@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "공격 증가 Lv1",
-    "description": null
+    "description": "공격 +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "공격 증가 (소) Lv1",
-    "description": null
+    "description": "공격 +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv1",
-    "description": null
+    "description": "공격 +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "공격 증가 Lv2",
-    "description": null
+    "description": "공격 +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "공격 증가 (소) Lv2",
-    "description": null
+    "description": "공격 +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv2",
-    "description": null
+    "description": "공격 +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "공격 증가 Lv3",
-    "description": null
+    "description": "공격 +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "공격 증가 (소) Lv3",
-    "description": null
+    "description": "공격 +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv3",
-    "description": null
+    "description": "공격 +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "공격 증가 Lv4",
-    "description": null
+    "description": "공격 +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "공격 증가 (소) Lv4",
-    "description": null
+    "description": "공격 +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "팰 공격 증가 Lv4",
-    "description": null
+    "description": "공격 +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "힐링 코치",
-    "description": null
+    "description": "플레이어의 HP 자연 회복 배율 +5.0%"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "회피 시 무적 시간 연장",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "용 속성 피해 강화 (중)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "물 속성 피해 강화 (소)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "번개 속성 피해 강화 (중)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "물 속성 피해 강화 (소)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "무속성 피해 강화 (중)",
-    "description": null
+    "description": "무속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "땅 속성 피해 강화 (대)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "번개 속성 피해 강화 (중)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "용 속성 피해 강화 (소)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "번개 속성 피해 강화 (중)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "화염 속성 피해 강화 (중)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "용 속성 피해 강화 (중)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "땅 속성 피해 강화 (중)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "어둠 속성 피해 강화 (중)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "땅 속성 피해 강화 (중)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "물 속성 피해 강화 (중)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "얼음 속성 피해 강화 (소)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "얼음 속성 피해 강화 (대)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "얼음 속성 피해 강화 (대)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "화염 속성 피해 강화 (대)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "용 속성 피해 강화 (대)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "화염 속성 피해 강화 (중)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "얼음 속성 피해 강화 (중)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "화염 속성 피해 강화 (대)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "얼음 속성 피해 강화 (대)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "용 속성 피해 강화 (소)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "풀 속성 피해 강화 (대)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "물 속성 피해 강화 (중)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "어둠 속성 피해 강화 (중)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "얼음 속성 피해 강화 (소)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "물 속성 피해 강화 (대)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "땅 속성 피해 강화 (중)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "얼음 속성 피해 강화 (중)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "화염 속성 피해 강화 (중)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "무속성 피해 강화 (대)",
-    "description": null
+    "description": "무속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "물 속성 피해 강화 (소)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "용 속성 피해 강화 (소)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "화염 속성 피해 강화 (대)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "물 속성 피해 강화 (중)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "얼음 속성 피해 강화 (중)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "얼음 속성 피해 강화 (소)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "얼음 속성 피해 강화 (대)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 3.0%"
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "무속성 피해 강화 (중)",
-    "description": null
+    "description": "무속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "어둠 속성 피해 강화 (중)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "얼음 속성 피해 강화 (소)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "용 속성 피해 강화 (중)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "땅 속성 피해 강화 (중)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 2.0%"
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "CaptureLevel_Up_1": {
     "localized_name": "포획력 강화 +1",
-    "description": null
+    "description": "포획력 +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "포획력 강화 +2",
-    "description": null
+    "description": "포획력 +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "포획력 강화 +3",
-    "description": null
+    "description": "포획력 +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "포획력 강화 +4",
-    "description": null
+    "description": "포획력 +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "포획력 강화 +5",
-    "description": null
+    "description": "포획력 +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "포획력 강화 +6",
-    "description": null
+    "description": "포획력 +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "열매 채집",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "서투름",
-    "description": null
+    "description": "작업 속도 -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "농땡이치는 버릇",
-    "description": null
+    "description": "작업 속도 -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "성실함",
-    "description": null
+    "description": "작업 속도 +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "장인 기질",
-    "description": null
+    "description": "작업 속도 +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "초절기교",
-    "description": null
+    "description": "작업 속도 +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "팰 방어 증가 Lv1",
-    "description": null
+    "description": "방어 +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "팰 방어 증가 Lv2",
-    "description": null
+    "description": "방어 +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "팰 방어 증가 Lv3",
-    "description": null
+    "description": "방어 +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "팰 방어 증가 Lv4",
-    "description": null
+    "description": "방어 +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "약한 맷집",
-    "description": null
+    "description": "방어 -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "부실한 뼈",
-    "description": null
+    "description": "방어 -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "단단한 피부",
-    "description": null
+    "description": "방어 +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "억센 육체",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "폭발 피해 경감",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "물놀이 선호",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "해황",
-    "description": null
+    "description": "물 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "어둠 속성 피해 강화 (소)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "팰 어둠 속성 피해 강화 Lv1",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "밤의 장막",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "어둠 속성 피해 강화 (중)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "팰 어둠 속성 피해 강화 Lv2",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "명왕",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "어둠 속성 피해 강화 (대)",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "팰 어둠 속성 피해 강화 Lv3",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "팰 어둠 속성 피해 강화 Lv4",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "용 속성 피해 강화 (소)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "팰 용 속성 피해 강화 Lv1",
-    "description": null
+    "description": "용 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "용의 혈족",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "용 속성 피해 강화 (중)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "팰 용 속성 피해 강화 Lv2",
-    "description": null
+    "description": "용 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "신룡",
-    "description": null
+    "description": "용 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "용 속성 피해 강화 (대)",
-    "description": null
+    "description": "용 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "팰 용 속성 피해 강화 Lv3",
-    "description": null
+    "description": "용 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "팰 용 속성 피해 강화 Lv4",
-    "description": null
+    "description": "용 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "땅 속성 피해 강화 (소)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "팰 땅 속성 피해 강화 Lv1",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "대지의 힘",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "땅 속성 피해 강화 (중)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "팰 땅 속성 피해 강화 Lv2",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "지제",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "땅 속성 피해 강화 (대)",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "팰 땅 속성 피해 강화 Lv3",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "팰 땅 속성 피해 강화 Lv4",
-    "description": null
+    "description": "땅 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (소)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "팰 번개 속성 피해 강화 Lv1",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (중)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "팰 번개 속성 피해 강화 Lv2",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "번개 속성 피해 강화 (대)",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "팰 번개 속성 피해 강화 Lv3",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "팰 번개 속성 피해 강화 Lv4",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "화염 속성 피해 강화 (소)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "팰 화염 속성 피해 강화 Lv1",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "불놀이 선호",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "화염 속성 피해 강화 (중)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "팰 화염 속성 피해 강화 Lv2",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "염제",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "화염 속성 피해 강화 (대)",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "팰 화염 속성 피해 강화 Lv3",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "팰 화염 속성 피해 강화 Lv4",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "얼음 속성 피해 강화 (소)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "팰 얼음 속성 피해 강화 Lv1",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "냉혈",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "얼음 속성 피해 강화 (중)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "팰 얼음 속성 피해 강화 Lv2",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "빙제",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "얼음 속성 피해 강화 (대)",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "팰 얼음 속성 피해 강화 Lv3",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "팰 얼음 속성 피해 강화 Lv4",
-    "description": null
+    "description": "얼음 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "풀 속성 피해 강화 (소)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "팰 풀 속성 피해 강화 Lv1",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "초목의 향기",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "풀 속성 피해 강화 (중)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "팰 풀 속성 피해 강화 Lv2",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "정령왕",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "풀 속성 피해 강화 (대)",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "팰 풀 속성 피해 강화 Lv3",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "팰 풀 속성 피해 강화 Lv4",
-    "description": null
+    "description": "풀 속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "무속성 피해 강화 (소)",
-    "description": null
+    "description": "무속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "팰 무속성 피해 강화 Lv1",
-    "description": null
+    "description": "무속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "무의 경지",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "무속성 피해 강화 (중)",
-    "description": null
+    "description": "무속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "팰 무속성 피해 강화 Lv2",
-    "description": null
+    "description": "무속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "성천",
-    "description": null
+    "description": "무속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "무속성 피해 강화 (대)",
-    "description": null
+    "description": "무속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "팰 무속성 피해 강화 Lv3",
-    "description": null
+    "description": "무속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "팰 무속성 피해 강화 Lv4",
-    "description": null
+    "description": "무속성 공격 피해 증가 20.0%"
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "콘덴서",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "뇌제",
-    "description": null
+    "description": "번개 속성 공격 피해 증가 30.0%"
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "물 속성 피해 강화 (소)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 1.0%"
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "팰 물 속성 피해 강화 Lv1",
-    "description": null
+    "description": "물 속성 공격 피해 증가 6.0%"
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "물 속성 피해 강화 (중)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 2.0%"
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "팰 물 속성 피해 강화 Lv2",
-    "description": null
+    "description": "물 속성 공격 피해 증가 12.0%"
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "물 속성 피해 강화 (대)",
-    "description": null
+    "description": "물 속성 공격 피해 증가 3.0%"
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "팰 물 속성 피해 강화 Lv3",
-    "description": null
+    "description": "물 속성 공격 피해 증가 18.0%"
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "팰 물 속성 피해 강화 Lv4",
-    "description": null
+    "description": "물 속성 공격 피해 증가 20.0%"
   },
   "ElementResist_Aqua_1": {
     "localized_name": "물 속성 피해 경감 Lv1",
-    "description": null
+    "description": "물 속성 피해 경감 15.0%"
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "방수 가공",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "물 속성 피해 경감 Lv2",
-    "description": null
+    "description": "물 속성 피해 경감 25.0%"
   },
   "ElementResist_Aqua_3": {
     "localized_name": "물 속성 피해 경감 Lv3",
-    "description": null
+    "description": "물 속성 피해 경감 30.0%"
   },
   "ElementResist_Aqua_4": {
     "localized_name": "물 속성 피해 경감 Lv4",
-    "description": null
+    "description": "물 속성 피해 경감 35.0%"
   },
   "ElementResist_Dark_1": {
     "localized_name": "어둠 속성 피해 경감 Lv1",
-    "description": null
+    "description": "어둠 속성 피해 경감 15.0%"
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "밝은 성격",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "어둠 속성 피해 경감 Lv2",
-    "description": null
+    "description": "어둠 속성 피해 경감 25.0%"
   },
   "ElementResist_Dark_3": {
     "localized_name": "어둠 속성 피해 경감 Lv3",
-    "description": null
+    "description": "어둠 속성 피해 경감 30.0%"
   },
   "ElementResist_Dark_4": {
     "localized_name": "어둠 속성 피해 경감 Lv4",
-    "description": null
+    "description": "어둠 속성 피해 경감 35.0%"
   },
   "ElementResist_Dragon_1": {
     "localized_name": "용 속성 피해 경감 Lv1",
-    "description": null
+    "description": "용 속성 피해 경감 15.0%"
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "용 학살자",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "용 속성 피해 경감 Lv2",
-    "description": null
+    "description": "용 속성 피해 경감 25.0%"
   },
   "ElementResist_Dragon_3": {
     "localized_name": "용 속성 피해 경감 Lv3",
-    "description": null
+    "description": "용 속성 피해 경감 30.0%"
   },
   "ElementResist_Dragon_4": {
     "localized_name": "용 속성 피해 경감 Lv4",
-    "description": null
+    "description": "용 속성 피해 경감 35.0%"
   },
   "ElementResist_Earth_1": {
     "localized_name": "땅 속성 피해 경감 Lv1",
-    "description": null
+    "description": "땅 속성 피해 경감 15.0%"
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "내진 구조",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "땅 속성 피해 경감 Lv2",
-    "description": null
+    "description": "땅 속성 피해 경감 25.0%"
   },
   "ElementResist_Earth_3": {
     "localized_name": "땅 속성 피해 경감 Lv3",
-    "description": null
+    "description": "땅 속성 피해 경감 30.0%"
   },
   "ElementResist_Earth_4": {
     "localized_name": "땅 속성 피해 경감 Lv4",
-    "description": null
+    "description": "땅 속성 피해 경감 35.0%"
   },
   "ElementResist_Fire_1": {
     "localized_name": "화염 속성 피해 경감 Lv1",
-    "description": null
+    "description": "화염 속성 피해 경감 15.0%"
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "일광욕 선호",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "화염 속성 피해 경감 Lv2",
-    "description": null
+    "description": "화염 속성 피해 경감 25.0%"
   },
   "ElementResist_Fire_3": {
     "localized_name": "화염 속성 피해 경감 Lv3",
-    "description": null
+    "description": "화염 속성 피해 경감 30.0%"
   },
   "ElementResist_Fire_4": {
     "localized_name": "화염 속성 피해 경감 Lv4",
-    "description": null
+    "description": "화염 속성 피해 경감 35.0%"
   },
   "ElementResist_Ice_1": {
     "localized_name": "얼음 속성 피해 경감 Lv1",
-    "description": null
+    "description": "얼음 속성 피해 경감 15.0%"
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "고온 체질",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "얼음 속성 피해 경감 Lv2",
-    "description": null
+    "description": "얼음 속성 피해 경감 25.0%"
   },
   "ElementResist_Ice_3": {
     "localized_name": "얼음 속성 피해 경감 Lv3",
-    "description": null
+    "description": "얼음 속성 피해 경감 30.0%"
   },
   "ElementResist_Ice_4": {
     "localized_name": "얼음 속성 피해 경감 Lv4",
-    "description": null
+    "description": "얼음 속성 피해 경감 35.0%"
   },
   "ElementResist_Leaf_1": {
     "localized_name": "풀 속성 피해 경감 Lv1",
-    "description": null
+    "description": "풀 속성 피해 경감 15.0%"
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "방초 효과",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "풀 속성 피해 경감 Lv2",
-    "description": null
+    "description": "풀 속성 피해 경감 25.0%"
   },
   "ElementResist_Leaf_3": {
     "localized_name": "풀 속성 피해 경감 Lv3",
-    "description": null
+    "description": "풀 속성 피해 경감 30.0%"
   },
   "ElementResist_Leaf_4": {
     "localized_name": "풀 속성 피해 경감 Lv4",
-    "description": null
+    "description": "풀 속성 피해 경감 35.0%"
   },
   "ElementResist_Normal_1": {
     "localized_name": "무속성 피해 경감 Lv1",
-    "description": null
+    "description": "무속성 피해 경감 15.0%"
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "어브노멀",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "무속성 피해 경감 Lv2",
-    "description": null
+    "description": "무속성 피해 경감 25.0%"
   },
   "ElementResist_Normal_3": {
     "localized_name": "무속성 피해 경감 Lv3",
-    "description": null
+    "description": "무속성 피해 경감 30.0%"
   },
   "ElementResist_Normal_4": {
     "localized_name": "무속성 피해 경감 Lv4",
-    "description": null
+    "description": "무속성 피해 경감 35.0%"
   },
   "ElementResist_Thunder_1": {
     "localized_name": "번개 속성 피해 경감 Lv1",
-    "description": null
+    "description": "번개 속성 피해 경감 15.0%"
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "절연체",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "번개 속성 피해 경감 Lv2",
-    "description": null
+    "description": "번개 속성 피해 경감 25.0%"
   },
   "ElementResist_Thunder_3": {
     "localized_name": "번개 속성 피해 경감 Lv3",
-    "description": null
+    "description": "번개 속성 피해 경감 30.0%"
   },
   "ElementResist_Thunder_4": {
     "localized_name": "번개 속성 피해 경감 Lv4",
-    "description": null
+    "description": "번개 속성 피해 경감 35.0%"
   },
   "EternalFlame": {
     "localized_name": "영원한 불꽃",
-    "description": null
+    "description": "화염 속성 공격 피해 증가 30.0% 번개 속성 공격 피해 증가 30.0%"
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "보유 팰의 신뢰도 상승량 증가",
-    "description": null
+    "description": "신뢰도 +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "포만도 쉽게 내려가지 않음 <NumBlue_13>+10.0%</>"
   },
   "GYM_NAME_Desert": {
     "localized_name": "팰파고스섬 자경단 간부",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "팰 애호 단체 창시자",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "레인 밀렵단 간부",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "달꽃단 대장",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "팰 유전자 연구 부대 대장",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "천락의 민족 수령",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "영원한 불꽃의 동지의 영혼 지도자",
-    "description": null
+    "description": "공격 +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "HP 증가 Lv1",
-    "description": null
+    "description": "최대 HP +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "HP 증가 Lv2",
-    "description": null
+    "description": "최대 HP +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "HP 증가 Lv3",
-    "description": null
+    "description": "최대 HP +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "HP 증가 Lv4",
-    "description": null
+    "description": "최대 HP +25.0%"
   },
   "Invader": {
     "localized_name": "침략자",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 30.0% 용 속성 공격 피해 증가 30.0%"
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "독가스 피해 무효",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "점프 횟수 증가 +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "최대 소지 중량 증가 Lv1",
-    "description": null
+    "description": "소지 중량 +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "최대 소지 중량 증가 Lv2",
-    "description": null
+    "description": "소지 중량 +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "최대 소지 중량 증가 Lv3",
-    "description": null
+    "description": "소지 중량 +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "최대 소지 중량 증가 Lv1",
-    "description": null
+    "description": "소지 중량 +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "최대 소지 중량 증가 Lv2",
-    "description": null
+    "description": "소지 중량 +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "최대 소지 중량 증가 Lv3",
-    "description": null
+    "description": "소지 중량 +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "최대 소지 중량 증가 Lv4",
-    "description": null
+    "description": "소지 중량 +300.0%"
   },
   "MiniNushi": {
     "localized_name": "월척",
-    "description": null
+    "description": "물 속성 공격 피해 증가 5.0% 얼음 속성 공격 피해 증가 5.0% 방어 +5.0%"
   },
   "MoveSpeed_up_1": {
     "localized_name": "재빠름",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "특이 체질",
-    "description": "팰과 플레이어의 HP 자연 회복량 +50.0% 방어력 +{EffectValue4}% 독 상태 이상 피해 <Status_Up>무효</> 화상 상태 이상 피해 <Status_Up>무효</>"
+    "description": "팰과 플레이어의 HP 자연 회복량 +50.0% 방어력 +25.0% 독 상태 이상 피해 <Status_Up>무효</> 화상 상태 이상 피해 <Status_Up>무효</>"
   },
   "NightOwl": {
     "localized_name": "밤샘",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "운동 바보",
-    "description": null
+    "description": "공격 +30.0% 작업 속도 -50.0%"
   },
   "Nushi": {
     "localized_name": "터주",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "블러드 퓨얼",
-    "description": null
+    "description": "피해를 주면 피해량의 일부를 흡수하여 HP를 회복한다. 밤이 되어도 잠들지 않고 계속 일한다."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "겁쟁이",
-    "description": null
+    "description": "공격 -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "무사주의자",
-    "description": null
+    "description": "공격 -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "용감",
-    "description": null
+    "description": "공격 +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "사나움",
-    "description": null
+    "description": "공격 +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "귀신",
-    "description": null
+    "description": "공격 +30.0% 방어 +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "일 노예",
-    "description": null
+    "description": "작업 속도 +30.0% 공격 -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "소식",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "ko_Text",
-    "description": null
+    "description": "작업 속도 -10.0% 방어 -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "자만심",
-    "description": null
+    "description": "작업 속도 +10.0% 방어 -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "마조히스트",
-    "description": null
+    "description": "방어 +15.0% 공격 -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "불량배",
-    "description": null
+    "description": "공격 +10.0% 방어 -10.0%"
   },
   "PAL_rude": {
     "localized_name": "난폭함",
-    "description": null
+    "description": "공격 +15.0% 작업 속도 -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "사디스트",
-    "description": null
+    "description": "공격 +15.0% 방어 -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "팰 경험치 획득량 증가 Lv1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "팰 경험치 획득량 증가 Lv2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "팰 경험치 획득량 증가 Lv3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "피로 관리사",
-    "description": null
+    "description": "플레이어의 기력 감소량 경감 +<NumBlue_13>5.0</>%"
   },
   "Rare": {
     "localized_name": "희귀",
-    "description": null
+    "description": "공격 +15.0% 방어 +15.0% 작업 속도 +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "재장전의 달인",
-    "description": null
+    "description": "플레이어의 재장전 속도 상승 +4.0%"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "가벼운 몸",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "구세주",
-    "description": null
+    "description": "무속성 공격 피해 증가 30.0% 풀 속성 공격 피해 증가 30.0%"
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "나누는 마음",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "수영의 달인",
-    "description": null
+    "description": "물 위 이동 속도 상승 40.0%"
   },
   "SwimSpeed_up_3": {
     "localized_name": "파도타기 왕",
-    "description": null
+    "description": "물 위 이동 속도 상승 50.0%"
   },
   "TemperatureResist_Cold1": {
     "localized_name": "내한 Lv1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "내한 Lv2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "내한 Lv3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "내열 Lv1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "내열 Lv1 / 내한 Lv1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "내열 Lv2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "내열 Lv2 / 내한 Lv2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "내열 Lv3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "내열 Lv3 / 내한 Lv3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "박애주의자",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "마녀",
-    "description": null
+    "description": "어둠 속성 공격 피해 증가 30.0% 얼음 속성 공격 피해 증가 30.0%"
   },
   "WoodDrop_Boost_1": {
     "localized_name": "벌목량 증가 Lv1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "고속 작업 Lv1",
-    "description": null
+    "description": "작업 속도 +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "고속 작업 Lv2",
-    "description": null
+    "description": "작업 속도 +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "고속 작업 Lv3",
-    "description": null
+    "description": "작업 속도 +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "고속 작업 Lv4",
-    "description": null
+    "description": "작업 속도 +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "목장 아이",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "신성한 힘 (마법)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "신성한 힘 (근거리)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "신성한 힘 (원거리)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "신성한 힘 (소환)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "신성한 수호",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "방어 증가 Lv1",
-    "description": null
+    "description": "방어 +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "방어 증가 Lv2",
-    "description": null
+    "description": "방어 +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "방어 증가 Lv3",
-    "description": null
+    "description": "방어 +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "방어 증가 Lv4",
-    "description": null
+    "description": "방어 +25.0%"
   }
 }

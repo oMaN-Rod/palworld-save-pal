@@ -74,6 +74,7 @@
 			case 3:
 				return calculateFilters('#fcdf19');
 			case 4:
+			case 5:
 				return calculateFilters('#68ffd8');
 			default:
 				return calculateFilters('#FF0000');

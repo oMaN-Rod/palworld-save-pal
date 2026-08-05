@@ -85,7 +85,8 @@ async fn valid_pick_persists_save_dir_before_loading() {
     }
 
     let pool = psp_db::open(&db_path).await.expect("open db");
-    let persisted = psp_db::settings::saved_save_dir(&pool).await.expect("read");
+    let driver = psp_db::SqlxSqliteDriver::new(pool);
+    let persisted = psp_db::settings::saved_save_dir(&driver).await.expect("read");
     assert_eq!(persisted, Some(save_dir.to_string_lossy().into_owned()));
 
     server.handle.shutdown().await;

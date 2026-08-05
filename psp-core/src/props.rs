@@ -138,6 +138,17 @@ pub fn as_byte_array(property: &crate::ue::Property) -> Option<&[u8]> {
     }
 }
 
+/// Mutable counterpart of `as_byte_array`. The `Vec`'s length is what uesave
+/// writes back, so a replacement blob may be shorter or longer.
+pub fn as_byte_array_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<u8>> {
+    match property {
+        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) => {
+            Some(bytes)
+        }
+        _ => None,
+    }
+}
+
 /// `FGuid`'s `Display` already renders Palworld's guid byte order as a
 /// canonical UUID string. Panics only on unreachable input; prefer
 /// `guid_to_uuid` for untrusted save data.

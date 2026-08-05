@@ -547,6 +547,14 @@
     "localized_name": "트릭 쇼",
     "description": "라피에르 전용 스킬. 2개의 환영을 만들어 적을 농락하고 본체가 비단 모자에서 불새를 날려 공격한다."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "스톤 프레스",
+    "description": "누름북 전용 스킬. 공중에 떠오르듯 도약해 압도적인 중량으로 적을 찌부러뜨린다."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "홀리 프레스",
+    "description": "성채북 전용 스킬. 공중에 떠오르듯 도약해 압도적인 중량으로 적을 찌부러뜨린다. 그 후 착지한 곳에서 빛기둥이 나타나 적을 추격한다."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "두더지 리프트",
     "description": "두더비 전용 스킬. 땅속에 파고들어 적의 발밑에서부터 기세 좋게 뛰어오른다."

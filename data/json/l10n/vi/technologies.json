@@ -1,1 +1,2354 @@
-{}
+{
+  "AIcore": {
+    "localized_name": "Lõi AI",
+    "description": "Linh kiện cốt lõi không thể thiếu của các thiết bị tiên tiến, cho phép xử lý các quyết định phức tạp và kiểm soát tự động. Có thể chế tạo tại “Nhà Máy Chế Tạo Văn Minh Tiên Tiến”."
+  },
+  "Accessory_AirDash1": {
+    "localized_name": "Giày Lướt Gió",
+    "description": "Phụ kiện cho phép người chơi lướt nhanh 1 lần trên không khi trang bị."
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Giày Lướt Gió Hai Lần",
+    "description": "Phụ kiện cho phép người chơi lướt nhanh 2 lần trên không khi trang bị."
+  },
+  "Accessory_AirDash3": {
+    "localized_name": "Giày Lướt Gió Ba Bước",
+    "description": "Phụ kiện cho phép người chơi lướt nhanh 3 lần trên không khi trang bị."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Trang Phục Chống Cháy Nổ",
+    "description": "Trang phục được làm từ sợi đặc biệt, mỏng nhẹ nhưng vô cùng bền chắn. Miễn nhiễm với sát thương từ các vụ nổ."
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Giày Nhảy Hai Bước",
+    "description": "Phụ kiện cho phép người chơi nhảy 1 lần trên không khi trang bị."
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Giày Nhảy Ba Bước",
+    "description": "Phụ kiện cho phép người chơi nhảy 2 lần trên không khi trang bị."
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Đai Phản Trọng Lực",
+    "description": "Phụ kiện cho phép người chơi tăng sức bật nhảy khi trang bị."
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Nhẫn Hòa Bình",
+    "description": "Nhẫn của người theo chủ nghĩa hòa bình. Người đeo không thể giảm Máu của mục tiêu tấn công xuống dưới 1."
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Kính Tiềm Năng",
+    "description": "Chiếc kính cho phép bạn nhìn thấy tiềm năng của Pal. Hiển thị các chỉ số về Máu, Tấn Công, và Phòng Thủ theo thang điểm 100."
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Túi Mở Rộng Cỡ Nhỏ",
+    "description": "Túi nhỏ để mang thêm vật phẩm. Sở hữu vật phẩm để tăng thêm ô chứa trong Túi Đồ. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Túi Mở Rộng Cỡ Vừa",
+    "description": "Túi cỡ vừa để mang thêm vật phẩm. Sở hữu vật phẩm để tăng thêm ô chứa trong Túi Đồ. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Túi Mở Rộng Cỡ Lớn",
+    "description": "Túi lớn để mang thêm vật phẩm. Sở hữu vật phẩm để tăng thêm ô chứa trong Túi Đồ. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Túi Mở Rộng Khổng Lồ",
+    "description": "Túi khổng lồ để mang thêm vật phẩm. Sở hữu vật phẩm để tăng thêm ô chứa trong Túi Đồ. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "Altar": {
+    "localized_name": "Bàn Thờ Triệu Hồi",
+    "description": "Dâng tấm đá có khắc hình Pal để triệu hồi Pal có năng lực mạnh đến căn cứ. Cần chuẩn bị đầy đủ cho trận chiến."
+  },
+  "AncientArmor": {
+    "localized_name": "Áo Giáp Cổ Đại",
+    "description": "Giáp trụ cổ xưa được rèn từ Thỏi Soralite. Tinh hoa của một nền văn minh đã mất, sở hữu khả năng phòng thủ tuyệt đối. Một bộ giáp tối thượng, đủ sức đương đầu với cả những hiểm họa tận thế."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Áo Giáp Cổ Đại Chịu Lạnh",
+    "description": "Phiên bản cải tiến của Áo Giáp Cổ Đại. Công nghệ cổ đại giúp tăng cường khả năng kháng lạnh, bảo vệ cơ thể ngay cả ở những vùng đất cực lạnh."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Áo Giáp Cổ Đại Chịu Nhiệt",
+    "description": "Phiên bản cải tiến của Áo Giáp Cổ Đại. Công nghệ cổ đại giúp tăng cường khả năng chịu nhiệt, bất chấp môi trường nóng rực lửa."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Áo Giáp Cổ Đại Hạng Nhẹ",
+    "description": "Phiên bản cải tiến của Áo Giáp Cổ Đại. Tích hợp cơ chế trợ lực cổ xưa, giúp người mặc mang vác được nhiều nhu yếu phẩm hơn."
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "Lò Luyện Văn Minh Cổ Đại",
+    "description": "Lò luyện đặc biệt ứng dụng kỹ thuật văn minh cổ đại, có thể đúc mọi loại thỏi kim loại. Quá trình luyện sử dụng nhiệt từ lửa để nung chảy và sức mạnh băng giá để làm nguội nhanh. Để vận hành, cần Pal có kỹ năng Nhóm Lửa và Làm Mát."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Bếp Văn Minh Cổ Đại",
+    "description": "Nhà bếp của nền văn minh cổ đại có thể nấu từ các món quen thuộc đến những mỹ vị mới lạ. Hoàn thành mọi món ăn bằng cách tích nhiệt từ lửa và chế biến thủ công. Để vận hành, cần Pal có kỹ năng Nhóm Lửa và Công Việc Thủ Công ở cấp cao."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Máy Phát Điện Văn Minh Cổ Đại",
+    "description": "Máy phát điện hiệu suất siêu cao, được phục dựng từ công nghệ cổ đại thất truyền. Tạo ra lượng điện khổng lồ nhưng đi kèm nguy cơ quá nhiệt khi hoạt động. Yêu cầu vận hành: Pal có thuộc tính Phát Điện cấp cao + Pal có thuộc tính Tưới Nước."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Máy Canh Tác Văn Minh Cổ Đại",
+    "description": "Máy canh tác cổ đại sử dụng sức mạnh Cây Thế Giới để nuôi trồng mọi loại thực vật trên đảo Palpagos. Kích thước nhỏ hơn nhiều so với Nông Trại Quả Mọng và có thể lắp đặt trong nhà, quy trình canh tác không đổi. Để vận hành, cần Pal có năng lực Gieo Hạt và Tưới Nước ở cấp cao."
+  },
+  "AncientHelmet": {
+    "localized_name": "Mũ Cổ Đại",
+    "description": "Chiếc mũ cối cổ xưa được rèn từ Thỏi Soralite. Chứa đựng trí tuệ truyền thừa qua bao thế kỷ, bảo vệ người đội khỏi mọi va đập. Khả năng phòng thủ vượt xa mọi trang bị hiện đại."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Máy Tạo Vật Chất Văn Minh Cổ Đại",
+    "description": "Máy tạo tài nguyên của nền văn minh cổ đại khai thác sức mạnh Cây Thế Giới để tạo ra mọi loại gỗ và quặng. Bạn có thể chọn loại tài nguyên muốn thu thập, nhưng hiệu suất khai thác không đổi. Do cấu trúc phức tạp, nên mỗi máy chỉ có thể giao cho 1 Pal."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Máy Chuyển Hóa Di Vật Văn Minh Cổ Đại",
+    "description": "Thiết bị chuyển hóa vật chất cổ đại ứng dụng kỹ thuật của nền văn minh đã mất. Giải mã kỹ thuật còn sót lại trong “Di Vật Văn Minh Cổ Đại” để nâng tầm chúng thành hình thái mới. Đây là thiết bị cực kỳ đặc biệt để tận dụng tối đa các di vật thu thập được."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Bàn Chế Tạo Văn Minh Cổ Đại",
+    "description": "Trạm chế tác tổng hợp dành riêng cho Pal, nơi có thể sản xuất mọi loại vật phẩm. Người chơi không thể thao tác và tốc độ chế tạo không đổi. Vì là máy móc tiên tiến, nên cần Pal có chỉ số Công Việc Thủ Công và Chế Thuốc cao vận hành."
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Trạm Y Tế Văn Minh Cổ Đại",
+    "description": "Cơ sở y tế tối tân, áp dụng các kỹ thuật y học tiên tiến cổ đại vào hiện tại. Có khả năng chăm sóc vượt trội so với trạm y tế thông thường. Chỉ cần chỉ định Pal bậc thầy về Chế Thuốc, cơ sở này có thể duy trì mức độ lành mạnh cao nhất, ngay cả khi căn cứ có điều kiện làm việc khắc nghiệt."
+  },
+  "Ancient_Houseset": {
+    "localized_name": "Bộ Cấu Kiện Văn Minh Cổ Đại",
+    "description": "Bộ cấu kiện để xây dựng căn cứ theo kiến trúc văn minh cổ đại. Bao gồm các thành phần cần thiết như nền nhà, tường, mái nhà, cầu thang và các vật liệu khác."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Giường Pal Văn Minh Cổ Đại",
+    "description": "Chiếc giường cao cấp nhất cho Pal, được làm từ kén trị liệu cổ đại và lớp vải lót mềm mại. Có khả năng phục hồi chỉ số Minh Mẫn cao nhất trong tất cả các loại giường Pal, giúp xua tan mệt mỏi nhanh chóng. Kích thước tương đương với Giường Pal Cỡ Lớn, các Pal to lớn cũng có thể nằm thoải mái."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Suối Nước Nóng Văn Minh Cổ Đại",
+    "description": "Suối nước nóng ứng dụng Kỹ Thuật Cổ Đại, chứa loại nước đặc biệt hòa tan thành phần Paladium. Sở hữu khả năng hồi phục chỉ số Minh Mẫn hàng đầu trong mọi loại suối nước nóng, đồng thời phục hồi cả thể lực. Kích thước tương đương với suối nước nóng thông thường, nhưng có thể chữa lành hoàn toàn cho Pal bị thương."
+  },
+  "Arrow": {
+    "localized_name": "Mũi Tên",
+    "description": "Mũi Tên dùng cho cung. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Mũi Tên Lửa",
+    "description": "Mũi Tên Lửa dùng cho cung. Gây sát thương <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/> cho mục tiêu bị bắn trúng. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Mũi Tên Độc",
+    "description": "Mũi Tên Độc dùng cho cung. Gây trạng thái <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/> cho mục tiêu bị bắn trúng. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Đạn Súng Trường Tấn Công",
+    "description": "Đạn sử dụng cho các loại “Súng Trường Tấn Công”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí”."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Túi Đựng Thức Ăn Nhỏ",
+    "description": "Túi nhỏ dùng để đựng thức ăn. Mở khóa tối đa 1 ô trang bị tự động ăn. Khi đói sẽ tự động tiêu thụ thức ăn trong ô. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Túi Đựng Thức Ăn Vừa",
+    "description": "Túi cỡ vừa dùng để đựng thức ăn. Mở khóa tối đa 2 ô trang bị tự động ăn. Khi đói sẽ tự động tiêu thụ thức ăn trong ô. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Túi Đựng Thức Ăn To",
+    "description": "Túi lớn dùng để đựng thức ăn. Mở khóa tối đa 3 ô trang bị tự động ăn. Khi đói sẽ tự động tiêu thụ thức ăn trong ô. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Túi Đựng Thức Ăn Siêu To",
+    "description": "Túi siêu lớn dùng để đựng thức ăn. Mở khóa tối đa 4 ô trang bị tự động ăn. Khi đói sẽ tự động tiêu thụ thức ăn trong ô. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Túi Đựng Thức Ăn Khổng Lồ",
+    "description": "Túi siêu to khổng lồ dùng để đựng thức ăn. Mở khóa tối đa 5 ô trang bị tự động ăn. Khi đói sẽ tự động tiêu thụ thức ăn trong ô. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Chuông Báo Động",
+    "description": "Chuông thay đổi trạng thái cảnh giác của Pal trong căn cứ. Có thể thay đổi trạng thái nghênh chiến kẻ địch bên ngoài và trạng thái tập trung làm việc vào thời điểm tùy thích."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Máy Lấy Vật Phẩm",
+    "description": "Thiết bị có thể tự do lấy tất cả vật phẩm trong rương ở căn cứ đã đặt nó."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Đài Quan Sát",
+    "description": "Có thể chỉ định cách làm việc của Pal trong căn cứ và cho phép/cấm từng công việc riêng lẻ."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Đài Quan Sát Cao Cấp",
+    "description": "Đài quan sát được cải tiến về vật liệu và kết cấu, với thiết kế tinh chỉnh hơn. Vẫn có thể thiết lập công việc như trước, đồng thời làm chậm tốc độ suy giảm chỉ số Minh Mẫn của Pal trong căn cứ. Môi trường làm việc được cải thiện đôi chút, giúp Pal ít bất mãn hơn."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Đài Quan Sát Văn Minh Cổ Đại",
+    "description": "Đài quan sát sử dụng kỹ thuật cổ đại, khảm đá Paldium đỏ. Điều khiển toàn bộ căn cứ thông qua giao diện Hologram, cũng như giảm thiểu tốc độ tiêu hao chỉ số Minh Mẫn của Pal. Các bước sóng đặc biệt bao phủ căn cứ, giữ cho tâm trí của Pal luôn bình tĩnh ngay cả trong điều kiện làm việc khắc nghiệt."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Thiết Bị Điều Khiển Palbox",
+    "description": "Thiết bị cho phép bạn điều khiển Palbox từ xa. Hãy đặt nó ở bất cứ đâu bạn muốn triệu hồi Pal để dễ dàng xây dựng căn cứ theo ý thích."
+  },
+  "Bat3": {
+    "localized_name": "Gậy Bóng Chày Kim Loại",
+    "description": "Gậy Bóng Chày Kim Loại cũng có thể dùng trong cận chiến. Ngứa mắt kẻ nào, cứ lấy ra tẩn cho một trận."
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Trang Phục Vải",
+    "description": "Trang phục làm từ “Vải”. Giúp bạn chống chọi với cái lạnh ban đêm. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Trang Phục Dân Tộc Vùng Lạnh Giá",
+    "description": "“Trang Phục Vải” có nguồn gốc từ vùng khí hậu lạnh. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Trang Phục Dân Tộc Vùng Nhiệt Đới",
+    "description": "“Trang Phục Vải” có nguồn gốc từ vùng khí hậu nóng. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Áo Giáp Da Thú",
+    "description": "Áo giáp làm bằng “Da Thú”. Độ bền và phòng thủ được cải thiện. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Áo Giáp Da Thú Chịu Lạnh",
+    "description": "“Áo Giáp Da Thú” có nguồn gốc từ vùng khí hậu lạnh. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Áo Giáp Da Thú Chịu Nhiệt",
+    "description": "“Áo Giáp Da Thú” có nguồn gốc từ vùng khí hậu nóng. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Áo Giáp Kim Loại",
+    "description": "Áo giáp làm bằng kim loại. Phòng thủ ổn, trọng lượng cũng vừa phải. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Áo Giáp Kim Loại Chịu Lạnh",
+    "description": "“Áo Giáp Kim Loại” đã được cải tiến. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Áo Giáp Kim Loại Chịu Nhiệt",
+    "description": "“Áo Giáp Kim Loại” đã được cải tiến. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Áo Giáp Kim Loại Tinh Luyện",
+    "description": "Áo giáp làm bằng kim loại cao cấp. Khả năng phòng thủ cao nhưng lại khá nặng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Áo Giáp Kim Loại Tinh Luyện Chịu Lạnh",
+    "description": "“Áo Giáp Kim Loại Tinh Luyện” đã được cải tiến. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Áo Giáp Kim Loại Tinh Luyện Chịu Nhiệt",
+    "description": "“Áo Giáp Kim Loại Tinh Luyện” đã được cải tiến. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Áo Giáp Pal Metal",
+    "description": "Áo giáp làm bằng Thỏi Pal Metal. Khả năng phòng thủ cực mạnh nhưng lại rất nặng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Áo Giáp Pal Metal Chịu Lạnh",
+    "description": "“Áo Giáp Pal Metal” đã được cải tiến. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Áo Giáp Pal Metal Chịu Nhiệt",
+    "description": "“Áo Giáp Pal Metal” đã được cải tiến. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Áo Giáp Plasteel",
+    "description": "Áo giáp làm bằng Thép Plasteel. Không chỉ tăng chỉ số phòng thủ mà còn giảm đáng kể trọng lượng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Áo Giáp Plasteel Chịu Lạnh",
+    "description": "“Áo Giáp Plasteel” đã được cải tiến. Giúp bạn chống chọi với cái lạnh thấu xương. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Áo Giáp Plasteel Chịu Nhiệt",
+    "description": "“Áo Giáp Plasteel” đã được cải tiến. Khả năng chịu nhiệt cao. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "Áo Giáp Plasteel Siêu Nhẹ",
+    "description": "“Áo Giáp Plasteel” đã được cải tiến. Tăng giới hạn sức mang của người chơi. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Vải",
+    "description": "Vải được dệt ra từ Lông Cừu. Nguyên liệu cần thiết để chế tạo bộ giáp. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Nỏ Săn Lắp Ráp",
+    "description": "Chỉ định Pal có năng lực |Công Việc Thủ Công|, chúng sẽ sử dụng nỏ săn để liên tục bảo vệ căn cứ."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Súng Máy Lắp Ráp",
+    "description": "Chỉ định Pal có năng lực |Công Việc Thủ Công|, chúng sẽ sử dụng súng máy để liên tục bảo vệ căn cứ."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Bệ Phóng Tên Lửa Lắp Ráp",
+    "description": "Chỉ định Pal có năng lực |Công Việc Thủ Công|, chúng sẽ sử dụng súng phóng tên lửa để liên tục bảo vệ căn cứ."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Dù Lượn Thường",
+    "description": "Dù lượn dùng để bay. Thiết kế đơn giản nên tốc độ không được nhanh."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Dù Lượn Khổng Lồ",
+    "description": "Dù lượn dùng để bay. Vì sản xuất đại trà nên tốc độ chỉ ở mức khá. Có thể chế tạo tại |Bàn Gia Công Cao Cấp|."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Dù Lượn Siêu Cấp",
+    "description": "Dù lượn dùng để bay. Hiệu suất được cải thiện, có thể bay với tốc độ khá cao. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất|."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Dù Lượn Siêu Tốc",
+    "description": "Dù lượn dùng để bay. Hiệu suất được cải thiện hơn nữa, tốc độ và lực nâng đều tốt hơn. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất II|."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Thuốc Súng",
+    "description": "|Thuốc Súng| để phóng đạn. Cần thiết để chế tạo đạn. Có thể chế tạo tại |Bàn Gia Công Cao Cấp|."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Phụ Kiện Tóc Lông Vũ",
+    "description": "Phụ kiện tóc bằng lông vũ tuyệt đẹp. Dường như nó có khả năng bảo vệ vùng đầu khỏi các đòn chí mạng. Có thể chế tạo tại “Workbench”."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Mũ Kim Loại",
+    "description": "Mũ giáp làm bằng kim loại. Trang bị phòng thủ đáng tin cậy, lá chắn kiên cố bảo vệ tâm trí bạn. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Mũ Kim Loại Tinh Luyện",
+    "description": "Mũ giáp làm bằng kim loại cao cấp. Lớp kim loại được mài giũa sáng bóng, nâng tầm đẳng cấp người đội. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Mũ Giáp Pal Metal",
+    "description": "Mũ giáp làm bằng Thỏi Pal Metal. Tuyệt tác đỉnh cao ai cũng phải ngước nhìn, biểu tượng chiến binh đầy kiêu hãnh. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Mũ Giáp Plasteel",
+    "description": "Mũ giáp làm bằng Thép Plasteel. Không chỉ tăng chỉ số phòng thủ mà còn giảm đáng kể trọng lượng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Rìu Pal Metal",
+    "description": "Rìu dùng để đốn gỗ. Độ sắc bén đáng kinh ngạc do làm từ Pal Metal. Có thể dễ dàng đốn hạ cả những cây gỗ tốt cứng cáp mọc ở vùng môi trường khắc nghiệt."
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Gậy Gỗ",
+    "description": "Gậy Gỗ dùng trong cận chiến. Nếu là Pal nhỏ, có lẽ có thể đánh gục được."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Gậy Bóng Chày",
+    "description": "Gậy bóng chày dùng được cả trong cận chiến. Để làm bóng thì Pal lại quá to."
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Cuốc Đào Pal Metal",
+    "description": "Một chiếc cuốc chim để khai thác. Hiệu suất đáng kinh ngạc nhờ làm từ Pal Metal."
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Kiếm",
+    "description": "“Kiếm” dùng trong cận chiến. Sắc bén vô cùng! Càng tiếp cận kẻ địch thì càng nguy hiểm. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Súng Trường Tấn Công",
+    "description": "Súng Trường Tấn Công áp đảo kẻ địch bằng hỏa lực dồn dập. Rất thích hợp để chiến đấu với những đối thủ mạnh. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí”."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Cung Thô Sơ",
+    "description": "Loại vũ khí tầm xa thô sơ. Vì được làm từ những mảnh chắp vá, nên uy lực thấp. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Cung Bắn Ba Tên",
+    "description": "Loại cung cải tiến, bắn được 3 mũi tên cùng lúc. Nhờ vào sức mạnh kỳ lạ, mỗi lần bắn chỉ tốn 1 Mũi Tên."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Nỏ Săn",
+    "description": "Có thể bắn “Mũi Tên” mà không cần tốn sức. Mất thời gian nạp đạn nhưng mỗi phát bắn đều rất uy lực. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Cung Trợ Lực",
+    "description": "Cung tên đã được hiện đại hóa. Có khả năng bắn ra những mũi tên mạnh hơn."
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "FlameThrower",
+    "description": "Flamethrower phun ra ngọn lửa tầm xa. Có thể thiêu đốt bất kỳ mục tiêu nào trúng đòn. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Súng Nòng Xoay",
+    "description": "Súng Gatling có khả năng bắn áp chế nhờ tốc độ xả đạn cực nhanh. Biến kẻ địch thành tổ ong bằng những loạt đạn chế ngự. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Súng Phóng Lựu",
+    "description": "Có thể bắn lựu đạn gây nổ trên diện rộng. Hữu dụng khi đối đầu với nhiều kẻ địch cùng lúc. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Súng Phóng Tên Lửa Điều Khiển",
+    "description": "Có thể bắn tên lửa tự động khóa và truy đuổi mục tiêu. Tên lửa sẽ phát nổ khi va chạm, gây sát thương trên diện rộng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Súng Ngắn",
+    "description": "Loại súng ngắn được cải tiến về số lượng đạn và tốc độ bắn. Có hỏa lực trên mỗi giây mạnh hơn Súng Ngắn Tự Chế Từ Phế Liệu. Chế tạo tại |Bàn Chế Tạo Vũ Khí|."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Súng Phóng Tự Dẫn",
+    "description": "Loại súng dùng để phóng Quả Cầu. Quả cầu được bắn ra sẽ tự động truy đuổi Pal mục tiêu. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Súng Laser",
+    "description": "Vũ khí bắn ra tia laser. Hỏa lực cao, dễ sử dụng. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Súng Ổ Xoay Cũ Kỹ",
+    "description": "Một khẩu súng lục ổ quay hơi cũ kĩ. Uy lực trong một lần bắn mạnh hơn so với Handgun_default."
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Súng Trường Bắn Đơn",
+    "description": "Loại súng trường bắn phát một. Mất thời gian để nạp đạn. Ít đạn nhưng mỗi phát bắn có sức mạnh khủng khiếp. Chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất Vũ Khí|."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Súng Phóng Tên Lửa",
+    "description": "Súng Phóng Tên Lửa có thể tấn công tầm xa với sát thương cực lớn. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Súng Trường Bán Tự Động",
+    "description": "Một khẩu súng trường có khả năng bắn liên thanh tương đối tốt. Dễ ngắm bắn và có hỏa lực mạnh, giúp dễ dàng sử dụng trong chiến đấu tầm trung."
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Súng Săn Bán Tự Động",
+    "description": "Một khẩu súng săn có tốc độ bắn nhanh. Hỏa lực tầm gần ở mức hàng đầu."
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Súng Hai Nòng",
+    "description": "Loại súng săn gây sát thương lớn ở cự ly gần. Có thể bắn 2 phát liên tiếp. Ít đạn nhưng hỏa lực mạnh. Chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất Vũ Khí|."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Súng Săn Bơm Tay",
+    "description": "Khẩu súng săn được tăng số lượng đạn, có uy lực mạnh mẽ hơn. DPS vô địch khi cận chiến. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí”."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Súng Phóng Cầu Hàng Loạt",
+    "description": "Loại súng phóng thế hệ mới, bắn ra hàng loạt Quả Cầu cùng lúc. Tha hồ săn bắt hàng loạt Pal. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí”."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Súng Phóng Cầu Tầm Xa",
+    "description": "Loại súng dùng để phóng Quả Cầu. Có thể bắt được những Pal ở khoảng cách xa hơn. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "Súng Tiểu Liên",
+    "description": "Một khẩu súng tiểu liên có khả năng bắn liên thanh xuất sắc. Dễ dàng thao tác và sử dụng trong chiến đấu tầm gần."
+  },
+  "BeamLauncher": {
+    "localized_name": "Thiết Bị Phóng Chùm Tia",
+    "description": "Thiết bị phóng chùm tia năng lượng mật độ cao, gây nổ trên diện rộng. Cần lưu ý tình trạng quá nhiệt khi bắn liên tục."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Đạn Thiết Bị Phóng Chùm Tia",
+    "description": "Đạn sử dụng cho Thiết Bị Phóng Chùm Tia. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "BeamSword": {
+    "localized_name": "Kiếm Tia Sáng",
+    "description": "Kiếm Tia Sáng dùng trong cận chiến. Đốt cháy đối thủ bằng laser công suất cao."
+  },
+  "BelieverFlagSet": {
+    "localized_name": "Bộ Cờ Của Tổ Chức Bảo Vệ Pal",
+    "description": "Một bộ gồm Cờ Hiệu Của Tổ Chức Bảo Vệ Pal và Biểu Ngữ Dọc Của Tổ Chức Bảo Vệ Pal. Chứng nhận cho việc bạn đã đánh bại Tổ Chức Bảo Vệ Pal."
+  },
+  "Bio_Battery": {
+    "localized_name": "Pin Sinh Học",
+    "description": "Thiết bị tích trữ năng lượng sinh học dưới dạng điện năng. Dùng cho các thiết bị cần mật độ năng lượng cao. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Bio_Coolant": {
+    "localized_name": "Chất Làm Mát Siêu Lạnh",
+    "description": "Chất làm mát hiệu suất cao sử dụng các thành phần đặc biệt chiết xuất từ Pal. Thường dùng để kiểm soát nhiệt độ cho các thiết bị công suất lớn. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Lò Khổng Lồ",
+    "description": "Có thể tinh luyện Hexolite. Nhiều Pal có thể cùng hợp lực tinh luyện nhờ được mở rộng quy mô. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "BreedFarm": {
+    "localized_name": "Trang Trại Phối Giống",
+    "description": "Bằng cách chỉ định cặp Pal đực và cái, có thể cho chúng đẻ trứng. Cần phải đặt |Bánh Kem| vào để nhân giống."
+  },
+  "BronzeSword": {
+    "localized_name": "Kiếm Nguyên Thủy",
+    "description": "Thanh kiếm dùng trong cận chiến. Độ sắc bén không thể xem thường! Tiếp cận càng gần, nguy hiểm càng cao."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Tượng Đá Sức Mạnh",
+    "description": "Dâng lễ vật sẽ giúp tăng sức mạnh cho cả người chơi và Pal."
+  },
+  "Cake02": {
+    "localized_name": "Bánh Nấm",
+    "description": "Khi đặt vào rương Trang Trại Phối Giống, các Pal ăn thứ này sẽ được tiếp thêm sinh lực và đẻ trứng. Giúp các Pal được sinh ra có thể dễ dàng phát triển tài năng hơn một chút."
+  },
+  "Cake03": {
+    "localized_name": "Bánh Rau Củ",
+    "description": "Khi đặt vào rương Trang Trại Phối Giống, các Pal ăn thứ này sẽ được tiếp thêm sinh lực và đẻ trứng. Đẻ được 2 quả trứng một lần."
+  },
+  "Cake04": {
+    "localized_name": "Bánh Rau Củ Thượng Hạng",
+    "description": "Khi đặt vào rương Trang Trại Phối Giống, các Pal ăn thứ này sẽ được tiếp thêm sinh lực và đẻ trứng. Dễ xảy ra đột biến hơn, đồng thời tài năng cũng dễ phát triển hơn."
+  },
+  "Cake05": {
+    "localized_name": "Bánh Đặc Biệt",
+    "description": "Khi đặt vào rương Trang Trại Phối Giống, các Pal ăn món này sẽ được tiếp thêm sinh lực và tiến hành đẻ trứng. Giúp tăng tỉ lệ trứng thừa hưởng được các kỹ năng bị động hơn từ cha mẹ."
+  },
+  "CarbonFiber": {
+    "localized_name": "Sợi Carbon",
+    "description": "Vật liệu chất lượng cao, có đặc tính nhẹ và cứng. Vật liệu để chế tạo bộ giáp và các vật phẩm khác. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Cauldron": {
+    "localized_name": "Vạc Phù Thủy",
+    "description": "Nếu đặt ở căn cứ tốc độ bào chế thuốc sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "CeilingLamp": {
+    "localized_name": "Đèn Trần",
+    "description": "Có thể treo trên trần."
+  },
+  "Cement": {
+    "localized_name": "Xi Măng",
+    "description": "Xi Măng được sử dụng làm vật liệu xây dựng. Có thể được tạo ra tại Bàn Gia Công Cao Cấp."
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "Súng Trường Năng Lượng",
+    "description": "Một khẩu súng bắn tia điện được chế tạo bằng công nghệ tiên tiến. Nạp năng lượng và bắn ra một phát đạn uy lực cao."
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Đạn Súng Trường Năng Lượng",
+    "description": "Đạn sử dụng cho các loại “Súng Trường Năng Lượng”. Có thể chế tạo tại “Dây Chuyền Lắp Ráp Văn Minh Tiên Tiến”."
+  },
+  "Clinic": {
+    "localized_name": "Trạm Y Tế",
+    "description": "Cơ sở y tế cơ bản để quản lý sức khỏe của các Pal làm việc tại căn cứ. Bằng cách chỉ định Pal có kỹ năng Chế Thuốc, cơ sở này giúp hạn chế suy giảm chỉ số Minh Mẫn và ngăn tình trạng bị bệnh và bị thương. Mặc dù chỉ có thể duy trì môi trường lành mạnh ở một mức độ nhất định, đây vẫn là cơ sở trọng yếu để quản lý căn cứ trong giai đoạn đầu."
+  },
+  "Cloth2": {
+    "localized_name": "Vải Thượng Hạng",
+    "description": "|Vải Thượng Hạng| được dệt từ rất nhiều |Lông Cừu|. Nguyên liệu cần thiết để chế tạo bộ giáp cao cấp. Có thể chế tạo tại |Bàn Gia Công Cao Cấp|."
+  },
+  "CompositeDesk": {
+    "localized_name": "Bàn Vẽ Kỹ Thuật",
+    "description": "Cơ sở có thể tạo ra bản thiết kế tiên tiến hơn bằng cách kết hợp nhiều bản thiết kế."
+  },
+  "Computer": {
+    "localized_name": "Máy Tính",
+    "description": "Vật phẩm nền tảng của công nghệ hiện đại, dùng để điều khiển thiết bị tự động và máy móc chính xác. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Cooler": {
+    "localized_name": "Máy Làm Mát Dùng Băng",
+    "description": "Làm mát vùng xung quanh và ngăn chặn cái nóng."
+  },
+  "CoolerBox": {
+    "localized_name": "Hộp Làm Mát",
+    "description": "Kho lưu trữ thực phẩm nhỏ. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Hộp Thức Ăn Giữ Lạnh",
+    "description": "Hộp thức ăn có thể giữ lạnh. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Dung Môi Ăn Mòn",
+    "description": "Dung môi hóa học nguy hiểm có đặc tính phân giải mạnh. Được sử dụng trong gia công chính xác hoặc xử lý đặc biệt. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Crusher": {
+    "localized_name": "Máy Nghiền",
+    "description": "Cơ sở có thể nghiền Đá hoặc Gỗ để chuyển đổi thành nguyên liệu khác. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+  },
+  "CrystalPit": {
+    "localized_name": "Mỏ Khai Thác Thạch Anh Lục Giác",
+    "description": "Cơ sở dùng để sản xuất Thạch Anh Lục Giác. Công việc đào Thạch Anh Lục Giác rất vất vả và đòi hỏi thể lực. Hãy giao cho những Pal giỏi khai thác."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Hình Nộm Đo Sát Thương",
+    "description": "Hình nộm tập luyện mô phỏng Pengullet."
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "Bộ Cờ Của Cư Dân Feybreak",
+    "description": "Một bộ gồm Cờ Hiệu Của Cư Dân Feybreak và Biểu Ngữ Dọc Của Cư Dân Feybreak. Chứng nhận cho việc bạn đã đánh bại Cư Dân Feybreak"
+  },
+  "DecalGunSet": {
+    "localized_name": "Bộ Súng Bắn Decal",
+    "description": "Bộ súng bắn Decal. Dùng để chế tạo một khẩu súng kỳ lạ có thể dán decal Pal tại vị trí bắn. Có thể chế tạo cả đạn cần thiết."
+  },
+  "DefenseWait": {
+    "localized_name": "Bao Cát",
+    "description": "Những Pal được chỉ định vào đây sẽ canh gác kẻ địch bên ngoài."
+  },
+  "DefenseWall": {
+    "localized_name": "Tường Đá Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Tường Kim Loại Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài. Vì làm bằng kim loại nên rất chắc chắn."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Tường Gỗ Phòng Thủ",
+    "description": "Tường phòng thủ khổng lồ để ngăn chặn sự xâm nhập của kẻ địch bên ngoài. Vì làm bằng gỗ nên dễ vỡ."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Kho Chứa Pal Đa Chiều",
+    "description": "Cơ sở có thể lưu trữ một lượng lớn Pal đã bắt được. Thành viên bang hội có thể đưa và lấy Pal. Nếu đặt ở chế độ riêng tư, có thể sử dụng làm kho lưu trữ Pal của riêng mình."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Băng Chuyền Xẻ Pal",
+    "description": "Thiết bị tuyệt vời tự động cắt xẻ Pal đã đặt vào."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Lồng Quan Sát",
+    "description": "Lồng dùng để quan sát Pal đã bắt được. Pal ở trong đó không thể chiến đấu hoặc làm việc, nhưng cũng không bị đói."
+  },
+  "DroneLauncher": {
+    "localized_name": "Thiết Bị Phóng Drone",
+    "description": "Thiết bị phóng drone tấn công tự hành. Có thể triển khai tối đa 8 drone cùng lúc để liên tục áp chế mục tiêu."
+  },
+  "ElecBaton": {
+    "localized_name": "Gậy Điện",
+    "description": "Vũ khí cận chiến gây điện giật khi đánh trúng. Pal đang bị điện giật sẽ dễ bắt hơn. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Súng Trường Plasma",
+    "description": "Súng trường phóng tia điện tại điểm tiếp xúc, lan sang các mục tiêu lân cận."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Đạn Súng Trường Plasma",
+    "description": "Đạn sử dụng cho Súng Trường Plasma. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "ElectricCooler": {
+    "localized_name": "Máy Làm Mát Dùng Điện",
+    "description": "Làm mát diện rộng, công suất cao được tăng cường nhờ sức mạnh của điện."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Máy Phát Điện Lớn",
+    "description": "Cơ sở tích trữ điện do Pal hệ Sấm phát ra. Đã được mở rộng và hiệu quả phát điện cũng được cải thiện."
+  },
+  "ElectricHeater": {
+    "localized_name": "Lò Sưởi Dùng Điện",
+    "description": "Sưởi ấm diện rộng, công suất cao được tăng cường nhờ sức mạnh của điện."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Đạn Plasma",
+    "description": "Đạn sử dụng cho các loại “Súng Plasma”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Súng Plasma",
+    "description": "Phóng ra đạn năng lượng công suất cao. Khi va chạm mục tiêu sẽ gây ra một vụ nổ năng lượng."
+  },
+  "EnergyShotgun": {
+    "localized_name": "Súng Săn Năng Lượng",
+    "description": "Súng săn bắn đạn năng lượng. Khả năng bắn liên tục xuất sắc, sức tấn công ở khoảng cách gần đạt đến mức phi thường."
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Đạn Súng Săn Năng Lượng",
+    "description": "Đạn sử dụng cho các loại “Súng Săn Năng Lượng”. Có thể chế tạo tại “Dây Chuyền Lắp Ráp Văn Minh Tiên Tiến”."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Tụ Điện",
+    "description": "Cơ sở lưu trữ điện dư thừa được tạo ra bởi Máy Phát Điện."
+  },
+  "Expedition": {
+    "localized_name": "Trạm Phái Cử Pal",
+    "description": "Cơ sở cho Pal đi thám hiểm hầm ngục hoặc nơi tương tự. Pal được cử đi sẽ thu thập và chiến đấu ở nhiều nơi, mang tài nguyên về căn cứ."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Nhà Máy Chế Tạo Văn Minh Tiên Tiến",
+    "description": "Nhà máy chế tạo vật phẩm và áo giáp. Sử dụng máy móc hiệu suất cao nên có thể sản xuất ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "Factory_Money": {
+    "localized_name": "Nhà Máy Sản Xuất Tiền Vàng",
+    "description": "Nhà máy chế tạo Đồng Vàng. Công việc gây áp lực tinh thần, khiến chỉ số Minh Mẫn của Pal làm việc giảm dần. Cần Pal có kỹ năng Công Việc Thủ Công. Việc xây dựng có thể khiến bạn bị Đội Tự Vệ truy quét gắt gao, hãy cẩn thận."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Nông Trại Quả Kỹ Năng",
+    "description": "Trang trại có thể trồng Quả Kỹ Năng. Bằng cách trồng quả gốc trên mặt đất, có thể thu hoạch nhiều quả cùng loại."
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Bộ Cờ Của Đồng Minh Ngọn Lửa Vĩnh Cửu",
+    "description": "Một bộ gồm Cờ Hiệu Của Đồng Minh Ngọn Lửa Vĩnh Cửu và Biểu Ngữ Dọc Của Đồng Minh Ngọn Lửa Vĩnh Cửu. Chứng nhận cho việc bạn đã đánh bại Đồng Minh Ngọn Lửa Vĩnh Cửu."
+  },
+  "FishingBait_2": {
+    "localized_name": "Mồi Câu Cao Cấp",
+    "description": "Mồi câu để thu hút Pal. Đã được cải tiến, khiến Pal dễ cắn câu hơn."
+  },
+  "FishingBait_3": {
+    "localized_name": "Mồi Câu Xa Xỉ",
+    "description": "Mồi câu để thu hút Pal. Đã được cải tiến để giúp tăng nhẹ kích thước vạch hiển thị trong Thử Thách Nhỏ."
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Mồi Câu Mê Hoặc",
+    "description": "Mồi câu để thu hút Pal. Đã được cải tiến để giúp tăng kích thước vạch hiển thị trong Thử Thách Nhỏ, tăng số lượng vật phẩm nhận được khi câu cá."
+  },
+  "FishingPond1": {
+    "localized_name": "Ao Câu Cá",
+    "description": "Ao câu cá có trang bị sẵn dụng cụ câu. Khi chỉ định Pal vào, chúng sẽ thảnh thơi câu cá cho bạn. Cần Pal có kỹ năng Công Việc Thủ Công."
+  },
+  "FishingPond2": {
+    "localized_name": "Ao Câu Cá Lớn",
+    "description": "Ao câu cá lớn có trang bị sẵn dụng cụ câu. Vùng nước rộng hơn, giúp câu được Pal lớn hơn. Cần Pal có kỹ năng Công Việc Thủ Công."
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Cần Câu Trung Cấp (Cattiva)",
+    "description": "Cần câu dùng để bắt Pal. Thả mồi câu tại những vùng nước có bóng cá để bắt chúng. Tính năng được cải thiện, giúp việc câu Pal dễ dàng hơn."
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Cần Câu Cao Cấp (Pengullet)",
+    "description": "Cần câu dùng để bắt Pal. Thả mồi câu tại những vùng nước có bóng cá để bắt chúng. Tính năng được cải thiện vượt trội, giúp việc câu Pal trở nên cực kỳ dễ dàng."
+  },
+  "FishingSet1": {
+    "localized_name": "Bộ Cần Câu Sơ Cấp",
+    "description": "Bộ cần câu và mồi câu dành cho người mới bắt đầu. Sau khi chế tạo cần câu và mồi câu, bạn có thể câu Pal tại các vùng nước."
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Nhiên Liệu Súng Phun Lửa",
+    "description": "Nhiên liệu cho Súng Phun Lửa. Đạn sử dụng cho các loại Flamethrower. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "FlourMill": {
+    "localized_name": "Máy Xay Bột",
+    "description": "Cơ sở có thể nghiền Lúa Mì để sản xuất Bột Mì. Cần Pal có năng lực |tưới nước| để quay bánh xe nước."
+  },
+  "FlowerBed": {
+    "localized_name": "Bồn Hoa",
+    "description": "Nếu đặt ở căn cứ tốc độ thu thập sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Fountain": {
+    "localized_name": "Đài Phun Nước",
+    "description": "Nếu đặt ở căn cứ tốc độ tưới nước sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "FragGrenade": {
+    "localized_name": "Lựu Đạn Nổ",
+    "description": "Lựu Đạn Nổ hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương cho kẻ địch."
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Lựu Đạn Bóng Tối",
+    "description": "Lựu Đạn Bóng Tối hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương Hệ Bóng Tối."
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Lựu Đạn Sức Mạnh Rồng",
+    "description": "Lựu Đạn Sức Mạnh Rồng hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương Hệ Rồng."
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Lựu Đạn Kích Điện",
+    "description": "Lựu Đạn Kích Điện hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và phóng tia điện ra khu vực xung quanh."
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Lựu Đạn Gây Cháy",
+    "description": "Lựu Đạn Gây Cháy hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây cháy lan xung quanh."
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Lựu Đạn Đại Địa",
+    "description": "Lựu Đạn Đại Địa hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương Hệ Đất."
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Lựu Đạn Đóng Băng",
+    "description": "Lựu Đạn Đóng Băng hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và đóng băng khu vực xung quanh."
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Lựu Đạn Cây Cỏ",
+    "description": "Lựu Đạn Cây Cỏ hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương Hệ Cỏ."
+  },
+  "FragGrenade_Super": {
+    "localized_name": "Lựu Đạn Nổ Cải Tiến",
+    "description": "Lựu đạn nổ đã cải tiến. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương nặng cho kẻ địch."
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Lựu Đạn Sóng Nước",
+    "description": "Lựu Đạn Sóng Nước hữu ích trong chiến đấu tầm trung. Khi ném ra, nó sẽ phát nổ sau vài giây và gây sát thương Hệ Nước."
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Bộ Nội Thất Phòng Khách Gỗ",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí phòng khách của bạn và tận hưởng cuộc sống cùng Pal."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Bộ Rào Chắn",
+    "description": "Bộ nội thất dùng để trang trí. Đặt nó ở nơi bạn muốn ngăn người qua lại."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Bộ Điều Khiển Giao Thông",
+    "description": "Bộ nội thất dùng để trang trí. Không thể sử dụng để kiểm soát giao thông vì không có đường."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Bộ Biển Báo",
+    "description": "Bộ nội thất dùng để trang trí. Không thể sử dụng để kiểm soát giao thông vì không có đường."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Bộ Bàn Ghế Kim Loại",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí với kiến trúc kim loại và tận hưởng cuộc sống cùng Pal."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Bộ Bàn Gỗ Lim",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí với kiến trúc kim loại và tận hưởng cuộc sống cùng Pal."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Bộ Nội Thất Đàn Piano",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí căn cứ của bạn và tạo nên một cuộc sống sung túc."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Bộ Gương Cổ",
+    "description": "Bộ nội thất dùng để trang trí. Vật dụng dùng để soi gương và chỉnh trang ngoại hình."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Bộ Thảm",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí cho nền nhà của căn cứ để tạo cảm giác sống động."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Bộ Ghế Sofa Cổ",
+    "description": "Bộ nội thất dùng để trang trí. Có thể mang đến cảm giác sang trọng cho căn cứ của bạn."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Bộ Ghế Cổ",
+    "description": "Bộ nội thất dùng để trang trí. Sử dụng kết hợp với bàn cổ."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Bộ Nội Thất Chứa Đồ Quầy Rượu Gỗ",
+    "description": "Bộ nội thất thùng rượu bằng gỗ hay thấy trong quầy rượu. Có thể đựng vật phẩm."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Bộ Bồn Tắm Cổ",
+    "description": "Bộ nội thất dùng để trang trí. Tạo ra một phòng tắm cổ điển."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Bộ Tủ Kệ Cổ",
+    "description": "Bộ nội thất lưu trữ kiểu cổ điển. Có thể đựng vật phẩm."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Bộ Tủ Đựng Cổ",
+    "description": "Bộ tủ lưu trữ kiểu cổ điển. Có thể đựng vật phẩm."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Bộ Đồng Hồ",
+    "description": "Bộ nội thất dùng để trang trí. Không thể dùng để xem giờ."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Bộ Bàn Cổ",
+    "description": "Bộ nội thất dùng để trang trí. Sử dụng kết hợp với ghế cổ."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Bộ Nội Thất Nhà Vệ Sinh",
+    "description": "Bộ nội thất dùng để trang trí. Không thể sử dụng theo chức năng thực tế."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Bộ Nội Thất Giải Trí",
+    "description": "Bộ nội thất dùng để trang trí. Các Pal sẽ tiếp tục làm việc."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Bộ Đèn Đường",
+    "description": "Bộ đèn đường có chức năng làm nguồn sáng. Cần điện để sáng."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Bộ Lò Sưởi",
+    "description": "Bộ lò sưởi gạch có chức năng làm nguồn sáng. Cần đốt lửa."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Bộ Đèn Cổ",
+    "description": "Bộ đèn cổ có chức năng làm nguồn sáng. Cần điện để sáng."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Bộ Nội Thất Quầy Rượu Gỗ",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí với phong cách quầy rượu và tận hưởng cuộc sống cùng Pal."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Bộ Kệ Kim Loại",
+    "description": "Bộ kệ bằng kim loại. Có thể đựng vật phẩm."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Bộ Ngoại Thất",
+    "description": "Bộ nội thất dùng để trang trí. Trang trí bên ngoài căn cứ của bạn."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Bộ Nội Thất Cổ Sang Trọng",
+    "description": "Bộ nội thất dùng để trang trí. Mang đến vẻ sang trọng cho căn cứ của bạn."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Bộ Cây Cảnh Treo Tường",
+    "description": "Bộ nội thất dùng để trang trí. Thêm một số cây xanh vào trên tường để tô điểm cho căn cứ."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Bộ Thùng Phuy Kim Loại",
+    "description": "Bộ nội thất dùng để trang trí. Bạn không thể tắm trong thùng phuy."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Bộ Thùng Chứa",
+    "description": "Bộ nội thất thùng chứa. Có thể đựng vật phẩm."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Bộ Ghế Da",
+    "description": "Bộ nội thất dùng để trang trí. Mang lại cảm giác sang trọng vì được bọc bằng da."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Bộ Bảng Chỉ Dẫn Lối Thoát Hiểm",
+    "description": "Bộ nội thất dùng để trang trí. Có thể nói rất quý giá trong thời đại văn minh."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Bộ Cây Cảnh",
+    "description": "Bộ nội thất dùng để trang trí. Đặt thêm một số cây xanh để tô điểm cho căn cứ."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Bộ Nội Thất Kiểu Nhật",
+    "description": "Bộ nội thất trang trí kiểu Nhật. Xây dựng căn cứ theo phong cách Nhật Bản."
+  },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "Bộ Mô Hình Cây Tre",
+    "description": "Bộ mô hình cây tre dùng để trang trí. Đặt thêm một số cây để tạo phong cách rừng tre cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "Bộ Mô Hình Cây Anh Đào",
+    "description": "Bộ mô hình cây anh đào dùng để trang trí. Đặt thêm một số cây để tạo phong cách đảo hoa đào cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "Bộ Mô Hình Cây Sa Mạc",
+    "description": "Bộ mô hình cây sa mạc dùng để trang trí. Đặt thêm một số cây để tạo phong cách sa mạc cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "Bộ Mô Hình Cây Xanh",
+    "description": "Bộ mô hình cây xanh dùng để trang trí. Đặt thêm một số cây để tạo phong cách thiên nhiên cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "Bộ Mô Hình Cây Lá Đỏ",
+    "description": "Bộ mô hình cây lá đỏ dùng để trang trí. Đặt thêm một số cây để tạo phong cách thiên nhiên cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "Bộ Mô Hình Cây Phủ Tuyết",
+    "description": "Bộ mô hình cây phủ tuyết dùng để trang trí. Đặt thêm một số cây để tạo phong cách núi tuyết cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "Bộ Mô Hình Cây Nhiệt Đới",
+    "description": "Bộ mô hình cây nhiệt đới dùng để trang trí. Đặt thêm một số cây để tạo phong cách nhiệt đới cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "Bộ Mô Hình Cây Lá Vàng",
+    "description": "Bộ mô hình cây lá vàng dùng để trang trí. Đặt thêm một số cây để tạo phong cách thiên nhiên cho căn cứ. Không thể thu thập nguyên liệu từ công trình này."
+  },
+  "GasMask": {
+    "localized_name": "Mặt Nạ Chống Sương Ăn Mòn",
+    "description": "Mặt nạ tích hợp hệ thống lọc chuyên dụng. Có khả năng triệt tiêu hoàn toàn sát thương từ Sương Ăn Mòn."
+  },
+  "GatlingBullet": {
+    "localized_name": "Đạn Súng Nòng Xoay",
+    "description": "Đạn sử dụng cho các loại “Súng Nòng Xoay”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Glass_houseset": {
+    "localized_name": "Bộ Cấu Kiện Nhà Thủy Tinh",
+    "description": "Bộ công cụ để xây dựng căn cứ bằng vật liệu thủy tinh. Cho phép xây dựng các cấu trúc cần thiết cho nơi trú ẩn như nền nhà, tường, trần nhà, cầu thang bằng thủy tinh."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Palbox Toàn Cầu",
+    "description": "Cơ sở có thể lưu trữ dữ liệu gen của Pal hoặc khôi phục Pal từ dữ liệu gen đã lưu trữ. Dữ liệu gen đã lưu trữ có thể được chuyển sang thế giới khác."
+  },
+  "GrapplingGun": {
+    "localized_name": "Súng Bắn Móc",
+    "description": "Súng bắn móc cho phép di chuyển với tốc độ cao. Bắn móc đến vị trí nhắm, kéo cơ thể người bắn về phía đó. Giúp di chuyển dễ dàng ở những nơi có độ chênh lệch về độ cao."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Súng Bắn Móc Cao Cấp",
+    "description": "Súng bắn móc cho phép di chuyển với tốc độ cao. Bắn móc đến vị trí nhắm, kéo cơ thể người bắn về phía đó. Đã được cải tiến để có tầm bắn xa hơn."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Súng Bắn Móc Cực Mạnh",
+    "description": "Súng bắn móc cho phép di chuyển với tốc độ cao. Bắn móc đến vị trí nhắm, kéo cơ thể người bắn về phía đó. Dựa trên dữ liệu của mẫu thử nghiệm, hiệu suất đã được cải thiện hơn nữa."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Súng Bắn Móc Huyền Thoại",
+    "description": "Súng bắn móc cho phép di chuyển với tốc độ cao. Bắn móc đến vị trí nhắm, kéo cơ thể người bắn về phía đó. Kết quả nghiên cứu đã mang lại khả năng cơ động vượt trội."
+  },
+  "GrapplingGun5": {
+    "localized_name": "Súng Bắn Móc Siêu Cấp",
+    "description": "Súng bắn móc cho phép di chuyển với tốc độ cao. Bắn móc đến vị trí nhắm, kéo cơ thể người bắn về phía đó. Nhờ sử dụng vật liệu mới, thời gian tản nhiệt đã được rút ngắn đáng kể."
+  },
+  "GrenadeBullet": {
+    "localized_name": "Lựu Đạn",
+    "description": "Đạn sử dụng cho các loại “Súng Phóng Lựu”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "GuildChest": {
+    "localized_name": "Rương Bang Hội",
+    "description": "Rương có thể gửi và nhận đồ vật bên trong ngay lập tức thông qua không gian con. Đồ vật bên trong rương này đặt ở mỗi căn cứ sẽ được chia sẻ."
+  },
+  "HandTorch": {
+    "localized_name": "Đuốc Cầm Tay",
+    "description": "Giúp soi sáng trong bóng tối, bảo vệ bạn khỏi cái lạnh. Cũng có thể dùng trong cận chiến khi cấp bách. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "HandgunBullet": {
+    "localized_name": "Đạn Súng Ngắn",
+    "description": "Đạn sử dụng cho các loại “Súng Ngắn”. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "Headstone": {
+    "localized_name": "Bia Mộ",
+    "description": "Bia mộ có thể viết chữ. Hãy sử dụng để ghi chú."
+  },
+  "Heater": {
+    "localized_name": "Lò Sưởi Dùng Lửa",
+    "description": "Sưởi ấm vùng xung quanh và ngăn chặn cái lạnh."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Ván Gỗ Cao Cấp",
+    "description": "Tấm ván được gọt giũa tỉ mỉ từ Gỗ Cứng. Sở hữu những đường vân tuyệt đẹp, chuyên dùng cho các công trình kiến trúc cao cấp. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "Homeward": {
+    "localized_name": "Mây Sấm Dịch Chuyển",
+    "description": "Dịch chuyển bạn đến căn cứ gần nhất. Không thể sử dụng bên trong hầm ngục hoặc các địa điểm tương tự."
+  },
+  "HugeKitchen": {
+    "localized_name": "Bếp Lớn",
+    "description": "Cơ sở cần thiết để nấu nguyên liệu. Nhiều Pal có thể cùng nấu ăn nhờ được mở rộng quy mô. Cần Pal hệ Lửa để đốt lửa."
+  },
+  "HunterFlagSet": {
+    "localized_name": "Bộ Cờ Của Tổ Chức Săn Trộm",
+    "description": "Một bộ gồm Cờ Hiệu Của Tổ Chức Săn Trộm và Biểu Ngữ Dọc Của Tổ Chức Săn Trộm. Chứng nhận cho việc bạn đã đánh bại Tổ Chức Săn Trộm."
+  },
+  "IceCrusher": {
+    "localized_name": "Máy Nghiền Đông Lạnh",
+    "description": "Cơ sở có thể nghiền Quặng Kim Loại để chuyển đổi thành nguyên liệu khác. Cần cung cấp điện và Pal có năng lực |làm mát| để hoạt động, nhưng cơ sở này làm việc rất hiệu quả."
+  },
+  "IceHorseStatue": {
+    "localized_name": "Tượng Frostallion",
+    "description": "Tượng Frostallion dùng để trang trí."
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Máy Phát Điện",
+    "description": "Pal hệ Sấm ở căn cứ đã có thể tích trữ điện, nhờ đó các cơ sở sử dụng điện đã có thể hoạt động."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Bảng Mạch Điện Tử",
+    "description": "Bảng Mạch Điện Tử cần thiết cho việc chế tạo thiết bị phức tạp. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất|."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Rương Gỗ",
+    "description": "Có thể đựng vật phẩm. Khi được đặt ở căn cứ, Pal có năng lực |Vận Chuyển| sẽ tự động vận chuyển vật phẩm."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Rương Kim Loại",
+    "description": "Có thể đựng được nhiều vật phẩm hơn và độ bền cũng được tăng lên. Pal có năng lực |Vận Chuyển| sẽ tự động vận chuyển vật phẩm."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Rương Kim Loại Tinh Luyện",
+    "description": "Có thể đựng được nhiều vật phẩm hơn nữa và độ bền cũng được tăng lên đáng kể. Pal có năng lực |Vận Chuyển| sẽ tự động vận chuyển vật phẩm."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Đinh Vít",
+    "description": "Linh kiện cần thiết để xây dựng nhiều công trình. Có thể được tạo ra tại Bàn Gia Công Nguyên Thủy."
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Giường Pal Bằng Rơm",
+    "description": "Pal ở căn cứ sẽ ngủ trên Giường Pal vào ban đêm để hồi phục Minh Mẫn. Nếu không có Giường Pal, giấc ngủ sẽ không thoải mái và chỉ số Minh Mẫn sẽ không hồi phục"
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Giường Pal Mềm Mại",
+    "description": "Các Pal có thể ngủ thoải mái hơn, giúp gia tăng việc hồi phục Máu và Minh Mẫn trong khi ngủ."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Giường Chất Lượng Thấp",
+    "description": "Giường để con người nằm ngủ, có khả năng hồi phục Máu. Khi bạn đi ngủ vào ban đêm, thời gian sẽ trôi qua cho đến sáng. Bạn không thể ngủ được nếu giường không được đặt ở trong nhà."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "Giường Chất Lượng Cao",
+    "description": "Chiếc giường êm ái giúp tăng hiệu quả hồi phục. Bạn không thể ngủ được nếu giường không được đặt ở trong nhà."
+  },
+  "ItemBooth": {
+    "localized_name": "Chợ Trời (Vật Phẩm)",
+    "description": "Cơ sở để bán vật phẩm. Có thể bán vật phẩm cho người chơi khác. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "ItemChest_04": {
+    "localized_name": "Rương Văn Minh Tiên Tiến",
+    "description": "Có thể đựng vật phẩm. Khá chắc chắn và có nhiều không gian lưu trữ. Hãy sử dụng nó như một nhà kho khổng lồ và an toàn."
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Bộ Cấu Kiện Nhà Kiểu Nhật",
+    "description": "Bộ công cụ để xây dựng căn cứ theo kiến trúc Nhật Bản. Cho phép xây dựng các cấu trúc cần thiết cho nơi trú ẩn như nền nhà, tường, trần nhà, cầu thang."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Tượng Jetragon",
+    "description": "Tượng Jetragon dùng để trang trí."
+  },
+  "Katana": {
+    "localized_name": "Thanh Katana",
+    "description": "Thanh Katana dùng trong cận chiến. Cực kỳ sắc bén, có thể chém đôi mục tiêu trong một nhát kiếm."
+  },
+  "Lab": {
+    "localized_name": "Viện Nghiên Cứu Công Việc Pal",
+    "description": "Cơ sở nghiên cứu về từng công việc của Pal. Khi cho Pal làm việc tại cơ sở này, việc nghiên cứu sẽ tiến triển và có thể thu được nhiều hiệu quả khác nhau."
+  },
+  "Lamp": {
+    "localized_name": "Đèn Đứng",
+    "description": "Có thể chiếu sáng căn cứ tốt hơn bằng sức mạnh của điện."
+  },
+  "Lantern": {
+    "localized_name": "Đèn Bão Đeo Hông",
+    "description": "Đèn bão có thể đeo ở thắt lưng. Vào ban đêm, đèn sẽ tự động bật sáng. Cũng có thể chuyển đổi chế độ đèn để đèn luôn sáng. Chỉ cần mang một cái là đủ."
+  },
+  "Lantern_High": {
+    "localized_name": "Đèn Bão Đeo Hông Cải Tiến",
+    "description": "Đèn bão đeo ở thắt lưng, chiếu sáng phạm vi rộng. Vào ban đêm, đèn sẽ tự động bật sáng. Cũng có thể chuyển đổi chế độ đèn để đèn luôn sáng. Chỉ cần mang một cái là đủ."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Đèn Trần Lớn",
+    "description": "Có thể treo trên trần nhà để chiếu sáng một khu vực rộng."
+  },
+  "LargeLamp": {
+    "localized_name": "Đèn Đứng Lớn",
+    "description": "Kích thước to hơn, có thể chiếu sáng một khu vực rộng hơn."
+  },
+  "LaserBullet": {
+    "localized_name": "Đạn Năng Lượng",
+    "description": "Đạn sử dụng cho các loại “Súng Laser”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Đạn Súng Nòng Xoay Laser",
+    "description": "Đạn sử dụng cho các loại “Súng Nòng Xoay Laser”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Súng Nòng Xoay Laser",
+    "description": "Có thể bắn liên tục chùm tia laser với tốc độ cao. Hỏa lực mạnh, có khả năng áp chế nhiều kẻ địch cùng lúc."
+  },
+  "LaserMiningTool": {
+    "localized_name": "Máy Cắt Plasma Đa Năng",
+    "description": "Máy cắt plasma cầm tay có khả năng hội tụ và phóng năng lượng plasma. Từ đào quặng cho đến chặt cây lấy gỗ, một mình nó cân được hết."
+  },
+  "LauncherBullet": {
+    "localized_name": "Tên Lửa",
+    "description": "Đạn sử dụng cho các loại “Súng Phóng Tên Lửa”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Đại Bác Thiên Thạch",
+    "description": "Một thứ vũ khí phi thường được chế tạo từ mảnh vỡ thiên thạch. Tạo ra vụ nổ lớn như thiên thạch rơi khi chạm mục tiêu. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí”."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Súng Trường Tự Chế",
+    "description": "Khẩu súng trường tấn công tự chế từ phế liệu. Sở hữu khả năng bắn liên thanh tuyệt vời và tầm bắn xa, nhưng uy lực trong một phát bắn lại thấp."
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Súng Ngắn Tự Chế Từ Phế Liệu",
+    "description": "Khẩu súng lục tự chế từ đồ phế liệu. Thích hợp cho chiến đấu ở khoảng cách gần, nhưng chỉ bắn được từng phát một. Có thể chế tạo tại |Bàn Chế Tạo Vũ Khí|."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Súng Săn Tự Chế",
+    "description": "Một khẩu súng săn tự chế từ phế liệu. Tầm bắn ngắn nhưng uy lực mạnh trong chiến đấu tầm gần."
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Súng Tiểu Liên Tự Chế",
+    "description": "Một khẩu súng tiểu liên tự chế từ phế liệu. Sở hữu khả năng bắn liên thanh tuyệt vời, nhưng uy lực trong một phát bắn lại thấp."
+  },
+  "ManganeseIngot": {
+    "localized_name": "Thỏi Coralum",
+    "description": "Hợp kim của Quặng Coralum tìm thấy dưới đáy biển. Chịu được năng lượng cao, chuyên dùng để chế tạo vũ khí và các vật phẩm khác. Có thể tinh luyện tại “Lò Khổng Lồ”."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Máy Phát Điện Bằng Sức Người",
+    "description": "Cơ sở chuyển đổi chuyển động quay thành năng lượng điện. Hiệu quả kém và Pal làm việc sẽ bị giảm chỉ số Minh Mẫn, nhưng có thể nhận được kinh nghiệm."
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Dao Săn",
+    "description": "Con dao có thể xẻ Pal được triệu hồi. Khi trang bị, hành động |Vuốt ve| sẽ chuyển thành |Xẻ thịt|. Một khi đã xẻ thịt, Pal sẽ không bao giờ quay trở lại."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Giường Pal Cỡ Lớn",
+    "description": "Giường lớn cho Pal ngủ ngon giấc. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Pal kích thước lớn cũng có thể ngủ thoải mái."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Pal Pod Văn Minh Tiên Tiến",
+    "description": "Khoang hồi phục cho Pal. Dùng cho Pal khi bị thương hoặc khi ngủ ban đêm. Lượng hồi phục đã tăng lên nhờ đổi mới công nghệ."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Bàn Chế Thuốc Văn Minh Tiên Tiến",
+    "description": "Thiết bị bào chế thuốc chữa bệnh cho Pal. Có thể bào chế những loại thuốc chưa được biết đến với công nghệ tương lai. Hãy giao công việc cho Pal có thể bào chế thuốc."
+  },
+  "MetalDetector": {
+    "localized_name": "Thiết Bị Dò Kim Loại",
+    "description": "Cầm trên tay và dò để phát hiện ra các quặng ẩn ở gần. Khi phát hiện đang ở gần quặng, tín hiệu có kim loại sẽ xuất hiện. Tín hiệu sẽ biến mất khi bạn di chuyển ra xa."
+  },
+  "Metal_Gate": {
+    "localized_name": "Cổng Kim Loại",
+    "description": "Cổng kim loại mà Pal kích thước lớn cũng có thể đi qua."
+  },
+  "Metal_houseset": {
+    "localized_name": "Bộ Cấu Kiện Nhà Kim Loại",
+    "description": "Bộ công cụ để xây dựng căn cứ bằng kim loại. Cho phép xây dựng các cấu trúc cần thiết cho nơi trú ẩn như nền nhà, tường, trần nhà, cầu thang bằng kim loại."
+  },
+  "MiningTool": {
+    "localized_name": "Xe Đẩy Khai Thác Mỏ",
+    "description": "Nếu đặt ở căn cứ tốc độ đào sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "MissileBullet": {
+    "localized_name": "Tên Lửa Điều Khiển",
+    "description": "Đạn sử dụng cho các loại “Súng Phóng Tên Lửa Điều Khiển”. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II”."
+  },
+  "MonsterFarm": {
+    "localized_name": "Trang Trại Gia Súc",
+    "description": "Trang trại chăn thả Pal giống cừu và gà. Nếu chỉ định Pal có năng lực phù hợp với trang trại, chúng sẽ tự động sản xuất vật phẩm."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Dùng Điện Cỡ Lớn",
+    "description": "Thiết bị dùng để ấp trứng Pal. Cần cung cấp điện, nhưng có thể ấp nhiều trứng cùng lúc ở nhiệt độ tối ưu."
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Thiết Bị Phối Giống Văn Minh Cổ Đại",
+    "description": "Cơ sở phối giống tiên tiến từ nền văn minh cổ đại, được bao bọc trong lớp kính điện tử. Quy trình từ sản xuất đến ấp trứng đều được tự động hóa với tốc độ cao, đồng thời tăng tỷ lệ di truyền kỹ năng hiếm. Pal được quản lý bằng hệ thống Hologram, nên không tốn nhiều diện tích như trang trại thông thường."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Cỡ Lớn",
+    "description": "Thiết bị dùng để ấp trứng Pal. Tự động duy trì nhiệt độ tối ưu, cho phép ấp cùng lúc nhiều quả trứng Pal."
+  },
+  "Musket": {
+    "localized_name": "Súng Hỏa Mai",
+    "description": "Khẩu súng cổ điển đơn giản. Sát thương mỗi phát cực cao, nhưng tốc độ nạp đạn chậm. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Bộ Cờ Của Hoa Mặt Trăng",
+    "description": "Một bộ gồm Cờ Hiệu Của Hoa Mặt Trăng và Biểu Ngữ Dọc Của Hoa Mặt Trăng. Chứng nhận cho việc bạn đã đánh bại Hoa Mặt Trăng."
+  },
+  "OctaviaSet01": {
+    "localized_name": "Bộ Vật Phẩm ULTRAKILL 1",
+    "description": "[Hợp tác với ULTRAKILL] Một bộ gồm Áo Giáp V1 và Súng Lục Marksman."
+  },
+  "OctaviaSet02": {
+    "localized_name": "Bộ Vật Phẩm ULTRAKILL 2",
+    "description": "[Hợp tác với ULTRAKILL] Một bộ gồm Áo Giáp V2 và Súng Ngắn Đẩy Lõi."
+  },
+  "OilPump": {
+    "localized_name": "Máy Chiết Xuất Dầu Thô",
+    "description": "Thiết bị cần thiết để chiết xuất Dầu Thô từ mỏ dầu. Cần cung cấp lượng điện lớn để hoạt động."
+  },
+  "OilPump02": {
+    "localized_name": "Máy Chiết Xuất Dầu Thô - Cao Áp",
+    "description": "Thiết bị bơm hút để khai thác Dầu Thô từ sâu trong lòng đất. Có thể tạo ra Dầu Thô ngay cả ở những nơi không có mỏ dầu, nhưng chỉ có thể đặt trên mặt đất trống. Yêu cầu cung cấp năng lượng lớn hơn nhiều so với Máy Chiết Xuất Dầu Thô."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Bệ Đuốc Thiêng",
+    "description": "Nếu đặt ở căn cứ tốc độ đốt lửa sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "OperatingTable": {
+    "localized_name": "Bàn Phẫu Thuật Pal",
+    "description": "Cơ sở dùng để tiến hành phẫu thuật cho Pal, giúp thay đổi giới tính và kỹ năng bị động của Pal."
+  },
+  "OverheatRifle": {
+    "localized_name": "Súng Trường Quá Nhiệt",
+    "description": "Súng trường tấn công có thể bắn liên tục mà không cần nạp đạn. Tuy nhiên, nếu bắn liên tục, có thể gây quá nhiệt và tạo ra lỗ hổng lớn nên cần phải cẩn thận."
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Đạn Súng Trường Quá Nhiệt",
+    "description": "Đạn sử dụng cho các loại “Súng Trường Quá Nhiệt”. Có thể chế tạo tại “Dây Chuyền Lắp Ráp Văn Minh Tiên Tiến”."
+  },
+  "PALBOX": {
+    "localized_name": "Palbox",
+    "description": "Cơ sở để giữ những Pal đã bắt được. Pal được đặt vào trong hộp sẽ dần hồi phục Máu. Phạm vi xung quanh với cơ sở này làm trung tâm sẽ trở thành căn cứ."
+  },
+  "PalBooth": {
+    "localized_name": "Chợ Trời (Pal)",
+    "description": "Cơ sở để bán Pal. Có thể bán Pal cho người chơi khác. Nếu chỉ định Pal hệ Băng, thực phẩm bạn bán sẽ khó bị hỏng hơn."
+  },
+  "PalDopingShot": {
+    "localized_name": "Súng Cường Lực",
+    "description": "Bắn vào Pal đồng đội sẽ tăng cường sức tấn công và phòng thủ của Pal đó trong một khoảng thời gian nhất định. Bắn vào kẻ địch sẽ gây sát thương."
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Đạn Súng Cường Lực",
+    "description": "Đạn sử dụng cho các loại “Súng Cường Lực”. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "PalDopingShot_2": {
+    "localized_name": "Súng Cường Lực Siêu Cấp",
+    "description": "Bắn vào Pal đồng đội sẽ tăng cường sức tấn công và phòng thủ, bắn vào kẻ địch sẽ gây sát thương. Nhờ cải tiến, mức tăng cường, thời gian hiệu lực và sát thương lên kẻ địch đã được cải thiện."
+  },
+  "PalFoodBox": {
+    "localized_name": "Hộp Thức Ăn",
+    "description": "Chỉ cần đặt thức ăn vào, các Pal trong căn cứ sẽ có thể đến ăn."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "Lựu Đạn Hồi Phục Pal",
+    "description": "Lựu Đạn Nổ có tác dụng hồi phục. Nó sẽ phát nổ va chạm, hồi phục Máu cho các Pal đồng đội."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Kệ Thuốc",
+    "description": "Kệ để cất thuốc của Pal. Pal bị bệnh sẽ uống thuốc ở đây. Hãy đảm bảo trong đây luôn có thuốc."
+  },
+  "PalRevive": {
+    "localized_name": "Thuốc Hồi Sinh",
+    "description": "Một loại thuốc giúp hồi phục Pal đang bị thương và không thể di chuyển."
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Quả Cầu Soralite",
+    "description": "Công cụ bắt Pal bằng cách ném vào Pal. Quả cầu cao cấp, minh chứng cho sự chung sống hòa hợp với Pal trong nền văn minh cổ đại."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Quả Cầu Pal Cổ Đại",
+    "description": "Công cụ bắt Pal bằng cách ném vào Pal. Quả cầu tối thượng mang sức mạnh của Cây Thế Giới, đỉnh cao của nền văn minh cổ đại."
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Quả Cầu Exotic",
+    "description": "Công cụ bắt Pal bằng cách ném vào Pal. Sở hữu hiệu năng đáng kinh ngạc, có thể bắt cả những Pal vượt ngoài tiêu chuẩn."
+  },
+  "Plastic": {
+    "localized_name": "Thép Plasteel",
+    "description": "Vật liệu đặc biệt được tạo ra bằng cách gia công Dầu Thô và kim loại. Có thể được tạo ra tại Lò Điện."
+  },
+  "PoliceFlagSet": {
+    "localized_name": "Bộ Cờ Của Đội Tự Vệ",
+    "description": "Một bộ gồm Cờ Hiệu Của Đội Tự Vệ và Biểu Ngữ Dọc Của Đội Tự Vệ. Chứng nhận cho việc bạn đã đánh bại Đội Tự Vệ."
+  },
+  "Polymer": {
+    "localized_name": "Vật Liệu Polymer",
+    "description": "Vật Liệu Polymer được tinh luyện từ dầu. Nguyên liệu cần thiết để chế tạo súng và các trang bị khác. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Potion_Extreme": {
+    "localized_name": "Thuốc Hồi Phục Đặc Cấp",
+    "description": "Loại thuốc giúp chữa lành vết thương theo thời gian. Chất lượng cực kỳ cao, giúp hồi phục Máu nhanh chóng."
+  },
+  "Processed_Wood": {
+    "localized_name": "Ván Gỗ",
+    "description": "Ván được gia công từ gỗ để dễ sử dụng. Đa dụng hơn hẳn gỗ khúc thông thường, phục vụ cho nhiều mục đích khác nhau. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Rìu Đá",
+    "description": "Một chiếc rìu để chặt gỗ. Được làm từ đá nên độ sắc bén không cao."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Rìu Kim Loại",
+    "description": "Chiếc rìu bằng kim loại có khả năng đốn các loại gỗ cứng. Hiệu quả với cả những cây gỗ cứng cáp mọc ở sâu trong lục địa. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Rìu Kim Loại Tinh Luyện",
+    "description": "Chiếc rìu có thể thu thập Gỗ Cứng từ những cây mọc ở vùng khắc nghiệt như núi lửa hay sa mạc. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Mỏ Khai Thác Than Đá",
+    "description": "Cơ sở để sản xuất Than Đá. Công việc đào Than Đá rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Lửa Trại",
+    "description": "Được sử dụng để chế biến thức ăn đơn giản hoặc cung cấp hơi ấm và ánh sáng ít ỏi."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Nồi Nấu Ăn",
+    "description": "Có thể chế biến nhiều loại thực phẩm hơn, hiệu quả hơn."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Bếp Điện",
+    "description": "Cần dùng điện nhưng có thể chế biến thực phẩm chất lượng cao hiệu quả hơn. Cần Pal có năng lực |Nhóm lửa| cho công việc."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Mỏ Khai Thác Kim Loại",
+    "description": "Cơ sở để sản xuất Quặng Kim Loại. Công việc đào Quặng Kim Loại rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Mỏ Khai Thác Kim Loại II",
+    "description": "Cơ sở để sản xuất hàng loạt Quặng Kim Loại. Công việc đào Quặng Kim Loại rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "Bàn Gia Công Cao Cấp",
+    "description": "Tốc độ sản xuất nhanh hơn |Bàn Gia Công Nguyên Thủy|. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất",
+    "description": "Tuy cần điện để hoạt động, nhưng có thể sản xuất các loại vật phẩm nhanh hơn. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất II",
+    "description": "Tuy cần điện để hoạt động, nhưng có thể sản xuất các loại vật phẩm nhanh hơn nữa. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Nông Trại Quả Mọng",
+    "description": "Nông trại sản xuất quả mọng. Cần Pal có năng lực |Gieo Hạt|, |Tưới Nước|, |Thu Thập| cho công việc."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Nông Trại Cà Rốt",
+    "description": "Nông trại có thể trồng Cà Rốt. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Nông Trại Xà Lách",
+    "description": "Nông trại sản xuất rau xà lách. Cần Pal có năng lực |Gieo Hạt|, |Tưới Nước|, |Thu Thập| cho công việc."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Nông Trại Hành Tây",
+    "description": "Nông trại có thể trồng Hành Tây. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Nông Trại Khoai Tây",
+    "description": "Nông trại có thể trồng Khoai Tây. Thời gian chờ đến khi thu hoạch có hơi dài, nhưng mang lại nhiều món ăn đa dạng. Cần một số Pal để gieo hạt, tưới nước và thu hoạch."
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Nông Trại Cà Chua",
+    "description": "Nông trại sản xuất cà chua. Cần Pal có năng lực |Gieo Hạt|, |Tưới Nước|, |Thu Thập| cho công việc."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Nông Trại Lúa Mì",
+    "description": "Nông trại sản xuất lúa mì, nguyên liệu chính để làm |Bánh Mì|. Cần Pal có năng lực |Gieo Hạt| |Tưới Nước| |Thu Thập|."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "Lò Nguyên Thủy",
+    "description": "Bạn có thể nấu chảy |Quặng Kim Loại| và đúc thành thỏi."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Lò Cải Tiến",
+    "description": "Bạn có thể tinh luyện |Thỏi Kim Loại Tinh Luyện|."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Lò Điện",
+    "description": "Bạn đã có thể tinh luyện |Thỏi Pal Metal|."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Bàn Chế Thuốc Trung Cổ",
+    "description": "Có thể tạo ra những loại thuốc đơn giản. Cần Pal có năng lực |Chế Thuốc| cho công việc."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Bàn Chế Thuốc Dùng Điện",
+    "description": "Tuy cần điện để hoạt động, nhưng có thể tạo ra các loại thuốc cao cấp hơn. Cần Pal có năng lực |Chế Thuốc| cho công việc."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Cuốc Đá",
+    "description": "Một chiếc cuốc chim để khai thác. Được làm bằng đá nên hiệu suất không được cao."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Cuốc Kim Loại",
+    "description": "Cuốc dùng để khai thác khoáng sản. Được làm bằng kim loại, độ bền và hiệu suất được cải thiện. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Cuốc Kim Loại Tinh Luyện",
+    "description": "Cuốc dùng để khai thác khoáng sản. Độ bền và hiệu suất đã được nâng cao hơn. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Mỏ Khai Thác Thạch Anh Tinh Khiết",
+    "description": "Cơ sở để sản xuất Thạch Anh Tinh Khiết. Công việc đào Thạch Anh Tinh Khiết rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Nơi Đốn Gỗ",
+    "description": "Có thể sản xuất gỗ ngay tại căn cứ. Cần Pal có năng lực |Đốn Gỗ| cho công việc."
+  },
+  "Product_StationDeforest2": {
+    "localized_name": "Khu Khai Thác Gỗ II",
+    "description": "Cơ sở để sản xuất Gỗ Cứng. Công việc chặt cây rất vất vả và tốn sức. Hãy giao cho những Pal giỏi Đốn Gỗ."
+  },
+  "Product_StonePit": {
+    "localized_name": "Mỏ Đá",
+    "description": "Có thể sản xuất đá ngay tại căn cứ. Cần Pal có năng lực |Khai Thác| cho công việc."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Mỏ Khai Thác Lưu Huỳnh",
+    "description": "Cơ sở để sản xuất Lưu Huỳnh. Công việc đào Lưu Huỳnh rất vất vả và tốn sức. Hãy giao cho Pal giỏi công việc đào."
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Bàn Chế Tạo Vũ Khí",
+    "description": "Cơ sở chế tạo các loại vũ khí cơ khí đơn giản. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Vũ Khí",
+    "description": "Tuy cần điện để hoạt động, nhưng có thể sản xuất vũ khí, đạn bắn nhanh hơn. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Vũ Khí II",
+    "description": "Tuy cần điện để hoạt động, nhưng có thể sản xuất vũ khí, đạn bắn nhanh hơn nữa. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Bàn Chế Tạo Trang Bị Pal",
+    "description": "Chế tạo công cụ để Pal sử dụng Kỹ Năng Đồng Hành."
+  },
+  "Refrigerator": {
+    "localized_name": "Tủ Lạnh",
+    "description": "Kho lưu trữ thực phẩm dung tích lớn. Nếu chỉ định Pal hệ Băng, thực phẩm bên trong sẽ khó bị hỏng hơn."
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Mũi Tên Cường Hóa",
+    "description": "Mũi tên được cường hóa dùng để bắn bằng Cung Trợ Lực. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "RepairBench": {
+    "localized_name": "Bàn Sửa Chữa",
+    "description": "Có thể sửa chữa vũ khí và công cụ bị hư hỏng."
+  },
+  "RifleBullet": {
+    "localized_name": "Đạn Súng Trường",
+    "description": "Đạn sử dụng cho các loại súng trường. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "RoughBullet": {
+    "localized_name": "Đạn Thô",
+    "description": "Đạn sử dụng cho các loại vũ khí như “Súng Hỏa Mai” và “Súng Ngắn Tự Chế Từ Phế Liệu”. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "SFArmor": {
+    "localized_name": "Áo Giáp Hexolite",
+    "description": "Áo giáp làm từ vật liệu Hexolite. Có độ bền và khả năng phòng thủ vượt trội."
+  },
+  "SFArmorCold": {
+    "localized_name": "Áo Giáp Hexolite Chịu Lạnh",
+    "description": "Áo Giáp Hexolite đã được cải tiến. Giúp người mặc tránh được cái lạnh thấu xương."
+  },
+  "SFArmorHeat": {
+    "localized_name": "Áo Giáp Hexolite Chịu Nhiệt",
+    "description": "Áo Giáp Hexolite đã được cải tiến. Có tính năng chịu nhiệt cao."
+  },
+  "SFArmorWeight": {
+    "localized_name": "Áo Giáp Hexolite Siêu Nhẹ",
+    "description": "Áo Giáp Hexolite đã được cải tiến. Tăng sức mang của người chơi."
+  },
+  "SFArrow": {
+    "localized_name": "Mũi Tên Nâng Cấp",
+    "description": "Mũi tên được cường hóa dùng để bắn bằng Cung Nâng Cấp. Có thể chế tạo tại “Bàn Gia Công Nguyên Thủy”."
+  },
+  "SFBow": {
+    "localized_name": "Cung Nâng Cấp",
+    "description": "Cung tên được tái cấu trúc bằng kỹ thuật cao. Có khả năng bắn ra những mũi tên cực kỳ mạnh."
+  },
+  "SFHelmet": {
+    "localized_name": "Mũ Giáp Hexolite",
+    "description": "Mũ giáp làm từ vật liệu Hexolite. Có độ bền đáng kinh ngạc và trọng lượng nhẹ."
+  },
+  "SF_houseset": {
+    "localized_name": "Bộ Cấu Kiện Kiến Trúc Tương Lai",
+    "description": "Bộ cấu kiện để xây dựng căn cứ theo phong cách tương lai. Bao gồm các thành phần cần thiết như nền nhà, tường, mái nhà, cầu thang và các vật liệu khác."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Nam Châm Câu Cá Siêu Mạnh",
+    "description": "Thanh nam châm mạnh mẽ cần thiết cho việc trục vớt nâng cao. Có thể kéo các tài nguyên và vật tư còn sót lại dưới đáy biển lên bằng lực từ mạnh mẽ."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Thiết Bị Tạo Sóng Alpha",
+    "description": "Thiết bị tạo sóng alpha giúp Pal thư giãn. Chỉ số Minh Mẫn của Pal trong căn cứ sẽ giảm chậm hơn. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "ScientistFlagSet": {
+    "localized_name": "Bộ Cờ Của Đơn Vị Nghiên Cứu Gen",
+    "description": "Một bộ gồm Cờ Hiệu Của Đơn Vị Nghiên Cứu Gen và Biểu Ngữ Dọc Của Đơn Vị Nghiên Cứu Gen. Chứng nhận cho việc bạn đã đánh bại Đơn Vị Nghiên Cứu Gen."
+  },
+  "Shield_01": {
+    "localized_name": "Khiên Thường",
+    "description": "Tấm khiên kỳ lạ được tạo ra bằng công nghệ Paldium. Khi không bị tấn công trong một khoảng thời gian nhất định, khiên sẽ tự phục hồi."
+  },
+  "Shield_02": {
+    "localized_name": "Khiên Khổng Lồ",
+    "description": "Tấm khiên kỳ lạ được tạo ra bằng công nghệ Paldium. Bản thử nghiệm đã được nâng cấp, giúp tăng khả năng phòng thủ. Có thể chế tạo tại |Bàn Gia Công Cao Cấp|."
+  },
+  "Shield_03": {
+    "localized_name": "Khiên Siêu Cấp",
+    "description": "Tấm khiên kỳ lạ được tạo ra bằng công nghệ Paldium. Đã được nâng cấp, hiệu quả được cải thiện đáng kể. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất|."
+  },
+  "Shield_04": {
+    "localized_name": "Khiên Vượt Trội",
+    "description": "Tấm khiên kỳ lạ được tạo ra bằng công nghệ Paldium. Sau nhiều lần thử nghiệm, chất lượng đã đạt đến mức cao nhất. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất II|."
+  },
+  "Shield_05": {
+    "localized_name": "Khiên Tối Thượng",
+    "description": "Tấm khiên kỳ lạ được tạo ra bằng công nghệ Paldium. Nhờ tiếp tục thử nghiệm thêm, chất lượng đã đạt đến mức tuyệt đối. Có thể chế tạo tại |Nhà Máy Dây Chuyền Sản Xuất II|."
+  },
+  "Shield_07": {
+    "localized_name": "Khiên Cổ Đại",
+    "description": "Tấm khiên được tạo ra bằng công nghệ cổ đại đã thất truyền. Nếu không chịu sát thương trong một thời gian, khiên sẽ tự động hồi phục. Hiệu quả của nó được cho là không thể tái tạo bằng công nghệ hiện đại."
+  },
+  "Shield_SF": {
+    "localized_name": "Khiên Nâng Cấp",
+    "description": "Tấm khiên kỳ diệu được tạo ra bằng công nghệ siêu tân tiến. Khi không chịu tấn công trong một khoảng thời gian nhất định, khiên sẽ tự phục hồi. Đạt đến chất lượng hoàn hảo."
+  },
+  "ShotGunBullet": {
+    "localized_name": "Đạn Súng Săn",
+    "description": "Đạn sử dụng cho các loại súng săn. Có thể chế tạo tại “Bàn Chế Tạo Vũ Khí”."
+  },
+  "Signboard": {
+    "localized_name": "Bảng Hiệu",
+    "description": "Có thể viết chữ lên."
+  },
+  "Silo": {
+    "localized_name": "Silo",
+    "description": "Nếu đặt ở căn cứ tốc độ gieo hạt sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Yên Cưỡi Melpaca",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Melpaca."
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Yên Cưỡi Kitsun",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Kitsun."
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Yên Cưỡi Kitsun Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Kitsun Noct."
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Súng Săn Của Nyafia",
+    "description": "Súng săn của Nyafia. Khi kích hoạt Kỹ Năng Đồng Hành, Nyafia sẽ dùng súng săn bắn liên tục vào kẻ địch gần đó."
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Yên Cưỡi Vanwyrm",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Vanwyrm."
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Yên Cưỡi Vanwyrm Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Vanwyrm Cryst."
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Yên Cưỡi Necromus",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Necromus."
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Yên Cưỡi Shadowbeak",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Shadowbeak."
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Yên Cưỡi Astegon",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Astegon."
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Dây Cương Smokie",
+    "description": "Dây cương dùng cho Smokie. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể phát hiện vị trí có Quặng Chromite ở gần."
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Yên Cưỡi Azurobe",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Azurobe."
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Yên Cưỡi Azurobe Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Azurobe Cryst."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Yên Cưỡi Shaolong",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Shaolong."
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Yên Cưỡi Azurmane",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Azurmane."
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Yên Cưỡi Rushoar",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Rushoar."
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Súng Tiểu Liên Lifmunk",
+    "description": "Khẩu súng mini được chế tạo riêng cho Lifmunk. Khi kích hoạt Kỹ Năng Đồng Hành, nhân vật sẽ nhảy lên đầu người chơi và bắn yểm trợ theo các đòn tấn công."
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Găng Tay Tocotoco",
+    "description": "Găng tay để nhẹ nhàng giữ Tocotoco. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể ôm Tocotoco và bắn trứng bom để tấn công."
+  },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Yên Cưỡi Tetroise",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Tetroise ."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Yên Cưỡi Tetroise Primo",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Tetroise Primo."
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Yên Cưỡi Xenolord",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Xenolord."
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Yên Cưỡi Eikthyrdeer",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Eikthyrdeer."
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Yên Cưỡi Eikthyrdeer Terra",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Eikthyrdeer Terra."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Yên Cưỡi Aegidron",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Aegidron."
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Súng Minigun Của Grizzbolt",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Grizzbolt và dùng súng minigun bắn liên tục."
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Yên Cưỡi Elphidran",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Elphidran."
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Yên Cưỡi Elphidran Aqua",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Elphidran Aqua."
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Yên Cưỡi Dazemu",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Dazemu."
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Yên Cưỡi Fenglope",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Fenglope."
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Yên Cưỡi Fenglope Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Fenglope Lux."
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Yên Cưỡi Pyrin",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Pyrin."
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Yên Cưỡi Pyrin Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Pyrin Noct."
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Yên Cưỡi Arsox",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Arsox."
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Yên Cưỡi Dinossom",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Dinossom."
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Yên Cưỡi Dinossom Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Dinossom Lux."
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Bộ Yên Cương Direhow",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Direhowl."
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Yên Cưỡi Ghangler",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Ghangler."
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Yên Cưỡi Ghangler Ignis",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Ghangler Ignis."
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Yên Cưỡi Maraith",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Maraith."
+  },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Yên Cưỡi Eidrolon",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Eidrolon."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Yên Cưỡi Eidrolon Ignis",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Eidrolon Ignis."
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Yên Cưỡi Gildane",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Gildane."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Yên Cưỡi Dualith",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Dualith và bắn ra tia laser hệ Cỏ có sức công phá mạnh mẽ."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Yên Cưỡi Dualith Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Dualith Noct và bắn ra tia laser hệ Bóng Tối có sức công phá mạnh mẽ."
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Yên Cưỡi Mammorest",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Mammorest."
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Yên Cưỡi Mammorest Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Mammorest Cryst."
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Súng Phóng Lựu Mossanda",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Mossanda và bắn súng phóng lựu."
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Súng Phóng Lựu Mossanda Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Mossanda Lux và bắn súng phóng lựu."
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Yên Cưỡi Yakumo",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Yakumo."
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Yên Cưỡi Helzephyr",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Helzephyr."
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Yên Cưỡi Helzephyr Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Helzephyr Lux."
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Yên Cưỡi Nitewing",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Nitewing."
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Yên Cưỡi Faleris",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Faleris."
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Yên Cưỡi Faleris Aqua",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Faleris Aqua."
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Yên Cưỡi Reindrix",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Reindrix."
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Yên Cưỡi Frostallion",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Frostallion."
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Yên Cưỡi Frostallion Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Frostallion Noct."
+  },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Yên Cưỡi Whalaska",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Whalaska."
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Yên Cưỡi Whalaska Ignis",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Whalaska Ignis."
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Yên Cưỡi Polapup",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Polapup."
+  },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Yên Cưỡi Polapup Terra",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Polapup Terra."
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Súng Phóng Tên Lửa Điều Khiển Jetragon",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Jetragon và bắn tên lửa điều khiển."
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Yên Cưỡi Kingpaca",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Kingpaca."
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Yên Cưỡi Kingpaca Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Kingpaca Cryst."
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Yên Cưỡi Blazamut",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Blazamut."
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Yên Cưỡi Blazamut Ryu",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Blazamut Ryu."
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Yên Cưỡi Solmora",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Solmora."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Yên Cưỡi Solmora Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Solmora Lux."
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Yên Cưỡi Univolt",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Univolt."
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Yên Cưỡi Univolt Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Univolt Cryst."
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Dây Giữ Foxparks",
+    "description": "Dây cương để giữ Foxparks. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể ôm Foxparkslên và sử dụng như một vũ khí phun lửa để tấn công."
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Dây Cương Foxparks Cryst",
+    "description": "Dây cương để giữ Foxparks Cryst. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể ôm Foxparks Cryst lên và phóng khí lạnh để tấn công."
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Súng Phóng Tên Lửa Điều Khiển Relaxaurus",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Relaxaurus và bắn súng phóng tên lửa điều khiển."
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Súng Phóng Tên Lửa Điều Khiển Relaxaurus Lux",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Relaxaurus Lux và bắn súng phóng tên lửa điều khiển."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Yên Cưỡi Hartalis",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi Hartalis và tạo lá chắn để chặn đòn tấn công."
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Yên Cưỡi Ophydia",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Ophydia."
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Yên Cưỡi Blazehowl",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Blazehowl."
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Yên Cưỡi Blazehowl Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Blazehowl Noct."
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Súng Trường Tấn Công Tanzee",
+    "description": "Khẩu súng trường tấn công loại nhỏ được chế tạo riêng cho Tanzee. Khi kích hoạt Kỹ Năng Đồng Hành, Tanzee sẽ chuyển sang chế độ bắn súng và bắn liên tục vào kẻ địch gần đó."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Súng Trường Tấn Công Tanzee Ignis",
+    "description": "Súng trường tấn công cỡ nhỏ dành riêng cho Tanzee Ignis. Khi kích hoạt Kỹ Năng Đồng Hành, Tanzee Ignis sẽ chuyển sang chế độ bắn súng, càn quét toàn bộ kẻ địch xung quanh."
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Yên Cưỡi Selyne",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Selyne."
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Yên Cưỡi Sweepa",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Sweepa."
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Yên Cưỡi Shroomer",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Shroomer."
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Yên Cưỡi Shroomer Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Shroomer Noct."
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Yên Cưỡi Grintale",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Grintale."
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Yên Cưỡi Starryon",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Starryon."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Yên Cưỡi Starryon Primo",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Starryon Primo."
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Súng Phóng Tên Lửa Pengullet",
+    "description": "Khẩu súng dùng để phóng Pengullet. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể bắn Pengullet để tấn công kẻ địch. Sau khi bắn, Pengullet sẽ rơi vào trạng thái bất tỉnh."
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Súng Phóng Tên Lửa Pengullet Lux",
+    "description": "Khẩu súng dùng để phóng Pengullet Lux. Khi kích hoạt Kỹ Năng Đồng Hành, bạn có thể bắnPengullet Lux để tấn công kẻ địch. Sau khi bắn đi, Pengullet Lux sẽ rơi vào trạng thái bất tỉnh."
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Yên Cưỡi Braloha",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Braloha."
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Yên Cưỡi Neptilius",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Neptilius."
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Yên Cưỡi Tarantriss",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Tarantriss."
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Yên Cưỡi Ragnahawk",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Ragnahawk."
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Yên Cưỡi Paladius",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Paladius."
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Yên Cưỡi Broncherry",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Broncherry."
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Yên Cưỡi Broncherry Aqua",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Broncherry Aqua."
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Yên Cưỡi Surfent",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Surfent."
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Yên Cưỡi Surfent Terra",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Surfent Terra."
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Yên Cưỡi Quivern",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Quivern."
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Yên Cưỡi Quivern Botan",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Quivern Botan."
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Búa Bastigor",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Bastigor."
+  },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Yên Cưỡi Bulldosu",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Bulldosu."
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Yên Cưỡi Suzaku",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Suzaku."
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Yên Cưỡi Suzaku Aqua",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Suzaku Aqua."
+  },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Yên Cưỡi Roujay",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Roujay."
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Yên Cưỡi Beakon",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Beakon."
+  },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Yên Cưỡi Beakon Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Beakon Cryst."
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Yên Cưỡi Rayhound",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Rayhound."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Yên Cưỡi Dynamoff",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Dynamoff."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Yên Cưỡi Rayhound Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Thunderdog_Ice."
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Yên Cưỡi Palumba",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Palumba."
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Yên Cưỡi Jormuntide",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Jormuntide."
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Yên Cưỡi Jormuntide Ignis",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Jormuntide Ignis."
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Yên Cưỡi Reptyro",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Reptyro."
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Yên Cưỡi Reptyro Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Reptyro Cryst."
+  },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Yên Cưỡi Moldron",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Moldron."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Yên Cưỡi Moldron Cryst",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Moldron Cryst."
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Yên Cưỡi Chillet",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Chillet."
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Yên Cưỡi Chillet Ignis",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Chillet Ignis."
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Yên Cưỡi Xenogard",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Xenogard."
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Yên Cưỡi Celesdir",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Celesdir."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Yên Cưỡi Celesdir Noct",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể cưỡi lên Celesdir Noct."
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Yên Cưỡi Silvegis",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Silvegis."
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Yên Cưỡi Wumpo",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Wumpo."
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Yên Cưỡi Wumpo Botan",
+    "description": "Khi sở hữu vật phẩm này, bạn sẽ có thể cưỡi Wumpo Botan."
+  },
+  "SkinChange": {
+    "localized_name": "Thiết Bị Trưng Diện Pal",
+    "description": "Cơ sở thay đổi giao diện. Cơ sở thay đổi giao diện của Pal thành ngoại hình đặc biệt. Có thể sử dụng giao diện có được bên ngoài trò chơi."
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "Súng Trường Tấn Công Hạng Nặng",
+    "description": "Súng trường tấn công được chế tạo từ thỏi Soralite. Vẫn giữ được tính đa năng nhưng đã được nâng cấp để sử dụng loại đạn có sát thương cao hơn."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Đạn Súng Trường Tấn Công Hạng Nặng",
+    "description": "Đạn sử dụng cho Súng Trường Tấn Công Hạng Nặng. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "SkyBeamSword": {
+    "localized_name": "Kiếm Laser",
+    "description": "Kiếm Kiếm Tia Sáng được chế tạo từ thỏi Soralite. Lưỡi kiếm mang năng lượng công suất cao, có thể chém đứt mục tiêu trong tích tắc."
+  },
+  "SkyBow": {
+    "localized_name": "Cung Cơ Khí",
+    "description": "Cung tên được chế tạo từ thỏi Soralite. Tốc độ bắn và khả năng xuyên phá được cải thiện đáng kể, cho phép bắn tầm xa cực chuẩn."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Mũi Tên Cung Cơ Khí",
+    "description": "Mũi tên được cường hóa dùng để bắn bằng Cung Cơ Khí. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Súng Phóng Lựu Chiến Thuật",
+    "description": "Súng phóng lựu được chế tạo từ thỏi Soralite. Quỹ đạo đạn ổn định hơn, cho phép nã pháo chính xác từ khoảng cách xa."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Đạn Súng Phóng Lựu Chiến Thuật",
+    "description": "Đạn sử dụng cho Súng Phóng Lựu Chiến Thuật. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "Bộ Cờ Lời Thề Trời Xanh",
+    "description": "Một bộ gồm Cờ Hiệu Lời Thề Trời Xanh và Biểu Ngữ Dọc Lời Thề Trời Xanh. Chứng nhận cho việc bạn đã đánh bại Lời Thề Trời Xanh."
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "Mỏ Khai Thác Đá Soralite",
+    "description": "Cơ sở chế tạo Đá Soralite. Công việc khai thác Đá Soralite rất vất vả và đòi hỏi thể lực. Hãy giao cho những Pal giỏi Khai Thác."
+  },
+  "SkyShotgun": {
+    "localized_name": "Súng Săn Nguyên Mẫu",
+    "description": "Súng săn được chế tạo từ thỏi Soralite. Phát huy hỏa lực áp đảo ở cự ly gần, băng đạn đặc biệt có khả năng chiến đấu liên tục."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Đạn Súng Săn Nguyên Mẫu",
+    "description": "Đạn sử dụng cho Súng Săn Nguyên Mẫu. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Súng Tiểu Liên Chiến Đấu",
+    "description": "Súng tiểu liên được chế tạo từ thỏi Soralite. Băng đạn và đạn được cải tiến giúp tăng cường tối đa khả năng áp chế mục tiêu."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Đạn Súng Tiểu Liên Chiến Đấu",
+    "description": "Đạn sử dụng cho Súng Tiểu Liên Chiến Đấu. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "SkyislandIngot": {
+    "localized_name": "Thỏi Soralite",
+    "description": "Vật liệu kim loại của văn minh cổ đại, được tinh luyện từ quặng ngủ sâu ở Miền Ánh Dương. Vật liệu chế tác quý hiếm, là nền tảng cho các trang bị và công trình cao cấp. Có thể tinh luyện tại “Lò Luyện Văn Minh Cổ Đại”."
+  },
+  "Snowman": {
+    "localized_name": "Người Tuyết",
+    "description": "Nếu đặt ở căn cứ tốc độ làm mát sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Spa": {
+    "localized_name": "Suối Nước Nóng",
+    "description": "Khi vào |Suối Nước Nóng|, Pal sẽ được hồi phục chỉ số Minh Mẫn."
+  },
+  "Spa2": {
+    "localized_name": "Suối Nước Nóng Cao Cấp",
+    "description": "Những Pal vào đây sẽ được hồi phục chỉ số Minh Mẫn nhiều hơn."
+  },
+  "Spa3": {
+    "localized_name": "Suối Nước Nóng Kiểu Nhật",
+    "description": "Cơ sở để Pal tại căn cứ đến nghỉ ngơi khi mệt mỏi. Trong không gian trị liệu kiểu Nhật, Pal có thể hồi phục chỉ số Minh Mẫn nhiều hơn nữa."
+  },
+  "Spear": {
+    "localized_name": "Giáo Đá",
+    "description": "Ngọn giáo hữu dụng trong cận chiến. Độ dài cho phép tấn công từ khoảng cách an toàn."
+  },
+  "Spear_2": {
+    "localized_name": "Giáo Kim Loại",
+    "description": "Ngọn giáo hữu dụng trong cận chiến. Được làm bằng kim loại, giúp tăng sức tấn công. Có thể chế tạo tại “Bàn Gia Công Cao Cấp”."
+  },
+  "Spear_3": {
+    "localized_name": "Giáo Kim Loại Tinh Luyện",
+    "description": "Ngọn giáo hữu dụng trong cận chiến. Được làm bằng kim loại cao cấp, giúp tăng sức tấn công. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất”."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Ngọn Giáo Lily",
+    "description": "Ngọn giáo được Lily trân trọng. Trừng phạt những kẻ bỏ mặc Pal."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Ngọn Thương Lily Cường Hóa",
+    "description": "Phiên bản nâng cấp từ cây thương yêu thích của Lily. Sẵn sàng đâm thủng bất cứ kẻ nào dám coi thường Pal."
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng Dùng Điện",
+    "description": "Thiết bị dùng để ấp trứng Pal. Cần cung cấp điện, nhưng bên trong máy ấp sẽ tự động duy trì nhiệt độ tối ưu."
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Máy Ấp Trứng",
+    "description": "Chỉ cần đặt trứng Pal vào là có thể ấp nở được."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Máy Tinh Luyện Pal",
+    "description": "Kết hợp nhiều Pal cùng loài và tổng hợp sức mạnh để tạo ra phiên bản có cấp bậc cao hơn."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Quả Cầu Pal",
+    "description": "Công cụ bắt Pal bằng cách ném vào Pal. Được sản xuất đại trà, chỉ hiệu quả với Pal cấp thấp."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Quả Cầu Mega",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Hiệu suất được cải thiện, có thể bắt được nhiều loại Pal hơn. Có thể chế tạo tại “Bàn Chế Tạo Quả Cầu Pal”."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Quả Cầu Giga",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Có thể bắt được cả những Pal mạnh hơn. Có thể chế tạo tại “Bàn Chế Tạo Quả Cầu Pal”."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Quả Cầu Hyper",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Có thể bắt được những Pal tương đối mạnh. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal”."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Quả Cầu Ultra",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Hiệu suất vượt trội, rất ít Pal có thể thoát. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal II”."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Quả Cầu Legendary",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Hiệu suất cực cao, gần như không Pal nào chạy thoát. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal II”."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Quả Cầu Ultimate",
+    "description": "Dụng cụ để ném và bắt giữ Pal. Mang sức mạnh áp đảo, có thể bắt được hầu hết các Pal. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal II”."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Bàn Chế Tạo Quả Cầu Pal",
+    "description": "Bàn gia công các quả cầu để bắt Pal. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal",
+    "description": "Có thể sản xuất |Quả Cầu Pal| nhanh hơn. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Nhà Máy Dây Chuyền Sản Xuất Quả Cầu Pal II",
+    "description": "Có thể được sản xuất |Quả Cầu Pal| nhanh hơn nữa. Cần Pal có năng lực |Công Việc Thủ Công| cho công việc."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Nhà Máy Quả Cầu Pal Văn Minh Tiên Tiến",
+    "description": "Nhà máy sản xuất quả cầu để bắt Pal. Sử dụng máy móc hiệu suất cao nên có thể sản xuất các quả cầu Pal ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Thiết Bị Xoáy Cầu",
+    "description": "Khi trang bị, quả cầu sẽ xoáy và bay cong. Dễ dàng khiến Pal bị bất ngờ và tăng sức mạnh bắt giữ."
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Thiết Bị Xoay Tăng Cường",
+    "description": "Khi trang bị, quả cầu sẽ xoay trượt. Quả cầu bay cong với góc cong lớn, dễ dàng khiến Pal bị bất ngờ và tăng sức mạnh bắt giữ."
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Thiết Bị Tăng Trọng Lượng",
+    "description": "Khi trang bị, quả cầu sẽ nặng hơn, tầm bay giảm nhưng sức mạnh bắt giữ tăng lên."
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Thiết Bị Tự Ngắm Mục Tiêu",
+    "description": "Khi trang bị, quả cầu sẽ nhắm mục tiêu vào Pal, tăng đáng kể sức mạnh bắt giữ."
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Thiết Bị Tăng Tầm Ném",
+    "description": "Khi trang bị, quả cầu sẽ bay xa hơn, giúp bắt Pal chính xác hơn và tăng sức mạnh bắt giữ."
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Thiết Bị Tăng Tầm Ném II",
+    "description": "Khi trang bị, quả cầu sẽ bay xa hơn đáng kể, giúp bắt Pal chính xác hơn và tăng sức mạnh bắt giữ."
+  },
+  "StainlessSteel": {
+    "localized_name": "Hexolite",
+    "description": "Hợp kim của Quặng Chromite và Thạch Anh Lục Giác. Dùng làm vật liệu cho các công trình và thiết bị tiên tiến. Có thể tinh luyện tại “Lò Khổng Lồ”."
+  },
+  "Stone_Gate": {
+    "localized_name": "Cổng Đá",
+    "description": "Cổng đá mà Pal kích thước lớn cũng có thể đi qua."
+  },
+  "Stone_houseset": {
+    "localized_name": "Bộ Cấu Kiện Nhà Đá",
+    "description": "Bộ công cụ để xây dựng căn cứ bằng đá. Cho phép xây dựng các cấu trúc cần thiết cho nơi trú ẩn như nền nhà, tường, trần nhà, cầu thang bằng đá."
+  },
+  "Stump": {
+    "localized_name": "Gốc Cây Và Rìu",
+    "description": "Nếu đặt ở căn cứ tốc độ đốn gỗ sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Supplement": {
+    "localized_name": "Chất Dinh Dưỡng",
+    "description": "Khi uống Chất Dinh Dưỡng, bạn sẽ không bị đói trong một khoảng thời gian nhất định. Đây là loại thức uống bổ dưỡng với nhiều dưỡng chất cô đặc, giúp chống đói trong các chuyến thám hiểm dài."
+  },
+  "TableCircular": {
+    "localized_name": "Bộ Bàn Gọn Gàng",
+    "description": "Bộ bàn gọn gàng dùng để trang trí. Xây dựng căn cứ sạch sẽ và ngăn nắp."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Bàn Trang Điểm Cổ",
+    "description": "Bàn trang điểm để xem vẻ ngoài của mình. Có thể thay đổi ngoại hình của nhân vật."
+  },
+  "Thermal_Core": {
+    "localized_name": "Lõi Siêu Nhiệt",
+    "description": "Lõi phản ứng nhiệt độ cao chứa nguồn năng lượng nhiệt khổng lồ. Được sử dụng trong bộ phận truyền động của các thiết bị tiên tiến. Có thể chế tạo tại “Nhà Máy Dây Chuyền Sản Xuất II”."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Hộp Dụng Cụ Lớn",
+    "description": "Nếu đặt ở căn cứ tốc độ làm việc thủ công sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Torch": {
+    "localized_name": "Đuốc Đứng",
+    "description": "Đặt ở căn cứ để làm sáng khu vực xung quanh."
+  },
+  "TransmissionTower": {
+    "localized_name": "Tháp Truyền Điện",
+    "description": "Nếu đặt ở căn cứ tốc độ phát điện sẽ tăng lên. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Bẫy Kẹp (Nhỏ)",
+    "description": "Có thể giữ chân đối phương khi giẫm trúng. Chỉ có hiệu quả với những Pal nhỏ và con người."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Bẫy Kẹp (Lớn)",
+    "description": "Có thể giữ chân đối phương khi giẫm trúng. Chỉ có hiệu quả với Pal nhỏ."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mìn Đất",
+    "description": "Khi có kẻ địch giẫm lên, nó sẽ tự động phát nổ."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Mìn Điện Giật",
+    "description": "Bất cứ ai bước lên sẽ bị điện giật. Những Pal bị điện giật sẽ dễ bị bắt hơn."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Mìn Đóng Băng",
+    "description": "Bất cứ ai bước lên sẽ bị đóng băng. Những Pal bị đóng băng sẽ dễ bị bắt hơn."
+  },
+  "Trap_Noose": {
+    "localized_name": "Bẫy Treo",
+    "description": "Có thể tóm được Pal nào đi ngang qua. Chỉ có hiệu quả với những Pal nhỏ và con người."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Bao Đựng Vũ Khí Bổ Sung",
+    "description": "Bao đựng giúp trang bị thêm vũ khí. Sở hữu vật phẩm sẽ mở 1 ô trang bị vũ khí. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Bao Đựng Vũ Khí Bổ Sung 2",
+    "description": "Bao đựng giúp trang bị thêm vũ khí. Sở hữu vật phẩm sẽ mở thêm 1 ô trang bị vũ khí nữa. Chỉ cần mang theo 1 cái là đủ."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Bộ Mở Khóa Đơn Giản",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể bẻ khóa các rương kho báu cần đến Chìa Khóa Đồng để mở. Không bị hỏng dù sử dụng nhiều lần."
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Bộ Mở Khóa Cao Cấp",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể bẻ khóa các rương kho báu cần đến Chìa Khóa Bạc để mở. Không bị hỏng dù sử dụng nhiều lần."
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Bộ Mở Khóa Chuyên Nghiệp",
+    "description": "Khi sở hữu vật phẩm này, bạn có thể bẻ khóa các rương kho báu cần đến Chìa Khóa Vàng để mở. Không bị hỏng dù sử dụng nhiều lần."
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
+    "description": "Tấm bảng có thể viết chữ. Có thể treo trên tường."
+  },
+  "WallTorch": {
+    "localized_name": "Đuốc Treo Tường",
+    "description": "Có thể treo trên tường."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Bộ Công Cụ Xây Dựng Trên Nước",
+    "description": "Công cụ dùng để xây dựng trên mặt nước. Cho phép đặt nền móng ngay trên mặt nước."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Dây Chuyền Lắp Ráp Văn Minh Tiên Tiến",
+    "description": "Nhà máy sản xuất vũ khí và đạn dược. Sử dụng máy móc hiệu suất cao nên có thể sản xuất vũ khí ở tốc độ cao. Cần Pal có khả năng làm việc thủ công."
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "Súng Năng Lượng Tán Xạ",
+    "description": "Vũ khí năng lượng chuyên dụng cho cận chiến. Phóng ra luồng năng lượng nén dưới dạng chùm tia tán xạ."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Đạn Súng Năng Lượng Tán Xạ",
+    "description": "Đạn sử dụng cho Súng Năng Lượng Tán Xạ. Có thể chế tạo tại “Bàn Chế Tạo Văn Minh Cổ Đại”."
+  },
+  "WingGlider": {
+    "localized_name": "Bộ Cánh Bay",
+    "description": "Thiết bị bay dạng cánh gắn sau lưng. Tiêu hao Pin Cánh Bay để tạo lực đẩy."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Pin Cánh Bay",
+    "description": "Nguồn năng lượng để bay bằng Bộ Cánh Bay."
+  },
+  "Wood_Gate": {
+    "localized_name": "Cổng Gỗ",
+    "description": "Cổng gỗ mà Pal kích thước lớn cũng có thể đi qua."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Bộ Cấu Kiện Nhà Gỗ",
+    "description": "Bộ công cụ để xây dựng căn cứ bằng gỗ. Cho phép xây dựng các cấu trúc cần thiết cho nơi trú ẩn như nền nhà, tường, trần nhà, cầu thang bằng gỗ."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Thang",
+    "description": "Thang giúp leo lên nơi cao hơn một chút."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Thiết Bị Tạo Sóng Beta",
+    "description": "Thiết bị tạo sóng beta kích thích hoạt động của Pal. Tăng tốc độ làm việc của Pal trong căn cứ. Đặt từ 2 cái trở lên sẽ không có hiệu quả."
+  },
+  "Workbench": {
+    "localized_name": "Bàn Gia Công Nguyên Thủy",
+    "description": "|Bàn Gia Công Nguyên Thủy| để chế tạo những vật phẩm đơn giản. Các Pal có năng lực |Công Việc Thủ Công| sẽ giúp bạn thực hiện công việc."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Thỏi Paloxite",
+    "description": "Hợp kim cực phẩm được luyện từ Đá Soralite và Paloxite. Kết tinh giữa kỹ thuật cổ đại và sức mạnh Cây Thế Giới, tạo nên vật liệu cực kỳ quý hiếm. Không thể thiếu để chế tạo trang bị và công trình bậc nhất."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Kiếm Meowmere",
+    "description": "[Hợp tác với Terraria] Theo truyền thuyết, thanh kiếm này được Croajiro mang về từ một vùng đất xa xôi. Mà lý do thì không ai biết cả… Mỗi khi vung kiếm, nó sẽ phóng ra những viên đạn mèo nảy bật để tấn công kẻ địch."
+  }
+}

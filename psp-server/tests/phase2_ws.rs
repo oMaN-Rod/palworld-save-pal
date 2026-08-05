@@ -561,3 +561,57 @@ async fn request_guild_details_returns_guild() {
 
     server.shutdown().await;
 }
+
+// world1 has 2 guilds; only one owns a base (see delete_ops.rs in psp-core for
+// the same constants and their real fixture shape).
+const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
+const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
+
+#[tokio::test]
+async fn delete_base_removes_it_from_the_guilds_bases() {
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    load_world1(&mut socket).await;
+
+    send(
+        &mut socket,
+        json!({"type": "request_guild_details", "data": WORLD1_GUILD_WITH_BASE}),
+    )
+    .await;
+    let before_frames = recv_until(&mut socket, "get_guild_details_response").await;
+    let before = before_frames.last().unwrap();
+    let bases_before = before["data"]["guild"]["bases"]
+        .as_object()
+        .expect("guild details must carry a bases object");
+    assert!(
+        bases_before.contains_key(WORLD1_BASE_ID),
+        "test precondition: world1's guild must carry the base before delete, got {before}"
+    );
+
+    send(
+        &mut socket,
+        json!({"type": "delete_base", "data": {"base_id": WORLD1_BASE_ID}}),
+    )
+    .await;
+    let delete_frames = recv_until_type_or_error(&mut socket, "delete_base").await;
+    let delete_response = delete_frames.last().unwrap();
+    assert_eq!(delete_response["data"]["base_id"], WORLD1_BASE_ID);
+
+    send(
+        &mut socket,
+        json!({"type": "request_guild_details", "data": WORLD1_GUILD_WITH_BASE}),
+    )
+    .await;
+    let after_frames = recv_until(&mut socket, "get_guild_details_response").await;
+    let after = after_frames.last().unwrap();
+    let bases_after = after["data"]["guild"]["bases"]
+        .as_object()
+        .expect("guild details must carry a bases object");
+    assert!(
+        !bases_after.contains_key(WORLD1_BASE_ID),
+        "the deleted base must be absent from guild.bases, got {after}"
+    );
+
+    server.shutdown().await;
+}

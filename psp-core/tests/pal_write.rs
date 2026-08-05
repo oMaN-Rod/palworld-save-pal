@@ -158,8 +158,8 @@ fn apply_dto_stale_is_boss_flag_does_not_add_boss_prefix_or_inflate_hp() {
     // If these two ever come out equal, the fixture pal has stopped resolving
     // a real `pals.json` hp_scaling entry and the test can no longer tell the
     // boosted case from the unboosted one -- fail loudly rather than pass.
-    let unboosted_max_hp = pal::max_hp_for(&dto, false, &data);
-    let boosted_max_hp = pal::max_hp_for(&dto, true, &data);
+    let unboosted_max_hp = pal::max_hp_for(&dto, false, false, &data);
+    let boosted_max_hp = pal::max_hp_for(&dto, true, false, &data);
     assert_ne!(
         unboosted_max_hp, boosted_max_hp,
         "test setup: this fixture pal must be recognized with a real hp_scaling entry"
@@ -209,8 +209,8 @@ fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
     dto.is_boss = Some(false);
     dto.is_lucky = Some(false);
 
-    let unboosted_max_hp = pal::max_hp_for(&dto, false, &data);
-    let boosted_max_hp = pal::max_hp_for(&dto, true, &data);
+    let unboosted_max_hp = pal::max_hp_for(&dto, false, false, &data);
+    let boosted_max_hp = pal::max_hp_for(&dto, true, false, &data);
     assert_ne!(
         unboosted_max_hp, boosted_max_hp,
         "test setup: SheepBall must be recognized with a real hp_scaling entry"

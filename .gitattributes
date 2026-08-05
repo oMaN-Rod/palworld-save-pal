@@ -13,3 +13,9 @@
 # "invalid option name". `core.autocrlf=true` on Windows would otherwise rewrite
 # committed scripts to CRLF.
 *.sh text eol=lf
+
+# Cloudflare parses `_headers` line by line and takes each header value as the
+# rest of the line. Under `core.autocrlf=true` a Windows checkout rewrites it to
+# CRLF, so a local `wrangler deploy` would ship `Cache-Control: ...\r` with the
+# carriage return inside the header value.
+_headers text eol=lf

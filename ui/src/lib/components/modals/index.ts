@@ -3,6 +3,7 @@ import CloneToUpsModal from './clone-to-ups/CloneToUpsModal.svelte';
 import ConfirmModal from './confirm/ConfirmModal.svelte';
 import EditBaseModal from './edit-base/EditBaseModal.svelte';
 import EditTagsModal from './edit-tags/EditTagsModal.svelte';
+import ExportBlueprintModal from './export-blueprint/ExportBlueprintModal.svelte';
 import ExportPalModal from './export-pal/ExportPalModal.svelte';
 import FillPalsModal from './fill-pals/FillPalsModal.svelte';
 import ImportToUpsModal from './import-to-ups/ImportToUpsModal.svelte';
@@ -17,6 +18,7 @@ import PalEditModal from './pal-edit/PalEditModal.svelte';
 import PresetConfigModal from './pal-preset-config/PalPresetConfigModal.svelte';
 import PalPresetSelectModal from './pal-preset-select/PalPresetSelectModal.svelte';
 import PalSelectModal from './pal-select/PalSelectModal.svelte';
+import SelectBaseModal from './select-base/SelectBaseModal.svelte';
 import SettingsModal from './settings/SettingsModal.svelte';
 import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
 import TextInputModal from './text-input/TextInputModal.svelte';
@@ -28,6 +30,7 @@ export {
 	ConfirmModal,
 	EditBaseModal,
 	EditTagsModal,
+	ExportBlueprintModal,
 	ExportPalModal,
 	FillPalsModal,
 	ImportToUpsModal,
@@ -42,6 +45,7 @@ export {
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,
+	SelectBaseModal,
 	SettingsModal,
 	SkillSelectModal,
 	TextInputModal,

@@ -5,6 +5,7 @@
 	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
+	import { baseStructuresData } from '$lib/data';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
@@ -57,7 +58,7 @@
 		}
 	}
 
-	const activeTile = $derived(activeNavId(page.url.pathname));
+	const activeTile = $derived(activeNavId(page.url.pathname, ctx));
 
 	async function handleLanguageSelect(): Promise<void> {
 		// @ts-ignore
@@ -80,6 +81,7 @@
 			send(MessageType.EJECT_SESSION, { session_id: sessionId });
 		}
 		appState.resetState();
+		baseStructuresData.reset();
 		clearSessionPersistence();
 		await goto('/file');
 	}
@@ -137,10 +139,11 @@
 				{/if}
 				{#each tiles as item (item.id)}
 					{@const Icon = item.icon(ctx)}
+					{@const href = typeof item.href === 'string' ? item.href : item.href?.(ctx)}
 					{@const isActive = item.id === activeTile}
-						{@const needsSave = item.href && item.href !== '/' && item.href !== '/file' && item.href !== '/upload' && item.href !== '/about' && item.href !== '/docs'}
+						{@const needsSave = href && href !== '/' && href !== '/file' && href !== '/upload' && href !== '/about' && href !== '/docs'}
 					<a
-						href={item.href}
+						href={href}
 						class="nav-link nav-link-{isActive ? 'active' : 'inactive'}"
 						class:nav-link-disabled={needsSave && !appState.saveFile}
 						title={(item.title ?? item.label)?.()}

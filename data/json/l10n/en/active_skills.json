@@ -547,6 +547,14 @@
     "localized_name": "Trickster Show",
     "description": "Dupin's exclusive skill. Creates two illusions to distract enemies, then launches fire birds from its top hat."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Cube Press",
+    "description": "Tetroise 's exclusive skill. Leaps into the air and crushes enemies with its massive weight."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Holy Press",
+    "description": "Tetroise Primo's exclusive skill. Leaps into the air and crushes enemies with its massive weight. Upon landing, light spreads outward, forming pillars of light that burst forth and strike nearby enemies."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Fuddler Tunneler",
     "description": "Fuddler's exclusive skill. Burrows underground and bursts out from beneath enemies."

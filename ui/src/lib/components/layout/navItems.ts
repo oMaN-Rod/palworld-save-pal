@@ -1,5 +1,6 @@
 import type { Component } from 'svelte';
 import {
+	Blocks,
 	BookOpen,
 	Bug,
 	ChevronsLeft,
@@ -23,6 +24,7 @@ import {
 import type { AppState } from '$states';
 import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
+import { isWebBuild } from '$lib/utils/platform';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
@@ -48,8 +50,8 @@ export type NavItem = {
 	label?: () => string;
 	/** Tooltip text. Defaults to `label` when omitted. */
 	title?: () => string;
-	/** Navigation target for link tiles. */
-	href?: string;
+	/** Navigation target for link tiles. Static, or resolved from runtime context. */
+	href?: string | ((ctx: NavContext) => string);
 	/** Stateful action for non-link tiles. Handled by NavBar's action map. */
 	action?: NavAction;
 	/** Runtime visibility predicate. Visible when omitted. */
@@ -96,7 +98,7 @@ export const navItems: NavItem[] = [
 		group: 'main',
 		icon: () => LayoutGrid,
 		label: () => 'Files',
-		href: '/'
+		href: (ctx) => (ctx.desktop ? '/file' : '/upload')
 	},
 	{
 		id: 'edit',
@@ -133,6 +135,14 @@ export const navItems: NavItem[] = [
 
 	// --- tiles: tools ---
 	{
+		id: 'blueprints',
+		section: 'tiles',
+		group: 'main',
+		icon: () => Blocks,
+		label: () => 'Blueprints',
+		href: '/blueprints'
+	},
+	{
 		id: 'gps',
 		section: 'tiles',
 		group: 'tools',
@@ -155,7 +165,9 @@ export const navItems: NavItem[] = [
 		group: 'tools',
 		icon: () => Server,
 		label: () => 'Servers',
-		href: '/servers'
+		href: '/servers',
+		// Server management drives Docker/native services the browser build cannot reach.
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'editor',
@@ -222,16 +234,19 @@ export const navItems: NavItem[] = [
 /**
  * Resolves the active nav id for a given pathname by longest-matching `href`
  * on a route-segment boundary. The longest match wins, so `/editor` beats `/edit`.
+ * Function hrefs are resolved against the runtime context (e.g. Files → /file on
+ * desktop vs /upload on the web build).
  */
-export function activeNavId(pathname: string): string {
+export function activeNavId(pathname: string, ctx: NavContext): string {
 	let bestId = '';
 	let bestLen = 0;
 	for (const item of navItems) {
 		if (!item.href) continue;
-		if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
-			if (item.href.length > bestLen) {
+		const href = typeof item.href === 'string' ? item.href : item.href(ctx);
+		if (pathname === href || pathname.startsWith(`${href}/`)) {
+			if (href.length > bestLen) {
 				bestId = item.id;
-				bestLen = item.href.length;
+				bestLen = href.length;
 			}
 		}
 	}

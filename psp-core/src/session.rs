@@ -480,6 +480,39 @@ impl SaveSession {
         Ok(player_files)
     }
 
+    /// Uncompressed-GVAS sibling of `level_sav_bytes`, for callers (the web
+    /// worker) that own compression.
+    pub fn level_gvas_bytes(&self) -> Result<Vec<u8>, CoreError> {
+        crate::savio::write_gvas_bytes(&self.level)
+    }
+
+    pub fn level_meta_gvas_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
+        match &self.level_meta {
+            Some(meta) => Ok(Some(crate::savio::write_gvas_bytes(meta)?)),
+            None => Ok(None),
+        }
+    }
+
+    pub fn world_option_gvas_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
+        match &self.world_option {
+            Some(save) => Ok(Some(crate::savio::write_gvas_bytes(save)?)),
+            None => Ok(None),
+        }
+    }
+
+    pub fn player_gvas_bytes(&self) -> Result<BTreeMap<Uuid, PlayerSaveBytes>, CoreError> {
+        let mut player_files = BTreeMap::new();
+        for (player_id, loaded) in &self.loaded_players {
+            let sav_bytes = crate::savio::write_gvas_bytes(&loaded.sav)?;
+            let dps_bytes = match &loaded.dps {
+                Some(dps_save) => Some(crate::savio::write_gvas_bytes(dps_save)?),
+                None => None,
+            };
+            player_files.insert(*player_id, (sav_bytes, dps_bytes));
+        }
+        Ok(player_files)
+    }
+
     /// Updates the loaded `LevelMeta.sav`'s `SaveData.WorldName` AND the
     /// session's own `world_name`. Neither is touched unless a LevelMeta is
     /// loaded and its `SaveData` lookup succeeds; the error string reaches the

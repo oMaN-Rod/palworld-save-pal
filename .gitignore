@@ -28,7 +28,7 @@ logs/
 /ui/node_modules
 /ui/.output
 /ui/.vercel
-/ui/.svelte-kit
+.svelte-kit
 /ui/build
 /ui/.env
 /ui/.env.*
@@ -56,3 +56,11 @@ data/json/settings.json
 # Rust workspace build output
 /target
 /contract/tmp/
+
+# wasm-pack binary output (overwrites the committed placeholder module locally)
+/ui/src/lib/wasm/psp/psp_bg.wasm
+/ui/src/lib/wasm/psp/*_bg.js
+
+# ooz wasm build scratch (cloned source + emcc intermediates); the vendored
+# artifact lives under ui/vendor/ooz and IS committed.
+/vendor/

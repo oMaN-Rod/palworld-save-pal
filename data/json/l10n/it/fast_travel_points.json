@@ -5,6 +5,9 @@
   "04CB216B487AD789C47E2DBA08B0B49F": {
     "localized_name": "Promontorio delle nevi dissolte"
   },
+  "0994C20A46B5522FE17090973C3C5452": {
+    "localized_name": "Piedi dell'albero del mondo"
+  },
   "0C0AF9F34C0491BCAD80B1BF355B9A98": {
     "localized_name": "Interno della foresta di bambù - Torre di osservazione"
   },
@@ -80,11 +83,17 @@
   "2F3A56DA4022EB1E43D3439ECEE2AA2C": {
     "localized_name": "Osservatorio della brezza"
   },
+  "31078A16494A996F94DC13828638EAD4": {
+    "localized_name": "Isola solitaria delle rovine circolari"
+  },
   "321E111B4B7AA9D901864F87404A70F2": {
     "localized_name": "Foresta di glicini invitanti"
   },
   "328BCAC94E01988D944C4F85D49E457C": {
     "localized_name": "Pianura d'ocra - Torre di osservazione"
+  },
+  "33A82FD24431633F5738F8AE02FFAC42": {
+    "localized_name": "Isola solitaria delle rovine gelide"
   },
   "341551F747D44FA84DB87F8C8D2DCB48": {
     "localized_name": "Isola dei ciliegi: Spiaggia occidentale"
@@ -143,6 +152,9 @@
   "4CCF456A440C6CD5F2347AAA3E163F21": {
     "localized_name": "Ingresso dell'arena"
   },
+  "4CE584574E74956A7F94D68D846F931D": {
+    "localized_name": "Isola solitaria erosa dal vento"
+  },
   "4D2F204549AB656CA1EA4B8E39C484F3": {
     "localized_name": "Bivio del monte innevato"
   },
@@ -157,6 +169,9 @@
   },
   "52E1E065410F78AF13B18CB1136EC8D6": {
     "localized_name": "Isola solitaria del tesoro dimenticato"
+  },
+  "5543641F4C980A9863F64685A91FE619": {
+    "localized_name": "Laboratorio proibito"
   },
   "5669E36645C97EE9F38D308738ED30A7": {
     "localized_name": "Isola solitaria gelida"
@@ -247,6 +262,9 @@
   },
   "79C561B747335A7A0A8FBF9FAE280E62": {
     "localized_name": "Territorio dei mastri spadaccini"
+  },
+  "7A803ABD4C208C8D5C7EE197C9D2AD65": {
+    "localized_name": "Isola solitaria del portale d'arenaria"
   },
   "80729706432E53B2A3D07C82D14C8749": {
     "localized_name": "Rupe dei funghi misteriosi"
@@ -347,6 +365,9 @@
   "B44AA24445864494E7569597ACCAEFC6": {
     "localized_name": "Foresta di bambù - Interno"
   },
+  "B5A9156C4C3911FD3A4FFA8F807DD5A4": {
+    "localized_name": "Isola solitaria dello stemma solare"
+  },
   "B795E2B14189A7D1EEAD6E97E89C91B7": {
     "localized_name": "Promontorio dell'esilio"
   },
@@ -355,6 +376,9 @@
   },
   "BF8B123244ADB794A06EA8A10503FBDD": {
     "localized_name": "Territorio degli squali minori"
+  },
+  "C1D34C6C424DD841005934936F590865": {
+    "localized_name": "Isola solitaria dei fiumi di fuoco"
   },
   "C2A21FB148CA559F4814029637CEF75F": {
     "localized_name": "Promontorio della sabbia gelida"
@@ -391,6 +415,9 @@
   },
   "CD9FE0D4490874187ED9919D0E4D2A09": {
     "localized_name": "Fortezza distrutta"
+  },
+  "CE7CDCFA48F15174B4FCF49C03F240ED": {
+    "localized_name": "Isola solitaria a bipiramide"
   },
   "CF5FAE4A487231DDD8487C9B19453128": {
     "localized_name": "Isola solitaria con oasi"
@@ -440,6 +467,9 @@
   "E9FC08444BFE7E3EE6E06F84AC8688EC": {
     "localized_name": "Collina delle belve ghiacciate - Torre di osservazione"
   },
+  "EA56C74B459DAB2F5F596EA17049167A": {
+    "localized_name": "Origine delle spore fosforescenti"
+  },
   "EC4896F44C4C9BD993DAE2B2C1F31BBA": {
     "localized_name": "Corso verdeggiante"
   },
@@ -481,6 +511,9 @@
   },
   "F8E5CB8143F4FA2F6213E6B454569F87": {
     "localized_name": "Monti fiammeggianti - Statua di Anubi"
+  },
+  "F94B3D32448028F24CE513B1302ACC94": {
+    "localized_name": "Origine della nebbia marcescente"
   },
   "FC8F024D40741A133EB9DA88201AE7F0": {
     "localized_name": "Rupe scarlatta"

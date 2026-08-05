@@ -57,6 +57,8 @@ export interface UPSStats {
 	element_distribution: string;
 	alpha_count: number;
 	lucky_count: number;
+	awakened_count: number;
+	imported_count: number;
 	human_count: number;
 	predator_count: number;
 	oilrig_count: number;

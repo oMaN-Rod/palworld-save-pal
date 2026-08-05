@@ -486,6 +486,8 @@
 				is_lucky: false,
 				is_boss: false,
 				is_predator: false,
+				is_awakened: false,
+				is_imported: false,
 				is_tower: false,
 				is_sick: false,
 				gender: PalGender.MALE,
@@ -734,6 +736,20 @@
 													buttonClass={getPalTypeButtonClass('lucky')}
 												>
 													<img src={staticIcons.luckyIcon} alt="Lucky" />
+												</TooltipButton>
+												<TooltipButton
+													popupLabel={m.awakened()}
+													onclick={() => handlePalTypeFilter('awakened')}
+													buttonClass={getPalTypeButtonClass('awakened')}
+												>
+													<img src={staticIcons.awakeningIcon} alt="Awakened" />
+												</TooltipButton>
+												<TooltipButton
+													popupLabel={m.imported()}
+													onclick={() => handlePalTypeFilter('imported')}
+													buttonClass={getPalTypeButtonClass('imported')}
+												>
+													<img src={staticIcons.importedIcon} alt="Imported" />
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.human({ count: 2 })}

@@ -57,6 +57,8 @@
 	const specialStats = $derived({
 		alpha: stats?.alpha_count || 0,
 		lucky: stats?.lucky_count || 0,
+		awakened: stats?.awakened_count || 0,
+		imported: stats?.imported_count || 0,
 		human: stats?.human_count || 0,
 		predator: stats?.predator_count || 0,
 		oilrig: stats?.oilrig_count || 0,
@@ -268,6 +270,20 @@
 								<span class="text-xs">{m.lucky()}</span>
 							</div>
 							<span class="font-medium">{specialStats.lucky}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.awakeningIcon} alt="Awakened" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">{m.awakened()}</span>
+							</div>
+							<span class="font-medium">{specialStats.awakened}</span>
+						</div>
+						<div class="flex items-center">
+							<img src={staticIcons.importedIcon} alt="Imported" class="mr-2 h-5 w-5" />
+							<div class="grow">
+								<span class="text-xs">{m.imported()}</span>
+							</div>
+							<span class="font-medium">{specialStats.imported}</span>
 						</div>
 						<div class="flex items-center">
 							<User class="mr-2 h-5 w-5" />

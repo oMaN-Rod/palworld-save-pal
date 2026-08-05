@@ -83,7 +83,8 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
     let server = common::start_test_server().await;
     let db_path = server._temp_dir.path().join("psp-rs.db");
     let db = psp_db::open(&db_path).await.expect("open test db");
-    psp_db::settings::update_save_dir(&db, &world1_copy.to_string_lossy())
+    let driver = psp_db::SqlxSqliteDriver::new(db);
+    psp_db::settings::update_save_dir(&driver, &world1_copy.to_string_lossy())
         .await
         .expect("set save_dir to temp world1 copy");
 
@@ -173,7 +174,8 @@ async fn watchtower_unlock_survives_update_save_modded_save_and_reload() {
     let server = common::start_test_server().await;
     let db_path = server._temp_dir.path().join("psp-rs.db");
     let db = psp_db::open(&db_path).await.expect("open test db");
-    psp_db::settings::update_save_dir(&db, &world1_copy.to_string_lossy())
+    let driver = psp_db::SqlxSqliteDriver::new(db);
+    psp_db::settings::update_save_dir(&driver, &world1_copy.to_string_lossy())
         .await
         .expect("set save_dir to temp world1 copy");
 

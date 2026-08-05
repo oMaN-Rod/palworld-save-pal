@@ -2,6 +2,7 @@
 name = "psp-desktop"
 version.workspace = true
 edition.workspace = true
+license.workspace = true
 
 # The package stays `psp-desktop` (workspace members, `-p psp-desktop`, the
 # Dockerfile and CI working-dirs all key off it); only the emitted binary is

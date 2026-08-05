@@ -547,6 +547,14 @@
     "localized_name": "การแสดงกลลวง",
     "description": "สกิลเฉพาะตัวของDupin สร้างภาพลวง 2 ร่างเพื่อหลอกล่อศัตรู ขณะเดียวกัน ร่างจริงจะปล่อยนกเพลิงออกมาจากหมวกทรงสูงเพื่อโจมตี"
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "ศิลาบดทับ",
+    "description": "สกิลเฉพาะตัวของTetroise กระโดดลอยขึ้นกลางอากาศ ก่อนทิ้งตัวลงด้วยน้ำหนักมหาศาล เพื่อบดขยี้ศัตรู"
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "แรงกดศักดิ์สิทธิ์",
+    "description": "สกิลเฉพาะตัวของTetroise Primo กระโดดลอยขึ้นกลางอากาศแล้วทิ้งตัวลงบดขยี้ศัตรู จากนั้นพลังแสงจะกระจายออกไป และตามด้วย เสาแสงโจมตีซ้ำ"
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "ยกพื้นจากใต้ดิน",
     "description": "สกิลเฉพาะตัวของFuddler มุดลงใต้ดิน แล้วพุ่งทะลุขึ้นมาจากใต้เท้าศัตรูอย่างรวดเร็ว"

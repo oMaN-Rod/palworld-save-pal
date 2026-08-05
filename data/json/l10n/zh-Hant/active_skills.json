@@ -547,6 +547,14 @@
     "localized_name": "好戲上演",
     "description": "拉比耶爾的專屬技能。 製造2道幻影迷惑敵人， 本體則從絲綢禮帽中放出炎鳥進行攻擊。"
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "巨石壓頂",
+    "description": "重岩龜的專屬技能。 高高躍起至空中， 隨即以壓倒性的重量將敵人壓垮。"
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "聖石壓頂",
+    "description": "淨岩龜的專屬技能。 高高躍起至空中，將敵人壓垮。 隨後擴散光芒，以光柱進行追擊。"
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "掘地潛行",
     "description": "遁地鼠的專屬技能。 潛入地下，從腳下猛然竄出突襲敵人。"

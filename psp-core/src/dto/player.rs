@@ -123,6 +123,8 @@ mod tests {
             is_lucky: Some(false),
             is_boss: Some(false),
             is_predator: false,
+            is_awakened: Some(false),
+            is_imported: Some(false),
             is_tower: false,
             gender: PalGender::Female,
             nickname: None,

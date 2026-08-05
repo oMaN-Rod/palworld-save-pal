@@ -8,6 +8,8 @@ export type PalStats = {
 	workSpeed?: number;
 };
 
+const AWAKENING_STATUS_MULTIPLY = 1.1;
+
 function isDefenseEffect(type: EffectType): boolean {
 	return type === EffectType.Defense || type.toString().startsWith('ElementResist_');
 }
@@ -89,15 +91,19 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 
 	// HP calculation
 	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
+	const awakeningScaling = pal.is_awakened ? AWAKENING_STATUS_MULTIPLY : 1;
 	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv) * alphaScaling);
-	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus)) * 1000;
+	pal.max_hp =
+		Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * awakeningScaling) * 1000;
 
 	// Attack calculation
 	const attackIv = (pal.talent_shot * 0.3) / 100;
 	const attackSoulBonus = pal.rank_attack * 0.03;
 	const attackScale = palData.scaling.attack;
 	let attack = Math.floor(attackScale * 0.075 * level * (1 + attackIv));
-	attack = Math.floor(attack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus));
+	attack = Math.floor(
+		attack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus) * awakeningScaling
+	);
 
 	// Defense calculation
 	const defenseIv = (pal.talent_defense * 0.3) / 100;
@@ -105,7 +111,7 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 	const defenseScale = palData.scaling.defense;
 	let defense = Math.floor(50 + defenseScale * 0.075 * level * (1 + defenseIv));
 	defense = Math.floor(
-		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus)
+		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus) * awakeningScaling
 	);
 
 	// Work speed calculation with base value of 70

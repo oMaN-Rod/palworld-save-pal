@@ -71,11 +71,22 @@
 	// Special categories statistics
 	let specialStats = $derived.by(() => {
 		if (!pals || pals.length === 0)
-			return { alpha: 0, lucky: 0, human: 0, predator: 0, oilrig: 0, summon: 0 };
+			return {
+				alpha: 0,
+				lucky: 0,
+				awakened: 0,
+				imported: 0,
+				human: 0,
+				predator: 0,
+				oilrig: 0,
+				summon: 0
+			};
 
 		return {
 			alpha: pals.filter(({ pal }: PalWithData) => pal.is_boss).length,
 			lucky: pals.filter(({ pal }: PalWithData) => pal.is_lucky).length,
+			awakened: pals.filter(({ pal }: PalWithData) => pal.is_awakened).length,
+			imported: pals.filter(({ pal }: PalWithData) => pal.is_imported).length,
 			human: pals.filter(({ palData }: PalWithData) => palData && !palData.is_pal).length,
 			predator: pals.filter(({ pal }: PalWithData) =>
 				pal.character_id.toLowerCase().includes('predator_')
@@ -161,6 +172,20 @@
 					<span class="text-xs 2xl:text-base">{m.lucky()}</span>
 				</div>
 				<span>{specialStats.lucky}</span>
+			</div>
+			<div class="flex items-center">
+				<img src={staticIcons.awakeningIcon} alt="Awakened" class="pal-element-badge mr-2" />
+				<div class="grow">
+					<span class="text-xs 2xl:text-base">{m.awakened()}</span>
+				</div>
+				<span>{specialStats.awakened}</span>
+			</div>
+			<div class="flex items-center">
+				<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge mr-2" />
+				<div class="grow">
+					<span class="text-xs 2xl:text-base">{m.imported()}</span>
+				</div>
+				<span>{specialStats.imported}</span>
 			</div>
 			<div class="flex items-center">
 				<User class="pal-element-badge mr-2" />

@@ -1,4 +1,5 @@
 import { appStateHandlers } from './appStateHandler';
+import { blueprintHandlers } from './blueprintHandler';
 import { gpsHandlers } from './gpsHandler';
 import { guildHandlers } from './guildHandler';
 import { lazyLoadHandlers } from './lazyLoadHandler';
@@ -11,6 +12,7 @@ import { serverHandlers } from './serverHandler';
 
 export const handlers = [
 	...appStateHandlers,
+	...blueprintHandlers,
 	...saveFileHandlers,
 	...palHandlers,
 	...playerHandlers,

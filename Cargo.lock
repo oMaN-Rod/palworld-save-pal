@@ -3481,11 +3481,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "psp-app"
+version = "1.2.0"
+dependencies = [
+ "async-trait",
+ "base64 0.22.1",
+ "chrono",
+ "futures-util",
+ "psp-core",
+ "psp-db",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+ "zip",
+]
+
+[[package]]
 name = "psp-core"
 version = "1.2.0"
 dependencies = [
  "chrono",
  "cityhasher",
+ "psp-core",
  "serde",
  "serde_json",
  "tempfile",
@@ -3499,6 +3520,7 @@ dependencies = [
 name = "psp-db"
 version = "1.2.0"
 dependencies = [
+ "async-trait",
  "chrono",
  "serde",
  "serde_json",
@@ -3541,6 +3563,7 @@ dependencies = [
  "opener",
  "percent-encoding",
  "pretty_assertions",
+ "psp-app",
  "psp-core",
  "psp-db",
  "reqwest 0.12.28",

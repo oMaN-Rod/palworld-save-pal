@@ -547,6 +547,14 @@
     "localized_name": "Spettacolo del prestigiatore",
     "description": "Abilità del Pal Dupin. Crea due illusioni per distrarre il nemico, quindi scaglia uccelli di fuoco dal suo cilindro."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Schianto roccioso",
+    "description": "Abilità del Pal Tetroise . Salta in cielo con agilità, per poi schiantarsi sui nemici con tutto il suo peso."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Schianto sacro",
+    "description": "Abilità del Pal Tetroise Primo. Salta in cielo con agilità e si schianta sui nemici. All'impatto, continua ad attaccare creando un pilastro di luce intorno a sé."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Talpa all'assalto",
     "description": "Abilità del Pal Fuddler. Si muove sottoterra per poi colpire da sotto i piedi dei nemici."

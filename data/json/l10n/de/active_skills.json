@@ -547,6 +547,14 @@
     "localized_name": "Gaukelspiel",
     "description": "Einzigartige Fähigkeit von Dupin. Erschafft zwei Schattenklone, um den Gegner zu verwirren, während das Original Feuervögel aus seinem Zylinder beschwört."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Steinpresse",
+    "description": "Einzigartige Fähigkeit von Tetroise . Springt beinahe schwerelos in die Luft und begräbt Gegner unter seinem massigen Körper."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Marmorpresse",
+    "description": "Einzigartige Fähigkeit von Tetroise Primo. Springt beinahe schwerelos in die Luft und begräbt Gegner unter sich. Vom Epizentrum breitet sich Licht aus und setzt Gegnern in Form von Lichtsäulen nach."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Maulwurfstunnel",
     "description": "Einzigartige Fähigkeit von Fuddler. Verschwindet unter der Erde und bricht plötzlich unter dem Gegner hervor."

@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "Tăng Tấn Công Cấp 1",
-    "description": null
+    "description": "Tấn công +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "Tăng Tấn Công (Thấp) Lv1",
-    "description": null
+    "description": "Tấn công +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Tăng Tấn Công Cho Pal Cấp 1",
-    "description": null
+    "description": "Tấn công +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "Tăng Tấn Công Cấp 2",
-    "description": null
+    "description": "Tấn công +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "Tăng Tấn Công (Thấp) Lv2",
-    "description": null
+    "description": "Tấn công +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Tăng Tấn Công Cho Pal Cấp 2",
-    "description": null
+    "description": "Tấn công +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "Tăng Tấn Công Cấp 3",
-    "description": null
+    "description": "Tấn công +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "Tăng Tấn Công (Thấp) Lv3",
-    "description": null
+    "description": "Tấn công +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Tăng Tấn Công Cho Pal Cấp 3",
-    "description": null
+    "description": "Tấn công +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "Tăng Tấn Công Lv4",
-    "description": null
+    "description": "Tấn công +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "Tăng Tấn Công (Thấp) Lv4",
-    "description": null
+    "description": "Tấn công +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Tăng Tấn Công Của Pal Lv4",
-    "description": null
+    "description": "Tấn công +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "Chuyên Gia Hồi Phục",
-    "description": null
+    "description": "Tốc độ tự hồi Máu của người chơi +5.0%"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "Kéo Dài Thời Gian Bất Khả Xâm Phạm Khi Né",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 2.0%"
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 1.0%"
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 2.0%"
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 1.0%"
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 2.0%"
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 3.0%"
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 2.0%"
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 1.0%"
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 2.0%"
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 2.0%"
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 2.0%"
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 2.0%"
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 2.0%"
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 2.0%"
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 2.0%"
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 1.0%"
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 3.0%"
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 3.0%"
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 3.0%"
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 3.0%"
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 2.0%"
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 2.0%"
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 3.0%"
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 3.0%"
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 1.0%"
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 3.0%"
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 2.0%"
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 2.0%"
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 1.0%"
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 3.0%"
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 2.0%"
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 2.0%"
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 2.0%"
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 3.0%"
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 1.0%"
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 1.0%"
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 3.0%"
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 2.0%"
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 2.0%"
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 1.0%"
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 3.0%"
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 2.0%"
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 2.0%"
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 1.0%"
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 2.0%"
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 2.0%"
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "CaptureLevel_Up_1": {
     "localized_name": "Tăng Sức Bắt Giữ +1",
-    "description": null
+    "description": "Sức bắt giữ +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "Tăng Sức Bắt Giữ +2",
-    "description": null
+    "description": "Sức bắt giữ +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "Tăng Sức Bắt Giữ +3",
-    "description": null
+    "description": "Sức bắt giữ +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "Tăng Sức Bắt Giữ +4",
-    "description": null
+    "description": "Sức bắt giữ +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "Tăng Sức Bắt Giữ +5",
-    "description": null
+    "description": "Sức bắt giữ +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "Tăng Sức Bắt Giữ +6",
-    "description": null
+    "description": "Sức bắt giữ +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "Hái Quả Mọng",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "Vụng Về",
-    "description": null
+    "description": "Tốc độ làm việc -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "Lười Biếng",
-    "description": null
+    "description": "Tốc độ làm việc -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "Chú Tâm",
-    "description": null
+    "description": "Tốc độ làm việc +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "Nghệ Nhân Đích Thực",
-    "description": null
+    "description": "Tốc độ làm việc +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "Kỹ Năng Siêu Việt",
-    "description": null
+    "description": "Tốc độ làm việc +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 1",
-    "description": null
+    "description": "Phòng thủ +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 2",
-    "description": null
+    "description": "Phòng thủ +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Tăng Phòng Thủ Cho Pal Cấp 3",
-    "description": null
+    "description": "Phòng thủ +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Tăng Phòng Thủ Của Pal Lv4",
-    "description": null
+    "description": "Phòng thủ +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "Yếu Ớt",
-    "description": null
+    "description": "Phòng thủ -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "Mỏng Manh",
-    "description": null
+    "description": "Phòng thủ -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "Da Sắt",
-    "description": null
+    "description": "Phòng thủ +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "Thân Thể Cường Tráng",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Giảm Sát Thương Nổ",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Ưa Nước",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Hải Vương",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 30.0%"
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 1.0%"
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 6.0%"
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Bức Màn Bóng Đêm",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 2.0%"
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 12.0%"
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "Minh Vương",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 30.0%"
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 3.0%"
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 18.0%"
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Bóng Tối Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 20.0%"
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 1.0%"
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 6.0%"
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Dòng Máu Loài Rồng",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 2.0%"
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 12.0%"
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Thần Long",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 30.0%"
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Rồng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 3.0%"
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Rồng Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 18.0%"
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Rồng Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ rồng tăng 20.0%"
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 1.0%"
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 6.0%"
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Sức Mạnh Từ Đất Mẹ",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 2.0%"
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 12.0%"
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Địa Đế",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 30.0%"
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Đất (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 3.0%"
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Đất Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 18.0%"
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Đất Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ đất tăng 20.0%"
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 1.0%"
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 6.0%"
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 2.0%"
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 12.0%"
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Sấm (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 3.0%"
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Sấm Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 18.0%"
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Sấm Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 20.0%"
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 1.0%"
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 6.0%"
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Ưa Lửa",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 2.0%"
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 12.0%"
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Viêm Đế",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 30.0%"
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Lửa (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 3.0%"
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Lửa Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 18.0%"
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Lửa Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 20.0%"
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 1.0%"
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 6.0%"
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Máu Lạnh",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 2.0%"
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 12.0%"
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Băng Đế",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 30.0%"
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Băng (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 3.0%"
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Băng Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 18.0%"
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Băng Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ băng tăng 20.0%"
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 1.0%"
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 6.0%"
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Lá Xanh Hương Nồng",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 2.0%"
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 12.0%"
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Tinh Linh Vương",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 30.0%"
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 3.0%"
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 18.0%"
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Cỏ Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ cỏ tăng 20.0%"
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 1.0%"
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 6.0%"
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Tâm Thiền",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 2.0%"
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 12.0%"
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Thiên Vương",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 30.0%"
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Thường (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 3.0%"
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Thường Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 18.0%"
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Thường Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ thường tăng 20.0%"
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Tụ Điện",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Lôi Đế",
-    "description": null
+    "description": "Sát thương tấn công hệ sấm tăng 30.0%"
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Thấp)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 1.0%"
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 1",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 6.0%"
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Vừa)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 2.0%"
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 2",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 12.0%"
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Tăng Sát Thương Hệ Nước (Cao)",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 3.0%"
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Nước Cho Pal Cấp 3",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 18.0%"
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "Tăng Sát Thương Hệ Nước Của Pal Lv4",
-    "description": null
+    "description": "Sát thương tấn công hệ nước tăng 20.0%"
   },
   "ElementResist_Aqua_1": {
     "localized_name": "Giảm Sát Thương Hệ Nước Cấp 1",
-    "description": null
+    "description": "Sát thương hệ nước giảm 15.0%"
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Chống Thấm Nước",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Giảm Sát Thương Hệ Nước Cấp 2",
-    "description": null
+    "description": "Sát thương hệ nước giảm 25.0%"
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Giảm Sát Thương Hệ Nước Cấp 3",
-    "description": null
+    "description": "Sát thương hệ nước giảm 30.0%"
   },
   "ElementResist_Aqua_4": {
     "localized_name": "Giảm Sát Thương Hệ Nước Lv4",
-    "description": null
+    "description": "Sát thương hệ nước giảm 35.0%"
   },
   "ElementResist_Dark_1": {
     "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 1",
-    "description": null
+    "description": "Sát thương hệ bóng tối giảm 15.0%"
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Lạc Quan Vui Vẻ",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 2",
-    "description": null
+    "description": "Sát thương hệ bóng tối giảm 25.0%"
   },
   "ElementResist_Dark_3": {
     "localized_name": "Giảm Sát Thương Hệ Bóng Tối Cấp 3",
-    "description": null
+    "description": "Sát thương hệ bóng tối giảm 30.0%"
   },
   "ElementResist_Dark_4": {
     "localized_name": "Giảm Sát Thương Hệ Bóng Tối Lv4",
-    "description": null
+    "description": "Sát thương hệ bóng tối giảm 35.0%"
   },
   "ElementResist_Dragon_1": {
     "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 1",
-    "description": null
+    "description": "Sát thương hệ rồng giảm 15.0%"
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Kẻ Hạ Gục Rồng",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 2",
-    "description": null
+    "description": "Sát thương hệ rồng giảm 25.0%"
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Giảm Sát Thương Hệ Rồng Cấp 3",
-    "description": null
+    "description": "Sát thương hệ rồng giảm 30.0%"
   },
   "ElementResist_Dragon_4": {
     "localized_name": "Giảm Sát Thương Hệ Rồng Lv4",
-    "description": null
+    "description": "Sát thương hệ rồng giảm 35.0%"
   },
   "ElementResist_Earth_1": {
     "localized_name": "Giảm Sát Thương Hệ Đất Cấp 1",
-    "description": null
+    "description": "Sát thương hệ đất giảm 15.0%"
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Chống Động Đất",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "Giảm Sát Thương Hệ Đất Cấp 2",
-    "description": null
+    "description": "Sát thương hệ đất giảm 25.0%"
   },
   "ElementResist_Earth_3": {
     "localized_name": "Giảm Sát Thương Hệ Đất Cấp 3",
-    "description": null
+    "description": "Sát thương hệ đất giảm 30.0%"
   },
   "ElementResist_Earth_4": {
     "localized_name": "Giảm Sát Thương Hệ Đất Lv4",
-    "description": null
+    "description": "Sát thương hệ đất giảm 35.0%"
   },
   "ElementResist_Fire_1": {
     "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 1",
-    "description": null
+    "description": "Sát thương hệ lửa giảm 15.0%"
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Ưa Nắng",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 2",
-    "description": null
+    "description": "Sát thương hệ lửa giảm 25.0%"
   },
   "ElementResist_Fire_3": {
     "localized_name": "Giảm Sát Thương Hệ Lửa Cấp 3",
-    "description": null
+    "description": "Sát thương hệ lửa giảm 30.0%"
   },
   "ElementResist_Fire_4": {
     "localized_name": "Giảm Sát Thương Hệ Lửa Lv4",
-    "description": null
+    "description": "Sát thương hệ lửa giảm 35.0%"
   },
   "ElementResist_Ice_1": {
     "localized_name": "Giảm Sát Thương Hệ Băng Cấp 1",
-    "description": null
+    "description": "Sát thương hệ băng giảm 15.0%"
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Thân Nhiệt Cao",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "Giảm Sát Thương Hệ Băng Cấp 2",
-    "description": null
+    "description": "Sát thương hệ băng giảm 25.0%"
   },
   "ElementResist_Ice_3": {
     "localized_name": "Giảm Sát Thương Hệ Băng Cấp 3",
-    "description": null
+    "description": "Sát thương hệ băng giảm 30.0%"
   },
   "ElementResist_Ice_4": {
     "localized_name": "Giảm Sát Thương Hệ Băng Lv4",
-    "description": null
+    "description": "Sát thương hệ băng giảm 35.0%"
   },
   "ElementResist_Leaf_1": {
     "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 1",
-    "description": null
+    "description": "Sát thương hệ cỏ giảm 15.0%"
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Phòng Tuyến Cỏ Cây",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 2",
-    "description": null
+    "description": "Sát thương hệ cỏ giảm 25.0%"
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Giảm Sát Thương Hệ Cỏ Cấp 3",
-    "description": null
+    "description": "Sát thương hệ cỏ giảm 30.0%"
   },
   "ElementResist_Leaf_4": {
     "localized_name": "Giảm Sát Thương Hệ Cỏ Lv4",
-    "description": null
+    "description": "Sát thương hệ cỏ giảm 35.0%"
   },
   "ElementResist_Normal_1": {
     "localized_name": "Giảm Sát Thương Hệ Thường Cấp 1",
-    "description": null
+    "description": "Sát thương hệ thường giảm 15.0%"
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Bất Thường",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "Giảm Sát Thương Hệ Thường Cấp 2",
-    "description": null
+    "description": "Sát thương hệ thường giảm 25.0%"
   },
   "ElementResist_Normal_3": {
     "localized_name": "Giảm Sát Thương Hệ Thường Cấp 3",
-    "description": null
+    "description": "Sát thương hệ thường giảm 30.0%"
   },
   "ElementResist_Normal_4": {
     "localized_name": "Giảm Sát Thương Hệ Thường Lv4",
-    "description": null
+    "description": "Sát thương hệ thường giảm 35.0%"
   },
   "ElementResist_Thunder_1": {
     "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 1",
-    "description": null
+    "description": "Sát thương hệ sấm giảm 15.0%"
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Thân Cách Điện",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 2",
-    "description": null
+    "description": "Sát thương hệ sấm giảm 25.0%"
   },
   "ElementResist_Thunder_3": {
     "localized_name": "Giảm Sát Thương Hệ Sấm Cấp 3",
-    "description": null
+    "description": "Sát thương hệ sấm giảm 30.0%"
   },
   "ElementResist_Thunder_4": {
     "localized_name": "Giảm Sát Thương Hệ Sấm Lv4",
-    "description": null
+    "description": "Sát thương hệ sấm giảm 35.0%"
   },
   "EternalFlame": {
     "localized_name": "Ngọn Lửa Vĩnh Cửu",
-    "description": null
+    "description": "Sát thương tấn công hệ lửa tăng 30.0% Sát thương tấn công hệ sấm tăng 30.0%"
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "Tăng Độ Tin Cậy Của Pal Trong Đội",
-    "description": null
+    "description": "Độ Tin Cậy +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "No lâu <NumBlue_13>+10,0%</>"
   },
   "GYM_NAME_Desert": {
     "localized_name": "Chỉ Huy Đội Tự Vệ Đảo Palpagos",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "Người Sáng Lập Tổ Chức Bảo Vệ Pal",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Thủ Lĩnh Tổ Chức Săn Trộm Rayne",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Thủ Lĩnh Hoa Mặt Trăng",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "Đội Trưởng - Đơn Vị Nghiên Cứu Gen Pal",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "Tộc Trưởng Dân Feybreak",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "Thủ Lĩnh Linh Hồn - Đồng Minh Ngọn Lửa Vĩnh Cửu",
-    "description": null
+    "description": "Tấn công +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "Tăng HP Lv1",
-    "description": null
+    "description": "Máu tối đa +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "Tăng HP Lv2",
-    "description": null
+    "description": "Máu tối đa +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "Tăng HP Lv3",
-    "description": null
+    "description": "Máu tối đa +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "Tăng HP Lv4",
-    "description": null
+    "description": "Máu tối đa +25.0%"
   },
   "Invader": {
     "localized_name": "Kẻ Xâm Lược",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 30.0% Sát thương tấn công hệ rồng tăng 30.0%"
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "Miễn Nhiễm Khí Độc",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "Tăng Số Lần Nhảy +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 1",
-    "description": null
+    "description": "Sức mang +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 2",
-    "description": null
+    "description": "Sức mang +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 3",
-    "description": null
+    "description": "Sức mang +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 1",
-    "description": null
+    "description": "Sức mang +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 2",
-    "description": null
+    "description": "Sức mang +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "Tăng Sức Mang Tối Đa Cấp 3",
-    "description": null
+    "description": "Sức mang +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "Tăng Sức Mang Tối Đa Lv4",
-    "description": null
+    "description": "Sức mang +300.0%"
   },
   "MiniNushi": {
     "localized_name": "Cá Lớn",
-    "description": null
+    "description": "Tăng sát thương tấn công hệ Nước 5.0% Tăng sát thương tấn công hệ Băng 5.0% Phòng thủ+5.0%"
   },
   "MoveSpeed_up_1": {
     "localized_name": "Nhanh Nhẹn",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Thể Chất Đặc Dị",
-    "description": "Lượng hồi phục Máu tự nhiên của Pal và người chơi +50.0% Phòng Thủ +{EffectValue4}% Sát thương do trúng độc<Status_Up>Vô hiệu</> Sát thương do thiêu đốt<Status_Up>Vô hiệu</>"
+    "description": "Lượng hồi phục Máu tự nhiên của Pal và người chơi +50.0% Phòng Thủ +25.0% Sát thương do trúng độc<Status_Up>Vô hiệu</> Sát thương do thiêu đốt<Status_Up>Vô hiệu</>"
   },
   "NightOwl": {
     "localized_name": "Cú Đêm",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "Cơ Bắp",
-    "description": null
+    "description": "Tấn công +30.0% Tốc độ làm việc -50.0%"
   },
   "Nushi": {
     "localized_name": "Thủ Lĩnh",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "Nhiên Liệu Máu",
-    "description": null
+    "description": "Gây sát thương, hấp thụ một phần sát thương đó và hồi phục Máu. Tiếp tục làm việc mà không ngủ, ngay cả vào ban đêm."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Nhút Nhát",
-    "description": null
+    "description": "Tấn công -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "Dĩ Hòa Vi Quý",
-    "description": null
+    "description": "Tấn công -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "Dũng Cảm",
-    "description": null
+    "description": "Tấn công +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "Cuồng Bạo",
-    "description": null
+    "description": "Tấn công +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "Quỷ Thần",
-    "description": null
+    "description": "Tấn công +30.0% Phòng thủ +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "Đam Mê Công Việc",
-    "description": null
+    "description": "Tốc độ làm việc +30.0% Tấn công -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Ăn Nhẹ",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "-",
-    "description": null
+    "description": "Tốc độ làm việc -10.0% Phòng thủ -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "Tự Cao",
-    "description": null
+    "description": "Tốc độ làm việc +10.0% Phòng thủ -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "Chịu Trận",
-    "description": null
+    "description": "Phòng thủ +15.0% Tấn công -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "Hung Hăng",
-    "description": null
+    "description": "Tấn công +10.0% Phòng thủ -10.0%"
   },
   "PAL_rude": {
     "localized_name": "Thô Lỗ",
-    "description": null
+    "description": "Tấn công +15.0% Tốc độ làm việc -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "Tàn Bạo",
-    "description": null
+    "description": "Tấn công +15.0% Phòng thủ -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "Tăng Điểm Kinh Nghiệm Cho Pal Cấp 3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "Trợ Thủ Bền Sức",
-    "description": null
+    "description": "Giảm tiêu hao thể lực của người chơi +<NumBlue_13>5,0</>%"
   },
   "Rare": {
     "localized_name": "May Mắn",
-    "description": null
+    "description": "Tấn công +15.0% Phòng thủ +15.0% Tốc độ làm việc +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "Bậc Thầy Nạp Đạn",
-    "description": null
+    "description": "Tăng tốc độ nạp đạn của người chơi +4.0%"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "Thân Thủ Linh Hoạt",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "Đấng Cứu Thế",
-    "description": null
+    "description": "Sát thương tấn công hệ Thường tăng 30.0% Sát thương tấn công hệ Cỏ tăng 30.0%"
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "Chia Sẻ May Mắn",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "Bơi Lội Siêu Phàm",
-    "description": null
+    "description": "Tăng tốc độ di chuyển trên mặt nước 40.0%"
   },
   "SwimSpeed_up_3": {
     "localized_name": "Vua Lướt Sóng",
-    "description": null
+    "description": "Tăng tốc độ di chuyển trên mặt nước 50.0%"
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Kháng Lạnh Cấp 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "Kháng Lạnh Cấp 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "Kháng Lạnh Cấp 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "Kháng Nhiệt Cấp 1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "Kháng Nhiệt Cấp 1 / Kháng Lạnh Cấp 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "Kháng Nhiệt Cấp 2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "Kháng Nhiệt Cấp 2 / Kháng Lạnh Cấp 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "Kháng Nhiệt Cấp 3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "Kháng Nhiệt Cấp 3 / Kháng Lạnh Cấp 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Lòng Thương Bao La",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "Nhân Ngư Từ Hư Không",
-    "description": null
+    "description": "Sát thương tấn công hệ bóng tối tăng 30.0% Sát thương tấn công hệ băng tăng 30.0%"
   },
   "WoodDrop_Boost_1": {
     "localized_name": "Tăng Lượng Đốn Gỗ Lv1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Làm Việc Nhanh Nhẹn Cấp 1",
-    "description": null
+    "description": "Tốc độ làm việc +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "Làm Việc Nhanh Nhẹn Cấp 2",
-    "description": null
+    "description": "Tốc độ làm việc +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Làm Việc Nhanh Nhẹn Cấp 3",
-    "description": null
+    "description": "Tốc độ làm việc +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "Làm Việc Nhanh Nhẹn Lv4",
-    "description": null
+    "description": "Tốc độ làm việc +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Đứa Trẻ Trang Trại",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Sức Mạnh Thần Thánh: Phép Thuật",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "Sức Mạnh Thần Thánh: Cận Chiến",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "Sức Mạnh Thần Thánh: Tầm Xa",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "Sức Mạnh Thần Thánh: Triệu Hồi",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "Bảo Hộ Thần Thánh",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "Tăng Phòng Thủ Cấp 1",
-    "description": null
+    "description": "Phòng thủ +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "Tăng Phòng Thủ Cấp 2",
-    "description": null
+    "description": "Phòng thủ +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "Tăng Phòng Thủ Cấp 3",
-    "description": null
+    "description": "Phòng thủ +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "Tăng Phòng Thủ Lv4",
-    "description": null
+    "description": "Phòng thủ +25.0%"
   }
 }

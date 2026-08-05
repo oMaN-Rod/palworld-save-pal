@@ -7,7 +7,7 @@ use http_body_util::BodyExt;
 use tower::ServiceExt;
 
 use psp_server::router::build_router;
-use psp_server::{AppState, ServerConfig};
+use psp_server::{AppConfig, AppState};
 
 async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     // Real repo game data; synthetic UI dir.
@@ -16,30 +16,30 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     std::fs::write(ui_dir.join("index.html"), "<html>psp</html>").unwrap();
     std::fs::write(ui_dir.join("assets/app.js"), "console.log('ok')").unwrap();
 
-    let config = ServerConfig {
-        host: "127.0.0.1".parse().unwrap(),
-        port: 0,
-        ui_dir,
-        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
-        db_path: temp_dir.path().join("test.db"),
-        desktop_mode: false,
-    };
-    let db = psp_db::open(&config.db_path).await.unwrap();
-    let game_data =
-        Arc::new(psp_core::gamedata::GameData::load(&config.data_dir.join("json")).unwrap());
+    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let db_path = temp_dir.path().join("test.db");
+    let db = psp_db::open(&db_path).await.unwrap();
+    let game_data = Arc::new(psp_core::gamedata::GameData::load(&data_dir.join("json")).unwrap());
     let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
     let server_services = Arc::new(psp_server::services::ServerServices::with_docker(Arc::new(
         psp_server::services::docker::mock::MockDocker::default(),
     )));
-    build_router(Arc::new(AppState {
-        config,
-        game_data,
-        db,
-        dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
-        live_connections,
-        server_services,
-        sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
-    }))
+    build_router(
+        Arc::new(AppState {
+            config: AppConfig {
+                desktop_mode: false,
+            },
+            game_data,
+            driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
+            dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
+            live_connections,
+            ext: Arc::new(psp_server::server_ext::ServerExtRouter {
+                services: server_services,
+            }),
+            sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
+        }),
+        &ui_dir,
+    )
 }
 
 #[tokio::test]
@@ -340,4 +340,19 @@ async fn redirect_leaves_unreserved_characters_unescaped() {
         .to_str()
         .unwrap();
     assert_eq!(location, "/?path=/pals/a~b.c-d_e");
+}
+
+#[tokio::test]
+async fn map_tile_paths_bypass_the_spa_redirect() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let router = test_router(&temp_dir).await;
+    let response = router
+        .oneshot(
+            Request::get("/maps/mainmap/9/999/999.webp")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::NOT_FOUND);
 }

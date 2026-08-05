@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, v1.3.x]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Linux system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: "v0-ci"
+
+      - name: psp-app stays transport-free
+        shell: bash
+        run: |
+          if ! tree_output=$(cargo tree -p psp-app -e normal); then
+            echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
+            exit 1
+          fi
+          if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap|sqlx"; then
+            echo "::error::forbidden native dependency in psp-app tree"
+            exit 1
+          fi
+
+      - name: psp-db core compiles without sqlx
+        run: cargo check -p psp-db --no-default-features
+
+      - name: Add wasm32 target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Core crates compile for wasm32
+        run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app
+
+      - name: psp-web builds for wasm32
+        run: cargo build --target wasm32-unknown-unknown -p psp-web -j 2
+
+      - name: Test workspace
+        run: cargo test --workspace
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install frontend dependencies
+        working-directory: ui
+        run: bun install
+
+      - name: Desktop web build succeeds
+        working-directory: ui
+        run: bun run build

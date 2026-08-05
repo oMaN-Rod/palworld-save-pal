@@ -1,7 +1,7 @@
 {
   "AIcore": {
     "localized_name": "Núcleo de IA",
-    "description": null
+    "description": "Como possibilita tomar decisões complexas e automatizar funções de controle, é um componente central e indispensável para dispositivos de ponta. Você pode fazê-lo na Fábrica de Civilização Avançada."
   },
   "Accessory_AirDash1": {
     "localized_name": "Botas de Corrida Aérea",
@@ -13,11 +13,11 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Botas de Corrida Aérea Tripla",
-    "description": "pt-BR_Text"
+    "description": "Acessório que lhe confere a capacidade de correr três vezes em pleno ar quando equipado."
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Roupa de Baixo Antiexplosão",
-    "description": null
+    "description": "Roupa de baixo feita com fibras especiais que são leves, porém resistentes. Anula o dano sofrido por explosões."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Botas de Pulo Duplo",
@@ -41,19 +41,19 @@
   },
   "AdditionalInventory_001": {
     "localized_name": "Bolsa de Expansão Pequena",
-    "description": "Pequena bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Pequena bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_002": {
     "localized_name": "Bolsa de Expansão Mediana",
-    "description": "Bolsa de tamanho razoável que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Bolsa de tamanho razoável que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_003": {
     "localized_name": "Bolsa de Expansão Grande",
-    "description": "Grande bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Grande bolsa que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "AdditionalInventory_004": {
     "localized_name": "Bolsa de Expansão Gigantesca",
-    "description": "Bolsa gigantesca que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário."
+    "description": "Bolsa gigantesca que permite carregar bagagem adicional. Com isto em mãos, são adicionados mais slots ao inventário. Carregar uma só já é o suficiente."
   },
   "Altar": {
     "localized_name": "Altar de Invocação",
@@ -101,7 +101,7 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Conversor de Relíquias Antigas",
-    "description": null
+    "description": "Mecanismo de conversão de materiais da antiguidade que reaproveita técnicas de uma civilização perdida. Pode desvendar tecnologias deixadas na forma de |relíquias da civilização antiga| para dar a elas uma nova forma aprimorada. É um recurso indispensável para poder aproveitar relíquias sem nenhum desperdício."
   },
   "AncientWorkBench": {
     "localized_name": "Bancada da Civilização Antiga",
@@ -109,7 +109,7 @@
   },
   "Ancient_Clinic": {
     "localized_name": "Clínica da Civilização Antiga",
-    "description": null
+    "description": "Instalações médicas de mais alto nível que reproduzem a tecnologia médica avançada da antiguidade. Possui capacidades de manutenção muito superiores às de clínicas comuns. Coloque um Pal com grande aptidão para manipulação de remédios aqui para manter o nível sanitário máximo mesmo em bases com trabalho forçado excessivo."
   },
   "Ancient_Houseset": {
     "localized_name": "Kit de construção da civilização antiga",
@@ -117,11 +117,11 @@
   },
   "Ancient_MedicalPalBed": {
     "localized_name": "Cama para Pals da Civilização Antiga",
-    "description": null
+    "description": "A cama de mais alto nível para Pals, criada colocando um pano macio nas cápsulas de regeneração da antiguidade. Oferece uma taxa de recuperação de SAN maior que qualquer outra cama para Pals, eliminando rapidamente o cansaço. Tem o mesmo tamanho da Cama Grande para Pals, garantindo um repouso confortável até para Pals de maior porte."
   },
   "Ancient_Spa": {
     "localized_name": "Água Termal da Civilização Antiga",
-    "description": null
+    "description": "Água termal de uma tecnologia antiga que funde palúdio para extrair as propriedades do metal e encher a banheira com uma água especial. Oferece uma taxa de recuperação de SAN maior que qualquer outra água termal, restaurando também o vigor. Com o mesmo tamanho de outras águas termais, possibilita que Pals feridos se curem por completo."
   },
   "Arrow": {
     "localized_name": "Flecha",
@@ -141,23 +141,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Saco de Ração Pequeno",
-    "description": "Saco pequeno para colocar comida. Desbloqueia 1 slot de equipamento para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente."
+    "description": "Saco pequeno para guardar comida. Desbloqueia 1 slot para refeição automática. Quando a fome aperta, a comida no slot é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Saco de Ração Razoável",
-    "description": "Saco de tamanho razoável para colocar comida. Desbloqueia 2 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco de tamanho razoável para guardar comida. Desbloqueia 2 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Saco de Ração Grande",
-    "description": "Saco grande para colocar comida. Desbloqueia 3 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco grande para guardar comida. Desbloqueia 3 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Saco de Ração Gigante",
-    "description": "Saco extragrande para colocar comida. Desbloqueia 4 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco extragrande para guardar comida. Desbloqueia 4 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Saco de Ração Colossal",
-    "description": "Saco extragrande para colocar comida. Desbloqueia 5 slots de equipamento para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente."
+    "description": "Saco colossal para guardar comida. Desbloqueia 5 slots para refeição automática. Quando a fome aperta, a comida nos slots é consumida automaticamente. Carregar um só já é o suficiente."
   },
   "BaseCampBattleDirector": {
     "localized_name": "Sino de Alarme",
@@ -173,19 +173,19 @@
   },
   "BaseCampWorkHard02": {
     "localized_name": "Plataforma de Monitoramento Requintada",
-    "description": null
+    "description": "Plataforma de monitoramento mais refinada, com materiais e estrutura revisada. Além de servir para dar orientações de trabalho como outras plataformas, também torna mais difícil diminuir a SAN dos Pals na base. Assim você pode melhorar um pouco o ambiente de trabalho e evitar que os Pals se sintam muito insatisfeitos."
   },
   "BaseCampWorkHard03": {
     "localized_name": "Plataforma de Monitoramento da Civilização Antiga",
-    "description": null
+    "description": "Plataforma de monitoramento feita com tecnologia antiga usando palúdio vermelho. Transmite comandos para a base inteira via uma interface holográfica, evitando a redução de SAN dos Pals. Envolve a base com um comprimento de onda específico que faz com que os Pals mantenham a mente tranquila mesmo em condições de trabalho extenuantes."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Terminal para Operar Caixa de Pals",
-    "description": null
+    "description": "Terminal para operar uma Caixa de Pals à distância. Coloque-o num local onde deseja soltar Pals para criar uma base a seu gosto."
   },
   "Bat3": {
     "localized_name": "Bastão de Metal",
-    "description": null
+    "description": "Bastão de Metal útil também em combate à curta distância. Se encontrar alguém de quem não goste, é só dar uma surra com isto."
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Roupas de Pano",
@@ -265,7 +265,7 @@
   },
   "Battle_Cloth": {
     "localized_name": "Pano",
-    "description": "Pano feito ao tecer Lã. Necessário para produzir armaduras."
+    "description": "Pano feito ao tecer Lã. Necessário para produzir armaduras. Você pode fazê-lo na Bancada Primitiva."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Besta Fixa",
@@ -321,7 +321,7 @@
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Machado de Metal Pal",
-    "description": "Machado para cortar lenha. Graças ao Metal Pal, adquiriu um gume aterrador."
+    "description": "Machado para cortar lenha. Graças ao Metal Pal, adquiriu um gume aterrador. É capaz de cortar facilmente até a dura madeira requintada que cresce em condições extremas."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "Clava de Madeira",
@@ -433,7 +433,7 @@
   },
   "BeamLauncherBullet": {
     "localized_name": "Carga de Lança-Raios",
-    "description": null
+    "description": "Projétil usado com Lança-Raios. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "BeamSword": {
     "localized_name": "Espada de Raio",
@@ -445,11 +445,11 @@
   },
   "Bio_Battery": {
     "localized_name": "Biobateria",
-    "description": null
+    "description": "Dispositivo que armazena energia biológica na forma de energia elétrica. É usado em máquinas que exigem uma densidade de energia elevada. Você pode fazê-lo na Fábrica de Linha II."
   },
   "Bio_Coolant": {
     "localized_name": "Material de Refrigeração Absoluta",
-    "description": null
+    "description": "Material de refrigeração altamente eficiente que emprega substâncias especiais provenientes dos Pals. É usado para controlar a temperatura de dispositivos de alta potência. Você pode fazê-lo na Fábrica de Linha."
   },
   "BlastFurnace4": {
     "localized_name": "Forno Gigantesco",
@@ -469,23 +469,23 @@
   },
   "Cake02": {
     "localized_name": "Bolo de Cogumelos",
-    "description": null
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam um ovo. O Pal que nascer poderá aumentar suas capacidades um pouco mais facilmente."
   },
   "Cake03": {
     "localized_name": "Bolo de Verduras",
-    "description": null
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam ovos. Eles produzirão dois ovos por vez."
   },
   "Cake04": {
     "localized_name": "Bolo de Verduras Extravagante",
-    "description": null
+    "description": "Coloque no baú da Fazenda de Acasalamento para deixar os Pals animados e fazer com que produzam um ovo. O Pal que nascer poderá aumentar suas capacidades um pouco mais facilmente e terá maior chance de passar por mutação."
   },
   "Cake05": {
     "localized_name": "Bolo Especial",
-    "description": null
+    "description": "Coloque no baú da Fazenda de Acasalamento e os Pals que comerem isto ficarão animados e produzirão um ovo. Torna mais fácil para os filhotes herdarem várias habilidades passivas dos pais."
   },
   "CarbonFiber": {
     "localized_name": "Fibra de Carbono",
-    "description": "Material superior que é tanto leve quanto resistente. Pode ser usado para fazer armaduras."
+    "description": "Material superior que é tanto leve quanto resistente. Pode ser usado para fazer armaduras. Você pode fazê-lo na Fábrica de Linha."
   },
   "Cauldron": {
     "localized_name": "Caldeirão de Bruxa",
@@ -501,15 +501,15 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Fuzil de Carga",
-    "description": "pt-BR_Text"
+    "description": "Fuzil de raios elétricos carregados feito com tecnologia avançada. Carrega energia para disparar um tiro de alta potência."
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Bala de Fuzil de Carga",
-    "description": "pt-BR_Text"
+    "description": "Projétil usado com Fuzil de Carga e armas similares. Você pode fazê-lo na Fábrica de Armas de Civilização Avançada."
   },
   "Clinic": {
     "localized_name": "Clínica",
-    "description": null
+    "description": "Instalações médicas básicas para cuidar da saúde dos Pals trabalhando na base. Coloque um Pal com aptidão para manipulação de remédios aqui para conter a redução de SAN e a ocorrência de doenças e ferimentos. Embora possa manter o nível sanitário apenas até um certo limite, é indispensável para administrar a saúde de bases nos estágios iniciais."
   },
   "Cloth2": {
     "localized_name": "Pano Requintado",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Computador",
-    "description": "pt-BR_Text"
+    "description": "Um componente fundamental em tecnologias modernas, sendo usado para controlar recursos automatizados e maquinário avançado. Você pode fazê-lo na Fábrica de Linha II."
   },
   "Cooler": {
     "localized_name": "Resfriador a Gelo",
@@ -537,7 +537,7 @@
   },
   "Corrosive_Solvent": {
     "localized_name": "Corrosivo",
-    "description": null
+    "description": "Perigoso solvente químico com capacidade de decomposição poderosa. É empregado em processos de alta precisão e tratamento especial de materiais. Você pode fazê-lo na Fábrica de Linha."
   },
   "Crusher": {
     "localized_name": "Triturador",
@@ -545,7 +545,7 @@
   },
   "CrystalPit": {
     "localized_name": "Garimpo de Exoquartzo",
-    "description": null
+    "description": "Recurso para produzir Exoquartzo. O trabalho de escavar Exoquartzo é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
   },
   "DamagedScarecrow": {
     "localized_name": "Boneco de Pancada",
@@ -601,7 +601,7 @@
   },
   "ElectricArcAssaultRifleBullet": {
     "localized_name": "Munição de Fuzil de Plasma",
-    "description": null
+    "description": "Projétil usado com Fuzil de Plasma. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "ElectricCooler": {
     "localized_name": "Resfriador Elétrico",
@@ -617,7 +617,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Cartucho de Plasma",
-    "description": "Projétil usado com Canhão de Plasma e armas similares."
+    "description": "Projétil usado com Canhão de Plasma e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Canhão de Plasma",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Espingarda de Energia",
-    "description": "pt-BR_Text"
+    "description": "Espingarda que dispara projéteis de energia. Com excelente cadência de tiro, seu poder de fogo à curta distância é de outro mundo."
   },
   "EnergyShotgunBullet": {
     "localized_name": "Cartucho de Espingarda de Energia",
-    "description": "pt-BR_Text"
+    "description": "Projétil usado com Espingarda de Energia e armas similares. Você pode fazê-lo na Fábrica de Armas de Civilização Avançada."
   },
   "EnergyStorage_Electric": {
     "localized_name": "Capacitor",
@@ -645,7 +645,7 @@
   },
   "Factory_Money": {
     "localized_name": "Fábrica de Dinheiro",
-    "description": "Fábrica para produzir Moeda de Ouro. Como gera pressão psicológica, diminui a SAN dos trabalhadores. Requer Pals capazes de realizar trabalho manual."
+    "description": "Fábrica para produzir Moeda de Ouro. Como gera pressão psicológica, diminui a SAN dos trabalhadores. Requer Pals capazes de realizar trabalho manual. Tome cuidado, pois construir isto pode acarretar medidas severas por parte da Milícia Popular."
   },
   "Farm_SkillFruits": {
     "localized_name": "Plantação de Frutos de Técnica",
@@ -657,31 +657,31 @@
   },
   "FishingBait_2": {
     "localized_name": "Isca Requintada",
-    "description": null
+    "description": "Isca para atrair Pals. Esta versão melhorada faz com que os Pals mordam a isca com mais frequência."
   },
   "FishingBait_3": {
     "localized_name": "Isca Extravagante",
-    "description": null
+    "description": "Isca de luxo para atrair Pals. Esta versão melhorada aumenta um pouco a barra durante o minijogo."
   },
   "FishingBait_3_A": {
     "localized_name": "Isca Sedutora",
-    "description": null
+    "description": "Isca para atrair Pals. Esta versão melhorada aumenta a barra durante o minijogo e também a quantidade de itens obtidos da pesca."
   },
   "FishingPond1": {
     "localized_name": "Tanque de Pesca",
-    "description": null
+    "description": "Tanque guarnecido com utensílios de pesca. Coloque um Pal aqui para que ele curta uma pescaria relaxante. Requer Pals capazes de realizar trabalho manual."
   },
   "FishingPond2": {
     "localized_name": "Grande Tanque de Pesca",
-    "description": null
+    "description": "Grande tanque guarnecido com utensílios de pesca. Graças à sua ampla extensão, é possível pescar Pals maiores. Requer Pals capazes de realizar trabalho manual."
   },
   "FishingRod_02_1": {
     "localized_name": "Vara Intermediária (Cattiva)",
-    "description": null
+    "description": "Vara de pesca para pegar Pals. Se tiver iscas, você pode pescar usando a vara em corpos d’água com silhuetas submersas. Com funcionalidade ainda melhor, torna a pesca um pouco mais fácil."
   },
   "FishingRod_03_1": {
     "localized_name": "Vara Avançada (Pengullet)",
-    "description": null
+    "description": "Vara de pesca para pegar Pals. Se tiver iscas, você pode pescar usando a vara em corpos d’água com silhuetas submersas. Com funcionalidade ainda melhor, torna a pesca bem mais fácil."
   },
   "FishingSet1": {
     "localized_name": "Kit de pesca iniciante",
@@ -689,7 +689,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Combustível de Lança-Chamas",
-    "description": "Combustível de lança-chamas. Munição usada com Flamethrower e armas similares."
+    "description": "Combustível de lança-chamas. Projétil usado com Flamethrower e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "FlourMill": {
     "localized_name": "Moenda",
@@ -909,11 +909,11 @@
   },
   "GasMask": {
     "localized_name": "Máscara de Névoa Corrosiva",
-    "description": "pt-BR_Text"
+    "description": "Máscara com um mecanismo de filtragem especial. Anula o dano causado por névoa corrosiva."
   },
   "GatlingBullet": {
     "localized_name": "Bala de Gatling",
-    "description": "Projétil usado com Gatling Gun e armas similares."
+    "description": "Projétil usado com Gatling Gun e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "Glass_houseset": {
     "localized_name": "Kit de construção de vidro",
@@ -941,11 +941,11 @@
   },
   "GrapplingGun5": {
     "localized_name": "Arpéu Ultra",
-    "description": null
+    "description": "Arpéu que permite movimento em alta velocidade. Dispare o gancho na direção de destino para puxar seu corpo até lá. Utilizando novos materiais, foi possível reduzir o tempo para dissipação do calor."
   },
   "GrenadeBullet": {
     "localized_name": "Granada",
-    "description": "Projétil usado com Lança-Granadas e armas similares."
+    "description": "Projétil usado com Lança-Granadas e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "GuildChest": {
     "localized_name": "Baú de Guilda",
@@ -969,7 +969,7 @@
   },
   "HighGrade_Processed_Wood": {
     "localized_name": "Tábua de Madeira Requintada",
-    "description": null
+    "description": "Tábua criada ao polir com esmero Madeira Dura. Com uma linda textura, é usada em trabalhos de luxo. Você pode fazê-la na Fábrica de Linha II."
   },
   "Homeward": {
     "localized_name": "Nuvens de Trovão do Regresso",
@@ -989,7 +989,7 @@
   },
   "IceHorseStatue": {
     "localized_name": "Estátua de Frostallion",
-    "description": null
+    "description": "Estátua de Frostallion para decoração."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Gerador Elétrico",
@@ -1045,7 +1045,7 @@
   },
   "JetDragonStatue": {
     "localized_name": "Estátua de Jetragon",
-    "description": null
+    "description": "Estátua de Jetragon para decoração."
   },
   "Katana": {
     "localized_name": "Katana",
@@ -1061,11 +1061,11 @@
   },
   "Lantern": {
     "localized_name": "Lampião de Cintura",
-    "description": "Lampião preso à cintura. Acende sozinho ao anoitecer. Um só já basta para iluminar o ambiente."
+    "description": "Lampião para prender à cintura. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
   },
   "Lantern_High": {
     "localized_name": "Lampião de Cintura Melhorado",
-    "description": null
+    "description": "Lampião preso à cintura para iluminar uma grande área. Acende sozinho ao anoitecer. É possível alterar o modo de iluminação para que permaneça sempre aceso. Um só já basta para iluminar o ambiente."
   },
   "LargeCeilingLamp": {
     "localized_name": "Lâmpada Grande de Teto",
@@ -1077,11 +1077,11 @@
   },
   "LaserBullet": {
     "localized_name": "Cartucho de Energia",
-    "description": "Projétil usado com Fuzil Laser e armas similares."
+    "description": "Projétil usado com Fuzil Laser e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "LaserGatlingBullet": {
     "localized_name": "Cartucho de Laser para Gatling Gun",
-    "description": "Projétil usado com Gatling Gun Laser e armas similares."
+    "description": "Projétil usado com Gatling Gun Laser e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "LaserGatlingGun": {
     "localized_name": "Gatling Gun Laser",
@@ -1117,7 +1117,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Lingote de Marganês",
-    "description": null
+    "description": "Liga metálica feita de Minério de Marganês que repousa no fundo do mar. Com elevada resistência a energia, serve de material para armas. Você pode refiná-la na Forno Gigantesco."
   },
   "ManualElectricGenerator": {
     "localized_name": "Gerador Elétrico Manual",
@@ -1157,7 +1157,7 @@
   },
   "MissileBullet": {
     "localized_name": "Míssil",
-    "description": "Projétil usado com Lança-Mísseis e armas similares."
+    "description": "Projétil usado com Lança-Mísseis e armas similares. Você pode fazê-lo na Fábrica de Linha de Armas II."
   },
   "MonsterFarm": {
     "localized_name": "Fazenda de Criação",
@@ -1169,11 +1169,11 @@
   },
   "MultiElectricHatchingPalEggWithBreed": {
     "localized_name": "Reprodutor da Civilização Antiga",
-    "description": null
+    "description": "Instalações de acasalamento de alto nível da civilização antiga cobertas por vidro eletrônico. Possibilita realizar de forma rápida e automática desde a produção de ovos até sua incubação, aumentando a chance de herança de habilidades raras. Como os Pals são monitorados via controle holográfico, não ocupa um espaço muito grande."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Máquina Incubadora de Ovos Grande",
-    "description": null
+    "description": "Dispositivo para incubar Ovo de Pal. Mantém a temperatura ideal de forma automática até certo ponto e permite incubar vários ovos ao mesmo tempo."
   },
   "Musket": {
     "localized_name": "Mosquete",
@@ -1197,7 +1197,7 @@
   },
   "OilPump02": {
     "localized_name": "Extrator de Petróleo de Alta Pressão",
-    "description": null
+    "description": "Dispositivo que bombeia Óleo cru do fundo da terra para extração. Embora seja capaz de gerar Óleo cru mesmo em locais sem campos de petróleo, só pode ser instalado em solo sem construções. Requer um fornecimento de eletricidade ainda mais abundante que o Extrator de Petróleo."
   },
   "OlympicCauldron": {
     "localized_name": "Pira da Chama Sagrada",
@@ -1205,15 +1205,15 @@
   },
   "OperatingTable": {
     "localized_name": "Mesa de Operação de Pals",
-    "description": "pt-BR_text"
+    "description": "Recurso que possibilita realizar cirurgias nos Pals para alterar seu sexo ou habilidades passivas."
   },
   "OverheatRifle": {
     "localized_name": "Fuzil de Superaquecimento",
-    "description": "pt-BR_Text"
+    "description": "Fuzil de assalto que pode disparar continuamente sem ser recarregado. Mas é preciso ter cuidado, pois ele acaba superaquecendo e assim cria uma brecha enorme para o adversário retaliar."
   },
   "OverheatRifleBullet": {
     "localized_name": "Bala de Fuzil de Superaquecimento",
-    "description": "pt-BR_Text"
+    "description": "Projétil usado com Fuzil de Superaquecimento e armas similares. Você pode fazê-lo na Fábrica de Armas de Civilização Avançada."
   },
   "PALBOX": {
     "localized_name": "Caixa de Pal",
@@ -1225,15 +1225,15 @@
   },
   "PalDopingShot": {
     "localized_name": "Arma Estimulante",
-    "description": "pt-BR_Text"
+    "description": "Dispare contra algum Pal amigo para fortalecer seu ataque e defesa por tempo limitado. Porém, causa dano se for disparada contra inimigos."
   },
   "PalDopingShotBullet": {
     "localized_name": "Bala de Arma Estimulante",
-    "description": "pt-BR_Text"
+    "description": "Projétil usado com Arma Estimulante e armas similares. Você pode fazê-lo na Fábrica de Armas."
   },
   "PalDopingShot_2": {
     "localized_name": "Arma Estimulante Mega",
-    "description": null
+    "description": "Fortalece ataque e defesa se disparada contra Pals amigos, mas causa dano se disparada contra inimigos. Graças a uma melhoria, apresenta maior intensidade e duração de fortalecimento, além de causar maior dano."
   },
   "PalFoodBox": {
     "localized_name": "Ração",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Granada Curadora de Pals",
-    "description": "pt-BR_Text"
+    "description": "Granada de Fragmentação com efeito de cura. Detona no momento do impacto, recuperando o PV de Pals amigos."
   },
   "PalMedicineBox": {
     "localized_name": "Armário de Remédios",
@@ -1265,7 +1265,7 @@
   },
   "Plastic": {
     "localized_name": "Plastiaço",
-    "description": "Material especial criado pelo processamento de Óleo cru e metal. Pode ser feito na Forno Elétrico."
+    "description": "Material especial criado pelo processamento de Óleo cru e metal. Pode ser feito no Forno Elétrico."
   },
   "PoliceFlagSet": {
     "localized_name": "Kit de bandeiras da Milícia Popular",
@@ -1273,15 +1273,15 @@
   },
   "Polymer": {
     "localized_name": "Polímero",
-    "description": "Polímero criado por meio do processamento de óleo. Necessário para produzir armas de fogo, por exemplo."
+    "description": "Polímero criado por meio do processamento de óleo. Necessário para produzir armas de fogo, por exemplo. Você pode fazê-lo na Fábrica de Linha."
   },
   "Potion_Extreme": {
     "localized_name": "Poção Sublime",
-    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De qualidade extremamente elevada, vai curando PV a olhos vistos."
+    "description": "Remédio que trata os ferimentos do corpo com o passar do tempo. De qualidade extremamente elevada, cura PV de forma notável e gradual."
   },
   "Processed_Wood": {
     "localized_name": "Tábua de Madeira",
-    "description": null
+    "description": "Madeira processada para facilitar o uso. É muito mais versátil que lenha virgem, podendo ser usada em diversas aplicações. Você pode fazê-la na Bancada Primitiva."
   },
   "Product_Axe_Grade_01": {
     "localized_name": "Machado de Pedra",
@@ -1401,7 +1401,7 @@
   },
   "Product_StationDeforest2": {
     "localized_name": "Madeireira II",
-    "description": null
+    "description": "Recurso para produzir Madeira Dura. O trabalho de cortar árvores é árduo e requer muita energia. Confie-o a um Pal com habilidade para cortar árvores."
   },
   "Product_StonePit": {
     "localized_name": "Pedreira",
@@ -1433,7 +1433,7 @@
   },
   "ReinforcedArrow": {
     "localized_name": "Flecha Reforçada",
-    "description": "Flecha fortalecida que pode ser disparada com Arco Composto."
+    "description": "Flecha fortalecida que pode ser disparada com Arco Composto. Você pode fazê-la na Bancada Primitiva."
   },
   "RepairBench": {
     "localized_name": "Bancada de Conserto",
@@ -1465,7 +1465,7 @@
   },
   "SFArrow": {
     "localized_name": "Flecha Avançada",
-    "description": "Flecha de exolita que pode ser disparada com Arco Avançado."
+    "description": "Flecha fortalecida que pode ser disparada com Arco Avançado. Você pode fazê-la na Bancada Primitiva."
   },
   "SFBow": {
     "localized_name": "Arco Avançado",
@@ -1481,7 +1481,7 @@
   },
   "Salvage_TreasureBoxKey02": {
     "localized_name": "Ímã de Pesca Poderoso",
-    "description": null
+    "description": "Ímã poderoso necessário para recuperar itens submersos com eficiência. Com sua grande força magnética, é possível içar recursos e matérias-primas abandonados no leito do mar."
   },
   "SanityDecrease1": {
     "localized_name": "Emissor de Ondas Alfa",
@@ -1513,7 +1513,7 @@
   },
   "Shield_07": {
     "localized_name": "Escudo Antigo",
-    "description": null
+    "description": "Escudo criado com uma antiga tecnologia perdida. Ele se conserta automaticamente após algum tempo sem sofrer ataques. Dizem que essa função não pode ser reproduzida nos tempos modernos."
   },
   "Shield_SF": {
     "localized_name": "Escudo Avançado",
@@ -1541,7 +1541,7 @@
   },
   "SkillUnlock_AmaterasuWolf_Dark": {
     "localized_name": "Sela de Kitsun Noct",
-    "description": "Quando você tem isto,Kitsun Noctpode montar num ."
+    "description": "Quando você tem isto, pode montar num Kitsun Noct."
   },
   "SkillUnlock_BadCatgirl": {
     "localized_name": "Espingarda de Nyafia",
@@ -1577,15 +1577,15 @@
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Sela de Azurobe Cryst",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Azurobe Cryst."
   },
   "SkillUnlock_BlueSkyDragon": {
     "localized_name": "Sela de Shaolong",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Shaolong."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Sela de Azurmane",
-    "description": "Quando você tem isto,Azurmanepode montar num ."
+    "description": "Quando você tem isto, pode montar num Azurmane."
   },
   "SkillUnlock_Boar": {
     "localized_name": "Sela de Rushoar",
@@ -1601,15 +1601,15 @@
   },
   "SkillUnlock_CubeTurtle": {
     "localized_name": "Sela de Tetroise",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Tetroise ."
   },
   "SkillUnlock_CubeTurtle_Neutral": {
     "localized_name": "Sela de Tetroise Primo",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Tetroise Primo."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Sela de Xenolord",
-    "description": "Quando você tem isto,Xenolordpode montar num ."
+    "description": "Quando você tem isto, pode montar num Xenolord."
   },
   "SkillUnlock_Deer": {
     "localized_name": "Sela de Eikthyrdeer",
@@ -1621,7 +1621,7 @@
   },
   "SkillUnlock_DomeArmorDragon": {
     "localized_name": "Sela de Aegidron",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Aegidron."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Minigun de Grizzbolt",
@@ -1637,7 +1637,7 @@
   },
   "SkillUnlock_FeatherOstrich": {
     "localized_name": "Sela de Dazemu",
-    "description": "Quando você tem isto,Dazemupode montar num ."
+    "description": "Quando você tem isto, pode montar num Dazemu."
   },
   "SkillUnlock_FengyunDeeper": {
     "localized_name": "Sela de Fenglope",
@@ -1645,7 +1645,7 @@
   },
   "SkillUnlock_FengyunDeeper_Electric": {
     "localized_name": "Sela de Fenglope Lux",
-    "description": "Quando você tem isto,Fenglope Luxpode montar num ."
+    "description": "Quando você tem isto, pode montar num Fenglope Lux."
   },
   "SkillUnlock_FireKirin": {
     "localized_name": "Sela de Pyrin",
@@ -1673,11 +1673,11 @@
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "Sela de Ghangler",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Ghangler."
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
     "localized_name": "Sela de Ghangler Ignis",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Ghangler Ignis."
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Sela de Maraith",
@@ -1685,11 +1685,11 @@
   },
   "SkillUnlock_GhostDragon": {
     "localized_name": "Sela de Eidrolon",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Eidrolon."
   },
   "SkillUnlock_GhostDragon_Fire": {
     "localized_name": "Sela de Eidrolon Ignis",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Eidrolon Ignis."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Sela de Gildane",
@@ -1697,11 +1697,11 @@
   },
   "SkillUnlock_GrassGolem": {
     "localized_name": "Sela de Dualith",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Dualith e disparar um laser de grama poderoso."
   },
   "SkillUnlock_GrassGolem_Dark": {
     "localized_name": "Sela de Dualith Noct",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Dualith Noct e disparar um laser de escuridão poderoso."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Sela de Mammorest",
@@ -1721,7 +1721,7 @@
   },
   "SkillUnlock_GuardianDog": {
     "localized_name": "Sela de Yakumo",
-    "description": "Quando você tem isto,Yakumopode montar num ."
+    "description": "Quando você tem isto, pode montar num Yakumo."
   },
   "SkillUnlock_HadesBird": {
     "localized_name": "Sela de Helzephyr",
@@ -1729,7 +1729,7 @@
   },
   "SkillUnlock_HadesBird_Electric": {
     "localized_name": "Sela de Helzephyr Lux",
-    "description": "Quando você tem isto,Helzephyr Luxpode montar num ."
+    "description": "Quando você tem isto, pode montar num Helzephyr Lux."
   },
   "SkillUnlock_HawkBird": {
     "localized_name": "Sela de Nitewing",
@@ -1741,7 +1741,7 @@
   },
   "SkillUnlock_Horus_Water": {
     "localized_name": "Sela de Faleris Aqua",
-    "description": "Quando você tem isto,Faleris Aquapode montar num ."
+    "description": "Quando você tem isto, pode montar num Faleris Aqua."
   },
   "SkillUnlock_IceDeer": {
     "localized_name": "Sela de Reindrix",
@@ -1757,19 +1757,19 @@
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "Sela de Whalaska",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Whalaska."
   },
   "SkillUnlock_IceNarwhal_Fire": {
     "localized_name": "Sela de Whalaska Ignis",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Whalaska Ignis."
   },
   "SkillUnlock_IceSeal": {
     "localized_name": "Sela de Polapup",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Polapup."
   },
   "SkillUnlock_IceSeal_Ground": {
     "localized_name": "Sela de Polapup Terra",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Polapup Terra."
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "Lança-mísseis de Jetragon",
@@ -1789,15 +1789,15 @@
   },
   "SkillUnlock_KingBahamut_Dragon": {
     "localized_name": "Sela de Blazamut Ryu",
-    "description": "Quando você tem isto,Blazamut Ryupode montar num ."
+    "description": "Quando você tem isto, pode montar num Blazamut Ryu."
   },
   "SkillUnlock_KingSunfish": {
     "localized_name": "Sela de Solmora",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Solmora."
   },
   "SkillUnlock_KingSunfish_Thunder": {
     "localized_name": "Sela de Solmora Lux",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Solmora Lux."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Sela de Univolt",
@@ -1805,7 +1805,7 @@
   },
   "SkillUnlock_Kirin_Ice": {
     "localized_name": "Sela de Univolt Cryst",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Univolt Cryst."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Arreios de Foxparks",
@@ -1825,11 +1825,11 @@
   },
   "SkillUnlock_LegendDeer": {
     "localized_name": "Sela de Hartalis",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Hartalis e gerar uma barreira que protege contra ataques."
   },
   "SkillUnlock_LotusDragon": {
     "localized_name": "Sela de Ophydia",
-    "description": null
+    "description": "Quando você tem isto, pode montar numa Ophydia."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Sela de Blazehowl",
@@ -1845,11 +1845,11 @@
   },
   "SkillUnlock_Monkey_Fire": {
     "localized_name": "Fuzil de Assalto de Tanzee Ignis",
-    "description": null
+    "description": "Pequeno fuzil de assalto para Tanzee Ignis. Quando a habilidade de companheiro é ativada, Tanzee Ignis entra no modo de disparo e atira contra os inimigos nos arredores."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Sela de Selyne",
-    "description": "Quando você tem isto,Selynepode montar num ."
+    "description": "Quando você tem isto, pode montar num Selyne."
   },
   "SkillUnlock_MopKing": {
     "localized_name": "Sela de Sweepa",
@@ -1857,11 +1857,11 @@
   },
   "SkillUnlock_MushroomDragon": {
     "localized_name": "Sela de Shroomer",
-    "description": "Quando você tem isto,Shroomerpode montar num ."
+    "description": "Quando você tem isto, pode montar num Shroomer."
   },
   "SkillUnlock_MushroomDragon_Dark": {
     "localized_name": "Sela de Shroomer Noct",
-    "description": "Quando você tem isto,Shroomer Noctpode montar num ."
+    "description": "Quando você tem isto, pode montar num Shroomer Noct."
   },
   "SkillUnlock_NaughtyCat": {
     "localized_name": "Sela de Grintale",
@@ -1869,11 +1869,11 @@
   },
   "SkillUnlock_NightBlueHorse": {
     "localized_name": "Sela de Starryon",
-    "description": "Quando você tem isto,Starryonpode montar num ."
+    "description": "Quando você tem isto, pode montar num Starryon."
   },
   "SkillUnlock_NightBlueHorse_Neutral": {
     "localized_name": "Sela de Starryon Primo",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Starryon Primo."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Lança-foguetes de Pengullet",
@@ -1881,19 +1881,19 @@
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "Lança-foguetes de Pengullet Lux",
-    "description": null
+    "description": "Canhão para disparar um Pengullet Lux. Quando a habilidade de companheiro é ativada, você pode disparar o Pengullet Lux para atacar. Porém, ele ficará incapacitado."
   },
   "SkillUnlock_Plesiosaur": {
     "localized_name": "Sela de Braloha",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Braloha."
   },
   "SkillUnlock_PoseidonOrca": {
     "localized_name": "Sela de Neptilius",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Neptilius."
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Sela de Tarantriss",
-    "description": "Quando você tem isto,Tarantrisspode montar num ."
+    "description": "Quando você tem isto, pode montar num Tarantriss."
   },
   "SkillUnlock_RedArmorBird": {
     "localized_name": "Sela de Ragnahawk",
@@ -1925,15 +1925,15 @@
   },
   "SkillUnlock_SkyDragon_Grass": {
     "localized_name": "Sela de Quivern Botan",
-    "description": "Quando você tem isto,Quivern Botanpode montar num ."
+    "description": "Quando você tem isto, pode montar num Quivern Botan."
   },
   "SkillUnlock_SnowTigerBeastman": {
     "localized_name": "Martelo de Bastigor",
-    "description": "Quando você tem isto,Bastigorpode montar num ."
+    "description": "Quando você tem isto, pode montar num Bastigor."
   },
   "SkillUnlock_SumoDog": {
     "localized_name": "Sela de Bulldosu",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Bulldosu."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Sela de Suzaku",
@@ -1945,7 +1945,7 @@
   },
   "SkillUnlock_ThiefBird": {
     "localized_name": "Sela de Roujay",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Roujay."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Sela de Beakon",
@@ -1953,7 +1953,7 @@
   },
   "SkillUnlock_ThunderBird_Ice": {
     "localized_name": "Sela de Beakon Cryst",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Beakon Cryst."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Sela de Rayhound",
@@ -1961,15 +1961,15 @@
   },
   "SkillUnlock_ThunderFluffyBird": {
     "localized_name": "Sela de Dynamoff",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Dynamoff."
   },
   "SkillUnlock_Thunderdog_Ice": {
     "localized_name": "Sela de Rayhound Cryst",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Thunderdog_Ice."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Sela de Palumba",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Palumba."
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "Sela de Jormuntide",
@@ -1989,11 +1989,11 @@
   },
   "SkillUnlock_VolcanoDragon": {
     "localized_name": "Sela de Moldron",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Moldron."
   },
   "SkillUnlock_VolcanoDragon_Ice": {
     "localized_name": "Sela de Moldron Cryst",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Moldron Cryst."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Sela de Chillet",
@@ -2001,23 +2001,23 @@
   },
   "SkillUnlock_WeaselDragon_Fire": {
     "localized_name": "Sela de Chillet Ignis",
-    "description": "Quando você tem isto,Chillet Ignispode montar num ."
+    "description": "Quando você tem isto, pode montar num Chillet Ignis."
   },
   "SkillUnlock_WhiteAlienDragon": {
     "localized_name": "Sela de Xenogard",
-    "description": "Quando você tem isto,Xenogardpode montar num ."
+    "description": "Quando você tem isto, pode montar num Xenogard."
   },
   "SkillUnlock_WhiteDeer": {
     "localized_name": "Sela de Celesdir",
-    "description": "Quando você tem isto,Celesdirpode montar num ."
+    "description": "Quando você tem isto, pode montar num Celesdir."
   },
   "SkillUnlock_WhiteDeer_Dark": {
     "localized_name": "Sela de Celesdir Noct",
-    "description": null
+    "description": "Quando você tem isto, pode montar num Celesdir Noct."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Sela de Silvegis",
-    "description": "Quando você tem isto,Silvegispode montar num ."
+    "description": "Quando você tem isto, pode montar num Silvegis."
   },
   "SkillUnlock_Yeti": {
     "localized_name": "Sela de Wumpo",
@@ -2037,7 +2037,7 @@
   },
   "SkyAssaultRifleBullet": {
     "localized_name": "Munição de Fuzil de Assalto Pesado",
-    "description": null
+    "description": "Projétil usado com Fuzil de Assalto Pesado. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "SkyBeamSword": {
     "localized_name": "Espada de Laser",
@@ -2049,7 +2049,7 @@
   },
   "SkyBowArrow": {
     "localized_name": "Flecha de Arco Mecânico",
-    "description": null
+    "description": "Flecha fortalecida que pode ser disparada com Arco Mecânico. Você pode fazê-la na Bancada da Civilização Antiga."
   },
   "SkyGrenadeLauncher": {
     "localized_name": "Lança-Granadas Tático",
@@ -2057,7 +2057,7 @@
   },
   "SkyGrenadeLauncherBullet": {
     "localized_name": "Carga de Lança-Granadas Tático",
-    "description": null
+    "description": "Projétil usado com Lança-Granadas Tático. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "SkyIslandFlagSet": {
     "localized_name": "Kit de bandeiras da Aliança Celeste",
@@ -2065,7 +2065,7 @@
   },
   "SkyIslandOrePit": {
     "localized_name": "Garimpo de Soralite",
-    "description": null
+    "description": "Recurso para produzir Soralite. O trabalho de escavar Soralite é árduo e requer muita energia. Confie-o a um Pal com habilidade para o garimpo."
   },
   "SkyShotgun": {
     "localized_name": "Espingarda-Protótipo",
@@ -2073,7 +2073,7 @@
   },
   "SkyShotgunBullet": {
     "localized_name": "Cartucho de Espingarda-Protótipo",
-    "description": null
+    "description": "Projétil usado com Espingarda-Protótipo. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "SkySubmachineGun": {
     "localized_name": "Submetralhadora de Combate",
@@ -2081,11 +2081,11 @@
   },
   "SkySubmachineGunBullet": {
     "localized_name": "Munição de Submetralhadora de Combate",
-    "description": null
+    "description": "Projétil usado com Submetralhadora de Combate. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "SkyislandIngot": {
     "localized_name": "Lingote de Soralite",
-    "description": null
+    "description": "Material metálico da civilização antiga refinado a partir de um minério adormecido na Terra do Esplendor Celeste. Este raríssimo material processado serve de base para construções e equipamentos de alto padrão. Você pode refiná-lo na Forno da Civilização Antiga."
   },
   "Snowman": {
     "localized_name": "Boneco de Neve",
@@ -2101,11 +2101,11 @@
   },
   "Spa3": {
     "localized_name": "Águas Termais Japonesas",
-    "description": null
+    "description": "Instalações aonde os Pals cansados vão para relaxar. O ambiente terapêutico ao estilo japonês restaura ainda mais a SAN."
   },
   "Spear": {
     "localized_name": "Lança de Pedra",
-    "description": "Lança útil em combates à curta distância. De longo alcance, permite lutar mantendo-se um pouco afastado."
+    "description": "Lança útil em combates à curta distância. De longo alcance, permite lutar mantendo-se um pouco distante."
   },
   "Spear_2": {
     "localized_name": "Lança de Metal",
@@ -2205,7 +2205,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Exolita",
-    "description": "Liga metálica contendo Cromita, Lingote de Metal e Exoquartzo. Pode servir de material para construções ou equipamentos avançados."
+    "description": "Liga metálica contendo Cromita e Exoquartzo. Pode servir de material para construções ou equipamentos avançados. Você pode refiná-la na Forno Gigantesco."
   },
   "Stone_Gate": {
     "localized_name": "Portão de Pedra",
@@ -2221,7 +2221,7 @@
   },
   "Supplement": {
     "localized_name": "Energético",
-    "description": null
+    "description": "Energético que, quando bebido, mantém a barriga cheia por tempo limitado. Esta bebida encorpada contém diversos nutrientes condensados e protege contra a fome durante expedições."
   },
   "TableCircular": {
     "localized_name": "Kit de mesas arrumadas",
@@ -2233,7 +2233,7 @@
   },
   "Thermal_Core": {
     "localized_name": "Núcleo Hipertérmico",
-    "description": null
+    "description": "Núcleo reativo de alta temperatura que contém uma vasta energia térmica. É empregado na unidade motora de dispositivos de ponta. Você pode fazê-lo na Fábrica de Linha II."
   },
   "ToolBoxV1": {
     "localized_name": "Caixa de Ferramentas Grande",
@@ -2273,11 +2273,11 @@
   },
   "UnlockEquipmentSlot_Weapon_01": {
     "localized_name": "Suporte Adicional para Arma",
-    "description": null
+    "description": "Suporte que possibilita equipar uma arma adicional. Com isto em mãos, é adicionado 1 slot de arma extra. Carregar um só já é o suficiente."
   },
   "UnlockEquipmentSlot_Weapon_02": {
     "localized_name": "Suporte Adicional para Arma 2",
-    "description": null
+    "description": "Suporte que possibilita equipar uma arma adicional. Com isto em mãos, é adicionado ainda mais 1 slot de arma extra. Carregar um só já é o suficiente."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Ferramenta de Destravar Simples",
@@ -2313,7 +2313,7 @@
   },
   "WidePenetrateShotgunBullet": {
     "localized_name": "Cartucho de Dispersora de Raios",
-    "description": null
+    "description": "Projétil usado com Dispersora de Raios. Você pode fazê-lo na Bancada da Civilização Antiga."
   },
   "WingGlider": {
     "localized_name": "Mochila Alada",
@@ -2349,6 +2349,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "Espada-Gato",
-    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada parece ter sido trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo…"
+    "description": "[Colaboração com Terraria] Segundo as lendas, esta espada foi trazida de uma nação distante por um Croajiro. Ninguém faz ideia do motivo… Cada vez que é agitada, ela ataca os inimigos disparando um projétil felino ricocheteante."
   }
 }

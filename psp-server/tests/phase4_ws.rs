@@ -210,7 +210,8 @@ async fn select_gamepass_save_loads_and_saves_modded_copy() {
     let pool = psp_db::open(&server._temp_dir.path().join("psp-rs.db"))
         .await
         .unwrap();
-    psp_db::settings::update_save_dir(&pool, &container_dir.to_string_lossy())
+    let db = psp_db::SqlxSqliteDriver::new(pool.clone());
+    psp_db::settings::update_save_dir(&db, &container_dir.to_string_lossy())
         .await
         .unwrap();
     pool.close().await;

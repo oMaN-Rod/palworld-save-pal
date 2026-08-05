@@ -1,71 +1,24 @@
 pub mod api_convert;
-pub mod desktop_dialogs;
-pub mod dispatcher;
-pub mod emitter;
-pub mod envelope;
-pub mod handler_error;
-pub mod handlers;
-pub mod messages;
+#[cfg(feature = "desktop")]
+pub mod rfd_dialogs;
 pub mod router;
+pub mod server_ext;
+pub mod servers_handlers;
 pub mod services;
 pub mod static_files;
+pub mod system_native;
 pub mod ws;
 
-use std::collections::{HashMap, VecDeque};
+pub use psp_app::{
+    blueprint_registry, desktop_dialogs, dispatcher, emitter, envelope, handler_error, handlers,
+    messages, AppConfig, AppState, SessionStore, SharedSession,
+};
+
 use std::net::{IpAddr, SocketAddr};
 use std::path::PathBuf;
 use std::sync::Arc;
 
 use psp_core::gamedata::GameData;
-use psp_core::session::Session;
-use uuid::Uuid;
-
-/// A parsed session shared between a connection and the store. The per-session
-/// `tokio::Mutex` may be held across a handler's `.await`s; the store's outer
-/// `std::Mutex` is only ever held briefly.
-pub type SharedSession = Arc<tokio::sync::Mutex<Session>>;
-
-/// Id-keyed store of parsed sessions, so a session survives a WS reconnect.
-/// `order` bounds growth: the oldest entry is evicted past `MAX_STORED_SESSIONS`.
-#[derive(Default)]
-pub struct SessionStore {
-    by_id: HashMap<Uuid, SharedSession>,
-    order: VecDeque<Uuid>,
-}
-
-const MAX_STORED_SESSIONS: usize = 8;
-
-impl SessionStore {
-    /// Inserts `session` under a fresh id, evicting the oldest past the cap.
-    pub fn register(&mut self, session: SharedSession) -> Uuid {
-        let id = Uuid::new_v4();
-        self.by_id.insert(id, session);
-        self.order.push_back(id);
-        while self.order.len() > MAX_STORED_SESSIONS {
-            if let Some(evicted) = self.order.pop_front() {
-                self.by_id.remove(&evicted);
-            }
-        }
-        id
-    }
-
-    pub fn get(&self, id: &Uuid) -> Option<SharedSession> {
-        self.by_id.get(id).cloned()
-    }
-
-    pub fn remove(&mut self, id: &Uuid) {
-        self.by_id.remove(id);
-        self.order.retain(|existing| existing != id);
-    }
-
-    pub fn len(&self) -> usize {
-        self.by_id.len()
-    }
-
-    pub fn is_empty(&self) -> bool {
-        self.by_id.is_empty()
-    }
-}
 
 #[derive(Debug, Clone)]
 pub struct ServerConfig {
@@ -79,25 +32,6 @@ pub struct ServerConfig {
     pub db_path: PathBuf,
     /// Enables native file dialogs and the local folder/browser handlers.
     pub desktop_mode: bool,
-}
-
-pub struct AppState {
-    pub config: ServerConfig,
-    pub game_data: Arc<GameData>,
-    pub db: sqlx::SqlitePool,
-    pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
-    /// Count of currently-open `/ws/{client_id}` connections, maintained by a
-    /// `Drop` guard in `ws::connection_loop` so it also decrements on panic or
-    /// early return. Makes reader-loop/writer-task teardown observable in tests:
-    /// axum runs the upgraded socket on its own spawned task, decoupled from the
-    /// HTTP connection future that `ServerHandle::shutdown` waits on.
-    pub live_connections: tokio::sync::watch::Sender<usize>,
-    /// Docker + Palworld REST clients used by the server-management handlers.
-    /// Real `BollardDocker` in production; `mock::MockDocker` in tests.
-    pub server_services: Arc<crate::services::ServerServices>,
-    /// Parsed sessions keyed by id, so a session survives a WS reconnect. A
-    /// connection registers its session here on load; reattach/eject read it.
-    pub sessions: std::sync::Mutex<SessionStore>,
 }
 
 pub struct ServerHandle {
@@ -131,7 +65,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
     // build always uses the inert NullDialogProvider.
     #[cfg(feature = "desktop")]
     let dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider> = if config.desktop_mode {
-        Arc::new(crate::desktop_dialogs::RfdDialogProvider)
+        Arc::new(crate::rfd_dialogs::RfdDialogProvider)
     } else {
         Arc::new(crate::desktop_dialogs::NullDialogProvider)
     };
@@ -171,12 +105,16 @@ pub async fn start_server_with(
     }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let state = Arc::new(AppState {
-        config: config.clone(),
+        config: AppConfig {
+            desktop_mode: config.desktop_mode,
+        },
         game_data,
-        db,
+        driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
         dialogs,
         live_connections,
-        server_services: Arc::new(crate::services::ServerServices::real()),
+        ext: Arc::new(crate::server_ext::ServerExtRouter {
+            services: Arc::new(crate::services::ServerServices::real()),
+        }),
         sessions: std::sync::Mutex::new(SessionStore::default()),
     });
 
@@ -185,7 +123,7 @@ pub async fn start_server_with(
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
-    let application = router::build_router(Arc::clone(&state));
+    let application = router::build_router(Arc::clone(&state), &config.ui_dir);
     let serve_task = tokio::spawn(async move {
         axum::serve(listener, application)
             .with_graceful_shutdown(async {
@@ -201,126 +139,4 @@ pub async fn start_server_with(
         shutdown_sender,
         serve_task,
     })
-}
-
-#[cfg(test)]
-mod session_store_tests {
-    use super::{SessionStore, SharedSession, MAX_STORED_SESSIONS};
-    use psp_core::session::Session;
-    use std::sync::Arc;
-
-    fn empty_session() -> SharedSession {
-        Arc::new(tokio::sync::Mutex::new(Session::new()))
-    }
-
-    #[test]
-    fn register_get_remove_round_trips() {
-        let mut store = SessionStore::default();
-        let session = empty_session();
-        let id = store.register(Arc::clone(&session));
-
-        let found = store.get(&id).expect("registered session is findable");
-        assert!(Arc::ptr_eq(&found, &session));
-        assert_eq!(store.len(), 1);
-
-        store.remove(&id);
-        assert!(store.get(&id).is_none());
-        assert!(store.is_empty());
-    }
-
-    #[test]
-    fn evicts_oldest_past_the_cap() {
-        let mut store = SessionStore::default();
-        let first_id = store.register(empty_session());
-        for _ in 0..MAX_STORED_SESSIONS {
-            store.register(empty_session());
-        }
-        assert_eq!(store.len(), MAX_STORED_SESSIONS);
-        assert!(store.get(&first_id).is_none());
-    }
-}
-
-#[cfg(test)]
-pub(crate) mod test_support {
-    use std::sync::Arc;
-
-    use axum::extract::ws::Message;
-    use tokio::sync::mpsc::UnboundedReceiver;
-
-    use psp_core::gamedata::GameData;
-    use psp_core::session::Session;
-
-    use crate::emitter::Emitter;
-    use crate::{AppState, ServerConfig};
-
-    /// Everything a handler unit test needs: an AppState over a temp DB and a
-    /// synthetic game-data dir, plus an Emitter whose frames land in `frames`.
-    pub struct TestContext {
-        pub app: Arc<AppState>,
-        pub session: Session,
-        pub emitter: Emitter,
-        pub frames: UnboundedReceiver<Message>,
-        /// Held for RAII only: deletes the temp tree on drop.
-        pub _temp_dir: tempfile::TempDir,
-    }
-
-    impl TestContext {
-        /// `populate_data_dir` writes JSON files into the future data/json dir
-        /// before GameData loads it.
-        pub async fn new(populate_data_dir: impl FnOnce(&std::path::Path)) -> Self {
-            let temp_dir = tempfile::tempdir().unwrap();
-            let json_dir = temp_dir.path().join("data/json");
-            std::fs::create_dir_all(&json_dir).unwrap();
-            populate_data_dir(&json_dir);
-
-            let config = ServerConfig {
-                host: "127.0.0.1".parse().unwrap(),
-                port: 0,
-                ui_dir: temp_dir.path().join("ui"),
-                data_dir: temp_dir.path().join("data"),
-                db_path: temp_dir.path().join("test.db"),
-                desktop_mode: false,
-            };
-            let db = psp_db::open(&config.db_path).await.unwrap();
-            let game_data = Arc::new(GameData::load(&json_dir).unwrap());
-            let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
-            let server_services = Arc::new(crate::services::ServerServices::with_docker(Arc::new(
-                crate::services::docker::mock::MockDocker::default(),
-            )));
-            let app = Arc::new(AppState {
-                config,
-                game_data,
-                db,
-                dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
-                live_connections,
-                server_services,
-                sessions: std::sync::Mutex::new(crate::SessionStore::default()),
-            });
-            let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
-            Self {
-                app,
-                session: Session::new(),
-                emitter: Emitter::new(sender),
-                frames,
-                _temp_dir: temp_dir,
-            }
-        }
-
-        pub fn next_frame_json(&mut self) -> serde_json::Value {
-            next_frame_json_from(&mut self.frames)
-        }
-
-        pub fn assert_no_more_frames(&mut self) {
-            assert!(self.frames.try_recv().is_err(), "unexpected extra frame");
-        }
-    }
-
-    /// Also usable by tests that drive a raw `UnboundedReceiver` without a full
-    /// `TestContext`.
-    pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<Message>) -> serde_json::Value {
-        match receiver.try_recv().expect("expected an emitted frame") {
-            Message::Text(text) => serde_json::from_str(text.as_str()).unwrap(),
-            other => panic!("expected text frame, got {other:?}"),
-        }
-    }
 }

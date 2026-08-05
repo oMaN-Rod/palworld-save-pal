@@ -625,6 +625,7 @@ body::after {
 	background: color-mix(in srgb, var(--color-surface-900) 95%, transparent);
 	backdrop-filter: blur(12px);
 }
+
 .nav-rail .active-nav-tile {
 	background: color-mix(in srgb, var(--color-primary-500) 15%, transparent) !important;
 	color: var(--color-primary-300) !important;
