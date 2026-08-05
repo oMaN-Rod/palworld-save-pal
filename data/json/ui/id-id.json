@@ -946,7 +946,7 @@
   "unlocks": "Membuka kunci",
   "update_available": "Pembaruan Tersedia!",
   "update_now": "Perbarui Sekarang",
-  "updated_entity_named": "{entity} {name} } \" diperbarui\"",
+  "updated_entity_named": "{entity} \"{name}\" diperbarui",
   "updated_tags_for_pals": "Tag yang diperbarui untuk {count} {pals}",
   "upload": "Mengunggah",
   "upload_a_file": "Unggah file",

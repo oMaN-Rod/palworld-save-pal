@@ -268,7 +268,7 @@
   "export_to": "Exportar a",
   "export_to_target": "Exportar a {target}",
   "exported_pal_to_target": "Exportado {pal} a {target}",
-  "exported_pal_to_target_slot": "Exportado {pal} a la ranura {slot {target} {slot}",
+  "exported_pal_to_target_slot": "Exportado {pal} a la ranura {target} {slot}",
   "exporting_count_selected_pals": "Exportando {count} {pals}",
   "failed_create_pal": "No se pudo crear un nuevo amigo. Inténtalo de nuevo.",
   "failed_export_pals": "Error al exportar {count} {pals}",
