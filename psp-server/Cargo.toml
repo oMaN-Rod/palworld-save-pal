@@ -2,6 +2,7 @@
 name = "psp-server"
 version.workspace = true
 edition.workspace = true
+license.workspace = true
 
 [features]
 # Desktop-only native file dialogs (rfd). Off by default so the server/Docker
@@ -10,8 +11,9 @@ edition.workspace = true
 desktop = ["dep:rfd"]
 
 [dependencies]
-psp-core = { workspace = true }
-psp-db = { workspace = true }
+psp-app = { workspace = true }
+psp-core = { workspace = true, features = ["oodle"] }
+psp-db = { workspace = true, features = ["sqlx-driver"] }
 uesave = { workspace = true }
 axum = { workspace = true }
 tokio = { workspace = true }
@@ -39,6 +41,7 @@ futures-util = { workspace = true }
 bollard = { workspace = true }
 
 [dev-dependencies]
+psp-app = { workspace = true, features = ["test-support"] }
 tokio-tungstenite = { workspace = true }
 tempfile = { workspace = true }
 pretty_assertions = { workspace = true }

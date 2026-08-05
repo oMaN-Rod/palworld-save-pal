@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "Увеличение атаки ур.1",
-    "description": null
+    "description": "Атака +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "Малое увеличение атаки ур.1",
-    "description": null
+    "description": "Атака +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Увеличение атаки Пала ур.1",
-    "description": null
+    "description": "Атака +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "Увеличение атаки ур.2",
-    "description": null
+    "description": "Атака +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "Малое увеличение атаки ур.2",
-    "description": null
+    "description": "Атака +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Увеличение атаки Пала ур.2",
-    "description": null
+    "description": "Атака +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "Увеличение атаки ур.3",
-    "description": null
+    "description": "Атака +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "Малое увеличение атаки ур.3",
-    "description": null
+    "description": "Атака +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Увеличение атаки Пала ур.3",
-    "description": null
+    "description": "Атака +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "Увеличение атаки ур.4",
-    "description": null
+    "description": "Атака +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "Малое увеличение атаки ур.4",
-    "description": null
+    "description": "Атака +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Увеличение атаки Пала ур.4",
-    "description": null
+    "description": "Атака +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "Тренер исцеления",
-    "description": null
+    "description": "Восстановление HP игрока на +5.0%"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "Увеличение времени неуязвимости при уклонении",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Среднее увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 2.0%"
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Малое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 1.0%"
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Среднее увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 2.0%"
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Малое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 1.0%"
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "Среднее увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 2.0%"
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "Большое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 3.0%"
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "Среднее увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 2.0%"
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Малое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 1.0%"
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Среднее увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 2.0%"
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "Среднее увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 2.0%"
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "Среднее увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 2.0%"
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Среднее увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 2.0%"
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "Среднее увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 2.0%"
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Среднее увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 2.0%"
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Среднее увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 2.0%"
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "Малое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 1.0%"
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Большое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 3.0%"
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Большое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 3.0%"
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Большое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 3.0%"
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Большое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 3.0%"
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "Среднее увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 2.0%"
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Среднее увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 2.0%"
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Большое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 3.0%"
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Большое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 3.0%"
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Малое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 1.0%"
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "Большое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 3.0%"
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "Среднее увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 2.0%"
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "Среднее увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 2.0%"
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Малое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 1.0%"
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Большое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 3.0%"
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "Среднее увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 2.0%"
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "Среднее увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 2.0%"
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Среднее увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 2.0%"
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "Увеличение травяного урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение нейтрального урона на 3.0%"
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Малое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 1.0%"
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Малое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 1.0%"
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Большое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 3.0%"
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "Малое увеличение грозового урона",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Среднее увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 2.0%"
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "Среднее увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 2.0%"
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Малое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 1.0%"
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Большое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 3.0%"
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Среднее увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 2.0%"
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "Среднее увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 2.0%"
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Малое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 1.0%"
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Среднее увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 2.0%"
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Среднее увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 2.0%"
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "CaptureLevel_Up_1": {
     "localized_name": "Увеличение силы захвата +1",
-    "description": null
+    "description": "Маст-во поимки +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "Увеличение силы захвата +2",
-    "description": null
+    "description": "Маст-во поимки +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "Увеличение силы захвата +3",
-    "description": null
+    "description": "Маст-во поимки +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "Увеличение силы захвата +4",
-    "description": null
+    "description": "Маст-во поимки +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "Увеличение силы захвата +5",
-    "description": null
+    "description": "Маст-во поимки +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "Увеличение силы захвата +6",
-    "description": null
+    "description": "Маст-во поимки +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "Сбор ягод",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "Неуклюжий",
-    "description": null
+    "description": "Скорость работы -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "Халтурщик",
-    "description": null
+    "description": "Скорость работы -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "Старательный",
-    "description": null
+    "description": "Скорость работы +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "Мастеровитый",
-    "description": null
+    "description": "Скорость работы +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "Виртуоз",
-    "description": null
+    "description": "Скорость работы +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Увеличение защиты Пала ур.1",
-    "description": null
+    "description": "Защита +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Увеличение защиты Пала ур.2",
-    "description": null
+    "description": "Защита +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Увеличение защиты Пала ур.3",
-    "description": null
+    "description": "Защита +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Увеличение защиты Пала ур.4",
-    "description": null
+    "description": "Защита +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "Мягкотелый",
-    "description": null
+    "description": "Защита -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "Хрупкие кости",
-    "description": null
+    "description": "Защита -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "Толстокожий",
-    "description": null
+    "description": "Защита +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "Крепкое тело",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Иммунитет к урону от взрывов",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Играющий с водой",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Владыка морей",
-    "description": null
+    "description": "Увеличение водного урона на 30.0%"
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "Малое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 1.0%"
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение тёмного урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение тёмного урона на 6.0%"
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Покров ночи",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Среднее увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 2.0%"
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение тёмного урона Палов ур.2",
-    "description": null
+    "description": "Увеличение тёмного урона на 12.0%"
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "Король тьмы",
-    "description": null
+    "description": "Увеличение тёмного урона на 30.0%"
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "Большое увеличение тёмного урона",
-    "description": null
+    "description": "Увеличение тёмного урона на 3.0%"
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение тёмного урона Палов ур.3",
-    "description": null
+    "description": "Увеличение тёмного урона на 18.0%"
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение тёмного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение тёмного урона на 20.0%"
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Малое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 1.0%"
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение драконьего урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение драконьего урона на 6.0%"
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Драконья кровь",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Среднее увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 2.0%"
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение драконьего урона Палов ур.2",
-    "description": null
+    "description": "Увеличение драконьего урона на 12.0%"
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Божественный дракон",
-    "description": null
+    "description": "Увеличение драконьего урона на 30.0%"
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "Большое увеличение драконьего урона",
-    "description": null
+    "description": "Увеличение драконьего урона на 3.0%"
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение драконьего урона Палов ур.3",
-    "description": null
+    "description": "Увеличение драконьего урона на 18.0%"
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение драконьего урона Палов ур.4",
-    "description": null
+    "description": "Увеличение драконьего урона на 20.0%"
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Малое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 1.0%"
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение земного урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение земляного урона на 6.0%"
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Сила земли",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Среднее увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 2.0%"
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение земного урона Палов ур.2",
-    "description": null
+    "description": "Увеличение земляного урона на 12.0%"
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Император земли",
-    "description": null
+    "description": "Увеличение земляного урона на 30.0%"
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "Большое увеличение земного урона",
-    "description": null
+    "description": "Увеличение земляного урона на 3.0%"
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение земного урона Палов ур.3",
-    "description": null
+    "description": "Увеличение земляного урона на 18.0%"
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение земного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение земляного урона на 20.0%"
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Малое увеличение урона молнией",
-    "description": null
+    "description": "Увеличение урона молнии на 1.0%"
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение грозового урона Палов ур.1",
-    "description": null
+    "description": "Увеличение урона молнии на 6.0%"
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Среднее увеличение урона молнией",
-    "description": null
+    "description": "Увеличение урона молнии на 2.0%"
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение грозового урона Палов ур.2",
-    "description": null
+    "description": "Увеличение урона молнии на 12.0%"
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Большое увеличение урона молнией",
-    "description": null
+    "description": "Увеличение урона молнии на 3.0%"
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение грозового урона Палов ур.3",
-    "description": null
+    "description": "Увеличение урона молнии на 18.0%"
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение грозового урона Палов ур.4",
-    "description": null
+    "description": "Увеличение урона молнии на 20.0%"
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Малое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 1.0%"
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение огненного урона Палов ур.1",
-    "description": null
+    "description": "Увеличение огненного урона на 6.0%"
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Играющий с огнём",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Среднее увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 2.0%"
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение огненного урона Палов ур.2",
-    "description": null
+    "description": "Увеличение огненного урона на 12.0%"
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Император огня",
-    "description": null
+    "description": "Увеличение огненного урона на 30.0%"
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "Большое увеличение огненного урона",
-    "description": null
+    "description": "Увеличение огненного урона на 3.0%"
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение огненного урона Палов ур.3",
-    "description": null
+    "description": "Увеличение огненного урона на 18.0%"
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение огненного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение огненного урона на 20.0%"
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Малое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 1.0%"
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение ледяного урона Палов ур.1",
-    "description": null
+    "description": "Увеличение ледяного урона на 6.0%"
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Бессердечный",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Среднее увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 2.0%"
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение ледяного урона Палов ур.2",
-    "description": null
+    "description": "Увеличение ледяного урона на 12.0%"
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Император льда",
-    "description": null
+    "description": "Увеличение ледяного урона на 30.0%"
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "Большое увеличение ледяного урона",
-    "description": null
+    "description": "Увеличение ледяного урона на 3.0%"
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение ледяного урона Палов ур.3",
-    "description": null
+    "description": "Увеличение ледяного урона на 18.0%"
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение ледяного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение ледяного урона на 20.0%"
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Малое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 1.0%"
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение травяного урона Палов ур.1",
-    "description": null
+    "description": "Увеличение травяного урона на 6.0%"
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Аромат трав",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Среднее увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 2.0%"
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение травяного урона Палов ур.2",
-    "description": null
+    "description": "Увеличение травяного урона на 12.0%"
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Король духов",
-    "description": null
+    "description": "Увеличение травяного урона на 30.0%"
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "Большое увеличение травяного урона",
-    "description": null
+    "description": "Увеличение травяного урона на 3.0%"
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение травяного урона Палов ур.3",
-    "description": null
+    "description": "Увеличение травяного урона на 18.0%"
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение травяного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение травяного урона на 20.0%"
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Малое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 1.0%"
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение нейтрального урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение нейтрального урона на 6.0%"
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Состояние пустоты",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Среднее увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 2.0%"
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение нейтрального урона Палов ур.2",
-    "description": null
+    "description": "Увеличение нейтрального урона на 12.0%"
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Небесный защитник",
-    "description": null
+    "description": "Увеличение нейтрального урона на 30.0%"
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Большое увеличение нейтрального урона",
-    "description": null
+    "description": "Увеличение нейтрального урона на 3.0%"
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение нейтрального урона Палов ур.3",
-    "description": null
+    "description": "Увеличение нейтрального урона на 18.0%"
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение нейтрального урона Палов ур.4",
-    "description": null
+    "description": "Увеличение нейтрального урона на 20.0%"
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Конденсатор",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Император молнии",
-    "description": null
+    "description": "Увеличение урона молнии на 30.0%"
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "Малое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 1.0%"
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение водного урона Палов ур. 1",
-    "description": null
+    "description": "Увеличение водного урона на 6.0%"
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Среднее увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 2.0%"
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение водного урона Палов ур. 2",
-    "description": null
+    "description": "Увеличение водного урона на 12.0%"
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Большое увеличение водного урона",
-    "description": null
+    "description": "Увеличение водного урона на 3.0%"
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение водного урона Палов ур. 3",
-    "description": null
+    "description": "Увеличение водного урона на 18.0%"
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "Увеличение водного урона Палов ур.4",
-    "description": null
+    "description": "Увеличение водного урона на 20.0%"
   },
   "ElementResist_Aqua_1": {
     "localized_name": "Сокращение водного урона ур.1",
-    "description": null
+    "description": "Снижение водного урона 15.0%"
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Водостойкость",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Сокращение водного урона ур.2",
-    "description": null
+    "description": "Снижение водного урона 25.0%"
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Сокращение водного урона ур.3",
-    "description": null
+    "description": "Снижение водного урона 30.0%"
   },
   "ElementResist_Aqua_4": {
     "localized_name": "Сокращение водного урона ур.4",
-    "description": null
+    "description": "Снижение водного урона 35.0%"
   },
   "ElementResist_Dark_1": {
     "localized_name": "Сокращение тёмного урона ур.1",
-    "description": null
+    "description": "Снижение тёмного урона 15.0%"
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Жизнерадостный",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "Сокращение тёмного урона ур.2",
-    "description": null
+    "description": "Снижение тёмного урона 25.0%"
   },
   "ElementResist_Dark_3": {
     "localized_name": "Сокращение тёмного урона ур.3",
-    "description": null
+    "description": "Снижение тёмного урона 30.0%"
   },
   "ElementResist_Dark_4": {
     "localized_name": "Сокращение тёмного урона ур.4",
-    "description": null
+    "description": "Снижение тёмного урона 35.0%"
   },
   "ElementResist_Dragon_1": {
     "localized_name": "Сокращение драконьего урона ур.1",
-    "description": null
+    "description": "Снижение драконического урона 15.0%"
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Убийца драконов",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Сокращение драконьего урона ур.2",
-    "description": null
+    "description": "Снижение драконического урона 25.0%"
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Сокращение драконьего урона ур.3",
-    "description": null
+    "description": "Снижение драконического урона 30.0%"
   },
   "ElementResist_Dragon_4": {
     "localized_name": "Сокращение драконьего урона ур.4",
-    "description": null
+    "description": "Снижение драконического урона 35.0%"
   },
   "ElementResist_Earth_1": {
     "localized_name": "Сокращение земного урона ур.1",
-    "description": null
+    "description": "Снижение земного урона 15.0%"
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Сейсмостойкость",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "Сокращение земного урона ур.2",
-    "description": null
+    "description": "Снижение земного урона 25.0%"
   },
   "ElementResist_Earth_3": {
     "localized_name": "Сокращение земного урона ур.3",
-    "description": null
+    "description": "Снижение земного урона 30.0%"
   },
   "ElementResist_Earth_4": {
     "localized_name": "Сокращение земного урона ур.4",
-    "description": null
+    "description": "Снижение земного урона 35.0%"
   },
   "ElementResist_Fire_1": {
     "localized_name": "Сокращение огненного урона ур.1",
-    "description": null
+    "description": "Снижение огненного урона 15.0%"
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Любитель загара",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "Сокращение огненного урона ур.2",
-    "description": null
+    "description": "Снижение огненного урона 25.0%"
   },
   "ElementResist_Fire_3": {
     "localized_name": "Сокращение огненного урона ур.3",
-    "description": null
+    "description": "Снижение огненного урона 30.0%"
   },
   "ElementResist_Fire_4": {
     "localized_name": "Сокращение огненного урона ур.4",
-    "description": null
+    "description": "Снижение огненного урона 35.0%"
   },
   "ElementResist_Ice_1": {
     "localized_name": "Сокращение ледяного урона ур.1",
-    "description": null
+    "description": "Снижение ледяного урона 15.0%"
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Горячее тело",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "Сокращение ледяного урона ур.2",
-    "description": null
+    "description": "Снижение ледяного урона 25.0%"
   },
   "ElementResist_Ice_3": {
     "localized_name": "Сокращение ледяного урона ур.3",
-    "description": null
+    "description": "Снижение ледяного урона 30.0%"
   },
   "ElementResist_Ice_4": {
     "localized_name": "Сокращение ледяного урона ур.4",
-    "description": null
+    "description": "Снижение ледяного урона 35.0%"
   },
   "ElementResist_Leaf_1": {
     "localized_name": "Сокращение травяного урона ур.1",
-    "description": null
+    "description": "Снижение травяного урона 15.0%"
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Ботанический барьер",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Сокращение травяного урона ур.2",
-    "description": null
+    "description": "Снижение травяного урона 25.0%"
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Сокращение травяного урона ур.3",
-    "description": null
+    "description": "Снижение травяного урона 30.0%"
   },
   "ElementResist_Leaf_4": {
     "localized_name": "Сокращение травяного урона ур.4",
-    "description": null
+    "description": "Снижение травяного урона 35.0%"
   },
   "ElementResist_Normal_1": {
     "localized_name": "Сокращение нейтрального урона ур.1",
-    "description": null
+    "description": "Снижение нейтрального урона на 15.0%"
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Аномальный",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "Сокращение нейтрального урона ур.2",
-    "description": null
+    "description": "Снижение нейтрального урона на 25.0%"
   },
   "ElementResist_Normal_3": {
     "localized_name": "Сокращение нейтрального урона ур.3",
-    "description": null
+    "description": "Снижение нейтрального урона на 30.0%"
   },
   "ElementResist_Normal_4": {
     "localized_name": "Сокращение нейтрального урона ур.4",
-    "description": null
+    "description": "Снижение нейтрального урона на 35.0%"
   },
   "ElementResist_Thunder_1": {
     "localized_name": "Сокращение урона молнии ур.1",
-    "description": null
+    "description": "Снижение урона молнией 15.0%"
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Диэлектрик",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Сокращение урона молнии ур.2",
-    "description": null
+    "description": "Снижение урона молнией 25.0%"
   },
   "ElementResist_Thunder_3": {
     "localized_name": "Сокращение урона молнии ур.3",
-    "description": null
+    "description": "Снижение урона молнией 30.0%"
   },
   "ElementResist_Thunder_4": {
     "localized_name": "Сокращение урона молнии ур.4",
-    "description": null
+    "description": "Снижение урона молнией 35.0%"
   },
   "EternalFlame": {
     "localized_name": "Вечное пламя",
-    "description": null
+    "description": "Увеличение огненного урона на 30.0% Увеличение урона молнии на 30.0%"
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "Ускорение роста доверия у Палов в команде",
-    "description": null
+    "description": "Уровень доверия +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "Уровень сытости снижается медленнее <NumBlue_13>+10.0%</>"
   },
   "GYM_NAME_Desert": {
     "localized_name": "Офицер Общества Вигилантов острова Палпагос",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "Учредитель Организации по Защите Палов",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Офицер отряда Браконьеров Рейн",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Лидер общества Лунных цветов",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "Начальник отряда Генетических Исследований",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "Вождь Тэнраку",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "Духовный лидер Братства Вечного Пламени",
-    "description": null
+    "description": "Атака +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "Увеличение HP ур.1",
-    "description": null
+    "description": "Макс. HP +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "Увеличение HP ур.2",
-    "description": null
+    "description": "Макс. HP +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "Увеличение HP ур.3",
-    "description": null
+    "description": "Макс. HP +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "Увеличение HP ур.4",
-    "description": null
+    "description": "Макс. HP +25.0%"
   },
   "Invader": {
     "localized_name": "Захватчик",
-    "description": null
+    "description": "Увеличение тёмного урона на 30.0% Увеличение драконьего урона на 30.0%"
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "Иммунитет к урону от ядовитого газа",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "Дополнительный прыжок +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Увеличение макс. переносимого веса ур.1",
-    "description": null
+    "description": "Переносимый вес +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "Увеличение макс. переносимого веса ур.2",
-    "description": null
+    "description": "Переносимый вес +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "Увеличение макс. переносимого веса ур.3",
-    "description": null
+    "description": "Переносимый вес +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "Увеличение макс. переносимого веса ур.1",
-    "description": null
+    "description": "Переносимый вес +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "Увеличение макс. переносимого веса ур.2",
-    "description": null
+    "description": "Переносимый вес +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "Увеличение макс. переносимого веса ур.3",
-    "description": null
+    "description": "Переносимый вес +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "Увеличение макс. переносимого веса ур.4",
-    "description": null
+    "description": "Переносимый вес +300.0%"
   },
   "MiniNushi": {
     "localized_name": "Крупная рыбка",
-    "description": null
+    "description": "Увеличение водного урона на 5.0% Увеличение ледяного урона на 5.0% Защита +5.0%"
   },
   "MoveSpeed_up_1": {
     "localized_name": "Проворный",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Особая конституция",
-    "description": "Регенерация HP Палов и игрока +50.0% Защита +{EffectValue4}% <Status_Up>Иммунитет</> к урону от яда <Status_Up>Иммунитет</> к урону от горения"
+    "description": "Регенерация HP Палов и игрока +50.0% Защита +25.0% <Status_Up>Иммунитет</> к урону от яда <Status_Up>Иммунитет</> к урону от горения"
   },
   "NightOwl": {
     "localized_name": "Полуночник",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "Мистер мускул",
-    "description": null
+    "description": "Атака +30.0% Скорость работы -50.0%"
   },
   "Nushi": {
     "localized_name": "Царь-рыба",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "Кровь - это топливо",
-    "description": null
+    "description": "Наносит урон и восстанавливает часть HP полученного урона. Активен даже в ночное время."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Трусливый",
-    "description": null
+    "description": "Атака -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "Бегущий от проблем",
-    "description": null
+    "description": "Атака -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "Отважный",
-    "description": null
+    "description": "Атака +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "Свирепый",
-    "description": null
+    "description": "Атака +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "Демон-бог",
-    "description": null
+    "description": "Атака +30.0% Защита +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "Корпоративный раб",
-    "description": null
+    "description": "Скорость работы +30.0% Атака -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Малоежка",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "ru_Text",
-    "description": null
+    "description": "Скорость работы -10.0% Защита -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "Тщеславный",
-    "description": null
+    "description": "Скорость работы +10.0% Защита -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "Мазохист",
-    "description": null
+    "description": "Защита +15.0% Атака -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "Агрессивный",
-    "description": null
+    "description": "Атака +10.0% Защита -10.0%"
   },
   "PAL_rude": {
     "localized_name": "Грубый",
-    "description": null
+    "description": "Атака +15.0% Скорость работы -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "Садист",
-    "description": null
+    "description": "Атака +15.0% Защита -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "Увеличение опыта Пала ур.1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "Увеличение опыта Пала ур.2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "Увеличение опыта Пала ур.3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "Снижение усталости",
-    "description": null
+    "description": "Снижение расхода выносливости игрока на +<NumBlue_13>5.0</>%"
   },
   "Rare": {
     "localized_name": "Удачливый",
-    "description": null
+    "description": "Атака +15.0% Защита +15.0% Скорость работы +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "Мастер перезарядки",
-    "description": null
+    "description": "Увеличение скорости перезарядки игрока на +4.0%"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "Лёгкое тело",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "Спаситель",
-    "description": null
+    "description": "Увеличение нейтрального урона на 30.0% Увеличение травяного урона на 30.0%"
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "Щедрая доля",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "Уверенно плавает",
-    "description": null
+    "description": "Увеличение скорости передвижения по воде на 40.0%"
   },
   "SwimSpeed_up_3": {
     "localized_name": "Повелитель волн",
-    "description": null
+    "description": "Увеличение скорости передвижения по воде на 50.0%"
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Морозостойкость ур.1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "Морозостойкость ур.2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "Морозостойкость ур.3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "Жаростойкость ур.1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "Жаростойкость ур.1 / Морозостойкость ур.1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "Жаростойкость ур.2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "Жаростойкость ур.2 / Морозостойкость ур.2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "Жаростойкость ур.3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "Жаростойкость ур.3 / Морозостойкость ур.3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Филантроп",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "Ведьма",
-    "description": null
+    "description": "Увеличение тёмного урона на 30.0% Увеличение ледяного урона на 30.0%"
   },
   "WoodDrop_Boost_1": {
     "localized_name": "Объёмы лесозаготовки ур.1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Ускоренная работа ур.1",
-    "description": null
+    "description": "Скорость работы +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "Ускоренная работа ур.2",
-    "description": null
+    "description": "Скорость работы +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Ускоренная работа ур.3",
-    "description": null
+    "description": "Скорость работы +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "Ускоренная работа ур.4",
-    "description": null
+    "description": "Скорость работы +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Ребёнок фермы",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Священная сила: магия",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "Священная сила: ближний бой",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "Священная сила: дальний бой",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "Священная сила: призыв",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "Священная защита",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "Увеличение защиты ур.1",
-    "description": null
+    "description": "Защита +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "Увеличение защиты ур.2",
-    "description": null
+    "description": "Защита +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "Увеличение защиты ур.3",
-    "description": null
+    "description": "Защита +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "Увеличение защиты ур.4",
-    "description": null
+    "description": "Защита +25.0%"
   }
 }

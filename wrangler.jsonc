@@ -1,0 +1,8 @@
+{
+	"name": "psp",
+	"compatibility_date": "2026-08-02",
+	"assets": {
+		"directory": "./ui_build",
+		"not_found_handling": "single-page-application"
+	}
+}

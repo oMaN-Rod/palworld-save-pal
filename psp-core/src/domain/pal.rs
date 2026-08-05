@@ -5,7 +5,7 @@
 
 use std::collections::HashSet;
 
-use uesave::{MapEntry, Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{MapEntry, Properties, Property, PropertyKey, StructValue, ValueVec};
 
 use crate::dto::ordered_map::OrderedMap;
 use crate::dto::pal::{format_character_key, PalDto, PalGender, WORK_SUITABILITIES};
@@ -71,6 +71,13 @@ pub fn read_save_parameter_dto(
         .unwrap_or(false);
     // A lucky pal is never also reported as a boss.
     let is_boss = character_id.to_uppercase().starts_with("BOSS_") && !is_lucky;
+
+    let is_awakened = param(save_parameter, "bIsAwakening")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
+    let is_imported = param(save_parameter, "bImportedCharacter")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
 
     // Gender is absent for pals that never had one assigned; Female is the
     // contract's default.
@@ -174,6 +181,8 @@ pub fn read_save_parameter_dto(
         is_lucky: Some(is_lucky),
         is_boss: Some(is_boss),
         is_predator: character_id.starts_with("PREDATOR_"),
+        is_awakened: Some(is_awakened),
+        is_imported: Some(is_imported),
         gender,
         rank_hp: param(save_parameter, "Rank_HP")
             .and_then(props::as_byte_number)
@@ -242,18 +251,23 @@ pub fn read_save_parameter_dto(
             .unwrap_or(0) as i64,
         character_id,
     };
-    dto.max_hp = max_hp_for(&dto, is_boss || is_lucky, game_data);
+    dto.max_hp = max_hp_for(&dto, is_boss || is_lucky, is_awakened, game_data);
     dto
 }
+
+/// `PalGameSetting.AwakeningStatusMultiply`.
+pub const AWAKENING_STATUS_MULTIPLY: f64 = 1.1;
 
 /// Computed max HP, falling back to `dto.hp` for a pal with no `scaling.hp`
 /// entry in `pals.json`.
 ///
-/// `boosted` (boss or lucky, worth a 1.2x multiplier) is a parameter rather
-/// than read off `dto`: on the write path `dto.is_boss` may be stale and
-/// `dto.is_lucky` may be `None` ("leave `IsRarePal` alone", not "false"), so
-/// only the caller can resolve it against the save's current state.
-pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
+/// `boosted` (boss or lucky, worth a 1.2x multiplier) and `awakened` (worth
+/// `AWAKENING_STATUS_MULTIPLY`) are parameters rather than read off `dto`:
+/// on the write path `dto.is_boss` may be stale and `dto.is_lucky`/
+/// `dto.is_awakened` may be `None` ("leave `IsRarePal`/`bIsAwakening` alone",
+/// not "false"), so only the caller can resolve them against the save's
+/// current state.
+pub fn max_hp_for(dto: &PalDto, boosted: bool, awakened: bool, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
     let pal_key = format_character_key(&dto.character_id, keys);
     let Some(pal_data) = pal_data_for(&pal_key, game_data) else {
@@ -270,7 +284,13 @@ pub fn max_hp_for(dto: &PalDto, boosted: bool, game_data: &GameData) -> i64 {
         + 5.0 * dto.level as f64
         + hp_scaling * 0.5 * dto.level as f64 * (1.0 + hp_iv) * alpha_scaling)
         .floor();
-    ((base * (1.0 + condenser_bonus) * (1.0 + hp_soul_bonus)).floor() as i64) * 1000
+    let awakening_multiplier = if awakened {
+        AWAKENING_STATUS_MULTIPLY
+    } else {
+        1.0
+    };
+    ((base * (1.0 + condenser_bonus) * (1.0 + hp_soul_bonus) * awakening_multiplier).floor() as i64)
+        * 1000
 }
 
 /// Reads a `CharacterSaveParameterMap` entry. `None` when the entry isn't
@@ -520,6 +540,21 @@ pub fn apply_pal_dto(
         }
     }
 
+    if let Some(is_awakened) = dto.is_awakened {
+        set_or_remove(
+            save_parameter,
+            "bIsAwakening",
+            is_awakened.then(|| props::bool_property(true)),
+        );
+    }
+    if let Some(is_imported) = dto.is_imported {
+        set_or_remove(
+            save_parameter,
+            "bImportedCharacter",
+            is_imported.then(|| props::bool_property(true)),
+        );
+    }
+
     save_parameter.insert("Gender", props::enum_property(&dto.gender.prefixed()));
 
     // Soul-upgrade ranks are absent from the save at 0, not written as 0.
@@ -661,8 +696,11 @@ pub fn apply_pal_dto(
     let current_is_lucky = param(save_parameter, "IsRarePal")
         .and_then(props::as_bool)
         .unwrap_or(false);
+    let current_is_awakened = param(save_parameter, "bIsAwakening")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
     let boosted = dto.character_id.to_uppercase().starts_with("BOSS_") || current_is_lucky;
-    let max_hp = max_hp_for(dto, boosted, game_data);
+    let max_hp = max_hp_for(dto, boosted, current_is_awakened, game_data);
     save_parameter.insert("Hp", props::fixed_point64_property(max_hp));
     // Drop the older "HP" spelling: it is now redundant with the "Hp" written
     // above, and leaving both would let the stale one win on the next read.
@@ -784,10 +822,10 @@ pub fn new_pal_entry(
     );
     save_parameter.insert(
         "LastJumpedLocation",
-        Property::Struct(StructValue::Vector(uesave::Vector {
-            x: uesave::Double(0.0),
-            y: uesave::Double(0.0),
-            z: uesave::Double(7088.5),
+        Property::Struct(StructValue::Vector(crate::ue::Vector {
+            x: crate::ue::Double(0.0),
+            y: crate::ue::Double(0.0),
+            z: crate::ue::Double(7088.5),
         })),
     );
 
@@ -797,7 +835,7 @@ pub fn new_pal_entry(
         Property::Struct(StructValue::Struct(save_parameter)),
     );
 
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = crate::ue::games::palworld::PalCharacterData {
         object: object_props,
         unknown_bytes: [0, 0, 0, 0],
         group_id: props::uuid_to_guid(group_id.unwrap_or(props::EMPTY_UUID)),
@@ -812,11 +850,13 @@ pub fn new_pal_entry(
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+            character_data,
+        ))),
     );
     value_props.insert(
         "CustomVersionData",
-        Property::Array(ValueVec::Byte(uesave::ByteArray::Byte(
+        Property::Array(ValueVec::Byte(crate::ue::ByteArray::Byte(
             CUSTOM_VERSION_DATA.to_vec(),
         ))),
     );
@@ -843,22 +883,22 @@ pub const SLOT_SAVE_PARAMETER_PREFIX: &str = "SaveParameterArray.SaveParameter";
 /// has no `Bool`; `uesave` maps the two onto each other. Nested struct leaves are
 /// paths of their own (`Hp` is not enough -- `Hp.Value` too), as are array element
 /// fields, which no save records while the array is empty.
-fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
-    use uesave::{PropertyTagDataPartial as Data, PropertyType, StructType};
+fn save_parameter_schemas() -> Vec<(String, crate::ue::PropertyTagDataPartial)> {
+    use crate::ue::{PropertyTagDataPartial as Data, PropertyType, StructType};
 
     let byte = || Data::Byte(None);
     let other = |t: PropertyType| Data::Other(t);
     // Resolve the name the way the READER does, rather than hand-picking a
-    // `StructType` variant: a known type keeps its own variant, anything else
-    // becomes a plain named struct. Guessing wrong makes uesave write the payload
-    // with the wrong codec, and the save no longer parses back.
+    // `StructType` variant: a Palworld game struct becomes a `StructType::Game`,
+    // anything else a plain named struct. Guessing wrong makes uesave write the
+    // payload with the wrong codec, and the save no longer parses back.
     let named_struct = |name: &str| Data::Struct {
-        struct_type: StructType::from(name),
-        id: uesave::FGuid::nil(),
+        struct_type: crate::ue::struct_type_for(name),
+        id: crate::ue::FGuid::nil(),
     };
     let plain_struct = |struct_type: StructType| Data::Struct {
         struct_type,
-        id: uesave::FGuid::nil(),
+        id: crate::ue::FGuid::nil(),
     };
     let struct_array = |name: &str| Data::Array(Box::new(named_struct(name)));
 
@@ -866,6 +906,11 @@ fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
         ("CharacterID".into(), other(PropertyType::NameProperty)),
         ("Gender".into(), Data::Enum("EPalGenderType".into(), None)),
         ("IsRarePal".into(), other(PropertyType::BoolProperty)),
+        ("bIsAwakening".into(), other(PropertyType::BoolProperty)),
+        (
+            "bImportedCharacter".into(),
+            other(PropertyType::BoolProperty),
+        ),
         ("IsPlayer".into(), other(PropertyType::BoolProperty)),
         ("Level".into(), byte()),
         ("Rank".into(), byte()),
@@ -965,21 +1010,21 @@ fn save_parameter_schemas() -> Vec<(String, uesave::PropertyTagDataPartial)> {
 
 /// Never overwrites a tag the real save recorded, so a file that already carries a
 /// property keeps its own on-disk shape.
-pub fn ensure_save_parameter_schemas(save: &mut uesave::Save, prefix: &str) {
+pub fn ensure_save_parameter_schemas(save: &mut crate::ue::Save, prefix: &str) {
     for (name, data) in save_parameter_schemas() {
         props::ensure_schema(
             save,
             format!("{prefix}.{name}"),
-            uesave::PropertyTagPartial { id: None, data },
+            crate::ue::PropertyTagPartial { id: None, data },
         );
     }
 }
 
-pub fn ensure_pal_property_schemas(level: &mut uesave::Save) {
+pub fn ensure_pal_property_schemas(level: &mut crate::ue::Save) {
     ensure_save_parameter_schemas(level, LEVEL_SAVE_PARAMETER_PREFIX);
 }
 
-pub fn ensure_slot_pal_schemas(save: &mut uesave::Save) {
+pub fn ensure_slot_pal_schemas(save: &mut crate::ue::Save) {
     ensure_save_parameter_schemas(save, SLOT_SAVE_PARAMETER_PREFIX);
 }
 
@@ -1046,12 +1091,12 @@ fn append_guild_handle(
     };
     let entries = world::group_map_mut(&mut session.level)?;
     if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
-        group_data
-            .individual_character_handle_ids
-            .push(uesave::games::palworld::PalInstanceId {
+        group_data.individual_character_handle_ids.push(
+            crate::ue::games::palworld::PalInstanceId {
                 guid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(instance_id),
-            });
+            },
+        );
     }
     Ok(())
 }
@@ -1559,7 +1604,7 @@ fn pal_owned_by_player(
 /// would wrongly forbid deleting a pal right after adding it. The `Slots`
 /// array still correctly rejects a pal belonging to a different base.
 fn pal_in_character_container(
-    level: &uesave::Save,
+    level: &crate::ue::Save,
     container_index: usize,
     pal_id: uuid::Uuid,
 ) -> bool {
@@ -1914,9 +1959,10 @@ pub fn add_player_dps_pal(
         );
         let dto = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
         let boosted = dto.is_boss.unwrap_or(false) || dto.is_lucky.unwrap_or(false);
+        let awakened = dto.is_awakened.unwrap_or(false);
         save_parameter.insert(
             "Hp",
-            props::fixed_point64_property(max_hp_for(&dto, boosted, game_data)),
+            props::fixed_point64_property(max_hp_for(&dto, boosted, awakened, game_data)),
         );
     }
     let loaded = session.loaded_players.get(&player_id).expect("checked");
@@ -2053,9 +2099,10 @@ pub fn clone_dps_pal(
         );
         let reread = read_save_parameter_dto(save_parameter, new_instance_id, true, game_data);
         let boosted = reread.is_boss.unwrap_or(false) || reread.is_lucky.unwrap_or(false);
+        let awakened = reread.is_awakened.unwrap_or(false);
         save_parameter.insert(
             "Hp",
-            props::fixed_point64_property(max_hp_for(&reread, boosted, game_data)),
+            props::fixed_point64_property(max_hp_for(&reread, boosted, awakened, game_data)),
         );
     }
     let loaded = session.loaded_players.get(&owner_id).expect("checked");
@@ -2188,15 +2235,15 @@ pub fn update_dps_pals(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::games::palworld::PalCharacterData;
-    use uesave::{Byte, Properties, Property, StructValue};
+    use crate::ue::games::palworld::PalCharacterData;
+    use crate::ue::{Byte, Properties, Property, StructValue};
 
     fn game_data() -> GameData {
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
         GameData::load(&json_dir).expect("data dir")
     }
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -2207,7 +2254,7 @@ mod tests {
     fn character_entry(
         instance_id: &str,
         save_parameter: Properties,
-        group_id: uesave::FGuid,
+        group_id: crate::ue::FGuid,
     ) -> MapEntry {
         let mut key_properties = Properties::default();
         key_properties.insert(
@@ -2230,7 +2277,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalCharacterData(character_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
 
         MapEntry {
@@ -2266,11 +2315,11 @@ mod tests {
             "SaveParameterArray",
             Property::Array(ValueVec::Struct(vec![StructValue::Struct(slot_props)])),
         );
-        let dps_save = uesave::Save {
-            header: uesave::Header {
+        let dps_save = crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -2278,18 +2327,18 @@ mod tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: dps_root_properties,
             },
             extra: Vec::new(),
         };
-        let level = uesave::Save {
-            header: uesave::Header {
+        let level = crate::ue::Save {
+            header: crate::ue::Header {
                 magic: 0,
                 save_game_version: 0,
-                package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                 engine_version_major: 0,
                 engine_version_minor: 0,
                 engine_version_patch: 0,
@@ -2297,8 +2346,8 @@ mod tests {
                 engine_version: String::new(),
                 custom_version: None,
             },
-            schemas: uesave::PropertySchemas::default(),
-            root: uesave::Root {
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
                 save_game_type: String::new(),
                 properties: Properties::default(),
             },
@@ -2310,11 +2359,11 @@ mod tests {
             crate::session::LoadedPlayer {
                 uid: owner_id,
                 sav: {
-                    let mut sav = uesave::Save {
-                        header: uesave::Header {
+                    let mut sav = crate::ue::Save {
+                        header: crate::ue::Header {
                             magic: 0,
                             save_game_version: 0,
-                            package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+                            package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
                             engine_version_major: 0,
                             engine_version_minor: 0,
                             engine_version_patch: 0,
@@ -2322,8 +2371,8 @@ mod tests {
                             engine_version: String::new(),
                             custom_version: None,
                         },
-                        schemas: uesave::PropertySchemas::default(),
-                        root: uesave::Root {
+                        schemas: crate::ue::PropertySchemas::default(),
+                        root: crate::ue::Root {
                             save_game_type: String::new(),
                             properties: Properties::default(),
                         },
@@ -2475,13 +2524,49 @@ mod tests {
     }
 
     #[test]
+    fn read_save_parameter_dto_reads_awakened_and_imported_flags() {
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+        save_parameter.insert("bIsAwakening", Property::Bool(true));
+        save_parameter.insert("bImportedCharacter", Property::Bool(true));
+
+        let dto = read_save_parameter_dto(&save_parameter, uuid::Uuid::nil(), false, &data);
+
+        assert_eq!(dto.is_awakened, Some(true));
+        assert_eq!(dto.is_imported, Some(true));
+    }
+
+    #[test]
+    fn read_save_parameter_dto_absent_flags_read_as_some_false() {
+        let data = game_data();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+
+        let dto = read_save_parameter_dto(&save_parameter, uuid::Uuid::nil(), false, &data);
+
+        assert_eq!(dto.is_awakened, Some(false));
+        assert_eq!(dto.is_imported, Some(false));
+    }
+
+    #[test]
+    fn save_parameter_schemas_registers_both_new_bool_flags() {
+        let names: Vec<String> = save_parameter_schemas()
+            .into_iter()
+            .map(|(name, _)| name)
+            .collect();
+        assert!(names.contains(&"bIsAwakening".to_string()));
+        assert!(names.contains(&"bImportedCharacter".to_string()));
+    }
+
+    #[test]
     fn read_save_parameter_dto_is_sick_ignores_hunger_and_sanity_markers() {
         let data = game_data();
         let instance_id = uuid::Uuid::nil();
 
         let mut only_hunger_and_sanity = Properties::default();
         only_hunger_and_sanity.insert("HungerType", Property::Bool(true));
-        only_hunger_and_sanity.insert("SanityValue", Property::Float(uesave::Float(50.0)));
+        only_hunger_and_sanity.insert("SanityValue", Property::Float(crate::ue::Float(50.0)));
         let dto = read_save_parameter_dto(&only_hunger_and_sanity, instance_id, false, &data);
         assert!(
             !dto.is_sick,
@@ -2567,7 +2652,7 @@ mod tests {
         let nil_group_entry = character_entry(
             "11111111-2222-3333-4444-555555555555",
             save_parameter.clone(),
-            uesave::FGuid::nil(),
+            crate::ue::FGuid::nil(),
         );
         let dto = pal_dto_from_entry(&nil_group_entry, &data).unwrap();
         assert!(dto.group_id.is_none());
@@ -2627,7 +2712,9 @@ mod tests {
     #[test]
     fn pal_dto_from_dps_slot_returns_none_for_a_non_struct_slot() {
         let data = game_data();
-        assert!(pal_dto_from_dps_slot(&StructValue::Guid(uesave::FGuid::nil()), &data).is_none());
+        assert!(
+            pal_dto_from_dps_slot(&StructValue::Guid(crate::ue::FGuid::nil()), &data).is_none()
+        );
     }
 
     #[test]
@@ -2641,6 +2728,8 @@ mod tests {
             is_lucky: Some(false),
             is_boss: Some(false),
             is_predator: false,
+            is_awakened: None,
+            is_imported: None,
             is_tower: false,
             gender: PalGender::Female,
             nickname: None,
@@ -2669,7 +2758,22 @@ mod tests {
             is_sick: false,
             friendship_point: 0,
         };
-        assert_eq!(max_hp_for(&dto, false, &data), 12345);
+        assert_eq!(max_hp_for(&dto, false, false, &data), 12345);
+    }
+
+    #[test]
+    fn max_hp_for_applies_the_awakening_multiplier() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+        dto.character_id = "SheepBall".to_string();
+        dto.level = 10;
+        dto.rank = 1;
+        dto.rank_hp = 0;
+        dto.talent_hp = 0;
+
+        // Sheepball scaling.hp is 70: floor(500 + 5*10 + 70*0.5*10) = 900.
+        assert_eq!(max_hp_for(&dto, false, false, &data), 900_000);
+        assert_eq!(max_hp_for(&dto, false, true, &data), 990_000);
     }
 
     #[test]
@@ -2681,7 +2785,7 @@ mod tests {
         let data = game_data();
         let mut save_parameter = Properties::default();
         save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));
-        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::NAN)));
+        save_parameter.insert("FullStomach", Property::Float(crate::ue::Float(f32::NAN)));
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
@@ -2711,7 +2815,10 @@ mod tests {
             "CharacterID",
             Property::Name("TotallyMadeUpCreature".to_string()),
         );
-        save_parameter.insert("FullStomach", Property::Float(uesave::Float(f32::INFINITY)));
+        save_parameter.insert(
+            "FullStomach",
+            Property::Float(crate::ue::Float(f32::INFINITY)),
+        );
         let instance_id = uuid::Uuid::nil();
 
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
@@ -2739,5 +2846,141 @@ mod tests {
         let dto = read_save_parameter_dto(&save_parameter, instance_id, false, &data);
 
         assert_eq!(dto.stomach, 150.0);
+    }
+
+    fn sample_pal_dto() -> PalDto {
+        let mut work_suitability = OrderedMap::new();
+        work_suitability.insert("Handcraft".to_string(), 2);
+        PalDto {
+            instance_id: uuid::Uuid::nil(),
+            character_id: "SheepBall".to_string(),
+            character_key: "sheepball".to_string(),
+            owner_uid: None,
+            is_lucky: Some(false),
+            is_boss: Some(false),
+            is_predator: false,
+            is_awakened: Some(false),
+            is_imported: Some(false),
+            is_tower: false,
+            gender: PalGender::Female,
+            nickname: None,
+            filtered_nickname: None,
+            group_id: None,
+            stomach: 150.0,
+            sanity: 100.0,
+            hp: 12345,
+            level: 10,
+            exp: 0,
+            rank: 1,
+            rank_hp: 0,
+            rank_attack: 0,
+            rank_defense: 0,
+            rank_craftspeed: 0,
+            talent_hp: 0,
+            talent_shot: 0,
+            talent_defense: 0,
+            max_hp: 0,
+            storage_slot: 0,
+            storage_id: props::EMPTY_UUID,
+            learned_skills: vec![],
+            active_skills: vec![],
+            passive_skills: vec![],
+            work_suitability,
+            is_sick: false,
+            friendship_point: 0,
+        }
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_removes_and_preserves_the_awakened_flag() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        let mut writes_it = Properties::default();
+        dto.is_awakened = Some(true);
+        apply_pal_dto(&mut writes_it, &dto, false, &data);
+        assert_eq!(
+            param(&writes_it, "bIsAwakening").and_then(props::as_bool),
+            Some(true)
+        );
+
+        let mut removes_it = Properties::default();
+        removes_it.insert("bIsAwakening", Property::Bool(true));
+        dto.is_awakened = Some(false);
+        apply_pal_dto(&mut removes_it, &dto, false, &data);
+        assert!(
+            param(&removes_it, "bIsAwakening").is_none(),
+            "Some(false) removes"
+        );
+
+        let mut leaves_it = Properties::default();
+        leaves_it.insert("bIsAwakening", Property::Bool(true));
+        dto.is_awakened = None;
+        apply_pal_dto(&mut leaves_it, &dto, false, &data);
+        assert_eq!(
+            param(&leaves_it, "bIsAwakening").and_then(props::as_bool),
+            Some(true),
+            "None leaves the save's existing flag alone"
+        );
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_awakened_boosted_hp() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        dto.is_awakened = Some(false);
+        let mut unawakened = Properties::default();
+        apply_pal_dto(&mut unawakened, &dto, false, &data);
+        let unawakened_hp = param(&unawakened, "Hp")
+            .and_then(props::fixed_point64)
+            .unwrap();
+
+        dto.is_awakened = Some(true);
+        let mut awakened = Properties::default();
+        apply_pal_dto(&mut awakened, &dto, false, &data);
+        let awakened_hp = param(&awakened, "Hp")
+            .and_then(props::fixed_point64)
+            .unwrap();
+
+        let expected =
+            (((unawakened_hp / 1000) as f64) * AWAKENING_STATUS_MULTIPLY).floor() as i64 * 1000;
+        assert_eq!(
+            awakened_hp, expected,
+            "bIsAwakening must be read back off the save (not the DTO) before Hp is computed"
+        );
+    }
+
+    #[test]
+    fn apply_pal_dto_writes_removes_and_preserves_the_imported_flag() {
+        let data = game_data();
+        let mut dto = sample_pal_dto();
+
+        let mut writes_it = Properties::default();
+        dto.is_imported = Some(true);
+        apply_pal_dto(&mut writes_it, &dto, false, &data);
+        assert_eq!(
+            param(&writes_it, "bImportedCharacter").and_then(props::as_bool),
+            Some(true)
+        );
+
+        let mut removes_it = Properties::default();
+        removes_it.insert("bImportedCharacter", Property::Bool(true));
+        dto.is_imported = Some(false);
+        apply_pal_dto(&mut removes_it, &dto, false, &data);
+        assert!(
+            param(&removes_it, "bImportedCharacter").is_none(),
+            "Some(false) removes"
+        );
+
+        let mut leaves_it = Properties::default();
+        leaves_it.insert("bImportedCharacter", Property::Bool(true));
+        dto.is_imported = None;
+        apply_pal_dto(&mut leaves_it, &dto, false, &data);
+        assert_eq!(
+            param(&leaves_it, "bImportedCharacter").and_then(props::as_bool),
+            Some(true),
+            "None leaves the save's existing flag alone"
+        );
     }
 }

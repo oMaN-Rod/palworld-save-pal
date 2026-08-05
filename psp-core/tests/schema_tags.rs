@@ -5,11 +5,11 @@
 /// A tag that disagrees encodes different bytes.
 #[test]
 fn invented_tags_match_the_tags_real_saves_record() {
-    let mut primed = uesave::Save {
-        header: uesave::Header {
+    let mut primed = psp_core::ue::Save {
+        header: psp_core::ue::Header {
             magic: 0,
             save_game_version: 0,
-            package_version: uesave::PackageVersion { ue4: 0, ue5: None },
+            package_version: psp_core::ue::PackageVersion { ue4: 0, ue5: None },
             engine_version_major: 0,
             engine_version_minor: 0,
             engine_version_patch: 0,
@@ -17,10 +17,10 @@ fn invented_tags_match_the_tags_real_saves_record() {
             engine_version: String::new(),
             custom_version: None,
         },
-        schemas: uesave::PropertySchemas::default(),
-        root: uesave::Root {
+        schemas: psp_core::ue::PropertySchemas::default(),
+        root: psp_core::ue::Root {
             save_game_type: String::new(),
-            properties: uesave::Properties::default(),
+            properties: psp_core::ue::Properties::default(),
         },
         extra: Vec::new(),
     };

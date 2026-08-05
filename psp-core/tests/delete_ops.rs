@@ -7,7 +7,7 @@ use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
 use psp_core::props;
 use psp_core::session::{LoadedPlayer, PlayerFileData, SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertyKey, PropertySchemas, Root,
     Save, StructValue, ValueVec,
 };
@@ -271,7 +271,7 @@ fn delete_guild_removes_group_extra_and_base_entries_but_leaves_the_chest_orphan
             .unwrap()
             .iter()
             .any(|e| container_id_key(e) == Some(chest_id)),
-        "PYTHON BUG (reproduced deliberately, see delete_guild_and_players's own doc \
+        "save-file fidelity (see delete_guild_and_players's own doc \
          comment): the guild's own item-storage container is never added to \
          container_ids_to_delete, so it survives delete_guild_and_players as an \
          orphaned ItemContainerSaveData entry"
@@ -300,16 +300,16 @@ fn player_character_entry(player_id: Uuid) -> MapEntry {
         "SaveParameter",
         Property::Struct(StructValue::Struct(save_parameter)),
     );
-    let character_data = uesave::games::palworld::PalCharacterData {
+    let character_data = psp_core::ue::games::palworld::PalCharacterData {
         object: object_props,
         unknown_bytes: [0; 4],
-        group_id: uesave::FGuid::nil(),
+        group_id: psp_core::ue::FGuid::nil(),
         trailing_bytes: [0; 4],
     };
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterData(character_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
     );
     MapEntry {
         key: Property::Struct(StructValue::Struct(key_props)),
@@ -338,14 +338,14 @@ fn character_container_entry_with_pal(container_id: Uuid, slot_num: i32, pal_id:
     slot_props.insert("SlotIndex", props::int_property(0));
     slot_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalCharacterContainer(
-            uesave::games::palworld::PalCharacterContainer {
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterContainer(
+            psp_core::ue::games::palworld::PalCharacterContainer {
                 player_uid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(pal_id),
                 permission_tribe_id: 0,
                 trailing_bytes: None,
             },
-        )),
+        ))),
     );
     value_props.insert(
         "Slots",
@@ -382,28 +382,28 @@ fn player_sav_with_containers(pal_box_id: Uuid, otomo_id: Uuid) -> Save {
 fn guild_group_entry(
     guild_id: Uuid,
     handle_ids: &[Uuid],
-    guild: uesave::games::palworld::PalGuildGroup,
+    guild: psp_core::ue::games::palworld::PalGuildGroup,
 ) -> MapEntry {
     let mut value_properties = Properties::default();
     value_properties.insert(
         "GroupType",
         Property::Enum("EPalGroupType::Guild".to_string()),
     );
-    let group_data = uesave::games::palworld::PalGroupData {
+    let group_data = psp_core::ue::games::palworld::PalGroupData {
         group_id: props::uuid_to_guid(guild_id),
         group_name: String::new(),
         individual_character_handle_ids: handle_ids
             .iter()
-            .map(|id| uesave::games::palworld::PalInstanceId {
+            .map(|id| psp_core::ue::games::palworld::PalInstanceId {
                 guid: props::uuid_to_guid(props::EMPTY_UUID),
                 instance_id: props::uuid_to_guid(*id),
             })
             .collect(),
-        data: uesave::games::palworld::PalGroupVariant::Guild(guild),
+        data: psp_core::ue::games::palworld::PalGroupVariant::Guild(guild),
     };
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::PalGroupData(group_data)),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::GroupData(group_data))),
     );
     MapEntry {
         key: guid_property(guild_id),
@@ -529,7 +529,7 @@ fn two_player_guild_session(guild_loaded: bool) -> TwoPlayerGuild {
     }
 }
 
-fn group_data_for(session: &SaveSession, guild_id: Uuid) -> &uesave::games::palworld::PalGroupData {
+fn group_data_for(session: &SaveSession, guild_id: Uuid) -> &psp_core::ue::games::palworld::PalGroupData {
     let entries = world::group_map(&session.level).unwrap();
     let entry = entries
         .iter()
@@ -646,12 +646,10 @@ fn delete_player_leaves_the_deleted_players_own_pal_guild_handle_dangling() {
             .individual_character_handle_ids
             .iter()
             .any(|h| props::guid_to_uuid(&h.instance_id) == member_pal_id),
-        "PYTHON BUG (reproduced deliberately for byte parity, not on the known list, \
+        "save-file fidelity (byte-identical save output, \
          see delete_player_and_pals_for_guild's own doc comment): the deleted \
          player's own pal's individual_character_handle_ids entry must remain \
-         dangling in the guild's raw tail, exactly matching real Python's \
-         _delete_player_and_pals -> _delete_pal_by_id call chain, which never \
-         reaches Guild.delete_character_handle"
+         dangling in the guild's raw tail"
     );
 }
 
@@ -711,20 +709,20 @@ fn item_container_entry_with_dynamic_slot(container_id: Uuid, local_id: Uuid) ->
     slot_props.insert("SlotIndex", props::int_property(0));
     slot_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalItemContainerSlots(
-            uesave::games::palworld::PalItemContainerSlot {
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::ItemContainerSlots(
+            psp_core::ue::games::palworld::PalItemContainerSlot {
                 slot_index: 0,
                 count: 1,
-                item: uesave::games::palworld::PalItemId {
+                item: psp_core::ue::games::palworld::PalItemId {
                     static_id: "WeaponFire_Bow".to_string(),
-                    dynamic_id: uesave::games::palworld::PalDynamicId {
-                        created_world_id: uesave::FGuid::nil(),
+                    dynamic_id: psp_core::ue::games::palworld::PalDynamicId {
+                        created_world_id: psp_core::ue::FGuid::nil(),
                         local_id_in_created_world: props::uuid_to_guid(local_id),
                     },
                 },
                 trailing_bytes: vec![0u8; 16],
             },
-        )),
+        ))),
     );
     let mut value_props = Properties::default();
     value_props.insert("SlotNum", props::int_property(1));
@@ -742,16 +740,16 @@ fn dynamic_item_value(local_id: Uuid) -> StructValue {
     let mut item_props = Properties::default();
     item_props.insert(
         "RawData",
-        Property::Struct(StructValue::PalDynamicItem(Box::new(
-            uesave::games::palworld::PalDynamicItem {
-                id: uesave::games::palworld::PalDynamicId {
-                    created_world_id: uesave::FGuid::nil(),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(Box::new(
+            psp_core::ue::games::palworld::PalDynamicItem {
+                id: psp_core::ue::games::palworld::PalDynamicId {
+                    created_world_id: psp_core::ue::FGuid::nil(),
                     local_id_in_created_world: props::uuid_to_guid(local_id),
                 },
                 static_id: "WeaponFire_Bow".to_string(),
-                item_type: uesave::games::palworld::PalDynamicItemType::Unknown { trailer: vec![] },
+                item_type: psp_core::ue::games::palworld::PalDynamicItemType::Unknown { trailer: vec![] },
             },
-        ))),
+        )))),
     );
     StructValue::Struct(item_props)
 }
@@ -814,14 +812,289 @@ fn delete_item_containers_cascades_its_dynamic_item_and_invalidates_both_indexes
     assert!(!dynamic_index.contains_key(&local_id));
 }
 
+// ---- delete_base ----
+
+fn map_object_base_id(value: &StructValue) -> Option<Uuid> {
+    let StructValue::Struct(object_props) = value else {
+        return None;
+    };
+    let model = object_props
+        .0
+        .get(&PropertyKey::from("Model"))
+        .and_then(props::struct_props)?;
+    match model.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::MapModel(raw)))) => {
+            Some(props::guid_to_uuid(&raw.base_camp_id_belong_to))
+        }
+        _ => None,
+    }
+}
+
+/// Every `ItemContainer`/`CharacterContainer` module's `target_container_id`
+/// on one `MapObjectSaveData` element.
+fn map_object_container_target_ids(value: &StructValue) -> Vec<Uuid> {
+    use psp_core::ue::games::palworld::PalMapConcreteModelModuleData;
+
+    let mut ids = Vec::new();
+    let StructValue::Struct(object_props) = value else {
+        return ids;
+    };
+    let Some(concrete) = object_props
+        .0
+        .get(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props)
+    else {
+        return ids;
+    };
+    let Some(modules) = concrete
+        .0
+        .get(&PropertyKey::from("ModuleMap"))
+        .and_then(props::map_entries)
+    else {
+        return ids;
+    };
+    for module in modules {
+        let Some(module_props) = props::struct_props(&module.value) else {
+            continue;
+        };
+        if let Some(Property::Struct(StructValue::Game(
+            psp_core::ue::PalStruct::MapConcreteModelModule(raw),
+        ))) = module_props.0.get(&PropertyKey::from("RawData"))
+        {
+            match &raw.data {
+                PalMapConcreteModelModuleData::ItemContainer {
+                    target_container_id,
+                    ..
+                } => ids.push(props::guid_to_uuid(target_container_id)),
+                PalMapConcreteModelModuleData::CharacterContainer {
+                    target_container_id,
+                    ..
+                } => ids.push(props::guid_to_uuid(target_container_id)),
+                _ => {}
+            }
+        }
+    }
+    ids
+}
+
+fn work_base_id(value: &StructValue) -> Option<Uuid> {
+    let StructValue::Struct(work_props) = value else {
+        return None;
+    };
+    match work_props.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::Work(raw)))) => raw
+            .base_data
+            .as_ref()
+            .map(|base_data| props::guid_to_uuid(&base_data.base_camp_id_belong_to)),
+        _ => None,
+    }
+}
+
+/// `delete_base` must remove exactly one base's structures, work entries,
+/// storage/worker containers and pals, and drop it from the owning guild's
+/// `base_ids`/`map_object_instance_ids_base_camp_points` -- while leaving the
+/// guild, its other base, and every unrelated container/work/map-object
+/// entry completely untouched. The final referential-integrity scan is the
+/// whole point: a dangling reference to a removed id here is the exact
+/// crash-the-game bug class this feature exists to avoid.
+#[test]
+fn delete_base_removes_everything_of_one_base_and_leaves_no_dangling_reference() {
+    let mut session = common::load_corpus_session();
+    let data = game_data();
+    let base_id = common::fixture_base_id(&session);
+    let guild_id = common::fixture_guild_id(&session);
+
+    let guild_before = guild::get_guild_details(&mut session, &data, guild_id)
+        .unwrap()
+        .expect("fixture guild loads");
+    let base = guild_before
+        .bases
+        .as_ref()
+        .and_then(|bases| bases.get(&base_id))
+        .expect("fixture base present in the guild's own bases");
+    let item_container_ids: Vec<Uuid> =
+        base.storage_containers.iter().map(|(id, _)| *id).collect();
+    let worker_container_id = base.container_id.expect("fixture base has a worker container");
+    let base_pal_ids: Vec<Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
+    assert!(!item_container_ids.is_empty(), "fixture base must own real storage containers");
+    assert!(!base_pal_ids.is_empty(), "fixture base must own real pals");
+
+    let guild_tail_before = {
+        let entries = world::group_map(&session.level).unwrap();
+        let entry = entries
+            .iter()
+            .find(|e| props::as_uuid(&e.key) == Some(guild_id))
+            .unwrap();
+        let group_data = guild_tail::entry_group_data(entry).unwrap();
+        guild_tail::as_guild(group_data).unwrap().clone()
+    };
+    assert!(
+        guild_tail_before
+            .base_ids
+            .iter()
+            .any(|id| props::guid_to_uuid(id) == base_id),
+        "test precondition: the guild tail must list the target base before delete"
+    );
+    let other_base_ids: Vec<Uuid> = guild_tail_before
+        .base_ids
+        .iter()
+        .map(props::guid_to_uuid)
+        .filter(|id| *id != base_id)
+        .collect();
+    assert!(
+        !other_base_ids.is_empty(),
+        "fixture guild must own another base too, or the guild-survives assertions below \
+         are vacuous"
+    );
+
+    let (works_before_len, matching_works_before, other_works_before) = {
+        let works_before = world::work_values(&session.level).unwrap().unwrap();
+        let matching_works_before =
+            works_before.iter().filter(|v| work_base_id(v) == Some(base_id)).count();
+        let other_works_before: Vec<StructValue> = works_before
+            .iter()
+            .filter(|v| work_base_id(v) != Some(base_id))
+            .cloned()
+            .collect();
+        (works_before.len(), matching_works_before, other_works_before)
+    };
+    assert!(matching_works_before > 0, "fixture base must own real work entries");
+
+    guild::delete_base(&mut session, &data, base_id).unwrap();
+
+    // The base camp entry itself is gone.
+    assert!(
+        world::base_camp_map(&session.level)
+            .unwrap()
+            .unwrap()
+            .iter()
+            .all(|e| props::as_uuid(&e.key) != Some(base_id)),
+        "the base camp entry must be removed"
+    );
+
+    // No map object still belongs to the deleted base.
+    let map_objects_after = world::map_object_values(&session.level).unwrap().unwrap();
+    assert!(
+        map_objects_after.iter().all(|obj| map_object_base_id(obj) != Some(base_id)),
+        "no MapObjectSaveData element may still reference the deleted base"
+    );
+
+    // No work entry still references the deleted base, and every unrelated
+    // work entry survives untouched.
+    let works_after = world::work_values(&session.level).unwrap().unwrap();
+    assert!(
+        works_after.iter().all(|v| work_base_id(v) != Some(base_id)),
+        "no WorkSaveData element may still reference the deleted base"
+    );
+    assert_eq!(
+        works_after.len(),
+        works_before_len - matching_works_before,
+        "only the deleted base's own work entries may be removed"
+    );
+    let other_works_after: Vec<StructValue> = works_after
+        .iter()
+        .filter(|v| work_base_id(v) != Some(base_id))
+        .cloned()
+        .collect();
+    assert_eq!(
+        other_works_before, other_works_after,
+        "every other base's work entries must survive byte-for-byte"
+    );
+
+    // The base's own storage and worker containers are gone.
+    let item_containers_after = world::item_container_map(&session.level).unwrap();
+    for storage_id in &item_container_ids {
+        assert!(
+            !item_containers_after.iter().any(|e| container_id_key(e) == Some(*storage_id)),
+            "base storage container {storage_id} must be deleted along with its base"
+        );
+    }
+    let character_containers_after = world::character_container_map(&session.level).unwrap();
+    assert!(
+        !character_containers_after
+            .iter()
+            .any(|e| container_id_key(e) == Some(worker_container_id)),
+        "the base's worker container must be deleted along with its base"
+    );
+
+    // The base's own pals are gone from the character map.
+    let characters_after = world::character_map(&session.level).unwrap();
+    for pal_id in &base_pal_ids {
+        assert!(
+            !characters_after.iter().any(|e| world::entry_instance_id(e) == Some(*pal_id)),
+            "base pal {pal_id} must be deleted along with its base"
+        );
+    }
+
+    // The guild itself survives, with its other base intact.
+    assert!(guild::guild_entry_index(&session, guild_id).unwrap().is_some());
+    let guild_tail_after = {
+        let entries = world::group_map(&session.level).unwrap();
+        let entry = entries
+            .iter()
+            .find(|e| props::as_uuid(&e.key) == Some(guild_id))
+            .expect("the guild's own group entry must still exist");
+        let group_data = guild_tail::entry_group_data(entry).unwrap();
+        guild_tail::as_guild(group_data).unwrap().clone()
+    };
+    let remaining_base_ids: Vec<Uuid> =
+        guild_tail_after.base_ids.iter().map(props::guid_to_uuid).collect();
+    assert_eq!(
+        remaining_base_ids, other_base_ids,
+        "deleting one base must drop only its own id from guild.base_ids, in place"
+    );
+    assert_eq!(
+        guild_tail_after.map_object_instance_ids_base_camp_points.len(),
+        guild_tail_before.map_object_instance_ids_base_camp_points.len() - 1,
+        "the deleted base's own Pal Box instance id must be dropped from the guild tail, \
+         and only that one"
+    );
+
+    // Referential integrity: nothing left over references the deleted base or
+    // any of its deleted containers.
+    let mut removed_ids: std::collections::HashSet<Uuid> = item_container_ids.into_iter().collect();
+    removed_ids.insert(worker_container_id);
+    for map_object in map_objects_after {
+        for target_id in map_object_container_target_ids(map_object) {
+            assert!(
+                !removed_ids.contains(&target_id),
+                "a surviving map object must not reference a deleted container {target_id}"
+            );
+        }
+    }
+
+    // The save still re-serializes cleanly after the delete.
+    let bytes = session.level_sav_bytes().expect("level must serialize after delete_base");
+    psp_core::savio::read_sav_bytes(&bytes).expect("level written after delete_base must parse back");
+}
+
+/// An unknown base id is a hard error and mutates nothing.
+#[test]
+fn delete_base_with_an_unknown_id_is_an_error_and_mutates_nothing() {
+    let mut session = common::load_corpus_session();
+    let data = game_data();
+    let base_camps_before = world::base_camp_map(&session.level).unwrap().unwrap().len();
+    let map_objects_before = world::map_object_values(&session.level).unwrap().unwrap().len();
+
+    let error = guild::delete_base(&mut session, &data, Uuid::new_v4()).unwrap_err();
+
+    assert!(matches!(error, CoreError::Other(message) if message.contains("not found")));
+    assert_eq!(
+        world::base_camp_map(&session.level).unwrap().unwrap().len(),
+        base_camps_before
+    );
+    assert_eq!(
+        world::map_object_values(&session.level).unwrap().unwrap().len(),
+        map_objects_before
+    );
+}
+
 /// The same cross-entity property the synthetic two-player guild proves,
-/// spot-checked against whatever real save `PSP_TEST_SAVE_DIR` names: deleting
+/// spot-checked against the committed `v1_relics` corpus fixture: deleting
 /// a non-admin player leaves every other player's entry untouched.
 #[test]
 fn delete_non_admin_player_round_trips_against_an_optional_real_corpus_save() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let player_ids: Vec<Uuid> = session.player_summaries.keys().copied().collect();
 

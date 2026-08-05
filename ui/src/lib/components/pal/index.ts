@@ -4,6 +4,7 @@ import PalActionButtons from './PalActionButtons.svelte';
 import PalBadge from './PalBadge.svelte';
 import PalCard from './PalCard.svelte';
 import PalContainerStats from './PalContainerStats.svelte';
+import PalFilterButtons from './PalFilterButtons.svelte';
 import PalHeader from './PalHeader.svelte';
 import PalInfoPopup from './PalInfoPopup.svelte';
 import PassiveSkillBadge from './PassiveSkillBadge.svelte';
@@ -22,6 +23,7 @@ export {
 	PalBadge,
 	PalCard,
 	PalContainerStats,
+	PalFilterButtons,
 	PalHeader,
 	PalInfoPopup,
 	PassiveSkillBadge,

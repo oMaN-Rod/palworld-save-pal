@@ -59,7 +59,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
-    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<Message>();
+    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<String>();
 
     // Drains the mpsc channel onto the socket so handlers never block on I/O.
     // Exits when the channel closes (all Emitters dropped) or the send fails
@@ -67,7 +67,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     // `None` or the loop `break`s, so this task always terminates.
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
-            if outgoing_sink.send(frame).await.is_err() {
+            if outgoing_sink.send(Message::Text(frame.into())).await.is_err() {
                 break;
             }
         }
@@ -83,6 +83,9 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     let mut current_session: Arc<tokio::sync::Mutex<Session>> =
         Arc::new(tokio::sync::Mutex::new(Session::new()));
     let mut current_session_id: Option<Uuid> = None;
+    // Owned per-connection, dropped when the socket closes; lives across every
+    // message the connection dispatches.
+    let mut blueprints = crate::blueprint_registry::BlueprintRegistry::default();
 
     // `incoming_stream.next()` returns `None` on a clean disconnect and
     // `Some(Err(_))` on a protocol error (e.g. the client vanishing mid-frame
@@ -97,6 +100,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
                     &mut current_session_id,
                     &app,
                     &emitter,
+                    &mut blueprints,
                 )
                 .await;
             }
@@ -122,6 +126,7 @@ async fn process_text_frame(
     current_session_id: &mut Option<Uuid>,
     app: &Arc<AppState>,
     emitter: &Emitter,
+    blueprints: &mut crate::blueprint_registry::BlueprintRegistry,
 ) {
     // A JSON decode failure sends an `error` message whose `data` is a plain
     // STRING, not the usual {message, trace} object.
@@ -173,6 +178,7 @@ async fn process_text_frame(
                 session: &mut session_guard,
                 app,
                 emitter,
+                blueprints,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,
@@ -188,6 +194,7 @@ async fn process_text_frame(
                 session: &mut scratch_session,
                 app,
                 emitter,
+                blueprints,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,

@@ -1,4 +1,4 @@
-//! World-tree navigation. Accessors take `&uesave::Save` rather than
+//! World-tree navigation. Accessors take `&crate::ue::Save` rather than
 //! `&SaveSession` so a player's or a transfer source's tree can be navigated
 //! the same way as `session.level`.
 //!
@@ -15,8 +15,8 @@
 
 use crate::error::CoreError;
 use crate::props;
-use uesave::games::palworld::PalCharacterData;
-use uesave::{MapEntry, Properties, Property, Save, StructValue};
+use crate::ue::games::palworld::PalCharacterData;
+use crate::ue::{MapEntry, Properties, Property, Save, StructValue};
 
 /// `Level.sav`'s `worldSaveData` struct — the root of every map/array this
 /// module navigates.
@@ -168,6 +168,7 @@ world_optional_struct_array_accessors!(
     map_object_values_mut,
     "MapObjectSaveData"
 );
+world_optional_struct_array_accessors!(work_values, work_values_mut, "WorkSaveData");
 
 /// A `CharacterSaveParameterMap` entry's key bag (`PlayerUId`, `InstanceId`).
 pub fn entry_key_props(entry: &MapEntry) -> Option<&Properties> {
@@ -194,18 +195,18 @@ pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
 
 /// `entry.value.RawData`, decoded as `PalCharacterData` -- the typed struct
 /// backing every character-map entry, player or pal.
-pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData> {
+pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData<crate::ue::Arch>> {
     let value_props = props::struct_props(&entry.value)?;
     match props::get(value_props, &["RawData"])? {
-        Property::Struct(StructValue::PalCharacterData(data)) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => Some(data),
         _ => None,
     }
 }
 
-pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacterData> {
+pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacterData<crate::ue::Arch>> {
     let value_props = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_props, &["RawData"])? {
-        Property::Struct(StructValue::PalCharacterData(data)) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => Some(data),
         _ => None,
     }
 }
@@ -286,7 +287,7 @@ pub fn build_dynamic_item_index(level: &Save) -> std::collections::HashMap<uuid:
             let StructValue::Struct(item_props) = value else {
                 continue;
             };
-            let Some(Property::Struct(StructValue::PalDynamicItem(dynamic_item))) =
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(dynamic_item)))) =
                 props::get(item_props, &["RawData"])
             else {
                 continue;
@@ -303,8 +304,8 @@ pub fn build_dynamic_item_index(level: &Save) -> std::collections::HashMap<uuid:
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::games::palworld::{PalDynamicId, PalDynamicItem, PalDynamicItemType};
-    use uesave::{Header, PackageVersion, PropertySchemas, Root, ValueVec};
+    use crate::ue::games::palworld::{PalDynamicId, PalDynamicItem, PalDynamicItemType};
+    use crate::ue::{Header, PackageVersion, PropertySchemas, Root, ValueVec};
 
     fn minimal_save(properties: Properties) -> Save {
         Save {
@@ -447,7 +448,7 @@ mod tests {
     fn dynamic_item_struct_value(local_id: uuid::Uuid) -> StructValue {
         let dynamic_item = PalDynamicItem {
             id: PalDynamicId {
-                created_world_id: uesave::FGuid::nil(),
+                created_world_id: crate::ue::FGuid::nil(),
                 local_id_in_created_world: props::uuid_to_guid(local_id),
             },
             static_id: "Weapon_Test".to_string(),
@@ -458,7 +459,7 @@ mod tests {
         let mut item_props = Properties::default();
         item_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalDynamicItem(Box::new(dynamic_item))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(dynamic_item)))),
         );
         StructValue::Struct(item_props)
     }
@@ -485,7 +486,7 @@ mod tests {
         world_save_data.insert(
             "DynamicItemSaveData",
             Property::Array(ValueVec::Struct(vec![
-                StructValue::Guid(uesave::FGuid::nil()), // not StructValue::Struct at all
+                StructValue::Guid(crate::ue::FGuid::nil()), // not StructValue::Struct at all
                 StructValue::Struct(Properties::default()), // Struct, but no "RawData"
             ])),
         );

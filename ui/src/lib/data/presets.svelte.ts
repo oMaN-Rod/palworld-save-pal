@@ -96,6 +96,12 @@ class Presets {
 		});
 	}
 
+	async exportPresets(
+		presets: { preset_id: string; preset_type: string; preset_name: string }[]
+	): Promise<void> {
+		await send(MessageType.EXPORT_PRESETS, presets);
+	}
+
 	async importPreset(): Promise<void> {
 		await send(MessageType.IMPORT_PRESET, {});
 	}

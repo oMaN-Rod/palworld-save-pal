@@ -91,6 +91,11 @@ class SocketState {
 	}
 }
 
-const socketStateInstance = new SocketState();
+import { WorkerTransport } from './workerTransport.svelte';
+
+// Vite statically replaces `import.meta.env.VITE_TRANSPORT`; unset (desktop/Docker
+// builds) → undefined → the WebSocket transport. `build:web` sets it to 'worker'.
+const socketStateInstance =
+	import.meta.env.VITE_TRANSPORT === 'worker' ? new WorkerTransport() : new SocketState();
 
 export const getSocketState = () => socketStateInstance;

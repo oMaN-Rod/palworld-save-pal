@@ -1,0 +1,18 @@
+{
+  "request": {
+    "type": "get_settings"
+  },
+  "responses": [
+    {
+      "type": "get_settings",
+      "data": {
+        "language": "en",
+        "save_dir": "C:\\Users\\OmarRodriguez\\AppData\\Local\\Pal\\Saved\\SaveGames",
+        "clone_prefix": "©️",
+        "new_pal_prefix": "🆕",
+        "debug_mode": false,
+        "cheat_mode": false
+      }
+    }
+  ]
+}

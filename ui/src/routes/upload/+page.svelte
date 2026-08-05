@@ -1,39 +1,66 @@
 <script lang="ts">
-	import { FileDropzone, Card, Tooltip, Button } from '$components/ui';
+	import { Card, Tooltip, Button } from '$components/ui';
+	import { SaveDropzone } from '$components/upload';
 	import { MessageType } from '$types';
-	import { getAppState } from '$states';
-	import { Download } from 'lucide-svelte';
+	import { getAppState, getToastState } from '$states';
+	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { startSaveLoad } from '$lib/data/loadSave';
+	import { openWorldOptionModal } from '$components/worldoption';
+	import {
+		restoreMostRecent,
+		hasRecent,
+		setSaveTarget,
+		getActiveDirectory
+	} from '$lib/fs';
+	import { isWebBuild } from '$lib/utils/platform';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
+	let toast = getToastState();
 
-	let files: FileList | undefined = $state();
+	let recentName = $state<string | null>(null);
 
-	async function handleOnUpload() {
-		if (!files) return;
+	$effect(() => {
+		if (isWebBuild) hasRecent().then((r) => (recentName = r?.worldName ?? null));
+	});
+
+	async function resume() {
 		await goto('/loading');
 		appState.resetState();
-		pushProgressMessage('Uploading zip file...');
-		const reader = new FileReader();
-		reader.onload = function () {
-			const arrayBuffer = reader.result as ArrayBuffer;
-			const uint8Array = new Uint8Array(arrayBuffer);
-			send(MessageType.LOAD_ZIP_FILE, Array.from(uint8Array));
-		};
-		reader.readAsArrayBuffer(files[0]);
+		pushProgressMessage(m.upload_restoring());
+		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
+		if (!r.restored) {
+			await goto('/upload');
+			toast.add(
+				r.needsPermission ? m.upload_reconnect_folder() : m.upload_restore_failed(),
+				m.toast_heads_up(),
+				'warning'
+			);
+		}
+	}
+
+	function saveToFolder() {
+		setSaveTarget('folder');
+		send(MessageType.DOWNLOAD_SAVE_FILE);
 	}
 
 	async function handleDownloadSaveFile() {
 		send(MessageType.DOWNLOAD_SAVE_FILE);
 		await goto('/loading');
-		pushProgressMessage('Starting to cook...');
+		pushProgressMessage(m.upload_starting_to_cook());
 	}
 </script>
 
 <div class="animate-fade-in flex h-full w-full flex-col items-center justify-center space-y-4">
+	{#if recentName && !appState.saveFile}
+		<Button variant="secondary" onclick={resume}>
+			<FolderOpen size={16} />
+			{m.upload_resume({ name: recentName })}
+		</Button>
+	{/if}
 	{#if appState.saveFile}
 		<Card class="w-full max-w-xl px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
 			<div class="flex">
@@ -57,32 +84,26 @@
 							<span>{m.download_modified_save()}</span>
 						{/snippet}
 					</Tooltip>
+					{#if isWebBuild && getActiveDirectory().writable}
+						<Button variant="secondary" onclick={saveToFolder}>
+							<FolderOpen size={16} />
+							{m.upload_save_to_folder()}
+						</Button>
+					{/if}
+					{#if appState.saveFile.world_option_present}
+						<Button variant="secondary" onclick={openWorldOptionModal}>
+							<Settings2 size={16} />
+							World Options
+						</Button>
+					{/if}
 				</div>
 			</div>
 		</Card>
 	{/if}
-	<div class="flex w-full max-w-xl flex-row justify-center px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
-		<div class="flex w-full flex-col items-center">
-			<FileDropzone baseClass="w-full hover:bg-surface-800" name="file" bind:files>
-				{#snippet message()}
-					<h3 class="h3">{m.upload_zip_files()}</h3>
-					<span>{m.drag_drop_zip()}</span>
-				{/snippet}
-			</FileDropzone>
-			{#if files}
-				<div class="mt-2 flex flex-col">
-					<Tooltip>
-						{#snippet children()}
-							<Button variant="primary" class="font-bold" onclick={handleOnUpload}>
-								{m.upload()}
-							</Button>
-						{/snippet}
-						{#snippet popup()}
-							<span>{m.upload()} {files ? files[0].name : ''}</span>
-						{/snippet}
-					</Tooltip>
-				</div>
-			{/if}
-		</div>
+	<div class="flex w-full max-w-xl flex-col items-center px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
+		<SaveDropzone onLoad={startSaveLoad} />
+		<p class="mt-2 max-w-md text-center text-xs opacity-60">
+			{m.upload_path_hint()}
+		</p>
 	</div>
 </div>

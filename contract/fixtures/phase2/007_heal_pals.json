@@ -1,0 +1,9 @@
+{
+  "request": {
+    "type": "heal_pals",
+    "data": [
+      "b38e7ffd-a271-488a-b584-6cb545a3f439"
+    ]
+  },
+  "responses": []
+}

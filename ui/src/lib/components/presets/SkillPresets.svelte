@@ -2,7 +2,7 @@
 	import { Combobox, TooltipButton } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
-	import { getModalState } from '$states';
+	import { getModalState, sortPresets } from '$states';
 	import { cn } from '$theme';
 	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
@@ -23,9 +23,12 @@
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
 	let activeSkillPresets: ExtendedPresetProfile[] = $derived.by(() => {
-		return Object.entries(presetsData.presetProfiles)
-			.filter(([_, preset]) => preset.type === 'active_skills')
-			.map(([id, preset]) => ({ ...preset, id }));
+		return sortPresets(
+			Object.entries(presetsData.presetProfiles)
+				.filter(([_, preset]) => preset.type === 'active_skills')
+				.map(([id, preset]) => ({ ...preset, id })),
+			'active_skills'
+		);
 	});
 	let activeSkillPresetOptions: SelectOption[] = $derived.by(() => {
 		return activeSkillPresets.map((preset) => ({
@@ -36,9 +39,12 @@
 	let selectedActiveSkillPreset: string = $state('');
 
 	let passiveSkillPresets: ExtendedPresetProfile[] = $derived.by(() => {
-		return Object.entries(presetsData.presetProfiles)
-			.filter(([_, preset]) => preset.type === 'passive_skills')
-			.map(([id, preset]) => ({ ...preset, id }));
+		return sortPresets(
+			Object.entries(presetsData.presetProfiles)
+				.filter(([_, preset]) => preset.type === 'passive_skills')
+				.map(([id, preset]) => ({ ...preset, id })),
+			'passive_skills'
+		);
 	});
 	let passiveSkillPresetOptions: SelectOption[] = $derived.by(() => {
 		return passiveSkillPresets.map((preset) => ({

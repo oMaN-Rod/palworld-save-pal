@@ -1,5 +1,6 @@
 import type { Component } from 'svelte';
 import {
+	Blocks,
 	BookOpen,
 	Bug,
 	ChevronsLeft,
@@ -25,6 +26,7 @@ import {
 import type { AppState } from '$states';
 import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
+import { isWebBuild } from '$lib/utils/platform';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
@@ -125,6 +127,13 @@ export const navItems: NavItem[] = [
 		href: '/presets'
 	},
 	{
+		id: 'blueprints',
+		section: 'tiles',
+		icon: () => Blocks,
+		label: () => 'Blueprints',
+		href: '/blueprints'
+	},
+	{
 		id: 'gps',
 		section: 'tiles',
 		icon: () => Globe,
@@ -152,7 +161,9 @@ export const navItems: NavItem[] = [
 		section: 'tiles',
 		icon: () => Server,
 		label: () => 'Servers',
-		href: '/servers'
+		href: '/servers',
+		// Server management drives Docker/native services the browser build cannot reach.
+		visible: () => !isWebBuild
 	},
 	{
 		id: 'editor',

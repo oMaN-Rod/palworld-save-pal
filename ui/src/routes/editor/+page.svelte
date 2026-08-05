@@ -1,7 +1,34 @@
 <script lang="ts">
+	import type * as MonacoE from 'monaco-editor';
+	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { FileDropzone, Monaco, Spinner, Stopwatch } from '$components/ui';
-	import { getToastState } from '$states';
+	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
+	import { getToastState, theme, type ThemeName } from '$states';
+	import { sendAndWait } from '$lib/utils/websocketUtils';
+	import { MessageType } from '$types';
 	import { Save, X, WrapText } from 'lucide-svelte';
+
+	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
+
+	// The light-palette themes; every other theme reads as dark. Drives the
+	// Monaco base and which accent shade stays legible on the surface.
+	const LIGHT_THEMES = new Set<ThemeName>(['light', 'lamball']);
+
+	// A hidden probe carries the active `data-theme` so its computed palette can
+	// be read independently of the layout's <body> effect. The Monaco JSON theme
+	// is rebuilt from it whenever the app theme changes.
+	let paletteProbe: HTMLElement | undefined = $state();
+	let editorThemeData = $state<MonacoE.editor.IStandaloneThemeData>();
+
+	$effect(() => {
+		const current = theme.current;
+		if (!paletteProbe) return;
+		const style = getComputedStyle(paletteProbe);
+		editorThemeData = buildEditorTheme(
+			(name) => style.getPropertyValue(name),
+			LIGHT_THEMES.has(current)
+		);
+	});
 
 	const LARGE_FILE_THRESHOLD = 50 * 1024 * 1024; // 50MB
 
@@ -17,29 +44,57 @@
 	const toast = getToastState();
 
 	async function handleSave() {
-		if (content?.text) {
-			try {
-				const response = await fetch('/api/convert/json-to-sav', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: content.text
-				});
-				if (!response.ok) throw new Error(`Server error: ${response.status}`);
-				const blob = await response.blob();
-				const url = URL.createObjectURL(blob);
-				const a = document.createElement('a');
-				a.href = url;
-				a.download = fileName ? fileName : 'modified_save.sav';
-				document.body.appendChild(a);
-				a.click();
-				document.body.removeChild(a);
-				URL.revokeObjectURL(url);
-			} catch (error) {
-				console.error('Error saving file:', error);
-				toast.add('Failed to save file.');
-			}
-		} else {
+		if (!content?.text) {
 			toast.add('Nothing to save.');
+			return;
+		}
+		// The webview ignores browser `<a download>`, so desktop routes through
+		// the backend to a native "Save As" dialog. Web mode keeps the download.
+		if (isDesktopMode) {
+			await saveViaNativeDialog(content.text);
+		} else {
+			await saveViaDownload(content.text);
+		}
+	}
+
+	async function saveViaNativeDialog(json: string) {
+		try {
+			const result = await sendAndWait<{ message?: string; error?: string; canceled?: boolean }>(
+				MessageType.SAVE_EDITED_SAV,
+				{ json, file_name: fileName }
+			);
+			if (result.canceled) return;
+			if (result.error) {
+				toast.add(result.error, 'Error', 'error');
+				return;
+			}
+			toast.add(result.message ?? 'Save file written successfully', 'Saved!', 'success');
+		} catch (error) {
+			console.error('Error saving file:', error);
+			toast.add('Failed to save file.');
+		}
+	}
+
+	async function saveViaDownload(json: string) {
+		try {
+			const response = await fetch('/api/convert/json-to-sav', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: json
+			});
+			if (!response.ok) throw new Error(`Server error: ${response.status}`);
+			const blob = await response.blob();
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = fileName ? fileName : 'modified_save.sav';
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(url);
+		} catch (error) {
+			console.error('Error saving file:', error);
+			toast.add('Failed to save file.');
 		}
 	}
 
@@ -103,6 +158,11 @@
 	});
 </script>
 
+<!-- Palette source for the editor theme; its own data-theme makes the read
+     independent of the layout's <body> theme effect. Never visible. -->
+<div bind:this={paletteProbe} data-theme={theme.current} class="palette-probe" aria-hidden="true">
+</div>
+
 {#if content}
 	<div class="editor-wrapper">
 		<div class="toolbar">
@@ -125,7 +185,13 @@
 			</button>
 		</div>
 		<div class="editor-container">
-			<Monaco language="json" bind:value={content.text} theme="vs-dark" {largeFile} />
+			<Monaco
+				language="json"
+				bind:value={content.text}
+				theme={EDITOR_THEME_NAME}
+				themeData={editorThemeData}
+				{largeFile}
+			/>
 		</div>
 	</div>
 {:else}
@@ -145,6 +211,17 @@
 {/if}
 
 <style>
+	/* Off-screen and zero-size, but still laid out — display:none would make
+	   getComputedStyle unreliable for reading the palette custom properties. */
+	.palette-probe {
+		position: absolute;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
 	.editor-wrapper {
 		height: 100%;
 		width: 100%;

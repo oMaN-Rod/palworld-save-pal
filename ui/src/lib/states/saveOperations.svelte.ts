@@ -122,6 +122,8 @@ export async function addNewUpspal(state: AppState, pal: Pal) {
 		stomach: pal.stomach,
 		is_lucky: pal.is_lucky,
 		is_boss: pal.is_boss,
+		is_awakened: pal.is_awakened,
+		is_imported: pal.is_imported,
 		gender: pal.gender,
 		is_tower: pal.is_tower,
 		storage_id: '00000000-0000-0000-0000-000000000000',

@@ -1,10 +1,10 @@
 use psp_db::ups::{PalTypeFilter, UpsFilter};
 
-async fn test_pool() -> sqlx::SqlitePool {
+async fn test_db() -> (psp_db::SqlxSqliteDriver, sqlx::SqlitePool) {
     let dir = tempfile::tempdir().unwrap();
     let pool = psp_db::open(&dir.path().join("psp-rs.db")).await.unwrap();
     std::mem::forget(dir);
-    pool
+    (psp_db::SqlxSqliteDriver::new(pool.clone()), pool)
 }
 
 async fn insert_pal(
@@ -37,7 +37,7 @@ async fn insert_pal(
 
 #[tokio::test]
 async fn search_is_case_insensitive_over_three_columns() {
-    let pool = test_pool().await;
+    let (db, pool) = test_db().await;
     insert_pal(
         &pool,
         "SheepBall",
@@ -62,7 +62,7 @@ async fn search_is_case_insensitive_over_three_columns() {
         search_query: Some("fluf".into()),
         ..Default::default()
     };
-    let (pals, total) = psp_db::ups::get_pals(&pool, &filter, "created_at", "desc", 0, 30)
+    let (pals, total) = psp_db::ups::get_pals(&db, &filter, "created_at", "desc", 0, 30)
         .await
         .unwrap();
     assert_eq!(total, 1);
@@ -71,7 +71,7 @@ async fn search_is_case_insensitive_over_three_columns() {
 
 #[tokio::test]
 async fn character_id_filter_all_means_no_filter() {
-    let pool = test_pool().await;
+    let (db, pool) = test_db().await;
     insert_pal(
         &pool,
         "SheepBall",
@@ -96,7 +96,7 @@ async fn character_id_filter_all_means_no_filter() {
         character_id_filter: Some("All".into()),
         ..Default::default()
     };
-    let (_, total) = psp_db::ups::get_pals(&pool, &filter, "created_at", "desc", 0, 30)
+    let (_, total) = psp_db::ups::get_pals(&db, &filter, "created_at", "desc", 0, 30)
         .await
         .unwrap();
     assert_eq!(total, 2);
@@ -104,7 +104,7 @@ async fn character_id_filter_all_means_no_filter() {
 
 #[tokio::test]
 async fn tag_pal_type_sort_and_pagination() {
-    let pool = test_pool().await;
+    let (db, pool) = test_db().await;
     insert_pal(
         &pool,
         "SheepBall",
@@ -140,7 +140,7 @@ async fn tag_pal_type_sort_and_pagination() {
         tags: Some(vec!["shiny".into()]),
         ..Default::default()
     };
-    let ids = psp_db::ups::get_all_filtered_ids(&pool, &tag_filter)
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &tag_filter)
         .await
         .unwrap();
     assert_eq!(ids, vec![1, 3]);
@@ -149,12 +149,12 @@ async fn tag_pal_type_sort_and_pagination() {
         pal_types: Some(vec![PalTypeFilter::Alpha, PalTypeFilter::Predator]),
         ..Default::default()
     };
-    let ids = psp_db::ups::get_all_filtered_ids(&pool, &alpha_filter)
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &alpha_filter)
         .await
         .unwrap();
     assert_eq!(ids, vec![2, 3]);
 
-    let (page, total) = psp_db::ups::get_pals(&pool, &UpsFilter::default(), "level", "asc", 0, 2)
+    let (page, total) = psp_db::ups::get_pals(&db, &UpsFilter::default(), "level", "asc", 0, 2)
         .await
         .unwrap();
     assert_eq!(total, 3);
@@ -164,7 +164,7 @@ async fn tag_pal_type_sort_and_pagination() {
     );
     // unknown sort key falls back to created_at desc
     let (page, _) =
-        psp_db::ups::get_pals(&pool, &UpsFilter::default(), "no_such_column", "desc", 0, 1)
+        psp_db::ups::get_pals(&db, &UpsFilter::default(), "no_such_column", "desc", 0, 1)
             .await
             .unwrap();
     assert_eq!(page[0].id, 3);
@@ -173,16 +173,86 @@ async fn tag_pal_type_sort_and_pagination() {
 #[tokio::test]
 async fn unknown_sort_order_defaults_to_ascending() {
     // Only "desc" means DESC; every other sort_order, valid or not, means ASC.
-    let pool = test_pool().await;
+    let (db, pool) = test_db().await;
     insert_pal(&pool, "A", None, 1, false, &[], "2026-01-01T00:00:00").await;
     insert_pal(&pool, "B", None, 40, false, &[], "2026-01-02T00:00:00").await;
     insert_pal(&pool, "C", None, 30, false, &[], "2026-01-03T00:00:00").await;
 
-    let (page, _) = psp_db::ups::get_pals(&pool, &UpsFilter::default(), "level", "garbage", 0, 30)
+    let (page, _) = psp_db::ups::get_pals(&db, &UpsFilter::default(), "level", "garbage", 0, 30)
         .await
         .unwrap();
     assert_eq!(
         page.iter().map(|p| p.level).collect::<Vec<_>>(),
         vec![1, 30, 40]
+    );
+}
+
+async fn insert_flagged_pal(
+    pool: &sqlx::SqlitePool,
+    character_id: &str,
+    is_awakened: bool,
+    is_imported: bool,
+) -> i64 {
+    let pal_data = serde_json::json!({
+        "character_id": character_id,
+        "is_boss": false,
+        "is_lucky": false,
+        "is_awakened": is_awakened,
+        "is_imported": is_imported,
+        "level": 10
+    });
+    sqlx::query_scalar(
+        "INSERT INTO ups_pals (instance_id, character_id, nickname, level, pal_data, tags, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id",
+    )
+    .bind(uuid::Uuid::new_v4().to_string())
+    .bind(character_id)
+    .bind(None::<String>)
+    .bind(10_i64)
+    .bind(pal_data.to_string())
+    .bind("[]")
+    .bind("2026-01-01T00:00:00")
+    .bind("2026-01-01T00:00:00")
+    .fetch_one(pool)
+    .await
+    .unwrap()
+}
+
+#[tokio::test]
+async fn pal_type_filter_selects_awakened_and_imported_pals() {
+    let (db, pool) = test_db().await;
+    let awakened_id = insert_flagged_pal(&pool, "SheepBall", true, false).await;
+    let imported_id = insert_flagged_pal(&pool, "Kitsunebi", false, true).await;
+    insert_flagged_pal(&pool, "Lamball", false, false).await;
+
+    let awakened_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Awakened]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &awakened_filter)
+        .await
+        .unwrap();
+    assert_eq!(ids, vec![awakened_id]);
+
+    let imported_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Imported]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &imported_filter)
+        .await
+        .unwrap();
+    assert_eq!(ids, vec![imported_id]);
+
+    let either_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Awakened, PalTypeFilter::Imported]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &either_filter)
+        .await
+        .unwrap();
+    assert_eq!(
+        ids,
+        vec![awakened_id, imported_id],
+        "the group is OR-joined"
     );
 }

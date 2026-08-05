@@ -1,11 +1,10 @@
 use std::collections::HashSet;
 
 use serde_json::{Map, Value};
-use sqlx::{QueryBuilder, Row, Sqlite, SqlitePool};
 
 use crate::error::DbError;
 
-#[derive(Debug, Clone, sqlx::FromRow)]
+#[derive(Debug, Clone)]
 pub struct ServerRecord {
     pub id: i64,
     pub name: String,
@@ -30,7 +29,7 @@ pub struct ServerRecord {
     pub server_password: String,
     pub admin_password: String,
     pub max_players: i64,
-    pub env_vars: sqlx::types::Json<Map<String, Value>>,
+    pub env_vars: Map<String, Value>,
     pub created_at: String,
     pub updated_at: String,
 }
@@ -95,102 +94,140 @@ const UPDATABLE_COLUMNS: &[&str] = &[
     "env_vars",
 ];
 
+fn map_server(r: &crate::DbRow) -> Result<ServerRecord, DbError> {
+    Ok(ServerRecord {
+        id: r.get_i64("id")?,
+        name: r.get_string("name")?,
+        container_name: r.get_string("container_name")?,
+        image_name: r.get_string("image_name")?,
+        server_type: r.get_string("server_type")?,
+        game_port: r.get_i64("game_port")?,
+        query_port: r.get_i64("query_port")?,
+        rest_api_port: r.get_i64("rest_api_port")?,
+        data_volume_name: r.get_string("data_volume_name")?,
+        saves_path: r.get_string("saves_path")?,
+        mods_path: r.get_string("mods_path")?,
+        logicmods_path: r.get_string("logicmods_path")?,
+        nativemods_path: r.get_string("nativemods_path")?,
+        install_path: r.get_string("install_path")?,
+        steamcmd_path: r.get_string("steamcmd_path")?,
+        pid: r.get_opt_i64("pid")?,
+        launch_args: r.get_string("launch_args")?,
+        workshop_dir: r.get_string("workshop_dir")?,
+        server_name: r.get_string("server_name")?,
+        server_description: r.get_string("server_description")?,
+        server_password: r.get_string("server_password")?,
+        admin_password: r.get_string("admin_password")?,
+        max_players: r.get_i64("max_players")?,
+        env_vars: match r.get_json("env_vars")? {
+            Value::Object(m) => m,
+            _ => Map::new(),
+        },
+        created_at: r.get_string("created_at")?,
+        updated_at: r.get_string("updated_at")?,
+    })
+}
+
 pub async fn create_server(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     new_server: NewServer,
 ) -> Result<ServerRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
     let env_vars_text = Value::Object(new_server.env_vars).to_string();
-    let inserted = sqlx::query(
-        "INSERT INTO servers (name, container_name, image_name, server_type, game_port, \
-         query_port, rest_api_port, data_volume_name, saves_path, mods_path, logicmods_path, \
-         nativemods_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
-         server_name, server_description, server_password, admin_password, max_players, \
-         env_vars, created_at, updated_at) \
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-    )
-    .bind(&new_server.name)
-    .bind(&new_server.container_name)
-    .bind(&new_server.image_name)
-    .bind(&new_server.server_type)
-    .bind(new_server.game_port)
-    .bind(new_server.query_port)
-    .bind(new_server.rest_api_port)
-    .bind(&new_server.data_volume_name)
-    .bind(&new_server.saves_path)
-    .bind(&new_server.mods_path)
-    .bind(&new_server.logicmods_path)
-    .bind(&new_server.nativemods_path)
-    .bind(&new_server.install_path)
-    .bind(&new_server.steamcmd_path)
-    .bind(&new_server.launch_args)
-    .bind(&new_server.workshop_dir)
-    .bind(&new_server.server_name)
-    .bind(&new_server.server_description)
-    .bind(&new_server.server_password)
-    .bind(&new_server.admin_password)
-    .bind(new_server.max_players)
-    .bind(env_vars_text)
-    .bind(&now)
-    .bind(&now)
-    .execute(pool)
-    .await?;
-    let server_id = inserted.last_insert_rowid();
-    get_server(pool, server_id)
+    let server_id = crate::scalar_i64(
+        &db.query(
+            "INSERT INTO servers (name, container_name, image_name, server_type, game_port, \
+             query_port, rest_api_port, data_volume_name, saves_path, mods_path, logicmods_path, \
+             nativemods_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
+             server_name, server_description, server_password, admin_password, max_players, \
+             env_vars, created_at, updated_at) \
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) \
+             RETURNING id",
+            &[
+                new_server.name.clone().into(),
+                new_server.container_name.clone().into(),
+                new_server.image_name.clone().into(),
+                new_server.server_type.clone().into(),
+                new_server.game_port.into(),
+                new_server.query_port.into(),
+                new_server.rest_api_port.into(),
+                new_server.data_volume_name.clone().into(),
+                new_server.saves_path.clone().into(),
+                new_server.mods_path.clone().into(),
+                new_server.logicmods_path.clone().into(),
+                new_server.nativemods_path.clone().into(),
+                new_server.install_path.clone().into(),
+                new_server.steamcmd_path.clone().into(),
+                new_server.launch_args.clone().into(),
+                new_server.workshop_dir.clone().into(),
+                new_server.server_name.clone().into(),
+                new_server.server_description.clone().into(),
+                new_server.server_password.clone().into(),
+                new_server.admin_password.clone().into(),
+                new_server.max_players.into(),
+                env_vars_text.into(),
+                now.clone().into(),
+                now.clone().into(),
+            ],
+        )
+        .await?,
+    )?;
+    get_server(db, server_id)
         .await?
         .ok_or_else(|| DbError::Other(format!("server {server_id} vanished after insert")))
 }
 
 pub async fn get_server(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     server_id: i64,
 ) -> Result<Option<ServerRecord>, DbError> {
-    let record = sqlx::query_as::<_, ServerRecord>(&format!(
-        "SELECT {SELECT_COLUMNS} FROM servers WHERE id = ?"
-    ))
-    .bind(server_id)
-    .fetch_optional(pool)
-    .await?;
-    Ok(record)
+    let rows = db
+        .query(
+            &format!("SELECT {SELECT_COLUMNS} FROM servers WHERE id = ?"),
+            &[server_id.into()],
+        )
+        .await?;
+    rows.first().map(map_server).transpose()
 }
 
 pub async fn server_with_install_path(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     install_path: &str,
 ) -> Result<Option<ServerRecord>, DbError> {
-    let record = sqlx::query_as::<_, ServerRecord>(&format!(
-        "SELECT {SELECT_COLUMNS} FROM servers WHERE install_path = ?"
-    ))
-    .bind(install_path)
-    .fetch_optional(pool)
-    .await?;
-    Ok(record)
+    let rows = db
+        .query(
+            &format!("SELECT {SELECT_COLUMNS} FROM servers WHERE install_path = ?"),
+            &[install_path.into()],
+        )
+        .await?;
+    rows.first().map(map_server).transpose()
 }
 
-pub async fn list_servers(pool: &SqlitePool) -> Result<Vec<ServerRecord>, DbError> {
-    let records = sqlx::query_as::<_, ServerRecord>(&format!(
-        "SELECT {SELECT_COLUMNS} FROM servers ORDER BY created_at"
-    ))
-    .fetch_all(pool)
-    .await?;
-    Ok(records)
+pub async fn list_servers(db: &dyn crate::DbDriver) -> Result<Vec<ServerRecord>, DbError> {
+    let rows = db
+        .query(
+            &format!("SELECT {SELECT_COLUMNS} FROM servers ORDER BY created_at"),
+            &[],
+        )
+        .await?;
+    rows.iter().map(map_server).collect()
 }
 
 pub async fn update_server(
-    pool: &SqlitePool,
+    db: &dyn crate::DbDriver,
     server_id: i64,
     updates: &Map<String, Value>,
 ) -> Result<Option<ServerRecord>, DbError> {
-    if get_server(pool, server_id).await?.is_none() {
+    if get_server(db, server_id).await?.is_none() {
         return Ok(None);
     }
-    let mut builder = QueryBuilder::<Sqlite>::new("UPDATE servers SET updated_at = ");
+    let mut builder = crate::SqlBuilder::new("UPDATE servers SET updated_at = ");
     builder.push_bind(crate::time::now_iso_naive_utc());
     for (key, value) in updates {
         if !UPDATABLE_COLUMNS.contains(&key.as_str()) {
             continue;
         }
-        builder.push(format!(", {key} = "));
+        builder.push(&format!(", {key} = "));
         match value {
             Value::Null => {
                 builder.push_bind(Option::<String>::None);
@@ -215,27 +252,29 @@ pub async fn update_server(
     }
     builder.push(" WHERE id = ");
     builder.push_bind(server_id);
-    builder.build().execute(pool).await?;
-    get_server(pool, server_id).await
+    let (sql, params) = builder.into_parts();
+    db.execute(&sql, &params).await?;
+    get_server(db, server_id).await
 }
 
-pub async fn delete_server(pool: &SqlitePool, server_id: i64) -> Result<bool, DbError> {
-    let result = sqlx::query("DELETE FROM servers WHERE id = ?")
-        .bind(server_id)
-        .execute(pool)
+pub async fn delete_server(db: &dyn crate::DbDriver, server_id: i64) -> Result<bool, DbError> {
+    let n = db
+        .execute("DELETE FROM servers WHERE id = ?", &[server_id.into()])
         .await?;
-    Ok(result.rows_affected() > 0)
+    Ok(n > 0)
 }
 
-pub async fn allocated_ports(pool: &SqlitePool) -> Result<HashSet<u16>, DbError> {
-    let rows = sqlx::query("SELECT game_port, query_port, rest_api_port FROM servers")
-        .fetch_all(pool)
+pub async fn allocated_ports(db: &dyn crate::DbDriver) -> Result<HashSet<u16>, DbError> {
+    let rows = db
+        .query(
+            "SELECT game_port, query_port, rest_api_port FROM servers",
+            &[],
+        )
         .await?;
     let mut ports = HashSet::new();
-    for row in rows {
+    for row in &rows {
         for column in ["game_port", "query_port", "rest_api_port"] {
-            let port: i64 = row.get(column);
-            ports.insert(port as u16);
+            ports.insert(row.get_i64(column)? as u16);
         }
     }
     Ok(ports)

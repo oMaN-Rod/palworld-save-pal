@@ -1,0 +1,62 @@
+name: Deploy Web
+
+# Builds the browser bundle (wasm-pack + VITE_TRANSPORT=worker) and deploys it
+# to the `psp` Cloudflare Worker as static assets. Fires when a release is
+# published -- alongside nexus-upload.yml and discord.yml -- but skips
+# prereleases. Run it manually first after any change to the build pipeline:
+# ci.yml only exercises the desktop build, so this is the only place
+# `bun run build:web` runs in CI.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # workflow_dispatch has no github.event.release, so the event_name check
+    # must come first and short-circuit before the prerelease lookup.
+    if: github.event_name == 'workflow_dispatch' || !github.event.release.prerelease
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          prefix-key: "v0-web"
+
+      - name: Install wasm-pack
+        uses: jetli/wasm-pack-action@v0.4.0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install frontend dependencies
+        working-directory: ui
+        run: bun install
+
+      - name: Build web bundle
+        working-directory: ui
+        run: bun run build:web
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Pinned, not `latest`: 4.34.0 is the floor that refreshes the upload
+          # token mid-flight, which a 4,000-file / 134 MB asset push needs.
+          wranglerVersion: "4.118.0"
+          command: deploy

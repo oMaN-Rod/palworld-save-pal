@@ -1,0 +1,70 @@
+{
+  "request": {
+    "type": "update_save_file",
+    "data": {
+      "modified_pals": {
+        "b38e7ffd-a271-488a-b584-6cb545a3f439": {
+          "instance_id": "b38e7ffd-a271-488a-b584-6cb545a3f439",
+          "character_id": "JetDragon",
+          "character_key": "jetdragon",
+          "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+          "is_lucky": false,
+          "is_boss": false,
+          "is_predator": false,
+          "is_tower": false,
+          "gender": "Female",
+          "nickname": "ParityEdited",
+          "filtered_nickname": null,
+          "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "stomach": 542.2474365234375,
+          "sanity": 100.0,
+          "hp": 13345000,
+          "level": 33,
+          "exp": 41376365,
+          "rank": 5,
+          "rank_hp": 20,
+          "rank_attack": 20,
+          "rank_defense": 20,
+          "rank_craftspeed": 20,
+          "talent_hp": 100,
+          "talent_shot": 100,
+          "talent_defense": 100,
+          "max_hp": 10506000,
+          "storage_slot": 0,
+          "storage_id": "65a4f103-471b-3102-7bb3-18bcefee294d",
+          "learned_skills": [],
+          "active_skills": [
+            "EPalWazaID::CommetRain",
+            "EPalWazaID::BeamSlicer",
+            "EPalWazaID::DragonMeteor"
+          ],
+          "passive_skills": [
+            "Noukin",
+            "PAL_ALLAttack_up2",
+            "MoveSpeed_up_3",
+            "Legend"
+          ],
+          "work_suitability": {
+            "Collection": 2
+          },
+          "is_sick": false,
+          "friendship_point": 200000
+        }
+      }
+    }
+  },
+  "responses": [
+    {
+      "type": "progress_message",
+      "data": "Updating pal ParityEdited"
+    },
+    {
+      "type": "progress_message",
+      "data": "Saving changes to file"
+    },
+    {
+      "type": "update_save_file",
+      "data": "Changes saved"
+    }
+  ]
+}

@@ -387,7 +387,7 @@
 			const container = appState.selectedPlayer.essential_container;
 			container.slots.sort((a, b) => a.slot_index - b.slot_index);
 			let containerSlots = [];
-			for (let i = 0; i < 200; i++) {
+			for (let i = 0; i < container.slot_num; i++) {
 				const slot = container.slots.find((s) => s.slot_index === i);
 				if (!slot) {
 					const emptySlot = {

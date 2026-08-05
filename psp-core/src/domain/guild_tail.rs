@@ -13,11 +13,11 @@
 //! the save.
 
 use crate::props;
-use uesave::games::palworld::{
+use crate::ue::games::palworld::{
     PalGroupData, PalGroupVariant, PalGuildGroup, PalGuildPlayerWithRole, PalGuildTail,
     PalGuildTailPreUpdate, PalPlayerInfo, PalPlayerInfoDetails,
 };
-use uesave::{MapEntry, Property, StructValue};
+use crate::ue::{MapEntry, Property, StructValue};
 use uuid::Uuid;
 
 /// One guild member, independent of which tail shape it is written into.
@@ -41,7 +41,7 @@ pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
 pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     let value_properties = props::struct_properties(&entry.value)?;
     match props::get(value_properties, &["RawData"])? {
-        Property::Struct(StructValue::PalGroupData(data)) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(data))) => Some(data),
         _ => None,
     }
 }
@@ -49,7 +49,7 @@ pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
 pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     let value_properties = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_properties, &["RawData"])? {
-        Property::Struct(StructValue::PalGroupData(data)) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(data))) => Some(data),
         _ => None,
     }
 }
@@ -315,7 +315,7 @@ pub fn pre_update_guild(
         base_camp_level,
         map_object_instance_ids_base_camp_points: Vec::new(),
         guild_name: guild_name.to_string(),
-        last_guild_name_modifier_player_uid: uesave::FGuid::nil(),
+        last_guild_name_modifier_player_uid: crate::ue::FGuid::nil(),
         guild_markers: Vec::new(),
         tail: PalGuildTail::PreUpdate(PalGuildTailPreUpdate {
             admin_player_uid: props::uuid_to_guid(admin_player_uid),
@@ -337,7 +337,7 @@ pub fn pre_update_guild(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use uesave::games::palworld::PalGuildTailPostUpdate;
+    use crate::ue::games::palworld::PalGuildTailPostUpdate;
 
     fn uid(byte: u8) -> Uuid {
         Uuid::from_bytes([byte; 16])

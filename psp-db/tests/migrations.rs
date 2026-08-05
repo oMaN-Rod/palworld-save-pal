@@ -33,26 +33,27 @@ async fn meta_get_set_roundtrip() {
     let pool = psp_db::open(&temp_dir.path().join("psp-rs.db"))
         .await
         .unwrap();
+    let db = psp_db::SqlxSqliteDriver::new(pool);
     assert_eq!(
-        psp_db::meta::get(&pool, "legacy_import").await.unwrap(),
+        psp_db::meta::get(&db, "legacy_import").await.unwrap(),
         None
     );
-    psp_db::meta::set(&pool, "legacy_import", "{\"done\":true}")
+    psp_db::meta::set(&db, "legacy_import", "{\"done\":true}")
         .await
         .unwrap();
     assert_eq!(
-        psp_db::meta::get(&pool, "legacy_import")
+        psp_db::meta::get(&db, "legacy_import")
             .await
             .unwrap()
             .as_deref(),
         Some("{\"done\":true}")
     );
     // set is an upsert
-    psp_db::meta::set(&pool, "legacy_import", "v2")
+    psp_db::meta::set(&db, "legacy_import", "v2")
         .await
         .unwrap();
     assert_eq!(
-        psp_db::meta::get(&pool, "legacy_import")
+        psp_db::meta::get(&db, "legacy_import")
             .await
             .unwrap()
             .as_deref(),
@@ -61,7 +62,7 @@ async fn meta_get_set_roundtrip() {
 }
 
 #[test]
-fn iso_naive_matches_python_isoformat() {
+fn iso_naive_formats_without_timezone_suffix() {
     let with_micros = chrono::NaiveDate::from_ymd_opt(2026, 1, 2)
         .unwrap()
         .and_hms_micro_opt(3, 4, 5, 123_456)

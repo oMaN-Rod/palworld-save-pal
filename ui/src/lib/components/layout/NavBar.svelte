@@ -6,6 +6,7 @@
 	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
+	import { baseStructuresData } from '$lib/data';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
@@ -74,6 +75,7 @@
 			send(MessageType.EJECT_SESSION, { session_id: sessionId });
 		}
 		appState.resetState();
+		baseStructuresData.reset();
 		clearSessionPersistence();
 		await goto('/file');
 	}
@@ -91,7 +93,6 @@
 	<Navigation.Tile
 		id={item.id}
 		labelExpanded={item.label?.()}
-		expandedClasses="text-xs 2xl:text-base"
 		title={(item.title ?? item.label)?.()}
 		href={item.href}
 		onclick={item.action ? () => runAction(item.action!) : undefined}

@@ -547,6 +547,14 @@
     "localized_name": "Màn Kịch Ảo Thuật",
     "description": "Kỹ năng độc quyền của Dupin. Tạo ra 2 phân thân ảo ảnh làm rối loạn kẻ địch, trong khi đó bản thể phóng ra chú chim lửa từ chiếc mũ ảo thuật để tấn công."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Cú Ép Đá",
+    "description": "Kỹ năng độc quyền của Tetroise . Bật nhảy vọt lên lơ lửng trên không trung, sau đó dùng trọng lượng áp đảo để đè bẹp kẻ địch."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Thánh Quang Trấn Áp",
+    "description": "Kỹ năng độc quyền của Tetroise Primo. Nhảy vọt lên lơ lửng trên không trung và đè bẹp kẻ địch. Sau đó lan tỏa ánh sáng và tiếp tục truy kích bằng những cột sáng."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Cú Trồi Địa Chấn",
     "description": "Kỹ năng độc quyền của Fuddler. Độn thổ che dấu hành tung và bất ngờ trồi lên ngay dưới chân và hất tung kẻ địch."

@@ -5,7 +5,7 @@ use psp_core::dto::guild::GuildLabResearchInfo;
 use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
 use psp_core::session::{SaveKind, SaveSession};
-use uesave::{
+use psp_core::ue::{
     Header, MapEntry, PackageVersion, Properties, Property, PropertySchemas, Root, Save,
     StructValue,
 };
@@ -159,12 +159,10 @@ fn every_fixture_guild_loads_without_panicking() {
     assert_eq!(guild_count, 3, "world1 has 2 guilds, world2 has 1");
 }
 
-/// The same sweep against the private corpus, when `PSP_TEST_SAVE_DIR` is set.
+/// The same sweep against the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_guild_loads_without_panicking() {
-    let Some(mut session) = common::load_corpus_session() else {
-        return;
-    };
+    let mut session = common::load_corpus_session();
     let data = game_data();
     let guild_ids: Vec<Uuid> = session.guild_summaries.keys().copied().collect();
     assert!(!guild_ids.is_empty());
@@ -278,7 +276,7 @@ fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
 fn raw_tail_bytes(
     session: &SaveSession,
     guild_id: Uuid,
-) -> uesave::games::palworld::PalGroupVariant {
+) -> psp_core::ue::games::palworld::PalGroupVariant {
     let entries = world::group_map(&session.level).unwrap();
     let entry_index = guild::guild_entry_index(session, guild_id)
         .unwrap()

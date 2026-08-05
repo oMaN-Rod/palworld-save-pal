@@ -10,6 +10,8 @@
 	import { cn } from '$theme';
 	import { GamepassBrowser } from '$components/gamepass';
 	import { TextInputModal } from '$components/modals';
+	import { openWorldOptionModal } from '$components/worldoption';
+	import { Settings2 } from 'lucide-svelte';
 	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
@@ -123,6 +125,14 @@
 						{appState.saveFile.world_name}
 					</Button>
 				</div>
+				{#if appState.saveFile.world_option_present}
+					<div class="flex justify-center">
+						<Button variant="secondary" onclick={openWorldOptionModal}>
+							<Settings2 size={16} />
+							Edit World Options
+						</Button>
+					</div>
+				{/if}
 				<Card class="w-full min-w-0 sm:min-w-96">
 					<div class="grid grid-cols-[auto_1fr] gap-2">
 						<span class="font-bold">{c.players}:</span>

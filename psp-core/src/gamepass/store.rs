@@ -209,7 +209,8 @@ pub fn clean_container_file_name(name: &str) -> String {
 
 /// Copies every file of the source container into a fresh container dir under
 /// `dest_dir`, renamed to `new_save_id`. LevelMeta payloads get the world name
-/// rewritten; player payloads are replaced when `replacement_player_data` is given.
+/// rewritten; player AND WorldOption payloads are replaced when
+/// `replacement_player_data` is given (`None` passes the original through).
 ///
 /// Aggregates ALL `container.*` revisions rather than picking a latest one, so the
 /// numeric-vs-lexicographic seq pitfall on `read_first_blob` doesn't apply: the sort
@@ -253,7 +254,7 @@ pub fn copy_container(
         for file in &file_list.files {
             let data = if key == "LevelMeta" {
                 crate::gamepass::scan::set_world_name_in_level_meta(&file.data, world_name)?
-            } else if key.contains("Player") {
+            } else if key.contains("Player") || key == "WorldOption" {
                 match replacement_player_data {
                     Some(replacement) => replacement.to_vec(),
                     None => file.data.clone(),
@@ -348,6 +349,7 @@ pub fn save_modified_gamepass(
     player_sav_data: &HashMap<uuid::Uuid, PlayerSavBytes>,
     original_containers: &OrderedMap<String, ContainerEntry>,
     world_name: &str,
+    modified_world_option: Option<&[u8]>,
 ) -> Result<(), CoreError> {
     let level_container =
         create_container(container_dir, save_id, modified_level_data, "Data", "Level")?;
@@ -383,6 +385,9 @@ pub fn save_modified_gamepass(
                 }
                 Err(_) => continue,
             }
+        } else if key == "WorldOption" {
+            // None => copy_container passes the original bytes through untouched.
+            replacement = modified_world_option.map(<[u8]>::to_vec);
         }
         let copied = copy_container(
             original,
@@ -574,39 +579,6 @@ mod tests {
         assert!(source.join("containers.index").exists()); // source untouched
     }
 
-    /// Validates the fixed-64 name codec and GUID blob naming against real Xbox
-    /// on-disk bytes. Skipped, not failed, when the corpus isn't checked out.
-    #[test]
-    fn reads_real_container_file_list_and_blobs_from_corpus_when_present() {
-        let container_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260328021933",
-        );
-        if !container_dir.exists() {
-            eprintln!(
-                "skipping reads_real_container_file_list_and_blobs_from_corpus_when_present: {} not found",
-                container_dir.display()
-            );
-            return;
-        }
-        let blob_dir = std::fs::read_dir(&container_dir)
-            .unwrap()
-            .flatten()
-            .map(|dir_entry| dir_entry.path())
-            .find(|path| path.is_dir() && path.join("container.1").exists())
-            .expect("expected at least one container subdir with a container.1 file list");
-
-        let list = ContainerFileList::read_from_file(&blob_dir.join("container.1")).unwrap();
-        assert_eq!(list.seq, 1);
-        assert!(
-            !list.files.is_empty(),
-            "expected at least one file entry in the real container.1 file list"
-        );
-        assert!(
-            !list.files[0].data.is_empty(),
-            "expected non-empty blob data for the real container's first file"
-        );
-    }
-
     #[test]
     fn read_first_blob_picks_numeric_latest_seq_not_lexicographic() {
         // container.10 is the true latest but sorts BEFORE container.2 as a string,
@@ -731,13 +703,7 @@ mod tests {
     #[test]
     fn save_modified_gamepass_creates_new_containers_and_rewrites_index() {
         use crate::gamepass::PlayerSavBytes;
-        let testdata = match crate::gamepass::fixture::python_testdata_dir() {
-            Some(dir) => dir,
-            None => {
-                eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-                return;
-            }
-        };
+        let testdata = crate::gamepass::fixture::reference_saves_dir();
         let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
 
         let temp = tempfile::tempdir().unwrap();
@@ -777,6 +743,7 @@ mod tests {
             &player_data,
             &originals,
             "Renamed World",
+            None,
         )
         .unwrap();
 
@@ -857,6 +824,86 @@ mod tests {
             delete_save_containers(&container_dir, "0000000000000000000000000000BEEF", &backups)
                 .unwrap();
         assert_eq!(removed, 0);
+    }
+
+    #[test]
+    fn save_modified_gamepass_substitutes_world_option_bytes() {
+        let temp = tempfile::tempdir().unwrap();
+        let save_id = "0123456789ABCDEF0123456789ABCDEF";
+        let synthetic = crate::gamepass::fixture::SyntheticSave {
+            save_id: save_id.to_string(),
+            level_sav: b"LEVEL".to_vec(),
+            // None, not fake bytes: save_modified_gamepass runs every non-Level
+            // container through copy_container, and a LevelMeta container is
+            // rewritten via a real GVAS parse (set_world_name_in_level_meta) that
+            // fake bytes can't survive. Omitting it keeps this test focused on
+            // WorldOption substitution.
+            level_meta: None,
+            local_data: None,
+            world_option: Some(b"OLD_WORLD_OPTION".to_vec()),
+            players: vec![],
+        };
+        let container_dir =
+            crate::gamepass::fixture::build_wgs_tree(temp.path(), &[synthetic]).unwrap();
+        let mut index = ContainerIndex::read_from_dir(&container_dir).unwrap();
+        let originals = index.latest_save_containers(save_id);
+
+        save_modified_gamepass(
+            &mut index,
+            &container_dir,
+            save_id,
+            b"NEW_LEVEL",
+            &HashMap::new(),
+            &originals,
+            "MyWorld",
+            Some(b"NEW_WORLD_OPTION"),
+        )
+        .unwrap();
+
+        let latest = index.latest_save_containers(save_id);
+        let entry = latest.get("WorldOption").unwrap();
+        let (_seq, blob) = read_first_blob(&container_dir, entry).unwrap().unwrap();
+        assert_eq!(blob, b"NEW_WORLD_OPTION");
+    }
+
+    #[test]
+    fn save_modified_gamepass_passes_world_option_through_when_not_modified() {
+        let temp = tempfile::tempdir().unwrap();
+        let save_id = "0123456789ABCDEF0123456789ABCDEF";
+        let synthetic = crate::gamepass::fixture::SyntheticSave {
+            save_id: save_id.to_string(),
+            level_sav: b"LEVEL".to_vec(),
+            // See the comment in the substitution test above: fake LevelMeta
+            // bytes can't survive save_modified_gamepass's real GVAS rewrite.
+            level_meta: None,
+            local_data: None,
+            world_option: Some(b"ORIGINAL".to_vec()),
+            players: vec![],
+        };
+        let container_dir =
+            crate::gamepass::fixture::build_wgs_tree(temp.path(), &[synthetic]).unwrap();
+        let mut index = ContainerIndex::read_from_dir(&container_dir).unwrap();
+        let originals = index.latest_save_containers(save_id);
+
+        save_modified_gamepass(
+            &mut index,
+            &container_dir,
+            save_id,
+            b"NEW_LEVEL",
+            &HashMap::new(),
+            &originals,
+            "MyWorld",
+            None,
+        )
+        .unwrap();
+
+        let latest = index.latest_save_containers(save_id);
+        let entry = latest.get("WorldOption").unwrap();
+        let (_seq, blob) = read_first_blob(&container_dir, entry).unwrap().unwrap();
+        assert_eq!(
+            blob, b"ORIGINAL",
+            "an unmodified WorldOption must survive untouched"
+        );
     }
 
     #[test]

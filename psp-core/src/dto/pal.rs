@@ -91,6 +91,8 @@ pub struct PalDto {
     pub is_boss: Option<bool>,
     #[serde(default)]
     pub is_predator: bool, // output-only
+    pub is_awakened: Option<bool>,
+    pub is_imported: Option<bool>,
     pub is_tower: bool,
     pub gender: PalGender,
     pub nickname: Option<String>,
@@ -136,6 +138,8 @@ impl PalDto {
             "character_id": "",
             "is_lucky": null,
             "is_boss": null,
+            "is_awakened": null,
+            "is_imported": null,
             "gender": "Male",
             "rank_hp": 0, "rank_attack": 0, "rank_defense": 0, "rank_craftspeed": 0,
             "talent_hp": 0, "talent_shot": 0, "talent_defense": 0,
@@ -256,6 +260,8 @@ mod tests {
             is_lucky: Some(false),
             is_boss: Some(false),
             is_predator: false,
+            is_awakened: Some(false),
+            is_imported: Some(false),
             is_tower: false,
             gender: PalGender::Female,
             nickname: Some("wooly".to_string()),
@@ -287,6 +293,30 @@ mod tests {
     }
 
     #[test]
+    fn pal_dto_defaults_both_new_flags_to_none_when_absent() {
+        let payload = serde_json::json!({
+            "instance_id": "11111111-2222-3333-4444-555555555555",
+            "character_id": "SheepBall",
+        });
+        let dto = PalDto::from_json_lenient(&payload).unwrap();
+        assert_eq!(dto.is_awakened, None, "absent means leave the save alone");
+        assert_eq!(dto.is_imported, None, "absent means leave the save alone");
+    }
+
+    #[test]
+    fn pal_dto_round_trips_both_new_flags() {
+        let payload = serde_json::json!({
+            "instance_id": "11111111-2222-3333-4444-555555555555",
+            "character_id": "SheepBall",
+            "is_awakened": true,
+            "is_imported": false,
+        });
+        let dto = PalDto::from_json_lenient(&payload).unwrap();
+        assert_eq!(dto.is_awakened, Some(true));
+        assert_eq!(dto.is_imported, Some(false));
+    }
+
+    #[test]
     fn pal_dto_pins_exact_wire_order() {
         let serialized = serde_json::to_string(&sample_pal_dto()).unwrap();
         assert_eq!(
@@ -298,6 +328,8 @@ mod tests {
                 "\"is_lucky\":false,",
                 "\"is_boss\":false,",
                 "\"is_predator\":false,",
+                "\"is_awakened\":false,",
+                "\"is_imported\":false,",
                 "\"is_tower\":false,",
                 "\"gender\":\"Female\",",
                 "\"nickname\":\"wooly\",",

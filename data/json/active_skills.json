@@ -1927,6 +1927,30 @@
       }
     ]
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "element": "Earth",
+    "type": "Shot",
+    "power": 600,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 30.0,
+    "effects": [
+      {
+        "type": "Muddy",
+        "value": 100,
+        "value_ex": 0.0
+      }
+    ]
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "element": "Normal",
+    "type": "Shot",
+    "power": 700,
+    "min_range": 500,
+    "max_range": 4000,
+    "cool_time": 30.0,
+    "effects": []
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "element": "Earth",
     "type": "Melee",

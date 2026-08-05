@@ -513,7 +513,7 @@ pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
         .or_else(|| parse_option_settings_ini(&default_ini))
         .unwrap_or_else(hardcoded_defaults);
 
-    for (env_key, env_value) in record.env_vars.0.iter() {
+    for (env_key, env_value) in record.env_vars.iter() {
         if is_docker_only_key(env_key) {
             continue;
         }
@@ -732,7 +732,7 @@ mod tests {
         record.max_players = 24;
         record.game_port = 8311;
         record.rest_api_port = 8312;
-        record.env_vars = sqlx::types::Json(serde_json::Map::new());
+        record.env_vars = serde_json::Map::new();
         record
     }
 
@@ -810,11 +810,9 @@ mod tests {
         let mut record = native_record(&install);
         record
             .env_vars
-            .0
             .insert("EXP_RATE".to_string(), serde_json::json!("3.0"));
         record
             .env_vars
-            .0
             .insert("UPDATE_ON_BOOT".to_string(), serde_json::json!("true")); // docker-only, skipped
         let content = build_palworld_settings_content(&record);
         assert!(content.starts_with("[/Script/Pal.PalGameWorldSettings]\nOptionSettings=("));

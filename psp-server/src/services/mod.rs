@@ -175,7 +175,7 @@ mod tests {
     use chrono::NaiveDate;
 
     #[test]
-    fn round_to_matches_python_round_for_stats_values() {
+    fn round_to_uses_banker_rounding_for_stats_values() {
         assert_eq!(round_to(80.004, 2), 80.0);
         assert_eq!(round_to(1024.04, 1), 1024.0);
         // Exactly-representable halves (eighths) must round to even: 0.125 -> 0.12,
@@ -196,7 +196,7 @@ mod tests {
     }
 
     #[test]
-    fn python_str_matches_python_str_builtin() {
+    fn python_str_formats_floats_without_trailing_zeros() {
         assert_eq!(python_str(&serde_json::json!("text")), "text");
         assert_eq!(python_str(&serde_json::json!(true)), "True");
         assert_eq!(python_str(&serde_json::json!(false)), "False");

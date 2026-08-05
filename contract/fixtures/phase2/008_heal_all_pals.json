@@ -1,0 +1,9 @@
+{
+  "request": {
+    "type": "heal_all_pals",
+    "data": {
+      "player_id": "8c2f1930-0000-0000-0000-000000000000"
+    }
+  },
+  "responses": []
+}

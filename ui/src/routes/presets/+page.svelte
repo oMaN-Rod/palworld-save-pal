@@ -1,9 +1,27 @@
 <script lang="ts">
 	import { presetsData } from '$lib/data';
-	import { Button, List, TooltipButton, Input, Tooltip } from '$components/ui';
-	import { getModalState, getToastState } from '$states';
-	import { debounce } from '$utils';
-	import { Trash, RefreshCcw, Download, Upload } from 'lucide-svelte';
+	import { Button, List, TooltipButton, Input, Tooltip, Select } from '$components/ui';
+	import {
+		getModalState,
+		getToastState,
+		getConfig,
+		setMode,
+		setDirection,
+		setCustomOrder,
+		sortPresets
+	} from '$states';
+	import type { PresetTypeKey, PresetSortMode } from '$states';
+	import { debounce, moveIds } from '$utils';
+	import {
+		Trash,
+		RefreshCcw,
+		Download,
+		Upload,
+		ArrowDownAZ,
+		ArrowUpAZ,
+		ChevronUp,
+		ChevronDown
+	} from 'lucide-svelte';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -28,95 +46,84 @@
 	let searchQuery = $state('');
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 
+	const TAB_TYPE: Record<PresetType, PresetTypeKey> = {
+		pal: 'pal_preset',
+		inventory: 'inventory',
+		passive: 'passive_skills',
+		active: 'active_skills',
+		storage: 'storage'
+	};
+	const activeTypeKey = $derived(TAB_TYPE[activeTab]);
+	const activeConfig = $derived(getConfig(activeTypeKey));
+
+	const sortOptions = $derived([
+		{ value: 'name', label: m.name() },
+		{ value: 'custom', label: m.sort_custom() }
+	]);
+
 	const presetsClass = $derived(
 		// @ts-ignore
 		activeTab === 'active' || activeTab === 'passive' ? 'grid grid-cols-2' : 'flex flex-col'
 	);
 
-	const palPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'pal_preset')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
+	function presetsOfType(type: PresetProfile['type']): ExtendedPresetProfile[] {
+		return Object.entries(presetsData.presetProfiles)
+			.filter(([, preset]) => preset.type === type)
+			.map(([id, preset]) => ({ ...preset, id }));
+	}
 
-	const inventoryPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'inventory')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
+	const palPresets = $derived(presetsOfType('pal_preset'));
+	const inventoryPresets = $derived(presetsOfType('inventory'));
+	const passiveSkillPresets = $derived(presetsOfType('passive_skills'));
+	const activeSkillPresets = $derived(presetsOfType('active_skills'));
+	const storagePresets = $derived(presetsOfType('storage'));
 
-	const passiveSkillPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'passive_skills')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const activeSkillPresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'active_skills')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const storagePresets = $derived(
-		Object.values(presetsData.presetProfiles)
-			.filter((p) => p.type === 'storage')
-			.map((preset) => ({
-				...preset,
-				id: Object.keys(presetsData.presetProfiles)[
-					Object.values(presetsData.presetProfiles).findIndex((p) => p === preset)
-				]
-			}))
-	);
-
-	const filteredPresets = $derived.by(() => {
-		let presets: ExtendedPresetProfile[] = [];
-
+	const activePresets = $derived.by(() => {
 		switch (activeTab) {
 			case 'pal':
-				presets = palPresets;
-				break;
+				return palPresets;
 			case 'inventory':
-				presets = inventoryPresets;
-				break;
+				return inventoryPresets;
 			case 'passive':
-				presets = passiveSkillPresets;
-				break;
+				return passiveSkillPresets;
 			case 'active':
-				presets = activeSkillPresets;
-				break;
+				return activeSkillPresets;
 			case 'storage':
-				presets = storagePresets;
-				break;
+				return storagePresets;
 		}
+		return [];
+	});
 
+	const filteredPresets = $derived.by(() => {
+		let presets = activePresets;
 		if (searchQuery) {
 			presets = presets.filter((preset) =>
 				preset.name.toLowerCase().includes(searchQuery.toLowerCase())
 			);
 		}
-
-		return presets;
+		return sortPresets(presets, activeTypeKey);
 	});
+
+	// Reordering acts on the full (unfiltered) order; disabled while searching so
+	// hidden presets keep their place. First move auto-switches the tab to custom
+	// mode, seeding the custom order from what is currently displayed.
+	function moveSelected(direction: 'up' | 'down') {
+		if (searchQuery || selectedPresets.length === 0) return;
+		const ordered = sortPresets(activePresets, activeTypeKey).map((preset) => preset.id);
+		const selectedIds = new Set(selectedPresets.map((preset) => preset.id));
+		const moved = moveIds(ordered, selectedIds, direction);
+		setMode(activeTypeKey, 'custom');
+		setCustomOrder(activeTypeKey, moved);
+	}
+
+	function handlePanelKeydown(event: KeyboardEvent) {
+		if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+		const target = event.target as HTMLElement;
+		if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') return;
+		if (searchQuery || selectedPresets.length === 0) return;
+		event.preventDefault();
+		moveSelected(event.key === 'ArrowUp' ? 'up' : 'down');
+	}
 
 	async function handleDeletePresets() {
 		if (selectedPresets.length === 0) return;
@@ -185,6 +192,22 @@
 		await presetsData.exportPreset(preset.id, activeTab, preset.name);
 	}
 
+	async function handleExportSelected() {
+		if (selectedPresets.length === 0) return;
+		if (selectedPresets.length === 1) {
+			const preset = selectedPresets[0];
+			await presetsData.exportPreset(preset.id, preset.type, preset.name);
+			return;
+		}
+		await presetsData.exportPresets(
+			selectedPresets.map((preset) => ({
+				preset_id: preset.id,
+				preset_type: preset.type,
+				preset_name: preset.name
+			}))
+		);
+	}
+
 	async function handleImportPreset() {
 		await presetsData.importPreset();
 	}
@@ -243,7 +266,7 @@
 		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
 	>
 		<!-- Left Controls -->
-		<div class="shrink-0 space-y-2 overflow-y-auto p-4">
+		<div class="shrink-0 space-y-2 overflow-y-auto p-4" onkeydown={handlePanelKeydown} role="none">
 			<div class="flex items-center space-x-2">
 				<div class="grow">
 					<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
@@ -259,6 +282,33 @@
 				</TooltipButton>
 			</div>
 
+			<div class="flex items-center space-x-2">
+				<div class="grow">
+					{#key activeTypeKey}
+						<Select
+							options={sortOptions}
+							value={activeConfig.mode}
+							onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
+							label={m.sort_by()}
+						/>
+					{/key}
+				</div>
+
+				{#if activeConfig.mode === 'name'}
+					<TooltipButton
+						popupLabel={activeConfig.direction === 'asc' ? m.sort_descending() : m.sort_ascending()}
+						onclick={() =>
+							setDirection(activeTypeKey, activeConfig.direction === 'asc' ? 'desc' : 'asc')}
+					>
+						{#if activeConfig.direction === 'asc'}
+							<ArrowDownAZ class="h-6 w-6" />
+						{:else}
+							<ArrowUpAZ class="h-6 w-6" />
+						{/if}
+					</TooltipButton>
+				{/if}
+			</div>
+
 			<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
 				<TooltipButton
 					popupLabel={m.import_preset()}
@@ -266,6 +316,15 @@
 					buttonClass="hover:bg-secondary-500/50"
 				>
 					<Upload size={20} />
+				</TooltipButton>
+
+				<TooltipButton
+					popupLabel={m.export_selected()}
+					onclick={handleExportSelected}
+					buttonClass="hover:bg-primary-500/50"
+					disabled={selectedPresets.length === 0}
+				>
+					<Download size={20} />
 				</TooltipButton>
 
 				<TooltipButton
@@ -278,6 +337,26 @@
 				>
 					<Trash size={20} />
 				</TooltipButton>
+
+				<div class="bg-surface-700/50 mx-1 w-px self-stretch"></div>
+
+				<TooltipButton
+					popupLabel={m.move_up()}
+					onclick={() => moveSelected('up')}
+					buttonClass="hover:bg-secondary-500/50"
+					disabled={selectedPresets.length === 0 || !!searchQuery}
+				>
+					<ChevronUp size={20} />
+				</TooltipButton>
+
+				<TooltipButton
+					popupLabel={m.move_down()}
+					onclick={() => moveSelected('down')}
+					buttonClass="hover:bg-secondary-500/50"
+					disabled={selectedPresets.length === 0 || !!searchQuery}
+				>
+					<ChevronDown size={20} />
+				</TooltipButton>
 			</div>
 
 			<List
@@ -286,6 +365,8 @@
 				bind:selectedItems={selectedPresets}
 				multiple={true}
 				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
+				reorderable={activeConfig.mode === 'custom' && !searchQuery}
+				onReorder={(ids) => setCustomOrder(activeTypeKey, ids as string[])}
 			>
 				{#snippet listHeader()}
 					<span class="font-bold">{m.name()}</span>

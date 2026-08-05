@@ -84,6 +84,16 @@ export function editAlpha(pal: Pal, force: boolean = false): [string, boolean] {
 		return [type, true];
 	}
 
+export function editAwakened(pal: Pal): void {
+	pal.is_awakened = !pal.is_awakened;
+	pal.state = EntryState.MODIFIED;
+}
+
+export function editImported(pal: Pal): void {
+	pal.is_imported = !pal.is_imported;
+	pal.state = EntryState.MODIFIED;
+}
+
 export function formatNickname(nickname: string, prefix: string | undefined) {
 	if (prefix && !nickname.startsWith(prefix)) {
 		return `${prefix} ${nickname}`;
@@ -98,6 +108,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	const maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	editAlpha(pal, true);
+	pal.is_awakened = true;
 	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_shot = appState.settings.cheat_mode ? 255 : 100;
 	pal.talent_defense = appState.settings.cheat_mode ? 255 : 100;
@@ -114,7 +125,7 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 		pal.stomach = palData.max_full_stomach;
 		for (const [key, value] of Object.entries(palData.work_suitability)) {
 			if (value === 0) continue;
-			pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 4);
+			pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
 		}
 	} else {
 		pal.stomach = 150;

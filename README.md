@@ -242,7 +242,9 @@ collects the shipped artifacts into `dist/`:
 
 ## 📜 License
 
-MIT License (do whatever you want with it).
+[GNU General Public License v3.0](LICENSE). You are free to use, modify, and
+redistribute this software, provided derivative works are released under the
+same license and their source is made available.
 
 ## ➡️ Related Projects
 

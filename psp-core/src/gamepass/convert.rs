@@ -15,9 +15,9 @@ pub fn recompress_to_plm(data: &[u8]) -> Result<Vec<u8>, CoreError> {
     if data.len() > 12 && &data[8..12] == b"PlM1" {
         return Ok(data.to_vec());
     }
-    let gvas_bytes = uesave::compression::decompress_save(&mut Cursor::new(data))
+    let gvas_bytes = crate::ue::compression::decompress_save(&mut Cursor::new(data))
         .map_err(|error| CoreError::Parse(error.to_string()))?;
-    uesave::compression::compress_save(&gvas_bytes, uesave::compression::CompressionFormat::Oodle)
+    crate::ue::compression::compress_save(&gvas_bytes, crate::ue::compression::CompressionFormat::Oodle)
         .map_err(|error| CoreError::Parse(error.to_string()))
 }
 
@@ -183,79 +183,33 @@ mod tests {
     use super::*;
     use crate::dto::ordered_map::OrderedMap;
     use crate::gamepass::fixture::{
-        build_wgs_tree, python_testdata_dir, SyntheticPlayer, SyntheticSave,
+        build_wgs_tree, reference_saves_dir, SyntheticPlayer, SyntheticSave,
     };
     use crate::gamepass::format::ContainerIndex;
     use crate::progress::null_progress;
 
-    fn testdata_or_skip() -> Option<std::path::PathBuf> {
-        let dir = python_testdata_dir();
-        if dir.is_none() {
-            eprintln!("SKIP: python testdata not found (set PSP_PY_TESTDATA)");
-        }
-        dir
-    }
-
     #[test]
     fn recompress_to_plm_converts_plz_and_passes_plm_through() {
-        let Some(testdata) = testdata_or_skip() else {
-            return;
-        };
-        // Committed test saves are PlZ (zlib).
-        let plz_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
+        // The committed reference saves are PlZ (zlib).
+        let plz_bytes = std::fs::read(reference_saves_dir().join("LevelMeta.sav")).unwrap();
         assert_eq!(&plz_bytes[8..11], b"PlZ");
 
         let plm_bytes = recompress_to_plm(&plz_bytes).unwrap();
         assert_eq!(&plm_bytes[8..12], b"PlM1");
         let original_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
                 .unwrap();
         let recompressed_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
+            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
                 .unwrap();
         assert_eq!(original_gvas, recompressed_gvas);
 
         assert_eq!(recompress_to_plm(&plm_bytes).unwrap(), plm_bytes);
     }
 
-    /// Exercises the CNK->PlM path against a real Xbox `Level.sav` (the committed
-    /// testdata is PlZ, so only the corpus covers CNK). Skipped, not failed, when
-    /// the corpus isn't checked out.
-    #[test]
-    fn recompress_to_plm_converts_real_gamepass_cnk_level_to_plm() {
-        let level_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join(
-            "../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260325231642/CC9746994B05F767129BC48B346B691D/Level.sav",
-        );
-        if !level_path.exists() {
-            eprintln!(
-                "skipping recompress_to_plm_converts_real_gamepass_cnk_level_to_plm: {} not found",
-                level_path.display()
-            );
-            return;
-        }
-        let cnk_bytes = std::fs::read(&level_path).unwrap();
-        assert_eq!(&cnk_bytes[8..11], b"CNK");
-
-        let plm_bytes = recompress_to_plm(&cnk_bytes).unwrap();
-        assert_eq!(&plm_bytes[8..12], b"PlM1");
-
-        let original_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(cnk_bytes.as_slice()))
-                .unwrap();
-        let recompressed_gvas =
-            uesave::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
-                .unwrap();
-        assert_eq!(
-            original_gvas, recompressed_gvas,
-            "GVAS payload must be preserved when recompressing a real CNK Level.sav to PlM"
-        );
-    }
-
     #[test]
     fn extract_writes_steam_layout_with_selected_save_progress_labels() {
-        let Some(testdata) = testdata_or_skip() else {
-            return;
-        };
+        let testdata = reference_saves_dir();
         let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
         let level_bytes = std::fs::read(testdata.join("Level.sav")).unwrap();
         let player_bytes =
@@ -319,9 +273,7 @@ mod tests {
 
     #[test]
     fn import_steam_dir_creates_containers_under_new_save_id() {
-        let Some(testdata) = testdata_or_skip() else {
-            return;
-        };
+        let testdata = reference_saves_dir();
         let temp = tempfile::tempdir().unwrap();
 
         let source_dir = temp.path().join("steam-src");

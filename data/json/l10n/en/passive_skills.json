@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "Attack Up Lv. 1",
-    "description": null
+    "description": "Attack +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "Attack Up (S) Lv. 1",
-    "description": null
+    "description": "Attack +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Pal Attack Up Lv. 1",
-    "description": null
+    "description": "Attack +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "Attack Up Lv. 2",
-    "description": null
+    "description": "Attack +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "Attack Up (S) Lv. 2",
-    "description": null
+    "description": "Attack +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Pal Attack Up Lv. 2",
-    "description": null
+    "description": "Attack +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "Attack Up Lv. 3",
-    "description": null
+    "description": "Attack +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "Attack Up (S) Lv. 3",
-    "description": null
+    "description": "Attack +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Pal Attack Up Lv. 3",
-    "description": null
+    "description": "Attack +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "Attack Up Lv. 4",
-    "description": null
+    "description": "Attack +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "Attack Up (S) Lv. 4",
-    "description": null
+    "description": "Attack +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Pal Attack Up Lv. 4",
-    "description": null
+    "description": "Attack +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "Healing Coach",
-    "description": null
+    "description": "Player Auto Health Regeneration Rate +5.0%"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "Extended Dodge Immunity",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Water Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Water attack damage."
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Electric Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Water Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Water attack damage."
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "Neutral Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "Dragon Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "Electric Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Dragon Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Electric Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "Fire Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Fire attack damage."
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Ground Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Earth attack damage."
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "Dark Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dark attack damage."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Ground Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Earth attack damage."
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Water Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Water attack damage."
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "Ice Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Ice attack damage."
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Ice Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Ice attack damage."
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Ice Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Ice attack damage."
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Fire Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Fire attack damage."
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Dragon Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "Fire Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Fire attack damage."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Ice Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Ice attack damage."
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Fire Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Fire attack damage."
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Ice Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Ice attack damage."
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Dragon Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "Grass Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Grass attack damage."
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "Water Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Water attack damage."
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "Dark Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dark attack damage."
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Ice Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Ice attack damage."
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Water Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Water attack damage."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "Ground Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Earth attack damage."
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "Ice Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Ice attack damage."
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Fire Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Fire attack damage."
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "Neutral Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Water Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Water attack damage."
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Dragon Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Fire Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Fire attack damage."
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Water Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Water attack damage."
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "Ice Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Ice attack damage."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Ice Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Ice attack damage."
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Ice Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Ice attack damage."
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Neutral Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Neutral attack damage."
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "Dark Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dark attack damage."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Ice Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Ice attack damage."
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dragon attack damage."
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Ground Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Earth attack damage."
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "CaptureLevel_Up_1": {
     "localized_name": "Capture Strength +1",
-    "description": null
+    "description": "Capture Power +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "Capture Strength +2",
-    "description": null
+    "description": "Capture Power +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "Capture Strength +3",
-    "description": null
+    "description": "Capture Power +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "Capture Strength +4",
-    "description": null
+    "description": "Capture Power +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "Capture Strength +5",
-    "description": null
+    "description": "Capture Power +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "Capture Strength +6",
-    "description": null
+    "description": "Capture Power +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "Berry Picker",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "Clumsy",
-    "description": null
+    "description": "Work Speed -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "Slacker",
-    "description": null
+    "description": "Work Speed -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "Serious",
-    "description": null
+    "description": "Work Speed +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "Artisan",
-    "description": null
+    "description": "Work Speed +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "Remarkable Craftsmanship",
-    "description": null
+    "description": "Work Speed +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Pal Defense Up Lv. 1",
-    "description": null
+    "description": "Defense +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Pal Defense Up Lv. 2",
-    "description": null
+    "description": "Defense +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Pal Defense Up Lv. 3",
-    "description": null
+    "description": "Defense +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Pal Defense Up Lv. 4",
-    "description": null
+    "description": "Defense +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "Downtrodden",
-    "description": null
+    "description": "Defense -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "Brittle",
-    "description": null
+    "description": "Defense -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "Hard Skin",
-    "description": null
+    "description": "Defense +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "Burly Body",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Explosion Immunity",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydromaniac",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Lord of the Sea",
-    "description": null
+    "description": "30.0% increase in Water attack damage."
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "Pal Dark Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Veil of Darkness",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "Pal Dark Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "Lord of the Underworld",
-    "description": null
+    "description": "30.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "Dark Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "Pal Dark Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Dark attack damage."
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "Pal Dark Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Dark attack damage."
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "Pal Dragon Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Blood of the Dragon",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "Pal Dragon Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Divine Dragon",
-    "description": null
+    "description": "30.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "Dragon Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Pal Dragon Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Dragon attack damage."
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "Pal Dragon Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Dragon attack damage."
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "Pal Ground Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Power of Gaia",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "Pal Ground Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Earth Emperor",
-    "description": null
+    "description": "30.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "Ground Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "Pal Ground Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Earth attack damage."
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "Pal Ground Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Earth attack damage."
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "Pal Electric Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "Pal Electric Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Electric Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Pal Electric Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Lightning attack damage."
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "Pal Electric Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Lightning attack damage."
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "Pal Fire Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromaniac",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "Pal Fire Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Flame Emperor",
-    "description": null
+    "description": "30.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "Fire Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "Pal Fire Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Fire attack damage."
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "Pal Fire Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Fire attack damage."
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "Pal Ice Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Coldblooded",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "Pal Ice Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Ice Emperor",
-    "description": null
+    "description": "30.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "Ice Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Pal Ice Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Ice attack damage."
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "Pal Ice Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Ice attack damage."
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "Pal Grass Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrant Foliage",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "Pal Grass Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Spirit Emperor",
-    "description": null
+    "description": "30.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "Grass Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "Pal Grass Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Grass attack damage."
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "Pal Grass Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Grass attack damage."
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "Pal Neutral Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Spirit of Zen",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "Pal Neutral Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Celestial Emperor",
-    "description": null
+    "description": "30.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Neutral Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Pal Neutral Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Neutral attack damage."
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "Pal Neutral Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Neutral attack damage."
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Capacitor",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Lord of Lightning",
-    "description": null
+    "description": "30.0% increase in Lightning attack damage."
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Small)",
-    "description": null
+    "description": "1.0% increase in Water attack damage."
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "Pal Water Damage Enhancement Lv. 1",
-    "description": null
+    "description": "6.0% increase in Water attack damage."
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Medium)",
-    "description": null
+    "description": "2.0% increase in Water attack damage."
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "Pal Water Damage Enhancement Lv. 2",
-    "description": null
+    "description": "12.0% increase in Water attack damage."
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Water Damage Enhancement (Large)",
-    "description": null
+    "description": "3.0% increase in Water attack damage."
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "Pal Water Damage Enhancement Lv. 3",
-    "description": null
+    "description": "18.0% increase in Water attack damage."
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "Pal Water Damage Enhancement Lv. 4",
-    "description": null
+    "description": "20.0% increase in Water attack damage."
   },
   "ElementResist_Aqua_1": {
     "localized_name": "Water Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Water damage."
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Waterproof",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Water Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Water damage."
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Water Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Water damage."
   },
   "ElementResist_Aqua_4": {
     "localized_name": "Water Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Water damage."
   },
   "ElementResist_Dark_1": {
     "localized_name": "Dark Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Dark damage."
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Cheery",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "Dark Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Dark damage."
   },
   "ElementResist_Dark_3": {
     "localized_name": "Dark Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Dark damage."
   },
   "ElementResist_Dark_4": {
     "localized_name": "Dark Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Dark damage."
   },
   "ElementResist_Dragon_1": {
     "localized_name": "Dragon Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Dragon damage."
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Dragonkiller",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Dragon Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Dragon damage."
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Dragon Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Dragon damage."
   },
   "ElementResist_Dragon_4": {
     "localized_name": "Dragon Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Dragon damage."
   },
   "ElementResist_Earth_1": {
     "localized_name": "Earth Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Earth damage."
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Earthquake Resistant",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "Earth Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Earth damage."
   },
   "ElementResist_Earth_3": {
     "localized_name": "Earth Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Earth damage."
   },
   "ElementResist_Earth_4": {
     "localized_name": "Ground Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Earth damage."
   },
   "ElementResist_Fire_1": {
     "localized_name": "Fire Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Fire damage."
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Suntan Lover",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "Fire Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Fire damage."
   },
   "ElementResist_Fire_3": {
     "localized_name": "Fire Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Fire damage."
   },
   "ElementResist_Fire_4": {
     "localized_name": "Fire Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Fire damage."
   },
   "ElementResist_Ice_1": {
     "localized_name": "Ice Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Ice damage."
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Heated Body",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "Ice Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Ice damage."
   },
   "ElementResist_Ice_3": {
     "localized_name": "Ice Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Ice damage."
   },
   "ElementResist_Ice_4": {
     "localized_name": "Ice Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Ice damage."
   },
   "ElementResist_Leaf_1": {
     "localized_name": "Grass Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Grass damage."
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Botanical Barrier",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Grass Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Grass damage."
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Grass Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Grass damage."
   },
   "ElementResist_Leaf_4": {
     "localized_name": "Grass Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Grass damage."
   },
   "ElementResist_Normal_1": {
     "localized_name": "Neutral Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Neutral damage."
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Abnormal",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "Neutral Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Neutral damage."
   },
   "ElementResist_Normal_3": {
     "localized_name": "Neutral Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Neutral damage."
   },
   "ElementResist_Normal_4": {
     "localized_name": "Neutral Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Neutral damage."
   },
   "ElementResist_Thunder_1": {
     "localized_name": "Electric Damage Reduction Lv. 1",
-    "description": null
+    "description": "15.0% decrease in incoming Lightning damage."
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Insulated Body",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Electric Damage Reduction Lv. 2",
-    "description": null
+    "description": "25.0% decrease in incoming Lightning damage."
   },
   "ElementResist_Thunder_3": {
     "localized_name": "Electric Damage Reduction Lv. 3",
-    "description": null
+    "description": "30.0% decrease in incoming Lightning damage."
   },
   "ElementResist_Thunder_4": {
     "localized_name": "Electric Damage Reduction Lv. 4",
-    "description": null
+    "description": "35.0% decrease in incoming Lightning damage."
   },
   "EternalFlame": {
     "localized_name": "Eternal Flame",
-    "description": null
+    "description": "30.0% increase to Fire attack damage. 30.0% increase to Lightning attack damage."
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "Party Pals Bond Boost",
-    "description": null
+    "description": "Trust +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "Hunger decreases <NumBlue_13>+10.0%</> slower."
   },
   "GYM_NAME_Desert": {
     "localized_name": "PIDF Commander",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "Free Pal Alliance Founder",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Rayne Syndicate Boss",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Leader of the Moonflowers",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "PAL Genetic Research Unit Commander",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "Jarl of Feybreak",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "Brothers of the Eternal Pyre Soul Leader",
-    "description": null
+    "description": "Attack +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "Health Up Lv. 1",
-    "description": null
+    "description": "Max Health +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "Health Up Lv. 2",
-    "description": null
+    "description": "Max Health +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "Health Up Lv. 3",
-    "description": null
+    "description": "Max Health +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "Health Up Lv. 4",
-    "description": null
+    "description": "Max Health +25.0%"
   },
   "Invader": {
     "localized_name": "Invader",
-    "description": null
+    "description": "30.0% increase in Dark attack damage. 30.0% increase in Dragon attack damage."
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "Toxic Gas Immunity",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "Jump Count Increase +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Max Carrying Capacity Lv. 1",
-    "description": null
+    "description": "Carrying Capacity +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "Max Carrying Capacity Lv. 2",
-    "description": null
+    "description": "Carrying Capacity +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "Max Carrying Capacity Lv. 3",
-    "description": null
+    "description": "Carrying Capacity +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "Max Carrying Capacity Lv. 1",
-    "description": null
+    "description": "Carrying Capacity +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "Max Carrying Capacity Lv. 2",
-    "description": null
+    "description": "Carrying Capacity +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "Max Carrying Capacity Lv. 3",
-    "description": null
+    "description": "Carrying Capacity +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "Max Carrying Capacity Lv. 4",
-    "description": null
+    "description": "Carrying Capacity +300.0%"
   },
   "MiniNushi": {
     "localized_name": "Whopper",
-    "description": null
+    "description": "5.0% increase to Water attack damage 5.0% increase to Ice attack damage 5.0% increase to defense."
   },
   "MoveSpeed_up_1": {
     "localized_name": "Nimble",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Idiosyncratic",
-    "description": "Pal and Player Auto Health Regeneration Rate +50.0% Defense +{EffectValue4}% <Status_Up>Immune</> to Poison Damage <Status_Up>Immune</> to Burn Damage"
+    "description": "Pal and Player Auto Health Regeneration Rate +50.0% Defense +25.0% <Status_Up>Immune</> to Poison Damage <Status_Up>Immune</> to Burn Damage"
   },
   "NightOwl": {
     "localized_name": "Night Owl",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "Musclehead",
-    "description": null
+    "description": "Attack +30.0% Work Speed -50.0%"
   },
   "Nushi": {
     "localized_name": "Lunker",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "Blood Is Fuel",
-    "description": null
+    "description": "Absorbs a portion of the damage dealt to restore Health. Does not sleep at night and continues to work."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Coward",
-    "description": null
+    "description": "Attack -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "Pacifist",
-    "description": null
+    "description": "Attack -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "Brave",
-    "description": null
+    "description": "Attack +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "Ferocious",
-    "description": null
+    "description": "Attack +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "Demon God",
-    "description": null
+    "description": "Attack +30.0% Defense +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "Work Slave",
-    "description": null
+    "description": "Work Speed +30.0% Attack -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Dainty Eater",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "Mentally unstable",
-    "description": null
+    "description": "Work Speed -10.0% Defense -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "Conceited",
-    "description": null
+    "description": "Work Speed +10.0% Defense -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "Masochist",
-    "description": null
+    "description": "Defense +15.0% Attack -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "Aggressive",
-    "description": null
+    "description": "Attack +10.0% Defense -10.0%"
   },
   "PAL_rude": {
     "localized_name": "Hooligan",
-    "description": null
+    "description": "Attack +15.0% Work Speed -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "Sadist",
-    "description": null
+    "description": "Attack +15.0% Defense -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "Pal EXP Up Lv. 1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "Pal EXP Up Lv. 2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "Pal EXP Up Lv. 3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "Wellness Watcher",
-    "description": null
+    "description": "Player Stamina Consumption -<NumBlue_13>5.0</>%"
   },
   "Rare": {
     "localized_name": "Lucky",
-    "description": null
+    "description": "Attack +15.0% Defense +15.0% Work Speed +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "Reload Master",
-    "description": null
+    "description": "Player Reload Speed +4.0%"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "Lightfooted",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "Savior",
-    "description": null
+    "description": "30.0% increase in Neutral attack damage. 30.0% increase in Grass attack damage."
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "Sharing is Caring",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "Ace Swimmer",
-    "description": null
+    "description": "40.0% increase movement speed on water."
   },
   "SwimSpeed_up_3": {
     "localized_name": "King of the Waves",
-    "description": null
+    "description": "50.0% increase movement speed on water."
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Cold Resistance Lv. 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "Cold Resistance Lv. 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "Cold Resistance Lv. 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "Heat Resistance Lv. 1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "Heat Resistance Lv. 1 / Cold Resistance Lv. 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "Heat Resistance Lv. 2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "Heat Resistance Lv. 2 / Cold Resistance Lv. 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "Heat Resistance Lv. 3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "Heat Resistance Lv. 3 / Cold Resistance Lv. 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Philanthropist",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "Siren of the Void",
-    "description": null
+    "description": "30.0% increase in Dark attack damage. 30.0% increase in Ice attack damage."
   },
   "WoodDrop_Boost_1": {
     "localized_name": "Logging Yield Up Lv. 1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Speedy Worker Lv. 1",
-    "description": null
+    "description": "Work Speed +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "Speedy Worker Lv. 2",
-    "description": null
+    "description": "Work Speed +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Speedy Worker Lv. 3",
-    "description": null
+    "description": "Work Speed +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "Speedy Worker Lv. 4",
-    "description": null
+    "description": "Work Speed +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Farmhand",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Hallowed Power: Magic",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "Hallowed Power: Close Range",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "Hallowed Power: Ranged",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "Hallowed Power: Summon",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "Hallowed Guard",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "Defense Up Lv. 1",
-    "description": null
+    "description": "Defense +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "Defense Up Lv. 2",
-    "description": null
+    "description": "Defense +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "Defense Up Lv. 3",
-    "description": null
+    "description": "Defense +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "Defense Up Lv. 4",
-    "description": null
+    "description": "Defense +25.0%"
   }
 }

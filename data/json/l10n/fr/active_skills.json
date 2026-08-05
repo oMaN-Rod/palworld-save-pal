@@ -547,6 +547,14 @@
     "localized_name": "Passe-passe",
     "description": "Compétence exclusive à Dupin. Crée deux illusions pour distraire l'ennemi, puis l'attaque en faisant sortir des oiseaux de feu de son haut-de-forme."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Presse Cubique",
+    "description": "Compétence exclusive à Tetroise . S'élève dans les airs pour écraser l'ennemi sous son poids."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Écrasement Sacré",
+    "description": "Compétence exclusive à Tetroise Primo. S'élève dans les airs pour écraser l'ennemi. Diffuse de la lumière à l'atterrissage pour attaquer une nouvelle fois l'ennemi avec une colonne lumineuse."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Fouission",
     "description": "Compétence exclusive à Fuddler. S'enfonce dans le sol avant d'en ressortir brusquement sous les pieds de l'ennemi."

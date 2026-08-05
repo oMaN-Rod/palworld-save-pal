@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 use crate::dto::container::{CharacterContainerDto, ItemContainerDto};
-use crate::dto::guild::{BaseDto, GuildDto, GuildLabResearchInfo};
+use crate::dto::guild::{BaseDto, BaseStructureDto, GuildDto, GuildLabResearchInfo};
 use crate::dto::ordered_map::OrderedMap;
 use crate::dto::pal::PalDto;
 use crate::dto::player::WorldMapPointDto;
@@ -11,7 +11,7 @@ use crate::error::CoreError;
 use crate::gamedata::GameData;
 use crate::props;
 use crate::session::SaveSession;
-use uesave::{Properties, Property, PropertyKey, StructValue};
+use crate::ue::{Properties, Property, PropertyKey, StructValue};
 
 use super::{containers, guild_tail, pal, world};
 
@@ -22,10 +22,10 @@ use super::{containers, guild_tail, pal, world};
 /// `Struct(None)` hint, which it never decodes, so the property arrives as a
 /// raw byte array. `palbin::worker_director_container_id` bounds-checks and
 /// parses that fixed 118-byte layout.
-pub fn base_guild_and_container(entry: &uesave::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
+pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
     let value_properties = props::struct_props(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let uesave::Property::Struct(uesave::StructValue::PalBaseCamp(base_camp)) = raw_data else {
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) = raw_data else {
         return None;
     };
     let guild_id = props::guid_to_uuid(&base_camp.group_id_belong_to);
@@ -102,12 +102,12 @@ pub fn guild_extra_entry_index(
 fn guild_extra_lab(
     session: &SaveSession,
     extra_index: usize,
-) -> Option<&uesave::games::palworld::PalGuildLab> {
+) -> Option<&crate::ue::games::palworld::PalGuildLab> {
     let entries = world::guild_extra_map(&session.level).ok().flatten()?;
     let value_props = props::struct_props(&entries.get(extra_index)?.value)?;
     let lab_props = props::struct_props(value_props.0.get(&PropertyKey::from("Lab"))?)?;
     match lab_props.0.get(&PropertyKey::from("RawData"))? {
-        Property::Struct(StructValue::PalGuildLab(lab)) => Some(lab),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::GuildLab(lab))) => Some(lab),
         _ => None,
     }
 }
@@ -120,7 +120,7 @@ fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option
     let storage_props =
         props::struct_props(value_props.0.get(&PropertyKey::from("GuildItemStorage"))?)?;
     match storage_props.0.get(&PropertyKey::from("RawData"))? {
-        Property::Struct(StructValue::PalGuildItemStorage(storage)) => {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::GuildItemStorage(storage))) => {
             Some(props::guid_to_uuid(&storage.container_id))
         }
         _ => None,
@@ -151,16 +151,7 @@ fn map_object_properties_by_base_id(
         let StructValue::Struct(object_props) = map_object else {
             continue;
         };
-        let Some(model_props) = object_props
-            .0
-            .get(&PropertyKey::from("Model"))
-            .and_then(props::struct_props)
-        else {
-            continue;
-        };
-        let Some(Property::Struct(StructValue::PalMapModel(model))) =
-            model_props.0.get(&PropertyKey::from("RawData"))
-        else {
+        let Some(model) = map_object_model(object_props) else {
             continue;
         };
         let base_id = props::guid_to_uuid(&model.base_camp_id_belong_to);
@@ -169,13 +160,79 @@ fn map_object_properties_by_base_id(
     index
 }
 
+/// A `MapObjectSaveData` element's typed `Model.RawData`.
+fn map_object_model(
+    object_props: &Properties,
+) -> Option<&crate::ue::games::palworld::PalMapModel> {
+    let model_props = object_props
+        .0
+        .get(&PropertyKey::from("Model"))
+        .and_then(props::struct_props)?;
+    match model_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(model))) => Some(model),
+        _ => None,
+    }
+}
+
+/// The placed structures of `base_id`, as read-only geometry for the world map.
+///
+/// An element that carries no `MapObjectId` or no typed `Model.RawData` is
+/// skipped: one malformed entry must not cost the caller the rest of the base.
+pub fn base_structures(session: &SaveSession, base_id: uuid::Uuid) -> Vec<BaseStructureDto> {
+    let Ok(Some(map_objects)) = world::map_object_values(&session.level) else {
+        return Vec::new();
+    };
+    let index = map_object_properties_by_base_id(map_objects);
+    let Some(objects) = index.get(&base_id) else {
+        return Vec::new();
+    };
+    objects
+        .iter()
+        .filter_map(|object_props| {
+            let map_object_id = object_props
+                .0
+                .get(&PropertyKey::from("MapObjectId"))
+                .and_then(props::as_str)?
+                .to_string();
+            let model = map_object_model(object_props)?;
+            let transform = &model.initial_transform_cache;
+            Some(BaseStructureDto {
+                instance_id: props::guid_to_uuid(&model.instance_id).to_string(),
+                map_object_id,
+                x: transform.translation.x.0,
+                y: transform.translation.y.0,
+                z: transform.translation.z.0,
+                yaw: yaw_from_quat(
+                    transform.rotation.x.0,
+                    transform.rotation.y.0,
+                    transform.rotation.z.0,
+                    transform.rotation.w.0,
+                ),
+                scale_x: transform.scale.x.0,
+                scale_y: transform.scale.y.0,
+                scale_z: transform.scale.z.0,
+                hp_current: model.hp.current as i64,
+                hp_max: model.hp.max as i64,
+                build_player_uid: props::guid_to_uuid(&model.build_player_uid).to_string(),
+            })
+        })
+        .collect()
+}
+
+/// Flattens a placed structure's rotation quaternion to its yaw about Z.
+/// Placed structures are yaw-only in practice, so the pitch/roll terms carry
+/// nothing the map can render.
+fn yaw_from_quat(x: f64, y: f64, z: f64, w: f64) -> f64 {
+    (2.0 * (w * z + x * y)).atan2(1.0 - 2.0 * (y * y + z * z))
+}
+
 /// `target_container_id` from an ItemContainer module's typed `RawData`.
 fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
-    let Property::Struct(StructValue::PalMapConcreteModelModule(module)) = raw_data else {
+    let Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(module))) = raw_data else {
         return None;
     };
     match &module.data {
-        uesave::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
+        crate::ue::games::palworld::PalMapConcreteModelModuleData::ItemContainer {
             target_container_id,
             ..
         } => Some(props::guid_to_uuid(target_container_id)),
@@ -267,7 +324,7 @@ fn build_guild_dto(
         .unwrap_or_default();
     let empty_map_objects: Vec<&Properties> = Vec::new();
     let character_container_index = world::build_character_container_index(&session.level);
-    let base_camp_entries: &[uesave::MapEntry] = world::base_camp_map(&session.level)?
+    let base_camp_entries: &[crate::ue::MapEntry] = world::base_camp_map(&session.level)?
         .map(|entries| entries.as_slice())
         .unwrap_or(&[]);
 
@@ -316,7 +373,7 @@ fn build_guild_dto(
             .and_then(|entry| props::struct_props(&entry.value))
             .and_then(|value_props| value_props.0.get(&PropertyKey::from("RawData")))
             .map(|raw_data| match raw_data {
-                Property::Struct(StructValue::PalBaseCamp(base_camp)) => (
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) => (
                     Some(base_camp.name.clone()),
                     Some(base_camp.area_range as f64),
                     Some(WorldMapPointDto {
@@ -453,14 +510,14 @@ pub fn update_lab_research(
     else {
         return Ok(());
     };
-    let Some(Property::Struct(StructValue::PalGuildLab(lab))) =
+    let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::GuildLab(lab)))) =
         lab_props.0.get_mut(&PropertyKey::from("RawData"))
     else {
         return Ok(());
     };
     lab.research_info = research_updates
         .iter()
-        .map(|info| uesave::games::palworld::PalLabResearchInfo {
+        .map(|info| crate::ue::games::palworld::PalLabResearchInfo {
             research_id: info.research_id.clone(),
             work_amount: info.work_amount as f32,
         })
@@ -616,7 +673,7 @@ pub(crate) fn should_delete_map_object(
     else {
         return false;
     };
-    let Some(Property::Struct(StructValue::PalMapModel(model))) =
+    let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(model)))) =
         model_props.0.get(&PropertyKey::from("RawData"))
     else {
         return false;
@@ -638,12 +695,12 @@ pub(crate) fn should_delete_map_object(
     else {
         return false;
     };
-    let Some(Property::Struct(StructValue::PalMapConcreteModel(concrete))) =
+    let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(concrete)))) =
         concrete_props.0.get(&PropertyKey::from("RawData"))
     else {
         return false;
     };
-    if let uesave::games::palworld::PalMapConcreteModelVariant::ItemBooth(booth) =
+    if let crate::ue::games::palworld::PalMapConcreteModelVariant::ItemBooth(booth) =
         &concrete.model_data
     {
         if player_ids.contains(&props::guid_to_uuid(&booth.private_lock_player_uid)) {
@@ -757,12 +814,126 @@ pub fn delete_guild_and_players(
     Ok(())
 }
 
+/// Deletes one base -- its structures, item/character containers, pals, and
+/// work entries, plus the `BaseCampSaveData` entry itself -- without touching
+/// the guild that owns it or any of that guild's other bases or players.
+///
+/// `Err` when `base_id` names no `BaseCampSaveData` entry (or one whose owning
+/// guild doesn't resolve). The owning guild is loaded via
+/// [`get_guild_details`] (a no-op if it's already loaded) so `guild.base_ids`
+/// and `guild.map_object_instance_ids_base_camp_points` -- the two guild-tail
+/// lists `place::register_with_guild` writes into on founding a base -- can be
+/// pruned of this base's ids. Skipping that step would leave the guild
+/// pointing at a base camp and Pal Box that no longer exist: the same
+/// dangling-reference class that crashes the game.
+pub fn delete_base(
+    session: &mut SaveSession,
+    game_data: &GameData,
+    base_id: uuid::Uuid,
+) -> Result<(), CoreError> {
+    let not_found = || CoreError::Other(format!("Base {base_id} not found in the save file."));
+
+    let (guild_id, pal_box_instance_id) = {
+        let entries = world::base_camp_map(&session.level)?
+            .map(|entries| entries.as_slice())
+            .unwrap_or(&[]);
+        let entry = entries
+            .iter()
+            .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+            .ok_or_else(not_found)?;
+        let (guild_id, _) = base_guild_and_container(entry).ok_or_else(not_found)?;
+        let pal_box_instance_id = props::struct_props(&entry.value)
+            .and_then(|value_props| value_props.0.get(&PropertyKey::from("RawData")))
+            .and_then(|raw_data| match raw_data {
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) => {
+                    Some(props::guid_to_uuid(&base_camp.owner_map_object_instance_id))
+                }
+                _ => None,
+            });
+        (guild_id, pal_box_instance_id)
+    };
+
+    let dto = get_guild_details(session, game_data, guild_id)?
+        .ok_or_else(|| CoreError::GuildNotFound(guild_id))?;
+    let base = dto
+        .bases
+        .as_ref()
+        .and_then(|bases| bases.get(&base_id))
+        .ok_or_else(not_found)?;
+    let item_container_ids: Vec<uuid::Uuid> =
+        base.storage_containers.iter().map(|(id, _)| *id).collect();
+    let character_container_ids: Vec<uuid::Uuid> = base.container_id.into_iter().collect();
+    let base_pal_ids: Vec<uuid::Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
+
+    if let Some(values) = world::map_object_values_mut(&mut session.level)? {
+        values.retain(|map_object| {
+            let StructValue::Struct(object_props) = map_object else {
+                return true;
+            };
+            match map_object_model(object_props) {
+                Some(model) => props::guid_to_uuid(&model.base_camp_id_belong_to) != base_id,
+                None => true,
+            }
+        });
+    }
+
+    if let Some(values) = world::work_values_mut(&mut session.level)? {
+        values.retain(|value| {
+            let StructValue::Struct(work_props) = value else {
+                return true;
+            };
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::Work(raw)))) =
+                work_props.0.get(&PropertyKey::from("RawData"))
+            else {
+                return true;
+            };
+            match &raw.base_data {
+                Some(base_data) => {
+                    props::guid_to_uuid(&base_data.base_camp_id_belong_to) != base_id
+                }
+                None => true,
+            }
+        });
+    }
+
+    // `delete_guild_pals` (not a raw `delete_pal_entry` per id) so each base
+    // pal's `individual_character_handle_ids` entry in the guild tail is
+    // removed too.
+    super::pal::delete_guild_pals(session, guild_id, base_id, &base_pal_ids)?;
+
+    if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
+        entries.retain(|entry| props::as_uuid(&entry.key) != Some(base_id));
+    }
+
+    super::containers::delete_item_containers(session, &item_container_ids)?;
+    super::containers::delete_character_containers(session, &character_container_ids)?;
+
+    if let Some(entry_index) = guild_entry_index(session, guild_id)? {
+        let entries = world::group_map_mut(&mut session.level)?;
+        if let Some(group_data) = guild_tail::entry_group_data_mut(&mut entries[entry_index]) {
+            if let Some(guild) = guild_tail::as_guild_mut(group_data) {
+                guild
+                    .base_ids
+                    .retain(|id| props::guid_to_uuid(id) != base_id);
+                if let Some(pal_box_id) = pal_box_instance_id.filter(|id| !id.is_nil()) {
+                    guild
+                        .map_object_instance_ids_base_camp_points
+                        .retain(|id| props::guid_to_uuid(id) != pal_box_id);
+                }
+            }
+        }
+    }
+
+    session.invalidate_performance_caches();
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::palbin::test_bytes::shuffle_guid_bytes;
-    use uesave::games::palworld::{PalBaseCamp, PalTransform};
-    use uesave::{
+    use crate::ue::games::palworld::{PalBaseCamp, PalTransform};
+    use crate::ue::{
         ByteArray, Double, MapEntry, Properties, Property, Quat, StructValue, ValueVec, Vector,
     };
 
@@ -770,7 +941,7 @@ mod tests {
     const BASE_ID: &str = "44444444-4444-4444-4444-444444444444";
     const CONTAINER_ID: &str = "55555555-5555-5555-5555-555555555555";
 
-    fn fguid(text: &str) -> uesave::FGuid {
+    fn fguid(text: &str) -> crate::ue::FGuid {
         serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap()
     }
 
@@ -815,7 +986,7 @@ mod tests {
             area_range: 0.0,
             group_id_belong_to: fguid(guild_id),
             fast_travel_local_transform: zero_transform(),
-            owner_map_object_instance_id: uesave::FGuid::nil(),
+            owner_map_object_instance_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut worker_properties = Properties::default();
@@ -828,7 +999,7 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalBaseCamp(Box::new(camp))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -872,7 +1043,7 @@ mod tests {
             area_range: 0.0,
             group_id_belong_to: fguid(GUILD_ID),
             fast_travel_local_transform: zero_transform(),
-            owner_map_object_instance_id: uesave::FGuid::nil(),
+            owner_map_object_instance_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
         let mut worker_properties = Properties::default();
@@ -883,7 +1054,7 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalBaseCamp(Box::new(camp))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -900,8 +1071,8 @@ mod tests {
     // ---- find_player_guild_id ----
 
     use crate::session::{SaveKind, SaveSession};
-    use uesave::games::palworld::PalGroupData;
-    use uesave::{Header, MapEntry as UMapEntry, PackageVersion, PropertySchemas, Root, Save};
+    use crate::ue::games::palworld::PalGroupData;
+    use crate::ue::{Header, MapEntry as UMapEntry, PackageVersion, PropertySchemas, Root, Save};
 
     fn minimal_save(properties: Properties) -> Save {
         Save {
@@ -927,7 +1098,7 @@ mod tests {
 
     fn guild_group_entry(
         guild_id: &str,
-        guild: uesave::games::palworld::PalGuildGroup,
+        guild: crate::ue::games::palworld::PalGuildGroup,
     ) -> UMapEntry {
         let mut value_properties = Properties::default();
         value_properties.insert(
@@ -938,11 +1109,11 @@ mod tests {
             group_id: fguid(guild_id),
             group_name: String::new(),
             individual_character_handle_ids: vec![],
-            data: uesave::games::palworld::PalGroupVariant::Guild(guild),
+            data: crate::ue::games::palworld::PalGroupVariant::Guild(guild),
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalGroupData(group_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
         );
         UMapEntry {
             key: guid_property(guild_id),
@@ -1014,13 +1185,13 @@ mod tests {
             group_id: fguid(GUILD_ID),
             group_name: String::new(),
             individual_character_handle_ids: vec![],
-            data: uesave::games::palworld::PalGroupVariant::Unknown {
+            data: crate::ue::games::palworld::PalGroupVariant::Unknown {
                 remaining_data: vec![],
             },
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::PalGroupData(group_data)),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
         );
         let entry = UMapEntry {
             key: guid_property(GUILD_ID),
@@ -1103,10 +1274,10 @@ mod tests {
 
     #[test]
     fn module_target_container_id_resolves_the_item_container_variant() {
-        use uesave::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+        use crate::ue::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
 
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
-        let raw_data = Property::Struct(StructValue::PalMapConcreteModelModule(
+        let raw_data = Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(
             PalMapConcreteModelModule {
                 module_type: "EPalMapObjectConcreteModelModuleType::ItemContainer".to_string(),
                 data: PalMapConcreteModelModuleData::ItemContainer {
@@ -1119,22 +1290,22 @@ mod tests {
                 },
                 custom_version_data: vec![],
             },
-        ));
+        )));
 
         assert_eq!(module_target_container_id(&raw_data), Some(container_id));
     }
 
     #[test]
     fn module_target_container_id_returns_none_for_a_non_item_container_module() {
-        use uesave::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+        use crate::ue::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
 
-        let raw_data = Property::Struct(StructValue::PalMapConcreteModelModule(
+        let raw_data = Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(
             PalMapConcreteModelModule {
                 module_type: "EPalMapObjectConcreteModelModuleType::Energy".to_string(),
                 data: PalMapConcreteModelModuleData::Energy,
                 custom_version_data: vec![],
             },
-        ));
+        )));
 
         assert!(module_target_container_id(&raw_data).is_none());
         assert!(module_target_container_id(&Property::Bool(true)).is_none());
@@ -1145,13 +1316,13 @@ mod tests {
     fn zero_map_model(
         group_id_belong_to: &str,
         build_player_uid: &str,
-    ) -> uesave::games::palworld::PalMapModel {
-        uesave::games::palworld::PalMapModel {
+    ) -> crate::ue::games::palworld::PalMapModel {
+        crate::ue::games::palworld::PalMapModel {
             instance_id: fguid("00000000-0000-0000-0000-000000000000"),
             concrete_model_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
             base_camp_id_belong_to: fguid("00000000-0000-0000-0000-000000000000"),
             group_id_belong_to: fguid(group_id_belong_to),
-            hp: uesave::games::palworld::PalMapObjectHp { current: 0, max: 0 },
+            hp: crate::ue::games::palworld::PalMapObjectHp { current: 0, max: 0 },
             initial_transform_cache: zero_transform(),
             repair_work_id: fguid("00000000-0000-0000-0000-000000000000"),
             owner_spawner_level_object_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
@@ -1159,7 +1330,7 @@ mod tests {
             build_player_uid: fguid(build_player_uid),
             interact_restrict_type: 0,
             deterioration_damage: 0.0,
-            stage_instance_id_belong_to: uesave::games::palworld::PalStageInstanceId {
+            stage_instance_id_belong_to: crate::ue::games::palworld::PalStageInstanceId {
                 id: fguid("00000000-0000-0000-0000-000000000000"),
                 valid: 0,
             },
@@ -1179,10 +1350,10 @@ mod tests {
         let mut model_props = Properties::default();
         model_props.insert(
             "RawData",
-            Property::Struct(StructValue::PalMapModel(Box::new(zero_map_model(
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(zero_map_model(
                 group_id_belong_to,
                 build_player_uid,
-            )))),
+            ))))),
         );
         let mut object_props = Properties::default();
         object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
@@ -1194,18 +1365,18 @@ mod tests {
             // -- an element with no `RawData` at all is not a shape any real
             // save produces.
             let raw_data = concrete_raw_data.unwrap_or_else(|| {
-                Property::Struct(StructValue::PalMapConcreteModel(Box::new(
-                    uesave::games::palworld::PalMapConcreteModel {
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(Box::new(
+                    crate::ue::games::palworld::PalMapConcreteModel {
                         instance_id: fguid(SDM_NIL),
                         model_instance_id: fguid(SDM_NIL),
                         concrete_model_type: "BaseModel".to_string(),
-                        model_data: uesave::games::palworld::PalMapConcreteModelVariant::Unknown(
-                            uesave::games::palworld::BaseModel {
+                        model_data: crate::ue::games::palworld::PalMapConcreteModelVariant::Unknown(
+                            crate::ue::games::palworld::BaseModel {
                                 trailing_bytes: vec![],
                             },
                         ),
                     },
-                )))
+                ))))
             });
             concrete_props.insert("RawData", raw_data);
             if let Some(modules) = module_map {
@@ -1219,13 +1390,13 @@ mod tests {
         StructValue::Struct(object_props)
     }
 
-    fn zero_item_and_num() -> uesave::games::palworld::PalItemAndNum {
-        uesave::games::palworld::PalItemAndNum {
-            item_id: uesave::games::palworld::PalItemId {
+    fn zero_item_and_num() -> crate::ue::games::palworld::PalItemAndNum {
+        crate::ue::games::palworld::PalItemAndNum {
+            item_id: crate::ue::games::palworld::PalItemId {
                 static_id: String::new(),
-                dynamic_id: uesave::games::palworld::PalDynamicId {
-                    created_world_id: uesave::FGuid::nil(),
-                    local_id_in_created_world: uesave::FGuid::nil(),
+                dynamic_id: crate::ue::games::palworld::PalDynamicId {
+                    created_world_id: crate::ue::FGuid::nil(),
+                    local_id_in_created_world: crate::ue::FGuid::nil(),
                 },
             },
             num: 0,
@@ -1233,7 +1404,7 @@ mod tests {
     }
 
     fn item_booth_concrete_model(private_lock_player_uid: &str, seller_uids: &[&str]) -> Property {
-        use uesave::games::palworld::{
+        use crate::ue::games::palworld::{
             PalMapConcreteModelVariant, PalMapObjectItemBoothModel, PalMapObjectItemBoothTradeInfo,
         };
         let trade_infos = seller_uids
@@ -1244,8 +1415,8 @@ mod tests {
                 seller_player_uid: fguid(seller),
             })
             .collect();
-        Property::Struct(StructValue::PalMapConcreteModel(Box::new(
-            uesave::games::palworld::PalMapConcreteModel {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(Box::new(
+            crate::ue::games::palworld::PalMapConcreteModel {
                 instance_id: fguid("00000000-0000-0000-0000-000000000000"),
                 model_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
                 concrete_model_type: "PalMapObjectItemBoothModel".to_string(),
@@ -1256,7 +1427,7 @@ mod tests {
                     trailing_bytes: [0; 20],
                 }),
             },
-        )))
+        ))))
     }
 
     const SDM_GUILD: &str = "10101010-0000-0000-0000-000000000000";
@@ -1309,7 +1480,7 @@ mod tests {
     /// ownership. Pins that the omission is load-bearing.
     #[test]
     fn should_delete_map_object_never_matches_via_password_lock_module_dead_code() {
-        use uesave::games::palworld::{
+        use crate::ue::games::palworld::{
             PalMapConcreteModelModule, PalMapConcreteModelModuleData, PalPlayerLockInfo,
         };
         let player: uuid::Uuid = SDM_PLAYER.parse().unwrap();
@@ -1333,7 +1504,7 @@ mod tests {
                 let mut properties = Properties::default();
                 properties.insert(
                     "RawData",
-                    Property::Struct(StructValue::PalMapConcreteModelModule(password_lock_module)),
+                    Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(password_lock_module))),
                 );
                 properties
             })),
@@ -1349,11 +1520,141 @@ mod tests {
     #[test]
     fn should_delete_map_object_returns_false_for_an_untyped_map_object() {
         assert!(!should_delete_map_object(
-            &StructValue::Guid(uesave::FGuid::nil()),
+            &StructValue::Guid(crate::ue::FGuid::nil()),
             None,
             &[]
         ));
         let empty = StructValue::Struct(Properties::default());
         assert!(!should_delete_map_object(&empty, None, &[]));
+    }
+
+    // ---- base_structures ----
+
+    const OTHER_BASE_ID: &str = "88888888-8888-8888-8888-888888888888";
+    const STRUCTURE_INSTANCE_ID: &str = "a1a1a1a1-1111-2222-3333-444444444444";
+    const STRUCTURE_BUILDER_ID: &str = "b2b2b2b2-1111-2222-3333-444444444444";
+
+    fn world_level(map_objects: Vec<StructValue>) -> Save {
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("MapObjectSaveData", Property::Array(ValueVec::Struct(map_objects)));
+        let mut root_properties = Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+        minimal_save(root_properties)
+    }
+
+    fn level_with_map_object(
+        base_id: &str,
+        map_object_id: &str,
+        translation: (f64, f64, f64),
+    ) -> Save {
+        let mut model = zero_map_model(SDM_NIL, STRUCTURE_BUILDER_ID);
+        model.instance_id = fguid(STRUCTURE_INSTANCE_ID);
+        // `concrete_model_instance_id` deliberately differs from `instance_id`:
+        // reading the wrong one must be visible.
+        model.concrete_model_instance_id = fguid(OTHER_BASE_ID);
+        model.base_camp_id_belong_to = fguid(base_id);
+        model.hp = crate::ue::games::palworld::PalMapObjectHp {
+            current: 40,
+            max: 100,
+        };
+        model.initial_transform_cache.translation = Vector {
+            x: Double(translation.0),
+            y: Double(translation.1),
+            z: Double(translation.2),
+        };
+        // Three distinct scale values, so an axis swap in the reader fails.
+        model.initial_transform_cache.scale = Vector {
+            x: Double(2.0),
+            y: Double(3.0),
+            z: Double(4.0),
+        };
+
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+        );
+        let mut object_props = Properties::default();
+        object_props.insert("MapObjectId", Property::Name(map_object_id.to_string()));
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+
+        world_level(vec![StructValue::Struct(object_props)])
+    }
+
+    #[test]
+    fn yaw_from_quat_reads_zero_for_identity() {
+        assert_eq!(0.0, yaw_from_quat(0.0, 0.0, 0.0, 1.0));
+    }
+
+    #[test]
+    fn yaw_from_quat_reads_ninety_degrees_for_quarter_turn_about_z() {
+        let half = std::f64::consts::FRAC_PI_4;
+        let yaw = yaw_from_quat(0.0, 0.0, half.sin(), half.cos());
+
+        assert!((yaw - std::f64::consts::FRAC_PI_2).abs() < 1e-9);
+    }
+
+    #[test]
+    fn base_structures_returns_translation_and_scale_for_each_entry() {
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            level_with_map_object(BASE_ID, "PalBoxV2", (100.0, 200.0, 300.0)),
+        );
+
+        let structures = base_structures(&session, BASE_ID.parse().unwrap());
+
+        assert_eq!(1, structures.len());
+        assert_eq!(STRUCTURE_INSTANCE_ID, structures[0].instance_id);
+        assert_eq!("PalBoxV2", structures[0].map_object_id);
+        assert_eq!(100.0, structures[0].x);
+        assert_eq!(200.0, structures[0].y);
+        assert_eq!(300.0, structures[0].z);
+        assert_eq!(0.0, structures[0].yaw);
+        assert_eq!(2.0, structures[0].scale_x);
+        assert_eq!(3.0, structures[0].scale_y);
+        assert_eq!(4.0, structures[0].scale_z);
+        assert_eq!(40, structures[0].hp_current);
+        assert_eq!(100, structures[0].hp_max);
+        assert_eq!(STRUCTURE_BUILDER_ID, structures[0].build_player_uid);
+    }
+
+    #[test]
+    fn base_structures_excludes_entries_belonging_to_another_base() {
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            level_with_map_object(BASE_ID, "PalBoxV2", (0.0, 0.0, 0.0)),
+        );
+
+        assert!(base_structures(&session, OTHER_BASE_ID.parse().unwrap()).is_empty());
+    }
+
+    #[test]
+    fn base_structures_is_empty_when_the_world_has_no_map_objects() {
+        let session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(Properties::default()));
+
+        assert!(base_structures(&session, BASE_ID.parse().unwrap()).is_empty());
+    }
+
+    #[test]
+    fn base_structures_skips_an_entry_whose_map_object_id_is_missing() {
+        let mut model = zero_map_model(SDM_NIL, SDM_NIL);
+        model.base_camp_id_belong_to = fguid(BASE_ID);
+        let mut model_props = Properties::default();
+        model_props.insert(
+            "RawData",
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+        );
+        let mut object_props = Properties::default();
+        object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
+        let session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            world_level(vec![StructValue::Struct(object_props)]),
+        );
+
+        assert!(base_structures(&session, BASE_ID.parse().unwrap()).is_empty());
     }
 }

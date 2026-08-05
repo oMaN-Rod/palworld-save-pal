@@ -3,7 +3,7 @@
 	import { Button, List, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
 	import type { ItemContainerSlot, Player, PresetProfile } from '$lib/types';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, sortPresets } from '$states';
 	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
 	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
@@ -26,9 +26,12 @@
 	let listWrapperStyle = $state('');
 
 	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
-		return Object.entries(presetsData.presetProfiles)
-			.filter(([_, preset]) => preset.type === 'inventory')
-			.map(([id, preset]) => ({ ...preset, id }));
+		return sortPresets(
+			Object.entries(presetsData.presetProfiles)
+				.filter(([_, preset]) => preset.type === 'inventory')
+				.map(([id, preset]) => ({ ...preset, id })),
+			'inventory'
+		);
 	});
 
 	function calculateHeight() {

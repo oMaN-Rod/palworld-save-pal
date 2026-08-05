@@ -1,7 +1,7 @@
 //! SPA fallback middleware for the built UI: serves a matching file or
 //! directory index, otherwise redirects unmatched paths to the SPA root
 //! with the original path preserved as a query parameter.
-use std::path::Component;
+use std::path::{Component, Path};
 use std::sync::Arc;
 
 use axum::extract::{Request, State};
@@ -9,8 +9,6 @@ use axum::http::{StatusCode, Uri};
 use axum::middleware::Next;
 use axum::response::{IntoResponse, Redirect, Response};
 use percent_encoding::{percent_decode_str, utf8_percent_encode, AsciiSet, NON_ALPHANUMERIC};
-
-use crate::AppState;
 
 /// Characters left unescaped when percent-encoding the redirect's path
 /// query param: alphanumerics plus `_ . - ~ /`.
@@ -22,13 +20,13 @@ const QUOTE_SET: &AsciiSet = &NON_ALPHANUMERIC
     .remove(b'~');
 
 pub async fn spa_fallback_redirect(
-    State(state): State<Arc<AppState>>,
+    State(ui_dir): State<Arc<Path>>,
     mut request: Request,
     next: Next,
 ) -> Response {
     let raw_path = request.uri().path().to_owned();
 
-    if raw_path.starts_with("/ws") || raw_path.starts_with("/api") {
+    if raw_path.starts_with("/ws") || raw_path.starts_with("/api") || raw_path.starts_with("/maps") {
         return next.run(request).await;
     }
 
@@ -41,10 +39,7 @@ pub async fn spa_fallback_redirect(
     // ends in "/" (otherwise it redirects to add one), so directories are
     // resolved here and handed to ServeDir as a concrete file path.
     if !has_parent_dir_segment(&decoded_path) {
-        let candidate = state
-            .config
-            .ui_dir
-            .join(decoded_path.trim_start_matches('/'));
+        let candidate = ui_dir.join(decoded_path.trim_start_matches('/'));
         if candidate.join("index.html").is_file() {
             *request.uri_mut() = append_index_html(request.uri());
         }

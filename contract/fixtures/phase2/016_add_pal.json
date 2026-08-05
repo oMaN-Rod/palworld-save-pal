@@ -1,0 +1,55 @@
+{
+  "request": {
+    "type": "add_pal",
+    "data": {
+      "player_id": "8c2f1930-0000-0000-0000-000000000000",
+      "character_id": "SheepBall",
+      "nickname": "parity",
+      "container_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29"
+    }
+  },
+  "responses": [
+    {
+      "type": "add_pal",
+      "data": {
+        "player_id": "8c2f1930-0000-0000-0000-000000000000",
+        "pal": {
+          "instance_id": "e02ffe1a-b8f8-44fb-9e10-912a756f380d",
+          "character_id": "SheepBall",
+          "character_key": "sheepball",
+          "owner_uid": "8c2f1930-0000-0000-0000-000000000000",
+          "is_lucky": false,
+          "is_boss": false,
+          "is_predator": false,
+          "is_tower": false,
+          "gender": "Female",
+          "nickname": "parity",
+          "filtered_nickname": null,
+          "group_id": "54491484-4e6c-7327-70b2-868f350929f6",
+          "stomach": 100.0,
+          "sanity": 100.0,
+          "hp": 545000,
+          "level": 1,
+          "exp": 0,
+          "rank": 0,
+          "rank_hp": 0,
+          "rank_attack": 0,
+          "rank_defense": 0,
+          "rank_craftspeed": 0,
+          "talent_hp": 50,
+          "talent_shot": 50,
+          "talent_defense": 50,
+          "max_hp": 517000,
+          "storage_slot": 6,
+          "storage_id": "a6cb3db4-4760-f87f-c404-8b87887c0f29",
+          "learned_skills": [],
+          "active_skills": [],
+          "passive_skills": [],
+          "work_suitability": {},
+          "is_sick": false,
+          "friendship_point": 0
+        }
+      }
+    }
+  ]
+}

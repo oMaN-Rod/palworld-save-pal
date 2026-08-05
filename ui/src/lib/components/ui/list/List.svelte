@@ -2,6 +2,7 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
+	import { GripVertical } from 'lucide-svelte';
 
 	let {
 		items = $bindable([]),
@@ -21,6 +22,8 @@
 		listItemPopup,
 		onselect = (item: T) => {},
 		idKey = 'id',
+		reorderable = false,
+		onReorder,
 		...additionalProps
 	} = $props<{
 		items: T[];
@@ -40,6 +43,8 @@
 		listItemPopup?: Snippet<[T]>;
 		onselect?: (item: T) => void;
 		idKey?: string;
+		reorderable?: boolean;
+		onReorder?: (orderedIds: (string | number)[]) => void;
 		[key: string]: any;
 	}>();
 
@@ -124,6 +129,69 @@
 		return (!onlyHighlightChecked && item === selectedItem) || selectedItemsSet.has(key);
 	}
 
+	let dragSourceIndex: number | null = $state(null);
+	let dropIndex: number | null = $state(null);
+	let dragGhost: HTMLElement | null = null;
+
+	function handleDragStart(event: DragEvent, index: number) {
+		dragSourceIndex = index;
+		if (!event.dataTransfer) return;
+		// Required for a native drag to actually start (Firefox) and to show
+		// the move cursor instead of the no-drop cursor.
+		event.dataTransfer.effectAllowed = 'move';
+		event.dataTransfer.setData('text/plain', String(index));
+
+		// Drag the whole row as an opaque card instead of just the grip handle.
+		// Rows are transparent, so clone into an off-screen styled chip and use
+		// that as the drag image, anchored under the cursor.
+		const row = (event.currentTarget as HTMLElement).closest('li');
+		if (row) {
+			const rect = row.getBoundingClientRect();
+			const ghost = row.cloneNode(true) as HTMLElement;
+			ghost.classList.add('bg-surface-800', 'rounded-sm', 'shadow-lg');
+			ghost.style.position = 'fixed';
+			ghost.style.top = '-1000px';
+			ghost.style.left = '0';
+			ghost.style.width = `${rect.width}px`;
+			ghost.style.pointerEvents = 'none';
+			document.body.appendChild(ghost);
+			dragGhost = ghost;
+			event.dataTransfer.setDragImage(ghost, event.clientX - rect.left, event.clientY - rect.top);
+		}
+	}
+
+	function handleDragEnd() {
+		dragSourceIndex = null;
+		dropIndex = null;
+		dragGhost?.remove();
+		dragGhost = null;
+	}
+
+	// The gap the item will drop into: `dropIndex` items from the top, so gap i
+	// is the line above row i and gap items.length is below the last row.
+	function handleDragOver(event: DragEvent, index: number) {
+		if (!reorderable || dragSourceIndex === null) return;
+		event.preventDefault();
+		if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
+		const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+		const inBottomHalf = event.clientY - rect.top > rect.height / 2;
+		dropIndex = inBottomHalf ? index + 1 : index;
+	}
+
+	function handleDrop() {
+		if (!reorderable || dragSourceIndex === null || dropIndex === null) {
+			handleDragEnd();
+			return;
+		}
+		const reordered = [...items];
+		const [moved] = reordered.splice(dragSourceIndex, 1);
+		// The removed source shifts every gap after it left by one.
+		const insertAt = dropIndex > dragSourceIndex ? dropIndex - 1 : dropIndex;
+		reordered.splice(insertAt, 0, moved);
+		handleDragEnd();
+		onReorder?.(reordered.map(getItemKey));
+	}
+
 	$effect(() => {
 		if (items.length > 0) {
 			selectAll = selectedItemsSet.size === items.length;
@@ -143,8 +211,37 @@
 		</div>
 	</div>
 	<ul class={listClass}>
-		{#each items as item (getItemKey(item))}
-			<li class={cn(itemClass, isSelected(item) ? 'bg-secondary-500/25' : '')}>
+		{#each items as item, i (getItemKey(item))}
+			<li
+				class={cn(
+					itemClass,
+					isSelected(item) ? 'bg-secondary-500/25' : '',
+					reorderable ? 'relative' : ''
+				)}
+				ondragover={(e) => handleDragOver(e, i)}
+				ondrop={handleDrop}
+			>
+				{#if reorderable && dragSourceIndex !== null && dropIndex === i}
+					<div class="bg-primary-500 pointer-events-none absolute inset-x-0 top-0 z-10 h-1"></div>
+				{/if}
+				{#if reorderable && dragSourceIndex !== null && dropIndex === i + 1 && i === items.length - 1}
+					<div
+						class="bg-primary-500 pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1"
+					></div>
+				{/if}
+				{#if reorderable}
+					<span
+						class="text-surface-400 mr-1 cursor-grab active:cursor-grabbing"
+						draggable="true"
+						ondragstart={(e) => handleDragStart(e, i)}
+						ondragend={handleDragEnd}
+						role="button"
+						tabindex="0"
+						aria-label="Drag to reorder"
+					>
+						<GripVertical class="h-4 w-4" />
+					</span>
+				{/if}
 				{#if canSelect}
 					<Checkbox
 						checked={selectedItemsSet.has(getItemKey(item))}

@@ -1,16 +1,16 @@
-async fn test_pool() -> sqlx::SqlitePool {
+async fn test_driver() -> psp_db::SqlxSqliteDriver {
     let dir = tempfile::tempdir().unwrap();
     let pool = psp_db::open(&dir.path().join("psp-rs.db")).await.unwrap();
     // keep temp dir alive for the pool's lifetime
     std::mem::forget(dir);
-    pool
+    psp_db::SqlxSqliteDriver::new(pool)
 }
 
 #[tokio::test]
 async fn add_and_get_preset_with_pal_preset() {
-    let pool = test_pool().await;
+    let db = test_driver().await;
     let preset_id = psp_db::presets::add(
-        &pool,
+        &db,
         serde_json::json!({
             "name": "Max Fox",
             "type": "pal_preset",
@@ -38,7 +38,7 @@ async fn add_and_get_preset_with_pal_preset() {
     .await
     .unwrap();
 
-    let all = psp_db::presets::get_all(&pool).await.unwrap();
+    let all = psp_db::presets::get_all(&db).await.unwrap();
     let preset = all.get(&preset_id).expect("preset present, keyed by id");
     assert_eq!(preset["name"], "Max Fox");
     assert_eq!(preset["type"], "pal_preset");
@@ -50,15 +50,15 @@ async fn add_and_get_preset_with_pal_preset() {
 
 #[tokio::test]
 async fn preset_without_pal_preset_omits_the_key() {
-    let pool = test_pool().await;
+    let db = test_driver().await;
     let preset_id = psp_db::presets::add(
-        &pool,
+        &db,
         serde_json::json!({"name": "Kit", "type": "inventory",
             "common_container": [{"static_id": "Wood", "count": 999, "slot_index": 0}]}),
     )
     .await
     .unwrap();
-    let all = psp_db::presets::get_all(&pool).await.unwrap();
+    let all = psp_db::presets::get_all(&db).await.unwrap();
     let preset = all.get(&preset_id).unwrap();
     // The key must be absent, not null.
     assert!(preset.get("pal_preset").is_none());
@@ -67,37 +67,37 @@ async fn preset_without_pal_preset_omits_the_key() {
 
 #[tokio::test]
 async fn update_delete_nuke() {
-    let pool = test_pool().await;
-    let id = psp_db::presets::add(&pool, serde_json::json!({"name": "A", "type": "inventory"}))
+    let db = test_driver().await;
+    let id = psp_db::presets::add(&db, serde_json::json!({"name": "A", "type": "inventory"}))
         .await
         .unwrap();
-    assert!(psp_db::presets::update_name(&pool, &id, "B").await.unwrap());
-    assert!(!psp_db::presets::update_name(&pool, "no-such-id", "X")
+    assert!(psp_db::presets::update_name(&db, &id, "B").await.unwrap());
+    assert!(!psp_db::presets::update_name(&db, "no-such-id", "X")
         .await
         .unwrap());
-    let all = psp_db::presets::get_all(&pool).await.unwrap();
+    let all = psp_db::presets::get_all(&db).await.unwrap();
     assert_eq!(all.get(&id).unwrap()["name"], "B");
-    assert!(psp_db::presets::delete(&pool, &id).await.unwrap());
-    assert!(!psp_db::presets::delete(&pool, &id).await.unwrap());
-    psp_db::presets::add(&pool, serde_json::json!({"name": "C", "type": "inventory"}))
+    assert!(psp_db::presets::delete(&db, &id).await.unwrap());
+    assert!(!psp_db::presets::delete(&db, &id).await.unwrap());
+    psp_db::presets::add(&db, serde_json::json!({"name": "C", "type": "inventory"}))
         .await
         .unwrap();
-    psp_db::presets::nuke(&pool).await.unwrap();
-    assert!(psp_db::presets::get_all(&pool).await.unwrap().is_empty());
+    psp_db::presets::nuke(&db).await.unwrap();
+    assert!(psp_db::presets::get_all(&db).await.unwrap().is_empty());
 }
 
 #[tokio::test]
 async fn populate_from_json_only_seeds_empty_table() {
-    let pool = test_pool().await;
+    let db = test_driver().await;
     let seed = serde_json::json!([
         {"id": "dddddddd-dddd-dddd-dddd-dddddddddddd", "name": "Seed", "type": "inventory"}
     ]);
-    psp_db::presets::populate_from_json(&pool, &seed)
+    psp_db::presets::populate_from_json(&db, &seed)
         .await
         .unwrap();
-    assert_eq!(psp_db::presets::get_all(&pool).await.unwrap().len(), 1);
-    psp_db::presets::populate_from_json(&pool, &seed)
+    assert_eq!(psp_db::presets::get_all(&db).await.unwrap().len(), 1);
+    psp_db::presets::populate_from_json(&db, &seed)
         .await
         .unwrap();
-    assert_eq!(psp_db::presets::get_all(&pool).await.unwrap().len(), 1);
+    assert_eq!(psp_db::presets::get_all(&db).await.unwrap().len(), 1);
 }

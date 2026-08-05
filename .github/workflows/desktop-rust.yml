@@ -45,10 +45,12 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Build desktop UI
-        working-directory: palworld-save-pal
+      - name: Install UI deps
+        working-directory: palworld-save-pal/ui
         shell: bash
-        run: bash scripts/build-ui-desktop.sh
+        run: bun install
+        # The frontend itself is built by Tauri's beforeBuildCommand
+        # (bun run build:desktop) during "Build Tauri bundles".
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -58,6 +60,19 @@ jobs:
         with:
           workspaces: palworld-save-pal
           prefix-key: "v0-rust-${{ matrix.os }}"
+
+      - name: psp-app stays transport-free
+        working-directory: palworld-save-pal
+        shell: bash
+        run: |
+          if ! tree_output=$(cargo tree -p psp-app -e normal); then
+            echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
+            exit 1
+          fi
+          if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
+            echo "::error::forbidden native dependency in psp-app tree"
+            exit 1
+          fi
 
       - name: Install Tauri CLI
         run: cargo install tauri-cli --version "^2" --locked --force

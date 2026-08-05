@@ -25,6 +25,9 @@
 		value: string;
 		language?: string | undefined;
 		theme?: string | undefined;
+		/** When set, `theme` is defined from this data and applied, taking
+		 *  precedence over bundled/native themes of the same name. */
+		themeData?: MonacoE.editor.IStandaloneThemeData;
 		options?: MonacoE.editor.IStandaloneEditorConstructionOptions;
 		largeFile?: boolean;
 		monaco?: typeof MonacoE;
@@ -47,6 +50,7 @@
 		value = $bindable(),
 		language = undefined,
 		theme = undefined,
+		themeData = undefined,
 		options = {
 			value,
 			automaticLayout: true
@@ -63,16 +67,18 @@
 	});
 
 	function refreshTheme() {
-		if (theme) {
-			if (exportedThemes[theme]) {
-				const themeName = theme; // the theme name can change during the async call
-				exportedThemes[theme]().then((resolvedTheme) => {
-					monaco?.editor.defineTheme(themeName, resolvedTheme as any);
-					monaco?.editor.setTheme(themeName);
-				});
-			} else if (nativeThemes.includes(theme)) {
-				monaco?.editor.setTheme(theme);
-			}
+		if (!theme) return;
+		if (themeData) {
+			monaco?.editor.defineTheme(theme, themeData);
+			monaco?.editor.setTheme(theme);
+		} else if (exportedThemes[theme]) {
+			const themeName = theme; // the theme name can change during the async call
+			exportedThemes[theme]().then((resolvedTheme) => {
+				monaco?.editor.defineTheme(themeName, resolvedTheme as any);
+				monaco?.editor.setTheme(themeName);
+			});
+		} else if (nativeThemes.includes(theme)) {
+			monaco?.editor.setTheme(theme);
 		}
 	}
 

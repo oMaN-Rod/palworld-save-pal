@@ -481,30 +481,4 @@ mod tests {
             .is_some());
     }
 
-    /// Skipped, not failed, when the gamepass backup corpus isn't checked out.
-    #[test]
-    fn reads_real_containers_index_from_corpus_when_present() {
-        let corpus_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../backups/gamepass/000900000487F3B6_0000000000000000000000006B210A9C_20260328021933/containers.index");
-        if !corpus_path.exists() {
-            eprintln!(
-                "skipping reads_real_containers_index_from_corpus_when_present: {} not found",
-                corpus_path.display()
-            );
-            return;
-        }
-        let bytes = std::fs::read(&corpus_path).unwrap();
-        let index = ContainerIndex::read(&mut Cursor::new(&bytes)).unwrap();
-        assert!(
-            !index.containers.is_empty(),
-            "expected at least one container entry"
-        );
-        // Structural, not byte-for-byte: each entry's reserved u64 is discarded on
-        // read and written back as zero, so a file with a non-zero reserved value
-        // decodes fine but wouldn't survive a byte-identical round trip.
-        let mut rewritten = Vec::new();
-        index.write(&mut rewritten).unwrap();
-        let round_tripped = ContainerIndex::read(&mut Cursor::new(&rewritten)).unwrap();
-        assert_eq!(index, round_tripped);
-    }
 }

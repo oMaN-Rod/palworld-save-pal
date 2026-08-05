@@ -11,9 +11,14 @@
  * swaps the color palette. To add a new theme, drop in a `[data-theme='name']`
  * palette file, import it here, and register it in the theme selector.
  */
-@import './dark.css';
-@import './light.css';
-@import './frontier.css';
+@import './themes/dark.css';
+@import './themes/light.css';
+@import './themes/frontier.css';
+@import './themes/ancient.css';
+@import './themes/grizzbolt.css';
+@import './themes/lamball.css';
+@import './themes/sakurajima.css';
+@import './themes/wildlands.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -278,6 +283,26 @@ body {
 	border-right: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
 	background: color-mix(in srgb, var(--color-surface-900) 95%, transparent);
 	backdrop-filter: blur(12px);
+}
+
+.nav-rail [data-testid='nav-rail-tiles'] {
+	
+}
+
+@media (max-width: 1535.98px) {
+	.nav-rail [data-testid='nav-rail-tiles'] {
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+		row-gap: 0 !important;
+		gap: 0 !important;
+	}
+
+	.nav-rail [data-testid='nav-tile'] {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+		padding-top: 4px !important;
+		padding-bottom: 4px !important;
+	}
 }
 
 .nav-rail [data-testid='nav-tile'] {

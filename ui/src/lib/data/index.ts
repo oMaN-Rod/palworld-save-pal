@@ -1,4 +1,6 @@
 import { activeSkillsData } from './activeSkills.svelte';
+import { baseStructuresData } from './baseStructures.svelte';
+import { blueprintsData } from './blueprints.svelte';
 import { bosses } from './bosses.svelte';
 import { buildingsData } from './buildings.svelte';
 import { elementsData } from './elements.svelte';
@@ -20,6 +22,8 @@ import { workSuitabilityData } from './workSuitability.svelte';
 
 export {
 	activeSkillsData,
+	baseStructuresData,
+	blueprintsData,
 	bosses,
 	buildingsData,
 	elementsData,
