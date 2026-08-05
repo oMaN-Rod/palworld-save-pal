@@ -10,15 +10,42 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	
+
 	const appState = getAppState();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
+
+	const AUTHOR_URL = 'https://github.com/CyrixJD115';
+
+	let hoveringTop = $state(false);
+	let easterEgg = $state(false);
 
 	function openLink(event: MouseEvent, url: string) {
 		if (isDesktopMode) {
 			event.preventDefault();
 			send(MessageType.OPEN_URL, url);
 		}
+	}
+
+	function onKeydown(event: KeyboardEvent) {
+		if (event.code === 'Escape') easterEgg = false;
+		else if (hoveringTop && event.code === 'KeyC') easterEgg = true;
+	}
+
+	function trackHover(node: HTMLElement) {
+		function onEnter() {
+			hoveringTop = true;
+		}
+		function onLeave() {
+			hoveringTop = false;
+		}
+		node.addEventListener('mouseenter', onEnter);
+		node.addEventListener('mouseleave', onLeave);
+		return {
+			destroy() {
+				node.removeEventListener('mouseenter', onEnter);
+				node.removeEventListener('mouseleave', onLeave);
+			}
+		};
 	}
 
 	function tilt(node: HTMLElement) {
@@ -29,8 +56,8 @@
 			const rect = node.getBoundingClientRect();
 			const x = e.clientX - rect.left;
 			const y = e.clientY - rect.top;
-			const rx = ((y - rect.height / 2) / rect.height) * -8;
-			const ry = ((x - rect.width / 2) / rect.width) * 8;
+			const rx = ((y - rect.height / 2) / rect.height) * -3;
+			const ry = ((x - rect.width / 2) / rect.width) * 3;
 			node.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
 		}
 		function onLeave() {
@@ -50,9 +77,45 @@
 	}
 </script>
 
+<svelte:window onkeydown={onKeydown} />
+
+{#if easterEgg}
+	<div class="fixed inset-0 z-[100] flex items-start justify-end p-4">
+		<button
+			class="absolute inset-0 cursor-default"
+			aria-label={m.compat_dismiss()}
+			onclick={() => (easterEgg = false)}
+		></button>
+		<div
+			class="border-primary-400/60 bg-surface-900/95 shadow-glow-paldium animate-fade-in relative rotate-2 rounded-lg border-2 px-5 py-4 backdrop-blur-md"
+			role="dialog"
+			aria-modal="true"
+			aria-label={m.easter_egg_title()}
+		>
+			<p class="heading-gradient text-sm font-bold">🥚 {m.easter_egg_title()}</p>
+			<a
+				href={AUTHOR_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-primary-300 hover:text-primary-200 mt-1 flex items-center gap-2 text-sm font-semibold underline"
+				onclick={(event) => openLink(event, AUTHOR_URL)}
+			>
+				CyrixJD115
+			</a>
+			<p class="text-muted mt-0.5 text-[11px]">{m.easter_egg_credit()}</p>
+			<button
+				class="text-muted hover:text-surface-50 mt-2 text-[10px] underline"
+				onclick={() => (easterEgg = false)}
+			>
+				{m.compat_dismiss()}
+			</button>
+		</div>
+	</div>
+{/if}
+
 <div class="animate-fade-in flex h-full w-full items-center justify-center space-x-2 p-2">
 	<div class="flex flex-col space-y-2">
-		<div use:tilt class="card-tilt">
+		<div use:trackHover use:tilt class="card-tilt">
 			<Card>
 				<div class="flex space-x-2">
 					<img src={staticIcons.pspWhite} alt="Palworld Save Pal" class="mb-2" />
@@ -61,7 +124,7 @@
 				<hr class="border-surface-500" />
 				<div class="mt-2 flex flex-col space-y-2">
 					<Tooltip position="left" background="bg-transparent">
-						{@html m.about_built_by()}
+						<p>{@html m.about_built_by()}</p>
 						{#snippet popup()}
 							<img src={Saitama} alt="Saitama" class="inline-block h-48 w-48" />
 						{/snippet}
@@ -71,7 +134,7 @@
 		</div>
 		<div use:tilt class="card-tilt">
 			<Card>
-				<div class="flex gap-2 w-full justify-between px-4">
+				<div class="flex w-full justify-between gap-2 px-4">
 					<a
 						href="https://github.com/oMaN-Rod/palworld-save-pal"
 						target="_blank"
@@ -80,7 +143,7 @@
 						onclick={(event) => openLink(event, 'https://github.com/oMaN-Rod/palworld-save-pal')}
 					>
 						<img src={githubIcon} alt="GitHub" class="h-8 w-8" />
-						<span class="text-xs align-bottom">{m.about_link_github()}</span>
+						<span class="align-bottom text-xs">{m.about_link_github()}</span>
 					</a>
 					<a
 						href="https://discord.gg/YWZFPy9G8J"
@@ -90,7 +153,7 @@
 						onclick={(event) => openLink(event, 'https://discord.gg/YWZFPy9G8J')}
 					>
 						<img src={discordIcon} alt="Discord" class="h-8 w-8" />
-						<span class="text-xs align-bottom">{m.about_link_discord()}</span>
+						<span class="align-bottom text-xs">{m.about_link_discord()}</span>
 					</a>
 					<a
 						href="https://buymeacoffee.com/i_am_o"
@@ -100,7 +163,7 @@
 						onclick={(event) => openLink(event, 'https://buymeacoffee.com/i_am_o')}
 					>
 						<img src={buyMeACoffee} alt="Buy me a coffee" class="h-8" />
-						<span class="text-xs align-bottom">{m.about_link_support()}</span>
+						<span class="align-bottom text-xs">{m.about_link_support()}</span>
 					</a>
 				</div>
 			</Card>
