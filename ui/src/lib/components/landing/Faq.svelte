@@ -30,14 +30,14 @@
 	];
 </script>
 
-<section class="relative w-full overflow-hidden px-4 py-16">
-	<h2 class="h2 mb-8 text-center font-bold">{m.landing_faq_heading()}</h2>
+<section class="relative w-full px-4 py-16">
+	<h2 class="heading-gradient h2 mb-8 text-center font-bold">
+		{m.landing_faq_heading()}
+	</h2>
 	<div class="mx-auto flex max-w-3xl flex-col gap-3">
 		{#each faqs as item, i (i)}
 			<details class="card group p-0">
-				<summary
-					class="flex cursor-pointer list-none items-center justify-between p-4 font-medium"
-				>
+				<summary class="flex cursor-pointer list-none items-center justify-between p-4 font-medium">
 					<span>{item.q()}</span>
 					<ChevronDown class="h-4 w-4 transition-transform group-open:rotate-180" />
 				</summary>
