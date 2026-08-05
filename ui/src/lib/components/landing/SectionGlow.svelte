@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="section-glow pointer-events-none absolute inset-0 -z-10 {klass}"
+	class="section-glow pointer-events-none absolute -inset-x-1/4 -top-1/4 -bottom-1/4 -z-10 {klass}"
 	aria-hidden="true"
 ></div>
 

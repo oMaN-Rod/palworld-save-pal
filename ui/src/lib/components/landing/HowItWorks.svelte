@@ -8,7 +8,7 @@
 	];
 </script>
 
-<section class="relative w-full overflow-hidden px-4 py-16">
+<section class="relative w-full px-4 py-16">
 	<h2 class="heading-gradient h2 mb-8 text-center font-bold">
 		{m.landing_steps_heading()}
 	</h2>

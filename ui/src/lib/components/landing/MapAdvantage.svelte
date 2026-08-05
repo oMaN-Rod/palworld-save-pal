@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Boxes, MapPin, MousePointerClick } from 'lucide-svelte';
-	import SectionGlow from './SectionGlow.svelte';
 	import * as m from '$i18n/messages';
 
 	const points = [
@@ -10,8 +9,7 @@
 	];
 </script>
 
-<section class="relative w-full overflow-hidden px-4 py-16 text-center">
-	<SectionGlow />
+<section class="relative w-full px-4 py-16 text-center">
 	<h2 class="heading-gradient h2 mx-auto max-w-3xl font-bold">
 		{m.landing_map_heading()}
 	</h2>

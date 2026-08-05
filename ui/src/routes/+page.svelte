@@ -60,7 +60,7 @@
 </svelte:head>
 
 {#if isWebBuild && !appState.saveFile}
-	<main class="animate-fade-in flex w-full flex-col items-center">
+	<main class="landing-page animate-fade-in flex w-full flex-col items-center">
 		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
 		<MapAdvantage />
 		<Values />
@@ -71,3 +71,27 @@
 		<Cta />
 	</main>
 {/if}
+
+<style>
+	.landing-page {
+		position: relative;
+		overflow-x: clip;
+		background:
+			radial-gradient(
+				900px 500px at 15% 15%,
+				color-mix(in srgb, var(--color-primary-500) 6%, transparent),
+				transparent 70%
+			),
+			radial-gradient(
+				800px 500px at 85% 50%,
+				color-mix(in srgb, var(--color-secondary-500) 5%, transparent),
+				transparent 72%
+			),
+			radial-gradient(
+				700px 400px at 50% 85%,
+				color-mix(in srgb, var(--color-tertiary-500) 5%, transparent),
+				transparent 70%
+			);
+		background-attachment: fixed;
+	}
+</style>

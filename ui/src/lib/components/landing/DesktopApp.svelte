@@ -4,7 +4,7 @@
 	import * as m from '$i18n/messages';
 </script>
 
-<section class="relative w-full overflow-hidden px-4 py-16">
+<section class="relative w-full px-4 py-16">
 	<div
 		class="card mx-auto flex max-w-4xl flex-col items-center gap-6 p-8 sm:flex-row sm:text-left"
 	>
