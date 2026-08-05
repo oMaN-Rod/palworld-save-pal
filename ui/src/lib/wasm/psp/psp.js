@@ -19,6 +19,10 @@ export async function dispatch_frame() {
 	throw new Error(NOT_BUILT);
 }
 
+export function set_oodle_bridge() {
+	throw new Error(NOT_BUILT);
+}
+
 export function set_sql_bridge() {
 	throw new Error(NOT_BUILT);
 }

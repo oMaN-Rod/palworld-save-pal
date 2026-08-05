@@ -547,6 +547,14 @@
     "localized_name": "Hile Gösterisi",
     "description": "Dupine özgü bir yetenek. 2 adet illüzyon yaratıp düşmanı şaşırtır, ardından asıl beden silindir şapkadan bir ateş kuşu fırlatarak saldırır."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Taş Ezmesi",
+    "description": "Tetroise e özgü bir yetenek. Havada süzülür gibi sıçrar, ezici ağırlığıyla düşmanı ezer."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Kutsal Baskı",
+    "description": "Tetroise Primoe özgü bir yetenek. Havada süzülür gibi sıçrayarak düşmanı ezer. Ardından ışık yayılır ve ışık sütunlarıyla ek saldırı yapar."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Mogurifuto",
     "description": "Fuddlere özgü bir yetenek. Yerin altına dalar ve düşmanın ayaklarının altından hızla fırlar."

@@ -93,7 +93,6 @@
 	<Navigation.Tile
 		id={item.id}
 		labelExpanded={item.label?.()}
-		expandedClasses="text-xs 2xl:text-base"
 		title={(item.title ?? item.label)?.()}
 		href={item.href}
 		onclick={item.action ? () => runAction(item.action!) : undefined}

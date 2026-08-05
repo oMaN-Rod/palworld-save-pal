@@ -10,8 +10,15 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 69604.09,
     "y": 196989.27,
-    "z": 20226.29,
+    "z": 20218.29,
     "id": "FTPoint113"
+  },
+  "0994C20A46B5522FE17090973C3C5452": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 192505.83,
+    "y": -227006.47,
+    "z": 6371.88,
+    "id": "FootOfWorldTree"
   },
   "0C0AF9F34C0491BCAD80B1BF355B9A98": {
     "class": "BP_LevelObject_UnlockMapPoint_C",
@@ -31,7 +38,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -503990.0,
     "y": -214380.0,
-    "z": -1830.0,
+    "z": -1845.0,
     "id": "FTPoint71"
   },
   "11E3E3C44F040B34E3809CB69CD87435": {
@@ -66,7 +73,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -257951.39,
     "y": 151247.84,
-    "z": 7.66,
+    "z": -8.34,
     "id": "FTPoint31"
   },
   "1749FBB34126AB7711670481717C9FEC": {
@@ -101,7 +108,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 102159.82,
     "y": 48527.03,
-    "z": 28428.29,
+    "z": 28394.29,
     "id": "FTPoint18"
   },
   "23B9E99C4A454B99220AF7B4A58FD8DE": {
@@ -115,7 +122,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -572461.56,
     "y": -287224.06,
-    "z": 45.33,
+    "z": 26.33,
     "id": "FTPoint81"
   },
   "26F321B44481BC01C5174D9D38409597": {
@@ -157,7 +164,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -50300.98,
     "y": 287392.38,
-    "z": 295.79,
+    "z": 264.79,
     "id": "FTPoint11"
   },
   "2DE1702048A1D4A82126168C49BE51A9": {
@@ -188,6 +195,13 @@
     "z": 2949.06,
     "id": "FTPoint108"
   },
+  "31078A16494A996F94DC13828638EAD4": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -153135.81,
+    "y": 589409.5,
+    "z": -2038.8,
+    "id": "New_SmallIsland01"
+  },
   "321E111B4B7AA9D901864F87404A70F2": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 524166.12,
@@ -201,6 +215,13 @@
     "y": -283378.06,
     "z": 31715.24,
     "id": "WatchTower_17"
+  },
+  "33A82FD24431633F5738F8AE02FFAC42": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -568698.6,
+    "y": -603451.94,
+    "z": -2010.95,
+    "id": "New_SmallIsland05"
   },
   "341551F747D44FA84DB87F8C8D2DCB48": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
@@ -283,7 +304,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": 117624.25,
     "y": 400134.78,
-    "z": -1931.7,
+    "z": -1949.7,
     "id": "FTPoint13"
   },
   "479A228C4032AAF144B3808E753E1690": {
@@ -335,11 +356,18 @@
     "z": -1887.3,
     "id": "FTPoint63"
   },
+  "4CE584574E74956A7F94D68D846F931D": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -451245.0,
+    "y": 363338.16,
+    "z": 12413.93,
+    "id": "New_SmallIsland03"
+  },
   "4D2F204549AB656CA1EA4B8E39C484F3": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
-    "x": -125290.0,
+    "x": -125476.0,
     "y": 201720.0,
-    "z": 6920.0,
+    "z": 6886.0,
     "id": "FTPoint36"
   },
   "4DA12CD449AA1A3DB7C6CABF9D6EA90D": {
@@ -367,14 +395,21 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -197915.22,
     "y": 438001.44,
-    "z": -2064.68,
+    "z": -2071.68,
     "id": "FTPoint89"
+  },
+  "5543641F4C980A9863F64685A91FE619": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 621794.3,
+    "y": -757914.56,
+    "z": 21127.6,
+    "id": "WorldTree_MiddleBoss_3"
   },
   "5669E36645C97EE9F38D308738ED30A7": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -558410.44,
     "y": 121112.1,
-    "z": -1587.23,
+    "z": -1607.23,
     "id": "FTPoint87"
   },
   "58A29B814E069D61EC75B1A6E9658FC1": {
@@ -395,7 +430,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -367707.78,
     "y": -114950.9,
-    "z": 61380.66,
+    "z": 61372.66,
     "id": "FTPoint3"
   },
   "59AABD184966FE16E9BA8EA0BD0EFDED": {
@@ -493,7 +528,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -760285.44,
     "y": -354966.22,
-    "z": 4300.47,
+    "z": 4290.47,
     "id": "FTPoint75"
   },
   "6DB6B7B2431CA2EFFFC88EB45805BA6A": {
@@ -528,14 +563,14 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -265980.0,
     "y": 268690.0,
-    "z": -1970.0,
+    "z": -1979.0,
     "id": "FTPoint55"
   },
   "71C4B2B2407F2BBBD77572A20C7FF0F5": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -80506.16,
     "y": 141464.77,
-    "z": 8140.14,
+    "z": 8131.14,
     "id": "FTPoint15"
   },
   "72626BD0492AD65E59BDB499C9BED99A": {
@@ -577,8 +612,15 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -283781.0,
     "y": 59352.68,
-    "z": 5251.39,
+    "z": 5226.39,
     "id": "FTPoint29"
+  },
+  "7A803ABD4C208C8D5C7EE197C9D2AD65": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -426910.2,
+    "y": -436850.9,
+    "z": -134.48,
+    "id": "New_SmallIsland06"
   },
   "80729706432E53B2A3D07C82D14C8749": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
@@ -647,7 +689,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -374180.0,
     "y": 63960.0,
-    "z": -1920.0,
+    "z": -1933.0,
     "id": "FTPoint54"
   },
   "902C96F44BC84002E39B52ACBFC61452": {
@@ -661,7 +703,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -588140.0,
     "y": -253780.0,
-    "z": 720.0,
+    "z": 695.0,
     "id": "FTPoint72"
   },
   "91DAC6F34D2A9FD7F01471B5166C6C02": {
@@ -710,7 +752,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -63520.73,
     "y": -55005.94,
-    "z": -1711.81,
+    "z": -1731.81,
     "id": "FTPoint64"
   },
   "A166CA6F4C1D191AA59951AD1CA49A92": {
@@ -757,9 +799,9 @@
   },
   "ACAE5FB04D48DE4197443E9C0993086B": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
-    "x": -151783.97,
-    "y": 213200.86,
-    "z": 3277.12,
+    "x": -151842.0,
+    "y": 213101.45,
+    "z": 3279.44,
     "id": "FTPoint35"
   },
   "AEBCC3FF41ACF9252B3499A89E0BAD55": {
@@ -780,7 +822,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -218636.78,
     "y": 58528.14,
-    "z": 3731.15,
+    "z": 3716.15,
     "id": "FTPoint30"
   },
   "B03880F34C398AEE56A024B8E510649D": {
@@ -808,8 +850,15 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -215388.52,
     "y": 8854.22,
-    "z": 13174.68,
+    "z": 13150.68,
     "id": "FTPoint43"
+  },
+  "B5A9156C4C3911FD3A4FFA8F807DD5A4": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -61819.01,
+    "y": -246053.52,
+    "z": -1979.87,
+    "id": "New_SmallIsland07"
   },
   "B795E2B14189A7D1EEAD6E97E89C91B7": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
@@ -829,8 +878,15 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -219172.86,
     "y": 226394.84,
-    "z": -1956.38,
+    "z": -1970.38,
     "id": "FTPoint40"
+  },
+  "C1D34C6C424DD841005934936F590865": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 63442.54,
+    "y": 507395.38,
+    "z": -1871.36,
+    "id": "New_SmallIsland02"
   },
   "C2A21FB148CA559F4814029637CEF75F": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
@@ -916,11 +972,18 @@
     "z": 515.74,
     "id": "FTPoint8"
   },
+  "CE7CDCFA48F15174B4FCF49C03F240ED": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": -984033.7,
+    "y": -371189.75,
+    "z": -2048.88,
+    "id": "New_SmallIsland04"
+  },
   "CF5FAE4A487231DDD8487C9B19453128": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -33882.15,
     "y": 564292.5,
-    "z": -2102.58,
+    "z": -2106.58,
     "id": "FTPoint85"
   },
   "D758455B40BC4D1A8ABB3EB62DD009D3": {
@@ -976,7 +1039,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -792350.0,
     "y": -251110.0,
-    "z": -540.0,
+    "z": -558.0,
     "id": "FTPoint73"
   },
   "DEE0F8BB4609C83285CE6CA80B84B679": {
@@ -995,9 +1058,9 @@
   },
   "E0819EFB41581AEAC3A029B0EE2FE195": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
-    "x": 89644.01,
-    "y": 94542.2,
-    "z": 67275.08,
+    "x": 89624.98,
+    "y": 94363.32,
+    "z": 67279.08,
     "id": "FTPoint20"
   },
   "E74D687D4CAAF5EA085E0B8A76F8B652": {
@@ -1028,6 +1091,13 @@
     "z": 24138.19,
     "id": "WatchTower_7"
   },
+  "EA56C74B459DAB2F5F596EA17049167A": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 405904.9,
+    "y": -729214.1,
+    "z": 22741.15,
+    "id": "WorldTree_MiddleBoss_2"
+  },
   "EC4896F44C4C9BD993DAE2B2C1F31BBA": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -74928.58,
@@ -1039,7 +1109,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -39402.43,
     "y": 159611.86,
-    "z": 17025.17,
+    "z": 16996.17,
     "id": "FTPoint16"
   },
   "EDE1AB2C44B1846879BB789C3951B2F7": {
@@ -1116,7 +1186,7 @@
     "class": "BP_LevelObject_TowerFastTravelPoint_C",
     "x": -221230.0,
     "y": 165130.0,
-    "z": -40.0,
+    "z": -54.0,
     "id": "FTPoint33"
   },
   "F8E5CB8143F4FA2F6213E6B454569F87": {
@@ -1125,6 +1195,13 @@
     "y": -90012.16,
     "z": 23301.87,
     "id": "FTPoint6"
+  },
+  "F94B3D32448028F24CE513B1302ACC94": {
+    "class": "BP_LevelObject_TowerFastTravelPoint_C",
+    "x": 628791.56,
+    "y": -610720.44,
+    "z": 28290.31,
+    "id": "WorldTree_MiddleBoss_1"
   },
   "FC8F024D40741A133EB9DA88201AE7F0": {
     "class": "BP_LevelObject_TowerFastTravelPoint_C",

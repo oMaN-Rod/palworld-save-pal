@@ -1,0 +1,54 @@
+{
+  "capture_power": {
+    "localized_name": "Daya Tangkap",
+    "description": "Meningkatkan kekuatan menangkap dari seluruh Sphere yang digunakan."
+  },
+  "hunger_reduction": {
+    "localized_name": "Rasa lapar",
+    "description": "Mengurangi rasa lapar pemain."
+  },
+  "swim_speed": {
+    "localized_name": "Kemampuan berenang",
+    "description": "Kecepatan berenang pemain meningkat dan konsumsi staminanya berkurang."
+  },
+  "food_decay_reduction": {
+    "localized_name": "Pengawetan Makanan",
+    "description": "Makanan di dalam inventori menjadi lebih awet."
+  },
+  "jump_power": {
+    "localized_name": "Kemampuan Melompat",
+    "description": "Kemampuan melompat pemain meningkat."
+  },
+  "glider_speed": {
+    "localized_name": "Kemampuan Meluncur",
+    "description": "Kecepatan saat menggunakan glider meningkat dan konsumsi stamina berkurang."
+  },
+  "climb_speed": {
+    "localized_name": "Panjat Tebing",
+    "description": "Kecepatan memanjat tebing meningkat dan konsumsi stamina berkurang."
+  },
+  "status_ailment_resist": {
+    "localized_name": "Resistensi Status",
+    "description": "Pemain menjadi tidak mudah terkena status buruk."
+  },
+  "stamina_reduction": {
+    "localized_name": "Stamina",
+    "description": "Konsumsi stamina saat pemain dan Pal yang dikendarai berlari akan berkurang."
+  },
+  "sphere_homing": {
+    "localized_name": "Pelacakan Sphere",
+    "description": "Saat melempar Sphere, Sphere akan mengejar target."
+  },
+  "exp_bonus": {
+    "localized_name": "EXP yang diperoleh",
+    "description": "Poin pengalaman yang didapat akan meningkat. (Kecuali beberapa bonus poin tertentu)"
+  },
+  "rainbow_passive_rate": {
+    "localized_name": "Keberuntungan Pelangi",
+    "description": "Peluang Pal liar memiliki kemampuan pasif yang lebih baik akan meningkat."
+  },
+  "move_speed": {
+    "localized_name": "Kecepatan gerak",
+    "description": "Meningkatkan kecepatan gerak pemain"
+  }
+}

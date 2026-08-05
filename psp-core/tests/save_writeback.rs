@@ -119,6 +119,8 @@ fn update_pals_missing_pal_errors() {
         is_lucky: Some(false),
         is_boss: Some(false),
         is_predator: false,
+        is_awakened: Some(false),
+        is_imported: Some(false),
         is_tower: false,
         gender: psp_core::dto::pal::PalGender::Female,
         nickname: None,

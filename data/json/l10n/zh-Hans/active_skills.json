@@ -547,6 +547,14 @@
     "localized_name": "好戏上演",
     "description": "拉比耶尔的专用技能。 制造2道幻影迷惑敌人， 本体则从丝绸礼帽中放出炎鸟进行攻击。"
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "巨石压顶",
+    "description": "重岩龟的专用技能。 高高跃起至空中， 随即以压倒性的重量将敌人压垮。"
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "圣石压顶",
+    "description": "净岩龟的专用技能。 高高跃起至空中，将敌人压垮。 随后扩散光芒，以光柱进行追击。"
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "掘地潜行",
     "description": "遁地鼠的专用技能。 潜入地下，从脚下猛然窜出突袭敌人。"

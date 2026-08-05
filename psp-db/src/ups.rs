@@ -61,6 +61,8 @@ pub struct UpsFilter {
 pub enum PalTypeFilter {
     Alpha,
     Lucky,
+    Awakened,
+    Imported,
     Human(Vec<String>),
     Predator,
     Oilrig,
@@ -189,6 +191,12 @@ fn push_filter(builder: &mut crate::SqlBuilder, filter: &UpsFilter) {
                     }
                     PalTypeFilter::Lucky => {
                         builder.push("pal_data LIKE '%\"is_lucky\":true%'");
+                    }
+                    PalTypeFilter::Awakened => {
+                        builder.push("pal_data LIKE '%\"is_awakened\":true%'");
+                    }
+                    PalTypeFilter::Imported => {
+                        builder.push("pal_data LIKE '%\"is_imported\":true%'");
                     }
                     PalTypeFilter::Human(ids) => {
                         builder.push("character_id IN (");
@@ -401,6 +409,8 @@ pub struct UpsStatsRecord {
     pub element_distribution: String,
     pub alpha_count: i64,
     pub lucky_count: i64,
+    pub awakened_count: i64,
+    pub imported_count: i64,
     pub human_count: i64,
     pub predator_count: i64,
     pub oilrig_count: i64,
@@ -422,6 +432,8 @@ fn map_stats(r: &crate::DbRow) -> Result<UpsStatsRecord, DbError> {
         element_distribution: r.get_string("element_distribution")?,
         alpha_count: r.get_i64("alpha_count")?,
         lucky_count: r.get_i64("lucky_count")?,
+        awakened_count: r.get_i64("awakened_count")?,
+        imported_count: r.get_i64("imported_count")?,
         human_count: r.get_i64("human_count")?,
         predator_count: r.get_i64("predator_count")?,
         oilrig_count: r.get_i64("oilrig_count")?,
@@ -448,7 +460,8 @@ pub async fn recompute_stats(
     let total_pals: i64 =
         crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?)?;
     let total_collections: i64 = crate::scalar_i64(
-        &db.query("SELECT COUNT(id) FROM ups_collections", &[]).await?,
+        &db.query("SELECT COUNT(id) FROM ups_collections", &[])
+            .await?,
     )?;
     let total_tags: i64 =
         crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?)?;
@@ -503,8 +516,16 @@ pub async fn recompute_stats(
         .map(|r| Ok((r.get_str_at(0)?.to_string(), r.get_str_at(1)?.to_string())))
         .collect::<Result<Vec<_>, DbError>>()?;
     let mut element_counts: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
-    let (mut alpha, mut lucky, mut human, mut predator, mut oilrig, mut summon) =
-        (0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
+    let (
+        mut alpha,
+        mut lucky,
+        mut awakened,
+        mut imported,
+        mut human,
+        mut predator,
+        mut oilrig,
+        mut summon,
+    ) = (0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
     for (character_id, pal_data_text) in rows {
         if let Some(character_info) = pals_game_data.get(&character_id) {
             if let Some(elements) = character_info
@@ -542,6 +563,20 @@ pub async fn recompute_stats(
             {
                 lucky += 1;
             }
+            if pal_data
+                .get("is_awakened")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false)
+            {
+                awakened += 1;
+            }
+            if pal_data
+                .get("is_imported")
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false)
+            {
+                imported += 1;
+            }
         }
         let lower = character_id.to_lowercase();
         if lower.contains("predator_") {
@@ -562,7 +597,8 @@ pub async fn recompute_stats(
            most_transferred_pal_id = COALESCE(?, most_transferred_pal_id),
            most_cloned_pal_id = COALESCE(?, most_cloned_pal_id),
            most_popular_character_id = COALESCE(?, most_popular_character_id),
-           element_distribution = ?, alpha_count = ?, lucky_count = ?, human_count = ?,
+           element_distribution = ?, alpha_count = ?, lucky_count = ?, awakened_count = ?,
+           imported_count = ?, human_count = ?,
            predator_count = ?, oilrig_count = ?, summon_count = ?, last_updated = ?
          WHERE id = 1",
         &[
@@ -578,6 +614,8 @@ pub async fn recompute_stats(
             serde_json::Value::Object(element_counts).to_string().into(),
             alpha.into(),
             lucky.into(),
+            awakened.into(),
+            imported.into(),
             human.into(),
             predator.into(),
             oilrig.into(),
@@ -600,6 +638,7 @@ pub async fn get_stats(
             "SELECT total_pals, total_collections, total_tags, total_transfers, total_clones,
                 storage_size_mb, most_transferred_pal_id, most_cloned_pal_id,
                 most_popular_character_id, element_distribution, alpha_count, lucky_count,
+                awakened_count, imported_count,
                 human_count, predator_count, oilrig_count, summon_count, last_updated
          FROM ups_stats WHERE id = 1",
             &[],
@@ -1142,7 +1181,8 @@ pub async fn create_or_update_tag(
     color: Option<&str>,
 ) -> Result<UpsTagRecord, DbError> {
     let existing: Option<i64> = crate::opt_scalar_i64(
-        &db.query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()]).await?,
+        &db.query("SELECT id FROM ups_tags WHERE name = ?", &[name.into()])
+            .await?,
     )?;
     match existing {
         Some(tag_id) => {

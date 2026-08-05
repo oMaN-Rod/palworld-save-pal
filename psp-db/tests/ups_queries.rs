@@ -186,3 +186,73 @@ async fn unknown_sort_order_defaults_to_ascending() {
         vec![1, 30, 40]
     );
 }
+
+async fn insert_flagged_pal(
+    pool: &sqlx::SqlitePool,
+    character_id: &str,
+    is_awakened: bool,
+    is_imported: bool,
+) -> i64 {
+    let pal_data = serde_json::json!({
+        "character_id": character_id,
+        "is_boss": false,
+        "is_lucky": false,
+        "is_awakened": is_awakened,
+        "is_imported": is_imported,
+        "level": 10
+    });
+    sqlx::query_scalar(
+        "INSERT INTO ups_pals (instance_id, character_id, nickname, level, pal_data, tags, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id",
+    )
+    .bind(uuid::Uuid::new_v4().to_string())
+    .bind(character_id)
+    .bind(None::<String>)
+    .bind(10_i64)
+    .bind(pal_data.to_string())
+    .bind("[]")
+    .bind("2026-01-01T00:00:00")
+    .bind("2026-01-01T00:00:00")
+    .fetch_one(pool)
+    .await
+    .unwrap()
+}
+
+#[tokio::test]
+async fn pal_type_filter_selects_awakened_and_imported_pals() {
+    let (db, pool) = test_db().await;
+    let awakened_id = insert_flagged_pal(&pool, "SheepBall", true, false).await;
+    let imported_id = insert_flagged_pal(&pool, "Kitsunebi", false, true).await;
+    insert_flagged_pal(&pool, "Lamball", false, false).await;
+
+    let awakened_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Awakened]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &awakened_filter)
+        .await
+        .unwrap();
+    assert_eq!(ids, vec![awakened_id]);
+
+    let imported_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Imported]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &imported_filter)
+        .await
+        .unwrap();
+    assert_eq!(ids, vec![imported_id]);
+
+    let either_filter = UpsFilter {
+        pal_types: Some(vec![PalTypeFilter::Awakened, PalTypeFilter::Imported]),
+        ..Default::default()
+    };
+    let ids = psp_db::ups::get_all_filtered_ids(&db, &either_filter)
+        .await
+        .unwrap();
+    assert_eq!(
+        ids,
+        vec![awakened_id, imported_id],
+        "the group is OR-joined"
+    );
+}

@@ -547,6 +547,14 @@
     "localized_name": "Pokaz sztuczek",
     "description": "Umiejętność wyłączna dla: Dupin. Tworzy dwie iluzje, by zmylić przeciwników, po czym wystrzeliwuje z cylindra chmarę ognistych ptaków."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Kamienne zmiażdżenie",
+    "description": "Umiejętność wyłączna dla: Tetroise . Wybija się wysoko w górę, by z impetem zmiażdżyć przeciwników swoją przytłaczającą masą."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Święte przygniecenie",
+    "description": "Umiejętność wyłączna dla: Tetroise Primo. Wybija się wysoko w górę, by z impetem zmiażdżyć przeciwników swoją przytłaczającą masą. Po uderzeniu rozchodzi się blask, przywołujący dobijający słup światła."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Kreci podrzut",
     "description": "Umiejętność wyłączna dla: Fuddler. Zaszywa się pod ziemią, by po chwili z impetem wyskoczyć bezpośrednio spod stóp przeciwnika."
