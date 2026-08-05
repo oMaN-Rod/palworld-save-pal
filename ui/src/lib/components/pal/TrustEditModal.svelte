@@ -52,21 +52,23 @@
 	initializeTrust();
 </script>
 
-<Card class="min-w-[min(100vw,24rem)] rounded-xl p-6 text-surface-50 shadow-lg">
+<Card class="text-surface-50 min-w-[min(100vw,24rem)] rounded-xl p-6 shadow-lg">
 	<h3 class="mb-6 text-lg font-semibold">{m.edit_entity({ entity: m.trust() })}</h3>
 
 	<div class="space-y-6">
 		<!-- Trust Level Display -->
 		<div class="flex items-center justify-between">
-			<span class="text-sm text-surface-50/80">{m.friendship_rank()}</span>
-			<span class="rounded-full bg-[#db7c90] px-3 py-1 text-sm font-bold text-white">
+			<span class="text-surface-50/80 text-sm">{m.friendship_rank()}</span>
+			<span
+				class="bg-tertiary-500 text-tertiary-contrast-500 rounded-full px-3 py-1 text-sm font-bold"
+			>
 				Lv.{currentRank}
 			</span>
 		</div>
 
 		<!-- Custom Slider -->
 		<div>
-			<label for="trust-slider" class="mb-1 block text-sm font-medium text-surface-50/80"
+			<label for="trust-slider" class="text-surface-50/80 mb-1 block text-sm font-medium"
 				>{m.trust_xp()}</label
 			>
 			<input
@@ -78,9 +80,9 @@
 				value={currentTrust}
 				oninput={(e) => updateTrust(+(e.target as HTMLInputElement).value)}
 			/>
-			<div class="mt-2 flex justify-between text-sm text-surface-50/70">
+			<div class="text-surface-50/70 mt-2 flex justify-between text-sm">
 				<span>{minTrust}</span>
-				<span class="font-semibold text-surface-50">{currentTrust}</span>
+				<span class="text-surface-50 font-semibold">{currentTrust}</span>
 				<span>{maxTrust}</span>
 			</div>
 		</div>
@@ -118,7 +120,7 @@
 		-webkit-appearance: none;
 		width: 100%;
 		height: 6px;
-		background: #444;
+		background: var(--color-surface-700);
 		border-radius: 3px;
 		outline: none;
 	}
@@ -129,8 +131,8 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: #db7c90;
-		border: 2px solid white;
+		background: var(--color-tertiary-400);
+		border: 2px solid var(--color-surface-50);
 		cursor: pointer;
 		transition: transform 0.2s ease;
 	}
@@ -139,8 +141,8 @@
 		width: 16px;
 		height: 16px;
 		border-radius: 9999px;
-		background: #db7c90;
-		border: 2px solid white;
+		background: var(--color-tertiary-400);
+		border: 2px solid var(--color-surface-50);
 		cursor: pointer;
 		transition: transform 0.2s ease;
 	}

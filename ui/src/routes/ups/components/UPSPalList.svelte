@@ -31,7 +31,7 @@
 				upsPal.id
 			)
 				? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 ring-secondary-500 ring-4'
-				: 'dark:bg-surface-800 bg-white'}"
+				: 'dark:bg-surface-800'}"
 		>
 			<!-- Pal Badge (smaller for list view) -->
 			<div class="shrink-0">

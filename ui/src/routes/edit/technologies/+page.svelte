@@ -124,7 +124,7 @@
 					? ''
 					: 'opacity-25'}"
 			>
-				<div class="absolute top-0 h-auto w-full bg-[#091f35] py-0.5 text-xs">
+				<div class="bg-primary-950 absolute top-0 h-auto w-full py-0.5 text-xs">
 					{headerText}
 				</div>
 				{#await getImageForTechnology(techID) then icon}
@@ -299,7 +299,7 @@
 								{@const isSelected = appState.selectedPlayer.technologies.includes(ancientTechID)}
 								{@render technologyButton(ancientTechID, isSelected, ancientTechItem, 'ancient')}
 							{:else}
-								<div class="w-24 bg-[#220022] 2xl:w-32"></div>
+								<div class="bg-tertiary-950 w-24 2xl:w-32"></div>
 							{/if}
 						</div>
 					</div>

@@ -79,7 +79,7 @@
 
 	function elementColor(element: string): string {
 		const el = elementsData.elements[element];
-		return el?.color || '#888';
+		return el?.color || 'var(--color-surface-500)';
 	}
 
 	const allSkills = $derived(Object.entries(activeSkillsData.activeSkills));
@@ -120,8 +120,7 @@
 </script>
 
 <div class="flex h-full flex-col gap-4">
-
-	<span class="text-surface-400 text-xs w-full text-end mb-2">{filteredSkills.length}</span>
+	<span class="text-surface-400 mb-2 w-full text-end text-xs">{filteredSkills.length}</span>
 
 	<div class="flex flex-col gap-3 md:flex-row md:items-start">
 		<div class="md:w-72">
