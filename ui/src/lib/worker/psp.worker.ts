@@ -2,7 +2,7 @@ import { unzipSync, unzlibSync, zipSync } from 'fflate';
 import { initOoz, oozCompress, oozCompressSync, oozDecompress, oozDecompressSync } from './ooz';
 import type { SavHeader } from './savframe';
 import { parseSavHeader, buildSav, getMagic, checkSavFormat, SaveType } from './savframe';
-import { openSqlite } from './sqlite';
+import { openSqlite, storageWarning } from './sqlite';
 
 function toB64(bytes: Uint8Array): string {
 	let s = '';
@@ -140,23 +140,17 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 					(sql: string, params: unknown[]) => sqlite.query(sql, params)
 				);
 				await mod.run_migrations();
-				if (!sqlite.persistent) {
-					// Untranslated: paraglide resolves the locale from a cookie or a
-					// module-scoped variable set by setLocale, and a dedicated worker
-					// has neither `document` nor the main thread's module instance, so
-					// importing $i18n/messages here would always render baseLocale.
-					// 'warning', not 'error': errorHandler navigates to /error, which
-					// would eject the user out of an app that still works fine without
-					// persistence.
+				// Untranslated: paraglide resolves the locale from a cookie or a
+				// module-scoped variable set by setLocale, and a dedicated worker
+				// has neither `document` nor the main thread's module instance, so
+				// importing $i18n/messages here would always render baseLocale.
+				// 'warning', not 'error': errorHandler navigates to /error, which
+				// would eject the user out of an app that still works fine without
+				// persistence.
+				const warning = storageWarning(sqlite);
+				if (warning) {
 					self.postMessage(
-						JSON.stringify({
-							type: 'warning',
-							data: {
-								message:
-									'This browser cannot store data; presets, blueprints and stored pals will not be saved between visits.',
-								trace: ''
-							}
-						})
+						JSON.stringify({ type: 'warning', data: { message: warning, trace: '' } })
 					);
 				}
 				const manifest: string[] = await (await fetch('/data/json/manifest.json')).json();

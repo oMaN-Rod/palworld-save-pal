@@ -27,6 +27,10 @@ export const staticIcons = {
 	unknownEggIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/unknown_egg.webp`),
 	altarIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/altar.webp`),
 	luckyIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/lucky.webp`),
+	awakeningIcon: assetLoader.loadImage(
+		`${ASSET_DATA_PATH}/img/t_itemicon_consume_palawakening_neutral.webp`
+	),
+	importedIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/palglobalimport.webp`),
 	pspWhite: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/app/psp_white.webp`),
 	lamball: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/sheepball.webp`),
 	trustIcon: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_palfriendship.webp`),

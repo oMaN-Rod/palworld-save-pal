@@ -58,6 +58,12 @@
 		pal && pal.is_sick ? 'animate-pulse ring-4 ring-red-500 rounded-full' : ''
 	);
 
+	const awakenedClass = $derived(
+		pal && pal.is_awakened
+			? 'ring-4 ring-amber-400 rounded-full shadow-[0_0_12px_2px_rgba(251,191,36,0.7)]'
+			: ''
+	);
+
 	const palData = $derived(palsData.getByKey(pal.character_key));
 
 	const menuItems = $derived.by(() => {
@@ -142,7 +148,7 @@
 				{disabled}
 			>
 				<div class="flex flex-col">
-					<div class={cn('relative flex items-center justify-center', sickClass)}>
+					<div class={cn('relative flex items-center justify-center', awakenedClass, sickClass)}>
 						{#if pal.is_boss}
 							<div class="absolute -top-1 -left-4 h-6 w-6 xl:h-8 xl:w-8">
 								<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
@@ -176,6 +182,11 @@
 						{#if palLevel}
 							<div class="absolute -bottom-4 -left-3 h-6 w-6 xl:h-8 xl:w-8">
 								<span class="text-xs {levelSyncClass} font-bold">lvl {palLevel}</span>
+							</div>
+						{/if}
+						{#if pal.is_imported}
+							<div class="absolute -right-4 -bottom-1 h-6 w-6 xl:h-8 xl:w-8">
+								<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge" />
 							</div>
 						{/if}
 					</div>

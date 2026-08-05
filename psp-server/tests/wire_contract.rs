@@ -195,6 +195,28 @@ fn mask_gps_response_frame(message_type: &str, value: &mut Value) {
     }
 }
 
+/// `is_awakened`/`is_imported` post-date the recorded corpus, so they are
+/// DROPPED rather than masked: a mask cannot reconcile a key that is absent on
+/// the recorded side. Both names are unique to `PalDto`, so a blanket recursive
+/// removal cannot touch an unrelated field.
+fn drop_post_fixture_pal_fields(value: &mut Value) {
+    match value {
+        Value::Object(object) => {
+            object.remove("is_awakened");
+            object.remove("is_imported");
+            for (_, child) in object.iter_mut() {
+                drop_post_fixture_pal_fields(child);
+            }
+        }
+        Value::Array(items) => {
+            for item in items.iter_mut() {
+                drop_post_fixture_pal_fields(item);
+            }
+        }
+        _ => {}
+    }
+}
+
 /// Replaces every masked pointer for `message_type` with a fixed sentinel, in
 /// place. A pointer that isn't present in `value` is left alone (the frame may
 /// legitimately not carry it, e.g. a `warning` instead of an `add_pal`).
@@ -217,6 +239,7 @@ fn mask_ignored_paths(message_type: &str, value: &mut Value) {
             data.remove("world_option_present");
         }
     }
+    drop_post_fixture_pal_fields(value);
 }
 
 /// Response index 1 of `save_modded_save`'s gamepass burst names a
@@ -760,6 +783,32 @@ async fn replay_reads_fixtures_in_filename_order() {
 
     let fixtures_replayed = replay_all_fixtures(&temp_dir.path().join("fixtures")).await;
     assert_eq!(fixtures_replayed, 2);
+}
+
+#[test]
+fn drop_post_fixture_pal_fields_strips_both_flags_at_any_depth() {
+    let mut frame = serde_json::json!({
+        "data": {
+            "player": {
+                "pals": {
+                    "abc": { "character_key": "sheepball", "is_awakened": true, "level": 5 }
+                }
+            },
+            "pal": { "character_key": "lamball", "is_imported": true }
+        }
+    });
+
+    drop_post_fixture_pal_fields(&mut frame);
+
+    assert_eq!(
+        frame,
+        serde_json::json!({
+            "data": {
+                "player": { "pals": { "abc": { "character_key": "sheepball", "level": 5 } } },
+                "pal": { "character_key": "lamball" }
+            }
+        })
+    );
 }
 
 /// Identical order must report success. Calls `compare_responses` directly —

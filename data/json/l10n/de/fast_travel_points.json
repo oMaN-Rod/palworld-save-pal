@@ -5,8 +5,11 @@
   "04CB216B487AD789C47E2DBA08B0B49F": {
     "localized_name": "Azurblaues Taukap"
   },
+  "0994C20A46B5522FE17090973C3C5452": {
+    "localized_name": "Weltenbaum\u00A0– Ausläufer"
+  },
   "0C0AF9F34C0491BCAD80B1BF355B9A98": {
-    "localized_name": "Bambushain (Hinterland) – Beobachtungswarte"
+    "localized_name": "Bambushain (Hinterland)\u00A0– Beobachtungswarte"
   },
   "0EBF6F3D441ACA707517B9B7BAA6590D": {
     "localized_name": "Wolkenmoor"
@@ -15,13 +18,13 @@
     "localized_name": "Verlohte Lande"
   },
   "11E3E3C44F040B34E3809CB69CD87435": {
-    "localized_name": "Windstieginsel – Beobachtungswarte"
+    "localized_name": "Windstieginsel\u00A0– Beobachtungswarte"
   },
   "15314BE94E2FB8D018D5749BE9A318F0": {
     "localized_name": "Schmetterlingswald"
   },
   "15BD61D9481EE7F63CB32BB4E10A05CA": {
-    "localized_name": "Tosende Insel – Strand"
+    "localized_name": "Tosende Insel\u00A0– Strand"
   },
   "16B14E084BBB4C71E9D07A9DC84B80BD": {
     "localized_name": "Geweihte Smaragdauen"
@@ -33,13 +36,13 @@
     "localized_name": "Scheideweg der Kirschblüten"
   },
   "1BDEABA240B1699541C17F83E59E61DF": {
-    "localized_name": "Eisgrat – Gipfel"
+    "localized_name": "Eisgrat\u00A0– Gipfel"
   },
   "20B16780488A8F23A80502BC608A0192": {
     "localized_name": "Dürre Dünen"
   },
   "211BCB174B47C566C6F92E9CEB999F98": {
-    "localized_name": "Geisterzinne – Berghang"
+    "localized_name": "Geisterzinne\u00A0– Berghang"
   },
   "22095BFA48A46172F8D154B2EBEB7493": {
     "localized_name": "Absolute Nullpunktzone"
@@ -57,7 +60,7 @@
     "localized_name": "Geisterinsel"
   },
   "28D514E74B51FD9EB078A891DB0787C2": {
-    "localized_name": "Blumenhasenberg – Gipfel"
+    "localized_name": "Blumenhasenberg\u00A0– Gipfel"
   },
   "2913E38E4924F762AF9B129303898A31": {
     "localized_name": "Passage zum Meer"
@@ -66,7 +69,7 @@
     "localized_name": "Ewiger Eissee"
   },
   "2BC5E46049E69D3549CFB58948BE3288": {
-    "localized_name": "Sandige Dünen – Eingang"
+    "localized_name": "Sandige Dünen\u00A0– Eingang"
   },
   "2DE1702048A1D4A82126168C49BE51A9": {
     "localized_name": "Graspandawald"
@@ -80,14 +83,20 @@
   "2F3A56DA4022EB1E43D3439ECEE2AA2C": {
     "localized_name": "Windwarte"
   },
+  "31078A16494A996F94DC13828638EAD4": {
+    "localized_name": "Insel der kreisrunden Ruinen"
+  },
   "321E111B4B7AA9D901864F87404A70F2": {
     "localized_name": "Lockhain der Glyzinien"
   },
   "328BCAC94E01988D944C4F85D49E457C": {
-    "localized_name": "Lössebene – Beobachtungswarte"
+    "localized_name": "Lössebene\u00A0– Beobachtungswarte"
+  },
+  "33A82FD24431633F5738F8AE02FFAC42": {
+    "localized_name": "Insel der eisigen Ruinen"
   },
   "341551F747D44FA84DB87F8C8D2DCB48": {
-    "localized_name": "Kirschblüteninsel – Westküste"
+    "localized_name": "Kirschblüteninsel\u00A0– Westküste"
   },
   "3697999C458BF8A3C7973382969FBDF9": {
     "localized_name": "Wüstenstadt"
@@ -102,10 +111,10 @@
     "localized_name": "Glühendes Lavaplateau"
   },
   "3BF1495E406AD5F437DA5AA2134954A2": {
-    "localized_name": "Trockener Sandstrand – Beobachtungswarte"
+    "localized_name": "Trockener Sandstrand\u00A0– Beobachtungswarte"
   },
   "3E8E504B4A3975FD3862E1BC85A5D4F6": {
-    "localized_name": "Windhauchinseln – Kirche"
+    "localized_name": "Windhauchinseln\u00A0– Kirche"
   },
   "41727100495D21DC905D309C53989914": {
     "localized_name": "Festungsruine"
@@ -120,16 +129,16 @@
     "localized_name": "Sandsturm-Küste"
   },
   "4669582D4081BF550AFB66A05D043A3D": {
-    "localized_name": "Sandige Dünen – Hinterland"
+    "localized_name": "Sandige Dünen\u00A0– Hinterland"
   },
   "479A228C4032AAF144B3808E753E1690": {
-    "localized_name": "Glutwindsteppe – Beobachtungswarte"
+    "localized_name": "Glutwindsteppe\u00A0– Beobachtungswarte"
   },
   "47E04FF245A4FB6F4E1E9C864ED8F2B0": {
-    "localized_name": "Ockerschlucht – Beobachtungswarte"
+    "localized_name": "Ockerschlucht\u00A0– Beobachtungswarte"
   },
   "49C3516D459F15C70ABEE88CD7F4D331": {
-    "localized_name": "Turm der Gesellschaft des Blumenmondes – Eingang"
+    "localized_name": "Turm der Gesellschaft des Blumenmondes\u00A0–\u00A0Eingang"
   },
   "4B2462954566096EB1EB74A0B48E5C5D": {
     "localized_name": "Ufer der Gebeine"
@@ -138,10 +147,13 @@
     "localized_name": "Purpurroter Irrwald"
   },
   "4C204C3842EAB210A7A9DA9D2CF9CBBE": {
-    "localized_name": "Windhauchinseln – Beobachtungswarte"
+    "localized_name": "Windhauchinseln\u00A0– Beobachtungswarte"
   },
   "4CCF456A440C6CD5F2347AAA3E163F21": {
     "localized_name": "Arena-Eingang"
+  },
+  "4CE584574E74956A7F94D68D846F931D": {
+    "localized_name": "Witterinsel"
   },
   "4D2F204549AB656CA1EA4B8E39C484F3": {
     "localized_name": "Scheideweg der Schneegipfel"
@@ -150,7 +162,7 @@
     "localized_name": "Einsamer Sandwall"
   },
   "4DB2FF944B1E545F41FBC6AF86BEBEB5": {
-    "localized_name": "Obsidiankrater – 2. Station"
+    "localized_name": "Obsidiankrater\u00A0– 2. Station"
   },
   "513E166044565A0BD3360F94142577E8": {
     "localized_name": "Moorinsel"
@@ -158,17 +170,20 @@
   "52E1E065410F78AF13B18CB1136EC8D6": {
     "localized_name": "Witterschatz-Insel"
   },
+  "5543641F4C980A9863F64685A91FE619": {
+    "localized_name": "Verbotenes Forschungslabor"
+  },
   "5669E36645C97EE9F38D308738ED30A7": {
     "localized_name": "Frostinsel"
   },
   "58A29B814E069D61EC75B1A6E9658FC1": {
-    "localized_name": "Östliche Wildnisinsel – Beobachtungswarte"
+    "localized_name": "Östliche Wildnisinsel\u00A0– Beobachtungswarte"
   },
   "596996B948716D3FD2283C8B5C6E829C": {
-    "localized_name": "Windhauchinseln – Strand der Schiffbrüchigen"
+    "localized_name": "Windhauchinseln\u00A0– Strand der Schiffbrüchigen"
   },
   "5970E8E648D2A83AFDFF7C9151D9BEF5": {
-    "localized_name": "Turm der Bruderschaft der ewigen Lohe – Eingang"
+    "localized_name": "Turm der Bruderschaft der ewigen Lohe\u00A0– Eingang"
   },
   "59AABD184966FE16E9BA8EA0BD0EFDED": {
     "localized_name": "Zugang zum Hochplateau"
@@ -180,10 +195,10 @@
     "localized_name": "Abgelegenes Fischerdorf"
   },
   "5FA6EB494384E4134BAA589F02A580DC": {
-    "localized_name": "Eisiger Korallenhügel – Beobachtungswarte"
+    "localized_name": "Eisiger Korallenhügel\u00A0– Beobachtungswarte"
   },
   "603ED0CD4CFB9AFDC9E11F805594CCE5": {
-    "localized_name": "Turm des Rayne-Syndikats – Eingang"
+    "localized_name": "Turm des Rayne-Syndikats\u00A0– Eingang"
   },
   "618F02C546F191912D42398685A2BBA2": {
     "localized_name": "Sengende Meerenge"
@@ -198,10 +213,10 @@
     "localized_name": "Geweihte Tränenfurt"
   },
   "65B10BB14ABDA9C2109167B21901D195": {
-    "localized_name": "Turm der Miliz – Eingang"
+    "localized_name": "Turm der Miliz\u00A0– Eingang"
   },
   "6948B7914C8D1701DB7F4081E4D970E5": {
-    "localized_name": "Sengende Kluft – Beobachtungswarte"
+    "localized_name": "Sengende Kluft\u00A0– Beobachtungswarte"
   },
   "69A3B9E64018BA4C158BDDA7CD713463": {
     "localized_name": "Schwarzquellblick"
@@ -240,13 +255,16 @@
     "localized_name": "Reinweißer Firn"
   },
   "76B000914943BADDC56BCFBAE2BF051E": {
-    "localized_name": "Abgeschiedene Insel – Kirchenruine"
+    "localized_name": "Abgeschiedene Insel\u00A0– Kirchenruine"
   },
   "77699B11460416B57ADEDFB989B78E68": {
     "localized_name": "Vergessene Insel"
   },
   "79C561B747335A7A0A8FBF9FAE280E62": {
     "localized_name": "Reich des Schwertmeisters"
+  },
+  "7A803ABD4C208C8D5C7EE197C9D2AD65": {
+    "localized_name": "Sandsteintor-Insel"
   },
   "80729706432E53B2A3D07C82D14C8749": {
     "localized_name": "Klippe der dubiosen Pilze"
@@ -258,19 +276,19 @@
     "localized_name": "Steppenschleuse"
   },
   "837C6214424040FCEF9D48BA20E248BA": {
-    "localized_name": "Obsidiankrater – Bergpfad"
+    "localized_name": "Obsidiankrater\u00A0– Bergpfad"
   },
   "839048604D716A58A64781A9A342B717": {
     "localized_name": "Goldene Ruinenstadt"
   },
   "84D48EA34666191781868E809ACBCBCE": {
-    "localized_name": "Geisterzinne (Berghang) – Beobachtungswarte"
+    "localized_name": "Geisterzinne (Berghang)\u00A0– Beobachtungswarte"
   },
   "866881DB443444AA7F4E7C8E5DCDAA29": {
-    "localized_name": "Moorinsel – Kirchenruine"
+    "localized_name": "Moorinsel\u00A0– Kirchenruine"
   },
   "8A9AE3B44AD758EDD7FE44BA9B75000B": {
-    "localized_name": "Sandsteinplateau – Beobachtungswarte"
+    "localized_name": "Sandsteinplateau\u00A0– Beobachtungswarte"
   },
   "8C1EE640439F980EA6BA3D9B256D4FAD": {
     "localized_name": "Kristallbaumriese"
@@ -291,7 +309,7 @@
     "localized_name": "Heuchlerhügel"
   },
   "9521FEBF4A6D0D02AE9F80AE9513B99C": {
-    "localized_name": "Turm der Feybreak – Eingang"
+    "localized_name": "Turm der Feybreak\u00A0– Eingang"
   },
   "979BF2044C8E8FE559B598A95A83EDE3": {
     "localized_name": "Kleines Dorf"
@@ -315,22 +333,22 @@
     "localized_name": "Reich der Schnellfüßigkeit"
   },
   "A51FC0C147435750046C48B254793A8B": {
-    "localized_name": "Turm der Liga der Palfreunde – Eingang"
+    "localized_name": "Turm der Liga der Palfreunde\u00A0– Eingang"
   },
   "A5664AB74E0D030D03BF2DAF87C67A0F": {
     "localized_name": "Siegelkammer"
   },
   "A9213E6E425F2F696D8B3EB19AA547FE": {
-    "localized_name": "Goldene Ruinenstadt – Beobachtungswarte"
+    "localized_name": "Goldene Ruinenstadt\u00A0– Beobachtungswarte"
   },
   "ACAE5FB04D48DE4197443E9C0993086B": {
     "localized_name": "Reich der Mysterien"
   },
   "AEBCC3FF41ACF9252B3499A89E0BAD55": {
-    "localized_name": "Turm des Gelübdes – Eingang"
+    "localized_name": "Turm des Gelübdes\u00A0– Eingang"
   },
   "AECFED0D41AFEE11F30B4F9687BC3243": {
-    "localized_name": "Obsidiankrater – Berghang"
+    "localized_name": "Obsidiankrater\u00A0– Berghang"
   },
   "B001852C491FF5E70C4747BFF9972924": {
     "localized_name": "Scheideweg der Forscher"
@@ -345,7 +363,10 @@
     "localized_name": "Seerosenklamm"
   },
   "B44AA24445864494E7569597ACCAEFC6": {
-    "localized_name": "Bambushain – Hinterland"
+    "localized_name": "Bambushain\u00A0– Hinterland"
+  },
+  "B5A9156C4C3911FD3A4FFA8F807DD5A4": {
+    "localized_name": "Sonnenwappeninsel"
   },
   "B795E2B14189A7D1EEAD6E97E89C91B7": {
     "localized_name": "Kap der Verbannten"
@@ -355,6 +376,9 @@
   },
   "BF8B123244ADB794A06EA8A10503FBDD": {
     "localized_name": "Kleinhairevier"
+  },
+  "C1D34C6C424DD841005934936F590865": {
+    "localized_name": "Feuerader-Insel"
   },
   "C2A21FB148CA559F4814029637CEF75F": {
     "localized_name": "Eisiges Sandkap"
@@ -369,7 +393,7 @@
     "localized_name": "Dünen des Anubis"
   },
   "C5E2ABA14A8F6D35EF4A81AD47EC19C9": {
-    "localized_name": "Höllenglutplateau – Beobachtungswarte"
+    "localized_name": "Höllenglutplateau\u00A0– Beobachtungswarte"
   },
   "C5F1A3CA46EAE25B999783B3ECC569ED": {
     "localized_name": "Sporenpassage"
@@ -387,10 +411,13 @@
     "localized_name": "Roter Krummfelsen"
   },
   "CCCD29E444CEB548D5B5E589DAF086F2": {
-    "localized_name": "Sengende Sandhügel – Beobachtungswarte"
+    "localized_name": "Sengende Sandhügel\u00A0– Beobachtungswarte"
   },
   "CD9FE0D4490874187ED9919D0E4D2A09": {
     "localized_name": "Verfallene Festungsstadt"
+  },
+  "CE7CDCFA48F15174B4FCF49C03F240ED": {
+    "localized_name": "Zwillingshorninsel"
   },
   "CF5FAE4A487231DDD8487C9B19453128": {
     "localized_name": "Oaseninsel"
@@ -402,7 +429,7 @@
     "localized_name": "Geweihtes Kaskadenufer"
   },
   "D8C1A86541DACA78B1250AB9B85B7E67": {
-    "localized_name": "Mondsichelstrand – Beobachtungswarte"
+    "localized_name": "Mondsichelstrand\u00A0– Beobachtungswarte"
   },
   "DC0ECF9241B4410C59EE619F56D1106A": {
     "localized_name": "Kaltwasserküste"
@@ -420,25 +447,28 @@
     "localized_name": "Lössebene"
   },
   "DEE0F8BB4609C83285CE6CA80B84B679": {
-    "localized_name": "Grünbach – Beobachtungswarte"
+    "localized_name": "Grünbach\u00A0– Beobachtungswarte"
   },
   "DF9FB9CB41B43052A9C74FA79A826A50": {
     "localized_name": "Reich der sengenden Glut"
   },
   "E0819EFB41581AEAC3A029B0EE2FE195": {
-    "localized_name": "Turm des Instituts für Genforschung – Eingang"
+    "localized_name": "Turm des Instituts für Genforschung\u00A0– Eingang"
   },
   "E74D687D4CAAF5EA085E0B8A76F8B652": {
     "localized_name": "Sonneninsel"
   },
   "E8351DF348B268672F0A219840C6BE47": {
-    "localized_name": "Verbrannte Obsidianebene – Beobachtungswarte"
+    "localized_name": "Verbrannte Obsidianebene\u00A0– Beobachtungswarte"
   },
   "E8A85FF544C205E1B04F7E93109B8197": {
     "localized_name": "Durstmark"
   },
   "E9FC08444BFE7E3EE6E06F84AC8688EC": {
-    "localized_name": "Eiswieselhügel – Beobachtungswarte"
+    "localized_name": "Eiswieselhügel\u00A0– Beobachtungswarte"
+  },
+  "EA56C74B459DAB2F5F596EA17049167A": {
+    "localized_name": "Keimstätte der Leuchtsporen"
   },
   "EC4896F44C4C9BD993DAE2B2C1F31BBA": {
     "localized_name": "Grünbach"
@@ -447,7 +477,7 @@
     "localized_name": "Eiswieselhügel"
   },
   "EDE1AB2C44B1846879BB789C3951B2F7": {
-    "localized_name": "Bambusklamm – Beobachtungswarte"
+    "localized_name": "Bambusklamm\u00A0– Beobachtungswarte"
   },
   "F1A1AB834E138B2A938D0AA90E9A65E3": {
     "localized_name": "Kirschblüteninsel – Südsande"
@@ -465,7 +495,7 @@
     "localized_name": "Bambusflüsterhang"
   },
   "F46296FF4274FEDBF32DC5957835A18A": {
-    "localized_name": "Kirschblüteninsel – Beobachtungswarte"
+    "localized_name": "Kirschblüteninsel\u00A0– Beobachtungswarte"
   },
   "F6AFBCDA4D7AF6C373407DBC8556FBAE": {
     "localized_name": "Reich von Terraria"
@@ -480,12 +510,15 @@
     "localized_name": "Zentralsee"
   },
   "F8E5CB8143F4FA2F6213E6B454569F87": {
-    "localized_name": "Obsidiankrater – Anubisstatue"
+    "localized_name": "Obsidiankrater\u00A0– Anubisstatue"
+  },
+  "F94B3D32448028F24CE513B1302ACC94": {
+    "localized_name": "Keimstätte des Fäulnisnebels"
   },
   "FC8F024D40741A133EB9DA88201AE7F0": {
     "localized_name": "Rote Klippe"
   },
   "FD235A5B4F02CD76312A459D77398CA6": {
-    "localized_name": "Sonnenhort – Beobachtungswarte"
+    "localized_name": "Sonnenhort\u00A0– Beobachtungswarte"
   }
 }

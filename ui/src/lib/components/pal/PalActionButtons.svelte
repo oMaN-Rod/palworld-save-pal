@@ -15,7 +15,14 @@
 	import { cn } from '$theme';
 	import { getAppState, getModalState, getNavigationState, getToastState } from '$states';
 	import { BicepsFlexed, Bug, Edit, Play, Save } from 'lucide-svelte';
-	import { assetLoader, handleMaxOutPal, editLucky, editAlpha } from '$utils';
+	import {
+		assetLoader,
+		handleMaxOutPal,
+		editLucky,
+		editAlpha,
+		editAwakened,
+		editImported
+	} from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
@@ -151,6 +158,8 @@
 				character_id: pal.character_id,
 				is_lucky: config.is_lucky ? pal.is_lucky : null,
 				is_boss: config.is_boss ? pal.is_boss : null,
+				is_awakened: config.is_awakened ? pal.is_awakened : null,
+				is_imported: config.is_imported ? pal.is_imported : null,
 				gender: config.gender ? pal.gender : null,
 				rank_hp: config.rank_hp ? pal.rank_hp : null,
 				rank_attack: config.rank_attack ? pal.rank_attack : null,
@@ -255,6 +264,24 @@
 					class="h-8 w-8"
 					style="width: 24px; height: 24px;"
 				/>
+			</CornerDotButton>
+		</Tooltip>
+		<Tooltip position="bottom" label={m.toggle_entity({ entity: m.awakened() })}>
+			<CornerDotButton
+				onClick={() => editAwakened(pal)}
+				class={cn('h-8 w-8 p-1', pal.is_awakened && 'bg-secondary-500/25')}
+				disabled={!showActions}
+			>
+				<img src={staticIcons.awakeningIcon} alt="Awakened" class="pal-element-badge" />
+			</CornerDotButton>
+		</Tooltip>
+		<Tooltip position="bottom" label={m.toggle_entity({ entity: m.imported() })}>
+			<CornerDotButton
+				onClick={() => editImported(pal)}
+				class={cn('h-8 w-8 p-1', pal.is_imported && 'bg-secondary-500/25')}
+				disabled={!showActions}
+			>
+				<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge" />
 			</CornerDotButton>
 		</Tooltip>
 		{#if getPalElementTypes(pal.character_key)}

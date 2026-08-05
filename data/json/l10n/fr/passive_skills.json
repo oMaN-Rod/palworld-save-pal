@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "Attaque augmentée Niv. 1",
-    "description": null
+    "description": "Attaque +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "Attaque augmentée (faible) Niv. 1",
-    "description": null
+    "description": "Attaque +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Augmentation de l'attaque des Pals Niv. 1",
-    "description": null
+    "description": "Attaque +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "Attaque augmentée Niv. 2",
-    "description": null
+    "description": "Attaque +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "Attaque augmentée (faible) Niv. 2",
-    "description": null
+    "description": "Attaque +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Augmentation de l'attaque des Pals Niv. 2",
-    "description": null
+    "description": "Attaque +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "Attaque augmentée Niv. 3",
-    "description": null
+    "description": "Attaque +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "Attaque augmentée (faible) Niv. 3",
-    "description": null
+    "description": "Attaque +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Augmentation de l'attaque des Pals Niv. 3",
-    "description": null
+    "description": "Attaque +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "Attaque augmentée Niv. 4",
-    "description": null
+    "description": "Attaque +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "Attaque augmentée (faible) Niv. 4",
-    "description": null
+    "description": "Attaque +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Augmentation de l'attaque des Pals Niv. 4",
-    "description": null
+    "description": "Attaque +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "Ange Médecin",
-    "description": null
+    "description": "Régénération passive des PV du joueur +5.0 %"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "Durée d'invincibilité lors des esquives augmentée",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "Augmentation des dégâts de dragon (moyen)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 2.0 %."
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "Augmentation des dégâts d'eau (faible)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 1.0 %."
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "Augmentation des dégâts de foudre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 2.0 %."
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "Augmentation des dégâts d'eau (faible)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 1.0 %."
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "Augmentation des dégâts non élémentaires (moyen)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 2.0 %."
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "Augmentation des dégâts de dragon (fort)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 3.0 %."
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "Augmentation des dégâts de foudre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 2.0 %."
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "Augmentation des dégâts de dragon (faible)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 1.0 %."
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "Augmentation des dégâts de foudre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 2.0 %."
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "Augmentation des dégâts de feu (moyen)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 2.0 %."
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "Augmentation des dégâts de dragon (moyen)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 2.0 %."
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 2.0 %."
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "Augmentation des dégâts de ténèbres (moyen)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 2.0 %."
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 2.0 %."
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "Augmentation des dégâts d'eau (moyen)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 2.0 %."
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "Augmentation des dégâts de glace (faible)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 1.0 %."
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "Augmentation des dégâts de glace (fort)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 3.0 %."
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "Dégâts de type Glace Augmentés (Fort)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 3.0 %."
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "Dégâts de type Feu Augmentés (Fort)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 3.0 %."
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "Augmentation des dégâts de dragon (fort)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 3.0 %."
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "Augmentation des dégâts de feu (moyen)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 2.0 %."
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "Augmentation des dégâts de glace (moyen)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 2.0 %."
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "Augmentation des dégâts de feu (fort)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 3.0 %."
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "Augmentation des dégâts de glace (fort)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 3.0 %."
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "Augmentation des dégâts de dragon (faible)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 1.0 %."
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "Augmentation des dégâts de plante (fort)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 3.0 %."
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "Augmentation des dégâts d'eau (moyen)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 2.0 %."
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "Augmentation des dégâts de ténèbres (moyen)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 2.0 %."
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "Augmentation des dégâts de glace (faible)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 1.0 %."
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "Dégâts de type Glace Augmentés (Fort)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 3.0 %."
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 2.0 %."
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "Augmentation des dégâts de glace (moyen)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 2.0 %."
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "Augmentation des dégâts de feu (moyen)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 2.0 %."
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "Augmentation des dégâts non élémentaires (fort)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 3.0 %."
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "Augmentation des dégâts d'eau (faible)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 1.0 %."
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "Augmentation des dégâts de dragon (faible)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 1.0 %."
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "Augmentation des dégâts de feu (fort)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 3.0 %."
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "Augmentation des dégâts d'eau (moyen)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 2.0 %."
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "Augmentation des dégâts de glace (moyen)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 2.0 %."
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "Augmentation des dégâts de glace (faible)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 1.0 %."
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "Augmentation des dégâts de glace (fort)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 3.0 %."
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "Augmentation des dégâts non élémentaires (moyen)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 2.0 %."
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "Augmentation des dégâts de ténèbres (moyen)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 2.0 %."
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "Augmentation des dégâts de glace (faible)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 1.0 %."
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "Augmentation des dégâts de dragon (moyen)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 2.0 %."
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 2.0 %."
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "CaptureLevel_Up_1": {
     "localized_name": "Force de capture +1",
-    "description": null
+    "description": "Force de capture +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "Force de capture +2",
-    "description": null
+    "description": "Force de capture +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "Force de capture +3",
-    "description": null
+    "description": "Force de capture +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "Force de capture +4",
-    "description": null
+    "description": "Force de capture +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "Force de capture +5",
-    "description": null
+    "description": "Force de capture +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "Force de capture +6",
-    "description": null
+    "description": "Force de capture +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "Cueillette de baies",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "Maladroit",
-    "description": null
+    "description": "Vitesse de travail -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "Négligent",
-    "description": null
+    "description": "Vitesse de travail -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "Sérieux",
-    "description": null
+    "description": "Vitesse de travail +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "Appliqué",
-    "description": null
+    "description": "Vitesse de travail +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "Maîtrise Exceptionnelle",
-    "description": null
+    "description": "Vitesse de travail +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "Augmentation de la défense des Pals Niv. 1",
-    "description": null
+    "description": "Défense +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "Augmentation de la défense des Pals Niv. 2",
-    "description": null
+    "description": "Défense +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "Augmentation de la défense des Pals Niv. 3",
-    "description": null
+    "description": "Défense +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "Augmentation de la défense des Pals Niv. 4",
-    "description": null
+    "description": "Défense +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "Vulnérable aux Coups",
-    "description": null
+    "description": "Défense -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "Os fragiles",
-    "description": null
+    "description": "Défense -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "Peau dure",
-    "description": null
+    "description": "Défense +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "Corps Robuste",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "Dégâts explosifs réduits",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "Hydrophile",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "Seigneur des Mers",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 30.0 %."
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de ténèbres (faible)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 1.0 %."
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de ténèbres des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 6.0 %."
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "Voile des Ténèbres",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de ténèbres (moyen)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 2.0 %."
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de ténèbres des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 12.0 %."
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "Seigneur des Enfers",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 30.0 %."
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de ténèbres (fort)",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 3.0 %."
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de ténèbres des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 18.0 %."
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de ténèbres des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 20.0 %."
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de dragon (faible)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 1.0 %."
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de dragon des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 6.0 %."
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "Sang de Dragon",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de dragon (moyen)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 2.0 %."
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de dragon des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 12.0 %."
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "Dragon Divin",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 30.0 %."
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de dragon (fort)",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 3.0 %."
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de dragon des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 18.0 %."
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de dragon des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Dragon augmentent de 20.0 %."
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de terre (faible)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 1.0 %."
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de terre des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 6.0 %."
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "Force Tellurique",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de terre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 2.0 %."
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de terre des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 12.0 %."
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "Empereur Terrestre",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 30.0 %."
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de terre (fort)",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 3.0 %."
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de terre des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 18.0 %."
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de terre des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Terre augmentent de 20.0 %."
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de foudre (faible)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 1.0 %."
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de foudre des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 6.0 %."
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de foudre (moyen)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 2.0 %."
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de foudre des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 12.0 %."
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de foudre (fort)",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 3.0 %."
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de foudre des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 18.0 %."
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de foudre des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 20.0 %."
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de feu (faible)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 1.0 %."
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de feu des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 6.0 %."
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "Pyromane",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de feu (moyen)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 2.0 %."
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de feu des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 12.0 %."
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "Empereur Enflammé",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 30.0 %."
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de feu (fort)",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 3.0 %."
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de feu des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 18.0 %."
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de feu des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 20.0 %."
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de glace (faible)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 1.0 %."
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de glace des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 6.0 %."
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "Sang Froid",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de glace (moyen)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 2.0 %."
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de glace des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 12.0 %."
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "Empereur Glacial",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 30.0 %."
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de glace (fort)",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 3.0 %."
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de glace des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 18.0 %."
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de glace des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Glace augmentent de 20.0 %."
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts de plante (faible)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 1.0 %."
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de plante des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 6.0 %."
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "Fragrance Boisée",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts de plante (moyen)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 2.0 %."
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de plante des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 12.0 %."
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "Divinité de la Forêt",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 30.0 %."
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts de plante (fort)",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 3.0 %."
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de plante des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 18.0 %."
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts de plante des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Plante augmentent de 20.0 %."
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts non élémentaires (faible)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 1.0 %."
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts non élémentaires des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 6.0 %."
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "Esprit Zen",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts non élémentaires (moyen)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 2.0 %."
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts non élémentaires des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 12.0 %."
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "Empereur Céleste",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 30.0 %."
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts non élémentaires (fort)",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 3.0 %."
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts non élémentaires des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 18.0 %."
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts non élémentaires des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 20.0 %."
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "Condensateur",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "Seigneur des Tempêtes",
-    "description": null
+    "description": "Les dégâts de type Foudre augmentent de 30.0 %."
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "Augmentation des dégâts d'eau (faible)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 1.0 %."
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts d'eau des Pals Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 6.0 %."
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "Augmentation des dégâts d'eau (moyen)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 2.0 %."
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts d'eau des Pals Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 12.0 %."
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "Augmentation des dégâts d'eau (fort)",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 3.0 %."
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts d'eau des Pals Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 18.0 %."
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "Augmentation des dégâts d'eau des Pals Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 20.0 %."
   },
   "ElementResist_Aqua_1": {
     "localized_name": "Réduction des dégâts d'eau Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Eau sont réduits de 15.0 %."
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "Imperméabilité",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "Réduction des dégâts d'eau Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Eau sont réduits de 25.0 %."
   },
   "ElementResist_Aqua_3": {
     "localized_name": "Réduction des dégâts d'eau Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Eau sont réduits de 30.0 %."
   },
   "ElementResist_Aqua_4": {
     "localized_name": "Réduction des dégâts d'eau Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Eau sont réduits de 35.0 %."
   },
   "ElementResist_Dark_1": {
     "localized_name": "Réduction des dégâts de ténèbres Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Ténèbres sont réduits de 15.0 %."
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "Lumineux",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "Réduction des dégâts de ténèbres Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Ténèbres sont réduits de 25.0 %."
   },
   "ElementResist_Dark_3": {
     "localized_name": "Réduction des dégâts de ténèbres Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Ténèbres sont réduits de 30.0 %."
   },
   "ElementResist_Dark_4": {
     "localized_name": "Réduction des dégâts de ténèbres Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Ténèbres sont réduits de 35.0 %."
   },
   "ElementResist_Dragon_1": {
     "localized_name": "Réduction des dégâts de dragon Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Dragon sont réduits de 15.0 %."
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "Tueur de Dragons",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "Réduction des dégâts de dragon Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Dragon sont réduits de 25.0 %."
   },
   "ElementResist_Dragon_3": {
     "localized_name": "Réduction des dégâts de dragon Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Dragon sont réduits de 30.0 %."
   },
   "ElementResist_Dragon_4": {
     "localized_name": "Réduction des dégâts de dragon Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Dragon sont réduits de 35.0 %."
   },
   "ElementResist_Earth_1": {
     "localized_name": "Réduction des dégâts de terre Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Terre sont réduits de 15.0 %."
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "Parasismique",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "Réduction des dégâts de terre Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Terre sont réduits de 25.0 %."
   },
   "ElementResist_Earth_3": {
     "localized_name": "Réduction des dégâts de terre Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Terre sont réduits de 30.0 %."
   },
   "ElementResist_Earth_4": {
     "localized_name": "Réduction des dégâts de terre Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Terre sont réduits de 35.0 %."
   },
   "ElementResist_Fire_1": {
     "localized_name": "Réduction des dégâts de feu Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Feu sont réduits de 15.0 %."
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "Bronzage Naturel",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "Réduction des dégâts de feu Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Feu sont réduits de 25.0 %."
   },
   "ElementResist_Fire_3": {
     "localized_name": "Réduction des dégâts de feu Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Feu sont réduits de 30.0 %."
   },
   "ElementResist_Fire_4": {
     "localized_name": "Réduction des dégâts de feu Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Feu sont réduits de 35.0 %."
   },
   "ElementResist_Ice_1": {
     "localized_name": "Réduction des dégâts de glace Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Glace sont réduits de 15.0 %."
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "Sang Chaud",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "Réduction des dégâts de glace Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Glace sont réduits de 25.0 %."
   },
   "ElementResist_Ice_3": {
     "localized_name": "Réduction des dégâts de glace Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Glace sont réduits de 30.0 %."
   },
   "ElementResist_Ice_4": {
     "localized_name": "Réduction des dégâts de glace Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Glace sont réduits de 35.0 %."
   },
   "ElementResist_Leaf_1": {
     "localized_name": "Réduction des dégâts de plante Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Plante sont réduits de 15.0 %."
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "Protection Végétale",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "Réduction des dégâts de plante Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Plante sont réduits de 25.0 %."
   },
   "ElementResist_Leaf_3": {
     "localized_name": "Réduction des dégâts de plante Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Plante sont réduits de 30.0 %."
   },
   "ElementResist_Leaf_4": {
     "localized_name": "Réduction des dégâts de plante Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Plante sont réduits de 35.0 %."
   },
   "ElementResist_Normal_1": {
     "localized_name": "Réduction des dégâts non élémentaires Niv. 1",
-    "description": null
+    "description": "Les dégâts Non Élémentaires sont réduits de 15.0 %."
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "Anormal",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "Réduction des dégâts non élémentaires Niv. 2",
-    "description": null
+    "description": "Les dégâts Non Élémentaires sont réduits de 25.0 %."
   },
   "ElementResist_Normal_3": {
     "localized_name": "Réduction des dégâts non élémentaires Niv. 3",
-    "description": null
+    "description": "Les dégâts Non Élémentaires sont réduits de 30.0 %."
   },
   "ElementResist_Normal_4": {
     "localized_name": "Réduction des dégâts non élémentaires Niv. 4",
-    "description": null
+    "description": "Les dégâts Non Élémentaires sont réduits de 35.0 %."
   },
   "ElementResist_Thunder_1": {
     "localized_name": "Réduction des dégâts de foudre Niv. 1",
-    "description": null
+    "description": "Les dégâts de type Foudre sont réduits de 15.0 %."
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "Isolant",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "Réduction des dégâts de foudre Niv. 2",
-    "description": null
+    "description": "Les dégâts de type Foudre sont réduits de 25.0 %."
   },
   "ElementResist_Thunder_3": {
     "localized_name": "Réduction des dégâts de foudre Niv. 3",
-    "description": null
+    "description": "Les dégâts de type Foudre sont réduits de 30.0 %."
   },
   "ElementResist_Thunder_4": {
     "localized_name": "Réduction des dégâts de foudre Niv. 4",
-    "description": null
+    "description": "Les dégâts de type Foudre sont réduits de 35.0 %."
   },
   "EternalFlame": {
     "localized_name": "Feu Éternel",
-    "description": null
+    "description": "Les dégâts de type Feu augmentent de 30.0 %. Les dégâts de type Foudre augmentent de 30.0 %."
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "Augmente les gains de confiance des Pals de l'équipe",
-    "description": null
+    "description": "Confiance +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "Le degré de satiété diminue plus lentement <NumBlue_13>+10.0 %</>"
   },
   "GYM_NAME_Desert": {
     "localized_name": "Cadre de la Milice Populaire de Palpagos",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "Membre Fondateur de la Ligue pour la Protection des Pals",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "Officiel du Syndicat de Rayne",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "Chef du Clan des Fleurs Lunaires",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "Commandant de l’Unité de Recherche Génétique",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "Jarl du Paradis Déchu",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "Chef Spirituel de la Confrérie des Flammes Éternelles",
-    "description": null
+    "description": "Attaque +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "PV augmentés Niv. 1",
-    "description": null
+    "description": "PV max +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "PV augmentés Niv. 2",
-    "description": null
+    "description": "PV max +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "PV augmentés Niv. 3",
-    "description": null
+    "description": "PV max +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "PV augmentés Niv. 4",
-    "description": null
+    "description": "PV max +25.0%"
   },
   "Invader": {
     "localized_name": "Envahisseur",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 30.0 %. Les dégâts de type Dragon augmentent de 30.0 %."
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "Immunité aux dégâts des gaz toxiques",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "Saut additionnel +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "Augmentation du poids max Niv. 1",
-    "description": null
+    "description": "Poids max +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "Augmentation du poids max Niv. 2",
-    "description": null
+    "description": "Poids max +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "Augmentation du poids max Niv. 3",
-    "description": null
+    "description": "Poids max +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "Augmentation du Poids Max Niv. 1",
-    "description": null
+    "description": "Poids max +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "Augmentation du Poids Max Niv. 2",
-    "description": null
+    "description": "Poids max +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "Augmentation du Poids Max Niv. 3",
-    "description": null
+    "description": "Poids max +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "Augmentation du poids max Niv. 4",
-    "description": null
+    "description": "Poids max +300.0%"
   },
   "MiniNushi": {
     "localized_name": "Caïd",
-    "description": null
+    "description": "Les dégâts de type Eau augmentent de 5.0 %. Les dégâts de type Glace augmentent de 5.0 %. Défense +5.0 %"
   },
   "MoveSpeed_up_1": {
     "localized_name": "Vif",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "Anomalie",
-    "description": "Restauration automatique des PV des Pals et du joueur +50.0 % Défense +{EffectValue4} % <Status_Up>Immunité</> aux dégâts de Poison <Status_Up>Immunité</> aux dégâts de Brûlure"
+    "description": "Restauration automatique des PV des Pals et du joueur +50.0 % Défense +25.0 % <Status_Up>Immunité</> aux dégâts de Poison <Status_Up>Immunité</> aux dégâts de Brûlure"
   },
   "NightOwl": {
     "localized_name": "Oiseau de Nuit",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "Impulsif",
-    "description": null
+    "description": "Attaque +30.0% Vitesse de travail -50.0%"
   },
   "Nushi": {
     "localized_name": "Trophée des Flots",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "Afflux Sanguin",
-    "description": null
+    "description": "Absorbe une partie des dégâts infligés pour restaurer ses PV. Ne dort pas et continue à travailler la nuit."
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "Lâche",
-    "description": null
+    "description": "Attaque -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "Pacifiste",
-    "description": null
+    "description": "Attaque -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "Brave",
-    "description": null
+    "description": "Attaque +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "Féroce",
-    "description": null
+    "description": "Attaque +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "Colère Divine",
-    "description": null
+    "description": "Attaque +30.0% Défense +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "Soumis",
-    "description": null
+    "description": "Vitesse de travail +30.0% Attaque -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "Frugal",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "fr_Text",
-    "description": null
+    "description": "Vitesse de travail -10.0% Défense -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "Vaniteux",
-    "description": null
+    "description": "Vitesse de travail +10.0% Défense -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "Masochiste",
-    "description": null
+    "description": "Défense +15.0% Attaque -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "Rentre-Dedans",
-    "description": null
+    "description": "Attaque +10.0% Défense -10.0%"
   },
   "PAL_rude": {
     "localized_name": "Trouble-Fête",
-    "description": null
+    "description": "Attaque +15.0% Vitesse de travail -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "Sadique",
-    "description": null
+    "description": "Attaque +15.0% Défense -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "Gain d'EXP accru des Pals Niv. 1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "Gain d'EXP accru des Pals Niv. 2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "Gain d'EXP accru des Pals Niv. 3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "Guide de l'effort",
-    "description": null
+    "description": "Consommation d'endurance du joueur -5 %"
   },
   "Rare": {
     "localized_name": "Chanceux",
-    "description": null
+    "description": "Attaque +15.0% Défense +15.0% Vitesse de travail +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "Instructeur de Tir",
-    "description": null
+    "description": "Vitesse de rechargement du joueur +4.0 %"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "Légèreté",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "Sauveur",
-    "description": null
+    "description": "Les dégâts Non Élémentaires augmentent de 30.0 %. Les dégâts de type Plante augmentent de 30.0 %."
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "Partageur",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "Coursier Marin",
-    "description": null
+    "description": "La vitesse de déplacement augmente de 40.0 % sur l'eau."
   },
   "SwimSpeed_up_3": {
     "localized_name": "Roi des Vagues",
-    "description": null
+    "description": "La vitesse de déplacement augmente de 50.0 % sur l'eau."
   },
   "TemperatureResist_Cold1": {
     "localized_name": "Antifroid Niv. 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "Antifroid Niv. 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "Antifroid Niv. 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "Antichaleur Niv. 1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "Antichaleur Niv. 1 / Antifroid Niv. 1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "Antichaleur Niv. 2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "Antichaleur Niv. 2 / Antifroid Niv. 2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "Antichaleur Niv. 3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "Antichaleur Niv. 3 / Antifroid Niv. 3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "Philanthrope",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "Sorcière",
-    "description": null
+    "description": "Les dégâts de type Ténèbres augmentent de 30.0 % Les dégâts de type Glace augmentent de 30.0 %."
   },
   "WoodDrop_Boost_1": {
     "localized_name": "Volume d'abattage augmenté niv. 1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "Productivité Niv. 1",
-    "description": null
+    "description": "Vitesse de travail +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "Productivité Niv. 2",
-    "description": null
+    "description": "Vitesse de travail +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "Productivité Niv. 3",
-    "description": null
+    "description": "Vitesse de travail +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "Productivité Niv. 4",
-    "description": null
+    "description": "Vitesse de travail +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "Apprenti Éleveur",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "Pouvoir Saint (Magie)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "Pouvoir Saint (Proximité)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "Pouvoir Saint (Longue Distance)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "Pouvoir Saint (Invocation)",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "Protection Sainte",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "Défense augmentée Niv. 1",
-    "description": null
+    "description": "Défense +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "Défense augmentée Niv. 2",
-    "description": null
+    "description": "Défense +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "Défense augmentée Niv. 3",
-    "description": null
+    "description": "Défense +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "Défense augmentée Niv. 4",
-    "description": null
+    "description": "Défense +25.0%"
   }
 }

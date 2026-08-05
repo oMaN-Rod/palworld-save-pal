@@ -1,7 +1,7 @@
 {
   "AIcore": {
     "localized_name": "AI Core",
-    "description": null
+    "description": "A core component essential to cutting-edge devices, enabling complex decision-making and autonomous control. Can be crafted at Advanced Workshop."
   },
   "Accessory_AirDash1": {
     "localized_name": "Air Dash Boots",
@@ -13,11 +13,11 @@
   },
   "Accessory_AirDash3": {
     "localized_name": "Triple Air Dash Boots",
-    "description": "en-Text"
+    "description": "An accessory that allows the player to perform triple dashes in mid-air when equipped."
   },
   "Accessory_ExplosionResist": {
     "localized_name": "Explosion-Resistant Undershirt",
-    "description": null
+    "description": "A lightweight yet durable undergarment made from special fibers. It nullifies damage from explosions."
   },
   "Accessory_JumpCount_Increase1": {
     "localized_name": "Double Jump Boots",
@@ -37,23 +37,23 @@
   },
   "Accessory_TalentChecker": {
     "localized_name": "Ability Glasses",
-    "description": "Glasses used to discern hidden Pal abilities. Displays Health, Attack and Defense stats on a scale of 0 to 100."
+    "description": "Glasses used to discern hidden Pal potentials. Displays Health, Attack and Defense stats on a scale of 0 to 100."
   },
   "AdditionalInventory_001": {
     "localized_name": "Small Pouch",
-    "description": "A small pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A small pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_002": {
     "localized_name": "Medium Pouch",
-    "description": "A modest pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A modest pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_003": {
     "localized_name": "Large Pouch",
-    "description": "A large pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A large pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "AdditionalInventory_004": {
     "localized_name": "Giant Pouch",
-    "description": "A massive pouch that allows you to carry additional items. Holding it increases your inventory slots."
+    "description": "A massive pouch that allows you to carry additional items. Holding it increases your inventory slots. Carrying one is enough."
   },
   "Altar": {
     "localized_name": "Summoning Altar",
@@ -101,7 +101,7 @@
   },
   "AncientRelicRecycler": {
     "localized_name": "Ancient Relic Recycler",
-    "description": null
+    "description": "An ancient civilization device that converts materials using repurposed technology from a lost civilization. It deciphers the technology left within Ancient Relics and refines them into new forms. A highly specialized facility designed for the efficient use of relics without waste."
   },
   "AncientWorkBench": {
     "localized_name": "Ancient Workbench",
@@ -109,7 +109,7 @@
   },
   "Ancient_Clinic": {
     "localized_name": "Ancient Clinic",
-    "description": null
+    "description": "A top-tier medical facility that reproduces advanced ancient medical technology. It offers significantly greater protective capability than a standard clinic. By assigning a Pal with Medicine Production suitability, even bases with harsh working conditions can maintain the highest level of hygiene."
   },
   "Ancient_Houseset": {
     "localized_name": "Ancient Structure Set",
@@ -117,11 +117,11 @@
   },
   "Ancient_MedicalPalBed": {
     "localized_name": "Ancient Pal Bed",
-    "description": null
+    "description": "A ulitmate Pal Bed made from ancient recovery pod with soft matress. It offers one of the highest SAN recovery rates of all Pal beds, quickly relieving fatigue. It is the same size as a Large Pal Bed, allowing large Pals to rest comfortably."
   },
   "Ancient_Spa": {
     "localized_name": "Ancient Hot Spring",
-    "description": null
+    "description": "A hot spring built with ancient technology, filled with special water infused with Paldium. It offers the highest SAN recovery of all hot springs and also restores Health. It is the same size as a standard hot spring, and can fully heal injured Pals."
   },
   "Arrow": {
     "localized_name": "Arrow",
@@ -141,23 +141,23 @@
   },
   "AutoMealPouch_Tier1": {
     "localized_name": "Small Feed Bag",
-    "description": "Unlocks a food slot in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A small pouch for holding food. Unlocks a food slot in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier2": {
     "localized_name": "Average Feed Bag",
-    "description": "A decently sized pouch for holding food. Unlocks 2 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A decently sized pouch for holding food. Unlocks 2 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier3": {
     "localized_name": "Large Feed Bag",
-    "description": "A large pouch for holding food. Unlocks 3 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A large pouch for holding food. Unlocks 3 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier4": {
     "localized_name": "Huge Feed Bag",
-    "description": "An extremely large pouch for holding food. Unlocks 4 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "A extra-large pouch for holding food. Unlocks 4 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "AutoMealPouch_Tier5": {
     "localized_name": "Giant Feed Bag",
-    "description": "An extraordinarily large sack for storing food. Unlocks 5 food slots in your inventory. Players and Pals automatically consume food when hungry."
+    "description": "An enormous pouch for holding food. Unlocks 5 food slots in your inventory. Players and Pals automatically consume food when hungry. Carrying one is enough."
   },
   "BaseCampBattleDirector": {
     "localized_name": "Alarm Bell",
@@ -173,19 +173,19 @@
   },
   "BaseCampWorkHard02": {
     "localized_name": "High Quality Monitoring Stand",
-    "description": null
+    "description": "A refined monitoring station with improved materials and structure. In addition to being able to issue work orders, the system also lowers the SAN cost for Pals working at the base. Working conditions are slightly improved, making Pals less likely to become dissatisfied."
   },
   "BaseCampWorkHard03": {
     "localized_name": "Ancient Monitoring Stand",
-    "description": null
+    "description": "A monitoring station based on ancient technology, embedded with Red Paldium. It issues commands across the entire base through a holographic interface, reducing SAN depletion in Pals. A special wavelength surrounds the base, keeping Pals calm even in harsh working environments."
   },
   "BaseCampWorkerExtraStation": {
     "localized_name": "Palbox Control Device",
-    "description": null
+    "description": "A remote-access terminal for the Palbox. Set it up wherever you'd like and build a base of your own design."
   },
   "Bat3": {
     "localized_name": "Metal Bat",
-    "description": null
+    "description": "A Metal Bat that works well in close combat. Use it to beat down anyone you don't like."
   },
   "Battle_Armor_Grade_01_Cloth": {
     "localized_name": "Cloth Outfit",
@@ -265,7 +265,7 @@
   },
   "Battle_Cloth": {
     "localized_name": "Cloth",
-    "description": "Cloth woven from Wool. Required to create armor."
+    "description": "Cloth woven from Wool. Required to create armor. Can be crafted at Primitive Workbench."
   },
   "Battle_Defense_BowGun": {
     "localized_name": "Mounted Crossbow",
@@ -321,7 +321,7 @@
   },
   "Battle_MeleeWeapon_Axe_Steal": {
     "localized_name": "Pal Metal Axe",
-    "description": "An axe for chopping wood. It has achieved extraordinary sharpness thanks to Pal Metal."
+    "description": "An axe for chopping wood. It has achieved extraordinary sharpness thanks to Pal Metal. It can slice through high-grade trees from the harshest regions without trouble."
   },
   "Battle_MeleeWeapon_Bat": {
     "localized_name": "Wooden Club",
@@ -433,7 +433,7 @@
   },
   "BeamLauncherBullet": {
     "localized_name": "Beam Launcher Ammo",
-    "description": null
+    "description": "Ammo for the Beam Launcher. Can be crafted at Ancient Workbench."
   },
   "BeamSword": {
     "localized_name": "Beam Sword",
@@ -445,11 +445,11 @@
   },
   "Bio_Battery": {
     "localized_name": "Bio Battery",
-    "description": null
+    "description": "A device that stores bio-energy as electrical power. Used for equipment requiring high energy density. Can be crafted at Production Assembly Line II."
   },
   "Bio_Coolant": {
     "localized_name": "Cryogenic Coolant",
-    "description": null
+    "description": "A high-efficiency cooling medium made from special components derived from Pals. Used to regulate temperature in high-output devices. Can be crafted at Production Assembly Line."
   },
   "BlastFurnace4": {
     "localized_name": "Gigantic Furnace",
@@ -469,23 +469,23 @@
   },
   "Cake02": {
     "localized_name": "Mushroom Cake",
-    "description": null
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. The talents of the resulting Pals will grow slightly more easily."
   },
   "Cake03": {
     "localized_name": "Vegetable Cake",
-    "description": null
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. Lay eggs twice at once."
   },
   "Cake04": {
     "localized_name": "Extravagant Vegetable Cake",
-    "description": null
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. Mutations are more likely to occur, and talents will grow more easily."
   },
   "Cake05": {
     "localized_name": "Special Cake",
-    "description": null
+    "description": "Place it in the chest at a Breeding Farm to make Pals lay a particularly healthy egg. More likely inherit multiple passive skills from their parents."
   },
   "CarbonFiber": {
     "localized_name": "Carbon Fiber",
-    "description": "A lightweight yet sturdy material. Used to create armor among other equipment."
+    "description": "A lightweight yet sturdy material. Used to create armor and other equipment. Can be crafted at Production Assembly Line."
   },
   "Cauldron": {
     "localized_name": "Witch Cauldron",
@@ -501,15 +501,15 @@
   },
   "ChargeLaserRifle": {
     "localized_name": "Charge Rifle",
-    "description": "ChargeLaserRifle"
+    "description": "A beam rifle crafted with advanced technology. Charges energy to deliver one powerful shot."
   },
   "ChargeLaserRifleBullet": {
     "localized_name": "Charge Rifle Ammo",
-    "description": "en text"
+    "description": "Ammo for the Charge Rifle and similar weapons. Can be crafted at Advanced Weapon Assembly Line."
   },
   "Clinic": {
     "localized_name": "Clinic",
-    "description": null
+    "description": "A basic medical facility for managing the health of Pals working at the base. Assigning a Pal with Medicine Production suitability helps reduce SAN depletion and prevent illness and injury. While sanitation has its limits, it plays a crucial role in early base development."
   },
   "Cloth2": {
     "localized_name": "High Quality Cloth",
@@ -521,7 +521,7 @@
   },
   "Computer": {
     "localized_name": "Computer",
-    "description": "Computer"
+    "description": "A component used in the control of automated equipment and precision machinery. It's a key component forming the foundation of modern technology. Can be crafted at Production Assembly Line II."
   },
   "Cooler": {
     "localized_name": "Cooler",
@@ -537,7 +537,7 @@
   },
   "Corrosive_Solvent": {
     "localized_name": "Corrosive Solvent",
-    "description": null
+    "description": "A dangerous chemical solvent with strong decomposing properties. Used for precision processing and special treatments. Can be crafted at Production Assembly Line."
   },
   "Crusher": {
     "localized_name": "Crusher",
@@ -545,7 +545,7 @@
   },
   "CrystalPit": {
     "localized_name": "Hexolite Quartz Mine",
-    "description": null
+    "description": "Facility for producing Hexolite Quartzs. Digging Hexolite Quartzs is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "DamagedScarecrow": {
     "localized_name": "Training Dummy",
@@ -601,7 +601,7 @@
   },
   "ElectricArcAssaultRifleBullet": {
     "localized_name": "Plasma Rifle Ammo",
-    "description": null
+    "description": "Ammo for the Plasma Rifle. Can be crafted at Ancient Workbench."
   },
   "ElectricCooler": {
     "localized_name": "Electric Cooler",
@@ -617,7 +617,7 @@
   },
   "EnergyLauncherBullet": {
     "localized_name": "Plasma Cartridge",
-    "description": "Ammo for the Plasma Cannon and any similar weapon."
+    "description": "Ammo for the Plasma Cannon and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "EnergyRocketLauncher": {
     "localized_name": "Plasma Cannon",
@@ -625,11 +625,11 @@
   },
   "EnergyShotgun": {
     "localized_name": "Energy Shotgun",
-    "description": "EnergyShotgun"
+    "description": "A shotgun that fires energy rounds. Excelling in rapid fire, its close-range firepower is truly otherworldly."
   },
   "EnergyShotgunBullet": {
     "localized_name": "Energy Shotgun Ammo",
-    "description": "en text"
+    "description": "Ammo for the Energy Shotgun and similar weapons. Can be crafted at Advanced Weapon Assembly Line."
   },
   "EnergyStorage_Electric": {
     "localized_name": "Accumulator",
@@ -645,7 +645,7 @@
   },
   "Factory_Money": {
     "localized_name": "Gold Coin Assembly Line",
-    "description": "An Assemby Line that manufactures Money. The work puts a strain on the mind, causing a decrease in Pal's SAN value. Requires Pals that can work with their hands."
+    "description": "An Assembly Line that manufactures Gold Coin. The work puts a strain on the mind, causing a decrease in Pal's SAN value. Requires Pals that can work with their hands. Warning: building this facility may draw severe scrutiny from the PIDF."
   },
   "Farm_SkillFruits": {
     "localized_name": "Skillfruit Orchard",
@@ -657,31 +657,31 @@
   },
   "FishingBait_2": {
     "localized_name": "High Quality Bait",
-    "description": null
+    "description": "Bait that lures in Pals. Improved from Simple Bait to increase the chances of Pals biting the bait."
   },
   "FishingBait_3": {
     "localized_name": "Deluxe Bait",
-    "description": null
+    "description": "Bait that lures in Pals. Improved to slightly enlarge the size of the bar in the fishing minigame."
   },
   "FishingBait_3_A": {
     "localized_name": "Alluring Bait",
-    "description": null
+    "description": "Bait that lures in Pals. Improved to enlarge the size of the bar in the fishing minigame and increase the number of items obtained from fishing."
   },
   "FishingPond1": {
     "localized_name": "Fishing Pond",
-    "description": null
+    "description": "A ready-to-use fishing pond. Assign a Pal to fish here at their own leisure. Requires Pals that can work with their hands."
   },
   "FishingPond2": {
     "localized_name": "Large Fishing Pond",
-    "description": null
+    "description": "A ready-to-use large fishing pond. The expanded body of water makes it possible to catch even larger Pals. Requires Pals that can work with their hands."
   },
   "FishingRod_02_1": {
     "localized_name": "Intermediate Fishing Rod (Cattiva)",
-    "description": null
+    "description": "A fishing rod designed for catching Pals. Use it with bait near water where shadows are visible to start fishing. It boasts improved performance, making catches a bit easier."
   },
   "FishingRod_03_1": {
     "localized_name": "Advanced Fishing Rod (Pengullet)",
-    "description": null
+    "description": "A fishing rod designed for catching Pals. Use it with bait near water where shadows are visible to start fishing. It boasts improved performance, making catches vastly easier."
   },
   "FishingSet1": {
     "localized_name": "Beginner Fishing Set",
@@ -689,7 +689,7 @@
   },
   "FlamethrowerBullet": {
     "localized_name": "Flamethrower Fuel",
-    "description": "Flamethrower fuel. Ammo for the Flamethrower and similar weapons."
+    "description": "Ammo for the Flamethrower and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "FlourMill": {
     "localized_name": "Mill",
@@ -909,11 +909,11 @@
   },
   "GasMask": {
     "localized_name": "Corrosive Mist Mask",
-    "description": "Gas Mask"
+    "description": "A mask with a special filtration system. Negates damage taken from corrosive mist."
   },
   "GatlingBullet": {
     "localized_name": "Gatling Gun Ammo",
-    "description": "Ammo for the Gatling Gun and similar weapons."
+    "description": "Ammo for the Gatling Gun and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "Glass_houseset": {
     "localized_name": "Glass Structure Set",
@@ -941,11 +941,11 @@
   },
   "GrapplingGun5": {
     "localized_name": "Ultra Grappling Gun",
-    "description": null
+    "description": "It fires a hook that latches on to distant targets, pulling the user's body towards the target. With new materials, cooldown time has been significantly reduced."
   },
   "GrenadeBullet": {
     "localized_name": "Grenade Ammo",
-    "description": "Ammo for the Grenade Launcher and similar weapons."
+    "description": "Ammo for the Grenade Launcher and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "GuildChest": {
     "localized_name": "Guild Chest",
@@ -969,7 +969,7 @@
   },
   "HighGrade_Processed_Wood": {
     "localized_name": "High Quality Wooden Board",
-    "description": null
+    "description": "Fine planks carefully carved from Hardwood. They have beautiful wood grain and are used for structures with a luxurious feel. Can be crafted at Production Assembly Line II."
   },
   "Homeward": {
     "localized_name": "Homeward Thundercloud",
@@ -989,7 +989,7 @@
   },
   "IceHorseStatue": {
     "localized_name": "Frostallion Statue",
-    "description": null
+    "description": "Decorative Frostallion statue."
   },
   "Infra_ElectricGenerator_Grade_01": {
     "localized_name": "Power Generator",
@@ -1045,7 +1045,7 @@
   },
   "JetDragonStatue": {
     "localized_name": "Jetragon Statue",
-    "description": null
+    "description": "Decorative Jetragon statue."
   },
   "Katana": {
     "localized_name": "Katana",
@@ -1061,11 +1061,11 @@
   },
   "Lantern": {
     "localized_name": "Hip Lantern",
-    "description": "A lantern that can be attached to the hip. It lights up automatically at night. Just one is enough to find your way in the dark."
+    "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
   },
   "Lantern_High": {
     "localized_name": "Enhanced Hip Lantern",
-    "description": null
+    "description": "A lantern that can be attached to the hip. It lights up automatically at night. You can also switch its lighting mode to keep it on at all times. Just one is enough to find your way in the dark."
   },
   "LargeCeilingLamp": {
     "localized_name": "Large Ceiling Lamp",
@@ -1077,15 +1077,15 @@
   },
   "LaserBullet": {
     "localized_name": "Energy Cartridge",
-    "description": "Ammo used by the Laser Rifle and similar weapons."
+    "description": "Ammo for the Laser Rifle and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "LaserGatlingBullet": {
     "localized_name": "Laser Gatling Cartridge",
-    "description": "Ammo for the Laser Gatling Gun and any similar weapon."
+    "description": "Ammo for the Laser Gatling Gun and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "LaserGatlingGun": {
     "localized_name": "Laser Gatling Gun",
-    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multple enemies at once."
+    "description": "Fires beam-like energy blasts at high speed. Its overwhelming firepower can take down multiple enemies at once."
   },
   "LaserMiningTool": {
     "localized_name": "Plasma Multicutter",
@@ -1117,7 +1117,7 @@
   },
   "ManganeseIngot": {
     "localized_name": "Coralum Ingot",
-    "description": null
+    "description": "An alloy made from Coralum Ore found on the ocean floor. Highly resistant to energy, making it ideal for crafting weapons. Can be refined at Gigantic Furnace."
   },
   "ManualElectricGenerator": {
     "localized_name": "Human-Powered Generator",
@@ -1141,7 +1141,7 @@
   },
   "MetalDetector": {
     "localized_name": "Metal Detector",
-    "description": "Holding it allows you to detect hidden ores nearby. It marks the metal when close to the ore, but the mark disappears if you move away."
+    "description": "Using this reveals hidden Chromite deposits in dungeons, marking them for easier mining. Deposits will become unmarked if you move too far away."
   },
   "Metal_Gate": {
     "localized_name": "Iron Gate",
@@ -1157,7 +1157,7 @@
   },
   "MissileBullet": {
     "localized_name": "Missile Ammo",
-    "description": "Ammo for the Guided Missile Launcher and similar weapons."
+    "description": "Ammo for the Guided Missile Launcher and similar weapons. Can be crafted at Weapon Assembly Line II."
   },
   "MonsterFarm": {
     "localized_name": "Ranch",
@@ -1169,11 +1169,11 @@
   },
   "MultiElectricHatchingPalEggWithBreed": {
     "localized_name": "Ancient Hatchery",
-    "description": null
+    "description": "An advanced breeding facility of ancient civilization technology, enclosed in electronic glass. It fully automates everything from egg production to incubation at high speed, and increases the inheritance rate of rare skills. Pals are managed through holograms, it requires minimal pasture space."
   },
   "MultiHatchingPalEgg": {
     "localized_name": "Large Incubator",
-    "description": null
+    "description": "Device for incubating Pal eggs. It automatically maintains a suitable temperature and can hatch multiple eggs at once."
   },
   "Musket": {
     "localized_name": "Musket",
@@ -1197,7 +1197,7 @@
   },
   "OilPump02": {
     "localized_name": "High-Pressure Crude Oil Extractor",
-    "description": null
+    "description": "A device that pumps and extracts Crude Oil from deep underground. It can produce Crude Oil even in areas without oil fields, but it can only be placed on open ground with no structures beneath it. It requires a far greater supply of electricity than the Crude Oil Extractor."
   },
   "OlympicCauldron": {
     "localized_name": "Flame Cauldron",
@@ -1209,11 +1209,11 @@
   },
   "OverheatRifle": {
     "localized_name": "Overheat Rifle",
-    "description": "OverheatRifle"
+    "description": "An assault rifle capable of firing endlessly without reloading. Prolonged bursts cause overheating, leaving you exposed. Use with caution."
   },
   "OverheatRifleBullet": {
     "localized_name": "Overheat Rifle Ammo",
-    "description": "en text"
+    "description": "Ammo for the Overheat Rifle and similar weapons. Can be crafted at Advanced Weapon Assembly Line."
   },
   "PALBOX": {
     "localized_name": "Palbox",
@@ -1225,15 +1225,15 @@
   },
   "PalDopingShot": {
     "localized_name": "Boost Gun",
-    "description": "PalDopingShot"
+    "description": "Firing this at a Pal in your team temporarily boosts that Pal's attack and defense. Firing it at an enemy deals damage instead."
   },
   "PalDopingShotBullet": {
     "localized_name": "Boost Gun Ammo",
-    "description": "en text"
+    "description": "Ammo for the Boost Gun and similar weapons. Can be crafted at Weapon Workbench."
   },
   "PalDopingShot_2": {
     "localized_name": "Megaboost Gun",
-    "description": null
+    "description": "Firing it at an allied Pal boosts their attack and defense, while hitting an enemy deals damage. Thanks to improvements, the boost is stronger and lasts longer, and it deals more damage to enemies."
   },
   "PalFoodBox": {
     "localized_name": "Feed Box",
@@ -1241,7 +1241,7 @@
   },
   "PalHealingGrenade": {
     "localized_name": "Pal Recovery Grenade",
-    "description": "PalHealingGrenade"
+    "description": "A Frag Grenade with healing effects. It bursts on impact, restoring HP to allied Pals."
   },
   "PalMedicineBox": {
     "localized_name": "Medicine Rack",
@@ -1273,7 +1273,7 @@
   },
   "Polymer": {
     "localized_name": "Polymer",
-    "description": "Made from refined oil. Required for producing various advanced items such as rifles."
+    "description": "Polymer made from refined oil. Required for producing various advanced items such as firearms. Can be crafted at Production Assembly Line."
   },
   "Potion_Extreme": {
     "localized_name": "Advanced Recovery Meds",
@@ -1281,7 +1281,7 @@
   },
   "Processed_Wood": {
     "localized_name": "Wooden Board",
-    "description": null
+    "description": "Planks made from processed wood for easier use. More versatile than raw logs, with a wide variety of uses. Can be crafted at Primitive Workbench."
   },
   "Product_Axe_Grade_01": {
     "localized_name": "Stone Axe",
@@ -1393,7 +1393,7 @@
   },
   "Product_QuartzPit": {
     "localized_name": "Pure Quartz Quarry",
-    "description": "A facility for producing Pure Quartz. Mining Pure Quartz is hard work that requires physical endurance. Leave it to Pals skilled at mining."
+    "description": "A facility for producing Pure Quartz. Mining Pure Quartz is grueling physical work. Leave it to Pals skilled at mining."
   },
   "Product_StationDeforest": {
     "localized_name": "Logging Site",
@@ -1401,7 +1401,7 @@
   },
   "Product_StationDeforest2": {
     "localized_name": "Logging Site II",
-    "description": null
+    "description": "Facility for producing Hardwood. Cutting wood is hard work that requires much physical endurance. Leave it to Pals skilled in logging."
   },
   "Product_StonePit": {
     "localized_name": "Stone Pit",
@@ -1433,7 +1433,7 @@
   },
   "ReinforcedArrow": {
     "localized_name": "Reinforced Arrow",
-    "description": "Enhanced arrows designed for use with the Compound Bow."
+    "description": "Enhanced arrows for shooting with Compound Bow. Can be crafted at Primitive Workbench."
   },
   "RepairBench": {
     "localized_name": "Repair Bench",
@@ -1465,7 +1465,7 @@
   },
   "SFArrow": {
     "localized_name": "Advanced Arrow",
-    "description": "Arrows made of Hexolite material, designed for use with the Advanced Bow."
+    "description": "Enhanced arrows for shooting with Advanced Bow. Can be crafted at Primitive Workbench."
   },
   "SFBow": {
     "localized_name": "Advanced Bow",
@@ -1481,11 +1481,11 @@
   },
   "Salvage_TreasureBoxKey02": {
     "localized_name": "Powerful Fishing Magnet",
-    "description": null
+    "description": "A high-powered magnet used in advanced salvage operations. Its strong magnetic pull can retrieve resources and supplies from the ocean floor."
   },
   "SanityDecrease1": {
     "localized_name": "Alpha Wave Generator",
-    "description": "A device that generates alpha waves to relax Pals. It slows the rate at which the SAN value of allies at the base decreases. Placing more than two will not have any additional effect."
+    "description": "A device that emits alpha waves to help Pals relax. Slows the rate at which the SAN value of Base Pals decreases. Placing more than one has no additional effect."
   },
   "ScientistFlagSet": {
     "localized_name": "PAL Genetic Research Unit Flag Set",
@@ -1513,11 +1513,11 @@
   },
   "Shield_07": {
     "localized_name": "Ancient Shield",
-    "description": null
+    "description": "A shield created using lost ancient technology. It automatically repairs itself after not taking damage for a while. Its performance is said to be impossible to reproduce in the modern era."
   },
   "Shield_SF": {
     "localized_name": "Advanced Shield",
-    "description": "Strange shield made with advanced technology. It automatically repair itself after not taking damage for a while."
+    "description": "Strange shield made with advanced technology. It automatically repairs itself after not taking damage for a while."
   },
   "ShotGunBullet": {
     "localized_name": "Shotgun Shell",
@@ -1577,11 +1577,11 @@
   },
   "SkillUnlock_BlueDragon_Ice": {
     "localized_name": "Azurobe Cryst Saddle",
-    "description": null
+    "description": "Saddle for safely riding Azurobe Cryst."
   },
   "SkillUnlock_BlueSkyDragon": {
     "localized_name": "Shaolong Saddle",
-    "description": null
+    "description": "Saddle for safely riding Shaolong."
   },
   "SkillUnlock_BlueThunderHorse": {
     "localized_name": "Azurmane Saddle",
@@ -1601,11 +1601,11 @@
   },
   "SkillUnlock_CubeTurtle": {
     "localized_name": "Tetroise Saddle",
-    "description": null
+    "description": "Saddle for safely riding Tetroise ."
   },
   "SkillUnlock_CubeTurtle_Neutral": {
     "localized_name": "Tetroise Primo Saddle",
-    "description": null
+    "description": "Saddle for safely riding Tetroise Primo."
   },
   "SkillUnlock_DarkMechaDragon": {
     "localized_name": "Xenolord Saddle",
@@ -1621,7 +1621,7 @@
   },
   "SkillUnlock_DomeArmorDragon": {
     "localized_name": "Aegidron Saddle",
-    "description": null
+    "description": "Saddle for safely riding Aegidron."
   },
   "SkillUnlock_ElecPanda": {
     "localized_name": "Grizzbolt's Minigun",
@@ -1673,11 +1673,11 @@
   },
   "SkillUnlock_GhostAnglerfish": {
     "localized_name": "Ghangler Saddle",
-    "description": null
+    "description": "Saddle for safely riding Ghangler."
   },
   "SkillUnlock_GhostAnglerfish_Fire": {
     "localized_name": "Ghangler Ignis Saddle",
-    "description": null
+    "description": "Saddle for safely riding Ghangler Ignis."
   },
   "SkillUnlock_GhostBeast": {
     "localized_name": "Maraith Saddle",
@@ -1685,11 +1685,11 @@
   },
   "SkillUnlock_GhostDragon": {
     "localized_name": "Eidrolon Saddle",
-    "description": null
+    "description": "Saddle for safely riding Eidrolon."
   },
   "SkillUnlock_GhostDragon_Fire": {
     "localized_name": "Eidrolon Ignis Saddle",
-    "description": null
+    "description": "Saddle for safely riding Eidrolon Ignis."
   },
   "SkillUnlock_GoldenHorse": {
     "localized_name": "Gildane Saddle",
@@ -1697,11 +1697,11 @@
   },
   "SkillUnlock_GrassGolem": {
     "localized_name": "Dualith Saddle",
-    "description": null
+    "description": "Saddle for safely riding Dualith. Grants the ability to fire a powerful Grass-element laser while mounted."
   },
   "SkillUnlock_GrassGolem_Dark": {
     "localized_name": "Dualith Noct Saddle",
-    "description": null
+    "description": "Saddle for safely riding Dualith Noct. Grants the ability to fire a powerful Dark-element laser while mounted."
   },
   "SkillUnlock_GrassMammoth": {
     "localized_name": "Mammorest Saddle",
@@ -1757,19 +1757,19 @@
   },
   "SkillUnlock_IceNarwhal": {
     "localized_name": "Whalaska Saddle",
-    "description": null
+    "description": "Saddle for safely riding Whalaska."
   },
   "SkillUnlock_IceNarwhal_Fire": {
     "localized_name": "Whalaska Ignis Saddle",
-    "description": null
+    "description": "Saddle for safely riding Whalaska Ignis."
   },
   "SkillUnlock_IceSeal": {
     "localized_name": "Polapup Saddle",
-    "description": null
+    "description": "Saddle for safely riding Polapup."
   },
   "SkillUnlock_IceSeal_Ground": {
     "localized_name": "Polapup Terra Saddle",
-    "description": null
+    "description": "Saddle for safely riding Polapup Terra."
   },
   "SkillUnlock_JetDragon": {
     "localized_name": "Jetragon's Missile Launcher",
@@ -1793,11 +1793,11 @@
   },
   "SkillUnlock_KingSunfish": {
     "localized_name": "Solmora Saddle",
-    "description": null
+    "description": "Saddle for safely riding Solmora."
   },
   "SkillUnlock_KingSunfish_Thunder": {
     "localized_name": "Solmora Lux Saddle",
-    "description": null
+    "description": "Saddle for safely riding Solmora Lux."
   },
   "SkillUnlock_Kirin": {
     "localized_name": "Univolt Saddle",
@@ -1805,7 +1805,7 @@
   },
   "SkillUnlock_Kirin_Ice": {
     "localized_name": "Univolt Cryst Saddle",
-    "description": null
+    "description": "Saddle for safely riding Univolt Cryst."
   },
   "SkillUnlock_Kitsunebi": {
     "localized_name": "Foxparks' Harness",
@@ -1825,11 +1825,11 @@
   },
   "SkillUnlock_LegendDeer": {
     "localized_name": "Hartalis Saddle",
-    "description": null
+    "description": "Saddle for safely riding Hartalis. Grants the ability to generate a barrier that blocks incoming attacks."
   },
   "SkillUnlock_LotusDragon": {
     "localized_name": "Ophydia Saddle",
-    "description": null
+    "description": "Saddle for safely riding Ophydia."
   },
   "SkillUnlock_Manticore": {
     "localized_name": "Blazehowl Saddle",
@@ -1845,7 +1845,7 @@
   },
   "SkillUnlock_Monkey_Fire": {
     "localized_name": "Tanzee Ignis's Assault Rifle",
-    "description": null
+    "description": "Assault rifle made specifically for Tanzee Ignis. Activate its Partner Skill, and Tanzee Ignis will enter gunner mode and begin shooting at nearby enemies."
   },
   "SkillUnlock_MoonQueen": {
     "localized_name": "Selyne Saddle",
@@ -1873,7 +1873,7 @@
   },
   "SkillUnlock_NightBlueHorse_Neutral": {
     "localized_name": "Starryon Primo Saddle",
-    "description": null
+    "description": "Saddle for safely riding Starryon Primo."
   },
   "SkillUnlock_Penguin": {
     "localized_name": "Pengullet Rocket Launcher",
@@ -1881,15 +1881,15 @@
   },
   "SkillUnlock_Penguin_Electric": {
     "localized_name": "Pengullet Lux's Rocket Launcher",
-    "description": null
+    "description": "Rocket launcher for launching Pengullet Lux. Activate its Partner Skill to fire Pengullet Lux and damage enemies. After firing, Pengullet Lux will become incapacitated."
   },
   "SkillUnlock_Plesiosaur": {
     "localized_name": "Braloha Saddle",
-    "description": null
+    "description": "Saddle for safely riding Braloha."
   },
   "SkillUnlock_PoseidonOrca": {
     "localized_name": "Neptilius Saddle",
-    "description": null
+    "description": "Saddle for safely riding Neptilius."
   },
   "SkillUnlock_PurpleSpider": {
     "localized_name": "Tarantriss Saddle",
@@ -1933,7 +1933,7 @@
   },
   "SkillUnlock_SumoDog": {
     "localized_name": "Bulldosu Saddle",
-    "description": null
+    "description": "Saddle for safely riding Bulldosu."
   },
   "SkillUnlock_Suzaku": {
     "localized_name": "Suzaku Saddle",
@@ -1945,7 +1945,7 @@
   },
   "SkillUnlock_ThiefBird": {
     "localized_name": "Roujay Saddle",
-    "description": null
+    "description": "Saddle for safely riding Roujay."
   },
   "SkillUnlock_ThunderBird": {
     "localized_name": "Beakon Saddle",
@@ -1953,7 +1953,7 @@
   },
   "SkillUnlock_ThunderBird_Ice": {
     "localized_name": "Beakon Cryst Saddle",
-    "description": null
+    "description": "Saddle for safely riding Beakon Cryst."
   },
   "SkillUnlock_ThunderDog": {
     "localized_name": "Rayhound Saddle",
@@ -1961,15 +1961,15 @@
   },
   "SkillUnlock_ThunderFluffyBird": {
     "localized_name": "Dynamoff Saddle",
-    "description": null
+    "description": "Saddle for safely riding Dynamoff."
   },
   "SkillUnlock_Thunderdog_Ice": {
     "localized_name": "Rayhound Cryst Saddle",
-    "description": null
+    "description": "Saddle for safely riding Thunderdog_Ice."
   },
   "SkillUnlock_TropicalOstrich": {
     "localized_name": "Palumba Saddle",
-    "description": null
+    "description": "Saddle for safely riding Palumba."
   },
   "SkillUnlock_Umihebi": {
     "localized_name": "Jormuntide Saddle",
@@ -1989,11 +1989,11 @@
   },
   "SkillUnlock_VolcanoDragon": {
     "localized_name": "Moldron Saddle",
-    "description": null
+    "description": "Saddle for safely riding Moldron."
   },
   "SkillUnlock_VolcanoDragon_Ice": {
     "localized_name": "Moldron Cryst Saddle",
-    "description": null
+    "description": "Saddle for safely riding Moldron Cryst."
   },
   "SkillUnlock_WeaselDragon": {
     "localized_name": "Chillet Saddle",
@@ -2013,7 +2013,7 @@
   },
   "SkillUnlock_WhiteDeer_Dark": {
     "localized_name": "Celesdir Noct Saddle",
-    "description": null
+    "description": "Saddle for safely riding Celesdir Noct."
   },
   "SkillUnlock_WhiteShieldDragon": {
     "localized_name": "Silvegis Saddle",
@@ -2037,7 +2037,7 @@
   },
   "SkyAssaultRifleBullet": {
     "localized_name": "Heavy Assault Rifle Ammo",
-    "description": null
+    "description": "Ammo for the Heavy Assault Rifle. Can be crafted at Ancient Workbench."
   },
   "SkyBeamSword": {
     "localized_name": "Laser Sword",
@@ -2049,7 +2049,7 @@
   },
   "SkyBowArrow": {
     "localized_name": "Mechanical Bow Ammo",
-    "description": null
+    "description": "Enhanced arrows for shooting with Mechanical Bow. Can be crafted at Ancient Workbench."
   },
   "SkyGrenadeLauncher": {
     "localized_name": "Tactical Grenade Launcher",
@@ -2057,7 +2057,7 @@
   },
   "SkyGrenadeLauncherBullet": {
     "localized_name": "Tactical Grenade Launcher Ammo",
-    "description": null
+    "description": "Ammo for the Tactical Grenade Launcher. Can be crafted at Ancient Workbench."
   },
   "SkyIslandFlagSet": {
     "localized_name": "Azure Covenant Flag Set",
@@ -2065,7 +2065,7 @@
   },
   "SkyIslandOrePit": {
     "localized_name": "Soralite Quarry",
-    "description": null
+    "description": "Facility for producing Soralite. Digging Soralite is grueling physical work. Leave it to a Pal that is good at mining."
   },
   "SkyShotgun": {
     "localized_name": "Prototype Shotgun",
@@ -2073,7 +2073,7 @@
   },
   "SkyShotgunBullet": {
     "localized_name": "Prototype Shotgun Ammo",
-    "description": null
+    "description": "Ammo for the Prototype Shotgun. Can be crafted at Ancient Workbench."
   },
   "SkySubmachineGun": {
     "localized_name": "Combat SMG",
@@ -2081,11 +2081,11 @@
   },
   "SkySubmachineGunBullet": {
     "localized_name": "Combat SMG Ammo",
-    "description": null
+    "description": "Ammo for the Combat SMG. Can be crafted at Ancient Workbench."
   },
   "SkyislandIngot": {
     "localized_name": "Soralite Ingot",
-    "description": null
+    "description": "An ancient metal refined from ore that slumbers in Sunreach. A rare processed material, forming the foundation of high-grade equipment and structures. Can be refined at Ancient Furnace."
   },
   "Snowman": {
     "localized_name": "Snowman",
@@ -2101,7 +2101,7 @@
   },
   "Spa3": {
     "localized_name": "Japanese-Style Hot Spring",
-    "description": null
+    "description": "Facility where Pals on base can rest. Its calming, traditional Japanese design offers an extra boost to SAN recovery."
   },
   "Spear": {
     "localized_name": "Stone Spear",
@@ -2205,7 +2205,7 @@
   },
   "StainlessSteel": {
     "localized_name": "Hexolite",
-    "description": "An alloy of Chromite, Ingot, and Hexolite Quartz. Used as materials for advanced equipment and structures."
+    "description": "An alloy of Chromite and Hexolite Quartz. Used for building advanced equipment and structures. Can be refined at Gigantic Furnace."
   },
   "Stone_Gate": {
     "localized_name": "Stone Gate",
@@ -2221,7 +2221,7 @@
   },
   "Supplement": {
     "localized_name": "Nutrient Tonic",
-    "description": null
+    "description": "A nutrient-rich Nutrient Tonic that prevents hunger for a period of time. A concentrated, flavorful blend of nutrients ideal for long journeys."
   },
   "TableCircular": {
     "localized_name": "Tidy Table Set",
@@ -2233,7 +2233,7 @@
   },
   "Thermal_Core": {
     "localized_name": "Thermal Core",
-    "description": null
+    "description": "A high-temperature reaction core containing vast thermal energy. Used as a power component in advanced devices. Can be crafted at Production Assembly Line II."
   },
   "ToolBoxV1": {
     "localized_name": "Large Toolbox",
@@ -2273,11 +2273,11 @@
   },
   "UnlockEquipmentSlot_Weapon_01": {
     "localized_name": "Extra Weapon Holster",
-    "description": null
+    "description": "A holster that allows an additional weapon to be equipped. While in possession, it increases weapon equip slots by 1. Carrying one is enough."
   },
   "UnlockEquipmentSlot_Weapon_02": {
     "localized_name": "Extra Weapon Holster 2",
-    "description": null
+    "description": "A holster that lets you equip additional weapons. When in inventory, adds an extra weapon slot. Carrying one is enough."
   },
   "Unlock_Picking_Tier1": {
     "localized_name": "Lockpicking Tool v1",
@@ -2313,7 +2313,7 @@
   },
   "WidePenetrateShotgunBullet": {
     "localized_name": "Beam Scatter Ammo",
-    "description": null
+    "description": "Ammo for the Beam Scatter. Can be crafted at Ancient Workbench."
   },
   "WingGlider": {
     "localized_name": "Wing Pack",
@@ -2337,7 +2337,7 @@
   },
   "WorkSpeedIncrease1": {
     "localized_name": "Beta Wave Generator",
-    "description": "A device that emits beta waves to energize Pals. It increases the work speed of Pals in the base. Placing more than one will not have additional effects."
+    "description": "A device that emits beta waves to energize Pals. Increases the work speed of Base Pals. Placing more than one has no additional effect."
   },
   "Workbench": {
     "localized_name": "Primitive Workbench",
@@ -2349,6 +2349,6 @@
   },
   "YakushimaBlade": {
     "localized_name": "Meowmere",
-    "description": "[Terraria Collab] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea..."
+    "description": "[Tides of Terraria] According to the legend, this sword was brought back from a distant land by Croajiro. Why? We have no idea... Fires a bouncing cat projectile with each swing to attack enemies."
   }
 }

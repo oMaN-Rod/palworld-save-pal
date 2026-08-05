@@ -1,0 +1,2354 @@
+{
+  "AIcore": {
+    "localized_name": "Rdzeń AI",
+    "description": "Komponent centralny niezbędny w najnowocześniejszych urządzeniach. Umożliwia podejmowanie skomplikowanych decyzji i autonomiczne sterowanie. Do wytworzenia potrzebna jest Warsztat zaawansowanej cywilizacji."
+  },
+  "Accessory_AirDash1": {
+    "localized_name": "Buty powietrznego zrywu",
+    "description": "Akcesorium, które po założeniu pozwala graczowi wykonać zryw w powietrzu."
+  },
+  "Accessory_AirDash2": {
+    "localized_name": "Buty podwójnego powietrznego zrywu",
+    "description": "Akcesorium, które po założeniu pozwala graczowi wykonać podwójny zryw w powietrzu."
+  },
+  "Accessory_AirDash3": {
+    "localized_name": "Buty potrójnego powietrznego zrywu",
+    "description": "Akcesorium, które po założeniu pozwala graczowi wykonać potrójny zryw w powietrzu."
+  },
+  "Accessory_ExplosionResist": {
+    "localized_name": "Podkoszulek przeciwwybuchowy",
+    "description": "Lekki, a zarazem wytrzymały podkoszulek wykonany ze specjalnych włókien. Neutralizuje obrażenia od wybuchów."
+  },
+  "Accessory_JumpCount_Increase1": {
+    "localized_name": "Buty podwójnego skoku",
+    "description": "Akcesorium, które po założeniu pozwala graczowi skoczyć w powietrzu."
+  },
+  "Accessory_JumpCount_Increase2": {
+    "localized_name": "Buty potrójnego skoku",
+    "description": "Akcesorium, które po założeniu pozwala graczowi wykonać podwójny skok w powietrzu."
+  },
+  "Accessory_JumpPower_Increase": {
+    "localized_name": "Pas antygrawitacyjny",
+    "description": "Akcesorium, które po założeniu zwiększa siłę skoku gracza."
+  },
+  "Accessory_Nonkilling": {
+    "localized_name": "Pierścień Miłosierdzia",
+    "description": "Pierścień Pacyfisty. Ataki nosiciela nie zredukują HP przeciwnika poniżej 1."
+  },
+  "Accessory_TalentChecker": {
+    "localized_name": "Okulary umiejętności",
+    "description": "Okulary służące do wykrywania ukrytych zdolności Pali. Pokazują statystyki HP, Ataku i Obrony w skali 0 do 100."
+  },
+  "AdditionalInventory_001": {
+    "localized_name": "Mała sakiewka",
+    "description": "Mała sakwa do przenoszenia dodatkowych przedmiotów. Zwiększa liczbę gniazd w ekwipunku. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AdditionalInventory_002": {
+    "localized_name": "Średnia sakiewka",
+    "description": "Średnia sakwa do przenoszenia dodatkowych przedmiotów. Zwiększa liczbę gniazd w ekwipunku. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AdditionalInventory_003": {
+    "localized_name": "Duża sakiewka",
+    "description": "Duża sakwa do przenoszenia dodatkowych przedmiotów. Zwiększa liczbę gniazd w ekwipunku. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AdditionalInventory_004": {
+    "localized_name": "Gigantyczna sakiewka",
+    "description": "Ogromna sakwa do przenoszenia dodatkowych przedmiotów. Zwiększa liczbę gniazd w ekwipunku. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "Altar": {
+    "localized_name": "Ołtarz przywołania",
+    "description": "Złóż płytę przedstawiającą Pala, aby przyzwać potężny okaz do swojej bazy. Wskazana jest szczególna ostrożność i pełna gotowość do walki."
+  },
+  "AncientArmor": {
+    "localized_name": "Starożytna zbroja",
+    "description": "Starożytna zbroja wykuta z surowca Sztabka solitu. W pełni ucieleśnia kunszt zaginionej cywilizacji i zapewnia potężną ochronę. To ostateczny pancerz, zdolny stawić czoła nawet zagrożeniom klasy apokaliptycznej."
+  },
+  "AncientArmorCold": {
+    "localized_name": "Mrozoodporna starożytna zbroja",
+    "description": "Starożytna zbroja w wersji ulepszonej. Dzięki starożytnej technologii zapewnia jeszcze lepszą ochronę przed zimnem i pozwala zachować pełnię sił nawet w skrajnie mroźnych warunkach."
+  },
+  "AncientArmorHeat": {
+    "localized_name": "Żaroodporna starożytna zbroja",
+    "description": "Starożytna zbroja w wersji ulepszonej. Dzięki starożytnej technologii zapewnia jeszcze lepszą ochronę przed wysoką temperaturą i sprawdza się nawet w skrajnie gorących warunkach."
+  },
+  "AncientArmorWeight": {
+    "localized_name": "Lekka starożytna zbroja",
+    "description": "Starożytna zbroja w wersji ulepszonej. Wbudowany starożytny mechanizm wspomagający pozwala przenosić więcej zasobów."
+  },
+  "AncientBlastFurnace": {
+    "localized_name": "Piec starożytnej cywilizacji",
+    "description": "Specjalny piec wykorzystujący technologię starożytnej cywilizacji, w którym można wytapiać wszystkie sztabki. Materiały są topione przy użyciu ognia, a następnie gwałtownie chłodzone i utwardzane za pomocą lodu. Do jego obsługi potrzebne są Pale zdolne do rozpalania ognia i chłodzenia."
+  },
+  "AncientCookingStove": {
+    "localized_name": "Kuchnia starożytnej cywilizacji",
+    "description": "Kuchnia starożytnej cywilizacji, w której można przygotować wszystko — od znanych potraw po zupełnie nowe dania. Potrawy przyrządza się w niej na ogniu, a ręczne wykończenie pozwala dopracować każdy szczegół. Do jej obsługi potrzebne są Pale biegłe w rozpalaniu ognia i rzemiośle."
+  },
+  "AncientElectricGenerator": {
+    "localized_name": "Generator starożytnej cywilizacji",
+    "description": "Generator o wyjątkowo wysokiej wydajności, odtworzony w oparciu o zaginioną starożytną technologię. Potrafi wytwarzać ogromne ilości energii, ale podczas pracy grozi mu przegrzanie. Do jego obsługi potrzebne są nie tylko Pale o wysokich predyspozycjach do wytwarzania energii elektrycznej, ale także Pale biegłe w podlewaniu."
+  },
+  "AncientFarmBlock": {
+    "localized_name": "Kultywator starożytnej cywilizacji",
+    "description": "Urządzenie starożytnej cywilizacji służące do uprawy, które dzięki mocy Drzewa Świata pozwala hodować wszelkie rośliny z archipelagu Palpagos. Jest znacznie mniejsze od plantacji jagód i można je ustawić także wewnątrz budynków, ale sam proces uprawy pozostaje bez zmian. Do jego obsługi potrzebne są Pale biegłe w sadzeniu i podlewaniu."
+  },
+  "AncientHelmet": {
+    "localized_name": "Starożytny hełm",
+    "description": "Starożytny hełm wykuty z surowca Sztabka solitu. Kryje w sobie mądrość przekazywaną przez wieki i niezawodnie chroni swojego nosiciela. Jego właściwości obronne dalece przewyższają współczesny ekwipunek."
+  },
+  "AncientMultiProduct": {
+    "localized_name": "Generator materii starożytnej cywilizacji",
+    "description": "Generator starożytnej cywilizacji wykorzystujący moc Drzewa Świata do wytwarzania wszelkiego rodzaju drewna i rud. Pozwala wybrać dowolny surowiec, ale jego wydajność nie różni się od standardowych obiektów. Ze względu na złożoną konstrukcję można przypisać do niego tylko jednego Pala."
+  },
+  "AncientRelicRecycler": {
+    "localized_name": "Recykler reliktów starożytnej cywilizacji",
+    "description": "Starożytne urządzenie do przemiany materii, wykorzystujące technologię zaginionej cywilizacji. Odczytuje wiedzę zapisaną w „Relikcie starożytnej cywilizacji” i przekształca ją w nową formę. To wysoce specjalistyczne urządzenie, stworzone do pełnego wykorzystania potencjału reliktów."
+  },
+  "AncientWorkBench": {
+    "localized_name": "Warsztat starożytnej cywilizacji",
+    "description": "Wielofunkcyjny obiekt dla Pali, umożliwiający wytwarzanie wszystkich przedmiotów w jednym miejscu. Gracz nie może w nim pracować, a szybkość wytwarzania nie różni się od tej w standardowych urządzeniach. Ze względu na zaawansowaną konstrukcję, do jego obsługi potrzebne są Pale biegłe w rzemiośle i produkcji leków."
+  },
+  "Ancient_Clinic": {
+    "localized_name": "Klinika starożytnej cywilizacji",
+    "description": "Najwyższej klasy placówka medyczna, odtwarzająca zaawansowane technologie medyczne starożytności we współczesnych realiach. Zapewnia ochronę znacznie przewyższającą tę oferowaną przez zwykłą klinikę. Przydzielenie do niej doświadczonego Pala biegłego w produkcji leków pozwala utrzymać najwyższy poziom higieny nawet w bazie, w której Pale wykonują wyjątkowo ciężką pracę."
+  },
+  "Ancient_Houseset": {
+    "localized_name": "Zestaw konstrukcji w stylu starożytnej cywilizacji",
+    "description": "Zestaw do budowy bazy w stylu starożytnej cywilizacji. Umożliwia stawianie fundamentów, ścian, dachów, schodów i innych elementów potrzebnych do stworzenia schronienia."
+  },
+  "Ancient_MedicalPalBed": {
+    "localized_name": "Łóżko dla Pala w stylu starożytnej cywilizacji",
+    "description": "Najwyższej klasy łóżko dla Pali, składające się ze starożytnej kapsuły leczniczej wyścielonej miękką tkaniną. Zapewnia największą regenerację wartości SAN spośród wszystkich dostępnych łóżek i błyskawicznie niweluje zmęczenie. Rozmiarem dorównuje dużemu łóżku dla Pali, zapewniając komfortowy wypoczynek nawet największym osobnikom."
+  },
+  "Ancient_Spa": {
+    "localized_name": "Gorące źródło w stylu starożytnej cywilizacji",
+    "description": "Gorące źródło skonstruowane w oparciu o starożytną technologię, wypełnione specjalną wodą z rozpuszczonymi składnikami Paldium. Zapewnia największą regenerację wartości SAN spośród wszystkich źródeł, a dodatkowo przywraca punkty zdrowia. Choć rozmiarem nie różni się od standardowych obiektów tego typu, w pełni leczy rany Pali."
+  },
+  "Arrow": {
+    "localized_name": "Strzała",
+    "description": "Strzała do użycia z łukiem. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Arrow_Fire": {
+    "localized_name": "Ognista strzała",
+    "description": "Ognista strzała do użycia z łukiem. Zadaje trafionemu celowi obrażenia <img id=|ElemIcon_Fire|/><uiCommon id=|COMMON_ELEMENT_NAME_Fire| style=|Elem_Fire|/>. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Arrow_Poison": {
+    "localized_name": "Zatruta strzała",
+    "description": "Zatruta strzała do użytku z łukiem. Nakłada na trafiony cel efekt <uiCommon id=|ADDITIONAL_EFFECT_Poison| style=|Effect_Poison|/>. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "AssaultRifleBullet": {
+    "localized_name": "Amunicja: Karabin szturmowy",
+    "description": "Amunicja do broni, takiej jak Karabin szturmowy. Do wytworzenia potrzeba: Linia produkcyjna broni."
+  },
+  "AutoMealPouch_Tier1": {
+    "localized_name": "Mała torba z paszą",
+    "description": "Mała sakwa do przechowywania jedzenia. Odblokowuje 1 gniazdo na jedzenie w ekwipunku. Gdy pojawi się głód, zawartość gniazda zostanie automatycznie skonsumowana. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AutoMealPouch_Tier2": {
+    "localized_name": "Średnia torba z paszą",
+    "description": "Dość pojemna sakwa do przechowywania jedzenia. Odblokowuje 2 gniazda na jedzenie w ekwipunku. Gdy pojawi się głód, zawartość gniazda zostanie automatycznie skonsumowana. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AutoMealPouch_Tier3": {
+    "localized_name": "Duża torba z paszą",
+    "description": "Duża sakwa do przechowywania jedzenia. Odblokowuje 3 gniazda na jedzenie w ekwipunku. Gdy pojawi się głód, zawartość gniazda zostanie automatycznie skonsumowana. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AutoMealPouch_Tier4": {
+    "localized_name": "Ogromna torba z paszą",
+    "description": "Większa sakwa do przechowywania jedzenia. Odblokowuje 4 gniazda na jedzenie w ekwipunku. Gdy pojawi się głód, zawartość gniazda zostanie automatycznie skonsumowana. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "AutoMealPouch_Tier5": {
+    "localized_name": "Gigantyczna torba z paszą",
+    "description": "Ogromna sakwa do przechowywania jedzenia. Odblokowuje 5 slotów na jedzenie w ekwipunku. Gdy pojawi się głód, zawartość gniazda zostanie automatycznie skonsumowana. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "BaseCampBattleDirector": {
+    "localized_name": "Dzwon alarmowy",
+    "description": "Dzwon uruchamiający alarm dla Pali w bazie. W każdej chwili możesz zmienić ich zachowanie, by atakować intruzów lub skupić się wyłącznie na pracy."
+  },
+  "BaseCampItemDispenser": {
+    "localized_name": "Maszyna do odbierania przedmiotów",
+    "description": "Urządzenie umożliwiające swobodny dostęp do przedmiotów ze wszystkich skrzyń w bazie."
+  },
+  "BaseCampWorkHard": {
+    "localized_name": "Stanowisko obserwacyjne",
+    "description": "Wydawaj Palom polecenia do pracy przy różnych zadaniach w bazie. Możesz zezwolić na konkretne rodzaje pracy lub zabronić pewnych działań."
+  },
+  "BaseCampWorkHard02": {
+    "localized_name": "Wysokiej jakości stanowisko obserwacyjne",
+    "description": "Stanowisko obserwacyjne o udoskonalonej konstrukcji i staranniej dobranych materiałach. Pozwala na wydawanie standardowych poleceń, a dodatkowo spowalnia spadek wartości SAN u Pali w bazie. Dzięki niewielkiej poprawie warunków pracy Pale będą rzadziej odczuwać niezadowolenie."
+  },
+  "BaseCampWorkHard03": {
+    "localized_name": "Stanowisko obserwacyjne starożytnej cywilizacji",
+    "description": "Punkt obserwacyjny starożytnej technologii, wyposażony w czerwone Paldium. Za pomocą holograficznego interfejsu pozwala wydawać polecenia całej bazie, a jednocześnie spowalnia spadek wartości SAN u Pali. Specjalna długość fali otula bazę, pomagając zachować Palom spokój nawet w trudnych warunkach pracy."
+  },
+  "BaseCampWorkerExtraStation": {
+    "localized_name": "Panel sterowania Palboxem",
+    "description": "Terminal umożliwiający zdalną obsługę Palboxa. Ustaw go tam, gdzie chcesz wypuścić Pala, i swobodnie rozwijaj swoją bazę."
+  },
+  "Bat3": {
+    "localized_name": "Metalowy kij",
+    "description": "Metalowy kij, który świetnie sprawdza się w zwarciu. Z jego pomocą spuść porządne lanie każdemu, kto zajdzie ci za skórę."
+  },
+  "Battle_Armor_Grade_01_Cloth": {
+    "localized_name": "Odzież z sukna",
+    "description": "Odzież wykonana z materiału Sukno. Chroni przed chłodem nocy. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Battle_Armor_Grade_01_Cloth_Cold": {
+    "localized_name": "Strój tundrowy",
+    "description": "Odzież z sukna wytwarzana w zimnych regionach. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Battle_Armor_Grade_01_Cloth_Heat": {
+    "localized_name": "Strój tropikalny",
+    "description": "Odzież z sukna wytwarzana w gorących regionach. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Battle_Armor_Grade_02_Fur": {
+    "localized_name": "Zbroja ze skóry",
+    "description": "Zbroja wykonana z materiału Skóra. Cechuje się zarówno zwiększoną wytrzymałością, jak i ochroną. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_02_Fur_Cold": {
+    "localized_name": "Zimnoodporna zbroja ze skóry",
+    "description": "Zbroja ze skóry wytwarzana w zimnych regionach. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_02_Fur_Heat": {
+    "localized_name": "Żaroodporna zbroja ze skóry",
+    "description": "Zbroja ze skóry wytwarzana w gorących regionach. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_03_Copper": {
+    "localized_name": "Zbroja z metalu",
+    "description": "Zbroja wykonana z metalu. Dość ciężka, ale zapewnia solidną ochronę. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_03_Copper_Cold": {
+    "localized_name": "Zimnoodporna zbroja z metalu",
+    "description": "Ulepszona Zbroja z metalu. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_03_Copper_Heat": {
+    "localized_name": "Żaroodporna zbroja z metalu",
+    "description": "Ulepszona Zbroja z metalu. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Armor_Grade_03_Iron": {
+    "localized_name": "Zbroja z rafinowanego metalu",
+    "description": "Zbroja wykonana z wysokiej jakości metalu. Dość ciężka, ale zapewnia świetną ochronę. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Battle_Armor_Grade_03_Iron_Cold": {
+    "localized_name": "Zimnoodporna zbroja z rafinowanego metalu",
+    "description": "Ulepszona Zbroja z rafinowanego metalu. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Battle_Armor_Grade_03_Iron_Heat": {
+    "localized_name": "Żaroodporna zbroja z rafinowanego metalu",
+    "description": "Ulepszona Zbroja z rafinowanego metalu. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Battle_Armor_Grade_04_Steal": {
+    "localized_name": "Zbroja z Palmetalu",
+    "description": "Zbroja wykonana z materiału: Sztaba z Palmetalu. Jest niezwykle ciężka, lecz zapewnia doskonałą ochronę. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_04_Steal_Cold": {
+    "localized_name": "Zimnoodporna zbroja z Palmetalu",
+    "description": "Ulepszona Zbroja z Palmetalu. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_04_Steal_Heat": {
+    "localized_name": "Żaroodporna zbroja z Palmetalu",
+    "description": "Ulepszona Zbroja z Palmetalu. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_05_Plastic": {
+    "localized_name": "Zbroja z Plastali",
+    "description": "Zbroja wykonana z materiału Plastal. Zapewnia zwiększoną obronę, a przy tym jest wyjątkowo lekka. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_05_Plastic_Cold": {
+    "localized_name": "Zimnoodporna Zbroja z plastali",
+    "description": "Ulepszona Zbroja z Plastali. Chroni przed dotkliwym zimnem. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_05_Plastic_Heat": {
+    "localized_name": "Żaroodporna zbroja z plastali",
+    "description": "Ulepszona Zbroja z Plastali. Charakteryzuje się wysoką odpornością na gorąco. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Armor_Grade_05_Plastic_Weight": {
+    "localized_name": "Lekka zbroja z plastali",
+    "description": "Ulepszona Zbroja z Plastali. Zwiększa nośność. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Cloth": {
+    "localized_name": "Sukno",
+    "description": "Sukno utkane z materiału Wełna. Wymagane do wytworzenia zbroi. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
+  },
+  "Battle_Defense_BowGun": {
+    "localized_name": "Stacjonarna kusza",
+    "description": "Przydziel Pala z cechą Rzemiosło, aby obsługiwał wyrzutnię rakiet i chronił bazę."
+  },
+  "Battle_Defense_MachineGun": {
+    "localized_name": "Stacjonarny karabin maszynowy",
+    "description": "Przydziel Pala z cechą Rzemiosło, aby obsługiwał karabin maszynowy i chronił bazę."
+  },
+  "Battle_Defense_Missile": {
+    "localized_name": "Stacjonarna wyrzutnia pocisków",
+    "description": "Przydziel Pala z cechą Rzemiosło, aby obsługiwał wyrzutnię rakiet i chronił bazę."
+  },
+  "Battle_Glider_Grade_01": {
+    "localized_name": "Zwykły spadochron",
+    "description": "Szybowiec do lotu w przestworzach. Niedbale wykonany, nie jest zbyt szybki."
+  },
+  "Battle_Glider_Grade_02": {
+    "localized_name": "Mega szybowiec",
+    "description": "Szybowiec do lotu w przestworzach. Komercyjny model masowej produkcji, całkiem szybki. Do wytworzenia potrzebny jest Warsztat wysokiej jakości."
+  },
+  "Battle_Glider_Grade_03": {
+    "localized_name": "Giga szybowiec",
+    "description": "Szybowiec do lotu w przestworzach. O ulepszonych możliwościach, pozwala szybować z dużą prędkością Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Battle_Glider_Grade_04": {
+    "localized_name": "Hiper szybowiec",
+    "description": "Szybowiec do lotu w przestworzach. O jeszcze lepszych osiągach, z większą prędkością i zdolnością wznoszenia się. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Battle_GunPowder_Grade_02": {
+    "localized_name": "Proch strzelniczy",
+    "description": "Proch strzelniczy służy do wystrzeliwania amunicji. Wymagany do wytwarzania pocisków. Do wytworzenia potrzebny jest Warsztat wysokiej jakości."
+  },
+  "Battle_Helm_Grade_02_Fur": {
+    "localized_name": "Opaska z piórami",
+    "description": "Piękna ozdoba do włosów wykonana z piór. Sprawia wrażenie, jakby chroniła przed śmiertelnymi urazami głowy. Do wytworzenia potrzeba: Workbench."
+  },
+  "Battle_Helm_Grade_03_Copper": {
+    "localized_name": "Hełm z metalu",
+    "description": "Hełm wykonany z metalu. Pancerz dający poczucie bezpieczeństwa i niezawodnie chroniący umysł. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_Helm_Grade_04_Iron": {
+    "localized_name": "Hełm z rafinowanego metalu",
+    "description": "Hełm wykonany z wysokiej jakości metalu. Połysk starannie wypolerowanego metalu dodaje mu prestiżu. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Battle_Helm_Grade_05_Steal": {
+    "localized_name": "Hełm z Palmetalu",
+    "description": "Hełm wykonany z materiału Sztaba z Palmetalu. Jakość budząca powszechną zazdrość. Symbol wojownika, który wybiera swojego właściciela. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_Helm_Grade_06_Plastic": {
+    "localized_name": "Hełm z Plastali",
+    "description": "Hełm wykonany z materiału Plastal. Zapewnia zwiększoną obronę, a przy tym jest wyjątkowo lekki. Do wytworzenia potrzeba: Linia produkcyjna II."
+  },
+  "Battle_MeleeWeapon_Axe_Steal": {
+    "localized_name": "Topór z Palmetalu",
+    "description": "Topór przeznaczony do ścinania drzew. Dzięki zastosowaniu Palmetalu zyskał niesamowitą ostrość. Pozwala bez trudu ścinać nawet wysokiej jakości twarde drewno rosnące w skrajnie surowych warunkach."
+  },
+  "Battle_MeleeWeapon_Bat": {
+    "localized_name": "Drewniana pałka",
+    "description": "Drewniana pałka do walki wręcz. W razie potrzeby można nią zbić małego Pala na kwaśne jabłko."
+  },
+  "Battle_MeleeWeapon_Bat2": {
+    "localized_name": "Kij",
+    "description": "Kij bejsbolowy do walki wręcz. Pala raczej nie wyślesz poza stadion."
+  },
+  "Battle_MeleeWeapon_Pickaxe_Steal": {
+    "localized_name": "Kilof z Palmetalu",
+    "description": "Kilof górniczy, który dzięki Pal-metalowi osiąga wyjątkową wydajność."
+  },
+  "Battle_MeleeWeapon_Sword": {
+    "localized_name": "Miecz",
+    "description": "Miecz do walki w zwarciu. Niezwykle ostry! Trzeba jednak podejść do przeciwnika, co wiąże się z dużym ryzykiem. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "Battle_RangeWeapon_AssaultRifle": {
+    "localized_name": "Karabin szturmowy",
+    "description": "Karabin szturmowy o przytłaczającej szybkostrzelności, pozwalającej zdominować przeciwnika. Idealna broń do walki z potężnymi wrogami. Do wytworzenia potrzeba: Linia produkcyjna broni."
+  },
+  "Battle_RangeWeapon_Bow1": {
+    "localized_name": "Stary łuk",
+    "description": "Prymitywna broń dystansowa. Wykonana z przypadkowo połączonych elementów, przez co zadaje niewielkie obrażenia. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "Battle_RangeWeapon_Bow3": {
+    "localized_name": "Łuk trójstrzałowy",
+    "description": "Wzmocniony łuk, który pozwala wypuścić trzy strzały naraz. Jakimś cudem zużywana jest jedna Strzała przy wystrzale."
+  },
+  "Battle_RangeWeapon_BowGun": {
+    "localized_name": "Kusza",
+    "description": "Z tej broni Strzała może zostać z łatwością wystrzelona. Długi czas przeładowania rekompensuje niszczycielska siła strzału. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Battle_RangeWeapon_CompoundBow": {
+    "localized_name": "Łuk złożony",
+    "description": "Uwspółcześniony łuk. Potrafi wystrzeliwać potężniejsze strzały."
+  },
+  "Battle_RangeWeapon_FlameThrower": {
+    "localized_name": "FlameThrower",
+    "description": "Flamethrower o dużym zasięgu. Umożliwia podpalenie trafionych przeciwników. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_GatlingGun": {
+    "localized_name": "Kartaczownica Gatlinga",
+    "description": "Kartaczownica Gatlinga zdolna do prowadzenia szybkiego ognia zaporowego. Za jej pomocą można zamienić przeciwnika w sito. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_GrenadeLauncher": {
+    "localized_name": "Wyrzutnia granatów",
+    "description": "Wystrzeliwuje granaty powodujące eksplozje na dużym obszarze. Przydatne w walce z licznymi wrogami. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_GuidedMissileLauncher": {
+    "localized_name": "Wyrzutnia pocisków sterowanych",
+    "description": "Wystrzeliwuje pociski, które automatyczne namierzają i ścigają wrogów. Wybuchają one przy trafieniu, zadając obrażenia na dużym obszarze. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_HandGun": {
+    "localized_name": "Pistolet",
+    "description": "Pistolet o zwiększonej pojemności i lepszej szybkostrzelności. Ma większą siłę ognia niż Prowizoryczny pistolet. Do wytworzenia potrzebny jest Stół do wytwarzania broni."
+  },
+  "Battle_RangeWeapon_HomingSphereLauncher": {
+    "localized_name": "Wyrzutnia Sfer naprowadzających",
+    "description": "Wyrzutnia do wystrzeliwania sfer. Wystrzelone sfery same namierzają Pale. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_LaserRifle": {
+    "localized_name": "Karabin laserowy",
+    "description": "Broń wystrzeliwująca wysokoenergetyczne lasery. Ma imponującą siłę ognia i jest łatwa w użyciu. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_OldRevolver": {
+    "localized_name": "Stary rewolwer",
+    "description": "Trochę przestarzały pistolet obrotowy. Wyróżnia się większą siłą pojedynczego wystrzału niż Handgun_default."
+  },
+  "Battle_RangeWeapon_Rifle": {
+    "localized_name": "Karabin jednostrzałowy",
+    "description": "Karabin jednostrzałowy. Jego naładowanie wymaga czasu. Choć brakuje mu pojemności, nadrabia to mocą. Do wytworzenia potrzebny jest Linia produkcyjna broni."
+  },
+  "Battle_RangeWeapon_RocketLauncher": {
+    "localized_name": "Wyrzutnia rakiet",
+    "description": "Wyrzutnia rakiet to broń zdolna do wystrzelenia potężnej salwy na duży dystans. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Battle_RangeWeapon_SemiAutoRifle": {
+    "localized_name": "Karabin półautomatyczny",
+    "description": "Karabin umożliwiający częściowo szybkostrzelny ogień. Łatwy w celowaniu i o dużej sile rażenia, sprawdza się w walce na średnim dystansie."
+  },
+  "Battle_RangeWeapon_SemiAutoShotgun": {
+    "localized_name": "Strzelba półautomatyczna",
+    "description": "Szybkostrzelna strzelba o ogromnej sile rażenia. Jej skuteczność w zwarciu nie mają sobie równych."
+  },
+  "Battle_RangeWeapon_ShotGun": {
+    "localized_name": "Dubeltówka",
+    "description": "Śmiercionośny na bliskim dystansie. Może oddać dwa strzały przed przeładowaniem. Pomimo ograniczonej pojemności wciąż potrafi solidnie uderzyć. Do wytworzenia potrzebna jest Linia produkcyjna broni."
+  },
+  "Battle_RangeWeapon_ShotGun_Multi": {
+    "localized_name": "Strzelba pompowa",
+    "description": "Potężna strzelba o dużej pojemności. Zadaje wyjątkowo wysokie obrażenia na sekundę na bliskim dystansie. Do wytworzenia potrzeba: Linia produkcyjna broni."
+  },
+  "Battle_RangeWeapon_SphereLauncher": {
+    "localized_name": "Wyrzutnia rozproszonych Sfer",
+    "description": "Nowy typ wyrzutni, która wystrzeliwuje dużą liczbę sfer. Umożliwia schwytanie całego stada Pali. Do wytworzenia potrzeba: Linia produkcyjna broni."
+  },
+  "Battle_RangeWeapon_SphereLauncher_Once": {
+    "localized_name": "Jednostrzałowa wyrzutnia Sfer",
+    "description": "Wyrzutnia sfer. Pozwala łapać także Pale znajdujące się dalej. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "Battle_RangeWeapon_SubmachineGun": {
+    "localized_name": "Pistolet maszynowy",
+    "description": "Pistolet maszynowy o wyjątkowo wysokiej szybkostrzelności. Łatwy w obsłudze i skuteczny w walce na bliskim dystansie."
+  },
+  "BeamLauncher": {
+    "localized_name": "Wyrzutnia wiązek",
+    "description": "Wyrzutnia wystrzeliwująca wiązki o wysokiej gęstości, wywołujące eksplozje na dużym obszarze. Przy ogniu ciągłym trzeba uważać na przegrzanie."
+  },
+  "BeamLauncherBullet": {
+    "localized_name": "Amunicja: Wyrzutnia wiązek",
+    "description": "Amunicja do broni, takiej jak Wyrzutnia wiązek. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "BeamSword": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy przydatny do walki na bliskim dystansie. Przecina przeciwników na wskroś, rażąc ich laserem o wysokiej mocy."
+  },
+  "BelieverFlagSet": {
+    "localized_name": "Zestaw flag Związku Wolnych Pali",
+    "description": "Zestaw: Flaga drużyny Związku Wolnych Pali i Pionowy baner Związku Wolnych Pali. Dowód na pokonanie Związku Wolnych Pali."
+  },
+  "Bio_Battery": {
+    "localized_name": "Biobateria",
+    "description": "Urządzenie magazynujące bioenergię w postaci energii elektrycznej. Jest stosowane w urządzeniach wymagających wysokiej gęstości energii. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Bio_Coolant": {
+    "localized_name": "Kriogeniczne medium chłodzące",
+    "description": "Wydajne medium chłodzące wykorzystujące specjalne składniki pochodzące od Pali. Jest używane do kontroli temperatury urządzeń o dużej mocy. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "BlastFurnace4": {
+    "localized_name": "Olbrzymi piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Heksolit. Wraz ze wzrostem rozmiaru, kilka Pali może współpracować przy wytapianiu. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "BreedFarm": {
+    "localized_name": "Farma hodowlana",
+    "description": "Przydziel jednego samca i jedną samicę Pala, aby rozpocząć produkcję jaj. Do produkcji niezbędne jest Ciasto, które należy umieścić w obiekcie."
+  },
+  "BronzeSword": {
+    "localized_name": "Prymitywny miecz",
+    "description": "Miecz do walki w zwarciu. Jest zaskakująco ostry! Walka na krótkim dystansie daje przewagę, ale wiąże się też z dużym ryzykiem."
+  },
+  "BuildableGoddessStatue": {
+    "localized_name": "Posąg Mocy",
+    "description": "Składanie ofiar zwiększa statystyki gracza i jego Pali."
+  },
+  "Cake02": {
+    "localized_name": "Ciasto grzybowe",
+    "description": "Włóż ten smakołyk do skrzyni na terenie obiektu Farma hodowlana. Pal, który się nim posili, nabierze sił i zniesie jajo, z którego wykluje się osobnik o nieco większym potencjale rozwoju swoich talentów."
+  },
+  "Cake03": {
+    "localized_name": "Ciasto warzywne",
+    "description": "Włóż ten smakołyk do skrzyni na terenie obiektu Farma hodowlana. Pal, który się nim posili, nabierze sił i zniesie dwa jaja na raz."
+  },
+  "Cake04": {
+    "localized_name": "Wykwintne ciasto warzywne",
+    "description": "Włóż ten smakołyk do skrzyni na terenie obiektu Farma hodowlana. Pal, który się nim posili, nabierze sił i zniesie jajo, z którego wykluje się osobnik o większym potencjale rozwoju swoich talentów i bardziej podatny na mutacje."
+  },
+  "Cake05": {
+    "localized_name": "Ciasto specjalne",
+    "description": "Włóż ten smakołyk do skrzyni na terenie obiektu Farma hodowlana. Pal, który się nim posili, nabierze sił i zniesie jajo, a potomstwo będzie łatwiej dziedziczyć więcej umiejętności pasywnych od rodziców."
+  },
+  "CarbonFiber": {
+    "localized_name": "Włókno węglowe",
+    "description": "Lekki, ale wytrzymały materiał. Wykorzystywany do tworzenia zbroi i innego wyposażenia. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Cauldron": {
+    "localized_name": "Kocioł czarownicy",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość wytwarzania lekarstw. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "CeilingLamp": {
+    "localized_name": "Lampa sufitowa",
+    "description": "Można zamontować na suficie"
+  },
+  "Cement": {
+    "localized_name": "Cement",
+    "description": "Cement wykorzystywany do tworzenia różnych konstrukcji. Można go wyprodukować w Warsztat wysokiej jakości."
+  },
+  "ChargeLaserRifle": {
+    "localized_name": "Karabin energetyczny",
+    "description": "Karabin wiązkowy, opracowany z wykorzystaniem zaawansowanej technologii. Kumuluje energię, by oddać jeden potężny strzał."
+  },
+  "ChargeLaserRifleBullet": {
+    "localized_name": "Amunicja: Karabin energetyczny",
+    "description": "Amunicja do broni, takiej jak Karabin energetyczny. Do wytworzenia potrzebna jest Zbrojownia zaawansowanej cywilizacji."
+  },
+  "Clinic": {
+    "localized_name": "Klinika",
+    "description": "Podstawowa placówka medyczna służąca do dbania o zdrowie Pali pracujących w bazie. Przydzielenie do niej Pala biegłego w produkcji leków pozwala ograniczyć spadek wartości SAN oraz zmniejszyć ryzyko chorób i urazów. Choć poziom higieny, jaki można dzięki niej utrzymać, ma swoje granice, obiekt ten stanowi podstawę zarządzania higieną we wczesnej fazie rozwoju bazy."
+  },
+  "Cloth2": {
+    "localized_name": "Sukno wysokiej jakości",
+    "description": "Do jego utkania wykorzystana została Wełna w dużych ilościach. Potrzebne do wytworzenia wysokiej jakości zbroi. Do wytworzenia potrzebny jest Warsztat wysokiej jakości."
+  },
+  "CompositeDesk": {
+    "localized_name": "Stół kreślarski",
+    "description": "Obiekt, który pozwala łączyć wiele schematów w bardziej zaawansowane."
+  },
+  "Computer": {
+    "localized_name": "Komputer",
+    "description": "Część stanowiąca podstawę nowoczesnej technologii, używany do sterowania zautomatyzowanymi instalacjami i precyzyjnymi maszynami. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Cooler": {
+    "localized_name": "Chłodziarka",
+    "description": "Chłodzi najbliższe otoczenie i chroni przed upałem."
+  },
+  "CoolerBox": {
+    "localized_name": "Skrzynka chłodząca",
+    "description": "Mały magazyn żywności. Przydziel Pala typu lodowego, aby pomóc w zabezpieczeniu przechowywanego jedzenia przed psuciem się."
+  },
+  "CoolerPalFoodBox": {
+    "localized_name": "Chłodziarka na żywność",
+    "description": "Pojemnik na karmę, który można utrzymywać w chłodzie. Przydziel do niej Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie."
+  },
+  "Corrosive_Solvent": {
+    "localized_name": "Rozpuszczalnik żrący",
+    "description": "Niebezpieczny rozpuszczalnik chemiczny o silnym działaniu rozkładającym. Jest wykorzystywany w precyzyjnej obróbce i specjalnych procesach. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Crusher": {
+    "localized_name": "Kruszarka",
+    "description": "Obiekt do przetwarzania surowców Kamień i Drewno na inne materiały. Przetwarzanie wymaga Pala z umiejętnością Nawadnianie do wprawienia w ruch turbiny wodnej."
+  },
+  "CrystalPit": {
+    "localized_name": "Kopalnia kwarcu heksolitu",
+    "description": "Placówka, w której wydobywa się Kwarc heksolitu. Kwarc heksolitu jest trudny do wydobycia i wymaga dużej siły. Powierz to zadanie Palowi specjalizującemu się w górnictwie."
+  },
+  "DamagedScarecrow": {
+    "localized_name": "Manekin treningowy",
+    "description": "Manekin treningowy w kształcie Pengulletta."
+  },
+  "DarkIslandFlagSet": {
+    "localized_name": "Zestaw flag ludu Feybreak",
+    "description": "Zestaw: Flaga ludu Feybreak i Pionowy baner ludu Feybreak. Dowód na zdominowanie ludu Feybreak."
+  },
+  "DecalGunSet": {
+    "localized_name": "Zestaw pistoletów do naklejek",
+    "description": "Zestaw z pistoletem do naklejek. Umożliwia stworzenie dziwacznej broni, która maluje sylwetkę Pala tam, gdzie zostanie wystrzelona. Odblokowuje również możliwość wytwarzania potrzebnej amunicji."
+  },
+  "DefenseWait": {
+    "localized_name": "Worki z piaskiem",
+    "description": "Przydzielone do nich Pale będą wypatrywać zbliżających się wrogów."
+  },
+  "DefenseWall": {
+    "localized_name": "Kamienna ściana obronna",
+    "description": "Duża ściana obronna chroniąca przed wrogimi najazdami."
+  },
+  "DefenseWall_Metal": {
+    "localized_name": "Metalowa ściana obronna",
+    "description": "Masywna ściana obronna zapobiegająca wtargnięciom wrogów. Wykonana z metalu, jest niezwykle wytrzymała."
+  },
+  "DefenseWall_Wood": {
+    "localized_name": "Drewniana ściana obronna",
+    "description": "Masywna ściana obronna zapobiegająca wtargnięciom wrogów. Wykonana z drewna, łatwo się niszczy."
+  },
+  "DimensionPalStorage": {
+    "localized_name": "Międzywymiarowy skład Pali",
+    "description": "Obiekt do przechowywania dużej liczby schwytanych Pali. Każdy członek gildii może tam umieszczać i wyjmować Pale. Po ustawieniu jako prywatny może pełnić funkcję osobistego magazynu Pali."
+  },
+  "DismantlingConveyor": {
+    "localized_name": "Taśmociąg do dekompletacji Pali",
+    "description": "Fantastyczne urządzenie, które automatycznie utylizuje każdego Pala umieszczonego w środku."
+  },
+  "DisplayCharacter": {
+    "localized_name": "Klatka wystawowa",
+    "description": "Klatka do obserwacji schwytanych Pali. Pale znajdujące się w środku nie mogą brać udziału w walce ani produkcji, ale nie odczuwają głodu."
+  },
+  "DroneLauncher": {
+    "localized_name": "Wyrzutnia dronów",
+    "description": "Wyrzutnia wystrzeliwująca drony atakujące autonomicznie. Może rozmieścić do 8 jednostek naraz, zapewniając ciągłe tłumienie."
+  },
+  "ElecBaton": {
+    "localized_name": "Pałka ogłuszająca",
+    "description": "Broń do walki wręcz, która razi prądem przy uderzeniu. Porażone Pale są łatwiejsze do schwytania. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "ElectricArcAssaultRifle": {
+    "localized_name": "Karabin plazmowy",
+    "description": "Karabin, którego wyładowania elektryczne rozchodzą się od punktu trafienia i łańcuchowo rażą wielu przeciwników."
+  },
+  "ElectricArcAssaultRifleBullet": {
+    "localized_name": "Amunicja: Karabin plazmowy",
+    "description": "Amunicja do broni, takiej jak Karabin plazmowy. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "ElectricCooler": {
+    "localized_name": "Elektryczna chłodziarka",
+    "description": "Chłodzi najbliższe otoczenie i chroni przed upałem. Ma większy zasięg i możliwości chłodnicze."
+  },
+  "ElectricGenerator_Large": {
+    "localized_name": "Duży generator prądu",
+    "description": "Generator prądu zasilany przez Pale typu elektrycznego. Większy i bardziej wydajny w wytwarzaniu energii."
+  },
+  "ElectricHeater": {
+    "localized_name": "Elektryczny grzejnik",
+    "description": "Ogrzewa najbliższą okolicę i chroni przed zimnem. Ma większy zasięg i możliwości grzewcze."
+  },
+  "EnergyLauncherBullet": {
+    "localized_name": "Nabój plazmowy",
+    "description": "Amunicja do broni, takiej jak Działo plazmowe. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "EnergyRocketLauncher": {
+    "localized_name": "Działo plazmowe",
+    "description": "Wystrzeliwuje wysokoenergetyczne pocisk. >Po trafieniu powoduje eksplozję energetyczną."
+  },
+  "EnergyShotgun": {
+    "localized_name": "Strzelba energetyczna",
+    "description": "Strzelba wystrzeliwująca pociski energetyczne. Wyróżnia się szybkostrzelnością, a jej siła rażenia na bliskim dystansie jest wręcz nieziemska."
+  },
+  "EnergyShotgunBullet": {
+    "localized_name": "Amunicja: Strzelba energetyczna",
+    "description": "Amunicja do broni, takiej jak Strzelba energetyczna. Do wytworzenia potrzebna jest Zbrojownia zaawansowanej cywilizacji."
+  },
+  "EnergyStorage_Electric": {
+    "localized_name": "Akumulator",
+    "description": "Obiekt do magazynowania nadmiaru energii elektrycznej wytwarzanej przez Generator prądu."
+  },
+  "Expedition": {
+    "localized_name": "Stacja ekspedycyjna Pali",
+    "description": "Obiekt, dzięki któremu możesz wysyłać Pale na wyprawy, na przykład do lochów. W trakcie misji walczą, zbierają przedmioty i przynoszą zasoby z powrotem do baz."
+  },
+  "Factory_Hard_04": {
+    "localized_name": "Warsztat zaawansowanej cywilizacji",
+    "description": "Linia produkcyjna do wytwarzania przedmiotów i ekwipunku. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "Factory_Money": {
+    "localized_name": "Linia produkcyjna złotych monet",
+    "description": "Linia produkcyjna do wytwarzania przedmiotu Złota moneta. Praca przy niej obciąża umysł, powodując spadek wartości SAN u pracujących Pali. Do produkcji potrzebne są Pale zdolne do pracy fizycznej. Uwaga: postawienie tego obiektu może narazić cię na bezwzględną kontrolę ze strony funkcjonariuszy SOWP."
+  },
+  "Farm_SkillFruits": {
+    "localized_name": "Sad owoców umiejętności",
+    "description": "Farma, na której można uprawiać owoce umiejętności. Wystarczy zasadzić oryginalny owoc, by po czasie zebrać kilka sztuk tego samego rodzaju."
+  },
+  "FireCultFlagSet": {
+    "localized_name": "Zestaw flag Bractwa Wiecznego Płomienia",
+    "description": "Zestaw: Flaga drużyny Bractwa Wiecznego Płomienia i Pionowy baner Bractwa Wiecznego Płomienia. Dowód na pokonanie frakcji Bractwa Wiecznego Płomienia."
+  },
+  "FishingBait_2": {
+    "localized_name": "Wysokiej jakości przynęta wędkarska",
+    "description": "Przynęta wędkarska służąca do zwabiania Pali. Ulepszona, dzięki czemu Pale chętniej ją łapią."
+  },
+  "FishingBait_3": {
+    "localized_name": "Luksusowa przynęta wędkarska",
+    "description": "Przynęta wędkarska służąca do zwabiania Pali. Dzięki ulepszeniu pasek w minigrze jest teraz nieco większy."
+  },
+  "FishingBait_3_A": {
+    "localized_name": "Kusząca przynęta wędkarska",
+    "description": "Przynęta wędkarska służąca do zwabiania Pali. Dzięki ulepszeniu pasek w minigrze jest teraz większy, a podczas łowienia można zdobyć więcej przedmiotów."
+  },
+  "FishingPond1": {
+    "localized_name": "Łowisko",
+    "description": "Łowisko wyposażone w niezbędny sprzęt. Przypisz do niego Pala, aby zajmował się rekreacyjnym wędkowaniem. Wymagany jest Pal zdolny do pracy fizycznej."
+  },
+  "FishingPond2": {
+    "localized_name": "Duże łowisko",
+    "description": "Duże łowisko wyposażone w niezbędny sprzęt. Większy zbiornik wodny umożliwia złowienie dużych Pali. Wymagany jest Pal zdolny do pracy fizycznej."
+  },
+  "FishingRod_02_1": {
+    "localized_name": "Wędka dla średniozaawansowanych (Cattiva)",
+    "description": "Wędka do łowienia Pali. Załóż przynętę i zarzuć ją nad wodą, gdzie widać sylwetki ryb. Ulepszona konstrukcja sprawia, że łowienie jest nieco łatwiejsze."
+  },
+  "FishingRod_03_1": {
+    "localized_name": "Wędka dla zaawansowanych (Pengullet)",
+    "description": "Wędka do łowienia Pali. Załóż przynętę i zarzuć ją nad wodą, gdzie widać sylwetki ryb. Ulepszona konstrukcja sprawia, że łowienie jest znacznie łatwiejsze."
+  },
+  "FishingSet1": {
+    "localized_name": "Zestaw wędkarski dla początkujących",
+    "description": "Zestaw: wędka i przynęta dla początkujących. Wykonaj wędkę, by móc łowić Pale w pobliżu wody."
+  },
+  "FlamethrowerBullet": {
+    "localized_name": "Paliwo do miotacza ognia",
+    "description": "Paliwo do miotacza ognia. Amunicja do broni, takiej jak Flamethrower. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "FlourMill": {
+    "localized_name": "Młyn",
+    "description": "Obiekt, w którym mielona jest Pszenica. W ten sposób powstaje Mąka. Mielenie wymaga Pala z umiejętnością Nawadnianie do wprawienia w ruch turbiny wodnej."
+  },
+  "FlowerBed": {
+    "localized_name": "Klomb kwiatowy",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość zbierania surowców. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Fountain": {
+    "localized_name": "Fontanna",
+    "description": "Umieść ją w bazie, aby zwiększyć szybkość nawadniania. Umieszczenie więcej niż jednej nie zwiększa efektu."
+  },
+  "FragGrenade": {
+    "localized_name": "Granat odłamkowy",
+    "description": "Granat odłamkowy, przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceni, zadając obrażenia wrogom."
+  },
+  "FragGrenade_Dark": {
+    "localized_name": "Mroczny granat",
+    "description": "Mroczny granat przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zadając wrogom obrażenia typu Mroczny."
+  },
+  "FragGrenade_Dragon": {
+    "localized_name": "Smoczy granat",
+    "description": "Smoczy granat przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zadając wrogom obrażenia typu Smoczy."
+  },
+  "FragGrenade_Elec": {
+    "localized_name": "Granat ogłuszający",
+    "description": "Granat ogłuszający, przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, rażąc prądem wszystko w zasięgu wybuchu."
+  },
+  "FragGrenade_Fire": {
+    "localized_name": "Granat zapalny",
+    "description": "Granat zapalny, przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, podpalając obszar wokół."
+  },
+  "FragGrenade_Ground": {
+    "localized_name": "Ziemny granat",
+    "description": "Ziemny granat przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zadając wrogom obrażenia typu Ziemny."
+  },
+  "FragGrenade_Ice": {
+    "localized_name": "Granat lodowy",
+    "description": "Granat lodowy, przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zamrażając najbliższe otoczenie."
+  },
+  "FragGrenade_Leaf": {
+    "localized_name": "Roślinny granat",
+    "description": "Roślinny granat przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zadając wrogom obrażenia typu Roślinny."
+  },
+  "FragGrenade_Super": {
+    "localized_name": "Granat odłamkowy M67",
+    "description": "Ulepszony granat odłamkowy. Eksploduje po kilka sekund po wyrzuceniu, zadając poważne obrażenia wrogom."
+  },
+  "FragGrenade_Water": {
+    "localized_name": "Wodny granat",
+    "description": "Wodny granat przydatny do walki na średnim dystansie. Detonuje kilka sekund po wyrzuceniu, zadając wrogom obrażenia typu Wodny."
+  },
+  "FurnitureSet_1": {
+    "localized_name": "Zestaw drewnianych mebli do salonu",
+    "description": "Zestaw dekoracyjnych mebli. Umebluj swoją przestrzeń i ciesz się życiem w gronie swoich Pali."
+  },
+  "FurnitureSet_10": {
+    "localized_name": "Zestaw barykad",
+    "description": "Zestaw dekoracyjnych mebli. Przeznaczony do miejsc, do których nie każdy powinien mieć dostęp."
+  },
+  "FurnitureSet_11": {
+    "localized_name": "Zestaw kontroli ruchu",
+    "description": "Zestaw dekoracyjnych mebli. Nie ma tu dróg, więc nie przydadzą się do kierowania ruchem."
+  },
+  "FurnitureSet_12": {
+    "localized_name": "Zestaw znaków drogowych",
+    "description": "Zestaw dekoracyjnych mebli. Nie ma tu dróg, więc nie przydadzą się do kierowania ruchem."
+  },
+  "FurnitureSet_13": {
+    "localized_name": "Zestaw metalowe krzesło i biurko",
+    "description": "Zestaw dekoracyjnych mebli. Dopasuj do metalowych konstrukcji i ciesz się życiem w gronie swoich Pali."
+  },
+  "FurnitureSet_14": {
+    "localized_name": "Zestaw stołów z żelaznego drewna",
+    "description": "Zestaw dekoracyjnych mebli. Dopasuj do metalowych konstrukcji i ciesz się życiem w gronie swoich Pali."
+  },
+  "FurnitureSet_15": {
+    "localized_name": "Zestaw mebli z fortepianem",
+    "description": "Zestaw dekoracyjnych mebli. Ustaw w swojej bazie i wyobraź sobie, że żyjesz w luksusie."
+  },
+  "FurnitureSet_16": {
+    "localized_name": "Zestaw antycznych luster",
+    "description": "Zestaw dekoracyjnych mebli. Stworzony w trosce o twoją prezencję."
+  },
+  "FurnitureSet_17": {
+    "localized_name": "Zestaw dywanów",
+    "description": "Zestaw dekoracyjnych mebli. Umieść w swojej bazie, by nadać jej przytulności."
+  },
+  "FurnitureSet_18": {
+    "localized_name": "Zestaw antycznych kanap",
+    "description": "Zestaw dekoracyjnych mebli. Wnosi do bazy powiew luksusu."
+  },
+  "FurnitureSet_19": {
+    "localized_name": "Zestaw antycznych krzeseł",
+    "description": "Zestaw dekoracyjnych mebli. Świetnie komponuje się z antycznym biurkiem."
+  },
+  "FurnitureSet_2": {
+    "localized_name": "Zestaw drewnianych szafek do karczmy",
+    "description": "Zestaw drewnianych szafek, które idealnie pasują do karczmy. Można w nich przechowywać przedmioty."
+  },
+  "FurnitureSet_20": {
+    "localized_name": "Zestaw antycznych akcesoriów łazienkowych",
+    "description": "Zestaw dekoracyjnych mebli. Nie służy tak naprawdę do utrzymywania higieny."
+  },
+  "FurnitureSet_21": {
+    "localized_name": "Zestaw antycznych mebli do przechowywania",
+    "description": "Zestaw antycznych mebli ze schowkami. Umożliwia przechowywanie przedmiotów."
+  },
+  "FurnitureSet_22": {
+    "localized_name": "Zestaw antycznych szafek do przechowywania",
+    "description": "Zestaw antycznych szafek do przechowywania przedmiotów. Umożliwia przechowywanie przedmiotów."
+  },
+  "FurnitureSet_23": {
+    "localized_name": "Zestaw zegarów",
+    "description": "Zestaw antycznych szafek do przechowywania przedmiotów. Umożliwia przechowywanie przedmiotów."
+  },
+  "FurnitureSet_24": {
+    "localized_name": "Zestaw antycznych biurek",
+    "description": "Zestaw dekoracyjnych mebli. Świetnie komponuje się z antycznym krzesłem."
+  },
+  "FurnitureSet_25": {
+    "localized_name": "Zestaw łazienkowy",
+    "description": "Zestaw dekoracyjnych mebli. Nie nadaje się do użytku zgodnie z przeznaczeniem."
+  },
+  "FurnitureSet_26": {
+    "localized_name": "Zestaw mebli rekreacyjnych",
+    "description": "Zestaw dekoracyjnych mebli. Twoje Pale będą pracować bez wytchnienia."
+  },
+  "FurnitureSet_27": {
+    "localized_name": "Zestaw latarni ulicznych",
+    "description": "Zestaw latarni ulicznych zapewniających oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "FurnitureSet_28": {
+    "localized_name": "Zestaw kominkowy",
+    "description": "Zestaw z ceglanym kominkiem zapewniającym oświetlenie. Potrzeba ognia, by go rozpalić."
+  },
+  "FurnitureSet_29": {
+    "localized_name": "Zestaw antycznych lamp",
+    "description": "Zestaw antycznych lamp zapewniających oświetlenie. Do działania wymaga energii elektrycznej."
+  },
+  "FurnitureSet_3": {
+    "localized_name": "Zestaw drewnianych mebli do karczmy",
+    "description": "Zestaw dekoracyjnych mebli. Spraw sobie bar i baw się dobrze z Palami."
+  },
+  "FurnitureSet_30": {
+    "localized_name": "Zestaw metalowych półek",
+    "description": "Zestaw metalowych półek. Umożliwia przechowywanie przedmiotów."
+  },
+  "FurnitureSet_31": {
+    "localized_name": "Zestawy mebli ogrodowych",
+    "description": "Zestaw dekoracyjnych mebli. Upiększy twoja bazę z zewnątrz."
+  },
+  "FurnitureSet_32": {
+    "localized_name": "Zestaw antycznych mebli wysokiej jakości",
+    "description": "Zestaw dekoracyjnych mebli. Dodaje bazie odrobiny klasy i elegancji."
+  },
+  "FurnitureSet_4": {
+    "localized_name": "Zestaw roślin doniczkowych na ścianę",
+    "description": "Zestaw dekoracyjnych mebli. Udekoruj ściany bazy roślinami, by tchnąć w nią trochę życia i barw."
+  },
+  "FurnitureSet_5": {
+    "localized_name": "Zestaw metalowych beczek",
+    "description": "Zestaw dekoracyjnych mebli. Nie próbuj z nim żadnych sztuczek w domu."
+  },
+  "FurnitureSet_6": {
+    "localized_name": "Zestaw kontenerów",
+    "description": "Zestaw mebli ze schowkami. Umożliwia przechowywanie przedmiotów."
+  },
+  "FurnitureSet_7": {
+    "localized_name": "Zestaw skórzanych krzeseł",
+    "description": "Zestaw dekoracyjnych mebli. Skóra to synonim luksusu."
+  },
+  "FurnitureSet_8": {
+    "localized_name": "Zestaw znaków wyjścia ewakuacyjnego",
+    "description": "Zestaw dekoracyjnych mebli. Podobno bezcenny artefakt z bardziej cywilizowanych czasów."
+  },
+  "FurnitureSet_9": {
+    "localized_name": "Zestaw roślin doniczkowych",
+    "description": "Zestaw dekoracyjnych mebli. Udekoruj ściany bazy roślinami, by tchnąć w nią trochę życia i barw."
+  },
+  "FurnitureSet_Japanese": {
+    "localized_name": "Zestaw mebli w stylu japońskim",
+    "description": "Zestaw dekoracyjnych mebli w stylu japońskim. Przekształć swoją bazę w tradycyjną japońską oazę."
+  },
+  "FurnitureTree_Bamboo": {
+    "localized_name": "Zestaw modeli bambusów",
+    "description": "Zestaw dekoracyjnych modeli bambusa. Ustaw je, by nadać bazie wygląd bambusowego lasu. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Cherry": {
+    "localized_name": "Zestaw modeli wiśni",
+    "description": "Zestaw dekoracyjnych modeli drzew wiśni. Ustaw je, by nadać bazie wygląd w stylu Sakurajimy. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Desert": {
+    "localized_name": "Zestaw modeli pustynnych drzew",
+    "description": "Zestaw dekoracyjnych modeli pustynnych drzew. Ustaw je, by nadać bazie pustynny wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Green": {
+    "localized_name": "Zestaw modeli drzew",
+    "description": "Zestaw dekoracyjnych modeli drzew. Ustaw je, by nadać bazie naturalny wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Red": {
+    "localized_name": "Zestaw modeli czerwonych drzew",
+    "description": "Zestaw dekoracyjnych modeli czerwonych drzew jesiennych. Ustaw je, by nadać bazie naturalny wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Snow": {
+    "localized_name": "Zestaw modeli ośnieżonych drzew",
+    "description": "Zestaw dekoracyjnych modeli ośnieżonych drzew. Ustaw je, by nadać bazie zimowy wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Tropical": {
+    "localized_name": "Zestaw modeli tropikalnych drzew",
+    "description": "Zestaw dekoracyjnych modeli drzew tropikalnych. Ustaw je, by nadać bazie tropikalny wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "FurnitureTree_Yellow": {
+    "localized_name": "Zestaw modeli żółtych drzew",
+    "description": "Zestaw dekoracyjnych modeli żółtych drzew jesiennych. Ustaw je, by nadać bazie naturalny wygląd. Z tego obiektu nie można pozyskać materiałów."
+  },
+  "GasMask": {
+    "localized_name": "Maska przeciw żrącej mgle",
+    "description": "Maska ze specjalnym systemem filtracji. Neutralizuje obrażenia od żrącej mgły."
+  },
+  "GatlingBullet": {
+    "localized_name": "Amunicja: Kartaczownica Gatlinga",
+    "description": "Amunicja do broni, takiej jak Kartaczownica Gatlinga. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "Glass_houseset": {
+    "localized_name": "Zestaw szklanych konstrukcji",
+    "description": "Zestaw do budowy baz ze szkła. Umożliwia stawianie szklanych fundamentów, ścian, sufitów, schodów i innych elementów potrzebnych do stworzenia schronienia."
+  },
+  "GlobalPalStorage": {
+    "localized_name": "Globalny Palbox",
+    "description": "Obiekt służący do przechowywania danych genetycznych Pali i odtwarzania ich na podstawie tych informacji. Zgromadzone dane można także przenosić do innych światów."
+  },
+  "GrapplingGun": {
+    "localized_name": "Pistolet z hakiem",
+    "description": "Wystrzeliwuje hak, który zaczepia się o odległy cel, przyciągając użytkownika w jego stronę. Ułatwia przemieszczanie się między miejscami o różnej wysokości."
+  },
+  "GrapplingGun2": {
+    "localized_name": "Mega pistolet z hakiem",
+    "description": "Wystrzeliwuje hak, który zaczepia się o odległy cel, przyciągając użytkownika w jego stronę. Dzięki ulepszeniu zyskał większy zasięg."
+  },
+  "GrapplingGun3": {
+    "localized_name": "Giga pistolet z hakiem",
+    "description": "Wystrzeliwuje hak, który zaczepia się o odległy cel, przyciągając użytkownika w jego stronę. Na podstawie danych z wersji prototypowych jego możliwości zostały jeszcze bardziej zwiększone."
+  },
+  "GrapplingGun4": {
+    "localized_name": "Hiper pistolet z hakiem",
+    "description": "Wystrzeliwuje hak, który zaczepia się o odległy cel, przyciągając użytkownika w jego stronę. Dzięki intensywnym badaniom osiągnął niespotykaną mobilność."
+  },
+  "GrapplingGun5": {
+    "localized_name": "Ultrawyrzutnia z hakiem",
+    "description": "Pistolet z hakiem umożliwiający szybkie przemieszczanie się. Wystrzeliwuje linę z hakiem tak, by użytkownik mógł się przyciągnąć w odpowiednie miejsce. Dzięki zastosowaniu nowych materiałów udało się skrócić czas studzenia."
+  },
+  "GrenadeBullet": {
+    "localized_name": "Amunicja: Granatnik",
+    "description": "Amunicja do broni, takiej jak Wyrzutnia granatów. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "GuildChest": {
+    "localized_name": "Skrzynia gildii",
+    "description": "Skrzynia, z której można błyskawicznie wysyłać i odbierać przedmioty przez podprzestrzeń. Przedmioty w środku są współdzielone przez wszystkie bazy, w których zostanie umieszczona."
+  },
+  "HandTorch": {
+    "localized_name": "Ręczna pochodnia",
+    "description": "Rozświetla ciemne miejsca i chroni przed zimnem. W pewnym stopniu sprawdza się również w zwarciu. Do wytworzenia potrzeba: Prymitywny stół warsztatowy."
+  },
+  "HandgunBullet": {
+    "localized_name": "Amunicja: Pistolet",
+    "description": "Amunicja do broni, takiej jak Pistolet. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "Headstone": {
+    "localized_name": "Nagrobek",
+    "description": "Nagrobek, na którym można umieścić dowolny tekst. Może służyć do zapisywania informacji."
+  },
+  "Heater": {
+    "localized_name": "Grzejnik",
+    "description": "Ogrzewa najbliższą okolicę i chroni przed zimnem."
+  },
+  "HighGrade_Processed_Wood": {
+    "localized_name": "Deska wysokiej jakości",
+    "description": "Deski starannie wyciosane z materiału Twarde drewno. Mają piękne usłojenie i są wykorzystywane w luksusowych konstrukcjach. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Homeward": {
+    "localized_name": "Powrotna chmura burzowa",
+    "description": "Przenosi cię do najbliższej bazy. Nie można używać w lochach ani podobnych miejscach."
+  },
+  "HugeKitchen": {
+    "localized_name": "Duży piec kamienny",
+    "description": "Niezbędny do przygotowywania jedzenia. Dzięki większym rozmiarom kilka Pali może współpracować przy gotowaniu. Do rozpalenia ognia potrzebny jest Pal typu ognistego."
+  },
+  "HunterFlagSet": {
+    "localized_name": "Zestaw flag gangu kłusowników",
+    "description": "Zestaw: Flaga drużyny gangu kłusowników i Pionowy baner gangu kłusowników. Dowód na pokonanie frakcji gangu kłusowników."
+  },
+  "IceCrusher": {
+    "localized_name": "Chłodząca kruszarka",
+    "description": "Maszyna do rozdrabniania surowca Ruda i przekształcania go w inne materiały. Wymaga zasilania oraz Pala z umiejętnością Chłodzenie, lecz jest bardzo wydajna."
+  },
+  "IceHorseStatue": {
+    "localized_name": "Posąg Frostalliona",
+    "description": "Ozdobny posąg Frostalliona."
+  },
+  "Infra_ElectricGenerator_Grade_01": {
+    "localized_name": "Generator prądu",
+    "description": "Pale typu elektrycznego w bazie mogą teraz magazynować energię, umożliwiając korzystanie z obiektów elektrycznych."
+  },
+  "Infra_ElectronicCircuit": {
+    "localized_name": "Płytka drukowana",
+    "description": "Płytka drukowana jest wymagana do wytworzenia precyzyjnego sprzętu. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Infra_ItemChest_Grade_01": {
+    "localized_name": "Drewniana skrzynia",
+    "description": "Służy do przechowywania przedmiotów. Umieść w bazie, a Pale z cechą Transport będą automatycznie przenosić do niej przedmioty."
+  },
+  "Infra_ItemChest_Grade_02": {
+    "localized_name": "Metalowa skrzynia",
+    "description": "Pozwala przechowywać większą liczbę przedmiotów. Pale z cechą Transport będą automatycznie przenosić do niej przedmioty."
+  },
+  "Infra_ItemChest_Grade_03": {
+    "localized_name": "Skrzynia z rafinowanego metalu",
+    "description": "Pozwala przechowywać jeszcze większą liczbę przedmiotów. Pale z cechą Transport będą automatycznie przenosić do niej przedmioty."
+  },
+  "Infra_MachineParts": {
+    "localized_name": "Gwóźdź",
+    "description": "Niezbędny do budowy różnych obiektów. Można go wykonać przy użyciu Prymitywny stół warsztatowy."
+  },
+  "Infra_PalBed_Grade_01": {
+    "localized_name": "Słomiane łóżko dla Pala",
+    "description": "Pale przebywające w bazie odzyskują wartość SAN, śpiąc w nocy w łóżkach dla Pali. Brak łóżka obniża komfort snu i uniemożliwia regenerację wartości SAN."
+  },
+  "Infra_PalBed_Grade_02": {
+    "localized_name": "Puszyste łóżko dla Pala",
+    "description": "Pale śpią spokojniej, co zwiększa ilość zdrowia i SAN odzyskiwanych podczas snu."
+  },
+  "Infra_PlayerBed_Grade_01": {
+    "localized_name": "Liche łóżko",
+    "description": "Łóżko dla ludzi. Sen przywraca zdrowie. Połóż się spać w nocy, a czas przyspieszy do rana. Nie można spać, jeśli łóżko nie znajduje się pod dachem."
+  },
+  "Infra_PlayerBed_Grade_02": {
+    "localized_name": "Porządne łóżko",
+    "description": "Miękkie łóżko o zwiększonych właściwościach regeneracyjnych. Nie można spać, jeśli łóżko nie znajduje się pod dachem."
+  },
+  "ItemBooth": {
+    "localized_name": "Pchli targ (przedmioty)",
+    "description": "Obiekt do sprzedaży przedmiotów. Umieszczając produkty na liście sprzedaży, możesz sprzedawać je innym graczom. Przydziel do niego Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie się."
+  },
+  "ItemChest_04": {
+    "localized_name": "Zaawansowana skrzynia",
+    "description": "Służy do przechowywania przedmiotów. Jest dość wytrzymała i oferuje sporo miejsca na składowanie. Przydatna jako duża, bezpieczna skrzynia do przechowywania przedmiotów."
+  },
+  "JapaneseStyle_houseset": {
+    "localized_name": "Zestaw konstrukcji w stylu japońskim",
+    "description": "Zestaw do budowy baz w stylu japońskim. Umożliwia stawianie fundamentów, ścian, sufitów, schodów i innych elementów potrzebnych do stworzenia schronienia w tym stylu."
+  },
+  "JetDragonStatue": {
+    "localized_name": "Posąg Jetragona",
+    "description": "Ozdobny posąg Jetragona."
+  },
+  "Katana": {
+    "localized_name": "Katana",
+    "description": "Katana przydatna do walki na bliskim dystansie. Przecina z precyzją żyletki, zadając czyste cięcie jednym ciosem."
+  },
+  "Lab": {
+    "localized_name": "Laboratorium pracy Pali",
+    "description": "Obiekt do prowadzenia badań nad różnymi zadaniami wykonywanymi przez Pale. Przydzielając im zadania w tym miejscu, możesz rozwijać badania i zdobywać rozmaite korzyści."
+  },
+  "Lamp": {
+    "localized_name": "Lampa stojąca",
+    "description": "Oświetla ciemne obszary w bazie."
+  },
+  "Lantern": {
+    "localized_name": "Latarnia biodrowa",
+    "description": "Latarnia, którą można nosić przy biodrze. Automatycznie zapala się w nocy. Można zmienić ustawienia, by świeciła cały czas. Jedna wystarczy, by odnaleźć drogę w ciemności."
+  },
+  "Lantern_High": {
+    "localized_name": "Wzmocniona latarnia biodrowa",
+    "description": "Latarnia, którą można nosić przy biodrze. Automatycznie zapala się w nocy. Można zmienić ustawienia, by świeciła cały czas. Jedna wystarczy, by odnaleźć drogę w ciemności."
+  },
+  "LargeCeilingLamp": {
+    "localized_name": "Duża lampa sufitowa",
+    "description": "Zamontowana na suficie, oświetla duże obszary w bazie."
+  },
+  "LargeLamp": {
+    "localized_name": "Duża lampa na stojaku",
+    "description": "Zwiększony rozmiar pozwala jej oświetlić szerszy obszar w bazie."
+  },
+  "LaserBullet": {
+    "localized_name": "Nabój energetyczny",
+    "description": "Amunicja do broni, takiej jak Karabin laserowy. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "LaserGatlingBullet": {
+    "localized_name": "Laserowy nabój do kartaczownicy Gatlinga",
+    "description": "Amunicja do broni, takiej jak Laserowa kartaczownica Gatlinga. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "LaserGatlingGun": {
+    "localized_name": "Laserowa kartaczownica Gatlinga",
+    "description": "Wystrzeliwuje wiązkopodobne eksplozje energii z dużą prędkością. Jego przytłaczająca siła ognia potrafi powalić wielu wrogów jednocześnie."
+  },
+  "LaserMiningTool": {
+    "localized_name": "Wieloplazmowy przecinak",
+    "description": "Przenośny przecinak plazmowy, który skupia energię plazmową i wystrzeliwuje ją w skoncentrowanej wiązce. Ma wiele zastosowań — sprawdza się zarówno przy wydobyciu rud, jak i ścinaniu drzew."
+  },
+  "LauncherBullet": {
+    "localized_name": "Amunicja: Rakieta",
+    "description": "Amunicja do broni, takiej jak Wyrzutnia rakiet. Do wytworzenia potrzeba: Linia produkcyjna broni II."
+  },
+  "Launcher_Meteor": {
+    "localized_name": "Wyrzutnik meteorów",
+    "description": "Niesamowita broń wykonana z przetworzonego meteorytu. Przy trafieniu w cel wywołuje eksplozję przypominającą uderzenie aerolitu. Do wytworzenia potrzeba: Linia produkcyjna broni."
+  },
+  "MakeshiftAssaultRifle": {
+    "localized_name": "Prowizoryczny karabin szturmowy",
+    "description": "Karabin szturmowy wykonany ręcznie z odpadków. Charakteryzuje się wysoką szybkostrzelnością i dużym zasięgiem, ale ma niewielką siłę pojedynczego strzału."
+  },
+  "MakeshiftHandgun": {
+    "localized_name": "Prowizoryczny pistolet",
+    "description": "Pistolet złożony ze złomu. Nieźle sprawdza się w walce na bliskim dystansie, ale można oddać tylko jeden strzał przed przeładowaniem. Do wytworzenia potrzebny jest Stół do wytwarzania broni."
+  },
+  "MakeshiftShotgun": {
+    "localized_name": "Prowizoryczna strzelba",
+    "description": "Strzelba wykonana ręcznie z odpadków. Ma krótki zasięg, ale doskonale sprawdza się w walce na bliskim dystansie."
+  },
+  "MakeshiftSubmachineGun": {
+    "localized_name": "Prowizoryczny pistolet maszynowy",
+    "description": "Pistolet maszynowy wykonany ręcznie z odpadków. Charakteryzuje się wysoką szybkostrzelnością, ale ma niewielką siłę pojedynczego strzału."
+  },
+  "ManganeseIngot": {
+    "localized_name": "Sztabka koralowa",
+    "description": "Stop surowca Ruda koralowa, spoczywającego na dnie morza. Wykazuje wysoką odporność na działanie energii i służy jako materiał do wytwarzania broni oraz innych przedmiotów. Do wytworzenia potrzebny jest Olbrzymi piec hutniczy."
+  },
+  "ManualElectricGenerator": {
+    "localized_name": "Generator napędzany siłą ludzką",
+    "description": "Obiekt zamieniający ruch obrotowy w energię elektryczną. Nie jest zbyt wydajny, a Pale pracujące przy nim tracą wartość SAN, lecz zdobywają przy tym punkty doświadczenia."
+  },
+  "MeatCutterKnife": {
+    "localized_name": "Tasak",
+    "description": "Nóż do uboju Pali. Po wyposażeniu komenda |Pogłaszcz| zostaje zastąpiona przez |Ubij|. Zlikwidowane Pale znikają na zawsze."
+  },
+  "MedicalPalBed_04": {
+    "localized_name": "Duże łóżko dla Pala",
+    "description": "Puszyste łóżko zapewniające Palom porządny odpoczynek. Pale mogą na nim spać w nocy lub wypoczywać, by leczyć obrażenia. Nawet duże osobniki mogą spokojnie wypocząć na takim posłaniu."
+  },
+  "MedicalPalBed_05": {
+    "localized_name": "Kapsuła Pala",
+    "description": "Kapsuła lecznicza dla Pali. Używana, gdy Pale są ranne lub potrzebują odpoczynku w nocy. Dzięki postępowi technologicznemu zwiększono skuteczność leczenia."
+  },
+  "MedicineFacility_03": {
+    "localized_name": "Zaawansowany stół apteczny",
+    "description": "Obiekt do tworzenia lekarstw na choroby Pali. Dzięki zaawansowanej technologii potrafi także wytwarzać nieznane medykamenty. Zleć to zadanie Palowi umiejącemu pracować z medykamentami."
+  },
+  "MetalDetector": {
+    "localized_name": "Wykrywacz metalu",
+    "description": "Posiadanie go pozwala wykrywać ukryte w pobliżu rudy. Gdy zbliżysz się do złoża, metal zostaje oznaczony, lecz znak znika po oddaleniu się."
+  },
+  "Metal_Gate": {
+    "localized_name": "Metalowa brama",
+    "description": "Metalowa brama wystarczająco duża, by mogły przez nią przechodzić duże Pale."
+  },
+  "Metal_houseset": {
+    "localized_name": "Zestaw metalowych konstrukcji",
+    "description": "Zestaw do budowy baz z metalu. Umożliwia stawianie metalowych fundamentów, ścian, sufitów, schodów i innych elementów potrzebnych do schronienia."
+  },
+  "MiningTool": {
+    "localized_name": "Wózek górniczy",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość wydobycia. Umieszczenie więcej niż jednego zestawu nie zwiększa efektu."
+  },
+  "MissileBullet": {
+    "localized_name": "Amunicja: Pocisk",
+    "description": "Amunicja do broni, takiej jak Wyrzutnia pocisków sterowanych. Do wytworzenia potrzebna jest Linia produkcyjna broni II."
+  },
+  "MonsterFarm": {
+    "localized_name": "Ranczo",
+    "description": "Ranczo do hodowli Pali przypominających owce i ptaki. Przydziel Pala z odpowiednią predyspozycją do pracy, aby automatycznie wytwarzać przedmioty."
+  },
+  "MultiElectricHatchingPalEgg": {
+    "localized_name": "Duży elektryczny inkubator jaj",
+    "description": "Urządzenie do inkubacji jaj Pali. Wymaga zasilania, ale umożliwia jednoczesną inkubację wielu jaj w optymalnej temperaturze."
+  },
+  "MultiElectricHatchingPalEggWithBreed": {
+    "localized_name": "Rozmnażarka starożytnej cywilizacji",
+    "description": "Zaawansowana placówka hodowlana starożytnej cywilizacji, osłonięta szkłem elektronicznym. W pełni automatycznie i z dużą szybkością obsługuje cały proces — od produkcji jaj po ich wykluwanie, a dodatkowo zwiększa szansę na dziedziczenie rzadkich umiejętności. Zarządzanie Palami odbywa się za pomocą sterowania holograficznego, dzięki czemu nie wymaga rozległej przestrzeni hodowlanej."
+  },
+  "MultiHatchingPalEgg": {
+    "localized_name": "Duży inkubator jaj",
+    "description": "Urządzenie służące do inkubacji jaj Pali. Automatycznie utrzymuje odpowiednią temperaturę, umożliwiając jednoczesne wykluwanie wielu jaj."
+  },
+  "Musket": {
+    "localized_name": "Muszkiet",
+    "description": "Prosty, staromodny pistolet. Pojedynczy strzał ma ogromną moc, ale przeładowanie broni zajmuje dużo czasu. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "NinjaFlagSet": {
+    "localized_name": "Zestaw flag Klanu Księżycowego Kwiatu",
+    "description": "Zestaw: Flaga drużyny Księżycowego Kwiatu i Pionowy baner Księżycowego Kwiatu. Dowód na pokonanie frakcji Klanu Księżycowego Kwiatu."
+  },
+  "OctaviaSet01": {
+    "localized_name": "Zestaw ULTRAKILL część 1",
+    "description": "[Ultrakill] Zestaw: Pancerz V1 i Rewolwer strzelca wyborowego."
+  },
+  "OctaviaSet02": {
+    "localized_name": "Zestaw ULTRAKILL część 2",
+    "description": "[Ultrakill] Zestaw: Pancerz V2 i Strzelba z wyrzutem rdzenia."
+  },
+  "OilPump": {
+    "localized_name": "Ekstraktor ropy naftowej",
+    "description": "Sprzęt do wydobycia surowca: Ropa naftowa z pól naftowych. Do działania niezbędne jest zasilanie."
+  },
+  "OilPump02": {
+    "localized_name": "Wysokociśnieniowy ekstraktor ropy naftowej",
+    "description": "Urządzenie, które pompuje i wydobywa surowiec Ropa naftowa z głębi ziemi. Pozwala pozyskiwać surowiec Ropa naftowa nawet w miejscach pozbawionych złóż, jednak można je umieścić wyłącznie na ziemi, w miejscu wolnym od innych zabudowań. Wymaga znacznie większej ilości energii elektrycznej niż Ekstraktor ropy naftowej."
+  },
+  "OlympicCauldron": {
+    "localized_name": "Palenisko",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość rozpalania ognia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "OperatingTable": {
+    "localized_name": "Stół operacyjny dla Pali",
+    "description": "Placówka, w której przeprowadza się operację na Palach, aby zmienić ich płeć lub umiejętności pasywne."
+  },
+  "OverheatRifle": {
+    "localized_name": "Karabin przeciążeniowy",
+    "description": "Karabin szturmowy umożliwiający nieprzerwaną salwę bez przeładowywania. Jednak przy dłuższej serii strzałów broń się przegrzewa, a użytkownik pozostaje odsłonięty. Zachowaj ostrożność."
+  },
+  "OverheatRifleBullet": {
+    "localized_name": "Amunicja: Karabin przeciążeniowy",
+    "description": "Amunicja do broni, takiej jak Karabin przeciążeniowy. Do wytworzenia potrzebna jest Zbrojownia zaawansowanej cywilizacji."
+  },
+  "PALBOX": {
+    "localized_name": "Palbox",
+    "description": "Obiekt do przechowywania schwytanych Pali. Przebywające w nim osobniki stopniowo regenerują zdrowie. Obszar wokół tego obiektu staje się bazą."
+  },
+  "PalBooth": {
+    "localized_name": "Pchli targ (Pale)",
+    "description": "Obiekt do sprzedaży Pali. Umieszczając Pale na liście sprzedaży, możesz sprzedawać je innym graczom. Przydziel do niego Pala typu lodowego, a przechowywana żywność będzie mniej podatna na psucie się."
+  },
+  "PalDopingShot": {
+    "localized_name": "Broń wzmacniająca",
+    "description": "Użycie na sojuszniczym Palu tymczasowo zwiększa jego siłę ataku i obrony. Jeśli trafi wroga zadaje mu obrażenia."
+  },
+  "PalDopingShotBullet": {
+    "localized_name": "Amunicja: Broń wzmacniająca",
+    "description": "Amunicja do broni, takiej jak Broń wzmacniająca. Do wytworzenia potrzebny jest Stół do wytwarzania broni."
+  },
+  "PalDopingShot_2": {
+    "localized_name": "Mega broń wzmacniająca",
+    "description": "tymczasowo zwiększa jego siłę ataku i obrony, lecz wrogom zadaje obrażenia. Dzięki ulepszeniom zwiększono siłę i czas działania wzmocnień oraz zadawane obrażenia."
+  },
+  "PalFoodBox": {
+    "localized_name": "Karmnik",
+    "description": "Umieść tu jedzenie, by Pale w bazie mogły się tu pożywić."
+  },
+  "PalHealingGrenade": {
+    "localized_name": "Granat uzdrawiający Pale",
+    "description": "Granat odłamkowy o właściwościach leczniczych. Eksploduje przy kontakcie, przywracając HP Palom w zespole."
+  },
+  "PalMedicineBox": {
+    "localized_name": "Regał na medykamenty",
+    "description": "Półka na leki. Chore Pale same przyjdą tu po lekarstwo. Pamiętaj, żeby regularnie uzupełniać zapasy."
+  },
+  "PalRevive": {
+    "localized_name": "Mikstura wskrzeszenia",
+    "description": "Mikstura, która przywraca do życia rannego Pala, niezdolnego do poruszania się."
+  },
+  "PalSphere_Ancient_1": {
+    "localized_name": "Solsfera",
+    "description": "Przedmiot, który po rzuceniu pozwala schwytać Pala. To wysokiej klasy sfera, która w czasach starożytnej cywilizacji umocniła współistnienie z Palami."
+  },
+  "PalSphere_Ancient_2": {
+    "localized_name": "Starożytna Sfera",
+    "description": "Przedmiot, który po rzuceniu pozwala schwytać Pala. To ostateczna sfera, stworzona jako zwieńczenie osiągnięć starożytnej cywilizacji dzięki wykorzystaniu mocy Drzewa Świata."
+  },
+  "PalSphere_Exotic": {
+    "localized_name": "Egzotyczna Sfera",
+    "description": "Przedmiot, który po wyrzuceniu chwyta Pale. Dzięki niezwykłej skuteczności potrafi schwytać także Pale wykraczające poza standardowe normy."
+  },
+  "Plastic": {
+    "localized_name": "Plastal",
+    "description": "Plastal otrzymywany przez przetwarzanie Ropa naftowa i metalu. Wytwarza się w Elektryczny piec hutniczy."
+  },
+  "PoliceFlagSet": {
+    "localized_name": "Zestaw flag SOWP",
+    "description": "Zestaw: Flaga drużyny SOWP i Pionowy baner SOWP. Dowód na pokonanie funkcjonariuszy SOWP."
+  },
+  "Polymer": {
+    "localized_name": "Polimer",
+    "description": "Polimer wykonany z rafinowanego oleju. Niezbędny do wytwarzania broni palnej i innych przedmiotów. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Potion_Extreme": {
+    "localized_name": "Zaawansowane leki uzdrawiające",
+    "description": "Lekarstwo leczące rany wraz z upływem czasu. Niezwykle wysokiej jakości – błyskawicznie przywraca HP niemal natychmiast po użyciu"
+  },
+  "Processed_Wood": {
+    "localized_name": "Deska",
+    "description": "Deski z drewna przetworzone w sposób ułatwiający ich użycie. Są bardziej uniwersalne niż surowe kłody i mają szerokie zastosowanie. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
+  },
+  "Product_Axe_Grade_01": {
+    "localized_name": "Kamienny topór",
+    "description": "Topór do rąbania drewna. Zrobiony z kamienia, nie jest zbyt ostry."
+  },
+  "Product_Axe_Grade_02": {
+    "localized_name": "Metalowy topór",
+    "description": "Metalowy topór przystosowany do cięcia twardego drewna. Skuteczny również przeciwko wytrzymałym drzewom rosnącym w głębi kontynentu. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Product_Axe_Grade_03": {
+    "localized_name": "Topór z rafinowanego metalu",
+    "description": "Topór umożliwiający pozyskiwanie materiału Twarde drewno z drzew rosnących w skrajnie surowych regionach, takich jak wulkany czy pustynie. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Product_CoalPit": {
+    "localized_name": "Kopalnia węgla",
+    "description": "Obiekt do pozyskiwania: Węgiel. Wydobycie surowca Węgiel to wyczerpująca praca fizyczna. Zleć to zadanie Palowi, który dobrze radzi sobie z górnictwem."
+  },
+  "Product_Cooking_Grade_01": {
+    "localized_name": "Ognisko",
+    "description": "Umożliwia przygotowanie prostych potraw i zapewnia odrobinę ciepła oraz światła."
+  },
+  "Product_Cooking_Grade_02": {
+    "localized_name": "Kociołek",
+    "description": "Umożliwia sprawne przygotowywanie większej liczby różnych potraw."
+  },
+  "Product_Cooking_Grade_03": {
+    "localized_name": "Kuchnia elektryczna",
+    "description": "Wymaga energii elektrycznej, ale umożliwia sprawniejsze przygotowywanie wysokiej jakości potraw. Wymaga Pala z cechą Rozpalanie ognia."
+  },
+  "Product_CopperPit": {
+    "localized_name": "Obszar wydobycia rudy",
+    "description": "Obiekt do pozyskiwania: Ruda. Wydobycie surowca Ruda to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Product_CopperPit_2": {
+    "localized_name": "Obszar wydobycia rudy II",
+    "description": "Obiekt do pozyskiwania dużych ilości surowca: Ruda. Wydobycie surowca Ruda to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Product_Factory_Hard_Grade_01": {
+    "localized_name": "Warsztat wysokiej jakości",
+    "description": "Pozwala wytwarzać przedmioty szybciej niż Prymitywny stół warsztatowy. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_Factory_Hard_Grade_02": {
+    "localized_name": "Linia produkcyjna",
+    "description": "Wymaga energii elektrycznej, ale umożliwia szybszą produkcję przedmiotów. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_Factory_Hard_Grade_03": {
+    "localized_name": "Linia produkcyjna II",
+    "description": "Wymaga energii elektrycznej, ale umożliwia jeszcze szybszą produkcję przedmiotów. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_Farm_Berries": {
+    "localized_name": "Plantacja jagód",
+    "description": "Umożliwia uprawę jagód w bazie. Wymaga Pala z cechami: Sadzenie, Podlewanie i Zbieractwo."
+  },
+  "Product_Farm_Carrot": {
+    "localized_name": "Plantacja marchewek",
+    "description": "Farma, na której rośnie Marchew. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "Product_Farm_Lettuce": {
+    "localized_name": "Plantacja sałaty",
+    "description": "Farma do uprawy sałaty. Wymaga Pala z cechami: Sadzenie, Podlewanie i Zbieractwo."
+  },
+  "Product_Farm_Onion": {
+    "localized_name": "Plantacja cebuli",
+    "description": "Farma, na której rośnie Cebula. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "Product_Farm_Potato": {
+    "localized_name": "Plantacja ziemniaków",
+    "description": "Farma, na której rośnie Ziemniak. Uprawa zajmuje trochę czasu, ale zwiększa różnorodność posiłków, które możesz przygotować. Do sadzenia nasion, podlewania i zbierania plonów potrzebne jest kilka Pali."
+  },
+  "Product_Farm_tomato": {
+    "localized_name": "Plantacja pomidorów",
+    "description": "Farma do uprawy pomidorów. Wymaga Pala z cechami: Sadzenie, Podlewanie i Zbieractwo."
+  },
+  "Product_Farm_wheat": {
+    "localized_name": "Plantacja pszenicy",
+    "description": "Farma do uprawy pszenicy, z której powstaje Chleb. Do produkcji potrzebny jest Pal z cechami: Sadzenie, Podlewanie i Zbieractwo."
+  },
+  "Product_Ingot_Grade_01_Copper": {
+    "localized_name": "Prymitywny piec hutniczy",
+    "description": "Umożliwia przetwarzanie: Ruda oraz wytapianie sztabek."
+  },
+  "Product_Ingot_Grade_02_Iron": {
+    "localized_name": "Ulepszony piec hutniczy",
+    "description": "Wykorzystuje surowce Ruda i Węgiel do wytwarzania przedmiotu Rafinowana sztaba."
+  },
+  "Product_Ingot_Grade_03_Steal": {
+    "localized_name": "Elektryczny piec hutniczy",
+    "description": "Umożliwia wytapianie przedmiotu Sztaba z Palmetalu."
+  },
+  "Product_Medicine_Grade_01": {
+    "localized_name": "Średniowieczny stół apteczny",
+    "description": "Pozwala wytwarzać proste lekarstwa. Wymaga Pala z cechą Produkcja leków."
+  },
+  "Product_Medicine_Grade_02": {
+    "localized_name": "Elektryczny stół apteczny",
+    "description": "Wymaga energii elektrycznej, ale umożliwia wytwarzanie lekarstw wyższej jakości. Wymaga Pala z cechą Produkcja leków."
+  },
+  "Product_Pickaxe_Grade_01": {
+    "localized_name": "Kilof z kamienia",
+    "description": "Kilof do wydobycia surowców. Wykonany z kamienia. Wątpliwej wydajności."
+  },
+  "Product_Pickaxe_Grade_02": {
+    "localized_name": "Kilof z metalu",
+    "description": "Kilof przeznaczony do wydobywania surowców. Metalowa konstrukcja zapewnia większą wytrzymałość i wydajność. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Product_Pickaxe_Grade_03": {
+    "localized_name": "Kilof z rafinowanego metalu",
+    "description": "Kilof przeznaczony do wydobywania surowców. Metalowa konstrukcja zapewnia jeszcze większą wytrzymałość i wydajność. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Product_QuartzPit": {
+    "localized_name": "Kopalnia czystego kwarcu",
+    "description": "Obiekt, z pomocą którego pozyskuje się Czysty kwarc. Wydobycie surowca Czysty kwarc to ciężka praca wymagająca wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w górnictwie."
+  },
+  "Product_StationDeforest": {
+    "localized_name": "Plac wyrębu",
+    "description": "Pozwala wytwarzać drewno w bazie. Wymaga Pala z cechą Ścinanie drzew."
+  },
+  "Product_StationDeforest2": {
+    "localized_name": "Plac wyrębu II",
+    "description": "Obiekt, z pomocą którego pozyskuje się Twarde drewno. Rąbanie drewna to ciężka praca wymagająca dużej wytrzymałości fizycznej. Zleć to zadanie Palom wyspecjalizowanym w wyrębie."
+  },
+  "Product_StonePit": {
+    "localized_name": "Kamieniołom",
+    "description": "Pozwala wytwarzać kamień w bazie. Wymaga Pala z cechą Wydobycie."
+  },
+  "Product_SulfurPit": {
+    "localized_name": "Kopalnia siarki",
+    "description": "Obiekt do pozyskiwania: Siarka. Wydobycie surowca Siarka to wyczerpująca praca fizyczna. Zleć to zadanie Palowi, który dobrze radzi sobie z górnictwem."
+  },
+  "Product_WeaponFactory_Dirty_Grade_01": {
+    "localized_name": "Stół do wytwarzania broni",
+    "description": "Wytwarza proste mechaniczne bronie. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_WeaponFactory_Dirty_Grade_02": {
+    "localized_name": "Linia produkcyjna broni",
+    "description": "Wymaga energii elektrycznej, ale umożliwia szybszą produkcję broni i amunicji. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_WeaponFactory_Dirty_Grade_03": {
+    "localized_name": "Linia produkcyjna broni II",
+    "description": "Wymaga energii elektrycznej, ale umożliwia jeszcze szybszą produkcję broni i amunicji. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Product_WorkBench_SkillUnlock": {
+    "localized_name": "Stół warsztatowy do Pal Sprzętu",
+    "description": "Pozwala wytwarzać przedmioty, które pozwalają Palom korzystać z Umiejętności Partnera."
+  },
+  "Refrigerator": {
+    "localized_name": "Lodówka",
+    "description": "Duży magazyn żywności. Przydziel Pala typu lodowego, aby pomóc w zabezpieczeniu przechowywanego jedzenia przed psuciem się."
+  },
+  "ReinforcedArrow": {
+    "localized_name": "Wzmocniona strzała",
+    "description": "Wzmocnione strzały do wystrzelenia z broni Łuk złożony. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
+  },
+  "RepairBench": {
+    "localized_name": "Stół naprawczy",
+    "description": "Naprawia uszkodzoną broń i narzędzia."
+  },
+  "RifleBullet": {
+    "localized_name": "Amunicja: Karabin",
+    "description": "Amunicja do karabinów i podobnej broni. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "RoughBullet": {
+    "localized_name": "Surowa amunicja",
+    "description": "Amunicja do broni, takiej jak Muszkiet czy Prowizoryczny pistolet. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "SFArmor": {
+    "localized_name": "Zbroja z heksolitu",
+    "description": "Zbroja, której podstawowym materiałem jest Heksolit. Charakteryzuje się ogromną wytrzymałością i wysokim poziomem ochrony."
+  },
+  "SFArmorCold": {
+    "localized_name": "Zimnoodporna zbroja z heksolitu",
+    "description": "Ulepszona Zbroja z heksolitu. Przydatna do przetrwania w zimnym klimacie.."
+  },
+  "SFArmorHeat": {
+    "localized_name": "Żaroodporna zbroja z heksolitu",
+    "description": "Ulepszona Zbroja z heksolitu. Charakteryzuje się wysoką odpornością na gorąco."
+  },
+  "SFArmorWeight": {
+    "localized_name": "Lekka zbroja z heksolitu",
+    "description": "Ulepszona Zbroja z heksolitu. Zwiększa nośność."
+  },
+  "SFArrow": {
+    "localized_name": "Zaawansowana strzała",
+    "description": "Wzmocnione strzały przeznaczone do wystrzelenia z broni Zaawansowany łuk. Do wytworzenia potrzebny jest Prymitywny stół warsztatowy."
+  },
+  "SFBow": {
+    "localized_name": "Zaawansowany łuk",
+    "description": "Łuk odtworzony przy użyciu zaawansowanej technologii. Zdolny do wystrzeliwania niezwykle potężnych strzał."
+  },
+  "SFHelmet": {
+    "localized_name": "Hełm z heksolitu",
+    "description": "Hełm, którego podstawowym materiałem jest Heksolit. Charakteryzuje się wyjątkową wytrzymałością i lekkością"
+  },
+  "SF_houseset": {
+    "localized_name": "Zestaw konstrukcji w stylu futurystycznym",
+    "description": "Zestaw do wybudowania bazy w stylu futurystycznym. Umożliwia budowę fundamentów, ścian, dachów, schodów i innych elementów potrzebnych do wzniesienia domu."
+  },
+  "Salvage_TreasureBoxKey02": {
+    "localized_name": "Silny magnes wędkarski",
+    "description": "Potężny magnes wykorzystywany w zaawansowanym odzysku. Dzięki silnemu przyciąganiu umożliwia wydobycie porzuconych zasobów i materiałów z morskiego dna."
+  },
+  "SanityDecrease1": {
+    "localized_name": "Generator fal alfa",
+    "description": "Urządzenie emitujące fale alfa do relaksowania Pali. Spowalnia tempo spadku wartości SAN u sojuszników w bazie. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "ScientistFlagSet": {
+    "localized_name": "Zestaw flag Jednostki Badań Genetycznych PAL",
+    "description": "Zestaw: Flaga drużyny Jednostki Badań Genetycznych PAL i Pionowy baner Jednostki Badań Genetycznych PAL. Dowód na pokonanie frakcji Jednostki Badań Genetycznych PAL."
+  },
+  "Shield_01": {
+    "localized_name": "Zwykła tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. Automatycznie się naprawia, jeśli przez jakiś czas nie otrzymuje obrażeń."
+  },
+  "Shield_02": {
+    "localized_name": "Mega tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. Nowy model został ulepszony i zapewnia lepszą obronę. Do wytworzenia potrzebny jest Warsztat wysokiej jakości."
+  },
+  "Shield_03": {
+    "localized_name": "Giga tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. Modyfikacje dodatkowo zwiększyły jej skuteczność. Do wytworzenia potrzebna jest Linia produkcyjna."
+  },
+  "Shield_04": {
+    "localized_name": "Hiper tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. W wyniku licznych testów osiągnięto najwyższą jakość. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Shield_05": {
+    "localized_name": "Ultra tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu technologii Paldium. W wyniku dalszych eksperymentów osiągnięto doskonałą jakość. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "Shield_07": {
+    "localized_name": "Starożytna tarcza",
+    "description": "Tarcza stworzona przy użyciu starożytnej technologii. Automatycznie się naprawia, jeśli przez jakiś czas nie otrzymuje obrażeń. Przyjmuje się, że obecnie nie jest możliwe odtworzenie tej wydajności."
+  },
+  "Shield_SF": {
+    "localized_name": "Zaawansowana tarcza",
+    "description": "Dziwna tarcza stworzona przy użyciu zaawansowanej technologii. Automatycznie się naprawia, jeśli przez jakiś czas nie otrzymuje obrażeń."
+  },
+  "ShotGunBullet": {
+    "localized_name": "Łuska do strzelby",
+    "description": "Amunicja do strzelb i podobnej broni. Do wytworzenia potrzeba: Stół do wytwarzania broni."
+  },
+  "Signboard": {
+    "localized_name": "Tablica",
+    "description": "Można na niej pisać."
+  },
+  "Silo": {
+    "localized_name": "Silos",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość sadzenia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "SkillUnlock_Alpaca": {
+    "localized_name": "Siodło dla Melpaki",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Melpaca."
+  },
+  "SkillUnlock_AmaterasuWolf": {
+    "localized_name": "Siodło dla Kitsuna",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Kitsun."
+  },
+  "SkillUnlock_AmaterasuWolf_Dark": {
+    "localized_name": "Siodło dla Kitsuna Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Kitsun Noct."
+  },
+  "SkillUnlock_BadCatgirl": {
+    "localized_name": "Strzelba Nyafii",
+    "description": "Strzelba przeznaczona dla Nyafia. Aktywuj Umiejętność Partnera, a Nyafia wystrzeli salwę strzałów ze strzelby w pobliskich wrogów."
+  },
+  "SkillUnlock_BirdDragon": {
+    "localized_name": "Siodło dla Vanwyrm",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Vanwyrm."
+  },
+  "SkillUnlock_BirdDragon_Ice": {
+    "localized_name": "Siodło dla Vanwyrm Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Vanwyrm Cryst."
+  },
+  "SkillUnlock_BlackCentaur": {
+    "localized_name": "Siodło dla Necromusa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Necromus."
+  },
+  "SkillUnlock_BlackGriffon": {
+    "localized_name": "Siodło dla Shadowbeaka",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Shadowbeak."
+  },
+  "SkillUnlock_BlackMetalDragon": {
+    "localized_name": "Siodło dla Astegona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Astegon."
+  },
+  "SkillUnlock_BlackPuppy": {
+    "localized_name": "Uprząż dla Smokiego",
+    "description": "Uprząż dla Smokie. Aktywuj Umiejętność Partnera, by wykryć, gdzie znajduje się pobliski Chromit."
+  },
+  "SkillUnlock_BlueDragon": {
+    "localized_name": "Siodło dla Azurobe'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Azurobe."
+  },
+  "SkillUnlock_BlueDragon_Ice": {
+    "localized_name": "Siodło dla Azurobe'a Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Azurobe Cryst."
+  },
+  "SkillUnlock_BlueSkyDragon": {
+    "localized_name": "Siodło dla Shaolonga",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Shaolong."
+  },
+  "SkillUnlock_BlueThunderHorse": {
+    "localized_name": "Siodło dla Azurmane'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Azurmane."
+  },
+  "SkillUnlock_Boar": {
+    "localized_name": "Siodło dla Rushoara",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Rushoar."
+  },
+  "SkillUnlock_Carbunclo": {
+    "localized_name": "Pistolet maszynowy Lifmunka",
+    "description": "Pistolet maszynowy stworzony specjalnie dla Lifmunk. Aktywuj Umiejętność Partnera, a Lifmunk usiądzie ci na głowie i zacznie strzelać do wrogów."
+  },
+  "SkillUnlock_ColorfulBird": {
+    "localized_name": "Rękawice Tocotoco",
+    "description": "Rękawice do delikatnego trzymania Tocotoco. Aktywuj Umiejętność Partnera, by trzymać Tocotoco i używać go do strzelania wybuchowymi jajami."
+  },
+  "SkillUnlock_CubeTurtle": {
+    "localized_name": "Siodło dla Tetroise'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Tetroise ."
+  },
+  "SkillUnlock_CubeTurtle_Neutral": {
+    "localized_name": "Siodło dla Tetroise'a Primo",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Tetroise Primo."
+  },
+  "SkillUnlock_DarkMechaDragon": {
+    "localized_name": "Siodło dla Xenolorda",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Xenolord."
+  },
+  "SkillUnlock_Deer": {
+    "localized_name": "Siodło dla Eikthyrdeera",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Eikthyrdeer."
+  },
+  "SkillUnlock_Deer_Ground": {
+    "localized_name": "Siodło dla Eikthyrdeera Terra",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Eikthyrdeer Terra."
+  },
+  "SkillUnlock_DomeArmorDragon": {
+    "localized_name": "Siodło dla Aegidrona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Aegidron."
+  },
+  "SkillUnlock_ElecPanda": {
+    "localized_name": "Minigun Grizzbolta",
+    "description": "Sprawia, że Grizzbolt strzela z miniguna podczas jazdy."
+  },
+  "SkillUnlock_FairyDragon": {
+    "localized_name": "Siodło dla Elphidrana",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Elphidran."
+  },
+  "SkillUnlock_FairyDragon_Water": {
+    "localized_name": "Siodło dla Elphidrana Aqua",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Elphidran Aqua."
+  },
+  "SkillUnlock_FeatherOstrich": {
+    "localized_name": "Siodło dla Dazemu",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Dazemu."
+  },
+  "SkillUnlock_FengyunDeeper": {
+    "localized_name": "Siodło dla Fenglope'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Fenglope."
+  },
+  "SkillUnlock_FengyunDeeper_Electric": {
+    "localized_name": "Siodło dla Fenglope'a Lux",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Fenglope Lux."
+  },
+  "SkillUnlock_FireKirin": {
+    "localized_name": "Siodło dla Pyrina",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Pyrin."
+  },
+  "SkillUnlock_FireKirin_Dark": {
+    "localized_name": "Siodło dla Pyrina Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Pyrin Noct."
+  },
+  "SkillUnlock_FlameBuffalo": {
+    "localized_name": "Siodło dla Arsoxa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Arsox."
+  },
+  "SkillUnlock_FlowerDinosaur": {
+    "localized_name": "Siodło dla Dinossoma",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Dinossom."
+  },
+  "SkillUnlock_FlowerDinosaur_Electric": {
+    "localized_name": "Siodło dla Dinossoma Lux",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Dinossom Lux."
+  },
+  "SkillUnlock_Garm": {
+    "localized_name": "Uprząż dla Direhowla",
+    "description": "Siodło do umożliwiające bezpieczną jazdę na Palu Direhowl."
+  },
+  "SkillUnlock_GhostAnglerfish": {
+    "localized_name": "Siodło dla Ghanglera",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Ghangler."
+  },
+  "SkillUnlock_GhostAnglerfish_Fire": {
+    "localized_name": "Siodło dla Ghanglera Ignis",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Ghangler Ignis."
+  },
+  "SkillUnlock_GhostBeast": {
+    "localized_name": "Siodło dla Maraitha",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Maraith."
+  },
+  "SkillUnlock_GhostDragon": {
+    "localized_name": "Siodło dla Eidrolona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Eidrolon."
+  },
+  "SkillUnlock_GhostDragon_Fire": {
+    "localized_name": "Siodło dla Eidrolona Ignis",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Eidrolon Ignis."
+  },
+  "SkillUnlock_GoldenHorse": {
+    "localized_name": "Siodło dla Gildane",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Gildane."
+  },
+  "SkillUnlock_GrassGolem": {
+    "localized_name": "Siodło dla Dualitha",
+    "description": "Posiadanie tego przedmiotu sprawia, że Dualith wystrzeliwuje potężny laser typu roślinnego podczas jazdy."
+  },
+  "SkillUnlock_GrassGolem_Dark": {
+    "localized_name": "Siodło dla Dualitha Noct",
+    "description": "Posiadanie tego przedmiotu sprawia, że Dualith Noct wystrzeliwuje potężny laser typu roślinnego podczas jazdy."
+  },
+  "SkillUnlock_GrassMammoth": {
+    "localized_name": "Siodło dla Mammoresta",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Mammorest."
+  },
+  "SkillUnlock_GrassMammoth_Ice": {
+    "localized_name": "Siodło dla Mammoresta Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Mammorest Cryst."
+  },
+  "SkillUnlock_GrassPanda": {
+    "localized_name": "Wyrzutnia Granatów Mossandy",
+    "description": "Sprawia, że Mossanda strzela z wyrzutni granatów podczas jazdy."
+  },
+  "SkillUnlock_GrassPanda_Electric": {
+    "localized_name": "Wyrzutnia granatów Mossandy Lux",
+    "description": "Sprawia, że Mossanda Lux strzela z wyrzutni granatów podczas jazdy."
+  },
+  "SkillUnlock_GuardianDog": {
+    "localized_name": "Siodło dla Yakumo",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Yakumo."
+  },
+  "SkillUnlock_HadesBird": {
+    "localized_name": "Siodło dla Helzephyra",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Helzephyr."
+  },
+  "SkillUnlock_HadesBird_Electric": {
+    "localized_name": "Siodło dla Helzephyra Lux",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Helzephyr Lux."
+  },
+  "SkillUnlock_HawkBird": {
+    "localized_name": "Siodło dla Nitewinga",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Nitewing."
+  },
+  "SkillUnlock_Horus": {
+    "localized_name": "Siodło dla Falerisa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Faleris."
+  },
+  "SkillUnlock_Horus_Water": {
+    "localized_name": "Siodło dla Falerisa Aqua",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Faleris Aqua."
+  },
+  "SkillUnlock_IceDeer": {
+    "localized_name": "Siodło dla Reindrixa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Reindrix."
+  },
+  "SkillUnlock_IceHorse": {
+    "localized_name": "Siodło dla Frostalliona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Frostallion."
+  },
+  "SkillUnlock_IceHorse_Dark": {
+    "localized_name": "Siodło dla Frostalliona Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Frostallion Noct."
+  },
+  "SkillUnlock_IceNarwhal": {
+    "localized_name": "Siodło dla Whalaski",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Whalaska."
+  },
+  "SkillUnlock_IceNarwhal_Fire": {
+    "localized_name": "Siodło dla Whalaski Ignis",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Whalaska Ignis."
+  },
+  "SkillUnlock_IceSeal": {
+    "localized_name": "Siodło dla Polapupa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Polapup."
+  },
+  "SkillUnlock_IceSeal_Ground": {
+    "localized_name": "Siodło dla Polapupa Terra",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Polapup Terra."
+  },
+  "SkillUnlock_JetDragon": {
+    "localized_name": "Wyrzutnia pocisków Jetragona",
+    "description": "Sprawia, że Jetragon wystrzeliwuje pociski podczas jazdy."
+  },
+  "SkillUnlock_KingAlpaca": {
+    "localized_name": "Siodło dla Kingpaki",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Kingpaca."
+  },
+  "SkillUnlock_KingAlpaca_Ice": {
+    "localized_name": "Siodło dla Kingpaki Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Kingpaca Cryst."
+  },
+  "SkillUnlock_KingBahamut": {
+    "localized_name": "Siodło dla Blazamuta",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Blazamut."
+  },
+  "SkillUnlock_KingBahamut_Dragon": {
+    "localized_name": "Siodło dla Blazamuta Ryu",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Blazamut Ryu."
+  },
+  "SkillUnlock_KingSunfish": {
+    "localized_name": "Siodło dla Solmory",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Solmora."
+  },
+  "SkillUnlock_KingSunfish_Thunder": {
+    "localized_name": "Siodło dla Solmory Lux",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Solmora Lux."
+  },
+  "SkillUnlock_Kirin": {
+    "localized_name": "Siodło dla Univolta",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Univolt."
+  },
+  "SkillUnlock_Kirin_Ice": {
+    "localized_name": "Siodło dla Univolta Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Univolt Cryst."
+  },
+  "SkillUnlock_Kitsunebi": {
+    "localized_name": "Uprząż dla Foxparksa",
+    "description": "Uprząż do trzymania Foxparks. Aktywuj Umiejętność Partnera, by chwycić Foxparks i atakować, używając go jak miotacza ognia."
+  },
+  "SkillUnlock_Kitsunebi_Ice": {
+    "localized_name": "Uprząż dla Foxparksa Cryst",
+    "description": "Uprząż do trzymania Pala Foxparks Cryst. Aktywuj Umiejętność Partnera, by trzymać Pala Foxparks Cryst i wypuścić mroźne powietrze do ataku."
+  },
+  "SkillUnlock_LazyDragon": {
+    "localized_name": "Wyrzutnia pocisków Relaxaurusa",
+    "description": "Sprawia, że Relaxaurus strzela z wyrzutni pocisków podczas jazdy."
+  },
+  "SkillUnlock_LazyDragon_Electric": {
+    "localized_name": "Wyrzutnia pocisków Relaxaurusa Lux",
+    "description": "Sprawia, że Relaxaurus Lux strzela z wyrzutni pocisków podczas jazdy."
+  },
+  "SkillUnlock_LegendDeer": {
+    "localized_name": "Siodło dla Hartalisa",
+    "description": "Gdy masz ten przedmiot przy sobie, możesz dosiąść Hartalisi stworzyć barierę chroniącą przed atakami."
+  },
+  "SkillUnlock_LotusDragon": {
+    "localized_name": "Siodło dla Ophydii",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Ophydia."
+  },
+  "SkillUnlock_Manticore": {
+    "localized_name": "Siodło dla Blazehowla",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Blazehowl."
+  },
+  "SkillUnlock_Manticore_Dark": {
+    "localized_name": "Siodło dla Blazehowla Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Blazehowl Noct."
+  },
+  "SkillUnlock_Monkey": {
+    "localized_name": "Karabin szturmowy Tanzee",
+    "description": "Karabin szturmowy stworzony specjalnie dla Tanzee. Aktywuj Umiejętność Partnera, a Tanzee przejdzie w tryb strzelecki i zacznie strzelać do pobliskich wrogów."
+  },
+  "SkillUnlock_Monkey_Fire": {
+    "localized_name": "Karabin szturmowy Tanzee Ignis",
+    "description": "Karabin szturmowy stworzony specjalnie dla: Tanzee Ignis. Aktywuj Umiejętność Partnera, a Tanzee Ignis przejdzie w tryb strzelecki i otworzy ogień do pobliskich wrogów."
+  },
+  "SkillUnlock_MoonQueen": {
+    "localized_name": "Siodło dla Selyne",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Selyne."
+  },
+  "SkillUnlock_MopKing": {
+    "localized_name": "Siodło dla Sweepy",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Sweepa."
+  },
+  "SkillUnlock_MushroomDragon": {
+    "localized_name": "Siodło dla Shroomera",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Shroomer."
+  },
+  "SkillUnlock_MushroomDragon_Dark": {
+    "localized_name": "Siodło dla Shroomera Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Shroomer Noct."
+  },
+  "SkillUnlock_NaughtyCat": {
+    "localized_name": "Siodło dla Grintale'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Grintale."
+  },
+  "SkillUnlock_NightBlueHorse": {
+    "localized_name": "Siodło dla Starryona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Starryon."
+  },
+  "SkillUnlock_NightBlueHorse_Neutral": {
+    "localized_name": "Siodło dla Starryona Primo",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Starryon Primo."
+  },
+  "SkillUnlock_Penguin": {
+    "localized_name": "Wyrzutnia rakiet Pengulleta",
+    "description": "Wyrzutnia rakiet zaprojektowana do wystrzeliwania Pengullet. Aktywuj Umiejętność Partnera, by wystrzelić Pengulleta i zadać obrażenia przeciwnikom. Po wystrzeleniu Pengullet zostanie wyłączony z walki."
+  },
+  "SkillUnlock_Penguin_Electric": {
+    "localized_name": "Wyrzutnia rakiet Pengulleta Lux",
+    "description": "Urządzenie, z którego może zostać wystrzelony Pengullet Lux. Po użyciu umiejętności partnera Pengullet Lux zostaje wystrzelony, by zaatakować wrogów. Uwaga: Pengullet Lux znajdzie się w stanie krytycznym."
+  },
+  "SkillUnlock_Plesiosaur": {
+    "localized_name": "Siodło dla Bralohi",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Braloha."
+  },
+  "SkillUnlock_PoseidonOrca": {
+    "localized_name": "Siodło dla Neptiliusa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Neptilius."
+  },
+  "SkillUnlock_PurpleSpider": {
+    "localized_name": "Siodło dla Tarantriss",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Tarantriss."
+  },
+  "SkillUnlock_RedArmorBird": {
+    "localized_name": "Siodło dla Ragnahawka",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Ragnahawk."
+  },
+  "SkillUnlock_SaintCentaur": {
+    "localized_name": "Siodło dla Paladiusa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Paladius."
+  },
+  "SkillUnlock_SakuraSaurus": {
+    "localized_name": "Siodło dla Broncherry",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Broncherry."
+  },
+  "SkillUnlock_SakuraSaurus_Water": {
+    "localized_name": "Siodło dla Broncherry Aqua",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Broncherry Aqua."
+  },
+  "SkillUnlock_Serpent": {
+    "localized_name": "Siodło dla Surfenta",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Surfent."
+  },
+  "SkillUnlock_Serpent_Ground": {
+    "localized_name": "Siodło dla Surfenta Terra",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Surfent Terra."
+  },
+  "SkillUnlock_SkyDragon": {
+    "localized_name": "Siodło dla Quiverna",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Quivern."
+  },
+  "SkillUnlock_SkyDragon_Grass": {
+    "localized_name": "Siodło dla Quiverna Botan",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Quivern Botan."
+  },
+  "SkillUnlock_SnowTigerBeastman": {
+    "localized_name": "Młot Bastigora",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Bastigor."
+  },
+  "SkillUnlock_SumoDog": {
+    "localized_name": "Siodło dla Bulldosu",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Bulldosu."
+  },
+  "SkillUnlock_Suzaku": {
+    "localized_name": "Siodło dla Suzaku",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Suzaku."
+  },
+  "SkillUnlock_Suzaku_Water": {
+    "localized_name": "Siodło dla Suzaku Aqua",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Suzaku Aqua."
+  },
+  "SkillUnlock_ThiefBird": {
+    "localized_name": "Siodło dla Roujaya",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Roujay."
+  },
+  "SkillUnlock_ThunderBird": {
+    "localized_name": "Siodło dla Beakona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Beakon."
+  },
+  "SkillUnlock_ThunderBird_Ice": {
+    "localized_name": "Siodło dla Beakona Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Beakon Cryst."
+  },
+  "SkillUnlock_ThunderDog": {
+    "localized_name": "Siodło dla Rayhounda",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Rayhound."
+  },
+  "SkillUnlock_ThunderFluffyBird": {
+    "localized_name": "Siodło dla Dynamoffa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Dynamoff."
+  },
+  "SkillUnlock_Thunderdog_Ice": {
+    "localized_name": "Siodło dla Rayhounda Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Thunderdog_Ice."
+  },
+  "SkillUnlock_TropicalOstrich": {
+    "localized_name": "Siodło dla Palumby",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Palumba."
+  },
+  "SkillUnlock_Umihebi": {
+    "localized_name": "Siodło dla Jormuntide'a",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Jormuntide."
+  },
+  "SkillUnlock_Umihebi_Fire": {
+    "localized_name": "Siodło dla Jormuntide'a Ignis",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Jormuntide Ignis."
+  },
+  "SkillUnlock_VolcanicMonster": {
+    "localized_name": "Siodło dla Reptyro",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Reptyro."
+  },
+  "SkillUnlock_VolcanicMonster_Ice": {
+    "localized_name": "Siodło dla Reptyro Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Reptyro Cryst."
+  },
+  "SkillUnlock_VolcanoDragon": {
+    "localized_name": "Siodło dla Moldrona",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Moldron."
+  },
+  "SkillUnlock_VolcanoDragon_Ice": {
+    "localized_name": "Siodło dla Moldrona Cryst",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Moldron Cryst."
+  },
+  "SkillUnlock_WeaselDragon": {
+    "localized_name": "Siodło dla Chilleta",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Chillet."
+  },
+  "SkillUnlock_WeaselDragon_Fire": {
+    "localized_name": "Siodło dla Chilleta Ignis",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Chillet Ignis."
+  },
+  "SkillUnlock_WhiteAlienDragon": {
+    "localized_name": "Siodło dla Xenogarda",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Xenogard."
+  },
+  "SkillUnlock_WhiteDeer": {
+    "localized_name": "Siodło dla Celesdira",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Celesdir."
+  },
+  "SkillUnlock_WhiteDeer_Dark": {
+    "localized_name": "Siodło dla Celesdira Noct",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Celesdir Noct."
+  },
+  "SkillUnlock_WhiteShieldDragon": {
+    "localized_name": "Siodło dla Silvegisa",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Silvegis."
+  },
+  "SkillUnlock_Yeti": {
+    "localized_name": "Siodło dla Wumpo",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Wumpo."
+  },
+  "SkillUnlock_Yeti_Grass": {
+    "localized_name": "Siodło dla Wumpo Botan",
+    "description": "Siodło umożliwiające bezpieczną jazdę na Palu Wumpo Botan."
+  },
+  "SkinChange": {
+    "localized_name": "Urządzenie do stylizacji Pali",
+    "description": "Przebieralnia dla Pali. Podaruj swoim Palom nowy wygląd! Skórki zdobyte w grze i poza nią można zastosować właśnie tutaj!"
+  },
+  "SkyAssaultRifle": {
+    "localized_name": "Ciężki karabin szturmowy",
+    "description": "Karabin szturmowy wykonany ze sztabek solitu. Zachowując uniwersalność, został wzmocniony tak, by móc używać amunicji o większej sile rażenia."
+  },
+  "SkyAssaultRifleBullet": {
+    "localized_name": "Amunicja: Ciężki karabin szturmowy",
+    "description": "Amunicja do broni, takiej jak Ciężki karabin szturmowy. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "SkyBeamSword": {
+    "localized_name": "Miecz laserowy",
+    "description": "Miecz laserowy wykonany ze sztabek solitu. Broń do walki wręcz, która dzięki wysokoenergetycznemu ostrzu błyskawicznie przecina cel."
+  },
+  "SkyBow": {
+    "localized_name": "Łuk mechaniczny",
+    "description": "Łuk wykonany ze sztabek solitu. Dzięki znacznie większej prędkości początkowej i sile przebicia umożliwia niezwykle precyzyjne strzelanie z dużej odległości."
+  },
+  "SkyBowArrow": {
+    "localized_name": "Strzały: Łuk mechaniczny",
+    "description": "Wzmocnione strzały przeznaczone do wystrzelenia z broni Łuk mechaniczny. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "SkyGrenadeLauncher": {
+    "localized_name": "Taktyczna wyrzutnia granatów",
+    "description": "Granatnik wykonany ze sztabek solitu. Ulepszona stabilność toru lotu pocisku pozwala na precyzyjne bombardowanie z dużej odległości."
+  },
+  "SkyGrenadeLauncherBullet": {
+    "localized_name": "Amunicja: Taktyczna wyrzutnia granatów",
+    "description": "Amunicja do broni, takiej jak Taktyczna wyrzutnia granatów. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "SkyIslandFlagSet": {
+    "localized_name": "Zestaw flag ludu Przymierza Błękitnego Nieba",
+    "description": "Zestaw: Flaga Przymierza Błękitnego Nieba i Pionowy baner Przymierza Błękitnego Nieba. Dowód na zdominowanie Przymierza Błękitnego Nieba."
+  },
+  "SkyIslandOrePit": {
+    "localized_name": "Kopalnia solitu",
+    "description": "Placówka, w której wydobywa się: Solit. Solit jest trudnym do wydobycia surowcem i wymaga dużej siły. Powierz to zadanie Palowi specjalizującemu się w górnictwie."
+  },
+  "SkyShotgun": {
+    "localized_name": "Strzelba prototypowa",
+    "description": "Strzelba wykonana ze sztabek solitu. Na bardzo krótkim dystansie wykazuje przytłaczającą siłę ognia, a dzięki specjalnemu magazynkowi ma też wysoką zdolność do prowadzenia walki przez dłuższy czas."
+  },
+  "SkyShotgunBullet": {
+    "localized_name": "Amunicja: Strzelba prototypowa",
+    "description": "Amunicja do broni, takiej jak Strzelba prototypowa. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "SkySubmachineGun": {
+    "localized_name": "Bojowy pistolet maszynowy",
+    "description": "Pistolet maszynowy wykonany ze sztabek solitu. Ulepszony magazynek i amunicja zapewniają większą siłę tłumienia."
+  },
+  "SkySubmachineGunBullet": {
+    "localized_name": "Amunicja: Bojowy pistolet maszynowy",
+    "description": "Amunicja do broni, takiej jak Bojowy pistolet maszynowy. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "SkyislandIngot": {
+    "localized_name": "Sztabka solitu",
+    "description": "Metalowy materiał starożytnej cywilizacji, wytapiany z rudy spoczywającej w Niebiańskiej Krainie Słońca. Jest to rzadki surowiec przetworzony, stanowiący podstawę zaawansowanego wyposażenia oraz budowli. Do wytworzenia potrzebny jest Piec starożytnej cywilizacji."
+  },
+  "Snowman": {
+    "localized_name": "Bałwan",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość chłodzenia. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Spa": {
+    "localized_name": "Gorące źródło",
+    "description": "Gorące źródło pozwala Palom zregenerować wartość SAN."
+  },
+  "Spa2": {
+    "localized_name": "Gorące źródło wysokiej jakości",
+    "description": "Pale odzyskują dużo SAN podczas kąpieli w gorącym źródle."
+  },
+  "Spa3": {
+    "localized_name": "Gorące źródło w stylu japońskim",
+    "description": "Obiekt, w którym zmęczone Pale w bazie mogą się zrelaksować. Tradycyjna, japońska przestrzeń sprzyja regeneracji i pozwala jeszcze skuteczniej odzyskać SAN."
+  },
+  "Spear": {
+    "localized_name": "Włócznia z kamienia",
+    "description": "Przydatny do walki wręcz. Dzięki swojej długości pozwala atakować z nieco większej odległości."
+  },
+  "Spear_2": {
+    "localized_name": "Włócznia z metalu",
+    "description": "Włócznia przydatna w walce wręcz. Wykonanie z metalu zapewnia zwiększoną siłę ataku. Do wytworzenia potrzeba: Warsztat wysokiej jakości."
+  },
+  "Spear_3": {
+    "localized_name": "Włócznia z rafinowanego metalu",
+    "description": "Włócznia przydatna w walce wręcz. Wykonanie z wysokiej jakości metalu zapewnia jej zwiększoną siłę ataku. Do wytworzenia potrzeba: Linia produkcyjna."
+  },
+  "Spear_ForestBoss": {
+    "localized_name": "Włócznia Lily",
+    "description": "Włócznia ukochana przez Lily. Wymierza karę tym, którzy zaniedbują swoje Pale."
+  },
+  "Spear_ForestBoss2": {
+    "localized_name": "Wzmocniona włócznia Lily",
+    "description": "Ulepszona wersja ulubionej włóczni Lily. Wymierza karę tym, którzy zaniedbują swoje Pale."
+  },
+  "Special_ElectricHatchingPalEgg": {
+    "localized_name": "Elektryczny inkubator jaj",
+    "description": "Urządzenie do inkubacji jaj Pali. Wymaga energii elektrycznej, ale automatycznie utrzymuje odpowiednią temperaturę wewnątrz inkubatora."
+  },
+  "Special_HatchingPalEgg": {
+    "localized_name": "Inkubator jaj",
+    "description": "Umieść jajo Pala w środku, aby rozpocząć inkubację."
+  },
+  "Special_PalRankUp": {
+    "localized_name": "Kondensator Esencji Pali",
+    "description": "Umożliwia połączenie kilku Pali tego samego typu, by uzyskać wersję wyższej rangi."
+  },
+  "Special_PalSphere_Grade_01": {
+    "localized_name": "Pal Sfera",
+    "description": "Przedmiot do łapania dzikich Pali — wystarczy nim rzucić. Ten podstawowy model działa tylko na Pale niskiego poziomu."
+  },
+  "Special_PalSphere_Grade_02": {
+    "localized_name": "Mega Sfera",
+    "description": "Narzędzie, które po rzuceniu pozwala schwytać Pale. Zwiększona efektywność pozwala na chwytanie szerszej gamy Pali. Do wytworzenia potrzeba: Stół warsztatowy do sfer."
+  },
+  "Special_PalSphere_Grade_03": {
+    "localized_name": "Giga Sfera",
+    "description": "Przedmiot do łapania Pali — wystarczy nim rzucić. Pozwala łapać także silniejsze okazy. Do wytworzenia potrzeba: Stół warsztatowy do sfer."
+  },
+  "Special_PalSphere_Grade_04": {
+    "localized_name": "Hiper Sfera",
+    "description": "Przedmiot do łapania Pali — wystarczy nim rzucić. Pozwala łapać nawet bardzo silne Pale. Do wytworzenia potrzeba: Linia produkcyjna sfer."
+  },
+  "Special_PalSphere_Grade_05": {
+    "localized_name": "Ultra Sfera",
+    "description": "Przedmiot do łapania Pali — wystarczy nim rzucić. Cechuje się znakomitą skutecznością. Niewiele Pali zdoła się mu wymknąć. Do wytworzenia potrzeba: Linia produkcyjna sfer II."
+  },
+  "Special_PalSphere_Grade_06": {
+    "localized_name": "Legendarna Sfera",
+    "description": "Przedmiot do łapania Pali — wystarczy nim rzucić. Tak skuteczny, że prawie żaden Pal nie zdoła się wymknąć. Do wytworzenia potrzeba: Linia produkcyjna sfer II."
+  },
+  "Special_PalSphere_Grade_07": {
+    "localized_name": "Ostateczna Sfera",
+    "description": "Przedmiot do łapania Pali — wystarczy nim rzucić. Tak skuteczny, że pozwala schwytać niemal każdego Pala. Do wytworzenia potrzeba: Linia produkcyjna sfer II."
+  },
+  "Special_SphereFactory_Black_Grade_01": {
+    "localized_name": "Stół warsztatowy do sfer",
+    "description": "Wytwarza sfery do chwytania Pali. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Special_SphereFactory_Black_Grade_02": {
+    "localized_name": "Linia produkcyjna sfer",
+    "description": "Umożliwia szybsze wytwarzanie przedmiotu Pal Sfera. Wymaga Pala z cechą Rzemiosło."
+  },
+  "Special_SphereFactory_Black_Grade_03": {
+    "localized_name": "Linia produkcyjna sfer II",
+    "description": "Umożliwia jeszcze szybsze wytwarzanie przedmiotu Pal Sfera. Wymaga Pala z cechą Rzemiosło."
+  },
+  "SphereFactory_Black_04": {
+    "localized_name": "Zaawansowana linia produkcyjna sfer",
+    "description": "Linia produkcyjna do wytwarzania sfer służących do łapania Pali. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "SphereModule_Curve": {
+    "localized_name": "Moduł zakrzywienia",
+    "description": "Po wyposażeniu sfera porusza się po zakrzywionej trajektorii. Ułatwia to chwytanie zaskoczonych Pali i zwiększa siłę chwytania."
+  },
+  "SphereModule_Curve2": {
+    "localized_name": "Moduł ślizgu",
+    "description": "Po wyposażeniu sfera zyskuje boczny obrót. Leci po ostro zakrzywionej trajektorii, co ułatwia chwytanie zaskoczonych Pali i zwiększa siłę chwytania."
+  },
+  "SphereModule_Heavy": {
+    "localized_name": "Moduł zwiększonego ciężaru",
+    "description": "Po wyposażeniu czyni sferę cięższą, zmniejszając jej zasięg, ale zwiększając siłę chwytania."
+  },
+  "SphereModule_Homing": {
+    "localized_name": "Moduł samonaprowadzający",
+    "description": "Po wyposażeniu sfera sama naprowadza się na Pala, co dodatkowo zwiększa siłę chwytania."
+  },
+  "SphereModule_Sniper": {
+    "localized_name": "Moduł snajpera",
+    "description": "Po wyposażeniu zwiększa się zasięg sfery, co pozwala skutecznie chwytać Pale i zwiększa siłę chwytania."
+  },
+  "SphereModule_Sniper2": {
+    "localized_name": "Moduł snajpera Ⅱ",
+    "description": "Po wyposażeniu znacząco zwiększa się zasięg sfery, co pozwala skutecznie chwytać Pale i zwiększa siłę chwytania."
+  },
+  "StainlessSteel": {
+    "localized_name": "Heksolit",
+    "description": "Stop surowców: Chromit i Kwarc heksolitu. Materiał do wytwarzania zaawansowanego wyposażenia i konstrukcji. Do wytworzenia potrzebny jest Olbrzymi piec hutniczy."
+  },
+  "Stone_Gate": {
+    "localized_name": "Kamienna brama",
+    "description": "Kamienna brama wystarczająco duża, by mogły przez nią przechodzić duże Pale."
+  },
+  "Stone_houseset": {
+    "localized_name": "Zestaw kamiennych konstrukcji",
+    "description": "Zestaw do budowy baz z kamienia. Umożliwia stawianie kamiennych fundamentów, ścian, sufitów, schodów i innych elementów potrzebnych do schronienia."
+  },
+  "Stump": {
+    "localized_name": "Pień i siekiera",
+    "description": "Umieść je w bazie, aby zwiększyć szybkość wyrębu. Umieszczenie więcej niż jednego zestawu nie zwiększa efektu."
+  },
+  "Supplement": {
+    "localized_name": "Suplement odżywczy",
+    "description": "Suplement odżywczy to bogaty w składniki odżywcze napój, idealny na wyprawy. Po wypiciu przez pewien czas nie odczuwasz głodu."
+  },
+  "TableCircular": {
+    "localized_name": "Zestaw schludnych stołów",
+    "description": "Zestaw dekoracyjnych schludnych stołów. Pozwalają stworzyć czystą i zadbaną bazę."
+  },
+  "TableDresser01_Stone": {
+    "localized_name": "Antyczna toaletka",
+    "description": "Toaletka przydatna do zmiany wyglądu. Umożliwia graczowi edycję wyglądu postaci."
+  },
+  "Thermal_Core": {
+    "localized_name": "Rdzeń wysokotemperaturowy",
+    "description": "Wysokotemperaturowy rdzeń reakcyjny zawierający ogromną ilość energii cieplnej. Jest wykorzystywany w układach napędowych zaawansowanych urządzeń. Do wytworzenia potrzebna jest Linia produkcyjna II."
+  },
+  "ToolBoxV1": {
+    "localized_name": "Duża skrzynka z narzędziami",
+    "description": "Umieść ją bazie, aby zwiększyć szybkość prac ręcznych. Umieszczenie więcej niż jednej nie zwiększa efektu."
+  },
+  "Torch": {
+    "localized_name": "Pochodnia na stojaku",
+    "description": "Umieść w bazie, by oświetlić otoczenie."
+  },
+  "TransmissionTower": {
+    "localized_name": "Słup elektryczny",
+    "description": "Umieść go w bazie, aby zwiększyć szybkość wytwarzania energii elektrycznej. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Trap_LegHold": {
+    "localized_name": "Potrzask (mały)",
+    "description": "Unieruchamia każdego, kto w niego wdepnie. Działa tylko na małe Pale lub ludzi."
+  },
+  "Trap_LegHold_Big": {
+    "localized_name": "Potrzask (duży)",
+    "description": "Unieruchamia każdego, kto w niego wdepnie. Działa tylko na duże Pale."
+  },
+  "Trap_MineAttack": {
+    "localized_name": "Mina",
+    "description": "Automatycznie wybucha po nadepnięciu."
+  },
+  "Trap_MineElecShock": {
+    "localized_name": "Mina elektryczna",
+    "description": "Razi prądem każdego, kto na nią nadepnie. Porażone Pale łatwiej schwytać."
+  },
+  "Trap_MineFreeze": {
+    "localized_name": "Mina lodowa",
+    "description": "Zamraża każdego, kto na nią nadepnie. Zamrożone Pale łatwiej schwytać."
+  },
+  "Trap_Noose": {
+    "localized_name": "Wnyki",
+    "description": "Chwyta Pale, które przez nią przechodzą. Skuteczna tylko na małe Pale i ludzi."
+  },
+  "UnlockEquipmentSlot_Weapon_01": {
+    "localized_name": "Dodatkowy uchwyt na broń",
+    "description": "Uchwyt pozwalający na wyposażenie dodatkowej broni. Zwiększa liczbę gniazd na broń o 1. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "UnlockEquipmentSlot_Weapon_02": {
+    "localized_name": "Dodatkowy uchwyt na broń 2",
+    "description": "Uchwyt pozwalający na wyposażenie dodatkowej broni. Zwiększa liczbę gniazd na broń o jedno kolejne. Wystarczy posiadać tylko jedną sztukę."
+  },
+  "Unlock_Picking_Tier1": {
+    "localized_name": "Proste narzędzie do otwierania zamków",
+    "description": "Nie ma klucza? Nie ma problemu! Te narzędzia pozwolą ci spróbować wyważyć każdą skrzynię skarbów, która normalnie wymaga przedmiotu typu Miedziany klucz."
+  },
+  "Unlock_Picking_Tier2": {
+    "localized_name": "Wysokiej jakosci narzędzie do otwierania zamków",
+    "description": "Nie ma klucza? Nie ma problemu! Te narzędzia pozwolą ci spróbować wyważyć każdą skrzynię skarbów, która normalnie wymaga przedmiotu typu Srebrny klucz."
+  },
+  "Unlock_Picking_Tier3": {
+    "localized_name": "Profesjonalne narzędzie do otwierania zamków",
+    "description": "Nie ma klucza? Nie ma problemu! Te narzędzia pozwolą ci spróbować wyważyć każdą skrzynię skarbów, która normalnie wymaga przedmiotu typu Złoty klucz."
+  },
+  "WallSignboard": {
+    "localized_name": "WallSignBoard",
+    "description": "Tablica do pisania. Można ją zawiesić na ścianie."
+  },
+  "WallTorch": {
+    "localized_name": "Pochodnia ścienna",
+    "description": "Umieść na ścianie, by oświetlić otoczenie."
+  },
+  "WaterBuildKit": {
+    "localized_name": "Zestaw do budowania na wodzie",
+    "description": "Zestaw do budowania na wodzie. Pozwala stawiać fundamenty na powierzchni wody."
+  },
+  "WeaponFactory_Dirty_04": {
+    "localized_name": "Zbrojownia zaawansowanej cywilizacji",
+    "description": "Linia produkcyjna do wytwarzania broni i amunicji. Dzięki zastosowaniu zaawansowanej technologii możliwe jest bardzo szybkie ich wykonanie. Produkcja wymaga Pali potrafiących pracować rękami."
+  },
+  "WidePenetrateShotgun": {
+    "localized_name": "Rozszczepiacz wiązki",
+    "description": "Broń wiązkowa stworzona z myślą o walce na krótkim dystansie. Wystrzeliwuje skompresowaną energię w postaci rozproszonej wiązki."
+  },
+  "WidePenetrateShotgunBullet": {
+    "localized_name": "Amunicja: Rozszczepiacz wiązki",
+    "description": "Amunicja do broni, takiej jak Rozszczepiacz wiązki. Do wytworzenia potrzebny jest Warsztat starożytnej cywilizacji."
+  },
+  "WingGlider": {
+    "localized_name": "Skrzydłoplecak",
+    "description": "Urządzenie ze skrzydłami, zakładane na plecy, służące do latania. Do uzyskania siły napędowej potrzebne jest Paliwo skrzydłoplecaka."
+  },
+  "WingGlider_Fuel": {
+    "localized_name": "Paliwo skrzydłoplecaka",
+    "description": "Źródło energii wykorzystywane przez urządzenie podczas lotu: Skrzydłoplecak."
+  },
+  "Wood_Gate": {
+    "localized_name": "Drewniana brama",
+    "description": "Drewniana brama wystarczająco duża, by mogły przez nią przechodzić duże Pale."
+  },
+  "Wooden_houseset": {
+    "localized_name": "Zestaw drewnianych konstrukcji",
+    "description": "Zestaw do budowy baz z drewna. Umożliwia stawianie drewnianych fundamentów, ścian, sufitów, schodów i innych elementów potrzebnych do schronienia."
+  },
+  "Wooden_ladder": {
+    "localized_name": "Drabina",
+    "description": "Drabina, dzięki której możesz wspiąć się na nieco wyższe miejsce."
+  },
+  "WorkSpeedIncrease1": {
+    "localized_name": "Generator fal beta",
+    "description": "Urządzenie emitujące fale beta, które pobudzają Pale. Zwiększa szybkość pracy Pali w bazie. Umieszczenie więcej niż jednego nie zwiększa efektu."
+  },
+  "Workbench": {
+    "localized_name": "Prymitywny stół warsztatowy",
+    "description": "Prymitywny stół warsztatowy do wytwarzania prostych przedmiotów. Pale z odpowiednią cechą Rzemiosło pomagają przyspieszyć produkcję."
+  },
+  "WorldTreeIngot": {
+    "localized_name": "Sztabka paloksytu",
+    "description": "Najwyższej jakości stop powstały z połączenia surowców Solit i Paloksyt. To niezwykle rzadki materiał, będący połączeniem technologii starożytnej cywilizacji i mocy Drzewa Świata. Niezbędny do tworzenia najwyższej klasy wyposażenia i budowli."
+  },
+  "YakushimaBlade": {
+    "localized_name": "Meowmere",
+    "description": "[Tides of Terraria] Legenda głosi, że ten miecz przywiózł z odległej krainy Croajiro. Nie wiadomo tylko po co. Przy każdym machnięciu wypuszcza kocie kule, które odbijają się i atakują przeciwników."
+  }
+}

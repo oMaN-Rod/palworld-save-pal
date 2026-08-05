@@ -4,6 +4,7 @@ export * from './debounce';
 export * from './deep-copy';
 export * from './keyMapper';
 export * from './modalUtils';
+export * from './palFilters';
 export * from './pals';
 export * from './palStorage';
 export * from './portal';

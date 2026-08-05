@@ -547,6 +547,14 @@
     "localized_name": "Espectáculo de trucos",
     "description": "Habilidad exclusiva de Dupin. Crea dos ilusiones para confundir al enemigo, mientras el cuerpo principal lanza aves de fuego desde un sombrero de copa."
   },
+  "EPalWazaID::Unique_CubeTurtle_CubePress": {
+    "localized_name": "Prensa de piedra",
+    "description": "Habilidad exclusiva de Tetroise . Salta como si flotara y aplasta al enemigo con su enorme peso."
+  },
+  "EPalWazaID::Unique_CubeTurtle_Neutral_HolyPress": {
+    "localized_name": "Prensa sagrada",
+    "description": "Habilidad exclusiva de Tetroise Primo. Salta como si flotara y aplasta al enemigo, luego expande luz y remata con pilares de luz."
+  },
   "EPalWazaID::Unique_CuteMole_DiggingAttack": {
     "localized_name": "Excavación ascendente",
     "description": "Habilidad exclusiva de Fuddler. Se entierra y emerge violentamente bajo el enemigo."

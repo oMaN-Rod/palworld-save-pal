@@ -151,6 +151,8 @@ fn build_filter(
             .filter_map(|pal_type| match pal_type.as_str() {
                 "alpha" => Some(PalTypeFilter::Alpha),
                 "lucky" => Some(PalTypeFilter::Lucky),
+                "awakened" => Some(PalTypeFilter::Awakened),
+                "imported" => Some(PalTypeFilter::Imported),
                 "human" => Some(PalTypeFilter::Human(human_character_ids(pals_data))),
                 "predator" => Some(PalTypeFilter::Predator),
                 "oilrig" => Some(PalTypeFilter::Oilrig),

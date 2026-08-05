@@ -21,483 +21,483 @@
   },
   "Attack_ACC_up1": {
     "localized_name": "เพิ่มพลังโจมตี Lv1",
-    "description": null
+    "description": "โจมตี +5.0%"
   },
   "Attack_ACC_up1_Armor": {
     "localized_name": "เพิ่งพลังโจมตี (เล็กน้อย) Lv1",
-    "description": null
+    "description": "โจมตี +3.0%"
   },
   "Attack_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังโจมตีของพาล Lv1",
-    "description": null
+    "description": "โจมตี +4.0%"
   },
   "Attack_ACC_up2": {
     "localized_name": "เพิ่มพลังโจมตี Lv2",
-    "description": null
+    "description": "โจมตี +10.0%"
   },
   "Attack_ACC_up2_Armor": {
     "localized_name": "เพิ่งพลังโจมตี (เล็กน้อย) Lv2",
-    "description": null
+    "description": "โจมตี +6.0%"
   },
   "Attack_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังโจมตีของพาล Lv2",
-    "description": null
+    "description": "โจมตี +8.0%"
   },
   "Attack_ACC_up3": {
     "localized_name": "เพิ่งพลังโจมตี Lv3",
-    "description": null
+    "description": "โจมตี +15.0%"
   },
   "Attack_ACC_up3_Armor": {
     "localized_name": "เพิ่งพลังโจมตี (เล็กน้อย) Lv3",
-    "description": null
+    "description": "โจมตี +9.0%"
   },
   "Attack_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังโจมตีของพาล Lv3",
-    "description": null
+    "description": "โจมตี +12.0%"
   },
   "Attack_ACC_up4": {
     "localized_name": "เพิ่มพลังโจมตี Lv4",
-    "description": null
+    "description": "โจมตี +20.0%"
   },
   "Attack_ACC_up4_Armor": {
     "localized_name": "เพิ่งพลังโจมตี (เล็กน้อย) Lv4",
-    "description": null
+    "description": "โจมตี +12.0%"
   },
   "Attack_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังโจมตีของพาล Lv4",
-    "description": null
+    "description": "โจมตี +16.0%"
   },
   "AutoHPRegeneRate_Passive": {
     "localized_name": "ฮีลลิ่งโค้ช",
-    "description": null
+    "description": "ปริมาณการฟื้นฟู HP ตามธรรมชาติของผู้เล่น+5.0%"
   },
   "AvoidDurationUp_EquipSkill_2": {
     "localized_name": "ยืดระยะเวลาคงกระพันของระยะเวลาฟื้น HP",
-    "description": null
+    "description": "AvoidDurationUp_EquipSkill +20.0%"
   },
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_Anubis": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_BadCatgirl": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_BerryGoat_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_BlackMetalDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร2.0%"
   },
   "BossDefeatReward_BlackPuppy": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_BlueDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ1.0%"
   },
   "BossDefeatReward_BlueThunderHorse": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า2.0%"
   },
   "BossDefeatReward_BlueberryFairy": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_CactusDoll": {
     "localized_name": "เพิ่มความเสียหายธาตุพืชเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_CaptainPenguin": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ1.0%"
   },
   "BossDefeatReward_CatMage": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_CatVampire": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_CubeTurtle": {
     "localized_name": "เพิ่มความเสียหายธาตุดินเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_CubeTurtle_Neutral": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ2.0%"
   },
   "BossDefeatReward_DarkScorpion": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_DarkScorpion_Ground": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_DomeArmorDragon": {
     "localized_name": "ความเสียหายธาตุดินเสริมพลังระดับสูง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร3.0%"
   },
   "BossDefeatReward_ElecLizard": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้าเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_ElecPanda": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้าปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า2.0%"
   },
   "BossDefeatReward_ElecSnail": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้าเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_FairyDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร1.0%"
   },
   "BossDefeatReward_FengyunDeeper": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "BossDefeatReward_FengyunDeeper_Electric": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า2.0%"
   },
   "BossDefeatReward_FireKirin": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "BossDefeatReward_FlameBuffalo": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_FlowerDoll": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_FoxExorcist": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ2.0%"
   },
   "BossDefeatReward_FoxMage": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "BossDefeatReward_GhostDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกรปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร2.0%"
   },
   "BossDefeatReward_GhostRabbit": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_GoldenHorse": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน2.0%"
   },
   "BossDefeatReward_GrassGolem": {
     "localized_name": "เพิ่มความเสียหายธาตุพืชปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_GrassGolem_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุมืดปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด2.0%"
   },
   "BossDefeatReward_GrassMammoth": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_GrassPanda_Electric": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_GrassRabbitMan": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_GrimGirl": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_HawkBird": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "BossDefeatReward_HerculesBeetle": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_HerculesBeetle_Ground": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน2.0%"
   },
   "BossDefeatReward_Horus_Water": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ2.0%"
   },
   "BossDefeatReward_IceFox": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็งเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง1.0%"
   },
   "BossDefeatReward_IceHorse": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง3.0%"
   },
   "BossDefeatReward_IceHorse_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_IceNarwhal": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง3.0%"
   },
   "BossDefeatReward_IceNarwhal_Fire": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ3.0%"
   },
   "BossDefeatReward_JetDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร3.0%"
   },
   "BossDefeatReward_KabukiMan": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ2.0%"
   },
   "BossDefeatReward_KingAlpaca": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "BossDefeatReward_KingAlpaca_Ice": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง2.0%"
   },
   "BossDefeatReward_KingBahamut": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ3.0%"
   },
   "BossDefeatReward_Kirin": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_Kitsunebi_Ice": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง3.0%"
   },
   "BossDefeatReward_LazyCatfish": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_LazyDragon_Electric": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร1.0%"
   },
   "BossDefeatReward_LilyQueen": {
     "localized_name": "เพิ่มความเสียหายธาตุพืชมาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช3.0%"
   },
   "BossDefeatReward_LilyQueen_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_LotusDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ2.0%"
   },
   "BossDefeatReward_Manticore": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "BossDefeatReward_MoonChild": {
     "localized_name": "เพิ่มความเสียหายธาตุมืดปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด2.0%"
   },
   "BossDefeatReward_MopKing": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง1.0%"
   },
   "BossDefeatReward_MushroomLady": {
     "localized_name": "เพิ่มความเสียหายธาตุพืชเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_Mutant": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "BossDefeatReward_MysteryMask": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_NaughtyCat": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "BossDefeatReward_NightBlueHorse": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_PinkRabbit_Grass": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_PlantSlime": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_PoseidonOrca": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำอย่างมาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ3.0%"
   },
   "BossDefeatReward_PurpleSpider": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_QueenBee": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_RaijinDaughter_Water": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_RockBeast": {
     "localized_name": "เพิ่มความเสียหายธาตุดินปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน2.0%"
   },
   "BossDefeatReward_RockBeast_Ice": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็งปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง2.0%"
   },
   "BossDefeatReward_Ronin": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ2.0%"
   },
   "BossDefeatReward_SaintCentaur_1": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ3.0%"
   },
   "BossDefeatReward_SaintCentaur_2": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "BossDefeatReward_SakuraSaurus": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "BossDefeatReward_SakuraSaurus_Water": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ1.0%"
   },
   "BossDefeatReward_ScorpionMan_Electric": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้าเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_SkyDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร1.0%"
   },
   "BossDefeatReward_Suzaku": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ3.0%"
   },
   "BossDefeatReward_ThunderBird": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_ThunderFluffyBird": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้าเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "BossDefeatReward_Umihebi": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ2.0%"
   },
   "BossDefeatReward_VioletFairy": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "BossDefeatReward_VolcanicMonster": {
     "localized_name": "เพิ่มความเสียหายธาตุดินเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_VolcanoDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟเล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "BossDefeatReward_VolcanoDragon_Ice": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็งปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง2.0%"
   },
   "BossDefeatReward_WeaselDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง1.0%"
   },
   "BossDefeatReward_Werewolf_Ice": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง3.0%"
   },
   "BossDefeatReward_WhiteDeer": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ2.0%"
   },
   "BossDefeatReward_WhiteDeer_Dark": {
     "localized_name": "เพิ่มความเสียหายธาตุมืดปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด2.0%"
   },
   "BossDefeatReward_WhiteMoth": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง1.0%"
   },
   "BossDefeatReward_WhiteShieldDragon": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร2.0%"
   },
   "BossDefeatReward_WhiteTiger_Ground": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน2.0%"
   },
   "BossDefeatReward_WingGolem": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "BossDefeatReward_Yeti_Grass": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "CaptureLevel_Up_1": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +1",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +1.0"
   },
   "CaptureLevel_Up_2": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +2",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +2.0"
   },
   "CaptureLevel_Up_3": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +3",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +3.0"
   },
   "CaptureLevel_Up_4": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +4",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +4.0"
   },
   "CaptureLevel_Up_5": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +5",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +5.0"
   },
   "CaptureLevel_Up_6": {
     "localized_name": "เพิ่มโอกาสจับสำเร็จ +6",
-    "description": null
+    "description": "โอกาสจับสำเร็จ +6.0"
   },
   "CollectItem_Berries": {
     "localized_name": "นักเด็ดเบอร์รี",
@@ -549,51 +549,51 @@
   },
   "CraftSpeed_down1": {
     "localized_name": "งุ่มง่าม",
-    "description": null
+    "description": "ความเร็วการทำงาน -10.0%"
   },
   "CraftSpeed_down2": {
     "localized_name": "จอมอู้",
-    "description": null
+    "description": "ความเร็วการทำงาน -30.0%"
   },
   "CraftSpeed_up1": {
     "localized_name": "จริงจัง",
-    "description": null
+    "description": "ความเร็วการทำงาน +20.0%"
   },
   "CraftSpeed_up2": {
     "localized_name": "ช่างฝีมือ",
-    "description": null
+    "description": "ความเร็วการทำงาน +50.0%"
   },
   "CraftSpeed_up3": {
     "localized_name": "ยอดฝีมือ",
-    "description": null
+    "description": "ความเร็วการทำงาน +75.0%"
   },
   "Defense_ACC_up1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังป้องกันของพาล Lv1",
-    "description": null
+    "description": "ป้องกัน +5.0%"
   },
   "Defense_ACC_up2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังป้องกันของพาล Lv2",
-    "description": null
+    "description": "ป้องกัน +10.0%"
   },
   "Defense_ACC_up3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังป้องกันของพาล Lv3",
-    "description": null
+    "description": "ป้องกัน +15.0%"
   },
   "Defense_ACC_up4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มพลังป้องกันของพาล Lv4",
-    "description": null
+    "description": "ป้องกัน +20.0%"
   },
   "Deffence_down1": {
     "localized_name": "ปวกเปียก",
-    "description": null
+    "description": "ป้องกัน -10.0%"
   },
   "Deffence_down2": {
     "localized_name": "กระดูกเปราะ",
-    "description": null
+    "description": "ป้องกัน -20.0%"
   },
   "Deffence_up1": {
     "localized_name": "หนังเหนียว",
-    "description": null
+    "description": "ป้องกัน +10.0%"
   },
   "Deffence_up2": {
     "localized_name": "ร่างบึกบึน",
@@ -609,7 +609,7 @@
   },
   "Defuser_ExplosiveSpore_EquipSkill": {
     "localized_name": "ลดความเสียหายธาตุมังกร%",
-    "description": null
+    "description": "Defuser_ExplosiveSpore +1.0 ExplosionResist +100.0%"
   },
   "ElementBoost_Aqua_1_PAL": {
     "localized_name": "ชอบเล่นน้ำ",
@@ -617,15 +617,15 @@
   },
   "ElementBoost_Aqua_2_PAL": {
     "localized_name": "เจ้าสมุทร",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ30.0%"
   },
   "ElementBoost_Dark_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด1.0%"
   },
   "ElementBoost_Dark_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมืด Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด6.0%"
   },
   "ElementBoost_Dark_1_PAL": {
     "localized_name": "ม่านราตรี",
@@ -633,35 +633,35 @@
   },
   "ElementBoost_Dark_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด2.0%"
   },
   "ElementBoost_Dark_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมืด Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด12.0%"
   },
   "ElementBoost_Dark_2_PAL": {
     "localized_name": "ยมบาล",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด30.0%"
   },
   "ElementBoost_Dark_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุความมืด มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด3.0%"
   },
   "ElementBoost_Dark_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมืด Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด18.0%"
   },
   "ElementBoost_Dark_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมืด Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด20.0%"
   },
   "ElementBoost_Dragon_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร1.0%"
   },
   "ElementBoost_Dragon_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมังกร Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร6.0%"
   },
   "ElementBoost_Dragon_1_PAL": {
     "localized_name": "สายเลือดมังกร",
@@ -669,35 +669,35 @@
   },
   "ElementBoost_Dragon_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร2.0%"
   },
   "ElementBoost_Dragon_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมังกร Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร12.0%"
   },
   "ElementBoost_Dragon_2_PAL": {
     "localized_name": "เทพมังกร",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร30.0%"
   },
   "ElementBoost_Dragon_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุมังกร มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร3.0%"
   },
   "ElementBoost_Dragon_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมังกร Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร18.0%"
   },
   "ElementBoost_Dragon_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุมังกร Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุมังกร20.0%"
   },
   "ElementBoost_Earth_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน1.0%"
   },
   "ElementBoost_Earth_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุดิน Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน6.0%"
   },
   "ElementBoost_Earth_1_PAL": {
     "localized_name": "พลังพสุธา",
@@ -705,63 +705,63 @@
   },
   "ElementBoost_Earth_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน2.0%"
   },
   "ElementBoost_Earth_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุดิน Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน12.0%"
   },
   "ElementBoost_Earth_2_PAL": {
     "localized_name": "เจ้าพสุธา",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน30.0%"
   },
   "ElementBoost_Earth_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุดิน มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน3.0%"
   },
   "ElementBoost_Earth_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุดิน Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน18.0%"
   },
   "ElementBoost_Earth_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุดิน Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุดิน20.0%"
   },
   "ElementBoost_Electricity_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า1.0%"
   },
   "ElementBoost_Electricity_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุสายฟ้า Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า6.0%"
   },
   "ElementBoost_Electricity_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า2.0%"
   },
   "ElementBoost_Electricity_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุสายฟ้า Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า12.0%"
   },
   "ElementBoost_Electricity_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุสายฟ้า มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า3.0%"
   },
   "ElementBoost_Electricity_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุสายฟ้า Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า18.0%"
   },
   "ElementBoost_Electricity_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุสายฟ้า Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า20.0%"
   },
   "ElementBoost_Fire_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ1.0%"
   },
   "ElementBoost_Fire_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุไฟ Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ6.0%"
   },
   "ElementBoost_Fire_1_PAL": {
     "localized_name": "ชอบเล่นไฟ",
@@ -769,35 +769,35 @@
   },
   "ElementBoost_Fire_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ2.0%"
   },
   "ElementBoost_Fire_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุไฟ Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ12.0%"
   },
   "ElementBoost_Fire_2_PAL": {
     "localized_name": "เจ้าแห่งเพลิง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ30.0%"
   },
   "ElementBoost_Fire_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุไฟ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ3.0%"
   },
   "ElementBoost_Fire_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุไฟ Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ18.0%"
   },
   "ElementBoost_Fire_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุไฟ Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ20.0%"
   },
   "ElementBoost_Ice_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง1.0%"
   },
   "ElementBoost_Ice_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำแข็ง Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง6.0%"
   },
   "ElementBoost_Ice_1_PAL": {
     "localized_name": "เลือดเย็น",
@@ -805,35 +805,35 @@
   },
   "ElementBoost_Ice_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง2.0%"
   },
   "ElementBoost_Ice_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำแข็ง Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง12.0%"
   },
   "ElementBoost_Ice_2_PAL": {
     "localized_name": "เจ้าแห่งน้ำแข็ง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง30.0%"
   },
   "ElementBoost_Ice_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำแข็ง มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง3.0%"
   },
   "ElementBoost_Ice_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำแข็ง Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง18.0%"
   },
   "ElementBoost_Ice_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำแข็ง Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง20.0%"
   },
   "ElementBoost_Leaf_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช1.0%"
   },
   "ElementBoost_Leaf_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุพืช Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช6.0%"
   },
   "ElementBoost_Leaf_1_PAL": {
     "localized_name": "กลิ่นใบหญ้า",
@@ -841,35 +841,35 @@
   },
   "ElementBoost_Leaf_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช2.0%"
   },
   "ElementBoost_Leaf_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุพืช Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช12.0%"
   },
   "ElementBoost_Leaf_2_PAL": {
     "localized_name": "เจ้าแห่งภูต",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช30.0%"
   },
   "ElementBoost_Leaf_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุพืช มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช3.0%"
   },
   "ElementBoost_Leaf_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุพืช Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช18.0%"
   },
   "ElementBoost_Leaf_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุพืช Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุพืช20.0%"
   },
   "ElementBoost_Normal_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ1.0%"
   },
   "ElementBoost_Normal_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลไร้ธาตุ Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ6.0%"
   },
   "ElementBoost_Normal_1_PAL": {
     "localized_name": "อนัตตา",
@@ -877,27 +877,27 @@
   },
   "ElementBoost_Normal_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ2.0%"
   },
   "ElementBoost_Normal_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลไร้ธาตุ Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ12.0%"
   },
   "ElementBoost_Normal_2_PAL": {
     "localized_name": "สวรรค์ศักดิ์สิทธิ์",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ30.0%"
   },
   "ElementBoost_Normal_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายไร้ธาตุ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ3.0%"
   },
   "ElementBoost_Normal_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลไร้ธาตุ Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ18.0%"
   },
   "ElementBoost_Normal_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลไร้ธาตุ Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีไร้ธาตุ20.0%"
   },
   "ElementBoost_Thunder_1_PAL": {
     "localized_name": "ตัวเก็บประจุ",
@@ -905,39 +905,39 @@
   },
   "ElementBoost_Thunder_2_PAL": {
     "localized_name": "เจ้าแห่งอัสนี",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุสายฟ้า30.0%"
   },
   "ElementBoost_Water_1_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ เล็กน้อย",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ1.0%"
   },
   "ElementBoost_Water_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำ Lv1",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ6.0%"
   },
   "ElementBoost_Water_2_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ ปานกลาง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ2.0%"
   },
   "ElementBoost_Water_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำ Lv2",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ12.0%"
   },
   "ElementBoost_Water_3_BossDefeat": {
     "localized_name": "เพิ่มความเสียหายธาตุน้ำ มาก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ3.0%"
   },
   "ElementBoost_Water_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำ Lv3",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ18.0%"
   },
   "ElementBoost_Water_4_Otomo_Only_Equip": {
     "localized_name": "เพิ่มความเสียหายของพาลธาตุน้ำ Lv4",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ20.0%"
   },
   "ElementResist_Aqua_1": {
     "localized_name": "ลดความเสียหายธาตุน้ำ Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำ15.0%"
   },
   "ElementResist_Aqua_1_PAL": {
     "localized_name": "กันน้ำ",
@@ -945,19 +945,19 @@
   },
   "ElementResist_Aqua_2": {
     "localized_name": "ลดความเสียหายธาตุน้ำ Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำ25.0%"
   },
   "ElementResist_Aqua_3": {
     "localized_name": "ลดความเสียหายธาตุน้ำ Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำ30.0%"
   },
   "ElementResist_Aqua_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุน้ำ Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำ35.0%"
   },
   "ElementResist_Dark_1": {
     "localized_name": "ลดความเสียหายธาตุความมืด Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุความมืด15.0%"
   },
   "ElementResist_Dark_1_PAL": {
     "localized_name": "คนมืดมน",
@@ -965,19 +965,19 @@
   },
   "ElementResist_Dark_2": {
     "localized_name": "ลดความเสียหายธาตุความมืด Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุความมืด25.0%"
   },
   "ElementResist_Dark_3": {
     "localized_name": "ลดความเสียหายธาตุความมืด Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุความมืด30.0%"
   },
   "ElementResist_Dark_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุมืด Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุความมืด35.0%"
   },
   "ElementResist_Dragon_1": {
     "localized_name": "ลดความเสียหายธาตุมังกร Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุมังกร15.0%"
   },
   "ElementResist_Dragon_1_PAL": {
     "localized_name": "ดรากอนคิลเลอร์",
@@ -985,19 +985,19 @@
   },
   "ElementResist_Dragon_2": {
     "localized_name": "ลดความเสียหายธาตุมังกร Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุมังกร25.0%"
   },
   "ElementResist_Dragon_3": {
     "localized_name": "ลดความเสียหายธาตุมังกร Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุมังกร30.0%"
   },
   "ElementResist_Dragon_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุมังกร Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุมังกร35.0%"
   },
   "ElementResist_Earth_1": {
     "localized_name": "ลดความเสียหายธาตุดิน Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุดิน15.0%"
   },
   "ElementResist_Earth_1_PAL": {
     "localized_name": "ต้านแผ่นดินไหว",
@@ -1005,19 +1005,19 @@
   },
   "ElementResist_Earth_2": {
     "localized_name": "ลดความเสียหายธาตุดิน Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุดิน25.0%"
   },
   "ElementResist_Earth_3": {
     "localized_name": "ลดความเสียหายธาตุดิน Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุดิน30.0%"
   },
   "ElementResist_Earth_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุดิน Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุดิน35.0%"
   },
   "ElementResist_Fire_1": {
     "localized_name": "ลดความเสียหายธาตุไฟ Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุไฟ15.0%"
   },
   "ElementResist_Fire_1_PAL": {
     "localized_name": "ชอบอาบแดด",
@@ -1025,19 +1025,19 @@
   },
   "ElementResist_Fire_2": {
     "localized_name": "ลดความเสียหายธาตุไฟ Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุไฟ25.0%"
   },
   "ElementResist_Fire_3": {
     "localized_name": "ลดความเสียหายธาตุไฟ Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุไฟ30.0%"
   },
   "ElementResist_Fire_4": {
     "localized_name": "ลดความเสียหายธาตุไฟ Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุไฟ35.0%"
   },
   "ElementResist_Ice_1": {
     "localized_name": "ลดความเสียหายธาตุน้ำแข็ง Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำแข็ง15.0%"
   },
   "ElementResist_Ice_1_PAL": {
     "localized_name": "ตัวอุ่น",
@@ -1045,19 +1045,19 @@
   },
   "ElementResist_Ice_2": {
     "localized_name": "ลดความเสียหายธาตุน้ำแข็ง Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำแข็ง25.0%"
   },
   "ElementResist_Ice_3": {
     "localized_name": "ลดความเสียหายธาตุน้ำแข็ง Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำแข็ง30.0%"
   },
   "ElementResist_Ice_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุน้ำแข็ง Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุน้ำแข็ง35.0%"
   },
   "ElementResist_Leaf_1": {
     "localized_name": "ลดความเสียหายธาตุพืช Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุพืช15.0%"
   },
   "ElementResist_Leaf_1_PAL": {
     "localized_name": "ต้านวัชพืช",
@@ -1065,19 +1065,19 @@
   },
   "ElementResist_Leaf_2": {
     "localized_name": "ลดความเสียหายธาตุพืช Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุพืช25.0%"
   },
   "ElementResist_Leaf_3": {
     "localized_name": "ลดความเสียหายธาตุพืช Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุพืช30.0%"
   },
   "ElementResist_Leaf_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุพืช Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุพืช35.0%"
   },
   "ElementResist_Normal_1": {
     "localized_name": "ลดความเสียหายไร้ธาตุ Lv1",
-    "description": null
+    "description": "ลดความเสียหายไร้ธาตุ15.0%"
   },
   "ElementResist_Normal_1_PAL": {
     "localized_name": "วิสามัญ",
@@ -1085,19 +1085,19 @@
   },
   "ElementResist_Normal_2": {
     "localized_name": "ลดความเสียหายไร้ธาตุ Lv2",
-    "description": null
+    "description": "ลดความเสียหายไร้ธาตุ25.0%"
   },
   "ElementResist_Normal_3": {
     "localized_name": "ลดความเสียหายไร้ธาตุ Lv3",
-    "description": null
+    "description": "ลดความเสียหายไร้ธาตุ30.0%"
   },
   "ElementResist_Normal_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุ Lv4",
-    "description": null
+    "description": "ลดความเสียหายไร้ธาตุ35.0%"
   },
   "ElementResist_Thunder_1": {
     "localized_name": "ลดความเสียหายธาตุสายฟ้า Lv1",
-    "description": null
+    "description": "ลดความเสียหายธาตุสายฟ้า15.0%"
   },
   "ElementResist_Thunder_1_PAL": {
     "localized_name": "ฉนวนไฟฟ้า",
@@ -1105,31 +1105,35 @@
   },
   "ElementResist_Thunder_2": {
     "localized_name": "ลดความเสียหายธาตุสายฟ้า Lv2",
-    "description": null
+    "description": "ลดความเสียหายธาตุสายฟ้า25.0%"
   },
   "ElementResist_Thunder_3": {
     "localized_name": "ลดความเสียหายธาตุสายฟ้า Lv3",
-    "description": null
+    "description": "ลดความเสียหายธาตุสายฟ้า30.0%"
   },
   "ElementResist_Thunder_4": {
     "localized_name": "ลดความเสียหายไร้ธาตุสายฟ้า Lv4",
-    "description": null
+    "description": "ลดความเสียหายธาตุสายฟ้า35.0%"
   },
   "EternalFlame": {
     "localized_name": "เพลิงนิรันดร์",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุไฟ30.0% เพิ่มความเสียหายการโจมตีธาตุสายฟ้า30.0%"
   },
   "FriendshipPoint_Increase_EquipSkill": {
     "localized_name": "เพิ่มปริมาณระดับความน่าเชื่อถือของพาลในทีม",
-    "description": null
+    "description": "ค่าความเชื่อใจ +50.0%"
+  },
+  "FullStomach_Down_1_BossDefeat": {
+    "localized_name": "FullStomach_Down_1_BossDefeat",
+    "description": "ค่าความอิ่มลดช้าลง <NumBlue_13>+10.0%</>"
   },
   "GYM_NAME_Desert": {
     "localized_name": "ผู้บริหารสันติบาลเกาะพาลพากอส",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Forest": {
     "localized_name": "องค์กรผู้พิทักษ์พาล ผู้ก่อตั้ง",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Meadow": {
     "localized_name": "ผู้บริหารขบวนการพรานเถื่อน",
@@ -1137,43 +1141,43 @@
   },
   "GYM_NAME_Sakurajima": {
     "localized_name": "กลุ่มบุปผาจันทรา ผู้นำ",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Snow": {
     "localized_name": "กองกำลังวิจัยพันธุกรรมพาล หัวหน้าหน่วย",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Viking": {
     "localized_name": "ชาวสวรรค์ล่ม บอส",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "GYM_NAME_Volcano": {
     "localized_name": "ภารดรเพลิงนิรันดร์ ผู้นำจิตวิญญาณ",
-    "description": null
+    "description": "โจมตี +20.0% MoveSpeed +10.0%"
   },
   "HP_ACC_up1": {
     "localized_name": "เพิ่ม HP Lv1",
-    "description": null
+    "description": "HP สูงสุด +10.0%"
   },
   "HP_ACC_up2": {
     "localized_name": "เพิ่ม HP Lv2",
-    "description": null
+    "description": "HP สูงสุด +15.0%"
   },
   "HP_ACC_up3": {
     "localized_name": "เพิ่ม HP Lv3",
-    "description": null
+    "description": "HP สูงสุด +20.0%"
   },
   "HP_ACC_up4": {
     "localized_name": "เพิ่ม HP Lv4",
-    "description": null
+    "description": "HP สูงสุด +25.0%"
   },
   "Invader": {
     "localized_name": "ผู้บุกรุก",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด30.0% เพิ่มความเสียหายการโจมตีธาตุมังกร30.0%"
   },
   "Invalid_ToxicGas_EquipSkill": {
     "localized_name": "ดาเมจระเบิดไม่ได้ผล",
-    "description": null
+    "description": "InvalidToxicGas"
   },
   "JumpCount_Increase1": {
     "localized_name": "เพิ่มจำนวนการกระโดด +1",
@@ -1197,35 +1201,35 @@
   },
   "MaxInventoryWeight_up": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv1",
-    "description": null
+    "description": "ปริมาณความจุ +50.0%"
   },
   "MaxInventoryWeight_up2": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv2",
-    "description": null
+    "description": "ปริมาณความจุ +150.0%"
   },
   "MaxInventoryWeight_up3": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv3",
-    "description": null
+    "description": "ปริมาณความจุ +200.0%"
   },
   "MaxInventoryWeight_up_Equip_1": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv1",
-    "description": null
+    "description": "ปริมาณความจุ +50.0%"
   },
   "MaxInventoryWeight_up_Equip_2": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv2",
-    "description": null
+    "description": "ปริมาณความจุ +100.0%"
   },
   "MaxInventoryWeight_up_Equip_3": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv3",
-    "description": null
+    "description": "ปริมาณความจุ +200.0%"
   },
   "MaxInventoryWeight_up_Equip_4": {
     "localized_name": "เพิ่มปริมาณความจุสูงสุด Lv4",
-    "description": null
+    "description": "ปริมาณความจุ +300.0%"
   },
   "MiniNushi": {
     "localized_name": "ตัวตึง",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุน้ำ5.0% เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง5.0% พลังป้องกัน+5.0%"
   },
   "MoveSpeed_up_1": {
     "localized_name": "ว่องไว",
@@ -1253,7 +1257,7 @@
   },
   "MutationPal_Mutant": {
     "localized_name": "ร่างกายพิเศษ",
-    "description": "ปริมาณการฟื้นคืนค่าพลังชีวิตโดยธรรมชาติของพาลเเละผู้เล่น+50.0% ป้องกัน+{EffectValue4}% ความเสียหายจากสถานะพิษ<Status_Up>ป้องกันได้</> ความเสียหายจากสถานะเพลิง<Status_Up>ป้องกันได้</>"
+    "description": "ปริมาณการฟื้นคืนค่าพลังชีวิตโดยธรรมชาติของพาลเเละผู้เล่น+50.0% ป้องกัน+25.0% ความเสียหายจากสถานะพิษ<Status_Up>ป้องกันได้</> ความเสียหายจากสถานะเพลิง<Status_Up>ป้องกันได้</>"
   },
   "NightOwl": {
     "localized_name": "อยู่จนดึก",
@@ -1269,7 +1273,7 @@
   },
   "Noukin": {
     "localized_name": "หน่วยใช้กำลัง",
-    "description": null
+    "description": "โจมตี +30.0% ความเร็วการทำงาน -50.0%"
   },
   "Nushi": {
     "localized_name": "เจ้าถิ่น",
@@ -1277,31 +1281,31 @@
   },
   "OctaviaArmorVampire": {
     "localized_name": "บลัดฟิวเอล",
-    "description": null
+    "description": "เมื่อสร้างความเสียหาย จะดูดซับความเสียหายส่วนหนึ่งมาฟื้นHP แม้จะดึกแล้วแต่ก็ไม่นอน ยังทำงานต่อ"
   },
   "PAL_ALLAttack_down1": {
     "localized_name": "ขี้ขลาด",
-    "description": null
+    "description": "โจมตี -10.0%"
   },
   "PAL_ALLAttack_down2": {
     "localized_name": "ไม่ชอบมีเรื่อง",
-    "description": null
+    "description": "โจมตี -20.0%"
   },
   "PAL_ALLAttack_up1": {
     "localized_name": "กล้าหาญ",
-    "description": null
+    "description": "โจมตี +10.0%"
   },
   "PAL_ALLAttack_up2": {
     "localized_name": "ดุร้าย",
-    "description": null
+    "description": "โจมตี +20.0%"
   },
   "PAL_ALLAttack_up3": {
     "localized_name": "เทพมาร",
-    "description": null
+    "description": "โจมตี +30.0% ป้องกัน +5.0%"
   },
   "PAL_CorporateSlave": {
     "localized_name": "แรงงานทาส",
-    "description": null
+    "description": "ความเร็วการทำงาน +30.0% โจมตี -30.0%"
   },
   "PAL_FullStomach_Down_1": {
     "localized_name": "กินน้อย",
@@ -1345,51 +1349,51 @@
   },
   "PAL_SpiritualInst": {
     "localized_name": "-",
-    "description": null
+    "description": "ความเร็วการทำงาน -10.0% ป้องกัน -10.0%"
   },
   "PAL_conceited": {
     "localized_name": "หลงตัวเอง",
-    "description": null
+    "description": "ความเร็วการทำงาน +10.0% ป้องกัน -10.0%"
   },
   "PAL_masochist": {
     "localized_name": "มาโซคิสต์",
-    "description": null
+    "description": "ป้องกัน +15.0% โจมตี -15.0%"
   },
   "PAL_oraora": {
     "localized_name": "บ้าพลัง",
-    "description": null
+    "description": "โจมตี +10.0% ป้องกัน -10.0%"
   },
   "PAL_rude": {
     "localized_name": "อันธพาล",
-    "description": null
+    "description": "โจมตี +15.0% ความเร็วการทำงาน -10.0%"
   },
   "PAL_sadist": {
     "localized_name": "ซาดิสต์",
-    "description": null
+    "description": "โจมตี +15.0% ป้องกัน -15.0%"
   },
   "PalExp_Increase_1_Otomo_Only_Equip": {
     "localized_name": "เพิ่มค่าประสบการณ์ของพาล Lv1",
-    "description": null
+    "description": "PalExp_Increase +30.0%"
   },
   "PalExp_Increase_2_Otomo_Only_Equip": {
     "localized_name": "เพิ่มค่าประสบการณ์ของพาล Lv2",
-    "description": null
+    "description": "PalExp_Increase +40.0%"
   },
   "PalExp_Increase_3_Otomo_Only_Equip": {
     "localized_name": "เพิ่มค่าประสบการณ์ของพาล Lv3",
-    "description": null
+    "description": "PalExp_Increase +50.0%"
   },
   "PlayerSP_DecreaseRate_Passive": {
     "localized_name": "ประเภทป้องกันความเหนื่อยล้า",
-    "description": null
+    "description": "ความเร็วการลดของสตามิน่าของผู้เล่น +<NumBlue_13>5.0</>%"
   },
   "Rare": {
     "localized_name": "นำโชค",
-    "description": null
+    "description": "โจมตี +15.0% ป้องกัน +15.0% ความเร็วการทำงาน +20.0%"
   },
   "ReloadSpeedUp_Passive": {
     "localized_name": "รีโหลดมาสเตอร์",
-    "description": null
+    "description": "เพิ่มความเร็วในการบรรจุกระสุนของผู้เล่น +4.0%"
   },
   "RideJumpCount_Increase1": {
     "localized_name": "ตัวเบา",
@@ -1413,7 +1417,7 @@
   },
   "Salvation": {
     "localized_name": "ผู้ช่วยให้รอด",
-    "description": null
+    "description": "ความเสียหายจากการโจมตีที่ไร้ธาตุเพิ่มขึ้น30.0％ ความเสียหายจากการโจมตีของธาตุพืชเพิ่มขึ้น30.0％"
   },
   "SelfDeathAddItemDrop_up_1": {
     "localized_name": "แบ่งปันเล็กน้อย",
@@ -1497,47 +1501,47 @@
   },
   "SwimSpeed_up_2": {
     "localized_name": "ว่ายน้ำอย่างชำนาญ",
-    "description": null
+    "description": "เพิ่มความเร็วเคลื่อนที่บนน้ำ40.0%"
   },
   "SwimSpeed_up_3": {
     "localized_name": "ราชันเเห่งการโต้คลื่น",
-    "description": null
+    "description": "เพิ่มความเร็วเคลื่อนที่บนน้ำ50.0%"
   },
   "TemperatureResist_Cold1": {
     "localized_name": "ทนหนาว Lv1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0"
   },
   "TemperatureResist_Cold2": {
     "localized_name": "ทนหนาว Lv2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0"
   },
   "TemperatureResist_Cold3": {
     "localized_name": "ทนหนาว Lv3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0"
   },
   "TemperatureResist_Heat1": {
     "localized_name": "ทนร้อน Lv1",
-    "description": null
+    "description": "TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat1Cold1": {
     "localized_name": "ทนร้อน Lv1 / ทนหนาว Lv1",
-    "description": null
+    "description": "TemperatureResist_Cold +1.0 TemperatureResist_Heat +1.0"
   },
   "TemperatureResist_Heat2": {
     "localized_name": "ทนร้อน Lv2",
-    "description": null
+    "description": "TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat2Cold2": {
     "localized_name": "ทนร้อน Lv2 / ทนหนาว Lv2",
-    "description": null
+    "description": "TemperatureResist_Cold +2.0 TemperatureResist_Heat +2.0"
   },
   "TemperatureResist_Heat3": {
     "localized_name": "ทนร้อน Lv3",
-    "description": null
+    "description": "TemperatureResist_Heat +3.0"
   },
   "TemperatureResist_Heat3Cold3": {
     "localized_name": "ทนร้อน Lv3 / ทนหนาว Lv3",
-    "description": null
+    "description": "TemperatureResist_Cold +3.0 TemperatureResist_Heat +3.0"
   },
   "Test_PalEgg_HatchingSpeed_Up": {
     "localized_name": "คนใจบุญ",
@@ -1569,7 +1573,7 @@
   },
   "Witch": {
     "localized_name": "แม่มด",
-    "description": null
+    "description": "เพิ่มความเสียหายการโจมตีธาตุความมืด30.0% เพิ่มความเสียหายการโจมตีธาตุน้ำแข็ง30.0%"
   },
   "WoodDrop_Boost_1": {
     "localized_name": "ปริมาณตัดไม้เพิ่มLv1",
@@ -1593,19 +1597,19 @@
   },
   "WorkSpeed_ACC_up1": {
     "localized_name": "ทำงานรวดเร็ว Lv1",
-    "description": null
+    "description": "ความเร็วการทำงาน +10.0%"
   },
   "WorkSpeed_ACC_up2": {
     "localized_name": "ทำงานรวดเร็ว Lv2",
-    "description": null
+    "description": "ความเร็วการทำงาน +15.0%"
   },
   "WorkSpeed_ACC_up3": {
     "localized_name": "ทำงานรวดเร็ว Lv3",
-    "description": null
+    "description": "ความเร็วการทำงาน +20.0%"
   },
   "WorkSpeed_ACC_up4": {
     "localized_name": "ทำงานรวดเร็ว Lv4",
-    "description": null
+    "description": "ความเร็วการทำงาน +25.0%"
   },
   "WorkSuitabilityAddRank_MonsterFarm_1": {
     "localized_name": "เด็กฟาร์ม",
@@ -1645,38 +1649,38 @@
   },
   "YakushimaDagameBoost_Magic_Equip": {
     "localized_name": "พลังศักดิ์สิทธิ์-เวทย์มนต์",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMagicWeapon +20.0%"
   },
   "YakushimaDagameBoost_Melee_Equip": {
     "localized_name": "พลังศักดิ์สิทธิ์-ระยะใกล้",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaMeleeWeapon +20.0%"
   },
   "YakushimaDagameBoost_Ranged_Equip": {
     "localized_name": "พลังศักดิ์สิทธิ์-ระยะไกล",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaRangedWeapon +20.0%"
   },
   "YakushimaDagameBoost_Summon_Equip": {
     "localized_name": "พลังศักดิ์สิทธิ์-อัญเชิญ",
-    "description": null
+    "description": "DamageUpIfEquipped_YakushimaSummonWeapon +20.0%"
   },
   "YakushimaProtection_Equip": {
     "localized_name": "ผู้พิทักษ์ศักดิ์สิทธิ์",
-    "description": null
+    "description": "ForYakushimaDefenceRate +30.0%"
   },
   "defense_ACC_up1": {
     "localized_name": "เพิ่มพลังป้องกัน Lv1",
-    "description": null
+    "description": "ป้องกัน +10.0%"
   },
   "defense_ACC_up2": {
     "localized_name": "เพิ่มพลังป้องกัน Lv2",
-    "description": null
+    "description": "ป้องกัน +15.0%"
   },
   "defense_ACC_up3": {
     "localized_name": "เพิ่มพลังป้องกัน Lv3",
-    "description": null
+    "description": "ป้องกัน +20.0%"
   },
   "defense_ACC_up4": {
     "localized_name": "เพิ่มพลังป้องกัน Lv4",
-    "description": null
+    "description": "ป้องกัน +25.0%"
   }
 }
