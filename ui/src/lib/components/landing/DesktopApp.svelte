@@ -10,7 +10,7 @@
 	>
 		<Monitor class="text-primary-400 h-16 w-16 shrink-0" />
 		<div class="text-center sm:text-left">
-			<h2 class="h3 font-bold">{m.landing_desktop_heading()}</h2>
+			<h2 class="heading-gradient h3 font-bold">{m.landing_desktop_heading()}</h2>
 			<p class="text-surface-300 mt-2">
 				{m.landing_desktop_body()}
 			</p>

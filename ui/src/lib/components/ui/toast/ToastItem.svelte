@@ -26,7 +26,7 @@
 </script>
 
 <div
-	class="relative flex min-h-16 max-w-1/2 min-w-60 flex-col items-center justify-center rounded-md border p-4 text-white shadow-md backdrop-blur-sm {colorClasses}"
+	class="relative flex min-h-16 min-w-60 max-w-md flex-col items-center justify-center rounded-md border p-4 text-white shadow-md backdrop-blur-sm {colorClasses}"
 	transition:transition={transitionParams}
 >
 	<span class="font-bold">{toast.title}</span>

@@ -31,7 +31,9 @@
 </script>
 
 <section class="relative w-full overflow-hidden px-4 py-16">
-	<h2 class="h2 mb-8 text-center font-bold">{m.landing_faq_heading()}</h2>
+	<h2 class="heading-gradient h2 mb-8 text-center font-bold">
+		{m.landing_faq_heading()}
+	</h2>
 	<div class="mx-auto flex max-w-3xl flex-col gap-3">
 		{#each faqs as item, i (i)}
 			<details class="card group p-0">

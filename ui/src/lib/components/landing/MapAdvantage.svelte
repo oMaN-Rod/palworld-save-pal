@@ -12,7 +12,7 @@
 
 <section class="relative w-full overflow-hidden px-4 py-16 text-center">
 	<SectionGlow />
-	<h2 class="h2 mx-auto max-w-3xl font-bold">
+	<h2 class="heading-gradient h2 mx-auto max-w-3xl font-bold">
 		{m.landing_map_heading()}
 	</h2>
 	<p class="text-surface-300 mx-auto mt-4 max-w-2xl">

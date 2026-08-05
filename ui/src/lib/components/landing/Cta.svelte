@@ -9,7 +9,7 @@
 
 <footer class="border-surface-700/50 relative w-full overflow-hidden border-t px-4 py-14 text-center">
 	<SectionGlow />
-	<h2 class="h3 font-bold">{m.landing_cta_heading()}</h2>
+	<h2 class="heading-gradient h3 font-bold">{m.landing_cta_heading()}</h2>
 	<div class="mt-6 flex items-center justify-center gap-5">
 		<GithubLink />
 		<a href={DISCORD} target="_blank" rel="noopener noreferrer" aria-label="Discord">

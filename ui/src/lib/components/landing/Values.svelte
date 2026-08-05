@@ -20,7 +20,9 @@
 </script>
 
 <section class="relative w-full overflow-hidden px-4 py-16">
-	<h2 class="h2 mb-8 text-center font-bold">{m.landing_values_heading()}</h2>
+	<h2 class="heading-gradient h2 mb-8 text-center font-bold">
+		{m.landing_values_heading()}
+	</h2>
 	<div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 		{#each values as v (v.title)}
 			<div class="card flex flex-col items-center gap-3 p-6 text-center">
