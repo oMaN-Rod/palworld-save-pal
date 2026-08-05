@@ -14,13 +14,14 @@
 	import { assetLoader } from '$lib/utils/assetLoader';
 	import { computePosition, flip, shift, offset, autoUpdate } from '@floating-ui/dom';
 	import { portal } from '$utils';
+	import * as m from '$i18n/messages';
 	import Search from '@lucide/svelte/icons/search';
 	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import type { BreedablePal } from '$lib/breeding/types';
 
 	let {
 		value = null,
-		placeholder = 'Select a pal…',
+		placeholder = m.breeding_select_pal(),
 		onselect,
 		exclude = [],
 		pals = []
@@ -148,17 +149,17 @@
 			role="listbox"
 		>
 			<div class="p-2 border-b border-surface-700">
-				<input
-					type="text"
-					bind:value={query}
-					placeholder="Search pals…"
-					class="input text-xs"
-					autocomplete="off"
-				/>
-			</div>
-			<div class="overflow-y-auto flex-1">
-				{#if filtered.length === 0}
-					<p class="text-xs text-surface-400 p-3 text-center">No matches</p>
+<input
+						type="text"
+						bind:value={query}
+						placeholder={m.breeding_search_pals()}
+						class="input text-xs"
+						autocomplete="off"
+					/>
+				</div>
+				<div class="overflow-y-auto flex-1">
+					{#if filtered.length === 0}
+						<p class="text-xs text-surface-400 p-3 text-center">{m.breeding_no_matches()}</p>
 				{:else}
 					{#each filtered as pal (pal.tribe)}
 						<button

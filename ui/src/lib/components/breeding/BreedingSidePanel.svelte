@@ -122,12 +122,12 @@
 		<span
 			class="text-[10px] font-semibold text-surface-400 uppercase tracking-wider {collapsed
 				? 'hidden'
-				: ''}">Controls</span
+				: ''}">{m.breeding_controls()}</span
 		>
 		<button
 			class="btn btn-secondary p-1 rounded-3 text-surface-400 hover:text-surface-50 transition-colors"
 			onclick={() => oncollapsedChange?.(!collapsed)}
-			title={collapsed ? 'Expand panel' : 'Collapse panel'}
+			title={collapsed ? m.breeding_expand_panel() : m.breeding_collapse_panel()}
 		>
 			{#if collapsed}<ChevronLeft size={13} />{:else}<ChevronRight size={13} />{/if}
 		</button>
@@ -135,7 +135,7 @@
 
 	{#if collapsed}
 		<div class="flex flex-col items-center gap-2 py-3 text-surface-400">
-			<span class="text-[9px] font-medium">Cfg</span>
+			<span class="text-[9px] font-medium">{m.breeding_cfg()}</span>
 		</div>
 	{:else}
 		{#if chains.length > 0}
@@ -148,7 +148,10 @@
 						<button
 							class="px-2 py-1 rounded-3 text-[10px] font-medium transition-all {i === activeChainIndex ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-200 hover:bg-surface-800 border border-surface-700/30'}"
 							onclick={() => onactiveChainIndexChange?.(i)}
-							title="{palMap.get(chain.target)?.display_name ?? chain.target} — {chain.generations} gen"
+							title={m.breeding_gen_title({
+								name: palMap.get(chain.target)?.display_name ?? chain.target,
+								n: chain.generations
+							})}
 						>
 							{i + 1}
 						</button>
@@ -159,32 +162,36 @@
 
 		{#if mode === 'direct'}
 			<div class="px-3 py-3 border-b border-surface-700/20 space-y-2.5">
-				<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider">Direct</span>
+				<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_direct()}</span>
 				<div class="flex gap-1">
 					{#each ['forward', 'reverse', 'parents'] as sub}
 						<button
-							class="px-2 py-1 rounded-3 text-[9px] font-medium transition-all {directSub === sub ? 'bg-surface-800 text-surface-50 border border-surface-600/60' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+							class="px-2 py-1 rounded-3 text-[10px] font-medium transition-all {directSub === sub ? 'bg-surface-800 text-surface-50 border border-surface-600/60' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 							onclick={() => ondirectSubChange?.(sub)}
 						>
-							{sub === 'forward' ? 'A+B→C' : sub === 'reverse' ? 'A+T→B' : 'T→P'}
+							{sub === 'forward'
+								? m.breeding_a_plus_b_child()
+								: sub === 'reverse'
+									? m.breeding_a_plus_target()
+									: m.breeding_target_with_parents()}
 						</button>
 					{/each}
 				</div>
 
 				{#if directSub !== 'parents'}
 					<div>
-						<span class="block text-[10px] text-surface-400 mb-0.5">Parent A</span>
+						<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_parent_a()}</span>
 						<PalPicker pals={pals} value={parentA} onselect={(t) => onparentAChange?.(t)} />
 					</div>
 				{/if}
 				{#if directSub === 'forward'}
 					<div>
-						<span class="block text-[10px] text-surface-400 mb-0.5">Parent B</span>
+						<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_parent_b()}</span>
 						<PalPicker pals={pals} value={parentB} onselect={(t) => onparentBChange?.(t)} exclude={parentA ? [parentA] : []} />
 					</div>
 				{:else if directSub === 'reverse' || directSub === 'parents'}
 					<div>
-						<span class="block text-[10px] text-surface-400 mb-0.5">Target</span>
+						<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_target()}</span>
 						<PalPicker pals={pals} value={directTarget} onselect={(t) => ondirectTargetChange?.(t)} />
 					</div>
 				{/if}
@@ -195,7 +202,7 @@
 					onclick={oncomputeDirect}
 				>
 					{#if directLoading}<Spinner size="size-3.5" />{:else}<Play size={13} />{/if}
-					Compute
+					{m.breeding_compute()}
 				</button>
 				{#if error}<p class="text-[10px] text-rose-400">{error}</p>{/if}
 			</div>
@@ -205,11 +212,11 @@
 					{m.breeding_configuration()}
 				</span>
 				<div>
-					<span class="block text-[10px] text-surface-400 mb-0.5">{m.breeding_target()}</span>
+					<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_target()}</span>
 					<PalPicker pals={pals} value={chainTarget} onselect={(t) => onchainTargetChange?.(t)} />
 				</div>
 				<div>
-					<span class="block text-[10px] text-surface-400 mb-0.5">{m.breeding_gender()}</span>
+					<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_gender()}</span>
 					<select
 						class="input text-xs w-full"
 						value={chainGender ?? ''}
@@ -223,7 +230,7 @@
 				</div>
 				<div class="grid grid-cols-2 gap-2">
 					<div>
-						<span class="block text-[10px] text-surface-400 mb-0.5">{m.breeding_max_generations()}</span>
+						<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_max_generations()}</span>
 						<input
 							type="number"
 							min="1"
@@ -235,7 +242,7 @@
 						/>
 					</div>
 					<div>
-						<span class="block text-[10px] text-surface-400 mb-0.5">{m.breeding_max_results()}</span>
+						<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">{m.breeding_max_results()}</span>
 						<input
 							type="number"
 							min="1"
@@ -282,14 +289,14 @@
 													(e.currentTarget as HTMLSelectElement).value || null
 												)}
 										>
-											<option value="">Any</option>
-											<option value="Male">M</option>
-											<option value="Female">F</option>
+											<option value="">{m.breeding_any()}</option>
+											<option value="Male">{m.breeding_male_short()}</option>
+											<option value="Female">{m.breeding_female_short()}</option>
 										</select>
 										<button
 											class="text-surface-400 hover:text-rose-400 transition-colors"
 											onclick={() => onremoveFromPool?.(member.tribe)}
-											title="Remove"
+											title={m.breeding_remove()}
 										>
 											<X size={10} />
 										</button>

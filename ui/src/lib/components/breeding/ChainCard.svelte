@@ -1,16 +1,17 @@
 <script lang="ts">
-	// Renders one breeding Chain: header (target + gen count + gender
-	// feasibility), source pals (leaves), and ordered breeding steps.
-	import type { BreedablePal, Chain } from '$lib/breeding/types';
-	import GitMerge from '@lucide/svelte/icons/git-merge';
-	import Plus from '@lucide/svelte/icons/plus';
-	import ArrowRight from '@lucide/svelte/icons/arrow-right';
-	import CheckCircle2 from '@lucide/svelte/icons/circle-check-big';
-	import XCircle from '@lucide/svelte/icons/circle-x';
-	import Package from '@lucide/svelte/icons/package';
-	import Hand from '@lucide/svelte/icons/hand';
-	import Trees from '@lucide/svelte/icons/trees';
-	import PalSlot from './PalSlot.svelte';
+// Renders one breeding Chain: header (target + gen count + gender
+		// feasibility), source pals (leaves), and ordered breeding steps.
+		import * as m from '$i18n/messages';
+		import type { BreedablePal, Chain } from '$lib/breeding/types';
+		import GitMerge from '@lucide/svelte/icons/git-merge';
+		import Plus from '@lucide/svelte/icons/plus';
+		import ArrowRight from '@lucide/svelte/icons/arrow-right';
+		import CheckCircle2 from '@lucide/svelte/icons/circle-check-big';
+		import XCircle from '@lucide/svelte/icons/circle-x';
+		import Package from '@lucide/svelte/icons/package';
+		import Hand from '@lucide/svelte/icons/hand';
+		import Trees from '@lucide/svelte/icons/trees';
+		import PalSlot from './PalSlot.svelte';
 
 	let {
 		chain,
@@ -25,9 +26,9 @@
 	const palFor = (tribe: string) => palMap.get(tribe);
 
 	const sourceMeta = {
-		owned: { icon: Package, label: 'Owned', cls: 'chip-blue' },
-		selected: { icon: Hand, label: 'Selected', cls: 'chip-green' },
-		wild: { icon: Trees, label: 'Wild', cls: 'chip-amber' }
+		owned: { icon: Package, label: () => m.breeding_owned(), cls: 'chip-blue' },
+		selected: { icon: Hand, label: () => m.breeding_selected(), cls: 'chip-green' },
+		wild: { icon: Trees, label: () => m.breeding_wild(), cls: 'chip-amber' }
 	} as const;
 
 	function srcMeta(type: string) {
@@ -45,7 +46,7 @@
 			<h3 class="text-sm font-semibold text-surface-50">
 				{palFor(chain.target)?.display_name ?? chain.target}
 			</h3>
-			<span class="chip text-[10px] px-2 py-0 chip-blue">{chain.generations} gen</span>
+			<span class="chip text-[10px] px-2 py-0 chip-blue">{m.breeding_gens({ n: chain.generations })}</span>
 			{#if chain.gender_feasible}
 				<CheckCircle2 size={13} class="text-emerald-400" />
 			{:else}
@@ -77,9 +78,9 @@
 						size="sm"
 						gender={src.gender}
 					/>
-					<span class="chip text-[8px] px-1 py-0 {meta.cls} shrink-0">
-						<SrcIcon size={9} class="inline" />{meta.label}
-					</span>
+<span class="chip text-[9px] px-1.5 py-0 {meta.cls} shrink-0">
+							<SrcIcon size={9} class="inline" />{meta.label()}
+						</span>
 				</div>
 			{/each}
 		</div>
@@ -98,17 +99,17 @@
 					<PalSlot tribe={step.child} display={palFor(step.child)?.display_name} characterId={step.child} size="sm" />
 					{#if step.inherited_passives.length}
 						<div class="flex flex-wrap gap-0.5 ml-auto shrink-0">
-							{#each step.inherited_passives as p}
-								<span class="chip text-[8px] px-1 py-0 {matchedSet.has(p) ? 'chip-green' : ''}"
-									>{passiveName(p)}</span
-								>
+{#each step.inherited_passives as p}
+									<span class="chip text-[9px] px-1.5 py-0 {matchedSet.has(p) ? 'chip-green' : ''}"
+										>{passiveName(p)}</span
+									>
 							{/each}
 						</div>
 					{/if}
 				</div>
 			{/each}
 		</div>
-	{:else}
-		<p class="text-xs text-surface-400 italic">Target already available — no breeding required.</p>
+{:else}
+			<p class="text-xs text-surface-400 italic">{m.breeding_target_already_available()}</p>
 	{/if}
 </div>

@@ -301,73 +301,75 @@ export class DendrogramEngine {
 			})
 			.attr('stroke-width', (d) => (d.node.isTarget ? 2.5 : 2));
 
-		merged.select<SVGTextElement>('.dendro-name').text((d) => truncate(d.node.display, 14));
+		merged.select<SVGTextElement>('.dendro-name').text((d) => d.node.display);
 
 		merged
 			.select<SVGTextElement>('.dendro-target-badge')
 			.text((d) => (d.node.isTarget ? 'TARGET' : ''))
 			.attr('opacity', (d) => (d.node.isTarget ? 1 : 0));
 
-		const passiveName = this.passiveName;
-		const matchedPassives = this.matchedPassives;
-		const glyphX = this.genderGlyphX.bind(this);
-		const iconTextX = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
-		merged.each(function (this: SVGGElement, d: PositionedNode) {
-			// Gender glyph: place just after the display name. Measure the real
-			// rendered text width (fall back to a char-width estimate when the
-			// SVG isn't laid out yet) — CJK/wide glyphs otherwise overlap.
-			const genderEl = select(this).select<SVGTextElement>('.dendro-gender');
-			let genderX = glyphX(d.node.display);
-			const nameNode = select(this).select<SVGTextElement>('.dendro-name').node();
-			if (nameNode) {
-				try {
-					const w = nameNode.getComputedTextLength();
-					if (w > 0) genderX = iconTextX + w + 5;
-				} catch {
-					// not laid out — keep the estimate
+const passiveName = this.passiveName;
+			const matchedPassives = this.matchedPassives;
+			const glyphX = this.genderGlyphX.bind(this);
+			const iconTextX = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
+			merged.each(function (this: SVGGElement, d: PositionedNode) {
+				// --- Name + gender glyph ---------------------------------------
+				// Fit the display name to the card's usable width (measured, not
+				// a char-count guess — CJK/wide glyphs are wider than an ASCII
+				// estimate), reserving a slot for the gender glyph and the
+				// right-edge step/target badges. Long names shrink instead of
+				// overlapping the glyph or spilling past the card.
+				const cardW = d.w;
+				const rightReserve = 30;
+				const genderSlot = genderGlyph(d.node.gender) ? 16 : 0;
+				const nameMaxW = Math.max(cardW - iconTextX - rightReserve - genderSlot, 20);
+
+				const nameEl = select(this).select<SVGTextElement>('.dendro-name');
+				const nameNode = nameEl.node();
+				if (nameNode) {
+					try {
+						fitWidth(nameNode, nameMaxW);
+					} catch {
+						// not laid out yet — keep the unmeasured text
+					}
 				}
-			}
-			genderEl
-				.attr('x', genderX)
-				.text(genderGlyph(d.node.gender))
-				.attr('fill', genderColor(d.node.gender));
+				const nameW = nameNode ? nameNode.getComputedTextLength() : 0;
+				const genderEl = select(this).select<SVGTextElement>('.dendro-gender');
+				const genderX =
+					iconTextX + (nameW > 0 ? nameW + 5 : glyphX(d.node.display) - iconTextX);
+				genderEl
+					.attr('x', genderX)
+					.text(genderGlyph(d.node.gender))
+					.attr('fill', genderColor(d.node.gender));
 
-			const g = select(this).select<SVGGElement>('g.dendro-passives');
-			const chipX0 = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
-			const chipY = 38;
-			const visible = d.node.passives.slice(0, 3);
-			const overflow = d.node.passives.length - visible.length;
-
-			if (overflow > 0) {
-				const first = visible[0];
-				const name = first ? passiveName(first) : '';
-				const label = name && name.length > 10 ? name.slice(0, 9) + '…' : name;
-				const allMatched = visible.every((p) => matchedPassives.has(p));
+				// --- Passive chips line -----------------------------------------
+				const g = select(this).select<SVGGElement>('g.dendro-passives');
+				const chipX0 = iconTextX;
+				const chipY = 38;
+				const passiveMaxW = Math.max(cardW - chipX0 - rightReserve, 30);
+				const visible = d.node.passives.slice(0, 3);
+				const overflow = d.node.passives.length - visible.length;
 
 				g.selectAll<SVGTextElement, string>('text').remove();
-				if (label) {
-					g.append('text')
-						.attr('x', chipX0)
-						.attr('y', chipY)
-						.attr('font-size', 8)
-						.attr('font-weight', allMatched ? 600 : 400)
-						.attr(
-							'fill',
-							allMatched ? DENDRO_COLORS.passiveMatched : DENDRO_COLORS.inkSecondary
-						)
-						.attr('dominant-baseline', 'middle')
-						.text(`${label} +${overflow}`);
-				}
-			} else {
-				g.selectAll<SVGTextElement, string>('text').remove();
-				if (visible.length) {
+				let label = '';
+				let allMatched = false;
+				if (overflow > 0) {
+					const first = visible[0];
+					const name = first ? passiveName(first) : '';
+					const short = name && name.length > 10 ? name.slice(0, 9) + '…' : name;
+					label = short ? `${short} +${overflow}` : '';
+					allMatched = visible.every((p) => matchedPassives.has(p));
+				} else if (visible.length) {
 					const parts = visible.map((p) => {
 						const name = passiveName(p);
 						return name.length > 10 ? name.slice(0, 9) + '…' : name;
 					});
-					const label = parts.join(', ');
-					const allMatched = visible.every((p) => matchedPassives.has(p));
-					g.append('text')
+					label = parts.join(', ');
+					allMatched = visible.every((p) => matchedPassives.has(p));
+				}
+				if (label) {
+					const t = g
+						.append('text')
 						.attr('x', chipX0)
 						.attr('y', chipY)
 						.attr('font-size', 8)
@@ -377,10 +379,17 @@ export class DendrogramEngine {
 							allMatched ? DENDRO_COLORS.passiveMatched : DENDRO_COLORS.inkSecondary
 						)
 						.attr('dominant-baseline', 'middle')
-						.text(label);
+						.text(label)
+						.node();
+					if (t) {
+						try {
+							fitWidth(t, passiveMaxW);
+						} catch {
+							// not laid out yet
+						}
+					}
 				}
-			}
-		});
+			});
 
 		merged
 			.select<SVGCircleElement>('.dendro-source-dot')
@@ -546,6 +555,33 @@ function orthogonalPath(sx: number, sy: number, tx: number, ty: number, midX: nu
 
 function truncate(s: string, max: number): string {
 	return s.length <= max ? s : s.slice(0, max - 1) + '…';
+}
+
+/**
+ * Shrink `el`'s text (with a trailing ellipsis) until its measured width fits
+ * `maxWidth`. Width is measured, so CJK/wide glyphs respect the same limit as
+ * ASCII — a fixed char-count truncation cannot. No-op when already fits.
+ * Requires the element to be laid out; callers guard with try/catch before
+ * layout stabilizes.
+ */
+function fitWidth(el: SVGTextElement, maxWidth: number): void {
+	const full = el.textContent ?? '';
+	el.textContent = full;
+	if (el.getComputedTextLength() <= maxWidth) return;
+	let best = '…';
+	let lo = 1;
+	let hi = full.length;
+	while (lo <= hi) {
+		const mid = (lo + hi) >> 1;
+		el.textContent = full.slice(0, mid) + '…';
+		if (el.getComputedTextLength() <= maxWidth) {
+			best = el.textContent!;
+			lo = mid + 1;
+		} else {
+			hi = mid - 1;
+		}
+	}
+	el.textContent = best;
 }
 
 function genderGlyph(gender?: string | null): string {

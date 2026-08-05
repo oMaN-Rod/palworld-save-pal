@@ -1,6 +1,7 @@
 <script lang="ts">
 	// Renders one Direct-Mode result row: [Parent A] + [Parent B] → [Child].
 	// Used for both the single forward answer and each reverse-mode candidate.
+	import * as m from '$i18n/messages';
 	import type { BreedablePal, DirectResultItem } from '$lib/breeding/types';
 	import Plus from '@lucide/svelte/icons/plus';
 	import ArrowRight from '@lucide/svelte/icons/arrow-right';
@@ -33,25 +34,25 @@
 
 	<div class="flex items-center gap-2 min-w-0 flex-1">
 		<PalSlot tribe={result.child} display={childDisplay} characterId={result.child} size="md" />
-		{#if result.combo_type === 'unique'}
-			<span class="chip chip-amber text-[9px] px-1.5 py-0 shrink-0">Special</span>
-		{/if}
-	</div>
-
-	{#if result.child_gender_prob}
-		<div class="flex items-center gap-1 shrink-0 text-[10px]">
-			{#if result.child_gender_prob.male > 0}
-				<span class="text-sky-400 flex items-center gap-0.5" title="Male probability">
-					<Mars size={11} />
-					{Math.round(result.child_gender_prob.male * 100)}%
-				</span>
-			{/if}
-			{#if result.child_gender_prob.female > 0}
-				<span class="text-pink-400 flex items-center gap-0.5" title="Female probability">
-					<Venus size={11} />
-					{Math.round(result.child_gender_prob.female * 100)}%
-				</span>
+{#if result.combo_type === 'unique'}
+				<span class="chip chip-amber text-[9px] px-1.5 py-0 shrink-0">{m.breeding_special()}</span>
 			{/if}
 		</div>
-	{/if}
+
+		{#if result.child_gender_prob}
+			<div class="flex items-center gap-1 shrink-0 text-[10px]" title={m.breeding_gender_probability()}>
+				{#if result.child_gender_prob.male > 0}
+					<span class="text-sky-400 flex items-center gap-0.5" title={m.breeding_male()}>
+						<Mars size={11} />
+						{Math.round(result.child_gender_prob.male * 100)}%
+					</span>
+				{/if}
+				{#if result.child_gender_prob.female > 0}
+					<span class="text-pink-400 flex items-center gap-0.5" title={m.breeding_female()}>
+						<Venus size={11} />
+						{Math.round(result.child_gender_prob.female * 100)}%
+					</span>
+				{/if}
+			</div>
+		{/if}
 </div>

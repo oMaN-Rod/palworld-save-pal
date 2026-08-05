@@ -1,14 +1,15 @@
 <script lang="ts">
-	// ChainTooltip — floating hover card for a dendrogram node. Absolute HTML
-	// overlay clamped to viewport.
-	import { assetLoader } from '$lib/utils/assetLoader';
-	import Mars from '@lucide/svelte/icons/mars';
-	import Venus from '@lucide/svelte/icons/venus';
-	import Package from '@lucide/svelte/icons/package';
-	import Hand from '@lucide/svelte/icons/hand';
-	import Trees from '@lucide/svelte/icons/trees';
-	import Target from '@lucide/svelte/icons/target';
-	import type { TreeNode } from '$lib/breeding/dendrogram/types';
+// ChainTooltip — floating hover card for a dendrogram node. Absolute HTML
+		// overlay clamped to viewport.
+		import * as m from '$i18n/messages';
+		import { assetLoader } from '$lib/utils/assetLoader';
+		import Mars from '@lucide/svelte/icons/mars';
+		import Venus from '@lucide/svelte/icons/venus';
+		import Package from '@lucide/svelte/icons/package';
+		import Hand from '@lucide/svelte/icons/hand';
+		import Trees from '@lucide/svelte/icons/trees';
+		import Target from '@lucide/svelte/icons/target';
+		import type { TreeNode } from '$lib/breeding/dendrogram/types';
 
 	let {
 		node,
@@ -26,9 +27,9 @@
 	let ty = $derived(Math.max(y - 50, 8));
 
 	const sourceMeta = {
-		owned: { icon: Package, label: 'Owned', cls: 'text-primary-400' },
-		selected: { icon: Hand, label: 'Selected', cls: 'text-emerald-400' },
-		wild: { icon: Trees, label: 'Wild', cls: 'text-amber-400' }
+		owned: { icon: Package, label: () => m.breeding_owned(), cls: 'text-primary-400' },
+		selected: { icon: Hand, label: () => m.breeding_selected(), cls: 'text-emerald-400' },
+		wild: { icon: Trees, label: () => m.breeding_wild(), cls: 'text-amber-400' }
 	} as const;
 
 	function srcMeta(type?: string) {
@@ -58,20 +59,20 @@
 				</div>
 				<div class="text-[10px] text-surface-400 font-mono">{node.tribe}</div>
 
-				{#if node.isBred && node.stepIndex !== undefined}
-					<div class="text-[10px] text-cyan-400">Step {node.stepIndex + 1} · Bred</div>
-				{:else if srcMeta(node.sourceType)}
-					{@const m = srcMeta(node.sourceType)!}
-					{@const MIcon = m.icon}
-					<div class="text-[10px] {m.cls} flex items-center gap-1">
-						<MIcon size={10} class="inline" />{m.label}
-					</div>
-				{/if}
-				{#if node.isTarget}
-					<div class="text-[10px] text-primary-400 font-semibold flex items-center gap-1">
-						<Target size={10} class="inline" />Target
-					</div>
-				{/if}
+{#if node.isBred && node.stepIndex !== undefined}
+						<div class="text-[10px] text-cyan-400">Step {m.breeding_step_bred({ n: node.stepIndex + 1 })}</div>
+					{:else if srcMeta(node.sourceType)}
+						{@const m2 = srcMeta(node.sourceType)!}
+						{@const MIcon = m2.icon}
+						<div class="text-[10px] {m2.cls} flex items-center gap-1">
+							<MIcon size={10} class="inline" />{m2.label()}
+						</div>
+					{/if}
+					{#if node.isTarget}
+						<div class="text-[10px] text-primary-400 font-semibold flex items-center gap-1">
+							<Target size={10} class="inline" />{m.breeding_target()}
+						</div>
+					{/if}
 			</div>
 		</div>
 

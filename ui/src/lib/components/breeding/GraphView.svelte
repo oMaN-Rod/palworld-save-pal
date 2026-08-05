@@ -4,6 +4,7 @@
 	 * chain mode (multiple chains) and Direct mode (simple trees). Features
 	 * prev/next navigation and per-gen / all-in-one layout toggle (chain mode).
 	 */
+	import * as m from '$i18n/messages';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import GitMerge from '@lucide/svelte/icons/git-merge';
@@ -63,7 +64,7 @@
 						class="btn btn-secondary p-1 rounded-3 text-surface-400 hover:text-surface-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
 						onclick={prev}
 						disabled={activeIndex <= 0}
-						title="Previous"
+						title={m.breeding_previous()}
 					>
 						<ChevronLeft size={12} />
 					</button>
@@ -74,7 +75,7 @@
 						class="btn btn-secondary p-1 rounded-3 text-surface-400 hover:text-surface-50 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
 						onclick={next}
 						disabled={activeIndex >= totalTrees - 1}
-						title="Next"
+						title={m.breeding_next()}
 					>
 						<ChevronRight size={12} />
 					</button>
@@ -86,9 +87,9 @@
 				<h3 class="text-sm font-semibold text-surface-50 truncate">
 					{palMap.get(activeChain.target)?.display_name ?? activeChain.target}
 				</h3>
-				<span class="chip text-[9px] px-1.5 py-0.5 chip-blue shrink-0"
-					>{activeChain.generations} gen</span
-				>
+<span class="chip text-[9px] px-1.5 py-0.5 chip-blue shrink-0"
+						>{m.breeding_gens({ n: activeChain.generations })}</span
+					>
 				{#if activeChain.gender_feasible}
 					<CheckCircle2 size={11} class="text-emerald-400 shrink-0" />
 				{:else}
@@ -111,20 +112,20 @@
 			<div class="flex items-center gap-1.5 shrink-0">
 				<div class="flex gap-0.5 p-0.5 rounded-3 bg-surface-950/50 border border-surface-700/30">
 					<button
-						class="px-1.5 py-0.5 rounded-2 text-[9px] font-medium transition-all {graphLayout === 'all-in-one' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+						class="px-1.5 py-0.5 rounded-2 text-[10px] font-medium transition-all {graphLayout === 'all-in-one' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 						onclick={() => ongraphLayoutChange?.('all-in-one')}
-						title="Show all generations">All</button
+						title={m.breeding_show_all_generations()}>{m.breeding_all()}</button
 					>
 					<button
-						class="px-1.5 py-0.5 rounded-2 text-[9px] font-medium transition-all {graphLayout === 'per-gen' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+						class="px-1.5 py-0.5 rounded-2 text-[10px] font-medium transition-all {graphLayout === 'per-gen' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 						onclick={() => ongraphLayoutChange?.('per-gen')}
-						title="Show one generation at a time">Per-Gen</button
+						title={m.breeding_show_single_generation()}>{m.breeding_per_gen()}</button
 					>
 				</div>
 
 				{#if graphLayout === 'per-gen'}
 					<div class="flex items-center gap-1">
-						<span class="text-[9px] text-surface-400 whitespace-nowrap">Gen</span>
+						<span class="text-[9px] text-surface-400 whitespace-nowrap">{m.breeding_gen()}</span>
 						<input
 							type="range"
 							min="1"
@@ -151,7 +152,7 @@
 		</div>
 	{:else}
 		<div class="flex-1 flex items-center justify-center text-xs text-surface-400 italic">
-			No tree to display
+			{m.breeding_no_tree()}
 		</div>
 	{/if}
 </div>

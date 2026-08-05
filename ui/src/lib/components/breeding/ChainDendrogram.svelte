@@ -8,9 +8,20 @@
 	import Plus from '@lucide/svelte/icons/plus';
 	import Minus from '@lucide/svelte/icons/minus';
 	import Maximize2 from '@lucide/svelte/icons/maximize-2';
+	import Download from '@lucide/svelte/icons/download';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Check from '@lucide/svelte/icons/check';
+	import * as m from '$i18n/messages';
+	import { getToastState } from '$states';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import { DendrogramEngine } from '$lib/breeding/dendrogram/DendrogramEngine';
 	import { chainToTree } from '$lib/breeding/dendrogram/treeBuilder';
+	import {
+		copyPngToClipboard,
+		downloadPng,
+		exportTreeToPng,
+		slugify
+	} from '$lib/breeding/dendrogram/exportPng';
 	import type { TreeNode } from '$lib/breeding/dendrogram/types';
 	import ChainTooltip from './ChainTooltip.svelte';
 
@@ -32,6 +43,8 @@
 		onselect?: (node: TreeNode | null) => void;
 	} = $props();
 
+	const toast = getToastState();
+
 	let svgEl: SVGSVGElement;
 	let containerEl: HTMLDivElement;
 	let engine: DendrogramEngine;
@@ -40,6 +53,35 @@
 	let hoveredNode = $state<TreeNode | null>(null);
 	let tooltipX = $state(0);
 	let tooltipY = $state(0);
+	let exporting = $state(false);
+	let copied = $state(false);
+
+	const exportName = $derived(slugify(treeNode?.tribe ?? chain?.target ?? 'direct'));
+
+	async function handleExport(kind: 'download' | 'copy') {
+		if (!svgEl || exporting) return;
+		exporting = true;
+		try {
+			const blob = await exportTreeToPng(svgEl);
+			if (kind === 'download') {
+				downloadPng(blob, `${exportName}-dendrogram.png`);
+				toast.add(m.breeding_png_downloaded(), m.success(), 'success');
+			} else {
+				const ok = await copyPngToClipboard(blob);
+				if (ok) {
+					copied = true;
+					setTimeout(() => (copied = false), 2000);
+					toast.add(m.breeding_png_copied(), m.success(), 'success');
+				} else {
+					toast.add(m.breeding_png_copy_failed(), m.error(), 'error');
+				}
+			}
+		} catch (e) {
+			toast.add(e instanceof Error ? e.message : String(e), m.error(), 'error');
+		} finally {
+			exporting = false;
+		}
+	}
 
 	let mouseDownX = 0;
 	let mouseDownY = 0;
@@ -53,15 +95,18 @@
 		return [e.clientX - rect.left, e.clientY - rect.top];
 	}
 
-	function handleMouseDown(e: MouseEvent) {
+	function handlePointerDown(e: PointerEvent) {
 		const [sx, sy] = getSvgPos(e);
 		mouseDownX = sx;
 		mouseDownY = sy;
 		mouseDownButton = e.button;
 		hasMoved = false;
+		// Keep receiving moves outside the SVG during a drag (also makes touch
+		// panning work — mouse-only events never fire on touch).
+		svgEl.setPointerCapture?.(e.pointerId);
 	}
 
-	function handleMouseMove(e: MouseEvent) {
+	function handlePointerMove(e: PointerEvent) {
 		const [sx, sy] = getSvgPos(e);
 		if (e.buttons > 0) {
 			const dx = sx - mouseDownX;
@@ -83,7 +128,7 @@
 		}
 	}
 
-	function handleMouseUp(e: MouseEvent) {
+	function handlePointerUp(e: PointerEvent) {
 		if (mouseDownButton !== 0 || hasMoved) return;
 		const [sx, sy] = getSvgPos(e);
 		const hit = engine.hitTestNode(sx, sy);
@@ -91,7 +136,7 @@
 		onselect?.(hit ?? null);
 	}
 
-	function handleMouseLeave() {
+	function handlePointerLeave() {
 		engine.setHovered(null);
 		hoveredNode = null;
 		svgEl.style.cursor = 'default';
@@ -154,21 +199,38 @@
 		role="application"
 		tabindex="0"
 		aria-label="Breeding chain tree for {treeNode?.tribe ?? chain?.target ?? 'unknown'}"
-		onmousedown={handleMouseDown}
-		onmousemove={handleMouseMove}
-		onmouseup={handleMouseUp}
-		onmouseleave={handleMouseLeave}
+onpointerdown={handlePointerDown}
+			onpointermove={handlePointerMove}
+			onpointerup={handlePointerUp}
+			onpointerleave={handlePointerLeave}
 	></svg>
 
 	<div class="absolute top-2 right-2 flex flex-col gap-1 z-10">
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title="Zoom in" onclick={() => engine?.zoomBy(1.25)}>
+		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_zoom_in()} onclick={() => engine?.zoomBy(1.25)}>
 			<Plus size={14} />
 		</button>
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title="Zoom out" onclick={() => engine?.zoomBy(0.8)}>
+		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_zoom_out()} onclick={() => engine?.zoomBy(0.8)}>
 			<Minus size={14} />
 		</button>
-		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title="Fit view" onclick={() => engine?.fit()}>
+		<button class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50" title={m.breeding_fit_view()} onclick={() => engine?.fit()}>
 			<Maximize2 size={14} />
+		</button>
+		<div class="my-0.5 h-px bg-surface-700/40"></div>
+		<button
+			class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50 disabled:opacity-40 disabled:cursor-not-allowed"
+			title={m.breeding_export_png()}
+			disabled={exporting}
+			onclick={() => handleExport('download')}
+		>
+			<Download size={14} class={exporting ? 'animate-pulse' : ''} />
+		</button>
+		<button
+			class="btn btn-secondary p-1.5 rounded-4 text-surface-200 hover:text-surface-50 disabled:opacity-40 disabled:cursor-not-allowed"
+			title={copied ? m.breeding_png_copied() : m.breeding_copy_png()}
+			disabled={exporting}
+			onclick={() => handleExport('copy')}
+		>
+			{#if copied}<Check size={14} class="text-emerald-400" />{:else}<Copy size={14} />{/if}
 		</button>
 	</div>
 

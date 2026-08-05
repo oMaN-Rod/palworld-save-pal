@@ -201,6 +201,11 @@
 	async function runDirect() {
 		directLoading = true;
 		error = null;
+		// Clear the stale answer so the previous result isn't shown while the
+		// new one is being computed.
+		directResult = null;
+		partnersResult = null;
+		parentsResult = null;
 		try {
 			if (directSub === 'forward' && parentA && parentB) {
 				directResult = await breedingApi.breedingDirectChild({ parent_a: parentA, parent_b: parentB });
@@ -232,8 +237,8 @@
 				const loaded = await ensurePlayerLoaded(ownerUid);
 				if (!loaded) {
 					error = ownerUid
-						? 'Could not load that player\'s pal data.'
-						: 'No loaded players with pal data. Select a player.';
+						? m.breeding_loading_player_failed()
+						: m.breeding_no_loaded_players();
 					computing = false;
 					return;
 				}
@@ -391,8 +396,8 @@
 </script>
 
 <div
-	class="p-6 space-y-5 {chainViewMode === 'graph'
-		? 'max-w-full px-4 flex flex-col h-full min-h-0'
+	class="p-5 space-y-5 {chainViewMode === 'graph'
+		? 'max-w-full flex flex-col h-full min-h-0'
 		: 'max-w-5xl mx-auto'}"
 >
 	<!-- header -->
@@ -426,7 +431,6 @@
 			<button
 				class="flex items-center gap-1 px-2.5 py-1 rounded-4 text-[11px] font-medium transition-all {chainViewMode === 'list' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 				onclick={() => (chainViewMode = 'list')}
-				title={m.breeding_view_list()}
 			>
 				<List size={12} />
 				{m.breeding_view_list()}
@@ -434,7 +438,6 @@
 			<button
 				class="flex items-center gap-1 px-2.5 py-1 rounded-4 text-[11px] font-medium transition-all {chainViewMode === 'graph' ? 'bg-primary-500/15 text-primary-300 border border-primary-500/40' : 'text-surface-400 hover:text-surface-200 border border-transparent'}"
 				onclick={() => (chainViewMode = 'graph')}
-				title={m.breeding_view_graph()}
 			>
 				<GitMerge size={12} />
 				{m.breeding_view_graph()}
@@ -464,7 +467,7 @@
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 						{#if directSub !== 'parents'}
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_parent_a()}
 								</span>
 								<PalPicker {pals} value={parentA} onselect={(t) => (parentA = t)} />
@@ -472,14 +475,14 @@
 						{/if}
 						{#if directSub === 'forward'}
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_parent_b()}
 								</span>
 								<PalPicker {pals} value={parentB} onselect={(t) => (parentB = t)} exclude={parentA ? [parentA] : []} />
 							</div>
 						{:else if directSub === 'reverse' || directSub === 'parents'}
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_target_child()}
 								</span>
 								<PalPicker {pals} value={directTarget} onselect={(t) => (directTarget = t)} />
@@ -492,7 +495,7 @@
 					</button>
 				</div>
 
-				{#if error}<p class="text-xs text-rose-400">{error}</p>{/if}
+				{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
 
 				{#if directSub === 'forward' && directResult}
 					<div class="space-y-2">
@@ -550,7 +553,7 @@
 			</div>
 		{:else if mode === 'direct' && chainViewMode === 'graph'}
 			{#if error && !directTrees.length}
-				<p class="text-xs text-rose-400 mb-2">{error}</p>
+				<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>
 			{/if}
 			<div class="flex gap-4 flex-1 min-h-0">
 				<div class="flex-1 min-w-0 min-h-0 rounded-6 border border-surface-700/30 bg-surface-950/20 overflow-hidden">
@@ -623,13 +626,13 @@
 					<div class="card space-y-3">
 						<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_target()}
 								</span>
 								<PalPicker {pals} value={chainTarget} onselect={(t) => (chainTarget = t)} />
 							</div>
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_gender()}
 								</span>
 								<select bind:value={chainGender} class="input text-xs">
@@ -642,13 +645,13 @@
 
 						<div class="grid grid-cols-2 gap-3">
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_max_generations()}
 								</span>
 								<input type="number" min="1" max="6" bind:value={chainGens} class="input text-xs" />
 							</div>
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_max_results()}
 								</span>
 								<input type="number" min="1" max="10" bind:value={chainMaxResults} class="input text-xs" />
@@ -657,7 +660,7 @@
 
 						{#if mode === 'selection'}
 							<div>
-								<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+								<span class="block text-[10px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
 									{m.breeding_pool()} ({selectedPool.length})
 								</span>
 								<PalPicker
@@ -670,15 +673,15 @@
 									<div class="flex flex-wrap gap-1.5 mt-2">
 										{#each selectedPool as member (member.tribe)}
 											<div class="flex items-center gap-1 px-1.5 py-0.5 rounded-4 bg-surface-950/50 border border-surface-700/30">
-												<button
-													class="text-xs flex items-center gap-1"
-													onclick={() => setPoolGender(member.tribe, member.gender === 'Male' ? 'Female' : member.gender === 'Female' ? null : 'Male')}
-													title="Toggle gender"
-												>
-													{member.gender ?? 'Any'}
-												</button>
-												<span class="text-[10px] text-surface-200">{palMap.get(member.tribe)?.display_name ?? member.tribe}</span>
-												<button class="text-surface-400 hover:text-rose-400 transition-colors" onclick={() => removeFromPool(member.tribe)} title="Remove">
+<button
+						class="text-xs flex items-center gap-1"
+						onclick={() => setPoolGender(member.tribe, member.gender === 'Male' ? 'Female' : member.gender === 'Female' ? null : 'Male')}
+						title={m.breeding_toggle_gender()}
+					>
+						{member.gender ?? m.breeding_any()}
+					</button>
+					<span class="text-[10px] text-surface-200">{palMap.get(member.tribe)?.display_name ?? member.tribe}</span>
+					<button class="text-surface-400 hover:text-rose-400 transition-colors" onclick={() => removeFromPool(member.tribe)} title={m.breeding_remove()}>
 													×
 												</button>
 											</div>
@@ -697,8 +700,8 @@
 									</label>
 									<p class="text-[10px] text-surface-400">
 										{ownedPalCount > 0
-											? `${ownedPalCount} owned pal(s) available`
-											: 'No pals loaded — select a player or compute to load.'}
+											? m.breeding_owned_count({ n: ownedPalCount })
+											: m.breeding_no_pals_loaded()}
 									</p>
 								</div>
 							</div>
@@ -710,14 +713,19 @@
 						</button>
 					</div>
 
-					{#if error}<p class="text-xs text-rose-400">{error}</p>{/if}
-					{#each chainWarnings as w}
+					{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
+					{#each chainWarnings as w, i (i)}
 						<p class="text-xs text-amber-400 flex items-center gap-1">
 							<AlertTriangle size={13} />{w}
 						</p>
 					{/each}
 
-					{#if chains.length}
+					{#if computing && !chains.length}
+						<div class="flex items-center justify-center gap-2 py-12 text-surface-400">
+							<Spinner size="size-5" />
+							<span class="text-sm">{m.breeding_computing()}</span>
+						</div>
+					{:else if chains.length}
 						<div class="space-y-3">
 							<h3 class="text-xs font-semibold text-surface-400 uppercase tracking-wider">
 								{m.breeding_chains()} ({chains.length})
@@ -743,8 +751,8 @@
 					<p class="text-xs">{m.breeding_save_required_hint()}</p>
 				</div>
 			{:else}
-				{#if error}<p class="text-xs text-rose-400">{error}</p>{/if}
-				{#each chainWarnings as w}
+				{#if error}<div class="flex items-center gap-1.5 px-3 py-2 rounded-4 bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300"><AlertTriangle size={13} class="shrink-0" /><span>{error}</span></div>{/if}
+				{#each chainWarnings as w, i (i)}
 					<p class="text-xs text-amber-400 flex items-center gap-1">
 						<AlertTriangle size={13} />{w}
 					</p>

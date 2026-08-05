@@ -111,13 +111,16 @@
 				role="listbox"
 				id="owner-listbox"
 			>
-				<button
-					class="w-full text-left px-3 py-1.5 text-xs text-surface-300 hover:bg-surface-800 transition-colors border-b border-surface-700/20 last:border-b-0 {ownerUid === null ? 'bg-primary-500/10' : ''}"
-					onmousedown={() => select(null)}
-				>
-					{m.breeding_all_players()}
-				</button>
-				{#each filteredPlayers as pl (pl.uid)}
+<button
+						class="w-full text-left px-3 py-1.5 text-xs text-surface-300 hover:bg-surface-800 transition-colors border-b border-surface-700/20 last:border-b-0 {ownerUid === null ? 'bg-primary-500/10' : ''}"
+						onmousedown={() => select(null)}
+					>
+						{m.breeding_all_players()}
+					</button>
+					{#if players.length === 0}
+						<div class="px-3 py-2 text-xs text-surface-400">{m.breeding_no_players()}</div>
+					{:else}
+						{#each filteredPlayers as pl (pl.uid)}
 					<button
 						class="w-full text-left px-3 py-1.5 text-xs text-surface-50 hover:bg-surface-800 transition-colors border-b border-surface-700/20 last:border-b-0 {ownerUid === pl.uid ? 'bg-primary-500/10' : ''}"
 						onmousedown={() => select(pl.uid)}
@@ -128,8 +131,9 @@
 						>
 					</button>
 				{/each}
-				{#if filteredPlayers.length === 0 && ownerSearch}
-					<div class="px-3 py-2 text-xs text-surface-400">{m.breeding_owner_no_match()}</div>
+					{#if filteredPlayers.length === 0 && ownerSearch}
+						<div class="px-3 py-2 text-xs text-surface-400">{m.breeding_owner_no_match()}</div>
+					{/if}
 				{/if}
 			</div>
 		{/if}
