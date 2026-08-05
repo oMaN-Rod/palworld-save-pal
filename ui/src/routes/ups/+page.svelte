@@ -525,7 +525,7 @@
 	>
 		<div class="flex items-center gap-3">
 			<div class="bg-primary-500 flex h-8 w-8 items-center justify-center rounded-lg">
-				<Database class="h-5 w-5 text-white" />
+				<Database class="text-primary-contrast-500 h-5 w-5" />
 			</div>
 			<div>
 				<h1 class="text-xl font-semibold">
@@ -572,7 +572,7 @@
 				class={cn(
 					'rounded-md p-2',
 					upsState.showCollectionsPanel
-						? 'bg-primary-500 text-white'
+						? 'bg-primary-500 text-primary-contrast-500'
 						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 				)}
 				popupLabel={m.toggle_entity({ entity: m.collection({ count: 2 }) })}
@@ -585,7 +585,7 @@
 				class={cn(
 					'rounded-md p-2',
 					upsState.showTagsPanel
-						? 'bg-primary-500 text-white'
+						? 'bg-primary-500 text-primary-contrast-500'
 						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 				)}
 				popupLabel={m.toggle_entity({ entity: c.tags })}
@@ -598,7 +598,7 @@
 				class={cn(
 					'rounded-md p-2',
 					upsState.showStatsPanel
-						? 'bg-primary-500 text-white'
+						? 'bg-primary-500 text-primary-contrast-500'
 						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 				)}
 				popupLabel={m.toggle_entity({ entity: m.statistics() })}
@@ -614,7 +614,7 @@
 				class={cn(
 					'rounded-md p-2',
 					upsState.viewMode === 'grid'
-						? 'bg-primary-500 text-white'
+						? 'bg-primary-500 text-primary-contrast-500'
 						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 				)}
 				popupLabel={m.grid_view()}
@@ -627,7 +627,7 @@
 				class={cn(
 					'rounded-md p-2',
 					upsState.viewMode === 'list'
-						? 'bg-primary-500 text-white'
+						? 'bg-primary-500 text-primary-contrast-500'
 						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 				)}
 				popupLabel={m.list_view()}
@@ -659,7 +659,8 @@
 								<Filter class="h-4 w-4" />
 								<span>{m.filter_and_sort()}</span>
 								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
-									<span class="bg-primary-500 rounded-full px-2 py-0.5 text-xs text-white"
+									<span
+										class="bg-primary-500 text-primary-contrast-500 rounded-full px-2 py-0.5 text-xs"
 										>{m.active()}</span
 									>
 								{/if}
@@ -679,7 +680,7 @@
 												</span>
 												{#if upsState.filters.elementTypes.length > 0}
 													<button
-														class="text-primary-600 hover:text-primary-700 text-xs"
+														class="text-primary-400 hover:text-primary-300 text-xs"
 														onclick={clearElementTypeFilters}
 													>
 														{m.clear()} ({upsState.filters.elementTypes.length})
@@ -715,7 +716,7 @@
 												</span>
 												{#if upsState.filters.palTypes.length > 0}
 													<button
-														class="text-primary-600 hover:text-primary-700 text-xs"
+														class="text-primary-400 hover:text-primary-300 text-xs"
 														onclick={clearPalTypeFilters}
 													>
 														{m.clear()} ({upsState.filters.palTypes.length})
@@ -794,7 +795,7 @@
 												class={cn(
 													'flex items-center gap-1 rounded-md border px-3 py-1 text-sm',
 													upsState.filters.sortBy === sortOption.key
-														? 'bg-primary-500 border-primary-500 text-white'
+														? 'bg-primary-500 border-primary-500 text-primary-contrast-500'
 														: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-surface-900'
 												)}
 												onclick={() => handleSort(sortOption.key as UPSSortBy)}
@@ -811,7 +812,7 @@
 									<div class="border-surface-300 dark:border-surface-700 col-span-2 border-t pt-2">
 										<button
 											onclick={clearFilters}
-											class="text-primary-600 hover:text-primary-700 flex items-center gap-1 text-sm"
+											class="text-primary-400 hover:text-primary-300 flex items-center gap-1 text-sm"
 										>
 											<X class="h-3 w-3" />
 											{m.clear_all_entity({ entity: m.filter({ count: 2 }) })}
@@ -839,7 +840,7 @@
 			<!-- Selection Controls -->
 			{#if upsState.pals.length > 0}
 				<div
-					class="bg-surface-100 dark:bg-surface-900 grid grid-cols-[auto_1fr_auto] items-center px-4 text-sm h-12"
+					class="bg-surface-100 dark:bg-surface-900 grid h-12 grid-cols-[auto_1fr_auto] items-center px-4 text-sm"
 				>
 					<div class="flex w-full items-center gap-4">
 						<span>
@@ -890,50 +891,50 @@
 						</nav>
 					</div>
 					<div class="flex items-center gap-2">
-					{#if upsState.hasSelectedPals}
-						<TooltipButton
-							onclick={handleBulkEditTags}
-							variant="primary"
-							size="icon"
-							popupLabel={m.edit_entity({ entity: c.tags })}
-						>
-							<Tag class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={handleBulkAddToCollection}
-							variant="secondary"
-							size="icon"
-							popupLabel={m.add_to_collection()}
-						>
-							<Folder class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={handleBulkExport}
-							class="rounded-md bg-purple-500 p-2 text-white hover:bg-purple-600"
-							popupLabel={m.export_selected()}
-						>
-							<Upload class="h-4 w-4" />
-						</TooltipButton>
-						<TooltipButton
-							onclick={deleteSelected}
-							class="rounded-md bg-red-500 p-2 text-white hover:bg-red-600"
-							popupLabel={m.delete_entity({ entity: m.selected() })}
-						>
-							<Trash class="h-4 w-4" />
-						</TooltipButton>
-					{/if}
-					{#if upsState.pagination.totalCount > 0}
-						<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
-							<button
-								class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
-								onclick={handleNukeUps}
-								disabled={upsState.loading}
+						{#if upsState.hasSelectedPals}
+							<TooltipButton
+								onclick={handleBulkEditTags}
+								variant="primary"
+								size="icon"
+								popupLabel={m.edit_entity({ entity: c.tags })}
 							>
-								<Nuke size={16} />
-							</button>
-						</TooltipButton>
-					{/if}
-				</div>
+								<Tag class="h-4 w-4" />
+							</TooltipButton>
+							<TooltipButton
+								onclick={handleBulkAddToCollection}
+								variant="secondary"
+								size="icon"
+								popupLabel={m.add_to_collection()}
+							>
+								<Folder class="h-4 w-4" />
+							</TooltipButton>
+							<TooltipButton
+								onclick={handleBulkExport}
+								class="bg-tertiary-500 text-tertiary-contrast-500 hover:bg-tertiary-600 rounded-md p-2"
+								popupLabel={m.export_selected()}
+							>
+								<Upload class="h-4 w-4" />
+							</TooltipButton>
+							<TooltipButton
+								onclick={deleteSelected}
+								class="bg-error-500 text-error-contrast-500 hover:bg-error-600 rounded-md p-2"
+								popupLabel={m.delete_entity({ entity: m.selected() })}
+							>
+								<Trash class="h-4 w-4" />
+							</TooltipButton>
+						{/if}
+						{#if upsState.pagination.totalCount > 0}
+							<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
+								<button
+									class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
+									onclick={handleNukeUps}
+									disabled={upsState.loading}
+								>
+									<Nuke size={16} />
+								</button>
+							</TooltipButton>
+						{/if}
+					</div>
 					<div class="text-surface-600 dark:text-surface-400">
 						{m.page_of_pages({ current: currentPage, total: totalPages })}
 					</div>
@@ -1015,7 +1016,7 @@
 									class={cn(
 										'rounded px-3 py-1 text-sm',
 										page === currentPage
-											? 'bg-primary-500 text-white'
+											? 'bg-primary-500 text-primary-contrast-500'
 											: 'hover:bg-surface-200 dark:hover:bg-surface-800'
 									)}
 								>

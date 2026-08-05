@@ -101,30 +101,52 @@
 			<img
 				src="/psp.png"
 				alt="PSP"
-				class="h-7 w-7 flex-shrink-0 rounded object-contain animate-breathe"
+				class="animate-breathe h-7 w-7 flex-shrink-0 rounded object-contain"
 			/>
 			{#if expanded.current}
-				<span class="sidebar-label heading-gradient text-lg font-extrabold tracking-tight whitespace-nowrap">
+				<span
+					class="sidebar-label heading-gradient text-lg font-extrabold tracking-tight whitespace-nowrap"
+				>
 					Palworld Save Pals
 				</span>
 			{/if}
 		</div>
 		{#if expanded.current}
 			<button
-				class="ml-auto text-surface-500 hover:text-surface-200 transition-fast p-1"
+				class="text-surface-500 hover:text-surface-200 transition-fast ml-auto p-1"
 				title={m.toggle_entity({ entity: '' })}
 				onclick={() => runAction('toggle-expanded')}
 			>
 				<!-- icon resolved inline to avoid dynamic-component overhead for a single chevron -->
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"><path d="m15 18-6-6 6-6" /></svg
+				>
 			</button>
 		{:else}
 			<button
-				class="mx-auto text-surface-500 hover:text-surface-200 transition-fast p-1"
+				class="text-surface-500 hover:text-surface-200 transition-fast mx-auto p-1"
 				title={m.toggle_entity({ entity: '' })}
 				onclick={() => runAction('toggle-expanded')}
 			>
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg
+				>
 			</button>
 		{/if}
 	</div>
@@ -141,9 +163,15 @@
 					{@const Icon = item.icon(ctx)}
 					{@const href = typeof item.href === 'string' ? item.href : item.href?.(ctx)}
 					{@const isActive = item.id === activeTile}
-						{@const needsSave = href && href !== '/' && href !== '/file' && href !== '/upload' && href !== '/about' && href !== '/docs'}
+					{@const needsSave =
+						href &&
+						href !== '/' &&
+						href !== '/file' &&
+						href !== '/upload' &&
+						href !== '/about' &&
+						href !== '/docs'}
 					<a
-						href={href}
+						{href}
 						class="nav-link nav-link-{isActive ? 'active' : 'inactive'}"
 						class:nav-link-disabled={needsSave && !appState.saveFile}
 						title={(item.title ?? item.label)?.()}
@@ -160,7 +188,7 @@
 	</nav>
 
 	<!-- Footer: action items (save/eject from header section + open-folder/settings) -->
-	<div class="border-t border-surface-700/30 py-2 flex-shrink-0">
+	<div class="border-surface-700/30 flex-shrink-0 border-t py-2">
 		{#if expanded.current}
 			<!-- save + eject action buttons (header section) -->
 			{#each itemsFor('header').filter((i) => i.id !== 'menu') as item (item.id)}

@@ -1,4 +1,7 @@
-import type { Component } from 'svelte';
+import * as m from '$i18n/messages';
+import { c } from '$lib/utils/commonTranslations';
+import { isWebBuild } from '$lib/utils/platform';
+import type { AppState } from '$states';
 import {
 	Blocks,
 	BookOpen,
@@ -21,10 +24,7 @@ import {
 	Settings,
 	Wrench
 } from '@lucide/svelte';
-import type { AppState } from '$states';
-import * as m from '$i18n/messages';
-import { c } from '$lib/utils/commonTranslations';
-import { isWebBuild } from '$lib/utils/platform';
+import type { Component } from 'svelte';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
