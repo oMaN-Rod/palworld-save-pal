@@ -11,8 +11,13 @@
 	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
 	import CheckCircle2 from '@lucide/svelte/icons/circle-check-big';
 	import XCircle from '@lucide/svelte/icons/circle-x';
+	import GitFork from '@lucide/svelte/icons/git-fork';
+	import Spline from '@lucide/svelte/icons/spline';
+	import Columns3 from '@lucide/svelte/icons/columns-3';
+	import Orbit from '@lucide/svelte/icons/orbit';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import type { TreeNode } from '$lib/breeding/dendrogram/types';
+	import type { LayoutMode } from '$lib/breeding/dendrogram/layouts';
 	import ChainDendrogram from './ChainDendrogram.svelte';
 
 	let {
@@ -27,6 +32,7 @@
 		currentGen = 1,
 		oncurrentGenChange,
 		maxDepth = 1,
+		viewMode = $bindable('dendrogram'),
 		onselect
 	}: {
 		trees: TreeNode[];
@@ -40,12 +46,22 @@
 		currentGen?: number;
 		oncurrentGenChange?: (val: number) => void;
 		maxDepth?: number;
+		/** Which graph rendering to use. Bindable so the choice persists across
+		 *  chain navigation and mode switches. */
+		viewMode?: LayoutMode;
 		onselect?: (node: TreeNode | null) => void;
 	} = $props();
 
 	const activeTree = $derived(trees[activeIndex]);
 	const totalTrees = $derived(trees.length);
 	const activeChain = $derived(chains[activeIndex]);
+
+	const VIEWS: { mode: LayoutMode; icon: typeof GitFork; label: () => string }[] = [
+		{ mode: 'dendrogram', icon: GitFork, label: () => m.breeding_view_dendrogram() },
+		{ mode: 'smooth', icon: Spline, label: () => m.breeding_view_smooth() },
+		{ mode: 'columns', icon: Columns3, label: () => m.breeding_view_columns() },
+		{ mode: 'radial', icon: Orbit, label: () => m.breeding_view_radial() }
+	];
 
 	function prev() {
 		if (activeIndex > 0) onactiveIndexChange?.(activeIndex - 1);
@@ -110,8 +126,24 @@
 			{/if}
 		</div>
 
-		{#if chains.length > 0 && maxDepth !== undefined && maxDepth > 1}
-			<div class="flex shrink-0 items-center gap-1.5">
+		<div class="flex shrink-0 items-center gap-1.5">
+			<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
+				{#each VIEWS as view (view.mode)}
+					{@const Icon = view.icon}
+					<button
+						class="rounded-sm p-1 transition-all {viewMode === view.mode
+							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
+							: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
+						onclick={() => (viewMode = view.mode)}
+						title={view.label()}
+						aria-pressed={viewMode === view.mode}
+					>
+						<Icon size={12} />
+					</button>
+				{/each}
+			</div>
+
+			{#if chains.length > 0 && maxDepth !== undefined && maxDepth > 1}
 				<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
 					<button
 						class="rounded-sm px-1.5 py-0.5 text-xs font-medium transition-all {graphLayout ===
@@ -148,13 +180,20 @@
 						>
 					</div>
 				{/if}
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 
 	{#if activeTree}
 		<div class="min-h-0 flex-1">
-			<ChainDendrogram treeNode={activeTree} {palMap} {passiveName} fullHeight={true} {onselect} />
+			<ChainDendrogram
+				treeNode={activeTree}
+				{palMap}
+				{passiveName}
+				fullHeight={true}
+				layoutMode={viewMode}
+				{onselect}
+			/>
 		</div>
 	{:else}
 		<div class="text-surface-400 flex flex-1 items-center justify-center text-xs italic">

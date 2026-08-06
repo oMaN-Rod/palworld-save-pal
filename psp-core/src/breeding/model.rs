@@ -211,6 +211,11 @@ impl Default for BreedingSpec {
 }
 
 /// One row of a Direct-Mode answer (forward or reverse).
+///
+/// `parent_*_gender` is `Some` only for the handful of unique combos the game
+/// gates on parent gender (`DT_PalCombiUnique.ParentGenderA/B`) — e.g. CatMage
+/// + FoxMage yields a different child depending on which parent is male. The
+/// genders are stated relative to this row's own `parent_a`/`parent_b` order.
 #[derive(Debug, Clone, serde::Serialize)]
 pub struct DirectResult {
     pub parent_a: String,
@@ -223,6 +228,38 @@ pub struct DirectResult {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub child_gender_prob: Option<GenderProb>,
     pub combo_type: ComboType,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub parent_a_gender: Option<Gender>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub parent_b_gender: Option<Gender>,
+}
+
+/// One possible child of a parent pair.
+///
+/// A pair usually has exactly one outcome, but a gender-gated unique pair has
+/// two (one per gender assignment). Genders are relative to the queried parent
+/// order, so callers never have to re-derive which side a constraint applies to.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ComboOutcome {
+    pub child: String,
+    pub parent_a_gender: Option<Gender>,
+    pub parent_b_gender: Option<Gender>,
+    pub combo_type: ComboType,
+}
+
+impl ComboOutcome {
+    /// True when concrete parent genders can satisfy this outcome's constraints.
+    /// `Wildcard`/`Unknown` count as "could be either", so an unresolved pal
+    /// keeps every branch alive.
+    pub fn admits(&self, gender_a: Gender, gender_b: Gender) -> bool {
+        fn ok(req: Option<Gender>, actual: Gender) -> bool {
+            match req {
+                None => true,
+                Some(want) => matches!(actual, Gender::Wildcard | Gender::Unknown) || actual == want,
+            }
+        }
+        ok(self.parent_a_gender, gender_a) && ok(self.parent_b_gender, gender_b)
+    }
 }
 
 /// `{"male": p, "female": q}` — serialized as a two-key object.

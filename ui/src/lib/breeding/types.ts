@@ -25,10 +25,19 @@ export interface DirectResultItem {
 	child_icon: string | null;
 	child_gender_prob: { male: number; female: number } | null;
 	combo_type: 'formula' | 'unique';
+	/** Set only for the unique combos the game gates on parent gender
+	 *  (`DT_PalCombiUnique.ParentGenderA/B`) — e.g. CatMage + FoxMage yields a
+	 *  different child depending on which parent is male. Relative to this
+	 *  row's own `parent_a`/`parent_b` order. */
+	parent_a_gender?: 'Male' | 'Female' | null;
+	parent_b_gender?: 'Male' | 'Female' | null;
 }
 
 export interface DirectChildResponse {
+	/** The headline answer (first of `results`). */
 	result: DirectResultItem | null;
+	/** Every outcome for the pair. Longer than one only for gender-gated combos. */
+	results?: DirectResultItem[];
 }
 
 export interface DirectPartnersResponse {

@@ -1,41 +1,22 @@
 /**
- * DendrogramEngine — framework-agnostic D3 dendrogram renderer for ONE chain.
+ * DendrogramEngine — framework-agnostic D3 renderer for ONE breeding chain.
  *
- * Ported from PalSavTools. Only integration change: `assetUrl(icon)` →
- * `assetLoader.loadImage(t_{character_id}_icon_normal.webp)` for PSP's bundled-image model.
+ * Ported from PalSavTools. Integration changes: `assetUrl(icon)` →
+ * `assetLoader.loadMenuImage(character_id)` for PSP's bundled-image model, and
+ * layout is delegated to `./layouts` so the same renderer serves the
+ * dendrogram, smooth, bracket and radial views.
  *
- * Renders a single breeding chain as a left-to-right binary tree: the target
- * pal on the LEFT (root), source pals as leaves on the RIGHT, intermediate
- * bred pals in the middle. Layout uses `d3-hierarchy`'s `tree()`
- * (Reingold-Tilford), rotated 90° so depth → X and sibling axis → Y. Edges are
- * orthogonal elbow connectors with unique midpoints.
+ * The tree reads target-first: the target pal is the root and source pals are
+ * the leaves.
  */
-import { hierarchy, tree, type HierarchyPointNode } from 'd3-hierarchy';
 import { select, type Selection } from 'd3-selection';
 import { transition } from 'd3-transition';
 import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior } from 'd3-zoom';
 
 import { assetLoader } from '$lib/utils/assetLoader';
-import { ASSET_DATA_PATH } from '$lib/constants';
 import { DENDRO_COLORS, DENDRO_CONFIG, resolveDendroColors, type DendroColors } from './constants';
+import { computeLayout, type LayoutMode, type PositionedLink, type PositionedNode } from './layouts';
 import type { NodeHoverCallback, NodeSelectCallback, TreeNode } from './types';
-
-interface PositionedNode {
-	node: TreeNode;
-	x: number;
-	y: number;
-	w: number;
-}
-
-interface PositionedLink {
-	source: PositionedNode;
-	target: PositionedNode;
-	sx: number;
-	sy: number;
-	tx: number;
-	ty: number;
-	midX: number;
-}
 
 export class DendrogramEngine {
 	private svg: Selection<SVGSVGElement, unknown, null, undefined>;
@@ -55,6 +36,9 @@ export class DendrogramEngine {
 
 	matchedPassives: Set<string> = new Set();
 	passiveName: (asset: string) => string = (s) => s;
+	layoutMode: LayoutMode = 'dendrogram';
+	/** Last tree handed to `render`, so a layout switch can re-lay it out. */
+	private currentTree: TreeNode | null = null;
 
 	callbacks: {
 		onSelect?: NodeSelectCallback;
@@ -63,6 +47,7 @@ export class DendrogramEngine {
 
 	constructor(svgEl: SVGSVGElement) {
 		this.svg = select(svgEl);
+		this.defineFilters();
 		this.zoomLayer = this.svg.append('g').attr('class', 'dendro-zoom-layer');
 		this.linksLayer = this.zoomLayer.append('g').attr('class', 'dendro-links');
 		this.nodesLayer = this.zoomLayer.append('g').attr('class', 'dendro-nodes');
@@ -77,74 +62,32 @@ export class DendrogramEngine {
 		this.svg.on('dblclick.zoom', null);
 	}
 
+	/**
+	 * Lay out and draw `treeRoot`. Selection and hover survive a re-render when
+	 * the node still exists, so re-rendering (a theme change, a layout switch)
+	 * does not silently clear what the user picked.
+	 */
 	render(treeRoot: TreeNode): void {
 		this.colors = resolveDendroColors();
-		this.selectedId = null;
-		this.hoveredId = null;
-		this.layoutIndex.clear();
-		this.layoutNodes = [];
-		this.layoutLinks = [];
+		this.currentTree = treeRoot;
 
-		const root = hierarchy<TreeNode>(treeRoot, (d) => (d.parents ? [...d.parents] : []));
+		const { nodes, links, index } = computeLayout(treeRoot, this.layoutMode);
+		this.layoutNodes = nodes;
+		this.layoutLinks = links;
+		this.layoutIndex = index;
 
-		const layout = tree<TreeNode>()
-			.nodeSize([
-				DENDRO_CONFIG.nodeHeight + DENDRO_CONFIG.siblingGap,
-				DENDRO_CONFIG.nodeWidth + DENDRO_CONFIG.levelGap
-			])
-			.separation((a, b) => (a.parent === b.parent ? 1 : 1.25));
-
-		const laidOut = layout(root);
-
-		laidOut.each((d: HierarchyPointNode<TreeNode>) => {
-			const isTarget = d.data.isTarget === true;
-			const w = isTarget ? DENDRO_CONFIG.targetNodeWidth : DENDRO_CONFIG.nodeWidth;
-			const positioned: PositionedNode = {
-				node: d.data,
-				x: d.y,
-				y: d.x,
-				w
-			};
-			this.layoutNodes.push(positioned);
-			this.layoutIndex.set(d.data.id, positioned);
-		});
-
-		const targetLinkCount = new Map<string, number>();
-		const targetLinkIdx = new Map<string, number>();
-		for (const link of laidOut.links()) {
-			const tid = link.target.data.id;
-			targetLinkCount.set(tid, (targetLinkCount.get(tid) ?? 0) + 1);
-		}
-
-		let linkIdx = 0;
-		for (const link of laidOut.links()) {
-			const sourceData = link.source.data;
-			const targetData = link.target.data;
-			const source = this.layoutIndex.get(sourceData.id);
-			const target = this.layoutIndex.get(targetData.id);
-			if (!source || !target) continue;
-
-			const sx = source.x + source.w;
-			const sy = source.y;
-			const tx = target.x;
-			const ty = target.y;
-
-			const span = tx - sx;
-			const laneOffset = (linkIdx % 3) * 6 - 6;
-			const midX = sx + (span * 0.5 + laneOffset);
-
-			const tIdx = targetLinkIdx.get(targetData.id) ?? 0;
-			targetLinkIdx.set(targetData.id, tIdx + 1);
-			const totalIncoming = targetLinkCount.get(targetData.id) ?? 1;
-			const entryOffset = totalIncoming > 1 ? (tIdx / (totalIncoming - 1) - 0.5) * 8 : 0;
-			const tyAdj = ty + entryOffset;
-
-			this.layoutLinks.push({ source, target, sx, sy, tx, ty: tyAdj, midX });
-			linkIdx++;
-		}
+		if (this.selectedId && !index.has(this.selectedId)) this.selectedId = null;
+		if (this.hoveredId && !index.has(this.hoveredId)) this.hoveredId = null;
 
 		this.drawLinks();
 		this.drawNodes();
+	}
+
+	/** Switch view without rebuilding the tree. No-op if the mode is unchanged. */
+	setLayout(mode: LayoutMode): void {
+		if (mode === this.layoutMode) return;
+		this.layoutMode = mode;
+		if (this.currentTree) this.render(this.currentTree);
 	}
 
 	private drawLinks(): void {
@@ -165,7 +108,7 @@ export class DendrogramEngine {
 
 		enter
 			.merge(sel)
-			.attr('d', (d) => orthogonalPath(d.sx, d.sy, d.tx, d.ty, d.midX))
+			.attr('d', (d) => d.path)
 			.attr('stroke', (d) => {
 				if (d.source.node.id === this.selectedId || d.target.node.id === this.selectedId) {
 					return this.colors.linkHighlight;
@@ -206,9 +149,10 @@ export class DendrogramEngine {
 			.attr('class', 'dendro-card')
 			.attr('width', (d) => d.w)
 			.attr('height', DENDRO_CONFIG.nodeHeight)
-			.attr('rx', 8)
-			.attr('ry', 8)
-			.attr('stroke-width', 2);
+			.attr('rx', 10)
+			.attr('ry', 10)
+			.attr('stroke-width', 2)
+			.attr('filter', 'url(#dendro-card-shadow)');
 
 		enter
 			.append('clipPath')
@@ -230,7 +174,7 @@ export class DendrogramEngine {
 			.attr('height', DENDRO_CONFIG.iconSize)
 			.attr('preserveAspectRatio', 'xMidYMid slice')
 			.attr('clip-path', (d) => `url(#clip-${cssEscape(d.node.id)})`)
-			.attr('href', (d) => assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${d.node.character_id}_icon_normal.webp`));
+			.attr('href', (d) => assetLoader.loadMenuImage(d.node.character_id));
 
 		enter
 			.append('text')
@@ -282,7 +226,14 @@ export class DendrogramEngine {
 
 		const merged = enter.merge(sel);
 
-		merged.attr('transform', (d) => `translate(${d.x},${d.y - DENDRO_CONFIG.nodeHeight / 2})`);
+		merged
+			.attr('transform', (d) => `translate(${d.x},${d.y - DENDRO_CONFIG.nodeHeight / 2})`)
+			.attr('opacity', (d) => {
+				// Dim everything not on the highlighted node's own edges, matching
+				// how the links fade, so focus reads across marks and connectors.
+				if (!this.selectedId && !this.hoveredId) return 1;
+				return this.isAdjacentToFocus(d.node.id) ? 1 : 0.35;
+			});
 
 		merged
 			.select<SVGRectElement>('.dendro-card')
@@ -402,6 +353,28 @@ export class DendrogramEngine {
 			.attr('opacity', (d) => (d.node.isBred ? 1 : 0));
 	}
 
+	/**
+	 * Soft drop shadow, declared once. Kept as an SVG filter rather than a CSS
+	 * one so the PNG export — which serializes the SVG with no stylesheet —
+	 * rasterizes with the same depth the on-screen tree has.
+	 */
+	private defineFilters(): void {
+		const defs = this.svg.append('defs');
+		const shadow = defs
+			.append('filter')
+			.attr('id', 'dendro-card-shadow')
+			.attr('x', '-20%')
+			.attr('y', '-20%')
+			.attr('width', '140%')
+			.attr('height', '140%');
+		shadow
+			.append('feDropShadow')
+			.attr('dx', 0)
+			.attr('dy', 1)
+			.attr('stdDeviation', 2)
+			.attr('flood-opacity', 0.35);
+	}
+
 	private genderGlyphX(display: string): number {
 		const nameWidth = truncate(display, 14).length * 6.5;
 		return DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5 + nameWidth + 5;
@@ -436,10 +409,26 @@ export class DendrogramEngine {
 		this.callbacks.onSelect?.(node as any);
 	}
 
+	/** Is `id` the focused node, or directly connected to it? */
+	private isAdjacentToFocus(id: string): boolean {
+		const focus = this.selectedId ?? this.hoveredId;
+		if (!focus) return true;
+		if (id === focus) return true;
+		return this.layoutLinks.some(
+			(l) =>
+				(l.source.node.id === focus && l.target.node.id === id) ||
+				(l.target.node.id === focus && l.source.node.id === id)
+		);
+	}
+
 	private refreshNodeStyles(): void {
 		if (!this.layoutNodes.length) return;
-		this.nodesLayer
-			.selectAll<SVGGElement, PositionedNode>('g.dendro-node')
+		const groups = this.nodesLayer.selectAll<SVGGElement, PositionedNode>('g.dendro-node');
+		groups.attr('opacity', (d) => {
+			if (!this.selectedId && !this.hoveredId) return 1;
+			return this.isAdjacentToFocus(d.node.id) ? 1 : 0.35;
+		});
+		groups
 			.select<SVGRectElement>('.dendro-card')
 			.attr('fill', (d) => {
 				if (d.node.id === this.selectedId) return this.colors.bgCardSelected;
@@ -538,10 +527,6 @@ export class DendrogramEngine {
 		this.svg.selectAll('*').remove();
 		this.svg.on('.zoom', null);
 	}
-}
-
-function orthogonalPath(sx: number, sy: number, tx: number, ty: number, midX: number): string {
-	return `M${sx},${sy} H${midX} V${ty} H${tx}`;
 }
 
 function truncate(s: string, max: number): string {
