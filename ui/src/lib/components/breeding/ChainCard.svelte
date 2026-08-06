@@ -46,7 +46,7 @@
 			<h3 class="text-surface-50 text-sm font-semibold">
 				{palFor(chain.target)?.display_name ?? chain.target}
 			</h3>
-			<span class="chip chip-primary px-2 py-0 text-[10px]"
+			<span class="chip chip-primary px-2 py-0 text-xs"
 				>{m.breeding_gens({ n: chain.generations })}</span
 			>
 			{#if chain.gender_feasible}
@@ -58,7 +58,7 @@
 		{#if chain.matched_passives.length}
 			<div class="flex flex-wrap gap-1">
 				{#each chain.matched_passives as passive}
-					<span class="chip chip-success px-1.5 py-0 text-[9px]">{passiveName(passive)}</span>
+					<span class="chip chip-success px-1.5 py-0 text-[10px]">{passiveName(passive)}</span>
 				{/each}
 			</div>
 		{/if}
@@ -77,10 +77,10 @@
 						tribe={src.pal}
 						display={src.display}
 						characterId={src.raw_character_id ?? src.pal}
-						size="sm"
+						size="md"
 						gender={src.gender}
 					/>
-					<span class="chip px-1.5 py-0 text-[9px] {meta.cls} shrink-0">
+					<span class="chip px-1.5 py-0 text-[10px] {meta.cls} shrink-0">
 						<SrcIcon size={9} class="inline" />{meta.label()}
 					</span>
 				</div>
@@ -95,31 +95,31 @@
 				<div
 					class="rounded-sm bg-surface-900/30 border-surface-700/20 flex items-center gap-2 border p-2"
 				>
-					<span class="text-surface-400 w-4 shrink-0 font-mono text-[9px]">{i + 1}</span>
+					<span class="text-surface-400 w-4 shrink-0 font-mono text-[10px]">{i + 1}</span>
 					<PalSlot
 						tribe={step.parent_a}
 						display={palFor(step.parent_a)?.display_name}
 						characterId={step.parent_a}
-						size="sm"
+						size="md"
 					/>
-					<Plus size={11} class="text-surface-400 shrink-0" />
+					<Plus size={16} class="text-surface-400 shrink-0" />
 					<PalSlot
 						tribe={step.parent_b}
 						display={palFor(step.parent_b)?.display_name}
 						characterId={step.parent_b}
-						size="sm"
+						size="md"
 					/>
-					<ArrowRight size={13} class="text-primary-400 shrink-0" />
+					<ArrowRight size={18} class="text-primary-400 shrink-0" />
 					<PalSlot
 						tribe={step.child}
 						display={palFor(step.child)?.display_name}
 						characterId={step.child}
-						size="sm"
+						size="md"
 					/>
 					{#if step.inherited_passives.length}
 						<div class="ml-auto flex shrink-0 flex-wrap gap-0.5">
 							{#each step.inherited_passives as p}
-								<span class="chip px-1.5 py-0 text-[9px] {matchedSet.has(p) ? 'chip-success' : ''}"
+								<span class="chip px-1.5 py-0 text-[10px] {matchedSet.has(p) ? 'chip-success' : ''}"
 									>{passiveName(p)}</span
 								>
 							{/each}

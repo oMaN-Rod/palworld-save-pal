@@ -20,8 +20,8 @@
 		gender?: string | null;
 	} = $props();
 
-	const dims = $derived({ sm: 'w-5 h-5', md: 'w-8 h-8', lg: 'w-12 h-12' }[size]);
-	const textSize = $derived({ sm: 'text-[10px]', md: 'text-xs', lg: 'text-sm' }[size]);
+	const dims = $derived({ sm: 'w-8 h-8', md: 'w-10 h-10', lg: 'w-14 h-14' }[size]);
+	const textSize = $derived({ sm: 'text-sm', md: 'text-base', lg: 'text-lg' }[size]);
 	const shown = $derived(display || tribe);
 	const iconSrc = $derived(assetLoader.loadPalImage(characterId ?? tribe));
 	const GenderIcon = $derived(gender === 'Male' ? Mars : gender === 'Female' ? Venus : null);
@@ -30,7 +30,7 @@
 	);
 </script>
 
-<div class="flex min-w-0 items-center gap-1.5">
+<div class="flex min-w-0 items-center gap-2">
 	<div class="relative shrink-0">
 		<img
 			src={iconSrc}
@@ -40,14 +40,11 @@
 		/>
 		{#if GenderIcon}
 			<div class="absolute -right-0.5 -bottom-0.5 {genderColor} bg-surface-900 rounded-full">
-				<GenderIcon size={10} />
+				<GenderIcon size={12} />
 			</div>
 		{/if}
 	</div>
 	<div class="min-w-0">
 		<p class="{textSize} text-surface-50 truncate leading-tight font-medium">{shown}</p>
-		{#if display && display !== tribe}
-			<p class="text-surface-400 truncate font-mono text-[9px] leading-tight">{tribe}</p>
-		{/if}
 	</div>
 </div>

@@ -70,7 +70,7 @@
 					>
 						<ChevronLeft size={12} />
 					</button>
-					<span class="text-surface-400 shrink-0 px-1 font-mono text-[10px] tabular-nums">
+					<span class="text-surface-400 shrink-0 px-1 font-mono text-xs tabular-nums">
 						{totalTrees > 0 ? `${activeIndex + 1}/${totalTrees}` : '0/0'}
 					</span>
 					<button
@@ -89,7 +89,7 @@
 				<h3 class="text-surface-50 truncate text-sm font-semibold">
 					{palMap.get(activeChain.target)?.display_name ?? activeChain.target}
 				</h3>
-				<span class="chip chip-primary shrink-0 px-1.5 py-0.5 text-[9px]"
+				<span class="chip chip-primary shrink-0 px-1.5 py-0.5 text-[10px]"
 					>{m.breeding_gens({ n: activeChain.generations })}</span
 				>
 				{#if activeChain.gender_feasible}
@@ -100,7 +100,7 @@
 				{#if activeChain.matched_passives.length}
 					<div class="ml-1 flex shrink-0 flex-wrap gap-1">
 						{#each activeChain.matched_passives as passive}
-							<span class="chip chip-success px-1.5 py-0 text-[8px]">{passiveName(passive)}</span>
+							<span class="chip chip-success px-1.5 py-0 text-[10px]">{passiveName(passive)}</span>
 						{/each}
 					</div>
 				{/if}
@@ -114,7 +114,7 @@
 			<div class="flex shrink-0 items-center gap-1.5">
 				<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
 					<button
-						class="rounded-sm px-1.5 py-0.5 text-[10px] font-medium transition-all {graphLayout ===
+						class="rounded-sm px-1.5 py-0.5 text-xs font-medium transition-all {graphLayout ===
 						'all-in-one'
 							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
 							: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
@@ -122,7 +122,7 @@
 						title={m.breeding_show_all_generations()}>{m.breeding_all()}</button
 					>
 					<button
-						class="rounded-sm px-1.5 py-0.5 text-[10px] font-medium transition-all {graphLayout ===
+						class="rounded-sm px-1.5 py-0.5 text-xs font-medium transition-all {graphLayout ===
 						'per-gen'
 							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
 							: 'text-surface-400 hover:text-surface-200 border border-transparent'}"
@@ -133,7 +133,7 @@
 
 				{#if graphLayout === 'per-gen'}
 					<div class="flex items-center gap-1">
-						<span class="text-surface-400 text-[9px] whitespace-nowrap">{m.breeding_gen()}</span>
+						<span class="text-surface-400 text-[10px] whitespace-nowrap">{m.breeding_gen()}</span>
 						<input
 							type="range"
 							min="1"
@@ -143,7 +143,7 @@
 							oninput={(e) =>
 								oncurrentGenChange?.(parseInt((e.currentTarget as HTMLInputElement).value) || 1)}
 						/>
-						<span class="text-surface-50 w-4 text-right font-mono text-[10px] tabular-nums"
+						<span class="text-surface-50 w-4 text-right font-mono text-xs tabular-nums"
 							>{currentGen}</span
 						>
 					</div>

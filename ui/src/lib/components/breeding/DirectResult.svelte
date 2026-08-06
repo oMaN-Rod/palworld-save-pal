@@ -26,30 +26,30 @@
 		tribe={result.parent_a}
 		display={palA?.display_name}
 		characterId={result.parent_a}
-		size="sm"
+		size="md"
 	/>
 
-	<Plus size={14} class="text-surface-400 shrink-0" />
+		<Plus size={18} class="text-surface-400 shrink-0" />
 
 	<PalSlot
 		tribe={result.parent_b}
 		display={palB?.display_name}
 		characterId={result.parent_b}
-		size="sm"
+		size="md"
 	/>
 
-	<ArrowRight size={16} class="text-primary-400 shrink-0" />
+		<ArrowRight size={20} class="text-primary-400 shrink-0" />
 
 	<div class="flex min-w-0 flex-1 items-center gap-2">
 		<PalSlot tribe={result.child} display={childDisplay} characterId={result.child} size="md" />
 		{#if result.combo_type === 'unique'}
-			<span class="chip chip-warning shrink-0 px-1.5 py-0 text-[9px]">{m.breeding_special()}</span>
+			<span class="chip chip-warning shrink-0 px-1.5 py-0 text-[10px]">{m.breeding_special()}</span>
 		{/if}
 	</div>
 
 	{#if result.child_gender_prob}
 		<div
-			class="flex shrink-0 items-center gap-1 text-[10px]"
+			class="flex shrink-0 items-center gap-1 text-xs"
 			title={m.breeding_gender_probability()}
 		>
 			{#if result.child_gender_prob.male > 0}

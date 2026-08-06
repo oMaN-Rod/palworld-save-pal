@@ -59,24 +59,23 @@
 						<GenderIcon
 							size={12}
 							class="shrink-0 {node.gender === 'Male' ? 'text-primary-300' : 'text-tertiary-400'}"
-						/>
-					{/if}
-				</div>
-				<div class="text-surface-400 font-mono text-[10px]">{node.tribe}</div>
+				/>
+			{/if}
+		</div>
 
-				{#if node.isBred && node.stepIndex !== undefined}
-					<div class="text-primary-400 text-[10px]">
-						Step {m.breeding_step_bred({ n: node.stepIndex + 1 })}
-					</div>
-				{:else if srcMeta(node.sourceType)}
-					{@const m2 = srcMeta(node.sourceType)!}
-					{@const MIcon = m2.icon}
-					<div class="text-[10px] {m2.cls} flex items-center gap-1">
-						<MIcon size={10} class="inline" />{m2.label()}
-					</div>
-				{/if}
-				{#if node.isTarget}
-					<div class="text-primary-400 flex items-center gap-1 text-[10px] font-semibold">
+		{#if node.isBred && node.stepIndex !== undefined}
+			<div class="text-primary-400 text-xs">
+				Step {m.breeding_step_bred({ n: node.stepIndex + 1 })}
+			</div>
+		{:else if srcMeta(node.sourceType)}
+			{@const m2 = srcMeta(node.sourceType)!}
+			{@const MIcon = m2.icon}
+			<div class="text-xs {m2.cls} flex items-center gap-1">
+				<MIcon size={10} class="inline" />{m2.label()}
+			</div>
+		{/if}
+		{#if node.isTarget}
+			<div class="text-primary-400 flex items-center gap-1 text-xs font-semibold">
 						<Target size={10} class="inline" />{m.breeding_target()}
 					</div>
 				{/if}
@@ -86,7 +85,7 @@
 		{#if node.passives.length}
 			<div class="border-surface-700/30 flex flex-wrap gap-1 border-t px-2.5 pt-0.5 pb-2.5">
 				{#each node.passives as passive}
-					<span class="chip px-1.5 py-0 text-[9px]">{passiveName(passive)}</span>
+					<span class="chip px-1.5 py-0 text-[10px]">{passiveName(passive)}</span>
 				{/each}
 			</div>
 		{/if}

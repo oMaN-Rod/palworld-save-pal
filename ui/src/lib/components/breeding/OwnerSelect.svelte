@@ -74,7 +74,7 @@
 </script>
 
 <div>
-	<span class="block text-[11px] font-semibold text-surface-400 uppercase tracking-wider mb-1">
+	<span class="block text-xs font-semibold text-surface-400 uppercase tracking-wider mb-1">
 		{m.breeding_owner()}
 	</span>
 	<div class="relative">

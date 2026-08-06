@@ -433,14 +433,14 @@
 			aria-label="View mode"
 		>
 			<button
-				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium transition-all {tabPill(chainViewMode === 'list')}"
+				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-xs font-medium transition-all {tabPill(chainViewMode === 'list')}"
 				onclick={() => (chainViewMode = 'list')}
 			>
 				<List size={12} />
 				{m.breeding_view_list()}
 			</button>
 			<button
-				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium transition-all {tabPill(chainViewMode === 'graph')}"
+				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-xs font-medium transition-all {tabPill(chainViewMode === 'graph')}"
 				onclick={() => (chainViewMode = 'graph')}
 			>
 				<GitMerge size={12} />
@@ -475,7 +475,7 @@
 						{#if directSub !== 'parents'}
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_parent_a()}
 								</span>
@@ -485,7 +485,7 @@
 						{#if directSub === 'forward'}
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_parent_b()}
 								</span>
@@ -499,7 +499,7 @@
 						{:else if directSub === 'reverse' || directSub === 'parents'}
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_target_child()}
 								</span>
@@ -665,7 +665,7 @@
 						<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_target()}
 								</span>
@@ -673,7 +673,7 @@
 							</div>
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_gender()}
 								</span>
@@ -688,7 +688,7 @@
 						<div class="grid grid-cols-2 gap-3">
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_max_generations()}
 								</span>
@@ -696,7 +696,7 @@
 							</div>
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_max_results()}
 								</span>
@@ -713,7 +713,7 @@
 						{#if mode === 'selection'}
 							<div>
 								<span
-									class="text-surface-400 mb-1 block text-[10px] font-semibold tracking-wider uppercase"
+									class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 								>
 									{m.breeding_pool()} ({selectedPool.length})
 								</span>
@@ -744,7 +744,7 @@
 												>
 													{member.gender ?? m.breeding_any()}
 												</button>
-												<span class="text-surface-200 text-[10px]"
+												<span class="text-surface-200 text-xs"
 													>{palMap.get(member.tribe)?.display_name ?? member.tribe}</span
 												>
 												<button
@@ -775,7 +775,7 @@
 										<input type="checkbox" bind:checked={includeWild} class="accent-primary-500" />
 										{m.breeding_include_wild()}
 									</label>
-									<p class="text-surface-400 text-[10px]">
+									<p class="text-surface-400 text-xs">
 										{ownedPalCount > 0
 											? m.breeding_owned_count({ n: ownedPalCount })
 											: m.breeding_no_pals_loaded()}
