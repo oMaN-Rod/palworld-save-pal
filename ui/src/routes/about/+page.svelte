@@ -10,6 +10,12 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
+	import Palette from '@lucide/svelte/icons/palette';
+	import GitMerge from '@lucide/svelte/icons/git-merge';
+	import Github from '@lucide/svelte/icons/github';
+	import Sparkles from '@lucide/svelte/icons/sparkles';
+	import X from '@lucide/svelte/icons/x';
+	import { fade } from 'svelte/transition';
 
 	const appState = getAppState();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
@@ -80,35 +86,65 @@
 <svelte:window onkeydown={onKeydown} />
 
 {#if easterEgg}
-	<div class="fixed inset-0 z-[100] flex items-start justify-end p-4">
+	<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 		<button
-			class="absolute inset-0 cursor-default"
+			class="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm"
 			aria-label={m.compat_dismiss()}
 			onclick={() => (easterEgg = false)}
+			transition:fade={{ duration: 150 }}
 		></button>
 		<div
-			class="border-primary-400/60 bg-surface-900/95 shadow-glow-paldium animate-fade-in relative rotate-2 rounded-lg border-2 px-5 py-4 backdrop-blur-md"
+			class="border-primary-400/60 bg-surface-900/95 shadow-glow-paldium relative w-full max-w-sm rounded-lg border-2 px-6 py-5 backdrop-blur-md"
 			role="dialog"
 			aria-modal="true"
-			aria-label={m.easter_egg_title()}
+			aria-label="CyrixJD115 contributions"
+			transition:fade={{ duration: 150 }}
 		>
-			<p class="heading-gradient text-sm font-bold">🥚 {m.easter_egg_title()}</p>
+			<!-- close button -->
+			<button
+				class="text-muted hover:text-surface-50 absolute right-3 top-3 transition-colors"
+				onclick={() => (easterEgg = false)}
+				aria-label={m.compat_dismiss()}
+			>
+				<X size={18} />
+			</button>
+
+			<!-- header — title links to GitHub -->
 			<a
 				href={AUTHOR_URL}
 				target="_blank"
 				rel="noopener noreferrer"
-				class="text-primary-300 hover:text-primary-200 mt-1 flex items-center gap-2 text-sm font-semibold underline"
+				class="group flex items-center gap-2.5"
 				onclick={(event) => openLink(event, AUTHOR_URL)}
 			>
-				CyrixJD115
+				<Sparkles size={20} class="text-primary-400 shrink-0" />
+				<h2 class="heading-gradient text-lg font-bold">CyrixJD115</h2>
+				<Github size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
 			</a>
-			<p class="text-muted mt-0.5 text-[11px]">{m.easter_egg_credit()}</p>
-			<button
-				class="text-muted hover:text-surface-50 mt-2 text-[10px] underline"
-				onclick={() => (easterEgg = false)}
-			>
-				{m.compat_dismiss()}
-			</button>
+
+			<!-- contributions -->
+			<div class="mt-4 space-y-2.5">
+				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
+				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+					<Palette size={18} class="text-secondary-400 shrink-0" />
+					<div>
+						<p class="text-surface-50 text-sm font-medium">Theme UI/UX Overhaul</p>
+						<p class="text-muted text-xs">Frontier theme, design tokens, palette system</p>
+					</div>
+				</div>
+				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+					<GitMerge size={18} class="text-tertiary-400 shrink-0" />
+					<div>
+						<p class="text-surface-50 text-sm font-medium">Breeding Calculator</p>
+						<p class="text-muted text-xs">Standalone breeding chain solver + dendrogram</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- footer -->
+			<p class="text-muted mt-4 text-center text-xs">
+				{m.easter_egg_credit()}
+			</p>
 		</div>
 	</div>
 {/if}

@@ -3,6 +3,7 @@
 	// overlay clamped to viewport.
 	import * as m from '$i18n/messages';
 	import { assetLoader } from '$lib/utils/assetLoader';
+	import { ASSET_DATA_PATH } from '$lib/constants';
 	import Mars from '@lucide/svelte/icons/mars';
 	import Venus from '@lucide/svelte/icons/venus';
 	import Package from '@lucide/svelte/icons/package';
@@ -48,7 +49,7 @@
 	>
 		<div class="flex items-start gap-2 p-2.5">
 			<img
-				src={assetLoader.loadPalImage(node.character_id)}
+				src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${node.character_id}_icon_normal.webp`)}
 				alt=""
 				class="rounded-sm border-surface-600 h-12 w-12 shrink-0 border object-cover"
 			/>

@@ -2,7 +2,7 @@
  * DendrogramEngine — framework-agnostic D3 dendrogram renderer for ONE chain.
  *
  * Ported from PalSavTools. Only integration change: `assetUrl(icon)` →
- * `assetLoader.loadPalImage(character_id)` for PSP's bundled-image model.
+ * `assetLoader.loadImage(t_{character_id}_icon_normal.webp)` for PSP's bundled-image model.
  *
  * Renders a single breeding chain as a left-to-right binary tree: the target
  * pal on the LEFT (root), source pals as leaves on the RIGHT, intermediate
@@ -16,6 +16,7 @@ import { transition } from 'd3-transition';
 import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior } from 'd3-zoom';
 
 import { assetLoader } from '$lib/utils/assetLoader';
+import { ASSET_DATA_PATH } from '$lib/constants';
 import { DENDRO_COLORS, DENDRO_CONFIG, resolveDendroColors, type DendroColors } from './constants';
 import type { NodeHoverCallback, NodeSelectCallback, TreeNode } from './types';
 
@@ -229,7 +230,7 @@ export class DendrogramEngine {
 			.attr('height', DENDRO_CONFIG.iconSize)
 			.attr('preserveAspectRatio', 'xMidYMid slice')
 			.attr('clip-path', (d) => `url(#clip-${cssEscape(d.node.id)})`)
-			.attr('href', (d) => assetLoader.loadPalImage(d.node.character_id));
+			.attr('href', (d) => assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${d.node.character_id}_icon_normal.webp`));
 
 		enter
 			.append('text')
