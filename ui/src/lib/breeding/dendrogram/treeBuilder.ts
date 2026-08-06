@@ -177,7 +177,10 @@ export function directToTreeNode(
 		isTarget: true,
 		parents: [
 			{
-				id: `${result.parent_a}#direct-leaf`,
+				// Suffixed per slot, not per tribe: a self-pair (Anubis + Anubis)
+				// would otherwise give both parents one id, and the layout index
+				// collapses same-id nodes into a single connector.
+				id: `${result.parent_a}#direct-leaf-a`,
 				tribe: result.parent_a,
 				display: parentAPal?.display_name || result.parent_a,
 				character_id: result.parent_a,
@@ -188,7 +191,7 @@ export function directToTreeNode(
 				parents: null
 			},
 			{
-				id: `${result.parent_b}#direct-leaf`,
+				id: `${result.parent_b}#direct-leaf-b`,
 				tribe: result.parent_b,
 				display: parentBPal?.display_name || result.parent_b,
 				character_id: result.parent_b,

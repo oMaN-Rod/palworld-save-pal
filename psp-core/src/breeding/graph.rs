@@ -34,12 +34,9 @@ pub fn min_steps(db: &BreedingDB, start: &str, target: &str) -> Option<i64> {
 }
 
 fn directly_breeds_into(db: &BreedingDB, parent: &str, target: &str) -> bool {
-    for (a, _b) in db.child_to_parents(target) {
-        if a == parent {
-            return true;
-        }
-    }
-    false
+    db.child_to_parents(target)
+        .iter()
+        .any(|p| p.parent_a == parent || p.parent_b == parent)
 }
 
 /// Convenience: is `min_steps(start, target)` within `max_steps`?

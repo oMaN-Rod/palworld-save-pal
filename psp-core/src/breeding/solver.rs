@@ -128,22 +128,26 @@ pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -
                 if !gender_compatible(p1, p2) {
                     continue;
                 }
-                let Some(child_species) = db.forward(&p1.species, &p2.species) else {
-                    continue;
-                };
-                if !db.reachable(child_species, &spec.target_pal, remaining_budget) {
-                    continue;
+                // A pair usually has one outcome, but a gender-gated unique
+                // pair has two — branch on every outcome the parents' genders
+                // still admit rather than collapsing to the first.
+                for outcome in
+                    db.forward_gendered(&p1.species, p1.gender, &p2.species, p2.gender)
+                {
+                    if !db.reachable(&outcome.child, &spec.target_pal, remaining_budget) {
+                        continue;
+                    }
+                    let inherited = inherit_passives(&p1.passives, &p2.passives);
+                    new_children.push(PalRef {
+                        species: outcome.child,
+                        gender: Gender::Wildcard,
+                        passives: inherited,
+                        generation: gen + 1,
+                        parents: Some((Arc::clone(p1), Arc::clone(p2))),
+                        origin: Origin::Bred,
+                        provenance: Default::default(),
+                    });
                 }
-                let inherited = inherit_passives(&p1.passives, &p2.passives);
-                new_children.push(PalRef {
-                    species: child_species.to_string(),
-                    gender: Gender::Wildcard,
-                    passives: inherited,
-                    generation: gen + 1,
-                    parents: Some((Arc::clone(p1), Arc::clone(p2))),
-                    origin: Origin::Bred,
-                    provenance: Default::default(),
-                });
             }
         }
 

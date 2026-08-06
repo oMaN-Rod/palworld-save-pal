@@ -78,8 +78,13 @@ pub async fn handle_breeding_direct_child(
 ) -> Result<(), HandlerError> {
     let mt = MessageType::BreedingDirectChild;
     let db = db_or_soft_error!(ctx, mt);
-    let result = direct_child(db, &data.parent_a, &data.parent_b);
-    ctx.emitter.emit(mt, &json!({ "result": result }));
+    let results = direct_child(db, &data.parent_a, &data.parent_b);
+    // `result` stays the single headline answer for back-compat; `results`
+    // carries every outcome, which is >1 only for the gender-gated combos.
+    ctx.emitter.emit(
+        mt,
+        &json!({ "result": results.first(), "results": results }),
+    );
     Ok(())
 }
 

@@ -435,6 +435,70 @@ body::after {
 		color: var(--color-surface-200);
 		border: 1px solid color-mix(in srgb, var(--color-surface-600) 40%, transparent);
 	}
+
+	/* Breeding pair rows: A + B → child … trailing.
+
+	   The column template lives on the LIST, and each row adopts it with
+	   `subgrid`. That is what lets both alignments hold at once: one shared set
+	   of tracks means the pal icons line up down every column, and because the
+	   pal tracks size to the widest content in the list rather than to a fixed
+	   width, a track's edge sits just past its name — so the operator, centred
+	   in its own track between them, reads as centred between the two pals.
+
+	   A per-row grid cannot do both. Sibling grids size independently, so
+	   cross-row alignment there needs fixed tracks, and fixed tracks leave dead
+	   space after short names that pushes the operator off-centre.
+
+	   Rows carry EXACTLY 6 children, in order: pal, .breed-op, pal, .breed-op,
+	   pal, trailing — 7 for `.breed-list-numbered`, which prepends an index
+	   cell. A mismatched child count shifts every pal into an operator track,
+	   which collapses its name to zero width. Row padding is fine as long as it
+	   is uniform within a list; it insets every row identically. */
+	.breed-list,
+	.breed-list-numbered {
+		display: grid;
+		column-gap: var(--breed-gap);
+		row-gap: 0.375rem;
+		--breed-op: 1.25rem;
+		--breed-gap: 0.5rem;
+	}
+	.breed-list {
+		grid-template-columns:
+			minmax(0, auto)
+			var(--breed-op)
+			minmax(0, auto)
+			var(--breed-op)
+			minmax(0, auto)
+			1fr;
+	}
+	.breed-list-numbered {
+		grid-template-columns:
+			1rem
+			minmax(0, auto)
+			var(--breed-op)
+			minmax(0, auto)
+			var(--breed-op)
+			minmax(0, auto)
+			1fr;
+	}
+	.breed-row {
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+		align-items: center;
+	}
+	.breed-row > .breed-op {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/* Start-aligned so each icon sits at its track's left edge. */
+	.breed-row > :not(.breed-op) {
+		justify-content: flex-start;
+	}
+	.breed-row > :last-child {
+		justify-content: flex-end;
+	}
 }
 
 /* ── Transition helpers ──────────────────────────────────────────────── */
@@ -887,6 +951,15 @@ body::after {
 	);
 	border-color: color-mix(in srgb, var(--color-success-400) 50%, transparent);
 	color: var(--color-success-300);
+}
+.chip-tertiary {
+	background: linear-gradient(
+		135deg,
+		color-mix(in srgb, var(--color-tertiary-500) 15%, transparent),
+		color-mix(in srgb, var(--color-tertiary-400) 10%, transparent)
+	);
+	border-color: color-mix(in srgb, var(--color-tertiary-400) 50%, transparent);
+	color: var(--color-tertiary-300);
 }
 .chip-warning {
 	background: linear-gradient(

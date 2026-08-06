@@ -90,41 +90,37 @@
 
 	<!-- steps -->
 	{#if chain.steps.length}
-		<div class="space-y-1.5">
+		<div class="breed-list-numbered">
 			{#each chain.steps as step, i}
-				<div
-					class="rounded-sm bg-surface-900/30 border-surface-700/20 flex items-center gap-2 border p-2"
-				>
-					<span class="text-surface-400 w-4 shrink-0 font-mono text-[10px]">{i + 1}</span>
+				<div class="breed-row rounded-sm bg-surface-900/30 border-surface-700/20 border p-2">
+					<span class="text-surface-400 shrink-0 font-mono text-[10px]">{i + 1}</span>
 					<PalSlot
 						tribe={step.parent_a}
 						display={palFor(step.parent_a)?.display_name}
 						characterId={step.parent_a}
 						size="md"
 					/>
-					<Plus size={16} class="text-surface-400 shrink-0" />
+					<span class="breed-op"><Plus size={16} class="text-primary-400" /></span>
 					<PalSlot
 						tribe={step.parent_b}
 						display={palFor(step.parent_b)?.display_name}
 						characterId={step.parent_b}
 						size="md"
 					/>
-					<ArrowRight size={18} class="text-primary-400 shrink-0" />
+					<span class="breed-op"><ArrowRight size={18} class="text-primary-400" /></span>
 					<PalSlot
 						tribe={step.child}
 						display={palFor(step.child)?.display_name}
 						characterId={step.child}
 						size="md"
 					/>
-					{#if step.inherited_passives.length}
-						<div class="ml-auto flex shrink-0 flex-wrap gap-0.5">
-							{#each step.inherited_passives as p}
-								<span class="chip px-1.5 py-0 text-[10px] {matchedSet.has(p) ? 'chip-success' : ''}"
-									>{passiveName(p)}</span
-								>
-							{/each}
-						</div>
-					{/if}
+					<div class="flex shrink-0 flex-wrap justify-end gap-0.5 pl-2">
+						{#each step.inherited_passives as p}
+							<span class="chip px-1.5 py-0 text-[10px] {matchedSet.has(p) ? 'chip-success' : ''}"
+								>{passiveName(p)}</span
+							>
+						{/each}
+					</div>
 				</div>
 			{/each}
 		</div>

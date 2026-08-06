@@ -20,7 +20,7 @@ use serde::Deserialize;
 
 use crate::gamedata::GameData;
 
-use super::model::{ComboType, DirectResult, GenderProb};
+use super::model::{ComboOutcome, ComboType, DirectResult, Gender, GenderProb};
 use super::BreedingError;
 
 // ---------------------------------------------------------------------
@@ -55,12 +55,59 @@ struct RawCombo {
     parent_a: String,
     parent_b: String,
     child: String,
+    /// `DT_PalCombiUnique.ParentGenderA`; absent/null for the usual
+    /// gender-agnostic combo.
+    #[serde(default)]
+    parent_a_gender: Option<String>,
+    #[serde(default)]
+    parent_b_gender: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Clone)]
 struct RawPair {
     parent_a: String,
     parent_b: String,
+    #[serde(default)]
+    parent_a_gender: Option<String>,
+    #[serde(default)]
+    parent_b_gender: Option<String>,
+}
+
+fn parse_gender(raw: &Option<String>) -> Option<Gender> {
+    raw.as_deref()
+        .filter(|s| !s.trim().is_empty())
+        .map(|s| Gender::coerce(Some(s)))
+        .filter(|g| matches!(g, Gender::Male | Gender::Female))
+}
+
+/// One way to produce a child: the two parent tribes plus any gender gate.
+#[derive(Debug, Clone)]
+pub struct ParentPair {
+    pub parent_a: String,
+    pub parent_b: String,
+    pub parent_a_gender: Option<Gender>,
+    pub parent_b_gender: Option<Gender>,
+    pub combo_type: ComboType,
+}
+
+impl ParentPair {
+    /// Re-state this pair with `pinned` as `parent_a`, moving its gender gate
+    /// with it. Returns `None` when `pinned` is not one of the two parents.
+    fn oriented(&self, pinned: &str) -> Option<ParentPair> {
+        if self.parent_a == pinned {
+            Some(self.clone())
+        } else if self.parent_b == pinned {
+            Some(ParentPair {
+                parent_a: self.parent_b.clone(),
+                parent_b: self.parent_a.clone(),
+                parent_a_gender: self.parent_b_gender,
+                parent_b_gender: self.parent_a_gender,
+                combo_type: self.combo_type,
+            })
+        } else {
+            None
+        }
+    }
 }
 
 #[derive(Debug, Deserialize, Default)]
@@ -92,21 +139,62 @@ fn pair_key(a: &str, b: &str) -> (String, String) {
     }
 }
 
+fn raw_to_pair(raw: &RawPair, combo_type: ComboType) -> ParentPair {
+    ParentPair {
+        parent_a: raw.parent_a.clone(),
+        parent_b: raw.parent_b.clone(),
+        parent_a_gender: parse_gender(&raw.parent_a_gender),
+        parent_b_gender: parse_gender(&raw.parent_b_gender),
+        combo_type,
+    }
+}
+
+/// Do two pairs impose the same gender gate on the same two tribes? Compared
+/// after normalizing parent order, so (A♂,B♀) and (B♀,A♂) are one gate.
+fn same_gate(x: &ParentPair, y: &ParentPair) -> bool {
+    let norm = |p: &ParentPair| {
+        let mut sides = [
+            (p.parent_a.clone(), p.parent_a_gender),
+            (p.parent_b.clone(), p.parent_b_gender),
+        ];
+        sides.sort_by(|l, r| l.0.cmp(&r.0).then(format!("{:?}", l.1).cmp(&format!("{:?}", r.1))));
+        sides
+    };
+    norm(x) == norm(y)
+}
+
+fn push_pair(bucket: &mut Vec<ParentPair>, pair: ParentPair) {
+    if !bucket.iter().any(|p| same_gate(p, &pair)) {
+        bucket.push(pair);
+    }
+}
+
 // ---------------------------------------------------------------------
 // BreedingDB
 // ---------------------------------------------------------------------
 /// Indexed breeding data. Construct via [`BreedingDB::from_game_data`].
 pub struct BreedingDB {
     pal_info: HashMap<String, PalInfo>,
-    /// `unique_combos` reindexed by child, for `_is_unique_combo`.
+    /// `unique_combos` reindexed by child, for `is_unique_combo`.
     child_to_parents_unique: HashMap<String, Vec<RawPair>>,
     display_names: HashMap<String, String>,
     gender_prob: HashMap<String, GenderProb>,
-    /// Sorted-(a,b) → child. Unique combos override formula results.
-    pair_to_child: HashMap<(String, String), String>,
-    /// child → deduped, sorted parent pairs (unique-first, then formula).
-    child_to_parents_merged: HashMap<String, Vec<(String, String)>>,
+    /// Sorted-(a,b) → the formula child. One entry per pair.
+    pair_formula: HashMap<(String, String), String>,
+    /// Sorted-(a,b) → every unique combo for that pair. Usually one, but a
+    /// gender-gated pair has one entry per gender assignment, so this cannot
+    /// collapse to a single child the way a plain map would.
+    pair_unique: HashMap<(String, String), Vec<ParentPair2Child>>,
+    /// child → deduped parent pairs (unique-first, then formula).
+    child_to_parents_merged: HashMap<String, Vec<ParentPair>>,
     min_steps: HashMap<String, HashMap<String, i64>>,
+}
+
+/// Internal: a unique combo stored against its sorted pair key.
+#[derive(Debug, Clone)]
+struct ParentPair2Child {
+    pair: ParentPair,
+    child: String,
 }
 
 impl BreedingDB {
@@ -128,39 +216,51 @@ impl BreedingDB {
         let min_steps: HashMap<String, HashMap<String, i64>> =
             serde_json::from_value(distance.clone())?;
 
-        // pair_to_child: formula first, then unique overwrites (game precedence).
-        let mut pair_to_child: HashMap<(String, String), String> = HashMap::new();
+        let mut pair_formula: HashMap<(String, String), String> = HashMap::new();
         for (child, pairs) in &breeding_file.child_to_parents_formula {
             for pair in pairs {
-                pair_to_child.insert(pair_key(&pair.parent_a, &pair.parent_b), child.clone());
+                pair_formula.insert(pair_key(&pair.parent_a, &pair.parent_b), child.clone());
             }
         }
+
+        // Unique combos are collected per pair rather than overwriting, so a
+        // gender-gated pair keeps both of its children.
+        let mut pair_unique: HashMap<(String, String), Vec<ParentPair2Child>> = HashMap::new();
         for combo in &breeding_file.unique_combos {
-            pair_to_child.insert(
-                pair_key(&combo.parent_a, &combo.parent_b),
-                combo.child.clone(),
-            );
+            let entry = ParentPair2Child {
+                pair: ParentPair {
+                    parent_a: combo.parent_a.clone(),
+                    parent_b: combo.parent_b.clone(),
+                    parent_a_gender: parse_gender(&combo.parent_a_gender),
+                    parent_b_gender: parse_gender(&combo.parent_b_gender),
+                    combo_type: ComboType::Unique,
+                },
+                child: combo.child.clone(),
+            };
+            let bucket = pair_unique
+                .entry(pair_key(&combo.parent_a, &combo.parent_b))
+                .or_default();
+            if !bucket
+                .iter()
+                .any(|e| e.child == entry.child && same_gate(&e.pair, &entry.pair))
+            {
+                bucket.push(entry);
+            }
         }
 
-        // child_to_parents_merged: unique-first, symmetric dedupe.
-        let mut merged: HashMap<String, Vec<(String, String)>> = HashMap::new();
-        let mut seen: HashMap<String, std::collections::HashSet<(String, String)>> =
-            HashMap::new();
-        for src in [
-            &breeding_file.child_to_parents_unique,
-            &breeding_file.child_to_parents_formula,
-        ] {
-            for (child, pairs) in src {
-                let bucket_seen = seen.entry(child.clone()).or_default();
-                let bucket = merged.entry(child.clone()).or_default();
-                for pair in pairs {
-                    let key = pair_key(&pair.parent_a, &pair.parent_b);
-                    if bucket_seen.contains(&key) {
-                        continue;
-                    }
-                    bucket_seen.insert(key.clone());
-                    bucket.push(key);
-                }
+        // child_to_parents_merged: unique-first, symmetric dedupe. The gender
+        // gate is part of the identity, so both CatMage/FoxMage rows survive.
+        let mut merged: HashMap<String, Vec<ParentPair>> = HashMap::new();
+        for (child, pairs) in &breeding_file.child_to_parents_unique {
+            let bucket = merged.entry(child.clone()).or_default();
+            for pair in pairs {
+                push_pair(bucket, raw_to_pair(pair, ComboType::Unique));
+            }
+        }
+        for (child, pairs) in &breeding_file.child_to_parents_formula {
+            let bucket = merged.entry(child.clone()).or_default();
+            for pair in pairs {
+                push_pair(bucket, raw_to_pair(pair, ComboType::Formula));
             }
         }
 
@@ -169,40 +269,104 @@ impl BreedingDB {
             child_to_parents_unique: breeding_file.child_to_parents_unique,
             display_names: meta_file.display_names,
             gender_prob: meta_file.gender_prob,
-            pair_to_child,
+            pair_formula,
+            pair_unique,
             child_to_parents_merged: merged,
             min_steps,
         })
     }
 
-    /// A + B → child tribe, or `None` if the pair has no known child.
-    /// Order-independent. Same-species pairs resolve to themselves when present
-    /// (Alpaca+Alpaca→Alpaca).
-    pub fn forward(&self, parent_a: &str, parent_b: &str) -> Option<&str> {
-        self.pair_to_child
-            .get(&pair_key(parent_a, parent_b))
-            .map(String::as_str)
+    /// Every child a pair can produce, with the gender gate (if any) that
+    /// selects it. Genders are stated relative to the queried `parent_a`/
+    /// `parent_b` order.
+    ///
+    /// Precedence mirrors the game:
+    /// 1. **Same species breeds true.** Two pals of one species always yield
+    ///    that species. This is not in the combo tables — the rank formula
+    ///    would otherwise hand back a rank-neighbour for the elemental
+    ///    variants, and nothing at all for `IgnoreCombi` legendaries.
+    /// 2. `DT_PalCombiUnique` entries for the pair.
+    /// 3. The rank formula.
+    pub fn forward_all(&self, parent_a: &str, parent_b: &str) -> Vec<ComboOutcome> {
+        if parent_a == parent_b {
+            return vec![ComboOutcome {
+                child: parent_a.to_string(),
+                parent_a_gender: None,
+                parent_b_gender: None,
+                combo_type: ComboType::Formula,
+            }];
+        }
+        let key = pair_key(parent_a, parent_b);
+        if let Some(entries) = self.pair_unique.get(&key) {
+            let mut out = Vec::with_capacity(entries.len());
+            for entry in entries {
+                let Some(oriented) = entry.pair.oriented(parent_a) else {
+                    continue;
+                };
+                out.push(ComboOutcome {
+                    child: entry.child.clone(),
+                    parent_a_gender: oriented.parent_a_gender,
+                    parent_b_gender: oriented.parent_b_gender,
+                    combo_type: ComboType::Unique,
+                });
+            }
+            if !out.is_empty() {
+                return out;
+            }
+        }
+        self.pair_formula
+            .get(&key)
+            .map(|child| {
+                vec![ComboOutcome {
+                    child: child.clone(),
+                    parent_a_gender: None,
+                    parent_b_gender: None,
+                    combo_type: ComboType::Formula,
+                }]
+            })
+            .unwrap_or_default()
+    }
+
+    /// Outcomes reachable given concrete parent genders. `Wildcard`/`Unknown`
+    /// keeps every branch — an unresolved pal could still turn out either way.
+    pub fn forward_gendered(
+        &self,
+        parent_a: &str,
+        gender_a: Gender,
+        parent_b: &str,
+        gender_b: Gender,
+    ) -> Vec<ComboOutcome> {
+        self.forward_all(parent_a, parent_b)
+            .into_iter()
+            .filter(|o| o.admits(gender_a, gender_b))
+            .collect()
+    }
+
+    /// A + B → child tribe, ignoring gender gates. Returns the first outcome,
+    /// so a gender-gated pair reports only one of its two children — prefer
+    /// [`Self::forward_all`] anywhere both matter.
+    pub fn forward(&self, parent_a: &str, parent_b: &str) -> Option<String> {
+        self.forward_all(parent_a, parent_b)
+            .into_iter()
+            .next()
+            .map(|o| o.child)
     }
 
     /// child → all parent pairs (unique + formula), deduped symmetrically.
-    pub fn child_to_parents(&self, child: &str) -> &[(String, String)] {
+    pub fn child_to_parents(&self, child: &str) -> &[ParentPair] {
         self.child_to_parents_merged
             .get(child)
             .map(Vec::as_slice)
             .unwrap_or(&[])
     }
 
-    /// Given Parent A + target child, return candidate Parent B tribes.
-    pub fn reverse(&self, parent_a: &str, target_child: &str) -> Vec<String> {
-        let mut out = Vec::new();
-        for (a, b) in self.child_to_parents(target_child) {
-            if a == parent_a {
-                out.push(b.clone());
-            } else if b == parent_a {
-                out.push(a.clone());
-            }
-        }
-        out
+    /// Given Parent A + target child, return the candidate pairs re-stated with
+    /// `parent_a` pinned to the first slot (so any gender gate travels with it).
+    pub fn reverse(&self, parent_a: &str, target_child: &str) -> Vec<ParentPair> {
+        self.child_to_parents(target_child)
+            .iter()
+            .filter_map(|p| p.oriented(parent_a))
+            .collect()
     }
 
     /// Raw distance row for `start` (palcalc `MinBreedingSteps`), or `None`.
@@ -293,13 +457,15 @@ impl BreedingDB {
     }
 
     /// `DirectResult` factory — shared by the forward + reverse Direct-Mode
-    /// helpers.
+    /// helpers. `gender_a`/`gender_b` carry a unique combo's gender gate, if any.
     pub fn direct_result(
         &self,
         parent_a: &str,
         parent_b: &str,
         child: &str,
         combo_type: ComboType,
+        gender_a: Option<Gender>,
+        gender_b: Option<Gender>,
     ) -> DirectResult {
         DirectResult {
             parent_a: parent_a.to_string(),
@@ -309,6 +475,8 @@ impl BreedingDB {
             child_icon: self.icon_path(child),
             child_gender_prob: Some(self.gender_probability(child)),
             combo_type,
+            parent_a_gender: gender_a,
+            parent_b_gender: gender_b,
         }
     }
 }
@@ -327,15 +495,15 @@ mod tests {
     fn forward_resolves_formula_and_unique_combos() {
         let db = load_repo_db();
         // Formula pair (Alpaca self-breed).
-        assert_eq!(db.forward("Alpaca", "Alpaca"), Some("Alpaca"));
+        assert_eq!(db.forward("Alpaca", "Alpaca").as_deref(), Some("Alpaca"));
         // Unique combo: LazyDragon + ElecCat → LazyDragon_Electric.
         assert_eq!(
-            db.forward("LazyDragon", "ElecCat"),
+            db.forward("LazyDragon", "ElecCat").as_deref(),
             Some("LazyDragon_Electric")
         );
         // Order-independent.
         assert_eq!(
-            db.forward("ElecCat", "LazyDragon"),
+            db.forward("ElecCat", "LazyDragon").as_deref(),
             Some("LazyDragon_Electric")
         );
         // Unknown pair → None.
@@ -349,7 +517,66 @@ mod tests {
         // wins. LazyDragon_Electric is a unique child of LazyDragon+ElecCat.
         let child = db.forward("LazyDragon", "ElecCat").unwrap();
         assert_eq!(child, "LazyDragon_Electric");
-        assert!(db.is_unique_combo("LazyDragon", "ElecCat", child));
+        assert!(db.is_unique_combo("LazyDragon", "ElecCat", &child));
+    }
+
+    /// Two pals of the same species always yield that species. The combo tables
+    /// do not encode this for the elemental variants (excluded from the formula
+    /// result pool) or for `IgnoreCombi` legendaries, so the engine supplies it.
+    #[test]
+    fn same_species_breeds_true() {
+        let db = load_repo_db();
+        for tribe in db.breedable_tribes() {
+            assert_eq!(
+                db.forward(&tribe, &tribe).as_deref(),
+                Some(tribe.as_str()),
+                "{tribe} + {tribe} must yield {tribe}"
+            );
+        }
+    }
+
+    /// `DT_PalCombiUnique` gates CatMage + FoxMage on parent gender: the male
+    /// CatMage line yields FoxMage_Dark, the female one CatMage_Fire. Both must
+    /// survive — a pair-keyed map would drop one.
+    #[test]
+    fn gender_gated_unique_combo_keeps_both_children() {
+        let db = load_repo_db();
+        let all = db.forward_all("CatMage", "FoxMage");
+        let mut kids: Vec<&str> = all.iter().map(|o| o.child.as_str()).collect();
+        kids.sort_unstable();
+        assert_eq!(kids, ["CatMage_Fire", "FoxMage_Dark"]);
+
+        // Pinning genders selects exactly one.
+        let male_cat = db.forward_gendered("CatMage", Gender::Male, "FoxMage", Gender::Female);
+        assert_eq!(male_cat.len(), 1);
+        assert_eq!(male_cat[0].child, "FoxMage_Dark");
+
+        let female_cat = db.forward_gendered("CatMage", Gender::Female, "FoxMage", Gender::Male);
+        assert_eq!(female_cat.len(), 1);
+        assert_eq!(female_cat[0].child, "CatMage_Fire");
+
+        // Reversing the query order moves the gate to the other slot.
+        let flipped = db.forward_gendered("FoxMage", Gender::Female, "CatMage", Gender::Male);
+        assert_eq!(flipped.len(), 1);
+        assert_eq!(flipped[0].child, "FoxMage_Dark");
+
+        // An unresolved gender keeps both branches alive.
+        assert_eq!(
+            db.forward_gendered("CatMage", Gender::Wildcard, "FoxMage", Gender::Wildcard)
+                .len(),
+            2
+        );
+    }
+
+    /// Regression: the generator once read tribe names from the `EPalTribeID`
+    /// enum, which spells Fuack "Blueplatypus" while its CharacterID (and every
+    /// save file) uses "BluePlatypus". Save Mode silently dropped every Fuack.
+    #[test]
+    fn species_keys_use_character_id_casing() {
+        let db = load_repo_db();
+        assert!(db.is_breedable("BluePlatypus"));
+        assert!(!db.is_breedable("Blueplatypus"));
+        assert!(db.min_steps_row("BluePlatypus").is_some());
     }
 
     #[test]
@@ -373,7 +600,7 @@ mod tests {
         // many pals at distance 1 — pick any child it forward-resolves to).
         if let Some(child) = db.forward("Alpaca", "Deer") {
             assert!(
-                db.reachable("Alpaca", child, 5),
+                db.reachable("Alpaca", &child, 5),
                 "Alpaca should reach its own child {child}"
             );
         }

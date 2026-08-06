@@ -35,6 +35,7 @@
 	import GraphView from '$lib/components/breeding/GraphView.svelte';
 	import BreedingSidePanel from '$lib/components/breeding/BreedingSidePanel.svelte';
 	import type { TreeNode } from '$lib/breeding/dendrogram/types';
+	import type { LayoutMode } from '$lib/breeding/dendrogram/layouts';
 	import { directToTreeNode, chainToTree } from '$lib/breeding/dendrogram/treeBuilder';
 	import type {
 		BreedablePal,
@@ -150,6 +151,8 @@
 	let graphLayout = $state<GraphLayout>('all-in-one');
 	let currentGen = $state(1);
 	let sidePanelCollapsed = $state(false);
+	// Shared by the Direct and Chain graph panes so switching mode keeps the view.
+	let graphViewMode = $state<LayoutMode>('dendrogram');
 
 	const chainTrees = $derived<TreeNode[]>(
 		chains.map((c) => {
@@ -159,9 +162,16 @@
 	);
 	const maxDepth = $derived(chains.length > 0 ? Math.max(...chains.map((c) => c.generations)) : 1);
 
+	// A pair normally has one outcome. The unique combos the game gates on
+	// parent gender (CatMage + FoxMage) have two, so render every row the
+	// backend returned rather than just the headline one.
+	const directForwardResults = $derived(
+		directResult?.results ?? (directResult?.result ? [directResult.result] : [])
+	);
+
 	const directTrees = $derived.by<TreeNode[]>(() => {
-		if (directSub === 'forward' && directResult?.result) {
-			return [directToTreeNode(directResult.result, palMap)];
+		if (directSub === 'forward' && directForwardResults.length) {
+			return directForwardResults.map((r) => directToTreeNode(r, palMap));
 		}
 		if (directSub === 'reverse' && partnersResult?.partners.length) {
 			return partnersResult.partners.map((p) => directToTreeNode(p, palMap));
@@ -528,8 +538,12 @@
 						<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
 							{m.breeding_result()}
 						</h3>
-						{#if directResult.result}
-							<DirectResult result={directResult.result} {palMap} />
+						{#if directForwardResults.length}
+							<div class="breed-list">
+								{#each directForwardResults as row (`${row.child}-${row.parent_a_gender ?? ''}`)}
+									<DirectResult result={row} {palMap} />
+								{/each}
+							</div>
 						{:else}
 							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
 								<Ban size={24} />
@@ -545,7 +559,7 @@
 							{m.breeding_partners()} ({partnersResult.partners.length})
 						</h3>
 						{#if partnersResult.partners.length}
-							<div class="space-y-1.5">
+							<div class="breed-list">
 								{#each partnersResult.partners as p, i (i)}
 									<DirectResult result={p} {palMap} />
 								{/each}
@@ -565,7 +579,7 @@
 							{m.breeding_partners()} ({parentsResult.parents.length})
 						</h3>
 						{#if parentsResult.parents.length}
-							<div class="space-y-1.5">
+							<div class="breed-list">
 								{#each parentsResult.parents as p, i (i)}
 									<DirectResult result={p} {palMap} />
 								{/each}
@@ -600,6 +614,7 @@
 							onactiveIndexChange={(idx) => (activeChainIndex = idx)}
 							graphLayout={'all-in-one'}
 							maxDepth={1}
+							bind:viewMode={graphViewMode}
 							onselect={(node) => (selectedTreeNode = node)}
 						/>
 					{:else}
@@ -860,6 +875,7 @@
 							onactiveIndexChange={(idx) => (activeChainIndex = idx)}
 							{graphLayout}
 							ongraphLayoutChange={(v) => (graphLayout = v)}
+							bind:viewMode={graphViewMode}
 							{currentGen}
 							oncurrentGenChange={(v) => (currentGen = v)}
 							{maxDepth}

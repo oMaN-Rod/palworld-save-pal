@@ -4,7 +4,7 @@
 	 * breeding chain. Handles DOM events, ResizeObserver, lifecycle, and the
 	 * zoom/fit/reset toolbar.
 	 */
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, onDestroy, untrack } from 'svelte';
 	import Plus from '@lucide/svelte/icons/plus';
 	import Minus from '@lucide/svelte/icons/minus';
 	import Maximize2 from '@lucide/svelte/icons/maximize-2';
@@ -15,6 +15,7 @@
 	import { getToastState, theme } from '$states';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import { DendrogramEngine } from '$lib/breeding/dendrogram/DendrogramEngine';
+	import type { LayoutMode } from '$lib/breeding/dendrogram/layouts';
 	import { chainToTree } from '$lib/breeding/dendrogram/treeBuilder';
 	import {
 		copyPngToClipboard,
@@ -32,6 +33,7 @@
 		passiveName = (asset: string) => asset,
 		height = 420,
 		fullHeight = false,
+		layoutMode = 'dendrogram',
 		onselect
 	}: {
 		chain?: Chain;
@@ -40,6 +42,7 @@
 		passiveName?: (asset: string) => string;
 		height?: number;
 		fullHeight?: boolean;
+		layoutMode?: LayoutMode;
 		onselect?: (node: TreeNode | null) => void;
 	} = $props();
 
@@ -142,24 +145,36 @@
 		svgEl.style.cursor = 'default';
 	}
 
+	const tree = $derived(treeNode ?? chainToTree(chain!, palMap));
+
+	// Keep the engine's callbacks and display helpers current. Deliberately
+	// separate from the render effect: `onselect` is an inline arrow at the call
+	// site, so its identity changes on every parent render. Folding it into the
+	// render effect made clicking a node re-render the tree — which cleared the
+	// selection it had just set and snapped zoom/pan back to fit.
 	$effect(() => {
-		void chain;
-		void treeNode;
-		void palMap;
-		void matchedPassives;
-		void onselect;
-		void theme.current;
 		if (!engine) return;
-		const tree = treeNode ?? chainToTree(chain!, palMap);
 		engine.passiveName = passiveName;
 		engine.matchedPassives = matchedPassives;
 		engine.callbacks.onSelect = (node) => onselect?.(node);
-		engine.render(tree);
-		requestAnimationFrame(() => engine.fit());
+	});
+
+	// Re-render only when the tree, the view, or the palette actually changes.
+	$effect(() => {
+		const nextTree = tree;
+		const nextMode = layoutMode;
+		void theme.current;
+		if (!engine) return;
+		untrack(() => {
+			engine.layoutMode = nextMode;
+			engine.render(nextTree);
+			requestAnimationFrame(() => engine.fit());
+		});
 	});
 
 	$effect(() => {
 		void fullHeight;
+		void height;
 		if (engine) requestAnimationFrame(() => engine.fit());
 	});
 
@@ -168,7 +183,7 @@
 		engine.passiveName = passiveName;
 		engine.matchedPassives = matchedPassives;
 		engine.callbacks.onSelect = (node) => onselect?.(node);
-		const tree = treeNode ?? chainToTree(chain!, palMap);
+		engine.layoutMode = layoutMode;
 		engine.render(tree);
 
 		resizeObserver = new ResizeObserver(() => {
@@ -191,7 +206,7 @@
 	class="bg-surface-950/80 border-surface-700/40 relative w-full overflow-hidden border {fullHeight
 		? 'h-full'
 		: 'rounded-md'}"
-	style={fullHeight ? '' : 'height: {height}px;'}
+	style:height={fullHeight ? null : `${height}px`}
 >
 	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->

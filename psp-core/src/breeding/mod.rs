@@ -19,12 +19,12 @@ pub mod model;
 pub mod solver;
 pub mod sources;
 
-pub use data::BreedingDB;
+pub use data::{BreedingDB, ParentPair};
 pub use direct::{direct_child, direct_parents, direct_partners};
 pub use graph::{can_reach, min_steps};
 pub use model::{
-    BreedingSpec, BreedingStep, Chain, ChainSource, ComboType, DirectResult, Gender, GenderProb,
-    Origin, PalRef,
+    BreedingSpec, BreedingStep, Chain, ChainSource, ComboOutcome, ComboType, DirectResult, Gender,
+    GenderProb, Origin, PalRef,
 };
 pub use solver::solve;
 pub use sources::{

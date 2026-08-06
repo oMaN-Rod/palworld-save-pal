@@ -12,7 +12,6 @@
 	// overflow) that trap the z-index and clip the menu — so the header, tab
 	// pills, or result cards painted later overlap it.
 	import { assetLoader } from '$lib/utils/assetLoader';
-	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { computePosition, flip, shift, offset, autoUpdate } from '@floating-ui/dom';
 	import { portal } from '$utils';
 	import * as m from '$i18n/messages';
@@ -130,7 +129,7 @@
 	>
 		{#if selectedPal}
 			<img
-				src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${selectedPal.tribe}_icon_normal.webp`)}
+				src={assetLoader.loadMenuImage(selectedPal.tribe)}
 				alt={selectedPal.display_name}
 				class="w-7 h-7 object-contain rounded-sm bg-surface-900"
 			/>
@@ -198,7 +197,7 @@
 								onclick={() => pick(pal)}
 							>
 								<img
-									src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${pal.tribe}_icon_normal.webp`)}
+									src={assetLoader.loadMenuImage(pal.tribe)}
 									alt={pal.display_name}
 									class="w-10 h-10 object-contain rounded-sm bg-surface-900"
 									loading="lazy"
@@ -217,7 +216,7 @@
 							onclick={() => pick(pal)}
 						>
 							<img
-								src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${pal.tribe}_icon_normal.webp`)}
+								src={assetLoader.loadMenuImage(pal.tribe)}
 								alt={pal.display_name}
 								class="w-7 h-7 object-contain rounded-sm bg-surface-900 shrink-0"
 								loading="lazy"

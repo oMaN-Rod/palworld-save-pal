@@ -3,7 +3,6 @@
 	// and picker selections. Renders an icon (via assetLoader) plus the display
 	// name, with a subtle border/bg treatment.
 	import { assetLoader } from '$lib/utils/assetLoader';
-	import { ASSET_DATA_PATH } from '$lib/constants';
 	import Mars from '@lucide/svelte/icons/mars';
 	import Venus from '@lucide/svelte/icons/venus';
 
@@ -24,9 +23,7 @@
 	const dims = $derived({ sm: 'w-8 h-8', md: 'w-10 h-10', lg: 'w-14 h-14' }[size]);
 	const textSize = $derived({ sm: 'text-sm', md: 'text-base', lg: 'text-lg' }[size]);
 	const shown = $derived(display || tribe);
-	const iconSrc = $derived(
-		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_${characterId ?? tribe}_icon_normal.webp`)
-	);
+	const iconSrc = $derived(assetLoader.loadMenuImage(characterId ?? tribe));
 	const GenderIcon = $derived(gender === 'Male' ? Mars : gender === 'Female' ? Venus : null);
 	const genderColor = $derived(
 		gender === 'Male' ? 'text-primary-300' : gender === 'Female' ? 'text-tertiary-400' : ''
