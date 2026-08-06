@@ -77,11 +77,8 @@
 	}
 
 	// Position the portaled menu under the trigger, tracking scroll/resize.
-	// viewMode is read here so toggling grid/list re-runs the effect and
-	// widens the dropdown for grid tiles.
 	$effect(() => {
 		if (!open || !triggerEl || !floatingEl) return;
-		const minW = viewMode === 'grid' ? 460 : 0;
 		query = '';
 		cleanup?.();
 		const update = () => {
@@ -94,7 +91,7 @@
 				Object.assign(floatingEl.style, {
 					left: `${x}px`,
 					top: `${y}px`,
-					width: `${Math.max(triggerEl.offsetWidth, minW)}px`
+					width: `${triggerEl.offsetWidth}px`
 				});
 			});
 		};
