@@ -26,7 +26,6 @@
 	const even = $derived(male === female);
 	const numCls = $derived(size === 'sm' ? 'text-xs' : 'text-sm');
 	const iconSize = $derived(size === 'sm' ? 11 : 13);
-	const barW = $derived(size === 'sm' ? 'w-12' : 'w-16');
 </script>
 
 <div
@@ -47,7 +46,7 @@
 	</div>
 
 	<!-- Meter: 2px surface gap between segments so they read as two marks. -->
-	<div class="bg-surface-800/60 flex h-1 {barW} overflow-hidden rounded-full">
+	<div class="bg-surface-800/60 flex h-1 w-full overflow-hidden rounded-full">
 		{#if male > 0}
 			<div class="bg-primary-400 h-full" style:width="{male}%"></div>
 		{/if}

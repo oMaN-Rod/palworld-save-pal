@@ -32,7 +32,7 @@
 		gender={result.parent_a_gender}
 	/>
 
-	<span class="breed-op"><Plus size={18} class="text-surface-400" /></span>
+	<span class="breed-op"><Plus size={18} class="text-primary-400" /></span>
 
 	<PalSlot
 		tribe={result.parent_b}
