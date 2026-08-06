@@ -100,7 +100,7 @@
 						characterId={step.parent_a}
 						size="md"
 					/>
-					<span class="breed-op"><Plus size={16} class="text-surface-400" /></span>
+					<span class="breed-op"><Plus size={16} class="text-primary-400" /></span>
 					<PalSlot
 						tribe={step.parent_b}
 						display={palFor(step.parent_b)?.display_name}
