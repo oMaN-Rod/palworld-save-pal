@@ -11,6 +11,7 @@ import {
 	CircleX,
 	Database,
 	FileHeart,
+	FlaskConical,
 	Folder,
 	Globe,
 	Info,
@@ -185,6 +186,14 @@ export const navItems: NavItem[] = [
 		label: () => m.debug(),
 		href: '/debug',
 		visible: (ctx) => Boolean(ctx.appState.settings.debug_mode)
+	},
+	{
+		id: 'breeding',
+		section: 'tiles',
+		group: 'tools',
+		icon: () => FlaskConical,
+		label: () => m.breeding(),
+		href: '/breeding'
 	},
 
 	// --- tiles: help ---

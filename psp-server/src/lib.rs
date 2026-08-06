@@ -116,6 +116,7 @@ pub async fn start_server_with(
             services: Arc::new(crate::services::ServerServices::real()),
         }),
         sessions: std::sync::Mutex::new(SessionStore::default()),
+        breeding_db: Default::default(),
     });
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;

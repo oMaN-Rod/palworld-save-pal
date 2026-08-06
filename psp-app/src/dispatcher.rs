@@ -428,6 +428,24 @@ async fn route(
         MessageType::DeleteBlueprint => {
             handlers::blueprints::handle_delete_blueprint(serde_json::from_value(data)?, ctx).await
         }
+        // Breeding calculator
+        MessageType::GetBreedingPals => handlers::breeding::handle_get_breeding_pals(ctx).await,
+        MessageType::BreedingDirectChild => handlers::breeding::handle_breeding_direct_child(
+            serde_json::from_value(data)?,
+            ctx,
+        )
+        .await,
+        MessageType::BreedingDirectPartners => {
+            handlers::breeding::handle_breeding_direct_partners(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::BreedingDirectParents => {
+            handlers::breeding::handle_breeding_direct_parents(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::BreedingChain => {
+            handlers::breeding::handle_breeding_chain(serde_json::from_value(data)?, ctx).await
+        }
         other => {
             // Native-only types (server management, shell-open) are owned by the
             // transport's ExtRouter; clone the Arc first so `ctx` is free to reborrow.

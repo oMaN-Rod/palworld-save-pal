@@ -40,6 +40,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
                 services: server_services,
             }),
             sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
+            breeding_db: Default::default(),
         }),
         &ui_dir,
     )

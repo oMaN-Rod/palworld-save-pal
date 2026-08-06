@@ -51,6 +51,7 @@ ui_build/
 backups/
 data/json/settings.json
 .claude/
+.zcode/
 /servers/
 
 # Rust workspace build output

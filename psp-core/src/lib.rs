@@ -1,4 +1,5 @@
 // Domain logic; no web-framework dependencies.
+pub mod breeding;
 pub mod convert;
 pub mod domain;
 pub mod dto;

@@ -402,6 +402,39 @@ body::after {
 	.text-muted-foreground {
 		color: var(--color-text-muted-foreground);
 	}
+
+	/* Breeding calculator form controls — Tailwind v4 + Skeleton tokens.
+	   Shared so the ported PalSavTools components render consistently. */
+	.input {
+		width: 100%;
+		background: color-mix(in srgb, var(--color-surface-900) 80%, transparent);
+		border: 1px solid color-mix(in srgb, var(--color-surface-600) 45%, transparent);
+		border-radius: 4px;
+		padding: 0.375rem 0.625rem;
+		font-size: 0.875rem;
+		color: var(--color-surface-50);
+		transition: border-color 0.15s ease;
+	}
+	.input:focus {
+		outline: none;
+		border-color: color-mix(in srgb, var(--color-secondary-500) 60%, transparent);
+	}
+	.input::placeholder {
+		color: var(--color-surface-500);
+	}
+
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.125rem;
+		padding: 0.0625rem 0.375rem;
+		border-radius: 4px;
+		font-size: 0.625rem;
+		font-weight: 600;
+		background: color-mix(in srgb, var(--color-surface-700) 50%, transparent);
+		color: var(--color-surface-200);
+		border: 1px solid color-mix(in srgb, var(--color-surface-600) 40%, transparent);
+	}
 }
 
 /* ── Transition helpers ──────────────────────────────────────────────── */
