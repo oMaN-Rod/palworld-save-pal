@@ -129,12 +129,12 @@
 			<img
 				src="/psp.png"
 				alt="PSP"
-				class="animate-breathe h-7 w-7 flex-shrink-0 rounded object-contain"
+				class="animate-breathe h-6 w-6 shrink-0 rounded object-contain"
 			/>
 			<span
-				class="sidebar-label heading-gradient text-lg font-extrabold tracking-tight whitespace-nowrap"
+				class="sidebar-label heading-gradient text-xs font-extrabold tracking-tight whitespace-nowrap"
 			>
-				Palworld Save Pals
+				PALWORLD SAVE PAL
 			</span>
 		</div>
 		<button
@@ -159,7 +159,7 @@
 						title={(item.title ?? item.label)?.()}
 						onclick={() => (item.action ? runAction(item.action) : handleNavigate(item))}
 					>
-						<Icon class="h-4 w-4 flex-shrink-0" />
+						<Icon class="h-4 w-4 shrink-0" />
 						<span class="sidebar-label truncate">{item.label?.()}</span>
 					</a>
 				{/each}
@@ -167,7 +167,7 @@
 		{/each}
 	</nav>
 
-	<div class="border-surface-700/30 flex-shrink-0 border-t py-2">
+	<div class="border-surface-700/30 shrink-0 border-t py-2">
 		{#each actionItems as item (item.id)}
 			{@render actionButton(item)}
 		{/each}
