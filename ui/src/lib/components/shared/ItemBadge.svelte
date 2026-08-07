@@ -235,7 +235,7 @@
 </script>
 
 <button
-	class="hover:ring-secondary-500 h-12 w-12 hover:ring xl:h-16 xl:w-16"
+	class="hover:ring-secondary-500 h-12 w-12 hover:ring 2xl:h-16 2xl:w-16"
 	onclick={handleItemSelect}
 	oncontextmenu={(event) => event.preventDefault()}
 	onmousedown={(event) => handleMouseEvent(event)}
@@ -250,14 +250,16 @@
 			<div class="flex flex-col">
 				<div
 					class={cn(
-						'bg-surface-800/50 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16',
+						'bg-surface-800/50 relative flex h-12 w-12 items-center justify-center 2xl:h-16 2xl:w-16',
 						itemClass
 					)}
 				>
 					<span class="absolute top-0 left-0.5 text-xs">{slotWeight}</span>
-					<img src={icon} alt={item.info.localized_name} class="h-12 w-12 xl:h-16 xl:w-16" />
+					<img src={icon} alt={item.info.localized_name} class="h-12 w-12 2xl:h-16 2xl:w-16" />
 					{#if palIcon}
-						<div class="bg-surface-800 border-surface-600 absolute top-0 right-0 h-7 w-7 border">
+						<div
+							class="bg-surface-800 border-surface-600 absolute top-0 right-0 h-5 w-5 border 2xl:h-7 2xl:w-7"
+						>
 							<img src={palIcon} alt="Pal Icon" class="h-full w-full object-cover" />
 						</div>
 					{/if}
@@ -392,9 +394,9 @@
 	{:else if slot.static_id !== 'None'}
 		<Tooltip>
 			<div
-				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16"
+				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center 2xl:h-16 2xl:w-16"
 			>
-				<Package size="48" />
+				<Package class="h-8 w-8 2xl:h-12 2xl:w-12" />
 				<span class="absolute right-0 bottom-0 text-xs">{slot.count}</span>
 			</div>
 
@@ -405,7 +407,7 @@
 	{:else}
 		<Tooltip>
 			<div
-				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center xl:h-16 xl:w-16"
+				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center 2xl:h-16 2xl:w-16"
 			></div>
 
 			{#snippet popup()}
