@@ -8,6 +8,12 @@
 //! frontend's already-parsed `appState.selectedPlayer.pals` (which carries
 //! `passive_skills`, unlike `PalSummary`).
 
+// `std::time::Instant::now()` panics on `wasm32-unknown-unknown` (the target has
+// no system clock — see `library/std/src/sys/time/unsupported.rs`). The
+// `elapsed_ms` field below is diagnostic only, so on wasm we skip timing rather
+// than pull in a clock crate. The import + both call sites are cfg-gated
+// together below.
+#[cfg(not(target_arch = "wasm32"))]
 use std::time::Instant;
 
 use serde::Deserialize;
@@ -177,6 +183,7 @@ pub async fn handle_breeding_chain(
 ) -> Result<(), HandlerError> {
     let mt = MessageType::BreedingChain;
     let db = db_or_soft_error!(ctx, mt);
+    #[cfg(not(target_arch = "wasm32"))]
     let start = Instant::now();
 
     let mut owned: Vec<OwnedPalInput> = Vec::new();
@@ -232,7 +239,10 @@ pub async fn handle_breeding_chain(
     };
 
     let chains = solve(db, &composite, &spec);
-    let elapsed_ms = start.elapsed().as_millis();
+    #[cfg(not(target_arch = "wasm32"))]
+    let elapsed_ms = serde_json::Value::from(start.elapsed().as_millis() as u64);
+    #[cfg(target_arch = "wasm32")]
+    let elapsed_ms = serde_json::Value::Null;
 
     ctx.emitter.emit(
         mt,
