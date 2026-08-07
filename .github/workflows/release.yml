@@ -126,6 +126,8 @@ jobs:
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
         run: cargo tauri build --bundles dmg
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Collect and rename installer
         working-directory: palworld-save-pal
