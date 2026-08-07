@@ -58,11 +58,7 @@
 		pal && pal.is_sick ? 'animate-pulse ring-4 ring-error-500 rounded-full' : ''
 	);
 
-	const awakenedClass = $derived(
-		pal && pal.is_awakened
-			? 'ring-4 ring-secondary-500 rounded-full shadow-[var(--shadow-glow-gold)]'
-			: ''
-	);
+	const awakenedClass = $derived(pal && pal.is_awakened ? 'awakened-ring rounded-full' : '');
 
 	const palData = $derived(palsData.getByKey(pal.character_key));
 

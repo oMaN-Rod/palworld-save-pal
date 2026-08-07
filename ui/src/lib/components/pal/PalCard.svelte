@@ -48,9 +48,7 @@
 		)
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-error-500' : '');
-	const awakenedClass = $derived(
-		pal && pal.is_awakened ? 'ring-4 ring-secondary-500 shadow-[var(--shadow-glow-gold)]' : ''
-	);
+	const awakenedClass = $derived(pal && pal.is_awakened ? 'awakened-ring' : '');
 	const palData = $derived(palsData.getByKey(pal.character_key));
 	const levelSyncTxt = $derived(
 		appState.selectedPlayer!.level < pal.level
@@ -120,7 +118,7 @@
 </script>
 
 <ContextMenu items={menuItems} menuClass="bg-surface-700" xOffset={-32}>
-	<button class={cardClass} onclick={handleClick}>
+	<button class={cn(cardClass, awakenedClass)} onclick={handleClick}>
 		{#if pal && pal.character_id !== 'None'}
 			<Tooltip
 				popupClass="p-4 mt-12 bg-surface-800"
@@ -128,7 +126,7 @@
 				position="right"
 				useArrow={false}
 			>
-				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', awakenedClass, sickClass)}>
+				<div class={cn('grid grid-cols-[1fr_auto] overflow-hidden', sickClass)}>
 					<div class="ml-4 flex min-w-0 flex-col">
 						<div class="flex flex-wrap items-center gap-x-2">
 							<Tooltip label={levelSyncTxt}>

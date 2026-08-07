@@ -51,6 +51,12 @@
 	--shadow-glow-gold:
 		0 0 8px color-mix(in srgb, var(--color-secondary-500) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-secondary-500) 15%, transparent);
+
+	/* Awakened gold sits outside the palette on purpose — an awakened pal reads
+	 * as gold in every theme, not as the theme's secondary color. */
+	--color-awakened-300: rgb(255, 241, 194);
+	--color-awakened-400: rgb(251, 191, 36);
+	--color-awakened-600: rgb(161, 98, 7);
 	--shadow-glow-red:
 		0 0 8px color-mix(in srgb, var(--color-error-500) 40%, transparent),
 		0 0 20px color-mix(in srgb, var(--color-error-500) 15%, transparent);
@@ -384,6 +390,85 @@ body::after {
 	animation: shimmer 1.5s ease-in-out infinite;
 }
 
+/* ── Awakened gold ring ───────────────────────────────────────────────── */
+
+@property --awakened-angle {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false;
+}
+
+@keyframes awakenedShine {
+	to {
+		--awakened-angle: 360deg;
+	}
+}
+
+@keyframes awakenedGlow {
+	0%,
+	100% {
+		box-shadow:
+			0 0 8px color-mix(in srgb, var(--color-awakened-400) 40%, transparent),
+			0 0 20px color-mix(in srgb, var(--color-awakened-400) 14%, transparent);
+	}
+	50% {
+		box-shadow:
+			0 0 14px color-mix(in srgb, var(--color-awakened-300) 65%, transparent),
+			0 0 32px color-mix(in srgb, var(--color-awakened-400) 28%, transparent);
+	}
+}
+
+.awakened-ring {
+	position: relative;
+}
+.awakened-ring::before,
+.awakened-ring::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	border-radius: inherit;
+}
+.awakened-ring::before {
+	animation: awakenedGlow 2.8s ease-in-out infinite;
+}
+.awakened-ring::after {
+	--awakened-angle: 0deg;
+	padding: 4px;
+	background: conic-gradient(
+		from var(--awakened-angle),
+		var(--color-awakened-600),
+		var(--color-awakened-400) 12%,
+		var(--color-awakened-300) 22%,
+		var(--color-awakened-400) 32%,
+		var(--color-awakened-600) 55%,
+		var(--color-awakened-400) 78%,
+		var(--color-awakened-600)
+	);
+	-webkit-mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask:
+		linear-gradient(#000 0 0) content-box,
+		linear-gradient(#000 0 0);
+	mask-composite: exclude;
+	animation: awakenedShine 3.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.awakened-ring::before {
+		animation: none;
+		box-shadow:
+			0 0 8px color-mix(in srgb, var(--color-awakened-400) 40%, transparent),
+			0 0 20px color-mix(in srgb, var(--color-awakened-400) 14%, transparent);
+	}
+	.awakened-ring::after {
+		animation: none;
+	}
+}
+
 .hover-lift {
 	transition:
 		transform 0.15s ease,
@@ -602,7 +687,7 @@ body::after {
 	transition: width 0.2s ease-out;
 }
 .sidebar.collapsed {
-	width: 3.5rem;
+	width: 4rem;
 }
 
 .sidebar-header {
