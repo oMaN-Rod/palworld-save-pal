@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { Sidebar, PublicNav } from '$components/layout';
-	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
+	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
@@ -118,4 +118,5 @@
 		</div>
 	</Modal>
 	<PalEditorOverlay />
+	<ResizeWarning />
 {/if}
