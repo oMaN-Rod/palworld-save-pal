@@ -111,6 +111,8 @@
 		showPredatorPals = true,
 		showLabels = true,
 		show3d = false,
+		showStructureControls = true,
+		areaSwitchAlign = 'center',
 		structureTypes = {},
 		renderMode = 'detailed',
 		onToggle3d,
@@ -148,6 +150,12 @@
 		showPredatorPals?: boolean;
 		showLabels?: boolean;
 		show3d?: boolean;
+		/** Surfaces the detailed-structure and structure-filter controls. Off for
+		 *  callers with no bases to draw, where both would be inert. */
+		showStructureControls?: boolean;
+		/** Area switcher placement. `right` clears a host that occupies the top
+		 *  centre, such as the public shell's floating nav. */
+		areaSwitchAlign?: 'center' | 'right';
 		/** Per-structure-type visibility; a missing key means visible. */
 		structureTypes?: Record<string, boolean>;
 		renderMode?: 'detailed' | 'flat';
@@ -941,10 +949,10 @@
 		<Toggle3dControl
 			position="top-right"
 			active={show3d}
-			title="3D {m.structures()}"
+			title={showStructureControls ? `3D ${m.structures()}` : '3D'}
 			onchange={onToggle3d}
 		/>
-		{#if show3d}
+		{#if show3d && showStructureControls}
 			<ToggleDetailedControl
 				position="top-right"
 				active={renderMode === 'detailed'}
@@ -1326,7 +1334,7 @@
 		</div>
 	{/if}
 
-	<div class="map-area-switch">
+	<div class="map-area-switch" class:align-right={areaSwitchAlign === 'right'}>
 		{#each MAP_AREA_ORDER as candidate}
 			<button
 				type="button"
@@ -1443,6 +1451,13 @@
 		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
 		border-radius: 4px;
 		z-index: 1000;
+	}
+
+	/* Clears the 29px control column and its 10px edge margin at top-right. */
+	.map-area-switch.align-right {
+		left: auto;
+		right: 52px;
+		transform: none;
 	}
 
 	.map-area-btn {
