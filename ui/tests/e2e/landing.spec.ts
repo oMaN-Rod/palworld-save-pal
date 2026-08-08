@@ -60,3 +60,36 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 	// check that a real browser is not told it is broken.
 	await expect(page.getByRole('status')).toHaveCount(0);
 });
+
+test('mobile landing hides save editing and shows the desktop-only notice', async ({
+	page
+}) => {
+	await page.setViewportSize({ width: 390, height: 844 });
+	await page.goto('/');
+
+	// Title + desktop-only disclaimer
+	await expect(page.getByRole('img', { name: /palworld save pal/i })).toBeVisible({
+		timeout: 15_000
+	});
+	await expect(page.getByText(/desktop browser/i)).toBeVisible();
+
+	// Save editing is not offered on phones: no dropzone or resume button
+	await expect(page.getByText(/drop your save here/i)).toHaveCount(0);
+	await expect(page.getByRole('button', { name: 'Choose .zip', exact: true })).toHaveCount(0);
+	await expect(page.getByRole('button', { name: 'Choose folder', exact: true })).toHaveCount(0);
+
+	// Everything else stays: tagline and marketing sections remain visible
+	await expect(
+		page.getByText(/the free, open-source palworld save editor\. in your browser\./i)
+	).toBeVisible();
+	await expect(page.getByText(/built different, on purpose/i)).toBeVisible();
+
+	// Resize guard must not blackout public pages on phones
+	await expect(page.getByText('Window Too Small')).toHaveCount(0);
+
+	// Maps, Wiki, Breeding stay reachable via the public nav. Under 640px the
+	// nav is a standard full-width top bar (still inline links, not a dropdown).
+	await expect(page.getByRole('link', { name: 'Map', exact: true })).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Wiki', exact: true })).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Breeding', exact: true })).toBeVisible();
+});

@@ -10,7 +10,7 @@
 <nav class="public-nav">
 	<a href="/" class="public-nav-brand" aria-label="Palworld Save Pal home">
 		<img src="/psp.png" alt="" class="h-5 w-5 rounded object-contain" />
-		<span class="heading-gradient hidden text-xs font-extrabold tracking-tight sm:inline">
+		<span class="heading-gradient hidden text-xs font-extrabold tracking-tight md:inline">
 			PALWORLD SAVE PAL
 		</span>
 	</a>
@@ -26,7 +26,7 @@
 				aria-label={item.label()}
 			>
 				<Icon class="h-4 w-4 shrink-0" />
-				<span class="hidden sm:inline">{item.label()}</span>
+				<span class="public-nav-label hidden sm:inline">{item.label()}</span>
 			</a>
 		{/each}
 	</div>
