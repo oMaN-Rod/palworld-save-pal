@@ -28,8 +28,37 @@ export function canBeLucky(character_id: string): [string, boolean] {
 	return ['', true];
 }
 
+/**
+ * Species the game only loads under one exact character id. Keyed by the bare
+ * species name; the value is the required id minus the `BOSS_` prefix. Awakened
+ * is a separate flag and does not affect the id.
+ */
+const EXACT_CHARACTER_IDS = new Map<string, string>([['kingwhale', 'KingWhale_Otomo']]);
+
+/** The required id for a constrained species, or null if unconstrained. */
+export function exactCharacterId(character_id: string): string | null {
+	const bare = character_id
+		.replace(/^BOSS_/i, '')
+		.replace(/_Otomo$/i, '')
+		.toLowerCase();
+	return EXACT_CHARACTER_IDS.get(bare) ?? null;
+}
+
 export function formatBossCharacterId(pal: Pal): void {
 	pal.character_id = pal.character_id.replace('Boss_', 'BOSS_');
+
+	// A constrained species keeps its prefix and suffix whatever the toggles say,
+	// and must stay flagged boss or lucky, because the game will not load it
+	// otherwise.
+	const exact = exactCharacterId(pal.character_id);
+	if (exact) {
+		pal.character_id = `BOSS_${exact}`;
+		if (!pal.is_boss && !pal.is_lucky) {
+			pal.is_boss = true;
+		}
+		return;
+	}
+
 	if (pal && (pal.is_boss || pal.is_lucky) && !pal.character_id.startsWith('BOSS_')) {
 		pal.character_id = `BOSS_${pal.character_id}`;
 	} else if (pal && !pal.is_boss && !pal.is_lucky && pal.character_id.startsWith('BOSS_')) {

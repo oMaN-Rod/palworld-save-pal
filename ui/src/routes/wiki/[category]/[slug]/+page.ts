@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { descriptorFor } from '$lib/utils/wikiDescriptors';
 import { WIKI_CATEGORIES, type WikiCategory } from '$lib/utils/wikiCategories';
-import { stripKeyPrefix, toSlug } from '$lib/utils/wikiSlug';
+import { isDisabledRecord, stripKeyPrefix, toSlug } from '$lib/utils/wikiSlug';
 
 const CATEGORIES = WIKI_CATEGORIES.map((category) => category.id).filter(
 	(id) => id !== 'pals'
@@ -11,7 +11,8 @@ export async function entries() {
 	const results: { category: WikiCategory; slug: string }[] = [];
 	for (const category of CATEGORIES) {
 		const json = await descriptorFor(category).loadJson();
-		for (const key of Object.keys(json)) {
+		for (const [key, record] of Object.entries(json)) {
+			if (isDisabledRecord(record)) continue;
 			results.push({ category, slug: toSlug(stripKeyPrefix(key)) });
 		}
 	}

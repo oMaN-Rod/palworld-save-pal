@@ -115,12 +115,7 @@ function iconField(...path: string[]) {
 		assetIcon(get(record, ...path));
 }
 
-/** Records that carry a `disabled` flag, either at the top level or nested under `details`. */
-export function isDisabledRecord(record: Record<string, unknown>): boolean {
-	if (record.disabled === true) return true;
-	const details = record.details;
-	return !!details && typeof details === 'object' && (details as Record<string, unknown>).disabled === true;
-}
+export { isDisabledRecord } from './wikiSlug';
 
 function palIcon(key: string, pal: PalData): WikiIcon | null {
 	const src = assetLoader.loadPalImage(key, pal.is_pal ?? true);

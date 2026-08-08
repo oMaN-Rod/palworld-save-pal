@@ -33,3 +33,21 @@ export function stripKeyPrefix(key: string): string {
 	const index = key.lastIndexOf('::');
 	return index === -1 ? key : key.slice(index + 2);
 }
+
+/**
+ * Records that carry a `disabled` flag, either at the top level (raw JSON) or
+ * nested under `details` (the wire shape). Lives here rather than alongside the
+ * descriptors so build-time route modules can filter without importing the
+ * runtime data stores.
+ */
+export function isDisabledRecord(record: unknown): boolean {
+	if (!record || typeof record !== 'object') return false;
+	const value = record as Record<string, unknown>;
+	if (value.disabled === true) return true;
+	const details = value.details;
+	return (
+		!!details &&
+		typeof details === 'object' &&
+		(details as Record<string, unknown>).disabled === true
+	);
+}
