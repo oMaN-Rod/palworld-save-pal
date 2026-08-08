@@ -17,6 +17,7 @@ import TooltipButton from './tooltip-button/TooltipButton.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
 import Modal from './modal/Modal.svelte';
 import PalEditorOverlay from './modal/PalEditorOverlay.svelte';
+import ResizeWarning from './resize-warning/ResizeWarning.svelte';
 import Monaco from './monaco/Monaco.svelte';
 import Nuke from './icons/Nuke.svelte';
 import Spinner from './spinner/Spinner.svelte';
@@ -42,6 +43,7 @@ export {
 	Select,
 	Modal,
 	PalEditorOverlay,
+	ResizeWarning,
 	Monaco,
 	Nuke,
 	Popover,
