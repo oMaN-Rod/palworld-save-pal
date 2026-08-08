@@ -7,6 +7,8 @@
 		"dev:desktop": "node scripts/ensure-desktop-env.mjs && vite dev",
 		"dev:web": "concurrently \"vite dev\" \"cd .. && cargo run -p psp-server -- --dev\"",
 		"dev:vite": "vite dev",
+		"dev:wasm": "node scripts/ensure-web-env.mjs && node ../scripts/gen-json-manifest.mjs && cross-env VITE_TRANSPORT=worker vite dev",
+		"build:wasm": "cd ../psp-web && wasm-pack build --target web --out-dir ../ui/src/lib/wasm/psp",
 		"build": "vite build",
 		"build:desktop": "node scripts/ensure-desktop-env.mjs --force && vite build",
 		"build:web": "node scripts/ensure-web-env.mjs && node ../scripts/gen-json-manifest.mjs && cd ../psp-web && wasm-pack build --target web --out-dir ../ui/src/lib/wasm/psp && cd ../ui && cross-env VITE_TRANSPORT=worker vite build",
