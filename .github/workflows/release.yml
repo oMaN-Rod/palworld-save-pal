@@ -129,13 +129,15 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
-      - name: Collect and rename installer
+      - name: Sign app and rebuild DMG
         working-directory: palworld-save-pal
         run: |
           tag="${{ github.event.inputs.version }}"
           mkdir -p dist
-          dmg=$(ls target/release/bundle/dmg/*.dmg | head -n 1)
-          cp "$dmg" "dist/PalworldSavePal-$tag-macos.dmg"
+          # Tauri's .app may be unsigned; Gatekeeper rejects it as damaged.
+          # Ad-hoc sign it and rebuild the DMG from the signed bundle.
+          app=$(ls target/release/bundle/macos/*.app | head -n 1)
+          bash scripts/sign-macos-app.sh "$app" "dist/PalworldSavePal-$tag-macos.dmg"
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4

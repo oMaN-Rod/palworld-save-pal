@@ -31,6 +31,13 @@ fi
 ( cd psp-desktop && cargo tauri build --bundles "$bundle" )
 
 mkdir -p dist
-artifact="$(ls "target/release/bundle/$bundle/"*."$ext" | head -n 1)"
-cp "$artifact" "dist/PalworldSavePal-$version-$os.$ext"
+if [ "$os" = "macos" ]; then
+  # Tauri's .app may be unsigned; Gatekeeper rejects it as damaged. Ad-hoc
+  # sign it and rebuild the DMG from the signed bundle.
+  app="$(ls target/release/bundle/macos/*.app | head -n 1)"
+  bash "$repo_root/scripts/sign-macos-app.sh" "$app" "dist/PalworldSavePal-$version-$os.$ext"
+else
+  artifact="$(ls "target/release/bundle/$bundle/"*."$ext" | head -n 1)"
+  cp "$artifact" "dist/PalworldSavePal-$version-$os.$ext"
+fi
 echo "Done: dist/PalworldSavePal-$version-$os.$ext"
