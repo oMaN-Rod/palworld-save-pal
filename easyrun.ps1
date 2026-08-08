@@ -392,11 +392,14 @@ function Spawn-BgTagged($tag, [string[]]$cmd, [string]$cwd, $envVars) {
 }
 
 function Cleanup-Children() {
+    # Idempotent: safe to call from both Wait-OnProcs's finally and the
+    # script-scope Invoke-WithCleanup finally. The list is cleared each call.
     foreach ($p in $script:ChildJobs) {
         if ($p -and -not $p.HasExited) {
             # Kill the whole process tree. On Windows use taskkill /T (reliable
-            # tree-walk). On .NET 5+ $p.Kill($true) (entireProcessTree) works
-            # cross-platform; fall back to plain Kill() where unavailable.
+            # tree-walk — reaches vite→esbuild, cargo→rustc). On .NET 5+
+            # $p.Kill($true) (entireProcessTree) works cross-platform; fall back
+            # to plain Kill() where unavailable.
             try {
                 if ($IsWindows -or $env:OS -eq "Windows_NT") {
                     & taskkill /T /F /PID $p.Id 2>&1 | Out-Null
@@ -798,14 +801,40 @@ if ($NoInstall) {
     function Ensure-BunInstall([bool]$force) { Log-Info "-NoInstall: skipping bun install." }
 }
 
-switch ($mode) {
-    "web"           { Run-Web $null }
-    "desktop"       { Run-Desktop $null }
-    "webapp"        { Run-Webapp $null }
-    "landing"       { Run-Landing $null }
-    "docker"        { Run-Docker $null }
-    "serve"         { Run-Serve $null }
-    "build-desktop" { Run-BuildDesktop $null }
-    "build-web"     { Run-BuildWeb $null }
-    "build"         { Run-BuildPlain $null }
+# Wrap the entire dispatch in try/finally so spawned children are ALWAYS torn
+# down on exit — including Ctrl-C, mid-build failures, or exits during
+# Wait-ForHttp (before Wait-OnProcs's own finally runs). This mirrors the bash
+# script's global EXIT trap. Wait-OnProcs still has its own finally for the
+# normal child-exit path; Cleanup-Children is idempotent (clears the list).
+$script:CleanupDone = $false
+function Invoke-WithCleanup([scriptblock]$body) {
+    try {
+        & $body
+    } catch {
+        Write-Host "Error: $_" -ForegroundColor Red
+        throw
+    } finally {
+        if (-not $script:CleanupDone) {
+            $script:CleanupDone = $true
+            if ($script:ChildJobs.Count -gt 0) {
+                Write-Host "Cleaning up spawned processes…" -ForegroundColor Yellow
+            }
+            Cleanup-Children
+            Restore-EnvOnExit
+        }
+    }
+}
+
+Invoke-WithCleanup {
+    switch ($mode) {
+        "web"           { Run-Web $null }
+        "desktop"       { Run-Desktop $null }
+        "webapp"        { Run-Webapp $null }
+        "landing"       { Run-Landing $null }
+        "docker"        { Run-Docker $null }
+        "serve"         { Run-Serve $null }
+        "build-desktop" { Run-BuildDesktop $null }
+        "build-web"     { Run-BuildWeb $null }
+        "build"         { Run-BuildPlain $null }
+    }
 }
