@@ -1,19 +1,23 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
+	import { isWebBuild } from '$lib/utils/platform';
+	import { getAppState } from '$states';
 
 	const { children } = $props();
+	const appState = getAppState();
+	const publicShell = $derived(isWebBuild && !appState.saveFile);
 
-	const tabs = [
-		{ label: m.docs_wiki(), href: '/docs/wiki', id: 'wiki' },
+	const allTabs = [
+		{ label: m.docs_wiki(), href: '/wiki', id: 'wiki' },
 		{ label: m.docs_guides(), href: '/docs/guides', id: 'guides' },
 		{ label: m.docs_tours(), href: '/docs/tours', id: 'tours' },
 	];
+	const tabs = $derived(publicShell ? allTabs.filter((tab) => tab.id !== 'tours') : allTabs);
 
 	const activeTab = $derived.by(() => {
-		if (page.url.pathname.startsWith('/docs/guides')) return 'guides';
 		if (page.url.pathname.startsWith('/docs/tours')) return 'tours';
-		return 'wiki';
+		return 'guides';
 	});
 </script>
 

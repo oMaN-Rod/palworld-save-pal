@@ -21,7 +21,8 @@
 		editLucky,
 		editAlpha,
 		editAwakened,
-		editImported
+		editImported,
+		formatBossCharacterId
 	} from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -86,15 +87,6 @@
 		pal.state = EntryState.MODIFIED;
 	}
 
-	function formatBossCharacterId() {
-		pal.character_id = pal.character_id.replace('Boss_', 'BOSS_');
-		if (pal && (pal.is_boss || pal.is_lucky) && !pal.character_id.startsWith('BOSS_')) {
-			pal.character_id = `BOSS_${pal.character_id}`;
-		} else if (pal && !pal.is_boss && !pal.is_lucky && pal.character_id.startsWith('BOSS_')) {
-			pal.character_id = pal.character_id.replace('BOSS_', '');
-		}
-	}
-
 	function handleEditLucky() {
 		const [type, valid] = editLucky(pal);
 		if (!valid) {
@@ -135,6 +127,7 @@
 				(pal as Record<string, any>)[key] = value;
 			}
 		}
+		formatBossCharacterId(pal);
 		pal.state = EntryState.MODIFIED;
 	}
 

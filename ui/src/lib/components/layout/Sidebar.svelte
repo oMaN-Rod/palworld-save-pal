@@ -167,9 +167,11 @@
 		{/each}
 	</nav>
 
-	<div class="border-surface-700/30 shrink-0 border-t py-2">
-		{#each actionItems as item (item.id)}
-			{@render actionButton(item)}
-		{/each}
-	</div>
+	<div class="border-surface-700/30 border-t py-2">
+			{#each actionItems as item (item.id)}
+				<div class="flex justify-center">
+					{@render actionButton(item)}
+				</div>
+			{/each}
+		</div>
 </aside>

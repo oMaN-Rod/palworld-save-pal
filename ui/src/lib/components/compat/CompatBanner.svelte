@@ -66,7 +66,7 @@
 
 {#if (isMobile || losses.length > 0) && !isDismissed}
 	<div
-		class="card border-warning-500/40 bg-surface-900/95 fixed top-4 left-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] -translate-x-1/2 border p-4 shadow-xl backdrop-blur"
+		class="card border-warning-500/40 bg-surface-900/95 fixed top-[4.5rem] left-1/2 z-50 w-[min(28rem,calc(100vw-2rem))] -translate-x-1/2 border p-4 shadow-xl backdrop-blur"
 		role="status"
 	>
 		<div class="flex items-start gap-3">

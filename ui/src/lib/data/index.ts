@@ -18,7 +18,7 @@ import { relicData } from './relic.svelte';
 import { relics } from './relics.svelte';
 import { technologiesData } from './technologies.svelte';
 import { uiCommonData } from './ui.svelte';
-import { workSuitabilityData } from './workSuitability.svelte';
+import { WORK_SUITABILITY_KEYS, workSuitabilityData } from './workSuitability.svelte';
 
 export {
 	activeSkillsData,
@@ -41,5 +41,6 @@ export {
 	relics,
 	technologiesData,
 	uiCommonData,
+	WORK_SUITABILITY_KEYS,
 	workSuitabilityData
 };

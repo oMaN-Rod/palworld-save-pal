@@ -11,6 +11,7 @@ import {
 	CircleX,
 	Database,
 	FileHeart,
+	FileText,
 	FlaskConical,
 	Folder,
 	Globe,
@@ -209,9 +210,17 @@ export const navItems: NavItem[] = [
 		id: 'docs',
 		section: 'tiles',
 		group: 'help',
-		icon: () => BookOpen,
+		icon: () => FileText,
 		label: () => m.docs(),
 		href: '/docs'
+	},
+	{
+		id: 'wiki',
+		section: 'tiles',
+		group: 'help',
+		icon: () => BookOpen,
+		label: () => m.docs_wiki(),
+		href: '/wiki'
 	},
 	{
 		id: 'about',

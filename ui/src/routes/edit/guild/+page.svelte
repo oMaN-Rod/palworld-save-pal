@@ -25,7 +25,13 @@
 		NumberSliderModal,
 		TextInputModal
 	} from '$components/modals';
-	import { assetLoader, debounce, deepCopy, formatNickname } from '$utils';
+	import {
+		assetLoader,
+		debounce,
+		deepCopy,
+		formatBossCharacterId,
+		formatNickname
+	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import { send } from '$lib/utils/websocketUtils';
@@ -559,6 +565,7 @@
 						(pal as Record<string, any>)[key] = value;
 					}
 				}
+				formatBossCharacterId(pal);
 				pal.state = EntryState.MODIFIED;
 			}
 		});

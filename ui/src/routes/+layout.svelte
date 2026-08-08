@@ -1,10 +1,11 @@
 <script lang="ts">
 	import '../app.css';
-	import { Sidebar } from '$components/layout';
+	import { Sidebar, PublicNav } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
-	import { getAppState, getSocketState, theme } from '$states';
+	import { getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
+	import { isSaveRequiredRoute, isFullBleedRoute } from '$lib/utils/shellRoutes';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
@@ -14,7 +15,8 @@
 	import { c } from '$lib/utils/commonTranslations';
 	import {
 		setStoredSelectedPlayerUid,
-		clearStoredSelectedPlayerUid
+		clearStoredSelectedPlayerUid,
+		getStoredSessionId
 	} from '$lib/utils/sessionPersistence';
 	import { isWebBuild } from '$lib/utils/platform';
 	import { browser } from '$app/environment';
@@ -31,6 +33,7 @@
 	// matters because adapter-static prerenders in Node, where `Worker` is not a
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
+	const publicShell = $derived(isWebBuild && !appState.saveFile);
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
@@ -62,6 +65,15 @@
 		return () => window.removeEventListener('beforeunload', handleBeforeUnload);
 	});
 
+	// Only redirect when no session could possibly reattach — a stored session
+	// id means bootstrap() may still populate saveFile, so let that race resolve
+	// instead of bouncing a refreshing editor user off their save-only route.
+	$effect(() => {
+		if (publicShell && !getStoredSessionId() && isSaveRequiredRoute(page.url.pathname)) {
+			goto('/');
+		}
+	});
+
 	onMount(async () => {
 		if (blocked) return;
 		ws.connect({ goto });
@@ -74,12 +86,14 @@
 	<UnsupportedBrowser />
 {:else}
 	<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
-	{#if isWebBuild && !appState.saveFile}
+	{#if publicShell}
 		<CompatBanner />
 	{/if}
 	<Modal>
 		<div class="relative z-[1] flex h-screen w-full overflow-hidden">
-			{#if !(isWebBuild && !appState.saveFile)}
+			{#if publicShell}
+				<PublicNav />
+			{:else}
 				<Sidebar />
 			{/if}
 			<div class="relative flex flex-1 flex-col overflow-hidden">
@@ -90,8 +104,12 @@
 					</div>
 				{/if}
 				<div class="relative flex-1 overflow-hidden">
-					{#key page.url.pathname}
-						<main class="absolute inset-0 overflow-y-auto" transition:fade={{ duration: 150 }}>
+					{#key `${page.url.pathname}:${localeState.version}`}
+						<main
+							class="absolute inset-0 overflow-y-auto"
+							class:public-shell-main={publicShell && !isFullBleedRoute(page.url.pathname)}
+							transition:fade={{ duration: 150 }}
+						>
 							{@render children()}
 						</main>
 					{/key}

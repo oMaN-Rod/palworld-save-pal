@@ -65,3 +65,6 @@ data/json/settings.json
 # ooz wasm build scratch (cloned source + emcc intermediates); the vendored
 # artifact lives under ui/vendor/ooz and IS committed.
 /vendor/
+
+# Superpowers scratch: SDD ledgers, task briefs, brainstorm mockups
+/.superpowers/
