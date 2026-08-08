@@ -11,6 +11,7 @@
 	import { onMount } from 'svelte';
 	import * as m from '$i18n/messages';
 	import { getAppState } from '$states/appState.svelte';
+	import { isWebBuild } from '$lib/utils/platform';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { breedingApi } from '$lib/breeding/api';
@@ -402,11 +403,17 @@
 		return players.reduce((sum, p) => sum + Object.keys(p?.pals ?? {}).length, 0);
 	});
 
-	const tabs: { id: Mode; icon: typeof ArrowRightLeft; label: () => string }[] = [
+	const allTabs: { id: Mode; icon: typeof ArrowRightLeft; label: () => string }[] = [
 		{ id: 'direct', icon: ArrowRightLeft, label: () => m.breeding_tabs_direct() },
 		{ id: 'selection', icon: ListChecks, label: () => m.breeding_tabs_selection() },
 		{ id: 'save', icon: Database, label: () => m.breeding_tabs_save() }
 	];
+
+	// Save Mode sources pals from a loaded save, so it has nothing to offer a
+	// public-shell visitor. `mode` starts on 'direct', so hiding it cannot strand.
+	const tabs = $derived(
+		isWebBuild && !appState.saveFile ? allTabs.filter((tab) => tab.id !== 'save') : allTabs
+	);
 </script>
 
 <div
@@ -427,7 +434,7 @@
 
 	<!-- tab pills + list/graph toggle -->
 	<div class="flex items-center gap-1.5">
-		{#each tabs as tab}
+		{#each tabs as tab (tab.id)}
 			{@const TabIcon = tab.icon}
 			<button
 				class="rounded-sm flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium transition-all {tabPill(mode === tab.id)}"

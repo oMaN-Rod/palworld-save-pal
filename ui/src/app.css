@@ -1495,3 +1495,107 @@ body::after {
 .driver-popover .driver-popover-arrow-side-bottom.driver-popover-arrow {
 	border-color: var(--color-surface-800) !important;
 }
+
+.public-nav {
+	position: fixed;
+	top: 0.75rem;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	max-width: calc(100vw - 1.5rem);
+	padding: 0.375rem 0.5rem 0.375rem 0.75rem;
+	border-radius: 9999px;
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 60%, transparent);
+	background: color-mix(in srgb, var(--color-surface-900) 82%, transparent);
+	backdrop-filter: blur(12px);
+	box-shadow: 0 8px 24px rgb(0 0 0 / 0.28);
+}
+
+.public-nav-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-shrink: 0;
+}
+
+.public-nav-links {
+	display: flex;
+	align-items: center;
+	gap: 0.125rem;
+	min-width: 0;
+}
+
+.public-nav-link {
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	padding: 0.375rem 0.625rem;
+	border-radius: 9999px;
+	font-size: 0.8125rem;
+	color: var(--color-surface-300);
+	white-space: nowrap;
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+.public-nav-link:hover {
+	background: color-mix(in srgb, var(--color-surface-700) 70%, transparent);
+	color: var(--color-surface-50);
+}
+
+.public-nav-link.is-active {
+	background: color-mix(in srgb, var(--color-primary-500) 18%, transparent);
+	color: var(--color-primary-300);
+}
+
+.public-nav-chips {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	flex-shrink: 0;
+}
+
+.public-chip {
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	padding: 0.3125rem 0.625rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	color: var(--color-surface-300);
+	border: 1px solid color-mix(in srgb, var(--color-surface-600) 55%, transparent);
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+.public-chip:hover {
+	background: color-mix(in srgb, var(--color-surface-700) 70%, transparent);
+	color: var(--color-surface-50);
+}
+
+.public-chip-option {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	padding: 0.375rem 0.5rem;
+	border-radius: 0.375rem;
+	font-size: 0.8125rem;
+	text-align: left;
+	color: var(--color-surface-300);
+}
+
+.public-chip-option:hover {
+	background: var(--color-surface-700);
+	color: var(--color-surface-50);
+}
+
+.public-chip-option.is-active {
+	color: var(--color-primary-400);
+	font-weight: 600;
+}
+
+.public-shell-main {
+	padding-top: 4rem;
+}
