@@ -401,10 +401,13 @@ spawn_fg_tagged() {
 }
 
 # spawn_bg_tagged <tag> <cmd...> — background, prefixed lines, SAME process group.
-# Echoes the child's PID on stdout for cleanup.
+# Sets LAST_BG_PID to the new background job's PID (do NOT call via $() command
+# substitution — that runs this function in a subshell whose exit reaps the
+# background job, so the parent shell never sees it). Callers read $LAST_BG_PID.
 # Honors SPAWN_CWD. Extra env vars must be exported by the caller before calling.
 # IMPORTANT: no setsid/start_new_session — children stay in our process group so
 # Ctrl-C reaches them. The trap on INT/TERM/EXIT guarantees teardown regardless.
+LAST_BG_PID=""
 spawn_bg_tagged() {
     local tag="$1"; shift
     log_info "Starting $tag: ${BOLD}$*${RESET}"
@@ -416,12 +419,8 @@ spawn_bg_tagged() {
     else
         ( "$@" 2>&1 | sed -u "s/^/[${sed_tag}] /" ) >&2 &
     fi
-    # $! is the subshell; resolve the actual command PID via pgrep on the tag.
-    # As a reliable fallback, also track the subshell PID so cleanup can reach
-    # its child via the shared process group.
-    local subshell_pid=$!
-    CHILD_PIDS+=("$subshell_pid")
-    printf '%s\n' "$subshell_pid"
+    LAST_BG_PID=$!
+    CHILD_PIDS+=("$LAST_BG_PID")
 }
 
 cleanup_children() {
@@ -578,12 +577,14 @@ run_web() {
     banner "Dev: web  (${host}:${vite_port}  +  psp-server :${server_port})"
 
     local vite_pid server_pid
-    SPAWN_CWD="$UI_DIR" vite_pid="$(SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port")"
+    SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
+    vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
-        SPAWN_CWD="$REPO_ROOT" server_pid="$(SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+        SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
             --host "$host" --port "$server_port" \
             --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-            --db "$REPO_ROOT/psp-rs.db" --dev)"
+            --db "$REPO_ROOT/psp-rs.db" --dev
+        server_pid="$LAST_BG_PID"
     fi
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
     printf '\n%s%s  ▸ PSP web dev running:%s  %shttp://%s:%s%s\n\n' \
@@ -614,7 +615,8 @@ run_desktop() {
     banner "Dev: desktop  (Tauri + embedded psp-server)"
     local tauri_pid
     # cargo tauri dev must run from psp-desktop/.
-    tauri_pid="$(SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev)"
+    SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
+    tauri_pid="$LAST_BG_PID"
     printf '%s  Ctrl-C to stop. easyrun restores ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$tauri_pid"
 }
@@ -628,7 +630,8 @@ run_webapp() {
     write_web_env ""
     banner "Dev: webapp  (landing page + tool, browser-only)"
     local vite_pid
-    vite_pid="$(VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port")"
+    VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
+    vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (webapp)" 60 || true
     printf '\n%s%s  ▸ PSP webapp dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
@@ -643,7 +646,8 @@ run_landing() {
     write_web_env ""
     banner "Dev: landing-only  (${host}:${port}, no wasm / no server)"
     local vite_pid
-    vite_pid="$(VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port")"
+    VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
+    vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (landing)" 60 || true
     printf '\n%s%s  ▸ PSP landing preview:%s  %shttp://%s:%s%s\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
@@ -657,10 +661,11 @@ run_serve() {
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
     banner "Serve: psp-server  (${host}:${port})"
     local server_pid
-    server_pid="$(SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
         --host "$host" --port "$port" \
         --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-        --db "$REPO_ROOT/psp-rs.db" --dev)"
+        --db "$REPO_ROOT/psp-rs.db" --dev
+    server_pid="$LAST_BG_PID"
     wait_on_pids "$server_pid"
 }
 
