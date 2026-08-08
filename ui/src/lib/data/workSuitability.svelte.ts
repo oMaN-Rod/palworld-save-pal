@@ -6,23 +6,30 @@ interface WorkSuitabilityData {
 	description?: string;
 }
 
+const WORK_SUITABILITY_SEED: Record<WorkSuitability, WorkSuitabilityData> = {
+	EmitFlame: {},
+	Watering: {},
+	Seeding: {},
+	GenerateElectricity: {},
+	Handcraft: {},
+	Collection: {},
+	Deforest: {},
+	Mining: {},
+	OilExtraction: {},
+	ProductMedicine: {},
+	Cool: {},
+	Transport: {},
+	MonsterFarm: {}
+};
+
+/** Build-time source for the 13 work suitability keys; the store below is empty until runtime. */
+export const WORK_SUITABILITY_KEYS = Object.keys(WORK_SUITABILITY_SEED) as WorkSuitability[];
+
 class WorkSuitabilities {
 	private loading: boolean = false;
 
 	workSuitability: Record<WorkSuitability, WorkSuitabilityData> = $state({
-		EmitFlame: {},
-		Watering: {},
-		Seeding: {},
-		GenerateElectricity: {},
-		Handcraft: {},
-		Collection: {},
-		Deforest: {},
-		Mining: {},
-		OilExtraction: {},
-		ProductMedicine: {},
-		Cool: {},
-		Transport: {},
-		MonsterFarm: {}
+		...WORK_SUITABILITY_SEED
 	});
 
 	private async ensureLoaded(): Promise<void> {
@@ -44,21 +51,7 @@ class WorkSuitabilities {
 	}
 
 	async reset(): Promise<void> {
-		this.workSuitability = {
-			EmitFlame: {},
-			Watering: {},
-			Seeding: {},
-			GenerateElectricity: {},
-			Handcraft: {},
-			Collection: {},
-			Deforest: {},
-			Mining: {},
-			OilExtraction: {},
-			ProductMedicine: {},
-			Cool: {},
-			Transport: {},
-			MonsterFarm: {}
-		};
+		this.workSuitability = { ...WORK_SUITABILITY_SEED };
 		await this.ensureLoaded();
 	}
 }
