@@ -13,7 +13,7 @@ export type PublicNavItem = {
 
 export const publicNavItems: PublicNavItem[] = [
 	{ id: 'map', href: '/map', icon: Map, label: () => m.map() },
-	{ id: 'wiki', href: '/docs/wiki', icon: BookOpen, label: () => m.docs_wiki() },
+	{ id: 'wiki', href: '/wiki', icon: BookOpen, label: () => m.docs_wiki() },
 	{ id: 'breeding', href: '/breeding', icon: FlaskConical, label: () => m.breeding() }
 ];
 
