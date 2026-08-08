@@ -315,17 +315,17 @@
 			return Object.values(appState.players ?? {}).some((p) => p?.pals);
 		}
 		if (appState.players?.[uid]?.pals) return true;
-		// `sendAndWait` can't be used here: its queue resolves only when a
-		// message of the REQUEST's own type arrives, but the backend answers
-		// under GET_PLAYER_DETAILS_RESPONSE — so the await would never resolve
-		// and Save Mode would hang. Fire the request and poll for the pals.
-		send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: uid, origin: 'breeding' });
-		const deadline = Date.now() + 20_000;
-		while (Date.now() < deadline) {
-			if (appState.players?.[uid]?.pals) return true;
-			await new Promise((r) => setTimeout(r, 120));
-		}
-		return false;
+			// `sendAndWait` can't be used here: its queue resolves only when a
+			// message of the REQUEST's own type arrives, but the backend answers
+			// under GET_PLAYER_DETAILS_RESPONSE — so the await would never resolve
+			// and Save Mode would hang. Fire the request and poll for the pals.
+			send(MessageType.REQUEST_PLAYER_DETAILS, { player_id: uid, origin: 'breeding' });
+			const deadline = Date.now() + 20_000;
+			while (Date.now() < deadline) {
+				if (appState.players?.[uid]?.pals) return true;
+				await new Promise((r) => setTimeout(r, 120));
+			}
+			return false;
 	}
 
 	// Clear only the Save Mode result slot (owner changes invalidate results).
