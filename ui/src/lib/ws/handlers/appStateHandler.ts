@@ -1,8 +1,9 @@
 import { goto } from '$app/navigation';
 import { UpdateAvailableModal } from '$components/modals';
 import * as m from '$i18n/messages';
-import { setLocale } from '$i18n/runtime';
+import { getLocale, setLocale } from '$i18n/runtime';
 import { getAppState, getModalState, getToastState } from '$states';
+import { bumpLocaleVersion } from '$states/localeState.svelte';
 import { MessageType } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import type { WSMessageHandler } from '../types';
@@ -59,8 +60,10 @@ export const settingsHandler: WSMessageHandler = {
 	type: MessageType.GET_SETTINGS,
 	async handle(data) {
 		const appState = getAppState();
+		const previous = getLocale();
 		appState.settings = data;
 		setLocale(appState.settings.language);
+		if (appState.settings.language !== previous) bumpLocaleVersion();
 	}
 };
 
