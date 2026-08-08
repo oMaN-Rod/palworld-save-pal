@@ -5,7 +5,7 @@ members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-we
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
 # all crates). Bump with scripts/bump.ps1.
-version = "1.3.1"
+version = "1.3.2"
 edition = "2021"
 license = "GPL-3.0-only"
 
