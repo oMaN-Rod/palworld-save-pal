@@ -14,44 +14,40 @@ import { worldToPixel } from './utils';
 import { pixelToLngLat } from './mercator';
 import { composeWorld } from './ghostTransform';
 import { MESH_FLIP, getSharedRenderer } from './structureLayer';
+import { ueQuatToThree } from './coords3d';
 import { structureParts, requestMesh, onMeshLoaded } from './meshLibrary';
 import { partLocalMatrix } from './meshPlacement';
-
-// Gap 1: the real render path only carries yaw (ueYawToThreeQuaternion), but a
-// blueprint records a full quaternion. This mirrors that converter's convention
-// for the whole quaternion: the ue.(x,y,z) -> three.(x,z,y) axis swap with the
-// handedness flip. Concretely it is the same component map ueEulerToThreeQuaternion
-// implements (ue roll->+X, ue pitch->+Z, ue yaw->-Y), so a yaw-only quat reduces
-// exactly to ueYawToThreeQuaternion and pitched/rolled parts stay consistent with
-// partLocalMatrix. Verified single-axis against coords3d/meshPlacement conventions.
-function ueQuatToThree(q: Quat): THREE.Quaternion {
-	return new THREE.Quaternion(q.x, -q.z, q.y, q.w);
-}
 
 type MeshBucket = { mesh: string; matrices: THREE.Matrix4[] };
 
 // Same recipe as structureLayer.meshInstanceMatrix, but fed an absolute world
 // transform (composeWorld) instead of a BaseStructure, honouring the full
 // quaternion and per-structure scale.
-function ghostInstanceMatrix(
+export function ghostInstanceMatrix(
 	world: { translation: { x: number; y: number; z: number }; rotation: Quat; scale: { x: number; y: number; z: number } },
 	part: Parameters<typeof partLocalMatrix>[0],
 	area: MapArea,
-	verticalScale: number,
+	_verticalScale: number,
 	cmToMerc: number
 ): THREE.Matrix4 {
 	const [px, py] = worldToPixel(world.translation.x, world.translation.y, area);
 	const [lng, lat] = pixelToLngLat(px, py);
-	const anchor = MercatorCoordinate.fromLngLat([lng, lat], world.translation.z * verticalScale);
+	// Z goes through cmToMerc directly, not fromLngLat's altitude argument, which
+	// would divide by this instance's own latitude rather than the camera
+	// centre's (see structureLayer.meshInstanceMatrix).
+	const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
+	const anchorZ = world.translation.z * cmToMerc;
 	const rotation = MESH_FLIP.clone().multiply(
-		new THREE.Matrix4().makeRotationFromQuaternion(ueQuatToThree(world.rotation))
+		new THREE.Matrix4().makeRotationFromQuaternion(
+			ueQuatToThree(world.rotation.x, world.rotation.y, world.rotation.z, world.rotation.w)
+		)
 	);
 	// Gap 2: per-structure scale, in the same (x,z,y) axis order partLocalMatrix
 	// uses for the part's own scale, folded into the cm->mercator conversion.
 	const s = world.scale;
 	const scale = new THREE.Matrix4().makeScale(cmToMerc * s.x, cmToMerc * s.z, cmToMerc * s.y);
 	return new THREE.Matrix4()
-		.makeTranslation(anchor.x, anchor.y, anchor.z)
+		.makeTranslation(anchor.x, anchor.y, anchorZ)
 		.multiply(rotation)
 		.multiply(scale)
 		.multiply(partLocalMatrix(part));
@@ -161,9 +157,6 @@ export function createGhostLayer(opts: { id: string }): GhostLayer {
 			const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
 			camera.projectionMatrix = m;
 			renderer.resetState();
-			// MapLibre's shared depth buffer isn't cleared for us; without this the
-			// ghost inherits stale depth state and self-occludes incorrectly.
-			renderer.clearDepth();
 			renderer.render(scene, camera);
 		},
 

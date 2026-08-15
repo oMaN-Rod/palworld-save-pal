@@ -12,11 +12,23 @@ import { buildArchetypeGeometry } from './proxyGeometry';
 import { ueYawToThreeQuaternion } from './coords3d';
 import { structurePlacement, structureAnchor } from './structurePlacement';
 import { structureFillColor } from './styles';
+import { materialOpacities } from './mapColors.svelte';
 import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
-import { structureParts, requestMesh, meshFailed, onMeshLoaded, type ManifestPart } from './meshLibrary';
+import {
+	structureParts,
+	requestMesh,
+	meshFailed,
+	onMeshLoaded,
+	requestTexturedMesh,
+	onTexturedMeshLoaded,
+	STRUCTURE_MODEL_DIR,
+	type ManifestPart,
+	type TexturedMeshBundle
+} from './meshLibrary';
 import { partLocalMatrix, type MeshPart } from './meshPlacement';
 import { PickIndex } from './pickIndex';
 import { decodePickBytes } from './pickEncoding';
+import { bakeStructureInstance, composeStructureMatrix, STRUCTURE_BAKE_STRIDE } from './structureInstances';
 
 // Both mesh and proxy geometry are authored Y-up; MapLibre's mercator world
 // (fed through mainMatrix with an identity camera view) is Z-up. A naive
@@ -64,11 +76,23 @@ void main() {
 }
 `;
 
-export type Group = { mesh: THREE.InstancedMesh; keys: string[]; colorHex: string; pickBase: number };
+export type Group = {
+	mesh: THREE.InstancedMesh;
+	keys: string[];
+	colorHex: string;
+	pickBase: number;
+	// Camera-independent per-instance data (STRUCTURE_BAKE_STRIDE floats each, in
+	// key order), so setVerticalScale can recompose every matrix from this
+	// without touching groups, geometry or materials.
+	baked: Float32Array;
+	// An extra camera-independent transform composeStructureMatrix does not fold
+	// in; null on the proxy path, which has no such offset.
+	partMatrices: THREE.Matrix4[] | null;
+};
 
 type MeshItem = { s: BaseStructure; fp: Footprint; part: ManifestPart };
-type MeshBucket = { colorHex: string; mesh: string; items: MeshItem[] };
-type ProxyBucket = { fp: Footprint; colorHex: string; items: BaseStructure[] };
+type MeshBucket = { colorHex: string; opacity: number; mesh: string; items: MeshItem[] };
+type ProxyBucket = { fp: Footprint; colorHex: string; opacity: number; items: BaseStructure[] };
 
 // Pure (no WebGL, no InstancedMesh) per-instance transforms, split out of
 // update() so C1 (cm-vs-metre scale) and C2 (box-offset leaking into the mesh
@@ -78,18 +102,22 @@ export function meshInstanceMatrix(
 	s: BaseStructure,
 	part: MeshPart,
 	area: MapArea,
-	verticalScale: number,
+	_verticalScale: number,
 	cmToMerc: number
 ): THREE.Matrix4 {
 	// Real game meshes use the raw actor transform: unlike the proxy path there
 	// is no origin/half-height centering to compensate for a synthetic box.
 	const p = structureAnchor(s, area);
-	const anchor = MercatorCoordinate.fromLngLat([p.lng, p.lat], p.altitudeCm * verticalScale);
+	// Z goes through cmToMerc directly, not fromLngLat's altitude argument, which
+	// would divide by this instance's own latitude rather than the camera
+	// centre's (see sceneryLayer.sceneryInstanceMatrix).
+	const anchor = MercatorCoordinate.fromLngLat([p.lng, p.lat]);
+	const anchorZ = p.altitudeCm * cmToMerc;
 	const yawRotation = new THREE.Matrix4().makeRotationFromQuaternion(ueYawToThreeQuaternion(p.yaw));
 	const rotation = MESH_FLIP.clone().multiply(yawRotation);
 	const scale = new THREE.Matrix4().makeScale(cmToMerc, cmToMerc, cmToMerc);
 	return new THREE.Matrix4()
-		.makeTranslation(anchor.x, anchor.y, anchor.z)
+		.makeTranslation(anchor.x, anchor.y, anchorZ)
 		.multiply(rotation)
 		.multiply(scale)
 		.multiply(partLocalMatrix(part));
@@ -106,12 +134,15 @@ export function proxyInstanceMatrix(
 	const p = structurePlacement(s, fp, area, verticalScale);
 	const halfH = p.footprintCm.sz / 2;
 	const originCm = p.altitudeCm + (archetype === 'foundation' ? halfH : -halfH);
-	const anchor = MercatorCoordinate.fromLngLat([p.lng, p.lat], originCm * verticalScale);
+	// See meshInstanceMatrix above: Z goes through cmToMerc directly, not
+	// fromLngLat's per-instance-latitude altitude argument.
+	const anchor = MercatorCoordinate.fromLngLat([p.lng, p.lat]);
+	const anchorZ = originCm * cmToMerc;
 	const yawRotation = new THREE.Matrix4().makeRotationFromQuaternion(ueYawToThreeQuaternion(p.yaw));
 	const rotation = MESH_FLIP.clone().multiply(yawRotation);
 	const scale = new THREE.Matrix4().makeScale(cmToMerc, cmToMerc, cmToMerc);
 	return new THREE.Matrix4()
-		.makeTranslation(anchor.x, anchor.y, anchor.z)
+		.makeTranslation(anchor.x, anchor.y, anchorZ)
 		.multiply(rotation)
 		.multiply(scale);
 }
@@ -158,13 +189,41 @@ export function getSharedRenderer(
 	return sharedRenderer;
 }
 
+// For instrumentation that must not create a renderer. Null until the first
+// layer is added.
+export function peekSharedRenderer(): THREE.WebGLRenderer | null {
+	return sharedRenderer;
+}
+
+// Resolves a cached bundle's material(s) for one group, cloned so mutating
+// opacity here cannot bleed back into the shared cache. Mirrors
+// addInstancedGroup's opacity handling so the two modes stay consistent.
+export function texturedGroupMaterial(
+	bundle: TexturedMeshBundle,
+	opacity: number
+): THREE.Material | THREE.Material[] {
+	const withOpacity = (material: THREE.Material): THREE.Material => {
+		const clone = material.clone();
+		clone.transparent = opacity < 1;
+		clone.opacity = opacity;
+		return clone;
+	};
+	return Array.isArray(bundle.material)
+		? bundle.material.map(withOpacity)
+		: withOpacity(bundle.material);
+}
+
 export type StructureLayer = CustomLayerInterface & {
 	update(
 		structures: BaseStructure[],
 		footprints: Record<string, Footprint>,
 		area: MapArea,
-		verticalScale: number
+		verticalScale: number,
+		textured?: boolean
 	): void;
+	// The camera-only path a pan/zoom/pitch takes instead of a full update():
+	// recomposes matrices without rebuilding groups, geometry or materials.
+	setVerticalScale(verticalScale: number): void;
 	setHover(key: string | null): void;
 	requestPick(x: number, y: number, cb: (key: string | null) => void): void;
 	dispose(): void;
@@ -215,11 +274,35 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			// frees its GPU buffers while the object stays cached, so a later cache
 			// hit would render nothing. Only the per-update material and the
 			// InstancedMesh's own instance-attribute buffers belong to this layer.
-			(g.mesh.material as THREE.Material).dispose();
+			// A textured group's material is a per-update clone, so it belongs to this
+			// layer and is disposed like the flat-colour one. The cached bundle's
+			// original is not ours to dispose.
+			const material = g.mesh.material;
+			if (Array.isArray(material)) {
+				for (const m of material) m.dispose();
+			} else {
+				material.dispose();
+			}
 			g.mesh.dispose();
 		}
 		groups.length = 0;
 		pickIndex.reset();
+	}
+
+	// Shared by update() and setVerticalScale() so the two never drift.
+	// partMatrix does not depend on cmToMerc, so it post-multiplies rather than
+	// being folded into the bake.
+	const scratch = new THREE.Matrix4();
+	function applyBakedMatrix(
+		inst: THREE.InstancedMesh,
+		index: number,
+		baked: Float32Array,
+		cmToMerc: number,
+		partMatrix: THREE.Matrix4 | null
+	) {
+		composeStructureMatrix(baked, index * STRUCTURE_BAKE_STRIDE, cmToMerc, scratch);
+		if (partMatrix) scratch.multiply(partMatrix);
+		inst.setMatrixAt(index, scratch);
 	}
 
 	function ensurePickTarget(width: number, height: number): THREE.WebGLRenderTarget {
@@ -290,8 +373,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			renderer = getSharedRenderer(m.getCanvas(), gl as WebGLRenderingContext);
 		},
 
-		update(structures, footprints, area, verticalScale) {
-			lastArgs = [structures, footprints, area, verticalScale];
+		update(structures, footprints, area, verticalScale, textured = false) {
+			lastArgs = [structures, footprints, area, verticalScale, textured];
 			if (!map || disposed) return;
 			clearGroups();
 			const center = map.getCenter();
@@ -302,17 +385,18 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 
 			const meshBuckets = new Map<string, MeshBucket>();
 			const proxyBuckets = new Map<string, ProxyBucket>();
+			const opacities = materialOpacities();
 
-			function addProxy(s: BaseStructure, fp: Footprint, colorHex: string, why: string) {
+			function addProxy(s: BaseStructure, fp: Footprint, colorHex: string, opacity: number, why: string) {
 				if (!reportedProxy.has(s.map_object_id)) {
 					reportedProxy.add(s.map_object_id);
 					console.info(`[structure3d] proxy fallback: ${s.map_object_id} (${why})`);
 				}
 				const archetype = fp.archetype ?? 'box';
-				const key = `proxy:${archetype}|${fp.sx}|${fp.sy}|${fp.sz}|${colorHex}`;
+				const key = `proxy:${archetype}|${fp.sx}|${fp.sy}|${fp.sz}|${colorHex}|${opacity.toFixed(2)}`;
 				let b = proxyBuckets.get(key);
 				if (!b) {
-					b = { fp, colorHex, items: [] };
+					b = { fp, colorHex, opacity, items: [] };
 					proxyBuckets.set(key, b);
 				}
 				b.items.push(s);
@@ -321,6 +405,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			for (const s of structures) {
 				const fp = lookupFootprint(footprints, s.map_object_id) ?? DEFAULT_STRUCTURE_FOOTPRINT;
 				const colorHex = structureFillColor(fp.typeA, fp.material);
+				const opacity = opacities[fp.material ?? ''] ?? 1;
 				const parts = structureParts(s.map_object_id);
 
 				if (parts && parts.length > 0) {
@@ -342,43 +427,78 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 						}
 					}
 					if (failedMesh) {
-						addProxy(s, fp, colorHex, `mesh failed: ${failedMesh}`);
+						addProxy(s, fp, colorHex, opacity, `mesh failed: ${failedMesh}`);
 						continue;
 					}
 					if (anyLoading) continue; // still loading; onMeshLoaded triggers a rebuild
 					for (const part of resolvedParts) {
-						const key = `mesh:${part.mesh}|${colorHex}`;
+						const key = `mesh:${part.mesh}|${colorHex}|${opacity.toFixed(2)}`;
 						let b = meshBuckets.get(key);
 						if (!b) {
-							b = { colorHex, mesh: part.mesh, items: [] };
+							b = { colorHex, opacity, mesh: part.mesh, items: [] };
 							meshBuckets.set(key, b);
 						}
 						b.items.push({ s, fp, part });
 					}
 					continue;
 				}
-				addProxy(s, fp, colorHex, parts ? 'manifest entry has no parts' : 'no manifest entry');
+				addProxy(s, fp, colorHex, opacity, parts ? 'manifest entry has no parts' : 'no manifest entry');
 			}
 
 			// The mercator transform mirrors handedness relative to three's convention,
 			// which flips winding and makes FrontSide backface-cull the visible faces.
 			function addInstancedGroup(
 				geom: THREE.BufferGeometry,
-				count: number
+				count: number,
+				opacity: number
 			): { inst: THREE.InstancedMesh; keys: string[] } {
-				const material = new THREE.MeshLambertMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+				// Transparent groups must still write depth: this layer shares MapLibre's
+				// depth buffer, and pixels left at the cleared far value get repainted by
+				// its later passes, so the glass disappears entirely. The cost is that
+				// glass occludes glass behind it rather than showing through.
+				const material = new THREE.MeshLambertMaterial({
+					color: 0xffffff,
+					side: THREE.DoubleSide,
+					transparent: opacity < 1,
+					opacity
+				});
 				const inst = new THREE.InstancedMesh(geom, material, count);
 				inst.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(count * 3), 3);
 				inst.frustumCulled = false;
+				// The pick pass swaps in scene.overrideMaterial and so ignores opacity: an
+				// opacity-0 group would stay invisible yet keep intercepting clicks.
+				// Hiding it skips both passes, letting clicks fall through.
+				inst.visible = opacity > 0;
 				return { inst, keys: [] };
 			}
 
-			function finalizeGroup(inst: THREE.InstancedMesh, keys: string[], colorHex: string) {
+			// Textured groups skip the flat-colour path: with no instanceColor here,
+			// instances render the glb's own texture until applyHover() lazily creates
+			// one, initialised to white.
+			function addTexturedInstancedGroup(
+				bundle: TexturedMeshBundle,
+				count: number,
+				opacity: number
+			): { inst: THREE.InstancedMesh; keys: string[] } {
+				const material = texturedGroupMaterial(bundle, opacity);
+				const inst = new THREE.InstancedMesh(bundle.geometry, material, count);
+				inst.frustumCulled = false;
+				inst.visible = opacity > 0;
+				return { inst, keys: [] };
+			}
+
+			function finalizeGroup(
+				inst: THREE.InstancedMesh,
+				keys: string[],
+				colorHex: string,
+				baked: Float32Array,
+				partMatrices: THREE.Matrix4[] | null
+			) {
 				const pickBase = pickIndex.add(keys);
 				inst.instanceMatrix.needsUpdate = true;
 				if (inst.instanceColor) inst.instanceColor.needsUpdate = true;
 				scene.add(inst);
-				groups.push({ mesh: inst, keys, colorHex, pickBase });
+				groups.push({ mesh: inst, keys, colorHex, pickBase, baked, partMatrices });
 				inst.onBeforeRender = (_renderer, _scene, _camera, _geometry, material) => {
 					const sm = material as THREE.ShaderMaterial;
 					// scene.overrideMaterial substitutes one shared ShaderMaterial instance for
@@ -394,30 +514,77 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			for (const b of meshBuckets.values()) {
 				const geom = requestMesh(b.mesh);
 				if (!geom) continue;
-				const { inst, keys } = addInstancedGroup(geom, b.items.length);
+				const baked = new Float32Array(b.items.length * STRUCTURE_BAKE_STRIDE);
+				const partMatrices: THREE.Matrix4[] = [];
 				b.items.forEach(({ s, part }, i) => {
-					inst.setMatrixAt(i, meshInstanceMatrix(s, part, area, verticalScale, cmToMerc));
+					baked.set(bakeStructureInstance(structureAnchor(s, area)), i * STRUCTURE_BAKE_STRIDE);
+					partMatrices.push(partLocalMatrix(part));
+				});
+				// The textured cache loads independently of the colour-mode one above, so
+				// while it is still resolving this bucket renders flat-coloured, and
+				// onTexturedMeshLoaded requeues a rebuild once it lands.
+				if (textured) {
+					const bundle = requestTexturedMesh(b.mesh);
+					if (bundle) {
+						const { inst, keys } = addTexturedInstancedGroup(bundle, b.items.length, b.opacity);
+						b.items.forEach(({ s }, i) => {
+							applyBakedMatrix(inst, i, baked, cmToMerc, partMatrices[i]);
+							keys.push(s.instance_id);
+						});
+						finalizeGroup(inst, keys, '#ffffff', baked, partMatrices);
+						continue;
+					}
+				}
+				const { inst, keys } = addInstancedGroup(geom, b.items.length, b.opacity);
+				b.items.forEach(({ s }, i) => {
+					applyBakedMatrix(inst, i, baked, cmToMerc, partMatrices[i]);
 					color.set(b.colorHex);
 					inst.setColorAt(i, color);
 					keys.push(s.instance_id);
 				});
-				finalizeGroup(inst, keys, b.colorHex);
+				finalizeGroup(inst, keys, b.colorHex, baked, partMatrices);
 			}
 
 			for (const b of proxyBuckets.values()) {
 				const archetype = b.fp.archetype ?? 'box';
 				const geom = buildArchetypeGeometry(archetype, b.fp.sx, b.fp.sy, b.fp.sz);
-				const { inst, keys } = addInstancedGroup(geom, b.items.length);
+				const { inst, keys } = addInstancedGroup(geom, b.items.length, b.opacity);
+				const baked = new Float32Array(b.items.length * STRUCTURE_BAKE_STRIDE);
 				b.items.forEach((s, i) => {
-					inst.setMatrixAt(i, proxyInstanceMatrix(s, b.fp, archetype, area, verticalScale, cmToMerc));
+					const p = structurePlacement(s, b.fp, area, verticalScale);
+					const halfH = p.footprintCm.sz / 2;
+					const originCm = p.altitudeCm + (archetype === 'foundation' ? halfH : -halfH);
+					baked.set(
+						bakeStructureInstance({ lng: p.lng, lat: p.lat, altitudeCm: originCm, yaw: p.yaw }),
+						i * STRUCTURE_BAKE_STRIDE
+					);
+					applyBakedMatrix(inst, i, baked, cmToMerc, null);
 					color.set(b.colorHex);
 					inst.setColorAt(i, color);
 					keys.push(s.instance_id);
 				});
-				finalizeGroup(inst, keys, b.colorHex);
+				finalizeGroup(inst, keys, b.colorHex, baked, null);
 			}
 
 			applyHover();
+			map.triggerRepaint();
+		},
+
+		// The camera-only counterpart to update(): recomposes matrices from baked
+		// data, touching no clearGroups(), no InstancedMesh construction, no
+		// PickIndex.
+		setVerticalScale(verticalScale) {
+			if (!map || disposed) return;
+			const center = map.getCenter();
+			const merc = MercatorCoordinate.fromLngLat([center.lng, center.lat], 0);
+			const mPerUnit = merc.meterInMercatorCoordinateUnits();
+			const cmToMerc = verticalScale * mPerUnit;
+			for (const g of groups) {
+				for (let i = 0; i < g.keys.length; i++) {
+					applyBakedMatrix(g.mesh, i, g.baked, cmToMerc, g.partMatrices ? g.partMatrices[i] : null);
+				}
+				g.mesh.instanceMatrix.needsUpdate = true;
+			}
 			map.triggerRepaint();
 		},
 
@@ -439,9 +606,6 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				runPick();
 				renderer.resetState();
 			}
-			// MapLibre's shared depth buffer isn't cleared for us; without this, three's
-			// meshes inherit stale depth state and don't occlude each other correctly.
-			renderer.clearDepth();
 			renderer.render(scene, camera);
 		},
 
@@ -457,6 +621,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 		dispose() {
 			disposed = true;
 			unsubscribeMeshLoaded();
+			unsubscribeTexturedMeshLoaded();
 			pendingPick = null;
 			pickTarget?.dispose();
 			pickTarget = null;
@@ -491,18 +656,25 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	}
 
 	// A settle (success or permanent failure) can fire synchronously out of
-	// requestMesh() while update() is still iterating buckets; deferring the
-	// rebuild to a microtask guarantees it never re-enters a running update(),
-	// and the rebuildQueued flag coalesces a burst of settles (many meshes
-	// finishing close together) into a single rebuild.
-	const unsubscribeMeshLoaded = onMeshLoaded(() => {
+	// requestMesh()/requestTexturedMesh() while update() is still iterating
+	// buckets; the microtask keeps it from re-entering a running update(), and
+	// rebuildQueued coalesces a burst of settles from either cache into one.
+	function scheduleRebuild() {
 		if (rebuildQueued) return;
 		rebuildQueued = true;
 		queueMicrotask(() => {
 			rebuildQueued = false;
 			if (lastArgs) layer.update(...lastArgs);
 		});
-	});
+	}
+
+	// Scoped to the structure mesh directory: the cache is shared with the scenery
+	// layer, whose hundreds of meshes would otherwise each trigger a full rebuild.
+	const unsubscribeMeshLoaded = onMeshLoaded(scheduleRebuild, STRUCTURE_MODEL_DIR);
+	// The textured cache settles independently of the plain one above, so a
+	// structure already resolved for colour mode may still be waiting on its
+	// texture and needs this second subscription to rebuild once it lands.
+	const unsubscribeTexturedMeshLoaded = onTexturedMeshLoaded(scheduleRebuild, STRUCTURE_MODEL_DIR);
 
 	return layer;
 }

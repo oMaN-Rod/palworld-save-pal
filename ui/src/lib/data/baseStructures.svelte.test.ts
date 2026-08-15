@@ -1,15 +1,18 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 type Deferred = {
-	baseId: string;
+	baseId: string | undefined;
 	resolve: (value: unknown) => void;
 	reject: (reason: unknown) => void;
 };
 
+// loadFootprints sends no payload, so base_id is read optionally: reading it
+// through `!` threw inside the mock and left `pending` empty, which looks exactly
+// like a request that was never made.
 const pending: Deferred[] = [];
 const sendAndWait = vi.fn((_type: unknown, data?: { base_id: string }) => {
 	return new Promise((resolve, reject) => {
-		pending.push({ baseId: data!.base_id, resolve, reject });
+		pending.push({ baseId: data?.base_id, resolve, reject });
 	});
 });
 
@@ -154,3 +157,63 @@ describe('baseStructures.load', () => {
 		expect(baseStructuresData.for('A')).toEqual([{ id: 'fresh' }]);
 	});
 });
+
+// A base holds thousands of structures whose fields are read on every rebuild,
+// and under a deep $state each read goes through Svelte's proxy: profiling one
+// base load attributed 83 s to get_proxied_value and 56 s to the proxy's get
+// handler, against 495 ms of real work. The store replaces these collections
+// wholesale, so they must not be deeply reactive. Reference identity is the
+// observable form of that -- a proxied array is never the one handed in.
+describe('bulk collections are replaced wholesale', () => {
+	it('hands back the exact structure array it was given', async () => {
+		const structures = [{ id: 's1' }, { id: 's2' }] as never;
+		const load = baseStructuresData.load('RAW');
+		await flush();
+		pending.shift()!.resolve({ base_id: 'RAW', structures });
+		await load;
+
+		expect(baseStructuresData.for('RAW')).toBe(structures);
+	});
+
+	it('hands back the exact structure objects it was given', async () => {
+		const first = { id: 's1' };
+		const structures = [first] as never;
+		const load = baseStructuresData.load('RAW_ITEMS');
+		await flush();
+		pending.shift()!.resolve({ base_id: 'RAW_ITEMS', structures });
+		await load;
+
+		expect(baseStructuresData.for('RAW_ITEMS')[0]).toBe(first);
+	});
+
+	it('hands back the exact footprints object it was given', async () => {
+		const footprints = { Wall: { sx: 1, sy: 1, sz: 1 } } as never;
+		const load = baseStructuresData.loadFootprints();
+		await flush();
+		pending.shift()!.resolve(footprints);
+		await load;
+
+		expect(baseStructuresData.footprints).toBe(footprints);
+	});
+
+	// Consumers react to the replacement, so a second base must still be visible
+	// after the first.
+	it('keeps earlier bases readable when a later one lands', async () => {
+		const a = [{ id: 'a' }] as never;
+		const b = [{ id: 'b' }] as never;
+
+		const loadA = baseStructuresData.load('A2');
+		await flush();
+		pending.shift()!.resolve({ base_id: 'A2', structures: a });
+		await loadA;
+
+		const loadB = baseStructuresData.load('B2');
+		await flush();
+		pending.shift()!.resolve({ base_id: 'B2', structures: b });
+		await loadB;
+
+		expect(baseStructuresData.for('A2')).toBe(a);
+		expect(baseStructuresData.for('B2')).toBe(b);
+	});
+})
+;

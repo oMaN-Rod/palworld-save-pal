@@ -15,9 +15,15 @@ class BaseStructures {
 	// GET_BASE_STRUCTURES requests would share one slot and the first would never
 	// settle. Chain requests so at most one is ever on the wire.
 	private queue: Promise<void> = Promise.resolve();
-	private byBase: Record<string, BaseStructure[]> = $state({});
+	// $state.raw, not $state: a base holds thousands of structures whose fields are
+	// read repeatedly on every rebuild, and under a deep $state each read goes
+	// through Svelte's proxy. Profiling one base load attributed ~90 s to
+	// buildStructureFC and ~37 s to structureAnchor, nearly all inside the proxy's
+	// get handler, against 495 ms of real work. Both collections are replaced
+	// wholesale rather than mutated, so that reactivity buys nothing.
+	private byBase: Record<string, BaseStructure[]> = $state.raw({});
 
-	footprints: Record<string, Footprint> = $state({});
+	footprints: Record<string, Footprint> = $state.raw({});
 
 	async loadFootprints(): Promise<void> {
 		if (this.loadingFootprints || Object.keys(this.footprints).length > 0) return;
@@ -45,13 +51,16 @@ class BaseStructures {
 				);
 				if (epoch !== this.epoch) return;
 				if (response?.base_id && response.base_id !== baseId) return;
-				// Errors ("No save file loaded", malformed request) come back under the same
-				// message type and carry no structure list; cache empty so a moving map does
-				// not re-ask on every frame.
-				this.byBase[baseId] = Array.isArray(response?.structures) ? response.structures : [];
+				// Errors come back under the same message type with no structure list;
+				// cache empty so a moving map does not re-ask every frame. Replaced
+				// rather than mutated, since $state.raw only notifies on assignment.
+				this.byBase = {
+					...this.byBase,
+					[baseId]: Array.isArray(response?.structures) ? response.structures : []
+				};
 			} catch (error) {
 				console.error('Error fetching base structures:', error);
-				if (epoch === this.epoch) this.byBase[baseId] = [];
+				if (epoch === this.epoch) this.byBase = { ...this.byBase, [baseId]: [] };
 			} finally {
 				this.inflight.delete(baseId);
 			}
