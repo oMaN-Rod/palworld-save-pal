@@ -1,0 +1,576 @@
+{
+  "BP_LevelObject_Relic_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Jewel_2ae911",
+        "loc": [
+          0.0,
+          -10.0,
+          -10.0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_FlameBambi_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_FlameBambi_0f22c4",
+        "loc": [
+          0.0,
+          0.0,
+          77.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_GuardianDog_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_GuardianDog_f71bdc",
+        "loc": [
+          0.0,
+          -2.0,
+          74.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_IceCrocodile_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_IceCrocodile_b66d5f",
+        "loc": [
+          0.0,
+          0.0,
+          75.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          1.7
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_LazyDragon_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_LazyDragon_3fa1a8",
+        "loc": [
+          0.0,
+          -5.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_LeafMomonga_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_LeafMomonga_2b27a5",
+        "loc": [
+          0.0,
+          -10.0,
+          74.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_Monkey_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_Monkey_70e560",
+        "loc": [
+          0.0,
+          -10.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.7,
+          1.7,
+          1.7
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_Mutant_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_Mutant_4a2fff",
+        "loc": [
+          0.0,
+          4.0,
+          63.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.8,
+          1.8,
+          1.8
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_NegativeKoala_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_NegativeKoala_774da3",
+        "loc": [
+          0.0,
+          0.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_Penguin_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_Penguin_112e47",
+        "loc": [
+          0.0,
+          0.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_PinkCat_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_PinkCat_bd4a22",
+        "loc": [
+          0.0,
+          4.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_Relic_SheepBall_C": {
+    "parts": [
+      {
+        "mesh": "SM_JewelBase_496ae3",
+        "loc": [
+          0,
+          0,
+          0
+        ],
+        "rot": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          2.0,
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "mesh": "SM_Relic_SheepBall_82f48a",
+        "loc": [
+          0.0,
+          0.0,
+          76.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.9,
+          1.9,
+          1.9
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  },
+  "BP_LevelObject_TowerFastTravelPoint_C": {
+    "parts": [
+      {
+        "mesh": "SM_FastTravelStatue_61071e",
+        "loc": [
+          0.0,
+          2.0,
+          0.0
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.5,
+          1.5,
+          1.5
+        ]
+      }
+    ],
+    "cullDistanceCm": 30000
+  },
+  "BP_LevelObject_UnlockMapPoint_C": {
+    "parts": [
+      {
+        "mesh": "SM_FastTravelStatueVariant_185d80",
+        "loc": [
+          175.39882,
+          -124.06216,
+          2369.6255
+        ],
+        "rot": [
+          0.0,
+          90.0,
+          0.0
+        ],
+        "scale": [
+          1.5,
+          1.5000002,
+          1.5000001
+        ]
+      },
+      {
+        "mesh": "SM_pal_b07_PaldiumCrystal_02_3e214b",
+        "loc": [
+          175.39881869448985,
+          -124.06213467285858,
+          360.2095642089844
+        ],
+        "rot": [
+          0,
+          43.493001424862655,
+          0
+        ],
+        "scale": [
+          0.5991203784942627,
+          0.5991203784942627,
+          0.6749999821186066
+        ]
+      },
+      {
+        "mesh": "SM_pal_map_small_tower_01_2e73df",
+        "loc": [
+          175.3988218815969,
+          -124.06215842032087,
+          -1243.9893493652344
+        ],
+        "rot": [
+          0,
+          1.3943450767328613E-06,
+          0
+        ],
+        "scale": [
+          0.75,
+          0.75,
+          0.75
+        ]
+      }
+    ],
+    "cullDistanceCm": 100000
+  }
+}
