@@ -12,6 +12,7 @@ const { loadCalls } = vi.hoisted(() => ({
 vi.mock('three/examples/jsm/loaders/GLTFLoader.js', () => ({
 	GLTFLoader: vi.fn().mockImplementation(() => ({
 		setDRACOLoader: vi.fn(),
+		setMeshoptDecoder: vi.fn(),
 		load: (
 			url: string,
 			onLoad: (gltf: { scene: THREE.Object3D }) => void,
@@ -29,7 +30,17 @@ vi.mock('three/examples/jsm/loaders/DRACOLoader.js', () => ({
 	}))
 }));
 
-import { structureParts, requestMesh, meshFailed, onMeshLoaded } from './meshLibrary';
+import {
+	structureParts,
+	requestMesh,
+	meshFailed,
+	onMeshLoaded,
+	requestTexturedMesh,
+	texturedMeshFailed,
+	onTexturedMeshLoaded,
+	bundleMapObjectMesh,
+	configureTexturedMaterial
+} from './meshLibrary';
 import manifest from '../../../../../data/json/structure_meshes.json';
 
 function sceneWithMeshes(count: number): THREE.Object3D {
@@ -146,6 +157,15 @@ describe('requestMesh multi-mesh glb', () => {
 	});
 });
 
+describe('requestMesh dir override', () => {
+	it('loads from the given directory instead of the default structures path', () => {
+		const name = 'RequestMesh_SceneryDir';
+		expect(requestMesh(name, '/models/scenery')).toBeNull();
+
+		expect(lastCallFor(name).url).toBe(`/models/scenery/${name}.glb`);
+	});
+});
+
 describe('onMeshLoaded unsubscribe', () => {
 	it('stops invoking the callback once unsubscribed', () => {
 		const name = 'RequestMesh_Unsubscribe';
@@ -212,5 +232,244 @@ describe('requestMesh failure path', () => {
 		const callsBefore = loadCalls.length;
 		requestMesh(name);
 		expect(loadCalls.length).toBe(callsBefore);
+	});
+});
+
+// The cache is shared by structures (a few dozen meshes) and scenery (hundreds).
+// Notifying every listener regardless of directory meant each scenery mesh woke
+// the structure layer into a full rebuild of every base: 79 of 82 rebuilds during
+// one real base load came from meshes it never draws.
+describe('onMeshLoaded directory scoping', () => {
+	const STRUCTURES = '/models/structures';
+	const SCENERY = '/models/scenery';
+
+	it('notifies a listener when a mesh from its own directory settles', () => {
+		let hits = 0;
+		const off = onMeshLoaded(() => hits++, STRUCTURES);
+		const name = 'Scoped_OwnDir';
+
+		requestMesh(name, STRUCTURES);
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+
+		off();
+		expect(hits).toBe(1);
+	});
+
+	it('does not notify a listener when a mesh from another directory settles', () => {
+		let structureHits = 0;
+		let sceneryHits = 0;
+		const offStructures = onMeshLoaded(() => structureHits++, STRUCTURES);
+		const offScenery = onMeshLoaded(() => sceneryHits++, SCENERY);
+		const name = 'Scoped_OtherDir';
+
+		requestMesh(name, SCENERY);
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+
+		offStructures();
+		offScenery();
+		expect(sceneryHits).toBe(1);
+		expect(structureHits).toBe(0);
+	});
+
+	it('scopes permanent failures the same way as successes', () => {
+		let structureHits = 0;
+		let sceneryHits = 0;
+		const offStructures = onMeshLoaded(() => structureHits++, STRUCTURES);
+		const offScenery = onMeshLoaded(() => sceneryHits++, SCENERY);
+		const name = 'Scoped_FailureDir';
+
+		requestMesh(name, SCENERY);
+		lastCallFor(name).onError(new Error('nope'));
+
+		offStructures();
+		offScenery();
+		expect(meshFailed(name)).toBe(true);
+		expect(sceneryHits).toBe(1);
+		expect(structureHits).toBe(0);
+	});
+
+	it('notifies an unscoped listener for every directory', () => {
+		let hits = 0;
+		const off = onMeshLoaded(() => hits++);
+		const a = 'Scoped_UnscopedA';
+		const b = 'Scoped_UnscopedB';
+
+		requestMesh(a, STRUCTURES);
+		lastCallFor(a).onLoad({ scene: sceneWithMeshes(1) });
+		requestMesh(b, SCENERY);
+		lastCallFor(b).onLoad({ scene: sceneWithMeshes(1) });
+
+		off();
+		expect(hits).toBe(2);
+	});
+});
+
+// requestTexturedMesh is a separate cache that keeps per-primitive materials
+// instead of merging them away; these mirror the plain suite's coverage.
+describe('requestTexturedMesh', () => {
+	it('returns null while loading, then a cached bundle once the load lands', () => {
+		const name = 'RequestTexturedMesh_Success';
+		expect(requestTexturedMesh(name)).toBeNull();
+
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+
+		expect(texturedMeshFailed(name)).toBe(false);
+		const bundle = requestTexturedMesh(name);
+		expect(bundle?.geometry).toBeInstanceOf(THREE.BufferGeometry);
+		expect(Array.isArray(bundle?.material)).toBe(false);
+	});
+
+	it('scales geometry (metres, per the glTF exporter) up 100x to UE centimetres, same as requestMesh', () => {
+		const name = 'RequestTexturedMesh_CmContract';
+		requestTexturedMesh(name);
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+
+		const geo = requestTexturedMesh(name)!.geometry;
+		geo.computeBoundingBox();
+		const size = new THREE.Vector3();
+		geo.boundingBox!.getSize(size);
+		const source = new THREE.BoxGeometry(1, 1, 1);
+		source.computeBoundingBox();
+		const sourceSize = new THREE.Vector3();
+		source.boundingBox!.getSize(sourceSize);
+		expect(size.x).toBeCloseTo(sourceSize.x * 100, 6);
+		expect(size.y).toBeCloseTo(sourceSize.y * 100, 6);
+		expect(size.z).toBeCloseTo(sourceSize.z * 100, 6);
+	});
+
+	// Unlike requestMesh, a multi-primitive glb keeps each primitive's material
+	// via geometry.groups instead of merging into one untextured blob.
+	it('bundles a multi-primitive glb with one geometry group per primitive material', () => {
+		const name = 'RequestTexturedMesh_MultiMaterial';
+		requestTexturedMesh(name);
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(2) });
+
+		const bundle = requestTexturedMesh(name)!;
+		expect(Array.isArray(bundle.material)).toBe(true);
+		expect((bundle.material as THREE.Material[]).length).toBe(2);
+		expect(bundle.geometry.groups).toHaveLength(2);
+		expect(bundle.geometry.groups[0].materialIndex).toBe(0);
+		expect(bundle.geometry.groups[1].materialIndex).toBe(1);
+	});
+
+	it('reports a permanently-failed glb via texturedMeshFailed, not as still loading', () => {
+		const name = 'RequestTexturedMesh_404';
+		expect(requestTexturedMesh(name)).toBeNull();
+		expect(texturedMeshFailed(name)).toBe(false);
+
+		lastCallFor(name).onError(new Error('404'));
+
+		expect(texturedMeshFailed(name)).toBe(true);
+		expect(requestTexturedMesh(name)).toBeNull();
+	});
+
+	it('never re-requests a glb once it has permanently failed', () => {
+		const name = 'RequestTexturedMesh_NoRetry';
+		requestTexturedMesh(name);
+		lastCallFor(name).onError(new Error('404'));
+
+		const callsBefore = loadCalls.length;
+		requestTexturedMesh(name);
+		requestTexturedMesh(name);
+
+		expect(loadCalls.length).toBe(callsBefore);
+	});
+
+	it('notifies onTexturedMeshLoaded listeners on both success and failure', () => {
+		const successName = 'RequestTexturedMesh_NotifySuccess';
+		const failName = 'RequestTexturedMesh_NotifyFail';
+		const cb = vi.fn();
+		const off = onTexturedMeshLoaded(cb);
+
+		requestTexturedMesh(successName);
+		lastCallFor(successName).onLoad({ scene: sceneWithMeshes(1) });
+		requestTexturedMesh(failName);
+		lastCallFor(failName).onError(new Error('boom'));
+
+		off();
+		expect(cb).toHaveBeenCalledTimes(2);
+	});
+
+	it('loads from the given directory instead of the default structures path', () => {
+		const name = 'RequestTexturedMesh_SceneryDir';
+		expect(requestTexturedMesh(name, '/models/scenery')).toBeNull();
+		expect(lastCallFor(name).url).toBe(`/models/scenery/${name}.glb`);
+	});
+
+	it('keeps its own cache independent of requestMesh, so both can hold the same glb at once', () => {
+		const name = 'RequestTexturedMesh_IndependentCache';
+		expect(requestMesh(name)).toBeNull();
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+		expect(requestMesh(name)).toBeInstanceOf(THREE.BufferGeometry);
+
+		// The textured cache has not seen this name yet, so it still reports
+		// loading (null) even though the plain geometry cache already resolved it.
+		expect(requestTexturedMesh(name)).toBeNull();
+		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
+		expect(requestTexturedMesh(name)?.geometry).toBeInstanceOf(THREE.BufferGeometry);
+	});
+});
+
+describe('bundleMapObjectMesh (re-exported for structures)', () => {
+	it('returns null for an empty glb', () => {
+		expect(bundleMapObjectMesh([], [])).toBeNull();
+	});
+
+	it('returns the geometry and material untouched for a single-primitive glb', () => {
+		const geometry = new THREE.BoxGeometry(1, 1, 1);
+		const material = new THREE.MeshStandardMaterial();
+		const bundle = bundleMapObjectMesh([geometry], [material]);
+		expect(bundle?.geometry).toBe(geometry);
+		expect(bundle?.material).toBe(material);
+	});
+});
+
+// Shared by palMeshLibrary and mapObjectMeshLibrary so their textured materials
+// tune together rather than drifting apart.
+describe('configureTexturedMaterial', () => {
+	it('zeroes metalness and raises roughness off the glTF fully-metallic default', () => {
+		const material = new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1 });
+		configureTexturedMaterial(material);
+		expect(material.metalness).toBe(0);
+		expect(material.roughness).toBe(0.9);
+	});
+
+	it('forces DoubleSide so the mercator winding flip does not cull the visible face', () => {
+		const material = new THREE.MeshStandardMaterial({ side: THREE.FrontSide });
+		configureTexturedMaterial(material);
+		expect(material.side).toBe(THREE.DoubleSide);
+	});
+
+	it('gives a textured material an emissive floor', () => {
+		const map = new THREE.Texture();
+		const material = new THREE.MeshStandardMaterial({ map });
+		configureTexturedMaterial(material);
+		expect(material.emissiveMap).toBe(map);
+		expect(material.emissiveIntensity).toBeCloseTo(0.25, 6);
+		expect(material.emissive.getHex()).toBe(0xffffff);
+	});
+
+	it('leaves an untextured material unlit', () => {
+		const material = new THREE.MeshStandardMaterial();
+		configureTexturedMaterial(material);
+		expect(material.emissiveMap).toBeNull();
+		expect(material.emissive.getHex()).toBe(0x000000);
+	});
+});
+
+describe('configureTexturedMaterial vertex colours', () => {
+	it('forces vertexColors off', () => {
+		const material = new THREE.MeshStandardMaterial();
+		material.vertexColors = true;
+		configureTexturedMaterial(material);
+		expect(material.vertexColors).toBe(false);
+	});
+
+	it('leaves opacity and transparency untouched', () => {
+		const material = new THREE.MeshStandardMaterial({ transparent: true, opacity: 0.25 });
+		material.vertexColors = true;
+		configureTexturedMaterial(material);
+		expect(material.transparent).toBe(true);
+		expect(material.opacity).toBe(0.25);
 	});
 });
