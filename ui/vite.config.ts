@@ -1,8 +1,16 @@
-import { fileURLToPath } from 'node:url';
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import basicSsl from '@vitejs/plugin-basic-ssl';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
+
+// Vite serves HTTP/2 only over TLS (resolveHttpServer hands https options to
+// node:http2's createSecureServer), and browsers only negotiate h2 over TLS. Opt-in
+// rather than always-on: the cert is self-signed, and psp-desktop/tauri.conf.json
+// points its webview at http://localhost:5173, which WebView2 will not load over a
+// self-signed origin.
+const useHttps = process.env.VITE_HTTPS === '1';
 
 export default defineConfig({
 	plugins: [
@@ -11,7 +19,8 @@ export default defineConfig({
 			outdir: './src/paraglide'
 		}),
 		tailwindcss(),
-		sveltekit()
+		sveltekit(),
+		...(useHttps ? [basicSsl()] : [])
 	],
 	worker: {
 		format: 'es'
@@ -40,10 +49,6 @@ export default defineConfig({
 		}
 	},
 	test: {
-		include: [
-			'src/**/*.{test,spec}.{js,ts}',
-			'scripts/**/*.test.mjs',
-			'../scripts/**/*.test.mjs'
-		]
+		include: ['src/**/*.{test,spec}.{js,ts}', 'scripts/**/*.test.mjs', '../scripts/**/*.test.mjs']
 	}
 });
