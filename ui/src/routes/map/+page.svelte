@@ -1,17 +1,21 @@
 <script lang="ts">
 	import { getAppState } from '$states';
 	import { goto } from '$app/navigation';
-	import {
-		worldToPixel,
-		mapOf,
-		DEFAULT_MAP_AREA,
-		type MapArea
-	} from '$components/map/utils';
+	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/utils';
 	import { pixelToLngLat } from '$components/map/mercator';
 	import { isWatchtower } from '$components/map/fastTravel';
-	import { mapImg, relicTypeIcon } from '$components/map/styles';
+	import { mapImg } from '$components/map/styles';
+	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
+	import {
+		MAP_OBJECT_SCALE_DEFAULT,
+		MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT
+	} from '$components/map/mapObjectSize';
+	import { clampMapOpacity } from '$components/map/mapOpacity';
+	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
+	import MapHints from '$components/map/MapHints.svelte';
 	import { Loading, SectionHeader } from '$components/ui';
-	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { partitionSpawns } from '$components/map/spawns';
 	import { assetLoader } from '$utils';
 	import { persistedState } from 'svelte-persisted-state';
 	import { fly } from 'svelte/transition';
@@ -40,6 +44,20 @@
 		enable3d: boolean;
 		structureRenderMode: 'detailed' | 'flat';
 		panelOpen: boolean;
+		/** Pal render scale as a multiple of true size. */
+		palSize: number;
+		/** Whether Pals turn to face the camera; north-facing when off. */
+		palAutoFollow: boolean;
+		/** Vertical offset above ground, in world centimetres. */
+		palHeight: number;
+		/** Raster opacity, cross-fading toward the hillshade relief beneath it. */
+		mapOpacity: number;
+		/** Fast travel statue render scale as a multiple of true size. */
+		fastTravelSize: number;
+		/** Watchtower render scale as a multiple of true size. */
+		watchtowerSize: number;
+		/** Relic render scale as a multiple of true size. */
+		relicSize: number;
 	};
 
 	const PANEL_W = 420;
@@ -61,12 +79,20 @@
 		showLabels: true,
 		enable3d: false,
 		structureRenderMode: 'detailed',
-		panelOpen: true
+		panelOpen: true,
+		palSize: PAL_SCALE_DEFAULT,
+		palAutoFollow: true,
+		palHeight: 0,
+		mapOpacity: 1,
+		fastTravelSize: MAP_OBJECT_SCALE_DEFAULT,
+		watchtowerSize: MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT,
+		relicSize: MAP_OBJECT_SCALE_DEFAULT
 	});
 
 	const options = $derived(optionsState.current);
 	const activeArea = $derived(options.area ?? DEFAULT_MAP_AREA);
 	const panelOpen = $derived(options.panelOpen ?? true);
+	const mapOpacity = $derived(clampMapOpacity(options.mapOpacity));
 
 	let map: maplibregl.Map | undefined = $state(undefined);
 
@@ -109,25 +135,30 @@
 		return [...ordered, ...present.filter((type) => !ordered.includes(type))];
 	});
 
+	const relicTypeStats = $derived(
+		Object.fromEntries(Object.entries(relicTypeTotals).map(([type, total]) => [type, { total }]))
+	);
+
 	const relicCount = $derived(
 		Object.values(relicTypeTotals).reduce((acc, total) => acc + total, 0)
 	);
 	const isRelicTypeVisible = (type: string) => options.relicTypes?.[type] !== false;
 
-	const areaMapObjectCounts = $derived.by(() => {
-		const counts: Record<string, number> = {};
-		for (const point of Object.values(mapObjects.points)) {
-			if (mapOf(point.x, point.y) !== activeArea) continue;
-			counts[point.type] = (counts[point.type] ?? 0) + 1;
-		}
-		return counts;
+	const areaSpawnPartition = $derived.by(() => {
+		const partition = partitionSpawns(bosses.points);
+		const inArea = (p: { x: number; y: number }) => mapOf(p.x, p.y) === activeArea;
+		return {
+			alpha: partition.alpha.filter(inArea),
+			boss: partition.boss.filter(inArea),
+			predator: partition.predator.filter(inArea)
+		};
 	});
-	const dungeonCount = $derived(areaMapObjectCounts['dungeon'] ?? 0);
-	const alphaPalCount = $derived(areaMapObjectCounts['alpha_pal'] ?? 0);
-	const predatorPalCount = $derived(areaMapObjectCounts['predator_pal'] ?? 0);
-	const bossCount = $derived(
-		Object.values(bosses.points).filter((b) => mapOf(b.x, b.y) === activeArea).length
+	const dungeonCount = $derived(
+		Object.values(dungeons.points).filter((p) => mapOf(p.x, p.y) === activeArea).length
 	);
+	const alphaPalCount = $derived(areaSpawnPartition.alpha.length);
+	const predatorPalCount = $derived(areaSpawnPartition.predator.length);
+	const bossCount = $derived(areaSpawnPartition.boss.length);
 
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
@@ -202,9 +233,7 @@
 						<span class="text-surface-500 text-xs">{relicCount}</span>
 					</button>
 					<button
-						class="flex items-center space-x-2 {(options.showDungeons ?? true)
-							? ''
-							: 'opacity-25'}"
+						class="flex items-center space-x-2 {(options.showDungeons ?? true) ? '' : 'opacity-25'}"
 						onclick={() => (options.showDungeons = !(options.showDungeons ?? true))}
 					>
 						<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
@@ -247,52 +276,44 @@
 						<span>{m.map_labels()}</span>
 					</button>
 				</div>
-
-				{#if (options.showRelics ?? true) && relicTypeList.length > 0}
-					<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
-						{#each relicTypeList as relicType (relicType)}
-							<button
-								class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
-									? ''
-									: 'opacity-25'}"
-								onclick={() =>
-									(options.relicTypes = {
-										...(options.relicTypes ?? {}),
-										[relicType]: !isRelicTypeVisible(relicType)
-									})}
-							>
-								<img
-									src={relicTypeIcon(relicType)}
-									alt={relicData.relicData[relicType]?.localized_name ?? relicType}
-									class="mr-1 h-5 w-5"
-								/>
-								<span class="truncate text-xs">
-									{relicData.relicData[relicType]?.localized_name ?? relicType}
-								</span>
-								<span class="text-surface-500 text-xs">{relicTypeTotals[relicType]}</span>
-							</button>
-						{/each}
-					</div>
-				{/if}
 			</div>
+
+			<MapHints />
 		</aside>
 	{/if}
 
-	<button
-		type="button"
-		class="bg-surface-900/95 hover:bg-surface-800 absolute top-2 z-20 rounded-lg p-2 shadow-lg transition-[left] duration-300 ease-out"
+	<div
+		class="absolute top-2 z-20 flex flex-col items-start gap-2 transition-[left] duration-300 ease-out"
 		style:left="{panelOpen ? PANEL_W + 16 : 8}px"
-		title={m.map_options()}
-		aria-label={m.map_options()}
-		aria-expanded={panelOpen}
-		onclick={() => (options.panelOpen = !panelOpen)}
 	>
-		{#if panelOpen}
-			<PanelLeftClose class="h-5 w-5" />
-		{:else}
-			<PanelLeft class="h-5 w-5" />
+		<button
+			type="button"
+			class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+			title={m.map_options()}
+			aria-label={m.map_options()}
+			aria-expanded={panelOpen}
+			onclick={() => (options.panelOpen = !panelOpen)}
+		>
+			{#if panelOpen}
+				<PanelLeftClose class="h-5 w-5" />
+			{:else}
+				<PanelLeft class="h-5 w-5" />
+			{/if}
+		</button>
+
+		{#if (options.showRelics ?? true) && relicTypeList.length > 0}
+			<RelicFilterControl
+				types={relicTypeList}
+				stats={relicTypeStats}
+				enabled={options.relicTypes ?? {}}
+				ontoggle={(relicType) =>
+					(options.relicTypes = {
+						...(options.relicTypes ?? {}),
+						[relicType]: !isRelicTypeVisible(relicType)
+					})}
+			/>
 		{/if}
-	</button>
+	</div>
 
 	<div class="absolute inset-0">
 		{#if MapComponent}
@@ -316,10 +337,24 @@
 				showStructureControls={false}
 				areaSwitchAlign="right"
 				renderMode={options.structureRenderMode ?? 'detailed'}
+				palSize={options.palSize ?? PAL_SCALE_DEFAULT}
+				palAutoFollow={options.palAutoFollow ?? true}
+				palHeight={options.palHeight ?? 0}
+				{mapOpacity}
+				fastTravelSize={options.fastTravelSize ?? MAP_OBJECT_SCALE_DEFAULT}
+				watchtowerSize={options.watchtowerSize ?? MAP_OBJECT_SCALE_DEFAULT}
+				relicSize={options.relicSize ?? MAP_OBJECT_SCALE_DEFAULT}
 				onToggle3d={() => (options.enable3d = !(options.enable3d ?? false))}
 				onToggleRenderMode={() =>
 					(options.structureRenderMode =
 						(options.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
+				onTogglePalAutoFollow={() => (options.palAutoFollow = !(options.palAutoFollow ?? true))}
+				onPalSizeChange={(scale: number) => (options.palSize = scale)}
+				onFastTravelSizeChange={(scale: number) => (options.fastTravelSize = scale)}
+				onWatchtowerSizeChange={(scale: number) => (options.watchtowerSize = scale)}
+				onRelicSizeChange={(scale: number) => (options.relicSize = scale)}
+				onPalHeightChange={(height: number) => (options.palHeight = height)}
+				onMapOpacityChange={(opacity: number) => (options.mapOpacity = opacity)}
 			/>
 		{:else}
 			<Loading label={m.initializing_entity({ entity: m.map() })} />

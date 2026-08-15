@@ -22,6 +22,15 @@ export const MAP_SIZE = 8192;
 
 export const DEFAULT_MAP_AREA: MapArea = 'MainMap';
 
+/** Slug used for every per-area static asset path (raster/DEM tiles, scenery streams). */
+export const MAP_TILE_DIR: Record<MapArea, string> = { MainMap: 'mainmap', Tree: 'tree' };
+
+/** Per-area scenery instance stream, mirroring the DEM tile convention
+ *  (`/maps/dem/${MAP_TILE_DIR[area]}/...`) instead of one stream shared by every area. */
+export function sceneryStreamUrl(area: MapArea): string {
+	return `/maps/scenery_instances_${MAP_TILE_DIR[area]}.bin`;
+}
+
 // The in-game coordinate readout (the numbers shown in the game's own UI) is a
 // separate concern from pixel placement and keeps its original constants.
 export const TRANSLATION_X = 123930.0;

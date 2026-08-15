@@ -13,13 +13,14 @@
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(point.x, point.y));
-	const palData = $derived(palsData.getByKey(point.pal));
+	const palData = $derived(palsData.getByKey(point.pal ?? ''));
 </script>
 
 <div class="popup-content">
 	<h3 class="text-lg font-bold">
 		{palData ? palData.localized_name : point.pal}
 	</h3>
+	<h4>{point.pal}</h4>
 	<div class="mt-2 space-y-1">
 		<div class="flex items-start gap-2">
 			<Globe class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />

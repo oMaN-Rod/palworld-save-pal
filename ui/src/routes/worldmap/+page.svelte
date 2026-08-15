@@ -11,7 +11,8 @@
 	} from '$components/map/utils';
 	import { collectRelics, relicsByType, toggleRelic } from '$components/map/relics';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { mapImg, relicTypeIcon, STRUCTURE_COLORS } from '$components/map/styles';
+	import { mapImg } from '$components/map/styles';
+	import { STRUCTURE_TYPE_ORDER } from '$components/map/mapColors.svelte';
 	import { isWatchtower } from '$components/map/fastTravel';
 	import Target from '@lucide/svelte/icons/target';
 	import Unlock from '@lucide/svelte/icons/unlock';
@@ -22,7 +23,8 @@
 	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
-	import { mapObjects, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { partitionSpawns } from '$components/map/spawns';
 	import type maplibregl from 'maplibre-gl';
 	import { pixelToLngLat } from '$components/map/mercator';
 	import type {
@@ -40,7 +42,6 @@
 	import { blueprintsData } from '$lib/data/blueprints.svelte';
 	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { EntryState, MessageType } from '$types';
-	import { staticIcons } from '$types/icons';
 	import { persistedState } from 'svelte-persisted-state';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import { sendAndWait } from '$utils/websocketUtils';
@@ -48,6 +49,14 @@
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 	import { Eye, EyeOff } from '@lucide/svelte';
+	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
+	import {
+		MAP_OBJECT_SCALE_DEFAULT,
+		MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT
+	} from '$components/map/mapObjectSize';
+	import { clampMapOpacity } from '$components/map/mapOpacity';
+	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
+	import MapHints from '$components/map/MapHints.svelte';
 
 	const appState = getAppState();
 	const modal = getModalState();
@@ -77,7 +86,24 @@
 		showLabels: boolean;
 		enable3d: boolean;
 		structureRenderMode?: 'detailed' | 'flat';
+		/** Renders detailed structures with their glb's own texture instead of the
+		 *  per-type flat colour. */
+		structureTextured?: boolean;
 		panelOpen: boolean;
+		/** Pal render scale as a multiple of true size. */
+		palSize: number;
+		/** Whether Pals turn to face the camera; north-facing when off. */
+		palAutoFollow: boolean;
+		/** Vertical offset above ground, in world centimetres. */
+		palHeight: number;
+		/** Raster opacity, cross-fading toward the hillshade relief beneath it. */
+		mapOpacity: number;
+		/** Fast travel statue render scale as a multiple of true size. */
+		fastTravelSize: number;
+		/** Watchtower render scale as a multiple of true size. */
+		watchtowerSize: number;
+		/** Relic render scale as a multiple of true size. */
+		relicSize: number;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
@@ -91,7 +117,7 @@
 		hideCollectedRelics: false,
 		hideUnlockedFastTravel: false,
 		relicTypes: {},
-		structureTypes: Object.fromEntries(Object.keys(STRUCTURE_COLORS).map((key) => [key, true])),
+		structureTypes: Object.fromEntries(STRUCTURE_TYPE_ORDER.map((key) => [key, true])),
 		showDungeons: true,
 		showBosses: true,
 		showAlphaPals: true,
@@ -99,11 +125,20 @@
 		showLabels: true,
 		enable3d: false,
 		structureRenderMode: 'detailed',
-		panelOpen: true
+		structureTextured: false,
+		panelOpen: true,
+		palSize: PAL_SCALE_DEFAULT,
+		palAutoFollow: true,
+		palHeight: 0,
+		mapOpacity: 1,
+		fastTravelSize: MAP_OBJECT_SCALE_DEFAULT,
+		watchtowerSize: MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT,
+		relicSize: MAP_OBJECT_SCALE_DEFAULT
 	});
 	const mapOptions = $derived(mapOptionsState.current);
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const panelOpen = $derived(mapOptions.panelOpen ?? true);
+	const mapOpacity = $derived(clampMapOpacity(mapOptions.mapOpacity));
 	const PANEL_W = 420;
 	const toast = getToastState();
 	let section = $state(['players']);
@@ -204,20 +239,21 @@
 		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.collected, 0)
 	);
 	const isRelicTypeVisible = (type: string) => mapOptions.relicTypes?.[type] !== false;
-	const areaMapObjectCounts = $derived.by(() => {
-		const counts: Record<string, number> = {};
-		for (const point of Object.values(mapObjects.points)) {
-			if (mapOf(point.x, point.y) !== activeArea) continue;
-			counts[point.type] = (counts[point.type] ?? 0) + 1;
-		}
-		return counts;
+	const areaSpawnPartition = $derived.by(() => {
+		const partition = partitionSpawns(bosses.points);
+		const inArea = (p: { x: number; y: number }) => mapOf(p.x, p.y) === activeArea;
+		return {
+			alpha: partition.alpha.filter(inArea),
+			boss: partition.boss.filter(inArea),
+			predator: partition.predator.filter(inArea)
+		};
 	});
-	const dungeonCount = $derived(areaMapObjectCounts['dungeon'] ?? 0);
-	const alphaPalCount = $derived(areaMapObjectCounts['alpha_pal'] ?? 0);
-	const predatorPalCount = $derived(areaMapObjectCounts['predator_pal'] ?? 0);
-	const bossCount = $derived(
-		Object.values(bosses.points).filter((b) => mapOf(b.x, b.y) === activeArea).length
+	const dungeonCount = $derived(
+		Object.values(dungeons.points).filter((p) => mapOf(p.x, p.y) === activeArea).length
 	);
+	const alphaPalCount = $derived(areaSpawnPartition.alpha.length);
+	const predatorPalCount = $derived(areaSpawnPartition.predator.length);
+	const bossCount = $derived(areaSpawnPartition.boss.length);
 	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
 	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
@@ -519,15 +555,22 @@
 	$effect(() => {
 		let panToLoc: { x: number; y: number; radius: number } = { x: 0, y: 0, radius: 3500 };
 		if (placementState.active && placementState.handle && placementState.geometry.length === 0) {
-			blueprintsData.requestGeometry(placementState.handle).then((res) => {
-				placementState.geometry = res.structures;
-				placementState.setAnchor(res.origin);
-				panToLoc = { x: res.origin.x, y: res.origin.y, radius: placementState.header?.footprint_radius ?? 3500 };
-			}).finally(() => {
-				setTimeout(() => {
-					panTo(panToLoc.x, panToLoc.y, 7);
-				}, 100);
-			})
+			blueprintsData
+				.requestGeometry(placementState.handle)
+				.then((res) => {
+					placementState.geometry = res.structures;
+					placementState.setAnchor(res.origin);
+					panToLoc = {
+						x: res.origin.x,
+						y: res.origin.y,
+						radius: placementState.header?.footprint_radius ?? 3500
+					};
+				})
+				.finally(() => {
+					setTimeout(() => {
+						panTo(panToLoc.x, panToLoc.y, 7);
+					}, 100);
+				});
 		}
 	});
 
@@ -605,19 +648,13 @@
 								{/snippet}
 							</SectionHeader>
 						</div>
-						
-						<div class="grid grid-cols-2 border-b-2 border-b-surface-800 pb-2">
-							<button
-								class="flex items-center space-x-2"
-								onclick={() => handleToggleAll(true)}
-							>
+
+						<div class="border-b-surface-800 grid grid-cols-2 border-b-2 pb-2">
+							<button class="flex items-center space-x-2" onclick={() => handleToggleAll(true)}>
 								<Eye class="mr-2 h-4 w-4" />
 								<span class="text-sm">Show All</span>
 							</button>
-							<button
-								class="flex items-center space-x-2"
-								onclick={() => handleToggleAll(false)}
-							>
+							<button class="flex items-center space-x-2" onclick={() => handleToggleAll(false)}>
 								<EyeOff class="mr-2 h-4 w-4" />
 								<span class="text-sm">Hide All</span>
 							</button>
@@ -758,35 +795,6 @@
 									<img src={mapImg.effigy} alt={m.relics()} class="mr-1 h-5 w-5" />
 									<span class="truncate text-xs">{m.hide_collected()}</span>
 								</button>
-							</div>
-						{/if}
-						{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
-							<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
-								{#each relicTypeList as relicType (relicType)}
-									{@const stats = relicTypeStats[relicType]}
-									<button
-										class="flex items-center space-x-2 {isRelicTypeVisible(relicType)
-											? ''
-											: 'opacity-25'}"
-										onclick={() =>
-											(mapOptions.relicTypes = {
-												...(mapOptions.relicTypes ?? {}),
-												[relicType]: !isRelicTypeVisible(relicType)
-											})}
-									>
-										<img
-											src={relicTypeIcon(relicType)}
-											alt={relicData.relicData[relicType]?.localized_name ?? relicType}
-											class="mr-1 h-5 w-5"
-										/>
-										<span class="truncate text-xs">
-											{relicData.relicData[relicType]?.localized_name ?? relicType}
-										</span>
-										<span class="text-surface-500 text-xs">
-											{appState.selectedPlayer ? `${stats.collected}/${stats.total}` : stats.total}
-										</span>
-									</button>
-								{/each}
 							</div>
 						{/if}
 					</div>
@@ -930,42 +938,77 @@
 						</Accordion>
 					{/if}
 
-					<div class="mt-auto flex flex-col gap-2">
-						<p class="text-surface-500 text-sm">{m.click_map_coordinates()}</p>
-						<div class="flex flex-col">
-							<div class="flex items-center gap-2">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
-								<span class="text-surface-500 text-xs">{m.left_click_focus()}</span>
-							</div>
-							<div class="flex items-center gap-2">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class=" h-6 w-6" />
-								<span class="text-surface-500 text-xs">{m.click_toggle_point()}</span>
-							</div>
-							<div class="flex items-center gap-2">
-								<img src={staticIcons.rightClickIcon} alt="Right Click" class=" h-6 w-6" />
-								<span class="text-surface-500 text-xs">{m.right_click_edit_base()}</span>
-							</div>
-						</div>
-					</div>
+					<MapHints saveHints />
 				</div>
 			</aside>
 		{/if}
 
-		<button
-			type="button"
-			class="bg-surface-900/95 hover:bg-surface-800 absolute top-2 z-20 rounded-lg p-2 shadow-lg transition-[left] duration-300 ease-out"
+		<div
+			class="absolute top-2 z-20 flex flex-col items-start gap-2 transition-[left] duration-300 ease-out"
 			style:left="{panelOpen ? PANEL_W + 16 : 8}px"
-			title={m.map_options()}
-			aria-label={m.map_options()}
-			aria-expanded={panelOpen}
-			onclick={() => (mapOptions.panelOpen = !panelOpen)}
 		>
-			{#if panelOpen}
-				<PanelLeftClose class="h-5 w-5" />
-			{:else}
-				<PanelLeft class="h-5 w-5" />
+			<button
+				type="button"
+				class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+				title={m.map_options()}
+				aria-label={m.map_options()}
+				aria-expanded={panelOpen}
+				onclick={() => (mapOptions.panelOpen = !panelOpen)}
+			>
+				{#if panelOpen}
+					<PanelLeftClose class="h-5 w-5" />
+				{:else}
+					<PanelLeft class="h-5 w-5" />
+				{/if}
+			</button>
+
+			{#if (mapOptions.showRelics ?? true) && relicTypeList.length > 0}
+				<RelicFilterControl
+					types={relicTypeList}
+					stats={relicTypeStats}
+					enabled={mapOptions.relicTypes ?? {}}
+					showCollected={!!appState.selectedPlayer}
+					ontoggle={(relicType) =>
+						(mapOptions.relicTypes = {
+							...(mapOptions.relicTypes ?? {}),
+							[relicType]: !isRelicTypeVisible(relicType)
+						})}
+				/>
 			{/if}
-		</button>
+
+			{#if appState.selectedPlayer}
+				<button
+					type="button"
+					class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+					title={m.unlock_all_fast_travel()}
+					aria-label={m.unlock_all_fast_travel()}
+					onclick={handleUnlockAllFastTravel}
+				>
+					<img src={mapImg.fastTravel} alt={m.fast_travel()} class="h-5 w-5" />
+				</button>
+				<button
+					type="button"
+					class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+					title={m.unlock_all_watchtowers()}
+					aria-label={m.unlock_all_watchtowers()}
+					onclick={handleUnlockAllWatchtowers}
+				>
+					<img src={mapImg.watchTower} alt={m.watchtower()} class="h-5 w-5" />
+				</button>
+				<!-- Never offer a bulk write for pins the user cannot see. -->
+				{#if mapOptions.showRelics ?? true}
+					<button
+						type="button"
+						class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+						title={m.collect_all_relics()}
+						aria-label={m.collect_all_relics()}
+						onclick={handleCollectAllRelics}
+					>
+						<img src={mapImg.effigy} alt={m.relics()} class="h-5 w-5" />
+					</button>
+				{/if}
+			{/if}
+		</div>
 
 		<div class="absolute inset-0">
 			{#if MapComponent}
@@ -988,21 +1031,36 @@
 					showPredatorPals={mapOptions.showPredatorPals}
 					showLabels={mapOptions.showLabels ?? true}
 					show3d={mapOptions.enable3d ?? false}
+					palSize={mapOptions.palSize ?? PAL_SCALE_DEFAULT}
+					palAutoFollow={mapOptions.palAutoFollow ?? true}
+					palHeight={mapOptions.palHeight ?? 0}
+					{mapOpacity}
+					fastTravelSize={mapOptions.fastTravelSize ?? MAP_OBJECT_SCALE_DEFAULT}
+					watchtowerSize={mapOptions.watchtowerSize ?? MAP_OBJECT_SCALE_DEFAULT}
+					relicSize={mapOptions.relicSize ?? MAP_OBJECT_SCALE_DEFAULT}
 					structureTypes={mapOptions.structureTypes ?? {}}
 					renderMode={mapOptions.structureRenderMode ?? 'detailed'}
+					structureTextured={mapOptions.structureTextured ?? false}
 					onToggle3d={() => (mapOptions.enable3d = !(mapOptions.enable3d ?? false))}
 					onToggleStructureType={handleToggleStructureType}
 					onToggleRenderMode={() =>
 						(mapOptions.structureRenderMode =
 							(mapOptions.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
+					onToggleStructureTextured={() =>
+						(mapOptions.structureTextured = !(mapOptions.structureTextured ?? false))}
 					onEditBase={handleEditBase}
 					onExportBase={handleExportBlueprint}
 					onDeleteBase={handleDeleteBase}
 					onToggleFastTravel={handleToggleFastTravel}
 					onToggleRelic={handleToggleRelic}
-					onUnlockAllFastTravel={handleUnlockAllFastTravel}
-					onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
-					onCollectAllRelics={handleCollectAllRelics}
+					onTogglePalAutoFollow={() =>
+						(mapOptions.palAutoFollow = !(mapOptions.palAutoFollow ?? true))}
+					onPalSizeChange={(scale) => (mapOptions.palSize = scale)}
+					onFastTravelSizeChange={(scale) => (mapOptions.fastTravelSize = scale)}
+					onWatchtowerSizeChange={(scale) => (mapOptions.watchtowerSize = scale)}
+					onRelicSizeChange={(scale) => (mapOptions.relicSize = scale)}
+					onPalHeightChange={(height) => (mapOptions.palHeight = height)}
+					onMapOpacityChange={(opacity) => (mapOptions.mapOpacity = opacity)}
 					placement={placementState.active}
 					placementGeometry={placementState.geometry}
 					placementAnchor={placementState.anchor}
@@ -1013,7 +1071,12 @@
 				/>
 			{/if}
 			{#if placementState.active}
-				<PlacementPanel {guildOptions} {playerOptions} onPlace={handlePlace} onCancel={handleCancel} />
+				<PlacementPanel
+					{guildOptions}
+					{playerOptions}
+					onPlace={handlePlace}
+					onCancel={handleCancel}
+				/>
 			{/if}
 		</div>
 	</div>

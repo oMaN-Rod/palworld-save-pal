@@ -1,7 +1,7 @@
 <script module lang="ts">
 	const HOVER_STATE = { hover: true };
 	const STRUCTURE_MIN_ZOOM = 5;
-	const MAX_PITCH_DETAILED = 90;
+	const MAX_PITCH_DETAILED = 80;
 	const MAX_PITCH_FLAT = 85;
 	const BOUNDS_PITCH_LIMIT = 85;
 	const HALO_COLOR = '#f59e0b';
@@ -34,12 +34,16 @@
 		pixelToWorld,
 		worldToPixel,
 		cmPerPx,
+		sceneryStreamUrl,
 		DEFAULT_MAP_AREA,
 		MAP_AREA_ORDER,
+		MAP_TILE_DIR,
 		type MapArea
 	} from './utils';
-	import { MAP_MAX_BOUNDS, lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './mercator';
+	import { lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './mercator';
+	import { worldFittingConstrain } from './constrain';
 	import { haloRadiusPx, zoomScaledIconSize, zoomScaledRadius } from './expressions';
+	import { partitionSpawns } from './spawns';
 	import {
 		buildBaseFC,
 		buildBaseRadiusFC,
@@ -62,9 +66,16 @@
 	import { palIconId } from './iconIds';
 	import { relicsByType } from './relics';
 	import { isWatchtower } from './fastTravel';
-	import { mapImg, STRUCTURE_COLORS } from './styles';
+	import { portalRingColorExpression, PORTAL_HEX } from './mapObjectPortal';
 	import {
-		mapObjects,
+		STRUCTURE_TYPE_ORDER,
+		materialBlend,
+		materialOpacities,
+		materialTints,
+		structureColors
+	} from './mapColors.svelte';
+	import {
+		dungeons,
 		fastTravelPoints,
 		relics,
 		relicData,
@@ -76,11 +87,27 @@
 	import { assetLoader } from '$utils';
 	import MapTooltip from './MapTooltip.svelte';
 	import MapPopup from './MapPopup.svelte';
+	import BenchOverlay from './BenchOverlay.svelte';
 	import Toggle3dControl from './Toggle3dControl.svelte';
-	import ToggleDetailedControl from './ToggleDetailedControl.svelte';
-	import StructureFilterControl from './StructureFilterControl.svelte';
+	import Map3dOptionsControl from './Map3dOptionsControl.svelte';
 	import { createStructureLayer, type StructureLayer } from './structureLayer';
 	import { createGhostLayer, type GhostLayer } from './ghostLayer';
+	import { createSceneryLayer, type SceneryLayer } from './sceneryLayer';
+	import { beforeIdFor, LAYER_ORDER_3D } from './layerOrder';
+	import {
+		createPalLayer,
+		predatorPalBosses,
+		type PalLayer,
+		type PalBoss,
+		type PalPredator
+	} from './palLayer';
+	import { createMapObjectLayer, type MapObjectItem, type MapObjectLayer } from './mapObjectLayer';
+	import { buildMapObjectItems, buildFastTravelRingFC, buildRelicRingFC } from './mapObjectItems';
+	import { buildPalPortalFC } from './palPortalFC';
+	import { PAL_SCALE_DEFAULT } from './palSize';
+	import { MAP_OBJECT_SCALE_DEFAULT } from './mapObjectSize';
+	import { decodeSceneryStream, type SceneryStream } from './sceneryFormat';
+	import { loadTintMosaic, type TintMosaic } from './sceneryTint';
 	import { composeWorld } from './ghostTransform';
 	import type {
 		BaseStructure,
@@ -115,21 +142,34 @@
 		areaSwitchAlign = 'center',
 		structureTypes = {},
 		renderMode = 'detailed',
+		structureTextured = false,
 		onToggle3d,
 		onToggleStructureType,
 		onToggleRenderMode,
+		onToggleStructureTextured,
 		onEditBase,
 		onExportBase,
 		onDeleteBase,
 		onToggleFastTravel,
 		onToggleRelic,
-		onUnlockAllFastTravel,
-		onUnlockAllWatchtowers,
-		onCollectAllRelics,
+		onTogglePalAutoFollow,
+		onPalSizeChange,
+		onFastTravelSizeChange,
+		onWatchtowerSizeChange,
+		onRelicSizeChange,
+		onPalHeightChange,
+		onMapOpacityChange,
 		placement = false,
 		placementGeometry,
 		placementAnchor,
-		onPlacementAnchorChange
+		onPlacementAnchorChange,
+		palSize = PAL_SCALE_DEFAULT,
+		palAutoFollow = true,
+		palHeight = 0,
+		mapOpacity = 1,
+		fastTravelSize = MAP_OBJECT_SCALE_DEFAULT,
+		watchtowerSize = MAP_OBJECT_SCALE_DEFAULT,
+		relicSize = MAP_OBJECT_SCALE_DEFAULT
 	}: {
 		map?: maplibregl.Map;
 		area?: MapArea;
@@ -150,8 +190,8 @@
 		showPredatorPals?: boolean;
 		showLabels?: boolean;
 		show3d?: boolean;
-		/** Surfaces the detailed-structure and structure-filter controls. Off for
-		 *  callers with no bases to draw, where both would be inert. */
+		/** Surfaces the structure sections of the 3D options panel. Off for callers
+		 *  with no bases to draw. */
 		showStructureControls?: boolean;
 		/** Area switcher placement. `right` clears a host that occupies the top
 		 *  centre, such as the public shell's floating nav. */
@@ -159,26 +199,42 @@
 		/** Per-structure-type visibility; a missing key means visible. */
 		structureTypes?: Record<string, boolean>;
 		renderMode?: 'detailed' | 'flat';
+		/** Renders structures with their glb's own texture instead of the per-type
+		 *  flat colour. */
+		structureTextured?: boolean;
 		onToggle3d?: () => void;
 		onToggleStructureType?: (type: string) => void;
 		onToggleRenderMode?: () => void;
+		onToggleStructureTextured?: () => void;
 		onEditBase?: (base: any) => void;
 		onExportBase?: (base: any) => void;
 		onDeleteBase?: (base: any) => void;
 		onToggleFastTravel?: (point: MapUnlockPoint) => void;
 		onToggleRelic?: (point: RelicPoint) => void;
-		onUnlockAllFastTravel?: () => void;
-		onUnlockAllWatchtowers?: () => void;
-		onCollectAllRelics?: () => void;
+		onTogglePalAutoFollow?: () => void;
+		onPalSizeChange?: (scale: number) => void;
+		onFastTravelSizeChange?: (scale: number) => void;
+		onWatchtowerSizeChange?: (scale: number) => void;
+		onRelicSizeChange?: (scale: number) => void;
+		onPalHeightChange?: (heightCm: number) => void;
+		onMapOpacityChange?: (opacity: number) => void;
 		placement?: boolean;
 		placementGeometry?: BlueprintStructureGeometry[];
 		placementAnchor?: PlacementAnchor;
 		onPlacementAnchorChange?: (anchor: PlacementAnchor) => void;
+		palSize?: number;
+		palAutoFollow?: boolean;
+		palHeight?: number;
+		mapOpacity?: number;
+		/** Fast travel statue render scale as a multiple of true size. */
+		fastTravelSize?: number;
+		/** Watchtower render scale as a multiple of true size. */
+		watchtowerSize?: number;
+		/** Relic render scale as a multiple of true size. */
+		relicSize?: number;
 	} = $props();
 
 	const appState = getAppState();
-
-	const MAP_TILE_DIR: Record<MapArea, string> = { MainMap: 'mainmap', Tree: 'tree' };
 
 	const EMPTY_STYLE: maplibregl.StyleSpecification = {
 		version: 8,
@@ -236,7 +292,9 @@
 
 	const collectedRelicGuids = $derived.by(() => {
 		const byType: Record<string, Set<string>> = {};
-		for (const [type, guids] of Object.entries(selectedPlayer ? relicsByType(selectedPlayer) : {})) {
+		for (const [type, guids] of Object.entries(
+			selectedPlayer ? relicsByType(selectedPlayer) : {}
+		)) {
 			byType[type] = new Set(guids.map((guid) => guid.toUpperCase()));
 		}
 		return byType;
@@ -259,50 +317,138 @@
 			.filter((p) => !(hideCollectedRelics && p.unlocked === true));
 	});
 
+	// spawn_type is the sole partition key: every spawn lands in exactly one of
+	// alpha/boss/predator, so nothing can double-marker it.
+	const spawnPartition = $derived(partitionSpawns(bosses.points));
+	const defeatedSpawnerIds = $derived(new Set(selectedPlayer?.defeated_bosses ?? []));
+
 	const dungeonPoints = $derived(
-		mapObjects.points.filter((p) => p.type === 'dungeon').filter((p) => mapOf(p.x, p.y) === area)
-	);
-	const alphaPalPoints = $derived(
-		mapObjects.points.filter((p) => p.type === 'alpha_pal').filter((p) => mapOf(p.x, p.y) === area)
-	);
-	const predatorPalPoints = $derived(
-		mapObjects.points
-			.filter((p) => p.type === 'predator_pal')
-			.filter((p) => mapOf(p.x, p.y) === area)
+		Object.values(dungeons.points).filter((p) => mapOf(p.x, p.y) === area)
 	);
 
-	const bossPoints = $derived.by(() => {
-		const defeated = new Set(selectedPlayer?.defeated_bosses ?? []);
-		return Object.entries(bosses.points)
-			.map(([rowKey, boss]) => {
-				const palKey = bossPalKey(boss.character_id);
+	const bossPoints = $derived(
+		spawnPartition.boss
+			.filter((b) => mapOf(b.x, b.y) === area)
+			.map((b) => {
+				const palKey = bossPalKey(b.character_id);
 				const palData = palKey ? palsData.getByKey(palKey) : undefined;
 				return {
-					...boss,
-					rowKey,
-					defeated: defeated.has(boss.spawner_id),
-					localized_name: palData?.localized_name || humanizeSpawnerId(boss.spawner_id)
+					...b,
+					palKey,
+					defeated: defeatedSpawnerIds.has(b.spawner_id),
+					localized_name: palData?.localized_name || humanizeSpawnerId(b.spawner_id)
 				};
 			})
-			.filter((boss) => mapOf(boss.x, boss.y) === area);
-	});
+	);
+
+	// Alpha spawns carry the same spawner_id/character_id shape as boss spawns
+	// (their `pal` field was dropped upstream); palKey strips the BOSS_ prefix.
+	const alphaSpawnPoints = $derived(
+		spawnPartition.alpha
+			.filter((b) => mapOf(b.x, b.y) === area)
+			.map((b) => ({
+				...b,
+				palKey: bossPalKey(b.character_id),
+				defeated: defeatedSpawnerIds.has(b.spawner_id)
+			}))
+	);
+	const alphaPalPoints = $derived(
+		alphaSpawnPoints.map((b) => ({ x: b.x, y: b.y, pal: b.palKey ?? '' }))
+	);
+
+	const predatorSpawnsInArea = $derived(
+		spawnPartition.predator.filter((p) => mapOf(p.x, p.y) === area)
+	);
+	const predatorPalPoints = $derived(
+		predatorSpawnsInArea.map((p) => ({ x: p.x, y: p.y, pal: p.pal }))
+	);
 
 	const originFC = $derived(showOrigin && area === 'MainMap' ? buildOriginFC(area) : emptyFC());
 	const originLinesFC = $derived(buildOriginCrosshairFC(area));
 	const playerFC = $derived(buildPlayerFC(players as never, area));
 	const baseFC = $derived(buildBaseFC(bases, area));
 	const baseRadiusFC = $derived(buildBaseRadiusFC(bases, area));
-	const fastTravelFC = $derived(buildFastTravelFC(visibleFastTravelPoints as never, area));
+	const fastTravelFC = $derived(buildFastTravelFC(visibleFastTravelPoints, area));
 	const relicFC = $derived(buildRelicFC(relicPointList, area));
 	const dungeonFC = $derived(buildMapObjectFC(dungeonPoints, 'dungeon', area));
 	const alphaFC = $derived(buildMapObjectFC(alphaPalPoints, 'alpha_pal', area));
 	const predatorFC = $derived(buildMapObjectFC(predatorPalPoints, 'predator_pal', area));
 	const bossFC = $derived(buildBossFC(bossPoints as never, area));
 
+	// Rebuilt only when the point list changes -- the lists are derived objects, so
+	// identity is a sound proxy for content. Rebuilding ~580 polygons on every
+	// unrelated recompute made MapLibre re-tessellate and re-upload both sources.
+	function sameRingPoints<T>(a: T[], b: T[]): boolean {
+		if (a.length !== b.length) return false;
+		for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+		return true;
+	}
+
+	// Each ring's radius constant lives in mapObjectItems.ts, not here: this
+	// component has no test file, so the pairing has to be provable by calling
+	// those functions directly rather than by reading the call sites below.
+	function memoRingFC<T extends { x: number; y: number }>(
+		build: (points: T[], area: MapArea, ...scales: number[]) => GeoJSON.FeatureCollection
+	) {
+		let lastPoints: T[] = [];
+		let lastArea: MapArea | null = null;
+		let lastScales: number[] = [];
+		let last: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
+		return (points: T[], nextArea: MapArea, ...scales: number[]): GeoJSON.FeatureCollection => {
+			if (
+				nextArea === lastArea &&
+				sameRingPoints(lastScales, scales) &&
+				sameRingPoints(lastPoints, points)
+			)
+				return last;
+			lastPoints = points;
+			lastArea = nextArea;
+			lastScales = scales;
+			last = build(points, nextArea, ...scales);
+			return last;
+		};
+	}
+
+	// `unlocked` is tri-state -- undefined until a player is selected -- so the
+	// state helpers resolve it explicitly rather than by truthiness. Browsing
+	// without a player reads as already dealt with, matching the portal beams.
+	const fastTravelRing = memoRingFC<MapUnlockPoint>(buildFastTravelRingFC);
+	const relicRing = memoRingFC<RelicPoint>(buildRelicRingFC);
+
+	// Rings read the same palette as the portal beams (PORTAL_HEX), so tuning a
+	// beam colour can't leave the matching ring behind.
+	const fastTravelRingColor = portalRingColorExpression('fastTravel');
+	const relicRingColor = portalRingColorExpression('relic');
+	// palRing has no 'unknown' state, so the match expression's trailing arm is
+	// given explicitly rather than defaulting to an absent one.
+	const palPortalRingColor = portalRingColorExpression('palRing', PORTAL_HEX.palRing.boss);
+	const fastTravelRingFC = $derived(
+		fastTravelRing(show3d ? visibleFastTravelPoints : [], area, fastTravelSize, watchtowerSize)
+	);
+	const relicRingFC = $derived(
+		relicRing(show3d && showRelics ? relicPointList : [], area, relicSize)
+	);
+
+	// The per-field mapping lives in buildMapObjectItems and is tested there --
+	// this component has no test file to catch a regression.
+	const mapObjectItems = $derived<MapObjectItem[]>(
+		buildMapObjectItems(
+			show3d,
+			{
+				points: visibleFastTravelPoints,
+				sources: fastTravelPoints.points,
+				size: fastTravelSize,
+				watchtowerSize
+			},
+			{ show: showRelics, points: relicPointList, sources: relics.points, size: relicSize }
+		)
+	);
+
 	const byKey = $derived.by(() => {
 		const table = new Map<string, { data: any; guildName?: string }>();
 		for (const p of players) table.set(`player:${p.uid}`, { data: p });
-		for (const { base, guildName } of bases) table.set(`base:${base.id}`, { data: base, guildName });
+		for (const { base, guildName } of bases)
+			table.set(`base:${base.id}`, { data: base, guildName });
 		for (const p of visibleFastTravelPoints) table.set(`fast_travel:${p.guid}`, { data: p });
 		for (const p of relicPointList) table.set(`relic:${p.guid}`, { data: p });
 		for (const p of dungeonPoints) table.set(`dungeon:dungeon:${p.x}:${p.y}`, { data: p });
@@ -342,6 +488,14 @@
 			});
 		}
 		return wanted;
+	});
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		const tf = instance.transform;
+		tf.setConstrainOverride(worldFittingConstrain(tf));
+		return () => tf.setConstrainOverride(null);
 	});
 
 	const registeredPalIcons = new Set<string>();
@@ -611,6 +765,7 @@
 	let center = $state<[number, number]>(untrack(() => areaCenter(area)));
 	let zoom = $state(2);
 	let pitch = $state(0);
+	let bearing = $state(0);
 
 	$effect(() => {
 		center = areaCenter(area);
@@ -662,6 +817,11 @@
 	let ghostLayer: GhostLayer | null = null;
 	let pendingGhostStyleHandler: (() => void) | null = null;
 
+	function mount3dLayer(instance: maplibregl.Map, layer: maplibregl.CustomLayerInterface) {
+		const mounted = LAYER_ORDER_3D.filter((id) => instance.getLayer(id));
+		instance.addLayer(layer, beforeIdFor(layer.id as (typeof LAYER_ORDER_3D)[number], mounted));
+	}
+
 	function populateStructureLayer() {
 		if (!structureLayer) return;
 		const all: BaseStructure[] = [];
@@ -675,7 +835,13 @@
 				all.push(s);
 			}
 		}
-		structureLayer.update(all, baseStructuresData.footprints, area, verticalScale);
+		structureLayer.update(
+			all,
+			baseStructuresData.footprints,
+			area,
+			verticalScale,
+			structureTextured
+		);
 	}
 
 	$effect(() => {
@@ -686,8 +852,13 @@
 			// keep the reference once addLayer actually succeeds, retrying on `styledata`.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
+				// isStyleLoaded() goes true before this component's layers exist, so
+				// without the anchor a 3D layer lands below the rasters that mount
+				// afterwards, and whatever it draws without writing depth -- the portal
+				// beam -- gets repainted by them. The retry loop below absorbs the wait.
+				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createStructureLayer({ id: 'structure-3d' });
-				instance.addLayer(layer, instance.getLayer('origin-icons') ? 'origin-icons' : undefined);
+				mount3dLayer(instance, layer);
 				structureLayer = layer;
 				populateStructureLayer();
 				return true;
@@ -722,14 +893,300 @@
 		}
 	});
 
+	// Each area ships its own scenery stream, so content is keyed by the area it
+	// was fetched for rather than reusing whatever was last loaded.
+	let sceneryStreamsByArea: Partial<Record<MapArea, SceneryStream>> = $state({});
+	let sceneryStreamAttempted = $state(new Set<MapArea>());
+	const sceneryStream = $derived(sceneryStreamsByArea[area] ?? null);
+
+	let sceneryLayer: SceneryLayer | null = null;
+	let pendingSceneryStyleHandler: (() => void) | null = null;
+
+	let palLayer: PalLayer | null = null;
+	let pendingPalStyleHandler: (() => void) | null = null;
+
+	let mapObjectLayer: MapObjectLayer | null = null;
+	let pendingMapObjectStyleHandler: (() => void) | null = null;
+	// Each toggle gates its own spawns here, not just its 2D marker layer's
+	// `visible` flag, so hiding alphas leaves bosses alone and vice versa. Human
+	// bosses have no palKey and never reach this list.
+	const palBosses = $derived(
+		[...(showAlphaPals ? alphaSpawnPoints : []), ...(showBosses ? bossPoints : [])]
+			.filter((b) => b.palKey)
+			.map(
+				(b): PalBoss => ({
+					key: b.palKey as string,
+					x: b.x,
+					y: b.y,
+					z: b.z,
+					defeated: b.defeated
+				})
+			)
+	);
+	// Predators resolve their model key from `pal` directly: unlike alpha/boss
+	// they carry no character_id to strip a BOSS_ prefix from.
+	const predatorPalModels = $derived<PalPredator[]>(
+		showPredatorPals ? predatorPalBosses(predatorSpawnsInArea) : []
+	);
+	const palPortalFC = $derived(buildPalPortalFC(palBosses, predatorPalModels, area, palSize));
+
+	// A missing or corrupt stream must not take the map down: log it and leave the
+	// rest working with scenery absent for that area. sceneryStreamAttempted fires
+	// the fetch at most once per area rather than retrying on every revisit.
+	$effect(() => {
+		if (!show3d) return;
+		const currentArea = area;
+		if (sceneryStreamAttempted.has(currentArea)) return;
+		sceneryStreamAttempted = new Set(sceneryStreamAttempted).add(currentArea);
+		fetch(sceneryStreamUrl(currentArea))
+			.then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(`${r.status}`))))
+			.then((buf) => {
+				sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: decodeSceneryStream(buf) };
+			})
+			.catch((e) =>
+				console.warn(
+					`[scenery] stream unavailable for ${currentArea}, layer disabled for this area`,
+					e
+				)
+			);
+	});
+
+	// Mirrors the scenery-stream fetch above. loadTintMosaic's own module-scope
+	// cache is what dedupes across component reloads; tintMosaicAttempted only
+	// stops this effect re-calling it every reactive run within one lifetime.
+	let tintMosaicsByArea: Partial<Record<MapArea, TintMosaic>> = $state({});
+	let tintMosaicAttempted = $state(new Set<MapArea>());
+
+	$effect(() => {
+		if (!show3d) return;
+		const currentArea = area;
+		if (tintMosaicAttempted.has(currentArea)) return;
+		tintMosaicAttempted = new Set(tintMosaicAttempted).add(currentArea);
+		// Keyed by the area captured here, not the live binding, so a mosaic
+		// resolving after an area switch lands in its own slot.
+		loadTintMosaic(currentArea).then((mosaic) => {
+			tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
+		});
+	});
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		const streamToMount = sceneryStream;
+		if (show3d && streamToMount && !sceneryLayer) {
+			// MapLibre throws if a layer is added before the style finishes loading.
+			const add = () => {
+				if (!instance.isStyleLoaded()) return false;
+				// Same anchor rule as the structure layer: see its add() for why.
+				if (!instance.getLayer('origin-icons')) return false;
+				const layer = createSceneryLayer({ id: 'scenery-3d' });
+				mount3dLayer(instance, layer);
+				sceneryLayer = layer;
+				sceneryLayer.setTint(tintMosaicsByArea[area] ?? null);
+				sceneryLayer.setOpacity(mapOpacity);
+				sceneryLayer.update(streamToMount, area, verticalScale);
+				return true;
+			};
+			if (!add() && !pendingSceneryStyleHandler) {
+				const onStyle = () => {
+					if (!show3d || !sceneryStream || sceneryLayer) {
+						instance.off('styledata', onStyle);
+						pendingSceneryStyleHandler = null;
+						return;
+					}
+					if (add()) {
+						instance.off('styledata', onStyle);
+						pendingSceneryStyleHandler = null;
+					}
+				};
+				pendingSceneryStyleHandler = onStyle;
+				instance.on('styledata', onStyle);
+			}
+		}
+		if ((!show3d || !sceneryStream) && sceneryLayer) {
+			if (instance.getLayer('scenery-3d')) instance.removeLayer('scenery-3d');
+			sceneryLayer.dispose();
+			sceneryLayer = null;
+		}
+		if (!show3d && pendingSceneryStyleHandler) {
+			instance.off('styledata', pendingSceneryStyleHandler);
+			pendingSceneryStyleHandler = null;
+		}
+	});
+
+	// sceneryLayer.update() owns no camera subscription and re-derives its culled
+	// bucket set per call, so the caller must re-invoke it on every camera move.
+	// zoom, center and pitch are read here purely to make this effect track them.
+	$effect(() => {
+		const stream = sceneryStream;
+		const currentArea = area;
+		const vScale = verticalScale;
+		const currentTint = tintMosaicsByArea[currentArea] ?? null;
+		void zoom;
+		void center;
+		void pitch;
+		if (!stream || !sceneryLayer) return;
+		sceneryLayer.setTint(currentTint);
+		sceneryLayer.update(stream, currentArea, vScale);
+	});
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		if (show3d && !palLayer) {
+			// MapLibre throws if a layer is added before the style finishes loading.
+			const add = () => {
+				if (!instance.isStyleLoaded()) return false;
+				// Same anchor rule as the structure layer: see its add() for why.
+				if (!instance.getLayer('origin-icons')) return false;
+				const layer = createPalLayer({ id: 'pals-3d' });
+				mount3dLayer(instance, layer);
+				palLayer = layer;
+				palLayer.update(
+					palBosses,
+					area,
+					verticalScale,
+					{
+						scale: palSize,
+						heightCm: palHeight,
+						autoFollow: palAutoFollow,
+						xray: mapOpacity < 1
+					},
+					predatorPalModels
+				);
+				return true;
+			};
+			if (!add() && !pendingPalStyleHandler) {
+				const onStyle = () => {
+					if (!show3d || palLayer) {
+						instance.off('styledata', onStyle);
+						pendingPalStyleHandler = null;
+						return;
+					}
+					if (add()) {
+						instance.off('styledata', onStyle);
+						pendingPalStyleHandler = null;
+					}
+				};
+				pendingPalStyleHandler = onStyle;
+				instance.on('styledata', onStyle);
+			}
+		}
+		if (!show3d && palLayer) {
+			if (instance.getLayer('pals-3d')) instance.removeLayer('pals-3d');
+			palLayer.dispose();
+			palLayer = null;
+		}
+		if (!show3d && pendingPalStyleHandler) {
+			instance.off('styledata', pendingPalStyleHandler);
+			pendingPalStyleHandler = null;
+		}
+	});
+
+	// palLayer.update() owns no camera subscription, so the caller must re-invoke
+	// it on every camera move -- bearing included, so Pals turn to face the camera.
+	$effect(() => {
+		const bosses = palBosses;
+		const predators = predatorPalModels;
+		const currentArea = area;
+		const vScale = verticalScale;
+		void zoom;
+		void center;
+		void pitch;
+		void bearing;
+		void palSize;
+		void palAutoFollow;
+		void palHeight;
+		void mapOpacity;
+		if (!palLayer) return;
+		palLayer.update(
+			bosses,
+			currentArea,
+			vScale,
+			{
+				scale: palSize,
+				heightCm: palHeight,
+				autoFollow: palAutoFollow,
+				xray: mapOpacity < 1
+			},
+			predators
+		);
+	});
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		if (show3d && !mapObjectLayer) {
+			// MapLibre throws if a layer is added before the style finishes loading.
+			const add = () => {
+				if (!instance.isStyleLoaded()) return false;
+				// Same anchor rule as the structure layer: see its add() for why.
+				if (!instance.getLayer('origin-icons')) return false;
+				const layer = createMapObjectLayer('map-objects-3d');
+				mount3dLayer(instance, layer);
+				mapObjectLayer = layer;
+				mapObjectLayer.update(mapObjectItems, area, verticalScale);
+				return true;
+			};
+			if (!add() && !pendingMapObjectStyleHandler) {
+				const onStyle = () => {
+					if (!show3d || mapObjectLayer) {
+						instance.off('styledata', onStyle);
+						pendingMapObjectStyleHandler = null;
+						return;
+					}
+					if (add()) {
+						instance.off('styledata', onStyle);
+						pendingMapObjectStyleHandler = null;
+					}
+				};
+				pendingMapObjectStyleHandler = onStyle;
+				instance.on('styledata', onStyle);
+			}
+		}
+		if (!show3d && mapObjectLayer) {
+			if (instance.getLayer('map-objects-3d')) instance.removeLayer('map-objects-3d');
+			mapObjectLayer.dispose();
+			mapObjectLayer = null;
+		}
+		if (!show3d && pendingMapObjectStyleHandler) {
+			instance.off('styledata', pendingMapObjectStyleHandler);
+			pendingMapObjectStyleHandler = null;
+		}
+	});
+
+	// mapObjectLayer.update() owns no camera subscription and re-derives the centre
+	// its cull distances are measured from, so re-invoke it on every camera move.
+	$effect(() => {
+		const items = mapObjectItems;
+		const currentArea = area;
+		const vScale = verticalScale;
+		void zoom;
+		void center;
+		void pitch;
+		if (!mapObjectLayer) return;
+		mapObjectLayer.update(items, currentArea, vScale);
+	});
+
+	$effect(() => {
+		const o = mapOpacity;
+		if (!sceneryLayer) return;
+		sceneryLayer.setOpacity(o);
+	});
+
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
 		if (placement && !ghostLayer) {
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
+				// Same anchor rule as the structure layer: see its add() for why.
+				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createGhostLayer({ id: 'blueprint-ghost' });
-				instance.addLayer(layer);
+				// Below pals-3d, which clears the depth buffer under x-ray: a ghost drawn
+				// after it would float over the terrain and misreport where the
+				// blueprint lands.
+				mount3dLayer(instance, layer);
 				ghostLayer = layer;
 				ghostLayer.update(
 					placementGeometry ?? [],
@@ -796,16 +1253,33 @@
 		const footprints = baseStructuresData.footprints;
 		const types = structureTypes;
 		const currentArea = area;
-		const vScale = verticalScale;
+		const colors = structureColors();
+		const tints = materialTints();
+		const blend = materialBlend();
+		const opacities = materialOpacities();
+		const isTextured = structureTextured;
 		let total = 0;
 		for (const { base } of baseList) total += baseStructuresData.for(base.id).length;
 		void footprints;
 		void types;
 		void currentArea;
-		void vScale;
+		void colors;
+		void tints;
+		void blend;
+		void opacities;
+		void isTextured;
 		void total;
 		if (!isDetailed || !structureLayer) return;
 		populateStructureLayer();
+	});
+
+	// verticalScale is $derived from the map centre latitude and so changes on
+	// every camera move. It stays out of the heavy effect above, which rebuilds
+	// every group and material; this one only recomposes matrices.
+	$effect(() => {
+		const vScale = verticalScale;
+		if (!detailed || !structureLayer) return;
+		structureLayer.setVerticalScale(vScale);
 	});
 
 	$effect(() => {
@@ -834,20 +1308,23 @@
 		}
 	});
 
-	const structureColor: ExpressionSpecification = [
-		'case',
-		['boolean', ['feature-state', 'hover'], false],
-		'#ffffff',
-		[
-			'match',
-			['get', 'typeA'],
-			...(Object.entries(STRUCTURE_COLORS).flat() as [string, string, ...string[]]),
-			STRUCTURE_COLORS.Other
-		]
-	];
+	const structureColor = $derived.by<ExpressionSpecification>(() => {
+		const colors = structureColors();
+		return [
+			'case',
+			['boolean', ['feature-state', 'hover'], false],
+			'#ffffff',
+			[
+				'match',
+				['get', 'typeA'],
+				...(Object.entries(colors).flat() as [string, string, ...string[]]),
+				colors.Other
+			]
+		];
+	});
 
-	const structureTypeList = Object.keys(STRUCTURE_COLORS);
-	let structureFilterOpen = $state(false);
+	const structureTypeList = STRUCTURE_TYPE_ORDER;
+	let options3dOpen = $state(false);
 
 	const structureFilter = $derived.by<FilterSpecification | undefined>(() => {
 		const hidden = Object.entries(structureTypes)
@@ -885,7 +1362,6 @@
 	// are re-validated together whenever any of those can happen.
 	$effect(() => {
 		if (!show3d) {
-			structureFilterOpen = false;
 			if (selected?.type === 'structure') selected = null;
 			if (hovered?.type === 'structure') hovered = null;
 			return;
@@ -893,9 +1369,7 @@
 		const structureType = (key: string) => {
 			const data = byKey.get(`structure:${key}`)?.data;
 			if (!data) return undefined;
-			return (
-				lookupFootprint(baseStructuresData.footprints, data.map_object_id)?.typeA ?? 'Other'
-			);
+			return lookupFootprint(baseStructuresData.footprints, data.map_object_id)?.typeA ?? 'Other';
 		};
 		if (selected?.type === 'structure') {
 			const type = structureType(selected.key);
@@ -917,7 +1391,6 @@
 		if (!current) return;
 		if (!byKey.has(`${current.type}:${current.key}`)) hovered = null;
 	});
-
 </script>
 
 <div class="relative h-full w-full">
@@ -928,10 +1401,11 @@
 		bind:center
 		bind:zoom
 		bind:pitch
+		bind:bearing
 		minZoom={0}
 		maxZoom={7}
-		maxBounds={MAP_MAX_BOUNDS}
 		renderWorldCopies={false}
+		centerClampedToGround={false}
 		dragRotate={show3d}
 		pitchWithRotate={true}
 		touchZoomRotate={show3d}
@@ -952,39 +1426,58 @@
 			title={showStructureControls ? `3D ${m.structures()}` : '3D'}
 			onchange={onToggle3d}
 		/>
-		{#if show3d && showStructureControls}
-			<ToggleDetailedControl
-				position="top-right"
-				active={renderMode === 'detailed'}
-				title="Detailed {m.structures()}"
-				onchange={onToggleRenderMode}
-			/>
-			<StructureFilterControl
-				position="top-right"
-				types={structureTypeList}
-				enabled={structureTypes}
-				open={structureFilterOpen}
-				onToggleOpen={() => (structureFilterOpen = !structureFilterOpen)}
-				ontoggle={(type) => onToggleStructureType?.(type)}
-				title={m.structure_types()}
-			/>
-		{/if}
+		<Map3dOptionsControl
+			position="top-right"
+			types={structureTypeList}
+			enabled={structureTypes}
+			open={options3dOpen}
+			onToggleOpen={() => (options3dOpen = !options3dOpen)}
+			ontoggle={(type) => onToggleStructureType?.(type)}
+			title={m.map_3d_options()}
+			{show3d}
+			{showStructureControls}
+			{detailed}
+			textured={structureTextured}
+			{palAutoFollow}
+			ontoggledetailed={() => onToggleRenderMode?.()}
+			ontoggletextured={() => onToggleStructureTextured?.()}
+			ontogglepalautofollow={() => onTogglePalAutoFollow?.()}
+			{palSize}
+			{fastTravelSize}
+			{watchtowerSize}
+			{relicSize}
+			{palHeight}
+			{mapOpacity}
+			onPalSizeChange={(scale) => onPalSizeChange?.(scale)}
+			onFastTravelSizeChange={(scale) => onFastTravelSizeChange?.(scale)}
+			onWatchtowerSizeChange={(scale) => onWatchtowerSizeChange?.(scale)}
+			onRelicSizeChange={(scale) => onRelicSizeChange?.(scale)}
+			onPalHeightChange={(height) => onPalHeightChange?.(height)}
+			onMapOpacityChange={(opacity) => onMapOpacityChange?.(opacity)}
+		/>
 
 		<ImageLoader images={staticIcons}>
+			<!-- Declared before the DEM block so the hillshade always has a raster to anchor
+			     against. Using the first area's rather than the visible one keeps the id
+			     independent of which area is selected. -->
 			{#each MAP_AREA_ORDER as candidate}
 				<Source.Raster
 					tiles={[`/maps/${MAP_TILE_DIR[candidate]}/{z}/{x}/{y}.webp`]}
 					tileSize={512}
 					maxzoom={4}
 				>
-					<Layer.Raster visible={area === candidate} paint={{ 'raster-fade-duration': 300 }} />
+					<Layer.Raster
+						id="raster-{candidate}"
+						visible={area === candidate}
+						paint={{ 'raster-fade-duration': 300, 'raster-opacity': mapOpacity }}
+					/>
 				</Source.Raster>
 			{/each}
 
 			<!-- Each area is baked against its own world extent, and both share one lng/lat
-			     tile namespace, so exactly one DEM may be mounted. #key forces a full
-			     teardown/rebuild on area change rather than mutating a live source. -->
-			{#if show3d}
+			     tile namespace, so only one AREA's DEM may be mounted at a time. #key forces a
+			     full teardown/rebuild on area change rather than mutating a live source. -->
+			{#if show3d || mapOpacity < 1}
 				{#key area}
 					<Source.RasterDEM
 						id="dem-{MAP_TILE_DIR[area]}"
@@ -999,7 +1492,34 @@
 					>
 						<!-- Same cm-to-MapLibre-metre scalar the extrusions below use, so terrain and
 						     buildings share one vertical space and sum correctly. -->
-						<Terrain source="dem-{MAP_TILE_DIR[area]}" exaggeration={verticalScale} />
+						{#if show3d}
+							<Terrain source="dem-{MAP_TILE_DIR[area]}" exaggeration={verticalScale} />
+						{/if}
+					</Source.RasterDEM>
+
+					<!-- Identical tiles under a second id: MapLibre degrades hillshade quality
+					     when one source feeds both it and terrain, and the HTTP cache makes
+					     the duplicate free. -->
+					<Source.RasterDEM
+						id="dem-hs-{MAP_TILE_DIR[area]}"
+						tiles={[`/maps/dem/${MAP_TILE_DIR[area]}/{z}/{x}/{y}.png`]}
+						tileSize={512}
+						maxzoom={4}
+						encoding="custom"
+						redFactor={512}
+						greenFactor={2}
+						blueFactor={0}
+						baseShift={50000}
+					>
+						<!-- Anchored explicitly, not by declaration order: the {#key} above tears
+						     this down on every area switch, and an unanchored re-add lands on top
+						     of the style instead of back under the raster. -->
+						<Layer.Hillshade
+							id="hillshade"
+							beforeId="raster-{MAP_AREA_ORDER[0]}"
+							visible={mapOpacity < 1}
+							paint={{ 'hillshade-exaggeration': 0.5 }}
+						/>
 					</Source.RasterDEM>
 				{/key}
 			{/if}
@@ -1046,6 +1566,31 @@
 							'fill-extrusion-base': ['*', ['get', 'b'], verticalScale],
 							'fill-extrusion-height': ['*', ['get', 'h'], verticalScale],
 							'fill-extrusion-opacity': 0.9
+						}}
+					/>
+				</Source.GeoJSON>
+			{/if}
+
+			<!-- Draped 2D layers, not the three.js portal column: MapLibre's
+			     render-to-texture pass conforms these to terrain, unlike the rigid flat
+			     disc this replaces. -->
+			{#if show3d}
+				<Source.GeoJSON id="pal-portal-src" data={palPortalFC}>
+					<Layer.Fill
+						id="pal-portal-fill"
+						beforeId="origin-icons"
+						paint={{
+							'fill-color': palPortalRingColor,
+							'fill-opacity': ['case', ['get', 'defeated'], 0.08, 0.22]
+						}}
+					/>
+					<Layer.Line
+						id="pal-portal-line"
+						beforeId="origin-icons"
+						paint={{
+							'line-color': palPortalRingColor,
+							'line-width': 2,
+							'line-opacity': ['case', ['get', 'defeated'], 0.3, 0.9]
 						}}
 					/>
 				</Source.GeoJSON>
@@ -1119,7 +1664,7 @@
 							['case', ['get', 'watchtower'], 0.6, 0.75]
 						),
 						'text-field': showLabels ? ['step', ['zoom'], '', 4, ['get', 'name']] : '',
-						'text-size': 11,
+						'text-size': 14,
 						'text-optional': true,
 						'text-anchor': 'top',
 						'text-offset': [0, 0.8],
@@ -1191,6 +1736,49 @@
 					}}
 				/>
 			</Source.GeoJSON>
+
+			<!-- Draped ground rings under the 3D map objects: fill plus line, like the
+			     portal rings above. -->
+			{#if show3d}
+				<Source.GeoJSON id="fast-travel-ring-src" data={fastTravelRingFC}>
+					<Layer.Fill
+						id="fast-travel-ring-fill"
+						beforeId="origin-icons"
+						paint={{
+							'fill-color': fastTravelRingColor,
+							'fill-opacity': 0.22
+						}}
+					/>
+					<Layer.Line
+						id="fast-travel-ring-line"
+						beforeId="origin-icons"
+						paint={{
+							'line-color': fastTravelRingColor,
+							'line-width': 2,
+							'line-opacity': 0.9
+						}}
+					/>
+				</Source.GeoJSON>
+				<Source.GeoJSON id="relic-ring-src" data={relicRingFC}>
+					<Layer.Fill
+						id="relic-ring-fill"
+						beforeId="origin-icons"
+						paint={{
+							'fill-color': relicRingColor,
+							'fill-opacity': 0.22
+						}}
+					/>
+					<Layer.Line
+						id="relic-ring-line"
+						beforeId="origin-icons"
+						paint={{
+							'line-color': relicRingColor,
+							'line-width': 2,
+							'line-opacity': 0.9
+						}}
+					/>
+				</Source.GeoJSON>
+			{/if}
 
 			<Source.GeoJSON id="dungeon-src" data={dungeonFC}>
 				<Layer.Symbol
@@ -1268,6 +1856,10 @@
 		{/if}
 	</MLMap>
 
+	{#if import.meta.env.DEV && typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('bench')}
+		<BenchOverlay {map} {area} />
+	{/if}
+
 	{#if hovered?.point}
 		{@const entry = lookup(hovered.type, hovered.key)}
 		<div class="map-anchored-card" style="left: {hovered.point.x}px; top: {hovered.point.y}px;">
@@ -1295,42 +1887,6 @@
 				}}
 			/>
 			<button type="button" class="map-popup-close" onclick={() => (selected = null)}>×</button>
-		</div>
-	{/if}
-
-	<!-- Player bulk actions -->
-	{#if selectedPlayer}
-		<div class="map-actions">
-			<button
-				type="button"
-				class="map-action-btn"
-				title={m.unlock_all_fast_travel()}
-				aria-label={m.unlock_all_fast_travel()}
-				onclick={() => onUnlockAllFastTravel?.()}
-			>
-				<img src={mapImg.fastTravel} alt={m.fast_travel()} />
-			</button>
-			<button
-				type="button"
-				class="map-action-btn"
-				title={m.unlock_all_watchtowers()}
-				aria-label={m.unlock_all_watchtowers()}
-				onclick={() => onUnlockAllWatchtowers?.()}
-			>
-				<img src={mapImg.watchTower} alt={m.watchtower()} />
-			</button>
-			<!-- Never offer a bulk write for pins the user cannot see. -->
-			{#if showRelics}
-				<button
-					type="button"
-					class="map-action-btn"
-					title={m.collect_all_relics()}
-					aria-label={m.collect_all_relics()}
-					onclick={() => onCollectAllRelics?.()}
-				>
-					<img src={mapImg.effigy} alt={m.relics()} />
-				</button>
-			{/if}
 		</div>
 	{/if}
 
@@ -1381,44 +1937,6 @@
 		line-height: 1;
 		color: white;
 		cursor: pointer;
-	}
-
-	.map-actions {
-		position: absolute;
-		bottom: 72px;
-		right: 8px;
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		z-index: 1000;
-	}
-
-	.map-action-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		padding: 6px;
-		background: color-mix(in srgb, var(--color-surface-900) 85%, transparent);
-		backdrop-filter: blur(8px);
-		border: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
-		border-radius: 4px;
-		cursor: pointer;
-		transition:
-			background-color 0.15s ease-out,
-			border-color 0.15s ease-out;
-	}
-
-	.map-action-btn:hover {
-		background: color-mix(in srgb, var(--color-secondary-500) 25%, transparent);
-		border-color: color-mix(in srgb, var(--color-secondary-400) 50%, transparent);
-	}
-
-	.map-action-btn img {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
 	}
 
 	.coordinate-display {

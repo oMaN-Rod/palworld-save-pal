@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
 	MAP_AREAS,
+	MAP_AREA_ORDER,
 	MAP_SIZE,
+	MAP_TILE_DIR,
 	cmPerPx,
 	mapOf,
 	mapToWorld,
 	pixelToGameCoords,
 	pixelToWorld,
+	sceneryStreamUrl,
 	worldToMap,
 	worldToPixel
 } from './utils';
@@ -109,5 +112,23 @@ describe('mapOf', () => {
 
 	it('returns null outside every area', () => {
 		expect(mapOf(5_000_000, 5_000_000)).toBeNull();
+	});
+});
+
+describe('sceneryStreamUrl', () => {
+	it('points at a per-area file named after the MAP_TILE_DIR slug, mirroring the DEM tile convention', () => {
+		expect(sceneryStreamUrl('MainMap')).toBe('/maps/scenery_instances_mainmap.bin');
+		expect(sceneryStreamUrl('Tree')).toBe('/maps/scenery_instances_tree.bin');
+	});
+
+	it('produces a distinct URL for every known area', () => {
+		const urls = MAP_AREA_ORDER.map(sceneryStreamUrl);
+		expect(new Set(urls).size).toBe(urls.length);
+	});
+
+	it('uses the same slug MAP_TILE_DIR already exposes for DEM/raster tiles', () => {
+		for (const area of MAP_AREA_ORDER) {
+			expect(sceneryStreamUrl(area)).toBe(`/maps/scenery_instances_${MAP_TILE_DIR[area]}.bin`);
+		}
 	});
 });

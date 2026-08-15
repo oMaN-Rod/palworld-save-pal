@@ -17,7 +17,7 @@
 	} = $props();
 
 	const mapCoords = $derived(worldToMap(point.x, point.y));
-	const palData = $derived(palsData.getByKey(point.pal));
+	const palData = $derived(palsData.getByKey(point.pal ?? ''));
 
 	const pal = $derived({
 		instance_id: '',

@@ -211,9 +211,9 @@ export function buildMapObjectFC(
 		if (!inArea(p.x, p.y, area)) continue;
 		const icon =
 			type === 'alpha_pal'
-				? palIconId(p.pal, false)
+				? palIconId(p.pal ?? '', false)
 				: type === 'predator_pal'
-					? palIconId(p.pal, true)
+					? palIconId(p.pal ?? '', true)
 					: ICON_DUNGEON;
 		features.push(
 			point(features.length, p.x, p.y, area, {

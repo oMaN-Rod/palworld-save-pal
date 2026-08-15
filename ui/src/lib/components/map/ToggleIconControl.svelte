@@ -7,6 +7,7 @@
 		active = false,
 		title,
 		buttonClass,
+		label,
 		position = 'top-right',
 		onchange
 	}: {
@@ -14,6 +15,8 @@
 		title: string;
 		/** Selector the caller styles its icon through, e.g. `maplibregl-ctrl-3d`. */
 		buttonClass: string;
+		/** Renders as text in place of the background-image icon when set. */
+		label?: string;
 		position?: ControlPosition;
 		onchange?: () => void;
 	} = $props();
@@ -28,6 +31,7 @@
 	});
 
 	let button = $state<HTMLButtonElement>();
+	let iconEl = $state<HTMLSpanElement>();
 
 	$effect(() => {
 		const map = ctx.map;
@@ -47,6 +51,8 @@
 		const icon = document.createElement('span');
 		icon.className = 'maplibregl-ctrl-icon';
 		icon.setAttribute('aria-hidden', 'true');
+		const initialLabel = untrack(() => label);
+		if (initialLabel !== undefined) icon.classList.add('maplibregl-ctrl-icon-text');
 		el.appendChild(icon);
 		container.appendChild(el);
 
@@ -62,12 +68,20 @@
 			untrack(() => position)
 		);
 		button = el;
+		iconEl = icon;
 
 		return () => {
 			el.removeEventListener('click', handleClick);
 			button = undefined;
+			iconEl = undefined;
 			ctx.removeControl(control);
 		};
+	});
+
+	$effect(() => {
+		const el = iconEl;
+		if (!el || label === undefined) return;
+		el.textContent = label;
 	});
 
 	$effect(() => {

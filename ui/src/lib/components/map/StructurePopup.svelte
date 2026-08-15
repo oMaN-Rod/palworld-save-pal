@@ -3,7 +3,7 @@
 	import type { BaseStructure } from '$types';
 	import { Heart, Ruler, Award, User } from 'lucide-svelte';
 	import { structureInfo } from './structureInfo';
-	import { STRUCTURE_COLORS } from './styles';
+	import { structureColors } from './mapColors.svelte';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';
 
@@ -18,7 +18,10 @@
 			appState.playerSummaries
 		)
 	);
-	const swatchColor = $derived(STRUCTURE_COLORS[info.typeA] ?? STRUCTURE_COLORS.Other);
+	const swatchColor = $derived.by(() => {
+		const colors = structureColors();
+		return colors[info.typeA] ?? colors.Other;
+	});
 </script>
 
 <Card class="min-w-70 shadow-lg">
@@ -32,6 +35,7 @@
 				<div class="min-w-0 flex-1">
 					<h3 class="text-foreground truncate text-lg font-bold">{info.name}</h3>
 					<span class="truncate text-xs font-light">{info.typeA}</span>
+					<span class="truncate text-xs font-light">{structure.map_object_id}</span>
 				</div>
 			</div>
 			{#if info.description}

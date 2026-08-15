@@ -20,6 +20,7 @@
 
 <div class="popup-content">
 	<h3 class="text-lg font-bold">{info.name}</h3>
+	<span class="truncate text-xs font-light">{structure.map_object_id}</span>
 	<div class="mt-2 space-y-1">
 		<div class="flex items-start gap-2">
 			<Box class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
