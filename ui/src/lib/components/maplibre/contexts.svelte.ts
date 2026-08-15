@@ -83,13 +83,17 @@ export class MapContext {
 	}
 
 	/**
-	 * Add a layer to the map and track it for cleanup.
-	 * Layers are tracked in order for correct re-addition after style changes.
+	 * Add a layer to the map and track it for cleanup. Tracking is for teardown
+	 * only -- nothing re-adds these layers after a style change.
 	 */
 	addLayer(spec: AddLayerObject, beforeId?: string): void {
 		if (!this.map) return;
 		if (this.map.getLayer(spec.id)) return;
 		this.map.addLayer(spec, beforeId);
+		// A beforeId naming a layer that does not exist yet makes MapLibre fire an
+		// ErrorEvent and return rather than throw, so tracking the id regardless
+		// would record a layer that was never added.
+		if (!this.map.getLayer(spec.id)) return;
 		this.userLayers.push(spec.id);
 	}
 
