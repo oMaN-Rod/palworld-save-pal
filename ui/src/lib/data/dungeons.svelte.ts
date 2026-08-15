@@ -1,20 +1,20 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType, type MapObject } from '$types';
+import { MessageType, type Dungeon } from '$types';
 
-export class MapObjects {
+export class Dungeons {
 	private loading = false;
 
-	points: MapObject[] = $state([]);
+	points: Record<string, Dungeon> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
-		if (this.points.length === 0 && !this.loading) {
+		if (Object.keys(this.points).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				this.points = await sendAndWait(MessageType.GET_MAP_OBJECTS);
+				this.points = await sendAndWait(MessageType.GET_DUNGEONS);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
-				console.error('Error fetching active skills:', error);
+				console.error('Error fetching dungeons:', error);
 				throw error;
 			}
 		}
@@ -24,15 +24,15 @@ export class MapObjects {
 		}
 	}
 
-	async getMapObjects(): Promise<MapObject[]> {
+	async getDungeons(): Promise<Record<string, Dungeon>> {
 		await this.ensureLoaded();
 		return this.points;
 	}
 
 	async reset(): Promise<void> {
-		this.points = [];
+		this.points = {};
 		await this.ensureLoaded();
 	}
 }
 
-export const mapObjects = new MapObjects();
+export const dungeons = new Dungeons();

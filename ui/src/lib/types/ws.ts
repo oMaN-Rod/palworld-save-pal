@@ -55,7 +55,7 @@ export enum MessageType {
 	GET_MAP_OBJECT_FOOTPRINTS = 'get_map_object_footprints',
 	GET_BASE_STRUCTURES = 'get_base_structures',
 	GET_RAW_DATA = 'get_raw_data',
-	GET_MAP_OBJECTS = 'get_map_objects',
+	GET_DUNGEONS = 'get_dungeons',
 	GET_BOSSES = 'get_bosses',
 	GET_FAST_TRAVEL_POINTS = 'get_fast_travel_points',
 	GET_RELICS = 'get_relics',

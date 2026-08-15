@@ -169,7 +169,7 @@ async fn route(
         MessageType::GetFriendshipData => {
             handlers::game_data::handle_get_friendship_data(ctx).await
         }
-        MessageType::GetMapObjects => handlers::game_data::handle_get_map_objects(ctx).await,
+        MessageType::GetDungeons => handlers::game_data::handle_get_dungeons(ctx).await,
         MessageType::GetBosses => handlers::game_data::handle_get_bosses(ctx).await,
         MessageType::GetRelics => handlers::game_data::handle_get_relics(ctx).await,
         MessageType::GetFastTravelPoints => {

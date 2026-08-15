@@ -3,13 +3,13 @@ import { baseStructuresData } from './baseStructures.svelte';
 import { blueprintsData } from './blueprints.svelte';
 import { bosses } from './bosses.svelte';
 import { buildingsData } from './buildings.svelte';
+import { dungeons } from './dungeons.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
 import { fastTravelPoints } from './fastTravelPoints.svelte';
 import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
-import { mapObjects } from './mapObjects.svelte';
 import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
@@ -26,13 +26,13 @@ export {
 	blueprintsData,
 	bosses,
 	buildingsData,
+	dungeons,
 	elementsData,
 	expData,
 	fastTravelPoints,
 	friendshipData,
 	itemsData,
 	labResearchData,
-	mapObjects,
 	missionsData,
 	palsData,
 	passiveSkillsData,

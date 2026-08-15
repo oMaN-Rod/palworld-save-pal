@@ -231,12 +231,6 @@ pub async fn handle_get_friendship_data(ctx: &mut HandlerCtx<'_>) -> Result<(), 
     Ok(())
 }
 
-pub async fn handle_get_map_objects(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let payload = raw_file(&ctx.app.game_data, "map_objects");
-    ctx.emitter.emit(MessageType::GetMapObjects, &payload);
-    Ok(())
-}
-
 pub async fn handle_get_map_object_footprints(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
@@ -290,6 +284,12 @@ pub async fn handle_get_base_structures(
 pub async fn handle_get_bosses(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let payload = raw_file(&ctx.app.game_data, "bosses");
     ctx.emitter.emit(MessageType::GetBosses, &payload);
+    Ok(())
+}
+
+pub async fn handle_get_dungeons(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let payload = raw_file(&ctx.app.game_data, "dungeons");
+    ctx.emitter.emit(MessageType::GetDungeons, &payload);
     Ok(())
 }
 
@@ -881,8 +881,8 @@ mod tests {
         assert_eq!(frame["data"], json!({"1": {"TotalEXP": 0}}));
 
         // Missing file → empty object.
-        let frame = run_handler!(test, handle_get_map_objects);
-        assert_eq!(frame["type"], "get_map_objects");
+        let frame = run_handler!(test, handle_get_dungeons);
+        assert_eq!(frame["type"], "get_dungeons");
         assert_eq!(frame["data"], json!({}));
     }
 

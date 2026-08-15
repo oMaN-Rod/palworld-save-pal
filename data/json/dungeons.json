@@ -1,0 +1,1022 @@
+{
+  "0533892747FCA0E182EA558AFDA37F2C": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": 936.83,
+    "y": -128792.5,
+    "z": 1079.77
+  },
+  "0682D0D748AFBEBAC824368C1C5E2930": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -585393.8,
+    "y": -338144.72,
+    "z": 23197.46
+  },
+  "09795AA74FDDAE29361E258A61F13041": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": -36660.12,
+    "y": 148978.95,
+    "z": 16283.47
+  },
+  "0C75D6AF42EC7BCD7F30F989DD168267": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -265204.06,
+    "y": 131385.12,
+    "z": 2521.93
+  },
+  "0CDC85054296AA45E0094FBE34D42D23": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -346468.22,
+    "y": 214850.02,
+    "z": -2023.98
+  },
+  "118C58B344CED4088B9C5D9C199ADD29": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 136262.53,
+    "y": 88305.4,
+    "z": 38681.85
+  },
+  "11F9BC464E53B6610B71C5B08D33193F": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -250000.34,
+    "y": 120261.4,
+    "z": 5693.6
+  },
+  "1347209B47B7AA24A1B50B962571E4BB": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -287925.97,
+    "y": -191141.92,
+    "z": 6661.25
+  },
+  "15BB601E45F8330002CA14AD62099E2F": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -173408.44,
+    "y": 166837.0,
+    "z": 9412.82
+  },
+  "1639BB654514784AEA5B9DA3D8746B8A": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -15641.82,
+    "y": -137406.38,
+    "z": 4600.0
+  },
+  "19487CF247348A5941790E80EC7D54A4": {
+    "class": "BP_DungeonPortalMarker_Yakushima_C",
+    "x": -485315.12,
+    "y": -34972.19,
+    "z": -1469.02
+  },
+  "1998F011415C656970302F9A19757495": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -22520.58,
+    "y": 313714.28,
+    "z": 1326.15
+  },
+  "1CBFAF7A47DC1E803B5AAAB4FDB88606": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -307418.28,
+    "y": 225000.78,
+    "z": -378.63
+  },
+  "2014D69645D07FB0C1E4398CA174FD81": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -338708.5,
+    "y": 161823.08,
+    "z": 2176.75
+  },
+  "2090E9F9499690072F08EB9DBEAEA05E": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -155066.94,
+    "y": 296284.66,
+    "z": -2102.62
+  },
+  "20F0B8B54608D956F8A0D1AA6A374AAB": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -652504.44,
+    "y": -439189.22,
+    "z": 11888.71
+  },
+  "24F42B664697A2EE6810759E9F7C66F1": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -37363.29,
+    "y": -152096.67,
+    "z": 878.67
+  },
+  "269285A74E26444FC94817817127E813": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -186504.7,
+    "y": 268455.56,
+    "z": -885.24
+  },
+  "26CDE6944DD68E7FF2126EB5D2E10EBE": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -121016.87,
+    "y": 212487.1,
+    "z": 7959.51
+  },
+  "292B208C4470DB34080404B6DC17825E": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -110032.66,
+    "y": -71996.59,
+    "z": -2102.62
+  },
+  "2946E9B74399B8F9D01BBDAAB79D4F85": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 15729.53,
+    "y": 267188.94,
+    "z": 4439.39
+  },
+  "29A81D534234E3FED27627BE9E4FC881": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -125215.91,
+    "y": 174427.38,
+    "z": -1460.97
+  },
+  "2BEEDB0346F05A45E6EE94A9569901D9": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -211384.67,
+    "y": 182474.86,
+    "z": -486.1
+  },
+  "2DC10859439B4D5C9C15E4BCD7A5D432": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -137086.11,
+    "y": -50427.56,
+    "z": -1429.22
+  },
+  "2E31E876471CB99E05D75ABB8A9E4F68": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -364797.3,
+    "y": 181681.66,
+    "z": 2387.34
+  },
+  "2FDEFF7B42951597CA6D70970E9F33BE": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -251818.6,
+    "y": 164041.66,
+    "z": -1273.34
+  },
+  "300DFC044CDD542683938980559B597F": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -671787.0,
+    "y": -192539.98,
+    "z": 3095.22
+  },
+  "307014684EF6611D278655A9347FCA5D": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 135090.5,
+    "y": 64370.32,
+    "z": 28543.8
+  },
+  "3658705147676022E9DDD29AD92B38EB": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 85201.23,
+    "y": 312813.88,
+    "z": 12564.14
+  },
+  "36BDC2774B02F81D62C6B2B4E84B3265": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": -3297.48,
+    "y": 53484.94,
+    "z": 19498.62
+  },
+  "37FE82334549E800DA982E8C61DB5B33": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -315091.6,
+    "y": -52063.6,
+    "z": 14675.74
+  },
+  "3A1EAC4C4800B321537EE1A67C34DDF2": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -363251.12,
+    "y": 167049.92,
+    "z": -1978.5
+  },
+  "3AF2DE2B48ED73C698E875A016558051": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -219424.83,
+    "y": 165811.12,
+    "z": 57.48
+  },
+  "3D9FA6E44A04ECADDEA3F092EF95B6DC": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -203748.6,
+    "y": 90007.32,
+    "z": 17.3
+  },
+  "3DBFB80448413A72A00767934C750056": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -289138.2,
+    "y": -209876.05,
+    "z": 3435.3
+  },
+  "3E4B692E43074A964BE2AB8376ECD7B9": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -279321.47,
+    "y": 101902.94,
+    "z": -449.1
+  },
+  "3F407F744B02FFEC50E7F3800A528BBB": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 61320.0,
+    "y": 418400.0,
+    "z": -1460.0
+  },
+  "435BA4224C28DBBF310A5680C134A56F": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 2547.95,
+    "y": 172474.5,
+    "z": 7516.84
+  },
+  "484705704C2421ED409F9A9C92B3CE5C": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -36843.14,
+    "y": 454971.78,
+    "z": -30.23
+  },
+  "49DA06734EAA87807686589E83687703": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 41444.24,
+    "y": 27335.72,
+    "z": 11078.67
+  },
+  "49E119654A89F861B09B4CA196333225": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -340404.62,
+    "y": 58438.68,
+    "z": 4618.39
+  },
+  "4D74248A46DFAFA56257D5981682ECFA": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -221494.6,
+    "y": 27971.86,
+    "z": 14071.28
+  },
+  "4FE2F2FB48E2116712BAC7893C61228C": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -330139.03,
+    "y": 200216.97,
+    "z": -1272.49
+  },
+  "532F859248171F90B3552A9134E7716B": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -209589.38,
+    "y": 163211.5,
+    "z": 939.51
+  },
+  "541016C84AF22B6E8FE59688683CEEEF": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -213940.0,
+    "y": 398860.0,
+    "z": -1930.0
+  },
+  "54101DFE447AA85174C687B2A7271504": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -84794.05,
+    "y": 286150.22,
+    "z": 9393.38
+  },
+  "54B0886848DE81883A5EC7BE44BF7AC5": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -315044.72,
+    "y": 54365.9,
+    "z": 7854.55
+  },
+  "57BCA4344D83D25E173594B6A4B3F6E9": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -588020.0,
+    "y": -254710.0,
+    "z": 1050.0
+  },
+  "57E74328480C0305748AE28E2B1855AA": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -877132.9,
+    "y": -430141.72,
+    "z": 16598.94
+  },
+  "58C4584F4F061F2B85065093DC06BDCB": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 101675.28,
+    "y": 373450.72,
+    "z": 1058.33
+  },
+  "59A19AF441B0A075BAB819B54049F5C9": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -61090.59,
+    "y": -5748.06,
+    "z": -2102.62
+  },
+  "5BE723544A04390E6B1EB4BD5F034337": {
+    "class": "BP_DungeonPortalMarker_Skyland_C",
+    "x": -837426.0,
+    "y": -9351.0,
+    "z": 66044.0
+  },
+  "5EA7F36E40F9C8A86975E8AC993EB1B4": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -189599.53,
+    "y": 372690.3,
+    "z": 1620.0
+  },
+  "642B390047742C05AC82219614426A1B": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -4513.04,
+    "y": 424323.72,
+    "z": 10750.94
+  },
+  "64D0B12B4DB5E728F35DA49CFD893906": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -404448.4,
+    "y": 64664.34,
+    "z": -1598.9
+  },
+  "6620FD98497A17342476BBBEB4410C13": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -400575.6,
+    "y": -35335.31,
+    "z": 7001.19
+  },
+  "676129744D53EFA5CCC8D092EE9AD285": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -130866.33,
+    "y": 230761.69,
+    "z": 1491.26
+  },
+  "6799F7B54CE40B380886C18C078707B5": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -386508.1,
+    "y": -12226.48,
+    "z": 4659.49
+  },
+  "68064BB248FEE9AF044A778589672A10": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 143019.12,
+    "y": 9658.51,
+    "z": 18597.22
+  },
+  "6ABFFB724C641A3F4B7D42A70A300D9F": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -24131.92,
+    "y": -110237.73,
+    "z": 4410.0
+  },
+  "6BC50AC94E43E2B98D2D92A87886C8DF": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -322793.12,
+    "y": 185433.95,
+    "z": -781.98
+  },
+  "6C82F0C5476BCFA3A2A5FD87911CEBFA": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -405155.94,
+    "y": -176237.36,
+    "z": 15502.3
+  },
+  "6D1350204CA0EB68CC4F0BAA60F53335": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -843324.4,
+    "y": -404753.84,
+    "z": -2102.62
+  },
+  "6DC3A97A4C6DD339D49FCA8CCE1E1815": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -798439.8,
+    "y": -331101.8,
+    "z": 9432.31
+  },
+  "6ECEEF8E4821EF653431A7ACD779302E": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -683335.7,
+    "y": -279554.97,
+    "z": 11603.89
+  },
+  "6ED1CB6144A7B8EA950AA4A6FC253A72": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -339127.47,
+    "y": 193425.61,
+    "z": -2031.27
+  },
+  "6F10A5BF4C3599C409639AA9A5214635": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -669586.3,
+    "y": -394684.16,
+    "z": 25288.35
+  },
+  "6FF6C3CB457EAB916074F3946C93D317": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -120225.01,
+    "y": 25862.93,
+    "z": -1502.52
+  },
+  "7075A490424377C1EFD806940DAFA602": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -296998.28,
+    "y": 212680.78,
+    "z": -279.77
+  },
+  "7086D23B44D24EE61C6E57B7D6745D77": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -335586.6,
+    "y": -104884.1,
+    "z": 40441.94
+  },
+  "71B04C6E4EDEC41CCE0D50ABB1946A4D": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -733449.0,
+    "y": -320729.53,
+    "z": 31032.07
+  },
+  "7201E700488ADFFE20D845AA5318FBED": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": -58507.24,
+    "y": 157466.9,
+    "z": 12276.95
+  },
+  "73A9D7D64B6F157F3157EBB1F36F9283": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -61859.88,
+    "y": 204435.4,
+    "z": 626.38
+  },
+  "7579648B4FB5122CFAE30284CAA82B09": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -42658.46,
+    "y": -122726.34,
+    "z": 1367.7
+  },
+  "75F04E6D41384185529C75AA085EEF7A": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -267882.53,
+    "y": 327448.2,
+    "z": -1887.19
+  },
+  "77B4E5414D759142CAA0ACBECAD76EFD": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -597250.44,
+    "y": -301345.4,
+    "z": 14453.99
+  },
+  "77F9F5A84404E726D7F2D989C5370CDC": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -325692.12,
+    "y": 83869.57,
+    "z": 2548.65
+  },
+  "7A661AFD44438BD8B2DE55B72E5D610C": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -180769.03,
+    "y": 163430.77,
+    "z": 5051.6
+  },
+  "7AD1556142577DE281D4DFAC2C06F17F": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -702808.5,
+    "y": -335070.7,
+    "z": 27588.1
+  },
+  "7B2BEC1C45F99ECCE1A6BE8F57A56E11": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -176948.36,
+    "y": 200393.8,
+    "z": -1723.14
+  },
+  "7B3EF9344A76CC4D955036B371B5DA58": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -768983.8,
+    "y": -257968.58,
+    "z": 2615.15
+  },
+  "7C69FD564C553253123821964C76AE55": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -311425.0,
+    "y": 151135.0,
+    "z": 35.0
+  },
+  "7DA91A864B5B1AD148373F9C9441860E": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 42530.34,
+    "y": 203883.6,
+    "z": 8423.11
+  },
+  "84838A364F35C648FB218AB89694D767": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -163447.64,
+    "y": 229313.19,
+    "z": 5276.36
+  },
+  "861A26834377971DCFF9518209C1E0B3": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -13807.57,
+    "y": -152802.98,
+    "z": 2880.0
+  },
+  "8A0ABF4443BEFD4E8A0550AB85A17A74": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -26780.0,
+    "y": 354640.0,
+    "z": 170.0
+  },
+  "8AC175F740D95350ED75D99A5028D452": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -281167.4,
+    "y": 88738.35,
+    "z": 3834.78
+  },
+  "8DAB603B4AA64681AF640FB8B1860B82": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 20555.75,
+    "y": 102617.6,
+    "z": 2350.21
+  },
+  "8DCE893B4872615AC3CC51A3BB5E6C80": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -101785.07,
+    "y": 205029.23,
+    "z": 7157.85
+  },
+  "90DE27044E96E94C609AA19F19EAE9AB": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -164661.72,
+    "y": 153125.2,
+    "z": -1414.78
+  },
+  "9158500A4E4CEF6A09B9DEBCB2D35485": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -817170.0,
+    "y": -461060.0,
+    "z": -600.0
+  },
+  "9293446A41363D2C3130CE927795F9B9": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -739658.9,
+    "y": -310238.78,
+    "z": 35274.93
+  },
+  "9340841548BE845AC96C0FBE61E46401": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -215213.8,
+    "y": 265367.6,
+    "z": -142.54
+  },
+  "94906016412F1DF37A986591D8C06B47": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -17730.91,
+    "y": -73667.05,
+    "z": 854.78
+  },
+  "95823EC343052E419C7F60AFD506329A": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -374132.75,
+    "y": -89184.65,
+    "z": 30822.11
+  },
+  "96E9E42D4D95809202086CADDC0A001E": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -2514.63,
+    "y": -106358.34,
+    "z": 1496.4
+  },
+  "978717F241C2798C60913CA11F527ED0": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 63496.1,
+    "y": 333388.16,
+    "z": 447.21
+  },
+  "983027024A1BB568CCB88DA59B2D06BA": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -431538.06,
+    "y": 82092.4,
+    "z": 57.41
+  },
+  "990C43BD40D22F010A8AAAAE08CF11C7": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -800228.8,
+    "y": -286975.7,
+    "z": 1958.27
+  },
+  "99AF7ED046FC64221ADA67902F9A96FC": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -624781.9,
+    "y": -247472.5,
+    "z": 13299.92
+  },
+  "9E50A6DA4332E0A8CA410393C1567EB8": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -74146.06,
+    "y": -63473.69,
+    "z": -2090.0
+  },
+  "A49F40B14775E8006A746C9F47F3C1AD": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 101576.62,
+    "y": 18990.65,
+    "z": 19538.1
+  },
+  "A4DE23624EAB5CD0EB4BA4B52E648430": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -245011.25,
+    "y": 335769.0,
+    "z": -1610.38
+  },
+  "A53DD2744479DA3DBC8E779FA9D169EF": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -554303.94,
+    "y": -314140.56,
+    "z": 16585.56
+  },
+  "A695AD354BB3EDFF59A7A1963E64E23A": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -337808.62,
+    "y": 30763.02,
+    "z": 4100.71
+  },
+  "A8BDD8BC4946238BD8992B963D2AEE16": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -320921.66,
+    "y": -100230.68,
+    "z": 18782.26
+  },
+  "AC2C19D042009C321E4599BCB11225F1": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 26498.53,
+    "y": 75921.09,
+    "z": 24300.94
+  },
+  "AE4D23C344AF419C1DD6ADB6C516223C": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -268094.03,
+    "y": -53009.18,
+    "z": 3558.55
+  },
+  "B0AF31CC4FBC64C79D97E5AE293A77B7": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -217124.6,
+    "y": 138061.36,
+    "z": 6128.78
+  },
+  "B167BE014E622F3FB65A22A38F917E52": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 14688.69,
+    "y": 384880.8,
+    "z": 709.48
+  },
+  "B303AA1640DEA128B9C22F843C0DF0B8": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -333902.78,
+    "y": -205767.4,
+    "z": 6942.85
+  },
+  "B98B66CA403F34E8FA2087BCE200786E": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -372111.75,
+    "y": 161187.75,
+    "z": 1083.56
+  },
+  "BAE6786943A75BFB798362A6792D28EB": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": 10312.33,
+    "y": -115227.17,
+    "z": 1137.07
+  },
+  "BB495FD946AE0137AE25BDBE89D6A386": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -194214.64,
+    "y": 239238.69,
+    "z": -1577.19
+  },
+  "BB6BF8C74B199850B353E8BB6A12E797": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -753200.0,
+    "y": -274400.0,
+    "z": 8591.31
+  },
+  "BBB7669844DB59C072E57FA2256BDC4B": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -107243.01,
+    "y": 24363.0,
+    "z": -20.92
+  },
+  "BC8BB90149F24B50BAF9F7AD231FAB71": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -230933.7,
+    "y": 152106.48,
+    "z": -555.32
+  },
+  "BCCD7DBE47E9068C5C0CCD9D3C5FD46F": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -372024.53,
+    "y": 278564.66,
+    "z": -1994.38
+  },
+  "C032C4FA480BBCB8417AE08FDD3D6A47": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -32453.78,
+    "y": -106978.17,
+    "z": 2376.01
+  },
+  "C1C0F1A34C1DFAACB69D67B354A6A7B1": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -181432.97,
+    "y": 350147.84,
+    "z": 3353.44
+  },
+  "C363463F4FFE9A8D373689AFA4F4A654": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": 9258.16,
+    "y": -142072.25,
+    "z": 1314.52
+  },
+  "C3C4F0BA47A8140A89AAF29903A708D4": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -635848.56,
+    "y": -271258.94,
+    "z": 11034.84
+  },
+  "C49880DA416B7CDACD88AC939E962ED0": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -640033.75,
+    "y": -344681.72,
+    "z": 11471.45
+  },
+  "C54E3EB9496CE6C6A2440187D8B43C9B": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -225251.94,
+    "y": -13333.92,
+    "z": -912.78
+  },
+  "C8D6EE6042D568BE735F0683E4193581": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -196751.97,
+    "y": 176316.2,
+    "z": -607.19
+  },
+  "CA5DCDFF4AA32135DEED85A62A2A4EA5": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -74916.76,
+    "y": 372458.47,
+    "z": 3272.68
+  },
+  "CA69DB7B4CCF43F81A5BAB9461DF2D33": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -231307.81,
+    "y": 73146.88,
+    "z": -1290.31
+  },
+  "CB862CD545848331F7DC71BAC6113157": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -124929.0,
+    "y": -79963.57,
+    "z": -2102.62
+  },
+  "CC9B08EA4F1F16F62E2FB2AAD137EB72": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -256755.73,
+    "y": 26900.88,
+    "z": 9510.31
+  },
+  "CD39C156439A63751E3B5FB8C8B67082": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -389335.2,
+    "y": 108597.55,
+    "z": -1944.67
+  },
+  "CD443EA44307361593B4CEAAC4809BD3": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -302529.38,
+    "y": 52391.46,
+    "z": 12481.66
+  },
+  "D394C26B4993988CA83173B5FECF4201": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -202257.86,
+    "y": 31403.27,
+    "z": 7325.41
+  },
+  "D3C6680D413447587E341CBE22AB7B53": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -429603.38,
+    "y": 94092.7,
+    "z": -948.34
+  },
+  "D55BAC814D05C7CEE30AEBAB556CEB32": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -320588.1,
+    "y": 113800.28,
+    "z": -1457.76
+  },
+  "D61627264473C8A8687A46AFD4F56846": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 47436.18,
+    "y": -9661.42,
+    "z": 9924.34
+  },
+  "D68B296A40D40AEFD62B689A37089706": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -368225.28,
+    "y": -74478.06,
+    "z": 18314.77
+  },
+  "D6D667B0415E195FA5D51DBA108EF6B2": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -220790.0,
+    "y": 234113.03,
+    "z": -1278.64
+  },
+  "D980E249450536EDF498E9A90EA0587E": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 21557.57,
+    "y": 309214.78,
+    "z": -916.3
+  },
+  "DB23CA1A48CF2465C0FD9EADB7485725": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -62924.05,
+    "y": 412516.97,
+    "z": 13502.81
+  },
+  "DB2ABCB741CA87D9BD9B408EC3D579E2": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -57776.31,
+    "y": 228600.25,
+    "z": 2436.37
+  },
+  "E0801D7E4EB11B53069B79AC78CD1305": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -39021.6,
+    "y": -39231.31,
+    "z": -1814.67
+  },
+  "E11ABA864BBCA4EC85B4349356D4925E": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -301121.12,
+    "y": 179718.17,
+    "z": 319.98
+  },
+  "E1EBFF614A938B44799B468F420B2548": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -259060.98,
+    "y": 280351.5,
+    "z": -1880.89
+  },
+  "E2666A754684F43F4B8E53A7449B8FAE": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -288304.3,
+    "y": 227049.95,
+    "z": 769.34
+  },
+  "E2DC10B14FE879F5E576B3A45633F176": {
+    "class": "BP_DungeonPortalMarker_Sakura_C",
+    "x": -57139.16,
+    "y": -86089.53,
+    "z": -2013.28
+  },
+  "E34E23924DD17FEEBC6EF4803D1139C1": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -376218.16,
+    "y": 48671.66,
+    "z": -1670.35
+  },
+  "E490CCD44FB0CD1FEA42B0A06EE88574": {
+    "class": "BP_DungeonPortalMarker_Viking_C",
+    "x": -696510.0,
+    "y": -309770.0,
+    "z": 25630.0
+  },
+  "E4915A6148F2C6ADD801A3B1C4A8DE6C": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -502169.7,
+    "y": -346285.5,
+    "z": -1500.39
+  },
+  "E59CEB24469A32723EA8E688BD18D02B": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -250341.31,
+    "y": 183436.67,
+    "z": 4307.48
+  },
+  "E5A6640D425996748F376B847C7B24CA": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -238650.75,
+    "y": -121688.11,
+    "z": -247.39
+  },
+  "E76CCB314FA1C1D087AA918F3B433905": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -383502.84,
+    "y": 99617.95,
+    "z": -453.18
+  },
+  "E77C6D1D439BC16AB46C15966649D675": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -563204.8,
+    "y": -229685.1,
+    "z": -316.51
+  },
+  "E7DA88E945E7A7C0760FC09DBBCE52E6": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -315807.78,
+    "y": 107247.59,
+    "z": -354.75
+  },
+  "E80CCA3C446C1F32057D67ACD7A679E5": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -740400.0,
+    "y": -345130.0,
+    "z": 870.0
+  },
+  "E8C1EE3545555106D27727A470605D11": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -265755.38,
+    "y": -164168.52,
+    "z": 9003.48
+  },
+  "E90570484D91FC41F3BB6EB87EC6D4BE": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -778536.75,
+    "y": -381700.44,
+    "z": 3873.26
+  },
+  "EA17F2E1424B9D6EC03F8FBFDFCE6E44": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -613348.6,
+    "y": -320523.06,
+    "z": 21843.98
+  },
+  "ED8258184FDE94279F7FA4AC07E07CC2": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -239159.88,
+    "y": 205386.8,
+    "z": 2115.23
+  },
+  "EFDEA9B449BBCEAA24814C998AA390C4": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -129471.89,
+    "y": 253439.78,
+    "z": -1537.63
+  },
+  "F0239AC840B0D5B25ACC25B1F0FB4FDF": {
+    "class": "BP_DungeonPortalMarker_Forest_C",
+    "x": -257638.36,
+    "y": 141158.6,
+    "z": 541.94
+  },
+  "F44756C44F86606D2B99BA8F58749EF5": {
+    "class": "BP_DungeonPortalMarker_Viking_C_C",
+    "x": -512833.9,
+    "y": -284233.53,
+    "z": 1254.92
+  },
+  "F5930C1E41005A5E27F244A42D0AD9B2": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -134629.19,
+    "y": 6185.44,
+    "z": -1599.22
+  },
+  "F7F572F6452AB3521A5631BD4FB35884": {
+    "class": "BP_DungeonPortalMarker_Grass1_C",
+    "x": -319255.0,
+    "y": 213145.0,
+    "z": -760.0
+  },
+  "FAB9065F4C85FCE7B903B29CB5B49ABE": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -796816.5,
+    "y": -365816.16,
+    "z": 5647.43
+  },
+  "FAD9959F448611EF6879F7A78476F677": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": 139611.05,
+    "y": 324306.53,
+    "z": 3399.43
+  },
+  "FBCCAAAE4AB222028715899C56FCD707": {
+    "class": "BP_DungeonPortalMarker_Volcano_C",
+    "x": -392681.62,
+    "y": -208957.25,
+    "z": -32.7
+  },
+  "FC64914E445F9E1F10D103A6FAA840C5": {
+    "class": "BP_DungeonPortalMarker_Viking_B_C",
+    "x": -744310.0,
+    "y": -372750.0,
+    "z": 25450.0
+  },
+  "FED843AA4128E1937D10A393F5A0F00D": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": 80038.95,
+    "y": 6386.82,
+    "z": 30360.69
+  },
+  "FEFA1C184CCE83261848D28149F474A9": {
+    "class": "BP_DungeonPortalMarker_Snow_C",
+    "x": -25056.86,
+    "y": 113597.3,
+    "z": 8292.37
+  },
+  "FF23348346BCF659B1F0918EA9B35015": {
+    "class": "BP_DungeonPortalMarker_Desert_C",
+    "x": -6205.63,
+    "y": 255610.88,
+    "z": 2361.21
+  }
+}
