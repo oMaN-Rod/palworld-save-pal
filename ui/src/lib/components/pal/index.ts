@@ -7,6 +7,7 @@ import PalContainerStats from './PalContainerStats.svelte';
 import PalFilterButtons from './PalFilterButtons.svelte';
 import PalHeader from './PalHeader.svelte';
 import PalInfoPopup from './PalInfoPopup.svelte';
+import PalModelViewer from './PalModelViewer.svelte';
 import PassiveSkillBadge from './PassiveSkillBadge.svelte';
 import PassiveSkillOption from './PassiveSkillOption.svelte';
 import Souls from './Souls.svelte';
@@ -26,6 +27,7 @@ export {
 	PalFilterButtons,
 	PalHeader,
 	PalInfoPopup,
+	PalModelViewer,
 	PassiveSkillBadge,
 	PassiveSkillOption,
 	Souls,

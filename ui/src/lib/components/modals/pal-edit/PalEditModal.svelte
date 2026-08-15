@@ -2,6 +2,7 @@
 	import {
 		ActiveSkillBadge,
 		PalHeader,
+		PalModelViewer,
 		PassiveSkillBadge,
 		Souls,
 		StatsBadges,
@@ -12,20 +13,28 @@
 	import {
 		LearnedSkillSelectModal,
 		MultiSkillSelectModal,
+		PalPresetSelectModal,
+		PresetConfigModal,
+		SkillPresetSelectModal,
 		TextInputModal
 	} from '$components/modals';
 	import { Button, SectionHeader, Tooltip } from '$components/ui';
-	import { SkillPresets } from '$components/presets';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
-	import { EntryState, type PresetProfile, type WorkSuitability } from '$types';
+	import {
+		defaultPresetConfig,
+		EntryState,
+		type PalPresetConfig,
+		type PresetProfile,
+		type WorkSuitability
+	} from '$types';
 	import { staticIcons } from '$types/icons';
-	import { assetLoader, calculateFilters } from '$utils';
+	import { assetLoader, calculateFilters, formatBossCharacterId, handleMaxOutPal } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import { BicepsFlexed, Brain, Plus, Save } from 'lucide-svelte';
+	import { BicepsFlexed, Brain, Edit, Play, Plus, Save } from 'lucide-svelte';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
+	import { c, p } from '$lib/utils/commonTranslations';
 
 	const appState = getAppState();
 
@@ -156,6 +165,19 @@
 		}
 	}
 
+	async function handleApplySkillPreset(type: 'active' | 'passive') {
+		if (!appState.selectedPal) return;
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(SkillPresetSelectModal, {
+			title: m.select_a_entity({
+				entity: `${type === 'active' ? c.activeSkill : c.passiveSkill} ${c.preset}`
+			}),
+			type
+		});
+		if (!result) return;
+		await setSkillPreset(type, result);
+	}
+
 	async function handleAddPreset(type: 'active' | 'passive') {
 		if (!appState.selectedPal) return;
 		// @ts-ignore
@@ -221,10 +243,118 @@
 		}
 	}
 
+	async function handleEditNickname() {
+		const pal = appState.selectedPal;
+		if (!pal) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(TextInputModal, {
+			title: m.edit_entity({ entity: m.nickname() }),
+			value: pal.nickname || pal.name
+		});
+		if (!result) return;
+		pal.nickname = result;
+		pal.state = EntryState.MODIFIED;
+		if (appState.selectedPlayer && appState.selectedPlayer.pals)
+			appState.selectedPlayer.pals[pal.instance_id].nickname = result;
+	}
+
+	async function handleApplyPalPreset() {
+		const pal = appState.selectedPal;
+		if (!pal) return;
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: m.select_entity({ entity: c.preset }),
+			selectedPals: [{ character_id: pal.character_id, character_key: pal.character_key }]
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
+			if (key === 'character_id') continue;
+			if (key === 'lock' && value) {
+				pal.character_id = presetProfile.pal_preset?.character_id as string;
+			}
+			if (key === 'is_boss' && value && pal.is_lucky) {
+				pal.is_boss = true;
+				pal.is_lucky = false;
+			}
+			if (key === 'is_lucky' && value && pal.is_boss) {
+				pal.is_boss = false;
+				pal.is_lucky = true;
+			} else if (value !== null) {
+				(pal as Record<string, any>)[key] = value;
+			}
+		}
+		formatBossCharacterId(pal);
+		pal.state = EntryState.MODIFIED;
+	}
+
+	async function handleSavePalPreset() {
+		const pal = appState.selectedPal;
+		if (!pal) return;
+		const element = palsData.getByKey(pal.character_key)?.element_types[0];
+		// @ts-ignore
+		const result = await modal.showModal(PresetConfigModal, {
+			config: defaultPresetConfig,
+			palName: pal.name,
+			element
+		});
+		if (!result) return;
+
+		const { name, config } = result as { name: string; config: PalPresetConfig };
+
+		const newPreset = {
+			name: name,
+			type: 'pal_preset',
+			pal_preset: {
+				lock: config.lock,
+				character_id: pal.character_id,
+				is_lucky: config.is_lucky ? pal.is_lucky : null,
+				is_boss: config.is_boss ? pal.is_boss : null,
+				is_awakened: config.is_awakened ? pal.is_awakened : null,
+				is_imported: config.is_imported ? pal.is_imported : null,
+				gender: config.gender ? pal.gender : null,
+				rank_hp: config.rank_hp ? pal.rank_hp : null,
+				rank_attack: config.rank_attack ? pal.rank_attack : null,
+				rank_defense: config.rank_defense ? pal.rank_defense : null,
+				rank_craftspeed: config.rank_craftspeed ? pal.rank_craftspeed : null,
+				talent_hp: config.talent_hp ? pal.talent_hp : null,
+				talent_shot: config.talent_shot ? pal.talent_shot : null,
+				talent_defense: config.talent_defense ? pal.talent_defense : null,
+				rank: config.rank ? pal.rank : null,
+				level: config.level ? pal.level : null,
+				learned_skills: config.learned_skills ? pal.learned_skills : null,
+				active_skills: config.active_skills ? pal.active_skills : null,
+				passive_skills: config.passive_skills ? pal.passive_skills : null,
+				work_suitability: config.work_suitability ? pal.work_suitability : null,
+				sanity: config.sanity ? pal.sanity : null,
+				exp: config.exp ? pal.exp : null,
+				element: element,
+				lock_element: config.lock_element,
+				nickname: config.nickname ? pal.nickname : null,
+				filtered_nickname: config.filtered_nickname ? pal.nickname : null,
+				stomach: config.stomach ? pal.stomach : null,
+				hp: config.hp ? pal.hp : null,
+				friendship_point: config.friendship_point ? pal.friendship_point : null
+			}
+		} as PresetProfile;
+
+		await presetsData.addPresetProfile(newPreset);
+	}
+
 	$effect(() => {
 		calcPalLevelProgress();
 	});
 </script>
+
+{#snippet palImageFallback()}
+	<img
+		src={palImage}
+		alt={`${appState.selectedPal?.name} icon`}
+		class="size-full object-contain"
+	/>
+{/snippet}
 
 {#snippet activeSkillsHeader()}
 	<SectionHeader text={c.activeSkills}>
@@ -254,6 +384,19 @@
 						}}
 					>
 						<Save size={20} />
+					</Button>
+				</Tooltip>
+				<Tooltip label={m.apply_preset()}>
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
+							event.stopPropagation();
+							handleApplySkillPreset('active');
+						}}
+					>
+						<Play size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.activeSkill })}>
@@ -297,6 +440,19 @@
 						}}
 					>
 						<Save size={20} />
+					</Button>
+				</Tooltip>
+				<Tooltip label={m.apply_preset()}>
+					<Button
+						variant="ghost"
+						size="icon"
+						class="ml-2"
+						onclick={(event: MouseEvent) => {
+							event.stopPropagation();
+							handleApplySkillPreset('passive');
+						}}
+					>
+						<Play size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.passiveSkill })}>
@@ -393,6 +549,35 @@
 
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
+		<nav
+			id="pal-quick-actions"
+			class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center self-start rounded-sm"
+		>
+			<Tooltip label={m.edit_entity({ entity: m.nickname() })}>
+				<Button variant="ghost" size="icon" onclick={handleEditNickname}>
+					<Edit class="h-6 w-6" />
+				</Button>
+			</Tooltip>
+			<Tooltip label={m.max_out_pal_stats(p.pal)}>
+				<Button
+					variant="ghost"
+					size="icon"
+					onclick={() => handleMaxOutPal(appState.selectedPal!, appState.selectedPlayer!)}
+				>
+					<BicepsFlexed class="h-6 w-6" />
+				</Button>
+			</Tooltip>
+			<Tooltip label={m.save_as_preset()}>
+				<Button variant="ghost" size="icon" onclick={handleSavePalPreset}>
+					<Save class="h-6 w-6" />
+				</Button>
+			</Tooltip>
+			<Tooltip label={m.apply_preset()}>
+				<Button variant="ghost" size="icon" onclick={handleApplyPalPreset}>
+					<Play class="h-6 w-6" />
+				</Button>
+			</Tooltip>
+		</nav>
 		<div class="flex grow flex-col">
 			<div id="pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
 				<PalHeader bind:pal={appState.selectedPal} />
@@ -407,10 +592,6 @@
 						<div id="pal-passive-skills">
 							{@render passiveSkillsHeader()}
 							{@render passiveSkillsBody()}
-						</div>
-						<div id="pal-skill-presets">
-							<SectionHeader text={c.presets} />
-							<SkillPresets onSelect={setSkillPreset} />
 						</div>
 						<div id="pal-work-suitability">
 							{@render workSuitabilityHeader()}
@@ -441,14 +622,6 @@
 								{@render passiveSkillsBody()}
 							{/snippet}
 						</Accordion.Item>
-						<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								<SectionHeader text={c.presets} />
-							{/snippet}
-							{#snippet panel()}
-								<SkillPresets onSelect={setSkillPreset} />
-							{/snippet}
-						</Accordion.Item>
 						<Accordion.Item value="work_suitability" controlHover="hover:bg-secondary-500/25">
 							{#snippet control()}
 								{@render workSuitabilityHeader()}
@@ -461,18 +634,18 @@
 				</div>
 				<div id="pal-image" class="flex-1 overflow-auto p-2">
 					<div class="flex h-full flex-col items-center justify-center">
-						<div class="pal">
+						<div class="pal w-full">
 							<Tooltip
+								baseClass="w-full"
 								popupClass="p-4 bg-surface-800"
 								rounded="rounded-none"
 								position="top-start"
 								useArrow={false}
 							>
-								<div class="relative">
-									<img
-										src={palImage}
-										alt={`${appState.selectedPal?.name} icon`}
-										class="max-h-[350px] max-w-full 2xl:max-h-[600px]"
+								<div class="relative h-87.5 w-full 2xl:h-150">
+									<PalModelViewer
+										characterKey={appState.selectedPal.character_key}
+										fallback={palImageFallback}
 									/>
 									{#if appState.selectedPal.is_predator}
 										<img
@@ -499,7 +672,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="overflow-auto p-2 w-1/3">
+		<div class="w-1/3 overflow-auto p-2">
 			<div class="hidden flex-col space-y-2 2xl:flex">
 				<div id="pal-status">
 					<StatusBadge bind:pal={appState.selectedPal} />

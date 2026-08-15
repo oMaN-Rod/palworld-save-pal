@@ -20,6 +20,7 @@ import PalPresetSelectModal from './pal-preset-select/PalPresetSelectModal.svelt
 import PalSelectModal from './pal-select/PalSelectModal.svelte';
 import SelectBaseModal from './select-base/SelectBaseModal.svelte';
 import SettingsModal from './settings/SettingsModal.svelte';
+import SkillPresetSelectModal from './skill-preset-select/SkillPresetSelectModal.svelte';
 import SkillSelectModal from './skill-select/SkillSelectModal.svelte';
 import TextInputModal from './text-input/TextInputModal.svelte';
 import UpdateAvailableModal from './update-available/UpdateAvailableModal.svelte';
@@ -47,6 +48,7 @@ export {
 	PresetConfigModal,
 	SelectBaseModal,
 	SettingsModal,
+	SkillPresetSelectModal,
 	SkillSelectModal,
 	TextInputModal,
 	UpdateAvailableModal

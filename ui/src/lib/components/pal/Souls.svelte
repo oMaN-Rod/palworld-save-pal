@@ -1,122 +1,85 @@
 <script lang="ts">
-	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import { EntryState, type Pal } from '$types';
-	import { Input } from '$components/ui';
-	import { getAppState } from '$states';
+	import { Tooltip } from '$components/ui';
+	import { NumberSliderModal } from '$components/modals';
+	import { getAppState, getModalState } from '$states';
+	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
 
-	let { pal = $bindable() } = $props<{
+	type SoulKey = 'rank_hp' | 'rank_attack' | 'rank_defense' | 'rank_craftspeed';
+
+	let {
+		pal = $bindable()
+	}: {
 		pal: Pal;
-	}>();
+	} = $props();
 
-	let appState = getAppState();
+	const appState = getAppState();
+	const modal = getModalState();
 
 	const max = $derived(appState.settings.cheat_mode ? 255 : 20);
 	const markers = $derived(appState.settings.cheat_mode ? [50, 100, 150, 200] : [5, 10, 15]);
 
-	const hp = $derived([pal.rank_hp ?? 0]);
-	const attack = $derived([pal.rank_attack ?? 0]);
-	const defense = $derived([pal.rank_defense ?? 0]);
-	const craftSpeed = $derived([pal.rank_craftspeed ?? 0]);
+	const souls = $derived([
+		{
+			key: 'rank_hp' as SoulKey,
+			label: m.health(),
+			icon: staticIcons.hpIcon,
+			value: pal.rank_hp ?? 0
+		},
+		{
+			key: 'rank_attack' as SoulKey,
+			label: m.attack(),
+			icon: staticIcons.attackIcon,
+			value: pal.rank_attack ?? 0
+		},
+		{
+			key: 'rank_defense' as SoulKey,
+			label: m.defense(),
+			icon: staticIcons.defenseIcon,
+			value: pal.rank_defense ?? 0
+		},
+		{
+			key: 'rank_craftspeed' as SoulKey,
+			label: m.workspeed(),
+			icon: staticIcons.workSpeedIcon,
+			value: pal.rank_craftspeed ?? 0
+		}
+	]);
 
-	function handleUpdateHp(details: any): void {
-		pal.rank_hp = details.value[0];
-		pal.state = EntryState.MODIFIED;
-	}
-
-	function handleUpdateAttack(details: any): void {
-		pal.rank_attack = details.value[0];
-		pal.state = EntryState.MODIFIED;
-	}
-
-	function handleUpdateCraftSpeed(details: any): void {
-		pal.rank_craftspeed = details.value[0];
-		pal.state = EntryState.MODIFIED;
-	}
-
-	function handleUpdateDefense(details: any): void {
-		pal.rank_defense = details.value[0];
+	async function handleEditSoul(key: SoulKey, label: string, value: number): Promise<void> {
+		// @ts-ignore
+		const result = await modal.showModal<number>(NumberSliderModal, {
+			title: m.edit_entity({ entity: label }),
+			value,
+			min: 0,
+			max,
+			markers
+		});
+		if (result === null || result === undefined) return;
+		pal[key] = result;
 		pal.state = EntryState.MODIFIED;
 	}
 </script>
 
-<div class="grid grid-cols-[minmax(60px,80px)_1fr_auto] items-center gap-2">
-	<span>{m.health()}</span>
-	<Slider
-		classes="grow"
-		height="h-2"
-		meterBg="bg-green-500"
-		thumbRingColor="ring-green-500"
-		min={0}
-		{max}
-		{markers}
-		step={1}
-		value={hp}
-		onValueChange={handleUpdateHp}
-	/>
-	<Input type="number" inputClass="h-8 p-1" value={hp[0]} onchange={handleUpdateHp} min={0} {max} />
-
-	<span>{m.attack()}</span>
-	<Slider
-		height="h-2"
-		meterBg="bg-red-500"
-		thumbRingColor="ring-red-500"
-		min={0}
-		{max}
-		{markers}
-		step={1}
-		value={attack}
-		onValueChange={handleUpdateAttack}
-	/>
-	<Input
-		type="number"
-		inputClass="h-8 p-1"
-		value={attack[0]}
-		onchange={handleUpdateAttack}
-		min={0}
-		{max}
-	/>
-
-	<span>{m.defense()}</span>
-	<Slider
-		height="h-2"
-		meterBg="bg-primary-500"
-		thumbRingColor="ring-primary-500"
-		min={0}
-		{max}
-		{markers}
-		step={1}
-		value={defense}
-		onValueChange={handleUpdateDefense}
-	/>
-	<Input
-		type="number"
-		inputClass="h-8 p-1"
-		value={defense[0]}
-		onchange={handleUpdateDefense}
-		min={0}
-		{max}
-	/>
-
-	<span>{m.workspeed()}</span>
-	<Slider
-		height="h-2"
-		meterBg="bg-secondary-500"
-		thumbRingColor="ring-secondary-500"
-		min={0}
-		{max}
-		{markers}
-		step={1}
-		value={craftSpeed}
-		onValueChange={handleUpdateCraftSpeed}
-	/>
-	<Input
-		type="number"
-		inputClass="h-8 p-1"
-		value={craftSpeed[0]}
-		onchange={handleUpdateCraftSpeed}
-		min={0}
-		{max}
-	/>
+<div class="grid w-full grid-cols-4 gap-2">
+	{#each souls as soul (soul.key)}
+		<Tooltip>
+			<button
+				class="border-l-surface-600 bg-surface-900 relative w-full overflow-hidden rounded-none border-l-2 p-0 shadow-none"
+				onclick={() => handleEditSoul(soul.key, soul.label, soul.value)}
+			>
+				<div class="flex w-full items-center">
+					<img src={soul.icon} alt="{soul.label} icon" class="ml-2 h-4 w-4 2xl:h-6 2xl:w-6" />
+					<span class="p-2 text-sm font-bold 2xl:text-lg">{soul.value}</span>
+				</div>
+			</button>
+			{#snippet popup()}
+				<div class="flex items-center space-x-2">
+					<span class="text-lg font-bold">{soul.value}</span>
+					<span class="text-lg">{soul.label}</span>
+				</div>
+			{/snippet}
+		</Tooltip>
+	{/each}
 </div>

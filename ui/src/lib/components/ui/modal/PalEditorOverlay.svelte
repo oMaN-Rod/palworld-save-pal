@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
-	import { Button, Loading } from '$components/ui';
+	import { Loading } from '$components/ui';
 	import { PalEditModal } from '$components/modals';
 	import { onMount, onDestroy } from 'svelte';
-	import { PawPrint } from '@lucide/svelte';
+	import { PawPrint, X } from '@lucide/svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -41,22 +41,28 @@
 		aria-modal="true"
 		tabindex="-1"
 	>
-		<div class="bg-surface-950 relative h-[90vh] w-[90vw] overflow-hidden rounded-sm">
-			<Button
-				variant="ghost"
-				size="icon"
-				class="absolute -top-2 -right-2 z-10 text-2xl leading-none"
+		<div class="relative">
+			<div class="bg-surface-950 h-[90vh] w-[90vw] overflow-hidden rounded-sm">
+				{#if palEditor.loading}
+					<div class="flex h-full items-center justify-center">
+						<Loading
+							label={m.loading_entity({ entity: c.pal })}
+							loadingComplete={false}
+							icon={PawPrint}
+						/>
+					</div>
+				{:else if appState.selectedPal}
+					<PalEditModal />
+				{/if}
+			</div>
+			<button
+				type="button"
+				class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+				aria-label={m.close()}
 				onclick={() => palEditor.close()}
 			>
-				×
-			</Button>
-			{#if palEditor.loading}
-				<div class="flex h-full items-center justify-center">
-					<Loading label={m.loading_entity({ entity: c.pal })} loadingComplete={false} icon={PawPrint} />
-				</div>
-			{:else if appState.selectedPal}
-				<PalEditModal />
-			{/if}
+				<X size={24} />
+			</button>
 		</div>
 	</div>
 {/if}
