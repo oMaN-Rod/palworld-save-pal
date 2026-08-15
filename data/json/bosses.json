@@ -5,7 +5,8 @@
     "level": 66,
     "x": -867560.9,
     "y": -441338.22,
-    "z": 18640.15
+    "z": 18640.15,
+    "spawn_type": "alpha"
   },
   "1": {
     "spawner_id": "yamijima_plateau_pink_G_BOSS_2",
@@ -13,7 +14,8 @@
     "level": 65,
     "x": -791868.2,
     "y": -337175.94,
-    "z": 35122.79
+    "z": 35122.79,
+    "spawn_type": "alpha"
   },
   "10": {
     "spawner_id": "yamijima_forest_pink_D_WhiteDeer",
@@ -21,7 +23,8 @@
     "level": 65,
     "x": -661871.9,
     "y": -284991.84,
-    "z": 1422.1
+    "z": 1422.1,
+    "spawn_type": "alpha"
   },
   "100": {
     "spawner_id": "BOSS_Female_Soldier",
@@ -29,7 +32,8 @@
     "level": 19,
     "x": -177380.0,
     "y": 9850.0,
-    "z": 6230.0
+    "z": 6230.0,
+    "spawn_type": "boss"
   },
   "101": {
     "spawner_id": "BOSS_Female_Soldier03",
@@ -37,7 +41,8 @@
     "level": 39,
     "x": -231660.0,
     "y": -113810.0,
-    "z": -1150.0
+    "z": -1150.0,
+    "spawn_type": "boss"
   },
   "102": {
     "spawner_id": "BOSS_Female_People02",
@@ -45,7 +50,8 @@
     "level": 16,
     "x": -304539.22,
     "y": 35742.27,
-    "z": 2271.28
+    "z": 2271.28,
+    "spawn_type": "boss"
   },
   "103": {
     "spawner_id": "BOSS_Male_Trader02",
@@ -53,7 +59,8 @@
     "level": 57,
     "x": -907334.1,
     "y": -389724.44,
-    "z": -1882.67
+    "z": -1882.67,
+    "spawn_type": "boss"
   },
   "104": {
     "spawner_id": "BOSS_Male_People2",
@@ -61,7 +68,8 @@
     "level": 26,
     "x": -124753.86,
     "y": 318055.84,
-    "z": -1920.75
+    "z": -1920.75,
+    "spawn_type": "boss"
   },
   "105": {
     "spawner_id": "5_2_island_iceblock_FBOSS_1",
@@ -69,7 +77,8 @@
     "level": 60,
     "x": 175142.77,
     "y": 221586.5,
-    "z": -2024.66
+    "z": -2024.66,
+    "spawn_type": "boss"
   },
   "106": {
     "spawner_id": "81_1_forest_FBOSS_3",
@@ -77,7 +86,8 @@
     "level": 35,
     "x": -119314.52,
     "y": 288958.4,
-    "z": 3096.73
+    "z": 3096.73,
+    "spawn_type": "boss"
   },
   "107": {
     "spawner_id": "81_1_grass_FBOSS_9",
@@ -85,7 +95,8 @@
     "level": 15,
     "x": -285331.3,
     "y": 210162.69,
-    "z": 766.81
+    "z": 766.81,
+    "spawn_type": "boss"
   },
   "108": {
     "spawner_id": "81_1_grass_FBOSS_28",
@@ -93,7 +104,8 @@
     "level": 23,
     "x": -426590.0,
     "y": 90670.0,
-    "z": 110.0
+    "z": 110.0,
+    "spawn_type": "boss"
   },
   "109": {
     "spawner_id": "81_5_Yamijima_FBOSS_9",
@@ -101,7 +113,8 @@
     "level": 60,
     "x": -589257.2,
     "y": -265874.4,
-    "z": 19702.04
+    "z": 19702.04,
+    "spawn_type": "boss"
   },
   "11": {
     "spawner_id": "yamijima_plateau_purple_BOSS",
@@ -109,7 +122,8 @@
     "level": 60,
     "x": -544943.3,
     "y": -264111.88,
-    "z": 2902.4
+    "z": 2902.4,
+    "spawn_type": "alpha"
   },
   "110": {
     "spawner_id": "81_5_Yamijima_FBOSS_8",
@@ -117,7 +131,8 @@
     "level": 60,
     "x": -797364.2,
     "y": -245386.88,
-    "z": 183.87
+    "z": 183.87,
+    "spawn_type": "boss"
   },
   "111": {
     "spawner_id": "81_1_forest_FBOSS_2",
@@ -125,7 +140,8 @@
     "level": 28,
     "x": -226362.23,
     "y": 231993.33,
-    "z": -1897.7
+    "z": -1897.7,
+    "spawn_type": "boss"
   },
   "112": {
     "spawner_id": "81_1_grass_FBOSS_20",
@@ -133,7 +149,8 @@
     "level": 15,
     "x": -276240.0,
     "y": 268990.0,
-    "z": -1300.0
+    "z": -1300.0,
+    "spawn_type": "boss"
   },
   "113": {
     "spawner_id": "81_1_forest_FBOSS_4",
@@ -141,7 +158,8 @@
     "level": 35,
     "x": -147025.53,
     "y": 217379.17,
-    "z": 2767.2
+    "z": 2767.2,
+    "spawn_type": "boss"
   },
   "114": {
     "spawner_id": "81_1_forest_FBOSS_5",
@@ -149,7 +167,8 @@
     "level": 40,
     "x": -92059.77,
     "y": 273741.9,
-    "z": 18877.03
+    "z": 18877.03,
+    "spawn_type": "boss"
   },
   "115": {
     "spawner_id": "81_1_forest_FBOSS_1",
@@ -157,7 +176,8 @@
     "level": 27,
     "x": -245458.9,
     "y": 149122.0,
-    "z": 822.98
+    "z": 822.98,
+    "spawn_type": "boss"
   },
   "116": {
     "spawner_id": "skyisland_8_09_D_forest_FBOSS_2",
@@ -165,7 +185,8 @@
     "level": 66,
     "x": -773523.9,
     "y": 51495.86,
-    "z": 45252.0
+    "z": 45252.0,
+    "spawn_type": "boss"
   },
   "117": {
     "spawner_id": "81_1_grass_FBOSS_6",
@@ -173,7 +194,8 @@
     "level": 25,
     "x": -282853.72,
     "y": 64952.2,
-    "z": 5267.48
+    "z": 5267.48,
+    "spawn_type": "boss"
   },
   "118": {
     "spawner_id": "81_5_Yamijima_FBOSS_16",
@@ -181,7 +203,8 @@
     "level": 60,
     "x": -729794.06,
     "y": -338535.5,
-    "z": 15500.14
+    "z": 15500.14,
+    "spawn_type": "boss"
   },
   "119": {
     "spawner_id": "81_1_grass_FBOSS_10",
@@ -189,7 +212,8 @@
     "level": 30,
     "x": -183818.9,
     "y": 40647.84,
-    "z": 8457.06
+    "z": 8457.06,
+    "spawn_type": "boss"
   },
   "12": {
     "spawner_id": "yamijima_plateau_purple_BOSS_2",
@@ -197,7 +221,8 @@
     "level": 62,
     "x": -593253.1,
     "y": -294034.56,
-    "z": 1152.6
+    "z": 1152.6,
+    "spawn_type": "alpha"
   },
   "120": {
     "spawner_id": "81_1_grass_FBOSS_FlameBuffalo",
@@ -205,7 +230,8 @@
     "level": 15,
     "x": -349072.88,
     "y": 104534.98,
-    "z": -211.34
+    "z": -211.34,
+    "spawn_type": "boss"
   },
   "121": {
     "spawner_id": "81_5_Yamijima_FBOSS_11",
@@ -213,7 +239,8 @@
     "level": 63,
     "x": -568029.2,
     "y": -464143.12,
-    "z": -1848.0
+    "z": -1848.0,
+    "spawn_type": "boss"
   },
   "122": {
     "spawner_id": "81_1_grass_FBOSS_15",
@@ -221,7 +248,8 @@
     "level": 15,
     "x": -149050.0,
     "y": -30550.0,
-    "z": -1380.0
+    "z": -1380.0,
+    "spawn_type": "boss"
   },
   "123": {
     "spawner_id": "REGION_Oilrig_3",
@@ -229,7 +257,8 @@
     "level": 60,
     "x": -789847.9,
     "y": -636231.0,
-    "z": -250.0
+    "z": -250.0,
+    "spawn_type": "boss"
   },
   "124": {
     "spawner_id": "REGION_Oilrig_1",
@@ -237,7 +266,8 @@
     "level": 55,
     "x": -321274.9,
     "y": 424944.06,
-    "z": -2102.61
+    "z": -2102.61,
+    "spawn_type": "boss"
   },
   "125": {
     "spawner_id": "REGION_Oilrig_2",
@@ -245,39 +275,36 @@
     "level": 30,
     "x": -250672.6,
     "y": 232290.08,
-    "z": -2100.0
+    "z": -2100.0,
+    "spawn_type": "boss"
   },
   "126": {
-    "spawner_id": "BOSS_Female_Soldier02",
-    "character_id": "None",
-    "level": 56,
-    "x": -712045.56,
-    "y": -229952.92,
-    "z": 8893.03
+    "spawn_type": "predator",
+    "x": -249150.0,
+    "y": 47780.0,
+    "z": 8210.0,
+    "pal": "SifuDog"
   },
   "127": {
-    "spawner_id": "BOSS_Male_People03",
-    "character_id": "None",
-    "level": 10,
-    "x": -335675.2,
-    "y": 148683.03,
-    "z": 6384.37
+    "spawn_type": "predator",
+    "x": -260656.53,
+    "y": 129341.76,
+    "z": 3448.56,
+    "pal": "PurpleSpider"
   },
   "128": {
-    "spawner_id": "BOSS_Police_Rifle",
-    "character_id": "None",
-    "level": 40,
-    "x": 45909.48,
-    "y": 304971.44,
-    "z": -1015.37
+    "spawn_type": "predator",
+    "x": -283650.0,
+    "y": 147100.0,
+    "z": 560.0,
+    "pal": "LazyDragon"
   },
   "129": {
-    "spawner_id": "BOSS_Believer_CrossBow",
-    "character_id": "None",
-    "level": 23,
-    "x": -164164.23,
-    "y": 152549.42,
-    "z": -1410.97
+    "spawn_type": "predator",
+    "x": -329220.0,
+    "y": -51630.0,
+    "z": 14460.0,
+    "pal": "Umihebi_Fire"
   },
   "13": {
     "spawner_id": "yamijima_plateau_purple_C_BOSS",
@@ -285,87 +312,78 @@
     "level": 60,
     "x": -649837.06,
     "y": -235616.66,
-    "z": 17616.09
+    "z": 17616.09,
+    "spawn_type": "alpha"
   },
   "130": {
-    "spawner_id": "BOSS_Ninja",
-    "character_id": "None",
-    "level": 28,
-    "x": -124623.98,
-    "y": 232502.7,
-    "z": 7801.97
+    "spawn_type": "predator",
+    "x": -318898.75,
+    "y": 86800.91,
+    "z": 3143.75,
+    "pal": "PinkLizard"
   },
   "131": {
-    "spawner_id": "BOSS_DarkTrader",
-    "character_id": "None",
-    "level": 59,
-    "x": -666737.7,
-    "y": -409956.38,
-    "z": 25605.27
+    "spawn_type": "predator",
+    "x": -377810.0,
+    "y": 31720.0,
+    "z": -140.0,
+    "pal": "Gorilla"
   },
   "132": {
-    "spawner_id": "BOSS_Male_Trader03",
-    "character_id": "None",
-    "level": 57,
-    "x": -538826.5,
-    "y": -337667.7,
-    "z": -426.03
+    "spawn_type": "predator",
+    "x": -464660.0,
+    "y": -115480.0,
+    "z": -1870.0,
+    "pal": "DrillGame"
   },
   "133": {
-    "spawner_id": "BOSS_Believer_Fat_GiantClub",
-    "character_id": "None",
-    "level": 30,
-    "x": -79599.09,
-    "y": 192658.28,
-    "z": 6188.34
+    "spawn_type": "predator",
+    "x": -21460.0,
+    "y": -123580.0,
+    "z": 5710.0,
+    "pal": "GrimGirl"
   },
   "134": {
-    "spawner_id": "BOSS_Male_Soldier03",
-    "character_id": "None",
-    "level": 49,
-    "x": 21850.12,
-    "y": -8346.56,
-    "z": 6712.46
+    "spawn_type": "predator",
+    "x": -11000.0,
+    "y": 69160.0,
+    "z": 16580.0,
+    "pal": "Werewolf_Ice"
   },
   "135": {
-    "spawner_id": "BOSS_Male_Soldier04",
-    "character_id": "None",
-    "level": 21,
-    "x": -217110.73,
-    "y": 127090.61,
-    "z": 6141.97
+    "spawn_type": "predator",
+    "x": -46930.0,
+    "y": -63680.0,
+    "z": -1050.0,
+    "pal": "MushroomDragon"
   },
   "136": {
-    "spawner_id": "BOSS_Police_Old",
-    "character_id": "None",
-    "level": 57,
-    "x": -686537.5,
-    "y": -380252.66,
-    "z": 32747.38
+    "spawn_type": "predator",
+    "x": -26610.0,
+    "y": 385860.0,
+    "z": 7320.0,
+    "pal": "ScorpionMan"
   },
   "137": {
-    "spawner_id": "BOSS_Female_People03",
-    "character_id": "None",
-    "level": 15,
-    "x": -300962.38,
-    "y": 157210.73,
-    "z": -164.24
+    "spawn_type": "predator",
+    "x": -47628.45,
+    "y": 147755.06,
+    "z": 13819.54,
+    "pal": "AmaterasuWolf"
   },
   "138": {
-    "spawner_id": "BOSS_Female_Soldier04",
-    "character_id": "None",
-    "level": 52,
-    "x": -75788.09,
-    "y": -82304.96,
-    "z": -960.0
+    "spawn_type": "predator",
+    "x": -63920.0,
+    "y": 2010.0,
+    "z": -1570.0,
+    "pal": "FairyDragon"
   },
   "139": {
-    "spawner_id": "BOSS_Male_Trader01",
-    "character_id": "None",
-    "level": 42,
-    "x": -57544.38,
-    "y": 116422.49,
-    "z": 9060.12
+    "spawn_type": "predator",
+    "x": -59150.0,
+    "y": 107330.0,
+    "z": 7750.0,
+    "pal": "Horus_Water"
   },
   "14": {
     "spawner_id": "yamijima_IceLand_pink_A_BOSS",
@@ -373,87 +391,78 @@
     "level": 66,
     "x": -773027.4,
     "y": -368265.88,
-    "z": 4287.22
+    "z": 4287.22,
+    "spawn_type": "alpha"
   },
   "140": {
-    "spawner_id": "BOSS_Male_DesertPeople",
-    "character_id": "None",
-    "level": 36,
-    "x": -62624.9,
-    "y": 402438.94,
-    "z": 12180.67
+    "spawn_type": "predator",
+    "x": -80710.0,
+    "y": 241410.0,
+    "z": 20110.0,
+    "pal": "VolcanicMonster_Ice"
   },
   "141": {
-    "spawner_id": "BOSS_Female_DesertPeople",
-    "character_id": "None",
-    "level": 37,
-    "x": 147119.08,
-    "y": 347473.56,
-    "z": -856.4
+    "spawn_type": "predator",
+    "x": -107400.0,
+    "y": 180590.0,
+    "z": 1530.0,
+    "pal": "FlowerDinosaur"
   },
   "142": {
-    "spawner_id": "BOSS_FireCult_FlameThrower",
-    "character_id": "None",
-    "level": 41,
-    "x": -331690.16,
-    "y": -40407.43,
-    "z": 15982.14
+    "spawn_type": "predator",
+    "x": -139220.0,
+    "y": 8790.0,
+    "z": -1340.0,
+    "pal": "Garm"
   },
   "143": {
-    "spawner_id": "BOSS_Male_NinjaElite",
-    "character_id": "None",
-    "level": 53,
-    "x": -18160.0,
-    "y": -151400.0,
-    "z": 2360.0
+    "spawn_type": "predator",
+    "x": -147040.0,
+    "y": 234240.0,
+    "z": 4780.0,
+    "pal": "GhostBeast"
   },
   "144": {
-    "spawner_id": "BOSS_Hunter_Rifle",
-    "character_id": "None",
-    "level": 12,
-    "x": -359201.56,
-    "y": 181724.28,
-    "z": 5179.1
+    "spawn_type": "predator",
+    "x": -172100.0,
+    "y": 271020.0,
+    "z": 2430.0,
+    "pal": "ThunderDog"
   },
   "145": {
-    "spawner_id": "BOSS_Male_People",
-    "character_id": "None",
-    "level": 26,
-    "x": -126584.23,
-    "y": 318232.75,
-    "z": -1519.07
+    "spawn_type": "predator",
+    "x": -155820.36,
+    "y": 314737.6,
+    "z": -2101.2,
+    "pal": "RedArmorBird"
   },
   "146": {
-    "spawner_id": "BOSS_Male_Soldier02",
-    "character_id": "None",
-    "level": 23,
-    "x": -224118.3,
-    "y": 277672.06,
-    "z": -864.36
+    "spawn_type": "predator",
+    "x": -198120.0,
+    "y": 12210.0,
+    "z": 15090.0,
+    "pal": "GrassPanda"
   },
   "147": {
-    "spawner_id": "BOSS_Male_People02",
-    "character_id": "None",
-    "level": 43,
-    "x": 97107.99,
-    "y": 68422.43,
-    "z": 42381.05
+    "spawn_type": "predator",
+    "x": -181520.0,
+    "y": 167290.0,
+    "z": 7830.0,
+    "pal": "NightBlueHorse"
   },
   "148": {
-    "spawner_id": "BOSS_Male_Soldier",
-    "character_id": "None",
-    "level": 15,
-    "x": -409430.0,
-    "y": 24820.0,
-    "z": 1880.0
+    "spawn_type": "predator",
+    "x": -227181.38,
+    "y": -116672.16,
+    "z": -1150.83,
+    "pal": "GoldenHorse"
   },
   "149": {
-    "spawner_id": "BOSS_Female_People",
-    "character_id": "None",
-    "level": 38,
-    "x": -470651.97,
-    "y": -80708.37,
-    "z": -2009.12
+    "spawn_type": "predator",
+    "x": -205400.0,
+    "y": 324230.0,
+    "z": -2070.0,
+    "pal": "BirdDragon"
   },
   "15": {
     "spawner_id": "remainsIsland_1_GrassGolem_FBOSS",
@@ -461,79 +470,43 @@
     "level": 75,
     "x": 517450.0,
     "y": -626940.0,
-    "z": 10980.0
+    "z": 10980.0,
+    "spawn_type": "alpha"
   },
   "150": {
-    "spawner_id": "BOSS_Female_Soldier03",
-    "character_id": "None",
-    "level": 39,
-    "x": -231660.0,
-    "y": -113810.0,
-    "z": -1150.0
+    "spawn_type": "predator",
+    "x": -225550.0,
+    "y": 161970.0,
+    "z": -630.0,
+    "pal": "MysteryMask"
   },
   "151": {
-    "spawner_id": "BOSS_Female_People02",
-    "character_id": "None",
-    "level": 16,
-    "x": -304539.22,
-    "y": 35742.27,
-    "z": 2271.28
+    "spawn_type": "predator",
+    "x": 20638.32,
+    "y": 329931.44,
+    "z": -1168.81,
+    "pal": "FeatherOstrich"
   },
   "152": {
-    "spawner_id": "BOSS_Male_Trader02",
-    "character_id": "None",
-    "level": 57,
-    "x": -907334.1,
-    "y": -389724.44,
-    "z": -1882.67
+    "spawn_type": "predator",
+    "x": 50780.0,
+    "y": 23130.0,
+    "z": 9060.0,
+    "pal": "Yeti"
   },
   "153": {
-    "spawner_id": "BOSS_Male_People2",
-    "character_id": "None",
-    "level": 26,
-    "x": -124753.86,
-    "y": 318055.84,
-    "z": -1920.75
+    "spawn_type": "predator",
+    "x": 42910.0,
+    "y": 279290.0,
+    "z": 1940.0,
+    "pal": "WhiteTiger_Ground"
   },
   "154": {
-    "spawner_id": "BOSS_Viking",
-    "character_id": "None",
-    "level": 57,
-    "x": -584187.7,
-    "y": -181661.73,
-    "z": 978.43
-  },
-  "155": {
-    "spawner_id": "BOSS_Hunter_Fat_GatlingGun",
-    "character_id": "None",
-    "level": 20,
-    "x": -242340.0,
-    "y": 36220.0,
-    "z": 13020.0
-  },
-  "156": {
-    "spawner_id": "BOSS_VikingElite",
-    "character_id": "None",
-    "level": 58,
-    "x": -805295.06,
-    "y": -478475.2,
-    "z": -815.01
-  },
-  "157": {
-    "spawner_id": "BOSS_Scientist_LaserRifle",
-    "character_id": "None",
-    "level": 45,
-    "x": 10215.88,
-    "y": 153782.08,
-    "z": 3150.0
-  },
-  "158": {
-    "spawner_id": "BOSS_Female_Soldier",
-    "character_id": "None",
-    "level": 19,
-    "x": -177380.0,
-    "y": 9850.0,
-    "z": 6230.0
+    "spawn_type": "predator",
+    "x": 94990.0,
+    "y": 32590.0,
+    "z": 18710.0,
+    "pal": "Manticore_Dark"
   },
   "16": {
     "spawner_id": "worldtree_9_11_N_FBOSS_1",
@@ -541,7 +514,8 @@
     "level": 79,
     "x": 520440.0,
     "y": -727175.0,
-    "z": 41054.54
+    "z": 41054.54,
+    "spawn_type": "alpha"
   },
   "17": {
     "spawner_id": "worldtree_9_02_B_FBOSS_1",
@@ -549,7 +523,8 @@
     "level": 74,
     "x": 526910.2,
     "y": -581727.6,
-    "z": 18204.21
+    "z": 18204.21,
+    "spawn_type": "alpha"
   },
   "18": {
     "spawner_id": "worldtree_9_10_L_FBOSS_1",
@@ -557,7 +532,8 @@
     "level": 78,
     "x": 458095.0,
     "y": -694560.0,
-    "z": 19325.0
+    "z": 19325.0,
+    "spawn_type": "alpha"
   },
   "19": {
     "spawner_id": "worldtree_9_07_I_FBOSS_1",
@@ -565,7 +541,8 @@
     "level": 78,
     "x": 571870.0,
     "y": -733420.0,
-    "z": 18000.0
+    "z": 18000.0,
+    "spawn_type": "alpha"
   },
   "2": {
     "spawner_id": "yamijima_forest_purple_C_BOSS",
@@ -573,7 +550,8 @@
     "level": 64,
     "x": -691248.6,
     "y": -309680.34,
-    "z": 16072.18
+    "z": 16072.18,
+    "spawn_type": "alpha"
   },
   "20": {
     "spawner_id": "worldtree_9_05_D_FBOSS_1",
@@ -581,7 +559,8 @@
     "level": 78,
     "x": 601096.75,
     "y": -572063.06,
-    "z": 30180.0
+    "z": 30180.0,
+    "spawn_type": "alpha"
   },
   "21": {
     "spawner_id": "worldtree_9_13_M_FBOSS_1",
@@ -589,7 +568,8 @@
     "level": 79,
     "x": 491580.78,
     "y": -725697.06,
-    "z": 12042.81
+    "z": 12042.81,
+    "spawn_type": "alpha"
   },
   "22": {
     "spawner_id": "81_2_dessert_FBOSS_FlowerDinosaur_Electric",
@@ -597,7 +577,8 @@
     "level": 47,
     "x": -46108.39,
     "y": 302547.8,
-    "z": -1928.49
+    "z": -1928.49,
+    "spawn_type": "alpha"
   },
   "23": {
     "spawner_id": "81_2_dessert_FBOSS_1",
@@ -605,7 +586,8 @@
     "level": 45,
     "x": 97716.31,
     "y": 307499.7,
-    "z": 17330.4
+    "z": 17330.4,
+    "spawn_type": "alpha"
   },
   "24": {
     "spawner_id": "81_2_dessert_FBOSS_3",
@@ -613,7 +595,8 @@
     "level": 44,
     "x": 122760.0,
     "y": 318710.0,
-    "z": 320.0
+    "z": 320.0,
+    "spawn_type": "alpha"
   },
   "25": {
     "spawner_id": "81_2_dessert_FBOSS_5",
@@ -621,7 +604,8 @@
     "level": 55,
     "x": 50564.78,
     "y": 357757.47,
-    "z": 29.71
+    "z": 29.71,
+    "spawn_type": "alpha"
   },
   "26": {
     "spawner_id": "81_2_dessert_FBOSS_2",
@@ -629,7 +613,8 @@
     "level": 60,
     "x": 187731.2,
     "y": 359897.25,
-    "z": 2647.32
+    "z": 2647.32,
+    "spawn_type": "alpha"
   },
   "27": {
     "spawner_id": "volcanoiskand_1_FBOSS",
@@ -637,7 +622,8 @@
     "level": 70,
     "x": -1033347.94,
     "y": -358750.8,
-    "z": 7958.07
+    "z": 7958.07,
+    "spawn_type": "alpha"
   },
   "28": {
     "spawner_id": "volcanoiskand_2_FBOSS",
@@ -645,7 +631,8 @@
     "level": 50,
     "x": 90345.45,
     "y": 534007.8,
-    "z": 3685.11
+    "z": 3685.11,
+    "spawn_type": "alpha"
   },
   "29": {
     "spawner_id": "desertisland_2_FBOSS",
@@ -653,7 +640,8 @@
     "level": 40,
     "x": -450359.53,
     "y": 356886.22,
-    "z": 3561.44
+    "z": 3561.44,
+    "spawn_type": "alpha"
   },
   "3": {
     "spawner_id": "yamijima_forest_purple_A_BOSS",
@@ -661,7 +649,8 @@
     "level": 63,
     "x": -772213.2,
     "y": -273563.47,
-    "z": 5318.77
+    "z": 5318.77,
+    "spawn_type": "alpha"
   },
   "30": {
     "spawner_id": "desertisland_1_FBOSS",
@@ -669,7 +658,8 @@
     "level": 70,
     "x": -404768.2,
     "y": -444910.75,
-    "z": -695.88
+    "z": -695.88,
+    "spawn_type": "alpha"
   },
   "31": {
     "spawner_id": "remainsIsland_2_GrassGolem_Dark_FBOSS",
@@ -677,7 +667,8 @@
     "level": 70,
     "x": -558869.94,
     "y": -619480.75,
-    "z": -1819.68
+    "z": -1819.68,
+    "spawn_type": "alpha"
   },
   "32": {
     "spawner_id": "remainsIsland_1_GrassGolem_FBOSS",
@@ -685,7 +676,8 @@
     "level": 55,
     "x": -169138.25,
     "y": 575683.1,
-    "z": -1814.14
+    "z": -1814.14,
+    "spawn_type": "alpha"
   },
   "33": {
     "spawner_id": "snow_orange_I_BOSS",
@@ -693,7 +685,8 @@
     "level": 46,
     "x": 39324.88,
     "y": -18772.69,
-    "z": 6701.49
+    "z": 6701.49,
+    "spawn_type": "alpha"
   },
   "34": {
     "spawner_id": "81_6_Ocean_FBOSS_1",
@@ -701,7 +694,8 @@
     "level": 55,
     "x": 262730.0,
     "y": 75740.0,
-    "z": -3183.0
+    "z": -3183.0,
+    "spawn_type": "alpha"
   },
   "35": {
     "spawner_id": "81_3_snow_FBOSS_1",
@@ -709,7 +703,8 @@
     "level": 60,
     "x": 109790.0,
     "y": -5880.0,
-    "z": 22180.0
+    "z": 22180.0,
+    "spawn_type": "alpha"
   },
   "36": {
     "spawner_id": "sakura_purple_D_LilyQueen",
@@ -717,7 +712,8 @@
     "level": 58,
     "x": 14681.05,
     "y": -132067.56,
-    "z": 2994.49
+    "z": 2994.49,
+    "spawn_type": "alpha"
   },
   "37": {
     "spawner_id": "sakura_red_B_BOSS",
@@ -725,7 +721,8 @@
     "level": 55,
     "x": 21745.54,
     "y": -109001.64,
-    "z": -1343.32
+    "z": -1343.32,
+    "spawn_type": "alpha"
   },
   "38": {
     "spawner_id": "sakura_purple_D_LilyQueen_Dark",
@@ -733,7 +730,8 @@
     "level": 58,
     "x": 15843.52,
     "y": -130382.9,
-    "z": 3160.84
+    "z": 3160.84,
+    "spawn_type": "alpha"
   },
   "39": {
     "spawner_id": "skyisland_8_07_G_mountain_FBOSS_1",
@@ -741,7 +739,8 @@
     "level": 68,
     "x": -821552.1,
     "y": 46132.06,
-    "z": 51332.96
+    "z": 51332.96,
+    "spawn_type": "alpha"
   },
   "4": {
     "spawner_id": "yamijima_rock_purple_BOSS",
@@ -749,7 +748,8 @@
     "level": 60,
     "x": -550552.06,
     "y": -166886.31,
-    "z": -476.08
+    "z": -476.08,
+    "spawn_type": "alpha"
   },
   "40": {
     "spawner_id": "skyisland_8_15_1_lake_FBOSS_1",
@@ -757,7 +757,8 @@
     "level": 69,
     "x": -822007.0,
     "y": -66402.0,
-    "z": 40122.79
+    "z": 40122.79,
+    "spawn_type": "alpha"
   },
   "41": {
     "spawner_id": "skyisland_8_04_B_highland_FBOSS_1",
@@ -765,7 +766,8 @@
     "level": 70,
     "x": -735438.4,
     "y": -95932.93,
-    "z": 47396.84
+    "z": 47396.84,
+    "spawn_type": "alpha"
   },
   "42": {
     "spawner_id": "skyisland_8_07_G_mountain_FBOSS_2",
@@ -773,7 +775,8 @@
     "level": 67,
     "x": -822824.0,
     "y": 16747.0,
-    "z": 45679.0
+    "z": 45679.0,
+    "spawn_type": "alpha"
   },
   "43": {
     "spawner_id": "skyisland_8_10_D_swamp_FBOSS_1",
@@ -781,7 +784,8 @@
     "level": 66,
     "x": -746847.06,
     "y": -10678.01,
-    "z": 41413.11
+    "z": 41413.11,
+    "spawn_type": "alpha"
   },
   "44": {
     "spawner_id": "skyisland_8_06_C_lotsulake_FBOSS_1",
@@ -789,7 +793,8 @@
     "level": 69,
     "x": -802420.0,
     "y": -112610.0,
-    "z": 51608.09
+    "z": 51608.09,
+    "spawn_type": "alpha"
   },
   "45": {
     "spawner_id": "skyisland_8_11_E_meadow_FBOSS_1",
@@ -797,7 +802,8 @@
     "level": 65,
     "x": -772844.0,
     "y": -11173.0,
-    "z": 39727.0
+    "z": 39727.0,
+    "spawn_type": "alpha"
   },
   "46": {
     "spawner_id": "81_1_grass_FBOSS_14",
@@ -805,7 +811,8 @@
     "level": 55,
     "x": -167230.0,
     "y": 96430.0,
-    "z": -1737.13
+    "z": -1737.13,
+    "spawn_type": "alpha"
   },
   "47": {
     "spawner_id": "81_1_grass_FBOSS_1",
@@ -813,7 +820,8 @@
     "level": 38,
     "x": -343155.0,
     "y": 244585.0,
-    "z": -95.0
+    "z": -95.0,
+    "spawn_type": "alpha"
   },
   "48": {
     "spawner_id": "1_10_plain_F_Boss_FairyDragon",
@@ -821,7 +829,8 @@
     "level": 11,
     "x": -315583.53,
     "y": 237116.97,
-    "z": 2448.41
+    "z": 2448.41,
+    "spawn_type": "alpha"
   },
   "49": {
     "spawner_id": "81_1_grass_FBOSS_16",
@@ -829,7 +838,8 @@
     "level": 25,
     "x": -333940.0,
     "y": 39610.0,
-    "z": 1600.0
+    "z": 1600.0,
+    "spawn_type": "alpha"
   },
   "5": {
     "spawner_id": "yamijima_rock_pink_E_BOSS",
@@ -837,7 +847,8 @@
     "level": 62,
     "x": -721639.0,
     "y": -432015.0,
-    "z": 10210.87
+    "z": 10210.87,
+    "spawn_type": "alpha"
   },
   "50": {
     "spawner_id": "81_1_grass_FBOSS_23",
@@ -845,7 +856,8 @@
     "level": 31,
     "x": -372950.0,
     "y": 104400.0,
-    "z": -770.0
+    "z": -770.0,
+    "spawn_type": "alpha"
   },
   "51": {
     "spawner_id": "81_1_grass_FBOSS_4",
@@ -853,7 +865,8 @@
     "level": 37,
     "x": -113197.67,
     "y": 201490.47,
-    "z": 2063.39
+    "z": 2063.39,
+    "spawn_type": "alpha"
   },
   "52": {
     "spawner_id": "81_1_grass_FBOSS_31",
@@ -861,7 +874,8 @@
     "level": 40,
     "x": -246100.0,
     "y": 77200.0,
-    "z": -1460.0
+    "z": -1460.0,
+    "spawn_type": "alpha"
   },
   "53": {
     "spawner_id": "81_1_grass_FBOSS_18",
@@ -869,7 +883,8 @@
     "level": 17,
     "x": -236727.1,
     "y": 321310.12,
-    "z": -1909.38
+    "z": -1909.38,
+    "spawn_type": "alpha"
   },
   "54": {
     "spawner_id": "81_1_grass_FBOSS_2",
@@ -877,7 +892,8 @@
     "level": 23,
     "x": -335225.0,
     "y": 180735.0,
-    "z": 475.0
+    "z": 475.0,
+    "spawn_type": "alpha"
   },
   "55": {
     "spawner_id": "81_1_grass_FBOSS_24",
@@ -885,7 +901,8 @@
     "level": 23,
     "x": -431050.44,
     "y": 56140.59,
-    "z": -1864.76
+    "z": -1864.76,
+    "spawn_type": "alpha"
   },
   "56": {
     "spawner_id": "81_1_grass_FBOSS_13",
@@ -893,7 +910,8 @@
     "level": 55,
     "x": -162910.0,
     "y": 318720.0,
-    "z": -2382.35
+    "z": -2382.35,
+    "spawn_type": "alpha"
   },
   "57": {
     "spawner_id": "81_1_forest_FBOSS_7",
@@ -901,7 +919,8 @@
     "level": 30,
     "x": -254060.0,
     "y": 178050.0,
-    "z": 4000.0
+    "z": 4000.0,
+    "spawn_type": "alpha"
   },
   "58": {
     "spawner_id": "81_1_grass_FBOSS_27",
@@ -909,7 +928,8 @@
     "level": 14,
     "x": -122060.0,
     "y": 15810.0,
-    "z": -1460.0
+    "z": -1460.0,
+    "spawn_type": "alpha"
   },
   "59": {
     "spawner_id": "81_1_grass_FBOSS_22",
@@ -917,7 +937,8 @@
     "level": 18,
     "x": -155950.0,
     "y": 31260.0,
-    "z": -1960.0
+    "z": -1960.0,
+    "spawn_type": "alpha"
   },
   "6": {
     "spawner_id": "yamijima_forest_purple_A_BOSS_2",
@@ -925,7 +946,8 @@
     "level": 63,
     "x": -717565.94,
     "y": -251787.33,
-    "z": 175.2
+    "z": 175.2,
+    "spawn_type": "alpha"
   },
   "60": {
     "spawner_id": "81_1_grass_FBOSS_30",
@@ -933,7 +955,8 @@
     "level": 35,
     "x": -239436.58,
     "y": 345.75,
-    "z": 7166.69
+    "z": 7166.69,
+    "spawn_type": "alpha"
   },
   "61": {
     "spawner_id": "81_1_grass_FBOSS_25",
@@ -941,7 +964,8 @@
     "level": 11,
     "x": -412259.28,
     "y": 106237.67,
-    "z": -2035.61
+    "z": -2035.61,
+    "spawn_type": "alpha"
   },
   "62": {
     "spawner_id": "81_1_grass_FBOSS_21",
@@ -949,7 +973,8 @@
     "level": 11,
     "x": -396003.12,
     "y": 53772.16,
-    "z": -1575.8
+    "z": -1575.8,
+    "spawn_type": "alpha"
   },
   "63": {
     "spawner_id": "81_1_grass_FBOSS_26",
@@ -957,7 +982,8 @@
     "level": 31,
     "x": -206970.0,
     "y": 363810.0,
-    "z": 1140.0
+    "z": 1140.0,
+    "spawn_type": "alpha"
   },
   "64": {
     "spawner_id": "81_1_grass_FBOSS_29",
@@ -965,7 +991,8 @@
     "level": 38,
     "x": -147370.0,
     "y": 364010.0,
-    "z": -1940.0
+    "z": -1940.0,
+    "spawn_type": "alpha"
   },
   "65": {
     "spawner_id": "81_1_forest_FBOSS_6",
@@ -973,7 +1000,8 @@
     "level": 39,
     "x": -162481.34,
     "y": 233115.23,
-    "z": 5175.21
+    "z": 5175.21,
+    "spawn_type": "alpha"
   },
   "66": {
     "spawner_id": "81_4_Sakurajima_FBOSS_2",
@@ -981,7 +1009,8 @@
     "level": 55,
     "x": -238810.95,
     "y": -110487.63,
-    "z": -205.31
+    "z": -205.31,
+    "spawn_type": "alpha"
   },
   "67": {
     "spawner_id": "81_3_volcano_FBOSS_2",
@@ -989,7 +1018,8 @@
     "level": 50,
     "x": -322819.97,
     "y": -93429.84,
-    "z": 18739.18
+    "z": 18739.18,
+    "spawn_type": "alpha"
   },
   "68": {
     "spawner_id": "81_3_volcano_FBOSS_3",
@@ -997,7 +1027,8 @@
     "level": 52,
     "x": -276069.47,
     "y": -180092.97,
-    "z": 8181.59
+    "z": 8181.59,
+    "spawn_type": "alpha"
   },
   "69": {
     "spawner_id": "sanctuary_2_volcano_FBOSS",
@@ -1005,7 +1036,8 @@
     "level": 55,
     "x": -174578.95,
     "y": -158213.75,
-    "z": -1710.3
+    "z": -1710.3,
+    "spawn_type": "alpha"
   },
   "7": {
     "spawner_id": "yamijima_beach_purple_BOSS",
@@ -1013,7 +1045,8 @@
     "level": 60,
     "x": -516157.0,
     "y": -393151.12,
-    "z": -721.87
+    "z": -721.87,
+    "spawn_type": "alpha"
   },
   "70": {
     "spawner_id": "sanctuary_1_forest_FBOSS",
@@ -1021,7 +1054,8 @@
     "level": 30,
     "x": -443860.8,
     "y": 183689.42,
-    "z": -1496.65
+    "z": -1496.65,
+    "spawn_type": "alpha"
   },
   "71": {
     "spawner_id": "sanctuary_3_dessert_FBOSS",
@@ -1029,7 +1063,8 @@
     "level": 65,
     "x": 173548.3,
     "y": 474295.44,
-    "z": 192.48
+    "z": 192.48,
+    "spawn_type": "alpha"
   },
   "72": {
     "spawner_id": "BOSS_Female_Soldier02",
@@ -1037,7 +1072,8 @@
     "level": 56,
     "x": -712045.56,
     "y": -229952.92,
-    "z": 8893.03
+    "z": 8893.03,
+    "spawn_type": "boss"
   },
   "73": {
     "spawner_id": "BOSS_Male_People03",
@@ -1045,7 +1081,8 @@
     "level": 10,
     "x": -335675.2,
     "y": 148683.03,
-    "z": 6384.37
+    "z": 6384.37,
+    "spawn_type": "boss"
   },
   "74": {
     "spawner_id": "BOSS_Viking",
@@ -1053,7 +1090,8 @@
     "level": 57,
     "x": -584187.7,
     "y": -181661.73,
-    "z": 978.43
+    "z": 978.43,
+    "spawn_type": "boss"
   },
   "75": {
     "spawner_id": "BOSS_Police_Rifle",
@@ -1061,7 +1099,8 @@
     "level": 40,
     "x": 45909.48,
     "y": 304971.44,
-    "z": -1015.37
+    "z": -1015.37,
+    "spawn_type": "boss"
   },
   "76": {
     "spawner_id": "BOSS_Believer_CrossBow",
@@ -1069,7 +1108,8 @@
     "level": 23,
     "x": -164164.23,
     "y": 152549.42,
-    "z": -1410.97
+    "z": -1410.97,
+    "spawn_type": "boss"
   },
   "77": {
     "spawner_id": "BOSS_Hunter_Fat_GatlingGun",
@@ -1077,7 +1117,8 @@
     "level": 20,
     "x": -242340.0,
     "y": 36220.0,
-    "z": 13020.0
+    "z": 13020.0,
+    "spawn_type": "boss"
   },
   "78": {
     "spawner_id": "BOSS_Ninja",
@@ -1085,7 +1126,8 @@
     "level": 28,
     "x": -124623.98,
     "y": 232502.7,
-    "z": 7801.97
+    "z": 7801.97,
+    "spawn_type": "boss"
   },
   "79": {
     "spawner_id": "BOSS_VikingElite",
@@ -1093,7 +1135,8 @@
     "level": 58,
     "x": -805295.06,
     "y": -478475.2,
-    "z": -815.01
+    "z": -815.01,
+    "spawn_type": "boss"
   },
   "8": {
     "spawner_id": "yamijima_plateau_pink_F_BOSS",
@@ -1101,7 +1144,8 @@
     "level": 65,
     "x": -723782.7,
     "y": -230996.66,
-    "z": 7282.11
+    "z": 7282.11,
+    "spawn_type": "alpha"
   },
   "80": {
     "spawner_id": "BOSS_DarkTrader",
@@ -1109,7 +1153,8 @@
     "level": 59,
     "x": -666737.7,
     "y": -409956.38,
-    "z": 25605.27
+    "z": 25605.27,
+    "spawn_type": "boss"
   },
   "81": {
     "spawner_id": "BOSS_Male_Trader03",
@@ -1117,7 +1162,8 @@
     "level": 57,
     "x": -538826.5,
     "y": -337667.7,
-    "z": -426.03
+    "z": -426.03,
+    "spawn_type": "boss"
   },
   "82": {
     "spawner_id": "BOSS_Believer_Fat_GiantClub",
@@ -1125,7 +1171,8 @@
     "level": 30,
     "x": -79599.09,
     "y": 192658.28,
-    "z": 6188.34
+    "z": 6188.34,
+    "spawn_type": "boss"
   },
   "83": {
     "spawner_id": "BOSS_Male_Soldier03",
@@ -1133,7 +1180,8 @@
     "level": 49,
     "x": 21850.12,
     "y": -8346.56,
-    "z": 6712.46
+    "z": 6712.46,
+    "spawn_type": "boss"
   },
   "84": {
     "spawner_id": "BOSS_Male_Soldier04",
@@ -1141,7 +1189,8 @@
     "level": 21,
     "x": -217110.73,
     "y": 127090.61,
-    "z": 6141.97
+    "z": 6141.97,
+    "spawn_type": "boss"
   },
   "85": {
     "spawner_id": "BOSS_Scientist_LaserRifle",
@@ -1149,7 +1198,8 @@
     "level": 45,
     "x": 10215.88,
     "y": 153782.08,
-    "z": 3150.0
+    "z": 3150.0,
+    "spawn_type": "boss"
   },
   "86": {
     "spawner_id": "BOSS_Police_Old",
@@ -1157,7 +1207,8 @@
     "level": 57,
     "x": -686537.5,
     "y": -380252.66,
-    "z": 32747.38
+    "z": 32747.38,
+    "spawn_type": "boss"
   },
   "87": {
     "spawner_id": "BOSS_Female_People03",
@@ -1165,7 +1216,8 @@
     "level": 15,
     "x": -300962.38,
     "y": 157210.73,
-    "z": -164.24
+    "z": -164.24,
+    "spawn_type": "boss"
   },
   "88": {
     "spawner_id": "BOSS_Female_Soldier04",
@@ -1173,7 +1225,8 @@
     "level": 52,
     "x": -75788.09,
     "y": -82304.96,
-    "z": -960.0
+    "z": -960.0,
+    "spawn_type": "boss"
   },
   "89": {
     "spawner_id": "BOSS_Male_Trader01",
@@ -1181,7 +1234,8 @@
     "level": 42,
     "x": -57544.38,
     "y": 116422.49,
-    "z": 9060.12
+    "z": 9060.12,
+    "spawn_type": "boss"
   },
   "9": {
     "spawner_id": "yamijima_IceLand_pink_F_BOSS",
@@ -1189,7 +1243,8 @@
     "level": 66,
     "x": -889441.3,
     "y": -361294.3,
-    "z": -1930.76
+    "z": -1930.76,
+    "spawn_type": "alpha"
   },
   "90": {
     "spawner_id": "BOSS_Male_DesertPeople",
@@ -1197,7 +1252,8 @@
     "level": 36,
     "x": -62624.9,
     "y": 402438.94,
-    "z": 12180.67
+    "z": 12180.67,
+    "spawn_type": "boss"
   },
   "91": {
     "spawner_id": "BOSS_Female_DesertPeople",
@@ -1205,7 +1261,8 @@
     "level": 37,
     "x": 147119.08,
     "y": 347473.56,
-    "z": -856.4
+    "z": -856.4,
+    "spawn_type": "boss"
   },
   "92": {
     "spawner_id": "BOSS_FireCult_FlameThrower",
@@ -1213,7 +1270,8 @@
     "level": 41,
     "x": -331690.16,
     "y": -40407.43,
-    "z": 15982.14
+    "z": 15982.14,
+    "spawn_type": "boss"
   },
   "93": {
     "spawner_id": "BOSS_Male_NinjaElite",
@@ -1221,7 +1279,8 @@
     "level": 53,
     "x": -18160.0,
     "y": -151400.0,
-    "z": 2360.0
+    "z": 2360.0,
+    "spawn_type": "boss"
   },
   "94": {
     "spawner_id": "BOSS_Hunter_Rifle",
@@ -1229,7 +1288,8 @@
     "level": 12,
     "x": -359201.56,
     "y": 181724.28,
-    "z": 5179.1
+    "z": 5179.1,
+    "spawn_type": "boss"
   },
   "95": {
     "spawner_id": "BOSS_Male_People",
@@ -1237,7 +1297,8 @@
     "level": 26,
     "x": -126584.23,
     "y": 318232.75,
-    "z": -1519.07
+    "z": -1519.07,
+    "spawn_type": "boss"
   },
   "96": {
     "spawner_id": "BOSS_Male_Soldier02",
@@ -1245,7 +1306,8 @@
     "level": 23,
     "x": -224118.3,
     "y": 277672.06,
-    "z": -864.36
+    "z": -864.36,
+    "spawn_type": "boss"
   },
   "97": {
     "spawner_id": "BOSS_Male_People02",
@@ -1253,7 +1315,8 @@
     "level": 43,
     "x": 97107.99,
     "y": 68422.43,
-    "z": 42381.05
+    "z": 42381.05,
+    "spawn_type": "boss"
   },
   "98": {
     "spawner_id": "BOSS_Male_Soldier",
@@ -1261,7 +1324,8 @@
     "level": 15,
     "x": -409430.0,
     "y": 24820.0,
-    "z": 1880.0
+    "z": 1880.0,
+    "spawn_type": "boss"
   },
   "99": {
     "spawner_id": "BOSS_Female_People",
@@ -1269,6 +1333,7 @@
     "level": 38,
     "x": -470651.97,
     "y": -80708.37,
-    "z": -2009.12
+    "z": -2009.12,
+    "spawn_type": "boss"
   }
 }

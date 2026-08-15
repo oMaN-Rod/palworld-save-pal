@@ -257,12 +257,21 @@ export type Base = {
 	area_range: number;
 };
 
+/** A dungeon/alpha/predator marker ready to feed `buildMapObjectFC`. */
 export type MapObject = {
 	x: number;
 	y: number;
-	type: string;
-	localized_name: string;
-	pal: string;
+	type?: string;
+	localized_name?: string;
+	pal?: string;
+};
+
+/** An entry of dungeons.json. */
+export type Dungeon = {
+	class: string;
+	x: number;
+	y: number;
+	z: number;
 };
 
 export type FastTravelPoint = {
@@ -274,16 +283,19 @@ export type FastTravelPoint = {
 	localized_name?: string;
 };
 
-/** An entry of relics.json; `relic_type` is a bare EPalRelicType key. */
+/** An entry of relics.json; `relic_type` is a bare EPalRelicType key. `rot` is
+ *  an FRotator (pitch, yaw, roll) in degrees. */
 export type Relic = {
 	class: string;
 	x: number;
 	y: number;
 	z: number;
+	rot: [number, number, number];
 	relic_type: string;
 };
 
 export type Boss = {
+	spawn_type: 'alpha' | 'boss';
 	spawner_id: string;
 	character_id: string;
 	level: number;
@@ -291,6 +303,17 @@ export type Boss = {
 	y: number;
 	z: number;
 };
+
+/** bosses.json's predator entries: no spawner_id/character_id/level, just a pal. */
+export type PredatorSpawn = {
+	spawn_type: 'predator';
+	x: number;
+	y: number;
+	z: number;
+	pal: string;
+};
+
+export type Spawn = Boss | PredatorSpawn;
 
 export type MapUnlockPoint = {
 	guid: string;

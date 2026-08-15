@@ -1,10 +1,10 @@
 import { sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType, type Boss } from '$types';
+import { MessageType, type Spawn } from '$types';
 
 export class Bosses {
 	private loading = false;
 
-	points: Record<string, Boss> = $state({});
+	points: Record<string, Spawn> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
 		if (Object.keys(this.points).length === 0 && !this.loading) {
@@ -24,7 +24,7 @@ export class Bosses {
 		}
 	}
 
-	async getBosses(): Promise<Record<string, Boss>> {
+	async getBosses(): Promise<Record<string, Spawn>> {
 		await this.ensureLoaded();
 		return this.points;
 	}
