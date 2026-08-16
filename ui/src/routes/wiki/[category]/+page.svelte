@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle, ElementExplorer, PassiveSkillExplorer, WorkSuitabilityExplorer } from '$components/docs';
+	import { Seo, breadcrumbSchema, itemListSchema } from '$lib/components/seo';
 	import { descriptorFor, isDisabledRecord } from '$lib/utils/wikiDescriptors';
-	import { categoryLabel, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
+	import { categoryLabel, categoryLabelPlural, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
 	import { wikiPrefs } from '$lib/utils/wikiPrefs.svelte';
 
-	let { data }: { data: { category: WikiCategory } } = $props();
+	let {
+		data
+	}: { data: { category: WikiCategory; names: string[]; slugs: string[] } } = $props();
 
 	let search = $state('');
 
@@ -25,9 +28,41 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{categoryLabel(data.category)} | Palworld Save Pal Wiki</title>
-</svelte:head>
+<Seo
+	pathname={`/wiki/${data.category}`}
+	title={`Palworld ${categoryLabelPlural(data.category)} - Complete List`}
+	description={`Every ${categoryLabel(data.category).toLowerCase()} entry in Palworld, with stats and cross-references from the game data.`}
+	structuredData={[
+		breadcrumbSchema([
+			{ name: 'Wiki', path: '/wiki' },
+			{ name: categoryLabel(data.category), path: `/wiki/${data.category}` }
+		]),
+		itemListSchema(
+			categoryLabel(data.category),
+			data.names.map((name, index) => ({
+				name,
+				path: `/wiki/${data.category}/${data.slugs[index]}`
+			}))
+		)
+	]}
+/>
+
+<!-- Prerender-time listing: the runtime store is empty, so the interactive grid
+     below renders nothing. This gives crawlers the full set of entity links. -->
+{#if allEntries.length === 0}
+	<div class="p-5">
+		<h1 class="mb-4 text-2xl font-bold">{categoryLabelPlural(data.category)}</h1>
+		<ul class="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
+			{#each data.names as name, index (data.slugs[index])}
+				<li>
+					<a class="text-surface-300 hover:underline" href={`/wiki/${data.category}/${data.slugs[index]}`}>
+						{name}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
 <div>
 	{#if data.category === 'elements'}

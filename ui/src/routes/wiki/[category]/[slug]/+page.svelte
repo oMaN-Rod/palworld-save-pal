@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { WikiEntity } from '$components/docs';
+	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 	import { Loading } from '$components/ui';
 	import { DESCRIPTORS } from '$lib/utils/wikiDescriptors';
 	import { categoryLabel, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
 	import { buildSlugIndex, keyFromSlug, stripKeyPrefix } from '$lib/utils/wikiSlug';
 	import * as m from '$i18n/messages';
 
-	let { data }: { data: { category: string; slug: string } } = $props();
+	let {
+		data
+	}: {
+		data: { category: string; slug: string; name: string; description: string | null };
+	} = $props();
 
 	const category = $derived(data.category as WikiCategory);
 	const descriptor = $derived(DESCRIPTORS[category]);
@@ -44,9 +49,28 @@
 	);
 </script>
 
-<svelte:head>
-	<title>{title}</title>
-</svelte:head>
+<Seo
+	pathname={`/wiki/${data.category}/${data.slug}`}
+	title={`${data.name} - Palworld ${categoryLabel(category)}`}
+	description={data.description ??
+		`${data.name} details, stats and related entries from the Palworld game data.`}
+	structuredData={breadcrumbSchema([
+		{ name: 'Wiki', path: '/wiki' },
+		{ name: categoryLabel(category), path: `/wiki/${data.category}` },
+		{ name: data.name, path: `/wiki/${data.category}/${data.slug}` }
+	])}
+/>
+
+<!-- Rendered during prerender, when the runtime store is still empty. This is
+     the content crawlers receive; hydration replaces it with the full view. -->
+{#if !hasData}
+	<div class="p-5">
+		<h1 class="text-2xl font-bold">{data.name}</h1>
+		{#if data.description}
+			<p class="text-surface-300 mt-2 max-w-2xl">{data.description}</p>
+		{/if}
+	</div>
+{/if}
 
 {#snippet media()}
 	<div class="flex flex-col items-center gap-4">
