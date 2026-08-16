@@ -4,7 +4,18 @@ vi.mock('$lib/data', () => ({
 	elementsData: { elements: { Fire: { icon: 'fire' }, Water: { icon: 'water' } } }
 }));
 
-import { palMatchesFilter } from './palFilters';
+import { classifyPalCategory, palMatchesFilter } from './palFilters';
+import type { PalData } from '$types';
+
+const catalogPal = (over: Partial<PalData> = {}): PalData =>
+	({
+		is_pal: true,
+		is_boss: false,
+		is_tower_boss: false,
+		is_raid_boss: false,
+		predator: false,
+		...over
+	}) as PalData;
 
 const pal = (over: Record<string, unknown> = {}) =>
 	({
@@ -54,5 +65,58 @@ describe('palMatchesFilter', () => {
 		expect(palMatchesFilter(pal(), palData(), 'awakened')).toBe(false);
 		expect(palMatchesFilter(pal({ is_imported: true }), palData(), 'imported')).toBe(true);
 		expect(palMatchesFilter(pal(), palData(), 'imported')).toBe(false);
+	});
+});
+
+describe('classifyPalCategory', () => {
+	it('classifies a plain pal as normal', () => {
+		expect(classifyPalCategory('SheepBall', catalogPal())).toBe('normal');
+	});
+
+	it('classifies quest-prefixed keys as quest', () => {
+		expect(classifyPalCategory('Quest_Farmer03_SheepBall', catalogPal())).toBe('quest');
+		expect(classifyPalCategory('AmaterasuWolf_Dark_Quest_Enemy', catalogPal())).toBe('quest');
+	});
+
+	it('classifies bosses via flag OR prefix', () => {
+		expect(classifyPalCategory('GYM_BlackGriffon', catalogPal({ is_tower_boss: true }))).toBe(
+			'boss'
+		);
+		expect(classifyPalCategory('BOSS_DarkTrader', catalogPal({ is_boss: true }))).toBe('boss');
+	});
+
+	it('classifies special entries via flag OR prefix', () => {
+		expect(classifyPalCategory('RAID_DarkMechaDragon', catalogPal({ is_raid_boss: true }))).toBe(
+			'special'
+		);
+		expect(classifyPalCategory('PREDATOR_AmaterasuWolf', catalogPal({ predator: true }))).toBe(
+			'special'
+		);
+		// SUMMON_DarkAlien has predator=true flag but no PREDATOR_ prefix — still special.
+		expect(classifyPalCategory('SUMMON_DarkAlien', catalogPal({ predator: true }))).toBe(
+			'special'
+		);
+		expect(classifyPalCategory('Baphomet_Dark_Oilrig', catalogPal())).toBe('special');
+	});
+
+	it('classifies human NPCs (non-pal) as other', () => {
+		expect(classifyPalCategory('Believer_CrossBow_Tower', catalogPal({ is_pal: false }))).toBe(
+			'other'
+		);
+	});
+
+	it('prioritizes quest over boss and special', () => {
+		expect(
+			classifyPalCategory(
+				'Quest_Hunter_GYM_Raider',
+				catalogPal({ is_boss: true, is_raid_boss: true })
+			)
+		).toBe('quest');
+	});
+
+	it('prioritizes boss over special', () => {
+		expect(
+			classifyPalCategory('GYM_BlackGriffon', catalogPal({ is_boss: true, predator: true }))
+		).toBe('boss');
 	});
 });

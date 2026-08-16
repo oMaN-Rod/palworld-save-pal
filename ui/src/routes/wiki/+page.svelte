@@ -10,7 +10,7 @@
 		elementsData,
 		workSuitabilityData
 	} from '$lib/data';
-	import { WikiSearch } from '$components/docs';
+	import { WikiCard, WikiSearch } from '$components/docs';
 	import { searchWiki, type WikiSearchEntry } from '$lib/utils/wikiSearch';
 	import { descriptorFor } from '$lib/utils/wikiDescriptors';
 	import {
@@ -134,26 +134,13 @@
 									| undefined}
 								{@const icon = record ? (descriptor.icon?.(entry.key, record) ?? null) : null}
 								{@const meta = record ? (descriptor.cardMeta?.(entry.key, record) ?? null) : null}
-								<a
-									href={link.href}
-									class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-800 flex items-center gap-3 rounded-md border px-3 py-2 text-sm transition-colors"
-								>
-									{#if icon}
-										<img
-											src={icon.src}
-											alt=""
-											class="h-9 w-9 shrink-0 object-contain"
-											style={icon.filter ? `filter: ${icon.filter};` : undefined}
-										/>
-									{/if}
-									<span class="flex min-w-0 flex-col leading-tight">
-										<span class="truncate">{entry.name}</span>
-										<span class="text-surface-500 truncate font-mono text-xs">{entry.key}</span>
-									</span>
-									{#if meta}
-										<span class="text-surface-400 ml-auto shrink-0 text-xs">{meta}</span>
-									{/if}
-								</a>
+								<WikiCard
+										href={link.href}
+										name={entry.name}
+										{icon}
+										{meta}
+										subtext={entry.key}
+									/>
 							{/each}
 						</div>
 					</div>

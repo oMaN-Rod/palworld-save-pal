@@ -543,6 +543,7 @@
   "landing_map_point_terrain": "Real 3D terrain, not a flat picture.",
   "landing_meta_description": "Open, edit and save Palworld saves entirely in your browser. Pals, bases, blueprints and presets. Free and open source, with a full 3D world map.",
   "landing_meta_title": "Palworld Save Pal: edit Palworld saves in your browser",
+  "landing_mobile_notice": "Save editing works only in a desktop browser. Maps, Wiki and Breeding stay available on mobile.",
   "landing_og_description": "Edit Palworld saves in your browser, with a full 3D world map. Pals, bases, blueprints and presets.",
   "landing_og_title": "Palworld Save Pal",
   "landing_step_drop_body": "A .zip or your world folder. Both work.",

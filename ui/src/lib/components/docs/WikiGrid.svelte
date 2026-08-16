@@ -24,7 +24,7 @@
 		<p>{empty}</p>
 	</div>
 {:else}
-	<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+	<div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
 		{#each items as item, i (i)}
 			{@render children(item, i)}
 		{/each}

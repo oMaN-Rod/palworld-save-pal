@@ -1,25 +1,37 @@
 <script lang="ts">
 	import { palsData, elementsData } from '$lib/data';
-	import { WikiGrid, WikiSearch } from '$components/docs';
-	import { Tooltip } from '$components/ui';
+	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle } from '$components/docs';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { toSlug } from '$lib/utils/wikiSlug';
 	import { byPaldeckIndex } from '$lib/utils/wikiDescriptors';
+	import { classifyPalCategory, type PalCategory } from '$lib/utils/palFilters';
+	import { wikiPrefs } from '$lib/utils/wikiPrefs.svelte';
 	import { cn } from '$theme';
-	import { staticIcons } from '$types/icons';
 	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
 	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
 	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
 	import ArrowDownNarrowWide from '@lucide/svelte/icons/arrow-down-narrow-wide';
 	import GalleryVerticalEnd from '@lucide/svelte/icons/gallery-vertical-end';
-	import User from '@lucide/svelte/icons/user';
+	import Check from '@lucide/svelte/icons/check';
+	import List from '@lucide/svelte/icons/list';
+	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
 
 	type SortBy = 'name' | 'paldeck-index';
 	type SortOrder = 'asc' | 'desc';
 
+	const CATEGORIES: { id: PalCategory; label: string }[] = [
+		{ id: 'normal', label: 'Normal' },
+		{ id: 'quest', label: 'Quest' },
+		{ id: 'boss', label: 'Boss' },
+		{ id: 'special', label: 'Special' },
+		{ id: 'other', label: 'Other' }
+	];
+
 	let search = $state('');
-	let selectedFilter = $state('All');
+	// Multi-select category set; defaults to normal-only so the common case is uncluttered.
+	let selectedCategories = $state<Set<PalCategory>>(new Set<PalCategory>(['normal']));
+	let selectedElement = $state<string | null>(null);
 	let sortBy: SortBy = $state('paldeck-index');
 	let sortOrder: SortOrder = $state('asc');
 
@@ -37,8 +49,6 @@
 		return icons;
 	});
 
-	const filterClass = (value: string) =>
-		cn('btn btn-sm', selectedFilter === value ? 'bg-secondary-500/25' : '');
 	const sortButtonClass = (value: SortBy) =>
 		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
 
@@ -65,6 +75,32 @@
 		}
 	}
 
+	function toggleCategory(id: PalCategory) {
+		const next = new Set(selectedCategories);
+		if (next.has(id)) {
+			next.delete(id);
+		} else {
+			next.add(id);
+		}
+		// Never let the set go fully empty — re-add the toggled one.
+		selectedCategories = next.size > 0 ? next : new Set<PalCategory>([id]);
+	}
+
+	function toggleElement(element: string) {
+		selectedElement = selectedElement === element ? null : element;
+	}
+
+	const categoryChipClass = (id: PalCategory) =>
+		cn(
+			'btn btn-sm gap-1',
+			selectedCategories.has(id) ? 'bg-secondary-500/25 text-surface-50' : 'text-surface-400'
+		);
+	const elementChipClass = (element: string) =>
+		cn(
+			'btn btn-sm',
+			selectedElement === element ? 'bg-secondary-500/25' : ''
+		);
+
 	function getElementIcon(element: string): string {
 		const el = elementsData.elements[element];
 		if (!el) return '';
@@ -74,19 +110,12 @@
 	const allPals = $derived(Object.entries(palsData.pals).filter(([, pal]) => !pal.disabled));
 
 	const filteredPals = $derived.by(() => {
-		let result = allPals;
-
-		if (selectedFilter !== 'All') {
-			if (selectedFilter === 'alpha') {
-				result = result.filter(([, pal]) => pal.is_boss || pal.is_tower_boss || pal.is_raid_boss);
-			} else if (selectedFilter === 'human') {
-				result = result.filter(([, pal]) => !pal.is_pal);
-			} else {
-				result = result.filter(([, pal]) =>
-					pal.element_types.some((e) => e.toLowerCase() === selectedFilter.toLowerCase())
-				);
-			}
-		}
+		let result = allPals.filter(([key, pal]) => {
+			const category = classifyPalCategory(key, pal);
+			if (!selectedCategories.has(category)) return false;
+			if (selectedElement && !pal.element_types.some((e) => e === selectedElement)) return false;
+			return true;
+		});
 
 		if (search) {
 			const q = search.toLowerCase();
@@ -120,87 +149,93 @@
 <div>
 	<WikiGrid items={filteredPals}>
 		{#snippet toolbar()}
-			<div class="flex flex-wrap items-center gap-3">
-				<div class="min-w-48 flex-1">
-					<WikiSearch bind:value={search} />
+			<div class="flex flex-col gap-3">
+				<div class="flex flex-wrap items-center gap-2">
+					<div class="min-w-48 flex-1">
+						<WikiSearch bind:value={search} />
+					</div>
+					<div class="flex items-center gap-1">
+						<button
+							type="button"
+							class={sortButtonClass('name')}
+							onclick={() => toggleSort('name')}
+							title="Name"
+						>
+							<NameSortIcon class="h-4 w-4" />
+						</button>
+						<button
+							type="button"
+							class={sortButtonClass('paldeck-index')}
+							onclick={() => toggleSort('paldeck-index')}
+							title="Paldeck #"
+						>
+							<PaldeckSortIcon class="h-4 w-4" />
+						</button>
+					</div>
+					<WikiViewToggle />
+					<span class="text-surface-400 text-xs">{filteredPals.length}</span>
 				</div>
-				<div class="flex items-center gap-1">
-					<button
-						type="button"
-						class={sortButtonClass('name')}
-						onclick={() => toggleSort('name')}
-						title="Name"
-					>
-						<NameSortIcon class="h-4 w-4" />
-					</button>
-					<button
-						type="button"
-						class={sortButtonClass('paldeck-index')}
-						onclick={() => toggleSort('paldeck-index')}
-						title="Paldeck #"
-					>
-						<PaldeckSortIcon class="h-4 w-4" />
-					</button>
-				</div>
+
 				<div class="flex flex-wrap items-center gap-1">
-					<button type="button" class={filterClass('All')} onclick={() => (selectedFilter = 'All')}>
+					{#each CATEGORIES as { id, label } (id)}
+						<button
+							type="button"
+							class={categoryChipClass(id)}
+							onclick={() => toggleCategory(id)}
+						>
+							{#if selectedCategories.has(id)}
+								<Check class="h-3.5 w-3.5" />
+							{/if}
+							{label}
+						</button>
+					{/each}
+				</div>
+
+				<div class="flex flex-wrap items-center gap-1">
+					<button
+						type="button"
+						class={cn('btn btn-sm', selectedElement === null ? 'bg-secondary-500/25' : '')}
+						onclick={() => (selectedElement = null)}
+						title="All elements"
+					>
 						<GalleryVerticalEnd class="h-4 w-4" />
 					</button>
 					{#each elementTypes as element (element)}
 						<button
 							type="button"
-							class={filterClass(element)}
-							onclick={() => (selectedFilter = element)}
+							class={elementChipClass(element)}
+							onclick={() => toggleElement(element)}
 						>
 							<img src={elementIcons[element]} alt={element} class="h-5 w-5" />
 						</button>
 					{/each}
-					<Tooltip label="Alpha / Boss">
-						<button
-							type="button"
-							class={filterClass('alpha')}
-							onclick={() => (selectedFilter = 'alpha')}
-						>
-							<img src={staticIcons.alphaIcon} alt="Alpha" class="h-5 w-5" />
-						</button>
-					</Tooltip>
-					<Tooltip label="Human">
-						<button
-							type="button"
-							class={filterClass('human')}
-							onclick={() => (selectedFilter = 'human')}
-						>
-							<User class="h-4 w-4" />
-						</button>
-					</Tooltip>
 				</div>
-				<span class="text-surface-400 text-xs">{filteredPals.length}</span>
 			</div>
 		{/snippet}
 
 		{#snippet children([key, pal])}
-			<a
+			<WikiCard
 				href="/wiki/pals/{toSlug(key)}"
-				class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 flex flex-col items-center rounded-lg border p-3 text-center transition-colors"
+				name={pal.localized_name}
+				variant={wikiPrefs.viewMode}
+				gridIconClass="h-14 w-14"
+				icon={(() => {
+					const src = assetLoader.loadPalImage(key, pal.is_pal);
+					return src ? { src } : null;
+				})()}
 			>
-				<img
-					src={assetLoader.loadPalImage(key, pal.is_pal)}
-					alt={pal.localized_name}
-					class="h-16 w-16 object-contain"
-				/>
-				<span class="mt-2 line-clamp-1 text-sm font-medium">{pal.localized_name}</span>
-				{#if pal.pal_deck_index > 0}
-					<span class="text-surface-400 text-xs">#{pal.pal_deck_index}</span>
-				{/if}
-				<div class="mt-1 flex items-center gap-1">
+				{#snippet badges()}
+					{#if pal.pal_deck_index > 0}
+						<span class="text-surface-400 text-xs">#{pal.pal_deck_index}</span>
+					{/if}
 					{#each pal.element_types as element (element)}
 						{@const icon = getElementIcon(element)}
 						{#if icon}
 							<img src={icon} alt={element} class="h-4 w-4 shrink-0" />
 						{/if}
 					{/each}
-				</div>
-			</a>
+				{/snippet}
+			</WikiCard>
 		{/snippet}
 	</WikiGrid>
 </div>
