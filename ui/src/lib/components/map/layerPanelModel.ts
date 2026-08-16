@@ -43,6 +43,7 @@ const LABELS: Record<MapLayerId, () => string> = {
 	alpha_pals: () => c.alphaPals,
 	boss_pals: m.bosses,
 	predator_pals: () => c.predatorPals,
+	bounty: m.bounty,
 	camps: m.camps
 };
 
@@ -75,6 +76,7 @@ const ICONS: Record<MapLayerId, () => string> = {
 	alpha_pals: () => assetLoader.loadMenuImage('anubis'),
 	boss_pals: () => mapImg.boss,
 	predator_pals: () => assetLoader.loadMenuImage('nightbluehorse'),
+	bounty: () => mapImg.human,
 	camps: () => mapImg.camp
 };
 

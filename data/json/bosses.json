@@ -33,7 +33,7 @@
     "x": -177380.0,
     "y": 9850.0,
     "z": 6230.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "101": {
     "spawner_id": "BOSS_Female_Soldier03",
@@ -42,7 +42,7 @@
     "x": -231660.0,
     "y": -113810.0,
     "z": -1150.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "102": {
     "spawner_id": "BOSS_Female_People02",
@@ -51,7 +51,7 @@
     "x": -304539.22,
     "y": 35742.27,
     "z": 2271.28,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "103": {
     "spawner_id": "BOSS_Male_Trader02",
@@ -60,7 +60,7 @@
     "x": -907334.1,
     "y": -389724.44,
     "z": -1882.67,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "104": {
     "spawner_id": "BOSS_Male_People2",
@@ -69,7 +69,7 @@
     "x": -124753.86,
     "y": 318055.84,
     "z": -1920.75,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "105": {
     "spawner_id": "5_2_island_iceblock_FBOSS_1",
@@ -1073,7 +1073,7 @@
     "x": -712045.56,
     "y": -229952.92,
     "z": 8893.03,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "73": {
     "spawner_id": "BOSS_Male_People03",
@@ -1082,7 +1082,7 @@
     "x": -335675.2,
     "y": 148683.03,
     "z": 6384.37,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "74": {
     "spawner_id": "BOSS_Viking",
@@ -1091,7 +1091,7 @@
     "x": -584187.7,
     "y": -181661.73,
     "z": 978.43,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "75": {
     "spawner_id": "BOSS_Police_Rifle",
@@ -1100,7 +1100,7 @@
     "x": 45909.48,
     "y": 304971.44,
     "z": -1015.37,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "76": {
     "spawner_id": "BOSS_Believer_CrossBow",
@@ -1109,7 +1109,7 @@
     "x": -164164.23,
     "y": 152549.42,
     "z": -1410.97,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "77": {
     "spawner_id": "BOSS_Hunter_Fat_GatlingGun",
@@ -1118,7 +1118,7 @@
     "x": -242340.0,
     "y": 36220.0,
     "z": 13020.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "78": {
     "spawner_id": "BOSS_Ninja",
@@ -1127,7 +1127,7 @@
     "x": -124623.98,
     "y": 232502.7,
     "z": 7801.97,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "79": {
     "spawner_id": "BOSS_VikingElite",
@@ -1136,7 +1136,7 @@
     "x": -805295.06,
     "y": -478475.2,
     "z": -815.01,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "8": {
     "spawner_id": "yamijima_plateau_pink_F_BOSS",
@@ -1154,7 +1154,7 @@
     "x": -666737.7,
     "y": -409956.38,
     "z": 25605.27,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "81": {
     "spawner_id": "BOSS_Male_Trader03",
@@ -1163,7 +1163,7 @@
     "x": -538826.5,
     "y": -337667.7,
     "z": -426.03,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "82": {
     "spawner_id": "BOSS_Believer_Fat_GiantClub",
@@ -1172,7 +1172,7 @@
     "x": -79599.09,
     "y": 192658.28,
     "z": 6188.34,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "83": {
     "spawner_id": "BOSS_Male_Soldier03",
@@ -1181,7 +1181,7 @@
     "x": 21850.12,
     "y": -8346.56,
     "z": 6712.46,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "84": {
     "spawner_id": "BOSS_Male_Soldier04",
@@ -1190,7 +1190,7 @@
     "x": -217110.73,
     "y": 127090.61,
     "z": 6141.97,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "85": {
     "spawner_id": "BOSS_Scientist_LaserRifle",
@@ -1199,7 +1199,7 @@
     "x": 10215.88,
     "y": 153782.08,
     "z": 3150.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "86": {
     "spawner_id": "BOSS_Police_Old",
@@ -1208,7 +1208,7 @@
     "x": -686537.5,
     "y": -380252.66,
     "z": 32747.38,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "87": {
     "spawner_id": "BOSS_Female_People03",
@@ -1217,7 +1217,7 @@
     "x": -300962.38,
     "y": 157210.73,
     "z": -164.24,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "88": {
     "spawner_id": "BOSS_Female_Soldier04",
@@ -1226,7 +1226,7 @@
     "x": -75788.09,
     "y": -82304.96,
     "z": -960.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "89": {
     "spawner_id": "BOSS_Male_Trader01",
@@ -1235,7 +1235,7 @@
     "x": -57544.38,
     "y": 116422.49,
     "z": 9060.12,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "9": {
     "spawner_id": "yamijima_IceLand_pink_F_BOSS",
@@ -1253,7 +1253,7 @@
     "x": -62624.9,
     "y": 402438.94,
     "z": 12180.67,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "91": {
     "spawner_id": "BOSS_Female_DesertPeople",
@@ -1262,7 +1262,7 @@
     "x": 147119.08,
     "y": 347473.56,
     "z": -856.4,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "92": {
     "spawner_id": "BOSS_FireCult_FlameThrower",
@@ -1271,7 +1271,7 @@
     "x": -331690.16,
     "y": -40407.43,
     "z": 15982.14,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "93": {
     "spawner_id": "BOSS_Male_NinjaElite",
@@ -1280,7 +1280,7 @@
     "x": -18160.0,
     "y": -151400.0,
     "z": 2360.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "94": {
     "spawner_id": "BOSS_Hunter_Rifle",
@@ -1289,7 +1289,7 @@
     "x": -359201.56,
     "y": 181724.28,
     "z": 5179.1,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "95": {
     "spawner_id": "BOSS_Male_People",
@@ -1298,7 +1298,7 @@
     "x": -126584.23,
     "y": 318232.75,
     "z": -1519.07,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "96": {
     "spawner_id": "BOSS_Male_Soldier02",
@@ -1307,7 +1307,7 @@
     "x": -224118.3,
     "y": 277672.06,
     "z": -864.36,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "97": {
     "spawner_id": "BOSS_Male_People02",
@@ -1316,7 +1316,7 @@
     "x": 97107.99,
     "y": 68422.43,
     "z": 42381.05,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "98": {
     "spawner_id": "BOSS_Male_Soldier",
@@ -1325,7 +1325,7 @@
     "x": -409430.0,
     "y": 24820.0,
     "z": 1880.0,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   },
   "99": {
     "spawner_id": "BOSS_Female_People",
@@ -1334,6 +1334,6 @@
     "x": -470651.97,
     "y": -80708.37,
     "z": -2009.12,
-    "spawn_type": "boss"
+    "spawn_type": "bounty"
   }
 }

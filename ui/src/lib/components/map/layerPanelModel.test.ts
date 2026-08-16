@@ -289,6 +289,7 @@ describe('groupVisibilityPatch', () => {
 			'alpha_pals',
 			'boss_pals',
 			'predator_pals',
+			'bounty',
 			'camps'
 		]);
 	});

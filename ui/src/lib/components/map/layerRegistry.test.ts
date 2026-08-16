@@ -37,6 +37,7 @@ describe('MAP_LAYERS', () => {
 			'alpha_pals',
 			'boss_pals',
 			'predator_pals',
+			'bounty',
 			'camps'
 		]);
 	});
@@ -213,18 +214,19 @@ describe('subset by class: fast travel vs watchtower', () => {
 	});
 });
 
-// bosses.json carries alpha, boss and predator spawns in one table, told apart by
-// `spawn_type`, and the UI toggles the three separately.
-describe('subset by spawn_type: alpha / boss / predator', () => {
+// bosses.json carries alpha, boss, predator and bounty spawns in one table, told
+// apart by `spawn_type`, and the UI toggles the four separately.
+describe('subset by spawn_type: alpha / boss / predator / bounty', () => {
 	const artifact = {
 		a: { spawn_type: 'alpha' },
 		b: { spawn_type: 'boss' },
 		c: { spawn_type: 'predator' },
-		d: { spawn_type: 'alpha' }
+		d: { spawn_type: 'alpha' },
+		e: { spawn_type: 'bounty' }
 	};
 
-	it('backs all three layers with the bosses artifact', () => {
-		for (const id of ['alpha_pals', 'boss_pals', 'predator_pals'] as const) {
+	it('backs all four layers with the bosses artifact', () => {
+		for (const id of ['alpha_pals', 'boss_pals', 'predator_pals', 'bounty'] as const) {
 			expect(getMapLayer(id).artifact).toBe('bosses');
 		}
 	});
@@ -233,14 +235,28 @@ describe('subset by spawn_type: alpha / boss / predator', () => {
 		expect(selectLayerEntries('alpha_pals', artifact).points.map((p) => p.key)).toEqual(['a', 'd']);
 		expect(selectLayerEntries('boss_pals', artifact).points.map((p) => p.key)).toEqual(['b']);
 		expect(selectLayerEntries('predator_pals', artifact).points.map((p) => p.key)).toEqual(['c']);
+		expect(selectLayerEntries('bounty', artifact).points.map((p) => p.key)).toEqual(['e']);
+	});
+
+	it('keeps bounty targets out of the boss layer', () => {
+		// Both are character_id "None" humans; only spawn_type separates them, and
+		// bounty rows shipped as spawn_type "boss" until the parser split them.
+		expect(selectLayerEntries('boss_pals', artifact).points.map((p) => p.key)).not.toContain('e');
+	});
+
+	it('partitions the artifact with no entry lost or shared', () => {
+		const selected = (['alpha_pals', 'boss_pals', 'predator_pals', 'bounty'] as const).flatMap(
+			(id) => selectLayerEntries(id, artifact).points.map((p) => p.key)
+		);
+		expect(selected.sort()).toEqual(Object.keys(artifact).sort());
 	});
 
 	it('drops an entry whose spawn_type is unrecognised instead of defaulting it', () => {
-		const withJunk = { ...artifact, e: { spawn_type: 'unknown_future_type' } };
-		const selected = (['alpha_pals', 'boss_pals', 'predator_pals'] as const).flatMap((id) =>
-			selectLayerEntries(id, withJunk).points.map((p) => p.key)
+		const withJunk = { ...artifact, z: { spawn_type: 'unknown_future_type' } };
+		const selected = (['alpha_pals', 'boss_pals', 'predator_pals', 'bounty'] as const).flatMap(
+			(id) => selectLayerEntries(id, withJunk).points.map((p) => p.key)
 		);
-		expect(selected).not.toContain('e');
+		expect(selected).not.toContain('z');
 	});
 });
 

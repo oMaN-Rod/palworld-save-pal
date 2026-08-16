@@ -89,6 +89,7 @@
 		showBosses: boolean;
 		showAlphaPals: boolean;
 		showPredatorPals: boolean;
+		showBounty: boolean;
 		showLabels: boolean;
 		enable3d: boolean;
 		structureRenderMode?: 'detailed' | 'flat';
@@ -130,6 +131,7 @@
 		showBosses: true,
 		showAlphaPals: true,
 		showPredatorPals: true,
+		showBounty: false,
 		showLabels: true,
 		enable3d: false,
 		structureRenderMode: 'detailed',
@@ -159,6 +161,7 @@
 		| 'showBosses'
 		| 'showAlphaPals'
 		| 'showPredatorPals'
+		| 'showBounty'
 		| 'showOrigin'
 		| 'showPlayers'
 		| 'showBases'
@@ -172,6 +175,7 @@
 		boss_pals: 'showBosses',
 		alpha_pals: 'showAlphaPals',
 		predator_pals: 'showPredatorPals',
+		bounty: 'showBounty',
 		origin: 'showOrigin',
 		players: 'showPlayers',
 		bases: 'showBases',
@@ -220,6 +224,8 @@
 				return String(alphaPalCount);
 			case 'predator_pals':
 				return String(predatorPalCount);
+			case 'bounty':
+				return String(bountyCount);
 			case 'labels':
 			case 'origin':
 				return undefined;
@@ -357,7 +363,8 @@
 		return {
 			alpha: partition.alpha.filter(inArea),
 			boss: partition.boss.filter(inArea),
-			predator: partition.predator.filter(inArea)
+			predator: partition.predator.filter(inArea),
+			bounty: partition.bounty.filter(inArea)
 		};
 	});
 	const dungeonCount = $derived(
@@ -366,6 +373,7 @@
 	const alphaPalCount = $derived(areaSpawnPartition.alpha.length);
 	const predatorPalCount = $derived(areaSpawnPartition.predator.length);
 	const bossCount = $derived(areaSpawnPartition.boss.length);
+	const bountyCount = $derived(areaSpawnPartition.bounty.length);
 
 	function panTo(x: number, y: number, zoom = 4) {
 		const area = mapOf(x, y);
@@ -1003,6 +1011,7 @@
 					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
+					showBounty={mapOptions.showBounty ?? false}
 					mapLayerVisibility={layerVisibility}
 					showLabels={mapOptions.showLabels ?? true}
 					show3d={mapOptions.enable3d ?? false}

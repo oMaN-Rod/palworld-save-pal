@@ -3,6 +3,7 @@ import { MAP_SIZE, worldToPixel } from './utils';
 import { lngLatToPixel } from './mercator';
 import {
 	buildBaseRadiusFC,
+	buildBossFC,
 	buildFastTravelFC,
 	buildMapObjectFC,
 	buildRelicFC,
@@ -12,6 +13,7 @@ import {
 	structureCentroid,
 	type StructureFC
 } from './features';
+import { ICON_BOSS, ICON_BOUNTY } from './iconIds';
 import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
 
 const TREE_POINT = { x: 512112, y: -510663 };
@@ -122,6 +124,52 @@ describe('buildMapObjectFC', () => {
 		const [feature] = buildMapObjectFC(objects, 'alpha_pal', 'MainMap').features;
 		expect(feature.properties.type).toBe('alpha_pal');
 		expect(feature.properties.icon).toBe('pal:alpha:Chillet');
+	});
+});
+
+describe('buildBossFC', () => {
+	const spawn = {
+		rowKey: '7',
+		x: MAIN_POINT.x,
+		y: MAIN_POINT.y,
+		z: 0,
+		level: 42,
+		defeated: false,
+		localized_name: 'Zoe'
+	};
+
+	it('marks a boss spawn with the boss icon by default', () => {
+		// Broken by a default change that would silently repaint every boss marker.
+		const [feature] = buildBossFC([spawn] as never, 'MainMap').features;
+		expect(feature.properties.icon).toBe(ICON_BOSS);
+		expect(feature.properties.type).toBe('boss');
+	});
+
+	it('marks a bounty spawn with its own icon and type', () => {
+		// Bounty targets rendered as boss markers until they had a layer of their
+		// own; without a distinct icon the two are indistinguishable on the map.
+		const [feature] = buildBossFC([spawn] as never, 'MainMap', {
+			type: 'bounty',
+			icon: ICON_BOUNTY
+		}).features;
+		expect(feature.properties.icon).toBe(ICON_BOUNTY);
+		expect(feature.properties.type).toBe('bounty');
+	});
+
+	it('carries rowKey through as the feature key either way', () => {
+		// Broken by keying on the array index, which is positional not stable.
+		const asBoss = buildBossFC([spawn] as never, 'MainMap').features[0];
+		const asBounty = buildBossFC([spawn] as never, 'MainMap', {
+			type: 'bounty',
+			icon: ICON_BOUNTY
+		}).features[0];
+		expect(asBoss.properties.key).toBe('7');
+		expect(asBounty.properties.key).toBe('7');
+	});
+
+	it('drops a spawn outside the requested area', () => {
+		// Broken by rendering every spawn on whichever map is open.
+		expect(buildBossFC([spawn] as never, 'Tree').features).toEqual([]);
 	});
 });
 

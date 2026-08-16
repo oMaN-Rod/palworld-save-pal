@@ -63,7 +63,7 @@
 		type StructureFeature
 	} from './features';
 	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
-	import { palIconId } from './iconIds';
+	import { ICON_BOUNTY, palIconId } from './iconIds';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import { getMapLayer, type MapLayerId } from './layerRegistry';
 	import type { MapLayerVisibility } from './layerPanelModel';
@@ -140,6 +140,7 @@
 		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
+		showBounty = false,
 		mapLayerVisibility = {},
 		showLabels = true,
 		show3d = false,
@@ -193,6 +194,7 @@
 		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
+		showBounty?: boolean;
 		/** Visibility for the registry-driven layers. The layers above keep their
 		 *  own props and their own stores. */
 		mapLayerVisibility?: MapLayerVisibility;
@@ -326,7 +328,7 @@
 	});
 
 	// spawn_type is the sole partition key: every spawn lands in exactly one of
-	// alpha/boss/predator, so nothing can double-marker it.
+	// alpha/boss/predator/bounty, so nothing can double-marker it.
 	const spawnPartition = $derived(partitionSpawns(bosses.points));
 	const defeatedSpawnerIds = $derived(new Set(selectedPlayer?.defeated_bosses ?? []));
 
@@ -364,6 +366,18 @@
 		alphaSpawnPoints.map((b) => ({ x: b.x, y: b.y, pal: b.palKey ?? '' }))
 	);
 
+	// Bounty targets never name a pal, so their label always comes off the
+	// spawner id - there is no palsData lookup to try first.
+	const bountyPoints = $derived(
+		spawnPartition.bounty
+			.filter((b) => mapOf(b.x, b.y) === area)
+			.map((b) => ({
+				...b,
+				defeated: defeatedSpawnerIds.has(b.spawner_id),
+				localized_name: humanizeSpawnerId(b.spawner_id)
+			}))
+	);
+
 	const predatorSpawnsInArea = $derived(
 		spawnPartition.predator.filter((p) => mapOf(p.x, p.y) === area)
 	);
@@ -382,6 +396,9 @@
 	const alphaFC = $derived(buildMapObjectFC(alphaPalPoints, 'alpha_pal', area));
 	const predatorFC = $derived(buildMapObjectFC(predatorPalPoints, 'predator_pal', area));
 	const bossFC = $derived(buildBossFC(bossPoints as never, area));
+	const bountyFC = $derived(
+		buildBossFC(bountyPoints as never, area, { type: 'bounty', icon: ICON_BOUNTY })
+	);
 
 	// Rebuilt only when the point list changes -- the lists are derived objects, so
 	// identity is a sound proxy for content. Rebuilding ~580 polygons on every
@@ -1818,6 +1835,38 @@
 				<Layer.Symbol
 					id="boss-icons"
 					visible={showBosses}
+					layout={{
+						'icon-image': ['get', 'icon'],
+						'icon-allow-overlap': true,
+						'symbol-sort-key': ['case', ['get', 'defeated'], 2, 1],
+						'icon-size': zoomScaledIconSize(0.6, 1.0),
+						'text-field': showLabels ? ['step', ['zoom'], '', 5, ['get', 'name']] : '',
+						'text-size': 11,
+						'text-optional': true,
+						'text-anchor': 'top',
+						'text-offset': [0, 0.8],
+						'text-max-width': 12
+					}}
+					paint={{
+						'icon-opacity': [
+							'case',
+							['boolean', ['feature-state', 'hover'], false],
+							1,
+							['get', 'defeated'],
+							0.6,
+							1
+						],
+						'text-color': '#ffffff',
+						'text-halo-color': '#000000',
+						'text-halo-width': 1.5
+					}}
+				/>
+			</Source.GeoJSON>
+
+			<Source.GeoJSON id="bounty-src" data={bountyFC}>
+				<Layer.Symbol
+					id="bounty-icons"
+					visible={showBounty}
 					layout={{
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,

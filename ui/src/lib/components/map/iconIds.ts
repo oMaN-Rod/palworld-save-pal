@@ -25,6 +25,7 @@ export const ICON_TOWER_BOSS = 'towerBoss';
 export const ICON_EGG = 'egg';
 export const ICON_CAMP = 'camp';
 export const ICON_JOURNAL = 'journal';
+export const ICON_BOUNTY = 'bounty';
 
 export function relicIconId(relicType: string): string {
 	return `relic:${relicType}`;

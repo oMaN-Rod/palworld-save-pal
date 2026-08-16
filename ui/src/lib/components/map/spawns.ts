@@ -7,6 +7,7 @@ export type SpawnPartition = {
 	alpha: BossRow[];
 	boss: BossRow[];
 	predator: PredatorRow[];
+	bounty: BossRow[];
 };
 
 // `unknown`, not `never`: TS cannot narrow a Boss to `never` just because both
@@ -23,11 +24,13 @@ export function partitionSpawns(spawns: Record<string, Spawn>): SpawnPartition {
 	const alpha: BossRow[] = [];
 	const boss: BossRow[] = [];
 	const predator: PredatorRow[] = [];
+	const bounty: BossRow[] = [];
 	for (const [rowKey, spawn] of Object.entries(spawns)) {
 		if (spawn.spawn_type === 'predator') predator.push({ ...spawn, rowKey });
 		else if (spawn.spawn_type === 'alpha') alpha.push({ ...spawn, rowKey });
 		else if (spawn.spawn_type === 'boss') boss.push({ ...spawn, rowKey });
+		else if (spawn.spawn_type === 'bounty') bounty.push({ ...spawn, rowKey });
 		else warnUnknownSpawnType(spawn, rowKey);
 	}
-	return { alpha, boss, predator };
+	return { alpha, boss, predator, bounty };
 }

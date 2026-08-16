@@ -8,8 +8,10 @@ import { PORTAL_HEIGHT_CM, PORTAL_TAPER_RATIO, CORE_COLOR } from './palPortal';
 export type FastTravelState = 'unknown' | 'locked' | 'unlocked';
 export type RelicState = 'unknown' | 'uncollected' | 'collected';
 // Reuses the save's own spawn_type union so a new kind fails PORTAL_COLORS.palRing
-// indexing at compile time rather than resolving to nothing at runtime.
-export type PalRingKind = Spawn['spawn_type'];
+// indexing at compile time rather than resolving to nothing at runtime. Bounty is
+// excluded rather than coloured: those spawns name no pal, so they never reach a
+// pal model and a ring colour for them would be unreachable.
+export type PalRingKind = Exclude<Spawn['spawn_type'], 'bounty'>;
 
 // The radius each marker type's ring and beam both derive from, in centimetres
 // before the size slider. Alpha, boss and predator use palPortal's

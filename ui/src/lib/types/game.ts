@@ -294,8 +294,10 @@ export type Relic = {
 	relic_type: string;
 };
 
+// A bounty target shares this shape but never names a pal: character_id is the
+// literal "None" and the spawner_id is what identifies the human.
 export type Boss = {
-	spawn_type: 'alpha' | 'boss';
+	spawn_type: 'alpha' | 'boss' | 'bounty';
 	spawner_id: string;
 	character_id: string;
 	level: number;

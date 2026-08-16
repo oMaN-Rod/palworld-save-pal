@@ -28,6 +28,9 @@ export const mapImg = {
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.webp`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.webp`),
 	camp: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_camp.webp`),
+	// The game's generic human silhouette. The 33 bounty targets each have their
+	// own t_boss_npc_* portrait, but no one of them stands for the category.
+	human: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/human.webp`),
 	journal: assetLoader.loadImage(
 		`${ASSET_DATA_PATH}/img/t_itemicon_consume_technologybook_g1.webp`
 	),

@@ -32,6 +32,7 @@ export type MapFeatureType =
 	| 'boss'
 	| 'alpha_pal'
 	| 'predator_pal'
+	| 'bounty'
 	| 'structure';
 
 export type MapFeatureProps = {
@@ -228,18 +229,24 @@ export function buildMapObjectFC(
 	return { type: 'FeatureCollection', features };
 }
 
-export function buildBossFC(points: BossView[], area: MapArea): PointFC {
+/** Bounty targets share this shape with bosses and differ only in marker and
+ *  feature type, so they build through here rather than a near-copy. */
+export function buildBossFC(
+	points: BossView[],
+	area: MapArea,
+	marker: { type: MapFeatureType; icon: string } = { type: 'boss', icon: ICON_BOSS }
+): PointFC {
 	const features: PointFeature[] = [];
 	for (const b of points) {
 		if (!inArea(b.x, b.y, area)) continue;
 		features.push(
 			point(features.length, b.x, b.y, area, {
 				key: b.rowKey,
-				type: 'boss',
+				type: marker.type,
 				name: b.localized_name ?? '',
 				level: b.level,
 				defeated: b.defeated,
-				icon: ICON_BOSS
+				icon: marker.icon
 			})
 		);
 	}

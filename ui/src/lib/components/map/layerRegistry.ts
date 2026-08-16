@@ -137,6 +137,15 @@ export const MAP_LAYERS = [
 		subset: spawnType('predator'),
 		defaultVisible: true
 	},
+	// The table's human NPC bosses. They share boss_pals' shape and its
+	// character_id of "None", so spawn_type is the only thing telling them apart.
+	{
+		id: 'bounty',
+		group: 'poi',
+		artifact: 'bosses',
+		subset: spawnType('bounty'),
+		defaultVisible: false
+	},
 	{ id: 'camps', group: 'poi', artifact: 'camps', subset: all, defaultVisible: false }
 ] as const satisfies readonly MapLayerRow[];
 
