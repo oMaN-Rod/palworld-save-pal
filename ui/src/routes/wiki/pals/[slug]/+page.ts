@@ -1,4 +1,8 @@
+import { loadEntitySeo } from '$lib/utils/wikiL10n';
 import { isDisabledRecord, toSlug } from '$lib/utils/wikiSlug';
+
+export const ssr = true;
+export const prerender = true;
 
 export async function entries() {
 	const palsJson = (await import('../../../../../../data/json/pals.json')).default;
@@ -7,6 +11,11 @@ export async function entries() {
 		.map(([key]) => ({ slug: toSlug(key) }));
 }
 
-export function load({ params }: { params: { slug: string } }) {
-	return { slug: params.slug };
+export async function load({ params }: { params: { slug: string } }) {
+	const entity = await loadEntitySeo('pals', params.slug);
+	return {
+		slug: params.slug,
+		name: entity?.name ?? params.slug,
+		description: entity?.description ?? null
+	};
 }

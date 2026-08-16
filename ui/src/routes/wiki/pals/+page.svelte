@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 	import { palsData, elementsData } from '$lib/data';
 	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle } from '$components/docs';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -142,9 +143,15 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Pals | Palworld Save Pal Wiki</title>
-</svelte:head>
+<Seo
+	pathname="/wiki/pals"
+	title="All Palworld Pals - Stats, Elements and Skills"
+	description="Every Pal in Palworld with elements, work suitability and base stats, searchable and sortable."
+	structuredData={breadcrumbSchema([
+		{ name: 'Wiki', path: '/wiki' },
+		{ name: 'Pals', path: '/wiki/pals' }
+	])}
+/>
 
 <div>
 	<WikiGrid items={filteredPals}>

@@ -16,8 +16,9 @@
 	import type { PalData, WorkSuitability } from '$types';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
+	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 
-	let { data }: { data: { slug: string } } = $props();
+	let { data }: { data: { slug: string; name: string; description: string | null } } = $props();
 
 	const palKeys = $derived(Object.keys(palsData.pals));
 	const hasData = $derived(palKeys.length > 0);
@@ -40,9 +41,28 @@
 	const workSuits = $derived(pal ? getWorkSuitabilities(pal) : []);
 </script>
 
-<svelte:head>
-	<title>{pal ? pal.localized_name : data.slug}</title>
-</svelte:head>
+<Seo
+	pathname={`/wiki/pals/${data.slug}`}
+	title={`${data.name} - Palworld Pal Stats, Skills and Work Suitability`}
+	description={data.description ??
+		`${data.name} stats, elements, active and passive skills, and work suitability in Palworld.`}
+	structuredData={breadcrumbSchema([
+		{ name: 'Wiki', path: '/wiki' },
+		{ name: 'Pals', path: '/wiki/pals' },
+		{ name: data.name, path: `/wiki/pals/${data.slug}` }
+	])}
+/>
+
+<!-- The interactive view below needs the runtime store, which is empty during
+     prerender. This block is what crawlers receive; it disappears on hydration. -->
+{#if !hasData}
+	<div class="p-5">
+		<h1 class="text-2xl font-bold">{data.name}</h1>
+		{#if data.description}
+			<p class="text-surface-300 mt-2 max-w-2xl">{data.description}</p>
+		{/if}
+	</div>
+{/if}
 
 {#snippet elementIcon(element: string, size: string)}
 	{@const icon = getElementIcon(element)}
