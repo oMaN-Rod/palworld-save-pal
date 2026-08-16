@@ -145,13 +145,34 @@ pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
 
     // Take the state out to satisfy the borrow checker across the await, then put back.
     let mut state = STATE.with(|s| s.borrow_mut().take()).expect("init() first");
+    // reattach_session / eject_session must NOT run under this session's own
+    // guard: they lock the TARGET arc, which for a self-reattach is this very
+    // one, and a tokio mutex is not reentrant. They get a scratch session
+    // instead and reach the real one through `attachment.arc` — the native ws
+    // frame loop makes exactly the same split.
+    let holds_own_session_lock = !matches!(
+        psp_app::messages::MessageType::from_wire(&envelope.message_type),
+        Some(
+            psp_app::messages::MessageType::ReattachSession
+                | psp_app::messages::MessageType::EjectSession
+        )
+    );
     // Lock a CLONE of the current arc so the arc slot itself stays free for the
     // attachment's `&mut` — exactly the native ws frame loop's pattern.
     let session_arc = Arc::clone(&state.current);
-    let mut session_guard = session_arc.lock().await;
+    let mut scratch = Session::new();
+    let mut session_guard = if holds_own_session_lock {
+        Some(session_arc.lock().await)
+    } else {
+        None
+    };
     {
+        let session: &mut Session = match session_guard.as_mut() {
+            Some(guard) => guard,
+            None => &mut scratch,
+        };
         let ctx = HandlerCtx {
-            session: &mut session_guard,
+            session,
             app: &state.app,
             emitter: &emitter,
             blueprints: &mut state.blueprints,
