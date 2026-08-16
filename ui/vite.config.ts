@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
+import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 
 // Vite serves HTTP/2 only over TLS (resolveHttpServer hands https options to
 // node:http2's createSecureServer), and browsers only negotiate h2 over TLS. Opt-in
@@ -16,7 +17,11 @@ export default defineConfig({
 	plugins: [
 		paraglideVitePlugin({
 			project: './project.inlang',
-			outdir: './src/paraglide'
+			outdir: './src/paraglide',
+			// `url` only matches the hub paths in routingConfig; editor routes have
+			// no prefix and fall through to the persisted cookie setting.
+			strategy: ['url', 'cookie', 'globalVariable', 'baseLocale'],
+			urlPatterns: paraglideUrlPatterns
 		}),
 		tailwindcss(),
 		sveltekit(),

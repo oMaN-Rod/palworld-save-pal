@@ -4,6 +4,11 @@ import { mdsvex } from 'mdsvex';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeSlug from 'rehype-slug';
 import { remarkTocHeadings } from './remark-toc-headings.js';
+import { LOCALIZED_PATHS, localizedPath, siteLocales } from './src/lib/i18n/routingConfig.js';
+
+const localizedEntries = LOCALIZED_PATHS.flatMap((pathname) =>
+	siteLocales.map((locale) => localizedPath(pathname, locale))
+);
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -24,6 +29,9 @@ const config = {
 		adapter: adapter({
 			pages: '../ui_build'
 		}),
+		prerender: {
+			entries: ['*', ...localizedEntries]
+		},
 		alias: {
 			$theme: 'src/lib/theme',
 			$components: 'src/lib/components',
