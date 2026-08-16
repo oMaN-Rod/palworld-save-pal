@@ -10,9 +10,9 @@
 
 <Popover position="bottom-end">
 	{#snippet children()}
-		<button class="public-chip" type="button">
+		<button class="public-chip" type="button" aria-label={activeLabel}>
 			<Palette class="h-3.5 w-3.5" />
-			<span>{activeLabel}</span>
+			<span class="hidden md:inline">{activeLabel}</span>
 		</button>
 	{/snippet}
 	{#snippet content({ close }: { close: () => void })}

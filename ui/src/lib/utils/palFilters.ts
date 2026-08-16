@@ -1,5 +1,33 @@
 import { elementsData } from '$lib/data';
-import type { ElementType, Pal } from '$types';
+import type { ElementType, Pal, PalData } from '$types';
+
+/**
+ * Coarse pal category for wiki filtering. Merges the data-flag system
+ * (`is_boss`, `is_raid_boss`, `predator`) with the key-prefix system
+ * (`GYM_`, `RAID_`, `PREDATOR_`, `SUMMON_`, `OILRIG`) via OR predicates so
+ * entries that carry one signal but not the other still land in the right
+ * bucket. First match wins.
+ */
+export type PalCategory = 'normal' | 'quest' | 'boss' | 'special' | 'other';
+
+const QUEST_MARKERS = ['QUEST_', '_QUEST_'];
+const SPECIAL_PREFIXES = ['RAID_', 'PREDATOR_', 'SUMMON_', 'OILRIG'];
+
+export function classifyPalCategory(key: string, pal: PalData): PalCategory {
+	const upperKey = key.toUpperCase();
+
+	if (QUEST_MARKERS.some((marker) => upperKey.includes(marker))) return 'quest';
+	if (pal.is_boss || pal.is_tower_boss || upperKey.includes('GYM_') || upperKey.startsWith('BOSS_'))
+		return 'boss';
+	if (
+		pal.is_raid_boss ||
+		pal.predator ||
+		SPECIAL_PREFIXES.some((prefix) => upperKey.includes(prefix))
+	)
+		return 'special';
+	if (!pal.is_pal) return 'other';
+	return 'normal';
+}
 
 export function palMatchesFilter(
 	pal: Pal,

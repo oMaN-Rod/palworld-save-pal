@@ -375,17 +375,13 @@ write_desktop_env() {
 }
 
 # ─── Process orchestration ─────────────────────────────────────────────────
-# Background children run each in their own session (setsid) so a single
-# negative-PID kill tears down the whole tree (vite→esbuild, cargo→rustc,
-# psp-server→…). We capture the real child PID via a temp file because `$!`
-# after a pipe is the subshell, not the child.
-CHILD_PGIDS=()
-SPAWN_TMPDIR=""
-
-_ensure_spawn_tmpdir() {
-    [[ -n "$SPAWN_TMPDIR" ]] && return 0
-    SPAWN_TMPDIR="$(mktemp -d "${TMPDIR:-/tmp}/easyrun.XXXXXX")"
-}
+# Children run in the SCRIPT's own process group (NOT a new session via setsid).
+# This is deliberate: when the user hits Ctrl-C, the terminal sends SIGINT to
+# the foreground process group, which reaches the script AND every child in the
+# same group — including grandchildren vite/cargo spawn — so they die naturally.
+# We still install traps to guarantee cleanup even if a child ignores SIGINT or
+# the script exits via a non-signal path (set -e failure, etc.).
+CHILD_PIDS=()
 
 # spawn_fg_tagged <tag> <cmd...> — foreground, prefixed lines, returns child rc.
 # Used for finite builds. Honors SPAWN_CWD (cd there first) + exported env.
@@ -404,56 +400,65 @@ spawn_fg_tagged() {
     return $rc
 }
 
-# spawn_bg_tagged <tag> <cmd...> — background, prefixed lines, new session.
-# Echoes the child's process-group ID (PGID) on stdout for cleanup.
+# spawn_bg_tagged <tag> <cmd...> — background, prefixed lines, SAME process group.
+# Sets LAST_BG_PID to the new background job's PID (do NOT call via $() command
+# substitution — that runs this function in a subshell whose exit reaps the
+# background job, so the parent shell never sees it). Callers read $LAST_BG_PID.
 # Honors SPAWN_CWD. Extra env vars must be exported by the caller before calling.
+# IMPORTANT: no setsid/start_new_session — children stay in our process group so
+# Ctrl-C reaches them. The trap on INT/TERM/EXIT guarantees teardown regardless.
+LAST_BG_PID=""
 spawn_bg_tagged() {
     local tag="$1"; shift
     log_info "Starting $tag: ${BOLD}$*${RESET}"
-    _ensure_spawn_tmpdir
-    local pidfile="$SPAWN_TMPDIR/$tag.pid"
-    : > "$pidfile"
     local sed_tag="${tag//\//\\/}"
-    # setsid launches the child as a new session leader. We write its PID to
-    # pidfile from INSIDE the child (after setsid, $$ is the child) so we capture
-    # the real process, not a subshell. The pipeline through sed tags log lines.
-    # The inner bash -c string is single-quoted except for the pidfile path,
-    # so $$ expands INSIDE the child (correct) rather than in this script.
+    # Launch in the background WITHOUT setsid. The child (and any grandchildren
+    # it forks, e.g. vite→esbuild) share our process group.
     if [[ -n "${SPAWN_CWD:-}" ]]; then
-        ( cd "$SPAWN_CWD" && setsid bash -c 'echo $$ > "'"$pidfile"'"; exec "$@"' _ "$@" 2>&1 \
-            | sed -u "s/^/[${sed_tag}] /" ) >&2 &
+        ( cd "$SPAWN_CWD" && "$@" 2>&1 | sed -u "s/^/[${sed_tag}] /" ) >&2 &
     else
-        ( setsid bash -c 'echo $$ > "'"$pidfile"'"; exec "$@"' _ "$@" 2>&1 \
-            | sed -u "s/^/[${sed_tag}] /" ) >&2 &
+        ( "$@" 2>&1 | sed -u "s/^/[${sed_tag}] /" ) >&2 &
     fi
-    # Wait for the child to have written its PID.
-    local i
-    for ((i=0; i<50; i++)); do
-        [[ -s "$pidfile" ]] && break
-        sleep 0.1
-    done
-    local pgid
-    pgid="$(cat "$pidfile" 2>/dev/null || true)"
-    pgid="${pgid//[!0-9]/}"
-    [[ -n "$pgid" ]] || { log_warn "could not capture PID for $tag; cleanup may be incomplete."; return 1; }
-    CHILD_PGIDS+=("$pgid")
-    printf '%s\n' "$pgid"
+    LAST_BG_PID=$!
+    CHILD_PIDS+=("$LAST_BG_PID")
 }
 
 cleanup_children() {
-    local pgid
-    for pgid in "${CHILD_PGIDS[@]}"; do
-        # Kill the whole process group (negative PGID). Each child was started
-        # in its own session via setsid, so this propagates to grandchildren.
-        set +e
-        kill -- -"$pgid" 2>/dev/null
-        kill "$pgid" 2>/dev/null
-        set -e
+    # Kill the whole process group rooted at THIS script. Because children run
+    # in the same process group (no setsid), a negative-PGID kill reaches every
+    # child AND grandchild (vite→esbuild, cargo→rustc, psp-server→…). This is
+    # more reliable than tracking individual child PIDs, which can be reaped
+    # before we resolve their PGID. SIGTERM first (grace), then SIGKILL.
+    set +e
+    local self_pgid="${EASYRUN_PGID:-}"
+    # Resolve our own PGID. Prefer the captured one; fall back to ps.
+    if [[ -z "$self_pgid" ]]; then
+        self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
+    fi
+    if [[ -n "$self_pgid" ]]; then
+        # This shell is a member of the group it is about to signal. SIGTERM is
+        # survivable (ignored below for the duration), but a group-wide SIGKILL
+        # is not trappable and would kill us before restore_env_on_exit runs,
+        # leaving ui/.env pointing at the dev build. So pass 2 enumerates the
+        # survivors and skips our own PID instead of killing the group.
+        trap '' TERM
+        kill -TERM -- -"$self_pgid" 2>/dev/null
+        sleep 0.25
+        local gpid
+        for gpid in $(ps -e -o pid=,pgid= 2>/dev/null \
+            | awk -v g="$self_pgid" -v me="$$" '$2==g && $1!=me {print $1}'); do
+            kill -KILL "$gpid" 2>/dev/null
+        done
+        trap - TERM
+    fi
+    # Belt-and-suspenders: direct kill on each tracked PID too.
+    local pid
+    for pid in "${CHILD_PIDS[@]}"; do
+        kill -TERM "$pid" 2>/dev/null
+        kill -KILL "$pid" 2>/dev/null
     done
-    CHILD_PGIDS=()
-    # Clean up the temp dir.
-    [[ -n "$SPAWN_TMPDIR" && -d "$SPAWN_TMPDIR" ]] && rm -rf "$SPAWN_TMPDIR" 2>/dev/null || true
-    SPAWN_TMPDIR=""
+    set -e
+    CHILD_PIDS=()
 }
 
 wait_for_http() {
@@ -577,12 +582,14 @@ run_web() {
     banner "Dev: web  (${host}:${vite_port}  +  psp-server :${server_port})"
 
     local vite_pid server_pid
-    SPAWN_CWD="$UI_DIR" vite_pid="$(SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port")"
+    SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
+    vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
-        SPAWN_CWD="$REPO_ROOT" server_pid="$(SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+        SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
             --host "$host" --port "$server_port" \
             --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-            --db "$REPO_ROOT/psp-rs.db" --dev)"
+            --db "$REPO_ROOT/psp-rs.db" --dev
+        server_pid="$LAST_BG_PID"
     fi
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
     printf '\n%s%s  ▸ PSP web dev running:%s  %shttp://%s:%s%s\n\n' \
@@ -613,7 +620,8 @@ run_desktop() {
     banner "Dev: desktop  (Tauri + embedded psp-server)"
     local tauri_pid
     # cargo tauri dev must run from psp-desktop/.
-    tauri_pid="$(SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev)"
+    SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
+    tauri_pid="$LAST_BG_PID"
     printf '%s  Ctrl-C to stop. easyrun restores ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$tauri_pid"
 }
@@ -627,7 +635,8 @@ run_webapp() {
     write_web_env ""
     banner "Dev: webapp  (landing page + tool, browser-only)"
     local vite_pid
-    vite_pid="$(VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port")"
+    VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
+    vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (webapp)" 60 || true
     printf '\n%s%s  ▸ PSP webapp dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
@@ -642,7 +651,8 @@ run_landing() {
     write_web_env ""
     banner "Dev: landing-only  (${host}:${port}, no wasm / no server)"
     local vite_pid
-    vite_pid="$(VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port")"
+    VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
+    vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (landing)" 60 || true
     printf '\n%s%s  ▸ PSP landing preview:%s  %shttp://%s:%s%s\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
@@ -656,10 +666,11 @@ run_serve() {
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
     banner "Serve: psp-server  (${host}:${port})"
     local server_pid
-    server_pid="$(SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
         --host "$host" --port "$port" \
         --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-        --db "$REPO_ROOT/psp-rs.db" --dev)"
+        --db "$REPO_ROOT/psp-rs.db" --dev
+    server_pid="$LAST_BG_PID"
     wait_on_pids "$server_pid"
 }
 
@@ -730,22 +741,26 @@ detect_lan_ip() {
     [[ -n "$ip" && "$ip" != 127.* ]] && printf '%s' "$ip" || true
 }
 
-# wait_on_pids <pid...> — block until any exits or interrupted. Cleans up on exit.
+# wait_on_pids <pid...> — block until any child exits or a signal arrives.
+# `wait` with no args blocks until ALL background jobs finish AND returns
+# immediately when a trapped signal (INT/TERM) is received, so the trap handler
+# runs. This is more reliable than a poll/sleep loop, which can swallow signals.
+# We `wait -n` (bash 4.3+) to return as soon as the FIRST child exits.
 wait_on_pids() {
     local pids=("$@") rc=0
-    trap 'printf "\n%sInterrupted — cleaning up…%s\n" "$YELLOW" "$RESET" >&2; cleanup_children; restore_env_on_exit; exit 130' INT TERM
-    while true; do
-        local pid
-        for pid in "${pids[@]}"; do
-            if ! kill -0 "$pid" 2>/dev/null; then
-                wait "$pid" 2>/dev/null; rc=$?
-                log_warn "process exited (code $rc)."
-                cleanup_children
-                return $rc
-            fi
-        done
-        sleep 1
-    done
+    if (( ${#pids[@]} == 0 )); then return 0; fi
+    # wait -n: block until any one background job changes state. Any trapped
+    # signal interrupts it and runs the handler first. Falls back to plain
+    # `wait` on bash < 4.3.
+    if wait -n 2>/dev/null; then
+        rc=0
+    else
+        rc=$?
+    fi
+    # If we get here via a normal child exit (not a signal), report it. Signal
+    # paths are handled by the trap + _on_interrupt before we ever reach here.
+    log_warn "process exited (code $rc)."
+    return $rc
 }
 
 # ─── Arg parsing + usage ───────────────────────────────────────────────────
@@ -834,8 +849,31 @@ main() {
 
     snapshot_env
     RESTORE_ENV=1
-    # Ensure cleanup on any exit path (build failures, interrupts handled in wait_on_pids).
-    trap 'cleanup_children; restore_env_on_exit' EXIT
+    # Capture OUR process-group ID now, before any child spawns. All children
+    # run in this same group (no setsid), so a negative-PGID kill in cleanup
+    # reaches the whole tree even if individual child PIDs have been reaped.
+    export EASYRUN_PGID="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ')"
+    # Install the cleanup trap EARLY — before any child is spawned — so an
+    # interrupt at ANY point (during preflight, bun install, wait_for_http, or
+    # the run loop) tears down spawned children. INT/TERM print a message and
+    # exit 130; EXIT handles the normal/failure paths. Children share our
+    # process group, so Ctrl-C reaches them directly too; the trap is the
+    # guarantee for anything that survives or for non-interactive kills.
+    _cleanup_done=0
+    _on_exit_or_interrupt() {
+        # Guard against double-cleanup (EXIT fires after INT handler's exit).
+        (( _cleanup_done )) && return 0
+        _cleanup_done=1
+        cleanup_children
+        restore_env_on_exit
+    }
+    _on_interrupt() {
+        printf '\n%sInterrupted — cleaning up…%s\n' "$YELLOW" "$RESET" >&2
+        _on_exit_or_interrupt
+        exit 130
+    }
+    trap _on_interrupt INT TERM
+    trap _on_exit_or_interrupt EXIT
 
     if (( ARG_CHECK )); then
         if (( ! ARG_JSON )); then

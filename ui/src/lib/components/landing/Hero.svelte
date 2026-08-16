@@ -42,19 +42,29 @@
 			{m.landing_hero_tagline()}
 		</p>
 		<div class="mt-6">
-			<SaveDropzone {onLoad} />
+			<!-- Phones can't run the editor: the dropzone is replaced by a
+			     desktop-only notice. Maps, Wiki and Breeding stay reachable
+			     via the public nav. -->
+			<div class="hidden md:block">
+				<SaveDropzone {onLoad} />
+			</div>
+			<p class="text-surface-300 mx-auto mt-2 max-w-xs text-sm leading-relaxed md:hidden">
+				{m.landing_mobile_notice()}
+			</p>
 		</div>
 		<p class="text-surface-300 mt-4 flex items-center justify-center gap-2 text-sm">
 			<Lock size={14} />
 			{m.landing_hero_privacy()}
 		</p>
 		{#if resumeName && onResume}
-			<Tooltip label={resumeName}>
-				<Button variant="secondary" class="mt-4" onclick={onResume}>
-					<RotateCcw size={16} />
-					{m.landing_hero_resume()}
-				</Button>
-			</Tooltip>
+			<div class="hidden md:block">
+				<Tooltip label={resumeName}>
+					<Button variant="secondary" class="mt-4" onclick={onResume}>
+						<RotateCcw size={16} />
+						{m.landing_hero_resume()}
+					</Button>
+				</Tooltip>
+			</div>
 		{/if}
 	</div>
 </section>

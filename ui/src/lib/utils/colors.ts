@@ -79,6 +79,7 @@ export function skillBorderClass(rank: number) {
 		case 3:
 			return 'border-l-[#fcdf19]';
 		case 4:
+		case 5:
 			return 'border-l-[#68ffd8]';
 		default:
 			return 'border-l-[#FF0000]';
@@ -91,6 +92,7 @@ export function skillOpacity(rank: number) {
 		case 2:
 		case 3:
 		case 4:
+		case 5:
 			return 'opacity-25';
 	}
 	return 'opacity-15';
@@ -104,6 +106,7 @@ export function skillFilter(rank: number) {
 		case 3:
 			return calculateFilters('#fcdf19');
 		case 4:
+		case 5:
 			return calculateFilters('#68ffd8');
 		default:
 			return calculateFilters('#FF0000');

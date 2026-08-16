@@ -19,8 +19,15 @@
 	let failed = $state(false);
 	let center = $state<[number, number]>([0, 0]);
 	let zoom = $state(2.6);
-	let pitch = $state(52);
-	let show3d = $state(true);
+	// 3D terrain (DEM) is GPU-heavy. The landing hero shows a desktop-only
+	// notice below md (768px) — on those viewports, default 3D off so phones
+	// don't pay the terrain cost. The toggle button still lets a user opt in.
+	const isMobile =
+		typeof window !== 'undefined' &&
+		typeof window.matchMedia === 'function' &&
+		window.matchMedia('(max-width: 767px)').matches;
+	let pitch = $state(isMobile ? 0 : 52);
+	let show3d = $state(!isMobile);
 
 	const verticalScale = verticalScaleFactor(0, cmPerPx('MainMap'));
 
