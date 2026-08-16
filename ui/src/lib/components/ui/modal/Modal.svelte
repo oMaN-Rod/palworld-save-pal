@@ -4,6 +4,8 @@
 	import { cn } from '$theme';
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
+	import { m } from '$i18n/messages';
+	import { X } from '@lucide/svelte';
 
 	const modal = getModalState();
 
@@ -76,14 +78,14 @@
 		tabindex="-1"
 	>
 		<div class={cn('relative', contentClass, rounded)}>
-			<Button
-				variant="ghost"
-				size="icon"
-				class="absolute top-2 right-2 z-10 text-2xl leading-none"
+			<button
+				type="button"
+				class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+				aria-label={m.close()}
 				onclick={() => modal.closeModal()}
 			>
-				×
-			</Button>
+				<X size={24} />
+			</button>
 			<modal.component {...modal.props} closeModal={modal.closeModal} />
 		</div>
 	</div>
