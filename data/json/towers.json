@@ -1,0 +1,58 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": 29975.28,
+    "y": 413325.0,
+    "z": 15514.0,
+    "boss_type": "DesertBoss"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -361695.0,
+    "y": -112009.0,
+    "z": 61207.5,
+    "boss_type": "ElectricBoss"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -266563.16,
+    "y": 174506.3,
+    "z": 5930.38,
+    "boss_type": "ForestBoss"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -321596.25,
+    "y": 209085.0,
+    "z": -45.0,
+    "boss_type": "GrassBoss"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -29427.57,
+    "y": -115900.05,
+    "z": 6225.54,
+    "boss_type": "SakurajimaBoss"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": 81363.0,
+    "y": 90183.0,
+    "z": 63796.0,
+    "boss_type": "SnowBoss"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -778215.9,
+    "y": -36026.0,
+    "z": 60693.29,
+    "boss_type": "SorajimaBoss"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "class": "BP_PalBossTower_C",
+    "x": -889805.2,
+    "y": -435828.0,
+    "z": 19038.92,
+    "boss_type": "VikingBoss"
+  }
+}

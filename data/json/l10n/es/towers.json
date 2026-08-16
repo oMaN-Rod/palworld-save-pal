@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Torre de Los Vigilantes"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Torre de la Llama eterna"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Torre de la Liga de defensa de los Pals"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Torre del Sindicato Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Torre de las Flores Lunares"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Torre del Equipo de investigación genética"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Torre del pacto"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Torre de Tenraku"
+  }
+}

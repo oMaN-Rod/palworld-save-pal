@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Turm der Miliz"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Turm der Bruderschaft der ewigen Lohe"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Turm der Liga der Palfreunde"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Turm des Rayne-Syndikats"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Turm der Gesellschaft des Blumenmondes"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Turm des Instituts für Genforschung"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Turm des Gelübdes"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Turm der Feybreak"
+  }
+}

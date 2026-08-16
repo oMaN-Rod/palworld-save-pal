@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Tour de la Milice populaire"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Tour de la Confrérie des flammes éternelles"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Tour de la Ligue pour la protection des Pals"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Tour du Syndicat de Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Tour du clan des Fleurs lunaires"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Tour de l’Unité de recherche génétique"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Tour de l’Alliance Azurée"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Tour du Paradis Déchu"
+  }
+}

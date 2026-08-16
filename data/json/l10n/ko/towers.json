@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "자경단의 탑"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "영원한 불꽃의 동지의 탑"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "팰 애호 단체의 탑"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "레인 밀렵단의 탑"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "달꽃단의 탑"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "유전자 연구 부대의 탑"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "맹약의 탑"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "천락의 탑"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "หอคอยสันติบาล"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "หอคอยภารดรเพลิงนิรันดร์"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "หอคอยองค์กรผู้พิทักษ์พาล"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "หอคอยขบวนการพรานเถื่อน เรน"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "หอคอยกลุ่มบุปผาจันทรา"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "หอคอยกองกำลังวิจัยพันธุกรรม"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "หอคอยเเห่งพันธสัญญา"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "หอคอยสวรรค์ล่ม"
+  }
+}

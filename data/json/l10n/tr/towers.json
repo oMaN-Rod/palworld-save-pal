@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "PASG Kulesi"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Ölümsüz Ateş Kardeşliği Kulesi"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Hür Pal İttifakı Kulesi"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Rayne Örgütü Kulesi"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Ay Goncası Kulesi"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "PAL Genetik Araştırma Birimi Kulesi"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Müttefiklik Kulesi"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Feybreak Kulesi"
+  }
+}

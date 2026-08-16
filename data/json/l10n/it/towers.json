@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Torre della Milizia volontaria"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Torre della Congrega del fuoco perenne"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Torre dell'Ente per la tutela dei Pal"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Torre del Sindacato di Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Torre del clan dei fiori di luna"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Torre della Squadra per la ricerca genetica"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Torre del giuramento"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Torre della rovina"
+  }
+}

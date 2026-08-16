@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Tháp Đội Tự Vệ"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Tháp Đồng Minh Ngọn Lửa Vĩnh Cửu"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Tháp Tổ Chức Bảo Vệ Pal"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Tháp Tổ Chức Săn Trộm Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Tháp Hoa Mặt Trăng"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Tháp Đơn Vị Nghiên Cứu Gen"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Tháp Giao Ước"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Tháp Feybreak"
+  }
+}

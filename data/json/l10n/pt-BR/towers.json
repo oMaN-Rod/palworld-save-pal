@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Torre da Milícia Popular"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Torre dos Amigos da Chama Eterna"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Torre da Associação de Proteção aos Pals"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Torre dos Caçadores Clandestinos de Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Torre do Bando das Flores e da Lua"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Torre da Unidade de Pesquisas Genéticas"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Torre da Aliança"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Torre do Povo Decaído"
+  }
+}

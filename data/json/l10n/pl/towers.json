@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Wieża SOWP"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Wieża Bractwa Wiecznego Płomienia"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Wieża Związku Wolnych Pali"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Wieża Syndykatu Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Wieża Księżycowego Kwiatu"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Wieża Jednostki Badań Genetycznych PAL"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Wieża Przymierza"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Wieża Feybreak"
+  }
+}

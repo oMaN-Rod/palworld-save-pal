@@ -1,0 +1,466 @@
+[
+  {
+    "class": "BP_NPCCampSpawner_Believer_02_01_C",
+    "name": "BP_NPCCampSpawner_Believer_02_01_C_UAID_50EBF656371D88BB02_1788580712",
+    "x": -62270.0,
+    "y": 209100.0,
+    "z": 3366.03,
+    "instance_id": "2ED1A6CF455520AF797FAC9869E153B5"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D562A02_1927267856",
+    "x": -649783.25,
+    "y": -121108.56,
+    "z": -2102.62,
+    "instance_id": "FD126D344214D814A3B789BC611050D3"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D572A02_1490917033",
+    "x": -791572.6,
+    "y": -292660.12,
+    "z": 6995.57,
+    "instance_id": "E5126743441DF80CFCEFDCAD737846FF"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D572A02_1681873034",
+    "x": -878243.25,
+    "y": -351211.8,
+    "z": -1952.28,
+    "instance_id": "7A85AFFD4456A9BEA4CE5BBAFF748C0F"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D572A02_1841877036",
+    "x": -797757.3,
+    "y": -470149.12,
+    "z": -2087.83,
+    "instance_id": "8FD328C5413D91F91C6CA3BB22EF5B01"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D582A02_1814349215",
+    "x": -786849.5,
+    "y": -423729.03,
+    "z": 5581.25,
+    "instance_id": "588A275441F03EF500B948813A2C38EE"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D5B2A02_1321662746",
+    "x": -496542.84,
+    "y": -411575.6,
+    "z": -1711.4,
+    "instance_id": "AA347F504DA91F1886472FB96F3745ED"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D5B2A02_1573508749",
+    "x": -698390.06,
+    "y": -276831.34,
+    "z": 30528.77,
+    "instance_id": "E143DE0B40B7A166267C73B7D63250C5"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D872D02_1218555479",
+    "x": -584534.6,
+    "y": -366277.25,
+    "z": 20919.18,
+    "instance_id": "AF83F2E7489B4CD1F257E19BA97496A8"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D872D02_1562631480",
+    "x": -632815.5,
+    "y": -454882.47,
+    "z": 8959.32,
+    "instance_id": "6929C332404F1BF9FBFF1C8D29CC1313"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D872D02_1693105482",
+    "x": -727594.1,
+    "y": -397901.47,
+    "z": 36473.25,
+    "instance_id": "FBDA4A55498C3EA54546B5AB92515514"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC2_1_C",
+    "name": "BP_NPCCampSpawner_DLC2_1_C_UAID_50EBF656371D872D02_2010010483",
+    "x": -542921.94,
+    "y": -235980.33,
+    "z": 15971.78,
+    "instance_id": "1770E38D4E83EC6DF18DDF9BF29F4F7D"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC3_AreaBarrier_C",
+    "name": "BP_NPCCampSpawner_DLC3_AreaBarrier_C_UAID_5811222ECF19FDC002_2080214780",
+    "x": -814034.2,
+    "y": -105943.41,
+    "z": 53290.9,
+    "instance_id": "FACF623645CF76BF710A73A4BCDE9586"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC3_AreaBarrier_C",
+    "name": "BP_NPCCampSpawner_DLC3_AreaBarrier_C_UAID_5811222ECF19FDC002_2094440781",
+    "x": -820682.8,
+    "y": -42100.26,
+    "z": 37435.3,
+    "instance_id": "3552DF8F4CF804040361BC979DDA3D11"
+  },
+  {
+    "class": "BP_NPCCampSpawner_DLC3_AreaBarrier_C",
+    "name": "BP_NPCCampSpawner_DLC3_AreaBarrier_C_UAID_5811222ECF19FDC002_2119505782",
+    "x": -744140.6,
+    "y": -59009.0,
+    "z": 29240.64,
+    "instance_id": "3997BAD449764D3A755E3EA152299244"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Desert_Hunter_02_02_C",
+    "name": "BP_NPCCampSpawner_Desert_Hunter_C_UAID_50EBF656371D6B5B02_1994109701",
+    "x": -96350.0,
+    "y": 491200.0,
+    "z": -1831.69,
+    "instance_id": "727EAE1242D051A291ED8DAF8CE5AB34"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Desert_Hunter_02_01_C",
+    "name": "BP_NPCCampSpawner_Desert_Hunter_C_UAID_50EBF656371D6D5B02_1190895236",
+    "x": 74030.0,
+    "y": 375080.0,
+    "z": -1650.0,
+    "instance_id": "C97ED59B4666E99B1D35B592AB36878A"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Desert_Hunter_01_03_C",
+    "name": "BP_NPCCampSpawner_Desert_Hunter_C_UAID_50EBF656371D9A5802_1119659788",
+    "x": -15710.0,
+    "y": 306340.0,
+    "z": 10596.4,
+    "instance_id": "59D857CF4DE2FB021E6478850ADC65B2"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Desert_Hunter_01_03_C",
+    "name": "BP_NPCCampSpawner_Desert_Hunter_C_UAID_50EBF656371DAE5C02_1166141048",
+    "x": -55200.0,
+    "y": 377960.0,
+    "z": 3170.0,
+    "instance_id": "A38B6C4A415CDEA03609DF964D396E10"
+  },
+  {
+    "class": "BP_NPCCampSpawner_FireCult_01_01_C",
+    "name": "BP_NPCCampSpawner_FireCult_02_01_C_UAID_50EBF656371D445202_1342460401",
+    "x": -328992.22,
+    "y": -31724.6,
+    "z": 15986.23,
+    "instance_id": "CA8D4A584935771EC3DF69A91CF915C9"
+  },
+  {
+    "class": "BP_NPCCampSpawner_FireCult_02_01_C",
+    "name": "BP_NPCCampSpawner_FireCult_02_01_C_UAID_50EBF656371D975802_1250246765",
+    "x": -276830.0,
+    "y": -158630.0,
+    "z": 20740.0,
+    "instance_id": "1B2AFF114D487099F7063B9E1229256F"
+  },
+  {
+    "class": "BP_NPCCampSpawner_FireCult_02_02_C",
+    "name": "BP_NPCCampSpawner_FireCult_02_01_C_UAID_50EBF656371DB06102_1124982752",
+    "x": -352810.0,
+    "y": -199150.0,
+    "z": 15848.83,
+    "instance_id": "56D9CE5A46DAC98CA7F7CE912BCDB31D"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Forest1_C",
+    "name": "BP_NPCCampSpawner_Forest1_C_UAID_FC349764B52DF69601_1406097155",
+    "x": -263130.0,
+    "y": 163440.0,
+    "z": 2930.0
+  },
+  {
+    "class": "BP_NPCCampSpawner_Forest1_C",
+    "name": "BP_NPCCampSpawner_Forest1_C_UAID_FC349764B52DF69601_1478349158",
+    "x": -216168.77,
+    "y": 192877.17,
+    "z": 278.06,
+    "instance_id": "FC2EB56748E348EB47851ABD32E86ECA"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Believer_01_02_C",
+    "name": "BP_NPCCampSpawner_Forest1_C_UAID_FC349764B52DF69601_1510584159",
+    "x": -201770.0,
+    "y": 280480.0,
+    "z": 4695.04,
+    "instance_id": "F6FDA6DA4848A197DDB87FAE31CA3534"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Believer_01_02_C",
+    "name": "BP_NPCCampSpawner_Forest1_C_UAID_FC349764B52DF69601_1544602161",
+    "x": -171068.8,
+    "y": 194873.2,
+    "z": -1121.86,
+    "instance_id": "EF9553554D619EE302B267B5E2F7F00E"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Believer_01_03_C",
+    "name": "BP_NPCCampSpawner_Forest1_C_UAID_FC349764B52DF69601_1570720162",
+    "x": -131700.67,
+    "y": 265693.9,
+    "z": 4200.28,
+    "instance_id": "C42E5F2844D19ABAB70F87880F5138BF"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_1848965305",
+    "x": -340331.97,
+    "y": 72250.42,
+    "z": 1589.02,
+    "instance_id": "DB65C0B543DAC3E54F524CBAA403CB12"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_2_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_1936139312",
+    "x": -274610.0,
+    "y": 72420.0,
+    "z": 1973.83,
+    "instance_id": "295032EB418A0DCA0204359603764FAA"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_2_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_2008849314",
+    "x": -260905.78,
+    "y": 33572.66,
+    "z": 8144.76,
+    "instance_id": "BA9FB55647256FA3C36DD2A7623BDDFE"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_3_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_2015640315",
+    "x": -231264.05,
+    "y": 17464.49,
+    "z": 13734.94,
+    "instance_id": "3B1741C04F12D36D3E2649918ED2BE51"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_3_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_2028673317",
+    "x": -191680.0,
+    "y": 91840.0,
+    "z": -1870.0,
+    "instance_id": "725D54A3436584EC1297BE92B1555D67"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_3_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_2037085319",
+    "x": -205070.0,
+    "y": 54880.0,
+    "z": 5094.39,
+    "instance_id": "6DB0058D47A5E54C5A09CBA191F326EB"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass2_C",
+    "name": "BP_NPCCampSpawner_Grass2_C_UAID_FC349764B52DDD8701_2060061322",
+    "x": -184320.0,
+    "y": -25570.0,
+    "z": -1320.0
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_50EBF656371D04BD01_1306090386",
+    "x": -426264.56,
+    "y": 96864.14,
+    "z": -948.34
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_50EBF656371D04BD01_1422822387",
+    "x": -261843.12,
+    "y": 303265.34,
+    "z": -1924.79
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_50EBF656371D04BD01_1496766388",
+    "x": -127052.61,
+    "y": -65132.59,
+    "z": -415.63
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_FC349764B52D435501_1407636816",
+    "x": -350890.0,
+    "y": 173550.0,
+    "z": 5170.0
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_TypeC_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_FC349764B52D9B5401_1613617153",
+    "x": -348400.0,
+    "y": 134220.0,
+    "z": 670.0,
+    "instance_id": "9B7C5AA14C6363B1B6AA118648C7D021"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_FC349764B52D9B5401_1720051155",
+    "x": -316478.47,
+    "y": 145451.42,
+    "z": -1529.64,
+    "instance_id": "2566E21D42F14C673588D489D629A94C"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Grass_C",
+    "name": "BP_NPCCampSpawner_Grass_C_UAID_FC349764B52DB45301_1762299488",
+    "x": -311170.0,
+    "y": 212530.0,
+    "z": 473.26
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_01_01_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_01_01_C_UAID_5811222ECF193BBC02_2033136412",
+    "x": 146100.0,
+    "y": 531810.0,
+    "z": -2105.0,
+    "instance_id": "CD86377D458F6B752448D6BAAC83FD29"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_01_01_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_01_01_C_UAID_5811222ECF1941BC02_1840087295",
+    "x": 239680.0,
+    "y": 383895.0,
+    "z": -2105.0,
+    "instance_id": "CCF0FA8548D87F3E323CD5BEC83136AC"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_01_02_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_01_02_C_UAID_5811222ECF193FBC02_1618040117",
+    "x": 246535.0,
+    "y": 365.0,
+    "z": -2105.0,
+    "instance_id": "7C9E8ABE4B129F0CB080D2941C54CBBB"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_01_04_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_01_04_C_UAID_5811222ECF19D1CD02_1804738160",
+    "x": -241448.73,
+    "y": 479414.25,
+    "z": -2103.0,
+    "instance_id": "A836B0D14312A4ED73654F986E27AE15"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_01_04_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_01_04_C_UAID_5811222ECF19D1CD02_2044822161",
+    "x": -441662.0,
+    "y": 275066.0,
+    "z": -2103.0,
+    "instance_id": "892FBBBC422CAD003A5EEF8FC6A03994"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_02_01_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_02_01_C_UAID_5811222ECF1940BC02_1780688368",
+    "x": -889385.0,
+    "y": -295080.0,
+    "z": -2105.0,
+    "instance_id": "6B3182DE486A4F35CA8C50965FDB9323"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_02_01_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_02_01_C_UAID_5811222ECF1941BC02_1171245120",
+    "x": -528455.0,
+    "y": -512500.0,
+    "z": -2105.0,
+    "instance_id": "8BC5F9764C85A3A49F6F3C8563582F45"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_02_02_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_02_02_C_UAID_5811222ECF193ABC02_1694335960",
+    "x": -615205.0,
+    "y": 745.0,
+    "z": -2105.0,
+    "instance_id": "473E0A6548CEB3B8B4D70EB1C29BDF63"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_02_02_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_02_02_C_UAID_5811222ECF193BBC02_1148676193",
+    "x": -288065.0,
+    "y": -361035.0,
+    "z": -2105.0,
+    "instance_id": "CEB4393C4A4A4830B4DC0090A816FE1F"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Hunter_SeaBase_02_03_C",
+    "name": "BP_NPCCampSpawner_Hunter_SeaBase_02_03_C_UAID_5811222ECF193FBC02_2118804123",
+    "x": -927948.1,
+    "y": -528171.2,
+    "z": -2487.92,
+    "instance_id": "8DA236B542A60D7AF3745D879EABD547"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Ninja_01_01_C",
+    "name": "BP_NPCCampSpawner_Ninja_01_01_C_UAID_50EBF656371D94BB02_1412611037",
+    "x": -21083.37,
+    "y": -57940.25,
+    "z": -164.65,
+    "instance_id": "4891680A49F9900B535C4BA65613035A"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Ninja_02_02_C",
+    "name": "BP_NPCCampSpawner_Ninja_02_02_C_UAID_50EBF656371D9B6702_1753447467",
+    "x": -24960.0,
+    "y": -120050.0,
+    "z": 6270.0,
+    "instance_id": "3825BD484018CC99F0698B81CED293AC"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Ninja_02_01_C",
+    "name": "BP_NPCCampSpawner_Ninja_C_UAID_50EBF656371D5E6102_1661978557",
+    "x": -39360.0,
+    "y": -159200.0,
+    "z": 2927.89,
+    "instance_id": "F3B9530341AE049F08BFFD8196DF76F6"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Ninja_01_02_C",
+    "name": "BP_NPCCampSpawner_Ninja_C_UAID_50EBF656371DDD5802_1954231200",
+    "x": -41578.48,
+    "y": -26697.15,
+    "z": -1155.99,
+    "instance_id": "07F5A9C641814039657F149175FF746A"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Scientist_01_01_C",
+    "name": "BP_NPCCampSpawner_Scientist_C_UAID_50EBF656371D516802_1984567667",
+    "x": -6829.48,
+    "y": 68773.52,
+    "z": 17082.18,
+    "instance_id": "7D1A502143A53208EA6E6D8A285F9AB8"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Scientist_01_01_C",
+    "name": "BP_NPCCampSpawner_Scientist_C_UAID_50EBF656371D526802_1865842511",
+    "x": 86680.0,
+    "y": 20860.0,
+    "z": 23508.31,
+    "instance_id": "466A8ADC45AFA34279CEDCADCA89663C"
+  },
+  {
+    "class": "BP_NPCCampSpawner_Scientist_02_03_C",
+    "name": "BP_NPCCampSpawner_Scientist_C_UAID_50EBF656371D536802_1123803952",
+    "x": 80930.0,
+    "y": -23020.0,
+    "z": 21478.11,
+    "instance_id": "4755C807428024A81BE13D9BFA1E865C"
+  },
+  {
+    "class": "BP_NPCCamp_Police_02_01_C",
+    "name": "BP_NPCCamp_Police_02_01_C_UAID_50EBF656371D016D02_1218914833",
+    "x": 61917.0,
+    "y": 315044.88,
+    "z": 2195.51
+  }
+]

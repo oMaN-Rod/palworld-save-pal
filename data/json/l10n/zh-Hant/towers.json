@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "自衛隊的高塔"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "永炎同心會的高塔"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "帕魯保護團體的高塔"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "雷恩盜獵集團的高塔"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "月花眾的高塔"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "基因研究部隊的高塔"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "盟約之塔"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "天墜之塔"
+  }
+}

@@ -1,0 +1,450 @@
+{
+  "Day-xx": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -340151.28,
+    "y": 219815.88,
+    "z": 5924.4,
+    "instance_id": "EF242F0144E9D4F114A336BD2FD798B0"
+  },
+  "Day0": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -257842.55,
+    "y": -47222.98,
+    "z": 3713.94,
+    "instance_id": "ADCB3FFC49D7CB554B4B79881E9DB393"
+  },
+  "Day1-1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -363278.84,
+    "y": 276903.75,
+    "z": 7155.3,
+    "instance_id": "0C49B5BA49A432199A0F32846D3D7BB9"
+  },
+  "Day1-2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -334784.28,
+    "y": 197304.75,
+    "z": -231.09,
+    "instance_id": "31CC1E1249C40BA5647C13B7D2940D07"
+  },
+  "Day10": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -294513.2,
+    "y": 149428.8,
+    "z": 180.33,
+    "instance_id": "03CEFEF84A5D0D019C9EAE9454EE5188"
+  },
+  "Day11": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -305819.06,
+    "y": 213786.97,
+    "z": 259.99,
+    "instance_id": "6BD510434204BB3B641627913BA148E0"
+  },
+  "Day12-1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -338282.1,
+    "y": 79978.52,
+    "z": 1174.62,
+    "instance_id": "9482C5324EDFE876A260B7BB73D8A902"
+  },
+  "Day12-2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -108816.96,
+    "y": 209024.47,
+    "z": 7044.98,
+    "instance_id": "8B007351429409A3DAFB28B61D991EFF"
+  },
+  "Day12-3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -111750.63,
+    "y": 242254.94,
+    "z": 18777.27,
+    "instance_id": "72846DB24E6DE4285BBD2FB7E5CA2644"
+  },
+  "Day13": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -226549.75,
+    "y": -100793.73,
+    "z": -1151.62,
+    "instance_id": "6B121B8B4E53BC1939BB6182C91353D9"
+  },
+  "Day15": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -146580.02,
+    "y": 301270.1,
+    "z": 3867.8,
+    "instance_id": "94337F10488BE4C2A15ED3A2777671D6"
+  },
+  "Day18": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -315241.1,
+    "y": 173395.64,
+    "z": -1150.32,
+    "instance_id": "7DB1EA3C49B5FD889B4CE085451D2E1D"
+  },
+  "Day2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -355891.75,
+    "y": 267443.47,
+    "z": 5633.83,
+    "instance_id": "ED37BF2A4F2EF90C133B34BC52E64148"
+  },
+  "Day22": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -118766.62,
+    "y": 385155.4,
+    "z": 705.01,
+    "instance_id": "A81015C14866ED27EACAA884474421B2"
+  },
+  "Day25": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -425135.84,
+    "y": -174718.52,
+    "z": 13963.24,
+    "instance_id": "1F2FFBF349646838DB68138D9FEE4A0F"
+  },
+  "Day29": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -402455.38,
+    "y": -28051.02,
+    "z": 6121.93,
+    "instance_id": "6EDFF26B4C68C1BBE60580B3EE5F13A4"
+  },
+  "Day3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -297552.5,
+    "y": 244560.22,
+    "z": -1877.85,
+    "instance_id": "E75E8DB244C56E173A5D4C84BDCF67D8"
+  },
+  "Day30": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -35730.34,
+    "y": 290459.88,
+    "z": -604.63,
+    "instance_id": "02DE594942C99A51EB4464B53FD0CE90"
+  },
+  "Day32": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 55488.26,
+    "y": 392859.38,
+    "z": -608.89,
+    "instance_id": "18FD5FAD4B3921712BE7B882B4DF1FCD"
+  },
+  "Day38": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -185327.23,
+    "y": 37273.1,
+    "z": 8536.12,
+    "instance_id": "E6568A10460A8A835C80E9BE5B1E5B42"
+  },
+  "Day5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 82137.27,
+    "y": 232163.86,
+    "z": 3488.86,
+    "instance_id": "E15B965B4E847C165E22DBAA1CABBD9E"
+  },
+  "Day6": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -210150.4,
+    "y": 50624.29,
+    "z": 22618.16,
+    "instance_id": "A115B25340416D246A6344B837779FEF"
+  },
+  "Day8": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -315600.6,
+    "y": 187181.95,
+    "z": 3268.49,
+    "instance_id": "F4797A7D474AE2C8DD2DFE83440DF7E3"
+  },
+  "DesertBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 42675.42,
+    "y": 313641.2,
+    "z": 1843.19,
+    "instance_id": "A48565EE4BB583DAF753EDB613FA07ED"
+  },
+  "DesertBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 27732.37,
+    "y": 432083.25,
+    "z": 10364.31,
+    "instance_id": "26FBBBE04825C41C5D2D98AE904A28A2"
+  },
+  "DesertBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 121473.12,
+    "y": 356847.9,
+    "z": 3926.64,
+    "instance_id": "79A0701B46A90560C59E91A316E43935"
+  },
+  "ForestBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -223189.58,
+    "y": 134498.48,
+    "z": 6785.92,
+    "instance_id": "3A28A028479E75DB269C828946D7F237"
+  },
+  "ForestBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -241933.28,
+    "y": 258173.56,
+    "z": -859.69,
+    "instance_id": "7CA4BB134C75D4F0EB3744B2B0753055"
+  },
+  "ForestBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -245568.66,
+    "y": 154861.5,
+    "z": 776.35,
+    "instance_id": "FAD162B8429EF2A0BC8E42A07849D44D"
+  },
+  "ForestBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -185964.25,
+    "y": 55638.52,
+    "z": 993.63,
+    "instance_id": "9BAA66764BBF9A0F6ED1688F075AF4AB"
+  },
+  "GrassBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -354575.56,
+    "y": 156361.98,
+    "z": 7280.36,
+    "instance_id": "6CAD36ED45AFF4A7C56AC6A958CE57DE"
+  },
+  "GrassBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -378067.7,
+    "y": 235013.86,
+    "z": -1951.43,
+    "instance_id": "0C1C5F524A295B51EB9708AAFABCEFE9"
+  },
+  "GrassBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -278642.03,
+    "y": 215975.7,
+    "z": -434.44,
+    "instance_id": "2DA37B754422C24AEB66CBA399D2C31D"
+  },
+  "GrassBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -201123.97,
+    "y": -24022.13,
+    "z": 3459.9,
+    "instance_id": "A2095B1648D94BFD5676B29A31A94180"
+  },
+  "GrassBoss5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -209798.6,
+    "y": -6681.26,
+    "z": 12031.8,
+    "instance_id": "B163A5C342BD24D670063CAA0555BBAC"
+  },
+  "SakurajimaBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -30652.63,
+    "y": -112970.73,
+    "z": 4190.08,
+    "instance_id": "D2FE16034F7927E25917A2A0D23B46DB"
+  },
+  "SakurajimaBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -5174.29,
+    "y": -64212.77,
+    "z": -1941.38,
+    "instance_id": "6AFEA5E44B6F7CB0A3D4E09042BAF259"
+  },
+  "SakurajimaBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -85253.05,
+    "y": -161407.5,
+    "z": -1876.05,
+    "instance_id": "5AA2D5F143BC1E07B2FB59A76E89A72A"
+  },
+  "SakurajimaBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -18050.46,
+    "y": -129575.17,
+    "z": 5774.23,
+    "instance_id": "0D12769547BEEDB00C876FBF7184BB87"
+  },
+  "SakurajimaBoss5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -18655.81,
+    "y": -152533.75,
+    "z": 2279.78,
+    "instance_id": "D9F28F954E8776EF4171FFAAC65C004F"
+  },
+  "SnowBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -42137.54,
+    "y": 117812.77,
+    "z": 7953.58,
+    "instance_id": "3E5C7FB345823230466DA9B421FEC838"
+  },
+  "SnowBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 145643.56,
+    "y": 95477.3,
+    "z": 41242.46,
+    "instance_id": "C35069CF495F4213EBD1FDB1D8091E60"
+  },
+  "SnowBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 103666.92,
+    "y": 72074.05,
+    "z": 41839.22,
+    "instance_id": "7408426B47FE58D98EC418B9002DD2CA"
+  },
+  "SorajimaBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -775846.75,
+    "y": 43093.77,
+    "z": 42253.79,
+    "instance_id": "54DBCCAF4C23EA6C5495CB8C3BD72EE2"
+  },
+  "SorajimaBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -803032.6,
+    "y": 48318.03,
+    "z": 51400.17,
+    "instance_id": "FF02D958424A20AC8AEE23ABF12CD414"
+  },
+  "SorajimaBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -811860.0,
+    "y": -109820.0,
+    "z": 53315.62,
+    "instance_id": "E80663DD4D2AB0B77AE8549204FE540B"
+  },
+  "SorajimaBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -817090.0,
+    "y": -42400.0,
+    "z": 40899.04,
+    "instance_id": "A55AEBC445D3A855537DD9B14F4C0EA8"
+  },
+  "SorajimaBoss5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -734100.0,
+    "y": -50560.0,
+    "z": 28877.71,
+    "instance_id": "16B2E4A142FD30F64DACA7B251B65458"
+  },
+  "SorajimaBoss6": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -739450.0,
+    "y": -99350.0,
+    "z": 47885.48,
+    "instance_id": "6E43A8CF422B8A0C23E60E8782F427A0"
+  },
+  "VikingBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -727250.7,
+    "y": -337204.9,
+    "z": 15489.49,
+    "instance_id": "EB719FA543B0B5A90472599097D35D79"
+  },
+  "VikingBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -661788.2,
+    "y": -286540.38,
+    "z": 1422.1,
+    "instance_id": "9779DD9F4328E67AEDD5BE9A7D649C57"
+  },
+  "VikingBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -680766.0,
+    "y": -228162.77,
+    "z": 10055.67,
+    "instance_id": "D1D1C90740B64269113906BF7A5A9B4D"
+  },
+  "VikingBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -554410.1,
+    "y": -145171.53,
+    "z": 11009.07,
+    "instance_id": "060C3B1F4B6867631CC2418E32305357"
+  },
+  "VikingBoss5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -897682.2,
+    "y": -441227.0,
+    "z": 19691.97,
+    "instance_id": "830091144707925322502CAE81CCB0CD"
+  },
+  "VolcanoBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": -249441.14,
+    "y": -148442.66,
+    "z": 11962.18,
+    "instance_id": "13378DE5456837BDA419318CEAECF550"
+  },
+  "WorldTree1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 472840.0,
+    "y": -717920.0,
+    "z": 34707.38,
+    "instance_id": "7447B3624BEF5F6FC8915DA98E2616A9"
+  },
+  "WorldTree2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 590640.0,
+    "y": -593490.0,
+    "z": 29517.62,
+    "instance_id": "C269058E45C859A205559E81FF7336C9"
+  },
+  "WorldTree3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 514459.16,
+    "y": -502842.84,
+    "z": 41067.46,
+    "instance_id": "818F45794489F246E862A1B4F878ACA8"
+  },
+  "WorldTreeBoss1": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 538930.0,
+    "y": -712660.0,
+    "z": 20990.0,
+    "instance_id": "AB1529CB46C4BE9796CDFEAFAC1B9BCF"
+  },
+  "WorldTreeBoss2": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 515560.0,
+    "y": -628530.0,
+    "z": 10894.48,
+    "instance_id": "31BC168441A2A1ADCDEB1CAB957AE4FC"
+  },
+  "WorldTreeBoss3": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 620810.0,
+    "y": -748550.0,
+    "z": 23208.06,
+    "instance_id": "2F95CB024355BCCBAC2226BE5D9A7BC2"
+  },
+  "WorldTreeBoss4": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 423580.0,
+    "y": -737420.0,
+    "z": 19382.76,
+    "instance_id": "293FEC504EBB6AE39F00DEA03DB83606"
+  },
+  "WorldTreeBoss5": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 553850.0,
+    "y": -730360.0,
+    "z": 21404.69,
+    "instance_id": "6E2613AD4AA46EBE4ABDDF8E86CFA7F2"
+  },
+  "WorldTreeBoss6": {
+    "class": "BP_LevelObject_Note_C",
+    "x": 498336.0,
+    "y": -753630.0,
+    "z": 41487.36,
+    "instance_id": "720F936842E57AEBE658969A53AA0AE7"
+  }
+}

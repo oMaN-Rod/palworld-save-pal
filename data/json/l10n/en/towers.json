@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "PIDF Tower"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Brothers of the Eternal Pyre Tower"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Free Pal Alliance Tower"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Rayne Syndicate Tower"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Moonflower Tower"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "PAL Genetic Research Unit Tower"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Azure Covenant Tower"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Feybreak Tower"
+  }
+}

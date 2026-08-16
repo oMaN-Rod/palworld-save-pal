@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Башня Вигилантов"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Башня Братства Вечного Пламени"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Башня Организации по Защите Палов"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Башня Отряда Браконьеров Рейн"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Башня Лунных Цветов"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Башня Отряда Генетических Исследований"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Башня Завета"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Башня Тэнраку"
+  }
+}

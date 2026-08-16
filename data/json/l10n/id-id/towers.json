@@ -1,0 +1,26 @@
+{
+  "BOSS_BATTLE_NAME_DesertBoss": {
+    "localized_name": "Menara Kelompok Penegak Hukum"
+  },
+  "BOSS_BATTLE_NAME_ElectricBoss": {
+    "localized_name": "Menara Sekutu Api Abadi"
+  },
+  "BOSS_BATTLE_NAME_ForestBoss": {
+    "localized_name": "Menara Kelompok Perlindungan Pal"
+  },
+  "BOSS_BATTLE_NAME_GrassBoss": {
+    "localized_name": "Menara Gerombolan Pemburu Liar Rayne"
+  },
+  "BOSS_BATTLE_NAME_SakurajimaBoss": {
+    "localized_name": "Menara Bunga Bulan"
+  },
+  "BOSS_BATTLE_NAME_SnowBoss": {
+    "localized_name": "Menara Unit Penelitian Genetika"
+  },
+  "BOSS_BATTLE_NAME_SorajimaBoss": {
+    "localized_name": "Menara Perjanjian"
+  },
+  "BOSS_BATTLE_NAME_VikingBoss": {
+    "localized_name": "Menara Langit Jatuh"
+  }
+}
