@@ -180,6 +180,9 @@
 <Seo pathname="/map" title={m.map_meta_title()} description={m.map_meta_description()} />
 
 <div class="relative h-full overflow-hidden">
+	<!-- The map fills the viewport and has no visible heading. This gives the
+	     page a document heading for screen readers and crawlers alike. -->
+	<h1 class="sr-only">{m.map_meta_title()}</h1>
 	{#if panelOpen}
 		<aside
 			class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"

@@ -88,6 +88,8 @@
 
 <svelte:window onkeydown={onKeydown} />
 
+<h1 class="sr-only">{m.about_meta_title()}</h1>
+
 {#if easterEgg}
 	<div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
 		<button

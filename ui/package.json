@@ -13,6 +13,7 @@
 		"build": "node scripts/generate-sitemap.mjs && vite build",
 		"build:desktop": "node scripts/ensure-desktop-env.mjs --force && vite build",
 		"build:web": "node scripts/ensure-web-env.mjs && node ../scripts/gen-json-manifest.mjs && cd ../psp-web && wasm-pack build --target web --out-dir ../ui/src/lib/wasm/psp && cd ../ui && node scripts/generate-sitemap.mjs && cross-env VITE_TRANSPORT=worker vite build",
+		"verify:build": "node scripts/check-build-output.mjs",
 		"generate:sitemap": "node scripts/generate-sitemap.mjs",
 		"preview": "vite preview",
 		"test": "npm run test:integration && npm run test:unit",
