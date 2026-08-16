@@ -1,16 +1,20 @@
 import compass from '$lib/assets/img/compass.webp';
-import { mapImg, relicTypeIcon } from './styles';
 import {
 	ICON_BASE,
 	ICON_BOSS,
+	ICON_CAMP,
 	ICON_DUNGEON,
+	ICON_EGG,
 	ICON_FAST_TRAVEL,
+	ICON_JOURNAL,
 	ICON_ORIGIN,
 	ICON_PLAYER,
+	ICON_TOWER_BOSS,
 	ICON_WATCHTOWER,
 	RELIC_TYPES,
 	relicIconId
 } from './iconIds';
+import { mapImg, relicTypeIcon } from './styles';
 
 export const PAL_BORDER_ALPHA = '#ffffff';
 export const PAL_BORDER_PREDATOR = '#ef4444';
@@ -23,7 +27,11 @@ export function staticIconUrls(): Record<string, string> {
 		[ICON_WATCHTOWER]: mapImg.watchTower,
 		[ICON_DUNGEON]: mapImg.dungeon,
 		[ICON_BOSS]: mapImg.boss,
-		[ICON_ORIGIN]: compass
+		[ICON_ORIGIN]: compass,
+		[ICON_TOWER_BOSS]: mapImg.tower,
+		[ICON_EGG]: mapImg.egg,
+		[ICON_CAMP]: mapImg.camp,
+		[ICON_JOURNAL]: mapImg.journal
 	};
 	for (const type of RELIC_TYPES) {
 		urls[relicIconId(type)] = relicTypeIcon(type);

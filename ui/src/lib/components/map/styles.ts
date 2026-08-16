@@ -27,6 +27,13 @@ export const mapImg = {
 	watchTower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_ftunlockmap.webp`),
 	oilRig: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_oilrig.webp`),
 	tower: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_tower.webp`),
+	camp: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_camp.webp`),
+	journal: assetLoader.loadImage(
+		`${ASSET_DATA_PATH}/img/t_itemicon_consume_technologybook_g1.webp`
+	),
+	// The wall-mounted board, not the free-standing one: its post eats half the
+	// icon box, leaving the sign itself unreadable at 24px.
+	signboard: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_buildobject_wallsignboard.webp`),
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`)
 };
 

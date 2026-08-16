@@ -14,7 +14,6 @@
 	import { mapImg } from '$components/map/styles';
 	import { STRUCTURE_TYPE_ORDER } from '$components/map/mapColors.svelte';
 	import { isWatchtower } from '$components/map/fastTravel';
-	import Target from '@lucide/svelte/icons/target';
 	import Unlock from '@lucide/svelte/icons/lock-open';
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
@@ -35,7 +34,7 @@
 		Player,
 		RelicPoint
 	} from '$types';
-	import { assetLoader, debounce } from '$utils';
+	import { debounce } from '$utils';
 	import { EditBaseModal, ExportBlueprintModal } from '$components/modals';
 	import PlacementPanel from '$components/map/PlacementPanel.svelte';
 	import { placementState } from '$lib/data/placement.svelte';
@@ -47,9 +46,6 @@
 	import { sendAndWait } from '$utils/websocketUtils';
 	import { SectionHeader } from '$components/ui';
 	import * as m from '$i18n/messages';
-	import { c, p } from '$lib/utils/commonTranslations';
-	import Eye from '@lucide/svelte/icons/eye';
-	import EyeOff from '@lucide/svelte/icons/eye-off';
 	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
 	import {
 		MAP_OBJECT_SCALE_DEFAULT,
@@ -57,6 +53,15 @@
 	} from '$components/map/mapObjectSize';
 	import { clampMapOpacity } from '$components/map/mapOpacity';
 	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
+	import MapLayerPanel from '$components/map/MapLayerPanel.svelte';
+	import {
+		allVisibilityPatch,
+		defaultPanelVisibility,
+		type MapLayerVisibility,
+		type PanelOptionId
+	} from '$components/map/layerPanelModel';
+	import { isMapLayerId, type MapLayerId } from '$components/map/layerRegistry';
+	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import MapHints from '$components/map/MapHints.svelte';
 
 	const appState = getAppState();
@@ -105,6 +110,8 @@
 		watchtowerSize: number;
 		/** Relic render scale as a multiple of true size. */
 		relicSize: number;
+		/** Visibility for the registry-driven layers, keyed by layer id. */
+		mapLayerVisibility?: MapLayerVisibility;
 	};
 
 	const mapOptionsState = persistedState<MapOptions>('mapOptions', {
@@ -140,6 +147,110 @@
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const panelOpen = $derived(mapOptions.panelOpen ?? true);
 	const mapOpacity = $derived(clampMapOpacity(mapOptions.mapOpacity));
+
+	// The layers that predate the registry are still drawn from their own stores
+	// and their own showX props; the panel drives those booleans rather than a
+	// second copy of the same state.
+	type LayerOptionKey =
+		| 'showFastTravel'
+		| 'showWatchtower'
+		| 'showRelics'
+		| 'showDungeons'
+		| 'showBosses'
+		| 'showAlphaPals'
+		| 'showPredatorPals'
+		| 'showOrigin'
+		| 'showPlayers'
+		| 'showBases'
+		| 'showLabels';
+
+	const LEGACY_LAYER_OPTION: Partial<Record<PanelOptionId, LayerOptionKey>> = {
+		fast_travel: 'showFastTravel',
+		watchtower: 'showWatchtower',
+		relics: 'showRelics',
+		dungeons: 'showDungeons',
+		boss_pals: 'showBosses',
+		alpha_pals: 'showAlphaPals',
+		predator_pals: 'showPredatorPals',
+		origin: 'showOrigin',
+		players: 'showPlayers',
+		bases: 'showBases',
+		labels: 'showLabels'
+	};
+
+	const PANEL_DEFAULTS = defaultPanelVisibility();
+
+	const layerVisibility = $derived.by(() => {
+		const record: MapLayerVisibility = { ...(mapOptions.mapLayerVisibility ?? {}) };
+		for (const [id, key] of Object.entries(LEGACY_LAYER_OPTION)) {
+			record[id as PanelOptionId] = mapOptions[key] ?? PANEL_DEFAULTS[id as PanelOptionId];
+		}
+		return record;
+	});
+
+	// Players and Bases lived inside {#if appState.saveFile}; without a save there
+	// is nothing to show or count.
+	function layerAvailable(id: PanelOptionId): boolean {
+		return (id !== 'players' && id !== 'bases') || !!appState.saveFile;
+	}
+
+	function layerCount(id: PanelOptionId): string | undefined {
+		switch (id) {
+			case 'fast_travel':
+				return fastTravelUnlockedCount !== undefined
+					? `${fastTravelUnlockedCount}/${fastTravelCount}`
+					: String(fastTravelCount);
+			case 'watchtower':
+				return watchtowerUnlockedCount !== undefined
+					? `${watchtowerUnlockedCount}/${watchtowerCount}`
+					: String(watchtowerCount);
+			case 'relics':
+				return appState.selectedPlayer
+					? `${relicCollectedCount}/${relicCount}`
+					: String(relicCount);
+			case 'players':
+				return `${loadedPlayerCount}/${totalPlayerCount}`;
+			case 'bases':
+				return `${loadedBaseCount}/${totalBaseCount}`;
+			case 'dungeons':
+				return String(dungeonCount);
+			case 'boss_pals':
+				return String(bossCount);
+			case 'alpha_pals':
+				return String(alphaPalCount);
+			case 'predator_pals':
+				return String(predatorPalCount);
+			case 'labels':
+			case 'origin':
+				return undefined;
+			default:
+				// Registry-backed layers report whatever the store has cached.
+				return isMapLayerId(id) ? mapLayers.peek(id)?.points.length?.toString() : undefined;
+		}
+	}
+
+	function handleLayerVisibility(patch: MapLayerVisibility) {
+		const registry: MapLayerVisibility = { ...(mapOptions.mapLayerVisibility ?? {}) };
+		const enabled: MapLayerId[] = [];
+		for (const [key, visible] of Object.entries(patch)) {
+			const id = key as PanelOptionId;
+			const legacy = LEGACY_LAYER_OPTION[id];
+			if (legacy) {
+				mapOptions[legacy] = visible;
+				continue;
+			}
+			registry[id] = visible;
+			if (visible && isMapLayerId(id)) enabled.push(id);
+		}
+		mapOptions.mapLayerVisibility = registry;
+		// Fetched on first enable, never on page load: every registry-only layer
+		// defaults to hidden, and the store caches and coalesces from here.
+		if (enabled.length > 0) void mapLayers.getLayers(enabled);
+	}
+
+	function handleShowAll(visible: boolean) {
+		handleLayerVisibility(allVisibilityPatch(visible));
+	}
 	const PANEL_W = 420;
 	const toast = getToastState();
 	let section = $state(['players']);
@@ -255,8 +366,6 @@
 	const alphaPalCount = $derived(areaSpawnPartition.alpha.length);
 	const predatorPalCount = $derived(areaSpawnPartition.predator.length);
 	const bossCount = $derived(areaSpawnPartition.boss.length);
-	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
-	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
 
 	function panTo(x: number, y: number, zoom = 4) {
 		const area = mapOf(x, y);
@@ -482,27 +591,6 @@
 		}
 	}
 
-	async function handleToggleAll(show: boolean) {
-		const skip = [
-			'enable3d',
-			'panelOpen',
-			'structureTypes',
-			'hideCollectedRelics',
-			'hideUnlockedFastTravel'
-		];
-		function toggleRecursive(obj: Record<string, any>, nested = false) {
-			for (const key in obj) {
-				if (skip.includes(key)) continue;
-				if (typeof obj[key] === 'boolean') {
-					obj[key] = show;
-				} else if (obj[key] !== null && typeof obj[key] === 'object') {
-					toggleRecursive(obj[key], true);
-				}
-			}
-		}
-		toggleRecursive(mapOptions);
-	}
-
 	let loadingComplete = $state(false);
 	let dismissLoading = $state(false);
 	let MapComponent: typeof import('$components/map/Map.svelte').default | undefined = $state();
@@ -650,128 +738,13 @@
 							</SectionHeader>
 						</div>
 
-						<div class="border-b-surface-800 grid grid-cols-2 border-b-2 pb-2">
-							<button class="flex items-center space-x-2" onclick={() => handleToggleAll(true)}>
-								<Eye class="mr-2 h-4 w-4" />
-								<span class="text-sm">Show All</span>
-							</button>
-							<button class="flex items-center space-x-2" onclick={() => handleToggleAll(false)}>
-								<EyeOff class="mr-2 h-4 w-4" />
-								<span class="text-sm">Hide All</span>
-							</button>
-						</div>
-						<div class="grid grid-cols-2 gap-2">
-							<button
-								class="flex items-center space-x-2 {mapOptions.showOrigin ? '' : 'opacity-25'}"
-								onclick={() => (mapOptions.showOrigin = !mapOptions.showOrigin)}
-							>
-								<Target class="mr-2 h-6 w-6" />
-								<span>{m.origin()}</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {mapOptions.showFastTravel ? '' : 'opacity-25'} "
-								onclick={() => (mapOptions.showFastTravel = !mapOptions.showFastTravel)}
-							>
-								<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
-								<span>{m.fast_travel()}</span>
-								<span class="text-surface-500 text-xs">
-									{fastTravelUnlockedCount !== undefined
-										? `${fastTravelUnlockedCount}/${fastTravelCount}`
-										: fastTravelCount}
-								</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {(mapOptions.showWatchtower ?? true)
-									? ''
-									: 'opacity-25'} "
-								onclick={() => (mapOptions.showWatchtower = !(mapOptions.showWatchtower ?? true))}
-							>
-								<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
-								<span>{m.watchtower()}</span>
-								<span class="text-surface-500 text-xs">
-									{watchtowerUnlockedCount !== undefined
-										? `${watchtowerUnlockedCount}/${watchtowerCount}`
-										: watchtowerCount}
-								</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {(mapOptions.showRelics ?? true)
-									? ''
-									: 'opacity-25'} "
-								onclick={() => (mapOptions.showRelics = !(mapOptions.showRelics ?? true))}
-							>
-								<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
-								<span>{m.relics()}</span>
-								<span class="text-surface-500 text-xs">
-									{appState.selectedPlayer ? `${relicCollectedCount}/${relicCount}` : relicCount}
-								</span>
-							</button>
-							{#if appState.saveFile}
-								<button
-									class="flex items-center space-x-2 {mapOptions.showPlayers ? '' : 'opacity-25'}"
-									onclick={() => (mapOptions.showPlayers = !mapOptions.showPlayers)}
-								>
-									<img src={mapImg.player} alt={m.player({ count: 2 })} class="mr-2 h-6 w-6" />
-									<span>{m.player({ count: 1 })}</span>
-									<span class="text-surface-500 text-xs"
-										>{loadedPlayerCount}/{totalPlayerCount}</span
-									>
-								</button>
-								<button
-									class="flex items-center space-x-2 {mapOptions.showBases ? '' : 'opacity-25'}"
-									onclick={() => (mapOptions.showBases = !mapOptions.showBases)}
-								>
-									<img src={mapImg.baseCamp} alt={m.base({ count: 2 })} class="mr-2 h-6 w-6" />
-									<span>{m.base({ count: 2 })}</span>
-									<span class="text-surface-500 text-xs">{loadedBaseCount}/{totalBaseCount}</span>
-								</button>
-							{/if}
-							<button
-								class="flex items-center space-x-2 {mapOptions.showDungeons ? '' : 'opacity-25'}"
-								onclick={() => (mapOptions.showDungeons = !mapOptions.showDungeons)}
-							>
-								<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
-								<span>{m.dungeons()}</span>
-								<span class="text-surface-500 text-xs">{dungeonCount}</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {(mapOptions.showBosses ?? true)
-									? ''
-									: 'opacity-25'}"
-								onclick={() => (mapOptions.showBosses = !(mapOptions.showBosses ?? true))}
-							>
-								<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
-								<span>{m.bosses()}</span>
-								<span class="text-surface-500 text-xs">{bossCount}</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {mapOptions.showAlphaPals ? '' : 'opacity-25'}"
-								onclick={() => (mapOptions.showAlphaPals = !mapOptions.showAlphaPals)}
-							>
-								<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
-								<span>{m.alpha_pal(p.pals)}</span>
-								<span class="text-surface-500 text-xs">{alphaPalCount}</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {mapOptions.showPredatorPals
-									? ''
-									: 'opacity-25'}"
-								onclick={() => (mapOptions.showPredatorPals = !mapOptions.showPredatorPals)}
-							>
-								<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
-								<span>{m.predator_pals(p.pals)}</span>
-								<span class="text-surface-500 text-xs">{predatorPalCount}</span>
-							</button>
-							<button
-								class="flex items-center space-x-2 {(mapOptions.showLabels ?? true)
-									? ''
-									: 'opacity-25'}"
-								onclick={() => (mapOptions.showLabels = !(mapOptions.showLabels ?? true))}
-							>
-								<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
-								<span>{m.map_labels()}</span>
-							</button>
-						</div>
+						<MapLayerPanel
+							layers={layerVisibility}
+							onVisibilityChange={handleLayerVisibility}
+							onShowAll={handleShowAll}
+							count={layerCount}
+							available={layerAvailable}
+						/>
 						{#if appState.selectedPlayer}
 							<div class="border-surface-700 grid grid-cols-2 gap-2 rounded-sm border p-2">
 								<button
@@ -1030,6 +1003,7 @@
 					showBosses={mapOptions.showBosses ?? true}
 					showAlphaPals={mapOptions.showAlphaPals}
 					showPredatorPals={mapOptions.showPredatorPals}
+					mapLayerVisibility={layerVisibility}
 					showLabels={mapOptions.showLabels ?? true}
 					show3d={mapOptions.enable3d ?? false}
 					palSize={mapOptions.palSize ?? PAL_SCALE_DEFAULT}

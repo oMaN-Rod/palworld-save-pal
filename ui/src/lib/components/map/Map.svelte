@@ -64,6 +64,10 @@
 	} from './features';
 	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
 	import { palIconId } from './iconIds';
+	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
+	import { getMapLayer, type MapLayerId } from './layerRegistry';
+	import type { MapLayerVisibility } from './layerPanelModel';
+	import { buildMapLayerFC } from './mapLayerFeatures';
 	import { relicsByType } from './relics';
 	import { isWatchtower } from './fastTravel';
 	import { portalRingColorExpression, PORTAL_HEX } from './mapObjectPortal';
@@ -136,6 +140,7 @@
 		showBosses = true,
 		showAlphaPals = true,
 		showPredatorPals = true,
+		mapLayerVisibility = {},
 		showLabels = true,
 		show3d = false,
 		showStructureControls = true,
@@ -188,6 +193,9 @@
 		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
+		/** Visibility for the registry-driven layers. The layers above keep their
+		 *  own props and their own stores. */
+		mapLayerVisibility?: MapLayerVisibility;
 		showLabels?: boolean;
 		show3d?: boolean;
 		/** Surfaces the structure sections of the 3D options panel. Off for callers
@@ -472,6 +480,20 @@
 	}
 
 	const staticIcons = staticIconUrls();
+
+	// Only the layers with no legacy rendering path. fast_travel, watchtower,
+	// relics, dungeons and the three spawn layers keep their own props, stores and
+	// sources above.
+	const REGISTRY_LAYERS: MapLayerId[] = ['tower_boss', 'camps', 'eggs', 'journals'];
+
+	const mapLayerRenders = $derived(
+		REGISTRY_LAYERS.map((id) => ({
+			id,
+			minZoom: getMapLayer(id).minZoom,
+			visible: mapLayerVisibility[id] ?? getMapLayer(id).defaultVisible,
+			fc: buildMapLayerFC(id, mapLayers.peek(id), area)
+		}))
+	);
 
 	const palIcons = $derived.by(() => {
 		const wanted = new Map<string, { url: string; border: string }>();
@@ -1847,6 +1869,21 @@
 					}}
 				/>
 			</Source.GeoJSON>
+
+			{#each mapLayerRenders as render (render.id)}
+				<Source.GeoJSON id="{render.id}-src" data={render.fc}>
+					<Layer.Symbol
+						id="{render.id}-icons"
+						visible={render.visible}
+						minzoom={render.minZoom}
+						layout={{
+							'icon-image': ['get', 'icon'],
+							'icon-allow-overlap': true,
+							'icon-size': zoomScaledIconSize(0.6, 1.0)
+						}}
+					/>
+				</Source.GeoJSON>
+			{/each}
 		</ImageLoader>
 
 		{#if hovered}

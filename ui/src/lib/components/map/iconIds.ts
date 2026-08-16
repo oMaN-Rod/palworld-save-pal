@@ -21,6 +21,10 @@ export const ICON_WATCHTOWER = 'watchTower';
 export const ICON_DUNGEON = 'dungeon';
 export const ICON_BOSS = 'boss';
 export const ICON_ORIGIN = 'origin';
+export const ICON_TOWER_BOSS = 'towerBoss';
+export const ICON_EGG = 'egg';
+export const ICON_CAMP = 'camp';
+export const ICON_JOURNAL = 'journal';
 
 export function relicIconId(relicType: string): string {
 	return `relic:${relicType}`;
