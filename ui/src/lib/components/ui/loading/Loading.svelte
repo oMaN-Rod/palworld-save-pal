@@ -41,7 +41,9 @@
 				class="text-secondary-400 animate-spin"
 				style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
 			/>
-			<Icon size={iconSize} class="text-secondary-300 absolute inset-0 m-auto" />
+			{#if Icon}
+				<Icon size={iconSize} class="text-secondary-300 absolute inset-0 m-auto" />
+			{/if}
 		</div>
 		<p class="loading-text">{label}</p>
 		<div class="loading-bar-track">

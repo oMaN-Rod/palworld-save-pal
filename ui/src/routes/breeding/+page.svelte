@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Seo } from '$lib/components/seo';
 	// Breeding Calculator — three modes behind one page:
 	//   • Direct    — A+B → child, and A+target → B options
 	//   • Selection — chain to a target from a user-picked theoretical pool
@@ -415,6 +416,8 @@
 		isWebBuild && !appState.saveFile ? allTabs.filter((tab) => tab.id !== 'save') : allTabs
 	);
 </script>
+
+<Seo pathname="/breeding" title={m.breeding_meta_title()} description={m.breeding_meta_description()} />
 
 <div
 	class="animate-fade-in space-y-5 p-5 {chainViewMode === 'graph'

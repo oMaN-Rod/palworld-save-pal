@@ -1,4 +1,10 @@
 function getComputedColor(varName: string) {
+	// Read during component init, which also happens server-side while
+	// prerendering. There is no computed style there; the client recomputes on
+	// hydration.
+	if (typeof document === 'undefined' || typeof getComputedStyle === 'undefined') {
+		return '';
+	}
 	const computedStyle = getComputedStyle(document.body);
 	const value = computedStyle.getPropertyValue(varName).trim();
 	return value;
@@ -6,8 +12,7 @@ function getComputedColor(varName: string) {
 
 export function getComputedColorHex(varName: string): string {
 	const color = getComputedColor(varName);
-	const hex = rgbToHex(color) as string;
-	return hex;
+	return rgbToHex(color) ?? '#000000';
 }
 
 export function rgbToHex(rgbString: string | undefined) {

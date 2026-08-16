@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$i18n/messages';
+	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 	import {
 		palsData,
 		itemsData,
@@ -103,9 +104,12 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{m.docs_wiki()} | Palworld Save Pal</title>
-</svelte:head>
+<Seo
+	pathname="/wiki"
+	title={m.wiki_meta_title()}
+	description={m.wiki_meta_description()}
+	structuredData={breadcrumbSchema([{ name: 'Wiki', path: '/wiki' }])}
+/>
 
 <div>
 	<h1 class="mb-2 text-2xl font-bold">{m.docs_wiki()}</h1>

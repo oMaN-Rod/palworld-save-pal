@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Seo } from '$lib/components/seo';
 	import { getAppState } from '$states';
 	import { goto } from '$app/navigation';
 	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/utils';
@@ -175,6 +176,8 @@
 		options.relicTypes = Object.fromEntries(relicTypeList.map((type) => [type, show]));
 	}
 </script>
+
+<Seo pathname="/map" title={m.map_meta_title()} description={m.map_meta_description()} />
 
 <div class="relative h-full overflow-hidden">
 	{#if panelOpen}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Seo } from '$lib/components/seo';
 	import { getAppState } from '$states';
 	import { Card, Tooltip } from '$components/ui';
 	import Saitama from '$lib/assets/img/app/saitama.webp';
@@ -82,6 +83,8 @@
 		};
 	}
 </script>
+
+<Seo pathname="/about" title={m.about_meta_title()} description={m.about_meta_description()} />
 
 <svelte:window onkeydown={onKeydown} />
 
