@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { palsData, elementsData, activeSkillsData } from '$lib/data';
 	import { WikiEntity } from '$components/docs';
+	import { PalModelViewer } from '$components/pal';
 	import { Loading } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import {
@@ -51,6 +52,14 @@
 	{/if}
 {/snippet}
 
+{#snippet palImageFallback()}
+	<img
+		src={assetLoader.loadPalImage(palKey ?? '', pal?.is_pal ?? true)}
+		alt={`${pal?.localized_name} icon`}
+		class="size-full object-contain"
+	/>
+{/snippet}
+
 {#if pal && palKey}
 	<WikiEntity category="pals" title={pal.localized_name} subtitle={palKey} breadcrumbLabel={c.pal}>
 		{#snippet icons()}
@@ -61,11 +70,11 @@
 		{/snippet}
 
 		{#snippet media()}
-			<img
-				src={assetLoader.loadPalImage(palKey ?? '', pal.is_pal)}
-				alt={`${pal.localized_name} icon`}
-				class="max-h-87.5 max-w-full 2xl:max-h-150"
-			/>
+			<!-- Pals with no baked mesh (NPCs and a handful of variants) render the
+			     deck artwork instead, so the panel keeps its size either way. -->
+			<div class="relative aspect-square w-full">
+				<PalModelViewer characterKey={palKey} fallback={palImageFallback} />
+			</div>
 		{/snippet}
 
 		{#snippet infobox()}
