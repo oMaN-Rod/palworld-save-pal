@@ -68,3 +68,6 @@ data/json/settings.json
 
 # Superpowers scratch: SDD ledgers, task briefs, brainstorm mockups
 /.superpowers/
+
+# Wrangler local dev state (workerd cache, .dev.vars)
+.wrangler/
