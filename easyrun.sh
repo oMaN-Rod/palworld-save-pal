@@ -436,15 +436,20 @@ cleanup_children() {
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
     if [[ -n "$self_pgid" ]]; then
-        # Pass 1: SIGTERM to the whole group (graceful).
+        # This shell is a member of the group it is about to signal. SIGTERM is
+        # survivable (ignored below for the duration), but a group-wide SIGKILL
+        # is not trappable and would kill us before restore_env_on_exit runs,
+        # leaving ui/.env pointing at the dev build. So pass 2 enumerates the
+        # survivors and skips our own PID instead of killing the group.
+        trap '' TERM
         kill -TERM -- -"$self_pgid" 2>/dev/null
-        # Grace period for graceful shutdown.
         sleep 0.25
-        # Pass 2: SIGKILL anything still alive. Re-resolve group members to
-        # avoid sending KILL to already-reaped PIDs (harmless, but noisy).
-        for pid in "${CHILD_PIDS[@]}"; do
-            kill -0 "$pid" 2>/dev/null && kill -KILL -- -"$self_pgid" 2>/dev/null
+        local gpid
+        for gpid in $(ps -e -o pid=,pgid= 2>/dev/null \
+            | awk -v g="$self_pgid" -v me="$$" '$2==g && $1!=me {print $1}'); do
+            kill -KILL "$gpid" 2>/dev/null
         done
+        trap - TERM
     fi
     # Belt-and-suspenders: direct kill on each tracked PID too.
     local pid
