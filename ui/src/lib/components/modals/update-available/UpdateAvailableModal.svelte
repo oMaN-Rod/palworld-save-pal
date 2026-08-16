@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Button, Card } from '$components/ui';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
+	import { openExternalLink } from '$lib/utils/externalLink';
+
+	const RELEASES_URL = 'https://github.com/oMaN-Rod/palworld-save-pal/releases';
 
 	let { closeModal } = $props<{
 		closeModal: (value: [string, number]) => void;
@@ -20,10 +22,12 @@
 
 			<div class="mt-2 flex flex-row items-center justify-end space-x-2">
 				<Button
-					href="https://github.com/oMaN-Rod/palworld-save-pal/releases"
+					href={RELEASES_URL}
 					variant="primary"
 					target="_blank"
-					rel="noopener noreferrer">{m.update_now()}</Button
+					rel="noopener noreferrer"
+					onclick={(event: MouseEvent) => openExternalLink(event, RELEASES_URL)}
+					>{m.update_now()}</Button
 				>
 				<Button variant="ghost" onclick={handleLater}>{m.later()}</Button>
 			</div>
