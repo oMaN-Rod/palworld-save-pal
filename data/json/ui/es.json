@@ -103,6 +103,7 @@
   "bulk_actions": "Acciones masivas",
   "bulk_clone_to_ups_failed": "La clonación masiva al SAI (Sistema de Alimentación Ininterrumpida) falló. Inténtelo de nuevo.",
   "bulk_search_placeholder": "Buscar {entity} ...",
+  "camps": "Campamentos",
   "cancel": "Cancelar",
   "cannot_fill": "No puedes llenar tu {target} , necesitas {count} espacios más.",
   "cannot_paste_here": "No se puede pegar aquí (todavía™)",
@@ -113,6 +114,7 @@
   "character_container": "Contenedor de caracteres",
   "cheat_mode": "Modo trucos",
   "chest": "Cofre",
+  "chests": "Cofres",
   "choose_a_entity": "Elige una {entity}",
   "choose_entity": "Seleccionar entidad",
   "clear": "Claro",
@@ -142,6 +144,7 @@
   "close_toast": "Cerrar tostada",
   "collect_all_relics": "Recoge todas las reliquias visibles en este mapa.",
   "collected": "Coleccionado",
+  "collectibles": "Coleccionables",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Efigies de Lifmunk",
   "effigy": "Efigie de Lifmunk",
   "egg": "Huevo",
+  "eggs": "Huevos",
   "eject": "Expulsar",
   "element_and_type": "Elemento y tipo",
   "element_types": "Tipos de elementos",
@@ -321,6 +325,7 @@
   "friendship_rank": "Rango de amistad",
   "gamepass": "Game Pass",
   "gender": "Género",
+  "general": "General",
   "glider": "Planeador",
   "global_pal_storage": "Almacenamiento global {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Curar todo en {entity}",
   "heal_selected_pals": "Curar a {pals} seleccionados",
   "health": "Salud",
+  "hide_all": "Ocultar todo",
   "hide_collected": "Piel recogida",
   "hide_unlocked": "Ocultar desbloqueado",
   "how_many_clones": "¿Cuántos clones?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} copiado al portapapeles",
   "iv": "IV",
   "ivs": "Vías intravenosas",
+  "journals": "Notas",
   "key_items": "Elementos clave",
   "lab": "Laboratorio",
   "landing_cta_footnote": "Gratuito y de código abierto. Una herramienta creada por fans, no afiliada a Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Cargar gremio/bases",
   "load_player": "Cargar reproductor",
   "loaded_entity": "Cargado {entity}",
+  "loading": "Cargando",
   "loading_data": "Cargando datos...",
   "loading_entity": "Cargando {entity}",
   "loadout": "Carga",
   "location": "Ubicación",
+  "locations": "Ubicaciones",
   "lock_all": "Bloquear todo",
   "locked": "Bloqueado",
   "lucky": "Afortunado",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Puntos de interés",
   "predator": "Depredador",
   "predator_pals": "Depredador {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Ajustes",
   "shield": "Blindaje",
   "shortcuts": "Atajos",
+  "show_all": "Mostrar todo",
   "show_archived": "Mostrar archivado",
   "showing_pals": "Mostrando {start} a {end} de {total} {pals}",
   "size": "Tamaño",
@@ -897,6 +908,7 @@
   "total_count": "Recuento total",
   "total_exports": "Exportaciones totales",
   "total_pals": "Total {pals}",
+  "tower_boss": "Jefes de torre",
   "transfer": [
     {
       "declarations": [

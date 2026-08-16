@@ -103,6 +103,7 @@
   "bulk_actions": "批量操作",
   "bulk_clone_to_ups_failed": "批次複製到 UPS 失敗。請重試。",
   "bulk_search_placeholder": "搜尋{entity} ...",
+  "camps": "營地",
   "cancel": "取消",
   "cannot_fill": "您的{target}無法填滿，您還需要{count}個插槽。",
   "cannot_paste_here": "暫時無法在此處貼上",
@@ -113,6 +114,7 @@
   "character_container": "字元容器",
   "cheat_mode": "作弊模式",
   "chest": "公會箱子",
+  "chests": "寶箱",
   "choose_a_entity": "選取一個{entity}",
   "choose_entity": "選擇實體",
   "clear": "清除",
@@ -142,6 +144,7 @@
   "close_toast": "烤麵包機",
   "collect_all_relics": "收集地圖上所有可見的遺物",
   "collected": "集",
+  "collectibles": "收集品",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "利夫蒙克雕像",
   "effigy": "利夫蒙克雕像",
   "egg": "蛋",
+  "eggs": "蛋",
   "eject": "噴射",
   "element_and_type": "元素和類型",
   "element_types": "元素類型",
@@ -321,6 +325,7 @@
   "friendship_rank": "友善等級",
   "gamepass": "GamePass",
   "gender": "性別",
+  "general": "一般",
   "glider": "滑翔機",
   "global_pal_storage": "全球{pal}存儲",
   "gps": "全球定位系統",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "治癒{entity}中的所有人",
   "heal_selected_pals": "治癒選定的{pals}",
   "health": "健康",
+  "hide_all": "全部隱藏",
   "hide_collected": "隱藏收集",
   "hide_unlocked": "隱藏已解鎖",
   "how_many_clones": "有多少個克隆體？",
@@ -400,6 +406,7 @@
   "item_copied": "{name}已複製到剪貼簿",
   "iv": "第四",
   "ivs": "靜脈輸液",
+  "journals": "筆記",
   "key_items": "關鍵項目",
   "lab": "實驗室",
   "landing_cta_footnote": "免費開源。本工具由粉絲製作，與 Pocketpair 公司無關。",
@@ -486,10 +493,12 @@
   "load_guild_bases": "加載公會/基地",
   "load_player": "載入播放器",
   "loaded_entity": "已載入{entity}",
+  "loading": "正在載入",
   "loading_data": "正在載入資料...",
   "loading_entity": "正在載入{entity}",
   "loadout": "裝備",
   "location": "地點",
+  "locations": "地點",
   "lock_all": "全部鎖定",
   "locked": "已鎖定",
   "lucky": "幸運的",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "興趣點",
   "predator": "掠食者",
   "predator_pals": "捕食者{pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "設定",
   "shield": "盾",
   "shortcuts": "快速方式",
+  "show_all": "全部顯示",
   "show_archived": "顯示已存檔內容",
   "showing_pals": "顯示{start}到{end} {total} {pals}",
   "size": "尺寸",
@@ -897,6 +908,7 @@
   "total_count": "總數",
   "total_exports": "出口總額",
   "total_pals": "總共{pals}",
+  "tower_boss": "塔主",
   "transfer": [
     {
       "declarations": [

@@ -103,6 +103,7 @@
   "bulk_actions": "Operazioni di massa",
   "bulk_clone_to_ups_failed": "La clonazione in blocco su UPS non è riuscita. Riprova.",
   "bulk_search_placeholder": "Cerca {entity} ...",
+  "camps": "Accampamenti",
   "cancel": "Cancellare",
   "cannot_fill": "Non puoi riempire il tuo {target} , hai bisogno di {count} slot in più.",
   "cannot_paste_here": "Non è ancora possibile incollare qui™",
@@ -113,6 +114,7 @@
   "character_container": "Logo del personaggio",
   "cheat_mode": "Modalità Trucchi",
   "chest": "Forziere",
+  "chests": "Forzieri",
   "choose_a_entity": "Scegli {entity}",
   "choose_entity": "Seleziona l'entità",
   "clear": "Chiaro",
@@ -142,6 +144,7 @@
   "close_toast": "Brindisi ravvicinato",
   "collect_all_relics": "Raccogli tutte le reliquie visibili su questa mappa",
   "collected": "Raccolto",
+  "collectibles": "Collezionabili",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Effigi di Lifmunk",
   "effigy": "Effigie di Lifmunk",
   "egg": "Uovo",
+  "eggs": "Uova",
   "eject": "Espellere",
   "element_and_type": "Elemento e tipo",
   "element_types": "Tipi di elementi",
@@ -321,6 +325,7 @@
   "friendship_rank": "Grado di amicizia",
   "gamepass": "GamePass",
   "gender": "Genere",
+  "general": "Generale",
   "glider": "Aliante",
   "global_pal_storage": "Archiviazione globale {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Guarisci tutto in {entity}",
   "heal_selected_pals": "Guarisci i {pals} selezionati",
   "health": "Salute",
+  "hide_all": "Nascondi tutto",
   "hide_collected": "Pelle raccolta",
   "hide_unlocked": "Nascondi sbloccato",
   "how_many_clones": "Quanti cloni?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} copiato negli appunti",
   "iv": "IV",
   "ivs": "flebo",
+  "journals": "Note",
   "key_items": "Elementi chiave",
   "lab": "Laboratorio",
   "landing_cta_footnote": "Gratuito e open source. Uno strumento creato da fan, non affiliato a Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Carica gilde/basi",
   "load_player": "Carica il giocatore",
   "loaded_entity": "Caricata {entity}",
+  "loading": "Caricamento",
   "loading_data": "Caricamento dati in corso...",
   "loading_entity": "Caricamento di {entity}",
   "loadout": "Equipaggiamento",
   "location": "Posizione",
+  "locations": "Posizioni",
   "lock_all": "Blocca tutto",
   "locked": "Chiuso",
   "lucky": "Fortunato",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Punti di interesse",
   "predator": "Predatore",
   "predator_pals": "Predatore {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Impostazioni",
   "shield": "Scudo",
   "shortcuts": "Scorciatoie",
+  "show_all": "Mostra tutto",
   "show_archived": "Mostra archiviati",
   "showing_pals": "Visualizzazione {start} a {end} di {total} {pals}",
   "size": "Misurare",
@@ -897,6 +908,7 @@
   "total_count": "Conteggio totale",
   "total_exports": "Esportazioni totali",
   "total_pals": "Totale {pals}",
+  "tower_boss": "Boss delle torri",
   "transfer": [
     {
       "declarations": [

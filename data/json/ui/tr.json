@@ -103,6 +103,7 @@
   "bulk_actions": "Toplu İşlemler",
   "bulk_clone_to_ups_failed": "UPS'ye toplu klonlama başarısız oldu. Lütfen tekrar deneyin.",
   "bulk_search_placeholder": "{entity} araması...",
+  "camps": "Kamplar",
   "cancel": "İptal etmek",
   "cannot_fill": "{target} dolduramazsınız, {count} adet daha yuvaya ihtiyacınız var.",
   "cannot_paste_here": "Buraya yapıştıramazsınız (henüz™).",
@@ -113,6 +114,7 @@
   "character_container": "Karakter Konteyneri",
   "cheat_mode": "Hile Modu",
   "chest": "Sandık",
+  "chests": "Sandıklar",
   "choose_a_entity": "Bir {entity} seçin",
   "choose_entity": "Varlık Seçin",
   "clear": "Temizlemek",
@@ -142,6 +144,7 @@
   "close_toast": "Tostu kapat",
   "collect_all_relics": "Bu haritada görünen tüm kalıntıları toplayın.",
   "collected": "Toplandı",
+  "collectibles": "Koleksiyon Öğeleri",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Lifmunk Heykelleri",
   "effigy": "Lifmunk Heykeli",
   "egg": "Yumurta",
+  "eggs": "Yumurtalar",
   "eject": "Çıkarma",
   "element_and_type": "Element ve Tip",
   "element_types": "Element Tipleri",
@@ -321,6 +325,7 @@
   "friendship_rank": "Arkadaşlık Sıralaması",
   "gamepass": "GamePass",
   "gender": "Cinsiyet",
+  "general": "Genel",
   "glider": "Planör",
   "global_pal_storage": "Küresel {pal} Depolama",
   "gps": "Küresel Konumlama Sistemi",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "{entity} içindeki her şeyi iyileştir",
   "heal_selected_pals": "Seçilen {pals} iyileştir",
   "health": "Sağlık",
+  "hide_all": "Tümünü gizle",
   "hide_collected": "Toplananları gizle",
   "hide_unlocked": "Kilidi açılmış olanları gizle",
   "how_many_clones": "Kaç tane klon?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} panoya kopyalandı",
   "iv": "IV",
   "ivs": "IV'ler",
+  "journals": "Notlar",
   "key_items": "Önemli Maddeler",
   "lab": "Laboratuvar",
   "landing_cta_footnote": "Ücretsiz ve açık kaynak kodlu. Pocketpair, Inc. ile hiçbir bağlantısı olmayan, hayranlar tarafından geliştirilmiş bir araç.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Lonca/Üsleri Yükle",
   "load_player": "Oynatıcıyı Yükle",
   "loaded_entity": "{entity} yüklendi",
+  "loading": "Yükleniyor",
   "loading_data": "Veriler yükleniyor...",
   "loading_entity": "{entity} yükleniyor",
   "loadout": "Ekipman",
   "location": "Konum",
+  "locations": "Konumlar",
   "lock_all": "Tümünü Kilitle",
   "locked": "Kilitli",
   "lucky": "Şanslı",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "İlgi Çekici Noktalar",
   "predator": "Avcı",
   "predator_pals": "Avcı {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Ayarlar",
   "shield": "Kalkan",
   "shortcuts": "Kısayollar",
+  "show_all": "Tümünü göster",
   "show_archived": "Arşivlenmiş olanları göster",
   "showing_pals": "{start} {end} a kadar {total} {pals} gösteriliyor",
   "size": "Boyut",
@@ -897,6 +908,7 @@
   "total_count": "Toplam Sayı",
   "total_exports": "Toplam İhracat",
   "total_pals": "Toplam {pals}",
+  "tower_boss": "Kule Patronları",
   "transfer": [
     {
       "declarations": [

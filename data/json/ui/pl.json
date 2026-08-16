@@ -103,6 +103,7 @@
   "bulk_actions": "Akcje zbiorcze",
   "bulk_clone_to_ups_failed": "Klonowanie zbiorcze do UPS nie powiodło się. Spróbuj ponownie.",
   "bulk_search_placeholder": "Wyszukaj {entity} ...",
+  "camps": "Obozy",
   "cancel": "Anulować",
   "cannot_fill": "Nie możesz zapełnić {target} , potrzebujesz {count} więcej slotów.",
   "cannot_paste_here": "Nie można wkleić tutaj (jeszcze™)",
@@ -113,6 +114,7 @@
   "character_container": "Kontener postaci",
   "cheat_mode": "Tryb oszukiwania",
   "chest": "Skrzynia",
+  "chests": "Skrzynie",
   "choose_a_entity": "Wybierz {entity}",
   "choose_entity": "Wybierz jednostkę",
   "clear": "Jasne",
@@ -142,6 +144,7 @@
   "close_toast": "Zamknij tost",
   "collect_all_relics": "Zbierz wszystkie widoczne relikwie na tej mapie",
   "collected": "Zebrane",
+  "collectibles": "Znajdźki",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Kukły Lifmunka",
   "effigy": "Kukła Lifmunka",
   "egg": "Jajko",
+  "eggs": "Jajka",
   "eject": "Wyrzucać",
   "element_and_type": "Element i typ",
   "element_types": "Typy elementów",
@@ -321,6 +325,7 @@
   "friendship_rank": "Ranga przyjaźni",
   "gamepass": "GamePass",
   "gender": "Płeć",
+  "general": "Ogólne",
   "glider": "Szybowiec",
   "global_pal_storage": "Globalne przechowywanie {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Ulecz wszystko w {entity}",
   "heal_selected_pals": "Ulecz wybranych {pals}",
   "health": "Zdrowie",
+  "hide_all": "Ukryj wszystko",
   "hide_collected": "Ukryj zebrane",
   "hide_unlocked": "Ukryj odblokowane",
   "how_many_clones": "Ile klonów?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} skopiowano do schowka",
   "iv": "IV",
   "ivs": "kroplówki",
+  "journals": "Notatki",
   "key_items": "Kluczowe elementy",
   "lab": "Laboratorium",
   "landing_cta_footnote": "Darmowe i otwarte oprogramowanie. Narzędzie stworzone przez fanów, niezwiązane z Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Załaduj Gildię/Bazy",
   "load_player": "Załaduj odtwarzacz",
   "loaded_entity": "Załadowano {entity}",
+  "loading": "Ładowanie",
   "loading_data": "Ładowanie danych...",
   "loading_entity": "Ładowanie {entity}",
   "loadout": "Ładunek",
   "location": "Lokalizacja",
+  "locations": "Lokalizacje",
   "lock_all": "Zablokuj wszystko",
   "locked": "Zamknięty",
   "lucky": "Mający szczęście",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Ciekawe miejsca",
   "predator": "Drapieżnik",
   "predator_pals": "Predator {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Ustawienia",
   "shield": "Tarcza",
   "shortcuts": "Skróty",
+  "show_all": "Pokaż wszystko",
   "show_archived": "Pokaż zarchiwizowane",
   "showing_pals": "Pokazywanie {start} do {end} z {total} {pals}",
   "size": "Rozmiar",
@@ -897,6 +908,7 @@
   "total_count": "Całkowita liczba",
   "total_exports": "Całkowity eksport",
   "total_pals": "Razem {pals}",
+  "tower_boss": "Bossowie wież",
   "transfer": [
     {
       "declarations": [

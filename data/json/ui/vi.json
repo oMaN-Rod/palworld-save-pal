@@ -103,6 +103,7 @@
   "bulk_actions": "Thao tác hàng loạt",
   "bulk_clone_to_ups_failed": "Sao chép hàng loạt sang UPS không thành công. Vui lòng thử lại.",
   "bulk_search_placeholder": "Tìm kiếm {entity} ...",
+  "camps": "Trại",
   "cancel": "Hủy bỏ",
   "cannot_fill": "Bạn không thể lấp đầy {target} của mình, bạn cần thêm {count} ô trống nữa.",
   "cannot_paste_here": "Chưa thể dán nội dung vào đây (hiện tại™)",
@@ -113,6 +114,7 @@
   "character_container": "Thùng chứa ký tự",
   "cheat_mode": "Chế độ gian lận",
   "chest": "Rương",
+  "chests": "Rương",
   "choose_a_entity": "Chọn một {entity}",
   "choose_entity": "Chọn thực thể",
   "clear": "Thông thoáng",
@@ -142,6 +144,7 @@
   "close_toast": "Đóng bánh mì nướng",
   "collect_all_relics": "Thu thập tất cả các di vật có thể nhìn thấy trên bản đồ này.",
   "collected": "Đã thu thập",
+  "collectibles": "Vật phẩm sưu tầm",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Hình nộm Lifmunk",
   "effigy": "Hình nộm Lifmunk",
   "egg": "Trứng",
+  "eggs": "Trứng",
   "eject": "Đẩy ra",
   "element_and_type": "Phần tử & Loại",
   "element_types": "Các loại phần tử",
@@ -321,6 +325,7 @@
   "friendship_rank": "Xếp hạng tình bạn",
   "gamepass": "GamePass",
   "gender": "Giới tính",
+  "general": "Chung",
   "glider": "Tàu lượn",
   "global_pal_storage": "Lưu trữ toàn cầu {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Chữa lành tất cả trong {entity}",
   "heal_selected_pals": "Chữa lành {pals} đã chọn",
   "health": "Sức khỏe",
+  "hide_all": "Ẩn tất cả",
   "hide_collected": "Ẩn đồ đã thu thập",
   "hide_unlocked": "Ẩn phần đã mở khóa",
   "how_many_clones": "Có bao nhiêu bản sao?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} đã được sao chép vào clipboard",
   "iv": "IV",
   "ivs": "IVs",
+  "journals": "Ghi chú",
   "key_items": "Các mục chính",
   "lab": "Phòng thí nghiệm",
   "landing_cta_footnote": "Miễn phí và mã nguồn mở. Một công cụ do người hâm mộ tạo ra, không liên kết với Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Tải máy chủ/căn cứ",
   "load_player": "Tải trình phát",
   "loaded_entity": "Đã tải {entity}",
+  "loading": "Đang tải",
   "loading_data": "Đang tải dữ liệu...",
   "loading_entity": "Đang tải {entity}",
   "loadout": "Trang bị",
   "location": "Vị trí",
+  "locations": "Vị trí",
   "lock_all": "Khóa tất cả",
   "locked": "Đã khóa",
   "lucky": "May mắn",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Địa điểm đáng chú ý",
   "predator": "Kẻ săn mồi",
   "predator_pals": "Kẻ săn mồi {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Cài đặt",
   "shield": "Khiên",
   "shortcuts": "Phím tắt",
+  "show_all": "Hiện tất cả",
   "show_archived": "Hiển thị các nội dung đã lưu trữ",
   "showing_pals": "Hiển thị {start} đến {end} trong tổng {total} {pals}",
   "size": "Kích cỡ",
@@ -897,6 +908,7 @@
   "total_count": "Tổng số",
   "total_exports": "Tổng xuất khẩu",
   "total_pals": "Tổng số {pals}",
+  "tower_boss": "Trùm Tháp",
   "transfer": [
     {
       "declarations": [

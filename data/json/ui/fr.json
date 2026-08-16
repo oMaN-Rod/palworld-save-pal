@@ -103,6 +103,7 @@
   "bulk_actions": "Actions groupées",
   "bulk_clone_to_ups_failed": "Échec du clonage en masse vers l'onduleur. Veuillez réessayer.",
   "bulk_search_placeholder": "Rechercher {entity} ...",
+  "camps": "Camps",
   "cancel": "Annuler",
   "cannot_fill": "Vous ne pouvez pas remplir votre {target} , il vous faut {count} emplacements supplémentaires.",
   "cannot_paste_here": "Impossible de coller ici (pour l'instant™)",
@@ -113,6 +114,7 @@
   "character_container": "Conteneur de personnage",
   "cheat_mode": "Mode triche",
   "chest": "Coffre",
+  "chests": "Coffres",
   "choose_a_entity": "Choisissez une {entity}",
   "choose_entity": "Choisir une entité",
   "clear": "Clair",
@@ -142,6 +144,7 @@
   "close_toast": "Toast fermé",
   "collect_all_relics": "Récupérez toutes les reliques visibles sur cette carte.",
   "collected": "Collecté",
+  "collectibles": "Objets à collectionner",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Effigies de Lifmunk",
   "effigy": "Effigie de Lifmunk",
   "egg": "Œuf",
+  "eggs": "Œufs",
   "eject": "Éjecter",
   "element_and_type": "Élément et type",
   "element_types": "Types d'éléments",
@@ -321,6 +325,7 @@
   "friendship_rank": "Rang d'amitié",
   "gamepass": "GamePass",
   "gender": "Genre",
+  "general": "Général",
   "glider": "Planeur",
   "global_pal_storage": "Stockage global {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Guérir tout dans {entity}",
   "heal_selected_pals": "Soignez {pals} sélectionnés",
   "health": "Santé",
+  "hide_all": "Tout masquer",
   "hide_collected": "Cacher collecté",
   "hide_unlocked": "Cacher déverrouillé",
   "how_many_clones": "Combien de clones ?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} copié dans le presse-papiers",
   "iv": "IV",
   "ivs": "perfusions intraveineuses",
+  "journals": "Notes",
   "key_items": "Éléments clés",
   "lab": "Laboratoire",
   "landing_cta_footnote": "Logiciel libre et gratuit. Un outil créé par des fans, sans lien avec Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Charger Guilde/Bases",
   "load_player": "Charger le lecteur",
   "loaded_entity": "{entity} chargée",
+  "loading": "Chargement",
   "loading_data": "Chargement des données...",
   "loading_entity": "Chargement de {entity}",
   "loadout": "Équipement",
   "location": "Emplacement",
+  "locations": "Emplacements",
   "lock_all": "Verrouiller tout",
   "locked": "Fermé",
   "lucky": "Chanceux",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Points d'intérêt",
   "predator": "Prédateur",
   "predator_pals": "Prédateur {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Paramètres",
   "shield": "Bouclier",
   "shortcuts": "Raccourcis",
+  "show_all": "Tout afficher",
   "show_archived": "Afficher les archives",
   "showing_pals": "Affichage {start} à {end} de {total} {pals}",
   "size": "Taille",
@@ -897,6 +908,7 @@
   "total_count": "Nombre total",
   "total_exports": "Exportations totales",
   "total_pals": "Total {pals}",
+  "tower_boss": "Boss de tour",
   "transfer": [
     {
       "declarations": [

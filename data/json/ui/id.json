@@ -103,6 +103,7 @@
   "bulk_actions": "Tindakan Massal",
   "bulk_clone_to_ups_failed": "Pengkloningan massal ke UPS gagal. Silakan coba lagi.",
   "bulk_search_placeholder": "Cari {entity} ...",
+  "camps": "Kamp",
   "cancel": "Membatalkan",
   "cannot_fill": "Anda tidak dapat memenuhi {target} Anda, Anda membutuhkan {count} slot lagi.",
   "cannot_paste_here": "Tidak bisa menempelkan teks di sini (belum™)",
@@ -113,6 +114,7 @@
   "character_container": "Wadah Karakter",
   "cheat_mode": "Mode Curang",
   "chest": "Peti",
+  "chests": "Peti",
   "choose_a_entity": "Pilih sebuah {entity}",
   "choose_entity": "Pilih Entitas",
   "clear": "Jernih",
@@ -142,6 +144,7 @@
   "close_toast": "Tutup roti panggang",
   "collect_all_relics": "Kumpulkan semua relik yang terlihat di peta ini.",
   "collected": "Dikumpulkan",
+  "collectibles": "Barang Koleksi",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Patung-patung Lifmunk",
   "effigy": "Patung Lifmunk",
   "egg": "Telur",
+  "eggs": "Telur",
   "eject": "Mengeluarkan",
   "element_and_type": "Elemen & Tipe",
   "element_types": "Jenis Elemen",
@@ -321,6 +325,7 @@
   "friendship_rank": "Peringkat Persahabatan",
   "gamepass": "GamePass",
   "gender": "Jenis kelamin",
+  "general": "Umum",
   "glider": "Pesawat peluncur",
   "global_pal_storage": "Penyimpanan Global {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Sembuhkan semua yang ada di {entity}",
   "heal_selected_pals": "Sembuhkan {pals} terpilih",
   "health": "Kesehatan",
+  "hide_all": "Sembunyikan semua",
   "hide_collected": "Sembunyikan yang dikumpulkan",
   "hide_unlocked": "Sembunyikan tidak terkunci",
   "how_many_clones": "Berapa banyak klon?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} disalin ke papan klip",
   "iv": "IV",
   "ivs": "IV",
+  "journals": "Catatan",
   "key_items": "Poin-Poin Penting",
   "lab": "Laboratorium",
   "landing_cta_footnote": "Gratis dan sumber terbuka. Alat buatan penggemar, tidak berafiliasi dengan Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Muat Guild/Basis",
   "load_player": "Muat Pemutar",
   "loaded_entity": "{entity} dimuat",
+  "loading": "Memuat",
   "loading_data": "Memuat data...",
   "loading_entity": "Memuat {entity}",
   "loadout": "Perlengkapan",
   "location": "Lokasi",
+  "locations": "Lokasi",
   "lock_all": "Kunci Semua",
   "locked": "Terkunci",
   "lucky": "Beruntung",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Titik Menarik",
   "predator": "Predator",
   "predator_pals": "Predator {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Pengaturan",
   "shield": "Tameng",
   "shortcuts": "Jalan pintas",
+  "show_all": "Tampilkan semua",
   "show_archived": "Tampilkan arsip",
   "showing_pals": "Menampilkan {start} hingga {end} dari {total} {pals}",
   "size": "Ukuran",
@@ -897,6 +908,7 @@
   "total_count": "Jumlah Total",
   "total_exports": "Total Ekspor",
   "total_pals": "Total {pals}",
+  "tower_boss": "Bos Menara",
   "transfer": [
     {
       "declarations": [

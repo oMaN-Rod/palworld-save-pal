@@ -103,6 +103,7 @@
   "bulk_actions": "Ações em massa",
   "bulk_clone_to_ups_failed": "A clonagem em massa para o UPS falhou. Tente novamente.",
   "bulk_search_placeholder": "Pesquisar {entity} ...",
+  "camps": "Acampamentos",
   "cancel": "Cancelar",
   "cannot_fill": "Você não pode preencher seu {target} , você precisa de {count} mais espaços.",
   "cannot_paste_here": "Não é possível colar aqui (ainda™)",
@@ -113,6 +114,7 @@
   "character_container": "Contêiner de Caracteres",
   "cheat_mode": "Modo de trapaça",
   "chest": "Baú",
+  "chests": "Baús",
   "choose_a_entity": "Escolha uma {entity}",
   "choose_entity": "Selecionar entidade",
   "clear": "Claro",
@@ -142,6 +144,7 @@
   "close_toast": "Fechar brinde",
   "collect_all_relics": "Colete todas as relíquias visíveis neste mapa.",
   "collected": "Coletado",
+  "collectibles": "Colecionáveis",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Efígies de Lifmunk",
   "effigy": "Efígie de Lifmunk",
   "egg": "Ovo",
+  "eggs": "Ovos",
   "eject": "Ejetar",
   "element_and_type": "Elemento e tipo",
   "element_types": "Tipos de elementos",
@@ -321,6 +325,7 @@
   "friendship_rank": "Nível de Amizade",
   "gamepass": "GamePass",
   "gender": "Gênero",
+  "general": "Geral",
   "glider": "Planador",
   "global_pal_storage": "Armazenamento global {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Curar todos em {entity}",
   "heal_selected_pals": "Curar {pals} selecionados",
   "health": "Saúde",
+  "hide_all": "Ocultar tudo",
   "hide_collected": "Ocultar coletado",
   "hide_unlocked": "Ocultar desbloqueado",
   "how_many_clones": "Quantos clones?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} copiado para a área de transferência",
   "iv": "4",
   "ivs": "IVs",
+  "journals": "Anotações",
   "key_items": "Itens principais",
   "lab": "Laboratório",
   "landing_cta_footnote": "Gratuito e de código aberto. Uma ferramenta criada por fãs, sem qualquer vínculo com a Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Carregar Guilda/Bases",
   "load_player": "Carregar reprodutor",
   "loaded_entity": "Carregado {entity}",
+  "loading": "Carregando",
   "loading_data": "Carregando dados...",
   "loading_entity": "Carregando {entity}",
   "loadout": "Equipamento",
   "location": "Localização",
+  "locations": "Localizações",
   "lock_all": "Bloquear tudo",
   "locked": "Trancado",
   "lucky": "Sortudo",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Pontos de interesse",
   "predator": "Predador",
   "predator_pals": "Predador {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Configurações",
   "shield": "Escudo",
   "shortcuts": "Atalhos",
+  "show_all": "Mostrar tudo",
   "show_archived": "Mostrar arquivos",
   "showing_pals": "Exibindo {start} a {end} de {total} {pals}",
   "size": "Tamanho",
@@ -897,6 +908,7 @@
   "total_count": "Contagem total",
   "total_exports": "Exportações totais",
   "total_pals": "Total de {pals}",
+  "tower_boss": "Chefes de torre",
   "transfer": [
     {
       "declarations": [

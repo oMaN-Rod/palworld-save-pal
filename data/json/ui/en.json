@@ -196,6 +196,7 @@
   "bulk_actions": "Bulk Actions",
   "bulk_clone_to_ups_failed": "Bulk clone to UPS failed. Please try again.",
   "bulk_search_placeholder": "Search {entity}...",
+  "camps": "Camps",
   "cancel": "Cancel",
   "cannot_fill": "You cannot fill your {target}, you need {count} more slots.",
   "cannot_paste_here": "Cannot paste here (yet™)",
@@ -206,6 +207,7 @@
   "character_container": "Character Container",
   "cheat_mode": "Cheat Mode",
   "chest": "Chest",
+  "chests": "Chests",
   "choose_a_entity": "Choose a {entity}",
   "choose_entity": "Choose Entity",
   "clear": "Clear",
@@ -236,6 +238,7 @@
   "close_toast": "Close toast",
   "collect_all_relics": "Collect all visible relics on this map",
   "collected": "Collected",
+  "collectibles": "Collectibles",
   "collection": [
     {
       "declarations": [
@@ -339,6 +342,7 @@
   "effigies": "Lifmunk Effigies",
   "effigy": "Lifmunk Effigy",
   "egg": "Egg",
+  "eggs": "Eggs",
   "eject": "Eject",
   "element_and_type": "Element & Type",
   "element_types": "Element Types",
@@ -417,6 +421,7 @@
   "friendship_rank": "Friendship Rank",
   "gamepass": "GamePass",
   "gender": "Gender",
+  "general": "General",
   "glider": "Glider",
   "global_pal_storage": "Global {pal} Storage",
   "gps": "GPS",
@@ -442,6 +447,7 @@
   "heal_all_in_entity": "Heal all in {entity}",
   "heal_selected_pals": "Heal selected {pals}",
   "health": "Health",
+  "hide_all": "Hide all",
   "hide_collected": "Hide collected",
   "hide_unlocked": "Hide unlocked",
   "how_many_clones": "How many clones?",
@@ -496,6 +502,7 @@
   "item_copied": "{name} copied to clipboard",
   "iv": "IV",
   "ivs": "IVs",
+  "journals": "Journals",
   "key_items": "Key Items",
   "lab": "Lab",
   "landing_cta_footnote": "Free and open source. A fan-made tool, not affiliated with Pocketpair, Inc.",
@@ -595,10 +602,12 @@
   "load_guild_bases": "Load Guild/Bases",
   "load_player": "Load Player",
   "loaded_entity": "Loaded {entity}",
+  "loading": "Loading",
   "loading_data": "Loading data...",
   "loading_entity": "Loading {entity}",
   "loadout": "Loadout",
   "location": "Location",
+  "locations": "Locations",
   "lock_all": "Lock All",
   "locked": "Locked",
   "lucky": "Lucky",
@@ -766,6 +775,7 @@
       ]
     }
   ],
+  "poi": "Points of Interest",
   "predator": "Predator",
   "predator_pals": "Predator {pals}",
   "preset": [
@@ -866,6 +876,7 @@
   "settings": "Settings",
   "shield": "Shield",
   "shortcuts": "Shortcuts",
+  "show_all": "Show all",
   "show_archived": "Show archived",
   "showing_pals": "Showing {start} to {end} of {total} {pals}",
   "size": "Size",
@@ -1023,6 +1034,7 @@
   "total_count": "Total Count",
   "total_exports": "Total Exports",
   "total_pals": "Total {pals}",
+  "tower_boss": "Tower Bosses",
   "transfer": [
     {
       "declarations": [

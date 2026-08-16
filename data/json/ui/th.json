@@ -103,6 +103,7 @@
   "bulk_actions": "การดำเนินการจำนวนมาก",
   "bulk_clone_to_ups_failed": "การคัดลอกข้อมูลจำนวนมากไปยัง UPS ล้มเหลว โปรดลองอีกครั้ง",
   "bulk_search_placeholder": "ค้นหา {entity} ...",
+  "camps": "ค่าย",
   "cancel": "ยกเลิก",
   "cannot_fill": "คุณไม่สามารถเติม {target} ของคุณได้ คุณต้องใช้ช่องว่างเพิ่มอีก {count} ช่อง",
   "cannot_paste_here": "ยังวางข้อความตรงนี้ไม่ได้ (ในตอนนี้™)",
@@ -113,6 +114,7 @@
   "character_container": "คอนเทนเนอร์ตัวละคร",
   "cheat_mode": "โหมดโกง",
   "chest": "หีบสมบัติ",
+  "chests": "หีบสมบัติ",
   "choose_a_entity": "เลือก {entity}",
   "choose_entity": "เลือกเอนทิตี",
   "clear": "ชัดเจน",
@@ -142,6 +144,7 @@
   "close_toast": "ปิดขนมปังปิ้ง",
   "collect_all_relics": "รวบรวมโบราณวัตถุทั้งหมดที่มองเห็นได้บนแผนที่นี้",
   "collected": "รวบรวม",
+  "collectibles": "ของสะสม",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "หุ่นจำลองลิฟมังก์",
   "effigy": "หุ่นจำลองลิฟมังก์",
   "egg": "ไข่",
+  "eggs": "ไข่",
   "eject": "ดีดออก",
   "element_and_type": "องค์ประกอบและประเภท",
   "element_types": "ประเภทขององค์ประกอบ",
@@ -321,6 +325,7 @@
   "friendship_rank": "ระดับมิตรภาพ",
   "gamepass": "เกมพาส",
   "gender": "เพศ",
+  "general": "ทั่วไป",
   "glider": "เครื่องร่อน",
   "global_pal_storage": "พื้นที่จัดเก็บข้อมูลทั่วโลก {pal}",
   "gps": "จีเอส",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "รักษาทุกสิ่งใน {entity}",
   "heal_selected_pals": "รักษา {pals} ที่เลือกไว้",
   "health": "สุขภาพ",
+  "hide_all": "ซ่อนทั้งหมด",
   "hide_collected": "ซ่อนที่รวบรวมไว้",
   "hide_unlocked": "ซ่อนปลดล็อกแล้ว",
   "how_many_clones": "มีโคลนกี่ตัว?",
@@ -400,6 +406,7 @@
   "item_copied": "คัดลอก {name} ไปยังคลิปบอร์ดแล้ว",
   "iv": "IV",
   "ivs": "เส้นเลือดดำ",
+  "journals": "บันทึก",
   "key_items": "รายการสำคัญ",
   "lab": "ห้องปฏิบัติการ",
   "landing_cta_footnote": "ฟรีและโอเพนซอร์ส เครื่องมือที่สร้างโดยแฟนๆ ไม่เกี่ยวข้องกับ Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "โหลดกิลด์/ฐาน",
   "load_player": "โหลดผู้เล่น",
   "loaded_entity": "โหลด {entity} แล้ว",
+  "loading": "กำลังโหลด",
   "loading_data": "กำลังโหลดข้อมูล...",
   "loading_entity": "กำลังโหลด {entity}",
   "loadout": "โหลดเอาท์",
   "location": "ที่ตั้ง",
+  "locations": "ที่ตั้ง",
   "lock_all": "ล็อกทั้งหมด",
   "locked": "ล็อก",
   "lucky": "โชคดี",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "จุดที่น่าสนใจ",
   "predator": "นักล่า",
   "predator_pals": "นักล่า {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "การตั้งค่า",
   "shield": "โล่",
   "shortcuts": "ทางลัด",
+  "show_all": "แสดงทั้งหมด",
   "show_archived": "แสดงรายการที่เก็บถาวร",
   "showing_pals": "แสดงจำนวนเพื่อนตั้งแต่ {start} ถึง {end} จาก {total} {pals}",
   "size": "ขนาด",
@@ -897,6 +908,7 @@
   "total_count": "จำนวนรวม",
   "total_exports": "ยอดส่งออกรวม",
   "total_pals": "รวมทั้งหมด {pals}",
+  "tower_boss": "บอสหอคอย",
   "transfer": [
     {
       "declarations": [

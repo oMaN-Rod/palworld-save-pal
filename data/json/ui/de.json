@@ -103,6 +103,7 @@
   "bulk_actions": "Massenaktionen",
   "bulk_clone_to_ups_failed": "Die Massenklonierung auf die USV ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
   "bulk_search_placeholder": "Suche {entity} ...",
+  "camps": "Lager",
   "cancel": "Stornieren",
   "cannot_fill": "Du kannst dein {target} nicht füllen, du benötigst {count} weitere Slots.",
   "cannot_paste_here": "Kann hier (noch™) nicht einfügen",
@@ -113,6 +114,7 @@
   "character_container": "Zeichencontainer",
   "cheat_mode": "Cheat-Modus",
   "chest": "Truhe",
+  "chests": "Truhen",
   "choose_a_entity": "Wählen Sie eine {entity}",
   "choose_entity": "Entität auswählen",
   "clear": "Klar",
@@ -142,6 +144,7 @@
   "close_toast": "Toast schließen",
   "collect_all_relics": "Sammle alle sichtbaren Relikte auf dieser Karte.",
   "collected": "Gesammelt",
+  "collectibles": "Sammelobjekte",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Lifmunk-Figuren",
   "effigy": "Lifmunk-Figur",
   "egg": "Ei",
+  "eggs": "Eier",
   "eject": "Auswerfen",
   "element_and_type": "Element & Typ",
   "element_types": "Elementtypen",
@@ -321,6 +325,7 @@
   "friendship_rank": "Freundschaftsrang",
   "gamepass": "Game Pass",
   "gender": "Geschlecht",
+  "general": "Allgemein",
   "glider": "Segelflugzeug",
   "global_pal_storage": "Globaler {pal} Speicher",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Heile alle in {entity}",
   "heal_selected_pals": "Heile ausgewählte {pals}",
   "health": "Gesundheit",
+  "hide_all": "Alle ausblenden",
   "hide_collected": "Ausblenden gesammelt",
   "hide_unlocked": "Entsperrt ausblenden",
   "how_many_clones": "Wie viele Klone?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} in die Zwischenablage kopiert",
   "iv": "IV",
   "ivs": "Infusionen",
+  "journals": "Notizen",
   "key_items": "Wichtige Punkte",
   "lab": "Labor",
   "landing_cta_footnote": "Kostenlos und Open Source. Ein von Fans entwickeltes Tool, das in keiner Verbindung zu Pocketpair, Inc. steht.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Gilden/Basen laden",
   "load_player": "Spieler laden",
   "loaded_entity": "{entity} geladen",
+  "loading": "Wird geladen",
   "loading_data": "Daten werden geladen...",
   "loading_entity": "Laden der {entity}",
   "loadout": "Ausrüstung",
   "location": "Standort",
+  "locations": "Standorte",
   "lock_all": "Alles sperren",
   "locked": "Gesperrt",
   "lucky": "Glücklich",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Interessante Orte",
   "predator": "Raubtier",
   "predator_pals": "Predator {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Einstellungen",
   "shield": "Schild",
   "shortcuts": "Abkürzungen",
+  "show_all": "Alle anzeigen",
   "show_archived": "Archiv anzeigen",
   "showing_pals": "Zeigt {start} bis {end} von {total} {pals}",
   "size": "Größe",
@@ -897,6 +908,7 @@
   "total_count": "Gesamtzahl",
   "total_exports": "Gesamtexporte",
   "total_pals": "Total {pals}",
+  "tower_boss": "Turmbosse",
   "transfer": [
     {
       "declarations": [

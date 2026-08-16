@@ -103,6 +103,7 @@
   "bulk_actions": "Массовые действия",
   "bulk_clone_to_ups_failed": "Не удалось выполнить массовое клонирование на ИБП. Пожалуйста, попробуйте еще раз.",
   "bulk_search_placeholder": "Поиск {entity} ...",
+  "camps": "Лагеря",
   "cancel": "Отмена",
   "cannot_fill": "Вы не можете заполнить свой {target} , вам нужно {count} дополнительных слотов.",
   "cannot_paste_here": "Вставить сюда (пока недоступно™)",
@@ -113,6 +114,7 @@
   "character_container": "Контейнер символов",
   "cheat_mode": "Режим читов",
   "chest": "Сундук",
+  "chests": "Сундуки",
   "choose_a_entity": "Выберите {entity}",
   "choose_entity": "Выберите сущность",
   "clear": "Прозрачный",
@@ -142,6 +144,7 @@
   "close_toast": "Закрыть тост",
   "collect_all_relics": "Соберите все видимые реликвии на этой карте.",
   "collected": "Собрано",
+  "collectibles": "Коллекционные предметы",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "Фигурки Лифмунка",
   "effigy": "Чучело Лифмунка",
   "egg": "Яйцо",
+  "eggs": "Яйца",
   "eject": "Выбросить",
   "element_and_type": "Элемент и тип",
   "element_types": "Типы элементов",
@@ -321,6 +325,7 @@
   "friendship_rank": "Рейтинг дружбы",
   "gamepass": "GamePass",
   "gender": "Пол",
+  "general": "Общее",
   "glider": "Планер",
   "global_pal_storage": "Глобальное хранилище {pal}",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "Исцели всё в {entity}",
   "heal_selected_pals": "Вылечить выбранных {pals}",
   "health": "Здоровье",
+  "hide_all": "Скрыть все",
   "hide_collected": "Скрыть собранные",
   "hide_unlocked": "Скрыть разблокированную",
   "how_many_clones": "Сколько клонов?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} скопировано в буфер обмена",
   "iv": "IV",
   "ivs": "внутривенные инъекции",
+  "journals": "Записки",
   "key_items": "Ключевые элементы",
   "lab": "Лаборатория",
   "landing_cta_footnote": "Бесплатный инструмент с открытым исходным кодом. Создан фанатами и не связан с Pocketpair, Inc.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "Загрузка Гильдии/Баз",
   "load_player": "Загрузить плеер",
   "loaded_entity": "Загружено {entity}",
+  "loading": "Загрузка",
   "loading_data": "Загрузка данных...",
   "loading_entity": "Загрузка {entity}",
   "loadout": "Снаряжение",
   "location": "Расположение",
+  "locations": "Локации",
   "lock_all": "Заблокировать все",
   "locked": "Заблокировано",
   "lucky": "Удачливый",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "Точки интереса",
   "predator": "Хищник",
   "predator_pals": "Хищник {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "Настройки",
   "shield": "Щит",
   "shortcuts": "Ярлыки",
+  "show_all": "Показать все",
   "show_archived": "Показать архив",
   "showing_pals": "Отображается {start} до {end} из {total} {pals}",
   "size": "Размер",
@@ -897,6 +908,7 @@
   "total_count": "Общее количество",
   "total_exports": "Общий объем экспорта",
   "total_pals": "Всего {pals}",
+  "tower_boss": "Боссы башен",
   "transfer": [
     {
       "declarations": [

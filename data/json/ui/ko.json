@@ -103,6 +103,7 @@
   "bulk_actions": "대량 작업",
   "bulk_clone_to_ups_failed": "UPS로의 대량 복제에 실패했습니다. 다시 시도해 주세요.",
   "bulk_search_placeholder": "{entity} 검색하세요...",
+  "camps": "캠프",
   "cancel": "취소",
   "cannot_fill": "{target} 슬롯을 채울 수 없습니다. {count} 슬롯이 더 필요합니다.",
   "cannot_paste_here": "여기에 붙여넣을 수 없습니다(아직™).",
@@ -113,6 +114,7 @@
   "character_container": "문자 컨테이너",
   "cheat_mode": "치트 모드",
   "chest": "상자",
+  "chests": "상자",
   "choose_a_entity": "{entity} 를 선택하세요",
   "choose_entity": "엔티티를 선택하세요",
   "clear": "분명한",
@@ -142,6 +144,7 @@
   "close_toast": "토스트 닫기",
   "collect_all_relics": "이 지도에 보이는 모든 유물을 수집하세요",
   "collected": "모은",
+  "collectibles": "수집품",
   "collection": [
     {
       "declarations": [
@@ -244,6 +247,7 @@
   "effigies": "리프뭉크 조각상",
   "effigy": "리프뭉크 형상",
   "egg": "계란",
+  "eggs": "알",
   "eject": "꺼내기",
   "element_and_type": "요소 및 유형",
   "element_types": "요소 유형",
@@ -321,6 +325,7 @@
   "friendship_rank": "우정 등급",
   "gamepass": "게임패스",
   "gender": "성별",
+  "general": "일반",
   "glider": "글라이더",
   "global_pal_storage": "글로벌 {pal} 스토리지",
   "gps": "GPS",
@@ -346,6 +351,7 @@
   "heal_all_in_entity": "{entity} 의 모든 것을 치유하세요",
   "heal_selected_pals": "선택한 {pals} 치료하세요",
   "health": "건강",
+  "hide_all": "모두 숨기기",
   "hide_collected": "수집된 정보 숨기기",
   "hide_unlocked": "숨김 해제됨",
   "how_many_clones": "클론이 몇 개입니까?",
@@ -400,6 +406,7 @@
   "item_copied": "{name} 이 클립보드에 복사되었습니다",
   "iv": "IV",
   "ivs": "IVs",
+  "journals": "메모",
   "key_items": "주요 항목",
   "lab": "랩",
   "landing_cta_footnote": "무료 오픈 소스 소프트웨어입니다. 팬이 제작한 도구이며, Pocketpair, Inc.와는 아무런 관련이 없습니다.",
@@ -486,10 +493,12 @@
   "load_guild_bases": "길드/기지 로드",
   "load_player": "플레이어 불러오기",
   "loaded_entity": "{entity} 가 로드되었습니다.",
+  "loading": "로딩 중",
   "loading_data": "데이터를 불러오는 중...",
   "loading_entity": "{entity} 로딩 중",
   "loadout": "장비 구성",
   "location": "위치",
+  "locations": "위치",
   "lock_all": "모두 잠금",
   "locked": "잠김",
   "lucky": "운이 좋은",
@@ -645,6 +654,7 @@
       ]
     }
   ],
+  "poi": "주요 지점",
   "predator": "포식자",
   "predator_pals": "포식자 {pals}",
   "preset": [
@@ -742,6 +752,7 @@
   "settings": "설정",
   "shield": "방패",
   "shortcuts": "바로가기",
+  "show_all": "모두 보기",
   "show_archived": "보관된 콘텐츠 보기",
   "showing_pals": "{start} 부터 {end} 까지 {total} {pals} 명을 표시합니다.",
   "size": "크기",
@@ -897,6 +908,7 @@
   "total_count": "총 개수",
   "total_exports": "총 수출액",
   "total_pals": "총 {pals}",
+  "tower_boss": "타워 보스",
   "transfer": [
     {
       "declarations": [
