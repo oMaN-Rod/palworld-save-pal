@@ -86,36 +86,41 @@
 	<UnsupportedBrowser />
 {:else}
 	<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />
-	{#if publicShell}
-		<CompatBanner />
-	{/if}
-	<Modal>
-		<div class="relative z-[1] flex h-screen w-full overflow-hidden">
-			{#if publicShell}
-				<PublicNav />
-			{:else}
-				<Sidebar />
-			{/if}
-			<div class="relative flex flex-1 flex-col overflow-hidden">
-				{#if appState.autoSave}
-					<div class="auto-save-indicator" transition:fade>
-						<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
-						<Spinner size="size-5" />
-					</div>
+	<!-- Paraglide message accessors read module-scoped state, so nothing re-renders
+	     on a locale change by itself. Keying the whole shell — not just the routed
+	     page — is what re-translates the nav, banner and indicator too. -->
+	{#key localeState.version}
+		{#if publicShell}
+			<CompatBanner />
+		{/if}
+		<Modal>
+			<div class="relative z-[1] flex h-screen w-full overflow-hidden">
+				{#if publicShell}
+					<PublicNav />
+				{:else}
+					<Sidebar />
 				{/if}
-				<div class="relative flex-1 overflow-hidden">
-					{#key `${page.url.pathname}:${localeState.version}`}
-						<main
-							class="absolute inset-0 overflow-y-auto"
-							class:public-shell-main={publicShell && !isFullBleedRoute(page.url.pathname)}
-							transition:fade={{ duration: 150 }}
-						>
-							{@render children()}
-						</main>
-					{/key}
+				<div class="relative flex flex-1 flex-col overflow-hidden">
+					{#if appState.autoSave}
+						<div class="auto-save-indicator" transition:fade>
+							<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
+							<Spinner size="size-5" />
+						</div>
+					{/if}
+					<div class="relative flex-1 overflow-hidden">
+						{#key page.url.pathname}
+							<main
+								class="absolute inset-0 overflow-y-auto"
+								class:public-shell-main={publicShell && !isFullBleedRoute(page.url.pathname)}
+								transition:fade={{ duration: 150 }}
+							>
+								{@render children()}
+							</main>
+						{/key}
+					</div>
 				</div>
 			</div>
-		</div>
-	</Modal>
+		</Modal>
+	{/key}
 	<PalEditorOverlay />
 {/if}
