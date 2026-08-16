@@ -1,11 +1,13 @@
 import { goto } from '$app/navigation';
 import { UpdateAvailableModal } from '$components/modals';
 import * as m from '$i18n/messages';
-import { getLocale, setLocale } from '$i18n/runtime';
+import { extractLocaleFromCookie, getLocale, setLocale } from '$i18n/runtime';
+import { send } from '$lib/utils/websocketUtils';
 import { getAppState, getModalState, getToastState } from '$states';
 import { bumpLocaleVersion } from '$states/localeState.svelte';
-import { MessageType } from '$types';
+import { MessageType, type AppSettings, type SupportedLanguage } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
+import { reconcileSettingsLocale } from '$utils/localeReconcile';
 import type { WSMessageHandler } from '../types';
 
 export const progressMessageHandler: WSMessageHandler = {
@@ -60,10 +62,15 @@ export const settingsHandler: WSMessageHandler = {
 	type: MessageType.GET_SETTINGS,
 	async handle(data) {
 		const appState = getAppState();
-		const previous = getLocale();
-		appState.settings = data;
-		setLocale(appState.settings.language);
-		if (appState.settings.language !== previous) bumpLocaleVersion();
+		const settings = data as AppSettings;
+		const language = reconcileSettingsLocale(settings.language, {
+			storedLocale: () => extractLocaleFromCookie(),
+			getLocale: () => getLocale(),
+			setLocale: (next, opts) => setLocale(next as SupportedLanguage, opts),
+			bump: bumpLocaleVersion,
+			persist: (next) => send(MessageType.UPDATE_SETTINGS, { ...settings, language: next })
+		});
+		appState.settings = { ...settings, language: language as SupportedLanguage };
 	}
 };
 

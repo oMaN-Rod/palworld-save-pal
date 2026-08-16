@@ -17,3 +17,15 @@ export function switchLocale(code: string, deps: LocaleSwitchDeps): boolean {
 	deps.persist(code);
 	return true;
 }
+
+export type SettingsApplyDeps = LocaleSwitchDeps & { persistAll: () => void };
+
+/**
+ * Applies the settings a modal just edited. The settings echo no longer applies
+ * the backend's language, so the edit has to switch the locale itself —
+ * `switchLocale` persists the whole object on its way, leaving `persistAll` for
+ * the case where only the other fields changed.
+ */
+export function applyEditedSettings(language: string, deps: SettingsApplyDeps): void {
+	if (!switchLocale(language, deps)) deps.persistAll();
+}

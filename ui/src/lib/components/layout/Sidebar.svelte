@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAppState, getModalState } from '$states';
+	import { applySettings, getAppState, getModalState } from '$states';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { OpenFolder, SettingsModal } from '$components/modals';
@@ -85,7 +85,7 @@
 		});
 
 		if (result) {
-			send(MessageType.UPDATE_SETTINGS, { ...appState.settings });
+			applySettings();
 			setTimeout(() => {
 				location.reload();
 			}, 500);
@@ -168,10 +168,10 @@
 	</nav>
 
 	<div class="border-surface-700/30 border-t py-2">
-			{#each actionItems as item (item.id)}
-				<div class="flex justify-center">
-					{@render actionButton(item)}
-				</div>
-			{/each}
-		</div>
+		{#each actionItems as item (item.id)}
+			<div class="flex justify-center">
+				{@render actionButton(item)}
+			</div>
+		{/each}
+	</div>
 </aside>

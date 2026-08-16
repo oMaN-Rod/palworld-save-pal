@@ -1,8 +1,8 @@
 import { getLocale, setLocale } from '$i18n/runtime';
+import { applyEditedSettings, switchLocale } from '$lib/utils/localeSwitch';
 import { send } from '$lib/utils/websocketUtils';
-import { switchLocale } from '$lib/utils/localeSwitch';
-import { MessageType } from '$types';
 import type { SupportedLanguage } from '$types';
+import { MessageType } from '$types';
 import { getAppState } from './appState.svelte';
 
 let version = $state(0);
@@ -19,15 +19,27 @@ export function bumpLocaleVersion(): void {
 	version += 1;
 }
 
-export function applyLocale(code: SupportedLanguage): boolean {
+function localeDeps() {
 	const appState = getAppState();
-	return switchLocale(code, {
+	return {
 		getLocale: () => getLocale(),
-		setLocale: (next, opts) => setLocale(next as SupportedLanguage, opts),
+		setLocale: (next: string, opts: { reload: boolean }) =>
+			setLocale(next as SupportedLanguage, opts),
 		bump: bumpLocaleVersion,
-		persist: (next) => {
+		persist: (next: string) => {
 			appState.settings.language = next as SupportedLanguage;
 			send(MessageType.UPDATE_SETTINGS, { ...appState.settings });
-		}
-	});
+		},
+		persistAll: () => send(MessageType.UPDATE_SETTINGS, { ...appState.settings })
+	};
+}
+
+export function applyLocale(code: SupportedLanguage): boolean {
+	return switchLocale(code, localeDeps());
+}
+
+/** Saves settings edited in the settings modal, including a language change. */
+export function applySettings(): void {
+	const appState = getAppState();
+	applyEditedSettings(appState.settings.language, localeDeps());
 }

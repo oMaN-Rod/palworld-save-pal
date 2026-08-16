@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { switchLocale, type LocaleSwitchDeps } from './localeSwitch';
+import { describe, expect, it } from 'vitest';
+import { applyEditedSettings, switchLocale, type SettingsApplyDeps } from './localeSwitch';
 
-function deps(current: string, calls: string[] = []): LocaleSwitchDeps & { calls: string[] } {
+function deps(current: string, calls: string[] = []): SettingsApplyDeps & { calls: string[] } {
 	return {
 		calls,
 		getLocale: () => current,
@@ -13,6 +13,9 @@ function deps(current: string, calls: string[] = []): LocaleSwitchDeps & { calls
 		},
 		persist: (code) => {
 			calls.push(`persist:${code}`);
+		},
+		persistAll: () => {
+			calls.push('persistAll');
 		}
 	};
 }
@@ -48,5 +51,27 @@ describe('switchLocale', () => {
 		const d = deps('en');
 		switchLocale('fr', d);
 		expect(d.calls).toContain('persist:fr');
+	});
+});
+
+describe('applyEditedSettings', () => {
+	// The settings echo no longer applies the backend's language, so the modal
+	// that edited it has to switch the locale itself.
+	it('switches the locale when the edit changed it', () => {
+		const d = deps('en');
+		applyEditedSettings('fr', d);
+		expect(d.calls).toContain('setLocale:fr:reload=false');
+	});
+
+	it('does not persist twice when the locale switch already saved the settings', () => {
+		const d = deps('en');
+		applyEditedSettings('fr', d);
+		expect(d.calls).not.toContain('persistAll');
+	});
+
+	it('persists the other edited settings when the locale is unchanged', () => {
+		const d = deps('en');
+		applyEditedSettings('en', d);
+		expect(d.calls).toEqual(['persistAll']);
 	});
 });
