@@ -333,6 +333,125 @@ pub async fn handle_get_effigies(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     Ok(())
 }
 
+/// The marker-layer artifacts `get_map_layer` will serve. A request names a
+/// file to read off disk, so an id outside this list is refused rather than
+/// resolved as a path.
+const MAP_LAYERS: [&str; 10] = [
+    "fast_travel_points",
+    "dungeons",
+    "bosses",
+    "relics",
+    "effigies",
+    "towers",
+    "notes",
+    "eggs_spawners",
+    "chests",
+    "camps",
+];
+
+#[derive(Debug, serde::Deserialize)]
+pub struct GetMapLayerData {
+    pub layers: Vec<String>,
+}
+
+/// Folds `localized_name` onto each entry of a marker artifact from
+/// `l10n/{language}/{artifact}`, the same shape `handle_get_fast_travel_points`
+/// produces. Driven by the l10n file's existence, so an artifact gains names the
+/// moment its table ships — no list to keep in step.
+///
+/// Three cases serve the artifact untouched instead:
+/// - no l10n table for this artifact, or none for this language;
+/// - a top-level ARRAY (`eggs_spawners`, `camps`), whose entries carry no ids to
+///   key a merge on — inventing one would tie the wire shape to array order;
+/// - an entry the l10n table does not cover. Unlike the per-artifact handlers,
+///   which fall back to the entry's own key as its display name, this path can
+///   be pointed at a table that was never meant for it: `l10n/{lang}/relics.json`
+///   localizes `relic_data.json`'s 13 relic TYPES, while the `relics` artifact is
+///   407 markers keyed by instance id — zero keys in common. A blanket fallback
+///   would hand every one of those markers its own GUID as a name.
+fn localized_map_layer(game_data: &GameData, language: &str, artifact: &str) -> Value {
+    let raw = raw_file(game_data, artifact);
+    let Some(localization) = game_data
+        .get(&format!("l10n/{language}/{artifact}"))
+        .and_then(Value::as_object)
+    else {
+        return raw;
+    };
+    let Value::Object(base) = raw else {
+        return raw;
+    };
+    let mut merged = Map::new();
+    for (entry_id, mut entry_value) in base {
+        let localized_name = localization
+            .get(&entry_id)
+            .and_then(|l10n_entry| l10n_entry.get("localized_name"));
+        if let (Some(entry), Some(localized_name)) = (entry_value.as_object_mut(), localized_name) {
+            entry.insert("localized_name".into(), localized_name.clone());
+        }
+        merged.insert(entry_id, entry_value);
+    }
+    Value::Object(merged)
+}
+
+/// Marker-layer artifacts for the requested ids, keyed by id under `layers`,
+/// each localized by `localized_map_layer`. Batched — one request carrying N
+/// ids, never N requests — because the frontend correlates responses by message
+/// TYPE alone, so two single-layer requests in flight would resolve against
+/// each other.
+///
+/// `fast_travel_points` comes out of here in the same shape
+/// `get_fast_travel_points` produces, so a layer served through either message
+/// keeps its names.
+///
+/// EVERY outcome answers under `get_map_layer`, refusals included, so a client
+/// waiting on that type always resolves. An unrecognized id fails the whole
+/// request rather than dropping its key: a key the client asked for and never
+/// received would leave it waiting forever.
+pub async fn handle_get_map_layer(
+    data: Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let request: GetMapLayerData = match serde_json::from_value(data) {
+        Ok(request) => request,
+        Err(error) => {
+            ctx.emitter.emit(
+                MessageType::GetMapLayer,
+                &json!({"error": format!("Invalid map_layer request: {error}")}),
+            );
+            return Ok(());
+        }
+    };
+    if request.layers.is_empty() {
+        ctx.emitter.emit(
+            MessageType::GetMapLayer,
+            &json!({"error": "No map layers requested"}),
+        );
+        return Ok(());
+    }
+    // Every id is checked before anything is read, so a refusal never depends
+    // on the settings lookup below.
+    if let Some(unknown) = request
+        .layers
+        .iter()
+        .find(|layer_id| !MAP_LAYERS.contains(&layer_id.as_str()))
+    {
+        ctx.emitter.emit(
+            MessageType::GetMapLayer,
+            &json!({"error": format!("Unknown map layer: {unknown}")}),
+        );
+        return Ok(());
+    }
+    let language = current_language(ctx).await?;
+    let mut layers = Map::new();
+    for layer_id in request.layers {
+        let payload = localized_map_layer(&ctx.app.game_data, &language, &layer_id);
+        layers.insert(layer_id, payload);
+    }
+    ctx.emitter
+        .emit(MessageType::GetMapLayer, &json!({"layers": layers}));
+    Ok(())
+}
+
 /// Responds under the `get_active_skills` message type, NOT `get_ui_common`.
 /// The frontend correlates on that type — do not "fix" it here.
 pub async fn handle_get_ui_common(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
@@ -534,6 +653,48 @@ mod tests {
         fs::write(
             json_dir.join("map_object_footprints.json"),
             r#"{"PalBoxV2": {"sx": 500, "sy": 400, "sz": 390, "ox": -150, "oy": 0, "oz": 200, "typeA": "Other"}}"#,
+        )
+        .unwrap();
+        // Marker layers. Some real artifacts are top-level arrays rather than
+        // objects, so the fixtures keep both shapes.
+        fs::write(
+            json_dir.join("towers.json"),
+            r#"{"Tower1": {"class": "BP_PalBossTower_C", "x": 7}}"#,
+        )
+        .unwrap();
+        fs::write(json_dir.join("notes.json"), r#"{"Day0": {"x": 8}}"#).unwrap();
+        fs::write(
+            json_dir.join("eggs_spawners.json"),
+            r#"[{"class": "spawner", "x": 9}]"#,
+        )
+        .unwrap();
+        fs::write(
+            json_dir.join("chests.json"),
+            r#"[{"class": "chest", "x": 10}]"#,
+        )
+        .unwrap();
+        fs::write(
+            json_dir.join("camps.json"),
+            r#"[{"class": "camp", "x": 11}]"#,
+        )
+        .unwrap();
+        fs::write(
+            json_dir.join("l10n/en/towers.json"),
+            r#"{"Tower1": {"localized_name": "Rayne Syndicate Tower"}}"#,
+        )
+        .unwrap();
+        // Keyed by relic TYPE, while relics.json is keyed by marker instance
+        // id — the two share no keys at all, exactly as on disk.
+        fs::write(
+            json_dir.join("l10n/en/relics.json"),
+            r#"{"jump_power": {"localized_name": "Jump Power"}}"#,
+        )
+        .unwrap();
+        // An l10n table alongside an array-shaped artifact, which has no entry
+        // ids to key a merge on.
+        fs::write(
+            json_dir.join("l10n/en/camps.json"),
+            r#"{"0": {"localized_name": "First Camp"}}"#,
         )
         .unwrap();
     }
@@ -968,6 +1129,224 @@ mod tests {
             frame["data"]["Mystery"],
             json!({"code_name": "Mystery", "localized_name": "Mystery",
                    "description": "No description available"})
+        );
+    }
+
+    #[tokio::test]
+    async fn map_layer_serves_one_layer_keyed_by_its_id() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["notes"]})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert_eq!(
+            frame["data"]["layers"],
+            json!({"notes": {"Day0": {"x": 8}}})
+        );
+        test.assert_no_more_frames();
+    }
+
+    async fn set_language(test: &TestContext, language: &str) {
+        psp_db::settings::update_settings(
+            &*test.app.driver,
+            &psp_db::settings::SettingsUpdate {
+                language: language.to_string(),
+                clone_prefix: "©️".into(),
+                new_pal_prefix: "🆕".into(),
+                debug_mode: false,
+                cheat_mode: false,
+            },
+        )
+        .await
+        .unwrap();
+    }
+
+    /// Driven by the l10n file's existence, not by a list of artifact ids.
+    #[tokio::test]
+    async fn map_layer_folds_localized_name_from_the_l10n_table() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["towers"]})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(
+            frame["data"]["layers"]["towers"]["Tower1"],
+            json!({"class": "BP_PalBossTower_C", "x": 7,
+                   "localized_name": "Rayne Syndicate Tower"})
+        );
+    }
+
+    #[tokio::test]
+    async fn map_layer_without_an_l10n_table_is_served_unchanged() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["effigies"]}))
+            .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(
+            frame["data"]["layers"]["effigies"],
+            json!({"Eff1": {"x": 2}})
+        );
+    }
+
+    /// `l10n/<lang>/relics.json` localizes `relic_data.json`, not the relic
+    /// MARKER artifact of the same name: its keys are relic types, the markers'
+    /// are instance ids. Folding a fallback onto every entry would stamp each
+    /// marker with its own id as a display name.
+    #[tokio::test]
+    async fn map_layer_does_not_name_entries_the_l10n_table_does_not_cover() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["relics"]})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(
+            frame["data"]["layers"]["relics"]["Rel1"],
+            json!({"x": 3, "relic_type": "jump_power"})
+        );
+    }
+
+    /// Array-shaped artifacts carry no entry ids to key a merge on, so they
+    /// pass through untouched even when a same-named l10n table exists.
+    #[tokio::test]
+    async fn map_layer_passes_array_shaped_artifacts_through_untouched() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(
+            test,
+            handle_get_map_layer,
+            json!({"layers": ["camps", "eggs_spawners"]})
+        )
+        .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(
+            frame["data"]["layers"]["camps"],
+            json!([{"class": "camp", "x": 11}])
+        );
+        assert_eq!(
+            frame["data"]["layers"]["eggs_spawners"],
+            json!([{"class": "spawner", "x": 9}])
+        );
+    }
+
+    /// A language with no l10n tree degrades to the raw artifact rather than
+    /// failing the request.
+    #[tokio::test]
+    async fn map_layer_in_a_language_without_l10n_serves_the_raw_artifact() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        set_language(&test, "de").await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["towers"]})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(
+            frame["data"]["layers"]["towers"]["Tower1"],
+            json!({"class": "BP_PalBossTower_C", "x": 7})
+        );
+    }
+
+    /// One request, one response, every requested id echoed as a key — the
+    /// client correlates only on the message type, so several layers must
+    /// never be asked for as several concurrent requests.
+    #[tokio::test]
+    async fn map_layer_batches_every_requested_layer_into_one_response() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(
+            test,
+            handle_get_map_layer,
+            json!({"layers": ["notes", "chests", "camps"]})
+        )
+        .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert_eq!(frame["data"]["layers"]["notes"], json!({"Day0": {"x": 8}}));
+        assert_eq!(
+            frame["data"]["layers"]["chests"],
+            json!([{"class": "chest", "x": 10}])
+        );
+        assert_eq!(
+            frame["data"]["layers"]["camps"],
+            json!([{"class": "camp", "x": 11}])
+        );
+        test.assert_no_more_frames();
+    }
+
+    /// `get_map_layer` reads files off disk by name, so ids outside the
+    /// allowlist are refused rather than resolved as a path.
+    #[tokio::test]
+    async fn map_layer_rejects_an_id_outside_the_allowlist() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(
+            test,
+            handle_get_map_layer,
+            json!({"layers": ["towers", "../pals"]})
+        )
+        .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert!(
+            frame["data"]["error"]
+                .as_str()
+                .is_some_and(|error| error.contains("../pals")),
+            "the error must name the offending layer id, got: {}",
+            frame["data"]
+        );
+        assert!(
+            frame["data"].get("layers").is_none(),
+            "a rejected request must not emit a partial layer map"
+        );
+        test.assert_no_more_frames();
+    }
+
+    #[tokio::test]
+    async fn map_layer_with_no_layers_requested_is_an_error() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": []})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert!(
+            frame["data"]["error"].is_string(),
+            "an empty request must surface an error"
+        );
+        assert!(frame["data"].get("layers").is_none());
+        test.assert_no_more_frames();
+    }
+
+    /// A malformed payload still answers under `get_map_layer`, so a client
+    /// waiting on that type resolves instead of hanging.
+    #[tokio::test]
+    async fn map_layer_with_a_malformed_payload_is_an_error() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({})).unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert!(frame["data"]["error"].is_string());
+        test.assert_no_more_frames();
+    }
+
+    /// An allowlisted layer whose file is absent keeps `raw_file`'s empty-object
+    /// answer: the key is still present, so the client resolves.
+    #[tokio::test]
+    async fn map_layer_answers_an_absent_artifact_with_an_empty_object() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(test, handle_get_map_layer, json!({"layers": ["dungeons"]}))
+            .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["data"]["layers"]["dungeons"], json!({}));
+    }
+
+    /// `fast_travel_points` reaches the same shape through either message, so a
+    /// layer moved onto `get_map_layer` does not lose its names.
+    #[tokio::test]
+    async fn map_layer_and_get_fast_travel_points_agree_on_shape() {
+        let mut test = TestContext::new(write_fixture_tree).await;
+        run_handler_with_data!(
+            test,
+            handle_get_map_layer,
+            json!({"layers": ["fast_travel_points"]})
+        )
+        .unwrap();
+        let batched = test.next_frame_json();
+        assert_eq!(
+            batched["data"]["layers"]["fast_travel_points"]["FT1"],
+            json!({"x": 1, "localized_name": "Beach"})
+        );
+
+        let bespoke = run_handler!(test, handle_get_fast_travel_points);
+        assert_eq!(
+            batched["data"]["layers"]["fast_travel_points"],
+            bespoke["data"]
         );
     }
 

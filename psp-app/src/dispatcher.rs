@@ -176,6 +176,7 @@ async fn route(
             handlers::game_data::handle_get_fast_travel_points(ctx).await
         }
         MessageType::GetEffigies => handlers::game_data::handle_get_effigies(ctx).await,
+        MessageType::GetMapLayer => handlers::game_data::handle_get_map_layer(data, ctx).await,
         MessageType::GetUiCommon => handlers::game_data::handle_get_ui_common(ctx).await,
         MessageType::GetVersion => handlers::game_data::handle_get_version(ctx).await,
         MessageType::GetPals => handlers::game_data::handle_get_pals(ctx).await,
@@ -579,6 +580,34 @@ mod tests {
         )
         .await;
         assert_eq!(test.next_frame_json()["type"], "get_settings");
+    }
+
+    /// The batched map-layer request carries its layer list in `data`, so the
+    /// route arm has to forward the payload rather than call a bare handler.
+    #[tokio::test]
+    async fn get_map_layer_routes_with_its_payload() {
+        let mut test = TestContext::new(|json_dir| {
+            std::fs::write(json_dir.join("towers.json"), r#"{"Tower1": {"x": 7}}"#).unwrap();
+        })
+        .await;
+        dispatch(
+            envelope("get_map_layer", serde_json::json!({"layers": ["towers"]})),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
+                attachment: None,
+            },
+        )
+        .await;
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert_eq!(
+            frame["data"]["layers"]["towers"],
+            serde_json::json!({"Tower1": {"x": 7}})
+        );
+        test.assert_no_more_frames();
     }
 
     #[tokio::test]

@@ -204,6 +204,8 @@ define_message_types! {
     BreedingDirectPartners => "breeding_direct_partners",
     BreedingDirectParents => "breeding_direct_parents",
     BreedingChain => "breeding_chain",
+    // Map marker layers
+    GetMapLayer => "get_map_layer",
 }
 
 #[cfg(test)]
@@ -370,6 +372,7 @@ mod tests {
         "breeding_direct_partners",
         "breeding_direct_parents",
         "breeding_chain",
+        "get_map_layer",
     ];
 
     #[test]
