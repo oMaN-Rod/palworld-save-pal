@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { Button, Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill } from '$types';
-	import { Plus, Save, X, Trash, TimerReset, Delete, BicepsFlexed, Brain } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
+	import Trash from '@lucide/svelte/icons/trash';
+	import TimerReset from '@lucide/svelte/icons/timer-reset';
+	import Delete from '@lucide/svelte/icons/delete';
+	import BicepsFlexed from '@lucide/svelte/icons/biceps-flexed';
+	import Brain from '@lucide/svelte/icons/brain';
 	import { activeSkillsData, elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import { X, AlertTriangle, Trash2 } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
+	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';

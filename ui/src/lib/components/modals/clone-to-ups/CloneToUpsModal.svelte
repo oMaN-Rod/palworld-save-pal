@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { Button, Card, Combobox, Input } from '$components/ui';
-	import { X, Folder, Tag, Plus, Copy } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Folder from '@lucide/svelte/icons/folder';
+	import Tag from '@lucide/svelte/icons/tag';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Copy from '@lucide/svelte/icons/copy';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';

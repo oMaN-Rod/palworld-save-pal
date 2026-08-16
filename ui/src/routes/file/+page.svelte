@@ -11,7 +11,7 @@
 	import { GamepassBrowser } from '$components/gamepass';
 	import { TextInputModal } from '$components/modals';
 	import { openWorldOptionModal } from '$components/worldoption';
-	import { Settings2 } from 'lucide-svelte';
+	import Settings2 from '@lucide/svelte/icons/settings-2';
 	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';

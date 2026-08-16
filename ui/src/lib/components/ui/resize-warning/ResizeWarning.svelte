@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Maximize } from '@lucide/svelte';
+	import Maximize from '@lucide/svelte/icons/maximize';
 	import { getAppState } from '$states';
 	import { isWebBuild } from '$lib/utils/platform';
 

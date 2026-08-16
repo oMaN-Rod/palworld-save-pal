@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/slider';
 	import { onMount } from 'svelte';

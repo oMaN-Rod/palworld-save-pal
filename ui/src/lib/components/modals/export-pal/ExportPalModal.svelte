@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { Button, Card, Combobox } from '$components/ui';
-	import { Save, X, Upload, Share, Download, AlertTriangle, CheckCircle } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
+	import Upload from '@lucide/svelte/icons/upload';
+	import Share from '@lucide/svelte/icons/share';
+	import Download from '@lucide/svelte/icons/download';
+	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
+	import CheckCircle from '@lucide/svelte/icons/circle-check-big';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState } from '$states';

@@ -19,7 +19,15 @@
 	import { staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
 	import { focusModal } from '$utils/modalUtils';
-	import { Apple, Cuboid, Delete, Gem, Save, Scroll, Shield, Sword, X } from 'lucide-svelte';
+	import Apple from '@lucide/svelte/icons/apple';
+	import Cuboid from '@lucide/svelte/icons/cuboid';
+	import Delete from '@lucide/svelte/icons/delete';
+	import Gem from '@lucide/svelte/icons/gem';
+	import Save from '@lucide/svelte/icons/save';
+	import Scroll from '@lucide/svelte/icons/scroll';
+	import Shield from '@lucide/svelte/icons/shield';
+	import Sword from '@lucide/svelte/icons/sword';
+	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import EggConfigSection from './EggConfigSection.svelte';
 	import { getItemIcon, getItemTier, getBackgroundColor } from './itemUtils';

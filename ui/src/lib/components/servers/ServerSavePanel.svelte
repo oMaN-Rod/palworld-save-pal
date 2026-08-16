@@ -2,7 +2,8 @@
 	import type { Server } from '$types';
 	import { getServerState, getModalState } from '$states';
 	import { Button, Card } from '$components/ui';
-	import { FolderOpen, AlertTriangle } from 'lucide-svelte';
+	import FolderOpen from '@lucide/svelte/icons/folder-open';
+	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
 	import { goto } from '$app/navigation';
 
 	let { server } = $props<{ server: Server }>();

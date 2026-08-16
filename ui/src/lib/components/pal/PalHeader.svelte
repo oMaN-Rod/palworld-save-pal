@@ -5,7 +5,8 @@
 	import { cn } from '$theme';
 	import { getAppState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Minus, Plus } from 'lucide-svelte';
+	import Minus from '@lucide/svelte/icons/minus';
+	import Plus from '@lucide/svelte/icons/plus';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
 	import type { ValueChangeDetails } from '@zag-js/rating-group';

@@ -2,7 +2,7 @@
 	import { List } from '$components/ui';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType, type GamepassSave } from '$types';
-	import { Users } from 'lucide-svelte';
+	import Users from '@lucide/svelte/icons/users';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

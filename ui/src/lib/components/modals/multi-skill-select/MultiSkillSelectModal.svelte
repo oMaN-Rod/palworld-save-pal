@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { Button, Card, Tooltip, Combobox, List, TooltipButton } from '$components/ui';
 	import { type Pal, type SelectOption, type SkillType } from '$types';
-	import { Save, X, Delete, Trash, Plus } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
+	import Delete from '@lucide/svelte/icons/delete';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Plus from '@lucide/svelte/icons/plus';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components/pal';

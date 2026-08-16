@@ -8,7 +8,9 @@
 		CreateServerModal,
 		ImportServerModal
 	} from '$components/servers';
-	import { Plus, Server, Download } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Server from '@lucide/svelte/icons/server';
+	import Download from '@lucide/svelte/icons/download';
 	import type { CreateServerData, ImportServerData, Server as ServerType } from '$types';
 
 	const serverState = getServerState();

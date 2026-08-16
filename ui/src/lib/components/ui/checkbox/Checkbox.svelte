@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { Check } from 'lucide-svelte';
+	import Check from '@lucide/svelte/icons/check';
 
 	let {
 		checked = $bindable(false),

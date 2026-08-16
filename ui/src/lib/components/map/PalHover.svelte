@@ -2,7 +2,8 @@
 	import type { MapObject } from '$types';
 	import { worldToMap } from './utils';
 	import { palsData } from '$lib/data';
-	import { Globe, Map } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		point,

@@ -6,7 +6,9 @@
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import { EntryState, type Mission, type MissionType } from '$types';
-	import { CheckCheck, Trash2, ListX } from 'lucide-svelte';
+	import CheckCheck from '@lucide/svelte/icons/check-check';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import ListX from '@lucide/svelte/icons/list-x';
 	import * as m from '$i18n/messages';
 
 	const appState = getAppState();

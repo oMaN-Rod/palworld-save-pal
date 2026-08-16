@@ -1,14 +1,12 @@
 <script lang="ts">
-	import {
-		PawPrint,
-		User,
-		Package,
-		FlaskConical,
-		Blocks,
-		Users,
-		Bookmark,
-		Languages
-	} from 'lucide-svelte';
+	import PawPrint from '@lucide/svelte/icons/paw-print';
+	import User from '@lucide/svelte/icons/user';
+	import Package from '@lucide/svelte/icons/package';
+	import FlaskConical from '@lucide/svelte/icons/flask-conical';
+	import Blocks from '@lucide/svelte/icons/blocks';
+	import Users from '@lucide/svelte/icons/users';
+	import Bookmark from '@lucide/svelte/icons/bookmark';
+	import Languages from '@lucide/svelte/icons/languages';
 	import * as m from '$i18n/messages';
 
 	const features = [

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getAppState, getNavigationState } from '$states';
-	import { Bug } from 'lucide-svelte';
+	import Bug from '@lucide/svelte/icons/bug';
 	import { Button } from '$components/ui';
 
 	const appState = getAppState();

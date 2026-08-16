@@ -2,7 +2,7 @@
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { page } from '$app/stores';
 	import { staticIcons } from '$types/icons';
-	import { Copy } from 'lucide-svelte';
+	import Copy from '@lucide/svelte/icons/copy';
 	import { getToastState } from '$states';
 	import { Button } from '$components/ui';
 	import type { ValueChangeDetails } from '@zag-js/accordion';

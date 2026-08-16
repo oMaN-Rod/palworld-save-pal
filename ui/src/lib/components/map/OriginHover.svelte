@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mapToWorld } from './utils';
-	import { Globe, Map } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 </script>
 
 <div class="popup-content">

@@ -6,7 +6,7 @@
 	import { staticIcons } from '$types/icons';
 	import type { Guild, GuildLabResearchInfo, WorkSuitability } from '$types';
 	import NumberFlow from '@number-flow/svelte';
-	import { Unlock } from 'lucide-svelte';
+	import Unlock from '@lucide/svelte/icons/lock-open';
 	import { Button } from '$components/ui';
 	import * as m from '$i18n/messages';
 

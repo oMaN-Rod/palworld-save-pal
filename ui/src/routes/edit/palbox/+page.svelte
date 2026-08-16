@@ -21,28 +21,26 @@
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import {
-		Search,
-		ArrowDown01,
-		ArrowDown10,
-		ArrowDownAZ,
-		ArrowDownZA,
-		Plus,
-		CircleFadingPlus,
-		Copy,
-		Ambulance,
-		Trash,
-		X,
-		ArrowDownWideNarrow,
-		ArrowDownNarrowWide,
-		User,
-		ReplaceAll,
-		BicepsFlexed,
-		Bandage,
-		Play,
-		Info,
-		Upload
-	} from 'lucide-svelte';
+	import Search from '@lucide/svelte/icons/search';
+	import ArrowDown01 from '@lucide/svelte/icons/arrow-down-0-1';
+	import ArrowDown10 from '@lucide/svelte/icons/arrow-down-1-0';
+	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
+	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
+	import Plus from '@lucide/svelte/icons/plus';
+	import CircleFadingPlus from '@lucide/svelte/icons/circle-fading-plus';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Ambulance from '@lucide/svelte/icons/ambulance';
+	import Trash from '@lucide/svelte/icons/trash';
+	import X from '@lucide/svelte/icons/x';
+	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
+	import ArrowDownNarrowWide from '@lucide/svelte/icons/arrow-down-narrow-wide';
+	import User from '@lucide/svelte/icons/user';
+	import ReplaceAll from '@lucide/svelte/icons/replace-all';
+	import BicepsFlexed from '@lucide/svelte/icons/biceps-flexed';
+	import Bandage from '@lucide/svelte/icons/bandage';
+	import Play from '@lucide/svelte/icons/play';
+	import Info from '@lucide/svelte/icons/info';
+	import Upload from '@lucide/svelte/icons/upload';
 	import { Card } from '$components/ui';
 	import { PalCard, PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';

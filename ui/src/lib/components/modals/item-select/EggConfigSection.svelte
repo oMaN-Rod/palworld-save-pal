@@ -11,7 +11,8 @@
 	import { assetLoader } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import { TimerReset, Trash } from 'lucide-svelte';
+	import TimerReset from '@lucide/svelte/icons/timer-reset';
+	import Trash from '@lucide/svelte/icons/trash';
 	import { getPalIcon } from './itemUtils';
 
 	let {

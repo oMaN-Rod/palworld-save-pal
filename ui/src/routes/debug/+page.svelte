@@ -14,7 +14,10 @@
 		type Player
 	} from '$types';
 	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
-	import { Eye, EyeOff, RefreshCcw, Trash } from 'lucide-svelte';
+	import Eye from '@lucide/svelte/icons/eye';
+	import EyeOff from '@lucide/svelte/icons/eye-off';
+	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
+	import Trash from '@lucide/svelte/icons/trash';
 	import { onMount } from 'svelte';
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';

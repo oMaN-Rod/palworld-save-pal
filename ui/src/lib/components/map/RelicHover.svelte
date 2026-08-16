@@ -2,7 +2,10 @@
 	import type { RelicPoint } from '$types';
 	import { worldToMap } from './utils';
 	import { relicTypeIcon } from './styles';
-	import { Globe, Map, Check, X } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
+	import Check from '@lucide/svelte/icons/check';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 
 	let {

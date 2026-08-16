@@ -6,7 +6,9 @@
 	import { getToastState, theme, type ThemeName } from '$states';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
-	import { Save, X, WrapText } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
+	import WrapText from '@lucide/svelte/icons/text-wrap';
 
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 

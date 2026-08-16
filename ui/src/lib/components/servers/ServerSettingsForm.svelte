@@ -2,7 +2,8 @@
 	import type { Server } from '$types';
 	import { Button, Input } from '$components/ui';
 	import { getServerState } from '$states';
-	import { Save, ExternalLink } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { envGroups, PALWORLD_DOCS_URL } from './envGroups';
 	import EnvField from './EnvField.svelte';

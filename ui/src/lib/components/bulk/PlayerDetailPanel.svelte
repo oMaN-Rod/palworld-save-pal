@@ -3,8 +3,9 @@
 	import { getAppState, getPalEditorState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { X } from 'lucide-svelte';
-	import { Pencil, User } from '@lucide/svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Pencil from '@lucide/svelte/icons/pencil';
+	import User from '@lucide/svelte/icons/user';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';

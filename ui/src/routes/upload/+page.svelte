@@ -3,7 +3,9 @@
 	import { SaveDropzone } from '$components/upload';
 	import { MessageType } from '$types';
 	import { getAppState, getToastState } from '$states';
-	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
+	import Download from '@lucide/svelte/icons/download';
+	import Settings2 from '@lucide/svelte/icons/settings-2';
+	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import { goto } from '$app/navigation';
 	import { send, sendBytes, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { startSaveLoad } from '$lib/data/loadSave';

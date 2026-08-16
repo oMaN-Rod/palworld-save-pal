@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Input } from '$components/ui';
-	import { X } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
 
 	let {
 		value,

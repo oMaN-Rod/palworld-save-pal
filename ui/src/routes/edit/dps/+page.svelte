@@ -23,22 +23,20 @@
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import {
-		Search,
-		ArrowDown01,
-		ArrowDown10,
-		ArrowDownAZ,
-		ArrowDownZA,
-		Trash,
-		X,
-		ArrowDownWideNarrow,
-		ArrowDownNarrowWide,
-		ReplaceAll,
-		CircleFadingPlus,
-		Info,
-		Play,
-		Upload
-	} from 'lucide-svelte';
+	import Search from '@lucide/svelte/icons/search';
+	import ArrowDown01 from '@lucide/svelte/icons/arrow-down-0-1';
+	import ArrowDown10 from '@lucide/svelte/icons/arrow-down-1-0';
+	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
+	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
+	import Trash from '@lucide/svelte/icons/trash';
+	import X from '@lucide/svelte/icons/x';
+	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
+	import ArrowDownNarrowWide from '@lucide/svelte/icons/arrow-down-narrow-wide';
+	import ReplaceAll from '@lucide/svelte/icons/replace-all';
+	import CircleFadingPlus from '@lucide/svelte/icons/circle-fading-plus';
+	import Info from '@lucide/svelte/icons/info';
+	import Play from '@lucide/svelte/icons/play';
+	import Upload from '@lucide/svelte/icons/upload';
 	import { PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';

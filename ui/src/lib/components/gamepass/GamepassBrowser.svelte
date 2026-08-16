@@ -3,17 +3,15 @@
 	import { MessageType } from '$types';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { getToastState } from '$states';
-	import {
-		Users,
-		HardDrive,
-		Clock,
-		ChevronDown,
-		ChevronRight,
-		Layers,
-		FileBox,
-		Trash2,
-		Pencil
-	} from 'lucide-svelte';
+	import Users from '@lucide/svelte/icons/users';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
+	import Clock from '@lucide/svelte/icons/clock';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
+	import Layers from '@lucide/svelte/icons/layers';
+	import FileBox from '@lucide/svelte/icons/file-box';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Pencil from '@lucide/svelte/icons/pencil';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';

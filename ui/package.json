@@ -92,7 +92,6 @@
 		"d3-zoom": "^3.0.0",
 		"driver.js": "^1.4.0",
 		"fflate": "^0.8.3",
-		"lucide-svelte": "^0.469.0",
 		"maplibre-gl": "^5.17.0",
 		"monaco-editor": "^0.55.1",
 		"svelte-jsoneditor": "^3.11.0",

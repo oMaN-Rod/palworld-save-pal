@@ -12,7 +12,14 @@
 		Rarity
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { Ambulance, X, ReplaceAll, Plus, Trash, Bandage, Play, RefreshCcw } from 'lucide-svelte';
+	import Ambulance from '@lucide/svelte/icons/ambulance';
+	import X from '@lucide/svelte/icons/x';
+	import ReplaceAll from '@lucide/svelte/icons/replace-all';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Bandage from '@lucide/svelte/icons/bandage';
+	import Play from '@lucide/svelte/icons/play';
+	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
 	import { PalBadge } from '$components/pal';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';

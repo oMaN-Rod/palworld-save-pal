@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Server } from '$types';
 	import { Card } from '$components/ui';
-	import { Users, Play, Square } from 'lucide-svelte';
+	import Users from '@lucide/svelte/icons/users';
+	import Play from '@lucide/svelte/icons/play';
+	import Square from '@lucide/svelte/icons/square';
 	import { cn } from '$theme';
 
 	let {

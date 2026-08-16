@@ -11,12 +11,14 @@
 		inactivePlayerUids,
 		type PlayerRow
 	} from './bulk.utils';
-	import { Pencil, Trash2 } from 'lucide-svelte';
+	import Pencil from '@lucide/svelte/icons/pencil';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
-	import { ClockAlert, Trash } from '@lucide/svelte';
+	import ClockAlert from '@lucide/svelte/icons/clock-alert';
+	import Trash from '@lucide/svelte/icons/trash';
 	
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();

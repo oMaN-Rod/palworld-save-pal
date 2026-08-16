@@ -1,15 +1,13 @@
 <script lang="ts">
-	import {
-		BarChart3,
-		TrendingUp,
-		Database,
-		Calendar,
-		User,
-		Save,
-		Tag,
-		Upload,
-		RefreshCw
-	} from 'lucide-svelte';
+	import BarChart3 from '@lucide/svelte/icons/chart-column';
+	import TrendingUp from '@lucide/svelte/icons/trending-up';
+	import Database from '@lucide/svelte/icons/database';
+	import Calendar from '@lucide/svelte/icons/calendar';
+	import User from '@lucide/svelte/icons/user';
+	import Save from '@lucide/svelte/icons/save';
+	import Tag from '@lucide/svelte/icons/tag';
+	import Upload from '@lucide/svelte/icons/upload';
+	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 	import { Button } from '$components/ui';
 	import { getUpsState } from '$states';
 	import { elementsData } from '$lib/data';

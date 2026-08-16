@@ -3,7 +3,7 @@
 	import { type SelectOption } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
-	import { TimerReset } from 'lucide-svelte';
+	import TimerReset from '@lucide/svelte/icons/timer-reset';
 	import * as m from '$i18n/messages';
 
 	let { option } = $props<{

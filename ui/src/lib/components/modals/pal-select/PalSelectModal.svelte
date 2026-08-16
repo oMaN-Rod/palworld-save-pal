@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Button, Card, Tooltip, Combobox, Input } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';

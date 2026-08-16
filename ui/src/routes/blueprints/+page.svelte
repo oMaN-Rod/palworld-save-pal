@@ -6,7 +6,7 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { ExportBlueprintModal, SelectBaseModal } from '$components/modals';
 	import { Button, Card, FileDropzone } from '$components/ui';
-	import { Trash2 } from '@lucide/svelte';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import type { BlueprintRow } from '$types';
 
 	const appState = getAppState();

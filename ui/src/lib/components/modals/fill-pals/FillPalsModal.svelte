@@ -7,7 +7,10 @@
 	import { applyPalPreset, assetLoader, canBeAlpha, canBeLucky, formatNickname } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import NumberFlow from '@number-flow/svelte';
-	import { X, Check, Trash, Lock } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Check from '@lucide/svelte/icons/check';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Lock from '@lucide/svelte/icons/lock';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import PalTypeToggles from './PalTypeToggles.svelte';

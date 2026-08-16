@@ -2,7 +2,8 @@
 	import type { Server } from '$types';
 	import { getServerState } from '$states';
 	import { Button, Card, Input } from '$components/ui';
-	import { Send, Terminal } from 'lucide-svelte';
+	import Send from '@lucide/svelte/icons/send';
+	import Terminal from '@lucide/svelte/icons/terminal';
 	import { cn } from '$theme';
 	import { JSONEditor } from 'svelte-jsoneditor';
 

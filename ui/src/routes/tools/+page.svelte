@@ -9,7 +9,11 @@
 		UidSwapTab
 	} from '$components/tools';
 	import * as m from '$i18n/messages';
-	import { ArrowRightLeft, Gamepad2, Hash, Repeat, Upload } from 'lucide-svelte';
+	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
+	import Gamepad2 from '@lucide/svelte/icons/gamepad-2';
+	import Hash from '@lucide/svelte/icons/hash';
+	import Repeat from '@lucide/svelte/icons/repeat';
+	import Upload from '@lucide/svelte/icons/upload';
 
 	let activeTab = $state('convert');
 </script>

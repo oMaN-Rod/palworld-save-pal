@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { cn } from '$theme';
-	import { ExternalLink } from 'lucide-svelte';
+	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import type { CreateServerData, ServerType } from '$types';
 	import { getServerState } from '$states';
 	import { envGroups, PALWORLD_DOCS_URL } from './envGroups';
 	import EnvField from './EnvField.svelte';
-	import { Search } from 'lucide-svelte';
+	import Search from '@lucide/svelte/icons/search';
 
 	let {
 		title = 'Create Server',

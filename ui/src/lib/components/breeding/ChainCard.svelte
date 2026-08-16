@@ -6,7 +6,7 @@
 	import GitMerge from '@lucide/svelte/icons/git-merge';
 	import Plus from '@lucide/svelte/icons/plus';
 	import ArrowRight from '@lucide/svelte/icons/arrow-right';
-	import CheckCircle2 from '@lucide/svelte/icons/circle-check-big';
+	import CheckCircle2 from '@lucide/svelte/icons/circle-check';
 	import XCircle from '@lucide/svelte/icons/circle-x';
 	import Package from '@lucide/svelte/icons/package';
 	import Hand from '@lucide/svelte/icons/hand';

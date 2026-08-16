@@ -9,7 +9,7 @@
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import GitMerge from '@lucide/svelte/icons/git-merge';
 	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
-	import CheckCircle2 from '@lucide/svelte/icons/circle-check-big';
+	import CheckCircle2 from '@lucide/svelte/icons/circle-check';
 	import XCircle from '@lucide/svelte/icons/circle-x';
 	import GitFork from '@lucide/svelte/icons/git-fork';
 	import Spline from '@lucide/svelte/icons/spline';

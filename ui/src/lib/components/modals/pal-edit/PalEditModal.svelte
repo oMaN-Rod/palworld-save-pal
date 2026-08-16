@@ -32,7 +32,12 @@
 	import { assetLoader, calculateFilters, formatBossCharacterId, handleMaxOutPal } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import { BicepsFlexed, Brain, Edit, Play, Plus, Save } from 'lucide-svelte';
+	import BicepsFlexed from '@lucide/svelte/icons/biceps-flexed';
+	import Brain from '@lucide/svelte/icons/brain';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import Play from '@lucide/svelte/icons/play';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Save from '@lucide/svelte/icons/save';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 

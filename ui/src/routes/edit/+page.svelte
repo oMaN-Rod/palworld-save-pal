@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Rocket } from 'lucide-svelte';
+	import Rocket from '@lucide/svelte/icons/rocket';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 </script>

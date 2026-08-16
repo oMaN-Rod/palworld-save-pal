@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FolderArchive } from 'lucide-svelte';
+	import FolderArchive from '@lucide/svelte/icons/folder-archive';
 	import { getAppState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';

@@ -5,7 +5,8 @@
 	import { assetLoader } from '$utils';
 	import { NumberInputModal } from '$components/modals';
 	import { Button, Tooltip } from '$components/ui';
-	import { Lock, Unlock } from 'lucide-svelte';
+	import Lock from '@lucide/svelte/icons/lock';
+	import Unlock from '@lucide/svelte/icons/lock-open';
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

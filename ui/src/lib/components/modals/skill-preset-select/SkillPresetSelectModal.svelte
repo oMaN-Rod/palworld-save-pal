@@ -6,7 +6,8 @@
 	import { cn } from '$theme';
 	import { type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

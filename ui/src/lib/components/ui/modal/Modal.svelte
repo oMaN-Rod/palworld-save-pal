@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import { m } from '$i18n/messages';
-	import { X } from '@lucide/svelte';
+	import X from '@lucide/svelte/icons/x';
 
 	const modal = getModalState();
 

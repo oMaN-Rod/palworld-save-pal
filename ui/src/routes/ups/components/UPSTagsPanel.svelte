@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { Plus, Tag, X, Edit, Trash2 } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Tag from '@lucide/svelte/icons/tag';
+	import X from '@lucide/svelte/icons/x';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { getUpsState, getModalState } from '$states';
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';

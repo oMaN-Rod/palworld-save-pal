@@ -1,7 +1,9 @@
 <script lang="ts" generics="T">
 	import { cn } from '$theme';
 	import { Checkbox } from '$components/ui';
-	import { ChevronDown, ChevronUp, ChevronsUpDown } from 'lucide-svelte';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import ChevronUp from '@lucide/svelte/icons/chevron-up';
+	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 	import type { Snippet } from 'svelte';
 	import type { ColumnDef, SortState } from './table.types';
 	import {

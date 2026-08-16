@@ -5,7 +5,7 @@
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState, getToastState } from '$states';
-	import { Bug } from 'lucide-svelte';
+	import Bug from '@lucide/svelte/icons/bug';
 	import { assetLoader, editLucky, editAlpha, editAwakened, editImported } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

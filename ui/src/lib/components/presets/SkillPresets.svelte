@@ -8,7 +8,8 @@
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
 	import { c } from '$utils/commonTranslations';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Play, Trash } from 'lucide-svelte';
+	import Play from '@lucide/svelte/icons/play';
+	import Trash from '@lucide/svelte/icons/trash';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Button } from '$components/ui';
-	import { FolderArchive, FileArchive, FolderOpen } from 'lucide-svelte';
+	import FolderArchive from '@lucide/svelte/icons/folder-archive';
+	import FileArchive from '@lucide/svelte/icons/file-archive';
+	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import {
 		readInputFolder,
 		readDroppedItems,

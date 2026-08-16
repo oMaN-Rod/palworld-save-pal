@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ToastType } from '$types';
-	import { X } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
 	import { getToastState } from '$states/toastState.svelte';
 	import { fly, scale } from 'svelte/transition';
 	import * as m from '$i18n/messages';

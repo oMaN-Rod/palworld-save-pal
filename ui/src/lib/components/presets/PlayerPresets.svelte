@@ -6,7 +6,11 @@
 	import { getAppState, getModalState, sortPresets } from '$states';
 	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
-	import { Edit, Play, Plus, Trash, X } from 'lucide-svelte';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import Play from '@lucide/svelte/icons/play';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Trash from '@lucide/svelte/icons/trash';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 

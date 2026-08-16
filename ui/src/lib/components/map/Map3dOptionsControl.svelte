@@ -3,7 +3,8 @@
 	import { untrack } from 'svelte';
 	import { getMapContext, type ControlPosition } from '$components/maplibre';
 	import { Accordion, Slider, Switch } from '@skeletonlabs/skeleton-svelte';
-	import { Eye, EyeClosed } from '@lucide/svelte';
+	import Eye from '@lucide/svelte/icons/eye';
+	import EyeClosed from '@lucide/svelte/icons/eye-closed';
 	import * as m from '$i18n/messages';
 	import { debounce } from '$utils';
 	import {

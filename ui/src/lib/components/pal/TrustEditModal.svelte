@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Card, Tooltip } from '$components/ui';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { type Pal } from '$types';
 	import * as m from '$i18n/messages';

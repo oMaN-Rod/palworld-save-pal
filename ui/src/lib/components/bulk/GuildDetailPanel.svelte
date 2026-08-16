@@ -3,8 +3,9 @@
 	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { X } from 'lucide-svelte';
-	import { Pencil, Users } from '@lucide/svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Pencil from '@lucide/svelte/icons/pencil';
+	import Users from '@lucide/svelte/icons/users';
 	import Input from '$components/ui/input/Input.svelte';
 
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();

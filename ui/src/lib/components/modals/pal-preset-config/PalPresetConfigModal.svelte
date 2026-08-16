@@ -9,7 +9,8 @@
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader, focusModal } from '$utils';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 

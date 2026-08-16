@@ -6,7 +6,12 @@
 	import { cn } from '$theme';
 	import { getAppState, getPalEditorState } from '$states';
 	import { palsData } from '$lib/data';
-	import { Plus, ArchiveRestore, Trash, Copy, Upload, Users } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import ArchiveRestore from '@lucide/svelte/icons/archive-restore';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Upload from '@lucide/svelte/icons/upload';
+	import Users from '@lucide/svelte/icons/users';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

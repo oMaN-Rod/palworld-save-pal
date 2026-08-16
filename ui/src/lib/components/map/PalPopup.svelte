@@ -5,8 +5,8 @@
 	import { palsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import { PalBadge } from '$components/pal';
-	import { Globe } from '@lucide/svelte';
-	import { Map } from '@lucide/svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		point,

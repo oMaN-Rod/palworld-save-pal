@@ -5,7 +5,8 @@
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import type { Pal } from '$types';
-	import { TimerReset, HelpCircle } from 'lucide-svelte';
+	import TimerReset from '@lucide/svelte/icons/timer-reset';
+	import HelpCircle from '@lucide/svelte/icons/circle-question-mark';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

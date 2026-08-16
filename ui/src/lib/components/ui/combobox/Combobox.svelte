@@ -3,7 +3,7 @@
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
 	import { onMount, type Snippet } from 'svelte';
-	import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import { debounce } from '$utils';
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list'
 	import * as m from '$i18n/messages';

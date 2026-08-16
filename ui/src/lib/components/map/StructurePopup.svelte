@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
 	import type { BaseStructure } from '$types';
-	import { Heart, Ruler, Award, User } from 'lucide-svelte';
+	import Heart from '@lucide/svelte/icons/heart';
+	import Ruler from '@lucide/svelte/icons/ruler';
+	import Award from '@lucide/svelte/icons/award';
+	import User from '@lucide/svelte/icons/user';
 	import { structureInfo } from './structureInfo';
 	import { structureColors } from './mapColors.svelte';
 	import { baseStructuresData, buildingsData } from '$lib/data';

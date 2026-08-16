@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
 	import { mapToWorld } from './utils';
-	import { Globe, Map } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 	import * as m from '$i18n/messages';
 </script>
 

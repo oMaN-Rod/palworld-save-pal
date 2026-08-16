@@ -2,7 +2,8 @@
 	import type { Boss } from '$types';
 	import { bossPalKey, humanizeSpawnerId, worldToMap } from './utils';
 	import { palsData } from '$lib/data';
-	import { Globe, Map } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 	import * as m from '$i18n/messages';
 
 	let {

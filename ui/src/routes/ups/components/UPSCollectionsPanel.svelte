@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { Plus, Folder, Star, Archive, Edit, Trash2 } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Folder from '@lucide/svelte/icons/folder';
+	import Star from '@lucide/svelte/icons/star';
+	import Archive from '@lucide/svelte/icons/archive';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { getUpsState, getModalState } from '$states';
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';

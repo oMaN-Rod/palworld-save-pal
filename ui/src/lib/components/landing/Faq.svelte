@@ -17,7 +17,7 @@
 </script>
 
 <script lang="ts">
-	import { ChevronDown } from 'lucide-svelte';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 
 	const faqs = $derived(faqEntries());
 </script>

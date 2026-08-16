@@ -2,7 +2,9 @@
 	import { Button, Card } from '$components/ui';
 	import type { Base } from '$types';
 	import { worldToMap } from './utils';
-	import { Home, Globe, Map } from 'lucide-svelte';
+	import Home from '@lucide/svelte/icons/house';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 	import { itemsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import { ASSET_DATA_PATH } from '$types/icons';

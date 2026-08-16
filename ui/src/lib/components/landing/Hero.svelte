@@ -4,7 +4,8 @@
 	import Logo from '$components/layout/Logo.svelte';
 	import { SaveDropzone } from '$components/upload';
 	import { Button, Tooltip } from '$components/ui';
-	import { RotateCcw, Lock } from 'lucide-svelte';
+	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
+	import Lock from '@lucide/svelte/icons/lock';
 	import * as m from '$i18n/messages';
 
 	interface Props {

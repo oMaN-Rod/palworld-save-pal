@@ -15,7 +15,7 @@
 	import { STRUCTURE_TYPE_ORDER } from '$components/map/mapColors.svelte';
 	import { isWatchtower } from '$components/map/fastTravel';
 	import Target from '@lucide/svelte/icons/target';
-	import Unlock from '@lucide/svelte/icons/unlock';
+	import Unlock from '@lucide/svelte/icons/lock-open';
 	import Users from '@lucide/svelte/icons/users';
 	import MapIcon from '@lucide/svelte/icons/map';
 	import Building from '@lucide/svelte/icons/building';
@@ -48,7 +48,8 @@
 	import { SectionHeader } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
-	import { Eye, EyeOff } from '@lucide/svelte';
+	import Eye from '@lucide/svelte/icons/eye';
+	import EyeOff from '@lucide/svelte/icons/eye-off';
 	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
 	import {
 		MAP_OBJECT_SCALE_DEFAULT,

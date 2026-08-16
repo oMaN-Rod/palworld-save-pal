@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import { Save, X } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';

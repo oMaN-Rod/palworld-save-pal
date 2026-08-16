@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { Boxes, MapPin, MousePointerClick } from 'lucide-svelte';
+	import Boxes from '@lucide/svelte/icons/boxes';
+	import MapPin from '@lucide/svelte/icons/map-pin';
+	import MousePointerClick from '@lucide/svelte/icons/mouse-pointer-click';
 	import * as m from '$i18n/messages';
 
 	const points = [

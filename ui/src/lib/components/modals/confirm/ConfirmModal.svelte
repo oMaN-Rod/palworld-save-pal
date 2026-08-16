@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Card, Tooltip } from '$components/ui';
-	import { X, Check } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Check from '@lucide/svelte/icons/check';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';

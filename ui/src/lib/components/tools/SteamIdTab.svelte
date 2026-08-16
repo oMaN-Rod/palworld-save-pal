@@ -4,7 +4,9 @@
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
-	import { Hash, Copy, Check } from 'lucide-svelte';
+	import Hash from '@lucide/svelte/icons/hash';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Check from '@lucide/svelte/icons/check';
 
 	const toast = getToastState();
 

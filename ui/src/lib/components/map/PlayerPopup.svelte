@@ -3,7 +3,15 @@
 	import { getAppState, getNavigationState } from '$states';
 	import type { Player } from '$types';
 	import { worldToMap } from './utils';
-	import { Pencil, Heart, Trophy, Clock, Users, Gamepad2, Swords, Globe, Map } from 'lucide-svelte';
+	import Pencil from '@lucide/svelte/icons/pencil';
+	import Heart from '@lucide/svelte/icons/heart';
+	import Trophy from '@lucide/svelte/icons/trophy';
+	import Clock from '@lucide/svelte/icons/clock';
+	import Users from '@lucide/svelte/icons/users';
+	import Gamepad2 from '@lucide/svelte/icons/gamepad-2';
+	import Swords from '@lucide/svelte/icons/swords';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		player

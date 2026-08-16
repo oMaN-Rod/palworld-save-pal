@@ -2,7 +2,10 @@
 	import { cn } from '$theme';
 	import { missionsData } from '$lib/data';
 	import type { Mission, MissionType } from '$types';
-	import { Check, Circle, Trash2, CheckCircle } from 'lucide-svelte';
+	import Check from '@lucide/svelte/icons/check';
+	import Circle from '@lucide/svelte/icons/circle';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import CheckCircle from '@lucide/svelte/icons/circle-check-big';
 	import { SectionHeader, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';

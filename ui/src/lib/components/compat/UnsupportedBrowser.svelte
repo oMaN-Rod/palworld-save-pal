@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { MonitorDown, TriangleAlert } from 'lucide-svelte';
+	import MonitorDown from '@lucide/svelte/icons/monitor-down';
+	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
 	import * as m from '$i18n/messages';
 
 	const DESKTOP_URL = 'https://github.com/oMaN-Rod/palworld-save-pal/releases';

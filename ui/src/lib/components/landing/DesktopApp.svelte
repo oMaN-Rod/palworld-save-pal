@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Monitor } from 'lucide-svelte';
+	import Monitor from '@lucide/svelte/icons/monitor';
 	import { GithubLink, NexusModsLink } from '.';
 	import * as m from '$i18n/messages';
 </script>

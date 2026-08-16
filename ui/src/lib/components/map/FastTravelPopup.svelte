@@ -2,7 +2,11 @@
 	import { Card } from '$components/ui';
 	import type { MapUnlockPoint } from '$types';
 	import { worldToMap } from './utils';
-	import { Navigation, Globe, Map, Lock, LockOpen } from 'lucide-svelte';
+	import Navigation from '@lucide/svelte/icons/navigation';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
+	import Lock from '@lucide/svelte/icons/lock';
+	import LockOpen from '@lucide/svelte/icons/lock-open';
 	import * as m from '$i18n/messages';
 
 	let {

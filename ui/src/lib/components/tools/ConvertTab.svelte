@@ -9,7 +9,10 @@
 	import { GamepassBrowser } from '$components/gamepass';
 	import { c } from '$lib/utils/commonTranslations';
 	import * as m from '$i18n/messages';
-	import { ArrowRightLeft, Monitor, HardDrive, ArrowLeft } from 'lucide-svelte';
+	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
+	import Monitor from '@lucide/svelte/icons/monitor';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
+	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 
 	const appState = getAppState();
 	const toast = getToastState();

@@ -9,23 +9,21 @@
 	import { ItemBadge } from '$components/shared';
 	import { PlayerPresets } from '$components/presets';
 	import { TextInputModal, NumberInputModal, ItemSelectModal } from '$components/modals';
-	import {
-		Bomb,
-		ChevronsLeftRight,
-		Key,
-		Pizza,
-		Shield,
-		Swords,
-		ArrowUp01,
-		Minus,
-		Plus,
-		Edit,
-		Hash,
-		PaintBucket,
-		PawPrint,
-		Activity,
-		Rocket
-	} from 'lucide-svelte';
+	import Bomb from '@lucide/svelte/icons/bomb';
+	import ChevronsLeftRight from '@lucide/svelte/icons/chevrons-left-right';
+	import Key from '@lucide/svelte/icons/key';
+	import Pizza from '@lucide/svelte/icons/pizza';
+	import Shield from '@lucide/svelte/icons/shield';
+	import Swords from '@lucide/svelte/icons/swords';
+	import ArrowUp01 from '@lucide/svelte/icons/arrow-up-0-1';
+	import Minus from '@lucide/svelte/icons/minus';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import Hash from '@lucide/svelte/icons/hash';
+	import PaintBucket from '@lucide/svelte/icons/paint-bucket';
+	import PawPrint from '@lucide/svelte/icons/paw-print';
+	import Activity from '@lucide/svelte/icons/activity';
+	import Rocket from '@lucide/svelte/icons/rocket';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';

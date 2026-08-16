@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import { ArrowLeft, ArrowRight } from 'lucide-svelte';
+	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
+	import ArrowRight from '@lucide/svelte/icons/arrow-right';
 	import * as m from '$i18n/messages';
 
 	type Position = 'left' | 'right';

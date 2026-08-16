@@ -25,7 +25,8 @@
 	import Target from '@lucide/svelte/icons/target';
 	import PanelLeft from '@lucide/svelte/icons/panel-left';
 	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
-	import { Eye, EyeOff } from '@lucide/svelte';
+	import Eye from '@lucide/svelte/icons/eye';
+	import EyeOff from '@lucide/svelte/icons/eye-off';
 	import * as m from '$i18n/messages';
 	import { p } from '$lib/utils/commonTranslations';
 

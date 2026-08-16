@@ -2,30 +2,28 @@ import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
 import { isWebBuild } from '$lib/utils/platform';
 import type { AppState } from '$states';
-import {
-	Blocks,
-	BookOpen,
-	Bug,
-	ChevronsLeft,
-	ChevronsRight,
-	CircleX,
-	Database,
-	FileHeart,
-	FileText,
-	FlaskConical,
-	Folder,
-	Globe,
-	Info,
-	Layers,
-	LayoutGrid,
-	Map,
-	NotebookPen,
-	Pencil,
-	Save,
-	Server,
-	Settings,
-	Wrench
-} from '@lucide/svelte';
+import Blocks from '@lucide/svelte/icons/blocks';
+import BookOpen from '@lucide/svelte/icons/book-open';
+import Bug from '@lucide/svelte/icons/bug';
+import ChevronsLeft from '@lucide/svelte/icons/chevrons-left';
+import ChevronsRight from '@lucide/svelte/icons/chevrons-right';
+import CircleX from '@lucide/svelte/icons/circle-x';
+import Database from '@lucide/svelte/icons/database';
+import FileHeart from '@lucide/svelte/icons/file-heart';
+import FileText from '@lucide/svelte/icons/file-text';
+import FlaskConical from '@lucide/svelte/icons/flask-conical';
+import Folder from '@lucide/svelte/icons/folder';
+import Globe from '@lucide/svelte/icons/globe';
+import Info from '@lucide/svelte/icons/info';
+import Layers from '@lucide/svelte/icons/layers';
+import LayoutGrid from '@lucide/svelte/icons/layout-grid';
+import Map from '@lucide/svelte/icons/map';
+import NotebookPen from '@lucide/svelte/icons/notebook-pen';
+import Pencil from '@lucide/svelte/icons/pencil';
+import Save from '@lucide/svelte/icons/save';
+import Server from '@lucide/svelte/icons/server';
+import Settings from '@lucide/svelte/icons/settings';
+import Wrench from '@lucide/svelte/icons/wrench';
 import type { Component } from 'svelte';
 
 export type NavSection = 'header' | 'tiles' | 'footer';

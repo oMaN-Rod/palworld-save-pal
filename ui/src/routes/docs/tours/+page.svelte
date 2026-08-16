@@ -2,7 +2,8 @@
 	import { tours } from '$docs/tours';
 	import { tourService } from '$docs/tours/tourService.svelte';
 	import { getAppState } from '$states';
-	import { Play, AlertCircle } from 'lucide-svelte';
+	import Play from '@lucide/svelte/icons/play';
+	import AlertCircle from '@lucide/svelte/icons/circle-alert';
 	import * as m from '$i18n/messages';
 	import { Button } from '$components/ui';
 

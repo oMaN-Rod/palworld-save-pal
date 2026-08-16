@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Spinner, Stopwatch } from '$components/ui';
 	import { getAppState } from '$states';
-	import { Cpu } from 'lucide-svelte';
+	import Cpu from '@lucide/svelte/icons/cpu';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

@@ -4,7 +4,8 @@
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
-	import { HardDrive, Repeat } from 'lucide-svelte';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
+	import Repeat from '@lucide/svelte/icons/repeat';
 
 	const appState = getAppState();
 	const toast = getToastState();

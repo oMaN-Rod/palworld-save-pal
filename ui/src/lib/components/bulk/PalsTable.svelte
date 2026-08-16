@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Table, Input, Loading, Button, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
-	import { PawPrint, Trash2, Trash } from '@lucide/svelte';
+	import PawPrint from '@lucide/svelte/icons/paw-print';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Trash from '@lucide/svelte/icons/trash';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { getAppState, getModalState, getToastState, getPalEditorState } from '$states';

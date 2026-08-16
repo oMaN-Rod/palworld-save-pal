@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Search, X } from 'lucide-svelte';
+	import Search from '@lucide/svelte/icons/search';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 
 	let { value = $bindable(''), placeholder = `${m.docs_search_placeholder()}` }: { value?: string; placeholder?: string } = $props();

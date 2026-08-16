@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
-	import { X, Save } from 'lucide-svelte';
+	import X from '@lucide/svelte/icons/x';
+	import Save from '@lucide/svelte/icons/save';
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';

@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
-	import { BookOpen, Server, HardDrive } from 'lucide-svelte';
+	import BookOpen from '@lucide/svelte/icons/book-open';
+	import Server from '@lucide/svelte/icons/server';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
 
 	const guides = [
 		{

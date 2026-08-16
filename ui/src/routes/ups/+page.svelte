@@ -1,26 +1,24 @@
 <script lang="ts">
 	import { Button, Input, Tooltip, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import {
-		Search,
-		ArrowDown01,
-		ArrowDown10,
-		ArrowDownAZ,
-		ArrowDownZA,
-		Trash,
-		X,
-		ArrowDownWideNarrow,
-		User,
-		Grid3x3,
-		List,
-		Folder,
-		Tag,
-		BarChart3,
-		Plus,
-		Filter,
-		Database,
-		Upload
-	} from 'lucide-svelte';
+	import Search from '@lucide/svelte/icons/search';
+	import ArrowDown01 from '@lucide/svelte/icons/arrow-down-0-1';
+	import ArrowDown10 from '@lucide/svelte/icons/arrow-down-1-0';
+	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
+	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
+	import Trash from '@lucide/svelte/icons/trash';
+	import X from '@lucide/svelte/icons/x';
+	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
+	import User from '@lucide/svelte/icons/user';
+	import Grid3x3 from '@lucide/svelte/icons/grid-3x3';
+	import List from '@lucide/svelte/icons/list';
+	import Folder from '@lucide/svelte/icons/folder';
+	import Tag from '@lucide/svelte/icons/tag';
+	import BarChart3 from '@lucide/svelte/icons/chart-column';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Filter from '@lucide/svelte/icons/funnel';
+	import Database from '@lucide/svelte/icons/database';
+	import Upload from '@lucide/svelte/icons/upload';
 	import {
 		ImportToUpsModal,
 		EditTagsModal,
@@ -53,7 +51,8 @@
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
 	import UPSPalList from './components/UPSPalList.svelte';
 	import { Nuke } from '$components/ui';
-	import { ReplaceAll, StickyNote } from '@lucide/svelte';
+	import ReplaceAll from '@lucide/svelte/icons/replace-all';
+	import StickyNote from '@lucide/svelte/icons/sticky-note';
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 

@@ -5,7 +5,8 @@
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';
-	import { GalleryVerticalEnd, User } from 'lucide-svelte';
+	import GalleryVerticalEnd from '@lucide/svelte/icons/gallery-vertical-end';
+	import User from '@lucide/svelte/icons/user';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 

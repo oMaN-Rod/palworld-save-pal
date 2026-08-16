@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { Gift, Code, MonitorSmartphone, ShieldCheck } from 'lucide-svelte';
+	import Gift from '@lucide/svelte/icons/gift';
+	import Code from '@lucide/svelte/icons/code';
+	import MonitorSmartphone from '@lucide/svelte/icons/monitor-smartphone';
+	import ShieldCheck from '@lucide/svelte/icons/shield-check';
 	import * as m from '$i18n/messages';
 
 	const values = [

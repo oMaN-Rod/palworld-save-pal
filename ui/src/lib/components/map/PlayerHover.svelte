@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { Player } from '$types';
-	import { Clock, Heart, Trophy } from '@lucide/svelte';
+	import Clock from '@lucide/svelte/icons/clock';
+	import Heart from '@lucide/svelte/icons/heart';
+	import Trophy from '@lucide/svelte/icons/trophy';
 	import { worldToMap } from './utils';
-	import { Globe, Map } from 'lucide-svelte';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		player

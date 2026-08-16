@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Card, Tooltip } from '$components/ui';
-	import { History, FolderDot } from '@lucide/svelte';
+	import History from '@lucide/svelte/icons/history';
+	import FolderDot from '@lucide/svelte/icons/folder-dot';
 	import { onMount } from 'svelte';
 	import { assetLoader, focusModal } from '$utils';
 	import { send } from '$utils/websocketUtils';

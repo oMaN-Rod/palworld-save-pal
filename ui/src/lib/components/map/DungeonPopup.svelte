@@ -2,7 +2,9 @@
 	import { Card } from '$components/ui';
 	import type { MapObject } from '$types';
 	import { worldToMap } from './utils';
-	import { Castle, Globe, Map } from 'lucide-svelte';
+	import Castle from '@lucide/svelte/icons/castle';
+	import Globe from '@lucide/svelte/icons/globe';
+	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		point

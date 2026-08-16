@@ -2,7 +2,9 @@
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
-	import { Tag, Upload, RefreshCw } from 'lucide-svelte';
+	import Tag from '@lucide/svelte/icons/tag';
+	import Upload from '@lucide/svelte/icons/upload';
+	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 	import * as m from '$i18n/messages';
 
 	const upsState = getUpsState();

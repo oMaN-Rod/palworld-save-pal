@@ -4,7 +4,8 @@
 	import { Loading } from '$components/ui';
 	import { PalEditModal } from '$components/modals';
 	import { onMount } from 'svelte';
-	import { PawPrint, X } from '@lucide/svelte';
+	import PawPrint from '@lucide/svelte/icons/paw-print';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

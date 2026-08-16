@@ -6,7 +6,8 @@
 	import { MessageType, type GamepassSave } from '$types';
 	import { GamepassBrowser } from '$components/gamepass';
 	import * as m from '$i18n/messages';
-	import { Monitor, RefreshCw } from 'lucide-svelte';
+	import Monitor from '@lucide/svelte/icons/monitor';
+	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 
 	// `active` is true while this tab is the selected one. Skeleton keeps every
 	// panel mounted, so the first scan is gated on activation to preserve the

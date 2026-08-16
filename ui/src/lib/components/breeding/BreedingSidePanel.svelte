@@ -4,7 +4,8 @@
 	 * selector tabs, configuration inputs, selection-pool or save-owner
 	 * controls, the compute button, and a node-detail section.
 	 */
-	import { ChevronRight, ChevronLeft } from '@lucide/svelte/icons';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
+	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import Play from '@lucide/svelte/icons/play';
 	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';

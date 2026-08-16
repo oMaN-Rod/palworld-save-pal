@@ -8,7 +8,11 @@
 	import StatusBadge from './StatusBadge.svelte';
 	import { palsData } from '$lib/data';
 	import { ContextMenu } from '$components/ui';
-	import { Plus, ArchiveRestore, Trash, Copy, Upload } from 'lucide-svelte';
+	import Plus from '@lucide/svelte/icons/plus';
+	import ArchiveRestore from '@lucide/svelte/icons/archive-restore';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Upload from '@lucide/svelte/icons/upload';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

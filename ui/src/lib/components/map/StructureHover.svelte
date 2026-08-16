@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { BaseStructure } from '$types';
-	import { Box, Heart } from 'lucide-svelte';
+	import Box from '@lucide/svelte/icons/box';
+	import Heart from '@lucide/svelte/icons/heart';
 	import { structureInfo } from './structureInfo';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';

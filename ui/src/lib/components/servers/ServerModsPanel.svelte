@@ -2,7 +2,10 @@
 	import type { Server, ServerMod } from '$types';
 	import { getServerState } from '$states';
 	import { Card } from '$components/ui';
-	import { Upload, Package, Shield, FolderOpen } from 'lucide-svelte';
+	import Upload from '@lucide/svelte/icons/upload';
+	import Package from '@lucide/svelte/icons/package';
+	import Shield from '@lucide/svelte/icons/shield';
+	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import { cn } from '$theme';
 
 	let { server } = $props<{ server: Server }>();

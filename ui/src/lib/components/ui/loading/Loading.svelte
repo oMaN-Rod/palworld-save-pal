@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Loader2 } from '@lucide/svelte';
+	import Loader2 from '@lucide/svelte/icons/loader-circle';
 	import { Stopwatch } from '$lib/components/ui';
 	import { onMount } from 'svelte';
 

@@ -2,7 +2,7 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
-	import { GripVertical } from 'lucide-svelte';
+	import GripVertical from '@lucide/svelte/icons/grip-vertical';
 
 	let {
 		items = $bindable([]),

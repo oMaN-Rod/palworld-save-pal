@@ -6,7 +6,8 @@
 	import { MessageType, type PlayerSummary } from '$types';
 	import { c } from '$lib/utils/commonTranslations';
 	import * as m from '$i18n/messages';
-	import { Monitor, Upload } from 'lucide-svelte';
+	import Monitor from '@lucide/svelte/icons/monitor';
+	import Upload from '@lucide/svelte/icons/upload';
 
 	const appState = getAppState();
 	const toast = getToastState();

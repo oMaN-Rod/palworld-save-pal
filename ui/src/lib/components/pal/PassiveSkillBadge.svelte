@@ -8,7 +8,7 @@
 	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import { HelpCircle } from 'lucide-svelte';
+	import HelpCircle from '@lucide/svelte/icons/circle-question-mark';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 

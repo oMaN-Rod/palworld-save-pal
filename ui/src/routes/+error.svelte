@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
-	import { AlertTriangle } from 'lucide-svelte';
+	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
 
 	let error = $state(['']);
 </script>

@@ -12,16 +12,14 @@
 	} from '$states';
 	import type { PresetTypeKey, PresetSortMode } from '$states';
 	import { debounce, moveIds } from '$utils';
-	import {
-		Trash,
-		RefreshCcw,
-		Download,
-		Upload,
-		ArrowDownAZ,
-		ArrowUpAZ,
-		ChevronUp,
-		ChevronDown
-	} from 'lucide-svelte';
+	import Trash from '@lucide/svelte/icons/trash';
+	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
+	import Download from '@lucide/svelte/icons/download';
+	import Upload from '@lucide/svelte/icons/upload';
+	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
+	import ArrowUpAZ from '@lucide/svelte/icons/arrow-up-a-z';
+	import ChevronUp from '@lucide/svelte/icons/chevron-up';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';

@@ -13,7 +13,7 @@
 	import { getAppState, getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
-	import { Package } from 'lucide-svelte';
+	import Package from '@lucide/svelte/icons/package';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

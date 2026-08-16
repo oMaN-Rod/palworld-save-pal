@@ -7,7 +7,10 @@
 		type SelectOption,
 		type SkillType
 	} from '$types';
-	import { Save, X, Delete, TimerReset } from 'lucide-svelte';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
+	import Delete from '@lucide/svelte/icons/delete';
+	import TimerReset from '@lucide/svelte/icons/timer-reset';
 	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';

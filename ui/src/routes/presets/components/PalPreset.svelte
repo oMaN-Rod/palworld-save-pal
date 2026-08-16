@@ -11,7 +11,8 @@
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import { Lock, Unlock } from 'lucide-svelte';
+	import Lock from '@lucide/svelte/icons/lock';
+	import Unlock from '@lucide/svelte/icons/lock-open';
 
 	const suitabilityImageMap = {
 		EmitFlame: 'kindling',

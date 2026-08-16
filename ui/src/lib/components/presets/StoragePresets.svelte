@@ -6,17 +6,15 @@
 	import { getModalState, sortPresets } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import {
-		Edit,
-		PaintBucket,
-		Play,
-		Plus,
-		Trash,
-		X,
-		Hash,
-		ChevronsLeftRight,
-		PackagePlus
-	} from 'lucide-svelte';
+	import Edit from '@lucide/svelte/icons/square-pen';
+	import PaintBucket from '@lucide/svelte/icons/paint-bucket';
+	import Play from '@lucide/svelte/icons/play';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Trash from '@lucide/svelte/icons/trash';
+	import X from '@lucide/svelte/icons/x';
+	import Hash from '@lucide/svelte/icons/hash';
+	import ChevronsLeftRight from '@lucide/svelte/icons/chevrons-left-right';
+	import PackagePlus from '@lucide/svelte/icons/package-plus';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';

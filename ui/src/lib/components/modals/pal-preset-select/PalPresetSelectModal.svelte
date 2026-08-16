@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Button, Card, Tooltip, Combobox } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import { Lock, Save, X } from 'lucide-svelte';
+	import Lock from '@lucide/svelte/icons/lock';
+	import Save from '@lucide/svelte/icons/save';
+	import X from '@lucide/svelte/icons/x';
 	import { presetsData, palsData } from '$lib/data';
 	import { sortPresets } from '$states';
 	import * as m from '$i18n/messages';

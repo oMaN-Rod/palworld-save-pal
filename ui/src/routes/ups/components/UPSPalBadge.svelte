@@ -2,7 +2,11 @@
 	import { PalBadge } from '$components/pal';
 	import { EditTagsModal, AddToCollectionModal, ExportPalModal } from '$components/modals';
 	import { ContextMenu } from '$components/ui';
-	import { Copy, Trash, Upload, FolderPlus, Tag } from 'lucide-svelte';
+	import Copy from '@lucide/svelte/icons/copy';
+	import Trash from '@lucide/svelte/icons/trash';
+	import Upload from '@lucide/svelte/icons/upload';
+	import FolderPlus from '@lucide/svelte/icons/folder-plus';
+	import Tag from '@lucide/svelte/icons/tag';
 	import {
 		getUpsState,
 		getModalState,

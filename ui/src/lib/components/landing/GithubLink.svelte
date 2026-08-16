@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Star } from 'lucide-svelte';
+	import Star from '@lucide/svelte/icons/star';
 	import githubIcon from '$lib/assets/img/app/github.svg';
 	import { fetchGithubStars, formatStars } from '$lib/utils/githubStars';
 	import { Link } from '.';

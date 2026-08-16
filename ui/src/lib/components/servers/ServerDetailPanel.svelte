@@ -2,21 +2,19 @@
 	import type { Server } from '$types';
 	import { cn } from '$theme';
 	import { Button, Card } from '$components/ui';
-	import {
-		Settings,
-		Package,
-		Terminal,
-		FolderOpen,
-		LayoutDashboard,
-		Users,
-		Play,
-		Square,
-		Trash2,
-		Cpu,
-		MemoryStick,
-		Network,
-		HardDrive
-	} from 'lucide-svelte';
+	import Settings from '@lucide/svelte/icons/settings';
+	import Package from '@lucide/svelte/icons/package';
+	import Terminal from '@lucide/svelte/icons/terminal';
+	import FolderOpen from '@lucide/svelte/icons/folder-open';
+	import LayoutDashboard from '@lucide/svelte/icons/layout-dashboard';
+	import Users from '@lucide/svelte/icons/users';
+	import Play from '@lucide/svelte/icons/play';
+	import Square from '@lucide/svelte/icons/square';
+	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Cpu from '@lucide/svelte/icons/cpu';
+	import MemoryStick from '@lucide/svelte/icons/memory-stick';
+	import Network from '@lucide/svelte/icons/network';
+	import HardDrive from '@lucide/svelte/icons/hard-drive';
 	import { getServerState, getModalState } from '$states';
 	import ServerSettingsForm from './ServerSettingsForm.svelte';
 	import ServerModsPanel from './ServerModsPanel.svelte';

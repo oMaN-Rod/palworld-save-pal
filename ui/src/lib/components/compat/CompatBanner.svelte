@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { persistedState } from 'svelte-persisted-state';
-	import { MonitorDown, TriangleAlert, X } from 'lucide-svelte';
+	import MonitorDown from '@lucide/svelte/icons/monitor-down';
+	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
+	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import {
 		detectCapabilities,
