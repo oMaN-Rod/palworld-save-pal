@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/pages.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-pals.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-items.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-buildings.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-active-skills.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-passive-skills.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-technologies.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-elements.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/wiki-work-suitability.xml</loc>
+	</sitemap>
+	<sitemap>
+		<loc>https://palworldsavepal.app/sitemaps/guides.xml</loc>
+	</sitemap>
+</sitemapindex>

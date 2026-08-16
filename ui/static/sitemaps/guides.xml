@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<url>
+		<loc>https://palworldsavepal.app/docs/guides/getting-started</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/docs/guides/save-management</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/docs/guides/server-setup</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+</urlset>
