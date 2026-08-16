@@ -7,7 +7,8 @@ import {
 	type Pal,
 	type Player,
 	type PresetProfile,
-	type WorkSuitability
+	type WorkSuitability,
+	type MaxOutConfig
 } from '$types';
 
 const prefixTypeMap = [
@@ -130,36 +131,82 @@ export function formatNickname(nickname: string, prefix: string | undefined) {
 	return nickname;
 }
 
-export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
+export async function handleMaxOutPal(
+	pal: Pal,
+	player: Player,
+	config?: MaxOutConfig
+): Promise<void> {
 	if (!pal) return;
 	const appState = getAppState();
-	pal.level = appState.settings.cheat_mode ? 255 : MAX_LEVEL;
-	const maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
-	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
-	editAlpha(pal, true);
-	pal.is_awakened = true;
-	pal.talent_hp = appState.settings.cheat_mode ? 255 : 100;
-	pal.talent_shot = appState.settings.cheat_mode ? 255 : 100;
-	pal.talent_defense = appState.settings.cheat_mode ? 255 : 100;
-	pal.rank = appState.settings.cheat_mode ? 255 : 5;
-	pal.rank_hp = appState.settings.cheat_mode ? 255 : 20;
-	pal.rank_defense = appState.settings.cheat_mode ? 255 : 20;
-	pal.rank_attack = appState.settings.cheat_mode ? 255 : 20;
-	pal.rank_craftspeed = appState.settings.cheat_mode ? 255 : 20;
-	getStats(pal, player);
-	pal.hp = pal.max_hp;
-	pal.state = EntryState.MODIFIED;
-	const palData = palsData.getByKey(pal.character_key);
-	if (palData) {
-		pal.stomach = palData.max_full_stomach;
-		for (const [key, value] of Object.entries(palData.work_suitability)) {
-			if (value === 0) continue;
-			pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
-		}
-	} else {
-		pal.stomach = 150;
+	const cheatMode = appState.settings.cheat_mode;
+	const shouldApply = (key: string): boolean =>
+		!config || (config as Record<string, boolean | undefined>)[key] !== false;
+
+	if (shouldApply('level')) {
+		pal.level = cheatMode ? 255 : MAX_LEVEL;
 	}
-	pal.friendship_point = 200000;
+	if (shouldApply('exp')) {
+		const maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
+		pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
+	}
+	if (shouldApply('rank')) {
+		pal.rank = cheatMode ? 255 : 5;
+	}
+	if (shouldApply('is_boss')) {
+		editAlpha(pal, true);
+	}
+	if (shouldApply('is_lucky') && !shouldApply('is_boss')) {
+		pal.is_lucky = true;
+	}
+	if (shouldApply('is_awakened')) {
+		pal.is_awakened = true;
+	}
+	if (shouldApply('talent_hp')) {
+		pal.talent_hp = cheatMode ? 255 : 100;
+	}
+	if (shouldApply('talent_shot')) {
+		pal.talent_shot = cheatMode ? 255 : 100;
+	}
+	if (shouldApply('talent_defense')) {
+		pal.talent_defense = cheatMode ? 255 : 100;
+	}
+	if (shouldApply('rank_hp')) {
+		pal.rank_hp = cheatMode ? 255 : 20;
+	}
+	if (shouldApply('rank_attack')) {
+		pal.rank_attack = cheatMode ? 255 : 20;
+	}
+	if (shouldApply('rank_defense')) {
+		pal.rank_defense = cheatMode ? 255 : 20;
+	}
+	if (shouldApply('rank_craftspeed')) {
+		pal.rank_craftspeed = cheatMode ? 255 : 20;
+	}
+	getStats(pal, player);
+	if (shouldApply('hp')) {
+		pal.hp = pal.max_hp;
+	}
+	pal.state = EntryState.MODIFIED;
+	if (shouldApply('stomach')) {
+		const palData = palsData.getByKey(pal.character_key);
+		if (palData) {
+			pal.stomach = palData.max_full_stomach;
+		} else {
+			pal.stomach = 150;
+		}
+	}
+	if (shouldApply('work_suitability')) {
+		const palData = palsData.getByKey(pal.character_key);
+		if (palData) {
+			for (const [key, value] of Object.entries(palData.work_suitability)) {
+				if (value === 0) continue;
+				pal.work_suitability[key as WorkSuitability] = Math.min(10 - value, 9);
+			}
+		}
+	}
+	if (shouldApply('friendship_point')) {
+		pal.friendship_point = 200000;
+	}
 }
 
 export const applyPalPreset = (pal: Pal, presetProfile: PresetProfile, player?: Player): void => {

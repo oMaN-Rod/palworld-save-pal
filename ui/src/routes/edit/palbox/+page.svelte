@@ -8,9 +8,10 @@
 		PalSelectModal,
 		PalPresetSelectModal,
 		FillPalsModal,
-		CloneToUpsModal
+		CloneToUpsModal,
+		MaxOutConfigModal
 	} from '$components/modals';
-	import { type Pal, type PalData, MessageType, type CloneToUpsModalProps } from '$types';
+	import { type Pal, type PalData, MessageType, type CloneToUpsModalProps, defaultMaxOutConfig, type MaxOutConfig } from '$types';
 	import {
 		debounce,
 		deepCopy,
@@ -502,9 +503,15 @@
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		if (selectedPals.length === 0) return;
 
+		// @ts-ignore
+		const config = await modal.showModal<MaxOutConfig>(MaxOutConfigModal, {
+			config: { ...defaultMaxOutConfig }
+		});
+		if (!config) return;
+
 		for (const palId of selectedPals) {
 			const pal = appState.selectedPlayer.pals[palId];
-			handleMaxOutPal(pal, appState.selectedPlayer);
+			await handleMaxOutPal(pal, appState.selectedPlayer, config);
 		}
 		await appState.saveState();
 	}
