@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getAppState, getToastState } from '$states';
+	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { isWebBuild } from '$lib/utils/platform';
@@ -25,14 +26,16 @@
 
 	let resumeName = $state<string | null>(null);
 
-	if (desktop) {
-		if (!appState.saveFile) goto('/file');
-	} else if (appState.saveFile) {
-		goto('/edit');
-	} else if (isWebBuild) {
-		hasRecent().then((r) => (resumeName = r?.worldName ?? null));
-	} else {
-		goto('/upload');
+	if (browser) {
+		if (desktop) {
+			if (!appState.saveFile) goto('/file');
+		} else if (appState.saveFile) {
+			goto('/edit');
+		} else if (isWebBuild) {
+			hasRecent().then((r) => (resumeName = r?.worldName ?? null));
+		} else {
+			goto('/upload');
+		}
 	}
 
 	async function resume() {
@@ -61,7 +64,7 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-{#if isWebBuild && !appState.saveFile}
+{#if (isWebBuild || !browser) && !appState.saveFile}
 	<main class="landing-page animate-fade-in flex w-full flex-col items-center">
 		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
 		<MapAdvantage />
