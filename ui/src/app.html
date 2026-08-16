@@ -5,6 +5,13 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.webp" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#0f172a" />
+		<!--CF_BEACON_START--><!-- Cookieless analytics: no personal data, no
+		     consent banner, and the landing page's no-tracking claim stays true.
+		     This block is removed at prerender when the token is unset. --><script
+			defer
+			src="https://static.cloudflareinsights.com/beacon.min.js"
+			data-cf-beacon='{"token": "%CF_BEACON_TOKEN%"}'
+		></script><!--CF_BEACON_END-->
 		%sveltekit.head%
 	</head>
 	<body data-theme="dark" data-sveltekit-preload-data="hover" class="dark">

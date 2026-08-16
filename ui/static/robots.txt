@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Editor routes are stateful and carry no indexable content.
+Disallow: /edit
+Disallow: /upload
+Disallow: /file
+Disallow: /gps
+Disallow: /bulk
+Disallow: /loading
+Disallow: /error
+Disallow: /debug
+
+Sitemap: https://palworldsavepal.app/sitemap.xml
