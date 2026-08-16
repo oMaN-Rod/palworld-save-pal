@@ -1,12 +1,16 @@
-import { test, expect } from '@playwright/test';
-import { zipSync, unzipSync } from 'fflate';
+import { expect, test } from '@playwright/test';
+import { unzipSync, zipSync } from 'fflate';
 import { readFileSync, readdirSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const here = dirname(fileURLToPath(import.meta.url));
 
 function world1Zip(): Buffer {
-	const dir = resolve(__dirname, '../../../tests/fixtures/saves/world1');
+	const dir = resolve(here, '../../../tests/fixtures/saves/world1');
 	const entries: Record<string, Uint8Array> = {
-		'Level.sav': new Uint8Array(readFileSync(resolve(dir, 'Level.sav')))
+		'Level.sav': new Uint8Array(readFileSync(resolve(dir, 'Level.sav'))),
+		'LevelMeta.sav': new Uint8Array(readFileSync(resolve(dir, 'LevelMeta.sav')))
 	};
 	for (const p of readdirSync(resolve(dir, 'Players'))) {
 		entries[`Players/${p}`] = new Uint8Array(readFileSync(resolve(dir, 'Players', p)));
@@ -18,11 +22,10 @@ test('upload → edit-nothing → download round-trips a real world save', async
 	await page.goto('/upload');
 
 	await page
-		.locator('input[type=file][name=file]')
+		.locator('input[type=file][accept=".zip"]')
 		.setInputFiles({ name: 'world1.zip', mimeType: 'application/zip', buffer: world1Zip() });
 
-	await page.getByRole('button', { name: /^upload$/i }).click();
-
+	// The dropzone loads on change; there is no separate submit.
 	// Loading is a transient client-side route; the app lands on /edit once the
 	// worker has parsed the save and player summaries have arrived.
 	await expect(page).toHaveURL(/\/edit/, { timeout: 30_000 });
@@ -44,7 +47,11 @@ test('upload → edit-nothing → download round-trips a real world save', async
 	const files = unzipSync(zipBytes);
 	const levelName = Object.keys(files).find((n) => n.endsWith('Level.sav'));
 	expect(levelName).toBeTruthy();
+	// The container magic sits at byte 8, after the two length words.
 	const level = files[levelName!];
-	const magic = new TextDecoder().decode(level.subarray(0, 3));
-	expect(magic).toBe('PlM');
+	expect(new TextDecoder().decode(level.subarray(8, 11))).toBe('PlM');
+
+	// The rename-carrying file the JS zip builder used to leave out entirely.
+	expect(Object.keys(files)).toContain('LevelMeta.sav');
+	expect(new TextDecoder().decode(files['LevelMeta.sav'].subarray(8, 11))).toBe('PlM');
 });
