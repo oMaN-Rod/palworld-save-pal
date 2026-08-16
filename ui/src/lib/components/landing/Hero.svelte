@@ -38,9 +38,9 @@
 
 	<div class="glass relative z-10 mx-4 w-full max-w-md rounded-2xl p-6 text-center sm:p-8">
 		<Logo class="mx-auto mb-5 w-full max-w-xs" />
-		<p class="text-surface-200 text-lg">
+		<h1 class="text-surface-100 text-xl font-bold sm:text-2xl">
 			{m.landing_hero_tagline()}
-		</p>
+		</h1>
 		<div class="mt-6">
 			<!-- Phones can't run the editor: the dropzone is replaced by a
 			     desktop-only notice. Maps, Wiki and Breeding stay reachable

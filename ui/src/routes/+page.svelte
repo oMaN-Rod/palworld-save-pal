@@ -19,6 +19,8 @@
 	import { MessageType } from '$types';
 	import { startSaveLoad } from '$lib/data/loadSave';
 	import * as m from '$i18n/messages';
+	import { Seo, faqPageSchema, webApplicationSchema } from '$lib/components/seo';
+	import { faqEntries } from '$components/landing/Faq.svelte';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -56,13 +58,14 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{m.landing_meta_title()}</title>
-	<meta name="description" content={m.landing_meta_description()} />
-	<meta property="og:title" content={m.landing_og_title()} />
-	<meta property="og:description" content={m.landing_og_description()} />
-	<meta property="og:type" content="website" />
-</svelte:head>
+<Seo
+	pathname="/"
+	title={m.landing_meta_title()}
+	description={m.landing_meta_description()}
+	ogTitle={m.landing_og_title()}
+	ogDescription={m.landing_og_description()}
+	structuredData={[webApplicationSchema(), faqPageSchema(faqEntries())]}
+/>
 
 {#if (isWebBuild || !browser) && !appState.saveFile}
 	<main class="landing-page animate-fade-in flex w-full flex-col items-center">

@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import { getModalState } from '$states';
 	import { cn } from '$theme';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
 
 	const modal = getModalState();
@@ -52,14 +52,11 @@
 		}
 	}
 
-	// Set up the keydown event listener when the component mounts
+	// Registered and torn down from onMount, which never runs during SSR.
+	// onDestroy does run server-side, so cleaning up there would touch `window`.
 	onMount(() => {
 		window.addEventListener('keydown', handleKeydown);
-	});
-
-	// Clean up the event listener when the component is destroyed
-	onDestroy(() => {
-		window.removeEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
 	});
 </script>
 

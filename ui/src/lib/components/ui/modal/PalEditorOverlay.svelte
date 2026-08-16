@@ -3,7 +3,7 @@
 	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { Loading } from '$components/ui';
 	import { PalEditModal } from '$components/modals';
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 	import { PawPrint, X } from '@lucide/svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -26,8 +26,12 @@
 		if (event.target === event.currentTarget) palEditor.close();
 	}
 
-	onMount(() => window.addEventListener('keydown', handleKeydown));
-	onDestroy(() => window.removeEventListener('keydown', handleKeydown));
+	// Cleanup returns from onMount rather than onDestroy: onDestroy also runs
+	// during SSR, where `window` does not exist.
+	onMount(() => {
+		window.addEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
+	});
 </script>
 
 {#if palEditor.isOpen}
