@@ -46,8 +46,10 @@ export class WorkerTransport {
 		if (this.#worker) return;
 		this.#worker = this.#createWorker();
 		this.#unloadTarget?.addEventListener('pagehide', this.#onPageHide);
-		this.#worker.onmessage = async (event: MessageEvent<string>) => {
-			const data = JSON.parse(event.data);
+		this.#worker.onmessage = async (event: MessageEvent<string | Message>) => {
+			// Frames carrying bulk bytes arrive as structured-cloned objects; only
+			// the rest are JSON strings.
+			const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
 			if (!data) return;
 			if (data.type && this.#queue.has(data.type)) {
 				this.#queue.get(data.type)!(data);
@@ -73,6 +75,11 @@ export class WorkerTransport {
 
 	async send(messageData: string) {
 		this.#worker?.postMessage(messageData);
+	}
+
+	/// Transfers the buffer — the caller must not reuse `bytes` afterwards.
+	async sendBytes(type: string, bytes: Uint8Array) {
+		this.#worker?.postMessage({ type, bytes }, [bytes.buffer]);
 	}
 
 	async sendAndWait(messageData: any): Promise<any> {

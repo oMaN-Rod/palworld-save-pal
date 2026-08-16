@@ -3,10 +3,12 @@ import { WorkerTransport } from './workerTransport.svelte';
 
 class FakeWorker {
 	terminated = false;
-	posted: string[] = [];
-	onmessage: ((event: MessageEvent<string>) => void) | null = null;
-	postMessage(data: string) {
+	posted: unknown[] = [];
+	transfers: Transferable[][] = [];
+	onmessage: ((event: MessageEvent<unknown>) => void) | null = null;
+	postMessage(data: unknown, transfer: Transferable[] = []) {
 		this.posted.push(data);
+		this.transfers.push(transfer);
 	}
 	terminate() {
 		this.terminated = true;
@@ -86,5 +88,30 @@ describe('WorkerTransport', () => {
 		unload.hide(false);
 
 		expect(unload.listeners).toHaveLength(0);
+	});
+
+	// A save zip encoded as a JSON number array costs several times its own size
+	// in string, and the decompressed save behind it cannot be a string at all.
+	it('hands save bytes to the worker as a transferred buffer, not JSON', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+		const bytes = new Uint8Array([80, 75, 3, 4]);
+
+		await ws.sendBytes('load_zip_file', bytes);
+
+		expect(workers[0].posted[0]).toEqual({ type: 'load_zip_file', bytes });
+		expect(workers[0].transfers[0]).toEqual([bytes.buffer]);
+	});
+
+	it('dispatches a binary message from the worker without parsing it', async () => {
+		const ws = transport();
+		const dispatched: unknown[] = [];
+		ws.connect({ goto: async () => {} });
+		const frame = { type: 'download_save_file', data: [{ name: 'W.zip', bytes: new Uint8Array([1]) }] };
+
+		await workers[0].onmessage?.({ data: frame } as MessageEvent<unknown>);
+
+		expect(ws.message).toEqual(frame);
+		void dispatched;
 	});
 });

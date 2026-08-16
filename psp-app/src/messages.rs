@@ -121,9 +121,6 @@ define_message_types! {
     DownloadSaveFile => "download_save_file",
     LoadedSaveFiles => "loaded_save_files",
     LoadZipFile => "load_zip_file",
-    LoadSaveGvas => "load_save_gvas",
-    DownloadSaveGvas => "download_save_gvas",
-    SaveGvasBundle => "save_gvas_bundle",
     NoFileSelected => "no_file_selected",
     SaveModdedSave => "save_modded_save",
     SelectGamepassSave => "select_gamepass_save",
@@ -296,9 +293,6 @@ mod tests {
         "download_save_file",
         "loaded_save_files",
         "load_zip_file",
-        "load_save_gvas",
-        "download_save_gvas",
-        "save_gvas_bundle",
         "no_file_selected",
         "save_modded_save",
         "select_gamepass_save",
@@ -380,7 +374,7 @@ mod tests {
 
     #[test]
     fn message_type_count_is_expected() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 132);
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 129);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

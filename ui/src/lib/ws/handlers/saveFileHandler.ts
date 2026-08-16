@@ -1,16 +1,16 @@
-import { getAppState, getToastState } from '$states';
-import { MessageType } from '$types';
+import * as m from '$i18n/messages';
 import { baseStructuresData } from '$lib/data';
+import { getActiveDirectory, takeSaveTarget, writeSaveInPlace } from '$lib/fs';
 import {
 	clearSessionPersistence,
 	consumeReattachPending,
 	getStoredSelectedPlayerUid,
 	setStoredSessionId
 } from '$lib/utils/sessionPersistence';
+import { getAppState, getToastState } from '$states';
+import { MessageType } from '$types';
 import { unzipSync } from 'fflate';
-import { takeSaveTarget, getActiveDirectory, writeSaveInPlace } from '$lib/fs';
 import type { WSMessageHandler } from '../types';
-import * as m from '$i18n/messages';
 
 export const noFileSelectedHandler: WSMessageHandler = {
 	type: MessageType.NO_FILE_SELECTED,
@@ -72,39 +72,41 @@ export const saveModdedSaveHandler: WSMessageHandler = {
 	}
 };
 
+/** `bytes` from the worker; `content` (base64) only from the text-only socket. */
+export type SaveOutputFile = { name: string; content?: string; bytes?: Uint8Array };
+
+function fileBytes(file: SaveOutputFile): Uint8Array<ArrayBuffer> {
+	if (file.bytes) return file.bytes as Uint8Array<ArrayBuffer>;
+	const binary = atob(file.content ?? '');
+	const bytes = new Uint8Array(binary.length);
+	for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+	return bytes;
+}
+
 export async function handleSaveOutput(
-	files: Array<{ name: string; content: string }>,
-	download: (name: string, content: string) => void,
+	files: SaveOutputFile[],
+	download: (name: string, bytes: Uint8Array<ArrayBuffer>) => void,
 	now: number
 ): Promise<'folder' | 'download'> {
 	if (takeSaveTarget() === 'folder') {
 		const { handle, writable } = getActiveDirectory();
 		if (handle && writable && files.length > 0) {
-			const bin = atob(files[0].content);
-			const zip = new Uint8Array(bin.length);
-			for (let i = 0; i < bin.length; i++) zip[i] = bin.charCodeAt(i);
-			const unzipped = unzipSync(zip);
+			const unzipped = unzipSync(fileBytes(files[0]));
 			const out = Object.entries(unzipped).map(([path, bytes]) => ({ path, bytes }));
 			await writeSaveInPlace(handle, out, now);
 			return 'folder';
 		}
 	}
-	for (const { name, content } of files) download(name, content);
+	for (const file of files) download(file.name, fileBytes(file));
 	return 'download';
 }
 
 export const downloadSaveFileHandler: WSMessageHandler = {
 	type: MessageType.DOWNLOAD_SAVE_FILE,
 	async handle(data, { goto }) {
-		console.log('Download save files', data);
-		const files = data as Array<{ name: string; content: string }>;
+		const files = data as SaveOutputFile[];
 		const toast = getToastState();
-		const download = (name: string, content: string) => {
-			const binaryString = atob(content);
-			const bytes = new Uint8Array(binaryString.length);
-			for (let i = 0; i < binaryString.length; i++) {
-				bytes[i] = binaryString.charCodeAt(i);
-			}
+		const download = (name: string, bytes: Uint8Array<ArrayBuffer>) => {
 			const blob = new Blob([bytes], { type: 'application/octet-stream' });
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement('a');

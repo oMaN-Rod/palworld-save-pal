@@ -1,9 +1,9 @@
 import { goto } from '$app/navigation';
-import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+import * as m from '$i18n/messages';
 import { recordSession } from '$lib/fs';
+import { pushProgressMessage, sendBytes } from '$lib/utils/websocketUtils';
 import { getAppState, getToastState } from '$states';
 import { MessageType } from '$types';
-import * as m from '$i18n/messages';
 
 export async function startSaveLoad(
 	zip: Uint8Array,
@@ -14,7 +14,9 @@ export async function startSaveLoad(
 	await goto('/loading');
 	appState.resetState();
 	pushProgressMessage(m.upload_loading_save());
-	send(MessageType.LOAD_ZIP_FILE, Array.from(zip));
+	// A copy, because the worker transport transfers the buffer it is given and
+	// `recordSession` below still needs the original.
+	sendBytes(MessageType.LOAD_ZIP_FILE, zip.slice());
 	const res = await recordSession({
 		zipBytes: zip,
 		name,

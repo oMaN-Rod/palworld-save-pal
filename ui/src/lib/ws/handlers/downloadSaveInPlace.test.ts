@@ -55,4 +55,29 @@ describe('handleSaveOutput (save-in-place branch)', () => {
 		expect(downloaded).toEqual(['world1.zip']);
 		expect(writeSaveInPlace).not.toHaveBeenCalled();
 	});
+
+	// The worker hands the zip over as bytes; only the desktop socket, which can
+	// carry nothing but text, still base64s it.
+	it('writes a zip delivered as raw bytes without decoding base64', async () => {
+		active.target = 'folder';
+		active.dir = { handle: {}, writable: true };
+		const bytes = zipSync({ 'Level.sav': new Uint8Array([1, 2]) });
+		const downloaded: string[] = [];
+
+		const result = await handleSaveOutput([{ name: 'world1.zip', bytes }], (n) => downloaded.push(n), 1000);
+
+		expect(result).toBe('folder');
+		const files = vi.mocked(writeSaveInPlace).mock.calls[0][1] as { path: string; bytes: Uint8Array }[];
+		expect(files.map((f) => f.path)).toEqual(['Level.sav']);
+	});
+
+	it('downloads raw bytes as-is when there is no folder target', async () => {
+		const bytes = zipSync({ 'Level.sav': new Uint8Array([1]) });
+		const downloaded: Uint8Array[] = [];
+
+		const result = await handleSaveOutput([{ name: 'world1.zip', bytes }], (_n, b) => downloaded.push(b), 1000);
+
+		expect(result).toBe('download');
+		expect(downloaded).toEqual([bytes]);
+	});
 });

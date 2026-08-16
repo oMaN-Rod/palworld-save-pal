@@ -13,3 +13,7 @@ export function set_sql_bridge(
 	query: (sql: string, params: unknown[]) => Record<string, unknown>[]
 ): void;
 export function run_migrations(): Promise<void>;
+export function stage_gvas(slot: string, uid: string, bytes: Uint8Array): void;
+export function load_staged_gvas(save_id: string): Promise<void>;
+export function export_gvas_manifest(): Promise<{ world_name: string; names: string[] }>;
+export function export_gvas_file(name: string): Promise<Uint8Array>;

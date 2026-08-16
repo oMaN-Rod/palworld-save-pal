@@ -30,3 +30,19 @@ export function set_sql_bridge() {
 export async function run_migrations() {
 	throw new Error(NOT_BUILT);
 }
+
+export function stage_gvas() {
+	throw new Error(NOT_BUILT);
+}
+
+export async function load_staged_gvas() {
+	throw new Error(NOT_BUILT);
+}
+
+export async function export_gvas_manifest() {
+	throw new Error(NOT_BUILT);
+}
+
+export async function export_gvas_file() {
+	throw new Error(NOT_BUILT);
+}

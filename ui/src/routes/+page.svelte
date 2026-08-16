@@ -15,7 +15,7 @@
 		Cta
 	} from '$components/landing';
 	import { restoreMostRecent, hasRecent } from '$lib/fs';
-	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { send, sendBytes, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { startSaveLoad } from '$lib/data/loadSave';
 	import * as m from '$i18n/messages';
@@ -44,9 +44,7 @@
 		await goto('/loading');
 		appState.resetState();
 		pushProgressMessage(m.upload_restoring());
-		const r = await restoreMostRecent((bytes) =>
-			send(MessageType.LOAD_ZIP_FILE, Array.from(bytes))
-		);
+		const r = await restoreMostRecent((bytes) => sendBytes(MessageType.LOAD_ZIP_FILE, bytes));
 		if (!r.restored) {
 			await goto('/upload');
 			toast.add(

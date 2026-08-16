@@ -1,22 +1,8 @@
 import { unzipSync, unzlibSync, zipSync } from 'fflate';
 import { initOoz, oozCompress, oozCompressSync, oozDecompress, oozDecompressSync } from './ooz';
 import type { SavHeader } from './savframe';
-import { parseSavHeader, buildSav, getMagic, checkSavFormat, SaveType } from './savframe';
+import { buildSav, checkSavFormat, getMagic, parseSavHeader, SaveType } from './savframe';
 import { openSqlite, storageWarning } from './sqlite';
-
-function toB64(bytes: Uint8Array): string {
-	let s = '';
-	for (let i = 0; i < bytes.length; i += 0x8000) {
-		s += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-	}
-	return btoa(s);
-}
-function fromB64(b64: string): Uint8Array {
-	const bin = atob(b64);
-	const out = new Uint8Array(bin.length);
-	for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
-	return out;
-}
 
 const ZLIB_DOUBLE = 0x32;
 
@@ -45,75 +31,86 @@ export async function savToGvas(sav: Uint8Array): Promise<Uint8Array> {
 }
 async function gvasToSav(gvas: Uint8Array): Promise<Uint8Array> {
 	const compressed = await oozCompress(gvas);
-	return buildSav(compressed, gvas.length, compressed.length, getMagic(SaveType.PLM)!, SaveType.PLM);
+	return buildSav(
+		compressed,
+		gvas.length,
+		compressed.length,
+		getMagic(SaveType.PLM)!,
+		SaveType.PLM
+	);
 }
 
-interface GvasBundle {
-	save_id: string;
-	level: string;
-	level_meta: string | null;
-	world_option: string | null;
-	players: { uid: string; sav: string; dps: string | null }[];
+export type GvasSlot = 'level' | 'level_meta' | 'world_option' | 'player_sav' | 'player_dps';
+export type StageFn = (slot: GvasSlot, uid: string, gvas: Uint8Array) => void;
+
+/** Palworld names player files by 32-hex stem; the engine parses dashed uuids. */
+function uidFromStem(stem: string): string {
+	const hex = stem.toLowerCase();
+	return [
+		hex.slice(0, 8),
+		hex.slice(8, 12),
+		hex.slice(12, 16),
+		hex.slice(16, 20),
+		hex.slice(20, 32)
+	].join('-');
 }
 
-export async function savZipToGvasBundle(zipBytes: Uint8Array): Promise<GvasBundle> {
+/**
+ * Decompresses a save zip one file at a time, handing each GVAS buffer to
+ * `stage` and dropping it before starting the next. Returns the save id.
+ *
+ * One file at a time is the whole point: a real save's files total hundreds of
+ * megabytes decompressed, and collecting them into a single structure — base64
+ * in a JSON frame, above all — exceeds the longest string a browser can hold.
+ */
+export async function stageSavZip(zipBytes: Uint8Array, stage: StageFn): Promise<string> {
 	const files = unzipSync(zipBytes);
 	const names = Object.keys(files);
 	const levelName = names.find((n) => n.endsWith('Level.sav'));
 	if (!levelName) throw new Error("Zip does not contain 'Level.sav'");
+
+	const hand = async (name: string, slot: GvasSlot, uid = '') => {
+		const gvas = await savToGvas(files[name]);
+		// Release the compressed bytes before the caller takes the GVAS, so the
+		// two are never both retained.
+		delete files[name];
+		stage(slot, uid, gvas);
+	};
+
+	await hand(levelName, 'level');
 	const metaName = names.find((n) => n.endsWith('LevelMeta.sav'));
+	if (metaName) await hand(metaName, 'level_meta');
 	const woName = names.find((n) => n.endsWith('WorldOption.sav'));
-	const players: GvasBundle['players'] = [];
-	const byUid = new Map<string, { sav?: string; dps?: string }>();
-	const order: string[] = [];
+	if (woName) await hand(woName, 'world_option');
+
 	for (const n of names) {
 		if (!n.includes('Players') || !n.endsWith('.sav')) continue;
-		const stem = n.split('/').pop()!.replace(/\.sav$/, '');
+		const stem = n
+			.split('/')
+			.pop()!
+			.replace(/\.sav$/, '');
 		const isDps = stem.endsWith('_dps');
-		const uid = isDps ? stem.slice(0, -4) : stem;
-		if (!byUid.has(uid)) {
-			byUid.set(uid, {});
-			order.push(uid);
-		}
-		const gvas = toB64(await savToGvas(files[n]));
-		if (isDps) byUid.get(uid)!.dps = gvas;
-		else byUid.get(uid)!.sav = gvas;
+		const uid = uidFromStem(isDps ? stem.slice(0, -4) : stem);
+		await hand(n, isDps ? 'player_dps' : 'player_sav', uid);
 	}
-	for (const uid of order) {
-		const e = byUid.get(uid)!;
-		if (e.sav) players.push({ uid, sav: e.sav, dps: e.dps ?? null });
-	}
-	const saveId = levelName.includes('/') ? levelName.split('/')[0] : 'save';
-	return {
-		save_id: saveId,
-		level: toB64(await savToGvas(files[levelName])),
-		level_meta: metaName ? toB64(await savToGvas(files[metaName])) : null,
-		world_option: woName ? toB64(await savToGvas(files[woName])) : null,
-		players
-	};
+
+	return levelName.includes('/') ? levelName.split('/')[0] : 'save';
 }
 
-interface SaveBundleOut {
-	world_name: string;
-	level: string;
-	level_meta: string | null;
-	world_option: string | null;
-	players: { uid: string; sav: string; dps: string | null }[];
-}
-
-export async function gvasBundleToSavZip(
-	b: SaveBundleOut
+/**
+ * Compresses each entry the engine listed back into a `.sav` and zips them.
+ * The engine owns the file list, so the naming rules live in one place.
+ */
+export async function gvasFilesToSavZip(
+	worldName: string,
+	names: string[],
+	read: (name: string) => Uint8Array | Promise<Uint8Array>
 ): Promise<{ name: string; zip: Uint8Array }> {
 	const entries: Record<string, Uint8Array> = {};
-	entries['Level.sav'] = await gvasToSav(fromB64(b.level));
-	if (b.world_option) entries['WorldOption.sav'] = await gvasToSav(fromB64(b.world_option));
-	for (const p of b.players) {
-		const stem = p.uid.replace(/-/g, '');
-		entries[`Players/${stem}.sav`] = await gvasToSav(fromB64(p.sav));
-		if (p.dps) entries[`Players/${stem}_dps.sav`] = await gvasToSav(fromB64(p.dps));
-	}
-	const name = `${b.world_name || 'PSP'}.zip`;
-	return { name, zip: zipSync(entries) };
+	// Sequential on purpose: each GVAS is compressed and released before the
+	// next is pulled out of the engine, so only one is ever resident.
+	for (const name of names) entries[name] = await gvasToSav(await read(name));
+	return { name: `${worldName || 'PSP'}.zip`, zip: zipSync(entries) };
 }
 
 // Guarded so importing this module for its pure helpers doesn't start the
@@ -179,18 +176,46 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		);
 	}
 
-	self.onmessage = async (ev: MessageEvent<string>) => {
+	// Bulk bytes ride their own binary message rather than a JSON frame, in both
+	// directions. Everything else stays a JSON string.
+	type BinaryFrame = { type: string; bytes: Uint8Array };
+	const postBinary = (message: object, transfer: Transferable[]) =>
+		(self as unknown as { postMessage: (m: object, t: Transferable[]) => void }).postMessage(
+			message,
+			transfer
+		);
+
+	// Every engine entry point takes the module state out of its cell for the
+	// duration of the call, so two overlapping calls would find it missing and
+	// trap. `onmessage` is async, so without this the next message would start
+	// at the first await of the one before it.
+	let pending: Promise<unknown> = Promise.resolve();
+	const serialized = (op: () => Promise<void>) => {
+		const next = pending.then(op, op);
+		pending = next.catch(() => {});
+		return next;
+	};
+
+	const handle = async (ev: MessageEvent<string | BinaryFrame>) => {
 		try {
-			const frame = JSON.parse(ev.data) as { type: string; data: unknown };
 			const mod = await wasm();
-			if (frame.type === 'load_zip_file') {
-				const zip = Uint8Array.from(frame.data as number[]);
-				const bundle = await savZipToGvasBundle(zip);
-				await mod.dispatch_frame(JSON.stringify({ type: 'load_save_gvas', data: bundle }));
+			if (typeof ev.data !== 'string') {
+				if (ev.data.type !== 'load_zip_file') {
+					throw new Error(`unsupported binary frame: ${ev.data.type}`);
+				}
+				const saveId = await stageSavZip(ev.data.bytes, (slot, uid, gvas) =>
+					mod.stage_gvas(slot, uid, gvas)
+				);
+				await mod.load_staged_gvas(saveId);
 				return;
 			}
+			const frame = JSON.parse(ev.data) as { type: string; data: unknown };
 			if (frame.type === 'download_save_file') {
-				await mod.dispatch_frame(JSON.stringify({ type: 'download_save_gvas', data: null }));
+				const manifest = await mod.export_gvas_manifest();
+				const { name, zip } = await gvasFilesToSavZip(manifest.world_name, manifest.names, (n) =>
+					mod.export_gvas_file(n)
+				);
+				postBinary({ type: 'download_save_file', data: [{ name, bytes: zip }] }, [zip.buffer]);
 				return;
 			}
 			await mod.dispatch_frame(ev.data);
@@ -199,25 +224,7 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		}
 	};
 
-	// Turns the engine's save_gvas_bundle emission into the download_save_file
-	// frame the UI expects, by wrapping postMessage.
-	const origPost = self.postMessage.bind(self);
-	(self as unknown as { postMessage: (m: string) => void }).postMessage = (message: string) => {
-		try {
-			const parsed = JSON.parse(message) as { type: string; data: SaveBundleOut };
-			if (parsed.type === 'save_gvas_bundle') {
-				void gvasBundleToSavZip(parsed.data)
-					.then(({ name, zip }) => {
-						origPost(
-							JSON.stringify({ type: 'download_save_file', data: [{ name, content: toB64(zip) }] })
-						);
-					})
-					.catch(postError);
-				return;
-			}
-		} catch {
-			/* not JSON we intercept */
-		}
-		origPost(message);
+	self.onmessage = (ev: MessageEvent<string | BinaryFrame>) => {
+		void serialized(() => handle(ev));
 	};
 }

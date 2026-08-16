@@ -2,8 +2,11 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 const nav = vi.hoisted(() => ({ goto: vi.fn(async () => {}) }));
 vi.mock('$app/navigation', () => ({ goto: nav.goto }));
-const ws = vi.hoisted(() => ({ send: vi.fn(), push: vi.fn() }));
-vi.mock('$lib/utils/websocketUtils', () => ({ send: ws.send, pushProgressMessage: ws.push }));
+const ws = vi.hoisted(() => ({ sendBytes: vi.fn(), push: vi.fn() }));
+vi.mock('$lib/utils/websocketUtils', () => ({
+	sendBytes: ws.sendBytes,
+	pushProgressMessage: ws.push
+}));
 const fs = vi.hoisted(() => ({ record: vi.fn(async () => ({ persisted: true, quota: false })) }));
 vi.mock('$lib/fs', () => ({ recordSession: fs.record }));
 const st = vi.hoisted(() => ({ reset: vi.fn(), toastAdd: vi.fn() }));
@@ -26,11 +29,22 @@ describe('startSaveLoad', () => {
 		await startSaveLoad(zip, 'world1', { handle: {} as FileSystemDirectoryHandle, writable: true });
 		expect(nav.goto).toHaveBeenCalledWith('/loading');
 		expect(st.reset).toHaveBeenCalled();
-		expect(ws.send).toHaveBeenCalledWith('load_zip_file', [1, 2, 3]);
+		expect(ws.sendBytes).toHaveBeenCalledWith('load_zip_file', new Uint8Array([1, 2, 3]));
 		expect(fs.record).toHaveBeenCalledWith(
 			expect.objectContaining({ name: 'world1', writable: true })
 		);
 		expect(st.toastAdd).not.toHaveBeenCalled();
+	});
+
+	// The transport transfers the buffer it is handed, which would detach the
+	// caller's — so persistence must not be looking at the same one.
+	it('sends a copy of the zip so the recorded session still has its bytes', async () => {
+		const zip = new Uint8Array([1, 2, 3]);
+		await startSaveLoad(zip, 'world1');
+		const sent = ws.sendBytes.mock.calls[0][1] as Uint8Array;
+		expect(sent).not.toBe(zip);
+		const recorded = fs.record.mock.calls[0] as unknown as [{ zipBytes: Uint8Array }];
+		expect(recorded[0].zipBytes).toBe(zip);
 	});
 
 	it('toasts a warning when persistence hit the quota', async () => {

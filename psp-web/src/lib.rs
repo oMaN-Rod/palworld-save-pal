@@ -9,6 +9,7 @@ use psp_app::blueprint_registry::BlueprintRegistry;
 use psp_app::dispatcher::{dispatch, HandlerCtx, NullExtRouter, SessionAttachment};
 use psp_app::emitter::Emitter;
 use psp_app::envelope::Envelope;
+use psp_app::handlers::web_save::{handle_load_save_gvas_bytes, LoadSaveGvasBytes, StagedGvas};
 use psp_app::{AppConfig, AppState, SessionStore};
 use psp_core::gamedata::GameData;
 use psp_core::session::Session;
@@ -141,6 +142,94 @@ pub fn init_game_data(entries: JsValue) -> Result<(), JsValue> {
 pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
     let envelope: Envelope =
         serde_json::from_str(&frame_json).map_err(|e| JsValue::from_str(&e.to_string()))?;
+    run_with_ctx(Op::Frame(envelope)).await
+}
+
+// The save's GVAS files, accumulated across `stage_gvas` calls and consumed by
+// `load_staged_gvas`. Kept out of the frame path deliberately: these buffers
+// run to hundreds of megabytes, which is past what a JS string — and therefore
+// a JSON frame — can carry at all.
+thread_local! {
+    static STAGED: RefCell<StagedGvas> = RefCell::new(StagedGvas::default());
+}
+
+/// `slot` is one of `level`, `level_meta`, `world_option`, `player_sav`,
+/// `player_dps`; `uid` is ignored except for the two player slots. `bytes`
+/// arrives as a `Uint8Array` and is moved straight into the staging area, so
+/// the caller can drop its own copy immediately.
+#[wasm_bindgen]
+pub fn stage_gvas(slot: &str, uid: &str, bytes: Vec<u8>) -> Result<(), JsValue> {
+    STAGED.with(|staged| {
+        staged
+            .borrow_mut()
+            .stage(slot, uid, bytes)
+            .map_err(|e| JsValue::from_str(&e.to_string()))
+    })
+}
+
+/// Loads everything staged so far and empties the staging area.
+#[wasm_bindgen]
+pub async fn load_staged_gvas(save_id: String) -> Result<(), JsValue> {
+    let payload = STAGED
+        .with(|staged| staged.borrow_mut().take(save_id))
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+    run_with_ctx(Op::LoadStaged(Box::new(payload))).await
+}
+
+/// `{ world_name, names: string[] }` — the download zip's file list. Small by
+/// construction; the bytes come one at a time from `export_gvas_file`.
+#[wasm_bindgen]
+pub async fn export_gvas_manifest() -> Result<JsValue, JsValue> {
+    with_session(|session| {
+        let manifest = psp_app::handlers::web_save::export_manifest(session);
+        let out = js_sys::Object::new();
+        js_sys::Reflect::set(&out, &"world_name".into(), &manifest.world_name.into())?;
+        let names = manifest
+            .names
+            .into_iter()
+            .map(JsValue::from)
+            .collect::<js_sys::Array>();
+        js_sys::Reflect::set(&out, &"names".into(), &names)?;
+        Ok(out.into())
+    })
+    .await
+}
+
+/// Serializes one manifest entry and hands it over as a `Uint8Array`.
+#[wasm_bindgen]
+pub async fn export_gvas_file(name: String) -> Result<Vec<u8>, JsValue> {
+    with_session(|session| {
+        psp_app::handlers::web_save::export_file(session, &name)
+            .map_err(|e| JsValue::from_str(&e.to_string()))
+    })
+    .await
+}
+
+/// Borrows the loaded save. `STATE` is put back on every path — an early
+/// return between the take and the restore would leave the module permanently
+/// uninitialized for every later call.
+async fn with_session<T>(
+    f: impl FnOnce(&psp_core::session::SaveSession) -> Result<T, JsValue>,
+) -> Result<T, JsValue> {
+    let state = STATE.with(|s| s.borrow_mut().take()).expect("init() first");
+    let session_arc = Arc::clone(&state.current);
+    let result = {
+        let guard = session_arc.lock().await;
+        match guard.save.as_ref() {
+            Some(session) => f(session),
+            None => Err(JsValue::from_str("No save file loaded")),
+        }
+    };
+    STATE.with(|s| *s.borrow_mut() = Some(state));
+    result
+}
+
+enum Op {
+    Frame(Envelope),
+    LoadStaged(Box<LoadSaveGvasBytes>),
+}
+
+async fn run_with_ctx(op: Op) -> Result<(), JsValue> {
     let (emitter, mut frames) = Emitter::test_channel();
 
     // Take the state out to satisfy the borrow checker across the await, then put back.
@@ -150,13 +239,16 @@ pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
     // one, and a tokio mutex is not reentrant. They get a scratch session
     // instead and reach the real one through `attachment.arc` — the native ws
     // frame loop makes exactly the same split.
-    let holds_own_session_lock = !matches!(
-        psp_app::messages::MessageType::from_wire(&envelope.message_type),
-        Some(
-            psp_app::messages::MessageType::ReattachSession
-                | psp_app::messages::MessageType::EjectSession
-        )
-    );
+    let holds_own_session_lock = match &op {
+        Op::Frame(envelope) => !matches!(
+            psp_app::messages::MessageType::from_wire(&envelope.message_type),
+            Some(
+                psp_app::messages::MessageType::ReattachSession
+                    | psp_app::messages::MessageType::EjectSession
+            )
+        ),
+        Op::LoadStaged(_) => true,
+    };
     // Lock a CLONE of the current arc so the arc slot itself stays free for the
     // attachment's `&mut` — exactly the native ws frame loop's pattern.
     let session_arc = Arc::clone(&state.current);
@@ -166,12 +258,13 @@ pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
     } else {
         None
     };
+    let mut outcome = Ok(());
     {
         let session: &mut Session = match session_guard.as_mut() {
             Some(guard) => guard,
             None => &mut scratch,
         };
-        let ctx = HandlerCtx {
+        let mut ctx = HandlerCtx {
             session,
             app: &state.app,
             emitter: &emitter,
@@ -181,7 +274,16 @@ pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
                 arc: &mut state.current,
             }),
         };
-        dispatch(envelope, ctx).await;
+        match op {
+            // `dispatch` reports handler failures as `error` frames, not as a
+            // Result, so its own frames carry the outcome.
+            Op::Frame(envelope) => dispatch(envelope, ctx).await,
+            Op::LoadStaged(payload) => {
+                outcome = handle_load_save_gvas_bytes(*payload, &mut ctx)
+                    .await
+                    .map_err(|e| JsValue::from_str(&e.to_string()));
+            }
+        }
     }
     drop(session_guard);
     drop(emitter);
@@ -194,5 +296,5 @@ pub async fn dispatch_frame(frame_json: String) -> Result<(), JsValue> {
             }
         }
     });
-    Ok(())
+    outcome
 }

@@ -5,7 +5,7 @@
 	import { getAppState, getToastState } from '$states';
 	import { Download, Settings2, FolderOpen } from 'lucide-svelte';
 	import { goto } from '$app/navigation';
-	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { send, sendBytes, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { startSaveLoad } from '$lib/data/loadSave';
 	import { openWorldOptionModal } from '$components/worldoption';
 	import {
@@ -31,7 +31,7 @@
 		await goto('/loading');
 		appState.resetState();
 		pushProgressMessage(m.upload_restoring());
-		const r = await restoreMostRecent((bytes) => send(MessageType.LOAD_ZIP_FILE, Array.from(bytes)));
+		const r = await restoreMostRecent((bytes) => sendBytes(MessageType.LOAD_ZIP_FILE, bytes));
 		if (!r.restored) {
 			await goto('/upload');
 			toast.add(

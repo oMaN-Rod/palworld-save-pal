@@ -64,6 +64,13 @@ class SocketState {
 		this.#websocket.send(messageData);
 	}
 
+	// A WebSocket frame the backend parses as text, so bytes still go over as a
+	// JSON number array here. The worker transport overrides this with a real
+	// binary hand-off.
+	async sendBytes(type: string, bytes: Uint8Array) {
+		await this.send(JSON.stringify({ type, data: Array.from(bytes) }));
+	}
+
 	async sendAndWait(messageData: any): Promise<any> {
 		return new Promise((resolve) => {
 			const messageType = messageData.type;

@@ -25,9 +25,10 @@ async fn get_version_round_trips_through_the_callback() {
     assert!(frames.iter().any(|f| f.contains("get_version")), "got {frames:?}");
 }
 
+/// Bytes in through `stage_gvas`, bytes out through `export_gvas_file` — the
+/// GVAS never becomes a string in either direction.
 #[wasm_bindgen_test]
-async fn world_save_round_trips_through_wasm() {
-    use base64::Engine;
+async fn world_save_round_trips_through_wasm_as_bytes() {
     psp_web::init();
 
     let cb = wasm_bindgen::closure::Closure::<dyn Fn(String)>::new(|frame: String| {
@@ -38,28 +39,21 @@ async fn world_save_round_trips_through_wasm() {
     FRAMES.with(|f| f.borrow_mut().clear());
 
     let gvas = include_bytes!("fixtures/world1-level.gvas");
-    let level_b64 = base64::engine::general_purpose::STANDARD.encode(gvas);
-    let load = serde_json::json!({
-        "type": "load_save_gvas",
-        "data": { "save_id": "world1", "level": level_b64, "level_meta": null,
-                  "world_option": null, "players": [] }
-    });
-    psp_web::dispatch_frame(load.to_string()).await.unwrap();
-    psp_web::dispatch_frame(r#"{"type":"download_save_gvas","data":null}"#.to_string())
-        .await
-        .unwrap();
+    psp_web::stage_gvas("level", "", gvas.to_vec()).unwrap();
+    psp_web::load_staged_gvas("world1".to_string()).await.unwrap();
 
     let frames = FRAMES.with(|f| f.borrow().clone());
-    let bundle = frames
-        .iter()
-        .find_map(|f| {
-            let v: serde_json::Value = serde_json::from_str(f).ok()?;
-            (v["type"] == "save_gvas_bundle").then_some(v)
-        })
-        .expect("save_gvas_bundle emitted");
-    let out = base64::engine::general_purpose::STANDARD
-        .decode(bundle["data"]["level"].as_str().unwrap())
-        .unwrap();
+    assert!(
+        frames.iter().any(|f| f.contains("loaded_save_files")),
+        "got {frames:?}"
+    );
+
+    let manifest = psp_web::export_gvas_manifest().await.unwrap();
+    let names = js_sys::Reflect::get(&manifest, &"names".into()).unwrap();
+    let names = js_sys::Array::from(&names);
+    assert_eq!(names.get(0).as_string().as_deref(), Some("Level.sav"));
+
+    let out = psp_web::export_gvas_file("Level.sav".to_string()).await.unwrap();
     assert_eq!(out, gvas.to_vec(), "round-trip GVAS is byte-identical");
 }
 

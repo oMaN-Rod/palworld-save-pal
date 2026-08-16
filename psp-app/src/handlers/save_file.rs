@@ -701,7 +701,7 @@ pub async fn handle_update_save_file(
 /// A player's uuid as it appears inside the DOWNLOAD zip: LOWERCASE hex, no
 /// dashes. Deliberately different from `save_modded_player_stem` (uppercase);
 /// the two must not be collapsed.
-fn download_player_stem(player_id: &Uuid) -> String {
+pub(crate) fn download_player_stem(player_id: &Uuid) -> String {
     player_id.simple().to_string()
 }
 

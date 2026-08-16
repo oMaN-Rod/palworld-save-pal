@@ -25,6 +25,11 @@ export function send(type: MessageType, data?: any): void {
 	);
 }
 
+/** Sends bulk bytes. May transfer the buffer — do not reuse `bytes` after. */
+export function sendBytes(type: MessageType, bytes: Uint8Array): void {
+	getSocketState().sendBytes(type, bytes);
+}
+
 export function isReady(): boolean {
 	const ws = getSocketState();
 	return ws.isConnected();
