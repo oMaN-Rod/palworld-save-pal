@@ -1,6 +1,13 @@
 {
+	// Worker name stays `psp`: renaming would orphan the existing deployment.
 	"name": "psp",
 	"compatibility_date": "2026-08-02",
+	"routes": [
+		{
+			"pattern": "palworldsavepal.app",
+			"custom_domain": true
+		}
+	],
 	"assets": {
 		"directory": "./ui_build",
 		"not_found_handling": "single-page-application"

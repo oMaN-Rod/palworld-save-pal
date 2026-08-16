@@ -49,7 +49,15 @@ jobs:
 
       - name: Build web bundle
         working-directory: ui
+        env:
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
         run: bun run build:web
+
+      # Fails the run before upload if the asset budget is breached or a public
+      # page lost its title/description/canonical/h1.
+      - name: Verify build output
+        working-directory: ui
+        run: bun run verify:build
 
       - name: Deploy to Cloudflare
         uses: cloudflare/wrangler-action@v3
@@ -57,6 +65,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           # Pinned, not `latest`: 4.34.0 is the floor that refreshes the upload
-          # token mid-flight, which a 4,000-file / 134 MB asset push needs.
+          # token mid-flight, which a 10,600-file / 334 MB asset push needs.
           wranglerVersion: "4.118.0"
           command: deploy
