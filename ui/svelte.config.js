@@ -27,7 +27,10 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			pages: '../ui_build'
+			pages: '../ui_build',
+			// Paired with not_found_handling: "404-page" in wrangler.jsonc, so an
+			// unknown URL returns HTTP 404 instead of a 200 soft-404 shell.
+			fallback: '404.html'
 		}),
 		prerender: {
 			entries: ['*', ...localizedEntries]

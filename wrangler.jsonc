@@ -10,6 +10,8 @@
 	],
 	"assets": {
 		"directory": "./ui_build",
-		"not_found_handling": "single-page-application"
+		// Verified every static route is prerendered, so unknown URLs are genuinely
+		// unknown and should say so rather than returning a 200 soft-404.
+		"not_found_handling": "404-page"
 	}
 }
