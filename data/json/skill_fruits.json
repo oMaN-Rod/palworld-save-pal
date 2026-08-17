@@ -1,0 +1,1365 @@
+[
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1749922690",
+    "x": -551626.2,
+    "y": -148708.84,
+    "z": 11300.78,
+    "instance_id": "5CD889324D8AB7DACB50B3B4CFC2BFD4"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1806202691",
+    "x": -595484.1,
+    "y": -488487.44,
+    "z": 6843.73,
+    "instance_id": "588C04F243C65D626D42D78B6BD3F844"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1851138692",
+    "x": -891999.8,
+    "y": -495104.2,
+    "z": -551.29,
+    "instance_id": "576FD9AD49A37AE7B1FF60B069535B41"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1893256693",
+    "x": -799673.56,
+    "y": -242199.94,
+    "z": 66.75,
+    "instance_id": "46A2FC1A4537365186FF8DB89F761359"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1929187694",
+    "x": -546740.9,
+    "y": -288299.94,
+    "z": 22622.79,
+    "instance_id": "753CC6B84742F985D63C849516063440"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_1977434695",
+    "x": -660664.1,
+    "y": -286253.1,
+    "z": 3007.47,
+    "instance_id": "091CED98493D6F37D874C785AA378D92"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C_UAID_5811222FCA36322D02_2026204696",
+    "x": -766031.1,
+    "y": -416395.75,
+    "z": 28010.85,
+    "instance_id": "74D3E8F2450A3129CFA1D1A2953ED139"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Desert_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Desert_C_UAID_5811222FCA3696BE01_1258434228",
+    "x": 98365.55,
+    "y": 308512.5,
+    "z": 17509.94,
+    "instance_id": "B758C2A141AD10CE5DC32C94A0ACAEE2"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Desert_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Desert_C_UAID_5811222FCA3697BE01_1309497409",
+    "x": -7392.78,
+    "y": 291161.6,
+    "z": 14420.44,
+    "instance_id": "B446EF754CCAB34A8AFB6FBED2AE0D8B"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3694BE01_2047392866",
+    "x": -331352.47,
+    "y": 251147.8,
+    "z": 3460.43,
+    "instance_id": "A94967D74828F8A5AD6BFABF06E1DDC4"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_1273265043",
+    "x": -217275.77,
+    "y": 45631.85,
+    "z": 20155.71,
+    "instance_id": "1EA426254A11D3D077935D965A15A505"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_1643508046",
+    "x": -165098.64,
+    "y": 155823.5,
+    "z": 12740.84,
+    "instance_id": "7CA7398743E56048BD453DB904235D7D"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_1713232047",
+    "x": -135018.69,
+    "y": 225124.6,
+    "z": 1615.29,
+    "instance_id": "9EE8139342FCC5D51A6D6083BD859CF2"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_1931836048",
+    "x": -269151.5,
+    "y": 324098.53,
+    "z": -1894.3,
+    "instance_id": "AA7B901D4EA34BF5CE8DFA8EA2700DD3"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_2031665049",
+    "x": -361622.2,
+    "y": 69231.84,
+    "z": -425.98,
+    "instance_id": "E12E0C0043F1BF2ABB8A9C98FF60134C"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3695BE01_2124145050",
+    "x": -139111.08,
+    "y": -50039.27,
+    "z": -26.31,
+    "instance_id": "BFCC87AF4808CBFCBAC50E933CD966A1"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3697BE01_1156526406",
+    "x": -309227.0,
+    "y": 72250.74,
+    "z": 10926.08,
+    "instance_id": "679C97BB4ED7A5C5E713F88880348A4C"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3697BE01_1210385407",
+    "x": -146655.1,
+    "y": 181435.05,
+    "z": 2982.7,
+    "instance_id": "74608F2F41D21CB33177209093089C31"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_5811222FCA3697BE01_1260806408",
+    "x": -141963.81,
+    "y": 311323.34,
+    "z": 571.57,
+    "instance_id": "85AF8C674AB389C56E29C58B1632DBAC"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_A8A159E94333CF5302_2019954951_1b7c35de93ffbf77",
+    "x": -404954.47,
+    "y": 171016.47,
+    "z": -40233.37,
+    "instance_id": "01409A5B43C7270C86AA229B42AE6BB8"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_A8A159E94333CF5302_2019954951_6d0c084ff4533929",
+    "x": -223159.45,
+    "y": 223581.47,
+    "z": -65773.37,
+    "instance_id": "01409A5B43C7270C86AA229B42AE6BB8"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_A8A159E94333CF5302_2019954951_7ec9d097798f090a",
+    "x": -151329.45,
+    "y": 408291.47,
+    "z": -65773.37,
+    "instance_id": "01409A5B43C7270C86AA229B42AE6BB8"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Grass_C_UAID_A8A159E94333CF5302_2019954951_da838af7e0f3f28b",
+    "x": -202944.45,
+    "y": -23383.53,
+    "z": -40233.37,
+    "instance_id": "01409A5B43C7270C86AA229B42AE6BB8"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C_UAID_5811222FCA3624F601_1628467285",
+    "x": -19813.48,
+    "y": -53836.41,
+    "z": -244.96,
+    "instance_id": "2D3E63E5495A3A10F71E9A8429A5B192"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C_UAID_5811222FCA3624F601_1670199286",
+    "x": 18483.11,
+    "y": -116758.34,
+    "z": 1998.43,
+    "instance_id": "600F057F40D2C836A57F858BE0C129AF"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C_UAID_5811222FCA3624F601_1711378287",
+    "x": -48988.18,
+    "y": -105792.49,
+    "z": 4600.01,
+    "instance_id": "045019D543C4EBB6FC4535B12F0FC2BB"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C_UAID_5811222FCA3624F601_1781756288",
+    "x": -39438.85,
+    "y": -155134.83,
+    "z": 2588.38,
+    "instance_id": "5468072F45F8426037EC35933AA66AAA"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C_UAID_5811222ECF1975B702_1319062201",
+    "x": -781076.2,
+    "y": -91020.0,
+    "z": 49236.07,
+    "instance_id": "43D288B3414CD00442456DB1B5799B2D"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C_UAID_5811222ECF1975B702_1377136202",
+    "x": -718127.1,
+    "y": -96580.62,
+    "z": 53718.24,
+    "instance_id": "7CD729B7454C44FDC9AB75951DEBA88D"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C_UAID_5811222ECF19EFAA02_1739739210",
+    "x": -755686.3,
+    "y": -33184.12,
+    "z": 59266.39,
+    "instance_id": "930C98C740F4487F7E514DBF661621B1"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C_UAID_5811222ECF19EFAA02_2041256211",
+    "x": -744526.9,
+    "y": -18491.6,
+    "z": 42190.77,
+    "instance_id": "9854300941B208E15AF18DB805EE030E"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Snow_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Snow_C_UAID_5811222FCA3696BE01_1136505227",
+    "x": 73162.14,
+    "y": 241800.22,
+    "z": 24469.05,
+    "instance_id": "92E328E44967BF162AD671B47AF311B2"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Snow_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Snow_C_UAID_5811222FCA3697BE01_1396093410",
+    "x": 143300.66,
+    "y": 89052.25,
+    "z": 38556.23,
+    "instance_id": "CC7472FF4C200124020E51AF3C755479"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Volcano_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Volcano_C_UAID_5811222FCA3695BE01_1425178045",
+    "x": -410394.66,
+    "y": -96702.57,
+    "z": 24165.4,
+    "instance_id": "FBAD600040481D18C1668B9B8334AA08"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_Volcano_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_Volcano_C_UAID_5811222FCA3697BE01_1505418411",
+    "x": -243049.17,
+    "y": -128179.3,
+    "z": 8423.17,
+    "instance_id": "D6E3D5DE481808048B41F69512927071"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4E54E302_1495633854",
+    "x": 572300.0,
+    "y": -697260.7,
+    "z": 38890.09,
+    "instance_id": "2727D6AB448C84352D04F4B39A4B829A"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4E55E302_1219839114",
+    "x": 551097.6,
+    "y": -670141.94,
+    "z": 34689.91,
+    "instance_id": "C4F80478414308D9C07F8EB40E96D68E"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4E55E302_2098039428",
+    "x": 593432.2,
+    "y": -666984.0,
+    "z": 40185.93,
+    "instance_id": "2BB8B73C4D7C34CFBB4B34895A028818"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4E76C502_1076678069",
+    "x": 616621.2,
+    "y": -754349.3,
+    "z": 21081.53,
+    "instance_id": "3590844440B3F146737DF2B10C8ED647"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB4C502_1952948683",
+    "x": 595206.4,
+    "y": -643495.25,
+    "z": 18013.99,
+    "instance_id": "17E3B8A64B8F0F6FAC37899B516BF681"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB5C502_1538497266",
+    "x": 609405.44,
+    "y": -594254.25,
+    "z": 28864.72,
+    "instance_id": "6648796345265476FB3054AEDDECD2FA"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB7C502_1279069832",
+    "x": 499247.6,
+    "y": -730343.44,
+    "z": 25459.37,
+    "instance_id": "9FBBBED248BD739A2B9A0EBFC0FEE5C6"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB7C502_2135947184",
+    "x": 499029.97,
+    "y": -745573.7,
+    "z": 20696.32,
+    "instance_id": "4159D22A478003838B1201B2AEBDD7AD"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB8C502_1399965559",
+    "x": 498427.3,
+    "y": -582696.6,
+    "z": 20460.94,
+    "instance_id": "8943453B42A45EFEB8AD05AE8E938027"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB8C502_1675713641",
+    "x": 534349.3,
+    "y": -621028.56,
+    "z": 13281.12,
+    "instance_id": "1699F08243AF0FBAF440D8A7439180F3"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB8C502_1940036040",
+    "x": 484368.38,
+    "y": -664338.75,
+    "z": 18540.47,
+    "instance_id": "8D0A981B46D0BDA9BF15CB9649A1BA24"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+    "name": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C_UAID_345A605CEA4EB9C502_2125040408",
+    "x": 608703.44,
+    "y": -679949.8,
+    "z": 21896.07,
+    "instance_id": "BD33488F41EEA86A06C7F9975BF9F836"
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits1",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  },
+  {
+    "class": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+    "name": "LocationComponent_SkillFruits2",
+    "x": null,
+    "y": null,
+    "z": null
+  }
+]

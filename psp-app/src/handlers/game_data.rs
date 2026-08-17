@@ -336,7 +336,7 @@ pub async fn handle_get_effigies(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
 /// The marker-layer artifacts `get_map_layer` will serve. A request names a
 /// file to read off disk, so an id outside this list is refused rather than
 /// resolved as a path.
-const MAP_LAYERS: [&str; 10] = [
+const MAP_LAYERS: [&str; 13] = [
     "fast_travel_points",
     "dungeons",
     "bosses",
@@ -347,6 +347,9 @@ const MAP_LAYERS: [&str; 10] = [
     "eggs_spawners",
     "chests",
     "camps",
+    "ancient_ruins",
+    "kinship_peach",
+    "skill_fruits",
 ];
 
 #[derive(Debug, serde::Deserialize)]
@@ -1258,6 +1261,57 @@ mod tests {
         assert_eq!(
             frame["data"]["layers"]["camps"],
             json!([{"class": "camp", "x": 11}])
+        );
+        test.assert_no_more_frames();
+    }
+
+    /// The three artifacts added after the first batch of layers. A layer left
+    /// out of MAP_LAYERS is refused as an unknown id, so the allowlist is the
+    /// only thing standing between a shipped artifact and an error frame.
+    #[tokio::test]
+    async fn map_layer_serves_the_later_artifacts() {
+        let mut test = TestContext::new(|json_dir| {
+            std::fs::write(
+                json_dir.join("ancient_ruins.json"),
+                r#"{"GUID1": {"class": "shrine", "x": 3}}"#,
+            )
+            .unwrap();
+            std::fs::write(
+                json_dir.join("kinship_peach.json"),
+                r#"[{"name": "peach", "x": 5}]"#,
+            )
+            .unwrap();
+            std::fs::write(
+                json_dir.join("skill_fruits.json"),
+                r#"[{"name": "fruit", "x": 7}]"#,
+            )
+            .unwrap();
+        })
+        .await;
+        run_handler_with_data!(
+            test,
+            handle_get_map_layer,
+            json!({"layers": ["ancient_ruins", "kinship_peach", "skill_fruits"]})
+        )
+        .unwrap();
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_map_layer");
+        assert!(
+            frame["data"].get("error").is_none(),
+            "these ids must be allowlisted, got: {}",
+            frame["data"]
+        );
+        assert_eq!(
+            frame["data"]["layers"]["ancient_ruins"],
+            json!({"GUID1": {"class": "shrine", "x": 3}})
+        );
+        assert_eq!(
+            frame["data"]["layers"]["kinship_peach"],
+            json!([{"name": "peach", "x": 5}])
+        );
+        assert_eq!(
+            frame["data"]["layers"]["skill_fruits"],
+            json!([{"name": "fruit", "x": 7}])
         );
         test.assert_no_more_frames();
     }

@@ -1,0 +1,638 @@
+{
+  "0641DD1346B813DEC72CEB8D2E583E40": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 36135.74,
+    "y": -102794.02,
+    "z": -862.15
+  },
+  "0C2787934F41907A352385A7A15D5918": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 103369.63,
+    "y": 79980.2,
+    "z": 48401.56
+  },
+  "0FF6EDD7482B244949D4AFB021BC4BAA": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -320578.1,
+    "y": -122854.02,
+    "z": 18493.78
+  },
+  "106D54AE435007CCA4160B9A789C97E6": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -167160.28,
+    "y": 552219.44,
+    "z": -2096.98
+  },
+  "10DD9CAE4CAEE60564710DBE6E020B20": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 92797.3,
+    "y": 207482.92,
+    "z": 3380.02
+  },
+  "17CF574842581C81AE4402B83D01EFF7": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -25534.84,
+    "y": -68022.56,
+    "z": 2225.96
+  },
+  "1821970E4ADC8A5B9BA310BB2B6E871A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -235856.16,
+    "y": 116640.98,
+    "z": 5973.86
+  },
+  "18DB34AC4E66C596D878CB98FE190F40": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -814772.6,
+    "y": 20300.05,
+    "z": 42495.37
+  },
+  "191D1E384BDA248E53E920B1DF8AF62A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -108088.88,
+    "y": 238804.86,
+    "z": 19046.24
+  },
+  "1FBF0E1B4FD6DCF68BF14C9DEBF10AED": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -239825.78,
+    "y": 179007.34,
+    "z": -882.86
+  },
+  "25211EC14FB9C2A2B43A84987DA28DF0": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -159505.86,
+    "y": 299820.4,
+    "z": -2119.95
+  },
+  "2ADA7F7543C7C64910051D8780AC932A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 31252.06,
+    "y": 354119.16,
+    "z": -556.8
+  },
+  "2C723B4B4A2CCA8D2450AE862495AC51": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -580374.25,
+    "y": -186973.7,
+    "z": 10016.68
+  },
+  "2DA59E1742103D879D1291B5FEC4E66A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -170521.27,
+    "y": 111321.73,
+    "z": -56.79
+  },
+  "2F5DC859402926B1729F9DB3651C069D": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -578173.6,
+    "y": -636022.06,
+    "z": -2053.76
+  },
+  "2FE1550D4511CFA0C115A18282592EAB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -36381.25,
+    "y": 504757.4,
+    "z": 1380.0
+  },
+  "346D28724D9BDAC6E01279A63594C0F0": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 122774.14,
+    "y": 19185.75,
+    "z": 31414.61
+  },
+  "34FA044C4808DE3EF9C8ECAA3074B320": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 29619.92,
+    "y": 238550.42,
+    "z": -1482.55
+  },
+  "35B876E04164D3B829EFEFA8FF13AD7D": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -387719.25,
+    "y": -429204.16,
+    "z": 4870.37
+  },
+  "36C2AE674E7063E2C2EE5989E16FE9CB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -649822.9,
+    "y": -317721.03,
+    "z": 20136.79
+  },
+  "39F74ECE4B1C32041CE4D5963E30862A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -620359.2,
+    "y": -444953.2,
+    "z": 9054.49
+  },
+  "3A8C28584070FF43DFB8888B6E164898": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -230266.52,
+    "y": 206569.11,
+    "z": 1724.77
+  },
+  "3B9C31B0447703B748999CBEE64959FB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -729751.56,
+    "y": -294426.0,
+    "z": 390.03
+  },
+  "44B4F95F4645139381B88B9867AD01B0": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -218704.45,
+    "y": -77287.52,
+    "z": -2132.4
+  },
+  "46A699504B9A1BDDB34F0A871C2D5921": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -453711.88,
+    "y": 83883.98,
+    "z": 2360.53
+  },
+  "486837A0436F0097FD509395FE1B32C3": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -153259.47,
+    "y": 200653.2,
+    "z": 11604.73
+  },
+  "49247B09473C086B01A496BC1530F92F": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -212738.89,
+    "y": 68530.33,
+    "z": 3619.85
+  },
+  "4946672E4A6B96E5499AF69B1C1FE67C": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 8989.86,
+    "y": -157312.55,
+    "z": 4800.02
+  },
+  "4BDB51A64A259844E547629ABB44EAEE": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -513854.3,
+    "y": -216288.66,
+    "z": -875.79
+  },
+  "500A129A4CBC297A210DA793CB9FAFAB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 202991.36,
+    "y": 336967.03,
+    "z": -48.73
+  },
+  "5191490C4E52590D75E73EB7C6228A86": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -793159.5,
+    "y": -54318.61,
+    "z": 26565.69
+  },
+  "521F289643D5CCD64229639D8DE14266": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -266974.94,
+    "y": 15169.33,
+    "z": 4846.33
+  },
+  "53A0665548DAA4CC515B88A53A1C2946": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -219434.92,
+    "y": 398602.4,
+    "z": -1914.4
+  },
+  "55A124484FA0DF687D0EB3B519D32725": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -348543.8,
+    "y": 124778.55,
+    "z": -339.39
+  },
+  "55E5C168436A427F6C50CFBB9B5EFBAB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -306382.25,
+    "y": -228188.23,
+    "z": -1346.31
+  },
+  "5955BF104CA6A3C0EA1C5E8A7AC0FBB5": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -750547.7,
+    "y": 20549.38,
+    "z": 41712.3
+  },
+  "5FE5776546429311FADD30B5E5E5C056": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -623275.1,
+    "y": -137240.89,
+    "z": -448.79
+  },
+  "60783C364BF7E24A6BDE2DADD00796E3": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -66593.36,
+    "y": -253706.95,
+    "z": 7658.44
+  },
+  "61080B264712981BB1FBF899D13A3B1D": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 4145.59,
+    "y": 296633.06,
+    "z": 9649.08
+  },
+  "68A1D0DE498FD0A508663D9380AEB468": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -224312.73,
+    "y": 135301.62,
+    "z": 6697.15
+  },
+  "6B02629A4BAD4FD8EC1C188763737DCC": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -47888.25,
+    "y": 224852.0,
+    "z": 2418.12
+  },
+  "6E59AE554252374324D4B1AFCBCBAFA2": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -277726.06,
+    "y": 296465.88,
+    "z": -582.01
+  },
+  "6EB1181D40FA3C37D69F53ADA2444692": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 100621.71,
+    "y": -40449.86,
+    "z": 26145.03
+  },
+  "6F7097114F650CA142B3A9A658C0559E": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 101608.54,
+    "y": 299111.47,
+    "z": 16799.57
+  },
+  "7479315C4CDD5BBBAF3078BF4F215B73": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 70539.69,
+    "y": 505309.22,
+    "z": -2004.65
+  },
+  "79B2BAD94DD28D37ED8278B48D7EE38D": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -224073.08,
+    "y": -174363.67,
+    "z": -620.92
+  },
+  "8000F1F64A5DFC060E118080D5509518": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -781018.56,
+    "y": -96243.19,
+    "z": 39414.12
+  },
+  "81BC17C447713CEAF840CB8994E61E4E": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -57912.61,
+    "y": -190303.52,
+    "z": -1367.78
+  },
+  "83AC5F4E4D5FFF8F23DAB695CD264DAC": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -755078.75,
+    "y": -82828.6,
+    "z": 50651.65
+  },
+  "8489353E405DF5E6AAE58FAFD779F3D7": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -356889.47,
+    "y": -72283.53,
+    "z": 18735.26
+  },
+  "858281224E9CC37DD4E612B5679F2F4C": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -598655.06,
+    "y": -282853.53,
+    "z": 16763.13
+  },
+  "8733539E4ABE5F12D6A7128554562BB5": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -120219.84,
+    "y": 327153.28,
+    "z": -1691.66
+  },
+  "8965E4E544F56B34185A38AE2B588922": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -196055.92,
+    "y": 166946.86,
+    "z": -2054.79
+  },
+  "8C2E26FC4BF242208125EC8018BDC020": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -380577.62,
+    "y": 31263.76,
+    "z": -139.06
+  },
+  "8E071A0E490C0F9047B99DB1D6F3A68A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -387865.66,
+    "y": 196788.61,
+    "z": -1987.89
+  },
+  "8E82DE564606A610CE8F168203F98AF4": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 52556.18,
+    "y": -40642.94,
+    "z": 7702.95
+  },
+  "90A384814FA6BE1032B1FD846ACB7C8A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -42420.19,
+    "y": 112232.31,
+    "z": 22558.57
+  },
+  "90E84CDF4AD5EED653EC928E4194FE68": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -665225.6,
+    "y": -409944.03,
+    "z": 8438.6
+  },
+  "91949CFB4F1FA9195B478FBAEB04BB67": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -144250.44,
+    "y": -69065.6,
+    "z": -1485.43
+  },
+  "970EA20C409F1B6EF205618341798C3B": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -39202.16,
+    "y": 44777.99,
+    "z": 87.18
+  },
+  "97546E5242A7E75A8A2AD99530BF1219": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -15700.96,
+    "y": 178270.02,
+    "z": 14398.45
+  },
+  "978102E3471E5428E460F39AA480D0BB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 33674.24,
+    "y": 84211.6,
+    "z": 5307.33
+  },
+  "9BD0802E4F65E040AB04E5B6D4D2F542": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -110283.65,
+    "y": -147448.83,
+    "z": -2046.82
+  },
+  "9DB0467B41F6F9E788295BB9E92BD085": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -1009674.8,
+    "y": -401739.16,
+    "z": 1320.28
+  },
+  "A151B6664641FCDC6D9FD8BC7292D8A5": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -82055.13,
+    "y": 33486.04,
+    "z": -1084.62
+  },
+  "A1C5179B4C66603762507F8F6562BB0E": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -187651.03,
+    "y": 243315.16,
+    "z": 3838.87
+  },
+  "A420443440A05815417BDCAB1EC2F47A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -375552.28,
+    "y": 82706.91,
+    "z": 1715.6
+  },
+  "A6E41DCD4B2424893A07B8A177FA60B1": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -416615.62,
+    "y": -66259.49,
+    "z": 17173.61
+  },
+  "A6E893414A0B2D53A9E9FEAD1E1EB19E": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -379938.56,
+    "y": -44639.45,
+    "z": 8533.77
+  },
+  "A855C3DF468B9A5C158F1E8E2BF342CB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -724016.9,
+    "y": -426770.6,
+    "z": 10488.23
+  },
+  "A913D3E34A36F851D67C48BCD9736E18": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -77606.38,
+    "y": 393655.2,
+    "z": 575.36
+  },
+  "A9367D9D413D54B452070C96212C5BC2": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -31185.46,
+    "y": 335362.88,
+    "z": -829.43
+  },
+  "AABB4F9642E9CF1C6D4987A174C32670": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 15839.17,
+    "y": 435799.3,
+    "z": 9368.69
+  },
+  "AB390A82489247474012BCA34BD92361": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -828532.1,
+    "y": -55806.56,
+    "z": 39997.12
+  },
+  "AD713FDC400BD4F304DC6FA86A77CA45": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 166586.92,
+    "y": 281205.78,
+    "z": 328.54
+  },
+  "B1BB48D841D1E3E830C0BD877701D0B5": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -579016.25,
+    "y": -446038.06,
+    "z": -414.21
+  },
+  "B55544534F93FC14450020B641C02DB0": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -823529.2,
+    "y": -393098.62,
+    "z": -1686.23
+  },
+  "B5F86F1F4F44079BBE85AE89C05362AB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -56834.13,
+    "y": 418051.97,
+    "z": 16645.04
+  },
+  "B9865F8D4C359F7954A1479A41B85F29": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -732235.3,
+    "y": -397016.0,
+    "z": 10389.32
+  },
+  "B9D5287F4EB4D102F70C8A8F7ED5AE1F": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -504318.03,
+    "y": -386258.53,
+    "z": 2103.63
+  },
+  "BC8CB736410260408DE3EEB54A2ED6AE": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -423930.53,
+    "y": -179446.84,
+    "z": 15645.76
+  },
+  "BE2A9EF447BEA0FEE4085882EEDB36E4": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -765417.1,
+    "y": -265338.94,
+    "z": 7678.93
+  },
+  "BF87201741F408D5E731ABA4B0DFE261": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -456915.75,
+    "y": 344294.28,
+    "z": 13508.04
+  },
+  "C4B6594040942874DF910887668A7B74": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -684950.5,
+    "y": -201967.44,
+    "z": 8799.33
+  },
+  "C788607A430E327750A39AACFD453A7A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 33091.82,
+    "y": 21047.77,
+    "z": 11105.75
+  },
+  "CB35FF7943A158175C5B9D84EC0FB10C": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -71417.58,
+    "y": 267745.0,
+    "z": 13993.01
+  },
+  "CCC8C2754AE8FC4373113A9036CE8281": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -194633.66,
+    "y": -15881.57,
+    "z": 9581.63
+  },
+  "CCDCF8174EDDD40C863C9E8BE95F7E9E": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 91844.34,
+    "y": 52939.81,
+    "z": 17514.29
+  },
+  "D158F43B466421BD29CB4B91734C07C4": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -109917.29,
+    "y": 181024.81,
+    "z": 3801.91
+  },
+  "D40B827B46CFF53D20513883EFC3D175": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 149273.55,
+    "y": 101179.49,
+    "z": 43234.09
+  },
+  "D5E3FFE24579FE8A6BA230BEBC416494": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -68429.5,
+    "y": 161682.06,
+    "z": 11149.06
+  },
+  "DDE83D4E495E8278DCF881B3FE7F6525": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -275867.22,
+    "y": 122134.79,
+    "z": 3823.52
+  },
+  "E46EAD494100AA0916CEB29075C64E57": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -251985.17,
+    "y": 58771.5,
+    "z": 3890.09
+  },
+  "E62596C1449142AD1F59F0836B1BAA0C": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -166259.5,
+    "y": 145947.77,
+    "z": 3277.16
+  },
+  "ECD38C3A473F7B64BAA32DA741200B2F": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": 141228.94,
+    "y": 402829.66,
+    "z": -1753.15
+  },
+  "EE3165AB4B4F89F263C65793F67ABC69": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -806838.94,
+    "y": 7978.89,
+    "z": 42162.55
+  },
+  "EE862EFB489D23D59FD8848CEB6EEF5C": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -810892.7,
+    "y": -441755.2,
+    "z": 5901.6
+  },
+  "EFDBBA1C4D1A36C70828C197E2FBED09": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -509002.28,
+    "y": -292992.62,
+    "z": 1913.37
+  },
+  "F33C73DA4E79DFEBACC722A31C734069": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -436815.84,
+    "y": -17738.29,
+    "z": -2079.33
+  },
+  "F3925FF94518D3C2197C8BB03BEF75EB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -330105.16,
+    "y": 81369.68,
+    "z": -2020.02
+  },
+  "F4ABC6AC467C595AC0F1259E11F24D1A": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -641151.94,
+    "y": -264290.78,
+    "z": 10875.59
+  },
+  "F6CA395D44390FCA1AEAEC82446472CC": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -889655.8,
+    "y": -399246.88,
+    "z": 10715.36
+  },
+  "F9A43AE24B811E2436FF0F94622702FB": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -158482.34,
+    "y": 42980.21,
+    "z": -2054.43
+  },
+  "FB22DE6E44C4F83E1FD0B48631536D30": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -275247.03,
+    "y": 180285.75,
+    "z": 1317.04
+  },
+  "FDA9D7CE4774FE86877E7D9B87544A81": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -277579.1,
+    "y": -12837.38,
+    "z": -247.58
+  },
+  "FE3CBE6743714E658AD0548B78FA7E78": {
+    "class": "BP_LevelObject_ItemPickupTower_C",
+    "x": -392808.66,
+    "y": 235754.34,
+    "z": -2071.72
+  }
+}

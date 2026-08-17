@@ -22,7 +22,10 @@ export const MAP_LAYER_ARTIFACTS = [
 	// manifest at init). Still served, but no layer binds to it until artifacts
 	// load lazily.
 	'chests',
-	'camps'
+	'camps',
+	'ancient_ruins',
+	'kinship_peach',
+	'skill_fruits'
 ] as const;
 export type MapLayerArtifact = (typeof MAP_LAYER_ARTIFACTS)[number];
 
@@ -104,6 +107,13 @@ export const MAP_LAYERS = [
 	},
 	{ id: 'tower_boss', group: 'locations', artifact: 'towers', subset: all, defaultVisible: false },
 	{ id: 'dungeons', group: 'locations', artifact: 'dungeons', subset: all, defaultVisible: true },
+	{
+		id: 'ancient_ruins',
+		group: 'locations',
+		artifact: 'ancient_ruins',
+		subset: all,
+		defaultVisible: false
+	},
 	{ id: 'relics', group: 'collectibles', artifact: 'relics', subset: all, defaultVisible: true },
 	{
 		id: 'eggs',
@@ -116,6 +126,20 @@ export const MAP_LAYERS = [
 		minZoom: 4
 	},
 	{ id: 'journals', group: 'collectibles', artifact: 'notes', subset: all, defaultVisible: false },
+	{
+		id: 'skill_fruits',
+		group: 'collectibles',
+		artifact: 'skill_fruits',
+		subset: all,
+		defaultVisible: false
+	},
+	{
+		id: 'kinship_peach',
+		group: 'collectibles',
+		artifact: 'kinship_peach',
+		subset: all,
+		defaultVisible: false
+	},
 	{
 		id: 'alpha_pals',
 		group: 'poi',
@@ -166,6 +190,32 @@ export function getMapLayer(id: MapLayerId): MapLayerDefinition {
 
 export function mapLayersInGroup(group: MapLayerGroup): MapLayerDefinition[] {
 	return MAP_LAYERS.filter((layer) => layer.group === group);
+}
+
+/**
+ * Layers Map.svelte draws through a builder of their own, because one sprite for
+ * the whole layer will not do: the spawn layers take a per-pal portrait, relics
+ * one sprite per relic_type, and fast travel and dungeons predate the registry
+ * with their own stores and props.
+ *
+ * Everything else draws through buildMapLayerFC. The split lived as a literal
+ * inside Map.svelte, where a layer missing from it silently never drew; keeping
+ * it beside the table means a new row is generically drawn unless it opts out.
+ */
+export const BESPOKE_RENDER_LAYERS = [
+	'fast_travel',
+	'watchtower',
+	'dungeons',
+	'relics',
+	'alpha_pals',
+	'boss_pals',
+	'predator_pals',
+	'bounty'
+] as const satisfies readonly MapLayerId[];
+
+export function genericRenderLayers(): MapLayerId[] {
+	const bespoke = new Set<string>(BESPOKE_RENDER_LAYERS);
+	return MAP_LAYERS.map((layer) => layer.id).filter((id) => !bespoke.has(id));
 }
 
 /** The distinct artifacts backing `ids`, in first-seen order — the batch to ask

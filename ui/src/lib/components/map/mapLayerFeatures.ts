@@ -1,9 +1,12 @@
 import {
+	ICON_ANCIENT_RUIN,
 	ICON_CAMP,
 	ICON_DUNGEON,
 	ICON_EGG,
 	ICON_FAST_TRAVEL,
 	ICON_JOURNAL,
+	ICON_KINSHIP_PEACH,
+	ICON_SKILL_FRUIT,
 	ICON_TOWER_BOSS,
 	ICON_WATCHTOWER
 } from './iconIds';
@@ -36,7 +39,10 @@ const ICONS: Partial<Record<MapLayerId, string>> = {
 	dungeons: ICON_DUNGEON,
 	eggs: ICON_EGG,
 	journals: ICON_JOURNAL,
-	camps: ICON_CAMP
+	camps: ICON_CAMP,
+	skill_fruits: ICON_SKILL_FRUIT,
+	kinship_peach: ICON_KINSHIP_PEACH,
+	ancient_ruins: ICON_ANCIENT_RUIN
 };
 
 export function mapLayerIcon(id: MapLayerId): string {

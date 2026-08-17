@@ -1,0 +1,178 @@
+[
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF1955E102_1412902297",
+    "x": -835872.94,
+    "y": -9306.43,
+    "z": 65837.36,
+    "instance_id": "D47EFD2D40C3D8A3AF5555AFC057B034"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF1955E102_1610520298",
+    "x": 92287.05,
+    "y": 528351.94,
+    "z": 3778.6,
+    "instance_id": "455CF48A423C959F03AAD587C871F488"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF1956E102_1514207088",
+    "x": -167975.3,
+    "y": 573278.06,
+    "z": -1814.14,
+    "instance_id": "F6EA1DA34ACA45B46FCE63A426936AE5"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF1958E102_1108271859",
+    "x": -448559.03,
+    "y": 337255.47,
+    "z": 63.57,
+    "instance_id": "BEDD54CF47BB894E2E006490CD265E4A"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF1994E102_1899001786",
+    "x": -61457.48,
+    "y": -259507.14,
+    "z": 1057.79,
+    "instance_id": "10D7C9B84578380DB409AD8FCB7E5E7C"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF19ECE102_1696436759",
+    "x": -1049975.2,
+    "y": -346917.03,
+    "z": 9034.72,
+    "instance_id": "F208262047A49991E6DBA09136574B4D"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_5811222ECF19ECE102_1754744760",
+    "x": -404781.7,
+    "y": -444932.88,
+    "z": -697.32,
+    "instance_id": "418EA8D74F2EB2B15B550B8B40F0B304"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FD6802_2111955666",
+    "x": -342041.8,
+    "y": 346794.16,
+    "z": -712.3,
+    "instance_id": "DF0A9C624C843276753BDB948F8CF4AC"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1090568843",
+    "x": -192220.0,
+    "y": 444960.0,
+    "z": -2108.2,
+    "instance_id": "941868FF41865B6342AC90AD52C1F28C"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1115097844",
+    "x": -205300.0,
+    "y": 453400.0,
+    "z": -2109.36,
+    "instance_id": "5F739767480186FBC0CAA392DF38DC51"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1178900845",
+    "x": -33390.0,
+    "y": 576770.0,
+    "z": -763.74,
+    "instance_id": "D3F972464ABBF3F6718C45B5A0E52557"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1210129846",
+    "x": -37010.0,
+    "y": 555630.0,
+    "z": -2129.68,
+    "instance_id": "336D805D42F139752DD402805B230423"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1293442847",
+    "x": 195700.0,
+    "y": 231510.0,
+    "z": 3256.54,
+    "instance_id": "B08414264ED974412C73FDBCA8432EA2"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1326845848",
+    "x": 174730.0,
+    "y": 217780.0,
+    "z": -2021.64,
+    "instance_id": "00AD676246720C38DF7540A80324C355"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1396740849",
+    "x": -225720.0,
+    "y": -253070.0,
+    "z": -2109.18,
+    "instance_id": "316365654DE2E1E3994291BAE1816967"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1423620850",
+    "x": -219520.0,
+    "y": -265430.0,
+    "z": 1950.0,
+    "instance_id": "92BC679E41CDFAE3B86561AE5C1E8564"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1503661851",
+    "x": -508860.0,
+    "y": -41200.0,
+    "z": -2102.11,
+    "instance_id": "442BA5404B3037D3DAD1F493B90912AC"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1570362852",
+    "x": -501920.0,
+    "y": -41700.0,
+    "z": -1996.52,
+    "instance_id": "3F690C804C79F9C19B5905A5CA29CAB7"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1622650853",
+    "x": -570460.0,
+    "y": 123400.0,
+    "z": 11401.38,
+    "instance_id": "B83ABD5A49614BA563A70F9AB23D862B"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FE6802_1658145854",
+    "x": -569540.0,
+    "y": 106460.0,
+    "z": -2049.38,
+    "instance_id": "B07D678849C785E67DAEFD801596B1BF"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A036BC073962FF6802_1153985064",
+    "x": -324220.0,
+    "y": 347320.0,
+    "z": -1490.0,
+    "instance_id": "6FE5520246EF30BF6CF776886DF659A1"
+  },
+  {
+    "class": "BP_PalMapObjectSpawner_AffectionFruit_C",
+    "name": "BP_PalMapObjectSpawner_AffectionFruit_C_UAID_A8A159F81E9D8BE102_1310446222",
+    "x": -558251.4,
+    "y": -616871.2,
+    "z": -1819.68,
+    "instance_id": "32C0399F4184100289826BB717857A3C"
+  }
+]

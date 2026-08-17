@@ -31,7 +31,7 @@ import {
 	showAllLabel,
 	type MapLayerGroupModel
 } from './layerPanelModel';
-import { MAP_LAYERS, MAP_LAYER_GROUPS } from './layerRegistry';
+import { MAP_LAYERS, MAP_LAYER_GROUPS, mapLayersInGroup } from './layerRegistry';
 import MapLayerPanel from './MapLayerPanel.svelte';
 
 const noCounts = () => undefined;
@@ -137,7 +137,8 @@ describe('buildPanelGroups', () => {
 			'fast_travel',
 			'watchtower',
 			'tower_boss',
-			'dungeons'
+			'dungeons',
+			'ancient_ruins'
 		]);
 	});
 
@@ -295,11 +296,12 @@ describe('groupVisibilityPatch', () => {
 	});
 
 	it('sets every id in the group to the requested value', () => {
-		expect(Object.values(groupVisibilityPatch('collectibles', false))).toEqual([
-			false,
-			false,
-			false
-		]);
+		// Asserted as an invariant rather than a literal list: a hardcoded length
+		// here fails on every layer added, which says nothing about the patch.
+		const patch = groupVisibilityPatch('collectibles', false);
+		const ids = mapLayersInGroup('collectibles').map((layer) => layer.id);
+		expect(Object.keys(patch).sort()).toEqual([...ids].sort());
+		expect(Object.values(patch).every((visible) => visible === false)).toBe(true);
 	});
 
 	it('touches no layer outside the group', () => {

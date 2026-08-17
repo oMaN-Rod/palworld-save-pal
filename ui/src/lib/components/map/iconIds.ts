@@ -26,6 +26,9 @@ export const ICON_EGG = 'egg';
 export const ICON_CAMP = 'camp';
 export const ICON_JOURNAL = 'journal';
 export const ICON_BOUNTY = 'bounty';
+export const ICON_SKILL_FRUIT = 'skillFruit';
+export const ICON_KINSHIP_PEACH = 'kinshipPeach';
+export const ICON_ANCIENT_RUIN = 'ancientRuin';
 
 export function relicIconId(relicType: string): string {
 	return `relic:${relicType}`;

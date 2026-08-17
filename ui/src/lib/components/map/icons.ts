@@ -2,14 +2,17 @@ import compass from '$lib/assets/img/compass.webp';
 import {
 	ICON_BASE,
 	ICON_BOSS,
+	ICON_ANCIENT_RUIN,
 	ICON_BOUNTY,
 	ICON_CAMP,
 	ICON_DUNGEON,
 	ICON_EGG,
 	ICON_FAST_TRAVEL,
 	ICON_JOURNAL,
+	ICON_KINSHIP_PEACH,
 	ICON_ORIGIN,
 	ICON_PLAYER,
+	ICON_SKILL_FRUIT,
 	ICON_TOWER_BOSS,
 	ICON_WATCHTOWER,
 	RELIC_TYPES,
@@ -33,7 +36,10 @@ export function staticIconUrls(): Record<string, string> {
 		[ICON_EGG]: mapImg.egg,
 		[ICON_CAMP]: mapImg.camp,
 		[ICON_JOURNAL]: mapImg.journal,
-		[ICON_BOUNTY]: mapImg.human
+		[ICON_BOUNTY]: mapImg.human,
+		[ICON_SKILL_FRUIT]: mapImg.fruit,
+		[ICON_KINSHIP_PEACH]: mapImg.kinshipPeach,
+		[ICON_ANCIENT_RUIN]: mapImg.ancientRuin
 	};
 	for (const type of RELIC_TYPES) {
 		urls[relicIconId(type)] = relicTypeIcon(type);

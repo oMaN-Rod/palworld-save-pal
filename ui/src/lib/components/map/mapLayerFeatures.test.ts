@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import { ICON_DUNGEON } from './iconIds';
 import { mapLayerLabel } from './layerPanelModel';
-import type { MapLayerSelection } from './layerRegistry';
+import { MAP_LAYERS, type MapLayerId, type MapLayerSelection } from './layerRegistry';
 import { buildMapLayerFC, mapLayerIcon } from './mapLayerFeatures';
 
 const keyed = (entries: Record<string, unknown>): MapLayerSelection => ({
@@ -141,9 +142,26 @@ describe('display name', () => {
 });
 
 describe('mapLayerIcon', () => {
-	it('gives every drawable layer a sprite id', () => {
-		for (const id of ['tower_boss', 'camps', 'eggs', 'journals'] as const) {
-			expect(mapLayerIcon(id)).toBeTruthy();
+	// Layers with a bespoke feature builder never reach mapLayerIcon: the spawn
+	// layers take a per-pal sprite and relics one per relic_type.
+	const BESPOKE: MapLayerId[] = ['alpha_pals', 'boss_pals', 'predator_pals', 'bounty', 'relics'];
+	const generic = MAP_LAYERS.map((layer) => layer.id).filter((id) => !BESPOKE.includes(id));
+
+	it('gives every generically drawn layer a sprite id', () => {
+		for (const id of generic) expect(mapLayerIcon(id)).toBeTruthy();
+	});
+
+	it('gives every generically drawn layer an icon of its own', () => {
+		// mapLayerIcon falls back to ICON_DUNGEON, so a layer missing from the
+		// table draws as a dungeon rather than failing - silent and wrong.
+		for (const id of generic) {
+			if (id === 'dungeons') continue;
+			expect([id, mapLayerIcon(id)]).not.toEqual([id, ICON_DUNGEON]);
 		}
+	});
+
+	it('does not give two layers the same sprite', () => {
+		const icons = generic.map((id) => mapLayerIcon(id));
+		expect(new Set(icons).size).toBe(icons.length);
 	});
 });

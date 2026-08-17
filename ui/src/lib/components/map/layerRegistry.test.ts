@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { WATCHTOWER_CLASS } from './fastTravel';
 import {
+	BESPOKE_RENDER_LAYERS,
 	MAP_LAYERS,
 	MAP_LAYER_GROUPS,
 	artifactsForLayers,
+	genericRenderLayers,
 	getMapLayer,
 	mapLayersInGroup,
 	selectLayerEntries
@@ -21,7 +23,10 @@ const WIRE_ARTIFACTS = [
 	'notes',
 	'eggs_spawners',
 	'chests',
-	'camps'
+	'camps',
+	'ancient_ruins',
+	'kinship_peach',
+	'skill_fruits'
 ];
 
 describe('MAP_LAYERS', () => {
@@ -31,9 +36,12 @@ describe('MAP_LAYERS', () => {
 			'watchtower',
 			'tower_boss',
 			'dungeons',
+			'ancient_ruins',
 			'relics',
 			'eggs',
 			'journals',
+			'skill_fruits',
+			'kinship_peach',
 			'alpha_pals',
 			'boss_pals',
 			'predator_pals',
@@ -92,6 +100,27 @@ describe('MAP_LAYERS', () => {
 	});
 });
 
+// Map.svelte draws a layer one of two ways, and the split used to live as a
+// hardcoded list inside that component: a layer added to the registry but not to
+// that list simply never drew, with nothing failing.
+describe('render partition', () => {
+	it('assigns every layer to exactly one render path', () => {
+		const both = BESPOKE_RENDER_LAYERS.filter((id) => genericRenderLayers().includes(id));
+		expect(both).toEqual([]);
+		expect([...BESPOKE_RENDER_LAYERS, ...genericRenderLayers()].sort()).toEqual(
+			MAP_LAYERS.map((layer) => layer.id).sort()
+		);
+	});
+
+	it('routes a newly registered layer to the generic renderer by default', () => {
+		// The safe default: a new layer draws with its own icon rather than not at
+		// all, and opting into a bespoke path is the deliberate act.
+		for (const id of ['skill_fruits', 'kinship_peach', 'ancient_ruins'] as const) {
+			expect(genericRenderLayers()).toContain(id);
+		}
+	});
+});
+
 describe('getMapLayer', () => {
 	it('returns the definition for a known id', () => {
 		expect(getMapLayer('dungeons').artifact).toBe('dungeons');
@@ -108,7 +137,8 @@ describe('mapLayersInGroup', () => {
 			'fast_travel',
 			'watchtower',
 			'tower_boss',
-			'dungeons'
+			'dungeons',
+			'ancient_ruins'
 		]);
 	});
 });

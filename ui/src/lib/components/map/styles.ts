@@ -31,6 +31,11 @@ export const mapImg = {
 	// The game's generic human silhouette. The 33 bounty targets each have their
 	// own t_boss_npc_* portrait, but no one of them stands for the category.
 	human: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/human.webp`),
+	kinshipPeach: assetLoader.loadImage(
+		`${ASSET_DATA_PATH}/img/t_itemicon_consume_affectionfruit_01.webp`
+	),
+	// What a shrine awards, which is how the game itself signposts them.
+	ancientRuin: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_ancient_tech_point.webp`),
 	journal: assetLoader.loadImage(
 		`${ASSET_DATA_PATH}/img/t_itemicon_consume_technologybook_g1.webp`
 	),

@@ -65,7 +65,7 @@
 	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
 	import { ICON_BOUNTY, palIconId } from './iconIds';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
-	import { getMapLayer, type MapLayerId } from './layerRegistry';
+	import { genericRenderLayers, getMapLayer, type MapLayerId } from './layerRegistry';
 	import type { MapLayerVisibility } from './layerPanelModel';
 	import { buildMapLayerFC } from './mapLayerFeatures';
 	import { relicsByType } from './relics';
@@ -498,10 +498,9 @@
 
 	const staticIcons = staticIconUrls();
 
-	// Only the layers with no legacy rendering path. fast_travel, watchtower,
-	// relics, dungeons and the three spawn layers keep their own props, stores and
-	// sources above.
-	const REGISTRY_LAYERS: MapLayerId[] = ['tower_boss', 'camps', 'eggs', 'journals'];
+	// Derived from the registry rather than listed here: a layer added to the
+	// table but missing from a literal in this file silently never drew.
+	const REGISTRY_LAYERS: MapLayerId[] = genericRenderLayers();
 
 	const mapLayerRenders = $derived(
 		REGISTRY_LAYERS.map((id) => ({
