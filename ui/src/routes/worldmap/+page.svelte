@@ -60,7 +60,8 @@
 		type MapLayerVisibility,
 		type PanelOptionId
 	} from '$components/map/layerPanelModel';
-	import { isMapLayerId, type MapLayerId } from '$components/map/layerRegistry';
+	import { MAP_LAYERS, isMapLayerId, type MapLayerId } from '$components/map/layerRegistry';
+	import { mapLayerMarkerCount } from '$components/map/mapLayerFeatures';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import MapHints from '$components/map/MapHints.svelte';
 
@@ -231,7 +232,13 @@
 				return undefined;
 			default:
 				// Registry-backed layers report whatever the store has cached.
-				return isMapLayerId(id) ? mapLayers.peek(id)?.points.length?.toString() : undefined;
+				// The drawable count, not the artifact's row count: a layer whose rows
+				// are positionless or belong to the other map would overstate itself.
+				// Undefined while unloaded - a "0" there reads as "no markers here"
+				// rather than "not fetched yet".
+				if (!isMapLayerId(id)) return undefined;
+				const selection = mapLayers.peek(id);
+				return selection ? mapLayerMarkerCount(id, selection, activeArea).toString() : undefined;
 		}
 	}
 
@@ -249,14 +256,24 @@
 			if (visible && isMapLayerId(id)) enabled.push(id);
 		}
 		mapOptions.mapLayerVisibility = registry;
-		// Fetched on first enable, never on page load: every registry-only layer
-		// defaults to hidden, and the store caches and coalesces from here.
+		// The store caches and coalesces, so re-enabling a loaded layer is free.
 		if (enabled.length > 0) void mapLayers.getLayers(enabled);
 	}
 
 	function handleShowAll(visible: boolean) {
 		handleLayerVisibility(allVisibilityPatch(visible));
 	}
+
+	// Layer visibility is persisted, so a layer switched on in an earlier session
+	// comes back enabled with its artifact never requested: it sat ticked in the
+	// panel drawing nothing and showing no count. Settles after one round, because
+	// a fetched artifact makes peek() truthy and drops the layer out of `wanted`.
+	$effect(() => {
+		const wanted = MAP_LAYERS.map((layer) => layer.id).filter(
+			(id) => layerVisibility[id] && !mapLayers.peek(id) && !mapLayers.isLoading(id)
+		);
+		if (wanted.length > 0) void mapLayers.getLayers(wanted);
+	});
 	const PANEL_W = 420;
 	const toast = getToastState();
 	let section = $state(['players']);

@@ -2,7 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { ICON_DUNGEON } from './iconIds';
 import { mapLayerLabel } from './layerPanelModel';
 import { MAP_LAYERS, type MapLayerId, type MapLayerSelection } from './layerRegistry';
-import { buildMapLayerFC, mapLayerIcon } from './mapLayerFeatures';
+import {
+	buildMapLayerFC,
+	mapLayerIcon,
+	mapLayerIconScale,
+	mapLayerMarkerCount
+} from './mapLayerFeatures';
 
 const keyed = (entries: Record<string, unknown>): MapLayerSelection => ({
 	shape: 'keyed',
@@ -138,6 +143,61 @@ describe('display name', () => {
 			'MainMap'
 		);
 		expect(fc.features[0].properties.name).toBe('IceBoss');
+	});
+});
+
+// The panel count has to agree with what the map draws. The legacy layers all
+// report their area-filtered total (relics 360 of 407), and a registry layer
+// reporting its raw entry count instead read as 188 skill fruits beside 35
+// markers.
+describe('mapLayerMarkerCount', () => {
+	const AT = { x: -343155, y: 244585, z: 0 };
+	const TREE = { x: 512112, y: -510663, z: 0 };
+
+	it('counts only what buildMapLayerFC would draw', () => {
+		const selection = list([AT, TREE, { x: null, y: null, z: 0 }, AT]);
+		expect(mapLayerMarkerCount('camps', selection, 'MainMap')).toBe(
+			buildMapLayerFC('camps', selection, 'MainMap').features.length
+		);
+	});
+
+	it('drops entries with no coordinate', () => {
+		// 141 of skill_fruits' 188 rows are positionless location components.
+		expect(mapLayerMarkerCount('camps', list([AT, { x: null, y: null, z: 0 }]), 'MainMap')).toBe(1);
+	});
+
+	it('drops entries belonging to another area', () => {
+		expect(mapLayerMarkerCount('camps', list([AT, TREE]), 'MainMap')).toBe(1);
+		expect(mapLayerMarkerCount('camps', list([AT, TREE]), 'Tree')).toBe(1);
+	});
+
+	it('is zero for a layer with nothing loaded yet', () => {
+		// Distinct from "loaded and empty" only to the caller; both draw nothing.
+		expect(mapLayerMarkerCount('camps', undefined, 'MainMap')).toBe(0);
+	});
+});
+
+// icon-size multiplies the sprite's natural size, and the artwork is not one
+// size: the game's compass markers are 64px while its item icons are 256px, so
+// an item-icon layer drew four times the size of every other marker.
+describe('mapLayerIconScale', () => {
+	it('leaves a 64px compass-marker layer unscaled', () => {
+		expect(mapLayerIconScale('camps')).toBe(1);
+		expect(mapLayerIconScale('tower_boss')).toBe(1);
+	});
+
+	it('scales the 256px item-icon layers back to the common size', () => {
+		expect(mapLayerIconScale('journals')).toBe(0.25);
+		expect(mapLayerIconScale('kinship_peach')).toBe(0.25);
+	});
+
+	it('gives every layer a positive scale, defaulting to 1', () => {
+		// A layer missing from the table must fall back to 1 rather than
+		// undefined: undefined reaches the stops as NaN and the marker vanishes.
+		for (const layer of MAP_LAYERS) {
+			expect([layer.id, mapLayerIconScale(layer.id) > 0]).toEqual([layer.id, true]);
+			expect(Number.isFinite(mapLayerIconScale(layer.id))).toBe(true);
+		}
 	});
 });
 

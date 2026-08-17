@@ -49,12 +49,58 @@ export function mapLayerIcon(id: MapLayerId): string {
 	return ICONS[id] ?? ICON_DUNGEON;
 }
 
+/**
+ * icon-size multiplies the sprite's own pixel size, and the artwork is not one
+ * size: the game's compass markers are 64px but its item icons are 256px, so a
+ * layer drawn with an item icon came out four times the size of everything else.
+ * Correcting here rather than resizing the files keeps the same asset usable at
+ * full resolution in the panel, which renders it through CSS.
+ */
+const COMMON_ICON_PX = 64;
+const ITEM_ICON_PX = 256;
+
+const ICON_SCALES: Partial<Record<MapLayerId, number>> = {
+	journals: COMMON_ICON_PX / ITEM_ICON_PX,
+	kinship_peach: COMMON_ICON_PX / ITEM_ICON_PX
+};
+
+export function mapLayerIconScale(id: MapLayerId): number {
+	return ICON_SCALES[id] ?? 1;
+}
+
 export function emptyMapLayerFC(): MapLayerFC {
 	return { type: 'FeatureCollection', features: [] };
 }
 
 function coordinate(value: unknown): number | null {
 	return typeof value === 'number' && Number.isFinite(value) ? value : null;
+}
+
+/** Where a point draws on `area`, or null if it draws nowhere. The single test
+ *  for "does this entry become a marker", so the panel count and the map cannot
+ *  disagree about it. */
+function placement(point: MapLayerPoint, area: MapArea): { x: number; y: number } | null {
+	const x = coordinate(point.entry?.x);
+	const y = coordinate(point.entry?.y);
+	if (x === null || y === null) return null;
+	return mapOf(x, y) === area ? { x, y } : null;
+}
+
+/**
+ * Markers this layer contributes to `area`. The panel shows this beside the
+ * layer name, so it has to be what the map draws rather than the artifact's row
+ * count: skill_fruits carries 188 rows of which 141 are positionless location
+ * components, and the rest split across two maps.
+ */
+export function mapLayerMarkerCount(
+	_id: MapLayerId,
+	selection: MapLayerSelection | undefined,
+	area: MapArea
+): number {
+	if (!selection) return 0;
+	let count = 0;
+	for (const point of selection.points) if (placement(point, area)) count += 1;
+	return count;
 }
 
 /**
@@ -89,10 +135,9 @@ export function buildMapLayerFC(
 	const icon = mapLayerIcon(id);
 	const features: MapLayerFeature[] = [];
 	for (const point of selection.points) {
-		const x = coordinate(point.entry?.x);
-		const y = coordinate(point.entry?.y);
-		if (x === null || y === null) continue;
-		if (mapOf(x, y) !== area) continue;
+		const placed = placement(point, area);
+		if (!placed) continue;
+		const { x, y } = placed;
 		const [px, py] = worldToPixel(x, y, area);
 		features.push({
 			type: 'Feature',

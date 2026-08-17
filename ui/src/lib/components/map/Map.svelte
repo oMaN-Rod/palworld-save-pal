@@ -67,7 +67,7 @@
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import { genericRenderLayers, getMapLayer, type MapLayerId } from './layerRegistry';
 	import type { MapLayerVisibility } from './layerPanelModel';
-	import { buildMapLayerFC } from './mapLayerFeatures';
+	import { buildMapLayerFC, mapLayerIconScale } from './mapLayerFeatures';
 	import { relicsByType } from './relics';
 	import { isWatchtower } from './fastTravel';
 	import { portalRingColorExpression, PORTAL_HEX } from './mapObjectPortal';
@@ -496,6 +496,10 @@
 		return byKey.get(`${type}:${key}`);
 	}
 
+	// human.webp is a 256px portrait where the compass markers are 64px, so the
+	// silhouette drew four times the size of every other spawn marker.
+	const BOUNTY_ICON_SCALE = 0.25;
+
 	const staticIcons = staticIconUrls();
 
 	// Derived from the registry rather than listed here: a layer added to the
@@ -507,6 +511,10 @@
 			id,
 			minZoom: getMapLayer(id).minZoom,
 			visible: mapLayerVisibility[id] ?? getMapLayer(id).defaultVisible,
+			// Folded into the zoom stops rather than multiplied around them:
+			// MapLibre only accepts `zoom` as the input to a top-level interpolate,
+			// so wrapping the expression in `*` fails validation and drops the layer.
+			iconSize: zoomScaledIconSize(0.6 * mapLayerIconScale(id), mapLayerIconScale(id)),
 			fc: buildMapLayerFC(id, mapLayers.peek(id), area)
 		}))
 	);
@@ -1870,7 +1878,7 @@
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'defeated'], 2, 1],
-						'icon-size': zoomScaledIconSize(0.6, 1.0),
+						'icon-size': zoomScaledIconSize(0.6 * BOUNTY_ICON_SCALE, 1.0 * BOUNTY_ICON_SCALE),
 						'text-field': showLabels ? ['step', ['zoom'], '', 5, ['get', 'name']] : '',
 						'text-size': 11,
 						'text-optional': true,
@@ -1927,7 +1935,7 @@
 						layout={{
 							'icon-image': ['get', 'icon'],
 							'icon-allow-overlap': true,
-							'icon-size': zoomScaledIconSize(0.6, 1.0)
+							'icon-size': render.iconSize
 						}}
 					/>
 				</Source.GeoJSON>
