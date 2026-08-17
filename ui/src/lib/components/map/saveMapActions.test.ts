@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	updateRelicCount,
-	toggleRelicPoint,
-	toggleFastTravelPoint,
-	unlockFastTravelGuids,
 	collectAllRelics,
+	toggleFastTravelPoint,
+	toggleRelicPoint,
+	unlockFastTravelGuids,
+	updateRelicCount,
 	type ItemSlot,
 	type SaveActionPlayer
 } from './saveMapActions';

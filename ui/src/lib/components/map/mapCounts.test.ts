@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { WATCHTOWER_CLASS } from './fastTravel';
 import {
 	areaFastTravelGuids,
-	unlockedInArea,
-	relicTypeStats,
 	orderedRelicTypes,
-	pointsInArea
+	pointsInArea,
+	relicTypeStats,
+	unlockedInArea
 } from './mapCounts';
 
 // Chosen from the DT_WorldMapUIData bounds in utils.ts: the origin sits inside

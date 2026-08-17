@@ -189,7 +189,7 @@
 			case 'labels':
 			case 'origin':
 				return undefined;
-			default:
+			default: {
 				// Registry-backed layers report whatever the store has cached.
 				// The drawable count, not the artifact's row count: a layer whose rows
 				// are positionless or belong to the other map would overstate itself.
@@ -198,6 +198,7 @@
 				if (!isMapLayerId(id)) return undefined;
 				const selection = mapLayers.peek(id);
 				return selection ? mapLayerMarkerCount(id, selection, activeArea).toString() : undefined;
+			}
 		}
 	}
 
@@ -275,7 +276,9 @@
 	const relicTypeStats = $derived(
 		computeRelicTypeStats(relics.points, activeArea, appState.selectedPlayer ?? undefined)
 	);
-	const relicTypeList = $derived(orderedRelicTypes(relicTypeStats, Object.keys(relicData.relicData)));
+	const relicTypeList = $derived(
+		orderedRelicTypes(relicTypeStats, Object.keys(relicData.relicData))
+	);
 	const relicCount = $derived(
 		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)
 	);
@@ -341,7 +344,7 @@
 		const { default: EditBaseModal } = await import(
 			'$components/modals/edit-base/EditBaseModal.svelte'
 		);
-		// @ts-ignore
+		// @ts-expect-error Component typing
 		const result = await modal.showModal<{ name: string; area_range: number }>(EditBaseModal, {
 			title: m.edit_entity({ entity: m.base({ count: 1 }) }),
 			name: base.name || '',
@@ -368,7 +371,7 @@
 		const { default: ExportBlueprintModal } = await import(
 			'$components/modals/export-blueprint/ExportBlueprintModal.svelte'
 		);
-		// @ts-ignore  Component typing
+		// @ts-expect-error Component typing
 		await modal.showModal<boolean>(ExportBlueprintModal, {
 			baseId: base.id,
 			baseName: base.name || ''
@@ -720,7 +723,12 @@
 		{/if}
 
 		{#if saveLoaded && placementState.active}
-			<PlacementPanel {guildOptions} {playerOptions} onPlace={handlePlace} onCancel={handleCancel} />
+			<PlacementPanel
+				{guildOptions}
+				{playerOptions}
+				onPlace={handlePlace}
+				onCancel={handleCancel}
+			/>
 		{/if}
 	</div>
 </div>
