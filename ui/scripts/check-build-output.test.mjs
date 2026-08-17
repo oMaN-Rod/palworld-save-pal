@@ -1,5 +1,8 @@
+import { readFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { checkFileBudget, checkPageMarkup } from './check-build-output.mjs';
+import { checkFileBudget, checkPageMarkup, checkRedirects } from './check-build-output.mjs';
 
 const LIMITS = { maxFiles: 18000, maxBytes: 25 * 1024 * 1024 };
 
@@ -48,5 +51,45 @@ describe('checkPageMarkup', () => {
 		expect(checkPageMarkup(good.replace(/<link rel="canonical"[^>]*>/, ''))).toContain(
 			'missing canonical link'
 		);
+	});
+});
+
+describe('checkRedirects', () => {
+	it('accepts relative sources, comments and blank lines', () => {
+		const text = '# canonical locale aliases\n/zh-hans /zh 301\n\n/zh-hans/* /zh/:splat 301\n';
+		expect(checkRedirects(text)).toEqual([]);
+	});
+
+	it('accepts an external destination', () => {
+		expect(checkRedirects('/discord https://discord.gg/example 302\n')).toEqual([]);
+	});
+
+	it('rejects a domain-level source, which Workers assets refuse', () => {
+		const text = 'https://www.palworldsavepal.app/* https://palworldsavepal.app/:splat 301\n';
+		expect(checkRedirects(text)[0]).toContain('line 1');
+		expect(checkRedirects(text)[0]).toContain('relative');
+	});
+
+	it('rejects a source that is not a path', () => {
+		expect(checkRedirects('zh-hans /zh 301\n')[0]).toContain('line 1');
+	});
+
+	it('rejects an unsupported status code', () => {
+		expect(checkRedirects('/old /new 418\n')[0]).toContain('418');
+	});
+
+	it('rejects a rule missing a destination', () => {
+		expect(checkRedirects('/old\n')[0]).toContain('line 1');
+	});
+
+	it('rejects carriage returns, which end up inside the status token', () => {
+		expect(checkRedirects('/zh-hans /zh 301\r\n')[0]).toContain('carriage return');
+	});
+});
+
+describe('the shipped _redirects file', () => {
+	it('is valid for Cloudflare Workers static assets', async () => {
+		const path = join(dirname(fileURLToPath(import.meta.url)), '../static/_redirects');
+		expect(checkRedirects(await readFile(path, 'utf8'))).toEqual([]);
 	});
 });

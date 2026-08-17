@@ -40,6 +40,45 @@ export function checkFileBudget(files, limits = LIMITS) {
 	return { errors, fileCount: files.length };
 }
 
+const REDIRECT_STATUSES = new Set([200, 301, 302, 303, 307, 308]);
+
+/**
+ * Workers static assets reject the whole `_redirects` config -- after the asset
+ * upload, when the Worker version is created -- if any rule is malformed. The
+ * source must be a path: unlike Pages, Workers has no domain-level redirects,
+ * so `https://www.example.com/* ...` fails with "Only relative URLs are
+ * allowed". Redirects across hostnames belong in a zone Redirect Rule.
+ */
+export function checkRedirects(text) {
+	const errors = [];
+	text.split('\n').forEach((rawLine, index) => {
+		const lineNumber = index + 1;
+		if (rawLine.includes('\r')) {
+			errors.push(`_redirects line ${lineNumber}: carriage return; the file must use LF endings`);
+		}
+		const line = rawLine.replace('\r', '').trim();
+		if (line === '' || line.startsWith('#')) return;
+
+		const [source, destination, status, ...extra] = line.split(/\s+/);
+		if (!destination) {
+			errors.push(`_redirects line ${lineNumber}: rule needs a source and a destination`);
+			return;
+		}
+		if (extra.length > 0) {
+			errors.push(`_redirects line ${lineNumber}: unexpected trailing token "${extra[0]}"`);
+		}
+		if (!source.startsWith('/')) {
+			errors.push(
+				`_redirects line ${lineNumber}: source "${source}" must be a relative path starting with "/"`
+			);
+		}
+		if (status !== undefined && !REDIRECT_STATUSES.has(Number(status))) {
+			errors.push(`_redirects line ${lineNumber}: unsupported status "${status}"`);
+		}
+	});
+	return errors;
+}
+
 export function checkPageMarkup(html) {
 	const errors = [];
 	if (html.includes('%lang%')) errors.push('unsubstituted %lang% placeholder');
@@ -85,6 +124,12 @@ async function main() {
 		for (const problem of checkPageMarkup(html)) {
 			errors.push(`${page}: ${problem}`);
 		}
+	}
+
+	try {
+		errors.push(...checkRedirects(await readFile(join(buildDir, '_redirects'), 'utf8')));
+	} catch {
+		errors.push('Expected _redirects missing from build');
 	}
 
 	const totalMb = (files.reduce((sum, file) => sum + file.size, 0) / 1024 / 1024).toFixed(0);

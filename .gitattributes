@@ -19,3 +19,7 @@
 # CRLF, so a local `wrangler deploy` would ship `Cache-Control: ...\r` with the
 # carriage return inside the header value.
 _headers text eol=lf
+
+# Same for `_redirects`: the status code is the last token on the line, so a
+# CRLF checkout would ship `301\r` and Cloudflare would reject the config.
+_redirects text eol=lf
