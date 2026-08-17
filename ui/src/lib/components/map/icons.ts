@@ -36,7 +36,7 @@ export function staticIconUrls(): Record<string, string> {
 		[ICON_EGG]: mapImg.egg,
 		[ICON_CAMP]: mapImg.camp,
 		[ICON_JOURNAL]: mapImg.journal,
-		[ICON_BOUNTY]: mapImg.human,
+		[ICON_BOUNTY]: mapImg.bounty,
 		[ICON_SKILL_FRUIT]: mapImg.fruit,
 		[ICON_KINSHIP_PEACH]: mapImg.kinshipPeach,
 		[ICON_ANCIENT_RUIN]: mapImg.ancientRuin

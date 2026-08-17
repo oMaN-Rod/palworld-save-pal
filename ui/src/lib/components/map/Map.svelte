@@ -496,10 +496,6 @@
 		return byKey.get(`${type}:${key}`);
 	}
 
-	// human.webp is a 256px portrait where the compass markers are 64px, so the
-	// silhouette drew four times the size of every other spawn marker.
-	const BOUNTY_ICON_SCALE = 0.25;
-
 	const staticIcons = staticIconUrls();
 
 	// Derived from the registry rather than listed here: a layer added to the
@@ -1878,7 +1874,7 @@
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
 						'symbol-sort-key': ['case', ['get', 'defeated'], 2, 1],
-						'icon-size': zoomScaledIconSize(0.6 * BOUNTY_ICON_SCALE, 1.0 * BOUNTY_ICON_SCALE),
+						'icon-size': zoomScaledIconSize(0.5, 0.7),
 						'text-field': showLabels ? ['step', ['zoom'], '', 5, ['get', 'name']] : '',
 						'text-size': 11,
 						'text-optional': true,

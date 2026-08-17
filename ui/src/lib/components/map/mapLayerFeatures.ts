@@ -49,19 +49,10 @@ export function mapLayerIcon(id: MapLayerId): string {
 	return ICONS[id] ?? ICON_DUNGEON;
 }
 
-/**
- * icon-size multiplies the sprite's own pixel size, and the artwork is not one
- * size: the game's compass markers are 64px but its item icons are 256px, so a
- * layer drawn with an item icon came out four times the size of everything else.
- * Correcting here rather than resizing the files keeps the same asset usable at
- * full resolution in the panel, which renders it through CSS.
- */
-const COMMON_ICON_PX = 64;
-const ITEM_ICON_PX = 256;
-
 const ICON_SCALES: Partial<Record<MapLayerId, number>> = {
-	journals: COMMON_ICON_PX / ITEM_ICON_PX,
-	kinship_peach: COMMON_ICON_PX / ITEM_ICON_PX
+	journals: 0.25,
+	kinship_peach: 0.15,
+	ancient_ruins: 0.6,
 };
 
 export function mapLayerIconScale(id: MapLayerId): number {

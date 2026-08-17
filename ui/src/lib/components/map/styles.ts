@@ -42,7 +42,8 @@ export const mapImg = {
 	// The wall-mounted board, not the free-standing one: its post eats half the
 	// icon box, leaving the sign itself unreadable at 24px.
 	signboard: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_buildobject_wallsignboard.webp`),
-	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`)
+	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`),
+	bounty: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_bounty.webp`),
 };
 
 /** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
