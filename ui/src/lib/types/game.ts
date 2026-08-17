@@ -543,6 +543,48 @@ export const defaultPresetConfig: PalPresetConfig = {
 	friendship_point: true
 };
 
+export type MaxOutConfig = Partial<PalPresetConfig>;
+
+export const defaultMaxOutConfig: MaxOutConfig = {
+	level: false,
+	exp: false,
+	rank: false,
+	friendship_point: false,
+	hp: false,
+	stomach: false,
+	is_boss: false,
+	is_lucky: false,
+	is_awakened: false,
+	talent_hp: false,
+	talent_shot: false,
+	talent_defense: false,
+	rank_hp: false,
+	rank_attack: false,
+	rank_defense: false,
+	rank_craftspeed: false,
+	work_suitability: false,
+};
+
+export const maxOutNameDescriptionMap: Record<string, PalPresetNameDescriptionText> = {
+	level: { label: 'Level', description: 'Max out Level' },
+	exp: { label: 'EXP', description: 'Max out EXP' },
+	rank: { label: 'Rank', description: 'Max out Rank' },
+	friendship_point: { label: 'Trust', description: 'Max out Trust' },
+	hp: { label: 'HP', description: 'Max out HP' },
+	stomach: { label: 'Stomach', description: 'Max out Stomach' },
+	is_boss: { label: 'Alpha', description: 'Set as Alpha (Boss)' },
+	is_lucky: { label: 'Lucky', description: 'Set as Lucky' },
+	is_awakened: { label: 'Awakened', description: 'Set as Awakened' },
+	talent_hp: { label: 'HP IV', description: 'Max out HP IV' },
+	talent_shot: { label: 'Attack IV', description: 'Max out Attack IV' },
+	talent_defense: { label: 'Defense IV', description: 'Max out Defense IV' },
+	rank_hp: { label: 'HP Souls', description: 'Max out HP Souls' },
+	rank_attack: { label: 'Attack Souls', description: 'Max out Attack Souls' },
+	rank_defense: { label: 'Defense Souls', description: 'Max out Defense Souls' },
+	rank_craftspeed: { label: 'Workspeed Souls', description: 'Max out Workspeed Souls' },
+	work_suitability: { label: 'Work Suitability', description: 'Max out Work Suitability' },
+};
+
 export type PalPreset = {
 	lock: boolean;
 	lock_element?: boolean;

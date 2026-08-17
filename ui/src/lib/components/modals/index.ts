@@ -7,6 +7,7 @@ import ExportBlueprintModal from './export-blueprint/ExportBlueprintModal.svelte
 import ExportPalModal from './export-pal/ExportPalModal.svelte';
 import FillPalsModal from './fill-pals/FillPalsModal.svelte';
 import ImportToUpsModal from './import-to-ups/ImportToUpsModal.svelte';
+import MaxOutConfigModal from './max-out-config/MaxOutConfigModal.svelte';
 import ItemSelectModal from './item-select/ItemSelectModal.svelte';
 import LearnedSkillSelectModal from './learned-skill-select/LearnedSkillSelectModal.svelte';
 import MultiSkillSelectModal from './multi-skill-select/MultiSkillSelectModal.svelte';
@@ -37,6 +38,7 @@ export {
 	ImportToUpsModal,
 	ItemSelectModal,
 	LearnedSkillSelectModal,
+	MaxOutConfigModal,
 	MultiSkillSelectModal,
 	NukeUpsConfirmModal,
 	NumberInputModal,
