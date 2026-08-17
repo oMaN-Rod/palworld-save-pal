@@ -31,7 +31,7 @@ export const navigationTour: TourDefinition = {
 			}
 		},
 		{
-			element: 'a[href="/worldmap"]',
+			element: 'a[href="/map"]',
 			popover: {
 				title: 'World Map',
 				description:

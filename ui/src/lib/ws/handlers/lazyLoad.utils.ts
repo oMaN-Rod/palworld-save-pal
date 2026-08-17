@@ -1,4 +1,4 @@
-export type PlayerDetailsOrigin = 'edit' | 'bulk' | 'worldmap' | 'reattach' | 'breeding';
+export type PlayerDetailsOrigin = 'edit' | 'bulk' | 'map' | 'reattach' | 'breeding';
 
 export interface PlayerDetailsRouting {
 	/** Where the loaded player should be stored in app state. */
@@ -17,7 +17,7 @@ export function resolvePlayerDetailsRouting(origin: string | undefined): PlayerD
 	if (origin === 'bulk') {
 		return { target: 'bulkDetail', navigateTo: null };
 	}
-	if (origin === 'worldmap' || origin === 'reattach' || origin === 'breeding') {
+	if (origin === 'map' || origin === 'reattach' || origin === 'breeding') {
 		// Load into state, stay on whatever route reloaded / requested it. The
 		// breeding calculator requests player details to read pals but must not
 		// be navigated away to the editor.

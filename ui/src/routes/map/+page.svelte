@@ -1,150 +1,288 @@
 <script lang="ts">
 	import { Seo } from '$lib/components/seo';
-	import { getAppState } from '$states';
-	import { goto } from '$app/navigation';
+	import { Button, Loading, SectionHeader } from '$components/ui';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/utils';
 	import { pixelToLngLat } from '$components/map/mercator';
 	import { isWatchtower } from '$components/map/fastTravel';
-	import { mapImg } from '$components/map/styles';
 	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
-	import {
-		MAP_OBJECT_SCALE_DEFAULT,
-		MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT
-	} from '$components/map/mapObjectSize';
+	import { MAP_OBJECT_SCALE_DEFAULT } from '$components/map/mapObjectSize';
 	import { clampMapOpacity } from '$components/map/mapOpacity';
 	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
+	import MapLayerPanel from '$components/map/MapLayerPanel.svelte';
 	import MapHints from '$components/map/MapHints.svelte';
-	import { Loading, SectionHeader } from '$components/ui';
+	import PlacementPanel from '$components/map/PlacementPanel.svelte';
+	import { mapOptionsState } from '$components/map/mapOptions.svelte';
+	import {
+		areaFastTravelGuids,
+		unlockedInArea,
+		relicTypeStats as computeRelicTypeStats,
+		orderedRelicTypes,
+		pointsInArea
+	} from '$components/map/mapCounts';
+	import {
+		toggleRelicPoint,
+		toggleFastTravelPoint,
+		unlockFastTravelGuids,
+		collectAllRelics
+	} from '$components/map/saveMapActions';
+	import {
+		allVisibilityPatch,
+		defaultPanelVisibility,
+		type MapLayerVisibility,
+		type PanelOptionId
+	} from '$components/map/layerPanelModel';
+	import { MAP_LAYERS, isMapLayerId, type MapLayerId } from '$components/map/layerRegistry';
+	import { mapLayerMarkerCount } from '$components/map/mapLayerFeatures';
+	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
 	import { partitionSpawns } from '$components/map/spawns';
-	import { assetLoader } from '$utils';
-	import { persistedState } from 'svelte-persisted-state';
+	import { placementState } from '$lib/data/placement.svelte';
+	import { blueprintsData } from '$lib/data/blueprints.svelte';
+	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
+	import { isPublicShell } from '$lib/utils/shellRoutes';
+	import { isWebBuild } from '$lib/utils/platform';
+	import { debounce } from '$utils';
+	import { sendAndWait } from '$utils/websocketUtils';
+	import { EntryState, MessageType } from '$types';
+	import type {
+		Base,
+		FastTravelPoint,
+		GuildSummary,
+		MapUnlockPoint,
+		Player,
+		RelicPoint
+	} from '$types';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import type maplibregl from 'maplibre-gl';
-	import Target from '@lucide/svelte/icons/target';
+	import Unlock from '@lucide/svelte/icons/lock-open';
+	import MapIcon from '@lucide/svelte/icons/map';
 	import PanelLeft from '@lucide/svelte/icons/panel-left';
 	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
-	import Eye from '@lucide/svelte/icons/eye';
-	import EyeOff from '@lucide/svelte/icons/eye-off';
 	import * as m from '$i18n/messages';
-	import { p } from '$lib/utils/commonTranslations';
-
-	type PublicMapOptions = {
-		area: MapArea;
-		showOrigin: boolean;
-		showFastTravel: boolean;
-		showWatchtower: boolean;
-		showRelics: boolean;
-		/** Per-relic-type visibility; a missing key means visible. */
-		relicTypes: Record<string, boolean>;
-		showDungeons: boolean;
-		showBosses: boolean;
-		showAlphaPals: boolean;
-		showPredatorPals: boolean;
-		showLabels: boolean;
-		enable3d: boolean;
-		structureRenderMode: 'detailed' | 'flat';
-		panelOpen: boolean;
-		/** Pal render scale as a multiple of true size. */
-		palSize: number;
-		/** Whether Pals turn to face the camera; north-facing when off. */
-		palAutoFollow: boolean;
-		/** Vertical offset above ground, in world centimetres. */
-		palHeight: number;
-		/** Raster opacity, cross-fading toward the hillshade relief beneath it. */
-		mapOpacity: number;
-		/** Fast travel statue render scale as a multiple of true size. */
-		fastTravelSize: number;
-		/** Watchtower render scale as a multiple of true size. */
-		watchtowerSize: number;
-		/** Relic render scale as a multiple of true size. */
-		relicSize: number;
-	};
 
 	const PANEL_W = 420;
+
 	const appState = getAppState();
+	const modal = getModalState();
+	const toast = getToastState();
 
-	// Separate key from /worldmap: persistedState does not merge new defaults
-	// into an existing stored object.
-	const optionsState = persistedState<PublicMapOptions>('psp-public-map-options', {
-		area: DEFAULT_MAP_AREA,
-		showOrigin: false,
-		showFastTravel: true,
-		showWatchtower: true,
-		showRelics: true,
-		relicTypes: {},
-		showDungeons: true,
-		showBosses: true,
-		showAlphaPals: true,
-		showPredatorPals: true,
-		showLabels: true,
-		enable3d: false,
-		structureRenderMode: 'detailed',
-		panelOpen: true,
-		palSize: PAL_SCALE_DEFAULT,
-		palAutoFollow: true,
-		palHeight: 0,
-		mapOpacity: 1,
-		fastTravelSize: MAP_OBJECT_SCALE_DEFAULT,
-		watchtowerSize: MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT,
-		relicSize: MAP_OBJECT_SCALE_DEFAULT
-	});
+	// Two distinct questions. `saveLoaded` gates every editing surface; `publicShell`
+	// asks only whether the floating nav pill occupies the top centre, which the
+	// desktop build never does even with no save open.
+	const saveLoaded = $derived(!!appState.saveFile);
+	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
 
-	const options = $derived(optionsState.current);
-	const activeArea = $derived(options.area ?? DEFAULT_MAP_AREA);
-	const panelOpen = $derived(options.panelOpen ?? true);
-	const mapOpacity = $derived(clampMapOpacity(options.mapOpacity));
+	const mapOptions = $derived(mapOptionsState.current);
+	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
+	const panelOpen = $derived(mapOptions.panelOpen ?? true);
+	const mapOpacity = $derived(clampMapOpacity(mapOptions.mapOpacity));
 
+	let selectedPlayerUid = $state('');
 	let map: maplibregl.Map | undefined = $state(undefined);
 
 	const mapLoader = import('$components/map/Map.svelte');
 	let MapComponent = $state<typeof import('$components/map/Map.svelte').default | undefined>(
 		undefined
 	);
-
 	mapLoader.then((mod) => (MapComponent = mod.default));
 
+	// The editing surfaces stay out of the prerendered public entry: this route is
+	// rendered in Node at build time and shipped to visitors with no save at all.
+	let saveUi = $state<
+		| {
+				Panel: typeof import('$components/map/SaveMapPanel.svelte').default;
+				Controls: typeof import('$components/map/SaveMapControls.svelte').default;
+		  }
+		| undefined
+	>(undefined);
+	let saveUiRequested = false;
+
 	$effect(() => {
-		if (appState.saveFile) goto('/worldmap');
+		if (!appState.saveFile || saveUiRequested) return;
+		saveUiRequested = true;
+		Promise.all([
+			import('$components/map/SaveMapPanel.svelte'),
+			import('$components/map/SaveMapControls.svelte')
+		]).then(([panel, controls]) => {
+			saveUi = { Panel: panel.default, Controls: controls.default };
+		});
 	});
+
+	// The layers that predate the registry are still drawn from their own stores
+	// and their own showX props; the panel drives those booleans rather than a
+	// second copy of the same state.
+	type LayerOptionKey =
+		| 'showFastTravel'
+		| 'showWatchtower'
+		| 'showRelics'
+		| 'showDungeons'
+		| 'showBosses'
+		| 'showAlphaPals'
+		| 'showPredatorPals'
+		| 'showBounty'
+		| 'showOrigin'
+		| 'showPlayers'
+		| 'showBases'
+		| 'showLabels';
+
+	const LEGACY_LAYER_OPTION: Partial<Record<PanelOptionId, LayerOptionKey>> = {
+		fast_travel: 'showFastTravel',
+		watchtower: 'showWatchtower',
+		relics: 'showRelics',
+		dungeons: 'showDungeons',
+		boss_pals: 'showBosses',
+		alpha_pals: 'showAlphaPals',
+		predator_pals: 'showPredatorPals',
+		bounty: 'showBounty',
+		origin: 'showOrigin',
+		players: 'showPlayers',
+		bases: 'showBases',
+		labels: 'showLabels'
+	};
+
+	const PANEL_DEFAULTS = defaultPanelVisibility();
+
+	const layerVisibility = $derived.by(() => {
+		const record: MapLayerVisibility = { ...(mapOptions.mapLayerVisibility ?? {}) };
+		for (const [id, key] of Object.entries(LEGACY_LAYER_OPTION)) {
+			record[id as PanelOptionId] = mapOptions[key] ?? PANEL_DEFAULTS[id as PanelOptionId];
+		}
+		return record;
+	});
+
+	// Players and Bases have nothing to show or count without a save, which is
+	// also what a public visitor sees.
+	function layerAvailable(id: PanelOptionId): boolean {
+		return (id !== 'players' && id !== 'bases') || saveLoaded;
+	}
+
+	function layerCount(id: PanelOptionId): string | undefined {
+		switch (id) {
+			case 'fast_travel':
+				return fastTravelUnlockedCount !== undefined
+					? `${fastTravelUnlockedCount}/${fastTravelCount}`
+					: String(fastTravelCount);
+			case 'watchtower':
+				return watchtowerUnlockedCount !== undefined
+					? `${watchtowerUnlockedCount}/${watchtowerCount}`
+					: String(watchtowerCount);
+			case 'relics':
+				return appState.selectedPlayer
+					? `${relicCollectedCount}/${relicCount}`
+					: String(relicCount);
+			case 'players':
+				return `${loadedPlayerCount}/${totalPlayerCount}`;
+			case 'bases':
+				return `${loadedBaseCount}/${totalBaseCount}`;
+			case 'dungeons':
+				return String(dungeonCount);
+			case 'boss_pals':
+				return String(bossCount);
+			case 'alpha_pals':
+				return String(alphaPalCount);
+			case 'predator_pals':
+				return String(predatorPalCount);
+			case 'bounty':
+				return String(bountyCount);
+			case 'labels':
+			case 'origin':
+				return undefined;
+			default:
+				// Registry-backed layers report whatever the store has cached.
+				// The drawable count, not the artifact's row count: a layer whose rows
+				// are positionless or belong to the other map would overstate itself.
+				// Undefined while unloaded - a "0" there reads as "no markers here"
+				// rather than "not fetched yet".
+				if (!isMapLayerId(id)) return undefined;
+				const selection = mapLayers.peek(id);
+				return selection ? mapLayerMarkerCount(id, selection, activeArea).toString() : undefined;
+		}
+	}
+
+	function handleLayerVisibility(patch: MapLayerVisibility) {
+		const registry: MapLayerVisibility = { ...(mapOptions.mapLayerVisibility ?? {}) };
+		const enabled: MapLayerId[] = [];
+		for (const [key, visible] of Object.entries(patch)) {
+			const id = key as PanelOptionId;
+			const legacy = LEGACY_LAYER_OPTION[id];
+			if (legacy) {
+				mapOptions[legacy] = visible;
+				continue;
+			}
+			registry[id] = visible;
+			if (visible && isMapLayerId(id)) enabled.push(id);
+		}
+		mapOptions.mapLayerVisibility = registry;
+		// The store caches and coalesces, so re-enabling a loaded layer is free.
+		if (enabled.length > 0) void mapLayers.getLayers(enabled);
+	}
+
+	function handleShowAll(visible: boolean) {
+		handleLayerVisibility(allVisibilityPatch(visible));
+	}
+
+	// Layer visibility is persisted, so a layer switched on in an earlier session
+	// comes back enabled with its artifact never requested: it sat ticked in the
+	// panel drawing nothing and showing no count. Settles after one round, because
+	// a fetched artifact makes peek() truthy and drops the layer out of `wanted`.
+	$effect(() => {
+		const wanted = MAP_LAYERS.map((layer) => layer.id).filter(
+			(id) => layerVisibility[id] && !mapLayers.peek(id) && !mapLayers.isLoading(id)
+		);
+		if (wanted.length > 0) void mapLayers.getLayers(wanted);
+	});
+
+	const players = $derived(Object.values(appState.players || {}));
+	const loadedPlayerCount = $derived(players.length);
+	const totalPlayerCount = $derived(Object.keys(appState.playerSummaries || {}).length);
+	const guilds = $derived(Object.values(appState.guilds || {}));
+
+	const bases = $derived.by(() =>
+		guilds.reduce(
+			(acc, guild) => {
+				if (guild.bases) {
+					Object.values(guild.bases).forEach((base) => {
+						acc[base.id] = base;
+					});
+				}
+				return acc;
+			},
+			{} as Record<string, Base>
+		)
+	);
+	const loadedBaseCount = $derived(Object.keys(bases).length);
+	const totalBaseCount = $derived(
+		Object.values(appState.guildSummaries || {}).reduce(
+			(acc, summary) => acc + (summary as GuildSummary).base_count,
+			0
+		)
+	);
 
 	// Every count below is scoped to the active map area, matching what Map.svelte draws.
-	const fastTravelCount = $derived(
-		Object.values(fastTravelPoints.points).filter(
-			(point) => !isWatchtower(point) && mapOf(point.x, point.y) === activeArea
-		).length
+	const areaFtGuids = $derived(areaFastTravelGuids(fastTravelPoints.points, activeArea, false));
+	const areaWtGuids = $derived(areaFastTravelGuids(fastTravelPoints.points, activeArea, true));
+	const fastTravelCount = $derived(areaFtGuids.size);
+	const watchtowerCount = $derived(areaWtGuids.size);
+	const fastTravelUnlockedCount = $derived(
+		unlockedInArea(areaFtGuids, appState.selectedPlayer?.unlocked_fast_travel_points)
 	);
-	const watchtowerCount = $derived(
-		Object.values(fastTravelPoints.points).filter(
-			(point) => isWatchtower(point) && mapOf(point.x, point.y) === activeArea
-		).length
+	const watchtowerUnlockedCount = $derived(
+		unlockedInArea(areaWtGuids, appState.selectedPlayer?.unlocked_fast_travel_points)
 	);
-
-	const relicTypeTotals = $derived.by(() => {
-		const totals: Record<string, number> = {};
-		for (const relic of Object.values(relics.points)) {
-			if (mapOf(relic.x, relic.y) !== activeArea) continue;
-			totals[relic.relic_type] = (totals[relic.relic_type] ?? 0) + 1;
-		}
-		return totals;
-	});
-
-	// Game order (relic_data.json), restricted to types that exist on this map.
-	const relicTypeList = $derived.by(() => {
-		const present = Object.keys(relicTypeTotals);
-		const ordered = Object.keys(relicData.relicData).filter((type) => present.includes(type));
-		return [...ordered, ...present.filter((type) => !ordered.includes(type))];
-	});
 
 	const relicTypeStats = $derived(
-		Object.fromEntries(Object.entries(relicTypeTotals).map(([type, total]) => [type, { total }]))
+		computeRelicTypeStats(relics.points, activeArea, appState.selectedPlayer ?? undefined)
 	);
-
+	const relicTypeList = $derived(orderedRelicTypes(relicTypeStats, Object.keys(relicData.relicData)));
 	const relicCount = $derived(
-		Object.values(relicTypeTotals).reduce((acc, total) => acc + total, 0)
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)
 	);
-	const isRelicTypeVisible = (type: string) => options.relicTypes?.[type] !== false;
+	const relicCollectedCount = $derived(
+		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.collected, 0)
+	);
+	const isRelicTypeVisible = (type: string) => mapOptions.relicTypes?.[type] !== false;
 
 	const areaSpawnPartition = $derived.by(() => {
 		const partition = partitionSpawns(bosses.points);
@@ -152,29 +290,261 @@
 		return {
 			alpha: partition.alpha.filter(inArea),
 			boss: partition.boss.filter(inArea),
-			predator: partition.predator.filter(inArea)
+			predator: partition.predator.filter(inArea),
+			bounty: partition.bounty.filter(inArea)
 		};
 	});
-	const dungeonCount = $derived(
-		Object.values(dungeons.points).filter((p) => mapOf(p.x, p.y) === activeArea).length
-	);
+	const dungeonCount = $derived(pointsInArea(dungeons.points, activeArea).length);
 	const alphaPalCount = $derived(areaSpawnPartition.alpha.length);
 	const predatorPalCount = $derived(areaSpawnPartition.predator.length);
 	const bossCount = $derived(areaSpawnPartition.boss.length);
+	const bountyCount = $derived(areaSpawnPartition.bounty.length);
 
-	const anubisImg = $derived(assetLoader.loadMenuImage('anubis'));
-	const starryonImg = $derived(assetLoader.loadMenuImage('nightbluehorse'));
+	function panTo(x: number, y: number, zoom = 4) {
+		const area = mapOf(x, y);
+		if (!area) return;
+		mapOptions.area = area;
+		const [px, py] = worldToPixel(x, y, area);
+		map?.flyTo({ center: pixelToLngLat(px, py), zoom, duration: 500 });
+	}
 
-	function handleToggleAll(show: boolean) {
-		const skip = ['enable3d', 'panelOpen', 'structureRenderMode'];
-		for (const key in options) {
-			if (skip.includes(key)) continue;
-			const value = (options as Record<string, unknown>)[key];
-			if (typeof value === 'boolean') {
-				(options as Record<string, unknown>)[key] = show;
+	function handlePlayerFocus(player: Player) {
+		if (!player.location) return;
+		panTo(player.location.x, player.location.y);
+	}
+
+	// PlayerList re-fires onselect every time it mounts, and the options panel now
+	// mounts on each open, so the automatic pan is limited to once per player. The
+	// per-player focus button calls handlePlayerFocus directly and always re-centres.
+	let autoPannedUid: string | undefined;
+
+	function handlePlayerLoaded(player: Player) {
+		selectedPlayerUid = player.uid;
+		if (player.location && autoPannedUid !== player.uid) {
+			autoPannedUid = player.uid;
+			handlePlayerFocus(player);
+		}
+	}
+
+	$effect(() => {
+		if (MapComponent && appState.selectedPlayer && mapOptions.showPlayers) {
+			handlePlayerLoaded(appState.selectedPlayer);
+		}
+	});
+
+	function handleBaseFocus(base: Base) {
+		if (!base.location) return;
+		panTo(base.location.x, base.location.y);
+	}
+
+	async function handleEditBase(base: Base) {
+		const { default: EditBaseModal } = await import(
+			'$components/modals/edit-base/EditBaseModal.svelte'
+		);
+		// @ts-ignore
+		const result = await modal.showModal<{ name: string; area_range: number }>(EditBaseModal, {
+			title: m.edit_entity({ entity: m.base({ count: 1 }) }),
+			name: base.name || '',
+			areaRange: base.area_range || 3500
+		});
+		if (!result) return;
+
+		// Find the guild that contains this base
+		const guild = Object.values(appState.guilds || {}).find(
+			(g) => g.bases && Object.values(g.bases).some((b) => b.id === base.id)
+		);
+
+		if (guild && guild.bases) {
+			const baseInGuild = Object.values(guild.bases).find((b) => b.id === base.id);
+			if (baseInGuild) {
+				baseInGuild.name = result.name;
+				baseInGuild.area_range = result.area_range;
+				guild.state = EntryState.MODIFIED;
 			}
 		}
-		options.relicTypes = Object.fromEntries(relicTypeList.map((type) => [type, show]));
+	}
+
+	async function handleExportBlueprint(base: Base) {
+		const { default: ExportBlueprintModal } = await import(
+			'$components/modals/export-blueprint/ExportBlueprintModal.svelte'
+		);
+		// @ts-ignore  Component typing
+		await modal.showModal<boolean>(ExportBlueprintModal, {
+			baseId: base.id,
+			baseName: base.name || ''
+		});
+	}
+
+	async function handleDeleteBase(base: Base) {
+		const baseName = base.name || 'Unnamed Base';
+		const confirmed = await modal.showConfirmModal({
+			title: `Delete base "${baseName}"?`,
+			message: 'This removes its structures and pals.',
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (!confirmed) return;
+
+		const guildEntry = Object.entries(appState.guilds || {}).find(
+			([, guild]) => guild.bases && Object.values(guild.bases).some((b) => b.id === base.id)
+		);
+		if (!guildEntry) return;
+		const [guildId] = guildEntry;
+
+		try {
+			await sendAndWait(MessageType.DELETE_BASE, { base_id: base.id });
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Failed to delete base', 'error');
+			return;
+		}
+
+		delete appState.guilds[guildId];
+		await appState.loadGuildLazy(guildId);
+		baseStructuresData.reset();
+		toast.add(`Deleted base "${baseName}".`, 'Base deleted', 'success');
+	}
+
+	function handleToggleFastTravel(point: MapUnlockPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		toggleFastTravelPoint(player, point.guid);
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleToggleRelic(point: RelicPoint) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		toggleRelicPoint(player, point);
+		player.state = EntryState.MODIFIED;
+	}
+
+	function handleToggleStructureType(type: string) {
+		const visible = mapOptions.structureTypes?.[type] !== false;
+		mapOptions.structureTypes = { ...(mapOptions.structureTypes ?? {}), [type]: !visible };
+	}
+
+	function unlockAllWhere(predicate: (point: FastTravelPoint) => boolean) {
+		const player = appState.selectedPlayer;
+		if (!player) return;
+		const guids = Object.entries(fastTravelPoints.points)
+			.filter(([, point]) => predicate(point))
+			.map(([guid]) => guid);
+		if (unlockFastTravelGuids(player, guids) > 0) player.state = EntryState.MODIFIED;
+	}
+
+	function handleUnlockAllFastTravel() {
+		unlockAllWhere((point) => !isWatchtower(point));
+	}
+
+	function handleUnlockAllWatchtowers() {
+		unlockAllWhere(isWatchtower);
+	}
+
+	// Only the active map area and the currently visible types, so this can never
+	// write GUIDs the user cannot see.
+	function handleCollectAllRelics() {
+		const player = appState.selectedPlayer;
+		if (!player || !mapOptions.showRelics) return;
+		const visible = Object.entries(relics.points)
+			.filter(([, relic]) => mapOf(relic.x, relic.y) === activeArea)
+			.filter(([, relic]) => isRelicTypeVisible(relic.relic_type))
+			.map(([guid, relic]) => ({ guid, relic_type: relic.relic_type }));
+		if (collectAllRelics(player, visible) > 0) player.state = EntryState.MODIFIED;
+	}
+
+	async function handleUnlockMap() {
+		const confirmed = await modal.showConfirmModal({
+			title: m.unlock_full_map(),
+			message: m.unlock_map_confirm(),
+			confirmText: m.select_entity({ entity: m.file({ count: 1 }) }),
+			cancelText: m.cancel()
+		});
+
+		if (confirmed) {
+			const response: { success: boolean; message: string } = await sendAndWait(
+				MessageType.UNLOCK_MAP,
+				{}
+			);
+			const { success, message } = response;
+			if (success) {
+				toast.add(message, 'Success!', 'success');
+			}
+		}
+	}
+
+	const guildOptions = $derived(
+		Object.entries(appState.guildSummaries ?? {}).map(([id, summary]) => ({
+			value: id,
+			label: (summary as GuildSummary).name
+		}))
+	);
+	const playerOptions = $derived(
+		Object.values(appState.players ?? {}).map((player) => ({
+			value: player.uid,
+			label: player.nickname
+		}))
+	);
+
+	$effect(() => {
+		let panToLoc: { x: number; y: number; radius: number } = { x: 0, y: 0, radius: 3500 };
+		if (placementState.active && placementState.handle && placementState.geometry.length === 0) {
+			blueprintsData
+				.requestGeometry(placementState.handle)
+				.then((res) => {
+					placementState.geometry = res.structures;
+					placementState.setAnchor(res.origin);
+					panToLoc = {
+						x: res.origin.x,
+						y: res.origin.y,
+						radius: placementState.header?.footprint_radius ?? 3500
+					};
+				})
+				.finally(() => {
+					setTimeout(() => {
+						panTo(panToLoc.x, panToLoc.y, 7);
+					}, 100);
+				});
+		}
+	});
+
+	const debouncedValidate = debounce(() => placementState.runValidate(), 200);
+
+	$effect(() => {
+		if (!placementState.active) return;
+		void placementState.targetGuild;
+		void placementState.anchor;
+		debouncedValidate();
+	});
+
+	async function handlePlace() {
+		let res: Awaited<ReturnType<typeof placementState.commit>>;
+		try {
+			res = await placementState.commit();
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Placement failed', 'error');
+			return;
+		}
+
+		const guild = placementState.targetGuild;
+		placementState.exit();
+		delete appState.guilds[guild];
+		await appState.loadGuildLazy(guild);
+		baseStructuresData.reset();
+		toast.add(`Placed ${res.structures_placed} structures.`, 'Blueprint placed', 'success');
+
+		try {
+			await appState.writeSave();
+		} catch (e) {
+			toast.add(
+				String(e instanceof Error ? e.message : e),
+				'Placed, but saving to disk failed - use Save to write it.',
+				'error'
+			);
+		}
+	}
+
+	function handleCancel() {
+		placementState.exit();
 	}
 </script>
 
@@ -184,108 +554,59 @@
 	<!-- The map fills the viewport and has no visible heading. This gives the
 	     page a document heading for screen readers and crawlers alike. -->
 	<h1 class="sr-only">{m.map_meta_title()}</h1>
+
 	{#if panelOpen}
 		<aside
 			class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
 			transition:fly={{ x: -(PANEL_W + 16), duration: 300, easing: cubicOut }}
 		>
 			<div class="flex flex-col gap-2">
-				<SectionHeader text={m.map_options()} />
-
-				<div class="border-b-surface-800 grid grid-cols-2 border-b-2 pb-2">
-					<button class="flex items-center space-x-2" onclick={() => handleToggleAll(true)}>
-						<Eye class="mr-2 h-4 w-4" />
-						<span class="text-sm">Show All</span>
-					</button>
-					<button class="flex items-center space-x-2" onclick={() => handleToggleAll(false)}>
-						<EyeOff class="mr-2 h-4 w-4" />
-						<span class="text-sm">Hide All</span>
-					</button>
+				<div class="flex items-center">
+					<SectionHeader text={m.map_options()}>
+						{#snippet action()}
+							{#if saveLoaded}
+								<Button
+									variant="ghost"
+									size="sm"
+									class="flex items-center gap-2"
+									onclick={handleUnlockMap}
+								>
+									<Unlock class="h-4 w-4" />
+									<span>{m.unlock_map()}</span>
+								</Button>
+							{/if}
+						{/snippet}
+					</SectionHeader>
 				</div>
 
-				<div class="grid grid-cols-2 gap-2">
-					<button
-						class="flex items-center space-x-2 {options.showOrigin ? '' : 'opacity-25'}"
-						onclick={() => (options.showOrigin = !options.showOrigin)}
-					>
-						<Target class="mr-2 h-6 w-6" />
-						<span>{m.origin()}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showFastTravel ?? true)
-							? ''
-							: 'opacity-25'}"
-						onclick={() => (options.showFastTravel = !(options.showFastTravel ?? true))}
-					>
-						<img src={mapImg.fastTravel} alt={m.fast_travel()} class="mr-2 h-6 w-6" />
-						<span>{m.fast_travel()}</span>
-						<span class="text-surface-500 text-xs">{fastTravelCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showWatchtower ?? true)
-							? ''
-							: 'opacity-25'}"
-						onclick={() => (options.showWatchtower = !(options.showWatchtower ?? true))}
-					>
-						<img src={mapImg.watchTower} alt={m.watchtower()} class="mr-2 h-6 w-6" />
-						<span>{m.watchtower()}</span>
-						<span class="text-surface-500 text-xs">{watchtowerCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showRelics ?? true) ? '' : 'opacity-25'}"
-						onclick={() => (options.showRelics = !(options.showRelics ?? true))}
-					>
-						<img src={mapImg.effigy} alt={m.relics()} class="mr-2 h-6 w-6" />
-						<span>{m.relics()}</span>
-						<span class="text-surface-500 text-xs">{relicCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showDungeons ?? true) ? '' : 'opacity-25'}"
-						onclick={() => (options.showDungeons = !(options.showDungeons ?? true))}
-					>
-						<img src={mapImg.dungeon} alt={m.dungeons()} class="mr-2 h-6 w-6" />
-						<span>{m.dungeons()}</span>
-						<span class="text-surface-500 text-xs">{dungeonCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showBosses ?? true) ? '' : 'opacity-25'}"
-						onclick={() => (options.showBosses = !(options.showBosses ?? true))}
-					>
-						<img src={mapImg.boss} alt={m.bosses()} class="mr-2 h-6 w-6" />
-						<span>{m.bosses()}</span>
-						<span class="text-surface-500 text-xs">{bossCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showAlphaPals ?? true)
-							? ''
-							: 'opacity-25'}"
-						onclick={() => (options.showAlphaPals = !(options.showAlphaPals ?? true))}
-					>
-						<img src={anubisImg} alt={m.alpha_pal(p.pals)} class="mr-2 h-6 w-6" />
-						<span>{m.alpha_pal(p.pals)}</span>
-						<span class="text-surface-500 text-xs">{alphaPalCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showPredatorPals ?? true)
-							? ''
-							: 'opacity-25'}"
-						onclick={() => (options.showPredatorPals = !(options.showPredatorPals ?? true))}
-					>
-						<img src={starryonImg} alt={m.predator_pals(p.pals)} class="mr-2 h-6 w-6" />
-						<span>{m.predator_pals(p.pals)}</span>
-						<span class="text-surface-500 text-xs">{predatorPalCount}</span>
-					</button>
-					<button
-						class="flex items-center space-x-2 {(options.showLabels ?? true) ? '' : 'opacity-25'}"
-						onclick={() => (options.showLabels = !(options.showLabels ?? true))}
-					>
-						<img src={mapImg.fastTravel} alt={m.map_labels()} class="mr-2 h-6 w-6" />
-						<span>{m.map_labels()}</span>
-					</button>
-				</div>
+				<MapLayerPanel
+					layers={layerVisibility}
+					onVisibilityChange={handleLayerVisibility}
+					onShowAll={handleShowAll}
+					count={layerCount}
+					available={layerAvailable}
+				/>
 			</div>
 
-			<MapHints />
+			{#if saveUi}
+				<saveUi.Panel
+					hideUnlockedFastTravel={mapOptions.hideUnlockedFastTravel}
+					hideCollectedRelics={mapOptions.hideCollectedRelics}
+					showPlayers={mapOptions.showPlayers}
+					showBases={mapOptions.showBases}
+					{selectedPlayerUid}
+					onToggleHideUnlocked={() =>
+						(mapOptions.hideUnlockedFastTravel = !mapOptions.hideUnlockedFastTravel)}
+					onToggleHideCollected={() =>
+						(mapOptions.hideCollectedRelics = !mapOptions.hideCollectedRelics)}
+					onPlayerLoaded={handlePlayerLoaded}
+					onPlayerFocus={handlePlayerFocus}
+					onBaseFocus={handleBaseFocus}
+					onEditBase={handleEditBase}
+				/>
+			{/if}
+
+			<MapHints saveHints={saveLoaded} />
 		</aside>
 	{/if}
 
@@ -299,7 +620,7 @@
 			title={m.map_options()}
 			aria-label={m.map_options()}
 			aria-expanded={panelOpen}
-			onclick={() => (options.panelOpen = !panelOpen)}
+			onclick={() => (mapOptions.panelOpen = !panelOpen)}
 		>
 			{#if panelOpen}
 				<PanelLeftClose class="h-5 w-5" />
@@ -308,16 +629,26 @@
 			{/if}
 		</button>
 
-		{#if (options.showRelics ?? true) && relicTypeList.length > 0}
+		{#if mapOptions.showRelics && relicTypeList.length > 0}
 			<RelicFilterControl
 				types={relicTypeList}
 				stats={relicTypeStats}
-				enabled={options.relicTypes ?? {}}
+				enabled={mapOptions.relicTypes ?? {}}
+				showCollected={saveLoaded && !!appState.selectedPlayer}
 				ontoggle={(relicType) =>
-					(options.relicTypes = {
-						...(options.relicTypes ?? {}),
+					(mapOptions.relicTypes = {
+						...(mapOptions.relicTypes ?? {}),
 						[relicType]: !isRelicTypeVisible(relicType)
 					})}
+			/>
+		{/if}
+
+		{#if saveUi && appState.selectedPlayer}
+			<saveUi.Controls
+				showRelics={mapOptions.showRelics}
+				onUnlockAllFastTravel={handleUnlockAllFastTravel}
+				onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
+				onCollectAllRelics={handleCollectAllRelics}
 			/>
 		{/if}
 	</div>
@@ -327,44 +658,69 @@
 			<MapComponent
 				bind:map
 				area={activeArea}
-				onAreaChange={(next: MapArea) => (options.area = next)}
-				showOrigin={options.showOrigin ?? false}
-				showPlayers={false}
-				showBases={false}
-				showFastTravel={options.showFastTravel ?? true}
-				showWatchtower={options.showWatchtower ?? true}
-				showRelics={options.showRelics ?? true}
-				relicTypes={options.relicTypes ?? {}}
-				showDungeons={options.showDungeons ?? true}
-				showBosses={options.showBosses ?? true}
-				showAlphaPals={options.showAlphaPals ?? true}
-				showPredatorPals={options.showPredatorPals ?? true}
-				showLabels={options.showLabels ?? true}
-				show3d={options.enable3d ?? false}
-				showStructureControls={false}
-				areaSwitchAlign="right"
-				renderMode={options.structureRenderMode ?? 'detailed'}
-				palSize={options.palSize ?? PAL_SCALE_DEFAULT}
-				palAutoFollow={options.palAutoFollow ?? true}
-				palHeight={options.palHeight ?? 0}
+				onAreaChange={(next: MapArea) => (mapOptions.area = next)}
+				showOrigin={mapOptions.showOrigin}
+				showPlayers={saveLoaded && mapOptions.showPlayers}
+				showBases={saveLoaded && mapOptions.showBases}
+				showFastTravel={mapOptions.showFastTravel}
+				showWatchtower={mapOptions.showWatchtower}
+				showRelics={mapOptions.showRelics}
+				hideCollectedRelics={mapOptions.hideCollectedRelics}
+				hideUnlockedFastTravel={mapOptions.hideUnlockedFastTravel}
+				relicTypes={mapOptions.relicTypes ?? {}}
+				showDungeons={mapOptions.showDungeons}
+				showBosses={mapOptions.showBosses}
+				showAlphaPals={mapOptions.showAlphaPals}
+				showPredatorPals={mapOptions.showPredatorPals}
+				showBounty={mapOptions.showBounty}
+				mapLayerVisibility={layerVisibility}
+				showLabels={mapOptions.showLabels}
+				show3d={mapOptions.enable3d}
+				showStructureControls={saveLoaded}
+				areaSwitchAlign={publicShell ? 'right' : 'center'}
+				palSize={mapOptions.palSize ?? PAL_SCALE_DEFAULT}
+				palAutoFollow={mapOptions.palAutoFollow}
+				palHeight={mapOptions.palHeight ?? 0}
 				{mapOpacity}
-				fastTravelSize={options.fastTravelSize ?? MAP_OBJECT_SCALE_DEFAULT}
-				watchtowerSize={options.watchtowerSize ?? MAP_OBJECT_SCALE_DEFAULT}
-				relicSize={options.relicSize ?? MAP_OBJECT_SCALE_DEFAULT}
-				onToggle3d={() => (options.enable3d = !(options.enable3d ?? false))}
+				fastTravelSize={mapOptions.fastTravelSize ?? MAP_OBJECT_SCALE_DEFAULT}
+				watchtowerSize={mapOptions.watchtowerSize ?? MAP_OBJECT_SCALE_DEFAULT}
+				relicSize={mapOptions.relicSize ?? MAP_OBJECT_SCALE_DEFAULT}
+				structureTypes={mapOptions.structureTypes ?? {}}
+				renderMode={mapOptions.structureRenderMode ?? 'detailed'}
+				structureTextured={mapOptions.structureTextured}
+				onToggle3d={() => (mapOptions.enable3d = !mapOptions.enable3d)}
+				onToggleStructureType={handleToggleStructureType}
 				onToggleRenderMode={() =>
-					(options.structureRenderMode =
-						(options.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
-				onTogglePalAutoFollow={() => (options.palAutoFollow = !(options.palAutoFollow ?? true))}
-				onPalSizeChange={(scale: number) => (options.palSize = scale)}
-				onFastTravelSizeChange={(scale: number) => (options.fastTravelSize = scale)}
-				onWatchtowerSizeChange={(scale: number) => (options.watchtowerSize = scale)}
-				onRelicSizeChange={(scale: number) => (options.relicSize = scale)}
-				onPalHeightChange={(height: number) => (options.palHeight = height)}
-				onMapOpacityChange={(opacity: number) => (options.mapOpacity = opacity)}
+					(mapOptions.structureRenderMode =
+						(mapOptions.structureRenderMode ?? 'detailed') === 'detailed' ? 'flat' : 'detailed')}
+				onToggleStructureTextured={() =>
+					(mapOptions.structureTextured = !mapOptions.structureTextured)}
+				onEditBase={saveLoaded ? handleEditBase : undefined}
+				onExportBase={saveLoaded ? handleExportBlueprint : undefined}
+				onDeleteBase={saveLoaded ? handleDeleteBase : undefined}
+				onToggleFastTravel={saveLoaded ? handleToggleFastTravel : undefined}
+				onToggleRelic={saveLoaded ? handleToggleRelic : undefined}
+				onTogglePalAutoFollow={() => (mapOptions.palAutoFollow = !mapOptions.palAutoFollow)}
+				onPalSizeChange={(scale: number) => (mapOptions.palSize = scale)}
+				onFastTravelSizeChange={(scale: number) => (mapOptions.fastTravelSize = scale)}
+				onWatchtowerSizeChange={(scale: number) => (mapOptions.watchtowerSize = scale)}
+				onRelicSizeChange={(scale: number) => (mapOptions.relicSize = scale)}
+				onPalHeightChange={(height: number) => (mapOptions.palHeight = height)}
+				onMapOpacityChange={(opacity: number) => (mapOptions.mapOpacity = opacity)}
+				placement={placementState.active}
+				placementGeometry={placementState.geometry}
+				placementAnchor={placementState.anchor}
+				onPlacementAnchorChange={(a) => {
+					placementState.setAnchor(a);
+					debouncedValidate();
+				}}
 			/>
 		{:else}
-			<Loading label={m.initializing_entity({ entity: m.map() })} />
+			<Loading label={m.initializing_entity({ entity: m.map() })} icon={MapIcon} iconSize={24} />
+		{/if}
+
+		{#if saveLoaded && placementState.active}
+			<PlacementPanel {guildOptions} {playerOptions} onPlace={handlePlace} onCancel={handleCancel} />
 		{/if}
 	</div>
 </div>

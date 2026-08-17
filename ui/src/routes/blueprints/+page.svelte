@@ -89,7 +89,7 @@
 	async function placeRow(row: BlueprintRow) {
 		const res = await blueprintsData.loadFromId(row.id);
 		placementState.enter(res.handle, res.header);
-		await goto('/worldmap');
+		await goto('/map');
 	}
 
 	async function deleteRow(row: BlueprintRow) {

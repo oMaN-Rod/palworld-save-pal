@@ -122,7 +122,7 @@ export const navItems: NavItem[] = [
 		group: 'main',
 		icon: () => Map,
 		label: () => m.map(),
-		href: '/worldmap'
+		href: '/map'
 	},
 	{
 		id: 'presets',

@@ -44,7 +44,7 @@ export class AppState {
 	bulkDetailGuild: Guild | undefined = $state(undefined);
 	/** Set while a guild-details request originated from the bulk panel is in flight, so the
 	 *  response handler knows whether to populate bulkDetailGuild instead of other guild loads
-	 *  (e.g. /edit/guild, worldmap) stomping on it. */
+	 *  (e.g. /edit/guild, /map) stomping on it. */
 	bulkGuildRequestPending: boolean = $state(false);
 
 	resetState() {

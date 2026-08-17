@@ -23,8 +23,8 @@ describe('resolvePlayerDetailsRouting', () => {
 		});
 	});
 
-	it('routes the worldmap origin to the selected player without navigating', () => {
-		expect(resolvePlayerDetailsRouting('worldmap')).toEqual({
+	it('routes the map origin to the selected player without navigating', () => {
+		expect(resolvePlayerDetailsRouting('map')).toEqual({
 			target: 'selected',
 			navigateTo: null
 		});
