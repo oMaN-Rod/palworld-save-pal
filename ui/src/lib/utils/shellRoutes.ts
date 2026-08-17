@@ -28,3 +28,11 @@ export function isFullBleedRoute(pathname: string): boolean {
 		(route) => pathname === route || (route !== '/' && pathname.startsWith(`${route}/`))
 	);
 }
+
+// Whether the floating public nav pill is on screen. It is fixed to the top
+// centre, so anything else that wants that spot has to clear it. Distinct from
+// "no save is loaded": the desktop build renders the sidebar instead, leaving
+// the top centre free.
+export function isPublicShell(webBuild: boolean, saveFile: unknown): boolean {
+	return webBuild && !saveFile;
+}

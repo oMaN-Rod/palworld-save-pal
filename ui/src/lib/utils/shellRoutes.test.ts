@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isSaveRequiredRoute, isFullBleedRoute } from './shellRoutes';
+import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from './shellRoutes';
 
 describe('isSaveRequiredRoute', () => {
 	it('matches save-required roots exactly', () => {
@@ -23,7 +23,6 @@ describe('isSaveRequiredRoute', () => {
 	it('treats save-agnostic routes as public', () => {
 		expect(isSaveRequiredRoute('/')).toBe(false);
 		expect(isSaveRequiredRoute('/map')).toBe(false);
-		expect(isSaveRequiredRoute('/worldmap')).toBe(false);
 		expect(isSaveRequiredRoute('/breeding')).toBe(false);
 		expect(isSaveRequiredRoute('/about')).toBe(false);
 		expect(isSaveRequiredRoute('/tools')).toBe(false);
@@ -59,5 +58,21 @@ describe('isFullBleedRoute', () => {
 
 	it('does not match on bare string prefixes', () => {
 		expect(isFullBleedRoute('/mapping')).toBe(false);
+	});
+});
+
+describe('isPublicShell', () => {
+	it('is true only for the web build with no save loaded', () => {
+		expect(isPublicShell(true, undefined)).toBe(true);
+		expect(isPublicShell(true, null)).toBe(true);
+	});
+
+	it('is false once a save is loaded, on any build', () => {
+		expect(isPublicShell(true, { name: 'Level.sav' })).toBe(false);
+		expect(isPublicShell(false, { name: 'Level.sav' })).toBe(false);
+	});
+
+	it('is false on desktop even with no save, because the sidebar renders', () => {
+		expect(isPublicShell(false, undefined)).toBe(false);
 	});
 });

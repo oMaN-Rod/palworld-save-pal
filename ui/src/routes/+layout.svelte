@@ -5,7 +5,7 @@
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
-	import { isSaveRequiredRoute, isFullBleedRoute } from '$lib/utils/shellRoutes';
+	import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from '$lib/utils/shellRoutes';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
@@ -33,7 +33,7 @@
 	// matters because adapter-static prerenders in Node, where `Worker` is not a
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
-	const publicShell = $derived(isWebBuild && !appState.saveFile);
+	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
