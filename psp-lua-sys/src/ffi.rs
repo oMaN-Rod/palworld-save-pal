@@ -37,7 +37,7 @@ pub const LUA_TSTRING: c_int = 4;
 pub const LUA_TTABLE: c_int = 5;
 pub const LUA_TFUNCTION: c_int = 6;
 
-pub type lua_CFunction = extern "C" fn(*mut lua_State) -> c_int;
+pub type lua_CFunction = unsafe extern "C" fn(*mut lua_State) -> c_int;
 pub type lua_Hook = extern "C" fn(*mut lua_State, *mut c_void);
 pub type lua_Alloc =
     extern "C" fn(ud: *mut c_void, ptr: *mut c_void, osize: usize, nsize: usize) -> *mut c_void;
@@ -96,4 +96,21 @@ pub unsafe fn lua_tostring(state: *mut lua_State, index: c_int) -> *const c_char
 #[inline]
 pub unsafe fn lua_pop(state: *mut lua_State, n: c_int) {
     lua_settop(state, -n - 1);
+}
+
+/// The global table's name, as a NUL-terminated byte string so it can be passed
+/// straight to the C API without allocating.
+pub const LUA_GNAME: &[u8] = b"_G\0";
+
+extern "C" {
+    /// Opens a library and, when `glb` is non-zero, binds it to a global of the
+    /// same name. Leaves the module on the stack, so callers `lua_pop(state, 1)`.
+    pub fn luaL_requiref(
+        state: *mut lua_State,
+        modname: *const c_char,
+        openf: lua_CFunction,
+        glb: c_int,
+    );
+
+    pub fn luaopen_base(state: *mut lua_State) -> c_int;
 }
