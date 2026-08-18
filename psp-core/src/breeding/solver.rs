@@ -42,6 +42,10 @@ const OTHER: &str = "\u{0}other";
 
 type GroupKey = (String, Gender, BTreeSet<String>);
 
+/// Dedup signature of a built chain: target species, parent→child edges,
+/// and the passive set each step contributes.
+type ChainSignature = (String, BTreeSet<(String, String, String)>, BTreeSet<String>);
+
 struct WorkingSet {
     /// Insertion order of group keys (stable iteration, mirroring CPython dict
     /// ordering; drives which-equivalent-ref survives deterministically).
@@ -321,8 +325,7 @@ fn build_results(
     });
 
     let mut chains: Vec<Chain> = Vec::new();
-    let mut seen_sigs: HashSet<(String, BTreeSet<(String, String, String)>, BTreeSet<String>)> =
-        HashSet::new();
+    let mut seen_sigs: HashSet<ChainSignature> = HashSet::new();
     for ref_pal in qualifying {
         let chain = build_chain(db, &ref_pal, spec, required);
         let sig = chain_signature(&chain);
@@ -340,9 +343,7 @@ fn build_results(
     chains
 }
 
-fn chain_signature(
-    chain: &Chain,
-) -> (String, BTreeSet<(String, String, String)>, BTreeSet<String>) {
+fn chain_signature(chain: &Chain) -> ChainSignature {
     let edges: BTreeSet<(String, String, String)> = chain
         .steps
         .iter()
@@ -406,7 +407,7 @@ fn flatten(
     step_idx: &mut HashMap<usize, usize>,
 ) {
     // Identity by shared allocation (Arc pointer), mirroring Python's `id()`.
-    let id = Arc::as_ptr(ref_pal) as *const PalRef as usize;
+    let id = Arc::as_ptr(ref_pal) as usize;
     if !visited.insert(id) {
         return;
     }
@@ -437,7 +438,7 @@ fn flatten(
     // Resolve each parent's lineage: a parent is a prior bred step (already
     // appended — post-order guarantees earlier index) or a source leaf.
     let parent_ref = |p: &Arc<PalRef>| {
-        let pid = Arc::as_ptr(p) as *const PalRef as usize;
+        let pid = Arc::as_ptr(p) as usize;
         if let Some(i) = step_idx.get(&pid) {
             return (Some(*i), None);
         }

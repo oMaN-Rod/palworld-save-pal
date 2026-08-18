@@ -3,7 +3,7 @@ use chrono::{NaiveDateTime, Timelike, Utc};
 /// The timestamp shape every datetime column in this DB holds: `T` separator, 6-digit
 /// microseconds, and no fraction at all when the microsecond component is zero.
 pub fn iso_naive(value: NaiveDateTime) -> String {
-    if value.nanosecond() % 1_000_000_000 == 0 {
+    if value.nanosecond().is_multiple_of(1_000_000_000) {
         value.format("%Y-%m-%dT%H:%M:%S").to_string()
     } else {
         value.format("%Y-%m-%dT%H:%M:%S%.6f").to_string()

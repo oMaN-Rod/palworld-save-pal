@@ -131,7 +131,7 @@
 		</div>
 	{:else}
 		<ul class="divide-surface-700/60 max-h-96 divide-y overflow-y-auto">
-			{#each visible as row (row.instance_id)}
+			{#each visible as row, i (`${row.instance_id}-${i}`)}
 				<li class="flex items-center gap-3 py-2">
 					{#if row.severity === 'danger'}
 						<AlertOctagon size={16} class="text-error-400 shrink-0" />

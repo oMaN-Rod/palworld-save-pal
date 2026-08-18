@@ -224,9 +224,10 @@ export type Player = {
 	collected_effigies: string[];
 	collected_relics: Record<string, string[]>;
 	/** Unspent effigy counts per relic type (bare key), from
-	 *  `RecordData.RelicPossessNumMap`. `undefined` on a pre-1.0 save that
-	 *  carries no map -- the Effigies editor shows as unsupported then. */
-	relic_possess_num_map?: Record<string, number>;
+	 *  `RecordData.RelicPossessNumMap`. Serialized as JSON `null` on a pre-1.0
+	 *  save that carries no map -- the Effigies editor shows as unsupported
+	 *  then. */
+	relic_possess_num_map?: Record<string, number> | null;
 	defeated_bosses: string[];
 };
 

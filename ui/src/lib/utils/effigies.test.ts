@@ -92,15 +92,28 @@ describe('deriveStatusPatches', () => {
 		}
 	} as unknown as Record<string, RelicRankData>;
 
-	it('derives every known type rank from its staged count', () => {
-		const patches = deriveStatusPatches({ capture_power: 3, swim_speed: 2 }, relics);
+	it('derives the rank of every staged change from its staged count', () => {
+		const patches = deriveStatusPatches({ capture_power: 3, swim_speed: 2 }, { capture_power: 1 }, relics);
 		expect(patches['capture_rate']).toBe(2);
 		expect(patches['swim_speed']).toBe(2);
 	});
 
-	it('treats a missing count as rank 0', () => {
-		const patches = deriveStatusPatches({ swim_speed: 2 }, relics);
+	it('treats a staged-to-zero change as rank 0', () => {
+		const patches = deriveStatusPatches({ swim_speed: 2 }, { capture_power: 2 }, relics);
 		expect(patches['capture_rate']).toBe(0);
 		expect(patches['swim_speed']).toBe(2);
+	});
+
+	it('leaves untouched types out of the patch so bought ranks survive', () => {
+		// swim_speed was never touched: its stored rank must not be rewritten
+		// from a held count of 0.
+		const patches = deriveStatusPatches({ capture_power: 3 }, { capture_power: 1, swim_speed: 0 }, relics);
+		expect(patches['capture_rate']).toBe(2);
+		expect(patches['swim_speed']).toBeUndefined();
+	});
+
+	it('patches nothing when staged equals loaded', () => {
+		const patches = deriveStatusPatches({ capture_power: 2 }, { capture_power: 2 }, relics);
+		expect(Object.keys(patches)).toHaveLength(0);
 	});
 });

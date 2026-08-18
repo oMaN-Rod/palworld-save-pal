@@ -857,7 +857,7 @@ pub fn delete_base(
     };
 
     let dto = get_guild_details(session, game_data, guild_id)?
-        .ok_or_else(|| CoreError::GuildNotFound(guild_id))?;
+        .ok_or(CoreError::GuildNotFound(guild_id))?;
     let base = dto
         .bases
         .as_ref()

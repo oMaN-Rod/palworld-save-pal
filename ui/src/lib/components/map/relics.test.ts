@@ -12,10 +12,13 @@ const B = 'BBBBBBBB-0000-0000-0000-000000000002';
 const C = 'CCCCCCCC-0000-0000-0000-000000000003';
 const D = 'DDDDDDDD-0000-0000-0000-000000000004';
 
-/** A pre-1.0 save: effigies in the flat list, no by-type relic structure at all. */
+/** A pre-1.0 save: effigies in the flat list, no by-type relic structure at
+ *  all. The wire DTO serializes the possess map as JSON `null` (not absent),
+ *  so model that exact shape here. */
 const preOnePointZero = (): RelicPlayerView => ({
 	collected_effigies: [A, B, C],
-	collected_relics: {}
+	collected_relics: {},
+	relic_possess_num_map: null
 });
 
 describe('relicsByType', () => {
@@ -115,10 +118,10 @@ describe('possess-count sync (relic_possess_num_map / effigy_possess_num)', () =
 		expect(player.effigy_possess_num).toBe(0);
 	});
 
-	it('never creates the map on a save that has none', () => {
+	it('never creates the map on a save whose wire shape is null', () => {
 		const player = preOnePointZero();
 		toggleRelic(player, { guid: D, relic_type: CAPTURE_POWER });
-		expect(player.relic_possess_num_map).toBeUndefined();
+		expect(player.relic_possess_num_map).toBeNull();
 		// The scalar mirror still moves: the backend creates it on a positive net.
 		expect(player.effigy_possess_num).toBe(1);
 	});

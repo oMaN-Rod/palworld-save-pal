@@ -6,6 +6,7 @@
 	import { getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
 	import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from '$lib/utils/shellRoutes';
+	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
@@ -34,6 +35,13 @@
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
+
+	// Every locale's landing root (`/`, `/de`, `/zh`, …) — the marketing page
+	// stays clean of the ambient corner art.
+	const landingPaths = new Set(['/', ...siteLocales.map((locale) => localizedPath('/', locale))]);
+	function isLandingPath(pathname: string): boolean {
+		return landingPaths.has(pathname.replace(/\/+$/, '') || '/');
+	}
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
@@ -126,8 +134,9 @@
 	{/key}
 	<!-- Ambient corner art behind the app shell (PalSavTools-style): fixed,
 	     non-interactive, sits under the z-[1] shell above the body gradients.
-	     Skipped on the landing page so its marketing layout stays clean. -->
-	{#if page.url.pathname !== '/'}
+	     Skipped on the landing page (every locale's root) so its marketing
+	     layout stays clean. -->
+	{#if !isLandingPath(page.url.pathname)}
 		<div
 			class="pointer-events-none fixed inset-0 z-0"
 			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.5;"

@@ -32,9 +32,11 @@
 					<span class="text-surface-100 block truncate text-sm font-medium">
 						{player.nickname}
 					</span>
-					<span class="text-surface-500 text-xs">
-						{m.overview_lv({ level: player.level ?? 0 })}
-					</span>
+					{#if player.level != null}
+						<span class="text-surface-500 text-xs">
+							{m.overview_lv({ level: player.level })}
+						</span>
+					{/if}
 				</div>
 				<span
 					class="border-surface-600/60 bg-surface-900/60 text-surface-300 shrink-0 rounded-full border px-2.5 py-0.5 text-xs font-medium tabular-nums"

@@ -487,7 +487,7 @@ mod tests {
                 .iter()
                 .map(|bracket| (bracket.label, bracket.count))
                 .collect::<Vec<_>>(),
-            vec![("1-20", 1), ("21-40", 1), ("41-60", 2)]
+            vec![("1-20", 1), ("21-40", 1), ("41-60", 1), ("61-80", 1)]
         );
         // (30 + 50 + 1 + 200) / 4 = 70.25 → 70.2 under banker's rounding.
         assert_eq!(stats.composition.avg_level, 70.2);

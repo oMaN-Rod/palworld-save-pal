@@ -22,7 +22,18 @@ pub async fn handle_get_overview_stats(ctx: &mut HandlerCtx<'_>) -> Result<(), H
         );
         return Ok(());
     };
-    let stats = overview_stats(session, &ctx.app.game_data)?;
+    let stats = match overview_stats(session, &ctx.app.game_data) {
+        Ok(stats) => stats,
+        Err(error) => {
+            // Correlated under this message type (not a global `error` frame)
+            // so the frontend's overview handler clears its loading state.
+            ctx.emitter.emit(
+                MessageType::GetOverviewStats,
+                &json!({"error": format!("Failed to compute overview stats: {error}")}),
+            );
+            return Ok(());
+        }
+    };
     ctx.emitter
         .emit(MessageType::GetOverviewStats, &json!({ "stats": stats }));
     Ok(())

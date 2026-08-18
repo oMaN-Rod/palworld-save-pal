@@ -30,7 +30,7 @@ fn copy_dir_recursive(src: &Path, dst: &Path) {
         if dir_entry.path().is_dir() {
             copy_dir_recursive(&dir_entry.path(), &dest_path);
         } else {
-            std::fs::copy(&dir_entry.path(), &dest_path).unwrap();
+            std::fs::copy(dir_entry.path(), &dest_path).unwrap();
         }
     }
 }
@@ -76,7 +76,7 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     let summaries = load_frames
         .iter()
         .rev()
-        .find_map(|f| f["data"].as_object().map(|o| o.clone()))
+        .find_map(|f| f["data"].as_object().cloned())
         .expect("get_player_summaries data is an object");
     assert!(
         !summaries.is_empty(),

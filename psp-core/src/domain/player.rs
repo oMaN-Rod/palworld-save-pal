@@ -188,7 +188,11 @@ fn relic_possess_counts(record_data: &Properties) -> Option<BTreeMap<String, i64
 
     let mut out = BTreeMap::new();
     for entry in entries {
-        let type_name = relic_type_name(&entry.key)?;
+        // One corrupt key hides only itself, not the whole map — a `None`
+        // return here would read as "pre-1.0 save" in the UI.
+        let Some(type_name) = relic_type_name(&entry.key) else {
+            continue;
+        };
         let key = relic::RELIC_TYPE_MAP
             .iter()
             .find(|(enum_name, _)| *enum_name == type_name)

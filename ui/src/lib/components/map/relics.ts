@@ -4,8 +4,9 @@ export const CAPTURE_POWER = 'capture_power';
 export type RelicPlayerView = {
 	collected_effigies?: string[];
 	collected_relics?: Record<string, string[]>;
-	/** Unspent effigy counts per type; absent on a pre-1.0 save. */
-	relic_possess_num_map?: Record<string, number>;
+	/** Unspent effigy counts per relic type; JSON `null` (not absent) on a
+	 *  pre-1.0 save that carries no map. */
+	relic_possess_num_map?: Record<string, number> | null;
 	/** The CapturePower mirror of `relic_possess_num_map`. */
 	effigy_possess_num?: number;
 };
@@ -19,7 +20,9 @@ const same = (a: string, b: string) => a.toUpperCase() === b.toUpperCase();
  *  be un-spent, so un-collecting everything must stop at 0, not go negative.
  *  Only types the save already tracks move: the map is never created here. */
 function bumpPossessCount(player: RelicPlayerView, relicType: string, delta: number): void {
-	if (player.relic_possess_num_map === undefined || delta === 0) return;
+	// `== null` covers both shapes: absent (synthetic test views) and the
+	// JSON `null` the wire carries for a pre-1.0 save without a map.
+	if (player.relic_possess_num_map == null || delta === 0) return;
 	const current = player.relic_possess_num_map[relicType] ?? 0;
 	player.relic_possess_num_map[relicType] = Math.max(0, current + delta);
 }

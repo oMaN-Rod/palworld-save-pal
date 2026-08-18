@@ -242,7 +242,7 @@ async fn watchtower_unlock_survives_update_save_modded_save_and_reload() {
     let found = reloaded_points.iter().any(|point| {
         point
             .as_str()
-            .map(|s| s.to_ascii_uppercase() == WATCHTOWER_11_GUID.to_ascii_uppercase())
+            .map(|s| s.eq_ignore_ascii_case(WATCHTOWER_11_GUID))
             .unwrap_or(false)
     });
     assert!(

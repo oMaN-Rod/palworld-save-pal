@@ -213,9 +213,10 @@ impl Default for BreedingSpec {
 /// One row of a Direct-Mode answer (forward or reverse).
 ///
 /// `parent_*_gender` is `Some` only for the handful of unique combos the game
-/// gates on parent gender (`DT_PalCombiUnique.ParentGenderA/B`) — e.g. CatMage
-/// + FoxMage yields a different child depending on which parent is male. The
-/// genders are stated relative to this row's own `parent_a`/`parent_b` order.
+/// gates on parent gender (`DT_PalCombiUnique.ParentGenderA/B`) — e.g.
+/// CatMage + FoxMage yields a different child depending on which parent is
+/// male. The genders are stated relative to this row's own
+/// `parent_a`/`parent_b` order.
 #[derive(Debug, Clone, serde::Serialize)]
 pub struct DirectResult {
     pub parent_a: String,

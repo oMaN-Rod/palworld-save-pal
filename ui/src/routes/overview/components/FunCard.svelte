@@ -140,8 +140,11 @@
 			);
 		}
 
-		const bracket = composition.level_brackets.reduce((biggest, current) =>
-			current.count > biggest.count ? current : biggest
+		// Initial value = first bracket: an empty array yields undefined here
+		// instead of throwing, and the `count > 0` guard skips it either way.
+		const bracket = composition.level_brackets.reduce(
+			(biggest, current) => (current.count > biggest.count ? current : biggest),
+			composition.level_brackets[0]
 		);
 		if (bracket && bracket.count > 0) {
 			pool.push(

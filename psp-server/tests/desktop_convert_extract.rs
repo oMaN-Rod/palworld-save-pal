@@ -2,6 +2,7 @@
 //! native OUTPUT-DIRECTORY dialog (`pick_folder`):
 //!   1. a named GamePass save extracted to Steam (`save_id` + "steam"), and
 //!   2. the loaded (GamePass) save converted to Steam (`convert_loaded_save`).
+//!
 //! Both answered "Desktop mode required." before the dialog was wired. Driven
 //! through a queued (fake) dialog provider; the synthetic wgs tree mirrors
 //! `phase4_ws.rs`.

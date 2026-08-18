@@ -43,8 +43,8 @@ pub struct OverviewGenderSplit {
 }
 
 /// A level-range bucket. The label travels on the wire because the ranges are
-/// numeric, not localizable text; the top bucket reads "41-60" but is
-/// everything above 40 (matching the reference implementation).
+/// numeric, not localizable text; the top bucket reads "61-80" but is
+/// everything above 60 (matching the reference implementation's four buckets).
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct OverviewLevelBracket {
     pub label: &'static str,

@@ -57,7 +57,7 @@ impl OwnedSource {
     pub fn from_values(pals: Vec<Value>) -> Result<Self, super::BreedingError> {
         let parsed: Vec<OwnedPal> = pals
             .into_iter()
-            .map(|v| serde_json::from_value::<OwnedPal>(v))
+            .map(serde_json::from_value::<OwnedPal>)
             .collect::<Result<_, _>>()?;
         Ok(Self { pals: parsed })
     }
@@ -146,7 +146,7 @@ impl SelectedSource {
     pub fn from_values(pals: Vec<Value>) -> Result<Self, super::BreedingError> {
         let parsed: Vec<SelectedPal> = pals
             .into_iter()
-            .map(|v| serde_json::from_value::<SelectedPal>(v))
+            .map(serde_json::from_value::<SelectedPal>)
             .collect::<Result<_, _>>()?;
         Ok(Self {
             selected: parsed,

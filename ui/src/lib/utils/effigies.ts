@@ -65,19 +65,24 @@ export function clampCount(count: number, cumulativeMax: number): number {
 	return Math.max(0, Math.min(count, cumulativeMax));
 }
 
-/** The `status_point_list` patch that syncs every relic stat's rank to its
- *  staged count, the way PalSavTools' ability PUT does: setting a type's
- *  count invests that many effigies, so the rank follows the same thresholds.
- *  Types without loaded relic data are skipped -- their caps are unknown. */
+/** The `status_point_list` patch that syncs a relic stat's rank to its staged
+ *  count, the way PalSavTools' ability PUT does: setting a type's count invests
+ *  that many effigies, so the rank follows the same thresholds. Only types
+ *  whose staged count differs from the loaded one are patched -- held and
+ *  spent are independent, so an untouched type keeps its stored (bought)
+ *  rank instead of being reset to `rankForCount(held)`. Types without loaded
+ *  relic data are skipped -- their caps are unknown. */
 export function deriveStatusPatches(
-	values: Record<string, number>,
+	staged: Record<string, number>,
+	loaded: Record<string, number>,
 	relics: Record<string, RelicRankData>
 ): Record<string, number> {
 	const patches: Record<string, number> = {};
 	for (const relicKey of RELIC_ORDER) {
 		const entry = relics[relicKey];
 		if (!entry) continue;
-		patches[statKeyFor(relicKey)] = rankForCount(entry.per_rank, values[relicKey] ?? 0);
+		if ((staged[relicKey] ?? 0) === (loaded[relicKey] ?? 0)) continue;
+		patches[statKeyFor(relicKey)] = rankForCount(entry.per_rank, staged[relicKey] ?? 0);
 	}
 	return patches;
 }

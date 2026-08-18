@@ -39,16 +39,22 @@
 
 	// Empty until the game-data fetch lands; editors stay disabled without caps.
 	let relics = $state<Record<string, RelicRankData>>({});
+	let relicsFailed = $state(false);
 	$effect(() => {
+		relicsFailed = false;
 		relicData
 			.getRelicData()
 			.then((data) => (relics = data))
-			.catch((error) => console.error('Failed to load relic data; effigy editing disabled', error));
+			.catch((error) => {
+				console.error('Failed to load relic data; effigy editing disabled', error);
+				relicsFailed = true;
+			});
 	});
 
-	// A pre-1.0 save carries no RelicPossessNumMap at all: counts read as
-	// absent, not zero, and nothing here is editable.
-	let supported = $derived(player.relic_possess_num_map !== undefined);
+	// A pre-1.0 save carries no RelicPossessNumMap at all: the wire sends the
+	// field as JSON `null`, counts read as absent (not zero), and nothing here
+	// is editable.
+	let supported = $derived(player.relic_possess_num_map != null);
 
 	// Working copy of the counts, re-staged whenever the loaded player changes.
 	let values = $state<Record<string, number>>({});
@@ -158,8 +164,13 @@
 	function apply(): void {
 		const committed = { ...values };
 		// Ranks follow the staged counts exactly the way PalSavTools' ability
-		// write does: setting a type's count invests that many effigies.
-		Object.assign(player.status_point_list, deriveStatusPatches(committed, relics));
+		// write does: setting a type's count invests that many effigies. Only
+		// types whose count changed are patched -- untouched types keep the
+		// ranks their spent effigies bought.
+		Object.assign(
+			player.status_point_list,
+			deriveStatusPatches(committed, player.relic_possess_num_map ?? {}, relics)
+		);
 		player.relic_possess_num_map = committed;
 		player.state = EntryState.MODIFIED;
 		toast.add(m.effigies_updated(), undefined, 'success');
@@ -170,7 +181,12 @@
 	}
 </script>
 
-{#if Object.keys(relics).length === 0}
+{#if relicsFailed}
+	<div class="flex items-center justify-center gap-1.5 py-16">
+		<TriangleAlert size={14} class="text-warning-500" />
+		<p class="text-warning-500 text-xs">{m.failed_load_entity({ entity: m.edit_effigies() })}</p>
+	</div>
+{:else if Object.keys(relics).length === 0}
 	<div class="flex justify-center py-16">
 		<Spinner size="size-6" />
 	</div>
