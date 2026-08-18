@@ -448,11 +448,12 @@ function Ensure-Wasm([bool]$rebuild) {
     # Existence of psp_bg.wasm alone is NOT a safe skip condition: psp.js is the
     # committed placeholder while psp_bg.wasm is gitignored, so any git
     # checkout/pull/stash restores the throwing stub over the real JS entry
-    # while the stale .wasm survives. Detect that mismatch, plus Rust sources
-    # newer than the artifact, and rebuild in both cases. (Mirrors ensure_wasm
-    # in easyrun.sh.)
+    # while the stale .wasm survives. Detect that mismatch, an incomplete
+    # package (interrupted build), and Rust sources newer than the artifact —
+    # rebuild in all three cases. (Mirrors ensure_wasm in easyrun.sh.)
     $wasmFile = Join-Path $WasmOut "psp_bg.wasm"
     $entryJs  = Join-Path $WasmOut "psp.js"
+    $pkgJson  = Join-Path $WasmOut "package.json"
     $stubMarker = "psp wasm not built" # text baked into the committed psp.js placeholder
 
     $reason = $null
@@ -460,7 +461,9 @@ function Ensure-Wasm([bool]$rebuild) {
         $reason = "-RebuildWasm"
     } elseif (-not (Test-Path $wasmFile)) {
         $reason = "psp_bg.wasm missing"
-    } elseif ((Test-Path $entryJs) -and (Select-String -Path $entryJs -Pattern $stubMarker -Quiet)) {
+    } elseif (-not (Test-Path $pkgJson) -or -not (Test-Path $entryJs)) {
+        $reason = "incomplete wasm package (interrupted build?)"
+    } elseif (Select-String -Path $entryJs -Pattern $stubMarker -Quiet) {
         $reason = "psp.js is the committed placeholder (git restored it over the build output)"
     } else {
         # Staleness: newest workspace Rust source vs the artifact. mtime-based,
@@ -490,10 +493,24 @@ function Ensure-Wasm([bool]$rebuild) {
     if (-not $cargo)    { Die "cargo not found — run .\easyrun.ps1 -Check first." }
     if (-not $wasmPack) { Die "wasm-pack not found — run .\easyrun.ps1 -InstallWasm first." }
     Log-Info "Building psp-web (wasm-pack): $reason"
-    # Clear the out-dir so no committed placeholder — or stray output from a
-    # misnamed run (e.g. psp_web* from ui/package.json's build:wasm without
-    # --out-name) — shadows the real output.
-    if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
+    # Clear only GENERATED output, never the committed stubs: an interrupted
+    # build must still leave a resolvable $lib/wasm/psp behind. In a git work
+    # tree, `git clean -fdx` scoped to the out-dir removes exactly the
+    # untracked artifacts while the tracked placeholder files survive for
+    # wasm-pack to overwrite. Outside a work tree (or without git) fall back
+    # to removing the whole directory. (Mirrors ensure_wasm in easyrun.sh.)
+    $cleaned = $false
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        Push-Location $RepoRoot
+        try {
+            $rel = $WasmOut.Substring($RepoRoot.Length).TrimStart('\', '/')
+            & git clean -fdx -- $rel *> $null
+            $cleaned = ($LASTEXITCODE -eq 0)
+        } catch { } finally { Pop-Location }
+    }
+    if (-not $cleaned) {
+        if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
+    }
     Push-Location $PspWebDir
     try {
         & $wasmPack build --target web --out-name psp --out-dir $WasmOut

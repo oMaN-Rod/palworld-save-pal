@@ -498,11 +498,13 @@ ensure_wasm() {
     # Existence of psp_bg.wasm alone is NOT a safe skip condition: psp.js is the
     # committed placeholder while psp_bg.wasm is gitignored, so any git
     # checkout/pull/stash restores the throwing stub over the real JS entry
-    # while the stale .wasm survives. Detect that mismatch, plus Rust sources
-    # newer than the artifact, and rebuild in both cases.
+    # while the stale .wasm survives. Detect that mismatch, an incomplete
+    # package (interrupted build), and Rust sources newer than the artifact —
+    # rebuild in all three cases.
     local rebuild="${1:-0}"
     local wasm_file="$WASM_OUT/psp_bg.wasm"
     local entry_js="$WASM_OUT/psp.js"
+    local pkg_json="$WASM_OUT/package.json"
     local stub_marker='psp wasm not built' # text baked into the committed psp.js placeholder
 
     local reason=""
@@ -510,7 +512,9 @@ ensure_wasm() {
         reason="--rebuild-wasm"
     elif [[ ! -f "$wasm_file" ]]; then
         reason="psp_bg.wasm missing"
-    elif [[ -f "$entry_js" ]] && grep -q "$stub_marker" "$entry_js" 2>/dev/null; then
+    elif [[ ! -f "$pkg_json" || ! -f "$entry_js" ]]; then
+        reason="incomplete wasm package (interrupted build?)"
+    elif grep -q "$stub_marker" "$entry_js" 2>/dev/null; then
         reason="psp.js is the committed placeholder (git restored it over the build output)"
     else
         # Staleness: newest workspace Rust source vs the artifact. mtime-based,
@@ -539,10 +543,17 @@ ensure_wasm() {
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found — run ./easyrun.sh --check first."
     wasm_pack="$(resolve_tool wasm-pack || true)"; [[ -n "$wasm_pack" ]] || die "wasm-pack not found — run ./easyrun.sh --install-wasm first."
     log_info "Building psp-web (wasm-pack): $reason"
-    # Clear the out-dir so no committed placeholder — or stray output from a
-    # misnamed run (e.g. psp_web* from ui/package.json's build:wasm without
-    # --out-name) — shadows the real output.
-    rm -rf "$WASM_OUT"
+    # Clear only GENERATED output, never the committed stubs: an interrupted
+    # build must still leave a resolvable $lib/wasm/psp behind. In a git work
+    # tree, `git clean -fdx` scoped to the out-dir removes exactly the
+    # untracked artifacts (psp_bg.wasm, stray psp_web* output, wasm-pack's
+    # .gitignore) while the tracked placeholder files survive for wasm-pack to
+    # overwrite. Outside a work tree nothing is tracked — fall back to rm -rf.
+    if ( cd "$REPO_ROOT" && git rev-parse --is-inside-work-tree >/dev/null 2>&1 ); then
+        ( cd "$REPO_ROOT" && git clean -fdx -- "${WASM_OUT#"$REPO_ROOT"/}" ) >/dev/null 2>&1 || true
+    else
+        rm -rf "$WASM_OUT"
+    fi
     # --out-name psp keeps output aligned with the committed placeholder, the
     # worker import ($lib/wasm/psp), and the .gitignore (psp_bg.wasm).
     ( cd "$PSP_WEB_DIR" && "$wasm_pack" build --target web --out-name psp --out-dir "$WASM_OUT" ) >&2 || \
