@@ -114,3 +114,24 @@ extern "C" {
 
     pub fn luaopen_base(state: *mut lua_State) -> c_int;
 }
+
+// The remaining standard library names, as NUL-terminated byte strings so they
+// can be passed straight to the C API without allocating. These mirror the
+// `LUA_*LIBNAME` macros in lualib.h.
+pub const LUA_COLIBNAME: &[u8] = b"coroutine\0";
+pub const LUA_MATHLIBNAME: &[u8] = b"math\0";
+pub const LUA_STRLIBNAME: &[u8] = b"string\0";
+pub const LUA_TABLIBNAME: &[u8] = b"table\0";
+pub const LUA_UTF8LIBNAME: &[u8] = b"utf8\0";
+
+extern "C" {
+    pub fn luaopen_coroutine(state: *mut lua_State) -> c_int;
+    pub fn luaopen_math(state: *mut lua_State) -> c_int;
+    pub fn luaopen_string(state: *mut lua_State) -> c_int;
+    pub fn luaopen_table(state: *mut lua_State) -> c_int;
+    pub fn luaopen_utf8(state: *mut lua_State) -> c_int;
+
+    pub fn lua_pushnil(state: *mut lua_State);
+    /// Pops the value on top of the stack and stores it in global `name`.
+    pub fn lua_setglobal(state: *mut lua_State, name: *const c_char);
+}
