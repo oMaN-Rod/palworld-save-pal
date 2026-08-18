@@ -1,23 +1,23 @@
-import { describe, it, expect } from 'vitest';
-import * as THREE from 'three';
 import { MercatorCoordinate } from 'maplibre-gl';
-import {
-	selectBuckets,
-	sceneryInstanceMatrix,
-	projectedPixelDiameter,
-	meetsScreenSizeThreshold,
-	mergeRunsByMesh,
-	bakeInstances,
-	composeInstanceMatrices,
-	stabilizeScalar,
-	SCENERY_MIN_PIXELS,
-	SCENERY_SCALAR_EPSILON
-} from './sceneryLayer';
-import { MESH_FLIP } from './structureLayer';
+import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { ueYawToThreeQuaternion } from './coords3d';
-import { worldToPixel } from './utils';
 import { pixelToLngLat } from './mercator';
 import type { SceneryBucketData, SceneryRun, SceneryStream } from './sceneryFormat';
+import {
+	bakeInstances,
+	composeInstanceMatrices,
+	meetsScreenSizeThreshold,
+	mergeRunsByMesh,
+	projectedPixelDiameter,
+	SCENERY_MIN_PIXELS,
+	SCENERY_SCALAR_EPSILON,
+	sceneryInstanceMatrix,
+	selectBuckets,
+	stabilizeScalar
+} from './sceneryLayer';
+import { MESH_FLIP } from './structureLayer';
+import { worldToPixel } from './utils';
 
 const bucket = (
 	minX: number,
@@ -26,7 +26,11 @@ const bucket = (
 	maxY: number,
 	runs: SceneryRun[] = []
 ): SceneryBucketData => ({
-	minX, minY, maxX, maxY, runs
+	minX,
+	minY,
+	maxX,
+	maxY,
+	runs
 });
 
 const run = (meshIndex: number): SceneryRun => ({
@@ -71,16 +75,22 @@ describe('selectBuckets', () => {
 	});
 
 	it('includes a bucket that merely touches the view edge', () => {
-		expect(selectBuckets([bucket(0, 0, 10, 10)], { minX: 10, minY: 10, maxX: 20, maxY: 20 })).toEqual([0]);
+		expect(
+			selectBuckets([bucket(0, 0, 10, 10)], { minX: 10, minY: 10, maxX: 20, maxY: 20 })
+		).toEqual([0]);
 	});
 
 	it('excludes buckets entirely outside the view', () => {
-		expect(selectBuckets([bucket(0, 0, 10, 10)], { minX: 11, minY: 11, maxX: 20, maxY: 20 })).toEqual([]);
+		expect(
+			selectBuckets([bucket(0, 0, 10, 10)], { minX: 11, minY: 11, maxX: 20, maxY: 20 })
+		).toEqual([]);
 	});
 
 	it('returns every bucket when the view covers the world', () => {
 		const buckets = [bucket(0, 0, 10, 10), bucket(20, 20, 30, 30), bucket(-5, -5, 0, 0)];
-		expect(selectBuckets(buckets, { minX: -1000, minY: -1000, maxX: 1000, maxY: 1000 })).toEqual([0, 1, 2]);
+		expect(selectBuckets(buckets, { minX: -1000, minY: -1000, maxX: 1000, maxY: 1000 })).toEqual([
+			0, 1, 2
+		]);
 	});
 
 	it('handles an empty bucket list', () => {
@@ -154,8 +164,24 @@ describe('sceneryInstanceMatrix', () => {
 	it('maps two instances at the same worldZ but very different latitudes to the same mercator height', () => {
 		const worldZ = 5000;
 		const cmToMerc = 0.6;
-		const near = sceneryInstanceMatrix(-1099400, 0, worldZ, [0, 0, 0, 1], [1, 1, 1], 'MainMap', cmToMerc);
-		const far = sceneryInstanceMatrix(349400, 0, worldZ, [0, 0, 0, 1], [1, 1, 1], 'MainMap', cmToMerc);
+		const near = sceneryInstanceMatrix(
+			-1099400,
+			0,
+			worldZ,
+			[0, 0, 0, 1],
+			[1, 1, 1],
+			'MainMap',
+			cmToMerc
+		);
+		const far = sceneryInstanceMatrix(
+			349400,
+			0,
+			worldZ,
+			[0, 0, 0, 1],
+			[1, 1, 1],
+			'MainMap',
+			cmToMerc
+		);
 		expect(near.elements[14]).toBeCloseTo(far.elements[14], 12);
 		expect(near.elements[14]).toBeCloseTo(worldZ * cmToMerc, 12);
 	});
@@ -336,7 +362,14 @@ describe('bakeInstances + composeInstanceMatrices', () => {
 		const r = instanceRun(0, [instances[1]]);
 		const target = new Float32Array(32).fill(7);
 
-		const count = composeInstanceMatrices(bakeInstances([r], 'MainMap'), 2, cmToMerc, 1000, target, 1);
+		const count = composeInstanceMatrices(
+			bakeInstances([r], 'MainMap'),
+			2,
+			cmToMerc,
+			1000,
+			target,
+			1
+		);
 
 		expect(count).toBe(1);
 		for (let e = 0; e < 16; e++) {

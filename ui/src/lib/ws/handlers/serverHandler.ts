@@ -1,5 +1,5 @@
 import { getServerState, getToastState } from '$states';
-import type { Server, ServerMod, ServerApiResponse, ServerStatus, ContainerStats } from '$types';
+import type { ContainerStats, Server, ServerApiResponse, ServerMod, ServerStatus } from '$types';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '$ws/types';
 
@@ -150,11 +150,7 @@ export const toggleServerModHandler: WSMessageHandler = {
 			mod.enabled = data.enabled;
 			state.mods = [...state.mods];
 		}
-		toast.add(
-			`${data.mod_name} ${data.enabled ? 'enabled' : 'disabled'}`,
-			'Success',
-			'success'
-		);
+		toast.add(`${data.mod_name} ${data.enabled ? 'enabled' : 'disabled'}`, 'Success', 'success');
 	}
 };
 

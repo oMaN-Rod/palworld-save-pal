@@ -232,7 +232,11 @@ pub async fn handle_select_gamepass_save(
     // can still find the original containers if this load returns early.
     ctx.session.selected_gamepass_save = ctx.session.gamepass_saves.get(&save_id).cloned();
 
-    let container_dir = PathBuf::from(psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir);
+    let container_dir = PathBuf::from(
+        psp_db::settings::get_settings(&*ctx.app.driver)
+            .await?
+            .save_dir,
+    );
     let index = ContainerIndex::read_from_dir(&container_dir)?;
     let containers = index.latest_save_containers(&save_id);
 
@@ -374,8 +378,10 @@ fn emit_convert_canceled(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
 
 /// A soft convert failure under the same `convert_save_format` type.
 fn emit_convert_error(ctx: &mut HandlerCtx<'_>, message: String) -> Result<(), HandlerError> {
-    ctx.emitter
-        .emit(MessageType::ConvertSaveFormat, &serde_json::json!({"error": message}));
+    ctx.emitter.emit(
+        MessageType::ConvertSaveFormat,
+        &serde_json::json!({"error": message}),
+    );
     Ok(())
 }
 
@@ -406,7 +412,11 @@ async fn resolve_convert_output_dir(ctx: &mut HandlerCtx<'_>) -> Result<Option<P
     let saved_dir = psp_db::settings::saved_save_dir(&*ctx.app.driver)
         .await
         .map_err(|error| error.to_string())?;
-    Ok(ctx.app.dialogs.pick_folder(saved_dir.map(PathBuf::from)).await)
+    Ok(ctx
+        .app
+        .dialogs
+        .pick_folder(saved_dir.map(PathBuf::from))
+        .await)
 }
 
 async fn extract_named_gamepass_save_to_steam(
@@ -429,7 +439,10 @@ async fn extract_named_gamepass_save_to_steam(
     let index = ContainerIndex::read_from_dir(&container_dir)?;
     let containers = index.latest_save_containers(save_id);
     if containers.get("Level").is_none() {
-        return emit_convert_error(ctx, format!("Save {save_id} not found in GamePass containers."));
+        return emit_convert_error(
+            ctx,
+            format!("Save {save_id} not found in GamePass containers."),
+        );
     }
     let save_dir = gamepass_convert::extract_containers_to_steam_dir(
         &container_dir,

@@ -219,8 +219,10 @@ pub async fn handle_load_source_save(
                 return Ok(());
             }
             Err(message) => {
-                ctx.emitter
-                    .emit(MessageType::LoadSourceSave, &serde_json::json!({"error": message}));
+                ctx.emitter.emit(
+                    MessageType::LoadSourceSave,
+                    &serde_json::json!({"error": message}),
+                );
                 return Ok(());
             }
         }

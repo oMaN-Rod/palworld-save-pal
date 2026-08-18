@@ -1,5 +1,9 @@
 [data-theme='light'] {
-	--color-text-muted: color-mix(in srgb, var(--color-surface-500) 78%, var(--color-primary-500) 22%);
+	--color-text-muted: color-mix(
+		in srgb,
+		var(--color-surface-500) 78%,
+		var(--color-primary-500) 22%
+	);
 	--color-text-muted-foreground: color-mix(
 		in srgb,
 		var(--color-surface-600) 74%,

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { buildArchetypeGeometry } from './proxyGeometry';
 
 const bbox = (g: THREE.BufferGeometry) => {

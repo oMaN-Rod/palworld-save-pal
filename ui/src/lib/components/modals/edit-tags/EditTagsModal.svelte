@@ -198,20 +198,11 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<Button
-				type="button"
-				variant="neutral"
-				onclick={() => handleClose(false)}
-			>
+			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
 				<X class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
-			<Button
-				type="button"
-				variant="primary"
-				onclick={() => handleClose(true)}
-				data-modal-primary
-			>
+			<Button type="button" variant="primary" onclick={() => handleClose(true)} data-modal-primary>
 				<Save class="h-4 w-4" />
 				{m.save_changes()}
 			</Button>

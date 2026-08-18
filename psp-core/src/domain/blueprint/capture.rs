@@ -27,7 +27,10 @@ pub fn map_object_id_is_name_property(properties: &Properties) -> bool {
 }
 
 fn map_object_model(object_props: &Properties) -> Option<&PalMapModel> {
-    let model = object_props.0.get(&PropertyKey::from("Model")).and_then(props::struct_props)?;
+    let model = object_props
+        .0
+        .get(&PropertyKey::from("Model"))
+        .and_then(props::struct_props)?;
     match model.0.get(&PropertyKey::from("RawData"))? {
         Property::Struct(StructValue::Game(PalStruct::MapModel(model))) => Some(model),
         _ => None,
@@ -47,8 +50,10 @@ pub(crate) fn map_object_model_mut(object_props: &mut Properties) -> Option<&mut
 }
 
 fn map_object_concrete_model(object_props: &Properties) -> Option<&PalMapConcreteModel<Arch>> {
-    let concrete =
-        object_props.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)?;
+    let concrete = object_props
+        .0
+        .get(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props)?;
     match concrete.0.get(&PropertyKey::from("RawData"))? {
         Property::Struct(StructValue::Game(PalStruct::MapConcreteModel(model))) => Some(model),
         _ => None,
@@ -75,8 +80,10 @@ pub(crate) fn map_object_concrete_model_mut(
 /// Mutable access to a structure's `Model.Connector.RawData`, present only on
 /// structures that can be wired to a neighbor (conveyors, pipes, ...).
 pub(crate) fn map_object_connector_mut(object_props: &mut Properties) -> Option<&mut PalConnector> {
-    let model =
-        object_props.0.get_mut(&PropertyKey::from("Model")).and_then(props::struct_props_mut)?;
+    let model = object_props
+        .0
+        .get_mut(&PropertyKey::from("Model"))
+        .and_then(props::struct_props_mut)?;
     let connector = model
         .0
         .get_mut(&PropertyKey::from("Connector"))
@@ -93,18 +100,24 @@ pub(crate) fn for_each_module_raw(
     properties: &Properties,
     mut visit: impl FnMut(&PalMapConcreteModelModule),
 ) {
-    let Some(concrete) =
-        properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)
+    let Some(concrete) = properties
+        .0
+        .get(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props)
     else {
         return;
     };
-    let Some(module_entries) =
-        concrete.0.get(&PropertyKey::from("ModuleMap")).and_then(props::map_entries)
+    let Some(module_entries) = concrete
+        .0
+        .get(&PropertyKey::from("ModuleMap"))
+        .and_then(props::map_entries)
     else {
         return;
     };
     for module in module_entries {
-        let Some(module_props) = props::struct_props(&module.value) else { continue };
+        let Some(module_props) = props::struct_props(&module.value) else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
             module_props.0.get(&PropertyKey::from("RawData"))
         {
@@ -133,7 +146,9 @@ pub(crate) fn for_each_module_raw_mut(
         return;
     };
     for module in module_entries {
-        let Some(module_props) = props::struct_props_mut(&mut module.value) else { continue };
+        let Some(module_props) = props::struct_props_mut(&mut module.value) else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
             module_props.0.get_mut(&PropertyKey::from("RawData"))
         {
@@ -149,7 +164,9 @@ pub fn structure_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     blueprint
         .structures
         .iter()
-        .filter_map(|s| map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.instance_id)))
+        .filter_map(|s| {
+            map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.instance_id))
+        })
         .collect()
 }
 
@@ -168,11 +185,14 @@ pub fn structure_concrete_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
 /// A `WorkSaveData` element's `RawData.base_data.id` -- the work's own
 /// identity. `None` for a work type that serializes no work base.
 pub fn work_base_id(value: &StructValue) -> Option<Uuid> {
-    let StructValue::Struct(work_props) = value else { return None };
+    let StructValue::Struct(work_props) = value else {
+        return None;
+    };
     match work_props.0.get(&PropertyKey::from("RawData"))? {
-        Property::Struct(StructValue::Game(PalStruct::Work(raw))) => {
-            raw.base_data.as_ref().map(|base| props::guid_to_uuid(&base.id))
-        }
+        Property::Struct(StructValue::Game(PalStruct::Work(raw))) => raw
+            .base_data
+            .as_ref()
+            .map(|base| props::guid_to_uuid(&base.id)),
         _ => None,
     }
 }
@@ -192,10 +212,9 @@ pub fn model_concrete_reference_resolves(structure: &BlueprintStructure) -> bool
 }
 
 pub fn first_build_player_uid(blueprint: &BaseBlueprint) -> Option<Uuid> {
-    blueprint
-        .structures
-        .iter()
-        .find_map(|s| map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.build_player_uid)))
+    blueprint.structures.iter().find_map(|s| {
+        map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.build_player_uid))
+    })
 }
 
 /// Every structure's `Model.RawData.build_player_uid`, one entry per
@@ -216,8 +235,10 @@ pub fn structure_build_player_uids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
 /// mirrored in the other.
 pub fn structure_concrete_player_uids(properties: &Properties) -> Vec<Uuid> {
     let mut uids = Vec::new();
-    let Some(concrete) =
-        properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)
+    let Some(concrete) = properties
+        .0
+        .get(&PropertyKey::from("ConcreteModel"))
+        .and_then(props::struct_props)
     else {
         return uids;
     };
@@ -356,8 +377,12 @@ fn capture_inner(
     let mut housed_container_ids: Vec<Uuid> = Vec::new();
     if let Some(map_objects) = world::map_object_values(&session.level)? {
         for value in map_objects {
-            let StructValue::Struct(object_props) = value else { continue };
-            let Some(model) = map_object_model(object_props) else { continue };
+            let StructValue::Struct(object_props) = value else {
+                continue;
+            };
+            let Some(model) = map_object_model(object_props) else {
+                continue;
+            };
             if props::guid_to_uuid(&model.base_camp_id_belong_to) != base_id {
                 continue;
             }
@@ -398,13 +423,18 @@ fn capture_inner(
     if !item_container_ids.is_empty() {
         let entries = world::item_container_map(&session.level)?;
         for container_id in &item_container_ids {
-            let Some(entry) = entries.iter().find(|entry| container_entry_id(entry) == Some(*container_id))
+            let Some(entry) = entries
+                .iter()
+                .find(|entry| container_entry_id(entry) == Some(*container_id))
             else {
                 continue;
             };
             let mut entry = entry.clone();
             if options.container_contents {
-                push_unique(&mut dynamic_item_ids, &container_slot_dynamic_item_ids(&entry));
+                push_unique(
+                    &mut dynamic_item_ids,
+                    &container_slot_dynamic_item_ids(&entry),
+                );
             } else {
                 empty_item_container_slots(&mut entry);
             }
@@ -415,7 +445,9 @@ fn capture_inner(
     let mut dynamic_items = Vec::new();
     if options.container_contents {
         for value in world::dynamic_item_values(&session.level)? {
-            let Some(id) = dynamic_item_local_id(value) else { continue };
+            let Some(id) = dynamic_item_local_id(value) else {
+                continue;
+            };
             if dynamic_item_ids.contains(&id) {
                 dynamic_items.push(value.clone());
             }
@@ -429,10 +461,12 @@ fn capture_inner(
     let mut character_containers = Vec::new();
     let mut character_instance_ids: Vec<Uuid> = Vec::new();
     if let Some(base_entry) = base_camp_entry(session, base_id)? {
-        if let Some((_guild_id, worker_container_id)) = guild::base_guild_and_container(base_entry) {
+        if let Some((_guild_id, worker_container_id)) = guild::base_guild_and_container(base_entry)
+        {
             let entries = world::character_container_map(&session.level)?;
-            if let Some(entry) =
-                entries.iter().find(|entry| container_entry_id(entry) == Some(worker_container_id))
+            if let Some(entry) = entries
+                .iter()
+                .find(|entry| container_entry_id(entry) == Some(worker_container_id))
             {
                 let mut worker_container = entry.clone();
                 if options.worker_pals {
@@ -450,16 +484,24 @@ fn capture_inner(
     if !housed_container_ids.is_empty() {
         let entries = world::character_container_map(&session.level)?;
         for container_id in &housed_container_ids {
-            if character_containers.iter().any(|entry| container_entry_id(entry) == Some(*container_id)) {
+            if character_containers
+                .iter()
+                .any(|entry| container_entry_id(entry) == Some(*container_id))
+            {
                 continue;
             }
-            let Some(entry) = entries.iter().find(|entry| container_entry_id(entry) == Some(*container_id))
+            let Some(entry) = entries
+                .iter()
+                .find(|entry| container_entry_id(entry) == Some(*container_id))
             else {
                 continue;
             };
             let mut entry = entry.clone();
             if options.housed_pals {
-                push_unique(&mut character_instance_ids, &character_container_slot_instance_ids(&entry));
+                push_unique(
+                    &mut character_instance_ids,
+                    &character_container_slot_instance_ids(&entry),
+                );
             } else {
                 empty_character_container_slots(&mut entry);
             }
@@ -471,7 +513,10 @@ fn capture_inner(
     if !character_instance_ids.is_empty() {
         let entries = world::character_map(&session.level)?;
         for instance_id in &character_instance_ids {
-            if let Some(entry) = entries.iter().find(|entry| world::entry_instance_id(entry) == Some(*instance_id)) {
+            if let Some(entry) = entries
+                .iter()
+                .find(|entry| world::entry_instance_id(entry) == Some(*instance_id))
+            {
                 characters.push(entry.clone());
             }
         }
@@ -490,7 +535,11 @@ fn capture_inner(
             } else {
                 String::new()
             },
-            source_base: if options.base_identity { base_name } else { String::new() },
+            source_base: if options.base_identity {
+                base_name
+            } else {
+                String::new()
+            },
             created_at: 0,
             structure_count: structures.len() as u32,
             footprint_radius: area_range,
@@ -521,10 +570,16 @@ pub fn module_target_container_ids(properties: &Properties) -> (Vec<Uuid>, Vec<U
     let mut item_ids = Vec::new();
     let mut character_ids = Vec::new();
     for_each_module_raw(properties, |raw| match &raw.data {
-        PalMapConcreteModelModuleData::ItemContainer { target_container_id, .. } => {
+        PalMapConcreteModelModuleData::ItemContainer {
+            target_container_id,
+            ..
+        } => {
             item_ids.push(props::guid_to_uuid(target_container_id));
         }
-        PalMapConcreteModelModuleData::CharacterContainer { target_container_id, .. } => {
+        PalMapConcreteModelModuleData::CharacterContainer {
+            target_container_id,
+            ..
+        } => {
             character_ids.push(props::guid_to_uuid(target_container_id));
         }
         _ => {}
@@ -558,12 +613,16 @@ pub fn source_origin(blueprint: &BaseBlueprint) -> Option<(f64, f64, f64, f64)> 
 /// `ItemContainerSaveData` entry.
 pub fn container_slot_dynamic_item_ids(entry: &MapEntry) -> Vec<Uuid> {
     let mut ids = Vec::new();
-    let Some(value_props) = props::struct_props(&entry.value) else { return ids };
+    let Some(value_props) = props::struct_props(&entry.value) else {
+        return ids;
+    };
     let Some(slots) = props::get(value_props, &["Slots"]).and_then(props::struct_values) else {
         return ids;
     };
     for slot in slots {
-        let StructValue::Struct(slot_props) = slot else { continue };
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw)))) =
             slot_props.0.get(&PropertyKey::from("RawData"))
         {
@@ -580,12 +639,16 @@ pub fn container_slot_dynamic_item_ids(entry: &MapEntry) -> Vec<Uuid> {
 /// `CharacterContainerSaveData` entry.
 pub fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
     let mut ids = Vec::new();
-    let Some(value_props) = props::struct_props(&entry.value) else { return ids };
+    let Some(value_props) = props::struct_props(&entry.value) else {
+        return ids;
+    };
     let Some(slots) = props::get(value_props, &["Slots"]).and_then(props::struct_values) else {
         return ids;
     };
     for slot in slots {
-        let StructValue::Struct(slot_props) = slot else { continue };
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
             slot_props.0.get(&PropertyKey::from("RawData"))
         {
@@ -602,13 +665,17 @@ pub fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
 /// any: the slot count is the base's worker capacity, which the blueprint keeps
 /// even at a layer that takes none of the pals occupying them.
 fn empty_character_container_slots(entry: &mut MapEntry) {
-    let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
+        return;
+    };
     let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
     else {
         return;
     };
     for slot in slots {
-        let StructValue::Struct(slot_props) = slot else { continue };
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
             slot_props.0.get_mut(&PropertyKey::from("RawData"))
         {
@@ -621,13 +688,17 @@ fn empty_character_container_slots(entry: &mut MapEntry) {
 /// travels with the blueprint (a structure that references it must find it in
 /// the placed save), but carries no items when `container_contents` is off.
 fn empty_item_container_slots(entry: &mut MapEntry) {
-    let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
+    let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
+        return;
+    };
     let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
     else {
         return;
     };
     for slot in slots {
-        let StructValue::Struct(slot_props) = slot else { continue };
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw)))) =
             slot_props.0.get_mut(&PropertyKey::from("RawData"))
         {
@@ -641,11 +712,13 @@ fn empty_item_container_slots(entry: &mut MapEntry) {
 
 /// A `DynamicItemSaveData` element's `RawData.id.local_id_in_created_world`.
 pub fn dynamic_item_local_id(value: &StructValue) -> Option<Uuid> {
-    let StructValue::Struct(item_props) = value else { return None };
+    let StructValue::Struct(item_props) = value else {
+        return None;
+    };
     match item_props.0.get(&PropertyKey::from("RawData")) {
-        Some(Property::Struct(StructValue::Game(PalStruct::DynamicItem(dynamic_item)))) => {
-            Some(props::guid_to_uuid(&dynamic_item.id.local_id_in_created_world))
-        }
+        Some(Property::Struct(StructValue::Game(PalStruct::DynamicItem(dynamic_item)))) => Some(
+            props::guid_to_uuid(&dynamic_item.id.local_id_in_created_world),
+        ),
         _ => None,
     }
 }
@@ -654,8 +727,11 @@ pub fn dynamic_item_local_id(value: &StructValue) -> Option<Uuid> {
 /// just its `Properties`) so `guild::base_guild_and_container` can read the
 /// `WorkerDirector` raw byte blob alongside `RawData`.
 fn base_camp_entry(session: &SaveSession, base_id: Uuid) -> Result<Option<&MapEntry>, CoreError> {
-    Ok(world::base_camp_map(&session.level)?
-        .and_then(|entries| entries.iter().find(|entry| props::as_uuid(&entry.key) == Some(base_id))))
+    Ok(world::base_camp_map(&session.level)?.and_then(|entries| {
+        entries
+            .iter()
+            .find(|entry| props::as_uuid(&entry.key) == Some(base_id))
+    }))
 }
 
 /// Locates `base_id`'s `BaseCampSaveData` entry and reads its typed
@@ -770,7 +846,11 @@ fn clear_access_config(properties: &mut Properties) {
     });
 
     for_each_module_raw_mut(properties, |raw| match &mut raw.data {
-        PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } => {
+        PalMapConcreteModelModuleData::PasswordLock {
+            password,
+            player_infos,
+            ..
+        } => {
             password.clear();
             player_infos.clear();
         }
@@ -807,13 +887,17 @@ fn works_of(
         return Ok(works);
     };
     for value in values {
-        let StructValue::Struct(work_props) = value else { continue };
+        let StructValue::Struct(work_props) = value else {
+            continue;
+        };
         let Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) =
             work_props.0.get(&PropertyKey::from("RawData"))
         else {
             continue;
         };
-        let Some(base_data) = &raw.base_data else { continue };
+        let Some(base_data) = &raw.base_data else {
+            continue;
+        };
         if props::guid_to_uuid(&base_data.base_camp_id_belong_to) != base_id {
             continue;
         }
@@ -828,14 +912,22 @@ fn works_of(
 }
 
 fn zero_work_progress(work_value: &mut StructValue) {
-    let StructValue::Struct(work_props) = work_value else { return };
+    let StructValue::Struct(work_props) = work_value else {
+        return;
+    };
     if let Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) =
         work_props.0.get_mut(&PropertyKey::from("RawData"))
     {
         use crate::ue::games::palworld::PalWorkTypeSpecificData;
         match &mut raw.work_specific_data {
-            PalWorkTypeSpecificData::Progress { current_work_amount, .. }
-            | PalWorkTypeSpecificData::ProgressMultiType { current_work_amount, .. } => {
+            PalWorkTypeSpecificData::Progress {
+                current_work_amount,
+                ..
+            }
+            | PalWorkTypeSpecificData::ProgressMultiType {
+                current_work_amount,
+                ..
+            } => {
                 *current_work_amount = 0.0;
             }
             _ => {}

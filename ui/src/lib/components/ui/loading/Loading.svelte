@@ -4,23 +4,23 @@
 	import { onMount } from 'svelte';
 
 	let {
-        label = '',
+		label = '',
 		loadingComplete = $bindable(false),
-        progressMessage = $bindable(''),
+		progressMessage = $bindable(''),
 		icon: Icon,
 		iconSize
 	}: {
-        label: string;
+		label: string;
 		loadingComplete?: boolean;
-        progressMessage?: string;
+		progressMessage?: string;
 		icon?: typeof Loader2;
 		iconSize?: number;
 	} = $props();
-    
-    let elapsed = $state(0);
-    let intervalId: ReturnType<typeof setInterval>;
 
-    onMount(() => {
+	let elapsed = $state(0);
+	let intervalId: ReturnType<typeof setInterval>;
+
+	onMount(() => {
 		intervalId = setInterval(() => {
 			elapsed += 1;
 		}, 1000);
@@ -49,10 +49,10 @@
 		<div class="loading-bar-track">
 			<div class="loading-bar-fill" class:loading-bar-done={loadingComplete}></div>
 		</div>
-        {#if progressMessage}
-            <span class="my-2">{progressMessage}</span>
-        {/if}
-        <Stopwatch class="text-secondary-400" bind:seconds={elapsed} />
+		{#if progressMessage}
+			<span class="my-2">{progressMessage}</span>
+		{/if}
+		<Stopwatch class="text-secondary-400" bind:seconds={elapsed} />
 	</div>
 </div>
 

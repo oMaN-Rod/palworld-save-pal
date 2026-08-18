@@ -30,7 +30,10 @@ pub struct CaptureOptions {
 
 impl CaptureOptions {
     pub fn blueprint() -> Self {
-        CaptureOptions { production_config: true, ..CaptureOptions::default() }
+        CaptureOptions {
+            production_config: true,
+            ..CaptureOptions::default()
+        }
     }
 
     pub fn configured() -> Self {

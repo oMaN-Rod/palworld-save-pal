@@ -1,3 +1,4 @@
+import { ASSET_DATA_PATH } from '$lib/constants';
 import {
 	activeSkillsData,
 	buildingsData,
@@ -6,14 +7,13 @@ import {
 	palsData,
 	passiveSkillsData,
 	technologiesData,
-	workSuitabilityData,
-	WORK_SUITABILITY_KEYS
+	WORK_SUITABILITY_KEYS,
+	workSuitabilityData
 } from '$lib/data';
-import { ASSET_DATA_PATH } from '$lib/constants';
+import type { ElementType, PalData, WorkSuitability } from '$types';
 import { assetLoader } from './assetLoader';
 import { skillFilter } from './colors';
 import { suitabilityImageMap } from './pals';
-import type { ElementType, PalData, WorkSuitability } from '$types';
 import type { WikiCategory } from './wikiCategories';
 
 export type WikiField = {
@@ -90,7 +90,11 @@ function field(record: Record<string, unknown>, ...path: string[]): string | num
 	return null;
 }
 
-function nameOr(key: string, record: Record<string, unknown> | undefined, ...path: string[]): string {
+function nameOr(
+	key: string,
+	record: Record<string, unknown> | undefined,
+	...path: string[]
+): string {
 	if (!record) return key;
 	const value = path.length > 0 ? get(record, ...path) : record.localized_name;
 	return typeof value === 'string' && value.length > 0 ? value : key;
@@ -387,8 +391,7 @@ export const DESCRIPTORS: Record<WikiCategory, WikiDescriptor> = {
 		fields: []
 	},
 	'work-suitability': {
-		loadJson: async () =>
-			Object.fromEntries(WORK_SUITABILITY_KEYS.map((key) => [key, {}])),
+		loadJson: async () => Object.fromEntries(WORK_SUITABILITY_KEYS.map((key) => [key, {}])),
 		runtime: () => workSuitabilityData.workSuitability,
 		displayName: (key, record) => nameOr(key, record),
 		icon: (key) => assetIcon(suitabilityImageMap[key as WorkSuitability]),

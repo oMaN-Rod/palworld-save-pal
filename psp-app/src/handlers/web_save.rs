@@ -62,7 +62,11 @@ impl StagedGvas {
                 let index = match self.players.iter().position(|p| p.uid == uid) {
                     Some(index) => index,
                     None => {
-                        self.players.push(StagedPlayer { uid, sav: None, dps: None });
+                        self.players.push(StagedPlayer {
+                            uid,
+                            sav: None,
+                            dps: None,
+                        });
                         self.players.len() - 1
                     }
                 };
@@ -89,7 +93,11 @@ impl StagedGvas {
             .into_iter()
             // A `_dps.sav` with no `.sav` beside it is not a player.
             .filter_map(|p| {
-                Some(GvasPlayerBytes { uid: p.uid, sav: p.sav?, dps: p.dps })
+                Some(GvasPlayerBytes {
+                    uid: p.uid,
+                    sav: p.sav?,
+                    dps: p.dps,
+                })
             })
             .collect();
         Ok(LoadSaveGvasBytes {
@@ -112,7 +120,10 @@ pub async fn handle_load_save_gvas_bytes(
         player_order.push(player.uid);
         player_file_refs.insert(
             player.uid,
-            PlayerFileData::Bytes { sav: Some(player.sav), dps: player.dps },
+            PlayerFileData::Bytes {
+                sav: Some(player.sav),
+                dps: player.dps,
+            },
         );
     }
 
@@ -160,7 +171,10 @@ pub fn export_manifest(session: &SaveSession) -> ExportManifest {
             names.push(format!("Players/{stem}_dps.sav"));
         }
     }
-    ExportManifest { world_name: session.world_name.clone(), names }
+    ExportManifest {
+        world_name: session.world_name.clone(),
+        names,
+    }
 }
 
 /// Serializes one manifest entry to GVAS on demand.
@@ -168,8 +182,12 @@ pub fn export_file(session: &SaveSession, name: &str) -> Result<Vec<u8>, Handler
     let missing = |what: &str| HandlerError::Other(format!("{what} is not loaded"));
     match name {
         LEVEL => Ok(session.level_gvas_bytes()?),
-        LEVEL_META => session.level_meta_gvas_bytes()?.ok_or_else(|| missing(LEVEL_META)),
-        WORLD_OPTION => session.world_option_gvas_bytes()?.ok_or_else(|| missing(WORLD_OPTION)),
+        LEVEL_META => session
+            .level_meta_gvas_bytes()?
+            .ok_or_else(|| missing(LEVEL_META)),
+        WORLD_OPTION => session
+            .world_option_gvas_bytes()?
+            .ok_or_else(|| missing(WORLD_OPTION)),
         _ => {
             let stem = name
                 .strip_prefix("Players/")
@@ -219,10 +237,13 @@ mod tests {
         let gvas = world1_level_gvas_bytes();
 
         let mut staged = StagedGvas::default();
-        staged.stage("level", "", gvas.clone()).expect("stage level");
+        staged
+            .stage("level", "", gvas.clone())
+            .expect("stage level");
         let payload = staged.take("world1".to_string()).expect("payload");
 
-        let mut arc = std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
+        let mut arc =
+            std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
         let mut current_id: Option<Uuid> = None;
         {
             let mut ctx = HandlerCtx {
@@ -235,9 +256,14 @@ mod tests {
                     arc: &mut arc,
                 }),
             };
-            handle_load_save_gvas_bytes(payload, &mut ctx).await.expect("load");
+            handle_load_save_gvas_bytes(payload, &mut ctx)
+                .await
+                .expect("load");
         }
-        assert_eq!(next_non_progress_frame(&mut test)["type"], "loaded_save_files");
+        assert_eq!(
+            next_non_progress_frame(&mut test)["type"],
+            "loaded_save_files"
+        );
 
         let session = test.session.save.as_ref().expect("a save is loaded");
         let manifest = export_manifest(session);
@@ -267,7 +293,8 @@ mod tests {
         staged.stage("level_meta", "", meta).expect("stage meta");
         let payload = staged.take("world1".to_string()).expect("payload");
 
-        let mut arc = std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
+        let mut arc =
+            std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
         let mut current_id: Option<Uuid> = None;
         {
             let mut ctx = HandlerCtx {
@@ -280,7 +307,9 @@ mod tests {
                     arc: &mut arc,
                 }),
             };
-            handle_load_save_gvas_bytes(payload, &mut ctx).await.expect("load");
+            handle_load_save_gvas_bytes(payload, &mut ctx)
+                .await
+                .expect("load");
         }
 
         let session = test.session.save.as_ref().expect("a save is loaded");
@@ -290,17 +319,23 @@ mod tests {
             "got {:?}",
             manifest.names
         );
-        assert_eq!(&export_file(session, "LevelMeta.sav").expect("export")[0..4], b"GVAS");
+        assert_eq!(
+            &export_file(session, "LevelMeta.sav").expect("export")[0..4],
+            b"GVAS"
+        );
     }
 
     #[tokio::test]
     async fn exporting_an_unknown_name_is_rejected() {
         let mut test = TestContext::new(|_| {}).await;
         let mut staged = StagedGvas::default();
-        staged.stage("level", "", world1_level_gvas_bytes()).expect("stage");
+        staged
+            .stage("level", "", world1_level_gvas_bytes())
+            .expect("stage");
         let payload = staged.take("world1".to_string()).expect("payload");
 
-        let mut arc = std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
+        let mut arc =
+            std::sync::Arc::new(tokio::sync::Mutex::new(psp_core::session::Session::new()));
         let mut current_id: Option<Uuid> = None;
         {
             let mut ctx = HandlerCtx {
@@ -313,7 +348,9 @@ mod tests {
                     arc: &mut arc,
                 }),
             };
-            handle_load_save_gvas_bytes(payload, &mut ctx).await.expect("load");
+            handle_load_save_gvas_bytes(payload, &mut ctx)
+                .await
+                .expect("load");
         }
 
         let session = test.session.save.as_ref().expect("a save is loaded");
@@ -341,7 +378,9 @@ mod tests {
     #[test]
     fn staging_rejects_an_unknown_slot() {
         let mut staged = StagedGvas::default();
-        let error = staged.stage("bogus", "", vec![1]).expect_err("unknown slot");
+        let error = staged
+            .stage("bogus", "", vec![1])
+            .expect_err("unknown slot");
         assert!(error.to_string().contains("bogus"), "got {error}");
     }
 
@@ -378,5 +417,4 @@ mod tests {
             }
         }
     }
-
 }

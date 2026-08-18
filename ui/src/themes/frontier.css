@@ -1,5 +1,9 @@
 [data-theme='frontier'] {
-	--color-text-muted: color-mix(in srgb, var(--color-surface-400) 80%, var(--color-primary-300) 20%);
+	--color-text-muted: color-mix(
+		in srgb,
+		var(--color-surface-400) 80%,
+		var(--color-primary-300) 20%
+	);
 	--color-text-muted-foreground: color-mix(
 		in srgb,
 		var(--color-surface-500) 72%,

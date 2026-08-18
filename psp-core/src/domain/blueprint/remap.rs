@@ -87,7 +87,9 @@ fn rewrite(remap: &IdRemap, guid: &mut FGuid) {
 }
 
 fn dynamic_item_local_id_mut(value: &mut StructValue) -> Option<&mut FGuid> {
-    let StructValue::Struct(item_props) = value else { return None };
+    let StructValue::Struct(item_props) = value else {
+        return None;
+    };
     match item_props.0.get_mut(&PropertyKey::from("RawData")) {
         Some(Property::Struct(StructValue::Game(PalStruct::DynamicItem(dynamic_item)))) => {
             Some(&mut dynamic_item.id.local_id_in_created_world)
@@ -97,7 +99,9 @@ fn dynamic_item_local_id_mut(value: &mut StructValue) -> Option<&mut FGuid> {
 }
 
 fn work_raw_mut(value: &mut StructValue) -> Option<&mut PalWork> {
-    let StructValue::Struct(work_props) = value else { return None };
+    let StructValue::Struct(work_props) = value else {
+        return None;
+    };
     match work_props.0.get_mut(&PropertyKey::from("RawData")) {
         Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) => Some(raw),
         _ => None,
@@ -105,17 +109,18 @@ fn work_raw_mut(value: &mut StructValue) -> Option<&mut PalWork> {
 }
 
 /// Every `WorkAssignMap` entry's typed `RawData` on one `WorkSaveData` element.
-fn for_each_work_assign_mut(
-    value: &mut StructValue,
-    mut visit: impl FnMut(&mut PalWorkAssign),
-) {
-    let StructValue::Struct(work_props) = value else { return };
+fn for_each_work_assign_mut(value: &mut StructValue, mut visit: impl FnMut(&mut PalWorkAssign)) {
+    let StructValue::Struct(work_props) = value else {
+        return;
+    };
     let Some(Property::Map(entries)) = work_props.0.get_mut(&PropertyKey::from("WorkAssignMap"))
     else {
         return;
     };
     for entry in entries {
-        let Some(assign_props) = props::struct_props_mut(&mut entry.value) else { continue };
+        let Some(assign_props) = props::struct_props_mut(&mut entry.value) else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::WorkAssign(raw)))) =
             assign_props.0.get_mut(&PropertyKey::from("RawData"))
         {
@@ -282,7 +287,9 @@ fn rewrite_worker_director_container(
     let Some(raw_data) = props::get_mut(base_camp, &["WorkerDirector", "RawData"]) else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else { return Ok(()) };
+    let Some(bytes) = props::as_byte_array_mut(raw_data) else {
+        return Ok(());
+    };
     let mut director = palbin::read_worker_director(bytes)?;
     director.container_id = remap.get(director.container_id).unwrap_or(Uuid::nil());
     *bytes = director.to_bytes();
@@ -301,7 +308,9 @@ fn substitute_guid_bytes(bytes: &mut [u8], substitutions: &HashMap<[u8; 16], [u8
     }
     let mut offset = 0;
     while offset + 16 <= bytes.len() {
-        let window: [u8; 16] = bytes[offset..offset + 16].try_into().expect("16-byte window");
+        let window: [u8; 16] = bytes[offset..offset + 16]
+            .try_into()
+            .expect("16-byte window");
         match substitutions.get(&window) {
             Some(replacement) => {
                 bytes[offset..offset + 16].copy_from_slice(replacement);
@@ -314,10 +323,16 @@ fn substitute_guid_bytes(bytes: &mut [u8], substitutions: &HashMap<[u8; 16], [u8
 
 fn rewrite_module_map(remap: &IdRemap, properties: &mut Properties) {
     capture::for_each_module_raw_mut(properties, |raw| match &mut raw.data {
-        PalMapConcreteModelModuleData::ItemContainer { target_container_id, .. } => {
+        PalMapConcreteModelModuleData::ItemContainer {
+            target_container_id,
+            ..
+        } => {
             rewrite(remap, target_container_id);
         }
-        PalMapConcreteModelModuleData::CharacterContainer { target_container_id, .. } => {
+        PalMapConcreteModelModuleData::CharacterContainer {
+            target_container_id,
+            ..
+        } => {
             rewrite(remap, target_container_id);
         }
         PalMapConcreteModelModuleData::Workee { target_work_id, .. } => {
@@ -358,7 +373,11 @@ fn rewrite_pal_container_back_pointer(remap: &IdRemap, entry: &mut MapEntry) {
     let Some(save_parameter) = world::entry_save_parameter_mut(entry) else {
         return;
     };
-    let key = if props::get(save_parameter, &["SlotID"]).is_some() { "SlotID" } else { "SlotId" };
+    let key = if props::get(save_parameter, &["SlotID"]).is_some() {
+        "SlotID"
+    } else {
+        "SlotId"
+    };
     if let Some(Property::Struct(StructValue::Guid(guid))) =
         props::get_mut(save_parameter, &[key, "ContainerId", "ID"])
     {
@@ -382,10 +401,15 @@ fn rewrite_work(remap: &IdRemap, work: &mut StructValue) {
             }
         }
         match &mut raw.work_specific_data {
-            PalWorkTypeSpecificData::ReviveCharacter { target_individual_id } => {
+            PalWorkTypeSpecificData::ReviveCharacter {
+                target_individual_id,
+            } => {
                 rewrite_instance_id(remap, target_individual_id);
             }
-            PalWorkTypeSpecificData::Assign { assigned_individual_id, .. } => {
+            PalWorkTypeSpecificData::Assign {
+                assigned_individual_id,
+                ..
+            } => {
                 rewrite_instance_id(remap, assigned_individual_id);
             }
             _ => {}
@@ -415,11 +439,15 @@ fn rebuild_work_collection(
         .filter(|id| !id.is_nil())
         .collect();
 
-    let Some(base_camp) = &mut blueprint.base_camp else { return Ok(()) };
+    let Some(base_camp) = &mut blueprint.base_camp else {
+        return Ok(());
+    };
     let Some(raw_data) = props::get_mut(base_camp, &["WorkCollection", "RawData"]) else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else { return Ok(()) };
+    let Some(bytes) = props::as_byte_array_mut(raw_data) else {
+        return Ok(());
+    };
     let mut collection = palbin::read_work_collection(bytes)?;
     collection.own_id = remap.new_for(collection.own_id);
     collection.work_ids = work_ids;

@@ -481,7 +481,9 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
         None,
     )
     .unwrap()
-    .expect("an available first slot (index 0) is accepted here, so the box-full quirk does not apply");
+    .expect(
+        "an available first slot (index 0) is accepted here, so the box-full quirk does not apply",
+    );
 
     assert_eq!(new_pal.storage_slot, 0);
     assert_eq!(new_pal.storage_id, worker_container_id);
@@ -572,7 +574,9 @@ fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> 
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::BaseCamp(Box::new(camp)))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::BaseCamp(
+            Box::new(camp),
+        ))),
     );
     value_properties.insert(
         "WorkerDirector",
@@ -601,7 +605,9 @@ fn guild_group_entry(guild_id: Uuid) -> MapEntry {
     };
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::GroupData(group_data))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::GroupData(
+            group_data,
+        ))),
     );
     MapEntry {
         key: guid_property(guild_id),
@@ -813,7 +819,9 @@ fn player_character_entry(player_id: Uuid) -> MapEntry {
     let mut value_props = Properties::default();
     value_props.insert(
         "RawData",
-        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(
+            character_data,
+        ))),
     );
     MapEntry {
         key: Property::Struct(StructValue::Struct(key_props)),

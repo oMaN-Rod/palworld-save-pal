@@ -1,8 +1,8 @@
 import compass from '$lib/assets/img/compass.webp';
 import {
+	ICON_ANCIENT_RUIN,
 	ICON_BASE,
 	ICON_BOSS,
-	ICON_ANCIENT_RUIN,
 	ICON_BOUNTY,
 	ICON_CAMP,
 	ICON_DUNGEON,

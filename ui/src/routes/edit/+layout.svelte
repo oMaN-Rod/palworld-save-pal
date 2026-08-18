@@ -21,6 +21,7 @@
 		KeyL: 'player',
 		KeyT: 'technologies',
 		KeyB: 'palbox',
+		KeyE: 'effigies',
 		KeyD: 'dps',
 		KeyG: 'guild',
 		KeyM: 'missions',
@@ -124,6 +125,12 @@
 					href="/edit/technologies"
 				/>
 				<KeyboardShortcut id="palbox-tab" text={m.palbox()} key="B" href="/edit/palbox" />
+				<KeyboardShortcut
+					id="effigies-tab"
+					text={m.edit_effigies()}
+					key="E"
+					href="/edit/effigies"
+				/>
 			{/if}
 			{#if appState.selectedPlayer?.dps}
 				<KeyboardShortcut id="dps-tab" text={m.dps()} key="D" href="/edit/dps" />

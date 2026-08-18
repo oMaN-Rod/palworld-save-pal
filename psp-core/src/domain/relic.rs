@@ -83,6 +83,13 @@ pub fn max_rank(data: &GameData, relic_key: &str) -> Option<i64> {
     entry(data, relic_key)?.get("max_rank")?.as_i64()
 }
 
+/// The most unspent relics of `relic_key` a player can hold: the sum of every
+/// `per_rank` step, i.e. what a fully-maxed type sits at. The Effigies editor
+/// clamps count edits to this. `None` for an unknown key.
+pub fn cumulative_max(data: &GameData, relic_key: &str) -> Option<i64> {
+    entry(data, relic_key)?.get("cumulative_max")?.as_i64()
+}
+
 /// The bonus granted at `rank`, e.g. swim_speed rank 11 -> 55.0 (percent). `None`
 /// for rank 0 (no ranks bought), an out-of-range rank, or an unknown key.
 pub fn effect_for_rank(data: &GameData, relic_key: &str, rank: i64) -> Option<f64> {

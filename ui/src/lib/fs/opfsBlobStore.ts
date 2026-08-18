@@ -13,7 +13,10 @@ async function dir(): Promise<FileSystemDirectoryHandle> {
 }
 
 function isQuota(e: unknown): boolean {
-	return e instanceof DOMException && (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED');
+	return (
+		e instanceof DOMException &&
+		(e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED')
+	);
 }
 
 export async function putBlob(path: string, bytes: Uint8Array): Promise<void> {

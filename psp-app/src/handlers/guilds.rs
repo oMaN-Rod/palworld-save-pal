@@ -103,10 +103,8 @@ pub async fn handle_delete_base(
         return Ok(());
     };
     psp_core::domain::guild::delete_base(session, &game_data, data.base_id)?;
-    ctx.emitter.emit(
-        MessageType::DeleteBase,
-        &json!({ "base_id": data.base_id }),
-    );
+    ctx.emitter
+        .emit(MessageType::DeleteBase, &json!({ "base_id": data.base_id }));
     Ok(())
 }
 

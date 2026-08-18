@@ -4,16 +4,20 @@
 //
 // This layer owns no map subscription: update() re-derives the viewport-culled
 // bucket set each call, so the caller must re-invoke it on camera move.
-import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
-import type { SceneryBucketData, SceneryRun, SceneryStream } from './sceneryFormat';
-import { MESH_FLIP, getSharedRenderer } from './structureLayer';
+import * as THREE from 'three';
 import { ueQuatToThree } from './coords3d';
-import { requestMesh, onMeshLoaded } from './meshLibrary';
-import { worldToPixel, pixelToWorld, type MapArea } from './utils';
-import { pixelToLngLat, lngLatToPixel } from './mercator';
+import { lngLatToPixel, pixelToLngLat } from './mercator';
+import { onMeshLoaded, requestMesh } from './meshLibrary';
+import type { SceneryBucketData, SceneryRun, SceneryStream } from './sceneryFormat';
+import {
+	createSceneryMaterial,
+	setSceneryMaterialMap,
+	setSceneryMaterialOpacity
+} from './sceneryMaterial';
 import { mosaicTexture, type TintMosaic } from './sceneryTint';
-import { createSceneryMaterial, setSceneryMaterialMap, setSceneryMaterialOpacity } from './sceneryMaterial';
+import { MESH_FLIP, getSharedRenderer } from './structureLayer';
+import { pixelToWorld, worldToPixel, type MapArea } from './utils';
 
 const MODEL_DIR = '/models/scenery';
 
@@ -56,7 +60,9 @@ export function sceneryInstanceMatrix(
 	const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
 	const anchorZ = worldZ * cmToMerc;
 	const rotation = MESH_FLIP.clone().multiply(
-		new THREE.Matrix4().makeRotationFromQuaternion(ueQuatToThree(quat[0], quat[1], quat[2], quat[3]))
+		new THREE.Matrix4().makeRotationFromQuaternion(
+			ueQuatToThree(quat[0], quat[1], quat[2], quat[3])
+		)
 	);
 	// A dimensionless Scale3D multiplier applied on top of meshLibrary's
 	// cm-per-unit geometry, in ghostLayer's (x, z, y) axis order.
@@ -147,7 +153,12 @@ export function bakeInstances(runs: SceneryRun[], area: MapArea): Float32Array {
 			const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
 
 			bakeRotation.makeRotationFromQuaternion(
-				ueQuatToThree(run.quats[i * 4], run.quats[i * 4 + 1], run.quats[i * 4 + 2], run.quats[i * 4 + 3])
+				ueQuatToThree(
+					run.quats[i * 4],
+					run.quats[i * 4 + 1],
+					run.quats[i * 4 + 2],
+					run.quats[i * 4 + 3]
+				)
 			);
 			bakeRotation.premultiply(MESH_FLIP);
 			const r = bakeRotation.elements;
@@ -370,7 +381,10 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			lastCmToMerc
 		);
 		// Read fresh rather than cached: worldSize changes with zoom.
-		const pixelsPerMercatorUnit = stabilizeScalar(map.transform.worldSize, lastPixelsPerMercatorUnit);
+		const pixelsPerMercatorUnit = stabilizeScalar(
+			map.transform.worldSize,
+			lastPixelsPerMercatorUnit
+		);
 
 		const view = currentViewBounds();
 		const bucketIndices = view
@@ -493,7 +507,9 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
+			camera.projectionMatrix = new THREE.Matrix4().fromArray(
+				args.defaultProjectionData.mainMatrix
+			);
 			renderer.resetState();
 			renderer.render(scene, camera);
 		},

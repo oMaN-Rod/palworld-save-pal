@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
-import {
-	PORTAL_DIM_DEFEATED,
-	PORTAL_RADIUS_CM,
-	PORTAL_HEIGHT_CM,
-	portalInstanceMatrix,
-	portalIntensity,
-	createPortalMeshes,
-	disposePortalMeshes
-} from './palPortal';
+import { describe, expect, it } from 'vitest';
+import { lngLatToPixel } from './mercator';
 import { palInstanceMatrix } from './palLayer';
+import {
+	createPortalMeshes,
+	disposePortalMeshes,
+	PORTAL_DIM_DEFEATED,
+	PORTAL_HEIGHT_CM,
+	PORTAL_RADIUS_CM,
+	portalInstanceMatrix,
+	portalIntensity
+} from './palPortal';
 import { buildPalPortalFC } from './palPortalFC';
 import { cmPerPx, worldToPixel } from './utils';
-import { lngLatToPixel } from './mercator';
 
 describe('portalIntensity', () => {
 	it('dims defeated bosses and leaves the rest at full', () => {
@@ -116,7 +116,7 @@ describe('portal depth state', () => {
 });
 
 describe('the ground ring moved to buildPalPortalFC', () => {
-	it('sizes the draped ring from this module\'s own PORTAL_RADIUS_CM, not a copy', () => {
+	it("sizes the draped ring from this module's own PORTAL_RADIUS_CM, not a copy", () => {
 		const boss = { key: 'anubis', x: -400000, y: -300000, z: 0, defeated: false };
 		const fc = buildPalPortalFC([boss], [], 'MainMap', 30);
 		const ring = (fc.features[0].geometry as GeoJSON.Polygon).coordinates[0];

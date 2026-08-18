@@ -3,10 +3,10 @@
 // but that scale. Both structureLayer matrix builders already reduce to
 // T(anchor.x, anchor.y, altitudeCm * cmToMerc) . R . S(cmToMerc) with
 // R = MESH_FLIP * yaw, which the tests use as the oracle here.
-import * as THREE from 'three';
 import { MercatorCoordinate } from 'maplibre-gl';
-import { MESH_FLIP } from './structureLayer';
+import * as THREE from 'three';
 import { ueYawToThreeQuaternion } from './coords3d';
+import { MESH_FLIP } from './structureLayer';
 
 export type StructureAnchorInput = {
 	lng: number;

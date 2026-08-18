@@ -10,10 +10,4 @@ export * from './pal';
 export * from './player';
 export * from './presets';
 export * from './shared';
-export {
-	LabResearch,
-	LabResearchControls,
-	Map,
-	MissionDetails,
-	MissionList
-};
+export { LabResearch, LabResearchControls, Map, MissionDetails, MissionList };

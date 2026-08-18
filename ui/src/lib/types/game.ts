@@ -223,6 +223,10 @@ export type Player = {
 	unlocked_fast_travel_points: string[];
 	collected_effigies: string[];
 	collected_relics: Record<string, string[]>;
+	/** Unspent effigy counts per relic type (bare key), from
+	 *  `RecordData.RelicPossessNumMap`. `undefined` on a pre-1.0 save that
+	 *  carries no map -- the Effigies editor shows as unsupported then. */
+	relic_possess_num_map?: Record<string, number>;
 	defeated_bosses: string[];
 };
 
@@ -350,6 +354,8 @@ export type SaveFile = {
 	world_name?: string;
 	size?: number;
 	world_option_present: boolean;
+	/** Server session backing this save; used as the overview stats cache key. */
+	session_id?: string;
 };
 export interface DynamicItem {
 	local_id: string;

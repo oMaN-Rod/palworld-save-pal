@@ -1,6 +1,5 @@
+import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
 import { describe, expect, it } from 'vitest';
-import { MAP_SIZE, worldToPixel } from './utils';
-import { lngLatToPixel } from './mercator';
 import {
 	buildBaseRadiusFC,
 	buildBossFC,
@@ -14,7 +13,8 @@ import {
 	type StructureFC
 } from './features';
 import { ICON_BOSS, ICON_BOUNTY } from './iconIds';
-import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
+import { lngLatToPixel } from './mercator';
+import { MAP_SIZE, worldToPixel } from './utils';
 
 const TREE_POINT = { x: 512112, y: -510663 };
 const MAIN_POINT = { x: -343155, y: 244585 };
@@ -46,10 +46,9 @@ describe('buildFastTravelFC', () => {
 	});
 
 	it('assigns unique numeric ids', () => {
-		const ids = buildFastTravelFC(
-			[points[0], { ...points[0], guid: 'C' }],
-			'MainMap'
-		).features.map((f) => f.id);
+		const ids = buildFastTravelFC([points[0], { ...points[0], guid: 'C' }], 'MainMap').features.map(
+			(f) => f.id
+		);
 		expect(new Set(ids).size).toBe(2);
 	});
 
@@ -210,10 +209,18 @@ describe('MAP_SIZE sanity', () => {
 const footprint = { sx: 400, sy: 200, sz: 300, ox: 0, oy: 0, oz: 0, typeA: 'Storage' };
 
 const structure = (over = {}) => ({
-	instance_id: 'i1', map_object_id: 'Box',
-	x: 0, y: 0, z: 1000, yaw: 0,
-	scale_x: 1, scale_y: 1, scale_z: 1,
-	hp_current: 850, hp_max: 1000, build_player_uid: 'player-1',
+	instance_id: 'i1',
+	map_object_id: 'Box',
+	x: 0,
+	y: 0,
+	z: 1000,
+	yaw: 0,
+	scale_x: 1,
+	scale_y: 1,
+	scale_z: 1,
+	hp_current: 850,
+	hp_max: 1000,
+	build_player_uid: 'player-1',
 	...over
 });
 
@@ -250,11 +257,15 @@ describe('buildStructureFC', () => {
 	it('scales the box by the saved scale', () => {
 		const plain = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
 		const doubled = buildStructureFC(
-			[structure({ scale_z: 2 })], { Box: footprint }, 1000, 'MainMap'
+			[structure({ scale_z: 2 })],
+			{ Box: footprint },
+			1000,
+			'MainMap'
 		);
 
 		expect(doubled.features[0].properties.h - doubled.features[0].properties.b).toBeCloseTo(
-			(plain.features[0].properties.h - plain.features[0].properties.b) * 2, 6
+			(plain.features[0].properties.h - plain.features[0].properties.b) * 2,
+			6
 		);
 	});
 
@@ -297,9 +308,7 @@ describe('buildStructureFC', () => {
 			];
 		};
 
-		const [ux, uy] = centre(
-			buildStructureFC([structure()], { Box: offsetBox }, 1000, 'MainMap')
-		);
+		const [ux, uy] = centre(buildStructureFC([structure()], { Box: offsetBox }, 1000, 'MainMap'));
 		const [rx, ry] = centre(
 			buildStructureFC([structure({ yaw: Math.PI / 2 })], { Box: offsetBox }, 1000, 'MainMap')
 		);
@@ -342,7 +351,12 @@ describe('structureCentroid', () => {
 
 describe('buildStructureFC identity', () => {
 	it('does not assign positional ids, so promoteId can own identity', () => {
-		const fc = buildStructureFC([structure(), structure({ instance_id: 'i2' })], { Box: footprint }, 1000, 'MainMap');
+		const fc = buildStructureFC(
+			[structure(), structure({ instance_id: 'i2' })],
+			{ Box: footprint },
+			1000,
+			'MainMap'
+		);
 		for (const f of fc.features) expect(f.id).toBeUndefined();
 	});
 

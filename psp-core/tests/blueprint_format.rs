@@ -2,8 +2,8 @@ mod common;
 
 use psp_core::domain::blueprint::place::{self, PlacementRequest};
 use psp_core::domain::blueprint::validate::{Anchor, PlacementMode};
-use psp_core::domain::blueprint::{BaseBlueprint, BlueprintHeader, CaptureOptions, SCHEMA_VERSION};
 use psp_core::domain::blueprint::{capture, gvas};
+use psp_core::domain::blueprint::{BaseBlueprint, BlueprintHeader, CaptureOptions, SCHEMA_VERSION};
 use psp_core::session::SaveSession;
 use psp_core::ue::games::palworld::PalTransform;
 use psp_core::ue::{
@@ -80,7 +80,10 @@ fn typed_counts(blueprint: &BaseBlueprint) -> TypedCounts {
             .works
             .iter()
             .filter(|w| {
-                matches!(struct_value_raw_data(w), Some(StructValue::Game(PalStruct::Work(_))))
+                matches!(
+                    struct_value_raw_data(w),
+                    Some(StructValue::Game(PalStruct::Work(_)))
+                )
             })
             .count(),
         characters: blueprint
@@ -103,7 +106,10 @@ fn captured_fixture_blueprint() -> BaseBlueprint {
 }
 
 fn empty_blueprint() -> BaseBlueprint {
-    let source_header = common::load_fixture_session("v1_relics").level.header.clone();
+    let source_header = common::load_fixture_session("v1_relics")
+        .level
+        .header
+        .clone();
     BaseBlueprint {
         source_header,
         header: BlueprintHeader {
@@ -173,8 +179,14 @@ fn a_manifest_promising_contents_it_lacks_is_refused() {
 #[test]
 fn presets_select_the_documented_layers() {
     let blueprint = CaptureOptions::blueprint();
-    assert!(blueprint.production_config, "blueprint preset keeps recipes");
-    assert!(!blueprint.container_contents, "blueprint preset drops contents");
+    assert!(
+        blueprint.production_config,
+        "blueprint preset keeps recipes"
+    );
+    assert!(
+        !blueprint.container_contents,
+        "blueprint preset drops contents"
+    );
 
     let full = CaptureOptions::full();
     assert!(full.container_contents, "full preset keeps contents");
@@ -227,8 +239,8 @@ fn json_round_trip_preserves_property_variants_not_just_values() {
     let original =
         capture::capture(&session, base_id, CaptureOptions::full(), "Home").expect("capture");
 
-    let restored = gvas::from_json(&gvas::to_json(&original).expect("json encode"))
-        .expect("json decode");
+    let restored =
+        gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode");
 
     assert!(
         !original.structures.is_empty(),
@@ -236,7 +248,10 @@ fn json_round_trip_preserves_property_variants_not_just_values() {
     );
     assert_eq!(restored.structures.len(), original.structures.len());
     for (a, b) in original.structures.iter().zip(restored.structures.iter()) {
-        assert_eq!(a.map_object_id, b.map_object_id, "structure type must survive");
+        assert_eq!(
+            a.map_object_id, b.map_object_id,
+            "structure type must survive"
+        );
         assert!(
             psp_core::domain::blueprint::capture::map_object_id_is_name_property(&b.properties),
             "MapObjectId must still be a Property::Name, not collapsed to another variant"
@@ -252,8 +267,8 @@ fn json_round_trip_survives_a_re_encode_to_gvas_bytes() {
         capture::capture(&session, base_id, CaptureOptions::full(), "Home").expect("capture");
 
     let direct = gvas::to_psp_bytes(&original).expect("psp encode");
-    let via_json = gvas::from_json(&gvas::to_json(&original).expect("json encode"))
-        .expect("json decode");
+    let via_json =
+        gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode");
     let round_tripped = gvas::to_psp_bytes(&via_json).expect("psp encode after json");
 
     assert_eq!(
@@ -274,7 +289,10 @@ fn psp_round_trip_preserves_the_blueprint() {
 
     assert_eq!(restored.header.name, original.header.name);
     assert_eq!(restored.structures.len(), original.structures.len());
-    assert_eq!(restored.structures[0].map_object_id, original.structures[0].map_object_id);
+    assert_eq!(
+        restored.structures[0].map_object_id,
+        original.structures[0].map_object_id
+    );
     assert_eq!(
         restored.structures[0].relative_transform.translation.x.0,
         original.structures[0].relative_transform.translation.x.0
@@ -285,8 +303,8 @@ fn psp_round_trip_preserves_the_blueprint() {
 fn psp_and_json_encodings_agree() {
     let original = captured_fixture_blueprint();
 
-    let from_psp =
-        gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode")).expect("psp decode");
+    let from_psp = gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode"))
+        .expect("psp decode");
     let from_json =
         gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode");
 
@@ -310,17 +328,28 @@ fn a_psp_round_trip_keeps_every_typed_palworld_struct() {
     let expected = typed_counts(&original);
 
     assert!(
-        expected.models > 0 && expected.concrete_models > 0 && expected.works > 0 && expected.characters > 0,
+        expected.models > 0
+            && expected.concrete_models > 0
+            && expected.works > 0
+            && expected.characters > 0,
         "setup: the fixture must carry typed structs of every kind, got {expected:?}"
     );
 
-    let from_psp =
-        gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode")).expect("psp decode");
+    let from_psp = gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode"))
+        .expect("psp decode");
     let from_json =
         gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode");
 
-    assert_eq!(typed_counts(&from_json), expected, "json decode must preserve typed structs");
-    assert_eq!(typed_counts(&from_psp), expected, "psp decode must preserve typed structs");
+    assert_eq!(
+        typed_counts(&from_json),
+        expected,
+        "json decode must preserve typed structs"
+    );
+    assert_eq!(
+        typed_counts(&from_psp),
+        expected,
+        "psp decode must preserve typed structs"
+    );
 
     assert!(
         capture::first_build_player_uid(&from_psp).is_some(),
@@ -339,12 +368,13 @@ fn a_psp_round_trip_keeps_every_typed_palworld_struct() {
 #[test]
 fn a_labelled_byte_property_survives_both_encodings() {
     let mut original = captured_fixture_blueprint();
-    original.structures[0]
-        .properties
-        .insert("PspLabelledByte", Property::Byte(Byte::Label("EPal::Foo".to_string())));
+    original.structures[0].properties.insert(
+        "PspLabelledByte",
+        Property::Byte(Byte::Label("EPal::Foo".to_string())),
+    );
 
-    let from_psp =
-        gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode")).expect("psp decode");
+    let from_psp = gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode"))
+        .expect("psp decode");
     let from_json =
         gvas::from_json(&gvas::to_json(&original).expect("json encode")).expect("json decode");
 
@@ -367,7 +397,10 @@ fn a_labelled_byte_property_survives_both_encodings() {
 #[test]
 fn two_irreconcilable_types_at_one_path_are_refused_at_encode_time() {
     let mut blueprint = captured_fixture_blueprint();
-    assert!(blueprint.structures.len() > 1, "setup: need two structures to collide");
+    assert!(
+        blueprint.structures.len() > 1,
+        "setup: need two structures to collide"
+    );
     blueprint.structures[0]
         .properties
         .insert("PspCollision", Property::Name("AAA".to_string()));
@@ -379,7 +412,10 @@ fn two_irreconcilable_types_at_one_path_are_refused_at_encode_time() {
         .expect_err("a name/str collision at one path must not encode")
         .to_string();
 
-    assert!(message.contains("PspCollision"), "the error must name the path, got: {message}");
+    assert!(
+        message.contains("PspCollision"),
+        "the error must name the path, got: {message}"
+    );
     assert!(
         message.contains("NameProperty") && message.contains("StrProperty"),
         "the error must name both tags, got: {message}"
@@ -400,10 +436,13 @@ fn an_unparsed_raw_data_sibling_does_not_erase_a_typed_one() {
         "setup: the fixture must mix typed and raw ConcreteModel.RawData"
     );
 
-    let restored =
-        gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode")).expect("psp decode");
+    let restored = gvas::from_psp_bytes(&gvas::to_psp_bytes(&original).expect("psp encode"))
+        .expect("psp decode");
 
-    assert_eq!(typed_counts(&restored).concrete_models, typed.concrete_models);
+    assert_eq!(
+        typed_counts(&restored).concrete_models,
+        typed.concrete_models
+    );
 }
 
 #[test]
@@ -411,7 +450,10 @@ fn a_file_without_the_magic_header_is_rejected_clearly() {
     let result = gvas::from_psp_bytes(b"not a blueprint at all");
 
     let message = result.expect_err("garbage must not parse").to_string();
-    assert!(message.contains("blueprint"), "the error must name the format, got: {message}");
+    assert!(
+        message.contains("blueprint"),
+        "the error must name the format, got: {message}"
+    );
 }
 
 #[test]
@@ -505,7 +547,9 @@ fn placed_world_transforms(session: &SaveSession, base_id: uuid::Uuid) -> Vec<Pa
     values
         .iter()
         .filter_map(|value| {
-            let StructValue::Struct(object_props) = value else { return None };
+            let StructValue::Struct(object_props) = value else {
+                return None;
+            };
             let model = object_props
                 .0
                 .get(&PropertyKey::from("Model"))
@@ -557,7 +601,11 @@ fn capture_place_recapture_preserves_structure_geometry() {
         z: Double(0.0),
         w: Double(quarter),
     };
-    tilted.scale = Vector { x: Double(2.0), y: Double(3.0), z: Double(0.5) };
+    tilted.scale = Vector {
+        x: Double(2.0),
+        y: Double(3.0),
+        z: Double(0.5),
+    };
     let anchor_quat = {
         let half = PLACEMENT_YAW / 2.0;
         (0.0, 0.0, half.sin(), half.cos())
@@ -616,7 +664,10 @@ fn capture_place_recapture_preserves_structure_geometry() {
         .collect();
     original_types.sort_unstable();
     recaptured_types.sort_unstable();
-    assert_eq!(original_types, recaptured_types, "structure types must survive");
+    assert_eq!(
+        original_types, recaptured_types,
+        "structure types must survive"
+    );
 
     let mut worst = 0.0f64;
     let mut worst_rotation = 0.0f64;
@@ -626,7 +677,10 @@ fn capture_place_recapture_preserves_structure_geometry() {
             a.map_object_id, b.map_object_id,
             "a placed base must recapture in the order it was placed"
         );
-        let (p, q) = (&a.relative_transform.translation, &b.relative_transform.translation);
+        let (p, q) = (
+            &a.relative_transform.translation,
+            &b.relative_transform.translation,
+        );
         worst = worst
             .max((p.x.0 - q.x.0).abs())
             .max((p.y.0 - q.y.0).abs())
@@ -685,8 +739,10 @@ fn capture_place_recapture_preserves_structure_geometry() {
             .max((world.translation.y.0 - expected.1).abs())
             .max((world.translation.z.0 - expected.2).abs());
 
-        let expected_rotation =
-            hamilton(anchor_quat, quat_parts(&structure.relative_transform.rotation));
+        let expected_rotation = hamilton(
+            anchor_quat,
+            quat_parts(&structure.relative_transform.rotation),
+        );
         let actual = quat_parts(&world.rotation);
         worst_world_rotation = worst_world_rotation
             .max((actual.0 - expected_rotation.0).abs())
@@ -765,8 +821,7 @@ fn a_blueprint_decoded_from_either_encoding_still_places() {
         .unwrap_or_else(|error| panic!("{label}: a decoded blueprint must still place: {error}"));
         let new_base_id = result.base_id.expect("new base id");
         assert_eq!(
-            result.structures_placed as usize,
-            FIXTURE_BASE_STRUCTURES,
+            result.structures_placed as usize, FIXTURE_BASE_STRUCTURES,
             "{label}: every structure must be placed"
         );
 
@@ -775,8 +830,7 @@ fn a_blueprint_decoded_from_either_encoding_still_places() {
         });
         let reparsed = psp_core::savio::read_sav_bytes(&bytes)
             .unwrap_or_else(|error| panic!("{label}: the written level must parse back: {error}"));
-        let reloaded =
-            SaveSession::new_for_tests(psp_core::session::SaveKind::InMemory, reparsed);
+        let reloaded = SaveSession::new_for_tests(psp_core::session::SaveKind::InMemory, reparsed);
 
         assert_eq!(
             common::all_map_object_instance_ids(&reloaded).len(),
@@ -790,4 +844,3 @@ fn a_blueprint_decoded_from_either_encoding_still_places() {
         );
     }
 }
-

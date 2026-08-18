@@ -5,11 +5,7 @@
 	import { isTruthy } from './envGroups';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 
-	let {
-		envKey,
-		value,
-		onchange
-	} = $props<{
+	let { envKey, value, onchange } = $props<{
 		envKey: EnvKey;
 		value: string;
 		onchange: (key: string, value: string) => void;
@@ -23,14 +19,11 @@
 	<div class="flex items-center justify-between rounded-sm px-1 py-2">
 		<span class="text-surface-300 text-sm">{envKey.label}</span>
 		<Switch
-			checked={checked}
-			onCheckedChange={(e: CheckedChangeDetails) => onchange(envKey.key, e.checked ? 'true' : 'false')}
+			{checked}
+			onCheckedChange={(e: CheckedChangeDetails) =>
+				onchange(envKey.key, e.checked ? 'true' : 'false')}
 		/>
 	</div>
 {:else}
-	<Input
-		label={envKey.label}
-		{value}
-		onValueChange={(v) => onchange(envKey.key, String(v))}
-	/>
+	<Input label={envKey.label} {value} onValueChange={(v) => onchange(envKey.key, String(v))} />
 {/if}

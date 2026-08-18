@@ -66,7 +66,7 @@
 	<div
 		bind:this={floatingEl}
 		{@attach portal()}
-		class={cn('bg-surface-800 rounded shadow-xl p-3 min-w-48', popoverClass)}
+		class={cn('bg-surface-800 min-w-48 rounded p-3 shadow-xl', popoverClass)}
 		style="position: fixed; z-index: 99999;"
 		transition:fade={{ duration: 100 }}
 		role="dialog"

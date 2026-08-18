@@ -108,13 +108,24 @@ mod tests {
     async fn execute_and_query_round_trip_by_name() {
         let d = driver().await;
         d.execute("CREATE TABLE t (id INTEGER PRIMARY KEY, name TEXT, ratio REAL, blob BLOB, flag INTEGER)", &[]).await.unwrap();
-        let affected = d.execute(
-            "INSERT INTO t (name, ratio, blob, flag) VALUES (?, ?, ?, ?)",
-            &[DbValue::from("hi"), DbValue::from(1.5f64), DbValue::from(vec![1u8, 2, 3]), DbValue::from(true)],
-        ).await.unwrap();
+        let affected = d
+            .execute(
+                "INSERT INTO t (name, ratio, blob, flag) VALUES (?, ?, ?, ?)",
+                &[
+                    DbValue::from("hi"),
+                    DbValue::from(1.5f64),
+                    DbValue::from(vec![1u8, 2, 3]),
+                    DbValue::from(true),
+                ],
+            )
+            .await
+            .unwrap();
         assert_eq!(affected, 1);
 
-        let rows = d.query("SELECT id, name, ratio, blob, flag FROM t", &[]).await.unwrap();
+        let rows = d
+            .query("SELECT id, name, ratio, blob, flag FROM t", &[])
+            .await
+            .unwrap();
         assert_eq!(rows.len(), 1);
         assert_eq!(rows[0].get_i64("id").unwrap(), 1);
         assert_eq!(rows[0].get_str("name").unwrap(), "hi");
@@ -126,12 +137,28 @@ mod tests {
     #[tokio::test]
     async fn returning_and_null_and_empty() {
         let d = driver().await;
-        d.execute("CREATE TABLE t (id INTEGER PRIMARY KEY, note TEXT)", &[]).await.unwrap();
-        let id = d.query("INSERT INTO t (note) VALUES (?) RETURNING id", &[DbValue::Null]).await.unwrap()[0]
-            .get_i64_at(0).unwrap();
+        d.execute("CREATE TABLE t (id INTEGER PRIMARY KEY, note TEXT)", &[])
+            .await
+            .unwrap();
+        let id = d
+            .query(
+                "INSERT INTO t (note) VALUES (?) RETURNING id",
+                &[DbValue::Null],
+            )
+            .await
+            .unwrap()[0]
+            .get_i64_at(0)
+            .unwrap();
         assert_eq!(id, 1);
-        let rows = d.query("SELECT note FROM t WHERE id = ?", &[DbValue::from(id)]).await.unwrap();
+        let rows = d
+            .query("SELECT note FROM t WHERE id = ?", &[DbValue::from(id)])
+            .await
+            .unwrap();
         assert_eq!(rows[0].get_opt_str("note").unwrap(), None);
-        assert!(d.query("SELECT id FROM t WHERE id = 999", &[]).await.unwrap().is_empty());
+        assert!(d
+            .query("SELECT id FROM t WHERE id = 999", &[])
+            .await
+            .unwrap()
+            .is_empty());
     }
 }

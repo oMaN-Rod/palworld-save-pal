@@ -1,4 +1,3 @@
-import { persistedState } from 'svelte-persisted-state';
 import {
 	DEFAULT_CONFIG,
 	orderPresets,
@@ -7,8 +6,14 @@ import {
 	type PresetTypeKey,
 	type SortDirection
 } from '$utils/presetSort';
+import { persistedState } from 'svelte-persisted-state';
 
-export type { PresetSortConfig, PresetSortMode, PresetTypeKey, SortDirection } from '$utils/presetSort';
+export type {
+	PresetSortConfig,
+	PresetSortMode,
+	PresetTypeKey,
+	SortDirection
+} from '$utils/presetSort';
 
 const DEFAULTS: Record<PresetTypeKey, PresetSortConfig> = {
 	pal_preset: { ...DEFAULT_CONFIG },

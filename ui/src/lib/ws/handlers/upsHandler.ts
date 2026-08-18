@@ -180,7 +180,11 @@ export const importToUpsHandler: WSMessageHandler = {
 			// Refresh collections to update pal_count
 			await upsState.loadCollections();
 		} else {
-			toastState.add(m.import_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
+			toastState.add(
+				m.import_to_entity_failed({ entity: c.universalPalStorage }),
+				m.error(),
+				'error'
+			);
 		}
 	}
 };

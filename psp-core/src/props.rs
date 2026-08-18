@@ -8,7 +8,10 @@
 
 /// Looks up a property by name, descending through nested user structs when
 /// `path` has more than one segment.
-pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&'a crate::ue::Property> {
+pub fn get<'a>(
+    properties: &'a crate::ue::Properties,
+    path: &[&str],
+) -> Option<&'a crate::ue::Property> {
     let (segment, rest) = path.split_first()?;
     let property = properties
         .into_iter()
@@ -21,7 +24,10 @@ pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&
 }
 
 /// Like `get`, but starting from a property rather than a `Properties` map.
-pub fn get_in<'a>(property: &'a crate::ue::Property, path: &[&str]) -> Option<&'a crate::ue::Property> {
+pub fn get_in<'a>(
+    property: &'a crate::ue::Property,
+    path: &[&str],
+) -> Option<&'a crate::ue::Property> {
     let mut current = property;
     for segment in path {
         current = get(struct_properties(current)?, &[segment])?;
@@ -120,7 +126,9 @@ pub fn map_entries(property: &crate::ue::Property) -> Option<&Vec<crate::ue::Map
     }
 }
 
-pub fn map_entries_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<crate::ue::MapEntry>> {
+pub fn map_entries_mut(
+    property: &mut crate::ue::Property,
+) -> Option<&mut Vec<crate::ue::MapEntry>> {
     match property {
         crate::ue::Property::Map(entries) => Some(entries),
         _ => None,
@@ -131,9 +139,9 @@ pub fn map_entries_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<cr
 /// `None` for an enum-labeled byte array.
 pub fn as_byte_array(property: &crate::ue::Property) -> Option<&[u8]> {
     match property {
-        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) => {
-            Some(bytes)
-        }
+        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(
+            bytes,
+        ))) => Some(bytes),
         _ => None,
     }
 }
@@ -142,9 +150,9 @@ pub fn as_byte_array(property: &crate::ue::Property) -> Option<&[u8]> {
 /// writes back, so a replacement blob may be shorter or longer.
 pub fn as_byte_array_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<u8>> {
     match property {
-        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) => {
-            Some(bytes)
-        }
+        crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(
+            bytes,
+        ))) => Some(bytes),
         _ => None,
     }
 }
@@ -160,7 +168,9 @@ pub fn fguid_to_uuid(guid: &crate::ue::FGuid) -> uuid::Uuid {
 
 pub fn as_uuid(property: &crate::ue::Property) -> Option<uuid::Uuid> {
     match property {
-        crate::ue::Property::Struct(crate::ue::StructValue::Guid(guid)) => Some(fguid_to_uuid(guid)),
+        crate::ue::Property::Struct(crate::ue::StructValue::Guid(guid)) => {
+            Some(fguid_to_uuid(guid))
+        }
         _ => None,
     }
 }
@@ -245,7 +255,9 @@ pub fn struct_values(property: &crate::ue::Property) -> Option<&Vec<crate::ue::S
     }
 }
 
-pub fn struct_values_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<crate::ue::StructValue>> {
+pub fn struct_values_mut(
+    property: &mut crate::ue::Property,
+) -> Option<&mut Vec<crate::ue::StructValue>> {
     match property {
         crate::ue::Property::Array(crate::ue::ValueVec::Struct(values)) => Some(values),
         _ => None,
@@ -689,7 +701,10 @@ mod extension_tests {
             as_enum(&Property::Enum("EPalGroupType::Guild".to_string()))
         );
         assert_eq!(None, as_enum(&Property::Bool(true)));
-        assert_eq!(Some(42), as_byte(&Property::Byte(crate::ue::Byte::Byte(42))));
+        assert_eq!(
+            Some(42),
+            as_byte(&Property::Byte(crate::ue::Byte::Byte(42)))
+        );
         assert_eq!(
             None,
             as_byte(&Property::Byte(crate::ue::Byte::Label("None".to_string())))

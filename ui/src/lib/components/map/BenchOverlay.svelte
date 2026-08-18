@@ -87,7 +87,11 @@
 		instance: MLMap,
 		ms: number,
 		tracked: Map<WebGLRenderer, boolean>
-	): Promise<{ frameMs: number[]; renderSamples: RenderSample[]; lastRenderer: WebGLRenderer | null }> {
+	): Promise<{
+		frameMs: number[];
+		renderSamples: RenderSample[];
+		lastRenderer: WebGLRenderer | null;
+	}> {
 		return new Promise((resolve) => {
 			const frameMs: number[] = [];
 			const renderSamples: RenderSample[] = [];
@@ -185,7 +189,9 @@
 	{#each results as result (result.stop)}
 		<div>
 			{result.stop}: {result.fps.toFixed(1)} fps, p95 {result.p95.toFixed(1)} ms,
-			{result.renderer === 'measured' ? `${result.draws} draws, ${result.triangles} tris` : 'no renderer'}
+			{result.renderer === 'measured'
+				? `${result.draws} draws, ${result.triangles} tris`
+				: 'no renderer'}
 			{result.outcome === 'timed-out' ? ' [timed out]' : ''}
 		</div>
 	{/each}

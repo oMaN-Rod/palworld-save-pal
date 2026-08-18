@@ -26,15 +26,12 @@ test('upload → edit-nothing → download round-trips a real world save', async
 		.setInputFiles({ name: 'world1.zip', mimeType: 'application/zip', buffer: world1Zip() });
 
 	// The dropzone loads on change; there is no separate submit.
-	// Loading is a transient client-side route; the app lands on /edit once the
-	// worker has parsed the save and player summaries have arrived.
-	await expect(page).toHaveURL(/\/edit/, { timeout: 30_000 });
+	// Loading is a transient client-side route; the app lands on the /overview
+	// dashboard once the worker has parsed the save and player summaries have
+	// arrived.
+	await expect(page).toHaveURL(/\/overview/, { timeout: 30_000 });
 
-	// The download control lives on /upload's "current save" card; the nav
-	// rail's upload/download tile is a plain <a href="/upload">, so this is a
-	// client-side transition that keeps the in-memory save state.
-	await page.locator('a[href="/upload"]').click();
-
+	// The overview header carries the save-file download action.
 	const [download] = await Promise.all([
 		page.waitForEvent('download', { timeout: 30_000 }),
 		page.getByRole('button', { name: /download/i }).click()

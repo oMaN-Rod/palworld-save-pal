@@ -19,7 +19,10 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
-	let { container, onUpdate }:{
+	let {
+		container,
+		onUpdate
+	}: {
 		container: ItemContainer & { slots: ItemContainerSlot[] };
 		onUpdate: () => void;
 	} = $props();

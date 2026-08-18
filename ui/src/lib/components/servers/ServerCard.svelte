@@ -44,7 +44,7 @@
 <button
 	class={cn(
 		'w-full text-left transition-all',
-		selected ? 'ring-2 ring-secondary-500 rounded-sm' : ''
+		selected ? 'ring-secondary-500 rounded-sm ring-2' : ''
 	)}
 	onclick={() => onselect(server)}
 >

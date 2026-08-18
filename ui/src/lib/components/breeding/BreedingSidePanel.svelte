@@ -128,7 +128,7 @@
 				: ''}">{m.breeding_controls()}</span
 		>
 		<button
-			class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors"
+			class="btn btn-secondary text-surface-400 hover:text-surface-50 rounded-sm p-1 transition-colors"
 			onclick={() => oncollapsedChange?.(!collapsed)}
 			title={collapsed ? m.breeding_expand_panel() : m.breeding_collapse_panel()}
 		>
@@ -143,16 +143,13 @@
 	{:else}
 		{#if chains.length > 0}
 			<div class="border-surface-700/20 border-b px-3 pt-3 pb-2">
-				<span
-					class="text-surface-400 mb-1.5 block text-xs font-semibold tracking-wider uppercase"
-				>
+				<span class="text-surface-400 mb-1.5 block text-xs font-semibold tracking-wider uppercase">
 					{m.breeding_chains()} ({chains.length})
 				</span>
 				<div class="flex flex-wrap gap-1">
 					{#each chains as chain, i}
 						<button
-							class="rounded-sm px-2 py-1 text-xs font-medium transition-all {i ===
-							activeChainIndex
+							class="rounded-sm px-2 py-1 text-xs font-medium transition-all {i === activeChainIndex
 								? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
 								: 'text-surface-200 hover:bg-surface-800 border-surface-700/30 border'}"
 							onclick={() => onactiveChainIndexChange?.(i)}
@@ -192,8 +189,7 @@
 
 				{#if directSub !== 'parents'}
 					<div>
-						<span
-							class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+						<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 							>{m.breeding_parent_a()}</span
 						>
 						<PalPicker {pals} value={parentA} onselect={(t) => onparentAChange?.(t)} />
@@ -201,8 +197,7 @@
 				{/if}
 				{#if directSub === 'forward'}
 					<div>
-						<span
-							class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+						<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 							>{m.breeding_parent_b()}</span
 						>
 						<PalPicker
@@ -214,8 +209,7 @@
 					</div>
 				{:else if directSub === 'reverse' || directSub === 'parents'}
 					<div>
-						<span
-							class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+						<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 							>{m.breeding_target()}</span
 						>
 						<PalPicker {pals} value={directTarget} onselect={(t) => ondirectTargetChange?.(t)} />
@@ -238,15 +232,13 @@
 					{m.breeding_configuration()}
 				</span>
 				<div>
-					<span
-						class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+					<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 						>{m.breeding_target()}</span
 					>
 					<PalPicker {pals} value={chainTarget} onselect={(t) => onchainTargetChange?.(t)} />
 				</div>
 				<div>
-					<span
-						class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+					<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 						>{m.breeding_gender()}</span
 					>
 					<select
@@ -262,8 +254,7 @@
 				</div>
 				<div class="grid grid-cols-2 gap-2">
 					<div>
-						<span
-							class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+						<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 							>{m.breeding_max_generations()}</span
 						>
 						<input
@@ -277,8 +268,7 @@
 						/>
 					</div>
 					<div>
-						<span
-							class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
+						<span class="text-surface-400 mb-1 block text-xs font-semibold tracking-wider uppercase"
 							>{m.breeding_max_results()}</span
 						>
 						<input
@@ -314,7 +304,7 @@
 							<div class="mt-1.5 flex flex-wrap gap-1">
 								{#each selectedPool as member}
 									<div
-										class="rounded-sm bg-surface-950/50 border-surface-700/30 flex items-center gap-1 border px-1.5 py-0.5"
+										class="bg-surface-950/50 border-surface-700/30 flex items-center gap-1 rounded-sm border px-1.5 py-0.5"
 									>
 										<PalSlot
 											tribe={member.tribe}
@@ -386,9 +376,9 @@
 					>
 						{m.breeding_node_details()}
 					</span>
-						<div class="space-y-1">
-							<p class="text-surface-50 text-xs font-medium">{selectedNode.display}</p>
-							{#if selectedNode.passives.length}
+					<div class="space-y-1">
+						<p class="text-surface-50 text-xs font-medium">{selectedNode.display}</p>
+						{#if selectedNode.passives.length}
 							<div class="flex flex-wrap gap-1">
 								{#each selectedNode.passives as p}
 									<span class="chip px-1.5 py-0 text-[10px]">{passiveName(p)}</span>

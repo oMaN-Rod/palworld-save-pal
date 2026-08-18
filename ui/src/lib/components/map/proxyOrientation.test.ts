@@ -4,12 +4,12 @@
 // Tighter than the mesh cross-check in meshOrientation.test.ts: both paths
 // consume the same footprint dimensions (fp.sx/fp.sy), so ring corners can be
 // compared directly instead of via a small synthetic offset.
-import { describe, it, expect } from 'vitest';
-import * as THREE from 'three';
-import { MercatorCoordinate } from 'maplibre-gl';
-import { proxyInstanceMatrix } from './structureLayer';
-import { buildStructureFC } from './features';
 import type { BaseStructure, Footprint } from '$types';
+import { MercatorCoordinate } from 'maplibre-gl';
+import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
+import { buildStructureFC } from './features';
+import { proxyInstanceMatrix } from './structureLayer';
 
 const AREA = 'MainMap';
 const ORIGIN_X = -50000;

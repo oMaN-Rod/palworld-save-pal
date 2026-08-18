@@ -170,10 +170,16 @@
 						onclick={() => onrowclick?.(row)}
 						tabindex={onrowclick ? 0 : undefined}
 						role={onrowclick ? 'button' : undefined}
-						onkeydown={onrowclick ? (event: KeyboardEvent) => handleRowKeydown(event, row) : undefined}
+						onkeydown={onrowclick
+							? (event: KeyboardEvent) => handleRowKeydown(event, row)
+							: undefined}
 					>
 						{#if selectable}
-							<td class="p-2" onclick={(event) => event.stopPropagation()} onkeydown={(event) => event.stopPropagation()}>
+							<td
+								class="p-2"
+								onclick={(event) => event.stopPropagation()}
+								onkeydown={(event) => event.stopPropagation()}
+							>
 								<Checkbox
 									checked={selected.has(rowKey(row))}
 									onchange={() => handleRowCheckbox(row)}
@@ -186,7 +192,11 @@
 							</td>
 						{/each}
 						{#if rowActions}
-							<td class="p-2 text-right" onclick={(event) => event.stopPropagation()} onkeydown={(event) => event.stopPropagation()}>
+							<td
+								class="p-2 text-right"
+								onclick={(event) => event.stopPropagation()}
+								onkeydown={(event) => event.stopPropagation()}
+							>
 								{@render rowActions(row)}
 							</td>
 						{/if}

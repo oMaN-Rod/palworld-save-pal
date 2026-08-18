@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 	await page.goto('/');
@@ -61,9 +61,7 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 	await expect(page.getByRole('status')).toHaveCount(0);
 });
 
-test('mobile landing hides save editing and shows the desktop-only notice', async ({
-	page
-}) => {
+test('mobile landing hides save editing and shows the desktop-only notice', async ({ page }) => {
 	await page.setViewportSize({ width: 390, height: 844 });
 	await page.goto('/');
 

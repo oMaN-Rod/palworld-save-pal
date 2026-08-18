@@ -25,7 +25,10 @@ use super::{containers, guild_tail, pal, world};
 pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
     let value_properties = props::struct_props(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) = raw_data else {
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(
+        base_camp,
+    ))) = raw_data
+    else {
         return None;
     };
     let guild_id = props::guid_to_uuid(&base_camp.group_id_belong_to);
@@ -161,9 +164,7 @@ fn map_object_properties_by_base_id(
 }
 
 /// A `MapObjectSaveData` element's typed `Model.RawData`.
-fn map_object_model(
-    object_props: &Properties,
-) -> Option<&crate::ue::games::palworld::PalMapModel> {
+fn map_object_model(object_props: &Properties) -> Option<&crate::ue::games::palworld::PalMapModel> {
     let model_props = object_props
         .0
         .get(&PropertyKey::from("Model"))
@@ -228,7 +229,9 @@ fn yaw_from_quat(x: f64, y: f64, z: f64, w: f64) -> f64 {
 
 /// `target_container_id` from an ItemContainer module's typed `RawData`.
 fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
-    let Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(module))) = raw_data else {
+    let Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(module))) =
+        raw_data
+    else {
         return None;
     };
     match &module.data {
@@ -999,7 +1002,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(
+                camp,
+            )))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -1054,7 +1059,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(
+                camp,
+            )))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -1113,7 +1120,9 @@ mod tests {
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(
+                group_data,
+            ))),
         );
         UMapEntry {
             key: guid_property(guild_id),
@@ -1191,7 +1200,9 @@ mod tests {
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(
+                group_data,
+            ))),
         );
         let entry = UMapEntry {
             key: guid_property(GUILD_ID),
@@ -1274,11 +1285,13 @@ mod tests {
 
     #[test]
     fn module_target_container_id_resolves_the_item_container_variant() {
-        use crate::ue::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+        use crate::ue::games::palworld::{
+            PalMapConcreteModelModule, PalMapConcreteModelModuleData,
+        };
 
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
-        let raw_data = Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(
-            PalMapConcreteModelModule {
+        let raw_data = Property::Struct(StructValue::Game(
+            crate::ue::PalStruct::MapConcreteModelModule(PalMapConcreteModelModule {
                 module_type: "EPalMapObjectConcreteModelModuleType::ItemContainer".to_string(),
                 data: PalMapConcreteModelModuleData::ItemContainer {
                     target_container_id: fguid(CONTAINER_ID),
@@ -1289,23 +1302,25 @@ mod tests {
                     trailing_bytes: [0; 4],
                 },
                 custom_version_data: vec![],
-            },
-        )));
+            }),
+        ));
 
         assert_eq!(module_target_container_id(&raw_data), Some(container_id));
     }
 
     #[test]
     fn module_target_container_id_returns_none_for_a_non_item_container_module() {
-        use crate::ue::games::palworld::{PalMapConcreteModelModule, PalMapConcreteModelModuleData};
+        use crate::ue::games::palworld::{
+            PalMapConcreteModelModule, PalMapConcreteModelModuleData,
+        };
 
-        let raw_data = Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(
-            PalMapConcreteModelModule {
+        let raw_data = Property::Struct(StructValue::Game(
+            crate::ue::PalStruct::MapConcreteModelModule(PalMapConcreteModelModule {
                 module_type: "EPalMapObjectConcreteModelModuleType::Energy".to_string(),
                 data: PalMapConcreteModelModuleData::Energy,
                 custom_version_data: vec![],
-            },
-        )));
+            }),
+        ));
 
         assert!(module_target_container_id(&raw_data).is_none());
         assert!(module_target_container_id(&Property::Bool(true)).is_none());
@@ -1350,10 +1365,9 @@ mod tests {
         let mut model_props = Properties::default();
         model_props.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(zero_map_model(
-                group_id_belong_to,
-                build_player_uid,
-            ))))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(
+                zero_map_model(group_id_belong_to, build_player_uid),
+            )))),
         );
         let mut object_props = Properties::default();
         object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
@@ -1365,8 +1379,8 @@ mod tests {
             // -- an element with no `RawData` at all is not a shape any real
             // save produces.
             let raw_data = concrete_raw_data.unwrap_or_else(|| {
-                Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(Box::new(
-                    crate::ue::games::palworld::PalMapConcreteModel {
+                Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(
+                    Box::new(crate::ue::games::palworld::PalMapConcreteModel {
                         instance_id: fguid(SDM_NIL),
                         model_instance_id: fguid(SDM_NIL),
                         concrete_model_type: "BaseModel".to_string(),
@@ -1375,8 +1389,8 @@ mod tests {
                                 trailing_bytes: vec![],
                             },
                         ),
-                    },
-                ))))
+                    }),
+                )))
             });
             concrete_props.insert("RawData", raw_data);
             if let Some(modules) = module_map {
@@ -1415,8 +1429,8 @@ mod tests {
                 seller_player_uid: fguid(seller),
             })
             .collect();
-        Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(Box::new(
-            crate::ue::games::palworld::PalMapConcreteModel {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(
+            Box::new(crate::ue::games::palworld::PalMapConcreteModel {
                 instance_id: fguid("00000000-0000-0000-0000-000000000000"),
                 model_instance_id: fguid("00000000-0000-0000-0000-000000000000"),
                 concrete_model_type: "PalMapObjectItemBoothModel".to_string(),
@@ -1426,8 +1440,8 @@ mod tests {
                     trade_infos,
                     trailing_bytes: [0; 20],
                 }),
-            },
-        ))))
+            }),
+        )))
     }
 
     const SDM_GUILD: &str = "10101010-0000-0000-0000-000000000000";
@@ -1504,7 +1518,9 @@ mod tests {
                 let mut properties = Properties::default();
                 properties.insert(
                     "RawData",
-                    Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModelModule(password_lock_module))),
+                    Property::Struct(StructValue::Game(
+                        crate::ue::PalStruct::MapConcreteModelModule(password_lock_module),
+                    )),
                 );
                 properties
             })),
@@ -1536,7 +1552,10 @@ mod tests {
 
     fn world_level(map_objects: Vec<StructValue>) -> Save {
         let mut world_save_data = Properties::default();
-        world_save_data.insert("MapObjectSaveData", Property::Array(ValueVec::Struct(map_objects)));
+        world_save_data.insert(
+            "MapObjectSaveData",
+            Property::Array(ValueVec::Struct(map_objects)),
+        );
         let mut root_properties = Properties::default();
         root_properties.insert(
             "worldSaveData",
@@ -1575,7 +1594,9 @@ mod tests {
         let mut model_props = Properties::default();
         model_props.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(
+                model,
+            )))),
         );
         let mut object_props = Properties::default();
         object_props.insert("MapObjectId", Property::Name(map_object_id.to_string()));
@@ -1646,7 +1667,9 @@ mod tests {
         let mut model_props = Properties::default();
         model_props.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(model)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::MapModel(Box::new(
+                model,
+            )))),
         );
         let mut object_props = Properties::default();
         object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));

@@ -1,5 +1,5 @@
-import { persistedState } from 'svelte-persisted-state';
 import type { SelectOption } from '$types';
+import { persistedState } from 'svelte-persisted-state';
 
 export type ThemeName =
 	| 'dark'

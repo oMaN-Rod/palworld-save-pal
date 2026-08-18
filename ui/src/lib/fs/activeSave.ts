@@ -7,7 +7,10 @@ export function setActiveDirectory(h: FileSystemDirectoryHandle | null, w: boole
 	writable = w;
 }
 
-export function getActiveDirectory(): { handle: FileSystemDirectoryHandle | null; writable: boolean } {
+export function getActiveDirectory(): {
+	handle: FileSystemDirectoryHandle | null;
+	writable: boolean;
+} {
 	return { handle, writable };
 }
 

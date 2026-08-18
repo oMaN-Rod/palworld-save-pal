@@ -67,7 +67,8 @@ export function groupPassiveFamilies(entries: [string, PassiveSkill][]): Passive
 			displayName: baseName,
 			members,
 			ranks,
-			primaryRank: positiveRanks.length > 0 ? Math.max(...positiveRanks) : members[0].skill.details.rank
+			primaryRank:
+				positiveRanks.length > 0 ? Math.max(...positiveRanks) : members[0].skill.details.rank
 		});
 	}
 

@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import { LngLat } from 'maplibre-gl';
+import { describe, expect, it } from 'vitest';
 import { worldFittingConstrain, type ConstrainTransform } from './constrain';
 
 const FULL_LAT_RANGE: [number, number] = [-85.051129, 85.051129];

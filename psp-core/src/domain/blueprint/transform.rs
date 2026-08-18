@@ -2,7 +2,12 @@ use crate::ue::games::palworld::PalTransform;
 use crate::ue::{Double, Quat, Vector};
 
 fn conjugate(q: &Quat) -> Quat {
-    Quat { x: Double(-q.x.0), y: Double(-q.y.0), z: Double(-q.z.0), w: Double(q.w.0) }
+    Quat {
+        x: Double(-q.x.0),
+        y: Double(-q.y.0),
+        z: Double(-q.z.0),
+        w: Double(q.w.0),
+    }
 }
 
 fn multiply(a: &Quat, b: &Quat) -> Quat {
@@ -31,7 +36,12 @@ fn rotate_vector(q: &Quat, v: &Vector) -> Vector {
 
 pub fn yaw_quat(yaw_radians: f64) -> Quat {
     let half = yaw_radians / 2.0;
-    Quat { x: Double(0.0), y: Double(0.0), z: Double(half.sin()), w: Double(half.cos()) }
+    Quat {
+        x: Double(0.0),
+        y: Double(0.0),
+        z: Double(half.sin()),
+        w: Double(half.cos()),
+    }
 }
 
 pub fn to_relative(anchor: &PalTransform, world: &PalTransform) -> PalTransform {

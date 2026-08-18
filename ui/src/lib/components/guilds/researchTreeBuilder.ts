@@ -71,9 +71,7 @@ export function buildTree(
 
 	rootNodes.forEach(processNodeHierarchy);
 
-	Object.values(nodes).forEach((node) =>
-		node.children.sort((a, b) => a.id.localeCompare(b.id))
-	);
+	Object.values(nodes).forEach((node) => node.children.sort((a, b) => a.id.localeCompare(b.id)));
 
 	return rootNodes;
 }

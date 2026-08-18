@@ -54,7 +54,13 @@ describe('placementState', () => {
 		placementState.overrideWarnings = true;
 		place.mockResolvedValueOnce({ base_id: 'base-1', structures_placed: 8, findings: [] });
 		const res = await placementState.commit();
-		expect(place).toHaveBeenCalledWith('h1', { x: 1, y: 2, z: 3, yaw: 0 }, 'guild-9', 'player-2', true);
+		expect(place).toHaveBeenCalledWith(
+			'h1',
+			{ x: 1, y: 2, z: 3, yaw: 0 },
+			'guild-9',
+			'player-2',
+			true
+		);
 		expect(res.base_id).toBe('base-1');
 	});
 

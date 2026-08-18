@@ -22,7 +22,7 @@
 </script>
 
 <div
-	class="breed-row rounded-sm bg-surface-900/40 border-surface-700/30 hover:border-surface-700/60 border p-3 transition-colors"
+	class="breed-row bg-surface-900/40 border-surface-700/30 hover:border-surface-700/60 rounded-sm border p-3 transition-colors"
 >
 	<PalSlot
 		tribe={result.parent_a}

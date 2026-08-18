@@ -78,7 +78,7 @@
 
 {#if tocItems.length > 0}
 	<nav class="top-20 overflow-y-auto">
-		<h5 class="mb-3 text-xs font-semibold uppercase tracking-wide text-surface-400">
+		<h5 class="text-surface-400 mb-3 text-xs font-semibold tracking-wide uppercase">
 			On This Page
 		</h5>
 		<ul class="space-y-0.5 text-sm">
@@ -93,7 +93,7 @@
 					>
 						{#if activeId === item.id}
 							<span
-								class="absolute top-1/2 left-0 h-4 w-0.5 -translate-y-1/2 rounded-full bg-secondary-500"
+								class="bg-secondary-500 absolute top-1/2 left-0 h-4 w-0.5 -translate-y-1/2 rounded-full"
 							></span>
 						{/if}
 						<span>{item.text}</span>

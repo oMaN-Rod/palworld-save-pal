@@ -126,16 +126,66 @@
 	});
 
 	const toggles = $derived([
-		{ label: m.normal(), count: normalPals.length, checked: addNormalPals, onChange: (v: boolean) => (addNormalPals = v) },
-		{ label: m.lucky(), count: normalPals.length, checked: addLuckyPals, onChange: (v: boolean) => (addLuckyPals = v) },
-		{ label: m.alpha(), count: normalPals.length, checked: addAlphaPals, onChange: (v: boolean) => (addAlphaPals = v) },
-		{ label: m.awakened(), count: normalPals.length, checked: addAwakenedPals, onChange: (v: boolean) => (addAwakenedPals = v) },
-		{ label: m.boss(), count: bossPals.length, checked: addBossPals, onChange: (v: boolean) => (addBossPals = v) },
-		{ label: m.predator(), count: predatorPals.length, checked: addPredatorPals, onChange: (v: boolean) => (addPredatorPals = v) },
-		{ label: m.raid(), count: raidPals.length, checked: addRaidPals, onChange: (v: boolean) => (addRaidPals = v) },
-		{ label: m.summon(), count: summonPals.length, checked: addSummonPals, onChange: (v: boolean) => (addSummonPals = v) },
-		{ label: m.oil_rig(), count: oilRigPals.length, checked: addOilRigPals, onChange: (v: boolean) => (addOilRigPals = v) },
-		{ label: c.human, count: humanPals.length, checked: addHumanPals, onChange: (v: boolean) => (addHumanPals = v) }
+		{
+			label: m.normal(),
+			count: normalPals.length,
+			checked: addNormalPals,
+			onChange: (v: boolean) => (addNormalPals = v)
+		},
+		{
+			label: m.lucky(),
+			count: normalPals.length,
+			checked: addLuckyPals,
+			onChange: (v: boolean) => (addLuckyPals = v)
+		},
+		{
+			label: m.alpha(),
+			count: normalPals.length,
+			checked: addAlphaPals,
+			onChange: (v: boolean) => (addAlphaPals = v)
+		},
+		{
+			label: m.awakened(),
+			count: normalPals.length,
+			checked: addAwakenedPals,
+			onChange: (v: boolean) => (addAwakenedPals = v)
+		},
+		{
+			label: m.boss(),
+			count: bossPals.length,
+			checked: addBossPals,
+			onChange: (v: boolean) => (addBossPals = v)
+		},
+		{
+			label: m.predator(),
+			count: predatorPals.length,
+			checked: addPredatorPals,
+			onChange: (v: boolean) => (addPredatorPals = v)
+		},
+		{
+			label: m.raid(),
+			count: raidPals.length,
+			checked: addRaidPals,
+			onChange: (v: boolean) => (addRaidPals = v)
+		},
+		{
+			label: m.summon(),
+			count: summonPals.length,
+			checked: addSummonPals,
+			onChange: (v: boolean) => (addSummonPals = v)
+		},
+		{
+			label: m.oil_rig(),
+			count: oilRigPals.length,
+			checked: addOilRigPals,
+			onChange: (v: boolean) => (addOilRigPals = v)
+		},
+		{
+			label: c.human,
+			count: humanPals.length,
+			checked: addHumanPals,
+			onChange: (v: boolean) => (addHumanPals = v)
+		}
 	]);
 
 	const handleApplyPalPreset = (pal: Record<string, any>) => {
@@ -333,17 +383,11 @@
 									{@const palIcon = assetLoader.loadMenuImage(
 										preset.pal_preset.character_id as string
 									)}
-									<img
-										src={palIcon}
-										alt={preset.pal_preset.character_id}
-										class="ml-2 h-8 w-8"
-									/>
+									<img src={palIcon} alt={preset.pal_preset.character_id} class="ml-2 h-8 w-8" />
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.getByKey(
-										preset.pal_preset.element as string
-									)}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
 										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}
@@ -352,8 +396,12 @@
 							</div>
 						{/snippet}
 						{#snippet listItemActions(preset)}
-							<Button variant="ghost" size="icon" onclick={() =>
-									(selectedPresets = selectedPresets.filter((p) => p.id !== preset.id))}>
+							<Button
+								variant="ghost"
+								size="icon"
+								onclick={() =>
+									(selectedPresets = selectedPresets.filter((p) => p.id !== preset.id))}
+							>
 								<Trash size={16} />
 							</Button>
 						{/snippet}
@@ -364,9 +412,7 @@
 									<Lock class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
-									{@const elementData = elementsData.getByKey(
-										preset.pal_preset.element as string
-									)}
+									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
 									{@const elementIcon = assetLoader.loadImage(
 										`${ASSET_DATA_PATH}/img/${elementData?.badge_icon}.webp`
 									)}

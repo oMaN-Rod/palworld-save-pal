@@ -42,12 +42,12 @@
 
 {#if tooSmall && !isPublicShell}
 	<div
-		class="fixed inset-0 z-[99999] flex animate-fade-in flex-col items-center justify-center bg-surface-950 px-6 text-center"
+		class="animate-fade-in bg-surface-950 fixed inset-0 z-[99999] flex flex-col items-center justify-center px-6 text-center"
 		role="alert"
 	>
 		<Maximize class="text-warning-400 mb-3 size-12 shrink-0" />
-		<h2 class="mb-1 text-lg font-bold text-surface-50">Window Too Small</h2>
-		<p class="max-w-xs text-xs text-surface-400">
+		<h2 class="text-surface-50 mb-1 text-lg font-bold">Window Too Small</h2>
+		<p class="text-surface-400 max-w-xs text-xs">
 			Please resize to at least {MIN_WIDTH}×{MIN_HEIGHT} px.
 		</p>
 	</div>

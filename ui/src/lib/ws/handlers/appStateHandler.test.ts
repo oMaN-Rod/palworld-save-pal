@@ -1,5 +1,5 @@
-import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { MessageType } from '$types';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const toasts: Array<{ message: string; title?: string; color?: string }> = [];
 

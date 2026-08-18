@@ -1,6 +1,6 @@
+import type { PassiveSkill } from '$types';
 import { describe, expect, it } from 'vitest';
 import { groupPassiveFamilies, stripRankSuffix } from './passiveFamilies';
-import type { PassiveSkill } from '$types';
 
 const makeSkill = (name: string, rank: number): PassiveSkill =>
 	({

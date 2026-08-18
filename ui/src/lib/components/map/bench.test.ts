@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
 	BENCH_STOPS,
-	benchStopCenter,
-	summarizeFrames,
 	benchResult,
-	medianRenderSample
+	benchStopCenter,
+	medianRenderSample,
+	summarizeFrames
 } from './bench';
 
 describe('BENCH_STOPS', () => {

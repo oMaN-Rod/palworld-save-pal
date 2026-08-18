@@ -1,7 +1,7 @@
 import * as m from '$i18n/messages';
-import Map from '@lucide/svelte/icons/map';
 import BookOpen from '@lucide/svelte/icons/book-open';
 import FlaskConical from '@lucide/svelte/icons/flask-conical';
+import Map from '@lucide/svelte/icons/map';
 import type { Component } from 'svelte';
 
 export type PublicNavItem = {

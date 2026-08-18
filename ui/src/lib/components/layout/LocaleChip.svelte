@@ -7,9 +7,7 @@
 	const appState = getAppState();
 	const entries = Object.entries(languages) as [SupportedLanguage, string][];
 	const activeCode = $derived(appState.settings.language ?? 'en');
-	const activeLabel = $derived(
-		entries.find(([code]) => code === activeCode)?.[1] ?? activeCode
-	);
+	const activeLabel = $derived(entries.find(([code]) => code === activeCode)?.[1] ?? activeCode);
 </script>
 
 <Popover position="bottom-end">

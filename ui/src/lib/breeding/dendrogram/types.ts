@@ -28,8 +28,4 @@ export interface TreeNode {
 }
 
 export type NodeSelectCallback = (node: TreeNode | null) => void;
-export type NodeHoverCallback = (
-	node: TreeNode | null,
-	screenX: number,
-	screenY: number
-) => void;
+export type NodeHoverCallback = (node: TreeNode | null, screenX: number, screenY: number) => void;

@@ -1,11 +1,14 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { readSaveFolder, writeSaveInPlace } from './fileSystemAccess';
 
 // Minimal in-memory FileSystemDirectoryHandle fake.
 class FakeFile {
 	constructor(public bytes: Uint8Array) {}
 	async arrayBuffer() {
-		return this.bytes.buffer.slice(this.bytes.byteOffset, this.bytes.byteOffset + this.bytes.byteLength);
+		return this.bytes.buffer.slice(
+			this.bytes.byteOffset,
+			this.bytes.byteOffset + this.bytes.byteLength
+		);
 	}
 }
 class FakeWritable {
@@ -17,7 +20,10 @@ class FakeWritable {
 }
 class FakeFileHandle {
 	kind = 'file' as const;
-	constructor(public name: string, public file: FakeFile | null = null) {}
+	constructor(
+		public name: string,
+		public file: FakeFile | null = null
+	) {}
 	async getFile() {
 		if (!this.file) throw new Error('no file');
 		return this.file;
@@ -59,9 +65,15 @@ class FakeDirHandle {
 
 function seedWorld(): FakeDirHandle {
 	const root = new FakeDirHandle('world1');
-	root.entries_.set('Level.sav', new FakeFileHandle('Level.sav', new FakeFile(new Uint8Array([1, 2, 3]))));
+	root.entries_.set(
+		'Level.sav',
+		new FakeFileHandle('Level.sav', new FakeFile(new Uint8Array([1, 2, 3])))
+	);
 	const players = new FakeDirHandle('Players');
-	players.entries_.set('abc.sav', new FakeFileHandle('abc.sav', new FakeFile(new Uint8Array([4, 5]))));
+	players.entries_.set(
+		'abc.sav',
+		new FakeFileHandle('abc.sav', new FakeFile(new Uint8Array([4, 5])))
+	);
 	root.entries_.set('Players', players);
 	return root;
 }
@@ -81,7 +93,9 @@ describe('fileSystemAccess', () => {
 
 	it('readSaveFolder rejects a folder without Level.sav', async () => {
 		const empty = new FakeDirHandle('empty');
-		await expect(readSaveFolder(empty as unknown as FileSystemDirectoryHandle)).rejects.toThrow(/Level\.sav/);
+		await expect(readSaveFolder(empty as unknown as FileSystemDirectoryHandle)).rejects.toThrow(
+			/Level\.sav/
+		);
 	});
 
 	it('writeSaveInPlace backs up originals before overwriting', async () => {
@@ -105,9 +119,15 @@ describe('fileSystemAccess', () => {
 
 	it('resolves an existing uppercase file case-insensitively instead of creating a duplicate', async () => {
 		const caseRoot = new FakeDirHandle('caseworld');
-		caseRoot.entries_.set('Level.sav', new FakeFileHandle('Level.sav', new FakeFile(new Uint8Array([1]))));
+		caseRoot.entries_.set(
+			'Level.sav',
+			new FakeFileHandle('Level.sav', new FakeFile(new Uint8Array([1])))
+		);
 		const players = new FakeDirHandle('Players');
-		players.entries_.set('ABC.sav', new FakeFileHandle('ABC.sav', new FakeFile(new Uint8Array([7, 7, 7]))));
+		players.entries_.set(
+			'ABC.sav',
+			new FakeFileHandle('ABC.sav', new FakeFile(new Uint8Array([7, 7, 7])))
+		);
 		caseRoot.entries_.set('Players', players);
 
 		const backup = await writeSaveInPlace(

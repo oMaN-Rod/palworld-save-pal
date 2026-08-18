@@ -30,9 +30,7 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 use std::sync::Arc;
 
 use super::data::BreedingDB;
-use super::model::{
-    BreedingSpec, BreedingStep, Chain, ChainSource, Gender, Origin, PalRef,
-};
+use super::model::{BreedingSpec, BreedingStep, Chain, ChainSource, Gender, Origin, PalRef};
 use super::sources::SourceAdapter;
 
 /// Game hard cap; a child can hold at most 4 passives.
@@ -131,9 +129,7 @@ pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -
                 // A pair usually has one outcome, but a gender-gated unique
                 // pair has two — branch on every outcome the parents' genders
                 // still admit rather than collapsing to the first.
-                for outcome in
-                    db.forward_gendered(&p1.species, p1.gender, &p2.species, p2.gender)
-                {
+                for outcome in db.forward_gendered(&p1.species, p1.gender, &p2.species, p2.gender) {
                     if !db.reachable(&outcome.child, &spec.target_pal, remaining_budget) {
                         continue;
                     }
@@ -186,7 +182,10 @@ fn group_key(ref_pal: &PalRef, required: &BTreeSet<String>) -> GroupKey {
     )
 }
 
-fn effective_passives(passives: &BTreeSet<String>, required: &BTreeSet<String>) -> BTreeSet<String> {
+fn effective_passives(
+    passives: &BTreeSet<String>,
+    required: &BTreeSet<String>,
+) -> BTreeSet<String> {
     let kept: BTreeSet<String> = passives.intersection(required).cloned().collect();
     let has_extra = passives.difference(required).next().is_some();
     if has_extra {
@@ -341,7 +340,9 @@ fn build_results(
     chains
 }
 
-fn chain_signature(chain: &Chain) -> (String, BTreeSet<(String, String, String)>, BTreeSet<String>) {
+fn chain_signature(
+    chain: &Chain,
+) -> (String, BTreeSet<(String, String, String)>, BTreeSet<String>) {
     let edges: BTreeSet<(String, String, String)> = chain
         .steps
         .iter()
@@ -382,11 +383,7 @@ fn build_chain(
         &mut step_idx,
     );
 
-    let matched: Vec<String> = final_ref
-        .passives
-        .intersection(required)
-        .cloned()
-        .collect();
+    let matched: Vec<String> = final_ref.passives.intersection(required).cloned().collect();
 
     Chain {
         target: spec.target_pal.clone(),
@@ -500,7 +497,10 @@ mod tests {
             max_results: 5,
         };
         let chains = solve(&db, &source, &spec);
-        assert!(!chains.is_empty(), "should find at least the self-breed chain");
+        assert!(
+            !chains.is_empty(),
+            "should find at least the self-breed chain"
+        );
     }
 
     #[test]
@@ -599,6 +599,9 @@ mod tests {
             checked_chains.is_some(),
             "expected some target to yield a multi-generational chain"
         );
-        assert!(saw_bred_parent, "a multi-gen chain must contain a bred parent ref");
+        assert!(
+            saw_bred_parent,
+            "a multi-gen chain must contain a bred parent ref"
+        );
     }
 }

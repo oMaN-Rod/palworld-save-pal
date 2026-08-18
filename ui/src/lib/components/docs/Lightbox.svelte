@@ -1,8 +1,5 @@
 <script lang="ts">
-	let {
-		src = $bindable(''),
-		alt = $bindable('')
-	}: { src: string; alt: string } = $props();
+	let { src = $bindable(''), alt = $bindable('') }: { src: string; alt: string } = $props();
 
 	let open = $derived(src !== '');
 

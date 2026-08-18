@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { zipSync } from 'fflate';
 import { readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -23,7 +23,7 @@ test('zip import persists and is offered as Resume after reload', async ({ page 
 		.locator('input[type=file][name=file]')
 		.setInputFiles({ name: 'world1.zip', mimeType: 'application/zip', buffer: world1Zip() });
 	await page.getByRole('button', { name: /^upload$/i }).click();
-	await expect(page).toHaveURL(/\/edit/, { timeout: 30_000 });
+	await expect(page).toHaveURL(/\/overview/, { timeout: 30_000 });
 
 	// Reload: the app boots to the web root/upload; a Resume control appears
 	// because the imported save was persisted to OPFS.
@@ -32,5 +32,5 @@ test('zip import persists and is offered as Resume after reload', async ({ page 
 
 	// Resuming re-loads the same world.
 	await page.getByRole('button', { name: /^resume /i }).click();
-	await expect(page).toHaveURL(/\/edit/, { timeout: 30_000 });
+	await expect(page).toHaveURL(/\/overview/, { timeout: 30_000 });
 });

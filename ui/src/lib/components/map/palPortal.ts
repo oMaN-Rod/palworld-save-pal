@@ -1,7 +1,7 @@
-import * as THREE from 'three';
 import { MercatorCoordinate } from 'maplibre-gl';
-import { worldToPixel, type MapArea } from './utils';
+import * as THREE from 'three';
 import { pixelToLngLat } from './mercator';
+import { worldToPixel, type MapArea } from './utils';
 
 export const PORTAL_RADIUS_CM = 180;
 export const PORTAL_HEIGHT_CM = 1380;

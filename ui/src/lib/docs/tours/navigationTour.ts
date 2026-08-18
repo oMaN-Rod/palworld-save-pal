@@ -23,7 +23,7 @@ export const navigationTour: TourDefinition = {
 			}
 		},
 		{
-			element: 'a[href="/file"], a[href="/upload"]',
+			element: 'a[href="/overview"], a[href="/upload"]',
 			popover: {
 				title: 'File Management',
 				description:
@@ -50,16 +50,14 @@ export const navigationTour: TourDefinition = {
 			element: 'a[href="/ups"]',
 			popover: {
 				title: 'Universal Pal Storage (UPS)',
-				description:
-					'View and manage your UPS Pals, which can be shared across all your saves.'
+				description: 'View and manage your UPS Pals, which can be shared across all your saves.'
 			}
 		},
 		{
 			element: 'a[href="/debug"]',
 			popover: {
 				title: 'Debug',
-				description:
-					'Access debugging tools for inspecting game data.'
+				description: 'Access debugging tools for inspecting game data.'
 			}
 		},
 		{
@@ -97,16 +95,14 @@ export const navigationTour: TourDefinition = {
 			element: 'button[title="Open Folder"]',
 			popover: {
 				title: 'Open Folder',
-				description:
-					'Open default folder locations.'
+				description: 'Open default folder locations.'
 			}
 		},
 		{
 			element: 'button[title="Settings"]',
 			popover: {
 				title: 'Settings',
-				description:
-					'Access application settings, configure preferences, and manage your account.'
+				description: 'Access application settings, configure preferences, and manage your account.'
 			}
 		}
 	]

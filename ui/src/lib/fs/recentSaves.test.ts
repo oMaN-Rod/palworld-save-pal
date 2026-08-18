@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import 'fake-indexeddb/auto';
-import { putRecent, listRecent, getMostRecent, removeRecent, type RecentSave } from './recentSaves';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { getMostRecent, listRecent, putRecent, removeRecent, type RecentSave } from './recentSaves';
 
 function rec(id: string, savedAt: number): RecentSave {
 	return { id, kind: 'opfs', opfsPath: `${id}.zip`, worldName: id, sizeBytes: 10, savedAt };

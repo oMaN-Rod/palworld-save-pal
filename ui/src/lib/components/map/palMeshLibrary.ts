@@ -9,7 +9,11 @@
 import * as THREE from 'three';
 import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import manifest from '../../../../../data/json/pal_meshes.json';
-import { configureTexturedMaterial, createMeshoptGLTFLoader, dequantizeToFloat32 } from './meshLibrary';
+import {
+	configureTexturedMaterial,
+	createMeshoptGLTFLoader,
+	dequantizeToFloat32
+} from './meshLibrary';
 import { resolvePalModelKey } from './palModelKey';
 
 type Entry = { file: string; bytes: number; triangles: number };

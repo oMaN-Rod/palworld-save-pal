@@ -355,7 +355,10 @@ fn heal_save_parameter_clears_sickness_and_resets_sanity_and_stomach() {
         psp_core::ue::Property::Float(psp_core::ue::Float(30.0)),
     );
     save_parameter.insert("WorkerSick", psp_core::ue::Property::Bool(true));
-    save_parameter.insert("SanityValue", psp_core::ue::Property::Float(psp_core::ue::Float(12.0)));
+    save_parameter.insert(
+        "SanityValue",
+        psp_core::ue::Property::Float(psp_core::ue::Float(12.0)),
+    );
 
     pal::heal_save_parameter(&mut save_parameter, "Sheepball", &data);
 

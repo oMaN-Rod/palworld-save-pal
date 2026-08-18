@@ -68,7 +68,9 @@ fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntr
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(
+            character_data,
+        ))),
     );
 
     MapEntry {

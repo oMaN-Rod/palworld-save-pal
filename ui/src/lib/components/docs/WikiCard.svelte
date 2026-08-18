@@ -34,7 +34,7 @@
 
 {#if variant === 'grid'}
 	<a
-		href={href}
+		{href}
 		class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 flex flex-col items-center rounded-lg border p-2.5 text-center transition-colors"
 	>
 		{#if icon}
@@ -57,7 +57,7 @@
 	</a>
 {:else}
 	<a
-		href={href}
+		{href}
 		class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 flex items-center gap-2 rounded-md border p-2 text-left transition-colors"
 	>
 		{#if icon}

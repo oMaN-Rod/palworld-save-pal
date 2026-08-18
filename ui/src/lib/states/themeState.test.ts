@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { isLightTheme } from './themeState.svelte';
 
 describe('isLightTheme', () => {
@@ -7,7 +7,14 @@ describe('isLightTheme', () => {
 		expect(isLightTheme('lamball')).toBe(true);
 	});
 	it('classifies dark themes', () => {
-		for (const t of ['dark', 'frontier', 'grizzbolt', 'sakurajima', 'wildlands', 'ancient'] as const) {
+		for (const t of [
+			'dark',
+			'frontier',
+			'grizzbolt',
+			'sakurajima',
+			'wildlands',
+			'ancient'
+		] as const) {
 			expect(isLightTheme(t)).toBe(false);
 		}
 	});

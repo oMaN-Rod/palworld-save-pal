@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { MessageType } from '$types';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const sendAndWait = vi.fn();
 const send = vi.fn();
@@ -130,9 +130,7 @@ describe('blueprintsData.place', () => {
 
 describe('blueprintsData.remove', () => {
 	it('deletes by id then refreshes the row list', async () => {
-		sendAndWait
-			.mockResolvedValueOnce({ id: 'row-1' })
-			.mockResolvedValueOnce({ blueprints: [] });
+		sendAndWait.mockResolvedValueOnce({ id: 'row-1' }).mockResolvedValueOnce({ blueprints: [] });
 		await blueprintsData.remove('row-1');
 		expect(sendAndWait).toHaveBeenNthCalledWith(1, MessageType.DELETE_BLUEPRINT, { id: 'row-1' });
 		expect(sendAndWait).toHaveBeenNthCalledWith(2, MessageType.LIST_BLUEPRINTS, undefined);

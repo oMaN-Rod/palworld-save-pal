@@ -1,7 +1,7 @@
+import { MAX_LEVEL } from '$lib/constants';
 import { expData, palsData } from '$lib/data';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
-import { MAX_LEVEL } from '$lib/constants';
 import {
 	EntryState,
 	type Pal,
@@ -99,19 +99,19 @@ export function canBeAlpha(character_id: string): [string, boolean] {
 }
 
 export function editAlpha(pal: Pal, force: boolean = false): [string, boolean] {
-		const [type, valid] = canBeAlpha(pal.character_id);
-		if (!valid) {
-			pal.is_boss = false;
-			pal.is_lucky = false;
-			pal.state = EntryState.MODIFIED;
-			return [type, false];
-		}
-		pal.is_boss = force ? true : !pal.is_boss;
-		pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
-		formatBossCharacterId(pal);
+	const [type, valid] = canBeAlpha(pal.character_id);
+	if (!valid) {
+		pal.is_boss = false;
+		pal.is_lucky = false;
 		pal.state = EntryState.MODIFIED;
-		return [type, true];
+		return [type, false];
 	}
+	pal.is_boss = force ? true : !pal.is_boss;
+	pal.is_lucky = pal.is_boss ? false : pal.is_lucky;
+	formatBossCharacterId(pal);
+	pal.state = EntryState.MODIFIED;
+	return [type, true];
+}
 
 export function editAwakened(pal: Pal): void {
 	pal.is_awakened = !pal.is_awakened;
@@ -520,7 +520,7 @@ export enum WazaID {
 	Unique_YakushimaBoss002_2_PhantasmalDeathray = 307,
 	Unique_NightBlueHorse_Tossin = 308,
 	Unique_BlueThunderHorse_Tossin = 309,
-	MAX = 310,
+	MAX = 310
 }
 
 /**
@@ -530,16 +530,16 @@ export enum WazaID {
  * The skillIdString is always prefixed with 'EPalWazaID::' for consistency.
  */
 export function wazaIdFromStr(value: string): [WazaID | null, string] {
-	if (!value.startsWith("EPalWazaID::")) {
+	if (!value.startsWith('EPalWazaID::')) {
 		return [null, value];
 	}
 
-	const idPart = value.split("::").pop()!;
+	const idPart = value.split('::').pop()!;
 
 	// Try to parse as a name first
 	if (idPart in WazaID) {
 		const waza = WazaID[idPart as keyof typeof WazaID];
-		if (typeof waza === "number") {
+		if (typeof waza === 'number') {
 			return [waza, `EPalWazaID::${WazaID[waza]}`];
 		}
 	}

@@ -1,13 +1,13 @@
-import { describe, expect, it } from 'vitest';
 import type { ExpressionSpecification } from 'maplibre-gl';
+import { describe, expect, it } from 'vitest';
 import {
 	HALO_PAD,
 	ICON_SCALE,
 	ICON_ZOOM_MAX,
 	ICON_ZOOM_MIN,
 	haloRadiusPx,
-	zoomScaledRadius,
-	zoomScaledIconSize
+	zoomScaledIconSize,
+	zoomScaledRadius
 } from './expressions';
 
 const build = (...args: Parameters<typeof zoomScaledIconSize>): unknown[] =>

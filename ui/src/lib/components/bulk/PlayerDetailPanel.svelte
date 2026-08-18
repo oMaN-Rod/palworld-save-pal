@@ -46,7 +46,11 @@
 		</div>
 		{#if appState.loadingPlayer}
 			<div class="flex flex-1 items-center justify-center">
-				<Loading label={m.loading_entity({ entity: m.player({count: 1}) })} loadingComplete={!appState.loadingPlayer} icon={User}/>
+				<Loading
+					label={m.loading_entity({ entity: m.player({ count: 1 }) })}
+					loadingComplete={!appState.loadingPlayer}
+					icon={User}
+				/>
 			</div>
 		{:else if player}
 			<div class="flex flex-col gap-3">

@@ -4,14 +4,30 @@ use psp_core::ue::{Double, Quat, Vector};
 
 fn identity_at(x: f64, y: f64, z: f64) -> PalTransform {
     PalTransform {
-        rotation: Quat { x: Double(0.0), y: Double(0.0), z: Double(0.0), w: Double(1.0) },
-        translation: Vector { x: Double(x), y: Double(y), z: Double(z) },
-        scale: Vector { x: Double(1.0), y: Double(1.0), z: Double(1.0) },
+        rotation: Quat {
+            x: Double(0.0),
+            y: Double(0.0),
+            z: Double(0.0),
+            w: Double(1.0),
+        },
+        translation: Vector {
+            x: Double(x),
+            y: Double(y),
+            z: Double(z),
+        },
+        scale: Vector {
+            x: Double(1.0),
+            y: Double(1.0),
+            z: Double(1.0),
+        },
     }
 }
 
 fn assert_close(actual: f64, expected: f64, what: &str) {
-    assert!((actual - expected).abs() < 1e-6, "{what}: expected {expected}, got {actual}");
+    assert!(
+        (actual - expected).abs() < 1e-6,
+        "{what}: expected {expected}, got {actual}"
+    );
 }
 
 #[test]
@@ -60,7 +76,11 @@ fn placing_at_a_rotated_anchor_orbits_the_structure() {
 fn scale_is_carried_through_unchanged() {
     let anchor = identity_at(0.0, 0.0, 0.0);
     let mut world = identity_at(100.0, 0.0, 0.0);
-    world.scale = Vector { x: Double(2.0), y: Double(3.0), z: Double(4.0) };
+    world.scale = Vector {
+        x: Double(2.0),
+        y: Double(3.0),
+        z: Double(4.0),
+    };
 
     let relative = transform::to_relative(&anchor, &world);
     let restored = transform::to_world(&anchor, &relative);

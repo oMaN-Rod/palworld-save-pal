@@ -148,9 +148,7 @@ pub struct SteamSaveLayout {
 
 /// Error strings AND check order are wire-visible: the frontend shows the first
 /// failure it gets back, so a reordering changes what the user is told.
-pub fn validate_steam_save_directory(
-    save_path: &str,
-) -> Result<SteamSaveLayout, HandlerError> {
+pub fn validate_steam_save_directory(save_path: &str) -> Result<SteamSaveLayout, HandlerError> {
     let save_dir = Path::new(save_path)
         .parent()
         .unwrap_or_else(|| Path::new(""))
@@ -340,7 +338,8 @@ pub async fn handle_select_save(
         if let Some(parent_dir) = selected.parent() {
             // Persist BEFORE loading: a load failure must not lose the dir the
             // user just picked.
-            psp_db::settings::update_save_dir(&*ctx.app.driver, &parent_dir.to_string_lossy()).await?;
+            psp_db::settings::update_save_dir(&*ctx.app.driver, &parent_dir.to_string_lossy())
+                .await?;
         }
         resolved_path = Some(selected.to_string_lossy().into_owned());
     }
@@ -910,8 +909,7 @@ fn write_gps_if_loaded(session: &SaveSession, progress: &ProgressSink) -> Result
     };
     progress("Writing Global Pal Storage file");
     if gps_path.exists() {
-        std::fs::copy(gps_path, format!("{}.backup", gps_path.display()))
-            .map_err(CoreError::Io)?;
+        std::fs::copy(gps_path, format!("{}.backup", gps_path.display())).map_err(CoreError::Io)?;
     }
     std::fs::write(gps_path, &gps_bytes).map_err(CoreError::Io)?;
     Ok(())
@@ -1039,7 +1037,9 @@ pub async fn handle_save_modded_save(
 }
 
 async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let save_dir = psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir;
+    let save_dir = psp_db::settings::get_settings(&*ctx.app.driver)
+        .await?
+        .save_dir;
     let progress = ctx.emitter.progress_sink();
 
     let Some(session) = ctx.session.save.as_ref() else {
@@ -1106,7 +1106,11 @@ async fn write_modded_gamepass_containers(
         .selected_gamepass_save
         .clone()
         .ok_or_else(|| HandlerError::Other("No GamePass save selected".to_string()))?;
-    let container_dir = PathBuf::from(psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir);
+    let container_dir = PathBuf::from(
+        psp_db::settings::get_settings(&*ctx.app.driver)
+            .await?
+            .save_dir,
+    );
     let progress = ctx.emitter.progress_sink();
 
     progress("Creating backup of container path...");
@@ -1677,27 +1681,17 @@ mod tests {
 
     #[test]
     fn is_player_save_file_accepts_uuid_saves_and_rejects_junk() {
-        assert!(is_player_save_file(
-            "00000000000000000000000000000001.sav"
-        ));
-        assert!(is_player_save_file(
-            "0123456789ABCDEFfedcba9876543210.sav"
-        ));
+        assert!(is_player_save_file("00000000000000000000000000000001.sav"));
+        assert!(is_player_save_file("0123456789ABCDEFfedcba9876543210.sav"));
         assert!(is_player_save_file(
             "00000000000000000000000000000001_dps.sav"
         ));
 
         assert!(!is_player_save_file("notes.sav")); // non-hex stem
         assert!(!is_player_save_file("0000.sav")); // too short
-        assert!(!is_player_save_file(
-            "00000000000000000000000000000001.txt"
-        )); // wrong extension
-        assert!(!is_player_save_file(
-            "0000000000000000000000000000000G.sav"
-        )); // non-hex digit
-        assert!(!is_player_save_file(
-            "00000000000000000000000000000001"
-        )); // no extension
+        assert!(!is_player_save_file("00000000000000000000000000000001.txt")); // wrong extension
+        assert!(!is_player_save_file("0000000000000000000000000000000G.sav")); // non-hex digit
+        assert!(!is_player_save_file("00000000000000000000000000000001")); // no extension
         assert!(!is_player_save_file("_dps.sav")); // empty hex stem
     }
 

@@ -215,15 +215,20 @@
 					>
 						<div class="flex flex-col items-center gap-3">
 							<div class="flex items-center gap-3">
-								<div class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3">
+								<div
+									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
+								>
 									{@html steamIcon}
 								</div>
 								<ArrowRightLeft class="text-surface-400" size={20} />
-								<div class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3">
+								<div
+									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
+								>
 									{@html xboxIcon}
 								</div>
 							</div>
-							<span class="text-surface-50 text-lg font-semibold">{m.steam()} → {m.gamepass()}</span>
+							<span class="text-surface-50 text-lg font-semibold">{m.steam()} → {m.gamepass()}</span
+							>
 							<span class="text-surface-300 text-center text-sm">
 								{m.tools_steam_to_gamepass_desc()}
 							</span>
@@ -238,15 +243,20 @@
 					>
 						<div class="flex flex-col items-center gap-3">
 							<div class="flex items-center gap-3">
-								<div class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3">
+								<div
+									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
+								>
 									{@html xboxIcon}
 								</div>
 								<ArrowRightLeft class="text-surface-400" size={20} />
-								<div class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3">
+								<div
+									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
+								>
 									{@html steamIcon}
 								</div>
 							</div>
-							<span class="text-surface-50 text-lg font-semibold">{m.gamepass()} → {m.steam()}</span>
+							<span class="text-surface-50 text-lg font-semibold">{m.gamepass()} → {m.steam()}</span
+							>
 							<span class="text-surface-300 text-center text-sm">
 								{m.tools_gamepass_to_steam_desc()}
 							</span>

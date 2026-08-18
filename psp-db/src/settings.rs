@@ -76,7 +76,10 @@ pub async fn get_settings(db: &dyn crate::DbDriver) -> Result<SettingsRow, DbErr
 
 /// Upserts every column except save_dir: the DO UPDATE branch omits it, so the bound
 /// default only lands when this call is the one creating the row.
-pub async fn update_settings(db: &dyn crate::DbDriver, update: &SettingsUpdate) -> Result<SettingsRow, DbError> {
+pub async fn update_settings(
+    db: &dyn crate::DbDriver,
+    update: &SettingsUpdate,
+) -> Result<SettingsRow, DbError> {
     db.execute(
         "INSERT INTO settings (id, language, save_dir, clone_prefix, new_pal_prefix, debug_mode, cheat_mode) \
          VALUES (1, ?1, ?2, ?3, ?4, ?5, ?6) \
@@ -98,14 +101,20 @@ pub async fn update_settings(db: &dyn crate::DbDriver, update: &SettingsUpdate) 
 /// the row (with defaults) first so the UPDATE always has something to hit.
 pub async fn update_save_dir(db: &dyn crate::DbDriver, save_dir: &str) -> Result<(), DbError> {
     get_settings(db).await?;
-    db.execute("UPDATE settings SET save_dir = ?1 WHERE id = 1", &[save_dir.into()]).await?;
+    db.execute(
+        "UPDATE settings SET save_dir = ?1 WHERE id = 1",
+        &[save_dir.into()],
+    )
+    .await?;
     Ok(())
 }
 
 /// Reads the singleton settings row's save_dir. None means the row does not exist yet
 /// (fresh DB, before `get_settings` seeds it).
 pub async fn saved_save_dir(db: &dyn crate::DbDriver) -> Result<Option<String>, DbError> {
-    let rows = db.query("SELECT save_dir FROM settings WHERE id = 1", &[]).await?;
+    let rows = db
+        .query("SELECT save_dir FROM settings WHERE id = 1", &[])
+        .await?;
     rows.first().map(|r| r.get_string("save_dir")).transpose()
 }
 
@@ -158,7 +167,11 @@ mod fallback_tests {
         async fn execute(&self, _sql: &str, _params: &[crate::DbValue]) -> Result<u64, DbError> {
             Ok(0)
         }
-        async fn query(&self, _sql: &str, _params: &[crate::DbValue]) -> Result<Vec<DbRow>, DbError> {
+        async fn query(
+            &self,
+            _sql: &str,
+            _params: &[crate::DbValue],
+        ) -> Result<Vec<DbRow>, DbError> {
             Ok(Vec::new())
         }
     }

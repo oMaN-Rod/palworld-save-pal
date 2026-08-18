@@ -47,7 +47,11 @@ export function filterBySearch<T>(rows: T[], query: string, fields: (keyof T)[])
 	const needle = query.trim().toLowerCase();
 	if (!needle) return rows;
 	return rows.filter((row) =>
-		fields.some((field) => String(row[field] ?? '').toLowerCase().includes(needle))
+		fields.some((field) =>
+			String(row[field] ?? '')
+				.toLowerCase()
+				.includes(needle)
+		)
 	);
 }
 

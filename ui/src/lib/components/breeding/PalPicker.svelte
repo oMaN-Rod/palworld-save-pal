@@ -122,7 +122,7 @@
 	<button
 		type="button"
 		bind:this={triggerEl}
-		class="input flex h-11 items-center gap-2 text-left cursor-pointer hover:border-primary-500/50 transition-colors"
+		class="input hover:border-primary-500/50 flex h-11 cursor-pointer items-center gap-2 text-left transition-colors"
 		onclick={() => (open = !open)}
 		aria-haspopup="listbox"
 		aria-expanded={open}
@@ -131,14 +131,14 @@
 			<img
 				src={assetLoader.loadMenuImage(selectedPal.tribe)}
 				alt={selectedPal.display_name}
-				class="w-7 h-7 object-contain rounded-sm bg-surface-900"
+				class="bg-surface-900 h-7 w-7 rounded-sm object-contain"
 			/>
-			<span class="text-sm font-medium text-surface-50 truncate flex-1">
+			<span class="text-surface-50 flex-1 truncate text-sm font-medium">
 				{selectedPal.display_name}
 			</span>
 		{:else}
 			<Search size={16} class="text-surface-400" />
-			<span class="text-sm text-surface-400 flex-1">{placeholder}</span>
+			<span class="text-surface-400 flex-1 text-sm">{placeholder}</span>
 		{/if}
 		<ChevronDown size={16} class="text-surface-400 shrink-0" />
 	</button>
@@ -147,19 +147,19 @@
 		<div
 			bind:this={floatingEl}
 			{@attach portal()}
-			class="bg-surface-900 border border-surface-700 rounded-md shadow-xl flex flex-col max-h-96 min-w-72"
+			class="bg-surface-900 border-surface-700 flex max-h-96 min-w-72 flex-col rounded-md border shadow-xl"
 			style="position: fixed; z-index: 99999;"
 			role="listbox"
 		>
-			<div class="flex items-center gap-2 border-b border-surface-700 p-2">
+			<div class="border-surface-700 flex items-center gap-2 border-b p-2">
 				<input
 					type="text"
 					bind:value={query}
 					placeholder={m.breeding_search_pals()}
-					class="input text-sm flex-1"
+					class="input flex-1 text-sm"
 					autocomplete="off"
 				/>
-				<div class="flex gap-0.5 shrink-0">
+				<div class="flex shrink-0 gap-0.5">
 					<button
 						type="button"
 						class="rounded-sm p-1.5 transition-colors {viewMode === 'grid'
@@ -182,15 +182,18 @@
 					</button>
 				</div>
 			</div>
-			<div class="overflow-y-auto flex-1">
+			<div class="flex-1 overflow-y-auto">
 				{#if filtered.length === 0}
-					<p class="text-sm text-surface-400 p-3 text-center">{m.breeding_no_matches()}</p>
+					<p class="text-surface-400 p-3 text-center text-sm">{m.breeding_no_matches()}</p>
 				{:else if viewMode === 'grid'}
-					<div class="grid gap-1 p-2" style="grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));">
+					<div
+						class="grid gap-1 p-2"
+						style="grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));"
+					>
 						{#each filtered as pal (pal.tribe)}
 							<button
 								type="button"
-								class="flex flex-col items-center gap-1 rounded-sm p-1.5 transition-colors hover:bg-surface-800 {pal.tribe ===
+								class="hover:bg-surface-800 flex flex-col items-center gap-1 rounded-sm p-1.5 transition-colors {pal.tribe ===
 								value
 									? 'bg-primary-500/15'
 									: ''}"
@@ -199,10 +202,10 @@
 								<img
 									src={assetLoader.loadMenuImage(pal.tribe)}
 									alt={pal.display_name}
-									class="w-10 h-10 object-contain rounded-sm bg-surface-900"
+									class="bg-surface-900 h-10 w-10 rounded-sm object-contain"
 									loading="lazy"
 								/>
-								<span class="text-xs text-surface-200 truncate w-full text-center"
+								<span class="text-surface-200 w-full truncate text-center text-xs"
 									>{pal.display_name}</span
 								>
 							</button>
@@ -212,19 +215,20 @@
 					{#each filtered as pal (pal.tribe)}
 						<button
 							type="button"
-							class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm hover:bg-surface-800 transition-colors {pal.tribe === value ? 'bg-primary-500/15' : ''}"
+							class="hover:bg-surface-800 flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors {pal.tribe ===
+							value
+								? 'bg-primary-500/15'
+								: ''}"
 							onclick={() => pick(pal)}
 						>
 							<img
 								src={assetLoader.loadMenuImage(pal.tribe)}
 								alt={pal.display_name}
-								class="w-7 h-7 object-contain rounded-sm bg-surface-900 shrink-0"
+								class="bg-surface-900 h-7 w-7 shrink-0 rounded-sm object-contain"
 								loading="lazy"
 							/>
-							<span class="font-medium text-surface-50 truncate flex-1"
-								>{pal.display_name}</span
-							>
-							<span class="text-[10px] text-surface-400 font-mono shrink-0"
+							<span class="text-surface-50 flex-1 truncate font-medium">{pal.display_name}</span>
+							<span class="text-surface-400 shrink-0 font-mono text-[10px]"
 								>R{pal.rarity ?? '-'}</span
 							>
 						</button>

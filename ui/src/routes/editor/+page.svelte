@@ -162,8 +162,12 @@
 
 <!-- Palette source for the editor theme; its own data-theme makes the read
      independent of the layout's <body> theme effect. Never visible. -->
-<div bind:this={paletteProbe} data-theme={theme.current} class="palette-probe" aria-hidden="true">
-</div>
+<div
+	bind:this={paletteProbe}
+	data-theme={theme.current}
+	class="palette-probe"
+	aria-hidden="true"
+></div>
 
 {#if content}
 	<div class="editor-wrapper">

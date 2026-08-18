@@ -1,4 +1,7 @@
-import type { GeoJSONSource as MaplibreGeoJSONSource, GeoJSONSourceSpecification } from 'maplibre-gl';
+import type {
+	GeoJSONSourceSpecification,
+	GeoJSONSource as MaplibreGeoJSONSource
+} from 'maplibre-gl';
 import type { Snippet } from 'svelte';
 
 export interface GeoJSONSourceProps extends Omit<GeoJSONSourceSpecification, 'type'> {

@@ -5,7 +5,13 @@
 	import { SkillSelectModal } from '$components/modals';
 	import { getModalState } from '$states';
 	import { Tooltip } from '$components/ui';
-	import { assetLoader, calculateFilters, skillBorderClass, skillFilter, skillOpacity } from '$utils';
+	import {
+		assetLoader,
+		calculateFilters,
+		skillBorderClass,
+		skillFilter,
+		skillOpacity
+	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import HelpCircle from '@lucide/svelte/icons/circle-question-mark';

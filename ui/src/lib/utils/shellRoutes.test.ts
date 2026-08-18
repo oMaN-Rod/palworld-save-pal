@@ -11,7 +11,7 @@ describe('isSaveRequiredRoute', () => {
 		expect(isSaveRequiredRoute('/editor')).toBe(true);
 		expect(isSaveRequiredRoute('/debug')).toBe(true);
 		expect(isSaveRequiredRoute('/servers')).toBe(true);
-		expect(isSaveRequiredRoute('/file')).toBe(true);
+		expect(isSaveRequiredRoute('/overview')).toBe(true);
 	});
 
 	it('matches nested save-required routes', () => {

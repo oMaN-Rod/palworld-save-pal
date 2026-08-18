@@ -79,7 +79,7 @@
 			{#if totalTrees > 0}
 				<div class="mr-1 flex items-center gap-0.5">
 					<button
-						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+						class="btn btn-secondary text-surface-400 hover:text-surface-50 rounded-sm p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={prev}
 						disabled={activeIndex <= 0}
 						title={m.breeding_previous()}
@@ -90,7 +90,7 @@
 						{totalTrees > 0 ? `${activeIndex + 1}/${totalTrees}` : '0/0'}
 					</span>
 					<button
-						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+						class="btn btn-secondary text-surface-400 hover:text-surface-50 rounded-sm p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={next}
 						disabled={activeIndex >= totalTrees - 1}
 						title={m.breeding_next()}
@@ -127,7 +127,7 @@
 		</div>
 
 		<div class="flex shrink-0 items-center gap-1.5">
-			<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
+			<div class="bg-surface-950/50 border-surface-700/30 flex gap-0.5 rounded-sm border p-0.5">
 				{#each VIEWS as view (view.mode)}
 					{@const Icon = view.icon}
 					<button
@@ -144,7 +144,7 @@
 			</div>
 
 			{#if chains.length > 0 && maxDepth !== undefined && maxDepth > 1}
-				<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
+				<div class="bg-surface-950/50 border-surface-700/30 flex gap-0.5 rounded-sm border p-0.5">
 					<button
 						class="rounded-sm px-1.5 py-0.5 text-xs font-medium transition-all {graphLayout ===
 						'all-in-one'

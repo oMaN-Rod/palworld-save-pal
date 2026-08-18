@@ -19,7 +19,11 @@ describe('getSortValue', () => {
 	});
 
 	it('uses sortValue when provided', () => {
-		const column: ColumnDef<Row> = { key: 'name', header: 'Name', sortValue: (row) => row.name.length };
+		const column: ColumnDef<Row> = {
+			key: 'name',
+			header: 'Name',
+			sortValue: (row) => row.name.length
+		};
 		expect(getSortValue({ id: 'a', name: 'Zed', level: 3 }, column)).toBe(3);
 	});
 });
@@ -97,20 +101,29 @@ describe('sortRows', () => {
 
 describe('nextSortState', () => {
 	it('starts a new column ascending', () => {
-		expect(nextSortState({ key: null, direction: 'asc' }, 'level')).toEqual({ key: 'level', direction: 'asc' });
+		expect(nextSortState({ key: null, direction: 'asc' }, 'level')).toEqual({
+			key: 'level',
+			direction: 'asc'
+		});
 	});
 
 	it('toggles asc -> desc on the same column', () => {
-		expect(nextSortState({ key: 'level', direction: 'asc' }, 'level')).toEqual({ key: 'level', direction: 'desc' });
+		expect(nextSortState({ key: 'level', direction: 'asc' }, 'level')).toEqual({
+			key: 'level',
+			direction: 'desc'
+		});
 	});
 
 	it('toggles desc -> asc on the same column', () => {
-		expect(nextSortState({ key: 'level', direction: 'desc' }, 'level')).toEqual({ key: 'level', direction: 'asc' });
+		expect(nextSortState({ key: 'level', direction: 'desc' }, 'level')).toEqual({
+			key: 'level',
+			direction: 'asc'
+		});
 	});
 });
 
-import { computePageInfo, paginateRows } from './table.utils';
 import type { PageState } from './table.types';
+import { computePageInfo, paginateRows } from './table.utils';
 
 describe('computePageInfo', () => {
 	it('computes ranges for a middle page', () => {
@@ -133,7 +146,14 @@ describe('computePageInfo', () => {
 
 	it('handles an empty data set', () => {
 		const info = computePageInfo({ page: 1, pageSize: 10 }, 0);
-		expect(info).toMatchObject({ page: 1, totalPages: 1, startIndex: 0, endIndex: 0, hasPrev: false, hasNext: false });
+		expect(info).toMatchObject({
+			page: 1,
+			totalPages: 1,
+			startIndex: 0,
+			endIndex: 0,
+			hasPrev: false,
+			hasNext: false
+		});
 	});
 
 	it('clamps the last partial page end index to total', () => {
@@ -148,7 +168,18 @@ describe('paginateRows', () => {
 
 	it('returns the rows for the requested page', () => {
 		const state: PageState = { page: 2, pageSize: 10 };
-		expect(paginateRows(rows, state).map((r) => r.id)).toEqual(['10', '11', '12', '13', '14', '15', '16', '17', '18', '19']);
+		expect(paginateRows(rows, state).map((r) => r.id)).toEqual([
+			'10',
+			'11',
+			'12',
+			'13',
+			'14',
+			'15',
+			'16',
+			'17',
+			'18',
+			'19'
+		]);
 	});
 
 	it('returns the partial final page', () => {

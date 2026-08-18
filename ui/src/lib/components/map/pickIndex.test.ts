@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { PickIndex } from './pickIndex';
 
 describe('PickIndex', () => {
@@ -16,7 +16,12 @@ describe('PickIndex', () => {
 		idx.add(['c']);
 		idx.add(['d', 'e', 'f']);
 		expect(['a', 'b', 'c', 'd', 'e', 'f'].map((_, i) => idx.keyAt(i))).toEqual([
-			'a', 'b', 'c', 'd', 'e', 'f'
+			'a',
+			'b',
+			'c',
+			'd',
+			'e',
+			'f'
 		]);
 	});
 

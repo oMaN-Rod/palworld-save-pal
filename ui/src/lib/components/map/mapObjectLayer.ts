@@ -10,8 +10,8 @@
 //
 // This layer owns no camera subscription: the cull radius and camera centre are
 // re-derived each compose, so the caller must re-invoke update() on camera move.
-import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
+import * as THREE from 'three';
 import manifestJson from '../../../../../data/json/map_object_meshes.json';
 import {
 	manifestParts,
@@ -19,16 +19,16 @@ import {
 	type MapObjectManifest,
 	type MapObjectPart
 } from './mapObjectMesh';
-import { partLocalMatrix, ueEulerToThreeQuaternion } from './meshPlacement';
-import { MESH_FLIP, getSharedRenderer } from './structureLayer';
 import {
 	onMapObjectMeshLoaded,
 	requestMapObjectMesh,
 	type MapObjectMeshBundle
 } from './mapObjectMeshLibrary';
-import { lngLatToPixel, pixelToLngLat } from './mercator';
-import { pixelToWorld, worldToPixel, type MapArea } from './utils';
 import { createMapObjectPortalMesh, disposeMapObjectPortalMesh } from './mapObjectPortal';
+import { lngLatToPixel, pixelToLngLat } from './mercator';
+import { partLocalMatrix, ueEulerToThreeQuaternion } from './meshPlacement';
+import { MESH_FLIP, getSharedRenderer } from './structureLayer';
+import { pixelToWorld, worldToPixel, type MapArea } from './utils';
 
 const MODEL_DIR = '/models/mapobjects';
 
@@ -136,11 +136,24 @@ export function bakeMapObjectInstances(
 			}
 			const s = item.scale;
 			out.push(
-				anchor.x, anchor.y, item.z, item.x, item.y, cullCm,
-				e[0] * s, e[1] * s, e[2] * s,
-				e[4] * s, e[5] * s, e[6] * s,
-				e[8] * s, e[9] * s, e[10] * s,
-				e[12] * s, e[13] * s, e[14] * s
+				anchor.x,
+				anchor.y,
+				item.z,
+				item.x,
+				item.y,
+				cullCm,
+				e[0] * s,
+				e[1] * s,
+				e[2] * s,
+				e[4] * s,
+				e[5] * s,
+				e[6] * s,
+				e[8] * s,
+				e[9] * s,
+				e[10] * s,
+				e[12] * s,
+				e[13] * s,
+				e[14] * s
 			);
 		}
 	}
@@ -219,8 +232,16 @@ export function bakeMapObjectPortalInstances(
 		const cullCm = cullDistanceCmFor(manifest[item.actorClass]);
 		color.set(item.portalColor);
 		values.push(
-			anchor.x, anchor.y, item.z, item.x, item.y, cullCm, item.scale,
-			color.r, color.g, color.b
+			anchor.x,
+			anchor.y,
+			item.z,
+			item.x,
+			item.y,
+			cullCm,
+			item.scale,
+			color.r,
+			color.g,
+			color.b
 		);
 	}
 	return new Float32Array(values);
@@ -428,7 +449,11 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 			return existing;
 		}
 		if (existing) releaseMesh(existing);
-		const inst = new THREE.InstancedMesh(bundle.geometry, bundle.material, Math.ceil(capacity * 1.25) + 1);
+		const inst = new THREE.InstancedMesh(
+			bundle.geometry,
+			bundle.material,
+			Math.ceil(capacity * 1.25) + 1
+		);
 		inst.frustumCulled = false;
 		scene.add(inst);
 		meshObjects.set(mesh, inst);
@@ -561,7 +586,9 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
+			camera.projectionMatrix = new THREE.Matrix4().fromArray(
+				args.defaultProjectionData.mainMatrix
+			);
 			renderer.resetState();
 			renderer.render(scene, camera);
 		},
@@ -587,10 +614,22 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 				if (i < count) {
 					const o = i * BAKED_STRIDE;
 					return new THREE.Matrix4().set(
-						chunk[o + 6], chunk[o + 9], chunk[o + 12], chunk[o + 15],
-						chunk[o + 7], chunk[o + 10], chunk[o + 13], chunk[o + 16],
-						chunk[o + 8], chunk[o + 11], chunk[o + 14], chunk[o + 17],
-						0, 0, 0, 1
+						chunk[o + 6],
+						chunk[o + 9],
+						chunk[o + 12],
+						chunk[o + 15],
+						chunk[o + 7],
+						chunk[o + 10],
+						chunk[o + 13],
+						chunk[o + 16],
+						chunk[o + 8],
+						chunk[o + 11],
+						chunk[o + 14],
+						chunk[o + 17],
+						0,
+						0,
+						0,
+						1
 					);
 				}
 				i -= count;

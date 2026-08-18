@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { passiveSkillsData } from '$lib/data';
-	import { groupPassiveFamilies, type PassiveFamily, type PassiveMember } from '$lib/utils/passiveFamilies';
+	import {
+		groupPassiveFamilies,
+		type PassiveFamily,
+		type PassiveMember
+	} from '$lib/utils/passiveFamilies';
 	import { isDisabledRecord } from '$lib/utils/wikiSlug';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -12,8 +16,8 @@
 	let selectedMemberKey = $state<string | null>(null);
 
 	const allEntries = $derived(
-		Object.entries(passiveSkillsData.passiveSkills).filter(([, record]) =>
-			!isDisabledRecord(record)
+		Object.entries(passiveSkillsData.passiveSkills).filter(
+			([, record]) => !isDisabledRecord(record)
 		)
 	);
 
@@ -78,7 +82,9 @@
 					<li>
 						<button
 							type="button"
-							class="hover:bg-surface-800 flex w-full items-center gap-2 rounded-md border-l-2 px-2 py-1.5 text-left text-sm transition-colors {skillBorderClass(family.primaryRank)} {selectedFamily?.key === family.key ? 'bg-surface-800' : ''}"
+							class="hover:bg-surface-800 flex w-full items-center gap-2 rounded-md border-l-2 px-2 py-1.5 text-left text-sm transition-colors {skillBorderClass(
+								family.primaryRank
+							)} {selectedFamily?.key === family.key ? 'bg-surface-800' : ''}"
 							onclick={() => selectFamily(family)}
 						>
 							<img
@@ -92,7 +98,9 @@
 							/>
 							<span class="truncate">{family.displayName}</span>
 							{#if family.members.length > 1}
-								<span class="text-surface-500 ml-auto shrink-0 text-xs">{family.members.length}</span>
+								<span class="text-surface-500 ml-auto shrink-0 text-xs"
+									>{family.members.length}</span
+								>
 							{/if}
 						</button>
 					</li>
@@ -108,11 +116,17 @@
 						src={rankIcon(selectedFamily.primaryRank)}
 						alt=""
 						class="h-10 w-10 object-contain"
-						style={skillFilter(selectedFamily.primaryRank) ? `filter: ${skillFilter(selectedFamily.primaryRank)};` : undefined}
+						style={skillFilter(selectedFamily.primaryRank)
+							? `filter: ${skillFilter(selectedFamily.primaryRank)};`
+							: undefined}
 					/>
 					<div class="flex flex-col">
 						<h2 class="text-lg font-semibold">{selectedFamily.displayName}</h2>
-						<span class="text-surface-400 text-xs">{selectedFamily.members.length} variant{selectedFamily.members.length === 1 ? '' : 's'}</span>
+						<span class="text-surface-400 text-xs"
+							>{selectedFamily.members.length} variant{selectedFamily.members.length === 1
+								? ''
+								: 's'}</span
+						>
 					</div>
 				</div>
 
@@ -123,7 +137,11 @@
 							{@const isActive = activeMember?.skill.details.rank === tab.skill.details.rank}
 							<button
 								type="button"
-								class="border-l-2 px-2.5 py-1 text-sm transition-colors {skillBorderClass(tab.skill.details.rank)} {isActive ? 'bg-surface-700 text-surface-50' : 'text-surface-400 hover:bg-surface-800'}"
+								class="border-l-2 px-2.5 py-1 text-sm transition-colors {skillBorderClass(
+									tab.skill.details.rank
+								)} {isActive
+									? 'bg-surface-700 text-surface-50'
+									: 'text-surface-400 hover:bg-surface-800'}"
 								onclick={() => (selectedMemberKey = tab.key)}
 							>
 								Rank {tab.skill.details.rank}
@@ -135,7 +153,9 @@
 				{#if activeMember}
 					{@const member = activeMember}
 					<div class="mb-3 flex flex-wrap items-center gap-2">
-						<span class="rounded bg-surface-800 px-2 py-0.5 font-mono text-xs">Rank {member.skill.details.rank}</span>
+						<span class="bg-surface-800 rounded px-2 py-0.5 font-mono text-xs"
+							>Rank {member.skill.details.rank}</span
+						>
 						<span class="text-surface-400 font-mono text-xs">{member.key}</span>
 					</div>
 
@@ -145,10 +165,12 @@
 
 					{#if member.skill.details.effects.length > 0}
 						<div class="mb-3">
-							<h3 class="text-surface-400 mb-1 text-xs font-semibold uppercase tracking-wide">Effects</h3>
+							<h3 class="text-surface-400 mb-1 text-xs font-semibold tracking-wide uppercase">
+								Effects
+							</h3>
 							<table class="w-full text-sm">
 								<thead>
-									<tr class="text-surface-400 border-b border-surface-800 text-left text-xs">
+									<tr class="text-surface-400 border-surface-800 border-b text-left text-xs">
 										<th class="py-1 pr-2 font-medium">Type</th>
 										<th class="py-1 pr-2 font-medium">Value</th>
 										<th class="py-1 font-medium">Target</th>
@@ -156,7 +178,7 @@
 								</thead>
 								<tbody>
 									{#each member.skill.details.effects as effect (effect.type)}
-										<tr class="border-b border-surface-800/50">
+										<tr class="border-surface-800/50 border-b">
 											<td class="py-1 pr-2">{effectTypeLabel(effect.type)}</td>
 											<td class="py-1 pr-2 font-mono">{effect.value}</td>
 											<td class="text-surface-400 py-1 text-xs">{effect.target}</td>
@@ -169,13 +191,18 @@
 
 					{#if sameRankMembers.length > 1}
 						<div>
-							<h3 class="text-surface-400 mb-1 text-xs font-semibold uppercase tracking-wide">Same rank</h3>
+							<h3 class="text-surface-400 mb-1 text-xs font-semibold tracking-wide uppercase">
+								Same rank
+							</h3>
 							<ul class="flex flex-col gap-1">
 								{#each sameRankMembers as sibling (sibling.key)}
 									<li>
 										<button
 											type="button"
-											class="hover:bg-surface-800 w-full rounded px-2 py-1 text-left font-mono text-xs {sibling.key === member.key ? 'text-surface-50' : 'text-surface-400'}"
+											class="hover:bg-surface-800 w-full rounded px-2 py-1 text-left font-mono text-xs {sibling.key ===
+											member.key
+												? 'text-surface-50'
+												: 'text-surface-400'}"
 											onclick={() => (selectedMemberKey = sibling.key)}
 										>
 											{sibling.key}

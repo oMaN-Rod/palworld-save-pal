@@ -107,7 +107,10 @@ describe('WorkerTransport', () => {
 		const ws = transport();
 		const dispatched: unknown[] = [];
 		ws.connect({ goto: async () => {} });
-		const frame = { type: 'download_save_file', data: [{ name: 'W.zip', bytes: new Uint8Array([1]) }] };
+		const frame = {
+			type: 'download_save_file',
+			data: [{ name: 'W.zip', bytes: new Uint8Array([1]) }]
+		};
 
 		await workers[0].onmessage?.({ data: frame } as MessageEvent<unknown>);
 

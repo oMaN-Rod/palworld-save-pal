@@ -910,7 +910,12 @@
 		<div>
 			<!-- Pager -->
 			<div id="palbox-pager" class="mb-4 flex items-center justify-center space-x-4">
-				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
+				<Button
+					class="rounded-full p-0! font-bold"
+					variant="ghost"
+					size="md"
+					onclick={decrementPage}
+				>
 					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
 				</Button>
 
@@ -930,7 +935,7 @@
 					{/each}
 				</div>
 
-				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
+				<Button class="rounded-sm p-0! font-bold" variant="ghost" size="md" onclick={incrementPage}>
 					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
 				</Button>
 			</div>

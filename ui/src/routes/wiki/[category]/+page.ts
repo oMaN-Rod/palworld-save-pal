@@ -1,7 +1,7 @@
-import { error } from '@sveltejs/kit';
 import { WIKI_CATEGORIES, type WikiCategory } from '$lib/utils/wikiCategories';
 import { loadCategorySeo } from '$lib/utils/wikiL10n';
 import { stripKeyPrefix, toSlug } from '$lib/utils/wikiSlug';
+import { error } from '@sveltejs/kit';
 
 export const ssr = true;
 export const prerender = true;

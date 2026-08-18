@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { openSqlite } from './sqlite';
 
 describe('sqlite bridge', () => {
@@ -21,6 +21,10 @@ describe('sqlite bridge', () => {
 	it('runs a multi-statement script when no params are given', async () => {
 		const db = await openSqlite();
 		db.exec('CREATE TABLE a (x); CREATE TABLE b (y);', []);
-		expect(db.query("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name", []).map((r) => r.name)).toEqual(['a', 'b']);
+		expect(
+			db
+				.query("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name", [])
+				.map((r) => r.name)
+		).toEqual(['a', 'b']);
 	});
 });

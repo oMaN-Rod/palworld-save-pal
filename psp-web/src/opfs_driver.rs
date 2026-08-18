@@ -36,7 +36,11 @@ fn js_to_dbvalue(js: &JsValue) -> DbValue {
         // JS numbers are f64; integers come back whole. Keep whole numbers as
         // Integer so INTEGER columns decode exactly; DbRow::get_i64 also
         // tolerates a whole Real as a safety net.
-        if f.fract() == 0.0 { DbValue::Integer(f as i64) } else { DbValue::Real(f) }
+        if f.fract() == 0.0 {
+            DbValue::Integer(f as i64)
+        } else {
+            DbValue::Real(f)
+        }
     } else if let Some(s) = js.as_string() {
         DbValue::Text(s)
     } else if let Some(arr) = js.dyn_ref::<Uint8Array>() {
@@ -47,23 +51,38 @@ fn js_to_dbvalue(js: &JsValue) -> DbValue {
 }
 
 fn err(context: &str, e: JsValue) -> DbError {
-    DbError::Backend(format!("{context}: {}", e.as_string().unwrap_or_else(|| format!("{e:?}"))))
+    DbError::Backend(format!(
+        "{context}: {}",
+        e.as_string().unwrap_or_else(|| format!("{e:?}"))
+    ))
 }
 
 #[async_trait]
 impl DbDriver for OpfsSqlDriver {
     async fn execute(&self, sql: &str, params: &[DbValue]) -> Result<u64, DbError> {
-        let f = SQL_EXEC.with(|c| c.borrow().clone()).ok_or_else(|| DbError::Backend("sql bridge not set".into()))?;
+        let f = SQL_EXEC
+            .with(|c| c.borrow().clone())
+            .ok_or_else(|| DbError::Backend("sql bridge not set".into()))?;
         let n = f
-            .call2(&JsValue::NULL, &JsValue::from_str(sql), &to_js_params(params))
+            .call2(
+                &JsValue::NULL,
+                &JsValue::from_str(sql),
+                &to_js_params(params),
+            )
             .map_err(|e| err("execute", e))?;
         Ok(n.as_f64().unwrap_or(0.0) as u64)
     }
 
     async fn query(&self, sql: &str, params: &[DbValue]) -> Result<Vec<DbRow>, DbError> {
-        let f = SQL_QUERY.with(|c| c.borrow().clone()).ok_or_else(|| DbError::Backend("sql bridge not set".into()))?;
+        let f = SQL_QUERY
+            .with(|c| c.borrow().clone())
+            .ok_or_else(|| DbError::Backend("sql bridge not set".into()))?;
         let result = f
-            .call2(&JsValue::NULL, &JsValue::from_str(sql), &to_js_params(params))
+            .call2(
+                &JsValue::NULL,
+                &JsValue::from_str(sql),
+                &to_js_params(params),
+            )
             .map_err(|e| err("query", e))?;
         let rows = Array::from(&result);
         let mut out = Vec::with_capacity(rows.length() as usize);

@@ -919,7 +919,9 @@ fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() 
 
     let error =
         compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
-            .expect_err("an unresolved Rust target the fixture recorded as resolved must be reported");
+            .expect_err(
+                "an unresolved Rust target the fixture recorded as resolved must be reported",
+            );
     assert!(
         error.contains("fixtures/tools/005_get_raw_data.json"),
         "error must name the offending fixture; got: {error}"

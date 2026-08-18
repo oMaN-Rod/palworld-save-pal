@@ -1,20 +1,24 @@
-import { describe, it, expect } from 'vitest';
-import * as THREE from 'three';
+import type { Quat } from '$types';
 import { MercatorCoordinate } from 'maplibre-gl';
-import { ghostInstanceMatrix } from './ghostLayer';
-import { MESH_FLIP } from './structureLayer';
+import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { ueYawToThreeQuaternion } from './coords3d';
-import { worldToPixel } from './utils';
+import { ghostInstanceMatrix } from './ghostLayer';
 import { pixelToLngLat } from './mercator';
 import type { MeshPart } from './meshPlacement';
-import type { Quat } from '$types';
+import { MESH_FLIP } from './structureLayer';
+import { worldToPixel } from './utils';
 
 type QuatTuple = [number, number, number, number];
 type Vec3 = [number, number, number];
 
 const identityPart: MeshPart = { loc: [0, 0, 0], rot: [0, 0, 0], scale: [1, 1, 1] };
 
-const world = (translation: { x: number; y: number; z: number }, rotation: Quat, scale = { x: 1, y: 1, z: 1 }) => ({
+const world = (
+	translation: { x: number; y: number; z: number },
+	rotation: Quat,
+	scale = { x: 1, y: 1, z: 1 }
+) => ({
 	translation,
 	rotation,
 	scale

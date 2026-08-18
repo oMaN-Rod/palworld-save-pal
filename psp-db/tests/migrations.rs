@@ -34,10 +34,7 @@ async fn meta_get_set_roundtrip() {
         .await
         .unwrap();
     let db = psp_db::SqlxSqliteDriver::new(pool);
-    assert_eq!(
-        psp_db::meta::get(&db, "legacy_import").await.unwrap(),
-        None
-    );
+    assert_eq!(psp_db::meta::get(&db, "legacy_import").await.unwrap(), None);
     psp_db::meta::set(&db, "legacy_import", "{\"done\":true}")
         .await
         .unwrap();
@@ -49,9 +46,7 @@ async fn meta_get_set_roundtrip() {
         Some("{\"done\":true}")
     );
     // set is an upsert
-    psp_db::meta::set(&db, "legacy_import", "v2")
-        .await
-        .unwrap();
+    psp_db::meta::set(&db, "legacy_import", "v2").await.unwrap();
     assert_eq!(
         psp_db::meta::get(&db, "legacy_import")
             .await

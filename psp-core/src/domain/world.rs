@@ -198,15 +198,21 @@ pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
 pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData<crate::ue::Arch>> {
     let value_props = props::struct_props(&entry.value)?;
     match props::get(value_props, &["RawData"])? {
-        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => {
+            Some(data)
+        }
         _ => None,
     }
 }
 
-pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacterData<crate::ue::Arch>> {
+pub fn entry_character_data_mut(
+    entry: &mut MapEntry,
+) -> Option<&mut PalCharacterData<crate::ue::Arch>> {
     let value_props = props::struct_props_mut(&mut entry.value)?;
     match props::get_mut(value_props, &["RawData"])? {
-        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => Some(data),
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(data))) => {
+            Some(data)
+        }
         _ => None,
     }
 }
@@ -287,8 +293,9 @@ pub fn build_dynamic_item_index(level: &Save) -> std::collections::HashMap<uuid:
             let StructValue::Struct(item_props) = value else {
                 continue;
             };
-            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(dynamic_item)))) =
-                props::get(item_props, &["RawData"])
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(
+                dynamic_item,
+            )))) = props::get(item_props, &["RawData"])
             else {
                 continue;
             };
@@ -459,7 +466,9 @@ mod tests {
         let mut item_props = Properties::default();
         item_props.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(dynamic_item)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(
+                Box::new(dynamic_item),
+            ))),
         );
         StructValue::Struct(item_props)
     }

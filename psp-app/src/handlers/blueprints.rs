@@ -35,7 +35,12 @@ pub struct AnchorDto {
 
 impl AnchorDto {
     pub fn to_anchor(&self) -> Anchor {
-        Anchor { x: self.x, y: self.y, z: self.z, yaw_radians: self.yaw }
+        Anchor {
+            x: self.x,
+            y: self.y,
+            z: self.z,
+            yaw_radians: self.yaw,
+        }
     }
 }
 
@@ -61,7 +66,9 @@ pub fn resolve_mode(
         "merge_into" => target_base
             .map(|base_id| PlacementMode::MergeInto { base_id })
             .ok_or_else(|| HandlerError::Other("merge_into placement requires target_base".into())),
-        other => Err(HandlerError::Other(format!("unknown placement mode {other}"))),
+        other => Err(HandlerError::Other(format!(
+            "unknown placement mode {other}"
+        ))),
     }
 }
 
@@ -91,7 +98,10 @@ pub async fn handle_store_blueprint(
 ) -> Result<(), HandlerError> {
     let row = {
         let Some(blueprint) = ctx.blueprints.get(&data.handle) else {
-            return Err(HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)));
+            return Err(HandlerError::Other(format!(
+                "Unknown blueprint handle {}",
+                data.handle
+            )));
         };
         let header = &blueprint.header;
         psp_db::blueprints::NewBlueprint {
@@ -109,8 +119,10 @@ pub async fn handle_store_blueprint(
         }
     };
     let id = psp_db::blueprints::insert(&*ctx.app.driver, row).await?;
-    ctx.emitter
-        .emit(MessageType::StoreBlueprint, &serde_json::json!({ "id": id }));
+    ctx.emitter.emit(
+        MessageType::StoreBlueprint,
+        &serde_json::json!({ "id": id }),
+    );
     Ok(())
 }
 
@@ -154,7 +166,9 @@ pub async fn handle_load_blueprint(
                         .decode(content)
                         .map_err(|e| HandlerError::Other(format!("invalid base64: {e}")))?,
                 )
-                .map_err(|e| HandlerError::Other(format!("invalid utf-8 in json blueprint: {e}")))?;
+                .map_err(|e| {
+                    HandlerError::Other(format!("invalid utf-8 in json blueprint: {e}"))
+                })?;
                 gvas::from_json(&text)?
             }
             _ => {
@@ -194,12 +208,19 @@ pub async fn handle_export_blueprint_file(
 
     let (bytes, extension) = {
         let Some(blueprint) = ctx.blueprints.get(&data.handle) else {
-            return Err(HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)));
+            return Err(HandlerError::Other(format!(
+                "Unknown blueprint handle {}",
+                data.handle
+            )));
         };
         match data.format.as_str() {
             "json" => (gvas::to_json(blueprint)?.into_bytes(), "json"),
             "psp" => (gvas::to_psp_bytes(blueprint)?, "psp"),
-            other => return Err(HandlerError::Other(format!("unknown export format {other}"))),
+            other => {
+                return Err(HandlerError::Other(format!(
+                    "unknown export format {other}"
+                )))
+            }
         }
     };
 
@@ -264,7 +285,10 @@ pub async fn handle_validate_blueprint_placement(
     use psp_core::domain::blueprint::validate;
 
     let Some(blueprint) = ctx.blueprints.get(&data.handle) else {
-        return Err(HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)));
+        return Err(HandlerError::Other(format!(
+            "Unknown blueprint handle {}",
+            data.handle
+        )));
     };
     let Some(session) = ctx.session.save.as_ref() else {
         return Err(HandlerError::Other("No save file loaded".to_string()));
@@ -311,11 +335,10 @@ pub async fn handle_place_blueprint(
 
     // Clone the blueprint out of the registry so the mutable session borrow
     // below does not overlap the registry borrow.
-    let blueprint = ctx
-        .blueprints
-        .get(&data.handle)
-        .cloned()
-        .ok_or_else(|| HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)))?;
+    let blueprint =
+        ctx.blueprints.get(&data.handle).cloned().ok_or_else(|| {
+            HandlerError::Other(format!("Unknown blueprint handle {}", data.handle))
+        })?;
 
     let game_data = std::sync::Arc::clone(&ctx.app.game_data);
     let session = ctx.session.save_mut()?;
@@ -351,10 +374,16 @@ pub async fn handle_request_blueprint_geometry(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let Some(blueprint) = ctx.blueprints.get(&data.handle) else {
-        return Err(HandlerError::Other(format!("Unknown blueprint handle {}", data.handle)));
+        return Err(HandlerError::Other(format!(
+            "Unknown blueprint handle {}",
+            data.handle
+        )));
     };
-    let structures: Vec<serde_json::Value> =
-        blueprint.structures.iter().map(structure_geometry_json).collect();
+    let structures: Vec<serde_json::Value> = blueprint
+        .structures
+        .iter()
+        .map(structure_geometry_json)
+        .collect();
     let origin = psp_core::domain::blueprint::capture::source_origin(blueprint)
         .map(|(x, y, z, yaw)| serde_json::json!({ "x": x, "y": y, "z": z, "yaw": yaw }))
         .unwrap_or_else(|| serde_json::json!({ "x": 0.0, "y": 0.0, "z": 0.0, "yaw": 0.0 }));
@@ -375,8 +404,10 @@ pub async fn handle_delete_blueprint(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     psp_db::blueprints::delete(&*ctx.app.driver, &data.id).await?;
-    ctx.emitter
-        .emit(MessageType::DeleteBlueprint, &serde_json::json!({ "id": data.id }));
+    ctx.emitter.emit(
+        MessageType::DeleteBlueprint,
+        &serde_json::json!({ "id": data.id }),
+    );
     Ok(())
 }
 
@@ -385,7 +416,11 @@ mod tests {
     use super::*;
 
     fn finding(severity: Severity, code: &str) -> Finding {
-        Finding { severity, code: code.to_string(), message: format!("{code} tripped") }
+        Finding {
+            severity,
+            code: code.to_string(),
+            message: format!("{code} tripped"),
+        }
     }
 
     #[test]

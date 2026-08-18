@@ -463,8 +463,9 @@ fn mask_bytes(local_data_sav: &[u8]) -> Vec<u8> {
     else {
         panic!("SaveData missing");
     };
-    let psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(psp_core::ue::ByteArray::Byte(bytes))) =
-        &save_data.0[&psp_core::ue::PropertyKey::from("WorldMapMaskTextureV4")]
+    let psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(psp_core::ue::ByteArray::Byte(
+        bytes,
+    ))) = &save_data.0[&psp_core::ue::PropertyKey::from("WorldMapMaskTextureV4")]
     else {
         panic!("WorldMapMaskTextureV4 missing or not a byte array");
     };
@@ -490,9 +491,9 @@ async fn unlock_map_zeroes_mask_and_backs_up() {
             psp_core::props::struct_props_mut(save_data).expect("SaveData must be a struct");
         save_data.insert(
             "WorldMapMaskTextureV4",
-            psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(psp_core::ue::ByteArray::Byte(vec![
-                1, 2, 3, 0, 4,
-            ]))),
+            psp_core::ue::Property::Array(psp_core::ue::ValueVec::Byte(
+                psp_core::ue::ByteArray::Byte(vec![1, 2, 3, 0, 4]),
+            )),
         );
     }
     psp_core::props::ensure_schema(

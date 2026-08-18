@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { bundleMapObjectMesh } from './mapObjectMeshLibrary';
 
 // Material configuration is shared with palMeshLibrary and tested in

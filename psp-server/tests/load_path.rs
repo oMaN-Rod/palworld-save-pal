@@ -373,8 +373,8 @@ async fn test_no_file_selected_produces_no_response() {
 /// Players/). Never skips.
 #[tokio::test]
 async fn test_select_save_full_emission_order() {
-    let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../tests/fixtures/saves/v1_relics");
+    let save_dir =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/saves/v1_relics");
     let level_sav_path = save_dir.join("Level.sav");
 
     let (server, _scratch) = start_test_server().await;
@@ -444,8 +444,8 @@ async fn test_select_save_full_emission_order() {
 /// zipped up on the fly. Never skips.
 #[tokio::test]
 async fn test_load_zip_file_full_emission_order() {
-    let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../tests/fixtures/saves/v1_relics");
+    let save_dir =
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/saves/v1_relics");
     let level_sav = std::fs::read(save_dir.join("Level.sav")).unwrap();
     let mut entries: Vec<(String, Vec<u8>)> = vec![("Level.sav".to_string(), level_sav)];
     let players_dir = save_dir.join("Players");

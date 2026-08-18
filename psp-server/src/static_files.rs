@@ -26,7 +26,8 @@ pub async fn spa_fallback_redirect(
 ) -> Response {
     let raw_path = request.uri().path().to_owned();
 
-    if raw_path.starts_with("/ws") || raw_path.starts_with("/api") || raw_path.starts_with("/maps") {
+    if raw_path.starts_with("/ws") || raw_path.starts_with("/api") || raw_path.starts_with("/maps")
+    {
         return next.run(request).await;
     }
 

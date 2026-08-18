@@ -37,7 +37,9 @@ pub fn init() {
     // GameData is empty until `init_game_data`; handlers that need it before
     // then simply return empty lists.
     let app = Arc::new(AppState {
-        config: AppConfig { desktop_mode: false },
+        config: AppConfig {
+            desktop_mode: false,
+        },
         game_data: Arc::new(GameData::from_entries(Vec::new()).expect("empty game data")),
         driver: Arc::new(opfs_driver::OpfsSqlDriver),
         dialogs: Arc::new(psp_app::desktop_dialogs::NullDialogProvider),

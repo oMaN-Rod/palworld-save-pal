@@ -4,8 +4,8 @@ vi.mock('$lib/data', () => ({
 	elementsData: { elements: { Fire: { icon: 'fire' }, Water: { icon: 'water' } } }
 }));
 
-import { classifyPalCategory, palMatchesFilter } from './palFilters';
 import type { PalData } from '$types';
+import { classifyPalCategory, palMatchesFilter } from './palFilters';
 
 const catalogPal = (over: Partial<PalData> = {}): PalData =>
 	({
@@ -93,9 +93,7 @@ describe('classifyPalCategory', () => {
 			'special'
 		);
 		// SUMMON_DarkAlien has predator=true flag but no PREDATOR_ prefix — still special.
-		expect(classifyPalCategory('SUMMON_DarkAlien', catalogPal({ predator: true }))).toBe(
-			'special'
-		);
+		expect(classifyPalCategory('SUMMON_DarkAlien', catalogPal({ predator: true }))).toBe('special');
 		expect(classifyPalCategory('Baphomet_Dark_Oilrig', catalogPal())).toBe('special');
 	});
 

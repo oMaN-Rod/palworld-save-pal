@@ -192,22 +192,41 @@ async fn store_then_list_shows_the_row() {
         "name": "Library Home"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "store_blueprint", "data": {"handle": handle}})).await;
+    send(
+        &mut socket,
+        json!({"type": "store_blueprint", "data": {"handle": handle}}),
+    )
+    .await;
     let store = recv_until_type_or_error(&mut socket, "store_blueprint").await;
-    let row_id = store.last().unwrap()["data"]["id"].as_str().unwrap().to_string();
+    let row_id = store.last().unwrap()["data"]["id"]
+        .as_str()
+        .unwrap()
+        .to_string();
     assert!(!row_id.is_empty());
 
-    send(&mut socket, json!({"type": "list_blueprints", "data": null})).await;
+    send(
+        &mut socket,
+        json!({"type": "list_blueprints", "data": null}),
+    )
+    .await;
     let list = recv_until_type_or_error(&mut socket, "list_blueprints").await;
-    let blueprints = list.last().unwrap()["data"]["blueprints"].as_array().unwrap();
+    let blueprints = list.last().unwrap()["data"]["blueprints"]
+        .as_array()
+        .unwrap();
     assert_eq!(blueprints.len(), 1, "the stored blueprint is listed");
     let row = &blueprints[0];
     assert_eq!(row["id"], row_id);
     assert_eq!(row["name"], "Library Home");
     assert!(row["structure_count"].as_u64().unwrap() >= 1);
-    assert!(row.get("payload").is_none(), "list never carries the payload blob");
+    assert!(
+        row.get("payload").is_none(),
+        "list never carries the payload blob"
+    );
 }
 
 #[tokio::test]
@@ -224,26 +243,52 @@ async fn load_from_the_library_by_id_returns_a_fresh_handle() {
         "name": "Roundtrip"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "store_blueprint", "data": {"handle": handle}})).await;
+    send(
+        &mut socket,
+        json!({"type": "store_blueprint", "data": {"handle": handle}}),
+    )
+    .await;
     let store = recv_until_type_or_error(&mut socket, "store_blueprint").await;
-    let row_id = store.last().unwrap()["data"]["id"].as_str().unwrap().to_string();
+    let row_id = store.last().unwrap()["data"]["id"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "load_blueprint", "data": {"id": row_id}})).await;
+    send(
+        &mut socket,
+        json!({"type": "load_blueprint", "data": {"id": row_id}}),
+    )
+    .await;
     let load = recv_until_type_or_error(&mut socket, "load_blueprint").await;
     let loaded = load.last().unwrap();
-    assert!(loaded["data"]["handle"].as_str().is_some(), "load returns a handle");
+    assert!(
+        loaded["data"]["handle"].as_str().is_some(),
+        "load returns a handle"
+    );
     assert_eq!(loaded["data"]["header"]["name"], "Roundtrip");
-    assert!(loaded["data"]["header"]["structure_count"].as_u64().unwrap() >= 1);
+    assert!(
+        loaded["data"]["header"]["structure_count"]
+            .as_u64()
+            .unwrap()
+            >= 1
+    );
 }
 
 #[tokio::test]
 async fn load_of_an_unknown_id_is_an_error_frame() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
-    send(&mut socket, json!({"type": "load_blueprint",
-        "data": {"id": "00000000-0000-0000-0000-000000000000"}})).await;
+    send(
+        &mut socket,
+        json!({"type": "load_blueprint",
+        "data": {"id": "00000000-0000-0000-0000-000000000000"}}),
+    )
+    .await;
     let frame = recv(&mut socket).await;
     assert_eq!(frame["type"], "error");
 }
@@ -262,16 +307,26 @@ async fn export_returns_bytes_that_decode_back_to_the_blueprint() {
         "name": "Exported"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
     for format in ["psp", "json"] {
-        send(&mut socket, json!({"type": "export_blueprint_file",
-            "data": {"handle": handle, "format": format}})).await;
+        send(
+            &mut socket,
+            json!({"type": "export_blueprint_file",
+            "data": {"handle": handle, "format": format}}),
+        )
+        .await;
         let export = recv_until_type_or_error(&mut socket, "export_blueprint_file").await;
         let payload = export.last().unwrap()["data"].as_array().unwrap();
         let entry = &payload[0];
         let name = entry["name"].as_str().unwrap();
-        assert!(name.ends_with(&format!(".{format}")), "filename carries the format extension");
+        assert!(
+            name.ends_with(&format!(".{format}")),
+            "filename carries the format extension"
+        );
         let content = entry["content"].as_str().unwrap();
         assert!(!content.is_empty(), "{format} export has bytes");
     }
@@ -291,14 +346,21 @@ async fn validate_reports_findings_and_a_blocking_flag() {
         "name": "Validate"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "validate_blueprint_placement", "data": {
-        "handle": handle,
-        "anchor": {"x": 100000.0, "y": 100000.0, "z": 500.0, "yaw": 0.0},
-        "mode": "new_base",
-        "target_guild": guild_id
-    }})).await;
+    send(
+        &mut socket,
+        json!({"type": "validate_blueprint_placement", "data": {
+            "handle": handle,
+            "anchor": {"x": 100000.0, "y": 100000.0, "z": 500.0, "yaw": 0.0},
+            "mode": "new_base",
+            "target_guild": guild_id
+        }}),
+    )
+    .await;
     let frames = recv_until_type_or_error(&mut socket, "validate_blueprint_placement").await;
     let data = &frames.last().unwrap()["data"];
     assert!(data["findings"].is_array(), "findings is a list");
@@ -327,20 +389,33 @@ async fn place_adds_a_base_and_reports_the_count() {
         "name": "Placed"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "place_blueprint", "data": {
-        "handle": handle,
-        "anchor": {"x": 300000.0, "y": 300000.0, "z": 500.0, "yaw": 0.0},
-        "mode": "new_base",
-        "target_player": "00000000-0000-0000-0000-000000000000",
-        "target_guild": guild_id,
-        "override_warnings": true
-    }})).await;
+    send(
+        &mut socket,
+        json!({"type": "place_blueprint", "data": {
+            "handle": handle,
+            "anchor": {"x": 300000.0, "y": 300000.0, "z": 500.0, "yaw": 0.0},
+            "mode": "new_base",
+            "target_player": "00000000-0000-0000-0000-000000000000",
+            "target_guild": guild_id,
+            "override_warnings": true
+        }}),
+    )
+    .await;
     let frames = recv_until_type_or_error(&mut socket, "place_blueprint").await;
     let data = &frames.last().unwrap()["data"];
-    assert!(data["base_id"].as_str().is_some(), "placement founds a base");
-    assert!(data["structures_placed"].as_u64().unwrap() >= 1, "structures were placed");
+    assert!(
+        data["base_id"].as_str().is_some(),
+        "placement founds a base"
+    );
+    assert!(
+        data["structures_placed"].as_u64().unwrap() >= 1,
+        "structures were placed"
+    );
 }
 
 #[tokio::test]
@@ -357,17 +432,27 @@ async fn place_with_a_missing_target_guild_is_an_error() {
         "name": "NoGuild"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "place_blueprint", "data": {
-        "handle": handle,
-        "anchor": {"x": 300000.0, "y": 300000.0, "z": 500.0, "yaw": 0.0},
-        "mode": "new_base",
-        "target_player": "00000000-0000-0000-0000-000000000000",
-        "override_warnings": true
-    }})).await;
+    send(
+        &mut socket,
+        json!({"type": "place_blueprint", "data": {
+            "handle": handle,
+            "anchor": {"x": 300000.0, "y": 300000.0, "z": 500.0, "yaw": 0.0},
+            "mode": "new_base",
+            "target_player": "00000000-0000-0000-0000-000000000000",
+            "override_warnings": true
+        }}),
+    )
+    .await;
     let frame = recv(&mut socket).await;
-    assert_eq!(frame["type"], "error", "new_base without target_guild is refused");
+    assert_eq!(
+        frame["type"], "error",
+        "new_base without target_guild is refused"
+    );
 }
 
 #[tokio::test]
@@ -384,25 +469,49 @@ async fn load_from_uploaded_content_returns_a_handle() {
         "name": "Uploaded"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
     // Export to get the browser base64 body, then feed that body straight back
     // through the upload path — no DB id involved, so the round-trip proves the
     // content branch decodes what the export branch encoded.
     for format in ["psp", "json"] {
-        send(&mut socket, json!({"type": "export_blueprint_file",
-            "data": {"handle": handle, "format": format}})).await;
+        send(
+            &mut socket,
+            json!({"type": "export_blueprint_file",
+            "data": {"handle": handle, "format": format}}),
+        )
+        .await;
         let export = recv_until_type_or_error(&mut socket, "export_blueprint_file").await;
-        let content = export.last().unwrap()["data"][0]["content"].as_str().unwrap().to_string();
+        let content = export.last().unwrap()["data"][0]["content"]
+            .as_str()
+            .unwrap()
+            .to_string();
 
-        send(&mut socket, json!({"type": "load_blueprint",
-            "data": {"content": content, "format": format}})).await;
+        send(
+            &mut socket,
+            json!({"type": "load_blueprint",
+            "data": {"content": content, "format": format}}),
+        )
+        .await;
         let load = recv_until_type_or_error(&mut socket, "load_blueprint").await;
         let loaded = load.last().unwrap();
-        assert!(loaded["data"]["handle"].as_str().is_some(), "{format} upload returns a handle");
-        assert_eq!(loaded["data"]["header"]["name"], "Uploaded",
-            "{format} upload decoded the header back");
-        assert!(loaded["data"]["header"]["structure_count"].as_u64().unwrap() >= 1);
+        assert!(
+            loaded["data"]["handle"].as_str().is_some(),
+            "{format} upload returns a handle"
+        );
+        assert_eq!(
+            loaded["data"]["header"]["name"], "Uploaded",
+            "{format} upload decoded the header back"
+        );
+        assert!(
+            loaded["data"]["header"]["structure_count"]
+                .as_u64()
+                .unwrap()
+                >= 1
+        );
     }
 }
 
@@ -410,10 +519,17 @@ async fn load_from_uploaded_content_returns_a_handle() {
 async fn load_of_malformed_base64_content_is_an_error_frame() {
     let (server, _scratch) = start_test_server().await;
     let mut socket = connect(server.addr).await;
-    send(&mut socket, json!({"type": "load_blueprint",
-        "data": {"content": "!!!! not base64 !!!!", "format": "psp"}})).await;
+    send(
+        &mut socket,
+        json!({"type": "load_blueprint",
+        "data": {"content": "!!!! not base64 !!!!", "format": "psp"}}),
+    )
+    .await;
     let frame = recv(&mut socket).await;
-    assert_eq!(frame["type"], "error", "undecodable content is refused, not decoded to garbage");
+    assert_eq!(
+        frame["type"], "error",
+        "undecodable content is refused, not decoded to garbage"
+    );
 }
 
 #[tokio::test]
@@ -435,16 +551,34 @@ async fn geometry_returns_one_entry_per_structure_with_a_transform() {
     let structure_count = cap["data"]["header"]["structure_count"].as_u64().unwrap();
     assert!(structure_count >= 1, "world1 base has structures");
 
-    send(&mut socket, json!({"type": "request_blueprint_geometry", "data": {"handle": handle}})).await;
+    send(
+        &mut socket,
+        json!({"type": "request_blueprint_geometry", "data": {"handle": handle}}),
+    )
+    .await;
     let frames = recv_until_type_or_error(&mut socket, "request_blueprint_geometry").await;
-    let structures = frames.last().unwrap()["data"]["structures"].as_array().unwrap();
+    let structures = frames.last().unwrap()["data"]["structures"]
+        .as_array()
+        .unwrap();
 
-    assert_eq!(structures.len() as u64, structure_count,
-        "one geometry entry per captured structure");
+    assert_eq!(
+        structures.len() as u64,
+        structure_count,
+        "one geometry entry per captured structure"
+    );
     let first = &structures[0];
-    assert!(first["map_object_id"].as_str().is_some(), "carries a map_object_id");
-    assert!(first["translation"]["x"].as_f64().is_some(), "carries a translation");
-    assert!(first["rotation"]["w"].as_f64().is_some(), "carries a rotation quat");
+    assert!(
+        first["map_object_id"].as_str().is_some(),
+        "carries a map_object_id"
+    );
+    assert!(
+        first["translation"]["x"].as_f64().is_some(),
+        "carries a translation"
+    );
+    assert!(
+        first["rotation"]["w"].as_f64().is_some(),
+        "carries a rotation quat"
+    );
     assert!(first["scale"]["x"].as_f64().is_some(), "carries a scale");
 
     let origin = &frames.last().unwrap()["data"]["origin"];
@@ -474,23 +608,54 @@ async fn delete_removes_the_blueprint_from_the_library() {
         "name": "Deletable"
     }})).await;
     let capture = recv_until_type_or_error(&mut socket, "capture_base_blueprint").await;
-    let handle = capture.last().unwrap()["data"]["handle"].as_str().unwrap().to_string();
+    let handle = capture.last().unwrap()["data"]["handle"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "store_blueprint", "data": {"handle": handle}})).await;
+    send(
+        &mut socket,
+        json!({"type": "store_blueprint", "data": {"handle": handle}}),
+    )
+    .await;
     let store = recv_until_type_or_error(&mut socket, "store_blueprint").await;
-    let id = store.last().unwrap()["data"]["id"].as_str().unwrap().to_string();
+    let id = store.last().unwrap()["data"]["id"]
+        .as_str()
+        .unwrap()
+        .to_string();
 
-    send(&mut socket, json!({"type": "list_blueprints", "data": null})).await;
+    send(
+        &mut socket,
+        json!({"type": "list_blueprints", "data": null}),
+    )
+    .await;
     let list = recv_until_type_or_error(&mut socket, "list_blueprints").await;
-    assert_eq!(list.last().unwrap()["data"]["blueprints"].as_array().unwrap().len(), 1);
+    assert_eq!(
+        list.last().unwrap()["data"]["blueprints"]
+            .as_array()
+            .unwrap()
+            .len(),
+        1
+    );
 
-    send(&mut socket, json!({"type": "delete_blueprint", "data": {"id": id}})).await;
+    send(
+        &mut socket,
+        json!({"type": "delete_blueprint", "data": {"id": id}}),
+    )
+    .await;
     recv_until_type_or_error(&mut socket, "delete_blueprint").await;
 
-    send(&mut socket, json!({"type": "list_blueprints", "data": null})).await;
+    send(
+        &mut socket,
+        json!({"type": "list_blueprints", "data": null}),
+    )
+    .await;
     let list2 = recv_until_type_or_error(&mut socket, "list_blueprints").await;
     assert_eq!(
-        list2.last().unwrap()["data"]["blueprints"].as_array().unwrap().len(),
+        list2.last().unwrap()["data"]["blueprints"]
+            .as_array()
+            .unwrap()
+            .len(),
         0,
         "the deleted blueprint no longer appears in the library"
     );

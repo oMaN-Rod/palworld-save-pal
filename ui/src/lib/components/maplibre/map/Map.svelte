@@ -562,9 +562,7 @@
 	   against a dark group. The compass is excluded because it has its own
 	   two-colour treatment below. */
 	div[data-svlibre-theme='dark']
-		:global(
-			.maplibregl-ctrl-group button:not(.maplibregl-ctrl-compass) .maplibregl-ctrl-icon
-		) {
+		:global(.maplibregl-ctrl-group button:not(.maplibregl-ctrl-compass) .maplibregl-ctrl-icon) {
 		filter: invert(1);
 	}
 

@@ -50,11 +50,17 @@
 		{#each WORK_SUITABILITY_KEYS as key (key)}
 			<button
 				type="button"
-				class="hover:border-primary-500/70 group flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-lg border p-2 transition-colors {selectedKey === key ? 'border-primary-500 bg-surface-800' : 'border-surface-800'}"
+				class="hover:border-primary-500/70 group flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-lg border p-2 transition-colors {selectedKey ===
+				key
+					? 'border-primary-500 bg-surface-800'
+					: 'border-surface-800'}"
 				onclick={() => (selected = key)}
 			>
 				<img src={workIcon(key)} alt={key} class="h-8 w-8 object-contain" />
-				<span class="text-surface-200 group-hover:text-surface-50 line-clamp-2 text-center text-xs leading-tight">{workLabel(key)}</span>
+				<span
+					class="text-surface-200 group-hover:text-surface-50 line-clamp-2 text-center text-xs leading-tight"
+					>{workLabel(key)}</span
+				>
 			</button>
 		{/each}
 	</div>
@@ -72,10 +78,12 @@
 				</div>
 			</div>
 
-			<div class="mb-2 text-xs text-surface-400">
+			<div class="text-surface-400 mb-2 text-xs">
 				{palsForWork.length} pal{palsForWork.length === 1 ? '' : 's'} with this work suitability
 			</div>
-			<div class="grid max-h-[50vh] grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+			<div
+				class="grid max-h-[50vh] grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+			>
 				{#each palsForWork as { key, pal, level } (key)}
 					<WikiCard
 						href="/wiki/pals/{toSlug(key)}"

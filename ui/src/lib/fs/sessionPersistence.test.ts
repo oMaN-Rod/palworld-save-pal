@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const recent = vi.hoisted(() => ({ store: [] as any[] }));
 vi.mock('./recentSaves', () => ({
@@ -6,7 +6,9 @@ vi.mock('./recentSaves', () => ({
 		recent.store = recent.store.filter((x) => x.id !== r.id);
 		recent.store.push(r);
 	}),
-	getMostRecent: vi.fn(async () => [...recent.store].sort((a, b) => b.savedAt - a.savedAt)[0] ?? null),
+	getMostRecent: vi.fn(
+		async () => [...recent.store].sort((a, b) => b.savedAt - a.savedAt)[0] ?? null
+	),
 	removeRecent: vi.fn(async (id) => {
 		recent.store = recent.store.filter((x) => x.id !== id);
 	})
@@ -30,8 +32,7 @@ vi.mock('./opfsBlobStore', () => {
 	};
 });
 vi.mock('$lib/utils/folderUpload', () => ({
-	zipEntries: (entries: { path: string; data: Uint8Array }[]) =>
-		new Uint8Array([entries.length])
+	zipEntries: (entries: { path: string; data: Uint8Array }[]) => new Uint8Array([entries.length])
 }));
 vi.mock('./fileSystemAccess', () => ({
 	readSaveFolder: vi.fn(async () => [{ path: 'Level.sav', data: new Uint8Array([1]) }]),
@@ -51,7 +52,11 @@ beforeEach(() => {
 
 describe('sessionPersistence', () => {
 	it('records an opfs session and persists the bytes', async () => {
-		const res = await recordSession({ zipBytes: new Uint8Array([5, 6]), name: 'world1', savedAt: 1 });
+		const res = await recordSession({
+			zipBytes: new Uint8Array([5, 6]),
+			name: 'world1',
+			savedAt: 1
+		});
 		expect(res).toEqual({ persisted: true, quota: false });
 		const restored: number[] = [];
 		const r = await restoreMostRecent((b) => restored.push(...b));
@@ -61,7 +66,13 @@ describe('sessionPersistence', () => {
 
 	it('records a handle session and re-reads from disk on restore', async () => {
 		const handle = { name: 'world1' } as unknown as FileSystemDirectoryHandle;
-		const res = await recordSession({ zipBytes: new Uint8Array([9]), name: 'world1', savedAt: 2, handle, writable: true });
+		const res = await recordSession({
+			zipBytes: new Uint8Array([9]),
+			name: 'world1',
+			savedAt: 2,
+			handle,
+			writable: true
+		});
 		expect(res.persisted).toBe(true);
 		expect(active.set).toHaveBeenCalledWith(handle, true);
 		const restored: number[] = [];

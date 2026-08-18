@@ -54,14 +54,24 @@ impl Anchor {
     fn to_transform(self) -> PalTransform {
         PalTransform {
             rotation: transform::yaw_quat(self.yaw_radians),
-            translation: Vector { x: Double(self.x), y: Double(self.y), z: Double(self.z) },
-            scale: Vector { x: Double(1.0), y: Double(1.0), z: Double(1.0) },
+            translation: Vector {
+                x: Double(self.x),
+                y: Double(self.y),
+                z: Double(self.z),
+            },
+            scale: Vector {
+                x: Double(1.0),
+                y: Double(1.0),
+                z: Double(1.0),
+            },
         }
     }
 }
 
 pub fn has_blocking(findings: &[Finding]) -> bool {
-    findings.iter().any(|finding| finding.severity == Severity::Blocking)
+    findings
+        .iter()
+        .any(|finding| finding.severity == Severity::Blocking)
 }
 
 pub fn check(
@@ -95,9 +105,14 @@ pub fn check(
                 .find(|base| base.id == *base_id)
                 .map(|base| base.area_range)
                 .unwrap_or(blueprint.header.footprint_radius);
-            let existing_structure_count =
-                world_structures.iter().filter(|placed| placed.base_id == *base_id).count() as i64;
-            (target_area_range, existing_structure_count + blueprint_structure_count)
+            let existing_structure_count = world_structures
+                .iter()
+                .filter(|placed| placed.base_id == *base_id)
+                .count() as i64;
+            (
+                target_area_range,
+                existing_structure_count + blueprint_structure_count,
+            )
         }
     };
 
@@ -107,7 +122,13 @@ pub fn check(
     check_limits_unknown(&unreadable_limits, &mut findings);
     check_outside_area_range(blueprint, area_range, &mut findings);
     check_unknown_structure_type(game_data, blueprint, &mut findings);
-    check_structure_overlap(&world_structures, blueprint, &anchor_transform, mode, &mut findings);
+    check_structure_overlap(
+        &world_structures,
+        blueprint,
+        &anchor_transform,
+        mode,
+        &mut findings,
+    );
 
     findings
 }
@@ -140,12 +161,14 @@ fn existing_bases(session: &SaveSession) -> Vec<ExistingBase> {
             let id = props::as_uuid(&entry.key)?;
             let value_props = props::struct_props(&entry.value)?;
             match value_props.0.get(&PropertyKey::from("RawData")) {
-                Some(Property::Struct(StructValue::Game(PalStruct::BaseCamp(raw)))) => Some(ExistingBase {
-                    id,
-                    guild_id: props::guid_to_uuid(&raw.group_id_belong_to),
-                    transform: raw.transform.clone(),
-                    area_range: raw.area_range as f64,
-                }),
+                Some(Property::Struct(StructValue::Game(PalStruct::BaseCamp(raw)))) => {
+                    Some(ExistingBase {
+                        id,
+                        guild_id: props::guid_to_uuid(&raw.group_id_belong_to),
+                        transform: raw.transform.clone(),
+                        area_range: raw.area_range as f64,
+                    })
+                }
                 _ => None,
             }
         })
@@ -161,8 +184,13 @@ fn world_structures(session: &SaveSession) -> Vec<WorldStructure> {
     map_objects
         .iter()
         .filter_map(|value| {
-            let StructValue::Struct(object_props) = value else { return None };
-            let model = object_props.0.get(&model_key).and_then(props::struct_props)?;
+            let StructValue::Struct(object_props) = value else {
+                return None;
+            };
+            let model = object_props
+                .0
+                .get(&model_key)
+                .and_then(props::struct_props)?;
             let Property::Struct(StructValue::Game(PalStruct::MapModel(raw))) =
                 model.0.get(&raw_data_key)?
             else {
@@ -198,8 +226,13 @@ fn check_guild_base_limit(
     existing_bases: &[ExistingBase],
     findings: &mut Vec<Finding>,
 ) -> bool {
-    let Some(limit) = world_option_int(session, "BaseCampMaxNumInGuild") else { return false };
-    let count = existing_bases.iter().filter(|base| base.guild_id == guild_id).count() as i64;
+    let Some(limit) = world_option_int(session, "BaseCampMaxNumInGuild") else {
+        return false;
+    };
+    let count = existing_bases
+        .iter()
+        .filter(|base| base.guild_id == guild_id)
+        .count() as i64;
     if count >= limit {
         findings.push(Finding {
             severity: Severity::Blocking,
@@ -213,7 +246,9 @@ fn check_guild_base_limit(
 }
 
 fn check_world_base_limit(session: &SaveSession, count: i64, findings: &mut Vec<Finding>) -> bool {
-    let Some(limit) = world_option_int(session, "BaseCampMaxNum") else { return false };
+    let Some(limit) = world_option_int(session, "BaseCampMaxNum") else {
+        return false;
+    };
     if count >= limit {
         findings.push(Finding {
             severity: Severity::Blocking,
@@ -231,7 +266,9 @@ fn check_building_limit(
     structure_count: i64,
     findings: &mut Vec<Finding>,
 ) -> bool {
-    let Some(limit) = world_option_int(session, "MaxBuildingLimitNum") else { return false };
+    let Some(limit) = world_option_int(session, "MaxBuildingLimitNum") else {
+        return false;
+    };
     if limit != 0 && structure_count > limit {
         findings.push(Finding {
             severity: Severity::Blocking,
@@ -284,10 +321,15 @@ fn check_base_too_close(
     }
 }
 
-fn check_outside_area_range(blueprint: &BaseBlueprint, area_range: f64, findings: &mut Vec<Finding>) {
+fn check_outside_area_range(
+    blueprint: &BaseBlueprint,
+    area_range: f64,
+    findings: &mut Vec<Finding>,
+) {
     for structure in &blueprint.structures {
         let translation = &structure.relative_transform.translation;
-        let horizontal = (translation.x.0 * translation.x.0 + translation.y.0 * translation.y.0).sqrt();
+        let horizontal =
+            (translation.x.0 * translation.x.0 + translation.y.0 * translation.y.0).sqrt();
         if horizontal > area_range {
             findings.push(Finding {
                 severity: Severity::Warning,
@@ -310,7 +352,10 @@ fn check_unknown_structure_type(
     blueprint: &BaseBlueprint,
     findings: &mut Vec<Finding>,
 ) {
-    let Some(buildings) = game_data.get("buildings").and_then(serde_json::Value::as_object) else {
+    let Some(buildings) = game_data
+        .get("buildings")
+        .and_then(serde_json::Value::as_object)
+    else {
         return;
     };
     // Saves and catalog disagree on casing for the same object
@@ -393,5 +438,9 @@ fn check_structure_overlap(
 
 fn world_option_int(session: &SaveSession, key: &str) -> Option<i64> {
     let save = session.world_option.as_ref()?;
-    world_option::read_settings(save).into_iter().find(|entry| entry.key == key)?.value.as_i64()
+    world_option::read_settings(save)
+        .into_iter()
+        .find(|entry| entry.key == key)?
+        .value
+        .as_i64()
 }

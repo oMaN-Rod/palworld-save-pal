@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { lngLatToPixel } from './mercator';
+import type { PalBoss, PalPredator } from './palLayer';
+import { PORTAL_RADIUS_CM } from './palPortal';
 import { buildPalPortalFC } from './palPortalFC';
 import { cmPerPx, worldToPixel } from './utils';
-import { lngLatToPixel } from './mercator';
-import { PORTAL_RADIUS_CM } from './palPortal';
-import type { PalBoss, PalPredator } from './palLayer';
 
 const PAL_SCALE = 30;
 

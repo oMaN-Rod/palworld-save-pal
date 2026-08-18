@@ -40,12 +40,14 @@ mod tests {
         let rebuilt_sav = json_to_sav_bytes(json.as_bytes()).unwrap();
         assert_eq!(&rebuilt_sav[8..12], b"PlM1");
 
-        let original_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
-                .unwrap();
-        let rebuilt_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
-                .unwrap();
+        let original_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            sav_bytes.as_slice(),
+        ))
+        .unwrap();
+        let rebuilt_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            rebuilt_sav.as_slice(),
+        ))
+        .unwrap();
         assert_eq!(original_gvas, rebuilt_gvas);
     }
 
@@ -75,12 +77,14 @@ mod tests {
             "rebuilt sav should have PlM1 at offset 8"
         );
 
-        let original_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
-                .unwrap();
-        let rebuilt_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
-                .unwrap();
+        let original_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            sav_bytes.as_slice(),
+        ))
+        .unwrap();
+        let rebuilt_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            rebuilt_sav.as_slice(),
+        ))
+        .unwrap();
         assert_eq!(
             original_gvas, rebuilt_gvas,
             "GVAS payloads should be identical after round-trip"

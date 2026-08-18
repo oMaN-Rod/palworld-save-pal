@@ -42,9 +42,7 @@
 		return Object.entries(palsData.pals)
 			.filter(([, pal]) => (pal as PalData).element_types?.includes(selectedKey as never))
 			.map(([key, pal]) => ({ key, pal: pal as PalData }))
-			.sort((a, b) =>
-				byPaldeckIndex(a.pal.pal_deck_index, b.pal.pal_deck_index)
-			);
+			.sort((a, b) => byPaldeckIndex(a.pal.pal_deck_index, b.pal.pal_deck_index));
 	});
 
 	function palIcon(key: string, pal: PalData) {
@@ -61,7 +59,10 @@
 			{@const name = el.localized_name || key}
 			<button
 				type="button"
-				class="hover:border-primary-500/70 group flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-lg border p-2 transition-colors {selectedKey === key ? 'border-primary-500 bg-surface-800' : 'border-surface-800'}"
+				class="hover:border-primary-500/70 group flex h-20 w-20 flex-col items-center justify-center gap-1 rounded-lg border p-2 transition-colors {selectedKey ===
+				key
+					? 'border-primary-500 bg-surface-800'
+					: 'border-surface-800'}"
 				onclick={() => (selected = key)}
 			>
 				<span
@@ -90,7 +91,8 @@
 				<div class="flex flex-col">
 					<h2 class="text-lg font-semibold">{name}</h2>
 					<div class="flex items-center gap-2">
-						<span class="inline-block h-3 w-3 rounded-full" style={`background: ${el.color};`}></span>
+						<span class="inline-block h-3 w-3 rounded-full" style={`background: ${el.color};`}
+						></span>
 						<span class="text-surface-400 font-mono text-xs">{el.color}</span>
 					</div>
 				</div>
@@ -102,10 +104,12 @@
 				{/each}
 			</div>
 
-			<div class="mb-2 text-xs text-surface-400">
+			<div class="text-surface-400 mb-2 text-xs">
 				{palsWithElement.length} pal{palsWithElement.length === 1 ? '' : 's'} with this element
 			</div>
-			<div class="grid max-h-[50vh] grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+			<div
+				class="grid max-h-[50vh] grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+			>
 				{#each palsWithElement as { key, pal } (key)}
 					<WikiCard
 						href="/wiki/pals/{toSlug(key)}"

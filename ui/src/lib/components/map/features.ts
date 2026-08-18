@@ -7,8 +7,6 @@ import type {
 	RelicPoint,
 	WorldMapPoint
 } from '$types';
-import { pixelCirclePolygon, pixelToLngLat } from './mercator';
-import { cmPerPx, mapOf, MAP_SIZE, mapToWorld, worldToPixel, type MapArea } from './utils';
 import { isWatchtower } from './fastTravel';
 import {
 	ICON_BASE,
@@ -21,6 +19,8 @@ import {
 	palIconId,
 	relicIconId
 } from './iconIds';
+import { pixelCirclePolygon, pixelToLngLat } from './mercator';
+import { cmPerPx, MAP_SIZE, mapOf, mapToWorld, worldToPixel, type MapArea } from './utils';
 
 export type MapFeatureType =
 	| 'origin'
@@ -292,7 +292,13 @@ export function buildOriginCrosshairFC(area: MapArea): LineFC {
 }
 
 export const DEFAULT_STRUCTURE_FOOTPRINT: Footprint = {
-	sx: 100, sy: 100, sz: 100, ox: 0, oy: 0, oz: 0, typeA: 'Other'
+	sx: 100,
+	sy: 100,
+	sz: 100,
+	ox: 0,
+	oy: 0,
+	oz: 0,
+	typeA: 'Other'
 };
 
 // A save's map_object_id does not always match the data table row key's casing
@@ -337,7 +343,11 @@ export function buildStructureFC(
 		const height = fp.sz * s.scale_z;
 
 		const ring = [
-			[-hx, -hy], [hx, -hy], [hx, hy], [-hx, hy], [-hx, -hy]
+			[-hx, -hy],
+			[hx, -hy],
+			[hx, hy],
+			[-hx, hy],
+			[-hx, -hy]
 		].map(([dx, dy]) => {
 			const wx = cx + dx * cos - dy * sin;
 			const wy = cy + dx * sin + dy * cos;

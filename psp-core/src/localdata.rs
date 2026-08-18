@@ -146,8 +146,9 @@ mod tests {
         else {
             panic!("SaveData missing");
         };
-        let crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) =
-            &save_data.0[&crate::ue::PropertyKey::from("WorldMapMaskTextureV4")]
+        let crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(
+            bytes,
+        ))) = &save_data.0[&crate::ue::PropertyKey::from("WorldMapMaskTextureV4")]
         else {
             panic!("WorldMapMaskTextureV4 missing or not a byte array");
         };
@@ -157,9 +158,10 @@ mod tests {
     #[test]
     fn local_data_round_trips_byte_identical_at_gvas_level() {
         let sav_bytes = std::fs::read(reference_saves_dir().join("LocalData.sav")).unwrap();
-        let gvas_bytes =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(sav_bytes.as_slice()))
-                .unwrap();
+        let gvas_bytes = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            sav_bytes.as_slice(),
+        ))
+        .unwrap();
         let save = crate::ue::SaveReader::new()
             .game::<crate::ue::Palworld>()
             .types(crate::ue::games::palworld::palworld_types())
@@ -409,5 +411,4 @@ mod tests {
             "No non-empty WorldMapMaskTextureV4 or WorldMapUISaveDataMap mask found in SaveData"
         );
     }
-
 }

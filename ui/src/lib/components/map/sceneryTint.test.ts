@@ -1,5 +1,12 @@
-import { describe, it, expect } from 'vitest';
-import { tintOffsetAt, sampleTint, TINT_ZOOM, TINT_TILE_PX, TINT_MOSAIC_PX, type TintMosaic } from './sceneryTint';
+import { describe, expect, it } from 'vitest';
+import {
+	sampleTint,
+	TINT_MOSAIC_PX,
+	TINT_TILE_PX,
+	TINT_ZOOM,
+	tintOffsetAt,
+	type TintMosaic
+} from './sceneryTint';
 
 // 4x4 RGBA mosaic with every texel distinct, so a row/column mixup shows up as a
 // wrong colour rather than an accidental match.
@@ -18,7 +25,15 @@ function makeMosaic(): TintMosaic {
 	return { data, size };
 }
 
-function setTexel(mosaic: TintMosaic, col: number, row: number, r: number, g: number, b: number, a: number) {
+function setTexel(
+	mosaic: TintMosaic,
+	col: number,
+	row: number,
+	r: number,
+	g: number,
+	b: number,
+	a: number
+) {
 	const offset = (row * mosaic.size + col) * 4;
 	mosaic.data[offset] = r;
 	mosaic.data[offset + 1] = g;

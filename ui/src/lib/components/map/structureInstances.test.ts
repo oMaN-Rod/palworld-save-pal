@@ -1,13 +1,17 @@
 // Pinned element-for-element against meshInstanceMatrix and proxyInstanceMatrix,
 // which are the untouched oracle. Equality here proves a layer that bakes once
 // and composes per frame renders identically to one that rebuilds every instance.
-import { describe, it, expect } from 'vitest';
+import type { BaseStructure, Footprint } from '$types';
 import * as THREE from 'three';
-import { bakeStructureInstance, composeStructureMatrix, STRUCTURE_BAKE_STRIDE } from './structureInstances';
+import { describe, expect, it } from 'vitest';
+import type { MeshPart } from './meshPlacement';
+import {
+	bakeStructureInstance,
+	composeStructureMatrix,
+	STRUCTURE_BAKE_STRIDE
+} from './structureInstances';
 import { meshInstanceMatrix, proxyInstanceMatrix } from './structureLayer';
 import { structureAnchor, structurePlacement } from './structurePlacement';
-import type { MeshPart } from './meshPlacement';
-import type { BaseStructure, Footprint } from '$types';
 
 const identityPart: MeshPart = { loc: [0, 0, 0], rot: [0, 0, 0], scale: [1, 1, 1] };
 
@@ -91,7 +95,12 @@ describe('bakeStructureInstance + composeStructureMatrix (proxy path oracle)', (
 					const halfH = p.footprintCm.sz / 2;
 					const originCm = p.altitudeCm + (archetype === 'foundation' ? halfH : -halfH);
 
-					const baked = bakeStructureInstance({ lng: p.lng, lat: p.lat, altitudeCm: originCm, yaw: p.yaw });
+					const baked = bakeStructureInstance({
+						lng: p.lng,
+						lat: p.lat,
+						altitudeCm: originCm,
+						yaw: p.yaw
+					});
 					const got = new THREE.Matrix4();
 					composeStructureMatrix(baked, 0, cmToMerc, got);
 

@@ -1,13 +1,34 @@
-import { describe, it, expect } from 'vitest';
-import { structurePlacement } from './structurePlacement';
-import { verticalScaleFactor } from './mercator';
-import { cmPerPx } from './utils';
 import type { BaseStructure, Footprint } from '$types';
+import { describe, expect, it } from 'vitest';
+import { verticalScaleFactor } from './mercator';
+import { structurePlacement } from './structurePlacement';
+import { cmPerPx } from './utils';
 
-const fp: Footprint = { sx: 400, sy: 20, sz: 325, ox: 0, oy: 0, oz: 0, typeA: 'Foundation', archetype: 'wall', material: 'Wood' };
+const fp: Footprint = {
+	sx: 400,
+	sy: 20,
+	sz: 325,
+	ox: 0,
+	oy: 0,
+	oz: 0,
+	typeA: 'Foundation',
+	archetype: 'wall',
+	material: 'Wood'
+};
 const base = (over: Partial<BaseStructure>): BaseStructure => ({
-	instance_id: 'i', map_object_id: 'Wooden_Wall', x: 0, y: 0, z: 0, yaw: 0,
-	scale_x: 1, scale_y: 1, scale_z: 1, hp_current: 1, hp_max: 1, build_player_uid: 'u', ...over
+	instance_id: 'i',
+	map_object_id: 'Wooden_Wall',
+	x: 0,
+	y: 0,
+	z: 0,
+	yaw: 0,
+	scale_x: 1,
+	scale_y: 1,
+	scale_z: 1,
+	hp_current: 1,
+	hp_max: 1,
+	build_player_uid: 'u',
+	...over
 });
 
 describe('structurePlacement', () => {

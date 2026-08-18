@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { unzipSync, zipSync } from 'fflate';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { unzipSync, zipSync } from 'fflate';
-import { stageSavZip, gvasFilesToSavZip, type GvasSlot } from './psp.worker';
+import { describe, expect, it } from 'vitest';
+import { gvasFilesToSavZip, stageSavZip, type GvasSlot } from './psp.worker';
 
 const root = resolve(__dirname, '..', '..', '..', '..');
 const fixture = (name: string) =>

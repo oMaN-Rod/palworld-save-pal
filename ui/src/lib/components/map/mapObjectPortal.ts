@@ -1,9 +1,9 @@
-import * as THREE from 'three';
-import { MercatorCoordinate, type ExpressionSpecification } from 'maplibre-gl';
 import type { Spawn } from '$types';
-import { worldToPixel, type MapArea } from './utils';
+import { MercatorCoordinate, type ExpressionSpecification } from 'maplibre-gl';
+import * as THREE from 'three';
 import { pixelToLngLat } from './mercator';
-import { PORTAL_HEIGHT_CM, PORTAL_TAPER_RATIO, CORE_COLOR } from './palPortal';
+import { CORE_COLOR, PORTAL_HEIGHT_CM, PORTAL_TAPER_RATIO } from './palPortal';
+import { worldToPixel, type MapArea } from './utils';
 
 export type FastTravelState = 'unknown' | 'locked' | 'unlocked';
 export type RelicState = 'unknown' | 'uncollected' | 'collected';
@@ -87,7 +87,12 @@ export function portalRingColorExpression(
 ): ExpressionSpecification {
 	const palette: Record<string, string> = PORTAL_HEX[kind];
 	const arms = Object.entries(palette).flatMap(([state, hex]) => [state, hex]);
-	return ['match', ['get', 'state'], ...arms, fallback ?? palette.unknown] as unknown as ExpressionSpecification;
+	return [
+		'match',
+		['get', 'state'],
+		...arms,
+		fallback ?? palette.unknown
+	] as unknown as ExpressionSpecification;
 }
 
 export function mapObjectPortalMatrix(

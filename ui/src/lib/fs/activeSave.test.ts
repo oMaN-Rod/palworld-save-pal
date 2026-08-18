@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
-	setActiveDirectory,
-	getActiveDirectory,
 	clearActiveDirectory,
+	getActiveDirectory,
+	setActiveDirectory,
 	setSaveTarget,
 	takeSaveTarget
 } from './activeSave';

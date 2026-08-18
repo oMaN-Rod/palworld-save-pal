@@ -73,8 +73,7 @@
 	}
 
 	function handleLearnAll() {
-		const allSkillIds = selectOptions
-			.map((option) => option.value);
+		const allSkillIds = selectOptions.map((option) => option.value);
 		learnedSkills = allSkillIds.map((skillId) => ({ id: skillId }));
 	}
 

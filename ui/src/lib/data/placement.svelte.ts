@@ -3,8 +3,8 @@ import type {
 	BlueprintFinding,
 	BlueprintHeader,
 	BlueprintStructureGeometry,
-	PlacementAnchor,
-	PlaceBlueprintResponse
+	PlaceBlueprintResponse,
+	PlacementAnchor
 } from '$types';
 
 class Placement {

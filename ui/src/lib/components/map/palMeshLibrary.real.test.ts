@@ -3,10 +3,10 @@
 // relative URL and the library routes that to permanent failure -- so meshopt
 // registration, dequantization, and webp texture support are unverified there.
 // Only the network is stubbed here; loader setup and attribute handling are real.
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as THREE from 'three';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import manifestJson from '../../../../../data/json/pal_meshes.json';
 
 type Entry = { file: string; bytes: number; triangles: number };

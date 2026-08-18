@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { oozCompress, oozDecompress } from './ooz';
-import { parseSavHeader, buildSav, getMagic, SaveType } from './savframe';
+import { buildSav, getMagic, parseSavHeader, SaveType } from './savframe';
 
 const root = resolve(__dirname, '..', '..', '..', '..');
 const savPath = resolve(root, 'tests/fixtures/saves/world1/Level.sav');
@@ -32,7 +32,13 @@ describe.skipIf(!hasGolden)('GVAS boundary: ooz.wasm ↔ psp_core', () => {
 
 	it('compressing the golden GVAS re-frames to a .sav that decompresses back', async () => {
 		const compressed = await oozCompress(golden);
-		const sav2 = buildSav(compressed, golden.length, compressed.length, getMagic(SaveType.PLM)!, SaveType.PLM);
+		const sav2 = buildSav(
+			compressed,
+			golden.length,
+			compressed.length,
+			getMagic(SaveType.PLM)!,
+			SaveType.PLM
+		);
 		const header = parseSavHeader(sav2);
 		const payload = sav2.subarray(header.dataOffset, header.dataOffset + header.compressedLength);
 		const restored = await oozDecompress(payload, header.uncompressedLength);

@@ -1549,7 +1549,9 @@ body::after {
 	color: var(--color-surface-300);
 	white-space: nowrap;
 	flex-shrink: 0;
-	transition: background-color 120ms ease, color 120ms ease;
+	transition:
+		background-color 120ms ease,
+		color 120ms ease;
 }
 
 .public-nav-link:hover {
@@ -1580,7 +1582,9 @@ body::after {
 	border: 1px solid color-mix(in srgb, var(--color-surface-600) 55%, transparent);
 	white-space: nowrap;
 	flex-shrink: 0;
-	transition: background-color 120ms ease, color 120ms ease;
+	transition:
+		background-color 120ms ease,
+		color 120ms ease;
 }
 
 /* Responsive split: ≥640px = floating centered pill; <640px = standard
@@ -1617,7 +1621,6 @@ body::after {
 		gap: 0.125rem;
 	}
 }
-
 
 .public-chip:hover {
 	background: color-mix(in srgb, var(--color-surface-700) 70%, transparent);

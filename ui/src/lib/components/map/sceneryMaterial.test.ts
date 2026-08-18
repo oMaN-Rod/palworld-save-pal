@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import {
 	createSceneryMaterial,
-	setSceneryMaterialMap,
-	setSceneryMaterialOpacity,
 	SCENERY_AMBIENT,
 	SCENERY_CLIFF_COLOR,
+	SCENERY_CLIFF_DARKEN,
 	SCENERY_CLIFF_DESAT,
-	SCENERY_CLIFF_DARKEN
+	setSceneryMaterialMap,
+	setSceneryMaterialOpacity
 } from './sceneryMaterial';
 import { mosaicTexture, type TintMosaic } from './sceneryTint';
 
@@ -15,7 +15,18 @@ describe('createSceneryMaterial', () => {
 	it('returns a ShaderMaterial with every uniform the fragment shader reads', () => {
 		const material = createSceneryMaterial();
 		expect(material).toBeInstanceOf(THREE.ShaderMaterial);
-		for (const name of ['uMap', 'uHasMap', 'uBase', 'uSun', 'uAmbient', 'uCliff', 'uCliffStart', 'uCliffEnd', 'uCliffDesat', 'uCliffDarken']) {
+		for (const name of [
+			'uMap',
+			'uHasMap',
+			'uBase',
+			'uSun',
+			'uAmbient',
+			'uCliff',
+			'uCliffStart',
+			'uCliffEnd',
+			'uCliffDesat',
+			'uCliffDarken'
+		]) {
 			expect(material.uniforms).toHaveProperty(name);
 		}
 	});

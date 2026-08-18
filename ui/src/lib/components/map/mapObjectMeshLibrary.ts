@@ -50,7 +50,10 @@ function settle(name: string): void {
 	for (const cb of listeners) cb();
 }
 
-export function requestMapObjectMesh(name: string, baseUrl: string = MODEL_URL): MapObjectMeshBundle | null {
+export function requestMapObjectMesh(
+	name: string,
+	baseUrl: string = MODEL_URL
+): MapObjectMeshBundle | null {
 	const hit = cache.get(name);
 	if (hit) return hit;
 	if (inflight.has(name) || failed.has(name)) return null;

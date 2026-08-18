@@ -71,7 +71,7 @@
 				{@const meta = srcMeta(src.type)}
 				{@const SrcIcon = meta.icon}
 				<div
-					class="rounded-sm bg-surface-900/50 border-surface-700/30 flex items-center gap-1.5 border px-2 py-1"
+					class="bg-surface-900/50 border-surface-700/30 flex items-center gap-1.5 rounded-sm border px-2 py-1"
 				>
 					<PalSlot
 						tribe={src.pal}
@@ -92,7 +92,7 @@
 	{#if chain.steps.length}
 		<div class="breed-list-numbered">
 			{#each chain.steps as step, i}
-				<div class="breed-row rounded-sm bg-surface-900/30 border-surface-700/20 border p-2">
+				<div class="breed-row bg-surface-900/30 border-surface-700/20 rounded-sm border p-2">
 					<span class="text-surface-400 shrink-0 font-mono text-[10px]">{i + 1}</span>
 					<PalSlot
 						tribe={step.parent_a}

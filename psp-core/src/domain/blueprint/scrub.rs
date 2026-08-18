@@ -9,7 +9,9 @@ use super::{capture, BaseBlueprint, CaptureOptions};
 use crate::domain::world;
 use crate::props;
 use crate::ue::games::palworld::{PalMapConcreteModelModuleData, PalMapConcreteModelVariant};
-use crate::ue::{FGuid, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, ValueVec};
+use crate::ue::{
+    FGuid, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, ValueVec,
+};
 
 fn zero() -> FGuid {
     props::uuid_to_guid(Uuid::nil())
@@ -100,8 +102,11 @@ fn scrub_concrete_variant(variant: &mut PalMapConcreteModelVariant<crate::ue::Ar
 /// lock -- must not keep what opens it.
 fn scrub_module_map(properties: &mut Properties, keep_password: bool) {
     capture::for_each_module_raw_mut(properties, |raw| {
-        if let PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } =
-            &mut raw.data
+        if let PalMapConcreteModelModuleData::PasswordLock {
+            password,
+            player_infos,
+            ..
+        } = &mut raw.data
         {
             for info in player_infos {
                 info.player_uid = zero();
@@ -166,10 +171,14 @@ fn scrub_character_entry(entry: &mut MapEntry) {
     // in the destination, and adding one would break the save on write.
     let last_modifier = PropertyKey::from("LastNickNameModifierPlayerUid");
     if save_parameter.0.contains_key(&last_modifier) {
-        save_parameter.insert("LastNickNameModifierPlayerUid", props::guid_property(Uuid::nil()));
+        save_parameter.insert(
+            "LastNickNameModifierPlayerUid",
+            props::guid_property(Uuid::nil()),
+        );
     }
-    if let Some(Property::Array(ValueVec::Struct(values))) =
-        save_parameter.0.get_mut(&PropertyKey::from("OldOwnerPlayerUIds"))
+    if let Some(Property::Array(ValueVec::Struct(values))) = save_parameter
+        .0
+        .get_mut(&PropertyKey::from("OldOwnerPlayerUIds"))
     {
         values.clear();
     }

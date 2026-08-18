@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { palModelUrl, requestPalMesh, palMeshFailed } from './palMeshLibrary';
+import { describe, expect, it } from 'vitest';
+import { palMeshFailed, palModelUrl, requestPalMesh } from './palMeshLibrary';
 
 describe('palModelUrl', () => {
 	it('resolves a manifest key to its hashed file under /models/pals', () => {

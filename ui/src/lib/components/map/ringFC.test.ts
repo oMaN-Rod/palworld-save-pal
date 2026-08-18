@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { buildRingFC, RING_SEGMENTS } from './ringFC';
 
 const item = (x: number, y: number, dim = false) => ({ x, y, dim });

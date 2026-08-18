@@ -672,7 +672,9 @@ mod tests {
         modified.insert(0, edited);
 
         let progress: crate::progress::ProgressSink = std::sync::Arc::new(|_: &str| {});
-        session.update_gps_pals(&data, &modified, &progress).unwrap();
+        session
+            .update_gps_pals(&data, &modified, &progress)
+            .unwrap();
 
         let updated = &session.gps_pals().unwrap()[&0];
         assert_eq!(updated.nickname.as_deref(), Some("GPS Edited"));
@@ -689,7 +691,9 @@ mod tests {
         modified.insert(999, dto);
 
         let progress: crate::progress::ProgressSink = std::sync::Arc::new(|_: &str| {});
-        session.update_gps_pals(&data, &modified, &progress).unwrap();
+        session
+            .update_gps_pals(&data, &modified, &progress)
+            .unwrap();
 
         assert_eq!(session.gps_pals().unwrap().len(), 1);
         assert!(session.gps_pals().unwrap().contains_key(&1));
@@ -737,7 +741,8 @@ mod tests {
     fn gps_load_add_clone_delete_round_trips_against_a_real_file() {
         let gps_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/GlobalPalStorage.sav");
-        let gps_bytes = std::fs::read(gps_path).expect("read committed GlobalPalStorage.sav fixture");
+        let gps_bytes =
+            std::fs::read(gps_path).expect("read committed GlobalPalStorage.sav fixture");
         let data = game_data();
         let level = minimal_save(Properties::default());
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);

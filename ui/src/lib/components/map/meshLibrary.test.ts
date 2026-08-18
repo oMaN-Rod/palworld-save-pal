@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it, vi } from 'vitest';
 
 const { loadCalls } = vi.hoisted(() => ({
 	loadCalls: [] as Array<{
@@ -30,18 +30,18 @@ vi.mock('three/examples/jsm/loaders/DRACOLoader.js', () => ({
 	}))
 }));
 
+import manifest from '../../../../../data/json/structure_meshes.json';
 import {
-	structureParts,
-	requestMesh,
+	bundleMapObjectMesh,
+	configureTexturedMaterial,
 	meshFailed,
 	onMeshLoaded,
-	requestTexturedMesh,
-	texturedMeshFailed,
 	onTexturedMeshLoaded,
-	bundleMapObjectMesh,
-	configureTexturedMaterial
+	requestMesh,
+	requestTexturedMesh,
+	structureParts,
+	texturedMeshFailed
 } from './meshLibrary';
-import manifest from '../../../../../data/json/structure_meshes.json';
 
 function sceneWithMeshes(count: number): THREE.Object3D {
 	const group = new THREE.Group();

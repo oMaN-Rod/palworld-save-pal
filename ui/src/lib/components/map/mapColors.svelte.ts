@@ -70,7 +70,13 @@ function mergeValidOpacity(
 	const merged = { ...defaults };
 	if (!stored) return merged;
 	for (const [key, value] of Object.entries(stored)) {
-		if (key in defaults && typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 1) {
+		if (
+			key in defaults &&
+			typeof value === 'number' &&
+			Number.isFinite(value) &&
+			value >= 0 &&
+			value <= 1
+		) {
 			merged[key] = value;
 		}
 	}
@@ -133,7 +139,9 @@ function clamp(value: number): number {
 
 export function materialBlend(): number {
 	const value = mapColors.current?.blend;
-	return typeof value === 'number' && Number.isFinite(value) ? clamp(value) : DEFAULT_MATERIAL_BLEND;
+	return typeof value === 'number' && Number.isFinite(value)
+		? clamp(value)
+		: DEFAULT_MATERIAL_BLEND;
 }
 
 export function setStructureColor(type: string, hex: string): void {

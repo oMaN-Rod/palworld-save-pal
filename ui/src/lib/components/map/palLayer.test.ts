@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import * as THREE from 'three';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { palRingColor } from './mapObjectPortal';
 import {
 	createPalLayer,
 	palInstanceMatrix,
@@ -10,7 +11,6 @@ import {
 	type PalPredator
 } from './palLayer';
 import { PORTAL_DIM_DEFEATED, PORTAL_RADIUS_CM } from './palPortal';
-import { palRingColor } from './mapObjectPortal';
 import { PAL_SCALE_DEFAULT } from './palSize';
 
 const DISPLAY: PalDisplay = { scale: 30, heightCm: 0, autoFollow: true, xray: false };
@@ -169,9 +169,7 @@ describe('createPalLayer', () => {
 	}
 
 	function palGroups(layer: PalLayer): THREE.Object3D[] {
-		return layer
-			.groupsForTest()
-			.filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
+		return layer.groupsForTest().filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
 	}
 
 	// The library returns the same cached Object3D however many bosses share a
@@ -298,7 +296,12 @@ describe('createPalLayer', () => {
 		const layer = createPalLayer({ id: 'test-portal-dispose' });
 		attach(layer);
 
-		layer.update([{ key: 'a', x: -400000, y: -300000, z: 0, defeated: false }], 'MainMap', 1, DISPLAY);
+		layer.update(
+			[{ key: 'a', x: -400000, y: -300000, z: 0, defeated: false }],
+			'MainMap',
+			1,
+			DISPLAY
+		);
 		expect(layer.groupsForTest().length).toBeGreaterThan(0);
 
 		layer.dispose();
@@ -381,9 +384,7 @@ describe('predator 3D rendering', () => {
 	}
 
 	function palGroups(layer: PalLayer): THREE.Object3D[] {
-		return layer
-			.groupsForTest()
-			.filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
+		return layer.groupsForTest().filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
 	}
 
 	const PREDATOR: PalPredator = { key: 'sifudog', x: -400000, y: -300000, z: 0 };
@@ -587,9 +588,7 @@ describe('createPalLayer update cost', () => {
 	}
 
 	function palGroups(layer: PalLayer): THREE.Object3D[] {
-		return layer
-			.groupsForTest()
-			.filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
+		return layer.groupsForTest().filter((o) => (o as THREE.InstancedMesh).isInstancedMesh !== true);
 	}
 
 	const TWO = [

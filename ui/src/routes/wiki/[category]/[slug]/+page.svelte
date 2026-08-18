@@ -20,21 +20,15 @@
 	const runtimeKeys = $derived(Object.keys(runtimeRecords));
 	const hasData = $derived(runtimeKeys.length > 0);
 
-	const strippedToRawKey = $derived(
-		new Map(runtimeKeys.map((key) => [stripKeyPrefix(key), key]))
-	);
+	const strippedToRawKey = $derived(new Map(runtimeKeys.map((key) => [stripKeyPrefix(key), key])));
 	const slugIndex = $derived(buildSlugIndex([...strippedToRawKey.keys()]));
 	const matchedStrippedKey = $derived(keyFromSlug(data.slug, slugIndex));
 	const rawKey = $derived(
 		matchedStrippedKey ? strippedToRawKey.get(matchedStrippedKey) : undefined
 	);
-	const record = $derived(
-		rawKey ? (runtimeRecords[rawKey] as Record<string, unknown>) : undefined
-	);
+	const record = $derived(rawKey ? (runtimeRecords[rawKey] as Record<string, unknown>) : undefined);
 
-	const title = $derived(
-		record && rawKey ? descriptor.displayName(rawKey, record) : data.slug
-	);
+	const title = $derived(record && rawKey ? descriptor.displayName(rawKey, record) : data.slug);
 	const description = $derived(
 		record && descriptor.description ? descriptor.description(record) : null
 	);

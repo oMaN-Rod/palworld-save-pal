@@ -3,9 +3,9 @@
 // structure's own world Z (cm) so meshes ride the DEM surface. The caller applies
 // verticalScale (cm->MapLibre metres) exactly as <Terrain exaggeration> does.
 import type { BaseStructure, Footprint } from '$types';
+import { pixelToLngLat } from './mercator';
 import type { MapArea } from './utils';
 import { worldToPixel } from './utils';
-import { pixelToLngLat } from './mercator';
 
 export type StructurePlacement = {
 	lng: number;

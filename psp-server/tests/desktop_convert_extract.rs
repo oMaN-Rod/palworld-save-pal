@@ -198,10 +198,7 @@ async fn loaded_gamepass_save_converts_to_steam_dir() {
         steam_out.join("LevelMeta.sav").exists(),
         "LevelMeta.sav missing"
     );
-    assert!(
-        steam_out.join("Players").is_dir(),
-        "Players dir missing"
-    );
+    assert!(steam_out.join("Players").is_dir(), "Players dir missing");
 
     server.handle.shutdown().await;
 }

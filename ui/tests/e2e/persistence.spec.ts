@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test('a settings write survives a reload (OPFS persistence)', async ({ page }) => {
 	test.setTimeout(60_000);

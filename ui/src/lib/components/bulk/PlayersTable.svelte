@@ -19,7 +19,6 @@
 	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
 	import ClockAlert from '@lucide/svelte/icons/clock-alert';
 	import Trash from '@lucide/svelte/icons/trash';
-	
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -164,10 +163,13 @@
 						</div>
 					{/snippet}
 				</Popover>
-				<Tooltip
-					label={m.delete_selected_entity({ entity: c.players })}
-				>
-					<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete} disabled={selected.size === 0}>
+				<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
+					<Button
+						variant="ghost"
+						class="hover:bg-error-500"
+						onclick={bulkDelete}
+						disabled={selected.size === 0}
+					>
 						<Trash class="h-4 w-4" />
 					</Button>
 				</Tooltip>

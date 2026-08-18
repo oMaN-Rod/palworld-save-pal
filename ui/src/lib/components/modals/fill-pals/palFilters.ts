@@ -23,8 +23,7 @@ export function getNormalPals(): [string, PalData][] {
 	return filterEnabled()
 		.filter(
 			(p) =>
-				!SPECIAL_CASES.some((substring) => p[0].toUpperCase().includes(substring)) &&
-				p[1].is_pal
+				!SPECIAL_CASES.some((substring) => p[0].toUpperCase().includes(substring)) && p[1].is_pal
 		)
 		.sort(sortByDeckIndex);
 }

@@ -43,18 +43,18 @@
 		<div class="flex justify-end space-x-4">
 			<Tooltip position="bottom">
 				<Button variant="secondary" onclick={handleCancel}>
-				<X size={20} />
-				<span>{cancelText}</span>
-			</Button>
+					<X size={20} />
+					<span>{cancelText}</span>
+				</Button>
 				{#snippet popup()}
 					<span>{cancelText}</span>
 				{/snippet}
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="primary" onclick={handleConfirm} data-modal-primary>
-				<Check size={20} />
-				<span>{confirmText}</span>
-			</Button>
+					<Check size={20} />
+					<span>{confirmText}</span>
+				</Button>
 				{#snippet popup()}
 					<span>{confirmText}</span>
 				{/snippet}

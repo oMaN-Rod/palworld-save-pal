@@ -43,7 +43,7 @@ export const mapImg = {
 	// icon box, leaving the sign itself unreadable at 24px.
 	signboard: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_buildobject_wallsignboard.webp`),
 	arrow: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_prt_compass_arrow.webp`),
-	bounty: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_bounty.webp`),
+	bounty: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_bounty.webp`)
 };
 
 /** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */

@@ -56,7 +56,10 @@ async fn recv_until(socket: &mut common::WsClient, stop_type: &str) -> Vec<Value
 async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     let temp_root = tempfile::tempdir().unwrap();
     let world1_copy = temp_root.path().join("world1");
-    copy_dir_recursive(&repo_root().join("tests/fixtures/saves/world1"), &world1_copy);
+    copy_dir_recursive(
+        &repo_root().join("tests/fixtures/saves/world1"),
+        &world1_copy,
+    );
     let level_sav_path = world1_copy.join("Level.sav").to_string_lossy().into_owned();
 
     let server = common::start_test_server().await;
@@ -96,7 +99,10 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     let detail = detail_frames.last().unwrap();
     assert_eq!(detail["data"]["origin"], "breeding", "{detail}");
     let player = &detail["data"]["player"];
-    assert!(player["pals"].is_object(), "player must parse a pals object");
+    assert!(
+        player["pals"].is_object(),
+        "player must parse a pals object"
+    );
     let pals_obj = player["pals"].as_object().unwrap();
     assert!(
         pals_obj.len() >= 3,
@@ -132,9 +138,7 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     // --- 4. Breeding DB up + breedable list ---------------------------------
     common::send_json(&mut socket, json!({"type": "get_breeding_pals"})).await;
     let pals_frames = recv_until(&mut socket, "get_breeding_pals").await;
-    let breedable: Vec<String> = pals_frames
-        .last()
-        .unwrap()["data"]["pals"]
+    let breedable: Vec<String> = pals_frames.last().unwrap()["data"]["pals"]
         .as_array()
         .unwrap()
         .iter()
@@ -188,15 +192,15 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         common::send_json(
             socket,
             json!({"type": "breeding_chain",
-                   "data": {
-                       "target_pal": target,
-                       "required_passives": [],
-                       "target_gender": null,
-                       "max_generations": 4,
-                       "max_results": 5,
-                       "include_wild": false,
-                       "pals": pals,
-                   }}),
+            "data": {
+                "target_pal": target,
+                "required_passives": [],
+                "target_gender": null,
+                "max_generations": 4,
+                "max_results": 5,
+                "include_wild": false,
+                "pals": pals,
+            }}),
         )
         .await;
         let frames = recv_until(socket, "breeding_chain").await;

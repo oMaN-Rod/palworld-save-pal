@@ -1050,9 +1050,7 @@ fn collecting_a_typed_relic_updates_only_that_type() {
     );
     assert_eq!(
         possess_map_after.get(common::CAPTURE_POWER_RELIC).copied(),
-        possess_map_before
-            .get(common::CAPTURE_POWER_RELIC)
-            .copied(),
+        possess_map_before.get(common::CAPTURE_POWER_RELIC).copied(),
         "RelicPossessNumMap[CapturePower] must still mirror the untouched scalar"
     );
 
@@ -1455,13 +1453,9 @@ fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
     {
         let loaded = session.loaded_players.get(&player_id).unwrap();
         assert!(
-            !loaded
-                .sav
-                .schemas
-                .schemas()
-                .keys()
-                .any(|path| path.ends_with(".RelicObtainForInstanceFlagByType.Type")
-                    || path.ends_with(".RelicObtainForInstanceFlagByType.Flags")),
+            !loaded.sav.schemas.schemas().keys().any(|path| path
+                .ends_with(".RelicObtainForInstanceFlagByType.Type")
+                || path.ends_with(".RelicObtainForInstanceFlagByType.Flags")),
             "test setup: .Type/.Flags schemas must be stripped"
         );
     }

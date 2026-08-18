@@ -93,8 +93,7 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
 	const awakeningScaling = pal.is_awakened ? AWAKENING_STATUS_MULTIPLY : 1;
 	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv) * alphaScaling);
-	pal.max_hp =
-		Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * awakeningScaling) * 1000;
+	pal.max_hp = Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * awakeningScaling) * 1000;
 
 	// Attack calculation
 	const attackIv = (pal.talent_shot * 0.3) / 100;

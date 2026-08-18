@@ -15,7 +15,9 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
-	let { pal = $bindable() }: {
+	let {
+		pal = $bindable()
+	}: {
 		pal: Pal;
 	} = $props();
 
@@ -299,11 +301,7 @@
 		class="flex w-full flex-col space-y-2"
 	>
 		{#each activeSkillsToShow as skill}
-			<ActiveSkillBadge
-				{skill}
-				{pal}
-				onSkillUpdate={handleUpdateActiveSkill}
-			/>
+			<ActiveSkillBadge {skill} {pal} onSkillUpdate={handleUpdateActiveSkill} />
 		{/each}
 	</div>
 	<SectionHeader text={c.passiveSkills} />
@@ -312,11 +310,7 @@
 		style="opacity: {passiveProgress.current}; transition: opacity 300ms ease-out;"
 	>
 		{#each passiveSkillsToShow as skill}
-			<PassiveSkillBadge
-				{skill}
-				{pal}
-				onSkillUpdate={handleUpdatePassiveSkill}
-			/>
+			<PassiveSkillBadge {skill} {pal} onSkillUpdate={handleUpdatePassiveSkill} />
 		{/each}
 	</div>
 	<span class="text-justify">{palData?.description}</span>

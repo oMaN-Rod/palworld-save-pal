@@ -7,10 +7,7 @@ test.describe('SEO head tags', () => {
 		await page.goto('/');
 		await expect(page).toHaveTitle(/Palworld Save Editor/i);
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${ORIGIN}/`);
-		await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-			'content',
-			/Palworld/i
-		);
+		await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Palworld/i);
 		await expect(page.locator('h1')).toHaveCount(1);
 	});
 

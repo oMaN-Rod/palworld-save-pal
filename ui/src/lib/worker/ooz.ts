@@ -33,12 +33,22 @@ function decompress(m: OozModule, compressed: Uint8Array, uncompressedLength: nu
 	const dst = m._malloc(uncompressedLength + SAFE_SPACE_PADDING);
 	try {
 		m.HEAPU8.set(compressed, src);
-		const written = m.ccall(
-			'Ooz_Decompress',
-			'number',
-			Array(14).fill('number'),
-			[src, compressed.length, dst, uncompressedLength, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-		);
+		const written = m.ccall('Ooz_Decompress', 'number', Array(14).fill('number'), [
+			src,
+			compressed.length,
+			dst,
+			uncompressedLength,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
+		]);
 		if (written !== uncompressedLength) {
 			throw new Error(`Ooz_Decompress wrote ${written}, expected ${uncompressedLength}`);
 		}
@@ -55,12 +65,14 @@ function compress(m: OozModule, data: Uint8Array): Uint8Array {
 	const dst = m._malloc(dstCapacity);
 	try {
 		m.HEAPU8.set(data, src);
-		const written = m.ccall(
-			'Ooz_Compress',
-			'number',
-			Array(6).fill('number'),
-			[OODLE_MERMAID, src, data.length, dst, dstCapacity, OODLE_LEVEL_NORMAL]
-		);
+		const written = m.ccall('Ooz_Compress', 'number', Array(6).fill('number'), [
+			OODLE_MERMAID,
+			src,
+			data.length,
+			dst,
+			dstCapacity,
+			OODLE_LEVEL_NORMAL
+		]);
 		if (written <= 0) throw new Error(`Ooz_Compress failed (code ${written})`);
 		return new Uint8Array(m.HEAPU8.subarray(dst, dst + written));
 	} finally {

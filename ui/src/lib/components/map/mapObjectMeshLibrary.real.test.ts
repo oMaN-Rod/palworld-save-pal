@@ -3,10 +3,10 @@
 // survive dequantization, and embedded webp images resolve into a material's
 // .map. Only the network is stubbed; the texture path needs `self`/`document`
 // globals Node does not define.
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as THREE from 'three';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import manifestJson from '../../../../../data/json/map_object_meshes.json';
 import { meshNames, type MapObjectManifest } from './mapObjectMesh';
 
@@ -82,7 +82,8 @@ async function loadRealMeshes(names: string[]) {
 		'./mapObjectMeshLibrary'
 	);
 
-	const settled = () => names.every((n) => requestMapObjectMesh(n, DIR) !== null || mapObjectMeshFailed(n));
+	const settled = () =>
+		names.every((n) => requestMapObjectMesh(n, DIR) !== null || mapObjectMeshFailed(n));
 	for (const name of names) requestMapObjectMesh(name, DIR);
 
 	if (!settled()) {
@@ -97,7 +98,10 @@ async function loadRealMeshes(names: string[]) {
 		});
 	}
 
-	return { bundle: (name: string) => requestMapObjectMesh(name, DIR), meshFailed: mapObjectMeshFailed };
+	return {
+		bundle: (name: string) => requestMapObjectMesh(name, DIR),
+		meshFailed: mapObjectMeshFailed
+	};
 }
 
 describe('the shipped map object meshes', () => {

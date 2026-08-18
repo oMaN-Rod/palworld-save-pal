@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { hasDirectoryEntry } from './folderUpload';
 
 function items(kinds: Array<'file' | 'dir' | null>): DataTransferItemList {

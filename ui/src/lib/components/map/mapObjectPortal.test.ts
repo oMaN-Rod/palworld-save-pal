@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import {
-	fastTravelPortalColor,
-	relicPortalColor,
-	palRingColor,
-	mapObjectPortalMatrix,
-	portalRingColorExpression,
 	createMapObjectPortalMesh,
 	disposeMapObjectPortalMesh,
-	RELIC_RADIUS_CM,
 	FAST_TRAVEL_RADIUS_CM,
+	fastTravelPortalColor,
+	mapObjectPortalMatrix,
+	palRingColor,
+	portalRingColorExpression,
+	RELIC_RADIUS_CM,
+	relicPortalColor,
 	type FastTravelState,
 	type RelicState
 } from './mapObjectPortal';

@@ -17,7 +17,12 @@ fn game_data() -> GameData {
 }
 
 fn anchor_far_from_everything() -> Anchor {
-    Anchor { x: 400_000.0, y: 400_000.0, z: 1000.0, yaw_radians: 0.0 }
+    Anchor {
+        x: 400_000.0,
+        y: 400_000.0,
+        z: 1000.0,
+        yaw_radians: 0.0,
+    }
 }
 
 /// A warnings-overridden request, the shape every placement test but
@@ -53,7 +58,10 @@ fn blueprint_of(session: &SaveSession, base_id: Uuid) -> BaseBlueprint {
 }
 
 fn with_code<'a>(findings: &'a [Finding], code: &str) -> Vec<&'a Finding> {
-    findings.iter().filter(|finding| finding.code == code).collect()
+    findings
+        .iter()
+        .filter(|finding| finding.code == code)
+        .collect()
 }
 
 fn count_code(findings: &[Finding], code: &str) -> usize {
@@ -76,13 +84,29 @@ fn a_clean_placement_produces_no_blocking_findings() {
 
     // The limits have to be readable AND leave room, or "not blocked" is true
     // by construction rather than by decision.
-    assert_eq!(common::world_option_int(&session, "BaseCampMaxNum"), Some(128));
-    assert_eq!(common::world_option_int(&session, "BaseCampMaxNumInGuild"), Some(10));
-    assert_eq!(common::world_option_int(&session, "MaxBuildingLimitNum"), Some(0));
+    assert_eq!(
+        common::world_option_int(&session, "BaseCampMaxNum"),
+        Some(128)
+    );
+    assert_eq!(
+        common::world_option_int(&session, "BaseCampMaxNumInGuild"),
+        Some(10)
+    );
+    assert_eq!(
+        common::world_option_int(&session, "MaxBuildingLimitNum"),
+        Some(0)
+    );
     let guilds = common::base_camp_guild_ids(&session);
     let guild_bases = guilds.iter().filter(|owner| **owner == guild_id).count();
-    assert!(guilds.len() < 128, "world has {} bases, not under the limit", guilds.len());
-    assert!(guild_bases < 10, "guild has {guild_bases} bases, not under the limit");
+    assert!(
+        guilds.len() < 128,
+        "world has {} bases, not under the limit",
+        guilds.len()
+    );
+    assert!(
+        guild_bases < 10,
+        "guild has {guild_bases} bases, not under the limit"
+    );
 
     let findings = validate::check(
         &session,
@@ -119,7 +143,9 @@ fn placing_on_top_of_the_source_base_warns() {
     );
 
     assert!(
-        findings.iter().any(|f| f.severity == Severity::Warning && f.code == "base_too_close"),
+        findings
+            .iter()
+            .any(|f| f.severity == Severity::Warning && f.code == "base_too_close"),
         "placing a base on top of an existing one must warn: {findings:?}"
     );
     // The binding rule: proximity is advice, never a refusal.
@@ -146,7 +172,9 @@ fn a_guild_at_its_base_limit_blocks_placement() {
     );
 
     assert!(
-        findings.iter().any(|f| f.severity == Severity::Blocking && f.code == "guild_base_limit"),
+        findings
+            .iter()
+            .any(|f| f.severity == Severity::Blocking && f.code == "guild_base_limit"),
         "a full guild must block a new base: {findings:?}"
     );
 }
@@ -183,7 +211,11 @@ fn the_guild_base_limit_counts_only_the_target_guilds_bases() {
         "a guild holding {guild_bases} bases is at a limit of {guild_bases}: {at_limit:?}"
     );
 
-    common::set_world_option_int(&mut session, "BaseCampMaxNumInGuild", guild_bases as i32 + 1);
+    common::set_world_option_int(
+        &mut session,
+        "BaseCampMaxNumInGuild",
+        guild_bases as i32 + 1,
+    );
     let under_limit = validate::check(
         &session,
         &game_data(),
@@ -251,7 +283,10 @@ fn the_building_limit_blocks_only_when_the_placement_would_exceed_it() {
     let blueprint = blueprint_of(&session, base_id);
     let guild_id = common::fixture_guild_id(&session);
     let structure_count = blueprint.structures.len();
-    assert!(structure_count > 1, "fixture base must carry real structures");
+    assert!(
+        structure_count > 1,
+        "fixture base must carry real structures"
+    );
 
     let check = |session: &SaveSession| {
         validate::check(
@@ -263,7 +298,11 @@ fn the_building_limit_blocks_only_when_the_placement_would_exceed_it() {
         )
     };
 
-    common::set_world_option_int(&mut session, "MaxBuildingLimitNum", structure_count as i32 - 1);
+    common::set_world_option_int(
+        &mut session,
+        "MaxBuildingLimitNum",
+        structure_count as i32 - 1,
+    );
     let over = check(&session);
     let blocked = with_code(&over, "building_limit");
     assert_eq!(
@@ -457,7 +496,10 @@ fn merge_into_skips_the_targets_own_structures_and_sums_its_building_count() {
 #[test]
 fn limits_that_cannot_be_read_are_reported_rather_than_passed() {
     let session = common::load_fixture_session("v1_relics");
-    assert!(session.world_option.is_none(), "the corpus fixture ships no WorldOption.sav");
+    assert!(
+        session.world_option.is_none(),
+        "the corpus fixture ships no WorldOption.sav"
+    );
     let base_id = common::fixture_base_id(&session);
     let blueprint = blueprint_of(&session, base_id);
     let guild_id = common::fixture_guild_id(&session);
@@ -471,9 +513,17 @@ fn limits_that_cannot_be_read_are_reported_rather_than_passed() {
     );
 
     let unknown = with_code(&findings, "limits_unknown");
-    assert_eq!(unknown.len(), 1, "an unreadable limit set must be reported once: {findings:?}");
+    assert_eq!(
+        unknown.len(),
+        1,
+        "an unreadable limit set must be reported once: {findings:?}"
+    );
     assert_eq!(unknown[0].severity, Severity::Warning);
-    for key in ["BaseCampMaxNumInGuild", "BaseCampMaxNum", "MaxBuildingLimitNum"] {
+    for key in [
+        "BaseCampMaxNumInGuild",
+        "BaseCampMaxNum",
+        "MaxBuildingLimitNum",
+    ] {
         assert!(
             unknown[0].message.contains(key),
             "the finding must name {key}: {}",
@@ -524,7 +574,11 @@ fn unknown_structure_types_are_flagged_and_known_ones_are_not() {
     );
 
     let unknown = with_code(&findings, "unknown_structure_type");
-    assert_eq!(unknown.len(), 1, "the bogus structure must be flagged once: {findings:?}");
+    assert_eq!(
+        unknown.len(),
+        1,
+        "the bogus structure must be flagged once: {findings:?}"
+    );
     assert_eq!(unknown[0].severity, Severity::Warning);
     assert!(
         unknown[0].message.contains("NotARealBuildingType"),
@@ -579,7 +633,9 @@ fn session_fingerprint(session: &SaveSession) -> SessionFingerprint {
         characters: world::character_map(&session.level).map_or(0, Vec::len),
         dynamic_items: world::dynamic_item_values(&session.level).map_or(0, Vec::len),
         guild_registrations,
-        structure_instance_ids: common::all_map_object_instance_ids(session).into_iter().collect(),
+        structure_instance_ids: common::all_map_object_instance_ids(session)
+            .into_iter()
+            .collect(),
     }
 }
 
@@ -664,7 +720,10 @@ fn relabel_group_as_guild(session: &mut SaveSession, group_id: Uuid) {
         .expect("the named group has a GroupSaveDataMap entry");
     psp_core::props::struct_props_mut(&mut entry.value)
         .expect("group value")
-        .insert("GroupType", psp_core::props::enum_property("EPalGroupType::Guild"));
+        .insert(
+            "GroupType",
+            psp_core::props::enum_property("EPalGroupType::Guild"),
+        );
 }
 
 /// One placed structure's identity fields, read straight off
@@ -694,7 +753,9 @@ fn placed_structures(session: &SaveSession, base_id: Uuid) -> Vec<PlacedStructur
     values
         .iter()
         .filter_map(|value| {
-            let StructValue::Struct(object_props) = value else { return None };
+            let StructValue::Struct(object_props) = value else {
+                return None;
+            };
             let model = object_props
                 .0
                 .get(&PropertyKey::from("Model"))
@@ -807,7 +868,9 @@ fn placed_structures_are_rebound_to_the_owner_and_the_target_guild() {
     // Capture scrubs the builder uid to nil, so a placement that forgot to
     // rebind it would leave nil behind rather than the source save's value.
     assert!(
-        capture::structure_build_player_uids(&blueprint).iter().all(Uuid::is_nil),
+        capture::structure_build_player_uids(&blueprint)
+            .iter()
+            .all(Uuid::is_nil),
         "a captured blueprint carries no builder uid"
     );
 
@@ -839,7 +902,9 @@ fn a_blocked_placement_leaves_the_session_untouched() {
     common::set_world_option_int(&mut session, "BaseCampMaxNumInGuild", 1);
     let before = session_fingerprint(&session);
     assert!(
-        before.map_objects > 0 && before.base_camps > 0 && !before.structure_instance_ids.is_empty(),
+        before.map_objects > 0
+            && before.base_camps > 0
+            && !before.structure_instance_ids.is_empty(),
         "the fixture must carry map objects and base camps"
     );
 
@@ -850,7 +915,10 @@ fn a_blocked_placement_leaves_the_session_untouched() {
         &game_data(),
     );
 
-    assert!(result.is_err(), "a blocking finding must fail the placement");
+    assert!(
+        result.is_err(),
+        "a blocking finding must fail the placement"
+    );
     assert_eq!(
         session_fingerprint(&session),
         before,
@@ -925,11 +993,17 @@ fn a_placement_that_fails_after_validation_leaves_the_session_untouched() {
     // One property name, two property types, on two structures that share a
     // schema path: no single write tag can describe both.
     let mut clashing_types = blueprint.clone();
-    assert!(clashing_types.structures.len() > 1, "the capture must carry several structures");
-    clashing_types.structures[0].properties.insert("PspTypeClash", psp_core::props::int_property(0));
-    clashing_types.structures[1]
+    assert!(
+        clashing_types.structures.len() > 1,
+        "the capture must carry several structures"
+    );
+    clashing_types.structures[0]
         .properties
-        .insert("PspTypeClash", psp_core::ue::Property::Str("clash".to_string()));
+        .insert("PspTypeClash", psp_core::props::int_property(0));
+    clashing_types.structures[1].properties.insert(
+        "PspTypeClash",
+        psp_core::ue::Property::Str("clash".to_string()),
+    );
 
     let cases: Vec<(&str, &BaseBlueprint, PlacementRequest, &str)> = vec![
         (
@@ -1028,8 +1102,15 @@ fn warnings_are_refused_unless_overridden() {
         },
         &game_data(),
     );
-    assert!(refused.is_err(), "a warning must stop a placement that did not override");
-    assert_eq!(session_fingerprint(&session), before, "a refusal must change nothing");
+    assert!(
+        refused.is_err(),
+        "a warning must stop a placement that did not override"
+    );
+    assert_eq!(
+        session_fingerprint(&session),
+        before,
+        "a refusal must change nothing"
+    );
 
     let accepted = place::place(
         &mut session,
@@ -1097,7 +1178,10 @@ fn placed_structures_land_at_the_chosen_anchor() {
     let guild_id = common::fixture_guild_id(&session);
     let owner = common::fixture_player_uid(&session);
     let anchor = anchor_far_from_everything();
-    assert_eq!(anchor.yaw_radians, 0.0, "the expectation below assumes no rotation");
+    assert_eq!(
+        anchor.yaw_radians, 0.0,
+        "the expectation below assumes no rotation"
+    );
 
     // Derived from the blueprint, not from the placement: with an unrotated
     // anchor a structure's world position is exactly anchor + its captured
@@ -1107,11 +1191,18 @@ fn placed_structures_land_at_the_chosen_anchor() {
         .iter()
         .map(|structure| {
             let offset = &structure.relative_transform.translation;
-            position_key(anchor.x + offset.x.0, anchor.y + offset.y.0, anchor.z + offset.z.0)
+            position_key(
+                anchor.x + offset.x.0,
+                anchor.y + offset.y.0,
+                anchor.z + offset.z.0,
+            )
         })
         .collect();
     assert!(
-        blueprint.structures.iter().any(|s| horizontal_offset(s) > 100.0),
+        blueprint
+            .structures
+            .iter()
+            .any(|s| horizontal_offset(s) > 100.0),
         "the blueprint must spread out, or the anchor and the source would be indistinguishable"
     );
 
@@ -1125,7 +1216,10 @@ fn placed_structures_land_at_the_chosen_anchor() {
 
     let placed_base = result.base_id.expect("a new base must report its id");
     let structures = placed_structures(&session, placed_base);
-    assert!(!structures.is_empty(), "the placed base must have structures");
+    assert!(
+        !structures.is_empty(),
+        "the placed base must have structures"
+    );
     let actual: BTreeSet<String> = structures
         .iter()
         .map(|structure| position_key(structure.x, structure.y, structure.z))
@@ -1152,7 +1246,10 @@ fn merging_adds_structures_to_the_target_base_without_founding_one() {
     assert_eq!(pal_boxes, 1, "the fixture base has exactly one Pal Box");
     let bases_before = common::base_count(&session);
     let structures_before = placed_structures(&session, base_id).len();
-    assert!(structures_before > 1, "the target base must already hold structures");
+    assert!(
+        structures_before > 1,
+        "the target base must already hold structures"
+    );
 
     let mut anchor = common::fixture_base_anchor(&session, base_id);
     anchor.x += 20_000.0;
@@ -1165,7 +1262,11 @@ fn merging_adds_structures_to_the_target_base_without_founding_one() {
     .expect("merge placement");
 
     assert_eq!(result.base_id, None, "a merge founds no base");
-    assert_eq!(common::base_count(&session), bases_before, "a merge adds no base camp");
+    assert_eq!(
+        common::base_count(&session),
+        bases_before,
+        "a merge adds no base camp"
+    );
     assert_eq!(
         result.structures_placed as usize,
         blueprint.structures.len() - pal_boxes,
@@ -1199,7 +1300,9 @@ fn a_placed_blueprint_still_serializes_and_parses_back() {
     )
     .expect("placement");
 
-    let bytes = session.level_sav_bytes().expect("level must serialize after placement");
+    let bytes = session
+        .level_sav_bytes()
+        .expect("level must serialize after placement");
     let reparsed = psp_core::savio::read_sav_bytes(&bytes)
         .expect("level written after placement must parse back");
     let reloaded = psp_core::session::SaveSession::new_for_tests(
@@ -1231,7 +1334,9 @@ fn first_guild_id(session: &SaveSession) -> Uuid {
         .iter()
         .find(|entry| {
             guild_tail::entry_group_type(entry).as_deref() == Some("EPalGroupType::Guild")
-                && guild_tail::entry_group_data(entry).and_then(guild_tail::as_guild).is_some()
+                && guild_tail::entry_group_data(entry)
+                    .and_then(guild_tail::as_guild)
+                    .is_some()
         })
         .and_then(|entry| psp_core::props::as_uuid(&entry.key))
         .expect("every save fixture must carry a decodable guild")
@@ -1248,7 +1353,9 @@ fn guild_member_uid(session: &SaveSession, guild_id: Uuid) -> Uuid {
         .expect("the named guild has a GroupSaveDataMap entry");
     let group_data = guild_tail::entry_group_data(entry).expect("guild group data");
     let guild = guild_tail::as_guild(group_data).expect("group is a guild");
-    *guild_tail::guild_player_uids(guild).first().expect("the guild must have a member")
+    *guild_tail::guild_player_uids(guild)
+        .first()
+        .expect("the guild must have a member")
 }
 
 fn base_camp_entry(session: &SaveSession, base_id: Uuid) -> &psp_core::ue::MapEntry {
@@ -1313,7 +1420,11 @@ fn guild_lists(session: &SaveSession, guild_id: Uuid) -> (Vec<Uuid>, Vec<Uuid>, 
             .iter()
             .map(|handle| psp_core::props::guid_to_uuid(&handle.instance_id))
             .collect(),
-        guild.base_ids.iter().map(psp_core::props::guid_to_uuid).collect(),
+        guild
+            .base_ids
+            .iter()
+            .map(psp_core::props::guid_to_uuid)
+            .collect(),
         guild
             .map_object_instance_ids_base_camp_points
             .iter()
@@ -1331,7 +1442,9 @@ fn work_bindings(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
         .expect("the save must have WorkSaveData")
         .iter()
         .filter_map(|value| {
-            let StructValue::Struct(work_props) = value else { return None };
+            let StructValue::Struct(work_props) = value else {
+                return None;
+            };
             let Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) =
                 work_props.0.get(&PropertyKey::from("RawData"))
             else {
@@ -1355,15 +1468,21 @@ fn character_container_slot_owners(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     for entry in
         psp_core::domain::world::character_container_map(&session.level).expect("containers")
     {
-        let Some(container_id) = capture::container_entry_id(entry) else { continue };
-        let Some(value_props) = psp_core::props::struct_props(&entry.value) else { continue };
+        let Some(container_id) = capture::container_entry_id(entry) else {
+            continue;
+        };
+        let Some(value_props) = psp_core::props::struct_props(&entry.value) else {
+            continue;
+        };
         let Some(slots) =
             psp_core::props::get(value_props, &["Slots"]).and_then(psp_core::props::struct_values)
         else {
             continue;
         };
         for slot in slots {
-            let StructValue::Struct(slot_props) = slot else { continue };
+            let StructValue::Struct(slot_props) = slot else {
+                continue;
+            };
             if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
                 slot_props.0.get(&PropertyKey::from("RawData"))
             {
@@ -1388,18 +1507,24 @@ fn character_container_module_ids(properties: &psp_core::ue::Properties) -> Vec<
     else {
         return ids;
     };
-    let Some(modules) =
-        concrete.0.get(&PropertyKey::from("ModuleMap")).and_then(psp_core::props::map_entries)
+    let Some(modules) = concrete
+        .0
+        .get(&PropertyKey::from("ModuleMap"))
+        .and_then(psp_core::props::map_entries)
     else {
         return ids;
     };
     for module in modules {
-        let Some(module_props) = psp_core::props::struct_props(&module.value) else { continue };
+        let Some(module_props) = psp_core::props::struct_props(&module.value) else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(raw)))) =
             module_props.0.get(&PropertyKey::from("RawData"))
         {
-            if let PalMapConcreteModelModuleData::CharacterContainer { target_container_id, .. } =
-                &raw.data
+            if let PalMapConcreteModelModuleData::CharacterContainer {
+                target_container_id,
+                ..
+            } = &raw.data
             {
                 ids.push(psp_core::props::guid_to_uuid(target_container_id));
             }
@@ -1429,24 +1554,41 @@ fn work_individual_refs(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
         return refs;
     };
     for value in values {
-        let StructValue::Struct(work_props) = value else { continue };
+        let StructValue::Struct(work_props) = value else {
+            continue;
+        };
         let Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) =
             work_props.0.get(&PropertyKey::from("RawData"))
         else {
             continue;
         };
-        let work_id =
-            raw.base_data.as_ref().map(|base| psp_core::props::guid_to_uuid(&base.id)).unwrap_or_default();
+        let work_id = raw
+            .base_data
+            .as_ref()
+            .map(|base| psp_core::props::guid_to_uuid(&base.id))
+            .unwrap_or_default();
         match &raw.work_specific_data {
-            PalWorkTypeSpecificData::Assign { assigned_individual_id, .. } => {
-                refs.push((work_id, psp_core::props::guid_to_uuid(&assigned_individual_id.instance_id)));
+            PalWorkTypeSpecificData::Assign {
+                assigned_individual_id,
+                ..
+            } => {
+                refs.push((
+                    work_id,
+                    psp_core::props::guid_to_uuid(&assigned_individual_id.instance_id),
+                ));
             }
-            PalWorkTypeSpecificData::ReviveCharacter { target_individual_id } => {
-                refs.push((work_id, psp_core::props::guid_to_uuid(&target_individual_id.instance_id)));
+            PalWorkTypeSpecificData::ReviveCharacter {
+                target_individual_id,
+            } => {
+                refs.push((
+                    work_id,
+                    psp_core::props::guid_to_uuid(&target_individual_id.instance_id),
+                ));
             }
             _ => {}
         }
-        if let Some(Property::Map(entries)) = work_props.0.get(&PropertyKey::from("WorkAssignMap")) {
+        if let Some(Property::Map(entries)) = work_props.0.get(&PropertyKey::from("WorkAssignMap"))
+        {
             for entry in entries {
                 let Some(assign_props) = psp_core::props::struct_props(&entry.value) else {
                     continue;
@@ -1586,10 +1728,15 @@ fn a_blueprint_placed_into_another_save_leaves_that_save_writable() {
 fn a_destination_missing_a_collection_is_refused_before_anything_lands() {
     let source = common::load_fixture_session("v1_relics");
     let blueprint = source_blueprint(&source, CaptureOptions::full());
-    assert!(!blueprint.works.is_empty(), "the blueprint must carry works");
+    assert!(
+        !blueprint.works.is_empty(),
+        "the blueprint must carry works"
+    );
 
     let mut target = common::load_fixture_session("world2");
-    let bytes_before = target.level_sav_bytes().expect("world2 must serialize at baseline");
+    let bytes_before = target
+        .level_sav_bytes()
+        .expect("world2 must serialize at baseline");
     let fingerprint_before = session_fingerprint(&target);
     let guild_id = first_guild_id(&target);
     let owner = guild_member_uid(&target, guild_id);
@@ -1612,7 +1759,9 @@ fn a_destination_missing_a_collection_is_refused_before_anything_lands() {
         "a refused placement must not half-apply"
     );
     assert_eq!(
-        target.level_sav_bytes().expect("world2 must still serialize"),
+        target
+            .level_sav_bytes()
+            .expect("world2 must still serialize"),
         bytes_before,
         "a refused placement must leave the destination byte-identical"
     );
@@ -1638,8 +1787,7 @@ fn lengthen_session_base_camp_blob(session: &mut SaveSession, base_id: Uuid, fie
         .iter_mut()
         .find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
         .expect("the named base camp entry exists");
-    let value_props =
-        psp_core::props::struct_props_mut(&mut entry.value).expect("base camp value");
+    let value_props = psp_core::props::struct_props_mut(&mut entry.value).expect("base camp value");
     lengthen_base_camp_blob(value_props, field);
 }
 
@@ -1673,12 +1821,17 @@ fn a_blueprint_blob_that_does_not_decode_refuses_the_placement() {
     for field in ["WorkerDirector", "WorkCollection"] {
         let mut blueprint = intact.clone();
         lengthen_base_camp_blob(
-            blueprint.base_camp.as_mut().expect("the captured base has a base camp"),
+            blueprint
+                .base_camp
+                .as_mut()
+                .expect("the captured base has a base camp"),
             field,
         );
 
         let mut target = common::load_fixture_session("world1");
-        let bytes_before = target.level_sav_bytes().expect("world1 must serialize at baseline");
+        let bytes_before = target
+            .level_sav_bytes()
+            .expect("world1 must serialize at baseline");
         let fingerprint_before = session_fingerprint(&target);
         let guild_id = first_guild_id(&target);
         let owner = guild_member_uid(&target, guild_id);
@@ -1704,7 +1857,9 @@ fn a_blueprint_blob_that_does_not_decode_refuses_the_placement() {
             "{field}: a refused placement must not half-apply"
         );
         assert_eq!(
-            target.level_sav_bytes().expect("world1 must still serialize"),
+            target
+                .level_sav_bytes()
+                .expect("world1 must still serialize"),
             bytes_before,
             "{field}: a refused placement must leave the destination byte-identical"
         );
@@ -1723,7 +1878,10 @@ fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
     let base_id = common::fixture_base_id(&session);
     let blueprint = blueprint_of(&session, base_id);
     let owner = common::fixture_player_uid(&session);
-    assert!(!blueprint.works.is_empty(), "the blueprint must carry works to append");
+    assert!(
+        !blueprint.works.is_empty(),
+        "the blueprint must carry works to append"
+    );
 
     let mut anchor = common::fixture_base_anchor(&session, base_id);
     anchor.x += 20_000.0;
@@ -1741,7 +1899,9 @@ fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
     }
 
     lengthen_session_base_camp_blob(&mut session, base_id, "WorkCollection");
-    let bytes_before = session.level_sav_bytes().expect("the target must serialize at baseline");
+    let bytes_before = session
+        .level_sav_bytes()
+        .expect("the target must serialize at baseline");
     let fingerprint_before = session_fingerprint(&session);
 
     let error = match place::place(
@@ -1765,7 +1925,9 @@ fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
         "a refused merge must not half-apply"
     );
     assert_eq!(
-        session.level_sav_bytes().expect("the target must still serialize"),
+        session
+            .level_sav_bytes()
+            .expect("the target must still serialize"),
         bytes_before,
         "a refused merge must leave the target byte-identical"
     );
@@ -1786,20 +1948,28 @@ fn a_placed_base_rebinds_every_object_it_brings() {
     let mut target = common::load_fixture_session("world1");
     let guild_id = first_guild_id(&target);
     let owner = guild_member_uid(&target, guild_id);
-    assert_ne!(guild_id, source_guild, "the destination guild must differ from the source's");
+    assert_ne!(
+        guild_id, source_guild,
+        "the destination guild must differ from the source's"
+    );
     assert!(!guild_id.is_nil(), "the destination guild id must be real");
     assert!(!owner.is_nil(), "the destination owner uid must be real");
 
     let anchor = anchor_far_from_everything();
-    let works_before: BTreeSet<Uuid> =
-        work_bindings(&target).into_iter().map(|(id, _)| id).collect();
+    let works_before: BTreeSet<Uuid> = work_bindings(&target)
+        .into_iter()
+        .map(|(id, _)| id)
+        .collect();
     let containers_before = character_container_ids(&target);
     let characters_before = character_instance_ids(&target);
     // A captured pal names no guild at all -- the scrub pass zeroes it so the
     // source save's guild cannot travel in a shared blueprint -- so a placement
     // that forgot to rebind it would leave nil behind rather than the
     // destination's guild.
-    assert!(!blueprint.characters.is_empty(), "the blueprint must carry pals to rebind");
+    assert!(
+        !blueprint.characters.is_empty(),
+        "the blueprint must carry pals to rebind"
+    );
     for entry in &blueprint.characters {
         assert_eq!(
             psp_core::domain::world::entry_character_data(entry)
@@ -1821,7 +1991,10 @@ fn a_placed_base_rebinds_every_object_it_brings() {
     let placed_raw = base_camp_raw(&target, placed_base);
     let source_raw = base_camp_raw(&source, source_base);
     assert_ne!(
-        (source_raw.transform.translation.x.0, source_raw.transform.translation.y.0),
+        (
+            source_raw.transform.translation.x.0,
+            source_raw.transform.translation.y.0
+        ),
         (anchor.x, anchor.y),
         "the anchor must differ from the source base's own position"
     );
@@ -1846,9 +2019,15 @@ fn a_placed_base_rebinds_every_object_it_brings() {
     );
 
     let structures = placed_structures(&target, placed_base);
-    let base_camp_points: Vec<Uuid> =
-        structures.iter().filter_map(|structure| structure.base_camp_point_id).collect();
-    assert_eq!(base_camp_points.len(), 1, "exactly one placed structure is a BaseCampPoint");
+    let base_camp_points: Vec<Uuid> = structures
+        .iter()
+        .filter_map(|structure| structure.base_camp_point_id)
+        .collect();
+    assert_eq!(
+        base_camp_points.len(),
+        1,
+        "exactly one placed structure is a BaseCampPoint"
+    );
     assert_eq!(
         base_camp_points[0], placed_base,
         "the BaseCampPoint must name the new base, not the one it was captured from"
@@ -1864,11 +2043,16 @@ fn a_placed_base_rebinds_every_object_it_brings() {
         "every blueprint work must reach WorkSaveData"
     );
     for (work_id, base) in &placed_works {
-        assert_eq!(*base, placed_base, "work {work_id} must belong to the new base");
+        assert_eq!(
+            *base, placed_base,
+            "work {work_id} must belong to the new base"
+        );
     }
 
-    let placed_containers: BTreeSet<Uuid> =
-        character_container_ids(&target).difference(&containers_before).copied().collect();
+    let placed_containers: BTreeSet<Uuid> = character_container_ids(&target)
+        .difference(&containers_before)
+        .copied()
+        .collect();
     assert_eq!(
         placed_containers.len(),
         blueprint.character_containers.len(),
@@ -1884,18 +2068,25 @@ fn a_placed_base_rebinds_every_object_it_brings() {
         "the placed containers must have slots, or slot ownership is untested"
     );
     for slot_owner in &placed_slot_owners {
-        assert_eq!(*slot_owner, owner, "every placed container slot must name the owner");
+        assert_eq!(
+            *slot_owner, owner,
+            "every placed container slot must name the owner"
+        );
     }
 
-    let placed_characters: BTreeSet<Uuid> =
-        character_instance_ids(&target).difference(&characters_before).copied().collect();
+    let placed_characters: BTreeSet<Uuid> = character_instance_ids(&target)
+        .difference(&characters_before)
+        .copied()
+        .collect();
     assert_eq!(
         placed_characters.len(),
         blueprint.characters.len(),
         "every captured pal must land"
     );
     for entry in psp_core::domain::world::character_map(&target.level).expect("characters") {
-        let Some(instance_id) = psp_core::domain::world::entry_instance_id(entry) else { continue };
+        let Some(instance_id) = psp_core::domain::world::entry_instance_id(entry) else {
+            continue;
+        };
         if !placed_characters.contains(&instance_id) {
             continue;
         }
@@ -1966,10 +2157,18 @@ fn a_new_base_registers_itself_with_its_guild() {
         "the guild's base camp points must name the PLACED Pal Box instance"
     );
 
-    let placed_characters: BTreeSet<Uuid> =
-        character_instance_ids(&target).difference(&characters_before).copied().collect();
-    assert!(!placed_characters.is_empty(), "a full capture must bring pals");
-    let gained: BTreeSet<Uuid> = handles_after[handles_before.len()..].iter().copied().collect();
+    let placed_characters: BTreeSet<Uuid> = character_instance_ids(&target)
+        .difference(&characters_before)
+        .copied()
+        .collect();
+    assert!(
+        !placed_characters.is_empty(),
+        "a full capture must bring pals"
+    );
+    let gained: BTreeSet<Uuid> = handles_after[handles_before.len()..]
+        .iter()
+        .copied()
+        .collect();
     assert_eq!(
         handles_after.len(),
         handles_before.len() + placed_characters.len(),
@@ -1991,10 +2190,15 @@ fn merging_appends_its_works_to_the_target_bases_work_collection() {
     let base_id = common::fixture_base_id(&session);
     let blueprint = blueprint_of(&session, base_id);
     let owner = common::fixture_player_uid(&session);
-    assert!(!blueprint.works.is_empty(), "the blueprint must carry works");
+    assert!(
+        !blueprint.works.is_empty(),
+        "the blueprint must carry works"
+    );
 
-    let works_before: BTreeSet<Uuid> =
-        work_bindings(&session).into_iter().map(|(id, _)| id).collect();
+    let works_before: BTreeSet<Uuid> = work_bindings(&session)
+        .into_iter()
+        .map(|(id, _)| id)
+        .collect();
     let collection_before = work_collection(&session, base_id);
     assert!(
         !collection_before.work_ids.is_empty(),
@@ -2003,8 +2207,13 @@ fn merging_appends_its_works_to_the_target_bases_work_collection() {
 
     let mut anchor = common::fixture_base_anchor(&session, base_id);
     anchor.x += 20_000.0;
-    place::place(&mut session, &blueprint, &merge_request(anchor, base_id, owner), &game_data())
-        .expect("merge placement");
+    place::place(
+        &mut session,
+        &blueprint,
+        &merge_request(anchor, base_id, owner),
+        &game_data(),
+    )
+    .expect("merge placement");
 
     let merged_works: Vec<Uuid> = work_bindings(&session)
         .into_iter()
@@ -2052,8 +2261,11 @@ fn placing_invalidates_the_world_lookup_caches() {
     target.caches.item_container_index = Some(world::build_item_container_index(&target.level));
     target.caches.character_container_index =
         Some(world::build_character_container_index(&target.level));
-    let stale_containers =
-        target.caches.character_container_index.clone().expect("just built");
+    let stale_containers = target
+        .caches
+        .character_container_index
+        .clone()
+        .expect("just built");
     let containers_before = character_container_ids(&target);
 
     place::place(
@@ -2066,9 +2278,14 @@ fn placing_invalidates_the_world_lookup_caches() {
 
     // Why holding on to the index is a defect and not a missed optimisation: it
     // cannot answer for anything that just landed.
-    let placed: Vec<Uuid> =
-        character_container_ids(&target).difference(&containers_before).copied().collect();
-    assert!(!placed.is_empty(), "a full capture must bring character containers");
+    let placed: Vec<Uuid> = character_container_ids(&target)
+        .difference(&containers_before)
+        .copied()
+        .collect();
+    assert!(
+        !placed.is_empty(),
+        "a full capture must bring character containers"
+    );
     for container_id in &placed {
         assert!(
             !stale_containers.contains_key(container_id),
@@ -2076,8 +2293,14 @@ fn placing_invalidates_the_world_lookup_caches() {
         );
     }
 
-    assert!(target.caches.character_index.is_none(), "character index must be dropped");
-    assert!(target.caches.item_container_index.is_none(), "item container index must be dropped");
+    assert!(
+        target.caches.character_index.is_none(),
+        "character index must be dropped"
+    );
+    assert!(
+        target.caches.item_container_index.is_none(),
+        "item container index must be dropped"
+    );
     assert!(
         target.caches.character_container_index.is_none(),
         "character container index must be dropped"
@@ -2141,8 +2364,10 @@ fn the_placed_bases_worker_director_is_retargeted() {
             "{target_name}: the director must name the base it now belongs to"
         );
 
-        let placed_containers: BTreeSet<Uuid> =
-            character_container_ids(&target).difference(&containers_before).copied().collect();
+        let placed_containers: BTreeSet<Uuid> = character_container_ids(&target)
+            .difference(&containers_before)
+            .copied()
+            .collect();
         assert_ne!(
             director.container_id, source_director.container_id,
             "{target_name}: the director must not still name the source save's worker container"
@@ -2167,7 +2392,11 @@ fn the_placed_bases_worker_director_is_retargeted() {
         // the horizontal distance, so the two together pin the re-basing without
         // re-deriving the rotation the placement applies.
         let spawn = &director.spawn_transform.translation;
-        let placed_offset = (spawn.x.0 - anchor.x, spawn.y.0 - anchor.y, spawn.z.0 - anchor.z);
+        let placed_offset = (
+            spawn.x.0 - anchor.x,
+            spawn.y.0 - anchor.y,
+            spawn.z.0 - anchor.z,
+        );
         let placed_radius =
             (placed_offset.0 * placed_offset.0 + placed_offset.1 * placed_offset.1).sqrt();
         assert!(
@@ -2244,8 +2473,10 @@ fn every_capture_layer_gives_the_placed_base_a_worker_container() {
                 !director.container_id.is_nil(),
                 "{layer} -> {target_name}: the placed base's director names no worker container"
             );
-            let placed_containers: BTreeSet<Uuid> =
-                character_container_ids(&target).difference(&containers_before).copied().collect();
+            let placed_containers: BTreeSet<Uuid> = character_container_ids(&target)
+                .difference(&containers_before)
+                .copied()
+                .collect();
             assert!(
                 placed_containers.contains(&director.container_id),
                 "{layer} -> {target_name}: the director must name a container this placement \
@@ -2261,7 +2492,10 @@ fn every_capture_layer_gives_the_placed_base_a_worker_container() {
                 "{layer} -> {target_name}: the app's own base -> worker container lookup must agree"
             );
             assert_eq!(
-                common::container_slot_census(character_container_entry(&target, director.container_id)),
+                common::container_slot_census(character_container_entry(
+                    &target,
+                    director.container_id
+                )),
                 (source_slots, expected_pals),
                 "{layer} -> {target_name}: the worker container must keep the base's capacity and \
                  hold only the pals this layer captures"
@@ -2329,11 +2563,18 @@ fn a_merge_drops_only_the_container_that_is_both_unnamed_and_empty() {
         let containers_before = character_container_ids(&session);
         let mut anchor = common::fixture_base_anchor(&session, base_id);
         anchor.x += 20_000.0;
-        place::place(&mut session, &blueprint, &merge_request(anchor, base_id, owner), &game_data())
-            .unwrap_or_else(|error| panic!("{layer}: merge placement failed: {error}"));
+        place::place(
+            &mut session,
+            &blueprint,
+            &merge_request(anchor, base_id, owner),
+            &game_data(),
+        )
+        .unwrap_or_else(|error| panic!("{layer}: merge placement failed: {error}"));
 
-        let placed_containers: BTreeSet<Uuid> =
-            character_container_ids(&session).difference(&containers_before).copied().collect();
+        let placed_containers: BTreeSet<Uuid> = character_container_ids(&session)
+            .difference(&containers_before)
+            .copied()
+            .collect();
         assert_eq!(
             placed_containers.len(),
             expected_kept,
@@ -2364,7 +2605,8 @@ fn a_merge_drops_only_the_container_that_is_both_unnamed_and_empty() {
         );
         for container_id in &landed_unnamed {
             assert!(
-                common::container_slot_census(character_container_entry(&session, *container_id)).1 > 0,
+                common::container_slot_census(character_container_entry(&session, *container_id)).1
+                    > 0,
                 "{layer}: container {container_id} landed unnamed AND empty"
             );
         }
@@ -2399,11 +2641,18 @@ fn a_merge_lands_its_workers_and_leaves_no_work_naming_a_missing_pal() {
 
     let mut anchor = common::fixture_base_anchor(&session, base_id);
     anchor.x += 20_000.0;
-    place::place(&mut session, &blueprint, &merge_request(anchor, base_id, owner), &game_data())
-        .expect("merge placement");
+    place::place(
+        &mut session,
+        &blueprint,
+        &merge_request(anchor, base_id, owner),
+        &game_data(),
+    )
+    .expect("merge placement");
 
-    let placed_characters: BTreeSet<Uuid> =
-        character_instance_ids(&session).difference(&characters_before).copied().collect();
+    let placed_characters: BTreeSet<Uuid> = character_instance_ids(&session)
+        .difference(&characters_before)
+        .copied()
+        .collect();
     assert_eq!(
         placed_characters.len(),
         blueprint.characters.len(),
@@ -2431,7 +2680,10 @@ fn a_merge_lands_its_workers_and_leaves_no_work_naming_a_missing_pal() {
         placed_characters.len(),
         "the guild must gain one handle per pal that landed"
     );
-    let gained: BTreeSet<Uuid> = handles_after[handles_before.len()..].iter().copied().collect();
+    let gained: BTreeSet<Uuid> = handles_after[handles_before.len()..]
+        .iter()
+        .copied()
+        .collect();
     assert_eq!(
         gained, placed_characters,
         "the handles the guild gained must be exactly the pals that landed"

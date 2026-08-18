@@ -24,7 +24,11 @@ pub fn game_data() -> GameData {
 pub fn all_player_uids(session: &SaveSession) -> Vec<Uuid> {
     let mut uids: BTreeSet<Uuid> = session.player_file_refs.keys().copied().collect();
     if let Ok(entries) = psp_core::domain::world::character_map(&session.level) {
-        uids.extend(entries.iter().filter_map(psp_core::domain::world::entry_player_uid));
+        uids.extend(
+            entries
+                .iter()
+                .filter_map(psp_core::domain::world::entry_player_uid),
+        );
     }
     uids.remove(&Uuid::nil());
     uids.into_iter().collect()
@@ -38,7 +42,12 @@ pub fn all_player_uids(session: &SaveSession) -> Vec<Uuid> {
 #[allow(dead_code)]
 pub fn all_group_ids(session: &SaveSession) -> Vec<Uuid> {
     let mut ids: BTreeSet<Uuid> = psp_core::domain::world::group_map(&session.level)
-        .map(|entries| entries.iter().filter_map(|entry| psp_core::props::as_uuid(&entry.key)).collect())
+        .map(|entries| {
+            entries
+                .iter()
+                .filter_map(|entry| psp_core::props::as_uuid(&entry.key))
+                .collect()
+        })
         .unwrap_or_default();
     ids.remove(&Uuid::nil());
     ids.into_iter().collect()
@@ -214,6 +223,29 @@ pub fn relic_possess_num_map(sav: &serde_json::Value) -> BTreeMap<String, i64> {
         .unwrap_or_default()
 }
 
+/// Whether the save carries a `RelicPossessNumMap` property at all -- a
+/// present-but-empty map and an absent one are different states, and
+/// `relic_possess_num_map` cannot tell them apart.
+#[allow(dead_code)]
+pub fn relic_possess_map_present(sav: &serde_json::Value) -> bool {
+    find(sav, "RelicPossessNumMap").is_some()
+}
+
+/// Ordered variant of `relic_possess_num_map`: entries in on-disk order, so a
+/// test can catch a write that silently reordered the map.
+#[allow(dead_code)]
+pub fn relic_possess_num_map_ordered(sav: &serde_json::Value) -> Vec<(String, i64)> {
+    find(sav, "RelicPossessNumMap")
+        .and_then(|v| v.as_array())
+        .map(|entries| {
+            entries
+                .iter()
+                .filter_map(|e| Some((e["key"].as_str()?.to_string(), e["value"].as_i64()?)))
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
 #[allow(dead_code)]
 pub fn relic_bonus_exp_table_index(sav: &serde_json::Value) -> i64 {
     find(sav, "RelicBonusExpTableIndex")
@@ -297,7 +329,9 @@ pub const CAPTURE_POWER_RELIC: &str = "EPalRelicType::CapturePower";
 pub fn container_slot_census(entry: &psp_core::ue::MapEntry) -> (usize, usize) {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
 
-    let Some(value_props) = psp_core::props::struct_props(&entry.value) else { return (0, 0) };
+    let Some(value_props) = psp_core::props::struct_props(&entry.value) else {
+        return (0, 0);
+    };
     let Some(slots) =
         psp_core::props::get(value_props, &["Slots"]).and_then(psp_core::props::struct_values)
     else {
@@ -306,7 +340,9 @@ pub fn container_slot_census(entry: &psp_core::ue::MapEntry) -> (usize, usize) {
     let mut total = 0;
     let mut occupied = 0;
     for slot in slots {
-        let StructValue::Struct(slot_props) = slot else { continue };
+        let StructValue::Struct(slot_props) = slot else {
+            continue;
+        };
         if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
             slot_props.0.get(&PropertyKey::from("RawData"))
         {
@@ -332,7 +368,9 @@ pub fn fixture_base_id(session: &SaveSession) -> Uuid {
         .expect("map object values")
         .expect("the fixture must have MapObjectSaveData");
     for value in map_objects {
-        let StructValue::Struct(object_props) = value else { continue };
+        let StructValue::Struct(object_props) = value else {
+            continue;
+        };
         let Some(model) = object_props
             .0
             .get(&PropertyKey::from("Model"))
@@ -363,9 +401,15 @@ pub fn fixture_base_id(session: &SaveSession) -> Uuid {
     let (base_id, count) = counts
         .into_iter()
         .filter(|(id, _)| known.contains(id))
-        .max_by(|a, b| a.1.cmp(&b.1).then_with(|| a.0.to_string().cmp(&b.0.to_string())))
+        .max_by(|a, b| {
+            a.1.cmp(&b.1)
+                .then_with(|| a.0.to_string().cmp(&b.0.to_string()))
+        })
         .expect("the fixture must have a base camp with structures");
-    assert!(count > 1, "the chosen fixture base must have real structures, got {count}");
+    assert!(
+        count > 1,
+        "the chosen fixture base must have real structures, got {count}"
+    );
     base_id
 }
 
@@ -523,7 +567,10 @@ pub fn set_world_option_int(session: &mut SaveSession, key: &str, value: i32) {
     let save = session.world_option.as_mut().expect("world_option present");
     world_option::ensure_world_option_schemas(save);
 
-    let patch = world_option::WorldOptionPatch { key: key.to_string(), value: serde_json::json!(value) };
+    let patch = world_option::WorldOptionPatch {
+        key: key.to_string(),
+        value: serde_json::json!(value),
+    };
     world_option::apply_patch(save, &[patch]).expect("apply world option patch");
 }
 
@@ -541,7 +588,9 @@ pub fn fixture_player_uid(session: &SaveSession) -> Uuid {
         psp_core::domain::guild_tail::entry_group_data(entry).expect("guild group data");
     let guild = psp_core::domain::guild_tail::as_guild(group_data).expect("group is a guild");
     let players = psp_core::domain::guild_tail::guild_player_uids(guild);
-    *players.first().expect("the fixture guild must have a member")
+    *players
+        .first()
+        .expect("the fixture guild must have a member")
 }
 
 /// How many base camps the save holds, read straight off `BaseCampSaveData`.
@@ -574,7 +623,9 @@ pub fn all_map_object_instance_ids(session: &SaveSession) -> Vec<Uuid> {
     values
         .iter()
         .filter_map(|value| {
-            let StructValue::Struct(object_props) = value else { return None };
+            let StructValue::Struct(object_props) = value else {
+                return None;
+            };
             let model = object_props
                 .0
                 .get(&PropertyKey::from("Model"))

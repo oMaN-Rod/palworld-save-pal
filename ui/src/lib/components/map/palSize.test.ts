@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	PAL_SCALE_MIN,
-	PAL_SCALE_MAX,
 	PAL_SCALE_DEFAULT,
-	sliderToScale,
-	scaleToSlider
+	PAL_SCALE_MAX,
+	PAL_SCALE_MIN,
+	scaleToSlider,
+	sliderToScale
 } from './palSize';
 
 describe('slider bounds', () => {

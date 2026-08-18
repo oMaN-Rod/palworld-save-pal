@@ -54,7 +54,11 @@ mod tests {
 
     #[test]
     fn absent_world_option_serializes_with_empty_settings() {
-        let dto = WorldOptionDto { present: false, version: 0, settings: vec![] };
+        let dto = WorldOptionDto {
+            present: false,
+            version: 0,
+            settings: vec![],
+        };
         let text = serde_json::to_string(&dto).unwrap();
         assert_eq!(text, r#"{"present":false,"version":0,"settings":[]}"#);
     }
@@ -66,6 +70,9 @@ mod tests {
         let patch: WorldOptionPatchDto = serde_json::from_str(payload).unwrap();
         assert_eq!(patch.entries.len(), 2);
         assert_eq!(patch.entries[0].key, "ExpRate");
-        assert_eq!(patch.entries[1].value, serde_json::json!(["EPalAllowConnectPlatform::Steam"]));
+        assert_eq!(
+            patch.entries[1].value,
+            serde_json::json!(["EPalAllowConnectPlatform::Steam"])
+        );
     }
 }

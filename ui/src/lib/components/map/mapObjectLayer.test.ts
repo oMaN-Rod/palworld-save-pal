@@ -1,25 +1,25 @@
-import { beforeEach, describe, it, expect, vi } from 'vitest';
-import * as THREE from 'three';
 import type { Map as MLMap } from 'maplibre-gl';
+import * as THREE from 'three';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import manifestJson from '../../../../../data/json/map_object_meshes.json';
 import {
-	createMapObjectLayer,
 	bakeMapObjectInstances,
-	composeMapObjectMatrices,
 	bakeMapObjectPortalInstances,
+	composeMapObjectMatrices,
 	composeMapObjectPortalMatrices,
+	createMapObjectLayer,
 	cullDistanceCmFor,
-	viewRadiusCm,
 	MAP_OBJECT_DEFAULT_CULL_CM,
+	viewRadiusCm,
 	type MapObjectItem
 } from './mapObjectLayer';
 import { manifestParts, mapObjectInstanceMatrix, type MapObjectManifest } from './mapObjectMesh';
-import { mapObjectPortalMatrix, FAST_TRAVEL_RADIUS_CM, RELIC_RADIUS_CM } from './mapObjectPortal';
-import { CORE_COLOR } from './palPortal';
-import { pixelToLngLat, lngLatToPixel } from './mercator';
-import { pixelToWorld, worldToPixel } from './utils';
+import { FAST_TRAVEL_RADIUS_CM, mapObjectPortalMatrix, RELIC_RADIUS_CM } from './mapObjectPortal';
+import { lngLatToPixel, pixelToLngLat } from './mercator';
 import { partLocalMatrix, ueEulerToThreeQuaternion } from './meshPlacement';
+import { CORE_COLOR } from './palPortal';
 import { MESH_FLIP } from './structureLayer';
+import { pixelToWorld, worldToPixel } from './utils';
 
 // Only requestMapObjectMesh is replaced: an InstancedMesh over real geometry
 // needs no GL context, so the compose loop runs for real -- which is what lets
@@ -78,7 +78,7 @@ function lngLatOf(worldX: number, worldY: number): [number, number] {
 }
 
 // A layer with a stub map centred on the first item, already updated once.
-function mounted(items: typeof ITEM[]) {
+function mounted(items: (typeof ITEM)[]) {
 	const [lng, lat] = lngLatOf(items[0].x, items[0].y);
 	const { map, state } = stubMap(lng, lat);
 	const layer = createMapObjectLayer('map-objects-3d');
@@ -93,7 +93,10 @@ beforeEach(() => {
 	meshes.requestMapObjectMesh.mockImplementation((name: string) => {
 		let bundle = cache.get(name);
 		if (!bundle) {
-			bundle = { geometry: new THREE.BoxGeometry(100, 100, 100), material: new THREE.MeshStandardMaterial() };
+			bundle = {
+				geometry: new THREE.BoxGeometry(100, 100, 100),
+				material: new THREE.MeshStandardMaterial()
+			};
 			cache.set(name, bundle);
 		}
 		return bundle;
@@ -225,7 +228,9 @@ describe('createMapObjectLayer', () => {
 
 		const beams = layer
 			.groupsForTest()
-			.filter((o) => (o as THREE.InstancedMesh).geometry.type === 'CylinderGeometry') as THREE.InstancedMesh[];
+			.filter(
+				(o) => (o as THREE.InstancedMesh).geometry.type === 'CylinderGeometry'
+			) as THREE.InstancedMesh[];
 		expect(beams.length).toBe(2);
 
 		const radii = beams
@@ -333,8 +338,7 @@ describe('bakeMapObjectInstances', () => {
 				],
 				'MainMap',
 				MANIFEST
-			)
-				.size
+			).size
 		).toBe(0);
 	});
 });
@@ -405,7 +409,9 @@ describe('bakeMapObjectInstances + item rotation', () => {
 		const got = layer.bakedMatrixFor(1); // parts[0] bakes to index 0, parts[1] (jewel) to index 1
 		const expected = MESH_FLIP.clone()
 			.multiply(
-				new THREE.Matrix4().makeRotationFromQuaternion(ueEulerToThreeQuaternion(rot[0], rot[1], rot[2]))
+				new THREE.Matrix4().makeRotationFromQuaternion(
+					ueEulerToThreeQuaternion(rot[0], rot[1], rot[2])
+				)
 			)
 			.multiply(partLocalMatrix(jewel));
 
@@ -631,9 +637,9 @@ describe('bakeMapObjectInstances + composeMapObjectMatrices', () => {
 			'MainMap',
 			MANIFEST
 		);
-		expect(
-			composeMapObjectMatrices(inside.get(mesh)!, 0.6, 0, 0, 0, new Float32Array(16), 0)
-		).toBe(1);
+		expect(composeMapObjectMatrices(inside.get(mesh)!, 0.6, 0, 0, 0, new Float32Array(16), 0)).toBe(
+			1
+		);
 		expect(
 			composeMapObjectMatrices(outside.get(mesh)!, 0.6, 0, 0, 0, new Float32Array(16), 0)
 		).toBe(0);
@@ -660,7 +666,16 @@ describe('bakeMapObjectPortalInstances + composeMapObjectPortalMatrices', () => 
 		const baked = bakeMapObjectPortalInstances([item], 'MainMap', MANIFEST);
 		const [target, color] = targetAndColor();
 
-		const written = composeMapObjectPortalMatrices(baked, cmToMerc, item.x, item.y, 0, target, color, 0);
+		const written = composeMapObjectPortalMatrices(
+			baked,
+			cmToMerc,
+			item.x,
+			item.y,
+			0,
+			target,
+			color,
+			0
+		);
 
 		expect(written).toBe(1);
 		expectMatrixNear(

@@ -132,7 +132,9 @@ fn target_guild(session: &SaveSession, mode: &PlacementMode) -> Result<Uuid, Cor
             .ok_or_else(|| CoreError::Parse(format!("target base {base_id} not found")))?,
     };
     let Some(entry_index) = guild::guild_entry_index(session, guild_id)? else {
-        return Err(CoreError::Parse(format!("target guild {guild_id} not found")));
+        return Err(CoreError::Parse(format!(
+            "target guild {guild_id} not found"
+        )));
     };
     let entry = &world::group_map(&session.level)?[entry_index];
     let group_type = guild_tail::entry_group_type(entry);
@@ -142,7 +144,10 @@ fn target_guild(session: &SaveSession, mode: &PlacementMode) -> Result<Uuid, Cor
             group_type.as_deref().unwrap_or("group of unknown type")
         )));
     }
-    if guild_tail::entry_group_data(entry).and_then(guild_tail::as_guild).is_none() {
+    if guild_tail::entry_group_data(entry)
+        .and_then(guild_tail::as_guild)
+        .is_none()
+    {
         return Err(CoreError::Parse(format!(
             "target guild {guild_id} carries no decodable guild data"
         )));
@@ -175,9 +180,7 @@ fn preflight(
 ) -> Result<(), CoreError> {
     let missing = |name: &str| CoreError::Parse(format!("{name} missing from the target save"));
 
-    if !blueprint.structures.is_empty()
-        && world::map_object_values(&session.level)?.is_none()
-    {
+    if !blueprint.structures.is_empty() && world::map_object_values(&session.level)?.is_none() {
         return Err(missing("MapObjectSaveData"));
     }
     if !blueprint.works.is_empty() && world::work_values(&session.level)?.is_none() {
@@ -219,10 +222,7 @@ fn preflight(
 /// same blob, so a merge that could not register its works is refused before
 /// any of them land. A base camp carrying no such property at all is not an
 /// error -- `append_work_ids` skips it too.
-fn check_target_work_collection(
-    session: &SaveSession,
-    base_id: Uuid,
-) -> Result<(), CoreError> {
+fn check_target_work_collection(session: &SaveSession, base_id: Uuid) -> Result<(), CoreError> {
     let entries = world::base_camp_map(&session.level)?
         .ok_or_else(|| CoreError::Parse("BaseCampSaveData missing from the target save".into()))?;
     let entry = entries

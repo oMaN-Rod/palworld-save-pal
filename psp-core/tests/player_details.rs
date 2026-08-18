@@ -67,7 +67,9 @@ fn player_character_entry(
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",
-        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(character_data))),
+        Property::Struct(StructValue::Game(psp_core::ue::PalStruct::CharacterData(
+            character_data,
+        ))),
     );
 
     MapEntry {

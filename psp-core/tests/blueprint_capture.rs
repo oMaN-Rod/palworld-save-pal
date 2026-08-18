@@ -24,7 +24,10 @@ fn capture_collects_the_bases_structures() {
     let blueprint = capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home")
         .expect("capture must succeed for a base that exists");
 
-    assert!(!blueprint.structures.is_empty(), "a real base must capture at least one structure");
+    assert!(
+        !blueprint.structures.is_empty(),
+        "a real base must capture at least one structure"
+    );
     assert_eq!(
         blueprint.header.structure_count as usize,
         blueprint.structures.len(),
@@ -55,10 +58,17 @@ fn captured_transforms_are_relative_to_the_anchor() {
 fn capture_of_an_unknown_base_is_an_error() {
     let session = common::load_fixture_session("v1_relics");
 
-    let result =
-        capture::capture(&session, uuid::Uuid::nil(), CaptureOptions::blueprint(), "Nope");
+    let result = capture::capture(
+        &session,
+        uuid::Uuid::nil(),
+        CaptureOptions::blueprint(),
+        "Nope",
+    );
 
-    assert!(result.is_err(), "capturing a base that does not exist must error");
+    assert!(
+        result.is_err(),
+        "capturing a base that does not exist must error"
+    );
 }
 
 #[test]
@@ -97,7 +107,10 @@ fn scrubbing_zeroes_the_build_player_uid() {
 
     let owner = capture::first_build_player_uid(&unscrubbed)
         .expect("the fixture base must have a built structure with an owner");
-    assert!(!owner.is_nil(), "precondition: the fixture owner uid must be non-nil");
+    assert!(
+        !owner.is_nil(),
+        "precondition: the fixture owner uid must be non-nil"
+    );
 
     scrub::scrub_blueprint(&mut unscrubbed);
 
@@ -115,7 +128,10 @@ fn capture_scrubs_without_being_asked() {
         capture::capture(&session, base_id, CaptureOptions::full(), "Home").expect("capture");
 
     let owners = capture::structure_build_player_uids(&blueprint);
-    assert!(!owners.is_empty(), "the fixture base must have structures with a build_player_uid");
+    assert!(
+        !owners.is_empty(),
+        "the fixture base must have structures with a build_player_uid"
+    );
     assert!(
         owners.iter().all(|uid| uid.is_nil()),
         "capture must scrub every structure's build_player_uid, never returning an unscrubbed blueprint: {owners:?}"
@@ -162,8 +178,14 @@ fn capture_scrubs_all_captured_character_player_uids() {
     );
     for entry in &blueprint.characters {
         let (key_uid, owner_uid, old_owner_uids) = capture::character_entry_player_uids(entry);
-        assert!(key_uid.is_nil(), "character key PlayerUId must be scrubbed, got {key_uid}");
-        assert!(owner_uid.is_nil(), "OwnerPlayerUId must be scrubbed, got {owner_uid}");
+        assert!(
+            key_uid.is_nil(),
+            "character key PlayerUId must be scrubbed, got {key_uid}"
+        );
+        assert!(
+            owner_uid.is_nil(),
+            "OwnerPlayerUId must be scrubbed, got {owner_uid}"
+        );
         assert!(
             old_owner_uids.iter().all(|uid| uid.is_nil()),
             "OldOwnerPlayerUIds must be empty or all nil, got {old_owner_uids:?}"
@@ -228,7 +250,11 @@ fn item_containers_are_not_duplicated() {
     let total = ids.len();
     ids.sort();
     ids.dedup();
-    assert_eq!(ids.len(), total, "each item container must appear exactly once");
+    assert_eq!(
+        ids.len(),
+        total,
+        "each item container must appear exactly once"
+    );
 }
 
 #[test]
@@ -272,7 +298,10 @@ fn asking_for_workers_does_not_capture_caged_pals() {
     let session = common::load_fixture_session("v1_relics");
     let base_id = common::fixture_base_id(&session);
 
-    let workers_only = CaptureOptions { worker_pals: true, ..CaptureOptions::blueprint() };
+    let workers_only = CaptureOptions {
+        worker_pals: true,
+        ..CaptureOptions::blueprint()
+    };
     let blueprint = capture::capture(&session, base_id, workers_only, "Home").expect("capture");
 
     // `manifest` is a verbatim copy of the `options` argument, so asserting on it alone
@@ -280,7 +309,11 @@ fn asking_for_workers_does_not_capture_caged_pals() {
     // character containers instead.
     let base_entry = psp_core::domain::world::base_camp_map(&session.level)
         .expect("base camp map")
-        .and_then(|entries| entries.iter().find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id)))
+        .and_then(|entries| {
+            entries
+                .iter()
+                .find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
+        })
         .expect("fixture base camp entry must exist");
     let (_guild_id, worker_container_id) = guild::base_guild_and_container(base_entry)
         .expect("fixture base must resolve a worker container");
@@ -322,7 +355,9 @@ fn a_layer_without_worker_pals_captures_the_container_but_none_of_its_pals() {
     let base_entry = psp_core::domain::world::base_camp_map(&session.level)
         .expect("base camp map")
         .and_then(|entries| {
-            entries.iter().find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
+            entries
+                .iter()
+                .find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
         })
         .expect("fixture base camp entry must exist");
     let (_guild_id, worker_container_id) = guild::base_guild_and_container(base_entry)
@@ -391,7 +426,10 @@ fn the_source_world_is_withheld_unless_base_identity_is_requested() {
     // The control: read off the session, not off any capture. Without a world
     // name to withhold, an empty header field would prove nothing.
     let world_name = session.world_name.clone();
-    assert!(!world_name.is_empty(), "setup: the fixture save must carry a world name");
+    assert!(
+        !world_name.is_empty(),
+        "setup: the fixture save must carry a world name"
+    );
 
     for (layer, options) in [
         ("blueprint", CaptureOptions::blueprint()),
@@ -401,7 +439,11 @@ fn the_source_world_is_withheld_unless_base_identity_is_requested() {
         let blueprint = capture::capture(&session, base_id, options, "Home").expect("capture");
         assert_eq!(
             blueprint.header.source_world,
-            if options.base_identity { world_name.clone() } else { String::new() },
+            if options.base_identity {
+                world_name.clone()
+            } else {
+                String::new()
+            },
             "{layer}: the source world name must travel only with the base identity"
         );
     }
@@ -416,12 +458,19 @@ fn structure_container_refs_resolve_when_contents_and_pals_off() {
     // `blueprint()` captures production_config only, so container_contents AND
     // housed_pals are both OFF -- the preset that left dangling container
     // references and crashed Palworld on `IsWorkable`.
-    let bp = capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
+    let bp =
+        capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
 
-    let item_containers: HashSet<Uuid> =
-        bp.item_containers.iter().filter_map(capture::container_entry_id).collect();
-    let character_containers: HashSet<Uuid> =
-        bp.character_containers.iter().filter_map(capture::container_entry_id).collect();
+    let item_containers: HashSet<Uuid> = bp
+        .item_containers
+        .iter()
+        .filter_map(capture::container_entry_id)
+        .collect();
+    let character_containers: HashSet<Uuid> = bp
+        .character_containers
+        .iter()
+        .filter_map(capture::container_entry_id)
+        .collect();
 
     let mut refs = 0usize;
     for structure in &bp.structures {
@@ -443,7 +492,10 @@ fn structure_container_refs_resolve_when_contents_and_pals_off() {
             );
         }
     }
-    assert!(refs > 0, "fixture base must reference at least one container for this test to be meaningful");
+    assert!(
+        refs > 0,
+        "fixture base must reference at least one container for this test to be meaningful"
+    );
 
     // container_contents off: every captured item container is emptied.
     for entry in &bp.item_containers {

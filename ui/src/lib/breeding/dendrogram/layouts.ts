@@ -88,10 +88,13 @@ function radialPath(sx: number, sy: number, tx: number, ty: number): string {
 	return `M${sx},${sy} Q${mx * k},${my * k} ${tx},${ty}`;
 }
 
-function collect(laidOut: HierarchyPointNode<TreeNode>, place: (d: HierarchyPointNode<TreeNode>) => {
-	x: number;
-	y: number;
-}): { nodes: PositionedNode[]; index: Map<string, PositionedNode> } {
+function collect(
+	laidOut: HierarchyPointNode<TreeNode>,
+	place: (d: HierarchyPointNode<TreeNode>) => {
+		x: number;
+		y: number;
+	}
+): { nodes: PositionedNode[]; index: Map<string, PositionedNode> } {
 	const nodes: PositionedNode[] = [];
 	const index = new Map<string, PositionedNode>();
 	laidOut.each((d) => {

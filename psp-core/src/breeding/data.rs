@@ -157,7 +157,10 @@ fn same_gate(x: &ParentPair, y: &ParentPair) -> bool {
             (p.parent_a.clone(), p.parent_a_gender),
             (p.parent_b.clone(), p.parent_b_gender),
         ];
-        sides.sort_by(|l, r| l.0.cmp(&r.0).then(format!("{:?}", l.1).cmp(&format!("{:?}", r.1))));
+        sides.sort_by(|l, r| {
+            l.0.cmp(&r.0)
+                .then(format!("{:?}", l.1).cmp(&format!("{:?}", r.1)))
+        });
         sides
     };
     norm(x) == norm(y)
@@ -422,10 +425,7 @@ impl BreedingDB {
 
     /// `{"male": p, "female": q}`; defaults to 50/50 when unknown.
     pub fn gender_probability(&self, tribe: &str) -> GenderProb {
-        self.gender_prob
-            .get(tribe)
-            .cloned()
-            .unwrap_or_default()
+        self.gender_prob.get(tribe).cloned().unwrap_or_default()
     }
 
     /// A pal is breedable if it appears in the combo table at all.

@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
+import { describe, expect, it } from 'vitest';
 import { decodeSceneryStream } from './sceneryFormat';
 import { MAP_AREAS, type MapArea } from './utils';
 
@@ -15,33 +15,59 @@ function buildFixture(): ArrayBuffer {
 	const bytes = new Uint8Array(buf);
 	let o = 0;
 
-	bytes.set([0x50, 0x53, 0x50, 0x53], o); o += 4;      // "PSPS"
-	view.setUint32(o, 1, true); o += 4;                   // version
-	view.setUint32(o, names.length, true); o += 4;
+	bytes.set([0x50, 0x53, 0x50, 0x53], o);
+	o += 4; // "PSPS"
+	view.setUint32(o, 1, true);
+	o += 4; // version
+	view.setUint32(o, names.length, true);
+	o += 4;
 	for (const nb of nameBytes) {
-		view.setUint16(o, nb.length, true); o += 2;
-		bytes.set(nb, o); o += nb.length;
+		view.setUint16(o, nb.length, true);
+		o += 2;
+		bytes.set(nb, o);
+		o += nb.length;
 	}
-	view.setUint32(o, 1, true); o += 4;                   // bucketCount
-	view.setFloat32(o, -100, true); o += 4;
-	view.setFloat32(o, -200, true); o += 4;
-	view.setFloat32(o, 300, true); o += 4;
-	view.setFloat32(o, 400, true); o += 4;
-	view.setUint32(o, 1, true); o += 4;                   // runCount
-	view.setUint16(o, 0, true); o += 2;                   // meshIndex
-	view.setUint32(o, 2, true); o += 4;                   // instanceCount
+	view.setUint32(o, 1, true);
+	o += 4; // bucketCount
+	view.setFloat32(o, -100, true);
+	o += 4;
+	view.setFloat32(o, -200, true);
+	o += 4;
+	view.setFloat32(o, 300, true);
+	o += 4;
+	view.setFloat32(o, 400, true);
+	o += 4;
+	view.setUint32(o, 1, true);
+	o += 4; // runCount
+	view.setUint16(o, 0, true);
+	o += 2; // meshIndex
+	view.setUint32(o, 2, true);
+	o += 4; // instanceCount
 
-	for (const [x, y, z] of [[1, 2, 3], [4, 5, 6]]) {
-		view.setFloat32(o, x, true); o += 4;
-		view.setFloat32(o, y, true); o += 4;
-		view.setFloat32(o, z, true); o += 4;
-		view.setInt16(o, 0, true); o += 2;                 // qx
-		view.setInt16(o, 0, true); o += 2;                 // qy
-		view.setInt16(o, 0, true); o += 2;                 // qz
-		view.setInt16(o, 32767, true); o += 2;             // qw = 1
-		view.setFloat32(o, 1, true); o += 4;
-		view.setFloat32(o, 1, true); o += 4;
-		view.setFloat32(o, 1, true); o += 4;
+	for (const [x, y, z] of [
+		[1, 2, 3],
+		[4, 5, 6]
+	]) {
+		view.setFloat32(o, x, true);
+		o += 4;
+		view.setFloat32(o, y, true);
+		o += 4;
+		view.setFloat32(o, z, true);
+		o += 4;
+		view.setInt16(o, 0, true);
+		o += 2; // qx
+		view.setInt16(o, 0, true);
+		o += 2; // qy
+		view.setInt16(o, 0, true);
+		o += 2; // qz
+		view.setInt16(o, 32767, true);
+		o += 2; // qw = 1
+		view.setFloat32(o, 1, true);
+		o += 4;
+		view.setFloat32(o, 1, true);
+		o += 4;
+		view.setFloat32(o, 1, true);
+		o += 4;
 	}
 	return buf;
 }

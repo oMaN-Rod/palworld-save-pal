@@ -1,13 +1,13 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { structureFillColor, structureOpacity } from './styles';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
-	DEFAULT_STRUCTURE_COLORS,
 	DEFAULT_MATERIAL_TINTS,
+	DEFAULT_STRUCTURE_COLORS,
 	resetMapColors,
 	setMaterialBlend,
 	setMaterialOpacity,
 	setStructureColor
 } from './mapColors.svelte';
+import { structureFillColor, structureOpacity } from './styles';
 
 describe('structureFillColor', () => {
 	beforeEach(() => {

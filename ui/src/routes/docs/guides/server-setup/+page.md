@@ -15,12 +15,12 @@ Palworld Save Pal includes a built-in server manager for creating, configuring, 
 
 Running a Palworld dedicated server requires the following hardware ([source](https://docs.palworldgame.com/getting-started/requirements)):
 
-| Component   | Minimum                | Recommended              |
-|-------------|------------------------|--------------------------|
-| **CPU**     | 4 cores                | 4+ cores                 |
-| **RAM**     | 8 GB                   | 32 GB or more            |
-| **Storage** | HDD (not recommended)  | SSD                      |
-| **OS**      | Windows or Linux 64-bit| Windows or Linux 64-bit  |
+| Component   | Minimum                 | Recommended             |
+| ----------- | ----------------------- | ----------------------- |
+| **CPU**     | 4 cores                 | 4+ cores                |
+| **RAM**     | 8 GB                    | 32 GB or more           |
+| **Storage** | HDD (not recommended)   | SSD                     |
+| **OS**      | Windows or Linux 64-bit | Windows or Linux 64-bit |
 
 > 8 GB of RAM is bootable but increases the possibility of server crashes due to out-of-memory errors. SSD storage is strongly recommended — low-performance storage may corrupt saved data.
 
@@ -66,10 +66,10 @@ For players outside your local network to connect, you must forward the server p
 
 #### Default Ports
 
-| Port    | Protocol | Purpose                          |
-|---------|----------|----------------------------------|
+| Port    | Protocol | Purpose                           |
+| ------- | -------- | --------------------------------- |
 | `8211`  | UDP      | Game traffic (player connections) |
-| `27015` | UDP      | Steam query (server browser)     |
+| `27015` | UDP      | Steam query (server browser)      |
 
 > If you changed these ports during server creation, forward the ports you configured instead.
 
@@ -115,36 +115,36 @@ Navigate to **Servers** in the left navigation bar to open the server manager.
 
 Configure the core server settings:
 
-| Field              | Description                                                                 |
-|--------------------|-----------------------------------------------------------------------------|
-| **Deployment Type**| Choose **Docker** or **Native (Windows)**                                   |
-| **Display Name**   | A display name shown in PSP and in the server list                          |
-| **Server Name**    | A display name shown in-game                                                |
-| **Server Description** | A display name shown in-game                                            |
-| **Game Port**      | The port players connect to (default: `8211`)                               |
-| **Query Port**     | Steam query port for server browser visibility (default: `27015`)           |
-| **REST API Port**  | Port for the server's REST API used by the console and admin tools (default: `8212`) |
-| **Server Password**| Optional password players must enter to join                                |
-| **Admin Password** | Password for REST API authentication and in-game admin access               |
-| **Max Players**    | Maximum number of concurrent players                                        |
+| Field                  | Description                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| **Deployment Type**    | Choose **Docker** or **Native (Windows)**                                            |
+| **Display Name**       | A display name shown in PSP and in the server list                                   |
+| **Server Name**        | A display name shown in-game                                                         |
+| **Server Description** | A display name shown in-game                                                         |
+| **Game Port**          | The port players connect to (default: `8211`)                                        |
+| **Query Port**         | Steam query port for server browser visibility (default: `27015`)                    |
+| **REST API Port**      | Port for the server's REST API used by the console and admin tools (default: `8212`) |
+| **Server Password**    | Optional password players must enter to join                                         |
+| **Admin Password**     | Password for REST API authentication and in-game admin access                        |
+| **Max Players**        | Maximum number of concurrent players                                                 |
 
 > Ports are automatically suggested to avoid conflicts with your existing servers.
 
 #### Docker-Specific Fields
 
-| Field              | Description                                                    |
-|--------------------|----------------------------------------------------------------|
-| **Container Name** | Auto-generated from the server name; must be unique            |
-| **Image Name**     | Docker image to use (default: `omanrod/psp-palworld-server`)   |
+| Field              | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| **Container Name** | Auto-generated from the server name; must be unique          |
+| **Image Name**     | Docker image to use (default: `omanrod/psp-palworld-server`) |
 
 #### Native (Windows) Specific Fields
 
-| Field               | Description                                                                 |
-|----------------------|-----------------------------------------------------------------------------|
-| **SteamCMD Path**    | Path to your SteamCMD directory (downloaded automatically if not present)   |
-| **Install Base Path**| Directory where the Palworld dedicated server files will be installed        |
-| **World Name**       | Name for the game world                                                     |
-| **Launch Args**      | Additional command-line arguments passed to `PalServer.exe`                 |
+| Field                 | Description                                                               |
+| --------------------- | ------------------------------------------------------------------------- |
+| **SteamCMD Path**     | Path to your SteamCMD directory (downloaded automatically if not present) |
+| **Install Base Path** | Directory where the Palworld dedicated server files will be installed     |
+| **World Name**        | Name for the game world                                                   |
+| **Launch Args**       | Additional command-line arguments passed to `PalServer.exe`               |
 
 ### Gameplay Tab {.toc}
 
@@ -231,11 +231,11 @@ Edit server configuration after creation. Changes to ports, environment variable
 
 Manage server mods organized by type:
 
-| Mod Type      | Description                                      |
-|---------------|--------------------------------------------------|
-| **UE4SS Lua** | Lua script mods loaded by the UE4SS mod framework |
-| **Logic Mods**| `.pak` file mods placed in the LogicMods directory |
-| **Native DLL**| Native DLL mods loaded at runtime                 |
+| Mod Type       | Description                                        |
+| -------------- | -------------------------------------------------- |
+| **UE4SS Lua**  | Lua script mods loaded by the UE4SS mod framework  |
+| **Logic Mods** | `.pak` file mods placed in the LogicMods directory |
+| **Native DLL** | Native DLL mods loaded at runtime                  |
 
 - **Upload** a `.zip` file to install a new mod (select the mod type before uploading)
 - **Toggle** UE4SS mods on or off using the enable/disable switch
@@ -247,19 +247,19 @@ Manage server mods organized by type:
 
 A built-in REST API console for direct server administration (only available while the server is running). Available endpoints:
 
-| Endpoint        | Method | Description                          |
-|-----------------|--------|--------------------------------------|
-| **Server Info** | GET    | Current server information           |
-| **Players**     | GET    | List of online players               |
-| **Settings**    | GET    | Server configuration                 |
-| **Metrics**     | GET    | Server performance metrics           |
-| **Save World**  | POST   | Trigger a world save                 |
-| **Shutdown**    | POST   | Graceful server shutdown             |
-| **Force Stop**  | POST   | Immediately kill the server process  |
-| **Announce**    | POST   | Broadcast a message to all players   |
-| **Kick Player** | POST   | Kick a player by ID                  |
-| **Ban Player**  | POST   | Ban a player by ID                   |
-| **Unban Player**| POST   | Remove a player ban                  |
+| Endpoint         | Method | Description                         |
+| ---------------- | ------ | ----------------------------------- |
+| **Server Info**  | GET    | Current server information          |
+| **Players**      | GET    | List of online players              |
+| **Settings**     | GET    | Server configuration                |
+| **Metrics**      | GET    | Server performance metrics          |
+| **Save World**   | POST   | Trigger a world save                |
+| **Shutdown**     | POST   | Graceful server shutdown            |
+| **Force Stop**   | POST   | Immediately kill the server process |
+| **Announce**     | POST   | Broadcast a message to all players  |
+| **Kick Player**  | POST   | Kick a player by ID                 |
+| **Ban Player**   | POST   | Ban a player by ID                  |
+| **Unban Player** | POST   | Remove a player ban                 |
 
 Responses are displayed in a JSON viewer with color-coded HTTP status indicators.
 
@@ -312,11 +312,11 @@ Dedicated server saves are typically found at:
 
 ### Key Files
 
-| File                  | Description                                    |
-|-----------------------|------------------------------------------------|
-| `Level.sav`          | World data including buildings and map objects  |
-| `Players/<UID>.sav`  | Individual player save data                    |
-| `LocalData.sav`      | Local game settings                            |
+| File                | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| `Level.sav`         | World data including buildings and map objects |
+| `Players/<UID>.sav` | Individual player save data                    |
+| `LocalData.sav`     | Local game settings                            |
 
 ---
 

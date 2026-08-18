@@ -1,14 +1,14 @@
 import { send, sendAndWait } from '$lib/utils/websocketUtils';
-import { MessageType } from '$types';
 import type {
+	BlueprintGeometry,
 	BlueprintRow,
 	CaptureBlueprintResponse,
 	CaptureOptions,
-	BlueprintGeometry,
+	PlaceBlueprintResponse,
 	PlacementAnchor,
-	ValidatePlacementResponse,
-	PlaceBlueprintResponse
+	ValidatePlacementResponse
 } from '$types';
+import { MessageType } from '$types';
 
 export type BlueprintFormat = 'psp' | 'json';
 

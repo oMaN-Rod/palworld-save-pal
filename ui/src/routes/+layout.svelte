@@ -68,9 +68,11 @@
 	// Only redirect when no session could possibly reattach — a stored session
 	// id means bootstrap() may still populate saveFile, so let that race resolve
 	// instead of bouncing a refreshing editor user off their save-only route.
+	// Save-less visitors land on the upload page, matching where the sidebar
+	// links already point.
 	$effect(() => {
 		if (publicShell && !getStoredSessionId() && isSaveRequiredRoute(page.url.pathname)) {
-			goto('/');
+			goto('/upload');
 		}
 	});
 
@@ -122,6 +124,16 @@
 			</div>
 		</Modal>
 	{/key}
+	<!-- Ambient corner art behind the app shell (PalSavTools-style): fixed,
+	     non-interactive, sits under the z-[1] shell above the body gradients.
+	     Skipped on the landing page so its marketing layout stays clean. -->
+	{#if page.url.pathname !== '/'}
+		<div
+			class="pointer-events-none fixed inset-0 z-0"
+			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.5;"
+			aria-hidden="true"
+		></div>
+	{/if}
 	<PalEditorOverlay />
 	<ResizeWarning />
 {/if}

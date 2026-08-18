@@ -5,9 +5,9 @@ import { upsState } from '$states';
 import type { GuildDTO, ItemContainer, UPSPal } from '$types';
 import { EntryState, MessageType, type Pal, type Player } from '$types';
 import { deepCopy } from '$utils';
+import type { AppState } from './appState.svelte';
 import { getModalState } from './modalState.svelte';
 import { getPalEditorState } from './palEditorState.svelte';
-import type { AppState } from './appState.svelte';
 
 interface ModifiedData {
 	modified_pals?: Record<string, Pal>;
@@ -81,8 +81,7 @@ export function processGuilds(state: AppState) {
 					}
 				}
 				if (modifiedContainers.length > 0) {
-					guildClone.bases[base.id].storage_containers =
-						Object.fromEntries(modifiedContainers);
+					guildClone.bases[base.id].storage_containers = Object.fromEntries(modifiedContainers);
 					guild.state = EntryState.MODIFIED;
 				}
 			}

@@ -215,5 +215,4 @@ describe('bulk collections are replaced wholesale', () => {
 		expect(baseStructuresData.for('A2')).toBe(a);
 		expect(baseStructuresData.for('B2')).toBe(b);
 	});
-})
-;
+});

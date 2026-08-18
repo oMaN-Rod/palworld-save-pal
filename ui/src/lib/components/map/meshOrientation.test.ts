@@ -5,14 +5,14 @@
 // own axis-swap/UP_FLIP internals: it rotates a UE-space offset by yaw exactly
 // as buildStructureFC's ring does, then runs it through the same
 // worldToPixel/pixelToLngLat/MercatorCoordinate chain flat mode uses.
-import { describe, it, expect } from 'vitest';
-import * as THREE from 'three';
+import type { BaseStructure } from '$types';
 import { MercatorCoordinate } from 'maplibre-gl';
-import { meshInstanceMatrix } from './structureLayer';
-import { worldToPixel } from './utils';
+import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { pixelToLngLat } from './mercator';
 import type { MeshPart } from './meshPlacement';
-import type { BaseStructure } from '$types';
+import { meshInstanceMatrix } from './structureLayer';
+import { worldToPixel } from './utils';
 
 const identityPart: MeshPart = { loc: [0, 0, 0], rot: [0, 0, 0], scale: [1, 1, 1] };
 const AREA = 'MainMap';

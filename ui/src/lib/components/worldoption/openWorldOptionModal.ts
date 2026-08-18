@@ -1,7 +1,7 @@
-import { MessageType } from '$types';
+import { technologiesData } from '$lib/data';
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { getModalState } from '$states';
-import { technologiesData } from '$lib/data';
+import { MessageType } from '$types';
 import WorldOptionModal from './WorldOptionModal.svelte';
 
 export type WorldOptionEntry = {

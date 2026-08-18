@@ -8,16 +8,15 @@ import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
 import type {
 	BreedablePalsResponse,
-	DirectChildResponse,
-	DirectPartnersResponse,
-	DirectParentsResponse,
 	ChainRequest,
-	ChainResponse
+	ChainResponse,
+	DirectChildResponse,
+	DirectParentsResponse,
+	DirectPartnersResponse
 } from './types';
 
 export const breedingApi = {
-	breedingPals: () =>
-		sendAndWait<BreedablePalsResponse>(MessageType.GET_BREEDING_PALS),
+	breedingPals: () => sendAndWait<BreedablePalsResponse>(MessageType.GET_BREEDING_PALS),
 
 	breedingDirectChild: (params: { parent_a: string; parent_b: string }) =>
 		sendAndWait<DirectChildResponse>(MessageType.BREEDING_DIRECT_CHILD, params),
@@ -28,6 +27,5 @@ export const breedingApi = {
 	breedingDirectParents: (params: { target_child: string }) =>
 		sendAndWait<DirectParentsResponse>(MessageType.BREEDING_DIRECT_PARENTS, params),
 
-	breedingChain: (req: ChainRequest) =>
-		sendAndWait<ChainResponse>(MessageType.BREEDING_CHAIN, req)
+	breedingChain: (req: ChainRequest) => sendAndWait<ChainResponse>(MessageType.BREEDING_CHAIN, req)
 };

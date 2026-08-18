@@ -2,10 +2,10 @@
 // exactly why both the meshopt-decoder gap and the in-place-transform bug shipped
 // unnoticed: a mock cannot reject an unsupported extension or truncate an integer
 // typed array the way a real parser does. Only the network is stubbed here.
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import * as THREE from 'three';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 const SCENERY_DIR = resolve(__dirname, '../../../../static/models/scenery');
 const STRUCTURES_DIR = resolve(__dirname, '../../../../static/models/structures');
@@ -178,7 +178,9 @@ async function loadRealTexturedMesh(name: string) {
 		return new Response(arrayBuffer.slice(0));
 	}) as typeof fetch;
 
-	const { requestTexturedMesh, texturedMeshFailed, onTexturedMeshLoaded } = await import('./meshLibrary');
+	const { requestTexturedMesh, texturedMeshFailed, onTexturedMeshLoaded } = await import(
+		'./meshLibrary'
+	);
 
 	const dir = 'http://structures.test/models/structures';
 	expect(requestTexturedMesh(name, dir)).toBeNull();

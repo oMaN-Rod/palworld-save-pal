@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { toSlug, buildSlugIndex, keyFromSlug, stripKeyPrefix } from './wikiSlug';
+import { describe, expect, it } from 'vitest';
+import { buildSlugIndex, keyFromSlug, stripKeyPrefix, toSlug } from './wikiSlug';
 
 describe('toSlug', () => {
 	it('splits camelCase into kebab', () => {

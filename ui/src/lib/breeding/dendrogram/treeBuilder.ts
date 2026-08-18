@@ -129,7 +129,10 @@ export function chainToTree(
 		if (node.tribe === chain.target) root = node;
 	}
 	if (!root) {
-		const leaf = makeLeaf(chain.target, chain.sources.find((s) => s.pal === chain.target));
+		const leaf = makeLeaf(
+			chain.target,
+			chain.sources.find((s) => s.pal === chain.target)
+		);
 		leaf.isTarget = true;
 		return leaf;
 	}

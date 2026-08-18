@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
 	DEFAULT_MATERIAL_BLEND,
 	DEFAULT_MATERIAL_OPACITY,
@@ -8,8 +8,8 @@ import {
 	STRUCTURE_TYPE_ORDER,
 	mapColors,
 	materialBlend,
-	materialOpacity,
 	materialOpacities,
+	materialOpacity,
 	materialTints,
 	resetMapColors,
 	setMaterialBlend,
@@ -48,7 +48,12 @@ describe('mapColors', () => {
 	});
 
 	it('fills in defaults for keys missing from stored data', () => {
-		mapColors.current = { structures: { Defense: '#123456' }, materials: {}, opacities: {}, blend: 0.25 };
+		mapColors.current = {
+			structures: { Defense: '#123456' },
+			materials: {},
+			opacities: {},
+			blend: 0.25
+		};
 		expect(structureColors().Defense).toBe('#123456');
 		expect(structureColors().Foundation).toBe(DEFAULT_STRUCTURE_COLORS.Foundation);
 		expect(materialTints().Glass).toBe(DEFAULT_MATERIAL_TINTS.Glass);

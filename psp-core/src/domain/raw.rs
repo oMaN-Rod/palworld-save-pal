@@ -147,7 +147,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
 
         MapEntry {

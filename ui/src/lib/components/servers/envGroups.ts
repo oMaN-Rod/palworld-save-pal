@@ -163,27 +163,15 @@ export const envGroups: EnvGroup[] = [
 				label: 'Respawn Penalty Scale',
 				default: '2.0'
 			},
-			bool(
-				'ADDITIONAL_DROP_ITEM_WHEN_PLAYER_KILLING_IN_PVP',
-				'PvP Kill Drop Item',
-				'False'
-			),
+			bool('ADDITIONAL_DROP_ITEM_WHEN_PLAYER_KILLING_IN_PVP', 'PvP Kill Drop Item', 'False'),
 			{
 				key: 'ADDITIONAL_DROP_ITEM_PVP_ITEM',
 				label: 'PvP Kill Drop Item ID',
 				default: ''
 			},
 			{ key: 'ADDITIONAL_DROP_ITEM_PVP_NUM', label: 'PvP Kill Drop Qty', default: '1' },
-			bool(
-				'DISPLAY_PVP_ITEM_NUM_ON_WORLDMAP_BASECAMP',
-				'Show PvP Items on Map (Base)',
-				'False'
-			),
-			bool(
-				'DISPLAY_PVP_ITEM_NUM_ON_WORLDMAP_PLAYER',
-				'Show PvP Items on Map (Player)',
-				'False'
-			)
+			bool('DISPLAY_PVP_ITEM_NUM_ON_WORLDMAP_BASECAMP', 'Show PvP Items on Map (Base)', 'False'),
+			bool('DISPLAY_PVP_ITEM_NUM_ON_WORLDMAP_PLAYER', 'Show PvP Items on Map (Player)', 'False')
 		]
 	},
 	{

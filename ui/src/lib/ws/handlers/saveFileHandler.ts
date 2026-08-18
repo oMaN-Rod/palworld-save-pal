@@ -17,7 +17,7 @@ export const noFileSelectedHandler: WSMessageHandler = {
 	async handle(_: string, { goto }) {
 		const toast = getToastState();
 		toast.add(m.save_no_file_selected(), m.warning(), 'warning');
-		await goto('/file');
+		await goto('/overview');
 	}
 };
 
@@ -35,7 +35,11 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 			world_name,
 			type,
 			size,
-			world_option_present: world_option_present ?? false
+			world_option_present: world_option_present ?? false,
+			// Kept for the overview cache key (read via SaveFileWithSession);
+			// absent on the local-parse web path, where the cache falls back to
+			// refetching on save switch instead.
+			session_id
 		};
 		appState.playerSaveFiles = players.map((p: any) => ({ name: p }));
 		appState.hasGpsAvailable = has_gps ?? false;
@@ -59,7 +63,7 @@ export const sessionNotFoundHandler: WSMessageHandler = {
 	type: MessageType.SESSION_NOT_FOUND,
 	async handle(_, { goto }) {
 		clearSessionPersistence();
-		await goto('/file');
+		await goto('/overview');
 	}
 };
 
@@ -68,7 +72,7 @@ export const saveModdedSaveHandler: WSMessageHandler = {
 	async handle(data, { goto }) {
 		const toast = getToastState();
 		toast.add(data, m.toast_saved(), 'success');
-		await goto('/file');
+		await goto('/overview');
 	}
 };
 
@@ -119,7 +123,7 @@ export const downloadSaveFileHandler: WSMessageHandler = {
 		if (mode === 'folder') {
 			toast.add(m.save_saved_to_folder(), m.toast_saved(), 'success');
 		} else {
-			await goto('/file');
+			await goto('/overview');
 		}
 	}
 };
@@ -141,7 +145,7 @@ export const selectGamepassSaveHandler: WSMessageHandler = {
 		appState.resetState();
 		baseStructuresData.reset();
 		appState.gamepassSaves = data;
-		await goto('/file');
+		await goto('/overview');
 	}
 };
 

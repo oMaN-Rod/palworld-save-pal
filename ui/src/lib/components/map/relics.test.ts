@@ -86,3 +86,52 @@ describe('collectRelics', () => {
 		expect(collectRelics(player, points).added).toBe(0);
 	});
 });
+
+describe('possess-count sync (relic_possess_num_map / effigy_possess_num)', () => {
+	/** A 1.0 save: 2 held capture_power effigies, 3 held swim_speed relics. */
+	const onePointZero = (): RelicPlayerView => ({
+		collected_effigies: [A, B],
+		collected_relics: { [CAPTURE_POWER]: [A, B], swim_speed: [C, D] },
+		relic_possess_num_map: { capture_power: 2, swim_speed: 3 },
+		effigy_possess_num: 2
+	});
+
+	it('toggle moves the type count and the capture_power mirror by ±1', () => {
+		const player = onePointZero();
+		toggleRelic(player, { guid: A, relic_type: CAPTURE_POWER });
+		expect(player.relic_possess_num_map?.capture_power).toBe(1);
+		expect(player.effigy_possess_num).toBe(1);
+		toggleRelic(player, { guid: 'NEW-GUID', relic_type: 'swim_speed' });
+		expect(player.relic_possess_num_map?.swim_speed).toBe(4);
+		expect(player.effigy_possess_num).toBe(1);
+	});
+
+	it('un-collecting floors at 0 rather than going negative', () => {
+		const player = onePointZero();
+		player.relic_possess_num_map = { capture_power: 0 };
+		player.effigy_possess_num = 0;
+		toggleRelic(player, { guid: A, relic_type: CAPTURE_POWER });
+		expect(player.relic_possess_num_map?.capture_power).toBe(0);
+		expect(player.effigy_possess_num).toBe(0);
+	});
+
+	it('never creates the map on a save that has none', () => {
+		const player = preOnePointZero();
+		toggleRelic(player, { guid: D, relic_type: CAPTURE_POWER });
+		expect(player.relic_possess_num_map).toBeUndefined();
+		// The scalar mirror still moves: the backend creates it on a positive net.
+		expect(player.effigy_possess_num).toBe(1);
+	});
+
+	it("collectRelics adds each type's new count to its own entry", () => {
+		const player = onePointZero();
+		const points = [
+			{ guid: D, relic_type: CAPTURE_POWER },
+			{ guid: 'EEEEEEEE-0000-0000-0000-000000000005', relic_type: 'swim_speed' }
+		];
+		collectRelics(player, points);
+		expect(player.relic_possess_num_map?.capture_power).toBe(3);
+		expect(player.relic_possess_num_map?.swim_speed).toBe(4);
+		expect(player.effigy_possess_num).toBe(3);
+	});
+});

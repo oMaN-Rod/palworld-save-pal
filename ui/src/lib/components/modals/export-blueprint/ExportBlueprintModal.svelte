@@ -113,9 +113,7 @@
 
 		<div class="mt-4 flex justify-end gap-2">
 			<Button variant="neutral" onclick={() => closeModal(null)}>Cancel</Button>
-			<Button variant="primary" disabled={busy} onclick={confirm} data-modal-primary>
-				Export
-			</Button>
+			<Button variant="primary" disabled={busy} onclick={confirm} data-modal-primary>Export</Button>
 		</div>
 	</Card>
 </div>

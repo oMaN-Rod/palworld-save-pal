@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { isWebBuild } from '$lib/utils/platform';
+	import { Spinner } from '$components/ui';
 	import {
 		Hero,
 		MapAdvantage,
@@ -30,9 +31,9 @@
 
 	if (browser) {
 		if (desktop) {
-			if (!appState.saveFile) goto('/file');
+			if (!appState.saveFile) goto('/overview');
 		} else if (appState.saveFile) {
-			goto('/edit');
+			goto('/overview');
 		} else if (isWebBuild) {
 			hasRecent().then((r) => (resumeName = r?.worldName ?? null));
 		} else {
@@ -65,7 +66,7 @@
 	structuredData={[webApplicationSchema(), faqPageSchema(faqEntries())]}
 />
 
-{#if (isWebBuild || !browser) && !appState.saveFile}
+{#if isWebBuild && !appState.saveFile}
 	<main class="landing-page animate-fade-in flex w-full flex-col items-center">
 		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
 		<MapAdvantage />
@@ -76,6 +77,13 @@
 		<Faq />
 		<Cta />
 	</main>
+{:else if !appState.saveFile}
+	<!-- Desktop and server builds never show the landing; the client-side
+	     redirect to /overview (desktop) or /upload (server) takes over, so
+	     render a spinner during the hop instead of flashing the landing. -->
+	<div class="flex min-h-screen w-full items-center justify-center">
+		<Spinner size="size-12" />
+	</div>
 {/if}
 
 <style>

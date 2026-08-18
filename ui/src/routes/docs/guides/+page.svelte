@@ -28,14 +28,14 @@
 	<div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
 		{#each guides as guide}
 			<button
-				onclick={() => goto( guide.href)}
-				class="flex flex-col gap-2 rounded-lg border border-surface-700  p-4 no-underline transition-colors hover:border-primary-500/50 hover:bg-surface-700"
+				onclick={() => goto(guide.href)}
+				class="border-surface-700 hover:border-primary-500/50 hover:bg-surface-700 flex flex-col gap-2 rounded-lg border p-4 no-underline transition-colors"
 			>
 				<div class="flex items-center gap-2">
-					<guide.icon class="h-5 w-5 text-primary-500" />
+					<guide.icon class="text-primary-500 h-5 w-5" />
 					<h3 class="mt-0! mb-0! text-lg font-semibold">{guide.title}</h3>
 				</div>
-				<span class="mb-0! text-sm text-surface-400 text-left">{guide.description}</span>
+				<span class="text-surface-400 mb-0! text-left text-sm">{guide.description}</span>
 			</button>
 		{/each}
 	</div>

@@ -31,9 +31,7 @@
 	<div class="pointer-events-auto space-y-3">
 		<div class="border-b pb-3">
 			<div class="flex items-start gap-2">
-				<span
-					class="mt-1.5 h-3 w-3 shrink-0 rounded-full"
-					style="background-color: {swatchColor}"
+				<span class="mt-1.5 h-3 w-3 shrink-0 rounded-full" style="background-color: {swatchColor}"
 				></span>
 				<div class="min-w-0 flex-1">
 					<h3 class="text-foreground truncate text-lg font-bold">{info.name}</h3>

@@ -13,9 +13,11 @@ export const getPlayerSummariesHandler: WSMessageHandler = {
 		const appState = getAppState();
 		console.log('Received player summaries', Object.keys(data).length);
 		appState.playerSummaries = data;
-		// Only navigate to /edit if not already on /bulk page
-		if (!page.url.pathname.startsWith('/bulk')) {
-			goto('/edit');
+		// Land on the Overview dashboard once the save is ready: it is the
+		// file tab's destination after loading on both builds. Skip when the
+		// user is already there, and leave /bulk alone.
+		if (!page.url.pathname.startsWith('/bulk') && !page.url.pathname.startsWith('/overview')) {
+			goto('/overview');
 		}
 	}
 };

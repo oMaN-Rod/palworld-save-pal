@@ -1,8 +1,8 @@
 use std::path::PathBuf;
 
 fn world1_level_sav() -> Vec<u8> {
-    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../tests/fixtures/saves/world1/Level.sav");
+    let path =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/saves/world1/Level.sav");
     std::fs::read(path).expect("read world1 Level.sav")
 }
 
@@ -18,8 +18,7 @@ fn write_gvas_is_gvas_prefixed_and_round_trips() {
     assert_eq!(gvas, regvas, "GVAS round-trips byte-for-byte");
 
     // Golden the JS boundary test reads (written under target/, never committed).
-    let out = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../target/gvas-goldens");
+    let out = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../target/gvas-goldens");
     std::fs::create_dir_all(&out).expect("create golden dir");
     std::fs::write(out.join("world1-level.gvas"), &gvas).expect("write golden");
 }

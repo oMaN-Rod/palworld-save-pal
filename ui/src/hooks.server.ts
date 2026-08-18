@@ -7,10 +7,20 @@ import type { Handle } from '@sveltejs/kit';
 // %lang%/%dir% into the static HTML. Without it the placeholders ship literally.
 const BEACON_BLOCK = /<!--CF_BEACON_START-->[\s\S]*?<!--CF_BEACON_END-->/;
 
-/** Drop the analytics beacon entirely rather than shipping a dead request. */
+/**
+ * Drop the analytics beacon entirely rather than shipping a dead request.
+ * The block is collapsed to placeholder comments instead of being deleted:
+ * SvelteKit warns (and hydration can break) when a page-chunk transform
+ * removes HTML comments, so keep the same number of comment nodes present.
+ */
 function applyBeacon(html: string): string {
 	const token = env.PUBLIC_CF_BEACON_TOKEN;
-	if (!token) return html.replace(BEACON_BLOCK, '');
+	if (!token) {
+		return html.replace(
+			BEACON_BLOCK,
+			'<!--CF_BEACON_START--><!--CF_BEACON_STRIPPED--><!--CF_BEACON_END-->'
+		);
+	}
 	return html.replace('%CF_BEACON_TOKEN%', token);
 }
 

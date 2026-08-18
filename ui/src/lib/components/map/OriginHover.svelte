@@ -21,9 +21,7 @@
 			<Map class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">Map Coords</div>
-				<div class="font-mono text-xs">
-					0, 0
-				</div>
+				<div class="font-mono text-xs">0, 0</div>
 			</div>
 		</div>
 	</div>

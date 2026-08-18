@@ -10,12 +10,7 @@
 	import { send, sendBytes, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { startSaveLoad } from '$lib/data/loadSave';
 	import { openWorldOptionModal } from '$components/worldoption';
-	import {
-		restoreMostRecent,
-		hasRecent,
-		setSaveTarget,
-		getActiveDirectory
-	} from '$lib/fs';
+	import { restoreMostRecent, hasRecent, setSaveTarget, getActiveDirectory } from '$lib/fs';
 	import { isWebBuild } from '$lib/utils/platform';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';

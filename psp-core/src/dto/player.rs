@@ -98,6 +98,17 @@ pub struct PlayerDto {
     pub defeated_bosses: Option<Vec<String>>, // output-only
     #[serde(default)]
     pub effigy_possess_num: i64, // output-only
+    /// Unspent relic counts per type (bare key from `relic::RELIC_TYPE_MAP`),
+    /// read from and written back to `RecordData.RelicPossessNumMap`. This is
+    /// the Effigies editor's data: each type's count of held (spendable)
+    /// effigies, independent of the ranks in `status_point_list`.
+    ///
+    /// The frontend round-trips the whole DTO, so an edit arrives as this map
+    /// with absolute per-type counts. `None` (JSON `null`) is the shape for a
+    /// save whose player carries no `RelicPossessNumMap` at all (pre-1.0);
+    /// writing such a map back is a no-op, inventing nothing.
+    #[serde(default)]
+    pub relic_possess_num_map: Option<BTreeMap<String, i64>>,
     #[serde(default)]
     pub location: Option<WorldMapPointDto>, // output-only
     #[serde(default)]
@@ -235,6 +246,7 @@ mod tests {
             collected_relics: None,
             defeated_bosses: None,
             effigy_possess_num: 0,
+            relic_possess_num_map: None,
             location: None,
             last_online_time: None,
             dps: None,
@@ -275,6 +287,7 @@ mod tests {
                 "collected_relics",
                 "defeated_bosses",
                 "effigy_possess_num",
+                "relic_possess_num_map",
                 "location",
                 "last_online_time",
                 "dps",

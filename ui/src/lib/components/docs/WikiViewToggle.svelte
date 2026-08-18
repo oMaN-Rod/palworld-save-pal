@@ -15,10 +15,7 @@
 		{@const active = wikiPrefs.viewMode === mode.id}
 		<button
 			type="button"
-			class={cn(
-				'btn btn-sm',
-				active ? 'bg-secondary-500/25 text-surface-50' : 'text-surface-400'
-			)}
+			class={cn('btn btn-sm', active ? 'bg-secondary-500/25 text-surface-50' : 'text-surface-400')}
 			onclick={() => (wikiPrefs.viewMode = mode.id)}
 			title={mode.label}
 			aria-label={mode.label}

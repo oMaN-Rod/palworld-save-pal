@@ -4,6 +4,7 @@ pub mod game_data;
 pub mod gamepass;
 pub mod gps;
 pub mod guilds;
+pub mod overview;
 pub mod pals;
 pub mod players;
 pub mod presets;

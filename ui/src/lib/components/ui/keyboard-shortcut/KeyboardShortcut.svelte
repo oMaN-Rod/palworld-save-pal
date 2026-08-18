@@ -24,7 +24,6 @@
 	class="hover:bg-secondary-500/50 flex items-center gap-2 rounded p-2 {page.url.pathname == href
 		? 'bg-secondary-500/25'
 		: ''} {_class}"
-
 	onclick={() => {
 		nav.saveAndNavigate(href as string);
 	}}

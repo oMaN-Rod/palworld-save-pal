@@ -1,8 +1,8 @@
+import { goto } from '$app/navigation';
 import { driver, type Driver, type DriveStep } from 'driver.js';
 import 'driver.js/dist/driver.css';
-import { goto } from '$app/navigation';
-import type { TourStep } from './types';
 import { tours } from './index';
+import type { TourStep } from './types';
 
 class TourService {
 	activeTourId = $state<string | null>(null);
@@ -78,9 +78,7 @@ class TourService {
 				const blockNext = !!selector || (!!condition && !initiallySatisfied);
 
 				if (blockNext) {
-					const nextBtn = document.querySelector<HTMLButtonElement>(
-						'.driver-popover-next-btn'
-					);
+					const nextBtn = document.querySelector<HTMLButtonElement>('.driver-popover-next-btn');
 					if (nextBtn) {
 						const originalDisplay = nextBtn.style.display;
 						nextBtn.style.display = 'none';

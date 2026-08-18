@@ -1,19 +1,5 @@
-import type {
-	MapOptions,
-	StyleSpecification,
-	MapMouseEvent,
-	MapTouchEvent,
-	MapLibreEvent,
-	MapLibreZoomEvent,
-	MapWheelEvent,
-	MapTerrainEvent,
-	MapDataEvent,
-	MapSourceDataEvent,
-	MapStyleDataEvent,
-	MapContextEvent,
-	MapStyleImageMissingEvent
-} from 'maplibre-gl';
 import type maplibregl from 'maplibre-gl';
+import type { MapOptions, StyleSpecification } from 'maplibre-gl';
 import type { Snippet } from 'svelte';
 import type { Theme } from '../types.js';
 

@@ -62,7 +62,7 @@ export default defineConfig({
 		// Skeleton's Zag packages pin mixed versions of @zag-js/core. Externalizing
 		// them for SSR resolves every import to the single root install, which then
 		// lacks exports the older packages expect. Bundling lets each resolve its own.
-		noExternal: [/^@skeletonlabs\//, /^@zag-js\//]
+		noExternal: [/^@skeletonlabs\//, /^@zag-js\//, 'maplibre-gl']
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}', 'scripts/**/*.test.mjs', '../scripts/**/*.test.mjs']

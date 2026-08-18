@@ -1,10 +1,16 @@
-import { describe, expect, it } from 'vitest';
-import { captureOptionsForPreset, CAPTURE_OPTION_FIELDS } from './blueprintOptions';
 import type { CaptureOptions } from '$types';
+import { describe, expect, it } from 'vitest';
+import { CAPTURE_OPTION_FIELDS, captureOptionsForPreset } from './blueprintOptions';
 
 const KEYS: (keyof CaptureOptions)[] = [
-	'production_config', 'structure_condition', 'container_contents', 'worker_pals',
-	'housed_pals', 'production_progress', 'access_config', 'base_identity'
+	'production_config',
+	'structure_condition',
+	'container_contents',
+	'worker_pals',
+	'housed_pals',
+	'production_progress',
+	'access_config',
+	'base_identity'
 ];
 
 const on = (o: CaptureOptions) => KEYS.filter((k) => o[k]);

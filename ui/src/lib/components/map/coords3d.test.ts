@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
-import { ueYawToThreeQuaternion, ueQuatToThree } from './coords3d';
+import { describe, expect, it } from 'vitest';
+import { ueQuatToThree, ueYawToThreeQuaternion } from './coords3d';
 
 describe('ueYawToThreeQuaternion', () => {
 	it('maps UE yaw (Z-up) to a rotation about Three up-axis Y', () => {

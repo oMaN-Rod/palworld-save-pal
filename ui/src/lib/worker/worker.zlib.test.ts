@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import { zlibSync } from 'fflate';
+import { describe, expect, it } from 'vitest';
 import { savToGvas } from './psp.worker';
 
 function gvasPayload(): Uint8Array {
@@ -9,7 +9,13 @@ function gvasPayload(): Uint8Array {
 	return out;
 }
 
-function frame(magic: string, saveType: number, uncompressedLength: number, compressedLength: number, payload: Uint8Array): Uint8Array {
+function frame(
+	magic: string,
+	saveType: number,
+	uncompressedLength: number,
+	compressedLength: number,
+	payload: Uint8Array
+): Uint8Array {
 	const out = new Uint8Array(12 + payload.length);
 	const view = new DataView(out.buffer);
 	view.setUint32(0, uncompressedLength, true);

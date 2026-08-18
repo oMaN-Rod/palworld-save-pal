@@ -451,7 +451,13 @@ mod tests {
         ]);
         let added = import_preset_value(&*test.app.driver, value).await.unwrap();
         assert_eq!(added, 2);
-        assert_eq!(psp_db::presets::get_all(&*test.app.driver).await.unwrap().len(), 2);
+        assert_eq!(
+            psp_db::presets::get_all(&*test.app.driver)
+                .await
+                .unwrap()
+                .len(),
+            2
+        );
     }
 
     #[test]

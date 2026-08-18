@@ -2,28 +2,28 @@
 // most ~90 spawns map-wide and every model distinct, this places one Object3D
 // per spawn rather than instancing -- there is nothing to instance. update() is
 // caller-driven; the layer holds no camera listener of its own.
-import * as THREE from 'three';
-import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { PredatorSpawn } from '$types';
-import { requestPalMesh, onPalMeshLoaded } from './palMeshLibrary';
-import { MESH_FLIP, getSharedRenderer } from './structureLayer';
-import { worldToPixel, type MapArea } from './utils';
-import { pixelToLngLat } from './mercator';
+import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
+import * as THREE from 'three';
 import { ueYawToThreeQuaternion } from './coords3d';
-import {
-	createPortalMeshes,
-	disposePortalMeshes,
-	portalInstanceMatrix,
-	portalIntensity,
-	PORTAL_RADIUS_CM
-} from './palPortal';
 import {
 	createMapObjectPortalMesh,
 	disposeMapObjectPortalMesh,
 	mapObjectPortalMatrix,
 	palRingColor
 } from './mapObjectPortal';
+import { pixelToLngLat } from './mercator';
+import { onPalMeshLoaded, requestPalMesh } from './palMeshLibrary';
+import {
+	PORTAL_RADIUS_CM,
+	createPortalMeshes,
+	disposePortalMeshes,
+	portalInstanceMatrix,
+	portalIntensity
+} from './palPortal';
 import { PAL_SCALE_DEFAULT } from './palSize';
+import { MESH_FLIP, getSharedRenderer } from './structureLayer';
+import { worldToPixel, type MapArea } from './utils';
 
 export type PalBoss = { key: string; x: number; y: number; z: number; defeated: boolean };
 
@@ -189,7 +189,14 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 			const boss = groupBosses[i];
 			groups[i].matrix.copy(
 				palInstanceMatrix(
-					boss.x, boss.y, boss.z, bearingRad, area, cmToMerc, display.scale, display.heightCm
+					boss.x,
+					boss.y,
+					boss.z,
+					bearingRad,
+					area,
+					cmToMerc,
+					display.scale,
+					display.heightCm
 				)
 			);
 		}
@@ -198,16 +205,28 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 			const predator = groupPredators[i];
 			predatorGroups[i].matrix.copy(
 				palInstanceMatrix(
-					predator.x, predator.y, predator.z, bearingRad, area, cmToMerc, display.scale, display.heightCm
+					predator.x,
+					predator.y,
+					predator.z,
+					bearingRad,
+					area,
+					cmToMerc,
+					display.scale,
+					display.heightCm
 				)
 			);
 		}
 
 		if (portals) {
-			const intensityAttr = portals.column.geometry.getAttribute('aIntensity') as THREE.BufferAttribute;
+			const intensityAttr = portals.column.geometry.getAttribute(
+				'aIntensity'
+			) as THREE.BufferAttribute;
 			for (let i = 0; i < bosses.length; i++) {
 				const b = bosses[i];
-				portals.column.setMatrixAt(i, portalInstanceMatrix(b.x, b.y, b.z, area, cmToMerc, display.scale));
+				portals.column.setMatrixAt(
+					i,
+					portalInstanceMatrix(b.x, b.y, b.z, area, cmToMerc, display.scale)
+				);
 				intensityAttr.setX(i, portalIntensity(b.defeated));
 			}
 			portals.column.instanceMatrix.needsUpdate = true;
@@ -217,7 +236,10 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 		if (predatorPortal) {
 			for (let i = 0; i < predators.length; i++) {
 				const p = predators[i];
-				predatorPortal.setMatrixAt(i, mapObjectPortalMatrix(p.x, p.y, p.z, area, cmToMerc, display.scale));
+				predatorPortal.setMatrixAt(
+					i,
+					mapObjectPortalMatrix(p.x, p.y, p.z, area, cmToMerc, display.scale)
+				);
 			}
 			predatorPortal.instanceMatrix.needsUpdate = true;
 		}
@@ -308,7 +330,9 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
+			camera.projectionMatrix = new THREE.Matrix4().fromArray(
+				args.defaultProjectionData.mainMatrix
+			);
 			renderer.resetState();
 			// Discard depth already in the buffer so nothing drawn earlier occludes a
 			// Pal. Depth testing stays on within this scene -- turning it off instead

@@ -90,13 +90,21 @@ async fn import_preset_strips_id_and_adds() {
     .await;
     let mut socket = common::connect(&server).await;
 
-    common::send_json(&mut socket, serde_json::json!({"type": "import_preset", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "import_preset", "data": null}),
+    )
+    .await;
 
     let reply = common::next_json(&mut socket).await;
     assert_eq!(reply["type"], "import_preset");
     assert_eq!(reply["data"]["count"], 1);
 
-    common::send_json(&mut socket, serde_json::json!({"type": "get_presets", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "get_presets", "data": null}),
+    )
+    .await;
     let presets = common::next_json(&mut socket).await;
     let imported = presets["data"]
         .as_object()
@@ -158,12 +166,20 @@ async fn import_preset_reads_zip_and_json_array() {
     .await;
     let mut socket = common::connect(&server).await;
 
-    common::send_json(&mut socket, serde_json::json!({"type": "import_preset", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "import_preset", "data": null}),
+    )
+    .await;
     let reply = common::next_json(&mut socket).await;
     assert_eq!(reply["type"], "import_preset");
     assert_eq!(reply["data"]["count"], 4);
 
-    common::send_json(&mut socket, serde_json::json!({"type": "get_presets", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "get_presets", "data": null}),
+    )
+    .await;
     let presets = common::next_json(&mut socket).await;
     assert_eq!(presets["data"].as_object().unwrap().len(), 4);
 
@@ -207,7 +223,10 @@ async fn export_presets_writes_zip_of_selected() {
         .map(|i| archive.by_index(i).unwrap().name().to_string())
         .collect();
     names.sort();
-    assert_eq!(names, vec!["Alpha.json".to_string(), "Beta.json".to_string()]);
+    assert_eq!(
+        names,
+        vec!["Alpha.json".to_string(), "Beta.json".to_string()]
+    );
 
     server.handle.shutdown().await;
 }
@@ -252,12 +271,20 @@ async fn export_then_import_round_trip_restores_preset_contents() {
     let delete_reply = common::next_json(&mut socket).await;
     assert_eq!(delete_reply["type"], "delete_preset");
 
-    common::send_json(&mut socket, serde_json::json!({"type": "import_preset", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "import_preset", "data": null}),
+    )
+    .await;
     let import_reply = common::next_json(&mut socket).await;
     assert_eq!(import_reply["type"], "import_preset");
     assert_eq!(import_reply["data"]["count"], 2);
 
-    common::send_json(&mut socket, serde_json::json!({"type": "get_presets", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "get_presets", "data": null}),
+    )
+    .await;
     let presets = common::next_json(&mut socket).await;
     let presets_obj = presets["data"].as_object().unwrap();
 
@@ -285,7 +312,11 @@ async fn import_preset_canceled_emits_no_file_selected() {
     .await;
     let mut socket = common::connect(&server).await;
 
-    common::send_json(&mut socket, serde_json::json!({"type": "import_preset", "data": null})).await;
+    common::send_json(
+        &mut socket,
+        serde_json::json!({"type": "import_preset", "data": null}),
+    )
+    .await;
 
     let reply = common::next_json(&mut socket).await;
     assert_eq!(reply["type"], "no_file_selected");

@@ -229,7 +229,10 @@ pub async fn handle_breeding_chain(
     }
     let composite = CompositeSource::new(adapters);
 
-    let target_gender = data.target_gender.as_deref().map(|g| Gender::coerce(Some(g)));
+    let target_gender = data
+        .target_gender
+        .as_deref()
+        .map(|g| Gender::coerce(Some(g)));
     let spec = BreedingSpec {
         target_pal: data.target_pal.clone(),
         required_passives: data.required_passives.clone(),

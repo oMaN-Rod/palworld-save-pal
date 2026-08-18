@@ -1,5 +1,5 @@
-import { send } from '$lib/utils/websocketUtils';
 import { getStoredSessionId, markReattachPending } from '$lib/utils/sessionPersistence';
+import { send } from '$lib/utils/websocketUtils';
 import { getUpsState } from '$states/upsState.svelte';
 import { MessageType } from '$types';
 import { activeSkillsData } from './activeSkills.svelte';
@@ -8,10 +8,10 @@ import { buildingsData } from './buildings.svelte';
 import { dungeons } from './dungeons.svelte';
 import { elementsData } from './elements.svelte';
 import { expData } from './exp.svelte';
+import { fastTravelPoints } from './fastTravelPoints.svelte';
 import { friendshipData } from './friendship.svelte';
 import { itemsData } from './items.svelte';
 import { labResearchData } from './labResearch.svelte';
-import { fastTravelPoints } from './fastTravelPoints.svelte';
 import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';

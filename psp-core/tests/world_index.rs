@@ -36,8 +36,9 @@ fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
         let StructValue::Struct(item_props) = &entries[position] else {
             panic!("indexed position {position} is not a StructValue::Struct");
         };
-        let Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(dynamic_item)))) =
-            psp_core::props::get(item_props, &["RawData"])
+        let Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(
+            dynamic_item,
+        )))) = psp_core::props::get(item_props, &["RawData"])
         else {
             panic!("indexed position {position} has no PalDynamicItem RawData");
         };

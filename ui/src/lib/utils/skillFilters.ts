@@ -22,10 +22,7 @@ function getUniqueSkillSubstring(characterKey: string): string {
 	return yakushimaCorrelations[normalized] ?? `unique_${normalized}`;
 }
 
-export function isSkillAvailableForCharacter(
-	skillId: string,
-	characterKey: string
-): boolean {
+export function isSkillAvailableForCharacter(skillId: string, characterKey: string): boolean {
 	const skillLower = skillId.toLowerCase();
 	const uniqueSubstring = getUniqueSkillSubstring(characterKey);
 

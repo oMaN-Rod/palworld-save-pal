@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('$lib/data', () => ({
 	activeSkillsData: { activeSkills: {} },
@@ -12,8 +12,8 @@ vi.mock('$lib/data', () => ({
 	WORK_SUITABILITY_KEYS: []
 }));
 
-import { DESCRIPTORS, descriptorFor } from './wikiDescriptors';
 import { WIKI_CATEGORIES } from './wikiCategories';
+import { DESCRIPTORS, descriptorFor } from './wikiDescriptors';
 
 describe('DESCRIPTORS', () => {
 	it('has a descriptor for every WikiCategory', () => {

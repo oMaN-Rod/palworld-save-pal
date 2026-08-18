@@ -1,6 +1,6 @@
-import type { ZipEntry } from '$lib/utils/folderUpload';
-import { detectCapabilities } from '$lib/utils/browserCapabilities';
 import * as m from '$i18n/messages';
+import { detectCapabilities } from '$lib/utils/browserCapabilities';
+import type { ZipEntry } from '$lib/utils/folderUpload';
 
 type Perm = 'granted' | 'denied' | 'prompt';
 interface PermHandle {
@@ -14,9 +14,13 @@ export function fsaSupported(): boolean {
 
 export async function pickSaveDirectory(): Promise<FileSystemDirectoryHandle | null> {
 	try {
-		return await (globalThis as unknown as {
-			showDirectoryPicker(o?: { mode?: 'read' | 'readwrite' }): Promise<FileSystemDirectoryHandle>;
-		}).showDirectoryPicker({ mode: 'readwrite' });
+		return await (
+			globalThis as unknown as {
+				showDirectoryPicker(o?: {
+					mode?: 'read' | 'readwrite';
+				}): Promise<FileSystemDirectoryHandle>;
+			}
+		).showDirectoryPicker({ mode: 'readwrite' });
 	} catch {
 		// AbortError on cancel — treat as no selection.
 		return null;
@@ -28,9 +32,11 @@ async function collect(
 	prefix: string,
 	out: ZipEntry[]
 ): Promise<void> {
-	for await (const [name, handle] of (dir as unknown as {
-		entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
-	}).entries()) {
+	for await (const [name, handle] of (
+		dir as unknown as {
+			entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
+		}
+	).entries()) {
 		const path = prefix ? `${prefix}/${name}` : name;
 		if (handle.kind === 'file') {
 			if (!name.endsWith('.sav')) continue;
@@ -62,9 +68,11 @@ async function findCaseInsensitive(
 	dir: FileSystemDirectoryHandle,
 	name: string
 ): Promise<FileSystemHandle | null> {
-	for await (const [entryName, handle] of (dir as unknown as {
-		entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
-	}).entries()) {
+	for await (const [entryName, handle] of (
+		dir as unknown as {
+			entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
+		}
+	).entries()) {
 		if (entryName.toLowerCase() === name.toLowerCase()) return handle;
 	}
 	return null;
@@ -90,7 +98,10 @@ async function fileHandleFor(
 	return cur.getFileHandle(last, { create });
 }
 
-async function readIfExists(dir: FileSystemDirectoryHandle, path: string): Promise<Uint8Array | null> {
+async function readIfExists(
+	dir: FileSystemDirectoryHandle,
+	path: string
+): Promise<Uint8Array | null> {
 	try {
 		const fh = await fileHandleFor(dir, path, false);
 		const file = await fh.getFile();

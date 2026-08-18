@@ -67,7 +67,11 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     // `None` or the loop `break`s, so this task always terminates.
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
-            if outgoing_sink.send(Message::Text(frame.into())).await.is_err() {
+            if outgoing_sink
+                .send(Message::Text(frame.into()))
+                .await
+                .is_err()
+            {
                 break;
             }
         }

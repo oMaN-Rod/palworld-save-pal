@@ -4,7 +4,11 @@
  * are shared and live in app.css; a theme only swaps the palette below.
  */
 [data-theme='grizzbolt'] {
-	--color-text-muted: color-mix(in srgb, var(--color-surface-400) 82%, var(--color-primary-400) 18%);
+	--color-text-muted: color-mix(
+		in srgb,
+		var(--color-surface-400) 82%,
+		var(--color-primary-400) 18%
+	);
 	--color-text-muted-foreground: color-mix(
 		in srgb,
 		var(--color-surface-500) 76%,

@@ -4,31 +4,35 @@
 // structurePlacement + the same verticalScale the DEM terrain uses. Technique:
 // MapLibre "add a 3D model using three.js" example (shared GL context,
 // MercatorCoordinate placement).
-import * as THREE from 'three';
-import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { BaseStructure, Footprint } from '$types';
-import type { MapArea } from './utils';
-import { buildArchetypeGeometry } from './proxyGeometry';
+import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
+import * as THREE from 'three';
 import { ueYawToThreeQuaternion } from './coords3d';
-import { structurePlacement, structureAnchor } from './structurePlacement';
-import { structureFillColor } from './styles';
-import { materialOpacities } from './mapColors.svelte';
 import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
+import { materialOpacities } from './mapColors.svelte';
 import {
-	structureParts,
-	requestMesh,
 	meshFailed,
 	onMeshLoaded,
-	requestTexturedMesh,
 	onTexturedMeshLoaded,
+	requestMesh,
+	requestTexturedMesh,
 	STRUCTURE_MODEL_DIR,
+	structureParts,
 	type ManifestPart,
 	type TexturedMeshBundle
 } from './meshLibrary';
 import { partLocalMatrix, type MeshPart } from './meshPlacement';
-import { PickIndex } from './pickIndex';
 import { decodePickBytes } from './pickEncoding';
-import { bakeStructureInstance, composeStructureMatrix, STRUCTURE_BAKE_STRIDE } from './structureInstances';
+import { PickIndex } from './pickIndex';
+import { buildArchetypeGeometry } from './proxyGeometry';
+import {
+	bakeStructureInstance,
+	composeStructureMatrix,
+	STRUCTURE_BAKE_STRIDE
+} from './structureInstances';
+import { structureAnchor, structurePlacement } from './structurePlacement';
+import { structureFillColor } from './styles';
+import type { MapArea } from './utils';
 
 // Both mesh and proxy geometry are authored Y-up; MapLibre's mercator world
 // (fed through mainMatrix with an identity camera view) is Z-up. A naive
@@ -369,7 +373,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 
 		onAdd(m, gl) {
 			map = m;
-			isWebGL2 = typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
+			isWebGL2 =
+				typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
 			renderer = getSharedRenderer(m.getCanvas(), gl as WebGLRenderingContext);
 		},
 
@@ -387,7 +392,13 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			const proxyBuckets = new Map<string, ProxyBucket>();
 			const opacities = materialOpacities();
 
-			function addProxy(s: BaseStructure, fp: Footprint, colorHex: string, opacity: number, why: string) {
+			function addProxy(
+				s: BaseStructure,
+				fp: Footprint,
+				colorHex: string,
+				opacity: number,
+				why: string
+			) {
 				if (!reportedProxy.has(s.map_object_id)) {
 					reportedProxy.add(s.map_object_id);
 					console.info(`[structure3d] proxy fallback: ${s.map_object_id} (${why})`);
@@ -442,7 +453,13 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 					}
 					continue;
 				}
-				addProxy(s, fp, colorHex, opacity, parts ? 'manifest entry has no parts' : 'no manifest entry');
+				addProxy(
+					s,
+					fp,
+					colorHex,
+					opacity,
+					parts ? 'manifest entry has no parts' : 'no manifest entry'
+				);
 			}
 
 			// The mercator transform mirrors handedness relative to three's convention,

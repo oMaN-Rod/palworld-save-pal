@@ -1,13 +1,13 @@
 import type {
-	Server,
-	ServerMod,
-	ServerApiResponse,
 	ContainerStats,
 	CreateServerData,
-	ImportServerData
+	ImportServerData,
+	Server,
+	ServerApiResponse,
+	ServerMod
 } from '$types';
 import { MessageType } from '$types';
-import { send, sendAndWait } from '$utils/websocketUtils';
+import { send } from '$utils/websocketUtils';
 
 class ServerState {
 	servers = $state<Server[]>([]);

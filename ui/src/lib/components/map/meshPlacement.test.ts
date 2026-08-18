@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
-import { partLocalMatrix, ueEulerToThreeQuaternion, type MeshPart } from './meshPlacement';
+import { describe, expect, it } from 'vitest';
 import { ueYawToThreeQuaternion } from './coords3d';
+import { partLocalMatrix, ueEulerToThreeQuaternion, type MeshPart } from './meshPlacement';
 
 const DEG = Math.PI / 180;
 

@@ -139,7 +139,9 @@
 							<div class="flex items-center gap-3">
 								<Package
 									size={16}
-									class={mod.enabled ? modTypeColor[mod.mod_type] || 'text-surface-400' : 'text-surface-500'}
+									class={mod.enabled
+										? modTypeColor[mod.mod_type] || 'text-surface-400'
+										: 'text-surface-500'}
 								/>
 								<div class="flex flex-col">
 									<div class="flex items-center gap-2">
@@ -196,7 +198,7 @@
 			<h3 class="text-lg font-bold">Mods</h3>
 			<div class="flex items-center gap-2">
 				<div class="flex overflow-hidden rounded-sm text-xs">
-					{#each (['ue4ss', 'logic', 'native'] as const) as t (t)}
+					{#each ['ue4ss', 'logic', 'native'] as const as t (t)}
 						<button
 							class={cn(
 								'px-2 py-1',
@@ -240,7 +242,7 @@
 										<Shield size={16} class="text-orange-400" />
 										<div>
 											<span class="text-sm font-medium">{mod.mod_name}</span>
-											<span class="text-orange-400 ml-2 text-xs">native</span>
+											<span class="ml-2 text-xs text-orange-400">native</span>
 										</div>
 									</div>
 									<span class="text-xs text-green-400">Synced on boot</span>
@@ -262,10 +264,7 @@
 							<Card padding="p-3">
 								<div class="flex items-center justify-between">
 									<div class="flex items-center gap-3">
-										<Package
-											size={16}
-											class={mod.enabled ? 'text-blue-400' : 'text-surface-400'}
-										/>
+										<Package size={16} class={mod.enabled ? 'text-blue-400' : 'text-surface-400'} />
 										<span class="text-sm font-medium">{mod.mod_name}</span>
 									</div>
 									<button

@@ -1,8 +1,8 @@
 // Pins requestPalMesh's cache-sharing contract: the same Object3D for every call
 // with a given key, never a fresh clone. Mocked here so it stays deterministic
 // and independent of whether the real pipeline can parse a given GLB.
-import { describe, it, expect, vi } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it, vi } from 'vitest';
 
 const { loadCalls } = vi.hoisted(() => ({
 	loadCalls: [] as Array<{

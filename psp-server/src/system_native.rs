@@ -98,18 +98,16 @@ fn is_openable_url(url: &str) -> bool {
 /// Opens an external URL in the OS default browser. The Tauri webview drops
 /// `<a target="_blank">` navigations, so desktop links route here instead;
 /// `opener::open` hands the URL to the host, escaping the webview.
-pub async fn handle_open_url(
-    data: String,
-    _ctx: &mut HandlerCtx<'_>,
-) -> Result<(), HandlerError> {
+pub async fn handle_open_url(data: String, _ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let url = data.trim();
     if !is_openable_url(url) {
         return Err(HandlerError::Other(format!(
             "Refusing to open non-http(s) URL: {url}"
         )));
     }
-    opener::open(url)
-        .map_err(|open_error| HandlerError::Other(format!("Failed to open URL {url}: {open_error}")))?;
+    opener::open(url).map_err(|open_error| {
+        HandlerError::Other(format!("Failed to open URL {url}: {open_error}"))
+    })?;
     Ok(())
 }
 
@@ -121,7 +119,9 @@ mod tests {
     #[test]
     fn is_openable_url_accepts_only_http_schemes() {
         assert!(is_openable_url("http://localhost:5173"));
-        assert!(is_openable_url("https://github.com/oMaN-Rod/palworld-save-pal"));
+        assert!(is_openable_url(
+            "https://github.com/oMaN-Rod/palworld-save-pal"
+        ));
         assert!(is_openable_url("https://buymeacoffee.com/i_am_o"));
 
         assert!(!is_openable_url("file:///etc/passwd"));

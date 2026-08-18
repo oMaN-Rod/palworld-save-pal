@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import type { BreedablePal, DirectResultItem } from '../types';
 import { computeLayout } from './layouts';
 import { directToTreeNode } from './treeBuilder';
-import type { BreedablePal, DirectResultItem } from '../types';
 
 const palMap = new Map<string, BreedablePal>();
 

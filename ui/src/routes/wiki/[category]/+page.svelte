@@ -1,13 +1,24 @@
 <script lang="ts">
-	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle, ElementExplorer, PassiveSkillExplorer, WorkSuitabilityExplorer } from '$components/docs';
+	import {
+		WikiGrid,
+		WikiSearch,
+		WikiCard,
+		WikiViewToggle,
+		ElementExplorer,
+		PassiveSkillExplorer,
+		WorkSuitabilityExplorer
+	} from '$components/docs';
 	import { Seo, breadcrumbSchema, itemListSchema } from '$lib/components/seo';
 	import { descriptorFor, isDisabledRecord } from '$lib/utils/wikiDescriptors';
-	import { categoryLabel, categoryLabelPlural, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
+	import {
+		categoryLabel,
+		categoryLabelPlural,
+		entityLink,
+		type WikiCategory
+	} from '$lib/utils/wikiCategories';
 	import { wikiPrefs } from '$lib/utils/wikiPrefs.svelte';
 
-	let {
-		data
-	}: { data: { category: WikiCategory; names: string[]; slugs: string[] } } = $props();
+	let { data }: { data: { category: WikiCategory; names: string[]; slugs: string[] } } = $props();
 
 	let search = $state('');
 
@@ -23,7 +34,8 @@
 		const q = search.toLowerCase();
 		return allEntries.filter(
 			([key, record]) =>
-				descriptor.displayName(key, record).toLowerCase().includes(q) || key.toLowerCase().includes(q)
+				descriptor.displayName(key, record).toLowerCase().includes(q) ||
+				key.toLowerCase().includes(q)
 		);
 	});
 </script>
@@ -55,7 +67,10 @@
 		<ul class="grid grid-cols-2 gap-x-6 gap-y-1 sm:grid-cols-3 lg:grid-cols-4">
 			{#each data.names as name, index (data.slugs[index])}
 				<li>
-					<a class="text-surface-300 hover:underline" href={`/wiki/${data.category}/${data.slugs[index]}`}>
+					<a
+						class="text-surface-300 hover:underline"
+						href={`/wiki/${data.category}/${data.slugs[index]}`}
+					>
 						{name}
 					</a>
 				</li>

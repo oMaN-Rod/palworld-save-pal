@@ -255,7 +255,9 @@ impl ComboOutcome {
         fn ok(req: Option<Gender>, actual: Gender) -> bool {
             match req {
                 None => true,
-                Some(want) => matches!(actual, Gender::Wildcard | Gender::Unknown) || actual == want,
+                Some(want) => {
+                    matches!(actual, Gender::Wildcard | Gender::Unknown) || actual == want
+                }
             }
         }
         ok(self.parent_a_gender, gender_a) && ok(self.parent_b_gender, gender_b)

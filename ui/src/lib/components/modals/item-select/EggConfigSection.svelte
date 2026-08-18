@@ -43,8 +43,7 @@
 		Object.values(activeSkillsData.activeSkills)
 			.filter((skill) => isSkillAvailableForCharacter(skill.id, eggConfig.character_id))
 			.filter(
-				(aSkill) =>
-					!Object.values(eggConfig.learned_skills).some((skill) => skill === aSkill.id)
+				(aSkill) => !Object.values(eggConfig.learned_skills).some((skill) => skill === aSkill.id)
 			)
 			.sort((a, b) => a.details.element.localeCompare(b.details.element))
 			.map((s) => ({
@@ -54,9 +53,7 @@
 	);
 	const passiveSkillOptions: SelectOption[] = $derived(
 		Object.values(passiveSkillsData.passiveSkills)
-			.filter(
-				(pSkill) => !Object.values(eggConfig.passive_skills).some((p) => p === pSkill.id)
-			)
+			.filter((pSkill) => !Object.values(eggConfig.passive_skills).some((p) => p === pSkill.id))
 			.sort((a, b) => b.details.rank - a.details.rank)
 			.map((s) => ({
 				value: s.id,
@@ -94,11 +91,7 @@
 				>
 					{#snippet selectOption(option)}
 						<div class="flex items-center space-x-2">
-							<img
-								src={getPalIcon(option.value as string)}
-								alt={option.label}
-								class="h-8 w-8"
-							/>
+							<img src={getPalIcon(option.value as string)} alt={option.label} class="h-8 w-8" />
 							<span>{option.label}</span>
 						</div>
 					{/snippet}
@@ -160,11 +153,10 @@
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
 						<Button
-							variant="ghost" size="icon"
+							variant="ghost"
+							size="icon"
 							onclick={() =>
-								(eggConfig.active_skills = eggConfig.active_skills.filter(
-									(s) => s !== skill
-								))}
+								(eggConfig.active_skills = eggConfig.active_skills.filter((s) => s !== skill))}
 						>
 							<Trash size={16} />
 						</Button>
@@ -223,11 +215,10 @@
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
 						<Button
-							variant="ghost" size="icon"
+							variant="ghost"
+							size="icon"
 							onclick={() =>
-								(eggConfig.learned_skills = eggConfig.learned_skills.filter(
-									(s) => s !== skill
-								))}
+								(eggConfig.learned_skills = eggConfig.learned_skills.filter((s) => s !== skill))}
 						>
 							<Trash size={16} />
 						</Button>
@@ -286,11 +277,10 @@
 					{/snippet}
 					{#snippet listItemActions(skill: string)}
 						<Button
-							variant="ghost" size="icon"
+							variant="ghost"
+							size="icon"
 							onclick={() =>
-								(eggConfig.passive_skills = eggConfig.passive_skills.filter(
-									(s) => s !== skill
-								))}
+								(eggConfig.passive_skills = eggConfig.passive_skills.filter((s) => s !== skill))}
 						>
 							<Trash size={16} />
 						</Button>

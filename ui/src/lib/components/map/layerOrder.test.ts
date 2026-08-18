@@ -27,7 +27,10 @@ describe('beforeIdFor', () => {
 			items.length <= 1
 				? [items]
 				: items.flatMap((item, i) =>
-						permutations([...items.slice(0, i), ...items.slice(i + 1)]).map((rest) => [item, ...rest])
+						permutations([...items.slice(0, i), ...items.slice(i + 1)]).map((rest) => [
+							item,
+							...rest
+						])
 					);
 
 		for (const arrival of permutations([...LAYER_ORDER_3D])) {

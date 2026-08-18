@@ -6,17 +6,17 @@
 // (composeWorld), full-quaternion rotation (gap 1), per-structure scale (gap 2),
 // and a translucent material. Picking/hover/colour and the proxy fallback are
 // intentionally absent: a ghost is a transient, non-interactive preview.
-import * as THREE from 'three';
-import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { BlueprintStructureGeometry, PlacementAnchor, Quat } from '$types';
+import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
+import * as THREE from 'three';
+import { ueQuatToThree } from './coords3d';
+import { composeWorld } from './ghostTransform';
+import { pixelToLngLat } from './mercator';
+import { onMeshLoaded, requestMesh, structureParts } from './meshLibrary';
+import { partLocalMatrix } from './meshPlacement';
+import { MESH_FLIP, getSharedRenderer } from './structureLayer';
 import type { MapArea } from './utils';
 import { worldToPixel } from './utils';
-import { pixelToLngLat } from './mercator';
-import { composeWorld } from './ghostTransform';
-import { MESH_FLIP, getSharedRenderer } from './structureLayer';
-import { ueQuatToThree } from './coords3d';
-import { structureParts, requestMesh, onMeshLoaded } from './meshLibrary';
-import { partLocalMatrix } from './meshPlacement';
 
 type MeshBucket = { mesh: string; matrices: THREE.Matrix4[] };
 
@@ -24,7 +24,11 @@ type MeshBucket = { mesh: string; matrices: THREE.Matrix4[] };
 // transform (composeWorld) instead of a BaseStructure, honouring the full
 // quaternion and per-structure scale.
 export function ghostInstanceMatrix(
-	world: { translation: { x: number; y: number; z: number }; rotation: Quat; scale: { x: number; y: number; z: number } },
+	world: {
+		translation: { x: number; y: number; z: number };
+		rotation: Quat;
+		scale: { x: number; y: number; z: number };
+	},
 	part: Parameters<typeof partLocalMatrix>[0],
 	area: MapArea,
 	_verticalScale: number,
@@ -128,9 +132,7 @@ export function createGhostLayer(opts: { id: string }): GhostLayer {
 						bucket = { mesh: part.mesh, matrices: [] };
 						buckets.set(part.mesh, bucket);
 					}
-					bucket.matrices.push(
-						ghostInstanceMatrix(world, part, area, verticalScale, cmToMerc)
-					);
+					bucket.matrices.push(ghostInstanceMatrix(world, part, area, verticalScale, cmToMerc));
 				}
 			}
 

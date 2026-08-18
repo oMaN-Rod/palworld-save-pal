@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildEditorTheme, rgbToHex, EDITOR_THEME_NAME } from './paletteTheme';
+import { buildEditorTheme, EDITOR_THEME_NAME, rgbToHex } from './paletteTheme';
 
 // A stand-in palette; only the vars the builder reads need entries. Distinct
 // values per role so a mis-wired mapping is caught.
@@ -19,10 +19,8 @@ const palette: Record<string, string> = {
 };
 const read = (name: string) => palette[name] ?? '';
 
-const ruleFor = (
-	theme: ReturnType<typeof buildEditorTheme>,
-	token: string
-): string | undefined => theme.rules.find((r) => r.token === token)?.foreground;
+const ruleFor = (theme: ReturnType<typeof buildEditorTheme>, token: string): string | undefined =>
+	theme.rules.find((r) => r.token === token)?.foreground;
 
 describe('rgbToHex', () => {
 	it('converts an rgb() string to 6-digit hex without a leading #', () => {

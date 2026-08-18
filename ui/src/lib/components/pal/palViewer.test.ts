@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
+import { describe, expect, it } from 'vitest';
 import { FIT_MARGIN, fitDistance, palBounds } from './palViewer';
 
 const FOV = 35;

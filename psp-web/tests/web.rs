@@ -22,7 +22,10 @@ async fn get_version_round_trips_through_the_callback() {
         .unwrap();
 
     let frames = FRAMES.with(|f| f.borrow().clone());
-    assert!(frames.iter().any(|f| f.contains("get_version")), "got {frames:?}");
+    assert!(
+        frames.iter().any(|f| f.contains("get_version")),
+        "got {frames:?}"
+    );
 }
 
 /// Bytes in through `stage_gvas`, bytes out through `export_gvas_file` — the
@@ -40,7 +43,9 @@ async fn world_save_round_trips_through_wasm_as_bytes() {
 
     let gvas = include_bytes!("fixtures/world1-level.gvas");
     psp_web::stage_gvas("level", "", gvas.to_vec()).unwrap();
-    psp_web::load_staged_gvas("world1".to_string()).await.unwrap();
+    psp_web::load_staged_gvas("world1".to_string())
+        .await
+        .unwrap();
 
     let frames = FRAMES.with(|f| f.borrow().clone());
     assert!(
@@ -53,7 +58,9 @@ async fn world_save_round_trips_through_wasm_as_bytes() {
     let names = js_sys::Array::from(&names);
     assert_eq!(names.get(0).as_string().as_deref(), Some("Level.sav"));
 
-    let out = psp_web::export_gvas_file("Level.sav".to_string()).await.unwrap();
+    let out = psp_web::export_gvas_file("Level.sav".to_string())
+        .await
+        .unwrap();
     assert_eq!(out, gvas.to_vec(), "round-trip GVAS is byte-identical");
 }
 
@@ -81,10 +88,16 @@ async fn oodle_bridge_marshals_bytes_and_length_between_the_engine_and_js() {
     let save = psp_core::savio::read_gvas_bytes(gvas).expect("fixture parses");
     let sav = psp_core::savio::write_sav_bytes(&save).expect("writes through the bridge");
 
-    assert_eq!(&sav[8..11], b"PlM", "the bridge writes Palworld's PlM container");
+    assert_eq!(
+        &sav[8..11],
+        b"PlM",
+        "the bridge writes Palworld's PlM container"
+    );
     let observed = js_sys::Reflect::get(&js_sys::global(), &"__oodle".into()).unwrap();
     assert_eq!(
-        js_sys::Reflect::get(&observed, &"compressed".into()).unwrap().as_f64(),
+        js_sys::Reflect::get(&observed, &"compressed".into())
+            .unwrap()
+            .as_f64(),
         Some((sav.len() - 12) as f64),
         "js saw the GVAS bytes the engine wrote"
     );
@@ -92,7 +105,9 @@ async fn oodle_bridge_marshals_bytes_and_length_between_the_engine_and_js() {
     psp_core::savio::read_sav_bytes(&sav).expect("reads back through the bridge");
     let observed = js_sys::Reflect::get(&js_sys::global(), &"__oodle".into()).unwrap();
     assert_eq!(
-        js_sys::Reflect::get(&observed, &"declared".into()).unwrap().as_f64(),
+        js_sys::Reflect::get(&observed, &"declared".into())
+            .unwrap()
+            .as_f64(),
         Some((sav.len() - 12) as f64),
         "js was told how many bytes to produce"
     );
@@ -103,12 +118,19 @@ async fn sql_bridge_marshals_and_migrations_call_through() {
     use wasm_bindgen::JsCast;
     // exec: record calls; return 1. query: return [] for the applied-versions
     // read so run_migrations applies all six.
-    let exec = js_sys::Function::new_with_args("sql, params", "globalThis.__execs = globalThis.__execs || []; globalThis.__execs.push(sql); return 1;");
+    let exec = js_sys::Function::new_with_args(
+        "sql, params",
+        "globalThis.__execs = globalThis.__execs || []; globalThis.__execs.push(sql); return 1;",
+    );
     let query = js_sys::Function::new_with_args("sql, params", "return [];");
     psp_web::set_sql_bridge(exec.clone().unchecked_into(), query.unchecked_into());
     psp_web::run_migrations().await.unwrap();
     let execs = js_sys::Reflect::get(&js_sys::global(), &"__execs".into()).unwrap();
     let arr = js_sys::Array::from(&execs);
     // tracker + 6 migrations + 6 inserts = 13 execute calls.
-    assert!(arr.length() >= 13, "expected >=13 execs, got {}", arr.length());
+    assert!(
+        arr.length() >= 13,
+        "expected >=13 execs, got {}",
+        arr.length()
+    );
 }

@@ -1,14 +1,20 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { putBlob, getBlob, deleteBlob, QuotaError } from './opfsBlobStore';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { getBlob, putBlob, QuotaError } from './opfsBlobStore';
 
 class FakeFile {
 	constructor(public bytes: Uint8Array) {}
 	async arrayBuffer() {
-		return this.bytes.buffer.slice(this.bytes.byteOffset, this.bytes.byteOffset + this.bytes.byteLength);
+		return this.bytes.buffer.slice(
+			this.bytes.byteOffset,
+			this.bytes.byteOffset + this.bytes.byteLength
+		);
 	}
 }
 class FakeWritable {
-	constructor(private fh: FakeFileHandle, private failWith?: unknown) {}
+	constructor(
+		private fh: FakeFileHandle,
+		private failWith?: unknown
+	) {}
 	async write(data: Uint8Array) {
 		if (this.failWith) throw this.failWith;
 		this.fh.file = new FakeFile(data);
@@ -18,7 +24,10 @@ class FakeWritable {
 class FakeFileHandle {
 	kind = 'file' as const;
 	file: FakeFile | null = null;
-	constructor(public name: string, private failWith?: unknown) {}
+	constructor(
+		public name: string,
+		private failWith?: unknown
+	) {}
 	async getFile() {
 		if (!this.file) throw new DOMException('NotFound', 'NotFoundError');
 		return this.file;
@@ -30,7 +39,10 @@ class FakeFileHandle {
 class FakeDir {
 	kind = 'directory' as const;
 	entries_ = new Map<string, FakeDir | FakeFileHandle>();
-	constructor(public name: string, public failNextWrite?: unknown) {}
+	constructor(
+		public name: string,
+		public failNextWrite?: unknown
+	) {}
 	async getDirectoryHandle(name: string, opts?: { create?: boolean }) {
 		let e = this.entries_.get(name);
 		if (!e) {

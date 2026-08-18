@@ -169,12 +169,7 @@
 							inputClass="w-full"
 						/>
 						<div class="flex gap-2">
-							<Button
-								type="button"
-								variant="primary"
-								size="sm"
-								onclick={createCollection}
-							>
+							<Button type="button" variant="primary" size="sm" onclick={createCollection}>
 								{m.create()}
 							</Button>
 							<Button
@@ -229,13 +224,7 @@
 						placeholder={m.add_new_tag()}
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
-					<Button
-						type="button"
-						variant="primary"
-						size="icon"
-						class="w-10"
-						onclick={addNewTag}
-					>
+					<Button type="button" variant="primary" size="icon" class="w-10" onclick={addNewTag}>
 						<Plus class="h-4 w-4" />
 					</Button>
 				</div>
@@ -275,20 +264,11 @@
 
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
-			<Button
-				type="button"
-				variant="neutral"
-				onclick={() => handleClose(false)}
-			>
+			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
 				<X class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
-			<Button
-				type="button"
-				variant="primary"
-				onclick={() => handleClose(true)}
-				data-modal-primary
-			>
+			<Button type="button" variant="primary" onclick={() => handleClose(true)} data-modal-primary>
 				<Copy class="h-4 w-4" />
 				{m.clone_to_entity({ entity: m.ups() })}
 			</Button>

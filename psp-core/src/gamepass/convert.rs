@@ -17,8 +17,11 @@ pub fn recompress_to_plm(data: &[u8]) -> Result<Vec<u8>, CoreError> {
     }
     let gvas_bytes = crate::ue::compression::decompress_save(&mut Cursor::new(data))
         .map_err(|error| CoreError::Parse(error.to_string()))?;
-    crate::ue::compression::compress_save(&gvas_bytes, crate::ue::compression::CompressionFormat::Oodle)
-        .map_err(|error| CoreError::Parse(error.to_string()))
+    crate::ue::compression::compress_save(
+        &gvas_bytes,
+        crate::ue::compression::CompressionFormat::Oodle,
+    )
+    .map_err(|error| CoreError::Parse(error.to_string()))
 }
 
 /// Picks which progress strings `extract_containers_to_steam_dir` emits: converting
@@ -196,12 +199,14 @@ mod tests {
 
         let plm_bytes = recompress_to_plm(&plz_bytes).unwrap();
         assert_eq!(&plm_bytes[8..12], b"PlM1");
-        let original_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plz_bytes.as_slice()))
-                .unwrap();
-        let recompressed_gvas =
-            crate::ue::compression::decompress_save(&mut std::io::Cursor::new(plm_bytes.as_slice()))
-                .unwrap();
+        let original_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            plz_bytes.as_slice(),
+        ))
+        .unwrap();
+        let recompressed_gvas = crate::ue::compression::decompress_save(&mut std::io::Cursor::new(
+            plm_bytes.as_slice(),
+        ))
+        .unwrap();
         assert_eq!(original_gvas, recompressed_gvas);
 
         assert_eq!(recompress_to_plm(&plm_bytes).unwrap(), plm_bytes);

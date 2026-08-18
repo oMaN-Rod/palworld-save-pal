@@ -2,7 +2,7 @@
 	import { cn } from '$theme';
 
 	let {
-		id= '',
+		id = '',
 		onClick,
 		label,
 		class: _class = '',

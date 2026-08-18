@@ -127,9 +127,7 @@ describe('partitionSpawns over the real bosses.json', () => {
 		// partition bug that only shows on the full 155-entry table. The 33 bounty
 		// targets were part of boss's 54 until the parser learned to tell the
 		// table's human-NPC rows from its Pal ones.
-		const { alpha, boss, predator, bounty } = partitionSpawns(
-			bossesJson as Record<string, Spawn>
-		);
+		const { alpha, boss, predator, bounty } = partitionSpawns(bossesJson as Record<string, Spawn>);
 		expect(alpha.length).toBe(72);
 		expect(boss.length).toBe(21);
 		expect(predator.length).toBe(29);

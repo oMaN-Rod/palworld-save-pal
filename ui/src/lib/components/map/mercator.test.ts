@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { MAP_SIZE } from './utils';
 import {
 	MAP_MAX_BOUNDS,
 	MERCATOR_LAT_LIMIT,
@@ -8,6 +7,7 @@ import {
 	pixelToLngLat,
 	verticalScaleFactor
 } from './mercator';
+import { MAP_SIZE } from './utils';
 
 describe('pixelToLngLat', () => {
 	it('maps the pixel extent onto the whole mercator world', () => {
@@ -114,7 +114,8 @@ describe('verticalScaleFactor', () => {
 
 	it('is symmetric about the equator', () => {
 		expect(verticalScaleFactor(-40, MAIN_MAP_CM_PER_PX)).toBeCloseTo(
-			verticalScaleFactor(40, MAIN_MAP_CM_PER_PX), 12
+			verticalScaleFactor(40, MAIN_MAP_CM_PER_PX),
+			12
 		);
 	});
 

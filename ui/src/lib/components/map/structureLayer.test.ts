@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import * as THREE from 'three';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mesh-path tests need real GLTFLoader.load() calls to intercept: structure mesh
 // resolution goes through requestMesh/requestTexturedMesh, which share this
@@ -33,19 +33,19 @@ vi.mock('three/examples/jsm/loaders/DRACOLoader.js', () => ({
 	}))
 }));
 
-import {
-	meshInstanceMatrix,
-	proxyInstanceMatrix,
-	pickPixelCoords,
-	texturedGroupMaterial,
-	createStructureLayer
-} from './structureLayer';
-import { MercatorCoordinate } from 'maplibre-gl';
-import { resetMapColors, setMaterialOpacity, setMaterialTint } from './mapColors.svelte';
-import type { MeshPart } from './meshPlacement';
 import type { BaseStructure, Footprint } from '$types';
-import { requestMesh, type TexturedMeshBundle } from './meshLibrary';
+import { MercatorCoordinate } from 'maplibre-gl';
 import manifest from '../../../../../data/json/structure_meshes.json';
+import { resetMapColors, setMaterialOpacity, setMaterialTint } from './mapColors.svelte';
+import { requestMesh, type TexturedMeshBundle } from './meshLibrary';
+import type { MeshPart } from './meshPlacement';
+import {
+	createStructureLayer,
+	meshInstanceMatrix,
+	pickPixelCoords,
+	proxyInstanceMatrix,
+	texturedGroupMaterial
+} from './structureLayer';
 
 // Non-unit on purpose, so a stray latitude factor in the code under test cannot
 // hide behind cmToMerc = 1.
@@ -138,8 +138,22 @@ describe('proxyInstanceMatrix (unchanged proxy behavior)', () => {
 		const sNorth = base({ x: -1_099_400, y: 0, z: 5000 });
 		const sSouth = base({ x: 340_000, y: 0, z: 5000 });
 
-		const matrixNorth = proxyInstanceMatrix(sNorth, fpWithBoxOffset, 'wallDoor', 'MainMap', 1, CM_TO_MERC);
-		const matrixSouth = proxyInstanceMatrix(sSouth, fpWithBoxOffset, 'wallDoor', 'MainMap', 1, CM_TO_MERC);
+		const matrixNorth = proxyInstanceMatrix(
+			sNorth,
+			fpWithBoxOffset,
+			'wallDoor',
+			'MainMap',
+			1,
+			CM_TO_MERC
+		);
+		const matrixSouth = proxyInstanceMatrix(
+			sSouth,
+			fpWithBoxOffset,
+			'wallDoor',
+			'MainMap',
+			1,
+			CM_TO_MERC
+		);
 
 		const zNorth = new THREE.Vector3().setFromMatrixPosition(matrixNorth).z;
 		const zSouth = new THREE.Vector3().setFromMatrixPosition(matrixSouth).z;
@@ -517,7 +531,16 @@ describe('textured mode wiring', () => {
 		const meshName = meshNameFor(structureId);
 		setMaterialOpacity('Stone', 0.4);
 		const footprints: Record<string, Footprint> = {
-			[structureId]: { sx: 100, sy: 100, sz: 100, ox: 0, oy: 0, oz: 0, typeA: 'Foundation', material: 'Stone' }
+			[structureId]: {
+				sx: 100,
+				sy: 100,
+				sz: 100,
+				ox: 0,
+				oy: 0,
+				oz: 0,
+				typeA: 'Foundation',
+				material: 'Stone'
+			}
 		};
 
 		const layer = makeLayer('opacity');
@@ -583,7 +606,12 @@ describe('setVerticalScale (camera-only compose)', () => {
 		const footprints: Record<string, Footprint> = {
 			VScaleBox2: { sx: 100, sy: 100, sz: 100, ox: 0, oy: 0, oz: 0, typeA: 'Foundation' }
 		};
-		layer.update([base({ instance_id: 'v0', map_object_id: 'VScaleBox2' })], footprints, 'MainMap', 1);
+		layer.update(
+			[base({ instance_id: 'v0', map_object_id: 'VScaleBox2' })],
+			footprints,
+			'MainMap',
+			1
+		);
 
 		const updateSpy = vi.spyOn(layer, 'update');
 		layer.setVerticalScale(2);
@@ -643,7 +671,9 @@ describe('mesh-path part-local transform (multi-part structure)', () => {
 		for (const p of MANIFEST[structureId].parts) {
 			const call = [...loadCalls].reverse().find((c) => c.url.includes(p.mesh));
 			if (!call) throw new Error(`no load() call recorded for ${p.mesh}`);
-			call.onLoad({ scene: new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial()) });
+			call.onLoad({
+				scene: new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial())
+			});
 		}
 		layer.update([s], {}, 'MainMap', 1);
 

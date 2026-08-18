@@ -107,7 +107,7 @@
 		>
 			<!-- close button -->
 			<button
-				class="text-muted hover:text-surface-50 absolute right-3 top-3 transition-colors"
+				class="text-muted hover:text-surface-50 absolute top-3 right-3 transition-colors"
 				onclick={() => (easterEgg = false)}
 				aria-label={m.compat_dismiss()}
 			>
@@ -130,14 +130,14 @@
 			<!-- contributions -->
 			<div class="mt-4 space-y-2.5">
 				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<Palette size={18} class="text-secondary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Theme UI/UX Overhaul</p>
 						<p class="text-muted text-xs">Frontier theme, design tokens, palette system</p>
 					</div>
 				</div>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<GitMerge size={18} class="text-tertiary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Breeding Calculator</p>

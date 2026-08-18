@@ -70,9 +70,7 @@ impl OwnedSource {
                 .map(|p| OwnedPal {
                     character_id: Some(p.character_id),
                     gender: p.gender,
-                    passive_skills: Some(
-                        p.passive_skills.into_iter().map(Value::String).collect(),
-                    ),
+                    passive_skills: Some(p.passive_skills.into_iter().map(Value::String).collect()),
                     instance_id: p.instance_id,
                     nickname: p.nickname,
                     level: p.level,

@@ -20,11 +20,11 @@
 
 	const guildPlayers = $derived(
 		guild
-			? guild.players?.map((uid) => ({
+			? (guild.players?.map((uid) => ({
 					uid,
 					name: memberName(uid),
 					level: appState.playerSummaries[uid]?.level
-				})) ?? []
+				})) ?? [])
 			: undefined
 	);
 
@@ -81,10 +81,20 @@
 				</dl>
 				<div class="flex flex-col gap-1">
 					<h4 class="text-sm font-semibold">{c.players}</h4>
-					<List items={filteredPlayers} idKey="uid" canSelect={false} class="flex flex-col gap-1" headerClass="flex p-0">
+					<List
+						items={filteredPlayers}
+						idKey="uid"
+						canSelect={false}
+						class="flex flex-col gap-1"
+						headerClass="flex p-0"
+					>
 						{#snippet listHeader()}
 							{#if filteredPlayers.length > 5}
-								<Input bind:value={query} inputClass="my-0" placeholder={m.search_entity({ entity: c.players })} />
+								<Input
+									bind:value={query}
+									inputClass="my-0"
+									placeholder={m.search_entity({ entity: c.players })}
+								/>
 							{:else}
 								<div></div>
 							{/if}
@@ -94,7 +104,6 @@
 								<span class="font-bold">Lvl {member?.level ?? '—'}</span>
 								<span class="truncate">{member?.name}</span>
 							</div>
-
 						{/snippet}
 						{#snippet listItemActions(member)}
 							<button

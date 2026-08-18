@@ -124,17 +124,19 @@ mod tests {
     /// rather than falling through to the linked codec.
     #[test]
     fn a_registered_bridge_owns_the_plm_layer_on_both_sides() {
-        let sav = std::fs::read(
-            reference_saves_dir().join("00000000000000000000000000000001.sav"),
-        )
-        .expect("committed fixture is readable");
+        let sav = std::fs::read(reference_saves_dir().join("00000000000000000000000000000001.sav"))
+            .expect("committed fixture is readable");
         let save = read_sav_bytes(&sav).expect("fixture parses");
         let gvas = write_gvas_bytes(&save).expect("serializes to GVAS");
 
         crate::oodle::set_bridge(|data| Ok(data.to_vec()), |payload, _| Ok(payload.to_vec()));
 
         let written = write_sav_bytes(&save).expect("writes through the bridge");
-        assert_eq!(&written[8..11], b"PlM", "the bridge writes Palworld's PlM container");
+        assert_eq!(
+            &written[8..11],
+            b"PlM",
+            "the bridge writes Palworld's PlM container"
+        );
         assert_eq!(written[11], 0x31, "with the save type the game expects");
         assert_eq!(
             u32::from_le_bytes(written[0..4].try_into().unwrap()) as usize,
@@ -146,7 +148,10 @@ mod tests {
             written.len() - 12,
             "and the length of what the codec actually produced"
         );
-        assert!(written[12..] == gvas[..], "the identity codec's output is the GVAS body");
+        assert!(
+            written[12..] == gvas[..],
+            "the identity codec's output is the GVAS body"
+        );
 
         let reparsed = read_sav_bytes(&written).expect("reads back through the bridge");
         assert_eq!(
@@ -163,15 +168,16 @@ mod tests {
     /// the first byte-for-byte.
     #[test]
     fn gvas_pair_round_trips_without_compression() {
-        let sav = std::fs::read(
-            reference_saves_dir().join("00000000000000000000000000000001.sav"),
-        )
-        .expect("committed fixture is readable");
+        let sav = std::fs::read(reference_saves_dir().join("00000000000000000000000000000001.sav"))
+            .expect("committed fixture is readable");
         let save = read_sav_bytes(&sav).expect("fixture parses");
 
         let gvas = write_gvas_bytes(&save).expect("serializes to GVAS");
         assert!(!gvas.is_empty(), "GVAS output is non-empty");
-        assert_ne!(gvas, sav, "GVAS is the uncompressed form, not the .sav bytes");
+        assert_ne!(
+            gvas, sav,
+            "GVAS is the uncompressed form, not the .sav bytes"
+        );
 
         let reparsed = read_gvas_bytes(&gvas).expect("GVAS re-parses");
         let regvas = write_gvas_bytes(&reparsed).expect("re-serializes");

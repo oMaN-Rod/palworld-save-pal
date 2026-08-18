@@ -1,8 +1,8 @@
-import { type MapArea } from './utils';
+import type { PalRingKind } from './mapObjectPortal';
+import type { PalBoss, PalPredator } from './palLayer';
 import { PORTAL_RADIUS_CM } from './palPortal';
 import { buildRingFC } from './ringFC';
-import type { PalBoss, PalPredator } from './palLayer';
-import type { PalRingKind } from './mapObjectPortal';
+import { type MapArea } from './utils';
 
 type PalPortalRingSource = { x: number; y: number; state: PalRingKind; defeated: boolean };
 

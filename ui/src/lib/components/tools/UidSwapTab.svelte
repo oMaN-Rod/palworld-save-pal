@@ -60,7 +60,9 @@
 		</div>
 	{:else}
 		<section class="w-full">
-			<h2 class="text-surface-100 mb-2 text-center text-2xl font-bold">{m.tools_uid_swap_title()}</h2>
+			<h2 class="text-surface-100 mb-2 text-center text-2xl font-bold">
+				{m.tools_uid_swap_title()}
+			</h2>
 			<p class="text-surface-400 mb-6 text-center text-sm">{m.tools_uid_swap_description()}</p>
 
 			<Card class="mx-auto max-w-lg">

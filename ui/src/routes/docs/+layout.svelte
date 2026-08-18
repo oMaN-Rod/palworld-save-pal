@@ -11,7 +11,7 @@
 	const allTabs = [
 		{ label: m.docs_wiki(), href: '/wiki', id: 'wiki' },
 		{ label: m.docs_guides(), href: '/docs/guides', id: 'guides' },
-		{ label: m.docs_tours(), href: '/docs/tours', id: 'tours' },
+		{ label: m.docs_tours(), href: '/docs/tours', id: 'tours' }
 	];
 	const tabs = $derived(publicShell ? allTabs.filter((tab) => tab.id !== 'tours') : allTabs);
 
@@ -22,7 +22,7 @@
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden">
-	<nav class="flex gap-1 border-b border-surface-700 px-4 pt-2">
+	<nav class="border-surface-700 flex gap-1 border-b px-4 pt-2">
 		{#each tabs as tab}
 			<a
 				href={tab.href}

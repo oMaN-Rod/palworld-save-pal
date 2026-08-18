@@ -465,7 +465,9 @@ mod tests {
     fn test_read_worker_director_reads_the_documented_layout() {
         let id: uuid::Uuid = "11111111-2222-3333-4444-555555555555".parse().unwrap();
         let container: uuid::Uuid = "a1b2c3d4-0000-1111-2222-333344445555".parse().unwrap();
-        let doubles = [1.0, 2.0, 3.0, 4.0, -320856.5, 213349.875, -417.5, 5.0, 6.0, 7.0];
+        let doubles = [
+            1.0, 2.0, 3.0, 4.0, -320856.5, 213349.875, -417.5, 5.0, 6.0, 7.0,
+        ];
 
         let mut blob = Vec::new();
         blob.extend_from_slice(&guid_bytes(id));

@@ -10,7 +10,11 @@ export type MeshPart = {
 	scale: [number, number, number];
 };
 
-export function ueEulerToThreeQuaternion(pitch: number, yaw: number, roll: number): THREE.Quaternion {
+export function ueEulerToThreeQuaternion(
+	pitch: number,
+	yaw: number,
+	roll: number
+): THREE.Quaternion {
 	// UE yaw is about Z (up), which is three's Y after the swap; the handedness flip negates it.
 	return new THREE.Quaternion().setFromEuler(
 		new THREE.Euler(roll * DEG, -yaw * DEG, pitch * DEG, 'YZX')

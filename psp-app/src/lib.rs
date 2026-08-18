@@ -102,7 +102,9 @@ impl AppState {
         if let Some(cached) = self.breeding_db.get() {
             return Ok(cached);
         }
-        let db = Arc::new(psp_core::breeding::BreedingDB::from_game_data(&self.game_data)?);
+        let db = Arc::new(psp_core::breeding::BreedingDB::from_game_data(
+            &self.game_data,
+        )?);
         // `set` succeeds on the first writer; on a race the cell already holds
         // a valid Arc. Either way the cell now owns it, so re-fetch and borrow
         // against `&self`.

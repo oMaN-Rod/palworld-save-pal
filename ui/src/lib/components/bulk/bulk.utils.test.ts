@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
 import type { GuildSummary, PlayerSummary } from '$types';
+import { describe, expect, it } from 'vitest';
 import {
 	buildGuildRows,
 	buildPlayerRows,
@@ -11,19 +11,40 @@ import {
 } from './bulk.utils';
 
 const guilds: GuildSummary[] = [
-	{ id: 'g1', name: 'Alpha', player_count: 2, base_count: 1, level: 3, pal_count: 5, loaded: false },
+	{
+		id: 'g1',
+		name: 'Alpha',
+		player_count: 2,
+		base_count: 1,
+		level: 3,
+		pal_count: 5,
+		loaded: false
+	},
 	{ id: 'g2', name: 'Empty', player_count: 0, base_count: 0, level: 1, pal_count: 0, loaded: false }
 ];
 
 const players: PlayerSummary[] = [
-	{ uid: 'p1', nickname: 'Aria', level: 40, guild_id: 'g1', pal_count: 10, last_online_time: '2026-06-01T00:00:00', loaded: false },
+	{
+		uid: 'p1',
+		nickname: 'Aria',
+		level: 40,
+		guild_id: 'g1',
+		pal_count: 10,
+		last_online_time: '2026-06-01T00:00:00',
+		loaded: false
+	},
 	{ uid: 'p2', nickname: 'Bolt', level: 5, guild_id: 'gX', pal_count: 0, loaded: false }
 ];
 
 describe('buildPlayerRows', () => {
 	it('resolves guild name, falling back to a dash when unknown', () => {
 		const rows = buildPlayerRows(players, guilds);
-		expect(rows[0]).toMatchObject({ uid: 'p1', guildName: 'Alpha', level: 40, lastOnline: '2026-06-01T00:00:00' });
+		expect(rows[0]).toMatchObject({
+			uid: 'p1',
+			guildName: 'Alpha',
+			level: 40,
+			lastOnline: '2026-06-01T00:00:00'
+		});
 		expect(rows[1]).toMatchObject({ uid: 'p2', guildName: '—', level: 5, lastOnline: null });
 	});
 });
@@ -31,7 +52,14 @@ describe('buildPlayerRows', () => {
 describe('buildGuildRows', () => {
 	it('maps summary fields with null level fallback', () => {
 		const rows = buildGuildRows(guilds);
-		expect(rows[0]).toMatchObject({ id: 'g1', name: 'Alpha', player_count: 2, pal_count: 5, level: 3, base_count: 1 });
+		expect(rows[0]).toMatchObject({
+			id: 'g1',
+			name: 'Alpha',
+			player_count: 2,
+			pal_count: 5,
+			level: 3,
+			base_count: 1
+		});
 	});
 });
 

@@ -1,5 +1,5 @@
-import { worldToPixel, type MapArea } from './utils';
 import { pixelToLngLat } from './mercator';
+import { worldToPixel, type MapArea } from './utils';
 
 export type BenchStop = {
 	name: string;

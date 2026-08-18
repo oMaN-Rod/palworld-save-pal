@@ -29,8 +29,24 @@ function build(archetype: string, sx: number, sy: number, sz: number): THREE.Buf
 			const hx = sx / 2;
 			const hz = sy / 2;
 			const verts = new Float32Array([
-				-hx, 0, -hz, hx, 0, -hz, 0, sz, -hz,
-				-hx, 0, hz, hx, 0, hz, 0, sz, hz
+				-hx,
+				0,
+				-hz,
+				hx,
+				0,
+				-hz,
+				0,
+				sz,
+				-hz,
+				-hx,
+				0,
+				hz,
+				hx,
+				0,
+				hz,
+				0,
+				sz,
+				hz
 			]);
 			const idx = [0, 1, 2, 3, 5, 4, 0, 2, 5, 0, 5, 3, 1, 4, 5, 1, 5, 2, 0, 3, 4, 0, 4, 1];
 			const g = new THREE.BufferGeometry();
@@ -62,7 +78,12 @@ function build(archetype: string, sx: number, sy: number, sz: number): THREE.Buf
 				g.translate(0, y, 0);
 				return g;
 			};
-			return mergeGeometries([post(-sx / 2 + t / 2), post(sx / 2 - t / 2), rail(sz * 0.35), rail(sz * 0.75)]);
+			return mergeGeometries([
+				post(-sx / 2 + t / 2),
+				post(sx / 2 - t / 2),
+				rail(sz * 0.35),
+				rail(sz * 0.75)
+			]);
 		}
 		case 'chest': {
 			const base = new THREE.BoxGeometry(sx, sz * 0.7, sy);

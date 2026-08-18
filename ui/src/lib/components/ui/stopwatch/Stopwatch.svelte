@@ -6,7 +6,7 @@
 		class?: string;
 	};
 
-	let { seconds = $bindable(), class:_class = 'text-3xl' }: Props = $props();
+	let { seconds = $bindable(), class: _class = 'text-3xl' }: Props = $props();
 
 	const hh = $derived(Math.floor(seconds / 3600));
 	const mm = $derived(Math.floor((seconds % 3600) / 60));

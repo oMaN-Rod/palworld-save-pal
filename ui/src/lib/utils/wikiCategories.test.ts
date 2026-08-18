@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { categoryHref, entityLink, WIKI_CATEGORIES } from './wikiCategories';
 
 describe('WIKI_CATEGORIES', () => {

@@ -82,7 +82,10 @@ mod tests {
         assert_ne!(a, b, "each insert mints a fresh handle");
         assert!(registry.get(&a).is_some(), "first handle still resolves");
         assert!(registry.get(&b).is_some(), "second handle resolves");
-        assert!(registry.get(&Uuid::new_v4()).is_none(), "unknown handle does not");
+        assert!(
+            registry.get(&Uuid::new_v4()).is_none(),
+            "unknown handle does not"
+        );
     }
 
     #[test]
@@ -99,7 +102,10 @@ mod tests {
             "the oldest handle is evicted once the cap is exceeded"
         );
         for handle in &newer {
-            assert!(registry.get(handle).is_some(), "every newer handle survives");
+            assert!(
+                registry.get(handle).is_some(),
+                "every newer handle survives"
+            );
         }
     }
 }

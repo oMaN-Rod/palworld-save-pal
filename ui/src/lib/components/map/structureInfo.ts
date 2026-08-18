@@ -1,5 +1,5 @@
-import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
 import type { BaseStructure, Building, Footprint, PlayerSummary } from '$types';
+import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
 
 export type StructureInfo = {
 	name: string;

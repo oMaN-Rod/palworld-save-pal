@@ -32,7 +32,7 @@ export const editTour: TourDefinition = {
 			popover: {
 				title: 'Inventory Panel',
 				description:
-					'This panel displays the player\'s inventory. You can view and manage items here.'
+					"This panel displays the player's inventory. You can view and manage items here."
 			}
 		},
 		{
@@ -47,8 +47,7 @@ export const editTour: TourDefinition = {
 			element: 'div[data-testid="tabs-list"]',
 			popover: {
 				title: 'Inventory/Key Item Tabs',
-				description:
-					'These tabs allow you to switch between the inventory and key items panels.'
+				description: 'These tabs allow you to switch between the inventory and key items panels.'
 			}
 		},
 		{
@@ -64,8 +63,7 @@ export const editTour: TourDefinition = {
 			element: 'div[id="key-items-panel"]',
 			popover: {
 				title: 'Key Items Panel',
-				description:
-					'This panel displays the player\'s key items.'
+				description: "This panel displays the player's key items."
 			}
 		},
 		{
@@ -80,16 +78,14 @@ export const editTour: TourDefinition = {
 			element: 'div[id="weapon-equip"]',
 			popover: {
 				title: 'Equipped Weapons',
-				description:
-					'This section shows the player\'s currently equipped weapons.'
+				description: "This section shows the player's currently equipped weapons."
 			}
 		},
 		{
 			element: 'div[id="accessory-equip"]',
 			popover: {
 				title: 'Equipped Accessories',
-				description:
-					'This section shows the player\'s currently equipped accessories.'
+				description: "This section shows the player's currently equipped accessories."
 			}
 		},
 		{
@@ -97,47 +93,42 @@ export const editTour: TourDefinition = {
 			popover: {
 				title: 'Equipped Gear',
 				description:
-					'This section shows the player\'s currently equipped head, body, shield, glider, and sphere module gear.'
+					"This section shows the player's currently equipped head, body, shield, glider, and sphere module gear."
 			}
 		},
 		{
 			element: 'div[id="food-equip"]',
 			popover: {
 				title: 'Equipped Food',
-				description:
-					'This section shows the player\'s currently equipped food items.'
+				description: "This section shows the player's currently equipped food items."
 			}
 		},
 		{
 			element: 'div[id="player-level"]',
 			popover: {
 				title: 'Player Level',
-				description:
-					'View and edit the player\'s level progression.'
+				description: "View and edit the player's level progression."
 			}
 		},
 		{
 			element: 'button[id="player-nickname"]',
 			popover: {
 				title: 'Player Nickname',
-				description:
-					'Edit the player\'s nickname.'
+				description: "Edit the player's nickname."
 			}
 		},
 		{
 			element: 'button[id="player-heal-hp"]',
 			popover: {
 				title: 'Heal Player HP',
-				description:
-					'Fully restore the player\'s HP.'
+				description: "Fully restore the player's HP."
 			}
 		},
 		{
 			element: 'button[id="player-fill-stomach"]',
 			popover: {
 				title: 'Fill Player Stomach',
-				description:
-					'Fully fill the player\'s stomach.'
+				description: "Fully fill the player's stomach."
 			}
 		},
 		{
@@ -145,15 +136,14 @@ export const editTour: TourDefinition = {
 			popover: {
 				title: 'Player Stats',
 				description:
-					'View and edit the player\'s stats such as health, stamina, attack, defense, workspeed and carry weight.'
+					"View and edit the player's stats such as health, stamina, attack, defense, workspeed and carry weight."
 			}
 		},
 		{
 			element: 'button[id="max-player-stats"]',
 			popover: {
 				title: 'Max Player Stats',
-				description:
-					'Set all player stats to their maximum values.'
+				description: 'Set all player stats to their maximum values.'
 			}
 		},
 		{
@@ -197,8 +187,7 @@ export const editTour: TourDefinition = {
 			},
 			popover: {
 				title: 'Technologies Tab',
-				description:
-					'Click this tab to view and edit the player\'s unlocked technologies.'
+				description: "Click this tab to view and edit the player's unlocked technologies."
 			}
 		},
 		{
@@ -221,8 +210,7 @@ export const editTour: TourDefinition = {
 			element: 'div[id="tech-bulk-actions"]',
 			popover: {
 				title: 'Bulk Actions',
-				description:
-					'Quick actions to lock all technologies or unlock everything at once.'
+				description: 'Quick actions to lock all technologies or unlock everything at once.'
 			}
 		},
 		{
@@ -237,8 +225,7 @@ export const editTour: TourDefinition = {
 			element: 'button[id="tech-unlock-all"]',
 			popover: {
 				title: 'Unlock All',
-				description:
-					'Unlock every technology in the game at once.'
+				description: 'Unlock every technology in the game at once.'
 			}
 		},
 		{
@@ -347,7 +334,7 @@ export const editTour: TourDefinition = {
 			popover: {
 				title: 'DPS Tab',
 				description:
-					"Click this tab to view and edit the Dimensional Pal Storage. This tab only appears if your save has DPS data — otherwise you can skip ahead."
+					'Click this tab to view and edit the Dimensional Pal Storage. This tab only appears if your save has DPS data — otherwise you can skip ahead.'
 			}
 		},
 		{
@@ -449,8 +436,7 @@ export const editTour: TourDefinition = {
 			element: 'div[id="guild-pager"]',
 			popover: {
 				title: 'Base Pager',
-				description:
-					"Navigate between the guild's bases. Use Q/E or arrow keys to page as well."
+				description: "Navigate between the guild's bases. Use Q/E or arrow keys to page as well."
 			}
 		},
 		{
@@ -525,7 +511,7 @@ export const editTour: TourDefinition = {
 			},
 			popover: {
 				title: 'Guild Chest Tab',
-				description: "Click Chest to view and edit the shared guild chest."
+				description: 'Click Chest to view and edit the shared guild chest.'
 			}
 		},
 		{

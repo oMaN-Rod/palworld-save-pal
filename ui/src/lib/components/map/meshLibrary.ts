@@ -2,9 +2,9 @@
 // so requestMesh returns cached geometry or null and notifies when a load settles
 // (successfully or permanently). Failed names are never retried.
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import manifest from '../../../../../data/json/structure_meshes.json';
 import type { MeshPart } from './meshPlacement';
@@ -139,7 +139,9 @@ function normalizeForMerge(geometries: THREE.BufferGeometry[]): THREE.BufferGeom
 }
 
 function mergeAll(geometries: THREE.BufferGeometry[]): THREE.BufferGeometry | null {
-	return mergeGeometries(geometries, false) ?? mergeGeometries(normalizeForMerge(geometries), false);
+	return (
+		mergeGeometries(geometries, false) ?? mergeGeometries(normalizeForMerge(geometries), false)
+	);
 }
 
 const COMPONENT_GETTERS = ['getX', 'getY', 'getZ', 'getW'] as const;
@@ -210,7 +212,10 @@ function settleTextured(name: string, dir: string): void {
 // instead of merging into one untextured geometry. requestMesh's merge discards
 // material assignment, so a structure wanting its glb's texture is parsed again
 // through this separate cache; both may hold copies of the same glb at once.
-export function requestTexturedMesh(name: string, dir: string = MODEL_URL): TexturedMeshBundle | null {
+export function requestTexturedMesh(
+	name: string,
+	dir: string = MODEL_URL
+): TexturedMeshBundle | null {
 	const hit = texturedCache.get(name);
 	if (hit) return hit;
 	if (texturedInflight.has(name) || texturedFailed.has(name)) return null;

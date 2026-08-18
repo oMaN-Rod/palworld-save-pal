@@ -178,7 +178,9 @@
 								<h3 class="text-surface-200 font-semibold">{m.tools_source_save()}</h3>
 								{#if sourceLoaded}
 									<p class="text-sm text-green-400">
-										{sourceWorldName} ({m.tools_players_count({ count: sourcePlayersArray.length })})
+										{sourceWorldName} ({m.tools_players_count({
+											count: sourcePlayersArray.length
+										})})
 									</p>
 									<button
 										class="text-surface-400 hover:text-surface-200 text-xs"
@@ -206,9 +208,11 @@
 								<h3 class="text-surface-200 font-semibold">{m.tools_target_save()}</h3>
 								{#if hasLoadedSave}
 									<p class="text-sm text-green-400">
-										{appState.saveFile?.world_name ?? m.tools_loaded_save()} ({m.tools_players_count({
-											count: appState.playerSummariesArray.length
-										})})
+										{appState.saveFile?.world_name ?? m.tools_loaded_save()} ({m.tools_players_count(
+											{
+												count: appState.playerSummariesArray.length
+											}
+										)})
 									</p>
 									<span class="text-surface-500 text-xs">{m.tools_using_loaded_save()}</span>
 								{:else if standaloneTargetLoaded}
@@ -252,10 +256,7 @@
 								? (appState.saveFile?.world_name ?? m.tools_loaded_save())
 								: targetWorldName}
 						</span>
-						<button
-							class="text-surface-400 hover:text-surface-200 text-sm"
-							onclick={resetTransfer}
-						>
+						<button class="text-surface-400 hover:text-surface-200 text-sm" onclick={resetTransfer}>
 							{m.tools_start_over()}
 						</button>
 					</div>

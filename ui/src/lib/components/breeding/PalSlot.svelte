@@ -35,7 +35,7 @@
 		<img
 			src={iconSrc}
 			alt={shown}
-			class="{dims} rounded-sm border-surface-600 bg-surface-900 border object-contain"
+			class="{dims} border-surface-600 bg-surface-900 rounded-sm border object-contain"
 			loading="lazy"
 		/>
 		{#if GenderIcon}

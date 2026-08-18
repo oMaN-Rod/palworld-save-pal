@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
-	MAP_OBJECT_SCALE_MIN,
-	MAP_OBJECT_SCALE_MAX,
 	MAP_OBJECT_SCALE_DEFAULT,
-	sliderToScale,
-	scaleToSlider
+	MAP_OBJECT_SCALE_MAX,
+	MAP_OBJECT_SCALE_MIN,
+	scaleToSlider,
+	sliderToScale
 } from './mapObjectSize';
 
 describe('map object scale bounds', () => {

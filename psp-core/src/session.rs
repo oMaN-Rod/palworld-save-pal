@@ -332,16 +332,14 @@ impl SaveSession {
         // A broken WorldOption must not cost the user their world: Level.sav is the
         // world, WorldOption is config. Degrade to absent + warn instead of failing
         // the load (this is why it does NOT use `error_to_raw(false)` semantics).
-        let world_option = world_option_bytes.and_then(|bytes| {
-            match parse_palworld_save(bytes) {
-                Ok(mut save) => {
-                    crate::domain::world_option::ensure_world_option_schemas(&mut save);
-                    Some(save)
-                }
-                Err(error) => {
-                    tracing::warn!("WorldOption.sav failed to parse, ignoring: {error}");
-                    None
-                }
+        let world_option = world_option_bytes.and_then(|bytes| match parse_palworld_save(bytes) {
+            Ok(mut save) => {
+                crate::domain::world_option::ensure_world_option_schemas(&mut save);
+                Some(save)
+            }
+            Err(error) => {
+                tracing::warn!("WorldOption.sav failed to parse, ignoring: {error}");
+                None
             }
         });
 
@@ -861,7 +859,10 @@ mod load_tests {
     #[test]
     fn test_world_name_falls_back_to_unknown_when_world_name_absent() {
         let mut properties = crate::ue::Properties::default();
-        properties.insert("SaveData", struct_property(crate::ue::Properties::default()));
+        properties.insert(
+            "SaveData",
+            struct_property(crate::ue::Properties::default()),
+        );
 
         assert_eq!("Unknown", world_name_from_meta_properties(&properties));
     }
@@ -879,7 +880,10 @@ mod load_tests {
     #[test]
     fn test_world_name_uses_present_non_empty_value() {
         let mut save_data = crate::ue::Properties::default();
-        save_data.insert("WorldName", crate::ue::Property::Str("My World".to_string()));
+        save_data.insert(
+            "WorldName",
+            crate::ue::Property::Str("My World".to_string()),
+        );
         let mut properties = crate::ue::Properties::default();
         properties.insert("SaveData", struct_property(save_data));
 
@@ -1050,7 +1054,10 @@ mod load_tests {
     #[test]
     fn apply_world_option_patch_sets_dirty_only_on_real_change() {
         let world_option = load_world_option_fixture().unwrap();
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
+        let mut session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            minimal_uesave_save(crate::ue::Properties::default()),
+        );
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
@@ -1058,16 +1065,20 @@ mod load_tests {
         assert!(!session.world_option_dirty);
 
         // Read a current setting to know what value exists
-        let current_settings = crate::domain::world_option::read_settings(
-            session.world_option.as_ref().unwrap(),
+        let current_settings =
+            crate::domain::world_option::read_settings(session.world_option.as_ref().unwrap());
+        assert!(
+            !current_settings.is_empty(),
+            "fixture must have at least one setting"
         );
-        assert!(!current_settings.is_empty(), "fixture must have at least one setting");
         let first_setting = &current_settings[0];
         let original_value = first_setting.value.clone();
 
         // Create a genuinely different value based on the setting's type
         let different_value = match first_setting.kind {
-            crate::domain::world_option::WoKind::Bool => serde_json::json!(!original_value.as_bool().unwrap()),
+            crate::domain::world_option::WoKind::Bool => {
+                serde_json::json!(!original_value.as_bool().unwrap())
+            }
             crate::domain::world_option::WoKind::Int => {
                 let current = original_value.as_i64().unwrap_or(0);
                 serde_json::json!(current + 1)
@@ -1081,7 +1092,11 @@ mod load_tests {
             crate::domain::world_option::WoKind::Enum(name) => {
                 // Pick a different variant; if it's "Custom", use "Easy", otherwise use "Custom"
                 let current_str = original_value.as_str().unwrap_or("");
-                let new_variant = if current_str.contains("Custom") { "Easy" } else { "Custom" };
+                let new_variant = if current_str.contains("Custom") {
+                    "Easy"
+                } else {
+                    "Custom"
+                };
                 serde_json::json!(format!("{}::{}", name, new_variant))
             }
             crate::domain::world_option::WoKind::EnumArray => serde_json::json!(["SomeValue"]),
@@ -1095,11 +1110,17 @@ mod load_tests {
         };
         let result = session.apply_world_option_patch(&[patch]);
         assert!(result.is_ok(), "patch should succeed: {result:?}");
-        assert!(session.world_option_dirty, "dirty should be true after real change");
+        assert!(
+            session.world_option_dirty,
+            "dirty should be true after real change"
+        );
 
         // Now test the no-op case with a fresh session
         let world_option = load_world_option_fixture().unwrap();
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
+        let mut session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            minimal_uesave_save(crate::ue::Properties::default()),
+        );
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
@@ -1110,12 +1131,18 @@ mod load_tests {
         };
         let result = session.apply_world_option_patch(&[patch]);
         assert!(result.is_ok(), "no-op patch should succeed");
-        assert!(!session.world_option_dirty, "dirty should remain false on no-op change");
+        assert!(
+            !session.world_option_dirty,
+            "dirty should remain false on no-op change"
+        );
     }
 
     #[test]
     fn apply_world_option_patch_errors_when_no_world_option_loaded() {
-        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
+        let mut session = SaveSession::new_for_tests(
+            SaveKind::InMemory,
+            minimal_uesave_save(crate::ue::Properties::default()),
+        );
         session.world_option = None;
 
         let patch = crate::domain::world_option::WorldOptionPatch {
@@ -1136,8 +1163,8 @@ mod load_tests {
     fn load_degrades_gracefully_on_corrupt_world_option() {
         let level_fixture_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/v1_relics/Level.sav");
-        let valid_level_bytes = std::fs::read(&level_fixture_path)
-            .expect("failed to read Level.sav fixture");
+        let valid_level_bytes =
+            std::fs::read(&level_fixture_path).expect("failed to read Level.sav fixture");
 
         let corrupt_world_option_bytes = b"not a real sav";
 
@@ -1155,10 +1182,16 @@ mod load_tests {
         );
 
         // Load must succeed (corrupt WorldOption does not fail the whole load)
-        assert!(session.is_ok(), "load should succeed despite corrupt WorldOption");
+        assert!(
+            session.is_ok(),
+            "load should succeed despite corrupt WorldOption"
+        );
 
         let session = session.unwrap();
         // The session's world_option should be None (degraded to absent)
-        assert!(session.world_option.is_none(), "corrupted WorldOption should be degraded to None");
+        assert!(
+            session.world_option.is_none(),
+            "corrupted WorldOption should be degraded to None"
+        );
     }
 }

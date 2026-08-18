@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { sliderToScale, scaleToSlider } from './logScale';
+import { describe, expect, it } from 'vitest';
+import { scaleToSlider, sliderToScale } from './logScale';
 
 describe('sliderToScale', () => {
 	it('maps 0 to the minimum and 1 to the maximum', () => {

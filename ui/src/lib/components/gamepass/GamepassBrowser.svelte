@@ -38,9 +38,7 @@
 	let renamingSaveId: string | null = $state(null);
 	let renameValue = $state('');
 
-	const saveList = $derived(
-		Object.values(saves).sort((a, b) => b.last_modified - a.last_modified)
-	);
+	const saveList = $derived(Object.values(saves).sort((a, b) => b.last_modified - a.last_modified));
 
 	function formatDate(timestamp: number): string {
 		if (!timestamp) return 'Unknown';
@@ -166,8 +164,8 @@
 
 	{#if saveList.length === 0}
 		<p class="text-surface-400 text-sm">
-			No GamePass saves found. Make sure you have Palworld installed via GamePass and have
-			created at least one world.
+			No GamePass saves found. Make sure you have Palworld installed via GamePass and have created
+			at least one world.
 		</p>
 	{:else}
 		<div class="bg-surface-800 flex max-h-[600px] flex-col overflow-y-auto rounded-lg">
@@ -209,7 +207,7 @@
 								<input
 									type="text"
 									bind:value={renameValue}
-									class="bg-surface-900 border-surface-600 min-w-0 grow rounded border px-2 py-1 text-sm text-surface-50"
+									class="bg-surface-900 border-surface-600 text-surface-50 min-w-0 grow rounded border px-2 py-1 text-sm"
 									autofocus
 									onkeydown={(e) => {
 										if (e.key === 'Escape') renamingSaveId = null;
@@ -240,7 +238,7 @@
 								disabled={!selectable}
 							>
 								<div class="flex min-w-0 grow flex-col">
-									<span class="truncate font-semibold text-surface-50">
+									<span class="text-surface-50 truncate font-semibold">
 										{save.world_name}
 									</span>
 									<span class="text-surface-400 truncate text-xs">
@@ -250,9 +248,7 @@
 							</button>
 
 							<!-- Stats -->
-							<div
-								class="text-surface-300 flex shrink-0 items-center gap-4 text-sm"
-							>
+							<div class="text-surface-300 flex shrink-0 items-center gap-4 text-sm">
 								<div class="flex items-center gap-1" title="Players">
 									<Users size={14} />
 									<span>{save.player_count}</span>
@@ -261,10 +257,7 @@
 									<HardDrive size={14} />
 									<span>{formatSize(save.total_size)}</span>
 								</div>
-								<div
-									class="flex items-center gap-1"
-									title={formatDate(save.last_modified)}
-								>
+								<div class="flex items-center gap-1" title={formatDate(save.last_modified)}>
 									<Clock size={14} />
 									<span>{formatRelativeTime(save.last_modified)}</span>
 								</div>
@@ -296,7 +289,7 @@
 										</button>
 									{:else}
 										<button
-											class="text-surface-400 hover:text-red-400 rounded p-1"
+											class="text-surface-400 rounded p-1 hover:text-red-400"
 											title="Delete save"
 											onclick={() => (confirmDelete = save.save_id)}
 										>
@@ -311,9 +304,7 @@
 					<!-- Expanded container details -->
 					{#if isExpanded}
 						<div class="bg-surface-900/50 border-surface-700 border-t px-4 py-2">
-							<div
-								class="text-surface-400 mb-1 text-xs font-semibold uppercase tracking-wider"
-							>
+							<div class="text-surface-400 mb-1 text-xs font-semibold tracking-wider uppercase">
 								Containers
 							</div>
 							{#each Object.entries(groups) as [groupType, groupContainers]}
@@ -335,12 +326,8 @@
 									</div>
 									<div class="ml-5 flex flex-col gap-0.5">
 										{#each groupContainers as container}
-											<div
-												class="text-surface-400 flex items-center gap-3 text-xs"
-											>
-												<span
-													class="text-surface-300 min-w-0 truncate font-mono"
-												>
+											<div class="text-surface-400 flex items-center gap-3 text-xs">
+												<span class="text-surface-300 min-w-0 truncate font-mono">
 													{container.container_type}
 												</span>
 												<div class="flex items-center gap-1">
@@ -348,10 +335,7 @@
 													<span>v{container.seq}</span>
 												</div>
 												<span>{formatSize(container.size)}</span>
-												<span
-													class="text-surface-500"
-													title={formatDate(container.last_modified)}
-												>
+												<span class="text-surface-500" title={formatDate(container.last_modified)}>
 													{formatRelativeTime(container.last_modified)}
 												</span>
 											</div>

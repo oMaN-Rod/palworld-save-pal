@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { decodePickBytes, MAX_PICK_INDEX } from './pickEncoding';
 
 // Mirrors the pick vertex shader exactly: id = index + 1, split into 3 bytes.

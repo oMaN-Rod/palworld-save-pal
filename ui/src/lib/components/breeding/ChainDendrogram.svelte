@@ -225,21 +225,21 @@
 
 	<div class="absolute top-2 right-2 z-10 flex flex-col gap-1">
 		<button
-			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5"
 			title={m.breeding_zoom_in()}
 			onclick={() => engine?.zoomBy(1.25)}
 		>
 			<Plus size={14} />
 		</button>
 		<button
-			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5"
 			title={m.breeding_zoom_out()}
 			onclick={() => engine?.zoomBy(0.8)}
 		>
 			<Minus size={14} />
 		</button>
 		<button
-			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5"
+			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5"
 			title={m.breeding_fit_view()}
 			onclick={() => engine?.fit()}
 		>
@@ -247,7 +247,7 @@
 		</button>
 		<div class="bg-surface-700/40 my-0.5 h-px"></div>
 		<button
-			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
+			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
 			title={m.breeding_export_png()}
 			disabled={exporting}
 			onclick={() => handleExport('download')}
@@ -255,7 +255,7 @@
 			<Download size={14} class={exporting ? 'animate-pulse' : ''} />
 		</button>
 		<button
-			class="btn btn-secondary rounded-sm text-surface-200 hover:text-surface-50 p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
+			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
 			title={copied ? m.breeding_png_copied() : m.breeding_copy_png()}
 			disabled={exporting}
 			onclick={() => handleExport('copy')}

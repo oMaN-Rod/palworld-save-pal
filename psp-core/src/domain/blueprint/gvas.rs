@@ -103,13 +103,24 @@ pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
 
     let header_json = serde_json::to_string(&blueprint.header)
         .map_err(|e| CoreError::Parse(format!("blueprint header json encode failed: {e}")))?;
-    set_property(&mut save, &mut weak, BLUEPRINT_HEADER, Property::Str(header_json))?;
+    set_property(
+        &mut save,
+        &mut weak,
+        BLUEPRINT_HEADER,
+        Property::Str(header_json),
+    )?;
 
     let mut structures = Vec::with_capacity(blueprint.structures.len());
     for structure in &blueprint.structures {
         let mut element = structure.properties.clone();
-        element.insert("MapObjectId", props::name_property(&structure.map_object_id));
-        element.insert(RELATIVE_TRANSFORM, transform_property(&structure.relative_transform));
+        element.insert(
+            "MapObjectId",
+            props::name_property(&structure.map_object_id),
+        );
+        element.insert(
+            RELATIVE_TRANSFORM,
+            transform_property(&structure.relative_transform),
+        );
         structures.push(StructValue::Struct(element));
     }
 
@@ -129,14 +140,26 @@ pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
 /// `placement_schemas` must describe only what a real `Level.sav` will hold.
 fn world_properties(structures: Vec<StructValue>, blueprint: &BaseBlueprint) -> Properties {
     let mut world = Properties::default();
-    world.insert(MAP_OBJECT_SAVE_DATA, Property::Array(ValueVec::Struct(structures)));
-    world.insert(ITEM_CONTAINER_SAVE_DATA, Property::Map(blueprint.item_containers.clone()));
+    world.insert(
+        MAP_OBJECT_SAVE_DATA,
+        Property::Array(ValueVec::Struct(structures)),
+    );
+    world.insert(
+        ITEM_CONTAINER_SAVE_DATA,
+        Property::Map(blueprint.item_containers.clone()),
+    );
     world.insert(
         CHARACTER_CONTAINER_SAVE_DATA,
         Property::Map(blueprint.character_containers.clone()),
     );
-    world.insert(CHARACTER_SAVE_PARAMETER_MAP, Property::Map(blueprint.characters.clone()));
-    world.insert(WORK_SAVE_DATA, Property::Array(ValueVec::Struct(blueprint.works.clone())));
+    world.insert(
+        CHARACTER_SAVE_PARAMETER_MAP,
+        Property::Map(blueprint.characters.clone()),
+    );
+    world.insert(
+        WORK_SAVE_DATA,
+        Property::Array(ValueVec::Struct(blueprint.works.clone())),
+    );
     world.insert(
         DYNAMIC_ITEM_SAVE_DATA,
         Property::Array(ValueVec::Struct(blueprint.dynamic_items.clone())),
@@ -213,14 +236,22 @@ pub fn from_save(save: &Save) -> Result<BaseBlueprint, CoreError> {
         let mut element = props.clone();
         let map_object_id = match element.0.get(&PropertyKey::from("MapObjectId")) {
             Some(Property::Name(name)) => name.clone(),
-            _ => return Err(CoreError::Parse("structure missing MapObjectId".to_string())),
+            _ => {
+                return Err(CoreError::Parse(
+                    "structure missing MapObjectId".to_string(),
+                ))
+            }
         };
         let relative_transform = element
             .0
             .shift_remove(&PropertyKey::from(RELATIVE_TRANSFORM))
             .ok_or_else(|| CoreError::Parse("structure missing RelativeTransform".to_string()))?;
         let relative_transform = transform_from_property(&relative_transform)?;
-        structures.push(BlueprintStructure { map_object_id, relative_transform, properties: element });
+        structures.push(BlueprintStructure {
+            map_object_id,
+            relative_transform,
+            properties: element,
+        });
     }
 
     let item_containers = get_map_entries(world, ITEM_CONTAINER_SAVE_DATA)?;
@@ -263,7 +294,9 @@ fn base_camp_from_world(world: &Properties) -> Result<Option<Properties>, CoreEr
         return Ok(None);
     };
     let Property::Map(entries) = prop else {
-        return Err(CoreError::Parse(format!("{BASE_CAMP_SAVE_DATA} is not a map property")));
+        return Err(CoreError::Parse(format!(
+            "{BASE_CAMP_SAVE_DATA} is not a map property"
+        )));
     };
     let Some(entry) = entries.first() else {
         return Ok(None);
@@ -279,8 +312,12 @@ fn base_camp_from_world(world: &Properties) -> Result<Option<Properties>, CoreEr
 fn world_save_data(properties: &Properties) -> Result<&Properties, CoreError> {
     match properties.0.get(&PropertyKey::from(WORLD_SAVE_DATA)) {
         Some(Property::Struct(StructValue::Struct(props))) => Ok(props),
-        Some(_) => Err(CoreError::Parse(format!("{WORLD_SAVE_DATA} is not a struct property"))),
-        None => Err(CoreError::Parse(format!("blueprint missing {WORLD_SAVE_DATA}"))),
+        Some(_) => Err(CoreError::Parse(format!(
+            "{WORLD_SAVE_DATA} is not a struct property"
+        ))),
+        None => Err(CoreError::Parse(format!(
+            "blueprint missing {WORLD_SAVE_DATA}"
+        ))),
     }
 }
 
@@ -302,35 +339,64 @@ fn get_struct_array<'a>(
     match properties.0.get(&PropertyKey::from(key)) {
         None => Ok(&[]),
         Some(Property::Array(ValueVec::Struct(items))) => Ok(items),
-        Some(_) => Err(CoreError::Parse(format!("{key} is not a struct array property"))),
+        Some(_) => Err(CoreError::Parse(format!(
+            "{key} is not a struct array property"
+        ))),
     }
 }
 
 fn transform_property(transform: &PalTransform) -> Property {
     let mut fields = Properties::default();
-    fields.insert("Rotation", Property::Struct(StructValue::Quat(transform.rotation.clone())));
-    fields.insert("Translation", Property::Struct(StructValue::Vector(transform.translation.clone())));
-    fields.insert("Scale3D", Property::Struct(StructValue::Vector(transform.scale.clone())));
+    fields.insert(
+        "Rotation",
+        Property::Struct(StructValue::Quat(transform.rotation.clone())),
+    );
+    fields.insert(
+        "Translation",
+        Property::Struct(StructValue::Vector(transform.translation.clone())),
+    );
+    fields.insert(
+        "Scale3D",
+        Property::Struct(StructValue::Vector(transform.scale.clone())),
+    );
     Property::Struct(StructValue::Struct(fields))
 }
 
 fn transform_from_property(prop: &Property) -> Result<PalTransform, CoreError> {
     let Property::Struct(StructValue::Struct(fields)) = prop else {
-        return Err(CoreError::Parse("RelativeTransform is not a struct".to_string()));
+        return Err(CoreError::Parse(
+            "RelativeTransform is not a struct".to_string(),
+        ));
     };
     let rotation = match fields.0.get(&PropertyKey::from("Rotation")) {
         Some(Property::Struct(StructValue::Quat(value))) => value.clone(),
-        _ => return Err(CoreError::Parse("RelativeTransform missing Rotation".to_string())),
+        _ => {
+            return Err(CoreError::Parse(
+                "RelativeTransform missing Rotation".to_string(),
+            ))
+        }
     };
     let translation = match fields.0.get(&PropertyKey::from("Translation")) {
         Some(Property::Struct(StructValue::Vector(value))) => value.clone(),
-        _ => return Err(CoreError::Parse("RelativeTransform missing Translation".to_string())),
+        _ => {
+            return Err(CoreError::Parse(
+                "RelativeTransform missing Translation".to_string(),
+            ))
+        }
     };
     let scale = match fields.0.get(&PropertyKey::from("Scale3D")) {
         Some(Property::Struct(StructValue::Vector(value))) => value.clone(),
-        _ => return Err(CoreError::Parse("RelativeTransform missing Scale3D".to_string())),
+        _ => {
+            return Err(CoreError::Parse(
+                "RelativeTransform missing Scale3D".to_string(),
+            ))
+        }
     };
-    Ok(PalTransform { rotation, translation, scale })
+    Ok(PalTransform {
+        rotation,
+        translation,
+        scale,
+    })
 }
 
 // ---------------------------------------------------------------------------
@@ -389,7 +455,13 @@ fn prime(
         }
         _ => incoming,
     };
-    save.schemas.record(path.to_string(), PropertyTagPartial { id: None, data: merged.0 });
+    save.schemas.record(
+        path.to_string(),
+        PropertyTagPartial {
+            id: None,
+            data: merged.0,
+        },
+    );
     observed.insert(path.to_string(), merged.1);
 
     match prop {
@@ -452,7 +524,11 @@ fn prime_properties(
 ) -> Result<(), CoreError> {
     for (property_key, prop) in properties.0.iter() {
         let name = &property_key.1;
-        let prop_path = if path.is_empty() { name.clone() } else { format!("{path}.{name}") };
+        let prop_path = if path.is_empty() {
+            name.clone()
+        } else {
+            format!("{path}.{name}")
+        };
         prime(save, observed, &prop_path, name, prop)?;
     }
     Ok(())
@@ -567,34 +643,52 @@ fn tag_data_for(prop: &Property, path: &str, key: &str) -> Result<TaggedData, Co
         Property::MulticastDelegate(_) => {
             (Data::Other(PropertyType::MulticastDelegateProperty), false)
         }
-        Property::MulticastInlineDelegate(_) => {
-            (Data::Other(PropertyType::MulticastInlineDelegateProperty), false)
-        }
-        Property::MulticastSparseDelegate(_) => {
-            (Data::Other(PropertyType::MulticastSparseDelegateProperty), false)
-        }
+        Property::MulticastInlineDelegate(_) => (
+            Data::Other(PropertyType::MulticastInlineDelegateProperty),
+            false,
+        ),
+        Property::MulticastSparseDelegate(_) => (
+            Data::Other(PropertyType::MulticastSparseDelegateProperty),
+            false,
+        ),
         Property::Set(values) => {
             let (inner, weak) = value_vec_tag(values, path, key)?;
-            (Data::Set { key_type: Box::new(inner) }, weak)
+            (
+                Data::Set {
+                    key_type: Box::new(inner),
+                },
+                weak,
+            )
         }
         Property::Map(entries) => {
             let ((key_type, key_weak), (value_type, value_weak)) =
                 map_entry_tags(entries, path, key)?;
             (
-                Data::Map { key_type: Box::new(key_type), value_type: Box::new(value_type) },
+                Data::Map {
+                    key_type: Box::new(key_type),
+                    value_type: Box::new(value_type),
+                },
                 key_weak || value_weak,
             )
         }
-        Property::Struct(value) => {
-            (Data::Struct { struct_type: struct_type_of(value, key), id: FGuid::nil() }, false)
-        }
+        Property::Struct(value) => (
+            Data::Struct {
+                struct_type: struct_type_of(value, key),
+                id: FGuid::nil(),
+            },
+            false,
+        ),
         Property::Array(values) => {
             let (inner, weak) = value_vec_tag(values, path, key)?;
             (Data::Array(Box::new(inner)), weak)
         }
-        Property::Raw(_) => {
-            (Data::Struct { struct_type: StructType::Raw(key.to_string()), id: FGuid::nil() }, false)
-        }
+        Property::Raw(_) => (
+            Data::Struct {
+                struct_type: StructType::Raw(key.to_string()),
+                id: FGuid::nil(),
+            },
+            false,
+        ),
     })
 }
 
@@ -626,15 +720,28 @@ fn value_vec_tag(values: &ValueVec, path: &str, key: &str) -> Result<TaggedData,
         ValueVec::SoftObject(_) => (Data::Other(PropertyType::SoftObjectProperty), false),
         ValueVec::Name(_) => (Data::Other(PropertyType::NameProperty), false),
         ValueVec::Object(_) => (Data::Other(PropertyType::ObjectProperty), false),
-        ValueVec::Box(_) => (Data::Struct { struct_type: StructType::Box, id: FGuid::nil() }, false),
-        ValueVec::Box2D(_) => {
-            (Data::Struct { struct_type: StructType::Box2D, id: FGuid::nil() }, false)
-        }
+        ValueVec::Box(_) => (
+            Data::Struct {
+                struct_type: StructType::Box,
+                id: FGuid::nil(),
+            },
+            false,
+        ),
+        ValueVec::Box2D(_) => (
+            Data::Struct {
+                struct_type: StructType::Box2D,
+                id: FGuid::nil(),
+            },
+            false,
+        ),
         ValueVec::Struct(items) => {
             let mut observed: Option<TaggedData> = None;
             for item in items {
                 let incoming = (
-                    Data::Struct { struct_type: struct_type_of(item, key), id: FGuid::nil() },
+                    Data::Struct {
+                        struct_type: struct_type_of(item, key),
+                        id: FGuid::nil(),
+                    },
                     false,
                 );
                 observed = Some(match observed {
@@ -643,7 +750,10 @@ fn value_vec_tag(values: &ValueVec, path: &str, key: &str) -> Result<TaggedData,
                 });
             }
             observed.unwrap_or((
-                Data::Struct { struct_type: crate::ue::struct_type_for(key), id: FGuid::nil() },
+                Data::Struct {
+                    struct_type: crate::ue::struct_type_for(key),
+                    id: FGuid::nil(),
+                },
                 true,
             ))
         }
@@ -685,7 +795,10 @@ fn map_entry_tags(
             true,
         )
     };
-    Ok((key_tag.unwrap_or_else(fallback), value_tag.unwrap_or_else(fallback)))
+    Ok((
+        key_tag.unwrap_or_else(fallback),
+        value_tag.unwrap_or_else(fallback),
+    ))
 }
 
 /// The `StructType` this already-typed `StructValue` was (or, for a fresh

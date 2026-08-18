@@ -8,10 +8,7 @@
 // of the species name and must not be touched.
 const SPAWN_PREFIXES = ['boss_', 'predator_', 'summon_', 'raid_', 'gym_'];
 
-export function resolvePalModelKey(
-	rawKey: string,
-	has: (key: string) => boolean
-): string | null {
+export function resolvePalModelKey(rawKey: string, has: (key: string) => boolean): string | null {
 	const key = rawKey.toLowerCase();
 	if (!key) return null;
 	// First, so a model whose own name begins with a prefix is found as itself

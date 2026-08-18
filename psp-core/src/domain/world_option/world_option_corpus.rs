@@ -108,23 +108,36 @@ fn world_option_table_matches_corpus() {
         }
     }
 
-    let table: BTreeMap<&str, ()> = WORLD_OPTION_SETTINGS.iter().map(|(k, _)| (*k, ())).collect();
+    let table: BTreeMap<&str, ()> = WORLD_OPTION_SETTINGS
+        .iter()
+        .map(|(k, _)| (*k, ()))
+        .collect();
 
-    let missing: Vec<&String> = recorded.keys().filter(|k| !table.contains_key(k.as_str())).collect();
+    let missing: Vec<&String> = recorded
+        .keys()
+        .filter(|k| !table.contains_key(k.as_str()))
+        .collect();
     assert!(
         missing.is_empty(),
         "corpus has settings absent from WORLD_OPTION_SETTINGS (did Palworld add settings?): {missing:?}"
     );
 
-    let extra: Vec<&&str> = table.keys().filter(|k| !recorded.contains_key(**k)).collect();
-    assert!(extra.is_empty(), "table has settings the corpus never records: {extra:?}");
+    let extra: Vec<&&str> = table
+        .keys()
+        .filter(|k| !recorded.contains_key(**k))
+        .collect();
+    assert!(
+        extra.is_empty(),
+        "table has settings the corpus never records: {extra:?}"
+    );
 
     // Each table tag must equal what the real files record.
     for (key, kind) in WORLD_OPTION_SETTINGS {
         let expected = serde_json::to_string(&tag_for(*kind)).unwrap();
         let actual = &recorded[*key];
         assert_eq!(
-            &expected, actual,
+            &expected,
+            actual,
             "tag mismatch for {key} at {}",
             settings_schema_path(key)
         );

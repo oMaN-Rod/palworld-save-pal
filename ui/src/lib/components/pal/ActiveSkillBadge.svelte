@@ -12,7 +12,11 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
-	let { skill = 'Empty', pal, onSkillUpdate } = $props<{
+	let {
+		skill = 'Empty',
+		pal,
+		onSkillUpdate
+	} = $props<{
 		skill: string;
 		pal?: Pal;
 		onSkillUpdate?: (newSkill: string, oldSkill: string) => void;

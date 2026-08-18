@@ -248,7 +248,10 @@ async fn get_fast_travel_points_merges_l10n_and_preserves_class() {
     // A watchtower: same merge path, distinct class.
     let watchtower = &response["data"]["0C0AF9F34C0491BCAD80B1BF355B9A98"];
     assert_eq!(watchtower["class"], "BP_LevelObject_UnlockMapPoint_C");
-    assert_eq!(watchtower["localized_name"], "Deep Bamboo Thicket Watchtower");
+    assert_eq!(
+        watchtower["localized_name"],
+        "Deep Bamboo Thicket Watchtower"
+    );
 
     handle.shutdown().await;
 }

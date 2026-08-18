@@ -55,9 +55,10 @@ pub fn tag_for(kind: WoKind) -> PropertyTagPartial {
         WoKind::Str => PropertyTagDataPartial::Other(PropertyType::StrProperty),
         WoKind::Name => PropertyTagDataPartial::Other(PropertyType::NameProperty),
         WoKind::Enum(name) => PropertyTagDataPartial::Enum(name.to_string(), None),
-        WoKind::EnumArray => PropertyTagDataPartial::Array(Box::new(
-            PropertyTagDataPartial::Enum(String::new(), None),
-        )),
+        WoKind::EnumArray => PropertyTagDataPartial::Array(Box::new(PropertyTagDataPartial::Enum(
+            String::new(),
+            None,
+        ))),
         WoKind::NameArray => PropertyTagDataPartial::Array(Box::new(
             PropertyTagDataPartial::Other(PropertyType::NameProperty),
         )),
@@ -77,7 +78,10 @@ pub fn ensure_world_option_schemas(save: &mut crate::ue::Save) {
 }
 
 pub const WORLD_OPTION_SETTINGS: &[(&str, WoKind)] = &[
-    ("AdditionalDropItemNumWhenPlayerKillingInPvPMode", WoKind::Int),
+    (
+        "AdditionalDropItemNumWhenPlayerKillingInPvPMode",
+        WoKind::Int,
+    ),
     ("AdditionalDropItemWhenPlayerKillingInPvPMode", WoKind::Name),
     ("AdminPassword", WoKind::Str),
     ("AutoResetGuildTimeNoOnlinePlayers", WoKind::Float),
@@ -158,7 +162,10 @@ pub const WORLD_OPTION_SETTINGS: &[(&str, WoKind)] = &[
     ("WorkSpeedRate", WoKind::Float),
     ("autoSaveSpan", WoKind::Float),
     ("bActiveUNKO", WoKind::Bool),
-    ("bAdditionalDropItemWhenPlayerKillingInPvPMode", WoKind::Bool),
+    (
+        "bAdditionalDropItemWhenPlayerKillingInPvPMode",
+        WoKind::Bool,
+    ),
     ("bAllowClientMod", WoKind::Bool),
     ("bAllowEnhanceStat_Attack", WoKind::Bool),
     ("bAllowEnhanceStat_Health", WoKind::Bool),
@@ -266,18 +273,22 @@ pub struct WorldOptionPatch {
 }
 
 fn kind_error(key: &str, expected: &str) -> CoreError {
-    CoreError::Parse(format!(
-        "WorldOption setting '{key}' expects {expected}"
-    ))
+    CoreError::Parse(format!("WorldOption setting '{key}' expects {expected}"))
 }
 
 /// Decodes wire JSON into a `Property` per the table. Rejects anything the table
 /// disagrees with, so a malformed client patch can never write a wrong-typed
 /// property into a real save.
-fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<crate::ue::Property, CoreError> {
+fn decode_value(
+    key: &str,
+    kind: WoKind,
+    value: &serde_json::Value,
+) -> Result<crate::ue::Property, CoreError> {
     Ok(match kind {
         WoKind::Bool => crate::props::bool_property(
-            value.as_bool().ok_or_else(|| kind_error(key, "a boolean"))?,
+            value
+                .as_bool()
+                .ok_or_else(|| kind_error(key, "a boolean"))?,
         ),
         WoKind::Int => crate::props::int_property(
             value
@@ -288,18 +299,21 @@ fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<cr
         WoKind::Float => crate::props::float_property(
             value.as_f64().ok_or_else(|| kind_error(key, "a number"))? as f32,
         ),
-        WoKind::Str => crate::props::str_property(
-            value.as_str().ok_or_else(|| kind_error(key, "a string"))?,
-        ),
-        WoKind::Name => crate::props::name_property(
-            value.as_str().ok_or_else(|| kind_error(key, "a string"))?,
-        ),
+        WoKind::Str => {
+            crate::props::str_property(value.as_str().ok_or_else(|| kind_error(key, "a string"))?)
+        }
+        WoKind::Name => {
+            crate::props::name_property(value.as_str().ok_or_else(|| kind_error(key, "a string"))?)
+        }
         WoKind::Enum(enum_name) => {
             let text = value.as_str().ok_or_else(|| kind_error(key, "a string"))?;
             // Fully-qualified only: a bare "Custom" would write a value the game
             // cannot read back.
             if !text.starts_with(&format!("{enum_name}::")) {
-                return Err(kind_error(key, &format!("a fully-qualified {enum_name}:: variant")));
+                return Err(kind_error(
+                    key,
+                    &format!("a fully-qualified {enum_name}:: variant"),
+                ));
             }
             crate::props::enum_property(text)
         }
@@ -327,7 +341,10 @@ fn decode_string_array(key: &str, value: &serde_json::Value) -> Result<Vec<Strin
 ///
 /// Adding a key the source file omitted is safe because `ensure_world_option_schemas`
 /// primed every schema at parse.
-pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Result<bool, CoreError> {
+pub fn apply_patch(
+    save: &mut crate::ue::Save,
+    patch: &[WorldOptionPatch],
+) -> Result<bool, CoreError> {
     if patch.is_empty() {
         return Ok(false);
     }
@@ -338,7 +355,10 @@ pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Re
         let kind = kind_for(&entry.key).ok_or_else(|| {
             CoreError::Parse(format!("Unknown WorldOption setting '{}'", entry.key))
         })?;
-        decoded.push((entry.key.as_str(), decode_value(&entry.key, kind, &entry.value)?));
+        decoded.push((
+            entry.key.as_str(),
+            decode_value(&entry.key, kind, &entry.value)?,
+        ));
     }
 
     let properties = settings_properties_mut(save)
@@ -387,7 +407,10 @@ mod tests {
         assert_eq!(WORLD_OPTION_SETTINGS.len(), 119);
 
         let count = |pred: fn(&WoKind) -> bool| {
-            WORLD_OPTION_SETTINGS.iter().filter(|(_, k)| pred(k)).count()
+            WORLD_OPTION_SETTINGS
+                .iter()
+                .filter(|(_, k)| pred(k))
+                .count()
         };
         assert_eq!(count(|k| matches!(k, WoKind::Bool)), 42, "Bool count");
         assert_eq!(count(|k| matches!(k, WoKind::Float)), 42, "Float count");
@@ -395,8 +418,16 @@ mod tests {
         assert_eq!(count(|k| matches!(k, WoKind::Str)), 8, "Str count");
         assert_eq!(count(|k| matches!(k, WoKind::Enum(_))), 4, "Enum count");
         assert_eq!(count(|k| matches!(k, WoKind::Name)), 1, "Name count");
-        assert_eq!(count(|k| matches!(k, WoKind::NameArray)), 1, "NameArray count");
-        assert_eq!(count(|k| matches!(k, WoKind::EnumArray)), 1, "EnumArray count");
+        assert_eq!(
+            count(|k| matches!(k, WoKind::NameArray)),
+            1,
+            "NameArray count"
+        );
+        assert_eq!(
+            count(|k| matches!(k, WoKind::EnumArray)),
+            1,
+            "EnumArray count"
+        );
     }
 
     #[test]
@@ -461,8 +492,14 @@ mod tests {
     fn kind_for_resolves_known_keys_and_rejects_unknown() {
         assert!(matches!(kind_for("ExpRate"), Some(WoKind::Float)));
         assert!(matches!(kind_for("bIsPvP"), Some(WoKind::Bool)));
-        assert!(matches!(kind_for("DenyTechnologyList"), Some(WoKind::NameArray)));
-        assert!(matches!(kind_for("CrossplayPlatforms"), Some(WoKind::EnumArray)));
+        assert!(matches!(
+            kind_for("DenyTechnologyList"),
+            Some(WoKind::NameArray)
+        ));
+        assert!(matches!(
+            kind_for("CrossplayPlatforms"),
+            Some(WoKind::EnumArray)
+        ));
         assert!(kind_for("NoSuchSetting").is_none());
     }
 
@@ -472,7 +509,10 @@ mod tests {
             settings.insert(key, value);
         }
         let mut owd = crate::ue::Properties::default();
-        owd.insert(SETTINGS, crate::ue::Property::Struct(crate::ue::StructValue::Struct(settings)));
+        owd.insert(
+            SETTINGS,
+            crate::ue::Property::Struct(crate::ue::StructValue::Struct(settings)),
+        );
         let mut root = crate::ue::Properties::default();
         root.insert("Version", crate::props::int_property(101));
         root.insert(
@@ -528,7 +568,10 @@ mod tests {
 
         let entries = read_settings(&save);
 
-        assert_eq!(entries[0].value, serde_json::json!("EPalOptionWorldDifficulty::Custom"));
+        assert_eq!(
+            entries[0].value,
+            serde_json::json!("EPalOptionWorldDifficulty::Custom")
+        );
     }
 
     #[test]
@@ -551,7 +594,10 @@ mod tests {
 
         assert_eq!(
             entries[0].value,
-            serde_json::json!(["EPalAllowConnectPlatform::Steam", "EPalAllowConnectPlatform::Xbox"])
+            serde_json::json!([
+                "EPalAllowConnectPlatform::Steam",
+                "EPalAllowConnectPlatform::Xbox"
+            ])
         );
         assert_eq!(entries[1].value, serde_json::json!(["AIcore"]));
     }
@@ -582,7 +628,10 @@ mod tests {
     }
 
     fn patch(key: &str, value: serde_json::Value) -> WorldOptionPatch {
-        WorldOptionPatch { key: key.to_string(), value }
+        WorldOptionPatch {
+            key: key.to_string(),
+            value,
+        }
     }
 
     #[test]
@@ -606,7 +655,11 @@ mod tests {
     fn apply_patch_adds_an_absent_key() {
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
 
-        let dirty = apply_patch(&mut save, &[patch("bEnableVoiceChat", serde_json::json!(true))]).unwrap();
+        let dirty = apply_patch(
+            &mut save,
+            &[patch("bEnableVoiceChat", serde_json::json!(true))],
+        )
+        .unwrap();
 
         assert!(dirty);
         let entries = read_settings(&save);
@@ -631,14 +684,16 @@ mod tests {
     #[test]
     fn apply_patch_rejects_unknown_key() {
         let mut save = settings_save(vec![]);
-        let error = apply_patch(&mut save, &[patch("NoSuchSetting", serde_json::json!(1))]).unwrap_err();
+        let error =
+            apply_patch(&mut save, &[patch("NoSuchSetting", serde_json::json!(1))]).unwrap_err();
         assert!(format!("{error}").contains("NoSuchSetting"));
     }
 
     #[test]
     fn apply_patch_rejects_value_of_wrong_kind() {
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
-        let error = apply_patch(&mut save, &[patch("ExpRate", serde_json::json!("nope"))]).unwrap_err();
+        let error =
+            apply_patch(&mut save, &[patch("ExpRate", serde_json::json!("nope"))]).unwrap_err();
         assert!(format!("{error}").contains("ExpRate"));
     }
 
@@ -646,7 +701,11 @@ mod tests {
     fn apply_patch_rejects_bare_enum_variant() {
         let mut save = settings_save(vec![]);
         // Enum values must be fully qualified in both directions.
-        let error = apply_patch(&mut save, &[patch("Difficulty", serde_json::json!("Custom"))]).unwrap_err();
+        let error = apply_patch(
+            &mut save,
+            &[patch("Difficulty", serde_json::json!("Custom"))],
+        )
+        .unwrap_err();
         assert!(format!("{error}").contains("Difficulty"));
     }
 
@@ -655,7 +714,10 @@ mod tests {
         let mut save = settings_save(vec![]);
         let dirty = apply_patch(
             &mut save,
-            &[patch("Difficulty", serde_json::json!("EPalOptionWorldDifficulty::Custom"))],
+            &[patch(
+                "Difficulty",
+                serde_json::json!("EPalOptionWorldDifficulty::Custom"),
+            )],
         )
         .unwrap();
         assert!(dirty);
@@ -671,15 +733,27 @@ mod tests {
         apply_patch(
             &mut save,
             &[
-                patch("CrossplayPlatforms", serde_json::json!(["EPalAllowConnectPlatform::Steam"])),
-                patch("DenyTechnologyList", serde_json::json!(["AIcore", "Accessory_AirDash1"])),
+                patch(
+                    "CrossplayPlatforms",
+                    serde_json::json!(["EPalAllowConnectPlatform::Steam"]),
+                ),
+                patch(
+                    "DenyTechnologyList",
+                    serde_json::json!(["AIcore", "Accessory_AirDash1"]),
+                ),
             ],
         )
         .unwrap();
 
         let entries = read_settings(&save);
-        assert_eq!(entries[0].value, serde_json::json!(["EPalAllowConnectPlatform::Steam"]));
-        assert_eq!(entries[1].value, serde_json::json!(["AIcore", "Accessory_AirDash1"]));
+        assert_eq!(
+            entries[0].value,
+            serde_json::json!(["EPalAllowConnectPlatform::Steam"])
+        );
+        assert_eq!(
+            entries[1].value,
+            serde_json::json!(["AIcore", "Accessory_AirDash1"])
+        );
     }
 
     #[test]
@@ -697,7 +771,11 @@ mod tests {
         assert!(format!("{error}").contains("NoSuchSetting"));
         // Verify the valid entry was NOT applied because we decode-then-mutate
         let entries = read_settings(&save);
-        assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
+        assert_eq!(
+            entries[0].value,
+            serde_json::json!(1.0),
+            "ExpRate must not be mutated when patch is rejected"
+        );
 
         // Test with INVALID entry first, then VALID entry
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
@@ -712,7 +790,11 @@ mod tests {
         assert!(format!("{error}").contains("NoSuchSetting"));
         // Verify the valid entry was NOT applied even though it comes second
         let entries = read_settings(&save);
-        assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
+        assert_eq!(
+            entries[0].value,
+            serde_json::json!(1.0),
+            "ExpRate must not be mutated when patch is rejected"
+        );
     }
 
     #[test]
@@ -724,7 +806,10 @@ mod tests {
         // A no-op edit on an enum must not trigger a rewrite of the user's file.
         assert!(!apply_patch(
             &mut save,
-            &[patch("Difficulty", serde_json::json!("EPalOptionWorldDifficulty::Custom"))]
+            &[patch(
+                "Difficulty",
+                serde_json::json!("EPalOptionWorldDifficulty::Custom")
+            )]
         )
         .unwrap());
     }

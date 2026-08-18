@@ -47,44 +47,62 @@ fn row_from(row: &crate::DbRow) -> Result<BlueprintRow, DbError> {
 }
 
 pub async fn insert(db: &dyn crate::DbDriver, blueprint: NewBlueprint) -> Result<String, DbError> {
-    let id = blueprint.id.unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
+    let id = blueprint
+        .id
+        .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
     db.execute(
         "INSERT INTO blueprints
          (id, name, source_world, source_base, created_at, schema_version,
           structure_count, manifest, footprint_radius, payload, preview)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         &[
-            id.clone().into(), blueprint.name.into(), blueprint.source_world.into(),
-            blueprint.source_base.into(), blueprint.created_at.into(),
-            blueprint.schema_version.into(), blueprint.structure_count.into(),
-            blueprint.manifest.into(), blueprint.footprint_radius.into(),
-            blueprint.payload.into(), blueprint.preview.into(),
+            id.clone().into(),
+            blueprint.name.into(),
+            blueprint.source_world.into(),
+            blueprint.source_base.into(),
+            blueprint.created_at.into(),
+            blueprint.schema_version.into(),
+            blueprint.structure_count.into(),
+            blueprint.manifest.into(),
+            blueprint.footprint_radius.into(),
+            blueprint.payload.into(),
+            blueprint.preview.into(),
         ],
-    ).await?;
+    )
+    .await?;
     Ok(id)
 }
 
 pub async fn list(db: &dyn crate::DbDriver) -> Result<Vec<BlueprintRow>, DbError> {
-    let rows = db.query(
-        "SELECT id, name, source_world, source_base, created_at, schema_version,
+    let rows = db
+        .query(
+            "SELECT id, name, source_world, source_base, created_at, schema_version,
                 structure_count, manifest, footprint_radius
          FROM blueprints
          ORDER BY created_at DESC, rowid DESC",
-        &[],
-    ).await?;
+            &[],
+        )
+        .await?;
     rows.iter().map(row_from).collect()
 }
 
 pub async fn get(db: &dyn crate::DbDriver, id: &str) -> Result<Option<StoredBlueprint>, DbError> {
-    let rows = db.query("SELECT * FROM blueprints WHERE id = ?", &[id.into()]).await?;
+    let rows = db
+        .query("SELECT * FROM blueprints WHERE id = ?", &[id.into()])
+        .await?;
     match rows.first() {
-        Some(row) => Ok(Some(StoredBlueprint { row: row_from(row)?, payload: row.get_blob("payload")? })),
+        Some(row) => Ok(Some(StoredBlueprint {
+            row: row_from(row)?,
+            payload: row.get_blob("payload")?,
+        })),
         None => Ok(None),
     }
 }
 
 pub async fn delete(db: &dyn crate::DbDriver, id: &str) -> Result<bool, DbError> {
-    let n = db.execute("DELETE FROM blueprints WHERE id = ?", &[id.into()]).await?;
+    let n = db
+        .execute("DELETE FROM blueprints WHERE id = ?", &[id.into()])
+        .await?;
     Ok(n > 0)
 }
 
@@ -136,9 +154,7 @@ mod tests {
     #[tokio::test]
     async fn get_returns_the_payload_bytes_verbatim() {
         let db = test_driver().await;
-        let id = insert(&db, sample("Farm", &[9, 8, 7, 6, 5]))
-            .await
-            .unwrap();
+        let id = insert(&db, sample("Farm", &[9, 8, 7, 6, 5])).await.unwrap();
 
         let stored = get(&db, &id).await.unwrap().expect("row present");
         assert_eq!(stored.row.id, id);
@@ -156,9 +172,18 @@ mod tests {
         let db = test_driver().await;
         let id = insert(&db, sample("Farm", &[1, 2, 3])).await.unwrap();
 
-        assert!(delete(&db, &id).await.unwrap(), "deleting an existing row reports success");
+        assert!(
+            delete(&db, &id).await.unwrap(),
+            "deleting an existing row reports success"
+        );
         assert!(get(&db, &id).await.unwrap().is_none(), "the row is gone");
-        assert!(list(&db).await.unwrap().is_empty(), "list no longer shows it");
-        assert!(!delete(&db, "no-such-id").await.unwrap(), "deleting a missing row reports false");
+        assert!(
+            list(&db).await.unwrap().is_empty(),
+            "list no longer shows it"
+        );
+        assert!(
+            !delete(&db, "no-such-id").await.unwrap(),
+            "deleting a missing row reports false"
+        );
     }
 }

@@ -21,7 +21,9 @@ const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 pub(crate) fn save_parameter(entry: &crate::ue::MapEntry) -> Option<&crate::ue::Properties> {
     let value_properties = props::struct_properties(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))) = raw_data
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(
+        crate::ue::PalStruct::CharacterData(character_data),
+    )) = raw_data
     else {
         return None;
     };
@@ -50,7 +52,10 @@ fn guild_tail_entry(entry: &crate::ue::MapEntry) -> Option<(Uuid, &PalGuildGroup
     }
     let guild_id = props::as_uuid(&entry.key)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
-    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::GroupData(group_data))) = raw_data else {
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::GroupData(
+        group_data,
+    ))) = raw_data
+    else {
         return None;
     };
     let guild = guild_tail::as_guild(group_data)?;
@@ -72,7 +77,9 @@ pub(crate) fn build_player_guild_map(group_entries: &[crate::ue::MapEntry]) -> H
 
 /// Counts every non-player character entry against its `OwnerPlayerUId`,
 /// including the nil UUID (wild/unowned pals get their own bucket).
-pub(crate) fn build_pal_owner_counts(character_entries: &[crate::ue::MapEntry]) -> HashMap<Uuid, i64> {
+pub(crate) fn build_pal_owner_counts(
+    character_entries: &[crate::ue::MapEntry],
+) -> HashMap<Uuid, i64> {
     let mut owner_counts = HashMap::new();
     for entry in character_entries {
         let Some(parameters) = save_parameter(entry) else {
@@ -171,14 +178,18 @@ fn parse_player_save_and_timestamp(
 /// Worker-container ids for every base belonging to `guild_id`. A base whose
 /// `WorkerDirector` blob fails to decode contributes no container id rather
 /// than aborting the count.
-fn guild_worker_container_ids(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
+fn guild_worker_container_ids(
+    base_camp_entries: &[crate::ue::MapEntry],
+    guild_id: Uuid,
+) -> Vec<Uuid> {
     let mut container_ids = Vec::new();
     for base_entry in base_camp_entries {
         let Some(value_properties) = props::struct_properties(&base_entry.value) else {
             continue;
         };
-        let Some(crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(camp)))) =
-            props::get(value_properties, &["RawData"])
+        let Some(crate::ue::Property::Struct(crate::ue::StructValue::Game(
+            crate::ue::PalStruct::BaseCamp(camp),
+        ))) = props::get(value_properties, &["RawData"])
         else {
             continue;
         };
@@ -204,9 +215,9 @@ fn base_count_for_guild(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uui
             props::struct_properties(&base_entry.value)
                 .and_then(|value_properties| props::get(value_properties, &["RawData"]))
                 .and_then(|raw_data| match raw_data {
-                    crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(camp))) => {
-                        Some(props::fguid_to_uuid(&camp.group_id_belong_to))
-                    }
+                    crate::ue::Property::Struct(crate::ue::StructValue::Game(
+                        crate::ue::PalStruct::BaseCamp(camp),
+                    )) => Some(props::fguid_to_uuid(&camp.group_id_belong_to)),
                     _ => None,
                 })
                 == Some(guild_id)
@@ -416,7 +427,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
 
         MapEntry {
@@ -470,7 +483,9 @@ mod tests {
         };
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(group_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::GroupData(
+                group_data,
+            ))),
         );
         MapEntry {
             key: guid_property(guild_id),
@@ -545,7 +560,9 @@ mod tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(camp)))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::BaseCamp(Box::new(
+                camp,
+            )))),
         );
         value_properties.insert(
             "WorkerDirector",
@@ -666,8 +683,8 @@ mod tests {
 #[cfg(test)]
 mod extraction_tests {
     use super::*;
-    use std::sync::{Arc, Mutex};
     use crate::ue::{MapEntry, Properties, Property, StructValue};
+    use std::sync::{Arc, Mutex};
 
     const PLAYER_ONE: &str = "11111111-1111-1111-1111-111111111111";
 
@@ -696,7 +713,9 @@ mod extraction_tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
         let mut key_properties = Properties::default();
         key_properties.insert(
@@ -847,7 +866,9 @@ mod extraction_tests {
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
-            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(character_data))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
         );
         let mut key_properties = Properties::default();
         key_properties.insert("PlayerUId", guid_property(player_uid));

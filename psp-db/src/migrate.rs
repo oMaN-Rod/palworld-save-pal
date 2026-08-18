@@ -8,13 +8,41 @@ pub struct Migration {
 }
 
 pub const MIGRATIONS: &[Migration] = &[
-    Migration { version: 1, name: "settings", sql: include_str!("../migrations/0001_settings.sql") },
-    Migration { version: 2, name: "presets", sql: include_str!("../migrations/0002_presets.sql") },
-    Migration { version: 3, name: "ups", sql: include_str!("../migrations/0003_ups.sql") },
-    Migration { version: 4, name: "servers", sql: include_str!("../migrations/0004_servers.sql") },
-    Migration { version: 5, name: "meta", sql: include_str!("../migrations/0005_meta.sql") },
-    Migration { version: 6, name: "blueprints", sql: include_str!("../migrations/0006_blueprints.sql") },
-    Migration { version: 7, name: "ups_awakened_imported", sql: include_str!("../migrations/0007_ups_awakened_imported.sql") },
+    Migration {
+        version: 1,
+        name: "settings",
+        sql: include_str!("../migrations/0001_settings.sql"),
+    },
+    Migration {
+        version: 2,
+        name: "presets",
+        sql: include_str!("../migrations/0002_presets.sql"),
+    },
+    Migration {
+        version: 3,
+        name: "ups",
+        sql: include_str!("../migrations/0003_ups.sql"),
+    },
+    Migration {
+        version: 4,
+        name: "servers",
+        sql: include_str!("../migrations/0004_servers.sql"),
+    },
+    Migration {
+        version: 5,
+        name: "meta",
+        sql: include_str!("../migrations/0005_meta.sql"),
+    },
+    Migration {
+        version: 6,
+        name: "blueprints",
+        sql: include_str!("../migrations/0006_blueprints.sql"),
+    },
+    Migration {
+        version: 7,
+        name: "ups_awakened_imported",
+        sql: include_str!("../migrations/0007_ups_awakened_imported.sql"),
+    },
 ];
 
 const CREATE_TRACKER: &str =
@@ -85,9 +113,15 @@ mod tests {
 
     #[tokio::test]
     async fn applies_all_then_is_idempotent() {
-        let driver = MockDriver { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]) };
+        let driver = MockDriver {
+            applied: Mutex::new(vec![]),
+            executes: Mutex::new(vec![]),
+        };
         run_migrations(&driver).await.unwrap();
-        assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7]);
+        assert_eq!(
+            driver.applied.lock().unwrap().clone(),
+            vec![1, 2, 3, 4, 5, 6, 7]
+        );
         // Each migration SQL executed exactly once, plus the tracker + one insert per migration.
         let migration_execs = driver
             .executes

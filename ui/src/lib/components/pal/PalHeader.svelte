@@ -138,9 +138,7 @@
 </script>
 
 {#if pal}
-	<div
-		class="border-l-surface-600 bg-surface-800 flex flex-row rounded-none border-l-2 p-4"
-	>
+	<div class="border-l-surface-600 bg-surface-800 flex flex-row rounded-none border-l-2 p-4">
 		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
 			{#if appState.settings.cheat_mode}
 				<Input
@@ -185,11 +183,7 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.leftClickIcon}
-										alt="Left Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">-5</span>
 							</div>
@@ -198,28 +192,16 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.rightClickIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">-10</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.ctrlIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.middleClickIcon}
-										alt="Middle Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">Level 1</span>
 							</div>
@@ -260,11 +242,7 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.leftClickIcon}
-										alt="Left Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">+5</span>
 							</div>
@@ -273,28 +251,16 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.rightClickIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">+10</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.ctrlIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.middleClickIcon}
-										alt="Middle Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">{m.level({ level: max_level })}</span>
 							</div>

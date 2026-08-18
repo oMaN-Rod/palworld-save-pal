@@ -15,7 +15,12 @@ import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior 
 
 import { assetLoader } from '$lib/utils/assetLoader';
 import { DENDRO_COLORS, DENDRO_CONFIG, resolveDendroColors, type DendroColors } from './constants';
-import { computeLayout, type LayoutMode, type PositionedLink, type PositionedNode } from './layouts';
+import {
+	computeLayout,
+	type LayoutMode,
+	type PositionedLink,
+	type PositionedNode
+} from './layouts';
 import type { NodeHoverCallback, NodeSelectCallback, TreeNode } from './types';
 
 export class DendrogramEngine {

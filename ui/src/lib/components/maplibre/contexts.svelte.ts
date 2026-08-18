@@ -1,11 +1,11 @@
-import { getContext, setContext } from 'svelte';
 import type {
+	AddLayerObject,
+	IControl,
 	Map as MaplibreMap,
 	Marker as MaplibreMarker,
-	SourceSpecification,
-	AddLayerObject,
-	IControl
+	SourceSpecification
 } from 'maplibre-gl';
+import { getContext, setContext } from 'svelte';
 import type { Theme } from './types.js';
 
 // --- Context Keys ---
@@ -113,7 +113,10 @@ export class MapContext {
 	 */
 	addControl(control: IControl, position?: string): void {
 		if (!this.map) return;
-		this.map.addControl(control, position as 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right');
+		this.map.addControl(
+			control,
+			position as 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+		);
 		this.userControls.add(control);
 	}
 

@@ -1,8 +1,8 @@
-import { error } from '@sveltejs/kit';
-import { descriptorFor } from '$lib/utils/wikiDescriptors';
 import { WIKI_CATEGORIES, type WikiCategory } from '$lib/utils/wikiCategories';
+import { descriptorFor } from '$lib/utils/wikiDescriptors';
 import { loadEntitySeo } from '$lib/utils/wikiL10n';
 import { isDisabledRecord, stripKeyPrefix, toSlug } from '$lib/utils/wikiSlug';
+import { error } from '@sveltejs/kit';
 
 export const ssr = true;
 export const prerender = true;

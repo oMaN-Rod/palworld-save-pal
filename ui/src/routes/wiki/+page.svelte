@@ -33,12 +33,24 @@
 	let query = $state('');
 
 	const categoryMeta: Record<WikiCategory, { icon: typeof Egg; description: string }> = {
-		pals: { icon: Egg, description: 'Stats, elements, skills, and work suitabilities for all Pals.' },
-		items: { icon: Package, description: 'All items including weapons, armor, consumables, and materials.' },
+		pals: {
+			icon: Egg,
+			description: 'Stats, elements, skills, and work suitabilities for all Pals.'
+		},
+		items: {
+			icon: Package,
+			description: 'All items including weapons, armor, consumables, and materials.'
+		},
 		buildings: { icon: Building, description: 'Building recipes, materials, and stats.' },
-		'active-skills': { icon: Swords, description: 'Combat skills with element types, power, and cooldowns.' },
+		'active-skills': {
+			icon: Swords,
+			description: 'Combat skills with element types, power, and cooldowns.'
+		},
 		'passive-skills': { icon: Shield, description: 'Passive abilities and their stat effects.' },
-		technologies: { icon: FlaskConical, description: 'Technology tree, unlock requirements, and costs.' },
+		technologies: {
+			icon: FlaskConical,
+			description: 'Technology tree, unlock requirements, and costs.'
+		},
 		elements: { icon: Flame, description: 'Element types and their properties.' },
 		'work-suitability': { icon: Hammer, description: 'Work types and which Pals excel at each.' }
 	};
@@ -80,11 +92,13 @@
 				key,
 				name: element.localized_name || key
 			})),
-			'work-suitability': Object.entries(workSuitabilityData.workSuitability).map(([key, suit]) => ({
-				category: 'work-suitability',
-				key,
-				name: suit.localized_name || key
-			}))
+			'work-suitability': Object.entries(workSuitabilityData.workSuitability).map(
+				([key, suit]) => ({
+					category: 'work-suitability',
+					key,
+					name: suit.localized_name || key
+				})
+			)
 		};
 		return map;
 	});
@@ -138,13 +152,7 @@
 									| undefined}
 								{@const icon = record ? (descriptor.icon?.(entry.key, record) ?? null) : null}
 								{@const meta = record ? (descriptor.cardMeta?.(entry.key, record) ?? null) : null}
-								<WikiCard
-										href={link.href}
-										name={entry.name}
-										{icon}
-										{meta}
-										subtext={entry.key}
-									/>
+								<WikiCard href={link.href} name={entry.name} {icon} {meta} subtext={entry.key} />
 							{/each}
 						</div>
 					</div>
