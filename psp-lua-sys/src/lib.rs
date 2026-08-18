@@ -9,3 +9,6 @@
 //! rather than by C++ exceptions; see the findings document for why.
 
 pub mod ffi;
+
+#[cfg(target_arch = "wasm32")]
+mod wasm_stubs;
