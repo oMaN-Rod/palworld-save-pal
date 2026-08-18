@@ -645,7 +645,7 @@
 						</div>
 					{/if}
 				</div>
-				<div class="w-64 shrink-0">
+				<div class="{sidePanelCollapsed ? 'w-10' : 'w-64'} shrink-0 transition-all duration-200">
 					<div
 						class="border-surface-700/20 bg-surface-900/90 h-full overflow-hidden rounded-md border shadow-xl backdrop-blur-sm"
 					>
