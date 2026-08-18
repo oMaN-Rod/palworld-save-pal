@@ -445,16 +445,54 @@ function Ensure-BunInstall([bool]$force) {
 }
 
 function Ensure-Wasm([bool]$rebuild) {
+    # Existence of psp_bg.wasm alone is NOT a safe skip condition: psp.js is the
+    # committed placeholder while psp_bg.wasm is gitignored, so any git
+    # checkout/pull/stash restores the throwing stub over the real JS entry
+    # while the stale .wasm survives. Detect that mismatch, plus Rust sources
+    # newer than the artifact, and rebuild in both cases. (Mirrors ensure_wasm
+    # in easyrun.sh.)
     $wasmFile = Join-Path $WasmOut "psp_bg.wasm"
-    if ((Test-Path $wasmFile) -and -not $rebuild) {
-        Log-Info "WASM already built (ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
+    $entryJs  = Join-Path $WasmOut "psp.js"
+    $stubMarker = "psp wasm not built" # text baked into the committed psp.js placeholder
+
+    $reason = $null
+    if ($rebuild) {
+        $reason = "-RebuildWasm"
+    } elseif (-not (Test-Path $wasmFile)) {
+        $reason = "psp_bg.wasm missing"
+    } elseif ((Test-Path $entryJs) -and (Select-String -Path $entryJs -Pattern $stubMarker -Quiet)) {
+        $reason = "psp.js is the committed placeholder (git restored it over the build output)"
+    } else {
+        # Staleness: newest workspace Rust source vs the artifact. mtime-based,
+        # so a git pull that touches .rs files triggers one redundant rebuild —
+        # cheap and safe next to serving a stale wasm.
+        $wasmMtime = (Get-Item $wasmFile).LastWriteTime
+        $crateDirs = @("psp-web", "psp-app", "psp-core", "psp-db") |
+            ForEach-Object { Join-Path $RepoRoot $_ } |
+            Where-Object { Test-Path $_ }
+        $newer = Get-ChildItem -Path $crateDirs -Recurse -File -Include *.rs, Cargo.toml -ErrorAction SilentlyContinue |
+            Where-Object { $_.LastWriteTime -gt $wasmMtime } |
+            Select-Object -First 1
+        $rootToml = Join-Path $RepoRoot "Cargo.toml"
+        if (-not $newer -and (Test-Path $rootToml) -and ((Get-Item $rootToml).LastWriteTime -gt $wasmMtime)) {
+            $newer = Get-Item $rootToml
+        }
+        if ($newer) { $reason = "newer Rust sources (e.g. $($newer.FullName))" }
+    }
+
+    if (-not $reason) {
+        Log-Info "WASM up to date (ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
         return
     }
+
     $cargo = Resolve-Tool "cargo"
     $wasmPack = Resolve-Tool "wasm-pack"
     if (-not $cargo)    { Die "cargo not found — run .\easyrun.ps1 -Check first." }
     if (-not $wasmPack) { Die "wasm-pack not found — run .\easyrun.ps1 -InstallWasm first." }
-    Log-Info "Building psp-web (wasm-pack)…"
+    Log-Info "Building psp-web (wasm-pack): $reason"
+    # Clear the out-dir so no committed placeholder — or stray output from a
+    # misnamed run (e.g. psp_web* from ui/package.json's build:wasm without
+    # --out-name) — shadows the real output.
     if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
     Push-Location $PspWebDir
     try {

@@ -494,17 +494,54 @@ ensure_bun_install() {
 
 ensure_wasm() {
     # $1 = rebuild (1) to force wasm-pack even if the artifact exists.
+    #
+    # Existence of psp_bg.wasm alone is NOT a safe skip condition: psp.js is the
+    # committed placeholder while psp_bg.wasm is gitignored, so any git
+    # checkout/pull/stash restores the throwing stub over the real JS entry
+    # while the stale .wasm survives. Detect that mismatch, plus Rust sources
+    # newer than the artifact, and rebuild in both cases.
     local rebuild="${1:-0}"
     local wasm_file="$WASM_OUT/psp_bg.wasm"
-    if [[ -f "$wasm_file" ]] && (( ! rebuild )); then
-        log_info "WASM already built (ui/src/lib/wasm/psp/psp_bg.wasm) (--rebuild-wasm to redo)."
+    local entry_js="$WASM_OUT/psp.js"
+    local stub_marker='psp wasm not built' # text baked into the committed psp.js placeholder
+
+    local reason=""
+    if (( rebuild )); then
+        reason="--rebuild-wasm"
+    elif [[ ! -f "$wasm_file" ]]; then
+        reason="psp_bg.wasm missing"
+    elif [[ -f "$entry_js" ]] && grep -q "$stub_marker" "$entry_js" 2>/dev/null; then
+        reason="psp.js is the committed placeholder (git restored it over the build output)"
+    else
+        # Staleness: newest workspace Rust source vs the artifact. mtime-based,
+        # so a git pull that touches .rs files triggers one redundant rebuild —
+        # cheap and safe next to serving a stale wasm.
+        # head -n1 (not find -quit) keeps this portable to BSD find/macOS.
+        local stale=""
+        stale="$(find "$REPO_ROOT/psp-web" "$REPO_ROOT/psp-app" "$REPO_ROOT/psp-core" \
+            "$REPO_ROOT/psp-db" \
+            \( -name '*.rs' -o -name 'Cargo.toml' \) -newer "$wasm_file" -print 2>/dev/null \
+            | head -n1 || true)"
+        if [[ -z "$stale" && -f "$REPO_ROOT/Cargo.toml" && "$REPO_ROOT/Cargo.toml" -nt "$wasm_file" ]]; then
+            stale="$REPO_ROOT/Cargo.toml"
+        fi
+        if [[ -n "$stale" ]]; then
+            reason="newer Rust sources (e.g. ${stale#"$REPO_ROOT"/})"
+        fi
+    fi
+
+    if [[ -z "$reason" ]]; then
+        log_info "WASM up to date (ui/src/lib/wasm/psp/psp_bg.wasm) (--rebuild-wasm to redo)."
         return
     fi
+
     local cargo wasm_pack
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found — run ./easyrun.sh --check first."
     wasm_pack="$(resolve_tool wasm-pack || true)"; [[ -n "$wasm_pack" ]] || die "wasm-pack not found — run ./easyrun.sh --install-wasm first."
-    log_info "Building psp-web (wasm-pack)…"
-    # Clear the out-dir so no committed placeholder shadows the real output.
+    log_info "Building psp-web (wasm-pack): $reason"
+    # Clear the out-dir so no committed placeholder — or stray output from a
+    # misnamed run (e.g. psp_web* from ui/package.json's build:wasm without
+    # --out-name) — shadows the real output.
     rm -rf "$WASM_OUT"
     # --out-name psp keeps output aligned with the committed placeholder, the
     # worker import ($lib/wasm/psp), and the .gitignore (psp_bg.wasm).
