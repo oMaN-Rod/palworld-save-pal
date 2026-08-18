@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Input, Tooltip, TooltipButton } from '$components/ui';
+	import { Button, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import Search from '@lucide/svelte/icons/search';
 	import ArrowDown01 from '@lucide/svelte/icons/arrow-down-0-1';
@@ -174,6 +174,12 @@
 	}
 
 	// Helper functions for styling
+	function tabPill(active: boolean): string {
+		return active
+			? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
+			: 'text-surface-300 hover:bg-surface-800 border border-transparent';
+	}
+
 	function getElementButtonClass(element: string) {
 		return cn('btn', upsState.filters.elementTypes.includes(element) ? 'bg-secondary-500/25' : '');
 	}
@@ -517,20 +523,16 @@
 	});
 </script>
 
-<div class="ups-container animate-fade-in flex h-full flex-col">
+<div class="animate-fade-in flex h-full flex-col">
 	<!-- Header -->
-	<div
-		class="border-surface-300 dark:border-surface-700 flex items-center justify-between border-b p-4"
-	>
-		<div class="flex items-center gap-3">
-			<div class="bg-primary-500 flex h-8 w-8 items-center justify-center rounded-lg">
-				<Database class="text-primary-contrast-500 h-5 w-5" />
-			</div>
+	<div class="flex items-center justify-between gap-3 px-4 pt-4">
+		<div class="flex items-center gap-2">
+			<Database size={20} class="text-primary-400" />
 			<div>
-				<h1 class="text-xl font-semibold">
+				<h1 class="heading-gradient text-xl font-bold">
 					{m.universal_pal_storage({ pal: c.pal })}
 				</h1>
-				<p class="text-surface-600 dark:text-surface-400 text-sm">
+				<p class="text-surface-400 text-sm">
 					{upsState.pagination.totalCount}
 					{m.pals_in_storage({ pals: m.pal({ count: upsState.pagination.totalCount }) })}
 				</p>
@@ -562,77 +564,58 @@
 			{/if}
 
 			{#if upsState.pagination.totalCount > 0 || appState.saveFile}
-				<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
+				<div class="bg-surface-700 h-6 w-px"></div>
 			{/if}
 
 			<!-- Panel Toggles -->
-			<TooltipButton
-				onclick={() => upsState.toggleCollectionsPanel()}
-				class={cn(
-					'rounded-md p-2',
-					upsState.showCollectionsPanel
-						? 'bg-primary-500 text-primary-contrast-500'
-						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-				)}
-				popupLabel={m.toggle_entity({ entity: m.collection({ count: 2 }) })}
-			>
-				<Folder class="h-4 w-4" />
-			</TooltipButton>
+			<div class="bg-surface-950/50 border-surface-700/40 flex gap-1 rounded-sm border p-0.5">
+				<TooltipButton
+					onclick={() => upsState.toggleCollectionsPanel()}
+					class="rounded-sm p-2 transition-all {tabPill(upsState.showCollectionsPanel)}"
+					popupLabel={m.toggle_entity({ entity: m.collection({ count: 2 }) })}
+				>
+					<Folder class="h-4 w-4" />
+				</TooltipButton>
 
-			<TooltipButton
-				onclick={() => upsState.toggleTagsPanel()}
-				class={cn(
-					'rounded-md p-2',
-					upsState.showTagsPanel
-						? 'bg-primary-500 text-primary-contrast-500'
-						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-				)}
-				popupLabel={m.toggle_entity({ entity: c.tags })}
-			>
-				<Tag class="h-4 w-4" />
-			</TooltipButton>
+				<TooltipButton
+					onclick={() => upsState.toggleTagsPanel()}
+					class="rounded-sm p-2 transition-all {tabPill(upsState.showTagsPanel)}"
+					popupLabel={m.toggle_entity({ entity: c.tags })}
+				>
+					<Tag class="h-4 w-4" />
+				</TooltipButton>
 
-			<TooltipButton
-				onclick={() => upsState.toggleStatsPanel()}
-				class={cn(
-					'rounded-md p-2',
-					upsState.showStatsPanel
-						? 'bg-primary-500 text-primary-contrast-500'
-						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-				)}
-				popupLabel={m.toggle_entity({ entity: m.statistics() })}
-			>
-				<BarChart3 class="h-4 w-4" />
-			</TooltipButton>
-
-			<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
+				<TooltipButton
+					onclick={() => upsState.toggleStatsPanel()}
+					class="rounded-sm p-2 transition-all {tabPill(upsState.showStatsPanel)}"
+					popupLabel={m.toggle_entity({ entity: m.statistics() })}
+				>
+					<BarChart3 class="h-4 w-4" />
+				</TooltipButton>
+			</div>
 
 			<!-- View Mode Toggle -->
-			<TooltipButton
-				onclick={() => upsState.setViewMode('grid')}
-				class={cn(
-					'rounded-md p-2',
-					upsState.viewMode === 'grid'
-						? 'bg-primary-500 text-primary-contrast-500'
-						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-				)}
-				popupLabel={m.grid_view()}
+			<div
+				class="bg-surface-950/50 border-surface-700/40 flex gap-1 rounded-sm border p-0.5"
+				role="group"
+				aria-label={m.grid_view()}
 			>
-				<Grid3x3 class="h-4 w-4" />
-			</TooltipButton>
+				<TooltipButton
+					onclick={() => upsState.setViewMode('grid')}
+					class="rounded-sm p-2 transition-all {tabPill(upsState.viewMode === 'grid')}"
+					popupLabel={m.grid_view()}
+				>
+					<Grid3x3 class="h-4 w-4" />
+				</TooltipButton>
 
-			<TooltipButton
-				onclick={() => upsState.setViewMode('list')}
-				class={cn(
-					'rounded-md p-2',
-					upsState.viewMode === 'list'
-						? 'bg-primary-500 text-primary-contrast-500'
-						: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-				)}
-				popupLabel={m.list_view()}
-			>
-				<List class="h-4 w-4" />
-			</TooltipButton>
+				<TooltipButton
+					onclick={() => upsState.setViewMode('list')}
+					class="rounded-sm p-2 transition-all {tabPill(upsState.viewMode === 'list')}"
+					popupLabel={m.list_view()}
+				>
+					<List class="h-4 w-4" />
+				</TooltipButton>
+			</div>
 		</div>
 	</div>
 
@@ -641,9 +624,9 @@
 		<!-- Side Panels -->
 		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
 			<div
-				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 animate-slide-down flex w-full max-w-80 flex-col border-r sm:max-w-72 md:max-w-80"
+				class="animate-slide-down flex w-full flex-col gap-2 p-4 sm:w-72 sm:flex-none md:w-80"
 			>
-				<div class="mx-2">
+				<div>
 					<Input
 						bind:value={searchInput}
 						oninput={handleSearchInput}
@@ -652,29 +635,33 @@
 				</div>
 				<!-- Filter Controls -->
 				<Accordion base="w-full" collapsible>
-					<Accordion.Item value="filters">
+					<Accordion.Item
+						value="filters"
+						base="rounded-sm bg-surface-900"
+						controlHover="hover:bg-secondary-500/25"
+					>
 						{#snippet control()}
 							<div class="flex items-center gap-2">
 								<Filter class="h-4 w-4" />
-								<span>{m.filter_and_sort()}</span>
+								<span class="font-bold">{m.filter_and_sort()}</span>
 								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
 									<span
-										class="bg-primary-500 text-primary-contrast-500 rounded-full px-2 py-0.5 text-xs"
+										class="bg-secondary-500/25 text-secondary-300 rounded-full px-2 py-0.5 text-xs"
 										>{m.active()}</span
 									>
 								{/if}
 							</div>
 						{/snippet}
 						{#snippet panel()}
-							<div class="felx flex-col gap-4 p-4">
+							<div class="flex flex-col gap-4">
 								<!-- Left Column: Elements & Types Filter -->
 								<div class="space-y-4">
-									<span class="block text-sm font-medium">{m.element_and_type()}</span>
+									<legend class="font-bold">{m.element_and_type()}</legend>
 									<div class="space-y-3">
 										<!-- Element Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
+												<span class="text-surface-400 text-xs font-medium">
 													{m.element_types()}
 												</span>
 												{#if upsState.filters.elementTypes.length > 0}
@@ -710,7 +697,7 @@
 										<!-- Pal Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
+												<span class="text-surface-400 text-xs font-medium">
 													{m.pal_types()}
 												</span>
 												{#if upsState.filters.palTypes.length > 0}
@@ -728,28 +715,44 @@
 													onclick={() => handlePalTypeFilter('alpha')}
 													buttonClass={getPalTypeButtonClass('alpha')}
 												>
-													<img src={staticIcons.alphaIcon} alt="Alpha" />
+													<img
+														src={staticIcons.alphaIcon}
+														alt="Alpha"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.lucky_pals({ pals: c.pals })}
 													onclick={() => handlePalTypeFilter('lucky')}
 													buttonClass={getPalTypeButtonClass('lucky')}
 												>
-													<img src={staticIcons.luckyIcon} alt="Lucky" />
+													<img
+														src={staticIcons.luckyIcon}
+														alt="Lucky"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.awakened()}
 													onclick={() => handlePalTypeFilter('awakened')}
 													buttonClass={getPalTypeButtonClass('awakened')}
 												>
-													<img src={staticIcons.awakeningIcon} alt="Awakened" />
+													<img
+														src={staticIcons.awakeningIcon}
+														alt="Awakened"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.imported()}
 													onclick={() => handlePalTypeFilter('imported')}
 													buttonClass={getPalTypeButtonClass('imported')}
 												>
-													<img src={staticIcons.importedIcon} alt="Imported" />
+													<img
+														src={staticIcons.importedIcon}
+														alt="Imported"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.human({ count: 2 })}
@@ -763,21 +766,33 @@
 													buttonClass={getPalTypeButtonClass('predator')}
 													onclick={() => handlePalTypeFilter('predator')}
 												>
-													<img src={staticIcons.predatorIcon} alt="Predator" />
+													<img
+														src={staticIcons.predatorIcon}
+														alt="Predator"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.oil_rig_pals({ pals: c.pals })}
 													buttonClass={getPalTypeButtonClass('oilrig')}
 													onclick={() => handlePalTypeFilter('oilrig')}
 												>
-													<img src={staticIcons.oilrigIcon} alt="Oil Rig" />
+													<img
+														src={staticIcons.oilrigIcon}
+														alt="Oil Rig"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 												<TooltipButton
 													popupLabel={m.summoned_pals({ pals: c.pals })}
 													buttonClass={getPalTypeButtonClass('summon')}
 													onclick={() => handlePalTypeFilter('summon')}
 												>
-													<img src={staticIcons.altarIcon} alt="Summoned" />
+													<img
+														src={staticIcons.altarIcon}
+														alt="Summoned"
+														class="pal-element-badge"
+													/>
 												</TooltipButton>
 											</div>
 										</div>
@@ -786,16 +801,16 @@
 
 								<!-- Right Column: Sort By -->
 								<div>
-									<span class="mb-2 block text-sm font-medium">{m.sort_by()}</span>
+									<legend class="mb-2 font-bold">{m.sort_by()}</legend>
 									<div class="flex flex-wrap gap-2">
 										{#each [{ key: 'created_at', label: m.created() }, { key: 'updated_at', label: m.modified() }, { key: 'character_id', label: m.character() }, { key: 'nickname', label: m.name() }, { key: 'level', label: m.level() }, { key: 'transfer_count', label: m.transfer( { count: 2 } ) }, { key: 'clone_count', label: m.clones() }] as sortOption}
 											{@const IconComponent = getSortIcon(sortOption.key as UPSSortBy)}
 											<button
 												class={cn(
-													'flex items-center gap-1 rounded-md border px-3 py-1 text-sm',
+													'btn btn-sm',
 													upsState.filters.sortBy === sortOption.key
-														? 'bg-primary-500 border-primary-500 text-primary-contrast-500'
-														: 'dark:bg-surface-800 border-surface-300 dark:border-surface-700 bg-surface-900'
+														? 'bg-secondary-500/25'
+														: ''
 												)}
 												onclick={() => handleSort(sortOption.key as UPSSortBy)}
 											>
@@ -808,7 +823,7 @@
 
 								<!-- Clear Filters (spans both columns) -->
 								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
-									<div class="border-surface-300 dark:border-surface-700 col-span-2 border-t pt-2">
+									<div class="border-surface-700/60 border-t pt-2">
 										<button
 											onclick={clearFilters}
 											class="text-primary-400 hover:text-primary-300 flex items-center gap-1 text-sm"
@@ -839,7 +854,7 @@
 			<!-- Selection Controls -->
 			{#if upsState.pals.length > 0}
 				<div
-					class="bg-surface-100 dark:bg-surface-900 grid h-12 grid-cols-[auto_1fr_auto] items-center px-4 text-sm"
+					class="bg-surface-900/60 grid h-12 grid-cols-[auto_1fr_auto] items-center px-4 text-sm"
 				>
 					<div class="flex w-full items-center gap-4">
 						<span>
@@ -851,8 +866,10 @@
 										: upsState.pagination.totalCount
 							})}
 						</span>
-						<nav class="flex p-0">
+						<nav class="btn-group bg-surface-950/50 items-center rounded-sm p-0.5">
 							<TooltipButton
+								variant="ghost"
+								size="icon"
 								popupLabel={m.select_all_page_pals({
 									pals: c.pals,
 									count: upsState.pals.length
@@ -863,6 +880,8 @@
 							</TooltipButton>
 							{#if hasActiveFilters()}
 								<TooltipButton
+									variant="ghost"
+									size="icon"
 									popupLabel={m.select_all_filtered_pals({
 										pals: c.pals,
 										count: upsState.pagination.totalCount
@@ -873,6 +892,8 @@
 								</TooltipButton>
 							{:else}
 								<TooltipButton
+									variant="ghost"
+									size="icon"
 									popupLabel={m.select_all_ups_pals({
 										pals: c.pals,
 										count: upsState.pagination.totalCount
@@ -883,7 +904,12 @@
 								</TooltipButton>
 							{/if}
 							{#if upsState.hasSelectedPals}
-								<TooltipButton popupLabel={m.clear_selection()} onclick={clearSelection}>
+								<TooltipButton
+									variant="ghost"
+									size="icon"
+									popupLabel={m.clear_selection()}
+									onclick={clearSelection}
+								>
 									<X class="h-4 w-4" />
 								</TooltipButton>
 							{/if}
@@ -893,30 +919,36 @@
 						{#if upsState.hasSelectedPals}
 							<TooltipButton
 								onclick={handleBulkEditTags}
-								variant="primary"
+								variant="ghost"
 								size="icon"
+								class="hover:bg-secondary-500/25 text-secondary-300"
 								popupLabel={m.edit_entity({ entity: c.tags })}
 							>
 								<Tag class="h-4 w-4" />
 							</TooltipButton>
 							<TooltipButton
 								onclick={handleBulkAddToCollection}
-								variant="secondary"
+								variant="ghost"
 								size="icon"
+								class="hover:bg-secondary-500/25 text-secondary-300"
 								popupLabel={m.add_to_collection()}
 							>
 								<Folder class="h-4 w-4" />
 							</TooltipButton>
 							<TooltipButton
 								onclick={handleBulkExport}
-								class="bg-tertiary-500 text-tertiary-contrast-500 hover:bg-tertiary-600 rounded-md p-2"
+								variant="ghost"
+								size="icon"
+								class="hover:bg-tertiary-500/25 text-tertiary-300"
 								popupLabel={m.export_selected()}
 							>
 								<Upload class="h-4 w-4" />
 							</TooltipButton>
 							<TooltipButton
 								onclick={deleteSelected}
-								class="bg-error-500 text-error-contrast-500 hover:bg-error-600 rounded-md p-2"
+								variant="ghost"
+								size="icon"
+								class="hover:bg-error-500/25 text-error-400"
 								popupLabel={m.delete_entity({ entity: m.selected() })}
 							>
 								<Trash class="h-4 w-4" />
@@ -925,7 +957,7 @@
 						{#if upsState.pagination.totalCount > 0}
 							<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
 								<button
-									class="text-error-500 hover:bg-error-500/20 hover:text-error-600 h-8 w-8 rounded-md p-2 transition-colors"
+									class="text-error-500 hover:bg-error-500/20 hover:text-error-400 h-8 w-8 rounded-md p-2 transition-colors"
 									onclick={handleNukeUps}
 									disabled={upsState.loading}
 								>
@@ -934,7 +966,7 @@
 							</TooltipButton>
 						{/if}
 					</div>
-					<div class="text-surface-600 dark:text-surface-400">
+					<div class="text-surface-400">
 						{m.page_of_pages({ current: currentPage, total: totalPages })}
 					</div>
 				</div>
@@ -943,16 +975,19 @@
 			<!-- Pals Content -->
 			<div class="flex-1 overflow-auto">
 				{#if upsState.loading}
-					<div class="flex h-32 items-center justify-center">
-						<div class="border-primary-500 h-8 w-8 animate-spin rounded-full border-b-2"></div>
+					<div class="flex h-full flex-col items-center justify-center gap-4">
+						<Spinner size="size-16" />
+						<p class="text-surface-400">
+							{m.loading_entity({ entity: m.universal_pal_storage({ pal: c.pal }) })}
+						</p>
 					</div>
 				{:else if upsState.pals.length === 0}
 					<div class="flex h-64 flex-col items-center justify-center text-center">
-						<User class="text-surface-400 mb-4 h-16 w-16" />
-						<h3 class="text-surface-600 dark:text-surface-400 mb-2 text-lg font-medium">
+						<User class="text-surface-500 mb-4 h-16 w-16" />
+						<h3 class="text-surface-300 mb-2 text-lg font-medium">
 							{m.no_pals_in_storage({ pals: c.pals })}
 						</h3>
-						<p class="text-surface-500 mb-4 max-w-md">
+						<p class="text-surface-400 mb-4 max-w-md">
 							{m.create_pals_or_import({ pals: c.pals })}
 						</p>
 						<div class="flex gap-3">
@@ -980,9 +1015,9 @@
 
 			<!-- Pagination -->
 			{#if totalPages > 1}
-				<div class="border-surface-300 dark:border-surface-700 border-t p-4">
+				<div class="border-surface-700/40 border-t p-4">
 					<div class="flex items-center justify-between">
-						<div class="text-surface-600 dark:text-surface-400 text-sm">
+						<div class="text-surface-400 text-sm">
 							{m.showing_pals({
 								start: (currentPage - 1) * upsState.pagination.limit + 1,
 								end: Math.min(
@@ -997,14 +1032,14 @@
 							<button
 								onclick={() => handlePageChange(1)}
 								disabled={currentPage === 1}
-								class="hover:bg-surface-200 dark:hover:bg-surface-800 rounded p-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								<ArrowDown01 class="h-4 w-4 rotate-90" />
 							</button>
 							<button
 								onclick={() => handlePageChange(currentPage - 1)}
 								disabled={currentPage === 1}
-								class="hover:bg-surface-200 dark:hover:bg-surface-800 rounded p-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								<ArrowDownAZ class="h-4 w-4 rotate-90" />
 							</button>
@@ -1012,12 +1047,9 @@
 							{#each visiblePages as page}
 								<button
 									onclick={() => handlePageChange(page)}
-									class={cn(
-										'rounded px-3 py-1 text-sm',
-										page === currentPage
-											? 'bg-primary-500 text-primary-contrast-500'
-											: 'hover:bg-surface-200 dark:hover:bg-surface-800'
-									)}
+									class="h-8 min-w-8 rounded-full px-2 text-sm transition-colors {page === currentPage
+										? 'bg-primary-500 text-white'
+										: 'text-surface-300 hover:bg-surface-800'}"
 								>
 									{page}
 								</button>
@@ -1026,14 +1058,14 @@
 							<button
 								onclick={() => handlePageChange(currentPage + 1)}
 								disabled={currentPage === totalPages}
-								class="hover:bg-surface-200 dark:hover:bg-surface-800 rounded p-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								<ArrowDownZA class="h-4 w-4 -rotate-90" />
 							</button>
 							<button
 								onclick={() => handlePageChange(totalPages)}
 								disabled={currentPage === totalPages}
-								class="hover:bg-surface-200 dark:hover:bg-surface-800 rounded p-2 disabled:cursor-not-allowed disabled:opacity-50"
+								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
 							>
 								<ArrowDown10 class="h-4 w-4 -rotate-90" />
 							</button>
@@ -1046,11 +1078,8 @@
 </div>
 
 <style>
-	.ups-container {
-		background: var(--color-surface-50);
-	}
-
-	:global(.dark) .ups-container {
-		background: var(--color-surface-950);
+	.pal-element-badge {
+		width: 24px;
+		height: 24px;
 	}
 </style>

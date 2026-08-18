@@ -85,15 +85,16 @@
 	}
 </script>
 
-<div class="flex h-full flex-col transition-all duration-300 ease-in-out">
+<div class="bg-surface-900/60 flex h-full min-h-0 flex-col overflow-hidden rounded-sm">
 	<!-- Header -->
-	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
-		<div class="mb-3 flex items-center justify-between">
-			<h2 class="text-lg font-semibold">{c.collections}</h2>
+	<div class="border-surface-700/40 mb-2 border-b px-4 pt-4 pb-2">
+		<div class="flex items-center justify-between">
+			<h2 class="text-surface-100 text-sm font-bold tracking-wide uppercase">{c.collections}</h2>
 			<TooltipButton
 				onclick={createCollection}
-				variant="secondary"
+				variant="ghost"
 				size="icon"
+				class="hover:bg-secondary-500/25 text-secondary-300"
 				popupLabel={m.create_new_collection()}
 			>
 				<Plus class="h-4 w-4" />
@@ -103,27 +104,25 @@
 		<!-- All Pals Option -->
 		<button
 			onclick={() => selectCollection(null)}
-			class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-2 rounded-md p-2 text-left {upsState
+			class="hover:bg-secondary-500/25 flex w-full items-center gap-2 rounded-sm p-2 text-left transition-colors {upsState
 				.filters.collectionId === undefined
-				? 'bg-primary-500 text-white'
+				? 'bg-secondary-500/25'
 				: ''}"
 		>
 			<Folder class="h-4 w-4" />
 			<span class="flex-1">{m.all_entity({ entity: c.pals })}</span>
-			<span class="text-surface-200 text-xs">
+			<span class="text-muted text-xs">
 				{upsState.stats?.total_pals || 0}
 			</span>
 		</button>
 	</div>
 
 	<!-- Collections List -->
-	<div class="flex-1 space-y-1 overflow-auto p-4">
+	<div class="flex-1 space-y-3 overflow-auto px-4 pb-4">
 		<!-- Favorites -->
 		{#if favoriteCollections.length > 0}
-			<div class="mb-4">
-				<h3
-					class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium tracking-wide uppercase"
-				>
+			<div>
+				<h3 class="text-muted mb-2 text-xs font-bold tracking-wider uppercase">
 					{m.favorites()}
 				</h3>
 				<div class="space-y-1">
@@ -131,10 +130,10 @@
 						<div class="group relative">
 							<button
 								onclick={() => selectCollection(collection)}
-								class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-2 rounded-md p-2 text-left {isCollectionSelected(
+								class="hover:bg-secondary-500/25 flex w-full items-center gap-2 rounded-sm p-2 text-left transition-colors {isCollectionSelected(
 									collection.id
 								)
-									? 'bg-primary-500 text-white'
+									? 'bg-secondary-500/25'
 									: ''}"
 							>
 								<div
@@ -142,7 +141,7 @@
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
-								<span class="text-surface-200 text-xs">
+								<span class="text-muted text-xs">
 									{collection.pal_count}
 								</span>
 							</button>
@@ -156,7 +155,7 @@
 										e.stopPropagation();
 										toggleFavorite(collection);
 									}}
-									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+									class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 									popupLabel={m.remove_from_favorites()}
 									size="sm"
 								>
@@ -167,7 +166,7 @@
 										e.stopPropagation();
 										editCollection(collection);
 									}}
-									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+									class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -182,11 +181,9 @@
 
 		<!-- Regular Collections -->
 		{#if regularCollections.length > 0}
-			<div class="mb-4">
+			<div>
 				{#if favoriteCollections.length > 0}
-					<h3
-						class="text-surface-600 dark:text-surface-400 mb-2 text-sm font-medium tracking-wide uppercase"
-					>
+					<h3 class="text-muted mb-2 text-xs font-bold tracking-wider uppercase">
 						{c.collections}
 					</h3>
 				{/if}
@@ -195,10 +192,10 @@
 						<div class="group relative">
 							<button
 								onclick={() => selectCollection(collection)}
-								class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-2 rounded-md p-2 text-left {isCollectionSelected(
+								class="hover:bg-secondary-500/25 flex w-full items-center gap-2 rounded-sm p-2 text-left transition-colors {isCollectionSelected(
 									collection.id
 								)
-									? 'bg-primary-500 text-white'
+									? 'bg-secondary-500/25'
 									: ''}"
 							>
 								<div
@@ -206,7 +203,7 @@
 									style="background-color: {collection.color || '#6366f1'}"
 								></div>
 								<span class="flex-1 truncate">{collection.name}</span>
-								<span class="text-surface-200 text-xs">
+								<span class="text-muted text-xs">
 									{collection.pal_count}
 								</span>
 							</button>
@@ -220,7 +217,7 @@
 										e.stopPropagation();
 										toggleFavorite(collection);
 									}}
-									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+									class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 									popupLabel={m.add_to_favorites()}
 									size="sm"
 								>
@@ -231,7 +228,7 @@
 										e.stopPropagation();
 										editCollection(collection);
 									}}
-									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+									class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -242,7 +239,7 @@
 										e.stopPropagation();
 										toggleArchived(collection);
 									}}
-									class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+									class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 									popupLabel={m.archive_entity({ entity: c.collection })}
 									size="sm"
 								>
@@ -269,8 +266,8 @@
 		<!-- Empty State -->
 		{#if visibleCollections.length === 0}
 			<div class="py-8 text-center">
-				<Folder class="text-surface-400 mx-auto mb-3 h-12 w-12" />
-				<p class="text-surface-500 text-sm">
+				<Folder class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<p class="text-surface-400 text-sm">
 					{showArchived
 						? m.no_archived_entity({ entity: c.collections })
 						: m.no_entity_yet({ entity: c.collections })}
@@ -278,7 +275,7 @@
 				{#if !showArchived}
 					<button
 						onclick={createCollection}
-						class="text-primary-600 hover:text-primary-700 mt-2 text-sm"
+						class="text-primary-400 hover:text-primary-300 mt-2 text-sm"
 					>
 						{m.create_first_entity({ entity: c.collection })}
 					</button>
@@ -288,9 +285,9 @@
 	</div>
 
 	<!-- Footer -->
-	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
-		<label class="flex items-center gap-2 text-sm">
-			<input type="checkbox" bind:checked={showArchived} class="border-surface-300 rounded" />
+	<div class="border-surface-700/40 border-t px-4 py-3">
+		<label class="text-surface-300 flex items-center gap-2 text-sm">
+			<input type="checkbox" bind:checked={showArchived} class="accent-primary-500" />
 			{m.show_archived()}
 		</label>
 	</div>
