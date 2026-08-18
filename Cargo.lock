@@ -3579,6 +3579,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "psp-lua-sys"
+version = "1.3.3"
+dependencies = [
+ "cc",
+ "wasm-bindgen-test",
+]
+
+[[package]]
 name = "psp-server"
 version = "1.3.3"
 dependencies = [
