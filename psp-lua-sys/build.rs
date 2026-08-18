@@ -31,7 +31,7 @@ fn main() {
     println!("cargo:rerun-if-env-changed=WASI_SDK");
 
     let target = std::env::var("TARGET").expect("cargo sets TARGET");
-    if target.starts_with("wasm32") {
+    if target == "wasm32-unknown-unknown" {
         build_wasm(&source_dir);
     } else {
         build_native(&source_dir);
@@ -58,6 +58,9 @@ fn build_native(source_dir: &Path) {
 ///                               #error on wasi without this.
 ///   `--target=wasm32-wasip1`    the C objects are wasip1 while Rust is
 ///                               wasm32-unknown-unknown; same ABI, links fine.
+///
+/// `-O2` is fixed, not profile-dependent, so a from-source build stays
+/// byte-comparable to the committed `-O2` prebuilt archive.
 ///
 /// Lua is compiled as plain C, never as C++, and never with `-fwasm-exceptions`:
 /// that combination pulls in `libc++abi` and `libunwind`, whose prebuilt
@@ -95,6 +98,10 @@ fn build_wasm(source_dir: &Path) {
     }
 
     let archive = out_dir.join("liblua.a");
+    // `ar rcs` inserts/replaces members, it never truncates; without removing
+    // the archive first, a unit dropped from LUA_SOURCES would leave its
+    // stale .o linked in from a previous incremental build.
+    let _ = std::fs::remove_file(&archive);
     let ar = ar_path(&sdk);
     let status = Command::new(&ar)
         .arg("rcs")
@@ -108,9 +115,6 @@ fn build_wasm(source_dir: &Path) {
     emit_wasm_link_flags(&sysroot.join("lib/wasm32-wasip1"));
 }
 
-/// `wasi-sdk` ships its tools without a `.exe` suffix in its own scripts, but
-/// on Windows the binaries on disk are `clang.exe`; `Command` does not apply
-/// PATHEXT resolution to an explicit path, so the suffix has to be added here.
 fn clang_path(sdk: &Path) -> PathBuf {
     tool_path(sdk, "clang")
 }
@@ -119,6 +123,10 @@ fn ar_path(sdk: &Path) -> PathBuf {
     tool_path(sdk, "ar")
 }
 
+/// `wasi-sdk` ships its tools without a `.exe` suffix in its own scripts, but
+/// on Windows the binaries on disk are `clang.exe`/`ar.exe`; `Command` does not
+/// apply PATHEXT resolution to an explicit path, so the suffix has to be added
+/// here.
 fn tool_path(sdk: &Path, name: &str) -> PathBuf {
     let base = sdk.join("bin").join(name);
     if cfg!(windows) {
@@ -130,7 +138,9 @@ fn tool_path(sdk: &Path, name: &str) -> PathBuf {
 
 /// Links the committed archive, so a normal checkout needs no wasi-sdk.
 fn link_prebuilt() {
-    let prebuilt = PathBuf::from("prebuilt/wasm32-unknown-unknown");
+    let manifest_dir =
+        PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").expect("cargo sets CARGO_MANIFEST_DIR"));
+    let prebuilt = manifest_dir.join("prebuilt/wasm32-unknown-unknown");
     assert!(
         prebuilt.join("liblua.a").exists(),
         "no prebuilt Lua archive at {}, and WASI_SDK is not set.\n\
@@ -138,20 +148,21 @@ fn link_prebuilt() {
          with scripts/build-wasm-lua.sh",
         prebuilt.display()
     );
-    println!(
-        "cargo:rustc-link-search=native={}",
-        prebuilt.canonicalize().expect("prebuilt dir").display()
-    );
+    println!("cargo:rerun-if-changed=prebuilt");
+    println!("cargo:rustc-link-search=native={}", prebuilt.display());
     // The prebuilt archive still needs wasi-libc's static pieces at link time.
     // They are vendored alongside it by scripts/build-wasm-lua.sh.
-    println!("cargo:rustc-link-lib=static=lua");
-    println!("cargo:rustc-link-lib=static=setjmp");
-    println!("cargo:rustc-link-lib=static=c");
-    println!("cargo:rustc-link-lib=static=wasi-emulated-signal");
+    emit_link_libs();
 }
 
 fn emit_wasm_link_flags(lib_dir: &Path) {
     println!("cargo:rustc-link-search=native={}", lib_dir.display());
+    emit_link_libs();
+}
+
+/// The static libraries every wasm link needs, shared by both the prebuilt
+/// and from-source paths so a newly added library only has to be listed once.
+fn emit_link_libs() {
     println!("cargo:rustc-link-lib=static=lua");
     println!("cargo:rustc-link-lib=static=setjmp");
     println!("cargo:rustc-link-lib=static=c");

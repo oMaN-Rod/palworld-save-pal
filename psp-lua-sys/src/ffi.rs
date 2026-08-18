@@ -38,9 +38,13 @@ pub const LUA_TTABLE: c_int = 5;
 pub const LUA_TFUNCTION: c_int = 6;
 
 pub type lua_CFunction = unsafe extern "C" fn(*mut lua_State) -> c_int;
-pub type lua_Hook = extern "C" fn(*mut lua_State, *mut c_void);
-pub type lua_Alloc =
-    extern "C" fn(ud: *mut c_void, ptr: *mut c_void, osize: usize, nsize: usize) -> *mut c_void;
+pub type lua_Hook = unsafe extern "C" fn(*mut lua_State, *mut c_void);
+pub type lua_Alloc = unsafe extern "C" fn(
+    ud: *mut c_void,
+    ptr: *mut c_void,
+    osize: usize,
+    nsize: usize,
+) -> *mut c_void;
 
 extern "C" {
     pub fn luaL_newstate() -> *mut lua_State;

@@ -11,5 +11,5 @@ links = "lua"
 [build-dependencies]
 cc = "1"
 
-[dev-dependencies]
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
 wasm-bindgen-test = "0.3"

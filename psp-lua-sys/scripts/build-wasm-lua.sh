@@ -29,6 +29,10 @@ for unit in $units; do
     -c "$src/$unit.c" -o "$tmp/$unit.o"
 done
 
+# ar rcs inserts/replaces members, it never truncates; without removing the
+# archive first, a unit dropped from the unit list would leave its stale .o
+# linked in from a previous run.
+rm -f "$out/liblua.a"
 "$WASI_SDK/bin/ar" rcs "$out/liblua.a" "$tmp"/*.o
 
 # The static wasi-libc pieces the archive needs at link time, vendored so a

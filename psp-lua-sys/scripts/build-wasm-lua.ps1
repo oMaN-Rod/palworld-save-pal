@@ -31,6 +31,10 @@ try {
     }
 
     $objects = Get-ChildItem "$tmp\*.o" | ForEach-Object { $_.FullName }
+    # ar rcs inserts/replaces members, it never truncates; without removing the
+    # archive first, a unit dropped from the unit list would leave its stale
+    # .o linked in from a previous run.
+    Remove-Item "$out\liblua.a" -Force -ErrorAction SilentlyContinue
     & "$env:WASI_SDK\bin\ar.exe" rcs "$out\liblua.a" @objects
     if ($LASTEXITCODE -ne 0) { throw "ar failed" }
 

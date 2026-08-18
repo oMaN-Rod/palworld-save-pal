@@ -1,9 +1,14 @@
 //! Symbols wasi-libc expects that we deliberately do not provide for real.
 //!
 //! Two groups:
-//!  1. libc functions wasi-libc leaves undefined on this target. `clock` is
-//!     genuinely referenced (Lua's `ltablib` uses it to randomise a sort pivot);
-//!     it returns 0 so scripts cannot read the host clock.
+//!  1. libc functions wasi-libc leaves undefined on this target. Of these,
+//!     only `clock` is actually referenced by the compiled sources today —
+//!     `ltablib.c` calls it to randomise a sort pivot, and it returns 0 here
+//!     so scripts cannot read the host clock. `system`, `tmpnam` and
+//!     `tmpfile` are not called by anything in this build (they belong to
+//!     `loslib.c`/`liolib.c`, which are excluded); they are kept as
+//!     insurance because wasi-sdk's `libc.a` does not define them either, so
+//!     anything that started referencing them would otherwise fail to link.
 //!  2. wasi-libc's own import declarations, defined locally so the linked module
 //!     imports nothing at all. Most fail with ENOSYS (52); three are special:
 //!     - the environ pair must succeed — wasi-libc calls `_Exit` if environment
@@ -14,25 +19,31 @@
 //!       failure and also calls `_Exit`. EBADF is what a real WASI runtime
 //!       returns once the descriptor table is exhausted, so it reads to
 //!       wasi-libc as "no more preopens," which is true here.
-#![cfg(target_arch = "wasm32")]
 
 use std::ffi::{c_char, c_int, c_void};
 
+/// Referenced today, by `ltablib.c`'s sort-pivot randomisation.
 #[no_mangle]
 pub extern "C" fn clock() -> i64 {
     0
 }
 
+/// Insurance: not called by the compiled sources, kept because wasi-sdk's
+/// `libc.a` does not define it.
 #[no_mangle]
 pub extern "C" fn system(_command: *const c_char) -> c_int {
     -1
 }
 
+/// Insurance: not called by the compiled sources, kept because wasi-sdk's
+/// `libc.a` does not define it.
 #[no_mangle]
 pub extern "C" fn tmpnam(_buf: *mut c_char) -> *mut c_char {
     std::ptr::null_mut()
 }
 
+/// Insurance: not called by the compiled sources, kept because wasi-sdk's
+/// `libc.a` does not define it.
 #[no_mangle]
 pub extern "C" fn tmpfile() -> *mut c_void {
     std::ptr::null_mut()

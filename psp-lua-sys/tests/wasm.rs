@@ -1,5 +1,9 @@
 //! wasm32 tests. Run with:
 //!   wasm-pack test --node psp-lua-sys
+//!
+//! These run under Node, not a browser, because this crate uses no browser
+//! API. Browser validation of this build belongs where the JS glue actually
+//! matters: `psp-web`'s browser test suite, once it links this crate.
 #![cfg(target_arch = "wasm32")]
 
 use psp_lua_sys::ffi::*;
@@ -93,4 +97,50 @@ fn excluded_libraries_are_absent() {
     );
     assert_eq!(status, LUA_OK);
     assert_eq!(text, "nil,nil,nil,nil,nil,nil,nil,nil");
+}
+
+#[wasm_bindgen_test]
+fn reports_syntax_errors_without_crashing() {
+    let (status, text) = eval_sandboxed("this is not lua");
+    assert_eq!(status, LUA_ERRSYNTAX);
+    assert!(text.contains("syntax error"), "unexpected message: {text}");
+}
+
+#[wasm_bindgen_test]
+fn errors_can_carry_non_string_values() {
+    let (status, text) = eval_sandboxed(
+        r#"local ok, err = pcall(function() error({ code = 7 }) end)
+           return tostring(ok) .. ":" .. type(err) .. ":" .. tostring(err.code)"#,
+    );
+    assert_eq!(status, LUA_OK);
+    assert_eq!(text, "false:table:7");
+}
+
+#[wasm_bindgen_test]
+fn coroutines_run_and_surface_their_errors() {
+    let (status, text) = eval_sandboxed(
+        r#"local co = coroutine.create(function() error("in-co") end)
+           local ok, err = coroutine.resume(co)
+           return tostring(ok) .. ":" .. tostring(err)"#,
+    );
+    assert_eq!(status, LUA_OK);
+    assert!(text.starts_with("false:"), "unexpected result: {text}");
+    assert!(text.contains("in-co"), "unexpected result: {text}");
+}
+
+/// The linked wasm module carries two allocators: Rust's `dlmalloc` (via
+/// `memory.grow`) and wasi-libc's `malloc`/`realloc`/`free` (via `sbrk` over
+/// `memory.grow`), and Lua's `l_alloc` uses the latter. The other tests in
+/// this file barely allocate, so memory growth on this target is otherwise
+/// untested; 200k table allocations plus a full `collectgarbage()` exercises
+/// it cheaply.
+#[wasm_bindgen_test]
+fn garbage_collection_runs_under_allocation_churn() {
+    let (status, text) = eval_sandboxed(
+        r#"for i = 1, 200000 do local _ = { i, tostring(i) } end
+           collectgarbage()
+           return "gc-ok""#,
+    );
+    assert_eq!(status, LUA_OK);
+    assert_eq!(text, "gc-ok");
 }
