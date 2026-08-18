@@ -5,9 +5,15 @@
 //!     genuinely referenced (Lua's `ltablib` uses it to randomise a sort pivot);
 //!     it returns 0 so scripts cannot read the host clock.
 //!  2. wasi-libc's own import declarations, defined locally so the linked module
-//!     imports nothing at all. All fail with ENOSYS (52) EXCEPT the environ pair,
-//!     which must succeed — wasi-libc calls `_Exit` if environment
-//!     initialisation fails, which would abort the module on startup.
+//!     imports nothing at all. Most fail with ENOSYS (52); three are special:
+//!     - the environ pair must succeed — wasi-libc calls `_Exit` if environment
+//!       initialisation fails, which would abort the module on startup.
+//!     - `fd_prestat_get` must return EBADF (8), not ENOSYS. wasi-libc's
+//!       preopen scan calls it on ascending file descriptors and stops the
+//!       scan only on EBADF; any other nonzero errno is treated as a real
+//!       failure and also calls `_Exit`. EBADF is what a real WASI runtime
+//!       returns once the descriptor table is exhausted, so it reads to
+//!       wasi-libc as "no more preopens," which is true here.
 #![cfg(target_arch = "wasm32")]
 
 use std::ffi::{c_char, c_int, c_void};
@@ -47,7 +53,6 @@ wasi_stub! {
     __imported_wasi_snapshot_preview1_fd_close(a: i32);
     __imported_wasi_snapshot_preview1_fd_fdstat_get(a: i32, b: i32);
     __imported_wasi_snapshot_preview1_fd_fdstat_set_flags(a: i32, b: i32);
-    __imported_wasi_snapshot_preview1_fd_prestat_get(a: i32, b: i32);
     __imported_wasi_snapshot_preview1_fd_prestat_dir_name(a: i32, b: i32, c: i32);
     __imported_wasi_snapshot_preview1_fd_read(a: i32, b: i32, c: i32, d: i32);
     __imported_wasi_snapshot_preview1_fd_renumber(a: i32, b: i32);
@@ -56,6 +61,15 @@ wasi_stub! {
     __imported_wasi_snapshot_preview1_path_open(
         a: i32, b: i32, c: i32, d: i32, e: i32, f: i64, g: i64, h: i32, i: i32,
     );
+}
+
+/// EBADF (8), not ENOSYS. wasi-libc's preopen scan probes file descriptors
+/// starting at 3 and stops the loop only on EBADF; any other nonzero errno
+/// is treated as a real failure and triggers `_Exit`. Returning EBADF tells
+/// it there are no preopened directories, which is accurate here.
+#[no_mangle]
+pub extern "C" fn __imported_wasi_snapshot_preview1_fd_prestat_get(_a: i32, _b: i32) -> i32 {
+    8
 }
 
 /// Must report success: wasi-libc calls `_Exit` when environ setup fails.

@@ -86,8 +86,11 @@ fn stack_overflow_is_catchable() {
 #[wasm_bindgen_test]
 fn excluded_libraries_are_absent() {
     let (status, text) = eval_sandboxed(
-        r#"return tostring(io) .. "," .. tostring(os) .. "," .. tostring(package)"#,
+        r#"return table.concat({
+             tostring(io), tostring(os), tostring(package), tostring(debug),
+             tostring(require), tostring(dofile), tostring(loadfile), tostring(load),
+           }, ",")"#,
     );
     assert_eq!(status, LUA_OK);
-    assert_eq!(text, "nil,nil,nil");
+    assert_eq!(text, "nil,nil,nil,nil,nil,nil,nil,nil");
 }

@@ -6,7 +6,7 @@
 //!
 //! The build never links a C++ runtime. On `wasm32-unknown-unknown`, Lua's
 //! `setjmp`/`longjmp` error mechanism is provided by wasi-sdk's `libsetjmp`
-//! rather than by C++ exceptions; see the findings document for why.
+//! rather than by C++ exceptions, which avoids linking a C++ runtime.
 
 pub mod ffi;
 

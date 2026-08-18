@@ -87,18 +87,21 @@ fn build_wasm(source_dir: &Path) {
             .arg("-o")
             .arg(&object)
             .status()
-            .expect("failed to invoke wasi-sdk clang");
+            .unwrap_or_else(|e| {
+                panic!("failed to invoke wasi-sdk clang at {}: {e}", clang.display())
+            });
         assert!(status.success(), "wasi-sdk clang failed on {unit}.c");
         objects.push(object);
     }
 
     let archive = out_dir.join("liblua.a");
-    let status = Command::new(ar_path(&sdk))
+    let ar = ar_path(&sdk);
+    let status = Command::new(&ar)
         .arg("rcs")
         .arg(&archive)
         .args(&objects)
         .status()
-        .expect("failed to invoke wasi-sdk ar");
+        .unwrap_or_else(|e| panic!("failed to invoke wasi-sdk ar at {}: {e}", ar.display()));
     assert!(status.success(), "wasi-sdk ar failed");
 
     println!("cargo:rustc-link-search=native={}", out_dir.display());
