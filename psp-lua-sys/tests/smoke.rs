@@ -233,3 +233,45 @@ fn garbage_collection_runs_under_allocation_churn() {
     assert_eq!(status, LUA_OK);
     assert_eq!(text, "gc-ok");
 }
+
+#[test]
+fn extended_ffi_surface_links_and_round_trips_a_table() {
+    unsafe {
+        let state = luaL_newstate();
+        assert!(!state.is_null());
+
+        lua_createtable(state, 0, 1);
+        lua_pushinteger(state, 42);
+        lua_setfield(state, -2, c"answer".as_ptr());
+
+        assert_eq!(lua_getfield(state, -1, c"answer".as_ptr()), LUA_TNUMBER);
+        assert_eq!(lua_tointeger(state, -1), 42);
+        assert_eq!(lua_isinteger(state, -1), 1);
+        lua_pop(state, 1);
+
+        assert!(lua_istable(state, -1));
+        lua_pop(state, 1);
+
+        assert_eq!(lua_gettop(state), 0);
+        lua_close(state);
+    }
+}
+
+#[test]
+fn load_buffer_in_text_mode_refuses_precompiled_bytecode() {
+    unsafe {
+        let state = luaL_newstate();
+        // The Lua 5.4 binary chunk signature. Any chunk beginning ESC "Lua" is
+        // bytecode; text mode must refuse it rather than load it.
+        let bytecode = b"\x1bLua\x54\x00";
+        let status = luaL_loadbufferx(
+            state,
+            bytecode.as_ptr().cast(),
+            bytecode.len(),
+            c"=bytecode".as_ptr(),
+            c"t".as_ptr(),
+        );
+        assert_eq!(status, LUA_ERRSYNTAX);
+        lua_close(state);
+    }
+}

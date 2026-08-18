@@ -3587,6 +3587,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "psp-plugin"
+version = "1.3.3"
+dependencies = [
+ "pretty_assertions",
+ "psp-core",
+ "psp-lua-sys",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.18",
+]
+
+[[package]]
 name = "psp-server"
 version = "1.3.3"
 dependencies = [

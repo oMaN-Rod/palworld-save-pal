@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-web", "psp-lua-sys"]
+members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-web", "psp-lua-sys", "psp-plugin"]
 
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
@@ -22,6 +22,7 @@ psp-core = { path = "psp-core", default-features = false }
 # crates that need the SqlxSqliteDriver opt in with `features = ["sqlx-driver"]`.
 psp-db = { path = "psp-db", default-features = false }
 psp-lua-sys = { path = "psp-lua-sys" }
+psp-plugin = { path = "psp-plugin" }
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
