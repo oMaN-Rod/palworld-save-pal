@@ -1,0 +1,15 @@
+[package]
+name = "psp-lua-sys"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Raw FFI bindings to a vendored Lua 5.4.8, including a wasm32-unknown-unknown build"
+links = "lua"
+
+[dependencies]
+
+[build-dependencies]
+cc = "1"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
