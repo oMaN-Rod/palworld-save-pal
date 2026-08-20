@@ -3,6 +3,7 @@ pub mod driver;
 pub mod error;
 pub mod meta;
 pub mod migrate;
+pub mod plugins;
 pub mod presets;
 pub mod servers;
 pub mod settings;
