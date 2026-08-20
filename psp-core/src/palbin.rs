@@ -24,8 +24,7 @@ impl<'a> BlobReader<'a> {
         self.position == self.bytes.len()
     }
 
-    /// Bytes already consumed — lets callers report trailing-byte errors at the
-    /// exact offset.
+    /// Bytes already consumed, so callers can report trailing-byte errors at the exact offset.
     pub fn position(&self) -> usize {
         self.position
     }
@@ -123,8 +122,7 @@ impl<'a> BlobReader<'a> {
                 .chunks_exact(2)
                 .map(|pair| u16::from_le_bytes([pair[0], pair[1]]))
                 .collect();
-            // length < 0 means unit_count >= 1, so units is non-empty and this
-            // pop cannot panic.
+            // length < 0 means unit_count >= 1, so this pop cannot panic.
             units.pop();
             Ok(String::from_utf16_lossy(&units))
         } else {
@@ -149,9 +147,8 @@ impl<'a> BlobReader<'a> {
     }
 }
 
-/// The permutation between a guid's 16 raw on-disk bytes and its RFC 4122
-/// display bytes — see [`BlobReader::read_uuid`]. An involution, so the same
-/// call converts either way.
+/// The permutation between a guid's 16 raw on-disk bytes and its RFC 4122 display
+/// bytes (see [`BlobReader::read_uuid`]). An involution: the same call converts either way.
 pub fn shuffle_guid_bytes(b: [u8; 16]) -> [u8; 16] {
     [
         b[3], b[2], b[1], b[0], b[7], b[6], b[5], b[4], b[11], b[10], b[9], b[8], b[15], b[14],
@@ -159,19 +156,17 @@ pub fn shuffle_guid_bytes(b: [u8; 16]) -> [u8; 16] {
     ]
 }
 
-/// A guid's raw on-disk byte encoding, for matching or substituting guids
-/// inside an opaque blob.
+/// A guid's raw on-disk byte encoding, for matching or substituting guids inside a blob.
 pub fn guid_bytes(id: Uuid) -> [u8; 16] {
     shuffle_guid_bytes(*id.as_bytes())
 }
 
-/// Inverse of [`guid_bytes`].
 pub fn guid_bytes_to_uuid(raw: [u8; 16]) -> Uuid {
     Uuid::from_bytes(shuffle_guid_bytes(raw))
 }
 
-/// Adds a field name to a leaf read's error, so a truncated save reports which
-/// field failed in addition to `take`'s byte offset.
+/// Adds a field name to a leaf read’s error, so a truncated save reports which field
+/// failed alongside `take`'s byte offset.
 fn describe_field<T>(field: &'static str, result: Result<T, CoreError>) -> Result<T, CoreError> {
     result.map_err(|err| match err {
         CoreError::Parse(msg) => CoreError::Parse(format!("{field}: {msg}")),
@@ -198,11 +193,10 @@ pub fn worker_director_container_id(raw_data: &[u8]) -> Result<Uuid, CoreError> 
     describe_field("container_id", reader.read_uuid())
 }
 
-/// The whole `WorkerDirector` blob, for the two fields a placed base has to
-/// retarget: `container_id`, which otherwise still names the source save's
-/// worker container, and `spawn_transform`, which otherwise still sends the
-/// base's workers to the coordinates it was captured at. `id` names the base
-/// camp the director belongs to.
+/// The whole `WorkerDirector` blob, for the two fields a placed base has to retarget:
+/// `container_id`, which otherwise still names the source save's worker container,
+/// and `spawn_transform`, which otherwise still sends the workers to the coordinates
+/// the base was captured at. `id` names the base camp the director belongs to.
 #[derive(Debug, Clone, PartialEq)]
 pub struct WorkerDirector {
     pub id: Uuid,
@@ -411,8 +405,8 @@ mod tests {
 
     #[test]
     fn test_read_string_rejects_absurd_utf16_length() {
-        // negative length claims i32::MIN/-ish code units; must not panic
-        // computing unit_count * 2 or attempting the allocation/read.
+        // negative length claims i32::MIN code units; must not panic computing
+        // unit_count * 2 nor attempt the allocation.
         let mut writer = BlobWriter::default();
         writer.write_i32(i32::MIN);
         assert!(BlobReader::new(&writer.bytes).read_string().is_err());
@@ -430,9 +424,8 @@ mod tests {
 
     #[test]
     fn test_read_tarray_rejects_oversized_count_without_panicking() {
-        // count claims ~4 billion guid elements; must error cleanly on the
-        // first short element read rather than attempting to allocate or
-        // iterate that many times unboundedly.
+        // count claims ~4 billion guid elements; must error cleanly on the first short
+        // element read rather than iterating that many times.
         let mut writer = BlobWriter::default();
         writer.write_u32(u32::MAX);
         let mut reader = BlobReader::new(&writer.bytes);
@@ -458,9 +451,8 @@ mod tests {
         assert!(worker_director_container_id(&[]).is_err());
     }
 
-    /// The blob is hand-assembled from the layout the doc comment states, so
-    /// the reader is checked against the documented field offsets rather than
-    /// against its own writer.
+    /// The blob is hand-assembled from the layout the doc comment states, so the reader
+    /// is checked against the documented field offsets, not against its own writer.
     #[test]
     fn test_read_worker_director_reads_the_documented_layout() {
         let id: uuid::Uuid = "11111111-2222-3333-4444-555555555555".parse().unwrap();

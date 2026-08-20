@@ -2,15 +2,6 @@
 //!
 //! Pure data + logic, zero deps on save-decode code. Consumes plain JSON
 //! (loaded via [`crate::gamedata::GameData`]) and produces breeding answers.
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/`.
-//!
-//! Public surface mirrors the Python package:
-//! - [`BreedingDB`] — indexes + lookups
-//! - [`direct_child`], [`direct_partners`], [`direct_parents`] — Direct Mode
-//! - [`solve`] — chain solver (Selection + Save Mode)
-//! - [`OwnedSource`], [`SelectedSource`], [`WildSource`], [`CompositeSource`]
-//! - [`min_steps`], [`can_reach`] — reachability
 
 pub mod data;
 pub mod direct;
@@ -32,7 +23,6 @@ pub use sources::{
     SelectedSource, SourceAdapter, WildSource,
 };
 
-/// Errors raised while building or using the breeding database.
 #[derive(Debug, thiserror::Error)]
 pub enum BreedingError {
     #[error("missing breeding data file in GameData: {0}")]

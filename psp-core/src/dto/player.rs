@@ -86,10 +86,9 @@ pub struct PlayerDto {
     /// `relic::RELIC_TYPE_MAP`), read from and written back to
     /// `RelicObtainForInstanceFlagByType`.
     ///
-    /// `collected_relics["capture_power"]` equals `collected_effigies` on a 1.0 save. On
-    /// write, CapturePower is taken from `collected_effigies` -- the list that also drives
-    /// the legacy flat flag map -- so this key is read-only in practice. A pre-1.0 save
-    /// reads as an empty map, and writing one back invents nothing.
+    /// `collected_relics["capture_power"]` equals `collected_effigies` on a 1.0 save,
+    /// and on write CapturePower is taken from `collected_effigies`, so this key is
+    /// read-only in practice. A pre-1.0 save reads as an empty map.
     #[serde(default)]
     pub collected_relics: Option<BTreeMap<String, Vec<String>>>,
     /// `NormalBossDefeatFlag` + `TowerBossDefeatFlag` keys merged, read-only:
@@ -173,7 +172,6 @@ mod tests {
         assert_eq!(dto.hp, 5000);
         assert_eq!(dto.stomach, 100.0);
         assert_eq!(dto.sanity, 100.0);
-        // Output-only fields default when the frontend payload omits them.
         assert!(dto.pals.is_empty());
         assert_eq!(dto.pal_box, None);
         assert_eq!(dto.last_online_time, None);

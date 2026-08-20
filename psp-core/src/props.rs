@@ -1,13 +1,9 @@
-//! Accessors into `uesave`'s dynamic `Property` tree, used where no typed
-//! `uesave` struct exists for a node.
-//!
-//! Everything here returns `Option`: a missing or wrong-typed node in an
-//! untrusted save file is a normal condition, not a bug. These accessors carry
-//! no path in their failure, so callers should name the path in their own
-//! `CoreError` when a lookup comes back `None`.
+//! Accessors into `uesave`'s dynamic `Property` tree, for nodes with no typed
+//! struct. Everything returns `Option`: a missing or wrong-typed node in an
+//! untrusted save is a normal condition. Failures carry no path, so callers
+//! should name it in their own `CoreError`.
 
-/// Looks up a property by name, descending through nested user structs when
-/// `path` has more than one segment.
+/// Looks up a property by name, descending nested user structs for multi-segment paths.
 pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&'a crate::ue::Property> {
     let (segment, rest) = path.split_first()?;
     let property = properties
@@ -20,7 +16,6 @@ pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&
     }
 }
 
-/// Like `get`, but starting from a property rather than a `Properties` map.
 pub fn get_in<'a>(property: &'a crate::ue::Property, path: &[&str]) -> Option<&'a crate::ue::Property> {
     let mut current = property;
     for segment in path {
@@ -29,9 +24,8 @@ pub fn get_in<'a>(property: &'a crate::ue::Property, path: &[&str]) -> Option<&'
     Some(current)
 }
 
-/// Mutable counterpart of `get`. Matches by NAME only, ignoring the `u32` half
-/// of a `PropertyKey` that disambiguates same-named siblings, so it resolves
-/// exactly the node `get` would.
+/// Matches by NAME only, ignoring the `u32` half of a `PropertyKey` that
+/// disambiguates same-named siblings, so it resolves exactly the node `get` would.
 pub fn get_mut<'a>(
     properties: &'a mut crate::ue::Properties,
     path: &[&str],
@@ -48,7 +42,6 @@ pub fn get_mut<'a>(
     }
 }
 
-/// Mutable counterpart of `get_in`.
 pub fn get_in_mut<'a>(
     property: &'a mut crate::ue::Property,
     path: &[&str],
@@ -60,8 +53,6 @@ pub fn get_in_mut<'a>(
     Some(current)
 }
 
-/// The nested `Properties` map of a user-struct property (e.g. `ContainerId`,
-/// whose value is itself a bag of properties).
 pub fn struct_properties(property: &crate::ue::Property) -> Option<&crate::ue::Properties> {
     match property {
         crate::ue::Property::Struct(crate::ue::StructValue::Struct(properties)) => Some(properties),
@@ -86,8 +77,7 @@ pub fn as_bool(property: &crate::ue::Property) -> Option<bool> {
     }
 }
 
-/// An `Enum` property's fully qualified variant name (e.g.
-/// `"EPalGroupType::Guild"`).
+/// An `Enum` property's fully qualified variant name, e.g. `"EPalGroupType::Guild"`.
 pub fn as_enum(property: &crate::ue::Property) -> Option<&str> {
     match property {
         crate::ue::Property::Enum(value) => Some(value),
@@ -104,8 +94,7 @@ pub fn as_byte(property: &crate::ue::Property) -> Option<u8> {
     }
 }
 
-/// .NET-style ticks from a `DateTime` struct property (the player .sav
-/// "Timestamp").
+/// .NET-style ticks from a `DateTime` struct property (the player .sav "Timestamp").
 pub fn as_datetime_ticks(property: &crate::ue::Property) -> Option<u64> {
     match property {
         crate::ue::Property::Struct(crate::ue::StructValue::DateTime(ticks)) => Some(*ticks),
@@ -138,8 +127,8 @@ pub fn as_byte_array(property: &crate::ue::Property) -> Option<&[u8]> {
     }
 }
 
-/// Mutable counterpart of `as_byte_array`. The `Vec`'s length is what uesave
-/// writes back, so a replacement blob may be shorter or longer.
+/// The `Vec`'s length is what uesave writes back, so a replacement blob may be
+/// shorter or longer.
 pub fn as_byte_array_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<u8>> {
     match property {
         crate::ue::Property::Array(crate::ue::ValueVec::Byte(crate::ue::ByteArray::Byte(bytes))) => {
@@ -149,9 +138,8 @@ pub fn as_byte_array_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<
     }
 }
 
-/// `FGuid`'s `Display` already renders Palworld's guid byte order as a
-/// canonical UUID string. Panics only on unreachable input; prefer
-/// `guid_to_uuid` for untrusted save data.
+/// `FGuid`'s `Display` already renders Palworld's guid byte order as a canonical
+/// UUID string. Panics on malformed input; prefer `guid_to_uuid` for save data.
 pub fn fguid_to_uuid(guid: &crate::ue::FGuid) -> uuid::Uuid {
     guid.to_string()
         .parse()
@@ -169,21 +157,17 @@ pub fn as_uuid(property: &crate::ue::Property) -> Option<uuid::Uuid> {
 /// property slots.
 pub const EMPTY_UUID: uuid::Uuid = uuid::Uuid::nil();
 
-/// `FGuid` -> `Uuid` without panicking, for untrusted save data. The nil
-/// fallback is unreachable in practice (`FGuid`'s four `u32` fields always
-/// format to 32 hex digits) but a defensive accessor must not panic.
+/// `FGuid` -> `Uuid` without panicking. The nil fallback is unreachable in
+/// practice (`FGuid`'s four `u32` fields always format to 32 hex digits).
 pub fn guid_to_uuid(guid: &crate::ue::FGuid) -> uuid::Uuid {
     guid.to_string().parse().unwrap_or(uuid::Uuid::nil())
 }
 
-/// `Uuid` -> `FGuid` for writing back into a save. The nil fallback is
-/// likewise unreachable: a `Uuid`'s canonical string is always 32 hex digits,
-/// which `FGuid::parse_str` accepts.
+/// `Uuid` -> `FGuid` for writing back into a save; its nil fallback is likewise unreachable.
 pub fn uuid_to_guid(value: uuid::Uuid) -> crate::ue::FGuid {
     crate::ue::FGuid::parse_str(&value.to_string()).unwrap_or_else(|_| crate::ue::FGuid::nil())
 }
 
-/// Alias of `struct_properties`.
 pub fn struct_props(property: &crate::ue::Property) -> Option<&crate::ue::Properties> {
     struct_properties(property)
 }
@@ -219,7 +203,6 @@ pub fn as_f32(property: &crate::ue::Property) -> Option<f32> {
     }
 }
 
-/// Alias of `as_byte`.
 pub fn as_byte_number(property: &crate::ue::Property) -> Option<u8> {
     as_byte(property)
 }
@@ -252,9 +235,8 @@ pub fn struct_values_mut(property: &mut crate::ue::Property) -> Option<&mut Vec<
     }
 }
 
-/// A `FixedPoint64` stat field: always the bare user struct
-/// `{"Value": Int64(n)}`. Uses `Properties::get`, never the panicking `Index`
-/// impl, since a malformed save may be missing the field.
+/// A `FixedPoint64` stat field: always the bare user struct `{"Value": Int64(n)}`.
+/// Uses `Properties::get`, never the panicking `Index`, since the field may be absent.
 pub fn fixed_point64(property: &crate::ue::Property) -> Option<i64> {
     let inner = struct_props(property)?;
     as_i64(inner.0.get(&crate::ue::PropertyKey::from("Value"))?)
@@ -272,8 +254,7 @@ pub fn name_property(value: &str) -> crate::ue::Property {
     crate::ue::Property::Name(value.to_string())
 }
 
-/// `value` must be the fully qualified variant name (e.g.
-/// `"EPalGenderType::Female"`).
+/// `value` must be the fully qualified variant name, e.g. `"EPalGenderType::Female"`.
 pub fn enum_property(value: &str) -> crate::ue::Property {
     crate::ue::Property::Enum(value.to_string())
 }
@@ -306,22 +287,18 @@ pub fn enum_array_property(values: Vec<String>) -> crate::ue::Property {
     crate::ue::Property::Array(crate::ue::ValueVec::Enum(values))
 }
 
-/// Inverse of `fixed_point64`.
 pub fn fixed_point64_property(value: i64) -> crate::ue::Property {
     let mut inner = crate::ue::Properties::default();
     inner.insert("Value", crate::ue::Property::Int64(value));
     crate::ue::Property::Struct(crate::ue::StructValue::Struct(inner))
 }
 
-// `uesave`'s writer looks up a property's schema by its exact dotted scope path
-// and fails with `Error::MissingPropertySchema` when none is recorded. Any
-// property NAME newly introduced into a save (as opposed to overwriting a
-// present one, which already carries a schema from the read) must have a schema
-// registered before write.
+// `uesave`'s writer looks up a property's schema by its exact dotted scope path and
+// fails with `Error::MissingPropertySchema` when none is recorded. Any property NAME
+// newly introduced into a save must have a schema registered before write.
 
-/// Finds a recorded schema path ending with `suffix` and returns everything
-/// before it — the way to derive a schema for a brand-new property by copying
-/// an existing sibling's shape, since no schema exists at the new path yet.
+/// Finds a recorded schema path ending with `suffix` and returns everything before
+/// it, so a brand-new property can borrow an existing sibling's schema shape.
 pub fn schema_prefix_ending_with(save: &crate::ue::Save, suffix: &str) -> Option<String> {
     save.schemas
         .schemas()
@@ -330,28 +307,23 @@ pub fn schema_prefix_ending_with(save: &crate::ue::Save, suffix: &str) -> Option
         .map(|key| key[..key.len() - suffix.len()].to_string())
 }
 
-/// Records `tag` at `path` only when no schema exists there yet; never
-/// overwrites one already read from the real save.
+/// Records `tag` at `path` only when none exists; never overwrites one read from the save.
 pub fn ensure_schema(save: &mut crate::ue::Save, path: String, tag: crate::ue::PropertyTagPartial) {
     if save.schemas.get(&path).is_none() {
         save.schemas.record(path, tag);
     }
 }
 
-/// Copies every schema `source` recorded and `target` lacks.
-///
-/// Schemas are per-`Save` but a schema path is just the chain of property names, so
-/// a subtree grafted across saves keeps its path -- and carries properties the
-/// target may never have had a tag for. `target`'s own tags always win: only they
-/// describe how the target was actually read.
+/// A schema path is just the chain of property names, so a subtree grafted across
+/// saves keeps its path and carries properties the target may have no tag for.
+/// `target`'s own tags always win: only they describe how the target was read.
 pub fn merge_schemas(target: &mut crate::ue::Save, source: &crate::ue::Save) {
     for (path, tag) in source.schemas.schemas().clone() {
         ensure_schema(target, path, tag);
     }
 }
 
-/// `old` -> `new`, `new` -> `old`, anything else `None`. Both sides are parsed
-/// `Uuid`s, so the match ignores hyphenation and case in the source text.
+/// Both sides are parsed `Uuid`s, so the match ignores hyphenation and case.
 fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Option<uuid::Uuid> {
     if value == old {
         Some(new)
@@ -362,9 +334,8 @@ fn swap_uuid_value(value: uuid::Uuid, old: uuid::Uuid, new: uuid::Uuid) -> Optio
     }
 }
 
-/// Swaps a single ownership-key leaf in place: a `Str` holding uuid text, or a
-/// `Guid` struct. Any other shape (including a `Str` that isn't valid uuid
-/// text) is left untouched.
+/// An ownership-key leaf is either a `Str` holding uuid text or a `Guid` struct; any
+/// other shape (including a `Str` that isn't valid uuid text) is left untouched.
 fn swap_leaf_uuid_property(property: &mut crate::ue::Property, old: uuid::Uuid, new: uuid::Uuid) {
     match property {
         crate::ue::Property::Str(text) => {
@@ -383,12 +354,10 @@ fn swap_leaf_uuid_property(property: &mut crate::ue::Property, old: uuid::Uuid, 
     }
 }
 
-/// Descends only through the shapes that can carry a named field bag: a user
-/// struct, an array of user structs, and a map's key/value pairs. The
-/// game-specific typed structs (`PalGroupData`, `PalCharacterData`, the map
-/// object models) have no generic `Properties` bag, so recursion stops at them
-/// — see `swap_uuid_values_deep` for why that is correct and must not be
-/// "fixed" by hand-adding typed-struct arms.
+/// Descends only the shapes carrying a named field bag: user struct, array of user
+/// structs, map key/value. The game-specific typed structs (`PalGroupData`,
+/// `PalCharacterData`, the map object models) have none, so recursion stops there —
+/// see `swap_uuid_values_deep` for why adding typed-struct arms would be wrong.
 fn swap_uuid_values_deep_in_property(
     property: &mut crate::ue::Property,
     keys: &[&str],
@@ -416,18 +385,14 @@ fn swap_uuid_values_deep_in_property(
     }
 }
 
-/// Walks every `Property` reachable from `properties` and, for each field whose
-/// NAME is in `keys` and whose leaf is a uuid string or `Guid` struct equal to
-/// `old` or `new`, swaps it to the other — bidirectionally, in one pass.
+/// For each field whose NAME is in `keys` and whose leaf is a uuid string or `Guid`
+/// struct equal to `old` or `new`, swaps it to the other, bidirectionally, in one pass.
 ///
-/// On a real save this walk finds nothing, by design: `OwnerPlayerUId` lives
-/// inside the typed `PalCharacterData` RawData, and the lowercase ownership
-/// keys are typed `FGuid` fields on the map-object models — all
-/// `StructValue` variants with no generic `Properties` bag, which the walk
-/// stops at. The real uid rewriting is done by `swap_player_uids`'s other
-/// steps (`swap_player_gvas_uids`, the character-map key rewrite,
-/// `swap_guild_member_uids`, `swap_player_file_refs`). Adding typed-struct
-/// arms here would double-swap those fields.
+/// On a real save this walk finds nothing, by design: `OwnerPlayerUId` lives inside
+/// the typed `PalCharacterData` RawData, and the lowercase ownership keys are typed
+/// `FGuid` fields on the map-object models — `StructValue` variants with no generic
+/// `Properties` bag, which the walk stops at. The real rewriting is `swap_player_uids`'s
+/// other steps; adding typed-struct arms here would double-swap those fields.
 pub fn swap_uuid_values_deep(
     properties: &mut crate::ue::Properties,
     keys: &[&str],
@@ -772,8 +737,7 @@ mod phase2_tests {
 
     #[test]
     fn guid_to_uuid_matches_phase1_fguid_to_uuid() {
-        // guid_to_uuid differs from fguid_to_uuid only in not panicking on
-        // malformed input; the conversion itself must be identical.
+        // The conversion itself must be identical; only the panicking differs.
         let guid = fguid("0b1c2d3e-1111-2222-3333-444455556666");
         assert_eq!(guid_to_uuid(&guid), fguid_to_uuid(&guid));
     }
@@ -919,7 +883,6 @@ mod phase2_tests {
         properties.insert("Present", Property::Bool(true));
 
         assert!(get_mut(&mut properties, &["Missing"]).is_none());
-        // "Present" exists but isn't a struct, so descending into it fails.
         assert!(get_mut(&mut properties, &["Present", "Nested"]).is_none());
     }
 

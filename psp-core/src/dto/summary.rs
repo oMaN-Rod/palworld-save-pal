@@ -22,8 +22,8 @@ impl serde::Serialize for IsoDateTime {
 }
 
 /// Exists only so `PlayerDto` (a request *and* response shape) can derive
-/// `Deserialize`; `last_online_time` is server-computed, so this never sees
-/// real frontend input. It must round-trip what `Serialize` emits.
+/// `Deserialize`; `last_online_time` is server-computed, so this must round-trip
+/// what `Serialize` emits but never sees real frontend input.
 impl<'de> serde::Deserialize<'de> for IsoDateTime {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         let raw = <String as serde::Deserialize>::deserialize(deserializer)?;
@@ -33,22 +33,17 @@ impl<'de> serde::Deserialize<'de> for IsoDateTime {
     }
 }
 
-/// Converts .NET-style ticks (100 ns intervals since `0001-01-01 00:00:00`)
-/// to a datetime.
+/// Converts .NET-style ticks (100 ns intervals since `0001-01-01 00:00:00`).
 ///
-/// The quotient/remainder split by 10_000_000 is load-bearing, not a
-/// micro-optimization: `ticks as f64` is lossy for any value at or above 2^53
-/// (~9.007e15, i.e. any date after roughly the year 1000) and would discard
-/// low bits before the division even ran. Both halves of the split stay well
-/// under 2^53 and so convert to `f64` exactly, yielding a correctly-rounded
-/// quotient.
+/// The quotient/remainder split by 10_000_000 is load-bearing: `ticks as f64` is
+/// lossy at or above 2^53 (~9.007e15, any date after roughly the year 1000) and
+/// would discard low bits before the division even ran. Both halves of the split
+/// stay well under 2^53 and so convert exactly.
 ///
-/// `ticks == 0` is valid input and returns the epoch itself
-/// (`0001-01-01T00:00:00`). A wire value of `0` means "no timestamp"; callers
-/// must filter it out themselves rather than expecting `None` back.
+/// `ticks == 0` is valid input and returns the epoch itself. A wire value of `0`
+/// means "no timestamp"; callers must filter it out rather than expect `None`.
 ///
-/// Returns `None` (rather than panicking) if the resulting date falls
-/// outside the range `chrono::NaiveDate` can represent.
+/// `None` when the resulting date falls outside `chrono::NaiveDate`'s range.
 pub fn ticks_to_datetime(ticks: u64) -> Option<chrono::NaiveDateTime> {
     let whole_seconds = ticks / 10_000_000;
     let tick_remainder = ticks % 10_000_000;
@@ -144,9 +139,8 @@ mod tests {
 
     #[test]
     fn test_ticks_to_isoformat_preserves_sub_second_precision() {
-        // Each tick value below is one where a naive `ticks as f64` division
-        // drifts by several microseconds; they guard the quotient/remainder
-        // split in `ticks_to_datetime`.
+        // Each tick value below is one where a naive `ticks as f64` division drifts by
+        // several microseconds; they guard the quotient/remainder split.
         assert_eq!("2026-04-07T16:36:46.740997", iso(639111766067410000));
         assert_eq!("1257-01-07T22:18:15.775871", iso(396361666957758680));
         assert_eq!("3231-11-10T06:23:14.035370", iso(1019559973940353740));

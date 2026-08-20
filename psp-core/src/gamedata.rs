@@ -11,9 +11,8 @@ use crate::error::CoreError;
 /// crippling on a save with a large Dimensional Palbox (thousands of slots).
 #[derive(Debug, Default)]
 pub(crate) struct PalLookup {
-    /// Exact-case `pals.json` keys. Must stay exact-case:
-    /// `domain::pal::format_character_key`'s boss-prefix check is
-    /// case-sensitive.
+    /// Exact-case `pals.json` keys; `domain::pal::format_character_key`’s boss-prefix
+    /// check is case-sensitive.
     pub keys: HashSet<String>,
     /// Lowercased key -> the exact-case `pals.json` key, for
     /// `domain::pal::pal_data_for`'s case-insensitive lookup.
@@ -32,17 +31,15 @@ pub struct GameData {
 }
 
 impl GameData {
-    /// Loads every *.json file under `data_dir`, recursing into `l10n/` and
-    /// `ui/`.
+    /// Loads every *.json under `data_dir`, recursing into `l10n/` and `ui/`.
     pub fn load(data_dir: &Path) -> Result<Self, CoreError> {
         let mut entries = HashMap::new();
         load_json_directory(data_dir, data_dir, &mut entries)?;
         Ok(Self::from_parsed(entries))
     }
 
-    /// Builds game data from already-fetched JSON, for targets without a
-    /// filesystem. Keys are extension-less relative paths; they are normalized
-    /// the same way the directory loader normalizes them (`\` -> `/`,
+    /// Builds game data from already-fetched JSON, for targets without a filesystem.
+    /// Keys are normalized the way the directory loader normalizes them (`\` -> `/`,
     /// lower-cased) so `get` resolves identically.
     pub fn from_entries(
         entries: impl IntoIterator<Item = (String, String)>,
@@ -65,20 +62,16 @@ impl GameData {
         }
     }
 
-    /// Looks a file up by its extension-less path, case-insensitively.
+    /// Case-insensitive by path. The l10n directories carry the game’s casing (`es-MX`,
+    /// `zh-Hans`) while the app’s locale codes are lowercase, so an exact-case lookup
+    /// silently resolved to nothing for four languages, across every table.
     ///
-    /// The l10n directories carry the game's casing (`es-MX`, `zh-Hans`), but the app's
-    /// locale codes are lowercase (`es-mx`, `zh-hans`), so an exact-case lookup silently
-    /// resolved to nothing for four languages -- across every table, not just one.
-    ///
-    /// This is about FILE keys only. The pal catalog's keys *inside* `pals.json` remain
-    /// case-sensitive on purpose: `pal_lookup` below relies on exact casing to decide
-    /// whether a `BOSS_`-prefixed id names a real catalog entry.
+    /// FILE keys only: `pals.json`’s own keys stay case-sensitive, since `pal_lookup`
+    /// relies on exact casing to tell whether a `BOSS_`-prefixed id is a real entry.
     pub fn get(&self, key: &str) -> Option<&Value> {
         self.entries.get(&key.to_lowercase())
     }
 
-    /// App version for the `get_version` message.
     pub fn version(&self) -> &str {
         &self.version
     }

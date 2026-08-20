@@ -1,18 +1,15 @@
 //! Source adapters — how the solver gets its initial breeding pool.
 //!
-//! The key palcalc insight reproduced here: Save Mode and Selection Mode are
-//! the *same solver* with different initial pools. Each adapter just produces a
-//! list of `PalRef` leaves; the solver never knows which mode it's in.
+//! Save Mode and Selection Mode are the *same solver* with different initial
+//! pools. Each adapter just produces a list of `PalRef` leaves; the solver never
+//! knows which mode it's in.
 //!
-//! * [`OwnedSource`]    — Save Mode. Wraps owned-pal summaries (gender,
-//!   passives, character_id, ...). One ref per owned pal, carrying its real
+//! * [`OwnedSource`]    — Save Mode. One ref per owned pal, carrying its real
 //!   gender + passives + provenance.
 //! * [`SelectedSource`] — Selection Mode. User's theoretical picks. Gender
 //!   defaults to Wildcard so the solver treats them as flexible.
-//! * [`WildSource`]     — optional. Adds one Wildcard ref per breedable
-//!   species, representing "go catch one". Composable via [`CompositeSource`].
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/sources.py`.
+//! * [`WildSource`]     — optional. One Wildcard ref per breedable species,
+//!   representing "go catch one". Composable via [`CompositeSource`].
 
 use std::collections::BTreeSet;
 
@@ -27,9 +24,6 @@ pub trait SourceAdapter {
     fn initial_refs(&self, db: &BreedingDB) -> Vec<PalRef>;
 }
 
-// ---------------------------------------------------------------------
-// OwnedSource — Save Mode
-// ---------------------------------------------------------------------
 /// Wraps owned-pal summaries. Accepts the shape the frontend sends for Save
 /// Mode: `character_id` (species), `gender` ("Male"/"Female"/"Unknown"),
 /// `passive_skills` ([str, ...]), plus optional provenance
@@ -53,7 +47,6 @@ struct OwnedPal {
 }
 
 impl OwnedSource {
-    /// Build from already-deserialized owned-pal JSON values (one per pal).
     pub fn from_values(pals: Vec<Value>) -> Result<Self, super::BreedingError> {
         let parsed: Vec<OwnedPal> = pals
             .into_iter()
@@ -62,7 +55,6 @@ impl OwnedSource {
         Ok(Self { pals: parsed })
     }
 
-    /// Build from typed owned-pal summaries (no deserialize round-trip).
     pub fn new(pals: Vec<OwnedPalInput>) -> Self {
         Self {
             pals: pals
@@ -83,7 +75,6 @@ impl OwnedSource {
     }
 }
 
-/// Typed owned-pal input (used by the handler when it already has typed data).
 #[derive(Debug, Clone, Deserialize)]
 pub struct OwnedPalInput {
     pub character_id: String,
@@ -125,9 +116,6 @@ impl SourceAdapter for OwnedSource {
     }
 }
 
-// ---------------------------------------------------------------------
-// SelectedSource — Selection Mode
-// ---------------------------------------------------------------------
 /// User-selected theoretical pals. `gender` omitted → Wildcard. Unbreedable
 /// species are dropped; warnings are collected on the struct for surfacing.
 #[derive(Debug, Default)]
@@ -189,9 +177,8 @@ impl SourceAdapter for SelectedSource {
                 continue;
             }
             if !db.is_breedable(&species) {
-                // Bound into &self via a deferred mutation: collect after.
-                // (Adapter trait is &self; warnings recorded by the caller via
-                // the explicit `take_warnings`/`warnings` field.)
+                // The adapter trait takes `&self`, so warnings are recorded by the
+                // caller via `take_warnings`.
                 continue;
             }
             let gender = entry
@@ -214,11 +201,7 @@ impl SourceAdapter for SelectedSource {
     }
 }
 
-// ---------------------------------------------------------------------
-// WildSource — "go catch one" fallback
-// ---------------------------------------------------------------------
-/// One Wildcard ref per breedable species not in `exclude`. Represents
-/// wild-caught pals.
+/// One Wildcard ref per breedable species not in `exclude` — wild-caught pals.
 pub struct WildSource {
     exclude: std::collections::HashSet<String>,
 }
@@ -261,9 +244,6 @@ impl SourceAdapter for WildSource {
     }
 }
 
-// ---------------------------------------------------------------------
-// CompositeSource — combine adapters (e.g. OwnedSource + WildSource)
-// ---------------------------------------------------------------------
 /// Merge multiple adapters' refs. De-duplicates identical group keys
 /// (species + gender + full passive set).
 pub struct CompositeSource {
@@ -294,9 +274,6 @@ impl SourceAdapter for CompositeSource {
     }
 }
 
-// ---------------------------------------------------------------------
-// helpers
-// ---------------------------------------------------------------------
 /// Strip boss/predator prefixes so a save's CharacterID maps to its tribe.
 /// Saves encode boss pals as `BOSS_Anubis`; the breeding table keys on the
 /// bare tribe `Anubis`. Returns "" for falsy input.
@@ -316,7 +293,6 @@ pub fn normalize_species(raw: Option<&str>) -> String {
     trimmed.to_string()
 }
 
-/// Coerce a passive-skills field into a clean `BTreeSet<String>`.
 fn clean_passives(raw: Option<&[Value]>) -> BTreeSet<String> {
     let Some(arr) = raw else {
         return BTreeSet::new();

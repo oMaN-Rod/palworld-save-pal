@@ -10,9 +10,8 @@
 //!   `MaskTextureData` byte array. 1.0 added the World Tree, which is a second,
 //!   separate map with its own mask.
 //!
-//! On every real 1.0 save inspected the legacy property is **absent entirely**,
-//! so the two shapes are disjoint in practice — but this handles both being
-//! present, since neither costs anything to clear.
+//! On every real 1.0 save inspected the legacy property is **absent entirely**, so
+//! the two shapes are disjoint in practice, but both are handled.
 //!
 //! "Unlocked" means every byte of every mask present is zero.
 
@@ -40,14 +39,11 @@ fn zero_mask(mask_bytes: &mut [u8]) -> usize {
 }
 
 /// Zeroes every non-zero byte of EVERY fog mask in `SaveData` — the legacy
-/// `WorldMapMaskTextureV4` when present, plus the `MaskTextureData` of every
-/// entry of the 1.0 `WorldMapUISaveDataMap` (which covers both `MainMap` and the
-/// World Tree) — and re-emits the file as PlM/Oodle. `cleared_byte_count` sums
-/// across all of them.
+/// `WorldMapMaskTextureV4` when present, plus the `MaskTextureData` of every entry
+/// of the 1.0 `WorldMapUISaveDataMap` — and re-emits the file as PlM/Oodle.
 ///
-/// Neither structure being present is an error: that is an unrecognised save,
-/// not a fully-unlocked one. Error strings reach the UI unprefixed; the server
-/// layer adds the "Failed to unlock map: " prefix.
+/// Neither structure being present is an error: that is an unrecognised save, not a
+/// fully-unlocked one. Error strings reach the UI unprefixed.
 pub fn unlock_world_map(local_data_sav: &[u8]) -> Result<MapUnlockOutcome, CoreError> {
     let mut save = savio::read_sav_bytes(local_data_sav)?;
 
@@ -126,10 +122,8 @@ mod tests {
     use super::*;
     use crate::gamepass::fixture::reference_saves_dir;
 
-    /// A real, git-tracked `LevelMeta.sav` (the world1 fixture, also used by
-    /// `psp-server/tests/phase4_ws.rs`). It carries a `SaveData` struct, so the
+    /// A real, git-tracked `LevelMeta.sav` carrying a `SaveData` struct, so the
     /// hermetic tests below can graft a synthetic mask into a real GVAS tree.
-    /// Committed, so tests using it run unconditionally on a clean checkout / CI.
     fn fixture_level_meta_path() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/world1/LevelMeta.sav")
@@ -179,9 +173,9 @@ mod tests {
         assert!(matches!(error, crate::error::CoreError::Parse(_)));
     }
 
-    /// Hermetic test of the zeroing/count/re-emit path, needing no
-    /// `LocalData.sav` fixture. The grafted mask `[1, 2, 3, 0, 4]` mixes
-    /// non-zero and already-zero bytes so the cleared count is discriminating.
+    /// Hermetic zeroing/count/re-emit test, needing no `LocalData.sav` fixture. The
+    /// grafted mask `[1, 2, 3, 0, 4]` mixes non-zero and already-zero bytes so the
+    /// cleared count is discriminating.
     #[test]
     fn unlock_world_map_zeroes_synthetic_mask_grafted_into_real_savedata() {
         let meta_bytes = std::fs::read(fixture_level_meta_path()).unwrap();
@@ -222,10 +216,10 @@ mod tests {
         assert_eq!(mask_after, vec![0, 0, 0, 0, 0]);
     }
 
-    /// Grafts a 1.0-shaped `WorldMapUISaveDataMap` into a real `SaveData` tree.
-    /// Mirrors the exact shape observed in real 1.0 saves: a `Property::Map`
-    /// whose keys are `Property::Name` ("MainMap"/"Tree") and whose values are
-    /// bare user structs carrying a single `MaskTextureData` byte array.
+    /// Grafts a 1.0-shaped `WorldMapUISaveDataMap` into a real `SaveData` tree, in the
+    /// exact shape observed in real 1.0 saves: a `Property::Map` whose keys are
+    /// `Property::Name` ("MainMap"/"Tree") and whose values are bare user structs
+    /// carrying a single `MaskTextureData` byte array.
     fn graft_world_map_ui_save_data_map(
         save: &mut crate::ue::Save,
         entries: &[(&str, Vec<u8>)],
@@ -300,7 +294,6 @@ mod tests {
         );
     }
 
-    /// Reads back every `WorldMapUISaveDataMap` entry as (name, mask bytes).
     fn ui_map_masks(local_data_sav: &[u8]) -> Vec<(String, Vec<u8>)> {
         let save = savio::read_sav_bytes(local_data_sav).unwrap();
         let Some(Property::Struct(StructValue::Struct(save_data))) =
@@ -331,9 +324,8 @@ mod tests {
         std::fs::read(fixture_level_meta_path()).unwrap()
     }
 
-    /// A 1.0-only save: `WorldMapUISaveDataMap` present, legacy field ABSENT.
-    /// Every entry's mask must end up zeroed and the legacy field's absence must
-    /// not be an error.
+    /// A 1.0-only save: `WorldMapUISaveDataMap` present, legacy field ABSENT. The
+    /// legacy field's absence must not be an error.
     #[test]
     fn unlock_world_map_zeroes_every_world_map_ui_save_data_map_entry() {
         let meta_bytes = fixture_level_meta_bytes();
@@ -357,7 +349,6 @@ mod tests {
         assert_eq!(masks[0], ("MainMap".to_string(), vec![0, 0, 0, 0, 0]));
         assert_eq!(masks[1], ("Tree".to_string(), vec![0, 0, 0, 0]));
 
-        // Unlocking twice clears nothing further.
         assert_eq!(
             unlock_world_map(&outcome.sav_bytes)
                 .unwrap()
@@ -390,11 +381,9 @@ mod tests {
         }
     }
 
-    /// Neither mask structure present — a genuinely unrecognised save, which
-    /// must still error rather than silently succeed. Asserts on the error
-    /// MESSAGE, not just the `CoreError::Other` variant, since the "SaveData
-    /// not found" branch returns that same variant and would falsely pass a
-    /// variant-only check.
+    /// Neither mask structure present — a genuinely unrecognised save, which must still
+    /// error. Asserts on the error MESSAGE, since the "SaveData not found" branch
+    /// returns the same `CoreError::Other` variant and would pass a variant-only check.
     #[test]
     fn unlock_world_map_errors_when_no_mask_structure_exists() {
         let meta_bytes = fixture_level_meta_bytes();

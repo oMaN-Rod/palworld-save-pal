@@ -94,8 +94,7 @@ pub fn backup_container_dir(
 }
 
 /// Reads a container entry's payload: the first blob of its newest non-empty
-/// `container.<seq>` file list, with that list's seq. `None` when the blob dir is
-/// absent or holds no usable file list.
+/// `container.<seq>` file list, with that list's seq.
 pub fn read_first_blob(
     container_dir: &Path,
     entry: &ContainerEntry,
@@ -658,7 +657,6 @@ mod tests {
         assert_eq!(copied.size, b"player-new".len() as u64);
         let (_, blob) = read_first_blob(temp.path(), &copied).unwrap().unwrap();
         assert_eq!(blob, b"player-new");
-        // Source blob untouched.
         let (_, source_blob) = read_first_blob(temp.path(), &source_entry)
             .unwrap()
             .unwrap();
@@ -772,7 +770,6 @@ mod tests {
             crate::gamepass::scan::world_name_from_level_meta(&meta_blob).unwrap(),
             "Renamed World"
         );
-        // Old containers remain: cleanup is a separate pass.
         assert!(!reloaded
             .latest_save_containers("OLDID000OLDID000OLDID000OLDID000")
             .is_empty());
@@ -819,7 +816,6 @@ mod tests {
             .all(|entry| entry.container_name.starts_with("A11FE000")));
         assert!(backups.read_dir().unwrap().next().is_some()); // backup was taken
 
-        // Nothing matched: 0, no error.
         let removed =
             delete_save_containers(&container_dir, "0000000000000000000000000000BEEF", &backups)
                 .unwrap();
@@ -833,11 +829,8 @@ mod tests {
         let synthetic = crate::gamepass::fixture::SyntheticSave {
             save_id: save_id.to_string(),
             level_sav: b"LEVEL".to_vec(),
-            // None, not fake bytes: save_modified_gamepass runs every non-Level
-            // container through copy_container, and a LevelMeta container is
-            // rewritten via a real GVAS parse (set_world_name_in_level_meta) that
-            // fake bytes can't survive. Omitting it keeps this test focused on
-            // WorldOption substitution.
+            // None, not fake bytes: a LevelMeta container is rewritten via a real GVAS
+            // parse (set_world_name_in_level_meta) that fake bytes can't survive.
             level_meta: None,
             local_data: None,
             world_option: Some(b"OLD_WORLD_OPTION".to_vec()),
@@ -873,8 +866,7 @@ mod tests {
         let synthetic = crate::gamepass::fixture::SyntheticSave {
             save_id: save_id.to_string(),
             level_sav: b"LEVEL".to_vec(),
-            // See the comment in the substitution test above: fake LevelMeta
-            // bytes can't survive save_modified_gamepass's real GVAS rewrite.
+            // Fake LevelMeta bytes can't survive save_modified_gamepass's real GVAS rewrite.
             level_meta: None,
             local_data: None,
             world_option: Some(b"ORIGINAL".to_vec()),

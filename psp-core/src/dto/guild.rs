@@ -16,8 +16,7 @@ pub struct GuildLabResearchInfo {
     pub work_amount: f64,
 }
 
-/// One placed structure of a base, in world units. Field declaration order is a
-/// wire contract: `serde` serializes in declaration order.
+/// One placed structure of a base, in world units.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct BaseStructureDto {
     pub instance_id: String,

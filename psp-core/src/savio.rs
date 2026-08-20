@@ -90,8 +90,7 @@ fn plm_payload(bytes: &[u8]) -> Result<Option<Vec<u8>>, CoreError> {
 }
 
 /// Parses already-decompressed GVAS bytes. Like `read_sav_bytes`, this MUST go
-/// through `session::parse_palworld_save`: it installs the Palworld type
-/// registry, without which the RawData codecs parse as opaque bytes.
+/// through `session::parse_palworld_save` to install the Palworld type registry.
 pub fn read_gvas_bytes(bytes: &[u8]) -> Result<crate::ue::Save, CoreError> {
     crate::session::parse_palworld_save(bytes)
 }
@@ -157,9 +156,8 @@ mod tests {
     }
 
     /// The GVAS pair must round-trip a save without touching compression:
-    /// `write_gvas_bytes` produces uncompressed bytes distinct from the `.sav`
-    /// payload, and reading them back through `read_gvas_bytes` yields usable
-    /// typed output (a resolvable container id), with a second write matching
+    /// `write_gvas_bytes` produces uncompressed bytes distinct from the `.sav` payload,
+    /// reading them back yields usable typed output, and a second write matches
     /// the first byte-for-byte.
     #[test]
     fn gvas_pair_round_trips_without_compression() {
@@ -177,8 +175,7 @@ mod tests {
         let regvas = write_gvas_bytes(&reparsed).expect("re-serializes");
         assert_eq!(gvas, regvas, "GVAS round-trips byte-for-byte");
 
-        // Smoke check that parsing yields usable typed output, not just bytes
-        // that happen to round-trip.
+        // Smoke check that parsing yields usable typed output, not just round-tripping bytes.
         let save_data = save_data_props(&reparsed).expect("player SaveData present");
         assert!(
             container_id_from(save_data, "OtomoCharacterContainerId").is_some()

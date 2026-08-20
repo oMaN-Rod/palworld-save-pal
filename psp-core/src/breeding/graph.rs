@@ -5,8 +5,6 @@
 //! O(1). This module exposes a thin query layer over it plus a fallback for
 //! pairs the map doesn't cover (newer pals absent from the palcalc snapshot) —
 //! a one-step direct-breed check against the combo table.
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/graph.py`.
 
 use super::data::BreedingDB;
 
@@ -39,7 +37,6 @@ fn directly_breeds_into(db: &BreedingDB, parent: &str, target: &str) -> bool {
         .any(|p| p.parent_a == parent || p.parent_b == parent)
 }
 
-/// Convenience: is `min_steps(start, target)` within `max_steps`?
 pub fn can_reach(db: &BreedingDB, start: &str, target: &str, max_steps: i64) -> bool {
     min_steps(db, start, target)
         .map(|steps| steps <= max_steps)

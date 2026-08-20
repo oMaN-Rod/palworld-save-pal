@@ -1,18 +1,9 @@
-//! Loads and indexes the breeding data files.
+//! Loads the three breeding JSONs (surfaced via `GameData`) and builds the
+//! lookup indexes the rest of the engine needs.
 //!
-//! Reads the three breeding JSONs (sourced into `data/json/` and surfaced via
-//! `GameData`) and builds the lookup indexes the rest of the engine needs.
-//! Pure data access — no solver logic.
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/data.py`.
-//!
-//! Design note on the forward index: `child_to_parents_formula` is keyed
-//! child→[parent pairs]. We invert it once into `pair_to_child` (a sorted
-//! (a,b) → child map) for O(1) "A+B → ?" lookups, which both Direct Mode and
-//! the solver need constantly. `child_to_parents` stays as-is for the reverse
-//! Direct-Mode lookup. Unique combos overwrite formula results (a given pair
-//! may appear in both; unique wins, mirroring the game's `DT_PalCombiUnique`
-//! precedence).
+//! `child_to_parents_formula` is keyed child→[parent pairs]; it is inverted once
+//! into `pair_to_child` for O(1) "A+B → ?" lookups. Unique combos overwrite
+//! formula results, mirroring the game's `DT_PalCombiUnique` precedence.
 
 use std::collections::HashMap;
 
@@ -23,9 +14,6 @@ use crate::gamedata::GameData;
 use super::model::{ComboOutcome, ComboType, DirectResult, Gender, GenderProb};
 use super::BreedingError;
 
-// ---------------------------------------------------------------------
-// raw JSON shapes
-// ---------------------------------------------------------------------
 #[derive(Debug, Deserialize)]
 struct BreedingFile {
     pal_info: HashMap<String, PalInfo>,
@@ -80,7 +68,6 @@ fn parse_gender(raw: &Option<String>) -> Option<Gender> {
         .filter(|g| matches!(g, Gender::Male | Gender::Female))
 }
 
-/// One way to produce a child: the two parent tribes plus any gender gate.
 #[derive(Debug, Clone)]
 pub struct ParentPair {
     pub parent_a: String,
@@ -91,8 +78,7 @@ pub struct ParentPair {
 }
 
 impl ParentPair {
-    /// Re-state this pair with `pinned` as `parent_a`, moving its gender gate
-    /// with it. Returns `None` when `pinned` is not one of the two parents.
+    /// Re-states the pair with `pinned` as `parent_a`, moving its gender gate with it.
     fn oriented(&self, pinned: &str) -> Option<ParentPair> {
         if self.parent_a == pinned {
             Some(self.clone())
@@ -149,8 +135,7 @@ fn raw_to_pair(raw: &RawPair, combo_type: ComboType) -> ParentPair {
     }
 }
 
-/// Do two pairs impose the same gender gate on the same two tribes? Compared
-/// after normalizing parent order, so (A♂,B♀) and (B♀,A♂) are one gate.
+/// Compared after normalizing parent order, so (A♂,B♀) and (B♀,A♂) are one gate.
 fn same_gate(x: &ParentPair, y: &ParentPair) -> bool {
     let norm = |p: &ParentPair| {
         let mut sides = [
@@ -169,10 +154,6 @@ fn push_pair(bucket: &mut Vec<ParentPair>, pair: ParentPair) {
     }
 }
 
-// ---------------------------------------------------------------------
-// BreedingDB
-// ---------------------------------------------------------------------
-/// Indexed breeding data. Construct via [`BreedingDB::from_game_data`].
 pub struct BreedingDB {
     pal_info: HashMap<String, PalInfo>,
     /// `unique_combos` reindexed by child, for `is_unique_combo`.
@@ -190,7 +171,6 @@ pub struct BreedingDB {
     min_steps: HashMap<String, HashMap<String, i64>>,
 }
 
-/// Internal: a unique combo stored against its sorted pair key.
 #[derive(Debug, Clone)]
 struct ParentPair2Child {
     pair: ParentPair,
@@ -198,8 +178,7 @@ struct ParentPair2Child {
 }
 
 impl BreedingDB {
-    /// Build the indexes from the three breeding JSONs as carried by
-    /// `GameData`. Keys: `breeding`, `breeding_meta`, `breeding_distance`.
+    /// Keys in `GameData`: `breeding`, `breeding_meta`, `breeding_distance`.
     pub fn from_game_data(game_data: &GameData) -> Result<Self, super::BreedingError> {
         let breeding = game_data
             .get("breeding")
@@ -352,7 +331,6 @@ impl BreedingDB {
             .map(|o| o.child)
     }
 
-    /// child → all parent pairs (unique + formula), deduped symmetrically.
     pub fn child_to_parents(&self, child: &str) -> &[ParentPair] {
         self.child_to_parents_merged
             .get(child)
@@ -374,12 +352,8 @@ impl BreedingDB {
         self.min_steps.get(start)
     }
 
-    /// True if `start_pal` can reach `target_pal` in ≤ `budget` breeds.
-    ///
-    /// Same pal → 0 steps (always reachable with budget ≥ 0). Unknown pairs
-    /// (absent from the distance map) are treated as unreachable unless
-    /// start == target. The `10000` unreachable sentinel naturally fails the
-    /// `<= budget` check for any sane budget.
+    /// Same pal → 0 steps. Pairs absent from the distance map are unreachable, and
+    /// the `10000` unreachable sentinel naturally fails `<= budget` for any sane budget.
     pub fn reachable(&self, start_pal: &str, target_pal: &str, budget: i64) -> bool {
         if start_pal == target_pal {
             return budget >= 0;
@@ -393,7 +367,6 @@ impl BreedingDB {
         }
     }
 
-    /// Localized display name, falling back to pal_info name then the tribe.
     pub fn display_name(&self, tribe: &str) -> String {
         if let Some(d) = self.display_names.get(tribe) {
             return d.clone();
@@ -410,7 +383,6 @@ impl BreedingDB {
         self.pal_info.get(tribe).and_then(|i| i.icon.clone())
     }
 
-    /// Breeding power value (used by the breedable-pal list). `None` if absent.
     pub fn combi_rank(&self, tribe: &str) -> Option<i64> {
         self.pal_info.get(tribe).and_then(|i| i.combi_rank)
     }
@@ -433,7 +405,6 @@ impl BreedingDB {
         self.pal_info.contains_key(tribe)
     }
 
-    /// All tribes the UI picker should offer (sorted by display name).
     pub fn breedable_tribes(&self) -> Vec<String> {
         let mut tribes: Vec<String> = self.pal_info.keys().cloned().collect();
         tribes.sort_by(|a, b| {
@@ -444,8 +415,6 @@ impl BreedingDB {
         tribes
     }
 
-    /// Is a given (parent_a, parent_b, child) triple a "unique" combo?
-    /// Checked by membership in `child_to_parents_unique`.
     pub fn is_unique_combo(&self, parent_a: &str, parent_b: &str, child: &str) -> bool {
         let Some(unique_pairs) = self.child_to_parents_unique.get(child) else {
             return false;
@@ -456,8 +425,7 @@ impl BreedingDB {
             .any(|p| pair_key(&p.parent_a, &p.parent_b) == key)
     }
 
-    /// `DirectResult` factory — shared by the forward + reverse Direct-Mode
-    /// helpers. `gender_a`/`gender_b` carry a unique combo's gender gate, if any.
+    /// `gender_a`/`gender_b` carry a unique combo's gender gate, if any.
     pub fn direct_result(
         &self,
         parent_a: &str,
@@ -494,27 +462,22 @@ mod tests {
     #[test]
     fn forward_resolves_formula_and_unique_combos() {
         let db = load_repo_db();
-        // Formula pair (Alpaca self-breed).
         assert_eq!(db.forward("Alpaca", "Alpaca").as_deref(), Some("Alpaca"));
-        // Unique combo: LazyDragon + ElecCat → LazyDragon_Electric.
         assert_eq!(
             db.forward("LazyDragon", "ElecCat").as_deref(),
             Some("LazyDragon_Electric")
         );
-        // Order-independent.
         assert_eq!(
             db.forward("ElecCat", "LazyDragon").as_deref(),
             Some("LazyDragon_Electric")
         );
-        // Unknown pair → None.
         assert_eq!(db.forward("Alpaca", "DoesNotExist"), None);
     }
 
     #[test]
     fn unique_combo_override_takes_precedence() {
         let db = load_repo_db();
-        // Where a pair is both a formula and unique combo, the unique child
-        // wins. LazyDragon_Electric is a unique child of LazyDragon+ElecCat.
+        // Where a pair is both a formula and a unique combo, the unique child wins.
         let child = db.forward("LazyDragon", "ElecCat").unwrap();
         assert_eq!(child, "LazyDragon_Electric");
         assert!(db.is_unique_combo("LazyDragon", "ElecCat", &child));
@@ -546,7 +509,6 @@ mod tests {
         kids.sort_unstable();
         assert_eq!(kids, ["CatMage_Fire", "FoxMage_Dark"]);
 
-        // Pinning genders selects exactly one.
         let male_cat = db.forward_gendered("CatMage", Gender::Male, "FoxMage", Gender::Female);
         assert_eq!(male_cat.len(), 1);
         assert_eq!(male_cat[0].child, "FoxMage_Dark");
@@ -560,7 +522,6 @@ mod tests {
         assert_eq!(flipped.len(), 1);
         assert_eq!(flipped[0].child, "FoxMage_Dark");
 
-        // An unresolved gender keeps both branches alive.
         assert_eq!(
             db.forward_gendered("CatMage", Gender::Wildcard, "FoxMage", Gender::Wildcard)
                 .len(),
@@ -584,7 +545,6 @@ mod tests {
         let db = load_repo_db();
         let tribes = db.breedable_tribes();
         assert!(!tribes.is_empty());
-        // Sorted by display name.
         let names: Vec<String> = tribes.iter().map(|t| db.display_name(t)).collect();
         let mut sorted = names.clone();
         sorted.sort();
@@ -594,10 +554,7 @@ mod tests {
     #[test]
     fn reachable_handles_sentinel_and_self() {
         let db = load_repo_db();
-        // Self → reachable at budget 0.
         assert!(db.reachable("Alpaca", "Alpaca", 0));
-        // A real 1-step neighbour reachable at budget 1 (Anubis breeds into
-        // many pals at distance 1 — pick any child it forward-resolves to).
         if let Some(child) = db.forward("Alpaca", "Deer") {
             assert!(
                 db.reachable("Alpaca", &child, 5),

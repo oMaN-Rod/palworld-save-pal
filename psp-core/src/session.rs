@@ -8,7 +8,6 @@ use crate::progress::ProgressSink;
 use crate::props;
 use uuid::Uuid;
 
-/// Where the currently loaded save came from.
 #[derive(Debug)]
 pub enum SaveKind {
     Steam {
@@ -17,7 +16,6 @@ pub enum SaveKind {
     GamePass {
         container_id: String,
     },
-    /// Web zip upload — nothing on disk.
     InMemory,
 }
 
@@ -61,12 +59,8 @@ impl PlayerFileData {
     }
 }
 
-/// One player's compressed save-out: the `.sav` bytes and, when the player has
-/// a `_dps.sav` companion, its bytes too.
 pub type PlayerSaveBytes = (Vec<u8>, Option<Vec<u8>>);
 
-/// A lazily loaded player `.sav` (and, when present, its `_dps.sav` companion),
-/// cached once parsed so a later edit doesn't re-read the file.
 pub struct LoadedPlayer {
     pub uid: Uuid,
     pub sav: crate::ue::Save,
@@ -85,20 +79,15 @@ impl LoadedPlayer {
     }
 }
 
-/// Lazily built lookup caches over `SaveSession::level`'s world tree. Every
-/// field starts `None` and is populated on first use by `domain::world`.
+/// Lazily built lookup caches over `SaveSession::level`, populated on first
+/// use by `domain::world`.
 ///
-/// INVALIDATION CONTRACT: every mutation that inserts or removes a
-/// character-map/container-map entry MUST call
-/// `SaveSession::invalidate_performance_caches` before returning. Nothing
-/// enforces this at compile time — a mutation that forgets leaves a stale
-/// index behind that silently resolves the wrong pal on the next lookup
-/// (`world_index.rs`'s
-/// `stale_character_index_after_removal_would_resolve_the_wrong_entry`
-/// demonstrates it).
+/// Every mutation that inserts or removes a character-map/container-map entry
+/// MUST call `SaveSession::invalidate_performance_caches`. Nothing enforces
+/// this, and a stale index silently resolves the wrong pal.
 ///
-/// All six are `HashMap`: each is a uuid-keyed lookup resolved one key at a
-/// time, never iterated for wire output, so their iteration order cannot leak.
+/// `HashMap` is safe here: each is resolved one key at a time, never iterated
+/// for wire output, so their iteration order cannot leak.
 #[derive(Default)]
 pub struct WorldCaches {
     /// InstanceId → `CharacterSaveParameterMap` position.
@@ -115,14 +104,13 @@ pub struct WorldCaches {
     pub player_guild_map: Option<HashMap<Uuid, Uuid>>,
 }
 
-/// A loaded world save: `Level.sav` plus the indexes and summaries needed to
-/// serve on-demand detail loads without re-parsing the whole tree.
+/// A loaded world save: `Level.sav` plus the indexes and summaries that serve
+/// on-demand detail loads without re-parsing the whole tree.
 pub struct SaveSession {
     pub kind: SaveKind,
     pub world_name: String,
     pub level: crate::ue::Save,
-    /// The save's on-disk path (Steam) or GamePass save id — a stable
-    /// identifier on the wire.
+    /// The save's on-disk path (Steam) or GamePass save id; stable on the wire.
     pub save_id: String,
     pub save_type_label: &'static str,
     /// `level_sav_bytes.len() + 33`. The 33-byte offset is part of the
@@ -138,10 +126,8 @@ pub struct SaveSession {
     pub player_sav_cache: HashMap<Uuid, crate::ue::Save>,
     pub player_summaries: BTreeMap<Uuid, PlayerSummary>,
     pub guild_summaries: BTreeMap<Uuid, GuildSummary>,
-    /// GVAS-file order of `player_summaries` / `guild_summaries`
-    /// (`CharacterSaveParameterMap` order for players, `GroupSaveDataMap` order
-    /// for guilds), NOT the `BTreeMap`'s sorted order. `sync_app_state` emits
-    /// the summary arrays in this order, so it must be carried separately.
+    /// GVAS-file order (`CharacterSaveParameterMap` for players, `GroupSaveDataMap`
+    /// for guilds), NOT the `BTreeMap`'s sorted order, which is what the wire wants.
     pub player_summary_order: Vec<Uuid>,
     pub guild_summary_order: Vec<Uuid>,
     /// InstanceId → CharacterSaveParameterMap position.
@@ -154,25 +140,19 @@ pub struct SaveSession {
     pub group_index: HashMap<Uuid, usize>,
     /// key → GuildExtraSaveDataMap position.
     pub guild_extra_index: HashMap<Uuid, usize>,
-    /// GPS (Global Pal Storage) state; the methods that mutate it live in
-    /// `domain::gps`.
+    /// GPS (Global Pal Storage) state; its mutators live in `domain::gps`.
     pub gps: crate::domain::gps::GpsState,
-    /// Lazily loaded/parsed player `.sav` files, keyed like
-    /// `player_file_refs`/`player_sav_cache`. `BTreeMap`, not `HashMap`: this
-    /// map IS iterated (`player_sav_bytes`), and a nondeterministic order here
-    /// would surface as nondeterministic save-out.
+    /// `BTreeMap`, not `HashMap`: this map IS iterated (`player_sav_bytes`), and a
+    /// nondeterministic order here would surface as nondeterministic save-out.
     pub loaded_players: BTreeMap<Uuid, LoadedPlayer>,
     /// Guild ids whose full `GuildDto` detail has been lazily loaded.
     pub loaded_guilds: HashSet<Uuid>,
-    /// Lazily built lookup caches — see `WorldCaches` for the invalidation
-    /// contract every mutation must honor.
     pub caches: WorldCaches,
 }
 
-/// Parses a Palworld save (`Level.sav`, `LevelMeta.sav`, a player `.sav`, ...).
-/// `SaveReader`'s default `error_to_raw(false)` is deliberate: on an editor
-/// path an unparseable property must be a hard error, not silently degraded to
-/// raw bytes that would be written back as-is.
+/// `SaveReader`'s default `error_to_raw(false)` is deliberate: on an editor path
+/// an unparseable property must be a hard error, not silently degraded to raw
+/// bytes that would be written back as-is.
 pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<crate::ue::Save, CoreError> {
     crate::ue::SaveReader::new()
         .game::<crate::ue::Palworld>()
@@ -181,10 +161,6 @@ pub(crate) fn parse_palworld_save(bytes: &[u8]) -> Result<crate::ue::Save, CoreE
         .map_err(|parse_error| CoreError::Parse(parse_error.to_string()))
 }
 
-/// `SaveData.WorldName` from a LevelMeta (or Level) property tree, or `None`
-/// when the property is absent or empty. Callers supply their own placeholder:
-/// `world_name_from_meta_properties` uses `"Unknown"`,
-/// `gamepass::scan::world_name_from_level_meta` uses `"Unknown World"`.
 pub(crate) fn world_name_property(properties: &crate::ue::Properties) -> Option<String> {
     props::get(properties, &["SaveData", "WorldName"])
         .and_then(props::as_str)
@@ -196,11 +172,8 @@ pub(crate) fn world_name_from_meta_properties(properties: &crate::ue::Properties
     world_name_property(properties).unwrap_or_else(|| "Unknown".to_string())
 }
 
-/// Sets `SaveData.WorldName` on a LevelMeta (or Level) save in place. Shared by
-/// `SaveSession::set_world_name` and `gamepass::scan::set_world_name_in_level_meta`.
-///
 /// Takes the whole `Save`, not its properties: a save whose world was never named
-/// recorded no `WorldName` schema, and this write creates the property.
+/// recorded no `WorldName` schema, so this write has to create the property.
 pub(crate) fn set_world_name_property(
     save: &mut crate::ue::Save,
     new_name: &str,
@@ -220,10 +193,9 @@ pub(crate) fn set_world_name_property(
     Ok(())
 }
 
-/// Resolves a `MapEntry`'s key to a `Uuid`: `nested_field` names a struct
-/// field within the key (e.g. `CharacterSaveParameterMap`'s key struct has
-/// both `PlayerUId` and `InstanceId`), or `None` when the key itself is a
-/// bare `Guid` (e.g. `GroupSaveDataMap`, `GuildExtraSaveDataMap`).
+/// `nested_field` names a struct field within the key (`CharacterSaveParameterMap`'s
+/// key struct carries both `PlayerUId` and `InstanceId`); `None` when the key is a
+/// bare `Guid` (`GroupSaveDataMap`, `GuildExtraSaveDataMap`).
 fn map_entry_key_uuid(entry: &crate::ue::MapEntry, nested_field: Option<&str>) -> Option<Uuid> {
     match nested_field {
         None => props::as_uuid(&entry.key),
@@ -231,9 +203,8 @@ fn map_entry_key_uuid(entry: &crate::ue::MapEntry, nested_field: Option<&str>) -
     }
 }
 
-/// Builds a `Uuid -> position` index over a map's entries. Entries whose key
-/// can't be resolved to a `Uuid` are skipped, so one malformed entry never
-/// fails the whole load.
+/// Entries whose key can't resolve to a `Uuid` are skipped, so one malformed entry
+/// never fails the whole load.
 fn build_position_index(
     entries: &[crate::ue::MapEntry],
     nested_field: Option<&str>,
@@ -248,9 +219,8 @@ fn build_position_index(
 }
 
 impl SaveSession {
-    /// Builds a `SaveSession` with only `kind` and `level` set; every other
-    /// field gets an empty placeholder. `load` builds on this too, so a new
-    /// field only needs a default in one place.
+    /// Only `kind` and `level` are set. `load` builds on this too, so a new field
+    /// needs a default in exactly one place.
     pub fn new_for_tests(kind: SaveKind, level: crate::ue::Save) -> Self {
         SaveSession {
             kind,
@@ -280,20 +250,14 @@ impl SaveSession {
         }
     }
 
-    /// Resets every lazily built cache to `None` so the next accessor rebuilds
-    /// it from the current world tree. Mandatory after any character-map or
-    /// container-map mutation; see `WorldCaches`.
+    /// Mandatory after any character-map or container-map mutation; see `WorldCaches`.
     pub fn invalidate_performance_caches(&mut self) {
         self.caches = WorldCaches::default();
     }
 
-    /// Parses `Level.sav` (and `LevelMeta.sav`, when present) and builds the
-    /// position indexes and summaries.
-    ///
     /// `emit_top_level_progress` gates ONLY the leading `"Loading Level.sav..."`
-    /// frame. `select_save`/`load_zip` pass `true`; the transfer path emits its
-    /// own `"Loading {label} Level.sav..."` first and passes `false` to avoid a
-    /// duplicate. Every later frame is emitted regardless.
+    /// frame; the transfer path emits its own label first and passes `false` to
+    /// avoid a duplicate. Every later frame is emitted regardless.
     #[allow(clippy::too_many_arguments)]
     pub fn load(
         kind: SaveKind,
@@ -311,8 +275,8 @@ impl SaveSession {
             progress("Loading Level.sav...");
         }
         let mut level = parse_palworld_save(level_sav_bytes)?;
-        // Priming at the parse, not at each mutation site, is what keeps a later edit
-        // from depending on which properties this particular file happened to carry.
+        // Priming at the parse, not at each mutation site, keeps a later edit from
+        // depending on which properties this particular file happened to carry.
         crate::domain::pal::ensure_pal_property_schemas(&mut level);
         crate::domain::containers::ensure_container_schemas(&mut level);
 
@@ -329,9 +293,8 @@ impl SaveSession {
             }
         };
 
-        // A broken WorldOption must not cost the user their world: Level.sav is the
-        // world, WorldOption is config. Degrade to absent + warn instead of failing
-        // the load (this is why it does NOT use `error_to_raw(false)` semantics).
+        // Level.sav is the world, WorldOption is config: a broken WorldOption degrades
+        // to absent + warn rather than failing the load.
         let world_option = world_option_bytes.and_then(|bytes| {
             match parse_palworld_save(bytes) {
                 Ok(mut save) => {
@@ -373,13 +336,8 @@ impl SaveSession {
         Ok(session)
     }
 
-    /// Invalidates the lazy caches, drops the loaded-guild set, rebuilds the
-    /// eager position indexes, and re-extracts both summary maps from the
-    /// now-mutated world tree.
-    ///
-    /// `loaded_players` is deliberately NOT cleared: it holds the parsed player
-    /// GVAS that the save-out path iterates, and dropping it would discard
-    /// pending edits.
+    /// `loaded_players` is deliberately NOT cleared: it holds the parsed player GVAS
+    /// that the save-out path iterates, and dropping it would discard pending edits.
     pub fn rebuild_player_caches(&mut self) -> Result<(), CoreError> {
         self.invalidate_performance_caches();
         self.loaded_guilds.clear();
@@ -392,14 +350,10 @@ impl SaveSession {
         crate::domain::summaries::extract_summaries(self, &crate::progress::null_progress())
     }
 
-    /// Force-loads `player_uid`'s GVAS into `loaded_players`. Needed by
-    /// handlers that resolve a player purely as a transfer DESTINATION, since
-    /// `domain::player::build_player_dto` returns `Ok(None)` for any player the
-    /// frontend has not opened yet.
-    ///
-    /// Callers must first confirm the uid is real (via
-    /// `player_summaries`/`player_file_refs`): this is a silent no-op, not an
-    /// error, when the player is already loaded or has no file reference.
+    /// Force-loads `player_uid`'s GVAS. Needed for players resolved purely as a
+    /// transfer DESTINATION, since `domain::player::build_player_dto` returns
+    /// `Ok(None)` for any player the frontend has not opened yet. Silent no-op when
+    /// already loaded or when there is no file reference.
     pub fn ensure_player_loaded(&mut self, player_uid: Uuid) -> Result<(), CoreError> {
         crate::transfer::ensure_player_gvas_loaded(self, player_uid)
     }
@@ -423,7 +377,7 @@ impl SaveSession {
             .map(Vec::as_slice)
     }
 
-    /// `CharacterSaveParameterMap` — every player and pal. Absent only in a
+    /// `CharacterSaveParameterMap` holds every player AND pal. Absent only in a
     /// malformed save.
     pub fn character_map(&self) -> Result<&[crate::ue::MapEntry], CoreError> {
         self.required_map("CharacterSaveParameterMap")
@@ -451,13 +405,10 @@ impl SaveSession {
         self.optional_map("GuildExtraSaveDataMap")
     }
 
-    /// Compresses the current (possibly edited) `Level.sav` tree back to `.sav`
-    /// bytes.
     pub fn level_sav_bytes(&self) -> Result<Vec<u8>, CoreError> {
         crate::savio::write_sav_bytes(&self.level)
     }
 
-    /// `None` when no `LevelMeta.sav` was loaded.
     pub fn level_meta_sav_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
         match &self.level_meta {
             Some(meta) => Ok(Some(crate::savio::write_sav_bytes(meta)?)),
@@ -465,8 +416,7 @@ impl SaveSession {
         }
     }
 
-    /// Compresses every LOADED player's `.sav` (and `_dps.sav` companion) back
-    /// to bytes — only the players opened so far, not every player in the save.
+    /// Only the players opened so far, not every player in the save.
     pub fn player_sav_bytes(&self) -> Result<BTreeMap<Uuid, PlayerSaveBytes>, CoreError> {
         let mut player_files = BTreeMap::new();
         for (player_id, loaded) in &self.loaded_players {
@@ -480,8 +430,7 @@ impl SaveSession {
         Ok(player_files)
     }
 
-    /// Uncompressed-GVAS sibling of `level_sav_bytes`, for callers (the web
-    /// worker) that own compression.
+    /// Uncompressed-GVAS sibling of `level_sav_bytes`, for callers that own compression.
     pub fn level_gvas_bytes(&self) -> Result<Vec<u8>, CoreError> {
         crate::savio::write_gvas_bytes(&self.level)
     }
@@ -513,10 +462,6 @@ impl SaveSession {
         Ok(player_files)
     }
 
-    /// Updates the loaded `LevelMeta.sav`'s `SaveData.WorldName` AND the
-    /// session's own `world_name`. Neither is touched unless a LevelMeta is
-    /// loaded and its `SaveData` lookup succeeds; the error string reaches the
-    /// UI verbatim.
     pub fn set_world_name(&mut self, new_name: &str) -> Result<(), CoreError> {
         let Some(meta) = self.level_meta.as_mut() else {
             return Err(CoreError::Other(
@@ -565,16 +510,12 @@ impl SaveSession {
         Ok(())
     }
 
-    /// `&mut` access to `Level.sav`'s ROOT properties — one level above
-    /// `worldSaveData`, which is only one top-level entry among siblings.
+    /// ROOT properties, one level above `worldSaveData`:
     /// `props::swap_uuid_values_deep` must walk the whole root.
     pub fn level_properties_mut(&mut self) -> &mut crate::ue::Properties {
         &mut self.level.root.properties
     }
 
-    /// Writes `second` into `first`'s loaded GVAS at both `SaveData.PlayerUId`
-    /// and `SaveData.IndividualId.PlayerUId`, and `first` into `second`'s. A
-    /// no-op for whichever uid has no loaded GVAS.
     pub fn swap_player_gvas_uids(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         fn set_player_uid(sav: &mut crate::ue::Save, new_uid: uuid::Uuid) {
             let Ok(save_data) = crate::domain::player::save_data_props_mut(sav) else {
@@ -595,13 +536,9 @@ impl SaveSession {
         }
     }
 
-    /// Runs only when BOTH uids already have a loaded GVAS and a file
-    /// reference, so this is a plain swap, never a partial one.
-    ///
-    /// Note the asymmetry: the two `.sav` trees trade places between the uids
-    /// (each carrying its `swap_player_gvas_uids`-updated `PlayerUId`), but
-    /// each uid KEEPS its own original `_dps.sav` companion rather than the one
-    /// that traveled with the swapped `.sav`.
+    /// Runs only when BOTH uids have a loaded GVAS and a file reference.
+    /// Note the asymmetry: the two `.sav` trees trade places, but each uid KEEPS its
+    /// own original `_dps.sav` companion.
     pub fn swap_player_file_refs(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         if let (Some(first_loaded), Some(second_loaded)) = (
             self.loaded_players.remove(&first),
@@ -635,11 +572,9 @@ impl SaveSession {
     }
 }
 
-/// The on-disk locations a standalone `TransferTarget` was loaded from, so the
-/// auto-save step can write the edited session straight back without
-/// re-deriving paths. `level_meta` is `None` when the load found no
-/// `LevelMeta.sav`; `save_dir` is `level_sav`'s parent, the directory backed up
-/// before writing.
+/// Where a standalone `TransferTarget` was loaded from, so the auto-save step can
+/// write back without re-deriving paths. `save_dir` is `level_sav`'s parent, the
+/// directory backed up before writing.
 pub struct TransferSaveInfo {
     pub level_sav: std::path::PathBuf,
     pub level_meta: Option<std::path::PathBuf>,
@@ -647,16 +582,14 @@ pub struct TransferSaveInfo {
     pub save_dir: std::path::PathBuf,
 }
 
-/// A standalone Steam save loaded as the transfer TARGET (`role: "target"` on
-/// `load_source_save`), as opposed to the main `Session::save`, which can also
-/// serve as a target.
+/// A standalone Steam save loaded as the transfer TARGET, as opposed to the main
+/// `Session::save`, which can also serve as a target.
 pub struct TransferTarget {
     pub session: SaveSession,
     pub save_info: TransferSaveInfo,
 }
 
-/// Per-WS-connection state; sessions are per-connection so multiple tabs cannot
-/// clobber each other.
+/// Per-WS-connection state, so multiple tabs cannot clobber each other.
 #[derive(Default)]
 pub struct Session {
     pub save: Option<SaveSession>,
@@ -664,11 +597,7 @@ pub struct Session {
     /// Standalone transfer-target save. When absent, `transfer_player` falls
     /// back to `save` as the target.
     pub transfer_target: Option<TransferTarget>,
-    /// Saves discovered by `select_gamepass_directory`, keyed by save id;
-    /// consumed by `select_gamepass_save`.
     pub gamepass_saves: HashMap<String, crate::dto::gamepass::GamepassSaveData>,
-    /// Read by the gamepass branch of `save_modded_save` to locate the original
-    /// containers to copy from.
     pub selected_gamepass_save: Option<crate::dto::gamepass::GamepassSaveData>,
 }
 
@@ -699,8 +628,6 @@ mod load_tests {
     use super::*;
     use crate::progress::null_progress;
 
-    /// Full integration test against the committed `v1_relics` Steam save
-    /// fixture (Level.sav, LevelMeta.sav and Players/). Never skips.
     #[test]
     fn test_load_real_steam_save() {
         let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -812,8 +739,7 @@ mod load_tests {
         assert!(session.caches.player_guild_map.is_none());
     }
 
-    /// `new_for_tests` is the sole construction path for every hand-built
-    /// `SaveSession` (including `load`), so pin every field it defaults.
+    /// `new_for_tests` is the sole construction path, so pin every field it defaults.
     #[test]
     fn test_new_for_tests_sets_kind_and_level_and_defaults_everything_else() {
         let level = minimal_uesave_save(crate::ue::Properties::default());
@@ -886,8 +812,7 @@ mod load_tests {
         assert_eq!("My World", world_name_from_meta_properties(&properties));
     }
 
-    /// A `crate::ue::Save` carrying only root `properties`; the header/schema
-    /// fields only matter to the (de)serializer, which these tests never touch.
+    /// Header/schema fields only matter to the (de)serializer, untouched by these tests.
     fn minimal_uesave_save(properties: crate::ue::Properties) -> crate::ue::Save {
         crate::ue::Save {
             header: crate::ue::Header {
@@ -938,8 +863,6 @@ mod load_tests {
         }
     }
 
-    /// Each of the four required maps must fail with a message naming the
-    /// missing map, never panic.
     #[test]
     fn test_required_maps_missing_from_world_save_data_return_named_parse_errors() {
         let mut root_properties = crate::ue::Properties::default();
@@ -969,8 +892,6 @@ mod load_tests {
         }
     }
 
-    /// `BaseCampSaveData` and `GuildExtraSaveDataMap` are optional: absence
-    /// must come back `None`, never an `Err`.
     #[test]
     fn test_optional_maps_absent_from_world_save_data_return_none_not_error() {
         let mut root_properties = crate::ue::Properties::default();
@@ -1001,8 +922,8 @@ mod load_tests {
             .is_some_and(|entries| entries.is_empty()));
     }
 
-    /// Level.sav is untrusted input on the load path, so a malformed or
-    /// truncated compression header must produce a clean error, never a panic.
+    /// Level.sav is untrusted input: a malformed compression header must produce a
+    /// clean error, never a panic.
     #[test]
     fn test_parse_palworld_save_rejects_unsupported_and_truncated_formats_cleanly() {
         // Non-CNK compression header: 4-byte uncompressed_len, 4-byte
@@ -1022,7 +943,6 @@ mod load_tests {
         let cnk_error = parse_palworld_save(&compression_header(b"CNK")).unwrap_err();
         assert!(matches!(cnk_error, CoreError::Parse(_)), "{cnk_error}");
 
-        // A genuinely unknown magic is still rejected cleanly.
         let unknown_error = parse_palworld_save(&compression_header(b"XYZ")).unwrap_err();
         assert!(
             matches!(unknown_error, CoreError::Parse(_)),
@@ -1036,7 +956,6 @@ mod load_tests {
         assert!(truncated_error.to_string().contains("io error"));
     }
 
-    /// Load the lexicographically first fixture from tests/fixtures/world_option/.
     fn load_world_option_fixture() -> Result<crate::ue::Save, CoreError> {
         let fixture_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/world_option/19804164.sav");
@@ -1054,10 +973,8 @@ mod load_tests {
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
-        // Assert dirty is false initially
         assert!(!session.world_option_dirty);
 
-        // Read a current setting to know what value exists
         let current_settings = crate::domain::world_option::read_settings(
             session.world_option.as_ref().unwrap(),
         );
@@ -1065,7 +982,6 @@ mod load_tests {
         let first_setting = &current_settings[0];
         let original_value = first_setting.value.clone();
 
-        // Create a genuinely different value based on the setting's type
         let different_value = match first_setting.kind {
             crate::domain::world_option::WoKind::Bool => serde_json::json!(!original_value.as_bool().unwrap()),
             crate::domain::world_option::WoKind::Int => {
@@ -1079,7 +995,6 @@ mod load_tests {
             crate::domain::world_option::WoKind::Str => serde_json::json!("different_value"),
             crate::domain::world_option::WoKind::Name => serde_json::json!("different_name"),
             crate::domain::world_option::WoKind::Enum(name) => {
-                // Pick a different variant; if it's "Custom", use "Easy", otherwise use "Custom"
                 let current_str = original_value.as_str().unwrap_or("");
                 let new_variant = if current_str.contains("Custom") { "Easy" } else { "Custom" };
                 serde_json::json!(format!("{}::{}", name, new_variant))
@@ -1088,7 +1003,6 @@ mod load_tests {
             crate::domain::world_option::WoKind::NameArray => serde_json::json!(["SomeName"]),
         };
 
-        // Apply a patch with a genuinely different value
         let patch = crate::domain::world_option::WorldOptionPatch {
             key: first_setting.key.clone(),
             value: different_value,
@@ -1097,13 +1011,11 @@ mod load_tests {
         assert!(result.is_ok(), "patch should succeed: {result:?}");
         assert!(session.world_option_dirty, "dirty should be true after real change");
 
-        // Now test the no-op case with a fresh session
         let world_option = load_world_option_fixture().unwrap();
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, minimal_uesave_save(crate::ue::Properties::default()));
         session.world_option = Some(world_option);
         session.world_option_dirty = false;
 
-        // Apply a patch with the EXISTING value (no-op)
         let patch = crate::domain::world_option::WorldOptionPatch {
             key: first_setting.key.clone(),
             value: original_value,
@@ -1154,11 +1066,9 @@ mod load_tests {
             &null_progress(),
         );
 
-        // Load must succeed (corrupt WorldOption does not fail the whole load)
         assert!(session.is_ok(), "load should succeed despite corrupt WorldOption");
 
         let session = session.unwrap();
-        // The session's world_option should be None (degraded to absent)
         assert!(session.world_option.is_none(), "corrupted WorldOption should be degraded to None");
     }
 }

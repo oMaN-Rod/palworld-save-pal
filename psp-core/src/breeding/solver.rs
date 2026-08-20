@@ -1,30 +1,24 @@
-//! The breeding-chain solver — Selection Mode and Save Mode share this.
+//! The breeding-chain solver, shared by Selection Mode and Save Mode.
 //!
-//! Algorithm: iterative working-set expansion (adapted from palcalc, but
-//! simpler — no effort/IV-probability engine). We grow a frontier of reachable
-//! `PalRef`s one breeding generation at a time, breeding every compatible pair,
-//! and keep only the optimal ref per group. The load-bearing optimizations,
-//! mostly lifted from palcalc, are:
+//! Iterative working-set expansion: grow a frontier of reachable `PalRef`s one
+//! breeding generation at a time, breeding every compatible pair, keeping only
+//! the optimal ref per group. The load-bearing optimizations:
 //!
 //! 1. **Reachability pruning** via the precomputed `MinBreedingSteps` map
-//!    ([`super::data::BreedingDB::reachable`]): before breeding a pair we check
-//!    the resulting child can still reach the target within the remaining
-//!    generation budget. Without this the frontier explodes combinatorially.
-//! 2. **Effective-passives grouping**: two refs are interchangeable for breeding
-//!    if they share species, gender, and the required-relevant subset of their
-//!    passives. Non-required passives are collapsed to a single sentinel in the
-//!    group key — so a player who owns 50 Anubis with 50 different random
-//!    passive sets occupies ONE group slot. This is what makes Save Mode
-//!    tractable over thousands of owned pals.
-//! 3. **Optimal-per-group keep**: within a group we keep only the cheapest ref
-//!    (fewest generations, then most required-passive matches).
+//!    ([`super::data::BreedingDB::reachable`]): a pair is bred only when the
+//!    child can still reach the target within the remaining generation budget.
+//!    Without this the frontier explodes combinatorially.
+//! 2. **Effective-passives grouping**: refs are interchangeable when they share
+//!    species, gender, and the required-relevant subset of their passives.
+//!    Non-required passives collapse to one sentinel in the group key, so 50
+//!    Anubis with 50 different random passive sets occupy ONE group slot.
+//! 3. **Optimal-per-group keep**: fewest generations, then most required-passive
+//!    matches.
 //!
 //! Passive inheritance is modeled as *possibility*, not probability: a child
 //! "can have" passive P iff at least one parent has P (union, capped at 4
-//! slots). Gender: bred children are Wildcard; a pair is compatible when at
+//! slots). Bred children are Wildcard gender; a pair is compatible when at
 //! least one male and one female are present (wildcard counts as either).
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/solver.py`.
 
 use std::collections::{BTreeSet, HashMap, HashSet};
 use std::sync::Arc;
@@ -37,16 +31,14 @@ use super::sources::SourceAdapter;
 
 /// Game hard cap; a child can hold at most 4 passives.
 const MAX_PASSIVES: usize = 4;
-/// Sentinel marking "one or more non-required passives present" in an effective
-/// passives set. Kept distinct from any real passive name (CamelCase IDs like
-/// "Legend", never this NUL-prefixed sentinel).
+/// Sentinel marking "one or more non-required passives present". Kept distinct
+/// from any real passive name (CamelCase IDs like "Legend", never NUL-prefixed).
 const OTHER: &str = "\u{0}other";
 
 type GroupKey = (String, Gender, BTreeSet<String>);
 
 struct WorkingSet {
-    /// Insertion order of group keys (stable iteration, mirroring CPython dict
-    /// ordering; drives which-equivalent-ref survives deterministically).
+    /// Insertion order of group keys; makes which equivalent ref survives deterministic.
     order: Vec<GroupKey>,
     map: HashMap<GroupKey, Arc<PalRef>>,
 }
@@ -59,8 +51,7 @@ impl WorkingSet {
         }
     }
 
-    /// Insert `ref_pal` if it improves on the existing entry for its group.
-    /// Returns true if the working set changed (new group or better ref).
+    /// Inserts `ref_pal` when it improves on its group's entry; true when the set changed.
     fn merge(&mut self, ref_pal: Arc<PalRef>, required: &BTreeSet<String>) -> bool {
         let key = group_key(&ref_pal, required);
         match self.map.get(&key) {
@@ -80,7 +71,6 @@ impl WorkingSet {
         }
     }
 
-    /// Snapshot of the current refs in insertion order (Arc clone is cheap).
     fn frontier(&self) -> Vec<Arc<PalRef>> {
         self.order
             .iter()
@@ -89,14 +79,12 @@ impl WorkingSet {
     }
 }
 
-/// Return up to `spec.max_results` chains from `source` to `spec.target_pal`.
-///
-/// Empty list if unreachable within `spec.max_generations` or no chain
-/// satisfies the required-passives / target-gender constraints.
+/// Up to `spec.max_results` chains from `source` to `spec.target_pal`. Empty when
+/// unreachable within `spec.max_generations` or when no chain satisfies the
+/// required-passives / target-gender constraints.
 pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -> Vec<Chain> {
     let required: BTreeSet<String> = spec.required_passives.iter().cloned().collect();
 
-    // Seed the working set, pruning unreachable pals.
     let initial: Vec<PalRef> = source
         .initial_refs(db)
         .into_iter()
@@ -118,8 +106,7 @@ pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -
         let remaining_budget = (spec.max_generations as i64) - ((gen + 1) as i64);
         let mut new_children: Vec<PalRef> = Vec::new();
 
-        // Symmetric product with i<=j dedup — unordered pairs incl. (a,a)
-        // self-breeds (combinations_with_replacement in Python).
+        // Symmetric product with i<=j dedup — unordered pairs including (a,a) self-breeds.
         let n = frontier.len();
         for i in 0..n {
             for j in i..n {
@@ -128,9 +115,8 @@ pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -
                 if !gender_compatible(p1, p2) {
                     continue;
                 }
-                // A pair usually has one outcome, but a gender-gated unique
-                // pair has two — branch on every outcome the parents' genders
-                // still admit rather than collapsing to the first.
+                // A pair usually has one outcome, but a gender-gated unique pair has
+                // two, so branch on every outcome the parents' genders still admit.
                 for outcome in
                     db.forward_gendered(&p1.species, p1.gender, &p2.species, p2.gender)
                 {
@@ -175,9 +161,6 @@ pub fn solve(db: &BreedingDB, source: &dyn SourceAdapter, spec: &BreedingSpec) -
     build_results(db, target_refs, &working, spec, &required)
 }
 
-// ---------------------------------------------------------------------
-// pair iteration + merge helpers
-// ---------------------------------------------------------------------
 fn group_key(ref_pal: &PalRef, required: &BTreeSet<String>) -> GroupKey {
     (
         ref_pal.species.clone(),
@@ -210,13 +193,9 @@ fn is_better(a: &PalRef, b: &PalRef, required: &BTreeSet<String>) -> bool {
     false
 }
 
-// ---------------------------------------------------------------------
-// passives + gender
-// ---------------------------------------------------------------------
 fn inherit_passives(a: &BTreeSet<String>, b: &BTreeSet<String>) -> BTreeSet<String> {
-    // a's passives first, then b's new ones. BTreeSet iterates sorted so the
-    // cap is deterministic (Python's frozenset iteration was not — strictly an
-    // improvement). Only set membership matters downstream.
+    // a's passives first, then b's new ones. BTreeSet iterates sorted, so the 4-slot
+    // cap is deterministic. Only set membership matters downstream.
     let mut combined: Vec<String> = Vec::with_capacity(a.len() + b.len());
     for p in a {
         combined.push(p.clone());
@@ -258,9 +237,6 @@ fn gender_feasible(db: &BreedingDB, species: &str, target: Option<Gender>) -> bo
     }
 }
 
-// ---------------------------------------------------------------------
-// seed filtering
-// ---------------------------------------------------------------------
 fn keep_seed(db: &BreedingDB, ref_pal: &PalRef, spec: &BreedingSpec) -> bool {
     if ref_pal.species == spec.target_pal {
         return true;
@@ -272,9 +248,6 @@ fn keep_seed(db: &BreedingDB, ref_pal: &PalRef, spec: &BreedingSpec) -> bool {
     )
 }
 
-// ---------------------------------------------------------------------
-// result assembly
-// ---------------------------------------------------------------------
 fn build_results(
     db: &BreedingDB,
     bred_targets: Vec<Arc<PalRef>>,
@@ -295,7 +268,6 @@ fn build_results(
         }
     }
 
-    // Filter by constraints.
     let mut qualifying: Vec<Arc<PalRef>> = candidates
         .into_iter()
         .filter(|r| {
@@ -408,7 +380,7 @@ fn flatten(
     source_idx: &mut HashMap<usize, usize>,
     step_idx: &mut HashMap<usize, usize>,
 ) {
-    // Identity by shared allocation (Arc pointer), mirroring Python's `id()`.
+    // Identity by shared allocation (Arc pointer).
     let id = Arc::as_ptr(ref_pal) as *const PalRef as usize;
     if !visited.insert(id) {
         return;
@@ -437,8 +409,8 @@ fn flatten(
     flatten(db, p1, steps, sources, visited, source_idx, step_idx);
     flatten(db, p2, steps, sources, visited, source_idx, step_idx);
 
-    // Resolve each parent's lineage: a parent is a prior bred step (already
-    // appended — post-order guarantees earlier index) or a source leaf.
+    // A parent is either a prior bred step (already appended — post-order guarantees
+    // the earlier index) or a source leaf.
     let parent_ref = |p: &Arc<PalRef>| {
         let pid = Arc::as_ptr(p) as *const PalRef as usize;
         if let Some(i) = step_idx.get(&pid) {
@@ -485,8 +457,8 @@ mod tests {
     #[test]
     fn solve_selection_finds_direct_child_chain() {
         let db = load_repo_db();
-        // Alpaca + Alpaca → Alpaca (self-breed). Selecting Alpaca and targeting
-        // Alpaca with 0 required passives yields at least a 1-gen chain.
+        // Alpaca + Alpaca → Alpaca, so targeting Alpaca with 0 required passives
+        // must yield at least a 1-gen chain.
         let source = SelectedSource::new(vec![crate::breeding::sources::SelectedPalInput {
             species: "Alpaca".to_string(),
             gender: None,
@@ -523,16 +495,14 @@ mod tests {
         assert_eq!(out.len(), MAX_PASSIVES);
     }
 
-    /// Every step's parent refs must resolve: exactly one of *step/*source is
-    /// set per parent, step refs point at an earlier step, source refs are in
-    /// bounds. This is the contract the frontend dendrogram relies on to render
-    /// correct lineage (a tribe can be both bred and a source in one chain).
+    /// Exactly one of *step/*source is set per parent, step refs point at an earlier
+    /// step, source refs are in bounds. The frontend dendrogram relies on this to
+    /// render correct lineage (a tribe can be both bred and a source in one chain).
     #[test]
     fn chain_steps_have_resolvable_parent_lineage() {
         let db = load_repo_db();
-        // A small pool of common, mutually-breeding species ensures multi-gen
-        // chains exist (the distance map is a graph metric and can't be reached
-        // by self-breeding a single source).
+        // A pool of common, mutually-breeding species ensures multi-gen chains exist;
+        // the distance map is a graph metric and can't be reached by self-breeding.
         let species = ["Anubis", "Foxparks", "Alpaca", "Chikipi"];
         let source = SelectedSource::new(
             species
@@ -545,8 +515,8 @@ mod tests {
                 .collect(),
         );
 
-        // Scan targets until we find one solved with a ≥2-generation chain
-        // (which exercises bred-parent lineage refs).
+        // Scan targets for one solved with a ≥2-generation chain, which exercises
+        // bred-parent lineage refs.
         let mut checked_chains: Option<Vec<Chain>> = None;
         let mut saw_bred_parent = false;
         for tribe in db.breedable_tribes() {
@@ -561,7 +531,6 @@ mod tests {
             if chains.is_empty() || chains[0].generations < 2 {
                 continue;
             }
-            // Validate lineage on the found chain(s).
             let chain = &chains[0];
             let mut local_bred = false;
             for (i, step) in chain.steps.iter().enumerate() {

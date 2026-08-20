@@ -20,7 +20,6 @@ use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, LoadedPlayer, SaveSession};
 
-/// Which of a player's sub-trees the transfer touches.
 #[derive(Debug, Clone)]
 pub struct TransferOptions {
     pub transfer_character: bool,
@@ -41,12 +40,11 @@ pub enum TransferError {
     Core(#[from] CoreError),
 }
 
-/// `target_player_uid == None` means spawn mode: the source player is spawned
-/// into the target save under its own uid.
+/// `target_player_uid == None` means spawn mode: the source player is spawned into
+/// the target save under its own uid.
 ///
-/// `source` and `target` are always distinct `SaveSession`s — the borrow
-/// checker forbids passing one object as two `&mut` — which is why every helper
-/// below can hold `&source` and `&mut target` at once.
+/// `source` and `target` are always distinct `SaveSession`s, which is why every
+/// helper below can hold `&source` and `&mut target` at once.
 pub fn transfer_player(
     source: &mut SaveSession,
     target: &mut SaveSession,
@@ -197,11 +195,9 @@ pub fn transfer_player(
     Ok(())
 }
 
-/// Loads a player's `.sav` (reusing the summary-extraction sav cache when
-/// present) and its `_dps.sav` companion into `loaded_players`. A no-op when
-/// already loaded or the player has no file reference.
-///
-/// Re-exposed as `pub` by `SaveSession::ensure_player_loaded`.
+/// Loads a player's `.sav` (reusing the summary-extraction sav cache when present)
+/// and its `_dps.sav` companion. A no-op when already loaded or when the player
+/// has no file reference.
 pub(crate) fn ensure_player_gvas_loaded(
     session: &mut SaveSession,
     uid: Uuid,
@@ -319,8 +315,6 @@ fn player_container_ids(save_data: &Properties) -> HashSet<Uuid> {
     ids
 }
 
-/// Appends every source container whose id is in `allowed` and not already
-/// present in the target.
 fn copy_missing_containers(
     source_entries: &[MapEntry],
     target_entries: &mut Vec<MapEntry>,
@@ -373,8 +367,6 @@ fn transfer_tech(
     target: &mut SaveSession,
     target_uid: Uuid,
 ) -> Result<(), CoreError> {
-    // Snapshot every source field first, so the source borrow is released
-    // before the target is mutated.
     let (technology_point, boss_technology_point, unlocked_recipes, record_data) = {
         let Some(gvas) = source.loaded_players.get(&source_uid) else {
             return Ok(());
@@ -570,7 +562,6 @@ fn transfer_pals(
     let target_guild_id =
         guild::find_player_guild_id(target, target_uid)?.unwrap_or(props::EMPTY_UUID);
 
-    // Collect source pals (non-player, owned by source), retargeting ownership.
     let mut transferred: Vec<MapEntry> = Vec::new();
     for entry in world::character_map(&source.level)? {
         if world::entry_is_player(entry) {
@@ -608,7 +599,6 @@ fn transfer_pals(
         .filter_map(world::entry_instance_id)
         .collect();
 
-    // Replace the target player's own pals with the transferred set.
     {
         let entries = world::character_map_mut(&mut target.level)?;
         entries.retain(|entry| {
@@ -642,8 +632,6 @@ fn character_container_slots(level: &Save, container_id: Uuid) -> Option<Vec<Str
     )
 }
 
-/// Replaces the `Slots` array of the character container with id
-/// `container_id`. `false` when no such container entry exists.
 fn set_character_container_slots(
     level: &mut Save,
     container_id: Uuid,
@@ -663,9 +651,8 @@ fn set_character_container_slots(
     Ok(true)
 }
 
-/// Copies the pal box and party slot arrays from source to target, then
-/// repoints every transferred pal's `SlotId.ContainerId.ID` at the target
-/// container when the ids differ.
+/// Copies the pal box and party slot arrays, then repoints every transferred pal's
+/// `SlotId.ContainerId.ID` at the target container when the ids differ.
 fn copy_pal_container_slots(
     source: &SaveSession,
     source_uid: Uuid,
@@ -723,9 +710,8 @@ fn copy_pal_container_slots(
     Ok(())
 }
 
-/// In the target's own guild, drops any handle already pointing at a
-/// transferred pal, then appends a fresh `{guid: nil, instance_id}` handle per
-/// transferred pal.
+/// In the target's own guild, drops any handle already pointing at a transferred
+/// pal, then appends a fresh `{guid: nil, instance_id}` handle per transferred pal.
 fn update_guild_pal_handles(
     target: &mut SaveSession,
     target_guild_id: Uuid,
@@ -756,9 +742,9 @@ fn update_guild_pal_handles(
     Ok(())
 }
 
-/// The source player's guild-tail membership (`last_online_real_time`,
-/// `player_name`), the two fields carried onto the transferred player's new
-/// membership row. `None` when the source player is in no guild.
+/// The source player's guild-tail membership (`last_online_real_time`, `player_name`)
+/// carried onto the transferred player's new membership row. `None` when the source
+/// player is in no guild.
 fn find_source_guild_member(
     source: &SaveSession,
     source_uid: Uuid,
@@ -799,8 +785,7 @@ fn transfer_guild(
         player_name,
     };
 
-    // Try to update the target's existing guild membership: find the guild
-    // whose tail already lists `target_uid`, drop that row, append the new one.
+    // Find the guild whose tail already lists `target_uid`, drop that row, append the new one.
     let target_guild_position = {
         let groups = world::group_map(&target.level)?;
         groups.iter().position(|entry| {
@@ -859,9 +844,8 @@ fn create_guild_for_player(
         group_data.group_id = props::uuid_to_guid(new_guild_id);
         group_data.individual_character_handle_ids = Vec::new();
         if let Some(guild) = guild_tail::as_guild_mut(group_data) {
-            // Preserve the source admin's role for the new single-member
-            // guild (PostUpdate guilds carry per-player roles); harmless
-            // `None` for PreUpdate.
+            // Preserve the source admin’s role for the new single-member guild
+            // (PostUpdate guilds carry per-player roles); harmless `None` for PreUpdate.
             let source_role = guild_tail::player_role(guild, source_uid);
             guild_tail::reset_to_single_member(
                 guild,

@@ -99,11 +99,9 @@ pub fn build_wgs_tree(root: &Path, saves: &[SyntheticSave]) -> Result<PathBuf, C
     Ok(container_dir)
 }
 
-/// Committed directory of real PlZ/zlib reference saves (`Level.sav`,
-/// `LevelMeta.sav`, `LocalData.sav`, `00000000000000000000000000000001.sav`),
-/// copied from the upstream palworld-save-tools public test corpus. Replaces the
-/// former external sibling-checkout dependency, so the tests that read these
-/// bytes run unconditionally on a clean checkout instead of silently skipping.
+/// Committed directory of real PlZ/zlib reference saves (`Level.sav`, `LevelMeta.sav`,
+/// `LocalData.sav`, `00000000000000000000000000000001.sav`), copied from the upstream
+/// palworld-save-tools public test corpus.
 pub fn reference_saves_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/reference_saves")
 }

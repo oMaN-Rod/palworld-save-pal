@@ -133,9 +133,8 @@ mod tests {
         build_wgs_tree, reference_saves_dir, SyntheticPlayer, SyntheticSave,
     };
 
-    /// A real, committed `LevelMeta.sav` (upstream PlZ reference corpus) to
-    /// re-stamp in tests. Always present, so the tests using it run on a clean
-    /// checkout rather than skipping.
+    /// A real, committed `LevelMeta.sav` (upstream PlZ reference corpus) to re-stamp
+    /// in tests.
     fn base_level_meta_bytes() -> Vec<u8> {
         std::fs::read(reference_saves_dir().join("LevelMeta.sav")).unwrap()
     }
@@ -247,7 +246,6 @@ mod tests {
         };
         let container_dir = build_wgs_tree(temp.path(), &[save]).unwrap();
 
-        // Add container.10 ("NEW") into the same LevelMeta blob dir.
         let index = ContainerIndex::read_from_dir(&container_dir).unwrap();
         let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
         let meta_entry = latest.get("LevelMeta").unwrap();
@@ -262,9 +260,8 @@ mod tests {
         );
     }
 
-    /// Reads world name from a real PlM/Oodle-compressed `LevelMeta.sav` (the
-    /// committed world1 fixture), covering the Oodle decompression path that the
-    /// PlZ reference corpus does not exercise.
+    /// Reads the world name from a real PlM/Oodle-compressed `LevelMeta.sav`, covering
+    /// the Oodle path the PlZ reference corpus does not exercise.
     #[test]
     fn world_name_from_oodle_level_meta() {
         let level_meta_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))

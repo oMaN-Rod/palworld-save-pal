@@ -65,8 +65,7 @@ pub fn steam_id_to_player_uid(steam_id: u64) -> uuid::Uuid {
     uuid::Uuid::from_bytes(bytes)
 }
 
-/// The game's uid obfuscation cascade over the uid's first 4 bytes; every
-/// step is wrapping u32 arithmetic, overflow included.
+/// The game's uid obfuscation cascade over the uid's first 4 bytes.
 pub fn player_uid_to_nosteam(player_uid: uuid::Uuid) -> String {
     let raw = u32::from_le_bytes(player_uid.as_bytes()[0..4].try_into().unwrap());
     let a = (raw << 8) ^ 2654435769u32.wrapping_sub(raw);

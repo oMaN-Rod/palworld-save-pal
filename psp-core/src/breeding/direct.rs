@@ -10,9 +10,6 @@
 //! each result carries the gender assignment that selects it. The child's own
 //! gender probability is display-only. The gender-aware *feasibility* logic
 //! lives in the chain solver.
-//!
-//! Faithful port of `PalSavTools/src/palworld_aio/breeding/direct.py`, extended
-//! for the gender-gated combos that port did not model.
 
 use super::data::BreedingDB;
 use super::model::DirectResult;

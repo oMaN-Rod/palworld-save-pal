@@ -124,9 +124,8 @@ pub struct PalDto {
 }
 
 impl PalDto {
-    /// Tolerant construction from arbitrary JSON: unknown keys are ignored and
-    /// null/missing values fall back to defaults. Errors only if `character_id`
-    /// is not a string.
+    /// Tolerant construction from arbitrary JSON: unknown keys ignored, null/missing
+    /// values fall back to defaults. Errors only if `character_id` is not a string.
     pub fn from_json_lenient(value: &serde_json::Value) -> Result<Self, crate::error::CoreError> {
         let source = value
             .as_object()
@@ -211,7 +210,6 @@ mod tests {
         assert_eq!(dto.gender, PalGender::Female);
         assert_eq!(dto.work_suitability.get("Handcraft"), Some(&1));
         assert_eq!(dto.storage_slot, 3);
-        // Output-only fields default when the frontend payload omits them.
         assert_eq!(dto.character_key, "");
         assert!(!dto.is_predator);
         assert_eq!(dto.filtered_nickname, None);
