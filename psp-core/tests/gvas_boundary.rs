@@ -46,8 +46,7 @@ fn gvas_getters_round_trip_and_load_ingests_gvas() {
     assert_eq!(&level_gvas[0..4], b"GVAS");
     psp_core::savio::read_gvas_bytes(&level_gvas).expect("level gvas re-parses");
 
-    // SaveSession::load ingests that same raw GVAS (pass-through), producing an
-    // equivalent session: its re-emitted GVAS matches.
+    // SaveSession::load ingests that same raw GVAS (pass-through) into an equivalent session.
     let from_gvas = psp_core::session::SaveSession::load(
         psp_core::session::SaveKind::InMemory,
         "world1".to_string(),

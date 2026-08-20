@@ -220,8 +220,7 @@ fn a_visit_respects_its_depth_ceiling() {
 #[test]
 fn a_player_scope_loads_the_player_before_resolving() {
     let mut session = common::load_corpus_session();
-    // fixture_player_uid has no backing .sav file in this corpus; use a uid
-    // that genuinely has one so this test exercises loading, not a miss.
+    // fixture_player_uid has no backing .sav file in this corpus.
     let uid = *session
         .player_file_refs
         .keys()
@@ -294,9 +293,8 @@ fn a_hatching_pals_character_id_round_trips_through_get() {
 #[test]
 fn a_visit_classifies_an_unhatched_eggs_payload_as_a_struct_not_opaque() {
     let mut session = common::load_fixture_session("v1_relics");
-    // Every egg across every fixture carries an empty `object` bag, so this
-    // only proves the walk opens the struct (NodeKind::Struct) rather than
-    // treating it as opaque -- it cannot assert on a value inside.
+    // Every egg carries an empty `object` bag, so this only proves the walk opens
+    // NodeKind::Struct rather than treating it as opaque.
     let path = RawPath::parse("worldSaveData.DynamicItemSaveData[5]").expect("parses");
 
     let mut saw_raw_data = false;
@@ -386,8 +384,6 @@ fn a_host_driven_walk_removal_invalidates_caches() {
 
 #[test]
 fn a_walked_nodes_path_round_trips_through_raw_get() {
-    // Proves node.path is genuinely usable to resolve back to the same
-    // value, not just a plausible-looking rendering.
     let mut session = common::load_corpus_session();
     let path =
         RawPath::parse("worldSaveData.CharacterSaveParameterMap[3].value.RawData.SaveParameter")
@@ -397,8 +393,7 @@ fn a_walked_nodes_path_round_trips_through_raw_get() {
     let mut checked = 0;
     while let Some(info) = session.raw_walk_next(&mut walk) {
         if info.scalar.is_some() {
-            // path must be faithfully rendered here, not nil, or this test
-            // would trivially pass by skipping every node.
+            // Must not be nil, or this test would trivially pass by skipping every node.
             let text = info.path.clone().unwrap_or_else(|| {
                 panic!("node.path must not be nil for a plain fixture key: {info:?}")
             });

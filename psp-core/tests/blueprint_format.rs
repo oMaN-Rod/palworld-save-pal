@@ -10,16 +10,13 @@ use psp_core::ue::{
     Byte, Double, MapEntry, PalStruct, Properties, Property, PropertyKey, Quat, StructValue, Vector,
 };
 
-/// How many structures the `v1_relics` fixture's richest base carries. Pinned
-/// so a cycle that loses or duplicates structures cannot pass by comparing two
+/// Pinned so a cycle that loses or duplicates structures cannot pass by comparing two
 /// equally wrong numbers against each other.
 const FIXTURE_BASE_STRUCTURES: usize = 543;
 
-/// How many of the blueprint's payloads are still TYPED Palworld structs
-/// rather than opaque byte arrays. Byte-identical round trips prove nothing
-/// here: every consumer in `capture`/`transform`/`scrub` pattern-matches
-/// `StructValue::Game(PalStruct::..)`, so a decode that loses the type view
-/// yields a blueprint that is silently inert.
+/// Byte-identical round trips prove nothing here: every consumer in
+/// `capture`/`transform`/`scrub` pattern-matches `StructValue::Game(PalStruct::..)`, so
+/// a decode that loses the type view yields a blueprint that is silently inert.
 #[derive(Debug, PartialEq, Eq)]
 struct TypedCounts {
     models: usize,
@@ -183,7 +180,6 @@ fn presets_select_the_documented_layers() {
 
 #[test]
 fn a_manifest_claiming_no_state_layers_is_consistent_when_empty() {
-    // Kills an implementation that ignores manifest and wrongly rejects if structure_count > 0.
     let mut blueprint = empty_blueprint();
     blueprint.header.structure_count = 1;
 
@@ -197,7 +193,6 @@ fn a_manifest_claiming_no_state_layers_is_consistent_when_empty() {
 
 #[test]
 fn an_older_or_current_schema_version_is_accepted() {
-    // Kills an implementation using != instead of > that rejects older blueprints.
     let current = empty_blueprint();
     assert_eq!(
         current.header.schema_version, SCHEMA_VERSION,
@@ -216,10 +211,9 @@ fn an_older_or_current_schema_version_is_accepted() {
     );
 }
 
-/// The regression that motivated the Task 3/6 amendment. `MapObjectId` is a
-/// `Property::Name`; under a naive untagged serde derive it came back as
-/// `Property::Byte(Label(..))`, silently corrupting every structure's type.
-/// Empty-collection round trips pass vacuously, so this asserts on real data.
+/// `MapObjectId` is a `Property::Name`; a naive untagged serde derive would silently
+/// corrupt it to `Property::Byte(Label(..))`. Empty-collection round trips pass
+/// vacuously, so this asserts on real data.
 #[test]
 fn json_round_trip_preserves_property_variants_not_just_values() {
     let session = common::load_fixture_session("v1_relics");
@@ -292,8 +286,8 @@ fn psp_and_json_encodings_agree() {
 
     assert_eq!(from_psp.structures.len(), from_json.structures.len());
     assert_eq!(from_psp.header.manifest, from_json.header.manifest);
-    // Lengths and the manifest agreed even while `.psp` was decoding every
-    // payload as an opaque byte array. The type view is what actually differs.
+    // Lengths and the manifest alone can agree even while `.psp` decodes every
+    // payload as an opaque byte array; the type view is what actually differs.
     assert_eq!(
         typed_counts(&from_psp),
         typed_counts(&from_json),
@@ -301,9 +295,6 @@ fn psp_and_json_encodings_agree() {
     );
 }
 
-/// A blueprint decoded from `.psp` must be as PLACEABLE as one decoded from
-/// JSON: every `RawData` still a typed Palworld struct, so `capture`'s and
-/// `transform`'s `StructValue::Game(..)` matches still fire.
 #[test]
 fn a_psp_round_trip_keeps_every_typed_palworld_struct() {
     let original = captured_fixture_blueprint();
@@ -332,10 +323,8 @@ fn a_psp_round_trip_keeps_every_typed_palworld_struct() {
     );
 }
 
-/// uesave picks `Byte::Byte(u8)` vs `Byte::Label(String)` from the tag's enum
-/// type alone, but writes whichever variant it holds. A labelled byte tagged
-/// as untyped therefore writes a string and reads back one byte, misaligning
-/// the whole stream -- a blueprint that can never be loaded again.
+/// A labelled byte tagged as untyped writes a string and reads back one byte,
+/// misaligning the whole stream -- a blueprint that can never be loaded again.
 #[test]
 fn a_labelled_byte_property_survives_both_encodings() {
     let mut original = captured_fixture_blueprint();
@@ -360,10 +349,8 @@ fn a_labelled_byte_property_survives_both_encodings() {
     }
 }
 
-/// Two conflicting REAL observations of one path cannot both be encoded: the
-/// single schema tag there decides how every value at that path decodes. A
-/// `Name` silently returning as a `Str` is the failure class this format
-/// exists to prevent, so encoding must refuse rather than pick a winner.
+/// One schema tag decides how every value at a path decodes, so two conflicting
+/// observations at one path must refuse to encode rather than pick a winner.
 #[test]
 fn two_irreconcilable_types_at_one_path_are_refused_at_encode_time() {
     let mut blueprint = captured_fixture_blueprint();
@@ -386,10 +373,8 @@ fn two_irreconcilable_types_at_one_path_are_refused_at_encode_time() {
     );
 }
 
-/// The weak/strong half of the merge policy is load-bearing and must not
-/// regress: the fixture's `ConcreteModel.RawData` is a typed
-/// `PalMapConcreteModel` on some structures and an unparsed byte array on the
-/// rest, and the typed observation has to win.
+/// The fixture's `ConcreteModel.RawData` is a typed `PalMapConcreteModel` on some
+/// structures and an unparsed byte array on the rest; the typed observation must win.
 #[test]
 fn an_unparsed_raw_data_sibling_does_not_erase_a_typed_one() {
     let original = captured_fixture_blueprint();
@@ -456,9 +441,9 @@ fn new_base_request(anchor: Anchor, guild_id: uuid::Uuid, owner: uuid::Uuid) -> 
     }
 }
 
-/// Deliberately not a multiple of a right angle: a quarter turn permutes axes
-/// and swaps signs, so a rotation applied twice, or not at all, can land on the
-/// same coordinates by coincidence.
+/// Deliberately not a multiple of a right angle: a quarter turn permutes axes and swaps
+/// signs, so a rotation applied twice, or not at all, can land on the same coordinates
+/// by coincidence.
 const PLACEMENT_YAW: f64 = 1.1;
 const PLACEMENT_X: f64 = 400_000.0;
 const PLACEMENT_Y: f64 = 400_000.0;
@@ -473,9 +458,8 @@ fn anchor_far_from_everything() -> Anchor {
     }
 }
 
-/// Hamilton product, written out here rather than reached for in `transform`:
-/// an expectation computed with the code under test is not an expectation.
-/// Components are `(x, y, z, w)`.
+/// Written out here rather than reached for in `transform`: an expectation computed
+/// with the code under test is not an expectation. Components are `(x, y, z, w)`.
 fn hamilton(a: (f64, f64, f64, f64), b: (f64, f64, f64, f64)) -> (f64, f64, f64, f64) {
     let (ax, ay, az, aw) = a;
     let (bx, by, bz, bw) = b;
@@ -491,13 +475,10 @@ fn quat_parts(q: &psp_core::ue::Quat) -> (f64, f64, f64, f64) {
     (q.x.0, q.y.0, q.z.0, q.w.0)
 }
 
-/// Every structure the placed base owns, as the WORLD transform `place` wrote
-/// into `Model.RawData.initial_transform_cache`, in on-disk order.
-///
-/// Reading this rather than recapturing is what makes the anchor rotation
-/// testable at all: `to_relative` and `to_world` are each other's inverse, so a
-/// capture-place-recapture cycle returns the original offsets even when the
-/// rotation step is removed from both sides.
+/// Reading the WORLD transform `place` wrote is what makes the anchor rotation testable
+/// at all: `to_relative` and `to_world` are each other's inverse, so a
+/// capture-place-recapture cycle returns the original offsets even when the rotation
+/// step is removed from both sides.
 fn placed_world_transforms(session: &SaveSession, base_id: uuid::Uuid) -> Vec<PalTransform> {
     let Ok(Some(values)) = psp_core::domain::world::map_object_values(&session.level) else {
         return Vec::new();
@@ -521,18 +502,11 @@ fn placed_world_transforms(session: &SaveSession, base_id: uuid::Uuid) -> Vec<Pa
         .collect()
 }
 
-/// The whole pipeline in one cycle: capture, place at a different anchor under a
-/// non-zero yaw, then capture the placed base again. A blueprint IS the set of
-/// offsets from its anchor, so the cycle re-derives every one of them --
-/// translation, rotation and scale -- against a new anchor, and separately
-/// checks the world transforms the placement actually wrote against offsets
-/// rotated by this test's own trigonometry. The geometry survives both or the
-/// blueprint is not portable.
-///
-/// One structure is given a rotation about X and a lopsided scale before
-/// placement. The fixture's own structures are all yawed, and yaw quaternions
-/// commute with the anchor's, which would leave the rotation checks unable to
-/// tell `anchor * relative` from `relative * anchor`.
+/// Checks both the re-derived offsets after a capture-place-recapture cycle AND the
+/// world transforms `place` actually wrote, against offsets rotated by this test's own
+/// trigonometry. One structure is given a rotation about X and a lopsided scale: the
+/// fixture's own structures are all yawed, and yaw quaternions commute with the
+/// anchor's, which would leave the rotation checks unable to tell operand order.
 #[test]
 fn capture_place_recapture_preserves_structure_geometry() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -661,9 +635,6 @@ fn capture_place_recapture_preserves_structure_geometry() {
         "every structure's scale must survive the cycle, worst drift {worst_scale}"
     );
 
-    // What the placement actually wrote, against offsets this test rotates
-    // itself. The cycle above is an inverse pair and cannot see a rotation that
-    // was dropped from both halves of it.
     let placed = placed_world_transforms(&session, new_base_id);
     assert_eq!(
         placed.len(),
@@ -706,12 +677,9 @@ fn capture_place_recapture_preserves_structure_geometry() {
     );
 }
 
-/// Capture -> encode -> decode -> place -> serialize -> reparse, for BOTH
-/// encodings. Comparing encoded sizes is what let a `.psp` decode that produced
-/// zero typed structures pass while JSON produced every one of them, so this
-/// compares the typed struct census and then places what it decoded: a
-/// blueprint whose `Model.RawData` is an opaque byte array cannot be rebound to
-/// a base at all, and the placed base comes back empty.
+/// Comparing encoded sizes alone is not enough: a `.psp` decode that produced zero
+/// typed structures could still pass. This compares the typed struct census and then
+/// places what it decoded, since an opaque `Model.RawData` cannot be rebound at all.
 #[test]
 fn a_blueprint_decoded_from_either_encoding_still_places() {
     let source = common::load_fixture_session("v1_relics");

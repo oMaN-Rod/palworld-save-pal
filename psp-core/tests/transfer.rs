@@ -60,8 +60,6 @@ fn world1_spawn_mode_transfer_keeps_player_present() {
         return;
     };
 
-    // Spawning into the same uid in an identical world must succeed and leave
-    // the player's summary in place after the cache rebuild.
     transfer_player(
         &mut source,
         &mut target,
@@ -74,9 +72,8 @@ fn world1_spawn_mode_transfer_keeps_player_present() {
     assert!(target.player_summaries.contains_key(&source_uid));
 }
 
-/// True spawn mode (`target_player_uid = None` with a valid source uid): the
-/// only path that clones the source GVAS and inserts it into the target's
-/// `loaded_players`/`player_file_refs`.
+/// True spawn mode (`target_player_uid = None`): the only path that clones the source
+/// GVAS into the target's `loaded_players`/`player_file_refs`.
 #[test]
 fn world1_true_spawn_mode_inserts_cloned_player() {
     let mut source = common::load_fixture_session("world1");
@@ -87,8 +84,6 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
         return;
     };
 
-    // A freshly loaded target has parsed no player GVAS yet, so the spawn
-    // branch is the only thing that can populate `loaded_players` for this uid.
     assert!(
         !target.loaded_players.contains_key(&source_uid),
         "precondition: target has not loaded this player before the spawn"
@@ -118,7 +113,6 @@ fn world1_true_spawn_mode_inserts_cloned_player() {
     );
 }
 
-/// The same assertions against the committed `v1_relics` corpus fixture.
 #[test]
 fn corpus_spawn_mode_transfer_copies_player_into_target() {
     let mut source = common::load_corpus_session();

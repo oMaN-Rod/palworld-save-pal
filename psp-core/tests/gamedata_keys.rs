@@ -21,14 +21,8 @@ fn pals_json_keys_are_upper_camel_and_boss_prefixes_are_uppercase() {
         map.len()
     );
 
-    // `PalLookup::lower_to_canonical` (gamedata.rs) folds every key to
-    // lowercase for `pal_data_for`'s case-insensitive lookup. If pals.json
-    // ever carried two keys differing only by case, that fold would collide
-    // and `pal_data_for` would silently resolve to whichever key happened to
-    // be inserted last -- a real, load-bearing invariant, unlike a bare
-    // "starts uppercase" check (pal_data_for doesn't care about case at all,
-    // so that assertion never caught anything `pal_data_for` itself would
-    // notice).
+    // `PalLookup::lower_to_canonical` folds every key to lowercase for `pal_data_for`'s
+    // case-insensitive lookup; two keys differing only by case would collide there.
     let mut seen_lower = HashSet::new();
     let mut boss_count = 0;
     for key in map.keys() {
@@ -47,27 +41,19 @@ fn pals_json_keys_are_upper_camel_and_boss_prefixes_are_uppercase() {
         }
     }
 
-    // format_character_key (dto/pal.rs) only strips a BOSS_ prefix when the
-    // full id is ABSENT from known_pal_keys (an exact-case HashSet) -- so if
-    // pals.json ever lost every BOSS_ entry, that branch would silently stop
-    // being exercised by real data and this guard would still pass with zero
-    // iterations. Pin that boss keys actually exist.
+    // `format_character_key` only strips a BOSS_ prefix when the full id is absent
+    // from `known_pal_keys`; pin that boss keys actually exist to exercise that branch.
     assert!(
         boss_count > 0,
         "expected at least one BOSS_-prefixed pal key, got 0"
     );
 }
 
-/// Every language the app can be set to must actually resolve its l10n tables.
+/// `GameData` keys files by their on-disk path, but four l10n directories are mixed-case
+/// (`es-MX`, `pt-BR`, `zh-Hans`, `zh-Hant`) while the app sends lowercase locale codes; an
+/// exact-case lookup resolves those four to nothing, for every table.
 ///
-/// `GameData` keys files by their on-disk path, but four of the l10n directories are
-/// mixed-case (`es-MX`, `pt-BR`, `zh-Hans`, `zh-Hant`) while the app sends lowercase
-/// locale codes (`es-mx`, ...). With an exact-case lookup those four languages resolve to
-/// NOTHING -- for every table, not just one -- and users see raw code names throughout the
-/// app instead of translations.
-///
-/// The codes below are `SupportedLanguage` in `ui/src/lib/types/settings.ts`. They are what
-/// the server receives in `settings.language` and interpolates into the l10n key.
+/// The codes below are `SupportedLanguage` in `ui/src/lib/types/settings.ts`.
 #[test]
 fn every_supported_language_resolves_its_l10n_tables() {
     const APP_LOCALES: [&str; 16] = [

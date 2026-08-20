@@ -25,8 +25,8 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// Serializes `Level.sav` and reads it straight back. Writing bytes the reader
-/// chokes on is the failure this guards -- `level_sav_bytes()` alone cannot see it.
+/// Serializes `Level.sav` and reads it straight back -- `level_sav_bytes()` alone
+/// cannot see bytes the reader chokes on.
 fn written_level_parses_back(session: &SaveSession, what: &str) {
     let bytes = session
         .level_sav_bytes()
@@ -122,10 +122,9 @@ fn adding_the_first_pal_to_a_world_that_has_none_serializes() {
     pal::add_player_pal(&mut session, &data, id, "Lamball", "Fluffy", pal_box, None)
         .expect("add pal");
 
-    // The new pal's character-container slot is a `PalCharacterContainer` RawData.
-    // A world with no pal has empty `Slots`, so no tag for it was ever recorded and
-    // the primer supplies one -- a wrong tag here writes a save the game silently
-    // drops the pal from, and that this app then cannot reopen.
+    // A world with no pal has empty `Slots`, so no tag for the new slot was ever
+    // recorded; a wrong primed tag here writes a save the game silently drops the
+    // pal from.
     written_level_parses_back(&session, "adding the first pal");
 }
 

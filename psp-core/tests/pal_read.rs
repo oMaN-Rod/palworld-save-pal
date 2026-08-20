@@ -46,9 +46,6 @@ fn guid_property(text: &str) -> Property {
     Property::Struct(StructValue::Guid(guid))
 }
 
-/// A well-formed non-player `CharacterSaveParameterMap` entry, built by hand
-/// so a synthetic `save_parameter` (one missing `Rank`, say) can be fed
-/// straight into `pal_summaries`.
 fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntry {
     let mut key_properties = Properties::default();
     key_properties.insert(
@@ -77,9 +74,6 @@ fn pal_character_entry(instance_id: &str, save_parameter: Properties) -> MapEntr
     }
 }
 
-/// A `SaveSession` whose `CharacterSaveParameterMap` is exactly `entries` and
-/// which has no base camp map -- enough to run `pal_summaries` end to end
-/// without a save file on disk.
 fn session_with_character_map_entries(entries: Vec<MapEntry>) -> SaveSession {
     let mut world_save_data = Properties::default();
     world_save_data.insert("CharacterSaveParameterMap", Property::Map(entries));
@@ -123,9 +117,8 @@ fn pal_summaries_match_python_defaults() {
     assert_eq!(summaries.len(), pal_entry_count);
     for summary in &summaries {
         assert!(summary.level >= 1);
-        // Every real pal already carries an explicit `Rank`, so this only
-        // shows no corpus pal has `Rank == 0`; the "Rank absent -> 1" default
-        // is covered by `pal_summaries_defaults_rank_to_one_when_rank_is_absent`.
+        // Every real pal carries an explicit `Rank`; the "absent -> 1" default is
+        // covered separately by `pal_summaries_defaults_rank_to_one_when_rank_is_absent`.
         assert!(
             summary.rank >= 1,
             "no corpus pal has Rank == 0 (summaries.py get_pal_summaries)"
@@ -133,10 +126,9 @@ fn pal_summaries_match_python_defaults() {
     }
 }
 
-/// An absent `Rank` defaults to `1` in `PalSummary` but to `0` in the full
-/// `PalDto` dump -- both are deliberate. No real save can prove the summary
-/// side (every real pal carries an explicit `Rank`), so this feeds a
-/// `SaveParameter` that genuinely has none.
+/// An absent `Rank` defaults to `1` in `PalSummary` but to `0` in the full `PalDto`
+/// dump -- both deliberate. No real save can prove this (every real pal carries an
+/// explicit `Rank`), so this feeds a `SaveParameter` that genuinely has none.
 #[test]
 fn pal_summaries_defaults_rank_to_one_when_rank_is_absent() {
     let mut save_parameter = Properties::default();
@@ -154,9 +146,9 @@ fn pal_summaries_defaults_rank_to_one_when_rank_is_absent() {
     );
 }
 
-/// An empty `Gender` string leaves `PalSummary.gender` as `None`, unlike the
-/// full `PalDto` dump, which runs any present value through `from_prefixed`
-/// and so defaults even an empty string to `Female`.
+/// An empty `Gender` string leaves `PalSummary.gender` as `None`, unlike the full
+/// `PalDto` dump, which runs any present value through `from_prefixed` and so
+/// defaults even an empty string to `Female`.
 #[test]
 fn pal_summaries_treats_an_empty_gender_string_as_absent() {
     let mut save_parameter = Properties::default();
@@ -219,11 +211,9 @@ fn world1_fixture_pals_have_real_field_values() {
 }
 
 /// `pal_summaries` derives `guild_id`/`base_id` by decoding the raw
-/// `BaseCampSaveData`/`WorkerDirector` byte blob, so this pins the decode
-/// against world1's known base: guild `54491484-...`, worker container
-/// `a77f85ca-...`. Every one of world1's 11 pals sits in a party/pal-box
-/// container rather than the base's worker container, so no pal in this
-/// fixture ever resolves a `base_id`.
+/// `BaseCampSaveData`/`WorkerDirector` byte blob. Every one of world1's pals sits in a
+/// party/pal-box container rather than the base's worker container, so none resolves
+/// a `base_id`.
 #[test]
 fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
     let session = common::load_fixture_session("world1");
@@ -245,8 +235,6 @@ fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
     assert!(summaries.iter().all(|summary| summary.base_id.is_none()));
 }
 
-/// Save data is untrusted: an entry that isn't shaped like a pal at all must
-/// be skipped, never panic.
 #[test]
 fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
     let malformed = psp_core::ue::MapEntry {
@@ -258,8 +246,6 @@ fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
     assert!(pal::pal_dto_from_entry(&malformed, &data).is_none());
 }
 
-/// An entry whose `SaveParameter` is empty must still produce a `PalDto`:
-/// every field in `read_save_parameter_dto` has a default for "key absent".
 #[test]
 fn read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter() {
     let empty_save_parameter = psp_core::ue::Properties::default();

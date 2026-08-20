@@ -76,8 +76,6 @@ fn player_character_entry(
     }
 }
 
-/// A `SaveSession` whose `CharacterSaveParameterMap` is exactly `entries` --
-/// enough to drive `build_player_dto` without a save file on disk.
 fn session_with_character_map_entries(entries: Vec<MapEntry>) -> SaveSession {
     let mut world_save_data = Properties::default();
     world_save_data.insert("CharacterSaveParameterMap", Property::Map(entries));
@@ -97,10 +95,8 @@ fn player_sav_save(timestamp_ticks: u64, save_data: Properties) -> Save {
     minimal_save(root_properties)
 }
 
-/// `filtered_nickname` is deliberate: it is populated only for DPS pals and
-/// reads "FilteredNickName", a different save property from the "NickName"
-/// every pal uses for `nickname`. Writing it through "NickName" here would
-/// silently test the wrong field.
+/// `filtered_nickname` reads "FilteredNickName", a different save property from the
+/// "NickName" every pal uses for `nickname`.
 fn dps_slot(instance_id: Uuid, character_id: &str, filtered_nickname: Option<&str>) -> StructValue {
     let mut save_parameter = Properties::default();
     save_parameter.insert("CharacterID", Property::Name(character_id.to_string()));
@@ -142,11 +138,9 @@ fn ticks_conversion_is_correct() {
 const WORLD1_PLAYER_O: &str = "8c2f1930-0000-0000-0000-000000000000";
 const WORLD1_PLAYER_SKY: &str = "43797f87-0000-0000-0000-000000000000";
 
-/// The expected values below are world1 player `8c2f1930`'s real save data:
-/// nickname "O", level 65, 7 technology points, 502 unlocked technologies, a
-/// `SFBow_5` weapon and 6 armor dynamic items. Those equipment containers are
-/// the only real-save coverage of `read_item_container`'s Weapon/Armor
-/// branches (no fixture player has an Egg container).
+/// The weapon and armor containers below are the only real-save coverage of
+/// `read_item_container`'s Weapon/Armor branches (no fixture player has an Egg
+/// container).
 #[test]
 fn player_details_load_and_cache() {
     let mut session = common::load_fixture_session("world1");
@@ -174,10 +168,8 @@ fn player_details_load_and_cache() {
         details.otomo_container_id,
         Some("65a4f103-471b-3102-7bb3-18bcefee294d".parse().unwrap())
     );
-    // Sub-second precision is the point: the fixture's raw tick value
-    // (639111766067410000) is shared with `dto::summary::ticks_to_datetime`'s
-    // own test, so a lossy ticks/1e7 division anywhere on this path goes red.
-    // Compared via the JSON encoding, not `NaiveDateTime`'s `Display`.
+    // The fixture's raw tick value is shared with `dto::summary::ticks_to_datetime`'s
+    // own test. Compared via the JSON encoding, not `NaiveDateTime`'s `Display`.
     assert_eq!(
         details
             .last_online_time
@@ -224,8 +216,8 @@ fn player_details_load_and_cache() {
         .as_deref()
         == Some("HeadEquip041")));
 
-    // Cross-check against `player_summaries.pal_count`, which is derived by a
-    // separate code path (`pal_owner_counts`), not by this one.
+    // Cross-check against `player_summaries.pal_count`, derived by the separate
+    // `pal_owner_counts` code path.
     for (_, pal) in details.pals.iter() {
         assert_eq!(pal.owner_uid, Some(player_id));
     }
@@ -254,7 +246,6 @@ fn player_details_second_player_real_field_values() {
     assert_eq!(details.technologies.len(), 7);
 }
 
-/// Broad but shallow coverage of the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_player_loads_without_panicking() {
     let mut session = common::load_corpus_session();
@@ -284,7 +275,6 @@ fn unknown_player_returns_none() {
     assert!(result.is_none());
 }
 
-/// `get_player_details` must not re-parse a player's `.sav` on a second call.
 #[test]
 fn player_details_second_call_reuses_the_cached_loaded_sav_without_reparsing() {
     let mut session = common::load_fixture_session("world1");
@@ -296,8 +286,8 @@ fn player_details_second_call_reuses_the_cached_loaded_sav_without_reparsing() {
         .expect("player loads");
     assert_eq!(first.nickname, "sky");
 
-    // The on-disk file is untouched, so only a genuine cache hit (no
-    // re-read/re-parse) can make the second call observe this mutation.
+    // Only a genuine cache hit (no re-read/re-parse) can make the second call
+    // observe this in-memory-only mutation.
     let loaded = session.loaded_players.get_mut(&player_id).unwrap();
     let timestamp = loaded
         .sav
@@ -320,9 +310,8 @@ fn player_details_second_call_reuses_the_cached_loaded_sav_without_reparsing() {
     );
 }
 
-/// `get_player_details` is read-only over `session.level`, so every
-/// position-keyed index must resolve identically before and after it runs and
-/// no cache invalidation is required.
+/// `get_player_details` is read-only over `session.level`, so no cache invalidation
+/// is required.
 #[test]
 fn get_player_details_never_moves_any_world_tree_index_position() {
     let mut session = common::load_fixture_session("world1");
@@ -356,9 +345,9 @@ fn get_player_details_never_moves_any_world_tree_index_position() {
     );
 }
 
-// The DPS branch has no real-save coverage: neither world1 nor world2
-// contains a single `*_dps.sav`. The synthetic saves below are its only
-// proof, hand-built to the real `SaveParameterArray` shape.
+// Neither world1 nor world2 contains a single `*_dps.sav`, so the synthetic saves
+// below, hand-built to the real `SaveParameterArray` shape, are the DPS branch's
+// only coverage.
 
 fn player_id_and_instance() -> (Uuid, Uuid) {
     (
@@ -413,8 +402,8 @@ fn build_player_dto_populates_dps_pals_and_filters_the_none_placeholder() {
     assert_eq!(dps_pal.filtered_nickname, Some("DPS Sheep".to_string()));
 }
 
-/// With no `_dps.sav` loaded, `PlayerDto.dps` must serialize as `null`, not
-/// `{}` -- a distinction the frontend depends on.
+/// `PlayerDto.dps` must serialize as `null`, not `{}`, when no `_dps.sav` was loaded --
+/// a distinction the frontend depends on.
 #[test]
 fn build_player_dto_dps_is_none_when_no_dps_file_was_loaded() {
     let (player_id, instance_id) = player_id_and_instance();
@@ -454,8 +443,7 @@ fn get_player_details_returns_none_when_player_has_no_file_ref() {
     assert!(result.is_none());
 }
 
-/// A file ref that resolves to no `sav` bytes (an orphaned `_dps.sav`-only
-/// entry) must return `None`, not error.
+/// A file ref that resolves to no `sav` bytes (an orphaned `_dps.sav`-only entry).
 #[test]
 fn get_player_details_returns_none_when_file_ref_has_no_sav_bytes() {
     let (player_id, instance_id) = player_id_and_instance();
@@ -486,8 +474,8 @@ fn build_player_dto_returns_none_for_a_player_id_never_loaded() {
     assert!(result.is_none());
 }
 
-/// `PlayerDto`'s absent-nickname fallback is the ninja-emoji pattern,
-/// distinct from `PlayerSummary`'s "Player (xxxxxxxx)" -- not interchangeable.
+/// `PlayerDto`'s absent-nickname fallback is the ninja-emoji pattern, distinct from
+/// `PlayerSummary`'s "Player (xxxxxxxx)".
 #[test]
 fn build_player_dto_falls_back_to_the_ninja_emoji_nickname_when_nickname_is_absent() {
     let (player_id, instance_id) = player_id_and_instance();
@@ -518,11 +506,10 @@ fn build_player_dto_falls_back_to_the_ninja_emoji_nickname_when_nickname_is_abse
     assert!(details.nickname.starts_with('\u{1f977}'));
 }
 
-/// A player the frontend has not opened yet is present in `player_summaries`
-/// (eagerly populated) but absent from `loaded_players` (lazily populated), so
-/// `build_player_dto` alone returns `None` for them. WS handlers must gate on
-/// `player_summaries`, force-load via `ensure_player_loaded`, and only then
-/// call `build_player_dto` -- otherwise a valid player reads as "not found".
+/// A player is present in `player_summaries` (eagerly populated) but absent from
+/// `loaded_players` (lazily populated) until opened, so WS handlers must gate on
+/// `player_summaries`, force-load via `ensure_player_loaded`, and only then call
+/// `build_player_dto` -- otherwise a valid player reads as "not found".
 #[test]
 fn ensure_player_loaded_resolves_a_real_but_unloaded_player_for_build_player_dto() {
     let mut session = common::load_fixture_session("world1");
@@ -557,9 +544,6 @@ fn ensure_player_loaded_resolves_a_real_but_unloaded_player_for_build_player_dto
     assert_eq!(details.nickname, "sky");
 }
 
-/// The force-load above must not resurrect a nonexistent player:
-/// `ensure_player_loaded` is a no-op for a uid with no file reference, so a
-/// bogus uid still resolves to `None` ("Player not found").
 #[test]
 fn ensure_player_loaded_is_a_no_op_for_an_unknown_player_and_stays_unresolved() {
     let mut session = common::load_fixture_session("world1");

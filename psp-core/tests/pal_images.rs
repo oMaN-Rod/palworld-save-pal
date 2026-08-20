@@ -26,21 +26,12 @@ use std::path::Path;
 
 use psp_core::gamedata::GameData;
 
-/// Pal keys that are known to have no `.webp` asset, and are deliberately
-/// exempted rather than fixed.
+/// Pal keys with no `.webp` asset, deliberately exempted rather than fixed.
 ///
-/// All eight entries are internal body-part/phase sub-entities of the
-/// `RAID_YakushimaBoss002` raid boss (its two hand hitboxes, its head
-/// hitbox, and their "_2" phase variants). A player can never own or
-/// display one of these as a pal, upstream ships no art for them either
-/// (we cherry-picked their image commits verbatim), and at runtime the UI
-/// simply falls back to `unknown.webp` for them. If upstream ever adds art
-/// for these, the "still missing" check below will start failing and this
-/// list should be pruned.
-///
-/// If this list grows for a *new* reason, add a comment explaining why that
-/// entry is legitimately un-ownable/internal rather than just silencing the
-/// test.
+/// All eight are internal body-part/phase sub-entities of the `RAID_YakushimaBoss002`
+/// raid boss. A player can never own or display one, and upstream ships no art for
+/// them either. If this list grows, add a comment explaining why the new entry is
+/// legitimately un-ownable/internal rather than just silencing the test.
 const KNOWN_MISSING_ART: &[&str] = &[
     "RAID_YakushimaBoss002",
     "RAID_YakushimaBoss002_2",
@@ -77,8 +68,6 @@ fn cleanse_character_id(key: &str) -> String {
     s
 }
 
-/// Returns true if neither `<cleansed>.webp` nor the menu-icon fallback
-/// exists in `existing` for the given pal `key`.
 fn is_missing_art(key: &str, existing: &HashSet<String>) -> bool {
     let cleansed = cleanse_character_id(key);
     let direct = format!("{cleansed}.webp");
@@ -111,8 +100,6 @@ fn every_pal_key_has_an_image_asset() {
             .and_then(|v| v.as_bool())
             .unwrap_or(false);
         if !is_pal {
-            // Non-pal entries (humans/NPCs) never reach a per-key image
-            // lookup in the UI; they render a shared "commonhuman" icon.
             continue;
         }
 
@@ -137,9 +124,6 @@ fn every_pal_key_has_an_image_asset() {
         &missing[..missing.len().min(20)]
     );
 
-    // Keep KNOWN_MISSING_ART honest: if upstream ever ships art for one of
-    // these entries, fail here so the entry gets pruned instead of the
-    // allow-list silently rotting.
     let still_missing: Vec<&str> = KNOWN_MISSING_ART
         .iter()
         .copied()

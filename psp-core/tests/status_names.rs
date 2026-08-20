@@ -47,9 +47,8 @@ fn status_name_map_has_all_18_entries() {
     }
 }
 
-/// Collect every english status key the reader produces across all players of a
-/// fixture. Proves our Japanese strings match what the game actually writes: a
-/// typo would simply never match, and the key would never appear.
+/// Proves our Japanese strings match what the game actually writes: a typo would
+/// simply never match, and the key would never appear.
 fn keys_seen_in(fixture: &str) -> std::collections::BTreeSet<String> {
     let mut session = common::load_fixture_session(fixture);
     let data = game_data();
@@ -98,8 +97,6 @@ fn setting_a_stat_with_no_row_appends_one() {
         .unwrap()
         .unwrap();
 
-    // Find a relic stat this player has NO row for. Every fixture player is missing at
-    // least one; if not, the fixture changed and this test is no longer meaningful.
     let missing = STATUS_NAME_MAP
         .iter()
         .map(|(_, english)| *english)
@@ -122,9 +119,7 @@ fn setting_a_stat_with_no_row_appends_one() {
 }
 
 /// The DTO is untrusted input off the websocket. A negative rank is a value the game
-/// never writes, so it must not conjure a row either. Without this, a mutation of the
-/// append guard from `> 0` to `!= 0` would append `StatusPoint = -5` and every other
-/// test would still pass.
+/// never writes, so it must not conjure a row either.
 #[test]
 fn setting_a_missing_stat_to_a_negative_appends_nothing() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -158,8 +153,7 @@ fn setting_a_missing_stat_to_a_negative_appends_nothing() {
 }
 
 /// A rank-0 stat has no row in a real save. The UI sends all 13 relic keys, so an
-/// unedited save carries 0 for every stat the player never unlocked -- appending those
-/// would bloat the save with rows the game never wrote.
+/// unedited save carries 0 for every stat the player never unlocked.
 #[test]
 fn setting_a_missing_stat_to_zero_appends_nothing() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -193,10 +187,8 @@ fn setting_a_missing_stat_to_zero_appends_nothing() {
     );
 }
 
-/// Writes the fixture player back through the real writer, first letting `edit`
-/// mutate the DTO, and returns the resulting `Level.sav` bytes -- status-point
-/// rows live in the character map inside `Level.sav`, never in the player
-/// `.sav`, so that is the only file a status-point-row assertion can trust.
+/// Status-point rows live in the character map inside `Level.sav`, never in the
+/// player `.sav`, so that is the only file a status-point-row assertion can trust.
 fn resave_level_sav(edit: impl FnOnce(&mut psp_core::dto::player::PlayerDto)) -> Vec<u8> {
     let mut session = common::load_fixture_session("v1_relics");
     let data = game_data();
@@ -214,18 +206,11 @@ fn resave_level_sav(edit: impl FnOnce(&mut psp_core::dto::player::PlayerDto)) ->
     session.level_sav_bytes().expect("serialize Level.sav")
 }
 
-/// Pins the anti-bloat rule end to end. The UI sends every relic key on save, 0 for the
-/// ones the player never unlocked; that must produce the exact same bytes as a save that
-/// sent only the keys the file already had rows for -- not one byte of new row data.
-///
 /// Compared against another write rather than the on-disk bytes on purpose: some fields
 /// `update_players` touches are not byte-identical to the source file for unrelated
 /// reasons. Diffing two writes isolates the zeros, which is what this pins.
 #[test]
 fn resaving_with_all_relic_keys_at_zero_is_byte_identical() {
-    // Anti-vacuity guard: if the fixture player already had a row for every status
-    // stat, the edit closures below would insert nothing and both writes would match
-    // trivially, proving nothing about the anti-bloat rule.
     let missing_count = {
         let mut session = common::load_fixture_session("v1_relics");
         let data = game_data();
@@ -262,10 +247,7 @@ fn resaving_with_all_relic_keys_at_zero_is_byte_identical() {
 }
 
 /// `setting_a_stat_with_no_row_appends_one` only proves the row exists in the
-/// in-memory DTO -- `build_player_dto` reads back in-memory state, never bytes.
-/// This proves an appended row actually reaches the serialized `Level.sav`: a
-/// write with one status stat freshly set to a positive value must differ from
-/// an untouched write, byte for byte.
+/// in-memory DTO; this proves it reaches the serialized `Level.sav`.
 #[test]
 fn appended_status_row_survives_level_sav_serialization() {
     let untouched = resave_level_sav(|_| {});

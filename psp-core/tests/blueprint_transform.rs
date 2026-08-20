@@ -72,17 +72,15 @@ fn scale_is_carried_through_unchanged() {
 
 #[test]
 fn non_parallel_axes_pin_the_quaternion_multiply_order() {
-    // Pure-Z rotations commute under Hamilton product, so all 4 existing tests
-    // would pass even if operand order in multiply() were swapped. This test
-    // uses non-parallel axes (Z and X) to detect such a bug.
+    // Pure-Z rotations commute under Hamilton product, so all 4 existing tests would
+    // pass even if operand order in multiply() were swapped; non-parallel axes (Z and
+    // X) are needed to detect that bug.
 
     let sqrt2_over_2 = std::f64::consts::FRAC_1_SQRT_2;
 
-    // Anchor rotation: 90° about Z
     let mut anchor = identity_at(0.0, 0.0, 0.0);
     anchor.rotation = transform::yaw_quat(std::f64::consts::FRAC_PI_2);
 
-    // Structure world rotation: 90° about X
     let mut world = identity_at(0.0, 0.0, 0.0);
     world.rotation = Quat {
         x: Double(sqrt2_over_2),
@@ -93,13 +91,12 @@ fn non_parallel_axes_pin_the_quaternion_multiply_order() {
 
     let relative = transform::to_relative(&anchor, &world);
 
-    // Place relative at identity anchor; since to_world against identity
-    // returns the relative rotation unchanged, placed.rotation must equal conj(A) * W
+    // `to_world` against an identity anchor returns the relative rotation unchanged,
+    // so placed.rotation must equal conj(A) * W = (0.5, -0.5, -0.5, 0.5); a swapped
+    // operand order would flip y to +0.5.
     let identity = identity_at(0.0, 0.0, 0.0);
     let placed = transform::to_world(&identity, &relative);
 
-    // Expected: conj(A) * W = (x=0.5, y=-0.5, z=-0.5, w=0.5)
-    // If operands were swapped, y would be +0.5 instead of -0.5
     assert_close(placed.rotation.x.0, 0.5, "placed rotation x");
     assert_close(placed.rotation.y.0, -0.5, "placed rotation y");
     assert_close(placed.rotation.z.0, -0.5, "placed rotation z");

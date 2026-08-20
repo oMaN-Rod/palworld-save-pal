@@ -22,8 +22,6 @@ fn set_of(ids: impl IntoIterator<Item = Uuid>) -> HashSet<Uuid> {
     ids.into_iter().filter(|id| !id.is_nil()).collect()
 }
 
-/// Every id the blueprint DEFINES, grouped so a test can assert each group is
-/// non-empty (never vacuously disjoint) and fully regenerated.
 fn definition_sets(blueprint: &BaseBlueprint) -> Vec<(&'static str, HashSet<Uuid>)> {
     vec![
         ("structure models", set_of(capture::structure_instance_ids(blueprint))),
@@ -49,8 +47,7 @@ fn connector(properties: &Properties) -> Option<&PalConnector> {
     }
 }
 
-/// Every 16-byte window in every connector's opaque tail that equals one of
-/// `ids`, in the raw Palworld guid byte encoding.
+/// Every 16-byte window in a connector's opaque tail matching one of `ids`.
 fn connector_tail_hits(blueprint: &BaseBlueprint, ids: &HashSet<Uuid>) -> usize {
     blueprint
         .structures
@@ -102,8 +99,6 @@ fn work_assigns(work: &StructValue) -> Vec<(Uuid, Uuid)> {
     out
 }
 
-/// `(owner_map_object_model_id, owner_map_object_concrete_model_id,
-/// transform.map_object_instance_id)` for every captured work.
 fn work_owner_ids(work: &StructValue) -> Vec<(&'static str, Uuid)> {
     let mut out = Vec::new();
     let StructValue::Struct(work_props) = work else { return out };
@@ -199,7 +194,6 @@ fn container_slot_ids(
     out
 }
 
-/// A captured pal's `SaveParameter.SlotId.ContainerId.ID` back-pointer.
 fn pal_container_id(entry: &MapEntry) -> Option<Uuid> {
     let save_parameter = world::entry_save_parameter(entry)?;
     props::get(save_parameter, &["SlotID", "ContainerId", "ID"])
@@ -266,8 +260,7 @@ fn remapping_keeps_the_model_to_concrete_reference_consistent() {
             "Model.concrete_model_instance_id must still point at ConcreteModel.instance_id"
         );
     }
-    // Most structures have a nil concrete model, so the loop above passes on
-    // them whatever the remap does; only the linked ones test anything.
+    // Most structures have a nil concrete model, so only the linked ones test anything.
     let linked = set_of(capture::structure_concrete_instance_ids(&blueprint)).len();
     assert!(linked > 0, "no structure carries a ConcreteModel, so this asserts nothing");
 }
@@ -300,8 +293,6 @@ fn every_reference_resolves_into_the_post_remap_definition_set() {
     let characters = lookup(&sets, "characters");
     let dynamic_items = lookup(&sets, "dynamic items");
 
-    // Only a non-nil reference tests anything: nil means "outside the
-    // blueprint", which is always allowed.
     let mut checked = 0;
     let mut check = |label: &str, id: Uuid, targets: &HashSet<Uuid>| {
         if id.is_nil() {
@@ -445,9 +436,8 @@ fn the_work_collection_lists_exactly_the_remapped_works() {
     );
 }
 
-/// The `WorkCollection` rebuild shortens an `ArrayProperty<Byte>`, and the
-/// connector substitution rewrites bytes inside another. Both have to survive
-/// the encoders that turn a blueprint into a `.psp` file.
+/// The `WorkCollection` rebuild shortens an `ArrayProperty<Byte>`; that resize must
+/// survive the encoders that turn a blueprint into a `.psp` file.
 #[test]
 fn a_remapped_blueprint_still_round_trips_through_both_encodings() {
     let mut blueprint = fixture_blueprint();
@@ -468,10 +458,8 @@ fn a_remapped_blueprint_still_round_trips_through_both_encodings() {
     );
 }
 
-/// Adds a byte to one of the base camp's opaque blobs. `WorkerDirector` is a
-/// fixed 118-byte layout and `WorkCollection` is checked to its last byte, so
-/// one byte too many is enough to make either refuse to decode -- which is what
-/// a Palworld update that moved a field would look like from here.
+/// `WorkerDirector` is a fixed 118-byte layout; `WorkCollection` is checked to its last
+/// byte -- one extra byte fails either to decode.
 fn lengthen_base_camp_blob(base_camp: &mut Properties, field: &str) {
     let raw_data = props::get_mut(base_camp, &[field, "RawData"])
         .unwrap_or_else(|| panic!("the fixture base camp must carry a {field} blob"));
@@ -480,17 +468,12 @@ fn lengthen_base_camp_blob(base_camp: &mut Properties, field: &str) {
     bytes.push(0);
 }
 
-/// Both of `remap`'s opaque-blob rewrites used to shrug a decode failure off and
-/// carry the blob over untouched: the placed base's workers would go on naming
-/// the SOURCE save's container, and the base would go on calling its works by
-/// the source save's ids, with nothing reported. The blobs are read by offset,
-/// so one Palworld update is all it would take.
+/// Both of `remap`'s opaque-blob rewrites are read by offset, so a Palworld update
+/// that moved a field would make either refuse to decode.
 #[test]
 fn a_base_camp_blob_that_does_not_decode_refuses_the_remap() {
     let blueprint = fixture_blueprint();
 
-    // The control: the same blueprint, blobs intact, remaps cleanly -- so a
-    // refusal below is the corruption and not the blueprint.
     assert!(
         remap::remap_blueprint(&mut blueprint.clone()).is_ok(),
         "setup: an intact blueprint must remap, or the refusals below prove nothing"
@@ -523,8 +506,7 @@ fn a_nil_id_stays_nil() {
 /// How many structures the `v1_relics` fixture's richest base carries.
 const FIXTURE_BASE_STRUCTURES: usize = 543;
 
-/// Every capture layer. A UID leak that only the default preset avoids is still
-/// a leak, so nothing here is allowed to test `full` alone.
+/// Every capture layer: a UID leak that only the default preset avoids is still a leak.
 fn capture_layers() -> [(&'static str, CaptureOptions); 3] {
     [
         ("blueprint", CaptureOptions::blueprint()),
@@ -546,11 +528,9 @@ fn anchor_far_from_everything() -> Anchor {
     Anchor { x: 400_000.0, y: 400_000.0, z: 1000.0, yaw_radians: 0.0 }
 }
 
-/// Every byte encoding one UID can appear in inside a blueprint's payload: the
-/// on-disk `FGuid` layout (four little-endian `u32`s, which shuffles the uuid's
-/// byte order), the unshuffled uuid bytes, and the hyphenated ASCII form.
-/// Scanning for the uuid's own byte order alone would miss every guid the game
-/// actually writes.
+/// The on-disk `FGuid` layout (four little-endian `u32`s, which shuffles the uuid's
+/// byte order) versus the unshuffled uuid bytes and the hyphenated ASCII form -- the
+/// three ways one UID can appear in a blueprint's payload.
 fn uid_needles(uid: Uuid) -> Vec<(&'static str, Vec<u8>)> {
     vec![
         ("on-disk guid bytes", palbin::guid_bytes(uid).to_vec()),
@@ -563,11 +543,8 @@ fn contains(haystack: &[u8], needle: &[u8]) -> bool {
     haystack.windows(needle.len()).any(|window| window == needle)
 }
 
-/// `uid_needles` is only defence in depth if its three forms are three
-/// different byte strings that `contains` can each actually find. Only the
-/// on-disk form ever matches a payload the game wrote, so a form that had
-/// silently become a copy of another -- or one `contains` could never match --
-/// would sit in the leak scans looking like coverage they do not provide.
+/// Only the on-disk form ever matches a payload the game wrote; the other two must
+/// still be distinct, findable byte strings or they are dead weight in the leak scans.
 #[test]
 fn every_uid_needle_form_is_a_distinct_findable_needle() {
     let uid = Uuid::from_u128(0x36d1_1392_45df_a3d2_8f2a_448c_0b55_0e18);
@@ -592,11 +569,8 @@ fn every_uid_needle_form_is_a_distinct_findable_needle() {
     }
 }
 
-/// A `.psp` file's payload, decompressed. `to_psp_bytes` writes the body with
-/// `write_plm`, so the file is Oodle-compressed and a byte scan over it as
-/// written can only ever fail by coincidence -- it would pass with every UID in
-/// the save still inside. Decompressing first is what makes the scan mean
-/// anything.
+/// A `.psp` file's payload, decompressed. The file is Oodle-compressed, so a byte
+/// scan over it as written would pass with every UID still inside.
 fn psp_payload(blueprint: &BaseBlueprint) -> Vec<u8> {
     let file = gvas::to_psp_bytes(blueprint).expect("psp encode");
     let body = &file[gvas::PSP_MAGIC.len() + 4..];
@@ -625,9 +599,6 @@ fn no_player_uid_from_the_source_save_survives_capture() {
     );
 
     for (layer, options) in capture_layers() {
-        // The control. Without it a clean scan would prove only that these
-        // needles are absent from any blueprint whatsoever, whether or not the
-        // scrub pass does anything.
         let leaky = capture::capture_unscrubbed(&session, base_id, options, "Home")
             .expect("unscrubbed capture");
         let leaky_json = gvas::to_json(&leaky).expect("serialize");
@@ -653,8 +624,8 @@ fn no_player_uid_from_the_source_save_survives_capture() {
     }
 }
 
-/// The belt-and-braces check: a UID hiding in an unmodelled `unknown_bytes`
-/// tail never reaches the JSON as a string, but it is still in the file.
+/// A UID hiding in an unmodelled `unknown_bytes` tail never reaches the JSON as a
+/// string, but it is still in the file.
 #[test]
 fn no_player_uid_survives_into_the_psp_bytes() {
     let session = common::load_fixture_session("v1_relics");
@@ -668,9 +639,6 @@ fn no_player_uid_survives_into_the_psp_bytes() {
     );
 
     for (layer, options) in capture_layers() {
-        // The control. Without it a clean scan would prove only that these
-        // needles are absent from any blueprint whatsoever, whether or not the
-        // scrub pass does anything.
         let leaky = capture::capture_unscrubbed(&session, base_id, options, "Home")
             .expect("unscrubbed capture");
         let leaky_payload = psp_payload(&leaky);
@@ -681,12 +649,7 @@ fn no_player_uid_survives_into_the_psp_bytes() {
             .map(|(form, _)| form)
             .collect();
         // Asserted exactly, not `any`: the game writes every guid as an on-disk
-        // `FGuid`, so that is the one form a real leak takes, and an `any` here
-        // would go on passing on some other form if it stopped matching. The
-        // other two forms stay in the scan for a leak the game would never
-        // write -- a guid an encoder emitted in uuid order, or one spelled out
-        // as a string -- and `every_uid_needle_form_is_a_distinct_findable_needle`
-        // is what shows they are live needles rather than dead weight.
+        // `FGuid`, so that is the one form a real leak takes.
         assert_eq!(
             hit_forms.into_iter().collect::<Vec<_>>(),
             vec!["on-disk guid bytes"],
@@ -713,11 +676,8 @@ fn no_player_uid_survives_into_the_psp_bytes() {
     }
 }
 
-/// Guild identity is not player identity, and `common::all_player_uids`
-/// structurally cannot see it: a guild id is a `GroupSaveDataMap` key, never a
-/// `PlayerUId`, so the two uid scans above would stay green with the source
-/// save's guild stamped on every captured pal. It identifies the sharer just as
-/// squarely, so it gets its own scan, at every layer and in both encodings.
+/// A guild id is a `GroupSaveDataMap` key, never a `PlayerUId`, so the two player-uid
+/// scans above would stay green even with the source save's guild stamped on every pal.
 #[test]
 fn no_guild_id_from_the_source_save_survives_capture() {
     let session = common::load_fixture_session("v1_relics");
@@ -736,8 +696,6 @@ fn no_guild_id_from_the_source_save_survives_capture() {
     );
 
     for (layer, options) in capture_layers() {
-        // The control, in both encodings. Without it a clean scan would prove
-        // only that a guild id is absent from any blueprint whatsoever.
         let leaky = capture::capture_unscrubbed(&session, base_id, options, "Home")
             .expect("unscrubbed capture");
         assert!(
@@ -775,11 +733,8 @@ fn no_guild_id_from_the_source_save_survives_capture() {
     }
 }
 
-/// Where the guild id sat on a captured pal: the typed `PalCharacterData`
-/// sibling of the `SaveParameter` bag, which the property-bag scrub never
-/// touches. Pinned structurally as well as by byte scan, so a future capture
-/// that carried pals from a save whose guild id happened to be absent from
-/// `GroupSaveDataMap` could not quietly reintroduce it.
+/// A pal's guild id lives in the typed `PalCharacterData` sibling of the `SaveParameter`
+/// bag, which the property-bag scrub never touches -- so it is pinned structurally too.
 #[test]
 fn no_captured_pal_still_names_its_guild() {
     let session = common::load_fixture_session("v1_relics");
@@ -808,8 +763,6 @@ fn no_captured_pal_still_names_its_guild() {
     );
 }
 
-/// Each captured character's typed `PalCharacterData.group_id`, one per
-/// character, duplicates kept so a caller can assert the count too.
 fn character_group_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     blueprint
         .characters
@@ -823,11 +776,8 @@ fn character_group_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
 
 const LOCK_MODULE_TYPE: &str = "EPalMapObjectConcreteModelModuleType::PasswordLock";
 
-/// Distinctive enough that finding it in a payload cannot be coincidence.
 const INJECTED_PASSWORD: &str = "PspBlueprintLockSecret";
 
-/// A structure's `Model.RawData.base_camp_id_belong_to`, the field capture
-/// selects a base's structures by.
 fn structure_base_id(object_props: &Properties) -> Option<Uuid> {
     let model = object_props.0.get(&PropertyKey::from("Model")).and_then(props::struct_props)?;
     match model.0.get(&PropertyKey::from("RawData"))? {
@@ -838,13 +788,8 @@ fn structure_base_id(object_props: &Properties) -> Option<Uuid> {
     }
 }
 
-/// Gives `count` of the base's structures a real `PasswordLock` module. No
-/// fixture ships one -- no chest or door in them was ever locked -- so without
-/// this every assertion about what a lock leaks passes over an empty set.
-///
-/// The module is appended to a `ModuleMap` the structure already carries, so it
-/// travels through the same property and the same write schema the game's own
-/// modules do.
+/// No fixture ships a locked chest or door, so without this injection every
+/// assertion about what a lock leaks passes over an empty set.
 fn inject_password_locks(
     session: &mut SaveSession,
     base_id: Uuid,
@@ -911,10 +856,8 @@ fn inject_password_locks(
     injected
 }
 
-/// One structure's `PasswordLock` modules as `(password, player uids)`, walked
-/// through the public property surface rather than through capture's own
-/// traversal helper. The fixture already ships lock modules of its own, all
-/// with an empty password, so nothing here may assume a lock is an injected one.
+/// The fixture already ships lock modules of its own, all with an empty password, so
+/// nothing here may assume a lock is an injected one.
 fn structure_locks(properties: &Properties) -> Vec<(String, Vec<Uuid>)> {
     let mut out = Vec::new();
     let Some(concrete) =
@@ -949,7 +892,6 @@ fn captured_locks(blueprint: &BaseBlueprint) -> Vec<(String, Vec<Uuid>)> {
     blueprint.structures.iter().flat_map(|s| structure_locks(&s.properties)).collect()
 }
 
-/// How many captured locks still carry the injected secret.
 fn injected_passwords(blueprint: &BaseBlueprint) -> usize {
     captured_locks(blueprint).iter().filter(|(password, _)| password == INJECTED_PASSWORD).count()
 }
@@ -958,9 +900,6 @@ fn lock_player_uids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     captured_locks(blueprint).into_iter().flat_map(|(_, uids)| uids).collect()
 }
 
-/// How many of the base's structures hold the injected secret in the SAVE --
-/// the control that owes nothing to capture, so a scan of what capture produced
-/// cannot be clean merely because the injection never landed.
 fn source_injected_passwords(session: &SaveSession, base_id: Uuid) -> usize {
     let Ok(Some(values)) = world::map_object_values(&session.level) else {
         return 0;
@@ -977,16 +916,9 @@ fn source_injected_passwords(session: &SaveSession, base_id: Uuid) -> usize {
         .count()
 }
 
-/// A `PasswordLock`'s `password` is the secret that opens the chest or door it
-/// sits on, and a blueprint is a file its author hands to strangers.
-/// `configured` and `full` both keep the lock module -- `access_config` is on
-/// for both -- so at those two layers nothing but the scrub decides whether the
-/// secret travels. Only `full`, which is understood to be a complete snapshot,
-/// keeps it.
-///
-/// Both the typed field and the bytes the file is actually made of are checked:
-/// a password is a plain string, so the byte scan is what would catch it
-/// surviving somewhere the structural read does not look.
+/// `configured` and `full` both keep the lock module, but only `full` keeps its
+/// password -- a plain string, so the byte scan catches it surviving anywhere the
+/// structural read does not look.
 #[test]
 fn a_lock_password_leaves_the_save_only_in_a_full_capture() {
     const LOCKS: usize = 3;
@@ -1010,10 +942,8 @@ fn a_lock_password_leaves_the_save_only_in_a_full_capture() {
              blueprint proves only that the injection never landed"
         );
 
-        // The unscrubbed control, which can only speak for a layer that keeps
-        // the lock at all: `blueprint` drops the whole thing in
-        // `clear_access_config`, before the scrub is reached. The source-side
-        // count above is what stands in for it there.
+        // `blueprint` drops the lock entirely in `clear_access_config`, before the
+        // scrub is reached, so it has no unscrubbed lock to check here.
         let leaky = capture::capture_unscrubbed(&session, base_id, options, "Home")
             .expect("unscrubbed capture");
         let control = if options.access_config { LOCKS } else { 0 };
@@ -1065,8 +995,6 @@ fn a_lock_password_leaves_the_save_only_in_a_full_capture() {
     }
 }
 
-/// Every id class a placement appends to the destination, read straight off the
-/// session so a test can compare the save's own census before and after.
 fn destination_id_sets(session: &SaveSession) -> Vec<(&'static str, Vec<Uuid>)> {
     vec![
         ("map objects", common::all_map_object_instance_ids(session)),
@@ -1128,8 +1056,6 @@ fn destination_concrete_instance_ids(session: &SaveSession) -> Vec<Uuid> {
         .collect()
 }
 
-/// What the blueprint itself says it will add to each id class, counted off the
-/// blueprint rather than off the placement's own report.
 fn blueprint_definition_counts(blueprint: &BaseBlueprint) -> Vec<(&'static str, usize)> {
     vec![
         ("map objects", capture::structure_instance_ids(blueprint).len()),
@@ -1196,9 +1122,8 @@ fn placement_introduces_no_guid_that_already_existed() {
         assert!(!before.contains(&id), "placement reused an existing instance id: {id}");
     }
 
-    // The same invariant across every OTHER id class the placement appends to:
-    // a collision -- with the destination or within the placement itself --
-    // shows up as a set that grew by less than the number of rows added.
+    // A collision, with the destination or within the placement itself, shows up as
+    // a set that grew by less than the number of rows added.
     let census_after = destination_id_sets(&session);
     for ((name, before), ((_, after), (_, added))) in census_before
         .into_iter()
@@ -1220,9 +1145,6 @@ fn placement_introduces_no_guid_that_already_existed() {
     }
 }
 
-/// Ids are only consistent if every reference lands somewhere. The check runs
-/// against the WHOLE destination, not just the placed base: a reference that
-/// resolves to nothing in the save is a dangling pointer whatever it once meant.
 #[test]
 fn every_reference_a_placed_base_makes_resolves_in_the_destination() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1254,8 +1176,7 @@ fn every_reference_a_placed_base_makes_resolves_in_the_destination() {
     let characters = lookup(&sets, "characters");
     let dynamic_items = lookup(&sets, "dynamic items");
 
-    // Unscrubbed, because the scrub pass is for what LEAVES the save: this
-    // reads back what actually landed in it.
+    // Unscrubbed: the scrub pass is for what leaves the save, not what lands in it.
     let placed =
         capture::capture_unscrubbed(&session, new_base_id, CaptureOptions::full(), "Placed")
             .expect("recapture");

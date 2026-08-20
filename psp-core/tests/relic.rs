@@ -25,8 +25,6 @@ fn relic_type_map_has_13_entries() {
     }
 }
 
-/// Every relic type must grant a stat the status map knows about, or the relic
-/// would be unrepresentable in the player DTO.
 #[test]
 fn every_relic_status_name_is_a_known_status_name() {
     for (relic_key, japanese) in RELIC_TYPE_TO_STATUS_NAME {
@@ -122,7 +120,6 @@ fn max_rank_and_effect_for_rank() {
     assert_eq!(relic::effect_for_rank(&data, "swim_speed", 20), Some(100.0));
     // Rank 0 means "no ranks bought": no effect.
     assert_eq!(relic::effect_for_rank(&data, "swim_speed", 0), None);
-    // Out of range.
     assert_eq!(relic::effect_for_rank(&data, "swim_speed", 21), None);
     // capture_power grants no percentage at any rank.
     assert_eq!(
@@ -159,9 +156,6 @@ fn no_fixture_player_exceeds_max_rank() {
             }
         }
     }
-    // Without this, the test passes vacuously if the fixtures ever stop carrying
-    // relic-backed stats -- and it is the only thing validating our max ranks
-    // against real game output.
     assert!(
         ranks_checked > 0,
         "checked no relic-backed ranks at all: the fixtures no longer exercise this"
@@ -177,20 +171,15 @@ fn relic_key_for_stat(stat: &str) -> &str {
     }
 }
 
-/// Every language must carry every relic key. Guards a game patch that renumbers or
-/// renames the BUILDUP_PLAYER_STATUS rows: the l10n files are joined to relic keys BY
-/// INDEX, so a renumbering would silently mislabel every stat rather than fail loudly.
+/// The l10n files are joined to relic keys BY INDEX, so a game patch that renumbers the
+/// BUILDUP_PLAYER_STATUS rows would silently mislabel every stat rather than fail loudly.
 #[test]
 fn relic_l10n_covers_every_language_and_key() {
-    // The directories `relics.json` actually lives in -- the same ones every other l10n
-    // file uses. Indonesian is `id-id`, NOT `id`: a stale `id/` directory also exists and
-    // nothing reads it, so writing there would silently leave Indonesian users with raw keys.
-    //
-    // Note these are the ON-DISK directory names. Four of them (`es-MX`, `pt-BR`, `zh-Hans`,
-    // `zh-Hant`) do not match the lowercase locale codes the app sends (`es-mx`, ...), and
-    // `GameData`'s lookup is exact-case -- so those languages currently resolve to nothing for
-    // EVERY l10n table, not just this one. That is a pre-existing, repo-wide bug; this test
-    // asserts the files exist where the rest of the l10n lives, and does not paper over it.
+    // ON-DISK directory names. Indonesian is `id-id`, not `id` (a stale, unread `id/`
+    // directory also exists). Four of these (`es-MX`, `pt-BR`, `zh-Hans`, `zh-Hant`) don't
+    // match the lowercase locale codes the app sends, and `GameData`'s lookup is
+    // exact-case, so those languages currently resolve to nothing for every l10n table --
+    // a pre-existing, repo-wide bug this test does not paper over.
     const LANGS: [&str; 16] = [
         "de", "en", "es", "es-MX", "fr", "id-id", "it", "ko", "pl", "pt-BR", "ru", "th", "tr",
         "vi", "zh-Hans", "zh-Hant",
@@ -231,7 +220,6 @@ fn relic_l10n_names_are_not_just_the_keys() {
     assert_eq!(en["sphere_homing"]["localized_name"], "Sphere Tracking");
 }
 
-/// Every relic type needs an icon, or its row renders the generic unknown.webp.
 #[test]
 fn every_relic_has_an_icon_asset() {
     let img_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../ui/src/lib/assets/img");

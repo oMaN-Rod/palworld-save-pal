@@ -47,8 +47,7 @@ fn defeated_bosses_reads_normal_and_tower_flags_from_a_real_save() {
     );
 }
 
-/// world1's players have no boss-defeat flags at all -- a legitimately
-/// key-less save. Must read as an empty list, not error or `None`.
+/// world1's players have no boss-defeat flags at all -- a legitimately key-less save.
 #[test]
 fn defeated_bosses_is_empty_list_when_record_data_has_no_flags() {
     let mut session = common::load_fixture_session("world1");
@@ -64,9 +63,8 @@ fn defeated_bosses_is_empty_list_when_record_data_has_no_flags() {
     assert_eq!(dto.defeated_bosses, Some(vec![]));
 }
 
-/// No write path exists for boss-defeat flags. An unrelated resave (editing
-/// `collected_effigies`, which does write) must leave `defeated_bosses`
-/// exactly where it started, proving the flags round-trip untouched.
+/// No write path exists for boss-defeat flags, so an unrelated resave must leave
+/// `defeated_bosses` exactly where it started.
 #[test]
 fn defeated_bosses_survives_an_unrelated_resave_untouched() {
     use psp_core::dto::ordered_map::OrderedMap;

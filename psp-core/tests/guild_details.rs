@@ -16,10 +16,8 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-// world1's founding guild: admin 8c2f1930 ("O"), base_camp_level 1, one base
-// (`4bb24de8-...`) whose worker container is empty (SlotNum 1, 0 filled) but
-// which owns 4 storage containers (one "ItemChest", three "CommonDropItem3D"),
-// and 150 lab research entries (all work_amount 0.0).
+// world1's founding guild: admin 8c2f1930 ("O"), base_camp_level 1, one base whose
+// worker container is empty but owns 4 storage containers and 150 lab research entries.
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
 const WORLD1_GUILD_ADMIN: &str = "8c2f1930-0000-0000-0000-000000000000";
 const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
@@ -110,8 +108,7 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
     assert!(session.guild_summaries[&guild_id].loaded);
 }
 
-/// A guild with zero bases must surface `bases: Some(empty map)`, never
-/// `None` -- the wire contract the frontend relies on.
+/// `bases: Some(empty map)`, never `None` -- the wire contract the frontend relies on.
 #[test]
 fn guild_details_with_no_bases_is_some_empty_map_not_none() {
     let mut session = common::load_fixture_session("world1");
@@ -128,8 +125,7 @@ fn guild_details_with_no_bases_is_some_empty_map_not_none() {
         .bases
         .expect("bases is Some, not None, even when empty");
     assert!(bases.is_empty());
-    // This guild's tail carries no base ids, so its chest is whatever
-    // `GuildExtraSaveDataMap` says: assert only that the container_id and
+    // This guild's tail carries no base ids, so assert only that container_id and
     // guild_chest agree with each other (both present or both absent).
     assert_eq!(
         details.guild_chest.is_some(),
@@ -137,7 +133,6 @@ fn guild_details_with_no_bases_is_some_empty_map_not_none() {
     );
 }
 
-/// Broad but shallow: every guild in both fixtures loads and flips `loaded`.
 #[test]
 fn every_fixture_guild_loads_without_panicking() {
     let mut guild_count = 0;
@@ -159,7 +154,6 @@ fn every_fixture_guild_loads_without_panicking() {
     assert_eq!(guild_count, 3, "world1 has 2 guilds, world2 has 1");
 }
 
-/// The same sweep against the committed `v1_relics` corpus fixture.
 #[test]
 fn every_corpus_guild_loads_without_panicking() {
     let mut session = common::load_corpus_session();
@@ -219,9 +213,7 @@ fn update_lab_research_on_a_guild_never_loaded_is_guild_not_found() {
     assert!(matches!(result, Err(CoreError::GuildNotFound(id)) if id == guild_id));
 }
 
-/// A loaded guild whose `GuildExtraSaveDataMap` entry carries no `"Lab"`
-/// property must no-op, not error. Synthetic: no fixture guild is missing
-/// `Lab`.
+/// Synthetic: no fixture guild is missing `Lab`.
 #[test]
 fn update_lab_research_with_no_lab_data_is_a_silent_no_op() {
     let guild_id: Uuid = "11111111-2222-3333-4444-555555555555".parse().unwrap();
@@ -287,9 +279,8 @@ fn raw_tail_bytes(
         .clone()
 }
 
-/// `update_lab_research` writes only into `GuildExtraSaveDataMap.Lab`, a
-/// separate struct from `GroupSaveDataMap`'s guild tail, so neither it nor
-/// `get_guild_details` may perturb a single tail byte.
+/// `update_lab_research` writes only into `GuildExtraSaveDataMap.Lab`, a separate
+/// struct from `GroupSaveDataMap`'s guild tail.
 #[test]
 fn guild_details_and_lab_research_update_never_touch_the_raw_guild_tail_bytes() {
     let mut session = common::load_fixture_session("world1");
@@ -317,10 +308,8 @@ fn guild_details_and_lab_research_update_never_touch_the_raw_guild_tail_bytes() 
     );
 }
 
-/// Neither guild call inserts or removes a map entry -- `update_lab_research`
-/// replaces a `Vec` nested inside one already-positioned entry -- so every
-/// position-keyed index must resolve identically afterward and no cache
-/// invalidation is required.
+/// `update_lab_research` replaces a `Vec` nested inside one already-positioned entry;
+/// neither guild call inserts or removes a map entry.
 #[test]
 fn guild_operations_never_move_any_world_tree_index_position() {
     let mut session = common::load_fixture_session("world1");

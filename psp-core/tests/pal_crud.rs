@@ -43,8 +43,8 @@ fn minimal_save(properties: Properties) -> Save {
     }
 }
 
-// world1 has 2 players and no `_dps.sav` for either, so the DPS ops further
-// down are exercised synthetically instead.
+// world1 has no `_dps.sav` for either player, so the DPS ops further down are
+// exercised synthetically instead.
 
 fn loaded_session(session: &mut SaveSession, data: &GameData) -> Uuid {
     let player_id = *session
@@ -58,14 +58,10 @@ fn loaded_session(session: &mut SaveSession, data: &GameData) -> Uuid {
     player_id
 }
 
-/// Cache invalidation through the real CRUD entry points: after a delete the
-/// caches are cleared AND the rebuilt index has genuinely shifted.
 #[test]
 fn add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
-    // The player must already own a pal to serve as the "earlier entry"
-    // deleted below; world1's second player owns none.
     let mut player_id = None;
     for candidate in session.player_summaries.keys().copied().collect::<Vec<_>>() {
         player::get_player_details(&mut session, &data, candidate, &null_progress())
@@ -118,11 +114,8 @@ fn add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index() {
     let position_after_add = *index_after_add.get(&new_pal.instance_id).unwrap();
     assert_eq!(position_after_add, entry_count_before);
 
-    // Warm the cache again, then delete an EARLIER entry: this must shift
-    // every later position (the just-added pal's included) down by one. It
-    // has to be a pal this player owns, not `entries[0]`, which is often the
-    // player's own character entry -- `delete_player_pals`'s ownership guard
-    // rightly rejects that.
+    // Not `entries[0]`: that is often the player's own character entry, which
+    // `delete_player_pals`'s ownership guard rightly rejects.
     session.caches.character_index = Some(index_after_add);
     let earlier_pal_id = {
         let entries = world::character_map(&session.level).unwrap();
@@ -218,8 +211,7 @@ fn clone_pal_matches_source_stats_when_the_pal_box_has_room() {
         }
         None => {
             // Pal box genuinely full, or its first free slot happened to be 0
-            // (which `clone_pal` misreads as full). Both are acceptable here;
-            // the slot-0 case has a deterministic test of its own below.
+            // (which `clone_pal` misreads as full; see the deterministic test below).
         }
     }
 }
@@ -268,8 +260,6 @@ fn move_pal_updates_slot_membership() {
         .any(|s| s.pal_id == Some(pal_id)));
 }
 
-/// A `pal_id` belonging to a different player must be rejected before any
-/// container is touched, not silently succeed as "full".
 #[test]
 fn move_pal_rejects_a_pal_not_owned_by_this_player_without_mutating_any_container() {
     let mut session = common::load_fixture_session("world1");
@@ -321,9 +311,8 @@ fn move_pal_rejects_a_pal_not_owned_by_this_player_without_mutating_any_containe
     );
 }
 
-/// The delete analogue of the move rejection above: without the ownership
-/// guard, `delete_pal_entry`'s unscoped whole-map search would delete player
-/// B's pal from the save when called through player A.
+/// Without the ownership guard, `delete_pal_entry`'s unscoped whole-map search would
+/// delete player B's pal from the save when called through player A.
 #[test]
 fn delete_player_pals_rejects_a_pal_not_owned_by_this_player_without_mutating_anything() {
     let mut session = common::load_fixture_session("world1");
@@ -397,7 +386,6 @@ fn heal_pals_clears_sickness_and_skips_a_missing_id_without_erroring() {
     }
     let mut pal_ids: Vec<Uuid> = details.pals.iter().map(|(id, _)| *id).collect();
     let missing_id = Uuid::new_v4();
-    pal_ids.push(missing_id); // a missing id is skipped, not an error
 
     pal::heal_pals(&mut session, &data, &pal_ids).unwrap();
 
@@ -438,10 +426,8 @@ fn heal_all_player_pals_heals_every_owned_pal() {
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
 const WORLD1_BASE_ID: &str = "4bb24de8-4965-af19-f596-e296089e8ab0";
 
-/// Unlike `clone_pal` (see `clone_pal_at_slot_zero_...` below), `add_guild_pal`
-/// accepts slot index 0: the base's worker container starts with its only slot
-/// empty, and the add must succeed there. A fresh base pal also keeps a
-/// present (nil) `OwnerPlayerUId`, never an absent one.
+/// Unlike `clone_pal` (see `clone_pal_at_slot_zero_...` below), `add_guild_pal` accepts
+/// slot index 0: the base's worker container starts with its only slot empty.
 #[test]
 fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
     let mut session = common::load_fixture_session("world1");
@@ -507,9 +493,9 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
         .all(|e| world::entry_instance_id(e) != Some(new_pal.instance_id)));
 }
 
-// world1's only base has a single slot and no second guild with a base, so
-// nothing real can exercise `clone_guild_pal` or a cross-guild ownership
-// mismatch. The synthetic fixtures below give full control over occupancy.
+// world1's only base has a single slot and no second guild with a base, so nothing
+// real can exercise `clone_guild_pal` or a cross-guild ownership mismatch; the
+// synthetic fixtures below give full control over occupancy.
 
 fn shuffle_guid_bytes(b: [u8; 16]) -> [u8; 16] {
     [
@@ -609,10 +595,8 @@ fn guild_group_entry(guild_id: Uuid) -> MapEntry {
     }
 }
 
-/// N independent guild/base/worker-container triples in one session, each
-/// guild pre-loaded and each base's worker container empty. Callers seed pals
-/// through the real `pal::add_guild_pal`, so the fixture's pals are exactly
-/// what production code creates.
+/// N independent guild/base/worker-container triples, each guild pre-loaded and each
+/// base's worker container empty. Callers seed pals through the real `pal::add_guild_pal`.
 fn multi_guild_base_session(bases: &[(Uuid, Uuid, Uuid, i32)]) -> SaveSession {
     let mut container_entries = Vec::new();
     let mut base_entries = Vec::new();
@@ -648,11 +632,6 @@ fn multi_guild_base_session(bases: &[(Uuid, Uuid, Uuid, i32)]) -> SaveSession {
     session
 }
 
-/// The guild/base counterpart of
-/// `add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index`:
-/// clone, then delete the earlier seed pal, and the clone's rebuilt index
-/// position must shift down by one -- the concrete consequence a stale index
-/// would miss.
 #[test]
 fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_clone_and_a_later_delete(
 ) {
@@ -673,11 +652,8 @@ fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_cl
     )
     .unwrap()
     .expect("fixture worker container has room for the seed pal");
-    // `clone_guild_pal`'s source lookup only recognizes the mixed-case
-    // "SlotId", which is how every real base pal is spelled on disk, while
-    // `new_pal_entry` writes the uppercase "SlotID". The seed pal is
-    // re-spelled here so it looks like a real, already-saved base pal;
-    // otherwise the clone would never find it.
+    // `clone_guild_pal`'s source lookup only recognizes the mixed-case "SlotId" (how
+    // every real base pal is spelled on disk); `new_pal_entry` writes "SlotID".
     {
         let entries = world::character_map_mut(&mut session.level).unwrap();
         let entry = entries
@@ -733,9 +709,8 @@ fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_cl
     );
 }
 
-/// The guild/base analogue of the player-scoped delete rejection above:
-/// without the membership guard, `delete_pal_entry`'s unscoped whole-map
-/// search would delete guild B's base pal when called through guild A.
+/// Without the membership guard, `delete_pal_entry`'s unscoped whole-map search would
+/// delete guild B's base pal when called through guild A.
 #[test]
 fn delete_guild_pals_rejects_a_pal_from_a_different_base_without_mutating_anything() {
     let data = game_data();
@@ -833,8 +808,8 @@ fn empty_character_container_entry(container_id: Uuid, slot_num: i32) -> MapEntr
     }
 }
 
-/// One loaded player owning exactly one pal, with an empty (SlotNum 1) pal
-/// box -- forcing the pal box's first free slot to be 0, deterministically.
+/// One loaded player owning one pal, with an empty (SlotNum 1) pal box -- forcing the
+/// pal box's first free slot to be 0, deterministically.
 fn clone_bug_fixture() -> (SaveSession, GameData, Uuid, PalDto) {
     let data = game_data();
     let player_id = Uuid::new_v4();
@@ -947,9 +922,8 @@ fn clone_pal_at_slot_zero_is_reported_as_box_full() {
         "no new CharacterSaveParameterMap entry may be created when the bug fires"
     );
 
-    // The pal box's Slots array gained an orphaned entry before the bail-out,
-    // and nothing undoes it. Left in place on purpose: cleaning up the leak
-    // would diverge from the game's own on-disk result.
+    // The orphaned Slots entry from the bail-out is left in place on purpose: cleaning
+    // it up would diverge from the game's own on-disk result.
     let view = containers::read_character_container(&session.level, entry_index).unwrap();
     assert_eq!(
         view.slots.len(),
@@ -970,23 +944,19 @@ fn clone_pal_at_slot_zero_is_reported_as_box_full() {
     );
 }
 
-/// The same mutate-before-check mechanism, reached by a different failure:
-/// the pal-box mutation runs before the source-pal lookup, so a source id
-/// that doesn't exist leaves the same orphaned slot behind.
+/// The pal-box mutation runs before the source-pal lookup, so a source id that
+/// doesn't exist leaves the same orphaned slot behind.
 #[test]
 fn clone_pal_with_an_unowned_source_id_also_leaves_the_orphaned_slot() {
     let (mut session, data, pal_box_id, mut source_dto) = clone_bug_fixture();
-    // Give the box two slots so the slot-0 bug can't fire: only the "source
-    // not found" branch is under test here.
+    // Two slots so the slot-0 bug can't fire; only "source not found" is under test.
     {
         let entries = world::character_container_map_mut(&mut session.level).unwrap();
         let value_props = psp_core::props::struct_props_mut(&mut entries[0].value).unwrap();
         value_props.insert("SlotNum", psp_core::props::int_property(2));
     }
-    // Pre-occupy slot 0 with an unrelated pal id so the next add lands at 1.
     containers::character_container_add_pal(&mut session.level, 0, Uuid::new_v4(), Some(0))
         .unwrap();
-    source_dto.instance_id = Uuid::new_v4(); // no such entry exists
 
     let entry_count_before = world::character_map(&session.level).unwrap().len();
     let result = pal::clone_pal(&mut session, &data, &source_dto).unwrap();
@@ -1006,7 +976,6 @@ fn clone_pal_with_an_unowned_source_id_also_leaves_the_orphaned_slot() {
     );
 }
 
-// DPS ops: synthetic, since world1 has no `_dps.sav` for either player.
 
 fn dps_slot(character_id: &str, instance_id: Uuid) -> StructValue {
     let mut save_parameter = Properties::default();
@@ -1052,9 +1021,8 @@ fn dps_slot(character_id: &str, instance_id: Uuid) -> StructValue {
     StructValue::Struct(slot_props)
 }
 
-/// One loaded player whose `.dps` save has a two-slot `SaveParameterArray`:
-/// slot 0 empty, slot 1 already holding a lucky pal (`IsRarePal: true`). The
-/// lucky flag is deliberate -- it is what the recycled-slot test below reads.
+/// A two-slot `SaveParameterArray`: slot 0 empty, slot 1 holding a lucky pal
+/// (`IsRarePal: true`) deliberately, for the recycled-slot test below.
 fn dps_fixture() -> (SaveSession, GameData, Uuid) {
     let data = game_data();
     let player_id = Uuid::new_v4();
@@ -1146,9 +1114,8 @@ fn add_player_dps_pal_fills_the_first_empty_slot_and_computes_max_hp() {
     assert!(new_pal.hp > 0);
 }
 
-/// A DPS slot reset never clears `IsRarePal`, so a slot recycled from a pal
-/// that was lucky hands that flag to the brand-new pal created there.
-/// Preserved for save-file fidelity with the game.
+/// A DPS slot reset never clears `IsRarePal`, so a slot recycled from a lucky pal hands
+/// that flag to the brand-new pal created there. Preserved for save-file fidelity.
 #[test]
 fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
     let (mut session, data, player_id) = dps_fixture();
@@ -1173,11 +1140,9 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
     );
 }
 
-/// A DPS save for the `FullStomach` tests. Slot 0 is never-used (`CharacterID`
-/// "None", no `FullStomach` key at all). Slot 1 is recycled from an "Anubis"
-/// (`max_full_stomach` 540.0 in `pals.json`) and carries a stale 999.0 --
-/// chosen to collide with neither the 150.0 missing-key default nor either
-/// species' real max, so an inherited value is unmistakable.
+/// Slot 0 is never-used (`CharacterID` "None", no `FullStomach` key). Slot 1 is
+/// recycled from an "Anubis" (`max_full_stomach` 540.0) and carries a stale 999.0,
+/// chosen to collide with neither the 150.0 default nor either species' real max.
 fn dps_fixture_for_stomach() -> (SaveSession, GameData, Uuid) {
     let data = game_data();
     let player_id = Uuid::new_v4();
@@ -1272,8 +1237,7 @@ fn add_player_dps_pal_writes_a_flat_default_full_stomach_for_a_never_used_slot()
     );
 }
 
-/// Both halves at once: the stale 999.0 is overwritten, and the value written
-/// keys off the slot's PREVIOUS occupant ("Anubis", 540.0), not the
+/// The value written keys off the slot's PREVIOUS occupant ("Anubis", 540.0), not the
 /// newly-requested species ("Sheepball", which would give 150.0).
 #[test]
 fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_the_previous_occupants_species(
@@ -1358,8 +1322,8 @@ fn delete_player_dps_pals_resets_the_slot_and_clears_the_outer_instance_id() {
     );
 }
 
-/// All three DPS ops must return `None` or no-op when the player has no
-/// `_dps.sav` (world1's state for every player), never panic.
+/// All three DPS ops must return `None` or no-op, never panic, when the player has
+/// no `_dps.sav` (world1's state for every player).
 #[test]
 fn dps_ops_gracefully_return_none_when_the_player_has_no_dps_file() {
     let mut session = common::load_fixture_session("world1");
@@ -1392,7 +1356,6 @@ fn dps_ops_gracefully_return_none_when_the_player_has_no_dps_file() {
             .unwrap()
             .is_none());
     }
-    // Must not panic even though there is nothing to reset.
     pal::delete_player_dps_pals(&mut session, &data, player_id, &[0]).unwrap();
 }
 

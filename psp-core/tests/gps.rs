@@ -7,17 +7,15 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// The committed `GlobalPalStorage.sav` fixture bytes. No `Level.sav` is needed
-/// alongside it: GPS ops only ever touch `session.gps`, so any loaded session
-/// (here: `world1`) will do.
+/// GPS ops only ever touch `session.gps`, so any loaded session (here: `world1`) will
+/// do -- no `Level.sav` needs to match.
 fn gps_fixture_bytes() -> Vec<u8> {
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../tests/fixtures/saves/GlobalPalStorage.sav");
     std::fs::read(path).expect("read committed GlobalPalStorage.sav fixture")
 }
 
-/// A save with no `GlobalPalStorage.sav` leaves `session.gps.file_path`
-/// `None`, so GPS state must report "nothing to load" before `load_gps` runs.
+/// A save with no `GlobalPalStorage.sav` leaves `session.gps.file_path` `None`.
 #[test]
 fn gps_state_starts_unavailable_for_a_freshly_loaded_corpus_session() {
     let session = common::load_corpus_session();
@@ -25,9 +23,6 @@ fn gps_state_starts_unavailable_for_a_freshly_loaded_corpus_session() {
     assert!(session.gps_pals().is_none());
 }
 
-/// Full round trip against a real `GlobalPalStorage.sav`: load, add, clone,
-/// delete, and confirm the freed slots are reusable and the tree still
-/// re-serializes.
 #[test]
 fn gps_load_add_clone_delete_round_trips_against_a_real_file() {
     let gps_bytes = gps_fixture_bytes();

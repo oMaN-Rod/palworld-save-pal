@@ -69,8 +69,8 @@ fn the_blueprint_preset_drops_container_contents() {
     let blueprint =
         capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
 
-    // Containers a structure references still travel (referential integrity --
-    // an absent container crashes the game), but they carry no items.
+    // Containers a structure references still travel (an absent one crashes the
+    // game), but carry no items.
     for entry in &blueprint.item_containers {
         assert!(
             capture::container_slot_dynamic_item_ids(entry).is_empty(),
@@ -275,9 +275,8 @@ fn asking_for_workers_does_not_capture_caged_pals() {
     let workers_only = CaptureOptions { worker_pals: true, ..CaptureOptions::blueprint() };
     let blueprint = capture::capture(&session, base_id, workers_only, "Home").expect("capture");
 
-    // `manifest` is a verbatim copy of the `options` argument, so asserting on it alone
-    // would pass by construction of this test's own input; inspect the actually captured
-    // character containers instead.
+    // `manifest` is a verbatim copy of `options`, so asserting on it alone would pass by
+    // construction; inspect the actually captured character containers instead.
     let base_entry = psp_core::domain::world::base_camp_map(&session.level)
         .expect("base camp map")
         .and_then(|entries| entries.iter().find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id)))
@@ -291,9 +290,8 @@ fn asking_for_workers_does_not_capture_caged_pals() {
         .filter_map(capture::container_entry_id)
         .collect();
 
-    // The worker container travels and, with `worker_pals`, keeps its pals.
-    // Housed containers a structure references also travel (referential
-    // integrity), but emptied -- no caged pals come along.
+    // Housed containers a structure references also travel, but emptied -- no
+    // caged pals come along.
     assert!(
         captured_container_ids.contains(&worker_container_id),
         "workers_only capture must contain the base's worker container"
@@ -310,10 +308,7 @@ fn asking_for_workers_does_not_capture_caged_pals() {
 }
 
 /// The base camp's `WorkerDirector` is the only thing naming the base's worker
-/// container, so the container has to travel at every layer or a placed base
-/// ends up with none. A layer that takes no pals must still take none: the
-/// slots come along for their capacity, emptied of the source world's pal
-/// instance ids.
+/// container, so it must travel at every layer or a placed base ends up with none.
 #[test]
 fn a_layer_without_worker_pals_captures_the_container_but_none_of_its_pals() {
     let session = common::load_fixture_session("v1_relics");
@@ -379,17 +374,13 @@ fn base_identity_is_dropped_when_not_requested() {
     );
 }
 
-/// The world name names the save a blueprint came from, which identifies its
-/// author's world as squarely as the base name recorded beside it -- and it
-/// reaches the header at every layer unless something gates it. Pinned at all
-/// three presets, since a leak the default preset alone avoids is still a leak.
+/// The world name identifies its author's world as squarely as the base name. Pinned
+/// at all three presets, since a leak the default preset alone avoids is still a leak.
 #[test]
 fn the_source_world_is_withheld_unless_base_identity_is_requested() {
     let session = common::load_fixture_session("v1_relics");
     let base_id = common::fixture_base_id(&session);
 
-    // The control: read off the session, not off any capture. Without a world
-    // name to withhold, an empty header field would prove nothing.
     let world_name = session.world_name.clone();
     assert!(!world_name.is_empty(), "setup: the fixture save must carry a world name");
 
@@ -414,8 +405,8 @@ fn structure_container_refs_resolve_when_contents_and_pals_off() {
     let session = common::load_fixture_session("v1_relics");
     let base_id = common::fixture_base_id(&session);
     // `blueprint()` captures production_config only, so container_contents AND
-    // housed_pals are both OFF -- the preset that left dangling container
-    // references and crashed Palworld on `IsWorkable`.
+    // housed_pals are both OFF -- dangling container references here crash Palworld
+    // on `IsWorkable`.
     let bp = capture::capture(&session, base_id, CaptureOptions::blueprint(), "Home").expect("capture");
 
     let item_containers: HashSet<Uuid> =

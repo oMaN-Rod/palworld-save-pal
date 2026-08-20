@@ -14,8 +14,6 @@ const OWNERSHIP_KEYS: [&str; 4] = [
     "private_lock_player_uid",
 ];
 
-/// The `InstanceId` of the `CharacterSaveParameterMap` entry belonging to
-/// `player_uid`'s own player character (`IsPlayer == true`).
 fn player_instance_id(session: &SaveSession, player_uid: Uuid) -> Uuid {
     session
         .character_map()
@@ -67,11 +65,8 @@ fn world1_swapping_an_unknown_player_is_rejected() {
     }
 }
 
-/// A swap between world1's two real players exchanges the
-/// `CharacterSaveParameterMap` key `PlayerUId` at each player's own
-/// (unchanged) `InstanceId`, and `Level.sav` still re-serializes afterward:
-/// the deep swap only overwrites existing property values in place, so it can
-/// never introduce a `MissingPropertySchema`.
+/// The swap overwrites existing property values in place, so it can never
+/// introduce a `MissingPropertySchema`.
 #[test]
 fn world1_swap_between_two_players_exchanges_character_map_identities() {
     let mut session = common::load_fixture_session("world1");
@@ -91,8 +86,6 @@ fn world1_swap_between_two_players_exchanges_character_map_identities() {
     assert!(session.player_summaries.contains_key(&first_uid));
     assert!(session.player_summaries.contains_key(&second_uid));
 
-    // Each character keeps its own instance id, but the key's PlayerUId at
-    // that instance id now names the other player.
     let entry_at_first_instance = session
         .character_map()
         .unwrap()
@@ -120,12 +113,9 @@ fn world1_swap_between_two_players_exchanges_character_map_identities() {
         .expect("post-swap Level.sav re-serializes without a schema error");
 }
 
-/// `props::swap_uuid_values_deep` over the ownership keys must be inert on
-/// real save data: every reachable occurrence of those keys sits behind a
-/// typed codec struct the walk stops at, so nothing on the wire may change.
-/// Guards against `swap_leaf_uuid_property` starting to over-swap a reachable
-/// `Str`/`Guid` leaf. Asserted on the whole serialized `Level.sav`, not a
-/// hand-picked subset of properties.
+/// Every reachable occurrence of the ownership keys sits behind a typed codec struct
+/// the walk stops at, so nothing on the wire may change. Asserted on the whole
+/// serialized `Level.sav`, not a hand-picked subset of properties.
 #[test]
 fn deep_swap_over_real_level_sav_properties_changes_nothing() {
     let mut session = common::load_fixture_session("world1");
@@ -157,7 +147,6 @@ fn deep_swap_over_real_level_sav_properties_changes_nothing() {
     );
 }
 
-/// The same same-uid rejection against the committed `v1_relics` corpus fixture.
 #[test]
 fn corpus_swapping_same_uid_is_rejected() {
     let mut session = common::load_corpus_session();

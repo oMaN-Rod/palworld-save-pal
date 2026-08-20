@@ -1,8 +1,6 @@
-/// The primer only ever fills in tags a save did NOT record, so comparing a primed
-/// real save against itself proves nothing -- `ensure_schema` no-ops on every path
-/// that exists. Prime a save whose schema table is EMPTY, then compare the tags the
-/// primer invented against the tags real saves actually record for those paths.
-/// A tag that disagrees encodes different bytes.
+/// `ensure_schema` no-ops on every path a save already records, so comparing a primed
+/// real save against itself proves nothing. Prime a save with an EMPTY schema table
+/// instead, then compare the invented tags against what real saves actually record.
 #[test]
 fn invented_tags_match_the_tags_real_saves_record() {
     let mut primed = psp_core::ue::Save {

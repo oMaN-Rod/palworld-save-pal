@@ -14,8 +14,7 @@ const WORLD1_PLAYER_O: &str = "8c2f1930-0000-0000-0000-000000000000";
 const WORLD1_GUILD_WITH_BASE: &str = "54491484-4e6c-7327-70b2-868f350929f6";
 /// `v1_relics` "zBlasters": possess map holds CapturePower alone.
 const V1_PLAYER_CAPTURE_POWER_ONLY: &str = "62b176f8-0000-0000-0000-000000000000";
-/// `v1_relics` "espat": 12 relic types, most at 0 unspent, ranks bought in nearly all --
-/// the real save proving a 0-valued key is a normal state.
+/// `v1_relics` "espat": 12 relic types, most at 0 unspent -- proves a 0-valued key is normal.
 const V1_PLAYER_MANY_RELIC_RANKS: &str = "e1530496-0000-0000-0000-000000000000";
 
 fn game_data() -> GameData {
@@ -47,7 +46,6 @@ fn update_pals_edit_then_reread() {
         sink_messages.lock().unwrap().push(message.to_string());
     });
     pal::update_pals(&mut session, &data, &modified, &collector).unwrap();
-    // A per-pal message, then the trailing save message.
     let messages = captured_messages.lock().unwrap();
     assert!(messages[0].starts_with("Updating pal "));
     assert_eq!(
@@ -64,9 +62,8 @@ fn update_pals_edit_then_reread() {
     assert_eq!(updated.hp, updated.max_hp);
 }
 
-/// An incoming `storage_id` never moves the pal's `ContainerId`, all the way
-/// through the write-back path. The DTO must request a genuinely different
-/// container, or the assertion would hold either way and prove nothing.
+/// An incoming `storage_id` never moves the pal's `ContainerId`, all the way through
+/// the write-back path.
 #[test]
 fn update_pals_keeps_container_id_stable_on_move() {
     let mut session = common::load_fixture_session("world1");
@@ -204,11 +201,8 @@ fn update_players_full_dto() {
     assert_eq!(reread.technology_points, 999);
 }
 
-/// Container write-back must route through the player's own `InventoryInfo`,
-/// never the incoming DTO's `common_container.id`. The forged id here is
-/// paired with a real content edit on purpose: id-based routing would
-/// silently no-op on an unresolvable id, and that leaves `id` unchanged too,
-/// so asserting `id` alone cannot tell "routed correctly" from "did nothing".
+/// Container write-back must route through the player's own `InventoryInfo`, never
+/// the incoming DTO's `common_container.id`.
 #[test]
 fn update_players_common_container_edit_ignores_forged_dto_id() {
     let mut session = common::load_fixture_session("world1");
@@ -223,10 +217,6 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     let common = dto.common_container.as_mut().expect("player has one");
     let real_id = common.id;
     common.id = Uuid::new_v4(); // forged -- must be ignored for routing
-                                // A real content edit: a brand-new slot at an index that is both free and
-                                // within the container's own capacity, so it is a legitimate occupied
-                                // slot rather than one the paired essential-container resize would
-                                // rightly drop as out of range.
     let free_index = (0..common.slot_num)
         .find(|index| !common.slots.iter().any(|slot| slot.slot_index == *index))
         .expect("the fixture container has at least one free slot within capacity");
@@ -263,8 +253,7 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     assert_eq!(added.count, 3);
 }
 
-/// Real-save coverage for a weapon dynamic-item update: `WORLD1_PLAYER_O`'s
-/// weapon container carries exactly one slot, an `SFBow_5`.
+/// `WORLD1_PLAYER_O`'s weapon container carries exactly one slot, an `SFBow_5`.
 #[test]
 fn update_players_weapon_durability_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -302,12 +291,9 @@ fn update_players_weapon_durability_round_trips() {
     assert_eq!(item_after.static_id.as_deref(), Some("SFBow_5"));
 }
 
-/// Removing a dynamic item from a slot (`dynamic_item: None` while
-/// `static_id` stays non-"None") deletes the `DynamicItemSaveData` entry but
-/// leaves the slot's `local_id_in_created_world` pointing at it. The dangling
-/// slot is deliberate, for save-file byte fidelity; `read_item_container`
-/// treats a dangling `local_id` as "slot gone", so the slot vanishes on the
-/// next read, which is what the game itself would do.
+/// Removing a dynamic item leaves the slot's `local_id_in_created_world` dangling,
+/// deliberately, for save-file byte fidelity; `read_item_container` treats a dangling
+/// `local_id` as "slot gone", so the slot vanishes on the next read.
 #[test]
 fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read() {
     let mut session = common::load_fixture_session("world1");
@@ -324,8 +310,6 @@ fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read(
         .as_mut()
         .expect("armor container loads");
     assert_eq!(armor_container.slots.len(), 6);
-    // Keep the slot (static_id untouched, not "None") but drop its dynamic
-    // item reference: the exact shape that leaves the slot dangling.
     armor_container.slots[0].dynamic_item = None;
     let mut modified = OrderedMap::new();
     modified.insert(player_id, dto);
@@ -344,9 +328,8 @@ fn update_players_removing_a_dynamic_item_leaves_the_slot_dangling_on_next_read(
     );
 }
 
-/// world1's player `8C2F1930` has no `RelicObtainForInstanceFlag` key under
-/// `RecordData` at all -- a legitimately key-less save. `apply_unlock_flags`
-/// must create the Map property rather than silently no-op.
+/// world1's player `8C2F1930` has no `RelicObtainForInstanceFlag` key at all, a
+/// legitimately key-less save; `apply_unlock_flags` must create the Map property.
 #[test]
 fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
     let mut session = common::load_fixture_session("world1");
@@ -379,11 +362,9 @@ fn update_players_creates_missing_unlock_flag_map_and_it_round_trips() {
     );
 }
 
-/// `apply_player_dto` unconditionally writes `SaveData.CompletedQuestArray`/
-/// `OrderedQuestArray`, but a player who has never started a quest carries
-/// neither property nor its write schema, so the resave is refused. world1's
-/// player already carries both, so the properties and their schemas are
-/// stripped here to reproduce a genuinely quest-less player.
+/// A player who has never started a quest carries neither `CompletedQuestArray`/
+/// `OrderedQuestArray` nor their write schema. world1's player carries both, so both
+/// are stripped here to reproduce a genuinely quest-less player.
 #[test]
 fn update_players_full_dto_survives_missing_quest_array_schema() {
     let mut session = common::load_fixture_session("world1");
@@ -411,8 +392,6 @@ fn update_players_full_dto_survives_missing_quest_array_schema() {
             .0
             .shift_remove(&psp_core::ue::PropertyKey::from("OrderedQuestArray"));
 
-        // Each player `.sav` is its own standalone `psp_core::ue::Save`, so dropping
-        // these schemas here cannot affect any other player.
         let mut stripped_schemas = psp_core::ue::PropertySchemas::new();
         for (path, tag) in loaded.sav.schemas.schemas() {
             if path.ends_with(".CompletedQuestArray")
@@ -537,8 +516,7 @@ fn update_guilds_name_and_base_camp_level() {
     );
 }
 
-/// A `base_camp_level` of `0` is treated as "not supplied" and must leave the
-/// existing level untouched, exactly like an omitted field.
+/// A `base_camp_level` of `0` is treated as "not supplied", like an omitted field.
 #[test]
 fn update_guilds_zero_base_camp_level_is_a_no_op() {
     let mut session = common::load_fixture_session("world1");
@@ -560,9 +538,6 @@ fn update_guilds_zero_base_camp_level_is_a_no_op() {
     assert_eq!(after.base_camp_level, before.base_camp_level);
 }
 
-/// The widest single real-save exercise of `apply_guild_dto`/`apply_base_dto`/
-/// `apply_item_container_dto`: name, base camp level, a base's storage
-/// container, and the guild chest all through one `update_guilds` call.
 #[test]
 fn update_guilds_full_round_trip_bases_and_chest() {
     let mut session = common::load_fixture_session("world1");
@@ -626,7 +601,6 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         .unwrap();
     let start = base.effigy_possess_num;
 
-    // Fast-travel unlocks alone must not touch the relic counter.
     let mut dto = base.clone();
     dto.unlocked_fast_travel_points = Some(vec!["FT_A".into(), "FT_B".into(), "FT_C".into()]);
     dto.collected_effigies = Some(vec![]);
@@ -641,7 +615,6 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         "unlocking fast-travel points must not change RelicPossessNum"
     );
 
-    // Collecting 2 new effigies grants exactly 2.
     let mut dto = after_ft.clone();
     dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into()]);
     let mut m = OrderedMap::new();
@@ -656,7 +629,6 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         "collecting 2 new effigies must grant exactly 2 relics"
     );
 
-    // An unchanged resave must be a no-op.
     let mut m = OrderedMap::new();
     m.insert(player_id, after_two.clone());
     player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
@@ -668,7 +640,6 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
         "an unchanged resave must not change RelicPossessNum"
     );
 
-    // Collecting 1 more (keeping the existing 2) grants exactly 1.
     let mut dto = after_resave.clone();
     dto.collected_effigies = Some(vec!["EF_1".into(), "EF_2".into(), "EF_3".into()]);
     let mut m = OrderedMap::new();
@@ -684,22 +655,16 @@ fn relic_possess_num_only_counts_newly_collected_effigies() {
     );
 }
 
-/// After an effigy unlock on a 1.0 save, the legacy fields and the 1.0 by-type
-/// structures must still agree. The game's fixup already ran
-/// (`bCaptureCompletionRelicFixupDone` is `true` in every real save), so it will
-/// never reconcile them for us.
+/// The game's fixup already ran (`bCaptureCompletionRelicFixupDone` is `true` in every
+/// real save), so it will never reconcile the legacy and 1.0 by-type structures for us.
 #[test]
 fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     let mut session = common::load_fixture_session("v1_relics");
     let data = game_data();
-    // A player with a second, non-CapturePower relic type: without one, the
-    // "other types are untouched" assertions below would be vacuous.
     let player_id = common::first_player_with_non_capture_power_relics(&mut session, &data);
 
-    // Snapshot every non-CapturePower type's flag set *before* the write. Comparing the
-    // exp index against the by-type flags the code under test just wrote can only prove
-    // they agree with each other -- a regression that wiped the other types' flags would
-    // move both sides together and still pass. These are the fixed reference points.
+    // Snapshot before the write: comparing the exp index against by-type flags the code
+    // just wrote could only prove they agree with each other, not that neither changed.
     let before_by_type = common::relic_by_type_flags(&common::player_sav_json(&session, player_id));
     let other_types_before: BTreeMap<String, BTreeSet<String>> = before_by_type
         .iter()
@@ -718,7 +683,6 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
         .unwrap()
         .unwrap();
 
-    // Collect one more effigy than the player currently has.
     let mut effigies = dto.collected_effigies.clone().unwrap_or_default();
     assert!(
         !effigies.is_empty(),
@@ -738,7 +702,6 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     let possess_map = common::relic_possess_num_map(&sav);
     let exp_index = common::relic_bonus_exp_table_index(&sav);
 
-    // (2) flat == the CapturePower by-type flag set
     assert_eq!(
         flat,
         by_type
@@ -752,7 +715,6 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
         "the newly collected effigy must appear in both representations"
     );
 
-    // (3) scalar == map[CapturePower]
     assert_eq!(
         possess,
         possess_map
@@ -762,16 +724,12 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
         "RelicPossessNum must equal RelicPossessNumMap[CapturePower]"
     );
 
-    // (1) exp table index == total by-type true flags
     let total: usize = by_type.values().map(|s| s.len()).sum();
     assert_eq!(
         exp_index as usize, total,
         "RelicBonusExpTableIndex must equal the total by-type flag count"
     );
 
-    // (4) An effigy unlock grants CapturePower only. Every other relic type's flag set
-    // must come through the write non-empty and byte-for-byte unchanged -- asserted
-    // against the snapshot taken before the write, not against what the code just wrote.
     for (ty, expected) in &other_types_before {
         let actual = by_type.get(ty);
         assert_eq!(
@@ -784,7 +742,6 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
             "relic type {ty} must still carry flags after an effigy unlock"
         );
     }
-    // The exp index therefore counts more than just CapturePower.
     let capture_power_flags = by_type
         .get(common::CAPTURE_POWER_RELIC)
         .map(|f| f.len())
@@ -795,11 +752,9 @@ fn effigy_unlock_keeps_1_0_relic_structures_consistent() {
     );
 }
 
-/// The worldmap UI un-collects an effigy on a single click, with no confirmation.
-/// A collect/un-collect/re-collect cycle therefore lands the flags exactly back where
-/// they started, and `RelicPossessNum` must land back where it started too. Counting
-/// only additions inflates it by one per cycle -- the very inflation this counter's
-/// handling exists to prevent.
+/// The worldmap UI un-collects an effigy on a single click, no confirmation, so a
+/// collect/un-collect/re-collect cycle must land `RelicPossessNum` back where it
+/// started; counting only additions would inflate it by one per cycle.
 #[test]
 fn effigy_toggle_cycle_does_not_inflate_relic_possess_num() {
     let mut session = common::load_fixture_session("world1");
@@ -809,7 +764,6 @@ fn effigy_toggle_cycle_does_not_inflate_relic_possess_num() {
         .unwrap()
         .unwrap();
 
-    // Start from a player holding two effigies.
     let mut dto = player::build_player_dto(&session, &data, player_id)
         .unwrap()
         .unwrap();
@@ -822,14 +776,12 @@ fn effigy_toggle_cycle_does_not_inflate_relic_possess_num() {
         .unwrap();
     let baseline = collected.effigy_possess_num;
 
-    // Click EF_2's marker: it is spliced out of `collected_effigies`.
     let mut dto = collected.clone();
     dto.collected_effigies = Some(vec!["EF_1".into()]);
     let mut m = OrderedMap::new();
     m.insert(player_id, dto);
     player::update_players(&mut session, &data, &m, &null_progress()).unwrap();
 
-    // Click it again: it is put back. The flags are now identical to `collected`.
     let mut dto = player::build_player_dto(&session, &data, player_id)
         .unwrap()
         .unwrap();
@@ -852,8 +804,8 @@ fn effigy_toggle_cycle_does_not_inflate_relic_possess_num() {
     );
 }
 
-/// Un-collecting effigies gives their relics back, one per effigy -- symmetric with
-/// the frontend, which already decrements the inventory `Relic` item on removal.
+/// Symmetric with the frontend, which already decrements the inventory `Relic` item
+/// on removal.
 #[test]
 fn removing_effigies_lowers_relic_possess_num_by_the_number_removed() {
     let mut session = common::load_fixture_session("world1");
@@ -878,7 +830,6 @@ fn removing_effigies_lowers_relic_possess_num_by_the_number_removed() {
         .unwrap();
     assert_eq!(after_three.effigy_possess_num, start + 3);
 
-    // Remove two of the three.
     let mut dto = after_three.clone();
     dto.collected_effigies = Some(vec!["EF_2".into()]);
     let mut m = OrderedMap::new();
@@ -895,8 +846,7 @@ fn removing_effigies_lowers_relic_possess_num_by_the_number_removed() {
 }
 
 /// A relic already spent on a rank cannot be un-spent, so a real save holds fewer
-/// unspent relics than it has effigy flags. Un-collecting every effigy must floor the
-/// counter at 0, never drive it negative.
+/// unspent relics than it has effigy flags; the counter must floor at 0.
 #[test]
 fn relic_possess_num_never_goes_below_zero() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -915,7 +865,6 @@ fn relic_possess_num_never_goes_below_zero() {
         effigies.len()
     );
 
-    // Un-collect every effigy: more removals than there are relics to give back.
     let mut dto = base.clone();
     dto.collected_effigies = Some(vec![]);
     let mut m = OrderedMap::new();
@@ -980,14 +929,9 @@ fn effigy_unlock_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
     );
 }
 
-/// Palworld 1.0's other 11 relic types live ONLY in the by-type structures. Collecting one
-/// must move that type's `Flags` and its own `RelicPossessNumMap` entry, and must leave the
-/// legacy CapturePower-only mirrors (`RelicObtainForInstanceFlag`, `RelicPossessNum`)
-/// completely untouched.
-///
-/// `StaminaReduction` is deliberately a type this player has NO by-type entry for. The game
-/// appends an entry lazily, on first collection of that type, so the write path has to
-/// create it -- every fixture player is missing at least one of the 12.
+/// Palworld 1.0's other 11 relic types live ONLY in the by-type structures, leaving the
+/// legacy CapturePower-only mirrors untouched. `StaminaReduction` is deliberately a type
+/// this player has no by-type entry for: the game appends one lazily, on first collection.
 #[test]
 fn collecting_a_typed_relic_updates_only_that_type() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1042,7 +986,6 @@ fn collecting_a_typed_relic_updates_only_that_type() {
         "RelicPossessNumMap[StaminaReduction] must move by StaminaReduction's OWN net delta"
     );
 
-    // The legacy pair mirrors CapturePower alone, and nothing about CapturePower changed.
     assert_eq!(
         common::relic_flat_flags(&after),
         flat_before,
@@ -1061,7 +1004,6 @@ fn collecting_a_typed_relic_updates_only_that_type() {
         "RelicPossessNumMap[CapturePower] must still mirror the untouched scalar"
     );
 
-    // Every other type comes through byte-for-byte: a per-type delta must not leak sideways.
     for (ty, flags) in &by_type_before {
         assert_eq!(
             by_type_after.get(ty),
@@ -1078,8 +1020,8 @@ fn collecting_a_typed_relic_updates_only_that_type() {
     }
 }
 
-/// `RelicBonusExpTableIndex` is the total true flag count across ALL by-type entries --
-/// not CapturePower's alone. A typed relic write must move it too.
+/// `RelicBonusExpTableIndex` is the total true flag count across ALL by-type entries,
+/// not CapturePower's alone.
 #[test]
 fn relic_bonus_exp_table_index_counts_every_type_after_a_typed_relic_write() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1133,10 +1075,8 @@ fn relic_bonus_exp_table_index_counts_every_type_after_a_typed_relic_write() {
     );
 }
 
-/// A relic already spent on a rank cannot be un-spent, so a type's possess count must floor
-/// at 0 rather than go negative -- the same invariant the effigy scalar has. This player
-/// holds 0 unspent GliderSpeed relics while carrying GliderSpeed flags, so un-collecting
-/// them all asks for a negative count.
+/// This player holds 0 unspent GliderSpeed relics while carrying GliderSpeed flags, so
+/// un-collecting them all asks for a negative count -- the possess count must floor at 0.
 #[test]
 fn removing_typed_relics_floors_that_types_possess_count_at_zero() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1198,8 +1138,8 @@ fn removing_typed_relics_floors_that_types_possess_count_at_zero() {
     );
 }
 
-/// A pre-1.0 save has no by-type relic structures at all. A DTO carrying typed relics --
-/// which the frontend sends on every save -- must not conjure them into existence.
+/// A DTO carries typed relics on every save, even pre-1.0; it must not conjure by-type
+/// relic structures into existence.
 #[test]
 fn typed_relic_write_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
     let mut session = common::load_fixture_session("world1");
@@ -1243,7 +1183,6 @@ fn typed_relic_write_does_not_add_1_0_relic_fields_to_a_pre_1_0_save() {
     );
 }
 
-/// An unchanged resave of a 1.0 save must leave every relic structure exactly as it was.
 /// The by-type write path rewrites `Flags` for each type on every save, so a bug that
 /// reordered, dropped or duplicated a type would show up here first.
 #[test]
@@ -1280,10 +1219,9 @@ fn unchanged_resave_of_a_1_0_save_leaves_every_relic_structure_identical() {
     );
 }
 
-/// The set-based comparisons above (`relic_flat_flags`/`relic_by_type_flags` return
-/// `BTreeSet`s) would pass even if a write silently sorted or reordered a flag map. Order
-/// is deliberately CALLER order, not sorted -- see `relic_flag_write`'s comment -- and this
-/// compares the raw on-disk `Vec`s, which an accidental reorder would actually fail.
+/// The set-based comparisons elsewhere (`BTreeSet`s) would pass even if a write silently
+/// reordered a flag map. Order is deliberately CALLER order, not sorted, so this compares
+/// the raw on-disk `Vec`s instead.
 #[test]
 fn unchanged_resave_of_a_1_0_save_preserves_flag_order() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1325,10 +1263,8 @@ fn unchanged_resave_of_a_1_0_save_preserves_flag_order() {
     );
 }
 
-/// `relic_flag_write` dedupes the `Flags` map it builds, not just the delta it reports:
-/// `RelicBonusExpTableIndex` counts `Flags` map ENTRIES, so a caller-supplied duplicate
-/// guid that survived into the map would inflate the index by one per repeat, even though
-/// it represents a single collected relic.
+/// `RelicBonusExpTableIndex` counts `Flags` map ENTRIES, so a duplicate guid that survived
+/// into the map would inflate the index once per repeat.
 #[test]
 fn duplicate_guid_in_collected_relics_does_not_inflate_exp_table_index() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1396,14 +1332,10 @@ fn duplicate_guid_in_collected_relics_does_not_inflate_exp_table_index() {
     );
 }
 
-/// `RelicObtainForInstanceFlagByType`'s element schemas (`.Type`, `.Flags`) are normally
-/// learned by uesave from an existing element at read time. Every real save examined
-/// already has at least one entry once the property exists at all, so the append path has
-/// never needed its own `ensure_schema`. That is a property of the GAME's writer, though,
-/// not something this code can assume -- an array present with zero entries is a
-/// structurally valid shape nothing rules out. This test grafts exactly that shape onto a
-/// real 1.0 fixture (clearing the array AND stripping the schemas an existing element
-/// would have taught uesave) and forces the very first append by collecting a typed relic.
+/// uesave normally learns the `.Type`/`.Flags` element schemas from an existing array
+/// element; every real save already has one, so the append path has never needed its own
+/// `ensure_schema`. This test grafts a genuinely empty array (schemas stripped too) to
+/// force the first-ever append.
 #[test]
 fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
     let mut session = common::load_fixture_session("v1_relics");
@@ -1444,8 +1376,6 @@ fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
         );
         by_type_values.clear();
 
-        // Strip the `.Type`/`.Flags` schemas an existing element would otherwise have
-        // taught uesave, reproducing an array that has never held an entry.
         let mut stripped_schemas = psp_core::ue::PropertySchemas::new();
         for (path, tag) in loaded.sav.schemas.schemas() {
             if path.ends_with(".RelicObtainForInstanceFlagByType.Type")
@@ -1507,15 +1437,13 @@ fn typed_relic_write_creates_first_entry_in_an_empty_by_type_array() {
     );
 }
 
-/// Palworld 1.0 renamed both quest arrays to `<Base>_FullRelease`. This 1.0
-/// fixture player genuinely carries 19 completed and 13 current quests -- reading
-/// the pre-1.0 names finds neither and reports both as empty.
+/// Palworld 1.0 renamed both quest arrays to `<Base>_FullRelease`. This fixture player
+/// genuinely carries 19 completed and 13 current quests under the new names.
 const V1_PLAYER_WITH_QUESTS: &str = "b38a3ab1-0000-0000-0000-000000000000";
 
-/// Every property key anywhere in a serialized `.sav`, with uesave's `_<index>`
-/// disambiguating suffix stripped. Matching a bare NAME against the raw JSON text
-/// would be a trap: `CompletedQuestArray` is a strict PREFIX of
-/// `CompletedQuestArray_FullRelease`, so a substring check cannot tell them apart.
+/// Every property key in a serialized `.sav`, with uesave's `_<index>` disambiguating
+/// suffix stripped. A substring check would be a trap: `CompletedQuestArray` is a strict
+/// prefix of `CompletedQuestArray_FullRelease`.
 fn property_names(value: &serde_json::Value, out: &mut BTreeSet<String>) {
     match value {
         serde_json::Value::Object(map) => {
@@ -1547,7 +1475,6 @@ fn v1_quest_session() -> (psp_core::session::SaveSession, GameData, Uuid) {
     (session, data, player_id)
 }
 
-/// The headline bug: a 1.0 save's missions must actually be read.
 #[test]
 fn v1_save_missions_are_read() {
     let (session, data, player_id) = v1_quest_session();
@@ -1568,8 +1495,6 @@ fn v1_save_missions_are_read() {
     );
 }
 
-/// Writing a 1.0 player back unchanged must not lose their missions -- which it
-/// would, if the write landed on the bare-named property the game never reads.
 #[test]
 fn v1_save_missions_round_trip_unchanged() {
     let (mut session, data, player_id) = v1_quest_session();
@@ -1587,7 +1512,6 @@ fn v1_save_missions_round_trip_unchanged() {
     assert_eq!(reread.current_missions.len(), 13);
 }
 
-/// An edit to a 1.0 player's missions must persist.
 #[test]
 fn v1_save_mission_edit_persists() {
     let (mut session, data, player_id) = v1_quest_session();
@@ -1621,8 +1545,6 @@ fn v1_save_mission_edit_persists() {
     );
 }
 
-/// A 1.0 save must gain no bare-named quest property: writing one invents a
-/// property the game never wrote, and leaves the real `_FullRelease` data stale.
 #[test]
 fn v1_save_gains_no_bare_named_quest_property() {
     let (mut session, data, player_id) = v1_quest_session();
@@ -1656,16 +1578,14 @@ fn v1_save_gains_no_bare_named_quest_property() {
     );
 }
 
-/// A rank granted for a relic type with no `RelicPossessNumMap` key is invisible in game.
-/// In every real 1.0 save, `rank > 0` implies a key. The value is unspent relics and may
-/// legitimately be 0, so the key is created at 0 rather than handing out free relics.
+/// A rank granted for a relic type with no `RelicPossessNumMap` key is invisible in game;
+/// in every real 1.0 save `rank > 0` implies a key. The key is created at 0, not the
+/// granted rank, since the value is unspent relics, not a free handout.
 #[test]
 fn granting_a_relic_rank_creates_its_possess_map_key() {
     let mut session = common::load_fixture_session("v1_relics");
     let data = game_data();
-    // A 1.0 player whose map carries CapturePower alone.
     let player_id: Uuid = V1_PLAYER_CAPTURE_POWER_ONLY.parse().unwrap();
-    // Only a lazily loaded player has a `.sav` to inspect or write.
     player::get_player_details(&mut session, &data, player_id, &null_progress())
         .unwrap()
         .unwrap();
@@ -1712,14 +1632,11 @@ fn granting_a_relic_rank_creates_its_possess_map_key() {
     assert_eq!(dto.status_point_list.get("swim_speed").copied(), Some(5));
 }
 
-/// An unchanged resave of a real 1.0 save must add no keys: every rank it carries
-/// already has one.
 #[test]
 fn resaving_a_relic_player_unchanged_adds_no_possess_map_keys() {
     let mut session = common::load_fixture_session("v1_relics");
     let data = game_data();
     let player_id: Uuid = V1_PLAYER_MANY_RELIC_RANKS.parse().unwrap();
-    // Only a lazily loaded player has a `.sav` to inspect or write.
     player::get_player_details(&mut session, &data, player_id, &null_progress())
         .unwrap()
         .unwrap();
@@ -1744,13 +1661,11 @@ fn resaving_a_relic_player_unchanged_adds_no_possess_map_keys() {
     );
 }
 
-/// A pre-1.0 save has no `RelicPossessNumMap`; granting a relic rank must not invent one.
 #[test]
 fn granting_a_relic_rank_on_a_pre_1_0_save_invents_no_possess_map() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
     let player_id: Uuid = WORLD1_PLAYER_O.parse().unwrap();
-    // Only a lazily loaded player has a `.sav` to inspect or write.
     player::get_player_details(&mut session, &data, player_id, &null_progress())
         .unwrap()
         .unwrap();

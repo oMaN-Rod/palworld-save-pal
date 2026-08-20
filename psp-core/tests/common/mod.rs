@@ -6,8 +6,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::path::PathBuf;
 use uuid::Uuid;
 
-/// The repo's `data/json` tree, loaded once per call. `GameData` is not
-/// reachable from a `SaveSession` -- every domain consumer threads it
+/// `GameData` is not reachable from a `SaveSession`; every domain consumer threads it
 /// explicitly, so every test that reaches a domain call needs this.
 #[allow(dead_code)]
 pub fn game_data() -> GameData {
@@ -15,11 +14,8 @@ pub fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// Every player UID the save knows: the `PlayerUId` on each
-/// `CharacterSaveParameterMap` key, plus every player whose files the session
-/// loaded. The nil uid is excluded deliberately -- it is what scrubbing writes,
-/// not an identity, and a leak scan that included it would match every zeroed
-/// guid in the file and never fail.
+/// The nil uid is excluded deliberately: it is what scrubbing writes, and a leak scan
+/// that included it would match every zeroed guid in the file and never fail.
 #[allow(dead_code)]
 pub fn all_player_uids(session: &SaveSession) -> Vec<Uuid> {
     let mut uids: BTreeSet<Uuid> = session.player_file_refs.keys().copied().collect();
@@ -30,11 +26,8 @@ pub fn all_player_uids(session: &SaveSession) -> Vec<Uuid> {
     uids.into_iter().collect()
 }
 
-/// Every group id the save knows: the key of each `GroupSaveDataMap` entry, so
-/// guilds and every other group kind alike. Guild identity is invisible to
-/// `all_player_uids` -- it is not a player uid and appears on no character key
-/// -- so a leak scan built on that helper alone can never see it. The nil id is
-/// excluded for the same reason it is there: it is what scrubbing writes.
+/// Guild identity is invisible to `all_player_uids` -- it is not a player uid -- so a
+/// leak scan built on that helper alone can never see it.
 #[allow(dead_code)]
 pub fn all_group_ids(session: &SaveSession) -> Vec<Uuid> {
     let mut ids: BTreeSet<Uuid> = psp_core::domain::world::group_map(&session.level)
@@ -44,17 +37,14 @@ pub fn all_group_ids(session: &SaveSession) -> Vec<Uuid> {
     ids.into_iter().collect()
 }
 
-/// Loads the committed rich `v1_relics` fixture (10 players) as the corpus
-/// under test. Not env-gated and never skips: panics on failure, since a
-/// missing or broken checked-in fixture is a repo problem.
+/// The committed rich `v1_relics` fixture (10 players), as the corpus under test.
 #[allow(dead_code)]
 pub fn load_corpus_session() -> SaveSession {
     load_fixture_session("v1_relics")
 }
 
-/// Loads a committed fixture save from `tests/fixtures/saves/<name>/`. Never
-/// env-gated, so tests built on it always run; panics on failure, since a
-/// missing or broken checked-in fixture is a repo problem, not a skip.
+/// Loads a committed fixture save from `tests/fixtures/saves/<name>/`. Never env-gated;
+/// panics on failure, since a missing or broken checked-in fixture is a repo problem.
 pub fn load_fixture_session(name: &str) -> SaveSession {
     let save_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../tests/fixtures/saves")
@@ -113,9 +103,8 @@ pub fn load_fixture_session(name: &str) -> SaveSession {
     .expect("load fixture session")
 }
 
-/// The player's `.sav` as JSON, for structural assertions the DTO does not
-/// expose. Serialized through the real writer and re-parsed, so anything these
-/// helpers see is genuinely what would land on disk.
+/// The player's `.sav` as JSON. Serialized through the real writer and re-parsed, so
+/// anything these helpers see is genuinely what would land on disk.
 #[allow(dead_code)]
 pub fn player_sav_json(session: &SaveSession, player_id: Uuid) -> serde_json::Value {
     let player_files = session.player_sav_bytes().expect("serialize player savs");
@@ -124,8 +113,7 @@ pub fn player_sav_json(session: &SaveSession, player_id: Uuid) -> serde_json::Va
     serde_json::to_value(&save).expect("player sav to json")
 }
 
-/// Finds the property whose key is `name` -- uesave serializes a `PropertyKey`
-/// as `<name>_<index>`, so the `_` guard is what keeps
+/// uesave serializes a `PropertyKey` as `<name>_<index>`, so the `_` guard is what keeps
 /// `RelicObtainForInstanceFlag` from matching `RelicObtainForInstanceFlagByType`.
 #[allow(dead_code)]
 fn find<'a>(v: &'a serde_json::Value, name: &str) -> Option<&'a serde_json::Value> {
@@ -152,8 +140,7 @@ pub fn relic_flat_flags(sav: &serde_json::Value) -> BTreeSet<String> {
     let Some(entries) = find(sav, "RelicObtainForInstanceFlag").and_then(|v| v.as_array()) else {
         return BTreeSet::new();
     };
-    // Guard against `find` having walked into `...FlagByType`, whose entries are
-    // `Type`/`Flags` structs rather than map `key`/`value` pairs.
+    // Guards against `find` having walked into `...FlagByType` instead.
     for entry in entries {
         assert!(
             entry.get("key").is_some() && entry.get("value").is_some(),
@@ -221,9 +208,8 @@ pub fn relic_bonus_exp_table_index(sav: &serde_json::Value) -> i64 {
         .unwrap_or(0)
 }
 
-/// Ordered variant of `relic_flat_flags`: an on-disk-ordered `Vec` rather than a
-/// `BTreeSet`. `relic_flat_flags`'s set comparison would pass even if a write silently
-/// sorted or reordered the map -- this is the helper that actually catches that.
+/// On-disk-ordered `Vec` variant of `relic_flat_flags`, which catches a silent reorder
+/// that a `BTreeSet` comparison would not.
 #[allow(dead_code)]
 pub fn relic_flat_flags_ordered(sav: &serde_json::Value) -> Vec<String> {
     let Some(entries) = find(sav, "RelicObtainForInstanceFlag").and_then(|v| v.as_array()) else {
@@ -236,8 +222,7 @@ pub fn relic_flat_flags_ordered(sav: &serde_json::Value) -> Vec<String> {
         .collect()
 }
 
-/// Ordered variant of `relic_by_type_flags`: each type's `Flags` as an on-disk-ordered
-/// `Vec` rather than a `BTreeSet`. See `relic_flat_flags_ordered`.
+/// On-disk-ordered `Vec` variant of `relic_by_type_flags`. See `relic_flat_flags_ordered`.
 #[allow(dead_code)]
 pub fn relic_by_type_flags_ordered(sav: &serde_json::Value) -> BTreeMap<String, Vec<String>> {
     let mut out = BTreeMap::new();
@@ -263,9 +248,7 @@ pub fn relic_by_type_flags_ordered(sav: &serde_json::Value) -> BTreeMap<String, 
     out
 }
 
-/// The first fixture player that actually carries the 1.0 by-type relic
-/// structures. Loads each player's details, since only a loaded player has a
-/// `.sav` to inspect.
+/// The first fixture player that actually carries the 1.0 by-type relic structures.
 #[allow(dead_code)]
 pub fn first_player_with_relics(session: &mut SaveSession, data: &GameData) -> Uuid {
     let ids: Vec<Uuid> = session.player_file_refs.keys().copied().collect();
@@ -289,10 +272,8 @@ pub fn first_player_with_relics(session: &mut SaveSession, data: &GameData) -> U
 #[allow(dead_code)]
 pub const CAPTURE_POWER_RELIC: &str = "EPalRelicType::CapturePower";
 
-/// `(slot count, occupied slot count)` for one `CharacterContainerSaveData`
-/// entry. The slot count is the container's capacity -- a base's worker
-/// capacity, for its worker container -- and is independent of how many pals
-/// are actually sitting in it.
+/// `(slot count, occupied slot count)` for one `CharacterContainerSaveData` entry. Slot
+/// count is the container's capacity, independent of how many pals sit in it.
 #[allow(dead_code)]
 pub fn container_slot_census(entry: &psp_core::ue::MapEntry) -> (usize, usize) {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -319,10 +300,9 @@ pub fn container_slot_census(entry: &psp_core::ue::MapEntry) -> (usize, usize) {
     (total, occupied)
 }
 
-/// The base camp with the most placed structures, so capture tests exercise a
-/// real base. `v1_relics` has 15 base camps and the first is nearly empty --
-/// keying on entry order would let every capture assertion pass vacuously.
-/// Ties break on the uuid string so the choice is stable across runs.
+/// The base camp with the most placed structures. `v1_relics` has 15 base camps and the
+/// first is nearly empty, so keying on entry order would make capture assertions vacuous.
+/// Ties break on the uuid string for a stable choice across runs.
 #[allow(dead_code)]
 pub fn fixture_base_id(session: &SaveSession) -> Uuid {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -370,9 +350,7 @@ pub fn fixture_base_id(session: &SaveSession) -> Uuid {
 }
 
 /// The first fixture player carrying a *non*-CapturePower relic type with at least one
-/// true flag. Only such a player can witness a regression that wipes the other relic
-/// types' flag sets: an effigy unlock touches CapturePower alone, so every other type's
-/// flags must survive the write byte for byte.
+/// true flag -- the only kind that can witness a regression wiping other relic types.
 #[allow(dead_code)]
 pub fn first_player_with_non_capture_power_relics(
     session: &mut SaveSession,
@@ -441,9 +419,8 @@ pub fn fixture_base_anchor(session: &SaveSession, base_id: Uuid) -> Anchor {
     }
 }
 
-/// The guild that owns each base camp, one entry per base camp, read straight
-/// off `BaseCampSaveData`. Lets a test derive the world's base count and a
-/// guild's own base count from the fixture instead of from the code under test.
+/// The guild that owns each base camp, one entry per base camp, read straight off
+/// `BaseCampSaveData` -- independent of the code under test.
 #[allow(dead_code)]
 pub fn base_camp_guild_ids(session: &SaveSession) -> Vec<Uuid> {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -464,9 +441,8 @@ pub fn base_camp_guild_ids(session: &SaveSession) -> Vec<Uuid> {
         .collect()
 }
 
-/// Overwrites a base camp's `area_range`, so a test can build the "merging into
-/// a base with a tighter footprint than the blueprint" case the fixture's
-/// uniformly-3500 cm bases cannot express on their own.
+/// Overwrites a base camp's `area_range`; the fixture's bases are all a uniform 3500 cm,
+/// which cannot express a tighter-footprint merge case on its own.
 #[allow(dead_code)]
 pub fn set_base_area_range(session: &mut SaveSession, base_id: Uuid, area_range: f32) {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -487,9 +463,8 @@ pub fn set_base_area_range(session: &mut SaveSession, base_id: Uuid, area_range:
     }
 }
 
-/// A committed real `WorldOption.sav` from `tests/fixtures/world_option/`,
-/// parsed through the production reader. Real files carry all 119 settings, so
-/// a test reading one back is reading the game's own values, not its own.
+/// A committed real `WorldOption.sav`, parsed through the production reader. Real files
+/// carry all 119 settings, so a test reading one back is reading the game's own values.
 #[allow(dead_code)]
 pub fn load_world_option_fixture(name: &str) -> psp_core::ue::Save {
     let path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -509,10 +484,8 @@ pub fn attach_world_option(session: &mut SaveSession, name: &str) {
     session.world_option_dirty = false;
 }
 
-/// Writes `key = value` into `session.world_option`, attaching a real
-/// `WorldOption` fixture first if the save didn't carry one. Goes through the
-/// real `domain::world_option` schema/patch surface rather than poking the
-/// property tree directly, so the write behaves exactly like a live edit.
+/// Writes `key = value` through the real `domain::world_option` schema/patch surface,
+/// attaching a real `WorldOption` fixture first if the save didn't carry one.
 #[allow(dead_code)]
 pub fn set_world_option_int(session: &mut SaveSession, key: &str, value: i32) {
     use psp_core::domain::world_option;

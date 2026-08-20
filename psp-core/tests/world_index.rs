@@ -3,10 +3,8 @@ mod common;
 use psp_core::domain::world;
 use psp_core::ue::{Property, StructValue};
 
-/// Real-save validation of `PalDynamicItem.id.local_id_in_created_world`, the
-/// field path `build_dynamic_item_index` keys by. world1 carries ~43 real
-/// `DynamicItemSaveData` entries, so this exercises parsed `PalDynamicItem`
-/// structs rather than an empty loop.
+/// world1 carries ~43 real `DynamicItemSaveData` entries, so this exercises parsed
+/// `PalDynamicItem` structs rather than an empty loop.
 #[test]
 fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
     let session = common::load_fixture_session("world1");
@@ -29,9 +27,8 @@ fn dynamic_item_index_resolves_every_real_entry_by_local_id_in_created_world() {
          a mismatch here means the field path is wrong for real save data"
     );
 
-    // The struct at each indexed position must itself report the uuid the
-    // index filed it under -- proving the key extraction reads the field it
-    // claims to, not just that the counts happen to line up.
+    // Proves the key extraction reads the field it claims to, not just that the
+    // counts happen to line up.
     for (&local_id, &position) in &index {
         let StructValue::Struct(item_props) = &entries[position] else {
             panic!("indexed position {position} is not a StructValue::Struct");
@@ -68,10 +65,9 @@ fn character_index_finds_every_pal_and_player() {
 
 #[test]
 fn player_entries_are_flagged() {
-    // A complete fixture (every player-flagged map entry has a committed
-    // `.sav`), so this can assert exact equality -- catching both under- and
-    // over-flagging. The rich `v1_relics` corpus is trimmed (ghost player
-    // entries with no `.sav`), where flagged > loaded, so it can't be used here.
+    // world1 is a complete fixture (every player-flagged entry has a committed
+    // `.sav`); the trimmed v1_relics corpus has ghost player entries and can't be
+    // used for this exact-equality check.
     let session = common::load_fixture_session("world1");
     let entries = world::character_map(&session.level).unwrap();
     let player_count = entries.iter().filter(|e| world::entry_is_player(e)).count();
@@ -92,18 +88,14 @@ fn invalidation_clears_all_caches() {
     assert!(session.caches.player_guild_map.is_none());
 }
 
-/// Why `WorldCaches` must be invalidated on every character-map mutation: a
-/// stale index resolves to a different, still-existing entry, silently
-/// editing the wrong pal. Removes position 0 specifically -- with >= 2
-/// entries it is provably not the last position, so something always shifts
-/// into it and the demonstration can never degrade into "the slot is merely
-/// gone".
+/// Why `WorldCaches` must be invalidated on every character-map mutation: a stale
+/// index resolves to a different, still-existing entry, silently editing the wrong
+/// pal. Removes position 0 specifically -- with >= 2 entries it is provably not the
+/// last position, so something always shifts into it.
 #[test]
 fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
     let mut session = common::load_corpus_session();
     let entries_before_removal = world::character_map(&session.level).unwrap();
-    // A single-entry corpus leaves nothing behind at position 0 to be the
-    // "different existing entry" this test is about.
     if entries_before_removal.len() < 2 {
         return;
     }
@@ -112,9 +104,6 @@ fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
     let entries = world::character_map_mut(&mut session.level).unwrap();
     entries.remove(0);
 
-    // The stale index still claims `removed_id` lives at position 0, but every
-    // entry has shifted left by one, so position 0 now holds a different entry
-    // that still exists.
     let entries_after_removal = world::character_map(&session.level).unwrap();
     let resolved_after_removal = entries_after_removal
         .first()
@@ -131,7 +120,6 @@ fn stale_character_index_after_removal_would_resolve_the_wrong_entry() {
         "position 0 must no longer resolve to the removed entry's InstanceId"
     );
 
-    // A freshly rebuilt index no longer contains the removed id at all.
     if let Some(removed_id) = removed_id {
         let fresh_index = world::build_character_index(&session.level);
         assert!(!fresh_index.contains_key(&removed_id));

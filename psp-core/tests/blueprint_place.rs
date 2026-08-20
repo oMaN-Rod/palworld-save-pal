@@ -8,8 +8,7 @@ use psp_core::session::SaveSession;
 use std::collections::BTreeSet;
 use uuid::Uuid;
 
-/// The one `GroupSaveDataMap` group type that owns bases; `place` refuses any
-/// other outright.
+/// The only `GroupSaveDataMap` group type `place` accepts; every other type is refused.
 const GUILD_GROUP_TYPE: &str = "EPalGroupType::Guild";
 
 fn game_data() -> GameData {
@@ -20,8 +19,6 @@ fn anchor_far_from_everything() -> Anchor {
     Anchor { x: 400_000.0, y: 400_000.0, z: 1000.0, yaw_radians: 0.0 }
 }
 
-/// A warnings-overridden request, the shape every placement test but
-/// `warnings_are_refused_unless_overridden` wants.
 fn request(anchor: Anchor, mode: PlacementMode, owner: Uuid) -> PlacementRequest {
     PlacementRequest {
         anchor,
@@ -39,9 +36,7 @@ fn merge_request(anchor: Anchor, base_id: Uuid, owner: Uuid) -> PlacementRequest
     request(anchor, PlacementMode::MergeInto { base_id }, owner)
 }
 
-/// The corpus fixture ships no `WorldOption.sav`, and every limit check reads
-/// its answer from one -- without this, all three Blocking checks return before
-/// they compare anything and any "nothing is blocked" assertion is vacuous.
+/// The corpus fixture ships no `WorldOption.sav`; limit checks need one to compare against.
 fn session_with_limits() -> SaveSession {
     let mut session = common::load_fixture_session("v1_relics");
     common::attach_world_option(&mut session, "save_files");
@@ -60,8 +55,6 @@ fn count_code(findings: &[Finding], code: &str) -> usize {
     with_code(findings, code).len()
 }
 
-/// A structure's horizontal distance from the blueprint's anchor, the quantity
-/// `outside_area_range` compares against the target's `area_range`.
 fn horizontal_offset(structure: &psp_core::domain::blueprint::BlueprintStructure) -> f64 {
     let translation = &structure.relative_transform.translation;
     (translation.x.0 * translation.x.0 + translation.y.0 * translation.y.0).sqrt()
@@ -74,8 +67,6 @@ fn a_clean_placement_produces_no_blocking_findings() {
     let blueprint = blueprint_of(&session, base_id);
     let guild_id = common::fixture_guild_id(&session);
 
-    // The limits have to be readable AND leave room, or "not blocked" is true
-    // by construction rather than by decision.
     assert_eq!(common::world_option_int(&session, "BaseCampMaxNum"), Some(128));
     assert_eq!(common::world_option_int(&session, "BaseCampMaxNumInGuild"), Some(10));
     assert_eq!(common::world_option_int(&session, "MaxBuildingLimitNum"), Some(0));
@@ -122,7 +113,6 @@ fn placing_on_top_of_the_source_base_warns() {
         findings.iter().any(|f| f.severity == Severity::Warning && f.code == "base_too_close"),
         "placing a base on top of an existing one must warn: {findings:?}"
     );
-    // The binding rule: proximity is advice, never a refusal.
     assert!(
         !validate::has_blocking(&findings),
         "base_too_close must never make a placement blocking: {findings:?}"
@@ -151,9 +141,6 @@ fn a_guild_at_its_base_limit_blocks_placement() {
     );
 }
 
-/// `BaseCampMaxNumInGuild` is per guild, not per world. The fixture's bases are
-/// spread over nine guilds, so a limit above the target guild's own count but
-/// far below the world's total separates the two readings.
 #[test]
 fn the_guild_base_limit_counts_only_the_target_guilds_bases() {
     let mut session = session_with_limits();
@@ -200,8 +187,6 @@ fn the_guild_base_limit_counts_only_the_target_guilds_bases() {
     );
 }
 
-/// `BaseCampMaxNum` is the world-wide cap, evaluated against every base camp in
-/// the save rather than the target guild's share of them.
 #[test]
 fn the_world_base_limit_blocks_at_the_world_base_count() {
     let mut session = session_with_limits();
@@ -242,8 +227,6 @@ fn the_world_base_limit_blocks_at_the_world_base_count() {
     );
 }
 
-/// `MaxBuildingLimitNum` caps the structure count the placement would leave
-/// behind; 0 is the game's "no limit" value and must never fire.
 #[test]
 fn the_building_limit_blocks_only_when_the_placement_would_exceed_it() {
     let mut session = session_with_limits();
@@ -289,9 +272,6 @@ fn the_building_limit_blocks_only_when_the_placement_would_exceed_it() {
     );
 }
 
-/// A blueprint's own structures are bounded by the radius they were captured
-/// against, so `outside_area_range` can only fire when the blueprint lands in a
-/// base whose footprint is tighter than the one it came from.
 #[test]
 fn outside_area_range_fires_when_merging_into_a_smaller_footprint() {
     let mut session = session_with_limits();
@@ -344,9 +324,6 @@ fn outside_area_range_fires_when_merging_into_a_smaller_footprint() {
     );
 }
 
-/// Dropping a blueprint back onto the ground its own base occupies collides
-/// with every one of that base's placed structures, because a new base owns
-/// none of them.
 #[test]
 fn structure_overlap_reports_every_colliding_structure() {
     let session = session_with_limits();
@@ -382,9 +359,6 @@ fn structure_overlap_reports_every_colliding_structure() {
     );
 }
 
-/// `MergeInto` adds to a base rather than founding one: the target's own
-/// structures are not foreign objects to collide with, but they do count
-/// against the building limit.
 #[test]
 fn merge_into_skips_the_targets_own_structures_and_sums_its_building_count() {
     let mut session = session_with_limits();
@@ -417,9 +391,6 @@ fn merge_into_skips_the_targets_own_structures_and_sums_its_building_count() {
         "merging founds no base, so base counts do not apply: {merged:?}"
     );
 
-    // The target already holds `structure_count` structures and the blueprint
-    // brings the same number again, so a limit one under the sum must block a
-    // merge while leaving a brand new base of the same blueprint alone.
     common::set_world_option_int(
         &mut session,
         "MaxBuildingLimitNum",
@@ -451,9 +422,7 @@ fn merge_into_skips_the_targets_own_structures_and_sums_its_building_count() {
     );
 }
 
-/// A save whose `WorldOption.sav` is missing or unparseable loads fine -- the
-/// loader degrades to `None` and warns. Validation must say the limits went
-/// unchecked instead of reporting a clean bill of health.
+/// A missing or unparseable `WorldOption.sav` degrades to `None` rather than an error.
 #[test]
 fn limits_that_cannot_be_read_are_reported_rather_than_passed() {
     let session = common::load_fixture_session("v1_relics");
@@ -489,10 +458,8 @@ fn limits_that_cannot_be_read_are_reported_rather_than_passed() {
     }
 }
 
-/// The bundled buildings catalog is what tells placement a structure is a real
-/// build object. It spells ids in the game's own casing (`Stone_foundation`),
-/// while saves carry the level's (`Stone_Foundation`), so the lookup has to be
-/// case-insensitive or hundreds of ordinary walls read as unknown.
+/// The catalog spells ids in the game's casing (`Stone_foundation`); saves carry the
+/// level's (`Stone_Foundation`). The lookup must be case-insensitive.
 #[test]
 fn unknown_structure_types_are_flagged_and_known_ones_are_not() {
     let session = session_with_limits();
@@ -539,10 +506,7 @@ fn unknown_structure_types_are_flagged_and_known_ones_are_not() {
 
 // ---- place ----
 
-/// Everything a half-applied placement would disturb: one count for every
-/// collection `commit` appends to, plus the exact set of placed structure
-/// instance ids and the guild registration lists. A refusal has to leave all of
-/// them untouched.
+/// Snapshot of everything a placement could half-apply; a refusal must leave it unchanged.
 #[derive(Debug, PartialEq)]
 struct SessionFingerprint {
     map_objects: usize,
@@ -556,10 +520,8 @@ struct SessionFingerprint {
     structure_instance_ids: BTreeSet<Uuid>,
 }
 
-/// Absent collections count as zero rather than panicking: a fixture the
-/// placement is expected to REFUSE (`world2` carries no `WorkSaveData` and no
-/// `BaseCampSaveData` at all) still has to be fingerprinted on both sides of
-/// the refusal.
+/// Absent collections count as zero rather than panicking: `world2` ships neither
+/// `WorkSaveData` nor `BaseCampSaveData` and must still be fingerprintable.
 fn session_fingerprint(session: &SaveSession) -> SessionFingerprint {
     use psp_core::domain::world;
 
@@ -583,9 +545,7 @@ fn session_fingerprint(session: &SaveSession) -> SessionFingerprint {
     }
 }
 
-/// `(individual_character_handle_ids, base_ids, map_object_instance_ids_base_camp_points)`
-/// lengths for one `GroupSaveDataMap` entry -- the three lists a placement
-/// registers itself in.
+/// `(handle count, base count, base_camp_point count)` for one `GroupSaveDataMap` entry.
 fn guild_registration_counts(entry: &psp_core::ue::MapEntry) -> (usize, usize, usize) {
     use psp_core::domain::guild_tail;
 
@@ -603,10 +563,8 @@ fn guild_registration_counts(entry: &psp_core::ue::MapEntry) -> (usize, usize, u
     }
 }
 
-/// Every `GroupSaveDataMap` key whose entry is not a guild. `v1_relics` carries
-/// `EPalGroupType::Organization` groups alongside its guilds, and nothing but
-/// the group type distinguishes them at the map level -- which is exactly why a
-/// placement can be pointed at one by accident.
+/// `v1_relics` mixes `EPalGroupType::Organization` groups in with its guilds; only
+/// `GroupType` tells them apart.
 fn non_guild_group_ids(session: &SaveSession) -> Vec<Uuid> {
     use psp_core::domain::{guild_tail, world};
 
@@ -631,9 +589,7 @@ fn non_guild_group_ids(session: &SaveSession) -> Vec<Uuid> {
         .collect()
 }
 
-/// `(GroupType, RawData decodes as group data, that group data is a guild)` --
-/// the three facts `target_guild`'s two gates read, so a test can show which of
-/// them an input actually trips.
+/// `(GroupType, RawData decodes as group data, that group data is a guild)`.
 fn group_gate_facts(session: &SaveSession, group_id: Uuid) -> (Option<String>, bool, bool) {
     use psp_core::domain::{guild_tail, world};
 
@@ -650,10 +606,8 @@ fn group_gate_facts(session: &SaveSession, group_id: Uuid) -> (Option<String>, b
     )
 }
 
-/// Relabels a group as `EPalGroupType::Guild` without touching its `RawData`,
-/// producing what a Guild-typed group with a corrupt tail looks like from
-/// `place`'s side: the type gate waves it through and only `as_guild` is left
-/// to refuse it.
+/// Relabels a group's `GroupType` to `Guild` without touching its `RawData`, simulating
+/// a Guild-typed group with a corrupt tail.
 fn relabel_group_as_guild(session: &mut SaveSession, group_id: Uuid) {
     use psp_core::domain::world;
 
@@ -667,17 +621,13 @@ fn relabel_group_as_guild(session: &mut SaveSession, group_id: Uuid) {
         .insert("GroupType", psp_core::props::enum_property("EPalGroupType::Guild"));
 }
 
-/// One placed structure's identity fields, read straight off
-/// `MapObjectSaveData` rather than through a DTO, so ownership rebinding is
-/// visible.
 struct PlacedStructure {
     map_object_id: String,
     instance_id: Uuid,
     base_camp_id: Uuid,
     group_id: Uuid,
     build_player_uid: Uuid,
-    /// The `base_camp_id` a `BaseCampPoint` concrete model names -- the Pal
-    /// Box's own record of which base it founds, separate from the `Model`'s.
+    /// The base id a `BaseCampPoint` concrete model names, separate from the `Model`'s.
     base_camp_point_id: Option<Uuid>,
     x: f64,
     y: f64,
@@ -744,8 +694,7 @@ fn placed_structures(session: &SaveSession, base_id: Uuid) -> Vec<PlacedStructur
         .collect()
 }
 
-/// Positions rounded to a millimetre, so a set comparison is not at the mercy
-/// of the last bit of an f64.
+/// Rounds to a millimetre so a set comparison isn't at the mercy of the last bit of an f64.
 fn position_key(x: f64, y: f64, z: f64) -> String {
     format!("{x:.3}/{y:.3}/{z:.3}")
 }
@@ -804,8 +753,7 @@ fn placed_structures_are_rebound_to_the_owner_and_the_target_guild() {
     let guild_id = common::fixture_guild_id(&session);
     let owner = common::fixture_player_uid(&session);
     assert!(!owner.is_nil(), "the fixture owner uid must be real");
-    // Capture scrubs the builder uid to nil, so a placement that forgot to
-    // rebind it would leave nil behind rather than the source save's value.
+    // Capture scrubs the builder uid to nil.
     assert!(
         capture::structure_build_player_uids(&blueprint).iter().all(Uuid::is_nil),
         "a captured blueprint carries no builder uid"
@@ -858,28 +806,6 @@ fn a_blocked_placement_leaves_the_session_untouched() {
     );
 }
 
-/// Every refusal that survives validation, one per stage of the run, so the
-/// untouched-session guarantee is pinned all the way up to `commit` rather than
-/// only at the first gate:
-///
-/// * an unknown merge target fails in guild resolution, before `preflight`;
-/// * a group that is not a guild fails the same gate, one check later;
-/// * a Guild-typed group whose data is not a guild fails the check after that,
-///   which no fixture input reaches on its own: every non-Guild group in
-///   `v1_relics` is refused by the type check first, so the `as_guild` gate is
-///   given an input built for it;
-/// * a blueprint with no base camp fails inside `preflight`;
-/// * a blueprint whose base camp lost its typed `RawData` reaches `preflight`
-///   intact and fails during staging, after the clone has been remapped and
-///   transformed;
-/// * a blueprint carrying one property name at two different types fails inside
-///   `commit` itself, which is the last place a refusal can still be free.
-///
-/// Each case also pins the reason it was refused, because two gates that both
-/// happen to reject the same input prove nothing about either one.
-///
-/// None of the five is a blocking finding, which is what makes them refusals
-/// that happen after `validate::check` has already passed.
 #[test]
 fn a_placement_that_fails_after_validation_leaves_the_session_untouched() {
     let mut session = session_with_limits();
@@ -888,11 +814,6 @@ fn a_placement_that_fails_after_validation_leaves_the_session_untouched() {
     let guild_id = common::fixture_guild_id(&session);
     let owner = common::fixture_player_uid(&session);
 
-    // Two distinct non-guild groups: one stays as it is to trip the GroupType
-    // gate, the other is relabelled a Guild so that gate passes and the
-    // `as_guild` gate is the only thing left between it and
-    // `register_with_guild` -- which would hand it pal handles it can never
-    // record base ids beside.
     let non_guilds = non_guild_group_ids(&session);
     assert!(
         non_guilds.len() >= 2,
@@ -1007,7 +928,6 @@ fn warnings_are_refused_unless_overridden() {
     let blueprint = blueprint_of(&session, base_id);
     let guild_id = common::fixture_guild_id(&session);
     let owner = common::fixture_player_uid(&session);
-    // No `WorldOption.sav`, so `limits_unknown` fires: a warning, never blocking.
     let findings = validate::check(
         &session,
         &game_data(),
@@ -1099,9 +1019,7 @@ fn placed_structures_land_at_the_chosen_anchor() {
     let anchor = anchor_far_from_everything();
     assert_eq!(anchor.yaw_radians, 0.0, "the expectation below assumes no rotation");
 
-    // Derived from the blueprint, not from the placement: with an unrotated
-    // anchor a structure's world position is exactly anchor + its captured
-    // offset.
+    // With an unrotated anchor, world position is exactly anchor + captured offset.
     let expected: BTreeSet<String> = blueprint
         .structures
         .iter()
@@ -1136,8 +1054,6 @@ fn placed_structures_land_at_the_chosen_anchor() {
     );
 }
 
-/// Merging adds to an existing base: no new base camp, no second Pal Box, and
-/// the target base gains exactly the blueprint's remaining structures.
 #[test]
 fn merging_adds_structures_to_the_target_base_without_founding_one() {
     let mut session = session_with_limits();
@@ -1220,9 +1136,6 @@ fn a_placed_blueprint_still_serializes_and_parses_back() {
 
 // ---- placing into another save ----
 
-/// The first `GroupSaveDataMap` entry that is a decodable guild. A cross-save
-/// placement has to name a guild in the DESTINATION, which shares no id with the
-/// save the blueprint came from.
 fn first_guild_id(session: &SaveSession) -> Uuid {
     use psp_core::domain::{guild_tail, world};
 
@@ -1237,7 +1150,6 @@ fn first_guild_id(session: &SaveSession) -> Uuid {
         .expect("every save fixture must carry a decodable guild")
 }
 
-/// A member of `guild_id` -- the natural owner for a placement made into it.
 fn guild_member_uid(session: &SaveSession, guild_id: Uuid) -> Uuid {
     use psp_core::domain::{guild_tail, world};
 
@@ -1274,9 +1186,8 @@ fn base_camp_raw(
     }
 }
 
-/// The base camp's `WorkerDirector`, decoded from the opaque byte blob uesave
-/// hands back untyped -- where the worker container id and the worker spawn
-/// point live.
+/// The base camp's `WorkerDirector`, decoded from an opaque byte blob uesave leaves
+/// untyped; names the worker container id and the worker spawn point.
 fn worker_director(session: &SaveSession, base_id: Uuid) -> psp_core::palbin::WorkerDirector {
     let entry = base_camp_entry(session, base_id);
     let value_props = psp_core::props::struct_props(&entry.value).expect("base camp value");
@@ -1295,8 +1206,7 @@ fn work_collection(session: &SaveSession, base_id: Uuid) -> psp_core::palbin::Wo
     psp_core::palbin::read_work_collection(bytes).expect("WorkCollection blob decodes")
 }
 
-/// `(individual_character_handle_ids, base_ids, map_object_instance_ids_base_camp_points)`
-/// as plain id lists -- the three registers a placement has to enter itself in.
+/// `(character handle ids, base ids, base_camp_point ids)` a placement registers itself in.
 fn guild_lists(session: &SaveSession, guild_id: Uuid) -> (Vec<Uuid>, Vec<Uuid>, Vec<Uuid>) {
     use psp_core::domain::{guild_tail, world};
 
@@ -1346,8 +1256,7 @@ fn work_bindings(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
         .collect()
 }
 
-/// Every `(container id, slot player_uid)` pair in `CharacterContainerSaveData`,
-/// one per slot.
+/// Every `(container id, slot player_uid)` pair in `CharacterContainerSaveData`.
 fn character_container_slot_owners(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
 
@@ -1374,8 +1283,7 @@ fn character_container_slot_owners(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     owners
 }
 
-/// Every `CharacterContainer` module's `target_container_id` on one structure,
-/// walked through the public property surface.
+/// Every `CharacterContainer` module's `target_container_id` on one structure.
 fn character_container_module_ids(properties: &psp_core::ue::Properties) -> Vec<Uuid> {
     use psp_core::ue::games::palworld::PalMapConcreteModelModuleData;
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -1416,9 +1324,8 @@ fn character_container_entry(session: &SaveSession, container_id: Uuid) -> &psp_
         .unwrap_or_else(|| panic!("no character container entry for {container_id}"))
 }
 
-/// Every `(work id, individual id)` pair a `WorkSaveData` entry names -- the
-/// assigned worker on the work itself and on each `WorkAssignMap` entry. Nil
-/// ids ("nobody is on this") are left out.
+/// Every `(work id, individual id)` pair a `WorkSaveData` entry names. Nil ids (nobody
+/// assigned) are left out.
 fn work_individual_refs(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     use psp_core::ue::games::palworld::PalWorkTypeSpecificData;
     use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
@@ -1466,8 +1373,6 @@ fn work_individual_refs(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     refs
 }
 
-/// Every `(work id, individual id)` a work names that `CharacterSaveParameterMap`
-/// has no entry for -- the dangling reference a placement must never create.
 fn works_naming_a_missing_character(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     let characters = character_instance_ids(session);
     work_individual_refs(session)
@@ -1492,21 +1397,12 @@ fn character_instance_ids(session: &SaveSession) -> BTreeSet<Uuid> {
         .collect()
 }
 
-/// The `v1_relics` base every cross-save test ships, at one capture layer.
 fn source_blueprint(source: &SaveSession, options: CaptureOptions) -> BaseBlueprint {
     capture::capture(source, common::fixture_base_id(source), options, "Home").expect("capture")
 }
 
-/// Moving a base into ANOTHER save is what a blueprint is for, and it is exactly
-/// where uesave's write schemas run out: a schema is recorded only for a
-/// property that was actually READ, so every property the blueprint introduces
-/// has no tag in a destination that never carried one and `level_sav_bytes`
-/// fails -- after the placement has already been applied, leaving the user
-/// unable to save at all.
-///
-/// All three capture layers are covered because each brings different
-/// properties: `configured` adds structure condition and access config, `full`
-/// adds pals, containers and dynamic items on top.
+/// uesave only records a write schema for a property it actually read, so a property
+/// the blueprint introduces may have no tag in a destination that never carried one.
 #[test]
 fn a_blueprint_placed_into_another_save_leaves_that_save_writable() {
     let source = common::load_fixture_session("v1_relics");
@@ -1578,10 +1474,6 @@ fn a_blueprint_placed_into_another_save_leaves_that_save_writable() {
     }
 }
 
-/// `world2` has never held a work or a base camp, so those arrays are absent
-/// from its world tree entirely. The refusal has to come before anything is
-/// written -- and "nothing was written" is checked against the destination's own
-/// bytes, not merely against a count.
 #[test]
 fn a_destination_missing_a_collection_is_refused_before_anything_lands() {
     let source = common::load_fixture_session("v1_relics");
@@ -1618,10 +1510,8 @@ fn a_destination_missing_a_collection_is_refused_before_anything_lands() {
     );
 }
 
-/// Adds a byte to one of a base camp's opaque blobs. `WorkerDirector` is a
-/// fixed 118-byte layout and `WorkCollection` is checked to its last byte, so
-/// one byte too many makes either refuse to decode -- which is what a Palworld
-/// update that moved a field would look like from here.
+/// `WorkerDirector` is a fixed 118-byte layout; `WorkCollection` is checked to its last
+/// byte -- one extra byte fails either to decode.
 fn lengthen_base_camp_blob(base_camp: &mut psp_core::ue::Properties, field: &str) {
     let raw_data = psp_core::props::get_mut(base_camp, &[field, "RawData"])
         .unwrap_or_else(|| panic!("the base camp must carry a {field} blob"));
@@ -1643,20 +1533,13 @@ fn lengthen_session_base_camp_blob(session: &mut SaveSession, base_id: Uuid, fie
     lengthen_base_camp_blob(value_props, field);
 }
 
-/// The blueprint's own `WorkerDirector` and `WorkCollection` are the two blobs
-/// a placement has to rewrite before it can call the base its own. Undecodable,
-/// they used to be carried over verbatim and the placement reported success:
-/// the landed base's workers would resolve to the SOURCE save's container and
-/// its `WorkCollection` would name the source save's works, under the source
-/// base's id. Neither blob is modelled by uesave, so a Palworld update that
-/// moved a field would reinstate exactly that, on every placement.
+/// `WorkerDirector` and `WorkCollection` are opaque blobs a placement must rewrite before
+/// claiming a base as its own; neither is modelled by uesave.
 #[test]
 fn a_blueprint_blob_that_does_not_decode_refuses_the_placement() {
     let source = common::load_fixture_session("v1_relics");
     let intact = source_blueprint(&source, CaptureOptions::full());
 
-    // The control: this blueprint, blobs intact, places cleanly into this
-    // destination -- so a refusal below is the corruption and nothing else.
     {
         let mut target = common::load_fixture_session("world1");
         let guild_id = first_guild_id(&target);
@@ -1711,12 +1594,8 @@ fn a_blueprint_blob_that_does_not_decode_refuses_the_placement() {
     }
 }
 
-/// The fourth blob is the TARGET base's `WorkCollection`, which a merge appends
-/// its works to. Undecodable, the append used to be skipped and the merge
-/// reported success, leaving the target base holding works it does not list.
-/// The refusal has to land before anything is written, so the blob is decoded
-/// during preflight rather than at the point of the append, which runs from
-/// inside `commit`.
+/// A merge appends to the TARGET base's `WorkCollection`; the blob must decode during
+/// preflight, before `commit` runs the append.
 #[test]
 fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
     let mut session = session_with_limits();
@@ -1728,7 +1607,6 @@ fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
     let mut anchor = common::fixture_base_anchor(&session, base_id);
     anchor.x += 20_000.0;
 
-    // The control: the same merge succeeds while the target's blob is intact.
     {
         let mut control = session_with_limits();
         place::place(
@@ -1773,9 +1651,6 @@ fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
 
 // ---- what a placement rebinds ----
 
-/// Everything `stage_identity` rebinds, pinned in one placement made into a
-/// destination that shares no guild, no owner and no base with the save the
-/// blueprint came from -- so none of these values can match by coincidence.
 #[test]
 fn a_placed_base_rebinds_every_object_it_brings() {
     let source = common::load_fixture_session("v1_relics");
@@ -1795,10 +1670,8 @@ fn a_placed_base_rebinds_every_object_it_brings() {
         work_bindings(&target).into_iter().map(|(id, _)| id).collect();
     let containers_before = character_container_ids(&target);
     let characters_before = character_instance_ids(&target);
-    // A captured pal names no guild at all -- the scrub pass zeroes it so the
-    // source save's guild cannot travel in a shared blueprint -- so a placement
-    // that forgot to rebind it would leave nil behind rather than the
-    // destination's guild.
+    // Capture scrubs a pal's guild id to nil; a placement must rebind it to the
+    // destination guild.
     assert!(!blueprint.characters.is_empty(), "the blueprint must carry pals to rebind");
     for entry in &blueprint.characters {
         assert_eq!(
@@ -1915,10 +1788,8 @@ fn a_placed_base_rebinds_every_object_it_brings() {
     }
 }
 
-/// The guild registers a placement three times over, and none of the three
-/// follows from the structures landing: without them the base exists but no
-/// guild owns it, its Pal Box never shows up as a base camp point, and its pals
-/// belong to nobody.
+/// A guild registers a placement three separate ways: base ownership, the Pal Box as a
+/// base camp point, and each pal's guild id -- none follows automatically from the others.
 #[test]
 fn a_new_base_registers_itself_with_its_guild() {
     let source = common::load_fixture_session("v1_relics");
@@ -1981,10 +1852,8 @@ fn a_new_base_registers_itself_with_its_guild() {
     );
 }
 
-/// A base names its works twice: once per `WorkSaveData` entry, and once more in
-/// the opaque `WorkCollection` blob on the base camp. A merge that appends to
-/// the first and not the second leaves the target base unable to find the work
-/// it just gained.
+/// A base names its works twice: once per `WorkSaveData` entry, once more in its
+/// `WorkCollection` blob. Both must be updated.
 #[test]
 fn merging_appends_its_works_to_the_target_bases_work_collection() {
     let mut session = session_with_limits();
@@ -2035,9 +1904,8 @@ fn merging_appends_its_works_to_the_target_bases_work_collection() {
     );
 }
 
-/// `WorldCaches` maps ids to POSITIONS in the world tree and a placement appends
-/// to every map it indexes, so a placement that leaves the caches standing
-/// leaves later lookups resolving against a tree that no longer matches.
+/// `WorldCaches` maps ids to positions in the world tree; a placement appends to every
+/// map it indexes, so stale caches must be dropped.
 #[test]
 fn placing_invalidates_the_world_lookup_caches() {
     use psp_core::domain::world;
@@ -2064,8 +1932,6 @@ fn placing_invalidates_the_world_lookup_caches() {
     )
     .expect("placement");
 
-    // Why holding on to the index is a defect and not a missed optimisation: it
-    // cannot answer for anything that just landed.
     let placed: Vec<Uuid> =
         character_container_ids(&target).difference(&containers_before).copied().collect();
     assert!(!placed.is_empty(), "a full capture must bring character containers");
@@ -2086,19 +1952,14 @@ fn placing_invalidates_the_world_lookup_caches() {
 
 // ---- the base camp's opaque WorkerDirector blob ----
 
-/// The `WorkerDirector` is a raw byte blob, so nothing in the typed remap
-/// touches it. Carried over verbatim it still names the SOURCE save's worker
-/// container -- an id that does not exist in another save at all, and that in
-/// the same save resolves to the pals of the base the blueprint was captured
-/// from -- and still sends the base's workers to the source base's coordinates.
+/// `WorkerDirector` is a raw byte blob the typed remap never touches; carried over
+/// verbatim it still names the source save's worker container.
 #[test]
 fn the_placed_bases_worker_director_is_retargeted() {
     let source = common::load_fixture_session("v1_relics");
     let source_base = common::fixture_base_id(&source);
     let blueprint = source_blueprint(&source, CaptureOptions::full());
 
-    // Read off the source fixture, so every expectation below is independent of
-    // the placement.
     let source_director = worker_director(&source, source_base);
     let source_transform = base_camp_raw(&source, source_base).transform;
     assert!(
@@ -2117,8 +1978,7 @@ fn the_placed_bases_worker_director_is_retargeted() {
         "the source spawn point must be offset from its base, or re-basing is untestable"
     );
 
-    // Both directions matter: in the same save a stale container id silently
-    // resolves to the WRONG pals, in another save it resolves to nothing at all.
+    // Same-save: a stale id resolves to the wrong pals. Cross-save: it resolves to nothing.
     for target_name in ["v1_relics", "world1"] {
         let mut target = common::load_fixture_session(target_name);
         let guild_id = first_guild_id(&target);
@@ -2162,10 +2022,8 @@ fn the_placed_bases_worker_director_is_retargeted() {
             "{target_name}: the app's own base -> worker container lookup must agree"
         );
 
-        // The spawn point is a WORLD position, so it has to be re-based onto the
-        // anchor. A yaw rotation about Z preserves both the vertical offset and
-        // the horizontal distance, so the two together pin the re-basing without
-        // re-deriving the rotation the placement applies.
+        // A yaw rotation about Z preserves vertical offset and horizontal distance from
+        // the base camp, which together pin the re-basing without the rotation itself.
         let spawn = &director.spawn_transform.translation;
         let placed_offset = (spawn.x.0 - anchor.x, spawn.y.0 - anchor.y, spawn.z.0 - anchor.z);
         let placed_radius =
@@ -2189,22 +2047,13 @@ fn the_placed_bases_worker_director_is_retargeted() {
     }
 }
 
-/// `the_placed_bases_worker_director_is_retargeted` runs `full` only, and only
-/// a `full` capture brings a `CharacterContainerSaveData` entry the director can
-/// be pointed at. `blueprint` is the DEFAULT layer, so the layer that decides
-/// what most placements do is the one that has to be pinned: a base whose
-/// director names the nil guid has no worker container at all, and the app's own
-/// `base_guild_and_container` lookup says so.
-///
-/// The container travels emptied rather than absent, so the slot count -- the
-/// base's worker capacity -- is the same at every layer and only the occupancy
-/// differs.
+/// The worker container travels emptied rather than absent at the `blueprint` layer, so
+/// slot count (capacity) stays the same across layers and only occupancy differs.
 #[test]
 fn every_capture_layer_gives_the_placed_base_a_worker_container() {
     let source = common::load_fixture_session("v1_relics");
     let source_base = common::fixture_base_id(&source);
 
-    // Read off the source fixture, independent of any placement.
     let (_, source_container) =
         psp_core::domain::guild::base_guild_and_container(base_camp_entry(&source, source_base))
             .expect("the fixture base must resolve a worker container");
@@ -2270,17 +2119,9 @@ fn every_capture_layer_gives_the_placed_base_a_worker_container() {
     }
 }
 
-/// A merge founds no base, so it drops the blueprint's base camp -- and with it
-/// the `WorkerDirector` that was the only thing naming the base's worker
-/// container. An EMPTY container left behind that way is litter nothing can
-/// reach, so it goes. One still holding pals stays: `remap` has already pointed
-/// the merged works at those pals, so dropping them would land works naming
-/// `CharacterSaveParameterMap` keys that do not exist -- and would throw the
-/// base's whole workforce away without saying so.
-///
-/// Both layers are needed to separate the two halves of that rule: `blueprint`
-/// carries the worker container empty, so only the drop can happen; `full`
-/// carries it holding every worker, so only the keep can.
+/// A merge drops its blueprint's base camp, so an unnamed worker container it brought
+/// becomes unreachable litter -- unless it still holds pals, which `remap` has already
+/// pointed merged works at.
 #[test]
 fn a_merge_drops_only_the_container_that_is_both_unnamed_and_empty() {
     for (layer, options, expected_dropped, expected_kept_for_pals) in [
@@ -2292,9 +2133,6 @@ fn a_merge_drops_only_the_container_that_is_both_unnamed_and_empty() {
         let blueprint = capture::capture(&session, base_id, options, "Home").expect("capture");
         let owner = common::fixture_player_uid(&session);
 
-        // Derived from the blueprint alone: once the base camp and the Pal Box
-        // are gone, a container survives only because a remaining structure's
-        // module still names it, or because it holds a pal.
         let reachable: BTreeSet<Uuid> = blueprint
             .structures
             .iter()
@@ -2371,11 +2209,8 @@ fn a_merge_drops_only_the_container_that_is_both_unnamed_and_empty() {
     }
 }
 
-/// The other half of that rule, where the harm is: a merged `WorkSaveData`
-/// entry names its worker by instance id, and `remap` rewrote those names to the
-/// blueprint's fresh pal ids before anything decided which pals to land. Land
-/// the works without the pals and the target save carries works pointing at
-/// `CharacterSaveParameterMap` keys that were never inserted.
+/// `remap` rewrites a work's worker reference to the blueprint's fresh pal id before
+/// anything decides which pals actually land; dropping the pal leaves a dangling ref.
 #[test]
 fn a_merge_lands_its_workers_and_leaves_no_work_naming_a_missing_pal() {
     let mut session = session_with_limits();
@@ -2438,19 +2273,14 @@ fn a_merge_lands_its_workers_and_leaves_no_work_naming_a_missing_pal() {
     );
 }
 
-/// A base names itself in its `WorkCollection.own_id`, and that id is minted by
-/// `remap` -- before the placement decides what to call the new base. Reusing it
-/// is the only thing that keeps the two in agreement: minting a second id there
-/// leaves the placed base's own `WorkCollection` naming a base that exists in no
-/// save, and every other placement assertion goes on passing.
+/// `WorkCollection.own_id` is minted by `remap`, before the placement picks the new
+/// base's id; the placement must reuse it rather than minting a second one.
 #[test]
 fn a_placed_bases_work_collection_names_the_base_the_placement_founded() {
     let source = common::load_fixture_session("v1_relics");
     let source_base = common::fixture_base_id(&source);
     let blueprint = source_blueprint(&source, CaptureOptions::full());
 
-    // Read off the source fixture: `own_id` is the base's own id, which is what
-    // makes the placed value comparable to the placed base's id at all.
     let source_own_id = work_collection(&source, source_base).own_id;
     assert_eq!(
         source_own_id, source_base,

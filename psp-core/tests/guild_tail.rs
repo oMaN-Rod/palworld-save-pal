@@ -3,10 +3,8 @@ mod common;
 use psp_core::domain::{guild_tail, world};
 use uuid::Uuid;
 
-/// Every guild in a real save survives a full write -> read round trip with
-/// its structured data unchanged. `PalGuildGroup::write` is the exact inverse
-/// of its `read`, so structural equality across this round trip is byte
-/// identity of the guild's on-disk bytes.
+/// `PalGuildGroup::write` is the exact inverse of its `read`, so structural equality
+/// across this round trip is byte identity of the guild's on-disk bytes.
 #[test]
 fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     let mut guild_count = 0;
@@ -43,7 +41,6 @@ fn every_guild_tail_in_fixture_saves_round_trips_byte_identically() {
     );
 }
 
-/// The same round trip on the committed `v1_relics` corpus fixture.
 #[test]
 fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
     let session = common::load_corpus_session();
@@ -64,9 +61,9 @@ fn every_guild_tail_in_corpus_session_round_trips_byte_identically() {
     }
 }
 
-/// The accessors and mutators must handle both guild-tail shapes
-/// (`PreUpdate` and `PostUpdate`), never assuming one. The `PreUpdate` shape
-/// is built via the public constructor since the fixtures cannot guarantee it.
+/// Accessors and mutators must handle both guild-tail shapes (`PreUpdate` and
+/// `PostUpdate`); the `PreUpdate` shape is built via the public constructor since the
+/// fixtures cannot guarantee it.
 #[test]
 fn accessors_handle_pre_update_guilds_built_from_the_constructor() {
     let admin: Uuid = "77777777-7777-7777-7777-777777777777".parse().unwrap();
