@@ -236,7 +236,6 @@ class UPSStateClass {
 
 			this.tags = this.tags.filter((t) => t.id !== tagId);
 
-			// Refresh pals and stats after deletion
 			await this.loadPals(true);
 			await this.loadStats();
 		} catch (error) {
@@ -264,7 +263,6 @@ class UPSStateClass {
 				this.pals[index] = { ...this.pals[index], ...normalizedUpdates };
 			}
 
-			// Refresh collections if collection assignment changed
 			if ('collection_id' in updates) {
 				await this.loadCollections();
 			}
@@ -278,7 +276,6 @@ class UPSStateClass {
 			await send(MessageType.CLONE_UPS_PAL, {
 				pal_id: palId
 			});
-			// Refresh pals list and collections after cloning
 			await this.loadPals(true);
 			await this.loadCollections();
 		} catch (error) {
@@ -296,8 +293,8 @@ class UPSStateClass {
 
 			this.selectedPals.clear();
 			await this.loadPals(true);
-			await this.loadCollections(); // Update collections to refresh pal_count
-			await this.loadStats(); // Update stats after deletion
+			await this.loadCollections();
+			await this.loadStats();
 		} catch (error) {
 			console.error('Error deleting pals:', error);
 		}
@@ -312,8 +309,8 @@ class UPSStateClass {
 			palIds.forEach((id) => this.selectedPals.delete(id));
 
 			await this.loadPals(true);
-			await this.loadCollections(); // Update collections to refresh pal_count
-			await this.loadStats(); // Update stats after deletion
+			await this.loadCollections();
+			await this.loadStats();
 		} catch (error) {
 			console.error('Error deleting pals:', error);
 		}
@@ -362,7 +359,7 @@ class UPSStateClass {
 			await send(MessageType.IMPORT_TO_UPS, data);
 
 			await this.loadPals(true);
-			await this.loadCollections(); // Update collections to refresh pal_count
+			await this.loadCollections();
 			await this.loadStats();
 		} catch (error) {
 			console.error('Error importing pal:', error);
@@ -388,7 +385,7 @@ class UPSStateClass {
 			});
 
 			await this.loadPals(true);
-			await this.loadCollections(); // Update collections to refresh pal_count
+			await this.loadCollections();
 			await this.loadStats();
 		} catch (error) {
 			console.error('Error cloning pals to UPS:', error);
@@ -405,13 +402,11 @@ class UPSStateClass {
 				message: string;
 			} = await sendAndWait(MessageType.NUKE_UPS_PALS, {});
 
-			// Clear all local state after successful nuke
 			this.pals = [];
 			this.selectedPals.clear();
 			this.pagination = { ...DEFAULT_PAGINATION };
 			this.filters = { ...DEFAULT_FILTERS };
 
-			// Refresh all data to ensure consistency
 			await this.loadAll();
 
 			return {

@@ -1,14 +1,3 @@
-/**
- * DendrogramEngine — framework-agnostic D3 renderer for ONE breeding chain.
- *
- * Ported from PalSavTools. Integration changes: `assetUrl(icon)` →
- * `assetLoader.loadMenuImage(character_id)` for PSP's bundled-image model, and
- * layout is delegated to `./layouts` so the same renderer serves the
- * dendrogram, smooth, bracket and radial views.
- *
- * The tree reads target-first: the target pal is the root and source pals are
- * the leaves.
- */
 import { select, type Selection } from 'd3-selection';
 import { transition } from 'd3-transition';
 import { zoom, zoomIdentity, zoomTransform, type D3ZoomEvent, type ZoomBehavior } from 'd3-zoom';
@@ -37,7 +26,6 @@ export class DendrogramEngine {
 	matchedPassives: Set<string> = new Set();
 	passiveName: (asset: string) => string = (s) => s;
 	layoutMode: LayoutMode = 'dendrogram';
-	/** Last tree handed to `render`, so a layout switch can re-lay it out. */
 	private currentTree: TreeNode | null = null;
 
 	callbacks: {
@@ -62,11 +50,6 @@ export class DendrogramEngine {
 		this.svg.on('dblclick.zoom', null);
 	}
 
-	/**
-	 * Lay out and draw `treeRoot`. Selection and hover survive a re-render when
-	 * the node still exists, so re-rendering (a theme change, a layout switch)
-	 * does not silently clear what the user picked.
-	 */
 	render(treeRoot: TreeNode): void {
 		this.colors = resolveDendroColors();
 		this.currentTree = treeRoot;
@@ -83,7 +66,6 @@ export class DendrogramEngine {
 		this.drawNodes();
 	}
 
-	/** Switch view without rebuilding the tree. No-op if the mode is unchanged. */
 	setLayout(mode: LayoutMode): void {
 		if (mode === this.layoutMode) return;
 		this.layoutMode = mode;
@@ -229,8 +211,6 @@ export class DendrogramEngine {
 		merged
 			.attr('transform', (d) => `translate(${d.x},${d.y - DENDRO_CONFIG.nodeHeight / 2})`)
 			.attr('opacity', (d) => {
-				// Dim everything not on the highlighted node's own edges, matching
-				// how the links fade, so focus reads across marks and connectors.
 				if (!this.selectedId && !this.hoveredId) return 1;
 				return this.isAdjacentToFocus(d.node.id) ? 1 : 0.35;
 			});
@@ -264,12 +244,6 @@ export class DendrogramEngine {
 		const glyphX = this.genderGlyphX.bind(this);
 		const iconTextX = DENDRO_CONFIG.iconPadding * 2 + DENDRO_CONFIG.iconSize + 5;
 		merged.each(function (this: SVGGElement, d: PositionedNode) {
-			// --- Name + gender glyph ---------------------------------------
-			// Fit the display name to the card's usable width (measured, not
-			// a char-count guess — CJK/wide glyphs are wider than an ASCII
-			// estimate), reserving a slot for the gender glyph and the
-			// right-edge step/target badges. Long names shrink instead of
-			// overlapping the glyph or spilling past the card.
 			const cardW = d.w;
 			const rightReserve = 30;
 			const genderSlot = genderGlyph(d.node.gender) ? 16 : 0;
@@ -281,7 +255,6 @@ export class DendrogramEngine {
 				try {
 					fitWidth(nameNode, nameMaxW);
 				} catch {
-					// not laid out yet — keep the unmeasured text
 				}
 			}
 			const nameW = nameNode ? nameNode.getComputedTextLength() : 0;
@@ -292,7 +265,6 @@ export class DendrogramEngine {
 				.text(genderGlyph(d.node.gender))
 				.attr('fill', genderColor(colors, d.node.gender));
 
-			// --- Passive chips line -----------------------------------------
 			const g = select(this).select<SVGGElement>('g.dendro-passives');
 			const chipX0 = iconTextX;
 			const chipY = 38;
@@ -332,7 +304,6 @@ export class DendrogramEngine {
 					try {
 						fitWidth(t, passiveMaxW);
 					} catch {
-						// not laid out yet
 					}
 				}
 			}
@@ -353,11 +324,6 @@ export class DendrogramEngine {
 			.attr('opacity', (d) => (d.node.isBred ? 1 : 0));
 	}
 
-	/**
-	 * Soft drop shadow, declared once. Kept as an SVG filter rather than a CSS
-	 * one so the PNG export — which serializes the SVG with no stylesheet —
-	 * rasterizes with the same depth the on-screen tree has.
-	 */
 	private defineFilters(): void {
 		const defs = this.svg.append('defs');
 		const shadow = defs
@@ -409,7 +375,6 @@ export class DendrogramEngine {
 		this.callbacks.onSelect?.(node as any);
 	}
 
-	/** Is `id` the focused node, or directly connected to it? */
 	private isAdjacentToFocus(id: string): boolean {
 		const focus = this.selectedId ?? this.hoveredId;
 		if (!focus) return true;
@@ -533,13 +498,6 @@ function truncate(s: string, max: number): string {
 	return s.length <= max ? s : s.slice(0, max - 1) + '…';
 }
 
-/**
- * Shrink `el`'s text (with a trailing ellipsis) until its measured width fits
- * `maxWidth`. Width is measured, so CJK/wide glyphs respect the same limit as
- * ASCII — a fixed char-count truncation cannot. No-op when already fits.
- * Requires the element to be laid out; callers guard with try/catch before
- * layout stabilizes.
- */
 function fitWidth(el: SVGTextElement, maxWidth: number): void {
 	const full = el.textContent ?? '';
 	el.textContent = full;

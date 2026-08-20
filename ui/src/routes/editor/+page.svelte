@@ -32,7 +32,7 @@
 		);
 	});
 
-	const LARGE_FILE_THRESHOLD = 50 * 1024 * 1024; // 50MB
+	const LARGE_FILE_THRESHOLD = 50 * 1024 * 1024;
 
 	let isLoading = $state(false);
 	let content: { text: string } | undefined = $state(undefined);
@@ -160,8 +160,8 @@
 	});
 </script>
 
-<!-- Palette source for the editor theme; its own data-theme makes the read
-     independent of the layout's <body> theme effect. Never visible. -->
+<!-- Never visible; its own data-theme lets the editor theme be read independently
+     of the layout's <body> theme effect. -->
 <div bind:this={paletteProbe} data-theme={theme.current} class="palette-probe" aria-hidden="true">
 </div>
 

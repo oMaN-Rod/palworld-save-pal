@@ -1,6 +1,5 @@
 export async function isUpdateAvailableOnGitHub(version: string): Promise<boolean> {
 	try {
-		// Call GitHub API to check for latest release
 		const response = await fetch(
 			'https://api.github.com/repos/oMaN-Rod/palworld-save-pal/releases/latest'
 		);
@@ -29,9 +28,9 @@ function isNewerVersion(latestVersion: string, currentVersion: string): boolean 
 	while (partsCurrent.length < maxLength) partsCurrent.push(0);
 
 	for (let i = 0; i < maxLength; i++) {
-		if (partsLatest[i] > partsCurrent[i]) return true; // Latest version is newer
-		if (partsLatest[i] < partsCurrent[i]) return false; // Current version is newer
+		if (partsLatest[i] > partsCurrent[i]) return true;
+		if (partsLatest[i] < partsCurrent[i]) return false;
 	}
 
-	return false; // Versions are equal
+	return false;
 }

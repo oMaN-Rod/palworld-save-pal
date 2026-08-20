@@ -90,8 +90,6 @@
 		{/snippet}
 
 		{#snippet media()}
-			<!-- Pals with no baked mesh (NPCs and a handful of variants) render the
-			     deck artwork instead, so the panel keeps its size either way. -->
 			<div class="relative aspect-square w-full">
 				<PalModelViewer characterKey={palKey} fallback={palImageFallback} />
 			</div>

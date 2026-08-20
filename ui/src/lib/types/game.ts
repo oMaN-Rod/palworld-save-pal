@@ -116,7 +116,6 @@ export type Pal = {
 	sanity: number;
 	exp: number;
 	is_sick: boolean;
-	// UPS metadata fields (optional)
 	__ups_source?: boolean;
 	__ups_id?: number;
 	__ups_new?: boolean;
@@ -129,7 +128,7 @@ export type StatusPointList = {
 	weight: number;
 	capture_rate: number;
 	work_speed: number;
-	// Palworld 1.0 relic-backed ranks. Absent on pre-1.0 saves.
+	// Palworld 1.0 relic-backed ranks; absent on pre-1.0 saves.
 	[key: string]: number;
 };
 
@@ -257,7 +256,6 @@ export type Base = {
 	area_range: number;
 };
 
-/** A dungeon/alpha/predator marker ready to feed `buildMapObjectFC`. */
 export type MapObject = {
 	x: number;
 	y: number;
@@ -266,7 +264,6 @@ export type MapObject = {
 	pal?: string;
 };
 
-/** An entry of dungeons.json. */
 export type Dungeon = {
 	class: string;
 	x: number;
@@ -283,8 +280,7 @@ export type FastTravelPoint = {
 	localized_name?: string;
 };
 
-/** An entry of relics.json; `relic_type` is a bare EPalRelicType key. `rot` is
- *  an FRotator (pitch, yaw, roll) in degrees. */
+// `rot` is an FRotator (pitch, yaw, roll) in degrees.
 export type Relic = {
 	class: string;
 	x: number;
@@ -306,7 +302,6 @@ export type Boss = {
 	z: number;
 };
 
-/** bosses.json's predator entries: no spawner_id/character_id/level, just a pal. */
 export type PredatorSpawn = {
 	spawn_type: 'predator';
 	x: number;

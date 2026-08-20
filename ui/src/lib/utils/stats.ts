@@ -80,23 +80,19 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 
 	const level = player ? Math.min(player.level, pal.level) : pal.level;
 
-	// Calculate bonuses from passive skills
 	const { attackBonus, defenseBonus, workSpeedBonus } = calculateSkillEffects(pal.passive_skills);
 
-	// Soul and condenser bonuses
 	const condenserBonus = (pal.rank - 1) * 0.05;
 	const hpIv = (pal.talent_hp * 0.3) / 100;
 	const hpSoulBonus = pal.rank_hp * 0.03;
 	const hpScale = palData.scaling.hp;
 
-	// HP calculation
 	const alphaScaling = pal.is_boss || pal.is_lucky ? 1.2 : 1;
 	const awakeningScaling = pal.is_awakened ? AWAKENING_STATUS_MULTIPLY : 1;
 	const hp = Math.floor(500 + 5 * level + hpScale * 0.5 * level * (1 + hpIv) * alphaScaling);
 	pal.max_hp =
 		Math.floor(hp * (1 + condenserBonus) * (1 + hpSoulBonus) * awakeningScaling) * 1000;
 
-	// Attack calculation
 	const attackIv = (pal.talent_shot * 0.3) / 100;
 	const attackSoulBonus = pal.rank_attack * 0.03;
 	const attackScale = palData.scaling.attack;
@@ -105,7 +101,6 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 		attack * (1 + condenserBonus) * (1 + attackSoulBonus) * (1 + attackBonus) * awakeningScaling
 	);
 
-	// Defense calculation
 	const defenseIv = (pal.talent_defense * 0.3) / 100;
 	const defenseSoulBonus = pal.rank_defense * 0.03;
 	const defenseScale = palData.scaling.defense;
@@ -114,7 +109,6 @@ export function getStats(pal: Pal, player?: Player): PalStats | undefined {
 		defense * (1 + condenserBonus) * (1 + defenseSoulBonus) * (1 + defenseBonus) * awakeningScaling
 	);
 
-	// Work speed calculation with base value of 70
 	let workSpeed = 70 * (1 + workSpeedBonus);
 
 	return {

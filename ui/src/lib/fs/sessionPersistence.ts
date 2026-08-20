@@ -22,7 +22,7 @@ export async function recordSession(args: {
 			sizeBytes: args.zipBytes.length,
 			savedAt: args.savedAt
 		};
-		// The save is already loaded; losing the recents entry only costs Resume.
+		// Losing the recents entry only costs Resume, not the loaded save itself.
 		try {
 			await putRecent(rec);
 		} catch {
@@ -35,8 +35,8 @@ export async function recordSession(args: {
 		await putBlob(opfsPath, args.zipBytes);
 	} catch (e) {
 		if (e instanceof QuotaError) return { persisted: false, quota: true };
-		// OPFS unavailable (private window, embedded webview). Not fatal: the
-		// save is loaded, only resume-after-reload is lost.
+		// OPFS unavailable (private window, embedded webview); resume-after-reload
+		// is lost but the save itself is already loaded.
 		return { persisted: false, quota: false };
 	}
 	const rec: RecentSave = {
@@ -47,8 +47,6 @@ export async function recordSession(args: {
 		sizeBytes: args.zipBytes.length,
 		savedAt: args.savedAt
 	};
-	// The bytes are already safely in OPFS; losing the recents entry only
-	// costs Resume, so don't fail the whole save over it.
 	try {
 		await putRecent(rec);
 	} catch {

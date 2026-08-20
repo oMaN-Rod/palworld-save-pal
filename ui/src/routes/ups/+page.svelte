@@ -92,7 +92,6 @@
 		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
 	);
 
-	// Element and Type filtering
 	const elementTypes = $derived(Object.keys(elementsData.elements));
 	const elementIcons = $derived.by(() => {
 		let elementIcons: Record<string, string> = {};
@@ -138,11 +137,9 @@
 	function handleElementTypeFilter(elementType: string) {
 		const currentTypes = [...upsState.filters.elementTypes];
 		if (currentTypes.includes(elementType)) {
-			// Remove if already selected
 			const newTypes = currentTypes.filter((t) => t !== elementType);
 			upsState.updateElementTypesFilter(newTypes);
 		} else {
-			// Add if not selected
 			currentTypes.push(elementType);
 			upsState.updateElementTypesFilter(currentTypes);
 		}
@@ -152,11 +149,9 @@
 	function handlePalTypeFilter(palType: string) {
 		const currentTypes = [...upsState.filters.palTypes];
 		if (currentTypes.includes(palType)) {
-			// Remove if already selected
 			const newTypes = currentTypes.filter((t) => t !== palType);
 			upsState.updatePalTypesFilter(newTypes);
 		} else {
-			// Add if not selected
 			currentTypes.push(palType);
 			upsState.updatePalTypesFilter(currentTypes);
 		}
@@ -173,7 +168,6 @@
 		upsState.loadPals(true);
 	}
 
-	// Helper functions for styling
 	function getElementButtonClass(element: string) {
 		return cn('btn', upsState.filters.elementTypes.includes(element) ? 'bg-secondary-500/25' : '');
 	}
@@ -194,7 +188,6 @@
 		upsState.clearSelection();
 	}
 
-	// Helper to determine if filters are active
 	function hasActiveFilters(): boolean {
 		return (
 			!!upsState.filters.search ||
@@ -256,7 +249,6 @@
 		}
 	}
 
-	// Bulk Actions
 	async function handleBulkEditTags() {
 		if (upsState.selectedPals.size === 0) return;
 
@@ -273,12 +265,10 @@
 		});
 
 		if (result) {
-			// Update tags for all selected pals
 			for (const palId of selectedPalIds) {
 				await upsState.updatePal(palId, { tags: result });
 			}
 
-			// Refresh data
 			await upsState.loadPals();
 			toast.add(
 				m.updated_tags_for_pals({
@@ -307,14 +297,12 @@
 		});
 
 		if (result) {
-			// Update collection for all selected pals
 			const collectionId = result.removeFromCollection ? undefined : result.collectionId;
 
 			for (const palId of selectedPalIds) {
 				await upsState.updatePal(palId, { collection_id: collectionId });
 			}
 
-			// Refresh data
 			await upsState.loadAll();
 
 			if (result.removeFromCollection) {
@@ -406,7 +394,6 @@
 				return;
 			}
 
-			// Perform the nuke operation
 			const result = await upsState.nukeAllPals();
 
 			if (result.success) {
@@ -451,7 +438,6 @@
 		}
 
 		try {
-			// Create character_key using the same logic as backend
 			let character_key = selectedPal.toLowerCase();
 			if (character_key.startsWith('boss_')) {
 				character_key = character_key.slice(5);
@@ -461,7 +447,6 @@
 				character_key = character_key.slice(0, -7);
 			}
 
-			// Create a new pal instance with proper default values
 			const newPal = {
 				instance_id: '00000000-0000-0000-0000-000000000000',
 				character_id: selectedPal,
@@ -492,9 +477,9 @@
 				gender: PalGender.MALE,
 				friendship_point: 0,
 				owner_uid: '',
-				storage_id: '00000000-0000-0000-0000-000000000000', // Required UUID field
+				storage_id: '00000000-0000-0000-0000-000000000000',
 				storage_slot: 0,
-				group_id: null, // Optional UUID field
+				group_id: null,
 				learned_skills: [],
 				active_skills: [],
 				passive_skills: [],
@@ -518,7 +503,6 @@
 </script>
 
 <div class="ups-container animate-fade-in flex h-full flex-col">
-	<!-- Header -->
 	<div
 		class="border-surface-300 dark:border-surface-700 flex items-center justify-between border-b p-4"
 	>
@@ -537,9 +521,7 @@
 			</div>
 		</div>
 
-		<!-- View Controls -->
 		<div class="flex items-center gap-2">
-			<!-- Add Pal Button -->
 			<TooltipButton
 				onclick={handleAddPal}
 				variant="secondary"
@@ -549,7 +531,6 @@
 				<Plus class="h-4 w-4" />
 			</TooltipButton>
 
-			<!-- Import Button (when Pals exist and save file is loaded) -->
 			{#if appState.saveFile}
 				<TooltipButton
 					onclick={handleImportFromSave}
@@ -565,7 +546,6 @@
 				<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
 			{/if}
 
-			<!-- Panel Toggles -->
 			<TooltipButton
 				onclick={() => upsState.toggleCollectionsPanel()}
 				class={cn(
@@ -607,7 +587,6 @@
 
 			<div class="bg-surface-300 dark:bg-surface-700 h-6 w-px"></div>
 
-			<!-- View Mode Toggle -->
 			<TooltipButton
 				onclick={() => upsState.setViewMode('grid')}
 				class={cn(
@@ -636,9 +615,7 @@
 		</div>
 	</div>
 
-	<!-- Main Content -->
 	<div class="flex flex-1 overflow-hidden">
-		<!-- Side Panels -->
 		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
 			<div
 				class="border-surface-300 dark:border-surface-700 bg-surface-50 dark:bg-surface-900 animate-slide-down flex w-full max-w-80 flex-col border-r sm:max-w-72 md:max-w-80"
@@ -650,7 +627,6 @@
 						placeholder={m.search_entity({ entity: c.pals })}
 					/>
 				</div>
-				<!-- Filter Controls -->
 				<Accordion base="w-full" collapsible>
 					<Accordion.Item value="filters">
 						{#snippet control()}
@@ -667,11 +643,9 @@
 						{/snippet}
 						{#snippet panel()}
 							<div class="felx flex-col gap-4 p-4">
-								<!-- Left Column: Elements & Types Filter -->
 								<div class="space-y-4">
 									<span class="block text-sm font-medium">{m.element_and_type()}</span>
 									<div class="space-y-3">
-										<!-- Element Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
 												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
@@ -707,7 +681,6 @@
 											</div>
 										</div>
 
-										<!-- Pal Types -->
 										<div>
 											<div class="mb-1 flex items-center justify-between">
 												<span class="text-surface-600 dark:text-surface-400 text-xs font-medium">
@@ -784,7 +757,6 @@
 									</div>
 								</div>
 
-								<!-- Right Column: Sort By -->
 								<div>
 									<span class="mb-2 block text-sm font-medium">{m.sort_by()}</span>
 									<div class="flex flex-wrap gap-2">
@@ -806,7 +778,6 @@
 									</div>
 								</div>
 
-								<!-- Clear Filters (spans both columns) -->
 								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
 									<div class="border-surface-300 dark:border-surface-700 col-span-2 border-t pt-2">
 										<button
@@ -834,9 +805,7 @@
 			</div>
 		{/if}
 
-		<!-- Main Panel -->
 		<div class="flex flex-1 flex-col">
-			<!-- Selection Controls -->
 			{#if upsState.pals.length > 0}
 				<div
 					class="bg-surface-100 dark:bg-surface-900 grid h-12 grid-cols-[auto_1fr_auto] items-center px-4 text-sm"
@@ -940,7 +909,6 @@
 				</div>
 			{/if}
 
-			<!-- Pals Content -->
 			<div class="flex-1 overflow-auto">
 				{#if upsState.loading}
 					<div class="flex h-32 items-center justify-center">
@@ -969,7 +937,6 @@
 						</div>
 					</div>
 				{:else}
-					<!-- Pal Grid/List -->
 					{#if upsState.viewMode === 'grid'}
 						<UPSPalGrid />
 					{:else}
@@ -978,7 +945,6 @@
 				{/if}
 			</div>
 
-			<!-- Pagination -->
 			{#if totalPages > 1}
 				<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 					<div class="flex items-center justify-between">

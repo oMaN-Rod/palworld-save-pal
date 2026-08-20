@@ -1,18 +1,5 @@
 import * as m from '$i18n/messages';
 
-/**
- * Common translations used throughout the application.
- * Centralizes frequently used translation strings to reduce code repetition
- * and ensure consistency across components.
- *
- * @example
- * ```ts
- * import { c } from '$lib/utils/commonTranslations';
- * console.log(c.pal); // Outputs singular "Pal" translation
- * console.log(c.pals); // Outputs plural "Pals" translation
- * ```
- */
-
 export const c = {
 	activeSkill: m.active_skill({ count: 1 }),
 	activeSkills: m.active_skill({ count: 2 }),
@@ -58,19 +45,6 @@ export const c = {
 	container: m.storage_container(),
 	storage: m.storage()
 };
-
-/**
- * Pre-formatted parameter objects for message functions that require
- * common translation values as arguments.
- * These objects provide ready-to-use parameter sets to avoid repeatedly
- * constructing the same parameter structures throughout the application.
- *
- * @example
- * ```ts
- * import { p } from '$lib/utils/commonTranslations';
- * m.some_message(p.pal); // Passes { pal: m.pal({ count: 1 }) } as parameter
- * ```
- */
 
 export const p = {
 	pal: {

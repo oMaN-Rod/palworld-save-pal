@@ -106,7 +106,7 @@ export async function writeSaveInPlace(
 	timestamp: number
 ): Promise<string> {
 	const backup = `.psp-backup/${timestamp}`;
-	// Back up every original that exists BEFORE any overwrite.
+	// Every original is backed up before any overwrite, so a crash mid-write never loses data.
 	for (const f of files) {
 		const original = await readIfExists(dir, f.path);
 		if (original) {
@@ -116,7 +116,6 @@ export async function writeSaveInPlace(
 			await w.close();
 		}
 	}
-	// Then write the new bytes in place.
 	for (const f of files) {
 		const fh = await fileHandleFor(dir, f.path, true);
 		const w = await fh.createWritable();

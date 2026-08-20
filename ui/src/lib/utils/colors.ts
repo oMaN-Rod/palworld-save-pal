@@ -31,7 +31,6 @@ export function rgbToHex(rgbString: string | undefined) {
 }
 
 export function hexToRGB(hex: string) {
-	// Remove # if present
 	hex = hex.replace('#', '');
 
 	const r = parseInt(hex.substring(0, 2), 16) / 255;
@@ -44,28 +43,27 @@ export function hexToRGB(hex: string) {
 export function calculateFilters(hex: string) {
 	const rgb = hexToRGB(hex);
 
-	// Matrix for color transformation
 	const matrix = [
 		rgb.r,
 		0,
 		0,
 		0,
-		0, // Red
+		0,
 		0,
 		rgb.g,
 		0,
 		0,
-		0, // Green
+		0,
 		0,
 		0,
 		rgb.b,
 		0,
-		0, // Blue
+		0,
 		0,
 		0,
 		0,
 		1,
-		0 // Alpha
+		0
 	];
 
 	return `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='colorize'><feColorMatrix type='matrix' values='${matrix.join(' ')}'/></filter></svg>#colorize")`;

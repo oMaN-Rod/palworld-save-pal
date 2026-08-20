@@ -458,7 +458,6 @@
 	function handlePalSelect(pal: Pal, event: MouseEvent) {
 		if (!pal || pal.character_id === 'None') return;
 		if (event.ctrlKey || event.metaKey) {
-			// Toggle selection
 			if (selectedPals.includes(pal.instance_id)) {
 				selectedPals = selectedPals.filter((id) => id !== pal.instance_id);
 			} else {
@@ -723,7 +722,6 @@
 		</div>
 
 		<div>
-			<!-- Pager -->
 			<div id="dps-pager" class="mb-4 flex items-center justify-center space-x-4">
 				<Button
 					class="rounded-full p-0! font-bold"

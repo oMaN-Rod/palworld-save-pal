@@ -13,7 +13,6 @@ export const getPlayerSummariesHandler: WSMessageHandler = {
 		const appState = getAppState();
 		console.log('Received player summaries', Object.keys(data).length);
 		appState.playerSummaries = data;
-		// Only navigate to /edit if not already on /bulk page
 		if (!page.url.pathname.startsWith('/bulk')) {
 			goto('/edit');
 		}
@@ -43,7 +42,6 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 		const { player, player_id, origin } = data;
 		console.log('Received player details for', player.nickname);
 
-		// Process pals to add localized names
 		if (player.pals) {
 			Object.values(player.pals).forEach((pal) => {
 				const palInfo = palsData.getByKey(pal.character_key);
@@ -54,15 +52,13 @@ export const getPlayerDetailsResponseHandler: WSMessageHandler = {
 			});
 		}
 
-		// Add to players cache. Read the stored (proxied) value back for
-		// selectedPlayer/bulkDetailPlayer so they are the SAME reactive proxy
-		// as players[player_id]; assigning the raw `player` yields a separate
-		// proxy, so edits that set `selectedPlayer.state` never reach the
-		// players[] entry saveState iterates.
+		// Read the stored (proxied) value back rather than reusing `player` directly,
+		// so selectedPlayer/bulkDetailPlayer are the SAME reactive proxy as
+		// players[player_id] -- a raw assignment would yield a separate proxy, and
+		// edits to it would never reach the players[] entry saveState iterates.
 		appState.players[player_id] = player;
 		const stored = appState.players[player_id];
 
-		// Update summary to show as loaded
 		if (appState.playerSummaries[player_id]) {
 			appState.playerSummaries[player_id].loaded = true;
 		}
@@ -96,13 +92,11 @@ export const getGuildDetailsResponseHandler: WSMessageHandler = {
 		const { guild, guild_id } = data;
 		console.log('Received guild details for', guild.name);
 
-		// Add to guilds cache, then reference the stored (proxied) value so
-		// bulkDetailGuild is the SAME reactive proxy as guilds[guild_id] (a raw
-		// assignment yields a separate proxy — see the player handler above).
+		// Reference the stored (proxied) value so bulkDetailGuild is the SAME reactive
+		// proxy as guilds[guild_id] (see the player handler above).
 		appState.guilds[guild_id] = guild;
 		const storedGuild = appState.guilds[guild_id];
 
-		// Update summary to show as loaded
 		if (appState.guildSummaries[guild_id]) {
 			appState.guildSummaries[guild_id].loaded = true;
 		}

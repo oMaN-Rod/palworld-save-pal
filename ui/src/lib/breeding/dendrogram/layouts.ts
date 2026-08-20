@@ -1,14 +1,3 @@
-/**
- * Layout strategies for the breeding tree.
- *
- * Every strategy takes the `d3-hierarchy` root and returns positioned nodes
- * plus links that already carry their own SVG path. The engine stays dumb: it
- * draws whatever the strategy produced, so adding a view never touches the
- * renderer.
- *
- * Coordinate convention (shared with `DendrogramEngine.hitTestNode`):
- *   `x` = card's LEFT edge, `y` = card's VERTICAL CENTRE.
- */
 import { cluster, hierarchy, tree, type HierarchyPointNode } from 'd3-hierarchy';
 
 import { DENDRO_CONFIG } from './constants';
@@ -42,19 +31,11 @@ function buildHierarchy(root: TreeNode) {
 	return hierarchy<TreeNode>(root, (d) => (d.parents ? [...d.parents] : []));
 }
 
-/**
- * Corner-rounded orthogonal elbow.
- *
- * The turn column is passed in rather than derived per link — every link
- * leaving one parent must share it, otherwise the vertical segments of two
- * siblings sit a few pixels apart and the 90° turns visibly fail to line up.
- */
 function elbowPath(sx: number, sy: number, tx: number, ty: number, midX: number, r = 8): string {
 	if (Math.abs(ty - sy) < 0.5) {
 		return `M${sx},${sy} H${tx}`;
 	}
 	const dir = ty > sy ? 1 : -1;
-	// Never let the radius exceed the space available on either leg.
 	const radius = Math.max(
 		0,
 		Math.min(r, Math.abs(midX - sx), Math.abs(tx - midX), Math.abs(ty - sy) / 2)
@@ -72,18 +53,14 @@ function elbowPath(sx: number, sy: number, tx: number, ty: number, midX: number,
 	].join(' ');
 }
 
-/** Horizontal cubic bezier — the smooth counterpart to `elbowPath`. */
 function curvePath(sx: number, sy: number, tx: number, ty: number): string {
 	const dx = (tx - sx) * 0.5;
 	return `M${sx},${sy} C${sx + dx},${sy} ${tx - dx},${ty} ${tx},${ty}`;
 }
 
-/** Curve between two arbitrary points, bowed toward the layout origin. */
 function radialPath(sx: number, sy: number, tx: number, ty: number): string {
 	const mx = (sx + tx) / 2;
 	const my = (sy + ty) / 2;
-	// Pull the control point toward the centre so sibling links fan out
-	// instead of crossing straight through the middle of the diagram.
 	const k = 0.65;
 	return `M${sx},${sy} Q${mx * k},${my * k} ${tx},${ty}`;
 }
@@ -103,11 +80,6 @@ function collect(laidOut: HierarchyPointNode<TreeNode>, place: (d: HierarchyPoin
 	return { nodes, index };
 }
 
-/**
- * Left-to-right layered layouts. `mode` picks the link shape; `packLeaves`
- * switches `tree()` (tidy, parents centred over children) for `cluster()`
- * (all leaves flushed to the deepest column — the bracket look).
- */
 function horizontal(root: TreeNode, mode: LayoutMode, packLeaves: boolean): LayoutResult {
 	const h = buildHierarchy(root);
 	const layout = (packLeaves ? cluster<TreeNode>() : tree<TreeNode>())
@@ -118,11 +90,9 @@ function horizontal(root: TreeNode, mode: LayoutMode, packLeaves: boolean): Layo
 		.separation((a, b) => (a.parent === b.parent ? 1 : 1.25));
 	const laidOut = layout(h);
 
-	// d3 lays out vertically then we rotate: depth -> x, sibling axis -> y.
+	// d3 lays out vertically and we rotate: depth -> x, sibling axis -> y.
 	const { nodes, index } = collect(laidOut, (d) => ({ x: d.y, y: d.x }));
 
-	// One turn column per SOURCE node, shared by both of its outgoing links, so
-	// sibling elbows turn on exactly the same vertical line.
 	const turnX = new Map<string, number>();
 	for (const link of laidOut.links()) {
 		const source = index.get(link.source.data.id);
@@ -132,8 +102,6 @@ function horizontal(root: TreeNode, mode: LayoutMode, packLeaves: boolean): Layo
 		const span = target.x - sx;
 		const existing = turnX.get(source.node.id);
 		const candidate = sx + span * 0.5;
-		// Children of one parent share a depth, so this is already identical for
-		// siblings; `min` only guards against a ragged custom tree.
 		turnX.set(source.node.id, existing === undefined ? candidate : Math.min(existing, candidate));
 	}
 
@@ -156,7 +124,6 @@ function horizontal(root: TreeNode, mode: LayoutMode, packLeaves: boolean): Layo
 	return { nodes, links, index };
 }
 
-/** Root at the centre, one concentric ring per generation. */
 function radial(root: TreeNode): LayoutResult {
 	const h = buildHierarchy(root);
 	const depth = Math.max(1, h.height);
@@ -165,8 +132,6 @@ function radial(root: TreeNode): LayoutResult {
 		.size([2 * Math.PI, depth * ringGap])
 		.separation((a, b) => (a.parent === b.parent ? 1 : 1.6) / Math.max(a.depth, 1))(h);
 
-	// Cards stay axis-aligned — rotating them would flip the labels upside down
-	// on the left half of the circle, which costs more than it buys.
 	const { nodes, index } = collect(laidOut, (d) => {
 		const angle = d.x - Math.PI / 2;
 		const radius = d.y;

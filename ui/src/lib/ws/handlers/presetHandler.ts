@@ -24,7 +24,6 @@ export const importPresetHandler: WSMessageHandler = {
 	async handle(data: { message: string; count: number }) {
 		const toast = getToastState();
 		toast.add(data.message, 'Import Success', 'success');
-		// Refresh the presets data to include the new imported preset
 		await presetsData.reset();
 	}
 };

@@ -367,7 +367,6 @@
 		});
 
 		if (confirmed) {
-			// get base id based on current page
 			const baseId = currentBase ? currentBase[0] : '';
 			send(MessageType.DELETE_PALS, {
 				guild_id: playerGuild?.id,
@@ -713,7 +712,6 @@
 		</div>
 	{:else}
 		<div class="grid h-full w-full grid-cols-[minmax(200px,25%)_1fr] xl:grid-cols-[25%_1fr]">
-			<!-- Left Controls -->
 			<div class="shrink-0 space-y-2 p-4">
 				<div class="flex">
 					<div class="flex items-center">
@@ -986,9 +984,7 @@
 				{/if}
 			</div>
 
-			<!-- Right Content -->
 			<div>
-				<!-- Pager -->
 				{#if activeTab !== 'lab'}
 					<div id="guild-pager" class="mb-4 flex items-center justify-center space-x-4">
 						<Button

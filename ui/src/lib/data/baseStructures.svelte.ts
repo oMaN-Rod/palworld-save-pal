@@ -15,12 +15,9 @@ class BaseStructures {
 	// GET_BASE_STRUCTURES requests would share one slot and the first would never
 	// settle. Chain requests so at most one is ever on the wire.
 	private queue: Promise<void> = Promise.resolve();
-	// $state.raw, not $state: a base holds thousands of structures whose fields are
-	// read repeatedly on every rebuild, and under a deep $state each read goes
-	// through Svelte's proxy. Profiling one base load attributed ~90 s to
-	// buildStructureFC and ~37 s to structureAnchor, nearly all inside the proxy's
-	// get handler, against 495 ms of real work. Both collections are replaced
-	// wholesale rather than mutated, so that reactivity buys nothing.
+	// $state.raw, not $state: both collections are replaced wholesale rather than
+	// mutated, and a base holds thousands of structures read on every rebuild, so
+	// deep reactivity would proxy every one of those reads for no benefit.
 	private byBase: Record<string, BaseStructure[]> = $state.raw({});
 
 	footprints: Record<string, Footprint> = $state.raw({});

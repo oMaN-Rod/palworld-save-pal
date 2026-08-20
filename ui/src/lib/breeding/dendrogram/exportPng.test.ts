@@ -3,7 +3,6 @@ import { fitBounds, slugify } from './exportPng';
 
 describe('fitBounds', () => {
 	it('maps a tree bbox into a margin-padded canvas with the tree at the origin', () => {
-		// Tree laid out from (0,0) — the common dendrogram case.
 		expect(fitBounds({ x: 0, y: 0, width: 400, height: 300 }, 32)).toEqual({
 			dx: 32,
 			dy: 32,

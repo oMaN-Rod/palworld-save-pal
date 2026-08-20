@@ -39,9 +39,6 @@ export function orderPresets<T extends { id: string; name: string }>(
 	return [...known, ...unknown];
 }
 
-// Shift the selected ids one slot toward `direction`, each hopping over the
-// adjacent unselected neighbor. A selected block stops at the top/bottom;
-// non-contiguous selections move independently. Returns a new array.
 export function moveIds(
 	orderedIds: string[],
 	selectedIds: Set<string>,

@@ -185,7 +185,6 @@ export async function saveState(state: AppState) {
 	let modifiedPlayers: [string, Player][] = [];
 	let modifiedGuilds: [string, GuildDTO][] = [];
 
-	// Handle UPS pal modifications and new UPS pals
 	if (
 		state.selectedPal &&
 		state.selectedPal.state === EntryState.MODIFIED &&

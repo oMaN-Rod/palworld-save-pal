@@ -18,7 +18,6 @@ import type { WikiCategory } from './wikiCategories';
 
 export type WikiField = {
 	label: string;
-	/** Reads a display value from a record; return null to omit the row. */
 	value: (record: Record<string, unknown>) => string | number | null;
 };
 
@@ -28,34 +27,22 @@ export type WikiRelated = {
 	category: WikiCategory;
 	key: string;
 	label: string;
-	/** Secondary line, e.g. an entity's code name. */
 	sublabel?: string;
 	icon?: WikiIcon | null;
-	/** No entity page exists for this reference; render it as plain text. */
 	missing?: boolean;
 };
 
-/** Supplementary imagery shown beside an entity's main icon. */
 export type WikiExtra = { src: string; label: string };
 
 export type WikiDescriptor = {
-	/** Loads the raw record map at BUILD time. Dynamic import only. */
 	loadJson: () => Promise<Record<string, unknown>>;
-	/** Reads the runtime store's record map. May be empty on first paint. */
 	runtime: () => Record<string, unknown>;
-	/** Display name for a record, falling back to its key. */
 	displayName: (key: string, record: Record<string, unknown> | undefined) => string;
-	/** Fields shown in the entity page's infobox. */
 	fields: WikiField[];
-	/** Prose shown under the title, when available. */
 	description?: (record: Record<string, unknown>) => string | null;
-	/** Rendered in the entity page's media slot and on grid cards, when available. */
 	icon?: (key: string, record: Record<string, unknown>) => WikiIcon | null;
-	/** Short stat line shown under a grid card's name. */
 	cardMeta?: (key: string, record: Record<string, unknown>) => string | null;
-	/** Extra imagery shown beside the entity page's main icon. */
 	extras?: (key: string, record: Record<string, unknown>) => WikiExtra[];
-	/** Cross-references rendered as linked chips. */
 	related?: (key: string, record: Record<string, unknown>) => WikiRelated[];
 };
 
@@ -128,10 +115,6 @@ function elementIcon(element: unknown): WikiIcon | null {
 	return data ? assetIcon(data.icon, data.color) : null;
 }
 
-/**
- * Real-Pal entries first in paldeck order, then the rest. A negative index means
- * the entry has no paldeck slot (variants, bosses), so it sorts last.
- */
 export function byPaldeckIndex(a: number, b: number): number {
 	const aRanked = a > 0;
 	const bRanked = b > 0;
@@ -153,7 +136,6 @@ function palsWithElement(element: string): WikiRelated[] {
 		}));
 }
 
-/** Pals whose learned skill set contains this active skill. */
 function palsWithActiveSkill(skillKey: string): WikiRelated[] {
 	const target = skillKey.split('::').pop()?.toLowerCase() ?? '';
 	if (!target) return [];
@@ -174,12 +156,6 @@ function palsWithActiveSkill(skillKey: string): WikiRelated[] {
 		}));
 }
 
-/**
- * Turns a list of entity keys into linked chips. A handful of references point
- * at records that do not exist (e.g. the `Workbench` building, three recipe
- * items), so those are marked `missing` and render unlinked rather than as
- * links to a page that would 404.
- */
 function referenceChips(
 	refs: unknown,
 	category: WikiCategory,
@@ -203,7 +179,6 @@ function referenceChips(
 		});
 }
 
-/** Item recipes a technology unlocks. */
 function unlockedRecipes(record: Record<string, unknown>): WikiRelated[] {
 	return referenceChips(
 		get(record, 'details', 'unlock_item_recipes'),
@@ -214,7 +189,6 @@ function unlockedRecipes(record: Record<string, unknown>): WikiRelated[] {
 	);
 }
 
-/** Buildings a technology unlocks. */
 function unlockedBuildings(record: Record<string, unknown>): WikiRelated[] {
 	return referenceChips(
 		get(record, 'details', 'unlock_build_objects'),

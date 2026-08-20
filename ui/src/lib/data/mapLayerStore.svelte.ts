@@ -19,19 +19,13 @@ type MapLayerResponse = {
 const EMPTY: MapLayerSelection = { shape: 'keyed', points: [] };
 
 class MapLayerStore {
-	// $state.raw, not $state: an artifact holds thousands of markers whose fields
-	// are read on every map rebuild, and under a deep $state every one of those
-	// reads goes through Svelte's proxy -- the same shape that cost ~127 s per
-	// load on bulk save data. Artifacts are replaced wholesale, never mutated, so
-	// deep reactivity buys nothing here.
+	// $state.raw, not $state: an artifact holds thousands of markers read on every
+	// map rebuild, and deep $state would proxy every one of those reads. Artifacts
+	// are replaced wholesale, never mutated, so deep reactivity buys nothing here.
 	#artifacts: Partial<Record<MapLayerArtifact, RawArtifact>> = $state.raw({});
-	// Selections are derived from an immutable artifact, so once computed they
-	// stay valid until reset().
 	#views = new Map<MapLayerId, MapLayerSelection>();
-	// The next batch to send. Drained the moment it goes on the wire.
 	#pending = new Set<MapLayerArtifact>();
-	// Requested and not yet settled, whether or not it has reached the wire.
-	// Reactive so a row watching isLoading re-renders when the answer lands.
+	// $state.raw and reactive so a row watching isLoading re-renders when it settles.
 	#loading: ReadonlySet<MapLayerArtifact> = $state.raw(new Set());
 	// The socket keys pending resolvers by message type alone, so two overlapping
 	// get_map_layer requests would share one slot and the first would never
@@ -47,7 +41,6 @@ class MapLayerStore {
 		return this.#view(id) as MapLayerSelection<T>;
 	}
 
-	/** Several layers in one request, keyed back by layer id. */
 	async getLayers<K extends MapLayerId>(ids: readonly K[]): Promise<Record<K, MapLayerSelection>> {
 		await this.#load(ids);
 		const result = {} as Record<K, MapLayerSelection>;
@@ -55,15 +48,12 @@ class MapLayerStore {
 		return result;
 	}
 
-	/** Entries already cached for `id`, without triggering a fetch. */
 	peek<T extends MapLayerEntry = MapLayerEntry>(id: MapLayerId): MapLayerSelection<T> | undefined {
 		const { artifact } = getMapLayer(id);
 		if (!this.#artifacts[artifact]) return undefined;
 		return this.#view(id) as MapLayerSelection<T>;
 	}
 
-	/** True from the moment a layer is asked for until its artifact lands or the
-	 *  request fails, so a row can tell "still coming" from "never asked". */
 	isLoading(id: MapLayerId): boolean {
 		return this.#loading.has(getMapLayer(id).artifact);
 	}
@@ -98,9 +88,7 @@ class MapLayerStore {
 	}
 
 	async #flush(): Promise<void> {
-		// Everything buffered while the previous request was on the wire goes out
-		// together; callers that joined this batch find it already drained. The
-		// whole buffer clears its loading flag, including anything a batch ahead
+		// The whole buffer clears its loading flag, including anything a batch ahead
 		// of this one already cached -- otherwise that flag would never come down.
 		const buffered = [...this.#pending];
 		this.#pending.clear();

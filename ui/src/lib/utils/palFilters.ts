@@ -1,13 +1,6 @@
 import { elementsData } from '$lib/data';
 import type { ElementType, Pal, PalData } from '$types';
 
-/**
- * Coarse pal category for wiki filtering. Merges the data-flag system
- * (`is_boss`, `is_raid_boss`, `predator`) with the key-prefix system
- * (`GYM_`, `RAID_`, `PREDATOR_`, `SUMMON_`, `OILRIG`) via OR predicates so
- * entries that carry one signal but not the other still land in the right
- * bucket. First match wins.
- */
 export type PalCategory = 'normal' | 'quest' | 'boss' | 'special' | 'other';
 
 const QUEST_MARKERS = ['QUEST_', '_QUEST_'];

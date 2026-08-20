@@ -19,7 +19,6 @@
 		`${ASSET_DATA_PATH}/img/t_icon_ancient_tech_point.webp`
 	);
 
-	// Order technologies by level cap
 	const technologiesOrder = Object.entries(technologiesData.technologies).reduce(
 		(acc, [techID, techData]) => {
 			const levelCap = techData.details.level_cap;

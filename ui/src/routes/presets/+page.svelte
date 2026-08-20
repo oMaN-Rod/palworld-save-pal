@@ -102,9 +102,6 @@
 		return sortPresets(presets, activeTypeKey);
 	});
 
-	// Reordering acts on the full (unfiltered) order; disabled while searching so
-	// hidden presets keep their place. First move auto-switches the tab to custom
-	// mode, seeding the custom order from what is currently displayed.
 	function moveSelected(direction: 'up' | 'down') {
 		if (searchQuery || selectedPresets.length === 0) return;
 		const ordered = sortPresets(activePresets, activeTypeKey).map((preset) => preset.id);
@@ -230,8 +227,6 @@
 
 {#snippet presetContent(index: number)}
 	<div class="bg-surface-900 rounded-sm p-4">
-		<!-- <h3 class="h3 mb-4">{selectedPresets[index].name}</h3> -->
-
 		{#if activeTab === 'pal' && selectedPresets[index].pal_preset}
 			<PalPreset bind:preset={selectedPresets[index]} />
 		{:else if activeTab === 'active' && selectedPresets[index].skills}
@@ -249,7 +244,6 @@
 {/snippet}
 
 <div class="animate-fade-in flex h-full flex-col">
-	<!-- Header Banner -->
 	<div class="border-surface-700 flex items-center justify-start border-b p-4">
 		<nav class="border-surface-600/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
 			{@render tabButton('pal', c.pal)}
@@ -263,7 +257,6 @@
 	<div
 		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
 	>
-		<!-- Left Controls -->
 		<div class="shrink-0 space-y-2 overflow-y-auto p-4" onkeydown={handlePanelKeydown} role="none">
 			<div class="flex items-center space-x-2">
 				<div class="grow">
@@ -398,7 +391,6 @@
 			</List>
 		</div>
 
-		<!-- Right Content -->
 		<div class="overflow-y-auto p-4">
 			<div class="h-[calc(100vh-32px)] overflow-auto">
 				{#if selectedPresets.length === 1}

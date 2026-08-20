@@ -77,21 +77,17 @@
 
 	function handleClick(event: MouseEvent) {
 		if (event.ctrlKey || event.metaKey) {
-			// Ctrl+click for selection (following other storage systems pattern)
 			if (onSelect) {
 				onSelect(upsPal, event);
 			}
 		} else {
-			// Regular click - navigate to edit page with Pal tab
 			handlePalEdit();
 		}
 	}
 
 	function handlePalEdit() {
-		// Set the selected pal in app state and navigate to edit page
 		const palWithMetadata = {
 			...pal,
-			// Add metadata to track that this pal comes from UPS
 			__ups_source: true,
 			__ups_id: upsPal.id
 		};
@@ -101,7 +97,6 @@
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter' || event.key === ' ') {
 			event.preventDefault();
-			// For keyboard navigation, treat as regular click (open edit)
 			handlePalEdit();
 		}
 	}
@@ -156,7 +151,7 @@
 			const collectionId = result.removeFromCollection ? undefined : result.collectionId;
 			try {
 				await upsState.updatePal(upsPal.id, { collection_id: collectionId });
-				await upsState.loadAll(); // Refresh to update collection counts
+				await upsState.loadAll();
 
 				if (result.removeFromCollection) {
 					toast.add(
@@ -184,7 +179,7 @@
 		if (result) {
 			try {
 				await upsState.updatePal(upsPal.id, { tags: result });
-				await upsState.loadAll(); // Refresh to update available tags
+				await upsState.loadAll();
 				toast.add(m.updated_tags_for_pals({ pals: c.pal, count: 1 }), m.success(), 'success');
 			} catch (error) {
 				console.error('Tag update failed:', error);
@@ -206,9 +201,8 @@
 		}
 	}
 
-	function dummyHandler() {
-		// These are required by PalBadge but not used in UPS context
-	}
+	// Required by PalBadge's props but unused in the UPS context.
+	function dummyHandler() {}
 </script>
 
 <ContextMenu items={menuItems} menuClass="bg-surface-700" xOffset={-32}>

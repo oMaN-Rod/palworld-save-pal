@@ -32,9 +32,8 @@ describe('directToTreeNode', () => {
 		expect(new Set(ids).size).toBe(ids.length);
 	});
 
-	// Anubis + Anubis -> Anubis rendered only one connector: both parents were
-	// built with the id `Anubis#direct-leaf`, so the layout index collapsed them
-	// and both links resolved to the same positioned node.
+	// A self-pair with both parents sharing one id would collapse in the layout
+	// index, resolving both links to the same positioned node.
 	it('gives distinct ids to a self-pair', () => {
 		const ids = collectIds(directToTreeNode(direct('Anubis', 'Anubis', 'Anubis'), palMap));
 		expect(new Set(ids).size).toBe(ids.length);

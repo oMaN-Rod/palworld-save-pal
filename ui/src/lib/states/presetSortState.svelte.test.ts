@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { getConfig, presetSort, setDirection, setMode } from './presetSortState.svelte';
 
-// Regression: unconditional reassignment in the setters caused an infinite
-// effect loop (Select.svelte's mount $effect fires onChange -> setMode ->
-// new presetSort.current -> re-render -> new onChange -> effect re-run -> ...).
-// Idempotent setters must NOT reassign state when the value is unchanged.
+// Select.svelte's mount $effect fires onChange -> setMode -> new presetSort.current
+// -> re-render -> new onChange -> effect re-run -> ..., so setters must not
+// reassign state when the value is unchanged or the effect loops forever.
 describe('presetSortState setters are idempotent', () => {
 	it('setMode does not reassign state when the mode is unchanged', () => {
 		setMode('pal_preset', 'name');

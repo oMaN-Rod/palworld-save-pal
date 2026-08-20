@@ -42,9 +42,8 @@ export class AppState {
 	hasGpsAvailable: boolean = $state(false);
 	bulkDetailPlayer: Player | undefined = $state(undefined);
 	bulkDetailGuild: Guild | undefined = $state(undefined);
-	/** Set while a guild-details request originated from the bulk panel is in flight, so the
-	 *  response handler knows whether to populate bulkDetailGuild instead of other guild loads
-	 *  (e.g. /edit/guild, /map) stomping on it. */
+	// Set while a bulk-panel guild-details request is in flight, so the response
+	// handler knows to populate bulkDetailGuild instead of another guild load stomping on it.
 	bulkGuildRequestPending: boolean = $state(false);
 
 	resetState() {

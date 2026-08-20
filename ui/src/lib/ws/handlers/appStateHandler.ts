@@ -25,7 +25,6 @@ export const getVersionHandler: WSMessageHandler = {
 		const modal = getModalState();
 		appState.version = data;
 
-		// Check for updates
 		const isUpdateAvailable = await isUpdateAvailableOnGitHub(data);
 		if (isUpdateAvailable) {
 			// @ts-ignore-next-line

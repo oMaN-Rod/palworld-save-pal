@@ -68,9 +68,6 @@
 	const modal = getModalState();
 	const toast = getToastState();
 
-	// Two distinct questions. `saveLoaded` gates every editing surface; `publicShell`
-	// asks only whether the floating nav pill occupies the top centre, which the
-	// desktop build never does even with no save open.
 	const saveLoaded = $derived(!!appState.saveFile);
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
 
@@ -110,9 +107,6 @@
 		});
 	});
 
-	// The layers that predate the registry are still drawn from their own stores
-	// and their own showX props; the panel drives those booleans rather than a
-	// second copy of the same state.
 	type LayerOptionKey =
 		| 'showFastTravel'
 		| 'showWatchtower'
@@ -152,8 +146,6 @@
 		return record;
 	});
 
-	// Players and Bases have nothing to show or count without a save, which is
-	// also what a public visitor sees.
 	function layerAvailable(id: PanelOptionId): boolean {
 		return (id !== 'players' && id !== 'bases') || saveLoaded;
 	}
@@ -190,11 +182,6 @@
 			case 'origin':
 				return undefined;
 			default: {
-				// Registry-backed layers report whatever the store has cached.
-				// The drawable count, not the artifact's row count: a layer whose rows
-				// are positionless or belong to the other map would overstate itself.
-				// Undefined while unloaded - a "0" there reads as "no markers here"
-				// rather than "not fetched yet".
 				if (!isMapLayerId(id)) return undefined;
 				const selection = mapLayers.peek(id);
 				return selection ? mapLayerMarkerCount(id, selection, activeArea).toString() : undefined;
@@ -216,7 +203,6 @@
 			if (visible && isMapLayerId(id)) enabled.push(id);
 		}
 		mapOptions.mapLayerVisibility = registry;
-		// The store caches and coalesces, so re-enabling a loaded layer is free.
 		if (enabled.length > 0) void mapLayers.getLayers(enabled);
 	}
 
@@ -224,10 +210,10 @@
 		handleLayerVisibility(allVisibilityPatch(visible));
 	}
 
-	// Layer visibility is persisted, so a layer switched on in an earlier session
-	// comes back enabled with its artifact never requested: it sat ticked in the
-	// panel drawing nothing and showing no count. Settles after one round, because
-	// a fetched artifact makes peek() truthy and drops the layer out of `wanted`.
+	// A layer switched on in an earlier session comes back enabled with its
+	// artifact never requested, so this reconciles persisted visibility against
+	// what's actually cached. Settles after one round: a fetched artifact makes
+	// peek() truthy and drops the layer out of `wanted`.
 	$effect(() => {
 		const wanted = MAP_LAYERS.map((layer) => layer.id).filter(
 			(id) => layerVisibility[id] && !mapLayers.peek(id) && !mapLayers.isLoading(id)
@@ -261,7 +247,6 @@
 		)
 	);
 
-	// Every count below is scoped to the active map area, matching what Map.svelte draws.
 	const areaFtGuids = $derived(areaFastTravelGuids(fastTravelPoints.points, activeArea, false));
 	const areaWtGuids = $derived(areaFastTravelGuids(fastTravelPoints.points, activeArea, true));
 	const fastTravelCount = $derived(areaFtGuids.size);
@@ -316,9 +301,8 @@
 		panTo(player.location.x, player.location.y);
 	}
 
-	// PlayerList re-fires onselect every time it mounts, and the options panel now
-	// mounts on each open, so the automatic pan is limited to once per player. The
-	// per-player focus button calls handlePlayerFocus directly and always re-centres.
+	// The options panel remounts on each open and re-fires onselect, so this guards
+	// the automatic pan to once per player; the per-player focus button always re-centres.
 	let autoPannedUid: string | undefined;
 
 	function handlePlayerLoaded(player: Player) {
@@ -352,7 +336,6 @@
 		});
 		if (!result) return;
 
-		// Find the guild that contains this base
 		const guild = Object.values(appState.guilds || {}).find(
 			(g) => g.bases && Object.values(g.bases).some((b) => b.id === base.id)
 		);
@@ -443,8 +426,6 @@
 		unlockAllWhere(isWatchtower);
 	}
 
-	// Only the active map area and the currently visible types, so this can never
-	// write GUIDs the user cannot see.
 	function handleCollectAllRelics() {
 		const player = appState.selectedPlayer;
 		if (!player || !mapOptions.showRelics) return;
@@ -554,8 +535,7 @@
 <Seo pathname="/map" title={m.map_meta_title()} description={m.map_meta_description()} />
 
 <div class="relative h-full overflow-hidden">
-	<!-- The map fills the viewport and has no visible heading. This gives the
-	     page a document heading for screen readers and crawlers alike. -->
+	<!-- The map has no visible heading; this gives screen readers and crawlers one. -->
 	<h1 class="sr-only">{m.map_meta_title()}</h1>
 
 	{#if panelOpen}

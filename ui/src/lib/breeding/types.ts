@@ -1,8 +1,3 @@
-/**
- * Breeding calculator wire types — mirror the Rust `psp_core::breeding` structs
- * serialized by the psp-app handlers. Kept in sync with the serde shapes.
- */
-
 export interface BreedablePal {
 	tribe: string;
 	display_name: string;
@@ -25,18 +20,13 @@ export interface DirectResultItem {
 	child_icon: string | null;
 	child_gender_prob: { male: number; female: number } | null;
 	combo_type: 'formula' | 'unique';
-	/** Set only for the unique combos the game gates on parent gender
-	 *  (`DT_PalCombiUnique.ParentGenderA/B`) — e.g. CatMage + FoxMage yields a
-	 *  different child depending on which parent is male. Relative to this
-	 *  row's own `parent_a`/`parent_b` order. */
+	// Set only for combos the game gates on parent gender (DT_PalCombiUnique.ParentGenderA/B).
 	parent_a_gender?: 'Male' | 'Female' | null;
 	parent_b_gender?: 'Male' | 'Female' | null;
 }
 
 export interface DirectChildResponse {
-	/** The headline answer (first of `results`). */
 	result: DirectResultItem | null;
-	/** Every outcome for the pair. Longer than one only for gender-gated combos. */
 	results?: DirectResultItem[];
 }
 
@@ -54,9 +44,7 @@ export interface BreedingStep {
 	child: string;
 	inherited_passives: string[];
 	gender_feasible: boolean;
-	/** Lineage refs: which occurrence of each parent tribe (a species can be
-	 *  both a bred node and a source leaf in one chain). `*_step` indexes
-	 *  `Chain.steps`, `*_source` indexes `Chain.sources`; one is set per parent. */
+	// Lineage refs, one set per parent: *_step indexes Chain.steps, *_source indexes Chain.sources.
 	parent_a_step?: number;
 	parent_b_step?: number;
 	parent_a_source?: number;
@@ -100,12 +88,8 @@ export interface SelectedPal {
 	passives?: string[];
 }
 
-/**
- * Player-summary shape for the owner-search dropdown. PSP's core
- * `PlayerSummary` uses `nickname` (not `name`) and has no `guild_name`; the
- * page maps `nickname → name` and resolves `guild_name` from guild summaries.
- * This alias documents the fields the breeding UI consumes.
- */
+// The backend's PlayerSummary uses `nickname`, not `name`, and has no `guild_name`;
+// callers map nickname -> name and resolve guild_name separately.
 export interface PlayerSummaryT {
 	uid: string;
 	name: string;

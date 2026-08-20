@@ -24,7 +24,6 @@ const bred = (tribe: string, parents: [TreeNode, TreeNode]): TreeNode => ({
 	parents
 });
 
-/** Target with two bred parents, each from two leaves — 7 nodes, depth 2. */
 function sampleTree(): TreeNode {
 	const a = bred('Mid_A', [leaf('Leaf1'), leaf('Leaf2')]);
 	const b = bred('Mid_B', [leaf('Leaf3'), leaf('Leaf4')]);
@@ -33,7 +32,6 @@ function sampleTree(): TreeNode {
 	return root;
 }
 
-/** x of every quadratic control point — the elbow's turn column. */
 function turnColumns(path: string): number[] {
 	return [...path.matchAll(/Q([-\d.]+),/g)].map((m) => Number(m[1]));
 }
@@ -50,10 +48,6 @@ describe('computeLayout', () => {
 		}
 	});
 
-	// The reported defect: two pals branching into one had their right angles
-	// land on different vertical lines, because the turn column was derived from
-	// a global link counter (`(linkIdx % 3) * 6 - 6`) instead of the shared
-	// parent. Both links leaving a node must turn on exactly one column.
 	it('gives both links leaving a node the same turn column', () => {
 		const { links } = computeLayout(sampleTree(), 'dendrogram');
 		const bySource = new Map<string, number[]>();

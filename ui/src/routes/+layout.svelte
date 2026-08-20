@@ -45,7 +45,6 @@
 		document.body.dataset.theme = theme.current;
 	});
 
-	// Mirror the selected player to sessionStorage so a refresh can re-select it.
 	$effect(() => {
 		if (appState.selectedPlayerUid) {
 			setStoredSelectedPlayerUid(appState.selectedPlayerUid);

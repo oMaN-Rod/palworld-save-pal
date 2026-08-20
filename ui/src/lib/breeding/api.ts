@@ -1,9 +1,3 @@
-/**
- * Breeding calculator API — thin shim that maps the PalSavTools REST-style
- * calls onto PSP's WebSocket `sendAndWait` bus. Each function mirrors the
- * shape the ported components expect, so the page/components can call
- * `breedingApi.breedingPals()` etc. without knowing about WS.
- */
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
 import type {

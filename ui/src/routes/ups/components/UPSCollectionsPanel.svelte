@@ -86,7 +86,6 @@
 </script>
 
 <div class="flex h-full flex-col transition-all duration-300 ease-in-out">
-	<!-- Header -->
 	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
 		<div class="mb-3 flex items-center justify-between">
 			<h2 class="text-lg font-semibold">{c.collections}</h2>
@@ -100,7 +99,6 @@
 			</TooltipButton>
 		</div>
 
-		<!-- All Pals Option -->
 		<button
 			onclick={() => selectCollection(null)}
 			class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-2 rounded-md p-2 text-left {upsState
@@ -116,9 +114,7 @@
 		</button>
 	</div>
 
-	<!-- Collections List -->
 	<div class="flex-1 space-y-1 overflow-auto p-4">
-		<!-- Favorites -->
 		{#if favoriteCollections.length > 0}
 			<div class="mb-4">
 				<h3
@@ -147,7 +143,6 @@
 								</span>
 							</button>
 
-							<!-- Action buttons (show on hover) -->
 							<div
 								class="absolute top-1 right-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
 							>
@@ -180,7 +175,6 @@
 			</div>
 		{/if}
 
-		<!-- Regular Collections -->
 		{#if regularCollections.length > 0}
 			<div class="mb-4">
 				{#if favoriteCollections.length > 0}
@@ -211,7 +205,6 @@
 								</span>
 							</button>
 
-							<!-- Action buttons (show on hover) -->
 							<div
 								class="absolute top-1 right-1 flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
 							>
@@ -266,7 +259,6 @@
 			</div>
 		{/if}
 
-		<!-- Empty State -->
 		{#if visibleCollections.length === 0}
 			<div class="py-8 text-center">
 				<Folder class="text-surface-400 mx-auto mb-3 h-12 w-12" />
@@ -287,7 +279,6 @@
 		{/if}
 	</div>
 
-	<!-- Footer -->
 	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 		<label class="flex items-center gap-2 text-sm">
 			<input type="checkbox" bind:checked={showArchived} class="border-surface-300 rounded" />

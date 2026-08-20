@@ -92,7 +92,6 @@ describe('classifyPalCategory', () => {
 		expect(classifyPalCategory('PREDATOR_AmaterasuWolf', catalogPal({ predator: true }))).toBe(
 			'special'
 		);
-		// SUMMON_DarkAlien has predator=true flag but no PREDATOR_ prefix — still special.
 		expect(classifyPalCategory('SUMMON_DarkAlien', catalogPal({ predator: true }))).toBe(
 			'special'
 		);

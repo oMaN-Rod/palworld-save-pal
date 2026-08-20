@@ -77,8 +77,8 @@ describe('mapLayers.getLayer', () => {
 	});
 });
 
-// eggs_spawners and camps arrive as top-level arrays, everything else as keyed
-// objects. Both must survive the round trip intact.
+// Some layers arrive as top-level arrays, others as keyed objects; both must
+// survive the round trip intact.
 describe('artifact shapes', () => {
 	it('carries an array artifact through and keys it off the entries', async () => {
 		const got = mapLayers.getLayer('camps');
@@ -237,8 +237,6 @@ describe('mapLayers.isLoading', () => {
 		expect(mapLayers.isLoading('dungeons')).toBe(false);
 	});
 
-	// A layer buffered behind an in-flight batch has not been sent yet, but from
-	// the caller's side it is still loading.
 	it('is true for a layer still buffered behind an in-flight request', async () => {
 		const dungeons = mapLayers.getLayer('dungeons');
 		await flush();
@@ -256,8 +254,6 @@ describe('mapLayers.isLoading', () => {
 		expect(mapLayers.isLoading('camps')).toBe(false);
 	});
 
-	// A second request for a layer that the batch ahead of it already cached
-	// flushes to nothing, and must still clear the flag it set.
 	it('clears the flag when the batch it joined turns out to be empty', async () => {
 		const first = mapLayers.getLayer('dungeons');
 		await flush();
@@ -326,10 +322,9 @@ describe('mapLayers.reset', () => {
 	});
 });
 
-// Thousands of markers behind a deep $state proxy repeat the ~127 s per-load
-// cost already measured on bulk save data. Identity alone cannot prove it here:
-// vitest compiles .svelte.ts for the server, where deep $state does not proxy
-// and `toBe` holds either way. So the declaration is checked at the source.
+// Identity alone cannot prove this: vitest compiles .svelte.ts for the server,
+// where deep $state does not proxy and `toBe` holds either way. So the
+// declaration is checked at the source instead.
 describe('marker tables are not deeply proxied', () => {
 	it('declares the artifact cache with $state.raw', async () => {
 		const source = await readFile(

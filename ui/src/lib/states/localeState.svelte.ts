@@ -38,7 +38,6 @@ export function applyLocale(code: SupportedLanguage): boolean {
 	return switchLocale(code, localeDeps());
 }
 
-/** Saves settings edited in the settings modal, including a language change. */
 export function applySettings(): void {
 	const appState = getAppState();
 	applyEditedSettings(appState.settings.language, localeDeps());

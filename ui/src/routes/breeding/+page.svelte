@@ -1,14 +1,5 @@
 <script lang="ts">
 	import { Seo } from '$lib/components/seo';
-	// Breeding Calculator — three modes behind one page:
-	//   • Direct    — A+B → child, and A+target → B options
-	//   • Selection — chain to a target from a user-picked theoretical pool
-	//   • Save      — chain to a target using the loaded save's owned pals
-	//
-	// Ported from PalSavTools. Save Mode reads owned pals from
-	// `appState.selectedPlayer.pals` (already parsed by PSP's Rust core) and
-	// sends them as `origin: "owned"` inputs — unifying save + selection on the
-	// backend solver.
 	import { onMount } from 'svelte';
 	import * as m from '$i18n/messages';
 	import { getAppState } from '$states/appState.svelte';
@@ -60,12 +51,10 @@
 	let mode = $state<Mode>('direct');
 	let directSub = $state<DirectSub>('forward');
 
-	// Shared pal metadata cache (loaded once, shared with all pickers).
 	let pals = $state<BreedablePal[]>([]);
 	let palMap = $state<Map<string, BreedablePal>>(new Map());
 	let palsLoading = $state(true);
 
-	// direct mode inputs
 	let parentA = $state<string | null>(null);
 	let parentB = $state<string | null>(null);
 	let directTarget = $state<string | null>(null);
@@ -73,20 +62,16 @@
 	let partnersResult = $state<DirectPartnersResponse | null>(null);
 	let parentsResult = $state<DirectParentsResponse | null>(null);
 
-	// chain inputs
 	let chainTarget = $state<string | null>(null);
 	let chainGender = $state<string | null>(null);
 	let chainGens = $state(4);
 	let chainMaxResults = $state(5);
 
-	// selection-specific
 	let selectedPool = $state<{ tribe: string; gender: string | null }[]>([]);
 
-	// save-specific
 	let ownerUid = $state<string | null>(null);
 	let includeWild = $state(false);
 
-	// Build the breedable-player-summary list from appState for Save Mode.
 	const players = $derived.by<PlayerSummaryT[]>(() => {
 		const summaries = Object.values(appState.playerSummaries ?? {}) as PlayerSummary[];
 		return summaries.map((p) => ({
@@ -97,9 +82,6 @@
 		}));
 	});
 
-	// results — scoped per chain mode so Selection and Save never share state.
-	// Switching modes shows only that mode's own results; one mode's search can
-	// never bleed into the other.
 	interface ChainResults {
 		chains: ChainT[];
 		elapsedMs: number | null;
@@ -153,7 +135,6 @@
 	let graphLayout = $state<GraphLayout>('all-in-one');
 	let currentGen = $state(1);
 	let sidePanelCollapsed = $state(false);
-	// Shared by the Direct and Chain graph panes so switching mode keeps the view.
 	let graphViewMode = $state<LayoutMode>('dendrogram');
 
 	const chainTrees = $derived<TreeNode[]>(
@@ -164,9 +145,8 @@
 	);
 	const maxDepth = $derived(chains.length > 0 ? Math.max(...chains.map((c) => c.generations)) : 1);
 
-	// A pair normally has one outcome. The unique combos the game gates on
-	// parent gender (CatMage + FoxMage) have two, so render every row the
-	// backend returned rather than just the headline one.
+	// Unique combos the game gates on parent gender return more than one row;
+	// render every row the backend sent rather than just the headline one.
 	const directForwardResults = $derived(
 		directResult?.results ?? (directResult?.result ? [directResult.result] : [])
 	);
@@ -195,7 +175,6 @@
 			const res = await breedingApi.breedingPals();
 			pals = res.pals;
 			palMap = new Map(res.pals.map((p) => [p.tribe, p]));
-			// Ensure the passive catalog is loaded for display-name resolution.
 			void passiveSkillsData.getByKey;
 			await passiveSkillsData.reset().catch(() => {});
 		} catch (e) {
@@ -212,8 +191,6 @@
 	async function runDirect() {
 		directLoading = true;
 		error = null;
-		// Clear the stale answer so the previous result isn't shown while the
-		// new one is being computed.
 		directResult = null;
 		partnersResult = null;
 		parentsResult = null;
@@ -244,9 +221,6 @@
 		error = null;
 		chainResults[chainModeKey] = { chains: [], elapsedMs: null, warnings: [] };
 		try {
-			// Save Mode: ensure the selected player's pals are loaded before
-			// building the request — `appState.players[uid].pals` is lazily
-			// populated via REQUEST_PLAYER_DETAILS.
 			if (mode === 'save') {
 				const loaded = await ensurePlayerLoaded(ownerUid);
 				if (!loaded) {
@@ -277,10 +251,8 @@
 		}
 	}
 
-	// Build owned-pal inputs from loaded players' pals (Save Mode).
 	// Reads from `appState.players` (the full player map), not `selectedPlayer`
-	// (which is the editor's pick and unrelated to the breeding owner dropdown).
-	// When `ownerUid` is null, uses ALL loaded players' pals.
+	// (the editor's pick, unrelated to the breeding owner dropdown).
 	function saveOwnedPals(): PalInput[] {
 		const playerMap = appState.players ?? {};
 		const players = ownerUid
@@ -306,13 +278,8 @@
 		}));
 	}
 
-	// Ensure a player's full details (incl. pals) are loaded before solving.
-	// `appState.players[uid].pals` is only populated after the backend answers
-	// REQUEST_PLAYER_DETAILS with GET_PLAYER_DETAILS_RESPONSE (which the ws
-	// dispatcher applies to `appState.players[uid]`).
 	async function ensurePlayerLoaded(uid: string | null): Promise<boolean> {
 		if (!uid) {
-			// "All Players" — succeed if at least one player already has pals.
 			return Object.values(appState.players ?? {}).some((p) => p?.pals);
 		}
 		if (appState.players?.[uid]?.pals) return true;
@@ -329,12 +296,10 @@
 		return false;
 	}
 
-	// Clear only the Save Mode result slot (owner changes invalidate results).
 	function clearSaveResults() {
 		chainResults.save = { chains: [], elapsedMs: null, warnings: [] };
 	}
 
-	// Build selection inputs from the user pool (Selection Mode).
 	function selectionPals(): PalInput[] {
 		return selectedPool.map((p) => ({
 			character_id: p.tribe,
@@ -359,13 +324,10 @@
 	function switchMode(m: Mode) {
 		mode = m;
 		error = null;
-		// Results are scoped per mode (chainResults), so a switch never shows
-		// the other mode's chains. Reset the view state for the fresh mode.
 		activeChainIndex = 0;
 		selectedTreeNode = null;
 	}
 
-	// Shared active/inactive recipe for the mode + view-mode toggle pills.
 	function tabPill(active: boolean): string {
 		return active
 			? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
@@ -392,7 +354,6 @@
 			(mode !== 'save' || !!appState.saveFile)
 	);
 
-	// Count owned pals available for the current owner selection (Save Mode).
 	const ownedPalCount = $derived.by<number>(() => {
 		if (mode !== 'save') return 0;
 		const playerMap = appState.players ?? {};
@@ -410,8 +371,8 @@
 		{ id: 'save', icon: Database, label: () => m.breeding_tabs_save() }
 	];
 
-	// Save Mode sources pals from a loaded save, so it has nothing to offer a
-	// public-shell visitor. `mode` starts on 'direct', so hiding it cannot strand.
+	// `mode` starts on 'direct', so hiding the save tab for a public-shell
+	// visitor (no loaded save) can never strand them on a hidden tab.
 	const tabs = $derived(
 		isWebBuild && !appState.saveFile ? allTabs.filter((tab) => tab.id !== 'save') : allTabs
 	);
@@ -424,7 +385,6 @@
 		? 'flex h-full min-h-0 max-w-full flex-col'
 		: 'mx-auto max-w-5xl'}"
 >
-	<!-- header -->
 	<div class="flex flex-wrap items-center justify-between gap-3">
 		<div class="flex items-center gap-2">
 			<GitMerge size={20} class="text-primary-400" />
@@ -435,7 +395,6 @@
 		{/if}
 	</div>
 
-	<!-- tab pills + list/graph toggle -->
 	<div class="flex items-center gap-1.5">
 		{#each tabs as tab (tab.id)}
 			{@const TabIcon = tab.icon}
@@ -469,12 +428,10 @@
 		</div>
 	</div>
 
-	<!-- body -->
 	<div class={chainViewMode === 'graph' ? 'flex min-h-0 flex-1 flex-col' : ''}>
 		{#if palsLoading}
 			<div class="flex justify-center py-12"><Spinner size="size-6" /></div>
 		{:else if mode === 'direct' && chainViewMode === 'list'}
-			<!-- DIRECT MODE (LIST VIEW) -->
 			<div class="space-y-4">
 				<div class="flex gap-1.5">
 					{#each [{ id: 'forward', label: m.breeding_parent_a_b() }, { id: 'reverse', label: m.breeding_parent_a_target() }, { id: 'parents', label: m.breeding_target_only() }] as sub}
@@ -677,7 +634,6 @@
 				</div>
 			</div>
 		{:else if chainViewMode === 'list'}
-			<!-- LIST MODE -->
 			<div class="space-y-4">
 				{#if mode === 'save' && !appState.saveFile}
 					<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
@@ -785,7 +741,6 @@
 								{/if}
 							</div>
 						{:else}
-							<!-- Save Mode: owner selector + wild toggle -->
 							<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 								<OwnerSelect
 									{players}
@@ -853,7 +808,6 @@
 				{/if}
 			</div>
 		{:else}
-			<!-- CHAIN GRAPH MODE -->
 			{#if mode === 'save' && !appState.saveFile}
 				<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
 					<Database size={32} />

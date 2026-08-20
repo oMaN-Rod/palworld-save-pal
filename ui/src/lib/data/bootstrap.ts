@@ -49,7 +49,6 @@ export const bootstrap = async () => {
 	// save yet, settings-only emit), then reattach emits the overview once.
 	send(MessageType.SYNC_APP_STATE);
 
-	// Reattach to the last session if this tab held one before the refresh.
 	const storedSessionId = getStoredSessionId();
 	if (storedSessionId) {
 		markReattachPending();

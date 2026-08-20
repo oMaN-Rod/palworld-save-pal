@@ -34,7 +34,6 @@ describe('orderPresets', () => {
 
 	it('applies custom order and appends unknown ids name-sorted', () => {
 		const config = cfg({ mode: 'custom', customOrder: ['c', 'a'] });
-		// 'b' is not in customOrder -> appended after known, name-sorted
 		expect(orderPresets(list, config).map((p) => p.id)).toEqual(['c', 'a', 'b']);
 	});
 

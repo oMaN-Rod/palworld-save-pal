@@ -1,11 +1,3 @@
-/**
- * Rebuild a recursive binary tree from a flattened `Chain`.
- *
- * Ported from PalSavTools — logic identical, only the type imports changed
- * (BreedablePal → BreedablePal from our breeding types; icon → character_id
- * for PSP's assetLoader). The tree is "upside down" — target is root, source
- * pals are leaves.
- */
 import type { BreedablePal, Chain, ChainSource, DirectResultItem } from '../types';
 import type { TreeNode } from './types';
 
@@ -14,18 +6,10 @@ export function chainToTree(
 	palMap: Map<string, BreedablePal>,
 	maxDepth?: number
 ): TreeNode {
-	// Bred nodes keyed by STEP INDEX (not tribe) — a species can be produced
-	// by multiple steps, and each step's parents reference the exact prior
-	// step index that produced them (see BreedingStep.parent_*_step).
 	const bredNodes = new Map<number, TreeNode>();
 	const leafCounter = new Map<string, number>();
 	let cloneCounter = 0;
 
-	// Track which bred-node IDs have already been consumed as a parent by a
-	// prior step. d3-hierarchy requires a strict tree (no shared subtrees), so
-	// when the same bred node is referenced by multiple subsequent steps, every
-	// reference after the first MUST be a deep clone — otherwise d3 collapses
-	// the shared branch and connecting lines vanish.
 	const consumedBred = new Set<string>();
 
 	const makeLeaf = (tribe: string, source?: ChainSource): TreeNode => {
@@ -45,15 +29,11 @@ export function chainToTree(
 		};
 	};
 
-	// Resolve a parent lineage ref. Bred nodes are shared — first consumption
-	// returns the original, subsequent consumptions return deep clones so each
-	// usage is an independent branch in the d3 tree.
 	const resolveParent = (parent: {
 		tribe: string;
 		stepIdx?: number;
 		sourceIdx?: number;
 	}): TreeNode => {
-		// Explicit bred-step reference (new backend lineage refs).
 		if (parent.stepIdx !== undefined) {
 			const bred = bredNodes.get(parent.stepIdx);
 			if (bred) {
@@ -64,12 +44,10 @@ export function chainToTree(
 				return bred;
 			}
 		}
-		// Explicit source reference.
 		if (parent.sourceIdx !== undefined) {
 			const src = chain.sources[parent.sourceIdx];
 			if (src) return makeLeaf(src.pal, src);
 		}
-		// Fallback (no refs — older data): tribe-based resolution.
 		for (const bred of bredNodes.values()) {
 			if (bred.tribe === parent.tribe) {
 				if (consumedBred.has(bred.id)) {
@@ -96,8 +74,6 @@ export function chainToTree(
 			stepIdx: step.parent_b_step,
 			sourceIdx: step.parent_b_source
 		});
-		// Self-breed: both parents resolve to the same node reference (same
-		// species, same bred history). Clone one so d3 sees two branches.
 		if (parentA === parentB) {
 			parentB = deepCloneNode(parentB, leafCounter, cloneCounter++);
 		}
@@ -122,8 +98,6 @@ export function chainToTree(
 		return leaf;
 	}
 
-	// Root = the last step's child (the chain target), by contract of the
-	// topologically-sorted steps. But resolve by target tribe defensively.
 	let root: TreeNode | undefined;
 	for (const node of bredNodes.values()) {
 		if (node.tribe === chain.target) root = node;
@@ -177,9 +151,6 @@ export function directToTreeNode(
 		isTarget: true,
 		parents: [
 			{
-				// Suffixed per slot, not per tribe: a self-pair (Anubis + Anubis)
-				// would otherwise give both parents one id, and the layout index
-				// collapses same-id nodes into a single connector.
 				id: `${result.parent_a}#direct-leaf-a`,
 				tribe: result.parent_a,
 				display: parentAPal?.display_name || result.parent_a,

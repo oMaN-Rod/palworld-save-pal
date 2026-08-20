@@ -84,7 +84,6 @@
 		}
 	}
 
-	// Add keyboard event listener when component mounts
 	$effect(() => {
 		document.addEventListener('keydown', handleKeydown);
 		return () => {

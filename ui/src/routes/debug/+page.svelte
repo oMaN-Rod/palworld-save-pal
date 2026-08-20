@@ -363,10 +363,6 @@
 				if (!pal) return;
 				await fetchPalRawData(pal.instance_id);
 				break;
-			// case 'item_container':
-			// 	if (!itemContainer) return;
-			// 	await fetchPalRawData(itemContainer.id);
-			// 	break;
 			case 'character_container':
 				if (!characterContainer) return;
 				await fetchCharacterContainerRawData(characterContainer.id);

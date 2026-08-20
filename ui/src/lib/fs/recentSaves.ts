@@ -60,6 +60,5 @@ export async function removeRecent(id: string): Promise<void> {
 	try {
 		await tx('readwrite', (s) => s.delete(id));
 	} catch {
-		// Nothing to clean up if the store was never reachable.
 	}
 }

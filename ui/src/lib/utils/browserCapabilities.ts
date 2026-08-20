@@ -1,4 +1,3 @@
-/** Injectable so detection unit-tests against plain objects, with no browser. */
 export interface CapabilityScope {
 	WebAssembly?: unknown;
 	Worker?: unknown;

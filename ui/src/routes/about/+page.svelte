@@ -105,7 +105,6 @@
 			aria-label="CyrixJD115 contributions"
 			transition:fade={{ duration: 150 }}
 		>
-			<!-- close button -->
 			<button
 				class="text-muted hover:text-surface-50 absolute right-3 top-3 transition-colors"
 				onclick={() => (easterEgg = false)}
@@ -114,7 +113,6 @@
 				<X size={18} />
 			</button>
 
-			<!-- header — title links to GitHub -->
 			<a
 				href={AUTHOR_URL}
 				target="_blank"
@@ -127,7 +125,6 @@
 				<Github size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
 			</a>
 
-			<!-- contributions -->
 			<div class="mt-4 space-y-2.5">
 				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
 				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
@@ -146,7 +143,6 @@
 				</div>
 			</div>
 
-			<!-- footer -->
 			<p class="text-muted mt-4 text-center text-xs">
 				{m.easter_egg_credit()}
 			</p>

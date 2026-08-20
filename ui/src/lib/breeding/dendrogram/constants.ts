@@ -1,13 +1,3 @@
-/**
- * Dendrogram layout config + colors.
- *
- * `DENDRO_COLORS` holds hex fallbacks tuned for PSP's classic dark theme, used
- * when no DOM is available (SSR, unit tests). At runtime the breeding tab
- * calls `resolveDendroColors()` to read the ACTIVE theme's palette from
- * computed CSS custom properties on <body>, so the inline SVG follows the 8
- * theme overhaul palettes (dark/light/frontier/ancient/grizzbolt/lamball/
- * sakurajima/wildlands) instead of being pinned to one palette.
- */
 export const DENDRO_CONFIG = {
 	nodeWidth: 168,
 	nodeHeight: 52,
@@ -51,12 +41,6 @@ export const DENDRO_COLORS = {
 
 export type DendroColors = { -readonly [K in keyof typeof DENDRO_COLORS]: string };
 
-/**
- * Maps each dendrogram color to the theme CSS custom property it should be
- * read from. Follows the theme overhaul's semantic mapping:
- * cyan/paldium → primary, toxic/green → success, amber → warning,
- * ancient/pink → tertiary, red → error, neutral → surface.
- */
 const COLOR_TO_VAR: Record<keyof typeof DENDRO_COLORS, string> = {
 	bgCard: '--color-surface-900',
 	bgCardSelected: '--color-surface-800',
@@ -85,14 +69,6 @@ const COLOR_TO_VAR: Record<keyof typeof DENDRO_COLORS, string> = {
 	linkHighlight: '--color-primary-300'
 };
 
-/**
- * Read the ACTIVE theme's palette from computed styles on <body> and return a
- * fully-resolved `DendroColors` object (concrete color strings, no `var()`
- * references). Falls back to `DENDRO_COLORS` hex values when there is no DOM.
- *
- * SVG attributes get the resolved string directly, so the live tree and the
- * PNG export both match the current theme.
- */
 export function resolveDendroColors(): DendroColors {
 	const out: DendroColors = { ...DENDRO_COLORS };
 	if (typeof document === 'undefined' || typeof getComputedStyle === 'undefined') {

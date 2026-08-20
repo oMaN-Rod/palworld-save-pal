@@ -10,7 +10,6 @@
 	const upsState = getUpsState();
 
 	function handlePalSelect(upsPal: UPSPal, event: MouseEvent) {
-		// Only handle selection when Ctrl+click (following other storage systems pattern)
 		if (event.ctrlKey || event.metaKey) {
 			upsState.togglePalSelection(upsPal.id);
 		}
@@ -23,12 +22,10 @@
 	>
 		{#each upsState.pals as upsPal (upsPal.id)}
 			<div class="relative">
-				<!-- UPS Pal Badge with context menu -->
 				<div class="relative">
 					<UPSPalBadge {upsPal} onSelect={handlePalSelect} />
 				</div>
 
-				<!-- UPS-specific overlay info -->
 				<div class="absolute right-2 bottom-2">
 					{#if upsPal.tags && upsPal.tags.length > 0}
 						<div class="rounded bg-black/70 px-2 py-1 text-xs text-white">
@@ -37,7 +34,6 @@
 					{/if}
 				</div>
 
-				<!-- Additional stats overlay -->
 				<div class="absolute top-2 right-2 text-right">
 					{#if upsPal.transfer_count > 0 || upsPal.clone_count > 0}
 						<div class="space-y-1 rounded bg-black/70 px-2 py-1 text-xs text-white">

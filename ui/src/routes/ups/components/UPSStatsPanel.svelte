@@ -79,7 +79,6 @@
 </script>
 
 <div class="flex h-full flex-col">
-	<!-- Header -->
 	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
 		<div class="flex items-center gap-2">
 			<BarChart3 class="text-primary-500 h-5 w-5" />
@@ -87,12 +86,9 @@
 		</div>
 	</div>
 
-	<!-- Stats Content -->
 	<div class="flex-1 space-y-4 overflow-auto p-4">
 		{#if stats}
-			<!-- Overview Stats -->
 			<div class="grid grid-cols-2 gap-3">
-				<!-- Total Pals -->
 				<div
 					class="hover-lift dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
@@ -105,7 +101,6 @@
 					</div>
 				</div>
 
-				<!-- Collections -->
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
@@ -118,7 +113,6 @@
 					</div>
 				</div>
 
-				<!-- Tags -->
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
@@ -131,7 +125,6 @@
 					</div>
 				</div>
 
-				<!-- Storage Size -->
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-3"
 				>
@@ -145,7 +138,6 @@
 				</div>
 			</div>
 
-			<!-- Activity Stats -->
 			<div
 				class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
 			>
@@ -171,7 +163,6 @@
 				</div>
 			</div>
 
-			<!-- Most Popular -->
 			{#if stats.most_popular_character_id}
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
@@ -188,7 +179,6 @@
 				</div>
 			{/if}
 
-			<!-- Distribution -->
 			{#if totalPals > 0}
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
@@ -221,7 +211,6 @@
 				</div>
 			{/if}
 
-			<!-- Elemental Distribution -->
 			{#if Object.keys(elementDistribution).length > 0}
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
@@ -246,7 +235,6 @@
 				</div>
 			{/if}
 
-			<!-- Special Categories -->
 			{#if totalPals > 0}
 				<div
 					class="dark:bg-surface-800 border-surface-300 dark:border-surface-700 rounded-lg border p-4"
@@ -315,7 +303,6 @@
 				</div>
 			{/if}
 
-			<!-- Last Updated -->
 			{#if lastUpdated}
 				<div class="bg-surface-100 dark:bg-surface-700 rounded-lg p-3">
 					<div class="text-surface-600 dark:text-surface-400 flex items-center gap-2 text-xs">
@@ -325,14 +312,12 @@
 				</div>
 			{/if}
 		{:else}
-			<!-- Loading State -->
 			<div class="flex h-32 items-center justify-center">
 				<div class="border-primary-500 h-8 w-8 animate-spin rounded-full border-b-2"></div>
 			</div>
 		{/if}
 	</div>
 
-	<!-- Footer Actions -->
 	<div class="border-surface-300 dark:border-surface-700 border-t p-4">
 		<Button variant="secondary" class="w-full" onclick={() => upsState.loadStats()}>
 			{m.refresh_entity({ entity: m.stats() })}

@@ -11,7 +11,6 @@
 	const upsState = getUpsState();
 
 	function handlePalSelect(upsPal: UPSPal, event: MouseEvent) {
-		// Only handle selection when Ctrl+click (following other storage systems pattern)
 		if (event.ctrlKey || event.metaKey) {
 			upsState.togglePalSelection(upsPal.id);
 		}
@@ -35,14 +34,12 @@
 				? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 ring-secondary-500 ring-4'
 				: 'dark:bg-surface-800'}"
 		>
-			<!-- Pal Badge (smaller for list view) -->
 			<div class="shrink-0">
 				<div class="h-16 w-16">
 					<UPSPalBadge {upsPal} onSelect={handlePalSelect} />
 				</div>
 			</div>
 
-			<!-- Pal Info -->
 			<div class="min-w-0 flex-1">
 				<div class="mb-1 flex items-center gap-2">
 					<h3 class="text-surface-900 dark:text-surface-100 truncate text-base font-medium">
@@ -58,7 +55,6 @@
 					</span>
 				</div>
 
-				<!-- Tags -->
 				{#if upsPal.tags && upsPal.tags.length > 0}
 					<div class="mb-2 flex flex-wrap gap-1">
 						{#each upsPal.tags.slice(0, 3) as tag}
@@ -76,14 +72,12 @@
 					</div>
 				{/if}
 
-				<!-- Notes -->
 				{#if upsPal.notes}
 					<p class="text-surface-600 dark:text-surface-400 mb-1 line-clamp-2 text-sm">
 						{upsPal.notes}
 					</p>
 				{/if}
 
-				<!-- Source Info -->
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.source_save_file}
 						<div>
@@ -107,7 +101,6 @@
 				</div>
 			</div>
 
-			<!-- Stats -->
 			<div class="shrink-0 text-right">
 				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}

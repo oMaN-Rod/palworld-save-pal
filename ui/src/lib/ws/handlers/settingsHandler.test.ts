@@ -57,8 +57,7 @@ describe('settingsHandler', () => {
 	});
 
 	// The web build's sqlite falls back to in-memory whenever the OPFS pool is
-	// held elsewhere, so every boot reports the seeded default. Applying it would
-	// reset a user who has already chosen a language.
+	// held elsewhere, so every boot reports the seeded default language.
 	it('does not reset the chosen locale when the backend reports the seeded default', async () => {
 		storedLocale = 'fr';
 		activeLocale = 'fr';

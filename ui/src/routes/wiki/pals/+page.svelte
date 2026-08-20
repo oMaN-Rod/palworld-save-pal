@@ -30,7 +30,6 @@
 	];
 
 	let search = $state('');
-	// Multi-select category set; defaults to normal-only so the common case is uncluttered.
 	let selectedCategories = $state<Set<PalCategory>>(new Set<PalCategory>(['normal']));
 	let selectedElement = $state<string | null>(null);
 	let sortBy: SortBy = $state('paldeck-index');
@@ -83,7 +82,6 @@
 		} else {
 			next.add(id);
 		}
-		// Never let the set go fully empty — re-add the toggled one.
 		selectedCategories = next.size > 0 ? next : new Set<PalCategory>([id]);
 	}
 

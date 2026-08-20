@@ -3,23 +3,13 @@ import type { PassiveSkill } from '$types';
 export type PassiveMember = { key: string; skill: PassiveSkill };
 
 export type PassiveFamily = {
-	/** Stable key for selection state (the stripped display name). */
 	key: string;
-	/** Display name with rank/level tokens removed, e.g. "Attack Up". */
 	displayName: string;
-	/** Members sorted by rank then id. */
 	members: PassiveMember[];
-	/** Distinct positive ranks present, ascending. */
 	ranks: number[];
-	/** Highest rank in the family (used for list ordering/tier badge). */
 	primaryRank: number;
 };
 
-/**
- * Strips trailing rank/level markers from a localized passive name.
- * Handles "Lv. N", "+N", "(N)", and trailing " N" suffixes.
- * "Attack Up Lv. 2" → "Attack Up"; "Aerial Dash +3" → "Aerial Dash".
- */
 export function stripRankSuffix(name: string): string {
 	return name
 		.replace(/\s*Lv\.?\s*\d+\s*$/i, '')
@@ -29,16 +19,6 @@ export function stripRankSuffix(name: string): string {
 		.trim();
 }
 
-/**
- * Groups passive skills into families by their base localized name with rank
- * tokens removed. Skills whose stripped names match form one family and can be
- * compared across ranks (e.g. Attack Up Lv. 2/3/4). Skills with unique names
- * become single-member families.
- *
- * ponytail: name-heuristic grouping — entries with unrelated names that share
- * a code prefix (e.g. Deffence_up1/2/2_2/3 → "Hard Skin"/"Burly Body"/...)
- * correctly stay separate. Upgrade to a backend family field if exposed.
- */
 export function groupPassiveFamilies(entries: [string, PassiveSkill][]): PassiveFamily[] {
 	const byBaseName = new Map<string, PassiveMember[]>();
 

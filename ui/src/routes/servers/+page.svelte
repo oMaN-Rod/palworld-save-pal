@@ -43,7 +43,6 @@
 	}
 
 	async function handleCreate() {
-		// Get suggested ports
 		const allocatedPorts = new Set<number>();
 		for (const s of servers) {
 			allocatedPorts.add(s.game_port);
@@ -70,7 +69,6 @@
 			offset++;
 		}
 
-		// @ts-ignore
 		const result = await modal.showModal<CreateServerData | null>(CreateServerModal, {
 			title: 'Create Server',
 			suggestedPorts
@@ -93,7 +91,6 @@
 </script>
 
 <div class="flex h-full min-h-screen w-full gap-4 p-4">
-	<!-- Server List Panel -->
 	<div class="flex w-80 shrink-0 flex-col gap-4">
 		<div class="flex items-center justify-between">
 			<h2 class="text-primary-400 text-xl font-bold">Servers</h2>
@@ -144,7 +141,6 @@
 		</div>
 	</div>
 
-	<!-- Detail Panel -->
 	<div class="min-w-0 flex-1">
 		{#if selectedServer}
 			<ServerDetailPanel server={selectedServer} />

@@ -10,7 +10,6 @@ export const listServersHandler: WSMessageHandler = {
 		state.servers = data.servers;
 		state.loading = false;
 
-		// Update selected server if it exists in the new list
 		if (state.selectedServer) {
 			const updated = data.servers.find((s) => s.id === state.selectedServer?.id);
 			if (updated) {
@@ -26,7 +25,6 @@ export const getServerHandler: WSMessageHandler = {
 		const state = getServerState();
 		state.selectedServer = data;
 
-		// Also update in the servers list
 		const idx = state.servers.findIndex((s) => s.id === data.id);
 		if (idx >= 0) {
 			state.servers[idx] = data;
@@ -165,7 +163,6 @@ export const installServerModHandler: WSMessageHandler = {
 		const toast = getToastState();
 		if (data.success) {
 			toast.add(`Mod "${data.mod_name}" installed`, 'Success', 'success');
-			// Refresh mods list
 			state.loadMods(data.server_id);
 		} else {
 			toast.add(`Failed to install "${data.mod_name}"`, 'Error', 'error');

@@ -14,7 +14,6 @@ const IOS_SAFARI_UA =
 	'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Mobile/15E148 Safari/604.1';
 const ANDROID_CHROME_UA =
 	'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Mobile Safari/537.36';
-// iPadOS 13+ ships the desktop Macintosh UA verbatim — identical to SAFARI_UA.
 const IPADOS_UA = SAFARI_UA;
 
 afterEach(() => vi.unstubAllGlobals());
@@ -78,7 +77,6 @@ describe('detectBrowser via user agent string', () => {
 	});
 
 	it('does NOT mistake Chrome for Safari', () => {
-		// Chrome's UA also ends in "Safari/537.36" — the classic false positive.
 		expect(detectBrowser({ userAgent: CHROME_UA }).family).not.toBe('safari');
 	});
 
@@ -95,8 +93,6 @@ describe('detectBrowser via user agent string', () => {
 	});
 
 	it('identifies iOS Chrome with correct family and name', () => {
-		// iOS forces all browsers onto WebKit, so family is 'safari' (the engine).
-		// name is 'Chrome' (the product), for the display headline.
 		expect(detectBrowser({ userAgent: IOS_CHROME_UA })).toEqual({
 			family: 'safari',
 			name: 'Chrome',
@@ -105,8 +101,6 @@ describe('detectBrowser via user agent string', () => {
 	});
 
 	it('identifies iOS Firefox with correct family and name', () => {
-		// iOS forces all browsers onto WebKit, so family is 'safari' (the engine).
-		// name is 'Firefox' (the product), for the display headline.
 		expect(detectBrowser({ userAgent: IOS_FIREFOX_UA })).toEqual({
 			family: 'safari',
 			name: 'Firefox',
@@ -127,8 +121,6 @@ describe('detectBrowser mobile flag', () => {
 	it('flags an Android phone', () => {
 		const id = detectBrowser({ userAgent: ANDROID_CHROME_UA });
 		expect(id.mobile).toBe(true);
-		// Android Chrome without userAgentData still resolves as a Chromium UA,
-		// so the mobile flag is the only thing separating it from desktop Chrome.
 		expect(id.family).not.toBe('safari');
 	});
 

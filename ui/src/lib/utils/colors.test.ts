@@ -2,11 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import { skillBorderClass, skillFilter, skillOpacity } from './colors';
 
-/*
- * Rank 5 is the WorldTree passive tier. It is a top-tier positive passive and
- * must read the same as rank 4; red is reserved for the detrimental ranks
- * (-1, -2, -3).
- */
+// Rank 5 is the WorldTree passive tier: a top-tier positive passive that must
+// read the same as rank 4; red is reserved for the detrimental ranks (-1, -2, -3).
 describe('rank colouring', () => {
 	it('renders rank 5 with the same border as rank 4', () => {
 		expect(skillBorderClass(5)).toBe(skillBorderClass(4));

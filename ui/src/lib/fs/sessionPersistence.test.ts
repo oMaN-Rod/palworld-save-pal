@@ -67,7 +67,6 @@ describe('sessionPersistence', () => {
 		const restored: number[] = [];
 		const r = await restoreMostRecent((b) => restored.push(...b));
 		expect(r.restored).toBe(true);
-		// zipEntries mock returns [entries.length] === [1] for the single re-read file.
 		expect(restored).toEqual([1]);
 	});
 

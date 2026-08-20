@@ -1,5 +1,4 @@
-// Plain sessionStorage helpers for the session-id/selected-player reattach flow.
-// Deliberately no library (svelte-persisted-state etc.) — two small string values.
+// Deliberately no persistence library here -- just two small sessionStorage strings.
 
 const SESSION_ID_KEY = 'psp:session_id';
 const SELECTED_PLAYER_UID_KEY = 'psp:selected_player_uid';
@@ -29,9 +28,9 @@ export function clearSessionPersistence(): void {
 	sessionStorage.removeItem(SELECTED_PLAYER_UID_KEY);
 }
 
-// True while a reattach_session request is awaiting its overview reply, so the
-// loaded_save_files handler knows to re-select the stored player. Guards against
-// a plain fresh load re-selecting a stale uid left over from a previous save.
+// True while a reattach_session request is awaiting its reply, so the
+// loaded_save_files handler knows to re-select the stored player instead of
+// treating it as a plain fresh load with a stale uid left over.
 let reattachPending = false;
 
 export function markReattachPending(): void {

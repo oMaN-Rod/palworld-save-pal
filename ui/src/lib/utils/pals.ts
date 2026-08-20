@@ -28,14 +28,9 @@ export function canBeLucky(character_id: string): [string, boolean] {
 	return ['', true];
 }
 
-/**
- * Species the game only loads under one exact character id. Keyed by the bare
- * species name; the value is the required id minus the `BOSS_` prefix. Awakened
- * is a separate flag and does not affect the id.
- */
+// The game only loads this species under this exact character id.
 const EXACT_CHARACTER_IDS = new Map<string, string>([['kingwhale', 'KingWhale_Otomo']]);
 
-/** The required id for a constrained species, or null if unconstrained. */
 export function exactCharacterId(character_id: string): string | null {
 	const bare = character_id
 		.replace(/^BOSS_/i, '')
@@ -47,9 +42,7 @@ export function exactCharacterId(character_id: string): string | null {
 export function formatBossCharacterId(pal: Pal): void {
 	pal.character_id = pal.character_id.replace('Boss_', 'BOSS_');
 
-	// A constrained species keeps its prefix and suffix whatever the toggles say,
-	// and must stay flagged boss or lucky, because the game will not load it
-	// otherwise.
+	// The game will not load a constrained species unless it stays flagged boss or lucky.
 	const exact = exactCharacterId(pal.character_id);
 	if (exact) {
 		pal.character_id = `BOSS_${exact}`;
@@ -523,12 +516,6 @@ export enum WazaID {
 	MAX = 310,
 }
 
-/**
- * Convert from game's enum format (e.g., 'EPalWazaID::266' or 'EPalWazaID::Unique_LegendDeer_RadiantWingRush').
- *
- * Returns a tuple of [WazaID | null, skillIdString].
- * The skillIdString is always prefixed with 'EPalWazaID::' for consistency.
- */
 export function wazaIdFromStr(value: string): [WazaID | null, string] {
 	if (!value.startsWith("EPalWazaID::")) {
 		return [null, value];
@@ -536,7 +523,6 @@ export function wazaIdFromStr(value: string): [WazaID | null, string] {
 
 	const idPart = value.split("::").pop()!;
 
-	// Try to parse as a name first
 	if (idPart in WazaID) {
 		const waza = WazaID[idPart as keyof typeof WazaID];
 		if (typeof waza === "number") {
@@ -544,19 +530,14 @@ export function wazaIdFromStr(value: string): [WazaID | null, string] {
 		}
 	}
 
-	// Try to parse as a numeric value
 	const numericId = parseInt(idPart, 10);
 	if (!isNaN(numericId) && numericId in WazaID) {
 		return [numericId as WazaID, `EPalWazaID::${WazaID[numericId]}`];
 	}
 
-	// Both lookups failed
 	return [null, value];
 }
 
-/**
- * Convert a WazaID back to game's enum format with name.
- */
 export function wazaIdToStr(waza: WazaID): string {
 	return `EPalWazaID::${WazaID[waza]}`;
 }

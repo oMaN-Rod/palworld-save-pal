@@ -24,15 +24,12 @@ export const themeOptions: SelectOption[] = [
 	{ value: 'lamball', label: 'Lamball' }
 ];
 
-/**
- * Selected UI theme, persisted to localStorage. Changing `theme.current`
- * updates the persisted value; the `[data-theme]` attribute on <body> is kept
- * in sync from the root layout, which is what actually swaps the color palette.
- */
+// Persisted to localStorage; the `[data-theme]` attribute on <body> that actually
+// swaps the color palette is kept in sync from the root layout, not from here.
 export const theme = persistedState<ThemeName>('psp-theme', DEFAULT_THEME);
 
-// Light-background themes (by --color-surface-950 in ui/src/themes/*.css); all
-// others are dark. Drives the logo variant so the wordmark stays legible.
+// Light-background themes (by --color-surface-950 in ui/src/themes/*.css); a new
+// theme not added here silently gets the dark-logo variant.
 export const LIGHT_THEMES: ReadonlySet<ThemeName> = new Set<ThemeName>(['light', 'lamball']);
 
 export function isLightTheme(name: ThemeName): boolean {

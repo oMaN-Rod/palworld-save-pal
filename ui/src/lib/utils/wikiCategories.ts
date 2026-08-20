@@ -33,10 +33,6 @@ export function categoryLabel(category: WikiCategory): string {
 	return WIKI_CATEGORIES.find((c) => c.id === category)?.label() ?? category;
 }
 
-/**
- * Plural label for headings and page titles. `categoryLabel` stays singular for
- * `pals`/`items` because breadcrumbs and chips read better that way.
- */
 export function categoryLabelPlural(category: WikiCategory): string {
 	if (category === 'pals') return m.pal({ count: 2 });
 	if (category === 'items') return m.item({ count: 2 });

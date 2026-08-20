@@ -85,7 +85,6 @@ export enum MessageType {
 	UPDATE_GPS_PAL = 'update_gps_pal',
 	GET_GPS_PALS = 'get_gps_pals',
 
-	// UPS (Universal Pal Storage) Messages
 	GET_UPS_PALS = 'get_ups_pals',
 	GET_UPS_ALL_FILTERED_IDS = 'get_ups_all_filtered_ids',
 	ADD_UPS_PAL = 'add_ups_pal',
@@ -107,7 +106,6 @@ export enum MessageType {
 	GET_UPS_STATS = 'get_ups_stats',
 	NUKE_UPS_PALS = 'nuke_ups_pals',
 
-	// Map
 	UNLOCK_MAP = 'unlock_map',
 	GET_PLAYER_SUMMARIES = 'get_player_summaries',
 	GET_GUILD_SUMMARIES = 'get_guild_summaries',
@@ -128,7 +126,6 @@ export enum MessageType {
 	DELETE_GAMEPASS_PLAYER = 'delete_gamepass_player',
 	RENAME_GAMEPASS_WORLD = 'rename_gamepass_world',
 
-	// Tools
 	CONVERT_STEAM_ID = 'convert_steam_id',
 	SWAP_PLAYER_UIDS = 'swap_player_uids',
 	LOAD_SOURCE_SAVE = 'load_source_save',
@@ -136,7 +133,6 @@ export enum MessageType {
 	TRANSFER_PLAYER = 'transfer_player',
 	UNLOAD_SOURCE_SAVE = 'unload_source_save',
 
-	// Server Management
 	LIST_SERVERS = 'list_servers',
 	GET_SERVER = 'get_server',
 	CREATE_SERVER = 'create_server',
@@ -157,11 +153,9 @@ export enum MessageType {
 	SERVER_CREATION_PROGRESS = 'server_creation_progress',
 	IMPORT_SERVER = 'import_server',
 
-	// World Options
 	GET_WORLD_OPTION = 'get_world_option',
 	UPDATE_WORLD_OPTION = 'update_world_option',
 
-	// Breeding Calculator
 	GET_BREEDING_PALS = 'get_breeding_pals',
 	BREEDING_DIRECT_CHILD = 'breeding_direct_child',
 	BREEDING_DIRECT_PARTNERS = 'breeding_direct_partners',

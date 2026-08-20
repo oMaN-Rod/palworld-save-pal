@@ -77,7 +77,7 @@ export class WorkerTransport {
 		this.#worker?.postMessage(messageData);
 	}
 
-	/// Transfers the buffer — the caller must not reuse `bytes` afterwards.
+	// Transfers the buffer — the caller must not reuse `bytes` afterwards.
 	async sendBytes(type: string, bytes: Uint8Array) {
 		this.#worker?.postMessage({ type, bytes }, [bytes.buffer]);
 	}

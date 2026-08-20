@@ -17,7 +17,6 @@ class TourService {
 
 		await goto(tour.route);
 
-		// Wait for route transition and DOM to settle
 		await new Promise((resolve) => setTimeout(resolve, 300));
 
 		const steps = tour.steps.map((step) => this.#prepareStep(step));

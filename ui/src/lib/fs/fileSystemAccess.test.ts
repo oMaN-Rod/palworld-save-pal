@@ -1,7 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { readSaveFolder, writeSaveInPlace } from './fileSystemAccess';
 
-// Minimal in-memory FileSystemDirectoryHandle fake.
 class FakeFile {
 	constructor(public bytes: Uint8Array) {}
 	async arrayBuffer() {
@@ -51,7 +50,6 @@ class FakeDirHandle {
 	async *[Symbol.asyncIterator](): AsyncIterableIterator<[string, FakeDirHandle | FakeFileHandle]> {
 		for (const [k, v] of this.entries_) yield [k, v];
 	}
-	// FSA handles expose async `entries()`; mirror it.
 	entries() {
 		return this[Symbol.asyncIterator]();
 	}
@@ -90,11 +88,9 @@ describe('fileSystemAccess', () => {
 			[{ path: 'Level.sav', bytes: new Uint8Array([9, 9]) }],
 			1000
 		);
-		// New bytes written in place.
 		const lvl = (await root.getFileHandle('Level.sav')) as FakeFileHandle;
 		expect(Array.from((await lvl.getFile()).bytes)).toEqual([9, 9]);
-		// Original preserved under the backup dir (walk each path segment —
-		// real FSA directory names cannot contain '/').
+		// Walk each path segment — real FSA directory names cannot contain '/'.
 		let bdir: FakeDirHandle = root;
 		for (const seg of backup.split('/')) {
 			bdir = (await bdir.getDirectoryHandle(seg)) as FakeDirHandle;
@@ -116,14 +112,12 @@ describe('fileSystemAccess', () => {
 			2000
 		);
 
-		// Original uppercase file overwritten in place; no lowercase duplicate.
 		expect(players.entries_.size).toBe(1);
 		expect(players.entries_.has('abc.sav')).toBe(false);
 		const target = players.entries_.get('ABC.sav') as FakeFileHandle;
 		expect(target).toBeDefined();
 		expect(Array.from((await target.getFile()).bytes)).toEqual([8, 8]);
 
-		// Backup preserves the original bytes.
 		let bdir: FakeDirHandle = caseRoot;
 		for (const seg of backup.split('/')) {
 			bdir = (await bdir.getDirectoryHandle(seg)) as FakeDirHandle;

@@ -9,8 +9,6 @@ function isSaveFile(path: string): boolean {
 	return path.toLowerCase().endsWith('.sav');
 }
 
-/** Files chosen through an `<input webkitdirectory>`; keeps `webkitRelativePath`
- * as the zip path (e.g. `world1/Level.sav`, which the loader tolerates). */
 export async function readInputFolder(fileList: FileList): Promise<ZipEntry[]> {
 	const entries: ZipEntry[] = [];
 	for (const file of Array.from(fileList)) {
@@ -31,8 +29,6 @@ interface FsEntry {
 	};
 }
 
-/** Walks folders dropped onto a drop target via the non-standard
- * `DataTransferItem.webkitGetAsEntry` API (Chrome/Edge/Firefox). */
 export async function readDroppedItems(items: DataTransferItemList): Promise<ZipEntry[]> {
 	const roots: FsEntry[] = [];
 	for (const item of Array.from(items)) {
@@ -50,7 +46,6 @@ export async function readDroppedItems(items: DataTransferItemList): Promise<Zip
 			if (isSaveFile(path)) out.push({ path, data: new Uint8Array(await file.arrayBuffer()) });
 		} else if (entry.isDirectory && entry.createReader) {
 			const reader = entry.createReader();
-			// readEntries yields in batches; keep reading until an empty batch.
 			let batch: FsEntry[];
 			do {
 				batch = await new Promise<FsEntry[]>((res, rej) => reader.readEntries(res, rej));
@@ -62,20 +57,16 @@ export async function readDroppedItems(items: DataTransferItemList): Promise<Zip
 	return out;
 }
 
-/** Zips collected save files into a single archive for the `load_zip_file` path. */
 export function zipEntries(entries: ZipEntry[]): Uint8Array {
 	const files: Record<string, Uint8Array> = {};
 	for (const e of entries) files[e.path] = e.data;
 	return zipSync(files);
 }
 
-/** True when the collected files include a `Level.sav` (the minimum for a load). */
 export function hasLevelSav(entries: ZipEntry[]): boolean {
 	return entries.some((e) => e.path.toLowerCase().endsWith('level.sav'));
 }
 
-/** True when a drop contains at least one directory entry (a world folder),
- *  vs. only files (e.g. a .zip). Uses the non-standard webkitGetAsEntry API. */
 export function hasDirectoryEntry(items: DataTransferItemList): boolean {
 	for (const item of Array.from(items)) {
 		const entry = (

@@ -655,9 +655,7 @@
 					</Button>
 				</Tooltip>
 			</nav>
-			<!-- Main content wrapper -->
 			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-4 lg:pr-80 xl:pr-96 2xl:pr-105">
-				<!-- Inventory -->
 				<div class="flex flex-col space-y-2">
 					<Tabs
 						listBorder="preset-outlined-surface-200-800"
@@ -723,7 +721,6 @@
 						{/snippet}
 					</Tabs>
 				</div>
-				<!-- Player Equip -->
 				<div class="flex min-h-0 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
 					<div class="flex flex-col space-y-2">
 						<div id="weapon-equip" class="flex flex-col space-y-2">
@@ -845,7 +842,6 @@
 				</div>
 			</div>
 
-			<!-- Stats -->
 			<div
 				class="fixed right-2 max-h-screen w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
 				bind:this={sideBarWrapper}

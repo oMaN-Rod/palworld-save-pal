@@ -10,7 +10,6 @@ function zlibToGvas(h: SavHeader, sav: Uint8Array): Uint8Array {
 	const first = unzlibSync(sav.subarray(h.dataOffset));
 	let gvas = first;
 	if (h.saveType === ZLIB_DOUBLE) {
-		// compressedLength describes the intermediate stream here, not the disk bytes.
 		if (h.compressedLength !== first.length) {
 			throw new Error(`incorrect compressed length: ${h.compressedLength} != ${first.length}`);
 		}
@@ -43,7 +42,6 @@ async function gvasToSav(gvas: Uint8Array): Promise<Uint8Array> {
 export type GvasSlot = 'level' | 'level_meta' | 'world_option' | 'player_sav' | 'player_dps';
 export type StageFn = (slot: GvasSlot, uid: string, gvas: Uint8Array) => void;
 
-/** Palworld names player files by 32-hex stem; the engine parses dashed uuids. */
 function uidFromStem(stem: string): string {
 	const hex = stem.toLowerCase();
 	return [
@@ -56,12 +54,9 @@ function uidFromStem(stem: string): string {
 }
 
 /**
- * Decompresses a save zip one file at a time, handing each GVAS buffer to
- * `stage` and dropping it before starting the next. Returns the save id.
- *
- * One file at a time is the whole point: a real save's files total hundreds of
- * megabytes decompressed, and collecting them into a single structure — base64
- * in a JSON frame, above all — exceeds the longest string a browser can hold.
+ * One file at a time: a decompressed save can run hundreds of megabytes, and
+ * collecting them all into one structure (e.g. base64 in a JSON frame) would
+ * exceed the longest string a browser can hold.
  */
 export async function stageSavZip(zipBytes: Uint8Array, stage: StageFn): Promise<string> {
 	const files = unzipSync(zipBytes);
@@ -71,8 +66,6 @@ export async function stageSavZip(zipBytes: Uint8Array, stage: StageFn): Promise
 
 	const hand = async (name: string, slot: GvasSlot, uid = '') => {
 		const gvas = await savToGvas(files[name]);
-		// Release the compressed bytes before the caller takes the GVAS, so the
-		// two are never both retained.
 		delete files[name];
 		stage(slot, uid, gvas);
 	};
@@ -97,25 +90,18 @@ export async function stageSavZip(zipBytes: Uint8Array, stage: StageFn): Promise
 	return levelName.includes('/') ? levelName.split('/')[0] : 'save';
 }
 
-/**
- * Compresses each entry the engine listed back into a `.sav` and zips them.
- * The engine owns the file list, so the naming rules live in one place.
- */
 export async function gvasFilesToSavZip(
 	worldName: string,
 	names: string[],
 	read: (name: string) => Uint8Array | Promise<Uint8Array>
 ): Promise<{ name: string; zip: Uint8Array }> {
 	const entries: Record<string, Uint8Array> = {};
-	// Sequential on purpose: each GVAS is compressed and released before the
-	// next is pulled out of the engine, so only one is ever resident.
+	// Sequential on purpose: parallelizing would keep every GVAS resident at once.
 	for (const name of names) entries[name] = await gvasToSav(await read(name));
 	return { name: `${worldName || 'PSP'}.zip`, zip: zipSync(entries) };
 }
 
-// Guarded so importing this module for its pure helpers doesn't start the
-// runtime. Gate on a real worker global rather than `self`, since test
-// environments (e.g. vitest) also define `self`.
+// Gate on WorkerGlobalScope, not `self` — test environments (e.g. vitest) also define `self`.
 declare const WorkerGlobalScope: unknown;
 if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalScope as never)) {
 	let wasmReady: Promise<typeof import('$lib/wasm/psp')> | null = null;
@@ -137,13 +123,10 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 					(sql: string, params: unknown[]) => sqlite.query(sql, params)
 				);
 				await mod.run_migrations();
-				// Untranslated: paraglide resolves the locale from a cookie or a
-				// module-scoped variable set by setLocale, and a dedicated worker
-				// has neither `document` nor the main thread's module instance, so
-				// importing $i18n/messages here would always render baseLocale.
-				// 'warning', not 'error': errorHandler navigates to /error, which
-				// would eject the user out of an app that still works fine without
-				// persistence.
+				// Untranslated: paraglide's locale resolution needs `document` or the
+				// main thread's module instance, neither of which exists in a worker.
+				// 'warning', not 'error': errorHandler navigates to /error, ejecting the
+				// user from an app that still works fine without persistence.
 				const warning = storageWarning(sqlite);
 				if (warning) {
 					self.postMessage(

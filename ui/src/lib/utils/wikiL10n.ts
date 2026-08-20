@@ -5,11 +5,7 @@ export type EntitySeo = { key: string; name: string; description: string | null 
 
 type L10nRecord = { localized_name?: string | null; description?: string | null };
 
-/**
- * Raw game data per category, used for the authoritative key set and the
- * `disabled` filter. Specifiers are static so Vite can analyse them.
- * `work-suitability` has no raw file; its keys come from the l10n catalogue.
- */
+// Import specifiers are static (not built from `category`) so Vite can analyse them.
 const RAW_LOADERS: Record<WikiCategory, () => Promise<Record<string, unknown>>> = {
 	pals: async () => (await import('../../../../data/json/pals.json')).default,
 	items: async () => (await import('../../../../data/json/items.json')).default,
@@ -22,7 +18,6 @@ const RAW_LOADERS: Record<WikiCategory, () => Promise<Record<string, unknown>>> 
 		(await import('../../../../data/json/l10n/en/work_suitability.json')).default
 };
 
-/** Localized names and in-game descriptions, keyed identically to the raw data. */
 const L10N_LOADERS: Record<WikiCategory, () => Promise<Record<string, L10nRecord>>> = {
 	pals: async () => (await import('../../../../data/json/l10n/en/pals.json')).default,
 	items: async () => (await import('../../../../data/json/l10n/en/items.json')).default,

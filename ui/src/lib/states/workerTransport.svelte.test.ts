@@ -50,9 +50,8 @@ beforeEach(() => {
 });
 
 describe('WorkerTransport', () => {
-	// The worker's sqlite holds exclusive OPFS access handles for its whole
-	// lifetime. Leaving it running past the page means the next page cannot
-	// acquire the pool and silently runs on a non-persistent in-memory database.
+	// Leaving the worker (and its exclusive OPFS handles) running past the page
+	// would block the next page from acquiring the pool.
 	it('terminates the worker when the page is discarded', () => {
 		const ws = transport();
 		ws.connect({ goto: async () => {} });
