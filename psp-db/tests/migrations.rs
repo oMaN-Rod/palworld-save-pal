@@ -48,7 +48,6 @@ async fn meta_get_set_roundtrip() {
             .as_deref(),
         Some("{\"done\":true}")
     );
-    // set is an upsert
     psp_db::meta::set(&db, "legacy_import", "v2")
         .await
         .unwrap();
@@ -75,22 +74,16 @@ fn iso_naive_formats_without_timezone_suffix() {
         .unwrap()
         .and_hms_opt(3, 4, 5)
         .unwrap();
-    // The fraction is dropped entirely when microsecond == 0.
     assert_eq!(
         psp_db::time::iso_naive(without_micros),
         "2026-01-02T03:04:05"
     );
 }
 
-/// Migration files must be LF-only on every platform.
-///
-/// `sqlx::migrate!` embeds each file with `include_str!` and checksums the bytes
-/// exactly as they sit on disk. Every database in the wild was migrated from LF
-/// files, so a CRLF checkout changes the checksum and makes sqlx reject an
-/// already-applied migration -- "migration N was previously applied but has been
-/// modified" -- even though the SQL is byte-for-byte identical apart from the line
-/// endings. On Windows `core.autocrlf=true` does exactly that on checkout, which
-/// is why `.gitattributes` pins `*.sql` to `eol=lf`. This test is the guard.
+/// `sqlx::migrate!` checksums migration files as they sit on disk; a CRLF checkout
+/// (e.g. `core.autocrlf=true` on Windows) changes the checksum and makes sqlx
+/// reject an already-applied migration. `.gitattributes` pins `*.sql` to `eol=lf`
+/// for this reason — this test is the guard.
 #[test]
 fn migration_files_are_lf_only() {
     let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("migrations");

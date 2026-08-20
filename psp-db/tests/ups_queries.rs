@@ -172,7 +172,6 @@ async fn tag_pal_type_sort_and_pagination() {
 
 #[tokio::test]
 async fn unknown_sort_order_defaults_to_ascending() {
-    // Only "desc" means DESC; every other sort_order, valid or not, means ASC.
     let (db, pool) = test_db().await;
     insert_pal(&pool, "A", None, 1, false, &[], "2026-01-01T00:00:00").await;
     insert_pal(&pool, "B", None, 40, false, &[], "2026-01-02T00:00:00").await;

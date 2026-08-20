@@ -83,7 +83,6 @@ pub async fn import_legacy_if_needed(
         return Ok(None);
     }
 
-    // The legacy file is only ever copied and read, never written to.
     let backup_path = legacy_db_path.with_extension("db.pre-rust-import.bak");
     if !backup_path.exists() {
         std::fs::copy(legacy_db_path, &backup_path)?;

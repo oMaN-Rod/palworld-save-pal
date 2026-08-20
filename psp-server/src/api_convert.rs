@@ -46,7 +46,6 @@ async fn sav_to_json(mut multipart: Multipart) -> Response {
             .into_response();
     };
 
-    // Blocking parse of a potentially huge save — keep it off the async workers.
     let conversion = tokio::task::spawn_blocking(move || -> Result<String, String> {
         let save = SaveReader::new()
             .game::<Palworld>()

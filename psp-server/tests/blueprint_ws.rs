@@ -58,8 +58,6 @@ async fn recv(socket: &mut WsClient) -> Value {
     }
 }
 
-/// Reads frames until one whose `type` equals `stop_type`, returning every
-/// frame read (including the stop frame).
 async fn recv_until(socket: &mut WsClient, stop_type: &str) -> Vec<Value> {
     let mut frames = Vec::new();
     loop {

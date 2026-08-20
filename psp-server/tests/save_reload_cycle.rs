@@ -92,7 +92,6 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
 
     select_save(&mut socket, &level_sav_path).await;
 
-    // Add a new inventory slot to the player's common container.
     let mut player = load_player(&mut socket, WORLD1_PLAYER_O).await;
     let common_container = player
         .get_mut("common_container")

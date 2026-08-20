@@ -31,9 +31,8 @@ fn repo_root() -> anyhow::Result<PathBuf> {
     Ok(std::env::current_dir()?)
 }
 
-/// Packaged app: serve bundled resources, keep mutable state (DB, backups/) in
-/// the per-user app data dir. Unpackaged (`cargo tauri dev`, `cargo run`): use
-/// the repo's ui_build/ and data/ directly.
+/// Packaged app: serve bundled resources, keep mutable state in the per-user app
+/// data dir. Unpackaged: use the repo's ui_build/ and data/ directly.
 fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
     if let Ok(resource_dir) = app.path().resource_dir() {
         let bundled_ui = resource_dir.join("ui");
@@ -53,15 +52,11 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
         }
     }
     let repo_root = repo_root()?;
-    // Under `tauri dev` the webview loads Vite, so no static build is needed.
-    // ServeDir just 404s on the absent dir; nothing else reads ui_dir.
+    // Under `tauri dev` the webview loads Vite, so no static build is required.
     anyhow::ensure!(
         tauri::is_dev() || repo_root.join("ui_build").join("index.html").is_file(),
         "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p psp-desktop`, from the repo root"
     );
-    // backups/, servers/ and open_folder("psp_root") resolve against
-    // PSP_APP_ROOT; `tauri dev` runs the binary from the crate dir, so anchor
-    // them at the repo root.
     std::env::set_var("PSP_APP_ROOT", &repo_root);
     Ok(AssetDirs {
         ui_dir: repo_root.join("ui_build"),
@@ -85,10 +80,8 @@ fn choose_webview_url(
 }
 
 /// WebKitGTK's DMABUF renderer leaves the WebView blank-white on many virtual
-/// GPUs (VMs) and quirky driver combos — the page's JS still runs, nothing
-/// paints. We default the renderer off on Linux so the window always shows,
-/// but only when the user hasn't set `WEBKIT_DISABLE_DMABUF_RENDERER` themselves.
-/// Returns the value to export, or `None` to leave the environment untouched.
+/// GPUs and driver combos; default it off on Linux unless the user already set
+/// `WEBKIT_DISABLE_DMABUF_RENDERER` themselves.
 #[cfg(any(target_os = "linux", test))]
 fn dmabuf_disable_value(current: Option<std::ffi::OsString>) -> Option<&'static str> {
     match current {
@@ -98,9 +91,8 @@ fn dmabuf_disable_value(current: Option<std::ffi::OsString>) -> Option<&'static 
 }
 
 fn main() {
-    // Must run before any WebKitGTK init (webview build), which reads this env
-    // var when it spawns the web process. Keeps the WebView from rendering blank
-    // on Linux VMs / virtual GPUs.
+    // Must run before any WebKitGTK init, which reads this env var when it
+    // spawns the web process.
     #[cfg(target_os = "linux")]
     if let Some(value) = dmabuf_disable_value(std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER")) {
         std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", value);
@@ -143,9 +135,6 @@ fn main() {
             let server_url: tauri::Url = format!("http://{}", server_handle.addr).parse()?;
             tracing::info!("embedded server listening on {}", server_handle.addr);
 
-            // Dev (`tauri dev`): load the Vite dev server so frontend edits
-            // hot-reload; it proxies /api and /ws to the embedded server. Any
-            // release build loads the embedded server, which serves ui_build/.
             let allow_dev_server = cfg!(debug_assertions) && tauri::is_dev();
             let webview_url = choose_webview_url(
                 app.config().build.dev_url.clone(),
@@ -215,16 +204,13 @@ mod tests {
         let dev = url("http://localhost:5173/");
         let server = url("http://127.0.0.1:5174/");
 
-        // `tauri dev` (debug + is_dev): load Vite.
         assert_eq!(
             choose_webview_url(Some(dev.clone()), server.clone(), true),
             dev
         );
-        // Release binary (allow_dev_server false): NEVER the dev URL, even
-        // though tauri.conf.json still carries a dev_url. This is the
-        // "localhost refused" regression guard.
+        // "localhost refused" regression guard: allow_dev_server false must never
+        // pick the dev URL, even though tauri.conf.json still carries a dev_url.
         assert_eq!(choose_webview_url(Some(dev), server.clone(), false), server);
-        // No dev URL configured: always the embedded server.
         assert_eq!(choose_webview_url(None, server.clone(), true), server);
     }
 }

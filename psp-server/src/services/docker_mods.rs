@@ -143,7 +143,6 @@ pub fn install_native_dll_mod(nativemods_path: &str, mod_zip_b64: &str) -> bool 
 pub(crate) mod zip_fixture {
     use std::io::Write;
 
-    /// Builds a base64-encoded zip from (path, contents) entries.
     pub(crate) fn base64_zip(entries: &[(&str, &str)]) -> String {
         use base64::Engine;
         let mut buffer = std::io::Cursor::new(Vec::new());

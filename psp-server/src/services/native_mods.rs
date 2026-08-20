@@ -148,7 +148,6 @@ pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
     }))
 }
 
-/// Scan a workshop directory for mod dirs containing Info.json.
 pub fn list_workshop_mods(workshop_dir: &str, source: &str) -> Vec<Value> {
     if workshop_dir.is_empty() {
         return Vec::new();

@@ -24,7 +24,6 @@ use psp_core::gamedata::GameData;
 pub struct ServerConfig {
     /// Web default 0.0.0.0; desktop 127.0.0.1.
     pub host: IpAddr,
-    /// 0 picks a free port (tests).
     pub port: u16,
     pub ui_dir: PathBuf,
     /// Directory holding "json/" with the game data.
@@ -46,20 +45,16 @@ pub struct ServerHandle {
 }
 
 impl ServerHandle {
-    /// Signals the serve loop to stop and waits for it to exit.
     pub async fn shutdown(self) {
         let _ = self.shutdown_sender.send(());
         let _ = self.serve_task.await;
     }
 
-    /// Blocks until the server exits on its own.
     pub async fn wait(self) {
         let _ = self.serve_task.await;
     }
 }
 
-/// Picks the real `RfdDialogProvider` in desktop mode and the inert
-/// `NullDialogProvider` otherwise, then defers to `start_server_with`.
 pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> {
     // rfd only exists under the `desktop` feature; the headless server/Docker
     // build always uses the inert NullDialogProvider.
@@ -76,8 +71,7 @@ pub async fn start_server(config: ServerConfig) -> anyhow::Result<ServerHandle> 
 }
 
 /// Binds the listener before returning, so the port is already accepting
-/// connections by the time the caller sees a `ServerHandle`. `dialogs` lets
-/// callers inject a `FileDialogProvider` of their own.
+/// connections by the time the caller sees a `ServerHandle`.
 pub async fn start_server_with(
     config: ServerConfig,
     dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,

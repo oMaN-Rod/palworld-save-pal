@@ -128,7 +128,6 @@ async fn sav_to_json_to_sav_round_trips() {
         "expected save_type byte 0x31 (SaveType.PLM)"
     );
 
-    // The PlM sav must convert back to identical JSON.
     let response = router
         .oneshot(multipart_file_request(
             "/api/convert/sav-to-json",

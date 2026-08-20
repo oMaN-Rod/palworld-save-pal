@@ -695,8 +695,6 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
     fixtures_replayed
 }
 
-/// Replays every committed wire fixture and fails on any deviation: a
-/// regression net for the request/response protocol the frontend consumes.
 #[tokio::test]
 async fn replay_recorded_wire_fixtures() {
     let fixtures_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../contract/fixtures");
@@ -735,8 +733,6 @@ async fn replay_panics_on_a_mismatched_fixture() {
     replay_all_fixtures(&temp_dir.path().join("fixtures")).await;
 }
 
-/// The same fixture with the correct expected value must replay clean — the
-/// harness is not simply panicking on any synthetic input.
 #[tokio::test]
 async fn replay_passes_on_a_matching_fixture() {
     let temp_dir = tempfile::tempdir().unwrap();
@@ -891,8 +887,6 @@ async fn assert_no_surplus_frame_errs_when_a_frame_is_already_queued() {
     );
 }
 
-/// An exhausted stream must be reported clean — the check does not simply fail
-/// on any stream it is handed.
 #[tokio::test]
 async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     let mut stream =
@@ -910,8 +904,6 @@ async fn assert_no_surplus_frame_oks_an_exhausted_stream() {
     assert_eq!(result, Ok(()));
 }
 
-/// Recorded non-empty, replayed empty: the handler failed to resolve a target
-/// that once resolved.
 #[test]
 fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() {
     let expected = serde_json::json!({"type": "get_raw_data", "data": {"key": "SaveData.Guild"}});
@@ -930,7 +922,6 @@ fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() 
     );
 }
 
-/// Both sides empty (no save loaded, or no target field set) compares clean.
 #[test]
 fn compare_raw_data_structural_oks_both_sides_empty() {
     let expected = serde_json::json!({"type": "get_raw_data", "data": {}});
@@ -942,9 +933,6 @@ fn compare_raw_data_structural_oks_both_sides_empty() {
     );
 }
 
-/// Both sides non-empty but in COMPLETELY DIFFERENT dialects for the same save
-/// subtree still compares clean — this is the whole point of the structural
-/// comparator, since plain equality would fail here on content alone.
 #[test]
 fn compare_raw_data_structural_oks_non_empty_sides_with_differing_content() {
     let expected = serde_json::json!({
@@ -962,9 +950,6 @@ fn compare_raw_data_structural_oks_non_empty_sides_with_differing_content() {
     );
 }
 
-/// Either side's `data` not even being a JSON object (a malformed fixture,
-/// or a response shape this comparator was never meant to see) is reported,
-/// not silently treated as "empty".
 #[test]
 fn compare_raw_data_structural_errs_when_data_is_not_an_object() {
     let expected = serde_json::json!({"type": "get_raw_data", "data": "not-an-object"});
@@ -982,9 +967,6 @@ fn compare_raw_data_structural_errs_when_data_is_not_an_object() {
     assert!(error.contains("not a JSON object"), "got: {error}");
 }
 
-/// `mask_ignored_paths` must replace EXACTLY the listed pointers and nothing
-/// else: a mask that widened (blanking the whole `pal`, say, or `character_id`)
-/// would swallow real divergences, so the "unchanged" assertions here guard it.
 #[test]
 fn mask_ignored_paths_masks_only_the_listed_pointers() {
     let mut add_pal = serde_json::json!({
@@ -1064,10 +1046,6 @@ fn mask_ignored_paths_masks_only_the_listed_pointers() {
     );
 }
 
-/// The backup-line mask must fire ONLY on response index 1 of a
-/// `save_modded_save` burst: every other `progress_message` frame — in this
-/// burst and in every other corpus — carries deterministic text that must stay
-/// compared.
 #[test]
 fn mask_gamepass_backup_progress_line_masks_only_index_one_of_save_modded_save() {
     let mut backup_line = serde_json::json!({
@@ -1155,8 +1133,6 @@ fn world1_sav(file_name: &str) -> Vec<u8> {
     std::fs::read(&path).unwrap_or_else(|error| panic!("read {}: {error}", path.display()))
 }
 
-/// Identical inner saves must PASS despite a different compression method AND a
-/// different filename timestamp — the decompressed GVAS is what is compared.
 /// Uses the real committed `world1/Level.sav`, so this runs a genuine PlM/Oodle
 /// decode rather than a synthetic stand-in.
 #[test]
@@ -1179,10 +1155,9 @@ fn compare_download_equivalent_oks_identical_inner_saves() {
     );
 }
 
-/// A member whose DECOMPRESSED GVAS differs by even one byte must FAIL. The two
-/// zips carry a same-named `Level.sav` backed by two different, both-decodable
-/// containers, so the failure can only come from the GVAS byte comparison — not
-/// from a decode error or a member-name mismatch.
+/// The two zips carry a same-named `Level.sav` backed by two different,
+/// both-decodable containers, so the failure can only come from the GVAS byte
+/// comparison — not from a decode error or a member-name mismatch.
 #[test]
 fn compare_download_equivalent_errs_on_a_differing_inner_save() {
     let level = world1_sav("Level.sav");
@@ -1217,7 +1192,6 @@ fn compare_download_equivalent_errs_on_a_differing_inner_save() {
     );
 }
 
-/// A differing member SET (an extra `Players/*.sav` on one side) must also fail.
 #[test]
 fn compare_download_equivalent_errs_on_a_member_set_mismatch() {
     let level = world1_sav("Level.sav");
@@ -1275,9 +1249,6 @@ fn make_get_presets_frame(entries: &[(&str, Value)]) -> Value {
     serde_json::json!({ "type": "get_presets", "data": Value::Object(data) })
 }
 
-/// `mask_preset_ids` must replace EXACTLY `id`, `pal_preset_id` and the nested
-/// `pal_preset.id`, and nothing else: a widened mask (blanking `pal_preset`
-/// wholesale, or masking `name`) has to turn this red.
 #[test]
 fn mask_preset_ids_masks_only_id_fields() {
     let mut preset = serde_json::json!({
@@ -1305,8 +1276,6 @@ fn mask_preset_ids_masks_only_id_fields() {
     assert_eq!(preset["pal_preset"]["lock"], true);
     assert_eq!(preset["pal_preset"]["character_id"], "SheepBall");
 
-    // A preset with no pal_preset relationship: its `id` is still masked, but a
-    // NULL `pal_preset_id` must survive as null (see mask_preset_ids).
     let mut bare = serde_json::json!({
         "id": "33333333-3333-3333-3333-333333333333",
         "name": "Bare",
@@ -1323,9 +1292,7 @@ fn mask_preset_ids_masks_only_id_fields() {
     assert_eq!(bare["name"], "Bare");
 }
 
-/// Different uuid dict keys and different id values, but identical preset
-/// content in the same order, must compare EQUAL — plain equality on the raw
-/// dicts would fail on the keys alone.
+/// Plain equality on the raw dicts would fail on the (different) keys alone.
 #[test]
 fn compare_get_presets_equivalent_oks_different_uuids_same_content() {
     let expected = make_get_presets_frame(&[
@@ -1426,9 +1393,6 @@ fn compare_get_presets_equivalent_oks_when_only_nested_pal_preset_id_differs() {
     );
 }
 
-/// A REAL field difference (here a container's item count) must NOT compare
-/// equal, even with matching masked ids — the comparator is not vacuously
-/// permissive.
 #[test]
 fn compare_get_presets_equivalent_errs_on_a_real_field_difference() {
     let expected = make_get_presets_frame(&[(
@@ -1536,10 +1500,8 @@ fn compare_get_presets_equivalent_errs_when_pal_preset_association_differs() {
     );
 }
 
-/// The single-object UPS frames must mask EXACTLY their timestamp /
-/// instance-id fields and nothing else. The committed replay corpus does not
-/// cover UPS, so these synthetic checks are the standing proof the masking is
-/// right.
+/// The committed replay corpus does not cover UPS, so these synthetic checks
+/// are the standing proof the masking is right.
 #[test]
 fn mask_ignored_paths_masks_ups_single_object_frames() {
     let mut add = serde_json::json!({
@@ -1615,10 +1577,6 @@ fn mask_ignored_paths_masks_ups_single_object_frames() {
     assert_eq!(tag["data"]["tag"]["name"], "parity-tag");
 }
 
-/// The array-shaped list frames must mask EVERY element's nondeterministic
-/// fields while leaving deterministic siblings untouched — both inside each
-/// element (character_id, nickname, pal_data, name, color) and beside the array
-/// (total_count/offset/limit).
 #[test]
 fn mask_ups_list_frames_masks_every_element_only() {
     let mut pals = serde_json::json!({
@@ -1685,10 +1643,8 @@ fn mask_ups_list_frames_masks_every_element_only() {
     assert_eq!(tags["data"]["tags"][0]["name"], "t1");
 }
 
-/// Driven through `compare_responses`, the actual pass/fail decision: frames
-/// differing ONLY in masked timestamps/instance-ids compare EQUAL, while a real
-/// nickname difference still FAILS. The mask must be neither too weak (letting
-/// timestamps fail a replay) nor too strong (swallowing real divergences).
+/// Driven through `compare_responses`, the actual pass/fail decision, rather
+/// than through `mask_ups_list_frames` directly.
 #[test]
 fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
     let make = |instance: &str, timestamp: &str, nickname: &str| {
@@ -1729,11 +1685,8 @@ fn ups_pal_list_masking_is_neither_too_weak_nor_too_strong() {
     );
 }
 
-/// `mask_gps_response_frame` must mask EXACTLY `instance_id` in every pal of the
-/// slot-keyed map and leave everything else alone: other pal fields, the slot
-/// keys, the no-save / no-gps-file shapes (no pal map to walk), and any other
-/// message type. The committed replay corpus does not cover GPS, so these
-/// synthetic checks stand in for it.
+/// The committed replay corpus does not cover GPS, so these synthetic checks
+/// stand in for it.
 #[test]
 fn mask_gps_response_frame_masks_only_instance_id_per_slot() {
     let mut response = serde_json::json!({

@@ -22,10 +22,8 @@ const CREATE_TRACKER: &str =
     "CREATE TABLE IF NOT EXISTS _psp_migrations (version INTEGER PRIMARY KEY)";
 const SELECT_APPLIED: &str = "SELECT version FROM _psp_migrations";
 
-/// Applies every migration whose version is not already recorded, through the
-/// `DbDriver` seam. Apply-if-absent, so a persistent DB that already ran them is
-/// left alone on the next open. Each migration's SQL is executed as a single
-/// `execute` call (the driver runs multi-statement scripts when given no params).
+/// Each migration's SQL runs as a single `execute` call — the driver must run
+/// multi-statement scripts when given no params.
 pub async fn run_migrations(db: &dyn DbDriver) -> Result<(), DbError> {
     db.execute(CREATE_TRACKER, &[]).await?;
     let applied: std::collections::HashSet<i64> = db
@@ -55,7 +53,6 @@ mod tests {
     use crate::DbRow;
     use std::sync::{Arc, Mutex};
 
-    /// Records executes; answers the version-check with a script-controlled set.
     struct MockDriver {
         applied: Mutex<Vec<i64>>,
         executes: Mutex<Vec<String>>,
@@ -89,7 +86,6 @@ mod tests {
         let driver = MockDriver { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]) };
         run_migrations(&driver).await.unwrap();
         assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7, 8]);
-        // Each migration SQL executed exactly once, plus the tracker + one insert per migration.
         let migration_execs = driver
             .executes
             .lock()
@@ -99,7 +95,6 @@ mod tests {
             .count();
         assert_eq!(migration_execs, MIGRATIONS.len());
 
-        // Second run: all versions present → no further migration executes.
         driver.executes.lock().unwrap().clear();
         run_migrations(&driver).await.unwrap();
         let reruns = driver

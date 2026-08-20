@@ -37,8 +37,6 @@ fn temp_world1_level_sav() -> (tempfile::TempDir, String) {
     (temp_root, level_sav_path)
 }
 
-/// Drives a `select_save` and returns the `session_id` from its
-/// `loaded_save_files` frame.
 async fn select_save_get_session_id(socket: &mut common::WsClient, level_sav_path: &str) -> String {
     common::send_json(
         socket,

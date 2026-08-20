@@ -2,8 +2,7 @@ use std::sync::Arc;
 
 use crate::error::DbError;
 
-/// A single SQLite value, matching SQLite's five storage classes. `bool` maps to
-/// `Integer(0|1)`; JSON columns are carried as `Text`.
+/// `bool` maps to `Integer(0|1)`; JSON columns are carried as `Text`.
 #[derive(Debug, Clone, PartialEq)]
 pub enum DbValue {
     Null,
@@ -26,7 +25,6 @@ impl<T: Into<DbValue>> From<Option<T>> for DbValue {
 impl From<&String> for DbValue { fn from(v: &String) -> Self { DbValue::Text(v.clone()) } }
 impl From<&i64> for DbValue { fn from(v: &i64) -> Self { DbValue::Integer(*v) } }
 
-/// One result row: shared column names + this row's values, positionally aligned.
 #[derive(Debug, Clone)]
 pub struct DbRow {
     cols: Arc<Vec<String>>,
@@ -53,7 +51,6 @@ impl DbRow {
     pub fn get_blob(&self, col: &str) -> Result<Vec<u8>, DbError> { blob(self.at(col)?, col) }
     pub fn get_opt_str(&self, col: &str) -> Result<Option<String>, DbError> { opt_text(self.at(col)?, col) }
     pub fn get_opt_i64(&self, col: &str) -> Result<Option<i64>, DbError> { opt_int(self.at(col)?, col) }
-    /// TEXT column holding JSON -> Value; NULL -> Value::Null.
     pub fn get_json(&self, col: &str) -> Result<serde_json::Value, DbError> {
         match self.at(col)? {
             DbValue::Null => Ok(serde_json::Value::Null),
@@ -86,7 +83,7 @@ fn opt_int(v: &DbValue, col: &str) -> Result<Option<i64>, DbError> {
 fn real(v: &DbValue, col: &str) -> Result<f64, DbError> {
     match v {
         DbValue::Real(r) => Ok(*r),
-        DbValue::Integer(i) => Ok(*i as f64), // SQLite may store a whole REAL as INTEGER
+        DbValue::Integer(i) => Ok(*i as f64),
         _ => Err(DbError::Decode(format!("column `{col}` is not a real"))),
     }
 }
@@ -108,8 +105,6 @@ fn blob(v: &DbValue, col: &str) -> Result<Vec<u8>, DbError> {
     }
 }
 
-/// Accumulates SQL text and positional params, mirroring the subset of
-/// `sqlx::QueryBuilder` the domain code uses (`push`, `push_bind`, `separated`).
 pub struct SqlBuilder {
     sql: String,
     params: Vec<DbValue>,
@@ -143,38 +138,25 @@ impl Separated<'_> {
     }
 }
 
-/// The database seam. All domain functions run SQL through this. `execute`
-/// returns rows-affected; `query` returns rows with their column names so
-/// callers can read by name. Send+Sync with Send futures — native tokio needs
-/// it; psp-web will satisfy it by awaiting a Send channel to a wa-sqlite worker.
-///
-/// A second (non-sqlx) implementation must satisfy:
-/// 1. `query()` must EXECUTE writes, not just read — several call sites pass
-///    `INSERT … RETURNING id` to `query()`.
-/// 2. Parameters bind by 1-based index, and a placeholder may repeat (e.g.
-///    `settings::update_settings` reuses `?1..?6` across 11 occurrences of 6
-///    params); binding positionally by occurrence would corrupt the data.
-/// 3. `execute()` returns the statement's own changed-row count
-///    (`sqlite3_changes()`), not a cumulative total and not a last-insert rowid.
-/// 4. `DbValue::Integer` and `Real` must round-trip; a whole number may arrive
-///    as either (see the `int()`/`real()` coercions above).
+/// A second (non-sqlx) implementation must: run `query()` for writes too (some
+/// call sites pass `INSERT … RETURNING id`); bind params by 1-based index since
+/// a placeholder may repeat; have `execute()` return the statement's own
+/// changed-row count, not a cumulative total or last-insert rowid; and round-trip
+/// `DbValue::Integer`/`Real` since a whole number may arrive as either.
 #[async_trait::async_trait]
 pub trait DbDriver: Send + Sync {
     async fn execute(&self, sql: &str, params: &[DbValue]) -> Result<u64, DbError>;
     async fn query(&self, sql: &str, params: &[DbValue]) -> Result<Vec<DbRow>, DbError>;
 }
 
-/// Reads column 0 of row 0 as an integer. The queries that use this are
-/// `COUNT`/`SUM`/`INSERT … RETURNING`, which always yield a row on SQLite — but
-/// an empty result must surface as an error, not a panic: on wasm `panic =
-/// abort` means a panic aborts the module with no error frame.
+/// An empty result must surface as an error, not a panic: on wasm `panic = abort`
+/// means a panic aborts the module with no error frame.
 pub fn scalar_i64(rows: &[DbRow]) -> Result<i64, DbError> {
     rows.first()
         .ok_or_else(|| DbError::Backend("expected one row, got none".into()))?
         .get_i64_at(0)
 }
 
-/// Like `scalar_i64`, but a missing row OR a NULL cell reads as `None`.
 pub fn opt_scalar_i64(rows: &[DbRow]) -> Result<Option<i64>, DbError> {
     match rows.first() {
         Some(row) => row.get_opt_i64_at(0),

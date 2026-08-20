@@ -62,7 +62,6 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     let server = common::start_test_server().await;
     let mut socket = common::connect(&server).await;
 
-    // --- 1. Load the save ----------------------------------------------------
     common::send_json(
         &mut socket,
         json!({"type": "select_save",
@@ -85,7 +84,6 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         assert!(summary["pal_count"].is_u64(), "summary has pal_count");
     }
 
-    // --- 2. Parse the selected player's pals (Save Mode lazy load) -----------
     common::send_json(
         &mut socket,
         json!({"type": "request_player_details",
@@ -104,9 +102,8 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         pals_obj.len()
     );
 
-    // --- 3. Shape owned pals EXACTLY like the frontend's saveOwnedPals() -----
-    // PalInput: character_id, gender, passive_skills, instance_id, nickname,
-    // level, owner_uid, origin: "owned".
+    // Shaped exactly like the frontend's saveOwnedPals() PalInput: character_id,
+    // gender, passive_skills, instance_id, nickname, level, owner_uid, origin: "owned".
     let mut owned_pals: Vec<Value> = Vec::new();
     let mut owned_species: Vec<String> = Vec::new();
     for pal in pals_obj.values() {
@@ -129,7 +126,6 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         "owned pal inputs must carry character_id + passive_skills"
     );
 
-    // --- 4. Breeding DB up + breedable list ---------------------------------
     common::send_json(&mut socket, json!({"type": "get_breeding_pals"})).await;
     let pals_frames = recv_until(&mut socket, "get_breeding_pals").await;
     let breedable: Vec<String> = pals_frames
@@ -149,13 +145,12 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
             .to_string()
     };
 
-    // --- 5. Compute chains from the player's pals ----------------------------
-    // To prove chains are COMPUTED (not just echoed), target species the
-    // player does NOT own that two owned species combine into — the
-    // `breeding_direct_child` handler lists exactly those. The chain solver
-    // is gender-aware (faithful to PalSavTools: a pair needs M+F, wildcard
-    // counts as either), so the solver — not the test — decides which combos
-    // actually breed.
+    // To prove chains are COMPUTED (not just echoed), target species the player
+    // does NOT own that two owned species combine into — the
+    // `breeding_direct_child` handler lists exactly those. The chain solver is
+    // gender-aware (faithful to PalSavTools: a pair needs M+F, wildcard counts
+    // as either), so the solver — not the test — decides which combos actually
+    // breed.
     let owned_norm: Vec<String> = owned_species.iter().map(|s| strip_boss(s)).collect();
     let mut candidates: Vec<String> = Vec::new();
     for (i, a) in owned_norm.iter().enumerate() {
@@ -203,11 +198,9 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         frames.last().unwrap()["data"].clone()
     }
 
-    // --- 5a. The real pool is all-female: the correct answer is 0 chains. ---
-    // The fixture player owns only females, so no non-owned target can be
-    // bred. A well-formed EMPTY answer is the correct Save Mode behavior for
-    // such a pool and proves the pipeline runs end-to-end without fabricating
-    // a chain.
+    // The fixture player owns only females, so no non-owned target can be bred.
+    // A well-formed EMPTY answer is the correct Save Mode behavior for such a
+    // pool and proves the pipeline runs end-to-end without fabricating a chain.
     let response = request_chains(&mut socket, &owned_pals, &candidates[0]).await;
     assert!(response["elapsed_ms"].is_u64(), "{response:?}");
     assert!(response["warnings"].is_array(), "{response:?}");
@@ -216,11 +209,10 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
         "an all-female pool must yield no chains (gender-compatible M+F rule): {response:?}"
     );
 
-    // --- 5b. Positive proof: pool + one male of an owned species. ------------
-    // A realistic save contains males. Add a single male owned pal of a
-    // species the player already owns; every other input is the parsed player
-    // data, unmodified. The solver must now produce a real ≥1-step chain for
-    // a non-owned target.
+    // A realistic save contains males. Add a single male owned pal of a species
+    // the player already owns; every other input is the parsed player data,
+    // unmodified. The solver must now produce a real ≥1-step chain for a
+    // non-owned target.
     owned_pals.push(json!({
         "character_id": "Anubis",
         "gender": "Male",

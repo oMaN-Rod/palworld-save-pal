@@ -130,7 +130,6 @@ mod tests {
         assert_eq!(row.structure_count, 42);
         assert_eq!(row.schema_version, 1);
         assert_eq!(row.footprint_radius, 3500.0);
-        // BlueprintRow has no payload field at all — the list path never reads the blob.
     }
 
     #[tokio::test]

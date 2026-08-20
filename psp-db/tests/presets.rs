@@ -42,7 +42,6 @@ async fn add_and_get_preset_with_pal_preset() {
     let preset = all.get(&preset_id).expect("preset present, keyed by id");
     assert_eq!(preset["name"], "Max Fox");
     assert_eq!(preset["type"], "pal_preset");
-    // pal_preset id generated server-side and mirrored into pal_preset_id
     assert!(preset["pal_preset"]["id"].is_string());
     assert_eq!(preset["pal_preset_id"], preset["pal_preset"]["id"]);
     assert_eq!(preset["pal_preset"]["nickname"], "MaxFox");

@@ -92,7 +92,6 @@ async fn update_persists_everything_except_save_dir() {
         "save_dir must not change"
     );
 
-    // Survives reopen (persistence, migrations idempotent).
     drop(pool);
     drop(db);
     let reopened = psp_db::open(&db_path).await.unwrap();

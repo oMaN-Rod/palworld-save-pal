@@ -4,7 +4,6 @@ fn fixture_path() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/legacy_psp.db")
 }
 
-/// Lenient stand-in for the real pal validator: any object with a string character_id passes.
 fn test_validator(value: &serde_json::Value) -> Result<serde_json::Value, String> {
     match value.get("character_id") {
         Some(serde_json::Value::String(_)) => Ok(value.clone()),
@@ -37,7 +36,6 @@ async fn imports_legacy_database_once() {
     assert!(report.ups_stats_imported);
     assert_eq!(report.servers_imported, 1);
     assert!(report.backup_path.exists());
-    // The legacy file must come through byte-identical to its backup: import never writes to it.
     assert_eq!(
         std::fs::read(&legacy_path).unwrap(),
         std::fs::read(&report.backup_path).unwrap()
@@ -49,7 +47,6 @@ async fn imports_legacy_database_once() {
         .unwrap();
     assert_eq!(language, "fr");
 
-    // The legacy `palpreset` row folds into the pal_preset JSON column, gender NAME -> value.
     let pal_preset_json: Option<String> = sqlx::query_scalar(
         "SELECT pal_preset FROM presets WHERE id = 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'",
     )
@@ -61,15 +58,12 @@ async fn imports_legacy_database_once() {
     assert_eq!(pal_preset["gender"], "Female");
     assert_eq!(pal_preset["nickname"], "MaxFox");
 
-    // Legacy datetimes ("2026-01-02 03:04:05.123456") convert to ISO T-form.
     let created_at: String = sqlx::query_scalar("SELECT created_at FROM ups_pals WHERE id = 1")
         .fetch_one(&pool)
         .await
         .unwrap();
     assert_eq!(created_at, "2026-01-02T03:04:05.123456");
 
-    // Legacy UUID columns are dashless; instance_id and source_player_uid must come out
-    // canonical dashed-lowercase.
     let instance_id: String = sqlx::query_scalar("SELECT instance_id FROM ups_pals WHERE id = 1")
         .fetch_one(&pool)
         .await

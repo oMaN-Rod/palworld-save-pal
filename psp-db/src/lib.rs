@@ -28,8 +28,6 @@ use std::path::Path;
 #[cfg(feature = "sqlx-driver")]
 use sqlx::sqlite::{SqliteConnectOptions, SqlitePool, SqlitePoolOptions};
 
-/// Opens (creating if missing) the SQLite database at `db_path` and runs the
-/// embedded migrations.
 #[cfg(feature = "sqlx-driver")]
 pub async fn open(db_path: &Path) -> Result<SqlitePool, DbError> {
     let options = SqliteConnectOptions::new()

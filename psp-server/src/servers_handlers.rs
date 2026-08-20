@@ -100,7 +100,6 @@ pub(crate) async fn server_status(
     }
 }
 
-/// Online player count via the REST API when the status says running, else 0.
 pub(crate) async fn online_player_count(
     services: &ServerServices,
     record: &ServerRecord,
@@ -597,7 +596,6 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
     let emitter = ctx.emitter;
     let db = &*ctx.app.driver;
 
-    // 1. Resolve the install folder (native dialog in desktop mode).
     let install_path = if data.install_path == "__select__" {
         if !ctx.app.config.desktop_mode {
             emit_business_error(emitter, "Desktop mode is required to browse for a folder".to_string());
@@ -611,13 +609,11 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
         data.install_path.clone()
     };
 
-    // 2. Must be a real server install.
     if !Path::new(&install_path).join("PalServer.exe").exists() {
         emit_business_error(emitter, "PalServer.exe not found in the selected folder".to_string());
         return Ok(());
     }
 
-    // 3. Reject already-registered installs.
     if psp_db::servers::server_with_install_path(db, &install_path)
         .await
         .map_err(|error| error.to_string())?
@@ -627,10 +623,9 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
         return Ok(());
     }
 
-    // 4. Parse the owner's existing config.
     let config = native_config::parse_server_config_from_ini(&install_path);
 
-    // 5. Reassign conflicting ports in the DB only (non-destructive).
+    // Ports are reassigned in the DB only, not written back to the ini.
     let allocated = psp_db::servers::allocated_ports(db)
         .await
         .map_err(|error| error.to_string())?;
@@ -638,7 +633,6 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
     let ((game_port, query_port, rest_api_port), notifications) =
         reassign_import_ports(config.game_port, query_port, config.rest_api_port, &allocated);
 
-    // 6. Best-effort detection (optional).
     let steamcmd_path = native_process::find_steamcmd().unwrap_or_default();
     let mut workshop_dir = data.workshop_dir.clone().unwrap_or_default();
     if workshop_dir.is_empty() {
@@ -1296,8 +1290,6 @@ pub(crate) mod test_env {
 
     pub(crate) struct TestEnv {
         pub app: Arc<AppState>,
-        /// Passed explicitly to the handler under test, the way `ServerExtRouter`
-        /// does in production.
         pub services: Arc<ServerServices>,
         pub docker: Arc<MockDocker>,
         pub session: psp_core::session::Session,
@@ -1378,7 +1370,6 @@ pub(crate) mod test_env {
             }
         }
 
-        /// Drain all frames emitted so far as parsed envelopes.
         pub(crate) fn drain(&mut self) -> Vec<serde_json::Value> {
             let mut envelopes = Vec::new();
             while let Ok(frame) = self.receiver.try_recv() {
@@ -1441,7 +1432,6 @@ mod tests {
         let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("alpha"))
             .await
             .unwrap();
-        // Mock: container exists but is exited → running=false → player_count 0
         env.docker.statuses.lock().unwrap().insert(
             "alpha".to_string(),
             serde_json::json!({"State": {"Status": "exited", "Running": false, "StartedAt": null}}),
@@ -1461,7 +1451,6 @@ mod tests {
         assert_eq!(entry["total_players"], 0);
         assert_eq!(entry["player_count"], 0);
         assert_eq!(entry["env_vars"], serde_json::json!({}));
-        // created_at is an isoformat string
         assert!(entry["created_at"].as_str().unwrap().contains('T'));
     }
 
@@ -1515,7 +1504,6 @@ mod tests {
         let messages = env.drain();
         assert_eq!(messages[0]["type"], "get_server");
         assert_eq!(messages[0]["data"]["total_players"], 2); // _dps excluded
-                                                             // Container unknown to the mock → not_found status
         assert_eq!(messages[0]["data"]["status"]["status"], "not_found");
         assert_eq!(messages[0]["data"]["player_count"], 0);
     }
@@ -1565,7 +1553,6 @@ mod tests {
             "container_name": "alpha"
         }))
         .unwrap();
-        // Serde defaults must apply for every omitted field.
         assert_eq!(data.image_name, "omanrod/psp-palworld-server");
         assert_eq!(data.server_type, "docker");
         assert_eq!(data.game_port, 8211);
@@ -1610,7 +1597,6 @@ mod tests {
         assert_eq!(created["status"]["running"], true); // mock create starts it
         assert_eq!(created["player_count"], 0);
         assert!(created.get("total_players").is_none()); // create has no total_players
-                                                         // DB row exists
         let listed = psp_db::servers::list_servers(&*env.app.driver).await.unwrap();
         assert_eq!(listed.len(), 1);
         // Host mount dirs are under <cwd>/servers/alpha
@@ -1693,7 +1679,6 @@ mod tests {
         assert_eq!(messages[0]["data"]["server_name"], "Renamed");
         assert!(messages[0]["data"].get("player_count").is_none()); // update has no counts
         let calls = env.docker.calls.lock().unwrap().clone();
-        // stop old, remove (no volume), recreate
         assert!(calls.contains(&"stop:alpha".to_string()));
         assert!(calls.contains(&"remove_container:alpha".to_string()));
         assert!(!calls.contains(&"remove_volume:psp-alpha-data".to_string()));
@@ -2292,7 +2277,6 @@ mod tests {
         let mut env = TestEnv::new().await;
         let install_dir = env._scratch.path().join("Dup");
         let install = write_importable_install(&install_dir, "ServerName=\"Dup\",PublicPort=9921,RESTAPIPort=9922");
-        // Pre-register the same install path.
         let mut existing = docker_new_server("dup");
         existing.server_type = "native".to_string();
         existing.install_path = install.clone();
@@ -2315,7 +2299,6 @@ mod tests {
     #[tokio::test]
     async fn import_reassigns_conflicting_ports_and_leaves_ini_untouched() {
         let mut env = TestEnv::new().await;
-        // Occupy 9911 (game) and 9912 (rest) via an existing server.
         let mut occupant = docker_new_server("occupant");
         occupant.game_port = 9911;
         occupant.query_port = 27015;

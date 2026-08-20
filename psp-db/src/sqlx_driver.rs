@@ -5,8 +5,6 @@ use sqlx::{Column, Row, SqlitePool, TypeInfo, ValueRef};
 use crate::driver::{DbDriver, DbRow, DbValue};
 use crate::error::DbError;
 
-/// The native SQLite driver: binds `DbValue`s onto a sqlx query and decodes
-/// each `SqliteRow` back into a `DbRow` by inspecting column runtime types.
 pub struct SqlxSqliteDriver {
     pool: SqlitePool,
 }

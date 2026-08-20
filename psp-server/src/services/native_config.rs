@@ -832,7 +832,6 @@ mod tests {
     fn build_content_preserves_unknown_keys_from_active_ini() {
         let scratch = tempfile::tempdir().unwrap();
         let install = scratch.path().to_string_lossy().to_string();
-        // Active ini contains a key PSP does not map.
         let cfg = config_dir(&install);
         std::fs::create_dir_all(&cfg).unwrap();
         std::fs::write(
@@ -841,11 +840,9 @@ mod tests {
         )
         .unwrap();
 
-        let record = native_record(&install); // existing test helper in this module
+        let record = native_record(&install);
         let content = build_palworld_settings_content(&record);
-        // Unmapped key survives...
         assert!(content.contains("MyCustomKey=42"));
-        // ...while PSP-owned explicit fields still override.
         assert!(content.contains("ServerName=\"My Native Server\""));
     }
 
@@ -855,7 +852,6 @@ mod tests {
         let mut record = native_record(&scratch.path().to_string_lossy());
         record.server_password = String::new();
         let content = build_palworld_settings_content(&record);
-        // Sentinel values from the hardcoded fallback
         assert!(content.contains("Difficulty=None"));
         assert!(content.contains("BanListURL=\"https://b.palworldgame.com/api/banlist.txt\""));
         assert!(content.contains("CrossplayPlatforms=(Steam,Xbox,PS5,Mac)"));
@@ -892,7 +888,6 @@ mod tests {
         // known keys reverse-mapped and normalized (quotes stripped, bools lowercased)
         assert_eq!(parsed.env_vars.get("EXP_RATE").unwrap(), "3.000000");
         assert_eq!(parsed.env_vars.get("IS_PVP").unwrap(), "true");
-        // unknown ini key is not surfaced as an env var
         assert!(!parsed.env_vars.values().any(|v| v == "42"));
     }
 

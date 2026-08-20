@@ -50,8 +50,7 @@ pub async fn get_all(
     Ok(result)
 }
 
-/// Inserts a preset from a wire object, honouring an `id` the payload already carries
-/// (seed rows do) and generating one otherwise. Returns the preset id.
+/// Honours an `id` the payload already carries (seed rows do); generates one otherwise.
 pub async fn add(
     db: &dyn crate::DbDriver,
     preset_data: serde_json::Value,

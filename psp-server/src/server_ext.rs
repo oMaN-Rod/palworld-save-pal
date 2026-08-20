@@ -104,7 +104,6 @@ mod tests {
     use super::*;
     use crate::servers_handlers::test_env::TestEnv;
 
-    /// The 18 wire names `ServerExtRouter` is meant to own.
     const OWNED_WIRE_TYPES: &[&str] = &[
         "open_folder",
         "open_in_browser",
@@ -127,12 +126,9 @@ mod tests {
     ];
 
     /// Asserts ownership, not behavior: every wire name above must come back
-    /// `Some(_)` from `route` (Null payloads mostly fail to deserialize, which
-    /// is fine — the point is that this router claims the type at all), and
-    /// every OTHER `MessageType` variant must come back `None`. Iterating
-    /// `MessageType::ALL` (rather than spot-checking one type) means a new
-    /// arm added to `route` without a matching entry in `OWNED_WIRE_TYPES`
-    /// fails this test.
+    /// `Some(_)` from `route`, every other `MessageType` must come back `None`.
+    /// Iterating `MessageType::ALL` means a new arm added to `route` without a
+    /// matching entry in `OWNED_WIRE_TYPES` fails this test.
     #[tokio::test]
     async fn owns_exactly_the_documented_native_types() {
         let mut env = TestEnv::new().await;

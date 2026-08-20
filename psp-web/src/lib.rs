@@ -179,7 +179,6 @@ pub fn stage_gvas(slot: &str, uid: &str, bytes: Vec<u8>) -> Result<(), JsValue> 
     })
 }
 
-/// Loads everything staged so far and empties the staging area.
 #[wasm_bindgen]
 pub async fn load_staged_gvas(save_id: String) -> Result<(), JsValue> {
     let payload = STAGED
@@ -207,7 +206,6 @@ pub async fn export_gvas_manifest() -> Result<JsValue, JsValue> {
     .await
 }
 
-/// Serializes one manifest entry and hands it over as a `Uint8Array`.
 #[wasm_bindgen]
 pub async fn export_gvas_file(name: String) -> Result<Vec<u8>, JsValue> {
     with_session(|session| {

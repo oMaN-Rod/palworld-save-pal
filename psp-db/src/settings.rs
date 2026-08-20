@@ -35,7 +35,6 @@ fn map_settings(r: &crate::DbRow) -> Result<SettingsRow, DbError> {
     })
 }
 
-/// Returns the settings row, inserting the default row on first access.
 pub async fn get_settings(db: &dyn crate::DbDriver) -> Result<SettingsRow, DbError> {
     let rows = db.query(SELECT_SETTINGS, &[]).await?;
     if let Some(row) = rows.first() {
@@ -102,14 +101,12 @@ pub async fn update_save_dir(db: &dyn crate::DbDriver, save_dir: &str) -> Result
     Ok(())
 }
 
-/// Reads the singleton settings row's save_dir. None means the row does not exist yet
-/// (fresh DB, before `get_settings` seeds it).
+/// None means the row does not exist yet (fresh DB, before `get_settings` seeds it).
 pub async fn saved_save_dir(db: &dyn crate::DbDriver) -> Result<Option<String>, DbError> {
     let rows = db.query("SELECT save_dir FROM settings WHERE id = 1", &[]).await?;
     rows.first().map(|r| r.get_string("save_dir")).transpose()
 }
 
-/// Platform-specific location where the Steam release of the game keeps its saves.
 pub fn default_steam_save_dir() -> String {
     #[cfg(target_os = "windows")]
     {
