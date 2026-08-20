@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Builds the SvelteKit UI for the desktop app (Rust/Tauri or Python) into ui_build/.
 # The desktop env (PUBLIC_DESKTOP_MODE=true) and the build are owned by the
 # ui `build:desktop` script so local, CI, and Tauri's beforeBuildCommand agree.
 set -euo pipefail

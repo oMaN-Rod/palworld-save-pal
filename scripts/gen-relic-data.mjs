@@ -1,8 +1,3 @@
-// Regenerates data/json/relic_data.json from the game's own rank table.
-//
-// Usage:
-//   bun scripts/gen-relic-data.mjs <path-to-DT_PlayerStatusRankMasterDataTable.json> [out]
-//
 // Source: FModel export of
 //   Pal/Content/Pal/DataTable/Player/DT_PlayerStatusRankMasterDataTable.uasset
 // Row struct `PalPlayerStatusRankMasterData`:

@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Builds the desktop artifact into dist/ for the current OS:
-#   macOS:  PalworldSavePal-<version>-macos.dmg
-#   Linux:  PalworldSavePal-<version>-linux.deb
-#
 # Usage: ./scripts/build-desktop.sh [--skip-ui]   (--skip-ui if ui_build is current)
 set -euo pipefail
 

@@ -1,7 +1,5 @@
-# .github/dependabot.yml
 version: 2
 updates:
-  # Node.js dependencies for the Svelte frontend
   - package-ecosystem: "npm"
     directory: "/ui"
     schedule:

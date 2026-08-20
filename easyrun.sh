@@ -1,27 +1,15 @@
 #!/usr/bin/env bash
 #
-# easyrun.sh — bash port of easyrun.py. One-shot launcher / preflight for
-# Palworld Save Pal (PSP). macOS/Linux entry point.
+# easyrun.sh — one-shot launcher / preflight for Palworld Save Pal (PSP).
+# macOS/Linux entry point (the PowerShell sibling is easyrun.ps1 for Windows).
 #
-# Does NOT auto-install anything (except the opt-in --install-wasm): on a missing
-# or wrong tool it prints the exact command to fix it and exits non-zero, like
-# PalSavTools' start.sh / check_env.py pair.
-#
-# Usage:
-#   ./easyrun.sh --web        # Dev: Vite (5173) + psp-server (5174), tool-only SPA
-#   ./easyrun.sh --desktop    # Dev: Tauri native window + embedded server
-#   ./easyrun.sh --webapp     # Dev: landing page + tool (VITE_TRANSPORT=worker)
-#   ./easyrun.sh --landing    # Dev: landing page ONLY — no WASM, no server
-#   ./easyrun.sh --docker     # Build & run the self-build Docker image
-#   ./easyrun.sh --serve      # Run only the Rust psp-server
-#   ./easyrun.sh --build-desktop | --build-web | --build
-#   ./easyrun.sh --check [mode] | --install-wasm | --json
-#
-# Defaults to --web. Run `./easyrun.sh --help` for the full list.
-# Windows users: run easyrun.ps1 instead.
+# Does NOT auto-install anything (except the opt-in --install-wasm): on a
+# missing or wrong tool it prints the exact command to fix it and exits
+# non-zero. Defaults to --web; run `./easyrun.sh --help` for the full flag
+# list.
 set -euo pipefail
 
-# ─── Constants — every port/path here is load-bearing in the real config ───
+# Every port/path below is load-bearing in the real config.
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UI_DIR="$REPO_ROOT/ui"
 PSP_DESKTOP_DIR="$REPO_ROOT/psp-desktop"
@@ -33,7 +21,6 @@ WASM_OUT="$UI_DIR/src/lib/wasm/psp"
 VITE_PORT_DEFAULT=5173   # vite.config.ts server.port, strictPort:true
 SERVER_PORT_DEFAULT=5174 # psp-server default + Docker EXPOSE + WS_URL host
 
-# ─── Colors (only when interactive; EASYRUN_NO_COLOR disables) ─────────────
 if [[ -t 1 ]] && [[ "${EASYRUN_NO_COLOR:-}" != "1" ]] && [[ "${EASYRUN_NO_COLOR:-}" != "true" ]]; then
     RESET=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'
     RED=$'\033[31m'; GREEN=$'\033[32m'; YELLOW=$'\033[33m'; CYAN=$'\033[36m'
@@ -41,15 +28,12 @@ else
     RESET=""; BOLD=""; DIM=""; RED=""; GREEN=""; YELLOW=""; CYAN=""
 fi
 
-# ─── State ─────────────────────────────────────────────────────────────────
-# Child PIDs spawned by this script, cleaned up on exit / Ctrl-C.
 CHILD_PIDS=()
 PREVIOUS_ENV_EXISTS=0
 PREVIOUS_ENV_CONTENT=""
 RESTORE_ENV=0
 HTTP_POLL_PIDS=()
 
-# ─── Logging ───────────────────────────────────────────────────────────────
 log_info()  { printf '%s›%s %s\n' "${CYAN}${BOLD}" "$RESET" "$*" >&2; }
 log_ok()    { printf '%s✓%s %s\n' "$GREEN" "$RESET" "$*" >&2; }
 log_warn()  { printf '%s⚠%s %s\n' "$YELLOW" "$RESET" "$*" >&2; }
@@ -61,8 +45,8 @@ banner() {
     printf '\n%s%s%s\n  %s%s%s\n%s%s%s\n' "$DIM" "$line" "$RESET" "$BOLD" "$1" "$RESET" "$DIM" "$line" "$RESET" >&2
 }
 
-# ─── Tool detection — command -v first, then ~/.cargo/bin / ~/.local/bin /
-# ~/.bun/bin (the "just installed, PATH not refreshed" fallback). ────────────
+# command -v first, then ~/.cargo/bin / ~/.local/bin / ~/.bun/bin — the
+# "just installed, PATH not refreshed" fallback.
 resolve_tool() {
     # echoes the path to stdout, returns 1 if not found.
     local tool="$1" d
@@ -89,7 +73,6 @@ probe_version() {
     "$path" "$@" 2>&1 | head -n1 || true
 }
 
-# ─── Preflight engine — three severities, mode-driven strictness ───────────
 # Each check_* echoes a TSV line: name<TAB>status<TAB>detail<TAB>hint
 # status ∈ ok|warn|crit. run_preflight collects them.
 
@@ -243,7 +226,6 @@ check_disk_space() {
 
 check_port() {
     local port="$1"
-    # Best-effort: nc -z if available; otherwise skip with ok.
     if ! command -v nc >/dev/null 2>&1; then
         printf 'Port %s\tok\tchecked at launch (nc unavailable)\t\n' "$port"
         return
@@ -341,7 +323,7 @@ report_preflight() {
     return 0
 }
 
-# ─── Env-file management — mirrors ui/scripts/ensure-{desktop,web}-env.mjs ─
+# Mirrors ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 snapshot_env() {
     if [[ -f "$ENV_FILE" ]]; then
         PREVIOUS_ENV_EXISTS=1
@@ -374,7 +356,6 @@ write_desktop_env() {
     log_info "Wrote ui/.env (desktop mode)"
 }
 
-# ─── Process orchestration ─────────────────────────────────────────────────
 # Children run in the SCRIPT's own process group (NOT a new session via setsid).
 # This is deliberate: when the user hits Ctrl-C, the terminal sends SIGINT to
 # the foreground process group, which reaches the script AND every child in the
@@ -401,19 +382,15 @@ spawn_fg_tagged() {
 }
 
 # spawn_bg_tagged <tag> <cmd...> — background, prefixed lines, SAME process group.
-# Sets LAST_BG_PID to the new background job's PID (do NOT call via $() command
+# Sets LAST_BG_PID to the new background job's PID; do NOT call via $() command
 # substitution — that runs this function in a subshell whose exit reaps the
-# background job, so the parent shell never sees it). Callers read $LAST_BG_PID.
-# Honors SPAWN_CWD. Extra env vars must be exported by the caller before calling.
-# IMPORTANT: no setsid/start_new_session — children stay in our process group so
-# Ctrl-C reaches them. The trap on INT/TERM/EXIT guarantees teardown regardless.
+# background job, so the parent shell never sees it. Callers read $LAST_BG_PID.
+# Honors SPAWN_CWD; extra env vars must be exported by the caller first.
 LAST_BG_PID=""
 spawn_bg_tagged() {
     local tag="$1"; shift
     log_info "Starting $tag: ${BOLD}$*${RESET}"
     local sed_tag="${tag//\//\\/}"
-    # Launch in the background WITHOUT setsid. The child (and any grandchildren
-    # it forks, e.g. vite→esbuild) share our process group.
     if [[ -n "${SPAWN_CWD:-}" ]]; then
         ( cd "$SPAWN_CWD" && "$@" 2>&1 | sed -u "s/^/[${sed_tag}] /" ) >&2 &
     else
@@ -431,7 +408,6 @@ cleanup_children() {
     # before we resolve their PGID. SIGTERM first (grace), then SIGKILL.
     set +e
     local self_pgid="${EASYRUN_PGID:-}"
-    # Resolve our own PGID. Prefer the captured one; fall back to ps.
     if [[ -z "$self_pgid" ]]; then
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
@@ -477,7 +453,6 @@ wait_for_http() {
     return 1
 }
 
-# ─── Helpers shared by run modes ───────────────────────────────────────────
 ensure_bun_install() {
     # $1 = force (1) to run bun install even if node_modules exists.
     local force="${1:-0}" bun
@@ -522,7 +497,7 @@ gen_json_manifest() {
     ( cd "$REPO_ROOT" && "$bun" "$manifest_script" ) >&2 || die "JSON manifest generation failed."
 }
 
-# ─── Opt-in installer — the one exception to "never auto-install" ──────────
+# The one exception to "never auto-install".
 run_install_wasm() {
     banner "Install: WASM toolchain  (wasm32 target + wasm-pack)"
     local rustup
@@ -566,7 +541,6 @@ run_install_wasm() {
     report_preflight webapp 0 >&2 || true
 }
 
-# ─── Run modes ─────────────────────────────────────────────────────────────
 run_web() {
     # env already snapshotted by main; write web env for this run.
     local host="${ARG_HOST:-127.0.0.1}"
@@ -612,7 +586,7 @@ run_desktop() {
     ensure_bun_install 0
     write_desktop_env
     # tauri_build::build() validates resource paths exist even in dev; create an
-    # empty ui_build/ (gitignored) so the check passes. See easyrun.py for detail.
+    # empty ui_build/ (gitignored) so the check passes.
     if [[ ! -d "$REPO_ROOT/ui_build" ]]; then
         mkdir -p "$REPO_ROOT/ui_build"
         log_info "Created empty ui_build/ (Tauri dev resource check)."
@@ -749,21 +723,18 @@ detect_lan_ip() {
 wait_on_pids() {
     local pids=("$@") rc=0
     if (( ${#pids[@]} == 0 )); then return 0; fi
-    # wait -n: block until any one background job changes state. Any trapped
-    # signal interrupts it and runs the handler first. Falls back to plain
-    # `wait` on bash < 4.3.
     if wait -n 2>/dev/null; then
         rc=0
     else
         rc=$?
     fi
+
     # If we get here via a normal child exit (not a signal), report it. Signal
     # paths are handled by the trap + _on_interrupt before we ever reach here.
     log_warn "process exited (code $rc)."
     return $rc
 }
 
-# ─── Arg parsing + usage ───────────────────────────────────────────────────
 usage() {
     cat <<'EOF' >&2
 easyrun.sh — Palworld Save Pal dev/launch/build helper (macOS/Linux).
@@ -801,9 +772,6 @@ Windows users: run easyrun.ps1 instead.
 EOF
 }
 
-# Parse args into globals: ARG_MODE, ARG_CHECK, ARG_INSTALL_WASM, ARG_HOST,
-# ARG_VITE_PORT, ARG_SERVER_PORT, ARG_NO_SERVER, ARG_SKIP_CHECK, ARG_NO_INSTALL,
-# ARG_REBUILD_WASM, ARG_JSON, ARG_FORCE_CHECK_MODE.
 ARG_MODE=""; ARG_CHECK=0; ARG_INSTALL_WASM=0; ARG_HOST=""
 ARG_VITE_PORT=""; ARG_SERVER_PORT=""; ARG_NO_SERVER=0; ARG_SKIP_CHECK=0
 ARG_NO_INSTALL=0; ARG_REBUILD_WASM=0; ARG_JSON=0; ARG_FORCE_CHECK_MODE=""

@@ -1,8 +1,3 @@
-// Converts the game's 13 relic (buildup) icons to webp assets.
-//
-// Usage:
-//   bun scripts/gen-relic-icons.mjs <path-to-Exports/Pal/Content>
-//
 // Source: Pal/Texture/UI/IngameMenu/Buildup/T_icon_Buildup_Player_NN.png, NN = 00..12.
 // NN is the EPalRelicType enum value; that enum is dense 0..12 and its order matches
 // RELIC_TYPE_MAP in psp-core/src/domain/relic.rs, which is how index joins to key.

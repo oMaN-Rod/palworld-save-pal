@@ -1,9 +1,5 @@
-# Build and Run Script for PALWorld Save Pal
-
-# Navigate to the script's directory
 Set-Location -Path (Join-Path $PSScriptRoot "..")
 
-# Function to get the most appropriate IP address
 function Get-BestIPAddress {
     $ipAddresses = Get-NetIPAddress -AddressFamily IPv4 | 
     Where-Object { 
@@ -22,12 +18,10 @@ function Get-BestIPAddress {
     }
 }
 
-# Get the IP address
 $IPAddress = Get-BestIPAddress
 
 Write-Host "Using IP Address: $IPAddress"
 
-# Build and run docker compose
 docker-compose build --build-arg PUBLIC_WS_URL="${IPAddress}:5174/ws"
 docker-compose up -d
 

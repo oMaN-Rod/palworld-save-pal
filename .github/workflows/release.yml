@@ -1,9 +1,7 @@
 name: Build and Release
 
-# Builds the Rust/Tauri desktop bundles for Windows, macOS, and Linux and
-# creates a (draft) GitHub Release. Publishing the draft fires nexus-upload.yml
-# and discord.yml. Release assets are named canonically so nexus-upload.yml can
-# pattern-match them:
+# Publishing the draft release fires nexus-upload.yml and discord.yml. Release
+# assets are named canonically so nexus-upload.yml can pattern-match them:
 #   PalworldSavePal-<tag>-windows.msi              (MSI installer)
 #   PalworldSavePal-<tag>-windows-standalone.zip   (portable: exe + ui + data)
 #   PalworldSavePal-<tag>-macos.dmg                (DMG)
@@ -72,11 +70,10 @@ jobs:
         run: |
           $tag = "${{ github.event.inputs.version }}"
           New-Item -ItemType Directory -Force dist | Out-Null
-          # MSI installer (the only Windows installer we ship).
+          # The only Windows installer we ship.
           $msi = Get-ChildItem target/release/bundle/msi/*.msi | Select-Object -First 1
           Copy-Item $msi.FullName "dist/PalworldSavePal-$tag-windows.msi"
-          # Portable standalone: exe + ui_build + data in one folder, zipped;
-          # extract-and-run (keeps its DB alongside the exe).
+          # extract-and-run: keeps its DB alongside the exe.
           $staging = "dist/PalworldSavePal"
           New-Item -ItemType Directory -Force $staging | Out-Null
           Copy-Item target/release/psp.exe "$staging/psp.exe"

@@ -1,12 +1,6 @@
-// Slices the game's 8192x8192 world map textures into an XYZ tile pyramid for MapLibre.
-//
-// Usage:
-//   bun scripts/gen-map-tiles.mjs <path-to-Exports/Pal/Content>
-//
-// Source: Pal/Texture/UI/Map/T_WorldMap.png and T_TreeMap.png, from the game export
+// XYZ tile pyramid for MapLibre, sliced from the game's world map textures
 // (same export root as gen-relic-icons.mjs).
 //
-// 512px tiles, z0..z4. z4 is 16x16 = 8192px, exactly 1:1 with the source.
 // Row 0 is the north edge, matching the XYZ convention MapLibre expects.
 
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';

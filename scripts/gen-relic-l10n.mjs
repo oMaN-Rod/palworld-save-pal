@@ -1,8 +1,3 @@
-// Regenerates data/json/l10n/<lang>/relics.json from the game's own UI text tables.
-//
-// Usage:
-//   bun scripts/gen-relic-l10n.mjs <path-to-Exports/Pal/Content>
-//
 // Source per language:
 //   L10N/<lang>/Pal/DataTable/Text/DT_UI_Common_Text_Common.json
 // Rows BUILDUP_PLAYER_STATUS_NN (name) and BUILDUP_PLAYER_STATUS_DESC_NN (description),

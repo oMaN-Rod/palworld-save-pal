@@ -1,28 +1,11 @@
 # easyrun.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
 # Windows entry point (the bash sibling is easyrun.sh for macOS/Linux).
 #
-# STATUS: not 100% battle-tested on native Windows. This was cross-validated
-# via pwsh on Linux and mirrors the repo's own build-*.ps1 patterns + PalSavTools'
-# start.cmd, but it has NOT had a full run on every Windows config yet. Preflight
-# (-Check) and dev-server launch (-Web/-Landing) work; heavier flows (-Desktop
-# Tauri, -BuildDesktop) may surface Windows-specific issues (WebView2/MSVC deps
-# aren't preflight-checked). Report issues and prefer easyrun.sh where possible.
-#
 # Does NOT auto-install anything (except the opt-in -InstallWasm): on a missing
 # or wrong tool it prints the exact command to fix it and exits non-zero.
-#
-# Usage:
-#   .\easyrun.ps1 -Web               # Dev: Vite (5173) + psp-server (5174)
-#   .\easyrun.ps1 -Desktop           # Dev: Tauri native window + embedded server
-#   .\easyrun.ps1 -Webapp            # Dev: landing page + tool (VITE_TRANSPORT=worker)
-#   .\easyrun.ps1 -Landing           # Dev: landing page ONLY — no WASM, no server
-#   .\easyrun.ps1 -Docker            # Build & run the self-build Docker image
-#   .\easyrun.ps1 -Serve             # Run only the Rust psp-server
-#   .\easyrun.ps1 -BuildDesktop | -BuildWeb | -Build
-#   .\easyrun.ps1 -Check [mode] | -InstallWasm | -Json
-#
-# Defaults to -Web. Run `.\easyrun.ps1 -Help` for the full list.
-# macOS/Linux users: run easyrun.sh instead.
+# Preflight does not verify the WebView2/MSVC build tools needed by
+# -Desktop/-BuildDesktop. Defaults to -Web; run `.\easyrun.ps1 -Help` for the
+# full flag list.
 #
 # PowerShell execution policy: if blocked, use:
 #   powershell -ExecutionPolicy Bypass -File .\easyrun.ps1 [args]
@@ -42,7 +25,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-# ─── Constants — every port/path here is load-bearing in the real config ───
+# Every port/path below is load-bearing in the real config.
 $RepoRoot       = Split-Path -Parent $MyInvocation.MyCommand.Path
 $UiDir          = Join-Path $RepoRoot "ui"
 $PspDesktopDir  = Join-Path $RepoRoot "psp-desktop"
@@ -54,13 +37,11 @@ $WasmOut        = Join-Path $UiDir "src/lib/wasm/psp"
 $VitePortDefault   = 5173   # vite.config.ts server.port, strictPort:true
 $ServerPortDefault = 5174   # psp-server default + Docker EXPOSE + WS_URL host
 
-# ─── State ─────────────────────────────────────────────────────────────────
 $script:ChildJobs            = New-Object System.Collections.Generic.List[object]
 $script:PreviousEnvExists    = $false
 $script:PreviousEnvContent   = ""
 $script:RestoreEnv           = $false
 
-# ─── Logging ───────────────────────────────────────────────────────────────
 function Log-Info($m) { Write-Host "› $m" -ForegroundColor Cyan }
 function Log-Ok($m)   { Write-Host "✓ $m" -ForegroundColor Green }
 function Log-Warn($m) { Write-Host "⚠ $m" -ForegroundColor Yellow }
@@ -74,7 +55,6 @@ function Banner($t) {
     Write-Host $line -ForegroundColor DarkGray
 }
 
-# ─── Tool detection — Get-Command first, then ~/.cargo/bin etc. ───────────
 function Resolve-Tool($name) {
     $cmd = Get-Command $name -ErrorAction SilentlyContinue
     if ($cmd -and $cmd.Source) { return $cmd.Source }
@@ -99,7 +79,6 @@ function probe_version($name, [string[]]$argList) {
     } catch { return "" }
 }
 
-# ─── Preflight engine — three severities, mode-driven strictness ───────────
 function Check-Bun() {
     if (-not (Resolve-Tool "bun")) {
         return @{ Name="bun"; Status="crit"; Detail="not found on PATH";
@@ -233,7 +212,7 @@ function Check-DiskSpace($mode) {
 
 function Check-Port($port) {
     # On Windows we skip the bind probe (unreliable); the dev server reports
-    # clearly if it can't bind. Matches easyrun.py's Windows behavior.
+    # clearly if it can't bind.
     return @{ Name="Port $port"; Status="ok"; Detail="checked at launch (Windows)"; Hint="" }
 }
 
@@ -314,7 +293,7 @@ function Report-Preflight($mode, [bool]$asJson) {
     if ($nCrit -gt 0) { return 1 } else { return 0 }
 }
 
-# ─── Env-file management — mirrors ui/scripts/ensure-{desktop,web}-env.mjs ─
+# Mirrors ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 function Snapshot-Env() {
     if (Test-Path $EnvFile) {
         $script:PreviousEnvExists = $true
@@ -347,7 +326,6 @@ function Write-DesktopEnv() {
     Log-Info "Wrote ui/.env (desktop mode)"
 }
 
-# ─── Process orchestration ─────────────────────────────────────────────────
 # We let child processes inherit the console (no output redirection), so their
 # output streams naturally alongside ours. Async event handlers fire on a thread
 # with no PowerShell runspace and crash — avoiding redirection sidesteps that.
@@ -427,7 +405,6 @@ function Wait-ForHttp($url, $label, [int]$timeout = 60) {
     return $false
 }
 
-# ─── Helpers shared by run modes ───────────────────────────────────────────
 function Ensure-BunInstall([bool]$force) {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found — run .\easyrun.ps1 -Check first." }
@@ -478,7 +455,7 @@ function Gen-JsonManifest() {
     } finally { Pop-Location }
 }
 
-# ─── Opt-in installer — the one exception to "never auto-install" ──────────
+# The one exception to "never auto-install".
 function Run-InstallWasm() {
     Banner "Install: WASM toolchain  (wasm32 target + wasm-pack)"
     $rustup = Resolve-Tool "rustup"
@@ -531,7 +508,6 @@ function Run-InstallWasm() {
     Report-Preflight "webapp" $false | Out-Null
 }
 
-# ─── Run modes ─────────────────────────────────────────────────────────────
 function Run-Web($opts) {
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
     $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
@@ -720,7 +696,6 @@ function Wait-OnProcs($primary, $secondary) {
     }
 }
 
-# ─── Usage ─────────────────────────────────────────────────────────────────
 function Show-Usage() {
     @'
 easyrun.ps1 — Palworld Save Pal dev/launch/build helper (Windows).
@@ -759,7 +734,6 @@ common parameter name.
 '@ | Write-Host
 }
 
-# ─── Main dispatch ─────────────────────────────────────────────────────────
 if ($Help) { Show-Usage; exit 0 }
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }

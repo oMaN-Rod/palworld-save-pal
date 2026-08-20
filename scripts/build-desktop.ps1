@@ -1,13 +1,8 @@
-# Builds the Windows desktop artifacts into dist/:
-#   PalworldSavePal-<version>-windows.msi              MSI installer
-#   PalworldSavePal-<version>-windows-standalone.zip   portable (psp.exe + ui_build + data)
-#
-# The portable build runs extract-and-run: launch psp.exe from the
-# extracted folder — it serves the bundled ui_build/ and keeps its psp-rs.db
-# alongside the exe. Requires the Microsoft Edge WebView2 runtime (present on
-# up-to-date Windows 10/11).
-#
 # Usage: .\scripts\build-desktop.ps1 [-SkipUi]   (-SkipUi if ui_build is current)
+#
+# The portable zip runs as extract-and-run: psp.exe serves the bundled
+# ui_build/ and keeps its psp-rs.db alongside the exe. Requires the
+# Microsoft Edge WebView2 runtime (present on up-to-date Windows 10/11).
 param([switch]$SkipUi)
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
@@ -35,11 +30,9 @@ finally { Pop-Location }
 $dist = Join-Path $repoRoot "dist"
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
 
-# MSI installer.
 $msi = Get-ChildItem "target/release/bundle/msi/*.msi" | Select-Object -First 1
 Copy-Item $msi.FullName (Join-Path $dist "PalworldSavePal-$version-windows.msi")
 
-# Portable standalone: exe + ui_build + data in one folder, zipped.
 $staging = Join-Path $dist "PalworldSavePal"
 if (Test-Path $staging) { Remove-Item -Recurse -Force $staging }
 New-Item -ItemType Directory -Force -Path $staging | Out-Null

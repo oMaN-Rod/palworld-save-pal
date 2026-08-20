@@ -1,5 +1,3 @@
-# Bumps the project version.
-#
 # Single source of truth: the [workspace.package] version in Cargo.toml. Every
 # crate inherits it (version.workspace = true), the get_version wire reply is
 # CARGO_PKG_VERSION, and the Tauri bundle version derives from Cargo (no version

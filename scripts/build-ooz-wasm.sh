@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Build ui/vendor/ooz/ooz.mjs + ooz.wasm from oMaN-Rod/ooz via the emscripten/emsdk
-# docker image (emcc is not installed on the host).
+# Built via the emscripten/emsdk docker image since emcc is not installed on the host.
 #
 # Source list mirrors ooz-rs/build.rs (the authoritative compile list for the
 # libooz decompress+compress library). OOZ_BUILD_DLL=1 excludes the CLI main()

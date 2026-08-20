@@ -64,7 +64,6 @@ jobs:
           asset="${{ steps.meta.outputs.asset }}"
           case "$asset" in
             *.zip)
-              # Already a zip, upload as-is
               echo "upload_file=$asset" >> "$GITHUB_OUTPUT"
               ;;
             *)
