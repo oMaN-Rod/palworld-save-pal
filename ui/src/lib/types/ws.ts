@@ -166,7 +166,23 @@ export enum MessageType {
 	BREEDING_DIRECT_CHILD = 'breeding_direct_child',
 	BREEDING_DIRECT_PARTNERS = 'breeding_direct_partners',
 	BREEDING_DIRECT_PARENTS = 'breeding_direct_parents',
-	BREEDING_CHAIN = 'breeding_chain'
+	BREEDING_CHAIN = 'breeding_chain',
+
+	// Plugins
+	LIST_PLUGINS = 'list_plugins',
+	GET_PLUGIN = 'get_plugin',
+	INSTALL_PLUGIN = 'install_plugin',
+	UNINSTALL_PLUGIN = 'uninstall_plugin',
+	SET_PLUGIN_ENABLED = 'set_plugin_enabled',
+	RUN_PLUGIN_COMMAND = 'run_plugin_command',
+	CANCEL_PLUGIN_RUN = 'cancel_plugin_run',
+	PLUGIN_RUN_RESULT = 'plugin_run_result',
+	CHECK_PLUGIN_SYNTAX = 'check_plugin_syntax',
+	CHECK_PLUGIN_MANIFEST = 'check_plugin_manifest',
+	GET_API_DEFINITION = 'get_api_definition',
+	CREATE_PLUGIN = 'create_plugin',
+	SAVE_PLUGIN_SOURCE = 'save_plugin_source',
+	RUN_PLUGIN_DRAFT = 'run_plugin_draft'
 }
 
 interface UpdateSaveFileData {
@@ -177,4 +193,55 @@ interface UpdateSaveFileData {
 export interface Message {
 	type: MessageType;
 	data?: any | UpdateSaveFileData;
+}
+
+export type PluginParamType = 'int' | 'float' | 'string' | 'bool' | 'enum';
+
+export interface PluginParam {
+	id: string;
+	type: PluginParamType;
+	label: string;
+	description: string | null;
+	default: unknown;
+	min: number | null;
+	max: number | null;
+	options: string[];
+}
+
+export interface PluginCommand {
+	id: string;
+	title: string;
+	description: string | null;
+	destructive: boolean;
+	params: PluginParam[];
+}
+
+export interface PluginSummary {
+	id: string;
+	name: string;
+	version: string;
+	author: string | null;
+	enabled: boolean;
+	bundled: boolean;
+	commands: PluginCommand[];
+	error?: string;
+}
+
+export type PluginRunStatus = 'ok' | 'timeout' | 'cancelled' | 'memory_exceeded' | 'error';
+
+export type PluginLogLevel = 'info' | 'warn' | 'error';
+
+export interface PluginLogLine {
+	level: PluginLogLevel;
+	message: string;
+}
+
+export interface PluginRunResult {
+	run_id: string;
+	status: PluginRunStatus;
+	message: string | null;
+	summary: string | null;
+	counts: Record<string, number>;
+	result: unknown;
+	log: PluginLogLine[];
 }

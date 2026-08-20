@@ -6,6 +6,7 @@ import { lazyLoadHandlers } from './lazyLoadHandler';
 import { palHandlers } from './palHandler';
 import { playerHandlers } from './playerHandler';
 import { presetHandlers } from './presetHandler';
+import { pluginHandlers } from './pluginHandler';
 import { saveFileHandlers } from './saveFileHandler';
 import { upsHandlers } from './upsHandler';
 import { serverHandlers } from './serverHandler';
@@ -18,6 +19,7 @@ export const handlers = [
 	...playerHandlers,
 	...guildHandlers,
 	...presetHandlers,
+	...pluginHandlers,
 	...gpsHandlers,
 	...upsHandlers,
 	...lazyLoadHandlers,

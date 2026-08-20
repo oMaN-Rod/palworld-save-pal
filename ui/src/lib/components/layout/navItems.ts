@@ -20,6 +20,7 @@ import LayoutGrid from '@lucide/svelte/icons/layout-grid';
 import Map from '@lucide/svelte/icons/map';
 import NotebookPen from '@lucide/svelte/icons/notebook-pen';
 import Pencil from '@lucide/svelte/icons/pencil';
+import Puzzle from '@lucide/svelte/icons/puzzle';
 import Save from '@lucide/svelte/icons/save';
 import Server from '@lucide/svelte/icons/server';
 import Settings from '@lucide/svelte/icons/settings';
@@ -176,6 +177,14 @@ export const navItems: NavItem[] = [
 		icon: () => NotebookPen,
 		label: () => m.editor(),
 		href: '/editor'
+	},
+	{
+		id: 'plugins',
+		section: 'tiles',
+		group: 'tools',
+		icon: () => Puzzle,
+		label: () => 'Plugins',
+		href: '/plugins'
 	},
 	{
 		id: 'debug',

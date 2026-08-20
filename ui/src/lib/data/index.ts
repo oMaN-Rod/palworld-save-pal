@@ -14,6 +14,7 @@ import { missionsData } from './missions.svelte';
 import { palsData } from './pals.svelte';
 import { passiveSkillsData } from './passiveSkills.svelte';
 import { presetsData } from './presets.svelte';
+import { pluginsData, PLUGIN_WALL_CLOCK_LIMIT_SECONDS } from './plugins.svelte';
 import { relicData } from './relic.svelte';
 import { relics } from './relics.svelte';
 import { technologiesData } from './technologies.svelte';
@@ -37,6 +38,8 @@ export {
 	palsData,
 	passiveSkillsData,
 	presetsData,
+	pluginsData,
+	PLUGIN_WALL_CLOCK_LIMIT_SECONDS,
 	relicData,
 	relics,
 	technologiesData,

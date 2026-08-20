@@ -5,17 +5,25 @@
 	let {
 		checked = $bindable(false),
 		label = '',
+		disabled = false,
 		class: className = '',
 		onchange = () => {}
 	} = $props<{
 		checked?: boolean;
 		label?: string;
+		disabled?: boolean;
 		class?: string;
 		onchange?: (event: Event) => void;
 	}>();
 </script>
 
-<label class={cn('flex cursor-pointer items-center space-x-2', className)}>
+<label
+	class={cn(
+		'flex items-center space-x-2',
+		disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+		className
+	)}
+>
 	<div
 		class={cn(
 			'flex h-5 w-5 items-center justify-center rounded-sm border',
@@ -29,5 +37,12 @@
 	{#if label}
 		<span>{label}</span>
 	{/if}
-	<input type="checkbox" aria-hidden="true" style="display: none;" bind:checked {onchange} />
+	<input
+		type="checkbox"
+		aria-hidden="true"
+		style="display: none;"
+		bind:checked
+		{disabled}
+		{onchange}
+	/>
 </label>
