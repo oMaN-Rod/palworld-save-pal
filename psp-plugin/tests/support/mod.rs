@@ -1,0 +1,305 @@
+#![allow(dead_code)]
+
+use std::collections::BTreeMap;
+use std::path::PathBuf;
+
+use psp_core::gamedata::GameData;
+use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
+use psp_plugin::context::{LogLine, RunContext};
+use psp_plugin::host;
+use psp_plugin::manifest::{Capability, Manifest, Origin};
+use psp_plugin::runtime::{self, RunOutcome, RunRequest, RunServices};
+use psp_plugin::sandbox::{Cancel, Limits, Sandbox};
+use psp_plugin::status::RunStatus;
+
+fn repo_root() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .expect("psp-plugin has a parent directory")
+        .to_path_buf()
+}
+
+fn load_corpus() -> SaveSession {
+    let dir = repo_root().join("tests/fixtures/saves/v1_relics");
+    let level = std::fs::read(dir.join("Level.sav")).expect("the corpus fixture is checked in");
+    let meta = std::fs::read(dir.join("LevelMeta.sav")).ok();
+
+    let mut player_file_refs = BTreeMap::new();
+    if let Ok(entries) = std::fs::read_dir(dir.join("Players")) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.extension().and_then(|e| e.to_str()) != Some("sav") {
+                continue;
+            }
+            let stem = path.file_stem().and_then(|s| s.to_str()).unwrap_or_default();
+            let (stem, is_dps) = match stem.strip_suffix("_dps") {
+                Some(base) => (base, true),
+                None => (stem, false),
+            };
+            let Ok(uid) = uuid::Uuid::parse_str(stem) else { continue };
+            let slot = player_file_refs
+                .entry(uid)
+                .or_insert(PlayerFileData::Paths { sav: None, dps: None });
+            if let PlayerFileData::Paths { sav, dps } = slot {
+                if is_dps { *dps = Some(path) } else { *sav = Some(path) }
+            }
+        }
+    }
+
+    SaveSession::load(
+        SaveKind::Steam { level_path: dir.join("Level.sav") },
+        dir.to_string_lossy().into_owned(),
+        "steam",
+        &level,
+        meta.as_deref(),
+        None,
+        player_file_refs,
+        None,
+        false,
+        &psp_core::progress::null_progress(),
+    )
+    .expect("the corpus fixture must load; a failure here is a repo bug")
+}
+
+fn load_game_data() -> GameData {
+    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+}
+
+type ConfirmFn = Box<dyn Fn(&str) -> bool>;
+
+pub struct Harness {
+    session: SaveSession,
+    game_data: GameData,
+    granted: Vec<Capability>,
+    dry_run: bool,
+    limits: Limits,
+    storage: BTreeMap<String, String>,
+    log: Vec<LogLine>,
+    counts: BTreeMap<String, i64>,
+    storage_writes: Vec<(String, String)>,
+    confirm: Option<ConfirmFn>,
+    progress: Option<psp_core::progress::ProgressSink>,
+}
+
+fn build(granted: &[Capability], dry_run: bool, limits: Limits) -> Harness {
+    Harness {
+        session: load_corpus(),
+        game_data: load_game_data(),
+        granted: granted.to_vec(),
+        dry_run,
+        limits,
+        storage: BTreeMap::new(),
+        log: Vec::new(),
+        counts: BTreeMap::new(),
+        storage_writes: Vec::new(),
+        confirm: None,
+        progress: None,
+    }
+}
+
+pub fn harness(granted: &[Capability]) -> Harness {
+    build(granted, false, Limits::default())
+}
+
+pub fn harness_dry(granted: &[Capability]) -> Harness {
+    build(granted, true, Limits::default())
+}
+
+pub fn harness_with_timeout(granted: &[Capability], wall_clock_ms: i64) -> Harness {
+    build(granted, false, Limits { wall_clock_ms, ..Limits::default() })
+}
+
+pub fn harness_with_memory(granted: &[Capability], memory_bytes: usize) -> Harness {
+    build(granted, false, Limits { memory_bytes, ..Limits::default() })
+}
+
+impl Harness {
+    pub fn with_confirm(mut self, confirm: impl Fn(&str) -> bool + 'static) -> Self {
+        self.confirm = Some(Box::new(confirm));
+        self
+    }
+
+    pub fn with_progress(mut self, sink: psp_core::progress::ProgressSink) -> Self {
+        self.progress = Some(sink);
+        self
+    }
+
+    pub fn run(&mut self, source: &str) -> (RunStatus, Option<String>) {
+        let mut sandbox = Sandbox::new(self.limits, Cancel::new()).expect("a sandbox must open");
+        let mut ctx = RunContext {
+            session: &mut self.session,
+            game_data: &self.game_data,
+            granted: self.granted.clone(),
+            dry_run: self.dry_run,
+            mutation_epoch: 0,
+            log: std::mem::take(&mut self.log),
+            counts: std::mem::take(&mut self.counts),
+            storage: std::mem::take(&mut self.storage),
+            storage_writes: std::mem::take(&mut self.storage_writes),
+            progress: self.progress.as_ref(),
+            confirm: self.confirm.as_deref(),
+            pals: None,
+            raw_walk: None,
+            delete_where: None,
+            clear_slots: None,
+            container: None,
+            api_version: psp_plugin::manifest::SUPPORTED_API_VERSION,
+            plugin_id: "test.harness".to_string(),
+            command_id: "harness".to_string(),
+            now: 0,
+            args: Vec::new(),
+        };
+
+        let status = unsafe {
+            host::set_context(sandbox.as_ptr(), (&mut ctx) as *mut RunContext<'_> as *mut _);
+            let status = match host::install_globals(sandbox.as_ptr()) {
+                Ok(()) => sandbox.eval("=harness", source),
+                Err(err) => RunStatus::Error(err.into_message()),
+            };
+            host::clear_context(sandbox.as_ptr());
+            status
+        };
+
+        self.log = std::mem::take(&mut ctx.log);
+        self.counts = std::mem::take(&mut ctx.counts);
+        self.storage = std::mem::take(&mut ctx.storage);
+        self.storage_writes = std::mem::take(&mut ctx.storage_writes);
+        drop(ctx);
+
+        (status, sandbox.take_return_string())
+    }
+
+    pub fn a_player_uid(&self) -> uuid::Uuid {
+        *self
+            .session
+            .player_summary_order
+            .first()
+            .expect("the corpus fixture has players")
+    }
+
+    pub fn session(&self) -> &SaveSession { &self.session }
+    pub fn session_mut(&mut self) -> &mut SaveSession { &mut self.session }
+    pub fn counts(&self) -> &BTreeMap<String, i64> { &self.counts }
+    pub fn log(&self) -> &[LogLine] { &self.log }
+    pub fn storage_writes(&self) -> &[(String, String)] { &self.storage_writes }
+    pub fn seed_storage(&mut self, key: &str, value: &str) {
+        self.storage.insert(key.to_string(), value.to_string());
+    }
+}
+
+fn run_with_limits(
+    manifest_json: &str,
+    source: &str,
+    command_id: &str,
+    args: serde_json::Value,
+    dry_run: bool,
+    limits: Limits,
+) -> RunOutcome {
+    let manifest = Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+    let mut session = load_corpus();
+    let game_data = load_game_data();
+    let mut sources = BTreeMap::new();
+    sources.insert(manifest.entry.clone(), source.to_string());
+    let storage = BTreeMap::new();
+    let granted = manifest.capabilities.clone();
+
+    let request = RunRequest {
+        manifest: &manifest,
+        sources: &sources,
+        command_id,
+        args: &args,
+        dry_run,
+        granted: &granted,
+    };
+    let services = RunServices {
+        session: &mut session,
+        game_data: &game_data,
+        progress: None,
+        storage: &storage,
+        confirm: None,
+        limits,
+        cancel: Cancel::new(),
+    };
+
+    runtime::run_command(request, services)
+}
+
+pub fn run(
+    manifest_json: &str,
+    source: &str,
+    command_id: &str,
+    args: serde_json::Value,
+    dry_run: bool,
+) -> RunOutcome {
+    run_with_limits(manifest_json, source, command_id, args, dry_run, Limits::default())
+}
+
+pub fn run_with_timeout(
+    manifest_json: &str,
+    source: &str,
+    command_id: &str,
+    args: serde_json::Value,
+    wall_clock_ms: i64,
+) -> RunOutcome {
+    run_with_limits(
+        manifest_json,
+        source,
+        command_id,
+        args,
+        false,
+        Limits { wall_clock_ms, ..Limits::default() },
+    )
+}
+
+pub fn run_with_memory(
+    manifest_json: &str,
+    source: &str,
+    command_id: &str,
+    args: serde_json::Value,
+    memory_bytes: usize,
+) -> RunOutcome {
+    run_with_limits(
+        manifest_json,
+        source,
+        command_id,
+        args,
+        false,
+        Limits { memory_bytes, ..Limits::default() },
+    )
+}
+
+/// For proving `run_command` intersects `granted` with the manifest's own capabilities rather than trusting the caller's grant alone.
+pub fn run_with_granted(
+    manifest_json: &str,
+    source: &str,
+    command_id: &str,
+    args: serde_json::Value,
+    granted: &[Capability],
+) -> RunOutcome {
+    let manifest = Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+    let mut session = load_corpus();
+    let game_data = load_game_data();
+    let mut sources = BTreeMap::new();
+    sources.insert(manifest.entry.clone(), source.to_string());
+    let storage = BTreeMap::new();
+
+    let request = RunRequest {
+        manifest: &manifest,
+        sources: &sources,
+        command_id,
+        args: &args,
+        dry_run: false,
+        granted,
+    };
+    let services = RunServices {
+        session: &mut session,
+        game_data: &game_data,
+        progress: None,
+        storage: &storage,
+        confirm: None,
+        limits: Limits::default(),
+        cancel: Cancel::new(),
+    };
+
+    runtime::run_command(request, services)
+}
