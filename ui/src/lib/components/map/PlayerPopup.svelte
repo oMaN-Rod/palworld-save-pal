@@ -49,7 +49,6 @@
 
 <Card class="min-w-70 shadow-lg">
 	<div class="pointer-events-auto space-y-3">
-		<!-- Header -->
 		<div class="flex items-start justify-between gap-3 border-b pb-3">
 			<div class="min-w-0 flex-1">
 				<h3 class="text-foreground truncate text-lg font-bold">{player.nickname}</h3>
@@ -68,7 +67,6 @@
 			</button>
 		</div>
 
-		<!-- Guild Info -->
 		{#if guildName}
 			<div class="border-b pb-3">
 				<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
@@ -81,7 +79,6 @@
 			</div>
 		{/if}
 
-		<!-- Stats Grid -->
 		<div class="grid grid-cols-2 gap-3">
 			<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
 				<Trophy class="text-primary h-4 w-4 shrink-0" />
@@ -115,7 +112,6 @@
 			{/if}
 		</div>
 
-		<!-- Coordinates -->
 		<div class="space-y-2 border-t pt-2">
 			<div class="flex items-start gap-2">
 				<Globe class="text-primary mt-0.5 h-4 w-4 shrink-0" />

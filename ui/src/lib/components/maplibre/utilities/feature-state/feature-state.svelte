@@ -37,7 +37,6 @@
 				prevTarget.sourceLayer !== stableSourceLayer ||
 				prevTarget.id !== currentId);
 
-		// Clear previous state by setting all keys to null/false (preserves other components' state)
 		if (targetChanged) {
 			try {
 				const resetState: Record<string, unknown> = {};

@@ -26,8 +26,6 @@ export function areaFastTravelGuids(
 	);
 }
 
-/** Undefined when no player is selected, so a caller can tell "none unlocked"
- *  from "nobody to ask". */
 export function unlockedInArea(
 	guids: Set<string>,
 	unlocked: string[] | undefined
@@ -55,8 +53,6 @@ export function relicTypeStats(
 	return stats;
 }
 
-/** Game order (relic_data.json), restricted to the types present here, with
- *  anything the order does not know about appended. */
 export function orderedRelicTypes(stats: Record<string, unknown>, gameOrder: string[]): string[] {
 	const present = Object.keys(stats);
 	const ordered = gameOrder.filter((type) => present.includes(type));

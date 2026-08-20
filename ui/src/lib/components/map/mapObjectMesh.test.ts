@@ -17,9 +17,6 @@ const MANIFEST = {
 			},
 			{
 				mesh: 'SM_Jewel_b2',
-				// Offset on purpose: 10 of the 15 real baked parts carry a non-zero
-				// loc[0]/loc[1], and a part on the actor's vertical axis cannot tell
-				// correct horizontal routing from the pixel chain.
 				loc: [30, -20, 120] as [number, number, number],
 				rot: [0, 45, 0] as [number, number, number],
 				scale: [1, 1, 1] as [number, number, number]
@@ -56,7 +53,6 @@ function positionOf(m: THREE.Matrix4): THREE.Vector3 {
 	return new THREE.Vector3().setFromMatrixPosition(m);
 }
 
-// The mesh's own +X, carried into mercator space by the matrix's 3x3 block.
 function forwardOf(m: THREE.Matrix4): THREE.Vector3 {
 	return new THREE.Vector3(1, 0, 0).applyMatrix4(m).sub(positionOf(m)).normalize();
 }
@@ -82,8 +78,6 @@ describe('meshNames', () => {
 	});
 
 	it('counts a mesh shared by two classes once', () => {
-		// The real bake shares one pedestal across all twelve relics, so the preload
-		// list built from this must not repeat it.
 		expect(meshNames(MANIFEST).filter((n) => n === 'SM_JewelBase_a1')).toHaveLength(1);
 	});
 });
@@ -110,13 +104,9 @@ describe('mapObjectInstanceMatrix', () => {
 	it('scales with cmToMerc', () => {
 		const small = mapObjectInstanceMatrix(BASE, 0, 0, 0, 'MainMap', 1e-9);
 		const large = mapObjectInstanceMatrix(BASE, 0, 0, 0, 'MainMap', 2e-9);
-		// Magnitude, not signed determinant: the mercator frame is left-handed, so
-		// MESH_FLIP's determinant is -1 and every instance matrix here is negative.
 		expect(Math.abs(large.determinant())).toBeGreaterThan(Math.abs(small.determinant()));
 	});
 
-	// Pins absolute size, not just direction of change: centimetre geometry and a
-	// matrix assuming metres differ by 100x, which still reads as a statue.
 	it('scales by exactly the part scale times cmToMerc', () => {
 		const cmToMerc = 3e-9;
 		const scale = new THREE.Vector3().setFromMatrixScale(
@@ -134,15 +124,10 @@ describe('mapObjectInstanceMatrix', () => {
 		expect(scale.z).toBeCloseTo(2 * cmToMerc, 20);
 	});
 
-	// Part offsets are UE centimetres in the actor's frame; the same cmToMerc that
-	// scales the geometry must scale them, or composite actors come apart.
 	it('offsets a part by its local centimetres through cmToMerc', () => {
 		const cmToMerc = 1e-9;
 		const base = positionOf(mapObjectInstanceMatrix(BASE, 0, 0, 0, 'MainMap', cmToMerc));
 		const jewel = positionOf(mapObjectInstanceMatrix(JEWEL, 0, 0, 0, 'MainMap', cmToMerc));
-		// The horizontal axes carry the ~0.5-magnitude anchor, so differencing them
-		// leaves ~1e-16 of noise; only Z is anchor-free at worldZ 0. The offsets are
-		// 1e-8 and the error guarded against is ~700x, so this costs nothing.
 		expect(jewel.x - base.x).toBeCloseTo(-20 * cmToMerc, 14);
 		expect(jewel.y - base.y).toBeCloseTo(-30 * cmToMerc, 14);
 		expect(jewel.z - base.z).toBeCloseTo(120 * cmToMerc, 20);
@@ -158,7 +143,6 @@ describe('mapObjectInstanceMatrix', () => {
 		const origin = at([0, 0, 0]);
 		const alongUeX = at([100, 0, 0]).sub(origin);
 		const alongUeY = at([0, 100, 0]).sub(origin);
-		// Precision 14, not exact equality: see the anchor-cancellation note above.
 		expect(alongUeX.x).toBeCloseTo(0, 14);
 		expect(alongUeX.y).toBeCloseTo(-100 * cmToMerc, 14);
 		expect(alongUeX.z).toBeCloseTo(0, 20);
@@ -195,9 +179,6 @@ describe('mapObjectInstanceMatrix', () => {
 		expect(forwardOf(mapObjectInstanceMatrix(yawed, 0, 0, 0, 'MainMap', 1e-9)).z).toBeCloseTo(0, 9);
 	});
 
-	// A map object is a structure whose actor yaw is zero, so the whole placement
-	// chain must come out identical to the structure mesh path, not merely
-	// resemble it.
 	it('matches the structure mesh chain for a yaw-zero actor', () => {
 		const s = {
 			instance_id: 'x',

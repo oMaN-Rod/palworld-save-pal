@@ -1,6 +1,4 @@
-// Guards the shipped bake, not the placement arithmetic: a failure here means the
-// manifest changed. Imported from the tracked data/json source rather than
-// ui/static, which .gitignore treats as a generated copy.
+// Guards the shipped bake, not the placement arithmetic: a failure here means the manifest changed.
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -56,11 +54,6 @@ describe('the baked manifest', () => {
 		expect(MANIFEST['BP_LevelObject_UnlockMapPoint_C'].cullDistanceCm).toBe(100000);
 	});
 
-	// partLocalMatrix does convert pitch and roll, but that path is unvalidated:
-	// carrying a UE rotation across the frame change is not the plain y/z swap it
-	// looks like (the w sign flips too), and the discrepancy cancels only for yaw.
-	// Pitch and roll are pinned one axis at a time but never against a UE ground
-	// truth, so a bake that starts emitting them must fail here and be re-derived.
 	it('rotates about yaw only', () => {
 		for (const [actorClass, entry] of Object.entries(MANIFEST)) {
 			for (const part of entry.parts) {
@@ -74,8 +67,6 @@ describe('the baked manifest', () => {
 		}
 	});
 
-	// Placement multiplies these straight into a Matrix4, so a null or short tuple
-	// from a future bake would produce NaN elements rather than throw.
 	it('gives every part a finite 3-tuple loc, rot and scale', () => {
 		for (const [actorClass, entry] of Object.entries(MANIFEST)) {
 			for (const part of entry.parts) {

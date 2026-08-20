@@ -137,27 +137,22 @@
 	let container: HTMLDivElement;
 	let syncing = false;
 
-	// Resolve effective theme
 	$effect(() => {
 		ctx.theme = ctx.resolveTheme(theme ?? 'auto');
 	});
 
-	// Listen for theme changes when theme is 'auto'
 	$effect(() => {
 		if (theme !== 'auto' || typeof window === 'undefined') return;
 
-		// 1. Watch prefers-color-scheme media query
 		const mq = window.matchMedia('(prefers-color-scheme: dark)');
 		const mqHandler = (e: MediaQueryListEvent) => {
-			// Only use media query if .dark class isn't controlling things
+			// Only use the media query if the .dark class isn't controlling things.
 			if (!document.documentElement.classList.contains('dark')) {
 				ctx.theme = e.matches ? 'dark' : 'light';
 			}
 		};
 		mq.addEventListener('change', mqHandler);
 
-		// 2. Watch .dark class on <html> (Tailwind / mode-watcher convention)
-		//    When this fires, .dark class is authoritative — no media query fallback
 		const observer = new MutationObserver(() => {
 			ctx.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 		});
@@ -172,7 +167,6 @@
 		};
 	});
 
-	// All event names to forward
 	const EVENT_NAMES: (keyof MapEventType)[] = [
 		'error',
 		'idle',
@@ -225,7 +219,6 @@
 		'terrain'
 	];
 
-	// Collect event props into a lookup for registration
 	function getEventHandlers(): Partial<Record<keyof MapEventType, (ev: any) => void>> {
 		return {
 			error: onerror as any,
@@ -280,7 +273,6 @@
 		};
 	}
 
-	// Create the map instance (only depends on `container`)
 	$effect(() => {
 		if (!container) return;
 
@@ -351,13 +343,12 @@
 		map = mapInstance;
 
 		mapInstance.on('load', (e) => {
-			// Projection must be set after the style loads
+			// Projection must be set after the style loads.
 			const proj = untrack(() => projection);
 			if (proj !== 'mercator') {
 				mapInstance.setProjection({ type: proj });
 			}
 
-			// Apply accessor properties
 			const initRepaint = untrack(() => repaint);
 			const initShowCollisionBoxes = untrack(() => showCollisionBoxes);
 			const initShowOverdrawInspector = untrack(() => showOverdrawInspector);
@@ -375,7 +366,6 @@
 			onload?.(e);
 		});
 
-		// Bidirectional sync: map -> props
 		mapInstance.on('move', () => {
 			syncFromMap();
 		});
@@ -384,12 +374,11 @@
 			syncFromMap();
 		});
 
-		// Register all event handlers (except 'load' which is handled above)
 		const handlers = untrack(() => getEventHandlers());
 		const cleanups: Array<() => void> = [];
 
 		for (const name of EVENT_NAMES) {
-			if (name === 'load') continue; // handled above
+			if (name === 'load') continue;
 			const handler = handlers[name];
 			if (handler) {
 				mapInstance.on(name as any, handler as any);
@@ -404,7 +393,6 @@
 		};
 	});
 
-	// Bidirectional sync: props -> map
 	$effect(() => {
 		if (!ctx.map || syncing) return;
 		const m = ctx.map;
@@ -436,7 +424,6 @@
 		}
 	});
 
-	// Reactive accessor properties
 	$effect(() => {
 		if (!ctx.map) return;
 		if (repaint != null) ctx.map.repaint = repaint;
@@ -462,7 +449,6 @@
 		if (showTileBoundaries != null) ctx.map.showTileBoundaries = showTileBoundaries;
 	});
 
-	// Style changes (after initial creation)
 	let prevStyle: string | StyleSpecification | undefined;
 	$effect(() => {
 		const newStyle = applyTransform(style);
@@ -518,7 +504,6 @@
 </div>
 
 <style>
-	/* ── Theme CSS custom properties ── */
 	div[data-svlibre-theme='light'] {
 		--svlibre-ctrl-bg: #fff;
 		--svlibre-ctrl-bg-hover: rgba(0, 0, 0, 0.05);
@@ -538,8 +523,6 @@
 		--svlibre-tooltip-bg: rgba(30, 30, 30, 0.9);
 		--svlibre-tooltip-color: #e5e7eb;
 	}
-
-	/* ── Dark mode overrides for native MapLibre controls ── */
 
 	div[data-svlibre-theme='dark'] :global(.maplibregl-ctrl-group) {
 		background: var(--svlibre-ctrl-bg);
@@ -573,7 +556,6 @@
 		background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2229%22%20height%3D%2229%22%20fill%3D%22white%22%20viewBox%3D%220%200%2029%2029%22%3E%3Cpath%20d%3D%22m10.5%2014%204-8%204%208z%22/%3E%3Cpath%20fill%3D%22%23ff0000%22%20d%3D%22m10.5%2016%204%208%204-8z%22/%3E%3C/svg%3E');
 	}
 
-	/* Scale control */
 	div[data-svlibre-theme='dark'] :global(.maplibregl-ctrl-scale) {
 		background-color: var(--svlibre-ctrl-bg);
 		color: var(--svlibre-ctrl-color);
@@ -581,7 +563,6 @@
 		box-shadow: var(--svlibre-ctrl-shadow);
 	}
 
-	/* Attribution control */
 	div[data-svlibre-theme='dark'] :global(.maplibregl-ctrl-attrib) {
 		background-color: var(--svlibre-ctrl-bg);
 		color: var(--svlibre-ctrl-color);

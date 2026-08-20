@@ -67,9 +67,6 @@ function coordinate(value: unknown): number | null {
 	return typeof value === 'number' && Number.isFinite(value) ? value : null;
 }
 
-/** Where a point draws on `area`, or null if it draws nowhere. The single test
- *  for "does this entry become a marker", so the panel count and the map cannot
- *  disagree about it. */
 function placement(point: MapLayerPoint, area: MapArea): { x: number; y: number } | null {
 	const x = coordinate(point.entry?.x);
 	const y = coordinate(point.entry?.y);
@@ -77,12 +74,6 @@ function placement(point: MapLayerPoint, area: MapArea): { x: number; y: number 
 	return mapOf(x, y) === area ? { x, y } : null;
 }
 
-/**
- * Markers this layer contributes to `area`. The panel shows this beside the
- * layer name, so it has to be what the map draws rather than the artifact's row
- * count: skill_fruits carries 188 rows of which 141 are positionless location
- * components, and the rest split across two maps.
- */
 export function mapLayerMarkerCount(
 	_id: MapLayerId,
 	selection: MapLayerSelection | undefined,
@@ -94,13 +85,6 @@ export function mapLayerMarkerCount(
 	return count;
 }
 
-/**
- * `localized_name` is folded in only where an l10n table exists, so it is
- * present on towers and absent on notes, camps and eggs_spawners. A keyed
- * artifact falls back to its object key, which carries meaning (`Day-01`, a
- * boss battle name); an array artifact's key is a GUID or UAID blob, so it
- * falls back to the layer's own label instead.
- */
 export function mapLayerDisplayName(
 	point: MapLayerPoint,
 	shape: MapLayerShape,
@@ -111,12 +95,8 @@ export function mapLayerDisplayName(
 	return shape === 'keyed' ? point.key : mapLayerLabel(id);
 }
 
-/**
- * Markers for one layer, dropping anything without a usable position. These
- * artifacts are hand-maintained extracts and carry null or missing coordinates;
- * placing those would put a marker at the map origin or feed MapLibre a NaN,
- * which it drops silently rather than reporting.
- */
+// Drops anything without a usable position: these artifacts carry null or missing
+// coordinates, and feeding MapLibre a NaN gets dropped silently rather than reported.
 export function buildMapLayerFC(
 	id: MapLayerId,
 	selection: MapLayerSelection | undefined,

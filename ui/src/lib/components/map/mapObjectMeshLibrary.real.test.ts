@@ -12,13 +12,9 @@ import { meshNames, type MapObjectManifest } from './mapObjectMesh';
 
 const MANIFEST = manifestJson as unknown as MapObjectManifest;
 const MODELS_DIR = resolve(__dirname, '../../../../static/models/mapobjects');
-// FileLoader's `new Request(url)` throws on a bare "/..." path outside a browser;
-// an absolute dir sidesteps that without changing behaviour.
 const DIR = 'http://mapobjects.test/models/mapobjects';
 
 const NAMES = meshNames(MANIFEST);
-// Ship two primitives/materials each -- the case a single shared material would
-// render wrong for one half of the mesh.
 const MULTI_MATERIAL_NAMES = ['SM_FastTravelStatueVariant_185d80', 'SM_JewelBase_496ae3'];
 
 function samplePath(name: string): string {
@@ -53,8 +49,6 @@ class FakeImageElement {
 }
 
 async function loadRealMeshes(names: string[]) {
-	// three's FileLoader reports progress via a browser-only ProgressEvent; a
-	// minimal stand-in is enough since only the final outcome is read here.
 	(global as { ProgressEvent?: unknown }).ProgressEvent = class {
 		constructor(
 			public type: string,
@@ -62,8 +56,6 @@ async function loadRealMeshes(names: string[]) {
 		) {}
 	};
 
-	// GLTFParser.loadImageSource reads `self.URL` unconditionally, and Node has no
-	// `self`. Node's own URL supports createObjectURL, so aliasing suffices.
 	(global as { self?: unknown }).self = globalThis;
 
 	(global as { document?: unknown }).document = {

@@ -8,14 +8,10 @@ import type {
 } from 'maplibre-gl';
 import type { Theme } from './types.js';
 
-// --- Context Keys ---
-
 const MAP_CTX_KEY = Symbol('svlibre-map');
 const SOURCE_CTX_KEY = Symbol('svlibre-source');
 const LAYER_CTX_KEY = Symbol('svlibre-layer');
 const MARKER_CTX_KEY = Symbol('svlibre-marker');
-
-// --- MapContext ---
 
 export class MapContext {
 	map = $state<MaplibreMap | null>(null);
@@ -27,10 +23,6 @@ export class MapContext {
 	private userLayers: string[] = [];
 	private userControls = new Set<IControl>();
 
-	/**
-	 * Queue an operation until the style is loaded, or execute immediately if ready.
-	 * Returns a cleanup function if the callback returns one.
-	 */
 	whenLoaded(fn: () => void | (() => void)): void {
 		if (this.loaded && this.map) {
 			fn();
@@ -39,10 +31,6 @@ export class MapContext {
 		}
 	}
 
-	/**
-	 * Called when the map style finishes loading.
-	 * Flushes all pending operations.
-	 */
 	markLoaded(): void {
 		this.loaded = true;
 		const ops = this.pendingOps.splice(0);
@@ -51,19 +39,14 @@ export class MapContext {
 		}
 	}
 
-	/**
-	 * Called when style changes. User sources/layers are removed by MapLibre,
-	 * so we just reset tracking state and mark as not loaded.
-	 */
+	// User sources/layers are removed by MapLibre on a style change, so this just
+	// resets tracking state rather than removing them itself.
 	markUnloaded(): void {
 		this.loaded = false;
 		this.userSources.clear();
 		this.userLayers = [];
 	}
 
-	/**
-	 * Add a source to the map and track it for cleanup.
-	 */
 	addSource(id: string, spec: SourceSpecification): void {
 		if (!this.map) return;
 		if (this.map.getSource(id)) return;
@@ -71,9 +54,6 @@ export class MapContext {
 		this.userSources.add(id);
 	}
 
-	/**
-	 * Remove a tracked source from the map.
-	 */
 	removeSource(id: string): void {
 		this.userSources.delete(id);
 		if (!this.map) return;
@@ -82,10 +62,7 @@ export class MapContext {
 		}
 	}
 
-	/**
-	 * Add a layer to the map and track it for cleanup. Tracking is for teardown
-	 * only -- nothing re-adds these layers after a style change.
-	 */
+	// Tracking is for teardown only -- nothing re-adds these layers after a style change.
 	addLayer(spec: AddLayerObject, beforeId?: string): void {
 		if (!this.map) return;
 		if (this.map.getLayer(spec.id)) return;
@@ -97,9 +74,6 @@ export class MapContext {
 		this.userLayers.push(spec.id);
 	}
 
-	/**
-	 * Remove a tracked layer from the map.
-	 */
 	removeLayer(id: string): void {
 		this.userLayers = this.userLayers.filter((l) => l !== id);
 		if (!this.map) return;
@@ -108,29 +82,19 @@ export class MapContext {
 		}
 	}
 
-	/**
-	 * Track a control added to the map for cleanup.
-	 */
 	addControl(control: IControl, position?: string): void {
 		if (!this.map) return;
 		this.map.addControl(control, position as 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right');
 		this.userControls.add(control);
 	}
 
-	/**
-	 * Remove a tracked control from the map.
-	 */
 	removeControl(control: IControl): void {
 		this.userControls.delete(control);
 		if (!this.map) return;
 		this.map.removeControl(control);
 	}
 
-	/**
-	 * Resolve the effective theme.
-	 * Uses .dark class on <html> (Tailwind / mode-watcher convention).
-	 * For OS-level dark mode without a class-based system, pass theme='dark' explicitly.
-	 */
+	// For OS-level dark mode without a class-based system, pass theme='dark' explicitly.
 	resolveTheme(theme: Theme): 'light' | 'dark' {
 		if (theme === 'auto') {
 			if (typeof window !== 'undefined') {
@@ -141,13 +105,9 @@ export class MapContext {
 		return theme;
 	}
 
-	/**
-	 * Clean up all tracked resources. Called when the Map component is destroyed.
-	 */
 	cleanup(): void {
 		if (!this.map) return;
 
-		// Remove layers in reverse order (dependencies)
 		for (let i = this.userLayers.length - 1; i >= 0; i--) {
 			const id = this.userLayers[i];
 			if (this.map.getLayer(id)) {
@@ -156,7 +116,6 @@ export class MapContext {
 		}
 		this.userLayers = [];
 
-		// Remove sources
 		for (const id of this.userSources) {
 			if (this.map.getSource(id)) {
 				this.map.removeSource(id);
@@ -164,7 +123,6 @@ export class MapContext {
 		}
 		this.userSources.clear();
 
-		// Remove controls
 		for (const control of this.userControls) {
 			this.map.removeControl(control);
 		}
@@ -176,8 +134,6 @@ export class MapContext {
 	}
 }
 
-// --- SourceContext ---
-
 export class SourceContext {
 	readonly id: string;
 
@@ -185,8 +141,6 @@ export class SourceContext {
 		this.id = id;
 	}
 }
-
-// --- LayerContext ---
 
 export class LayerContext {
 	readonly id: string;
@@ -197,8 +151,6 @@ export class LayerContext {
 		this.sourceId = sourceId;
 	}
 }
-
-// --- Context Accessors ---
 
 export function setMapContext(ctx: MapContext): void {
 	setContext(MAP_CTX_KEY, ctx);
@@ -239,8 +191,6 @@ export function getLayerContext(): LayerContext {
 	}
 	return ctx;
 }
-
-// --- MarkerContext ---
 
 export class MarkerContext {
 	marker = $state<MaplibreMarker | null>(null);

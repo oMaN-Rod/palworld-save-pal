@@ -188,29 +188,19 @@
 		showRelics?: boolean;
 		hideCollectedRelics?: boolean;
 		hideUnlockedFastTravel?: boolean;
-		/** Per-relic-type visibility; a missing key means visible. */
 		relicTypes?: Record<string, boolean>;
 		showDungeons?: boolean;
 		showBosses?: boolean;
 		showAlphaPals?: boolean;
 		showPredatorPals?: boolean;
 		showBounty?: boolean;
-		/** Visibility for the registry-driven layers. The layers above keep their
-		 *  own props and their own stores. */
 		mapLayerVisibility?: MapLayerVisibility;
 		showLabels?: boolean;
 		show3d?: boolean;
-		/** Surfaces the structure sections of the 3D options panel. Off for callers
-		 *  with no bases to draw. */
 		showStructureControls?: boolean;
-		/** Area switcher placement. `right` clears a host that occupies the top
-		 *  centre, such as the public shell's floating nav. */
 		areaSwitchAlign?: 'center' | 'right';
-		/** Per-structure-type visibility; a missing key means visible. */
 		structureTypes?: Record<string, boolean>;
 		renderMode?: 'detailed' | 'flat';
-		/** Renders structures with their glb's own texture instead of the per-type
-		 *  flat colour. */
 		structureTextured?: boolean;
 		onToggle3d?: () => void;
 		onToggleStructureType?: (type: string) => void;
@@ -236,11 +226,8 @@
 		palAutoFollow?: boolean;
 		palHeight?: number;
 		mapOpacity?: number;
-		/** Fast travel statue render scale as a multiple of true size. */
 		fastTravelSize?: number;
-		/** Watchtower render scale as a multiple of true size. */
 		watchtowerSize?: number;
-		/** Relic render scale as a multiple of true size. */
 		relicSize?: number;
 	} = $props();
 
@@ -273,8 +260,6 @@
 
 	const selectedPlayer = $derived(appState.selectedPlayer);
 
-	// `unlocked` is deliberately tri-state: undefined when no player is selected, so
-	// downstream `=== false` checks leave those pins at full opacity rather than locked.
 	const fastTravelPointList = $derived.by(() => {
 		const unlocked = new Set(
 			(selectedPlayer?.unlocked_fast_travel_points ?? []).map((guid) => guid.toUpperCase())
@@ -291,9 +276,6 @@
 			.filter((p) => mapOf(p.x, p.y) === area);
 	});
 
-	// One layer, class-aware visibility: regular points follow showFastTravel,
-	// watchtowers follow showWatchtower. Both keep type: 'fast_travel' so the
-	// click/toggle path is shared.
 	const visibleFastTravelPoints = $derived(
 		fastTravelPointList
 			.filter((p) => (isWatchtower(p) ? showWatchtower : showFastTravel))
@@ -327,8 +309,6 @@
 			.filter((p) => !(hideCollectedRelics && p.unlocked === true));
 	});
 
-	// spawn_type is the sole partition key: every spawn lands in exactly one of
-	// alpha/boss/predator/bounty, so nothing can double-marker it.
 	const spawnPartition = $derived(partitionSpawns(bosses.points));
 	const defeatedSpawnerIds = $derived(new Set(selectedPlayer?.defeated_bosses ?? []));
 
@@ -351,8 +331,6 @@
 			})
 	);
 
-	// Alpha spawns carry the same spawner_id/character_id shape as boss spawns
-	// (their `pal` field was dropped upstream); palKey strips the BOSS_ prefix.
 	const alphaSpawnPoints = $derived(
 		spawnPartition.alpha
 			.filter((b) => mapOf(b.x, b.y) === area)
@@ -366,8 +344,6 @@
 		alphaSpawnPoints.map((b) => ({ x: b.x, y: b.y, pal: b.palKey ?? '' }))
 	);
 
-	// Bounty targets never name a pal, so their label always comes off the
-	// spawner id - there is no palsData lookup to try first.
 	const bountyPoints = $derived(
 		spawnPartition.bounty
 			.filter((b) => mapOf(b.x, b.y) === area)
@@ -400,18 +376,14 @@
 		buildBossFC(bountyPoints as never, area, { type: 'bounty', icon: ICON_BOUNTY })
 	);
 
-	// Rebuilt only when the point list changes -- the lists are derived objects, so
-	// identity is a sound proxy for content. Rebuilding ~580 polygons on every
-	// unrelated recompute made MapLibre re-tessellate and re-upload both sources.
+	// Memoized by point-list identity: rebuilding ~580 ring polygons on every unrelated
+	// recompute made MapLibre re-tessellate and re-upload both sources.
 	function sameRingPoints<T>(a: T[], b: T[]): boolean {
 		if (a.length !== b.length) return false;
 		for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
 		return true;
 	}
 
-	// Each ring's radius constant lives in mapObjectItems.ts, not here: this
-	// component has no test file, so the pairing has to be provable by calling
-	// those functions directly rather than by reading the call sites below.
 	function memoRingFC<T extends { x: number; y: number }>(
 		build: (points: T[], area: MapArea, ...scales: number[]) => GeoJSON.FeatureCollection
 	) {
@@ -434,18 +406,11 @@
 		};
 	}
 
-	// `unlocked` is tri-state -- undefined until a player is selected -- so the
-	// state helpers resolve it explicitly rather than by truthiness. Browsing
-	// without a player reads as already dealt with, matching the portal beams.
 	const fastTravelRing = memoRingFC<MapUnlockPoint>(buildFastTravelRingFC);
 	const relicRing = memoRingFC<RelicPoint>(buildRelicRingFC);
 
-	// Rings read the same palette as the portal beams (PORTAL_HEX), so tuning a
-	// beam colour can't leave the matching ring behind.
 	const fastTravelRingColor = portalRingColorExpression('fastTravel');
 	const relicRingColor = portalRingColorExpression('relic');
-	// palRing has no 'unknown' state, so the match expression's trailing arm is
-	// given explicitly rather than defaulting to an absent one.
 	const palPortalRingColor = portalRingColorExpression('palRing', PORTAL_HEX.palRing.boss);
 	const fastTravelRingFC = $derived(
 		fastTravelRing(show3d ? visibleFastTravelPoints : [], area, fastTravelSize, watchtowerSize)
@@ -454,8 +419,6 @@
 		relicRing(show3d && showRelics ? relicPointList : [], area, relicSize)
 	);
 
-	// The per-field mapping lives in buildMapObjectItems and is tested there --
-	// this component has no test file to catch a regression.
 	const mapObjectItems = $derived<MapObjectItem[]>(
 		buildMapObjectItems(
 			show3d,
@@ -498,8 +461,6 @@
 
 	const staticIcons = staticIconUrls();
 
-	// Derived from the registry rather than listed here: a layer added to the
-	// table but missing from a literal in this file silently never drew.
 	const REGISTRY_LAYERS: MapLayerId[] = genericRenderLayers();
 
 	const mapLayerRenders = $derived(
@@ -507,9 +468,8 @@
 			id,
 			minZoom: getMapLayer(id).minZoom,
 			visible: mapLayerVisibility[id] ?? getMapLayer(id).defaultVisible,
-			// Folded into the zoom stops rather than multiplied around them:
-			// MapLibre only accepts `zoom` as the input to a top-level interpolate,
-			// so wrapping the expression in `*` fails validation and drops the layer.
+			// Folded into the zoom stops rather than multiplied around them: MapLibre only
+			// accepts `zoom` as the input to a top-level interpolate, and wrapping it in `*` fails validation.
 			iconSize: zoomScaledIconSize(0.6 * mapLayerIconScale(id), mapLayerIconScale(id)),
 			fc: buildMapLayerFC(id, mapLayers.peek(id), area)
 		}))
@@ -572,8 +532,7 @@
 		lngLat: [number, number];
 	} | null>(null);
 
-	// The popup stays pinned to its feature across pan/zoom, so its screen position has
-	// to be reprojected on every map move rather than captured once at click time.
+	// Reprojected on every map move so the popup stays pinned to its feature across pan/zoom.
 	let moveTick = $state(0);
 	const selectedPoint = $derived.by(() => {
 		void moveTick;
@@ -620,7 +579,7 @@
 	let pickScheduled = false;
 	let pendingPoint: { x: number; y: number } | null = null;
 
-	// Coalesced to one pick per frame: the pass re-renders the scene, so a pick per
+	// Coalesced to one pick per frame: the pick pass re-renders the scene, so one per
 	// mousemove event would be wasteful.
 	function schedulePick(x: number, y: number) {
 		pendingPoint = { x, y };
@@ -637,8 +596,6 @@
 				if (key) {
 					if (hovered?.key !== key) hovered = { type: 'structure', key, point };
 				} else if (hovered) {
-					// A MapLibre miss plus a pick miss means nothing is under the cursor,
-					// regardless of what was hovered before (structure, pal, base icon, ...).
 					hovered = null;
 				}
 				const canvas = map?.getCanvas();
@@ -649,9 +606,6 @@
 
 	let ghostDragging = false;
 
-	// A click counts as "on the blueprint" when it lands within this many cm of
-	// any ghost structure's world position -- so dragging the base requires
-	// clicking a structure, while empty-map clicks pan and right-drag rotates.
 	const STRUCTURE_HIT_CM = 800;
 
 	function clickIsOnGhost(worldX: number, worldY: number): boolean {
@@ -669,27 +623,22 @@
 	function handleMouseDown(ev: maplibregl.MapMouseEvent) {
 		if (!placement) return;
 		const oe = ev.originalEvent;
-		// Right button rotates the camera; only the left button interacts with the ghost.
 		if (oe.button !== 0) return;
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
 		if (oe.ctrlKey) {
-			// Ctrl + left click: teleport the blueprint to the cursor.
 			onPlacementAnchorChange?.({ ...base, x: worldX, y: worldY });
 			return;
 		}
-		// Drag only when the click lands on a structure; otherwise fall through so
-		// the map pans normally.
 		if (clickIsOnGhost(worldX, worldY)) {
 			ghostDragging = true;
 			map?.dragPan.disable();
 		}
 	}
 
-	// Idempotent: safe to call whether or not a drag is in progress. A window-level
-	// mouseup mirrors MapLibre's own binding so releasing over the PlacementPanel (or
-	// off-window) still ends the drag - the map's own mouseup only fires over the canvas.
+	// MapLibre's own mouseup only fires over the canvas, so a window-level listener
+	// (below) is needed to end a drag released over the PlacementPanel or off-window.
 	function endGhostDrag() {
 		if (!ghostDragging) return;
 		ghostDragging = false;
@@ -719,8 +668,8 @@
 
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (top) {
-			// A pick resolves a frame later, so one already in flight would otherwise
-			// land after this hit and stomp it; bumping the sequence discards it.
+			// Bumps the sequence to discard any in-flight pick, which resolves a frame
+			// later and would otherwise land after this hit and stomp it.
 			pickSeq++;
 			pendingPoint = null;
 			const source = top.source;
@@ -754,7 +703,6 @@
 	}
 
 	function handleClick(ev: maplibregl.MapMouseEvent) {
-		// Placement owns clicks (drag / ctrl-teleport); don't also select map features.
 		if (placement) return;
 		const top = topFeatureAt(ev, INTERACTIVE_LAYERS);
 		if (!top && detailed && hovered?.type === 'structure') {
@@ -894,10 +842,9 @@
 			// keep the reference once addLayer actually succeeds, retrying on `styledata`.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
-				// isStyleLoaded() goes true before this component's layers exist, so
-				// without the anchor a 3D layer lands below the rasters that mount
-				// afterwards, and whatever it draws without writing depth -- the portal
-				// beam -- gets repainted by them. The retry loop below absorbs the wait.
+				// isStyleLoaded() goes true before this component's layers exist. Without this
+				// anchor check, a 3D layer mounted early lands below the rasters that mount
+				// afterwards, which repaint over anything it draws without writing depth (the portal beam).
 				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createStructureLayer({ id: 'structure-3d' });
 				mount3dLayer(instance, layer);
@@ -905,9 +852,8 @@
 				populateStructureLayer();
 				return true;
 			};
-			// `styledata` fires many times while the style/tiles load and often fires
-			// before isStyleLoaded() flips true, so a one-shot retry can miss every
-			// firing; keep listening until add() succeeds or 3D is toggled off.
+			// `styledata` fires many times and often before isStyleLoaded() flips true, so a
+			// one-shot retry can miss every firing; keep listening until add() succeeds.
 			if (!add() && !pendingStyleHandler) {
 				const onStyle = () => {
 					if (!detailed || structureLayer) {
@@ -935,8 +881,6 @@
 		}
 	});
 
-	// Each area ships its own scenery stream, so content is keyed by the area it
-	// was fetched for rather than reusing whatever was last loaded.
 	let sceneryStreamsByArea: Partial<Record<MapArea, SceneryStream>> = $state({});
 	let sceneryStreamAttempted = $state(new Set<MapArea>());
 	const sceneryStream = $derived(sceneryStreamsByArea[area] ?? null);
@@ -949,9 +893,6 @@
 
 	let mapObjectLayer: MapObjectLayer | null = null;
 	let pendingMapObjectStyleHandler: (() => void) | null = null;
-	// Each toggle gates its own spawns here, not just its 2D marker layer's
-	// `visible` flag, so hiding alphas leaves bosses alone and vice versa. Human
-	// bosses have no palKey and never reach this list.
 	const palBosses = $derived(
 		[...(showAlphaPals ? alphaSpawnPoints : []), ...(showBosses ? bossPoints : [])]
 			.filter((b) => b.palKey)
@@ -965,16 +906,11 @@
 				})
 			)
 	);
-	// Predators resolve their model key from `pal` directly: unlike alpha/boss
-	// they carry no character_id to strip a BOSS_ prefix from.
 	const predatorPalModels = $derived<PalPredator[]>(
 		showPredatorPals ? predatorPalBosses(predatorSpawnsInArea) : []
 	);
 	const palPortalFC = $derived(buildPalPortalFC(palBosses, predatorPalModels, area, palSize));
 
-	// A missing or corrupt stream must not take the map down: log it and leave the
-	// rest working with scenery absent for that area. sceneryStreamAttempted fires
-	// the fetch at most once per area rather than retrying on every revisit.
 	$effect(() => {
 		if (!show3d) return;
 		const currentArea = area;
@@ -993,9 +929,6 @@
 			);
 	});
 
-	// Mirrors the scenery-stream fetch above. loadTintMosaic's own module-scope
-	// cache is what dedupes across component reloads; tintMosaicAttempted only
-	// stops this effect re-calling it every reactive run within one lifetime.
 	let tintMosaicsByArea: Partial<Record<MapArea, TintMosaic>> = $state({});
 	let tintMosaicAttempted = $state(new Set<MapArea>());
 
@@ -1004,8 +937,8 @@
 		const currentArea = area;
 		if (tintMosaicAttempted.has(currentArea)) return;
 		tintMosaicAttempted = new Set(tintMosaicAttempted).add(currentArea);
-		// Keyed by the area captured here, not the live binding, so a mosaic
-		// resolving after an area switch lands in its own slot.
+		// Captured as currentArea, not the live binding, so a mosaic resolving after an
+		// area switch still lands in its own slot.
 		loadTintMosaic(currentArea).then((mosaic) => {
 			tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
 		});
@@ -1016,10 +949,8 @@
 		if (!instance) return;
 		const streamToMount = sceneryStream;
 		if (show3d && streamToMount && !sceneryLayer) {
-			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
-				// Same anchor rule as the structure layer: see its add() for why.
 				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createSceneryLayer({ id: 'scenery-3d' });
 				mount3dLayer(instance, layer);
@@ -1076,10 +1007,8 @@
 		const instance = map;
 		if (!instance) return;
 		if (show3d && !palLayer) {
-			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
-				// Same anchor rule as the structure layer: see its add() for why.
 				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createPalLayer({ id: 'pals-3d' });
 				mount3dLayer(instance, layer);
@@ -1159,10 +1088,8 @@
 		const instance = map;
 		if (!instance) return;
 		if (show3d && !mapObjectLayer) {
-			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
-				// Same anchor rule as the structure layer: see its add() for why.
 				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createMapObjectLayer('map-objects-3d');
 				mount3dLayer(instance, layer);
@@ -1222,12 +1149,10 @@
 		if (placement && !ghostLayer) {
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
-				// Same anchor rule as the structure layer: see its add() for why.
 				if (!instance.getLayer('origin-icons')) return false;
 				const layer = createGhostLayer({ id: 'blueprint-ghost' });
-				// Below pals-3d, which clears the depth buffer under x-ray: a ghost drawn
-				// after it would float over the terrain and misreport where the
-				// blueprint lands.
+				// Mounted below pals-3d, which clears the depth buffer under x-ray: a ghost drawn
+				// after it would float over the terrain and misreport where the blueprint lands.
 				mount3dLayer(instance, layer);
 				ghostLayer = layer;
 				ghostLayer.update(
@@ -1266,10 +1191,6 @@
 		}
 	});
 
-	// Placement is the only mode that disables dragPan mid-drag, so the window-level
-	// fallback only needs to exist while placement is active; the effect's own cleanup
-	// removes it the moment placement ends (exit or unmount), leaving normal map
-	// mouseup handling as the sole path otherwise.
 	$effect(() => {
 		if (!placement) return;
 		window.addEventListener('mouseup', endGhostDrag);
@@ -1399,9 +1320,6 @@
 		]
 	);
 
-	// A selected/hovered structure can stop being rendered three ways - 3D toggled off,
-	// its type filtered out, or the underlying data reset by a save load - so both refs
-	// are re-validated together whenever any of those can happen.
 	$effect(() => {
 		if (!show3d) {
 			if (selected?.type === 'structure') selected = null;
@@ -1423,11 +1341,8 @@
 		}
 	});
 
-	// A click can mutate the very feature it's hovering (e.g. collecting a relic while a
-	// "hide collected" filter is active), removing its byKey entry without any mousemove
-	// to clear `hovered` first. Left stale, the tooltip below would render with undefined
-	// data and throw. `has` (not a truthy `data` check) matters here: the origin entry is
-	// legitimately present with `data: null`.
+	// Uses `has`, not a truthy `data` check, because the origin entry is legitimately
+	// present with `data: null`; a truthy check would wrongly clear `hovered` for it.
 	$effect(() => {
 		const current = hovered;
 		if (!current) return;
@@ -1779,8 +1694,6 @@
 				/>
 			</Source.GeoJSON>
 
-			<!-- Draped ground rings under the 3D map objects: fill plus line, like the
-			     portal rings above. -->
 			{#if show3d}
 				<Source.GeoJSON id="fast-travel-ring-src" data={fastTravelRingFC}>
 					<Layer.Fill
@@ -1968,9 +1881,8 @@
 				guildName={entry?.guildName}
 				{onExportBase}
 				onDeleteBase={(base) => {
-					// Close the popup up front: the base it points at is about to
-					// stop existing in appState, and `entry` would otherwise
-					// resolve to undefined on the next reactive read.
+					// Closed before the delete: the base is about to stop existing in appState,
+					// and `entry` would otherwise resolve to undefined on the next reactive read.
 					selected = null;
 					onDeleteBase?.(base);
 				}}
@@ -1992,7 +1904,6 @@
 		{/each}
 	</div>
 
-	<!-- Coordinate display overlay -->
 	<div class="coordinate-display">
 		{@html coordDisplayText}
 	</div>
@@ -2003,8 +1914,6 @@
 		background-color: #000;
 	}
 
-	/* left/top are set inline from map.project(); the translate reproduces OpenLayers'
-	   center-left positioning with its [10, 0] offset. */
 	.map-anchored-card {
 		position: absolute;
 		z-index: 1000;
@@ -2060,7 +1969,6 @@
 		z-index: 1000;
 	}
 
-	/* Clears the 29px control column and its 10px edge margin at top-right. */
 	.map-area-switch.align-right {
 		left: auto;
 		right: 52px;

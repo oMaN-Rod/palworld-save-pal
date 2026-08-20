@@ -20,7 +20,6 @@
 
 		loading = true;
 
-		// Remove images that are no longer in props but were added by us
 		for (const id of addedImages) {
 			if (!(id in currentImages)) {
 				try {
@@ -32,7 +31,6 @@
 			}
 		}
 
-		// Find images that need loading
 		const toLoad: Array<{ id: string; url: string }> = [];
 		for (const [id, url] of Object.entries(currentImages)) {
 			if (!map.hasImage(id)) {

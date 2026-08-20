@@ -1,15 +1,10 @@
-// Renders fast travel statues and relic pedestals as instanced three.js meshes,
-// one InstancedMesh per distinct baked mesh, split into a camera-independent
-// bake and a per-frame compose like sceneryLayer.
+// Split into a camera-independent bake and a per-frame compose, like sceneryLayer.
+// Instances are culled past the game's per-class cull distance, clamped to never
+// go nearer than the camera can see (see viewRadiusCm) -- those distances are
+// metres from a first-person camera and would carve a visible circle out of a
+// map camera hundreds of metres up if applied literally.
 //
-// Instances are culled past the cull distance the game gives each actor class,
-// but never nearer than the camera can see (see viewRadiusCm): those numbers are
-// metres from a first-person camera, and applied literally to a map camera
-// hundreds of metres up they carve a visible circle out of the frame. Clamped,
-// the cull only ever drops what is already off screen.
-//
-// This layer owns no camera subscription: the cull radius and camera centre are
-// re-derived each compose, so the caller must re-invoke update() on camera move.
+// This layer owns no camera subscription, so the caller must re-invoke update() on camera move.
 import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import manifestJson from '../../../../../data/json/map_object_meshes.json';
@@ -41,26 +36,22 @@ export type MapObjectItem = {
 	actorClass: string;
 	scale: number;
 	portalColor: string;
-	// Ground radius the beam and ring derive from, cm, before `scale`. Required
-	// rather than defaulted: PORTAL_RADIUS_CM is pal-sized and meaningless for a
-	// relic or statue, so the caller must supply its own marker-type constant.
+	// Required rather than defaulted: PORTAL_RADIUS_CM is pal-sized and meaningless
+	// for a relic or statue, so the caller must supply its own marker-type constant.
 	ringRadiusCm: number;
-	// The actor's own FRotator (pitch, yaw, roll) in degrees, applied in the
-	// actor's frame before the part's own loc/rot/scale.
+	// FRotator (pitch, yaw, roll) in degrees, applied before the part's own loc/rot/scale.
 	rot: [number, number, number];
 };
 
-// A class the extractor found no LDMaxDrawDistance for is better drawn too far
-// than silently missing, so this is the generous end of the baked range.
+// A class with no extracted LDMaxDrawDistance is better drawn too far than silently missing.
 export const MAP_OBJECT_DEFAULT_CULL_CM = 100000;
 
 export function cullDistanceCmFor(entry: MapObjectEntry | undefined): number {
 	return entry?.cullDistanceCm ?? MAP_OBJECT_DEFAULT_CULL_CM;
 }
 
-// World-centimetre distance from the camera centre to the furthest visible
-// corner. Takes the furthest of the four because a pitched view puts the camera
-// centre off the rectangle's centre.
+// Takes the furthest of the four corners because a pitched view puts the camera
+// centre off the bounds rectangle's centre.
 export function viewRadiusCm(
 	sw: [number, number],
 	ne: [number, number],
@@ -89,9 +80,8 @@ export function viewRadiusCm(
 //          centimetres, times the item's own scale multiplier
 export const BAKED_STRIDE = 18;
 
-// partLocalMatrix is per part, so it is computed once and reused across that
-// part's instances. The item's own rotation is per item and so composed with
-// MESH_FLIP separately below rather than folded into the cache.
+// partLocalMatrix is per part, so it's computed once and reused across instances;
+// the item's own rotation is composed with MESH_FLIP separately, not cached here.
 function partLocalCache() {
 	const cache = new Map<string, THREE.Matrix4>();
 	return (actorClass: string, part: MapObjectPart): THREE.Matrix4 => {
@@ -150,11 +140,8 @@ export function bakeMapObjectInstances(
 	return baked;
 }
 
-// Applies the frame's cmToMerc to baked instances and appends those within cull
-// distance to `target` at instance `offset`, returning how many were written.
-// Each baked cull distance is raised to `minCullCm` -- pass the camera's view
-// radius so nothing on screen is culled. A uniform scale commutes with the flip,
-// so this reproduces mapObjectInstanceMatrix exactly; the tests pin that.
+// Each baked cull distance is raised to `minCullCm` -- pass the camera's view radius
+// so nothing on screen is culled.
 export function composeMapObjectMatrices(
 	baked: Float32Array,
 	cmToMerc: number,
@@ -226,8 +213,6 @@ export function bakeMapObjectPortalInstances(
 	return new Float32Array(values);
 }
 
-// Mirrors composeMapObjectMatrices' cull and packing, but a beam never rotates,
-// so the transform is a translate-then-uniform-scale rather than a baked 3x3.
 // colorTarget is written at the same compacted index as matrixTarget so a culled
 // instance never leaves the two out of step.
 export function composeMapObjectPortalMatrices(
@@ -275,14 +260,12 @@ export function composeMapObjectPortalMatrices(
 
 export type MapObjectLayer = CustomLayerInterface & {
 	update(items: MapObjectItem[], area: MapArea, verticalScale: number): void;
-	// The per-frame half of the split, public so a test can pin that moving the
-	// camera never re-bakes.
+	// Public so a test can pin that moving the camera never re-bakes.
 	compose(): void;
 	bakeCount(): number;
 	composeCount(): number;
 	instanceCount(): number;
-	// Test-only: the camera-independent local matrix baked at this index, in bake
-	// order across every mesh group. Only the linear 3x3 is meaningful.
+	// Test-only. Only the linear 3x3 is meaningful.
 	bakedMatrixFor(index: number): THREE.Matrix4;
 	dispose(): void;
 	// Test-only: composing needs no GL context, so tests attach a stub map
@@ -330,13 +313,10 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 	let baked = new Map<string, Float32Array>();
 	let bakedPortalsByRadius = new Map<number, Float32Array>();
 
-	// One InstancedMesh per distinct mesh, refilled in place across frames.
 	const meshObjects = new Map<string, THREE.InstancedMesh>();
 	// Bucketed by ring radius: fast travel and relic items share this path but
-	// their rings differ in size, so their beams can't be one mesh. Within a
-	// bucket instances still share a draw call, colour written per-instance.
+	// their rings differ in size, so their beams can't be one mesh.
 	const portalMeshes = new Map<number, THREE.InstancedMesh>();
-	// The camera state meshObjects were last composed for.
 	let lastCmToMerc = Number.NaN;
 	let lastCameraX = Number.NaN;
 	let lastCameraY = Number.NaN;

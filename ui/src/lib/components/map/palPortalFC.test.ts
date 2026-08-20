@@ -79,8 +79,6 @@ describe('buildPalPortalFC', () => {
 		expect(buildPalPortalFC([], [], 'MainMap', PAL_SCALE).features.length).toBe(0);
 	});
 
-	// The gap this closes: predators previously had no flat ground ring at all,
-	// since this function only ever consumed PalBoss[].
 	it('emits a ring for a predator too, not just bosses', () => {
 		const fc = buildPalPortalFC([], [predator(-400000, -300000)], 'MainMap', PAL_SCALE);
 		expect(fc.features.length).toBe(1);
@@ -98,8 +96,6 @@ describe('buildPalPortalFC', () => {
 		expect(states.sort()).toEqual(['boss', 'predator']);
 	});
 
-	// A predator carries no "defeated" concept -- would break if a future edit
-	// started reading it off something other than a hardcoded false.
 	it('always marks a predator feature as not defeated', () => {
 		const fc = buildPalPortalFC([], [predator(-400000, -300000)], 'MainMap', PAL_SCALE);
 		expect(fc.features[0].properties?.defeated).toBe(false);

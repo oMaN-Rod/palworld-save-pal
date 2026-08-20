@@ -14,8 +14,6 @@ export type SaveActionPlayer = RelicCountPlayer &
 
 const same = (a: string, b: string) => a.toUpperCase() === b.toUpperCase();
 
-/** Moves the player's `Relic` item count by `delta`, claiming or releasing an
- *  inventory slot as needed. */
 export function updateRelicCount(player: RelicCountPlayer, delta: number): void {
 	const container = player.essential_container;
 	if (!container) return;
@@ -66,8 +64,6 @@ export function toggleFastTravelPoint(player: SaveActionPlayer, guid: string): v
 	player.unlocked_fast_travel_points = unlocks;
 }
 
-/** Returns how many were newly added, so the caller can skip marking the player
- *  modified when nothing changed. */
 export function unlockFastTravelGuids(player: SaveActionPlayer, guids: string[]): number {
 	const unlocked = player.unlocked_fast_travel_points ?? [];
 	const existing = new Set(unlocked.map((guid) => guid.toUpperCase()));

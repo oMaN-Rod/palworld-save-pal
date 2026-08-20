@@ -1,7 +1,6 @@
 export type MapArea = 'MainMap' | 'Tree';
 
-/** Bounds from the game's DT_WorldMapUIData. Tree is listed first
- *  because it carries WorldMapPriority 1: where the rectangles overlap, it wins. */
+// Tree is listed first because it carries WorldMapPriority 1: where the rectangles overlap, it wins.
 export const MAP_AREAS: Record<MapArea, {
 	min: { x: number; y: number };
 	max: { x: number; y: number };
@@ -22,11 +21,8 @@ export const MAP_SIZE = 8192;
 
 export const DEFAULT_MAP_AREA: MapArea = 'MainMap';
 
-/** Slug used for every per-area static asset path (raster/DEM tiles, scenery streams). */
 export const MAP_TILE_DIR: Record<MapArea, string> = { MainMap: 'mainmap', Tree: 'tree' };
 
-/** Per-area scenery instance stream, mirroring the DEM tile convention
- *  (`/maps/dem/${MAP_TILE_DIR[area]}/...`) instead of one stream shared by every area. */
 export function sceneryStreamUrl(area: MapArea): string {
 	return `/maps/scenery_instances_${MAP_TILE_DIR[area]}.bin`;
 }
@@ -60,7 +56,6 @@ export function pixelToWorld(
 	return { worldX: pixelY * cm + min.x, worldY: pixelX * cm + min.y };
 }
 
-/** Which map a world position belongs to — the game's own rule, priority order. */
 export function mapOf(worldX: number, worldY: number): MapArea | null {
 	for (const area of Object.keys(MAP_AREAS) as MapArea[]) {
 		const { min, max } = MAP_AREAS[area];
@@ -85,15 +80,12 @@ export function mapToWorld(mapX: number, mapY: number): { x: number; y: number }
 	};
 }
 
-/** `BOSS_Horus_Water` -> `Horus_Water`, the key the pal data is stored under. */
 export function bossPalKey(characterId: string | undefined): string | null {
 	if (!characterId || characterId === 'None') return null;
 	const key = characterId.replace(/^boss_/i, '');
 	return key.length > 0 ? key : null;
 }
 
-/** Last-resort title for the human bosses, whose character_id is literally "None".
- *  `BOSS_Female_Soldier03` -> `Female Soldier 03`, `REGION_Oilrig_1` -> `Oilrig 1`. */
 export function humanizeSpawnerId(spawnerId: string | undefined): string {
 	if (!spawnerId) return 'Unknown';
 	const name = spawnerId

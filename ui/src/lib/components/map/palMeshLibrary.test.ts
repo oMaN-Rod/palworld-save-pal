@@ -9,9 +9,6 @@ describe('palModelUrl', () => {
 		expect(url).toMatch(/^\/models\/pals\/anubis_[0-9a-f]{6}\.glb$/);
 	});
 
-	// bossPalKey strips only the "boss_" prefix, so every real boss key reaches
-	// this function mixed-case while manifest keys are lowercase. Without
-	// normalisation this misses 100% of Pals, silently.
 	it('resolves a mixed-case key, as bossPalKey actually produces', () => {
 		expect(palModelUrl('Anubis')).toBe(palModelUrl('anubis'));
 		expect(palModelUrl('Anubis')).not.toBeNull();
@@ -27,19 +24,11 @@ describe('palModelUrl', () => {
 });
 
 describe('requestPalMesh', () => {
-	// No "returns null while loading" case here: outside a browser FileLoader
-	// throws on a relative URL and this library routes that to permanent failure,
-	// so such a test would pass against an implementation that failed every key.
 	it('marks a key with no manifest entry as permanently failed instead of fetching', () => {
 		requestPalMesh('__no_such_pal__');
 		expect(palMeshFailed('__no_such_pal__')).toBe(true);
 	});
 
-	// Keys arrive mixed-case while the manifest is lowercase, so the caches must
-	// key on the same normalised form palModelUrl looks up with -- otherwise one
-	// key occupies two identities and a recorded failure is invisible. The probe
-	// key is unique to this case: reusing an already-failed one would pass against
-	// the un-normalised implementation too.
 	it('records a failure under the normalised key, whatever casing the caller used', () => {
 		requestPalMesh('CasingProbe_NotAPal');
 		expect(palMeshFailed('casingprobe_notapal')).toBe(true);

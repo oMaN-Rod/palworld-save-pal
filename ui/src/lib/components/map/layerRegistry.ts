@@ -1,26 +1,19 @@
 import { WATCHTOWER_CLASS } from './fastTravel';
 
-/** Legend sections, in the order the panel renders them. `general` holds the
- *  options that are not artifact-backed layers, so no layer belongs to it. */
 export const MAP_LAYER_GROUPS = ['general', 'locations', 'collectibles', 'poi'] as const;
 export type MapLayerGroup = (typeof MAP_LAYER_GROUPS)[number];
 
-/** Artifact ids the backend accepts for `get_map_layer`. An id outside this set
- *  comes back as an error frame, so the table below may name nothing else. */
 export const MAP_LAYER_ARTIFACTS = [
 	'fast_travel_points',
 	'dungeons',
 	'bosses',
 	'relics',
-	// The capture_power subset of `relics`, and the narrower of the two files.
-	// Served, but no layer binds to it — the map draws the whole relics table.
 	'effigies',
 	'towers',
 	'notes',
 	'eggs_spawners',
 	// chests.json was removed for weight (3 MB, and the worker fetches the whole
-	// manifest at init). Still served, but no layer binds to it until artifacts
-	// load lazily.
+	// manifest at init). Still served, but no layer binds to it until artifacts load lazily.
 	'chests',
 	'camps',
 	'ancient_ruins',
@@ -31,22 +24,10 @@ export type MapLayerArtifact = (typeof MAP_LAYER_ARTIFACTS)[number];
 
 export type MapLayerEntry = Record<string, unknown>;
 
-/**
- * An artifact exactly as it arrives. Some are keyed objects (`towers`, `notes`,
- * `dungeons`, `bosses`, `fast_travel_points`, `relics`) and some are top-level
- * arrays (`eggs_spawners`, `camps`). Nothing on the wire normalises the two, and
- * the l10n merge skips arrays entirely because there is no key to target.
- */
 export type RawArtifact<T = MapLayerEntry> = Record<string, T> | readonly T[];
 
 export type MapLayerShape = 'keyed' | 'list';
 
-/**
- * An entry paired with the id it is known by. For a keyed artifact that is the
- * object key, which carries meaning (`Day-xx`, a boss battle name). An array
- * artifact has no such key, so identity comes off the entry — never the array
- * index, which is positional rather than stable.
- */
 export type MapLayerPoint<T = MapLayerEntry> = { key: string; entry: T };
 
 export type MapLayerSelection<T = MapLayerEntry> = {
@@ -54,15 +35,8 @@ export type MapLayerSelection<T = MapLayerEntry> = {
 	points: MapLayerPoint<T>[];
 };
 
-/** Identity fields an array entry may carry, most specific first. */
 const LIST_KEY_FIELDS = ['instance_id', 'name'] as const;
 
-/**
- * How a layer narrows its artifact. Several layers share one artifact and one
- * request, then split it here: `fast_travel_points` holds both fast travel
- * points and watchtowers, told apart by `class`; `bosses` holds alpha, boss and
- * predator spawns in one table, told apart by `spawn_type`.
- */
 export type MapLayerSubset =
 	| { readonly kind: 'all' }
 	| { readonly kind: 'equals'; readonly field: string; readonly value: string }
@@ -74,7 +48,6 @@ type MapLayerRow = {
 	readonly artifact: MapLayerArtifact;
 	readonly subset: MapLayerSubset;
 	readonly defaultVisible: boolean;
-	/** Zoom below which the layer is not drawn. Dense layers only. */
 	readonly minZoom?: number;
 };
 
@@ -161,8 +134,6 @@ export const MAP_LAYERS = [
 		subset: spawnType('predator'),
 		defaultVisible: true
 	},
-	// The table's human NPC bosses. They share boss_pals' shape and its
-	// character_id of "None", so spawn_type is the only thing telling them apart.
 	{
 		id: 'bounty',
 		group: 'poi',
@@ -192,16 +163,10 @@ export function mapLayersInGroup(group: MapLayerGroup): MapLayerDefinition[] {
 	return MAP_LAYERS.filter((layer) => layer.group === group);
 }
 
-/**
- * Layers Map.svelte draws through a builder of their own, because one sprite for
- * the whole layer will not do: the spawn layers take a per-pal portrait, relics
- * one sprite per relic_type, and fast travel and dungeons predate the registry
- * with their own stores and props.
- *
- * Everything else draws through buildMapLayerFC. The split lived as a literal
- * inside Map.svelte, where a layer missing from it silently never drew; keeping
- * it beside the table means a new row is generically drawn unless it opts out.
- */
+// Layers Map.svelte draws through a builder of their own, because one sprite for the
+// whole layer will not do: the spawn layers take a per-pal portrait, relics one sprite
+// per relic_type, and fast travel and dungeons predate the registry with their own
+// stores and props. Everything else draws through buildMapLayerFC.
 export const BESPOKE_RENDER_LAYERS = [
 	'fast_travel',
 	'watchtower',
@@ -218,8 +183,6 @@ export function genericRenderLayers(): MapLayerId[] {
 	return MAP_LAYERS.map((layer) => layer.id).filter((id) => !bespoke.has(id));
 }
 
-/** The distinct artifacts backing `ids`, in first-seen order — the batch to ask
- *  the backend for. Layers sharing an artifact collapse to one fetch. */
 export function artifactsForLayers(ids: readonly MapLayerId[]): MapLayerArtifact[] {
 	const seen = new Set<MapLayerArtifact>();
 	for (const id of ids) seen.add(getMapLayer(id).artifact);
@@ -240,11 +203,8 @@ function listKey(entry: MapLayerEntry, artifact: MapLayerArtifact, index: number
 	return `${artifact}:${index}`;
 }
 
-/**
- * The entries of `artifact` belonging to `id`, each with a stable key. Entry
- * objects are handed back by reference — these tables run to thousands of
- * entries and copying them buys nothing.
- */
+// Entry objects are handed back by reference -- these tables run to thousands of
+// entries and copying them buys nothing.
 export function selectLayerEntries<T extends MapLayerEntry>(
 	id: MapLayerId,
 	artifact: RawArtifact<T>

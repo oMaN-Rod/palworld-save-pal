@@ -19,13 +19,10 @@ export type RendererInfo = {
 	memory: { geometries: number; textures: number };
 };
 
-// 'timed-out' marks a stop whose camera never reached map-idle within the wait
-// budget, so its timings measured load rather than steady-state render.
 export type StopOutcome = 'settled' | 'timed-out';
 
-// 'unavailable' marks a stop where no renderer was found at all. Its counts stay
-// null rather than 0: a renderer reporting zero draws and a missing renderer are
-// both falsy but mean opposite things.
+// 'unavailable' counts stay null rather than 0: a renderer reporting zero draws and a
+// missing renderer are both falsy but mean opposite things.
 export type RendererStatus = 'measured' | 'unavailable';
 
 export type BenchResult = FrameSummary & {
@@ -38,8 +35,6 @@ export type BenchResult = FrameSummary & {
 	textures: number | null;
 };
 
-// World cm rather than lng/lat so these read against the map's own coordinate
-// overlay. `mountain` reproduces the framing grading screenshots are compared at.
 export const BENCH_STOPS: BenchStop[] = [
 	{ name: 'overview', worldX: 0, worldY: 0, zoom: 1.5, pitch: 0, bearing: 0 },
 	{ name: 'mountain', worldX: -328310, worldY: 150504, zoom: 4, pitch: 72.5, bearing: 0 },

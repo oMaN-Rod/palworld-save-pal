@@ -38,8 +38,6 @@ const fpWithBoxOffset: Footprint = {
 	archetype: 'wallDoor'
 };
 
-// Origin, the four far compass points (very different latitude scale factors),
-// positive and negative altitude, and yaw both negative and past a full turn.
 const STRUCTURES: BaseStructure[] = [
 	base({ x: 0, y: 0, z: 0, yaw: 0 }),
 	base({ x: -1_099_400, y: 0, z: 5000, yaw: Math.PI / 4 }),

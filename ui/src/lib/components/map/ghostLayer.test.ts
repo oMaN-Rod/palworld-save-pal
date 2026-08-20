@@ -20,8 +20,6 @@ const world = (translation: { x: number; y: number; z: number }, rotation: Quat,
 	scale
 });
 
-// Ground truth from the standard Hamilton formula, independent of three.js and
-// of the conversion under test, so this cannot be circular.
 function ueRotateVector([x, y, z, w]: QuatTuple, [vx, vy, vz]: Vec3): Vec3 {
 	return [
 		(1 - 2 * (y * y + z * z)) * vx + 2 * (x * y - w * z) * vy + 2 * (x * z + w * y) * vz,
@@ -30,8 +28,6 @@ function ueRotateVector([x, y, z, w]: QuatTuple, [vx, vy, vz]: Vec3): Vec3 {
 	];
 }
 
-// Builds a combined pitch+roll test quaternion from elemental axis rotations,
-// again independent of the code under test.
 function ueQuatMultiply([x1, y1, z1, w1]: QuatTuple, [x2, y2, z2, w2]: QuatTuple): QuatTuple {
 	return [
 		w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
@@ -41,16 +37,11 @@ function ueQuatMultiply([x1, y1, z1, w1]: QuatTuple, [x2, y2, z2, w2]: QuatTuple
 	];
 }
 
-// The ue.(x,y,z) -> three.(x,z,y) axis swap, applied to a plain vector (same
-// map the position path uses).
 function ueToThreeVec([vx, vy, vz]: Vec3): THREE.Vector3 {
 	return new THREE.Vector3(vx, vz, vy);
 }
 
 describe('ghostInstanceMatrix', () => {
-	// Rotating a UE vector then converting to three-space must equal converting
-	// first and then applying the matrix's rotation. MESH_FLIP is common to both
-	// sides, so a wrong quaternion conversion cannot be masked by it.
 	it('rotates a pitched/rolled UE quaternion consistently with the UE->three axis mapping', () => {
 		const roll: QuatTuple = [Math.sin(0.55), 0, 0, Math.cos(0.55)];
 		const pitch: QuatTuple = [0, Math.sin(-0.35), 0, Math.cos(-0.35)];
@@ -63,8 +54,6 @@ describe('ghostInstanceMatrix', () => {
 			1,
 			1
 		);
-		// extractRotation strips translation and normalizes out uniform scale,
-		// leaving exactly MESH_FLIP * R(ueQuatToThree(q)).
 		const rotation = new THREE.Matrix4().extractRotation(matrix);
 
 		const basis: Vec3[] = [
@@ -81,9 +70,6 @@ describe('ghostInstanceMatrix', () => {
 		}
 	});
 
-	// A yaw-only quaternion must still reduce to the MESH_FLIP +
-	// ueYawToThreeQuaternion path structureLayer trusts. worldZ is 0 so the
-	// expected matrix is immune to the altitude formula, isolating the rotation.
 	it('reduces to the trusted MESH_FLIP + ueYawToThreeQuaternion path for a yaw-only quaternion', () => {
 		const yaw = 0.9;
 		const qz = Math.sin(yaw / 2);

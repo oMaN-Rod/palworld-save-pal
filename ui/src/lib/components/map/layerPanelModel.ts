@@ -12,12 +12,8 @@ import {
 } from './layerRegistry';
 import { mapImg } from './styles';
 
-/**
- * Map options that are not artifact-backed layers: they read app state rather
- * than a `get_map_layer` artifact, so they are deliberately not registry rows —
- * the registry's `artifact` field would have to lie. They render through the
- * same model as the layers so the panel is one list.
- */
+// Not artifact-backed layers: they read app state rather than a `get_map_layer`
+// artifact, so the registry's `artifact` field would have to lie if they were rows.
 export const PANEL_EXTRAS = [
 	{ id: 'origin', group: 'general', defaultVisible: false },
 	{ id: 'players', group: 'general', defaultVisible: true },
@@ -64,10 +60,6 @@ const GROUP_LABELS: Record<MapLayerGroup, () => string> = {
 	poi: m.poi
 };
 
-/**
- * Panel artwork. The four marker-style layers keep the game's own compass
- * markers; the rest use the game item icon palpedia shows for the same thing.
- */
 const ICONS: Record<MapLayerId, () => string> = {
 	fast_travel: () => mapImg.fastTravel,
 	watchtower: () => mapImg.watchTower,
@@ -120,9 +112,7 @@ export type MapLayerRowModel = {
 	label: string;
 	icon: string;
 	visible: boolean;
-	/** Rendered verbatim, so two-part forms like "17/24" survive. */
 	count: string | undefined;
-	/** Requested and still on the way, as opposed to never asked for. */
 	loading: boolean;
 };
 
@@ -139,7 +129,7 @@ export type MapLayerVisibility = Partial<Record<PanelOptionId, boolean>>;
 export type PanelProbes = {
 	count?: (id: PanelOptionId) => string | undefined;
 	loading?: (id: PanelOptionId) => boolean;
-	/** False drops the row — Players and Bases need a save loaded. */
+	// False drops the row -- Players and Bases need a save loaded.
 	available?: (id: PanelOptionId) => boolean;
 };
 
@@ -148,14 +138,12 @@ function defaultVisible(id: PanelOptionId): boolean {
 	return getMapLayer(id).defaultVisible;
 }
 
-/** Visibility a caller can start from, straight off the registry. */
 export function defaultLayerVisibility(): Record<MapLayerId, boolean> {
 	const visibility = {} as Record<MapLayerId, boolean>;
 	for (const layer of MAP_LAYERS) visibility[layer.id] = layer.defaultVisible;
 	return visibility;
 }
 
-/** Every option's starting visibility, layers and non-layer options alike. */
 export function defaultPanelVisibility(): Record<PanelOptionId, boolean> {
 	const visibility = defaultLayerVisibility() as Record<PanelOptionId, boolean>;
 	for (const extra of PANEL_EXTRAS) visibility[extra.id] = extra.defaultVisible;
@@ -186,7 +174,6 @@ export function buildPanelGroups(
 				count: count?.(id),
 				loading: loading?.(id) ?? false
 			}));
-		// An empty group would draw a heading and a divider over nothing.
 		if (rows.length === 0) continue;
 		groups.push({
 			group,
@@ -199,15 +186,12 @@ export function buildPanelGroups(
 	return groups;
 }
 
-/** Every option in `group` set to `visible`, and nothing else — the parent owns
- *  the visibility record and merges this over it. */
 export function groupVisibilityPatch(group: MapLayerGroup, visible: boolean): MapLayerVisibility {
 	const patch: MapLayerVisibility = {};
 	for (const id of optionsInGroup(group)) patch[id] = visible;
 	return patch;
 }
 
-/** Every option, for the Show All / Hide All row. */
 export function allVisibilityPatch(visible: boolean): MapLayerVisibility {
 	const patch: MapLayerVisibility = {};
 	for (const group of MAP_LAYER_GROUPS) {

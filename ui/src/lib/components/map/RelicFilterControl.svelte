@@ -12,10 +12,7 @@
 		ontoggle
 	}: {
 		types: string[];
-		/** Per-type totals for the active area. `collected` is absent on hosts with
-		 *  no player to count against. */
 		stats: Record<string, { total: number; collected?: number }>;
-		/** Per-relic-type visibility; a missing key means visible. */
 		enabled: Record<string, boolean>;
 		showCollected?: boolean;
 		ontoggle: (type: string) => void;

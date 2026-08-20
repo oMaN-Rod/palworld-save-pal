@@ -79,7 +79,6 @@
 
 		ctx.addLayer(layerSpec, initBeforeId);
 
-		// Register all layer events
 		const map = ctx.map!;
 		const eventEntries: [string, any][] = untrack(() => [
 			['click', onclick],
@@ -104,7 +103,6 @@
 		}
 	});
 
-	// Reactive paint updates
 	$effect(() => {
 		if (!ctx.map || !ctx.loaded) return;
 		if (!ctx.map.getLayer(layerId)) return;
@@ -113,7 +111,6 @@
 		}
 	});
 
-	// Reactive layout updates
 	$effect(() => {
 		if (!ctx.map || !ctx.loaded) return;
 		if (!ctx.map.getLayer(layerId)) return;
@@ -122,14 +119,12 @@
 		}
 	});
 
-	// Reactive visibility
 	$effect(() => {
 		if (!ctx.map || !ctx.loaded) return;
 		if (!ctx.map.getLayer(layerId)) return;
 		ctx.map.setLayoutProperty(layerId, 'visibility', visible ? 'visible' : 'none');
 	});
 
-	// Reactive filter
 	$effect(() => {
 		if (!ctx.map || !ctx.loaded) return;
 		if (!ctx.map.getLayer(layerId)) return;

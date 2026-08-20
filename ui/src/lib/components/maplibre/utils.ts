@@ -2,17 +2,10 @@ import type maplibregl from 'maplibre-gl';
 
 let counter = 0;
 
-/**
- * Generate a unique ID with an optional prefix.
- * Used for auto-generating source and layer IDs.
- */
 export function generateId(prefix: string = 'svlibre'): string {
 	return `${prefix}-${++counter}`;
 }
 
-/**
- * Add an event listener to an Evented object and return a cleanup function.
- */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function addEventHandler(
 	evented: maplibregl.Evented,
@@ -25,9 +18,6 @@ export function addEventHandler(
 	};
 }
 
-/**
- * Add a layer-scoped event listener and return a cleanup function.
- */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function addLayerEventHandler(
 	map: maplibregl.Map,

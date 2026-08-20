@@ -1,9 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import * as THREE from 'three';
 
-// Mesh-path tests need real GLTFLoader.load() calls to intercept: structure mesh
-// resolution goes through requestMesh/requestTexturedMesh, which share this
-// loader singleton.
 const { loadCalls } = vi.hoisted(() => ({
 	loadCalls: [] as Array<{
 		url: string;
@@ -47,8 +44,6 @@ import type { BaseStructure, Footprint } from '$types';
 import { requestMesh, type TexturedMeshBundle } from './meshLibrary';
 import manifest from '../../../../../data/json/structure_meshes.json';
 
-// Non-unit on purpose, so a stray latitude factor in the code under test cannot
-// hide behind cmToMerc = 1.
 const CM_TO_MERC = 2.5e-9;
 
 const identityPart: MeshPart = { loc: [0, 0, 0], rot: [0, 0, 0], scale: [1, 1, 1] };
@@ -83,9 +78,6 @@ const fpWithBoxOffset: Footprint = {
 	archetype: 'wallDoor'
 };
 
-// Divide by cmToMerc, full stop -- no MercatorCoordinate lookup, no per-point
-// latitude. A helper that re-derived latitude would encode the very bug these
-// tests exist to catch.
 function altitudeCmFromMatrix(matrix: THREE.Matrix4, cmToMerc: number): number {
 	const position = new THREE.Vector3().setFromMatrixPosition(matrix);
 	return position.z / cmToMerc;
@@ -132,8 +124,6 @@ describe('proxyInstanceMatrix (unchanged proxy behavior)', () => {
 		expect(altitude).toBeCloseTo(s.z + fpWithBoxOffset.oz - halfH, 5);
 	});
 
-	// The same discriminator as above, applied to the proxy path's own anchor
-	// computation.
 	it('produces the same altitude regardless of latitude', () => {
 		const sNorth = base({ x: -1_099_400, y: 0, z: 5000 });
 		const sSouth = base({ x: 340_000, y: 0, z: 5000 });
@@ -242,8 +232,6 @@ describe('opacity bucketing', () => {
 	});
 
 	it('splits a transparent material into its own group even at an identical colour', () => {
-		// Same tint + same typeA => identical colorHex, so opacity is the only
-		// thing that can separate these two into distinct instanced groups.
 		setMaterialTint('Glass', '#abcdef');
 		setMaterialTint('Stone', '#abcdef');
 
@@ -390,18 +378,10 @@ describe('texturedGroupMaterial', () => {
 	});
 });
 
-// Exercises the mode switch inside update() through the real caches, not just
-// the pure material-resolution helper above.
 describe('textured mode wiring', () => {
-	// Both caches are keyed by mesh name at module scope and shared across this
-	// file, so each case below uses its own single-part manifest id to keep loads
-	// from resolving out of a previous test's cache.
 	const MANIFEST = manifest as unknown as Record<string, { parts: { mesh: string }[] }>;
 	const meshNameFor = (structureId: string) => MANIFEST[structureId].parts[0].mesh;
 
-	// GLTFLoader always parses a glTF material into a MeshStandardMaterial, never
-	// the bare MeshBasicMaterial default, so giving each synthetic mesh one
-	// explicitly is what makes the assertions below meaningful.
 	function sceneWithBoxes(count: number): THREE.Object3D {
 		const group = new THREE.Group();
 		for (let i = 0; i < count; i++) {
@@ -448,26 +428,19 @@ describe('textured mode wiring', () => {
 		expect(groups[0].mesh.material).toBeInstanceOf(THREE.MeshLambertMaterial);
 	});
 
-	// The other tests here cannot guard the default's *value*: with the bundle
-	// still pending, requestTexturedMesh returns null and the colour path runs
-	// whichever way the default reads. This one resolves the bundle first, then
-	// calls update() with `textured` omitted, so only a `false` default keeps it
-	// on the colour path. Flipping it to `true` was confirmed to fail here.
 	it('defaults to the flat-colour material even once a textured bundle is already cached and ready', async () => {
 		const structureId = 'CookingStove';
 		const meshName = meshNameFor(structureId);
 		const layer = makeLayer('default-guard');
 		layer.update(oneStructure(structureId), {}, 'MainMap', 1);
-		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) }); // colour-mode geometry ready
-		layer.update(oneStructure(structureId), {}, 'MainMap', 1, true); // textured on; drives the load
-		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) }); // textured bundle settles
-		await Promise.resolve(); // flush the settle-triggered rebuild
+		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) });
+		layer.update(oneStructure(structureId), {}, 'MainMap', 1, true);
+		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) });
+		await Promise.resolve();
 
-		// Confirms the bundle is genuinely resolved before the real assertion below;
-		// otherwise this would pass for the wrong reason.
 		expect(layer.groupsForTest()[0].mesh.material).toBeInstanceOf(THREE.MeshStandardMaterial);
 
-		layer.update(oneStructure(structureId), {}, 'MainMap', 1); // textured omitted -> default
+		layer.update(oneStructure(structureId), {}, 'MainMap', 1);
 
 		expect(layer.groupsForTest()[0].mesh.material).toBeInstanceOf(THREE.MeshLambertMaterial);
 	});
@@ -477,16 +450,13 @@ describe('textured mode wiring', () => {
 		const meshName = meshNameFor(structureId);
 		const layer = makeLayer('pending');
 		layer.update(oneStructure(structureId), {}, 'MainMap', 1);
-		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) }); // colour-mode geometry ready
-		layer.update(oneStructure(structureId), {}, 'MainMap', 1, true); // textured on; its own bundle not loaded yet
+		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) });
+		layer.update(oneStructure(structureId), {}, 'MainMap', 1, true);
 
 		let groups = layer.groupsForTest();
 		expect(groups.length).toBe(1);
 		expect(groups[0].mesh.material).toBeInstanceOf(THREE.MeshLambertMaterial);
 
-		// requestMesh's own call already settled and is served from cache, so the
-		// most recent load() is requestTexturedMesh's; settling it should requeue a
-		// rebuild via onTexturedMeshLoaded.
 		lastCallFor(meshName).onLoad({ scene: sceneWithBoxes(1) });
 		await Promise.resolve();
 
@@ -533,8 +503,6 @@ describe('textured mode wiring', () => {
 	});
 });
 
-// The point of setVerticalScale: a camera-driven scale change, which happens on
-// every move event, must not pay update()'s full group/material rebuild.
 describe('setVerticalScale (camera-only compose)', () => {
 	function makeVScaleLayer(idSuffix: string) {
 		const layer = createStructureLayer({ id: `test-vscale-${idSuffix}` });
@@ -593,12 +561,6 @@ describe('setVerticalScale (camera-only compose)', () => {
 	});
 });
 
-// Everything above exercises only the proxy path or asserts material type, so
-// the mesh path's partLocalMatrix post-multiply has no coverage of its own: a
-// reversed multiplication order or an index drift would misplace every
-// multi-part structure while the rest of this file stayed green. Wooden_DoorWall
-// is a real two-part entry with a non-identity part offset, pinned here against
-// meshInstanceMatrix both after update() and after setVerticalScale().
 describe('mesh-path part-local transform (multi-part structure)', () => {
 	type RealManifestPart = MeshPart & { mesh: string };
 	const MANIFEST = manifest as unknown as Record<string, { parts: RealManifestPart[] }>;

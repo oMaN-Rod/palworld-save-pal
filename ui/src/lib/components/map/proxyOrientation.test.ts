@@ -1,9 +1,6 @@
-// Cross-check: the 3D proxy-geometry path (proxyInstanceMatrix, structureLayer.ts)
-// must map a UE-local direction to the same mercator direction that flat mode
+// Cross-check: the 3D proxy-geometry path (proxyInstanceMatrix, structureLayer.ts) must
+// map a UE-local direction to the same mercator direction that flat mode
 // (buildStructureFC, features.ts -- shipped, visually verified) puts it.
-// Tighter than the mesh cross-check in meshOrientation.test.ts: both paths
-// consume the same footprint dimensions (fp.sx/fp.sy), so ring corners can be
-// compared directly instead of via a small synthetic offset.
 import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
 import { MercatorCoordinate } from 'maplibre-gl';

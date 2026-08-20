@@ -1,8 +1,6 @@
-// Lazy, cached textured geometry+material for map objects (relics, fast travel
-// statues). These glbs are meshopt, not Draco like structures, so this keeps its
-// own loader. Unlike palMeshLibrary these are instanced, and an InstancedMesh
-// needs one geometry plus one material (or an array keyed by geometry.groups)
-// rather than a scene graph -- hence a bundle per mesh name, not an Object3D.
+// Unlike palMeshLibrary these are instanced, and an InstancedMesh needs one geometry
+// plus one material (or an array keyed by geometry.groups) rather than a scene
+// graph -- hence a bundle per mesh name, not an Object3D.
 import * as THREE from 'three';
 import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {

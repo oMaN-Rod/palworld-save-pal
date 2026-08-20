@@ -1,8 +1,5 @@
-// Loads real Pal GLBs through the unmocked GLTFLoader. The mocked suite only
-// ever reaches the failure branch -- outside a browser FileLoader throws on a
-// relative URL and the library routes that to permanent failure -- so meshopt
-// registration, dequantization, and webp texture support are unverified there.
-// Only the network is stubbed here; loader setup and attribute handling are real.
+// Loads real Pal GLBs through the unmocked GLTFLoader; only the network is stubbed,
+// so meshopt registration, dequantization and webp texture support run for real.
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -14,13 +11,9 @@ const MANIFEST = manifestJson as unknown as Record<string, Entry>;
 
 const PALS_DIR = resolve(__dirname, '../../../../static/models/pals');
 
-// Resolved from the manifest rather than hardcoded: the hash suffix in the
-// filename is the exporter's, not ours to reproduce here.
 const KEY = 'anubis';
 const FILE = MANIFEST[KEY]?.file;
 
-// anubis is all-textured; blackpuppy ships 3 textured + 2 untextured materials,
-// covering both branches of the emissive-floor guard.
 const UNTEXTURED_KEY = 'blackpuppy';
 const UNTEXTURED_FILE = MANIFEST[UNTEXTURED_KEY]?.file;
 
@@ -62,8 +55,6 @@ async function loadRealPalMesh(key: string, file: string) {
 		fileBytes.byteOffset + fileBytes.byteLength
 	);
 
-	// FileLoader reports progress via a browser-only ProgressEvent. This test only
-	// reads the final outcome, so a minimal stand-in suffices.
 	(global as { ProgressEvent?: unknown }).ProgressEvent = class {
 		constructor(
 			public type: string,
@@ -71,8 +62,6 @@ async function loadRealPalMesh(key: string, file: string) {
 		) {}
 	};
 
-	// GLTFParser.loadImageSource reads `self.URL` unconditionally, and Node has no
-	// `self`. Node's own URL supports createObjectURL, so aliasing suffices.
 	(global as { self?: unknown }).self = globalThis;
 
 	(global as { document?: unknown }).document = {
@@ -89,8 +78,6 @@ async function loadRealPalMesh(key: string, file: string) {
 
 	const { requestPalMesh, palMeshFailed, onPalMeshLoaded } = await import('./palMeshLibrary');
 
-	// FileLoader's `new Request(url)` throws on a bare "/..." path outside a
-	// browser; an absolute base sidesteps that without changing behaviour.
 	const baseUrl = 'http://pals.test/models/pals';
 	expect(requestPalMesh(key, baseUrl)).toBeNull();
 
@@ -134,12 +121,9 @@ describe('palMeshLibrary (real gltfpack/meshopt/webp Pal GLBs)', () => {
 		async () => {
 			const { object, secondCall, failed } = await loadRealPalMesh(KEY, FILE);
 
-			// Without MeshoptDecoder registered this would come back failed: glTF
-			// requires rejecting an asset whose extensionsRequired is unsatisfied.
 			expect(failed).toBe(false);
 			expect(object).toBeInstanceOf(THREE.Object3D);
 
-			// Every attribute Float32Array proves dequantizeToFloat32 ran.
 			let meshCount = 0;
 			let materialCount = 0;
 			const box = new THREE.Box3();
@@ -156,7 +140,6 @@ describe('palMeshLibrary (real gltfpack/meshopt/webp Pal GLBs)', () => {
 			});
 			expect(meshCount).toBeGreaterThan(0);
 
-			// Stays a textured model, not bare geometry.
 			expect(materialCount).toBeGreaterThan(0);
 
 			// Finite non-zero extents catch geometry destroyed by an in-place
@@ -186,8 +169,6 @@ describe('palMeshLibrary (real gltfpack/meshopt/webp Pal GLBs)', () => {
 				expect(size[axis]).toBeLessThan(1000);
 			}
 
-			// Sharing contract: the same cached instance every call, never cloned
-			// here, so callers must clone before adding to a scene.
 			expect(secondCall).toBe(object);
 		}
 	);
@@ -239,8 +220,6 @@ describe('palMeshLibrary (real gltfpack/meshopt/webp Pal GLBs)', () => {
 					}
 				}
 			});
-			// anubis is all-textured, so only the textured branch is proven here;
-			// blackpuppy covers the untextured one below.
 			expect(textured).toBeGreaterThan(0);
 		}
 	);

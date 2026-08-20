@@ -139,15 +139,12 @@ describe('buildBossFC', () => {
 	};
 
 	it('marks a boss spawn with the boss icon by default', () => {
-		// Broken by a default change that would silently repaint every boss marker.
 		const [feature] = buildBossFC([spawn] as never, 'MainMap').features;
 		expect(feature.properties.icon).toBe(ICON_BOSS);
 		expect(feature.properties.type).toBe('boss');
 	});
 
 	it('marks a bounty spawn with its own icon and type', () => {
-		// Bounty targets rendered as boss markers until they had a layer of their
-		// own; without a distinct icon the two are indistinguishable on the map.
 		const [feature] = buildBossFC([spawn] as never, 'MainMap', {
 			type: 'bounty',
 			icon: ICON_BOUNTY
@@ -157,7 +154,6 @@ describe('buildBossFC', () => {
 	});
 
 	it('carries rowKey through as the feature key either way', () => {
-		// Broken by keying on the array index, which is positional not stable.
 		const asBoss = buildBossFC([spawn] as never, 'MainMap').features[0];
 		const asBounty = buildBossFC([spawn] as never, 'MainMap', {
 			type: 'bounty',
@@ -168,7 +164,6 @@ describe('buildBossFC', () => {
 	});
 
 	it('drops a spawn outside the requested area', () => {
-		// Broken by rendering every spawn on whichever map is open.
 		expect(buildBossFC([spawn] as never, 'Tree').features).toEqual([]);
 	});
 });
@@ -359,7 +354,6 @@ describe('buildStructureFC identity', () => {
 
 describe('lookupFootprint', () => {
 	const fp = (sx: number) => ({ sx, sy: 1, sz: 1, ox: 0, oy: 0, oz: 0, typeA: 'Foundation' });
-	// Saves spell some ids with different casing than the data table row key.
 	const registry = { Stone_foundation: fp(320), Stone_Pillar: fp(50), Stone_pillar: fp(60) };
 
 	it('finds an exact match', () => {

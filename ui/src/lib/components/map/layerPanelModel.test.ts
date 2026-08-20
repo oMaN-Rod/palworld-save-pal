@@ -50,8 +50,6 @@ describe('mapLayerLabel', () => {
 		expect(new Set(labels).size).toBe(labels.length);
 	});
 
-	// Reading the translated message rather than a literal is the whole point;
-	// a hardcoded 'Dungeons' would pass a truthiness check and fail this.
 	it('reads the existing translated message where one exists', () => {
 		expect(mapLayerLabel('fast_travel')).toBe(m.fast_travel());
 		expect(mapLayerLabel('watchtower')).toBe(m.watchtower());
@@ -66,7 +64,6 @@ describe('mapLayerLabel', () => {
 		expect(mapLayerLabel('journals')).toBe(m.journals());
 	});
 
-	// Every layer label now has a key; none may fall back to an English literal.
 	it('reads every group heading and bulk control from a message too', () => {
 		expect(mapLayerGroupLabel('locations')).toBe(m.locations());
 		expect(mapLayerGroupLabel('collectibles')).toBe(m.collectibles());
@@ -77,10 +74,6 @@ describe('mapLayerLabel', () => {
 		expect(loadingLabel()).toBe(m.loading());
 	});
 
-	// Tests run under the base locale, where an English literal and the message
-	// it replaced are the same string -- so comparing the two cannot tell them
-	// apart. The source can. Every label in the file now has a key, so none of
-	// these may appear as a literal.
 	it('leaves no hardcoded English label in the source', async () => {
 		const source = await readFile(
 			fileURLToPath(new URL('./layerPanelModel.ts', import.meta.url)),
@@ -168,9 +161,6 @@ describe('buildPanelGroups', () => {
 		expect(rows.find((row) => row.id === 'dungeons')!.loading).toBe(false);
 	});
 
-	// Fast Travel, Watchtower and Relics show "unlocked/total" when a player is
-	// selected, and Players/Bases show "loaded/total". The model must carry the
-	// string through untouched rather than reducing it to one number.
 	it('carries the count string through verbatim, two-part forms included', () => {
 		const counts = (id: string) =>
 			id === 'dungeons' ? '42' : id === 'fast_travel' ? '17/24' : undefined;
@@ -202,9 +192,6 @@ describe('buildPanelGroups', () => {
 	});
 });
 
-// The non-layer options (Origin, Players, Bases, Labels) are not backed by an
-// artifact, so they are not registry layers -- but they render through the same
-// model so there is only one list on screen.
 describe('non-layer options', () => {
 	const allOn = Object.fromEntries([
 		...MAP_LAYERS.map((layer) => [layer.id, true]),
@@ -227,8 +214,6 @@ describe('non-layer options', () => {
 		}
 	});
 
-	// Players and Bases were inside {#if appState.saveFile} and must not appear
-	// when no save is loaded.
 	it('drops the save-gated options when they are unavailable', () => {
 		const groups = buildPanelGroups(allOn, {
 			available: (id) => id !== 'players' && id !== 'bases'
@@ -247,8 +232,6 @@ describe('non-layer options', () => {
 	});
 });
 
-// The legacy block and the panel both rendered Fast Travel, Watchtower,
-// Dungeons, Relics, Bosses, Alpha and Predator. There is one list now.
 describe('no option renders twice', () => {
 	it('yields each id exactly once across every group', () => {
 		const allOn = Object.fromEntries([
@@ -270,8 +253,6 @@ describe('panelIcon', () => {
 		expect(panelIcon('journals')).toContain('technologybook');
 	});
 
-	// Two options sharing one image reads as a rendering bug, not as a category.
-	// Labels and Fast Travel both drew the fast-travel tower two rows apart.
 	it('gives no two options the same image', () => {
 		const ids = [...MAP_LAYERS.map((layer) => layer.id), ...PANEL_EXTRAS.map((e) => e.id)];
 		const byIcon = new Map<string, string[]>();
@@ -296,8 +277,6 @@ describe('groupVisibilityPatch', () => {
 	});
 
 	it('sets every id in the group to the requested value', () => {
-		// Asserted as an invariant rather than a literal list: a hardcoded length
-		// here fails on every layer added, which says nothing about the patch.
 		const patch = groupVisibilityPatch('collectibles', false);
 		const ids = mapLayersInGroup('collectibles').map((layer) => layer.id);
 		expect(Object.keys(patch).sort()).toEqual([...ids].sort());
@@ -349,8 +328,6 @@ describe('MapLayerPanel structure', () => {
 		for (const extra of PANEL_EXTRAS) expect(body).toContain(panelOptionLabel(extra.id));
 	});
 
-	// The user asked for the existing option shape back: a clickable button with
-	// an icon and a label, dimmed when off. No checkboxes, no radios.
 	it('uses a button per option, never a checkbox or radio', () => {
 		const body = html();
 		expect(body).not.toMatch(/type="checkbox"/);
@@ -369,7 +346,6 @@ describe('MapLayerPanel structure', () => {
 		expect(html().match(/grid grid-cols-2 gap-2/g) ?? []).toHaveLength(4);
 	});
 
-	// A rule between categories, in the idiom the Show All / Hide All row uses.
 	it('separates the categories with a rule and draws no box around itself', () => {
 		const body = html();
 		expect(body.match(/border-b-surface-800/g) ?? []).toHaveLength(3);
@@ -405,15 +381,12 @@ describe('MapLayerPanel counts', () => {
 		);
 	});
 
-	// Rendering the panel must never pull 20k markers over the wire.
 	it('reads through peek and never asks the store to fetch', () => {
 		html();
 		expect(peek).toHaveBeenCalled();
 		expect(getLayer).not.toHaveBeenCalled();
 	});
 
-	// A layer that has been asked for but has not arrived must not look identical
-	// to one nobody requested.
 	it('marks an in-flight row as loading', () => {
 		isLoading.mockImplementation((id: string) => id === 'camps');
 		const body = html();

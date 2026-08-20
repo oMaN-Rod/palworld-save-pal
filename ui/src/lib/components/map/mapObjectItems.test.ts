@@ -67,8 +67,6 @@ describe('buildMapObjectItems', () => {
 		expect(items).toEqual([]);
 	});
 
-	// Reverting `rot: source.rot` to `rot: [0, 0, 0]` would compile, typecheck and
-	// pass every other test while every relic silently lost its orientation.
 	it("carries the relic source's own rotation, not a zero placeholder", () => {
 		const items = buildMapObjectItems(
 			true,
@@ -79,8 +77,6 @@ describe('buildMapObjectItems', () => {
 		expect(items[0].rot).toEqual([0, 50, 0]);
 	});
 
-	// Fast travel points carry no rotation, so [0, 0, 0] is correct rather than a
-	// placeholder to be replaced by a source read.
 	it('carries [0, 0, 0] for a fast travel item, which has no rotation data', () => {
 		const items = buildMapObjectItems(
 			true,
@@ -91,8 +87,6 @@ describe('buildMapObjectItems', () => {
 		expect(items[0].rot).toEqual([0, 0, 0]);
 	});
 
-	// Would break if fastTravel.size and relics.size were ever swapped or
-	// collapsed onto a single multiplier.
 	it('scales a fast travel item by fastTravel.size, not relics.size', () => {
 		const items = buildMapObjectItems(
 			true,
@@ -103,8 +97,6 @@ describe('buildMapObjectItems', () => {
 		expect(ft?.scale).toBe(3);
 	});
 
-	// Watchtowers share the point list and layer with statues, so only the
-	// per-point class check keeps their scale independent.
 	it('scales a watchtower item by fastTravel.watchtowerSize, not fastTravel.size', () => {
 		const items = buildMapObjectItems(
 			true,
@@ -145,8 +137,6 @@ describe('buildMapObjectItems', () => {
 		expect(relic?.scale).toBe(7);
 	});
 
-	// Would break if x/y started coming from the source record instead of the
-	// point, or z/actorClass from the point instead of the source.
 	it("carries world x/y from the point and z/actorClass from that point's source", () => {
 		const items = buildMapObjectItems(
 			true,
@@ -161,8 +151,6 @@ describe('buildMapObjectItems', () => {
 		});
 	});
 
-	// Would break if the two portal palettes (fastTravelPortalColor/relicPortalColor)
-	// were ever swapped between the two loops.
 	it('colours a locked fast travel item from the fast-travel palette, not the relic palette', () => {
 		const items = buildMapObjectItems(
 			true,
@@ -209,8 +197,6 @@ describe('buildMapObjectItems', () => {
 		expect(items).toEqual([]);
 	});
 
-	// Would break if a fast-travel beam sized itself from relic's radius or a
-	// shared default instead of its own constant.
 	it("gives a fast travel item its own ring radius, not relic's", () => {
 		const items = buildMapObjectItems(
 			true,
@@ -230,8 +216,6 @@ describe('buildMapObjectItems', () => {
 	});
 });
 
-// Pins the constant each ring builder uses. Map.svelte has no test file to catch
-// the two being swapped at the call site, so the functions must prove it.
 describe('buildFastTravelRingFC', () => {
 	function ringRadiusPx(fc: GeoJSON.FeatureCollection, index: number, point: MapUnlockPoint) {
 		const ring = (fc.features[index].geometry as GeoJSON.Polygon).coordinates[0];
@@ -252,8 +236,6 @@ describe('buildFastTravelRingFC', () => {
 		}
 	});
 
-	// One FeatureCollection carries both classes, so a single radius for the whole
-	// collection would silently re-couple the two scales.
 	it('sizes a watchtower ring by the watchtower scale, leaving a statue on its own', () => {
 		const fc = buildFastTravelRingFC([FT_POINT, WT_POINT], 'MainMap', 2, 5);
 		expect(ringRadiusPx(fc, 1, WT_POINT)).toBeCloseTo(

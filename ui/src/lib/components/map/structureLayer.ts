@@ -1,9 +1,5 @@
-// A MapLibre CustomLayerInterface that renders placed structures as instanced
-// three.js meshes — real game meshes where the parts manifest resolves them,
-// falling back to procedural proxy geometry otherwise. Placement/height reuse
-// structurePlacement + the same verticalScale the DEM terrain uses. Technique:
-// MapLibre "add a 3D model using three.js" example (shared GL context,
-// MercatorCoordinate placement).
+// Technique: MapLibre's "add a 3D model using three.js" example (shared GL
+// context, MercatorCoordinate placement).
 import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { BaseStructure, Footprint } from '$types';
@@ -30,28 +26,20 @@ import { PickIndex } from './pickIndex';
 import { decodePickBytes } from './pickEncoding';
 import { bakeStructureInstance, composeStructureMatrix, STRUCTURE_BAKE_STRIDE } from './structureInstances';
 
-// Both mesh and proxy geometry are authored Y-up; MapLibre's mercator world
-// (fed through mainMatrix with an identity camera view) is Z-up. A naive
-// rotationX = PI/2 base flip (the MapLibre three.js example's reconciliation)
-// reflects the horizontal plane relative to flat mode's ground truth
-// (buildStructureFC, features.ts): local +X would land on world +x and local
-// +Z on world -y, a determinant -1 map, while flat mode's yaw rotation is a
-// proper (determinant +1) rotation. MESH_FLIP is the determinant +1
-// replacement -- local +X -> world -y, +Z -> world +x, +Y (up) unchanged --
-// verified against flat mode by meshOrientation.test.ts and
-// proxyOrientation.test.ts. Shared by both the mesh and proxy paths.
+// Both mesh and proxy geometry are authored Y-up; MapLibre's mercator world is Z-up.
+// The naive rotationX = PI/2 flip is a determinant -1 map and reflects the plane
+// relative to flat mode's ground truth; MESH_FLIP is the determinant +1 replacement
+// (local +X -> world -y, +Z -> world +x, +Y unchanged), verified by
+// meshOrientation.test.ts and proxyOrientation.test.ts.
 export const MESH_FLIP = new THREE.Matrix4().makeBasis(
 	new THREE.Vector3(0, -1, 0),
 	new THREE.Vector3(0, 0, 1),
 	new THREE.Vector3(1, 0, 0)
 );
 
-// Identity comes from gl_InstanceID plus a per-group base rather than a
-// per-instance attribute: geometries are shared between buckets, so attaching an
-// InstancedBufferAttribute would corrupt the sibling bucket or leak a fresh
-// buffer on every update. The colour is computed per vertex and passed flat so
-// interpolation cannot corrupt it, and a raw ShaderMaterial keeps three's colour
-// management off the value.
+// Identity comes from gl_InstanceID plus a per-group base rather than a per-instance
+// attribute: geometries are shared between buckets, so an InstancedBufferAttribute
+// here would corrupt the sibling bucket. `flat` keeps interpolation from corrupting it.
 const PICK_VERT = `
 uniform float uPickBase;
 flat out vec3 vPick;
@@ -81,12 +69,11 @@ export type Group = {
 	keys: string[];
 	colorHex: string;
 	pickBase: number;
-	// Camera-independent per-instance data (STRUCTURE_BAKE_STRIDE floats each, in
-	// key order), so setVerticalScale can recompose every matrix from this
-	// without touching groups, geometry or materials.
+	// Camera-independent per-instance data, so setVerticalScale can recompose every
+	// matrix without touching groups, geometry or materials.
 	baked: Float32Array;
-	// An extra camera-independent transform composeStructureMatrix does not fold
-	// in; null on the proxy path, which has no such offset.
+	// An extra transform composeStructureMatrix does not fold in; null on the proxy
+	// path, which has no such offset.
 	partMatrices: THREE.Matrix4[] | null;
 };
 
@@ -94,10 +81,8 @@ type MeshItem = { s: BaseStructure; fp: Footprint; part: ManifestPart };
 type MeshBucket = { colorHex: string; opacity: number; mesh: string; items: MeshItem[] };
 type ProxyBucket = { fp: Footprint; colorHex: string; opacity: number; items: BaseStructure[] };
 
-// Pure (no WebGL, no InstancedMesh) per-instance transforms, split out of
-// update() so C1 (cm-vs-metre scale) and C2 (box-offset leaking into the mesh
-// path) are each covered by a unit test instead of only being reachable
-// through a live renderer.
+// Pure (no WebGL, no InstancedMesh) per-instance transform, split out of update()
+// so it is unit-testable without a live renderer.
 export function meshInstanceMatrix(
 	s: BaseStructure,
 	part: MeshPart,
@@ -108,9 +93,8 @@ export function meshInstanceMatrix(
 	// Real game meshes use the raw actor transform: unlike the proxy path there
 	// is no origin/half-height centering to compensate for a synthetic box.
 	const p = structureAnchor(s, area);
-	// Z goes through cmToMerc directly, not fromLngLat's altitude argument, which
-	// would divide by this instance's own latitude rather than the camera
-	// centre's (see sceneryLayer.sceneryInstanceMatrix).
+	// Z goes through cmToMerc directly, not fromLngLat's altitude argument, which would
+	// divide by this instance's own latitude rather than the camera centre's.
 	const anchor = MercatorCoordinate.fromLngLat([p.lng, p.lat]);
 	const anchorZ = p.altitudeCm * cmToMerc;
 	const yawRotation = new THREE.Matrix4().makeRotationFromQuaternion(ueYawToThreeQuaternion(p.yaw));
@@ -147,10 +131,8 @@ export function proxyInstanceMatrix(
 		.multiply(scale);
 }
 
-// Pure CSS-pixel -> device-pixel conversion for the GPU colour-pick read, split
-// out of runPick() for the same reason meshInstanceMatrix/proxyInstanceMatrix
-// above are: it's exercised without a live WebGL context. WebGL's framebuffer
-// origin is bottom-left; the canvas/CSS origin is top-left, hence the Y flip.
+// WebGL's framebuffer origin is bottom-left; the canvas/CSS origin is top-left,
+// hence the Y flip.
 export function pickPixelCoords(
 	cssX: number,
 	cssY: number,
@@ -164,17 +146,12 @@ export function pickPixelCoords(
 	return { x, y };
 }
 
-// Shared across layer instances (Map.svelte tears down and recreates this
-// CustomLayerInterface on every detailed-mode toggle) because the renderer
-// wraps MapLibre's own GL context/canvas, not one this layer owns. Disposing
-// it on toggle-off would tear down three's WebGLAttributes -- and with it the
-// GPU buffers backing every mesh/proxy geometry cached in meshLibrary and
-// proxyGeometry -- while those caches deliberately outlive the layer so a
-// toggle-on reuses them instead of re-uploading. Keeping one renderer alive
-// for the map's lifetime avoids leaking a buffer set on every toggle.
-// Module-scoped so each id is reported once, not once per pan/zoom rebuild.
 const reportedProxy = new Set<string>();
 
+// Shared across layer instances because the renderer wraps MapLibre's own GL
+// context/canvas, not one this layer owns. Disposing it on toggle-off would tear
+// down three's WebGLAttributes, and with them the GPU buffers backing every
+// mesh/proxy geometry cached in meshLibrary/proxyGeometry, which outlive the layer.
 let sharedRenderer: THREE.WebGLRenderer | null = null;
 let sharedContext: WebGLRenderingContext | WebGL2RenderingContext | null = null;
 
@@ -189,15 +166,11 @@ export function getSharedRenderer(
 	return sharedRenderer;
 }
 
-// For instrumentation that must not create a renderer. Null until the first
-// layer is added.
 export function peekSharedRenderer(): THREE.WebGLRenderer | null {
 	return sharedRenderer;
 }
 
-// Resolves a cached bundle's material(s) for one group, cloned so mutating
-// opacity here cannot bleed back into the shared cache. Mirrors
-// addInstancedGroup's opacity handling so the two modes stay consistent.
+// Cloned so mutating opacity here cannot bleed back into the shared cache.
 export function texturedGroupMaterial(
 	bundle: TexturedMeshBundle,
 	opacity: number
@@ -221,15 +194,12 @@ export type StructureLayer = CustomLayerInterface & {
 		verticalScale: number,
 		textured?: boolean
 	): void;
-	// The camera-only path a pan/zoom/pitch takes instead of a full update():
-	// recomposes matrices without rebuilding groups, geometry or materials.
 	setVerticalScale(verticalScale: number): void;
 	setHover(key: string | null): void;
 	requestPick(x: number, y: number, cb: (key: string | null) => void): void;
 	dispose(): void;
-	// Test-only introspection: onAdd's renderer setup needs a live GL context, but
-	// update()'s bucket/group building does not, so tests attach a stub map
-	// directly rather than going through onAdd.
+	// Test-only: onAdd needs a live GL context, but update()'s bucket/group building
+	// does not, so tests attach a stub map directly rather than going through onAdd.
 	attachMapForTest(map: MLMap): void;
 	groupsForTest(): Group[];
 	keyAtForTest(index: number): string | null;
@@ -268,15 +238,10 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	function clearGroups() {
 		for (const g of groups) {
 			scene.remove(g.mesh);
-			// Geometry is never disposed here: mesh-library geometry (requestMesh) and
-			// proxy geometry (buildArchetypeGeometry) both live in module-level caches
-			// shared across updates and layer instances. Disposing a cached geometry
-			// frees its GPU buffers while the object stays cached, so a later cache
-			// hit would render nothing. Only the per-update material and the
-			// InstancedMesh's own instance-attribute buffers belong to this layer.
-			// A textured group's material is a per-update clone, so it belongs to this
-			// layer and is disposed like the flat-colour one. The cached bundle's
-			// original is not ours to dispose.
+			// Geometry is never disposed here: it lives in module-level caches (meshLibrary,
+			// proxyGeometry) shared across updates and layer instances, so freeing its GPU
+			// buffers here would leave a later cache hit rendering nothing. Only the
+			// per-update material (including a textured group's cloned one) belongs to this layer.
 			const material = g.mesh.material;
 			if (Array.isArray(material)) {
 				for (const m of material) m.dispose();
@@ -289,9 +254,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 		pickIndex.reset();
 	}
 
-	// Shared by update() and setVerticalScale() so the two never drift.
-	// partMatrix does not depend on cmToMerc, so it post-multiplies rather than
-	// being folded into the bake.
+	// Shared by update() and setVerticalScale() so the two never drift. partMatrix
+	// does not depend on cmToMerc, so it post-multiplies rather than folding into the bake.
 	const scratch = new THREE.Matrix4();
 	function applyBakedMatrix(
 		inst: THREE.InstancedMesh,
@@ -321,19 +285,14 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 		pendingPick = null;
 		if (!renderer || !request) return;
 
-		// Taken from the live canvas, not renderer.getDrawingBufferSize(): that getter
-		// returns width * pixelRatio captured at construction time and is only kept
-		// current by setSize/setDrawingBufferSize, neither of which this layer calls
-		// (the shared renderer wraps MapLibre's own canvas). After any canvas resize
-		// it would go stale while `ratio` below -- already read from the live canvas
-		// -- stays correct, displacing every pick.
+		// Taken from the live canvas, not renderer.getDrawingBufferSize(): that getter is
+		// only kept current by setSize/setDrawingBufferSize, neither of which this layer
+		// calls, and would go stale after a canvas resize, displacing every pick.
 		const canvas = renderer.domElement;
 		const width = canvas.width;
 		const height = canvas.height;
-		// Derived from the canvas rather than renderer.getPixelRatio(): the shared
-		// renderer wraps MapLibre's own canvas/context and is never told its ratio
-		// (setPixelRatio is never called), so that getter is always 1 regardless of
-		// the canvas's actual device-pixel size.
+		// Derived from the canvas rather than renderer.getPixelRatio(): setPixelRatio is
+		// never called on this shared renderer, so that getter is always 1.
 		const ratio = canvas.clientWidth > 0 ? canvas.width / canvas.clientWidth : 1;
 		const coords = pickPixelCoords(request.x, request.y, ratio, width, height);
 		if (!coords) {
@@ -409,10 +368,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				const parts = structureParts(s.map_object_id);
 
 				if (parts && parts.length > 0) {
-					// Resolve every part before committing to a render path: a mesh part
-					// with no size data can't stand in for the whole structure, so a
-					// single permanently-failed part falls the whole structure back to
-					// its proxy box rather than mixing partial mesh + a misplaced proxy.
+					// A single permanently-failed part falls the whole structure back to its
+					// proxy box, rather than mixing a partial mesh with a misplaced proxy.
 					const resolvedParts: ManifestPart[] = [];
 					let failedMesh: string | null = null;
 					let anyLoading = false;
@@ -452,10 +409,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				count: number,
 				opacity: number
 			): { inst: THREE.InstancedMesh; keys: string[] } {
-				// Transparent groups must still write depth: this layer shares MapLibre's
-				// depth buffer, and pixels left at the cleared far value get repainted by
-				// its later passes, so the glass disappears entirely. The cost is that
-				// glass occludes glass behind it rather than showing through.
+				// Transparent groups must still write depth: this layer shares MapLibre's depth
+				// buffer, and pixels left at the cleared far value get repainted by later passes,
+				// making the glass disappear entirely (at the cost of glass occluding glass).
 				const material = new THREE.MeshLambertMaterial({
 					color: 0xffffff,
 					side: THREE.DoubleSide,
@@ -467,14 +423,12 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				inst.frustumCulled = false;
 				// The pick pass swaps in scene.overrideMaterial and so ignores opacity: an
 				// opacity-0 group would stay invisible yet keep intercepting clicks.
-				// Hiding it skips both passes, letting clicks fall through.
 				inst.visible = opacity > 0;
 				return { inst, keys: [] };
 			}
 
-			// Textured groups skip the flat-colour path: with no instanceColor here,
-			// instances render the glb's own texture until applyHover() lazily creates
-			// one, initialised to white.
+			// With no instanceColor here, instances render the glb's own texture until
+			// applyHover() lazily creates one, initialised to white.
 			function addTexturedInstancedGroup(
 				bundle: TexturedMeshBundle,
 				count: number,
@@ -501,10 +455,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				groups.push({ mesh: inst, keys, colorHex, pickBase, baked, partMatrices });
 				inst.onBeforeRender = (_renderer, _scene, _camera, _geometry, material) => {
 					const sm = material as THREE.ShaderMaterial;
-					// scene.overrideMaterial substitutes one shared ShaderMaterial instance for
-					// every render item, so three only re-uploads its uniforms when the program
-					// or material identity changes -- never between instances sharing this
-					// material. uniformsNeedUpdate forces the upload for every group's draw call.
+					// scene.overrideMaterial substitutes one shared ShaderMaterial for every render
+					// item, so three only re-uploads uniforms on identity change; uniformsNeedUpdate
+					// forces the upload for each group's draw call.
 					if (!sm.uniforms?.uPickBase) return;
 					sm.uniforms.uPickBase.value = pickBase;
 					sm.uniformsNeedUpdate = true;
@@ -520,8 +473,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 					baked.set(bakeStructureInstance(structureAnchor(s, area)), i * STRUCTURE_BAKE_STRIDE);
 					partMatrices.push(partLocalMatrix(part));
 				});
-				// The textured cache loads independently of the colour-mode one above, so
-				// while it is still resolving this bucket renders flat-coloured, and
+				// While the textured cache is still resolving, this bucket renders flat-coloured;
 				// onTexturedMeshLoaded requeues a rebuild once it lands.
 				if (textured) {
 					const bundle = requestTexturedMesh(b.mesh);
@@ -570,9 +522,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			map.triggerRepaint();
 		},
 
-		// The camera-only counterpart to update(): recomposes matrices from baked
-		// data, touching no clearGroups(), no InstancedMesh construction, no
-		// PickIndex.
+		// Camera-only counterpart to update(): recomposes matrices from baked data
+		// without rebuilding groups, geometry or materials.
 		setVerticalScale(verticalScale) {
 			if (!map || disposed) return;
 			const center = map.getCenter();
@@ -599,9 +550,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
 			camera.projectionMatrix = m;
 			renderer.resetState();
-			// The pick pass shares MapLibre's context, so it runs here rather than from a
-			// standalone call: issuing draws and a readPixels outside MapLibre's own render
-			// loop risks leaving the context in a state it does not expect.
+			// Runs here, sharing MapLibre's context, rather than from a standalone call:
+			// issuing draws/readPixels outside MapLibre's own render loop risks leaving the
+			// context in a state it does not expect.
 			if (pendingPick) {
 				runPick();
 				renderer.resetState();
@@ -627,8 +578,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			pickTarget = null;
 			pickMaterial.dispose();
 			clearGroups();
-			// renderer is the module-level shared renderer (see getSharedRenderer) --
-			// it is intentionally not disposed here, only released by this instance.
+			// renderer is the module-level shared renderer; not disposed here, only released.
 			renderer = null;
 		},
 
@@ -655,10 +605,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 		}
 	}
 
-	// A settle (success or permanent failure) can fire synchronously out of
-	// requestMesh()/requestTexturedMesh() while update() is still iterating
-	// buckets; the microtask keeps it from re-entering a running update(), and
-	// rebuildQueued coalesces a burst of settles from either cache into one.
+	// A settle can fire synchronously out of requestMesh()/requestTexturedMesh() while
+	// update() is still iterating buckets; the microtask keeps it from re-entering a
+	// running update(), and rebuildQueued coalesces a burst of settles into one.
 	function scheduleRebuild() {
 		if (rebuildQueued) return;
 		rebuildQueued = true;
@@ -671,9 +620,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	// Scoped to the structure mesh directory: the cache is shared with the scenery
 	// layer, whose hundreds of meshes would otherwise each trigger a full rebuild.
 	const unsubscribeMeshLoaded = onMeshLoaded(scheduleRebuild, STRUCTURE_MODEL_DIR);
-	// The textured cache settles independently of the plain one above, so a
-	// structure already resolved for colour mode may still be waiting on its
-	// texture and needs this second subscription to rebuild once it lands.
+	// The textured cache settles independently of the plain one above, so a structure
+	// already resolved for colour mode may still need this to rebuild once its texture lands.
 	const unsubscribeTexturedMeshLoaded = onTexturedMeshLoaded(scheduleRebuild, STRUCTURE_MODEL_DIR);
 
 	return layer;

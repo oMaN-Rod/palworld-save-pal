@@ -13,13 +13,9 @@ export type MapOptions = {
 	showFastTravel: boolean;
 	showWatchtower: boolean;
 	showRelics: boolean;
-	/** Hide relics the selected player has already collected. */
 	hideCollectedRelics: boolean;
-	/** Hide fast travel points and watchtowers the selected player has already unlocked. */
 	hideUnlockedFastTravel: boolean;
-	/** Per-relic-type visibility; a missing key means visible. */
 	relicTypes: Record<string, boolean>;
-	/** Per-structure-type visibility; a missing key means visible. */
 	structureTypes: Record<string, boolean>;
 	showDungeons: boolean;
 	showBosses: boolean;
@@ -29,25 +25,15 @@ export type MapOptions = {
 	showLabels: boolean;
 	enable3d: boolean;
 	structureRenderMode: 'detailed' | 'flat';
-	/** Renders detailed structures with their glb's own texture instead of the
-	 *  per-type flat colour. */
 	structureTextured: boolean;
 	panelOpen: boolean;
-	/** Pal render scale as a multiple of true size. */
 	palSize: number;
-	/** Whether Pals turn to face the camera; north-facing when off. */
 	palAutoFollow: boolean;
-	/** Vertical offset above ground, in world centimetres. */
 	palHeight: number;
-	/** Raster opacity, cross-fading toward the hillshade relief beneath it. */
 	mapOpacity: number;
-	/** Fast travel statue render scale as a multiple of true size. */
 	fastTravelSize: number;
-	/** Watchtower render scale as a multiple of true size. */
 	watchtowerSize: number;
-	/** Relic render scale as a multiple of true size. */
 	relicSize: number;
-	/** Visibility for the registry-driven layers, keyed by layer id. */
 	mapLayerVisibility: MapLayerVisibility;
 };
 

@@ -1,6 +1,5 @@
-// Renders scenery instances as instanced three.js meshes. Positions are absolute
-// world centimetres that already include terrain elevation, so unlike structures
-// no DEM height is added.
+// Positions are absolute world centimetres that already include terrain elevation,
+// so unlike structures no DEM height is added.
 //
 // This layer owns no map subscription: update() re-derives the viewport-culled
 // bucket set each call, so the caller must re-invoke it on camera move.
@@ -46,13 +45,10 @@ export function sceneryInstanceMatrix(
 ): THREE.Matrix4 {
 	const [px, py] = worldToPixel(worldX, worldY, area);
 	const [lng, lat] = pixelToLngLat(px, py);
-	// The vertical axis deliberately bypasses fromLngLat's altitude argument,
-	// which would divide by this point's own latitude. MapLibre's terrain scales
-	// every vertex in a frame by one factor derived from the camera centre's
-	// latitude, and cmToMerc is that same factor -- so applying it directly keeps
-	// scenery in the vertical space terrain uses. Going through the altitude
-	// argument would apply both, correct only at the camera centre and drifting
-	// everywhere else.
+	// The vertical axis bypasses fromLngLat's altitude argument, which divides by this
+	// point's own latitude; cmToMerc is already the camera-centre-derived factor
+	// MapLibre's terrain uses, so applying it directly keeps scenery in that same
+	// vertical space instead of drifting away from the camera centre.
 	const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
 	const anchorZ = worldZ * cmToMerc;
 	const rotation = MESH_FLIP.clone().multiply(
@@ -262,14 +258,11 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 	let disposed = false;
 	let rebuildQueued = false;
 
-	// One InstancedMesh per distinct mesh index, refilled in place across frames
-	// rather than reallocated.
 	const meshObjects = new Map<number, THREE.InstancedMesh>();
 	// Camera-independent per-bucket caches, valid for the life of the stream:
 	// runs grouped by mesh, and baked instance data keyed `${bucket}:${mesh}`.
 	const bucketRuns = new Map<number, Map<number, SceneryRun[]>>();
 	const bakedChunks = new Map<string, Float32Array>();
-	// The camera state meshObjects were last composed for.
 	let lastCmToMerc = Number.NaN;
 	let lastPixelsPerMercatorUnit = Number.NaN;
 	let lastBucketIndices: number[] = [];

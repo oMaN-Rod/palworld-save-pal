@@ -1,7 +1,5 @@
-// Renders boss and alpha Pal spawn points as textured three.js meshes. With at
-// most ~90 spawns map-wide and every model distinct, this places one Object3D
-// per spawn rather than instancing -- there is nothing to instance. update() is
-// caller-driven; the layer holds no camera listener of its own.
+// With at most ~90 spawns map-wide and every model distinct, this places one
+// Object3D per spawn rather than instancing -- there is nothing to instance.
 import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { PredatorSpawn } from '$types';

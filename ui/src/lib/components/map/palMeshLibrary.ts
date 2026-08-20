@@ -1,11 +1,6 @@
-// Lazy, cached textured glTF models for Pals. Unlike the structure/scenery
-// library this keeps materials, so it returns a whole Object3D rather than
-// merged geometry. That Object3D is shared and cached -- callers must clone
-// before display (see requestPalMesh).
-//
-// Contract is "geometry in centimetres", matching meshLibrary: the conversion
-// and the dequantization transform are baked into geometry before caching, so
-// consumers get an object whose own transform is identity.
+// Unlike the structure/scenery library this keeps materials, so it returns a whole
+// Object3D rather than merged geometry. That Object3D is shared and cached --
+// callers must clone before display (see requestPalMesh).
 import * as THREE from 'three';
 import type { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import manifest from '../../../../../data/json/pal_meshes.json';

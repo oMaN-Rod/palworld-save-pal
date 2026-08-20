@@ -1,11 +1,6 @@
-// A MapLibre CustomLayerInterface that renders a blueprint's structures as a
-// translucent "ghost" preview while the user positions it. It reuses
-// structureLayer's shared three.js renderer, scene/camera setup, MESH_FLIP, and
-// per-instance transform recipe (meshInstanceMatrix) verbatim -- the only new
-// pieces are: absolute world transforms composed from the live anchor
-// (composeWorld), full-quaternion rotation (gap 1), per-structure scale (gap 2),
-// and a translucent material. Picking/hover/colour and the proxy fallback are
-// intentionally absent: a ghost is a transient, non-interactive preview.
+// Reuses structureLayer's shared three.js renderer, scene/camera setup, MESH_FLIP,
+// and per-instance transform recipe verbatim; picking/hover/colour and the proxy
+// fallback are intentionally absent since a ghost is a transient, non-interactive preview.
 import * as THREE from 'three';
 import { MercatorCoordinate, type CustomLayerInterface, type Map as MLMap } from 'maplibre-gl';
 import type { BlueprintStructureGeometry, PlacementAnchor, Quat } from '$types';

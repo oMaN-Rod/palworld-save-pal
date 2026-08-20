@@ -15,9 +15,6 @@ import { PAL_SCALE_DEFAULT } from './palSize';
 
 const DISPLAY: PalDisplay = { scale: 30, heightCm: 0, autoFollow: true, xray: false };
 
-// Stands in for the mesh library so group building runs without a network or GL
-// context: `models` decides what each key resolves to, `listeners` lets a test
-// fire a settle on demand.
 const { models, listeners } = vi.hoisted(() => ({
 	models: new Map<string, unknown>(),
 	listeners: new Set<() => void>()
@@ -65,9 +62,6 @@ describe('palInstanceMatrix', () => {
 	it('rotates about the up axis so a bearing change only spins the Pal in plan', () => {
 		const a = palInstanceMatrix(0, 0, 0, 0, 'MainMap', CM_TO_MERC, 30, 0);
 		const b = palInstanceMatrix(0, 0, 0, Math.PI / 2, 'MainMap', CM_TO_MERC, 30, 0);
-		// Column 1, not 2: MESH_FLIP maps the glTF up axis onto world column 1
-		// (mercator's up) and yaw rotates about that same axis, so column 1 is the
-		// invariant one while columns 0 and 2 rotate into each other.
 		const upA = new THREE.Vector3().setFromMatrixColumn(a, 1).normalize();
 		const upB = new THREE.Vector3().setFromMatrixColumn(b, 1).normalize();
 		expect(upA.dot(upB)).toBeCloseTo(1, 10);
@@ -108,13 +102,9 @@ describe('palInstanceMatrix', () => {
 	});
 });
 
-// The local axis the models' bodies point along, read off the shipped
-// geometry's accessor bounds.
 const MODEL_FORWARD = new THREE.Vector3(0, 0, 1);
 
 describe('palInstanceMatrix facing', () => {
-	// A bearing-invariance test would be worthless: the pre-fix code tracked
-	// bearing correctly and only pointed the wrong way, so this must be absolute.
 	it('points the model at the camera at every bearing', () => {
 		for (const bearing of [0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2]) {
 			const m = palInstanceMatrix(-375000, -375000, 0, bearing, 'MainMap', 1e-6, 30, 0);
@@ -127,8 +117,6 @@ describe('palInstanceMatrix facing', () => {
 	});
 });
 
-// Predator entries carry `pal`, not `character_id`, so this breaks if the
-// predator wiring reverts to the way alpha and boss spawns resolve their key.
 describe('predatorPalBosses', () => {
 	it('resolves the model key from pal rather than character_id', () => {
 		const rows = [
@@ -203,9 +191,6 @@ describe('createPalLayer', () => {
 		layer.dispose();
 	});
 
-	// Two guards, both load-bearing: dispose() must clear its groups, and the
-	// disposed flag must survive into an already-queued microtask rebuild, which
-	// would otherwise repopulate a layer whose renderer and map are gone.
 	it('leaves no groups after dispose, including from a rebuild queued beforehand', async () => {
 		models.set('anubis', stubModel('anubis'));
 		const layer = createPalLayer({ id: 'test-dispose' });
@@ -221,9 +206,6 @@ describe('createPalLayer', () => {
 		expect(layer.groupsForTest().length).toBe(0);
 	});
 
-	// An unresolvable key (lilyqueen_dark has no model in the pak) must be skipped
-	// outright. A placeholder Object3D would render nothing yet still occupy the
-	// list, so the name check, not the count, pins which boss survived.
 	it('builds a group only for bosses whose model resolves', () => {
 		models.set('anubis', stubModel('anubis'));
 		const layer = createPalLayer({ id: 'test-unresolvable' });
@@ -306,8 +288,6 @@ describe('createPalLayer', () => {
 	});
 });
 
-// One portal instance per boss handed in, so shrinking the list must not leave a
-// stray model or ring behind.
 describe('boss portal instancing', () => {
 	function attach(layer: PalLayer): void {
 		const stubMap = {
@@ -388,8 +368,6 @@ describe('predator 3D rendering', () => {
 
 	const PREDATOR: PalPredator = { key: 'sifudog', x: -400000, y: -300000, z: 0 };
 
-	// Would break if predators fed into the same model-building loop that reads
-	// `defeated` off a PalBoss, since PalPredator carries no such field.
 	it('builds a model group for a predator whose key resolves', () => {
 		models.set('sifudog', stubModel('sifudog'));
 		const layer = createPalLayer({ id: 'test-predator-model' });
@@ -404,9 +382,6 @@ describe('predator 3D rendering', () => {
 		layer.dispose();
 	});
 
-	// Would break if predators were dropped into the boss/alpha portal
-	// InstancedMesh, whose one shared uCore uniform leaves no per-instance way to
-	// make only the predator red.
 	it('gives a predator its own portal instance, separate from the boss/alpha one', () => {
 		const layer = createPalLayer({ id: 'test-predator-portal-count' });
 		attach(layer);
@@ -426,8 +401,6 @@ describe('predator 3D rendering', () => {
 		layer.dispose();
 	});
 
-	// Would break if the predator mesh came from createPortalMeshes, whose
-	// per-mesh uniform leaves no per-instance attribute for this to read.
 	it('colors the predator portal red via the aColor attribute, not uCore', () => {
 		const layer = createPalLayer({ id: 'test-predator-portal-color' });
 		attach(layer);
@@ -444,8 +417,6 @@ describe('predator 3D rendering', () => {
 		layer.dispose();
 	});
 
-	// Pins the radius createPalLayer passes for a predator beam to the pal
-	// family's own PORTAL_RADIUS_CM rather than any other literal.
 	it("builds the predator beam from palPortal.ts's PORTAL_RADIUS_CM", () => {
 		const layer = createPalLayer({ id: 'test-predator-portal-radius' });
 		attach(layer);
@@ -543,8 +514,6 @@ describe('pal x-ray depth', () => {
 		}
 	});
 
-	// Materials are cached and shared by palMeshLibrary across every spawn of a
-	// model, so a flag written once would leak into every later rebuild.
 	it('leaves depth testing on after toggling x-ray off again', () => {
 		const layer = buildLayerWithBosses({ xray: true });
 		layer.update(BOSSES, 'MainMap', 1, {
@@ -557,9 +526,6 @@ describe('pal x-ray depth', () => {
 	});
 });
 
-// update() runs once per frame during a pan, and the transform is the only thing
-// a camera move changes -- recreating the scene graph at that cadence would clone
-// one Object3D per boss per frame.
 describe('createPalLayer update cost', () => {
 	beforeEach(() => {
 		models.clear();
@@ -573,8 +539,6 @@ describe('createPalLayer update cost', () => {
 		return root;
 	}
 
-	// getBearing is read through a mutable box so a test can move the camera
-	// between update() calls the way a real rotate does.
 	function attachMovable(layer: PalLayer): { bearing: number } {
 		const camera = { bearing: 0 };
 		const stubMap = {
@@ -619,8 +583,6 @@ describe('createPalLayer update cost', () => {
 		expect(second[1]).toBe(first[1]);
 	});
 
-	// The reuse above must not become a stale-transform cache: with auto-follow a
-	// bearing change still has to reach the matrices.
 	it('still refreshes group transforms when the camera bearing changes', () => {
 		seed();
 		const layer = createPalLayer({ id: 'test-refresh' });

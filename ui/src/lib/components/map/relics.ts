@@ -1,4 +1,3 @@
-/** CapturePower relics ARE the Lifmunk Effigies. */
 export const CAPTURE_POWER = 'capture_power';
 
 export type RelicPlayerView = {
@@ -10,28 +9,16 @@ export type RelicRef = { guid: string; relic_type: string };
 
 const same = (a: string, b: string) => a.toUpperCase() === b.toUpperCase();
 
-/**
- * The by-type relic view of a player, with `capture_power` seeded from the flat
- * `collected_effigies` list when the by-type entry is absent.
- *
- * WHY: a pre-1.0 save has no by-type relic structure at all, so `collected_relics`
- * arrives as an empty map `{}` while `collected_effigies` still holds every Lifmunk
- * Effigy the player collected. The write path rebuilds the effigy map wholesale from
- * `collected_effigies`, so without this seed a single toggle would mirror an
- * effigy list of one back onto the save and erase all the others. Seeding makes the
- * read (pins drawn as collected) and write (effigy list) views share one baseline.
- * On a 1.0 save the two already agree, so this is a no-op.
- */
+// A pre-1.0 save has no by-type relic structure, so `collected_relics` arrives empty
+// while `collected_effigies` still holds every collected Lifmunk Effigy. The write
+// path rebuilds the effigy map wholesale from `collected_effigies`, so without this
+// seed a single toggle would mirror a one-entry effigy list back and erase the rest.
 export function relicsByType(player: RelicPlayerView): Record<string, string[]> {
 	const byType = player.collected_relics ?? {};
 	if (byType[CAPTURE_POWER]) return byType;
 	return { ...byType, [CAPTURE_POWER]: [...(player.collected_effigies ?? [])] };
 }
 
-/**
- * Toggle one relic on the player. Returns the delta to apply to the `Relic` item
- * count (non-zero only for capture_power, which is the item-backed effigy).
- */
 export function toggleRelic(player: RelicPlayerView, point: RelicRef): number {
 	const byType = relicsByType(player);
 	const collected = [...(byType[point.relic_type] ?? [])];
@@ -48,11 +35,6 @@ export function toggleRelic(player: RelicPlayerView, point: RelicRef): number {
 	return index >= 0 ? -1 : 1;
 }
 
-/**
- * Collect every relic in `points` that the player does not already have.
- * `capturePowerAdded` counts what was ACTUALLY newly added, so the `Relic` item count
- * moves by the true delta rather than by the count of visible pins.
- */
 export function collectRelics(
 	player: RelicPlayerView,
 	points: RelicRef[]

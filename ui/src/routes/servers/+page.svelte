@@ -69,6 +69,7 @@
 			offset++;
 		}
 
+		// @ts-ignore
 		const result = await modal.showModal<CreateServerData | null>(CreateServerModal, {
 			title: 'Create Server',
 			suggestedPorts

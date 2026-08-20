@@ -83,7 +83,6 @@ export function createSceneryMaterial(): THREE.ShaderMaterial {
 	});
 }
 
-// Swaps the map texture in (or clears it) without rebuilding the material.
 export function setSceneryMaterialMap(material: THREE.ShaderMaterial, texture: THREE.Texture | null): void {
 	material.uniforms.uMap.value = texture;
 	material.uniforms.uHasMap.value = texture ? 1 : 0;

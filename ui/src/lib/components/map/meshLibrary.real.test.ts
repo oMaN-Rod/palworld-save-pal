@@ -25,8 +25,6 @@ async function loadRealMesh(name: string) {
 		fileBytes.byteOffset + fileBytes.byteLength
 	);
 
-	// FileLoader reports progress via a browser-only ProgressEvent. This test only
-	// reads the final outcome, so a minimal stand-in suffices.
 	(global as { ProgressEvent?: unknown }).ProgressEvent = class {
 		constructor(
 			public type: string,
@@ -44,8 +42,6 @@ async function loadRealMesh(name: string) {
 
 	const { requestMesh, meshFailed, onMeshLoaded } = await import('./meshLibrary');
 
-	// FileLoader's `new Request(url)` throws on a bare "/..." path outside a
-	// browser; an absolute dir sidesteps that without changing behaviour.
 	const dir = 'http://scenery.test/models/scenery';
 	expect(requestMesh(name, dir)).toBeNull();
 
@@ -150,8 +146,6 @@ class FakeImageElement {
 	}
 }
 
-// These newly-baked structure glbs carry webp + quantization + meshopt, not the
-// Draco the shared loader also sets up, so DRACOLoader goes unexercised here.
 async function loadRealTexturedMesh(name: string) {
 	const fileBytes = readFileSync(structureSamplePath(name));
 	const arrayBuffer = fileBytes.buffer.slice(
@@ -225,8 +219,6 @@ describe('meshLibrary (real textured structure GLBs)', () => {
 		30000
 	);
 
-	// Ships 2 primitives, each with its own material and embedded texture -- the
-	// case a single shared material would render wrong for half the mesh.
 	const MULTI_MATERIAL = 'SM_Capacitor_Large_dbb237';
 
 	it.skipIf(!existsSync(structureSamplePath(MULTI_MATERIAL)))(

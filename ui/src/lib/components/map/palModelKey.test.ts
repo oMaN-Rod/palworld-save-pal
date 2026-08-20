@@ -1,9 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { resolvePalModelKey } from './palModelKey';
 
-// An explicit inventory rather than the shipped manifest: these cases are about
-// the resolution rule, and pinning them to the last bake would make them fail for
-// reasons unrelated to it.
 const INVENTORY = new Set([
 	'anubis',
 	'blackpuppy',
@@ -28,14 +25,10 @@ describe('resolvePalModelKey', () => {
 		expect(resolvePalModelKey('Anubis', has)).toBe('anubis');
 	});
 
-	// cubeturtle_neutral has a model of its own. Peeling first would render the plain
-	// Cube Turtle for it and the variant would never be reachable at all.
 	it('prefers a variant that has its own model over the base it derives from', () => {
 		expect(resolvePalModelKey('cubeturtle_neutral', has)).toBe('cubeturtle_neutral');
 	});
 
-	// Elemental recolors mostly reuse the base skeletal mesh with a material swap, so
-	// there is no blackpuppy_ice model to find.
 	it('falls back to the base model for a variant with no model of its own', () => {
 		expect(resolvePalModelKey('blackpuppy_ice', has)).toBe('blackpuppy');
 	});
@@ -63,8 +56,6 @@ describe('resolvePalModelKey', () => {
 		expect(resolvePalModelKey(id, has)).toBe(expected);
 	});
 
-	// Peeling "boss_kingwhale" down to "boss" would let any Pal whose model is missing
-	// collide with a model that happened to be named after the prefix.
 	it('never peels down to a bare prefix token', () => {
 		expect(resolvePalModelKey('boss_nothing_here', (key) => key === 'boss')).toBeNull();
 	});

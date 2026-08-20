@@ -229,8 +229,6 @@ export function buildMapObjectFC(
 	return { type: 'FeatureCollection', features };
 }
 
-/** Bounty targets share this shape with bosses and differ only in marker and
- *  feature type, so they build through here rather than a near-copy. */
 export function buildBossFC(
 	points: BossView[],
 	area: MapArea,

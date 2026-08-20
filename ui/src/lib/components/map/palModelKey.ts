@@ -1,9 +1,3 @@
-// Maps a save's character_id onto one of the models the bake shipped. The two are
-// different vocabularies: a character_id carries spawn context (BOSS_, PREDATOR_,
-// RAID_, ...) and may name an elemental recolor reusing its base Pal's mesh, while
-// the manifest is a flat inventory of meshes. A recolor resolved to its base
-// renders the right shape in the base palette -- the same trade the game makes.
-
 // Spawn-context markers, not species. Anything else leading a character_id is part
 // of the species name and must not be touched.
 const SPAWN_PREFIXES = ['boss_', 'predator_', 'summon_', 'raid_', 'gym_'];

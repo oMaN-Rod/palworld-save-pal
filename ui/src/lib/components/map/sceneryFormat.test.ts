@@ -82,8 +82,7 @@ describe('decodeSceneryStream', () => {
 });
 
 // The parser's real per-area output, which this repo does not own -- skipped
-// cleanly when absent so CI and other machines are unaffected. One file per area,
-// not the single scenery_instances.bin that shipped before per-area clipping.
+// cleanly when absent so CI and other machines are unaffected.
 const REAL_STREAM: Record<MapArea, string> = {
 	MainMap: 'O:/psp/palworld_parser/processed/scenery_instances_mainmap.bin',
 	Tree: 'O:/psp/palworld_parser/processed/scenery_instances_tree.bin'

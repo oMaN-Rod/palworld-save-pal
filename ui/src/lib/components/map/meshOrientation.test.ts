@@ -1,10 +1,6 @@
-// Cross-check: the 3D mesh path (meshInstanceMatrix, structureLayer.ts) must
-// map a direction expressed in UE space to the same mercator direction that
-// flat mode (buildStructureFC, features.ts -- shipped, visually verified)
-// would put it. Ground truth is derived independently of meshInstanceMatrix's
-// own axis-swap/UP_FLIP internals: it rotates a UE-space offset by yaw exactly
-// as buildStructureFC's ring does, then runs it through the same
-// worldToPixel/pixelToLngLat/MercatorCoordinate chain flat mode uses.
+// Cross-check: the 3D mesh path (meshInstanceMatrix, structureLayer.ts) must map a
+// direction expressed in UE space to the same mercator direction that flat mode
+// (buildStructureFC, features.ts -- shipped, visually verified) would put it.
 import { describe, it, expect } from 'vitest';
 import * as THREE from 'three';
 import { MercatorCoordinate } from 'maplibre-gl';

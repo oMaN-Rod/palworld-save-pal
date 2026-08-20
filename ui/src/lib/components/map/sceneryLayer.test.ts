@@ -51,8 +51,6 @@ const instanceRun = (meshIndex: number, instances: Instance[]): SceneryRun => ({
 	scales: new Float32Array(instances.flatMap((i) => i.scale))
 });
 
-// Reads instance k back out of a run exactly as rebuild() does, so the expected
-// value is built from the same float32-rounded inputs the baked path saw.
 const matrixOf = (r: SceneryRun, k: number, cmToMerc: number): THREE.Matrix4 =>
 	sceneryInstanceMatrix(
 		r.positions[k * 3],
@@ -88,9 +86,6 @@ describe('selectBuckets', () => {
 	});
 });
 
-// sceneryInstanceMatrix generalises the yaw-only rotation handling elsewhere to a
-// full actor quaternion, since scenery keeps pitch and roll. Feeding it a pure UE
-// Z-yaw quaternion pins that general path against the trusted yaw-only one.
 describe('sceneryInstanceMatrix', () => {
 	it('reduces to the trusted MESH_FLIP + ueYawToThreeQuaternion path for a pure UE Z-yaw quaternion', () => {
 		const yaw = 0.9;
@@ -113,11 +108,7 @@ describe('sceneryInstanceMatrix', () => {
 
 		const [px, py] = worldToPixel(worldX, worldY, 'MainMap');
 		const [lng, lat] = pixelToLngLat(px, py);
-		// Horizontal placement is a per-point projection; vertical placement must
-		// not be. It has to use cmToMerc -- one per-frame factor from the camera
-		// centre, matching how terrain scales every vertex in a frame -- rather than
-		// fromLngLat's altitude argument, which divides by this point's latitude.
-		const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
+	const anchor = MercatorCoordinate.fromLngLat([lng, lat]);
 		const rotation = MESH_FLIP.clone().multiply(
 			new THREE.Matrix4().makeRotationFromQuaternion(ueYawToThreeQuaternion(yaw))
 		);
@@ -173,9 +164,7 @@ describe('projectedPixelDiameter', () => {
 	it('is driven by the largest axis under anisotropic scale', () => {
 		const r = 1;
 		const W = 1000;
-		// A tall thin instance: the tiny x/y components must not shrink the result,
-		// since the large z axis alone has to keep it visible.
-		const matrix = new THREE.Matrix4().makeScale(0.001, 0.001, 5);
+	const matrix = new THREE.Matrix4().makeScale(0.001, 0.001, 5);
 		expect(projectedPixelDiameter(matrix, r, W)).toBeCloseTo(2 * r * 5 * W, 9);
 	});
 
@@ -244,9 +233,6 @@ describe('mergeRunsByMesh', () => {
 	});
 });
 
-// The bake/compose split separates what depends only on the stream from what
-// changes with the camera. It only pays off if the composed result is
-// indistinguishable from computing the whole matrix from scratch every frame.
 describe('bakeInstances + composeInstanceMatrices', () => {
 	const instances: Instance[] = [
 		{ pos: [12345, -6789, 4200], quat: [0.1, -0.2, 0.3, Math.sqrt(0.86)], scale: [1, 2, 3] },
@@ -259,9 +245,7 @@ describe('bakeInstances + composeInstanceMatrices', () => {
 		const baked = bakeInstances([r], 'MainMap');
 		const target = new Float32Array(32);
 
-		// A large pixelsPerMercatorUnit keeps every instance above the threshold,
-		// isolating this test to the transform.
-		const count = composeInstanceMatrices(baked, 2, cmToMerc, 1000, target, 0);
+	const count = composeInstanceMatrices(baked, 2, cmToMerc, 1000, target, 0);
 
 		expect(count).toBe(2);
 		for (let k = 0; k < 2; k++) {
@@ -289,8 +273,6 @@ describe('bakeInstances + composeInstanceMatrices', () => {
 		}
 	});
 
-	// The same instances must drop out, and survivors must pack down with no gap
-	// where a culled one was.
 	it('drops instances below the screen-size threshold and packs the survivors contiguously', () => {
 		const cmToMerc = 1;
 		const geometryRadius = 1;
@@ -329,8 +311,6 @@ describe('bakeInstances + composeInstanceMatrices', () => {
 		}
 	});
 
-	// One InstancedMesh is filled from several buckets' baked chunks in sequence,
-	// so a chunk must be able to append without disturbing what is already there.
 	it('appends at the given instance offset without touching earlier instances', () => {
 		const cmToMerc = 0.6;
 		const r = instanceRun(0, [instances[1]]);
@@ -355,8 +335,6 @@ describe('bakeInstances + composeInstanceMatrices', () => {
 	});
 });
 
-// cmToMerc shifts by a fraction of a percent on most frames of a pan, so a new
-// value is adopted only once it is far enough from the one in use to matter.
 describe('stabilizeScalar', () => {
 	it('keeps the value already in use when the new one is within epsilon of it', () => {
 		expect(stabilizeScalar(1.0005, 1, 1e-3)).toBe(1);
@@ -376,8 +354,6 @@ describe('stabilizeScalar', () => {
 		expect(stabilizeScalar(5, Number.NaN, 1e-3)).toBe(5);
 	});
 
-	// Drift is measured against the value in use, never against the last raw
-	// reading, so a slow pan cannot creep arbitrarily far in sub-epsilon steps.
 	it('eventually adopts a value reached by repeated sub-epsilon steps', () => {
 		let current = 1;
 		for (let i = 1; i <= 20; i++) current = stabilizeScalar(1 + i * 0.0002, current, 1e-3);
@@ -391,7 +367,6 @@ describe('stabilizeScalar', () => {
 	});
 });
 
-// Binds to the real cull rule rather than an inline duplicate of it.
 describe('meetsScreenSizeThreshold', () => {
 	it('is a positive threshold, culling just below it and keeping just at/above it', () => {
 		expect(SCENERY_MIN_PIXELS).toBeGreaterThan(0);

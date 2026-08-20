@@ -37,9 +37,8 @@
 		});
 	}
 
-	// A fixed post-jumpTo wait doesn't cover tile loading, and sampling into that
-	// window measures load stalls rather than steady-state render. 'idle' is
-	// MapLibre's own signal that nothing is left in flight; the timeout keeps a
+	// 'idle' is MapLibre's own signal that nothing is left in flight, so sampling
+	// only starts once tile loading can no longer skew it; the timeout keeps a
 	// stop that never idles from hanging the run.
 	function waitForIdle(instance: MLMap, timeoutMs: number): Promise<StopOutcome> {
 		return new Promise((resolve) => {
@@ -60,29 +59,20 @@
 		});
 	}
 
-	// The shared renderer is set in a custom layer's onAdd, which fires
-	// asynchronously and, for structures, only once zoom crosses their minimum.
-	// Resolving it once up front would cache null for the whole run even though a
-	// layer mounts moments later, so every read below is fresh.
+	// The shared renderer is set in a custom layer's onAdd, which fires asynchronously
+	// and, for structures, only once zoom crosses their minimum, so every read of it
+	// below is fresh rather than resolved once up front.
 	function ensureAutoResetOff(renderer: WebGLRenderer, tracked: Map<WebGLRenderer, boolean>) {
 		if (tracked.has(renderer)) return;
 		tracked.set(renderer, renderer.info.autoReset);
 		renderer.info.autoReset = false;
 	}
 
-	// Reads and resets renderer.info once per animation frame. Several custom
-	// layers call renderer.render() within one frame, and with autoReset on three
-	// zeroes info.render at the start of each, so a trailing read reflects only
-	// the last layer rather than the frame's total. `tracked` remembers every
-	// renderer touched so autoReset can be restored at the end. A null
-	// lastRenderer means none was ever found, which marks the counters
-	// unavailable rather than a false zero.
-	//
-	// With autoReset off, info.render accumulates until something reads and
-	// resets it, so any read not preceded by this function's own reset is
-	// contaminated. Two such backlogs are discarded rather than sampled: the gap
-	// between stops (hence the reset before the loop, not just inside it), and
-	// the first tick of a renderer discovered mid-run.
+	// Several custom layers call renderer.render() within one frame, and with
+	// autoReset on three zeroes info.render at the start of each, so a trailing read
+	// would reflect only the last layer. autoReset is forced off here and info is
+	// read-then-reset once per frame instead; the backlog between stops and a
+	// renderer's first tick after mid-run discovery are discarded rather than sampled.
 	function sampleFrames(
 		instance: MLMap,
 		ms: number,
@@ -143,8 +133,6 @@
 					SAMPLE_MS,
 					autoResetOriginals
 				);
-				// Empty even with a lastRenderer if it was only just discovered in this
-				// window; that stays unavailable rather than a fabricated zero.
 				const info: RendererInfo | null =
 					lastRenderer && renderSamples.length > 0
 						? {

@@ -82,8 +82,6 @@ describe('structureParts', () => {
 		expect(parts![0].mesh).toBe(entries[id].parts[0].mesh);
 	});
 
-	// Saves spell some ids with different casing than the data table row key,
-	// e.g. "Stone_Foundation" for the row "Stone_foundation".
 	it('falls back to a case-insensitive match', () => {
 		const entries = manifest as unknown as Record<string, { parts: { mesh: string }[] }>;
 		const id = Object.keys(entries).find((k) => k.toLowerCase() !== k)!;
@@ -304,8 +302,6 @@ describe('onMeshLoaded directory scoping', () => {
 	});
 });
 
-// requestTexturedMesh is a separate cache that keeps per-primitive materials
-// instead of merging them away; these mirror the plain suite's coverage.
 describe('requestTexturedMesh', () => {
 	it('returns null while loading, then a cached bundle once the load lands', () => {
 		const name = 'RequestTexturedMesh_Success';
@@ -337,8 +333,6 @@ describe('requestTexturedMesh', () => {
 		expect(size.z).toBeCloseTo(sourceSize.z * 100, 6);
 	});
 
-	// Unlike requestMesh, a multi-primitive glb keeps each primitive's material
-	// via geometry.groups instead of merging into one untextured blob.
 	it('bundles a multi-primitive glb with one geometry group per primitive material', () => {
 		const name = 'RequestTexturedMesh_MultiMaterial';
 		requestTexturedMesh(name);
@@ -402,8 +396,6 @@ describe('requestTexturedMesh', () => {
 		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
 		expect(requestMesh(name)).toBeInstanceOf(THREE.BufferGeometry);
 
-		// The textured cache has not seen this name yet, so it still reports
-		// loading (null) even though the plain geometry cache already resolved it.
 		expect(requestTexturedMesh(name)).toBeNull();
 		lastCallFor(name).onLoad({ scene: sceneWithMeshes(1) });
 		expect(requestTexturedMesh(name)?.geometry).toBeInstanceOf(THREE.BufferGeometry);
@@ -424,8 +416,6 @@ describe('bundleMapObjectMesh (re-exported for structures)', () => {
 	});
 });
 
-// Shared by palMeshLibrary and mapObjectMeshLibrary so their textured materials
-// tune together rather than drifting apart.
 describe('configureTexturedMaterial', () => {
 	it('zeroes metalness and raises roughness off the glTF fully-metallic default', () => {
 		const material = new THREE.MeshStandardMaterial({ metalness: 1, roughness: 1 });

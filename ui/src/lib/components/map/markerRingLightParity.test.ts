@@ -59,8 +59,6 @@ function expectClose(beamCm: number, ringCm: number) {
 // mesh builder to a fraction of PORTAL_RADIUS_CM breaks them.
 describe('marker ring/light radius parity', () => {
 	describe.each(SCALES)('at scale %s', (scale) => {
-		// Alpha spawns feed the same builders as bosses, so this covers both --
-		// there is no separate code path to diverge.
 		it('boss (and alpha): beam base radius equals the ring radius', () => {
 			const boss: PalBoss = { key: 'anubis', x: WORLD_X, y: WORLD_Y, z: 0, defeated: false };
 			const ring = ringRadiusCm(buildPalPortalFC([boss], [], AREA, scale));
@@ -83,8 +81,6 @@ describe('marker ring/light radius parity', () => {
 			expectClose(beam, ring);
 		});
 
-		// Goes through the same buildRelicRingFC Map.svelte calls rather than a
-		// hand-rolled buildRingFC, so this proves the binding, not just the constant.
 		it('relic: beam base radius equals the ring radius', () => {
 			const ring = ringRadiusCm(buildRelicRingFC([RELIC_POINT], AREA, scale));
 
@@ -95,8 +91,6 @@ describe('marker ring/light radius parity', () => {
 			expectClose(beam, ring);
 		});
 
-		// FT_POINT is a statue, so the watchtower scale passed here is deliberately
-		// a different number: parity has to hold on the statue's own scale.
 		it('fast travel: beam base radius equals the ring radius', () => {
 			const ring = ringRadiusCm(buildFastTravelRingFC([FT_POINT], AREA, scale, scale * 3));
 

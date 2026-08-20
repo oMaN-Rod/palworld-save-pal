@@ -13,9 +13,7 @@
 	}: {
 		active?: boolean;
 		title: string;
-		/** Selector the caller styles its icon through, e.g. `maplibregl-ctrl-3d`. */
 		buttonClass: string;
-		/** Renders as text in place of the background-image icon when set. */
 		label?: string;
 		position?: ControlPosition;
 		onchange?: () => void;
@@ -37,10 +35,6 @@
 		const map = ctx.map;
 		if (!map) return;
 
-		// Mirrors NavigationControl/FullscreenControl: a ctrl-group div holding a
-		// button whose only child is an empty span.maplibregl-ctrl-icon. Sizing,
-		// hover, focus and the divider between stacked buttons all come from
-		// maplibre's own stylesheet once the markup matches.
 		const container = document.createElement('div');
 		container.className = 'maplibregl-ctrl maplibregl-ctrl-group';
 

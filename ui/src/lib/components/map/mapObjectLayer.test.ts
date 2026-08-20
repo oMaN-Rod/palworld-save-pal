@@ -21,9 +21,6 @@ import { pixelToWorld, worldToPixel } from './utils';
 import { partLocalMatrix, ueEulerToThreeQuaternion } from './meshPlacement';
 import { MESH_FLIP } from './structureLayer';
 
-// Only requestMapObjectMesh is replaced: an InstancedMesh over real geometry
-// needs no GL context, so the compose loop runs for real -- which is what lets
-// the bake/compose split test below actually fail.
 const meshes = vi.hoisted(() => ({ requestMapObjectMesh: vi.fn() }));
 vi.mock('./mapObjectMeshLibrary', async (importOriginal) => ({
 	...(await importOriginal<typeof import('./mapObjectMeshLibrary')>()),
@@ -48,8 +45,6 @@ const ITEM: MapObjectItem = {
 	rot: [0, 0, 0]
 };
 
-// Baked instances are Float32, and one matrix mixes mercator anchors (~1e-1)
-// with centimetre offsets (~1e3), so the tolerance has to be relative.
 function expectMatrixNear(got: Float32Array, at: number, want: ArrayLike<number>) {
 	for (let e = 0; e < 16; e++) {
 		expect(Math.abs(got[at * 16 + e] - want[e])).toBeLessThanOrEqual(
@@ -58,8 +53,6 @@ function expectMatrixNear(got: Float32Array, at: number, want: ArrayLike<number>
 	}
 }
 
-// Enough of a map for compose(): it reads the centre, the bounds and asks for a
-// repaint, and nothing else.
 function stubMap(lng: number, lat: number, spanDeg = 0.05) {
 	const state = { lng, lat, spanDeg };
 	const map = {
@@ -77,7 +70,6 @@ function lngLatOf(worldX: number, worldY: number): [number, number] {
 	return pixelToLngLat(...worldToPixel(worldX, worldY, 'MainMap'));
 }
 
-// A layer with a stub map centred on the first item, already updated once.
 function mounted(items: typeof ITEM[]) {
 	const [lng, lat] = lngLatOf(items[0].x, items[0].y);
 	const { map, state } = stubMap(lng, lat);
@@ -143,8 +135,6 @@ describe('createMapObjectLayer', () => {
 		expect(layer.bakeCount()).toBe(baked + 1);
 	});
 
-	// Fails if sameItems ever stops comparing ringRadiusCm, which would keep
-	// composing the old beam bucket into a stale mesh.
 	it('re-bakes when only the ring radius changes', () => {
 		const layer = createMapObjectLayer('map-objects-3d');
 		layer.update([{ ...ITEM, ringRadiusCm: 140 }], 'MainMap', 1);
@@ -163,8 +153,6 @@ describe('createMapObjectLayer', () => {
 		);
 	});
 
-	// Only meaningful with a map attached: without one compose() returns before
-	// its body, and moving the bake in there would go unnoticed.
 	it('does not re-bake when only the camera moved', () => {
 		const { layer, state } = mounted([ITEM]);
 		const baked = layer.bakeCount();
@@ -188,8 +176,6 @@ describe('createMapObjectLayer', () => {
 		expect(meshes.requestMapObjectMesh.mock.calls.length).toBeGreaterThan(before);
 	});
 
-	// composeCount() counts invocations, not work, so the early-out is observed
-	// through the mesh loop it skips.
 	it('skips the mesh loop when nothing the scene depends on changed', () => {
 		const { layer } = mounted([ITEM]);
 		const before = meshes.requestMapObjectMesh.mock.calls.length;
@@ -205,9 +191,6 @@ describe('createMapObjectLayer', () => {
 		expect(layer.groupsForTest()).toHaveLength(0);
 	});
 
-	// Fast travel and relic items share this path but differ in ring radius, so
-	// folding their beams into one InstancedMesh -- one geometry, one base
-	// radius -- would break this.
 	it('builds a separate beam mesh per distinct ring radius', () => {
 		const { layer } = mounted([
 			{ ...ITEM, ringRadiusCm: FAST_TRAVEL_RADIUS_CM },
@@ -409,13 +392,9 @@ describe('bakeMapObjectInstances + item rotation', () => {
 			)
 			.multiply(partLocalMatrix(jewel));
 
-		// bakedMatrixFor round-trips through the baked Float32Array, so precision is
-		// float32, not float64.
 		got.elements.forEach((v, i) => expect(v).toBeCloseTo(expected.elements[i], 6));
 	});
 
-	// A signed comparison would be wrong: MESH_FLIP's determinant is negative, so
-	// every baked matrix's is too. Only the magnitude tracks rigidity.
 	it('keeps the baked matrix invertible under a non-zero yaw, by determinant magnitude', () => {
 		const layer = createMapObjectLayer('map-objects-3d-test');
 		layer.update(
@@ -446,8 +425,6 @@ describe('bakeMapObjectInstances + item rotation', () => {
 	});
 });
 
-// The split only pays off if its result is indistinguishable from computing the
-// whole matrix from scratch every frame.
 describe('bakeMapObjectInstances + composeMapObjectMatrices', () => {
 	it('reproduces mapObjectInstanceMatrix for every instance it writes', () => {
 		const cmToMerc = 0.6;
@@ -595,8 +572,6 @@ describe('bakeMapObjectInstances + composeMapObjectMatrices', () => {
 		).toBe(1);
 	});
 
-	// The watchtower is the one baked class with no cullDistanceCm at all, so it
-	// is culled against the default rather than against `undefined`.
 	it('culls a class with no baked cull distance against the default', () => {
 		const mesh = manifestParts(MANIFEST, WATCHTOWER_CLASS)[0].mesh;
 		const inside = bakeMapObjectInstances(
@@ -778,8 +753,6 @@ describe('viewRadiusCm', () => {
 		);
 	});
 
-	// Pitching puts the camera off the rectangle's centre, so the further side is
-	// the one that counts.
 	it('measures from the camera, not from the middle of the view', () => {
 		const sw: [number, number] = [-0.4, -0.4];
 		const ne: [number, number] = [0.4, 0.4];

@@ -1,6 +1,5 @@
-// Lazy, cached glTF geometry for structure meshes. The render layer cannot await,
-// so requestMesh returns cached geometry or null and notifies when a load settles
-// (successfully or permanently). Failed names are never retried.
+// The render layer cannot await, so requestMesh returns cached geometry or null and
+// notifies when a load settles (successfully or permanently). Failed names are never retried.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
@@ -58,16 +57,15 @@ export function createMeshoptGLTFLoader(): GLTFLoader {
 	return loader;
 }
 
-// Corrects a GLTFLoader-parsed material for this map's rendering conventions.
-// Each assignment is load-bearing:
-//   metalness - glTF defaults it to 1.0, and a fully metallic material computes
-//     diffuse as `rgb * (1 - metalness)`, so AmbientLight leaves it black.
-//   side      - mercator mirrors handedness (see MESH_FLIP), reversing winding,
-//     so the FrontSide default culls exactly the faces that should be visible.
-//   emissive  - guarded on `map` because three only multiplies emissive by
-//     emissiveMap when one is present; unguarded, untextured meshes glow grey.
-//   vertexColors - UE exports an all-zero COLOR_0 that GLTFLoader enables on
-//     sight, zeroing both diffuse and alpha (unlit surfaces, invisible glass).
+// Each assignment below is load-bearing:
+//   metalness    - glTF defaults it to 1.0, and a fully metallic material computes
+//                  diffuse as `rgb * (1 - metalness)`, so AmbientLight leaves it black.
+//   side         - mercator mirrors handedness (see MESH_FLIP), reversing winding, so
+//                  the FrontSide default culls exactly the faces that should be visible.
+//   emissive     - guarded on `map`: three only multiplies emissive by emissiveMap when
+//                  one is present, so unguarded, untextured meshes glow grey.
+//   vertexColors - UE exports an all-zero COLOR_0 that GLTFLoader enables on sight,
+//                  zeroing both diffuse and alpha (invisible glass).
 export function configureTexturedMaterial(material: THREE.Material): void {
 	const std = material as THREE.MeshStandardMaterial;
 	std.metalness = 0;

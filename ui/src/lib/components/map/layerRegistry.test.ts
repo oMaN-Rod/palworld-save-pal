@@ -11,8 +11,6 @@ import {
 	selectLayerEntries
 } from './layerRegistry';
 
-// The wire contract accepts exactly these artifact ids; an unknown one is an
-// error frame, so a typo in the table is a runtime failure with no local signal.
 const WIRE_ARTIFACTS = [
 	'fast_travel_points',
 	'dungeons',
@@ -56,9 +54,6 @@ describe('MAP_LAYERS', () => {
 		}
 	});
 
-	// effigies.json is the capture_power subset of relics.json, and chests.json
-	// was removed for weight. Both are still served, so they stay in the artifact
-	// allowlist, but no layer may bind to either.
 	it('binds no layer to the artifacts that exist but are not drawn', () => {
 		const bound = MAP_LAYERS.map((layer) => layer.artifact);
 		expect(bound).not.toContain('effigies');
@@ -82,8 +77,6 @@ describe('MAP_LAYERS', () => {
 		expect(new Set(ids).size).toBe(ids.length);
 	});
 
-	// Anything defaulting to visible is fetched at page load. Only the layers that
-	// already shipped that way may do so; every layer added since is opt-in.
 	it('defaults every newly added layer to hidden', () => {
 		const shipped = ['fast_travel', 'watchtower', 'dungeons', 'relics'];
 		const spawns = ['alpha_pals', 'boss_pals', 'predator_pals'];
@@ -100,9 +93,6 @@ describe('MAP_LAYERS', () => {
 	});
 });
 
-// Map.svelte draws a layer one of two ways, and the split used to live as a
-// hardcoded list inside that component: a layer added to the registry but not to
-// that list simply never drew, with nothing failing.
 describe('render partition', () => {
 	it('assigns every layer to exactly one render path', () => {
 		const both = BESPOKE_RENDER_LAYERS.filter((id) => genericRenderLayers().includes(id));
@@ -113,8 +103,6 @@ describe('render partition', () => {
 	});
 
 	it('routes a newly registered layer to the generic renderer by default', () => {
-		// The safe default: a new layer draws with its own icon rather than not at
-		// all, and opting into a bespoke path is the deliberate act.
 		for (const id of ['skill_fruits', 'kinship_peach', 'ancient_ruins'] as const) {
 			expect(genericRenderLayers()).toContain(id);
 		}
@@ -158,9 +146,6 @@ describe('artifactsForLayers', () => {
 	});
 });
 
-// Some artifacts arrive as keyed objects (towers, notes, dungeons, bosses,
-// fast_travel_points, relics) and some as top-level arrays (eggs_spawners,
-// camps). Nothing on the wire normalises them.
 describe('selectLayerEntries: keyed artifacts', () => {
 	const towers = {
 		BOSS_BATTLE_NAME_DesertBoss: { class: 'BP_PalBossTower_C', x: 1, y: 2 },
@@ -212,8 +197,6 @@ describe('selectLayerEntries: array artifacts', () => {
 	});
 });
 
-// fast_travel_points.json carries fast travel points AND watchtowers, told apart
-// by `class`. Two layers, one artifact, one request.
 describe('subset by class: fast travel vs watchtower', () => {
 	const artifact = {
 		a: { class: 'BP_LevelObject_TowerFastTravelPoint_C', x: 1 },
@@ -244,8 +227,6 @@ describe('subset by class: fast travel vs watchtower', () => {
 	});
 });
 
-// bosses.json carries alpha, boss, predator and bounty spawns in one table, told
-// apart by `spawn_type`, and the UI toggles the four separately.
 describe('subset by spawn_type: alpha / boss / predator / bounty', () => {
 	const artifact = {
 		a: { spawn_type: 'alpha' },
@@ -269,8 +250,6 @@ describe('subset by spawn_type: alpha / boss / predator / bounty', () => {
 	});
 
 	it('keeps bounty targets out of the boss layer', () => {
-		// Both are character_id "None" humans; only spawn_type separates them, and
-		// bounty rows shipped as spawn_type "boss" until the parser split them.
 		expect(selectLayerEntries('boss_pals', artifact).points.map((p) => p.key)).not.toContain('e');
 	});
 

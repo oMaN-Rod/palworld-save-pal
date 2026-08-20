@@ -1,7 +1,4 @@
-// Runs against the shipped data/json artifacts rather than fixtures. The
-// array-vs-object split, the missing instance_id in camps and the removal of
-// chests.json are all properties of the real files, and a fixture would just
-// restate whatever the code already assumes.
+// Runs against the shipped data/json artifacts rather than fixtures.
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,8 +25,6 @@ describe('every registered layer is backed by a file that exists', () => {
 	}
 });
 
-// chests.json was deleted for weight; the layer had to go with it, or the panel
-// would offer a toggle that can never draw anything.
 describe('chests', () => {
 	it('has no file and no layer', () => {
 		expect(existsSync(artifactPath('chests'))).toBe(false);
@@ -84,8 +79,6 @@ describe.each(SHAPES)('%s artifact', (id, expectedShape) => {
 	});
 });
 
-// 8 of 59 camp entries ship without instance_id, so identity has to fall through
-// to another field rather than collapsing onto one shared key.
 describe('camps identity fallback', () => {
 	const raw = loadArtifact('camps') as Array<Record<string, unknown>>;
 
@@ -99,9 +92,6 @@ describe('camps identity fallback', () => {
 	});
 });
 
-// get_map_layer folds localized_name in from l10n/<lang>/<artifact>.json at
-// request time, so the raw artifact on disk carries none. towers is the only
-// new layer with such a table; notes and camps have none and must fall back.
 describe('localized_name coverage', () => {
 	it('comes from the l10n table, which covers every towers entry', () => {
 		const raw = loadArtifact('towers') as Record<string, Record<string, unknown>>;

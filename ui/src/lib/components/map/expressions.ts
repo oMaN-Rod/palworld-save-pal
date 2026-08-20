@@ -5,7 +5,6 @@ export const ICON_ZOOM_MAX = 7;
 
 export type StopValue = number | ExpressionSpecification;
 
-/** Every marker renders this much larger than the size its call site declares. */
 export const ICON_SCALE = 1.15;
 
 function scaleStop(value: StopValue): StopValue {
@@ -28,22 +27,15 @@ export function zoomScaledIconSize(small: StopValue, large: StopValue): Expressi
 	];
 }
 
-/** Gap in px between the icon's edge and its halo ring. */
 export const HALO_PAD = 3;
 
-/**
- * Halo radius in px for a marker. Callers pass the artwork's measured visible
- * extent, not the source canvas -- every icon carries transparent padding, so
- * the canvas overstates how much space the art occupies.
- */
+// Callers pass the artwork's measured visible extent, not the source canvas -- every
+// icon carries transparent padding, so the canvas overstates how much space it occupies.
 export function haloRadiusPx(artPx: number, iconSize: number): number {
 	return (artPx * iconSize * ICON_SCALE) / 2 + HALO_PAD;
 }
 
-/**
- * Zoom interpolation for circle-radius. Unlike zoomScaledIconSize this does not
- * apply ICON_SCALE -- haloRadiusPx already has.
- */
+// Unlike zoomScaledIconSize this does not apply ICON_SCALE -- haloRadiusPx already has.
 export function zoomScaledRadius(small: StopValue, large: StopValue): ExpressionSpecification {
 	return ['interpolate', ['linear'], ['zoom'], ICON_ZOOM_MIN, small, ICON_ZOOM_MAX, large];
 }

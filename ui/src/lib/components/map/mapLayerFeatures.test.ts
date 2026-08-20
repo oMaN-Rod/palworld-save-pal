@@ -22,7 +22,6 @@ const list = (entries: unknown[]): MapLayerSelection => ({
 	points: entries.map((entry, i) => ({ key: `k${i}`, entry: entry as Record<string, unknown> }))
 });
 
-// A point somewhere inside MainMap.
 const AT = { x: -100000, y: 100000, z: 500 };
 
 describe('buildMapLayerFC', () => {
@@ -56,10 +55,6 @@ describe('buildMapLayerFC', () => {
 	});
 });
 
-// These artifacts are hand-maintained extracts; camps already ships 8 of 59
-// entries missing instance_id, and a null coordinate would otherwise land a
-// marker at the map origin or produce NaN, which MapLibre renders as a silent
-// hole rather than an error.
 describe('null and non-numeric coordinates', () => {
 	it('drops an entry whose x is null', () => {
 		const fc = buildMapLayerFC('camps', list([{ x: null, y: 100000, z: 0 }]), 'MainMap');
@@ -108,8 +103,6 @@ describe('null and non-numeric coordinates', () => {
 	});
 });
 
-// get_map_layer folds localized_name in only where an l10n table exists, so the
-// field is present on towers and absent on notes, camps and eggs_spawners.
 describe('display name', () => {
 	it('uses localized_name when the l10n merge provided one', () => {
 		const fc = buildMapLayerFC(
@@ -125,7 +118,6 @@ describe('display name', () => {
 		expect(fc.features[0].properties.name).toBe('BOSS_BATTLE_NAME_DesertBoss');
 	});
 
-	// An array artifact's key is a GUID or a UAID blob, never a display name.
 	it('falls back to the layer label for an array artifact', () => {
 		const fc = buildMapLayerFC('camps', list([AT]), 'MainMap');
 		expect(fc.features[0].properties.name).toBe(mapLayerLabel('camps'));
@@ -146,10 +138,6 @@ describe('display name', () => {
 	});
 });
 
-// The panel count has to agree with what the map draws. The legacy layers all
-// report their area-filtered total (relics 360 of 407), and a registry layer
-// reporting its raw entry count instead read as 188 skill fruits beside 35
-// markers.
 describe('mapLayerMarkerCount', () => {
 	const AT = { x: -343155, y: 244585, z: 0 };
 	const TREE = { x: 512112, y: -510663, z: 0 };
@@ -162,7 +150,6 @@ describe('mapLayerMarkerCount', () => {
 	});
 
 	it('drops entries with no coordinate', () => {
-		// 141 of skill_fruits' 188 rows are positionless location components.
 		expect(mapLayerMarkerCount('camps', list([AT, { x: null, y: null, z: 0 }]), 'MainMap')).toBe(1);
 	});
 
@@ -172,14 +159,10 @@ describe('mapLayerMarkerCount', () => {
 	});
 
 	it('is zero for a layer with nothing loaded yet', () => {
-		// Distinct from "loaded and empty" only to the caller; both draw nothing.
 		expect(mapLayerMarkerCount('camps', undefined, 'MainMap')).toBe(0);
 	});
 });
 
-// icon-size multiplies the sprite's natural size, and the artwork is not one
-// size: the game's compass markers are 64px while its item icons are 256px, so
-// an item-icon layer drew four times the size of every other marker.
 describe('mapLayerIconScale', () => {
 	it('leaves a 64px compass-marker layer unscaled', () => {
 		expect(mapLayerIconScale('camps')).toBe(1);
@@ -192,8 +175,6 @@ describe('mapLayerIconScale', () => {
 	});
 
 	it('gives every layer a positive scale, defaulting to 1', () => {
-		// A layer missing from the table must fall back to 1 rather than
-		// undefined: undefined reaches the stops as NaN and the marker vanishes.
 		for (const layer of MAP_LAYERS) {
 			expect([layer.id, mapLayerIconScale(layer.id) > 0]).toEqual([layer.id, true]);
 			expect(Number.isFinite(mapLayerIconScale(layer.id))).toBe(true);
@@ -202,8 +183,6 @@ describe('mapLayerIconScale', () => {
 });
 
 describe('mapLayerIcon', () => {
-	// Layers with a bespoke feature builder never reach mapLayerIcon: the spawn
-	// layers take a per-pal sprite and relics one per relic_type.
 	const BESPOKE: MapLayerId[] = ['alpha_pals', 'boss_pals', 'predator_pals', 'bounty', 'relics'];
 	const generic = MAP_LAYERS.map((layer) => layer.id).filter((id) => !BESPOKE.includes(id));
 
@@ -212,8 +191,6 @@ describe('mapLayerIcon', () => {
 	});
 
 	it('gives every generically drawn layer an icon of its own', () => {
-		// mapLayerIcon falls back to ICON_DUNGEON, so a layer missing from the
-		// table draws as a dungeon rather than failing - silent and wrong.
 		for (const id of generic) {
 			if (id === 'dungeons') continue;
 			expect([id, mapLayerIcon(id)]).not.toEqual([id, ICON_DUNGEON]);

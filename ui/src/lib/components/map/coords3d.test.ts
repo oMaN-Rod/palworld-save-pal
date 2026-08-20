@@ -25,8 +25,6 @@ describe('ueYawToThreeQuaternion', () => {
 type Quat = [number, number, number, number];
 type Vec3 = [number, number, number];
 
-// Ground truth from the standard Hamilton formula, independent of three.js and
-// of ueQuatToThree itself, so this cannot be circular.
 function ueRotateVector([x, y, z, w]: Quat, [vx, vy, vz]: Vec3): Vec3 {
 	return [
 		(1 - 2 * (y * y + z * z)) * vx + 2 * (x * y - w * z) * vy + 2 * (x * z + w * y) * vz,
@@ -35,8 +33,6 @@ function ueRotateVector([x, y, z, w]: Quat, [vx, vy, vz]: Vec3): Vec3 {
 	];
 }
 
-// Builds a general test quaternion from elemental axis rotations, again
-// independent of the code under test.
 function ueQuatMultiply([x1, y1, z1, w1]: Quat, [x2, y2, z2, w2]: Quat): Quat {
 	return [
 		w1 * x2 + x1 * w2 + y1 * z2 - z1 * y2,
@@ -46,13 +42,10 @@ function ueQuatMultiply([x1, y1, z1, w1]: Quat, [x2, y2, z2, w2]: Quat): Quat {
 	];
 }
 
-// The ue.(x,y,z) -> three.(x,z,y) axis swap applied to a plain vector.
 function ueToThreeVec([vx, vy, vz]: Vec3): THREE.Vector3 {
 	return new THREE.Vector3(vx, vz, vy);
 }
 
-// The correctness criterion: R' . P == P . R. Checking all three basis vectors
-// pins the whole 3x3, not just one column.
 function expectAxisMappingHolds(q: Quat) {
 	const three = ueQuatToThree(q[0], q[1], q[2], q[3]);
 	const basis: Vec3[] = [

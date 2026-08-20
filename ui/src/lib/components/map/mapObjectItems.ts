@@ -1,6 +1,3 @@
-// Builds the 3D map-object layer's items from Map.svelte's point lists and the
-// source records behind them. Split out of Map.svelte, which has no test file, so
-// the per-field mapping is asserted somewhere rather than only read.
 import type { FastTravelPoint, MapUnlockPoint, Relic, RelicPoint } from '$types';
 import { isWatchtower } from './fastTravel';
 import type { MapObjectItem } from './mapObjectLayer';
@@ -27,7 +24,6 @@ export type FastTravelItemInput = {
 	points: MapUnlockPoint[];
 	sources: Record<string, FastTravelPoint>;
 	size: number;
-	/** Watchtowers share the fast travel list and layer but scale on their own. */
 	watchtowerSize: number;
 };
 
@@ -38,9 +34,6 @@ export type RelicItemInput = {
 	size: number;
 };
 
-// The point lists carry no height or actor class; the source records do. Fast
-// travel points carry no rotation at all, so [0, 0, 0] is correct there rather
-// than a placeholder, while relics carry their source's `rot` verbatim.
 export function buildMapObjectItems(
 	show3d: boolean,
 	fastTravel: FastTravelItemInput,
@@ -51,7 +44,6 @@ export function buildMapObjectItems(
 
 	for (const p of fastTravel.points) {
 		const source = fastTravel.sources[p.guid];
-		// The source record always carries a class; the point's is optional.
 		if (source)
 			items.push({
 				x: p.x,
@@ -85,10 +77,6 @@ export function buildMapObjectItems(
 	return items;
 }
 
-// The draped ground rings drawn under the 3D beam. Separate from
-// buildMapObjectItems -- a ring needs only x/y and state -- but bound to the same
-// radius constants. Exported per type rather than taking a radius argument so a
-// test can prove each was never built from the other's radius.
 export function buildFastTravelRingFC(
 	points: MapUnlockPoint[],
 	area: MapArea,

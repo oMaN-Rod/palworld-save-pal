@@ -69,18 +69,12 @@ function toHexPalette<T extends Record<string, Record<string, THREE.Color>>>(
 	return result;
 }
 
-/**
- * `PORTAL_COLORS` as CSS hex strings, for consumers that can't use a THREE.Color
- * -- the ground rings drawn as maplibre paint expressions. Derived rather than
- * duplicated so a beam colour change can't drift the two apart.
- */
+// PORTAL_COLORS as CSS hex strings, for consumers that can't use a THREE.Color -- the
+// ground rings drawn as maplibre paint expressions. Derived rather than duplicated so
+// a beam colour change can't drift the two apart.
 export const PORTAL_HEX = toHexPalette(PORTAL_COLORS);
 
-/**
- * A maplibre `match` over `["get", "state"]` covering every state of the palette,
- * built from `PORTAL_HEX` so it can never omit one the beam table knows about.
- * `palRing` has no `unknown` state, so its caller must supply a fallback.
- */
+// `palRing` has no `unknown` state, so its caller must supply a fallback.
 export function portalRingColorExpression(
 	kind: keyof typeof PORTAL_HEX,
 	fallback?: string

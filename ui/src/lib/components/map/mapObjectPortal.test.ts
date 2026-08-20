@@ -50,8 +50,6 @@ describe('relicPortalColor', () => {
 });
 
 describe('palRingColor', () => {
-	// Would break if the predator ring went back to reusing CORE_COLOR, or any
-	// other blue, instead of this palette entry.
 	it('is red for a predator, distinct from alpha and boss', () => {
 		const predator = palRingColor('predator');
 		expect(predator.getHexString()).not.toBe(palRingColor('alpha').getHexString());
@@ -60,8 +58,6 @@ describe('palRingColor', () => {
 		expect(predator.r).toBeGreaterThan(predator.b);
 	});
 
-	// The boss-portal beam renders alpha and boss from one shared CORE_COLOR
-	// uniform, so giving their rings independent colours would desync them.
 	it('gives alpha and boss the same core color', () => {
 		expect(palRingColor('alpha').getHexString()).toBe(palRingColor('boss').getHexString());
 		expect(palRingColor('alpha').getHexString()).toBe('4fc3ff');
@@ -69,8 +65,6 @@ describe('palRingColor', () => {
 });
 
 describe('portalRingColorExpression', () => {
-	// Guards the ring's ['match'] arms drifting from the beam's colour table.
-	// Every state of both unions is checked, not just the ones that disagreed.
 	const fastTravelStates: FastTravelState[] = ['unknown', 'locked', 'unlocked'];
 	const relicStates: RelicState[] = ['unknown', 'uncollected', 'collected'];
 
@@ -116,8 +110,6 @@ describe('mapObjectPortalMatrix', () => {
 		expect(Math.abs(large.determinant())).toBeGreaterThan(Math.abs(small.determinant()));
 	});
 
-	// Asserts that the translation moved, not which component: worldToPixel swaps
-	// axes, so varying worldX moves latitude and leaves longitude untouched.
 	it('places two different world positions apart', () => {
 		const at = (wx: number, wy: number) =>
 			new THREE.Vector3().setFromMatrixPosition(
@@ -135,8 +127,6 @@ describe('createMapObjectPortalMesh', () => {
 		return Math.max(box.max.x, box.max.y);
 	}
 
-	// The base radius is exactly the argument, not a fraction of it, so a ring
-	// built from that same value can never disagree with the beam.
 	it('builds its base (ground) radius from the radius argument, not a fixed fraction of it', () => {
 		const relic = createMapObjectPortalMesh(1, RELIC_RADIUS_CM);
 		expect(baseRadiusOf(relic.geometry)).toBeCloseTo(RELIC_RADIUS_CM, 4);

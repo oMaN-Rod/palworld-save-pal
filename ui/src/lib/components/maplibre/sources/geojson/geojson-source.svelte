@@ -68,7 +68,6 @@
 		source = ctx.map!.getSource(sourceId) as MaplibreGeoJSONSource;
 	});
 
-	// Reactive data updates
 	$effect(() => {
 		if (source && data !== undefined) {
 			source.setData(data);

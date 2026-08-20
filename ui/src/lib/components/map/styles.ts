@@ -46,7 +46,6 @@ export const mapImg = {
 	bounty: assetLoader.loadImage(`${ASSET_DATA_PATH}/img/t_icon_compass_bounty.webp`),
 };
 
-/** Per-type relic icon, reusing the relic-stat art (`relic_<type>.webp`). */
 export function relicTypeIcon(relicType: string): string {
 	return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/relic_${relicType}.webp`);
 }

@@ -66,8 +66,6 @@
 		position?: ControlPosition;
 		title: string;
 		show3d: boolean;
-		/** Whether the host has bases to draw. Off leaves the structure sections out
-		 *  entirely. */
 		showStructureControls: boolean;
 		detailed: boolean;
 		textured: boolean;
@@ -91,12 +89,9 @@
 
 	const ctx = getMapContext();
 
-	// lucide `settings-2`.
 	const OPTIONS_ICON =
 		"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29' height='29' viewBox='-2.5 -2.5 29 29' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 7h-9'/%3E%3Cpath d='M14 17H5'/%3E%3Ccircle cx='17' cy='17' r='3'/%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3C/svg%3E\")";
 
-	// Every structure section needs both 3D and a host with bases; without the
-	// latter they would render against nothing.
 	const structureSections = $derived(show3d && showStructureControls);
 	const detailedSections = $derived(detailed && showStructureControls);
 
@@ -105,13 +100,10 @@
 	const blend = $derived(materialBlend());
 	const opacities = $derived(materialOpacities());
 
-	// A base-owning host opens to structures; without bases that section never
-	// renders, leaving sizes as the only one to start on.
 	let accordionValue = $state<string[]>(
 		untrack(() => (showStructureControls ? ['structures'] : ['sizes']))
 	);
 
-	// Tracks the drag live so the readout doesn't lag the debounced store write.
 	let blendPercent = $state(untrack(() => Math.round(blend * 100)));
 	$effect(() => {
 		blendPercent = Math.round(blend * 100);
@@ -130,9 +122,6 @@
 		);
 	});
 
-	// debounce() keeps one timer and fires with the last args, so a shared setter
-	// would drop an update when two swatches move inside one window. Pending
-	// values accumulate per key and flush together.
 	let pendingStructures: Record<string, string> = {};
 	let pendingMaterials: Record<string, string> = {};
 	let pendingOpacities: Record<string, number> = {};
@@ -209,8 +198,6 @@
 		const map = ctx.map;
 		if (!map) return;
 
-		// Mirrors Toggle3dControl's markup, plus a panel div appended as a second
-		// child so it can open beneath the button.
 		const container = document.createElement('div');
 		container.className = 'maplibregl-ctrl maplibregl-ctrl-group map-3d-options-ctrl relative';
 

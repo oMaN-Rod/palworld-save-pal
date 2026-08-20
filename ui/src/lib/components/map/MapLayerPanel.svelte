@@ -20,7 +20,6 @@
 		available
 	}: {
 		layers: MapLayerVisibility;
-		/** Options to change, merged by the caller over the record it owns. */
 		onVisibilityChange: (patch: MapLayerVisibility) => void;
 		onShowAll?: (visible: boolean) => void;
 		count?: (id: PanelOptionId) => string | undefined;
@@ -29,8 +28,7 @@
 	} = $props();
 
 	// peek, never getLayer: the panel reports what is already cached and must not
-	// pull an artifact over the wire just by being rendered. The non-layer options
-	// have no artifact and so no count.
+	// pull an artifact over the wire just by being rendered.
 	function markerCount(id: PanelOptionId): string | undefined {
 		if (!isMapLayerId(id)) return undefined;
 		const points = mapLayers.peek(id)?.points.length;
