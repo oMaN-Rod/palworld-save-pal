@@ -1,7 +1,6 @@
-//! The blueprint's wire form: a synthetic `Save<Palworld>`. `.psp` is that
-//! `Save`'s binary encoding (the same GVAS container real saves use); JSON is
-//! `serde_json` over the identical object. One object, two encodings -- see
-//! the amendment on this task for why that is load-bearing, not incidental.
+//! The blueprint's wire form: a synthetic `Save<Palworld>`. `.psp` is that `Save`'s
+//! binary encoding (the same GVAS container real saves use); JSON is `serde_json` over
+//! the identical object. One object, two encodings.
 
 use super::{BaseBlueprint, BlueprintHeader, BlueprintStructure, SCHEMA_VERSION};
 use crate::error::CoreError;
@@ -23,16 +22,12 @@ pub const SAVE_GAME_TYPE: &str = "PspBaseBlueprint";
 /// The blueprint's payload lives under the SAME property names the game's own
 /// `Level.sav` uses, nested under the same `worldSaveData` root struct.
 ///
-/// This is not cosmetic. `savio::read_sav_bytes` installs
-/// `palworld_types()`, whose every hint is keyed `worldSaveData.*`, and
-/// Palworld's context-dependent parsers (map objects, works) are gated on the
-/// literal paths `worldSaveData.MapObjectSaveData` and
-/// `worldSaveData.WorkSaveData`. A blueprint written at any other path reads
-/// back byte-identical but *typeless*: every `Model`/`ConcreteModel`/`Work`/
-/// character `RawData` stays an opaque byte array, and every consumer that
-/// pattern-matches `StructValue::Game(PalStruct::..)` silently sees nothing.
-/// Borrowing the game's own paths makes every hint and both context parsers
-/// apply for free.
+/// This is not cosmetic. `savio::read_sav_bytes` installs `palworld_types()`, whose
+/// every hint is keyed `worldSaveData.*`, and Palworld's context-dependent parsers (map
+/// objects, works) are gated on the literal paths `worldSaveData.MapObjectSaveData` and
+/// `worldSaveData.WorkSaveData`. A blueprint written at any other path reads back
+/// byte-identical but *typeless*: every `Model`/`ConcreteModel`/`Work`/character
+/// `RawData` stays an opaque byte array and every `StructValue::Game` match sees nothing.
 const WORLD_SAVE_DATA: &str = "worldSaveData";
 const MAP_OBJECT_SAVE_DATA: &str = "MapObjectSaveData";
 const ITEM_CONTAINER_SAVE_DATA: &str = "ItemContainerSaveData";
@@ -85,10 +80,6 @@ pub fn from_json(text: &str) -> Result<BaseBlueprint, CoreError> {
     from_save(&save)
 }
 
-// ---------------------------------------------------------------------------
-// Save construction
-// ---------------------------------------------------------------------------
-
 pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
     let mut save = Save {
         header: blueprint.source_header.clone(),
@@ -123,10 +114,9 @@ pub fn to_save(blueprint: &BaseBlueprint) -> Result<Save, CoreError> {
     Ok(save)
 }
 
-/// The blueprint's payload as one `worldSaveData` struct. `structures` is
-/// passed in because the two callers disagree about it: the wire form adds
-/// `MapObjectId` and `RelativeTransform` to each element, while
-/// `placement_schemas` must describe only what a real `Level.sav` will hold.
+/// The blueprint's payload as one `worldSaveData` struct. `structures` is passed in
+/// because the callers disagree: the wire form adds `MapObjectId` and
+/// `RelativeTransform` per element, while `placement_schemas` describes only `Level.sav`.
 fn world_properties(structures: Vec<StructValue>, blueprint: &BaseBlueprint) -> Properties {
     let mut world = Properties::default();
     world.insert(MAP_OBJECT_SAVE_DATA, Property::Array(ValueVec::Struct(structures)));
@@ -147,16 +137,13 @@ fn world_properties(structures: Vec<StructValue>, blueprint: &BaseBlueprint) -> 
     world
 }
 
-/// Every schema tag the blueprint's own properties imply, keyed at the paths a
-/// real `Level.sav` uses for them -- which is exactly why this module borrows
-/// the game's property names (see `WORLD_SAVE_DATA`).
+/// Every schema tag the blueprint's own properties imply, keyed at the paths a real
+/// `Level.sav` uses for them -- which is why this module borrows the game's names.
 ///
-/// uesave records a schema only for a property it actually READ, so a
-/// destination save that never held one of these properties has no tag to write
-/// it back with and `Save::write` fails with `MissingPropertySchema` -- after
-/// the placement has already been applied, leaving the user unable to save at
-/// all. `place` merges these into the destination before appending anything,
-/// with the destination's own tags always winning.
+/// uesave records a schema only for a property it actually READ, so a destination save
+/// that never held one has no tag to write it back with and `Save::write` fails with
+/// `MissingPropertySchema` -- after placement has been applied, leaving the user unable
+/// to save at all. `place` merges these in first, destination tags always winning.
 pub fn placement_schemas(blueprint: &BaseBlueprint) -> Result<PropertySchemas, CoreError> {
     let mut save = Save {
         header: blueprint.source_header.clone(),
@@ -246,11 +233,10 @@ pub fn from_save(save: &Save) -> Result<BaseBlueprint, CoreError> {
     Ok(blueprint)
 }
 
-/// The game keys `BaseCampSaveData` by base id; a blueprint carries exactly
-/// one base and no id of its own, so it writes a single nil-keyed entry. The
-/// shape is what matters: only at `worldSaveData.BaseCampSaveData` do the
-/// `RawData` -> `PalBaseCamp`, `WorkerDirector.RawData` and `ModuleMap.Value`
-/// hints apply.
+/// The game keys `BaseCampSaveData` by base id; a blueprint carries exactly one base and
+/// no id, so it writes a single nil-keyed entry. The shape is what matters: only at
+/// `worldSaveData.BaseCampSaveData` do the `RawData` -> `PalBaseCamp`,
+/// `WorkerDirector.RawData` and `ModuleMap.Value` hints apply.
 fn base_camp_property(base_camp: &Properties) -> Property {
     Property::Map(vec![MapEntry {
         key: Property::Struct(StructValue::Guid(FGuid::nil())),
@@ -284,9 +270,8 @@ fn world_save_data(properties: &Properties) -> Result<&Properties, CoreError> {
     }
 }
 
-/// A genuinely absent key is an empty collection; a key that is PRESENT but
-/// mis-shaped is a decode error. Returning empty for the latter is how a
-/// blueprint silently loses its contents.
+/// A genuinely absent key is an empty collection; a key that is PRESENT but mis-shaped
+/// is a decode error. Returning empty for the latter silently loses the contents.
 fn get_map_entries(properties: &Properties, key: &str) -> Result<Vec<MapEntry>, CoreError> {
     match properties.0.get(&PropertyKey::from(key)) {
         None => Ok(Vec::new()),
@@ -333,27 +318,18 @@ fn transform_from_property(prop: &Property) -> Result<PalTransform, CoreError> {
     Ok(PalTransform { rotation, translation, scale })
 }
 
-// ---------------------------------------------------------------------------
-// Schema priming.
-//
-// uesave's JSON deserializer picks each `Property`/`StructValue` variant by
-// consulting `save.schemas` at the property's exact dotted path -- the same
-// mechanism the binary reader uses (see the amendment at the top of this
-// task). A property inserted into `root.properties` without a matching schema
-// entry either fails to write (`Error::MissingPropertySchema`) or, worse,
-// deserializes from JSON as the wrong variant. `set_property` is the only
-// place a property is inserted, and `prime` is the only place a schema is
-// recorded, so a property cannot be added here without a tag: every path
-// through this module goes through both.
-// ---------------------------------------------------------------------------
+// uesave's JSON deserializer picks each `Property`/`StructValue` variant by consulting
+// `save.schemas` at the property's exact dotted path -- the same mechanism the binary
+// reader uses. A property inserted into `root.properties` without a matching schema
+// entry either fails to write (`Error::MissingPropertySchema`) or, worse, deserializes
+// from JSON as the wrong variant. `set_property` is the only place a property is
+// inserted and `prime` the only place a schema is recorded, so a property cannot be
+// added here without a tag.
 
-/// Per-path record of whether the tag recorded there was a guess. Threaded
-/// through the whole of `to_save`, so two subtrees that meet at one path still
-/// see each other's observations.
+/// Per-path record of whether the tag recorded there was a guess. Threaded through all
+/// of `to_save`, so two subtrees meeting at one path see each other's observations.
 type Observations = std::collections::HashMap<String, bool>;
 
-/// Inserts `prop` at the root under `key` and records its schema (recursing
-/// into whatever nested properties it carries).
 fn set_property(
     save: &mut Save,
     observed: &mut Observations,
@@ -365,16 +341,13 @@ fn set_property(
     Ok(())
 }
 
-/// Records `prop`'s schema at `path` and recurses into any nested `Properties`
-/// it carries, at the paths uesave's own pipeline would use to look them up.
+/// Records `prop`'s schema at `path` and recurses into nested `Properties`, at the paths
+/// uesave's own pipeline would look them up.
 ///
-/// A path can legitimately see more than one call (every `MapObjectSaveData`
-/// element shares "worldSaveData.MapObjectSaveData.<field>", every map entry
-/// shares its map's own path, ...), and siblings are not always shaped alike:
-/// a `RawData` blob that failed to parse (or was empty) on capture stays a raw
-/// byte array instead of the typed Palworld struct another sibling has, and an
-/// empty map/array yields no real key/value shape to observe. See
-/// `merge_observation` for how two observations of one path are reconciled.
+/// A path can legitimately see more than one call (every `MapObjectSaveData` element
+/// shares `worldSaveData.MapObjectSaveData.<field>`, every map entry shares its map's
+/// path), and siblings are not always shaped alike: a `RawData` blob that failed to parse
+/// or was empty stays a raw byte array, and an empty map/array yields nothing to observe.
 fn prime(
     save: &mut Save,
     observed: &mut Observations,
@@ -412,17 +385,13 @@ fn prime(
 
 /// Reconciles two observations of the same path.
 ///
-/// A guess never overwrites a real observation, and a real observation always
-/// overwrites a guess -- that half is load-bearing (a `ConcreteModel.RawData`
-/// left as raw bytes must not erase the typed `PalMapConcreteModel` a sibling
-/// proved is there).
+/// A guess never overwrites a real observation, and a real observation always overwrites
+/// a guess -- that half is load-bearing (a `ConcreteModel.RawData` left as raw bytes must
+/// not erase the typed `PalMapConcreteModel` a sibling proved is there).
 ///
-/// Two DIFFERING real observations are not mergeable at all. One schema tag
-/// decides how EVERY value at that path decodes, so keeping either silently
-/// rewrites the other's variant: a `Property::Name` comes back a
-/// `Property::Str`, an `Int64` is truncated to an `Int`. That is the exact
-/// silent variant corruption this format exists to prevent, so encoding
-/// refuses rather than picking a winner.
+/// Two DIFFERING real observations are not mergeable. One schema tag decides how EVERY
+/// value at that path decodes, so keeping either silently rewrites the other's variant:
+/// a `Property::Name` comes back a `Property::Str`, an `Int64` truncates to an `Int`.
 fn merge_observation(
     path: &str,
     existing: TaggedData,
@@ -440,10 +409,9 @@ fn merge_observation(
     }
 }
 
-/// Every field of `properties`, each recorded at `path` + "." + its own name --
-/// the convention uesave's `PropertiesSeed` uses whether `properties` is a
-/// struct's fields, an array element's fields, or a map entry's fields (all
-/// three share the same path prefix; only the property NAME distinguishes them).
+/// Every field of `properties`, recorded at `path` + "." + its own name -- the convention
+/// uesave's `PropertiesSeed` uses whether these are a struct's, an array element's, or a
+/// map entry's fields (all three share the prefix; only the property NAME distinguishes).
 fn prime_properties(
     save: &mut Save,
     observed: &mut Observations,
@@ -471,10 +439,9 @@ fn prime_struct_value(
     }
 }
 
-/// A map entry's key/value shares the enclosing map's own path (uesave records
-/// no separate `Key`/`Value` path segment), and its own tag lives in the map's
-/// `Map{key_type, value_type}` tag rather than a fresh schema entry -- so this
-/// only recurses into nested properties, never records `value` itself.
+/// A map entry's key/value shares the enclosing map's own path (uesave records no
+/// `Key`/`Value` segment), and its tag lives in the map's `Map{key_type, value_type}` tag
+/// rather than a fresh schema entry -- so this only recurses, never records `value`.
 fn prime_map_side(
     save: &mut Save,
     observed: &mut Observations,
@@ -501,10 +468,9 @@ fn prime_map_side(
 
 /// The three Palworld game structs that embed a nested `Properties` field
 /// (`PalCharacterData.object`, `PalDynamicItemType::Egg.object`,
-/// `PalMapConcreteModelVariant::HatchingEgg.hatched_character_save_parameter`)
-/// -- the same three `<Palworld as Game>::deserialize_struct` installs a
-/// properties context for. Every other Palworld struct is plain fixed-shape
-/// data with no dynamic property bag, so nothing else needs recursion here.
+/// `PalMapConcreteModelVariant::HatchingEgg.hatched_character_save_parameter`) -- the
+/// same three `<Palworld as Game>::deserialize_struct` installs a properties context for.
+/// Every other Palworld struct is fixed-shape data with no dynamic bag.
 fn prime_game_struct_properties(
     save: &mut Save,
     observed: &mut Observations,
@@ -531,9 +497,8 @@ fn prime_game_struct_properties(
 
 type TaggedData = (PropertyTagDataPartial, bool);
 
-/// Derives a property's tag from its own value, plus whether that derivation
-/// is a guess (`true`) rather than a real observation. See `prime`'s doc for
-/// why the distinction matters.
+/// Derives a property's tag from its own value, plus whether that derivation is a guess
+/// (`true`) rather than a real observation. See `prime` for why the distinction matters.
 fn tag_data_for(prop: &Property, path: &str, key: &str) -> Result<TaggedData, CoreError> {
     use PropertyTagDataPartial as Data;
     Ok(match prop {
@@ -598,13 +563,11 @@ fn tag_data_for(prop: &Property, path: &str, key: &str) -> Result<TaggedData, Co
     })
 }
 
-/// Like `tag_data_for` but for a `ValueVec` (an array/set element type). A
-/// byte array is marked a guess because it may be an embedded Palworld struct
-/// that stayed unparsed (empty, or a parse that failed and was captured raw);
-/// a struct array with no elements has nothing to observe, so its element type
-/// is guessed from the property name. EVERY element is observed, not just the
-/// first: one element tag covers the whole array, so heterogeneity inside it
-/// is exactly as unencodable as a conflict between two arrays.
+/// Like `tag_data_for` but for a `ValueVec` element type. A byte array is marked a guess
+/// because it may be an embedded Palworld struct that stayed unparsed (empty, or a failed
+/// parse captured raw); a struct array with no elements is guessed from the property name.
+/// EVERY element is observed: one element tag covers the whole array, so heterogeneity
+/// inside it is exactly as unencodable as a conflict between two arrays.
 fn value_vec_tag(values: &ValueVec, path: &str, key: &str) -> Result<TaggedData, CoreError> {
     use PropertyTagDataPartial as Data;
     Ok(match values {
@@ -650,9 +613,8 @@ fn value_vec_tag(values: &ValueVec, path: &str, key: &str) -> Result<TaggedData,
     })
 }
 
-/// The key and value element tags of a whole map. Every entry is observed, for
-/// the same reason `value_vec_tag` observes every element: the map carries one
-/// key tag and one value tag for all of them.
+/// The key and value element tags of a whole map. Every entry is observed, as in
+/// `value_vec_tag`: the map carries one key tag and one value tag for all of them.
 fn map_entry_tags(
     entries: &[MapEntry],
     path: &str,
@@ -688,15 +650,12 @@ fn map_entry_tags(
     Ok((key_tag.unwrap_or_else(fallback), value_tag.unwrap_or_else(fallback)))
 }
 
-/// The `StructType` this already-typed `StructValue` was (or, for a fresh
-/// generic struct, should be) tagged with. Builtin variants (`Guid`, `Vector`,
-/// ...) map 1:1 by construction. A `Game` struct needs its exact bare type
-/// name -- that is what routes it through `<Palworld as Game>::deserialize_struct`
-/// and back -- so it comes from `pal_struct_name`, not from `key`. A generic
-/// `Struct(Properties)` carries no name of its own (see the amendment: that is
-/// exactly what makes deriving `Deserialize` over it unsound), so this format
-/// is free to name it after the property key -- self-consistent, since nothing
-/// outside this blueprint format ever reads the name back.
+/// The `StructType` this `StructValue` was (or, for a fresh generic struct, should be)
+/// tagged with. Builtin variants (`Guid`, `Vector`, ...) map 1:1 by construction. A
+/// `Game` struct needs its exact bare type name -- that is what routes it through
+/// `<Palworld as Game>::deserialize_struct` and back -- so it comes from
+/// `pal_struct_name`, not from `key`. A generic `Struct(Properties)` carries no name of
+/// its own, so this format names it after the property key; nothing outside reads it back.
 fn struct_type_of(value: &StructValue, key: &str) -> StructType {
     match value {
         StructValue::Guid(_) => StructType::Guid,

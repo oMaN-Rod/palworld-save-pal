@@ -74,8 +74,7 @@ pub struct BlueprintHeader {
     pub anchor_height_above_terrain: f64,
 }
 
-/// No serde derives: `Properties` is only deserializable inside a schema
-/// context, which Task 6 supplies by encoding the blueprint as a `Save`.
+/// No serde derives: `Properties` only deserializes inside a schema context.
 #[derive(Debug, Clone)]
 pub struct BlueprintStructure {
     pub map_object_id: String,
@@ -86,11 +85,8 @@ pub struct BlueprintStructure {
 #[derive(Debug, Clone)]
 pub struct BaseBlueprint {
     pub header: BlueprintHeader,
-    /// The source save's GVAS header, carried verbatim. NOT decoration:
-    /// `large_world_coordinates()` (engine major >= 5) decides whether every
-    /// `Vector` is f64 or f32, and `property_tag()` (>= 5.4) whether an extra
-    /// byte is consumed per property. A defaulted header decodes every
-    /// coordinate at the wrong precision, silently.
+    /// The source save's GVAS header, carried verbatim: engine major >= 5 makes
+    /// every `Vector` f64, and >= 5.4 consumes an extra tag byte per property.
     pub source_header: Header,
     pub base_camp: Option<Properties>,
     pub structures: Vec<BlueprintStructure>,

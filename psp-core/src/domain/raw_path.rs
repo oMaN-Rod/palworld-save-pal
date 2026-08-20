@@ -1,7 +1,6 @@
-//! Path addressing, key deletion and a bounded walk over a raw GVAS tree.
-//! Supports a dotted/indexed path syntax, in-place scalar mutation,
-//! order-preserving deletion, and a traversal that survives across
-//! host-call boundaries (see `RawWalk`).
+//! Path addressing, key deletion and a bounded walk over a raw GVAS tree: a
+//! dotted/indexed path syntax, in-place scalar mutation, order-preserving deletion,
+//! and a traversal that survives across host-call boundaries (see `RawWalk`).
 
 use std::fmt;
 
@@ -151,8 +150,7 @@ pub struct VisitStats {
     pub visited: usize,
     pub removed: usize,
     pub stopped_early: bool,
-    /// Removals that failed to apply at `raw_walk_finish` (scope or parent
-    /// vanished). Nonzero means `removed` overcounts what the tree reflects.
+    /// Removals that failed to apply at `raw_walk_finish`. Nonzero means `removed` overcounts the tree.
     pub removal_errors: usize,
 }
 
@@ -163,12 +161,10 @@ pub struct RawNodeInfo {
     pub depth: usize,
     pub kind: NodeKind,
     pub scalar: Option<RawScalar>,
-    /// This node's address in [`RawPath::parse`] syntax, resolving back to
-    /// this exact node -- lets a `raw.visit` callback feed a match straight
-    /// into `raw.set`/`raw.get`. `None`, not a best-effort guess, when the
-    /// address can't render faithfully (a segment containing `.`/`[`/`]`, an
-    /// empty key, or a duplicate-name key with no index syntax to express
-    /// it): a lying path is worse than no path.
+    /// This node's address in [`RawPath::parse`] syntax, resolving back to this exact
+    /// node. `None`, never a best-effort guess, when the address cannot render
+    /// faithfully (a segment containing `.`/`[`/`]`, an empty key, or a duplicate-name
+    /// key with no index syntax to express it): a lying path is worse than no path.
     pub path: Option<String>,
 }
 
@@ -210,10 +206,6 @@ impl RawNodeMut<'_> {
     }
 }
 
-// ---------------------------------------------------------------------
-// Scope resolution
-// ---------------------------------------------------------------------
-
 fn scope_tree(session: &mut SaveSession, scope: RawScope) -> Result<&mut crate::ue::Save, CoreError> {
     match scope {
         RawScope::Level => Ok(&mut session.level),
@@ -239,10 +231,6 @@ fn scope_tree(session: &mut SaveSession, scope: RawScope) -> Result<&mut crate::
     }
 }
 
-// ---------------------------------------------------------------------
-// Navigation cursors
-// ---------------------------------------------------------------------
-
 #[derive(Clone, Copy)]
 enum NodeRef<'a> {
     Props(&'a Properties),
@@ -258,9 +246,8 @@ enum NodeMut<'a> {
     Struct(&'a mut StructValue),
 }
 
-/// The `StructValue::Game` variants that themselves hold a `Properties` bag
-/// reachable during a raw walk: a character entry, the pal inside an
-/// unhatched egg, and the pal currently incubating in a hatching egg.
+/// The `StructValue::Game` variants that themselves hold a `Properties` bag reachable
+/// during a walk: a character entry, an unhatched egg's pal, a hatching egg's pal.
 fn struct_value_properties(sv: &StructValue) -> Option<&Properties> {
     match sv {
         StructValue::Struct(p) => Some(p),
@@ -383,10 +370,6 @@ fn resolve_mut<'a>(root: &'a mut Properties, segments: &[Segment]) -> Option<Nod
     Some(cursor)
 }
 
-// ---------------------------------------------------------------------
-// Scalar mapping
-// ---------------------------------------------------------------------
-
 fn property_scalar(property: &Property) -> Option<RawScalar> {
     match property {
         Property::Int8(v) => Some(RawScalar::Int(*v as i64)),
@@ -446,9 +429,8 @@ fn overflow(kind: &str, given: i64) -> CoreError {
     CoreError::Other(format!("value {given} does not fit in a {kind} property"))
 }
 
-/// What assigning a validated `RawScalar` would concretely write. The only
-/// place variant-matching and overflow checks are computed, so `raw_set` and
-/// `raw_can_set`'s dry run can never drift apart.
+/// What assigning a validated `RawScalar` would concretely write. The only place
+/// variant-matching and overflow checks live, so `raw_set` and `raw_can_set` cannot drift.
 enum ScalarWrite {
     Int8(i8),
     Int16(i16),
@@ -588,9 +570,8 @@ fn convert_scalar_for_struct_value(sv: &StructValue, value: RawScalar) -> Result
     }
 }
 
-/// The fallback arm is unreachable in practice -- the converters only ever
-/// return a variant matching the property's own kind -- but errors instead
-/// of silently doing nothing, in case a future edit desyncs the two.
+/// The fallback arm is unreachable in practice -- converters only return a variant
+/// matching the property's kind -- but errors, in case a future edit desyncs the two.
 fn assign_scalar_write(property: &mut Property, write: ScalarWrite) -> Result<(), CoreError> {
     match (property, write) {
         (Property::Int8(v), ScalarWrite::Int8(n)) => *v = n,
@@ -649,13 +630,8 @@ fn can_set_scalar_on_node(node: NodeRef, value: &RawScalar) -> Result<(), CoreEr
     }
 }
 
-// ---------------------------------------------------------------------
-// Kind / length / json / children
-// ---------------------------------------------------------------------
-
-/// `Array(ValueVec::Struct(_))` is the only array shape `[n]` can step into;
-/// every other array/set variant reports `Opaque` instead, so `NodeKind::Array`
-/// never promises indexing the path engine can't deliver.
+/// `Array(ValueVec::Struct(_))` is the only array shape `[n]` can step into; every other
+/// array/set variant reports `Opaque`, so `NodeKind::Array` never promises what it can't deliver.
 fn property_kind(property: &Property) -> NodeKind {
     if property_scalar(property).is_some() {
         return NodeKind::Scalar;
@@ -748,10 +724,9 @@ fn node_to_json(node: NodeRef) -> Option<serde_json::Value> {
     }
 }
 
-/// Whether a key segment would survive a render-then-reparse round trip:
-/// `render_segments` has no escaping syntax, so a name containing `.`/`[`/`]`,
-/// an empty name, or a nonzero `dup_index` (no syntax expresses which
-/// same-named entry) would render ambiguously or resolve to the wrong node.
+/// Whether a key segment survives a render-then-reparse round trip: `render_segments`
+/// has no escaping syntax, so a name containing `.`/`[`/`]`, an empty name, or a nonzero
+/// `dup_index` would render ambiguously or resolve to the wrong node.
 fn key_segment_is_faithful(name: &str, dup_index: u32) -> bool {
     dup_index == 0 && !name.is_empty() && !name.contains(['.', '[', ']'])
 }
@@ -822,10 +797,6 @@ fn info_from_address(address: &[Segment], depth: usize, node: NodeRef, path_ok: 
     }
 }
 
-// ---------------------------------------------------------------------
-// Deletion
-// ---------------------------------------------------------------------
-
 enum Removable<'a> {
     PropsKey(&'a mut Properties, PropertyKey),
     MapIndex(&'a mut Vec<MapEntry>, usize),
@@ -888,26 +859,18 @@ fn apply_removal_at(session: &mut SaveSession, scope: RawScope, address: &[Segme
     }
 }
 
-// ---------------------------------------------------------------------
-// Walk
-// ---------------------------------------------------------------------
-
 struct Frame {
     address: Vec<Segment>,
     depth: usize,
     path_ok: bool,
 }
 
-/// Traversal state: the pending stack, deferred removals, and counters.
-/// Frames store an address rather than a reference, since every `raw_walk_*`
-/// method re-borrows the session fresh.
+/// Traversal state: pending stack, deferred removals, counters. Frames store an address
+/// rather than a reference, since every `raw_walk_*` method re-borrows the session fresh.
 ///
-/// Every `VisitAction::Remove` is only recorded here; nothing is removed
-/// until `raw_walk_finish`. Applying a removal mid-walk could still fire
-/// while a different queued frame addresses the same container by an index
-/// that removal is about to shift. Deferring every removal to one pass at
-/// the end, in descending address order, means no address is ever resolved
-/// after a removal that could have invalidated it.
+/// Every `VisitAction::Remove` is only recorded here; nothing is removed until
+/// `raw_walk_finish`. A mid-walk removal could shift an index a queued frame still
+/// addresses, so removals are deferred to one descending-address pass at the end.
 pub struct RawWalk {
     scope: RawScope,
     max_depth: usize,
@@ -921,9 +884,8 @@ pub struct RawWalk {
 }
 
 impl SaveSession {
-    /// `Err` when `path` does not resolve to any node. `Ok(None)` means the
-    /// path resolved to a non-scalar node (struct, map, array, opaque) --
-    /// use [`SaveSession::raw_kind`] to tell the two apart.
+    /// `Err` when `path` resolves to nothing; `Ok(None)` when it resolves to a non-scalar
+    /// node -- use [`SaveSession::raw_kind`] to tell the two apart.
     pub fn raw_get(&mut self, scope: RawScope, path: &RawPath) -> Result<Option<RawScalar>, CoreError> {
         let save = scope_tree(self, scope)?;
         let node = resolve_ref(&save.root.properties, &path.0)
@@ -983,8 +945,7 @@ impl SaveSession {
         Ok(node_len(node))
     }
 
-    /// Closure-driven walk. Convenient, and what the Rust tests use.
-    /// Not usable from a Lua host function; see `raw_walk_begin`.
+    /// Closure-driven walk, used by the Rust tests. Not usable from a Lua host function; see `raw_walk_begin`.
     pub fn raw_visit<F>(
         &mut self,
         scope: RawScope,
@@ -1019,8 +980,7 @@ impl SaveSession {
         Ok(self.raw_walk_finish(&mut walk))
     }
 
-    /// Host-driven walk. The caller owns the `RawWalk` and can therefore keep
-    /// it somewhere that survives a Lua `longjmp`.
+    /// Host-driven walk: the caller owns the `RawWalk` and can keep it somewhere that survives a Lua `longjmp`.
     pub fn raw_walk_begin(
         &mut self,
         scope: RawScope,
@@ -1067,9 +1027,8 @@ impl SaveSession {
         self.raw_walk_act_impl(walk, action, true);
     }
 
-    /// Like `raw_walk_act`, but a `VisitAction::Remove` prunes the subtree
-    /// from traversal without being queued for `raw_walk_finish` to apply --
-    /// a dry-run preview that visits and counts exactly what a real run would.
+    /// Like `raw_walk_act`, but `VisitAction::Remove` prunes the subtree from traversal
+    /// without queueing it -- a dry run that visits and counts what a real run would.
     pub fn raw_walk_act_preview(&mut self, walk: &mut RawWalk, action: VisitAction) {
         self.raw_walk_act_impl(walk, action, false);
     }
@@ -1111,10 +1070,8 @@ impl SaveSession {
         }
     }
 
-    /// Applies every deferred removal in one pass, addresses sorted
-    /// descending, so a sibling at a higher index is removed before one at a
-    /// lower index is ever resolved -- no removal can invalidate a
-    /// resolution still to come.
+    /// Applies every deferred removal in one pass, addresses sorted descending, so no
+    /// removal can invalidate a resolution still to come.
     pub fn raw_walk_finish(&mut self, walk: &mut RawWalk) -> VisitStats {
         let mut addresses = std::mem::take(&mut walk.pending_removals);
         addresses.sort_by(|a, b| b.cmp(a));

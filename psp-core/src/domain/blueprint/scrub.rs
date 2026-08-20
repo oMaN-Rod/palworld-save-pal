@@ -1,7 +1,6 @@
-//! Zeroes every player-identifying UID a captured `BaseBlueprint` carries.
-//! `capture::capture` always runs this; nothing outside this module should
-//! need to call it directly except tests exercising the precondition via
-//! `capture::capture_unscrubbed`.
+//! Zeroes every player-identifying UID a captured `BaseBlueprint` carries. `capture`
+//! always runs this; nothing outside this module should call it directly except tests
+//! exercising the precondition via `capture::capture_unscrubbed`.
 
 use uuid::Uuid;
 
@@ -60,10 +59,9 @@ fn scrub_concrete_variant(variant: &mut PalMapConcreteModelVariant<crate::ue::Ar
         PalMapConcreteModelVariant::PalEgg(model) => {
             model.pickupdable_player_uid = zero();
         }
-        // Exhaustive by design, not a style choice: a future uesave upgrade
-        // that adds a variant here must fail to compile until someone
-        // decides whether it carries a player UID, rather than silently
-        // falling through a catch-all and leaking one.
+        // Exhaustive by design: a future uesave upgrade that adds a variant here must
+        // fail to compile until someone decides whether it carries a player UID, rather
+        // than falling through a catch-all and leaking one.
         PalMapConcreteModelVariant::CharacterTeamMission(_)
         | PalMapConcreteModelVariant::FarmSkillFruits(_)
         | PalMapConcreteModelVariant::SupplyStorage(_)
@@ -88,16 +86,13 @@ fn scrub_concrete_variant(variant: &mut PalMapConcreteModelVariant<crate::ue::Ar
     }
 }
 
-/// Zeroes `player_uid` on every `PalPlayerLockInfo` inside a `PasswordLock`
-/// module, and clears the lock's own `password` unless the capture is a full
-/// snapshot. The uid scrub runs unconditionally, regardless of what
-/// `CaptureOptions` asked for: `capture::clear_access_config` also drops the
-/// whole lock when the user did not request access config, but this is the
-/// backstop that must hold on every preset, including ones that keep the lock.
+/// Zeroes `player_uid` on every `PalPlayerLockInfo` inside a `PasswordLock` module, and
+/// clears the lock's own `password` unless the capture is a full snapshot. The uid scrub
+/// runs unconditionally, whatever `CaptureOptions` asked for: it is the backstop that
+/// must hold on every preset, including ones that keep the lock.
 ///
-/// The password is a secret the source save's players share, and a blueprint is
-/// a file its author hands to strangers, so `configured` -- which keeps the
-/// lock -- must not keep what opens it.
+/// The password is a secret the source save's players share, and a blueprint is a file
+/// its author hands to strangers.
 fn scrub_module_map(properties: &mut Properties, keep_password: bool) {
     capture::for_each_module_raw_mut(properties, |raw| {
         if let PalMapConcreteModelModuleData::PasswordLock { password, player_infos, .. } =
@@ -128,7 +123,6 @@ fn scrub_concrete(properties: &mut Properties) {
     }
 }
 
-/// Zeroes every slot's `player_uid` in a `CharacterContainerSaveData` entry.
 fn scrub_character_container_entry(entry: &mut MapEntry) {
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
         return;
@@ -175,8 +169,7 @@ fn scrub_character_entry(entry: &mut MapEntry) {
     }
 }
 
-/// Zeroes `group_id_belong_to` on a captured `BaseCampSaveData` entry's typed
-/// `PalStruct::BaseCamp` raw data.
+/// Zeroes `group_id_belong_to` on a captured `BaseCampSaveData` entry's `PalStruct::BaseCamp`.
 fn scrub_base_camp(base_camp: &mut Properties) {
     if let Some(Property::Struct(StructValue::Game(PalStruct::BaseCamp(raw)))) =
         base_camp.0.get_mut(&PropertyKey::from("RawData"))

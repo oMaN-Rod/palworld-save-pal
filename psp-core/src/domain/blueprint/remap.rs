@@ -1,21 +1,16 @@
-//! Regenerates every GUID a captured `BaseBlueprint` defines and rewrites
-//! every reference to it, so the same blueprint can be placed more than once
-//! -- including back into the save it was captured from -- without any two
-//! placements (or a placement and its source) colliding on instance ids.
+//! Regenerates every GUID a captured `BaseBlueprint` defines and rewrites every reference
+//! to it, so one blueprint can be placed repeatedly -- including back into the save it was
+//! captured from -- without any two placements colliding on instance ids.
 //!
-//! Unlike PalworldSaveTools, which maps `instance_id_map[old] = old` and
-//! therefore requires never reimporting a base into its source world, every
-//! id here is freshly minted. A reference whose target lies outside the
-//! blueprint is written as a nil guid rather than dropped: the GVAS encoder
-//! writes the key unconditionally, and removing it breaks re-encoding.
+//! A reference whose target lies outside the blueprint is written as a nil guid rather
+//! than dropped: the GVAS encoder writes the key unconditionally, and removing it breaks
+//! re-encoding.
 //!
-//! Deliberately NOT remapped, because placement retargets them to the
-//! destination world rather than to anything inside the blueprint:
-//! `PalMapModel.base_camp_id_belong_to`, `PalMapModel.group_id_belong_to`,
-//! `PalBaseCamp.id`, `PalCharacterData`'s group id, and
+//! Deliberately NOT remapped, because placement retargets them to the destination world
+//! rather than to anything inside the blueprint: `PalMapModel.base_camp_id_belong_to`,
+//! `PalMapModel.group_id_belong_to`, `PalBaseCamp.id`, `PalCharacterData`'s group id, and
 //! `PalDynamicId.created_world_id` -- the last of which sits right beside
-//! `local_id_in_created_world`, which IS remapped, since it is the identity
-//! of the item itself.
+//! `local_id_in_created_world`, which IS remapped, being the identity of the item itself.
 
 use std::collections::HashMap;
 use uuid::Uuid;
@@ -37,9 +32,8 @@ pub struct IdRemap {
 }
 
 impl IdRemap {
-    /// The fresh id for `old`, minting one on first sight and returning the
-    /// same one on every later call. The nil guid maps to itself: it means
-    /// "no owner"/"no target", not an identity to regenerate.
+    /// The fresh id for `old`, minting on first sight and stable thereafter. The nil guid
+    /// maps to itself: it means "no owner"/"no target", not an identity to regenerate.
     pub fn new_for(&mut self, old: Uuid) -> Uuid {
         if old.is_nil() {
             return Uuid::nil();
@@ -57,8 +51,7 @@ impl IdRemap {
         self.mapping.get(&old).copied()
     }
 
-    /// Every old -> new pair in the raw Palworld guid byte encoding, for
-    /// substituting ids inside opaque blobs.
+    /// Every old -> new pair in the raw Palworld guid byte encoding, for substituting ids inside opaque blobs.
     fn byte_pairs(&self) -> HashMap<[u8; 16], [u8; 16]> {
         self.mapping
             .iter()
@@ -142,12 +135,10 @@ fn character_instance_id_mut(entry: &mut MapEntry) -> Option<&mut FGuid> {
     }
 }
 
-/// Mints a new id for every id the blueprint DEFINES. For a structure that is
-/// its `Model`'s own `instance_id` and its `ConcreteModel`'s own `instance_id`;
-/// the latter is the same underlying value `Model.concrete_model_instance_id`
-/// names, so reserving it here (whichever field the value is read from first)
-/// is what lets pass two's lookup of the other field resolve to the same fresh
-/// id.
+/// Mints a new id for every id the blueprint DEFINES. For a structure that is its
+/// `Model`'s own `instance_id` and its `ConcreteModel`'s own `instance_id`; the latter is
+/// the same underlying value `Model.concrete_model_instance_id` names, so reserving it
+/// here lets pass two's lookup of the other field resolve to the same fresh id.
 fn register_definitions(blueprint: &mut BaseBlueprint, remap: &mut IdRemap) {
     for structure in &mut blueprint.structures {
         if let Some(model) = capture::map_object_model_mut(&mut structure.properties) {
@@ -268,13 +259,11 @@ fn rewrite_references(blueprint: &mut BaseBlueprint, remap: &IdRemap) -> Result<
 }
 
 /// A base names its worker character container a second time, inside the opaque
-/// `WorkerDirector` blob uesave keeps raw. Missed, the placed base's workers
-/// resolve to the SOURCE base's container -- the same base's pals in the same
-/// save, and an id that does not exist in any other.
+/// `WorkerDirector` blob uesave keeps raw. Missed, the placed base's workers resolve to
+/// the SOURCE base's container.
 ///
-/// A blob that does not decode is refused rather than carried over: the layout
-/// is fixed at 118 bytes, so a game update that changes it would otherwise
-/// reinstate exactly that defect on every placement, silently.
+/// A blob that does not decode is refused rather than carried over: the layout is fixed at
+/// 118 bytes, so a game update changing it would silently reinstate that defect.
 fn rewrite_worker_director_container(
     remap: &IdRemap,
     base_camp: &mut Properties,
@@ -327,9 +316,8 @@ fn rewrite_module_map(remap: &IdRemap, properties: &mut Properties) {
     });
 }
 
-/// Walks an `ItemContainerSaveData`/`CharacterContainerSaveData` entry's
-/// `Slots`, rewriting the one guid `field` picks out of each slot's typed
-/// `RawData`.
+/// Walks an `ItemContainerSaveData`/`CharacterContainerSaveData` entry's `Slots`,
+/// rewriting the one guid `field` picks out of each slot's typed `RawData`.
 fn rewrite_container_slots(
     remap: &IdRemap,
     entry: &mut MapEntry,
@@ -396,14 +384,12 @@ fn rewrite_work(remap: &IdRemap, work: &mut StructValue) {
     });
 }
 
-/// The base camp names its works a second time, in an opaque blob uesave keeps
-/// raw. `own_id` is a definition; the list is replaced wholesale with the
-/// blueprint's post-remap work ids, which drops the ids that were already
-/// dangling in the source save.
+/// The base camp names its works a second time, in an opaque blob uesave keeps raw.
+/// `own_id` is a definition; the list is replaced wholesale with the blueprint's
+/// post-remap work ids, dropping ids already dangling in the source save.
 ///
-/// A blob that does not decode is refused rather than carried over: kept, it
-/// would leave the placed base naming the SOURCE save's works and calling
-/// itself by the source base's id.
+/// A blob that does not decode is refused rather than carried over: kept, it would leave
+/// the placed base naming the SOURCE save's works and calling itself by its base id.
 fn rebuild_work_collection(
     blueprint: &mut BaseBlueprint,
     remap: &mut IdRemap,

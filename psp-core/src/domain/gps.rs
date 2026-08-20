@@ -1,9 +1,8 @@
 //! GPS (Global Pal Storage) session state and pal operations.
 //!
-//! `GlobalPalStorage.sav`'s root `SaveParameterArray` uses the exact same
-//! per-slot `{"InstanceId", "SaveParameter"}` layout as a player's `_dps.sav`
-//! array, so this module is a thin wrapper around `domain::pal`'s DPS slot
-//! machinery rather than a separate implementation.
+//! `GlobalPalStorage.sav`'s root `SaveParameterArray` uses the exact same per-slot
+//! `{"InstanceId", "SaveParameter"}` layout as a player's `_dps.sav` array, so this
+//! module wraps `domain::pal`'s DPS slot machinery rather than reimplementing it.
 
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -18,19 +17,14 @@ use crate::gamedata::GameData;
 use crate::props;
 use crate::session::SaveSession;
 
-/// Parsed `GlobalPalStorage.sav` plus everything the GPS mutators need to
-/// read and write its `SaveParameterArray` without re-parsing the file.
 #[derive(Default)]
 pub struct GpsState {
-    /// Known as soon as the GPS file is located, before it is ever parsed --
-    /// `gps_available` is true from that point on.
+    /// Known as soon as the GPS file is located, before it is ever parsed.
     pub file_path: Option<PathBuf>,
     pub save: Option<crate::ue::Save>,
-    /// `SaveParameterArray` length: every valid slot index is
-    /// `0..slot_count`, occupied or not.
+    /// `SaveParameterArray` length: every index in `0..slot_count` is a slot, occupied or not.
     pub slot_count: usize,
-    /// Index -> occupied slot. Every mutator re-derives the entries it
-    /// touches from the just-written slot, so this never goes stale.
+    /// Index -> occupied slot, re-derived from the just-written slot by every mutator.
     pub pals: BTreeMap<i32, PalDto>,
     pub loaded: bool,
 }
@@ -53,8 +47,7 @@ fn gps_slots_mut(save: &mut crate::ue::Save) -> Option<&mut Vec<StructValue>> {
     )
 }
 
-/// A slot is empty when its `CharacterID` is absent or the literal string
-/// `"None"` -- the save format's own vacancy marker.
+/// A slot is empty when `CharacterID` is absent or the literal `"None"` -- the format's own vacancy marker.
 fn gps_slot_is_empty(slot: &StructValue) -> bool {
     let StructValue::Struct(slot_props) = slot else {
         return true;
@@ -92,13 +85,10 @@ impl SaveSession {
         self.gps.loaded || self.gps.file_path.is_some()
     }
 
-    /// `None` until `load_gps` has run at least once.
     pub fn gps_pals(&self) -> Option<&BTreeMap<i32, PalDto>> {
         self.gps.loaded.then_some(&self.gps.pals)
     }
 
-    /// Parses `GlobalPalStorage.sav` and extracts every non-empty
-    /// `SaveParameterArray` slot as a `PalDto`.
     pub fn load_gps(
         &mut self,
         sav_bytes: &[u8],
@@ -116,8 +106,7 @@ impl SaveSession {
         Ok(&self.gps.pals)
     }
 
-    /// `None` both when no slot is free and when no GPS file is loaded;
-    /// callers that need the distinction check `gps.loaded` first.
+    /// `None` both when no slot is free and when no GPS file is loaded; check `gps.loaded` to tell.
     pub fn find_first_empty_gps_slot(&self) -> Option<i32> {
         let slots = gps_slots(self.gps.save.as_ref()?)?;
         slots
@@ -126,11 +115,8 @@ impl SaveSession {
             .map(|index| index as i32)
     }
 
-    /// Creates a pal in `storage_slot`, or the first empty slot. Returns
-    /// `(pal, index)`, or `None` when GPS is full.
-    ///
-    /// `FullStomach` is deliberately left as the slot's previous occupant
-    /// left it: unlike a newly caught pal, a GPS deposit is not fed.
+    /// `FullStomach` is deliberately left as the slot's previous occupant left it:
+    /// unlike a newly caught pal, a GPS deposit is not fed.
     pub fn add_gps_pal(
         &mut self,
         game_data: &GameData,
@@ -220,8 +206,7 @@ impl SaveSession {
         Ok(Some((dto, slot_index)))
     }
 
-    /// Writes `pal_dto` into a GPS slot as a fresh, unowned pal -- also the
-    /// whole of cloning a GPS pal. Returns `(index, pal)`.
+    /// Writes `pal_dto` into a GPS slot as a fresh, unowned pal -- also the whole of cloning one.
     pub fn add_gps_pal_from_dto(
         &mut self,
         game_data: &GameData,
@@ -249,9 +234,8 @@ impl SaveSession {
         }
         let new_instance_id = uuid::Uuid::new_v4();
         let mut incoming = pal_dto.clone();
-        // Must be a present nil guid, not `None`: `apply_pal_dto` skips
-        // `OwnerPlayerUId` entirely when the field is `None`, which would
-        // leave the clone owned by the source pal's player.
+        // Must be a present nil guid, not `None`: `apply_pal_dto` skips `OwnerPlayerUId`
+        // entirely when the field is `None`, leaving the clone owned by the source's player.
         incoming.owner_uid = Some(props::EMPTY_UUID);
         incoming.instance_id = new_instance_id;
         incoming.storage_id = props::EMPTY_UUID;
@@ -293,9 +277,8 @@ impl SaveSession {
         Ok(Some((slot_index, dto)))
     }
 
-    /// Vacates each tracked slot in place: the array keeps its length, so the
-    /// slot's outer `InstanceId` must be zeroed too, or the game still sees a
-    /// pal there.
+    /// Vacates each tracked slot in place: the array keeps its length, so the slot's outer
+    /// `InstanceId` must be zeroed too, or the game still sees a pal there.
     pub fn delete_gps_pals(&mut self, pal_indexes: &[i32]) {
         let GpsState {
             save, pals, loaded, ..
@@ -336,10 +319,8 @@ impl SaveSession {
         }
     }
 
-    /// Applies each DTO in `modified_gps_pals` onto its `SaveParameterArray`
-    /// slot, addressed by slot index. A DTO whose slot is out of range or not a
-    /// struct is skipped. Mirrors `domain::pal::update_dps_pals`: the same
-    /// `apply_pal_dto` slot machinery, since GPS slots share the DPS layout.
+    /// Applies each DTO onto its `SaveParameterArray` slot, addressed by slot index; an
+    /// out-of-range or non-struct slot is skipped.
     pub fn update_gps_pals(
         &mut self,
         game_data: &GameData,
@@ -381,15 +362,13 @@ impl SaveSession {
                 }
             }
         }
-        // Re-derive the touched entries from the just-written slots.
         self.rebuild_gps_save(game_data)?;
         progress("Saving changes to file");
         Ok(())
     }
 
-    /// Re-derives `gps.pals`/`gps.slot_count` from the live property tree.
-    /// The mutators keep both in sync already; this is the defensive resync
-    /// the save-to-disk path can run first.
+    /// Re-derives `gps.pals`/`gps.slot_count` from the live tree. The mutators keep both
+    /// in sync already; this is the defensive resync the save-to-disk path can run first.
     pub fn rebuild_gps_save(&mut self, game_data: &GameData) -> Result<(), CoreError> {
         let save = self
             .gps
@@ -404,8 +383,6 @@ impl SaveSession {
         Ok(())
     }
 
-    /// Compresses the loaded `GlobalPalStorage.sav` tree back to `.sav` bytes,
-    /// or `None` when no GPS file was loaded.
     pub fn gps_sav_bytes(&self) -> Result<Option<Vec<u8>>, CoreError> {
         match &self.gps.save {
             Some(save) => Ok(Some(crate::savio::write_sav_bytes(save)?)),
@@ -495,8 +472,7 @@ mod tests {
         StructValue::Struct(slot_props)
     }
 
-    /// Three GPS slots: 0 empty, 1 holding a lucky pal, 2 empty -- two free
-    /// slots so an add and a subsequent clone both land somewhere.
+    /// Three GPS slots: 0 empty, 1 holding a lucky pal, 2 empty -- two free, so an add and a clone both land.
     fn gps_fixture_session() -> (SaveSession, GameData) {
         let data = game_data();
         let mut lucky_slot = match gps_slot("Sheepball", Uuid::new_v4()) {
@@ -718,11 +694,9 @@ mod tests {
         assert_eq!(error.to_string(), "GPS Gvas file is not initialized.");
     }
 
-    // Re-serializing a real parsed tree is left to the corpus-gated test
-    // below: `uesave`'s writer needs each property's schema, which is only
-    // recorded when the property was actually read through `SaveReader`, so
-    // `write_sav_bytes` on a hand-built `Save` always fails with `missing
-    // property schema`.
+    // Re-serializing a real parsed tree is left to the corpus-gated test below:
+    // `uesave`'s writer needs each property's schema, which is only recorded when the
+    // property was read through `SaveReader`, so a hand-built `Save` always fails.
 
     #[test]
     fn gps_sav_bytes_is_none_when_not_loaded() {
@@ -731,8 +705,7 @@ mod tests {
         assert!(session.gps_sav_bytes().unwrap().is_none());
     }
 
-    /// Exercises the actual parse/compression path against the committed
-    /// `GlobalPalStorage.sav` fixture. Never skips.
+    /// Exercises the real parse/compression path against the committed fixture. Never skips.
     #[test]
     fn gps_load_add_clone_delete_round_trips_against_a_real_file() {
         let gps_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))

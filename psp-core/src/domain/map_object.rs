@@ -18,8 +18,6 @@ fn concrete_variant(object: &StructValue) -> Option<&PalMapConcreteModelVariant<
     }
 }
 
-/// Mirrors `blueprint::capture::with_concrete_variant_mut`; kept separate
-/// because that helper is private to `blueprint`.
 fn with_concrete_variant_mut(
     object: &mut StructValue,
     f: impl FnOnce(&mut PalMapConcreteModelVariant<crate::ue::Arch>),
@@ -63,14 +61,11 @@ fn lock_field_mut(variant: &mut PalMapConcreteModelVariant<crate::ue::Arch>) -> 
     }
 }
 
-/// The single definition of "locked" -- `count_private_chest_locks` and
-/// `unlock_private_chests` both decide through this, so they cannot disagree.
 fn is_locked(variant: &PalMapConcreteModelVariant<crate::ue::Arch>) -> bool {
     lock_field(variant).is_some_and(|lock| *lock != FGuid::nil())
 }
 
-/// Deliberately leaves `PasswordLock` module state untouched, matching
-/// PalworldSaveTools' original private-chest unlock.
+/// Deliberately leaves `PasswordLock` module state untouched -- only the lock flag is cleared.
 fn clear_private_lock(object: &mut StructValue) -> bool {
     let mut changed = false;
     with_concrete_variant_mut(object, |variant| {

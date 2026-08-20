@@ -1,7 +1,5 @@
-//! Pal read/write side for Level.sav pals and DPS-array pals.
-//!
-//! Save data is untrusted: a malformed pal entry (missing `SaveParameter`,
-//! wrong-typed `RawData`, ...) is skipped, never a panic.
+//! Pal read/write side for Level.sav pals and DPS-array pals. Save data is untrusted: a
+//! malformed pal entry (missing `SaveParameter`, wrong-typed `RawData`) is skipped.
 
 use std::collections::HashSet;
 
@@ -17,16 +15,13 @@ use crate::session::SaveSession;
 
 use super::world;
 
-/// Look up a top-level property inside a pal/player `SaveParameter` bag.
 pub(crate) fn param<'a>(save_parameter: &'a Properties, name: &str) -> Option<&'a Property> {
     save_parameter.0.get(&PropertyKey::from(name))
 }
 
-/// Every key in `pals.json`, used by `format_character_key` to decide whether
-/// a `BOSS_`-prefixed id names a pal that is its own catalog entry (keep the
-/// prefix) or an ordinary pal spawned as a boss (strip it). Borrowed from
-/// `GameData`'s memoized lookup: this is called once per pal decoded, so it
-/// must not rebuild the set.
+/// Every key in `pals.json`, used by `format_character_key` to decide whether a
+/// `BOSS_`-prefixed id names a pal that is its own catalog entry (keep the prefix) or an
+/// ordinary pal spawned as a boss (strip it). Borrowed from `GameData`'s memoized lookup.
 pub fn known_pal_keys(game_data: &GameData) -> &HashSet<String> {
     &game_data.pal_lookup().keys
 }
@@ -35,8 +30,7 @@ pub fn known_pal_keys(game_data: &GameData) -> &HashSet<String> {
 /// deliberately excluded: they are normal state, not illness.
 const SICK_MARKERS: [&str; 3] = ["PalReviveTimer", "PhysicalHealth", "WorkerSick"];
 
-/// Resolves a pal's static `pals.json` entry from a `character_key`, matching
-/// case-insensitively against the real key casing.
+/// Resolves a pal's static `pals.json` entry, matching case-insensitively against the real key casing.
 fn pal_data_for<'a>(character_key: &str, game_data: &'a GameData) -> Option<&'a serde_json::Value> {
     if character_key.is_empty() {
         return None;
@@ -61,16 +55,13 @@ pub fn boss_and_lucky(save_parameter: &Properties, character_id: &str) -> (bool,
     (is_boss, is_lucky)
 }
 
-/// Builds the full `PalDto` from a resolved `SaveParameter` bag, for both
-/// Level.sav pals (`is_dps: false`) and GPS/DPS-array pals (`is_dps: true`).
 pub fn read_save_parameter_dto(
     save_parameter: &Properties,
     instance_id: uuid::Uuid,
     is_dps: bool,
     game_data: &GameData,
 ) -> PalDto {
-    // A character-map entry with no CharacterID is corrupt; "" keeps the
-    // downstream prefix checks (boss/predator/tower) total.
+    // A character-map entry with no CharacterID is corrupt; "" keeps the downstream prefix checks total.
     let character_id = param(save_parameter, "CharacterID")
         .and_then(props::as_str)
         .unwrap_or("")
@@ -85,8 +76,7 @@ pub fn read_save_parameter_dto(
         .and_then(props::as_bool)
         .unwrap_or(false);
 
-    // Gender is absent for pals that never had one assigned; Female is the
-    // contract's default.
+    // Gender is absent for pals that never had one assigned; Female is the contract's default.
     let gender = param(save_parameter, "Gender")
         .and_then(props::as_str)
         .map(PalGender::from_prefixed)
@@ -130,8 +120,7 @@ pub fn read_save_parameter_dto(
                 continue;
             };
             let bare = work_name.trim_start_matches("EPalWorkSuitability::");
-            // An unrecognized work-suitability name is dropped rather than
-            // surfaced: untrusted save data must not fail the whole read.
+            // An unrecognized work-suitability name is dropped: untrusted data must not fail the read.
             if !WORK_SUITABILITIES.contains(&bare) {
                 continue;
             }
@@ -264,15 +253,12 @@ pub fn read_save_parameter_dto(
 /// `PalGameSetting.AwakeningStatusMultiply`.
 pub const AWAKENING_STATUS_MULTIPLY: f64 = 1.1;
 
-/// Computed max HP, falling back to `dto.hp` for a pal with no `scaling.hp`
-/// entry in `pals.json`.
+/// Computed max HP, falling back to `dto.hp` for a pal with no `scaling.hp` entry.
 ///
-/// `boosted` (boss or lucky, worth a 1.2x multiplier) and `awakened` (worth
-/// `AWAKENING_STATUS_MULTIPLY`) are parameters rather than read off `dto`:
-/// on the write path `dto.is_boss` may be stale and `dto.is_lucky`/
-/// `dto.is_awakened` may be `None` ("leave `IsRarePal`/`bIsAwakening` alone",
-/// not "false"), so only the caller can resolve them against the save's
-/// current state.
+/// `boosted` (boss or lucky, worth 1.2x) and `awakened` (worth `AWAKENING_STATUS_MULTIPLY`)
+/// are parameters rather than read off `dto`: on the write path `dto.is_boss` may be stale
+/// and `dto.is_lucky`/`dto.is_awakened` may be `None` ("leave the flag alone", not
+/// "false"), so only the caller can resolve them against the save's current state.
 pub fn max_hp_for(dto: &PalDto, boosted: bool, awakened: bool, game_data: &GameData) -> i64 {
     let keys = known_pal_keys(game_data);
     let pal_key = format_character_key(&dto.character_id, keys);
@@ -299,8 +285,6 @@ pub fn max_hp_for(dto: &PalDto, boosted: bool, awakened: bool, game_data: &GameD
         * 1000
 }
 
-/// Reads a `CharacterSaveParameterMap` entry. `None` when the entry isn't
-/// shaped like a pal (no `InstanceId`/`SaveParameter`/`PalCharacterData`).
 pub fn pal_dto_from_entry(entry: &MapEntry, game_data: &GameData) -> Option<PalDto> {
     let instance_id = world::entry_instance_id(entry)?;
     let save_parameter = world::entry_save_parameter(entry)?;
@@ -312,10 +296,9 @@ pub fn pal_dto_from_entry(entry: &MapEntry, game_data: &GameData) -> Option<PalD
     Some(dto)
 }
 
-/// Reads a GPS/DPS `SaveParameterArray` element: a struct with a
-/// `SaveParameter` property and an `InstanceId` struct holding an inner
-/// `InstanceId` guid -- no `RawData`/`PalCharacterData` wrapper, unlike
-/// Level.sav pals. `None` when the slot isn't shaped this way.
+/// Reads a GPS/DPS `SaveParameterArray` element: a struct with a `SaveParameter` property
+/// and an `InstanceId` struct holding an inner `InstanceId` guid -- no
+/// `RawData`/`PalCharacterData` wrapper, unlike Level.sav pals.
 pub fn pal_dto_from_dps_slot(slot: &StructValue, game_data: &GameData) -> Option<PalDto> {
     let StructValue::Struct(slot_props) = slot else {
         return None;
@@ -336,16 +319,13 @@ pub fn pal_dto_from_dps_slot(slot: &StructValue, game_data: &GameData) -> Option
     ))
 }
 
-/// Lightweight summaries of every non-player pal in Level.sav.
-///
-/// Summary defaults differ from the full dump in one place: an absent `Rank`
-/// is reported as 1 here, 0 there.
+/// Lightweight summaries of every non-player pal in Level.sav. Summary defaults differ
+/// from the full dump in one place: an absent `Rank` is reported as 1 here, 0 there.
 pub fn pal_summaries(
     session: &SaveSession,
     game_data: &GameData,
 ) -> Result<Vec<PalSummary>, CoreError> {
-    // container_id -> (guild_id, base_id), from BaseCampSaveData's
-    // WorkerDirector. Empty when the world has no bases.
+    // container_id -> (guild_id, base_id), from BaseCampSaveData's WorkerDirector. Empty with no bases.
     let mut base_container_map = std::collections::HashMap::new();
     if let Some(base_entries) = session.base_camp_map() {
         for base_entry in base_entries {
@@ -496,7 +476,6 @@ pub fn max_stomach_for(character_id: &str, game_data: &GameData) -> f64 {
         .unwrap_or(300.0)
 }
 
-/// Clears every sickness marker and restores sanity and stomach to full.
 pub fn heal_save_parameter(
     save_parameter: &mut Properties,
     character_id: &str,
@@ -512,18 +491,16 @@ pub fn heal_save_parameter(
     );
 }
 
-/// Applies every writable field of `dto` onto an existing pal/player
-/// `SaveParameter` bag.
+/// Applies every writable field of `dto` onto an existing pal/player `SaveParameter` bag.
 ///
 /// - `group_id` is NOT applied: it lives in `PalCharacterData`, a sibling of
-///   `SaveParameter` this signature cannot reach. Callers owning the whole
-///   `MapEntry` must write it themselves.
-/// - `dto.is_boss` is never read. It is caller-supplied and can be stale
-///   (echoed back by a client after `character_id` changed), which would
-///   wrongly re-add the `BOSS_` prefix. Boss-ness is re-derived below from
-///   `character_id` and `is_lucky`.
-/// - Byte- and i32-width fields are saturated, never wrapped: DTO input is
-///   untrusted and a wrapped value would silently corrupt the save.
+///   `SaveParameter` this signature cannot reach. Callers owning the whole `MapEntry`
+///   must write it themselves.
+/// - `dto.is_boss` is never read. It is caller-supplied and can be stale (echoed back
+///   after `character_id` changed), which would wrongly re-add the `BOSS_` prefix.
+///   Boss-ness is re-derived below from `character_id` and `is_lucky`.
+/// - Byte- and i32-width fields are saturated, never wrapped: a wrapped value would
+///   silently corrupt the save.
 pub fn apply_pal_dto(
     save_parameter: &mut Properties,
     dto: &crate::dto::pal::PalDto,
@@ -610,7 +587,6 @@ pub fn apply_pal_dto(
     if let Some(nickname) = &dto.nickname {
         save_parameter.insert("NickName", props::str_property(nickname));
     }
-    // Only DPS pals carry a filtered nickname.
     if is_dps {
         if let Some(filtered) = &dto.filtered_nickname {
             save_parameter.insert("FilteredNickName", props::str_property(filtered));
@@ -620,11 +596,9 @@ pub fn apply_pal_dto(
     // Overwritten again by heal() below for non-DPS pals.
     save_parameter.insert("FullStomach", props::float_property(dto.stomach as f32));
 
-    // Storage moves are SlotIndex-only: `dto.storage_id` is inert, a pal's
-    // ContainerId is never reassigned here (moving a pal between containers
-    // goes through `move_pal`). Real saves spell the key "SlotId", but pals
-    // this module creates spell it "SlotID", so both are accepted; a pal with
-    // neither key is left untouched.
+    // Storage moves are SlotIndex-only: `dto.storage_id` is inert, a pal's ContainerId is
+    // never reassigned here (that goes through `move_pal`). Real saves spell the key
+    // "SlotId" but pals this module creates spell it "SlotID", so both are accepted.
     let slot_key = if save_parameter.0.contains_key(&PropertyKey::from("SlotID")) {
         "SlotID"
     } else {
@@ -659,9 +633,8 @@ pub fn apply_pal_dto(
     // Overwritten again by heal() below for non-DPS pals.
     save_parameter.insert("SanityValue", props::float_property(dto.sanity as f32));
 
-    // Zero-rank and unrecognized work-suitability keys are dropped:
-    // `work_suitability` is an unvalidated `String` map on the DTO, and an
-    // unknown `EPalWorkSuitability::` variant must never reach the save.
+    // Zero-rank and unrecognized work-suitability keys are dropped: an unknown
+    // `EPalWorkSuitability::` variant must never reach the save.
     let non_zero_known: Vec<(&String, &i64)> = dto
         .work_suitability
         .iter()
@@ -695,10 +668,9 @@ pub fn apply_pal_dto(
         props::int_property(dto.friendship_point.clamp(i32::MIN as i64, i32::MAX as i64) as i32),
     );
 
-    // Hp is always recomputed from the state just written, so `dto.hp` never
-    // survives this call. `IsRarePal` is read back off the save rather than
-    // from the DTO: `dto.is_lucky: None` leaves the save's existing flag in
-    // place, and the boost multiplier must reflect that flag, not the DTO.
+    // Hp is always recomputed from the state just written, so `dto.hp` never survives this
+    // call. `IsRarePal` is read back off the save rather than the DTO: `is_lucky: None`
+    // leaves the save's flag in place, and the boost multiplier must reflect that flag.
     let current_is_lucky = param(save_parameter, "IsRarePal")
         .and_then(props::as_bool)
         .unwrap_or(false);
@@ -715,7 +687,6 @@ pub fn apply_pal_dto(
         heal_save_parameter(save_parameter, &dto.character_id, game_data);
     }
 
-    // Boss-ness is re-derived here, never taken from `dto.is_boss`.
     let current_id = dto.character_id.clone();
     let should_be_boss =
         current_id.to_uppercase().starts_with("BOSS_") || dto.is_lucky.unwrap_or(false);
@@ -742,7 +713,6 @@ pub const STATUS_NAMES: [&str; 6] = [
 /// Same as `STATUS_NAMES` without capture rate.
 pub const EX_STATUS_NAMES: [&str; 5] = ["最大HP", "最大SP", "攻撃力", "所持重量", "作業速度"];
 
-/// One zeroed `{StatusName, StatusPoint}` struct per status name.
 pub(crate) fn status_point_structs(names: &[&str]) -> Property {
     let mut values = Vec::new();
     for status_name in names {
@@ -765,9 +735,8 @@ const CUSTOM_VERSION_DATA: [u8; 24] = [
     1, 0, 0, 0, 108, 246, 252, 15, 153, 72, 144, 17, 248, 156, 96, 177, 94, 71, 70, 74, 1, 0, 0, 0,
 ];
 
-/// Builds a complete `CharacterSaveParameterMap` entry for a freshly created
-/// pal. The caller must insert it into the map and call
-/// `ensure_pal_property_schemas`.
+/// Builds a complete `CharacterSaveParameterMap` entry for a freshly created pal. The
+/// caller must insert it into the map and call `ensure_pal_property_schemas`.
 #[allow(clippy::too_many_arguments)]
 pub fn new_pal_entry(
     character_id: &str,
@@ -878,26 +847,23 @@ pub const LEVEL_SAVE_PARAMETER_PREFIX: &str =
 /// `_dps.sav` and `GlobalPalStorage.sav` share one slot layout.
 pub const SLOT_SAVE_PARAMETER_PREFIX: &str = "SaveParameterArray.SaveParameter";
 
-/// Every `SaveParameter` property this app can write, with the tag `uesave` records
-/// for it when reading a save that has it.
+/// Every `SaveParameter` property this app can write, with the tag `uesave` records for it.
 ///
-/// A property at its default value is absent from a Palworld save, and `uesave`
-/// schemas only what it read, so a write must not depend on what the file happened
-/// to carry: every name is registered up front rather than discovered.
+/// A property at its default value is absent from a Palworld save, and `uesave` schemas
+/// only what it read, so a write must not depend on what the file happened to carry:
+/// every name is registered up front rather than discovered.
 ///
-/// `IsRarePal`/`IsPlayer` are `Other(BoolProperty)` because `PropertyTagDataPartial`
-/// has no `Bool`; `uesave` maps the two onto each other. Nested struct leaves are
-/// paths of their own (`Hp` is not enough -- `Hp.Value` too), as are array element
-/// fields, which no save records while the array is empty.
+/// `IsRarePal`/`IsPlayer` are `Other(BoolProperty)` because `PropertyTagDataPartial` has no
+/// `Bool`. Nested struct leaves are paths of their own (`Hp` is not enough -- `Hp.Value`
+/// too), as are array element fields, which no save records while the array is empty.
 fn save_parameter_schemas() -> Vec<(String, crate::ue::PropertyTagDataPartial)> {
     use crate::ue::{PropertyTagDataPartial as Data, PropertyType, StructType};
 
     let byte = || Data::Byte(None);
     let other = |t: PropertyType| Data::Other(t);
-    // Resolve the name the way the READER does, rather than hand-picking a
-    // `StructType` variant: a Palworld game struct becomes a `StructType::Game`,
-    // anything else a plain named struct. Guessing wrong makes uesave write the
-    // payload with the wrong codec, and the save no longer parses back.
+    // Resolve the name the way the READER does rather than hand-picking a `StructType`:
+    // a Palworld game struct becomes a `StructType::Game`, anything else a plain named
+    // struct. Guessing wrong makes uesave write the payload with the wrong codec.
     let named_struct = |name: &str| Data::Struct {
         struct_type: crate::ue::struct_type_for(name),
         id: crate::ue::FGuid::nil(),
@@ -1014,8 +980,7 @@ fn save_parameter_schemas() -> Vec<(String, crate::ue::PropertyTagDataPartial)> 
     entries
 }
 
-/// Never overwrites a tag the real save recorded, so a file that already carries a
-/// property keeps its own on-disk shape.
+/// Never overwrites a tag the real save recorded, so a file keeps its own on-disk shape.
 pub fn ensure_save_parameter_schemas(save: &mut crate::ue::Save, prefix: &str) {
     for (name, data) in save_parameter_schemas() {
         props::ensure_schema(
@@ -1034,9 +999,8 @@ pub fn ensure_slot_pal_schemas(save: &mut crate::ue::Save) {
     ensure_save_parameter_schemas(save, SLOT_SAVE_PARAMETER_PREFIX);
 }
 
-/// Guards every op that needs a loaded player. The message text is part of
-/// the wire contract (handlers surface it verbatim), hence `CoreError::Other`
-/// rather than `CoreError::PlayerNotFound`, whose `Display` differs.
+/// The message text is part of the wire contract (handlers surface it verbatim), hence
+/// `CoreError::Other` rather than `CoreError::PlayerNotFound`, whose `Display` differs.
 fn require_loaded_player(session: &SaveSession, player_id: uuid::Uuid) -> Result<(), CoreError> {
     if session.loaded_players.contains_key(&player_id) {
         Ok(())
@@ -1047,8 +1011,7 @@ fn require_loaded_player(session: &SaveSession, player_id: uuid::Uuid) -> Result
     }
 }
 
-/// The player's (pal box, party) container ids, read off the player's own
-/// `.sav` rather than Level.sav.
+/// The player's (pal box, party) container ids, read off the player's own `.sav`, not Level.sav.
 fn player_container_ids(
     session: &SaveSession,
     player_id: uuid::Uuid,
@@ -1064,9 +1027,8 @@ fn player_container_ids(
     Ok((pal_box_id, party_id))
 }
 
-/// `CharacterContainerSaveData` key.ID -> entry position. Built check-then-
-/// build rather than via an entry closure, which would borrow `session.level`
-/// inside a `&mut session.caches` borrow.
+/// `CharacterContainerSaveData` key.ID -> entry position. Built check-then-build rather
+/// than via an entry closure, which would borrow `session.level` inside a `&mut` borrow.
 fn container_entry_index(
     session: &mut SaveSession,
     container_id: uuid::Uuid,
@@ -1084,9 +1046,8 @@ fn container_entry_index(
         .copied())
 }
 
-/// Registers a pal with its guild. `individual_character_handle_ids` is a
-/// typed `PalGroupData` field decoded natively by `uesave`, not part of the
-/// guild tail's raw blob, so no re-encoding is needed.
+/// Registers a pal with its guild. `individual_character_handle_ids` is a typed
+/// `PalGroupData` field uesave decodes natively, not part of the tail's raw blob.
 fn append_guild_handle(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -1107,9 +1068,7 @@ fn append_guild_handle(
     Ok(())
 }
 
-/// Removes every guild handle matching `target_id` on EITHER of its two id
-/// fields -- a handle can carry the target id in `guid` rather than
-/// `instance_id`.
+/// Removes every guild handle matching `target_id` on EITHER id field -- a handle can carry it in `guid` rather than `instance_id`.
 fn remove_guild_handle(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -1128,9 +1087,8 @@ fn remove_guild_handle(
     Ok(())
 }
 
-/// Removes the `CharacterSaveParameterMap` entry for `pal_id`. Caches are
-/// invalidated only when an entry actually moved; a `pal_id` that was never
-/// present is a no-op. Performs NO ownership check -- callers must scope.
+/// Removes the `CharacterSaveParameterMap` entry for `pal_id`. Caches are invalidated only
+/// when an entry actually moved. Performs NO ownership check -- callers must scope.
 pub fn delete_pal_entry(session: &mut SaveSession, pal_id: uuid::Uuid) {
     if let Ok(entries) = world::character_map_mut(&mut session.level) {
         if let Some(position) = entries
@@ -1145,10 +1103,10 @@ pub fn delete_pal_entry(session: &mut SaveSession, pal_id: uuid::Uuid) {
 
 /// Creates a pal in the player's pal box or party.
 ///
-/// The mutated container is the pal box only when `container_id` names it,
-/// and the party otherwise -- but the caller's raw `container_id` is still
-/// what gets written into the new pal's own `SlotID.ContainerId`, so an
-/// unrecognized id lands the pal in the party while labelling it otherwise.
+/// The mutated container is the pal box only when `container_id` names it, the party
+/// otherwise -- but the caller's raw `container_id` is what gets written into the new
+/// pal's `SlotID.ContainerId`, so an unrecognized id lands the pal in the party while
+/// labelling it otherwise.
 pub fn add_player_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1189,8 +1147,7 @@ pub fn add_player_pal(
         nickname,
         game_data,
     );
-    // A freshly added pal keeps `new_pal_entry`'s placeholder Hp; it is not
-    // recomputed to max_hp here.
+    // A freshly added pal keeps `new_pal_entry`'s placeholder Hp; it is not recomputed here.
     ensure_pal_property_schemas(&mut session.level);
     world::character_map_mut(&mut session.level)?.push(entry);
     if let Some(guild) = guild_id {
@@ -1203,13 +1160,10 @@ pub fn add_player_pal(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
-/// Creates a pal in the player's box from a full DTO, preserving every
-/// stat/talent/skill it carries (the destination of a pal import/export).
-/// Container and slot placement follow `add_player_pal`.
-///
-/// The new pal is created owned by `player_id`, but a `dto.owner_uid` of
-/// `Some` overwrites that, so an imported pal keeps the owner it was stored
-/// with.
+/// Creates a pal in the player's box from a full DTO, preserving every stat/talent/skill
+/// it carries. Container and slot placement follow `add_player_pal`. The new pal is owned
+/// by `player_id`, but a `dto.owner_uid` of `Some` overwrites that, so an imported pal
+/// keeps the owner it was stored with.
 pub fn add_player_pal_from_dto(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1268,10 +1222,8 @@ pub fn add_player_pal_from_dto(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
-/// Creates a pal in a guild base's worker container.
-///
-/// A base pal has no player owner, but `OwnerPlayerUId` is still written --
-/// as the nil guid, not removed. The game accepts this and it is what the
+/// Creates a pal in a guild base's worker container. A base pal has no player owner, but
+/// `OwnerPlayerUId` is still written -- as the nil guid, not removed. That is what the
 /// save format carries for base pals.
 pub fn add_guild_pal(
     session: &mut SaveSession,
@@ -1322,7 +1274,6 @@ pub fn add_guild_pal(
         nickname,
         game_data,
     );
-    // Keeps `new_pal_entry`'s placeholder Hp, as `add_player_pal` does.
     ensure_pal_property_schemas(&mut session.level);
     world::character_map_mut(&mut session.level)?.push(entry);
     append_guild_handle(session, guild_id, new_pal_id)?;
@@ -1333,13 +1284,11 @@ pub fn add_guild_pal(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
-/// Clones one of a player's own pals into their pal box.
-///
-/// Two quirks of this operation, both deliberate:
+/// Clones one of a player's own pals into their pal box. Two deliberate quirks:
 /// - Slot index 0 is treated as "no free slot" and the clone is refused.
-/// - A refused clone (slot 0, or a source pal this player does not own)
-///   leaves the reserved slot behind in the pal box, referencing a pal id
-///   that never gets created. Callers depend on that state; do not clean it.
+/// - A refused clone (slot 0, or a source pal this player does not own) leaves the
+///   reserved slot behind in the pal box, referencing a pal id that never gets created.
+///   Callers depend on that state; do not clean it.
 pub fn clone_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1423,10 +1372,8 @@ pub fn clone_pal(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
-/// Clones a pal within a guild base's worker container.
-///
-/// Unlike `clone_pal`, slot index 0 is a valid destination here. The source
-/// pal must already be a member of this base's container.
+/// Clones a pal within a guild base's worker container. Unlike `clone_pal`, slot index 0
+/// is a valid destination here; the source pal must already be in this base's container.
 pub fn clone_guild_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1512,10 +1459,8 @@ pub fn clone_guild_pal(
         .and_then(|e| pal_dto_from_entry(e, game_data)))
 }
 
-/// Moves one of a player's own pals between their pal box and party.
-///
-/// Ownership is checked BEFORE any container is touched: a bogus `pal_id`
-/// must not leave a phantom slot reserved for a pal that was never there.
+/// Moves one of a player's own pals between their pal box and party. Ownership is checked
+/// BEFORE any container is touched: a bogus `pal_id` must not leave a phantom slot.
 pub fn move_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1586,7 +1531,6 @@ pub fn move_pal(
         .and_then(|entry| pal_dto_from_entry(entry, game_data)))
 }
 
-/// A player owns a pal iff its `OwnerPlayerUId` matches.
 fn pal_owned_by_player(
     session: &SaveSession,
     pal_id: uuid::Uuid,
@@ -1601,14 +1545,11 @@ fn pal_owned_by_player(
     }))
 }
 
-/// Whether `pal_id` occupies a slot in the container at `container_index`,
-/// per the container's own `Slots` array.
-///
-/// Membership is checked against the container rather than against the pal's
-/// own `SlotId` property (`guild::base_container_membership`): a pal created
-/// this session spells that key "SlotID" and would not be recognized, which
-/// would wrongly forbid deleting a pal right after adding it. The `Slots`
-/// array still correctly rejects a pal belonging to a different base.
+/// Whether `pal_id` occupies a slot in the container at `container_index`, per the
+/// container's own `Slots` array. Membership is checked against the container rather than
+/// the pal's own `SlotId` property: a pal created this session spells that key "SlotID"
+/// and would not be recognized, wrongly forbidding a delete right after an add. The
+/// `Slots` array still correctly rejects a pal belonging to a different base.
 fn pal_in_character_container(
     level: &crate::ue::Save,
     container_index: usize,
@@ -1619,13 +1560,12 @@ fn pal_in_character_container(
         .unwrap_or(false)
 }
 
-/// Deletes pals owned by `player_id`: from both containers (removal from a
-/// container that never held the pal is a no-op), from the guild handles, then
+/// Deletes pals owned by `player_id`: from both containers, from the guild handles, then
 /// the `CharacterSaveParameterMap` entry itself.
 ///
-/// Ownership is checked BEFORE any mutation and a pal this player does not own
-/// is a hard `PalNotFound`, not a skip: `delete_pal_entry` matches on instance
-/// id alone, so without this guard one player could delete another's pal.
+/// Ownership is checked BEFORE any mutation and a pal this player does not own is a hard
+/// `PalNotFound`: `delete_pal_entry` matches on instance id alone, so without this guard
+/// one player could delete another's pal.
 pub fn delete_player_pals(
     session: &mut SaveSession,
     player_id: uuid::Uuid,
@@ -1657,12 +1597,9 @@ pub fn delete_player_pals(
 
 /// Deletes pals from a guild base's worker container.
 ///
-/// The "Base ... not found in the guild ..." error fires when the GUILD
-/// doesn't resolve; an unresolvable `base_id` within a loaded guild is
-/// tolerated (guild handle and character-map entry are still removed).
-///
-/// Base membership is checked BEFORE any mutation and a non-member pal is a
-/// hard `PalNotFound`, for the same reason as `delete_player_pals`.
+/// The "Base ... not found in the guild ..." error fires when the GUILD doesn't resolve;
+/// an unresolvable `base_id` within a loaded guild is tolerated. Base membership is
+/// checked BEFORE any mutation, a non-member pal being a hard `PalNotFound`.
 pub fn delete_guild_pals(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -1700,8 +1637,7 @@ pub fn delete_guild_pals(
     Ok(())
 }
 
-/// Heals each pal in `pal_ids`. A pal id that doesn't resolve is skipped, not
-/// an error. Player entries are never touched.
+/// Heals each pal in `pal_ids`. An unresolved id is skipped. Player entries are never touched.
 pub fn heal_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1730,7 +1666,6 @@ pub fn heal_pals(
     Ok(())
 }
 
-/// Heals every pal owned by `player_id`.
 pub fn heal_all_player_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1750,9 +1685,7 @@ pub fn heal_all_player_pals(
     heal_pals(session, game_data, &owned_ids)
 }
 
-/// Heals every pal in a base's worker container. Membership uses
-/// `guild::base_container_membership`'s SlotId-only rule, not the
-/// SlotId-or-SlotID fallback the read path uses for storage ids.
+/// Heals every pal in a base's worker container. Membership uses the SlotId-only rule, not the SlotId-or-SlotID fallback.
 pub fn heal_all_base_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1792,9 +1725,8 @@ pub fn heal_all_base_pals(
     heal_pals(session, game_data, &base_pal_ids)
 }
 
-// DPS ops read and write `SaveParameterArray` in the player's own `_dps.sav`,
-// never `Level.sav`, so none of them invalidate `session.caches`: nothing in
-// `WorldCaches` indexes DPS data.
+// DPS ops read and write `SaveParameterArray` in the player's own `_dps.sav`, never
+// `Level.sav`, so none of them invalidate `session.caches`: nothing there indexes DPS data.
 
 fn dps_slots_mut(loaded: &mut crate::session::LoadedPlayer) -> Option<&mut Vec<StructValue>> {
     let dps_save = loaded.dps.as_mut()?;
@@ -1807,9 +1739,7 @@ fn dps_slots_mut(loaded: &mut crate::session::LoadedPlayer) -> Option<&mut Vec<S
     )
 }
 
-/// The first slot whose `CharacterID` is absent or the literal `"None"` --
-/// DPS slots are recycled in place, never removed, so that is what "empty"
-/// looks like.
+/// The first slot whose `CharacterID` is absent or the literal `"None"` -- DPS slots are recycled in place, never removed.
 fn first_empty_dps_slot(slots: &[StructValue]) -> Option<usize> {
     slots.iter().position(|slot| {
         let StructValue::Struct(slot_props) = slot else {
@@ -1830,13 +1760,11 @@ fn first_empty_dps_slot(slots: &[StructValue]) -> Option<usize> {
     })
 }
 
-/// Empties a DPS/GPS slot's `SaveParameter` bag in place. Shared with
-/// `domain::gps`, whose slots have the identical layout.
-///
-/// - `IsRarePal` is deliberately left in place: a recycled slot keeps the
-///   previous occupant's luck flag.
-/// - The status-point lists are cleared in place rather than reinserted, so
-///   the arrays keep the tag metadata they were parsed with.
+/// Empties a DPS/GPS slot's `SaveParameter` bag in place. Shared with `domain::gps`.
+/// - `IsRarePal` is deliberately left in place: a recycled slot keeps the previous
+///   occupant's luck flag.
+/// - The status-point lists are cleared in place rather than reinserted, so the arrays
+///   keep the tag metadata they were parsed with.
 pub(crate) fn reset_dps_save_parameter(save_parameter: &mut Properties) {
     save_parameter.insert("CharacterID", props::name_property("None"));
     save_parameter.insert("NickName", props::str_property(""));
@@ -1885,8 +1813,6 @@ pub(crate) fn reset_dps_save_parameter(save_parameter: &mut Properties) {
     }
 }
 
-/// Creates a pal in a player's Dimensional Palbox slot. `Ok(None)` when every
-/// slot is occupied.
 pub fn add_player_dps_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -2056,7 +1982,6 @@ pub fn add_player_dps_pal_from_dto(
     Ok(pal_dto_from_dps_slot(&slots[slot_index], game_data).map(|dto| (slot_index as i32, dto)))
 }
 
-/// Clones a DPS pal into the owner's first empty DPS slot.
 pub fn clone_dps_pal(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -2125,8 +2050,7 @@ pub fn clone_dps_pal(
     Ok(pal_dto_from_dps_slot(&slots[slot_index], game_data).map(|dto| (slot_index as i32, dto)))
 }
 
-/// Empties the given DPS slots in place: the slot's outer `InstanceId` is
-/// nilled and its `SaveParameter` bag is reset.
+/// Empties the given DPS slots in place: the outer `InstanceId` is nilled and the `SaveParameter` bag reset.
 pub fn delete_player_dps_pals(
     session: &mut SaveSession,
     _game_data: &GameData,
@@ -2165,12 +2089,10 @@ pub fn delete_player_dps_pals(
     Ok(())
 }
 
-/// Applies each DTO in `modified_pals` onto its `CharacterSaveParameterMap`
-/// entry. Deliberately NOT ownership-scoped: an edit addresses a pal by id
-/// regardless of who owns it.
-///
-/// Never invalidates `session.caches`: entries are mutated in place, never
-/// inserted or removed, so every cached position still resolves.
+/// Applies each DTO in `modified_pals` onto its `CharacterSaveParameterMap` entry.
+/// Deliberately NOT ownership-scoped: an edit addresses a pal by id regardless of owner.
+/// Never invalidates `session.caches`: entries are mutated in place, never inserted or
+/// removed, so every cached position still resolves.
 pub fn update_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -2199,8 +2121,6 @@ pub fn update_pals(
     Ok(())
 }
 
-/// Applies each DTO in `modified_dps_pals` onto the owning player's DPS slot.
-/// A DTO whose owner, DPS file, or slot index doesn't resolve is skipped.
 pub fn update_dps_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -2294,8 +2214,7 @@ mod tests {
         }
     }
 
-    /// No fixture save carries a `_dps.sav`, so this synthetic session is the
-    /// only coverage `update_dps_pals` gets.
+    /// No fixture save carries a `_dps.sav`, so this synthetic session is `update_dps_pals`' only coverage.
     fn session_with_one_dps_slot(
         owner_id: uuid::Uuid,
         character_id: &str,
@@ -2637,12 +2556,10 @@ mod tests {
 
     #[test]
     fn known_pal_keys_returns_empty_set_when_pals_json_is_absent_or_not_an_object() {
-        // No pals.json at all: game_data.get("pals") is None.
         let empty_dir = tempfile::tempdir().unwrap();
         let data_without_pals = GameData::load(empty_dir.path()).unwrap();
         assert!(known_pal_keys(&data_without_pals).is_empty());
 
-        // pals.json present but not a JSON object (e.g. corrupted/wrong shape).
         let wrong_shape_dir = tempfile::tempdir().unwrap();
         std::fs::write(wrong_shape_dir.path().join("pals.json"), "[1, 2, 3]").unwrap();
         let data_with_wrong_shape = GameData::load(wrong_shape_dir.path()).unwrap();
@@ -2784,10 +2701,9 @@ mod tests {
 
     #[test]
     fn read_save_parameter_dto_stomach_guards_against_nan_using_pal_data_fallback() {
-        // "Anubis" has max_full_stomach 540 in pals.json -- deliberately not
-        // Alpaca (150, which now collides with the missing-key flat default)
-        // and not 300 (the unrecognized-pal fallback), so this assertion
-        // still proves the pal_data lookup ran rather than either default.
+        // "Anubis" has max_full_stomach 540 in pals.json -- deliberately not Alpaca (150,
+        // which collides with the missing-key flat default) and not 300 (the unrecognized
+        // fallback), so this proves the pal_data lookup ran rather than either default.
         let data = game_data();
         let mut save_parameter = Properties::default();
         save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));
@@ -2801,8 +2717,7 @@ mod tests {
             "NaN FullStomach on a recognized pal must fall back to pals.json's max_full_stomach"
         );
 
-        // The wire-visible consequence: serde_json has no NaN literal and
-        // would otherwise silently downgrade this field to JSON `null`.
+        // The wire-visible consequence: serde_json has no NaN literal and would emit `null`.
         let serialized = serde_json::to_value(&dto).unwrap();
         assert_eq!(
             serialized["stomach"],
@@ -2838,12 +2753,9 @@ mod tests {
     #[test]
     fn read_save_parameter_dto_stomach_missing_key_still_defaults_to_150_not_the_pal_data_fallback()
     {
-        // An absent FullStomach defaults to 150.0; only a present-but-invalid
-        // one falls back to the species max. "Anubis" has max_full_stomach
-        // 540 in pals.json, so getting 150.0 here (not 540.0) proves the
-        // missing-key path uses the flat default and never consults
-        // pal_data at all -- unlike "Alpaca" (150), which would no longer
-        // discriminate between the two paths.
+        // An absent FullStomach defaults to 150.0; only a present-but-invalid one falls
+        // back to the species max. "Anubis" has max_full_stomach 540, so getting 150.0 here
+        // proves the missing-key path uses the flat default and never consults pal_data.
         let data = game_data();
         let mut save_parameter = Properties::default();
         save_parameter.insert("CharacterID", Property::Name("Anubis".to_string()));

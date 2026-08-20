@@ -1,6 +1,5 @@
-//! Placement validation: given a blueprint and a proposed anchor in a target
-//! save, decide whether placing it is allowed and report why not. Placement
-//! itself refuses to mutate anything until `has_blocking` is false.
+//! Placement validation: given a blueprint and a proposed anchor, decide whether placing
+//! it is allowed and why not. Placement mutates nothing until `has_blocking` is false.
 
 use std::collections::HashSet;
 
@@ -19,8 +18,7 @@ use crate::ue::{Double, PalStruct, Property, PropertyKey, StructValue, Vector};
 /// Inherited from PalworldSaveTools with no cited source -- see `check_base_too_close`.
 const BASE_TOO_CLOSE_CM: f64 = 5000.0;
 
-/// A placed structure's world position within this many cm of an existing
-/// structure of another base triggers `structure_overlap`.
+/// A placed structure within this many cm of an existing structure of another base triggers `structure_overlap`.
 const STRUCTURE_OVERLAP_CM: f64 = 100.0;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -119,10 +117,9 @@ struct ExistingBase {
     area_range: f64,
 }
 
-/// One placed structure, reduced to the two things validation asks about. Read
-/// in a single pass so the overlap check never walks the property tree again:
-/// the tree walk costs two `PropertyKey` allocations per object, and the naive
-/// form repeats it once per blueprint structure per map object.
+/// One placed structure, reduced to the two things validation asks about. Read in a single
+/// pass so the overlap check never walks the property tree again: the walk costs two
+/// `PropertyKey` allocations per object, once per blueprint structure per map object.
 struct WorldStructure {
     base_id: Uuid,
     x: f64,
@@ -244,10 +241,9 @@ fn check_building_limit(
     true
 }
 
-/// A save whose `WorldOption.sav` is missing or unparseable (the loader
-/// degrades to `None` rather than failing) leaves every limit unevaluated. Say
-/// so, or `has_blocking` silently reports "nothing wrong" for a placement that
-/// was never checked.
+/// A save whose `WorldOption.sav` is missing or unparseable (the loader degrades to `None`)
+/// leaves every limit unevaluated. Say so, or `has_blocking` silently reports "nothing
+/// wrong" for a placement that was never checked.
 fn check_limits_unknown(unreadable: &[&str], findings: &mut Vec<Finding>) {
     if unreadable.is_empty() {
         return;
@@ -262,8 +258,7 @@ fn check_limits_unknown(unreadable: &[&str], findings: &mut Vec<Finding>) {
     });
 }
 
-/// Warns rather than blocks: the 5000 cm figure is inherited from
-/// PalworldSaveTools with no cited source.
+/// Warns rather than blocks: the 5000 cm figure has no cited source.
 fn check_base_too_close(
     anchor_transform: &PalTransform,
     existing_bases: &[ExistingBase],
@@ -301,10 +296,9 @@ fn check_outside_area_range(blueprint: &BaseBlueprint, area_range: f64, findings
     }
 }
 
-/// Warning, not Blocking: the catalog is regenerated per game update and a
-/// base legitimately holds objects that are not buildings at all (dropped
-/// items, destructible rocks), so an unrecognized id means "we cannot vouch
-/// for this one", not "this save is unplaceable".
+/// Warning, not Blocking: the catalog is regenerated per game update and a base
+/// legitimately holds objects that are not buildings (dropped items, destructible rocks),
+/// so an unrecognized id means "we cannot vouch for this one", not "unplaceable".
 fn check_unknown_structure_type(
     game_data: &GameData,
     blueprint: &BaseBlueprint,
@@ -338,9 +332,8 @@ fn check_structure_overlap(
     mode: &PlacementMode,
     findings: &mut Vec<Finding>,
 ) {
-    // In `MergeInto` mode the target base's own structures are not "another
-    // base"; excluding them lets an added structure sit next to the base's
-    // existing ones without warning.
+    // In `MergeInto` mode the target base's own structures are not "another base";
+    // excluding them lets an added structure sit next to the existing ones without warning.
     let same_base_id = match mode {
         PlacementMode::MergeInto { base_id } => Some(*base_id),
         PlacementMode::NewBase { .. } => None,

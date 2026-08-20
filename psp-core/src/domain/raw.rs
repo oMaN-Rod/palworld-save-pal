@@ -1,6 +1,5 @@
 //! Raw-data inspector: locates one already-chosen subtree of the loaded
-//! `Level.sav` and serializes it as-is. Target selection (and its priority
-//! order) is the caller's job.
+//! `Level.sav` and serializes it as-is; target selection is the caller's job.
 
 use crate::props;
 use crate::session::SaveSession;
@@ -20,11 +19,8 @@ pub enum RawTarget {
 }
 
 impl SaveSession {
-    /// `None` when the target's id doesn't resolve against this save.
-    ///
-    /// Each id-addressed variant re-derives its position index fresh rather
-    /// than reading `self.character_index` and friends, which can be stale
-    /// between a mutation and the next `rebuild_player_caches` call.
+    /// Each id-addressed variant re-derives its position index fresh: the cached
+    /// `character_index` and friends are stale until `rebuild_player_caches` runs.
     pub fn raw_json_for(&self, target: RawTarget) -> Option<serde_json::Value> {
         match target {
             RawTarget::Guild(id) => {
@@ -34,9 +30,8 @@ impl SaveSession {
                     .find(|entry| props::as_uuid(&entry.key) == Some(id))?;
                 serde_json::to_value(entry).ok()
             }
-            // A player's entry is addressed by PlayerUId + IsPlayer, not by
-            // character_index, which keys by InstanceId and would resolve an
-            // unrelated pal.
+            // A player's entry is addressed by PlayerUId + IsPlayer; character_index
+            // keys by InstanceId and would resolve an unrelated pal.
             RawTarget::Player(id) => {
                 let entries = world::character_map(&self.level).ok()?;
                 let entry = entries.iter().find(|entry| {
@@ -69,8 +64,7 @@ impl SaveSession {
                 let entries = world::character_container_map(&self.level).ok()?;
                 serde_json::to_value(entries.get(position)?).ok()
             }
-            // The GVAS root only: `Save`'s header/schemas/extra are
-            // (de)serializer plumbing, not save data.
+            // The GVAS root only: header/schemas/extra are (de)serializer plumbing.
             RawTarget::Level => serde_json::to_value(&self.level.root).ok(),
         }
     }
@@ -124,8 +118,7 @@ mod tests {
         }
     }
 
-    /// `PlayerUId`/`InstanceId` in the key, `IsPlayer` inside
-    /// `RawData.object.SaveParameter`.
+    /// `PlayerUId`/`InstanceId` in the key, `IsPlayer` inside `RawData.object.SaveParameter`.
     fn character_entry(player_uid: &str, instance_id: &str, is_player: bool) -> MapEntry {
         let mut key_properties = Properties::default();
         key_properties.insert("PlayerUId", props::guid_property(uid(player_uid)));
@@ -179,8 +172,6 @@ mod tests {
         }
     }
 
-    /// One entry of each kind -- enough for every `RawTarget` variant to
-    /// resolve against a single fixture.
     fn session_with_every_target() -> SaveSession {
         let mut world_save_data = Properties::default();
         world_save_data.insert(
@@ -233,7 +224,6 @@ mod tests {
         assert_resolves_to_non_empty_object(
             session.raw_json_for(RawTarget::Player(uid(PLAYER_ID))),
         );
-        // The pal entry's InstanceId must not resolve as a Player target.
         assert!(session
             .raw_json_for(RawTarget::Player(uid(PAL_ID)))
             .is_none());

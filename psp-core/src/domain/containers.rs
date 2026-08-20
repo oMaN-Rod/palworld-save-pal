@@ -1,9 +1,8 @@
 //! Character- and item-container slot operations.
 //!
-//! `character_container_add_pal`/`remove_pal` mutate only the `Slots` array
-//! nested inside an already-positioned `CharacterContainerSaveData` entry;
-//! no entry's position changes, so the container-id → entry-position caches
-//! stay valid across them.
+//! `character_container_add_pal`/`remove_pal` mutate only the `Slots` array nested inside
+//! an already-positioned entry; no entry's position changes, so the container-id ->
+//! entry-position caches stay valid across them.
 
 use crate::dto::container::{
     CharacterContainerSlotDto, DynamicItemDto, ItemContainerDto, ItemContainerSlotDto,
@@ -27,11 +26,10 @@ pub fn ensure_container_schemas(level: &mut crate::ue::Save) {
     use crate::ue::{PropertyTagDataPartial as Data, PropertyTagPartial, PropertyType};
 
     let byte_array = || Data::Array(Box::new(Data::Byte(None)));
-    // `struct_type_for` resolves a name the way the READER does: a Palworld game
-    // struct (`PalCharacterContainer`, ...) becomes a `StructType::Game`, anything
-    // else a plain named struct. Hand-picking `Raw` here instead marks the type
-    // unknown, and uesave then writes the payload with the wrong codec -- a save
-    // that no longer parses back.
+    // `struct_type_for` resolves a name the way the READER does: a Palworld game struct
+    // (`PalCharacterContainer`, ...) becomes a `StructType::Game`, anything else a plain
+    // named struct. Hand-picking `Raw` here marks the type unknown, and uesave then
+    // writes the payload with the wrong codec -- a save that no longer parses back.
     let pal_struct = |name: &str| Data::Struct {
         struct_type: crate::ue::struct_type_for(name),
         id: crate::ue::FGuid::nil(),
@@ -71,10 +69,9 @@ pub fn ensure_container_schemas(level: &mut crate::ue::Save) {
             "worldSaveData.DynamicItemSaveData.RawData",
             pal_struct("PalDynamicItem"),
         ),
-        // An egg's `SaveParameter` struct node. A save with no egg records only
-        // its children (via `ensure_save_parameter_schemas` below), never this
-        // node -- so the first egg written failed to serialize. Real saves that
-        // hold an egg record it as `PalIndividualCharacterSaveParameter`, the
+        // An egg's `SaveParameter` struct node. A save with no egg records only its
+        // children, never this node -- so the first egg written failed to serialize. Real
+        // saves holding an egg record it as `PalIndividualCharacterSaveParameter`, the
         // same type a pal's `CharacterSaveParameterMap` SaveParameter carries.
         (
             EGG_SAVE_PARAMETER_PREFIX,
@@ -98,8 +95,6 @@ pub fn ensure_container_schemas(level: &mut crate::ue::Save) {
 
 use super::world;
 
-/// Internal read view, not a wire type — `dto::container::CharacterContainerDto`
-/// is the response shape callers assemble from this.
 pub struct CharacterContainerView {
     pub container_id: uuid::Uuid,
     pub size: i32,
@@ -154,8 +149,7 @@ pub fn read_character_container(
     })
 }
 
-/// Returns the assigned slot index, or `None` when the container is full.
-/// Without a `requested_slot`, the first free index below `SlotNum` is used.
+/// The assigned slot index, or `None` when full. Without a `requested_slot`, the first free index below `SlotNum`.
 pub fn character_container_add_pal(
     level: &mut crate::ue::Save,
     entry_index: usize,
@@ -202,7 +196,6 @@ pub fn character_container_add_pal(
     Ok(Some(assigned))
 }
 
-/// Removes the first slot holding `pal_id`; an absent `pal_id` is a no-op.
 pub fn character_container_remove_pal(
     level: &mut crate::ue::Save,
     entry_index: usize,
@@ -236,8 +229,7 @@ pub fn character_container_remove_pal(
     Ok(())
 }
 
-/// Reads a container's slots, resolving each slot's dynamic item (if any).
-/// `game_data` is used only by the Egg branch of `read_dynamic_item`.
+/// Reads a container's slots, resolving each slot's dynamic item. `game_data` is used only by the Egg branch.
 pub fn read_item_container(
     level: &crate::ue::Save,
     session_caches: &mut WorldCaches,
@@ -277,15 +269,13 @@ pub fn read_item_container(
             let static_id = Some(raw_slot.item.static_id.clone());
             let raw_local_id =
                 props::guid_to_uuid(&raw_slot.item.dynamic_id.local_id_in_created_world);
-            // A plain stackable item carries the nil GUID here; only a
-            // non-nil id backs a `DynamicItemSaveData` entry.
+            // A plain stackable item carries the nil GUID here; only a non-nil id backs a `DynamicItemSaveData` entry.
             let dynamic_local_id = (raw_local_id != props::EMPTY_UUID).then_some(raw_local_id);
             let dynamic_item = dynamic_local_id.and_then(|dynamic_local_id| {
                 let dynamic_entry_index = *dynamic_index.get(&dynamic_local_id)?;
                 read_dynamic_item(level, dynamic_entry_index, dynamic_local_id, game_data)
             });
-            // A dangling dynamic-item reference drops the whole slot; a plain
-            // (nil-id) item slot is always kept.
+            // A dangling dynamic-item reference drops the whole slot; a nil-id item slot is always kept.
             if dynamic_local_id.is_some() && dynamic_item.is_none() {
                 continue;
             }
@@ -294,8 +284,7 @@ pub fn read_item_container(
                 slot_index,
                 count,
                 static_id,
-                // Emitted raw: a plain item's nil UUID is serialized as
-                // "00000000-…", never as `null`.
+                // Emitted raw: a plain item's nil UUID serializes as "00000000-...", never as `null`.
                 local_id: Some(raw_local_id),
             });
         }
@@ -310,9 +299,8 @@ pub fn read_item_container(
     })
 }
 
-/// Decodes one `DynamicItemSaveData` entry. `Unknown` is the wire default for
-/// a dynamic item whose payload matches none of the egg/armor/weapon layouts;
-/// its DTO carries only `type` and `static_id`.
+/// Decodes one `DynamicItemSaveData` entry. `Unknown` is the wire default for a payload
+/// matching none of the egg/armor/weapon layouts; its DTO carries only `type`/`static_id`.
 fn read_dynamic_item(
     level: &crate::ue::Save,
     dynamic_entry_index: usize,
@@ -446,8 +434,7 @@ fn raw_container_slot(
     }
 }
 
-/// `None` when no slot at `slot_index` exists, or its dynamic id is the nil
-/// GUID (a plain, non-dynamic item).
+/// `None` when no slot at `slot_index` exists, or its dynamic id is the nil GUID (a plain item).
 fn raw_slot_local_id(
     level: &crate::ue::Save,
     entry_index: usize,
@@ -487,7 +474,6 @@ fn set_raw_slot_local_id(
     }
 }
 
-/// Removes the first `Slots` entry at `slot_index`; an absent index is a no-op.
 fn remove_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot_index: i32) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
@@ -500,9 +486,8 @@ fn remove_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot_index: 
     }
 }
 
-/// Updates an existing slot's `count`/`static_id`, or appends a fresh one.
-/// Never touches the slot's dynamic id — the caller sets that separately, once
-/// the dynamic item's final local id is known (see `apply_item_container_dto`).
+/// Updates an existing slot's `count`/`static_id`, or appends a fresh one. Never touches
+/// the slot's dynamic id -- the caller sets that once the item's final local id is known.
 fn upsert_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot: &ItemContainerSlotDto) {
     let Some(slots) = container_slots_mut(level, entry_index) else {
         return;
@@ -673,10 +658,9 @@ pub fn set_container_slot_count(
     })
 }
 
-/// Removes the `DynamicItemSaveData` entry at `local_id` (a no-op if absent).
-/// Invalidates `dynamic_item_index` immediately, never deferred: the removal
-/// shifts every later entry's position, so any further lookup in the same
-/// caller must not resolve through the now-stale index.
+/// Removes the `DynamicItemSaveData` entry at `local_id`. Invalidates `dynamic_item_index`
+/// immediately, never deferred: the removal shifts every later entry's position, so a
+/// further lookup in the same caller must not resolve through the now-stale index.
 fn remove_dynamic_item(session: &mut SaveSession, local_id: uuid::Uuid) -> Result<(), CoreError> {
     if session.caches.dynamic_item_index.is_none() {
         session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
@@ -787,11 +771,10 @@ fn build_egg_save_parameter(dto: &DynamicItemDto) -> Properties {
     object
 }
 
-/// `existing` is the current variant at this local id, if any. Its opaque
-/// leading/trailing bytes are carried over only when the type is unchanged:
-/// each variant's byte arrays have a different, fixed length, so reusing them
-/// across a type change would encode a wrong-length payload and corrupt the
-/// save. A type change (or a new item) therefore zero-fills them.
+/// `existing` is the current variant at this local id, if any. Its opaque leading/trailing
+/// bytes are carried over only when the type is unchanged: each variant's byte arrays have
+/// a different fixed length, so reusing them across a type change encodes a wrong-length
+/// payload and corrupts the save. A type change (or a new item) zero-fills them.
 fn build_dynamic_item_type(
     dto: &DynamicItemDto,
     existing: Option<&crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch>>,
@@ -966,12 +949,10 @@ pub fn upsert_dynamic_item(
     Ok(())
 }
 
-/// Resizes the paired common container (essential containers only), cleans up
-/// removed dynamic items and `static_id == "None"` slots, then upserts every
-/// remaining incoming slot.
-///
-/// `container_id` is the caller-resolved, session-trusted target; `dto` supplies
-/// only `type`/`slots` content, and `dto.id` is never used for routing.
+/// Resizes the paired common container (essential containers only), cleans up removed
+/// dynamic items and `static_id == "None"` slots, then upserts every remaining slot.
+/// `container_id` is the caller-resolved, session-trusted target; `dto.id` is never used
+/// for routing.
 pub fn apply_item_container_dto(
     session: &mut SaveSession,
     container_id: uuid::Uuid,
@@ -1047,7 +1028,6 @@ fn apply_resolved_container_dto(
 ) -> Result<Vec<uuid::Uuid>, CoreError> {
     let mut removed_dynamic_items = Vec::new();
 
-    // Cleanup pass.
     for incoming_slot in &dto.slots {
         let existing_local_id = raw_slot_local_id(
             &session.level,
@@ -1057,8 +1037,7 @@ fn apply_resolved_container_dto(
         if incoming_slot.dynamic_item.is_none() {
             if let Some(local_id) = existing_local_id {
                 removed_dynamic_items.push(local_id);
-                // The raw slot keeps pointing at the removed entry; a slot with
-                // a dangling reference is dropped on the next read.
+                // The raw slot keeps pointing at the removed entry; a dangling reference is dropped on the next read.
             }
         }
         if incoming_slot.static_id.as_deref() == Some("None") {
@@ -1070,7 +1049,6 @@ fn apply_resolved_container_dto(
         }
     }
 
-    // Apply pass.
     for incoming_slot in &dto.slots {
         if incoming_slot.static_id.is_none() || incoming_slot.static_id.as_deref() == Some("None") {
             continue;
@@ -1101,9 +1079,8 @@ fn apply_resolved_container_dto(
 
 /// Applies a base's storage-container edits and its name/area-range.
 ///
-/// The membership check is load-bearing: a `storage_containers` key this base
-/// does not actually own is skipped, so a forged container id cannot redirect a
-/// base-storage edit onto an unrelated container elsewhere in the world.
+/// The membership check is load-bearing: a `storage_containers` key this base does not own
+/// is skipped, so a forged container id cannot redirect the edit onto another container.
 pub fn apply_base_dto(
     session: &mut SaveSession,
     base_id: uuid::Uuid,
@@ -1144,9 +1121,7 @@ pub fn apply_base_dto(
     Ok(())
 }
 
-/// For each container id, removes its slots' dynamic items, then the
-/// `ItemContainerSaveData` entry itself. An id that doesn't resolve to a real
-/// container is a silent no-op.
+/// For each container id, removes its slots' dynamic items, then the `ItemContainerSaveData` entry itself.
 pub fn delete_item_containers(
     session: &mut SaveSession,
     container_ids: &[uuid::Uuid],
@@ -1167,7 +1142,6 @@ pub fn delete_item_containers(
             continue;
         };
 
-        // Collect this container's dynamic-item local ids before removing it.
         let local_ids: Vec<uuid::Uuid> = {
             let entries = world::item_container_map(&session.level)?;
             let mut ids = Vec::new();
@@ -1204,15 +1178,12 @@ pub fn delete_item_containers(
         if entry_index < entries.len() {
             entries.remove(entry_index);
         }
-        // The removal above shifts every later entry's position; the next
-        // iteration must rebuild the index.
+        // The removal above shifts every later entry's position; the next iteration must rebuild the index.
         session.caches.item_container_index = None;
     }
     Ok(())
 }
 
-/// Removes every `CharacterContainerSaveData` entry whose key matches one of
-/// `container_ids`; an id that isn't present is a silent no-op.
 pub fn delete_character_containers(
     session: &mut SaveSession,
     container_ids: &[uuid::Uuid],
@@ -1415,8 +1386,7 @@ mod tests {
         assert_eq!(read_character_container(&save, 0).unwrap().slots.len(), 1);
     }
 
-    /// Pins the invariant this module's doc comment relies on: slot mutations
-    /// never move a container's position in `CharacterContainerSaveData`.
+    /// Pins the module invariant: slot mutations never move a container's position in `CharacterContainerSaveData`.
     #[test]
     fn container_position_in_the_map_is_stable_across_add_and_remove() {
         let first_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
@@ -1716,7 +1686,6 @@ mod tests {
         assert_eq!(item.durability, Some(80.5));
         assert_eq!(item.remaining_bullets, Some(12));
         assert_eq!(item.passive_skill_list, Some(vec!["Rare".to_string()]));
-        // Weapon carries none of the egg-only fields.
         assert!(item.character_id.is_none());
         assert!(item.gender.is_none());
     }
@@ -1845,13 +1814,10 @@ mod tests {
             item.active_skills,
             Some(vec!["EPalWazaID::Move_Fire".to_string()])
         );
-        // Egg carries none of the weapon/armor-only fields.
         assert!(item.durability.is_none());
         assert!(item.remaining_bullets.is_none());
     }
 
-    /// An egg whose `object` carries no `"SaveParameter"` yet leaves every
-    /// save-parameter-derived field at its `None` default.
     #[test]
     fn read_item_container_egg_without_save_parameter_leaves_stats_none() {
         let container_id = uuid::Uuid::nil();
@@ -1940,8 +1906,7 @@ mod tests {
     fn apply_item_container_dto_adds_a_new_dynamic_item_and_invalidates_the_cache() {
         let container_id = uuid::Uuid::parse_str("11111111-0000-0000-0000-000000000000").unwrap();
         let mut session = session_with_item_container(container_id, 10, vec![], vec![]);
-        // Warm the cache with the pre-edit state, so the assertions below prove
-        // the stale index is discarded rather than merely never built.
+        // Warm the cache with the pre-edit state, so the assertions prove the stale index is discarded.
         session.caches.dynamic_item_index = Some(world::build_dynamic_item_index(&session.level));
         assert!(session
             .caches
@@ -2008,7 +1973,6 @@ mod tests {
             Some(&0)
         );
 
-        // Incoming slot keeps the same static_id but drops the dynamic item.
         let dto = ItemContainerDto {
             id: container_id,
             r#type: "CommonContainer".to_string(),
@@ -2091,7 +2055,6 @@ mod tests {
         let common_id = uuid::Uuid::parse_str("44444444-0000-0000-0000-000000000000").unwrap();
         let essential_id = uuid::Uuid::parse_str("55555555-0000-0000-0000-000000000000").unwrap();
 
-        // Build a save with BOTH containers present.
         let mut key_common = Properties::default();
         key_common.insert("ID", guid_property(common_id));
         let mut value_common = Properties::default();
@@ -2329,7 +2292,6 @@ mod tests {
         assert!(slots.is_empty());
     }
 
-    /// An unresolvable `container_id` is skipped, never a panic.
     #[test]
     fn apply_item_container_dto_unknown_container_id_is_a_no_op() {
         let mut session = session_with_item_container(uuid::Uuid::nil(), 5, vec![], vec![]);
@@ -2342,7 +2304,6 @@ mod tests {
             slot_num: 5,
         };
         apply_item_container_dto(&mut session, unknown, &dto, None).unwrap();
-        // The real (nil-id) container must be completely untouched.
         let entries = world::item_container_map(&session.level).unwrap();
         let value_props = props::struct_props(&entries[0].value).unwrap();
         assert!(props::get(value_props, &["Slots"])
@@ -2351,8 +2312,6 @@ mod tests {
             .is_empty());
     }
 
-    /// A new egg with `modified: true` rebuilds a full embedded `SaveParameter`,
-    /// readable back through `read_item_container`.
     #[test]
     fn apply_item_container_dto_new_egg_modified_rebuilds_embedded_save_parameter() {
         let container_id = uuid::Uuid::nil();
@@ -2410,8 +2369,6 @@ mod tests {
         );
     }
 
-    /// An existing egg updated with `modified: false` preserves its embedded
-    /// `object` exactly, even when the incoming DTO carries different stats.
     #[test]
     fn apply_item_container_dto_existing_egg_unmodified_preserves_embedded_save_parameter() {
         let container_id = uuid::Uuid::nil();
@@ -2504,9 +2461,8 @@ mod tests {
         }
     }
 
-    /// One `MapObjectSaveData` element linking `base_id` to `container_id` via
-    /// an `ItemContainer` module — the shape `guild::base_storage_container_ids`
-    /// enumerates to decide base ownership.
+    /// One `MapObjectSaveData` element linking `base_id` to `container_id` via an
+    /// `ItemContainer` module -- the shape `guild::base_storage_container_ids` enumerates.
     fn map_object_owning_container(base_id: uuid::Uuid, container_id: uuid::Uuid) -> StructValue {
         let model = crate::ue::games::palworld::PalMapModel {
             instance_id: crate::ue::FGuid::nil(),
@@ -2566,9 +2522,8 @@ mod tests {
         StructValue::Struct(object_props)
     }
 
-    /// Two item containers: one linked to `base_id` by a `MapObjectSaveData`
-    /// module, one with no link at all — a positive and a negative for
-    /// `apply_base_dto`'s membership check in the same fixture.
+    /// Two item containers: one linked to `base_id` by a `MapObjectSaveData` module, one
+    /// with no link -- a positive and a negative for the membership check in one fixture.
     fn session_with_base_owning_one_of_two_containers(
         base_id: uuid::Uuid,
         owned_container_id: uuid::Uuid,
@@ -2616,8 +2571,7 @@ mod tests {
         SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties))
     }
 
-    /// The membership check must accept an owned container and reject a foreign
-    /// one in the same call — proving it is not an always-reject.
+    /// The membership check must accept an owned container and reject a foreign one in the same call.
     #[test]
     fn apply_base_dto_accepts_the_owned_container_and_rejects_the_foreign_one() {
         let base_id = uuid::Uuid::parse_str("bbbbbbbb-0000-0000-0000-000000000000").unwrap();

@@ -1,16 +1,13 @@
 //! Accessors and mutation helpers over `uesave`'s structured guild group.
 //!
-//! A guild's binary TAIL comes in two shapes, and a real save can be either:
-//! `PalGuildTail::PreUpdate` (`admin_player_uid` + `players` + trailing bytes)
-//! or `PalGuildTail::PostUpdate` (which additionally carries
-//! `guild_chest_allowed_roles`, a per-player `role` byte, and
-//! `role_permissions`). Every accessor and mutator here handles both and never
-//! assumes one.
+//! A guild's binary TAIL comes in two shapes and a real save can be either:
+//! `PalGuildTail::PreUpdate` (`admin_player_uid` + `players` + trailing bytes) or
+//! `PalGuildTail::PostUpdate` (which also carries `guild_chest_allowed_roles`, a
+//! per-player `role` byte, and `role_permissions`). Every accessor handles both.
 //!
-//! Mutations touch only the field being changed, leaving markers, roles, role
-//! permissions, and trailing bytes intact -- `uesave` re-serializes the guild
-//! byte-for-byte on save, so any field clobbered here is a field corrupted in
-//! the save.
+//! Mutations touch only the field being changed: `uesave` re-serializes the guild
+//! byte-for-byte on save, so any marker, role, or trailing byte clobbered here is a
+//! field corrupted in the save.
 
 use crate::props;
 use crate::ue::games::palworld::{
@@ -27,8 +24,7 @@ pub struct GuildPlayerInfo {
     pub player_name: String,
 }
 
-/// `entry.value.GroupType`, as its fully qualified enum variant name (e.g.
-/// `"EPalGroupType::Guild"`).
+/// `entry.value.GroupType`, fully qualified (e.g. `"EPalGroupType::Guild"`).
 pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
     let value_properties = props::struct_properties(&entry.value)?;
     props::get(value_properties, &["GroupType"])
@@ -36,8 +32,7 @@ pub fn entry_group_type(entry: &MapEntry) -> Option<String> {
         .map(str::to_string)
 }
 
-/// A `GroupSaveDataMap` entry's `RawData` as structured `PalGroupData`. Does
-/// not check the group type; callers that need a guild must do that themselves.
+/// A `GroupSaveDataMap` entry's `RawData` as `PalGroupData`. Does not check the group type.
 pub fn entry_group_data(entry: &MapEntry) -> Option<&PalGroupData> {
     let value_properties = props::struct_properties(&entry.value)?;
     match props::get(value_properties, &["RawData"])? {
@@ -54,9 +49,7 @@ pub fn entry_group_data_mut(entry: &mut MapEntry) -> Option<&mut PalGroupData> {
     }
 }
 
-/// The `PalGuildGroup` inside a `PalGroupData`, if its variant is `Guild`. Any
-/// other variant (`IndependentGuild`, `Organization`, `Unknown`) yields `None`
-/// for the caller to skip.
+/// The `PalGuildGroup` in a `PalGroupData`; `None` for `IndependentGuild`/`Organization`/`Unknown`.
 pub fn as_guild(group_data: &PalGroupData) -> Option<&PalGuildGroup> {
     match &group_data.data {
         PalGroupVariant::Guild(guild) => Some(guild),
@@ -114,7 +107,6 @@ pub fn guild_has_player(guild: &PalGuildGroup, uid: Uuid) -> bool {
     }
 }
 
-/// `(last_online_real_time, player_name)` for `uid`, if a member.
 pub fn find_player_membership(guild: &PalGuildGroup, uid: Uuid) -> Option<(i64, String)> {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail
@@ -140,8 +132,7 @@ pub fn find_player_membership(guild: &PalGuildGroup, uid: Uuid) -> Option<(i64, 
     }
 }
 
-/// The `role` byte on `uid`'s row. `None` for a `PreUpdate` guild, whose tail
-/// has no per-player roles at all, or when `uid` is not a member.
+/// The `role` byte on `uid`'s row. `None` for a `PreUpdate` guild, which has no roles.
 pub fn player_role(guild: &PalGuildGroup, uid: Uuid) -> Option<u8> {
     match &guild.tail {
         PalGuildTail::PreUpdate(_) => None,
@@ -175,8 +166,7 @@ pub fn remove_player(guild: &mut PalGuildGroup, uid: Uuid) -> Option<u8> {
     }
 }
 
-/// Appends a member row. `role` defaults to `0` for a `PostUpdate` guild and is
-/// ignored entirely for a `PreUpdate` one.
+/// Appends a member row. `role` defaults to `0` on a `PostUpdate` tail, ignored on `PreUpdate`.
 pub fn push_player(guild: &mut PalGuildGroup, member: &GuildPlayerInfo, role: Option<u8>) {
     match &mut guild.tail {
         PalGuildTail::PreUpdate(tail) => tail.players.push(PalPlayerInfo {
@@ -218,9 +208,8 @@ pub fn set_player_last_online(guild: &mut PalGuildGroup, uid: Uuid, ticks: i64) 
     }
 }
 
-/// Bidirectionally swaps `old_uid` <-> `new_uid` across the guild's
-/// `admin_player_uid` and every member `player_uid`. Roles, names, timestamps,
-/// and markers are untouched.
+/// Bidirectionally swaps `old_uid` <-> `new_uid` across `admin_player_uid` and every
+/// member `player_uid`. Roles, names, timestamps, and markers are untouched.
 pub fn swap_player_uids(guild: &mut PalGuildGroup, old_uid: Uuid, new_uid: Uuid) {
     fn swapped(current: Uuid, old_uid: Uuid, new_uid: Uuid) -> Option<Uuid> {
         if current == old_uid {
@@ -259,9 +248,8 @@ pub fn swap_player_uids(guild: &mut PalGuildGroup, old_uid: Uuid, new_uid: Uuid)
     }
 }
 
-/// Resets a cloned template guild to a fresh single-member guild owned by
-/// `admin_uid`. Preserves the tail shape and every non-member field it carries
-/// (`guild_chest_allowed_roles`, `role_permissions`, trailing bytes).
+/// Resets a cloned template guild to a fresh single-member guild owned by `admin_uid`,
+/// preserving the tail shape and every non-member field it carries.
 pub fn reset_to_single_member(
     guild: &mut PalGuildGroup,
     guild_name: &str,
@@ -298,9 +286,8 @@ pub fn reset_to_single_member(
     }
 }
 
-/// Builds a `PalGuildGroup` with a `PreUpdate` tail, for tests and synthetic
-/// sessions. Production never builds a guild from scratch -- transfer clones a
-/// template instead.
+/// Builds a `PalGuildGroup` with a `PreUpdate` tail, for tests and synthetic sessions.
+/// Production never builds a guild from scratch -- transfer clones a template instead.
 pub fn pre_update_guild(
     base_camp_level: i32,
     guild_name: &str,
@@ -406,7 +393,6 @@ mod tests {
         let mut guild = post_update_guild();
         assert_eq!(remove_player(&mut guild, uid(2)), Some(2));
         assert_eq!(guild_player_uids(&guild), vec![uid(1)]);
-        // Non-member fields survive untouched.
         if let PalGuildTail::PostUpdate(tail) = &guild.tail {
             assert_eq!(tail.guild_chest_allowed_roles, vec![7, 8]);
             assert_eq!(tail.unknown_i32, 42);

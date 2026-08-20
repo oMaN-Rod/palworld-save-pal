@@ -1,12 +1,9 @@
 //! Places a captured blueprint into a save.
 //!
-//! Every mutation is computed against a private clone of the blueprint first;
-//! only once the whole set has been built does `commit` touch a single `_mut`
-//! accessor. A placement that fails -- a blocking finding, an unresolvable
-//! guild, a merge target that is not there -- therefore leaves the session
-//! exactly as it found it. A half-applied placement (structures added but no
-//! base camp, ids rebound on some objects but not others) is worse than one
-//! that refuses outright.
+//! Every mutation is computed against a private clone of the blueprint first; only once
+//! the whole set has been built does `commit` touch a single `_mut` accessor. A failed
+//! placement therefore leaves the session exactly as it found it -- a half-applied one
+//! (structures added but no base camp, ids rebound on some objects only) is worse.
 
 use std::collections::HashSet;
 
@@ -27,13 +24,11 @@ use crate::ue::{
     Double, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, Vector,
 };
 
-/// A base's Pal Box: the structure that makes the base a base. `MergeInto`
-/// drops it, since the target base already has one.
+/// A base's Pal Box: the structure that makes the base a base. `MergeInto` drops it, since the target already has one.
 const PAL_BOX_MAP_OBJECT_ID: &str = "PalBoxV2";
 
 /// The only `GroupSaveDataMap` group type that owns bases. The map also holds
-/// `Organization`, `Party` and friends, none of which carry the `base_ids` and
-/// `map_object_instance_ids_base_camp_points` lists a placed base registers in.
+/// `Organization`, `Party` and friends, none of which carry `base_ids`.
 const GUILD_GROUP_TYPE: &str = "EPalGroupType::Guild";
 
 #[derive(Debug, Clone)]
@@ -43,14 +38,12 @@ pub struct PlacementResult {
     pub findings: Vec<validate::Finding>,
 }
 
-/// Everything about a placement that is not the save or the blueprint itself.
 #[derive(Debug, Clone, Copy)]
 pub struct PlacementRequest {
     pub anchor: Anchor,
     pub mode: PlacementMode,
     pub owner_player_uid: Uuid,
-    /// Lets a placement past non-blocking findings. Blocking ones are never
-    /// overridable.
+    /// Lets a placement past non-blocking findings. Blocking ones are never overridable.
     pub override_warnings: bool,
 }
 
@@ -118,13 +111,11 @@ pub fn place(
     })
 }
 
-/// The guild the placement binds everything to, and the point at which an
-/// unresolvable target is rejected: `NewBase` names its guild outright, while
-/// `MergeInto` inherits the target base's.
+/// The guild the placement binds everything to, and where an unresolvable target is
+/// rejected: `NewBase` names its guild outright, `MergeInto` inherits the target base's.
 ///
-/// A group that is not a `Guild` is refused here rather than shrugged off
-/// later: nothing downstream can register a base with it, so letting it
-/// through would land 500 structures and a base camp that no guild owns.
+/// A group that is not a `Guild` is refused here rather than later: nothing downstream
+/// can register a base with it, so letting it through lands a base camp no guild owns.
 fn target_guild(session: &SaveSession, mode: &PlacementMode) -> Result<Uuid, CoreError> {
     let guild_id = match mode {
         PlacementMode::NewBase { guild_id } => *guild_id,
@@ -164,10 +155,9 @@ fn base_camp_guild(session: &SaveSession, base_id: Uuid) -> Option<Uuid> {
     }
 }
 
-/// Confirms every collection the placement will append to is present and of
-/// the expected shape, so `commit` cannot discover a missing one halfway
-/// through. A world that has never held a map object or a base camp carries no
-/// such array at all.
+/// Confirms every collection the placement will append to is present and of the expected
+/// shape, so `commit` cannot discover a missing one halfway through. A world that has
+/// never held a map object or a base camp carries no such array at all.
 fn preflight(
     session: &SaveSession,
     blueprint: &BaseBlueprint,
@@ -204,9 +194,8 @@ fn preflight(
             "blueprint carries no base camp to found a base with".to_string(),
         ));
     }
-    // `append_work_ids` runs from inside `commit`, after the structures have
-    // landed, so the blob it has to rewrite is decoded here instead -- while a
-    // refusal is still free.
+    // `append_work_ids` runs from inside `commit`, after the structures have landed, so
+    // the blob it has to rewrite is decoded here instead -- while a refusal is still free.
     if let PlacementMode::MergeInto { base_id } = mode {
         if !blueprint.works.is_empty() {
             check_target_work_collection(session, *base_id)?;
@@ -215,10 +204,9 @@ fn preflight(
     Ok(())
 }
 
-/// Read-only twin of the rewrite `append_work_ids` performs: it decodes the
-/// same blob, so a merge that could not register its works is refused before
-/// any of them land. A base camp carrying no such property at all is not an
-/// error -- `append_work_ids` skips it too.
+/// Read-only twin of the rewrite `append_work_ids` performs: it decodes the same blob, so
+/// a merge that could not register its works is refused before any of them land. A base
+/// camp carrying no such property is not an error -- `append_work_ids` skips it too.
 fn check_target_work_collection(
     session: &SaveSession,
     base_id: Uuid,
@@ -249,9 +237,8 @@ fn stage_transforms(blueprint: &mut BaseBlueprint, anchor_transform: &PalTransfo
     }
 }
 
-/// Rebinds ownership and base membership onto the staged clone. Returns the
-/// minted base id for `NewBase`, and `None` for `MergeInto`, which founds no
-/// base.
+/// Rebinds ownership and base membership onto the staged clone. Returns the minted base
+/// id for `NewBase`, `None` for `MergeInto`, which founds no base.
 fn stage_identity(
     blueprint: &mut BaseBlueprint,
     mode: &PlacementMode,
@@ -330,17 +317,14 @@ fn stage_identity(
     Ok(minted)
 }
 
-/// Rebinds the two fields the base camp's opaque `WorkerDirector` blob carries
-/// that placement owns: the base camp it belongs to, and the world-space point
-/// its workers spawn at, which travels verbatim out of the source save
-/// otherwise. The blob's `container_id` is remapped by `remap`, alongside every
-/// other id the blueprint references.
+/// Rebinds the two fields the base camp's opaque `WorkerDirector` blob carries that
+/// placement owns: the base camp it belongs to, and the world-space point its workers
+/// spawn at, which otherwise travels verbatim out of the source save. The blob's
+/// `container_id` is remapped by `remap`.
 ///
-/// A blob that does not decode refuses the placement rather than degrading to
-/// the source save's values: kept as it is, the placed base would still send its
-/// workers to the coordinates the blueprint was captured at and still call
-/// itself by the base id it was captured from. Staging runs before `commit`
-/// touches the session, so refusing here costs nothing.
+/// A blob that does not decode refuses the placement rather than degrading to the source
+/// save's values: kept, the placed base would send its workers to the capture coordinates
+/// and still call itself by the base id it was captured from.
 fn stage_worker_director(
     base_camp: &mut Properties,
     base_id: Uuid,
@@ -361,20 +345,15 @@ fn stage_worker_director(
     Ok(())
 }
 
-/// A merge founds no base, so it drops the blueprint's base camp -- and with it
-/// the `WorkerDirector` that was the only thing naming the base's worker
-/// container. An empty container left behind that way would land with nothing
-/// pointing at it, one orphan per merge, so it goes.
+/// A merge founds no base, so it drops the blueprint's base camp -- and with it the
+/// `WorkerDirector` that was the only thing naming the base's worker container. An empty
+/// container left behind would land with nothing pointing at it, one orphan per merge.
 ///
-/// A container still holding pals stays, orphan or not. `remap` has already
-/// rewritten every merged work's `assigned_individual_id` to those pals' fresh
-/// ids, so dropping them here would land works naming
-/// `CharacterSaveParameterMap` keys that do not exist -- and would silently
-/// discard the base's whole workforce. An unreferenced container is inert; a
-/// dangling reference is not.
-///
-/// Runs after `remap`, so both the container ids and the module references
-/// compared here are the post-remap ones.
+/// A container still holding pals stays, orphan or not. `remap` has already rewritten
+/// every merged work's `assigned_individual_id` to those pals' fresh ids, so dropping
+/// them would land works naming `CharacterSaveParameterMap` keys that do not exist, and
+/// discard the base's whole workforce. An unreferenced container is inert; a dangling
+/// reference is not. Runs after `remap`, so every id compared here is post-remap.
 fn drop_empty_unreferenced_character_containers(blueprint: &mut BaseBlueprint) {
     let mut referenced: HashSet<Uuid> = HashSet::new();
     for structure in &blueprint.structures {
@@ -396,9 +375,8 @@ fn drop_empty_unreferenced_character_containers(blueprint: &mut BaseBlueprint) {
     });
 }
 
-/// The new base's id. `remap` already minted one for the captured base id when
-/// it rewrote the base camp's `WorkCollection.own_id`, which names the base
-/// itself; reusing it is what keeps the two in agreement.
+/// The new base's id. `remap` already minted one for the captured base id when it rewrote
+/// the base camp's `WorkCollection.own_id`; reusing it keeps the two in agreement.
 fn mint_base_id(blueprint: &BaseBlueprint, remap: &remap::IdRemap) -> Result<Uuid, CoreError> {
     let base_camp = blueprint.base_camp.as_ref().ok_or_else(|| {
         CoreError::Parse("blueprint carries no base camp to found a base with".to_string())
@@ -426,8 +404,7 @@ fn work_raw_mut(value: &mut StructValue) -> Option<&mut PalWork> {
     }
 }
 
-/// Points every slot of a `CharacterContainerSaveData` entry at the placing
-/// player; capture scrubbed them to nil.
+/// Points every slot of a `CharacterContainerSaveData` entry at the placing player; capture scrubbed them to nil.
 fn set_container_slot_owners(entry: &mut MapEntry, owner_player_uid: Uuid) {
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
         return;
@@ -448,9 +425,8 @@ fn set_container_slot_owners(entry: &mut MapEntry, owner_player_uid: Uuid) {
     }
 }
 
-/// The only function here that writes to the session, and only from fully
-/// staged values. `preflight` has already established that every collection it
-/// reaches for exists.
+/// The only function here that writes to the session, and only from fully staged values.
+/// `preflight` has already established that every collection it reaches for exists.
 fn commit(
     session: &mut SaveSession,
     staged: BaseBlueprint,
@@ -473,9 +449,8 @@ fn commit(
         ..
     } = staged;
 
-    // Teaches the destination how to write back every property the blueprint
-    // introduces; without it `level_sav_bytes` fails on the first one the
-    // target save never happened to carry.
+    // Teaches the destination how to write back every property the blueprint introduces;
+    // without it `level_sav_bytes` fails on the first one the target save never carried.
     for (path, tag) in schemas.schemas().clone() {
         props::ensure_schema(&mut session.level, path, tag);
     }
@@ -583,8 +558,7 @@ fn append_work_ids(
     let Some(bytes) = props::as_byte_array_mut(raw_data) else {
         return Ok(());
     };
-    // `preflight` already decoded this blob, so the merged works cannot be
-    // dropped on the floor here after the rest of the placement has landed.
+    // `preflight` already decoded this blob, so the merged works cannot be dropped on the floor here.
     let mut collection = palbin::read_work_collection(bytes)?;
     collection.work_ids.extend_from_slice(work_ids);
     *bytes = collection.to_bytes();

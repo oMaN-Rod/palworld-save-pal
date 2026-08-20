@@ -1,14 +1,12 @@
 //! `WorldOption.sav` settings access.
 //!
-//! `WORLD_OPTION_SETTINGS` is the single source of truth for every setting's GVAS
-//! type and its write schema. The table was generated from the real testdata corpus
-//! (7 files, zero tag conflicts) rather than hand-written -- see the spec's Risks
-//! section. `world_option_table_matches_corpus` in `world_option_corpus.rs`
-//! is what keeps it honest when Palworld ships new settings.
+//! `WORLD_OPTION_SETTINGS` is the single source of truth for every setting's GVAS type
+//! and write schema. It was generated from the real testdata corpus (7 files, zero tag
+//! conflicts); `world_option_table_matches_corpus` keeps it honest as Palworld adds
+//! settings.
 //!
-//! The file is SPARSE: real saves carry anywhere from 87 to 119 of these keys, and
-//! the `Version` property (always 101) does not discriminate. Presence is read from
-//! the data, never inferred.
+//! The file is SPARSE: real saves carry anywhere from 87 to 119 of these keys, and the
+//! `Version` property (always 101) does not discriminate. Presence is read from data.
 
 use crate::ue::{PropertyTagDataPartial, PropertyTagPartial, PropertyType};
 
@@ -23,17 +21,14 @@ pub enum WoKind {
     Name,
     /// Carries the enum name recorded in the tag, e.g. "EPalOptionWorldDifficulty".
     Enum(&'static str),
-    /// `CrossplayPlatforms`. Takes NO enum name: the corpus records the element tag
-    /// as `Enum("", None)`. The fully-qualified `EPalAllowConnectPlatform::*` form
-    /// appears only in the values.
+    /// `CrossplayPlatforms`. Takes NO enum name: the corpus records the element tag as
+    /// `Enum("", None)`; the qualified `EPalAllowConnectPlatform::*` form is in values.
     EnumArray,
     /// `DenyTechnologyList`.
     NameArray,
 }
 
-/// Root property holding the settings struct.
 pub const OPTION_WORLD_DATA: &str = "OptionWorldData";
-/// The settings struct within it.
 pub const SETTINGS: &str = "Settings";
 
 /// Dotted schema path uesave's writer looks a property up by.
@@ -65,11 +60,9 @@ pub fn tag_for(kind: WoKind) -> PropertyTagPartial {
     PropertyTagPartial { id: None, data }
 }
 
-/// Records a write schema for every known setting, whether or not this file carried
-/// it. Called once at parse (`SaveSession::load`), never at a mutation site: that is
-/// what lets a later edit add a setting the source file omitted. `props::ensure_schema`
-/// never overwrites a schema read from the real save, so this is safe to call on any
-/// file.
+/// Records a write schema for every known setting, whether or not this file carried it.
+/// Called once at parse, never at a mutation site: that is what lets a later edit add a
+/// setting the source file omitted. `props::ensure_schema` never overwrites a real one.
 pub fn ensure_world_option_schemas(save: &mut crate::ue::Save) {
     for (key, kind) in WORLD_OPTION_SETTINGS {
         crate::props::ensure_schema(save, settings_schema_path(key), tag_for(*kind));
@@ -205,7 +198,6 @@ pub struct WorldOptionEntry {
     pub value: serde_json::Value,
 }
 
-/// The `Settings` property bag, or `None` on a save that isn't a WorldOption.
 fn settings_properties(save: &crate::ue::Save) -> Option<&crate::ue::Properties> {
     crate::props::get(&save.root.properties, &[OPTION_WORLD_DATA, SETTINGS])
         .and_then(crate::props::struct_props)
@@ -216,8 +208,7 @@ fn settings_properties_mut(save: &mut crate::ue::Save) -> Option<&mut crate::ue:
         .and_then(crate::props::struct_props_mut)
 }
 
-/// Encodes one property as wire JSON. Returns `None` when the stored property's
-/// shape disagrees with the table -- an untrusted save is allowed to be wrong.
+/// `None` when the stored property's shape disagrees with the table -- a save may be wrong.
 fn encode_value(kind: WoKind, property: &crate::ue::Property) -> Option<serde_json::Value> {
     Some(match kind {
         WoKind::Bool => serde_json::json!(crate::props::as_bool(property)?),
@@ -230,9 +221,8 @@ fn encode_value(kind: WoKind, property: &crate::ue::Property) -> Option<serde_js
     })
 }
 
-/// Present keys only, in GVAS order. Keys absent from `WORLD_OPTION_SETTINGS` (a
-/// future Palworld setting) are skipped here but left untouched in the tree, so they
-/// round-trip on write rather than being dropped.
+/// Present keys only, in GVAS order. Keys absent from `WORLD_OPTION_SETTINGS` (a future
+/// Palworld setting) are skipped but left in the tree, so they round-trip on write.
 pub fn read_settings(save: &crate::ue::Save) -> Vec<WorldOptionEntry> {
     let Some(properties) = settings_properties(save) else {
         return Vec::new();
@@ -271,9 +261,8 @@ fn kind_error(key: &str, expected: &str) -> CoreError {
     ))
 }
 
-/// Decodes wire JSON into a `Property` per the table. Rejects anything the table
-/// disagrees with, so a malformed client patch can never write a wrong-typed
-/// property into a real save.
+/// Decodes wire JSON per the table, rejecting anything it disagrees with, so a malformed
+/// client patch can never write a wrong-typed property into a real save.
 fn decode_value(key: &str, kind: WoKind, value: &serde_json::Value) -> Result<crate::ue::Property, CoreError> {
     Ok(match kind {
         WoKind::Bool => crate::props::bool_property(
@@ -321,12 +310,10 @@ fn decode_string_array(key: &str, value: &serde_json::Value) -> Result<Vec<Strin
         .collect()
 }
 
-/// Applies only the keys in `patch` -- the patch IS the minimal diff. Returns
-/// whether anything actually changed; the caller uses that as its dirty flag, so a
-/// no-op patch never triggers a rewrite of the user's file.
-///
-/// Adding a key the source file omitted is safe because `ensure_world_option_schemas`
-/// primed every schema at parse.
+/// Applies only the keys in `patch` -- the patch IS the minimal diff. Returns whether
+/// anything changed, so a no-op patch never triggers a rewrite of the user's file.
+/// Adding a key the source file omitted is safe: `ensure_world_option_schemas` primed
+/// every schema at parse.
 pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Result<bool, CoreError> {
     if patch.is_empty() {
         return Ok(false);
@@ -353,8 +340,7 @@ pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Re
         if unchanged {
             continue;
         }
-        // IndexMap::insert replaces in place for a present key (preserving GVAS
-        // order) and appends for a new one.
+        // Replacing a present key in place preserves GVAS order; a new key appends.
         properties.insert(key, property);
         dirty = true;
     }
@@ -418,8 +404,6 @@ mod tests {
 
     #[test]
     fn tag_for_enum_array_uses_empty_enum_name() {
-        // Verified against the real corpus: CrossplayPlatforms' element tag is
-        // Enum("", None) -- NOT "EPalAllowConnectPlatform".
         let tag = tag_for(WoKind::EnumArray);
         match tag.data {
             crate::ue::PropertyTagDataPartial::Array(inner) => match *inner {
@@ -624,7 +608,6 @@ mod tests {
     #[test]
     fn apply_patch_writing_an_identical_value_is_not_dirty() {
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
-        // A no-op edit must not trigger a rewrite of the user's file.
         assert!(!apply_patch(&mut save, &[patch("ExpRate", serde_json::json!(1.0))]).unwrap());
     }
 
@@ -645,7 +628,6 @@ mod tests {
     #[test]
     fn apply_patch_rejects_bare_enum_variant() {
         let mut save = settings_save(vec![]);
-        // Enum values must be fully qualified in both directions.
         let error = apply_patch(&mut save, &[patch("Difficulty", serde_json::json!("Custom"))]).unwrap_err();
         assert!(format!("{error}").contains("Difficulty"));
     }
@@ -684,7 +666,6 @@ mod tests {
 
     #[test]
     fn apply_patch_rejects_mixed_patch_without_mutating_anything() {
-        // Test with VALID entry first, then INVALID entry
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
         let error = apply_patch(
             &mut save,
@@ -695,11 +676,9 @@ mod tests {
         )
         .unwrap_err();
         assert!(format!("{error}").contains("NoSuchSetting"));
-        // Verify the valid entry was NOT applied because we decode-then-mutate
         let entries = read_settings(&save);
         assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
 
-        // Test with INVALID entry first, then VALID entry
         let mut save = settings_save(vec![("ExpRate", crate::props::float_property(1.0))]);
         let error = apply_patch(
             &mut save,
@@ -710,7 +689,6 @@ mod tests {
         )
         .unwrap_err();
         assert!(format!("{error}").contains("NoSuchSetting"));
-        // Verify the valid entry was NOT applied even though it comes second
         let entries = read_settings(&save);
         assert_eq!(entries[0].value, serde_json::json!(1.0), "ExpRate must not be mutated when patch is rejected");
     }
@@ -721,7 +699,6 @@ mod tests {
             "Difficulty",
             crate::props::enum_property("EPalOptionWorldDifficulty::Custom"),
         )]);
-        // A no-op edit on an enum must not trigger a rewrite of the user's file.
         assert!(!apply_patch(
             &mut save,
             &[patch("Difficulty", serde_json::json!("EPalOptionWorldDifficulty::Custom"))]

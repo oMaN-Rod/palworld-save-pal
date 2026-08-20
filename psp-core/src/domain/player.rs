@@ -39,8 +39,7 @@ pub const STATUS_NAME_MAP: [(&str, &str); 18] = [
     ("パルスフィアホーミング", "sphere_homing"),
     ("スタミナ消費軽減", "stamina_reduction"),
 ];
-/// `STATUS_NAME_MAP` minus `capture_rate`, which the extended stat list has no
-/// entry for.
+/// `STATUS_NAME_MAP` minus `capture_rate`, which the extended stat list has no entry for.
 pub const EX_STATUS_NAME_MAP: [(&str, &str); 5] = [
     ("最大HP", "max_hp"),
     ("最大SP", "max_sp"),
@@ -49,11 +48,9 @@ pub const EX_STATUS_NAME_MAP: [(&str, &str); 5] = [
     ("作業速度", "work_speed"),
 ];
 
-/// .NET/Palworld ticks -> an ISO-8601 string.
-///
-/// Delegates the tick math to `summary::ticks_to_datetime`. Do not recompute it
-/// as `ticks as f64 / 10_000_000.0`: `f64` cannot hold a tick count precisely,
-/// which silently corrupts any date past roughly year 1000.
+/// .NET/Palworld ticks -> an ISO-8601 string. Do not recompute the tick math as
+/// `ticks as f64 / 10_000_000.0`: `f64` cannot hold a tick count precisely, which
+/// silently corrupts any date past roughly year 1000.
 pub fn ticks_to_isoformat(ticks: u64) -> String {
     let datetime = summary::ticks_to_datetime(ticks).unwrap_or_else(|| {
         chrono::NaiveDate::from_ymd_opt(1, 1, 1)
@@ -72,14 +69,11 @@ pub fn ticks_to_isoformat(ticks: u64) -> String {
 const COMPLETED_QUEST_ARRAY: &str = "CompletedQuestArray";
 const ORDERED_QUEST_ARRAY: &str = "OrderedQuestArray";
 
-/// Palworld 1.0 renamed both player quest arrays to `<Base>_FullRelease`, and no
-/// save carries both namings: a 1.0 save has only the `_FullRelease` pair, a
-/// pre-1.0 save only the bare pair. So the name is resolved from the save rather
-/// than hard-coded -- the 1.0 name when the save carries it, the bare name
-/// otherwise.
+/// Palworld 1.0 renamed both player quest arrays to `<Base>_FullRelease`, and no save
+/// carries both namings: a 1.0 save has only the `_FullRelease` pair, a pre-1.0 save only
+/// the bare pair. So the name is resolved from the save rather than hard-coded.
 ///
-/// A save carrying NEITHER (only reachable synthetically, e.g. a player stripped
-/// of both properties) falls back to the bare name rather than guessing
+/// A save carrying NEITHER falls back to the bare name rather than guessing
 /// `_FullRelease`. The two arrays resolve independently.
 fn quest_array_name(save_data: &Properties, base: &str) -> String {
     let full_release = format!("{base}_FullRelease");
@@ -111,7 +105,6 @@ pub(crate) fn container_id_from(save_data: &Properties, name: &str) -> Option<uu
         .and_then(props::as_uuid)
 }
 
-/// The keys of a `Name -> Bool` unlock-flag map whose value is `true`.
 fn unlock_flag_keys(record_data: &Properties, flag_name: &str) -> Vec<String> {
     let Some(entries) = record_data
         .0
@@ -174,9 +167,8 @@ fn collected_relics_by_type(record_data: &Properties) -> BTreeMap<String, Vec<St
     out
 }
 
-/// One `english_name -> StatusPoint` entry per list element whose `StatusName`
-/// resolves through `name_map`. A `"None"` or unrecognized row is skipped rather
-/// than treated as an error: save data is untrusted input.
+/// One `english_name -> StatusPoint` entry per list element whose `StatusName` resolves.
+/// A `"None"` or unrecognized row is skipped: save data is untrusted input.
 fn status_points(
     save_parameter: &Properties,
     list_name: &str,
@@ -220,9 +212,8 @@ fn status_points(
     points
 }
 
-/// Lazily loads a player's `.sav`/`.dps` on first access, then dumps their full
-/// DTO. `None` when the player has no file reference or no matching
-/// character-map entry.
+/// Lazily loads a player's `.sav`/`.dps` on first access, then dumps their full DTO.
+/// `None` when the player has no file reference or no matching character-map entry.
 pub fn get_player_details(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -243,8 +234,7 @@ pub fn get_player_details(
         .unwrap_or_else(|| player_id.to_string()[..8].to_string());
     progress(&format!("Loading player {display_name}..."));
 
-    // Reuse the `.sav` summary extraction already parsed, if it is still
-    // cached, rather than reading and parsing the same file twice.
+    // Reuse the `.sav` summary extraction already parsed, if still cached, rather than parsing twice.
     let player_sav = match session.player_sav_cache.remove(&player_id) {
         Some(cached) => cached,
         None => {
@@ -295,13 +285,11 @@ pub fn get_player_details(
     build_player_dto(session, game_data, player_id)
 }
 
-/// Rebuilds the `PlayerDto` for an already-loaded player, without re-running the
-/// lazy-load machinery. `None` when the player isn't in `loaded_players` or its
-/// character-map entry has vanished.
+/// Rebuilds the `PlayerDto` for an already-loaded player, without re-running the lazy-load
+/// machinery.
 ///
-/// `guild_id` comes from `session.caches.player_guild_map`, which this function
-/// -- taking `&SaveSession` -- cannot populate, so it relies on that cache
-/// already being warm.
+/// `guild_id` comes from `session.caches.player_guild_map`, which this function -- taking
+/// `&SaveSession` -- cannot populate, so it relies on that cache already being warm.
 pub fn build_player_dto(
     session: &SaveSession,
     game_data: &GameData,
@@ -311,7 +299,6 @@ pub fn build_player_dto(
         return Ok(None);
     };
 
-    // --- character-map side ---
     let entries = world::character_map(&session.level)?;
     let Some(entry) = entries
         .iter()
@@ -327,10 +314,9 @@ pub fn build_player_dto(
         .and_then(props::as_str)
         .map(str::to_string)
         .unwrap_or_else(|| {
-            // A nameless player renders as this ninja-emoji placeholder. It is
-            // deliberately NOT the sheep placeholder `PlayerSummary::nickname`
-            // uses, and `apply_player_dto` treats this exact string as "no
-            // nickname" on write-back.
+            // A nameless player renders as this ninja-emoji placeholder. Deliberately NOT
+            // the sheep placeholder `PlayerSummary::nickname` uses, and `apply_player_dto`
+            // treats this exact string as "no nickname" on write-back.
             format!(
                 "\u{1f977} ({})",
                 player_id.to_string().split('-').next().unwrap_or("")
@@ -346,7 +332,6 @@ pub fn build_player_dto(
             _ => None,
         });
 
-    // --- player .sav side ---
     let save_data = save_data_props(&loaded.sav)?;
     // Older saves spell this key `inventoryInfo`; newer ones `InventoryInfo`.
     let inventory_key = if save_data
@@ -466,8 +451,7 @@ pub fn build_player_dto(
         }
     }
 
-    // Populated only when a `_dps.sav` exists for this player; `None` (JSON
-    // `null`) is a legitimate wire shape otherwise.
+    // Populated only when a `_dps.sav` exists; `None` (JSON `null`) is a legitimate wire shape.
     let dps = loaded.dps.as_ref().map(|dps_sav| {
         let mut dps_pals: OrderedMap<i32, PalDto> = OrderedMap::new();
         if let Some(slots) = dps_sav
@@ -598,7 +582,6 @@ pub(crate) fn save_data_props_mut(
     .ok_or_else(|| CoreError::Parse("player SaveData not a struct".into()))
 }
 
-/// Each field is applied only when `Some`. `Err` when `player_id` isn't loaded.
 pub fn update_player_technologies(
     session: &mut SaveSession,
     player_id: uuid::Uuid,
@@ -636,8 +619,7 @@ pub fn update_player_technologies(
     Ok(())
 }
 
-/// `_game_data` is unused here; the whole `update_*` family shares one uniform
-/// `(session, game_data, modified, progress)` signature.
+/// `_game_data` is unused here; the whole `update_*` family shares one uniform signature.
 pub fn update_players(
     session: &mut SaveSession,
     _game_data: &GameData,
@@ -651,10 +633,9 @@ pub fn update_players(
     Ok(())
 }
 
-/// The five item containers live one level deeper, under
-/// `InventoryInfo`/`inventoryInfo` (the older spelling), unlike
-/// `PalStorageContainerId`/`OtomoCharacterContainerId`, which sit directly on
-/// `SaveData`.
+/// The five item containers live one level deeper, under `InventoryInfo`/`inventoryInfo`
+/// (the older spelling), unlike `PalStorageContainerId`/`OtomoCharacterContainerId`,
+/// which sit directly on `SaveData`.
 fn player_inventory_container_id(save_data: &Properties, id_key: &str) -> Option<uuid::Uuid> {
     let inventory_key = if save_data
         .0
@@ -671,13 +652,12 @@ fn player_inventory_container_id(save_data: &Properties, id_key: &str) -> Option
     container_id_from(inventory_info, id_key)
 }
 
-/// Applies every writable field from `dto` onto the player's character-map
-/// `SaveParameter` bag and their own `.sav`'s `SaveData`/`RecordData`.
+/// Applies every writable field from `dto` onto the player's character-map `SaveParameter`
+/// bag and their own `.sav`'s `SaveData`/`RecordData`.
 ///
-/// Container edits are routed by the ids resolved from the player's OWN
-/// `InventoryInfo`, never by `dto.<container>.id`. A client-supplied id would
-/// let a forged payload redirect the write onto an arbitrary container anywhere
-/// in the save -- another player's inventory, a base's storage chest.
+/// Container edits are routed by the ids resolved from the player's OWN `InventoryInfo`,
+/// never by `dto.<container>.id`: a forged id would otherwise redirect the write onto an
+/// arbitrary container anywhere in the save.
 fn apply_player_dto(
     session: &mut SaveSession,
     player_id: uuid::Uuid,
@@ -688,12 +668,10 @@ fn apply_player_dto(
             "Player {player_id} not found in the save file."
         )));
     }
-    // Player edits write `SanityValue`, but a player's raw SaveParameter may
-    // carry no schema for that path, and uesave refuses to serialize an
-    // unschema'd property -- `level_sav_bytes()` would then fail on every player
-    // edit. Prime the shared per-path schemas pals already rely on.
+    // Player edits write `SanityValue`, but a player's raw SaveParameter may carry no
+    // schema for that path, and uesave refuses to serialize an unschema'd property --
+    // `level_sav_bytes()` would then fail on every player edit.
     pal::ensure_pal_property_schemas(&mut session.level);
-    // --- character-map save parameter fields ---
     {
         let entries = world::character_map_mut(&mut session.level)?;
         let Some(entry) = entries
@@ -715,8 +693,7 @@ fn apply_player_dto(
         save_parameter.0.shift_remove(&PropertyKey::from("HP"));
         save_parameter.insert("FullStomach", props::float_property(dto.stomach as f32));
         save_parameter.insert("SanityValue", props::float_property(dto.sanity as f32));
-        // The default placeholder nickname removes the property entirely rather
-        // than persisting the placeholder itself.
+        // The default placeholder nickname removes the property entirely rather than persisting it.
         let default_pattern = format!(
             "\u{1f977} ({})",
             player_id.to_string().split('-').next().unwrap_or("")
@@ -743,13 +720,11 @@ fn apply_player_dto(
             false,
         );
     }
-    // --- player .sav SaveData fields ---
     {
         let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
-        // Both quest arrays are written under the name this save actually uses --
-        // a 1.0 save's `_FullRelease` pair, a pre-1.0 save's bare pair. Writing the
-        // bare name onto a 1.0 save would invent a property the game never reads
-        // and leave the real data stale.
+        // Both quest arrays are written under the name this save actually uses. Writing the
+        // bare name onto a 1.0 save would invent a property the game never reads and leave
+        // the real data stale.
         let (completed_quest_array, ordered_quest_array) = {
             let save_data = save_data_props_mut(&mut loaded.sav)?;
             let completed_quest_array = quest_array_name(save_data, COMPLETED_QUEST_ARRAY);
@@ -776,8 +751,7 @@ fn apply_player_dto(
                 completed_quest_array.as_str(),
                 props::name_array_property(dto.completed_missions.clone()),
             );
-            // One {QuestName, BlockIndex: 0, IntegerMap: {}, StringMap: {}}
-            // struct per current mission.
+            // One {QuestName, BlockIndex: 0, IntegerMap: {}, StringMap: {}} struct per current mission.
             let mut quest_structs = Vec::new();
             for quest_name in &dto.current_missions {
                 let mut quest_props = Properties::default();
@@ -793,16 +767,14 @@ fn apply_player_dto(
             );
             (completed_quest_array, ordered_quest_array)
         };
-        // The three writes above can each land on a property the save carries no
-        // schema for; register those now. Each needs `&mut loaded.sav` for its
-        // `.schemas` table, so the `save_data` borrow must already have ended.
+        // The three writes above can each land on a property the save carries no schema
+        // for; each needs `&mut loaded.sav`, so the `save_data` borrow must already have ended.
         ensure_player_sav_schemas(&mut loaded.sav);
         ensure_player_quest_array_schemas(
             &mut loaded.sav,
             &completed_quest_array,
             &ordered_quest_array,
         );
-        // Unlock flags apply only when the caller supplied a value.
         if let Some(points) = &dto.unlocked_fast_travel_points {
             // Fast travel has no relic counter of any kind; the delta is deliberately dropped.
             apply_unlock_flags(&mut loaded.sav, "FastTravelPointUnlockFlag", points);
@@ -819,9 +791,8 @@ fn apply_player_dto(
                 dto.collected_relics.as_ref(),
             );
         } else if dto.collected_relics.is_some() {
-            // A malformed payload: the frontend always sends both together (see comment
-            // above), so `collected_relics` with no `collected_effigies` silently drops
-            // every typed relic on this save rather than erroring.
+            // A malformed payload: the frontend always sends both together, so
+            // `collected_relics` without `collected_effigies` drops every typed relic.
             tracing::warn!(
                 %player_id,
                 "collected_relics present without collected_effigies; dropping typed relic write"
@@ -868,17 +839,16 @@ fn apply_player_dto(
 /// A key with no row is APPENDED when its value is positive: the game creates a row
 /// lazily, only once a rank is bought, so an absent row means rank 0 and setting such a
 /// stat would otherwise silently do nothing. A key with no row and a value of 0 appends
-/// nothing -- see the comment on that branch.
+/// nothing.
 ///
 /// `drop_none_rows` first prunes `"None"`/unrecognized rows -- set for
-/// `GotStatusPointList`, deliberately NOT for `GotExStatusPointList`, whose rows
-/// are left as-is. A `points` key matching no `name_map` entry is skipped rather
-/// than treated as an error: the DTO is untrusted input.
+/// `GotStatusPointList`, deliberately NOT for `GotExStatusPointList`. A `points` key
+/// matching no `name_map` entry is skipped: the DTO is untrusted input.
 ///
-/// The prune pass advances its index even on a removal, so among a run of
-/// consecutive removable rows only every other one is dropped. This quirk is
-/// load-bearing for byte-compatible saves -- `Vec::retain` would remove all of
-/// them and produce a different save. See the tests pinning both cases.
+/// The prune pass advances its index even on a removal, so among a run of consecutive
+/// removable rows only every other one is dropped. That quirk is load-bearing for
+/// byte-compatible saves -- `Vec::retain` would remove all of them and write a different
+/// save.
 fn apply_status_points(
     save_parameter: &mut Properties,
     list_name: &str,
@@ -894,9 +864,8 @@ fn apply_status_points(
         return;
     };
     if drop_none_rows {
-        // `index` advances on every step, INCLUDING after a removal -- the row
-        // that shifts into the vacated slot is skipped. Intentional; see this
-        // function's doc comment.
+        // `index` advances on every step, INCLUDING after a removal -- the row that shifts
+        // into the vacated slot is skipped. Intentional.
         let mut index = 0;
         while index < values.len() {
             let should_remove = match &values[index] {
@@ -941,8 +910,7 @@ fn apply_status_points(
             _ => {
                 // No row. The game creates one lazily, only once a rank is bought, so an
                 // absent row means rank 0 -- and a rank-0 stat must NOT create one. The UI
-                // sends every relic key on save, so appending zeros here would add rows the
-                // game never wrote to every file that passes through the editor.
+                // sends every relic key on save, so appending zeros would touch every file.
                 if clamped > 0 {
                     let mut status_props = Properties::default();
                     status_props.insert("StatusName", props::name_property(japanese_name));
@@ -959,23 +927,20 @@ fn apply_status_points(
 /// counted additions would let an off/on toggle cycle ratchet a counter upward.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 struct FlagDelta {
-    /// Keys in the new set that were not already `true`.
     added: usize,
-    /// Keys that were `true` and are not in the new set.
     removed: usize,
 }
 
-/// Replaces the flag map's entries, every key set to `true`, and reports how the
-/// `true` set changed (see `FlagDelta`).
+/// Replaces the flag map's entries, every key set to `true`, and reports how the `true`
+/// set changed (see `FlagDelta`).
 ///
-/// This function does not touch any relic counter. `RelicPossessNum` is an
-/// effigy-only concern and is handled by `apply_relic_counters`; folding it
-/// in here is what made fast-travel unlocks increment a relic count.
+/// This function does not touch any relic counter. `RelicPossessNum` is an effigy-only
+/// concern handled by `apply_relic_counters`; folding it in here is what made fast-travel
+/// unlocks increment a relic count.
 ///
-/// A real save can legitimately carry a `RecordData` with no `flag_name` key. It
-/// is created here, preceded by an `ensure_schema` at the
-/// `SaveData.RecordData.<name>` path, because uesave's writer refuses to serialize
-/// a property with no registered schema.
+/// A real save can legitimately carry a `RecordData` with no `flag_name` key. It is
+/// created here, preceded by an `ensure_schema` at `SaveData.RecordData.<name>`, because
+/// uesave's writer refuses to serialize a property with no registered schema.
 fn apply_unlock_flags(
     player_sav: &mut crate::ue::Save,
     flag_name: &str,
@@ -1031,8 +996,7 @@ fn apply_unlock_flags(
         return FlagDelta::default();
     };
 
-    // Which keys were already true? Anything else in `keys` is newly unlocked, and any
-    // of these missing from `keys` is being un-set by this write.
+    // Anything else in `keys` is newly unlocked; any of these missing from `keys` is being un-set.
     let previously_true: std::collections::BTreeSet<String> = record_data
         .0
         .get(&flag_key)
@@ -1045,12 +1009,10 @@ fn apply_unlock_flags(
                 .collect()
         })
         .unwrap_or_default();
-    // `keys` is untrusted input and may repeat a key; dedupe here so a duplicate cannot
-    // be counted as two additions. The map write below does NOT dedupe -- a repeated key
-    // lands in `RelicObtainForInstanceFlag` as two `MapEntry`s with the same name. That
-    // differs from `relic_flag_write`'s `Flags` map, which does dedupe its write, because
-    // a duplicate there would inflate `RelicBonusExpTableIndex` by one per repeat (see
-    // that function's comment).
+    // `keys` is untrusted input and may repeat a key; dedupe here so a duplicate cannot be
+    // counted as two additions. The map write below does NOT dedupe -- a repeated key lands
+    // in `RelicObtainForInstanceFlag` as two `MapEntry`s. That differs from
+    // `relic_flag_write`'s `Flags` map, whose duplicates would inflate `RelicBonusExpTableIndex`.
     let now_true: std::collections::BTreeSet<&str> = keys.iter().map(String::as_str).collect();
 
     let delta = FlagDelta {
@@ -1090,11 +1052,9 @@ fn relic_type_name(property: &Property) -> Option<&str> {
 /// The `Flags` map to write for one relic type, and how the `true` set changed.
 ///
 /// The map keeps `keys` in CALLER order (first-seen), exactly as `apply_unlock_flags`
-/// writes the flat map -- order is deliberate, not incidental, so a caller that sorted
-/// or reordered `keys` would silently change save bytes. Both the delta AND the map
-/// itself dedupe a repeated guid: `RelicBonusExpTableIndex` (see `apply_relic_counters`)
-/// counts `Flags` ENTRIES, so a duplicate map entry would inflate it by one per repeat.
-/// `keys` is untrusted DTO input, so this dedupe is load-bearing, not defensive-only.
+/// writes the flat map -- order is deliberate, so a caller that sorted `keys` would change
+/// save bytes. Both the delta AND the map dedupe a repeated guid: `RelicBonusExpTableIndex`
+/// counts `Flags` ENTRIES, so a duplicate would inflate it by one per repeat.
 fn relic_flag_write(
     keys: &[String],
     previously_true: &std::collections::BTreeSet<String>,
@@ -1122,7 +1082,6 @@ fn relic_flag_write(
     (flags, delta)
 }
 
-/// The `true` keys of a by-type entry's `Flags` map.
 fn entry_true_flags(entry: &Properties) -> std::collections::BTreeSet<String> {
     entry
         .0
@@ -1144,49 +1103,37 @@ fn entry_true_flags(entry: &Properties) -> std::collections::BTreeSet<String> {
 /// Each type's unspent-relic count moves by THAT TYPE'S OWN net delta (`added - removed`),
 /// floored at 0. Un-collecting matters because the worldmap UI splices a relic out of the
 /// set on a single click: were only additions counted, an off/on toggle cycle would leave
-/// the flags identical but ratchet the counter up by one every time. Removal giving a relic
-/// back also makes this symmetric with the frontend, which already decrements the inventory
-/// `Relic` item when one is un-collected.
-///
-/// The floor is not cosmetic: a relic already spent on a rank cannot be un-spent, so a real
-/// save holds fewer unspent relics of a type than it has flags for it, and un-collecting
-/// them all must stop at 0 rather than go negative.
-///
-/// An unchanged resave has `added == removed == 0` for every type, and so leaves every
-/// counter alone.
+/// the flags identical but ratchet the counter up every time. The floor is not cosmetic:
+/// a relic already spent on a rank cannot be un-spent, so a real save holds fewer unspent
+/// relics of a type than it has flags for it. An unchanged resave has
+/// `added == removed == 0` for every type and leaves every counter alone.
 ///
 /// # The CapturePower special case is REAL, not a leftover
 ///
-/// Pre-1.0, the Lifmunk Effigy was the only relic, so 1.0 kept the two legacy flat fields as
-/// CapturePower-ONLY mirrors and put all 12 types in the by-type structures. That asymmetry
-/// is the save format, and is preserved exactly:
+/// Pre-1.0, the Lifmunk Effigy was the only relic, so 1.0 kept the two legacy flat fields
+/// as CapturePower-ONLY mirrors and put all 12 types in the by-type structures:
 ///   RelicObtainForInstanceFlag == the CapturePower by-type flag set   (NOT all types)
 ///   RelicPossessNum            == RelicPossessNumMap[CapturePower]    (NOT the total)
 ///   RelicBonusExpTableIndex    == total true flags across ALL by-type entries
 /// `bCaptureCompletionRelicFixupDone` is already `true` in every real 1.0 save, so the
 /// game's one-time migration has run and will never re-derive these for us.
 ///
-/// CapturePower's flags and delta therefore come from `effigies`/`delta` -- the very list
+/// CapturePower's flags and delta therefore come from `effigies`/`delta` -- the list
 /// `apply_unlock_flags` just wrote into the flat map -- and NOT from
-/// `collected_relics["capture_power"]`. A DTO whose two views of CapturePower disagreed
-/// would otherwise desync the flat map from the by-type entry.
+/// `collected_relics["capture_power"]`, whose disagreement would desync the two.
 ///
 /// # Nothing is invented
 ///
-/// Every write is conditional on the property already existing, so a pre-1.0 save -- which
-/// has none of the by-type structures -- comes through untouched. Two consequences worth
-/// stating, because they are invisible from the code:
-///   - `RelicObtainForInstanceFlagByType` is SPARSE: the game appends a type's entry lazily,
-///     on first collection. So a missing entry is normal, and collecting a type's first
-///     relic must CREATE one -- but only when there is a guid to write, never an empty
-///     entry. In every real save examined, appending needs no `ensure_schema` of its own:
-///     `.Type` and `.Flags` are learned from an existing element whenever the array itself
-///     is present. That is a property of the GAME's writer, not one this code can assume,
-///     so the append is preceded by a defensive `ensure_schema` for both, guarding the
-///     array-present-but-empty shape uesave would otherwise reject on first append.
+/// Every write is conditional on the property already existing, so a pre-1.0 save comes
+/// through untouched. Two consequences invisible from the code:
+///   - `RelicObtainForInstanceFlagByType` is SPARSE: the game appends a type's entry
+///     lazily, on first collection. A missing entry is normal, and collecting a type's
+///     first relic must CREATE one -- but only when there is a guid to write. `.Type` and
+///     `.Flags` are learned from an existing element whenever the array is present, which
+///     is a property of the GAME's writer, so the append is preceded by a defensive
+///     `ensure_schema` guarding the array-present-but-empty shape uesave would reject.
 ///   - `RelicPossessNum` is the one property we may create, and only when the delta is
-///     positive -- so an unchanged resave of a pre-1.0 save stays a strict no-op, and a
-///     removal-only edit never conjures a `0` into a save that never carried the field.
+///     positive -- so an unchanged resave of a pre-1.0 save stays a strict no-op.
 ///
 /// There is deliberately no `delta.is_zero()` early return: a save whose structures are
 /// already out of sync must get repaired on resave, even when the edit changed no flags.
@@ -1226,8 +1173,7 @@ fn apply_relic_counters(
         .unwrap_or(false);
 
     // A save predating the field carries no `RelicPossessNum`. Creating it needs an
-    // `ensure_schema` first, because uesave's writer refuses to serialize a property
-    // with no registered schema.
+    // `ensure_schema` first: uesave refuses to serialize a property with no schema.
     if !relic_already_present && net > 0 {
         if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
             props::ensure_schema(
@@ -1242,13 +1188,9 @@ fn apply_relic_counters(
     }
 
     // `RelicObtainForInstanceFlagByType`'s element fields (`.Type`, `.Flags`) are normally
-    // learned from an existing element at read time, which is why the append below has
-    // never needed an `ensure_schema` of its own -- every real save examined already has
-    // at least one entry. That is a property of the GAME's writer, not something this code
-    // can rely on: an array present with zero entries (arguably still a valid, if unseen,
-    // save shape) would hit uesave's "missing property schema" error on the first append.
-    // `ensure_schema` is a no-op once a schema is already recorded, so this costs nothing
-    // on every real save, where the schema is already there.
+    // learned from an existing element at read time, which is why the append below has never
+    // needed its own `ensure_schema`. That is the GAME's writer's behaviour, not something
+    // to rely on: an array present with zero entries would hit uesave's missing-schema error.
     let by_type_already_present = save_data_props(player_sav)
         .ok()
         .and_then(|save_data| save_data.0.get(&record_data_key))
@@ -1294,10 +1236,9 @@ fn apply_relic_counters(
         return;
     };
 
-    // Unspent effigy relics: moves by the net of collections and un-collections, floored
-    // at 0 -- a spent relic cannot be un-spent, so the count must never go negative.
-    // Writing a 0 into a save that never had the property would be inventing a field,
-    // so don't.
+    // Unspent effigy relics: moves by the net of collections and un-collections, floored at
+    // 0 -- a spent relic cannot be un-spent. Writing a 0 into a save that never had the
+    // property would be inventing a field.
     let possess = if relic_already_present || net > 0 {
         let current = record_data
             .0
@@ -1339,9 +1280,8 @@ fn apply_relic_counters(
                         entry_delta.added as i64 - entry_delta.removed as i64,
                     );
                 }
-                // No entry: the array is sparse, so this type has never been collected.
-                // An empty guid list must leave it that way rather than append an empty
-                // entry the game never wrote.
+                // No entry: the array is sparse, so this type has never been collected. An
+                // empty guid list must leave it that way, not append an entry the game never wrote.
                 None if !keys.is_empty() => {
                     let (flags, entry_delta) =
                         relic_flag_write(keys, &std::collections::BTreeSet::new());
@@ -1361,11 +1301,9 @@ fn apply_relic_counters(
         .get_mut(&possess_map_key)
         .and_then(props::map_entries_mut)
     {
-        // RelicPossessNumMap[CapturePower] mirrors the scalar. `possess` is `None` only
-        // when the legacy scalar is absent *and* nothing was newly collected -- there is no
-        // value to mirror then, and writing the `0` default would zero a real map entry.
-        // (Unreachable in every real save examined, where the scalar always exists alongside
-        // the map, but the map write must not depend on that.)
+        // RelicPossessNumMap[CapturePower] mirrors the scalar. `possess` is `None` only when
+        // the legacy scalar is absent *and* nothing was newly collected -- there is no value
+        // to mirror then, and writing the `0` default would zero a real map entry.
         if let Some(possess) = possess {
             match entries
                 .iter_mut()
@@ -1381,10 +1319,9 @@ fn apply_relic_counters(
             }
         }
 
-        // Every other type moves by its own net delta, floored at 0. A type with no key
-        // yet gains one only when it ends up holding relics: a 0 here would be a key the
-        // game never wrote. (`ensure_relic_possess_map_keys` separately creates 0-keys for
-        // ranked stats -- a different concern, and it runs after this.)
+        // Every other type moves by its own net delta, floored at 0. A type with no key yet
+        // gains one only when it ends up holding relics: a 0 would be a key the game never
+        // wrote. (`ensure_relic_possess_map_keys` separately creates 0-keys for ranked stats.)
         for (relic_type, net) in nets {
             if relic_type == CAPTURE_POWER_RELIC {
                 continue;
@@ -1456,11 +1393,9 @@ fn relic_type_for_stat(stat_key: &str) -> Option<&'static str> {
 /// `GotStatusPointList` is otherwise stored and never shown. Confirmed in game.
 ///
 /// The value is *unspent relics held*, not the rank, so `0` grants visibility without
-/// granting relics -- the normal state of a player who spent what they collected.
-/// Existing counts are left alone; `apply_relic_counters` owns every collected type.
-///
-/// Rank `0` creates nothing: the UI sends every relic key on every save.
-/// Conditional on the map existing, so a pre-1.0 save never gains one.
+/// granting relics. Existing counts are left alone; `apply_relic_counters` owns every
+/// collected type. Rank `0` creates nothing, and the map must already exist, so a pre-1.0
+/// save never gains one.
 fn ensure_relic_possess_map_keys(player_sav: &mut crate::ue::Save, points: &OrderedMap<String, i64>) {
     let Ok(save_data) = save_data_props_mut(player_sav) else {
         return;
@@ -1493,8 +1428,7 @@ fn ensure_relic_possess_map_keys(player_sav: &mut crate::ue::Save, points: &Orde
         {
             continue;
         }
-        // The map's declared key type is EnumProperty; a NameProperty would not read
-        // back as a relic type.
+        // The map's declared key type is EnumProperty; a NameProperty would not read back as a relic type.
         entries.push(crate::ue::MapEntry {
             key: props::enum_property(relic_type),
             value: props::int_property(0),
@@ -1530,13 +1464,10 @@ pub fn ensure_player_sav_schemas(player_sav: &mut crate::ue::Save) {
     }
 }
 
-/// A player who has never started or completed a quest carries no schema for either
-/// array. Element fields are looked up at a flat `<ArrayPath>.<FieldName>` path, so
-/// the ordered array's four need entries of their own.
-///
-/// The names are the ones `apply_player_dto` resolved from the save -- a 1.0 save
-/// spells the ordered array `OrderedQuestArray_FullRelease`, a pre-1.0 save the bare
-/// form -- so the schema must follow the name that was actually written.
+/// A player who has never started or completed a quest carries no schema for either array.
+/// Element fields are looked up at a flat `<ArrayPath>.<FieldName>` path, so the ordered
+/// array's four need entries of their own. The names are the ones `apply_player_dto`
+/// resolved from the save, so the schema must follow the name that was actually written.
 fn ensure_player_quest_array_schemas(
     player_sav: &mut crate::ue::Save,
     completed_quest_array: &str,
@@ -1593,13 +1524,11 @@ fn ensure_player_quest_array_schemas(
     );
 }
 
-/// `Ok(false)` when the player is their guild's admin -- an admin cannot be
-/// deleted, and nothing is touched. `Err` when `player_id` isn't loaded, before
-/// any mutation.
+/// `Ok(false)` when the player is their guild's admin -- an admin cannot be deleted, and
+/// nothing is touched. `Err` when `player_id` isn't loaded, before any mutation.
 ///
-/// The guild lookup is scoped to already-LOADED guilds. A player whose guild was
-/// never loaded this session is treated as guildless: no admin check, no
-/// guild-handle removal.
+/// The guild lookup is scoped to already-LOADED guilds. A player whose guild was never
+/// loaded this session is treated as guildless: no admin check, no guild-handle removal.
 pub fn delete_player(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1639,9 +1568,8 @@ pub fn delete_player(
         progress(&format!(
             "Deleting player {nickname} from guild {guild_name}"
         ));
-        // Drop the player's own character handle and their member row. uesave
-        // re-serializes the structured guild on save, so removing the row in
-        // place is the whole write -- no blob re-encode.
+        // Drop the player's own character handle and their member row. uesave re-serializes
+        // the structured guild on save, so removing the row in place is the whole write.
         let entries = world::group_map_mut(&mut session.level)?;
         if let Some(group_data) = super::guild_tail::entry_group_data_mut(&mut entries[entry_index])
         {
@@ -1675,15 +1603,13 @@ pub fn delete_player(
     Ok(true)
 }
 
-/// Deletes every pal the player's own pal box and party reference, then the
-/// player's character-map entry, file ref, and `LoadedPlayer`. Returns the five
-/// item-container ids and two character-container ids the CALLER must still
-/// delete -- both `delete_player` and `guild::delete_guild_and_players` use this.
+/// Deletes every pal the player's own pal box and party reference, then the player's
+/// character-map entry, file ref, and `LoadedPlayer`. Returns the five item-container ids
+/// and two character-container ids the CALLER must still delete.
 ///
 /// Does NOT remove the deleted pals' guild character handles, so their
-/// `individual_character_handle_ids` entries are left dangling in the guild
-/// tail. (Base pals, deleted via `pal::delete_guild_pals`, DO get theirs
-/// cleaned up -- the asymmetry is intentional.)
+/// `individual_character_handle_ids` entries are left dangling in the guild tail. (Base
+/// pals, deleted via `pal::delete_guild_pals`, DO get theirs cleaned up -- intentional.)
 pub(crate) fn delete_player_and_pals_for_guild(
     session: &mut SaveSession,
     _game_data: &GameData,
@@ -1832,9 +1758,8 @@ mod tests {
         GameData::load(&json_dir).expect("data dir")
     }
 
-    /// The documented invariant (`apply_relic_counters`'s doc comment):
-    /// the legacy flat flags equal the CapturePower by-type flag set. Checked
-    /// here against a real 1.0 save, not synthetic data.
+    /// The documented invariant: the legacy flat flags equal the CapturePower by-type flag
+    /// set. Checked here against a real 1.0 save, not synthetic data.
     #[test]
     fn collected_relics_capture_power_matches_collected_effigies_on_real_save() {
         let data = game_data();
@@ -1869,8 +1794,7 @@ mod tests {
         );
     }
 
-    /// A pre-1.0 save carries no `RelicObtainForInstanceFlagByType` and must read
-    /// as an empty map, never an error.
+    /// A pre-1.0 save carries no `RelicObtainForInstanceFlagByType` and must read as an empty map.
     #[test]
     fn collected_relics_is_empty_map_on_pre_1_0_save() {
         let data = game_data();
@@ -1955,9 +1879,8 @@ mod tests {
         );
     }
 
-    /// Contrast case: non-consecutive "None" rows are both removed -- there is
-    /// no shift for them to hide behind. Bounds the skip to exactly the
-    /// consecutive case.
+    /// Contrast case: non-consecutive "None" rows are both removed -- no shift to hide
+    /// behind. Bounds the skip to exactly the consecutive case.
     #[test]
     fn apply_status_points_removes_non_consecutive_none_rows_normally() {
         let mut save_parameter = Properties::default();

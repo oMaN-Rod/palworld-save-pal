@@ -25,13 +25,11 @@ pub fn base_camp_location(entry: &crate::ue::MapEntry) -> Option<(f64, f64, f64)
     Some((t.x.0, t.y.0, t.z.0))
 }
 
-/// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector
-/// container_id)`.
+/// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector container_id)`.
 ///
-/// `uesave` registers `BaseCampSaveData.WorkerDirector.RawData` as a generic
-/// `Struct(None)` hint, which it never decodes, so the property arrives as a
-/// raw byte array. `palbin::worker_director_container_id` bounds-checks and
-/// parses that fixed 118-byte layout.
+/// `uesave` registers `BaseCampSaveData.WorkerDirector.RawData` as a generic `Struct(None)`
+/// hint it never decodes, so the property arrives as a raw byte array;
+/// `palbin::worker_director_container_id` bounds-checks and parses that fixed 118-byte layout.
 pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
     let value_properties = props::struct_props(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
@@ -47,11 +45,9 @@ pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uu
     Some((guild_id, container_id))
 }
 
-/// The guild whose member list contains `player_id`, via a cached
-/// `player uid -> guild id` map built on first call.
-///
-/// A guild group whose tail doesn't decode contributes no entries rather than
-/// aborting the scan: save data is untrusted, so malformed entries are skipped.
+/// The guild whose member list contains `player_id`, via a cached `player uid -> guild id`
+/// map built on first call. A guild group whose tail doesn't decode contributes no entries
+/// rather than aborting the scan: save data is untrusted.
 pub fn find_player_guild_id(
     session: &mut crate::session::SaveSession,
     player_id: uuid::Uuid,
@@ -94,8 +90,7 @@ pub fn guild_entry_index(
         .position(|entry| props::as_uuid(&entry.key) == Some(guild_id)))
 }
 
-/// `GuildExtraSaveDataMap` is optional in the save format, so a `None` result
-/// means either "no such map" or "no such guild in it".
+/// `GuildExtraSaveDataMap` is optional in the save format, so `None` means either "no such map" or "no such guild in it".
 pub fn guild_extra_entry_index(
     session: &SaveSession,
     guild_id: uuid::Uuid,
@@ -122,8 +117,7 @@ fn guild_extra_lab(
     }
 }
 
-/// The guild chest's container id, from
-/// `GuildExtraSaveDataMap[i].GuildItemStorage.RawData.container_id`.
+/// The guild chest's container id, from `GuildExtraSaveDataMap[i].GuildItemStorage.RawData.container_id`.
 fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option<uuid::Uuid> {
     let entries = world::guild_extra_map(&session.level).ok().flatten()?;
     let value_props = props::struct_props(&entries.get(extra_index)?.value)?;
@@ -137,9 +131,8 @@ fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option
     }
 }
 
-/// The container a base pal sits in, via `SaveParameter.SlotId.ContainerId.ID`.
-///
-/// Only the `"SlotId"` spelling is accepted here -- deliberately narrower than
+/// The container a base pal sits in, via `SaveParameter.SlotId.ContainerId.ID`. Only the
+/// `"SlotId"` spelling is accepted here -- deliberately narrower than
 /// `pal::read_save_parameter_dto`, which also falls back to `"SlotID"`.
 pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
     let slot = pal::param(save_parameter, "SlotId").and_then(props::struct_props)?;
@@ -150,9 +143,8 @@ pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<u
         .and_then(props::as_uuid)
 }
 
-/// Groups every `MapObjectSaveData` element by its
-/// `Model.RawData.base_camp_id_belong_to`, so a base's map objects resolve in
-/// O(1) instead of rescanning the whole array once per base.
+/// Groups every `MapObjectSaveData` element by `Model.RawData.base_camp_id_belong_to`, so
+/// a base's map objects resolve in O(1) instead of rescanning the array once per base.
 fn map_object_properties_by_base_id(
     map_objects: &[StructValue],
 ) -> HashMap<uuid::Uuid, Vec<&Properties>> {
@@ -170,7 +162,6 @@ fn map_object_properties_by_base_id(
     index
 }
 
-/// A `MapObjectSaveData` element's typed `Model.RawData`.
 fn map_object_model(
     object_props: &Properties,
 ) -> Option<&crate::ue::games::palworld::PalMapModel> {
@@ -184,10 +175,8 @@ fn map_object_model(
     }
 }
 
-/// The placed structures of `base_id`, as read-only geometry for the world map.
-///
-/// An element that carries no `MapObjectId` or no typed `Model.RawData` is
-/// skipped: one malformed entry must not cost the caller the rest of the base.
+/// The placed structures of `base_id`. An element carrying no `MapObjectId` or no typed
+/// `Model.RawData` is skipped: one malformed entry must not cost the rest of the base.
 pub fn base_structures(session: &SaveSession, base_id: uuid::Uuid) -> Vec<BaseStructureDto> {
     let Ok(Some(map_objects)) = world::map_object_values(&session.level) else {
         return Vec::new();
@@ -229,9 +218,8 @@ pub fn base_structures(session: &SaveSession, base_id: uuid::Uuid) -> Vec<BaseSt
         .collect()
 }
 
-/// Flattens a placed structure's rotation quaternion to its yaw about Z.
-/// Placed structures are yaw-only in practice, so the pitch/roll terms carry
-/// nothing the map can render.
+/// Flattens a placed structure's rotation quaternion to its yaw about Z: placed structures
+/// are yaw-only in practice, so the pitch/roll terms carry nothing the map can render.
 fn yaw_from_quat(x: f64, y: f64, z: f64, w: f64) -> f64 {
     (2.0 * (w * z + x * y)).atan2(1.0 - 2.0 * (y * y + z * z))
 }
@@ -250,9 +238,8 @@ fn module_target_container_id(raw_data: &Property) -> Option<uuid::Uuid> {
     }
 }
 
-/// Loads a guild's full detail DTO. `None` when the guild id doesn't resolve,
-/// or when it has no `GuildExtraSaveDataMap` entry (a guild without one cannot
-/// be loaded at all).
+/// Loads a guild's full detail DTO. `None` when the guild id doesn't resolve, or when it
+/// has no `GuildExtraSaveDataMap` entry -- a guild without one cannot be loaded at all.
 pub fn get_guild_details(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -293,8 +280,7 @@ fn build_guild_dto(
             return Ok(None);
         };
         let players: Vec<uuid::Uuid> = guild_tail::guild_player_uids(guild);
-        // The admin is the first member row in the guild tail; an empty member
-        // list is a normal "no admin" case, not an error.
+        // The admin is the first member row in the guild tail; an empty member list is a normal "no admin".
         let admin = players.first().copied();
         (
             guild.guild_name.clone(),
@@ -396,8 +382,7 @@ fn build_guild_dto(
             })
             .unwrap_or((None, None, None));
 
-        // A base's storage containers are its map objects that carry an
-        // ItemContainer module.
+        // A base's storage containers are its map objects that carry an ItemContainer module.
         let mut storage_containers: OrderedMap<uuid::Uuid, ItemContainerDto> = OrderedMap::new();
         let base_map_objects = map_object_index.get(&base_id).unwrap_or(&empty_map_objects);
         for object_props in base_map_objects.iter().copied() {
@@ -485,14 +470,11 @@ fn build_guild_dto(
     }))
 }
 
-/// Fully replaces the guild's lab `research_info`, leaving
-/// `current_research_id` and `trailing_bytes` alone. Writes only into
-/// `GuildExtraSaveDataMap`'s `Lab.RawData`, never the guild tail.
-///
-/// `Err(GuildNotFound)` only when the guild id itself is not loaded. Once it
-/// resolves, every other failure (missing extra entry, missing `Lab`, untyped
-/// `Lab.RawData`) is a silent no-op. `work_amount` narrows to `f32` because the
-/// save persists it as IEEE-754 single precision.
+/// Fully replaces the guild's lab `research_info`, leaving `current_research_id` and
+/// `trailing_bytes` alone. Writes only into `GuildExtraSaveDataMap`'s `Lab.RawData`, never
+/// the guild tail. `Err(GuildNotFound)` only when the guild id itself is not loaded; once
+/// it resolves, every other failure is a silent no-op. `work_amount` narrows to `f32`
+/// because the save persists it as IEEE-754 single precision.
 pub fn update_lab_research(
     session: &mut SaveSession,
     guild_id: uuid::Uuid,
@@ -536,9 +518,8 @@ pub fn update_lab_research(
 }
 
 /// The item-container ids that genuinely belong to `base_id`'s own storage.
-/// `containers::apply_base_dto` uses this to reject a client-supplied
-/// `storage_containers` key that doesn't belong to this base. An unresolvable
-/// `base_id` yields an empty set rather than an error.
+/// `containers::apply_base_dto` uses this to reject a client-supplied `storage_containers`
+/// key that doesn't belong to this base.
 pub(crate) fn base_storage_container_ids(
     session: &SaveSession,
     base_id: uuid::Uuid,
@@ -595,8 +576,7 @@ pub fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Option<uui
     guild_chest_container_id(session, extra_index)
 }
 
-/// `_game_data` is unused here; the whole `update_*` family shares one uniform
-/// `(session, game_data, modified, progress)` signature.
+/// `_game_data` is unused here; the whole `update_*` family shares one uniform signature.
 pub fn update_guilds(
     session: &mut SaveSession,
     _game_data: &GameData,
@@ -626,16 +606,14 @@ pub fn apply_guild_dto(
         let Some(guild) = guild_tail::as_guild_mut(group_data) else {
             return Err(CoreError::Parse("guild group data untyped".into()));
         };
-        // An absent OR empty name means "leave it alone", per this API's
-        // contract.
+        // An absent OR empty name means "leave it alone", per this API's contract.
         if let Some(name) = &dto.name {
             if !name.is_empty() {
                 guild.guild_name = name.clone();
             }
         }
-        // Likewise level 0 means "leave it alone". uesave re-serializes the
-        // structured guild on save, so mutating the field in place is the whole
-        // write -- no blob re-encode needed.
+        // Likewise level 0 means "leave it alone". uesave re-serializes the structured
+        // guild on save, so mutating the field in place is the whole write.
         if let Some(level) = dto.base_camp_level {
             if level != 0 {
                 guild.base_camp_level = level;
@@ -647,8 +625,6 @@ pub fn apply_guild_dto(
             super::containers::apply_base_dto(session, *base_id, base_dto)?;
         }
     }
-    // Route the chest edit through the id resolved from the save, not the
-    // client-supplied `dto.guild_chest.id`.
     if dto.guild_chest.is_some() {
         if let Some(chest_id) = guild_chest_id(session, guild_id) {
             if let Some(chest_dto) = &dto.guild_chest {
@@ -659,15 +635,12 @@ pub fn apply_guild_dto(
     Ok(())
 }
 
-/// Delete a `MapObjectSaveData` element when `Model.RawData.group_id_belong_to`
-/// is `guild_id`, OR `Model.RawData.build_player_uid` is one of `player_ids`,
-/// OR (ItemBooth concrete models only) `private_lock_player_uid` or any
-/// `trade_infos[].seller_player_uid` is one of `player_ids`.
+/// Delete a `MapObjectSaveData` element when `Model.RawData.group_id_belong_to` is
+/// `guild_id`, OR `Model.RawData.build_player_uid` is one of `player_ids`, OR (ItemBooth
+/// concrete models only) `private_lock_player_uid` or any `trade_infos[].seller_player_uid`.
 ///
-/// A `ConcreteModel.ModuleMap` `PasswordLock` module recording a target player
-/// is deliberately NOT a delete trigger: the game never treats a lock record as
-/// ownership, and honoring it here would destroy map objects other players
-/// merely had access to.
+/// A `ConcreteModel.ModuleMap` `PasswordLock` module recording a target player is
+/// deliberately NOT a trigger: the game never treats a lock record as ownership.
 pub(crate) fn should_delete_map_object(
     map_object: &StructValue,
     guild_id: Option<uuid::Uuid>,
@@ -697,7 +670,6 @@ pub(crate) fn should_delete_map_object(
         return true;
     }
 
-    // ItemBooth edge cases: private lock owner, or any trade-info seller.
     let Some(concrete_props) = object_props
         .0
         .get(&PropertyKey::from("ConcreteModel"))
@@ -729,13 +701,11 @@ pub(crate) fn should_delete_map_object(
 
 /// Deletes a guild, its bases, its map objects, and its loaded members.
 ///
-/// `Err` when `guild_id` isn't loaded. The check reads `session.loaded_guilds`
-/// directly rather than calling `get_guild_details`, which would lazily load an
-/// unloaded guild as a side effect.
+/// `Err` when `guild_id` isn't loaded. The check reads `session.loaded_guilds` directly
+/// rather than calling `get_guild_details`, which would lazily load an unloaded guild.
 ///
-/// Only player containers and base storage containers are collected for
-/// deletion; the guild's own chest container is intentionally left behind as an
-/// orphaned `ItemContainerSaveData` entry.
+/// Only player and base storage containers are collected for deletion; the guild's own
+/// chest container is intentionally left behind as an orphaned entry.
 pub fn delete_guild_and_players(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -765,8 +735,7 @@ pub fn delete_guild_and_players(
     let mut item_container_ids: Vec<uuid::Uuid> = Vec::new();
     let mut character_container_ids: Vec<uuid::Uuid> = Vec::new();
 
-    // An unloaded member is skipped entirely -- their containers and pals are
-    // only knowable from their own loaded `.sav`.
+    // An unloaded member is skipped entirely -- their containers and pals are only knowable from their own `.sav`.
     for player_uid in &guild_players {
         if !session.loaded_players.contains_key(player_uid) {
             continue;
@@ -799,9 +768,8 @@ pub fn delete_guild_and_players(
                 character_container_ids.push(worker_container);
             }
             let base_pal_ids: Vec<uuid::Uuid> = base.pals.iter().map(|(id, _)| *id).collect();
-            // `delete_guild_pals` (not a raw `delete_pal_entry` per id) so each
-            // base pal's `individual_character_handle_ids` entry in the guild
-            // tail is removed too.
+            // `delete_guild_pals`, not a raw `delete_pal_entry` per id, so each base pal's
+            // `individual_character_handle_ids` entry in the guild tail is removed too.
             super::pal::delete_guild_pals(session, guild_id, *base_id, &base_pal_ids)?;
             if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
                 entries.retain(|entry| props::as_uuid(&entry.key) != Some(*base_id));
@@ -824,18 +792,14 @@ pub fn delete_guild_and_players(
     Ok(())
 }
 
-/// Deletes one base -- its structures, item/character containers, pals, and
-/// work entries, plus the `BaseCampSaveData` entry itself -- without touching
-/// the guild that owns it or any of that guild's other bases or players.
+/// Deletes one base -- its structures, item/character containers, pals, and work entries,
+/// plus the `BaseCampSaveData` entry itself -- without touching the guild that owns it.
 ///
-/// `Err` when `base_id` names no `BaseCampSaveData` entry (or one whose owning
-/// guild doesn't resolve). The owning guild is loaded via
-/// [`get_guild_details`] (a no-op if it's already loaded) so `guild.base_ids`
-/// and `guild.map_object_instance_ids_base_camp_points` -- the two guild-tail
-/// lists `place::register_with_guild` writes into on founding a base -- can be
-/// pruned of this base's ids. Skipping that step would leave the guild
-/// pointing at a base camp and Pal Box that no longer exist: the same
-/// dangling-reference class that crashes the game.
+/// `Err` when `base_id` names no `BaseCampSaveData` entry. The owning guild is loaded via
+/// [`get_guild_details`] so `guild.base_ids` and
+/// `guild.map_object_instance_ids_base_camp_points` -- the two guild-tail lists
+/// `place::register_with_guild` writes on founding a base -- can be pruned of this base's
+/// ids. Skipping that leaves the guild pointing at a base camp and Pal Box that are gone.
 pub fn delete_base(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -906,9 +870,8 @@ pub fn delete_base(
         });
     }
 
-    // `delete_guild_pals` (not a raw `delete_pal_entry` per id) so each base
-    // pal's `individual_character_handle_ids` entry in the guild tail is
-    // removed too.
+    // `delete_guild_pals`, not a raw `delete_pal_entry` per id, so each base pal's
+    // `individual_character_handle_ids` entry in the guild tail is removed too.
     super::pal::delete_guild_pals(session, guild_id, base_id, &base_pal_ids)?;
 
     if let Some(entries) = world::base_camp_map_mut(&mut session.level)? {
@@ -1078,8 +1041,6 @@ mod tests {
         assert!(base_guild_and_container(&entry).is_none());
     }
 
-    // ---- find_player_guild_id ----
-
     use crate::session::{SaveKind, SaveSession};
     use crate::ue::games::palworld::PalGroupData;
     use crate::ue::{Header, MapEntry as UMapEntry, PackageVersion, PropertySchemas, Root, Save};
@@ -1157,7 +1118,6 @@ mod tests {
         let guild_id = find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
 
         assert_eq!(guild_id, Some(GUILD_ID.parse().unwrap()));
-        // A second lookup, now against the warm cache, must agree.
         let guild_id_again =
             find_player_guild_id(&mut session, PLAYER_ID.parse().unwrap()).unwrap();
         assert_eq!(guild_id_again, Some(GUILD_ID.parse().unwrap()));
@@ -1182,8 +1142,7 @@ mod tests {
         assert_eq!(guild_id, None);
     }
 
-    /// A `GroupSaveDataMap` entry whose `GroupType` isn't `Guild` (an alliance,
-    /// say) must never be scanned for a player match.
+    /// A `GroupSaveDataMap` entry whose `GroupType` isn't `Guild` must never be scanned for a player match.
     #[test]
     fn find_player_guild_id_ignores_non_guild_groups() {
         let mut value_properties = Properties::default();
@@ -1214,8 +1173,6 @@ mod tests {
         assert_eq!(guild_id, None);
     }
 
-    // ---- base_container_membership ----
-
     fn slot_save_parameter(slot_key: &str, container_id: uuid::Uuid) -> Properties {
         let mut container_struct = Properties::default();
         container_struct.insert("ID", crate::props::guid_property(container_id));
@@ -1242,8 +1199,7 @@ mod tests {
         );
     }
 
-    /// The uppercase spelling `read_save_parameter_dto` accepts must resolve to
-    /// `None` here -- the two lookups genuinely differ.
+    /// The uppercase spelling `read_save_parameter_dto` accepts must resolve to `None` here.
     #[test]
     fn base_container_membership_does_not_fall_back_to_slot_id_uppercase() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
@@ -1255,8 +1211,7 @@ mod tests {
             "base-container membership has no \"SlotID\" fallback"
         );
 
-        // Contrast: `read_save_parameter_dto` DOES resolve the uppercase
-        // spelling.
+        // Contrast: `read_save_parameter_dto` DOES resolve the uppercase spelling.
         let mut with_character_id = save_parameter;
         with_character_id.insert("CharacterID", crate::props::name_property("SheepBall"));
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -1273,14 +1228,11 @@ mod tests {
         );
     }
 
-    /// No slot property at all (neither spelling): a clean `None`, not a panic.
     #[test]
     fn base_container_membership_returns_none_when_no_slot_property_present() {
         let save_parameter = Properties::default();
         assert!(base_container_membership(&save_parameter).is_none());
     }
-
-    // ---- module_target_container_id ----
 
     #[test]
     fn module_target_container_id_resolves_the_item_container_variant() {
@@ -1321,8 +1273,6 @@ mod tests {
         assert!(module_target_container_id(&Property::Bool(true)).is_none());
     }
 
-    // ---- should_delete_map_object ----
-
     fn zero_map_model(
         group_id_belong_to: &str,
         build_player_uid: &str,
@@ -1348,9 +1298,8 @@ mod tests {
         }
     }
 
-    /// A `MapObjectSaveData` element with a real typed `Model.RawData`, and
-    /// an optional `ConcreteModel.RawData` for the ItemBooth/PasswordLock
-    /// cases.
+    /// A `MapObjectSaveData` element with a real typed `Model.RawData`, and an optional
+    /// `ConcreteModel.RawData` for the ItemBooth/PasswordLock cases.
     fn map_object_with_model(
         group_id_belong_to: &str,
         build_player_uid: &str,
@@ -1369,11 +1318,9 @@ mod tests {
         object_props.insert("Model", Property::Struct(StructValue::Struct(model_props)));
         if concrete_raw_data.is_some() || module_map.is_some() {
             let mut concrete_props = Properties::default();
-            // Every real `MapObjectSaveData` element carries a
-            // `ConcreteModel.RawData` whatever its object type, so callers that
-            // only care about `ModuleMap` still get a `BaseModel` fallback here
-            // -- an element with no `RawData` at all is not a shape any real
-            // save produces.
+            // Every real `MapObjectSaveData` element carries a `ConcreteModel.RawData`
+            // whatever its object type, so callers that only care about `ModuleMap` still
+            // get a `BaseModel` fallback: no real save produces an element without one.
             let raw_data = concrete_raw_data.unwrap_or_else(|| {
                 Property::Struct(StructValue::Game(crate::ue::PalStruct::MapConcreteModel(Box::new(
                     crate::ue::games::palworld::PalMapConcreteModel {
@@ -1451,11 +1398,9 @@ mod tests {
         let guild_id: uuid::Uuid = SDM_GUILD.parse().unwrap();
         let object = map_object_with_model(SDM_GUILD, SDM_NIL, None, None);
         assert!(should_delete_map_object(&object, Some(guild_id), &[]));
-        // A different target guild must not match.
         let other: uuid::Uuid = SDM_OTHER_GUILD.parse().unwrap();
         assert!(!should_delete_map_object(&object, Some(other), &[]));
-        // No guild_id argument at all (player-only delete) must not match on
-        // group ownership, regardless of the object's own group.
+        // No guild_id argument at all (player-only delete) must not match on group ownership.
         assert!(!should_delete_map_object(&object, None, &[]));
     }
 
@@ -1484,10 +1429,9 @@ mod tests {
         assert!(should_delete_map_object(&object, None, &[player]));
     }
 
-    /// A map object with no group/builder/item-booth match, but whose
-    /// `ConcreteModel.ModuleMap` carries a `PasswordLock` module recording the
-    /// target player's uid, must NOT be deleted -- a lock record is access, not
-    /// ownership. Pins that the omission is load-bearing.
+    /// A map object whose `ConcreteModel.ModuleMap` carries a `PasswordLock` recording the
+    /// target player's uid, but matches nothing else, must NOT be deleted -- a lock record
+    /// is access, not ownership. Pins that the omission is load-bearing.
     #[test]
     fn should_delete_map_object_never_matches_via_password_lock_module_dead_code() {
         use crate::ue::games::palworld::{
@@ -1537,8 +1481,6 @@ mod tests {
         let empty = StructValue::Struct(Properties::default());
         assert!(!should_delete_map_object(&empty, None, &[]));
     }
-
-    // ---- base_structures ----
 
     const OTHER_BASE_ID: &str = "88888888-8888-8888-8888-888888888888";
     const STRUCTURE_INSTANCE_ID: &str = "a1a1a1a1-1111-2222-3333-444444444444";

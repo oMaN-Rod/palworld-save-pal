@@ -1,13 +1,9 @@
-//! Palworld 1.0 relic types. A relic grants ranks in one status stat; the number of
-//! relics of a type spent determines its rank, via cumulative thresholds in
-//! `data/json/relic_data.json`, and each rank carries a known effect rate.
-//!
-//! A player's `StatusPoint` for a relic-backed stat IS its rank -- verified against
-//! real saves. Nothing here recomputes it; these lookups exist so the UI can clamp
-//! edits to `max_rank` and show the resulting bonus.
+//! Palworld 1.0 relic types. A relic grants ranks in one status stat; rank comes from
+//! the cumulative thresholds in `data/json/relic_data.json`, and a player's
+//! `StatusPoint` for a relic-backed stat IS its rank -- verified against real saves.
 //!
 //! Not to be confused with effigies, which the save format also calls "relics"
-//! (`RelicObtainForInstanceFlag`, `RelicPossessNum`) for historical reasons.
+//! (`RelicObtainForInstanceFlag`, `RelicPossessNum`).
 
 use crate::gamedata::GameData;
 
@@ -53,9 +49,8 @@ fn entry<'a>(data: &'a GameData, relic_key: &str) -> Option<&'a serde_json::Valu
     data.get("relic_data").and_then(|v| v.get(relic_key))
 }
 
-/// Rank earned for having spent `count` relics of `relic_key`, by walking the
-/// cumulative `per_rank` thresholds. `0` for an unknown key or a count below the
-/// first threshold; saturates at `max_rank`.
+/// Rank earned for having spent `count` relics of `relic_key`, walking the cumulative
+/// `per_rank` thresholds; `0` below the first threshold, saturating at `max_rank`.
 pub fn rank_for_count(data: &GameData, relic_key: &str, count: i64) -> i64 {
     let Some(per_rank) = entry(data, relic_key)
         .and_then(|e| e.get("per_rank"))

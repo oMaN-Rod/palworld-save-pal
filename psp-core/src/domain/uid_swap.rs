@@ -18,9 +18,8 @@ const OWNERSHIP_KEYS: [&str; 4] = [
     "private_lock_player_uid",
 ];
 
-/// Retargets both players' UIDs in every guild: character handles (matched by
-/// character instance id), the admin uid, and each member's `player_uid`.
-/// Every swap is bidirectional -- old->new AND new->old in the same pass.
+/// Retargets both UIDs in every guild -- character handles (matched by character
+/// instance id), the admin uid, member `player_uid` -- bidirectionally in one pass.
 fn swap_guild_member_uids(
     level: &mut crate::ue::Save,
     old_uid: Uuid,
@@ -54,9 +53,8 @@ fn swap_guild_member_uids(
 }
 
 impl SaveSession {
-    /// `TransferError::Rejected` is a SOFT rejection: the handler reports it
-    /// as an `{"error": ...}` payload on the normal response, not as a WS
-    /// error frame.
+    /// `TransferError::Rejected` is a SOFT rejection: reported as an
+    /// `{"error": ...}` payload on the normal response, not a WS error frame.
     pub fn swap_player_uids(
         &mut self,
         old_player_uid: Uuid,

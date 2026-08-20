@@ -16,9 +16,8 @@ use crate::ue::{
     Arch, FGuid, MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue, ValueVec,
 };
 
-/// `true` only when `MapObjectId` is still a `Property::Name` -- the
-/// regression the Task 3/6 amendment exists to prevent (`MapObjectId`
-/// silently collapsing to `Property::Byte(Label(..))`).
+/// `true` only when `MapObjectId` is still a `Property::Name` -- guards the regression
+/// where it silently collapses to `Property::Byte(Label(..))`.
 pub fn map_object_id_is_name_property(properties: &Properties) -> bool {
     matches!(
         properties.0.get(&PropertyKey::from("MapObjectId")),
@@ -34,7 +33,6 @@ fn map_object_model(object_props: &Properties) -> Option<&PalMapModel> {
     }
 }
 
-/// Mutable counterpart of `map_object_model`, for remapping.
 pub(crate) fn map_object_model_mut(object_props: &mut Properties) -> Option<&mut PalMapModel> {
     let model = object_props
         .0
@@ -55,10 +53,9 @@ fn map_object_concrete_model(object_props: &Properties) -> Option<&PalMapConcret
     }
 }
 
-/// Mutable counterpart of `map_object_concrete_model`, for remapping. Unlike
-/// `with_concrete_variant_mut` this reaches the `ConcreteModel` struct itself
-/// (its own `instance_id`/`model_instance_id`), not the model-type-specific
-/// `model_data` variant nested inside it.
+/// Mutable counterpart of `map_object_concrete_model`. Unlike `with_concrete_variant_mut`
+/// this reaches the `ConcreteModel` struct itself (its own `instance_id`/
+/// `model_instance_id`), not the model-type-specific `model_data` nested inside it.
 pub(crate) fn map_object_concrete_model_mut(
     object_props: &mut Properties,
 ) -> Option<&mut PalMapConcreteModel<Arch>> {
@@ -72,8 +69,7 @@ pub(crate) fn map_object_concrete_model_mut(
     }
 }
 
-/// Mutable access to a structure's `Model.Connector.RawData`, present only on
-/// structures that can be wired to a neighbor (conveyors, pipes, ...).
+/// Mutable `Model.Connector.RawData` -- present only on structures that can be wired to a neighbor (conveyors, pipes).
 pub(crate) fn map_object_connector_mut(object_props: &mut Properties) -> Option<&mut PalConnector> {
     let model =
         object_props.0.get_mut(&PropertyKey::from("Model")).and_then(props::struct_props_mut)?;
@@ -87,8 +83,7 @@ pub(crate) fn map_object_connector_mut(object_props: &mut Properties) -> Option<
     }
 }
 
-/// Visits the typed `RawData` of every module in a structure's
-/// `ConcreteModel.ModuleMap`, the traversal capture, scrub and remap all need.
+/// Visits the typed `RawData` of every module in a structure's `ConcreteModel.ModuleMap`.
 pub(crate) fn for_each_module_raw(
     properties: &Properties,
     mut visit: impl FnMut(&PalMapConcreteModelModule),
@@ -113,7 +108,6 @@ pub(crate) fn for_each_module_raw(
     }
 }
 
-/// Mutable counterpart of `for_each_module_raw`.
 pub(crate) fn for_each_module_raw_mut(
     properties: &mut Properties,
     mut visit: impl FnMut(&mut PalMapConcreteModelModule),
@@ -142,9 +136,8 @@ pub(crate) fn for_each_module_raw_mut(
     }
 }
 
-/// Every structure's `Model.RawData.instance_id` -- the identity that must be
-/// unique and freshly generated before a blueprint is placed. One entry per
-/// structure that has a `Model` at all.
+/// Every structure's `Model.RawData.instance_id` -- the identity that must be unique and
+/// freshly generated before a blueprint is placed.
 pub fn structure_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     blueprint
         .structures
@@ -153,8 +146,6 @@ pub fn structure_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
         .collect()
 }
 
-/// Every structure's `ConcreteModel.RawData.instance_id`, one entry per
-/// structure that has a `ConcreteModel` at all.
 pub fn structure_concrete_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     blueprint
         .structures
@@ -165,8 +156,7 @@ pub fn structure_concrete_instance_ids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
         .collect()
 }
 
-/// A `WorkSaveData` element's `RawData.base_data.id` -- the work's own
-/// identity. `None` for a work type that serializes no work base.
+/// A `WorkSaveData` element's `RawData.base_data.id`; `None` for a work type that serializes no work base.
 pub fn work_base_id(value: &StructValue) -> Option<Uuid> {
     let StructValue::Struct(work_props) = value else { return None };
     match work_props.0.get(&PropertyKey::from("RawData"))? {
@@ -177,10 +167,8 @@ pub fn work_base_id(value: &StructValue) -> Option<Uuid> {
     }
 }
 
-/// `true` when a structure's `Model.RawData.concrete_model_instance_id`
-/// still names its own `ConcreteModel.RawData.instance_id` (or both are nil).
-/// Used to catch a remap that regenerates one side of the pair but not the
-/// other.
+/// `true` when a structure's `Model.RawData.concrete_model_instance_id` still names its
+/// own `ConcreteModel.RawData.instance_id` (or both are nil) -- catches a half-remap.
 pub fn model_concrete_reference_resolves(structure: &BlueprintStructure) -> bool {
     let model_side = map_object_model(&structure.properties)
         .map(|m| props::guid_to_uuid(&m.concrete_model_instance_id))
@@ -198,8 +186,6 @@ pub fn first_build_player_uid(blueprint: &BaseBlueprint) -> Option<Uuid> {
         .find_map(|s| map_object_model(&s.properties).map(|m| props::guid_to_uuid(&m.build_player_uid)))
 }
 
-/// Every structure's `Model.RawData.build_player_uid`, one entry per
-/// structure that has a `Model` at all.
 pub fn structure_build_player_uids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
     blueprint
         .structures
@@ -209,11 +195,9 @@ pub fn structure_build_player_uids(blueprint: &BaseBlueprint) -> Vec<Uuid> {
         .collect()
 }
 
-/// Every player-identifying UID a structure's `ConcreteModel` may carry: the
-/// per-variant ownership/lock fields plus the `ModuleMap`'s `PasswordLock`
-/// player list. Used by tests to assert none survive scrubbing; deliberately
-/// separate from `scrub`'s own logic so a bug in one is unlikely to be
-/// mirrored in the other.
+/// Every player-identifying UID a structure's `ConcreteModel` may carry: the per-variant
+/// ownership/lock fields plus the `ModuleMap`'s `PasswordLock` player list. Deliberately
+/// separate from `scrub`'s own logic, so a bug in one is unlikely to be mirrored here.
 pub fn structure_concrete_player_uids(properties: &Properties) -> Vec<Uuid> {
     let mut uids = Vec::new();
     let Some(concrete) =
@@ -253,10 +237,8 @@ pub fn structure_concrete_player_uids(properties: &Properties) -> Vec<Uuid> {
             PalMapConcreteModelVariant::PalEgg(model) => {
                 uids.push(props::guid_to_uuid(&model.pickupdable_player_uid));
             }
-            // Exhaustive for the same reason `scrub_concrete_variant` is: a
-            // variant newly given a player uid there but missed here would be
-            // invisible to the tests that verify the scrub, which is worse than
-            // no test at all.
+            // Exhaustive for the same reason `scrub_concrete_variant` is: a variant newly
+            // given a player uid there but missed here would be invisible to the tests.
             PalMapConcreteModelVariant::CharacterTeamMission(_)
             | PalMapConcreteModelVariant::FarmSkillFruits(_)
             | PalMapConcreteModelVariant::SupplyStorage(_)
@@ -292,10 +274,9 @@ pub fn structure_concrete_player_uids(properties: &Properties) -> Vec<Uuid> {
     uids
 }
 
-/// A captured `CharacterSaveParameterMap` entry's three player-identifying
-/// UIDs: the key's `PlayerUId`, the `SaveParameter` bag's `OwnerPlayerUId`,
-/// and every UID in `OldOwnerPlayerUIds`. Missing fields read as the nil
-/// UUID. Used by tests to assert scrubbing left nothing behind.
+/// A captured `CharacterSaveParameterMap` entry's three player-identifying UIDs: the key's
+/// `PlayerUId`, the `SaveParameter` bag's `OwnerPlayerUId`, and every UID in
+/// `OldOwnerPlayerUIds`. Missing fields read as the nil UUID.
 pub fn character_entry_player_uids(entry: &MapEntry) -> (Uuid, Uuid, Vec<Uuid>) {
     let key_uid = world::entry_player_uid(entry).unwrap_or(Uuid::nil());
     let save_parameter = world::entry_save_parameter(entry);
@@ -329,10 +310,9 @@ pub fn capture(
     Ok(blueprint)
 }
 
-/// What `capture` scrubs, before it does. Exists for the positive controls that
-/// prove the scrub works, and is reachable only from a build that asked for
-/// test fixtures: an ordinary consumer one identifier away from it would ship a
-/// blueprint carrying the source save's players.
+/// What `capture` scrubs, before it does. Reachable only from a build that asked for test
+/// fixtures: an ordinary consumer one identifier away from it would ship a blueprint
+/// carrying the source save's players.
 #[cfg(any(test, feature = "test-fixtures"))]
 pub fn capture_unscrubbed(
     session: &SaveSession,
@@ -372,11 +352,9 @@ fn capture_inner(
                 transform::to_relative(&anchor, &model.initial_transform_cache);
 
             let (module_item_ids, module_character_ids) = module_target_container_ids(object_props);
-            // Referential integrity: a captured structure that references a
-            // container must ship with that container, or the game crashes
-            // dereferencing it (UPalMapObjectProductItemModel::IsWorkable). The
-            // container_contents / housed_pals options decide only whether the
-            // stored items / pals survive, not whether the container exists.
+            // Referential integrity: a captured structure that references a container must
+            // ship with that container, or the game crashes dereferencing it
+            // (UPalMapObjectProductItemModel::IsWorkable).
             push_unique(&mut item_container_ids, &module_item_ids);
             push_unique(&mut housed_container_ids, &module_character_ids);
 
@@ -422,10 +400,9 @@ fn capture_inner(
         }
     }
 
-    // The worker container travels at every layer, emptied when the layer takes
-    // no pals: the base camp's `WorkerDirector` is what names it, so a base
-    // placed without one has no worker container at all -- its workers resolve
-    // to a nil id.
+    // The worker container travels at every layer, emptied when the layer takes no pals:
+    // the base camp's `WorkerDirector` is what names it, so a base placed without one has
+    // no worker container at all -- its workers resolve to a nil id.
     let mut character_containers = Vec::new();
     let mut character_instance_ids: Vec<Uuid> = Vec::new();
     if let Some(base_entry) = base_camp_entry(session, base_id)? {
@@ -514,9 +491,8 @@ fn push_unique(target: &mut Vec<Uuid>, ids: &[Uuid]) {
     }
 }
 
-/// `target_container_id` from every `ItemContainer`/`CharacterContainer`
-/// module in a structure's `ConcreteModel.ModuleMap`, as `(item_ids,
-/// character_ids)`.
+/// `target_container_id` from every `ItemContainer`/`CharacterContainer` module in a
+/// structure's `ConcreteModel.ModuleMap`, as `(item_ids, character_ids)`.
 pub fn module_target_container_ids(properties: &Properties) -> (Vec<Uuid>, Vec<Uuid>) {
     let mut item_ids = Vec::new();
     let mut character_ids = Vec::new();
@@ -538,10 +514,9 @@ pub fn container_entry_id(entry: &MapEntry) -> Option<Uuid> {
     props::get(props::struct_props(&entry.key)?, &["ID"]).and_then(props::as_uuid)
 }
 
-/// The source base's origin world position and yaw, read from the captured
-/// `base_camp` transform. Yaw comes from the Z-axis rotation quat; a base
-/// carrying pitch/roll (none do) would lose those, which is acceptable -- the
-/// full per-structure rotations still travel in `structures`.
+/// The source base's origin world position and yaw, read from the captured `base_camp`
+/// transform. Yaw comes from the Z-axis rotation quat; a base carrying pitch/roll (none
+/// do) would lose those -- the full per-structure rotations still travel in `structures`.
 pub fn source_origin(blueprint: &BaseBlueprint) -> Option<(f64, f64, f64, f64)> {
     let base_camp = blueprint.base_camp.as_ref()?;
     let Some(Property::Struct(StructValue::Game(PalStruct::BaseCamp(raw)))) =
@@ -598,9 +573,9 @@ pub fn character_container_slot_instance_ids(entry: &MapEntry) -> Vec<Uuid> {
     ids
 }
 
-/// Empties every slot of a `CharacterContainerSaveData` entry without removing
-/// any: the slot count is the base's worker capacity, which the blueprint keeps
-/// even at a layer that takes none of the pals occupying them.
+/// Empties every slot of a `CharacterContainerSaveData` entry without removing any: the
+/// slot count is the base's worker capacity, which the blueprint keeps even at a layer
+/// that takes none of the pals occupying them.
 fn empty_character_container_slots(entry: &mut MapEntry) {
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
     let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
@@ -617,9 +592,8 @@ fn empty_character_container_slots(entry: &mut MapEntry) {
     }
 }
 
-/// Empties every slot in an `ItemContainerSaveData` entry: the container still
-/// travels with the blueprint (a structure that references it must find it in
-/// the placed save), but carries no items when `container_contents` is off.
+/// Empties every slot in an `ItemContainerSaveData` entry: the container still travels
+/// (a structure referencing it must find it in the placed save) but carries no items.
 fn empty_item_container_slots(entry: &mut MapEntry) {
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else { return };
     let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
@@ -650,17 +624,15 @@ pub fn dynamic_item_local_id(value: &StructValue) -> Option<Uuid> {
     }
 }
 
-/// `BaseCampSaveData`'s full `MapEntry` for `base_id`, needed (rather than
-/// just its `Properties`) so `guild::base_guild_and_container` can read the
-/// `WorkerDirector` raw byte blob alongside `RawData`.
+/// `BaseCampSaveData`'s full `MapEntry` for `base_id`, needed rather than just its
+/// `Properties` so `guild::base_guild_and_container` can read the `WorkerDirector` blob.
 fn base_camp_entry(session: &SaveSession, base_id: Uuid) -> Result<Option<&MapEntry>, CoreError> {
     Ok(world::base_camp_map(&session.level)?
         .and_then(|entries| entries.iter().find(|entry| props::as_uuid(&entry.key) == Some(base_id))))
 }
 
-/// Locates `base_id`'s `BaseCampSaveData` entry and reads its typed
-/// `PalStruct::BaseCamp` raw data: the anchor transform, footprint radius,
-/// and display name every captured structure is made relative to.
+/// Locates `base_id`'s `BaseCampSaveData` entry and reads its typed `PalStruct::BaseCamp`:
+/// the anchor transform, footprint radius, and name every structure is made relative to.
 fn base_camp_of(
     session: &SaveSession,
     base_id: Uuid,
@@ -752,9 +724,8 @@ fn clear_production_progress(properties: &mut Properties) {
     });
 }
 
-/// Clears the private-lock ownership marker on lockable concrete-model
-/// variants, and the `ConcreteModel.ModuleMap`'s `PasswordLock`/`Switch`
-/// module state.
+/// Clears the private-lock ownership marker on lockable concrete-model variants, and the
+/// `ConcreteModel.ModuleMap`'s `PasswordLock`/`Switch` module state.
 fn clear_access_config(properties: &mut Properties) {
     with_concrete_variant_mut(properties, |variant| match variant {
         PalMapConcreteModelVariant::ItemChest(model) => {

@@ -1,10 +1,8 @@
 //! Round-trip and drift guards over the real WorldOption corpus.
 //!
-//! The corpus is 7 committed fixtures under `tests/fixtures/world_option/`, copied
-//! from real saves. It spans 89..=119 keys (observed counts: 89, 108, 119, 119, 119,
-//! 119, 119): real saves are SPARSE, and `Version` (always 101) does not discriminate.
-//! Real saves in the wild have been seen as low as 87 keys, though no fixture here
-//! goes that low.
+//! The corpus is 7 committed fixtures under `tests/fixtures/world_option/`, copied from
+//! real saves. It spans 89..=119 keys (89, 108, 119, 119, 119, 119, 119): real saves are
+//! SPARSE, `Version` (always 101) does not discriminate, and the wild goes as low as 87.
 
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -14,10 +12,8 @@ use super::{
     tag_for, WoKind, WorldOptionPatch, WORLD_OPTION_SETTINGS,
 };
 
-/// The 7 committed `tests/fixtures/world_option/*.sav` fixtures, sorted.
-///
-/// Panics if the fixture directory is missing or does not contain exactly 7 `.sav`
-/// files, so a broken checkout fails loudly instead of silently skipping tests.
+/// The 7 committed `tests/fixtures/world_option/*.sav` fixtures, sorted. Panics unless
+/// exactly 7 are present, so a broken checkout fails loudly instead of skipping tests.
 fn corpus() -> Vec<PathBuf> {
     let dir =
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/world_option");
@@ -119,7 +115,6 @@ fn world_option_table_matches_corpus() {
     let extra: Vec<&&str> = table.keys().filter(|k| !recorded.contains_key(**k)).collect();
     assert!(extra.is_empty(), "table has settings the corpus never records: {extra:?}");
 
-    // Each table tag must equal what the real files record.
     for (key, kind) in WORLD_OPTION_SETTINGS {
         let expected = serde_json::to_string(&tag_for(*kind)).unwrap();
         let actual = &recorded[*key];
@@ -148,7 +143,6 @@ fn editing_an_absent_key_on_a_sparse_save_writes_cleanly() {
     ensure_world_option_schemas(&mut save);
     let before = read_settings(&save).len();
 
-    // Pick a key this file genuinely lacks.
     let present: Vec<String> = read_settings(&save).into_iter().map(|e| e.key).collect();
     let absent = WORLD_OPTION_SETTINGS
         .iter()
@@ -173,9 +167,9 @@ fn editing_an_absent_key_on_a_sparse_save_writes_cleanly() {
     assert_eq!(read_settings(&reparsed).len(), before + 1);
 }
 
-/// Pins the gamepass container plumbing that Task 8 depends on: a WorldOption
-/// container built by `fixture::build_wgs_tree` round-trips byte-for-byte through
-/// `format::ContainerIndex` and `store::read_first_blob`.
+/// Pins the gamepass container plumbing: a WorldOption container built by
+/// `fixture::build_wgs_tree` round-trips byte-for-byte through `format::ContainerIndex`
+/// and `store::read_first_blob`.
 #[test]
 fn gamepass_fixture_round_trips_world_option_container() {
     let files = corpus();

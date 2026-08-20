@@ -15,9 +15,8 @@ use super::guild_tail;
 
 const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 
-/// `entry.value.RawData(.PalCharacterData).object.SaveParameter` — the
-/// property bag every other accessor in this module reads from. A missing or
-/// mistyped link anywhere in the chain yields `None`; callers skip the entry.
+/// `entry.value.RawData(.PalCharacterData).object.SaveParameter` -- the property bag
+/// every other accessor here reads from. A broken link anywhere yields `None`.
 pub(crate) fn save_parameter(entry: &crate::ue::MapEntry) -> Option<&crate::ue::Properties> {
     let value_properties = props::struct_properties(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
@@ -39,9 +38,8 @@ fn player_uid_from_key(entry: &crate::ue::MapEntry) -> Option<Uuid> {
     props::get_in(&entry.key, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
-/// A `GroupSaveDataMap` entry's decoded guild, when it is a Guild-type group
-/// whose `RawData` decodes cleanly. A nil guild id is deliberately kept here;
-/// only `build_guild_summaries` filters it out.
+/// A `GroupSaveDataMap` entry's decoded guild, when it is a Guild-type group. A nil
+/// guild id is deliberately kept here; only `build_guild_summaries` filters it out.
 fn guild_tail_entry(entry: &crate::ue::MapEntry) -> Option<(Uuid, &PalGuildGroup)> {
     let value_properties = props::struct_properties(&entry.value)?;
     let group_type = props::get(value_properties, &["GroupType"]).and_then(props::as_enum)?;
@@ -70,8 +68,7 @@ pub(crate) fn build_player_guild_map(group_entries: &[crate::ue::MapEntry]) -> H
     player_guild_map
 }
 
-/// Counts every non-player character entry against its `OwnerPlayerUId`,
-/// including the nil UUID (wild/unowned pals get their own bucket).
+/// Counts every non-player entry against its `OwnerPlayerUId`, nil included -- wild/unowned pals get their own bucket.
 pub(crate) fn build_pal_owner_counts(character_entries: &[crate::ue::MapEntry]) -> HashMap<Uuid, i64> {
     let mut owner_counts = HashMap::new();
     for entry in character_entries {
@@ -90,8 +87,6 @@ pub(crate) fn build_pal_owner_counts(character_entries: &[crate::ue::MapEntry]) 
     owner_counts
 }
 
-/// Player character entries with a non-nil `PlayerUId`, paired with their
-/// save parameter bag.
 pub(crate) fn collect_player_entries(
     character_entries: &[crate::ue::MapEntry],
 ) -> Vec<(Uuid, &crate::ue::Properties)> {
@@ -110,8 +105,7 @@ pub(crate) fn collect_player_entries(
     players
 }
 
-/// Player-facing nickname: `NickName` if present and non-empty, otherwise
-/// `"Player (<uid8>)"`.
+/// `NickName` if present and non-empty, otherwise `"Player (<uid8>)"`.
 fn player_nickname(uid: Uuid, save_parameter: &crate::ue::Properties) -> String {
     props::get(save_parameter, &["NickName"])
         .and_then(props::as_str)
@@ -120,8 +114,7 @@ fn player_nickname(uid: Uuid, save_parameter: &crate::ue::Properties) -> String 
         .unwrap_or_else(|| format!("Player ({})", &uid.to_string()[..8]))
 }
 
-/// The caller supplies `last_online_time`: it comes from the player's own
-/// `.sav`, which this function does no I/O to read.
+/// The caller supplies `last_online_time`: it comes from the player's own `.sav`, unread here.
 pub(crate) fn build_player_summary(
     uid: Uuid,
     save_parameter: &crate::ue::Properties,
@@ -146,9 +139,8 @@ pub(crate) fn build_player_summary(
     }
 }
 
-/// A player save's `Timestamp` (.NET ticks) as a datetime. Zero ticks means
-/// "never online", not the year 1 -- a save that has never been played writes
-/// `0` rather than omitting the property.
+/// A player save's `Timestamp` (.NET ticks) as a datetime. Zero ticks means "never
+/// online", not year 1 -- a save that has never been played writes `0` rather than omitting it.
 fn last_online_time_from_root(properties: &crate::ue::Properties) -> Option<chrono::NaiveDateTime> {
     props::get(properties, &["Timestamp"])
         .and_then(props::as_datetime_ticks)
@@ -169,8 +161,7 @@ fn parse_player_save_and_timestamp(
 }
 
 /// Worker-container ids for every base belonging to `guild_id`. A base whose
-/// `WorkerDirector` blob fails to decode contributes no container id rather
-/// than aborting the count.
+/// `WorkerDirector` blob fails to decode contributes no id rather than aborting the count.
 fn guild_worker_container_ids(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
     let mut container_ids = Vec::new();
     for base_entry in base_camp_entries {
@@ -214,8 +205,6 @@ fn base_count_for_guild(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uui
         .count() as i64
 }
 
-/// Pals working at any of `guild_id`'s bases: those slotted into one of its
-/// bases' worker containers.
 fn count_guild_base_pals(
     base_camp_entries: Option<&[crate::ue::MapEntry]>,
     character_entries: &[crate::ue::MapEntry],
@@ -247,9 +236,8 @@ fn count_guild_base_pals(
 
 /// No summary is built for the nil guild UUID.
 ///
-/// The returned `Vec<Uuid>` records save-file encounter order, which the wire
-/// `guilds` array must preserve — the `BTreeMap` itself always iterates in
-/// `Uuid`-sorted order and cannot answer that question.
+/// The returned `Vec<Uuid>` records save-file encounter order, which the wire `guilds`
+/// array must preserve -- the `Uuid`-sorted `BTreeMap` cannot answer that question.
 pub(crate) fn build_guild_summaries(
     group_entries: &[crate::ue::MapEntry],
     base_camp_entries: Option<&[crate::ue::MapEntry]>,
@@ -285,20 +273,16 @@ pub(crate) fn build_guild_summaries(
     (summaries, order)
 }
 
-/// Single entry point, called once per save load.
-///
-/// Output is deterministic: the `HashMap`s built along the way are pure
-/// lookup tables, never iterated for output. Save-file walk order is captured
-/// into `player_summary_order`/`guild_summary_order` here, before the
-/// `Uuid`-sorted `BTreeMap`s would lose it.
+/// Output is deterministic: the `HashMap`s built along the way are pure lookup tables,
+/// never iterated for output. Save-file walk order is captured into
+/// `player_summary_order`/`guild_summary_order` before the sorted `BTreeMap`s lose it.
 pub fn extract_summaries(
     session: &mut SaveSession,
     progress: &ProgressSink,
 ) -> Result<(), CoreError> {
     progress("Extracting player summaries...");
 
-    // Both passes hold immutable borrows of `session`, so its fields are
-    // assigned once, together, at the very end.
+    // Both passes hold immutable borrows of `session`, so its fields are assigned together at the end.
     let character_entries = session.character_map()?;
     let group_entries = session.group_map()?;
 
@@ -310,8 +294,7 @@ pub fn extract_summaries(
     let mut parsed_player_saves = Vec::new();
     let mut filtered_without_sav_count: usize = 0;
     for (uid, parameters) in collect_player_entries(character_entries) {
-        // A character entry with no `.sav` file behind it is a ghost the game
-        // cannot load; it gets no summary.
+        // A character entry with no `.sav` file behind it is a ghost the game cannot load.
         let Some(file_ref) = session.player_file_refs.get(&uid) else {
             filtered_without_sav_count += 1;
             tracing::warn!(
@@ -478,7 +461,6 @@ mod tests {
         }
     }
 
-    /// String-keyed convenience wrapper over `guild_tail::pre_update_guild`.
     fn guild(
         base_camp_level: i32,
         guild_name: &str,
@@ -619,7 +601,6 @@ mod tests {
         let characters = vec![
             player_character_entry(PLAYER_ONE, "Tester", 9),
             {
-                // No NickName property → fallback name
                 let mut save_parameter = Properties::default();
                 save_parameter.insert("IsPlayer", Property::Bool(true));
                 character_entry(PLAYER_TWO, PLAYER_TWO, save_parameter)
@@ -712,8 +693,7 @@ mod extraction_tests {
 
     #[test]
     fn test_malformed_entries_are_skipped_without_panicking() {
-        // A value that isn't a struct at all, and a struct whose `RawData` is
-        // the wrong variant. Neither may panic.
+        // Neither a non-struct value nor a wrong-variant `RawData` may panic.
         let not_a_struct_at_all = MapEntry {
             key: guid_property(PLAYER_ONE),
             value: Property::Bool(true),
@@ -786,8 +766,7 @@ mod extraction_tests {
         }
     }
 
-    /// Empty but present required maps — enough for `extract_summaries` to run
-    /// end to end without a real save file.
+    /// Empty but present required maps -- enough for `extract_summaries` to run end to end.
     fn minimal_empty_session() -> SaveSession {
         let mut world_save_data = Properties::default();
         world_save_data.insert("CharacterSaveParameterMap", Property::Map(Vec::new()));
@@ -858,9 +837,8 @@ mod extraction_tests {
         }
     }
 
-    /// The two players are laid out HIGH-then-LOW, deliberately the opposite
-    /// of `Uuid`'s `Ord`, so encounter order and sorted order are genuinely
-    /// different sequences and the assertions below are non-vacuous.
+    /// The two players are laid out HIGH-then-LOW, deliberately the opposite of `Uuid`'s
+    /// `Ord`, so encounter order and sorted order differ and the assertions are non-vacuous.
     #[test]
     fn test_extract_summaries_records_gvas_insertion_order_not_uuid_sorted_order() {
         const HIGH_UUID: &str = "ffffffff-ffff-ffff-ffff-ffffffffffff";

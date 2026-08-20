@@ -1,25 +1,19 @@
-//! World-tree navigation. Accessors take `&crate::ue::Save` rather than
-//! `&SaveSession` so a player's or a transfer source's tree can be navigated
-//! the same way as `session.level`.
+//! World-tree navigation. Accessors take `&crate::ue::Save`, so a player's or a
+//! transfer source's tree navigates the same way as `session.level`.
 //!
-//! `BaseCampSaveData`/`GuildExtraSaveDataMap`/`MapObjectSaveData` are absent
-//! from any save that has never built a base, formed a guild, or placed a map
-//! object -- normal data, not corruption -- so their accessors return
-//! `Ok(None)`. `Err` is reserved for a broken `worldSaveData` or a
-//! present-but-wrong-typed value.
+//! `BaseCampSaveData`/`GuildExtraSaveDataMap`/`MapObjectSaveData` are absent from any
+//! save that has never built a base, formed a guild, or placed a map object -- normal
+//! data, not corruption -- so their accessors return `Ok(None)`.
 //!
 //! Lookups go through `props::get` (name-only matching) rather than indexing
-//! `Properties`' `IndexMap` by a hand-built `PropertyKey`: a `PropertyKey` is
-//! `(u32, String)` whose `u32` disambiguates same-named siblings, and nothing
-//! guarantees a `worldSaveData` field sits at index `0`.
+//! `Properties` by a hand-built `PropertyKey`: that key is `(u32, String)` whose `u32`
+//! disambiguates same-named siblings, and nothing puts `worldSaveData` at index `0`.
 
 use crate::error::CoreError;
 use crate::props;
 use crate::ue::games::palworld::PalCharacterData;
 use crate::ue::{MapEntry, Properties, Property, Save, StructValue};
 
-/// `Level.sav`'s `worldSaveData` struct — the root of every map/array this
-/// module navigates.
 pub fn world_props(level: &Save) -> Result<&Properties, CoreError> {
     props::get(&level.root.properties, &["worldSaveData"])
         .and_then(props::struct_props)
@@ -32,8 +26,7 @@ pub fn world_props_mut(level: &mut Save) -> Result<&mut Properties, CoreError> {
         .ok_or_else(|| CoreError::Parse("worldSaveData missing from Level.sav".to_string()))
 }
 
-/// A named map under `worldSaveData` that every real save carries; absence is
-/// an `Err`.
+/// A named map under `worldSaveData` that every real save carries; absence is an `Err`.
 macro_rules! world_map_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<&Vec<MapEntry>, CoreError> {
@@ -59,8 +52,7 @@ macro_rules! world_map_accessors {
     };
 }
 
-/// A named map under `worldSaveData` a real save may legitimately not carry:
-/// `Ok(None)` for absent, `Err` only for a present-but-wrong-typed value.
+/// A named map a real save may legitimately lack: `Ok(None)` absent, `Err` if wrong-typed.
 macro_rules! world_optional_map_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<Option<&Vec<MapEntry>>, CoreError> {
@@ -134,7 +126,6 @@ macro_rules! world_struct_array_accessors {
     };
 }
 
-/// `world_optional_map_accessors!` for struct-array-shaped fields.
 macro_rules! world_optional_struct_array_accessors {
     ($get:ident, $get_mut:ident, $name:literal) => {
         pub fn $get(level: &Save) -> Result<Option<&Vec<StructValue>>, CoreError> {
@@ -183,18 +174,15 @@ pub fn entry_player_uid(entry: &MapEntry) -> Option<uuid::Uuid> {
     props::get(entry_key_props(entry)?, &["PlayerUId"]).and_then(props::as_uuid)
 }
 
-/// Overwrites the key's existing `PlayerUId` in place: `insert` on an
-/// already-present key updates the value without disturbing uesave's recorded
-/// write schema, so this never risks `Error::MissingPropertySchema`. A no-op
-/// when `entry.key` isn't a struct.
+/// Overwrites the key's existing `PlayerUId` in place: `insert` on an already-present
+/// key updates the value without disturbing uesave's recorded write schema.
 pub fn set_entry_player_uid(entry: &mut MapEntry, uid: uuid::Uuid) {
     if let Some(key_props) = props::struct_props_mut(&mut entry.key) {
         key_props.insert("PlayerUId", props::guid_property(uid));
     }
 }
 
-/// `entry.value.RawData`, decoded as `PalCharacterData` -- the typed struct
-/// backing every character-map entry, player or pal.
+/// `entry.value.RawData` as `PalCharacterData` -- backs every character-map entry, player or pal.
 pub fn entry_character_data(entry: &MapEntry) -> Option<&PalCharacterData<crate::ue::Arch>> {
     let value_props = props::struct_props(&entry.value)?;
     match props::get(value_props, &["RawData"])? {
@@ -211,8 +199,7 @@ pub fn entry_character_data_mut(entry: &mut MapEntry) -> Option<&mut PalCharacte
     }
 }
 
-/// The property bag every pal/player field (nickname, level, stats, ...)
-/// lives under.
+/// The property bag every pal/player field (nickname, level, stats, ...) lives under.
 pub fn entry_save_parameter(entry: &MapEntry) -> Option<&Properties> {
     let data = entry_character_data(entry)?;
     props::get(&data.object, &["SaveParameter"]).and_then(props::struct_props)
@@ -230,9 +217,6 @@ pub fn entry_is_player(entry: &MapEntry) -> bool {
         .and_then(props::as_bool)
         .unwrap_or(false)
 }
-
-// Index builders each return a fresh map; `SaveSession` caches them behind
-// `WorldCaches` and invalidates on every character/container-map mutation.
 
 pub fn build_character_index(level: &Save) -> std::collections::HashMap<uuid::Uuid, usize> {
     let mut index = std::collections::HashMap::new();
