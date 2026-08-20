@@ -33,11 +33,8 @@ pub async fn handle_update_world_option(
 
     session.apply_world_option_patch(&patch)?;
 
-    // Echo the authoritative state back so the modal reflects what was actually stored.
-    // MUST emit UpdateWorldOption, NOT GetWorldOption: the frontend's `sendAndWait`
-    // correlates the response by the REQUEST's message type
-    // (websocketState.svelte.ts:33). Replying with a different type leaves the caller
-    // hanging until timeout.
+    // Answers under UpdateWorldOption, not GetWorldOption — the frontend's
+    // sendAndWait correlates the response by the request's own message type.
     let dto = session.world_option_dto();
     ctx.emitter.emit(MessageType::UpdateWorldOption, &dto);
     Ok(())

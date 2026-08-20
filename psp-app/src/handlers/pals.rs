@@ -240,7 +240,6 @@ pub async fn handle_delete_pals(
     Ok(())
 }
 
-/// Emits no response frame.
 pub async fn handle_delete_dps_pals(
     data: DeletePalsData,
     ctx: &mut HandlerCtx<'_>,
@@ -286,7 +285,7 @@ pub async fn handle_move_pal(
     Ok(())
 }
 
-/// `data` is a bare UUID list; emits no response frame.
+/// `data` is a bare UUID list.
 pub async fn handle_heal_pals(
     data: Vec<uuid::Uuid>,
     ctx: &mut HandlerCtx<'_>,
@@ -296,7 +295,6 @@ pub async fn handle_heal_pals(
     Ok(())
 }
 
-/// Emits no response frame.
 pub async fn handle_heal_all_pals(
     data: HealAllPalData,
     ctx: &mut HandlerCtx<'_>,

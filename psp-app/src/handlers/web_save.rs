@@ -36,10 +36,6 @@ struct StagedPlayer {
     dps: Option<Vec<u8>>,
 }
 
-/// Collects one save's GVAS files as the caller decompresses them, one file at
-/// a time, so nothing ever has to hold the whole save in a single buffer. A
-/// real save's files total hundreds of megabytes; base64ing them into one JSON
-/// frame overflows what a browser can represent in a string at all.
 #[derive(Debug, Default)]
 pub struct StagedGvas {
     level: Option<Vec<u8>>,
@@ -78,8 +74,8 @@ impl StagedGvas {
         Ok(())
     }
 
-    /// Moves everything staged into a load payload, leaving the staging area
-    /// empty so a second load cannot resurrect the previous save's buffers.
+    /// Leaves the staging area empty so a second load cannot resurrect the
+    /// previous save's buffers.
     pub fn take(&mut self, save_id: String) -> Result<LoadSaveGvasBytes, HandlerError> {
         let level = self
             .level
@@ -163,7 +159,6 @@ pub fn export_manifest(session: &SaveSession) -> ExportManifest {
     ExportManifest { world_name: session.world_name.clone(), names }
 }
 
-/// Serializes one manifest entry to GVAS on demand.
 pub fn export_file(session: &SaveSession, name: &str) -> Result<Vec<u8>, HandlerError> {
     let missing = |what: &str| HandlerError::Other(format!("{what} is not loaded"));
     match name {
@@ -245,9 +240,6 @@ mod tests {
         assert_eq!(export_file(session, "Level.sav").expect("export"), gvas);
     }
 
-    /// The web download used to be assembled in JS, which never wrote
-    /// `LevelMeta.sav` -- so a renamed world silently lost the rename. The
-    /// manifest is the file list, so the name has to be in it.
     #[tokio::test]
     async fn export_manifest_lists_level_meta_when_one_is_loaded() {
         let mut test = TestContext::new(|_| {}).await;
@@ -353,9 +345,8 @@ mod tests {
         assert!(error.to_string().contains("Level"), "got {error}");
     }
 
-    /// Staging drops what it handed over, so a second load cannot resurrect the
-    /// previous save's buffers -- on wasm32 those are the largest allocation in
-    /// the process.
+    /// On wasm32 the staged buffers are the largest allocation in the process,
+    /// so a second load must not be able to resurrect the previous save's.
     #[test]
     fn taking_the_payload_empties_the_staging_area() {
         let mut staged = StagedGvas::default();

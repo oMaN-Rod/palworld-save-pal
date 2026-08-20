@@ -29,10 +29,9 @@ pub async fn handle_sync_app_state(ctx: &mut HandlerCtx<'_>) -> Result<(), Handl
         return Ok(());
     };
 
-    // The `players`/`guilds` arrays must follow save-file (GVAS) order, which
-    // `extract_summaries` records into `player_summary_order` /
-    // `guild_summary_order`. Reading the `BTreeMap`s' `.keys()` instead would
-    // silently resort them to `Uuid` order.
+    // Must follow save-file (GVAS) order, recorded by `extract_summaries` into
+    // `player_summary_order` / `guild_summary_order`. Reading the `BTreeMap`s'
+    // `.keys()` instead would silently resort them to `Uuid` order.
     let payload = SyncLoadedSaveFilesData {
         level: session.save_id.clone(),
         players: session
@@ -63,10 +62,8 @@ mod tests {
 
     #[tokio::test]
     async fn sync_app_state_without_save_emits_only_settings() {
-        // sync_app_state is the ONLY path by which settings reach the UI during
-        // bootstrap, so assert the full six-field payload. Pinning `save_dir` to
-        // the real default (rather than merely `is_string()`) is what catches a
-        // regression to `null`/an empty string.
+        // Pinning `save_dir` to the real default, not merely `is_string()`, is
+        // what catches a regression to `null`/an empty string.
         let mut test = TestContext::new(|_| {}).await;
         let mut ctx = HandlerCtx {
             session: &mut test.session,
@@ -90,9 +87,6 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// A `SaveSession` with only the fields `handle_sync_app_state` reads
-    /// populated; everything else is an empty placeholder.
-    ///
     /// The two players and two guilds are inserted in HIGH-then-LOW `Uuid`
     /// order — the opposite of `Uuid`'s `Ord`. That is what lets the test below
     /// discriminate: reading `player_summaries.keys()` instead of

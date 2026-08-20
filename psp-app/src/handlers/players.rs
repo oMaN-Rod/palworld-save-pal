@@ -1,6 +1,3 @@
-//! Player-management WS handlers: request_player_details, delete_player,
-//! set_technology_data.
-
 use serde::Deserialize;
 use serde_json::json;
 

@@ -140,9 +140,7 @@ pub async fn handle_export_preset(
     Ok(())
 }
 
-/// Turns a preset name into a safe, unique `<name>.json` zip entry. Path/reserved
-/// characters and controls become `_`; blank names become `preset`; collisions
-/// get a `-2`, `-3`, … suffix.
+/// Blank names become `preset`; collisions get a `-2`, `-3`, … suffix.
 fn zip_entry_name(name: &str, used: &mut std::collections::HashSet<String>) -> String {
     let sanitized: String = name
         .chars()
@@ -169,8 +167,8 @@ fn zip_entry_name(name: &str, used: &mut std::collections::HashSet<String>) -> S
     candidate
 }
 
-/// Bulk export: writes one `<name>.json` per requested preset into a single zip.
-/// Missing preset ids are skipped. Like the single export, requires desktop mode.
+/// Writes one `<name>.json` per requested preset into a single zip; missing
+/// preset ids are skipped.
 pub async fn handle_export_presets(
     data: Vec<ExportPresetData>,
     ctx: &mut HandlerCtx<'_>,
@@ -246,9 +244,8 @@ fn strip_preset_ids(preset: &mut serde_json::Value) {
     }
 }
 
-/// Imports every preset in `value` — a single object, or an array of objects —
-/// stripping identifiers so each is added with a fresh id. Non-object entries
-/// are skipped. Returns the number of presets added.
+/// `value` is a single object or an array of objects; non-object entries are
+/// skipped. Returns the number of presets added.
 async fn import_preset_value(
     db: &dyn psp_db::DbDriver,
     value: serde_json::Value,
@@ -382,8 +379,6 @@ mod tests {
     use super::*;
     use crate::test_support::TestContext;
 
-    /// Seeds one preset from a real presets.json fixture and checks the
-    /// id-keyed dict shape of the response.
     #[tokio::test]
     async fn get_presets_seeds_from_json_and_returns_dict() {
         let mut test = TestContext::new(|json_dir| {

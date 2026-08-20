@@ -2,8 +2,7 @@ use uuid::Uuid;
 
 use psp_core::domain::blueprint::BaseBlueprint;
 
-/// The most blueprints one connection holds at once. Capture-once-export-many
-/// and load-then-place both need only a handful; the cap bounds memory.
+/// Bounds memory; capture-once-export-many and load-then-place both need only a handful.
 const MAX_HANDLES: usize = 8;
 
 #[derive(Default)]
@@ -35,9 +34,7 @@ mod tests {
     use psp_core::domain::blueprint::{capture, CaptureOptions};
     use psp_core::props;
 
-    /// Loads the committed world1 Level.sav, captures its first base as a
-    /// blueprint. world1 has a single base with 13 structures — enough to be a
-    /// non-trivial value to store.
+    /// world1's base has 13 structures — enough to be a non-trivial value to store.
     fn a_blueprint() -> BaseBlueprint {
         let level_sav = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("../tests/fixtures/saves/world1/Level.sav");
@@ -51,8 +48,7 @@ mod tests {
             .expect("capture world1 base")
     }
 
-    /// Builds a SaveSession from a Level.sav path, the same entry point
-    /// `handle_select_save` uses for the steam load path: no LevelMeta/WorldOption,
+    /// Mirrors the steam load path `handle_select_save` uses: no LevelMeta/WorldOption,
     /// no players, no top-level progress frame.
     fn load_session(level_sav: &std::path::Path) -> psp_core::session::SaveSession {
         let level_sav_bytes = std::fs::read(level_sav).expect("read world1 Level.sav");

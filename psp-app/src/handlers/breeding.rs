@@ -1,18 +1,14 @@
 //! Breeding calculator handlers. Pure read-only computations over the cached
-//! `BreedingDB` (sourced from `game_data`); no `Session` access. Both transports
-//! (native WS + wasm) serve the same handlers.
+//! `BreedingDB`; no `Session` access. Both transports (native WS + wasm) serve
+//! the same handlers.
 //!
 //! Save Mode and Selection Mode are unified on the backend: both send a `pals`
 //! list tagged by `origin` ("owned" / "selected"); the solver treats them
-//! identically. This follows PSP's parsing model — owned pals arrive from the
-//! frontend's already-parsed `appState.selectedPlayer.pals` (which carries
-//! `passive_skills`, unlike `PalSummary`).
+//! identically.
 
-// `std::time::Instant::now()` panics on `wasm32-unknown-unknown` (the target has
-// no system clock — see `library/std/src/sys/time/unsupported.rs`). The
-// `elapsed_ms` field below is diagnostic only, so on wasm we skip timing rather
-// than pull in a clock crate. The import + both call sites are cfg-gated
-// together below.
+// `Instant::now()` panics on `wasm32-unknown-unknown` (no system clock). The
+// `elapsed_ms` field is diagnostic only, so wasm skips timing instead of
+// pulling in a clock crate.
 #[cfg(not(target_arch = "wasm32"))]
 use std::time::Instant;
 
@@ -44,9 +40,6 @@ macro_rules! db_or_soft_error {
     };
 }
 
-// ---------------------------------------------------------------------
-// GET get_breeding_pals — breedable-pal picker list
-// ---------------------------------------------------------------------
 pub async fn handle_get_breeding_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let mt = MessageType::GetBreedingPals;
     let db = db_or_soft_error!(ctx, mt);
@@ -69,9 +62,6 @@ pub async fn handle_get_breeding_pals(ctx: &mut HandlerCtx<'_>) -> Result<(), Ha
     Ok(())
 }
 
-// ---------------------------------------------------------------------
-// POST breeding_direct_child — A + B → child
-// ---------------------------------------------------------------------
 #[derive(Debug, Deserialize)]
 pub struct DirectChildData {
     pub parent_a: String,
@@ -94,9 +84,6 @@ pub async fn handle_breeding_direct_child(
     Ok(())
 }
 
-// ---------------------------------------------------------------------
-// POST breeding_direct_partners — A + target → candidate B list
-// ---------------------------------------------------------------------
 #[derive(Debug, Deserialize)]
 pub struct DirectPartnersData {
     pub parent_a: String,
@@ -114,9 +101,6 @@ pub async fn handle_breeding_direct_partners(
     Ok(())
 }
 
-// ---------------------------------------------------------------------
-// POST breeding_direct_parents — target → all parent pairs
-// ---------------------------------------------------------------------
 #[derive(Debug, Deserialize)]
 pub struct DirectParentsData {
     pub target_child: String,
@@ -133,9 +117,6 @@ pub async fn handle_breeding_direct_parents(
     Ok(())
 }
 
-// ---------------------------------------------------------------------
-// POST breeding_chain — chain solver (Selection + Save Mode)
-// ---------------------------------------------------------------------
 #[derive(Debug, Deserialize)]
 pub struct ChainRequest {
     pub target_pal: String,
@@ -160,9 +141,8 @@ fn default_max_results() -> u32 {
     5
 }
 
-/// A single input pal. `origin` distinguishes owned (save) vs selected
-/// (theoretical) for display badges; the solver splits them into the
-/// corresponding source adapters. Unrecognized origins default to "owned".
+/// `origin` distinguishes owned (save) vs selected (theoretical) for display
+/// badges and source-adapter routing. Unrecognized origins default to "owned".
 #[derive(Debug, Deserialize)]
 pub struct PalInput {
     pub character_id: String,

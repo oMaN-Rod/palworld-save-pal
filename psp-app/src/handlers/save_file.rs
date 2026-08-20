@@ -1,7 +1,3 @@
-//! Save-file load/write handlers: select_save, load_zip_file,
-//! update_save_file, download_save_file, save_modded_save, rename_world,
-//! convert_sav_file, unlock_map.
-//!
 //! In desktop mode `handle_select_save` drives a native file picker up front:
 //! a cancelled pick answers `no_file_selected` and loads nothing.
 
@@ -29,8 +25,7 @@ use crate::messages::MessageType;
 #[derive(Debug, serde::Deserialize)]
 pub struct SelectSaveData {
     pub r#type: String,
-    /// Required in web mode; absent in desktop mode, where the frontend omits
-    /// it and `handle_select_save` resolves it via a native file dialog.
+    /// Required in web mode; absent in desktop mode.
     pub path: Option<String>,
     /// Accepted for wire compatibility; not read.
     #[allow(dead_code)]
@@ -53,10 +48,9 @@ pub(crate) struct LoadedSaveFilesData {
 }
 
 impl LoadedSaveFilesData {
-    /// Rebuilds the load overview from an already-parsed session, for
-    /// `reattach_session`. `level`/`players` are derived the way
-    /// `sync_app_state` derives them (save id + summary order) — the only
-    /// values a reattach has.
+    /// For `reattach_session`: derives `level`/`players` the way
+    /// `sync_app_state` does (save id + summary order), the only values a
+    /// reattach has.
     pub(crate) fn from_session(session: &SaveSession, session_id: Uuid) -> Self {
         Self {
             level: session.save_id.clone(),
@@ -75,8 +69,6 @@ impl LoadedSaveFilesData {
     }
 }
 
-/// Emits the load overview (`loaded_save_files` + both summaries) for a
-/// reattached session — the same tail a fresh load emits.
 pub(crate) fn emit_reattach_overview(session: &SaveSession, session_id: Uuid, emitter: &Emitter) {
     emitter.emit(
         MessageType::LoadedSaveFiles,
@@ -92,9 +84,7 @@ pub fn emit_summary_messages(session: &SaveSession, emitter: &Emitter) {
     emitter.emit(MessageType::GetGuildSummaries, &session.guild_summaries);
 }
 
-/// The tail every load path shares: register the session in the store, emit
-/// `loaded_save_files`, emit the player/guild summaries, and attach the session
-/// to the connection. `players` is in load (zip/steam encounter) order.
+/// `players` is in load (zip/steam encounter) order.
 pub(crate) fn emit_loaded_save(
     ctx: &mut HandlerCtx<'_>,
     session: SaveSession,
@@ -123,9 +113,8 @@ pub(crate) fn emit_loaded_save(
     Ok(())
 }
 
-/// A `Players/*.sav` or `Players/*_dps.sav` file stem, split into its player id
-/// and whether it's the "_dps" companion file. `None` for anything that doesn't
-/// parse as a UUID once "_dps" is stripped; callers skip those.
+/// `None` for anything that doesn't parse as a UUID once "_dps" is stripped;
+/// callers skip those.
 fn parse_player_file_stem(stem: &str) -> Option<(Uuid, bool)> {
     let is_dps = stem.contains("_dps");
     stem.replace("_dps", "")
@@ -207,11 +196,10 @@ pub fn validate_steam_save_directory(
     })
 }
 
-/// Every `Players/*.sav`, its "_dps" companion folded into the same map entry,
-/// invalid names logged and skipped. Returns BOTH the pairing map (uuid-sorted,
-/// the type `SaveSession::player_file_refs` requires) and the order in which
-/// players were first encountered — `handle_select_save` builds the wire
-/// `players` array from the discovery order, NOT from the sorted map.
+/// Returns both the pairing map (uuid-sorted, the type
+/// `SaveSession::player_file_refs` requires) and the order players were first
+/// encountered — `handle_select_save` builds the wire `players` array from the
+/// discovery order, not the sorted map.
 pub fn discover_player_file_refs(
     players_dir: &Path,
 ) -> Result<(BTreeMap<Uuid, PlayerFileData>, Vec<Uuid>), HandlerError> {
@@ -266,11 +254,10 @@ where
     (player_file_refs, discovery_order)
 }
 
-/// Gamepass branch of `select_save`. The two failure payloads are `error`
-/// frames whose data is a PLAIN STRING, not the `{message, trace}` shape the
-/// dispatcher emits for a raised `HandlerError`. On success the
-/// `select_gamepass_save` data IS the saves map (`{<save_id>: GamepassSaveData}`)
-/// — NOT the `{"saves": ...}` wrapper that only `scan_gamepass_saves` uses.
+/// The two failure payloads are `error` frames with plain-string data, not the
+/// `{message, trace}` shape the dispatcher emits for a raised `HandlerError`.
+/// On success the `select_gamepass_save` data IS the saves map — not the
+/// `{"saves": ...}` wrapper that only `scan_gamepass_saves` uses.
 pub(crate) async fn select_gamepass_directory(
     index_file_path: &str,
     ctx: &mut HandlerCtx<'_>,
@@ -348,7 +335,6 @@ pub async fn handle_select_save(
         .ok_or_else(|| HandlerError::Other("select_save requires a path".to_string()))?;
 
     if data.r#type != "steam" {
-        // Every non-"steam" save type is handled as gamepass.
         return select_gamepass_directory(&save_path, ctx).await;
     }
 
@@ -403,15 +389,11 @@ pub async fn handle_select_save(
     Ok(())
 }
 
-/// Per-entry decompressed-size ceiling, bounding a zip bomb's memory/CPU
-/// blow-up. It caps bytes actually read back OUT (a bomb is real decompression
-/// amplification, not just a lie in the declared-size header). 1 GiB matches the
-/// headroom real Level.sav files already get from `ws::MAX_WS_MESSAGE_BYTES`.
+/// Caps bytes actually read back out, bounding a zip bomb's decompression
+/// blow-up regardless of what the entry's declared-size header claims.
 const MAX_ZIP_ENTRY_BYTES: u64 = 1 << 30;
 
-/// Ceiling on the number of central-directory entries a zip may declare. A
-/// legitimate save zip has a handful of entries (Level.sav, LevelMeta.sav, a
-/// few players, optionally GlobalPalStorage.sav); this only trips on an
+/// A legitimate save zip has a handful of entries; this only trips on an
 /// abusive upload (e.g. a huge number of empty entries).
 const MAX_ZIP_ENTRIES: usize = 100_000;
 
@@ -837,10 +819,9 @@ const BACKUP_ROOT_FILES: [&str; 4] = [
     "WorldOption.sav",
 ];
 
-/// Selectively copies whitelisted root files and validated `Players/` saves from
-/// `save_dir` to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a
-/// `_{%S}` suffix on collision. `backup_base` is a parameter (not a constant) so
-/// tests can point it at a `TempDir` instead of the real backups root. A missing
+/// Copies to `{backup_base}/{basename}_{%Y-%m-%d-%H-%M}`, appending a `_{%S}`
+/// suffix on collision. `backup_base` is a parameter, not a constant, so tests
+/// can point it at a `TempDir` instead of the real backups root. A missing
 /// `save_dir` reports "skipping backup" rather than failing.
 fn backup_save_directory(
     save_dir: &Path,
@@ -972,14 +953,9 @@ fn write_steam_modded_save(
     Ok(())
 }
 
-/// Writes a standalone transfer target's `Level.sav` (+ `LevelMeta.sav` when
-/// present) and every loaded player's `.sav`/`_dps.sav` to the locations
-/// recorded in its `TransferSaveInfo`.
-///
-/// Deliberately does NOT back up first, unlike `write_steam_modded_save`: the
+/// Deliberately does not back up first, unlike `write_steam_modded_save`: the
 /// caller (`handlers::tools::handle_transfer_player`) already backs up via
-/// `copy_dir_ignoring` before calling this. Backing up here too would double
-/// the I/O for no benefit.
+/// `copy_dir_ignoring` before calling this.
 pub(crate) fn write_transfer_target_save(
     session: &SaveSession,
     save_info: &psp_core::session::TransferSaveInfo,
@@ -1020,11 +996,9 @@ fn steam_backup_base() -> std::path::PathBuf {
     psp_core::paths::app_root().join("backups").join("steam")
 }
 
-/// `data` is a bare world-name string, used only by the GamePass branch. It MUST
-/// stay `Option<String>`: the frontend sends `null` for Steam saves, and a
-/// strict `String` would reject the Steam write with a serde parse error.
-/// Dispatches on the loaded save's `kind` — GamePass writes new wgs containers,
-/// everything else takes the on-disk Steam path.
+/// `data` must stay `Option<String>`: the frontend sends `null` for Steam
+/// saves, and a strict `String` would reject the Steam write with a serde
+/// parse error.
 pub async fn handle_save_modded_save(
     world_name: Option<String>,
     ctx: &mut HandlerCtx<'_>,

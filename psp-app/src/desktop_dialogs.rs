@@ -13,8 +13,6 @@ pub struct FileDialogRequest {
     pub initial_directory: Option<PathBuf>,
 }
 
-/// A "save as" dialog: like `FileDialogRequest` but seeds the dialog with a
-/// suggested file name the user can accept or override.
 pub struct FileSaveRequest {
     pub filter_name: &'static str,
     pub filter_extensions: &'static [&'static str],
@@ -74,12 +72,10 @@ impl QueuedDialogProvider {
         Self::new_with_all(pick_responses, save_responses, Vec::new())
     }
 
-    /// Folder-pick answers only; `pick_file`/`save_file` queues stay empty.
     pub fn new_with_folders(folder_responses: Vec<Option<PathBuf>>) -> Self {
         Self::new_with_all(Vec::new(), Vec::new(), folder_responses)
     }
 
-    /// Seeds all three queues; each dialog kind draws from its own.
     pub fn new_with_all(
         pick_responses: Vec<Option<PathBuf>>,
         save_responses: Vec<Option<PathBuf>>,
@@ -93,7 +89,6 @@ impl QueuedDialogProvider {
         }
     }
 
-    /// Multi-file pick answers only; the other three queues stay empty.
     pub fn new_with_pick_files(pick_files_responses: Vec<Option<Vec<PathBuf>>>) -> Self {
         Self {
             queued_pick_responses: Mutex::new(VecDeque::new()),
@@ -103,9 +98,7 @@ impl QueuedDialogProvider {
         }
     }
 
-    /// Seeds both the save queue (for export) and the multi-file pick queue
-    /// (for import), so a single provider can drive an export-then-import
-    /// round trip in one test. `pick_file`/`pick_folder` queues stay empty.
+    /// Lets a single provider drive an export-then-import round trip in one test.
     pub fn new_with_saves_and_pick_files(
         save_responses: Vec<Option<PathBuf>>,
         pick_files_responses: Vec<Option<Vec<PathBuf>>>,
@@ -161,7 +154,6 @@ impl FileDialogProvider for QueuedDialogProvider {
     }
 }
 
-/// Platform default directory for Steam saves.
 pub fn steam_save_root() -> PathBuf {
     if cfg!(target_os = "windows") {
         let local_app_data = std::env::var_os("LOCALAPPDATA").unwrap_or_default();
@@ -181,7 +173,6 @@ pub fn steam_save_root() -> PathBuf {
     }
 }
 
-/// Platform default directory for Game Pass save containers.
 pub fn gamepass_save_root() -> PathBuf {
     if cfg!(target_os = "windows") {
         let local_app_data = std::env::var_os("LOCALAPPDATA").unwrap_or_default();
@@ -215,8 +206,8 @@ pub fn dialog_request_for(save_type: &str, saved_save_dir: Option<&str>) -> File
     }
 }
 
-/// App-dir guard + expected-filename check. The error strings are wire-visible:
-/// they are sent verbatim as the `error` message the frontend renders.
+/// The error strings are wire-visible: they are sent verbatim as the `error`
+/// message the frontend renders.
 pub fn validate_selected_file(
     save_type: &str,
     selected: &Path,
@@ -246,8 +237,6 @@ pub fn validate_selected_file(
     }
 }
 
-/// The directory containing the running executable. Used only for the "picked a
-/// file inside the app dir" guard.
 pub fn application_root() -> PathBuf {
     std::env::current_exe()
         .ok()

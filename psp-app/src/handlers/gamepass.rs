@@ -1,12 +1,8 @@
-//! Gamepass container handlers: scan / delete-save / delete-player /
-//! rename-world, plus the gamepass load path `select_gamepass_save`.
-//!
-//! The four container-MANAGEMENT handlers target the REAL install via
-//! `store::find_container_dir()` and never touch `ctx.session` — container
-//! management is independent of any loaded save. `handle_select_gamepass_save`
-//! is the exception on both counts: it takes the container dir from
-//! `settings.save_dir` (the desktop dialog's chosen path) and loads the save
-//! into `ctx.session.save`.
+//! The container-management handlers target the real install via
+//! `store::find_container_dir()` and never touch `ctx.session`.
+//! `handle_select_gamepass_save` is the exception on both counts: it takes the
+//! container dir from `settings.save_dir` (the desktop dialog's chosen path)
+//! and loads the save into `ctx.session.save`.
 
 use std::path::{Path, PathBuf};
 
@@ -211,16 +207,13 @@ pub async fn handle_rename_gamepass_world(
     Ok(())
 }
 
-/// The message data is a BARE save-id string. Unlike the scan/delete/rename
-/// handlers this one loads a save into `ctx.session.save`, so the container
-/// directory comes from `settings.save_dir` (set by the desktop file dialog),
-/// NOT `find_container_dir()`.
+/// `data` is a bare save-id string. Unlike the scan/delete/rename handlers,
+/// the container directory here comes from `settings.save_dir`, not
+/// `find_container_dir()`.
 ///
-/// Silent-return contract: a missing Level or LevelMeta *container entry*
-/// returns `Ok(())` with NO frame at all, whereas a missing Level *payload* or
-/// an empty player set errors (surfacing an `error` frame). On success emits
-/// `loaded_save_files` (`type: "gamepass"`, `has_gps: false`) then
-/// `get_player_summaries` / `get_guild_summaries`.
+/// A missing Level or LevelMeta *container entry* returns `Ok(())` with no
+/// frame at all, whereas a missing Level *payload* or an empty player set
+/// errors (surfacing an `error` frame).
 pub async fn handle_select_gamepass_save(
     save_id: String,
     ctx: &mut HandlerCtx<'_>,
@@ -248,8 +241,6 @@ pub async fn handle_select_gamepass_save(
     let level_meta =
         store::read_first_blob(&container_dir, level_meta_entry)?.map(|(_seq, bytes)| bytes);
 
-    // Optional: absent container => no editable options, matching the silent-return
-    // contract used for other absent containers.
     let world_option = match containers.get("WorldOption") {
         Some(entry) => store::read_first_blob(&container_dir, entry)?.map(|(_seq, bytes)| bytes),
         None => None,
@@ -682,7 +673,6 @@ async fn convert_loaded_save(
                 );
                 return Ok(());
             }
-            // Writing the steam layout needs a native output-dir dialog.
             if !ctx.app.config.desktop_mode {
                 ctx.emitter.emit(
                     MessageType::ConvertSaveFormat,

@@ -1,6 +1,4 @@
-//! UPS pal handlers: get / get_ids / add / update / delete / clone / stats /
-//! nuke, plus collections, tags, and save-session interop (clone_to_ups /
-//! import_to_ups / export_ups_pal). Backed by the psp-db UPS layer.
+//! UPS pal handlers, backed by the psp-db UPS layer.
 
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
@@ -784,7 +782,6 @@ pub async fn handle_clone_to_ups(
     let mut errors: Vec<String> = Vec::new();
 
     for pal_id_text in &data.pal_ids {
-        // pal_box and dps need a player uid; gps does not.
         let source_player_uid = match data.source_type.as_str() {
             "pal_box" | "dps" => {
                 let Some(raw) = data.source_player_uid.as_deref() else {
@@ -985,11 +982,9 @@ pub async fn handle_export_ups_pal(
                 emit_ups_error(ctx, "Player UID required for pal box export".into());
                 return Ok(());
             };
-            // Players are loaded lazily, so `build_player_dto` alone would
-            // reject a real-but-not-yet-opened destination player. Check
-            // existence against the eagerly built `player_summaries` first, then
-            // force-load the player's GVAS. Same guard as
-            // `handlers::gps::handle_clone_gps_pal_to_player`.
+            // Players load lazily, so `build_player_dto` alone would reject a
+            // real-but-not-yet-opened player. Check `player_summaries` first, then
+            // force-load. Same guard as `handlers::gps::handle_clone_gps_pal_to_player`.
             let save = ctx.session.save.as_ref().unwrap();
             if !save.player_summaries.contains_key(&player_uid) {
                 emit_ups_error(ctx, "Player not found".into());

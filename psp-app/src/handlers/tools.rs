@@ -1,9 +1,6 @@
-//! Standalone tools: `convert_steam_id` (a pure input->output tool that works
-//! with no save loaded), the player-transfer surface (`load_source_save` /
-//! `get_source_players` / `transfer_player` / `unload_source_save`, operating
-//! on `ctx.session.source` and `ctx.session.transfer_target`),
-//! `swap_player_uids` (operating on the main `ctx.session.save`), and the
-//! raw-data inspector.
+//! Standalone tools. The player-transfer handlers operate on
+//! `ctx.session.source` / `ctx.session.transfer_target`; `swap_player_uids`
+//! operates on the main `ctx.session.save`.
 
 use std::path::PathBuf;
 
@@ -96,15 +93,10 @@ fn summaries_json(save: &SaveSession) -> serde_json::Value {
     serde_json::to_value(&save.player_summaries).expect("player summaries always serialize")
 }
 
-/// Resolves a directory-or-Level.sav `save_path` to its Steam layout, reusing
-/// `handlers::save_file`'s validation and discovery helpers so a bad directory
-/// produces the identical error string `select_save` would. Returns
-/// `Err(message)`, not `HandlerError`: every failure here becomes a SOFT
+/// Reuses `handlers::save_file`'s validation/discovery helpers so a bad
+/// directory produces the identical error string `select_save` would. Returns
+/// `Err(message)`, not `HandlerError`: every failure here becomes a soft
 /// `{"error": ...}` response, never the hard WS `error` frame.
-///
-/// The caller emits its own `"Loading {label} Level.sav..."` progress frame, so
-/// the load below is told NOT to also emit the generic `"Loading Level.sav..."`
-/// one — that would put an extra frame on the transfer wire.
 fn load_steam_save_for_transfer(
     save_path: &str,
     label: &str,
@@ -154,8 +146,7 @@ fn load_steam_save_for_transfer(
         None,
         player_file_refs,
         layout.global_pal_storage_sav.clone(),
-        // The "Loading {label} Level.sav..." frame above is the only leading
-        // frame the transfer path emits; suppress the generic one.
+        // The caller already emitted its own "Loading ... Level.sav..." frame.
         false,
         progress,
     )
@@ -284,9 +275,8 @@ pub async fn handle_get_source_players(ctx: &mut HandlerCtx<'_>) -> Result<(), H
     Ok(())
 }
 
-/// Recursively copies `from` into `to`, skipping any entry (file or directory)
-/// literally named `ignore_name`, which keeps a backup dir out of its own
-/// backup.
+/// Skips any entry literally named `ignore_name`, which keeps a backup dir out
+/// of its own backup.
 fn copy_dir_ignoring(
     from: &std::path::Path,
     to: &std::path::Path,
@@ -309,13 +299,10 @@ fn copy_dir_ignoring(
     Ok(())
 }
 
-/// Target resolution order: a standalone `transfer_target` first, falling back
-/// to the main `save` session. A missing target is reported BEFORE a missing
-/// source.
-///
-/// A successful transfer into a standalone target ALSO auto-saves it to disk
-/// (there is no separate "save" button for it): backup first, then write, then
-/// extend the result with `saved_to`.
+/// A missing target is reported before a missing source. A successful transfer
+/// into a standalone target also auto-saves it to disk (there is no separate
+/// "save" button for it): backup first, then write, then extend the result
+/// with `saved_to`.
 pub async fn handle_transfer_player(
     data: TransferPlayerData,
     ctx: &mut HandlerCtx<'_>,
@@ -412,7 +399,6 @@ pub async fn handle_transfer_player(
     Ok(())
 }
 
-/// Clears both the transfer source and any standalone transfer target.
 pub async fn handle_unload_source_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     ctx.session.source = None;
     ctx.session.transfer_target = None;
@@ -470,10 +456,8 @@ pub struct GetRawDataData {
     pub level: bool,
 }
 
-/// The six ids are tried in order (guild -> player -> pal -> base ->
-/// item_container -> character_container), falling back to `level`. No save
-/// loaded, an unresolved id, or no field set at all each answer `{}` rather
-/// than an error.
+/// No save loaded, an unresolved id, or no field set at all each answer `{}`
+/// rather than an error.
 pub async fn handle_get_raw_data(
     data: GetRawDataData,
     ctx: &mut HandlerCtx<'_>,

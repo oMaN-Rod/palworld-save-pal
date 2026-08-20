@@ -1,6 +1,5 @@
-//! Guild-management WS handlers: request_guild_details, update_lab_research,
-//! delete_guild, delete_base. (`get_lab_research` lives in
-//! `handlers::game_data`.)
+//! Guild-management WS handlers. `get_lab_research` lives in
+//! `handlers::game_data`, not here.
 
 use serde::Deserialize;
 use serde_json::json;
@@ -90,8 +89,6 @@ pub async fn handle_update_lab_research(
     Ok(())
 }
 
-/// Deletes one base -- never the guild that owns it or any other base --
-/// via `psp_core::domain::guild::delete_base`.
 pub async fn handle_delete_base(
     data: DeleteBaseData,
     ctx: &mut HandlerCtx<'_>,

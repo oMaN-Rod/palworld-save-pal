@@ -245,13 +245,10 @@ pub struct GetBaseStructuresData {
     pub base_id: uuid::Uuid,
 }
 
-/// Read-only placed-structure geometry for one base. EVERY outcome answers
-/// under `get_base_structures` so the frontend's request/response correlation
-/// resolves — a malformed or missing `base_id` is a soft `{"error": ...}`
-/// payload (omitting `base_id`, since none could be parsed), same convention
-/// as the no-save-loaded branch below, never the dispatcher's hard `error`
-/// frame nor an empty list the map would render as "this base has nothing
-/// built in it".
+/// Every outcome answers under `get_base_structures`, so the frontend's
+/// request/response correlation resolves — a malformed or missing `base_id`
+/// is a soft `{"error": ...}` payload, never the dispatcher's hard `error`
+/// frame nor an empty list the map would render as "nothing built here".
 pub async fn handle_get_base_structures(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
@@ -301,10 +298,9 @@ pub async fn handle_get_relics(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerEr
     Ok(())
 }
 
-/// Localization merged INTO each base entry (same shape as `handle_get_relic_data`),
-/// so every point on the wire keeps `class`/coords/`id` and carries `localized_name`.
-/// Watchtowers (`BP_LevelObject_UnlockMapPoint_C`) flow through unchanged — the
-/// client branches on `class`.
+/// Same merge shape as `handle_get_relic_data`. Watchtowers
+/// (`BP_LevelObject_UnlockMapPoint_C`) flow through unchanged — the client
+/// branches on `class`.
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "fast_travel_points");
@@ -358,9 +354,8 @@ pub struct GetMapLayerData {
 }
 
 /// Folds `localized_name` onto each entry of a marker artifact from
-/// `l10n/{language}/{artifact}`, the same shape `handle_get_fast_travel_points`
-/// produces. Driven by the l10n file's existence, so an artifact gains names the
-/// moment its table ships — no list to keep in step.
+/// `l10n/{language}/{artifact}`. Driven by the l10n file's existence, so an
+/// artifact gains names the moment its table ships — no list to keep in step.
 ///
 /// Three cases serve the artifact untouched instead:
 /// - no l10n table for this artifact, or none for this language;
@@ -369,9 +364,9 @@ pub struct GetMapLayerData {
 /// - an entry the l10n table does not cover. Unlike the per-artifact handlers,
 ///   which fall back to the entry's own key as its display name, this path can
 ///   be pointed at a table that was never meant for it: `l10n/{lang}/relics.json`
-///   localizes `relic_data.json`'s 13 relic TYPES, while the `relics` artifact is
-///   407 markers keyed by instance id — zero keys in common. A blanket fallback
-///   would hand every one of those markers its own GUID as a name.
+///   keys by relic TYPE, while the `relics` artifact keys by marker instance
+///   id — zero keys in common. A blanket fallback would hand every marker its
+///   own GUID as a name.
 fn localized_map_layer(game_data: &GameData, language: &str, artifact: &str) -> Value {
     let raw = raw_file(game_data, artifact);
     let Some(localization) = game_data
@@ -396,20 +391,13 @@ fn localized_map_layer(game_data: &GameData, language: &str, artifact: &str) -> 
     Value::Object(merged)
 }
 
-/// Marker-layer artifacts for the requested ids, keyed by id under `layers`,
-/// each localized by `localized_map_layer`. Batched — one request carrying N
-/// ids, never N requests — because the frontend correlates responses by message
-/// TYPE alone, so two single-layer requests in flight would resolve against
-/// each other.
+/// Batched — one request carrying N ids, never N requests — because the
+/// frontend correlates responses by message TYPE alone, so two single-layer
+/// requests in flight would resolve against each other.
 ///
-/// `fast_travel_points` comes out of here in the same shape
-/// `get_fast_travel_points` produces, so a layer served through either message
-/// keeps its names.
-///
-/// EVERY outcome answers under `get_map_layer`, refusals included, so a client
-/// waiting on that type always resolves. An unrecognized id fails the whole
-/// request rather than dropping its key: a key the client asked for and never
-/// received would leave it waiting forever.
+/// Every outcome answers under `get_map_layer`, refusals included. An
+/// unrecognized id fails the whole request rather than dropping its key: a
+/// key the client asked for and never received would leave it waiting forever.
 pub async fn handle_get_map_layer(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
@@ -686,15 +674,11 @@ mod tests {
             r#"{"Tower1": {"localized_name": "Rayne Syndicate Tower"}}"#,
         )
         .unwrap();
-        // Keyed by relic TYPE, while relics.json is keyed by marker instance
-        // id — the two share no keys at all, exactly as on disk.
         fs::write(
             json_dir.join("l10n/en/relics.json"),
             r#"{"jump_power": {"localized_name": "Jump Power"}}"#,
         )
         .unwrap();
-        // An l10n table alongside an array-shaped artifact, which has no entry
-        // ids to key a merge on.
         fs::write(
             json_dir.join("l10n/en/camps.json"),
             r#"{"0": {"localized_name": "First Camp"}}"#,
@@ -965,8 +949,6 @@ mod tests {
         );
     }
 
-    /// The `base_id` is honoured, not ignored: a base with nothing placed in it
-    /// answers with an empty list under its own id.
     #[tokio::test]
     async fn base_structures_are_empty_for_a_base_with_nothing_placed() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -984,9 +966,6 @@ mod tests {
         assert_eq!(frame["data"]["structures"], json!([]));
     }
 
-    /// A malformed request must be a visible error under `get_base_structures`
-    /// (so `sendAndWait` still resolves), never an empty list that the map
-    /// would render as "this base has no buildings".
     #[tokio::test]
     async fn base_structures_without_a_base_id_is_an_error_not_an_empty_list() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1007,8 +986,6 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// Answers under `get_base_structures` even with no save loaded, so the
-    /// frontend's request/response correlation still resolves.
     #[tokio::test]
     async fn base_structures_without_a_loaded_save_answer_with_an_error_field() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1091,9 +1068,6 @@ mod tests {
 
     #[tokio::test]
     async fn fast_travel_points_merge_with_l10n_and_keep_class() {
-        // Unlike the raw forwarders above, fast_travel_points merges l10n
-        // INTO the base entry (same shape as handle_get_relic_data) while
-        // preserving every base field.
         let mut test = TestContext::new(write_fixture_tree).await;
         let frame = run_handler!(test, handle_get_fast_travel_points);
         assert_eq!(frame["type"], "get_fast_travel_points");
@@ -1163,7 +1137,6 @@ mod tests {
         .unwrap();
     }
 
-    /// Driven by the l10n file's existence, not by a list of artifact ids.
     #[tokio::test]
     async fn map_layer_folds_localized_name_from_the_l10n_table() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1188,10 +1161,6 @@ mod tests {
         );
     }
 
-    /// `l10n/<lang>/relics.json` localizes `relic_data.json`, not the relic
-    /// MARKER artifact of the same name: its keys are relic types, the markers'
-    /// are instance ids. Folding a fallback onto every entry would stamp each
-    /// marker with its own id as a display name.
     #[tokio::test]
     async fn map_layer_does_not_name_entries_the_l10n_table_does_not_cover() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1203,8 +1172,6 @@ mod tests {
         );
     }
 
-    /// Array-shaped artifacts carry no entry ids to key a merge on, so they
-    /// pass through untouched even when a same-named l10n table exists.
     #[tokio::test]
     async fn map_layer_passes_array_shaped_artifacts_through_untouched() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1225,8 +1192,6 @@ mod tests {
         );
     }
 
-    /// A language with no l10n tree degrades to the raw artifact rather than
-    /// failing the request.
     #[tokio::test]
     async fn map_layer_in_a_language_without_l10n_serves_the_raw_artifact() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1239,9 +1204,6 @@ mod tests {
         );
     }
 
-    /// One request, one response, every requested id echoed as a key — the
-    /// client correlates only on the message type, so several layers must
-    /// never be asked for as several concurrent requests.
     #[tokio::test]
     async fn map_layer_batches_every_requested_layer_into_one_response() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1265,9 +1227,6 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// The three artifacts added after the first batch of layers. A layer left
-    /// out of MAP_LAYERS is refused as an unknown id, so the allowlist is the
-    /// only thing standing between a shipped artifact and an error frame.
     #[tokio::test]
     async fn map_layer_serves_the_later_artifacts() {
         let mut test = TestContext::new(|json_dir| {
@@ -1316,8 +1275,6 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// `get_map_layer` reads files off disk by name, so ids outside the
-    /// allowlist are refused rather than resolved as a path.
     #[tokio::test]
     async fn map_layer_rejects_an_id_outside_the_allowlist() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1357,8 +1314,6 @@ mod tests {
         test.assert_no_more_frames();
     }
 
-    /// A malformed payload still answers under `get_map_layer`, so a client
-    /// waiting on that type resolves instead of hanging.
     #[tokio::test]
     async fn map_layer_with_a_malformed_payload_is_an_error() {
         let mut test = TestContext::new(write_fixture_tree).await;
@@ -1380,8 +1335,6 @@ mod tests {
         assert_eq!(frame["data"]["layers"]["dungeons"], json!({}));
     }
 
-    /// `fast_travel_points` reaches the same shape through either message, so a
-    /// layer moved onto `get_map_layer` does not lose its names.
     #[tokio::test]
     async fn map_layer_and_get_fast_travel_points_agree_on_shape() {
         let mut test = TestContext::new(write_fixture_tree).await;

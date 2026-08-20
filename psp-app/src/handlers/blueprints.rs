@@ -1,7 +1,3 @@
-//! Blueprint capture/place WS handlers: captures a base out of the loaded
-//! save into the connection's `BlueprintRegistry`, and (in later tasks)
-//! validates and places a captured blueprint back into a save.
-
 use uuid::Uuid;
 
 use psp_core::domain::blueprint::validate::{Anchor, Finding, PlacementMode, Severity};
@@ -48,7 +44,6 @@ pub fn finding_json(finding: &Finding) -> serde_json::Value {
     serde_json::json!({ "severity": severity, "code": finding.code, "message": finding.message })
 }
 
-/// Turns the wire `mode` + optional target ids into a `PlacementMode`.
 pub fn resolve_mode(
     mode: &str,
     target_guild: Option<Uuid>,
@@ -418,9 +413,7 @@ mod tests {
             other => panic!("merge_into with a base should resolve to MergeInto, got {other:?}"),
         }
 
-        // A new_base naming no guild, and a merge_into naming no base, must both
-        // be refused rather than silently borrowing the other mode's target or
-        // defaulting to a nil id — the presence of the wrong target must not save it.
+        // Must not silently borrow the other mode's target or default to a nil id.
         assert!(
             resolve_mode("new_base", None, Some(base)).is_err(),
             "new_base without target_guild is refused even when a base is present"
