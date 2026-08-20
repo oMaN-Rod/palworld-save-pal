@@ -1,0 +1,63 @@
+{
+  "id": "pst.tools",
+  "api_version": 1,
+  "name": "Save Tools",
+  "version": "1.0.0",
+  "author": "PST",
+  "license": "GPL-3.0-only",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.write", "save.raw", "players"],
+  "commands": [
+    {
+      "id": "edit_game_days",
+      "title": "Set Game Day",
+      "description": "Sets the world clock to the given in-game day.",
+      "destructive": true,
+      "params": [
+        { "id": "days", "type": "int", "label": "In-game day", "default": 1, "min": 0, "max": 100000 }
+      ]
+    },
+    {
+      "id": "paldefender_commands",
+      "title": "PalDefender Commands",
+      "description": "Generates a /killnearestbase console command for every base camp. Returns the lines in its result for copying rather than writing them to a log file.",
+      "destructive": false,
+      "params": []
+    },
+    {
+      "id": "modify_one_container_slots",
+      "title": "Resize One Container",
+      "description": "Sets one container's slot count by id. Refuses rather than dropping slots that still hold items.",
+      "destructive": true,
+      "params": [
+        { "id": "container_id", "type": "string", "label": "Container id" },
+        { "id": "slots", "type": "int", "label": "Slot count", "default": 50, "min": 1, "max": 1000 }
+      ]
+    },
+    {
+      "id": "modify_all_player_slots",
+      "title": "Resize All Player Inventories",
+      "description": "Sets every player's main inventory to the given slot count. Refuses per player rather than dropping slots that still hold items.",
+      "destructive": true,
+      "params": [
+        { "id": "slots", "type": "int", "label": "Slot count", "default": 42, "min": 42, "max": 999 }
+      ]
+    },
+    {
+      "id": "modify_all_guild_chest_slots",
+      "title": "Resize All Guild Chests",
+      "description": "Sets every guild storage container to the given slot count. Refuses per container rather than dropping slots that still hold items.",
+      "destructive": true,
+      "params": [
+        { "id": "slots", "type": "int", "label": "Slot count", "default": 50, "min": 1, "max": 1000 }
+      ]
+    },
+    {
+      "id": "unlock_all_private_chests",
+      "title": "Unlock All Private Chests",
+      "description": "Clears the ownership lock on every private chest and item booth in the world so any player can open them.",
+      "destructive": true,
+      "params": []
+    }
+  ]
+}

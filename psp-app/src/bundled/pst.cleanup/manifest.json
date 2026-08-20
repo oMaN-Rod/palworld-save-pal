@@ -1,0 +1,43 @@
+{
+  "id": "pst.cleanup",
+  "api_version": 1,
+  "name": "Save Cleanup",
+  "version": "1.0.0",
+  "author": "PST",
+  "license": "GPL-3.0-only",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.write", "save.raw", "players", "gamedata", "log"],
+  "commands": [
+    {
+      "id": "delete_empty_guilds",
+      "title": "Delete Empty Guilds",
+      "description": "Removes guilds that have no remaining members.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "delete_inactive_players",
+      "title": "Delete Inactive Players",
+      "description": "Removes players who have not logged in for the given number of days. Guild admins are never removed.",
+      "destructive": true,
+      "params": [
+        { "id": "days", "type": "int", "label": "Inactive for (days)",
+          "default": 30, "min": 1, "max": 3650 }
+      ]
+    },
+    {
+      "id": "fix_all_negative_timestamps",
+      "title": "Fix Future Timestamps",
+      "description": "Clamps last-online timestamps that sit in the future back to the world's current time. Does not update the duplicate copy of the timestamp stored in guild membership data.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "remove_invalid_items_from_save",
+      "title": "Remove Invalid Items",
+      "description": "Clears item stacks whose item id is not in the game's item catalog.",
+      "destructive": true,
+      "params": []
+    }
+  ]
+}

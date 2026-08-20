@@ -1,0 +1,61 @@
+{
+  "id": "pst.reset",
+  "api_version": 1,
+  "name": "World Reset",
+  "version": "1.0.0",
+  "author": "PST",
+  "license": "GPL-3.0-only",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.raw", "players"],
+  "commands": [
+    {
+      "id": "reset_supply_drops",
+      "title": "Reset Supply Drops",
+      "description": "Clears supply drop state so the world regenerates it on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "reset_anti_air_turrets",
+      "title": "Reset Anti-Air Turrets",
+      "description": "Clears destroyed anti-air turret state so the world regenerates it on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "reset_oilrig",
+      "title": "Reset Oil Rig",
+      "description": "Clears oil rig state so the world regenerates it on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "reset_invader",
+      "title": "Reset Invaders",
+      "description": "Clears invader state so the world regenerates it on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "reset_dungeons",
+      "title": "Reset Dungeons",
+      "description": "Clears dungeon and dungeon point marker state so the world regenerates both on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "reset_lock_gimmick",
+      "title": "Reset Lock Gimmicks",
+      "description": "Clears lock gimmick state so the world regenerates it on next load.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "fix_missions",
+      "title": "Reset Missions",
+      "description": "Clears every player's completed-quest list so the game re-offers missions. Reports how many players were changed rather than writing a log file.",
+      "destructive": true,
+      "params": []
+    }
+  ]
+}
