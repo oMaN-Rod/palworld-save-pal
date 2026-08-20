@@ -1,7 +1,6 @@
-//! The wire message-type vocabulary shared with the frontend. Every wire string
-//! is the exact snake_case of its variant name; a variant that ever needs to
-//! break that rule needs an explicit #[serde(rename = "...")] AND a matching
-//! literal here.
+//! Every wire string is the exact snake_case of its variant name; a variant
+//! that ever needs to break that rule needs an explicit #[serde(rename = "...")]
+//! AND a matching literal here.
 
 macro_rules! define_message_types {
     ($($variant:ident => $wire:literal),+ $(,)?) => {
@@ -32,7 +31,6 @@ macro_rules! define_message_types {
 }
 
 define_message_types! {
-    // Pal management
     AddPal => "add_pal",
     AddDpsPal => "add_dps_pal",
     AddGpsPal => "add_gps_pal",
@@ -48,7 +46,6 @@ define_message_types! {
     HealAllPals => "heal_all_pals",
     HealPals => "heal_pals",
     MovePal => "move_pal",
-    // UPS (Universal Pal Storage)
     GetUpsPals => "get_ups_pals",
     GetUpsAllFilteredIds => "get_ups_all_filtered_ids",
     AddUpsPal => "add_ups_pal",
@@ -69,20 +66,16 @@ define_message_types! {
     DeleteUpsTag => "delete_ups_tag",
     GetUpsStats => "get_ups_stats",
     NukeUpsPals => "nuke_ups_pals",
-    // Player management
     DeletePlayer => "delete_player",
     SetTechnologyData => "set_technology_data",
-    // Lazy loading — summaries
     GetPlayerSummaries => "get_player_summaries",
     GetGuildSummaries => "get_guild_summaries",
-    // Lazy loading — on-demand details
     RequestPlayerDetails => "request_player_details",
     GetPlayerDetailsResponse => "get_player_details_response",
     RequestGuildDetails => "request_guild_details",
     GetGuildDetailsResponse => "get_guild_details_response",
     RequestGps => "request_gps",
     GetGpsResponse => "get_gps_response",
-    // Game data retrieval
     GetActiveSkills => "get_active_skills",
     GetBuildings => "get_buildings",
     GetMapObjectFootprints => "get_map_object_footprints",
@@ -106,18 +99,15 @@ define_message_types! {
     GetVersion => "get_version",
     GetWorkSuitability => "get_work_suitability",
     GetFriendshipData => "get_friendship_data",
-    // Presets
     AddPreset => "add_preset",
     DeletePreset => "delete_preset",
     GetPresets => "get_presets",
     UpdatePreset => "update_preset",
     ExportPreset => "export_preset",
     ImportPreset => "import_preset",
-    // Guild management
     DeleteGuild => "delete_guild",
     GetLabResearch => "get_lab_research",
     UpdateLabResearch => "update_lab_research",
-    // Save file management
     DownloadSaveFile => "download_save_file",
     LoadedSaveFiles => "loaded_save_files",
     LoadZipFile => "load_zip_file",
@@ -128,21 +118,16 @@ define_message_types! {
     UpdateSaveFile => "update_save_file",
     RenameWorld => "rename_world",
     UnlockMap => "unlock_map",
-    // Settings management
     GetSettings => "get_settings",
     UpdateSettings => "update_settings",
     NukePresets => "nuke_presets",
-    // System messages
     Error => "error",
     ProgressMessage => "progress_message",
     SyncAppState => "sync_app_state",
     Warning => "warning",
-    // Utility
     OpenInBrowser => "open_in_browser",
-    // Debug
     GetGuildRawData => "get_guild_raw_data",
     GetRawData => "get_raw_data",
-    // Utility (gamepass / conversion)
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",
     ConvertSaveFormat => "convert_save_format",
@@ -150,14 +135,12 @@ define_message_types! {
     DeleteGamepassSave => "delete_gamepass_save",
     DeleteGamepassPlayer => "delete_gamepass_player",
     RenameGamepassWorld => "rename_gamepass_world",
-    // Tools
     ConvertSteamId => "convert_steam_id",
     SwapPlayerUids => "swap_player_uids",
     LoadSourceSave => "load_source_save",
     GetSourcePlayers => "get_source_players",
     TransferPlayer => "transfer_player",
     UnloadSourceSave => "unload_source_save",
-    // Server management
     ListServers => "list_servers",
     GetServer => "get_server",
     CreateServer => "create_server",
@@ -177,17 +160,14 @@ define_message_types! {
     GetServerStats => "get_server_stats",
     ServerCreationProgress => "server_creation_progress",
     ImportServer => "import_server",
-    // Session persistence
     ReattachSession => "reattach_session",
     EjectSession => "eject_session",
     SessionNotFound => "session_not_found",
-    // World options
     GetWorldOption => "get_world_option",
     UpdateWorldOption => "update_world_option",
     ExportPresets => "export_presets",
     SaveEditedSav => "save_edited_sav",
     OpenUrl => "open_url",
-    // Blueprints
     CaptureBaseBlueprint => "capture_base_blueprint",
     StoreBlueprint => "store_blueprint",
     ListBlueprints => "list_blueprints",
@@ -198,22 +178,34 @@ define_message_types! {
     RequestBlueprintGeometry => "request_blueprint_geometry",
     DeleteBlueprint => "delete_blueprint",
     DeleteBase => "delete_base",
-    // Breeding calculator
     GetBreedingPals => "get_breeding_pals",
     BreedingDirectChild => "breeding_direct_child",
     BreedingDirectPartners => "breeding_direct_partners",
     BreedingDirectParents => "breeding_direct_parents",
     BreedingChain => "breeding_chain",
-    // Map marker layers
     GetMapLayer => "get_map_layer",
+    ListPlugins => "list_plugins",
+    GetPlugin => "get_plugin",
+    InstallPlugin => "install_plugin",
+    UninstallPlugin => "uninstall_plugin",
+    SetPluginEnabled => "set_plugin_enabled",
+    RunPluginCommand => "run_plugin_command",
+    CancelPluginRun => "cancel_plugin_run",
+    PluginRunResult => "plugin_run_result",
+    CheckPluginSyntax => "check_plugin_syntax",
+    CheckPluginManifest => "check_plugin_manifest",
+    GetApiDefinition => "get_api_definition",
+    CreatePlugin => "create_plugin",
+    SavePluginSource => "save_plugin_source",
+    RunPluginDraft => "run_plugin_draft",
 }
 
 #[cfg(test)]
 mod tests {
     use super::MessageType;
 
-    /// An independent duplicate of the enum table: a typo on either side fails
-    /// the tests below rather than silently changing the wire vocabulary.
+    /// An independent duplicate of the enum table, so a typo on either side
+    /// fails a test instead of silently changing the wire vocabulary.
     const EXPECTED_WIRE_NAMES: &[&str] = &[
         "add_pal",
         "add_dps_pal",
@@ -346,8 +338,6 @@ mod tests {
         "import_server",
     ];
 
-    /// Session-persistence and world-option types, which sit after the other
-    /// 127 in declaration order.
     const FEATURE_ADDITION_WIRE_NAMES: &[&str] = &[
         "reattach_session",
         "eject_session",
@@ -373,6 +363,20 @@ mod tests {
         "breeding_direct_parents",
         "breeding_chain",
         "get_map_layer",
+        "list_plugins",
+        "get_plugin",
+        "install_plugin",
+        "uninstall_plugin",
+        "set_plugin_enabled",
+        "run_plugin_command",
+        "cancel_plugin_run",
+        "plugin_run_result",
+        "check_plugin_syntax",
+        "check_plugin_manifest",
+        "get_api_definition",
+        "create_plugin",
+        "save_plugin_source",
+        "run_plugin_draft",
     ];
 
     #[test]

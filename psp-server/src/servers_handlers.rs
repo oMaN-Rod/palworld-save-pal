@@ -1327,6 +1327,7 @@ pub(crate) mod test_env {
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
+                plugins: Default::default(),
             });
             let (emitter, receiver) = crate::emitter::Emitter::test_channel();
             Self {
@@ -1361,6 +1362,7 @@ pub(crate) mod test_env {
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
+                plugins: Default::default(),
             });
             env.app = app;
             env

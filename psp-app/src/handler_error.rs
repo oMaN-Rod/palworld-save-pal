@@ -1,5 +1,4 @@
-/// Any handler failure. The dispatcher converts these into the `error`
-/// WS message ({message, trace}); the connection always survives.
+/// The dispatcher converts these into the `error` WS message ({message, trace}).
 #[derive(Debug, thiserror::Error)]
 pub enum HandlerError {
     #[error("{0}")]
@@ -17,8 +16,8 @@ mod tests {
     use super::HandlerError;
     use psp_core::error::CoreError;
 
-    /// The `#[error(...)]` strings end up in the `message` field of the wire
-    /// `error` frame the frontend renders, so pin them.
+    /// These strings end up in the wire `error` frame's `message` field, which
+    /// the frontend renders directly, so pin them.
     #[test]
     fn display_strings_match_contract() {
         assert_eq!(

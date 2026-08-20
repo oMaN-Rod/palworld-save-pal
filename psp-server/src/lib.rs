@@ -117,7 +117,9 @@ pub async fn start_server_with(
         }),
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
+        plugins: Default::default(),
     });
+    psp_app::handlers::plugins::seed_bundled_plugins(&state).await?;
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
     let addr = listener.local_addr()?;

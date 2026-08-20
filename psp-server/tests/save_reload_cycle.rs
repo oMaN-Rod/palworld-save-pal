@@ -99,14 +99,27 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
         .expect("player has a common_container")
         .as_object_mut()
         .expect("common_container is an object");
+    let slot_num = common_container
+        .get("slot_num")
+        .and_then(|v| v.as_i64())
+        .expect("common_container has slot_num") as i32;
     let slots = common_container
         .get_mut("slots")
         .expect("common_container has slots")
         .as_array_mut()
         .expect("slots is an array");
+    // Free and within the container's own capacity, so the paired
+    // essential-container resize does not rightly drop it as out of range.
+    let occupied: std::collections::HashSet<i64> = slots
+        .iter()
+        .filter_map(|slot| slot["slot_index"].as_i64())
+        .collect();
+    let free_index = (0..slot_num as i64)
+        .find(|index| !occupied.contains(index))
+        .expect("the fixture container has at least one free slot within capacity");
     slots.push(json!({
         "dynamic_item": null,
-        "slot_index": 9000,
+        "slot_index": free_index,
         "count": 3,
         "static_id": "Wood",
         "local_id": null,
@@ -142,7 +155,7 @@ async fn item_edit_survives_update_save_modded_save_and_reload() {
         .expect("reloaded common_container has slots");
     let added = reloaded_slots
         .iter()
-        .find(|slot| slot["slot_index"] == 9000);
+        .find(|slot| slot["slot_index"] == free_index);
     assert!(
         added.is_some(),
         "the added Wood slot must survive update_save_file -> save_modded_save -> reload \

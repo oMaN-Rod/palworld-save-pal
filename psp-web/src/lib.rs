@@ -9,6 +9,7 @@ use psp_app::blueprint_registry::BlueprintRegistry;
 use psp_app::dispatcher::{dispatch, HandlerCtx, NullExtRouter, SessionAttachment};
 use psp_app::emitter::Emitter;
 use psp_app::envelope::Envelope;
+use psp_app::handlers::plugins::seed_bundled_plugins;
 use psp_app::handlers::web_save::{handle_load_save_gvas_bytes, LoadSaveGvasBytes, StagedGvas};
 use psp_app::{AppConfig, AppState, SessionStore};
 use psp_core::gamedata::GameData;
@@ -45,6 +46,7 @@ pub fn init() {
         ext: Arc::new(NullExtRouter),
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
+        plugins: Default::default(),
     });
     STATE.with(|s| {
         *s.borrow_mut() = Some(WebState {
@@ -114,13 +116,23 @@ fn js_error_message(error: &JsValue) -> String {
         .unwrap_or_else(|| "the oodle bridge threw a non-Error value".to_string())
 }
 
-/// Runs the schema migrations through the driver. The worker calls this after
-/// `set_sql_bridge` and before dispatching frames.
+/// Runs the schema migrations through the driver, then seeds the bundled
+/// plugin set. The worker calls this after `set_sql_bridge` and before
+/// dispatching frames -- both steps need the SQL bridge already wired, which
+/// is why this isn't done inside `init()`.
 #[wasm_bindgen]
 pub async fn run_migrations() -> Result<(), JsValue> {
     psp_db::run_migrations(&opfs_driver::OpfsSqlDriver)
         .await
-        .map_err(|e| JsValue::from_str(&e.to_string()))
+        .map_err(|e| JsValue::from_str(&e.to_string()))?;
+
+    let app = STATE.with(|s| s.borrow().as_ref().map(|state| Arc::clone(&state.app)));
+    if let Some(app) = app {
+        seed_bundled_plugins(&app)
+            .await
+            .map_err(|e| JsValue::from_str(&e.to_string()))?;
+    }
+    Ok(())
 }
 
 /// `entries` is a JS array of `[filename, jsonText]` pairs.

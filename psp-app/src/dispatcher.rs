@@ -18,26 +18,19 @@ pub struct HandlerCtx<'a> {
     pub app: &'a Arc<AppState>,
     pub emitter: &'a Emitter,
     pub blueprints: &'a mut crate::blueprint_registry::BlueprintRegistry,
-    /// The connection's store attachment: its current session id and the `Arc`
-    /// backing `session`, so a load handler can register/replace it in the
-    /// store. `None` in unit tests that build a ctx directly and never load.
     pub attachment: Option<SessionAttachment<'a>>,
 }
 
-/// Links a `HandlerCtx` to the connection's entry in `AppState::sessions`.
-/// `arc` is the connection's OWN arc slot (`&mut`), so `reattach_session` can
-/// REPLACE it with the store's arc for a different id — setting `current_id`
-/// alone does not reattach.
+/// `arc` is the connection's own arc slot, so `reattach_session` can replace
+/// it with the store's arc for a different id — setting `current_id` alone
+/// does not reattach.
 pub struct SessionAttachment<'a> {
     pub current_id: &'a mut Option<uuid::Uuid>,
     pub arc: &'a mut crate::SharedSession,
 }
 
 impl HandlerCtx<'_> {
-    /// Registers the connection's session in the store under a FRESH id,
-    /// dropping the id this connection already held, and returns it. Load
-    /// handlers put the returned id in their `loaded_save_files` response. Only
-    /// the outer std map lock is taken, briefly — never across an `.await`.
+    /// The outer std map lock is taken only briefly here, never across an `.await`.
     pub fn register_current_session(&mut self) -> uuid::Uuid {
         let attachment = self
             .attachment
@@ -54,13 +47,10 @@ impl HandlerCtx<'_> {
     }
 }
 
-/// Routes the message types the platform-agnostic dispatcher does not own —
-/// server management and native shell-open — so they can live in the transport
-/// crate instead of the message layer.
 #[async_trait::async_trait]
 pub trait ExtRouter: Send + Sync {
-    /// Returns None when this router does not own `message_type`;
-    /// the dispatcher then falls through to its unrouted warn-and-drop path.
+    /// Returns None when this router does not own `message_type`; the
+    /// dispatcher then falls through to its unrouted warn-and-drop path.
     async fn route(
         &self,
         message_type: MessageType,
@@ -69,7 +59,6 @@ pub trait ExtRouter: Send + Sync {
     ) -> Option<Result<(), HandlerError>>;
 }
 
-/// Owns nothing, so every native-only type takes the unrouted path.
 pub struct NullExtRouter;
 
 #[async_trait::async_trait]
@@ -84,12 +73,9 @@ impl ExtRouter for NullExtRouter {
     }
 }
 
-/// Routes one envelope to its handler. Wire contract:
-/// - unknown or unrouted message type → warn log, nothing sent;
-/// - handler Err → `error` message {message, trace};
-/// - handler panic → contained, reported as an `error` message.
-///
-/// Never returns an error: the connection loop and socket always survive.
+/// Wire contract: unknown/unrouted type → warn log, nothing sent; handler
+/// `Err` or panic → `error` message. Never returns an error itself — the
+/// connection loop and socket always survive.
 pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
     let Some(message_type) = MessageType::from_wire(&envelope.message_type) else {
         tracing::warn!(message_type = %envelope.message_type, "invalid message type");
@@ -110,11 +96,6 @@ pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
     }
 }
 
-/// Runs `handler` to completion, converting any panic it raises into an `error`
-/// frame so a bad handler cannot tear down the connection. A separate function
-/// (rather than inline in `dispatch`) so the containment path is unit-testable:
-/// `route`'s own arms are a fixed `match`, but a test can still inject a
-/// panicking handler through `dispatch` itself via a custom `ExtRouter`.
 async fn catch_handler_panic<F>(
     handler: F,
     message_type: &str,
@@ -349,8 +330,7 @@ async fn route(
         MessageType::SwapPlayerUids => {
             handlers::tools::handle_swap_player_uids(serde_json::from_value(data)?, ctx).await
         }
-        // GetGuildRawData has no arm on purpose: it is a permanently dead wire
-        // type, pinned by valid_but_unimplemented_type_sends_nothing below.
+        // GetGuildRawData has no arm on purpose: a permanently dead wire type.
         MessageType::GetRawData => {
             handlers::tools::handle_get_raw_data(serde_json::from_value(data)?, ctx).await
         }
@@ -376,8 +356,7 @@ async fn route(
         MessageType::UnlockMap => {
             handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
         }
-        // ServerPlayerCount has no arm on purpose: it is a permanently dead
-        // wire type.
+        // ServerPlayerCount has no arm on purpose: a permanently dead wire type.
         // session_not_found is emit-only, so it has no inbound arm.
         MessageType::ReattachSession => {
             handlers::session::handle_reattach_session(serde_json::from_value(data)?, ctx).await
@@ -425,7 +404,6 @@ async fn route(
         MessageType::DeleteBlueprint => {
             handlers::blueprints::handle_delete_blueprint(serde_json::from_value(data)?, ctx).await
         }
-        // Breeding calculator
         MessageType::GetBreedingPals => handlers::breeding::handle_get_breeding_pals(ctx).await,
         MessageType::BreedingDirectChild => handlers::breeding::handle_breeding_direct_child(
             serde_json::from_value(data)?,
@@ -443,9 +421,45 @@ async fn route(
         MessageType::BreedingChain => {
             handlers::breeding::handle_breeding_chain(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::ListPlugins => handlers::plugins::handle_list_plugins(ctx).await,
+        MessageType::GetPlugin => {
+            handlers::plugins::handle_get_plugin(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::InstallPlugin => {
+            handlers::plugins::handle_install_plugin(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::UninstallPlugin => {
+            handlers::plugins::handle_uninstall_plugin(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::SetPluginEnabled => {
+            handlers::plugins::handle_set_plugin_enabled(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::RunPluginCommand => {
+            handlers::plugins::handle_run_plugin_command(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CancelPluginRun => {
+            handlers::plugins::handle_cancel_plugin_run(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CheckPluginSyntax => {
+            handlers::plugins::handle_check_plugin_syntax(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::CheckPluginManifest => {
+            handlers::plugins::handle_check_plugin_manifest(serde_json::from_value(data)?, ctx)
+                .await
+        }
+        MessageType::GetApiDefinition => handlers::plugins::handle_get_api_definition(ctx).await,
+        MessageType::CreatePlugin => {
+            handlers::plugins::handle_create_plugin(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::SavePluginSource => {
+            handlers::plugins::handle_save_plugin_source(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::RunPluginDraft => {
+            handlers::plugins::handle_run_plugin_draft(serde_json::from_value(data)?, ctx).await
+        }
+        // plugin_run_result is emit-only, so it has no inbound arm.
         other => {
-            // Native-only types (server management, shell-open) are owned by the
-            // transport's ExtRouter; clone the Arc first so `ctx` is free to reborrow.
+            // Clone the Arc first so `ctx` is free to reborrow for the route call.
             let ext = std::sync::Arc::clone(&ctx.app.ext);
             if let Some(result) = ext.route(other, data, ctx).await {
                 return result;
@@ -465,9 +479,8 @@ mod tests {
     use crate::envelope::Envelope;
     use crate::test_support::TestContext;
 
-    /// Restores the previous panic hook on drop, so a failing assertion in a test
-    /// that silences panic output cannot leak the silent hook into sibling tests
-    /// (the harness runs them in one process).
+    /// Restores the previous panic hook on drop, so a failing assertion here
+    /// cannot leak the silenced hook into sibling tests in the same process.
     #[allow(clippy::type_complexity)]
     struct PanicHookGuard(
         Option<Box<dyn Fn(&std::panic::PanicHookInfo<'_>) + Sync + Send + 'static>>,
@@ -507,7 +520,6 @@ mod tests {
 
     #[tokio::test]
     async fn valid_but_unimplemented_type_sends_nothing() {
-        // get_guild_raw_data is a valid MessageType that is never routed.
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
             envelope("get_guild_raw_data", serde_json::Value::Null),
@@ -582,8 +594,6 @@ mod tests {
         assert_eq!(test.next_frame_json()["type"], "get_settings");
     }
 
-    /// The batched map-layer request carries its layer list in `data`, so the
-    /// route arm has to forward the payload rather than call a bare handler.
     #[tokio::test]
     async fn get_map_layer_routes_with_its_payload() {
         let mut test = TestContext::new(|json_dir| {
@@ -653,16 +663,12 @@ mod tests {
 
     #[tokio::test]
     async fn catch_handler_panic_converts_panics_into_error_frames() {
-        // The default panic hook prints to stderr even though catch_unwind
-        // catches it. Silence it for the duration so test output stays clean;
-        // the guard's Drop restores it.
         let _hook_guard = PanicHookGuard(Some(std::panic::take_hook()));
         std::panic::set_hook(Box::new(|_| {}));
 
         let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
         let emitter = Emitter::new(sender);
 
-        // `panic!("literal")` with no format args panics with a `&'static str` payload.
         let result = catch_handler_panic(async { panic!("boom") }, "get_settings", &emitter).await;
         assert!(
             result.is_ok(),
@@ -675,8 +681,6 @@ mod tests {
             "expected the panic's own text in the error frame, got {frame:?}"
         );
 
-        // `panic!("{}", ...)` goes through the formatting path and panics with an
-        // owned `String` payload instead.
         let result =
             catch_handler_panic(async { panic!("boom-{}", 42) }, "get_settings", &emitter).await;
         assert!(result.is_ok());
@@ -690,8 +694,6 @@ mod tests {
             "expected the formatted panic text in the error frame, got {frame:?}"
         );
 
-        // A payload that is neither `&str` nor `String` must still produce an
-        // `error` frame carrying the generic fallback text, not panic again.
         let result = catch_handler_panic(
             async { std::panic::panic_any(42i32) },
             "get_settings",

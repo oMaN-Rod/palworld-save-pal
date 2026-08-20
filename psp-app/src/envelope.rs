@@ -1,4 +1,3 @@
-/// The wire envelope: {"type": <string>, "data": <any>}.
 /// `data` defaults to JSON null when absent — the frontend omits it for
 /// payload-less requests (JSON.stringify drops undefined).
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]

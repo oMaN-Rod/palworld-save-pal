@@ -6,6 +6,7 @@ pub mod gps;
 pub mod guilds;
 pub mod pals;
 pub mod players;
+pub mod plugins;
 pub mod presets;
 pub mod save_file;
 pub mod session;

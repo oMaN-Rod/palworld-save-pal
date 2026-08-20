@@ -6,6 +6,7 @@ pub mod envelope;
 pub mod handler_error;
 pub mod handlers;
 pub mod messages;
+pub mod plugin_registry;
 
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
@@ -14,13 +15,11 @@ use psp_core::gamedata::GameData;
 use psp_core::session::Session;
 use uuid::Uuid;
 
-/// A parsed session shared between a connection and the store. The per-session
-/// `tokio::Mutex` may be held across a handler's `.await`s; the store's outer
-/// `std::Mutex` is only ever held briefly.
+/// The per-session `tokio::Mutex` may be held across a handler's `.await`s;
+/// the store's outer `std::Mutex` is only ever held briefly.
 pub type SharedSession = Arc<tokio::sync::Mutex<Session>>;
 
 /// Id-keyed store of parsed sessions, so a session survives a WS reconnect.
-/// `order` bounds growth: the oldest entry is evicted past `MAX_STORED_SESSIONS`.
 #[derive(Default)]
 pub struct SessionStore {
     by_id: HashMap<Uuid, SharedSession>,
@@ -30,7 +29,6 @@ pub struct SessionStore {
 const MAX_STORED_SESSIONS: usize = 8;
 
 impl SessionStore {
-    /// Inserts `session` under a fresh id, evicting the oldest past the cap.
     pub fn register(&mut self, session: SharedSession) -> Uuid {
         let id = Uuid::new_v4();
         self.by_id.insert(id, session);
@@ -63,49 +61,39 @@ impl SessionStore {
 
 #[derive(Debug, Clone)]
 pub struct AppConfig {
-    /// Enables native file dialogs and the local folder/browser handlers.
     pub desktop_mode: bool,
 }
 
 pub struct AppState {
     pub config: AppConfig,
     pub game_data: Arc<GameData>,
-    /// The DbDriver seam: every domain call runs its SQL through this handle.
     pub driver: Arc<dyn psp_db::DbDriver>,
     pub dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
-    /// Count of currently-open `/ws/{client_id}` connections. The transport
-    /// (psp-server's `ws` module) maintains it with a `Drop` guard around each
-    /// connection so it also decrements on panic or early return, making
-    /// reader-loop/writer-task teardown observable in tests.
+    /// The transport maintains this with a `Drop` guard around each connection
+    /// so it also decrements on panic or early return.
     pub live_connections: tokio::sync::watch::Sender<usize>,
     /// Transport-owned router for native-only message types (server
-    /// management, shell-open). NullExtRouter on targets without them.
+    /// management, shell-open). `NullExtRouter` on targets without them.
     pub ext: Arc<dyn crate::dispatcher::ExtRouter>,
-    /// Parsed sessions keyed by id, so a session survives a WS reconnect. A
-    /// connection registers its session here on load; reattach/eject read it.
+    /// A connection registers its session here on load; reattach/eject read it.
     pub sessions: std::sync::Mutex<SessionStore>,
-    /// Lazily-built breeding database (indexes over `game_data`). Built on
-    /// first handler call so wasm — where `game_data` is populated post-init —
-    /// doesn't race construction.
+    /// Built on first handler call so wasm — where `game_data` is populated
+    /// post-init — doesn't race construction.
     pub breeding_db: std::sync::OnceLock<Arc<psp_core::breeding::BreedingDB>>,
+    /// Bundled plugin sources and in-flight run cancellation handles.
+    pub plugins: plugin_registry::PluginRegistry,
 }
 
 impl AppState {
-    /// Lazily builds and caches the breeding database from `game_data`.
-    /// Subsequent calls return the cached `Arc`. Built on first handler call
-    /// so wasm — where `game_data` is populated post-init — doesn't race
-    /// construction.
     pub fn breeding_db(
         &self,
     ) -> Result<&Arc<psp_core::breeding::BreedingDB>, psp_core::breeding::BreedingError> {
-        // Fast path: already built by a prior call.
         if let Some(cached) = self.breeding_db.get() {
             return Ok(cached);
         }
         let db = Arc::new(psp_core::breeding::BreedingDB::from_game_data(&self.game_data)?);
-        // `set` succeeds on the first writer; on a race the cell already holds
-        // a valid Arc. Either way the cell now owns it, so re-fetch and borrow
-        // against `&self`.
+        // `set` succeeds on the first writer; on a race the cell already holds a
+        // valid Arc either way, so re-fetch rather than trust this call's result.
         let _ = self.breeding_db.set(db);
         Ok(self
             .breeding_db
@@ -163,8 +151,6 @@ pub mod test_support {
     use crate::emitter::Emitter;
     use crate::{AppConfig, AppState};
 
-    /// Everything a handler unit test needs: an AppState over a temp DB and a
-    /// synthetic game-data dir, plus an Emitter whose frames land in `frames`.
     pub struct TestContext {
         pub app: Arc<AppState>,
         pub session: Session,
@@ -176,8 +162,6 @@ pub mod test_support {
     }
 
     impl TestContext {
-        /// `populate_data_dir` writes JSON files into the future data/json dir
-        /// before GameData loads it.
         pub async fn new(populate_data_dir: impl FnOnce(&std::path::Path)) -> Self {
             let temp_dir = tempfile::tempdir().unwrap();
             let json_dir = temp_dir.path().join("data/json");
@@ -199,6 +183,7 @@ pub mod test_support {
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
+                plugins: Default::default(),
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {
@@ -216,7 +201,6 @@ pub mod test_support {
             ext: Arc<dyn crate::dispatcher::ExtRouter>,
         ) -> Self {
             let mut test = Self::new(populate_data_dir).await;
-            // AppState is behind an Arc with no other clones yet, so rebuild it.
             let app = Arc::get_mut(&mut test.app).expect("fresh TestContext app is unshared");
             app.ext = ext;
             test
@@ -231,8 +215,6 @@ pub mod test_support {
         }
     }
 
-    /// Also usable by tests that drive a raw `UnboundedReceiver` without a full
-    /// `TestContext`.
     pub fn next_frame_json_from(receiver: &mut UnboundedReceiver<String>) -> serde_json::Value {
         let text = receiver.try_recv().expect("expected an emitted frame");
         serde_json::from_str(&text).unwrap()

@@ -4,8 +4,8 @@ use psp_core::progress::ProgressSink;
 
 use crate::messages::MessageType;
 
-/// Cheaply cloneable handle that queues outgoing frames onto the per-connection
-/// writer task, each wrapped in the wire envelope {"type": ..., "data": ...}.
+/// Cheaply cloneable handle that queues outgoing frames onto the
+/// per-connection writer task.
 #[derive(Clone)]
 pub struct Emitter {
     sender: UnboundedSender<String>,
@@ -17,8 +17,8 @@ impl Emitter {
     }
 
     pub fn emit<T: serde::Serialize>(&self, message_type: MessageType, data: &T) {
-        // Serialize the payload on its own first: a failing `Serialize` impl must
-        // not panic the connection, so log and drop the frame instead.
+        // A failing `Serialize` impl must not panic the connection, so log and
+        // drop the frame instead.
         let payload = match serde_json::to_value(data) {
             Ok(value) => value,
             Err(serialize_error) => {
@@ -34,7 +34,6 @@ impl Emitter {
         let _ = self.sender.send(text);
     }
 
-    /// Emits {"type": "error", "data": {"message": ..., "trace": ...}}.
     pub fn emit_error(&self, message: &str, trace: &str) {
         self.emit(
             MessageType::Error,
@@ -42,7 +41,6 @@ impl Emitter {
         );
     }
 
-    /// Progress strings become progress_message frames (UI spinner text).
     pub fn progress_sink(&self) -> ProgressSink {
         let emitter = self.clone();
         std::sync::Arc::new(move |progress_text: &str| {
@@ -50,7 +48,6 @@ impl Emitter {
         })
     }
 
-    /// Test-only: an Emitter whose frames land in a receiver instead of a socket.
     pub fn test_channel() -> (Self, UnboundedReceiver<String>) {
         let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
         (Self::new(sender), receiver)
@@ -112,7 +109,6 @@ mod tests {
             Err(tokio::sync::mpsc::error::TryRecvError::Empty)
         ));
 
-        // The emitter must still be usable afterwards — the connection survives.
         emitter.emit(MessageType::GetVersion, &"0.17.3");
         let value = text_frame_as_json(receiver.try_recv().unwrap());
         assert_eq!(
