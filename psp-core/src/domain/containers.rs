@@ -556,9 +556,8 @@ fn upsert_raw_slot(level: &mut crate::ue::Save, entry_index: usize, slot: &ItemC
     }
 }
 
-/// Writes `SlotNum`, then truncates `Slots` to `slot_count` entries by ARRAY
-/// POSITION, not by `slot_index` value — the two differ whenever a container's
-/// slots are not stored in ascending-`slot_index` order.
+/// `Slots` is sparse — one entry per occupied slot, addressed by the entry's
+/// own `slot_index` rather than by array position.
 fn set_item_container_slot_count(
     session: &mut SaveSession,
     container_id: uuid::Uuid,
@@ -590,11 +589,88 @@ fn set_item_container_slot_count(
     }
     if let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
     {
-        if slots.len() as i32 > slot_count {
-            slots.truncate(slot_count.max(0) as usize);
-        }
+        slots.retain(|slot| {
+            raw_item_slot_index_and_static_id(slot)
+                .map(|(slot_index, _)| slot_index < slot_count)
+                .unwrap_or(true)
+        });
     }
     Ok(())
+}
+
+fn raw_item_slot_index_and_static_id(slot: &StructValue) -> Option<(i32, &str)> {
+    let StructValue::Struct(slot_props) = slot else {
+        return None;
+    };
+    match slot_props.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw)))) => {
+            Some((raw.slot_index, raw.item.static_id.as_str()))
+        }
+        _ => None,
+    }
+}
+
+fn raw_item_slot_is_occupied(static_id: &str) -> bool {
+    !static_id.is_empty() && static_id != "None"
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SlotCountOutcome {
+    Resized { from: i32, to: i32 },
+    RefusedWouldDestroy { occupied_beyond: usize },
+}
+
+pub fn set_container_slot_count(
+    session: &mut SaveSession,
+    container_id: uuid::Uuid,
+    slot_count: i32,
+) -> Result<SlotCountOutcome, CoreError> {
+    let not_found =
+        || CoreError::Other(format!("Container {container_id} not found in the save file."));
+    let Some(entry_index) = resolve_container_entry(session, container_id) else {
+        return Err(not_found());
+    };
+    let entries = world::item_container_map_mut(&mut session.level)?;
+    let entry = entries.get_mut(entry_index).ok_or_else(not_found)?;
+    let value_props = props::struct_props_mut(&mut entry.value).ok_or_else(not_found)?;
+
+    let current_slot_num = props::get(value_props, &["SlotNum"])
+        .and_then(props::as_i32)
+        .unwrap_or(0);
+
+    let occupied_beyond = props::get(value_props, &["Slots"])
+        .and_then(props::struct_values)
+        .map(|slots| {
+            slots
+                .iter()
+                .filter_map(raw_item_slot_index_and_static_id)
+                .filter(|(slot_index, static_id)| {
+                    *slot_index >= slot_count && raw_item_slot_is_occupied(static_id)
+                })
+                .count()
+        })
+        .unwrap_or(0);
+
+    if occupied_beyond > 0 {
+        return Ok(SlotCountOutcome::RefusedWouldDestroy { occupied_beyond });
+    }
+
+    if let Some(slot_num_property) = props::get_mut(value_props, &["SlotNum"]) {
+        *slot_num_property = props::int_property(slot_count);
+    }
+    if let Some(slots) = props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
+    {
+        slots.retain(|slot| {
+            raw_item_slot_index_and_static_id(slot)
+                .map(|(slot_index, _)| slot_index < slot_count)
+                .unwrap_or(true)
+        });
+    }
+
+    Ok(SlotCountOutcome::Resized {
+        from: current_slot_num,
+        to: slot_count,
+    })
 }
 
 /// Removes the `DynamicItemSaveData` entry at `local_id` (a no-op if absent).
@@ -619,6 +695,30 @@ fn remove_dynamic_item(session: &mut SaveSession, local_id: uuid::Uuid) -> Resul
     if position < values.len() {
         values.remove(position);
     }
+    session.caches.dynamic_item_index = None;
+    Ok(())
+}
+
+fn remove_dynamic_items(
+    session: &mut SaveSession,
+    local_ids: &[uuid::Uuid],
+) -> Result<(), CoreError> {
+    if local_ids.is_empty() {
+        return Ok(());
+    }
+    let wanted: std::collections::HashSet<uuid::Uuid> = local_ids.iter().copied().collect();
+    let values = world::dynamic_item_values_mut(&mut session.level)?;
+    values.retain(|value| {
+        let StructValue::Struct(item_props) = value else {
+            return true;
+        };
+        let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(dynamic_item)))) =
+            props::get(item_props, &["RawData"])
+        else {
+            return true;
+        };
+        !wanted.contains(&props::guid_to_uuid(&dynamic_item.id.local_id_in_created_world))
+    });
     session.caches.dynamic_item_index = None;
     Ok(())
 }
@@ -897,20 +997,55 @@ pub fn apply_item_container_dto(
             )?;
         }
     }
+    let Some(container_entry_index) = resolve_container_entry(session, container_id) else {
+        return Ok(());
+    };
+    let removed_dynamic_items = apply_resolved_container_dto(session, container_entry_index, dto)?;
+    remove_dynamic_items(session, &removed_dynamic_items)?;
+
+    session.caches.dynamic_item_index = None;
+    session.caches.item_container_index = None;
+    Ok(())
+}
+
+pub fn apply_item_container_dtos(
+    session: &mut SaveSession,
+    batch: &[(uuid::Uuid, ItemContainerDto)],
+) -> Result<(), CoreError> {
+    let mut removed_dynamic_items = Vec::new();
+    for (container_id, dto) in batch {
+        let Some(container_entry_index) = resolve_container_entry(session, *container_id) else {
+            continue;
+        };
+        removed_dynamic_items
+            .extend(apply_resolved_container_dto(session, container_entry_index, dto)?);
+    }
+    remove_dynamic_items(session, &removed_dynamic_items)?;
+    session.caches.dynamic_item_index = None;
+    session.caches.item_container_index = None;
+    Ok(())
+}
+
+fn resolve_container_entry(session: &mut SaveSession, container_id: uuid::Uuid) -> Option<usize> {
     if session.caches.item_container_index.is_none() {
         session.caches.item_container_index =
             Some(world::build_item_container_index(&session.level));
     }
-    let Some(container_entry_index) = session
+    session
         .caches
         .item_container_index
         .as_ref()
         .expect("just built")
         .get(&container_id)
         .copied()
-    else {
-        return Ok(());
-    };
+}
+
+fn apply_resolved_container_dto(
+    session: &mut SaveSession,
+    container_entry_index: usize,
+    dto: &ItemContainerDto,
+) -> Result<Vec<uuid::Uuid>, CoreError> {
+    let mut removed_dynamic_items = Vec::new();
 
     // Cleanup pass.
     for incoming_slot in &dto.slots {
@@ -921,7 +1056,7 @@ pub fn apply_item_container_dto(
         );
         if incoming_slot.dynamic_item.is_none() {
             if let Some(local_id) = existing_local_id {
-                remove_dynamic_item(session, local_id)?;
+                removed_dynamic_items.push(local_id);
                 // The raw slot keeps pointing at the removed entry; a slot with
                 // a dangling reference is dropped on the next read.
             }
@@ -961,10 +1096,7 @@ pub fn apply_item_container_dto(
             );
         }
     }
-
-    session.caches.dynamic_item_index = None;
-    session.caches.item_container_index = None;
-    Ok(())
+    Ok(removed_dynamic_items)
 }
 
 /// Applies a base's storage-container edits and its name/area-range.
@@ -1408,6 +1540,36 @@ mod tests {
                 value: struct_property(value_props),
             }]),
         );
+        world_save_data.insert(
+            "DynamicItemSaveData",
+            Property::Array(ValueVec::Struct(dynamic_items)),
+        );
+        let mut root_properties = Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        minimal_save(root_properties)
+    }
+
+    fn save_with_item_containers(
+        containers: Vec<(uuid::Uuid, i32, Vec<StructValue>)>,
+        dynamic_items: Vec<StructValue>,
+    ) -> Save {
+        let entries = containers
+            .into_iter()
+            .map(|(container_id, slot_num, slots)| {
+                let mut key_props = Properties::default();
+                key_props.insert("ID", guid_property(container_id));
+                let mut value_props = Properties::default();
+                value_props.insert("SlotNum", props::int_property(slot_num));
+                value_props.insert("Slots", Property::Array(ValueVec::Struct(slots)));
+                crate::ue::MapEntry {
+                    key: struct_property(key_props),
+                    value: struct_property(value_props),
+                }
+            })
+            .collect();
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("ItemContainerSaveData", Property::Map(entries));
         world_save_data.insert(
             "DynamicItemSaveData",
             Property::Array(ValueVec::Struct(dynamic_items)),
@@ -1870,6 +2032,58 @@ mod tests {
             .is_empty());
     }
 
+    #[test]
+    fn apply_item_container_dtos_removes_many_dynamic_items_without_a_rebuild_per_removal() {
+        const N: usize = 4000;
+        let mut containers = Vec::with_capacity(N);
+        let mut dynamic_items = Vec::with_capacity(N);
+        let mut batch = Vec::with_capacity(N);
+        for i in 0..N {
+            let container_id = uuid::Uuid::from_u128(0x1000_0000_0000_0000_0000_0000_0000_0000 + i as u128);
+            let local_id = uuid::Uuid::from_u128(0x2000_0000_0000_0000_0000_0000_0000_0000 + i as u128);
+            let slot = item_container_slot(0, 1, "SFBow_5", local_id);
+            let weapon = dynamic_item_entry(
+                local_id,
+                "SFBow_5",
+                crate::ue::games::palworld::PalDynamicItemType::Weapon {
+                    leading_bytes: [0; 4],
+                    durability: 80.0,
+                    remaining_bullets: 12,
+                    passive_skill_list: vec![],
+                    unknown_str: None,
+                    trailing_bytes: [0; 4],
+                },
+            );
+            containers.push((container_id, 1, vec![slot]));
+            dynamic_items.push(weapon);
+            batch.push((
+                container_id,
+                ItemContainerDto {
+                    id: container_id,
+                    r#type: "CommonContainer".to_string(),
+                    slots: vec![slot_dto(0, 1, "SFBow_5", None)],
+                    key: None,
+                    slot_num: 0,
+                },
+            ));
+        }
+        let save = save_with_item_containers(containers, dynamic_items);
+        let mut session = SaveSession::new_for_tests(SaveKind::InMemory, save);
+
+        let start = std::time::Instant::now();
+        apply_item_container_dtos(&mut session, &batch).unwrap();
+        let elapsed = start.elapsed();
+
+        assert!(world::dynamic_item_values(&session.level)
+            .unwrap()
+            .is_empty());
+        assert!(
+            elapsed < std::time::Duration::from_millis(1500),
+            "removing {N} dynamic items across a batch of {N} containers took {elapsed:?}; \
+             a per-removal index rebuild makes this cost O(N^2)"
+        );
+    }
+
     /// Each `AdditionalInventory_*` slot in an essential container grows its
     /// paired common container by 3 slots over the base 42, capped at 4.
     #[test]
@@ -1942,8 +2156,6 @@ mod tests {
         assert_eq!(slot_num, 42 + 2 * 3, "42 + min(2,4)*3 = 48");
     }
 
-    /// Shrinking below the container's current slot count removes the excess
-    /// entries by array position.
     #[test]
     fn apply_item_container_dto_essential_resize_truncates_excess_common_slots() {
         let common_id = uuid::Uuid::parse_str("66666666-0000-0000-0000-000000000000").unwrap();
@@ -2013,6 +2225,86 @@ mod tests {
             .and_then(props::struct_values)
             .unwrap();
         assert_eq!(remaining_slots.len(), 42);
+    }
+
+    #[test]
+    fn apply_item_container_dto_essential_resize_retains_by_slot_index_not_position() {
+        let common_id = uuid::Uuid::parse_str("88888888-0000-0000-0000-000000000000").unwrap();
+        let essential_id = uuid::Uuid::parse_str("99999999-0000-0000-0000-000000000000").unwrap();
+
+        let common_slots: Vec<StructValue> = (0..45)
+            .map(|position| {
+                let slot_index = 44 - position;
+                item_container_slot(slot_index, 1, "Wood", props::EMPTY_UUID)
+            })
+            .collect();
+        let mut key_common = Properties::default();
+        key_common.insert("ID", guid_property(common_id));
+        let mut value_common = Properties::default();
+        value_common.insert("SlotNum", props::int_property(45));
+        value_common.insert("Slots", Property::Array(ValueVec::Struct(common_slots)));
+
+        let mut key_essential = Properties::default();
+        key_essential.insert("ID", guid_property(essential_id));
+        let mut value_essential = Properties::default();
+        value_essential.insert("SlotNum", props::int_property(0));
+        value_essential.insert("Slots", Property::Array(ValueVec::Struct(vec![])));
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert(
+            "ItemContainerSaveData",
+            Property::Map(vec![
+                crate::ue::MapEntry {
+                    key: struct_property(key_common),
+                    value: struct_property(value_common),
+                },
+                crate::ue::MapEntry {
+                    key: struct_property(key_essential),
+                    value: struct_property(value_essential),
+                },
+            ]),
+        );
+        world_save_data.insert(
+            "DynamicItemSaveData",
+            Property::Array(ValueVec::Struct(vec![])),
+        );
+        let mut root_properties = Properties::default();
+        root_properties.insert("worldSaveData", struct_property(world_save_data));
+        let mut session =
+            SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties));
+
+        let dto = ItemContainerDto {
+            id: essential_id,
+            r#type: "EssentialContainer".to_string(),
+            slots: vec![],
+            key: None,
+            slot_num: 0,
+        };
+        apply_item_container_dto(&mut session, essential_id, &dto, Some(common_id)).unwrap();
+
+        let entries = world::item_container_map(&session.level).unwrap();
+        let common_entry = entries
+            .iter()
+            .find(|entry| {
+                props::struct_props(&entry.key)
+                    .and_then(|key| props::get(key, &["ID"]))
+                    .and_then(props::as_uuid)
+                    == Some(common_id)
+            })
+            .unwrap();
+        let common_value = props::struct_props(&common_entry.value).unwrap();
+        let remaining_slots = props::get(common_value, &["Slots"])
+            .and_then(props::struct_values)
+            .unwrap();
+
+        let mut remaining_indices: Vec<i32> = remaining_slots
+            .iter()
+            .filter_map(raw_item_slot_index_and_static_id)
+            .map(|(slot_index, _)| slot_index)
+            .collect();
+        remaining_indices.sort_unstable();
+
+        assert_eq!(remaining_indices, (0..42).collect::<Vec<i32>>());
     }
 
     #[test]
@@ -2411,6 +2703,221 @@ mod tests {
             foreign_slots.is_empty(),
             "a container id outside this base's real storage set must never be mutated, \
              even when a genuinely-owned container is edited in the SAME call"
+        );
+    }
+
+    fn load_fixture_session(name: &str) -> SaveSession {
+        let save_dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves")
+            .join(name);
+        let level_sav_bytes =
+            std::fs::read(save_dir.join("Level.sav")).expect("read fixture Level.sav");
+        let level_meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).ok();
+
+        let mut player_file_refs: std::collections::BTreeMap<
+            uuid::Uuid,
+            crate::session::PlayerFileData,
+        > = std::collections::BTreeMap::new();
+        if let Ok(entries) = std::fs::read_dir(save_dir.join("Players")) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.extension().is_none_or(|ext| ext != "sav") {
+                    continue;
+                }
+                let Some(stem) = path.file_stem().and_then(|s| s.to_str()) else {
+                    continue;
+                };
+                let (uid_part, is_dps) = match stem.strip_suffix("_dps") {
+                    Some(base) => (base, true),
+                    None => (stem, false),
+                };
+                let Ok(uid) = uid_part.parse::<uuid::Uuid>() else {
+                    continue;
+                };
+                let file_ref =
+                    player_file_refs
+                        .entry(uid)
+                        .or_insert(crate::session::PlayerFileData::Paths {
+                            sav: None,
+                            dps: None,
+                        });
+                if let crate::session::PlayerFileData::Paths { sav, dps } = file_ref {
+                    if is_dps {
+                        *dps = Some(path);
+                    } else {
+                        *sav = Some(path);
+                    }
+                }
+            }
+        }
+
+        SaveSession::load(
+            crate::session::SaveKind::Steam {
+                level_path: save_dir.join("Level.sav"),
+            },
+            save_dir.to_string_lossy().into_owned(),
+            "steam",
+            &level_sav_bytes,
+            level_meta_bytes.as_deref(),
+            None,
+            player_file_refs,
+            None,
+            true,
+            &crate::progress::null_progress(),
+        )
+        .expect("load fixture session")
+    }
+
+    /// Guards the sparse-`Slots` assumption the resize logic depends on.
+    #[test]
+    fn container_slots_are_sparse_and_addressed_by_slot_index() {
+        let data = game_data();
+        let mut session = load_fixture_session("v1_relics");
+        let ids: Vec<uuid::Uuid> = world::build_item_container_index(&session.level)
+            .keys()
+            .copied()
+            .collect();
+
+        let mut saw_sparse = false;
+        for id in ids {
+            let Some(dto) =
+                read_item_container(&session.level, &mut session.caches, &data, id, "", None)
+            else {
+                continue;
+            };
+            if dto.slots.len() < dto.slot_num as usize {
+                saw_sparse = true;
+            }
+            for (position, slot) in dto.slots.iter().enumerate() {
+                if slot.slot_index as usize != position {
+                    saw_sparse = true;
+                }
+            }
+        }
+        assert!(
+            saw_sparse,
+            "no container in the fixture is sparse; the resize design assumes sparse storage"
+        );
+    }
+
+    fn occupied_slot_indexes(dto: &ItemContainerDto) -> Vec<i32> {
+        dto.slots
+            .iter()
+            .filter(|slot| {
+                let static_id = slot.static_id.as_deref();
+                static_id.is_some() && static_id != Some("") && static_id != Some("None")
+            })
+            .map(|slot| slot.slot_index)
+            .collect()
+    }
+
+    #[test]
+    fn growing_a_container_raises_slot_num_without_adding_entries() {
+        let game_data = game_data();
+        let mut session = load_fixture_session("v1_relics");
+        let id = uuid::Uuid::parse_str("38bbf73f-4634-efcc-0a61-05a94660c594").unwrap();
+        let before =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        assert!(
+            !occupied_slot_indexes(&before).is_empty(),
+            "fixture precondition: container must have at least one occupied slot"
+        );
+        let target = before.slot_num + 10;
+
+        let outcome = set_container_slot_count(&mut session, id, target).expect("resizes");
+        assert!(matches!(outcome, SlotCountOutcome::Resized { .. }), "{outcome:?}");
+
+        let after =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        assert_eq!(after.slot_num, target);
+        assert_eq!(
+            after.slots.len(),
+            before.slots.len(),
+            "growing must not invent slot entries — an empty slot has no entry"
+        );
+    }
+
+    #[test]
+    fn shrinking_below_an_occupied_slot_is_refused_and_changes_nothing() {
+        let game_data = game_data();
+        let mut session = load_fixture_session("v1_relics");
+        let id = uuid::Uuid::parse_str("ee60c32f-42c6-9360-ac62-5aa680bd2f42").unwrap();
+        let before =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        assert!(
+            before
+                .slots
+                .iter()
+                .enumerate()
+                .any(|(position, slot)| slot.slot_index as usize != position),
+            "fixture precondition: needs an entry whose slot_index differs from its array \
+             position, or this test cannot distinguish index-based filtering from position-based \
+             filtering"
+        );
+        let highest = occupied_slot_indexes(&before)
+            .into_iter()
+            .max()
+            .expect("fixture precondition: container has at least one occupied slot");
+        assert!(
+            highest > 0,
+            "fixture precondition: highest occupied slot_index must be greater than 0"
+        );
+        let target = 5;
+        assert!(
+            target <= highest,
+            "fixture precondition: target must fall at or below the highest occupied slot_index"
+        );
+
+        let outcome = set_container_slot_count(&mut session, id, target)
+            .expect("returns an outcome rather than erroring");
+        assert!(
+            matches!(outcome, SlotCountOutcome::RefusedWouldDestroy { .. }),
+            "{outcome:?}"
+        );
+
+        let after =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        assert_eq!(after.slot_num, before.slot_num, "a refused resize must not write SlotNum");
+        assert_eq!(
+            after.slots.len(),
+            before.slots.len(),
+            "a refused resize must not drop entries"
+        );
+    }
+
+    #[test]
+    fn shrinking_above_every_occupied_slot_succeeds_and_keeps_the_items() {
+        let game_data = game_data();
+        let mut session = load_fixture_session("v1_relics");
+        let id = uuid::Uuid::parse_str("aa1a3081-4c17-304d-9db4-839bc66c0835").unwrap();
+        let before =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        let highest = occupied_slot_indexes(&before)
+            .into_iter()
+            .max()
+            .expect("fixture precondition: container has at least one occupied slot");
+        let target = highest + 1;
+        assert!(
+            target < before.slot_num,
+            "fixture precondition: container must have headroom to shrink into"
+        );
+
+        let outcome = set_container_slot_count(&mut session, id, target).expect("resizes");
+        assert!(matches!(outcome, SlotCountOutcome::Resized { .. }), "{outcome:?}");
+
+        let after =
+            read_item_container(&session.level, &mut session.caches, &game_data, id, "", None)
+                .expect("resolves");
+        assert_eq!(after.slot_num, target);
+        assert_eq!(
+            after.slots.len(),
+            before.slots.len(),
+            "no occupied slot may be lost"
         );
     }
 }

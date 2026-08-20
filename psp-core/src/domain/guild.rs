@@ -15,6 +15,16 @@ use crate::ue::{Properties, Property, PropertyKey, StructValue};
 
 use super::{containers, guild_tail, pal, world};
 
+pub fn base_camp_location(entry: &crate::ue::MapEntry) -> Option<(f64, f64, f64)> {
+    let value_properties = props::struct_props(&entry.value)?;
+    let raw_data = props::get(value_properties, &["RawData"])?;
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(crate::ue::PalStruct::BaseCamp(base_camp))) = raw_data else {
+        return None;
+    };
+    let t = &base_camp.transform.translation;
+    Some((t.x.0, t.y.0, t.z.0))
+}
+
 /// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector
 /// container_id)`.
 ///
@@ -580,7 +590,7 @@ pub(crate) fn base_storage_container_ids(
 /// The guild chest's container id as resolved from the save itself. Guild-chest
 /// edits route through this, never through the client-supplied
 /// `GuildDto::guild_chest.id`, so a forged id cannot redirect the write.
-pub(crate) fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Option<uuid::Uuid> {
+pub fn guild_chest_id(session: &SaveSession, guild_id: uuid::Uuid) -> Option<uuid::Uuid> {
     let extra_index = guild_extra_entry_index(session, guild_id).ok().flatten()?;
     guild_chest_container_id(session, extra_index)
 }

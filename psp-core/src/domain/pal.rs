@@ -51,6 +51,16 @@ fn pal_data_for<'a>(character_key: &str, game_data: &'a GameData) -> Option<&'a 
         .and_then(|pals_json| pals_json.get(canonical))
 }
 
+/// A lucky pal carries the same `BOSS_` prefix as a boss but is never one —
+/// mutually exclusive by construction in Palworld itself.
+pub fn boss_and_lucky(save_parameter: &Properties, character_id: &str) -> (bool, bool) {
+    let is_lucky = param(save_parameter, "IsRarePal")
+        .and_then(props::as_bool)
+        .unwrap_or(false);
+    let is_boss = character_id.to_uppercase().starts_with("BOSS_") && !is_lucky;
+    (is_boss, is_lucky)
+}
+
 /// Builds the full `PalDto` from a resolved `SaveParameter` bag, for both
 /// Level.sav pals (`is_dps: false`) and GPS/DPS-array pals (`is_dps: true`).
 pub fn read_save_parameter_dto(
@@ -66,11 +76,7 @@ pub fn read_save_parameter_dto(
         .unwrap_or("")
         .to_string();
 
-    let is_lucky = param(save_parameter, "IsRarePal")
-        .and_then(props::as_bool)
-        .unwrap_or(false);
-    // A lucky pal is never also reported as a boss.
-    let is_boss = character_id.to_uppercase().starts_with("BOSS_") && !is_lucky;
+    let (is_boss, is_lucky) = boss_and_lucky(save_parameter, &character_id);
 
     let is_awakened = param(save_parameter, "bIsAwakening")
         .and_then(props::as_bool)

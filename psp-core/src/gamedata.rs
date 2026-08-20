@@ -28,6 +28,7 @@ pub struct GameData {
     entries: HashMap<String, Value>,
     version: String,
     pal_lookup: OnceLock<PalLookup>,
+    item_keys: OnceLock<HashSet<String>>,
 }
 
 impl GameData {
@@ -60,6 +61,7 @@ impl GameData {
             entries,
             version: env!("CARGO_PKG_VERSION").to_string(),
             pal_lookup: OnceLock::new(),
+            item_keys: OnceLock::new(),
         }
     }
 
@@ -79,6 +81,23 @@ impl GameData {
     /// App version for the `get_version` message.
     pub fn version(&self) -> &str {
         &self.version
+    }
+
+    pub fn is_known_pal_key(&self, id: &str) -> bool {
+        self.pal_lookup().lower_to_canonical.contains_key(&id.to_lowercase())
+    }
+
+    /// Item ids in a save do not always match `items.json`'s casing, so the
+    /// lookup must be case-insensitive.
+    pub fn is_known_item_key(&self, id: &str) -> bool {
+        self.item_keys
+            .get_or_init(|| {
+                self.get("items")
+                    .and_then(Value::as_object)
+                    .map(|items| items.keys().map(|key| key.to_lowercase()).collect())
+                    .unwrap_or_default()
+            })
+            .contains(&id.to_lowercase())
     }
 
     pub(crate) fn pal_lookup(&self) -> &PalLookup {
@@ -214,6 +233,21 @@ mod tests {
             "backslashes and casing normalize like the directory loader"
         );
         assert_eq!(data.version(), env!("CARGO_PKG_VERSION"));
+    }
+
+    #[test]
+    fn is_known_item_key_accepts_catalog_ids_in_any_casing_and_rejects_others() {
+        let data = GameData::from_entries([(
+            "items".to_string(),
+            r#"{"Wood":{"id":1},"GunPowder2":{"id":2}}"#.to_string(),
+        )])
+        .expect("entries parse");
+
+        assert!(data.is_known_item_key("Wood"));
+        assert!(data.is_known_item_key("wood"), "casing in a save need not match the catalog");
+        assert!(data.is_known_item_key("gunpowder2"));
+        assert!(!data.is_known_item_key("PSP_Test_Definitely_Bogus_Item"));
+        assert!(!data.is_known_item_key(""));
     }
 
     #[test]
