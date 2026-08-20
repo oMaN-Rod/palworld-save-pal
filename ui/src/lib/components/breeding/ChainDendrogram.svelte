@@ -1,16 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	/**
 	 * ChainDendrogram — thin Svelte wrapper around DendrogramEngine for ONE
 	 * breeding chain. Handles DOM events, ResizeObserver, lifecycle, and the
 	 * zoom/fit/reset toolbar.
 	 */
 	import { onMount, onDestroy, untrack } from 'svelte';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Minus from '@lucide/svelte/icons/minus';
-	import Maximize2 from '@lucide/svelte/icons/maximize-2';
-	import Download from '@lucide/svelte/icons/download';
-	import Copy from '@lucide/svelte/icons/copy';
-	import Check from '@lucide/svelte/icons/check';
 	import * as m from '$i18n/messages';
 	import { getToastState, theme } from '$states';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
@@ -229,21 +224,21 @@
 			title={m.breeding_zoom_in()}
 			onclick={() => engine?.zoomBy(1.25)}
 		>
-			<Plus size={14} />
+			<Icon icon="tabler:plus" size={14} />
 		</button>
 		<button
 			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5"
 			title={m.breeding_zoom_out()}
 			onclick={() => engine?.zoomBy(0.8)}
 		>
-			<Minus size={14} />
+			<Icon icon="tabler:minus" size={14} />
 		</button>
 		<button
 			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5"
 			title={m.breeding_fit_view()}
 			onclick={() => engine?.fit()}
 		>
-			<Maximize2 size={14} />
+			<Icon icon="tabler:maximize" size={14} />
 		</button>
 		<div class="bg-surface-700/40 my-0.5 h-px"></div>
 		<button
@@ -252,7 +247,7 @@
 			disabled={exporting}
 			onclick={() => handleExport('download')}
 		>
-			<Download size={14} class={exporting ? 'animate-pulse' : ''} />
+			<Icon icon="tabler:download" size={14} class={exporting ? 'animate-pulse' : ''} />
 		</button>
 		<button
 			class="btn btn-secondary text-surface-200 hover:text-surface-50 rounded-sm p-1.5 disabled:cursor-not-allowed disabled:opacity-40"
@@ -260,7 +255,10 @@
 			disabled={exporting}
 			onclick={() => handleExport('copy')}
 		>
-			{#if copied}<Check size={14} class="text-success-400" />{:else}<Copy size={14} />{/if}
+			{#if copied}<Icon icon="tabler:check" size={14} class="text-success-400" />{:else}<Icon
+					icon="tabler:copy"
+					size={14}
+				/>{/if}
 		</button>
 	</div>
 

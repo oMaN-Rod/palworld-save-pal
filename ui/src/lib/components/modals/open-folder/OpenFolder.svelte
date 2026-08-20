@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Card, Tooltip } from '$components/ui';
-	import History from '@lucide/svelte/icons/history';
-	import FolderDot from '@lucide/svelte/icons/folder-dot';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { assetLoader, focusModal } from '$utils';
 	import { send } from '$utils/websocketUtils';
@@ -16,18 +15,21 @@
 
 	type Folder = {
 		name: string;
-		icon: typeof History | string;
+		/** Iconify icon name, e.g. `tabler:history`. */
+		icon: string;
 		folderType: string;
+		/** Raw inline SVG (brand assets) rendered instead of `icon` when set. */
+		svg?: string;
 	};
 
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`) as string;
 	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`) as string;
 
 	const folders: Folder[] = [
-		{ name: 'Backups', icon: History, folderType: 'backups' },
-		{ name: 'Steam', icon: steamIcon, folderType: 'steam' },
-		{ name: 'Game pass', icon: xboxIcon, folderType: 'gamepass' },
-		{ name: 'PSP Root', icon: FolderDot, folderType: 'psp_root' }
+		{ name: 'Backups', icon: 'tabler:history', folderType: 'backups' },
+		{ name: 'Steam', icon: 'tabler:folder', folderType: 'steam', svg: steamIcon },
+		{ name: 'Game pass', icon: 'tabler:folder', folderType: 'gamepass', svg: xboxIcon },
+		{ name: 'PSP Root', icon: 'tabler:folder-share', folderType: 'psp_root' }
 	];
 
 	function handleFolderClick(folderType: string) {
@@ -54,13 +56,12 @@
 						class="border-secondary-500/50 hover:bg-secondary-500/25 flex cursor-pointer flex-col items-center space-y-1 rounded-md border p-4"
 						onclick={() => handleFolderClick(folder.folderType)}
 					>
-						{#if typeof folder.icon === 'string'}
+						{#if folder.svg}
 							<div class="h-12 w-12">
-								{@html folder.icon}
+								{@html folder.svg}
 							</div>
 						{:else}
-							{@const Icon = folder.icon}
-							<Icon class="h-12 w-12" />
+							<Icon icon={folder.icon} class="h-12 w-12" />
 						{/if}
 					</button>
 					{#snippet popup()}

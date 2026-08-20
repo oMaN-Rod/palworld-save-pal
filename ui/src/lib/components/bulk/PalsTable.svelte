@@ -1,9 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Table, Input, Loading, Button, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
-	import PawPrint from '@lucide/svelte/icons/paw-print';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import Trash from '@lucide/svelte/icons/trash';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { getAppState, getModalState, getToastState, getPalEditorState } from '$states';
@@ -126,7 +124,6 @@
 	}
 
 	async function deleteOne(row: PalRow) {
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.pal }),
 			message: m.delete_entity_by_name_confirm({ name: row.nickname || row.species_name }),
@@ -139,7 +136,6 @@
 	async function bulkDelete() {
 		const ids = [...selected];
 		if (ids.length === 0) return;
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_selected_entity({ entity: c.pals }),
 			message: m.delete_count_entities_confirm({ count: ids.length, entity: c.pals }),
@@ -185,7 +181,7 @@
 					disabled={selected.size === 0}
 				>
 					<Button variant="ghost" disabled={selected.size === 0} onclick={bulkDelete}>
-						<Trash class="h-4 w-4" />
+						<Icon icon="tabler:trash" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -201,7 +197,7 @@
 				<Loading
 					label={m.loading_entity({ entity: c.pals })}
 					loadingComplete={!loadingRows}
-					icon={PawPrint}
+					icon="ph:paw-print"
 				/>
 			</div>
 		{:else}
@@ -244,7 +240,7 @@
 						onclick={() => deleteOne(row)}
 						title={m.delete_entity({ entity: c.pal })}
 					>
-						<Trash2 class="h-4 w-4" />
+						<Icon icon="tabler:trash-x" class="h-4 w-4" />
 					</Button>
 				{/snippet}
 				{#snippet empty()}

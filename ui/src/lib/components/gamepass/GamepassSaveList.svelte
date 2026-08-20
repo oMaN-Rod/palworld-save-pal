@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { List } from '$components/ui';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType, type GamepassSave } from '$types';
-	import Users from '@lucide/svelte/icons/users';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -43,7 +43,7 @@
 				<div class="flex w-full items-center">
 					<span class="grow">{save.world_name}</span>
 					<div class="flex items-center space-x-2">
-						<Users size={16} />
+						<Icon icon="tabler:users" size={16} />
 						<span>{save.player_count}</span>
 					</div>
 				</div>

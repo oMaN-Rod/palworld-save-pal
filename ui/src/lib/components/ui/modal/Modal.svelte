@@ -1,11 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { fade } from 'svelte/transition';
 	import { getModalState } from '$states';
 	import { cn } from '$theme';
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
 	import { m } from '$i18n/messages';
-	import X from '@lucide/svelte/icons/x';
 
 	const modal = getModalState();
 
@@ -84,7 +84,7 @@
 				aria-label={m.close()}
 				onclick={() => modal.closeModal()}
 			>
-				<X size={24} />
+				<Icon icon="tabler:x" size={24} />
 			</button>
 			<modal.component {...modal.props} closeModal={modal.closeModal} />
 		</div>

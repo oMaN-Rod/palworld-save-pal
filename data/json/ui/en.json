@@ -455,6 +455,7 @@
       ]
     }
   ],
+  "guild_leader": "Guild Leader",
   "guild_name": "Guild Name",
   "head": "Head",
   "heal_all_in_entity": "Heal all in {entity}",
@@ -863,6 +864,7 @@
   "relic_size": "Relic size",
   "relic_types": "Relic Types",
   "relics": "Relics",
+  "entity_registry": "Registry",
   "remove": "Remove",
   "remove_all_from_collections": "Remove all selected {pals} from their collections",
   "remove_from_collection": "Remove from collection",
@@ -931,6 +933,7 @@
   "shortcuts": "Shortcuts",
   "show_all": "Show all",
   "show_archived": "Show archived",
+  "show_corner_art": "Show Palworld corner art",
   "showing_pals": "Showing {start} to {end} of {total} {pals}",
   "size": "Size",
   "sizes": "Sizes",

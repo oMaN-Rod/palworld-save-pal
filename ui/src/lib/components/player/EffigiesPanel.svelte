@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	// Effigies editor, ported from PalSavTools' Player Editor panel: the
 	// progress bar IS the value editor -- click anywhere on it to set the value
 	// proportionally, −/+ for ±1 fine adjustment, /max after. Edits stage in a
@@ -21,13 +22,6 @@
 		statKeyFor
 	} from '$utils/effigies';
 	import { EntryState, type Player } from '$types';
-	import Gem from '@lucide/svelte/icons/gem';
-	import Grid3x3 from '@lucide/svelte/icons/grid-3x3';
-	import List from '@lucide/svelte/icons/list';
-	import Zap from '@lucide/svelte/icons/zap';
-	import Check from '@lucide/svelte/icons/check';
-	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
-	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
 	import * as m from '$i18n/messages';
 
 	let { player = $bindable() }: { player: Player } = $props();
@@ -183,7 +177,7 @@
 
 {#if relicsFailed}
 	<div class="flex items-center justify-center gap-1.5 py-16">
-		<TriangleAlert size={14} class="text-warning-500" />
+		<Icon icon="tabler:alert-triangle" size={14} class="text-warning-500" />
 		<p class="text-warning-500 text-xs">{m.failed_load_entity({ entity: m.edit_effigies() })}</p>
 	</div>
 {:else if Object.keys(relics).length === 0}
@@ -196,7 +190,7 @@
 			<p
 				class="text-surface-400 flex items-center gap-1.5 text-[10px] font-semibold tracking-widest uppercase"
 			>
-				<Gem size={12} class="text-secondary-500" />
+				<Icon icon="tabler:diamond" size={12} class="text-secondary-500" />
 				{m.edit_effigies()}
 				{#if knownRelics.length}
 					<span class="text-surface-500 font-normal normal-case">— {knownRelics.length}</span>
@@ -214,7 +208,7 @@
 						onclick={() => (viewMode = 'grid')}
 						aria-label={m.effigies_grid_view()}
 					>
-						<Grid3x3 size={13} />
+						<Icon icon="tabler:grid-3x3" size={13} />
 					</button>
 					<button
 						type="button"
@@ -224,19 +218,19 @@
 						onclick={() => (viewMode = 'list')}
 						aria-label={m.effigies_list_view()}
 					>
-						<List size={13} />
+						<Icon icon="tabler:list" size={13} />
 					</button>
 				</div>
 				<div class="bg-surface-200 dark:bg-surface-700 h-4 w-px"></div>
 				<Button variant="ghost" onclick={setAllToMax} disabled={!supported} class="!text-xs">
-					<Zap size={13} class="mr-1" />{m.max_all_abilities()}
+					<Icon icon="tabler:bolt" size={13} class="mr-1" />{m.max_all_abilities()}
 				</Button>
 			</div>
 		</div>
 
 		{#if !supported}
 			<p class="text-warning-500 flex items-center gap-1.5 text-xs">
-				<TriangleAlert size={13} />
+				<Icon icon="tabler:alert-triangle" size={13} />
 				{m.effigies_unsupported()}
 			</p>
 		{/if}
@@ -272,7 +266,11 @@
 						<div class="min-w-0 flex-1">
 							<p class="text-on-surface truncate text-xs leading-tight">
 								{entry.localized_name}
-								{#if illegal}<TriangleAlert size={10} class="text-warning-500 ml-1 inline" />{/if}
+								{#if illegal}<Icon
+										icon="tabler:alert-triangle"
+										size={10}
+										class="text-warning-500 ml-1 inline"
+									/>{/if}
 							</p>
 							<p class="text-surface-400 text-[9px] leading-tight">
 								{m.rank_hint({ rank: storedRank(relicKey), max: entry.max_rank })}
@@ -350,7 +348,8 @@
 									</span>
 									<p class="text-on-surface truncate text-xs font-medium">
 										{entry.localized_name}
-										{#if illegal}<TriangleAlert
+										{#if illegal}<Icon
+												icon="tabler:alert-triangle"
 												size={10}
 												class="text-warning-500 ml-1 inline"
 											/>{/if}
@@ -412,17 +411,17 @@
 
 		{#if unknownTypes.length > 0}
 			<p class="text-warning-500 flex items-start gap-1.5 text-xs">
-				<TriangleAlert size={13} class="mt-0.5 shrink-0" />
+				<Icon icon="tabler:alert-triangle" size={13} class="mt-0.5 shrink-0" />
 				{m.effigies_unknown_types({ types: unknownTypes.join(', ') })}
 			</p>
 		{/if}
 
 		<div class="border-surface-200 dark:border-surface-800 flex items-center gap-2 border-t pt-2">
 			<Button variant="primary" onclick={apply} disabled={!supported || !dirty}>
-				<Check size={14} class="mr-1" />{m.apply_effigies()}
+				<Icon icon="tabler:check" size={14} class="mr-1" />{m.apply_effigies()}
 			</Button>
 			<Button variant="ghost" onclick={reset} disabled={!dirty}>
-				<RotateCcw size={13} class="mr-1" />{m.reset()}
+				<Icon icon="tabler:rotate" size={13} class="mr-1" />{m.reset()}
 			</Button>
 		</div>
 	</div>

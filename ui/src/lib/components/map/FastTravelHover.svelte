@@ -1,10 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { MapUnlockPoint } from '$types';
 	import { worldToMap } from './utils';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Map from '@lucide/svelte/icons/map';
-	import Lock from '@lucide/svelte/icons/lock';
-	import LockOpen from '@lucide/svelte/icons/lock-open';
 	import * as m from '$i18n/messages';
 
 	let {
@@ -22,16 +19,16 @@
 		{#if point.unlocked !== undefined}
 			<div class="flex items-center gap-2">
 				{#if point.unlocked}
-					<LockOpen class="mt-0.5 h-3.5 w-3.5 shrink-0 text-green-400" />
+					<Icon icon="tabler:lock-open" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-green-400" />
 					<span class="text-xs text-green-400">{m.unlocked()}</span>
 				{:else}
-					<Lock class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
+					<Icon icon="tabler:lock" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
 					<span class="text-xs text-red-400">{m.locked()}</span>
 				{/if}
 			</div>
 		{/if}
 		<div class="flex items-start gap-2">
-			<Globe class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<Icon icon="tabler:world" class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">World Coords</div>
 				<div class="font-mono text-xs">
@@ -40,7 +37,7 @@
 			</div>
 		</div>
 		<div class="flex items-start gap-2">
-			<Map class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<Icon icon="tabler:map" class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">Map Coords</div>
 				<div class="font-mono text-xs">

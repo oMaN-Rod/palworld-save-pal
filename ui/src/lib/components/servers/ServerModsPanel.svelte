@@ -1,11 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server, ServerMod } from '$types';
 	import { getServerState } from '$states';
 	import { Card } from '$components/ui';
-	import Upload from '@lucide/svelte/icons/upload';
-	import Package from '@lucide/svelte/icons/package';
-	import Shield from '@lucide/svelte/icons/shield';
-	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import { cn } from '$theme';
 
 	let { server } = $props<{ server: Server }>();
@@ -102,7 +99,7 @@
 			<label
 				class="btn bg-primary-500 hover:bg-primary-600 flex cursor-pointer items-center gap-2 rounded-sm px-3 py-1.5 text-sm"
 			>
-				<Upload size={14} />
+				<Icon icon="tabler:upload" size={14} />
 				Install (.zip)
 				<input type="file" accept=".zip" class="hidden" onchange={handleNativeInstall} />
 			</label>
@@ -110,7 +107,7 @@
 
 		{#if server.workshop_dir}
 			<div class="text-surface-400 flex items-center gap-2 text-xs">
-				<FolderOpen size={12} />
+				<Icon icon="tabler:folder-open" size={12} />
 				Workshop: <span class="text-surface-200 font-mono">{server.workshop_dir}</span>
 			</div>
 		{:else}
@@ -121,7 +118,7 @@
 
 		{#if mods.length === 0}
 			<Card class="text-surface-400 text-center">
-				<Package size={32} class="mx-auto mb-2 opacity-50" />
+				<Icon icon="tabler:package" size={32} class="mx-auto mb-2 opacity-50" />
 				<p>No mods found</p>
 				<p class="mt-1 text-xs">
 					{#if server.workshop_dir}
@@ -137,7 +134,8 @@
 					<Card padding="p-3">
 						<div class="flex items-center justify-between">
 							<div class="flex items-center gap-3">
-								<Package
+								<Icon
+									icon="tabler:package"
 									size={16}
 									class={mod.enabled
 										? modTypeColor[mod.mod_type] || 'text-surface-400'
@@ -215,7 +213,7 @@
 				<label
 					class="btn bg-primary-500 hover:bg-primary-600 flex cursor-pointer items-center gap-2 rounded-sm px-3 py-1.5 text-sm"
 				>
-					<Upload size={14} />
+					<Icon icon="tabler:upload" size={14} />
 					Install
 					<input type="file" accept=".zip" class="hidden" onchange={handleDockerInstall} />
 				</label>
@@ -224,14 +222,14 @@
 
 		{#if mods.length === 0}
 			<Card class="text-surface-400 text-center">
-				<Package size={32} class="mx-auto mb-2 opacity-50" />
+				<Icon icon="tabler:package" size={32} class="mx-auto mb-2 opacity-50" />
 				<p>No mods installed</p>
 			</Card>
 		{:else}
 			{#if nativeMods.length > 0}
 				<div>
 					<h4 class="text-surface-400 mb-2 flex items-center gap-2 text-xs font-medium uppercase">
-						<Shield size={12} />
+						<Icon icon="tabler:shield" size={12} />
 						Native / Proxy DLL Mods
 					</h4>
 					<div class="flex flex-col gap-2">
@@ -239,7 +237,7 @@
 							<Card padding="p-3">
 								<div class="flex items-center justify-between">
 									<div class="flex items-center gap-3">
-										<Shield size={16} class="text-orange-400" />
+										<Icon icon="tabler:shield" size={16} class="text-orange-400" />
 										<div>
 											<span class="text-sm font-medium">{mod.mod_name}</span>
 											<span class="ml-2 text-xs text-orange-400">native</span>
@@ -256,7 +254,7 @@
 			{#if ue4ssMods.length > 0}
 				<div>
 					<h4 class="text-surface-400 mb-2 flex items-center gap-2 text-xs font-medium uppercase">
-						<Package size={12} />
+						<Icon icon="tabler:package" size={12} />
 						UE4SS Mods
 					</h4>
 					<div class="flex flex-col gap-2">
@@ -264,7 +262,11 @@
 							<Card padding="p-3">
 								<div class="flex items-center justify-between">
 									<div class="flex items-center gap-3">
-										<Package size={16} class={mod.enabled ? 'text-blue-400' : 'text-surface-400'} />
+										<Icon
+											icon="tabler:package"
+											size={16}
+											class={mod.enabled ? 'text-blue-400' : 'text-surface-400'}
+										/>
 										<span class="text-sm font-medium">{mod.mod_name}</span>
 									</div>
 									<button
@@ -285,7 +287,7 @@
 			{#if logicMods.length > 0}
 				<div>
 					<h4 class="text-surface-400 mb-2 flex items-center gap-2 text-xs font-medium uppercase">
-						<Package size={12} />
+						<Icon icon="tabler:package" size={12} />
 						Logic Mods (.pak)
 					</h4>
 					<div class="flex flex-col gap-2">
@@ -293,7 +295,7 @@
 							<Card padding="p-3">
 								<div class="flex items-center justify-between">
 									<div class="flex items-center gap-3">
-										<Package size={16} class="text-purple-400" />
+										<Icon icon="tabler:package" size={16} class="text-purple-400" />
 										<span class="text-sm font-medium">{mod.mod_name}</span>
 									</div>
 									<span class="text-xs text-green-400">Active</span>

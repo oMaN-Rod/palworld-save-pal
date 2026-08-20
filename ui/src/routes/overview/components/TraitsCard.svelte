@@ -1,10 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 	import { staticIcons } from '$types/icons';
-	import ShieldCheck from '@lucide/svelte/icons/shield-check';
-	import Skull from '@lucide/svelte/icons/skull';
-	import Thermometer from '@lucide/svelte/icons/thermometer';
 	import type { OverviewStats } from '$states';
 
 	let {
@@ -44,7 +42,8 @@
 				condition.sick_pals > 0 && 'border-warning-500/40 bg-warning-500/10 border'
 			)}
 		>
-			<Thermometer
+			<Icon
+				icon="tabler:temperature"
 				size={36}
 				class={condition.sick_pals > 0 ? 'text-warning-400' : 'text-surface-500'}
 			/>
@@ -59,7 +58,11 @@
 				condition.fainted_pals > 0 && 'border-error-500/40 bg-error-500/10 border'
 			)}
 		>
-			<Skull size={36} class={condition.fainted_pals > 0 ? 'text-error-400' : 'text-surface-500'} />
+			<Icon
+				icon="tabler:skull"
+				size={36}
+				class={condition.fainted_pals > 0 ? 'text-error-400' : 'text-surface-500'}
+			/>
 			<span class="text-surface-500 text-xs">{m.overview_fainted()}</span>
 			<span class="text-surface-100 text-xl font-bold tabular-nums">
 				{condition.fainted_pals.toLocaleString()}
@@ -70,7 +73,7 @@
 		<div
 			class="border-success-500/40 bg-success-500/10 text-success-300 mt-4 flex items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium"
 		>
-			<ShieldCheck size={18} />
+			<Icon icon="tabler:shield-check" size={18} />
 			{m.overview_all_healthy()}
 		</div>
 	{/if}

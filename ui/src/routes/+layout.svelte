@@ -3,7 +3,7 @@
 	import { Sidebar, PublicNav } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
-	import { getAppState, getSocketState, theme, localeState } from '$states';
+	import { cornerArt, getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
 	import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from '$lib/utils/shellRoutes';
 	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
@@ -136,7 +136,7 @@
 	     non-interactive, sits under the z-[1] shell above the body gradients.
 	     Skipped on the landing page (every locale's root) so its marketing
 	     layout stays clean. -->
-	{#if !isLandingPath(page.url.pathname)}
+	{#if cornerArt.current && !isLandingPath(page.url.pathname)}
 		<div
 			class="pointer-events-none fixed inset-0 z-0"
 			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.5;"

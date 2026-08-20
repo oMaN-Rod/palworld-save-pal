@@ -1,9 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { getServerState } from '$states';
 	import { Button, Card, Input } from '$components/ui';
-	import Send from '@lucide/svelte/icons/send';
-	import Terminal from '@lucide/svelte/icons/terminal';
 	import { cn } from '$theme';
 	import { JSONEditor } from 'svelte-jsoneditor';
 
@@ -97,7 +96,7 @@
 
 	{#if !isRunning}
 		<Card class="text-surface-400 text-center">
-			<Terminal size={32} class="mx-auto mb-2 opacity-50" />
+			<Icon icon="tabler:terminal-2" size={32} class="mx-auto mb-2 opacity-50" />
 			<p>Server must be running to use the REST API</p>
 		</Card>
 	{:else}
@@ -140,7 +139,7 @@
 		<!-- Send button -->
 		<div class="flex items-center gap-3">
 			<Button variant="primary" onclick={handleCall}>
-				<Send size={14} />
+				<Icon icon="tabler:send" size={14} />
 				Send Request
 			</Button>
 			{#if hasResponse}

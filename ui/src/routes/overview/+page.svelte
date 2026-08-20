@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getAppState, getModalState, getOverviewState, overviewViewMode } from '$states';
@@ -15,17 +16,6 @@
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import Box from '@lucide/svelte/icons/box';
-	import Building2 from '@lucide/svelte/icons/building-2';
-	import Download from '@lucide/svelte/icons/download';
-	import FileJson from '@lucide/svelte/icons/file-json';
-	import Gem from '@lucide/svelte/icons/gem';
-	import MapPin from '@lucide/svelte/icons/map-pin';
-	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
-	import Settings2 from '@lucide/svelte/icons/settings-2';
-	import ShieldCheck from '@lucide/svelte/icons/shield-check';
-	import Sparkles from '@lucide/svelte/icons/sparkles';
-	import Users from '@lucide/svelte/icons/users';
 	import OverviewTile from './components/OverviewTile.svelte';
 	import NeedsReviewCard from './components/NeedsReviewCard.svelte';
 	import TraitsCard from './components/TraitsCard.svelte';
@@ -168,16 +158,16 @@
 					<div class="flex flex-wrap items-center justify-end gap-2">
 						{#if appState.saveFile.world_option_present}
 							<Button variant="outline" size="sm" onclick={openWorldOptionModal}>
-								<Settings2 size={14} />
+								<Icon icon="tabler:adjustments" size={14} />
 								{m.overview_edit_world_options()}
 							</Button>
 						{/if}
 						<Button variant="outline" size="sm" onclick={handleDownloadSaveFile}>
-							<Download size={14} />
+							<Icon icon="tabler:download" size={14} />
 							{m.download()}
 						</Button>
 						<Button variant="outline" size="sm" onclick={exportJson} disabled={!stats}>
-							<FileJson size={14} />
+							<Icon icon="tabler:braces" size={14} />
 							{m.overview_export_json()}
 						</Button>
 						<Button
@@ -186,7 +176,10 @@
 							onclick={() => overviewState.load(true)}
 							disabled={overviewState.loading}
 						>
-							<RefreshCw size={14} class={overviewState.loading ? 'animate-spin' : ''} />
+							<Icon
+								icon={overviewState.loading ? 'svg-spinners:180-ring' : 'tabler:refresh'}
+								size={14}
+							/>
 							{m.overview_refresh()}
 						</Button>
 					</div>
@@ -229,18 +222,22 @@
 				{:else if stats}
 					<section aria-label={m.overview_world_summary()}>
 						<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-							<OverviewTile label={c.guilds} value={stats.totals.guilds} icon={Building2} />
-							<OverviewTile label={c.players} value={stats.totals.players} icon={Users} />
-							<OverviewTile label={c.bases} value={stats.totals.bases} icon={MapPin} />
+							<OverviewTile
+								label={c.guilds}
+								value={stats.totals.guilds}
+								icon="tabler:building-community"
+							/>
+							<OverviewTile label={c.players} value={stats.totals.players} icon="tabler:users" />
+							<OverviewTile label={c.bases} value={stats.totals.bases} icon="tabler:map-pin" />
 							<OverviewTile
 								label={m.overview_containers()}
 								value={stats.totals.containers}
-								icon={Box}
+								icon="tabler:box"
 							/>
 							<OverviewTile
 								label={c.pals}
 								value={stats.totals.pals}
-								icon={Sparkles}
+								icon="tabler:sparkles"
 								accent="text-secondary-400"
 							/>
 						</div>
@@ -285,35 +282,39 @@
 						{m.overview_world_summary()}
 					</h2>
 					<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-						<OverviewTile label={c.guilds} value={stats.totals.guilds} icon={Building2} />
-						<OverviewTile label={c.players} value={stats.totals.players} icon={Users} />
-						<OverviewTile label={c.bases} value={stats.totals.bases} icon={MapPin} />
+						<OverviewTile
+							label={c.guilds}
+							value={stats.totals.guilds}
+							icon="tabler:building-community"
+						/>
+						<OverviewTile label={c.players} value={stats.totals.players} icon="tabler:users" />
+						<OverviewTile label={c.bases} value={stats.totals.bases} icon="tabler:map-pin" />
 						<OverviewTile
 							label={m.overview_containers()}
 							value={stats.totals.containers}
-							icon={Box}
+							icon="tabler:box"
 						/>
 						<OverviewTile
 							label={c.pals}
 							value={stats.totals.pals}
-							icon={Sparkles}
+							icon="tabler:sparkles"
 							accent="text-secondary-400"
 						/>
 						<OverviewTile
 							label={m.overview_creature_pals()}
 							value={stats.totals.creature_pals}
-							icon={Sparkles}
+							icon="tabler:sparkles"
 						/>
 						<OverviewTile
 							label={m.overview_human_npcs()}
 							value={stats.totals.human_npcs}
-							icon={Users}
+							icon="tabler:users"
 							accent="text-tertiary-400"
 						/>
 						<OverviewTile
 							label={m.overview_species()}
 							value={stats.totals.species}
-							icon={Gem}
+							icon="tabler:diamond"
 							accent="text-tertiary-400"
 						/>
 					</div>
@@ -346,7 +347,7 @@
 					<div
 						class="border-success-500/40 bg-success-500/10 text-success-300 flex items-center justify-center gap-2 rounded-md border px-4 py-4 text-sm font-medium"
 					>
-						<ShieldCheck size={18} />
+						<Icon icon="tabler:shield-check" size={18} />
 						{m.overview_no_flagged()}
 					</div>
 				{/if}

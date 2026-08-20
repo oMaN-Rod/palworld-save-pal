@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type * as MonacoE from 'monaco-editor';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { FileDropzone, Monaco, Spinner, Stopwatch } from '$components/ui';
@@ -6,9 +7,6 @@
 	import { getToastState, theme, type ThemeName } from '$states';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import WrapText from '@lucide/svelte/icons/text-wrap';
 
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
@@ -173,7 +171,7 @@
 	<div class="editor-wrapper">
 		<div class="toolbar">
 			<button class="toolbar-btn" title="Save SAV file" onclick={handleSave}>
-				<Save size={18} />
+				<Icon icon="tabler:device-floppy" size={18} />
 				<span>Save</span>
 			</button>
 			<button
@@ -182,11 +180,11 @@
 				title={formatted ? 'Minify JSON' : 'Format JSON'}
 				onclick={toggleFormatting}
 			>
-				<WrapText size={18} />
+				<Icon icon="tabler:text-wrap" size={18} />
 				<span>Format</span>
 			</button>
 			<button class="toolbar-btn" title="Close file" onclick={handleClose}>
-				<X size={18} />
+				<Icon icon="tabler:x" size={18} />
 				<span>Close</span>
 			</button>
 		</div>

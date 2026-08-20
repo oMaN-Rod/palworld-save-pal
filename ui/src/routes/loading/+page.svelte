@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { Spinner, Stopwatch } from '$components/ui';
 	import { getAppState } from '$states';
-	import Cpu from '@lucide/svelte/icons/cpu';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -26,7 +26,7 @@
 
 <div class="flex h-full w-full flex-col items-center justify-center">
 	<h2 class="h2 mb-8 flex items-center gap-3">
-		<Cpu size={24} class="text-primary-400" />
+		<Icon icon="tabler:cpu" size={24} class="text-primary-400" />
 		{m.working_on_it()}
 	</h2>
 	<Spinner size="size-32" />

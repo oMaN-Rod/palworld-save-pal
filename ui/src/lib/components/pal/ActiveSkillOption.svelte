@@ -1,9 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { type SelectOption } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
-	import TimerReset from '@lucide/svelte/icons/timer-reset';
 	import * as m from '$i18n/messages';
 
 	let { option } = $props<{
@@ -27,7 +27,7 @@
 	</div>
 	<div class="flex flex-col">
 		<div class="flex items-center justify-end space-x-1">
-			<TimerReset class="h-4 w-4" />
+			<Icon icon="tabler:history" class="h-4 w-4" />
 			<span class="font-bold">{activeSkill?.details.cool_time}</span>
 			<span class="text-xs">Pwr</span>
 			<span class="font-bold">{activeSkill?.details.power}</span>

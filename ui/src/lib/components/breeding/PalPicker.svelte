@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	// Searchable pal selector. Reads the shared breedable-pal list from the
 	// breeding backend (via sendAndWait). Renders a dropdown with icon + name +
 	// rarity, and emits the chosen tribe via onselect.
@@ -15,10 +16,6 @@
 	import { computePosition, flip, shift, offset, autoUpdate } from '@floating-ui/dom';
 	import { portal } from '$utils';
 	import * as m from '$i18n/messages';
-	import Search from '@lucide/svelte/icons/search';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
-	import List from '@lucide/svelte/icons/list';
 	import type { BreedablePal } from '$lib/breeding/types';
 
 	let {
@@ -137,10 +134,10 @@
 				{selectedPal.display_name}
 			</span>
 		{:else}
-			<Search size={16} class="text-surface-400" />
+			<Icon icon="tabler:search" size={16} class="text-surface-400" />
 			<span class="text-surface-400 flex-1 text-sm">{placeholder}</span>
 		{/if}
-		<ChevronDown size={16} class="text-surface-400 shrink-0" />
+		<Icon icon="tabler:chevron-down" size={16} class="text-surface-400 shrink-0" />
 	</button>
 
 	{#if open}
@@ -168,7 +165,7 @@
 						onclick={() => (viewMode = 'grid')}
 						title="Grid"
 					>
-						<LayoutGrid size={15} />
+						<Icon icon="tabler:layout-grid" size={15} />
 					</button>
 					<button
 						type="button"
@@ -178,7 +175,7 @@
 						onclick={() => (viewMode = 'list')}
 						title="List"
 					>
-						<List size={15} />
+						<Icon icon="tabler:list" size={15} />
 					</button>
 				</div>
 			</div>

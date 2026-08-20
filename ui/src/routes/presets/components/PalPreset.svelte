@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tooltip } from '$components/ui';
 	import {
 		activeSkillsData,
@@ -11,8 +12,6 @@
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import Lock from '@lucide/svelte/icons/lock';
-	import Unlock from '@lucide/svelte/icons/lock-open';
 
 	const suitabilityImageMap = {
 		EmitFlame: 'kindling',
@@ -133,9 +132,9 @@
 							{/if}
 							<div class="absolute -right-6 -bottom-4 h-6 w-6 xl:h-8 xl:w-8">
 								{#if preset.pal_preset.lock}
-									<Lock class="h-4 w-4" />
+									<Icon icon="tabler:lock" class="h-4 w-4" />
 								{:else}
-									<Unlock class="h-4 w-4" />
+									<Icon icon="tabler:lock-open" class="h-4 w-4" />
 								{/if}
 							</div>
 						</div>

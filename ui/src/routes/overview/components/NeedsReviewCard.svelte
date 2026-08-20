@@ -1,14 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Input } from '$components/ui';
 	import { palsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
-	import AlertOctagon from '@lucide/svelte/icons/octagon-x';
-	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-	import ChevronUp from '@lucide/svelte/icons/chevron-up';
-	import Search from '@lucide/svelte/icons/search';
 	import type { OverviewStats } from '$states';
 
 	let { anomalies }: { anomalies: OverviewStats['anomalies'] } = $props();
@@ -68,9 +64,9 @@
 >
 	<div class="mb-4 flex flex-wrap items-center gap-3">
 		{#if anomalies.danger_count > 0}
-			<AlertOctagon class="text-error-400 h-8 w-8 shrink-0" />
+			<Icon icon="tabler:alert-octagon" class="text-error-400 h-8 w-8 shrink-0" />
 		{:else}
-			<AlertTriangle class="text-warning-400 h-8 w-8 shrink-0" />
+			<Icon icon="tabler:alert-triangle" class="text-warning-400 h-8 w-8 shrink-0" />
 		{/if}
 		<div class="min-w-0 flex-1">
 			<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
@@ -114,7 +110,11 @@
 
 	{#if searchable}
 		<div class="text-surface-500 relative mb-3">
-			<Search size={14} class="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2" />
+			<Icon
+				icon="tabler:search"
+				size={14}
+				class="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2"
+			/>
 			<Input
 				type="text"
 				placeholder={m.overview_search_flagged()}
@@ -126,7 +126,7 @@
 
 	{#if filtered.length === 0}
 		<div class="text-surface-500 flex items-center gap-2 py-4 text-sm">
-			<Search size={16} />
+			<Icon icon="tabler:search" size={16} />
 			<span>{m.overview_no_flagged_match()}</span>
 		</div>
 	{:else}
@@ -134,9 +134,9 @@
 			{#each visible as row, i (`${row.instance_id}-${i}`)}
 				<li class="flex items-center gap-3 py-2">
 					{#if row.severity === 'danger'}
-						<AlertOctagon size={16} class="text-error-400 shrink-0" />
+						<Icon icon="tabler:alert-octagon" size={16} class="text-error-400 shrink-0" />
 					{:else}
-						<AlertTriangle size={16} class="text-warning-400 shrink-0" />
+						<Icon icon="tabler:alert-triangle" size={16} class="text-warning-400 shrink-0" />
 					{/if}
 					<img
 						src={palIcon(row)}
@@ -183,7 +183,7 @@
 				class="text-primary-400 hover:text-primary-300 mt-2 flex w-full items-center justify-center gap-1 text-xs font-medium"
 				onclick={() => (expanded = true)}
 			>
-				<ChevronDown size={14} />
+				<Icon icon="tabler:chevron-down" size={14} />
 				{m.show_all()} ({filtered.length.toLocaleString()})
 			</button>
 		{:else if expanded && filtered.length > PREVIEW_ROWS}
@@ -192,7 +192,7 @@
 				class="text-primary-400 hover:text-primary-300 mt-2 flex w-full items-center justify-center gap-1 text-xs font-medium"
 				onclick={() => (expanded = false)}
 			>
-				<ChevronUp size={14} />
+				<Icon icon="tabler:chevron-up" size={14} />
 				{m.overview_show_less()}
 			</button>
 		{/if}

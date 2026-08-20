@@ -1,17 +1,14 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { cn } from '$theme';
-	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import type { CreateServerData, ServerType } from '$types';
 	import { getServerState } from '$states';
 	import { envGroups, PALWORLD_DOCS_URL } from './envGroups';
 	import EnvField from './EnvField.svelte';
-	import Search from '@lucide/svelte/icons/search';
 
 	let {
 		title = 'Create Server',
@@ -183,7 +180,7 @@
 				rel="noopener noreferrer"
 				class="text-surface-400 hover:text-secondary-400 flex items-center gap-1 text-xs transition-colors"
 			>
-				<ExternalLink size={12} />
+				<Icon icon="tabler:external-link" size={12} />
 				Official Docs
 			</a>
 		</div>
@@ -282,7 +279,7 @@
 								onclick={handleDetectWorkshop}
 								disabled={detectingWorkshop}
 							>
-								<Search size={14} />
+								<Icon icon="tabler:search" size={14} />
 								{detectingWorkshop ? 'Detecting...' : 'Detect'}
 							</Button>
 						</div>
@@ -369,7 +366,7 @@
 						disabled={!name.trim() || (serverType === 'native' && !installPath)}
 						data-modal-primary
 					>
-						<Save />
+						<Icon icon="tabler:device-floppy" />
 					</Button>
 				{/snippet}
 				{#snippet popup()}
@@ -379,7 +376,7 @@
 			<Tooltip position="bottom">
 				{#snippet children()}
 					<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-						<X />
+						<Icon icon="tabler:x" />
 					</Button>
 				{/snippet}
 				{#snippet popup()}

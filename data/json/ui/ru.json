@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Лидер гильдии",
   "guild_name": "Название гильдии",
   "head": "Голова",
   "heal_all_in_entity": "Исцели всё в {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Обновить (Удалить несохраненные изменения)",
   "refresh_entity": "Обновить {entity}",
   "relics": "Реликвии",
+  "entity_registry": "Реестр",
   "remove": "Удалять",
   "remove_all_from_collections": "Удалить всех выбранных {pals} из их коллекций",
   "remove_from_collection": "Удалить из коллекции",
@@ -809,6 +811,7 @@
   "shortcuts": "Ярлыки",
   "show_all": "Показать все",
   "show_archived": "Показать архив",
+  "show_corner_art": "Показывать арт Palworld в углу",
   "showing_pals": "Отображается {start} до {end} из {total} {pals}",
   "size": "Размер",
   "skill_fruits": "Плоды навыков",

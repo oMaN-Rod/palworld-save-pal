@@ -1,9 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { MapObject } from '$types';
 	import { worldToMap } from './utils';
 	import { palsData } from '$lib/data';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		point,
@@ -24,7 +23,7 @@
 	<h4>{point.pal}</h4>
 	<div class="mt-2 space-y-1">
 		<div class="flex items-start gap-2">
-			<Globe class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<Icon icon="tabler:world" class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">World Coords</div>
 				<div class="font-mono text-xs">
@@ -33,7 +32,7 @@
 			</div>
 		</div>
 		<div class="flex items-start gap-2">
-			<Map class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<Icon icon="tabler:map" class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">Map Coords</div>
 				<div class="font-mono text-xs">

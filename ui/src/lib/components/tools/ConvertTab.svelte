@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { getAppState, getToastState } from '$states';
 	import { Button, Card, Spinner } from '$components/ui';
@@ -9,10 +10,6 @@
 	import { GamepassBrowser } from '$components/gamepass';
 	import { c } from '$lib/utils/commonTranslations';
 	import * as m from '$i18n/messages';
-	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
-	import Monitor from '@lucide/svelte/icons/monitor';
-	import HardDrive from '@lucide/svelte/icons/hard-drive';
-	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -137,7 +134,7 @@
 					class="text-surface-400 hover:text-surface-200"
 					onclick={() => (showConvertBrowser = false)}
 				>
-					<ArrowLeft size={20} />
+					<Icon icon="tabler:arrow-left" size={20} />
 				</button>
 				<h2 class="text-surface-100 text-2xl font-bold">{m.gamepass()} → {m.steam()}</h2>
 			</div>
@@ -170,7 +167,7 @@
 								</div>
 								<span class="text-surface-300 text-sm">{formatLabel(currentFormat)}</span>
 							</div>
-							<ArrowRightLeft class="text-primary-400" size={28} />
+							<Icon icon="tabler:transfer" class="text-primary-400" size={28} />
 							<div class="flex flex-col items-center gap-1">
 								<div
 									class="bg-surface-800 flex h-16 w-16 items-center justify-center rounded-full p-3"
@@ -192,7 +189,7 @@
 							})}
 						</p>
 						<Button variant="primary" onclick={handleConvertLoaded}>
-							<ArrowRightLeft size={16} />
+							<Icon icon="tabler:transfer" size={16} />
 							<span>{m.tools_convert_action()}</span>
 						</Button>
 					</div>
@@ -220,7 +217,7 @@
 								>
 									{@html steamIcon}
 								</div>
-								<ArrowRightLeft class="text-surface-400" size={20} />
+								<Icon icon="tabler:transfer" class="text-surface-400" size={20} />
 								<div
 									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
 								>
@@ -248,7 +245,7 @@
 								>
 									{@html xboxIcon}
 								</div>
-								<ArrowRightLeft class="text-surface-400" size={20} />
+								<Icon icon="tabler:transfer" class="text-surface-400" size={20} />
 								<div
 									class="bg-surface-900 flex h-14 w-14 items-center justify-center rounded-full p-3"
 								>
@@ -268,7 +265,7 @@
 			<section class="w-full">
 				<Card class="mx-auto max-w-lg">
 					<div class="flex flex-col items-center gap-4 p-4">
-						<Monitor size={48} class="text-surface-400" />
+						<Icon icon="tabler:device-desktop" size={48} class="text-surface-400" />
 						<p class="text-surface-300 text-center">{m.tools_convert_desktop_required()}</p>
 					</div>
 				</Card>
@@ -279,7 +276,7 @@
 		{#if conversionResult}
 			<Card class="mx-auto max-w-lg">
 				<div class="flex items-center gap-3 p-4">
-					<HardDrive size={20} class="text-primary-400" />
+					<Icon icon="ph:hard-drives" size={20} class="text-primary-400" />
 					<span class="text-surface-200">{conversionResult}</span>
 				</div>
 			</Card>

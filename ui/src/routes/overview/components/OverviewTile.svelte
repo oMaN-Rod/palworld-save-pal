@@ -1,17 +1,18 @@
 <script lang="ts">
 	import { cn } from '$theme';
-	import type { Component } from 'svelte';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 
 	let {
 		label,
 		value,
-		icon: Icon,
+		icon,
 		accent = 'text-primary-400',
 		format = true
 	}: {
 		label: string;
 		value: number | string;
-		icon: Component<{ class?: string; size?: number }>;
+		/** Iconify icon name, e.g. `tabler:users`. */
+		icon: string;
 		accent?: string;
 		format?: boolean;
 	} = $props();
@@ -26,7 +27,7 @@
 		<span class="text-surface-400 truncate text-xs font-semibold tracking-wider uppercase">
 			{label}
 		</span>
-		<Icon size={18} class={cn('shrink-0', accent)} />
+		<Icon {icon} size={18} class={cn('shrink-0', accent)} />
 	</div>
 	<span class="text-surface-100 text-2xl font-bold tabular-nums">
 		{display}

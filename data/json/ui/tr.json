@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Lonca Lideri",
   "guild_name": "Lonca Adı",
   "head": "KAFA",
   "heal_all_in_entity": "{entity} içindeki her şeyi iyileştir",
@@ -742,6 +743,7 @@
   "refresh": "Yenile (Kaydedilmemiş değişiklikleri temizle)",
   "refresh_entity": "{entity} yenile",
   "relics": "Kalıntılar",
+  "entity_registry": "Sicil",
   "remove": "Kaldırmak",
   "remove_all_from_collections": "Seçilen tüm {pals} koleksiyonlarından kaldırın.",
   "remove_from_collection": "Koleksiyondan kaldır",
@@ -809,6 +811,7 @@
   "shortcuts": "Kısayollar",
   "show_all": "Tümünü göster",
   "show_archived": "Arşivlenmiş olanları göster",
+  "show_corner_art": "Palworld köşe sanatını göster",
   "showing_pals": "{start} {end} a kadar {total} {pals} gösteriliyor",
   "size": "Boyut",
   "skill_fruits": "Yetenek Meyveleri",

@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { ToastType } from '$types';
-	import X from '@lucide/svelte/icons/x';
 	import { getToastState } from '$states/toastState.svelte';
 	import { fly, scale } from 'svelte/transition';
 	import * as m from '$i18n/messages';
@@ -38,6 +38,6 @@
 		onclick={() => toastState.remove(toast.id)}
 	>
 		<span class="sr-only">{m.close_toast()}</span>
-		<X class="size-4" />
+		<Icon icon="tabler:x" class="size-4" />
 	</Button>
 </div>

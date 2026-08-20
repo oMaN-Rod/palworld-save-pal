@@ -1,16 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	// Renders one breeding Chain: header (target + gen count + gender
 	// feasibility), source pals (leaves), and ordered breeding steps.
 	import * as m from '$i18n/messages';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
-	import GitMerge from '@lucide/svelte/icons/git-merge';
-	import Plus from '@lucide/svelte/icons/plus';
-	import ArrowRight from '@lucide/svelte/icons/arrow-right';
-	import CheckCircle2 from '@lucide/svelte/icons/circle-check';
-	import XCircle from '@lucide/svelte/icons/circle-x';
-	import Package from '@lucide/svelte/icons/package';
-	import Hand from '@lucide/svelte/icons/hand';
-	import Trees from '@lucide/svelte/icons/trees';
 	import PalSlot from './PalSlot.svelte';
 
 	let {
@@ -26,9 +19,9 @@
 	const palFor = (tribe: string) => palMap.get(tribe);
 
 	const sourceMeta = {
-		owned: { icon: Package, label: () => m.breeding_owned(), cls: 'chip-primary' },
-		selected: { icon: Hand, label: () => m.breeding_selected(), cls: 'chip-success' },
-		wild: { icon: Trees, label: () => m.breeding_wild(), cls: 'chip-warning' }
+		owned: { icon: 'tabler:package', label: () => m.breeding_owned(), cls: 'chip-primary' },
+		selected: { icon: 'tabler:hand-grab', label: () => m.breeding_selected(), cls: 'chip-success' },
+		wild: { icon: 'tabler:trees', label: () => m.breeding_wild(), cls: 'chip-warning' }
 	} as const;
 
 	function srcMeta(type: string) {
@@ -42,7 +35,7 @@
 	<!-- header -->
 	<div class="flex flex-wrap items-center justify-between gap-2">
 		<div class="flex items-center gap-2">
-			<GitMerge size={16} class="text-primary-400" />
+			<Icon icon="tabler:git-merge" size={16} class="text-primary-400" />
 			<h3 class="text-surface-50 text-sm font-semibold">
 				{palFor(chain.target)?.display_name ?? chain.target}
 			</h3>
@@ -50,9 +43,9 @@
 				>{m.breeding_gens({ n: chain.generations })}</span
 			>
 			{#if chain.gender_feasible}
-				<CheckCircle2 size={13} class="text-success-400" />
+				<Icon icon="tabler:circle-check" size={13} class="text-success-400" />
 			{:else}
-				<XCircle size={13} class="text-error-400" />
+				<Icon icon="tabler:circle-x" size={13} class="text-error-400" />
 			{/if}
 		</div>
 		{#if chain.matched_passives.length}
@@ -69,7 +62,6 @@
 		<div class="flex flex-wrap gap-2">
 			{#each chain.sources as src}
 				{@const meta = srcMeta(src.type)}
-				{@const SrcIcon = meta.icon}
 				<div
 					class="bg-surface-900/50 border-surface-700/30 flex items-center gap-1.5 rounded-sm border px-2 py-1"
 				>
@@ -81,7 +73,7 @@
 						gender={src.gender}
 					/>
 					<span class="chip px-1.5 py-0 text-[10px] {meta.cls} shrink-0">
-						<SrcIcon size={9} class="inline" />{meta.label()}
+						<Icon icon={meta.icon} size={9} class="inline" />{meta.label()}
 					</span>
 				</div>
 			{/each}
@@ -100,14 +92,18 @@
 						characterId={step.parent_a}
 						size="md"
 					/>
-					<span class="breed-op"><Plus size={16} class="text-primary-400" /></span>
+					<span class="breed-op"
+						><Icon icon="tabler:plus" size={16} class="text-primary-400" /></span
+					>
 					<PalSlot
 						tribe={step.parent_b}
 						display={palFor(step.parent_b)?.display_name}
 						characterId={step.parent_b}
 						size="md"
 					/>
-					<span class="breed-op"><ArrowRight size={18} class="text-primary-400" /></span>
+					<span class="breed-op"
+						><Icon icon="tabler:arrow-right" size={18} class="text-primary-400" /></span
+					>
 					<PalSlot
 						tribe={step.child}
 						display={palFor(step.child)?.display_name}

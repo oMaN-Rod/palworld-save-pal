@@ -1,12 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getToastState } from '$states';
 	import { Button, Card, Spinner } from '$components/ui';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
-	import Hash from '@lucide/svelte/icons/hash';
-	import Copy from '@lucide/svelte/icons/copy';
-	import Check from '@lucide/svelte/icons/check';
 
 	const toast = getToastState();
 
@@ -76,7 +74,7 @@
 							{#if steamConverting}
 								<Spinner />
 							{:else}
-								<Hash size={16} />
+								<Icon icon="tabler:hash" size={16} />
 								<span>{m.tools_convert_action()}</span>
 							{/if}
 						</Button>
@@ -104,9 +102,9 @@
 									onclick={() => copyToClipboard(steamResult!.palworld_uid!, 'palworld')}
 								>
 									{#if copiedField === 'palworld'}
-										<Check size={16} class="text-green-400" />
+										<Icon icon="tabler:check" size={16} class="text-green-400" />
 									{:else}
-										<Copy size={16} />
+										<Icon icon="tabler:copy" size={16} />
 									{/if}
 								</button>
 							</div>
@@ -126,9 +124,9 @@
 									onclick={() => copyToClipboard(steamResult!.nosteam_uid!, 'nosteam')}
 								>
 									{#if copiedField === 'nosteam'}
-										<Check size={16} class="text-green-400" />
+										<Icon icon="tabler:check" size={16} class="text-green-400" />
 									{:else}
-										<Copy size={16} />
+										<Icon icon="tabler:copy" size={16} />
 									{/if}
 								</button>
 							</div>

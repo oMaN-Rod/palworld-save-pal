@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
-	import Star from '@lucide/svelte/icons/star';
 	import githubIcon from '$lib/assets/img/app/github.svg';
 	import { fetchGithubStars, formatStars } from '$lib/utils/githubStars';
 	import { Link } from '.';
@@ -17,7 +17,7 @@
 	<img src={githubIcon} alt="GitHub" class="h-8 w-8" />
 	{#if stars !== null}
 		<span class="text-surface-200 flex items-center gap-1 text-sm font-semibold">
-			<Star class="h-3.5 w-3.5 fill-current" />
+			<Icon icon="tabler:star" class="h-3.5 w-3.5 fill-current" />
 			{formatStars(stars)}
 		</span>
 	{/if}

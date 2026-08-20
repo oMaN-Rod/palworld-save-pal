@@ -14,6 +14,7 @@ const guilds: GuildSummary[] = [
 	{
 		id: 'g1',
 		name: 'Alpha',
+		admin_player_uid: 'p1',
 		player_count: 2,
 		base_count: 1,
 		level: 3,
@@ -47,6 +48,12 @@ describe('buildPlayerRows', () => {
 		});
 		expect(rows[1]).toMatchObject({ uid: 'p2', guildName: '—', level: 5, lastOnline: null });
 	});
+
+	it('flags the guild admin as leader, and only them', () => {
+		const rows = buildPlayerRows(players, guilds);
+		expect(rows[0].isLeader).toBe(true);
+		expect(rows[1].isLeader).toBe(false);
+	});
 });
 
 describe('buildGuildRows', () => {
@@ -60,6 +67,16 @@ describe('buildGuildRows', () => {
 			level: 3,
 			base_count: 1
 		});
+	});
+
+	it('resolves the leader uid and name when provided', () => {
+		const names = new Map([
+			['p1', 'Aria'],
+			['p2', 'Bolt']
+		]);
+		const rows = buildGuildRows(guilds, names);
+		expect(rows[0]).toMatchObject({ leaderUid: 'p1', leaderName: 'Aria' });
+		expect(rows[1]).toMatchObject({ leaderUid: null, leaderName: null });
 	});
 });
 

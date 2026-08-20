@@ -1,17 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { GamepassSave, GamepassContainerInfo } from '$types';
 	import { MessageType } from '$types';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { getToastState } from '$states';
-	import Users from '@lucide/svelte/icons/users';
-	import HardDrive from '@lucide/svelte/icons/hard-drive';
-	import Clock from '@lucide/svelte/icons/clock';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-	import ChevronRight from '@lucide/svelte/icons/chevron-right';
-	import Layers from '@lucide/svelte/icons/layers';
-	import FileBox from '@lucide/svelte/icons/file-box';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import Pencil from '@lucide/svelte/icons/pencil';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -187,9 +179,9 @@
 							onclick={() => toggleExpanded(save.save_id)}
 						>
 							{#if isExpanded}
-								<ChevronDown size={16} />
+								<Icon icon="tabler:chevron-down" size={16} />
 							{:else}
-								<ChevronRight size={16} />
+								<Icon icon="tabler:chevron-right" size={16} />
 							{/if}
 						</button>
 
@@ -250,15 +242,15 @@
 							<!-- Stats -->
 							<div class="text-surface-300 flex shrink-0 items-center gap-4 text-sm">
 								<div class="flex items-center gap-1" title="Players">
-									<Users size={14} />
+									<Icon icon="tabler:users" size={14} />
 									<span>{save.player_count}</span>
 								</div>
 								<div class="flex items-center gap-1" title="Total Size">
-									<HardDrive size={14} />
+									<Icon icon="ph:hard-drives" size={14} />
 									<span>{formatSize(save.total_size)}</span>
 								</div>
 								<div class="flex items-center gap-1" title={formatDate(save.last_modified)}>
-									<Clock size={14} />
+									<Icon icon="tabler:clock" size={14} />
 									<span>{formatRelativeTime(save.last_modified)}</span>
 								</div>
 							</div>
@@ -271,7 +263,7 @@
 										title="Rename world"
 										onclick={() => startRename(save)}
 									>
-										<Pencil size={14} />
+										<Icon icon="tabler:pencil" size={14} />
 									</button>
 									{#if confirmDelete === save.save_id}
 										<span class="text-xs text-red-400">Delete?</span>
@@ -293,7 +285,7 @@
 											title="Delete save"
 											onclick={() => (confirmDelete = save.save_id)}
 										>
-											<Trash2 size={14} />
+											<Icon icon="tabler:trash-x" size={14} />
 										</button>
 									{/if}
 								</div>
@@ -311,9 +303,9 @@
 								<div class="mb-2">
 									<div class="flex items-center gap-2 py-1">
 										{#if groupType === 'Players'}
-											<Users size={12} class="text-surface-400" />
+											<Icon icon="tabler:users" size={12} class="text-surface-400" />
 										{:else}
-											<FileBox size={12} class="text-surface-400" />
+											<Icon icon="tabler:file-database" size={12} class="text-surface-400" />
 										{/if}
 										<span class="text-surface-200 text-sm font-medium">
 											{getContainerTypeLabel(groupType)}
@@ -331,7 +323,7 @@
 													{container.container_type}
 												</span>
 												<div class="flex items-center gap-1">
-													<Layers size={10} />
+													<Icon icon="tabler:stack-2" size={10} />
 													<span>v{container.seq}</span>
 												</div>
 												<span>{formatSize(container.size)}</span>

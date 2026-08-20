@@ -1,11 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PlayerList } from '$components/player';
 	import { Combobox } from '$components/ui';
 	import { getAppState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import Building from '@lucide/svelte/icons/building';
-	import Users from '@lucide/svelte/icons/users';
 	import { worldToMap } from './utils';
 	import { mapImg } from './styles';
 	import type { Base, GuildSummary, Player } from '$types';
@@ -104,7 +103,7 @@
 
 <div class="flex flex-col gap-2">
 	<div class="flex items-center gap-2">
-		<Users class="h-4 w-4" />
+		<Icon icon="tabler:users" class="h-4 w-4" />
 		<span class="text-sm font-medium">{m.load_player()}</span>
 	</div>
 	<PlayerList selected={selectedPlayerUid} onselect={onPlayerLoaded} redirect={false} />
@@ -112,7 +111,7 @@
 
 <div class="flex flex-col gap-2">
 	<div class="flex items-center gap-2">
-		<Building class="h-4 w-4" />
+		<Icon icon="tabler:building" class="h-4 w-4" />
 		<span class="text-sm font-medium">{m.load_guild_bases()}</span>
 	</div>
 	{#if appState.loadingGuild}

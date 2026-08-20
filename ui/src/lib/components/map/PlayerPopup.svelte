@@ -1,17 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Card } from '$components/ui';
 	import { getAppState, getNavigationState } from '$states';
 	import type { Player } from '$types';
 	import { worldToMap } from './utils';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import Heart from '@lucide/svelte/icons/heart';
-	import Trophy from '@lucide/svelte/icons/trophy';
-	import Clock from '@lucide/svelte/icons/clock';
-	import Users from '@lucide/svelte/icons/users';
-	import Gamepad2 from '@lucide/svelte/icons/gamepad-2';
-	import Swords from '@lucide/svelte/icons/swords';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Map from '@lucide/svelte/icons/map';
 
 	let {
 		player
@@ -54,7 +46,7 @@
 			<div class="min-w-0 flex-1">
 				<h3 class="text-foreground truncate text-lg font-bold">{player.nickname}</h3>
 				<div class="text-muted-foreground mt-1 flex items-center gap-1.5 text-xs">
-					<Clock class="h-3 w-3 shrink-0" />
+					<Icon icon="tabler:clock" class="h-3 w-3 shrink-0" />
 					<span class="truncate">{new Date(player.last_online_time).toLocaleString()}</span>
 				</div>
 			</div>
@@ -63,7 +55,7 @@
 				type="button"
 				class="chip preset-outlined-primary-500 hover:preset-outlined-secondary-500 inline-flex shrink-0 items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-medium transition-colors"
 			>
-				<Pencil class="h-3 w-3" />
+				<Icon icon="tabler:pencil" class="h-3 w-3" />
 				Edit
 			</button>
 		</div>
@@ -72,7 +64,7 @@
 		{#if guildName}
 			<div class="border-b pb-3">
 				<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
-					<Users class="text-primary h-4 w-4 shrink-0" />
+					<Icon icon="tabler:users" class="text-primary h-4 w-4 shrink-0" />
 					<div class="min-w-0 flex-1">
 						<div class="text-muted-foreground text-xs">Guild</div>
 						<div class="truncate text-sm font-semibold">{guildName}</div>
@@ -84,21 +76,21 @@
 		<!-- Stats Grid -->
 		<div class="grid grid-cols-2 gap-3">
 			<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
-				<Trophy class="text-primary h-4 w-4 shrink-0" />
+				<Icon icon="tabler:trophy" class="text-primary h-4 w-4 shrink-0" />
 				<div class="min-w-0">
 					<div class="text-muted-foreground text-xs">Level</div>
 					<div class="text-sm font-semibold">{player.level}</div>
 				</div>
 			</div>
 			<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
-				<Heart class="h-4 w-4 shrink-0 text-red-500" />
+				<Icon icon="tabler:heart" class="h-4 w-4 shrink-0 text-red-500" />
 				<div class="min-w-0">
 					<div class="text-muted-foreground text-xs">HP</div>
 					<div class="text-sm font-semibold">{player.hp}</div>
 				</div>
 			</div>
 			<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
-				<Gamepad2 class="text-primary h-4 w-4 shrink-0" />
+				<Icon icon="tabler:device-gamepad-2" class="text-primary h-4 w-4 shrink-0" />
 				<div class="min-w-0">
 					<div class="text-muted-foreground text-xs">Pals</div>
 					<div class="text-sm font-semibold">{palCount}</div>
@@ -106,7 +98,7 @@
 			</div>
 			{#if dpsCount > 0}
 				<div class="bg-muted/50 flex items-center gap-2 rounded-md p-2">
-					<Swords class="h-4 w-4 shrink-0 text-orange-500" />
+					<Icon icon="tabler:swords" class="h-4 w-4 shrink-0 text-orange-500" />
 					<div class="min-w-0">
 						<div class="text-muted-foreground text-xs">DPS</div>
 						<div class="text-sm font-semibold">{dpsCount}</div>
@@ -118,7 +110,7 @@
 		<!-- Coordinates -->
 		<div class="space-y-2 border-t pt-2">
 			<div class="flex items-start gap-2">
-				<Globe class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:world" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">World Coordinates</div>
 					<div class="text-foreground font-mono text-xs">
@@ -129,7 +121,7 @@
 				</div>
 			</div>
 			<div class="flex items-start gap-2">
-				<Map class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:map" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">Map Coordinates</div>
 					<div class="text-foreground font-mono text-xs">

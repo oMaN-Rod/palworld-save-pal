@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "길드 리더",
   "guild_name": "길드 이름",
   "head": "머리",
   "heal_all_in_entity": "{entity} 의 모든 것을 치유하세요",
@@ -742,6 +743,7 @@
   "refresh": "새로 고침(저장되지 않은 변경 사항 삭제)",
   "refresh_entity": "{entity} 새로 고침하세요",
   "relics": "유물",
+  "entity_registry": "레지스트리",
   "remove": "제거하다",
   "remove_all_from_collections": "선택한 {pals} 해당 컬렉션에서 모두 제거합니다.",
   "remove_from_collection": "컬렉션에서 제거",
@@ -809,6 +811,7 @@
   "shortcuts": "바로가기",
   "show_all": "모두 보기",
   "show_archived": "보관된 콘텐츠 보기",
+  "show_corner_art": "팔월드 코너 아트 표시",
   "showing_pals": "{start} 부터 {end} 까지 {total} {pals} 명을 표시합니다.",
   "size": "크기",
   "skill_fruits": "스킬 과일",

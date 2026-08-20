@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -19,15 +20,6 @@
 	import { staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';
 	import { focusModal } from '$utils/modalUtils';
-	import Apple from '@lucide/svelte/icons/apple';
-	import Cuboid from '@lucide/svelte/icons/cuboid';
-	import Delete from '@lucide/svelte/icons/delete';
-	import Gem from '@lucide/svelte/icons/gem';
-	import Save from '@lucide/svelte/icons/save';
-	import Scroll from '@lucide/svelte/icons/scroll';
-	import Shield from '@lucide/svelte/icons/shield';
-	import Sword from '@lucide/svelte/icons/sword';
-	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import EggConfigSection from './EggConfigSection.svelte';
 	import { getItemIcon, getItemTier, getBackgroundColor } from './itemUtils';
@@ -188,19 +180,19 @@
 
 {#snippet noIcon(typeA: ItemTypeA, typeB: ItemTypeB)}
 	{#if typeA === ItemTypeA.Weapon}
-		<Sword class="h-12 w-12"></Sword>
+		<Icon icon="tabler:sword" class="h-12 w-12"></Icon>
 	{:else if typeA === ItemTypeA.Armor && typeB === ItemTypeB.Shield}
-		<Shield class="h-12 w-12"></Shield>
+		<Icon icon="tabler:shield" class="h-12 w-12"></Icon>
 	{:else if typeA === ItemTypeA.Blueprint}
-		<Scroll class="h-12 w-12"></Scroll>
+		<Icon icon="ph:scroll" class="h-12 w-12"></Icon>
 	{:else if typeA === ItemTypeA.Accessory}
-		<Gem class="h-12 w-12"></Gem>
+		<Icon icon="tabler:diamond" class="h-12 w-12"></Icon>
 	{:else if typeA === ItemTypeA.Material}
-		<Cuboid class="h-12 w-12"></Cuboid>
+		<Icon icon="ph:cube" class="h-12 w-12"></Icon>
 	{:else if typeA === ItemTypeA.Food}
-		<Apple class="h-12 w-12"></Apple>
+		<Icon icon="tabler:apple" class="h-12 w-12"></Icon>
 	{:else}
-		<Cuboid class="h-12 w-12"></Cuboid>
+		<Icon icon="ph:cube" class="h-12 w-12"></Icon>
 	{/if}
 {/snippet}
 
@@ -316,7 +308,7 @@
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={handleClear}>
-					<Delete />
+					<Icon icon="tabler:backspace" />
 				</Button>
 				{#snippet popup()}
 					<span>{m.clear()}</span>
@@ -324,7 +316,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 				{#snippet popup()}
 					<span>{c.save}</span>
@@ -332,7 +324,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 				{#snippet popup()}
 					<span>{m.cancel()}</span>

@@ -1,10 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
-	import Folder from '@lucide/svelte/icons/folder';
-	import Tag from '@lucide/svelte/icons/tag';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Copy from '@lucide/svelte/icons/copy';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
@@ -87,7 +83,7 @@
 	<Card class="max-w-lg min-w-[calc(100vw/2)]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
-				<Copy class="h-5 w-5" />
+				<Icon icon="tabler:copy" class="h-5 w-5" />
 				{title}
 			</h3>
 		</div>
@@ -130,7 +126,7 @@
 			<!-- Collection Selection -->
 			<div>
 				<label class="mb-2 block flex items-center gap-2 text-sm font-medium">
-					<Folder class="h-4 w-4" />
+					<Icon icon="tabler:folder" class="h-4 w-4" />
 					{m.collection_optional()}
 				</label>
 				{#if !isCreatingCollection}
@@ -151,7 +147,7 @@
 							class="w-10"
 							onclick={() => (isCreatingCollection = true)}
 						>
-							<Plus class="h-4 w-4" />
+							<Icon icon="tabler:plus" class="h-4 w-4" />
 						</Button>
 					</div>
 				{:else}
@@ -192,7 +188,7 @@
 			<!-- Tags Selection -->
 			<div>
 				<label class="mb-2 block flex items-center gap-2 text-sm font-medium">
-					<Tag class="h-4 w-4" />
+					<Icon icon="tabler:tag" class="h-4 w-4" />
 					{m.tags_optional()}
 				</label>
 
@@ -225,7 +221,7 @@
 						onkeydown={(e: KeyboardEvent) => e.key === 'Enter' && addNewTag()}
 					/>
 					<Button type="button" variant="primary" size="icon" class="w-10" onclick={addNewTag}>
-						<Plus class="h-4 w-4" />
+						<Icon icon="tabler:plus" class="h-4 w-4" />
 					</Button>
 				</div>
 
@@ -240,7 +236,7 @@
 								>
 									{tag}
 									<button onclick={() => toggleTag(tag)} class="hover:bg-primary-600 rounded">
-										<X class="h-3 w-3" />
+										<Icon icon="tabler:x" class="h-3 w-3" />
 									</button>
 								</span>
 							{/each}
@@ -265,11 +261,11 @@
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
 			<Button type="button" variant="primary" onclick={() => handleClose(true)} data-modal-primary>
-				<Copy class="h-4 w-4" />
+				<Icon icon="tabler:copy" class="h-4 w-4" />
 				{m.clone_to_entity({ entity: m.ups() })}
 			</Button>
 		</div>

@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Input } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
 
 	let {
 		value,
@@ -57,7 +57,7 @@
 			<span class="bg-surface-800 flex items-center gap-1 rounded-sm px-2 py-0.5 text-xs">
 				{tech}
 				<button type="button" aria-label={`Remove ${tech}`} onclick={() => remove(tech)}>
-					<X size={12} />
+					<Icon icon="tabler:x" size={12} />
 				</button>
 			</span>
 		{/each}

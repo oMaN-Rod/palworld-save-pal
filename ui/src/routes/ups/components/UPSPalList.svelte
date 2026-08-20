@@ -1,10 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
-	import Upload from '@lucide/svelte/icons/upload';
-	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
-	import Eye from '@lucide/svelte/icons/eye';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
@@ -29,7 +27,7 @@
 <div class="space-y-2 p-4">
 	{#each upsState.pals as upsPal (upsPal.id)}
 		<div
-			class="card-hover hover:border-primary-500/40 hover:bg-surface-800/75 flex cursor-pointer items-center gap-4 rounded-sm border border-surface-700/60 bg-surface-800/50 p-3 transition-colors {isPalSelected(
+			class="card-hover hover:border-primary-500/40 hover:bg-surface-800/75 border-surface-700/60 bg-surface-800/50 flex cursor-pointer items-center gap-4 rounded-sm border p-3 transition-colors {isPalSelected(
 				upsPal.id
 			)
 				? 'border-secondary-500/60 bg-secondary-500/10 ring-secondary-500 ring-2'
@@ -112,19 +110,19 @@
 				<div class="text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}
 						<div title={m.transfer({ count: 2 })}>
-							<Upload size={12} class="mr-1 inline" />
+							<Icon icon="tabler:upload" size={12} class="mr-1 inline" />
 							{upsPal.transfer_count}
 						</div>
 					{/if}
 					{#if upsPal.clone_count > 0}
 						<div title={m.clones()}>
-							<RefreshCw size={12} class="mr-1 inline" />
+							<Icon icon="tabler:refresh" size={12} class="mr-1 inline" />
 							{upsPal.clone_count}
 						</div>
 					{/if}
 					{#if upsPal.last_accessed_at}
 						<div title={m.last_accessed()}>
-							<Eye size={12} class="mr-1 inline" />
+							<Icon icon="tabler:eye" size={12} class="mr-1 inline" />
 							{new Date(upsPal.last_accessed_at).toLocaleDateString()}
 						</div>
 					{/if}

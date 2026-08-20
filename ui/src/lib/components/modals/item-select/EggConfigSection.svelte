@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { ActiveSkillOption, PassiveSkillOption, Talents } from '$components/pal';
 	import { Button, Combobox, CornerDotButton, List } from '$components/ui';
 	import * as m from '$i18n/messages';
@@ -11,8 +12,6 @@
 	import { assetLoader } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import TimerReset from '@lucide/svelte/icons/timer-reset';
-	import Trash from '@lucide/svelte/icons/trash';
 	import { getPalIcon } from './itemUtils';
 
 	let {
@@ -158,13 +157,13 @@
 							onclick={() =>
 								(eggConfig.active_skills = eggConfig.active_skills.filter((s) => s !== skill))}
 						>
-							<Trash size={16} />
+							<Icon icon="tabler:trash" size={16} />
 						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}
 						{@const activeSkill = activeSkillsData.getByKey(skill)}
 						<div class="flex items-center space-x-1 justify-self-start">
-							<TimerReset class="h-4 w-4" />
+							<Icon icon="tabler:history" class="h-4 w-4" />
 							<span class="font-bold">{activeSkill?.details.cool_time}</span>
 							<span class="text-xs">{m.pwr()}</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
@@ -220,13 +219,13 @@
 							onclick={() =>
 								(eggConfig.learned_skills = eggConfig.learned_skills.filter((s) => s !== skill))}
 						>
-							<Trash size={16} />
+							<Icon icon="tabler:trash" size={16} />
 						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}
 						{@const activeSkill = activeSkillsData.getByKey(skill)}
 						<div class="flex items-center space-x-1 justify-self-start">
-							<TimerReset class="h-4 w-4" />
+							<Icon icon="tabler:history" class="h-4 w-4" />
 							<span class="font-bold">{activeSkill?.details.cool_time}</span>
 							<span class="text-xs">{m.pwr()}</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
@@ -282,7 +281,7 @@
 							onclick={() =>
 								(eggConfig.passive_skills = eggConfig.passive_skills.filter((s) => s !== skill))}
 						>
-							<Trash size={16} />
+							<Icon icon="tabler:trash" size={16} />
 						</Button>
 					{/snippet}
 					{#snippet listItemPopup(skill: string)}

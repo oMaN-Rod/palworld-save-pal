@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { List, Loading } from '$components/ui';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import { List, Loading, Tooltip } from '$components/ui';
 	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import X from '@lucide/svelte/icons/x';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import Users from '@lucide/svelte/icons/users';
 	import Input from '$components/ui/input/Input.svelte';
 
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();
@@ -57,7 +55,7 @@
 				onclick={() => onclose?.()}
 				aria-label={m.close_drawer()}
 			>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 			</button>
 		</div>
 		{#if appState.loadingGuild}
@@ -65,7 +63,7 @@
 				<Loading
 					label={m.loading_entity({ entity: c.guild })}
 					loadingComplete={!appState.loadingGuild}
-					icon={Users}
+					icon="tabler:users"
 				/>
 			</div>
 		{:else if guild}
@@ -100,9 +98,14 @@
 							{/if}
 						{/snippet}
 						{#snippet listItem(member)}
-							<div class="flex gap-2">
+							<div class="flex items-center gap-2">
 								<span class="font-bold">Lvl {member?.level ?? '—'}</span>
 								<span class="truncate">{member?.name}</span>
+								{#if guild?.admin_player_uid && guild.admin_player_uid === member.uid}
+									<Tooltip label={m.guild_leader()}>
+										<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
+									</Tooltip>
+								{/if}
 							</div>
 						{/snippet}
 						{#snippet listItemActions(member)}
@@ -110,7 +113,7 @@
 								class="ml-2 text-left text-sm hover:underline"
 								onclick={() => editPlayer(member.uid)}
 							>
-								<Pencil class="h-4 w-4" />
+								<Icon icon="tabler:pencil" class="h-4 w-4" />
 							</button>
 						{/snippet}
 					</List>

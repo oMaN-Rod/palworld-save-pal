@@ -1,9 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { elementsData, palsData } from '$lib/data';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
-	import User from '@lucide/svelte/icons/user';
 	import type { ElementType, Pal, PalData } from '$types';
 	import { getAppState } from '$states';
 	import * as m from '$i18n/messages';
@@ -188,7 +188,7 @@
 				<span>{specialStats.imported}</span>
 			</div>
 			<div class="flex items-center">
-				<User class="pal-element-badge mr-2" />
+				<Icon icon="tabler:user" class="pal-element-badge mr-2" />
 				<div class="grow">
 					<span class="text-xs 2xl:text-base">{c.human}</span>
 				</div>

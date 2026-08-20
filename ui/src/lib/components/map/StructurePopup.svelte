@@ -1,10 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Card } from '$components/ui';
 	import type { BaseStructure } from '$types';
-	import Heart from '@lucide/svelte/icons/heart';
-	import Ruler from '@lucide/svelte/icons/ruler';
-	import Award from '@lucide/svelte/icons/award';
-	import User from '@lucide/svelte/icons/user';
 	import { structureInfo } from './structureInfo';
 	import { structureColors } from './mapColors.svelte';
 	import { baseStructuresData, buildingsData } from '$lib/data';
@@ -46,14 +43,14 @@
 
 		<div class="space-y-2">
 			<div class="flex items-start gap-2">
-				<Heart class="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
+				<Icon icon="tabler:heart" class="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
 				<div class="min-w-0 flex-1">
 					<div class="mb-1 text-xs font-medium">HP</div>
 					<div class="text-foreground font-mono text-xs">{info.hp} / {info.hpMax}</div>
 				</div>
 			</div>
 			<div class="flex items-start gap-2">
-				<Ruler class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:ruler-2" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="mb-1 text-xs font-medium">Dimensions</div>
 					<div class="text-foreground font-mono text-xs">
@@ -63,7 +60,7 @@
 			</div>
 			{#if info.rank !== undefined}
 				<div class="flex items-start gap-2">
-					<Award class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+					<Icon icon="tabler:award" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 					<div class="min-w-0 flex-1">
 						<div class="mb-1 text-xs font-medium">Rank</div>
 						<div class="text-foreground font-mono text-xs">{info.rank}</div>
@@ -72,7 +69,7 @@
 			{/if}
 			{#if info.builder}
 				<div class="flex items-start gap-2">
-					<User class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+					<Icon icon="tabler:user" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 					<div class="min-w-0 flex-1">
 						<div class="mb-1 text-xs font-medium">Builder</div>
 						<div class="text-foreground font-mono text-xs">{info.builder}</div>

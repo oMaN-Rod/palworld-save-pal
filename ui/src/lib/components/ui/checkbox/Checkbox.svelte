@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
-	import Check from '@lucide/svelte/icons/check';
 
 	let {
 		checked = $bindable(false),
@@ -23,7 +23,7 @@
 		)}
 	>
 		{#if checked}
-			<Check class="h-4 w-4 text-white" />
+			<Icon icon="tabler:check" class="h-4 w-4 text-white" />
 		{/if}
 	</div>
 	{#if label}

@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { BaseStructure } from '$types';
-	import Box from '@lucide/svelte/icons/box';
-	import Heart from '@lucide/svelte/icons/heart';
 	import { structureInfo } from './structureInfo';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';
@@ -24,14 +23,14 @@
 	<span class="truncate text-xs font-light">{structure.map_object_id}</span>
 	<div class="mt-2 space-y-1">
 		<div class="flex items-start gap-2">
-			<Box class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
+			<Icon icon="tabler:box" class="text-primary mt-0.5 h-3.5 w-3.5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">Type</div>
 				<div class="font-mono text-xs">{info.typeA}</div>
 			</div>
 		</div>
 		<div class="flex items-start gap-2">
-			<Heart class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-500" />
+			<Icon icon="tabler:heart" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-500" />
 			<div class="min-w-0 flex-1">
 				<div class="text-muted-foreground text-xs font-medium">HP</div>
 				<div class="font-mono text-xs">{info.hp} / {info.hpMax}</div>

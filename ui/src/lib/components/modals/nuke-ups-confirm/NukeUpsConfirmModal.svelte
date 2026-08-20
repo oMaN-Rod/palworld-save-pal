@@ -1,8 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
-	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';
@@ -54,7 +52,7 @@
 		<!-- Header with warning icon -->
 		<div class="mb-6 flex items-center gap-3">
 			<div class="bg-error-500/20 rounded-full p-2">
-				<AlertTriangle class="text-error-500 h-6 w-6" />
+				<Icon icon="tabler:alert-triangle" class="text-error-500 h-6 w-6" />
 			</div>
 			<div>
 				<h3 class="h3 text-error-500">Nuke UPS Storage</h3>
@@ -69,7 +67,7 @@
 					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
 				>
 					<div class="flex items-start gap-3">
-						<Trash2 class="text-error-500 mt-0.5 h-5 w-5 shrink-0" />
+						<Icon icon="tabler:trash-x" class="text-error-500 mt-0.5 h-5 w-5 shrink-0" />
 						<div class="space-y-2">
 							<h4 class="text-error-700 dark:text-error-300 font-semibold">
 								You are about to delete ALL pals from UPS
@@ -110,7 +108,7 @@
 			<div class="flex justify-end space-x-4">
 				<Tooltip position="bottom">
 					<Button variant="secondary" onclick={handleCancel}>
-						<X size={20} />
+						<Icon icon="tabler:x" size={20} />
 						<span>Cancel</span>
 					</Button>
 					{#snippet popup()}
@@ -120,7 +118,7 @@
 				{#if totalPals > 0}
 					<Tooltip position="bottom">
 						<Button variant="danger" onclick={handleConfirm}>
-							<AlertTriangle size={20} />
+							<Icon icon="tabler:alert-triangle" size={20} />
 							<span>Continue</span>
 						</Button>
 						{#snippet popup()}
@@ -175,7 +173,7 @@
 				<div class="flex space-x-4">
 					<Tooltip position="bottom">
 						<Button variant="secondary" onclick={handleCancel}>
-							<X size={20} />
+							<Icon icon="tabler:x" size={20} />
 							<span>Cancel</span>
 						</Button>
 						{#snippet popup()}
@@ -184,7 +182,7 @@
 					</Tooltip>
 					<Tooltip position="bottom">
 						<Button variant="danger" onclick={handleConfirm} disabled={!isValid}>
-							<Trash2 size={20} />
+							<Icon icon="tabler:trash-x" size={20} />
 							<span>Delete All</span>
 						</Button>
 						{#snippet popup()}

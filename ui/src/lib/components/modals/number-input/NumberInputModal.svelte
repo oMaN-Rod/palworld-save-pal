@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';
@@ -45,7 +44,7 @@
 			<Input type="number" inputClass="grow" bind:value {min} {max} />
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 				{#snippet popup()}
 					<span>{c.save}</span>
@@ -53,7 +52,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 				{#snippet popup()}
 					<span>{m.cancel()}</span>

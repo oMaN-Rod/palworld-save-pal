@@ -1,10 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card } from '$components/ui';
 	import type { Base } from '$types';
 	import { worldToMap } from './utils';
-	import Home from '@lucide/svelte/icons/house';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Map from '@lucide/svelte/icons/map';
 	import { itemsData } from '$lib/data';
 	import { assetLoader } from '$utils';
 	import { ASSET_DATA_PATH } from '$types/icons';
@@ -45,7 +43,7 @@
 	<div class="pointer-events-auto space-y-3">
 		<div class="border-b pb-3">
 			<div class="flex items-start gap-2">
-				<Home class="text-primary mt-1 h-5 w-5 shrink-0" />
+				<Icon icon="tabler:home" class="text-primary mt-1 h-5 w-5 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<h3 class="text-foreground truncate text-lg font-bold">{base.name}</h3>
 					<span class="text-muted-foreground truncate text-xs font-light">Guild: {guildName}</span>
@@ -72,7 +70,7 @@
 
 		<div class="space-y-2 border-t pt-2">
 			<div class="flex items-start gap-2">
-				<Globe class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:world" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">World Coordinates</div>
 					<div class="text-foreground font-mono text-xs">
@@ -81,7 +79,7 @@
 				</div>
 			</div>
 			<div class="flex items-start gap-2">
-				<Map class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:map" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">Map Coordinates</div>
 					<div class="text-foreground font-mono text-xs">

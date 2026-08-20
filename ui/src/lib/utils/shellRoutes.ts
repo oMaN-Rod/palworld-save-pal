@@ -2,7 +2,7 @@
 // landing on one is redirected home rather than shown a broken page.
 export const SAVE_REQUIRED_ROUTES = [
 	'/edit',
-	'/bulk',
+	'/registry',
 	'/gps',
 	'/ups',
 	'/blueprints',

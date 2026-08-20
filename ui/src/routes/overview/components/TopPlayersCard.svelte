@@ -1,8 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
-	import Crown from '@lucide/svelte/icons/crown';
-	import User from '@lucide/svelte/icons/user';
 	import type { OverviewStats } from '$states';
 
 	let { players }: { players: OverviewStats['top_players'] } = $props();
@@ -16,9 +15,9 @@
 		{#each players as player, index (player.uid)}
 			<li class="flex items-center gap-3">
 				{#if index === 0 && player.pal_count > 0}
-					<Crown size={18} class="text-warning-400 shrink-0" />
+					<Icon icon="tabler:crown" size={18} class="text-warning-400 shrink-0" />
 				{:else}
-					<User size={18} class="text-surface-500 shrink-0" />
+					<Icon icon="tabler:user" size={18} class="text-surface-500 shrink-0" />
 				{/if}
 				<span
 					class={cn(

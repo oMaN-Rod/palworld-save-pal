@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Leader della gilda",
   "guild_name": "Nome della gilda",
   "head": "Testa",
   "heal_all_in_entity": "Guarisci tutto in {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Aggiorna (Annulla le modifiche non salvate)",
   "refresh_entity": "Aggiorna {entity}",
   "relics": "Reliquie",
+  "entity_registry": "Registro",
   "remove": "Rimuovere",
   "remove_all_from_collections": "Rimuovi tutti {pals} selezionati dalle loro collezioni",
   "remove_from_collection": "Rimuovi dalla collezione",
@@ -809,6 +811,7 @@
   "shortcuts": "Scorciatoie",
   "show_all": "Mostra tutto",
   "show_archived": "Mostra archiviati",
+  "show_corner_art": "Mostra la grafica Palworld nell’angolo",
   "showing_pals": "Visualizzazione {start} a {end} di {total} {pals}",
   "size": "Misurare",
   "skill_fruits": "Frutti abilità",

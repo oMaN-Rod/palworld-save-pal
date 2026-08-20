@@ -1,12 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { wikiPrefs, type WikiViewMode } from '$lib/utils/wikiPrefs.svelte';
 	import { cn } from '$theme';
-	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
-	import LayoutList from '@lucide/svelte/icons/layout-list';
 
-	const MODES: { id: WikiViewMode; icon: typeof LayoutList; label: string }[] = [
-		{ id: 'list', icon: LayoutList, label: 'List view' },
-		{ id: 'grid', icon: LayoutGrid, label: 'Grid view' }
+	const MODES: { id: WikiViewMode; icon: string; label: string }[] = [
+		{ id: 'list', icon: 'tabler:layout-list', label: 'List view' },
+		{ id: 'grid', icon: 'tabler:layout-grid', label: 'Grid view' }
 	];
 </script>
 
@@ -21,7 +20,7 @@
 			aria-label={mode.label}
 			aria-pressed={active}
 		>
-			<mode.icon class="h-4 w-4" />
+			<Icon icon={mode.icon} class="h-4 w-4" />
 		</button>
 	{/each}
 </div>

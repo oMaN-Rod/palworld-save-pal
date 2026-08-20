@@ -1,13 +1,11 @@
 <script lang="ts">
-	import Boxes from '@lucide/svelte/icons/boxes';
-	import MapPin from '@lucide/svelte/icons/map-pin';
-	import MousePointerClick from '@lucide/svelte/icons/mouse-pointer-click';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 
 	const points = [
-		{ icon: Boxes, text: m.landing_map_point_terrain },
-		{ icon: MapPin, text: m.landing_map_point_pins },
-		{ icon: MousePointerClick, text: m.landing_map_point_click }
+		{ icon: 'tabler:box-multiple', text: m.landing_map_point_terrain },
+		{ icon: 'tabler:map-pin', text: m.landing_map_point_pins },
+		{ icon: 'tabler:hand-click', text: m.landing_map_point_click }
 	];
 </script>
 
@@ -21,7 +19,7 @@
 	<div class="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
 		{#each points as p, i (i)}
 			<div class="flex flex-col items-center gap-2">
-				<p.icon class="text-primary-400 h-7 w-7" />
+				<Icon icon={p.icon} class="text-primary-400 h-7 w-7" />
 				<span class="text-surface-200 text-sm">{p.text()}</span>
 			</div>
 		{/each}

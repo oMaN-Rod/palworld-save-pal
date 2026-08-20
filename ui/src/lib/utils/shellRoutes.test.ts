@@ -4,7 +4,7 @@ import { isFullBleedRoute, isPublicShell, isSaveRequiredRoute } from './shellRou
 describe('isSaveRequiredRoute', () => {
 	it('matches save-required roots exactly', () => {
 		expect(isSaveRequiredRoute('/edit')).toBe(true);
-		expect(isSaveRequiredRoute('/bulk')).toBe(true);
+		expect(isSaveRequiredRoute('/registry')).toBe(true);
 		expect(isSaveRequiredRoute('/gps')).toBe(true);
 		expect(isSaveRequiredRoute('/ups')).toBe(true);
 		expect(isSaveRequiredRoute('/blueprints')).toBe(true);

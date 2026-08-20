@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Gildenleiter",
   "guild_name": "Gildenname",
   "head": "Kopf",
   "heal_all_in_entity": "Heile alle in {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Aktualisieren (Nicht gespeicherte Änderungen löschen)",
   "refresh_entity": "Aktualisiere {entity}",
   "relics": "Reliquien",
+  "entity_registry": "Register",
   "remove": "Entfernen",
   "remove_all_from_collections": "Entferne alle ausgewählten {pals} aus ihren Sammlungen.",
   "remove_from_collection": "Aus Sammlung entfernen",
@@ -809,6 +811,7 @@
   "shortcuts": "Abkürzungen",
   "show_all": "Alle anzeigen",
   "show_archived": "Archiv anzeigen",
+  "show_corner_art": "Palworld-Grafik in der Ecke anzeigen",
   "showing_pals": "Zeigt {start} bis {end} von {total} {pals}",
   "size": "Größe",
   "skill_fruits": "Skillfrüchte",

@@ -1,9 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { SelectOption } from '$types';
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
 	import { onMount, type Snippet } from 'svelte';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import { debounce } from '$utils';
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
 	import * as m from '$i18n/messages';
@@ -206,7 +206,8 @@
 				onfocus={handleFocus}
 				oninput={handleInput}
 			/>
-			<ChevronDown
+			<Icon
+				icon="tabler:chevron-down"
 				class={cn('cursor-pointer transition-transform', isOpen && 'rotate-180')}
 				onclick={() => {
 					if (!isOpen) {

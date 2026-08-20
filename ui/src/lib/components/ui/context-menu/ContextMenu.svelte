@@ -3,6 +3,7 @@
 	import { computePosition, flip, shift, offset, arrow, type Placement } from '@floating-ui/dom';
 	import { cn } from '$theme';
 	import { getComputedColorHex } from '$utils';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 
 	let {
 		baseClass = '',
@@ -21,7 +22,7 @@
 		position?: Placement;
 		xOffset?: number;
 		yOffset?: number;
-		items: Array<{ label: string; onClick: () => void; icon?: any }>;
+		items: Array<{ label: string; onClick: () => void; icon?: string }>;
 		useArrow?: boolean;
 		children: any;
 	}>();
@@ -130,7 +131,7 @@
 						onclick={(event) => handleMenuItemClick(event, item.onClick)}
 					>
 						{#if item.icon}
-							<div class="mr-2"><item.icon /></div>
+							<div class="mr-2"><Icon icon={item.icon} size={14} /></div>
 						{/if}
 						{item.label}
 					</button>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Combobox, TooltipButton } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
@@ -8,8 +9,6 @@
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
 	import { c } from '$utils/commonTranslations';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import Play from '@lucide/svelte/icons/play';
-	import Trash from '@lucide/svelte/icons/trash';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 
@@ -186,14 +185,14 @@
 						onclick={() => handleApplyPreset('active')}
 						disabled={!selectedActiveSkillPreset}
 					>
-						<Play class="text-primary-500" size="24" />
+						<Icon icon="tabler:player-play" class="text-primary-500" size="24" />
 					</TooltipButton>
 					<TooltipButton
 						popupLabel={m.delete_selected_entity({ entity: c.preset })}
 						onclick={() => handleDeletePreset('active')}
 						disabled={!selectedActiveSkillPreset}
 					>
-						<Trash class="text-primary-500" size="24" />
+						<Icon icon="tabler:trash" class="text-primary-500" size="24" />
 					</TooltipButton>
 				</div>
 			</div>
@@ -251,14 +250,14 @@
 						onclick={() => handleApplyPreset('passive')}
 						disabled={!selectedPassiveSkillPreset}
 					>
-						<Play class="text-primary-500" size="24" />
+						<Icon icon="tabler:player-play" class="text-primary-500" size="24" />
 					</TooltipButton>
 					<TooltipButton
 						popupLabel={m.delete_selected_entity({ entity: c.preset })}
 						onclick={() => handleDeletePreset('passive')}
 						disabled={!selectedPassiveSkillPreset}
 					>
-						<Trash class="text-primary-500" size="24" />
+						<Icon icon="tabler:trash" class="text-primary-500" size="24" />
 					</TooltipButton>
 				</div>
 			</div>

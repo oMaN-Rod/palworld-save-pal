@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Lider gildii",
   "guild_name": "Nazwa gildii",
   "head": "Głowa",
   "heal_all_in_entity": "Ulecz wszystko w {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Odśwież (usuń niezapisane zmiany)",
   "refresh_entity": "Odśwież {entity}",
   "relics": "Zwłoki",
+  "entity_registry": "Rejestr",
   "remove": "Usunąć",
   "remove_all_from_collections": "Usuń wszystkich wybranych {pals} z ich kolekcji",
   "remove_from_collection": "Usuń z kolekcji",
@@ -809,6 +811,7 @@
   "shortcuts": "Skróty",
   "show_all": "Pokaż wszystko",
   "show_archived": "Pokaż zarchiwizowane",
+  "show_corner_art": "Pokaż grafikę Palworld w narożniku",
   "showing_pals": "Pokazywanie {start} do {end} z {total} {pals}",
   "size": "Rozmiar",
   "skill_fruits": "Owoce umiejętności",

@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "หัวหน้ากิลด์",
   "guild_name": "ชื่อกิลด์",
   "head": "ศีรษะ",
   "heal_all_in_entity": "รักษาทุกสิ่งใน {entity}",
@@ -742,6 +743,7 @@
   "refresh": "รีเฟรช (ล้างการเปลี่ยนแปลงที่ยังไม่ได้บันทึก)",
   "refresh_entity": "รีเฟรช {entity}",
   "relics": "โบราณวัตถุ",
+  "entity_registry": "ทะเบียน",
   "remove": "ลบ",
   "remove_all_from_collections": "ลบ {pals} ที่เลือกทั้งหมดออกจากคอลเลกชันของพวกเขา",
   "remove_from_collection": "นำออกจากคอลเลกชัน",
@@ -809,6 +811,7 @@
   "shortcuts": "ทางลัด",
   "show_all": "แสดงทั้งหมด",
   "show_archived": "แสดงรายการที่เก็บถาวร",
+  "show_corner_art": "แสดงอาร์ตมุม Palworld",
   "showing_pals": "แสดงจำนวนเพื่อนตั้งแต่ {start} ถึง {end} จาก {total} {pals}",
   "size": "ขนาด",
   "skill_fruits": "ผลไม้สกิล",

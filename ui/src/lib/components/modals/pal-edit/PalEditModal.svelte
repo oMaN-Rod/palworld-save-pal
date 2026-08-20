@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import {
 		ActiveSkillBadge,
 		PalHeader,
@@ -32,12 +33,6 @@
 	import { assetLoader, calculateFilters, formatBossCharacterId, handleMaxOutPal } from '$utils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import BicepsFlexed from '@lucide/svelte/icons/biceps-flexed';
-	import Brain from '@lucide/svelte/icons/brain';
-	import Edit from '@lucide/svelte/icons/square-pen';
-	import Play from '@lucide/svelte/icons/play';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Save from '@lucide/svelte/icons/save';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
@@ -371,7 +366,7 @@
 							handleEditLearnedSkills();
 						}}
 					>
-						<Brain size={20} />
+						<Icon icon="tabler:brain" size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.save_as_preset()}>
@@ -384,7 +379,7 @@
 							handleAddPreset('active');
 						}}
 					>
-						<Save size={20} />
+						<Icon icon="tabler:device-floppy" size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.apply_preset()}>
@@ -397,7 +392,7 @@
 							handleApplySkillPreset('active');
 						}}
 					>
-						<Play size={20} />
+						<Icon icon="tabler:player-play" size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.activeSkill })}>
@@ -410,7 +405,7 @@
 							handleAddSkill('active');
 						}}
 					>
-						<Plus size={20} />
+						<Icon icon="tabler:plus" size={20} />
 					</Button>
 				</Tooltip>
 			</div>
@@ -444,7 +439,7 @@
 							handleAddPreset('passive');
 						}}
 					>
-						<Save size={20} />
+						<Icon icon="tabler:device-floppy" size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.apply_preset()}>
@@ -457,7 +452,7 @@
 							handleApplySkillPreset('passive');
 						}}
 					>
-						<Play size={20} />
+						<Icon icon="tabler:player-play" size={20} />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.add_entity({ entity: c.passiveSkill })}>
@@ -470,7 +465,7 @@
 							handleAddSkill('passive');
 						}}
 					>
-						<Plus size={20} />
+						<Icon icon="tabler:plus" size={20} />
 					</Button>
 				</Tooltip>
 			</div>
@@ -504,7 +499,7 @@
 							handleMaxWorkSuitability();
 						}}
 					>
-						<BicepsFlexed />
+						<Icon icon="ph:hand-fist" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -526,7 +521,7 @@
 							handleMaxIVs();
 						}}
 					>
-						<BicepsFlexed />
+						<Icon icon="ph:hand-fist" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -548,7 +543,7 @@
 							handleMaxSouls();
 						}}
 					>
-						<BicepsFlexed />
+						<Icon icon="ph:hand-fist" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -564,7 +559,7 @@
 		>
 			<Tooltip label={m.edit_entity({ entity: m.nickname() })}>
 				<Button variant="ghost" size="icon" onclick={handleEditNickname}>
-					<Edit class="h-6 w-6" />
+					<Icon icon="tabler:edit" class="h-6 w-6" />
 				</Button>
 			</Tooltip>
 			<Tooltip label={m.max_out_pal_stats(p.pal)}>
@@ -573,17 +568,17 @@
 					size="icon"
 					onclick={() => handleMaxOutPal(appState.selectedPal!, appState.selectedPlayer!)}
 				>
-					<BicepsFlexed class="h-6 w-6" />
+					<Icon icon="ph:hand-fist" class="h-6 w-6" />
 				</Button>
 			</Tooltip>
 			<Tooltip label={m.save_as_preset()}>
 				<Button variant="ghost" size="icon" onclick={handleSavePalPreset}>
-					<Save class="h-6 w-6" />
+					<Icon icon="tabler:device-floppy" class="h-6 w-6" />
 				</Button>
 			</Tooltip>
 			<Tooltip label={m.apply_preset()}>
 				<Button variant="ghost" size="icon" onclick={handleApplyPalPreset}>
-					<Play class="h-6 w-6" />
+					<Icon icon="tabler:player-play" class="h-6 w-6" />
 				</Button>
 			</Tooltip>
 		</nav>

@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
@@ -90,7 +89,7 @@
 						disabled={!canSubmit}
 						data-modal-primary
 					>
-						<Save />
+						<Icon icon="tabler:device-floppy" />
 					</Button>
 				{/snippet}
 				{#snippet popup()}
@@ -100,7 +99,7 @@
 			<Tooltip position="bottom">
 				{#snippet children()}
 					<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-						<X />
+						<Icon icon="tabler:x" />
 					</Button>
 				{/snippet}
 				{#snippet popup()}

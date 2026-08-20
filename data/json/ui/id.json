@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Pemimpin guild",
   "guild_name": "Nama Serikat",
   "head": "Kepala",
   "heal_all_in_entity": "Sembuhkan semua yang ada di {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Segarkan (Hapus perubahan yang belum disimpan)",
   "refresh_entity": "Segarkan {entity}",
   "relics": "Peninggalan",
+  "entity_registry": "Registri",
   "remove": "Menghapus",
   "remove_all_from_collections": "Hapus semua {pals} yang dipilih dari koleksi mereka",
   "remove_from_collection": "Hapus dari koleksi",
@@ -809,6 +811,7 @@
   "shortcuts": "Jalan pintas",
   "show_all": "Tampilkan semua",
   "show_archived": "Tampilkan arsip",
+  "show_corner_art": "Tampilkan gambar sudut Palworld",
   "showing_pals": "Menampilkan {start} hingga {end} dari {total} {pals}",
   "size": "Ukuran",
   "skill_fruits": "Buah Keahlian",

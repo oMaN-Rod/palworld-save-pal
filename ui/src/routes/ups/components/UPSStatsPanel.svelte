@@ -1,13 +1,5 @@
 <script lang="ts">
-	import BarChart3 from '@lucide/svelte/icons/chart-column';
-	import TrendingUp from '@lucide/svelte/icons/trending-up';
-	import Database from '@lucide/svelte/icons/database';
-	import Calendar from '@lucide/svelte/icons/calendar';
-	import User from '@lucide/svelte/icons/user';
-	import Save from '@lucide/svelte/icons/save';
-	import Tag from '@lucide/svelte/icons/tag';
-	import Upload from '@lucide/svelte/icons/upload';
-	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Spinner } from '$components/ui';
 	import { getUpsState } from '$states';
 	import { elementsData } from '$lib/data';
@@ -82,7 +74,7 @@
 	<!-- Header -->
 	<div class="border-surface-700/40 mb-2 border-b px-4 pt-4 pb-2">
 		<div class="flex items-center gap-2">
-			<BarChart3 class="text-primary-400 h-5 w-5" />
+			<Icon icon="tabler:chart-bar" class="text-primary-400 h-5 w-5" />
 			<h2 class="text-surface-100 text-sm font-bold tracking-wide uppercase">{m.statistics()}</h2>
 		</div>
 	</div>
@@ -96,7 +88,7 @@
 				<Card padding="p-3" class="text-center">
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-400 text-sm">{c.pals}</span>
-						<Database class="text-surface-400 h-4 w-4" />
+						<Icon icon="tabler:database" class="text-surface-400 h-4 w-4" />
 					</div>
 					<div class="text-surface-100 text-2xl font-bold">
 						{totalPals.toLocaleString()}
@@ -107,7 +99,7 @@
 				<Card padding="p-3" class="text-center">
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-400 text-sm">{c.collections}</span>
-						<TrendingUp class="text-surface-400 h-4 w-4" />
+						<Icon icon="tabler:trending-up" class="text-surface-400 h-4 w-4" />
 					</div>
 					<div class="text-surface-100 text-2xl font-bold">
 						{totalCollections}
@@ -118,7 +110,7 @@
 				<Card padding="p-3" class="text-center">
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-400 text-sm">{c.tags}</span>
-						<Tag size={18} class="text-surface-500" />
+						<Icon icon="tabler:tag" size={18} class="text-surface-500" />
 					</div>
 					<div class="text-surface-100 text-2xl font-bold">
 						{totalTags}
@@ -129,7 +121,7 @@
 				<Card padding="p-3" class="text-center">
 					<div class="mb-1 flex items-center justify-between">
 						<span class="text-surface-400 text-sm">{c.storage}</span>
-						<Save class="text-primary-400 h-5 w-5" />
+						<Icon icon="tabler:device-floppy" class="text-primary-400 h-5 w-5" />
 					</div>
 					<div class="text-surface-100 text-lg font-bold">
 						{formatBytes(storageSize * 1024 * 1024)}
@@ -143,22 +135,22 @@
 				<div class="space-y-3">
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<Upload size={18} class="text-surface-500" />
+							<Icon icon="tabler:upload" size={18} class="text-surface-500" />
 							<span class="text-surface-400 text-sm">{m.total_exports()}</span>
 						</div>
 						<span class="font-medium">{totalTransfers.toLocaleString()}</span>
 					</div>
 					<div class="flex items-center justify-between">
 						<div class="flex items-center gap-2">
-							<RefreshCw size={18} class="text-surface-500" />
+							<Icon icon="tabler:refresh" size={18} class="text-surface-500" />
 							<span class="text-surface-400 text-sm">{m.total_clones()}</span>
 						</div>
-					<span class="font-medium">{totalClones.toLocaleString()}</span>
-						</div>
+						<span class="font-medium">{totalClones.toLocaleString()}</span>
 					</div>
-				</Card>
+				</div>
+			</Card>
 
-				<!-- Most Popular -->
+			<!-- Most Popular -->
 			{#if stats.most_popular_character_id}
 				<Card>
 					<h3 class="text-surface-100 mb-3 text-sm font-medium">{m.most_popular()}</h3>
@@ -217,11 +209,11 @@
 								<span class="font-medium">{count}</span>
 							</div>
 						{/each}
-						</div>
-					</Card>
-				{/if}
+					</div>
+				</Card>
+			{/if}
 
-				<!-- Special Categories -->
+			<!-- Special Categories -->
 			{#if totalPals > 0}
 				<Card>
 					<h3 class="text-surface-100 mb-3 text-sm font-medium">{m.special_categories()}</h3>
@@ -255,7 +247,7 @@
 							<span class="font-medium">{specialStats.imported}</span>
 						</div>
 						<div class="flex items-center">
-							<User class="mr-2 h-5 w-5" />
+							<Icon icon="tabler:user" class="mr-2 h-5 w-5" />
 							<div class="grow">
 								<span class="text-xs">{c.human}</span>
 							</div>
@@ -290,7 +282,7 @@
 			{#if lastUpdated}
 				<div class="bg-surface-950/50 rounded-sm p-3">
 					<div class="text-surface-400 flex items-center gap-2 text-xs">
-						<Calendar class="h-3 w-3" />
+						<Icon icon="tabler:calendar" class="h-3 w-3" />
 						<span>{m.last_updated_date({ date: formatDate(lastUpdated) })}</span>
 					</div>
 				</div>

@@ -1,9 +1,7 @@
 <script lang="ts" generics="T">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import { Checkbox } from '$components/ui';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-	import ChevronUp from '@lucide/svelte/icons/chevron-up';
-	import ChevronsUpDown from '@lucide/svelte/icons/chevrons-up-down';
 	import type { Snippet } from 'svelte';
 	import type { ColumnDef, SortState } from './table.types';
 	import {
@@ -142,12 +140,12 @@
 									<span>{column.header}</span>
 									{#if sort.key === column.key}
 										{#if sort.direction === 'asc'}
-											<ChevronUp class="h-4 w-4" />
+											<Icon icon="tabler:chevron-up" class="h-4 w-4" />
 										{:else}
-											<ChevronDown class="h-4 w-4" />
+											<Icon icon="tabler:chevron-down" class="h-4 w-4" />
 										{/if}
 									{:else}
-										<ChevronsUpDown class="h-4 w-4 opacity-40" />
+										<Icon icon="tabler:arrows-move-vertical" class="h-4 w-4 opacity-40" />
 									{/if}
 								</button>
 							{:else}

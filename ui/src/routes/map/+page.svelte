@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo } from '$lib/components/seo';
 	import { Button, Loading, SectionHeader } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -56,10 +57,6 @@
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import type maplibregl from 'maplibre-gl';
-	import Unlock from '@lucide/svelte/icons/lock-open';
-	import MapIcon from '@lucide/svelte/icons/map';
-	import PanelLeft from '@lucide/svelte/icons/panel-left';
-	import PanelLeftClose from '@lucide/svelte/icons/panel-left-close';
 	import * as m from '$i18n/messages';
 
 	const PANEL_W = 420;
@@ -574,7 +571,7 @@
 									class="flex items-center gap-2"
 									onclick={handleUnlockMap}
 								>
-									<Unlock class="h-4 w-4" />
+									<Icon icon="tabler:lock-open" class="h-4 w-4" />
 									<span>{m.unlock_map()}</span>
 								</Button>
 							{/if}
@@ -626,9 +623,9 @@
 			onclick={() => (mapOptions.panelOpen = !panelOpen)}
 		>
 			{#if panelOpen}
-				<PanelLeftClose class="h-5 w-5" />
+				<Icon icon="tabler:layout-sidebar-left-collapse" class="h-5 w-5" />
 			{:else}
-				<PanelLeft class="h-5 w-5" />
+				<Icon icon="tabler:layout-sidebar" class="h-5 w-5" />
 			{/if}
 		</button>
 
@@ -719,7 +716,7 @@
 				}}
 			/>
 		{:else}
-			<Loading label={m.initializing_entity({ entity: m.map() })} icon={MapIcon} iconSize={24} />
+			<Loading label={m.initializing_entity({ entity: m.map() })} icon="tabler:map" iconSize={24} />
 		{/if}
 
 		{#if saveLoaded && placementState.active}

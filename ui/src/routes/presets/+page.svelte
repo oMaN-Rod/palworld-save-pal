@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { presetsData } from '$lib/data';
 	import { Button, List, TooltipButton, Input, Tooltip, Select } from '$components/ui';
 	import {
@@ -12,14 +13,6 @@
 	} from '$states';
 	import type { PresetTypeKey, PresetSortMode } from '$states';
 	import { debounce, moveIds } from '$utils';
-	import Trash from '@lucide/svelte/icons/trash';
-	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
-	import Download from '@lucide/svelte/icons/download';
-	import Upload from '@lucide/svelte/icons/upload';
-	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
-	import ArrowUpAZ from '@lucide/svelte/icons/arrow-up-a-z';
-	import ChevronUp from '@lucide/svelte/icons/chevron-up';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import { cn } from '$theme';
 	import { MessageType, type PresetProfile } from '$types';
 	import { staticIcons } from '$types/icons';
@@ -276,7 +269,7 @@
 						searchQuery = '';
 					}}
 				>
-					<RefreshCcw class="h-6 w-6" />
+					<Icon icon="tabler:rotate" class="h-6 w-6" />
 				</TooltipButton>
 			</div>
 
@@ -299,9 +292,9 @@
 							setDirection(activeTypeKey, activeConfig.direction === 'asc' ? 'desc' : 'asc')}
 					>
 						{#if activeConfig.direction === 'asc'}
-							<ArrowDownAZ class="h-6 w-6" />
+							<Icon icon="ph:sort-descending" class="h-6 w-6" />
 						{:else}
-							<ArrowUpAZ class="h-6 w-6" />
+							<Icon icon="ph:sort-ascending" class="h-6 w-6" />
 						{/if}
 					</TooltipButton>
 				{/if}
@@ -313,7 +306,7 @@
 					onclick={handleImportPreset}
 					buttonClass="hover:bg-secondary-500/50"
 				>
-					<Upload size={20} />
+					<Icon icon="tabler:upload" size={20} />
 				</TooltipButton>
 
 				<TooltipButton
@@ -322,7 +315,7 @@
 					buttonClass="hover:bg-primary-500/50"
 					disabled={selectedPresets.length === 0}
 				>
-					<Download size={20} />
+					<Icon icon="tabler:download" size={20} />
 				</TooltipButton>
 
 				<TooltipButton
@@ -333,7 +326,7 @@
 					buttonClass="hover:bg-error-500/50"
 					disabled={selectedPresets.length === 0}
 				>
-					<Trash size={20} />
+					<Icon icon="tabler:trash" size={20} />
 				</TooltipButton>
 
 				<div class="bg-surface-700/50 mx-1 w-px self-stretch"></div>
@@ -344,7 +337,7 @@
 					buttonClass="hover:bg-secondary-500/50"
 					disabled={selectedPresets.length === 0 || !!searchQuery}
 				>
-					<ChevronUp size={20} />
+					<Icon icon="tabler:chevron-up" size={20} />
 				</TooltipButton>
 
 				<TooltipButton
@@ -353,7 +346,7 @@
 					buttonClass="hover:bg-secondary-500/50"
 					disabled={selectedPresets.length === 0 || !!searchQuery}
 				>
-					<ChevronDown size={20} />
+					<Icon icon="tabler:chevron-down" size={20} />
 				</TooltipButton>
 			</div>
 
@@ -379,14 +372,14 @@
 						onclick={() => handleExportPreset(preset)}
 						buttonClass="hover:bg-primary-500/25 p-2"
 					>
-						<Download size={16} />
+						<Icon icon="tabler:download" size={16} />
 					</TooltipButton>
 					<Button
 						variant="ghost"
 						class="hover:bg-error-500/25 p-2"
 						onclick={() => handleDeletePreset(preset)}
 					>
-						<Trash size={16} />
+						<Icon icon="tabler:trash" size={16} />
 					</Button>
 				{/snippet}
 				{#snippet listItemPopup(preset)}

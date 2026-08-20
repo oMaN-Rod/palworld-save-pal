@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { elementsData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -23,20 +24,6 @@
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import Search from '@lucide/svelte/icons/search';
-	import ArrowDown01 from '@lucide/svelte/icons/arrow-down-0-1';
-	import ArrowDown10 from '@lucide/svelte/icons/arrow-down-1-0';
-	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
-	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
-	import Trash from '@lucide/svelte/icons/trash';
-	import X from '@lucide/svelte/icons/x';
-	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
-	import ArrowDownNarrowWide from '@lucide/svelte/icons/arrow-down-narrow-wide';
-	import ReplaceAll from '@lucide/svelte/icons/replace-all';
-	import CircleFadingPlus from '@lucide/svelte/icons/circle-fading-plus';
-	import Info from '@lucide/svelte/icons/info';
-	import Play from '@lucide/svelte/icons/play';
-	import Upload from '@lucide/svelte/icons/upload';
 	import { PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
@@ -148,25 +135,29 @@
 
 	let LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
-			return ArrowDown01;
+			return 'tabler:sort-ascending-numbers';
 		} else {
-			return sortOrder === 'asc' ? ArrowDown01 : ArrowDown10;
+			return sortOrder === 'asc'
+				? 'tabler:sort-ascending-numbers'
+				: 'tabler:sort-descending-numbers';
 		}
 	});
 
 	let NameSortIcon = $derived.by(() => {
 		if (sortBy !== 'name') {
-			return ArrowDownAZ;
+			return 'tabler:sort-ascending-letters';
 		} else {
-			return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+			return sortOrder === 'asc'
+				? 'tabler:sort-ascending-letters'
+				: 'tabler:sort-descending-letters';
 		}
 	});
 
 	let PaldeckSortIcon = $derived.by(() => {
 		if (sortBy !== 'paldeck-index') {
-			return ArrowDownWideNarrow;
+			return 'tabler:arrows-sort';
 		} else {
-			return sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
+			return sortOrder === 'asc' ? 'tabler:arrows-sort' : 'tabler:arrows-sort';
 		}
 	});
 
@@ -585,12 +576,12 @@
 					label={m.add_all_pals_to_entity({ pals: c.pals, entity: m.dps() })}
 				>
 					<Button id="dps-add-all" variant="ghost" size="icon" onclick={addAllPalsDps}>
-						<CircleFadingPlus class="h-4 w-4" />
+						<Icon icon="tabler:circle-plus" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 				<Tooltip>
 					<Button id="dps-select-all" variant="ghost" size="icon" onclick={handleSelectAll}>
-						<ReplaceAll class="h-4 w-4" />
+						<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
 					</Button>
 					{#snippet popup()}
 						<div class="flex flex-col">
@@ -613,7 +604,7 @@
 						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
 					>
 						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-							<Play class="h-4 w-4" />
+							<Icon icon="tabler:player-play" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 					<Tooltip
@@ -624,21 +615,21 @@
 						})}
 					>
 						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
-							<Upload class="h-4 w-4" />
+							<Icon icon="tabler:upload" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
 						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-							<Trash class="h-4 w-4" />
+							<Icon icon="tabler:trash" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 					<Tooltip
 						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
 					>
 						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-							<X class="h-4 w-4" />
+							<Icon icon="tabler:x" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 				{/if}
@@ -654,7 +645,7 @@
 						base="rounded-sm bg-surface-900"
 						controlHover="hover:bg-secondary-500/25"
 					>
-						{#snippet lead()}<Search />{/snippet}
+						{#snippet lead()}<Icon icon="tabler:search" />{/snippet}
 						{#snippet control()}
 							<span class="font-bold">{m.filter_and_sort()}</span>
 						{/snippet}
@@ -675,7 +666,7 @@
 											class={sortButtonClass('level')}
 											onclick={() => toggleSort('level')}
 										>
-											<LevelSortIcon />
+											<Icon icon={LevelSortIcon} />
 										</button>
 									</Tooltip>
 									<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
@@ -684,7 +675,7 @@
 											class={sortButtonClass('name')}
 											onclick={() => toggleSort('name')}
 										>
-											<NameSortIcon />
+											<Icon icon={NameSortIcon} />
 										</button>
 									</Tooltip>
 									<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
@@ -693,7 +684,7 @@
 											class={sortButtonClass('paldeck-index')}
 											onclick={() => toggleSort('paldeck-index')}
 										>
-											<PaldeckSortIcon />
+											<Icon icon={PaldeckSortIcon} />
 										</button>
 									</Tooltip>
 								</div>
@@ -706,7 +697,7 @@
 						base="block 2xl:hidden rounded-sm bg-surface-900"
 						controlHover="hover:bg-secondary-500/25"
 					>
-						{#snippet lead()}<Info />{/snippet}
+						{#snippet lead()}<Icon icon="tabler:info-circle" />{/snippet}
 						{#snippet control()}
 							<span class="font-bold">{m.stats()}</span>
 						{/snippet}

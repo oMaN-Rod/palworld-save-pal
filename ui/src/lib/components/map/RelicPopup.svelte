@@ -1,11 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Card } from '$components/ui';
 	import type { RelicPoint } from '$types';
 	import { worldToMap } from './utils';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Map from '@lucide/svelte/icons/map';
-	import Check from '@lucide/svelte/icons/check';
-	import X from '@lucide/svelte/icons/x';
 	import { relicTypeIcon } from './styles';
 	import * as m from '$i18n/messages';
 
@@ -37,16 +34,16 @@
 			{#if point.unlocked !== undefined}
 				<div class="flex items-center gap-2">
 					{#if point.unlocked}
-						<Check class="h-4 w-4 shrink-0 text-green-400" />
+						<Icon icon="tabler:check" class="h-4 w-4 shrink-0 text-green-400" />
 						<span class="text-sm text-green-400">{m.collected()}</span>
 					{:else}
-						<X class="h-4 w-4 shrink-0 text-red-400" />
+						<Icon icon="tabler:x" class="h-4 w-4 shrink-0 text-red-400" />
 						<span class="text-sm text-red-400">{m.not_collected()}</span>
 					{/if}
 				</div>
 			{/if}
 			<div class="flex items-start gap-2">
-				<Globe class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:world" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">World Coordinates</div>
 					<div class="text-foreground font-mono text-xs">
@@ -55,7 +52,7 @@
 				</div>
 			</div>
 			<div class="flex items-start gap-2">
-				<Map class="text-primary mt-0.5 h-4 w-4 shrink-0" />
+				<Icon icon="tabler:map" class="text-primary mt-0.5 h-4 w-4 shrink-0" />
 				<div class="min-w-0 flex-1">
 					<div class="text-muted-foreground mb-1 text-xs font-medium">Map Coordinates</div>
 					<div class="text-foreground font-mono text-xs">

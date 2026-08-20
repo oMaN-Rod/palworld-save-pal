@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
-	import { Eye, EyeOff, LoaderCircle } from '@lucide/svelte';
 	import {
 		buildPanelGroups,
 		hideAllLabel,
@@ -47,11 +47,11 @@
 {#if onShowAll}
 	<div class="border-b-surface-800 grid grid-cols-2 border-b-2 pb-2">
 		<button type="button" class="flex items-center space-x-2" onclick={() => onShowAll(true)}>
-			<Eye class="mr-2 h-4 w-4" />
+			<Icon icon="tabler:eye" class="mr-2 h-4 w-4" />
 			<span class="text-sm">{showAllLabel()}</span>
 		</button>
 		<button type="button" class="flex items-center space-x-2" onclick={() => onShowAll(false)}>
-			<EyeOff class="mr-2 h-4 w-4" />
+			<Icon icon="tabler:eye-off" class="mr-2 h-4 w-4" />
 			<span class="text-sm">{hideAllLabel()}</span>
 		</button>
 	</div>
@@ -73,9 +73,10 @@
 					<img src={row.icon} alt={row.label} class="mr-2 h-6 w-6" />
 					<span>{row.label}</span>
 					{#if row.loading}
-						<LoaderCircle
+						<Icon
+							icon="svg-spinners:180-ring"
 							data-loading={row.id}
-							class="text-surface-500 h-3 w-3 animate-spin"
+							class="text-surface-500 h-3 w-3"
 							aria-label={loadingLabel()}
 						/>
 					{:else if row.count !== undefined}

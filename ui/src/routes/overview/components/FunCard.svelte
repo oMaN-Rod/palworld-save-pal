@@ -1,10 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { activeSkillsData, palsData, passiveSkillsData } from '$lib/data';
 	import { cn } from '$theme';
-	import Dices from '@lucide/svelte/icons/dices';
-	import Globe2 from '@lucide/svelte/icons/globe-2';
-	import PartyPopper from '@lucide/svelte/icons/party-popper';
-	import Sparkles from '@lucide/svelte/icons/sparkles';
 	import type { OverviewStats } from '$states';
 	import * as m from '$i18n/messages';
 	import {
@@ -75,7 +72,7 @@
 <div class="card">
 	<div class="mb-4 flex items-center justify-between gap-3">
 		<h3 class="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase">
-			<PartyPopper size={16} class="text-warning-400" />
+			<Icon icon="ph:confetti" size={16} class="text-warning-400" />
 			<span class="text-surface-400">Server Shenanigans</span>
 		</h3>
 		<button
@@ -83,7 +80,7 @@
 			class="border-surface-600/60 text-surface-300 hover:border-primary-400/60 hover:text-surface-100 flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors"
 			onclick={() => reroll(current.map((fact) => fact.text))}
 		>
-			<Dices size={14} />
+			<Icon icon="tabler:dice-5" size={14} />
 			{m.overview_refresh()}
 		</button>
 	</div>
@@ -107,10 +104,10 @@
 			</div>
 			<div class="flex shrink-0 flex-col items-center gap-1">
 				{#if world.over9000}
-					<Sparkles size={36} class="text-warning-400" />
+					<Icon icon="tabler:sparkles" size={36} class="text-warning-400" />
 					<span class="text-warning-300 text-[10px] font-bold">MAX</span>
 				{:else}
-					<Globe2 size={36} class="text-primary-400/70" />
+					<Icon icon="tabler:world-longitude" size={36} class="text-primary-400/70" />
 				{/if}
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import LocaleChip from './LocaleChip.svelte';
 	import ThemeChip from './ThemeChip.svelte';
 	import { publicNavItems, activePublicNavId } from './publicNavItems';
@@ -17,7 +18,6 @@
 
 	<div class="public-nav-links">
 		{#each publicNavItems as item (item.id)}
-			{@const Icon = item.icon}
 			<a
 				href={item.href}
 				class="public-nav-link"
@@ -25,7 +25,7 @@
 				aria-current={activeId === item.id ? 'page' : undefined}
 				aria-label={item.label()}
 			>
-				<Icon class="h-4 w-4 shrink-0" />
+				<Icon icon={item.icon} class="h-4 w-4 shrink-0" />
 				<span class="public-nav-label hidden sm:inline">{item.label()}</span>
 			</a>
 		{/each}

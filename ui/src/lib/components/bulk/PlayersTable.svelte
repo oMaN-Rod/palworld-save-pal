@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Table, Input, Button, Popover, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
 	import * as m from '$i18n/messages';
@@ -11,14 +12,10 @@
 		inactivePlayerUids,
 		type PlayerRow
 	} from './bulk.utils';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
-	import ClockAlert from '@lucide/svelte/icons/clock-alert';
-	import Trash from '@lucide/svelte/icons/trash';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -79,7 +76,6 @@
 	}
 
 	async function deleteOne(row: PlayerRow) {
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.player }),
 			message: m.delete_entity_by_name_confirm({ name: row.nickname }),
@@ -92,7 +88,6 @@
 	async function bulkDelete() {
 		const uids = [...selected];
 		if (uids.length === 0) return;
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_selected_entity({ entity: c.players }),
 			message: m.delete_count_entities_confirm({ count: uids.length, entity: c.players }),
@@ -108,7 +103,6 @@
 			toast.add(m.no_players_match(), undefined, 'info');
 			return;
 		}
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_inactive_players(),
 			message: m.delete_count_entities_confirm({ count: uids.length, entity: c.players }),
@@ -135,7 +129,7 @@
 				<Popover position="bottom-end">
 					<Tooltip label={m.delete_inactive_players()}>
 						<Button variant="ghost">
-							<ClockAlert class="h-4 w-4" />
+							<Icon icon="tabler:clock-exclamation" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 					{#snippet content({ close })}
@@ -170,7 +164,7 @@
 						onclick={bulkDelete}
 						disabled={selected.size === 0}
 					>
-						<Trash class="h-4 w-4" />
+						<Icon icon="tabler:trash" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -194,6 +188,15 @@
 					{lastActiveLabel(row)}
 				{:else if column.key === 'level'}
 					{row.level ?? '—'}
+				{:else if column.key === 'nickname'}
+					<span class="flex items-center gap-1">
+						<span class="truncate">{row.nickname}</span>
+						{#if row.isLeader}
+							<Tooltip label={m.guild_leader()}>
+								<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
+							</Tooltip>
+						{/if}
+					</span>
 				{:else}
 					{row[column.key as keyof PlayerRow]}
 				{/if}
@@ -205,14 +208,14 @@
 						onclick={() => editPlayer(row.uid)}
 						title={m.edit_entity({ entity: c.player })}
 					>
-						<Pencil class="h-4 w-4" />
+						<Icon icon="tabler:pencil" class="h-4 w-4" />
 					</Button>
 					<Button
 						variant="ghost"
 						onclick={() => deleteOne(row)}
 						title={m.delete_entity({ entity: c.player })}
 					>
-						<Trash2 class="h-4 w-4" />
+						<Icon icon="tabler:trash-x" class="h-4 w-4" />
 					</Button>
 				</div>
 			{/snippet}

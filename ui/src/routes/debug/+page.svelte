@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Button, Combobox, Tooltip, TooltipButton } from '$components/ui';
@@ -14,10 +15,6 @@
 		type Player
 	} from '$types';
 	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
-	import Eye from '@lucide/svelte/icons/eye';
-	import EyeOff from '@lucide/svelte/icons/eye-off';
-	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
-	import Trash from '@lucide/svelte/icons/trash';
 	import { onMount } from 'svelte';
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
@@ -484,7 +481,7 @@
 	<div class="flex flex-col">
 		<Button variant="primary" class="mb-2 flex w-full" onclick={handleReset}>
 			<span class="font-medium">{m.reset()}</span>
-			<RefreshCcw size="20" />
+			<Icon icon="tabler:rotate" size="20" />
 		</Button>
 
 		<div class="flex items-center gap-2">
@@ -506,10 +503,10 @@
 					compact
 				>
 					{#snippet inactiveChild()}
-						<EyeOff size="20" />
+						<Icon icon="tabler:eye-off" size="20" />
 					{/snippet}
 					{#snippet activeChild()}
-						<Eye size="20" />
+						<Icon icon="tabler:eye" size="20" />
 					{/snippet}
 				</Switch>
 			</Tooltip>
@@ -519,7 +516,7 @@
 				onclick={handleDeleteGuild}
 				disabled={!guild}
 			>
-				<Trash size="20" />
+				<Icon icon="tabler:trash" size="20" />
 			</TooltipButton>
 		</div>
 		{#if baseSelectOptions.length > 0}
@@ -542,10 +539,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />
+							<Icon icon="tabler:eye-off" size="20" />
 						{/snippet}
 						{#snippet activeChild()}
-							<Eye size="20" />
+							<Icon icon="tabler:eye" size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -571,10 +568,10 @@
 					compact
 				>
 					{#snippet inactiveChild()}
-						<EyeOff size="20" />
+						<Icon icon="tabler:eye-off" size="20" />
 					{/snippet}
 					{#snippet activeChild()}
-						<Eye size="20" />
+						<Icon icon="tabler:eye" size="20" />
 					{/snippet}
 				</Switch>
 			</Tooltip>
@@ -584,7 +581,7 @@
 				onclick={handleDeletePlayer}
 				disabled={!player}
 			>
-				<Trash size="20" />
+				<Icon icon="tabler:trash" size="20" />
 			</TooltipButton>
 		</div>
 
@@ -608,10 +605,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />
+							<Icon icon="tabler:eye-off" size="20" />
 						{/snippet}
 						{#snippet activeChild()}
-							<Eye size="20" />
+							<Icon icon="tabler:eye" size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -640,10 +637,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />
+							<Icon icon="tabler:eye-off" size="20" />
 						{/snippet}
 						{#snippet activeChild()}
-							<Eye size="20" />
+							<Icon icon="tabler:eye" size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>
@@ -672,10 +669,10 @@
 						compact
 					>
 						{#snippet inactiveChild()}
-							<EyeOff size="20" />
+							<Icon icon="tabler:eye-off" size="20" />
 						{/snippet}
 						{#snippet activeChild()}
-							<Eye size="20" />
+							<Icon icon="tabler:eye" size="20" />
 						{/snippet}
 					</Switch>
 				</Tooltip>

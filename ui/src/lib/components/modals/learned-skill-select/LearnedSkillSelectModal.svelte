@@ -1,14 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill } from '$types';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Trash from '@lucide/svelte/icons/trash';
-	import TimerReset from '@lucide/svelte/icons/timer-reset';
-	import Delete from '@lucide/svelte/icons/delete';
-	import BicepsFlexed from '@lucide/svelte/icons/biceps-flexed';
-	import Brain from '@lucide/svelte/icons/brain';
 	import { activeSkillsData, elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -108,7 +101,7 @@
 							<span class="text-xs">{activeSkill?.description}</span>
 						</div>
 						<div class="flex items-center space-x-1 justify-self-start">
-							<TimerReset class="h-4 w-4" />
+							<Icon icon="tabler:history" class="h-4 w-4" />
 							<span class="font-bold">{activeSkill?.details.cool_time}</span>
 							<span class="text-xs">Pwr</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
@@ -119,7 +112,7 @@
 		</Combobox>
 		<Tooltip position="right">
 			<Button variant="primary" size="icon" onclick={handleAddSkill}>
-				<Plus />
+				<Icon icon="tabler:plus" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.add_skill()}</span>
@@ -155,13 +148,13 @@
 				{/snippet}
 				{#snippet listItemActions(skill)}
 					<Button variant="ghost" size="icon" onclick={() => handleRemoveSkill(skill)}>
-						<Trash size={16} />
+						<Icon icon="tabler:trash" size={16} />
 					</Button>
 				{/snippet}
 				{#snippet listItemPopup(skill)}
 					{@const activeSkill = activeSkills.find((s) => s.id === skill.id)}
 					<div class="flex items-center space-x-1 justify-self-start">
-						<TimerReset class="h-4 w-4" />
+						<Icon icon="tabler:history" class="h-4 w-4" />
 						<span class="font-bold">{activeSkill?.details.cool_time}</span>
 						<span class="text-xs">Pwr</span>
 						<span class="font-bold">{activeSkill?.details.power}</span>
@@ -179,7 +172,7 @@
 	<div class="mt-4 flex justify-end space-x-2">
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleLearnType}>
-				<Brain />
+				<Icon icon="tabler:brain" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.learn_skills_matching_type()}</span>
@@ -187,7 +180,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleLearnAll}>
-				<BicepsFlexed />
+				<Icon icon="ph:hand-fist" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.learn_all_skills()}</span>
@@ -195,7 +188,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleClear}>
-				<Delete />
+				<Icon icon="tabler:backspace" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
@@ -203,7 +196,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleSave}>
-				<Save />
+				<Icon icon="tabler:device-floppy" />
 			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
@@ -211,7 +204,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-				<X />
+				<Icon icon="tabler:x" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

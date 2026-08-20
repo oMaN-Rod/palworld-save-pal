@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Thủ lĩnh guild",
   "guild_name": "Tên Bang hội",
   "head": "Cái đầu",
   "heal_all_in_entity": "Chữa lành tất cả trong {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Làm mới (Xóa các thay đổi chưa được lưu)",
   "refresh_entity": "Làm mới {entity}",
   "relics": "Di vật",
+  "entity_registry": "Sổ đăng ký",
   "remove": "Di dời",
   "remove_all_from_collections": "Xóa tất cả {pals} đã chọn khỏi bộ sưu tập của họ",
   "remove_from_collection": "Xóa khỏi bộ sưu tập",
@@ -809,6 +811,7 @@
   "shortcuts": "Phím tắt",
   "show_all": "Hiện tất cả",
   "show_archived": "Hiển thị các nội dung đã lưu trữ",
+  "show_corner_art": "Hiển thị tranh trang trí góc Palworld",
   "showing_pals": "Hiển thị {start} đến {end} trong tổng {total} {pals}",
   "size": "Kích cỡ",
   "skill_fruits": "Quả Kỹ Năng",

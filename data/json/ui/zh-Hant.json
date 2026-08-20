@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "公會會長",
   "guild_name": "公會名稱",
   "head": "頭",
   "heal_all_in_entity": "治癒{entity}中的所有人",
@@ -742,6 +743,7 @@
   "refresh": "刷新（清除未儲存的變更）",
   "refresh_entity": "重新整理{entity}",
   "relics": "遺物",
+  "entity_registry": "檔案",
   "remove": "消除",
   "remove_all_from_collections": "從好友清單中移除所有選定的{pals}",
   "remove_from_collection": "從收藏中移除",
@@ -809,6 +811,7 @@
   "shortcuts": "快速方式",
   "show_all": "全部顯示",
   "show_archived": "顯示已存檔內容",
+  "show_corner_art": "顯示 Palworld 角落圖案",
   "showing_pals": "顯示{start}到{end} {total} {pals}",
   "size": "尺寸",
   "skill_fruits": "技能果實",

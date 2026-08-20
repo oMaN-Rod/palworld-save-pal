@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import {
@@ -9,11 +10,6 @@
 		UidSwapTab
 	} from '$components/tools';
 	import * as m from '$i18n/messages';
-	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
-	import Gamepad2 from '@lucide/svelte/icons/gamepad-2';
-	import Hash from '@lucide/svelte/icons/hash';
-	import Repeat from '@lucide/svelte/icons/repeat';
-	import Upload from '@lucide/svelte/icons/upload';
 
 	let activeTab = $state('convert');
 </script>
@@ -23,23 +19,23 @@
 		<Tabs value={activeTab} onValueChange={(e: ValueChangeDetails) => (activeTab = e.value)}>
 			{#snippet list()}
 				<Tabs.Control value="convert">
-					{#snippet lead()}<ArrowRightLeft size={16} />{/snippet}
+					{#snippet lead()}<Icon icon="tabler:transfer" size={16} />{/snippet}
 					{m.tools_tab_convert()}
 				</Tabs.Control>
 				<Tabs.Control value="gamepass">
-					{#snippet lead()}<Gamepad2 size={16} />{/snippet}
+					{#snippet lead()}<Icon icon="tabler:device-gamepad-2" size={16} />{/snippet}
 					{m.tools_tab_gamepass()}
 				</Tabs.Control>
 				<Tabs.Control value="steamid">
-					{#snippet lead()}<Hash size={16} />{/snippet}
+					{#snippet lead()}<Icon icon="tabler:hash" size={16} />{/snippet}
 					{m.tools_tab_steam_id()}
 				</Tabs.Control>
 				<Tabs.Control value="uidswap">
-					{#snippet lead()}<Repeat size={16} />{/snippet}
+					{#snippet lead()}<Icon icon="tabler:repeat" size={16} />{/snippet}
 					{m.tools_tab_uid_swap()}
 				</Tabs.Control>
 				<Tabs.Control value="transfer">
-					{#snippet lead()}<Upload size={16} />{/snippet}
+					{#snippet lead()}<Icon icon="tabler:upload" size={16} />{/snippet}
 					{m.tools_tab_transfer()}
 				</Tabs.Control>
 			{/snippet}

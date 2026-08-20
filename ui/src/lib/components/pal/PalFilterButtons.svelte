@@ -1,12 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';
-	import GalleryVerticalEnd from '@lucide/svelte/icons/gallery-vertical-end';
-	import User from '@lucide/svelte/icons/user';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
@@ -36,7 +35,7 @@
 	<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
 		<Tooltip>
 			<button class={filterClass('All')} onclick={() => (selectedFilter = 'All')}>
-				<GalleryVerticalEnd />
+				<Icon icon="tabler:layout-list" />
 			</button>
 			{#snippet popup()}{m.all_entity({ entity: c.pals })}{/snippet}
 		</Tooltip>
@@ -82,7 +81,7 @@
 		</Tooltip>
 		<Tooltip label={c.humans}>
 			<button type="button" class={filterClass('human')} onclick={() => (selectedFilter = 'human')}>
-				<User />
+				<Icon icon="tabler:user" />
 			</button>
 		</Tooltip>
 		<Tooltip label={c.predatorPals}>

@@ -1,10 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { IControl } from 'maplibre-gl';
 	import { untrack } from 'svelte';
 	import { getMapContext, type ControlPosition } from '$components/maplibre';
 	import { Accordion, Slider, Switch } from '@skeletonlabs/skeleton-svelte';
-	import Eye from '@lucide/svelte/icons/eye';
-	import EyeClosed from '@lucide/svelte/icons/eye-closed';
 	import * as m from '$i18n/messages';
 	import { debounce } from '$utils';
 	import {
@@ -91,7 +90,7 @@
 
 	const ctx = getMapContext();
 
-	// lucide `settings-2`.
+	// Hand-inlined sliders glyph for the maplibre control button.
 	const OPTIONS_ICON =
 		"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='29' height='29' viewBox='-2.5 -2.5 29 29' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 7h-9'/%3E%3Cpath d='M14 17H5'/%3E%3Ccircle cx='17' cy='17' r='3'/%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3C/svg%3E\")";
 
@@ -336,8 +335,11 @@
 									classes="h-6 w-6"
 								>
 									<span>{type}</span>
-									{#snippet inactiveChild()}<EyeClosed class="h-4 w-4" />{/snippet}
-									{#snippet activeChild()}<Eye class="h-4 w-4" />{/snippet}
+									{#snippet inactiveChild()}<Icon
+											icon="tabler:eye-closed"
+											class="h-4 w-4"
+										/>{/snippet}
+									{#snippet activeChild()}<Icon icon="tabler:eye" class="h-4 w-4" />{/snippet}
 								</Switch>
 							</div>
 						{/each}

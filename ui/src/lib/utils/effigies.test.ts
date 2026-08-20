@@ -93,7 +93,11 @@ describe('deriveStatusPatches', () => {
 	} as unknown as Record<string, RelicRankData>;
 
 	it('derives the rank of every staged change from its staged count', () => {
-		const patches = deriveStatusPatches({ capture_power: 3, swim_speed: 2 }, { capture_power: 1 }, relics);
+		const patches = deriveStatusPatches(
+			{ capture_power: 3, swim_speed: 2 },
+			{ capture_power: 1 },
+			relics
+		);
 		expect(patches['capture_rate']).toBe(2);
 		expect(patches['swim_speed']).toBe(2);
 	});
@@ -107,7 +111,11 @@ describe('deriveStatusPatches', () => {
 	it('leaves untouched types out of the patch so bought ranks survive', () => {
 		// swim_speed was never touched: its stored rank must not be rewritten
 		// from a held count of 0.
-		const patches = deriveStatusPatches({ capture_power: 3 }, { capture_power: 1, swim_speed: 0 }, relics);
+		const patches = deriveStatusPatches(
+			{ capture_power: 3 },
+			{ capture_power: 1, swim_speed: 0 },
+			relics
+		);
 		expect(patches['capture_rate']).toBe(2);
 		expect(patches['swim_speed']).toBeUndefined();
 	});

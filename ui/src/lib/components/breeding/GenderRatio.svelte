@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	/**
 	 * Child gender split, rendered as a proportion rather than two loose labels.
 	 *
@@ -9,8 +10,6 @@
 	 * of an exported chain.
 	 */
 	import * as m from '$i18n/messages';
-	import Mars from '@lucide/svelte/icons/mars';
-	import Venus from '@lucide/svelte/icons/venus';
 
 	let {
 		prob,
@@ -35,12 +34,12 @@
 	<div class="flex items-center gap-2 leading-none font-bold tabular-nums {numCls}">
 		{#if male > 0}
 			<span class="text-primary-300 flex items-center gap-0.5">
-				<Mars size={iconSize} class="shrink-0" />{male}%
+				<Icon icon="ph:gender-male" size={iconSize} class="shrink-0" />{male}%
 			</span>
 		{/if}
 		{#if female > 0}
 			<span class="text-tertiary-300 flex items-center gap-0.5">
-				<Venus size={iconSize} class="shrink-0" />{female}%
+				<Icon icon="ph:gender-female" size={iconSize} class="shrink-0" />{female}%
 			</span>
 		{/if}
 	</div>

@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Popover } from '$components/ui';
 	import { applyLocale, getAppState } from '$states';
 	import { languages, type SupportedLanguage } from '$types';
-	import Globe from '@lucide/svelte/icons/globe';
 
 	const appState = getAppState();
 	const entries = Object.entries(languages) as [SupportedLanguage, string][];
@@ -13,7 +13,7 @@
 <Popover position="bottom-end">
 	{#snippet children()}
 		<button class="public-chip" type="button" aria-label={activeLabel}>
-			<Globe class="h-3.5 w-3.5" />
+			<Icon icon="tabler:world" class="h-3.5 w-3.5" />
 			<span class="hidden uppercase md:inline">{activeCode}</span>
 		</button>
 	{/snippet}

@@ -5,16 +5,7 @@
 	 * prev/next navigation and per-gen / all-in-one layout toggle (chain mode).
 	 */
 	import * as m from '$i18n/messages';
-	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
-	import ChevronRight from '@lucide/svelte/icons/chevron-right';
-	import GitMerge from '@lucide/svelte/icons/git-merge';
-	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
-	import CheckCircle2 from '@lucide/svelte/icons/circle-check';
-	import XCircle from '@lucide/svelte/icons/circle-x';
-	import GitFork from '@lucide/svelte/icons/git-fork';
-	import Spline from '@lucide/svelte/icons/spline';
-	import Columns3 from '@lucide/svelte/icons/columns-3';
-	import Orbit from '@lucide/svelte/icons/orbit';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import type { TreeNode } from '$lib/breeding/dendrogram/types';
 	import type { LayoutMode } from '$lib/breeding/dendrogram/layouts';
@@ -56,11 +47,11 @@
 	const totalTrees = $derived(trees.length);
 	const activeChain = $derived(chains[activeIndex]);
 
-	const VIEWS: { mode: LayoutMode; icon: typeof GitFork; label: () => string }[] = [
-		{ mode: 'dendrogram', icon: GitFork, label: () => m.breeding_view_dendrogram() },
-		{ mode: 'smooth', icon: Spline, label: () => m.breeding_view_smooth() },
-		{ mode: 'columns', icon: Columns3, label: () => m.breeding_view_columns() },
-		{ mode: 'radial', icon: Orbit, label: () => m.breeding_view_radial() }
+	const VIEWS: { mode: LayoutMode; icon: string; label: () => string }[] = [
+		{ mode: 'dendrogram', icon: 'tabler:git-fork', label: () => m.breeding_view_dendrogram() },
+		{ mode: 'smooth', icon: 'tabler:vector-spline', label: () => m.breeding_view_smooth() },
+		{ mode: 'columns', icon: 'tabler:columns-3', label: () => m.breeding_view_columns() },
+		{ mode: 'radial', icon: 'tabler:atom', label: () => m.breeding_view_radial() }
 	];
 
 	function prev() {
@@ -84,7 +75,7 @@
 						disabled={activeIndex <= 0}
 						title={m.breeding_previous()}
 					>
-						<ChevronLeft size={12} />
+						<Icon icon="tabler:chevron-left" size={12} />
 					</button>
 					<span class="text-surface-400 shrink-0 px-1 font-mono text-xs tabular-nums">
 						{totalTrees > 0 ? `${activeIndex + 1}/${totalTrees}` : '0/0'}
@@ -95,13 +86,13 @@
 						disabled={activeIndex >= totalTrees - 1}
 						title={m.breeding_next()}
 					>
-						<ChevronRight size={12} />
+						<Icon icon="tabler:chevron-right" size={12} />
 					</button>
 				</div>
 			{/if}
 
 			{#if activeChain}
-				<GitMerge size={14} class="text-primary-400 shrink-0" />
+				<Icon icon="tabler:git-merge" size={14} class="text-primary-400 shrink-0" />
 				<h3 class="text-surface-50 truncate text-sm font-semibold">
 					{palMap.get(activeChain.target)?.display_name ?? activeChain.target}
 				</h3>
@@ -109,9 +100,9 @@
 					>{m.breeding_gens({ n: activeChain.generations })}</span
 				>
 				{#if activeChain.gender_feasible}
-					<CheckCircle2 size={11} class="text-success-400 shrink-0" />
+					<Icon icon="tabler:circle-check" size={11} class="text-success-400 shrink-0" />
 				{:else}
-					<XCircle size={11} class="text-error-400 shrink-0" />
+					<Icon icon="tabler:circle-x" size={11} class="text-error-400 shrink-0" />
 				{/if}
 				{#if activeChain.matched_passives.length}
 					<div class="ml-1 flex shrink-0 flex-wrap gap-1">
@@ -121,7 +112,7 @@
 					</div>
 				{/if}
 			{:else if activeTree}
-				<ArrowRightLeft size={14} class="text-primary-400 shrink-0" />
+				<Icon icon="tabler:transfer" size={14} class="text-primary-400 shrink-0" />
 				<h3 class="text-surface-50 truncate text-sm font-semibold">{activeTree.display}</h3>
 			{/if}
 		</div>
@@ -129,7 +120,6 @@
 		<div class="flex shrink-0 items-center gap-1.5">
 			<div class="bg-surface-950/50 border-surface-700/30 flex gap-0.5 rounded-sm border p-0.5">
 				{#each VIEWS as view (view.mode)}
-					{@const Icon = view.icon}
 					<button
 						class="rounded-sm p-1 transition-all {viewMode === view.mode
 							? 'bg-primary-500/15 text-primary-300 border-primary-500/40 border'
@@ -138,7 +128,7 @@
 						title={view.label()}
 						aria-pressed={viewMode === view.mode}
 					>
-						<Icon size={12} />
+						<Icon icon={view.icon} size={12} />
 					</button>
 				{/each}
 			</div>

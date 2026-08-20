@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, List, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, palsData, presetsData } from '$lib/data';
@@ -7,10 +8,6 @@
 	import { applyPalPreset, assetLoader, canBeAlpha, canBeLucky, formatNickname } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
 	import NumberFlow from '@number-flow/svelte';
-	import X from '@lucide/svelte/icons/x';
-	import Check from '@lucide/svelte/icons/check';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Lock from '@lucide/svelte/icons/lock';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import PalTypeToggles from './PalTypeToggles.svelte';
@@ -384,7 +381,7 @@
 										preset.pal_preset.character_id as string
 									)}
 									<img src={palIcon} alt={preset.pal_preset.character_id} class="ml-2 h-8 w-8" />
-									<Lock class="ml-2 h-4 w-4 text-red-500" />
+									<Icon icon="tabler:lock" class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
 									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
@@ -402,14 +399,14 @@
 								onclick={() =>
 									(selectedPresets = selectedPresets.filter((p) => p.id !== preset.id))}
 							>
-								<Trash size={16} />
+								<Icon icon="tabler:trash" size={16} />
 							</Button>
 						{/snippet}
 						{#snippet listItemPopup(preset)}
 							<div class="flex items-center space-x-2">
 								<span>{preset.name}</span>
 								{#if preset.pal_preset?.lock}
-									<Lock class="ml-2 h-4 w-4 text-red-500" />
+									<Icon icon="tabler:lock" class="ml-2 h-4 w-4 text-red-500" />
 								{/if}
 								{#if preset.pal_preset?.lock_element}
 									{@const elementData = elementsData.getByKey(preset.pal_preset.element as string)}
@@ -445,13 +442,13 @@
 	<div class="flex justify-end space-x-4">
 		<Tooltip position="bottom" label={m.cancel()}>
 			<Button variant="secondary" onclick={handleCancel}>
-				<X size={20} />
+				<Icon icon="tabler:x" size={20} />
 				<span>{m.cancel()}</span>
 			</Button>
 		</Tooltip>
 		<Tooltip position="bottom" label={m.confirm()}>
 			<Button variant="primary" onclick={handleConfirm} disabled={!canAddPals || isBusy}>
-				<Check size={20} />
+				<Icon icon="tabler:check" size={20} />
 				<span>{m.fill()}</span>
 			</Button>
 		</Tooltip>

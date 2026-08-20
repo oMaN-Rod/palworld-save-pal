@@ -1,14 +1,13 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
-	import Save from '@lucide/svelte/icons/save';
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
-	import { theme, themeOptions } from '$states';
+	import { cornerArt, theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -67,16 +66,33 @@
 			</div>
 		</div>
 
+		<div class="mt-2 flex flex-col space-y-2">
+			<!-- Purely visual, so this one is local UI state (like the theme picker
+			     above), applied immediately and persisted to localStorage — not part
+			     of the backend-persisted AppSettings payload. -->
+			<div class="flex space-x-2">
+				<Switch
+					checked={cornerArt.current}
+					onCheckedChange={(mode: CheckedChangeDetails) => {
+						cornerArt.current = mode.checked;
+					}}
+					name="corner_art"
+					label={m.show_corner_art()}
+				/>
+				<span>{m.show_corner_art()}</span>
+			</div>
+		</div>
+
 		<div class="mt-2 flex justify-end space-x-2">
 			<Tooltip position="bottom" label={c.save}>
 				<Button variant="ghost" size="icon" onclick={() => closeModal(settings)} data-modal-primary>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 			</Tooltip>
 
 			<Tooltip position="bottom" label={m.cancel()}>
 				<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 			</Tooltip>
 		</div>

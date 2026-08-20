@@ -1,8 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button } from '$components/ui';
-	import FolderArchive from '@lucide/svelte/icons/folder-archive';
-	import FileArchive from '@lucide/svelte/icons/file-archive';
-	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import {
 		readInputFolder,
 		readDroppedItems,
@@ -119,16 +117,16 @@
 		ondragleave={() => (dragOver = false)}
 		ondrop={onDrop}
 	>
-		<FolderArchive class="h-16 w-16 opacity-80" />
+		<Icon icon={dragOver ? 'line-md:upload-loop' : 'tabler:archive'} class="h-16 w-16 opacity-80" />
 		<h3 class="h3 mt-3">{m.upload_drop_heading()}</h3>
 		<span class="text-surface-300">{m.upload_drop_hint()}</span>
 		<div class="mt-4 flex flex-wrap items-center justify-center gap-3">
 			<Button variant="secondary" onclick={() => zipInput?.click()}>
-				<FileArchive size={16} />
+				<Icon icon="tabler:file-zip" size={16} />
 				{m.upload_choose_zip()}
 			</Button>
 			<Button variant="secondary" onclick={chooseFolder}>
-				<FolderOpen size={16} />
+				<Icon icon="tabler:folder-open" size={16} />
 				{m.upload_choose_folder()}
 			</Button>
 		</div>

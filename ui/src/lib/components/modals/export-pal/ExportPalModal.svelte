@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { Button, Card, Combobox } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Upload from '@lucide/svelte/icons/upload';
-	import Share from '@lucide/svelte/icons/share';
-	import Download from '@lucide/svelte/icons/download';
-	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
-	import CheckCircle from '@lucide/svelte/icons/circle-check-big';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState } from '$states';
@@ -78,13 +72,13 @@
 	function getTargetIcon() {
 		switch (exportTarget) {
 			case 'pal_box':
-				return Upload;
+				return 'tabler:upload';
 			case 'dps':
-				return Download;
+				return 'tabler:download';
 			case 'gps':
-				return Share;
+				return 'tabler:share';
 			default:
-				return Upload;
+				return 'tabler:upload';
 		}
 	}
 
@@ -113,8 +107,7 @@
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				{#if exportTarget}
-					{@const IconComponent = getTargetIcon()}
-					<IconComponent class="h-5 w-5" />
+					<Icon icon={getTargetIcon()} class="h-5 w-5" />
 				{/if}
 				{title}
 			</h3>
@@ -143,7 +136,7 @@
 						class:text-white={exportTarget === 'pal_box'}
 					>
 						<input type="radio" bind:group={exportTarget} value="pal_box" class="sr-only" />
-						<Upload class="h-4 w-4" />
+						<Icon icon="tabler:upload" class="h-4 w-4" />
 						<span class="text-sm">{m.palbox()}</span>
 					</label>
 					<label
@@ -152,7 +145,7 @@
 						class:text-white={exportTarget === 'dps'}
 					>
 						<input type="radio" bind:group={exportTarget} value="dps" class="sr-only" />
-						<Download class="h-4 w-4" />
+						<Icon icon="tabler:download" class="h-4 w-4" />
 						<span class="text-sm">{m.dps()}</span>
 					</label>
 					{#if !hideGps}
@@ -162,7 +155,7 @@
 							class:text-white={exportTarget === 'gps'}
 						>
 							<input type="radio" bind:group={exportTarget} value="gps" class="sr-only" />
-							<Share class="h-4 w-4" />
+							<Icon icon="tabler:share" class="h-4 w-4" />
 							<span class="text-sm">{m.gps()}</span>
 						</label>
 					{/if}
@@ -193,7 +186,7 @@
 
 				{#if !isTargetAvailable}
 					<div class="flex items-center gap-1 text-red-600 dark:text-red-400">
-						<AlertTriangle size={14} />
+						<Icon icon="tabler:alert-triangle" size={14} />
 						{#if exportTarget === 'pal_box'}
 							{m.select_valid_player()}
 						{:else if exportTarget === 'dps'}
@@ -204,7 +197,7 @@
 					</div>
 				{:else}
 					<div class="flex items-center gap-1 text-green-600 dark:text-green-400">
-						<CheckCircle size={14} />
+						<Icon icon="tabler:circle-check" size={14} />
 						{m.target_available()}
 					</div>
 				{/if}
@@ -222,7 +215,7 @@
 		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
 			<Button
@@ -232,7 +225,7 @@
 				data-modal-primary
 				disabled={!isTargetAvailable}
 			>
-				<Save class="h-4 w-4" />
+				<Icon icon="tabler:device-floppy" class="h-4 w-4" />
 				{m.export_to_target({ target: exportTarget.toUpperCase() })}
 			</Button>
 		</div>

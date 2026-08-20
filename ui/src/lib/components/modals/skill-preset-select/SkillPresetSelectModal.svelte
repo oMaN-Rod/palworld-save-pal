@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { activeSkillsData, elementsData, passiveSkillsData, presetsData } from '$lib/data';
@@ -6,8 +7,6 @@
 	import { cn } from '$theme';
 	import { type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -174,7 +173,7 @@
 				onclick={() => handleClose(true)}
 				data-modal-primary
 			>
-				<Save />
+				<Icon icon="tabler:device-floppy" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.apply_selected_entity({ entity: c.preset })}</span>
@@ -182,7 +181,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-				<X />
+				<Icon icon="tabler:x" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

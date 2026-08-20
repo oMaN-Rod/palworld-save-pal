@@ -15,8 +15,8 @@ export const getPlayerSummariesHandler: WSMessageHandler = {
 		appState.playerSummaries = data;
 		// Land on the Overview dashboard once the save is ready: it is the
 		// file tab's destination after loading on both builds. Skip when the
-		// user is already there, and leave /bulk alone.
-		if (!page.url.pathname.startsWith('/bulk') && !page.url.pathname.startsWith('/overview')) {
+		// user is already there, and leave /registry alone.
+		if (!page.url.pathname.startsWith('/registry') && !page.url.pathname.startsWith('/overview')) {
 			goto('/overview');
 		}
 	}

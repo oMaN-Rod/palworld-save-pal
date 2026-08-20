@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { passiveSkillsData } from '$lib/data';
 	import type { Pal, PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
@@ -14,7 +15,6 @@
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import HelpCircle from '@lucide/svelte/icons/circle-question-mark';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -100,7 +100,7 @@
 		{#if skill === 'Empty'}
 			<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6" />
 		{:else}
-			<HelpCircle size={18} class="text-surface-500 mr-2" />
+			<Icon icon="tabler:help-circle" size={18} class="text-surface-500 mr-2" />
 		{/if}
 	</div>
 {/snippet}

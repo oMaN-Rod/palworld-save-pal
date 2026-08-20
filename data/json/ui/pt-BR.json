@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Líder da guilda",
   "guild_name": "Nome da Guilda",
   "head": "Cabeça",
   "heal_all_in_entity": "Curar todos em {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Atualizar (Excluir alterações não salvas)",
   "refresh_entity": "Atualizar {entity}",
   "relics": "Relíquias",
+  "entity_registry": "Registro",
   "remove": "Remover",
   "remove_all_from_collections": "Remover todos os {pals} selecionados de suas coleções",
   "remove_from_collection": "Remover da coleção",
@@ -809,6 +811,7 @@
   "shortcuts": "Atalhos",
   "show_all": "Mostrar tudo",
   "show_archived": "Mostrar arquivos",
+  "show_corner_art": "Mostrar arte de Palworld no canto",
   "showing_pals": "Exibindo {start} a {end} de {total} {pals}",
   "size": "Tamanho",
   "skill_fruits": "Frutas de habilidade",

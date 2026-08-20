@@ -1,22 +1,20 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
-	import BookOpen from '@lucide/svelte/icons/book-open';
-	import Server from '@lucide/svelte/icons/server';
-	import HardDrive from '@lucide/svelte/icons/hard-drive';
 
 	const guides = [
 		{
 			title: 'Server Setup',
 			description: 'Configure and manage dedicated Palworld servers.',
 			href: '/docs/guides/server-setup',
-			icon: Server
+			icon: 'tabler:server'
 		},
 		{
 			title: 'Save Management',
 			description: 'Understand save file formats, backups, and conversions.',
 			href: '/docs/guides/save-management',
-			icon: HardDrive
+			icon: 'ph:hard-drives'
 		}
 	];
 </script>
@@ -32,7 +30,7 @@
 				class="border-surface-700 hover:border-primary-500/50 hover:bg-surface-700 flex flex-col gap-2 rounded-lg border p-4 no-underline transition-colors"
 			>
 				<div class="flex items-center gap-2">
-					<guide.icon class="text-primary-500 h-5 w-5" />
+					<Icon icon={guide.icon} class="text-primary-500 h-5 w-5" />
 					<h3 class="mt-0! mb-0! text-lg font-semibold">{guide.title}</h3>
 				</div>
 				<span class="text-surface-400 mb-0! text-left text-sm">{guide.description}</span>

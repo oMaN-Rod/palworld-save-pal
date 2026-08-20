@@ -5,6 +5,7 @@ import Combobox from './combobox/Combobox.svelte';
 import ContextMenu from './context-menu/ContextMenu.svelte';
 import CornerDotButton from './corner-dot-button/CornerDotButton.svelte';
 import FileDropzone from './file-dropzone/FileDropzone.svelte';
+import Icon from './icons/Icon.svelte';
 import Nuke from './icons/Nuke.svelte';
 import Input from './input/Input.svelte';
 import ItemHeader from './item-header/ItemHeader.svelte';
@@ -34,6 +35,7 @@ export {
 	ContextMenu,
 	CornerDotButton,
 	FileDropzone,
+	Icon,
 	Input,
 	ItemHeader,
 	KeyboardShortcut,

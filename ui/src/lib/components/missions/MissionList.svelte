@@ -1,11 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import { missionsData } from '$lib/data';
 	import type { Mission, MissionType } from '$types';
-	import Check from '@lucide/svelte/icons/check';
-	import Circle from '@lucide/svelte/icons/circle';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import CheckCircle from '@lucide/svelte/icons/circle-check-big';
 	import { SectionHeader, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -77,7 +74,7 @@
 							)}
 							onclick={() => handleSelectMission(mission)}
 						>
-							<Circle class="text-warning-500 h-4 w-4 shrink-0" />
+							<Icon icon="tabler:circle" class="text-warning-500 h-4 w-4 shrink-0" />
 							<span class="flex-1 truncate">{mission.localized_name}</span>
 							<div class="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
 								<Tooltip label={m.mark_complete()} position="left">
@@ -85,7 +82,7 @@
 										class="hover:bg-success-500/25 rounded p-1"
 										onclick={(e) => handleComplete(e, mission.id)}
 									>
-										<CheckCircle class="text-success-500 h-4 w-4" />
+										<Icon icon="tabler:circle-check" class="text-success-500 h-4 w-4" />
 									</button>
 								</Tooltip>
 								<Tooltip label={m.clear_entity({ entity: m.mission() })} position="left">
@@ -93,7 +90,7 @@
 										class="hover:bg-error-500/25 rounded p-1"
 										onclick={(e) => handleClear(e, mission.id, false)}
 									>
-										<Trash2 class="text-error-500 h-4 w-4" />
+										<Icon icon="tabler:trash-x" class="text-error-500 h-4 w-4" />
 									</button>
 								</Tooltip>
 							</div>
@@ -117,7 +114,7 @@
 							)}
 							onclick={() => handleSelectMission(mission)}
 						>
-							<Check class="text-success-500 h-4 w-4 shrink-0" />
+							<Icon icon="tabler:check" class="text-success-500 h-4 w-4 shrink-0" />
 							<span class="flex-1 truncate">{mission.localized_name}</span>
 							<div class="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
 								<Tooltip label={m.clear_entity({ entity: m.mission() })} position="left">
@@ -125,7 +122,7 @@
 										class="hover:bg-error-500/25 rounded p-1"
 										onclick={(e) => handleClear(e, mission.id, true)}
 									>
-										<Trash2 class="text-error-500 h-4 w-4" />
+										<Icon icon="tabler:trash-x" class="text-error-500 h-4 w-4" />
 									</button>
 								</Tooltip>
 							</div>

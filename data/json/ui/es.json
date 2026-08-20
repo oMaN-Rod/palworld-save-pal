@@ -355,6 +355,7 @@
       ]
     }
   ],
+  "guild_leader": "Líder de gremio",
   "guild_name": "Nombre del gremio",
   "head": "Cabeza",
   "heal_all_in_entity": "Curar todo en {entity}",
@@ -742,6 +743,7 @@
   "refresh": "Actualizar (Eliminar cambios no guardados)",
   "refresh_entity": "Actualizar {entity}",
   "relics": "Reliquias",
+  "entity_registry": "Registro",
   "remove": "Eliminar",
   "remove_all_from_collections": "Eliminar todos {pals} seleccionados de sus colecciones",
   "remove_from_collection": "Eliminar de la colección",
@@ -809,6 +811,7 @@
   "shortcuts": "Atajos",
   "show_all": "Mostrar todo",
   "show_archived": "Mostrar archivado",
+  "show_corner_art": "Mostrar arte de Palworld en la esquina",
   "showing_pals": "Mostrando {start} a {end} de {total} {pals}",
   "size": "Tamaño",
   "skill_fruits": "Frutas de habilidad",

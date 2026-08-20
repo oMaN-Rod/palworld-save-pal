@@ -1,9 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { Card } from '$components/ui';
-	import Users from '@lucide/svelte/icons/users';
-	import Play from '@lucide/svelte/icons/play';
-	import Square from '@lucide/svelte/icons/square';
 	import { cn } from '$theme';
 
 	let {
@@ -60,7 +58,7 @@
 			<div class="flex items-center gap-3">
 				{#if isRunning}
 					<span class="text-surface-400 flex items-center gap-1 text-sm">
-						<Users size={14} />
+						<Icon icon="tabler:users" size={14} />
 						{server.player_count ?? 0}
 					</span>
 				{/if}
@@ -77,9 +75,9 @@
 					}}
 				>
 					{#if isRunning}
-						<Square size={14} />
+						<Icon icon="tabler:square" size={14} />
 					{:else}
-						<Play size={14} />
+						<Icon icon="tabler:player-play" size={14} />
 					{/if}
 				</button>
 			</div>
