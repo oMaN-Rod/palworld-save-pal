@@ -223,13 +223,18 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     let common = dto.common_container.as_mut().expect("player has one");
     let real_id = common.id;
     common.id = Uuid::new_v4(); // forged -- must be ignored for routing
-                                // A real content edit: a brand-new slot at an index unlikely to already
-                                // be occupied by this fixture player's real inventory.
+                                // A real content edit: a brand-new slot at an index that is both free and
+                                // within the container's own capacity, so it is a legitimate occupied
+                                // slot rather than one the paired essential-container resize would
+                                // rightly drop as out of range.
+    let free_index = (0..common.slot_num)
+        .find(|index| !common.slots.iter().any(|slot| slot.slot_index == *index))
+        .expect("the fixture container has at least one free slot within capacity");
     common
         .slots
         .push(psp_core::dto::container::ItemContainerSlotDto {
             dynamic_item: None,
-            slot_index: 9000,
+            slot_index: free_index,
             count: 3,
             static_id: Some("Wood".to_string()),
             local_id: None,
@@ -249,7 +254,7 @@ fn update_players_common_container_edit_ignores_forged_dto_id() {
     let added = common_after
         .slots
         .iter()
-        .find(|slot| slot.slot_index == 9000)
+        .find(|slot| slot.slot_index == free_index)
         .expect(
             "the real content edit must have landed in the player's REAL common container -- \
              it would be silently absent if routing had instead gone through the forged id",
