@@ -90,6 +90,26 @@ impl DbDriver for SqlxSqliteDriver {
         };
         rows.iter().map(|r| decode_row(r, cols.clone())).collect()
     }
+
+    /// One pool transaction: each statement commits together, and a failure
+    /// rolls the whole batch back (the `Transaction` is dropped uncommitted).
+    async fn execute_batch(&self, statements: &[(&str, Vec<DbValue>)]) -> Result<(), DbError> {
+        let mut tx = self
+            .pool
+            .begin()
+            .await
+            .map_err(|e| DbError::Backend(e.to_string()))?;
+        for (sql, params) in statements {
+            bind_all(sqlx::query(sql), params)
+                .execute(&mut *tx)
+                .await
+                .map_err(|e| DbError::Backend(e.to_string()))?;
+        }
+        tx.commit()
+            .await
+            .map_err(|e| DbError::Backend(e.to_string()))?;
+        Ok(())
+    }
 }
 
 #[cfg(test)]
@@ -160,5 +180,40 @@ mod tests {
             .await
             .unwrap()
             .is_empty());
+    }
+
+    #[tokio::test]
+    async fn execute_batch_commits_and_rolls_back_atomically() {
+        let d = driver().await;
+        d.execute("CREATE TABLE t (id INTEGER PRIMARY KEY, n INTEGER)", &[])
+            .await
+            .unwrap();
+
+        // All statements in a batch commit together.
+        d.execute_batch(&[
+            ("INSERT INTO t (n) VALUES (?)", vec![DbValue::from(1i64)]),
+            ("INSERT INTO t (n) VALUES (?)", vec![DbValue::from(2i64)]),
+        ])
+        .await
+        .unwrap();
+        let rows = d.query("SELECT n FROM t ORDER BY n", &[]).await.unwrap();
+        assert_eq!(rows.len(), 2);
+
+        // A failing statement rolls the whole batch back, not just itself.
+        let result = d
+            .execute_batch(&[
+                ("INSERT INTO t (n) VALUES (?)", vec![DbValue::from(3i64)]),
+                ("INSERT INTO no_such_table (n) VALUES (4)", vec![]),
+            ])
+            .await;
+        assert!(result.is_err());
+        let rows = d.query("SELECT n FROM t ORDER BY n", &[]).await.unwrap();
+        assert_eq!(
+            rows.iter()
+                .map(|r| r.get_i64_at(0).unwrap())
+                .collect::<Vec<_>>(),
+            vec![1, 2],
+            "the first statement of the failed batch must not persist"
+        );
     }
 }

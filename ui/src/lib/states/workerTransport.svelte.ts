@@ -11,10 +11,12 @@ export type WorkerTransportOptions = {
 
 export class WorkerTransport {
 	#worker: Worker | null = null;
-	#message = $state<Message | null>(null);
+	// $state.raw: dispatched frames are handed to the dispatcher and forgotten —
+	// nothing reads `ws.message` deeply, so a deep proxy only adds per-payload cost.
+	#message = $state.raw<Message | null>(null);
 	#connected = $state(false);
 	#dispatcher = getDispatcher();
-	#queue = new Map<string, (value: unknown) => void>();
+	#queue = new Map<string, ((value: unknown) => void)[]>();
 	#createWorker: () => Worker;
 	#unloadTarget: UnloadTarget | null;
 
@@ -52,8 +54,13 @@ export class WorkerTransport {
 			const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
 			if (!data) return;
 			if (data.type && this.#queue.has(data.type)) {
-				this.#queue.get(data.type)!(data);
+				// Resolvers are queued per type so concurrent same-type requests
+				// each settle instead of overwriting each other.
+				const resolvers = this.#queue.get(data.type)!;
 				this.#queue.delete(data.type);
+				for (const resolve of resolvers) {
+					resolve(data);
+				}
 				return;
 			}
 			this.#message = data;
@@ -84,7 +91,11 @@ export class WorkerTransport {
 
 	async sendAndWait(messageData: any): Promise<any> {
 		return new Promise((resolve) => {
-			this.#queue.set(messageData.type, resolve);
+			// Queue, don't overwrite: a second concurrent request of the same
+			// type must not orphan the first promise.
+			const resolvers = this.#queue.get(messageData.type) ?? [];
+			resolvers.push(resolve);
+			this.#queue.set(messageData.type, resolvers);
 			this.send(JSON.stringify(messageData));
 		});
 	}

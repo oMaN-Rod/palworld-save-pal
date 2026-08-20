@@ -151,10 +151,31 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 					);
 				}
 				const manifest: string[] = await (await fetch('/data/json/manifest.json')).json();
+				// Fetch only the active locale (plus the en fallback) of the
+				// l10n/ and ui/ tables: the engine merges a single locale per
+				// request, so shipping all 17 would add ~18 MB of download and
+				// wasm parse time to every cold start. Language changes reload
+				// the app (Sidebar's handleLanguageSelect), re-running this.
+				const rows = sqlite.query('SELECT language FROM settings', []);
+				const row = rows[0];
+				const language = typeof row?.language === 'string' && row.language ? row.language : 'en';
+				const wantedLocale = language.toLowerCase();
+				const isWanted = (f: string): boolean => {
+					if (f.startsWith('ui/')) {
+						const stem = f.slice(3, -'.json'.length).toLowerCase();
+						return stem === 'en' || stem === wantedLocale;
+					}
+					if (f.startsWith('l10n/')) {
+						const locale = f.slice(5).split('/')[0].toLowerCase();
+						return locale === 'en' || locale === wantedLocale;
+					}
+					return true;
+				};
+				const selected = manifest.filter(isWanted);
 				const entries: [string, string][] = await Promise.all(
 					// Key is the fetch path minus the .json extension — GameData keys
 					// are extension-less (e.g. "items", "l10n/en/pals").
-					manifest.map(
+					selected.map(
 						async (f) =>
 							[f.replace(/\.json$/, ''), await (await fetch(`/data/json/${f}`)).text()] as [
 								string,

@@ -1,3 +1,4 @@
+pub mod blocking;
 pub mod blueprint_registry;
 pub mod desktop_dialogs;
 pub mod dispatcher;

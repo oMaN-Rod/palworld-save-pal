@@ -116,10 +116,20 @@
 			return filteredPals.slice(startIndex, endIndex);
 		}
 
+		// Slot lookup map built once — the previous per-slot find() scanned all
+		// (up to 960) proxied pals for each of the 960 slots. First pal at a
+		// given slot wins, matching the old find()-first behavior.
+		const bySlot = new Map<number, PalWithData>();
+		for (const pal of filteredPals) {
+			if (!bySlot.has(pal.pal.storage_slot)) {
+				bySlot.set(pal.pal.storage_slot, pal);
+			}
+		}
+
 		const paddedPals = Array(TOTAL_SLOTS)
 			.fill(undefined)
 			.map((_, index) => {
-				const pal = filteredPals.find((p) => p.pal.storage_slot === index);
+				const pal = bySlot.get(index);
 				if (pal) {
 					return pal;
 				} else {

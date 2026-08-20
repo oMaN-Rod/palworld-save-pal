@@ -3,7 +3,6 @@
 	import {
 		ActiveSkillBadge,
 		PalHeader,
-		PalModelViewer,
 		PassiveSkillBadge,
 		Souls,
 		StatsBadges,
@@ -11,6 +10,8 @@
 		Talents,
 		WorkSuitabilities
 	} from '$components/pal';
+	// Deep import so the (three.js) viewer stays out of the light pal barrel.
+	import PalModelViewer from '$components/pal/PalModelViewer.svelte';
 	import {
 		LearnedSkillSelectModal,
 		MultiSkillSelectModal,

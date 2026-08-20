@@ -782,6 +782,9 @@ pub async fn handle_clone_to_ups(
     }
     let mut cloned_count = 0usize;
     let mut errors: Vec<String> = Vec::new();
+    // Hoisted out of the loop: this deep-clones the whole pals table, once per
+    // handler call instead of once per cloned pal.
+    let pals_data = pals_game_data(ctx);
 
     for pal_id_text in &data.pal_ids {
         // pal_box and dps need a player uid; gps does not.
@@ -832,7 +835,6 @@ pub async fn handle_clone_to_ups(
             data.tags.clone(),
             data.notes.clone(),
         )?;
-        let pals_data = pals_game_data(ctx);
         match psp_db::ups::add_pal(&*ctx.app.driver, new_pal, &pals_data).await {
             Ok(_) => cloned_count += 1,
             Err(error) => errors.push(format!("Failed to clone {pal_id_text}: {error}")),

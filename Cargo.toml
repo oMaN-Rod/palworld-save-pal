@@ -15,6 +15,13 @@ opt-level = 1
 [profile.dev.package."*"]
 opt-level = 3
 
+# Strip + thin LTO shrink every release artifact (desktop installers, Docker
+# image, wasm). codegen-units = 1 trades a slower release build for size/speed.
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1
+
 [workspace.dependencies]
 psp-app = { path = "psp-app" }
 psp-core = { path = "psp-core", default-features = false }
@@ -24,7 +31,7 @@ psp-db = { path = "psp-db", default-features = false }
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
-tower-http = { version = "0.6", features = ["fs"] }
+tower-http = { version = "0.6", features = ["fs", "compression-gzip"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }
 sqlx = { version = "0.8", features = ["sqlite", "runtime-tokio", "macros", "migrate", "json", "chrono"] }

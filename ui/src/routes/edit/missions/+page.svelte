@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { MissionDetails, MissionList } from '$components';
+	import { MissionDetails, MissionList } from '$components/missions';
 	import { ConfirmModal } from '$components/modals';
 	import { TooltipButton } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';

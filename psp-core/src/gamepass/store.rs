@@ -341,6 +341,7 @@ pub fn cleanup_container_dir(
 /// The old save's containers are left in place; callers run `cleanup_container_dir`
 /// beforehand if they want them gone. `original_containers` must already be the
 /// resolved "latest" set from `ContainerIndex::latest_save_containers`.
+#[allow(clippy::too_many_arguments)] // one save write-through; a params struct would obscure it
 pub fn save_modified_gamepass(
     index: &mut ContainerIndex,
     container_dir: &Path,

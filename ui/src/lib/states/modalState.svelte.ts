@@ -1,4 +1,6 @@
-import { ConfirmModal } from '$components';
+// Deep import: this store sits in the root layout graph, and the $components
+// barrel (or even the modals barrel) would drag the heavy modal leaves with it.
+import ConfirmModal from '$components/modals/confirm/ConfirmModal.svelte';
 import type { Component } from 'svelte';
 
 class ModalState {

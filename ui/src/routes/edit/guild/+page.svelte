@@ -16,7 +16,7 @@
 	import { PalBadge } from '$components/pal';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';
-	import { LabResearch } from '$components';
+	import LabResearch from '$components/guilds/LabResearch.svelte';
 	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,

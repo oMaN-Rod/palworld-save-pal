@@ -30,3 +30,6 @@ src/lib/wasm/psp/psp_bg.wasm
 # Playwright run artifacts
 test-results/
 playwright-report/
+
+# Self-hosted monaco (copied from node_modules by the selfHostMonaco vite plugin)
+static/vs/

@@ -12,28 +12,33 @@ FROM oven/bun AS ui_builder
 
 ARG PUBLIC_WS_URL=127.0.0.1:5174/ws
 
-COPY . /app
+# Copy only what the UI build reads, so Rust-only changes do not invalidate the
+# bun-install/vite layers: generate-sitemap.mjs reads ../../data/json.
+COPY ui /app/ui
+COPY data/json /app/data/json
 WORKDIR /app/ui
 RUN echo "PUBLIC_WS_URL=${PUBLIC_WS_URL}" >.env; \
     echo "PUBLIC_DESKTOP_MODE=false" >>.env; \
-    bun install; \
+    bun install --frozen-lockfile; \
     bun run build
 
 # ---- Stage 2: Rust build (only psp-server) with cargo-chef layer caching ----
 # Bump the pinned toolchain freely; edition 2021 workspace.
-FROM rust:1.93-bookworm AS chef
-RUN cargo install cargo-chef --locked
+FROM lukemathwalker/cargo-chef:latest-rust-1.93-bookworm AS chef
 WORKDIR /build
 
 FROM chef AS planner
-# The workspace lives at the repo root. psp-desktop is a member (needed to
-# resolve the workspace) but is never compiled here — the cook/build below
-# scope to psp-server, so tauri/webkit are not pulled into this image.
+# The workspace lives at the repo root. Every member's manifest must be
+# present for `cargo metadata` (hence psp-app/psp-web too), but only
+# psp-server is ever compiled — the cook/build below scope to it, so
+# tauri/webkit and the wasm deps are not pulled into this image.
 COPY Cargo.toml Cargo.lock ./
 COPY psp-core psp-core
 COPY psp-db psp-db
+COPY psp-app psp-app
 COPY psp-server psp-server
 COPY psp-desktop psp-desktop
+COPY psp-web psp-web
 RUN cargo chef prepare --recipe-path recipe.json
 
 FROM chef AS rust_builder
@@ -43,8 +48,10 @@ RUN cargo chef cook --release --locked --package psp-server --recipe-path recipe
 COPY Cargo.toml Cargo.lock ./
 COPY psp-core psp-core
 COPY psp-db psp-db
+COPY psp-app psp-app
 COPY psp-server psp-server
 COPY psp-desktop psp-desktop
+COPY psp-web psp-web
 RUN cargo build --release --locked --package psp-server
 
 # ---- Stage 3: runtime ----

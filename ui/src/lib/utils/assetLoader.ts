@@ -1,10 +1,16 @@
 import { ASSET_DATA_PATH } from '$lib/constants';
-type AssetType = 'json' | 'image' | 'svg' | 'webp';
+
+type AssetType = 'image' | 'svg' | 'webp';
 
 class AssetLoader {
 	private cache: Record<string, any> = {};
-	private jsonGlob = import.meta.glob('$lib/assets/data/**/*.json', { eager: true });
-	private imageGlob = import.meta.glob('$lib/assets/img/**/*.webp', {
+	// `eager: true` is load-bearing: load()/loadImage() are synchronous and every
+	// caller — including module-scope `staticIcons` in types/icons.ts — needs the
+	// URL on the very first call. Lazy `() => import()` globs resolve in
+	// microtasks, which never flush between synchronous module evaluations.
+	// One webp glob serves both the 'image' and 'webp' cases; the former
+	// duplicate emitted the whole ~2500-entry glob record twice in the bundle.
+	private webpGlob = import.meta.glob('$lib/assets/img/**/*.webp', {
 		eager: true,
 		query: '?url',
 		import: 'default'
@@ -12,11 +18,6 @@ class AssetLoader {
 	private svgGlob = import.meta.glob('$lib/assets/img/**/*.svg', {
 		eager: true,
 		query: '?raw',
-		import: 'default'
-	});
-	private webpGlob = import.meta.glob('$lib/assets/img/**/*.webp', {
-		eager: true,
-		query: '?url',
 		import: 'default'
 	});
 	private unknownIcon = this.loadImage(`${ASSET_DATA_PATH}/img/unknown.webp`);
@@ -28,17 +29,12 @@ class AssetLoader {
 
 		let glob;
 		switch (type) {
-			case 'json':
-				glob = this.jsonGlob;
-				break;
 			case 'image':
-				glob = this.imageGlob;
+			case 'webp':
+				glob = this.webpGlob;
 				break;
 			case 'svg':
 				glob = this.svgGlob;
-				break;
-			case 'webp':
-				glob = this.webpGlob;
 				break;
 			default:
 				throw new Error(`Unsupported asset type: ${type}`);
@@ -51,11 +47,6 @@ class AssetLoader {
 
 		this.cache[path] = glob[path];
 		return this.cache[path];
-	}
-
-	loadJson<T>(path: string): T | undefined {
-		if (!path) return;
-		return this.load<T>(path, 'json');
 	}
 
 	loadImage(path: string, type: AssetType = 'webp'): string {

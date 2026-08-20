@@ -1226,32 +1226,49 @@ async fn load_server_save_impl(
             return Ok(());
         }
     };
-    let level_sav_bytes = std::fs::read(&layout.level_sav).map_err(|error| error.to_string())?;
-    let level_meta_bytes = match &layout.level_meta {
-        Some(meta_path) => Some(std::fs::read(meta_path).map_err(|error| error.to_string())?),
-        None => None,
-    };
-    let (player_file_refs, player_discovery_order) =
-        save_file::discover_player_file_refs(&layout.players_dir)
-            .map_err(|error| error.to_string())?;
-
     let progress = emitter.progress_sink();
-    let session = SaveSession::load(
-        SaveKind::Steam {
-            level_path: layout.level_sav.clone(),
-        },
-        level_sav_path.to_string_lossy().into_owned(),
-        "steam",
-        &level_sav_bytes,
-        level_meta_bytes.as_deref(),
-        None,
-        player_file_refs,
-        layout.global_pal_storage_sav.clone(),
-        // Emit the leading generic "Loading Level.sav..." progress frame.
-        true,
-        &progress,
-    )
-    .map_err(|error| error.to_string())?;
+
+    // Blocking read + parse of a potentially huge save — keep it off the async
+    // workers (same rationale as api_convert). Progress frames still flow
+    // through the same emitter channel, in the same order, because the tail
+    // frames below only go out after the `.await`.
+    let level_sav = layout.level_sav.clone();
+    let level_meta = layout.level_meta.clone();
+    let players_dir = layout.players_dir.clone();
+    let gps_path = layout.global_pal_storage_sav.clone();
+    let save_id = level_sav_path.to_string_lossy().into_owned();
+    let (session, player_discovery_order) =
+        tokio::task::spawn_blocking(move || -> Result<(SaveSession, Vec<uuid::Uuid>), String> {
+            let level_sav_bytes = std::fs::read(&level_sav).map_err(|error| error.to_string())?;
+            let level_meta_bytes = match &level_meta {
+                Some(meta_path) => {
+                    Some(std::fs::read(meta_path).map_err(|error| error.to_string())?)
+                }
+                None => None,
+            };
+            let (player_file_refs, player_discovery_order) =
+                save_file::discover_player_file_refs(&players_dir)
+                    .map_err(|error| error.to_string())?;
+            let session = SaveSession::load(
+                SaveKind::Steam {
+                    level_path: level_sav.clone(),
+                },
+                save_id,
+                "steam",
+                &level_sav_bytes,
+                level_meta_bytes.as_deref(),
+                None,
+                player_file_refs,
+                gps_path,
+                // Emit the leading generic "Loading Level.sav..." progress frame.
+                true,
+                &progress,
+            )
+            .map_err(|error| error.to_string())?;
+            Ok((session, player_discovery_order))
+        })
+        .await
+        .map_err(|join_error| join_error.to_string())??;
 
     // Point save_dir at the loaded world so a later write-back lands there.
     psp_db::settings::update_save_dir(&*ctx.app.driver, &world_dir.to_string_lossy())

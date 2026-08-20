@@ -2,8 +2,9 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import { cpSync, existsSync, rmSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, type Plugin } from 'vitest/config';
 import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 
 // Vite serves HTTP/2 only over TLS (resolveHttpServer hands https options to
@@ -13,18 +14,39 @@ import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 // self-signed origin.
 const useHttps = process.env.VITE_HTTPS === '1';
 
+// Self-host Monaco: @monaco-editor/loader defaults to pulling the editor from
+// jsdelivr at runtime, which breaks the offline desktop app and adds a
+// multi-MB CDN round-trip. The copy lands in static/vs (gitignored, rebuilt
+// from node_modules) so dev, desktop, and the webapp all serve '/vs'.
+function selfHostMonaco(): Plugin {
+	const src = fileURLToPath(new URL('./node_modules/monaco-editor/min/vs', import.meta.url));
+	const dest = fileURLToPath(new URL('./static/vs', import.meta.url));
+	return {
+		name: 'psp:self-host-monaco',
+		buildStart() {
+			if (!existsSync(src)) return;
+			const srcTime = statSync(src).mtimeMs;
+			const destTime = existsSync(dest) ? statSync(dest).mtimeMs : 0;
+			if (destTime >= srcTime) return;
+			rmSync(dest, { recursive: true, force: true });
+			cpSync(src, dest, { recursive: true });
+		}
+	};
+}
+
 export default defineConfig({
 	plugins: [
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/paraglide',
-			// `url` only matches the hub paths in routingConfig; editor routes have
-			// no prefix and fall through to the persisted cookie setting.
+			// `url` strategy only matches the hub paths in routingConfig; editor
+			// routes have no prefix and fall through to the persisted cookie setting.
 			strategy: ['url', 'cookie', 'globalVariable', 'baseLocale'],
 			urlPatterns: paraglideUrlPatterns
 		}),
 		tailwindcss(),
 		sveltekit(),
+		selfHostMonaco(),
 		...(useHttps ? [basicSsl()] : [])
 	],
 	worker: {

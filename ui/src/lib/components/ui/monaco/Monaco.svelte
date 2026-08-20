@@ -18,6 +18,11 @@
 	import { onDestroy, onMount } from 'svelte';
 	import loader from '@monaco-editor/loader';
 
+	// Serve monaco from our own static/vs (copied by the selfHostMonaco vite
+	// plugin) instead of the loader's jsdelivr default — keeps the desktop app
+	// fully offline and removes a multi-MB CDN round-trip on first open.
+	loader.config({ paths: { vs: '/vs' } });
+
 	let container: HTMLDivElement | undefined = $state();
 
 	interface Props {

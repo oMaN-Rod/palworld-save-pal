@@ -3,7 +3,7 @@
 	import { fade } from 'svelte/transition';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { Loading } from '$components/ui';
-	import { PalEditModal } from '$components/modals';
+	import type { Component } from 'svelte';
 	import { onMount } from 'svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -11,6 +11,17 @@
 	const palEditor = getPalEditorState();
 	const modal = getModalState();
 	const appState = getAppState();
+
+	// PalEditModal carries the three.js model viewer; loading it dynamically
+	// keeps the whole 3D stack out of the root bundle until the editor opens.
+	let PalEditModal = $state<Component | null>(null);
+	$effect(() => {
+		if (palEditor.isOpen && !PalEditModal) {
+			import('$components/modals/pal-edit/PalEditModal.svelte').then(
+				(module) => (PalEditModal = module.default)
+			);
+		}
+	});
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (!palEditor.isOpen) return;
@@ -56,7 +67,17 @@
 						/>
 					</div>
 				{:else if appState.selectedPal}
-					<PalEditModal />
+					{#if PalEditModal}
+						<PalEditModal />
+					{:else}
+						<div class="flex h-full items-center justify-center">
+							<Loading
+								label={m.loading_entity({ entity: c.pal })}
+								loadingComplete={false}
+								icon="ph:paw-print"
+							/>
+						</div>
+					{/if}
 				{/if}
 			</div>
 			<button

@@ -2171,6 +2171,22 @@ pub fn update_pals(
     modified_pals: &OrderedMap<uuid::Uuid, PalDto>,
     progress: &crate::progress::ProgressSink,
 ) -> Result<(), CoreError> {
+    // One index pass over the character map, replacing the per-pal linear
+    // `find` (O(pals x modified) -> O(pals + modified)). Built locally with
+    // first-wins on a duplicate instance id, so a lookup resolves exactly the
+    // entry the old `find` resolved; in-place edits never shift positions, so
+    // the index stays valid across the loop (see the doc comment above).
+    let entries = world::character_map(&session.level)?;
+    let mut position_by_instance_id: std::collections::HashMap<uuid::Uuid, usize> =
+        std::collections::HashMap::with_capacity(entries.len());
+    for (position, entry) in entries.iter().enumerate() {
+        if let Some(instance_id) = world::entry_instance_id(entry) {
+            position_by_instance_id
+                .entry(instance_id)
+                .or_insert(position);
+        }
+    }
+
     for (pal_id, dto) in modified_pals.iter() {
         let display_name = dto
             .nickname
@@ -2178,9 +2194,9 @@ pub fn update_pals(
             .unwrap_or_else(|| dto.character_id.clone());
         progress(&format!("Updating pal {display_name}"));
         let entries = world::character_map_mut(&mut session.level)?;
-        let Some(entry) = entries
-            .iter_mut()
-            .find(|entry| world::entry_instance_id(entry) == Some(*pal_id))
+        let Some(entry) = position_by_instance_id
+            .get(pal_id)
+            .and_then(|position| entries.get_mut(*position))
         else {
             return Err(CoreError::PalNotFound(*pal_id));
         };

@@ -7,7 +7,9 @@ import PalContainerStats from './PalContainerStats.svelte';
 import PalFilterButtons from './PalFilterButtons.svelte';
 import PalHeader from './PalHeader.svelte';
 import PalInfoPopup from './PalInfoPopup.svelte';
-import PalModelViewer from './PalModelViewer.svelte';
+// PalModelViewer is deliberately NOT re-exported here: it imports three.js and
+// would drag it into every consumer of this barrel (several of which sit in
+// the root layout graph). Deep-import the .svelte file instead.
 import PassiveSkillBadge from './PassiveSkillBadge.svelte';
 import PassiveSkillOption from './PassiveSkillOption.svelte';
 import Souls from './Souls.svelte';
@@ -27,7 +29,6 @@ export {
 	PalFilterButtons,
 	PalHeader,
 	PalInfoPopup,
-	PalModelViewer,
 	PassiveSkillBadge,
 	PassiveSkillOption,
 	Souls,

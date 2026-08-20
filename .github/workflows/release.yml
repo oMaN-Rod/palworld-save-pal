@@ -60,7 +60,15 @@ jobs:
           workspaces: palworld-save-pal
 
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
+        uses: taiki-e/install-action@v2
+
+
+      - name: Install Tauri CLI
+        with:
+
+
+      - name: Install Tauri CLI
+          tool: cargo-tauri
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
@@ -121,7 +129,15 @@ jobs:
           workspaces: palworld-save-pal
 
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked
+        uses: taiki-e/install-action@v2
+
+
+      - name: Install Tauri CLI
+        with:
+
+
+      - name: Install Tauri CLI
+          tool: cargo-tauri
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
@@ -179,7 +195,15 @@ jobs:
           prefix-key: "v0-rust-ubuntu-2204"
 
       - name: Install Tauri CLI
-        run: cargo install tauri-cli --version "^2" --locked --force
+        uses: taiki-e/install-action@v2
+
+
+      - name: Install Tauri CLI
+        with:
+
+
+      - name: Install Tauri CLI
+          tool: cargo-tauri
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
