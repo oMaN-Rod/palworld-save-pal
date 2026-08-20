@@ -7,15 +7,10 @@
 		name: string;
 		icon?: WikiIcon | null;
 		meta?: string | null;
-		/** Secondary mono line (e.g. raw key) shown under the name in hub search. */
 		subtext?: string | null;
-		/** Right-aligned trailing content (e.g. element badges, index). */
 		badges?: Snippet;
-		/** List mode: compact horizontal card. Grid mode: vertical card. */
 		variant?: 'list' | 'grid';
-		/** Icon size class override for list mode; defaults to a compact 36px. */
 		iconClass?: string;
-		/** Icon size class override for grid mode; defaults to 48px. */
 		gridIconClass?: string;
 	};
 

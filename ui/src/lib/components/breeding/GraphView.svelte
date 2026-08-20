@@ -1,9 +1,4 @@
 <script lang="ts">
-	/**
-	 * GraphView — wraps the dendrogram for the currently-active item. Supports
-	 * chain mode (multiple chains) and Direct mode (simple trees). Features
-	 * prev/next navigation and per-gen / all-in-one layout toggle (chain mode).
-	 */
 	import * as m from '$i18n/messages';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
@@ -46,8 +41,7 @@
 		currentGen?: number;
 		oncurrentGenChange?: (val: number) => void;
 		maxDepth?: number;
-		/** Which graph rendering to use. Bindable so the choice persists across
-		 *  chain navigation and mode switches. */
+		// Bindable so the chosen layout persists across chain navigation and mode switches.
 		viewMode?: LayoutMode;
 		onselect?: (node: TreeNode | null) => void;
 	} = $props();

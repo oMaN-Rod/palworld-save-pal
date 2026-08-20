@@ -1,9 +1,4 @@
 <script lang="ts">
-	/**
-	 * ChainDendrogram — thin Svelte wrapper around DendrogramEngine for ONE
-	 * breeding chain. Handles DOM events, ResizeObserver, lifecycle, and the
-	 * zoom/fit/reset toolbar.
-	 */
 	import { onMount, onDestroy, untrack } from 'svelte';
 	import Plus from '@lucide/svelte/icons/plus';
 	import Minus from '@lucide/svelte/icons/minus';
@@ -104,8 +99,7 @@
 		mouseDownY = sy;
 		mouseDownButton = e.button;
 		hasMoved = false;
-		// Keep receiving moves outside the SVG during a drag (also makes touch
-		// panning work — mouse-only events never fire on touch).
+		// Keeps receiving moves outside the SVG during a drag; also makes touch panning work (mouse-only events never fire on touch).
 		svgEl.setPointerCapture?.(e.pointerId);
 	}
 
@@ -147,11 +141,9 @@
 
 	const tree = $derived(treeNode ?? chainToTree(chain!, palMap));
 
-	// Keep the engine's callbacks and display helpers current. Deliberately
-	// separate from the render effect: `onselect` is an inline arrow at the call
-	// site, so its identity changes on every parent render. Folding it into the
-	// render effect made clicking a node re-render the tree — which cleared the
-	// selection it had just set and snapped zoom/pan back to fit.
+	// Deliberately separate from the render effect: `onselect` is an inline arrow at the call site, so its
+	// identity changes on every parent render. Folding it into the render effect made clicking a node
+	// re-render the tree — clearing the selection it had just set and snapping zoom/pan back to fit.
 	$effect(() => {
 		if (!engine) return;
 		engine.passiveName = passiveName;
@@ -159,11 +151,10 @@
 		engine.callbacks.onSelect = (node) => onselect?.(node);
 	});
 
-	// Re-render only when the tree, the view, or the palette actually changes.
 	$effect(() => {
 		const nextTree = tree;
 		const nextMode = layoutMode;
-		void theme.current;
+		void theme.current; // read to track it as a dependency; the render call below doesn't use it directly
 		if (!engine) return;
 		untrack(() => {
 			engine.layoutMode = nextMode;

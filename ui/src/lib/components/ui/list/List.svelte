@@ -136,14 +136,11 @@
 	function handleDragStart(event: DragEvent, index: number) {
 		dragSourceIndex = index;
 		if (!event.dataTransfer) return;
-		// Required for a native drag to actually start (Firefox) and to show
-		// the move cursor instead of the no-drop cursor.
+		// Required for a native drag to actually start (Firefox) and to show the move cursor instead of the no-drop cursor.
 		event.dataTransfer.effectAllowed = 'move';
 		event.dataTransfer.setData('text/plain', String(index));
 
-		// Drag the whole row as an opaque card instead of just the grip handle.
-		// Rows are transparent, so clone into an off-screen styled chip and use
-		// that as the drag image, anchored under the cursor.
+		// Rows are transparent, so clone into an off-screen styled chip and use that as the drag image instead.
 		const row = (event.currentTarget as HTMLElement).closest('li');
 		if (row) {
 			const rect = row.getBoundingClientRect();
@@ -167,8 +164,7 @@
 		dragGhost = null;
 	}
 
-	// The gap the item will drop into: `dropIndex` items from the top, so gap i
-	// is the line above row i and gap items.length is below the last row.
+	// `dropIndex` is a gap index: gap i is the line above row i, and gap items.length is below the last row.
 	function handleDragOver(event: DragEvent, index: number) {
 		if (!reorderable || dragSourceIndex === null) return;
 		event.preventDefault();

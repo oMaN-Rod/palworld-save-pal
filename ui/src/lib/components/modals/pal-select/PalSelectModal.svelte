@@ -87,7 +87,6 @@
 					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
 					<div class="grow">
 						<span>{option.label}</span>
-						<!-- <span class="text-xs">{option.value}</span> -->
 					</div>
 					{#if palData}
 						{#each palData.element_types as elementType}

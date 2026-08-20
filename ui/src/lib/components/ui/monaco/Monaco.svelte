@@ -25,8 +25,6 @@
 		value: string;
 		language?: string | undefined;
 		theme?: string | undefined;
-		/** When set, `theme` is defined from this data and applied, taking
-		 *  precedence over bundled/native themes of the same name. */
 		themeData?: MonacoE.editor.IStandaloneThemeData;
 		options?: MonacoE.editor.IStandaloneEditorConstructionOptions;
 		largeFile?: boolean;

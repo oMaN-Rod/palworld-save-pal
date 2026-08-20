@@ -20,15 +20,13 @@
 	} = $props();
 
 	const FOV = 35;
-	// Looking very slightly down on the Pal rather than dead level, which reads
-	// as a display stand instead of a mugshot.
+	// Slightly down rather than level, so it reads as a display stand instead of a mugshot.
 	const ELEVATION = (8 * Math.PI) / 180;
 
 	const spin = new PalSpin();
 
 	let status = $state<'loading' | 'ready' | 'unavailable'>('loading');
-	// $state.raw throughout: three.js objects are deeply structured, and $state's
-	// proxying is both expensive and breaks three's own identity checks.
+	// $state.raw: three.js objects are deeply structured, and $state's proxying breaks three's own identity checks.
 	let stage = $state.raw<THREE.Group | null>(null);
 	let source = $state.raw<THREE.Object3D | null>(null);
 	let camera: THREE.PerspectiveCamera | null = null;
@@ -56,8 +54,7 @@
 		scene.add(group);
 
 		scene.add(new THREE.AmbientLight(0xffffff, 1.8));
-		// Unlike palLayer, this scene keeps three's default +y up, so
-		// HemisphereLight's own default position needs no correction.
+		// Unlike palLayer, this scene keeps three's default +y up, so HemisphereLight needs no position correction.
 		scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 1.1));
 		const key = new THREE.DirectionalLight(0xffffff, 1.6);
 		key.position.set(0.5, 0.9, 1);
@@ -95,18 +92,14 @@
 			observer.disconnect();
 			stage = null;
 			camera = null;
-			// clone() copies the node tree but not the geometries and materials, which
-			// belong to palMeshLibrary's cache, so disposing them here would blank the
-			// map layer too. Only the renderer is ours to free, and its GL context has
-			// to go with it or a dozen Pals in a row exhausts the browser's limit.
+			// Geometries/materials belong to palMeshLibrary's cache (clone() doesn't copy them); only the renderer and its GL context are ours to free.
 			renderer.dispose();
 			renderer.forceContextLoss();
 		};
 	}
 
 	$effect(() => {
-		// Cleared first so selecting a second Pal drops the first immediately;
-		// otherwise the previous one spins on under the loading spinner.
+		// Cleared first so selecting a second Pal drops the first immediately instead of spinning on under the loading spinner.
 		source = null;
 		if (!modelUrl) {
 			status = 'unavailable';
@@ -141,13 +134,10 @@
 		const loaded = source;
 		if (!group || !loaded) return;
 
-		// requestPalMesh returns one cached Object3D per key, and an Object3D has
-		// only one parent -- adding it directly would tear the Pal out of the map
-		// layer while this modal is open.
+		// requestPalMesh returns one cached Object3D per key; an Object3D has only one parent, so it must be cloned rather than added directly.
 		const model = loaded.clone();
 		const bounds = palBounds(model);
-		// Rotating the group turns the model about the group's origin, so the
-		// model has to sit centred on it or the Pal orbits rather than spins.
+		// Group rotates about its own origin, so the model must be centred on it or the Pal orbits rather than spins.
 		model.position.sub(bounds.centre);
 		radius = bounds.radius;
 		group.add(model);

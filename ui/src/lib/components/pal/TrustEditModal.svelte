@@ -57,7 +57,6 @@
 	<h3 class="mb-6 text-lg font-semibold">{m.edit_entity({ entity: m.trust() })}</h3>
 
 	<div class="space-y-6">
-		<!-- Trust Level Display -->
 		<div class="flex items-center justify-between">
 			<span class="text-surface-50/80 text-sm">{m.friendship_rank()}</span>
 			<span
@@ -67,7 +66,6 @@
 			</span>
 		</div>
 
-		<!-- Custom Slider -->
 		<div>
 			<label for="trust-slider" class="text-surface-50/80 mb-1 block text-sm font-medium"
 				>{m.trust_xp()}</label
@@ -89,7 +87,6 @@
 		</div>
 	</div>
 
-	<!-- Action Buttons -->
 	<div class="mt-6 flex justify-end gap-2">
 		<Tooltip position="bottom">
 			{#snippet children()}

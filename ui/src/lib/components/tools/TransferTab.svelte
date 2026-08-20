@@ -172,7 +172,6 @@
 			{#if transferStep === 'select'}
 				<div class="mx-auto flex max-w-2xl flex-col gap-6">
 					<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-						<!-- Source save -->
 						<Card>
 							<div class="flex flex-col items-center gap-4 p-4">
 								<h3 class="text-surface-200 font-semibold">{m.tools_source_save()}</h3>
@@ -200,7 +199,6 @@
 							</div>
 						</Card>
 
-						<!-- Target save -->
 						<Card>
 							<div class="flex flex-col items-center gap-4 p-4">
 								<h3 class="text-surface-200 font-semibold">{m.tools_target_save()}</h3>
@@ -261,7 +259,6 @@
 					</div>
 
 					<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-						<!-- Source player -->
 						<Card>
 							<div class="flex flex-col gap-3 p-4">
 								<h3 class="text-surface-200 text-sm font-semibold">{m.tools_source_player()}</h3>
@@ -279,7 +276,6 @@
 							</div>
 						</Card>
 
-						<!-- Target player -->
 						<Card>
 							<div class="flex flex-col gap-3 p-4">
 								<h3 class="text-surface-200 text-sm font-semibold">{m.tools_target_player()}</h3>
@@ -299,7 +295,6 @@
 						</Card>
 					</div>
 
-					<!-- Transfer options -->
 					<Card>
 						<div class="flex flex-col gap-3 p-4">
 							<h3 class="text-surface-200 text-sm font-semibold">{m.tools_transfer_options()}</h3>

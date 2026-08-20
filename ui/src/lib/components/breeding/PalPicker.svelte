@@ -1,16 +1,7 @@
 <script lang="ts">
-	// Searchable pal selector. Reads the shared breedable-pal list from the
-	// breeding backend (via sendAndWait). Renders a dropdown with icon + name +
-	// rarity, and emits the chosen tribe via onselect.
-	//
-	// Audit fix #1: uses the page-provided `pals` array instead of refetching
-	// per mount (the PalSavTools bug where N pickers = N fetches).
-	//
-	// The dropdown is portaled to <body> and positioned with `position: fixed`
-	// via Floating UI. Plain `absolute z-50` inside the page fails because the
-	// trigger sits inside stacking contexts (.card's backdrop-filter, panels'
-	// overflow) that trap the z-index and clip the menu — so the header, tab
-	// pills, or result cards painted later overlap it.
+	// Dropdown is portaled to <body> and positioned via Floating UI: plain `absolute z-50` fails
+	// because the trigger sits inside stacking contexts (.card's backdrop-filter, panels' overflow)
+	// that trap the z-index and clip the menu.
 	import { assetLoader } from '$lib/utils/assetLoader';
 	import { computePosition, flip, shift, offset, autoUpdate } from '@floating-ui/dom';
 	import { portal } from '$utils';
@@ -76,7 +67,6 @@
 		if (e.key === 'Escape' && open) open = false;
 	}
 
-	// Position the portaled menu under the trigger, tracking scroll/resize.
 	$effect(() => {
 		if (!open || !triggerEl || !floatingEl) return;
 		query = '';
@@ -96,7 +86,6 @@
 			});
 		};
 		update();
-		// autoUpdate keeps the menu glued to the trigger through scroll/resize.
 		cleanup = autoUpdate(triggerEl, floatingEl, update);
 		return () => {
 			cleanup?.();

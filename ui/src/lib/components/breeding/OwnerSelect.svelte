@@ -1,10 +1,6 @@
 <script lang="ts">
-	// OwnerSelect — searchable player dropdown for Save Mode. Shared by the
-	// list-mode page and the graph-mode side panel so both behave identically.
-	//
-	// The listbox is portaled to <body> and fixed-positioned via Floating UI
-	// (same rationale as PalPicker): a plain `absolute` listbox trapped inside
-	// the .card / side-panel stacking contexts gets painted over and clipped.
+	// Listbox is portaled to <body> and fixed-positioned via Floating UI (same rationale as PalPicker):
+	// a plain `absolute` listbox trapped inside the .card / side-panel stacking contexts gets clipped.
 	import { computePosition, flip, shift, offset, autoUpdate } from '@floating-ui/dom';
 	import { portal } from '$utils';
 	import * as m from '$i18n/messages';

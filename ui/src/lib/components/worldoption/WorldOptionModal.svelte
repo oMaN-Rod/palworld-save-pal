@@ -34,8 +34,7 @@
 	let modalContainer: HTMLDivElement;
 	let activeTab: WoTab = $state('general');
 
-	// Keys the save actually carries. Everything else renders its default, badged
-	// "not set", and is only written if the user touches it.
+	// Keys the save actually carries. Everything else renders its default, badged "not set", and is only written if touched.
 	const present = $derived(
 		new Map<string, WoValue>(settings.map((entry) => [entry.key, entry.value]))
 	);
@@ -66,8 +65,7 @@
 		return a === b;
 	}
 
-	// The patch IS the minimal diff: an edit back to the stored value (or, for an
-	// absent key, back to the field default) drops out.
+	// The patch is the minimal diff: an edit back to the stored value (or field default, for an absent key) drops out.
 	const patch = $derived.by(() =>
 		Object.entries(edited)
 			.filter(([key, value]) => {

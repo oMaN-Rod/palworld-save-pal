@@ -13,16 +13,10 @@
 	import { detectBrowser } from '$lib/utils/browserIdentity';
 
 	const DESKTOP_URL = 'https://github.com/oMaN-Rod/palworld-save-pal/releases';
-	// The suggestion is suppressed on brand name as well as engine family:
-	// iOS Chrome reports family 'safari' (iOS forces WebKit) but name 'Chrome',
-	// and telling a Chrome user to switch to Chrome discredits the whole banner.
-	// Desktop Chromium browsers already match via `family`, so this list only
-	// needs the UA-string brand names that iOS-forced-WebKit browsers report.
+	// iOS forces WebKit, so iOS Chrome reports engine family 'safari' but name 'Chrome' — must exclude by name too.
 	const CHROMIUM_NAMES = ['Chrome', 'Microsoft Edge', 'Brave', 'Opera'];
 
-	// adapter-static prerenders this route in Node, where `Worker` and the
-	// storage APIs are absent — detecting there would bake a bogus warning into
-	// the shipped HTML. Only ever detect on the client.
+	// adapter-static prerenders this route without Worker/storage APIs; detect only on the client.
 	const losses = browser ? limitations(detectCapabilities()) : [];
 	const agent = browser
 		? detectBrowser()
@@ -34,34 +28,19 @@
 		indexedDb: m.compat_loss_indexed_db
 	};
 
-	// Phones and tablets are not a supported target at all, so the per-capability
-	// breakdown is beside the point — and on iOS every browser is WebKit, which
-	// makes "try Chrome" actively wrong. Send them to a computer instead.
+	// iOS forces WebKit on every browser, so per-capability hints like "try Chrome" don't apply to mobile.
 	const isMobile = agent.mobile;
 
-	// Re-surface the banner when the set of limitations changes rather than
-	// letting an old dismissal hide a new problem. persistedState may hold a
-	// legacy/absent value, so treat anything unexpected as "not dismissed".
-	// Mobile needs its own signature: its loss list can be empty, which would
-	// otherwise collide with the "nothing dismissed yet" default.
+	// Re-keyed so a new limitation clears an old dismissal; mobile gets its own signature since its loss list can be empty.
 	const signature = isMobile ? 'mobile' : losses.join(',');
 	const dismissed = persistedState<string>('psp-compat-dismissed', '');
 	const isDismissed = $derived(dismissed.current === signature);
 
-	// The private-window heuristic only holds for the real Chromium engine:
-	// desktop Chromium reliably supports OPFS/IndexedDB outside private mode, so
-	// their absence there signals private browsing. Safari-family browsers
-	// (including iOS Chrome/Firefox, which iOS forces onto WebKit) can lack
-	// these in ordinary browsing depending on OS version, so this stays keyed on
-	// engine family, not brand name — otherwise a normal iOS user would be
-	// wrongly told they're in a private window.
+	// Keyed on engine family, not brand: Safari-family browsers (incl. iOS-forced WebKit) can lack OPFS/IndexedDB outside private mode too, unlike real desktop Chromium.
 	const isChromiumEngine = agent.family === 'chromium';
 	const showPrivateNote =
 		!isMobile && isChromiumEngine && (losses.includes('opfs') || losses.includes('indexedDb'));
 
-	// The "try Chromium" suggestion suppresses on brand name too, so an iOS
-	// Chrome user (family 'safari', name 'Chrome') isn't told to switch to the
-	// browser they're already using.
 	const isChromiumBrand = isChromiumEngine || CHROMIUM_NAMES.includes(agent.name);
 	const showChromiumHint = !isMobile && !isChromiumBrand;
 </script>

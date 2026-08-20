@@ -21,15 +21,12 @@
 		children: any;
 	}>();
 
-	// Function to handle clicks outside the dialog
 	function handleOutsideClick(event: MouseEvent) {
-		// If the click target is the overlay (not the dialog content)
 		if (event.target === event.currentTarget) {
 			modal.closeModal();
 		}
 	}
 
-	// Function to handle key presses
 	function handleKeydown(event: KeyboardEvent) {
 		if (!modal.isOpen) return;
 

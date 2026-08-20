@@ -267,7 +267,6 @@
 </script>
 
 <div class="grid grid-cols-[1fr_400px] gap-4">
-	<!-- Research Tree -->
 	<div class="research-tree-container relative h-[calc(100vh-160px)] overflow-y-auto p-4">
 		<svg class="pointer-events-none absolute top-0 left-0 z-0 w-full overflow-visible">
 			{#each Object.entries(lineCoords) as [_key, coords]}

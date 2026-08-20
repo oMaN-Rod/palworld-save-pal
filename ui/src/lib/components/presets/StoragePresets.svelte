@@ -49,7 +49,6 @@
 	async function handleApplyPreset() {
 		if (!selectedPresets.length || !container) return;
 
-		// Merge the items from every selected preset into one flat list.
 		const allPresetSlots: ItemContainerSlot[] = [];
 		for (const preset of selectedPresets) {
 			if (preset.storage_container) {
@@ -61,8 +60,6 @@
 			}
 		}
 
-		// Overwrite mode: First empty the container, then fill in
-		// the preset items in sequence.
 		const updatedSlots = container.slots.map((slot: ItemContainerSlot, idx: number) => {
 			if (idx < allPresetSlots.length) {
 				const presetSlot = allPresetSlots[idx];
@@ -90,7 +87,6 @@
 	async function handleAppendPreset() {
 		if (!selectedPresets.length || !container) return;
 
-		// Merge the items from every selected preset into one flat list.
 		const allPresetSlots: ItemContainerSlot[] = [];
 		for (const preset of selectedPresets) {
 			if (preset.storage_container) {
@@ -102,10 +98,8 @@
 			}
 		}
 
-		// Collect the empty slots (static_id === 'None') in the container.
 		const emptySlots = container.slots.filter((s: ItemContainerSlot) => s.static_id === 'None');
 
-		// Fill the empty slots in order; discard anything beyond capacity.
 		let emptyIdx = 0;
 		for (const presetSlot of allPresetSlots) {
 			if (emptyIdx >= emptySlots.length) break;

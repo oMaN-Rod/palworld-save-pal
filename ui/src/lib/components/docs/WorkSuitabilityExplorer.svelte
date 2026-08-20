@@ -45,7 +45,6 @@
 </script>
 
 <div class="flex flex-col gap-4">
-	<!-- Tile row -->
 	<div class="flex flex-wrap gap-2">
 		{#each WORK_SUITABILITY_KEYS as key (key)}
 			<button
@@ -59,7 +58,6 @@
 		{/each}
 	</div>
 
-	<!-- Detail panel -->
 	{#if selectedKey}
 		<div class="border-surface-800 rounded-lg border p-4">
 			<div class="mb-4 flex items-center gap-3">

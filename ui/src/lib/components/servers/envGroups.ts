@@ -2,10 +2,8 @@ export type EnvFieldType = 'text' | 'bool';
 export type EnvKey = { key: string; label: string; default: string; type?: EnvFieldType };
 export type EnvGroup = { title: string; keys: EnvKey[] };
 
-/** Official Palworld server settings documentation */
 export const PALWORLD_DOCS_URL = 'https://docs.palworldgame.com/category/settings-and-operations';
 
-/** Helper: marks a key as boolean */
 const bool = (key: string, label: string, defaultVal: string): EnvKey => ({
 	key,
 	label,
@@ -324,7 +322,6 @@ export const envGroups: EnvGroup[] = [
 	}
 ];
 
-/** Parse a string as boolean (case-insensitive true/false) */
 export function isTruthy(value: string): boolean {
 	return value.toLowerCase() === 'true' || value === '1';
 }

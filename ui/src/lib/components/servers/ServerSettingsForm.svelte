@@ -12,7 +12,6 @@
 
 	const serverState = getServerState();
 
-	// Local editable state
 	let serverName = $state(server.server_name);
 	let serverDescription = $state(server.server_description);
 	let serverPassword = $state(server.server_password);
@@ -20,7 +19,6 @@
 	let maxPlayers = $state(server.max_players);
 	let envVars = $state<Record<string, string>>({ ...server.env_vars });
 
-	// Sync local state when server changes
 	$effect(() => {
 		serverName = server.server_name;
 		serverDescription = server.server_description;
@@ -73,7 +71,6 @@
 		</Button>
 	</div>
 
-	<!-- Core Settings -->
 	<div class="grid grid-cols-2 gap-3">
 		<Input label="Server Name" bind:value={serverName} />
 		<Input label="Server Description" bind:value={serverDescription} />
@@ -82,7 +79,6 @@
 		<Input label="Max Players" type="number" bind:value={maxPlayers} min={1} max={32} />
 	</div>
 
-	<!-- ENV Variable Groups -->
 	<Accordion collapsible>
 		{#each envGroups as group (group.title)}
 			<Accordion.Item

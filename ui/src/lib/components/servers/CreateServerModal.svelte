@@ -25,10 +25,8 @@
 
 	let modalContainer: HTMLDivElement;
 
-	// --- Deployment type ---
 	let serverType: ServerType = $state('docker');
 
-	// --- Tab state ---
 	type Tab = 'general' | 'gameplay' | 'advanced';
 	let activeTab: Tab = $state('general');
 
@@ -38,9 +36,7 @@
 		{ id: 'advanced', label: 'Advanced' }
 	];
 
-	// General tab groups (shown directly)
 	const generalGroupTitles = ['Server Settings', 'REST API & Logging'];
-	// Gameplay tab groups
 	const gameplayGroupTitles = [
 		'Gameplay Rates',
 		'Time & Difficulty',
@@ -48,7 +44,6 @@
 		'Guild / Building',
 		'Items & Drops'
 	];
-	// Advanced tab groups
 	const advancedGroupTitles = [
 		'Backup Settings',
 		'Auto Update / Reboot',
@@ -68,7 +63,6 @@
 		return envGroups.filter((g) => titles.includes(g.title));
 	}
 
-	// --- Form state ---
 	let name = $state('');
 	let containerName = $state('');
 	let serverName = $state('PSP Palworld Server');
@@ -79,14 +73,13 @@
 	let gamePort = $state(suggestedPorts.game_port);
 	let queryPort = $state(suggestedPorts.query_port);
 	let restApiPort = $state(suggestedPorts.rest_api_port);
-	// Pre-populate envVars with all defaults so every displayed value is submitted
+	// Pre-populated with all defaults so every displayed value is submitted, even if untouched.
 	let envVars = $state<Record<string, string>>(
 		Object.fromEntries(envGroups.flatMap((g) => g.keys.map((k) => [k.key, k.default])))
 	);
 
 	const serverState = getServerState();
 
-	// Native-specific fields
 	let steamcmdPath = $state('');
 	let installBasePath = $state('');
 	let worldName = $state('');
@@ -125,7 +118,6 @@
 		detectingWorkshop = true;
 		serverState.detectedWorkshopDir = '';
 		await serverState.detectWorkshopDir();
-		// Wait briefly for the WS response
 		const start = Date.now();
 		const check = () => {
 			if (serverState.detectedWorkshopDir || Date.now() - start > 5000) {
@@ -188,7 +180,6 @@
 			</a>
 		</div>
 
-		<!-- Deployment Type Selector -->
 		<div class="bg-surface-800 mb-4 flex gap-1 rounded-sm p-1">
 			<button
 				class={cn(
@@ -214,7 +205,6 @@
 			</button>
 		</div>
 
-		<!-- Tabs -->
 		<div class="border-surface-700 mb-4 flex gap-1 border-b">
 			{#each tabs as tab (tab.id)}
 				<button
@@ -231,7 +221,6 @@
 			{/each}
 		</div>
 
-		<!-- Tab Content -->
 		<div class="max-h-[60vh] overflow-y-auto pr-1">
 			{#if activeTab === 'general'}
 				<div class="flex flex-col gap-3">
@@ -244,7 +233,6 @@
 							placeholder={autoContainerName}
 						/>
 					{:else}
-						<!-- Native server fields -->
 						<Input
 							label="SteamCMD Path (optional, auto-detected)"
 							bind:value={steamcmdPath}
@@ -304,7 +292,6 @@
 
 					<Input label="Max Players" type="number" bind:value={maxPlayers} min={1} max={32} />
 
-					<!-- General ENV groups -->
 					<Accordion collapsible>
 						{#each groupsForTab('general') as group (group.title)}
 							<Accordion.Item
@@ -331,7 +318,6 @@
 					</Accordion>
 				</div>
 			{:else}
-				<!-- Gameplay or Advanced tab - accordion groups -->
 				<Accordion collapsible>
 					{#each groupsForTab(activeTab) as group (group.title)}
 						<Accordion.Item

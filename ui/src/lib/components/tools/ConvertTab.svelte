@@ -31,7 +31,6 @@
 	const targetFormat = $derived(currentFormat === 'steam' ? 'gamepass' : 'steam');
 	const hasLoadedSave = $derived(!!appState.saveFile);
 
-	// 'steam' | 'gamepass' -> its display label.
 	function formatLabel(format: string | null): string {
 		return format === 'steam' ? m.steam() : m.gamepass();
 	}
@@ -149,7 +148,6 @@
 			/>
 		</section>
 	{:else}
-		<!-- Convert Loaded Save -->
 		{#if hasLoadedSave && isDesktopMode}
 			<section class="w-full">
 				<h2 class="text-surface-100 mb-4 text-center text-2xl font-bold">
@@ -202,12 +200,10 @@
 			<hr class="border-surface-700" />
 		{/if}
 
-		<!-- Standalone Conversion -->
 		{#if isDesktopMode}
 			<section class="w-full">
 				<p class="text-surface-400 mb-6 text-center text-sm">{m.tools_convert_standalone_desc()}</p>
 				<div class="grid w-full grid-cols-1 justify-center gap-8 sm:grid-cols-2">
-					<!-- Steam to GamePass -->
 					<button
 						type="button"
 						class="bg-surface-800 hover:border-primary-500 border-surface-700 flex cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-8 shadow-md transition-all"
@@ -230,7 +226,6 @@
 						</div>
 					</button>
 
-					<!-- GamePass to Steam -->
 					<button
 						type="button"
 						class="bg-surface-800 hover:border-primary-500 border-surface-700 flex cursor-pointer flex-col items-center justify-between rounded-xl border-2 p-8 shadow-md transition-all"
@@ -265,7 +260,6 @@
 			</section>
 		{/if}
 
-		<!-- Conversion Result -->
 		{#if conversionResult}
 			<Card class="mx-auto max-w-lg">
 				<div class="flex items-center gap-3 p-4">

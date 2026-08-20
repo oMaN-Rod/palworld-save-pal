@@ -50,8 +50,7 @@
 		return typeof item.href === 'string' ? item.href : item.href?.(ctx);
 	}
 
-	// Leaving a section flushes pending edits to the backend, matching the
-	// behaviour the Skeleton rail drove from its active-tile change.
+	// Leaving a section flushes pending edits to the backend.
 	function handleNavigate(item: NavItem): void {
 		if (item.id === activeTile || !appState.saveFile) return;
 		appState.saveState();

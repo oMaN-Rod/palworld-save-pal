@@ -29,7 +29,6 @@ import type { Component } from 'svelte';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
-/** Sidebar grouping for `tiles` items. Determines which labelled cluster an item belongs to. */
 export type NavGroup = 'main' | 'tools' | 'help';
 
 export type NavAction = 'toggle-expanded' | 'save' | 'eject' | 'open-folder' | 'settings';
@@ -43,23 +42,16 @@ export type NavContext = {
 export type NavItem = {
 	id: string;
 	section: NavSection;
-	/** Sidebar cluster for tiles. Defaults to `'main'`; ignored for header/footer items. */
 	group?: NavGroup;
-	/** Resolves the icon component, given runtime context (e.g. upload vs download). */
 	icon: (ctx: NavContext) => Component;
-	/** Expanded label text. Omit for icon-only tiles (e.g. the menu toggle). */
 	label?: () => string;
-	/** Tooltip text. Defaults to `label` when omitted. */
 	title?: () => string;
-	/** Navigation target for link tiles. Static, or resolved from runtime context. */
 	href?: string | ((ctx: NavContext) => string);
-	/** Stateful action for non-link tiles. Handled by Sidebar's action map. */
 	action?: NavAction;
-	/** Runtime visibility predicate. Visible when omitted. */
 	visible?: (ctx: NavContext) => boolean;
 };
 
-/** Ordered sidebar groups. Labels resolve lazily so a locale switch re-reads them. */
+// Labels are functions, not strings, so a locale switch re-reads them.
 export const navGroups: { id: NavGroup; label: () => string }[] = [
 	{ id: 'main', label: () => m.nav_group_main() },
 	{ id: 'tools', label: () => m.tools() },
@@ -67,7 +59,6 @@ export const navGroups: { id: NavGroup; label: () => string }[] = [
 ];
 
 export const navItems: NavItem[] = [
-	// --- header ---
 	{
 		id: 'menu',
 		section: 'header',
@@ -92,7 +83,6 @@ export const navItems: NavItem[] = [
 		visible: (ctx) => Boolean(ctx.appState.saveFile)
 	},
 
-	// --- tiles: main ---
 	{
 		id: 'files',
 		section: 'tiles',
@@ -134,7 +124,6 @@ export const navItems: NavItem[] = [
 		href: '/presets'
 	},
 
-	// --- tiles: tools ---
 	{
 		id: 'blueprints',
 		section: 'tiles',
@@ -204,7 +193,6 @@ export const navItems: NavItem[] = [
 		href: '/breeding'
 	},
 
-	// --- tiles: help ---
 	{
 		id: 'tools',
 		section: 'tiles',
@@ -238,7 +226,6 @@ export const navItems: NavItem[] = [
 		href: '/about'
 	},
 
-	// --- footer ---
 	{
 		id: 'open-folder',
 		section: 'footer',
@@ -256,12 +243,7 @@ export const navItems: NavItem[] = [
 	}
 ];
 
-/**
- * Resolves the active nav id for a given pathname by longest-matching `href`
- * on a route-segment boundary. The longest match wins, so `/editor` beats `/edit`.
- * Function hrefs are resolved against the runtime context (e.g. Files → /file on
- * desktop vs /upload on the web build).
- */
+// Longest `href` match wins on a route-segment boundary, so `/editor` beats `/edit`.
 export function activeNavId(pathname: string, ctx: NavContext): string {
 	let bestId = '';
 	let bestLen = 0;

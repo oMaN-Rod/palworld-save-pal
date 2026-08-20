@@ -96,7 +96,6 @@
 				if (!isOpen) {
 					isOpen = true;
 				} else {
-					// Move to next option
 					const currentIndex = options.findIndex(
 						(opt: SelectOption) => opt.value.toString() === selected
 					);
@@ -108,7 +107,6 @@
 			case 'ArrowUp':
 				event.preventDefault();
 				if (isOpen) {
-					// Move to previous option
 					const currentIndex = options.findIndex(
 						(opt: SelectOption) => opt.value.toString() === selected
 					);

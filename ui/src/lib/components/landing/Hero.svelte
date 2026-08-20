@@ -43,9 +43,7 @@
 			{m.landing_hero_tagline()}
 		</h1>
 		<div class="mt-6">
-			<!-- Phones can't run the editor: the dropzone is replaced by a
-			     desktop-only notice. Maps, Wiki and Breeding stay reachable
-			     via the public nav. -->
+			<!-- Phones can't run the editor; the dropzone is replaced by a desktop-only notice below. -->
 			<div class="hidden md:block">
 				<SaveDropzone {onLoad} />
 			</div>

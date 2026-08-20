@@ -183,7 +183,6 @@
 					)}
 				>
 					<div class="flex items-center gap-2 p-3">
-						<!-- Expand toggle -->
 						<button
 							class="text-surface-400 hover:text-surface-200 shrink-0"
 							onclick={() => toggleExpanded(save.save_id)}
@@ -195,9 +194,7 @@
 							{/if}
 						</button>
 
-						<!-- Save info: either rename form or display -->
 						{#if renamingSaveId === save.save_id}
-							<!-- Rename form (not inside a button) -->
 							<!-- svelte-ignore a11y_autofocus -->
 							<form
 								class="flex min-w-0 grow items-center gap-2"
@@ -230,7 +227,6 @@
 								</button>
 							</form>
 						{:else}
-							<!-- Normal display (clickable in select mode) -->
 							<button
 								class={cn(
 									'flex min-w-0 grow items-center gap-3 text-left',
@@ -249,7 +245,6 @@
 								</div>
 							</button>
 
-							<!-- Stats -->
 							<div
 								class="text-surface-300 flex shrink-0 items-center gap-4 text-sm"
 							>
@@ -270,7 +265,6 @@
 								</div>
 							</div>
 
-							<!-- Management actions -->
 							{#if manageable}
 								<div class="flex shrink-0 items-center gap-1">
 									<button
@@ -308,7 +302,6 @@
 						{/if}
 					</div>
 
-					<!-- Expanded container details -->
 					{#if isExpanded}
 						<div class="bg-surface-900/50 border-surface-700 border-t px-4 py-2">
 							<div

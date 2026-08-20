@@ -23,7 +23,6 @@
 			});
 			if (!confirmed) return;
 			await serverState.stopServer(server.id);
-			// Wait a moment for container to stop
 			await new Promise((r) => setTimeout(r, 3000));
 		}
 		await serverState.loadServerSave(server.id);

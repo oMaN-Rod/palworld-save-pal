@@ -54,7 +54,6 @@
 </script>
 
 <div class="flex flex-col gap-4">
-	<!-- Puck row -->
 	<div class="flex flex-wrap gap-3">
 		{#each elementKeys as key (key)}
 			{@const el = elementsData.elements[key]}
@@ -75,7 +74,6 @@
 		{/each}
 	</div>
 
-	<!-- Detail panel -->
 	{#if selectedKey}
 		{@const el = elementsData.elements[selectedKey]}
 		{@const name = el.localized_name || selectedKey}

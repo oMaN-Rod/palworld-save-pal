@@ -9,9 +9,7 @@
 	import Monitor from '@lucide/svelte/icons/monitor';
 	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 
-	// `active` is true while this tab is the selected one. Skeleton keeps every
-	// panel mounted, so the first scan is gated on activation to preserve the
-	// original "scan once, on first view" behavior rather than scanning on load.
+	// Skeleton keeps every tab panel mounted, so the first scan is gated on `active` rather than firing for every hidden tab on load.
 	let { active = false }: { active?: boolean } = $props();
 
 	const toast = getToastState();

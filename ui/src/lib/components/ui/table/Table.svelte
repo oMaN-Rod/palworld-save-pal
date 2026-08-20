@@ -16,14 +16,8 @@
 		toggleSelection
 	} from './table.utils';
 
-	// Contract notes for downstream consumers:
-	// - When `onrowclick` is set, data rows are keyboard-activatable (Enter/Space)
-	//   in addition to being clickable with a pointer.
-	// - `pageSize` is a fixed value owned by the PARENT/toolbar. Table has no built-in
-	//   page-size selector by design; the toolbar renders one and passes the value down.
-	// - Server-side mode (`serverSide: true`): changing the sort does NOT reset `page`
-	//   to 1. A server-side consumer that wants to return to page 1 on sort must do so
-	//   in its `onsort` handler.
+	// `pageSize` is owned by the parent/toolbar by design; Table has no built-in page-size selector.
+	// In `serverSide` mode, changing the sort does not reset `page` -- do that in the `onsort` handler if wanted.
 	let {
 		rows,
 		columns,
@@ -60,8 +54,6 @@
 		onrowclick?: (row: T) => void;
 	} = $props();
 
-	// In client mode the component sorts + paginates internally.
-	// In server mode it renders `rows` as the already-fetched current page.
 	const displayedRows = $derived(
 		serverSide ? rows : paginateRows(sortRows(rows, columns, sort), { page, pageSize })
 	);

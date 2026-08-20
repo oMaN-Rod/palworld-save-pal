@@ -110,7 +110,6 @@
 	{#if node.children.length > 0}
 		<div class="mt-6 flex justify-center space-x-6">
 			{#each node.children as childNode (childNode.id)}
-				<!-- Direct recursive call using the component's name -->
 				<ResearchNode
 					node={childNode}
 					bind:selectedNode

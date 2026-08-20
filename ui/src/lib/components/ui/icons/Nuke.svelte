@@ -24,7 +24,6 @@
 	onmouseleave={handleMouseLeave}
 >
 	<div class="icon-container">
-		<!-- Original Nuclear Icon -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width={size}
@@ -44,7 +43,6 @@
 			</path>
 		</svg>
 
-		<!-- Mushroom Cloud Icon -->
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width={size}
@@ -61,7 +59,6 @@
 		</svg>
 	</div>
 
-	<!-- Explosion effect when hovered -->
 	<div class="explosion-effect" class:active={isHovered}></div>
 </div>
 

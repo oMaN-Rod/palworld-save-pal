@@ -20,7 +20,6 @@
 
 	const REQUIRED_TEXT = 'DELETE ALL';
 
-	// Check if confirmation text is valid
 	$effect(() => {
 		isValid = confirmationText.trim().toUpperCase() === REQUIRED_TEXT;
 	});
@@ -51,7 +50,6 @@
 
 <div bind:this={modalContainer}>
 	<Card class="max-w-md min-w-[calc(100vw/2.5)]">
-		<!-- Header with warning icon -->
 		<div class="mb-6 flex items-center gap-3">
 			<div class="bg-error-500/20 rounded-full p-2">
 				<AlertTriangle class="text-error-500 h-6 w-6" />
@@ -63,7 +61,6 @@
 		</div>
 
 		{#if step === 1}
-			<!-- Step 1: Warning and count display -->
 			<div class="mb-6 space-y-4">
 				<div
 					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
@@ -106,7 +103,6 @@
 				{/if}
 			</div>
 
-			<!-- Step 1 buttons -->
 			<div class="flex justify-end space-x-4">
 				<Tooltip position="bottom">
 					<Button variant="secondary" onclick={handleCancel}>
@@ -130,7 +126,6 @@
 				{/if}
 			</div>
 		{:else if step === 2}
-			<!-- Step 2: Text confirmation -->
 			<div class="mb-6 space-y-4">
 				<div
 					class="bg-error-50 dark:bg-error-900/20 border-error-200 dark:border-error-800 rounded-lg border p-4"
@@ -161,7 +156,6 @@
 				</div>
 			</div>
 
-			<!-- Step 2 buttons -->
 			<div class="flex justify-between">
 				<Tooltip position="bottom">
 					<Button variant="secondary" onclick={handleBack}>

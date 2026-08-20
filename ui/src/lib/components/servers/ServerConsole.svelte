@@ -12,7 +12,6 @@
 	const serverState = getServerState();
 	const apiResponse = $derived(serverState.apiResponse);
 
-	// JSONEditor content - updates when apiResponse changes
 	let editorContent = $derived.by(() => {
 		if (apiResponse && apiResponse.server_id === server.id) {
 			return { json: apiResponse.result.data };
@@ -101,7 +100,6 @@
 			<p>Server must be running to use the REST API</p>
 		</Card>
 	{:else}
-		<!-- Endpoint selector -->
 		<div class="flex flex-wrap gap-2">
 			{#each endpoints as ep (ep.id)}
 				<button
@@ -119,7 +117,6 @@
 			{/each}
 		</div>
 
-		<!-- Payload inputs -->
 		{#if selectedEndpoint.hasPayload && selectedEndpoint.payloadTemplate}
 			<Card padding="p-3">
 				<div class="grid grid-cols-2 gap-2">
@@ -137,7 +134,6 @@
 			</Card>
 		{/if}
 
-		<!-- Send button -->
 		<div class="flex items-center gap-3">
 			<Button variant="primary" onclick={handleCall}>
 				<Send size={14} />
@@ -157,7 +153,6 @@
 			{/if}
 		</div>
 
-		<!-- Response viewer -->
 		{#if hasResponse}
 			<div class="editor-wrapper max-h-[500px] overflow-auto">
 				<JSONEditor content={editorContent} readOnly={true} />

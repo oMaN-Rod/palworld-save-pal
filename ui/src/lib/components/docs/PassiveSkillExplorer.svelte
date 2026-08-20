@@ -71,7 +71,6 @@
 	<WikiSearch bind:value={search} />
 
 	<div class="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,300px)_minmax(0,1fr)]">
-		<!-- Family list -->
 		<div class="max-h-[70vh] overflow-y-auto pr-1">
 			<ul class="flex flex-col gap-1">
 				{#each filteredFamilies as family (family.key)}
@@ -100,7 +99,6 @@
 			</ul>
 		</div>
 
-		<!-- Detail panel -->
 		{#if selectedFamily}
 			<div class="border-surface-800 rounded-lg border p-4">
 				<div class="mb-3 flex items-center gap-3">
@@ -116,7 +114,6 @@
 					</div>
 				</div>
 
-				<!-- Rank tabs: only when more than one distinct rank -->
 				{#if familyRankTabs.length > 1}
 					<div class="mb-4 flex flex-wrap gap-1">
 						{#each familyRankTabs as tab (tab.skill.details.rank)}

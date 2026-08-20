@@ -18,14 +18,11 @@ export type WorldOptionPayload = {
 
 type PatchResult = { entries: { key: string; value: unknown }[] } | null;
 
-/** Fetches the current WorldOption, opens the editor, and sends back only the
- *  changed keys. No-op when the save carries no WorldOption. */
 export async function openWorldOptionModal(): Promise<void> {
 	const payload = await sendAndWait<WorldOptionPayload>(MessageType.GET_WORLD_OPTION);
 	if (!payload?.present) return;
 
-	// technologiesData is populated during app bootstrap (see data/bootstrap.ts),
-	// so this is already loaded by the time a page can show the WorldOption button.
+	// technologiesData is populated during app bootstrap, so it's already loaded by the time this button can show.
 	const technologies = Object.keys(technologiesData.technologies);
 
 	const modal = getModalState();

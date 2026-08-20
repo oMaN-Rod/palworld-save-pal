@@ -1,6 +1,4 @@
 <script lang="ts">
-	// ChainTooltip — floating hover card for a dendrogram node. Absolute HTML
-	// overlay clamped to viewport.
 	import * as m from '$i18n/messages';
 	import { assetLoader } from '$lib/utils/assetLoader';
 	import Mars from '@lucide/svelte/icons/mars';

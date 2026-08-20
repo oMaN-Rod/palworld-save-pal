@@ -1,16 +1,11 @@
 import type * as MonacoE from 'monaco-editor';
 
-/** Registration key for the palette-derived editor theme. */
 export const EDITOR_THEME_NAME = 'psp-editor';
 
-/** Reads a CSS custom property's value, e.g. `--color-primary-300` → `rgb(...)`. */
 export type VarReader = (name: string) => string;
 
-/** A CSS color → `0170f3` (bare 6-digit hex; editor `colors` want a leading `#`,
- *  added by the caller). Handles the forms getComputedStyle actually returns:
- *  `rgb(1, 112, 243)` and `rgba(...)` in dev, but hex (`#0170f3`) or
- *  space-separated `rgb(1 112 243)` once production CSS minification (Lightning
- *  CSS via Tailwind v4) rewrites the theme's `rgb(...)` custom properties. */
+// Returns bare 6-digit hex (no leading #). Handles both `rgb(1, 112, 243)`/`rgba(...)` (dev) and hex
+// or space-separated `rgb(1 112 243)` (production, once Lightning CSS minifies the theme's custom properties).
 export function rgbToHex(color: string): string {
 	const value = color.trim();
 
@@ -35,16 +30,8 @@ export function rgbToHex(color: string): string {
 		.join('');
 }
 
-/**
- * A Monaco theme whose JSON syntax colors come from the live app palette, so the
- * editor matches the active app theme. Roles: keys→primary, string values→
- * success, numbers→tertiary, keywords (true/false/null)→secondary, punctuation→
- * muted surface. Accent shades lighten on dark backgrounds and darken on light
- * ones for legible contrast against the surface background.
- *
- * `readVar` is injected so this stays pure and DOM-free (and unit-testable); the
- * editor passes a reader backed by `getComputedStyle` on a probe element.
- */
+// `readVar` is injected so this stays pure and DOM-free (and unit-testable); the editor passes a
+// reader backed by `getComputedStyle` on a probe element.
 export function buildEditorTheme(
 	readVar: VarReader,
 	isLight: boolean

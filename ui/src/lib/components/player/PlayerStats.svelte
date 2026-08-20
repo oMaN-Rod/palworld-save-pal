@@ -39,12 +39,10 @@
 		'move_speed'
 	];
 
-	// `capture_power` maps to `capture_rate`; all other keys map 1:1.
 	function statKeyFor(relicKey: string): string {
 		return relicKey === 'capture_power' ? 'capture_rate' : relicKey;
 	}
 
-	// Single source for hero stat key + label used by UI/read/write.
 	const HERO_STATS: Record<string, { key: string; label: () => string }> = {
 		health: { key: 'max_hp', label: m.health },
 		stamina: { key: 'max_sp', label: m.stamina },
@@ -53,10 +51,8 @@
 		weight: { key: 'weight', label: m.weight }
 	};
 
-	// Fixed cap for hero stats; relic caps come from relic data.
 	const HERO_MAX = 50;
 
-	// Empty while loading/failure; relic rank editing remains disabled without caps.
 	let relics: Record<string, RelicRankData> = $state({});
 	$effect(() => {
 		relicData
@@ -65,10 +61,8 @@
 			.catch((error) => console.error('Failed to load relic data; rank editing disabled', error));
 	});
 
-	// Full relic set in game order; unresolved data keeps editors disabled.
 	const relicStats = $derived(RELIC_ORDER.filter((key) => relics[key] !== undefined));
 
-	// Missing key means rank 0.
 	function rankOf(relicKey: string): number {
 		return player.status_point_list[statKeyFor(relicKey)] ?? 0;
 	}
@@ -88,7 +82,6 @@
 
 	async function updateRelicStat(relicKey: string) {
 		const max = maxRankFor(relicKey);
-		// Do not allow edits until the relic-specific cap is known.
 		if (max === undefined) return;
 		const entry = relics[relicKey];
 		// @ts-ignore
@@ -99,7 +92,6 @@
 			max
 		});
 		if (result === undefined || result === null) return;
-		// Backstop clamp.
 		player.status_point_list[statKeyFor(relicKey)] = Math.min(Math.max(result, 0), max);
 		player.state = EntryState.MODIFIED;
 	}
@@ -114,9 +106,8 @@
 			min: 0,
 			max: HERO_MAX
 		});
-		// `0` is valid, so only reject null/undefined.
+		// `0` is a valid result, so only reject null/undefined (not falsy).
 		if (result === undefined || result === null) return;
-		// Backstop clamp.
 		player.status_point_list[stat.key] = Math.min(Math.max(result, 0), HERO_MAX);
 		player.state = EntryState.MODIFIED;
 	}
@@ -125,7 +116,6 @@
 		for (const { key } of Object.values(HERO_STATS)) {
 			player.status_point_list[key] = HERO_MAX;
 		}
-		// Max relics to each stat's own cap.
 		for (const relicKey of relicStats) {
 			const max = maxRankFor(relicKey);
 			if (max === undefined) continue;
@@ -157,7 +147,6 @@
 	{@const entry = relics[relicKey]}
 	{@const max = maxRankFor(relicKey)}
 	{@const effect = effectFor(relicKey)}
-	<!-- Disable editing until this relic's cap is known. -->
 	<Tooltip label={`${entry.localized_name} +${effect}%`}>
 		<button
 			class="hover:ring-secondary-500 bg-surface-600/50 flex w-full items-center space-x-2 rounded-sm py-2 pr-2 hover:ring disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:ring-0"

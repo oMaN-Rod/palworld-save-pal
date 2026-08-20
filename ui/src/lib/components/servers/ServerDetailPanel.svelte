@@ -33,7 +33,6 @@
 	const isNative = $derived(server.server_type === 'native');
 	const stats = $derived(serverState.containerStats);
 
-	// Poll stats when on overview tab and server is running
 	let statsInterval: ReturnType<typeof setInterval> | null = null;
 
 	$effect(() => {
@@ -94,7 +93,6 @@
 </script>
 
 <div class="flex h-full flex-col gap-4">
-	<!-- Header -->
 	<div class="flex items-center justify-between">
 		<div>
 			<div class="flex items-center gap-2">
@@ -130,7 +128,6 @@
 		</div>
 	</div>
 
-	<!-- Tabs -->
 	<div class="border-surface-700 flex gap-1 border-b">
 		{#each tabs as tab}
 			<button
@@ -148,11 +145,9 @@
 		{/each}
 	</div>
 
-	<!-- Tab Content -->
 	<div class="min-h-0 flex-1 overflow-y-auto">
 		{#if activeTab === 'overview'}
 			<div class="flex flex-col gap-4">
-				<!-- Server info -->
 				<div class="grid grid-cols-2 gap-4">
 					<Card>
 						<h4 class="text-surface-400 mb-1 text-xs font-medium uppercase">Status</h4>
@@ -201,7 +196,6 @@
 					</Card>
 				</div>
 
-				<!-- Container stats -->
 				{#if isRunning && stats}
 					<h4 class="text-surface-400 mt-2 text-xs font-medium uppercase">
 						{isNative ? 'Process Resources' : 'Container Resources'}

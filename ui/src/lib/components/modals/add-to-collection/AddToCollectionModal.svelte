@@ -31,7 +31,6 @@
 	let newCollectionName = $state('');
 	let newCollectionDescription = $state('');
 
-	// Get existing collection assignments
 	const existingCollections = $derived.by(() => {
 		const collections = new Set<number>();
 		pals.forEach((pal) => {
@@ -42,7 +41,6 @@
 		return Array.from(collections);
 	});
 
-	// Check if all selected pals have the same collection
 	const commonCollection = $derived.by(() => {
 		if (existingCollections.length === 1) {
 			return existingCollections[0];
@@ -50,14 +48,12 @@
 		return undefined;
 	});
 
-	// Initialize with common collection if exists
 	$effect(() => {
 		if (commonCollection) {
 			selectedCollectionId = commonCollection;
 		}
 	});
 
-	// Collection options for combobox
 	const collectionOptions: SelectOption[] = $derived(
 		upsState.filteredCollections.map((c) => ({
 			label: c.name,
@@ -82,7 +78,6 @@
 
 		await upsState.createCollection(newCollectionName.trim(), newCollectionDescription.trim());
 
-		// Find the newly created collection
 		const newCollection = upsState.collections.find((c) => c.name === newCollectionName.trim());
 		if (newCollection) {
 			selectedCollectionId = newCollection.id;
@@ -118,12 +113,10 @@
 		{/if}
 
 		<div class="space-y-4">
-			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
 				{m.manage_collection_for_pals({ count: pals.length, pals: c.pals })}
 			</p>
 
-			<!-- Show current collection status -->
 			{#if existingCollections.length > 0}
 				<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
 					{#if commonCollection}
@@ -141,7 +134,6 @@
 				</div>
 			{/if}
 
-			<!-- Collection Selection -->
 			<div>
 				<div class="mb-2 flex items-center justify-between">
 					<span class="text-sm font-medium">{m.collection({ count: 1 })}</span>
@@ -209,7 +201,6 @@
 				{/if}
 			</div>
 
-			<!-- Show what will happen -->
 			{#if selectedCollectionId !== commonCollection}
 				<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
 					<p class="mb-2 font-medium">{m.changes()}:</p>
@@ -232,7 +223,6 @@
 			{/if}
 		</div>
 
-		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				type="button"

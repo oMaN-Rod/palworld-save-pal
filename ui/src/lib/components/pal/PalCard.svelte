@@ -104,13 +104,11 @@
 			return;
 		}
 
-		// If ctrl/cmd is pressed and onSelect is provided, handle selection
 		if ((event.ctrlKey || event.metaKey) && onSelect) {
 			event.preventDefault();
 			event.stopPropagation();
 			onSelect(pal, event);
 		} else {
-			// Otherwise handle normal pal selection
 			handlePalSelect();
 		}
 	}

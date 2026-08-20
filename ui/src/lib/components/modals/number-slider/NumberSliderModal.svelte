@@ -30,10 +30,8 @@
 	let sliderValue: number[] = $state([value]);
 	let modalContainer: HTMLDivElement;
 
-	// Callers that pass explicit markers keep them; otherwise derive roughly ten evenly
-	// spaced marks inside [min, max]. For the historical default (0-50) this yields
-	// [5, 10, ..., 45] — the previous hard-coded list — but a small max (e.g. a relic
-	// rank capped at 4) no longer draws markers beyond the end of the slider.
+	// Derives roughly ten evenly spaced marks inside [min, max] when the caller doesn't pass explicit markers,
+	// so a small max (e.g. a relic rank capped at 4) doesn't draw markers beyond the end of the slider.
 	const sliderMarkers = $derived.by(() => {
 		if (markers) return markers;
 		const span = max - min;
@@ -49,9 +47,7 @@
 			closeModal(null);
 			return;
 		}
-		// The number input lets you type past the slider's bounds -- and clearing it
-		// yields NaN, which would sail straight through Math.min/Math.max. The modal
-		// never returns a value outside [min, max].
+		// Clearing the number input yields NaN, which would sail straight through Math.min/Math.max.
 		const raw = sliderValue[0];
 		const value = typeof raw === 'number' && Number.isFinite(raw) ? raw : min;
 		closeModal(Math.min(Math.max(value, min), max));

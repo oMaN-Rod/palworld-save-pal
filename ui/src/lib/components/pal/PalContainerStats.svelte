@@ -25,12 +25,10 @@
 		elementsData?: any;
 	}>();
 
-	// Fallback for elementsData if not provided
 	elements = elements || elementsData;
 
 	const appState = getAppState();
 
-	// Load element icons
 	let elementIcons = $derived.by(() => {
 		let icons: Record<string, string> = {};
 		for (const element of elementTypes) {
@@ -44,18 +42,15 @@
 		return icons;
 	});
 
-	// Element type statistics
 	let elementStats = $derived.by(() => {
 		if (!pals || pals.length === 0) return {};
 
 		const stats: Record<string, number> = {};
 
-		// Initialize all element types with zero counts
 		elementTypes.forEach((element: string) => {
 			stats[element] = 0;
 		});
 
-		// Count pals by element type
 		pals.forEach(({ palData }: PalWithData) => {
 			if (palData && palData.element_types) {
 				palData.element_types.forEach((elementType: ElementType) => {
@@ -68,7 +63,6 @@
 		return stats;
 	});
 
-	// Special categories statistics
 	let specialStats = $derived.by(() => {
 		if (!pals || pals.length === 0)
 			return {
@@ -100,7 +94,6 @@
 		};
 	});
 
-	// Level statistics
 	let levelStats = $derived.by(() => {
 		if (!pals || pals.length === 0) {
 			return { average: 0, max: 0, min: 0, maxCount: 0 };
@@ -125,18 +118,15 @@
 		};
 	});
 
-	// Total count
 	let totalPals = $derived(pals.length);
 </script>
 
 <div class="flex flex-col space-y-3">
-	<!-- Overall stats -->
 	<div class="flex space-x-2">
 		<span class="grow font-bold">{m.total_pals(p.pals)}</span>
 		<span>{totalPals}</span>
 	</div>
 
-	<!-- Element type stats -->
 	<div>
 		<h5 class="mb-1 font-bold">{m.elemental_distribution()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
@@ -155,7 +145,6 @@
 		</div>
 	</div>
 
-	<!-- Special categories -->
 	<div>
 		<h5 class="mb-1 font-bold">{m.special_categories()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
@@ -223,7 +212,6 @@
 		</div>
 	</div>
 
-	<!-- Level stats -->
 	<div>
 		<h5 class="mb-1 font-bold">{m.level_distribution()}</h5>
 		<div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">

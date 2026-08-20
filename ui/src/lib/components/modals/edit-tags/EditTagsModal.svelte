@@ -29,7 +29,6 @@
 	let selectedTags: string[] = $state([]);
 	let newTagInput: string = $state('');
 
-	// Get all existing tags from selected pals
 	const existingTags = $derived.by(() => {
 		const allTags = new Set<string>();
 		pals.forEach((pal) => {
@@ -40,10 +39,8 @@
 		return Array.from(allTags);
 	});
 
-	// Initialize selected tags with common tags across all selected pals
 	$effect(() => {
 		if (pals.length > 0) {
-			// Find tags that are common to all selected pals
 			const commonTags = existingTags.filter((tag) =>
 				pals.every((pal) => pal.tags && pal.tags.includes(tag))
 			);
@@ -98,12 +95,10 @@
 		{/if}
 
 		<div class="space-y-4">
-			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
 				{m.edit_tags_for_pals({ count: pals.length, pals: c.pals })}
 			</p>
 
-			<!-- Available Tags -->
 			{#if upsState.availableTags.length > 0}
 				<div>
 					<span class="mb-2 block text-sm font-medium"
@@ -128,7 +123,6 @@
 				</div>
 			{/if}
 
-			<!-- Add New Tag -->
 			<div>
 				<span class="mb-2 block text-sm font-medium">{m.add_new_tag()}</span>
 				<div class="flex items-center gap-2">
@@ -149,7 +143,6 @@
 				</div>
 			</div>
 
-			<!-- Selected Tags Display -->
 			{#if selectedTags.length > 0}
 				<div>
 					<span class="mb-2 block text-sm font-medium">{m.selected_tags()}</span>
@@ -172,7 +165,6 @@
 				</div>
 			{/if}
 
-			<!-- Show tags that will be added/removed -->
 			{#if existingTags.length > 0}
 				{@const tagsToAdd = selectedTags.filter((tag) => !existingTags.includes(tag))}
 				{@const tagsToRemove = existingTags.filter((tag) => !selectedTags.includes(tag))}
@@ -196,7 +188,6 @@
 			{/if}
 		</div>
 
-		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				type="button"

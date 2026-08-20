@@ -1,6 +1,4 @@
 <script lang="ts">
-	// Renders one breeding Chain: header (target + gen count + gender
-	// feasibility), source pals (leaves), and ordered breeding steps.
 	import * as m from '$i18n/messages';
 	import type { BreedablePal, Chain } from '$lib/breeding/types';
 	import GitMerge from '@lucide/svelte/icons/git-merge';
@@ -39,7 +37,6 @@
 </script>
 
 <div class="card space-y-3">
-	<!-- header -->
 	<div class="flex flex-wrap items-center justify-between gap-2">
 		<div class="flex items-center gap-2">
 			<GitMerge size={16} class="text-primary-400" />
@@ -64,7 +61,6 @@
 		{/if}
 	</div>
 
-	<!-- sources (leaves) -->
 	{#if chain.sources.length}
 		<div class="flex flex-wrap gap-2">
 			{#each chain.sources as src}
@@ -88,7 +84,6 @@
 		</div>
 	{/if}
 
-	<!-- steps -->
 	{#if chain.steps.length}
 		<div class="breed-list-numbered">
 			{#each chain.steps as step, i}

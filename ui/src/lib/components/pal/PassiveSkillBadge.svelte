@@ -48,8 +48,6 @@
 		}
 	});
 
-	// Calculate CSS filter values
-
 	async function handleSelectSkill() {
 		// @ts-ignore
 		const result = await modal.showModal<string>(SkillSelectModal, {

@@ -1,8 +1,5 @@
 <script lang="ts">
-	// Renders one Direct-Mode result row: [Parent A] + [Parent B] → [Child].
-	// Used for both the single forward answer and each reverse-mode candidate.
-	// A `.breed-row` subgrid cell — the enclosing `.breed-list` owns the column
-	// template, so icons and operators line up across every row in the list.
+	// A `.breed-row` subgrid cell -- the enclosing `.breed-list` owns the column template, so icons and operators line up across every row.
 	import * as m from '$i18n/messages';
 	import type { BreedablePal, DirectResultItem } from '$lib/breeding/types';
 	import Plus from '@lucide/svelte/icons/plus';

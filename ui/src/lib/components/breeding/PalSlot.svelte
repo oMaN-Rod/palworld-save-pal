@@ -1,7 +1,4 @@
 <script lang="ts">
-	// Small reusable pal icon + name pill. Used in chain steps, direct results,
-	// and picker selections. Renders an icon (via assetLoader) plus the display
-	// name, with a subtle border/bg treatment.
 	import { assetLoader } from '$lib/utils/assetLoader';
 	import Mars from '@lucide/svelte/icons/mars';
 	import Venus from '@lucide/svelte/icons/venus';

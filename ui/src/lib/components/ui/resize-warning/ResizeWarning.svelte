@@ -3,20 +3,8 @@
 	import { getAppState } from '$states';
 	import { isWebBuild } from '$lib/utils/platform';
 
-	/*
-	 * Full-page resize guard. When the viewport drops below these thresholds the
-	 * entire app is blacked out with a "window too small" message — mirrors the
-	 * PalSavTools overview-screen behaviour, applied app-wide for both browser
-	 * and desktop (Tauri) builds. Mounted once in the root layout, above all
-	 * other layers (z-[99999] > Modal 50000 / PalEditorOverlay 40000).
-	 *
-	 * The public shell (web build without a loaded save: landing, map, wiki,
-	 * breeding) is exempt — those pages are meant to be browsable on phones.
-	 *
-	 * ponytail: thresholds + copy are constants here. To localize, add message
-	 * keys (window_too_small / resize_prompt) to data/json/ui/{locale}.json and
-	 * swap these strings for $i18n/messages calls.
-	 */
+	// z-[99999] must stay above every other overlay (Modal 50000, PalEditorOverlay 40000).
+	// The public shell (web build without a loaded save: landing, map, wiki, breeding) is exempt -- those pages are meant to be browsable on phones.
 	const MIN_WIDTH = 800;
 	const MIN_HEIGHT = 500;
 

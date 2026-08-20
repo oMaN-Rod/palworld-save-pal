@@ -15,7 +15,6 @@
 	const mods = $derived(serverState.mods);
 	const isNative = $derived(server.server_type === 'native');
 
-	// Docker: Group mods by type for display
 	const ue4ssMods = $derived(mods.filter((m) => m.mod_type === 'ue4ss'));
 	const logicMods = $derived(mods.filter((m) => m.mod_type === 'logic'));
 	const nativeMods = $derived(mods.filter((m) => m.mod_type === 'native'));
@@ -30,7 +29,6 @@
 		serverState.toggleMod(server.id, mod.mod_name, !mod.enabled);
 	}
 
-	// Docker install controls
 	type ModInstallType = 'ue4ss' | 'logic' | 'native';
 	let installType: ModInstallType = $state('ue4ss');
 
@@ -50,7 +48,7 @@
 		input.value = '';
 	}
 
-	// Native install (all mods go to Mods/Workshop/)
+	// Native installs don't distinguish mod type; everything lands in Mods/Workshop/.
 	async function handleNativeInstall(event: Event) {
 		const input = event.target as HTMLInputElement;
 		const file = input.files?.[0];
@@ -96,7 +94,6 @@
 
 <div class="flex flex-col gap-4">
 	{#if isNative}
-		<!-- Native server mod panel -->
 		<div class="flex items-center justify-between">
 			<h3 class="text-lg font-bold">Mods</h3>
 			<label
@@ -191,7 +188,6 @@
 			</div>
 		{/if}
 	{:else}
-		<!-- Docker server mod panel (unchanged) -->
 		<div class="flex items-center justify-between">
 			<h3 class="text-lg font-bold">Mods</h3>
 			<div class="flex items-center gap-2">

@@ -96,7 +96,6 @@
 			<p class="mb-4 text-sm">{message}</p>
 		{/if}
 
-		<!-- Pal Summary -->
 		<div class="bg-surface-100 dark:bg-surface-800 mb-4 rounded-lg p-3">
 			<h4 class="mb-2 text-sm font-medium">
 				{m.cloning_count_pals({ count: pals.length, pals: pals.length === 1 ? c.pal : c.pals })}
@@ -127,7 +126,6 @@
 		</div>
 
 		<div class="space-y-4">
-			<!-- Collection Selection -->
 			<div>
 				<label class="mb-2 block flex items-center gap-2 text-sm font-medium">
 					<Folder class="h-4 w-4" />
@@ -194,14 +192,12 @@
 				{/if}
 			</div>
 
-			<!-- Tags Selection -->
 			<div>
 				<label class="mb-2 block flex items-center gap-2 text-sm font-medium">
 					<Tag class="h-4 w-4" />
 					{m.tags_optional()}
 				</label>
 
-				<!-- Existing Tags -->
 				{#if upsState.availableTags.length > 0}
 					<div class="mb-2 flex flex-wrap gap-2">
 						{#each upsState.availableTags as tag}
@@ -221,7 +217,6 @@
 					</div>
 				{/if}
 
-				<!-- Add New Tag -->
 				<div class="flex gap-2">
 					<Input
 						type="text"
@@ -240,7 +235,6 @@
 					</Button>
 				</div>
 
-				<!-- Selected Tags Display -->
 				{#if selectedTags.length > 0}
 					<div class="mt-2">
 						<span class="text-surface-600 dark:text-surface-400 text-sm">{m.selected()}:</span>
@@ -260,7 +254,6 @@
 				{/if}
 			</div>
 
-			<!-- Notes -->
 			<div>
 				<label for="notes" class="mb-2 block text-sm font-medium">{m.notes_optional()}</label>
 				<textarea
@@ -273,7 +266,6 @@
 			</div>
 		</div>
 
-		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				type="button"

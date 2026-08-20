@@ -34,7 +34,6 @@
 	let exportTarget: 'pal_box' | 'dps' | 'gps' = $state('pal_box');
 	let selectedPlayerId: string | undefined = $state(undefined);
 
-	// Player options for combobox
 	const playerOptions = $derived(
 		Object.entries(appState.players).map(([id, player]) => ({
 			label: (player as Player).nickname || `Player ${id}`,
@@ -42,14 +41,12 @@
 		}))
 	);
 
-	// Auto-select current player if available
 	$effect(() => {
 		if (appState.selectedPlayer && !selectedPlayerId) {
 			selectedPlayerId = appState.selectedPlayer.uid;
 		}
 	});
 
-	// Check if target is available
 	const isTargetAvailable = $derived.by(() => {
 		switch (exportTarget) {
 			case 'pal_box':
@@ -125,7 +122,6 @@
 		{/if}
 
 		<div class="space-y-4">
-			<!-- Show pal count -->
 			<p class="text-surface-600 dark:text-surface-400 text-sm">
 				{m.exporting_count_selected_pals({
 					count: pals.length,
@@ -133,7 +129,6 @@
 				})}
 			</p>
 
-			<!-- Export Target Selection -->
 			<div>
 				<span class="mb-2 block text-sm font-medium">{m.export_to()}</span>
 				<div class="grid grid-cols-3 gap-2">
@@ -169,7 +164,6 @@
 				</div>
 			</div>
 
-			<!-- Player Selection (for Pal Box and DPS) -->
 			{#if exportTarget === 'pal_box' || exportTarget === 'dps'}
 				<div>
 					<span class="mb-2 block text-sm font-medium"
@@ -184,7 +178,6 @@
 				</div>
 			{/if}
 
-			<!-- Target description and availability check -->
 			<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
 				<p class="mb-1 font-medium">{m.export_target()}:</p>
 				<p class="text-surface-600 dark:text-surface-400 mb-2">
@@ -210,7 +203,6 @@
 				{/if}
 			</div>
 
-			<!-- Warning about export -->
 			<div class="rounded bg-surface-100 dark:bg-surface-800 p-3 text-sm ">
 				<p class="mb-1 font-medium ">{m.note()}:</p>
 				<p class="text-yellow-700 dark:text-yellow-300">
@@ -219,7 +211,6 @@
 			</div>
 		</div>
 
-		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				type="button"

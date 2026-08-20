@@ -1,6 +1,5 @@
 import type { ColumnDef, PageInfo, PageState, SortDirection, SortState } from './table.types';
 
-/** Resolve the comparable value for a row in a given column. */
 export function getSortValue<T>(row: T, column: ColumnDef<T>): string | number | null | undefined {
 	if (column.sortValue) {
 		return column.sortValue(row);
@@ -8,7 +7,7 @@ export function getSortValue<T>(row: T, column: ColumnDef<T>): string | number |
 	return (row as Record<string, unknown>)[column.key] as string | number | null | undefined;
 }
 
-/** Compare two primitive values. Nullish always sorts last, independent of direction. */
+// Nullish always sorts last, independent of direction.
 export function compareValues(
 	a: string | number | null | undefined,
 	b: string | number | null | undefined,
@@ -29,7 +28,6 @@ export function compareValues(
 	return direction === 'asc' ? result : -result;
 }
 
-/** Sort rows by the active sort state. Pure, stable, never mutates the input. */
 export function sortRows<T>(rows: T[], columns: ColumnDef<T>[], sort: SortState): T[] {
 	if (!sort.key) {
 		return rows.slice();
@@ -51,7 +49,6 @@ export function sortRows<T>(rows: T[], columns: ColumnDef<T>[], sort: SortState)
 		.map((wrapped) => wrapped.row);
 }
 
-/** Compute the sort state after a header click: new column -> asc; same column -> toggle. */
 export function nextSortState(current: SortState, key: string): SortState {
 	if (current.key !== key) {
 		return { key, direction: 'asc' };
@@ -59,7 +56,6 @@ export function nextSortState(current: SortState, key: string): SortState {
 	return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' };
 }
 
-/** Compute clamped page metadata for the given total row count. */
 export function computePageInfo(state: PageState, total: number): PageInfo {
 	const pageSize = Math.max(1, state.pageSize);
 	const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -78,7 +74,6 @@ export function computePageInfo(state: PageState, total: number): PageInfo {
 	};
 }
 
-/** Slice rows for the current page (client-side pagination). */
 export function paginateRows<T>(rows: T[], state: PageState): T[] {
 	if (rows.length === 0) {
 		return [];
@@ -87,7 +82,6 @@ export function paginateRows<T>(rows: T[], state: PageState): T[] {
 	return rows.slice(info.startIndex, info.endIndex + 1);
 }
 
-/** Toggle a single key, returning a new set (never mutates the input). */
 export function toggleSelection(selected: Set<string>, key: string): Set<string> {
 	const next = new Set(selected);
 	if (next.has(key)) {
@@ -98,7 +92,6 @@ export function toggleSelection(selected: Set<string>, key: string): Set<string>
 	return next;
 }
 
-/** Add or remove a batch of keys (used by the header select-all checkbox). */
 export function setPageSelection(
 	selected: Set<string>,
 	keys: string[],
@@ -115,7 +108,7 @@ export function setPageSelection(
 	return next;
 }
 
-/** Whether every provided key is currently selected. Empty key list is never "all selected". */
+// Empty key list is never "all selected".
 export function areAllSelected(selected: Set<string>, keys: string[]): boolean {
 	return keys.length > 0 && keys.every((key) => selected.has(key));
 }

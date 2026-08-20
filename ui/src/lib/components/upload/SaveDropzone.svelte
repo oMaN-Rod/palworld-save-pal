@@ -83,8 +83,7 @@
 		if (input.files?.length) loadEntries(await readInputFolder(input.files));
 	}
 
-	// Prefer the File System Access picker (yields a handle → enables save-in-place);
-	// fall back to a webkitdirectory input where FSA is unavailable.
+	// Prefer the File System Access picker (yields a handle -> enables save-in-place); fall back to a webkitdirectory input where FSA is unavailable.
 	async function chooseFolder() {
 		if (isWebBuild && fsaSupported()) {
 			const dir = await pickSaveDirectory();

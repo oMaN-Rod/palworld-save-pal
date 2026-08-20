@@ -1,17 +1,13 @@
 export type SortDirection = 'asc' | 'desc';
 
 export interface ColumnDef<T> {
-	/** Stable identifier for the column; also the default sort key. */
+	/** Also used as the sort key. */
 	key: string;
-	/** Header label text. */
 	header: string;
-	/** Whether the header is clickable to sort. Defaults to false. */
 	sortable?: boolean;
-	/** Extracts the comparable value for sorting. Falls back to row[key]. */
+	/** Falls back to row[key] when omitted. */
 	sortValue?: (row: T) => string | number | null | undefined;
-	/** Extra classes applied to this column's cells and header. */
 	class?: string;
-	/** Cell text alignment. Defaults to 'left'. */
 	align?: 'left' | 'center' | 'right';
 }
 
@@ -21,7 +17,7 @@ export interface SortState {
 }
 
 export interface PageState {
-	/** 1-based page number. */
+	/** 1-based. */
 	page: number;
 	pageSize: number;
 }
@@ -31,9 +27,9 @@ export interface PageInfo {
 	pageSize: number;
 	total: number;
 	totalPages: number;
-	/** 0-based index of the first row on the page within the full set. */
+	/** 0-based, unlike `page`. */
 	startIndex: number;
-	/** 0-based inclusive index of the last row on the page. */
+	/** 0-based and inclusive. */
 	endIndex: number;
 	hasPrev: boolean;
 	hasNext: boolean;

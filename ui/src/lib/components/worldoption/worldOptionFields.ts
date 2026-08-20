@@ -1,6 +1,5 @@
-// Labels are hardcoded English on purpose: they mirror Palworld's own ini keys,
-// which is what users search for. This matches the sibling envGroups.ts and is a
-// deliberate departure from the app's Paraglide i18n. See the spec, decision 5.
+// Labels are hardcoded English on purpose: they mirror Palworld's own ini keys, which is what users search for.
+// Deliberate departure from the app's Paraglide i18n, matching the sibling envGroups.ts.
 
 // Must stay in sync with WoKind::wire_tag() in psp-core/src/domain/world_option.rs.
 export type WoFieldKind =
@@ -24,7 +23,6 @@ export type WoField = {
 	min?: number;
 	max?: number;
 	step?: number;
-	/** Fully-qualified enum variants. Required for kind 'enum'. */
 	options?: { value: string; label: string }[];
 };
 
@@ -73,9 +71,7 @@ const rate = (key: string, label: string, def: number): WoField => ({
 	max: 100,
 	step: 0.1
 });
-// Engine-scale floats (distances in cm, intervals in seconds) whose values run far
-// above a rate multiplier. No upper cap: there is no sensible universal bound, and a
-// low `max` would clamp a legitimate value like 15000 down on edit.
+// No upper cap: there is no sensible universal bound, and a low `max` would clamp a legitimate value like 15000 down on edit.
 const bigFloat = (key: string, label: string, def: number): WoField => ({
 	key,
 	label,
@@ -380,8 +376,7 @@ export const worldOptionTabs: { id: WoTab; label: string }[] = [
 	{ id: 'advanced', label: 'Advanced' }
 ];
 
-/** Groups belonging to a tab. Filters on the group's own `tab`, never on a title
- *  list -- CreateServerModal filters by title and silently drops a mistyped group. */
+// Filters on the group's own `tab`, never a title list -- a mistyped title (as CreateServerModal uses) silently drops a group.
 export function groupsForTab(tab: WoTab): WoGroup[] {
 	return worldOptionGroups.filter((group) => group.tab === tab);
 }

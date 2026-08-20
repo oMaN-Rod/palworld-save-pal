@@ -1,9 +1,4 @@
 <script lang="ts">
-	/**
-	 * BreedingSidePanel — right-hand panel for Graph Mode. Contains the chain
-	 * selector tabs, configuration inputs, selection-pool or save-owner
-	 * controls, the compute button, and a node-detail section.
-	 */
 	import ChevronRight from '@lucide/svelte/icons/chevron-right';
 	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
 	import Play from '@lucide/svelte/icons/play';

@@ -19,9 +19,7 @@
 	let failed = $state(false);
 	let center = $state<[number, number]>([0, 0]);
 	let zoom = $state(2.6);
-	// 3D terrain (DEM) is GPU-heavy. The landing hero shows a desktop-only
-	// notice below md (768px) — on those viewports, default 3D off so phones
-	// don't pay the terrain cost. The toggle button still lets a user opt in.
+	// 3D terrain (DEM) is GPU-heavy; default off below md (768px) so phones don't pay the cost. Toggle still opts in.
 	const isMobile =
 		typeof window !== 'undefined' &&
 		typeof window.matchMedia === 'function' &&

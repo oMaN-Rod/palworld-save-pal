@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildEditorTheme, rgbToHex, EDITOR_THEME_NAME } from './paletteTheme';
 
-// A stand-in palette; only the vars the builder reads need entries. Distinct
-// values per role so a mis-wired mapping is caught.
+// Distinct values per role so a mis-wired mapping is caught.
 const palette: Record<string, string> = {
 	'--color-primary-300': 'rgb(85, 159, 248)',
 	'--color-primary-700': 'rgb(4, 83, 178)',
@@ -37,9 +36,7 @@ describe('rgbToHex', () => {
 		expect(rgbToHex('rgba( 34 , 34 ,34 , 0.5 )')).toBe('222222');
 	});
 
-	// Production CSS minification (Lightning CSS via Tailwind v4) rewrites the
-	// theme's `rgb(...)` custom properties into these forms, which is what
-	// getComputedStyle returns in a release build.
+	// getComputedStyle returns these forms in a release build (Lightning CSS minifies `rgb(...)`).
 	it('parses 6-digit hex', () => {
 		expect(rgbToHex('#559ff8')).toBe('559ff8');
 	});
@@ -69,15 +66,15 @@ describe('buildEditorTheme (dark)', () => {
 	});
 
 	it('maps JSON tokens to their palette roles at the dark accent shade (300)', () => {
-		expect(ruleFor(theme, 'string.key.json')).toBe('559ff8'); // primary-300
-		expect(ruleFor(theme, 'string.value.json')).toBe('69e0a2'); // success-300
-		expect(ruleFor(theme, 'number')).toBe('ff52b1'); // tertiary-300
-		expect(ruleFor(theme, 'keyword.json')).toBe('9f6ada'); // secondary-300
+		expect(ruleFor(theme, 'string.key.json')).toBe('559ff8');
+		expect(ruleFor(theme, 'string.value.json')).toBe('69e0a2');
+		expect(ruleFor(theme, 'number')).toBe('ff52b1');
+		expect(ruleFor(theme, 'keyword.json')).toBe('9f6ada');
 	});
 
 	it('paints editor chrome from the surface scale', () => {
-		expect(theme.colors['editor.background']).toBe('#222222'); // surface-900
-		expect(theme.colors['editor.foreground']).toBe('#ffffff'); // surface-50
+		expect(theme.colors['editor.background']).toBe('#222222');
+		expect(theme.colors['editor.foreground']).toBe('#ffffff');
 	});
 });
 
@@ -86,7 +83,7 @@ describe('buildEditorTheme (light)', () => {
 
 	it('uses the light Monaco base and the light accent shade (700)', () => {
 		expect(theme.base).toBe('vs');
-		expect(ruleFor(theme, 'string.key.json')).toBe('0453b2'); // primary-700
+		expect(ruleFor(theme, 'string.key.json')).toBe('0453b2');
 	});
 });
 

@@ -1,13 +1,5 @@
 <script lang="ts">
-	/**
-	 * Child gender split, rendered as a proportion rather than two loose labels.
-	 *
-	 * The numbers are the headline (bold, tabular, larger than the surrounding
-	 * chips) with a two-segment meter underneath carrying the same ratio
-	 * pre-attentively. Identity never rests on hue alone — each side keeps its
-	 * Mars/Venus glyph, so the split reads under any CVD or in a greyscale print
-	 * of an exported chain.
-	 */
+	// Identity never rests on hue alone -- each side keeps its Mars/Venus glyph, so the split still reads under CVD or in a greyscale export.
 	import * as m from '$i18n/messages';
 	import Mars from '@lucide/svelte/icons/mars';
 	import Venus from '@lucide/svelte/icons/venus';
@@ -17,7 +9,6 @@
 		size = 'md'
 	}: {
 		prob: { male: number; female: number };
-		/** `sm` for dense lists, `md` for result rows. */
 		size?: 'sm' | 'md';
 	} = $props();
 

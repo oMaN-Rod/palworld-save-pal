@@ -235,7 +235,6 @@
 
 		<div class="grid {gridClass} gap-2">
 			<div class="flex w-full flex-col space-y-4">
-				<!-- Source Type Selection -->
 				<div>
 					<Combobox
 						bind:value={selectedPlayerId}
@@ -274,7 +273,6 @@
 					{/if}
 				</div>
 
-				<!-- Collection Selection -->
 				<div>
 					<div class="flex items-center gap-2">
 						<label class="flex items-center text-sm font-medium">
@@ -342,14 +340,12 @@
 					{/if}
 				</div>
 
-				<!-- Tags Selection -->
 				<div>
 					<label class="mb-2 flex items-center gap-2 text-sm font-medium">
 						<Tag class="h-4 w-4" />
 						{m.tags_optional()}
 					</label>
 
-					<!-- Existing Tags -->
 					{#if upsState.availableTags.length > 0}
 						<div class="mb-2 flex flex-wrap gap-2">
 							{#each upsState.availableTags as tag}
@@ -369,7 +365,6 @@
 						</div>
 					{/if}
 
-					<!-- Add New Tag -->
 					<div class="flex items-center gap-2">
 						<Input
 							type="text"
@@ -387,7 +382,6 @@
 						</TooltipButton>
 					</div>
 
-					<!-- Selected Tags Display -->
 					{#if selectedTags.length > 0}
 						<div class="mt-2">
 							<span class="text-surface-600 dark:text-surface-400 text-sm">{m.selected()}:</span>
@@ -407,7 +401,6 @@
 					{/if}
 				</div>
 
-				<!-- Notes -->
 				<div>
 					<label for="notes" class="mb-2 block text-sm font-medium">{m.notes_optional()}</label>
 					<textarea
@@ -467,7 +460,6 @@
 			{/if}
 		</div>
 
-		<!-- Actions -->
 		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				type="button"
