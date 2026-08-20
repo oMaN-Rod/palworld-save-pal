@@ -13,7 +13,8 @@ import {
 	palRingColor
 } from './mapObjectPortal';
 import { pixelToLngLat } from './mercator';
-import { onPalMeshLoaded, requestPalMesh } from './palMeshLibrary';
+import { clearActiveMeshes, setActiveMeshes } from './meshUsage';
+import { onPalMeshLoaded, palMeshIdentity, requestPalMesh } from './palMeshLibrary';
 import {
 	PORTAL_RADIUS_CM,
 	createPortalMeshes,
@@ -95,6 +96,9 @@ export type PalLayer = CustomLayerInterface & {
 export function createPalLayer(opts: { id: string }): PalLayer {
 	const scene = new THREE.Scene();
 	const camera = new THREE.Camera();
+	// render() runs every painted frame; allocating the projection matrix there
+	// feeds the GC exactly when smoothness matters.
+	const projectionScratch = new THREE.Matrix4();
 	let renderer: THREE.WebGLRenderer | null = null;
 	let map: MLMap | null = null;
 	const groups: THREE.Object3D[] = [];
@@ -300,6 +304,14 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 			scene.add(predatorPortal);
 		}
 
+		// Pin the cloned models against the pal-mesh sweeper: clones share
+		// geometry and materials with the cached roots, so anything still drawn
+		// must never be disposed out from under it.
+		setActiveMeshes(
+			'pals',
+			[...bosses, ...predators].map(({ key }) => palMeshIdentity(key))
+		);
+
 		builtBosses = bosses.slice();
 		builtPredators = predators.slice();
 		builtArea = area;
@@ -330,9 +342,8 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(
-				args.defaultProjectionData.mainMatrix
-			);
+			// Reused across frames: this runs every painted frame of a pan.
+			camera.projectionMatrix = projectionScratch.fromArray(args.defaultProjectionData.mainMatrix);
 			renderer.resetState();
 			// Discard depth already in the buffer so nothing drawn earlier occludes a
 			// Pal. Depth testing stays on within this scene -- turning it off instead
@@ -350,6 +361,8 @@ export function createPalLayer(opts: { id: string }): PalLayer {
 			disposed = true;
 			unsubscribePalMeshLoaded();
 			clearGroups();
+			// Unpin the last drawn models so a swept map can reclaim them.
+			clearActiveMeshes('pals');
 			// Shared across layers: released here, never disposed.
 			renderer = null;
 			map = null;

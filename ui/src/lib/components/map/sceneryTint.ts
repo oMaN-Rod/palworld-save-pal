@@ -54,6 +54,16 @@ export function mosaicTexture(mosaic: TintMosaic): THREE.DataTexture {
 // Module scope, so every rebuild and area revisit reuses the one fetch+composite.
 const mosaicCache = new Map<MapArea, Promise<TintMosaic>>();
 
+/** Drops the cached mosaic pixels of every area except `keep`. Each mosaic is
+ * a 2048x2048 RGBA buffer (~16 MB); holding both areas forever doubles that
+ * for a switch most users make once. The kept area stays warm; dropped areas
+ * simply re-fetch and re-composite on the next switch back. */
+export function evictTintMosaics(keep: MapArea): void {
+	for (const area of [...mosaicCache.keys()]) {
+		if (area !== keep) mosaicCache.delete(area);
+	}
+}
+
 export function loadTintMosaic(area: MapArea): Promise<TintMosaic> {
 	const cached = mosaicCache.get(area);
 	if (cached) return cached;

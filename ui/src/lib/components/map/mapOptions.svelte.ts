@@ -2,6 +2,7 @@ import { persistedState } from 'svelte-persisted-state';
 import type { MapLayerVisibility } from './layerPanelModel';
 import { STRUCTURE_TYPE_ORDER } from './mapColors.svelte';
 import { MAP_OBJECT_SCALE_DEFAULT, MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT } from './mapObjectSize';
+import { MAP_QUALITY_DEFAULT, type MapQualitySetting } from './mapQuality';
 import { PAL_SCALE_DEFAULT } from './palSize';
 import { DEFAULT_MAP_AREA, type MapArea } from './utils';
 
@@ -49,6 +50,10 @@ export type MapOptions = {
 	relicSize: number;
 	/** Visibility for the registry-driven layers, keyed by layer id. */
 	mapLayerVisibility: MapLayerVisibility;
+	/** 3D render quality tier; 'auto' steps between levels from measured FPS. */
+	mapQuality: MapQualitySetting;
+	/** Live FPS counter overlay inside the 3D map renderer. */
+	showFps: boolean;
 };
 
 // A key of its own, never written by an earlier build: persistedState does not
@@ -83,5 +88,7 @@ export const mapOptionsState = persistedState<MapOptions>('psp-map-options', {
 	fastTravelSize: MAP_OBJECT_SCALE_DEFAULT,
 	watchtowerSize: MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT,
 	relicSize: MAP_OBJECT_SCALE_DEFAULT,
-	mapLayerVisibility: {}
+	mapLayerVisibility: {},
+	mapQuality: MAP_QUALITY_DEFAULT,
+	showFps: false
 });

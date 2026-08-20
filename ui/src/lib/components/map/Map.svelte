@@ -110,8 +110,27 @@
 	import { buildPalPortalFC } from './palPortalFC';
 	import { PAL_SCALE_DEFAULT } from './palSize';
 	import { MAP_OBJECT_SCALE_DEFAULT } from './mapObjectSize';
-	import { decodeSceneryStream, type SceneryStream } from './sceneryFormat';
-	import { loadTintMosaic, type TintMosaic } from './sceneryTint';
+	import type { SceneryStream } from './sceneryFormat';
+	import { decodeSceneryStreamAsync } from './sceneryStreamLoader';
+	import { evictTintMosaics, loadTintMosaic, type TintMosaic } from './sceneryTint';
+	import FpsOverlay from './FpsOverlay.svelte';
+	import {
+		attachRenderFpsMonitor,
+		createRenderFpsMonitor,
+		type RenderFpsSample
+	} from './fpsMonitor';
+	import {
+		autoQualityStep,
+		createAutoQualityState,
+		MAP_QUALITY_DEFAULT,
+		qualityParams,
+		type MapQualityLevel,
+		type MapQualitySetting
+	} from './mapQuality';
+	import { activeMeshUnion } from './meshUsage';
+	import { sweepMeshLibrary, sweepTexturedMeshLibrary } from './meshLibrary';
+	import { sweepPalMeshes } from './palMeshLibrary';
+	import { sweepMapObjectMeshes } from './mapObjectMeshLibrary';
 	import { composeWorld } from './ghostTransform';
 	import type {
 		BaseStructure,
@@ -172,6 +191,10 @@
 		palSize = PAL_SCALE_DEFAULT,
 		palAutoFollow = true,
 		palHeight = 0,
+		mapQuality = MAP_QUALITY_DEFAULT,
+		showFps = false,
+		onMapQualityChange,
+		onToggleShowFps,
 		mapOpacity = 1,
 		fastTravelSize = MAP_OBJECT_SCALE_DEFAULT,
 		watchtowerSize = MAP_OBJECT_SCALE_DEFAULT,
@@ -235,6 +258,12 @@
 		palSize?: number;
 		palAutoFollow?: boolean;
 		palHeight?: number;
+		/** 3D render quality tier; 'auto' steps between levels from render FPS. */
+		mapQuality?: MapQualitySetting;
+		/** Live FPS counter overlay inside the renderer. */
+		showFps?: boolean;
+		onMapQualityChange?: (quality: MapQualitySetting) => void;
+		onToggleShowFps?: () => void;
 		mapOpacity?: number;
 		/** Fast travel statue render scale as a multiple of true size. */
 		fastTravelSize?: number;
@@ -700,7 +729,26 @@
 		endGhostDrag();
 	}
 
+	// Coalesced to one hover/query pass per frame: high-frequency mice fire
+	// far more often than the map paints, and each event otherwise pays a
+	// queryRenderedFeatures plus the pick scheduling. Only the last position
+	// per frame matters, which is exactly what this keeps.
+	let mouseMoveScheduled = false;
+	let pendingMouseEvent: maplibregl.MapMouseEvent | null = null;
+
 	function handleMouseMove(ev: maplibregl.MapMouseEvent) {
+		pendingMouseEvent = ev;
+		if (mouseMoveScheduled) return;
+		mouseMoveScheduled = true;
+		requestAnimationFrame(() => {
+			mouseMoveScheduled = false;
+			const event = pendingMouseEvent;
+			pendingMouseEvent = null;
+			if (event) handleMouseMoveFrame(event);
+		});
+	}
+
+	function handleMouseMoveFrame(ev: maplibregl.MapMouseEvent) {
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const { gameX, gameY } = pixelToGameCoords(px, py, area);
@@ -859,6 +907,44 @@
 	let ghostLayer: GhostLayer | null = null;
 	let pendingGhostStyleHandler: (() => void) | null = null;
 
+	// --- Staged 3D boot -------------------------------------------------------
+	// With a persisted enable3d, all four custom layers used to mount in the
+	// same effect flush as the map itself, and page load froze under the
+	// combined weight -- full structure bake, whole-map scenery bake, model
+	// clones, plus every glb decode they trigger. Each stage below waits for an
+	// idle window after a painted frame, so the base map and the UI render and
+	// respond first and the heavy builds land one per idle window. Toggling 3D
+	// off resets the chain; the next toggle restarts it from stage 1.
+	let boot3dStage = $state(0);
+
+	function onIdleAfterPaint(cb: () => void): () => void {
+		if (typeof requestIdleCallback === 'undefined') {
+			const t = setTimeout(cb, 50);
+			return () => clearTimeout(t);
+		}
+		let cancelled = false;
+		let cancelIdle: (() => void) | null = null;
+		const raf = requestAnimationFrame(() => {
+			if (cancelled) return;
+			const id = requestIdleCallback(() => cb(), { timeout: 500 });
+			cancelIdle = () => cancelIdleCallback(id);
+		});
+		return () => {
+			cancelled = true;
+			cancelIdle?.();
+			cancelAnimationFrame(raf);
+		};
+	}
+
+	$effect(() => {
+		if (!show3d) {
+			boot3dStage = 0;
+			return;
+		}
+		if (boot3dStage >= 4) return;
+		return onIdleAfterPaint(() => (boot3dStage += 1));
+	});
+
 	function mount3dLayer(instance: maplibregl.Map, layer: maplibregl.CustomLayerInterface) {
 		const mounted = LAYER_ORDER_3D.filter((id) => instance.getLayer(id));
 		instance.addLayer(layer, beforeIdFor(layer.id as (typeof LAYER_ORDER_3D)[number], mounted));
@@ -889,7 +975,7 @@
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
-		if (detailed && !structureLayer) {
+		if (detailed && boot3dStage >= 1 && !structureLayer) {
 			// MapLibre throws if a layer is added before the style finishes loading; only
 			// keep the reference once addLayer actually succeeds, retrying on `styledata`.
 			const add = () => {
@@ -974,7 +1060,9 @@
 
 	// A missing or corrupt stream must not take the map down: log it and leave the
 	// rest working with scenery absent for that area. sceneryStreamAttempted fires
-	// the fetch at most once per area rather than retrying on every revisit.
+	// the fetch at most once per area rather than retrying on every revisit. The
+	// decode runs in a worker (see decodeSceneryStreamAsync) so the ~50k-instance
+	// parse never blocks the main thread -- Firefox freezes are what this guards.
 	$effect(() => {
 		if (!show3d) return;
 		const currentArea = area;
@@ -982,8 +1070,9 @@
 		sceneryStreamAttempted = new Set(sceneryStreamAttempted).add(currentArea);
 		fetch(sceneryStreamUrl(currentArea))
 			.then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(`${r.status}`))))
-			.then((buf) => {
-				sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: decodeSceneryStream(buf) };
+			.then((buf) => decodeSceneryStreamAsync(buf))
+			.then((stream) => {
+				sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: stream };
 			})
 			.catch((e) =>
 				console.warn(
@@ -996,6 +1085,8 @@
 	// Mirrors the scenery-stream fetch above. loadTintMosaic's own module-scope
 	// cache is what dedupes across component reloads; tintMosaicAttempted only
 	// stops this effect re-calling it every reactive run within one lifetime.
+	// The 64-tile fetch + composite is deferred until the browser is idle so it
+	// never competes with the base map's own first paint.
 	let tintMosaicsByArea: Partial<Record<MapArea, TintMosaic>> = $state({});
 	let tintMosaicAttempted = $state(new Set<MapArea>());
 
@@ -1006,16 +1097,23 @@
 		tintMosaicAttempted = new Set(tintMosaicAttempted).add(currentArea);
 		// Keyed by the area captured here, not the live binding, so a mosaic
 		// resolving after an area switch lands in its own slot.
-		loadTintMosaic(currentArea).then((mosaic) => {
-			tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
-		});
+		const load = () => {
+			loadTintMosaic(currentArea).then((mosaic) => {
+				tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
+			});
+		};
+		if (typeof requestIdleCallback !== 'undefined') {
+			requestIdleCallback(load, { timeout: 3000 });
+		} else {
+			setTimeout(load, 0);
+		}
 	});
 
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
 		const streamToMount = sceneryStream;
-		if (show3d && streamToMount && !sceneryLayer) {
+		if (show3d && streamToMount && boot3dStage >= 2 && !sceneryLayer) {
 			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
@@ -1075,7 +1173,7 @@
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
-		if (show3d && !palLayer) {
+		if (show3d && boot3dStage >= 3 && !palLayer) {
 			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
@@ -1158,7 +1256,7 @@
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
-		if (show3d && !mapObjectLayer) {
+		if (show3d && boot3dStage >= 4 && !mapObjectLayer) {
 			// MapLibre throws if a layer is added before the style finishes loading.
 			const add = () => {
 				if (!instance.isStyleLoaded()) return false;
@@ -1433,6 +1531,80 @@
 		if (!current) return;
 		if (!byKey.has(`${current.type}:${current.key}`)) hovered = null;
 	});
+
+	// --- Render quality, FPS counter, dynamic mesh offload -------------------
+	// Anti-aliasing rides the MLMap's canvasContextAttributes above: MapLibre's
+	// context defaults to antialias:false, and the three.js layers share that
+	// context, so MSAA there crisps up the whole 3D stack at once.
+
+	const devicePixelRatio = () => (typeof window !== 'undefined' ? window.devicePixelRatio : 1);
+
+	// 'auto' resolves through the controller in the FPS effect below; a fixed
+	// tier is itself.
+	let autoLevel = $state<MapQualityLevel>('high');
+	const effectiveQuality = $derived(mapQuality === 'auto' ? autoLevel : mapQuality);
+	const qualityTier = $derived(qualityParams(effectiveQuality, devicePixelRatio()));
+
+	// Resolution rides maplibre's runtime pixel-ratio override (present in the
+	// 5.x runtime, still missing from its typings): one call resizes the canvas
+	// backing store live, tiers with `null` restoring the device default.
+	$effect(() => {
+		const instance = map;
+		const pixelRatio = qualityTier.pixelRatio;
+		if (!instance) return;
+		const shim = instance as unknown as { setPixelRatio?: (ratio: number) => void };
+		if (typeof shim.setPixelRatio !== 'function') return;
+		shim.setPixelRatio(pixelRatio ?? devicePixelRatio());
+	});
+
+	$effect(() => {
+		sceneryLayer?.setMinPixels(qualityTier.sceneryMinPixels);
+	});
+
+	$effect(() => {
+		structureLayer?.setForceProxy(qualityTier.forceStructuresProxy);
+	});
+
+	// Live FPS from actual paint frames (MapLibre 'render' events -- see
+	// fpsMonitor.ts for why not rAF), feeding both the overlay and the auto
+	// quality controller's hysteresis.
+	const fpsMonitor = createRenderFpsMonitor();
+	let fpsSample = $state<RenderFpsSample>({ fps: 0, rendered: false });
+	let autoState = createAutoQualityState();
+
+	$effect(() => {
+		const instance = map;
+		if (!instance) return;
+		const stopMonitor = fpsMonitor.start();
+		const detach = attachRenderFpsMonitor(fpsMonitor, instance);
+		const unsubscribe = fpsMonitor.onSample((sample) => {
+			fpsSample = sample;
+			if (mapQuality !== 'auto') return;
+			const result = autoQualityStep(autoState, sample.rendered ? sample.fps : null, Date.now());
+			autoState = result.state;
+			if (result.changed) autoLevel = result.level;
+		});
+		return () => {
+			unsubscribe();
+			detach();
+			stopMonitor();
+		};
+	});
+
+	// Dynamic offload: periodically dispose cached meshes no layer has drawn
+	// recently (active sets pin exactly what is on screen; see meshUsage.ts),
+	// and keep only the visible area's ~16 MB tint mosaic resident.
+	$effect(() => {
+		const sweepAgeMs = qualityTier.meshSweepAgeMs;
+		const timer = setInterval(() => {
+			sweepMeshLibrary(activeMeshUnion(['structures', 'scenery', 'ghost']), sweepAgeMs);
+			sweepTexturedMeshLibrary(activeMeshUnion(['structures-textured']), sweepAgeMs);
+			sweepPalMeshes(activeMeshUnion(['pals']), sweepAgeMs);
+			sweepMapObjectMeshes(activeMeshUnion(['mapobjects']), sweepAgeMs);
+			evictTintMosaics(area);
+		}, 15_000);
+		return () => clearInterval(timer);
+	});
 </script>
 
 <div class="relative h-full w-full">
@@ -1448,6 +1620,7 @@
 		maxZoom={7}
 		renderWorldCopies={false}
 		centerClampedToGround={false}
+		canvasContextAttributes={{ antialias: true, powerPreference: 'high-performance' }}
 		dragRotate={show3d}
 		pitchWithRotate={true}
 		touchZoomRotate={show3d}
@@ -1484,6 +1657,10 @@
 			ontoggledetailed={() => onToggleRenderMode?.()}
 			ontoggletextured={() => onToggleStructureTextured?.()}
 			ontogglepalautofollow={() => onTogglePalAutoFollow?.()}
+			{mapQuality}
+			ontogglemapquality={(quality) => onMapQualityChange?.(quality)}
+			{showFps}
+			ontogglefps={() => onToggleShowFps?.()}
 			{palSize}
 			{fastTravelSize}
 			{watchtowerSize}
@@ -1947,6 +2124,10 @@
 
 	{#if import.meta.env.DEV && typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('bench')}
 		<BenchOverlay {map} {area} />
+	{/if}
+
+	{#if showFps}
+		<FpsOverlay sample={fpsSample} />
 	{/if}
 
 	{#if hovered?.point}

@@ -14,6 +14,7 @@ import { composeWorld } from './ghostTransform';
 import { pixelToLngLat } from './mercator';
 import { onMeshLoaded, requestMesh, structureParts } from './meshLibrary';
 import { partLocalMatrix } from './meshPlacement';
+import { clearActiveMeshes, setActiveMeshes } from './meshUsage';
 import { MESH_FLIP, getSharedRenderer } from './structureLayer';
 import type { MapArea } from './utils';
 import { worldToPixel } from './utils';
@@ -70,6 +71,8 @@ export type GhostLayer = CustomLayerInterface & {
 export function createGhostLayer(opts: { id: string }): GhostLayer {
 	const scene = new THREE.Scene();
 	const camera = new THREE.Camera();
+	// render() runs every painted frame while a placement preview is active.
+	const projectionScratch = new THREE.Matrix4();
 	let renderer: THREE.WebGLRenderer | null = null;
 	let map: MLMap | null = null;
 	const groups: THREE.InstancedMesh[] = [];
@@ -151,13 +154,15 @@ export function createGhostLayer(opts: { id: string }): GhostLayer {
 				groups.push(inst);
 			}
 
+			// Pin the preview's meshes against the meshLibrary sweeper.
+			setActiveMeshes('ghost', buckets.keys());
+
 			map.triggerRepaint();
 		},
 
 		render(_gl, args) {
 			if (!renderer) return;
-			const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
-			camera.projectionMatrix = m;
+			camera.projectionMatrix = projectionScratch.fromArray(args.defaultProjectionData.mainMatrix);
 			renderer.resetState();
 			renderer.render(scene, camera);
 		},
@@ -166,6 +171,8 @@ export function createGhostLayer(opts: { id: string }): GhostLayer {
 			disposed = true;
 			unsubscribeMeshLoaded();
 			clearGroups();
+			// Unpin the preview's meshes so a swept map can reclaim them.
+			clearActiveMeshes('ghost');
 			// renderer is structureLayer's module-level shared renderer -- released, not
 			// disposed (its GL context and cached buffers outlive this layer).
 			renderer = null;

@@ -10,6 +10,7 @@ import {
 	configureTexturedMaterial,
 	createMeshoptGLTFLoader,
 	dequantizeToFloat32,
+	disposeTexturedBundle,
 	type TexturedMeshBundle
 } from './meshLibrary';
 
@@ -27,6 +28,27 @@ const cache = new Map<string, MapObjectMeshBundle>();
 const inflight = new Set<string>();
 const failed = new Set<string>();
 const listeners = new Set<() => void>();
+const lastTouch = new Map<string, number>();
+
+/** Drops cached bundles not in `active` (see meshUsage.ts) whose last request
+ * is older than `maxAgeMs`, disposing geometry and texture memory. */
+export function sweepMapObjectMeshes(
+	active: ReadonlySet<string>,
+	maxAgeMs: number,
+	now: number = Date.now()
+): { swept: number } {
+	let swept = 0;
+	for (const [name, bundle] of cache) {
+		if (active.has(name)) continue;
+		const touched = lastTouch.get(name) ?? 0;
+		if (now - touched < maxAgeMs) continue;
+		disposeTexturedBundle(bundle);
+		cache.delete(name);
+		lastTouch.delete(name);
+		swept += 1;
+	}
+	return { swept };
+}
 
 // These declare EXT_meshopt_compression, so without the decoder every one fails
 // to parse.
@@ -55,7 +77,10 @@ export function requestMapObjectMesh(
 	baseUrl: string = MODEL_URL
 ): MapObjectMeshBundle | null {
 	const hit = cache.get(name);
-	if (hit) return hit;
+	if (hit) {
+		lastTouch.set(name, Date.now());
+		return hit;
+	}
 	if (inflight.has(name) || failed.has(name)) return null;
 
 	inflight.add(name);
@@ -104,6 +129,7 @@ export function requestMapObjectMesh(
 				}
 
 				cache.set(name, bundle);
+				lastTouch.set(name, Date.now());
 				settle(name);
 			},
 			undefined,

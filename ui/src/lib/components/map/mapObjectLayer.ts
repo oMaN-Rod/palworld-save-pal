@@ -27,6 +27,7 @@ import {
 import { createMapObjectPortalMesh, disposeMapObjectPortalMesh } from './mapObjectPortal';
 import { lngLatToPixel, pixelToLngLat } from './mercator';
 import { partLocalMatrix, ueEulerToThreeQuaternion } from './meshPlacement';
+import { clearActiveMeshes, setActiveMeshes } from './meshUsage';
 import { MESH_FLIP, getSharedRenderer } from './structureLayer';
 import { pixelToWorld, worldToPixel, type MapArea } from './utils';
 
@@ -338,6 +339,9 @@ function sameItems(a: MapObjectItem[], b: MapObjectItem[]): boolean {
 export function createMapObjectLayer(id: string): MapObjectLayer {
 	const scene = new THREE.Scene();
 	const camera = new THREE.Camera();
+	// render() runs every painted frame; allocating the projection matrix there
+	// feeds the GC exactly when smoothness matters.
+	const projectionScratch = new THREE.Matrix4();
 	let renderer: THREE.WebGLRenderer | null = null;
 	let map: MLMap | null = null;
 	let items: MapObjectItem[] = [];
@@ -556,6 +560,9 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 				meshObjects.delete(mesh);
 			}
 
+			// Pin what this compose drew against the map-object mesh sweeper.
+			setActiveMeshes('mapobjects', baked.keys());
+
 			for (const [radiusCm, chunk] of bakedPortalsByRadius) {
 				if (chunk.length === 0) continue;
 				const beam = portalMeshFor(radiusCm, chunk.length / PORTAL_BAKED_STRIDE);
@@ -586,9 +593,8 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(
-				args.defaultProjectionData.mainMatrix
-			);
+			// Reused across frames: this runs every painted frame of a pan.
+			camera.projectionMatrix = projectionScratch.fromArray(args.defaultProjectionData.mainMatrix);
 			renderer.resetState();
 			renderer.render(scene, camera);
 		},
@@ -643,6 +649,8 @@ export function createMapObjectLayer(id: string): MapObjectLayer {
 			clearGroups();
 			baked = new Map();
 			bakedPortalsByRadius = new Map();
+			// Unpin the last drawn meshes so a swept map can reclaim them.
+			clearActiveMeshes('mapobjects');
 			// Shared across layers: released here, never disposed.
 			renderer = null;
 			map = null;

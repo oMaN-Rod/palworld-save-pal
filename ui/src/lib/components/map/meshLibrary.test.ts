@@ -34,6 +34,7 @@ import manifest from '../../../../../data/json/structure_meshes.json';
 import {
 	bundleMapObjectMesh,
 	configureTexturedMaterial,
+	createMeshRequestLimiter,
 	meshFailed,
 	onMeshLoaded,
 	onTexturedMeshLoaded,
@@ -471,5 +472,70 @@ describe('configureTexturedMaterial vertex colours', () => {
 		configureTexturedMaterial(material);
 		expect(material.transparent).toBe(true);
 		expect(material.opacity).toBe(0.25);
+	});
+});
+
+describe('createMeshRequestLimiter', () => {
+	it('passes the first perPass requests through and queues the rest', () => {
+		const limiter = createMeshRequestLimiter((name) => `geo:${name}`);
+		expect(limiter.request('a')).toBe('geo:a');
+		expect(limiter.request('b')).toBe('geo:b');
+		expect(limiter.request('c')).toBe('geo:c');
+		expect(limiter.request('d')).toBe('geo:d');
+		// Default perPass is 4; the 5th distinct name lands in the queue.
+		expect(limiter.request('e')).toBe(null);
+		limiter.dispose();
+	});
+
+	it('flushes queued names on timer ticks, perFlush at a time', () => {
+		vi.useFakeTimers();
+		const requested: string[] = [];
+		const limiter = createMeshRequestLimiter(
+			(name) => {
+				requested.push(name);
+				return name;
+			},
+			2,
+			2
+		);
+		for (const name of ['a', 'b', 'c', 'd', 'e']) limiter.request(name);
+		expect(requested).toEqual(['a', 'b']);
+		vi.runOnlyPendingTimers();
+		expect(requested).toEqual(['a', 'b', 'c', 'd']);
+		vi.runOnlyPendingTimers();
+		expect(requested).toEqual(['a', 'b', 'c', 'd', 'e']);
+		// Queue drained: no further timer armed.
+		vi.runOnlyPendingTimers();
+		expect(requested).toHaveLength(5);
+		limiter.dispose();
+		vi.useRealTimers();
+	});
+
+	it('resetPass restores the per-pass budget for the next rebuild', () => {
+		const limiter = createMeshRequestLimiter((name) => name, 1, 1);
+		expect(limiter.request('a')).toBe('a');
+		expect(limiter.request('b')).toBe(null);
+		limiter.resetPass();
+		expect(limiter.request('c')).toBe('c');
+		limiter.dispose();
+	});
+
+	it('dispose drops pending names and clears the timer', () => {
+		vi.useFakeTimers();
+		const requested: string[] = [];
+		const limiter = createMeshRequestLimiter(
+			(name) => {
+				requested.push(name);
+				return name;
+			},
+			1,
+			4
+		);
+		limiter.request('a');
+		limiter.request('b');
+		limiter.dispose();
+		vi.advanceTimersByTime(10);
+		expect(requested).toEqual(['a']);
+		vi.useRealTimers();
 	});
 });

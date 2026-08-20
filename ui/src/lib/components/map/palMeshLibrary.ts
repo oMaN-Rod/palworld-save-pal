@@ -12,7 +12,8 @@ import manifest from '../../../../../data/json/pal_meshes.json';
 import {
 	configureTexturedMaterial,
 	createMeshoptGLTFLoader,
-	dequantizeToFloat32
+	dequantizeToFloat32,
+	disposeMaterialTextures
 } from './meshLibrary';
 import { resolvePalModelKey } from './palModelKey';
 
@@ -28,6 +29,36 @@ const cache = new Map<string, THREE.Object3D>();
 const inflight = new Set<string>();
 const failed = new Set<string>();
 const listeners = new Set<() => void>();
+const lastTouch = new Map<string, number>();
+
+/** Drops cached pal models not in `active` (see meshUsage.ts) whose last
+ * request is older than `maxAgeMs`. Live clones share geometry and materials
+ * with the cached root, so anything a layer still draws must stay pinned --
+ * the pal layer registers its model keys after every rebuild. */
+export function sweepPalMeshes(
+	active: ReadonlySet<string>,
+	maxAgeMs: number,
+	now: number = Date.now()
+): { swept: number } {
+	let swept = 0;
+	for (const [key, root] of cache) {
+		if (active.has(key)) continue;
+		const touched = lastTouch.get(key) ?? 0;
+		if (now - touched < maxAgeMs) continue;
+		root.traverse((child) => {
+			const mesh = child as THREE.Mesh;
+			if (!mesh.isMesh) return;
+			mesh.geometry.dispose();
+			for (const mat of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
+				disposeMaterialTextures(mat);
+			}
+		});
+		cache.delete(key);
+		lastTouch.delete(key);
+		swept += 1;
+	}
+	return { swept };
+}
 
 // Pal models declare EXT_meshopt_compression in extensionsRequired, and glTF
 // requires loaders to reject assets whose required extensions they cannot
@@ -44,9 +75,13 @@ const manifestHas = (key: string) => key in MANIFEST;
 // gave them ("Anubis", "BOSS_KingWhale_Otomo"); resolving first is what lets two
 // Pals sharing a model share one download and one recorded failure. A key that
 // resolves to nothing still needs a stable identity, hence the fallback.
-function identity(rawKey: string): string {
+//
+// Exported so layers can register cache keys with meshUsage's active sets --
+// the sweeper compares against these, not the raw save keys.
+export function palMeshIdentity(rawKey: string): string {
 	return resolvePalModelKey(rawKey, manifestHas) ?? rawKey.toLowerCase();
 }
+const identity = palMeshIdentity;
 
 // Real-artifact tests override baseUrl with an absolute origin: Node's fetch has
 // no document/location base and cannot resolve a root-relative URL.
@@ -76,7 +111,10 @@ function settle(key: string): void {
 export function requestPalMesh(rawKey: string, baseUrl: string = MODEL_URL): THREE.Object3D | null {
 	const key = identity(rawKey);
 	const hit = cache.get(key);
-	if (hit) return hit;
+	if (hit) {
+		lastTouch.set(key, Date.now());
+		return hit;
+	}
 	if (inflight.has(key) || failed.has(key)) return null;
 
 	const url = palModelUrl(key, baseUrl);
@@ -140,6 +178,7 @@ export function requestPalMesh(rawKey: string, baseUrl: string = MODEL_URL): THR
 				}
 
 				cache.set(key, root);
+				lastTouch.set(key, Date.now());
 				settle(key);
 			},
 			undefined,

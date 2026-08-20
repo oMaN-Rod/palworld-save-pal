@@ -27,6 +27,76 @@ const CM_PER_UNIT = 100;
 const cache = new Map<string, THREE.BufferGeometry>();
 const inflight = new Set<string>();
 const failed = new Set<string>();
+// Last-request wall time per cache entry, feeding the sweep below.
+const lastTouch = new Map<string, number>();
+
+// Disposes GPU resources owned by a cached entry. Only ever called by the
+// sweeper on entries no active layer references (see meshUsage.ts); three
+// re-uploads a geometry transparently if a stale reference ever outlives the
+// sweep, so this cannot hard-break a render, merely cost a re-upload.
+function disposeGeometry(geometry: THREE.BufferGeometry): void {
+	geometry.dispose();
+}
+
+export function disposeMaterialTextures(material: THREE.Material): void {
+	const std = material as THREE.MeshStandardMaterial;
+	for (const texture of [std.map, std.emissiveMap, std.normalMap, std.roughnessMap]) {
+		texture?.dispose();
+	}
+	material.dispose();
+}
+
+export function disposeTexturedBundle(bundle: TexturedMeshBundle): void {
+	bundle.geometry.dispose();
+	if (Array.isArray(bundle.material)) {
+		for (const material of bundle.material) disposeMaterialTextures(material);
+	} else {
+		disposeMaterialTextures(bundle.material);
+	}
+}
+
+export type MeshSweepResult = { swept: number };
+
+/** Drops cache entries not in `active` whose last request is older than
+ * `maxAgeMs`, disposing their GPU resources. Entries a layer is drawing are
+ * pinned by meshUsage's active sets and never touched; an evicted mesh is
+ simply reloaded (browser HTTP cache) the next time a rebuild needs it. */
+export function sweepMeshLibrary(
+	active: ReadonlySet<string>,
+	maxAgeMs: number,
+	now: number = Date.now()
+): MeshSweepResult {
+	let swept = 0;
+	for (const [name, geometry] of cache) {
+		if (active.has(name)) continue;
+		const touched = lastTouch.get(name) ?? 0;
+		if (now - touched < maxAgeMs) continue;
+		disposeGeometry(geometry);
+		cache.delete(name);
+		lastTouch.delete(name);
+		swept += 1;
+	}
+	return { swept };
+}
+
+/** The textured-cache sibling of sweepMeshLibrary. */
+export function sweepTexturedMeshLibrary(
+	active: ReadonlySet<string>,
+	maxAgeMs: number,
+	now: number = Date.now()
+): MeshSweepResult {
+	let swept = 0;
+	for (const [name, bundle] of texturedCache) {
+		if (active.has(name)) continue;
+		const touched = texturedLastTouch.get(name) ?? 0;
+		if (now - touched < maxAgeMs) continue;
+		disposeTexturedBundle(bundle);
+		texturedCache.delete(name);
+		texturedLastTouch.delete(name);
+		swept += 1;
+	}
+	return { swept };
+}
 // Scoped by request directory: the layers sharing this cache have very different
 // mesh sets, and each settle wakes a listener into a full rebuild. Unscoped, 79
 // of 82 structure rebuilds during one base load came from meshes that layer
@@ -47,6 +117,54 @@ function gltfLoader(): GLTFLoader {
 		loader.setMeshoptDecoder(MeshoptDecoder);
 	}
 	return loader;
+}
+
+// Caps how many glTF decodes a layer starts per rebuild pass. glTF parse +
+// meshopt decode run on the main thread, so a rebuild that wants dozens of new
+// meshes at once is a multi-frame freeze -- worst right when 3D mounts on a
+// page load. Requests past the per-pass cap queue and flush per-tick on timers;
+// a queued name simply reads "still loading" (null return) until its flush,
+// and the cache's settle notification drives the next rebuild.
+export function createMeshRequestLimiter<T>(
+	request: (name: string) => T | null,
+	perPass = 4,
+	perFlush = 4
+): { request: (name: string) => T | null; resetPass(): void; dispose(): void } {
+	let remaining = perPass;
+	const pending = new Set<string>();
+	let timer: ReturnType<typeof setTimeout> | null = null;
+
+	function flush() {
+		timer = null;
+		for (let i = 0; i < perFlush && pending.size > 0; i++) {
+			const name = pending.values().next().value as string;
+			pending.delete(name);
+			request(name);
+		}
+		if (pending.size > 0) timer = setTimeout(flush, 0);
+	}
+
+	return {
+		request(name) {
+			if (remaining > 0) {
+				remaining--;
+				return request(name);
+			}
+			pending.add(name);
+			if (timer === null) timer = setTimeout(flush, 0);
+			return null;
+		},
+		resetPass() {
+			remaining = perPass;
+		},
+		dispose() {
+			if (timer !== null) {
+				clearTimeout(timer);
+				timer = null;
+			}
+			pending.clear();
+		}
+	};
 }
 
 // Pal and map-object glbs need meshopt but no Draco. Shared so the two callers'
@@ -190,6 +308,7 @@ const texturedCache = new Map<string, TexturedMeshBundle>();
 const texturedInflight = new Set<string>();
 const texturedFailed = new Set<string>();
 const texturedListeners = new Set<Listener>();
+const texturedLastTouch = new Map<string, number>();
 
 export function onTexturedMeshLoaded(cb: () => void, dir?: string): () => void {
 	const listener: Listener = { cb, dir };
@@ -217,7 +336,10 @@ export function requestTexturedMesh(
 	dir: string = MODEL_URL
 ): TexturedMeshBundle | null {
 	const hit = texturedCache.get(name);
-	if (hit) return hit;
+	if (hit) {
+		texturedLastTouch.set(name, Date.now());
+		return hit;
+	}
 	if (texturedInflight.has(name) || texturedFailed.has(name)) return null;
 
 	texturedInflight.add(name);
@@ -252,6 +374,7 @@ export function requestTexturedMesh(
 			}
 			bundle.geometry.scale(CM_PER_UNIT, CM_PER_UNIT, CM_PER_UNIT);
 			texturedCache.set(name, bundle);
+			texturedLastTouch.set(name, Date.now());
 			settleTextured(name, dir);
 		},
 		undefined,
@@ -266,7 +389,10 @@ export function requestTexturedMesh(
 
 export function requestMesh(name: string, dir: string = MODEL_URL): THREE.BufferGeometry | null {
 	const hit = cache.get(name);
-	if (hit) return hit;
+	if (hit) {
+		lastTouch.set(name, Date.now());
+		return hit;
+	}
 	if (inflight.has(name) || failed.has(name)) return null;
 
 	inflight.add(name);
@@ -297,6 +423,7 @@ export function requestMesh(name: string, dir: string = MODEL_URL): THREE.Buffer
 			if (merged) {
 				merged.scale(CM_PER_UNIT, CM_PER_UNIT, CM_PER_UNIT);
 				cache.set(name, merged);
+				lastTouch.set(name, Date.now());
 			} else {
 				// Blacklisting is permanent, so say why once rather than leaving a
 				// structure silently drawn as a proxy box.

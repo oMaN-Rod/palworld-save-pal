@@ -8,6 +8,7 @@
 	import { isWatchtower } from '$components/map/fastTravel';
 	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
 	import { MAP_OBJECT_SCALE_DEFAULT } from '$components/map/mapObjectSize';
+	import { MAP_QUALITY_DEFAULT } from '$components/map/mapQuality';
 	import { clampMapOpacity } from '$components/map/mapOpacity';
 	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
 	import MapLayerPanel from '$components/map/MapLayerPanel.svelte';
@@ -83,7 +84,10 @@
 	let MapComponent = $state<typeof import('$components/map/Map.svelte').default | undefined>(
 		undefined
 	);
-	mapLoader.then((mod) => (MapComponent = mod.default));
+	// A rejected import must not leave the page on "Initializing Map" forever:
+	// surface it with a retry instead.
+	let mapLoadFailed = $state(false);
+	mapLoader.then((mod) => (MapComponent = mod.default)).catch(() => (mapLoadFailed = true));
 
 	// The editing surfaces stay out of the prerendered public entry: this route is
 	// rendered in Node at build time and shipped to visitors with no save at all.
@@ -701,6 +705,10 @@
 				onToggleFastTravel={saveLoaded ? handleToggleFastTravel : undefined}
 				onToggleRelic={saveLoaded ? handleToggleRelic : undefined}
 				onTogglePalAutoFollow={() => (mapOptions.palAutoFollow = !mapOptions.palAutoFollow)}
+				mapQuality={mapOptions.mapQuality ?? MAP_QUALITY_DEFAULT}
+				onMapQualityChange={(quality) => (mapOptions.mapQuality = quality)}
+				showFps={mapOptions.showFps ?? false}
+				onToggleShowFps={() => (mapOptions.showFps = !(mapOptions.showFps ?? false))}
 				onPalSizeChange={(scale: number) => (mapOptions.palSize = scale)}
 				onFastTravelSizeChange={(scale: number) => (mapOptions.fastTravelSize = scale)}
 				onWatchtowerSizeChange={(scale: number) => (mapOptions.watchtowerSize = scale)}
@@ -715,6 +723,15 @@
 					debouncedValidate();
 				}}
 			/>
+		{:else if mapLoadFailed}
+			<div
+				class="bg-surface-900/95 absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 rounded-lg p-6 shadow-lg"
+			>
+				<p>{m.map_component_failed()}</p>
+				<Button variant="primary" onclick={() => window.location.reload()}>
+					{m.retry()}
+				</Button>
+			</div>
 		{:else}
 			<Loading label={m.initializing_entity({ entity: m.map() })} icon="tabler:map" iconSize={24} />
 		{/if}

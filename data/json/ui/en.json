@@ -636,6 +636,14 @@
   "map_meta_title": "Palworld Interactive Map - Bases, Bosses and Fast Travel",
   "map_opacity": "Map opacity",
   "map_options": "Map Options",
+  "map_quality": "3D quality",
+  "map_quality_auto": "Auto",
+  "map_quality_very_low": "Very Low",
+  "map_quality_low": "Low",
+  "map_quality_medium": "Medium",
+  "map_quality_high": "High",
+  "map_quality_very_high": "Very High",
+  "map_show_fps": "Show FPS counter",
   "mark_all_current_complete": "Mark All Current as Complete",
   "mark_complete": "Mark Complete",
   "mark_complete_confirm": "Are you sure you want to mark all {count} current {type} missions as complete?",
@@ -1200,5 +1208,7 @@
   "world_name": "World Name",
   "xbox_game_pass": "Xbox Game Pass",
   "xbox_game_pass_description": "Xbox Game Pass: container.index file",
-  "zoom_in_out": "Zoom In/Out"
+  "zoom_in_out": "Zoom In/Out",
+  "map_component_failed": "The map failed to load.",
+  "retry": "Retry"
 }

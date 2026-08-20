@@ -11,6 +11,7 @@ import { ueYawToThreeQuaternion } from './coords3d';
 import { DEFAULT_STRUCTURE_FOOTPRINT, lookupFootprint } from './features';
 import { materialOpacities } from './mapColors.svelte';
 import {
+	createMeshRequestLimiter,
 	meshFailed,
 	onMeshLoaded,
 	onTexturedMeshLoaded,
@@ -22,6 +23,7 @@ import {
 	type TexturedMeshBundle
 } from './meshLibrary';
 import { partLocalMatrix, type MeshPart } from './meshPlacement';
+import { clearActiveMeshes, setActiveMeshes } from './meshUsage';
 import { decodePickBytes } from './pickEncoding';
 import { PickIndex } from './pickIndex';
 import { buildArchetypeGeometry } from './proxyGeometry';
@@ -228,6 +230,9 @@ export type StructureLayer = CustomLayerInterface & {
 	// The camera-only path a pan/zoom/pitch takes instead of a full update():
 	// recomposes matrices without rebuilding groups, geometry or materials.
 	setVerticalScale(verticalScale: number): void;
+	/** Quality lever: force every structure to its proxy box (low tiers) or
+	 * back to full glbs, replaying the last update's arguments. */
+	setForceProxy(force: boolean): void;
 	setHover(key: string | null): void;
 	requestPick(x: number, y: number, cb: (key: string | null) => void): void;
 	dispose(): void;
@@ -248,6 +253,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	const pickIndex = new PickIndex();
 	let hoverKey: string | null = null;
 	const color = new THREE.Color();
+	// render() runs every painted frame; allocating the projection matrix there
+	// feeds the GC exactly when smoothness matters.
+	const projectionScratch = new THREE.Matrix4();
 
 	let lastArgs: Parameters<StructureLayer['update']> | null = null;
 	let rebuildQueued = false;
@@ -255,6 +263,15 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 	let isWebGL2 = false;
 	let pickTarget: THREE.WebGLRenderTarget | null = null;
 	let pendingPick: { x: number; y: number; cb: (key: string | null) => void } | null = null;
+	// Quality lever: low tiers draw every structure as its proxy box, skipping
+	// the glb loads entirely.
+	let forceProxy = false;
+	// Decode-burst caps: a save with many distinct structure types would
+	// otherwise start every glb decode in one update() pass (see limiter doc).
+	const meshLimiter = createMeshRequestLimiter((name) => requestMesh(name, STRUCTURE_MODEL_DIR));
+	const texturedLimiter = createMeshRequestLimiter((name) =>
+		requestTexturedMesh(name, STRUCTURE_MODEL_DIR)
+	);
 	const pickBuffer = new Uint8Array(4);
 	const pickMaterial = new THREE.ShaderMaterial({
 		glslVersion: THREE.GLSL3,
@@ -381,6 +398,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 		update(structures, footprints, area, verticalScale, textured = false) {
 			lastArgs = [structures, footprints, area, verticalScale, textured];
 			if (!map || disposed) return;
+			meshLimiter.resetPass();
+			texturedLimiter.resetPass();
 			clearGroups();
 			const center = map.getCenter();
 			const merc = MercatorCoordinate.fromLngLat([center.lng, center.lat], 0);
@@ -391,6 +410,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			const meshBuckets = new Map<string, MeshBucket>();
 			const proxyBuckets = new Map<string, ProxyBucket>();
 			const opacities = materialOpacities();
+			const texturedNames = new Set<string>();
 
 			function addProxy(
 				s: BaseStructure,
@@ -419,6 +439,11 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				const opacity = opacities[fp.material ?? ''] ?? 1;
 				const parts = structureParts(s.map_object_id);
 
+				if (forceProxy) {
+					addProxy(s, fp, colorHex, opacity, 'quality tier forces proxy');
+					continue;
+				}
+
 				if (parts && parts.length > 0) {
 					// Resolve every part before committing to a render path: a mesh part
 					// with no size data can't stand in for the whole structure, so a
@@ -428,7 +453,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 					let failedMesh: string | null = null;
 					let anyLoading = false;
 					for (const part of parts) {
-						const geom = requestMesh(part.mesh);
+						const geom = meshLimiter.request(part.mesh);
 						if (geom) {
 							resolvedParts.push(part);
 						} else if (meshFailed(part.mesh)) {
@@ -529,7 +554,7 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			}
 
 			for (const b of meshBuckets.values()) {
-				const geom = requestMesh(b.mesh);
+				const geom = meshLimiter.request(b.mesh);
 				if (!geom) continue;
 				const baked = new Float32Array(b.items.length * STRUCTURE_BAKE_STRIDE);
 				const partMatrices: THREE.Matrix4[] = [];
@@ -541,8 +566,9 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				// while it is still resolving this bucket renders flat-coloured, and
 				// onTexturedMeshLoaded requeues a rebuild once it lands.
 				if (textured) {
-					const bundle = requestTexturedMesh(b.mesh);
+					const bundle = texturedLimiter.request(b.mesh);
 					if (bundle) {
+						texturedNames.add(b.mesh);
 						const { inst, keys } = addTexturedInstancedGroup(bundle, b.items.length, b.opacity);
 						b.items.forEach(({ s }, i) => {
 							applyBakedMatrix(inst, i, baked, cmToMerc, partMatrices[i]);
@@ -583,8 +609,24 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 				finalizeGroup(inst, keys, b.colorHex, baked, null);
 			}
 
+			// Pin what this update drew against the meshLibrary sweepers, so
+			// out-of-sight structure glbs can be freed (and reloaded on return).
+			setActiveMeshes(
+				'structures',
+				Array.from(meshBuckets.values(), (b) => b.mesh)
+			);
+			setActiveMeshes('structures-textured', texturedNames);
+
 			applyHover();
 			map.triggerRepaint();
+		},
+
+		// Quality lever: re-renders from the last update's arguments with every
+		// structure either forced to its proxy box (true) or back to glbs.
+		setForceProxy(force) {
+			if (force === forceProxy) return;
+			forceProxy = force;
+			if (lastArgs) layer.update(...lastArgs);
 		},
 
 		// The camera-only counterpart to update(): recomposes matrices from baked
@@ -613,8 +655,8 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 
 		render(_gl, args) {
 			if (!renderer) return;
-			const m = new THREE.Matrix4().fromArray(args.defaultProjectionData.mainMatrix);
-			camera.projectionMatrix = m;
+			// Reused across frames: this runs every painted frame of a pan.
+			camera.projectionMatrix = projectionScratch.fromArray(args.defaultProjectionData.mainMatrix);
 			renderer.resetState();
 			// The pick pass shares MapLibre's context, so it runs here rather than from a
 			// standalone call: issuing draws and a readPixels outside MapLibre's own render
@@ -639,11 +681,16 @@ export function createStructureLayer(opts: { id: string }): StructureLayer {
 			disposed = true;
 			unsubscribeMeshLoaded();
 			unsubscribeTexturedMeshLoaded();
+			meshLimiter.dispose();
+			texturedLimiter.dispose();
 			pendingPick = null;
 			pickTarget?.dispose();
 			pickTarget = null;
 			pickMaterial.dispose();
 			clearGroups();
+			// Unpin the last drawn meshes so a swept map can reclaim them.
+			clearActiveMeshes('structures');
+			clearActiveMeshes('structures-textured');
 			// renderer is the module-level shared renderer (see getSharedRenderer) --
 			// it is intentionally not disposed here, only released by this instance.
 			renderer = null;

@@ -27,6 +27,7 @@
 		scaleToSlider as objectScaleToSlider
 	} from './mapObjectSize';
 	import { MAP_OPACITY_MIN } from './mapOpacity';
+	import { MAP_QUALITY_LEVELS, type MapQualitySetting } from './mapQuality';
 
 	let {
 		types,
@@ -44,6 +45,10 @@
 		ontoggledetailed,
 		ontoggletextured,
 		ontogglepalautofollow,
+		mapQuality,
+		ontogglemapquality,
+		showFps,
+		ontogglefps,
 		palSize,
 		fastTravelSize,
 		watchtowerSize,
@@ -74,6 +79,10 @@
 		ontoggledetailed: () => void;
 		ontoggletextured: () => void;
 		ontogglepalautofollow: () => void;
+		mapQuality: MapQualitySetting;
+		ontogglemapquality: (quality: MapQualitySetting) => void;
+		showFps: boolean;
+		ontogglefps: () => void;
 		palSize: number;
 		fastTravelSize: number;
 		watchtowerSize: number;
@@ -87,6 +96,17 @@
 		onPalHeightChange: (heightCm: number) => void;
 		onMapOpacityChange: (opacity: number) => void;
 	} = $props();
+
+	const QUALITY_LABELS: Record<MapQualitySetting, () => string> = {
+		auto: () => m.map_quality_auto(),
+		'very-low': () => m.map_quality_very_low(),
+		low: () => m.map_quality_low(),
+		medium: () => m.map_quality_medium(),
+		high: () => m.map_quality_high(),
+		'very-high': () => m.map_quality_very_high()
+	};
+
+	const QUALITY_ORDER: MapQualitySetting[] = ['auto', ...MAP_QUALITY_LEVELS];
 
 	const ctx = getMapContext();
 
@@ -292,6 +312,22 @@
 	role="group"
 	aria-label={title}
 >
+	<label
+		class="border-surface-800 flex items-center justify-between gap-1.5 border-b py-1.5 text-xs whitespace-nowrap"
+	>
+		<span>{m.map_quality()}</span>
+		<select
+			class="bg-surface-800 border-surface-700 rounded border px-1.5 py-0.5 text-xs"
+			aria-label={m.map_quality()}
+			value={mapQuality}
+			onchange={(e) => ontogglemapquality(e.currentTarget.value as MapQualitySetting)}
+		>
+			{#each QUALITY_ORDER as option (option)}
+				<option value={option}>{QUALITY_LABELS[option]()}</option>
+			{/each}
+		</select>
+	</label>
+	{@render toggleRow(m.map_show_fps(), showFps, ontogglefps)}
 	{#if structureSections}
 		{@render toggleRow(m.detailed_structures(), detailed, ontoggledetailed)}
 	{/if}

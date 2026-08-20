@@ -25,6 +25,9 @@ const { models, listeners } = vi.hoisted(() => ({
 
 vi.mock('./palMeshLibrary', () => ({
 	requestPalMesh: (key: string) => models.get(key) ?? null,
+	// The real identity lowercases unresolved keys; the test keys are already
+	// lowercase, so a passthrough is faithful here.
+	palMeshIdentity: (key: string) => key.toLowerCase(),
 	onPalMeshLoaded: (cb: () => void) => {
 		listeners.add(cb);
 		return () => listeners.delete(cb);

@@ -9,6 +9,7 @@ import * as THREE from 'three';
 import { ueQuatToThree } from './coords3d';
 import { lngLatToPixel, pixelToLngLat } from './mercator';
 import { onMeshLoaded, requestMesh } from './meshLibrary';
+import { clearActiveMeshes, setActiveMeshes } from './meshUsage';
 import type { SceneryBucketData, SceneryRun, SceneryStream } from './sceneryFormat';
 import {
 	createSceneryMaterial,
@@ -202,10 +203,10 @@ export function composeInstanceMatrices(
 	cmToMerc: number,
 	pixelsPerMercatorUnit: number,
 	target: Float32Array,
-	offset: number
+	offset: number,
+	minPixels: number = SCENERY_MIN_PIXELS
 ): number {
-	const minScale =
-		SCENERY_MIN_PIXELS / (2 * geometryRadius * Math.abs(cmToMerc) * pixelsPerMercatorUnit);
+	const minScale = minPixels / (2 * geometryRadius * Math.abs(cmToMerc) * pixelsPerMercatorUnit);
 	let written = 0;
 
 	for (let o = 0; o < baked.length; o += BAKED_STRIDE) {
@@ -256,6 +257,9 @@ export type SceneryLayer = CustomLayerInterface & {
 	// next paint, so no InstancedMesh rebuild is needed.
 	setTint(mosaic: TintMosaic | null): void;
 	setOpacity(opacity: number): void;
+	/** Quality lever: raises the screen-size cull so low tiers draw fewer, and
+	 * high tiers draw more, scenery instances. Triggers a rebuild. */
+	setMinPixels(minPixels: number): void;
 	dispose(): void;
 	visibleBucketsForTest(bounds: ViewBounds): number[];
 };
@@ -272,6 +276,44 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 	let tintTexture: THREE.Texture | null = null;
 	let disposed = false;
 	let rebuildQueued = false;
+	// The live screen-size cull; SCENERY_MIN_PIXELS is the default tier.
+	let minPixels = SCENERY_MIN_PIXELS;
+	// Spreading gltf decodes: glTF parse + meshopt decode run on the main
+	// thread, and a rebuild that reaches a dense area can otherwise want a
+	// dozen meshes at once -- a multi-frame freeze, worst in Firefox. At most
+	// MESH_REQUESTS_PER_PASS start per rebuild; the rest queue and flush on
+	// timer ticks. A queued mesh simply reads "loading" for that pass (its
+	// requestMesh returns null), and its settle drives the next rebuild.
+	const MESH_REQUESTS_PER_PASS = 4;
+	const MESH_REQUESTS_PER_FLUSH = 4;
+	let requestsThisPass = MESH_REQUESTS_PER_PASS;
+	const pendingMeshNames = new Set<string>();
+	let meshFlushTimer: ReturnType<typeof setTimeout> | null = null;
+
+	function flushMeshRequests() {
+		meshFlushTimer = null;
+		for (let i = 0; i < MESH_REQUESTS_PER_FLUSH && pendingMeshNames.size > 0; i++) {
+			const name = pendingMeshNames.values().next().value;
+			if (name === undefined) break;
+			pendingMeshNames.delete(name);
+			requestMesh(name, MODEL_DIR);
+		}
+		if (pendingMeshNames.size > 0) {
+			meshFlushTimer = setTimeout(flushMeshRequests, 0);
+		}
+	}
+
+	function requestSceneryMesh(name: string): THREE.BufferGeometry | null {
+		if (requestsThisPass > 0) {
+			requestsThisPass--;
+			return requestMesh(name, MODEL_DIR);
+		}
+		pendingMeshNames.add(name);
+		if (meshFlushTimer === null) {
+			meshFlushTimer = setTimeout(flushMeshRequests, 0);
+		}
+		return null;
+	}
 
 	// One InstancedMesh per distinct mesh index, refilled in place across frames
 	// rather than reallocated.
@@ -290,6 +332,10 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 
 	const material = createSceneryMaterial();
 	material.uniforms.uBase.value = new THREE.Color(SCENERY_BASE_COLOR);
+
+	// render() runs every painted frame; allocating the projection matrix there
+	// feeds the GC exactly when smoothness matters.
+	const projectionScratch = new THREE.Matrix4();
 
 	function releaseMesh(inst: THREE.InstancedMesh) {
 		scene.remove(inst);
@@ -406,6 +452,7 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 		lastCmToMerc = cmToMerc;
 		lastPixelsPerMercatorUnit = pixelsPerMercatorUnit;
 		lastBucketIndices = bucketIndices;
+		requestsThisPass = MESH_REQUESTS_PER_PASS;
 
 		// Which visible buckets contribute to each mesh, so the draw-call count
 		// stays per distinct mesh rather than per (bucket x mesh) pair.
@@ -421,9 +468,9 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 
 		for (const [meshIndex, buckets] of bucketsByMesh) {
 			const name = stream.meshes[meshIndex];
-			const geometry = requestMesh(name, MODEL_DIR);
-			// Loading or failed; onMeshLoaded requeues a rebuild. Leave what is
-			// already on screen alone.
+			const geometry = requestSceneryMesh(name);
+			// Loading or queued; onMeshLoaded requeues a rebuild on settle. Leave
+			// what is already on screen alone.
 			if (!geometry) continue;
 
 			if (!geometry.boundingSphere) geometry.computeBoundingSphere();
@@ -444,7 +491,8 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 					cmToMerc,
 					pixelsPerMercatorUnit,
 					target,
-					count
+					count,
+					minPixels
 				);
 			}
 			inst.count = count;
@@ -457,6 +505,14 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			releaseMesh(inst);
 			meshObjects.delete(meshIndex);
 		}
+
+		// Pins the geometries this rebuild drew against the meshLibrary sweeper;
+		// meshes whose every bucket left the viewport drop out and become
+		// collectable (dynamic offload of out-of-sight assets).
+		setActiveMeshes(
+			'scenery',
+			Array.from(bucketsByMesh.keys(), (meshIndex) => stream!.meshes[meshIndex])
+		);
 
 		map.triggerRepaint();
 	}
@@ -505,11 +561,17 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			map?.triggerRepaint();
 		},
 
+		setMinPixels(next) {
+			if (next === minPixels) return;
+			minPixels = next;
+			dirty = true;
+			rebuild();
+		},
+
 		render(_gl, args) {
 			if (!renderer) return;
-			camera.projectionMatrix = new THREE.Matrix4().fromArray(
-				args.defaultProjectionData.mainMatrix
-			);
+			// Reused across frames: this runs every painted frame of a pan.
+			camera.projectionMatrix = projectionScratch.fromArray(args.defaultProjectionData.mainMatrix);
 			renderer.resetState();
 			renderer.render(scene, camera);
 		},
@@ -517,11 +579,18 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 		dispose() {
 			disposed = true;
 			unsubscribeMeshLoaded();
+			if (meshFlushTimer !== null) {
+				clearTimeout(meshFlushTimer);
+				meshFlushTimer = null;
+			}
+			pendingMeshNames.clear();
 			clearGroups();
 			bucketRuns.clear();
 			bakedChunks.clear();
 			material.dispose();
 			tintTexture?.dispose();
+			// Unpin the last drawn meshes so a swept map can reclaim them.
+			clearActiveMeshes('scenery');
 			// Shared across layers: released here, never disposed.
 			renderer = null;
 			map = null;
