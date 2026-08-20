@@ -28,6 +28,7 @@ fn main() {
     let source_dir = PathBuf::from("vendor/lua-5.4.8/src");
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed={}", source_dir.display());
+    println!("cargo:rerun-if-changed=src/shim.c");
     println!("cargo:rerun-if-env-changed=WASI_SDK");
 
     let target = std::env::var("TARGET").expect("cargo sets TARGET");
@@ -46,6 +47,7 @@ fn build_native(source_dir: &Path) {
     }
     // No LUA_USE_* define: Lua then restricts itself to ISO C, which means no
     // dlopen and no readline. That is what we want on every target.
+    build.file("src/shim.c");
     build.compile("lua");
 }
 
@@ -96,6 +98,23 @@ fn build_wasm(source_dir: &Path) {
         assert!(status.success(), "wasi-sdk clang failed on {unit}.c");
         objects.push(object);
     }
+
+    // shim.c isn't a vendored Lua unit, so it's compiled here rather than via LUA_SOURCES,
+    // with matching flags so it lands in the same archive.
+    let shim_object = out_dir.join("shim.o");
+    let status = Command::new(&clang)
+        .arg("--target=wasm32-wasip1")
+        .arg(format!("--sysroot={}", sysroot.display()))
+        .arg(format!("-I{}", source_dir.display()))
+        .args(["-mllvm", "-wasm-enable-sjlj"])
+        .args(["-O2", "-D_WASI_EMULATED_SIGNAL", "-c"])
+        .arg("src/shim.c")
+        .arg("-o")
+        .arg(&shim_object)
+        .status()
+        .unwrap_or_else(|e| panic!("failed to invoke wasi-sdk clang at {}: {e}", clang.display()));
+    assert!(status.success(), "wasi-sdk clang failed on shim.c");
+    objects.push(shim_object);
 
     let archive = out_dir.join("liblua.a");
     // `ar rcs` inserts/replaces members, it never truncates; without removing

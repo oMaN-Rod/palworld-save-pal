@@ -30,6 +30,18 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "clang failed on $unit.c" }
     }
 
+    # The C trampoline: not a vendored Lua unit, so it is compiled separately,
+    # with the same flags, into the same archive. -I points back at the
+    # vendored src directory, which is where "lua.h" actually lives.
+    & "$env:WASI_SDK\bin\clang.exe" `
+        --target=wasm32-wasip1 `
+        "--sysroot=$sysroot" `
+        "-I$src" `
+        -mllvm -wasm-enable-sjlj `
+        -O2 -D_WASI_EMULATED_SIGNAL `
+        -c "$here\src\shim.c" -o "$tmp\shim.o"
+    if ($LASTEXITCODE -ne 0) { throw "clang failed on shim.c" }
+
     $objects = Get-ChildItem "$tmp\*.o" | ForEach-Object { $_.FullName }
     # ar rcs inserts/replaces members, it never truncates; without removing the
     # archive first, a unit dropped from the unit list would leave its stale

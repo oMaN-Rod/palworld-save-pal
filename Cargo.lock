@@ -3520,8 +3520,10 @@ dependencies = [
  "base64 0.22.1",
  "chrono",
  "futures-util",
+ "psp-app",
  "psp-core",
  "psp-db",
+ "psp-plugin",
  "serde",
  "serde_json",
  "tempfile",
@@ -3590,12 +3592,15 @@ dependencies = [
 name = "psp-plugin"
 version = "1.3.3"
 dependencies = [
+ "chrono",
  "pretty_assertions",
  "psp-core",
  "psp-lua-sys",
  "serde",
  "serde_json",
  "thiserror 2.0.18",
+ "uuid",
+ "wasm-bindgen-test",
 ]
 
 [[package]]

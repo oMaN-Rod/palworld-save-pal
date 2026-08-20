@@ -1,7 +1,13 @@
-//! The safe layer over `psp-lua-sys`: sandbox, capabilities, host API, run loop.
-//!
-//! Nothing in this crate may panic. It links into `psp-web`, where `panic =
-//! abort` turns a panic into a dead module with no error frame, so every
-//! fallible path returns a status instead.
+//! Nothing in this crate may panic: it links into `psp-web`, where `panic =
+//! abort` turns a panic into a dead module with no error frame.
 
-pub mod state;
+pub mod context;
+pub mod host;
+pub mod manifest;
+pub mod runtime;
+pub mod sandbox;
+pub mod status;
+pub mod syntax;
+
+pub use host::api_def::{ApiDefinition, api_definition};
+pub use host::api_meta::lua_meta;

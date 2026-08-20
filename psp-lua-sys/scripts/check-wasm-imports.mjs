@@ -11,8 +11,10 @@ if (!path) {
 const module = new WebAssembly.Module(fs.readFileSync(path));
 const imports = WebAssembly.Module.imports(module);
 
-// wasm-bindgen injects these before its CLI post-processing removes them.
-const allowed = /^__wbindgen/;
+// For --target web, every wasm-bindgen import is satisfied by the JS glue
+// file emitted alongside the module (module name ends in "_bg.js"); anything
+// imported from another module (env, wasi_snapshot_preview1, ...) is foreign.
+const allowed = /_bg\.js$/;
 const foreign = imports.filter((i) => !allowed.test(i.module));
 
 for (const i of imports) console.log(`  ${i.module}.${i.name} (${i.kind})`);

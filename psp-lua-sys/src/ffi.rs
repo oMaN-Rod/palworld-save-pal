@@ -59,6 +59,13 @@ extern "C" {
         ctx: isize,
         k: *const c_void,
     ) -> c_int;
+    pub fn lua_callk(
+        state: *mut lua_State,
+        nargs: c_int,
+        nresults: c_int,
+        ctx: isize,
+        k: *const c_void,
+    );
 
     pub fn lua_tolstring(state: *mut lua_State, index: c_int, len: *mut usize) -> *const c_char;
     pub fn lua_tointegerx(state: *mut lua_State, index: c_int, isnum: *mut c_int) -> i64;
@@ -82,6 +89,13 @@ pub unsafe fn lua_pcall(
     errfunc: c_int,
 ) -> c_int {
     lua_pcallk(state, nargs, nresults, errfunc, 0, std::ptr::null())
+}
+
+/// Unlike `lua_pcall`, an error raised by the callee here is not caught — it
+/// propagates by `longjmp` to whatever protection is active in the caller.
+#[inline]
+pub unsafe fn lua_call(state: *mut lua_State, nargs: c_int, nresults: c_int) {
+    lua_callk(state, nargs, nresults, 0, std::ptr::null())
 }
 
 /// `lua_tostring` is a macro in C; this is its expansion.
@@ -140,19 +154,15 @@ extern "C" {
     pub fn lua_setglobal(state: *mut lua_State, name: *const c_char);
 }
 
-// Remaining Lua value type tags, from lua.h.
 pub const LUA_TNONE: c_int = -1;
 pub const LUA_TLIGHTUSERDATA: c_int = 2;
 pub const LUA_TUSERDATA: c_int = 7;
 pub const LUA_TTHREAD: c_int = 8;
 
-// Remaining hook masks, from lua.h. Only LUA_MASKCOUNT is used today; the rest
-// are declared so a mask is never assembled from a magic number.
 pub const LUA_MASKCALL: c_int = 1 << 0;
 pub const LUA_MASKRET: c_int = 1 << 1;
 pub const LUA_MASKLINE: c_int = 1 << 2;
 
-// Registry sentinels, from lauxlib.h and lua.h.
 pub const LUA_NOREF: c_int = -2;
 pub const LUA_REFNIL: c_int = -1;
 pub const LUA_RIDX_GLOBALS: i64 = 2;
@@ -161,6 +171,7 @@ extern "C" {
     pub fn lua_newstate(f: lua_Alloc, ud: *mut c_void) -> *mut lua_State;
     pub fn lua_atpanic(state: *mut lua_State, panicf: lua_CFunction) -> lua_CFunction;
     pub fn lua_sethook(state: *mut lua_State, func: Option<lua_Hook>, mask: c_int, count: c_int);
+    pub fn lua_gethook(state: *mut lua_State) -> Option<lua_Hook>;
     /// Raises the value on top of the stack as an error. Never returns.
     pub fn lua_error(state: *mut lua_State) -> c_int;
 
@@ -210,9 +221,8 @@ extern "C" {
     pub fn luaL_unref(state: *mut lua_State, t: c_int, r: c_int);
     pub fn luaL_tolstring(state: *mut lua_State, index: c_int, len: *mut usize) -> *const c_char;
 
-    /// `mode` selects which chunk forms are accepted: `b` binary, `t` text,
-    /// `bt` both. The sandbox always passes `t`, so precompiled bytecode --
-    /// which is not verified and can escape the sandbox -- is refused.
+    /// The sandbox always passes mode `t`, refusing precompiled bytecode, which is
+    /// unverified and can escape the sandbox.
     pub fn luaL_loadbufferx(
         state: *mut lua_State,
         buff: *const c_char,
@@ -222,87 +232,58 @@ extern "C" {
     ) -> c_int;
 }
 
-/// `lua_upvalueindex` is a macro in C; this is its expansion.
 #[inline]
 pub const fn lua_upvalueindex(i: c_int) -> c_int {
     LUA_REGISTRYINDEX - i
 }
 
-/// `LUA_EXTRASPACE` from luaconf.h: one pointer of scratch memory Lua reserves
-/// immediately before every `lua_State`, for the host to use as it likes.
+/// One pointer of scratch memory Lua reserves immediately before every
+/// `lua_State`; the size must match `LUA_EXTRASPACE` in luaconf.h.
 pub const LUA_EXTRASPACE: usize = std::mem::size_of::<*mut c_void>();
 
-/// `lua_getextraspace` is a macro in C; this is its expansion.
-///
-/// The sandbox stores one pointer here so the count hook — which receives only
-/// the state — can reach its interrupt record without touching the registry.
-///
-/// # Safety
-/// `state` must be a live state produced by `lua_newstate`/`luaL_newstate`.
 #[inline]
 pub unsafe fn lua_getextraspace(state: *mut lua_State) -> *mut c_void {
     (state as *mut u8).sub(LUA_EXTRASPACE) as *mut c_void
 }
 
-/// `lua_newtable` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live with room for one more stack slot.
 #[inline]
 pub unsafe fn lua_newtable(state: *mut lua_State) {
     lua_createtable(state, 0, 0);
 }
 
-/// `lua_pushcfunction` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live with room for one more stack slot.
 #[inline]
 pub unsafe fn lua_pushcfunction(state: *mut lua_State, f: lua_CFunction) {
     lua_pushcclosure(state, f, 0);
 }
 
-/// `lua_tonumber` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live and `index` a valid stack index.
 #[inline]
 pub unsafe fn lua_tonumber(state: *mut lua_State, index: c_int) -> f64 {
     lua_tonumberx(state, index, std::ptr::null_mut())
 }
 
-/// `lua_tointeger` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live and `index` a valid stack index.
 #[inline]
 pub unsafe fn lua_tointeger(state: *mut lua_State, index: c_int) -> i64 {
     lua_tointegerx(state, index, std::ptr::null_mut())
 }
 
-/// `lua_isnil` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live and `index` a valid stack index.
 #[inline]
 pub unsafe fn lua_isnil(state: *mut lua_State, index: c_int) -> bool {
     lua_type(state, index) == LUA_TNIL
 }
 
-/// `lua_istable` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live and `index` a valid stack index.
 #[inline]
 pub unsafe fn lua_istable(state: *mut lua_State, index: c_int) -> bool {
     lua_type(state, index) == LUA_TTABLE
 }
 
-/// `lua_isfunction` is a macro in C; this is its expansion.
-///
-/// # Safety
-/// `state` must be live and `index` a valid stack index.
 #[inline]
 pub unsafe fn lua_isfunction(state: *mut lua_State, index: c_int) -> bool {
     lua_type(state, index) == LUA_TFUNCTION
+}
+
+extern "C" {
+    /// Invokes a Rust host function through upvalues rather than a linked symbol
+    /// name -- `psp-lua-sys` cannot reference `psp-plugin` directly without a
+    /// circular rlib dependency. See `psp-lua-sys/src/shim.c`.
+    pub fn psp_host_trampoline(state: *mut lua_State) -> c_int;
 }

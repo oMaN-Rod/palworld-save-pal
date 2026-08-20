@@ -11,7 +11,9 @@ All were produced by, or copied from, **wasi-sdk 33.0**.
 - **License:** MIT
 - **Provenance:** built from the vendored sources at
   `psp-lua-sys/vendor/lua-5.4.8/src` by `scripts/build-wasm-lua.ps1` /
-  `build-wasm-lua.sh`, using wasi-sdk 33.0's `clang`.
+  `build-wasm-lua.sh`, using wasi-sdk 33.0's `clang`. Also holds one object
+  that is not upstream Lua: `psp-lua-sys/src/shim.c`, this project's own
+  code, compiled by the same script into the same archive.
 - **Full license text:** `psp-lua-sys/vendor/LUA-LICENSE.txt`
 
 ## `libc.a`, `libsetjmp.a`, `libwasi-emulated-signal.a`

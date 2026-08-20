@@ -29,6 +29,17 @@ for unit in $units; do
     -c "$src/$unit.c" -o "$tmp/$unit.o"
 done
 
+# The C trampoline: not a vendored Lua unit, so it is compiled separately,
+# with the same flags, into the same archive. -I points back at the vendored
+# src directory, which is where "lua.h" actually lives.
+"$WASI_SDK/bin/clang" \
+  --target=wasm32-wasip1 \
+  --sysroot="$sysroot" \
+  -I"$src" \
+  -mllvm -wasm-enable-sjlj \
+  -O2 -D_WASI_EMULATED_SIGNAL \
+  -c "$here/src/shim.c" -o "$tmp/shim.o"
+
 # ar rcs inserts/replaces members, it never truncates; without removing the
 # archive first, a unit dropped from the unit list would leave its stale .o
 # linked in from a previous run.

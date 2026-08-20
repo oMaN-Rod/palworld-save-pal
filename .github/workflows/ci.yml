@@ -44,7 +44,7 @@ jobs:
         run: rustup target add wasm32-unknown-unknown
 
       - name: Core crates compile for wasm32
-        run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app
+        run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app -p psp-lua-sys -p psp-plugin
 
       - name: psp-web builds for wasm32
         run: cargo build --target wasm32-unknown-unknown -p psp-web -j 2

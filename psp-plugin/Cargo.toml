@@ -3,13 +3,26 @@ name = "psp-plugin"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+autobenches = false
 
 [dependencies]
+chrono.workspace = true
 psp-core.workspace = true
 psp-lua-sys.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true
+uuid.workspace = true
 
 [dev-dependencies]
 pretty_assertions.workspace = true
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+psp-core = { workspace = true, features = ["oodle"] }
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[[test]]
+name = "hook_interval"
+path = "benches/hook_interval.rs"
