@@ -869,6 +869,7 @@
 		if (!show3d || zoom < STRUCTURE_MIN_ZOOM) return;
 		const instance = map;
 		if (!instance) return;
+		if (boot3dStage < 1) return;
 		void center;
 		let bounds = lastGroundBounds;
 		if (!bounds || pitch <= BOUNDS_PITCH_LIMIT) {
@@ -937,7 +938,7 @@
 	}
 
 	$effect(() => {
-		if (!show3d) {
+		if (!show3d || !map) {
 			boot3dStage = 0;
 			return;
 		}
@@ -1063,23 +1064,36 @@
 	// the fetch at most once per area rather than retrying on every revisit. The
 	// decode runs in a worker (see decodeSceneryStreamAsync) so the ~50k-instance
 	// parse never blocks the main thread -- Firefox freezes are what this guards.
+	// The fetch itself is deferred to an idle window so it never competes with the
+	// base map's first paint; a single failed or slow stream cannot hold up the page.
 	$effect(() => {
 		if (!show3d) return;
 		const currentArea = area;
 		if (sceneryStreamAttempted.has(currentArea)) return;
 		sceneryStreamAttempted = new Set(sceneryStreamAttempted).add(currentArea);
-		fetch(sceneryStreamUrl(currentArea))
-			.then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(`${r.status}`))))
-			.then((buf) => decodeSceneryStreamAsync(buf))
-			.then((stream) => {
-				sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: stream };
-			})
-			.catch((e) =>
-				console.warn(
-					`[scenery] stream unavailable for ${currentArea}, layer disabled for this area`,
-					e
+		const startFetch = () => {
+			const controller = new AbortController();
+			const timeout = setTimeout(() => controller.abort(), 15000);
+			fetch(sceneryStreamUrl(currentArea), { signal: controller.signal })
+				.then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(`${r.status}`))))
+				.then((buf) => decodeSceneryStreamAsync(buf))
+				.then((stream) => {
+					sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: stream };
+				})
+				.catch((e) =>
+					console.warn(
+						`[scenery] stream unavailable for ${currentArea}, layer disabled for this area`,
+						e
+					)
 				)
-			);
+				.finally(() => clearTimeout(timeout));
+		};
+		if (typeof requestIdleCallback !== 'undefined') {
+			const id = requestIdleCallback(() => startFetch(), { timeout: 2000 });
+			return () => cancelIdleCallback(id);
+		}
+		const t = setTimeout(startFetch, 0);
+		return () => clearTimeout(t);
 	});
 
 	// Mirrors the scenery-stream fetch above. loadTintMosaic's own module-scope
