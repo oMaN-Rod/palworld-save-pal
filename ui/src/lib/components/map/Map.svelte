@@ -605,13 +605,23 @@
 
 	// The popup stays pinned to its feature across pan/zoom, so its screen position has
 	// to be reprojected on every map move rather than captured once at click time.
-	// Note: moveTick must update synchronously — coalescing via rAF breaks map
-	// panning (drag moves only one pixel then stalls until mouseup).
+	// Throttled so continuous drag doesn't thrash Svelte's effect graph: each
+	// onmove used to log "updated at" and re-enter flush (resize→setPixelRatio→move
+	// loop). At most one tick per frame, skipped entirely when no popup is open.
 	let moveTick = $state(0);
+	let moveTickRaf = 0;
 	const selectedPoint = $derived.by(() => {
 		void moveTick;
 		return selected ? projectLngLat(selected.lngLat) : null;
 	});
+	function scheduleMoveTick() {
+		if (!selected) return;
+		if (moveTickRaf) return;
+		moveTickRaf = requestAnimationFrame(() => {
+			moveTickRaf = 0;
+			moveTick++;
+		});
+	}
 
 	function featureLngLat(feature: maplibregl.MapGeoJSONFeature): [number, number] | null {
 		const geometry = feature.geometry;
@@ -1594,13 +1604,28 @@
 	// Resolution rides maplibre's runtime pixel-ratio override (present in the
 	// 5.x runtime, still missing from its typings): one call resizes the canvas
 	// backing store live, tiers with `null` restoring the device default.
+	// Deferred to idle so the resize→move event doesn't amplify the onmove flood
+	// during drag or feed a resize→setPixelRatio loop.
+	let pendingPixelRatio: number | null | undefined = undefined;
 	$effect(() => {
 		const instance = map;
 		const pixelRatio = qualityTier.pixelRatio;
+		const target = pixelRatio ?? devicePixelRatio();
 		if (!instance) return;
-		const shim = instance as unknown as { setPixelRatio?: (ratio: number) => void };
-		if (typeof shim.setPixelRatio !== 'function') return;
-		shim.setPixelRatio(pixelRatio ?? devicePixelRatio());
+		pendingPixelRatio = target;
+		const apply = () => {
+			if (pendingPixelRatio === undefined) return;
+			const shim = instance as unknown as { setPixelRatio?: (ratio: number) => void };
+			if (typeof shim.setPixelRatio !== 'function') return;
+			shim.setPixelRatio(pendingPixelRatio as number);
+			pendingPixelRatio = undefined;
+		};
+		if (typeof requestIdleCallback !== 'undefined') {
+			const id = requestIdleCallback(apply, { timeout: 500 });
+			return () => cancelIdleCallback(id);
+		}
+		const t = setTimeout(apply, 0);
+		return () => clearTimeout(t);
 	});
 
 	$effect(() => {
@@ -1671,7 +1696,7 @@
 		pitchWithRotate={true}
 		touchZoomRotate={show3d}
 		attributionControl={false}
-		onmove={() => moveTick++}
+		onmove={scheduleMoveTick}
 		onmousemove={handleMouseMove}
 		onmouseout={handleMouseOut}
 		onmousedown={handleMouseDown}
