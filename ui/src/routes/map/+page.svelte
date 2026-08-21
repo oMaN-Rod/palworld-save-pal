@@ -80,14 +80,34 @@
 	let selectedPlayerUid = $state('');
 	let map: maplibregl.Map | undefined = $state(undefined);
 
-	const mapLoader = import('$components/map/Map.svelte');
+	import { mapPerfMark } from '$lib/utils/mapPerf';
+	mapPerfMark('page.svelte eval');
+
+	// Defer the heavy Map chunk (pulls maplibre + three) until the browser is idle
+	// so the page skeleton and side panel paint and respond first.
+	function loadMapChunk() {
+		import('$components/map/Map.svelte')
+			.then((mod) => {
+				mapPerfMark('Map.svelte chunk loaded');
+				MapComponent = mod.default;
+			})
+			.catch((e) => {
+				console.warn('[map-perf] Map.svelte import failed', e);
+				mapLoadFailed = true;
+			});
+	}
 	let MapComponent = $state<typeof import('$components/map/Map.svelte').default | undefined>(
 		undefined
 	);
 	// A rejected import must not leave the page on "Initializing Map" forever:
 	// surface it with a retry instead.
 	let mapLoadFailed = $state(false);
-	mapLoader.then((mod) => (MapComponent = mod.default)).catch(() => (mapLoadFailed = true));
+	if (typeof requestIdleCallback !== 'undefined') {
+		requestIdleCallback(() => loadMapChunk(), { timeout: 2000 });
+	} else {
+		// next tick so the current microtask queue (panel etc) settles first
+		setTimeout(loadMapChunk, 0);
+	}
 
 	// The editing surfaces stay out of the prerendered public entry: this route is
 	// rendered in Node at build time and shipped to visitors with no save at all.

@@ -132,6 +132,7 @@
 	import { sweepPalMeshes } from './palMeshLibrary';
 	import { sweepMapObjectMeshes } from './mapObjectMeshLibrary';
 	import { composeWorld } from './ghostTransform';
+	import { mapPerfMark } from '$lib/utils/mapPerf';
 	import type {
 		BaseStructure,
 		BlueprintStructureGeometry,
@@ -141,6 +142,7 @@
 	} from '$types';
 	import * as m from '$i18n/messages';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	mapPerfMark('Map.svelte module eval');
 
 	let {
 		map = $bindable(),
@@ -943,7 +945,22 @@
 			return;
 		}
 		if (boot3dStage >= 4) return;
-		return onIdleAfterPaint(() => (boot3dStage += 1));
+		return onIdleAfterPaint(() => {
+			const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
+			boot3dStage += 1;
+			try {
+				const dt = typeof performance !== 'undefined' ? (performance.now() - t0).toFixed(1) : '?';
+				console.info(`[map-perf] 3D boot stage ${boot3dStage} → ${boot3dStage + 0} (${dt}ms)`);
+			} catch {}
+		});
+	});
+
+	// Timed 3D stage advancement with logging per stage.
+	$effect(() => {
+		if (boot3dStage === 1) mapPerfMark('3D stage 1: structures');
+		if (boot3dStage === 2) mapPerfMark('3D stage 2: scenery');
+		if (boot3dStage === 3) mapPerfMark('3D stage 3: pals');
+		if (boot3dStage === 4) mapPerfMark('3D stage 4: map objects — boot complete');
 	});
 
 	function mount3dLayer(instance: maplibregl.Map, layer: maplibregl.CustomLayerInterface) {
@@ -1072,12 +1089,19 @@
 		if (sceneryStreamAttempted.has(currentArea)) return;
 		sceneryStreamAttempted = new Set(sceneryStreamAttempted).add(currentArea);
 		const startFetch = () => {
+			const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
+			mapPerfMark(`scenery fetch start (${currentArea})`);
 			const controller = new AbortController();
 			const timeout = setTimeout(() => controller.abort(), 15000);
 			fetch(sceneryStreamUrl(currentArea), { signal: controller.signal })
 				.then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(`${r.status}`))))
-				.then((buf) => decodeSceneryStreamAsync(buf))
+				.then((buf) => {
+					const dt = typeof performance !== 'undefined' ? (performance.now() - t0).toFixed(0) : '?';
+					mapPerfMark(`scenery fetch done (${currentArea})`, `${buf.byteLength} bytes in ${dt}ms, decoding…`);
+					return decodeSceneryStreamAsync(buf);
+				})
 				.then((stream) => {
+					mapPerfMark(`scenery decode done (${currentArea})`, `${stream.buckets.length} buckets`);
 					sceneryStreamsByArea = { ...sceneryStreamsByArea, [currentArea]: stream };
 				})
 				.catch((e) =>
@@ -1112,15 +1136,21 @@
 		// Keyed by the area captured here, not the live binding, so a mosaic
 		// resolving after an area switch lands in its own slot.
 		const load = () => {
-			loadTintMosaic(currentArea).then((mosaic) => {
-				tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
-			});
-		};
-		if (typeof requestIdleCallback !== 'undefined') {
-			requestIdleCallback(load, { timeout: 3000 });
-		} else {
-			setTimeout(load, 0);
-		}
+				const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
+				mapPerfMark(`tint mosaic fetch start (${currentArea})`);
+				loadTintMosaic(currentArea)
+					.then((mosaic) => {
+						const dt = typeof performance !== 'undefined' ? (performance.now() - t0).toFixed(0) : '?';
+						mapPerfMark(`tint mosaic done (${currentArea})`, `${dt}ms`);
+						tintMosaicsByArea = { ...tintMosaicsByArea, [currentArea]: mosaic };
+					})
+					.catch((e) => console.warn(`[map-perf] tint mosaic failed for ${currentArea}`, e));
+			};
+			if (typeof requestIdleCallback !== 'undefined') {
+				requestIdleCallback(load, { timeout: 3000 });
+			} else {
+				setTimeout(load, 0);
+			}
 	});
 
 	$effect(() => {

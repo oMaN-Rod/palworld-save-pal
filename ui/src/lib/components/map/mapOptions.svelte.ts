@@ -59,6 +59,18 @@ export type MapOptions = {
 // A key of its own, never written by an earlier build: persistedState does not
 // merge new defaults into a stored object, so a shared key would hand returning
 // users a half-populated blob.
+function migrateMapOptions(raw: MapOptions): MapOptions {
+	// 3D is intentionally opt-in per session. Persisted enable3d from an earlier
+	// session would otherwise freeze returning visitors who enabled 3D once.
+	if (raw.enable3d) {
+		try {
+			console.info('[map-perf] 3D was persisted enabled — resetting to off (opt-in per visit)');
+		} catch {}
+		raw = { ...raw, enable3d: false };
+	}
+	return raw;
+}
+
 export const mapOptionsState = persistedState<MapOptions>('psp-map-options', {
 	area: DEFAULT_MAP_AREA,
 	showOrigin: false,
@@ -91,4 +103,4 @@ export const mapOptionsState = persistedState<MapOptions>('psp-map-options', {
 	mapLayerVisibility: {},
 	mapQuality: MAP_QUALITY_DEFAULT,
 	showFps: false
-});
+}, { beforeRead: migrateMapOptions });
