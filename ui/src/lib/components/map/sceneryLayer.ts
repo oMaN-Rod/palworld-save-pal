@@ -251,15 +251,15 @@ export function stabilizeScalar(
 // Fallback for the shader's uBase uniform wherever no map texture is bound.
 export const SCENERY_BASE_COLOR = 0x8a8578;
 
-export type SceneryLayer = CustomLayerInterface & {
+	export type SceneryLayer = CustomLayerInterface & {
 	update(stream: SceneryStream, area: MapArea, verticalScale: number): void;
 	// Swaps the material's map texture in place; instances re-sample it on the
 	// next paint, so no InstancedMesh rebuild is needed.
 	setTint(mosaic: TintMosaic | null): void;
 	setOpacity(opacity: number): void;
 	/** Quality lever: raises the screen-size cull so low tiers draw fewer, and
-	 * high tiers draw more, scenery instances. Triggers a rebuild. */
-	setMinPixels(minPixels: number): void;
+	 * high tiers draw more, scenery instances. Triggers a rebuild, returns culled count. */
+	setMinPixels(minPixels: number): number | undefined;
 	dispose(): void;
 	visibleBucketsForTest(bounds: ViewBounds): number[];
 };
@@ -278,6 +278,7 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 	let rebuildQueued = false;
 	// The live screen-size cull; SCENERY_MIN_PIXELS is the default tier.
 	let minPixels = SCENERY_MIN_PIXELS;
+	let culledLastRebuild = 0;
 	// Spreading gltf decodes: glTF parse + meshopt decode run on the main
 	// thread, and a rebuild that reaches a dense area can otherwise want a
 	// dozen meshes at once -- a multi-frame freeze, worst in Firefox. At most
@@ -466,6 +467,8 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			}
 		}
 
+		let totalInstances = 0;
+		let visibleInstances = 0;
 		for (const [meshIndex, buckets] of bucketsByMesh) {
 			const name = stream.meshes[meshIndex];
 			const geometry = requestSceneryMesh(name);
@@ -480,6 +483,7 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			for (const bucketIndex of buckets) {
 				capacity += bakedFor(bucketIndex, meshIndex).length / BAKED_STRIDE;
 			}
+			totalInstances += capacity;
 
 			const inst = meshFor(meshIndex, geometry, capacity);
 			const target = inst.instanceMatrix.array as Float32Array;
@@ -495,10 +499,12 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 					minPixels
 				);
 			}
+			visibleInstances += count;
 			inst.count = count;
 			inst.visible = count > 0;
 			inst.instanceMatrix.needsUpdate = true;
 		}
+		culledLastRebuild = totalInstances - visibleInstances;
 
 		for (const [meshIndex, inst] of meshObjects) {
 			if (bucketsByMesh.has(meshIndex)) continue;
@@ -566,6 +572,7 @@ export function createSceneryLayer(opts: { id: string }): SceneryLayer {
 			minPixels = next;
 			dirty = true;
 			rebuild();
+			return culledLastRebuild;
 		},
 
 		render(_gl, args) {

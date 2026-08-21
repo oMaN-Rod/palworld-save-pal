@@ -1628,12 +1628,25 @@
 		return () => clearTimeout(t);
 	});
 
+	// Only log when the tier actually changes — this effect also re-runs on fpsSample.
+	let lastQualityLogged = '';
 	$effect(() => {
-		sceneryLayer?.setMinPixels(qualityTier.sceneryMinPixels);
-	});
-
-	$effect(() => {
-		structureLayer?.setForceProxy(qualityTier.forceStructuresProxy);
+		const { sceneryMinPixels, forceStructuresProxy } = qualityTier;
+		const q = effectiveQuality;
+		if (q === lastQualityLogged) {
+			sceneryLayer?.setMinPixels(sceneryMinPixels);
+			structureLayer?.setForceProxy(forceStructuresProxy);
+			return;
+		}
+		lastQualityLogged = q;
+		const n = sceneryLayer?.setMinPixels(sceneryMinPixels);
+		structureLayer?.setForceProxy(forceStructuresProxy);
+		try {
+			const fps = fpsSample.fps ? `${fpsSample.fps.toFixed(0)}fps` : 'idle';
+			console.info(
+				`[map-perf] quality: ${q} → minPixels ${sceneryMinPixels}, proxy ${forceStructuresProxy}, sweep ${qualityTier.meshSweepAgeMs}ms (${fps})${n != null ? ` culled ${n} scenery` : ''}`
+			);
+		} catch {}
 	});
 
 	// Live FPS from actual paint frames (MapLibre 'render' events -- see
