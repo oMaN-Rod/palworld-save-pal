@@ -28,12 +28,13 @@ describe('qualityParams', () => {
 		}
 	});
 
-	it('resolution never drops below 0.75 at very-low and only very-high exceeds the device ratio', () => {
-		expect(qualityParams('very-low', 3).pixelRatio).toBe(0.75);
-		expect(qualityParams('very-low', 1).pixelRatio).toBe(0.75);
-		expect(qualityParams('medium', 3).pixelRatio).toBe(1.5);
+	it('resolution never drops below 0.5 at very-low and only very-high exceeds the device ratio', () => {
+		expect(qualityParams('very-low', 3).pixelRatio).toBe(0.5);
+		expect(qualityParams('very-low', 1).pixelRatio).toBe(0.5);
+		expect(qualityParams('low', 2).pixelRatio).toBe(0.75);
+		expect(qualityParams('medium', 3).pixelRatio).toBe(1.25);
 		expect(qualityParams('high', 3).pixelRatio).toBeNull();
-		// Supersampling caps at 3 absolute but never below the device ratio.
+		// Very-high supersamples 1.5x, capped at 3.
 		expect(qualityParams('very-high', 2).pixelRatio).toBe(3);
 		expect(qualityParams('very-high', 1).pixelRatio).toBe(1.5);
 		expect(qualityParams('very-high', 3).pixelRatio).toBe(3);

@@ -36,27 +36,28 @@ export function qualityParams(level: MapQualityLevel, devicePixelRatio: number):
 	const dpr = Number.isFinite(devicePixelRatio) && devicePixelRatio > 0 ? devicePixelRatio : 1;
 	switch (level) {
 		case 'very-low':
-			// Visibly sparse: sub-native backing store + aggressive scenery cull + proxy-only structures.
-			// At dpr=1 this drops canvas pixels to 0.75x, ~44% fewer fragments.
+			// Potato mode: half backing store + ultra-aggressive scenery cull.
+			// At dpr=1 this is 0.5x backing store (75% fewer fragments) and only
+			// nearby large scenery draws — visually sparse by design.
 			return {
-				pixelRatio: Math.min(0.75, dpr),
-				sceneryMinPixels: 36,
+				pixelRatio: Math.min(0.5, dpr),
+				sceneryMinPixels: 48,
 				forceStructuresProxy: true,
-				meshSweepAgeMs: 15_000
+				meshSweepAgeMs: 8_000
 			};
 		case 'low':
 			return {
-				pixelRatio: 1,
-				sceneryMinPixels: 22,
+				pixelRatio: 0.75,
+				sceneryMinPixels: 32,
 				forceStructuresProxy: true,
-				meshSweepAgeMs: 25_000
+				meshSweepAgeMs: 15_000
 			};
 		case 'medium':
 			return {
-				pixelRatio: Math.min(dpr, 1.5),
-				sceneryMinPixels: 12,
+				pixelRatio: Math.min(dpr, 1.25),
+				sceneryMinPixels: 14,
 				forceStructuresProxy: false,
-				meshSweepAgeMs: 45_000
+				meshSweepAgeMs: 35_000
 			};
 		case 'high':
 			return {
@@ -66,11 +67,10 @@ export function qualityParams(level: MapQualityLevel, devicePixelRatio: number):
 				meshSweepAgeMs: 60_000
 			};
 		case 'very-high':
-			// Supersampled above the device ratio where the cap allows; the max()
-			// keeps a high-DPI display from being undersampled by the cap.
+			// Supersample 1.5x, capped at 3 absolute.
 			return {
-				pixelRatio: Math.max(dpr, Math.min(dpr * 1.5, 3)),
-				sceneryMinPixels: 5,
+				pixelRatio: Math.min(dpr * 1.5, 3),
+				sceneryMinPixels: 4,
 				forceStructuresProxy: false,
 				meshSweepAgeMs: 90_000
 			};
