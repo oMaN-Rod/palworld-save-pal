@@ -605,19 +605,9 @@
 
 	// The popup stays pinned to its feature across pan/zoom, so its screen position has
 	// to be reprojected on every map move rather than captured once at click time.
-	// Coalesced to one reactive update per animation frame — onmove fires far more
-	// frequently than the display refreshes, and each moveTick++ was triggering the
-	// full derived/effect graph (including Svelte devtools logging "updated at").
+	// Note: moveTick must update synchronously — coalescing via rAF breaks map
+	// panning (drag moves only one pixel then stalls until mouseup).
 	let moveTick = $state(0);
-	let moveTickScheduled = false;
-	function scheduleMoveTick() {
-		if (moveTickScheduled) return;
-		moveTickScheduled = true;
-		requestAnimationFrame(() => {
-			moveTickScheduled = false;
-			moveTick++;
-		});
-	}
 	const selectedPoint = $derived.by(() => {
 		void moveTick;
 		return selected ? projectLngLat(selected.lngLat) : null;
@@ -1681,7 +1671,7 @@
 		pitchWithRotate={true}
 		touchZoomRotate={show3d}
 		attributionControl={false}
-		onmove={scheduleMoveTick}
+		onmove={() => moveTick++}
 		onmousemove={handleMouseMove}
 		onmouseout={handleMouseOut}
 		onmousedown={handleMouseDown}
