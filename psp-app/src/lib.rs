@@ -5,6 +5,7 @@ pub mod emitter;
 pub mod envelope;
 pub mod handler_error;
 pub mod handlers;
+pub mod lsp;
 pub mod messages;
 pub mod plugin_registry;
 
@@ -75,6 +76,7 @@ pub struct AppState {
     /// Transport-owned router for native-only message types (server
     /// management, shell-open). `NullExtRouter` on targets without them.
     pub ext: Arc<dyn crate::dispatcher::ExtRouter>,
+    pub lsp: Arc<dyn crate::lsp::LspService>,
     /// A connection registers its session here on load; reattach/eject read it.
     pub sessions: std::sync::Mutex<SessionStore>,
     /// Built on first handler call so wasm — where `game_data` is populated
@@ -181,6 +183,7 @@ pub mod test_support {
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
+                lsp: Arc::new(crate::lsp::NullLspService),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
                 plugins: Default::default(),

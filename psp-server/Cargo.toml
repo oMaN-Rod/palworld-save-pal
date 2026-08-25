@@ -39,6 +39,9 @@ async-trait = { workspace = true }
 sysinfo = { workspace = true }
 futures-util = { workspace = true }
 bollard = { workspace = true }
+sha2 = { workspace = true }
+flate2 = { workspace = true }
+tar = { workspace = true }
 
 [dev-dependencies]
 psp-app = { workspace = true, features = ["test-support"] }

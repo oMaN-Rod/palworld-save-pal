@@ -199,6 +199,9 @@ define_message_types! {
     SavePluginSource => "save_plugin_source",
     DeletePluginSource => "delete_plugin_source",
     RunPluginDraft => "run_plugin_draft",
+    GetEditorTier => "get_editor_tier",
+    LspRequest => "lsp_request",
+    LspNotification => "lsp_notification",
 }
 
 #[cfg(test)]
@@ -379,6 +382,9 @@ mod tests {
         "save_plugin_source",
         "delete_plugin_source",
         "run_plugin_draft",
+        "get_editor_tier",
+        "lsp_request",
+        "lsp_notification",
     ];
 
     #[test]

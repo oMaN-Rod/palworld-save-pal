@@ -50,6 +50,9 @@ tauri-plugin-single-instance = "2"
 bollard = "0.18"
 reqwest = { version = "0.12", features = ["json"] }
 sysinfo = "0.33"
+sha2 = "0.10"
+flate2 = "1"
+tar = "0.4"
 async-trait = "0.1"
 futures-util = "0.3"
 # dev-dependencies

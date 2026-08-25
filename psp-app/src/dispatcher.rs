@@ -405,11 +405,10 @@ async fn route(
             handlers::blueprints::handle_delete_blueprint(serde_json::from_value(data)?, ctx).await
         }
         MessageType::GetBreedingPals => handlers::breeding::handle_get_breeding_pals(ctx).await,
-        MessageType::BreedingDirectChild => handlers::breeding::handle_breeding_direct_child(
-            serde_json::from_value(data)?,
-            ctx,
-        )
-        .await,
+        MessageType::BreedingDirectChild => {
+            handlers::breeding::handle_breeding_direct_child(serde_json::from_value(data)?, ctx)
+                .await
+        }
         MessageType::BreedingDirectPartners => {
             handlers::breeding::handle_breeding_direct_partners(serde_json::from_value(data)?, ctx)
                 .await
@@ -455,12 +454,32 @@ async fn route(
             handlers::plugins::handle_save_plugin_source(serde_json::from_value(data)?, ctx).await
         }
         MessageType::DeletePluginSource => {
-            handlers::plugins::handle_delete_plugin_source(serde_json::from_value(data)?, ctx)
-                .await
+            handlers::plugins::handle_delete_plugin_source(serde_json::from_value(data)?, ctx).await
         }
         MessageType::RunPluginDraft => {
             handlers::plugins::handle_run_plugin_draft(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::GetEditorTier => handlers::lsp::handle_get_editor_tier(ctx).await,
+        MessageType::LspRequest => match serde_json::from_value(data) {
+            Ok(payload) => handlers::lsp::handle_lsp_request(payload, ctx).await,
+            Err(error) => {
+                ctx.emitter.emit(
+                    MessageType::LspRequest,
+                    &serde_json::json!({ "error": error.to_string() }),
+                );
+                Ok(())
+            }
+        },
+        MessageType::LspNotification => match serde_json::from_value(data) {
+            Ok(payload) => handlers::lsp::handle_lsp_notification(payload, ctx).await,
+            Err(error) => {
+                ctx.emitter.emit(
+                    MessageType::LspNotification,
+                    &serde_json::json!({ "error": error.to_string() }),
+                );
+                Ok(())
+            }
+        },
         // plugin_run_result is emit-only, so it has no inbound arm.
         other => {
             // Clone the Arc first so `ctx` is free to reborrow for the route call.

@@ -44,6 +44,7 @@ pub fn init() {
         dialogs: Arc::new(psp_app::desktop_dialogs::NullDialogProvider),
         live_connections,
         ext: Arc::new(NullExtRouter),
+        lsp: Arc::new(psp_app::lsp::NullLspService),
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
         plugins: Default::default(),

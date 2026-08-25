@@ -109,6 +109,7 @@ pub async fn start_server_with(
         ext: Arc::new(crate::server_ext::ServerExtRouter {
             services: Arc::new(crate::services::ServerServices::real()),
         }),
+        lsp: Arc::new(psp_app::lsp::NullLspService),
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
         plugins: Default::default(),

@@ -36,6 +36,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             ext: Arc::new(psp_server::server_ext::ServerExtRouter {
                 services: server_services,
             }),
+            lsp: Arc::new(psp_app::lsp::NullLspService),
             sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
             breeding_db: Default::default(),
             plugins: Default::default(),

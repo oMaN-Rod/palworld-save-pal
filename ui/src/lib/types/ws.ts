@@ -177,7 +177,10 @@ export enum MessageType {
 	CREATE_PLUGIN = 'create_plugin',
 	SAVE_PLUGIN_SOURCE = 'save_plugin_source',
 	DELETE_PLUGIN_SOURCE = 'delete_plugin_source',
-	RUN_PLUGIN_DRAFT = 'run_plugin_draft'
+	RUN_PLUGIN_DRAFT = 'run_plugin_draft',
+	GET_EDITOR_TIER = 'get_editor_tier',
+	LSP_REQUEST = 'lsp_request',
+	LSP_NOTIFICATION = 'lsp_notification'
 }
 
 interface UpdateSaveFileData {
