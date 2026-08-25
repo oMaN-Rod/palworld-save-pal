@@ -205,7 +205,7 @@ fn player_index(state: *mut lua_State) -> Result<c_int, HostError> {
 
         let value = with_context(state, |ctx| Ok(player_field(ctx, handle.id, &field)))?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -215,22 +215,10 @@ fn pal_index(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 2, "pal field")?;
         let handle = read_handle(state, 1, HandleKind::Pal)?;
         let field = arg_string(state, 2, "field")?;
-        let write_choice = match field.as_str() {
-            "delete" => Some(0u8),
-            "set_level" => Some(1u8),
-            "set_talent" => Some(2u8),
-            _ => None,
-        };
-        if let Some(which) = write_choice {
-            if write_granted(state)? {
-                drop(field);
-                match which {
-                    0 => super::save_write::push_pal_delete(state, handle.id),
-                    1 => super::save_write::push_pal_set_level(state, handle.id),
-                    _ => super::save_write::push_pal_set_talent(state, handle.id),
-                }
-                return Ok(1);
-            }
+        if field == "delete" && write_granted(state)? {
+            drop(field);
+            super::save_write::push_pal_delete(state, handle.id);
+            return Ok(1);
         }
         let value = with_context(state, |ctx| {
             // A field this run has already written but not yet flushed must
@@ -257,7 +245,7 @@ fn pal_index(state: *mut lua_State) -> Result<c_int, HostError> {
             }
         })?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -274,7 +262,7 @@ fn guild_index(state: *mut lua_State) -> Result<c_int, HostError> {
         }
         let value = with_context(state, |ctx| Ok(guild_field(ctx, handle.id, &field)))?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -291,7 +279,7 @@ fn base_index(state: *mut lua_State) -> Result<c_int, HostError> {
         }
         let value = with_context(state, |ctx| Ok(base_field(ctx, handle.id, &field)))?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -347,7 +335,7 @@ fn container_field(state: *mut lua_State) -> Result<c_int, HostError> {
             })
         })?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -383,7 +371,7 @@ fn slot_field(state: *mut lua_State) -> Result<c_int, HostError> {
             })
         })?;
         drop(field);
-        push_field_value(state, value);
+        push_field_value(state, value)?;
         Ok(1)
     }
 }
@@ -489,29 +477,6 @@ pub fn handle_types() -> &'static [ApiHandle] {
                             doc: "Deletes this pal from its owning player or guild base. A structural write \
                                   and invalidates every live handle and iterator across all scopes, \
                                   including this one.",
-                            capability: Some(Capability::SaveWrite),
-                        },
-                        ApiFunction {
-                            name: "set_level",
-                            params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
-                            returns: ApiType::Nil,
-                            doc: "Sets the pal's level; must be between 1 and 255 inclusive, or this raises. \
-                                  A non-structural write: every live handle and iterator stays valid, but \
-                                  the cached pal snapshot this run holds is dropped and rebuilt on next \
-                                  field access, so the new level is visible immediately.",
-                            capability: Some(Capability::SaveWrite),
-                        },
-                        ApiFunction {
-                            name: "set_talent",
-                            params: &[
-                                ApiParam { name: "which", ty: ApiType::String, optional: false },
-                                ApiParam { name: "value", ty: ApiType::Integer, optional: false },
-                            ],
-                            returns: ApiType::Nil,
-                            doc: "Sets one soul (talent) value; `which` must be \"hp\", \"shot\" or \
-                                  \"defense\", and `value` must be between 0 and 100 inclusive, or this \
-                                  raises. Non-structural, with the same cached-snapshot refresh as \
-                                  set_level.",
                             capability: Some(Capability::SaveWrite),
                         },
                     ],

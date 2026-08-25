@@ -2,7 +2,8 @@ use std::ffi::c_int;
 use std::sync::OnceLock;
 
 use psp_core::domain::pal;
-use psp_core::dto::pal::{PalDto, PalGender};
+use psp_core::dto::ordered_map::OrderedMap;
+use psp_core::dto::pal::{PalDto, PalGender, WORK_SUITABILITIES};
 use psp_core::dto::summary::PalSummary;
 use psp_core::gamedata::GameData;
 use psp_lua_sys::ffi::*;
@@ -161,6 +162,18 @@ fn read_is_sick(dto: &PalDto) -> FieldValue {
 }
 fn read_friendship_point(dto: &PalDto) -> FieldValue {
     FieldValue::Int(dto.friendship_point)
+}
+fn read_learned_skills(dto: &PalDto) -> FieldValue {
+    FieldValue::List(dto.learned_skills.clone())
+}
+fn read_active_skills(dto: &PalDto) -> FieldValue {
+    FieldValue::List(dto.active_skills.clone())
+}
+fn read_passive_skills(dto: &PalDto) -> FieldValue {
+    FieldValue::List(dto.passive_skills.clone())
+}
+fn read_work_suitability(dto: &PalDto) -> FieldValue {
+    FieldValue::Map(dto.work_suitability.clone())
 }
 
 // --- writers -------------------------------------------------------------
@@ -423,6 +436,148 @@ fn apply_friendship_point(dto: &mut PalDto, value: FieldValue) {
     }
 }
 
+fn expect_list<'v>(name: &str, value: &'v FieldValue) -> Result<&'v [String], HostError> {
+    match value {
+        FieldValue::List(items) => Ok(items.as_slice()),
+        other => Err(HostError::new(format!(
+            "expected a list of strings for {name}, got {}",
+            field_value_type_name(other)
+        ))),
+    }
+}
+
+fn validate_learned_skills(_dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
+    expect_list("learned_skills", value).map(|_| ())
+}
+fn apply_learned_skills(dto: &mut PalDto, value: FieldValue) {
+    if let FieldValue::List(items) = value {
+        dto.learned_skills = items;
+    }
+}
+
+fn validate_active_skills(_dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
+    expect_list("active_skills", value).map(|_| ())
+}
+fn apply_active_skills(dto: &mut PalDto, value: FieldValue) {
+    if let FieldValue::List(items) = value {
+        dto.active_skills = items;
+    }
+}
+
+fn validate_passive_skills(_dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
+    expect_list("passive_skills", value).map(|_| ())
+}
+fn apply_passive_skills(dto: &mut PalDto, value: FieldValue) {
+    if let FieldValue::List(items) = value {
+        dto.passive_skills = items;
+    }
+}
+
+/// `apply_pal_dto` writes each rank through `as i32`, so a wider value would
+/// silently wrap on the way into the save rather than being refused here.
+fn validate_work_suitability(_dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
+    let FieldValue::Map(entries) = value else {
+        return Err(HostError::new(format!(
+            "expected a table of work-suitability ranks for work_suitability, got {}",
+            field_value_type_name(value)
+        )));
+    };
+    for (key, rank) in entries.iter() {
+        if !WORK_SUITABILITIES.contains(&key.as_str()) {
+            return Err(HostError::new(format!(
+                "work_suitability has no key {key:?}; the keys are {}",
+                WORK_SUITABILITIES.join(", ")
+            )));
+        }
+        if !(i64::from(i32::MIN)..=i64::from(i32::MAX)).contains(rank) {
+            return Err(HostError::new(format!(
+                "work_suitability rank for {key:?} must be between {} and {}, got {rank}",
+                i32::MIN,
+                i32::MAX
+            )));
+        }
+    }
+    Ok(())
+}
+/// Built by walking `WORK_SUITABILITIES` rather than the assigned map's own
+/// entries: `OrderedMap`'s order is the JSON key order the frontend receives,
+/// and the order Lua's `pairs` hands over is not an order at all.
+///
+/// A zero rank is dropped here for the same reason `apply_pal_dto` drops one on
+/// the way into the save: it filters `rank != 0` before writing
+/// `GotWorkSuitabilityAddRankList`, and removes the property outright when
+/// nothing survives. Keeping the zero in the cached DTO would leave a value the
+/// flush is going to discard, so the same read would answer `0` before a flush
+/// and `nil` after one -- and a dry run, which never flushes, would preview a
+/// map the real run does not produce. Dropping it here keeps one representation
+/// instead of two.
+fn apply_work_suitability(dto: &mut PalDto, value: FieldValue) {
+    if let FieldValue::Map(entries) = value {
+        let mut ordered = OrderedMap::new();
+        for name in WORK_SUITABILITIES {
+            match entries.get(name) {
+                Some(rank) if *rank != 0 => ordered.insert(name.to_string(), *rank),
+                _ => {}
+            }
+        }
+        dto.work_suitability = ordered;
+    }
+}
+
+/// Which `data/json` catalog a skill field's entries must come from. The app
+/// picks `learned_skills` out of the active-skill catalog too -- its editor
+/// enumerates the same table `active_skills` does -- so both answer
+/// `active_skills`.
+fn skill_catalog(field: &str) -> Option<&'static str> {
+    match field {
+        "learned_skills" | "active_skills" => Some("active_skills"),
+        "passive_skills" => Some("passive_skills"),
+        _ => None,
+    }
+}
+
+/// Exact match only. A mis-cased id would be accepted and then stored verbatim
+/// -- `apply_*_skills` never rewrites it to the catalog's spelling, and nothing
+/// downstream does either, since `apply_pal_dto` writes `MasteredWaza`,
+/// `EquipWaza` and `PassiveSkillList` through with no catalog check at all. So
+/// a lenient match here would put a spelling the game does not know into the
+/// save, which is worse than refusing the write. `work_suitability` keys are
+/// exact-case too, but the stake there is lower: `apply_pal_dto` filters out a
+/// name it does not recognize, so a mis-cased key would be dropped on the way to
+/// the save rather than written to it.
+fn catalog_holds(game_data: &GameData, catalog: &str, id: &str) -> bool {
+    game_data
+        .get(catalog)
+        .and_then(serde_json::Value::as_object)
+        .is_some_and(|entries| entries.contains_key(id))
+}
+
+/// Kept out of the row's own `validate`, which sees only the DTO: the catalogs
+/// live on `GameData`, the same way `is_lucky`'s species check does. A non-list
+/// is an error rather than a pass -- the row's `validate` rejects one first
+/// today, but nothing here should depend on that still being true.
+fn validate_skill_entries(
+    game_data: &GameData,
+    field: &str,
+    catalog: &str,
+    value: &FieldValue,
+) -> Result<(), HostError> {
+    let FieldValue::List(items) = value else {
+        return Err(HostError::new(format!(
+            "expected a list of strings for {field}, got {}",
+            field_value_type_name(value)
+        )));
+    };
+    for id in items {
+        if !catalog_holds(game_data, catalog, id) {
+            return Err(HostError::new(format!(
+                "{field} entry {id:?} is not in the {catalog} catalog"
+            )));
+        }
+    }
+    Ok(())
+}
+
 const fn rw(
     name: &'static str,
     ty: ApiType,
@@ -456,13 +611,11 @@ const fn ro_summary(
     FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
 }
 
-/// Every scalar field this handle answers for: the fields the pal summary
-/// already carries (most of them now also assignable) plus the fields that
-/// only live on the full `PalDto`, or only on the summary, and were
-/// previously unreadable through this handle at all. `learned_skills`,
-/// `active_skills`, `passive_skills` and `work_suitability` are collections,
-/// not scalars, and `filtered_nickname` never applies to a `Level.sav` pal --
-/// none of the five belong here.
+/// Every field this handle answers for: the fields the pal summary already
+/// carries (most of them now also assignable), the fields that only live on
+/// the full `PalDto`, or only on the summary, and the four collections.
+/// `filtered_nickname` is the one `PalDto` field still missing, and stays
+/// missing -- it never applies to a `Level.sav` pal.
 pub const PAL_FIELDS: &[FieldSpec<PalDto>] = &[
     ro("instance_id", ApiType::String, "This pal's unique id, as a string. Read-only.", read_instance_id),
     ro(
@@ -675,6 +828,56 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto>] = &[
         validate_friendship_point,
         apply_friendship_point,
     ),
+    rw(
+        "learned_skills",
+        ApiType::List(&ApiType::String),
+        "Every active skill this pal has learned, as catalog ids like \
+         \"EPalWazaID::FireBall\", spelled exactly as the catalog spells them. Assigning \
+         replaces the whole list, and every entry must be an active-skill id; any id in that \
+         catalog is accepted, including a species-specific skill belonging to some other pal, \
+         which the in-app skill picker would not offer you. The read returns a fresh table each \
+         time, so changing that table changes nothing.",
+        read_learned_skills,
+        validate_learned_skills,
+        apply_learned_skills,
+    ),
+    rw(
+        "active_skills",
+        ApiType::List(&ApiType::String),
+        "The active skills this pal has equipped, as catalog ids like \
+         \"EPalWazaID::FireBall\", spelled exactly as the catalog spells them. Assigning \
+         replaces the whole list; any id in that catalog is accepted, including a \
+         species-specific skill belonging to some other pal, which the in-app skill picker \
+         would not offer you. The read returns a fresh table each time, so changing that table \
+         changes nothing.",
+        read_active_skills,
+        validate_active_skills,
+        apply_active_skills,
+    ),
+    rw(
+        "passive_skills",
+        ApiType::List(&ApiType::String),
+        "The passive skills this pal carries, as catalog ids like \"Rare\", spelled exactly as \
+         the catalog spells them. Assigning replaces the whole list; the read returns a fresh \
+         table each time, so changing that table changes nothing.",
+        read_passive_skills,
+        validate_passive_skills,
+        apply_passive_skills,
+    ),
+    rw(
+        "work_suitability",
+        ApiType::Map { key: &ApiType::String, value: &ApiType::Integer },
+        "Work-suitability ranks added on top of the species' own, keyed by the wire names \
+         EmitFlame, Watering, Seeding, GenerateElectricity, Handcraft, Collection, Deforest, \
+         Mining, OilExtraction, ProductMedicine, Cool, Transport and MonsterFarm. Assigning \
+         replaces the whole map, and a key it does not know is refused. Assigning a rank of \
+         zero removes that key instead of storing it, so it reads back absent straight away, \
+         and saving never stores a zero either. A save written by some other tool can still \
+         hold one, and reading that pal gives you the zero it holds.",
+        read_work_suitability,
+        validate_work_suitability,
+        apply_work_suitability,
+    ),
 ];
 
 static API_FIELDS: OnceLock<Vec<ApiField>> = OnceLock::new();
@@ -732,9 +935,17 @@ pub(crate) fn pal_get(ctx: &mut RunContext<'_>, id: Uuid, field: &str) -> Result
     }
 }
 
-/// `save.write` is checked before anything else, including whether the field
-/// name is even known, so an ungranted write always reports the missing
-/// capability rather than a possibly-confusing message about the field.
+/// `save.write` is checked before any field resolution -- before the name is
+/// looked up, and so before `unknown pal field` or `is read-only` can be
+/// reported -- so an ungranted write is not told which fields exist or which
+/// of them it could have written.
+///
+/// It is not the very first thing that happens to the assignment, though:
+/// `pal_newindex` has already read the value off the stack and checked its
+/// shape by the time this runs, because a `FieldValue` is what this takes. So
+/// an ungranted write of a malformed table reports the malformed table. That
+/// costs nothing -- the shape check reads the stack and touches no save data,
+/// and neither path reaches a write.
 pub(crate) fn pal_set(ctx: &mut RunContext<'_>, id: Uuid, field: &str, value: FieldValue) -> Result<(), HostError> {
     if !ctx.grants(Capability::SaveWrite) {
         return Err(HostError::new("pal field assignment requires the save.write capability"));
@@ -745,12 +956,30 @@ pub(crate) fn pal_set(ctx: &mut RunContext<'_>, id: Uuid, field: &str, value: Fi
     let Some(write) = spec.write.as_ref() else {
         return Err(HostError::new(format!("{field} is read-only")));
     };
+    // An empty Lua table is an empty list and an empty map at once, and the
+    // reader cannot tell them apart; the row's declared type can.
+    let value = match (&spec.ty, value) {
+        (ApiType::Map { .. }, FieldValue::List(items)) if items.is_empty() => {
+            FieldValue::Map(OrderedMap::new())
+        }
+        (_, other) => other,
+    };
     let game_data = ctx.game_data;
     let current = dto_cache::pal_read(ctx, id)?;
     if spec.name == "is_lucky" {
         refuse_is_lucky_demote_without_a_catalog(game_data, current, &value)?;
     }
     (write.validate)(current, &value)?;
+    if let Some(catalog) = skill_catalog(spec.name) {
+        validate_skill_entries(game_data, spec.name, catalog, &value)?;
+    }
+    // Counted once per accepted assignment, not once per claimed field: an
+    // `is_lucky` demote claims `character_id` too, and a preview that said a
+    // plugin would write two fields when the script assigned one would be a
+    // lie about the script.
+    if ctx.dry_run {
+        ctx.bump(&format!("pal.{}", spec.name), 1);
+    }
     let apply = write.apply;
     if spec.name != "is_lucky" {
         return dto_cache::pal_write(ctx, id, &[spec.name], move |dto| apply(dto, value));
@@ -774,10 +1003,60 @@ fn pal_newindex(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 3, "pal field assignment")?;
         let handle = read_handle(state, 1, HandleKind::Pal)?;
         let field = arg_string(state, 2, "field")?;
-        let value = read_field_value(state, 3)?;
+        let value = read_field_value(state, 3, &field)?;
         with_context(state, |ctx| pal_set(ctx, handle.id, &field, value))?;
         Ok(0)
     }
 }
 
 host_fn!(push_pal_newindex, pal_newindex);
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn catalog() -> GameData {
+        GameData::from_entries([(
+            "active_skills".to_string(),
+            r#"{"EPalWazaID::FireBall": {}}"#.to_string(),
+        )])
+        .expect("the test catalog parses")
+    }
+
+    /// `pal_set` runs the row's own `validate` first, so a non-list never
+    /// reaches this today. It still has to refuse one on its own rather than
+    /// pass a value it never inspected, since nothing here should depend on
+    /// two calls staying in that order.
+    #[test]
+    fn validate_skill_entries_refuses_a_value_that_is_not_a_list() {
+        let error = validate_skill_entries(
+            &catalog(),
+            "active_skills",
+            "active_skills",
+            &FieldValue::Str("EPalWazaID::FireBall".to_string()),
+        )
+        .expect_err("a bare string is not a list of skills");
+        let message = error.into_message();
+        assert!(message.contains("active_skills"), "must name the field, got {message:?}");
+        assert!(message.contains("string"), "must name the type it got, got {message:?}");
+    }
+
+    #[test]
+    fn validate_skill_entries_matches_catalog_keys_exactly() {
+        let data = catalog();
+        assert!(validate_skill_entries(
+            &data,
+            "active_skills",
+            "active_skills",
+            &FieldValue::List(vec!["EPalWazaID::FireBall".to_string()]),
+        )
+        .is_ok());
+        assert!(validate_skill_entries(
+            &data,
+            "active_skills",
+            "active_skills",
+            &FieldValue::List(vec!["epalwazaid::fireball".to_string()]),
+        )
+        .is_err());
+    }
+}

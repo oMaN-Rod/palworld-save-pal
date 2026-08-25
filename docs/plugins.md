@@ -102,7 +102,7 @@ script is actually allowed to touch.
 | Capability | Wire name | Installs |
 |---|---|---|
 | Save read | `save.read` | The `save` global's read half: `save.info()`, `save.players()`, `save.pals()`, `save.guilds()`, `save.bases()`, `save.containers()`, and every handle field read. |
-| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, and every handle's mutating methods (`player.delete()`, `pal.set_level()`, `slot.clear()`, ...). Requires `save.read` to also be declared — the manifest is refused otherwise. |
+| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a pal's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
 | Save raw | `save.raw` | The `raw` global (`raw.get`/`exists`/`kind`/`set`/`delete`/`len`/`visit`). **Bundled plugins only in v1** — see below. |
 | Players | `players` | Installs nothing of its own. Gates the `player:<uid>` and `player_dps:<uid>` raw targets — `raw.get`/`raw.set`/etc. against a per-player scope refuse with an error unless this is also granted. `raw` itself still needs `save.raw`. |
 | Game data | `gamedata` | The `gamedata` global (`gamedata.is_valid_item()`, `gamedata.is_valid_pal()`, `gamedata.version()`). |
@@ -219,7 +219,7 @@ method call — `player.name`, not `player.name()`):
 | Handle | Fields |
 |---|---|
 | `player` | `uid`, `name`, `level`, `guild_id`, `pal_count`, `last_online` (ISO string or nil), `last_online_ts` (Unix seconds or nil), `pals` (a `player.pals()` iterator factory) |
-| `pal` | `instance_id`, `character_id`, `nickname`, `owner_uid`, `guild_id`, `base_id`, `gender`, `level`, `hp`, `rank`, `exp`, `talent_hp`, `talent_shot`, `talent_defense`, `rank_hp`, `rank_attack`, `rank_defense`, `rank_craftspeed`, `is_boss`, `is_lucky` |
+| `pal` | `instance_id`, `character_id`, `character_key`, `nickname`, `owner_uid`, `guild_id`, `base_id`, `gender`, `level`, `hp`, `max_hp`, `rank`, `exp`, `talent_hp`, `talent_shot`, `talent_defense`, `rank_hp`, `rank_attack`, `rank_defense`, `rank_craftspeed`, `is_boss`, `is_lucky`, `is_awakened`, `is_imported`, `is_predator`, `is_tower`, `is_sick`, `group_id`, `stomach`, `sanity`, `friendship_point`, `storage_id`, `storage_slot`, and four table-valued fields: `learned_skills`, `active_skills`, `passive_skills` (lists of catalog id strings) and `work_suitability` (ranks keyed by work type) |
 | `guild` | `id`, `name`, `admin_uid`, `player_count`, `base_count`, `level`, `pal_count`, `chest_container_id` (a container id string, or `nil` when the guild has no chest) |
 | `base` | `id`, `guild_id`, `x`, `y`, `z` |
 | `container` | `id`, `slot_count`, `slots` (a `container.slots()` iterator factory) |
@@ -237,9 +237,6 @@ three entity iterators that support it:
   than deleting a guild admin.
 - `player.set_level(n)` — `n` must be `1..=255`.
 - `pal.delete() -> bool`
-- `pal.set_level(n)` — `n` must be `1..=255`.
-- `pal.set_talent(which, value)` — `which` is `"hp"`, `"shot"`, or `"defense"`;
-  `value` must be `0..=100`.
 - `guild.delete() -> bool` — also deletes every loaded member's player entity.
 - `base.delete() -> bool` — also deletes the base's worker pals.
 - `slot.clear()` — **structural**, not an in-place empty: it removes the raw
@@ -296,6 +293,60 @@ container is empty: the loop's exit condition never arrives and the run times
 out instead. `save.clear_slots_where` has no such split — its predicate pass is
 identical in both modes and only the apply phase is skipped — so prefer it over
 hand-rolling the loop, and reach for `ctx.dry_run` branching only if you must.
+
+#### Writing a pal's fields
+
+A pal's writable fields are written by assigning to them, not by calling a
+setter:
+
+```lua
+pal.level = 60
+pal.talent_hp = 100
+pal.nickname = "Sparky"
+```
+
+An out-of-range value raises rather than being clamped, and the message names
+the field. Assigning a field that does not exist raises too, so a typo is an
+error rather than a silent no-op. Not every readable field is writable —
+identity fields (`instance_id`, `owner_uid`, `guild_id`, `base_id`) and fields
+the game itself recomputes whenever the pal is saved (`hp`, `stomach`, ...) are
+read-only, and assigning one raises saying so. The authority on which is which
+is `psp.lua`: a type-annotation file generated from the same host API
+definition these docs describe, in which every read-only field says so in its
+own entry. It is written into the plugin's workspace only where the editor's
+full tier runs, since it exists for that tier's language server to read — on
+the baseline tier there is no such file to open, and the runtime error on a
+refused assignment is what tells you the field was read-only.
+
+Assignment is non-structural: every live handle and iterator stays valid, and a
+read straight afterwards sees the new value.
+
+**Under a dry run** an assignment is validated and counted like the write
+methods above, but it does not simply return — the new value goes into the
+run's pal cache, so every later read in that same run sees it, which is what
+lets a preview compute from values it has itself assigned. Nothing reaches the
+save, and the cache is discarded when the run ends.
+
+**Reads are snapshots, not live views.** A field read hands back a copy — for a
+table field, a fresh table each time — so mutating what you read changes
+nothing. Write the whole value back:
+
+```lua
+-- mutates a copy; does nothing
+table.insert(pal.active_skills, "EPalWazaID::FireBall")
+
+-- correct
+local skills = pal.active_skills
+table.insert(skills, "EPalWazaID::FireBall")
+pal.active_skills = skills
+```
+
+The three skill fields are checked entry by entry against the game's own skill
+catalogs, so their ids have to be spelled exactly as the catalog spells them —
+`"EPalWazaID::FireBall"`, not `"FireBall"` and not `"fireball"` — and the
+refusal names the entry it rejected. `work_suitability` is not catalog-backed:
+its keys are checked against a fixed set of work types the host knows, and a
+key outside that set is refused with the whole accepted set listed for you.
 
 ### `raw` — requires `save.raw`
 
@@ -505,14 +556,18 @@ conversion — the run still succeeds, but with no `result`.
 Under a dry run specifically, every mutating host function (`raw.set`,
 `pal.delete`, `players():delete_where()`, ...) also bumps its own count key
 (for example `"guilds.delete_where"`) the moment it runs, independently of
-whatever the script itself returns. The outcome's final `counts` map is the
-union of those host-bumped keys and the script's own returned `counts` table
-— so a dry-run caller can see keys the script never set itself (see the
-worked example below, where a live run showed both `guilds` and
-`guilds.delete_where` in the same `counts` map). A real (non-dry) run never
-gets these host-bumped keys — mutating functions report what they did through
-their own return values instead, so a real run's `counts` reflects only what
-the script itself put there.
+whatever the script itself returns. Assigning a pal field does the same, under
+the key `"pal."` followed by the field name — `pal.level = 60` bumps
+`"pal.level"` — once per assignment the host accepts, so a refused assignment
+contributes nothing and assigning the same field twice counts twice.
+
+The outcome's final `counts` map is the union of those host-bumped keys and
+the script's own returned `counts` table — so a dry-run caller can see keys
+the script never set itself (see the worked example below, where a live run
+showed both `guilds` and `guilds.delete_where` in the same `counts` map). A
+real (non-dry) run never gets these host-bumped keys — mutating functions
+report what they did through their own return values instead, so a real run's
+`counts` reflects only what the script itself put there.
 
 ## Multi-file plugins and `require`
 
@@ -780,9 +835,11 @@ inside `for p in save.players() do`, typing `p.` offers nothing, because
 knowing that `p` holds a player handle means inferring the type of an
 expression, and the editor does no type inference. Handle types — player,
 pal, guild, container — are exactly where that shows: they are fully
-described in the `ApiDefinition` and rendered in the `---@meta` output, so
-`lua-language-server` reading that file does offer their fields, but the
-editor's own completion lists only ever start from a global name.
+described in the `ApiDefinition` and rendered in the `---@meta` output
+(`psp.lua`, written into the workspace alongside your sources when the full
+tier starts), so `lua-language-server` reading that file does offer their
+fields, but the editor's own completion lists only ever start from a global
+name.
 
 **`delete_where` is not offered as a completion, on any plugin, regardless of
 capability.** It is not a gap in the capability filter — it is a gap in what

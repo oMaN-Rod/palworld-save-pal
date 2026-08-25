@@ -15,7 +15,7 @@ const RUNTIME_MANIFEST: &str = r#"{
 
 const RUNTIME_SOURCE: &str = r#"
 function bump_level()
-  for p in save.pals() do p.set_level(19) break end
+  for p in save.pals() do p.level = 19 break end
   return 'done'
 end
 "#;
@@ -30,25 +30,34 @@ fn run_command_flushes_the_dto_cache_at_the_end_of_a_real_run() {
     assert_eq!(outcome.dto_flush_count, 1, "runtime::run_command must flush the cache at the end of a run");
 }
 
-/// `target.rank = 4` cannot work yet: `__newindex` does not exist until a later
-/// task. This exercises the same cache through the setters that already exist
-/// and already route through it (`pal.set_level`, `pal.set_talent`).
+/// The snapshot rebuild inside `ensure_pals_snapshot`, which a read of the
+/// field just written never reaches: `pal_index` short-circuits that one
+/// straight to the DTO cache. Only a read of an *unwritten* field gets there,
+/// so `target.rank` is what forces the rebuild the write's
+/// `note_pal_field_write` made necessary.
 ///
-/// Reading `target.level` right after the write also exercises the snapshot
-/// rebuild in `ensure_pals_snapshot`: the write drops `ctx.pals`, and the
-/// rebuild that follows must flush the cache first or the read would see the
-/// pre-write value.
+/// The rebuild has to flush **before** it re-reads the save, and the ordering
+/// is observable because the flush also drains the cache: the `target.level`
+/// read afterwards no longer has a pending write to short-circuit to, so it is
+/// answered by the fresh snapshot. Flush first and that snapshot carries the
+/// write; rebuild first and it carries the value the write replaced.
 #[test]
-fn a_write_is_visible_to_a_later_read_in_the_same_run() {
+fn a_read_of_an_unwritten_field_rebuilds_the_snapshot_from_a_flushed_save() {
     let mut harness = support::harness(CAPS);
     let (status, summary) = harness.run(
         "local target
          for p in save.pals() do target = p break end
-         target.set_level(12)
-         return tostring(target.level)",
+         target.level = 12
+         local rank = target.rank
+         return tostring(rank ~= nil) .. '|' .. tostring(target.level)",
     );
     assert_eq!(status, RunStatus::Ok);
-    assert_eq!(summary.as_deref(), Some("12"), "a read must see this run's own write");
+    assert_eq!(
+        summary.as_deref(),
+        Some("true|12"),
+        "the read of an unwritten field must rebuild the pal snapshot from a save the \
+         pending write has already been flushed into"
+    );
 }
 
 #[test]
@@ -57,9 +66,9 @@ fn many_writes_to_one_entity_cost_one_flush() {
     let (status, summary) = harness.run(
         "local target
          for p in save.pals() do target = p break end
-         target.set_level(12)
-         target.set_talent('hp', 100)
-         target.set_talent('shot', 50)
+         target.level = 12
+         target.talent_hp = 100
+         target.talent_shot = 50
          return 'done'",
     );
     assert_eq!(status, RunStatus::Ok);
@@ -71,16 +80,13 @@ fn many_writes_to_one_entity_cost_one_flush() {
     );
 }
 
-/// `p.rank = 3` (field-assignment syntax) does not work yet -- `__newindex`
-/// is a later task -- so this exercises the same cached-write path through
-/// `set_level`, an existing setter that already routes through `pal_write`.
 #[test]
 fn the_entry_index_is_built_once_per_run() {
     let mut harness = support::harness(CAPS);
     let (status, _) = harness.run(
         "local n = 0
          for p in save.pals() do
-           p.set_level(3)
+           p.level = 3
            n = n + 1
            if n == 5 then break end
          end
@@ -104,7 +110,7 @@ fn writes_to_two_entities_flush_each_once() {
     let (status, _) = harness.run(
         "local n = 0
          for p in save.pals() do
-           p.set_level(12)
+           p.level = 12
            n = n + 1
            if n == 2 then break end
          end
@@ -118,13 +124,13 @@ fn writes_to_two_entities_flush_each_once() {
 fn a_dry_run_writes_nothing_but_still_counts() {
     let mut harness = support::harness_dry(CAPS);
     let (status, _) = harness.run(
-        "for p in save.pals() do p.set_level(4) break end
+        "for p in save.pals() do p.level = 4 break end
          return 'done'",
     );
     assert_eq!(status, RunStatus::Ok);
     assert_eq!(harness.dto_flush_count(), 0, "a dry run must not flush");
     assert!(
-        harness.counts().get("pal.set_level").copied().unwrap_or(0) > 0,
+        harness.counts().get("pal.level").copied().unwrap_or(0) > 0,
         "a dry run must still report what it would have written"
     );
 }
@@ -186,8 +192,7 @@ fn a_dry_runs_write_to_a_summary_answered_field_is_still_visible_to_a_later_read
     );
 }
 
-/// The field-table assignment path (`target.level = ...`), not the older
-/// `p.set_level(...)` method this file's other tests already cover. Proves
+/// The non-dry counterpart of the test above. Proves
 /// `pal_field_was_written`'s short-circuit does not break the ordinary
 /// (non-dry) case: the read must still see this run's own write, now served
 /// straight from the cache instead of via a flush-and-rebuild.
@@ -214,7 +219,7 @@ fn a_real_runs_write_to_a_summary_answered_field_is_visible_to_a_later_read() {
 fn end_of_run_flush_persists_the_write_for_a_later_run() {
     let mut harness = support::harness(CAPS);
     let (status, _) = harness.run(
-        "for p in save.pals() do p.set_level(37) break end
+        "for p in save.pals() do p.level = 37 break end
          return 'done'",
     );
     assert_eq!(status, RunStatus::Ok);
@@ -248,7 +253,7 @@ fn a_structural_base_delete_flushes_its_own_worker_pals_pending_write_first() {
          assert(base_id ~= nil, 'fixture must have a base with at least one worker pal')
 
          for p in save.pals() do
-           if p.instance_id == pal_id then p.set_level(67) break end
+           if p.instance_id == pal_id then p.level = 67 break end
          end
 
          for b in save.bases() do if b.id == base_id then b.delete() break end end
@@ -293,7 +298,7 @@ fn delete_where_over_players_flushes_an_owned_pals_pending_write_first() {
          assert(victim_uid ~= nil, 'fixture must have a non-admin player who owns a pal')
 
          for p in save.pals() do
-           if p.instance_id == pal_id then p.set_level(79) break end
+           if p.instance_id == pal_id then p.level = 79 break end
          end
 
          local removed = save.players():delete_where(function(p) return p.uid == victim_uid end)
@@ -328,7 +333,7 @@ fn raw_get_flushes_a_pending_pal_write_before_reading_it() {
 
          local target
          for p in save.pals() do if p.instance_id == id then target = p break end end
-         target.set_level(101)
+         target.level = 101
 
          local path = 'worldSaveData.CharacterSaveParameterMap[' .. index ..
              '].value.RawData.SaveParameter.Level'
@@ -373,7 +378,7 @@ fn a_structural_delete_does_not_leave_a_stale_index_position_for_a_later_write()
          local earlier_id, target_id = ids[1], ids[3]
 
          for p in save.pals() do
-           if p.instance_id == target_id then p.set_level(15) break end
+           if p.instance_id == target_id then p.level = 15 break end
          end
 
          for p in save.pals() do
@@ -381,7 +386,7 @@ fn a_structural_delete_does_not_leave_a_stale_index_position_for_a_later_write()
          end
 
          for p in save.pals() do
-           if p.instance_id == target_id then p.set_level(88) break end
+           if p.instance_id == target_id then p.level = 88 break end
          end
 
          for p in save.pals() do
@@ -423,9 +428,9 @@ fn a_raw_write_between_two_cached_writes_on_the_same_pal_is_not_reverted() {
          local before_exp = raw.get('level', exp_path)
          local new_exp = before_exp + 12345
 
-         for p in save.pals() do if p.instance_id == id then p.set_level(10) break end end
+         for p in save.pals() do if p.instance_id == id then p.level = 10 break end end
          raw.set('level', exp_path, new_exp)
-         for p in save.pals() do if p.instance_id == id then p.set_level(11) break end end
+         for p in save.pals() do if p.instance_id == id then p.level = 11 break end end
 
          return tostring(raw.get('level', exp_path)) .. '|' .. tostring(new_exp) .. '|' .. tostring(before_exp)",
     );
@@ -438,7 +443,7 @@ fn a_raw_write_between_two_cached_writes_on_the_same_pal_is_not_reverted() {
     assert_ne!(new_exp, before_exp, "the fixture pal's exp must actually change for this test to mean anything");
     assert_eq!(
         after, new_exp,
-        "the raw write between the two set_level calls must survive, not revert to \
+        "the raw write between the two level assignments must survive, not revert to \
          before_exp={before_exp}; got exp={after}"
     );
 }

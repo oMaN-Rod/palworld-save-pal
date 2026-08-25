@@ -369,15 +369,426 @@ fn setting_is_lucky_false_is_refused_for_a_mixed_case_boss_prefix() {
     }
 }
 
+/// `rank` is read-write and `4` is in range, so the only thing left that can
+/// refuse this assignment is the capability gate. The negatives are what stop
+/// the test passing for a different reason if that ever stops being true.
 #[test]
 fn assignment_without_save_write_raises() {
     let mut harness = support::harness(&[Capability::SaveRead]);
     let (status, _) = harness.run(&first_pal("target.rank = 4\nreturn 'unreachable'"));
     match status {
+        RunStatus::Error(message) => {
+            assert!(
+                message.contains("requires the save.write capability"),
+                "an ungranted write must say which capability is missing, got {message:?}"
+            );
+            for wrong in ["unknown pal field", "is read-only", "attempt to index", "must be between"] {
+                assert!(
+                    !message.contains(wrong),
+                    "the refusal must be the capability one, not {wrong:?}, got {message:?}"
+                );
+            }
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// The gate runs before the field name is resolved, so an ungranted plugin is
+/// never told whether a field exists -- assigning a name that is not a pal
+/// field at all still reports the missing capability and nothing else. Order
+/// the two the other way round and this is where it shows.
+#[test]
+fn an_ungranted_assignment_is_refused_before_the_field_name_is_resolved() {
+    let mut harness = support::harness(&[Capability::SaveRead]);
+    let (status, _) = harness.run(&first_pal("target.no_such_field = 4\nreturn 'unreachable'"));
+    match status {
+        RunStatus::Error(message) => {
+            assert!(
+                message.contains("requires the save.write capability"),
+                "an ungranted write must be refused for the capability, got {message:?}"
+            );
+            assert!(
+                !message.contains("unknown pal field"),
+                "refusing an ungranted plugin by field name tells it which fields exist, \
+                 got {message:?}"
+            );
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// Real keys of `active_skills.json` and `passive_skills.json`, spelled exactly
+/// as those files spell them. An id outside its catalog is refused, so an
+/// invented one would silently turn every success test below into an error
+/// test.
+const A_SKILL: &str = "EPalWazaID::FireBall";
+const ANOTHER_SKILL: &str = "EPalWazaID::AcidRain";
+const A_PASSIVE: &str = "Rare";
+
+#[test]
+fn a_list_field_round_trips() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(&format!(
+        "target.active_skills = {{ '{A_SKILL}', '{ANOTHER_SKILL}' }}
+         local out = target.active_skills
+         return out[1] .. ',' .. out[2] .. ',' .. tostring(#out)"
+    )));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some(format!("{A_SKILL},{ANOTHER_SKILL},2").as_str()));
+}
+
+#[test]
+fn a_map_field_round_trips() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(
+        "target.work_suitability = { Handcraft = 3 }
+         return tostring(target.work_suitability.Handcraft)",
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some("3"));
+}
+
+/// A dry run never flushes, so the value read back here cannot have come from
+/// the save: it can only be the dirty DTO the write left in the cache. The
+/// non-dry round-trips above would still pass if the read went all the way out
+/// to the save and back, which is why this one exists.
+#[test]
+fn a_dry_run_reads_back_the_collections_it_just_set() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(&first_pal(&format!(
+        "target.active_skills = {{ '{A_SKILL}' }}
+         target.work_suitability = {{ Mining = 7 }}
+         return target.active_skills[1] .. '|' .. tostring(target.work_suitability.Mining)"
+    )));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some(format!("{A_SKILL}|7").as_str()));
+}
+
+#[test]
+fn a_read_returns_a_snapshot_not_a_live_view() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(&format!(
+        "target.active_skills = {{ '{A_SKILL}' }}
+         table.insert(target.active_skills, '{ANOTHER_SKILL}')
+         return tostring(#target.active_skills)"
+    )));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some("1"),
+        "mutating the returned table must not write through; this pins the documented rule"
+    );
+}
+
+#[test]
+fn an_empty_table_clears_a_list_and_a_map() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(&format!(
+        "target.active_skills = {{ '{A_SKILL}' }}
+         target.work_suitability = {{ Handcraft = 3 }}
+         target.active_skills = {{}}
+         target.work_suitability = {{}}
+         local n = 0
+         for _ in pairs(target.work_suitability) do n = n + 1 end
+         return tostring(#target.active_skills) .. '|' .. tostring(n)"
+    )));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some("0|0"), "an empty table must clear both shapes");
+}
+
+#[test]
+fn an_invalid_collection_entry_raises_and_names_the_entry() {
+    let mut harness = support::harness(&[
+        Capability::SaveRead,
+        Capability::SaveWrite,
+        Capability::GameData,
+    ]);
+    let (status, _) = harness.run(&first_pal(&format!(
+        "target.active_skills = {{ '{A_SKILL}', 'NotARealSkill' }}
+         return 'unreachable'"
+    )));
+    match status {
         RunStatus::Error(message) => assert!(
-            message.contains("save.write"),
-            "an ungranted write must say which capability is missing, got {message:?}"
+            message.contains("NotARealSkill"),
+            "must name the offending entry, not just the field, got {message:?}"
         ),
         other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// `learned_skills` is picked from the *active* skill catalog in the app
+/// (`LearnedSkillSelectModal` enumerates `activeSkillsData`), so a passive-skill
+/// id must be refused there, and an active-skill id must be refused for
+/// `passive_skills`. Without this, a single "is it any known skill" check would
+/// pass both.
+#[test]
+fn each_skill_field_validates_against_its_own_catalog() {
+    for (field, wrong_id, catalog) in [
+        ("learned_skills", A_PASSIVE, "active_skills"),
+        ("active_skills", A_PASSIVE, "active_skills"),
+        ("passive_skills", A_SKILL, "passive_skills"),
+    ] {
+        let mut harness = support::harness(CAPS);
+        let (status, _) = harness.run(&first_pal(&format!(
+            "target.{field} = {{ '{wrong_id}' }}\nreturn 'unreachable'"
+        )));
+        match status {
+            RunStatus::Error(message) => {
+                assert!(message.contains(wrong_id), "{field} must name the entry, got {message:?}");
+                assert!(
+                    message.contains(catalog),
+                    "{field} must name the catalog it checked, got {message:?}"
+                );
+            }
+            other => panic!("expected {field} to reject {wrong_id}, got {other:?}"),
+        }
+    }
+}
+
+/// The same ids the app itself offers must be accepted, in every skill field.
+#[test]
+fn the_catalogs_own_ids_are_accepted_in_every_skill_field() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(&format!(
+        "target.learned_skills = {{ '{A_SKILL}' }}
+         target.active_skills = {{ '{ANOTHER_SKILL}' }}
+         target.passive_skills = {{ '{A_PASSIVE}' }}
+         return target.learned_skills[1] .. '|' .. target.active_skills[1] .. '|' .. target.passive_skills[1]"
+    )));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some(format!("{A_SKILL}|{ANOTHER_SKILL}|{A_PASSIVE}").as_str()));
+}
+
+#[test]
+fn an_unknown_work_suitability_key_raises_and_names_the_key() {
+    let mut harness = support::harness(CAPS);
+    let (status, _) = harness.run(&first_pal(
+        "target.work_suitability = { kindling = 3 }\nreturn 'unreachable'",
+    ));
+    match status {
+        RunStatus::Error(message) => assert!(
+            message.contains("kindling"),
+            "must name the offending key, got {message:?}"
+        ),
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// `work_suitability`'s key order is a wire contract (`psp-core/src/dto/pal.rs`
+/// says so outright, and `OrderedMap` exists to keep it), and the order the
+/// frontend receives is the order the entries sit in inside the save. Lua's
+/// `pairs` has no order at all, so the map is built by walking
+/// `WORK_SUITABILITIES` rather than the keys Lua hands over -- this reads the
+/// order back out of the save itself, because a by-name lookup through the API
+/// passes just as happily with the keys completely scrambled.
+///
+/// The three keys are chosen so their canonical order is neither the order they
+/// are assigned in, nor their alphabetical order, nor the reverse of that:
+/// canonically they run EmitFlame, Watering, Seeding, GenerateElectricity;
+/// ascending they run EmitFlame, GenerateElectricity, Seeding, Watering; and
+/// descending, Watering, Seeding, GenerateElectricity, EmitFlame. Three keys
+/// were not enough: any three of these sit in canonical order or its exact
+/// reverse, so a descending sort survived them. The fourth key is what
+/// separates canonical order from every sort of it.
+#[test]
+fn work_suitability_reaches_the_save_in_the_canonical_key_order() {
+    let mut harness = support::harness(CAPS_RAW);
+    let (status, summary) = harness.run(
+        "local id
+         for p in save.pals() do id = p.instance_id break end
+         local target
+         for p in save.pals() do if p.instance_id == id then target = p break end end
+
+         target.work_suitability = { GenerateElectricity = 3, Watering = 1, Seeding = 2, EmitFlame = 4 }
+         local _ = target.level
+
+         local count = raw.len('level', 'worldSaveData.CharacterSaveParameterMap')
+         local index
+         for i = 0, count - 1 do
+           local this_id = raw.get('level', 'worldSaveData.CharacterSaveParameterMap[' .. i .. '].key.InstanceId')
+           if this_id == id then index = i break end
+         end
+         assert(index ~= nil, 'pal entry not found in CharacterSaveParameterMap')
+         local list = 'worldSaveData.CharacterSaveParameterMap[' .. index ..
+             '].value.RawData.SaveParameter.GotWorkSuitabilityAddRankList'
+         local n = raw.len('level', list)
+         local parts = {}
+         for i = 0, n - 1 do
+           parts[#parts+1] = raw.get('level', list .. '[' .. i .. '].WorkSuitability')
+         end
+         return table.concat(parts, ',')",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some(
+            "EPalWorkSuitability::EmitFlame,\
+             EPalWorkSuitability::Watering,\
+             EPalWorkSuitability::Seeding,\
+             EPalWorkSuitability::GenerateElectricity"
+        ),
+        "the entries must sit in WORK_SUITABILITIES order -- not the order Lua enumerated them, \
+         and not sorted"
+    );
+}
+
+#[test]
+fn assigning_a_non_table_to_a_collection_raises() {
+    let mut harness = support::harness(CAPS);
+    let (status, _) = harness.run(&first_pal("target.active_skills = 5\nreturn 'unreachable'"));
+    assert!(matches!(status, RunStatus::Error(_)));
+}
+
+#[test]
+fn assigning_a_wrongly_shaped_table_to_a_collection_raises_and_names_the_field() {
+    for (field, source) in [
+        ("active_skills", "target.active_skills = { 1, 2 }"),
+        ("active_skills", "target.active_skills = { Handcraft = 3 }"),
+        ("work_suitability", "target.work_suitability = { 'Handcraft' }"),
+        ("work_suitability", "target.work_suitability = { Handcraft = 'three' }"),
+    ] {
+        let mut harness = support::harness(CAPS);
+        let (status, _) = harness.run(&first_pal(&format!("{source}\nreturn 'unreachable'")));
+        match status {
+            RunStatus::Error(message) => assert!(
+                message.contains(field),
+                "{source} must name the field it refused, got {message:?}"
+            ),
+            other => panic!("expected {source} to raise, got {other:?}"),
+        }
+    }
+}
+
+/// Reading a pal's collections and writing them straight back is the first
+/// thing any editing plugin does, so the ids the save already carries have to
+/// pass the same validation an assignment does. A wrong catalog for
+/// `learned_skills`, or a casing mismatch between a save's ids and the
+/// catalog's, would show up here and nowhere else -- the hand-written ids in
+/// the tests above are catalog keys by construction. Each of the four fields
+/// gets its own populated pal, because a pal carrying active skills usually
+/// carries no learned ones and would leave that field untested.
+#[test]
+fn the_saves_own_collection_values_survive_a_round_trip() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(
+        "local ids = {}
+         for p in save.pals() do
+           if #p.learned_skills > 0 and not ids.learned then ids.learned = p.instance_id end
+           if #p.active_skills > 0 and not ids.active then ids.active = p.instance_id end
+           if #p.passive_skills > 0 and not ids.passive then ids.passive = p.instance_id end
+           local ranks = 0
+           for _ in pairs(p.work_suitability) do ranks = ranks + 1 end
+           if ranks > 0 and not ids.work then ids.work = p.instance_id end
+           if ids.learned and ids.active and ids.passive and ids.work then break end
+         end
+         assert(ids.learned, 'the fixture must hold a pal with learned skills')
+         assert(ids.active, 'the fixture must hold a pal with active skills')
+         assert(ids.passive, 'the fixture must hold a pal with passive skills')
+         assert(ids.work, 'the fixture must hold a pal with work-suitability ranks')
+
+         local failures = {}
+         for _, id in pairs(ids) do
+           local target
+           for p in save.pals() do if p.instance_id == id then target = p break end end
+           local ok, err = pcall(function()
+             target.learned_skills = target.learned_skills
+             target.active_skills = target.active_skills
+             target.passive_skills = target.passive_skills
+             target.work_suitability = target.work_suitability
+           end)
+           if not ok then failures[#failures+1] = tostring(err) end
+         end
+         return #failures .. '|' .. table.concat(failures, ';')",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some("0|"),
+        "every value already in the save must be assignable again"
+    );
+}
+
+/// The save cannot hold a zero rank: `apply_pal_dto` filters `rank != 0` out of
+/// `GotWorkSuitabilityAddRankList` and drops the property outright when nothing
+/// survives. If the cache kept the zero anyway, the same expression would answer
+/// `0` before a flush and `nil` after one -- so this reads the key twice, once
+/// straight after the write and once after forcing the flush, and requires the
+/// two to agree.
+#[test]
+fn a_zero_rank_reads_the_same_before_and_after_the_flush() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&first_pal(
+        "target.work_suitability = { Mining = 0, Handcraft = 2 }
+         local before = tostring(target.work_suitability.Mining)
+         local before_n = 0
+         for _ in pairs(target.work_suitability) do before_n = before_n + 1 end
+         -- reading a field this run has not written rebuilds the pal snapshot,
+         -- and that rebuild flushes the pending write out to the save first.
+         local _ = target.level
+         local after = tostring(target.work_suitability.Mining)
+         local after_n = 0
+         for _ in pairs(target.work_suitability) do after_n = after_n + 1 end
+         return before .. '|' .. after .. '|' .. before_n .. '|' .. after_n",
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some("nil|nil|1|1"),
+        "a zero rank must be absent on both sides of the flush, and must not be counted"
+    );
+}
+
+/// A dry run is a preview of the real run, so the two must agree about what a
+/// zero rank does. Nothing flushes under a dry run, so if the cached DTO kept a
+/// value the flush would have discarded, this is where the preview and the real
+/// result part company.
+#[test]
+fn a_dry_run_and_a_real_run_agree_about_a_zero_rank() {
+    let script = first_pal(
+        "target.work_suitability = { Mining = 0, Handcraft = 2 }
+         local n = 0
+         for _ in pairs(target.work_suitability) do n = n + 1 end
+         return tostring(target.work_suitability.Mining) .. '|' .. n",
+    );
+
+    let (dry_status, dry) = support::harness_dry(CAPS).run(&script);
+    let (real_status, real) = support::harness(CAPS).run(&script);
+
+    assert_eq!(dry_status, RunStatus::Ok);
+    assert_eq!(real_status, RunStatus::Ok);
+    assert_eq!(dry.as_deref(), Some("nil|1"), "the dry run must not preview a zero rank");
+    assert_eq!(dry, real, "a dry run must report what the real run produces");
+}
+
+/// A mis-cased id is stored exactly as it was assigned -- nothing rewrites it to
+/// the catalog's spelling, and `apply_pal_dto` writes the skill lists through
+/// with no catalog check of its own -- so accepting one would put a spelling the
+/// game does not know into the save. The catalogs are replaced here because the
+/// checked-in `data/json` tree and the fixture save agree on casing, so nothing
+/// in the real tree can exercise this.
+#[test]
+fn a_mis_cased_skill_id_is_refused_rather_than_stored_as_written() {
+    let catalog = r#"{"EPalWazaID::FireBall": {"element": "Fire"}}"#;
+
+    let mut exact = support::harness(CAPS).with_game_data_entries(&[("active_skills", catalog)]);
+    let (status, summary) = exact.run(&first_pal(
+        "target.active_skills = { 'EPalWazaID::FireBall' }
+         return target.active_skills[1]",
+    ));
+    assert_eq!(status, RunStatus::Ok, "the catalog's own spelling must be accepted");
+    assert_eq!(summary.as_deref(), Some("EPalWazaID::FireBall"));
+
+    for wrong in ["epalwazaid::fireball", "EPALWAZAID::FIREBALL", "EPalWazaID::fireball"] {
+        let mut harness = support::harness(CAPS).with_game_data_entries(&[("active_skills", catalog)]);
+        let (status, _) = harness.run(&first_pal(&format!(
+            "target.active_skills = {{ '{wrong}' }}\nreturn 'unreachable'"
+        )));
+        match status {
+            RunStatus::Error(message) => assert!(
+                message.contains(wrong),
+                "must name the id it refused, got {message:?}"
+            ),
+            other => panic!("{wrong:?} differs from the catalog only in case and must be refused, got {other:?}"),
+        }
     }
 }

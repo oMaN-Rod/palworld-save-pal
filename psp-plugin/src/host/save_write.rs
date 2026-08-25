@@ -1,6 +1,6 @@
 use std::ffi::{c_int, c_void};
 
-use psp_core::domain::{containers, guild, map_object, pal, player, world};
+use psp_core::domain::{containers, guild, map_object, pal, player};
 use psp_core::dto::container::{ItemContainerDto, ItemContainerSlotDto};
 use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::error::CoreError;
@@ -82,25 +82,6 @@ fn base_guild_id(ctx: &RunContext<'_>, base_id: Uuid) -> Option<Uuid> {
         .find(|entry| psp_core::props::as_uuid(&entry.key) == Some(base_id))
         .and_then(guild::base_guild_and_container)
         .map(|(guild_id, _)| guild_id)
-}
-
-fn pal_entry_exists(ctx: &RunContext<'_>, pal_id: Uuid) -> bool {
-    world::character_map(&ctx.session.level)
-        .map(|entries| {
-            entries
-                .iter()
-                .any(|entry| !world::entry_is_player(entry) && world::entry_instance_id(entry) == Some(pal_id))
-        })
-        .unwrap_or(false)
-}
-
-fn apply_pal_field(
-    ctx: &mut RunContext<'_>,
-    pal_id: Uuid,
-    field: &'static str,
-    f: impl FnOnce(&mut psp_core::dto::pal::PalDto),
-) -> Result<(), HostError> {
-    super::dto_cache::pal_write(ctx, pal_id, &[field], f)
 }
 
 /// The bound id is never epoch-checked at call time, which is sound only because
@@ -276,72 +257,6 @@ fn pal_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
 
 pub(crate) unsafe fn push_pal_delete(state: *mut lua_State, pal_id: Uuid) {
     push_bound(state, pal_delete_body, &pal_id.to_string());
-}
-
-fn pal_set_level_body(state: *mut lua_State) -> Result<c_int, HostError> {
-    unsafe {
-        check_args(state, 1, "pal.set_level")?;
-        let pal_id = bound_uuid(state, "pal id")?;
-        let level = arg_integer(state, 1, "level")?;
-        if !(1..=255).contains(&level) {
-            return Err(HostError::new(format!("pal level must be between 1 and 255, got {level}")));
-        }
-        with_context(state, |ctx| {
-            if !pal_entry_exists(ctx, pal_id) {
-                return Err(HostError::new(format!("pal {pal_id} not found")));
-            }
-            if ctx.dry_run {
-                ctx.bump("pal.set_level", 1);
-                return Ok(());
-            }
-            apply_pal_field(ctx, pal_id, "level", |dto| dto.level = level)?;
-            Ok(())
-        })?;
-        Ok(0)
-    }
-}
-
-pub(crate) unsafe fn push_pal_set_level(state: *mut lua_State, pal_id: Uuid) {
-    push_bound(state, pal_set_level_body, &pal_id.to_string());
-}
-
-fn pal_set_talent_body(state: *mut lua_State) -> Result<c_int, HostError> {
-    unsafe {
-        check_args(state, 2, "pal.set_talent")?;
-        let pal_id = bound_uuid(state, "pal id")?;
-        let which = arg_string(state, 1, "which")?;
-        let value = arg_integer(state, 2, "value")?;
-        if !(0..=100).contains(&value) {
-            return Err(HostError::new(format!("talent value must be between 0 and 100, got {value}")));
-        }
-        let (setter, field): (fn(&mut psp_core::dto::pal::PalDto, i64), &'static str) = match which.as_str() {
-            "hp" => (|dto, v| dto.talent_hp = v, "talent_hp"),
-            "shot" => (|dto, v| dto.talent_shot = v, "talent_shot"),
-            "defense" => (|dto, v| dto.talent_defense = v, "talent_defense"),
-            _ => {
-                return Err(HostError::new(format!(
-                    "unknown talent {which:?}; expected \"hp\", \"shot\" or \"defense\""
-                )))
-            }
-        };
-
-        with_context(state, |ctx| {
-            if !pal_entry_exists(ctx, pal_id) {
-                return Err(HostError::new(format!("pal {pal_id} not found")));
-            }
-            if ctx.dry_run {
-                ctx.bump("pal.set_talent", 1);
-                return Ok(());
-            }
-            apply_pal_field(ctx, pal_id, field, |dto| setter(dto, value))?;
-            Ok(())
-        })?;
-        Ok(0)
-    }
-}
-
-pub(crate) unsafe fn push_pal_set_talent(state: *mut lua_State, pal_id: Uuid) {
-    push_bound(state, pal_set_talent_body, &pal_id.to_string());
 }
 
 fn guild_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {

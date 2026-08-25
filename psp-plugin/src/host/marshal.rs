@@ -167,6 +167,156 @@ unsafe fn push_json_at(state: *mut lua_State, value: &Value, depth: usize) -> Re
     Ok(())
 }
 
+/// A Lua table read as one of the two collection shapes a field can hold: a
+/// sequence of strings, or a string-keyed map of integers. An empty table is
+/// reported as an empty list -- it is equally both, and only the field being
+/// assigned can say which was meant.
+pub(crate) enum TableCollection {
+    List(Vec<String>),
+    Map(Vec<(String, i64)>),
+}
+
+enum CollectionKey {
+    Index(i64),
+    Name(String),
+}
+
+enum CollectionValue {
+    Text(String),
+    Int(i64),
+    Other(String),
+}
+
+fn collection_value_type(value: &CollectionValue) -> &str {
+    match value {
+        CollectionValue::Text(_) => "string",
+        CollectionValue::Int(_) => "integer",
+        CollectionValue::Other(name) => name,
+    }
+}
+
+/// Deliberately does not accept a key Lua would coerce to a string: a float or
+/// boolean key is a mistake in a field assignment, and coercing it in place is
+/// also the mutation that breaks the enclosing `lua_next`.
+unsafe fn read_collection_key(state: *mut lua_State, name: &str) -> Result<CollectionKey, HostError> {
+    if lua_isinteger(state, -2) != 0 {
+        return Ok(CollectionKey::Index(lua_tointeger(state, -2)));
+    }
+    if lua_type(state, -2) == LUA_TSTRING {
+        return read_string_at(state, -2)
+            .map(CollectionKey::Name)
+            .ok_or_else(|| HostError::new(format!("failed to read a key of the table assigned to {name}")));
+    }
+    let actual = type_name(state, -2);
+    Err(HostError::new(format!(
+        "cannot assign a table to {name}: a {actual} is not a usable key"
+    )))
+}
+
+unsafe fn read_collection_value(state: *mut lua_State) -> CollectionValue {
+    match lua_type(state, -1) {
+        LUA_TSTRING => match read_string_at(state, -1) {
+            Some(text) => CollectionValue::Text(text),
+            None => CollectionValue::Other("string".to_string()),
+        },
+        LUA_TNUMBER if lua_isinteger(state, -1) != 0 => CollectionValue::Int(lua_tointeger(state, -1)),
+        _ => CollectionValue::Other(type_name(state, -1)),
+    }
+}
+
+unsafe fn read_collection_entries(
+    state: *mut lua_State,
+    index: c_int,
+    name: &str,
+) -> Result<Vec<(CollectionKey, CollectionValue)>, HostError> {
+    let mut entries = Vec::new();
+    lua_pushnil(state);
+    while lua_next(state, index) != 0 {
+        if entries.len() >= MAX_TABLE_NODES {
+            return Err(HostError::new(format!("the table assigned to {name} has too many entries")));
+        }
+        let key = read_collection_key(state, name)?;
+        entries.push((key, read_collection_value(state)));
+        lua_pop(state, 1);
+    }
+    Ok(entries)
+}
+
+/// Reads the table at `index` into a [`TableCollection`], leaving the stack as
+/// it found it even on the error paths that abandon a half-finished `lua_next`.
+pub(crate) unsafe fn read_collection(
+    state: *mut lua_State,
+    index: c_int,
+    name: &str,
+) -> Result<TableCollection, HostError> {
+    if lua_type(state, index) != LUA_TTABLE {
+        let actual = type_name(state, index);
+        return Err(HostError::new(format!("expected a table for {name}, got {actual}")));
+    }
+    if lua_checkstack(state, 4) == 0 {
+        return Err(HostError::new("the Lua stack cannot grow to walk this table"));
+    }
+    let index = lua_absindex(state, index);
+    let saved_top = lua_gettop(state);
+    let entries = read_collection_entries(state, index, name);
+    let len = lua_rawlen(state, index);
+    lua_settop(state, saved_top);
+    shape_collection(entries?, len, name)
+}
+
+fn shape_collection(
+    entries: Vec<(CollectionKey, CollectionValue)>,
+    len: u64,
+    name: &str,
+) -> Result<TableCollection, HostError> {
+    if entries.is_empty() {
+        return Ok(TableCollection::List(Vec::new()));
+    }
+    let indexed = entries.iter().filter(|(key, _)| matches!(key, CollectionKey::Index(_))).count();
+    if indexed == entries.len() {
+        if entries.len() as u64 != len
+            || !entries.iter().all(|(key, _)| matches!(key, CollectionKey::Index(i) if *i >= 1 && *i as u64 <= len))
+        {
+            return Err(HostError::new(format!(
+                "cannot assign a table to {name}: its list items must be numbered 1 to {} with no gaps",
+                entries.len()
+            )));
+        }
+        let mut items = vec![String::new(); entries.len()];
+        for (key, value) in entries {
+            let CollectionKey::Index(position) = key else { continue };
+            let CollectionValue::Text(text) = value else {
+                return Err(HostError::new(format!(
+                    "cannot assign a table to {name}: item {position} is of type {}, and a list field holds strings",
+                    collection_value_type(&value)
+                )));
+            };
+            if let Some(slot) = items.get_mut((position - 1) as usize) {
+                *slot = text;
+            }
+        }
+        return Ok(TableCollection::List(items));
+    }
+    if indexed != 0 {
+        return Err(HostError::new(format!(
+            "cannot assign a table to {name}: it mixes list items with named keys"
+        )));
+    }
+    let mut pairs = Vec::with_capacity(entries.len());
+    for (key, value) in entries {
+        let CollectionKey::Name(key) = key else { continue };
+        let CollectionValue::Int(number) = value else {
+            return Err(HostError::new(format!(
+                "cannot assign a table to {name}: the value for key {key:?} is of type {}, and a map field \
+                 holds integers",
+                collection_value_type(&value)
+            )));
+        };
+        pairs.push((key, number));
+    }
+    Ok(TableCollection::Map(pairs))
+}
+
 enum RawKey {
     Int(i64),
     Text(String),

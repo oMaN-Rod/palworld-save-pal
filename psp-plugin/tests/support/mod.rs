@@ -131,6 +131,15 @@ impl Harness {
         self
     }
 
+    /// Replaces the loaded catalogs with exactly the entries given, so a test
+    /// can pin how a lookup treats a spelling the real `data/json` tree does
+    /// not happen to contain.
+    pub fn with_game_data_entries(mut self, entries: &[(&str, &str)]) -> Self {
+        let owned = entries.iter().map(|(key, json)| (key.to_string(), json.to_string()));
+        self.game_data = GameData::from_entries(owned).expect("the test entries must parse");
+        self
+    }
+
     pub fn with_progress(mut self, sink: psp_core::progress::ProgressSink) -> Self {
         self.progress = Some(sink);
         self

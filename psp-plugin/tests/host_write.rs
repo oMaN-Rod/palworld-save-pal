@@ -194,7 +194,7 @@ fn setting_a_pal_level_is_visible_on_the_next_read() {
     let mut h = write_harness();
     let (status, value) = h.run(
         "local id for p in save.pals() do id = p.instance_id break end
-         for p in save.pals() do if p.instance_id == id then p.set_level(37) break end end
+         for p in save.pals() do if p.instance_id == id then p.level = 37 break end end
          for p in save.pals() do if p.instance_id == id then return tostring(p.level) end end
          return 'not found'",
     );
@@ -202,14 +202,33 @@ fn setting_a_pal_level_is_visible_on_the_next_read() {
     assert_eq!(value.as_deref(), Some("37"));
 }
 
+/// Asserting only that the assignment was refused would pass just as happily
+/// if assignment stopped working altogether, so the refusal has to be pinned
+/// by its reason: it must name the field and the range it enforces, and it
+/// must not be the error a pal that cannot be assigned to at all reports.
 #[test]
 fn an_out_of_range_level_is_refused() {
     let mut h = write_harness();
     let (status, value) = h.run(
-        "for p in save.pals() do return tostring(pcall(p.set_level, -5)) end return 'no pals'",
+        "for p in save.pals() do
+           local ok, err = pcall(function() p.level = -5 end)
+           return tostring(ok) .. '|' .. tostring(err)
+         end
+         return 'no pals'",
     );
     assert_eq!(status, RunStatus::Ok);
-    assert_eq!(value.as_deref(), Some("false"));
+    let value = value.expect("a string");
+    let (ok, err) = value.split_once('|').expect("an ok flag and an error");
+    assert_eq!(ok, "false", "an out-of-range level must be refused: {value}");
+    assert!(
+        !err.contains("attempt to index a psp.pal value"),
+        "the refusal must come from validating the value, not from the pal having no \
+         assignment path at all: {err}"
+    );
+    assert!(
+        err.contains("level must be between 1 and 255"),
+        "the refusal must name the field and the range it enforces: {err}"
+    );
 }
 
 #[test]
@@ -217,7 +236,7 @@ fn an_in_range_level_succeeds() {
     let mut h = write_harness();
     let (status, value) = h.run(
         "for p in save.pals() do
-           local ok = pcall(p.set_level, 42)
+           local ok = pcall(function() p.level = 42 end)
            return tostring(ok) .. ',' .. tostring(p.level)
          end
          return 'no pals'",
