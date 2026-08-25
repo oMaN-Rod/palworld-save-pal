@@ -149,6 +149,7 @@ fn raw_get(state: *mut lua_State) -> Result<c_int, HostError> {
         let path = parse_path(&arg_string(state, 2, "path")?)?;
 
         let value = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             ctx.session.raw_get(scope, &path).map_err(core_error)
         })?;
@@ -168,6 +169,7 @@ fn raw_exists(state: *mut lua_State) -> Result<c_int, HostError> {
         let path = parse_path(&arg_string(state, 2, "path")?)?;
 
         let exists = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             Ok(ctx.session.raw_kind(scope, &path).map_err(core_error)?.is_some())
         })?;
@@ -184,6 +186,7 @@ fn raw_kind(state: *mut lua_State) -> Result<c_int, HostError> {
         let path = parse_path(&arg_string(state, 2, "path")?)?;
 
         let kind = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             ctx.session.raw_kind(scope, &path).map_err(core_error)
         })?;
@@ -204,6 +207,7 @@ fn raw_set(state: *mut lua_State) -> Result<c_int, HostError> {
         let value = read_scalar_arg(state, 3)?;
 
         with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             if ctx.dry_run {
                 // Validate only — never write, not even transiently.
@@ -228,6 +232,7 @@ fn raw_delete(state: *mut lua_State) -> Result<c_int, HostError> {
         let path = parse_path(&arg_string(state, 2, "path")?)?;
 
         let removed = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             if ctx.dry_run {
                 let existed = ctx.session.raw_get_json(scope, &path).map_err(core_error)?.is_some();
@@ -254,6 +259,7 @@ fn raw_len(state: *mut lua_State) -> Result<c_int, HostError> {
         let path = parse_path(&arg_string(state, 2, "path")?)?;
 
         let len = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             ctx.session.raw_len(scope, &path).map_err(core_error)
         })?;
@@ -287,6 +293,7 @@ fn raw_visit(state: *mut lua_State) -> Result<c_int, HostError> {
                     "a raw.visit is already running; nested visits are refused",
                 ));
             }
+            super::dto_cache::flush(ctx)?;
             let scope = parse_target(&target, ctx)?;
             let walk = ctx
                 .session
@@ -298,6 +305,10 @@ fn raw_visit(state: *mut lua_State) -> Result<c_int, HostError> {
         drop(target);
         drop(path);
 
+        // The cache is flushed once, above, before the walk begins. A callback
+        // that writes a pal field mid-walk leaves later node reads stale until
+        // the next flush point -- read-only staleness, not a lost write, since
+        // the pending write itself still lands normally.
         let mut callback_error: Option<String> = None;
 
         loop {

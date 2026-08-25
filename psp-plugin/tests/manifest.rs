@@ -1,4 +1,4 @@
-use psp_plugin::manifest::{Capability, Manifest, ManifestError, Origin, ParamValue};
+use psp_plugin::manifest::{Capability, Manifest, ManifestError, ParamValue};
 
 const GOOD: &str = r#"{
   "id": "pst.cleanup",
@@ -45,7 +45,7 @@ fn with(field: &str, value: &str) -> String {
 
 #[test]
 fn a_well_formed_manifest_parses() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     assert_eq!(manifest.id, "pst.cleanup");
     assert_eq!(manifest.entry, "main.lua");
     assert_eq!(manifest.commands.len(), 2);
@@ -55,7 +55,7 @@ fn a_well_formed_manifest_parses() {
 
 #[test]
 fn an_unsupported_api_version_is_refused_with_both_numbers() {
-    let error = Manifest::parse(&with("api_version", "7"), Origin::User).unwrap_err();
+    let error = Manifest::parse(&with("api_version", "7")).unwrap_err();
     assert_eq!(
         error,
         ManifestError::UnsupportedApiVersion { found: 7, supported: 1 }
@@ -63,20 +63,17 @@ fn an_unsupported_api_version_is_refused_with_both_numbers() {
 }
 
 #[test]
-fn a_user_manifest_may_not_request_raw_access() {
+fn any_manifest_may_request_raw_access() {
     let raw = with("capabilities", r#"["save.read", "save.raw"]"#);
-    assert_eq!(
-        Manifest::parse(&raw, Origin::User).unwrap_err(),
-        ManifestError::RawIsBundledOnly
-    );
-    Manifest::parse(&raw, Origin::Bundled).expect("bundled plugins may request it");
+    let manifest = Manifest::parse(&raw).expect("save.raw is available to every plugin");
+    assert!(manifest.capabilities.contains(&Capability::SaveRaw));
 }
 
 #[test]
 fn write_without_read_is_refused() {
     let write_only = with("capabilities", r#"["save.write"]"#);
     assert_eq!(
-        Manifest::parse(&write_only, Origin::User).unwrap_err(),
+        Manifest::parse(&write_only).unwrap_err(),
         ManifestError::WriteRequiresRead
     );
 }
@@ -85,7 +82,7 @@ fn write_without_read_is_refused() {
 fn a_duplicate_capability_is_refused() {
     let dupe = with("capabilities", r#"["log", "log"]"#);
     assert!(matches!(
-        Manifest::parse(&dupe, Origin::User).unwrap_err(),
+        Manifest::parse(&dupe).unwrap_err(),
         ManifestError::DuplicateCapability(_)
     ));
 }
@@ -94,7 +91,7 @@ fn a_duplicate_capability_is_refused() {
 fn an_unknown_capability_is_refused_rather_than_ignored() {
     let unknown = with("capabilities", r#"["filesystem"]"#);
     assert!(matches!(
-        Manifest::parse(&unknown, Origin::User).unwrap_err(),
+        Manifest::parse(&unknown).unwrap_err(),
         ManifestError::Malformed(_)
     ));
 }
@@ -104,13 +101,13 @@ fn plugin_ids_are_restricted_to_a_safe_alphabet() {
     for bad in ["", "Has Caps", "trailing.", ".leading", "sla/sh", "..", "a..b"] {
         let json = with("id", &serde_json::to_string(bad).expect("quotes"));
         assert!(
-            matches!(Manifest::parse(&json, Origin::User), Err(ManifestError::InvalidId(_))),
+            matches!(Manifest::parse(&json), Err(ManifestError::InvalidId(_))),
             "id {bad:?} should have been refused"
         );
     }
     for good in ["pst.cleanup", "a", "my_plugin", "my-plugin", "a.b.c", "x1.y2"] {
         let json = with("id", &serde_json::to_string(good).expect("quotes"));
-        Manifest::parse(&json, Origin::User)
+        Manifest::parse(&json)
             .unwrap_or_else(|error| panic!("id {good:?} should parse, got {error:?}"));
     }
 }
@@ -120,7 +117,7 @@ fn the_entry_must_be_a_plain_lua_filename() {
     for bad in ["../escape.lua", "sub/dir.lua", "back\\slash.lua", "/abs.lua", "main.txt", ""] {
         let json = with("entry", &serde_json::to_string(bad).expect("quotes"));
         assert!(
-            matches!(Manifest::parse(&json, Origin::User), Err(ManifestError::InvalidEntry(_))),
+            matches!(Manifest::parse(&json), Err(ManifestError::InvalidEntry(_))),
             "entry {bad:?} should have been refused"
         );
     }
@@ -135,7 +132,7 @@ fn command_ids_must_be_callable_lua_globals() {
         );
         let json = with("commands", &commands);
         assert!(
-            matches!(Manifest::parse(&json, Origin::User), Err(ManifestError::InvalidCommandId(_))),
+            matches!(Manifest::parse(&json), Err(ManifestError::InvalidCommandId(_))),
             "command id {bad:?} should have been refused"
         );
     }
@@ -145,7 +142,7 @@ fn command_ids_must_be_callable_lua_globals() {
 fn duplicate_command_ids_are_refused() {
     let commands = r#"[{"id": "run", "title": "A"}, {"id": "run", "title": "B"}]"#;
     assert!(matches!(
-        Manifest::parse(&with("commands", commands), Origin::User).unwrap_err(),
+        Manifest::parse(&with("commands", commands)).unwrap_err(),
         ManifestError::DuplicateCommandId(_)
     ));
 }
@@ -156,7 +153,7 @@ fn a_param_range_must_not_be_inverted() {
         {"id": "n", "type": "int", "label": "N", "min": 10, "max": 1}
     ]}]"#;
     assert!(matches!(
-        Manifest::parse(&with("commands", commands), Origin::User).unwrap_err(),
+        Manifest::parse(&with("commands", commands)).unwrap_err(),
         ManifestError::InvalidParam { .. }
     ));
 }
@@ -172,7 +169,7 @@ fn param_ids_must_not_be_lua_reserved_words() {
         );
         assert!(
             matches!(
-                Manifest::parse(&with("commands", &commands), Origin::User).unwrap_err(),
+                Manifest::parse(&with("commands", &commands)).unwrap_err(),
                 ManifestError::InvalidParam { .. }
             ),
             "param id {bad:?} should have been refused"
@@ -186,14 +183,14 @@ fn an_enum_param_must_offer_at_least_one_option() {
         {"id": "pick", "type": "enum", "label": "Pick", "options": []}
     ]}]"#;
     assert!(matches!(
-        Manifest::parse(&with("commands", commands), Origin::User).unwrap_err(),
+        Manifest::parse(&with("commands", commands)).unwrap_err(),
         ManifestError::InvalidParam { .. }
     ));
 }
 
 #[test]
 fn supplied_arguments_are_coerced_and_clamped_against_the_declaration() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     let command = manifest.command("delete_inactive_players").expect("exists");
 
     let args = command
@@ -204,7 +201,7 @@ fn supplied_arguments_are_coerced_and_clamped_against_the_declaration() {
 
 #[test]
 fn a_missing_argument_falls_back_to_its_declared_default() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     let command = manifest.command("delete_inactive_players").expect("exists");
 
     let args = command
@@ -215,7 +212,7 @@ fn a_missing_argument_falls_back_to_its_declared_default() {
 
 #[test]
 fn an_out_of_range_argument_is_refused_not_clamped() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     let command = manifest.command("delete_inactive_players").expect("exists");
 
     assert!(matches!(
@@ -226,7 +223,7 @@ fn an_out_of_range_argument_is_refused_not_clamped() {
 
 #[test]
 fn an_argument_of_the_wrong_type_is_refused() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     let command = manifest.command("delete_inactive_players").expect("exists");
 
     assert!(matches!(
@@ -237,7 +234,7 @@ fn an_argument_of_the_wrong_type_is_refused() {
 
 #[test]
 fn an_undeclared_argument_is_refused_rather_than_passed_through() {
-    let manifest = Manifest::parse(GOOD, Origin::User).expect("should parse");
+    let manifest = Manifest::parse(GOOD).expect("should parse");
     let command = manifest.command("delete_inactive_players").expect("exists");
 
     assert!(matches!(
@@ -251,7 +248,7 @@ fn an_undeclared_argument_is_refused_rather_than_passed_through() {
 #[test]
 fn an_integer_argument_at_the_i64_bounds_is_accepted_exactly() {
     let manifest =
-        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND), Origin::User).expect("should parse");
+        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND)).expect("should parse");
     let command = manifest.command("run").expect("exists");
 
     let args = command
@@ -268,7 +265,7 @@ fn an_integer_argument_at_the_i64_bounds_is_accepted_exactly() {
 #[test]
 fn an_integer_one_past_i64_max_is_refused_not_saturated() {
     let manifest =
-        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND), Origin::User).expect("should parse");
+        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND)).expect("should parse");
     let command = manifest.command("run").expect("exists");
 
     let one_past_max: serde_json::Value =
@@ -282,7 +279,7 @@ fn an_integer_one_past_i64_max_is_refused_not_saturated() {
 #[test]
 fn a_huge_out_of_range_number_is_refused_not_saturated() {
     let manifest =
-        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND), Origin::User).expect("should parse");
+        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND)).expect("should parse");
     let command = manifest.command("run").expect("exists");
 
     assert!(matches!(
@@ -298,7 +295,7 @@ fn a_huge_out_of_range_number_is_refused_not_saturated() {
 #[test]
 fn integers_at_and_past_the_f64_precision_boundary_are_accepted_exactly() {
     let manifest =
-        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND), Origin::User).expect("should parse");
+        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND)).expect("should parse");
     let command = manifest.command("run").expect("exists");
 
     let two_pow_53: i64 = 1i64 << 53;
@@ -320,7 +317,7 @@ fn integers_at_and_past_the_f64_precision_boundary_are_accepted_exactly() {
 fn one_less_than_i64_min_collapses_to_i64_min_rather_than_erroring() {
     // serde_json parses this literal to an f64 before this crate sees a Value, and that f64 is bit-identical to i64::MIN.
     let manifest =
-        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND), Origin::User).expect("should parse");
+        Manifest::parse(&with("commands", UNBOUNDED_INT_COMMAND)).expect("should parse");
     let command = manifest.command("run").expect("exists");
 
     let one_past_min: serde_json::Value =

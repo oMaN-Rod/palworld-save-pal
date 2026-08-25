@@ -44,10 +44,8 @@ fn the_wall_clock_limit_holds_on_wasm() {
 
 #[wasm_bindgen_test]
 fn a_manifest_parses_on_wasm() {
-    let manifest = Manifest::parse(
-        r#"{"id":"a.b","api_version":1,"name":"A","version":"1.0.0","entry":"main.lua"}"#,
-        Origin::User,
-    )
+    let manifest = Manifest::parse(r#"{"id":"a.b","api_version":1,"name":"A","version":"1.0.0","entry":"main.lua"}"#,
+        Origin::User)
     .expect("parses");
     assert_eq!(manifest.id, "a.b");
 }

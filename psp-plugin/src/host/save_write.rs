@@ -99,24 +99,7 @@ fn apply_pal_field(
     pal_id: Uuid,
     f: impl FnOnce(&mut psp_core::dto::pal::PalDto),
 ) -> Result<(), HostError> {
-    let entries = world::character_map(&ctx.session.level).map_err(core_error)?;
-    let entry = entries
-        .iter()
-        .find(|entry| !world::entry_is_player(entry) && world::entry_instance_id(entry) == Some(pal_id))
-        .ok_or_else(|| HostError::new(format!("pal {pal_id} not found")))?;
-    let mut dto = pal::pal_dto_from_entry(entry, ctx.game_data)
-        .ok_or_else(|| HostError::new(format!("pal {pal_id} not found")))?;
-    f(&mut dto);
-
-    let entries_mut = world::character_map_mut(&mut ctx.session.level).map_err(core_error)?;
-    let entry_mut = entries_mut
-        .iter_mut()
-        .find(|entry| !world::entry_is_player(entry) && world::entry_instance_id(entry) == Some(pal_id))
-        .ok_or_else(|| HostError::new(format!("pal {pal_id} not found")))?;
-    let save_parameter = world::entry_save_parameter_mut(entry_mut)
-        .ok_or_else(|| HostError::new("pal save parameter missing"))?;
-    pal::apply_pal_dto(save_parameter, &dto, false, ctx.game_data);
-    Ok(())
+    super::dto_cache::pal_write(ctx, pal_id, f)
 }
 
 /// The bound id is never epoch-checked at call time, which is sound only because
@@ -157,6 +140,7 @@ fn player_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 0, "player.delete")?;
         let player_id = bound_uuid(state, "player id")?;
         let removed = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let fallback = null_progress();
             let progress: &ProgressSink = ctx.progress.unwrap_or(&fallback);
             player::get_player_details(ctx.session, ctx.game_data, player_id, progress)
@@ -236,6 +220,7 @@ fn pal_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 0, "pal.delete")?;
         let pal_id = bound_uuid(state, "pal id")?;
         with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let Some((owner_uid, guild_base)) = pal_routing(ctx, pal_id)? else {
                 return Err(HostError::new(format!("pal {pal_id} not found")));
             };
@@ -309,7 +294,6 @@ fn pal_set_level_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 return Ok(());
             }
             apply_pal_field(ctx, pal_id, |dto| dto.level = level)?;
-            ctx.note_pal_field_write();
             Ok(())
         })?;
         Ok(0)
@@ -349,7 +333,6 @@ fn pal_set_talent_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 return Ok(());
             }
             apply_pal_field(ctx, pal_id, |dto| setter(dto, value))?;
-            ctx.note_pal_field_write();
             Ok(())
         })?;
         Ok(0)
@@ -365,6 +348,7 @@ fn guild_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 0, "guild.delete")?;
         let guild_id = bound_uuid(state, "guild id")?;
         with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let details = guild::get_guild_details(ctx.session, ctx.game_data, guild_id)
                 .map_err(core_error)?
                 .ok_or_else(|| HostError::new(format!("guild {guild_id} not found")))?;
@@ -406,6 +390,7 @@ fn base_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 0, "base.delete")?;
         let base_id = bound_uuid(state, "base id")?;
         with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let Some(guild_id) = base_guild_id(ctx, base_id) else {
                 return Err(HostError::new(format!("base {base_id} not found")));
             };
@@ -460,6 +445,7 @@ fn slot_clear_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 ctx.bump("slot.clear", 1);
                 return Ok(());
             }
+            super::dto_cache::flush(ctx)?;
             let clear = ItemContainerDto {
                 id: container_id,
                 r#type: String::new(),
@@ -513,6 +499,7 @@ fn container_set_slot_count_body(state: *mut lua_State) -> Result<c_int, HostErr
                 ctx.bump("container.set_slot_count", 1);
                 return Ok(!would_destroy);
             }
+            super::dto_cache::flush(ctx)?;
             let outcome = containers::set_container_slot_count(ctx.session, container_id, slot_count)
                 .map_err(core_error)?;
             let resized = matches!(outcome, containers::SlotCountOutcome::Resized { .. });
@@ -573,7 +560,7 @@ fn clear_slots_where_run(state: *mut lua_State) -> Result<c_int, HostError> {
                 })
                 .collect();
             ctx.clear_slots = Some(ClearSlotsState { containers, kill: Vec::new() });
-            Ok(ctx.mutation_epoch)
+            Ok(ctx.mutation_epoch())
         })?;
 
         // Plain integers: a `longjmp` past this frame loses them without
@@ -587,7 +574,7 @@ fn clear_slots_where_run(state: *mut lua_State) -> Result<c_int, HostError> {
             let next = with_context(state, |ctx| {
                 // The cursor walks by position in a container re-read each step,
                 // so a structural write from the predicate must stop the walk.
-                if ctx.mutation_epoch != epoch {
+                if ctx.mutation_epoch() != epoch {
                     return Err(invalidated_handle_error());
                 }
                 loop {
@@ -656,6 +643,7 @@ fn clear_slots_where_run(state: *mut lua_State) -> Result<c_int, HostError> {
         }
 
         let cleared = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let stateful = ctx
                 .clear_slots
                 .take()
@@ -726,6 +714,7 @@ fn unlock_private_chests_body(state: *mut lua_State) -> Result<c_int, HostError>
                 ctx.bump("save.unlock_private_chests", count as i64);
                 return Ok(count);
             }
+            super::dto_cache::flush(ctx)?;
             let cleared = map_object::unlock_private_chests(ctx.session).map_err(core_error)?;
             if cleared > 0 {
                 ctx.note_mutation();
@@ -877,7 +866,7 @@ fn delete_where_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 }
             };
             ctx.delete_where = Some(DeleteWhereState { kind, ids, kill: Vec::new() });
-            Ok((ctx.mutation_epoch,))
+            Ok((ctx.mutation_epoch(),))
         })?;
 
         let mut index = 0usize;
@@ -927,6 +916,7 @@ fn delete_where_body(state: *mut lua_State) -> Result<c_int, HostError> {
         }
 
         let (removed, skipped) = with_context(state, |ctx| {
+            super::dto_cache::flush(ctx)?;
             let dw = ctx
                 .delete_where
                 .take()

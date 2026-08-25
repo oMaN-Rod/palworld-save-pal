@@ -7,7 +7,7 @@ use psp_core::gamedata::GameData;
 use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
 use psp_plugin::context::{LogLine, RunContext};
 use psp_plugin::host;
-use psp_plugin::manifest::{Capability, Manifest, Origin};
+use psp_plugin::manifest::{Capability, Manifest};
 use psp_plugin::runtime::{self, RunOutcome, RunRequest, RunServices};
 use psp_plugin::sandbox::{Cancel, Limits, Sandbox};
 use psp_plugin::status::RunStatus;
@@ -79,6 +79,8 @@ pub struct Harness {
     storage_writes: Vec<(String, String)>,
     confirm: Option<ConfirmFn>,
     progress: Option<psp_core::progress::ProgressSink>,
+    dto_flush_count: u64,
+    dto_index_build_count: u64,
 }
 
 fn build(granted: &[Capability], dry_run: bool, limits: Limits) -> Harness {
@@ -94,6 +96,8 @@ fn build(granted: &[Capability], dry_run: bool, limits: Limits) -> Harness {
         storage_writes: Vec::new(),
         confirm: None,
         progress: None,
+        dto_flush_count: 0,
+        dto_index_build_count: 0,
     }
 }
 
@@ -126,35 +130,33 @@ impl Harness {
 
     pub fn run(&mut self, source: &str) -> (RunStatus, Option<String>) {
         let mut sandbox = Sandbox::new(self.limits, Cancel::new()).expect("a sandbox must open");
-        let mut ctx = RunContext {
-            session: &mut self.session,
-            game_data: &self.game_data,
-            granted: self.granted.clone(),
-            dry_run: self.dry_run,
-            mutation_epoch: 0,
-            log: std::mem::take(&mut self.log),
-            counts: std::mem::take(&mut self.counts),
-            storage: std::mem::take(&mut self.storage),
-            storage_writes: std::mem::take(&mut self.storage_writes),
-            progress: self.progress.as_ref(),
-            confirm: self.confirm.as_deref(),
-            pals: None,
-            raw_walk: None,
-            delete_where: None,
-            clear_slots: None,
-            container: None,
-            api_version: psp_plugin::manifest::SUPPORTED_API_VERSION,
-            plugin_id: "test.harness".to_string(),
-            command_id: "harness".to_string(),
-            now: 0,
-            args: Vec::new(),
-        };
+        let mut ctx = RunContext::new(
+            &mut self.session,
+            &self.game_data,
+            self.granted.clone(),
+            self.dry_run,
+            std::mem::take(&mut self.log),
+            std::mem::take(&mut self.counts),
+            std::mem::take(&mut self.storage),
+            std::mem::take(&mut self.storage_writes),
+            self.progress.as_ref(),
+            self.confirm.as_deref(),
+            psp_plugin::manifest::SUPPORTED_API_VERSION,
+            "test.harness".to_string(),
+            "harness".to_string(),
+            0,
+            Vec::new(),
+        );
 
         let status = unsafe {
             host::set_context(sandbox.as_ptr(), (&mut ctx) as *mut RunContext<'_> as *mut _);
             let status = match host::install_globals(sandbox.as_ptr()) {
                 Ok(()) => sandbox.eval("=harness", source),
                 Err(err) => RunStatus::Error(err.into_message()),
+            };
+            let status = match (status, host::flush_dto_cache(&mut ctx)) {
+                (RunStatus::Ok, Err(err)) => RunStatus::Error(err.into_message()),
+                (status, _) => status,
             };
             host::clear_context(sandbox.as_ptr());
             status
@@ -164,6 +166,8 @@ impl Harness {
         self.counts = std::mem::take(&mut ctx.counts);
         self.storage = std::mem::take(&mut ctx.storage);
         self.storage_writes = std::mem::take(&mut ctx.storage_writes);
+        self.dto_flush_count = ctx.dto_flush_count;
+        self.dto_index_build_count = ctx.dto_index_build_count;
         drop(ctx);
 
         (status, sandbox.take_return_string())
@@ -180,6 +184,8 @@ impl Harness {
     pub fn session(&self) -> &SaveSession { &self.session }
     pub fn session_mut(&mut self) -> &mut SaveSession { &mut self.session }
     pub fn counts(&self) -> &BTreeMap<String, i64> { &self.counts }
+    pub fn dto_flush_count(&self) -> u64 { self.dto_flush_count }
+    pub fn dto_index_build_count(&self) -> u64 { self.dto_index_build_count }
     pub fn log(&self) -> &[LogLine] { &self.log }
     pub fn storage_writes(&self) -> &[(String, String)] { &self.storage_writes }
     pub fn seed_storage(&mut self, key: &str, value: &str) {
@@ -195,7 +201,7 @@ fn run_with_limits(
     dry_run: bool,
     limits: Limits,
 ) -> RunOutcome {
-    let manifest = Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+    let manifest = Manifest::parse(manifest_json).expect("the fixture manifest must parse");
     let mut session = load_corpus();
     let game_data = load_game_data();
     let mut sources = BTreeMap::new();
@@ -232,7 +238,7 @@ pub fn run_multi(
     dry_run: bool,
 ) -> RunOutcome {
     let manifest =
-        Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+        Manifest::parse(manifest_json).expect("the fixture manifest must parse");
     let mut session = load_corpus();
     let game_data = load_game_data();
     let storage = BTreeMap::new();
@@ -311,7 +317,7 @@ pub fn run_with_granted(
     args: serde_json::Value,
     granted: &[Capability],
 ) -> RunOutcome {
-    let manifest = Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+    let manifest = Manifest::parse(manifest_json).expect("the fixture manifest must parse");
     let mut session = load_corpus();
     let game_data = load_game_data();
     let mut sources = BTreeMap::new();

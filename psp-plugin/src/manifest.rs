@@ -9,12 +9,6 @@ const LUA_RESERVED_WORDS: &[&str] = &[
     "in", "local", "nil", "not", "or", "repeat", "return", "then", "true", "until", "while",
 ];
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Origin {
-    Bundled,
-    User,
-}
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Capability {
     #[serde(rename = "save.read")]
@@ -132,8 +126,6 @@ pub enum ManifestError {
     DuplicateCommandId(String),
     #[error("capability {0:?} is declared more than once")]
     DuplicateCapability(String),
-    #[error("save.raw is available to bundled plugins only")]
-    RawIsBundledOnly,
     #[error("save.write requires save.read")]
     WriteRequiresRead,
     #[error("parameter {id:?} on command {command:?}: {reason}")]
@@ -227,7 +219,7 @@ fn is_valid_param_id(id: &str) -> bool {
 }
 
 impl Manifest {
-    pub fn parse(json: &str, origin: Origin) -> Result<Manifest, ManifestError> {
+    pub fn parse(json: &str) -> Result<Manifest, ManifestError> {
         let manifest: Manifest =
             serde_json::from_str(json).map_err(|error| ManifestError::Malformed(error.to_string()))?;
 
@@ -262,9 +254,6 @@ impl Manifest {
                     "{capability:?}"
                 )));
             }
-        }
-        if seen_capabilities.contains(&Capability::SaveRaw) && origin == Origin::User {
-            return Err(ManifestError::RawIsBundledOnly);
         }
         if seen_capabilities.contains(&Capability::SaveWrite)
             && !seen_capabilities.contains(&Capability::SaveRead)

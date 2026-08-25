@@ -10,7 +10,7 @@ use psp_core::props;
 use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
 
 use psp_app::plugin_registry::BUNDLED;
-use psp_plugin::manifest::{Manifest, Origin};
+use psp_plugin::manifest::Manifest;
 use psp_plugin::runtime::{run_command, RunOutcome, RunRequest, RunServices};
 use psp_plugin::sandbox::{Cancel, Limits};
 use psp_plugin::status::RunStatus;
@@ -100,7 +100,7 @@ struct Harness {
 impl Harness {
     fn new() -> Self {
         let plugin = &BUNDLED[0];
-        let manifest = Manifest::parse(plugin.manifest, Origin::Bundled)
+        let manifest = Manifest::parse(plugin.manifest)
             .expect("the bundled manifest must parse");
         let sources = plugin
             .sources
@@ -398,7 +398,7 @@ fn the_bundled_manifest_parses_and_declares_four_commands() {
     let plugin = &BUNDLED[0];
     assert_eq!(plugin.id, "pst.cleanup");
     let manifest =
-        Manifest::parse(plugin.manifest, Origin::Bundled).expect("the bundled manifest must parse");
+        Manifest::parse(plugin.manifest).expect("the bundled manifest must parse");
     assert_eq!(manifest.commands.len(), 4);
     let mut ids: Vec<&str> = manifest.commands.iter().map(|c| c.id.as_str()).collect();
     ids.sort_unstable();

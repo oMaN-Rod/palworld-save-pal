@@ -1,5 +1,6 @@
 pub mod api_def;
 pub mod api_meta;
+pub(crate) mod dto_cache;
 pub mod gamedata;
 pub mod handle;
 pub mod marshal;
@@ -101,6 +102,13 @@ macro_rules! host_fn {
 pub use host_fn;
 
 pub type PushHostFn = unsafe fn(*mut lua_State);
+
+/// Writes back every dirty cached DTO. `runtime::run_command` calls this at the
+/// end of a run; anything that builds a `RunContext` directly (the test
+/// harness) must call it too, or a run's last writes never reach the save.
+pub fn flush_dto_cache(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
+    dto_cache::flush(ctx)
+}
 
 /// Its address is the key; the byte's value is never read.
 static CONTEXT_KEY: u8 = 0;

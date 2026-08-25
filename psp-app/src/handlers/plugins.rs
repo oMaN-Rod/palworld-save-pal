@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::sync::Arc;
 
-use psp_plugin::manifest::{Capability, CommandDef, Manifest, Origin};
+use psp_plugin::manifest::{Capability, CommandDef, Manifest};
 use psp_plugin::runtime::{run_command, RunOutcome, RunRequest, RunServices};
 use psp_plugin::sandbox::{Cancel, Limits};
 use psp_plugin::status::RunStatus;
@@ -28,20 +28,12 @@ pub struct PluginSummary {
     pub error: Option<String>,
 }
 
-fn origin_of(bundled: bool) -> Origin {
-    if bundled {
-        Origin::Bundled
-    } else {
-        Origin::User
-    }
-}
-
 fn parse_granted(raw: &str) -> Vec<Capability> {
     serde_json::from_str(raw).unwrap_or_default()
 }
 
 fn summarize(row: &psp_db::plugins::PluginRow) -> PluginSummary {
-    match Manifest::parse(&row.manifest, origin_of(row.bundled)) {
+    match Manifest::parse(&row.manifest) {
         Ok(manifest) => PluginSummary {
             id: row.id.clone(),
             name: manifest.name,
@@ -89,7 +81,7 @@ pub async fn handle_get_plugin(
         return Ok(());
     };
 
-    let manifest = match Manifest::parse(&row.manifest, origin_of(row.bundled)) {
+    let manifest = match Manifest::parse(&row.manifest) {
         Ok(manifest) => manifest,
         Err(parse_error) => {
             ctx.emitter.emit(
@@ -423,7 +415,7 @@ pub async fn handle_install_plugin(
         return install_error(ctx, "install_plugin accepts only a .lua file or a .zip archive");
     };
 
-    let manifest = match Manifest::parse(&manifest_json, Origin::User) {
+    let manifest = match Manifest::parse(&manifest_json) {
         Ok(manifest) => manifest,
         Err(manifest_error) => return install_error(ctx, manifest_error.to_string()),
     };
@@ -631,7 +623,7 @@ async fn run_plugin(
     }
 
     let manifest_json = overrides.and_then(|o| o.manifest).unwrap_or(&row.manifest);
-    let manifest = match Manifest::parse(manifest_json, origin_of(row.bundled)) {
+    let manifest = match Manifest::parse(manifest_json) {
         Ok(manifest) => manifest,
         Err(manifest_error) => {
             emit_refused_run(ctx, manifest_error.to_string());
@@ -775,7 +767,7 @@ fn bundled_sources(plugin: &BundledPlugin) -> BTreeMap<String, String> {
 /// full capability list — bundled plugins are first-party.
 pub async fn seed_bundled_plugins(app: &Arc<AppState>) -> Result<(), HandlerError> {
     for plugin in app.plugins.bundled() {
-        let manifest = Manifest::parse(plugin.manifest, Origin::Bundled)
+        let manifest = Manifest::parse(plugin.manifest)
             .map_err(|e| HandlerError::Other(format!("bundled plugin {}: {e}", plugin.id)))?;
         let sources = bundled_sources(plugin);
         let sources_json = serde_json::to_string(&sources)?;
@@ -812,10 +804,6 @@ pub async fn handle_check_plugin_syntax(
 
 #[derive(Debug, serde::Deserialize)]
 pub struct CheckPluginManifestData {
-    /// Names the row whose origin the manifest is judged under; unknown/absent
-    /// falls back to `Origin::User`, which refuses more.
-    #[serde(default)]
-    pub id: Option<String>,
     pub manifest: String,
 }
 
@@ -823,14 +811,7 @@ pub async fn handle_check_plugin_manifest(
     data: CheckPluginManifestData,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let origin = match &data.id {
-        Some(id) => match psp_db::plugins::get(&*ctx.app.driver, id).await? {
-            Some(row) => origin_of(row.bundled),
-            None => Origin::User,
-        },
-        None => Origin::User,
-    };
-    let error = Manifest::parse(&data.manifest, origin)
+    let error = Manifest::parse(&data.manifest)
         .err()
         .map(|parse_error| parse_error.to_string());
     ctx.emitter
@@ -902,7 +883,7 @@ pub async fn handle_create_plugin(
     })
     .to_string();
 
-    let manifest = match Manifest::parse(&manifest_json, Origin::User) {
+    let manifest = match Manifest::parse(&manifest_json) {
         Ok(manifest) => manifest,
         Err(manifest_error) => return create_refused(ctx, manifest_error.to_string()),
     };
@@ -968,7 +949,7 @@ pub async fn handle_save_plugin_source(
     }
 
     if data.path == MANIFEST_PATH {
-        let manifest = match Manifest::parse(&data.source, origin_of(row.bundled)) {
+        let manifest = match Manifest::parse(&data.source) {
             Ok(manifest) => manifest,
             Err(manifest_error) => return save_refused(ctx, &data, manifest_error.to_string()),
         };
@@ -1064,7 +1045,7 @@ pub async fn handle_delete_plugin_source(
         return delete_refused(ctx, &data, "the manifest cannot be deleted");
     }
 
-    let manifest = match Manifest::parse(&row.manifest, origin_of(row.bundled)) {
+    let manifest = match Manifest::parse(&row.manifest) {
         Ok(manifest) => manifest,
         Err(manifest_error) => {
             return delete_refused(

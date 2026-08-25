@@ -48,6 +48,7 @@ fn boss_and_lucky_by_pal(session: &SaveSession) -> HashMap<Uuid, (bool, bool)> {
 
 pub(crate) fn ensure_pals_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostError> {
     if ctx.pals.is_none() {
+        super::dto_cache::flush(ctx)?;
         let snapshot = pal::pal_summaries(ctx.session, ctx.game_data).map_err(core_error)?;
         let flags = boss_and_lucky_by_pal(ctx.session);
         let mut index: HashMap<Uuid, PalIndexEntry> = HashMap::with_capacity(snapshot.len());
@@ -785,7 +786,7 @@ fn iter_call(state: *mut lua_State) -> Result<c_int, HostError> {
         let cur = std::ptr::read(ptr);
 
         let next_id = with_context(state, |ctx| {
-            if ctx.mutation_epoch != cur.epoch {
+            if ctx.mutation_epoch() != cur.epoch {
                 return Err(invalidated_handle_error());
             }
             let index = usize::try_from(cur.index).unwrap_or(usize::MAX);
@@ -830,7 +831,7 @@ fn bases_next(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         let (index, epoch) = read_iter_box(state);
         let id = with_context(state, |ctx| {
-            if ctx.mutation_epoch != epoch {
+            if ctx.mutation_epoch() != epoch {
                 return Err(invalidated_handle_error());
             }
             let index = usize::try_from(index).unwrap_or(usize::MAX);
@@ -858,7 +859,7 @@ fn player_pals_next(state: *mut lua_State) -> Result<c_int, HostError> {
         drop(owner_text);
 
         let found = with_context(state, |ctx| {
-            if ctx.mutation_epoch != epoch {
+            if ctx.mutation_epoch() != epoch {
                 return Err(invalidated_handle_error());
             }
             let (snapshot, _) = ctx.pals.as_ref().ok_or_else(|| HostError::new("pal snapshot is missing"))?;
@@ -900,7 +901,7 @@ fn player_pals_factory(state: *mut lua_State) -> Result<c_int, HostError> {
         let owner_text = arg_string(state, lua_upvalueindex(4), "owner")?;
         let epoch = with_context(state, |ctx| {
             ensure_pals_snapshot(ctx)?;
-            Ok(ctx.mutation_epoch)
+            Ok(ctx.mutation_epoch())
         })?;
         push_iterator(state, player_pals_next, epoch, Some(&owner_text));
         Ok(1)
@@ -942,7 +943,7 @@ fn save_info(state: *mut lua_State) -> Result<c_int, HostError> {
 fn players_iter(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "save.players")?;
-        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch))?;
+        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch()))?;
         push_entity_iterator(state, DeleteWhereKind::Player, epoch);
         Ok(1)
     }
@@ -953,7 +954,7 @@ fn pals_iter(state: *mut lua_State) -> Result<c_int, HostError> {
         check_args(state, 0, "save.pals")?;
         let epoch = with_context(state, |ctx| {
             ensure_pals_snapshot(ctx)?;
-            Ok(ctx.mutation_epoch)
+            Ok(ctx.mutation_epoch())
         })?;
         push_entity_iterator(state, DeleteWhereKind::Pal, epoch);
         Ok(1)
@@ -963,7 +964,7 @@ fn pals_iter(state: *mut lua_State) -> Result<c_int, HostError> {
 fn guilds_iter(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "save.guilds")?;
-        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch))?;
+        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch()))?;
         push_entity_iterator(state, DeleteWhereKind::Guild, epoch);
         Ok(1)
     }
@@ -972,7 +973,7 @@ fn guilds_iter(state: *mut lua_State) -> Result<c_int, HostError> {
 fn bases_iter(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "save.bases")?;
-        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch))?;
+        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch()))?;
         push_iterator(state, bases_next, epoch, None);
         Ok(1)
     }
@@ -982,7 +983,7 @@ fn containers_next(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         let (index, epoch) = read_iter_box(state);
         let id = with_context(state, |ctx| {
-            if ctx.mutation_epoch != epoch {
+            if ctx.mutation_epoch() != epoch {
                 return Err(invalidated_handle_error());
             }
             let index = usize::try_from(index).unwrap_or(usize::MAX);
@@ -1006,7 +1007,7 @@ fn containers_next(state: *mut lua_State) -> Result<c_int, HostError> {
 fn containers_iter(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "save.containers")?;
-        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch))?;
+        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch()))?;
         push_iterator(state, containers_next, epoch, None);
         Ok(1)
     }
@@ -1021,7 +1022,7 @@ fn slots_next(state: *mut lua_State) -> Result<c_int, HostError> {
         drop(container_text);
 
         let slot_index = with_context(state, |ctx| {
-            if ctx.mutation_epoch != epoch {
+            if ctx.mutation_epoch() != epoch {
                 return Err(invalidated_handle_error());
             }
             let position = usize::try_from(index).unwrap_or(usize::MAX);
@@ -1054,7 +1055,7 @@ fn container_slots_factory(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "container.slots")?;
         let owner_text = arg_string(state, lua_upvalueindex(4), "container")?;
-        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch))?;
+        let epoch = with_context(state, |ctx| Ok(ctx.mutation_epoch()))?;
         push_iterator(state, slots_next, epoch, Some(&owner_text));
         Ok(1)
     }

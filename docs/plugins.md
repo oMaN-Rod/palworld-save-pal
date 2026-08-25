@@ -119,22 +119,35 @@ take effect: `run_plugin_command`'s `granted` list is intersected against the
 manifest's declared capabilities before installation, so a caller cannot grant
 a plugin more than it declared it wants.
 
-### Why `save.raw` is bundled-only
+### `save.raw` is powerful, and the risk is yours to accept
 
-Manifest validation refuses `save.raw` outright for a plugin whose origin is
-`User` (`ManifestError::RawIsBundledOnly`) — installing a `.zip` or `.lua` file
-through the UI always produces a `User`-origin plugin, so no user-installed
-plugin can ever declare it, regardless of what its manifest asks for.
+Any plugin may declare `save.raw`. Read this before you do.
 
-The reason is that raw access is unaudited mutation of save internals with no
-schema validation behind it. It is also the main road for a real PalworldSaveTools
-port — most of PST's own functions read and write the level tree directly, not
-through a typed model — so it cannot simply be left out of the API. Bundled
-scripts carry the same review burden as any other Rust or Lua code in this
-repository, so they may use it; handing that same access to arbitrary
-third-party code before there is a signing and review process would make a
-corrupted save report a matter of when, not if. This is revisited once a
-plugin repository with review exists.
+Every other capability writes through a typed model that validates what it is
+given. `save.write` can make changes you did not want, but the result is always
+a structurally valid save. **`raw.set` and `raw.delete` write untyped values at
+arbitrary paths with no schema behind them, so a mistake can produce a save the
+game refuses to load.** There is no undo inside a plugin run.
+
+Three things follow from that:
+
+- **A plugin only gets `save.raw` if you grant it.** The capability is declared
+  in the manifest and granted at install time; the grant is where you decide
+  whether you trust this code with unvalidated write access.
+- **Back up the save before running a `save.raw` plugin you did not write.**
+  Especially one from someone else.
+- **Prefer the typed API where it can do the job.** `save.players()`,
+  `save.pals()`, `save.containers()` and friends validate their writes and keep
+  handles coherent. Reach for `raw` when the typed API genuinely cannot reach
+  what you need — not as a shortcut around learning it.
+
+Raw access is the main road for porting PalworldSaveTools' own functions, most
+of which read and write the level tree directly rather than through a typed
+model. That is why it is available rather than withheld.
+
+If you publish a plugin that declares `save.raw`, say so plainly in its
+description. Someone installing it is being asked to trust you with their save
+file.
 
 ## The host API
 
@@ -284,10 +297,12 @@ out instead. `save.clear_slots_where` has no such split — its predicate pass i
 identical in both modes and only the apply phase is skipped — so prefer it over
 hand-rolling the loop, and reach for `ctx.dry_run` branching only if you must.
 
-### `raw` — requires `save.raw` (bundled plugins only)
+### `raw` — requires `save.raw`
 
-Direct GVAS tree access. Still gated on `save.raw`, and per-player targets
-also require `players`.
+Direct GVAS tree access, available to any plugin that declares `save.raw`.
+Per-player targets also require `players`. Writes here bypass schema
+validation and can produce a save the game cannot load — see the capability
+notes above before using it.
 
 ```lua
 raw.get(target, path)              -- read one scalar; errors if path does not resolve

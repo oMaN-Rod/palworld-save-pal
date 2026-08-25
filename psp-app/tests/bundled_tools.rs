@@ -12,7 +12,7 @@ use psp_core::progress::null_progress;
 use psp_core::session::{PlayerFileData, SaveKind, SaveSession};
 
 use psp_app::plugin_registry::BUNDLED;
-use psp_plugin::manifest::{Manifest, Origin};
+use psp_plugin::manifest::Manifest;
 use psp_plugin::runtime::{run_command, RunOutcome, RunRequest, RunServices};
 use psp_plugin::sandbox::{Cancel, Limits};
 use psp_plugin::status::RunStatus;
@@ -99,7 +99,7 @@ impl Harness {
             .iter()
             .find(|p| p.id == "pst.tools")
             .expect("pst.tools is a bundled plugin");
-        let manifest = Manifest::parse(plugin.manifest, Origin::Bundled)
+        let manifest = Manifest::parse(plugin.manifest)
             .expect("the bundled manifest must parse");
         let sources = plugin
             .sources

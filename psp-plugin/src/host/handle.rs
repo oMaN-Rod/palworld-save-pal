@@ -72,7 +72,7 @@ pub unsafe fn read_handle(
     }
     let handle = std::ptr::read(ptr);
     with_context(state, |ctx| {
-        if handle.epoch != ctx.mutation_epoch {
+        if handle.epoch != ctx.mutation_epoch() {
             Err(invalidated_handle_error())
         } else {
             Ok(())

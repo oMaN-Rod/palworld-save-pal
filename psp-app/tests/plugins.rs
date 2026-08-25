@@ -173,7 +173,7 @@ async fn install_plugin_accepts_a_zip_containing_a_manifest_and_sources() {
 }
 
 #[tokio::test]
-async fn install_plugin_rejects_a_manifest_requesting_save_raw() {
+async fn install_plugin_accepts_a_manifest_requesting_save_raw() {
     let mut test = TestContext::new(|_| {}).await;
     let manifest = manifest_json("raw-plugin", &["save.raw"], "run", 1);
     let bytes = zip_bytes(&[("manifest.json", &manifest), ("main.lua", "function run() end")]);
@@ -181,11 +181,10 @@ async fn install_plugin_rejects_a_manifest_requesting_save_raw() {
 
     handle_install_plugin(data, &mut ctx(&mut test)).await.unwrap();
     let frame = test.next_frame_json();
-    assert_eq!(frame["type"], "error");
-    let message = frame["data"].as_str().unwrap();
-    assert!(message.contains("save.raw"), "message was: {message}");
+    assert_eq!(frame["type"], "install_plugin");
+    assert_eq!(frame["data"]["id"], "raw-plugin");
 
-    assert!(psp_db::plugins::get(&*test.app.driver, "raw-plugin").await.unwrap().is_none());
+    assert!(psp_db::plugins::get(&*test.app.driver, "raw-plugin").await.unwrap().is_some());
 }
 
 #[tokio::test]
@@ -757,7 +756,7 @@ async fn check_plugin_syntax_reports_the_line_of_a_parse_error() {
 async fn check_plugin_manifest_accepts_a_valid_manifest() {
     let mut test = TestContext::new(|_| {}).await;
     handle_check_plugin_manifest(
-        CheckPluginManifestData { id: None, manifest: manifest_json("ok.plugin", &["log"], "run", 1) },
+        CheckPluginManifestData { manifest: manifest_json("ok.plugin", &["log"], "run", 1) },
         &mut ctx(&mut test),
     )
     .await
@@ -772,7 +771,7 @@ async fn check_plugin_manifest_accepts_a_valid_manifest() {
 async fn check_plugin_manifest_reports_a_parse_failure_as_text() {
     let mut test = TestContext::new(|_| {}).await;
     handle_check_plugin_manifest(
-        CheckPluginManifestData { id: None, manifest: manifest_json("ok.plugin", &["log"], "run", 99) },
+        CheckPluginManifestData { manifest: manifest_json("ok.plugin", &["log"], "run", 99) },
         &mut ctx(&mut test),
     )
     .await
@@ -784,50 +783,23 @@ async fn check_plugin_manifest_reports_a_parse_failure_as_text() {
 }
 
 #[tokio::test]
-async fn check_plugin_manifest_validates_under_the_named_rows_origin() {
+async fn check_plugin_manifest_accepts_save_raw_from_any_plugin() {
     let mut test = TestContext::new(|_| {}).await;
-    seed_row(&test, "bundled.one", &["log"], "function run() end", &["log"], true).await;
-    seed_row(&test, "user.one", &["log"], "function run() end", &["log"], false).await;
 
-    let raw_manifest = manifest_json("bundled.one", &["save.raw"], "run", 1);
     handle_check_plugin_manifest(
-        CheckPluginManifestData { id: Some("bundled.one".to_string()), manifest: raw_manifest.clone() },
+        CheckPluginManifestData { manifest: manifest_json("user.one", &["save.raw"], "run", 1) },
         &mut ctx(&mut test),
     )
     .await
     .unwrap();
-    let frame = test.next_frame_json();
-    assert_eq!(frame["data"]["error"], serde_json::Value::Null, "a bundled row may request save.raw");
 
-    let user_raw = manifest_json("user.one", &["save.raw"], "run", 1);
-    handle_check_plugin_manifest(
-        CheckPluginManifestData { id: Some("user.one".to_string()), manifest: user_raw },
-        &mut ctx(&mut test),
-    )
-    .await
-    .unwrap();
     let frame = test.next_frame_json();
-    assert!(
-        !frame["data"]["error"].is_null(),
-        "a user row must not be told save.raw is acceptable"
+    assert_eq!(
+        frame["data"]["error"],
+        serde_json::Value::Null,
+        "save.raw is available to every plugin"
     );
-}
-
-#[tokio::test]
-async fn check_plugin_manifest_falls_back_to_user_origin_for_an_unknown_id() {
-    let mut test = TestContext::new(|_| {}).await;
-    handle_check_plugin_manifest(
-        CheckPluginManifestData {
-            id: Some("nothing.here".to_string()),
-            manifest: manifest_json("nothing.here", &["save.raw"], "run", 1),
-        },
-        &mut ctx(&mut test),
-    )
-    .await
-    .unwrap();
-
-    let frame = test.next_frame_json();
-    assert!(!frame["data"]["error"].is_null());
+    test.assert_no_more_frames();
 }
 
 #[tokio::test]
@@ -873,11 +845,8 @@ async fn create_plugin_writes_a_runnable_scaffold() {
     assert!(!row.bundled);
     assert!(row.enabled);
 
-    let manifest = psp_plugin::manifest::Manifest::parse(
-        &row.manifest,
-        psp_plugin::manifest::Origin::User,
-    )
-    .expect("the scaffold manifest must parse");
+    let manifest = psp_plugin::manifest::Manifest::parse(&row.manifest)
+        .expect("the scaffold manifest must parse");
     assert_eq!(manifest.entry, "main.lua");
     assert_eq!(manifest.commands.len(), 1);
 
@@ -1102,9 +1071,9 @@ async fn saving_an_unparsable_manifest_changes_nothing() {
 }
 
 #[tokio::test]
-async fn saving_a_manifest_that_requests_save_raw_is_refused_for_a_user_plugin() {
+async fn saving_a_manifest_that_requests_save_raw_is_accepted_for_a_user_plugin() {
     let mut test = TestContext::new(|_| {}).await;
-    let before = seed_row(&test, "user.one", &["log"], "function run() end", &["log"], false).await;
+    seed_row(&test, "user.one", &["log"], "function run() end", &["log"], false).await;
 
     handle_save_plugin_source(
         SavePluginSourceData {
@@ -1119,11 +1088,11 @@ async fn saving_a_manifest_that_requests_save_raw_is_refused_for_a_user_plugin()
 
     let frame = test.next_frame_json();
     assert_eq!(frame["type"], "save_plugin_source");
-    assert!(!frame["data"]["error"].is_null());
+    assert_eq!(frame["data"]["error"], serde_json::Value::Null);
 
     let after = psp_db::plugins::get(&*test.app.driver, "user.one").await.unwrap().unwrap();
-    assert_eq!(after.manifest, before.manifest);
-    assert_eq!(after.granted_capabilities, before.granted_capabilities);
+    let stored: serde_json::Value = serde_json::from_str(&after.manifest).unwrap();
+    assert_eq!(stored["capabilities"], serde_json::json!(["save.raw"]));
 }
 
 #[tokio::test]
@@ -1316,7 +1285,7 @@ async fn a_draft_manifest_claiming_another_id_still_uses_the_requested_rows_gran
 }
 
 #[tokio::test]
-async fn a_user_plugins_draft_manifest_cannot_claim_save_raw() {
+async fn a_user_plugins_draft_manifest_may_claim_save_raw() {
     let mut test = TestContext::new(|_| {}).await;
     test.session.save = Some(minimal_save());
     seed_row(&test, "user.one", &["log"], "function run() end", &["log", "save.raw"], false).await;
@@ -1327,7 +1296,7 @@ async fn a_user_plugins_draft_manifest_cannot_claim_save_raw() {
     handle_run_plugin_draft(request, &mut ctx(&mut test)).await.unwrap();
 
     let frame = test.next_frame_json();
-    assert_eq!(frame["data"]["status"], "error");
+    assert_eq!(frame["data"]["status"], "ok");
 }
 
 #[tokio::test]

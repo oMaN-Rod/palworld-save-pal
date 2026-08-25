@@ -31,6 +31,9 @@ pub struct RunOutcome {
     pub result: Option<Value>,
     pub log: Vec<LogLine>,
     pub storage_writes: Vec<(String, String)>,
+    /// How many pals the DTO cache actually wrote back this run. Host-internal
+    /// observability, not plugin output -- kept out of `counts` on purpose.
+    pub dto_flush_count: u64,
 }
 
 pub struct RunServices<'a> {
@@ -51,6 +54,7 @@ fn error_before_context(message: String) -> RunOutcome {
         result: None,
         log: Vec::new(),
         storage_writes: Vec::new(),
+        dto_flush_count: 0,
     }
 }
 
@@ -69,6 +73,7 @@ fn finish(
         result,
         log: ctx.log,
         storage_writes: ctx.storage_writes,
+        dto_flush_count: ctx.dto_flush_count,
     }
 }
 
@@ -97,29 +102,23 @@ pub fn run_command(request: RunRequest<'_>, services: RunServices<'_>) -> RunOut
         .collect();
 
     let now = chrono::Utc::now().timestamp();
-    let mut ctx = RunContext {
+    let mut ctx = RunContext::new(
         session,
         game_data,
         granted,
-        dry_run: request.dry_run,
-        mutation_epoch: 0,
-        log: Vec::new(),
-        counts: BTreeMap::new(),
-        storage: storage.clone(),
-        storage_writes: Vec::new(),
+        request.dry_run,
+        Vec::new(),
+        BTreeMap::new(),
+        storage.clone(),
+        Vec::new(),
         progress,
         confirm,
-        pals: None,
-        raw_walk: None,
-        delete_where: None,
-        clear_slots: None,
-        container: None,
-        api_version: request.manifest.api_version,
-        plugin_id: request.manifest.id.clone(),
-        command_id: request.command_id.to_string(),
+        request.manifest.api_version,
+        request.manifest.id.clone(),
+        request.command_id.to_string(),
         now,
-        args: coerced_args,
-    };
+        coerced_args,
+    );
 
     // The registry slot must be cleared before `ctx` is consumed below: that
     // ordering is what keeps `host::with_context`'s raw pointer sound.
@@ -140,6 +139,10 @@ pub fn run_command(request: RunRequest<'_>, services: RunServices<'_>) -> RunOut
     }
 
     let (status, summary, result, lifted_counts) = execute(&mut sandbox, &request);
+    let status = match (status, host::flush_dto_cache(&mut ctx)) {
+        (RunStatus::Ok, Err(error)) => RunStatus::Error(error.into_message()),
+        (status, _) => status,
+    };
     unsafe { host::clear_context(sandbox.as_ptr()) };
     finish(ctx, status, summary, result, lifted_counts)
 }
