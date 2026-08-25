@@ -16,6 +16,7 @@ pub use host::fields::{Access, FieldSpec};
 pub use host::fields::base::BASE_FIELDS;
 pub use host::fields::container::CONTAINER_FIELDS;
 pub use host::fields::guild::GUILD_FIELDS;
+pub use host::fields::map_object::MAP_OBJECT_FIELDS;
 pub use host::fields::pal::PAL_FIELDS;
 pub use host::fields::player::PLAYER_FIELDS;
 pub use host::fields::slot::SLOT_FIELDS;

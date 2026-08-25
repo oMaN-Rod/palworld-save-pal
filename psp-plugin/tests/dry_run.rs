@@ -28,6 +28,10 @@ const SCRIPTS: &[(&str, &str)] = &[
         "return tostring(save.players():delete_where(function() return true end))",
     ),
     (
+        "unattached map objects",
+        "return tostring(save.map_objects():delete_where(function(obj) return obj.base_id == nil end))",
+    ),
+    (
         "invalid items",
         "return tostring(save.clear_slots_where(function(s) \
            return s.item_id ~= nil and not gamedata.is_valid_item(s.item_id) end))",

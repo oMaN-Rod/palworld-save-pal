@@ -3,6 +3,24 @@ mod support;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
 
+/// Runs `body` as a command's Lua source and returns its JSON-converted table result,
+/// so a test can index the return value the way the raw host itself does.
+fn run_script(body: &str) -> serde_json::Value {
+    let manifest = r#"{
+      "id": "test.raw_scalar_array", "api_version": 1, "name": "Test", "version": "1.0.0",
+      "entry": "main.lua",
+      "capabilities": ["save.raw"],
+      "commands": [{ "id": "run", "title": "Run" }]
+    }"#;
+    let source = format!("function run()\n{body}\nend\n");
+    let outcome = support::run(manifest, &source, "run", serde_json::json!({}), false);
+    match outcome.status {
+        RunStatus::Ok => {}
+        other => panic!("script failed: {other:?}"),
+    }
+    outcome.result.expect("the script must return a table")
+}
+
 #[test]
 fn a_top_level_key_can_be_deleted_in_one_line() {
     let mut h = support::harness(&[Capability::SaveRaw]);
@@ -377,4 +395,88 @@ fn a_memory_ceiling_that_starves_global_installation_is_an_error_not_an_abort() 
         RunStatus::Error(_) => {}
         other => panic!("expected an error from a starved global installation, got {other:?}"),
     }
+}
+
+#[test]
+fn a_name_array_element_is_addressable_readable_and_writable() {
+    let source = r#"
+        local base = nil
+        raw.visit('level', 'worldSaveData.CharacterSaveParameterMap', function(node)
+            if base == nil and node.key == 'PassiveSkillList' then base = node.path end
+        end)
+        if base == nil then error('the fixture must carry a PassiveSkillList') end
+
+        local n = raw.len('level', base)
+        if n == nil or n == 0 then error('a name array must report its length') end
+
+        local first = raw.get('level', base .. '[0]')
+        raw.set('level', base .. '[0]', 'PSP_TEST_MARKER')
+        local after = raw.get('level', base .. '[0]')
+        raw.set('level', base .. '[0]', first)
+
+        return { n = n, kind = raw.kind('level', base .. '[0]'),
+                 first = first, after = after,
+                 restored = raw.get('level', base .. '[0]') }
+    "#;
+    let result = run_script(source);
+    assert!(result["n"].as_i64().unwrap_or(0) > 0);
+    assert_eq!(result["after"], "PSP_TEST_MARKER");
+    assert_eq!(result["restored"], result["first"]);
+    assert_eq!(result["kind"], "scalar");
+}
+
+#[test]
+fn writing_a_number_into_a_name_array_element_is_refused_rather_than_coerced() {
+    let source = r#"
+        local base = nil
+        raw.visit('level', 'worldSaveData.CharacterSaveParameterMap', function(node)
+            if base == nil and node.key == 'PassiveSkillList' and raw.len('level', node.path) > 0 then
+                base = node.path
+            end
+        end)
+        if base == nil then error('the fixture must carry a non-empty PassiveSkillList') end
+
+        local before = raw.get('level', base .. '[0]')
+        local ok, err = pcall(function() raw.set('level', base .. '[0]', 12345) end)
+        return { ok = ok, err = tostring(err),
+                 unchanged = raw.get('level', base .. '[0]') == before,
+                 still_a_string = type(raw.get('level', base .. '[0]')) == 'string' }
+    "#;
+    let result = run_script(source);
+    assert_eq!(result["ok"], false, "a number written into a name array must be refused");
+    assert_eq!(result["unchanged"], true, "a refused write must leave the element alone");
+    assert_eq!(result["still_a_string"], true, "the element must not be coerced to another type");
+}
+
+#[test]
+fn deleting_a_name_array_element_shortens_the_array() {
+    let source = r#"
+        local base = nil
+        raw.visit('level', 'worldSaveData.CharacterSaveParameterMap', function(node)
+            if base == nil and node.key == 'PassiveSkillList' and raw.len('level', node.path) > 0 then
+                base = node.path
+            end
+        end)
+        if base == nil then error('the fixture must carry a non-empty PassiveSkillList') end
+        local before = raw.len('level', base)
+        raw.delete('level', base .. '[0]')
+        return { before = before, after = raw.len('level', base) }
+    "#;
+    let result = run_script(source);
+    assert_eq!(
+        result["after"].as_i64().unwrap_or(-1),
+        result["before"].as_i64().unwrap_or(0) - 1
+    );
+}
+
+#[test]
+fn a_walk_reaches_the_elements_of_a_name_array() {
+    let source = r#"
+        local seen = 0
+        raw.visit('level', 'worldSaveData.CharacterSaveParameterMap', function(node)
+            if node.index ~= nil and type(node.value) == 'string' then seen = seen + 1 end
+        end)
+        return { seen = seen }
+    "#;
+    assert!(run_script(source)["seen"].as_i64().unwrap_or(0) > 0);
 }

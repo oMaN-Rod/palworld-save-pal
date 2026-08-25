@@ -15,6 +15,7 @@ pub enum HandleKind {
     Base,
     Container,
     Slot,
+    MapObject,
 }
 
 impl std::fmt::Display for HandleKind {
@@ -26,6 +27,7 @@ impl std::fmt::Display for HandleKind {
             HandleKind::Base => "base",
             HandleKind::Container => "container",
             HandleKind::Slot => "slot",
+            HandleKind::MapObject => "map_object",
         };
         f.write_str(text)
     }
@@ -39,6 +41,7 @@ fn metatable_name(kind: HandleKind) -> &'static CStr {
         HandleKind::Base => c"psp.base",
         HandleKind::Container => c"psp.container",
         HandleKind::Slot => c"psp.slot",
+        HandleKind::MapObject => c"psp.map_object",
     }
 }
 
@@ -92,6 +95,7 @@ pub fn handle_kind_for(kind: DeleteWhereKind) -> HandleKind {
         DeleteWhereKind::Player => HandleKind::Player,
         DeleteWhereKind::Guild => HandleKind::Guild,
         DeleteWhereKind::Pal => HandleKind::Pal,
+        DeleteWhereKind::MapObject => HandleKind::MapObject,
     }
 }
 
@@ -171,5 +175,11 @@ pub unsafe fn install_metatables(state: *mut lua_State) {
         HandleKind::Slot,
         super::save_read::push_slot_index as PushHostFn,
         super::fields::slot::push_slot_newindex as PushHostFn,
+    );
+    install_one(
+        state,
+        HandleKind::MapObject,
+        super::save_read::push_map_object_index as PushHostFn,
+        super::fields::map_object::push_map_object_newindex as PushHostFn,
     );
 }

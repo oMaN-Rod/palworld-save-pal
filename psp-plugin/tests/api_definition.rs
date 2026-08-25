@@ -101,6 +101,7 @@ fn acquire_snippet(kind: &str) -> Option<&'static str> {
         "guild" => "for h in save.guilds() do H = h break end",
         "base" => "for h in save.bases() do H = h break end",
         "container" => "for h in save.containers() do H = h break end",
+        "map_object" => "for h in save.map_objects() do H = h break end",
         "slot" => {
             "for c in save.containers() do \
                for s in c.slots() do H = s break end \

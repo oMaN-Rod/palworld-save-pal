@@ -197,6 +197,7 @@ impl RawNodeMut<'_> {
         match &self.node {
             NodeMut::Prop(p) => property_scalar(p),
             NodeMut::Struct(sv) => struct_value_scalar(sv),
+            NodeMut::ValueVecElement(vv, index) => value_vec_scalar(vv, *index),
             NodeMut::Props(_) | NodeMut::Entry(_) => None,
         }
     }
@@ -237,6 +238,10 @@ enum NodeRef<'a> {
     Prop(&'a Property),
     Entry(&'a MapEntry),
     Struct(&'a StructValue),
+    /// An element of a scalar-element `ValueVec` array, addressed by index. Kept as the
+    /// vector plus index, not an extracted `RawScalar`, so `can_set_scalar_on_node` still
+    /// has the element's real width (e.g. `Int8` vs `Int64`) to validate a write against.
+    ValueVecElement(&'a ValueVec, usize),
 }
 
 enum NodeMut<'a> {
@@ -244,6 +249,7 @@ enum NodeMut<'a> {
     Prop(&'a mut Property),
     Entry(&'a mut MapEntry),
     Struct(&'a mut StructValue),
+    ValueVecElement(&'a mut ValueVec, usize),
 }
 
 /// The `StructValue::Game` variants that themselves hold a `Properties` bag reachable
@@ -310,6 +316,9 @@ fn step_ref<'a>(cursor: NodeRef<'a>, seg: &Segment) -> Option<NodeRef<'a>> {
         (NodeRef::Prop(p), Segment::Index(n)) => match p {
             Property::Map(entries) => entries.get(*n).map(NodeRef::Entry),
             Property::Array(ValueVec::Struct(vs)) => vs.get(*n).map(NodeRef::Struct),
+            Property::Array(vv) if value_vec_is_scalar(vv) && *n < value_vec_len(vv) => {
+                Some(NodeRef::ValueVecElement(vv, *n))
+            }
             _ => None,
         },
         (NodeRef::Entry(e), Segment::Key(k)) if k == "key" => Some(NodeRef::Prop(&e.key)),
@@ -344,6 +353,9 @@ fn step_mut<'a>(cursor: NodeMut<'a>, seg: &Segment) -> Option<NodeMut<'a>> {
             Segment::Index(n) => match p {
                 Property::Map(entries) => entries.get_mut(*n).map(NodeMut::Entry),
                 Property::Array(ValueVec::Struct(vs)) => vs.get_mut(*n).map(NodeMut::Struct),
+                Property::Array(vv) if value_vec_is_scalar(vv) && *n < value_vec_len(vv) => {
+                    Some(NodeMut::ValueVecElement(vv, *n))
+                }
                 _ => None,
             },
         },
@@ -359,6 +371,7 @@ fn step_mut<'a>(cursor: NodeMut<'a>, seg: &Segment) -> Option<NodeMut<'a>> {
                 .map(NodeMut::Prop),
             Segment::Index(_) => None,
         },
+        NodeMut::ValueVecElement(_, _) => None,
     }
 }
 
@@ -604,6 +617,158 @@ fn assign_scalar_write_on_struct_value(sv: &mut StructValue, write: ScalarWrite)
     Ok(())
 }
 
+fn value_vec_element_kind_label(vv: &ValueVec) -> &'static str {
+    match vv {
+        ValueVec::Int8(_) => "Int8",
+        ValueVec::Int16(_) => "Int16",
+        ValueVec::Int(_) => "Int",
+        ValueVec::Int64(_) => "Int64",
+        ValueVec::UInt8(_) => "UInt8",
+        ValueVec::UInt16(_) => "UInt16",
+        ValueVec::UInt32(_) => "UInt32",
+        ValueVec::UInt64(_) => "UInt64",
+        ValueVec::Float(_) => "Float",
+        ValueVec::Double(_) => "Double",
+        ValueVec::Bool(_) => "Bool",
+        ValueVec::Byte(crate::ue::ByteArray::Byte(_)) => "Byte",
+        ValueVec::Byte(crate::ue::ByteArray::Label(_)) => "ByteLabel",
+        ValueVec::Enum(_) => "Enum",
+        ValueVec::Str(_) => "Str",
+        ValueVec::Name(_) => "Name",
+        _ => "non-scalar",
+    }
+}
+
+fn convert_scalar_for_value_vec(vv: &ValueVec, value: RawScalar) -> Result<ScalarWrite, CoreError> {
+    let existing_label = value_vec_element_kind_label(vv);
+    match vv {
+        ValueVec::Int8(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Int8(i8::try_from(n).map_err(|_| overflow("Int8", n))?))
+        }
+        ValueVec::Int16(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Int16(i16::try_from(n).map_err(|_| overflow("Int16", n))?))
+        }
+        ValueVec::Int(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Int(i32::try_from(n).map_err(|_| overflow("Int", n))?))
+        }
+        ValueVec::Int64(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Int64(n))
+        }
+        ValueVec::UInt8(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::UInt8(u8::try_from(n).map_err(|_| overflow("UInt8", n))?))
+        }
+        ValueVec::UInt16(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::UInt16(u16::try_from(n).map_err(|_| overflow("UInt16", n))?))
+        }
+        ValueVec::UInt32(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::UInt32(u32::try_from(n).map_err(|_| overflow("UInt32", n))?))
+        }
+        ValueVec::UInt64(_) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::UInt64(u64::try_from(n).map_err(|_| overflow("UInt64", n))?))
+        }
+        ValueVec::Float(_) => {
+            let RawScalar::Float(f) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Float(Float(f as f32)))
+        }
+        ValueVec::Double(_) => {
+            let RawScalar::Float(f) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Double(Double(f)))
+        }
+        ValueVec::Bool(_) => {
+            let RawScalar::Bool(b) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Bool(b))
+        }
+        ValueVec::Byte(crate::ue::ByteArray::Byte(_)) => {
+            let RawScalar::Int(n) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Byte(u8::try_from(n).map_err(|_| overflow("Byte", n))?))
+        }
+        ValueVec::Byte(crate::ue::ByteArray::Label(_)) => {
+            let RawScalar::Text(t) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::ByteLabel(t))
+        }
+        ValueVec::Enum(_) | ValueVec::Str(_) | ValueVec::Name(_) => {
+            let RawScalar::Text(t) = value else {
+                return Err(mismatch(&value, existing_label));
+            };
+            Ok(ScalarWrite::Text(t))
+        }
+        _ => Err(mismatch(&value, existing_label)),
+    }
+}
+
+fn assign_scalar_write_on_value_vec(vv: &mut ValueVec, index: usize, write: ScalarWrite) -> Result<(), CoreError> {
+    fn set_at<T>(v: &mut [T], index: usize, value: T) -> Result<(), CoreError> {
+        match v.get_mut(index) {
+            Some(slot) => {
+                *slot = value;
+                Ok(())
+            }
+            None => Err(CoreError::Other(format!(
+                "index {index} is out of range for a {}-element array",
+                v.len()
+            ))),
+        }
+    }
+    match (vv, write) {
+        (ValueVec::Int8(v), ScalarWrite::Int8(n)) => set_at(v, index, n),
+        (ValueVec::Int16(v), ScalarWrite::Int16(n)) => set_at(v, index, n),
+        (ValueVec::Int(v), ScalarWrite::Int(n)) => set_at(v, index, n),
+        (ValueVec::Int64(v), ScalarWrite::Int64(n)) => set_at(v, index, n),
+        (ValueVec::UInt8(v), ScalarWrite::UInt8(n)) => set_at(v, index, n),
+        (ValueVec::UInt16(v), ScalarWrite::UInt16(n)) => set_at(v, index, n),
+        (ValueVec::UInt32(v), ScalarWrite::UInt32(n)) => set_at(v, index, n),
+        (ValueVec::UInt64(v), ScalarWrite::UInt64(n)) => set_at(v, index, n),
+        (ValueVec::Float(v), ScalarWrite::Float(f)) => set_at(v, index, f),
+        (ValueVec::Double(v), ScalarWrite::Double(d)) => set_at(v, index, d),
+        (ValueVec::Bool(v), ScalarWrite::Bool(b)) => set_at(v, index, b),
+        (ValueVec::Byte(crate::ue::ByteArray::Byte(v)), ScalarWrite::Byte(n)) => set_at(v, index, n),
+        (ValueVec::Byte(crate::ue::ByteArray::Label(v)), ScalarWrite::ByteLabel(t)) => set_at(v, index, t),
+        (ValueVec::Enum(v), ScalarWrite::Text(t)) => set_at(v, index, t),
+        (ValueVec::Str(v), ScalarWrite::Text(t)) => set_at(v, index, t),
+        (ValueVec::Name(v), ScalarWrite::Text(t)) => set_at(v, index, t),
+        _ => Err(CoreError::Other("scalar conversion produced a mismatched write kind".to_string())),
+    }
+}
+
+fn set_value_vec_scalar(vv: &mut ValueVec, index: usize, value: RawScalar) -> Result<(), CoreError> {
+    let write = convert_scalar_for_value_vec(vv, value)?;
+    assign_scalar_write_on_value_vec(vv, index, write)
+}
+
 fn set_scalar_on_property(property: &mut Property, value: RawScalar) -> Result<(), CoreError> {
     let write = convert_scalar_for_property(property, value)?;
     assign_scalar_write(property, write)
@@ -618,6 +783,7 @@ fn set_scalar_on_node(node: &mut NodeMut, value: RawScalar) -> Result<(), CoreEr
     match node {
         NodeMut::Prop(p) => set_scalar_on_property(p, value),
         NodeMut::Struct(sv) => set_scalar_on_struct_value(sv, value),
+        NodeMut::ValueVecElement(vv, index) => set_value_vec_scalar(vv, *index, value),
         NodeMut::Props(_) | NodeMut::Entry(_) => Err(mismatch(&value, "non-scalar")),
     }
 }
@@ -626,12 +792,14 @@ fn can_set_scalar_on_node(node: NodeRef, value: &RawScalar) -> Result<(), CoreEr
     match node {
         NodeRef::Prop(p) => convert_scalar_for_property(p, value.clone()).map(|_| ()),
         NodeRef::Struct(sv) => convert_scalar_for_struct_value(sv, value.clone()).map(|_| ()),
+        NodeRef::ValueVecElement(vv, _) => convert_scalar_for_value_vec(vv, value.clone()).map(|_| ()),
         NodeRef::Props(_) | NodeRef::Entry(_) => Err(mismatch(value, "non-scalar")),
     }
 }
 
-/// `Array(ValueVec::Struct(_))` is the only array shape `[n]` can step into; every other
-/// array/set variant reports `Opaque`, so `NodeKind::Array` never promises what it can't deliver.
+/// `Array(ValueVec::Struct(_))` and any `Array` over a scalar-element `ValueVec` are the
+/// array shapes `[n]` can step into; every other array/set variant reports `Opaque`, so
+/// `NodeKind::Array` never promises what it can't deliver.
 fn property_kind(property: &Property) -> NodeKind {
     if property_scalar(property).is_some() {
         return NodeKind::Scalar;
@@ -639,6 +807,7 @@ fn property_kind(property: &Property) -> NodeKind {
     match property {
         Property::Map(_) => NodeKind::Map,
         Property::Array(ValueVec::Struct(_)) => NodeKind::Array,
+        Property::Array(vv) if value_vec_is_scalar(vv) => NodeKind::Array,
         _ => {
             if property_struct_properties(property).is_some() {
                 NodeKind::Struct
@@ -666,6 +835,7 @@ fn node_kind(node: NodeRef) -> NodeKind {
         NodeRef::Entry(_) => NodeKind::Entry,
         NodeRef::Prop(p) => property_kind(p),
         NodeRef::Struct(sv) => struct_value_kind(sv),
+        NodeRef::ValueVecElement(_, _) => NodeKind::Scalar,
     }
 }
 
@@ -673,6 +843,7 @@ fn node_scalar(node: NodeRef) -> Option<RawScalar> {
     match node {
         NodeRef::Prop(p) => property_scalar(p),
         NodeRef::Struct(sv) => struct_value_scalar(sv),
+        NodeRef::ValueVecElement(vv, index) => value_vec_scalar(vv, index),
         NodeRef::Props(_) | NodeRef::Entry(_) => None,
     }
 }
@@ -706,6 +877,54 @@ fn value_vec_len(vv: &ValueVec) -> usize {
     }
 }
 
+fn value_vec_is_scalar(vv: &ValueVec) -> bool {
+    matches!(
+        vv,
+        ValueVec::Int8(_)
+            | ValueVec::Int16(_)
+            | ValueVec::Int(_)
+            | ValueVec::Int64(_)
+            | ValueVec::UInt8(_)
+            | ValueVec::UInt16(_)
+            | ValueVec::UInt32(_)
+            | ValueVec::UInt64(_)
+            | ValueVec::Float(_)
+            | ValueVec::Double(_)
+            | ValueVec::Bool(_)
+            | ValueVec::Byte(_)
+            | ValueVec::Enum(_)
+            | ValueVec::Str(_)
+            | ValueVec::Name(_)
+    )
+}
+
+fn value_vec_scalar(vv: &ValueVec, index: usize) -> Option<RawScalar> {
+    match vv {
+        ValueVec::Int8(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::Int16(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::Int(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::Int64(v) => v.get(index).map(|n| RawScalar::Int(*n)),
+        ValueVec::UInt8(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::UInt16(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::UInt32(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::UInt64(v) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::Float(v) => v.get(index).map(|f| RawScalar::Float(f.0 as f64)),
+        ValueVec::Double(v) => v.get(index).map(|f| RawScalar::Float(f.0)),
+        ValueVec::Bool(v) => v.get(index).map(|b| RawScalar::Bool(*b)),
+        ValueVec::Byte(crate::ue::ByteArray::Byte(v)) => v.get(index).map(|n| RawScalar::Int(*n as i64)),
+        ValueVec::Byte(crate::ue::ByteArray::Label(v)) => v.get(index).map(|s| RawScalar::Text(s.clone())),
+        ValueVec::Enum(v) | ValueVec::Str(v) | ValueVec::Name(v) => {
+            v.get(index).map(|s| RawScalar::Text(s.clone()))
+        }
+        ValueVec::Text(_)
+        | ValueVec::SoftObject(_)
+        | ValueVec::Object(_)
+        | ValueVec::Box(_)
+        | ValueVec::Box2D(_)
+        | ValueVec::Struct(_) => None,
+    }
+}
+
 fn node_len(node: NodeRef) -> Option<usize> {
     match node {
         NodeRef::Props(p) => Some(p.0.len()),
@@ -721,6 +940,14 @@ fn node_to_json(node: NodeRef) -> Option<serde_json::Value> {
         NodeRef::Prop(p) => serde_json::to_value(p).ok(),
         NodeRef::Entry(e) => serde_json::to_value(e).ok(),
         NodeRef::Struct(s) => serde_json::to_value(s).ok(),
+        NodeRef::ValueVecElement(vv, index) => value_vec_scalar(vv, index).map(|s| match s {
+            RawScalar::Int(n) => serde_json::Value::from(n),
+            RawScalar::Float(f) => serde_json::json!(f),
+            RawScalar::Bool(b) => serde_json::Value::from(b),
+            RawScalar::Text(t) => serde_json::Value::from(t),
+            RawScalar::Guid(g) => serde_json::Value::from(g.to_string()),
+            RawScalar::Empty => serde_json::Value::Null,
+        }),
     }
 }
 
@@ -749,6 +976,9 @@ fn children_of(node: NodeRef) -> Vec<(Segment, bool)> {
         NodeRef::Prop(p) => match p {
             Property::Map(entries) => (0..entries.len()).map(|i| (Segment::Index(i), true)).collect(),
             Property::Array(ValueVec::Struct(vs)) => (0..vs.len()).map(|i| (Segment::Index(i), true)).collect(),
+            Property::Array(vv) if value_vec_is_scalar(vv) => {
+                (0..value_vec_len(vv)).map(|i| (Segment::Index(i), true)).collect()
+            }
             _ => match property_struct_properties(p) {
                 Some(props) => keyed_children(props),
                 None => Vec::new(),
@@ -758,6 +988,7 @@ fn children_of(node: NodeRef) -> Vec<(Segment, bool)> {
             Some(props) => keyed_children(props),
             None => Vec::new(),
         },
+        NodeRef::ValueVecElement(_, _) => Vec::new(),
     }
 }
 
@@ -801,6 +1032,7 @@ enum Removable<'a> {
     PropsKey(&'a mut Properties, PropertyKey),
     MapIndex(&'a mut Vec<MapEntry>, usize),
     ArrayIndex(&'a mut Vec<StructValue>, usize),
+    ValueVecIndex(&'a mut ValueVec, usize),
 }
 
 fn resolve_removable<'a>(root: &'a mut Properties, segments: &[Segment]) -> Option<Removable<'a>> {
@@ -817,6 +1049,7 @@ fn resolve_removable<'a>(root: &'a mut Properties, segments: &[Segment]) -> Opti
         (NodeMut::Prop(p), Segment::Index(n)) => match p {
             Property::Map(entries) => Some(Removable::MapIndex(entries, *n)),
             Property::Array(ValueVec::Struct(vs)) => Some(Removable::ArrayIndex(vs, *n)),
+            Property::Array(vv) if value_vec_is_scalar(vv) => Some(Removable::ValueVecIndex(vv, *n)),
             _ => None,
         },
         (NodeMut::Struct(sv), Segment::Key(k)) => {
@@ -824,6 +1057,39 @@ fn resolve_removable<'a>(root: &'a mut Properties, segments: &[Segment]) -> Opti
             Some(Removable::PropsKey(props, PropertyKey::from(k.as_str())))
         }
         _ => None,
+    }
+}
+
+fn remove_value_vec_index(vv: &mut ValueVec, index: usize) -> bool {
+    fn remove_at<T>(v: &mut Vec<T>, index: usize) -> bool {
+        if index < v.len() {
+            v.remove(index);
+            true
+        } else {
+            false
+        }
+    }
+    match vv {
+        ValueVec::Int8(v) => remove_at(v, index),
+        ValueVec::Int16(v) => remove_at(v, index),
+        ValueVec::Int(v) => remove_at(v, index),
+        ValueVec::Int64(v) => remove_at(v, index),
+        ValueVec::UInt8(v) => remove_at(v, index),
+        ValueVec::UInt16(v) => remove_at(v, index),
+        ValueVec::UInt32(v) => remove_at(v, index),
+        ValueVec::UInt64(v) => remove_at(v, index),
+        ValueVec::Float(v) => remove_at(v, index),
+        ValueVec::Double(v) => remove_at(v, index),
+        ValueVec::Bool(v) => remove_at(v, index),
+        ValueVec::Byte(crate::ue::ByteArray::Byte(v)) => remove_at(v, index),
+        ValueVec::Byte(crate::ue::ByteArray::Label(v)) => remove_at(v, index),
+        ValueVec::Enum(v) | ValueVec::Str(v) | ValueVec::Name(v) => remove_at(v, index),
+        ValueVec::Text(_)
+        | ValueVec::SoftObject(_)
+        | ValueVec::Object(_)
+        | ValueVec::Box(_)
+        | ValueVec::Box2D(_)
+        | ValueVec::Struct(_) => false,
     }
 }
 
@@ -848,6 +1114,7 @@ fn remove_at(root: &mut Properties, segments: &[Segment]) -> bool {
                 false
             }
         }
+        Some(Removable::ValueVecIndex(vv, n)) => remove_value_vec_index(vv, n),
         None => false,
     }
 }

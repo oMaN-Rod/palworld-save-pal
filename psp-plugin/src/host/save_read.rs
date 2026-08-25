@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::ffi::{c_int, c_void, CStr};
 use std::sync::OnceLock;
 
-use psp_core::domain::{containers, pal, world};
+use psp_core::domain::{containers, map_object, pal, world};
 use psp_core::dto::summary::IsoDateTime;
 use psp_core::error::CoreError;
 use psp_core::props;
@@ -12,8 +12,8 @@ use uuid::Uuid;
 
 use super::api_def::{ApiFunction, ApiHandle, ApiParam, ApiType};
 use super::fields::{
-    base as base_fields, container as container_fields, guild as guild_fields, pal as pal_fields,
-    player as player_fields, slot as slot_fields,
+    base as base_fields, container as container_fields, guild as guild_fields,
+    map_object as map_object_fields, pal as pal_fields, player as player_fields, slot as slot_fields,
     push_field_value, FieldValue,
 };
 use super::handle::{handle_kind_for, invalidated_handle_error, push_handle, read_handle, Handle, HandleKind};
@@ -62,6 +62,22 @@ pub(crate) fn ensure_pals_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostE
             index.insert(summary.instance_id, PalIndexEntry { position, is_boss, is_lucky });
         }
         ctx.pals = Some((snapshot, index));
+    }
+    Ok(())
+}
+
+/// Cached for the run rather than resolved per iterator step or per field
+/// read: `map_object_views` walks and filters every `MapObjectSaveData`
+/// entry, so calling it once per position visited -- or once per field --
+/// would turn a single full iteration quadratic.
+pub(crate) fn ensure_map_objects_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostError> {
+    if ctx.map_objects.is_none() {
+        let views = map_object::map_object_views(ctx.session).map_err(core_error)?;
+        let mut index = HashMap::with_capacity(views.len());
+        for (position, view) in views.iter().enumerate() {
+            index.insert(view.instance_id, position);
+        }
+        ctx.map_objects = Some((views, index));
     }
     Ok(())
 }
@@ -254,6 +270,18 @@ fn base_index(state: *mut lua_State) -> Result<c_int, HostError> {
             return Ok(1);
         }
         let value = with_context(state, |ctx| base_fields::base_get(ctx, handle.id, &field))?;
+        drop(field);
+        push_field_value(state, value)?;
+        Ok(1)
+    }
+}
+
+fn map_object_index(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 2, "map_object field")?;
+        let handle = read_handle(state, 1, HandleKind::MapObject)?;
+        let field = arg_string(state, 2, "field")?;
+        let value = with_context(state, |ctx| map_object_fields::map_object_get(ctx, handle.id, &field))?;
         drop(field);
         push_field_value(state, value)?;
         Ok(1)
@@ -456,6 +484,12 @@ pub fn handle_types() -> &'static [ApiHandle] {
                         capability: Some(Capability::SaveWrite),
                     }],
                 },
+                ApiHandle {
+                    name: "map_object",
+                    capability: Some(Capability::SaveRead),
+                    fields: map_object_fields::api_fields(),
+                    methods: &[],
+                },
             ]
         })
         .as_slice()
@@ -467,6 +501,7 @@ host_fn!(push_guild_index, guild_index);
 host_fn!(push_base_index, base_index);
 host_fn!(push_container_index, container_field);
 host_fn!(push_slot_index, slot_field);
+host_fn!(push_map_object_index, map_object_index);
 
 /// Upvalue 4 is a two-slot table holding the next index and the creation epoch,
 /// mutated in place rather than replaced; upvalue 5, when present, is the owner.
@@ -523,6 +558,7 @@ pub(crate) fn iter_metatable_name(kind: DeleteWhereKind) -> &'static CStr {
         DeleteWhereKind::Player => c"psp.iter.player",
         DeleteWhereKind::Guild => c"psp.iter.guild",
         DeleteWhereKind::Pal => c"psp.iter.pal",
+        DeleteWhereKind::MapObject => c"psp.iter.map_object",
     }
 }
 
@@ -551,6 +587,13 @@ fn iter_call(state: *mut lua_State) -> Result<c_int, HostError> {
                 DeleteWhereKind::Pal => {
                     ensure_pals_snapshot(ctx)?;
                     ctx.pals.as_ref().and_then(|(snapshot, _)| snapshot.get(index)).map(|p| p.instance_id)
+                }
+                DeleteWhereKind::MapObject => {
+                    ensure_map_objects_snapshot(ctx)?;
+                    ctx.map_objects
+                        .as_ref()
+                        .and_then(|(views, _)| views.get(index))
+                        .map(|view| view.instance_id)
                 }
             };
             Ok(id)
@@ -768,6 +811,18 @@ fn containers_iter(state: *mut lua_State) -> Result<c_int, HostError> {
     }
 }
 
+fn map_objects_iter(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.map_objects")?;
+        let epoch = with_context(state, |ctx| {
+            ensure_map_objects_snapshot(ctx)?;
+            Ok(ctx.mutation_epoch())
+        })?;
+        push_entity_iterator(state, DeleteWhereKind::MapObject, epoch);
+        Ok(1)
+    }
+}
+
 fn slots_next(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         let (index, epoch) = read_iter_box(state);
@@ -822,6 +877,7 @@ host_fn!(push_pals, pals_iter);
 host_fn!(push_guilds, guilds_iter);
 host_fn!(push_bases, bases_iter);
 host_fn!(push_containers, containers_iter);
+host_fn!(push_map_objects, map_objects_iter);
 
 pub const SAVE_READ_FUNCTIONS: &[ApiFunction] = &[
     ApiFunction {
@@ -869,10 +925,18 @@ pub const SAVE_READ_FUNCTIONS: &[ApiFunction] = &[
         doc: "An iterator over every item container in the save, for use in a `for` loop.",
         capability: None,
     },
+    ApiFunction {
+        name: "map_objects",
+        params: &[],
+        returns: ApiType::Iterator("map_object"),
+        doc: "An iterator over every built structure, chest and resource node in the save, for \
+              use in a `for` loop.",
+        capability: None,
+    },
 ];
 
 const SAVE_READ_PUSH_FNS: [PushHostFn; SAVE_READ_FUNCTIONS.len()] =
-    [push_info, push_players, push_pals, push_guilds, push_bases, push_containers];
+    [push_info, push_players, push_pals, push_guilds, push_bases, push_containers, push_map_objects];
 
 fn save_read_bindings() -> [(&'static str, PushHostFn); SAVE_READ_FUNCTIONS.len()] {
     std::array::from_fn(|i| (SAVE_READ_FUNCTIONS[i].name, SAVE_READ_PUSH_FNS[i]))
@@ -883,6 +947,7 @@ pub unsafe fn install(state: *mut lua_State) {
     install_iter_metatable(state, DeleteWhereKind::Player);
     install_iter_metatable(state, DeleteWhereKind::Guild);
     install_iter_metatable(state, DeleteWhereKind::Pal);
+    install_iter_metatable(state, DeleteWhereKind::MapObject);
     register_table(state, "save", &save_read_bindings());
 }
 

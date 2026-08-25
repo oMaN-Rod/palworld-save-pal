@@ -383,3 +383,67 @@ fn a_guild_exposes_a_chest_container_id_that_resolves() {
     assert!(parts[0] > 0, "the fixture must have a guild with a chest: {value}");
     assert_eq!(parts[0], parts[1], "every exposed chest id must resolve to a real container: {value}");
 }
+
+#[test]
+fn map_objects_iterate_with_their_identity_and_attachment() {
+    let mut h = read_harness();
+    let (status, value) = h.run(
+        "local total, attached, named, with_hp = 0, 0, 0, 0
+         local first_kind = nil
+         for obj in save.map_objects() do
+           total = total + 1
+           if obj.base_id ~= nil then attached = attached + 1 end
+           if obj.id ~= nil and obj.id ~= '' then named = named + 1 end
+           if obj.max_hp ~= nil and obj.max_hp > 0 then with_hp = with_hp + 1 end
+           if first_kind == nil then first_kind = obj.kind end
+           if obj.instance_id == nil or obj.instance_id == '' then
+             error('every map object must be addressable')
+           end
+         end
+         return table.concat({ total, attached, named, with_hp, tostring(first_kind ~= nil and first_kind ~= '') }, ',')",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    let value = value.expect("a string");
+    let parts: Vec<&str> = value.split(',').collect();
+    let [total, attached, named, _with_hp, has_kind] = parts[..] else {
+        panic!("expected five comma-separated values, got {value}");
+    };
+    assert_eq!(total, "5452", "the fixture's map object count");
+    assert_eq!(attached, "2144", "map objects belonging to a base");
+    assert_eq!(named, "5452", "MapObjectId is a Name on every entry");
+    assert_eq!(has_kind, "true");
+}
+
+#[test]
+fn an_unattached_map_object_reports_nil_rather_than_a_zero_guid() {
+    let mut h = read_harness();
+    let (status, value) = h.run(
+        "local nil_guid = 0
+         for obj in save.map_objects() do
+           if obj.base_id == '00000000-0000-0000-0000-000000000000' then
+             nil_guid = nil_guid + 1
+           end
+         end
+         return tostring(nil_guid)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(value.as_deref(), Some("0"));
+}
+
+/// `save.map_objects()` respects the same gate every other `save.*` function
+/// does: without `save.read`, the `save` global itself is absent, so the call
+/// fails the same way any other index into a nil `save` would.
+#[test]
+fn map_objects_require_the_read_capability() {
+    let mut h = support::harness(&[Capability::GameData]);
+    let (status, value) = h.run(
+        "local ok = pcall(function() for _ in save.map_objects() do end end)
+         return tostring(ok)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        value.as_deref(),
+        Some("false"),
+        "map_objects must be unreachable without save.read, exactly like every other save.* function"
+    );
+}

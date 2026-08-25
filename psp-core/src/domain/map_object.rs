@@ -1,11 +1,25 @@
 //! World-wide operations over `MapObjectSaveData` entries.
 
+use std::collections::HashSet;
+
 use crate::domain::world;
 use crate::error::CoreError;
 use crate::props;
 use crate::session::SaveSession;
-use crate::ue::games::palworld::PalMapConcreteModelVariant;
+use crate::ue::games::palworld::{PalMapConcreteModelVariant, PalMapModel};
 use crate::ue::{FGuid, PalStruct, Property, PropertyKey, StructValue};
+
+#[derive(Debug, Clone)]
+pub struct MapObjectView {
+    pub instance_id: uuid::Uuid,
+    pub map_object_id: String,
+    pub base_id: Option<uuid::Uuid>,
+    pub guild_id: Option<uuid::Uuid>,
+    pub build_player_uid: Option<uuid::Uuid>,
+    pub hp: i32,
+    pub max_hp: i32,
+    pub kind: String,
+}
 
 fn concrete_variant(object: &StructValue) -> Option<&PalMapConcreteModelVariant<crate::ue::Arch>> {
     let StructValue::Struct(properties) = object else {
@@ -100,6 +114,129 @@ pub fn count_private_chest_locks(session: &SaveSession) -> Result<usize, CoreErr
         .iter()
         .filter(|object| concrete_variant(object).is_some_and(is_locked))
         .count())
+}
+
+fn model_of(object: &StructValue) -> Option<&PalMapModel> {
+    let StructValue::Struct(properties) = object else { return None };
+    let model = properties.0.get(&PropertyKey::from("Model")).and_then(props::struct_props)?;
+    match model.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::MapModel(raw))) => Some(raw),
+        _ => None,
+    }
+}
+
+fn model_of_mut(object: &mut StructValue) -> Option<&mut PalMapModel> {
+    let StructValue::Struct(properties) = object else { return None };
+    let model = properties
+        .0
+        .get_mut(&PropertyKey::from("Model"))
+        .and_then(props::struct_props_mut)?;
+    match model.0.get_mut(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::MapModel(raw))) => Some(raw),
+        _ => None,
+    }
+}
+
+fn optional_uuid(guid: &FGuid) -> Option<uuid::Uuid> {
+    let id = props::guid_to_uuid(guid);
+    (!id.is_nil()).then_some(id)
+}
+
+fn concrete_kind(object: &StructValue) -> String {
+    let StructValue::Struct(properties) = object else { return String::new() };
+    let Some(concrete) =
+        properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)
+    else {
+        return String::new();
+    };
+    match concrete.0.get(&PropertyKey::from("RawData")) {
+        Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModel(raw)))) => {
+            raw.concrete_model_type.clone()
+        }
+        _ => String::new(),
+    }
+}
+
+fn view_of(object: &StructValue) -> Option<MapObjectView> {
+    let model = model_of(object)?;
+    let map_object_id = match object {
+        StructValue::Struct(properties) => properties
+            .0
+            .get(&PropertyKey::from("MapObjectId"))
+            .and_then(props::as_str)
+            .unwrap_or_default()
+            .to_string(),
+        _ => String::new(),
+    };
+    Some(MapObjectView {
+        instance_id: props::guid_to_uuid(&model.instance_id),
+        map_object_id,
+        base_id: optional_uuid(&model.base_camp_id_belong_to),
+        guild_id: optional_uuid(&model.group_id_belong_to),
+        build_player_uid: optional_uuid(&model.build_player_uid),
+        hp: model.hp.current,
+        max_hp: model.hp.max,
+        kind: concrete_kind(object),
+    })
+}
+
+pub fn map_object_views(session: &SaveSession) -> Result<Vec<MapObjectView>, CoreError> {
+    let Some(objects) = world::map_object_values(&session.level)? else {
+        return Ok(Vec::new());
+    };
+    Ok(objects.iter().filter_map(view_of).collect())
+}
+
+pub fn map_object_ids(session: &SaveSession) -> Result<Vec<uuid::Uuid>, CoreError> {
+    let Some(objects) = world::map_object_values(&session.level)? else {
+        return Ok(Vec::new());
+    };
+    Ok(objects
+        .iter()
+        .filter_map(|object| model_of(object).map(|m| props::guid_to_uuid(&m.instance_id)))
+        .collect())
+}
+
+pub fn read_map_object(session: &SaveSession, id: uuid::Uuid) -> Option<MapObjectView> {
+    let objects = world::map_object_values(&session.level).ok()??;
+    objects
+        .iter()
+        .filter_map(view_of)
+        .find(|view| view.instance_id == id)
+}
+
+pub fn set_map_object_hp(
+    session: &mut SaveSession,
+    id: uuid::Uuid,
+    hp: i32,
+) -> Result<bool, CoreError> {
+    let Some(objects) = world::map_object_values_mut(&mut session.level)? else {
+        return Ok(false);
+    };
+    for object in objects.iter_mut() {
+        let Some(model) = model_of_mut(object) else { continue };
+        if props::guid_to_uuid(&model.instance_id) == id {
+            model.hp.current = hp;
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
+pub fn remove_map_objects(
+    session: &mut SaveSession,
+    ids: &[uuid::Uuid],
+) -> Result<usize, CoreError> {
+    let doomed: HashSet<uuid::Uuid> = ids.iter().copied().collect();
+    let Some(objects) = world::map_object_values_mut(&mut session.level)? else {
+        return Ok(0);
+    };
+    let before = objects.len();
+    objects.retain(|object| match model_of(object) {
+        Some(model) => !doomed.contains(&props::guid_to_uuid(&model.instance_id)),
+        None => true,
+    });
+    Ok(before - objects.len())
 }
 
 #[cfg(test)]
@@ -197,5 +334,88 @@ mod tests {
         let changed = unlock_private_chests(&mut session).expect("unlocks");
         assert_eq!(predicted, changed);
         assert_eq!(count_private_chest_locks(&session).expect("counts"), 0);
+    }
+
+    #[test]
+    fn every_map_object_view_carries_the_identity_the_save_stores() {
+        let session = load_fixture_session("v1_relics");
+        let views = map_object_views(&session).expect("views");
+        assert_eq!(views.len(), 5452, "the fixture's map object count");
+
+        assert!(
+            views.iter().all(|v| !v.instance_id.is_nil()),
+            "an instance id is how a handle addresses an object; a nil one is unaddressable"
+        );
+        assert!(
+            views.iter().all(|v| !v.map_object_id.is_empty()),
+            "MapObjectId is a Name property on every entry of every fixture"
+        );
+
+        let attached = views.iter().filter(|v| v.base_id.is_some()).count();
+        assert_eq!(attached, 2144, "map objects belonging to a base");
+        assert!(
+            views.iter().all(|v| v.base_id != Some(uuid::Uuid::nil())),
+            "an unattached object reports None, never the nil sentinel"
+        );
+
+        let ids = map_object_ids(&session).expect("ids");
+        assert_eq!(ids.len(), views.len(), "ids and views must agree in length");
+    }
+
+    #[test]
+    fn a_view_round_trips_through_read_map_object() {
+        let session = load_fixture_session("v1_relics");
+        let views = map_object_views(&session).expect("views");
+        let wanted = views.first().expect("the fixture has map objects");
+        let found = read_map_object(&session, wanted.instance_id).expect("the id resolves");
+        assert_eq!(found.instance_id, wanted.instance_id);
+        assert_eq!(found.map_object_id, wanted.map_object_id);
+        assert_eq!(found.hp, wanted.hp);
+        assert!(read_map_object(&session, uuid::Uuid::nil()).is_none());
+    }
+
+    #[test]
+    fn damaged_structures_exist_to_repair_and_hp_writes_land() {
+        let mut session = load_fixture_session("v1_relics");
+        let damaged: Vec<uuid::Uuid> = map_object_views(&session)
+            .expect("views")
+            .into_iter()
+            .filter(|v| v.hp < v.max_hp)
+            .map(|v| v.instance_id)
+            .collect();
+        assert_eq!(damaged.len(), 467, "the fixture's damaged structure count");
+
+        let target = damaged[0];
+        let before = read_map_object(&session, target).expect("resolves");
+        assert!(set_map_object_hp(&mut session, target, before.max_hp).expect("write"));
+        let after = read_map_object(&session, target).expect("resolves");
+        assert_eq!(after.hp, before.max_hp);
+
+        assert!(
+            !set_map_object_hp(&mut session, uuid::Uuid::nil(), 1).expect("write"),
+            "an unresolvable id reports false rather than erroring"
+        );
+    }
+
+    #[test]
+    fn remove_map_objects_removes_exactly_the_named_entries_in_one_pass() {
+        let mut session = load_fixture_session("v1_relics");
+        let before = map_object_ids(&session).expect("ids");
+        let doomed: Vec<uuid::Uuid> = before.iter().take(3).copied().collect();
+
+        let removed = remove_map_objects(&mut session, &doomed).expect("remove");
+        assert_eq!(removed, 3);
+
+        let after = map_object_ids(&session).expect("ids");
+        assert_eq!(after.len(), before.len() - 3);
+        for id in &doomed {
+            assert!(!after.contains(id), "a removed object must not survive");
+        }
+
+        assert_eq!(
+            remove_map_objects(&mut session, &doomed).expect("remove"),
+            0,
+            "a second removal of the same ids finds nothing"
+        );
     }
 }

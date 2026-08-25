@@ -613,6 +613,7 @@ fn kind_to_int(kind: DeleteWhereKind) -> i64 {
         DeleteWhereKind::Player => 0,
         DeleteWhereKind::Guild => 1,
         DeleteWhereKind::Pal => 2,
+        DeleteWhereKind::MapObject => 3,
     }
 }
 
@@ -621,6 +622,7 @@ fn kind_from_int(value: i64) -> Option<DeleteWhereKind> {
         0 => Some(DeleteWhereKind::Player),
         1 => Some(DeleteWhereKind::Guild),
         2 => Some(DeleteWhereKind::Pal),
+        3 => Some(DeleteWhereKind::MapObject),
         _ => None,
     }
 }
@@ -630,6 +632,7 @@ fn count_key(kind: DeleteWhereKind) -> &'static str {
         DeleteWhereKind::Player => "players.delete_where",
         DeleteWhereKind::Guild => "guilds.delete_where",
         DeleteWhereKind::Pal => "pals.delete_where",
+        DeleteWhereKind::MapObject => "map_objects.delete_where",
     }
 }
 
@@ -665,6 +668,14 @@ fn count_dry_run(
             Ok((count, skipped))
         }
         DeleteWhereKind::Guild => Ok((kill.len() as i64, 0)),
+        DeleteWhereKind::MapObject => {
+            super::save_read::ensure_map_objects_snapshot(ctx)?;
+            let resolvable = match ctx.map_objects.as_ref() {
+                Some((_, index)) => kill.iter().filter(|id| index.contains_key(id)).count(),
+                None => 0,
+            };
+            Ok((resolvable as i64, kill.len() as i64 - resolvable as i64))
+        }
         DeleteWhereKind::Pal => {
             let fallback = null_progress();
             let mut count = 0i64;
@@ -742,6 +753,13 @@ fn delete_where_body(state: *mut lua_State) -> Result<c_int, HostError> {
                     ctx.pals
                         .as_ref()
                         .map(|(snapshot, _)| snapshot.iter().map(|p| p.instance_id).collect())
+                        .unwrap_or_default()
+                }
+                DeleteWhereKind::MapObject => {
+                    super::save_read::ensure_map_objects_snapshot(ctx)?;
+                    ctx.map_objects
+                        .as_ref()
+                        .map(|(views, _)| views.iter().map(|view| view.instance_id).collect())
                         .unwrap_or_default()
                 }
             };
@@ -893,6 +911,12 @@ fn delete_where_body(state: *mut lua_State) -> Result<c_int, HostError> {
                         removed += 1;
                     }
                 }
+                DeleteWhereKind::MapObject => {
+                    let removed_count =
+                        map_object::remove_map_objects(ctx.session, &dw.kill).map_err(core_error)?;
+                    removed = removed_count as i64;
+                    skipped = dw.kill.len() as i64 - removed;
+                }
             }
             if removed > 0 {
                 ctx.note_mutation();
@@ -960,6 +984,7 @@ pub unsafe fn install(state: *mut lua_State) {
     add_delete_where(state, DeleteWhereKind::Player);
     add_delete_where(state, DeleteWhereKind::Guild);
     add_delete_where(state, DeleteWhereKind::Pal);
+    add_delete_where(state, DeleteWhereKind::MapObject);
     add_save_functions(state);
 }
 

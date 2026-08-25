@@ -11,6 +11,7 @@ use super::{marshal, HostError};
 pub mod base;
 pub mod container;
 pub mod guild;
+pub mod map_object;
 pub mod pal;
 pub mod player;
 pub mod slot;

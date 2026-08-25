@@ -128,6 +128,34 @@ fn delete_where_returns_zero_when_nothing_matches() {
     assert_eq!(value.as_deref(), Some("0"));
 }
 
+/// A host-mechanism test, proving the iterator and bulk removal work -- not
+/// the predicate the later delete_non_base_map_objects command will use. The
+/// 3308 objects this predicate matches are the fixture's unattached map
+/// objects, not "everything a repair or cleanup command should ever touch".
+#[test]
+fn delete_where_removes_the_matched_objects_in_one_pass() {
+    let mut h = write_harness();
+    let (status, value) = h.run(
+        "local before = 0
+         for _ in save.map_objects() do before = before + 1 end
+         local removed, unresolved = save.map_objects():delete_where(function(obj)
+           return obj.base_id == nil
+         end)
+         local after = 0
+         for _ in save.map_objects() do after = after + 1 end
+         return table.concat({ before, removed, unresolved, after }, ',')",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    let value = value.expect("a string");
+    let parts: Vec<i64> = value.split(',').map(|p| p.parse().expect("an integer")).collect();
+    assert_eq!(parts.len(), 4, "got {value}");
+    let (before, removed, unresolved, after) = (parts[0], parts[1], parts[2], parts[3]);
+    assert_eq!(before, 5452, "the fixture's map object count");
+    assert_eq!(removed, 3308, "the fixture's unattached map objects");
+    assert_eq!(unresolved, 0);
+    assert_eq!(after, 2144);
+}
+
 #[test]
 fn a_predicate_that_errors_aborts_the_bulk_delete_without_partial_damage() {
     let mut h = write_harness();

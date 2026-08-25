@@ -114,6 +114,18 @@
 ---@field count integer How many of the item occupy this slot. Must be at least 1: a slot holding none of its item is an empty slot, and emptying one is structural -- use slot.clear(). No upper bound beyond what the save can hold, because nothing in the game's data or in this app establishes a stack limit, and refusing one here would be inventing a rule rather than reporting one.
 ---@field clear fun(): nil Empties this slot, removing its underlying entry rather than overwriting it in place. A structural write and invalidates every live handle and iterator across all scopes, including this one -- looping over container.slots() and calling clear() on each raises after the first clear; collect ids first instead. Requires capability: save.write.
 
+---Requires capability: save.read.
+---
+---@class map_object
+---@field id string The MapObjectId asset name, shared by every instance of this kind. Read-only.
+---@field instance_id string This instance's UUID, as a string -- unique even among map objects that share an id. Read-only.
+---@field base_id string|nil The UUID, as a string, of the base this object belongs to, or nil if it is unattached. Read-only.
+---@field guild_id string|nil The UUID, as a string, of the guild this object belongs to, or nil if it has none. Read-only.
+---@field build_player_uid string|nil The UUID, as a string, of the player who built this object, or nil if it has none. Read-only.
+---@field hp integer This object's current hit points. Any 32-bit integer is accepted, including zero or a negative value -- lowering a structure's hp is a legitimate write, and it is not clamped to max_hp.
+---@field max_hp integer This object's maximum hit points. Read-only.
+---@field kind string The concrete model type name this object was built from. Read-only.
+
 ---Requires capability: save.raw.
 ---
 ---@class raw
@@ -221,6 +233,12 @@ function save.bases() end
 ---Requires capability: save.read.
 ---@return fun(): container|nil
 function save.containers() end
+
+---An iterator over every built structure, chest and resource node in the save, for use in a `for` loop.
+---
+---Requires capability: save.read.
+---@return fun(): map_object|nil
+function save.map_objects() end
 
 ---Calls predicate(slot) once for every item slot in the save with nothing yet mutated, then clears every slot predicate returned truthy for. Returns the number cleared, followed by the number examined. A non-zero clear count is a structural write and invalidates every live handle and iterator, including ones the walk itself was still using -- call this instead of looping over save.containers() and clearing slots one at a time, which a structural write would break after the first clear.
 ---

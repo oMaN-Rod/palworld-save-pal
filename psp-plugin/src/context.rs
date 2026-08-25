@@ -1,5 +1,6 @@
 use std::collections::{BTreeMap, HashMap};
 
+use psp_core::domain::map_object::MapObjectView;
 use psp_core::domain::raw_path::RawWalk;
 use psp_core::dto::summary::PalSummary;
 use psp_core::gamedata::GameData;
@@ -34,6 +35,7 @@ pub enum DeleteWhereKind {
     Player,
     Guild,
     Pal,
+    MapObject,
 }
 
 /// Parked here, not in `delete_where`'s own frame: its predicate `lua_pcall`
@@ -68,6 +70,14 @@ pub struct RunContext<'a> {
     pub confirm: Option<&'a dyn Fn(&str) -> bool>,
     /// One `Option` rather than two so the snapshot and its index cannot diverge.
     pub pals: Option<(Vec<PalSummary>, HashMap<uuid::Uuid, PalIndexEntry>)>,
+    /// Cached for the run: `map_object_views` walks and filters every
+    /// `MapObjectSaveData` entry, so resolving a field on every step of a
+    /// full iteration without this would turn it quadratic. Paired with an
+    /// `id -> position` index so a field read or write can jump straight to
+    /// its row; a write updates the cached row in place rather than dropping
+    /// the snapshot, so a read immediately after a write still sees it
+    /// without paying for a full rebuild.
+    pub map_objects: Option<(Vec<MapObjectView>, HashMap<uuid::Uuid, usize>)>,
     /// Parked here so it survives a `longjmp` past a host frame; `Some` only
     /// while a `raw.visit` runs, which is how a nested visit is refused. The
     /// runtime must clear it once the command's own `lua_pcall` returns.
@@ -134,6 +144,7 @@ impl<'a> RunContext<'a> {
             progress,
             confirm,
             pals: None,
+            map_objects: None,
             raw_walk: None,
             delete_where: None,
             clear_slots: None,
@@ -166,6 +177,7 @@ impl<'a> RunContext<'a> {
         self.pals = None;
         self.container = None;
         self.pal_entry_index = None;
+        self.map_objects = None;
     }
 
     /// Non-structural: a value overwritten in place, so handles stay valid.
