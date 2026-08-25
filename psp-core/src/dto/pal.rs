@@ -63,7 +63,11 @@ pub const WORK_SUITABILITIES: [&str; 13] = [
 /// known key keeps its prefix.
 pub fn format_character_key(character_id: &str, known_pal_keys: &HashSet<String>) -> String {
     let lowered = character_id.to_lowercase();
-    if !known_pal_keys.contains(character_id) {
+    let normalized_pal_keys: HashSet<String> = known_pal_keys
+        .iter()
+        .map(|k| k.to_lowercase())
+        .collect();
+    if !normalized_pal_keys.contains(&lowered) {
         if let Some(stripped) = lowered.strip_prefix("boss_") {
             return stripped.to_string();
         }
