@@ -85,8 +85,9 @@
 				{@const palData = palsData.getByKey(option.value as string)}
 				<div class="flex items-center space-x-2">
 					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
-					<div class="grow">
+					<div class="flex flex-col grow">
 						<span>{option.label}</span>
+						<span class="text-xs">{option.value}</span>
 					</div>
 					{#if palData}
 						{#each palData.element_types as elementType}
