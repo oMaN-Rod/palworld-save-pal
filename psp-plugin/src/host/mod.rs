@@ -1,6 +1,7 @@
 pub mod api_def;
 pub mod api_meta;
 pub(crate) mod dto_cache;
+pub mod fields;
 pub mod gamedata;
 pub mod handle;
 pub mod marshal;

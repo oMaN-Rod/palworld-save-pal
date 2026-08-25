@@ -12,3 +12,5 @@ pub mod syntax;
 
 pub use host::api_def::{ApiDefinition, api_definition};
 pub use host::api_meta::lua_meta;
+pub use host::fields::{Access, FieldSpec};
+pub use host::fields::pal::PAL_FIELDS;

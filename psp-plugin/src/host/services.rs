@@ -3,6 +3,7 @@ use std::ffi::c_int;
 use psp_lua_sys::ffi::*;
 
 use super::api_def::{ApiField, ApiFunction, ApiParam, ApiType};
+use super::fields::Access;
 use super::marshal::{arg_number, arg_string, check_args, push_str};
 use super::{register_table, with_context, HostError, PushHostFn};
 use crate::context::{LogLevel, LogLine, RunContext};
@@ -267,36 +268,73 @@ pub const CTX_FIELDS: &[ApiField] = &[
     ApiField {
         name: "dry_run",
         ty: ApiType::Boolean,
+        access: Access::ReadOnly,
         doc: "Whether this run is a dry run: every write function predicts its effect and \
               records a preview count instead of writing.",
     },
     ApiField {
         name: "api_version",
         ty: ApiType::Integer,
+        access: Access::ReadOnly,
         doc: "The api_version this plugin's manifest declares.",
     },
     ApiField {
         name: "plugin_id",
         ty: ApiType::String,
+        access: Access::ReadOnly,
         doc: "This plugin's own id, from its manifest.",
     },
     ApiField {
         name: "command_id",
         ty: ApiType::String,
+        access: Access::ReadOnly,
         doc: "The id of the command this run is executing.",
     },
     ApiField {
         name: "now",
         ty: ApiType::Integer,
+        access: Access::ReadOnly,
         doc: "The Unix timestamp, in seconds, of when this run started.",
     },
     ApiField {
         name: "args",
         ty: ApiType::Table,
+        access: Access::ReadOnly,
         doc: "This command's arguments, already coerced to the types its manifest declares, \
               keyed by parameter name.",
     },
 ];
+
+/// Every `ctx` field is `Access::ReadOnly`, and unlike a handle's fields these
+/// live on a table, where an assignment would otherwise just succeed and leave
+/// the script reading back a value the run never had. A key that is not one of
+/// the six is a different mistake and is reported as one: calling it read-only
+/// would send an author hunting for a getter that does not exist either.
+fn ctx_newindex(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        let Ok(field) = arg_string(state, 2, "field") else {
+            return Err(HostError::new("ctx has no field under a non-string key"));
+        };
+        if CTX_FIELDS.iter().any(|described| described.name == field) {
+            return Err(HostError::new(format!("ctx.{field} is read-only")));
+        }
+        Err(HostError::new(format!("ctx has no field {field:?}")))
+    }
+}
+
+host_fn!(push_ctx_newindex, ctx_newindex);
+
+/// `__newindex` only fires for a key the table does not already hold, so the
+/// values live on a backing table behind an empty proxy. That hides them from
+/// `pairs` too, which this hands back: upvalue 1 is the backing table, upvalue
+/// 2 the `next` captured at install time, so reassigning the global cannot
+/// change what a later `pairs(ctx)` walks.
+unsafe extern "C" fn ctx_pairs(state: *mut lua_State) -> c_int {
+    lua_pushvalue(state, lua_upvalueindex(2));
+    lua_pushvalue(state, lua_upvalueindex(1));
+    lua_pushnil(state);
+    3
+}
 
 pub unsafe fn install_ctx(state: *mut lua_State, ctx: &RunContext<'_>) {
     lua_createtable(state, 0, 6);
@@ -334,7 +372,33 @@ pub unsafe fn install_ctx(state: *mut lua_State, ctx: &RunContext<'_>) {
         }
     });
 
+    // The proxy is genuinely empty, so the two raw read shapes see an empty
+    // table instead of raising: `rawget(ctx, k)` is nil, and a hand-rolled
+    // `next(ctx)` walk yields nothing. `pairs` is restored by `__pairs` below;
+    // Lua 5.4 has no `__next`, so those two cannot be. `rawset` is the same
+    // hole in the other direction -- it plants the key on the proxy itself,
+    // after which plain assignment to that key stops reaching `__newindex`
+    // while `pairs` still reports the backing value. Accepted rather than
+    // closed: sealing it means making `ctx` a userdata, which would change
+    // `type(ctx)` for every plugin author.
+    lua_createtable(state, 0, 0);
+    lua_createtable(state, 0, 4);
+
+    lua_pushvalue(state, -3);
+    lua_setfield(state, -2, c"__index".as_ptr());
+    push_ctx_newindex(state);
+    lua_setfield(state, -2, c"__newindex".as_ptr());
+    lua_pushvalue(state, -3);
+    lua_getglobal(state, c"next".as_ptr());
+    lua_pushcclosure(state, ctx_pairs, 2);
+    lua_setfield(state, -2, c"__pairs".as_ptr());
+    // Without this the guard is one `setmetatable(ctx, nil)` away from gone.
+    lua_pushboolean(state, 1);
+    lua_setfield(state, -2, c"__metatable".as_ptr());
+
+    lua_setmetatable(state, -2);
     lua_setglobal(state, c"ctx".as_ptr());
+    lua_pop(state, 1);
 }
 
 #[cfg(test)]

@@ -39,7 +39,7 @@ const definition: ApiDefinition = {
 			name: 'ctx',
 			capability: null,
 			functions: [],
-			fields: [{ name: 'dry_run', type: { kind: 'boolean' }, doc: 'Whether this is a dry run.' }]
+			fields: [{ name: 'dry_run', type: { kind: 'boolean' }, access: 'read_only', doc: 'Whether this is a dry run.' }]
 		},
 		{
 			name: 'raw',
@@ -54,7 +54,7 @@ const definition: ApiDefinition = {
 		{
 			name: 'player',
 			capability: 'save.read',
-			fields: [{ name: 'uid', type: { kind: 'string' }, doc: "The player's UUID." }],
+			fields: [{ name: 'uid', type: { kind: 'string' }, access: 'read_only', doc: "The player's UUID." }],
 			methods: [
 				{ name: 'delete', params: [], returns: { kind: 'boolean' }, doc: 'Deletes.', capability: 'save.write' }
 			]

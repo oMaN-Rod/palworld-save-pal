@@ -123,6 +123,14 @@ impl Harness {
         self
     }
 
+    /// Simulates a missing or malformed `pals.json`: `GameData::load` tolerates
+    /// both by leaving its catalog empty rather than erroring, so this is
+    /// `GameData::from_entries` over nothing, not a corrupted-file fixture.
+    pub fn with_empty_game_data(mut self) -> Self {
+        self.game_data = GameData::from_entries(std::iter::empty()).expect("an empty entry set always parses");
+        self
+    }
+
     pub fn with_progress(mut self, sink: psp_core::progress::ProgressSink) -> Self {
         self.progress = Some(sink);
         self

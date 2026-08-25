@@ -86,3 +86,25 @@ fn api_type_serialises_adjacently_tagged() {
         chest_id["type"]
     );
 }
+
+/// The editor mirrors `access` as a string-literal union, so the exact
+/// spelling serde emits is the contract between the two and nothing else pins
+/// it -- a rename here would type-check on both sides and still not match.
+#[test]
+fn a_fields_access_serialises_as_the_editor_spells_it() {
+    let json = serde_json::to_value(api_definition()).expect("serialises");
+
+    let pal = json["handles"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|h| h["name"] == "pal")
+        .expect("pal is present");
+    let fields = pal["fields"].as_array().unwrap();
+
+    let writable = fields.iter().find(|f| f["name"] == "nickname").expect("nickname is present");
+    assert_eq!(writable["access"], serde_json::json!("read_write"), "{}", writable["access"]);
+
+    let read_only = fields.iter().find(|f| f["name"] == "instance_id").expect("instance_id is present");
+    assert_eq!(read_only["access"], serde_json::json!("read_only"), "{}", read_only["access"]);
+}

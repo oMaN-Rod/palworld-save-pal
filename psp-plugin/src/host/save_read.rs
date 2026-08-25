@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use std::ffi::{c_int, c_void, CStr};
+use std::sync::OnceLock;
 
 use psp_core::domain::guild::{base_camp_location, base_guild_and_container, guild_chest_id};
 use psp_core::domain::{containers, pal, world};
@@ -11,6 +12,7 @@ use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
 use super::api_def::{ApiField, ApiFunction, ApiHandle, ApiParam, ApiType};
+use super::fields::{pal as pal_fields, push_field_value, Access, FieldValue};
 use super::handle::{handle_kind_for, invalidated_handle_error, push_handle, read_handle, Handle, HandleKind};
 use super::marshal::{arg_string, check_args, push_str};
 use super::{free_message, register_table, trampoline, with_context, HostError, HostFn, PushHostFn};
@@ -59,24 +61,6 @@ pub(crate) fn ensure_pals_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostE
         ctx.pals = Some((snapshot, index));
     }
     Ok(())
-}
-
-enum FieldValue {
-    Nil,
-    Str(String),
-    Int(i64),
-    Float(f64),
-    Bool(bool),
-}
-
-unsafe fn push_field_value(state: *mut lua_State, value: FieldValue) {
-    match value {
-        FieldValue::Nil => lua_pushnil(state),
-        FieldValue::Str(s) => push_str(state, &s),
-        FieldValue::Int(i) => lua_pushinteger(state, i),
-        FieldValue::Float(f) => lua_pushnumber(state, f),
-        FieldValue::Bool(b) => lua_pushboolean(state, c_int::from(b)),
-    }
 }
 
 fn iso_string(value: Option<IsoDateTime>) -> Option<String> {
@@ -249,10 +233,28 @@ fn pal_index(state: *mut lua_State) -> Result<c_int, HostError> {
             }
         }
         let value = with_context(state, |ctx| {
+            // A field this run has already written but not yet flushed must
+            // be served from the DTO cache directly: the summary only ever
+            // reflects a real flush's write, and a dry run never flushes at
+            // all, so rebuilding the summary here would answer with the
+            // pre-write value even though this run's own write is sitting
+            // right there in the cache.
+            if super::dto_cache::pal_field_was_written(ctx, handle.id, &field) {
+                return pal_fields::pal_get(ctx, handle.id, &field);
+            }
             // `note_pal_field_write` can have dropped the snapshot without
             // invalidating this handle, so rebuild rather than read nothing.
             ensure_pals_snapshot(ctx)?;
-            Ok(pal_field(ctx, handle.id, &field))
+            let value = pal_field(ctx, handle.id, &field);
+            // The summary answers most pal fields directly; anything it
+            // doesn't carry (nil here, since `pal_field`'s catch-all also
+            // returns nil for a genuinely unknown name) falls through to the
+            // field table, which knows the rest.
+            if matches!(value, FieldValue::Nil) {
+                pal_fields::pal_get(ctx, handle.id, &field)
+            } else {
+                Ok(value)
+            }
         })?;
         drop(field);
         push_field_value(state, value);
@@ -386,325 +388,327 @@ fn slot_field(state: *mut lua_State) -> Result<c_int, HostError> {
     }
 }
 
-pub const HANDLE_TYPES: &[ApiHandle] = &[
-    ApiHandle {
-        name: "player",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "uid", ty: ApiType::String, doc: "The player's UUID, as a string." },
-            ApiField { name: "name", ty: ApiType::String, doc: "The player's nickname." },
-            ApiField {
-                name: "level",
-                ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                doc: "The player's level, or nil if the save has no level recorded for this \
-                      player.",
-            },
-            ApiField {
-                name: "guild_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the guild this player belongs to, or nil if the \
-                      player is in no guild.",
-            },
-            ApiField { name: "pal_count", ty: ApiType::Integer, doc: "How many pals this player owns." },
-            ApiField {
-                name: "last_online",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "An ISO-8601 timestamp of when the player was last online, or nil if the \
-                      save records none.",
-            },
-            ApiField {
-                name: "last_online_ts",
-                ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                doc: "The Unix timestamp, in seconds, of when the player was last online, or nil \
-                      if the save records none.",
-            },
-        ],
-        methods: &[
-            ApiFunction {
-                name: "pals",
-                params: &[],
-                returns: ApiType::Iterator("pal"),
-                doc: "An iterator over every pal this player owns, for use in a `for` loop.",
-                capability: None,
-            },
-            ApiFunction {
-                name: "delete",
-                params: &[],
-                returns: ApiType::Boolean,
-                doc: "Deletes this player, along with the item and character containers the \
-                      player owns. Refuses (returns false, changes nothing) if the player is \
-                      their guild's admin. A true result is a structural write and invalidates \
-                      every live handle and iterator across all scopes, including this one.",
-                capability: Some(Capability::SaveWrite),
-            },
-            ApiFunction {
-                name: "set_level",
-                params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
-                returns: ApiType::Nil,
-                doc: "Sets the player's level; must be between 1 and 255 inclusive, or this \
-                      raises. A non-structural write: this handle and every other live handle \
-                      and iterator stay valid, but any container previously read through this \
-                      run is forgotten and will be re-read on next access.",
-                capability: Some(Capability::SaveWrite),
-            },
-        ],
-    },
-    ApiHandle {
-        name: "pal",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "instance_id", ty: ApiType::String, doc: "The pal's UUID, as a string." },
-            ApiField {
-                name: "character_id",
-                ty: ApiType::String,
-                doc: "The pal's species/character id, e.g. \"PenguinPal\".",
-            },
-            ApiField {
-                name: "nickname",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The pal's nickname, or nil if it has none set.",
-            },
-            ApiField {
-                name: "owner_uid",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the player who owns this pal, or nil if it \
-                      belongs to a guild base instead.",
-            },
-            ApiField {
-                name: "guild_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the guild this pal belongs to, or nil if it is \
-                      not assigned to a guild base.",
-            },
-            ApiField {
-                name: "base_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the guild base this pal works at, or nil if it \
-                      is not assigned to one.",
-            },
-            ApiField {
-                name: "gender",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The pal's gender (\"Male\", \"Female\"), or nil if unknown.",
-            },
-            ApiField { name: "level", ty: ApiType::Integer, doc: "The pal's level." },
-            ApiField { name: "hp", ty: ApiType::Integer, doc: "The pal's max HP stat." },
-            ApiField { name: "rank", ty: ApiType::Integer, doc: "The pal's condensing rank, 0-4." },
-            ApiField { name: "exp", ty: ApiType::Integer, doc: "The pal's total experience points." },
-            ApiField {
-                name: "talent_hp",
-                ty: ApiType::Integer,
-                doc: "The pal's HP soul (talent) value, 0-100.",
-            },
-            ApiField {
-                name: "talent_shot",
-                ty: ApiType::Integer,
-                doc: "The pal's attack soul (talent) value, 0-100.",
-            },
-            ApiField {
-                name: "talent_defense",
-                ty: ApiType::Integer,
-                doc: "The pal's defense soul (talent) value, 0-100.",
-            },
-            ApiField { name: "rank_hp", ty: ApiType::Integer, doc: "The pal's condensed HP rank bonus." },
-            ApiField {
-                name: "rank_attack",
-                ty: ApiType::Integer,
-                doc: "The pal's condensed attack rank bonus.",
-            },
-            ApiField {
-                name: "rank_defense",
-                ty: ApiType::Integer,
-                doc: "The pal's condensed defense rank bonus.",
-            },
-            ApiField {
-                name: "rank_craftspeed",
-                ty: ApiType::Integer,
-                doc: "The pal's condensed work-speed rank bonus.",
-            },
-            ApiField {
-                name: "is_boss",
-                ty: ApiType::Boolean,
-                doc: "Whether this pal is a boss/alpha spawn. Mutually exclusive with is_lucky.",
-            },
-            ApiField {
-                name: "is_lucky",
-                ty: ApiType::Boolean,
-                doc: "Whether this pal is a lucky (rare, non-boss) spawn. Mutually exclusive \
-                      with is_boss.",
-            },
-        ],
-        methods: &[
-            ApiFunction {
-                name: "delete",
-                params: &[],
-                returns: ApiType::Boolean,
-                doc: "Deletes this pal from its owning player or guild base. A structural write \
-                      and invalidates every live handle and iterator across all scopes, \
-                      including this one.",
-                capability: Some(Capability::SaveWrite),
-            },
-            ApiFunction {
-                name: "set_level",
-                params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
-                returns: ApiType::Nil,
-                doc: "Sets the pal's level; must be between 1 and 255 inclusive, or this raises. \
-                      A non-structural write: every live handle and iterator stays valid, but \
-                      the cached pal snapshot this run holds is dropped and rebuilt on next \
-                      field access, so the new level is visible immediately.",
-                capability: Some(Capability::SaveWrite),
-            },
-            ApiFunction {
-                name: "set_talent",
-                params: &[
-                    ApiParam { name: "which", ty: ApiType::String, optional: false },
-                    ApiParam { name: "value", ty: ApiType::Integer, optional: false },
-                ],
-                returns: ApiType::Nil,
-                doc: "Sets one soul (talent) value; `which` must be \"hp\", \"shot\" or \
-                      \"defense\", and `value` must be between 0 and 100 inclusive, or this \
-                      raises. Non-structural, with the same cached-snapshot refresh as \
-                      set_level.",
-                capability: Some(Capability::SaveWrite),
-            },
-        ],
-    },
-    ApiHandle {
-        name: "guild",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "id", ty: ApiType::String, doc: "The guild's UUID, as a string." },
-            ApiField { name: "name", ty: ApiType::String, doc: "The guild's name." },
-            ApiField {
-                name: "admin_uid",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the guild's admin player, or nil if the guild \
-                      has none.",
-            },
-            ApiField { name: "player_count", ty: ApiType::Integer, doc: "How many players belong to this guild." },
-            ApiField { name: "base_count", ty: ApiType::Integer, doc: "How many bases this guild has." },
-            ApiField {
-                name: "level",
-                ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                doc: "The guild's level, or nil if the save has no level recorded for it.",
-            },
-            ApiField { name: "pal_count", ty: ApiType::Integer, doc: "How many pals belong to this guild's bases." },
-            ApiField {
-                name: "chest_container_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of this guild's shared chest container, or nil if \
-                      the guild has no chest.",
-            },
-        ],
-        methods: &[ApiFunction {
-            name: "delete",
-            params: &[],
-            returns: ApiType::Boolean,
-            doc: "Deletes this guild, its bases, and every loaded member player. An unloaded \
-                  member is skipped, not deleted. A structural write and invalidates every live \
-                  handle and iterator across all scopes, including this one.",
-            capability: Some(Capability::SaveWrite),
-        }],
-    },
-    ApiHandle {
-        name: "base",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "id", ty: ApiType::String, doc: "The base's UUID, as a string." },
-            ApiField {
-                name: "guild_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The UUID, as a string, of the guild this base belongs to, or nil if it \
-                      could not be resolved.",
-            },
-            ApiField {
-                name: "x",
-                ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                doc: "The base's world X coordinate, or nil if its location could not be \
-                      resolved.",
-            },
-            ApiField {
-                name: "y",
-                ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                doc: "The base's world Y coordinate, or nil if its location could not be \
-                      resolved.",
-            },
-            ApiField {
-                name: "z",
-                ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                doc: "The base's world Z coordinate, or nil if its location could not be \
-                      resolved.",
-            },
-        ],
-        methods: &[ApiFunction {
-            name: "delete",
-            params: &[],
-            returns: ApiType::Boolean,
-            doc: "Deletes this base and every pal working it, and updates its guild's base_count \
-                  and pal_count. A structural write and invalidates every live handle and \
-                  iterator across all scopes, including this one.",
-            capability: Some(Capability::SaveWrite),
-        }],
-    },
-    ApiHandle {
-        name: "container",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "id", ty: ApiType::String, doc: "The container's UUID, as a string." },
-            ApiField {
-                name: "slot_count",
-                ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                doc: "How many slots this container has, or nil if the container could not be \
-                      read.",
-            },
-        ],
-        methods: &[
-            ApiFunction {
-                name: "slots",
-                params: &[],
-                returns: ApiType::Iterator("slot"),
-                doc: "An iterator over every occupied slot in this container, for use in a \
-                      `for` loop.",
-                capability: None,
-            },
-            ApiFunction {
-                name: "set_slot_count",
-                params: &[ApiParam { name: "count", ty: ApiType::Integer, optional: false }],
-                returns: ApiType::Boolean,
-                doc: "Resizes the container to hold `count` slots, returning true if it \
-                      resized. Refuses (returns false, changes nothing) rather than destroying \
-                      an occupied slot that shrinking would drop. A true result is a structural \
-                      write and invalidates every live handle and iterator across all scopes, \
-                      including this one.",
-                capability: Some(Capability::SaveWrite),
-            },
-        ],
-    },
-    ApiHandle {
-        name: "slot",
-        capability: Some(Capability::SaveRead),
-        fields: &[
-            ApiField { name: "index", ty: ApiType::Integer, doc: "This slot's position within its container." },
-            ApiField {
-                name: "item_id",
-                ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                doc: "The static item id occupying this slot, or nil if the slot is empty.",
-            },
-            ApiField { name: "count", ty: ApiType::Integer, doc: "How many of the item occupy this slot." },
-        ],
-        methods: &[ApiFunction {
-            name: "clear",
-            params: &[],
-            returns: ApiType::Nil,
-            doc: "Empties this slot, removing its underlying entry rather than overwriting it \
-                  in place. A structural write and invalidates every live handle and iterator \
-                  across all scopes, including this one -- looping over container.slots() and \
-                  calling clear() on each raises after the first clear; collect ids first \
-                  instead.",
-            capability: Some(Capability::SaveWrite),
-        }],
-    },
-];
+static HANDLE_TYPES: OnceLock<Vec<ApiHandle>> = OnceLock::new();
+
+/// Not a `const`: the pal handle's fields are projected from `PAL_FIELDS` at first
+/// use so the description cannot drift from the rows that implement it.
+pub fn handle_types() -> &'static [ApiHandle] {
+    HANDLE_TYPES
+        .get_or_init(|| {
+            vec![
+                ApiHandle {
+                    name: "player",
+                    capability: Some(Capability::SaveRead),
+                    fields: &[
+                        ApiField {
+                            name: "uid",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The player's UUID, as a string.",
+                        },
+                        ApiField {
+                            name: "name",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The player's nickname.",
+                        },
+                        ApiField {
+                            name: "level",
+                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The player's level, or nil if the save has no level recorded for this \
+                                  player.",
+                        },
+                        ApiField {
+                            name: "guild_id",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The UUID, as a string, of the guild this player belongs to, or nil if the \
+                                  player is in no guild.",
+                        },
+                        ApiField {
+                            name: "pal_count",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "How many pals this player owns.",
+                        },
+                        ApiField {
+                            name: "last_online",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "An ISO-8601 timestamp of when the player was last online, or nil if the \
+                                  save records none.",
+                        },
+                        ApiField {
+                            name: "last_online_ts",
+                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The Unix timestamp, in seconds, of when the player was last online, or nil \
+                                  if the save records none.",
+                        },
+                    ],
+                    methods: &[
+                        ApiFunction {
+                            name: "pals",
+                            params: &[],
+                            returns: ApiType::Iterator("pal"),
+                            doc: "An iterator over every pal this player owns, for use in a `for` loop.",
+                            capability: None,
+                        },
+                        ApiFunction {
+                            name: "delete",
+                            params: &[],
+                            returns: ApiType::Boolean,
+                            doc: "Deletes this player, along with the item and character containers the \
+                                  player owns. Refuses (returns false, changes nothing) if the player is \
+                                  their guild's admin. A true result is a structural write and invalidates \
+                                  every live handle and iterator across all scopes, including this one.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                        ApiFunction {
+                            name: "set_level",
+                            params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
+                            returns: ApiType::Nil,
+                            doc: "Sets the player's level; must be between 1 and 255 inclusive, or this \
+                                  raises. A non-structural write: this handle and every other live handle \
+                                  and iterator stay valid, but any container previously read through this \
+                                  run is forgotten and will be re-read on next access.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                    ],
+                },
+                ApiHandle {
+                    name: "pal",
+                    capability: Some(Capability::SaveRead),
+                    fields: pal_fields::api_fields(),
+                    methods: &[
+                        ApiFunction {
+                            name: "delete",
+                            params: &[],
+                            returns: ApiType::Boolean,
+                            doc: "Deletes this pal from its owning player or guild base. A structural write \
+                                  and invalidates every live handle and iterator across all scopes, \
+                                  including this one.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                        ApiFunction {
+                            name: "set_level",
+                            params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
+                            returns: ApiType::Nil,
+                            doc: "Sets the pal's level; must be between 1 and 255 inclusive, or this raises. \
+                                  A non-structural write: every live handle and iterator stays valid, but \
+                                  the cached pal snapshot this run holds is dropped and rebuilt on next \
+                                  field access, so the new level is visible immediately.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                        ApiFunction {
+                            name: "set_talent",
+                            params: &[
+                                ApiParam { name: "which", ty: ApiType::String, optional: false },
+                                ApiParam { name: "value", ty: ApiType::Integer, optional: false },
+                            ],
+                            returns: ApiType::Nil,
+                            doc: "Sets one soul (talent) value; `which` must be \"hp\", \"shot\" or \
+                                  \"defense\", and `value` must be between 0 and 100 inclusive, or this \
+                                  raises. Non-structural, with the same cached-snapshot refresh as \
+                                  set_level.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                    ],
+                },
+                ApiHandle {
+                    name: "guild",
+                    capability: Some(Capability::SaveRead),
+                    fields: &[
+                        ApiField {
+                            name: "id",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The guild's UUID, as a string.",
+                        },
+                        ApiField {
+                            name: "name",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The guild's name.",
+                        },
+                        ApiField {
+                            name: "admin_uid",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The UUID, as a string, of the guild's admin player, or nil if the guild \
+                                  has none.",
+                        },
+                        ApiField {
+                            name: "player_count",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "How many players belong to this guild.",
+                        },
+                        ApiField {
+                            name: "base_count",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "How many bases this guild has.",
+                        },
+                        ApiField {
+                            name: "level",
+                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The guild's level, or nil if the save has no level recorded for it.",
+                        },
+                        ApiField {
+                            name: "pal_count",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "How many pals belong to this guild's bases.",
+                        },
+                        ApiField {
+                            name: "chest_container_id",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The UUID, as a string, of this guild's shared chest container, or nil if \
+                                  the guild has no chest.",
+                        },
+                    ],
+                    methods: &[ApiFunction {
+                        name: "delete",
+                        params: &[],
+                        returns: ApiType::Boolean,
+                        doc: "Deletes this guild, its bases, and every loaded member player. An unloaded \
+                              member is skipped, not deleted. A structural write and invalidates every live \
+                              handle and iterator across all scopes, including this one.",
+                        capability: Some(Capability::SaveWrite),
+                    }],
+                },
+                ApiHandle {
+                    name: "base",
+                    capability: Some(Capability::SaveRead),
+                    fields: &[
+                        ApiField {
+                            name: "id",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The base's UUID, as a string.",
+                        },
+                        ApiField {
+                            name: "guild_id",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The UUID, as a string, of the guild this base belongs to, or nil if it \
+                                  could not be resolved.",
+                        },
+                        ApiField {
+                            name: "x",
+                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The base's world X coordinate, or nil if its location could not be \
+                                  resolved.",
+                        },
+                        ApiField {
+                            name: "y",
+                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The base's world Y coordinate, or nil if its location could not be \
+                                  resolved.",
+                        },
+                        ApiField {
+                            name: "z",
+                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The base's world Z coordinate, or nil if its location could not be \
+                                  resolved.",
+                        },
+                    ],
+                    methods: &[ApiFunction {
+                        name: "delete",
+                        params: &[],
+                        returns: ApiType::Boolean,
+                        doc: "Deletes this base and every pal working it, and updates its guild's base_count \
+                              and pal_count. A structural write and invalidates every live handle and \
+                              iterator across all scopes, including this one.",
+                        capability: Some(Capability::SaveWrite),
+                    }],
+                },
+                ApiHandle {
+                    name: "container",
+                    capability: Some(Capability::SaveRead),
+                    fields: &[
+                        ApiField {
+                            name: "id",
+                            ty: ApiType::String,
+                            access: Access::ReadOnly,
+                            doc: "The container's UUID, as a string.",
+                        },
+                        ApiField {
+                            name: "slot_count",
+                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "How many slots this container has, or nil if the container could not be \
+                                  read.",
+                        },
+                    ],
+                    methods: &[
+                        ApiFunction {
+                            name: "slots",
+                            params: &[],
+                            returns: ApiType::Iterator("slot"),
+                            doc: "An iterator over every occupied slot in this container, for use in a \
+                                  `for` loop.",
+                            capability: None,
+                        },
+                        ApiFunction {
+                            name: "set_slot_count",
+                            params: &[ApiParam { name: "count", ty: ApiType::Integer, optional: false }],
+                            returns: ApiType::Boolean,
+                            doc: "Resizes the container to hold `count` slots, returning true if it \
+                                  resized. Refuses (returns false, changes nothing) rather than destroying \
+                                  an occupied slot that shrinking would drop. A true result is a structural \
+                                  write and invalidates every live handle and iterator across all scopes, \
+                                  including this one.",
+                            capability: Some(Capability::SaveWrite),
+                        },
+                    ],
+                },
+                ApiHandle {
+                    name: "slot",
+                    capability: Some(Capability::SaveRead),
+                    fields: &[
+                        ApiField {
+                            name: "index",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "This slot's position within its container.",
+                        },
+                        ApiField {
+                            name: "item_id",
+                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
+                            access: Access::ReadOnly,
+                            doc: "The static item id occupying this slot, or nil if the slot is empty.",
+                        },
+                        ApiField {
+                            name: "count",
+                            ty: ApiType::Integer,
+                            access: Access::ReadOnly,
+                            doc: "How many of the item occupy this slot.",
+                        },
+                    ],
+                    methods: &[ApiFunction {
+                        name: "clear",
+                        params: &[],
+                        returns: ApiType::Nil,
+                        doc: "Empties this slot, removing its underlying entry rather than overwriting it \
+                              in place. A structural write and invalidates every live handle and iterator \
+                              across all scopes, including this one -- looping over container.slots() and \
+                              calling clear() on each raises after the first clear; collect ids first \
+                              instead.",
+                        capability: Some(Capability::SaveWrite),
+                    }],
+                },
+            ]
+        })
+        .as_slice()
+}
 
 host_fn!(push_player_index, player_index);
 host_fn!(push_pal_index, pal_index);

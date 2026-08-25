@@ -104,16 +104,29 @@ fn acquire_snippet(kind: &str) -> Option<&'static str> {
     })
 }
 
+/// Lua's own `type()` calls every number `"number"`, which would let a field
+/// declared `Integer` hand back a float unnoticed. Probe scripts report
+/// `math.type()` for numbers instead, so these are its names: an `Integer`
+/// admits only an integer, while a `Number` admits either, matching how LuaLS
+/// treats `integer` as a subtype of `number`.
+const REFINED_TYPE_HELPER: &str = "local function refined_type(v)\n\
+                                   \x20 if type(v) == 'number' then return math.type(v) end\n\
+                                   \x20 return type(v)\n\
+                                   end\n";
+
 fn allowed_lua_types(ty: &ApiType) -> Vec<&'static str> {
     match ty {
         ApiType::Nil => vec!["nil"],
         ApiType::Boolean => vec!["boolean"],
-        ApiType::Integer | ApiType::Number => vec!["number"],
+        ApiType::Integer => vec!["integer"],
+        ApiType::Number => vec!["integer", "float"],
         ApiType::String => vec!["string"],
-        ApiType::Table => vec!["table"],
+        ApiType::Table | ApiType::List(_) | ApiType::Map { .. } => vec!["table"],
         ApiType::Handle(_) => vec!["userdata"],
         ApiType::Iterator(_) => vec!["function"],
-        ApiType::Any => vec!["nil", "boolean", "number", "string", "table", "function", "userdata", "thread"],
+        ApiType::Any => {
+            vec!["nil", "boolean", "integer", "float", "string", "table", "function", "userdata", "thread"]
+        }
         ApiType::Union(members) => members.iter().flat_map(allowed_lua_types).collect(),
     }
 }
@@ -127,7 +140,8 @@ fn field_allows_nil(ty: &ApiType) -> bool {
 fn every_described_handle_field_or_method_resolves_correctly_on_a_live_instance() {
     let def = api_definition();
 
-    let mut script = String::from("local results = {}\n");
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str("local results = {}\n");
     for handle in &def.handles {
         let acquire = acquire_snippet(handle.name).unwrap_or_else(|| {
             panic!(
@@ -142,10 +156,10 @@ fn every_described_handle_field_or_method_resolves_correctly_on_a_live_instance(
         script.push_str("  if H == nil then\n    out[#out+1] = 'NOHANDLE'\n  else\n");
         script.push_str("    out[#out+1] = 'FOUND'\n");
         for field in handle.fields {
-            script.push_str(&format!("    out[#out+1] = '{n}=' .. type(H['{n}'])\n", n = field.name));
+            script.push_str(&format!("    out[#out+1] = '{n}=' .. refined_type(H['{n}'])\n", n = field.name));
         }
         for method in handle.methods {
-            script.push_str(&format!("    out[#out+1] = '{n}=' .. type(H['{n}'])\n", n = method.name));
+            script.push_str(&format!("    out[#out+1] = '{n}=' .. refined_type(H['{n}'])\n", n = method.name));
         }
         script.push_str("  end\n");
         script.push_str(&format!("  results[#results+1] = '{n}:' .. table.concat(out, ',')\n", n = handle.name));
@@ -222,5 +236,95 @@ fn every_described_handle_field_or_method_resolves_correctly_on_a_live_instance(
         no_reachable_instance.is_empty(),
         "the fixture has no reachable instance of these described handle types, so their \
          fields could not be probed at all: {no_reachable_instance:?}"
+    );
+}
+
+#[test]
+fn every_pal_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "pal")
+        .expect("the pal handle must be described");
+
+    for spec in psp_plugin::PAL_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_pal_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "pal").expect("pal");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::PAL_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+/// The two agreement tests above are structural once the description is
+/// generated from the table: they compare the table to itself. This one is
+/// not. `pal_index` answers most rows from a hand-written `pal_field` arm that
+/// short-circuits before the table is ever consulted, so a row's declared type
+/// and the value Lua actually receives can disagree with nothing objecting.
+#[test]
+fn every_pal_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for p in save.pals() do target = p break end\n\
+         assert(target ~= nil, 'the fixture must hold a pal')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::PAL_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = read_only_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::PAL_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "pal.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(
+        psp_plugin::PAL_FIELDS.len(),
+        seen.len(),
+        "every row must be probed exactly once"
+    );
+    assert_eq!(
+        read_as_nil,
+        ["nickname", "guild_id", "base_id"],
+        "only rows genuinely absent on the fixture pal may read nil, and each of those must \
+         admit nil in its declared type"
     );
 }

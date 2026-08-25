@@ -29,6 +29,8 @@ fn lua_type(ty: &ApiType) -> String {
         ApiType::Handle(name) => (*name).to_string(),
         ApiType::Iterator(name) => format!("fun(): {name}|nil"),
         ApiType::Union(members) => members.iter().map(lua_type).collect::<Vec<_>>().join("|"),
+        ApiType::List(element) => format!("{}[]", lua_type(element)),
+        ApiType::Map { key, value } => format!("table<{}, {}>", lua_type(key), lua_type(value)),
         ApiType::Any => "any".to_string(),
     }
 }

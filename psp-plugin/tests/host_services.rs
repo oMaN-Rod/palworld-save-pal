@@ -83,6 +83,51 @@ fn ctx_exposes_the_run_shape() {
     assert_eq!(value.as_deref(), Some("false,1,table"));
 }
 
+/// Every `ctx` field is described read-only. On a plain table an assignment
+/// would succeed silently and the script would then read back a run shape the
+/// run never had -- a dry run that believes it is a real one, say.
+#[test]
+fn assigning_a_ctx_field_raises_and_names_it() {
+    let mut h = support::harness_dry(&[]);
+    let (status, _) = h.run("ctx.dry_run = false\nreturn 'unreachable'");
+    match status {
+        RunStatus::Error(message) => {
+            assert!(message.contains("ctx.dry_run"), "must name the field, got {message:?}");
+            assert!(message.contains("read-only"), "must say it is read-only, got {message:?}");
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// A key ctx never had is a typo, not a permission problem. Reporting it as
+/// read-only would tell an author the field exists and send them looking for a
+/// getter for it.
+#[test]
+fn assigning_an_unknown_ctx_key_says_it_does_not_exist() {
+    let mut h = support::harness(&[]);
+    let (status, _) = h.run("ctx.scratch = 1\nreturn 'unreachable'");
+    match status {
+        RunStatus::Error(message) => {
+            assert!(message.contains("scratch"), "must name the key, got {message:?}");
+            assert!(message.contains("no field"), "must say the field does not exist, got {message:?}");
+            assert!(
+                !message.contains("read-only"),
+                "a key ctx never had is not read-only, got {message:?}"
+            );
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// The guard lives in a metatable, so it is only real if the script cannot
+/// take it off again.
+#[test]
+fn the_ctx_write_guard_cannot_be_removed() {
+    let mut h = support::harness(&[]);
+    let (status, _) = h.run("setmetatable(ctx, nil)\nctx.dry_run = true\nreturn 'unreachable'");
+    assert!(matches!(status, RunStatus::Error(_)), "got {status:?}");
+}
+
 #[test]
 fn ui_confirm_reaches_a_supplied_dialog_that_answers_true() {
     let mut h = support::harness(&[Capability::UiDialog]).with_confirm(|_| true);

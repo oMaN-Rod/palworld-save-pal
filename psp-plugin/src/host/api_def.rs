@@ -2,6 +2,7 @@ use std::sync::OnceLock;
 
 use serde::Serialize;
 
+use super::fields::Access;
 use super::{gamedata, raw, save_read, save_write, services};
 use crate::manifest::Capability;
 
@@ -17,6 +18,8 @@ pub enum ApiType {
     Handle(&'static str),
     Iterator(&'static str),
     Union(&'static [ApiType]),
+    List(&'static ApiType),
+    Map { key: &'static ApiType, value: &'static ApiType },
     Any,
 }
 
@@ -43,6 +46,7 @@ pub struct ApiField {
     pub name: &'static str,
     #[serde(rename = "type")]
     pub ty: ApiType,
+    pub access: Access,
     pub doc: &'static str,
 }
 
@@ -130,7 +134,7 @@ pub fn api_definition() -> ApiDefinition {
                 fields: &[],
             },
         ],
-        handles: save_read::HANDLE_TYPES.to_vec(),
+        handles: save_read::handle_types().to_vec(),
     }
 }
 

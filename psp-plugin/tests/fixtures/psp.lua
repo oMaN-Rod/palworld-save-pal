@@ -17,26 +17,39 @@
 ---Requires capability: save.read.
 ---
 ---@class pal
----@field instance_id string The pal's UUID, as a string.
----@field character_id string The pal's species/character id, e.g. "PenguinPal".
----@field nickname string|nil The pal's nickname, or nil if it has none set.
----@field owner_uid string|nil The UUID, as a string, of the player who owns this pal, or nil if it belongs to a guild base instead.
----@field guild_id string|nil The UUID, as a string, of the guild this pal belongs to, or nil if it is not assigned to a guild base.
----@field base_id string|nil The UUID, as a string, of the guild base this pal works at, or nil if it is not assigned to one.
----@field gender string|nil The pal's gender ("Male", "Female"), or nil if unknown.
----@field level integer The pal's level.
----@field hp integer The pal's max HP stat.
----@field rank integer The pal's condensing rank, 0-4.
----@field exp integer The pal's total experience points.
----@field talent_hp integer The pal's HP soul (talent) value, 0-100.
----@field talent_shot integer The pal's attack soul (talent) value, 0-100.
----@field talent_defense integer The pal's defense soul (talent) value, 0-100.
----@field rank_hp integer The pal's condensed HP rank bonus.
----@field rank_attack integer The pal's condensed attack rank bonus.
----@field rank_defense integer The pal's condensed defense rank bonus.
----@field rank_craftspeed integer The pal's condensed work-speed rank bonus.
----@field is_boss boolean Whether this pal is a boss/alpha spawn. Mutually exclusive with is_lucky.
----@field is_lucky boolean Whether this pal is a lucky (rare, non-boss) spawn. Mutually exclusive with is_boss.
+---@field instance_id string This pal's unique id, as a string. Read-only.
+---@field character_id string The pal's species id, including a BOSS_ prefix when it has one. Read-only in itself, but writing is_lucky changes it: setting is_lucky = false removes a BOSS_ prefix that only marked the pal lucky, and setting it true puts one back when the change is saved. A dry run saves nothing, so after is_lucky = true this still reads the unprefixed id.
+---@field character_key string The pal's species key, as used to look up game data. Read-only, and refreshed only when the pal is next read from the save, so during a dry run it can still name the old species after a write that changed character_id.
+---@field nickname string|nil The pal's nickname, or nil if it has none.
+---@field owner_uid string|nil The id of the player who owns this pal, or nil if a guild base owns it instead. Read-only.
+---@field guild_id string|nil The id of the guild whose base this pal works at, or nil if it works at none. Read-only.
+---@field base_id string|nil The id of the base this pal works at, or nil if it works at none. Read-only.
+---@field gender string "None", "Male" or "Female".
+---@field level integer The pal's level, 1-255.
+---@field hp integer The pal's current HP. Read-only: assigning it raises. It is recalculated whenever the pal is saved, so a value set here could not have been kept anyway; a dry run saves nothing, so this keeps reading what it read before any of the run's writes.
+---@field rank integer The pal's condensing rank, 0-255.
+---@field exp integer The pal's experience points.
+---@field talent_hp integer HP talent value, 0-100.
+---@field talent_shot integer Ranged-attack talent value, 0-100.
+---@field talent_defense integer Defense talent value, 0-100.
+---@field rank_hp integer HP soul rank, 0-255.
+---@field rank_attack integer Attack soul rank, 0-255.
+---@field rank_defense integer Defense soul rank, 0-255.
+---@field rank_craftspeed integer Craft-speed soul rank, 0-255.
+---@field is_boss boolean True for a boss/alpha pal. Read-only, and never true at the same time as is_lucky: a lucky pal carries the same BOSS_ prefix but is not a boss. That exclusion is applied when the pal is saved, so during a dry run this can still read true right after setting is_lucky = true on a boss pal.
+---@field is_lucky boolean True for a lucky pal. Setting it false also removes the BOSS_ prefix from character_id, so the pal ends up plain rather than a boss; the write is refused, naming the species, when that prefix is part of the species' own name.
+---@field is_awakened boolean True if this pal has been awakened.
+---@field is_imported boolean True if this pal was imported from another save.
+---@field is_predator boolean True for a predator-species pal. Read-only.
+---@field is_tower boolean True for a tower-boss pal. Read-only.
+---@field group_id string|nil The id of the group this pal belongs to, or nil if it belongs to none. Read-only.
+---@field stomach number The pal's current fullness. Read-only: assigning it raises. The pal is fed back to full whenever it is saved, so a value set here could not have been kept anyway; a dry run saves nothing, so this keeps reading what it read before any of the run's writes.
+---@field sanity number The pal's current sanity. Read-only: assigning it raises. It is restored to 100 whenever the pal is saved, so a value set here could not have been kept anyway; a dry run saves nothing, so this keeps reading what it read before any of the run's writes.
+---@field max_hp integer The pal's maximum HP. Read-only: it is recalculated whenever the pal is saved, so during a dry run it does not move when level, rank or a talent changes.
+---@field storage_slot integer This pal's slot number inside the container holding it. Read-only: assigning it raises rather than moving the pal. Nothing would check whether the slot you named was already taken, so allowing the write would risk putting two pals in the same place.
+---@field storage_id string The id of the container holding this pal. Read-only.
+---@field is_sick boolean True if this pal is sick. Read-only: sickness is cleared whenever the pal is saved, so during a dry run a sick pal keeps reading true.
+---@field friendship_point integer The pal's friendship points.
 ---@field delete fun(): boolean Deletes this pal from its owning player or guild base. A structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
 ---@field set_level fun(level: integer): nil Sets the pal's level; must be between 1 and 255 inclusive, or this raises. A non-structural write: every live handle and iterator stays valid, but the cached pal snapshot this run holds is dropped and rebuilt on next field access, so the new level is visible immediately. Requires capability: save.write.
 ---@field set_talent fun(which: string, value: integer): nil Sets one soul (talent) value; `which` must be "hp", "shot" or "defense", and `value` must be between 0 and 100 inclusive, or this raises. Non-structural, with the same cached-snapshot refresh as set_level. Requires capability: save.write.

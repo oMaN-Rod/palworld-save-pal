@@ -97,9 +97,10 @@ fn pal_entry_exists(ctx: &RunContext<'_>, pal_id: Uuid) -> bool {
 fn apply_pal_field(
     ctx: &mut RunContext<'_>,
     pal_id: Uuid,
+    field: &'static str,
     f: impl FnOnce(&mut psp_core::dto::pal::PalDto),
 ) -> Result<(), HostError> {
-    super::dto_cache::pal_write(ctx, pal_id, f)
+    super::dto_cache::pal_write(ctx, pal_id, &[field], f)
 }
 
 /// The bound id is never epoch-checked at call time, which is sound only because
@@ -293,7 +294,7 @@ fn pal_set_level_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 ctx.bump("pal.set_level", 1);
                 return Ok(());
             }
-            apply_pal_field(ctx, pal_id, |dto| dto.level = level)?;
+            apply_pal_field(ctx, pal_id, "level", |dto| dto.level = level)?;
             Ok(())
         })?;
         Ok(0)
@@ -313,10 +314,10 @@ fn pal_set_talent_body(state: *mut lua_State) -> Result<c_int, HostError> {
         if !(0..=100).contains(&value) {
             return Err(HostError::new(format!("talent value must be between 0 and 100, got {value}")));
         }
-        let setter: fn(&mut psp_core::dto::pal::PalDto, i64) = match which.as_str() {
-            "hp" => |dto, v| dto.talent_hp = v,
-            "shot" => |dto, v| dto.talent_shot = v,
-            "defense" => |dto, v| dto.talent_defense = v,
+        let (setter, field): (fn(&mut psp_core::dto::pal::PalDto, i64), &'static str) = match which.as_str() {
+            "hp" => (|dto, v| dto.talent_hp = v, "talent_hp"),
+            "shot" => (|dto, v| dto.talent_shot = v, "talent_shot"),
+            "defense" => (|dto, v| dto.talent_defense = v, "talent_defense"),
             _ => {
                 return Err(HostError::new(format!(
                     "unknown talent {which:?}; expected \"hp\", \"shot\" or \"defense\""
@@ -332,7 +333,7 @@ fn pal_set_talent_body(state: *mut lua_State) -> Result<c_int, HostError> {
                 ctx.bump("pal.set_talent", 1);
                 return Ok(());
             }
-            apply_pal_field(ctx, pal_id, |dto| setter(dto, value))?;
+            apply_pal_field(ctx, pal_id, field, |dto| setter(dto, value))?;
             Ok(())
         })?;
         Ok(0)

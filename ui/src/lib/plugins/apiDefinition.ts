@@ -18,7 +18,11 @@ export type ApiType =
 	| { kind: 'any' }
 	| { kind: 'handle'; value: string }
 	| { kind: 'iterator'; value: string }
-	| { kind: 'union'; value: ApiType[] };
+	| { kind: 'union'; value: ApiType[] }
+	| { kind: 'list'; value: ApiType }
+	| { kind: 'map'; value: { key: ApiType; value: ApiType } };
+
+export type ApiAccess = 'read_write' | 'read_only';
 
 export interface ApiParam {
 	name: string;
@@ -37,6 +41,7 @@ export interface ApiFunction {
 export interface ApiField {
 	name: string;
 	type: ApiType;
+	access: ApiAccess;
 	doc: string;
 }
 
@@ -67,6 +72,10 @@ export function typeName(type: ApiType): string {
 			return `fun(): ${type.value}|nil`;
 		case 'union':
 			return type.value.map(typeName).join('|');
+		case 'list':
+			return `${typeName(type.value)}[]`;
+		case 'map':
+			return `table<${typeName(type.value.key)}, ${typeName(type.value.value)}>`;
 		default:
 			return type.kind;
 	}

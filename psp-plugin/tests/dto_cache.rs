@@ -129,6 +129,81 @@ fn a_dry_run_writes_nothing_but_still_counts() {
     );
 }
 
+/// `flush` used to drain the dirty-DTO map before checking `ctx.dry_run`,
+/// discarding a dry run's own pending writes instead of leaving them cached.
+/// `friendship_point` has no `pal_field` arm, so this read can only be
+/// answered by `fields::pal::pal_get`'s `dto_cache::pal_read` -- which would
+/// see the original value, not this run's write, if `flush` had drained it.
+#[test]
+fn a_dry_runs_own_write_is_still_visible_to_a_later_read_in_the_same_run() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(
+        "local target
+         for p in save.pals() do target = p break end
+         target.friendship_point = 999
+         return tostring(target.friendship_point)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some("999"),
+        "a dry run's own write must still be visible to a later read in the same run"
+    );
+    assert_eq!(harness.dto_flush_count(), 0, "a dry run must still never actually flush");
+}
+
+/// `friendship_point` above has no `pal_field` arm, so its read always went
+/// through `pal_get`, which already consulted the DTO cache -- that test
+/// never exercised the pal summary's own stale-rebuild path at all.
+/// `level` does have a `pal_field` arm: before `pal_index` checked
+/// `dto_cache::pal_field_was_written` first, this read went through
+/// `ensure_pals_snapshot` -> `flush` (a dry-run no-op) -> a summary rebuilt
+/// from the unmodified save, so it returned the pal's original level, not
+/// this run's write -- the exact gap `friendship_point`'s test could not
+/// catch.
+#[test]
+fn a_dry_runs_write_to_a_summary_answered_field_is_still_visible_to_a_later_read() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(
+        "local target
+         for p in save.pals() do target = p break end
+         local original = target.level
+         local new_level = original == 77 and 78 or 77
+         target.level = new_level
+         return tostring(original) .. '|' .. tostring(target.level) .. '|' .. tostring(new_level)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    let summary = summary.expect("a string");
+    let mut parts = summary.split('|');
+    let original: i64 = parts.next().expect("an original level").parse().expect("an integer");
+    let after: i64 = parts.next().expect("a level after the write").parse().expect("an integer");
+    let new_level: i64 = parts.next().expect("the intended new level").parse().expect("an integer");
+    assert_ne!(new_level, original, "the chosen new level must actually differ from the original");
+    assert_eq!(
+        after,
+        new_level,
+        "a dry run's own write to a summary-answered field must still be visible to a later read"
+    );
+}
+
+/// The field-table assignment path (`target.level = ...`), not the older
+/// `p.set_level(...)` method this file's other tests already cover. Proves
+/// `pal_field_was_written`'s short-circuit does not break the ordinary
+/// (non-dry) case: the read must still see this run's own write, now served
+/// straight from the cache instead of via a flush-and-rebuild.
+#[test]
+fn a_real_runs_write_to_a_summary_answered_field_is_visible_to_a_later_read() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(
+        "local target
+         for p in save.pals() do target = p break end
+         target.level = 60
+         return tostring(target.level)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some("60"));
+}
+
 /// End of run (`runtime::run_command`, after the command function returns,
 /// before `finish`). The harness builds a `RunContext` itself rather than
 /// going through `run_command`, so it flushes the same way
