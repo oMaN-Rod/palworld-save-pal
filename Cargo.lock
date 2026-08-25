@@ -3634,6 +3634,7 @@ dependencies = [
  "psp-app",
  "psp-core",
  "psp-db",
+ "psp-plugin",
  "reqwest 0.12.28",
  "rfd",
  "serde",

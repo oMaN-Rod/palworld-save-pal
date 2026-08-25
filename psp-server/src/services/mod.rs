@@ -2,6 +2,8 @@
 pub mod docker;
 pub mod docker_mods;
 pub mod language_server;
+pub mod lsp_process;
+pub mod lsp_workspace;
 pub mod native_config;
 pub mod native_mods;
 pub mod native_process;

@@ -1,4 +1,5 @@
 pub mod api_convert;
+pub mod lsp_service;
 #[cfg(feature = "desktop")]
 pub mod rfd_dialogs;
 pub mod router;
@@ -98,6 +99,13 @@ pub async fn start_server_with(
         }
     }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
+    // Both roots sit beside the database, the one directory the deployment
+    // already guarantees is writable.
+    let app_dir = config
+        .db_path
+        .parent()
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("."));
     let state = Arc::new(AppState {
         config: AppConfig {
             desktop_mode: config.desktop_mode,
@@ -109,7 +117,10 @@ pub async fn start_server_with(
         ext: Arc::new(crate::server_ext::ServerExtRouter {
             services: Arc::new(crate::services::ServerServices::real()),
         }),
-        lsp: Arc::new(psp_app::lsp::NullLspService),
+        lsp: Arc::new(crate::lsp_service::ServerLspService::new(
+            app_dir.join("lua-language-server"),
+            app_dir.join("plugin-workspaces"),
+        )),
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
         plugins: Default::default(),

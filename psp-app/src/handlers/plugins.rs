@@ -270,6 +270,13 @@ fn is_safe_source_path(path: &str) -> bool {
     }
     segments.iter().all(|segment| {
         !segment.is_empty()
+            // A consumer assembling this key on disk pushes it segment by
+            // segment, and `PathBuf::push` throws the whole buffer away when
+            // the component it is given carries a prefix: `lib/C:evil.lua`
+            // would land on `C:evil.lua`, outside the plugin's directory. A
+            // drive letter has to be refused wherever in the key it appears,
+            // not only at its start.
+            && !segment.contains(':')
             && *segment != "."
             && *segment != ".."
             && !segment.ends_with('.')
@@ -1111,6 +1118,18 @@ mod source_path_tests {
     fn rejects_a_drive_letter_prefix() {
         assert!(!is_safe_source_path("C:/util.lua"));
         assert!(!is_safe_source_path("c:util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_drive_letter_in_a_later_segment() {
+        // `PathBuf::push` discards everything before a component carrying a
+        // prefix, so these land on `C:evil.lua` — outside the plugin's own
+        // directory — for any consumer that assembles the key segment by
+        // segment.
+        assert!(!is_safe_source_path("lib/C:evil.lua"));
+        assert!(!is_safe_source_path("lib/C:/evil.lua"));
+        assert!(!is_safe_source_path("C:evil.lua"));
+        assert!(!is_safe_source_path("a/b/c:d.lua"));
     }
 
     #[test]
