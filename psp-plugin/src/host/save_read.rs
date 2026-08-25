@@ -10,10 +10,11 @@ use psp_core::session::SaveSession;
 use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
-use super::api_def::{ApiField, ApiFunction, ApiHandle, ApiParam, ApiType};
+use super::api_def::{ApiFunction, ApiHandle, ApiParam, ApiType};
 use super::fields::{
-    base as base_fields, guild as guild_fields, pal as pal_fields, player as player_fields,
-    push_field_value, Access, FieldValue,
+    base as base_fields, container as container_fields, guild as guild_fields, pal as pal_fields,
+    player as player_fields, slot as slot_fields,
+    push_field_value, FieldValue,
 };
 use super::handle::{handle_kind_for, invalidated_handle_error, push_handle, read_handle, Handle, HandleKind};
 use super::marshal::{arg_string, check_args, push_str};
@@ -274,6 +275,9 @@ pub(crate) fn read_container<'ctx>(
         )
         .map(|dto| (container_id, dto));
     }
+    if ctx.dry_run {
+        super::dto_cache::overlay_pending_slots(ctx, container_id);
+    }
     ctx.container.as_ref().map(|(_, dto)| dto)
 }
 
@@ -300,15 +304,8 @@ fn container_field(state: *mut lua_State) -> Result<c_int, HostError> {
             return Ok(1);
         }
 
-        let value = with_context(state, |ctx| {
-            Ok(match field.as_str() {
-                "id" => FieldValue::Str(handle.id.to_string()),
-                "slot_count" => read_container(ctx, handle.id)
-                    .map(|dto| FieldValue::Int(dto.slot_num as i64))
-                    .unwrap_or(FieldValue::Nil),
-                _ => FieldValue::Nil,
-            })
-        })?;
+        let value =
+            with_context(state, |ctx| container_fields::container_get(ctx, handle.id, &field))?;
         drop(field);
         push_field_value(state, value)?;
         Ok(1)
@@ -333,17 +330,7 @@ fn slot_field(state: *mut lua_State) -> Result<c_int, HostError> {
         }
 
         let value = with_context(state, |ctx| {
-            let slot = read_container(ctx, handle.id)
-                .and_then(|dto| dto.slots.iter().find(|slot| slot.slot_index == handle.slot));
-            Ok(match (field.as_str(), slot) {
-                ("index", Some(_)) => FieldValue::Int(handle.slot as i64),
-                ("item_id", Some(slot)) => match slot.static_id.as_deref() {
-                    Some("") | Some("None") | None => FieldValue::Nil,
-                    Some(id) => FieldValue::Str(id.to_string()),
-                },
-                ("count", Some(slot)) => FieldValue::Int(slot.count as i64),
-                _ => FieldValue::Nil,
-            })
+            slot_fields::slot_get(ctx, handle.id, handle.slot, &field)
         })?;
         drop(field);
         push_field_value(state, value)?;
@@ -430,21 +417,7 @@ pub fn handle_types() -> &'static [ApiHandle] {
                 ApiHandle {
                     name: "container",
                     capability: Some(Capability::SaveRead),
-                    fields: &[
-                        ApiField {
-                            name: "id",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The container's UUID, as a string.",
-                        },
-                        ApiField {
-                            name: "slot_count",
-                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "How many slots this container has, or nil if the container could not be \
-                                  read.",
-                        },
-                    ],
+                    fields: container_fields::api_fields(),
                     methods: &[
                         ApiFunction {
                             name: "slots",
@@ -470,26 +443,7 @@ pub fn handle_types() -> &'static [ApiHandle] {
                 ApiHandle {
                     name: "slot",
                     capability: Some(Capability::SaveRead),
-                    fields: &[
-                        ApiField {
-                            name: "index",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "This slot's position within its container.",
-                        },
-                        ApiField {
-                            name: "item_id",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The static item id occupying this slot, or nil if the slot is empty.",
-                        },
-                        ApiField {
-                            name: "count",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "How many of the item occupy this slot.",
-                        },
-                    ],
+                    fields: slot_fields::api_fields(),
                     methods: &[ApiFunction {
                         name: "clear",
                         params: &[],

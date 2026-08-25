@@ -98,6 +98,9 @@ const fn rw(
         access: Access::ReadWrite,
         doc,
         read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: None,
+        game_data_postcheck: None,
         write: Some(FieldWrite { validate, apply }),
     }
 }
@@ -111,7 +114,7 @@ const fn ro_entry(
     doc: &'static str,
     read: fn(&MapEntry) -> FieldValue,
 ) -> FieldSpec<BaseDto, MapEntry> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Every field this handle answers for. Every row but `id` admits nil, because
@@ -258,7 +261,7 @@ pub(crate) fn base_set(
         return Err(HostError::new(format!("unknown base field {field:?}")));
     };
     let Some(write) = spec.write.as_ref() else {
-        return Err(HostError::new(format!("{field} is read-only")));
+        return Err(spec.not_assignable());
     };
     // Refused rather than applied. `apply_base_dto` writes both writable rows
     // into the entry's base-camp record and simply does nothing when there is
@@ -271,8 +274,9 @@ pub(crate) fn base_set(
              the assignment would change nothing"
         )));
     }
+    let game_data = ctx.game_data;
     let current = dto_cache::base_read(ctx, id)?;
-    (write.validate)(current, &value)?;
+    spec.validate_write(game_data, current, &value)?;
     if ctx.dry_run {
         ctx.bump(&format!("base.{}", spec.name), 1);
     }

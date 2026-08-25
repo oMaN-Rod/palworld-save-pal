@@ -101,17 +101,17 @@
 ---Requires capability: save.read.
 ---
 ---@class container
----@field id string The container's UUID, as a string.
----@field slot_count integer|nil How many slots this container has, or nil if the container could not be read.
+---@field id string The container's UUID, as a string. Read-only.
+---@field slot_count integer|nil How many slots this container has, or nil if the container could not be read. Cannot be assigned: resizing a container is a structural write that invalidates every live handle and iterator, so it stays container.set_slot_count(n), which reports whether it resized and refuses rather than destroying an occupied slot.
 ---@field slots fun(): (fun(): slot|nil) An iterator over every occupied slot in this container, for use in a `for` loop. Requires capability: save.read.
 ---@field set_slot_count fun(count: integer): boolean Resizes the container to hold `count` slots, returning true if it resized. Refuses (returns false, changes nothing) rather than destroying an occupied slot that shrinking would drop. A true result is a structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
 
 ---Requires capability: save.read.
 ---
 ---@class slot
----@field index integer This slot's position within its container.
----@field item_id string|nil The static item id occupying this slot, or nil if the slot is empty.
----@field count integer How many of the item occupy this slot.
+---@field index integer This slot's position within its container. Read-only: moving a slot means removing and re-adding its entry, which is structural.
+---@field item_id string|nil The static item id occupying this slot, or nil if the slot is empty. Must name an item the loaded game data knows, matched case-insensitively and stored exactly as written; an id the catalog does not hold raises, and the check is skipped entirely when no catalog is loaded. Assigning "None" raises: it is the one value the save reads as "delete this slot", which is structural -- use slot.clear(). Assigning nil or an empty string raises too: both read back as an empty slot without emptying one, leaving an entry holding an item with no id. Assigning on a slot that carries a per-item record (durability, an egg's pal, a weapon's passives) also raises: the record names its own item and cannot be re-pointed here.
+---@field count integer How many of the item occupy this slot. Must be at least 1: a slot holding none of its item is an empty slot, and emptying one is structural -- use slot.clear(). No upper bound beyond what the save can hold, because nothing in the game's data or in this app establishes a stack limit, and refusing one here would be inventing a rule rather than reporting one.
 ---@field clear fun(): nil Empties this slot, removing its underlying entry rather than overwriting it in place. A structural write and invalidates every live handle and iterator across all scopes, including this one -- looping over container.slots() and calling clear() on each raises after the first clear; collect ids first instead. Requires capability: save.write.
 
 ---Requires capability: save.raw.

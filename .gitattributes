@@ -23,3 +23,9 @@ _headers text eol=lf
 # Same for `_redirects`: the status code is the last token on the line, so a
 # CRLF checkout would ship `301\r` and Cloudflare would reject the config.
 _redirects text eol=lf
+
+# The generated LuaLS meta fixture is compared byte-for-byte against what
+# `lua_meta` emits, which is LF. Under `core.autocrlf=true` a Windows checkout
+# rewrites it to CRLF and `the_meta_file_matches_its_golden` fails on a clean
+# tree, with a diff no regeneration can close.
+psp-plugin/tests/fixtures/psp.lua text eol=lf

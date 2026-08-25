@@ -319,6 +319,7 @@ fn slot_clear_body(state: *mut lua_State) -> Result<c_int, HostError> {
         with_context(state, |ctx| {
             if ctx.dry_run {
                 ctx.bump("slot.clear", 1);
+                super::dto_cache::forget_pending_slot(ctx, container_id, slot_index);
                 return Ok(());
             }
             super::dto_cache::flush(ctx)?;
@@ -528,6 +529,9 @@ fn clear_slots_where_run(state: *mut lua_State) -> Result<c_int, HostError> {
 
             if ctx.dry_run {
                 ctx.bump("slot.clear", cleared);
+                for (container_id, slot_index) in &stateful.kill {
+                    super::dto_cache::forget_pending_slot(ctx, *container_id, *slot_index);
+                }
                 return Ok(cleared);
             }
             if cleared == 0 {

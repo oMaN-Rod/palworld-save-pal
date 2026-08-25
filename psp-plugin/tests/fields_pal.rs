@@ -792,3 +792,60 @@ fn a_mis_cased_skill_id_is_refused_rather_than_stored_as_written() {
         }
     }
 }
+
+/// The `is_lucky` row declares its catalog check as a *pre*check, ahead of its
+/// own `validate`, and that position is the whole reason the row model carries
+/// two. This is the case that tells the two apart.
+///
+/// A `Boss_`-cased id passes `character_id_carries_boss_prefix`, which is
+/// case-insensitive, but fails `boss_prefix_is_a_lucky_marker`, whose
+/// `strip_prefix("BOSS_")` is not -- so `validate_is_lucky` refuses it on the
+/// species name. With the catalog also unavailable, that answer is not merely
+/// second-best, it is untrue: nothing here knows whether the prefix belongs to
+/// the species, because the catalog that would say so did not load. The
+/// catalog refusal has to win, and it only does while it runs first.
+///
+/// Move the row to `rw_postchecked` and every other pal test stays green while
+/// this one reports the species answer instead.
+#[test]
+fn the_catalog_refusal_pre_empts_the_species_refusal_it_cannot_confirm() {
+    let mut harness = support::harness(CAPS_RAW).with_empty_game_data();
+    let (status, _) = harness.run(
+        "local id
+         for p in save.pals() do id = p.instance_id break end
+
+         local target
+         for p in save.pals() do if p.instance_id == id then target = p break end end
+         target.is_lucky = true
+
+         local count = raw.len('level', 'worldSaveData.CharacterSaveParameterMap')
+         local index
+         for i = 0, count - 1 do
+           local this_id = raw.get('level', 'worldSaveData.CharacterSaveParameterMap[' .. i .. '].key.InstanceId')
+           if this_id == id then index = i break end
+         end
+         assert(index ~= nil, 'pal entry not found in CharacterSaveParameterMap')
+         local char_path = 'worldSaveData.CharacterSaveParameterMap[' .. index ..
+             '].value.RawData.SaveParameter.CharacterID'
+         raw.set('level', char_path, 'Boss_Foxparks')
+
+         target.is_lucky = false
+         return 'unreachable'",
+    );
+    match status {
+        RunStatus::Error(message) => {
+            assert!(message.contains("is_lucky"), "must name the field, got {message:?}");
+            assert!(
+                message.contains("catalog is unavailable"),
+                "the catalog refusal must win: without a catalog nothing can say whether the \
+                 prefix belongs to the species, got {message:?}"
+            );
+            assert!(
+                !message.contains("species name"),
+                "asserting the prefix is part of the species name is exactly what an unavailable \
+                 catalog cannot support, got {message:?}"
+            );
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}

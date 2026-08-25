@@ -112,6 +112,9 @@ const fn rw(
         access: Access::ReadWrite,
         doc,
         read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: None,
+        game_data_postcheck: None,
         write: Some(FieldWrite { validate, apply }),
     }
 }
@@ -122,7 +125,7 @@ const fn ro(
     doc: &'static str,
     read: fn(&GuildDto) -> FieldValue,
 ) -> FieldSpec<GuildDto, GuildSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Like `ro`, but sourced from the guild summary the session already holds
@@ -133,7 +136,7 @@ const fn ro_summary(
     doc: &'static str,
     read: fn(&GuildSummary) -> FieldValue,
 ) -> FieldSpec<GuildDto, GuildSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Every field this handle answers for. The three counts are derived by
@@ -268,10 +271,11 @@ pub(crate) fn guild_set(
         return Err(HostError::new(format!("unknown guild field {field:?}")));
     };
     let Some(write) = spec.write.as_ref() else {
-        return Err(HostError::new(format!("{field} is read-only")));
+        return Err(spec.not_assignable());
     };
+    let game_data = ctx.game_data;
     let current = dto_cache::guild_read(ctx, id)?;
-    (write.validate)(current, &value)?;
+    spec.validate_write(game_data, current, &value)?;
     if ctx.dry_run {
         ctx.bump(&format!("guild.{}", spec.name), 1);
     }

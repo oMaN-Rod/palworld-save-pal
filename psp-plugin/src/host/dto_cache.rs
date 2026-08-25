@@ -1,6 +1,7 @@
 use std::collections::BTreeMap;
 
 use psp_core::domain::{containers, guild, guild_tail, pal, player, world};
+use psp_core::dto::container::ItemContainerSlotDto;
 use psp_core::dto::guild::{BaseDto, GuildDto};
 use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::dto::pal::PalDto;
@@ -40,6 +41,20 @@ pub struct DtoCache {
     player: BTreeMap<Uuid, CachedPlayer>,
     guild: BTreeMap<Uuid, CachedGuild>,
     base: BTreeMap<Uuid, CachedBase>,
+    /// Dry-run only, and never flushed. Unlike the four caches above it holds
+    /// no write waiting to land: a real slot assignment goes straight to the
+    /// save at the point of assignment, so there is nothing pending on that
+    /// path and nothing here. A dry run writes nothing at all, and this is what
+    /// its own later reads of the slots it assigned to are answered from --
+    /// including across a mid-run flush, which a dry run never performs.
+    slot: BTreeMap<(Uuid, i32), PendingSlot>,
+}
+
+/// The whole of what a slot assignment can move. The per-item record is
+/// deliberately absent: no row writes it, and a dry run cannot change it.
+pub(crate) struct PendingSlot {
+    count: i32,
+    static_id: Option<String>,
 }
 
 pub(crate) struct CachedPlayer {
@@ -67,6 +82,57 @@ pub(crate) struct CachedPlayer {
     /// flush drains the entry, so the next load recaptures from the save.
     saved_status_rows: Vec<String>,
     saved_ext_status_rows: Vec<String>,
+}
+
+/// Records what a dry run's accepted slot assignment left the slot holding.
+pub(crate) fn note_pending_slot(
+    ctx: &mut RunContext<'_>,
+    container_id: Uuid,
+    slot: &ItemContainerSlotDto,
+) {
+    ctx.dto_cache.slot.insert(
+        (container_id, slot.slot_index),
+        PendingSlot { count: slot.count, static_id: slot.static_id.clone() },
+    );
+}
+
+/// Drops a dry run's record of a slot, because something has since happened to
+/// that slot which the record can no longer describe. A dry run's `slot.clear()`
+/// is the case: it previews removing the entry, and a pending count for an entry
+/// the preview has removed is a preview contradicting itself. Dropping it sends
+/// the read back to what the save holds, which is what a dry run answered before
+/// the overlay existed.
+///
+/// `note_write` is what makes it take effect: the overlay is applied onto the
+/// run's cached copy of the container, so forgetting the record is not enough on
+/// its own -- the copy still carries the value that was replayed onto it. This
+/// drops the copy so the next read comes off the save.
+pub(crate) fn forget_pending_slot(ctx: &mut RunContext<'_>, container_id: Uuid, slot_index: i32) {
+    if ctx.dto_cache.slot.remove(&(container_id, slot_index)).is_some() {
+        ctx.note_write();
+    }
+}
+
+/// Replays a dry run's accepted slot assignments onto the container just read
+/// out of the save, so the rest of the run previews what it asked for rather
+/// than what the save still holds. Idempotent: it writes values, not deltas, so
+/// re-running it over an already-overlaid copy changes nothing.
+pub(crate) fn overlay_pending_slots(ctx: &mut RunContext<'_>, container_id: Uuid) {
+    if ctx.dto_cache.slot.is_empty() {
+        return;
+    }
+    let Some((cached_id, dto)) = ctx.container.as_mut() else {
+        return;
+    };
+    if *cached_id != container_id {
+        return;
+    }
+    for slot in dto.slots.iter_mut() {
+        if let Some(pending) = ctx.dto_cache.slot.get(&(container_id, slot.slot_index)) {
+            slot.count = pending.count;
+            slot.static_id = pending.static_id.clone();
+        }
+    }
 }
 
 /// `CharacterSaveParameterMap` entry id -> position, built once per run and

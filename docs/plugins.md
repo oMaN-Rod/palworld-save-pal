@@ -102,7 +102,7 @@ script is actually allowed to touch.
 | Capability | Wire name | Installs |
 |---|---|---|
 | Save read | `save.read` | The `save` global's read half: `save.info()`, `save.players()`, `save.pals()`, `save.guilds()`, `save.bases()`, `save.containers()`, and every handle field read — except the `player` fields that are not answered from the save's player summary, which need `players` as well (see below). |
-| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a `pal`, `player`, `guild` or `base` handle's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
+| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a `pal`, `player`, `guild`, `base` or `slot` handle's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
 | Save raw | `save.raw` | The `raw` global (`raw.get`/`exists`/`kind`/`set`/`delete`/`len`/`visit`). **Bundled plugins only in v1** — see below. |
 | Players | `players` | Installs nothing of its own. Gates two things: the `player:<uid>` and `player_dps:<uid>` raw targets — `raw.get`/`raw.set`/etc. against a per-player scope refuse with an error unless this is also granted, and `raw` itself still needs `save.raw` — and reading any `player` handle field that is not answered from the save's own player summary. It is not a blanket gate on everything about a player: a player's entry in the level save (their `Exp`, `Level`, `FullStomach` and stat lists) is also reachable through the `level` raw target, which needs `save.raw` but not this. |
 | Game data | `gamedata` | The `gamedata` global (`gamedata.is_valid_item()`, `gamedata.is_valid_pal()`, `gamedata.version()`). |
@@ -222,7 +222,7 @@ method call — `player.name`, not `player.name()`):
 | `pal` | `instance_id`, `character_id`, `character_key`, `nickname`, `owner_uid`, `guild_id`, `base_id`, `gender`, `level`, `hp`, `max_hp`, `rank`, `exp`, `talent_hp`, `talent_shot`, `talent_defense`, `rank_hp`, `rank_attack`, `rank_defense`, `rank_craftspeed`, `is_boss`, `is_lucky`, `is_awakened`, `is_imported`, `is_predator`, `is_tower`, `is_sick`, `group_id`, `stomach`, `sanity`, `friendship_point`, `storage_id`, `storage_slot`, and four table-valued fields: `learned_skills`, `active_skills`, `passive_skills` (lists of catalog id strings) and `work_suitability` (ranks keyed by work type) |
 | `guild` | `id`, `name`, `admin_uid`, `player_count`, `base_count`, `level`, `pal_count`, `chest_container_id` (a container id string, or `nil` when the guild has no chest) |
 | `base` | `id`, `guild_id`, `name`, `area_range` (the radius of the base's working area, in world units), `x`, `y`, `z`. Everything but `id` reads `nil` on a base whose record in the save could not be read — the iterator hands out a handle for any entry that has an id, without checking there is anything behind it. |
-| `container` | `id`, `slot_count`, `slots` (a `container.slots()` iterator factory) |
+| `container` | `id`, `slot_count`, `slots` (a `container.slots()` iterator factory). Nothing on this handle is assignable — see below. |
 | `slot` | `index`, `item_id` (nil for an empty slot), `count` |
 
 An unresolvable field name returns `nil` rather than erroring — reading a
@@ -344,8 +344,8 @@ hand-rolling the loop, and reach for `ctx.dry_run` branching only if you must.
 
 #### Writing a handle's fields
 
-The writable fields of a `pal`, `player`, `guild` or `base` handle are written
-by assigning to them, not by calling a setter:
+The writable fields of a `pal`, `player`, `guild`, `base` or `slot` handle are
+written by assigning to them, not by calling a setter:
 
 ```lua
 pal.level = 60
@@ -361,6 +361,9 @@ guild.level = 12
 
 base.name = "Main Camp"
 base.area_range = 3500
+
+slot.count = 5
+slot.item_id = "Wood"
 ```
 
 An out-of-range value raises rather than being clamped, and the message names
@@ -376,11 +379,13 @@ to offer — and moving a base is not merely a missing setter, since its placed
 structures and working pals carry their own coordinates that nothing relates
 back to the base's. The authority on which is which is `psp.lua`: a
 type-annotation file generated from the same host API definition these docs
-describe, in which every read-only field says so in its own entry. It is
-written into the plugin's workspace only where the editor's full tier runs,
+describe, in which every read-only field says so in its own entry. It says so in
+prose only: LuaLS has no read-only field modifier, so an assignment to one
+type-checks like any other and is refused only once the command runs. The file
+is written into the plugin's workspace only where the editor's full tier runs,
 since it exists for that tier's language server to read — on the baseline tier
-there is no such file to open, and the runtime error on a refused assignment is
-what tells you the field was read-only.
+there is not even that entry to read, and the runtime error on a refused
+assignment is all there is.
 
 Assignment is non-structural: every live handle and iterator stays valid, and a
 read straight afterwards sees the new value. That holds for a player too — a
@@ -389,7 +394,41 @@ writes back, so nothing a `container` or `slot` handle points at can move under
 it. A guild write does the same with the guild's bases and its shared chest, and
 a base write with the base's storage containers: the save's own writers would
 otherwise walk each of those into a container rewrite that no handle or iterator
-could see coming.
+could see coming. A `slot` write is non-structural for a blunter reason: it
+overwrites that one raw slot entry in place and touches no other slot, so a
+`container.slots()` iterator stays walkable across it — unlike `slot.clear()`,
+which removes the entry and does not.
+
+Some fields are refused not because the value is wrong but because the change is
+**structural** — it adds or removes an entry, which invalidates every live
+handle and iterator. Those stay calls, and the refusal names the call to use:
+
+- `container.slot_count` is read-only; resizing is `container.set_slot_count(n)`.
+  Nothing at all on a `container` handle can be assigned.
+- `slot.item_id` cannot be assigned `"None"`: that is the one value the save
+  reads as "delete this slot". Use `slot.clear()`.
+- `slot.count` cannot be assigned zero or less, for the same reason — a slot
+  holding none of its item is an empty slot.
+- `slot.index` is read-only: moving a slot means removing and re-adding it.
+
+`slot.item_id` also refuses `nil` and `""`, but not because either is
+structural — neither removes anything. Both read back as an empty slot without
+emptying one: the entry would still be there, holding an item with no id. They
+are refused because emptying a slot is what they mean, and `slot.clear()` is
+what does it.
+
+`slot.item_id` must also name an item the loaded game data knows. The match is
+case-insensitive, because save ids and the catalog do not agree on casing, and
+the id reaches the save exactly as you wrote it. If no catalog is loaded the
+check is skipped rather than refusing everything — an unavailable catalog is not
+evidence that an id is wrong.
+
+Finally, `slot.item_id` is refused on a slot carrying a per-item record — a
+weapon's durability and remaining rounds, an egg's pal, armour's condition. That
+record names its own item and nothing here can rewrite it, so re-pointing only
+the slot would leave the two disagreeing. A `slot.count` write, on the other
+hand, keeps the record exactly as it was: the record is carried across the write
+untouched, not rebuilt and not dropped.
 
 A few values are refused rather than written because the save itself reads them
 as "leave this alone", so the assignment would quietly do nothing: an empty
@@ -402,7 +441,18 @@ read — the same base whose `name`, `area_range`, `x`, `y` and `z` all read
 methods above, but it does not simply return — the new value goes into the
 run's own cache for that handle, so every later read in that same run sees it,
 which is what lets a preview compute from values it has itself assigned. Nothing
-reaches the save, and the cache is discarded when the run ends.
+reaches the save, and the cache is discarded when the run ends. A `slot`
+assignment behaves the same way from the outside, though it gets there
+differently: on a real run it lands on the save at the point of assignment
+rather than being held and flushed later, so the read afterwards is a read of
+the save.
+
+One asymmetry to know about, which predates field assignment: **a dry run never
+invalidates handles**, because no structural operation performs its mutation
+under one. So a dry run can call `slot.clear()` and then keep reading that slot,
+where a real run would raise. A previewed clear does at least drop whatever the
+same run had previewed assigning to that slot, so the two do not contradict each
+other — the read falls back to what the save holds.
 
 **Reads are snapshots, not live views.** A field read hands back a copy — for a
 table field, a fresh table each time — so mutating what you read changes

@@ -1,6 +1,7 @@
 use std::ffi::c_int;
 
 use psp_core::dto::ordered_map::OrderedMap;
+use psp_core::gamedata::GameData;
 use psp_lua_sys::ffi::*;
 use serde::Serialize;
 
@@ -8,9 +9,11 @@ use super::api_def::ApiType;
 use super::{marshal, HostError};
 
 pub mod base;
+pub mod container;
 pub mod guild;
 pub mod pal;
 pub mod player;
+pub mod slot;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -206,12 +209,83 @@ pub struct FieldSpec<D, S> {
     pub access: Access,
     pub doc: &'static str,
     pub(crate) read: Reader<D, S>,
+    /// For a row that cannot be assigned but does have a working alternative:
+    /// the call to name in the refusal. `container.slot_count` is the case it
+    /// exists for -- resizing a container is structural, so it stays behind
+    /// `set_slot_count`, and an author who reaches for the assignment has to be
+    /// told the operation that works rather than only that this one does not.
+    /// `None` on every ordinary read-only row, which keeps the plain message.
+    pub(crate) instead_call: Option<&'static str>,
     /// `None` for every `Access::ReadOnly` row. `validate` inspects the
     /// current DTO (some rows, like `pal.is_lucky`, need to see what else is
     /// already set before deciding whether the write is safe) and the
     /// incoming value; `apply` is the pure mutation, only ever called after
     /// `validate` returns `Ok`.
     pub(crate) write: Option<FieldWrite<D>>,
+    /// A check the row needs that its own `validate` cannot make, run before
+    /// `validate`. `pal.is_lucky` is the case it exists for: its catalog-
+    /// availability refusal has to pre-empt the row's ordinary species-name
+    /// refusal, whose answer is unreliable precisely when the catalog is the
+    /// thing that is missing.
+    pub(crate) game_data_precheck: Option<GameDataCheck<D>>,
+    /// The same, run after `validate`. `slot.item_id` is the case it exists
+    /// for: the row's own refusals name the operation to use instead, and a
+    /// catalog check running first would replace them with a bare "not in the
+    /// catalog" for `"None"` and the empty string.
+    pub(crate) game_data_postcheck: Option<GameDataCheck<D>>,
+}
+
+/// A row's extra validator, for the checks `FieldWrite::validate` cannot make
+/// because it sees only the DTO and the catalogs live on `GameData`. Takes the
+/// row's own name so a message can quote the field without the row's name being
+/// written out a second time inside the validator.
+///
+/// Carried on the row, not selected by comparing the row's name to a string.
+/// A string-matched validator detaches silently when the row is renamed, and a
+/// detached validator does not fail loudly -- it stops validating, and the save
+/// takes the value it would have refused. Every other correspondence on these
+/// handles was replaced with a derived one for exactly that reason.
+pub(crate) type GameDataCheck<D> =
+    fn(&GameData, &'static str, &D, &FieldValue) -> Result<(), HostError>;
+
+impl<D, S> FieldSpec<D, S> {
+    /// Everything that has to pass before a row's `apply` may run: the row's
+    /// game-data precheck, its own `validate`, then its postcheck.
+    ///
+    /// One call rather than three, so a handle cannot run the row's `validate`
+    /// while silently skipping the checks the row carries -- which is the same
+    /// failure the checks were moved onto the row to prevent, one level up.
+    pub(crate) fn validate_write(
+        &self,
+        game_data: &GameData,
+        current: &D,
+        value: &FieldValue,
+    ) -> Result<(), HostError> {
+        if let Some(check) = self.game_data_precheck {
+            check(game_data, self.name, current, value)?;
+        }
+        if let Some(write) = self.write.as_ref() {
+            (write.validate)(current, value)?;
+        }
+        if let Some(check) = self.game_data_postcheck {
+            check(game_data, self.name, current, value)?;
+        }
+        Ok(())
+    }
+
+    /// The refusal for an assignment to a row that has no write. Structural
+    /// rows name the operation that does work; every other read-only row keeps
+    /// the plain wording the four earlier handles already report.
+    pub(crate) fn not_assignable(&self) -> HostError {
+        match self.instead_call {
+            Some(call) => HostError::new(format!(
+                "{} cannot be assigned: changing it is structural and invalidates every live \
+                 handle and iterator, so it stays a call -- use {call} instead",
+                self.name
+            )),
+            None => HostError::new(format!("{} is read-only", self.name)),
+        }
+    }
 }
 
 pub(crate) struct FieldWrite<D> {

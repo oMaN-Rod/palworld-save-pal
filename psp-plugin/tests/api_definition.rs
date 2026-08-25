@@ -4,6 +4,7 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use psp_plugin::host::api_def::{api_definition, ApiType};
 use psp_plugin::manifest::Capability;
+use psp_plugin::Access;
 use psp_plugin::status::RunStatus;
 
 /// Unlike `install_globals_body`'s match arms, this list has no compiler-enforced tie to `Capability`; a new variant not added here silently drops out of this test's coverage.
@@ -591,5 +592,421 @@ fn every_base_field_row_reads_back_at_its_declared_type() {
         Vec::<&str>::new(),
         "every row has a value on the fixture base, including the nilable ones -- a row \
          reading nil here needs explaining, not exempting"
+    );
+}
+
+#[test]
+fn every_container_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "container")
+        .expect("the container handle must be described");
+
+    for spec in psp_plugin::CONTAINER_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_container_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "container").expect("container");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::CONTAINER_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+#[test]
+fn every_slot_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "slot")
+        .expect("the slot handle must be described");
+
+    for spec in psp_plugin::SLOT_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_slot_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "slot").expect("slot");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::SLOT_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+/// The container counterpart of the four read-back tests above. Its two rows
+/// are answered from different places -- one off the handle, one off the
+/// container the save holds -- which is exactly the split a declared type can
+/// drift across.
+#[test]
+fn every_container_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for c in save.containers() do target = c break end\n\
+         assert(target ~= nil, 'the fixture must hold a container')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::CONTAINER_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = read_only_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::CONTAINER_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "container.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(psp_plugin::CONTAINER_FIELDS.len(), seen.len(), "every row must be probed exactly once");
+    assert_eq!(
+        read_as_nil,
+        Vec::<&str>::new(),
+        "every row has a value on the fixture container, including the nilable one -- a row \
+         reading nil here needs explaining, not exempting"
+    );
+}
+
+/// The slot counterpart. Every row is answered off the slot the save holds, and
+/// the fixture's first slot is occupied, so none of them may read nil.
+#[test]
+fn every_slot_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for c in save.containers() do\n\
+         \x20 for s in c.slots() do if s.item_id ~= nil then target = s break end end\n\
+         \x20 if target then break end\n\
+         end\n\
+         assert(target ~= nil, 'the fixture must hold an occupied slot')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::SLOT_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = read_only_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::SLOT_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "slot.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(psp_plugin::SLOT_FIELDS.len(), seen.len(), "every row must be probed exactly once");
+    assert_eq!(
+        read_as_nil,
+        Vec::<&str>::new(),
+        "every row has a value on an occupied fixture slot, including the nilable one -- a row \
+         reading nil here needs explaining, not exempting"
+    );
+}
+
+/// Whether `message` names `field` as a word of its own, rather than merely
+/// containing its letters. A plain substring test is vacuous for a short name:
+/// `exp` sits inside "expected", which every type refusal already says, so
+/// `player.exp` would pass no matter what name its validator quoted.
+fn names_the_field(message: &str, field: &str) -> bool {
+    let boundary = |byte: Option<u8>| !byte.is_some_and(|b| b.is_ascii_alphanumeric() || b == b'_');
+    message.match_indices(field).any(|(at, _)| {
+        let bytes = message.as_bytes();
+        boundary(at.checked_sub(1).map(|before| bytes[before]))
+            && boundary(bytes.get(at + field.len()).copied())
+    })
+}
+
+/// A value whose Lua type the row's declared type does not admit, as a Lua
+/// literal. `None` when the row admits all four probes -- a type wide enough
+/// that nothing is wrong-typed for it, which is a row this probe cannot reach.
+fn wrong_typed_literal(ty: &ApiType) -> Option<&'static str> {
+    let allowed = allowed_lua_types(ty);
+    [("true", "boolean"), ("'psp_probe'", "string"), ("1.5", "float"), ("{}", "table")]
+        .into_iter()
+        .find(|(_, lua_type)| !allowed.contains(lua_type))
+        .map(|(literal, _)| literal)
+}
+
+/// A value the row's declared type *does* admit but that little in a save
+/// plausibly holds: past the end of a range, outside a catalog, not a key any
+/// stat map carries. Derived from the declared type, with no per-row knowledge
+/// -- which is what makes a row added later covered without anyone remembering.
+///
+/// A row that accepts it is not a failure. This exists to reach the refusals a
+/// wrong type never gets to: ranges, domains, key sets, catalogs, and
+/// `slot.count`'s structural one.
+fn implausible_literal(ty: &ApiType) -> Option<&'static str> {
+    Some(match ty {
+        ApiType::Integer => "-987654321",
+        ApiType::Number => "1e40",
+        ApiType::String => "'psp_implausible_value'",
+        ApiType::Boolean => "false",
+        ApiType::List(_) => "{ 'psp_implausible_value' }",
+        ApiType::Map { .. } => "{ psp_implausible_key = -987654321 }",
+        ApiType::Table => "{ psp_implausible_key = -987654321 }",
+        ApiType::Union(members) => {
+            return members.iter().find(|member| !matches!(member, ApiType::Nil)).and_then(implausible_literal)
+        }
+        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Any => return None,
+    })
+}
+
+/// Builds one script that assigns `literal_for(row)` to every described row on
+/// every handle, each inside its own `pcall` so a refusal collects a message
+/// instead of stopping the walk. Returns the rows it probed, in the order their
+/// records come back, and the rows it could not build a literal for.
+///
+/// The walk comes off `api_definition()`, which is projected from the field
+/// tables, so neither pass has a list of rows to keep in step with the code.
+fn build_row_probe(
+    literal_for: fn(&ApiType) -> Option<&'static str>,
+) -> (Vec<ProbedRow>, Vec<String>, String) {
+    let def = api_definition();
+    let mut probed: Vec<ProbedRow> = Vec::new();
+    let mut unprobeable: Vec<String> = Vec::new();
+    let mut script = String::from("local out = {}\n");
+
+    for handle in &def.handles {
+        let acquire = acquire_snippet(handle.name).unwrap_or_else(|| {
+            panic!("no fixture acquisition strategy is known for handle type {:?}", handle.name)
+        });
+        script.push_str("do\n  local H\n  ");
+        script.push_str(acquire);
+        script.push_str(&format!(
+            "\n  if H == nil then error('no {} handle in the fixture') end\n",
+            handle.name
+        ));
+        for field in handle.fields {
+            let Some(literal) = literal_for(&field.ty) else {
+                unprobeable.push(format!("{}.{} ({:?})", handle.name, field.name, field.ty));
+                continue;
+            };
+            probed.push(ProbedRow { handle: handle.name, field: field.name, access: field.access });
+            script.push_str(&format!(
+                "  do local ok, err = pcall(function() H['{n}'] = {literal} end)\n\
+                 \x20   out[#out+1] = tostring(ok) .. '\\t' .. tostring(err) end\n",
+                n = field.name
+            ));
+        }
+        script.push_str("end\n");
+    }
+    script.push_str("return table.concat(out, '\\n')");
+    (probed, unprobeable, script)
+}
+
+/// One row a probe assigned to. `access` is carried so the second pass can put
+/// its floor on the writable rows alone: a read-only row refuses whatever it is
+/// handed, from a message `not_assignable` already derives, so it would prop up
+/// that floor without contributing any signal.
+struct ProbedRow {
+    handle: &'static str,
+    field: &'static str,
+    access: Access,
+}
+
+impl ProbedRow {
+    fn label(&self) -> String {
+        format!("{}.{}", self.handle, self.field)
+    }
+}
+
+/// Runs a built probe and returns one `(ok, message)` per row, in probe order.
+fn run_row_probe(script: &str, expected: usize) -> Vec<(bool, String)> {
+    let mut h = all_capabilities_harness();
+    let (status, value) = h.run(script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+    let records: Vec<(bool, String)> = value
+        .split('\n')
+        .map(|record| {
+            let (ok, message) = record
+                .split_once('\t')
+                .unwrap_or_else(|| panic!("expected ok<tab>message, got {record:?}"));
+            (ok == "true", message.to_string())
+        })
+        .collect();
+    assert_eq!(
+        records.len(),
+        expected,
+        "the generated script and this assertion loop drifted: {expected} probes, {} records",
+        records.len()
+    );
+    records
+}
+
+/// Every row's refusal has to name the row it refused, and nothing derives that
+/// today: each validator writes its own field name into its own message as a
+/// string literal (`expect_str("item_id", ...)`, `expect_bool("is_lucky", ...)`,
+/// and so on across every handle). A renamed row keeps its validator -- the row
+/// carries it -- but its message would go on quoting the old name, and an author
+/// would be told to fix a field that no longer exists.
+///
+/// Rather than thread a name parameter through some fifty validators, this walks
+/// the rows the API definition describes and provokes each one with a value its
+/// declared type does not admit, so every row's *type* refusal is reached.
+#[test]
+fn every_rows_refusal_names_the_row_it_refused() {
+    let (probed, unprobeable, script) = build_row_probe(wrong_typed_literal);
+    let records = run_row_probe(&script, probed.len());
+
+    let mut accepted: Vec<String> = Vec::new();
+    let mut unnamed: Vec<String> = Vec::new();
+    for (row, (ok, message)) in probed.iter().zip(&records) {
+        if *ok {
+            accepted.push(row.label());
+        } else if !names_the_field(message, row.field) {
+            unnamed.push(format!("{} was refused with {message:?}", row.label()));
+        }
+    }
+
+    assert_eq!(
+        accepted,
+        Vec::<String>::new(),
+        "these rows accepted a value their declared type does not admit, so nothing about their \
+         refusal could be checked"
+    );
+    assert_eq!(
+        unnamed,
+        Vec::<String>::new(),
+        "a refusal that does not name its row sends an author to fix a field that is not the one \
+         they wrote"
+    );
+    assert_eq!(
+        unprobeable,
+        Vec::<String>::new(),
+        "these rows admit every value this probe can offer, so their refusal is unreachable here \
+         -- exclude them deliberately rather than leaving them silently unprobed"
+    );
+
+    // Read-only rows pass this trivially: their refusal comes from
+    // `FieldSpec::not_assignable`, which already builds the message from the
+    // row's own name. All of the signal is in the writable rows, whose
+    // validators write the name out by hand -- so the floor is on those.
+    let writable = api_definition()
+        .handles
+        .iter()
+        .flat_map(|handle| handle.fields.iter())
+        .filter(|field| field.access == Access::ReadWrite)
+        .count();
+    assert!(
+        writable >= 40,
+        "only {writable} writable rows exist to probe; the walk is not reaching the tables"
+    );
+    assert_eq!(
+        probed.len(),
+        api_definition().handles.iter().map(|handle| handle.fields.len()).sum::<usize>(),
+        "every described row must be probed exactly once"
+    );
+}
+
+/// The second half, and the one that reaches the refusals a wrong type never
+/// gets to. A wrong-typed value only ever provokes a row's type check, so a
+/// range, domain, key-set, catalog or structural message could quote a stale
+/// name with the test above still green.
+///
+/// The assertion is conditional -- *if* the row refuses, the refusal must name
+/// it -- which is what makes a derived second pass safe: a row that legitimately
+/// accepts an implausible value is not a failure, and no per-row knowledge or
+/// exception table is needed to tell the two apart.
+#[test]
+fn every_rows_second_refusal_also_names_the_row_it_refused() {
+    let (probed, unprobeable, script) = build_row_probe(implausible_literal);
+    let records = run_row_probe(&script, probed.len());
+
+    let mut unnamed: Vec<String> = Vec::new();
+    let mut refused_writable = 0usize;
+    for (row, (ok, message)) in probed.iter().zip(&records) {
+        if *ok {
+            continue;
+        }
+        if row.access == Access::ReadWrite {
+            refused_writable += 1;
+        }
+        if !names_the_field(message, row.field) {
+            unnamed.push(format!("{} was refused with {message:?}", row.label()));
+        }
+    }
+
+    assert_eq!(
+        unnamed,
+        Vec::<String>::new(),
+        "a refusal that does not name its row sends an author to fix a field that is not the one \
+         they wrote"
+    );
+    assert_eq!(
+        unprobeable,
+        Vec::<String>::new(),
+        "these rows have no type-valid literal this probe can build, so nothing about their \
+         second refusal could be checked -- exclude them deliberately rather than silently"
+    );
+    // Without a floor this pass would still be green if every row started
+    // accepting everything, which is the shape it exists to notice.
+    assert!(
+        refused_writable >= 20,
+        "only {refused_writable} writable rows refused an implausible value; this pass is no \
+         longer reaching the range, domain, key-set and catalog refusals it exists for"
     );
 }

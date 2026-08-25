@@ -378,6 +378,9 @@ const fn rw(
         access: Access::ReadWrite,
         doc,
         read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: None,
+        game_data_postcheck: None,
         write: Some(FieldWrite { validate, apply }),
     }
 }
@@ -388,7 +391,7 @@ const fn ro(
     doc: &'static str,
     read: fn(&PlayerDto) -> FieldValue,
 ) -> FieldSpec<PlayerDto, PlayerSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Like `ro`, but sourced from the player summary the session already holds.
@@ -401,7 +404,7 @@ const fn ro_summary(
     doc: &'static str,
     read: fn(&PlayerSummary) -> FieldValue,
 ) -> FieldSpec<PlayerDto, PlayerSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Every field this handle answers for. The five container DTOs
@@ -734,7 +737,7 @@ pub(crate) fn player_set(
         return Err(HostError::new(format!("unknown player field {field:?}")));
     };
     let Some(write) = spec.write.as_ref() else {
-        return Err(HostError::new(format!("{field} is read-only")));
+        return Err(spec.not_assignable());
     };
     // An empty Lua table is an empty list and an empty map at once, and the
     // reader cannot tell them apart; the row's declared type can.
@@ -744,8 +747,9 @@ pub(crate) fn player_set(
         }
         (_, other) => other,
     };
+    let game_data = ctx.game_data;
     let current = dto_cache::player_read(ctx, uid)?;
-    (write.validate)(current, &value)?;
+    spec.validate_write(game_data, current, &value)?;
     // Validated against what the script actually assigned, so a refusal names
     // the script's own keys; expanded to a genuine replacement only afterwards.
     let value = match (spec.name, value) {

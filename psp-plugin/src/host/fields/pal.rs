@@ -11,7 +11,7 @@ use uuid::Uuid;
 
 use super::{
     expect_bool, expect_int, expect_list, expect_str, field_value_type_name, ranged_int, read_field_value,
-    Access, FieldSpec, FieldValue, FieldWrite, Reader,
+    Access, FieldSpec, FieldValue, FieldWrite, GameDataCheck, Reader,
 };
 use crate::context::RunContext;
 use crate::host::api_def::{ApiField, ApiType};
@@ -310,11 +310,12 @@ fn boss_prefix_is_a_lucky_marker(dto: &PalDto) -> bool {
 /// "known key" against an empty set) -- so every `BOSS_`-prefixed id,
 /// including `BOSS_Male_People`, would silently look like a safe strip. An
 /// unavailable catalog is not evidence that stripping is safe, so this is
-/// checked separately, ahead of the ordinary species-name refusal, and
-/// refuses outright rather than falling back to that check's (unreliable,
-/// in this case) answer.
+/// carried on the row as its `game_data_precheck` -- ahead of the ordinary
+/// species-name refusal -- and refuses outright rather than falling back to
+/// that check's (unreliable, in this case) answer.
 fn refuse_is_lucky_demote_without_a_catalog(
     game_data: &GameData,
+    field: &str,
     current: &PalDto,
     value: &FieldValue,
 ) -> Result<(), HostError> {
@@ -324,7 +325,7 @@ fn refuse_is_lucky_demote_without_a_catalog(
     }
     if pal::known_pal_keys(game_data).is_empty() {
         return Err(HostError::new(format!(
-            "cannot set is_lucky to false on {:?}: the pal species catalog is unavailable, so it \
+            "cannot set {field} to false on {:?}: the pal species catalog is unavailable, so it \
              cannot be confirmed safe to strip the BOSS_ prefix",
             current.character_id
         )));
@@ -343,8 +344,9 @@ fn refuse_is_lucky_demote_without_a_catalog(
 /// prefix is not always a lucky marker (see `boss_prefix_is_a_lucky_marker`),
 /// so this is refused, naming the species, rather than risk fabricating one
 /// that does not exist in `pals.json`. The catalog-availability refusal
-/// (`refuse_is_lucky_demote_without_a_catalog`) runs separately, before this,
-/// since it needs `GameData` and this does not.
+/// (`refuse_is_lucky_demote_without_a_catalog`) runs before this, since it
+/// needs `GameData` and this does not; the row carries it as its
+/// `game_data_precheck`, so a rename takes it along.
 fn validate_is_lucky(dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
     let new_value = expect_bool("is_lucky", value)?;
     if !new_value
@@ -486,12 +488,34 @@ fn apply_work_suitability(dto: &mut PalDto, value: FieldValue) {
 /// picks `learned_skills` out of the active-skill catalog too -- its editor
 /// enumerates the same table `active_skills` does -- so both answer
 /// `active_skills`.
-fn skill_catalog(field: &str) -> Option<&'static str> {
-    match field {
-        "learned_skills" | "active_skills" => Some("active_skills"),
-        "passive_skills" => Some("passive_skills"),
-        _ => None,
-    }
+/// The three adapters the rows carry. Each names its own catalog, and takes the
+/// row's name from the row rather than repeating it, so a renamed row keeps both
+/// its validator and the field name its message quotes.
+fn check_active_skill_catalog(
+    game_data: &GameData,
+    field: &'static str,
+    _current: &PalDto,
+    value: &FieldValue,
+) -> Result<(), HostError> {
+    validate_skill_entries(game_data, field, "active_skills", value)
+}
+
+fn check_passive_skill_catalog(
+    game_data: &GameData,
+    field: &'static str,
+    _current: &PalDto,
+    value: &FieldValue,
+) -> Result<(), HostError> {
+    validate_skill_entries(game_data, field, "passive_skills", value)
+}
+
+fn check_is_lucky_catalog(
+    game_data: &GameData,
+    field: &'static str,
+    current: &PalDto,
+    value: &FieldValue,
+) -> Result<(), HostError> {
+    refuse_is_lucky_demote_without_a_catalog(game_data, field, current, value)
 }
 
 /// Exact match only. A mis-cased id would be accepted and then stored verbatim
@@ -511,9 +535,10 @@ fn catalog_holds(game_data: &GameData, catalog: &str, id: &str) -> bool {
 }
 
 /// Kept out of the row's own `validate`, which sees only the DTO: the catalogs
-/// live on `GameData`, the same way `is_lucky`'s species check does. A non-list
-/// is an error rather than a pass -- the row's `validate` rejects one first
-/// today, but nothing here should depend on that still being true.
+/// live on `GameData`. Reached through the adapter each row carries as its
+/// `game_data_postcheck`, not by matching the row's name against a list. A
+/// non-list is an error rather than a pass -- the row's `validate` rejects one
+/// first today, but nothing here should depend on that still being true.
 fn validate_skill_entries(
     game_data: &GameData,
     field: &str,
@@ -550,6 +575,60 @@ const fn rw(
         access: Access::ReadWrite,
         doc,
         read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: None,
+        game_data_postcheck: None,
+        write: Some(FieldWrite { validate, apply }),
+    }
+}
+
+/// Like `rw`, plus a game-data check the row carries itself. `precheck` runs
+/// ahead of `validate`, which is what `is_lucky` needs: the ordinary
+/// species-name refusal reads `character_key`, and `character_key` is only
+/// meaningful when the catalog it was computed from actually loaded.
+const fn rw_prechecked(
+    name: &'static str,
+    ty: ApiType,
+    doc: &'static str,
+    read: fn(&PalDto) -> FieldValue,
+    validate: fn(&PalDto, &FieldValue) -> Result<(), HostError>,
+    apply: fn(&mut PalDto, FieldValue),
+    precheck: GameDataCheck<PalDto>,
+) -> FieldSpec<PalDto, PalSummary> {
+    FieldSpec {
+        name,
+        ty,
+        access: Access::ReadWrite,
+        doc,
+        read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: Some(precheck),
+        game_data_postcheck: None,
+        write: Some(FieldWrite { validate, apply }),
+    }
+}
+
+/// Like `rw`, plus a game-data check that runs after `validate` -- the position
+/// the three skill rows want, so a value that is not a list of strings at all is
+/// reported as that rather than as a catalog miss.
+const fn rw_postchecked(
+    name: &'static str,
+    ty: ApiType,
+    doc: &'static str,
+    read: fn(&PalDto) -> FieldValue,
+    validate: fn(&PalDto, &FieldValue) -> Result<(), HostError>,
+    apply: fn(&mut PalDto, FieldValue),
+    postcheck: GameDataCheck<PalDto>,
+) -> FieldSpec<PalDto, PalSummary> {
+    FieldSpec {
+        name,
+        ty,
+        access: Access::ReadWrite,
+        doc,
+        read: Reader::Dto(read),
+        instead_call: None,
+        game_data_precheck: None,
+        game_data_postcheck: Some(postcheck),
         write: Some(FieldWrite { validate, apply }),
     }
 }
@@ -560,7 +639,7 @@ const fn ro(
     doc: &'static str,
     read: fn(&PalDto) -> FieldValue,
 ) -> FieldSpec<PalDto, PalSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Like `ro`, but for a row with no corresponding `PalDto` field at all --
@@ -571,7 +650,7 @@ const fn ro_summary(
     doc: &'static str,
     read: fn(&PalSummary) -> FieldValue,
 ) -> FieldSpec<PalDto, PalSummary> {
-    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
+    FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), game_data_precheck: None, game_data_postcheck: None, instead_call: None, write: None }
 }
 
 /// Every field this handle answers for: the fields the pal summary already
@@ -710,7 +789,7 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
          setting is_lucky = true on a boss pal.",
         read_is_boss,
     ),
-    rw(
+    rw_prechecked(
         "is_lucky",
         ApiType::Boolean,
         "True for a lucky pal. Setting it false also removes the BOSS_ prefix from \
@@ -719,6 +798,7 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
         read_is_lucky,
         validate_is_lucky,
         apply_is_lucky,
+        check_is_lucky_catalog,
     ),
     rw(
         "is_awakened",
@@ -791,7 +871,7 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
         validate_friendship_point,
         apply_friendship_point,
     ),
-    rw(
+    rw_postchecked(
         "learned_skills",
         ApiType::List(&ApiType::String),
         "Every active skill this pal has learned, as catalog ids like \
@@ -803,8 +883,9 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
         read_learned_skills,
         validate_learned_skills,
         apply_learned_skills,
+        check_active_skill_catalog,
     ),
-    rw(
+    rw_postchecked(
         "active_skills",
         ApiType::List(&ApiType::String),
         "The active skills this pal has equipped, as catalog ids like \
@@ -816,8 +897,9 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
         read_active_skills,
         validate_active_skills,
         apply_active_skills,
+        check_active_skill_catalog,
     ),
-    rw(
+    rw_postchecked(
         "passive_skills",
         ApiType::List(&ApiType::String),
         "The passive skills this pal carries, as catalog ids like \"Rare\", spelled exactly as \
@@ -826,6 +908,7 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
         read_passive_skills,
         validate_passive_skills,
         apply_passive_skills,
+        check_passive_skill_catalog,
     ),
     rw(
         "work_suitability",
@@ -917,7 +1000,7 @@ pub(crate) fn pal_set(ctx: &mut RunContext<'_>, id: Uuid, field: &str, value: Fi
         return Err(HostError::new(format!("unknown pal field {field:?}")));
     };
     let Some(write) = spec.write.as_ref() else {
-        return Err(HostError::new(format!("{field} is read-only")));
+        return Err(spec.not_assignable());
     };
     // An empty Lua table is an empty list and an empty map at once, and the
     // reader cannot tell them apart; the row's declared type can.
@@ -929,13 +1012,7 @@ pub(crate) fn pal_set(ctx: &mut RunContext<'_>, id: Uuid, field: &str, value: Fi
     };
     let game_data = ctx.game_data;
     let current = dto_cache::pal_read(ctx, id)?;
-    if spec.name == "is_lucky" {
-        refuse_is_lucky_demote_without_a_catalog(game_data, current, &value)?;
-    }
-    (write.validate)(current, &value)?;
-    if let Some(catalog) = skill_catalog(spec.name) {
-        validate_skill_entries(game_data, spec.name, catalog, &value)?;
-    }
+    spec.validate_write(game_data, current, &value)?;
     // Counted once per accepted assignment, not once per claimed field: an
     // `is_lucky` demote claims `character_id` too, and a preview that said a
     // plugin would write two fields when the script assigned one would be a
