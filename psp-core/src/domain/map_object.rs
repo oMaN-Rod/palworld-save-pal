@@ -223,6 +223,25 @@ pub fn set_map_object_hp(
     Ok(false)
 }
 
+pub fn set_map_object_builder(
+    session: &mut SaveSession,
+    id: uuid::Uuid,
+    build_player_uid: Option<uuid::Uuid>,
+) -> Result<bool, CoreError> {
+    let Some(objects) = world::map_object_values_mut(&mut session.level)? else {
+        return Ok(false);
+    };
+    for object in objects.iter_mut() {
+        let Some(model) = model_of_mut(object) else { continue };
+        if props::guid_to_uuid(&model.instance_id) == id {
+            model.build_player_uid =
+                build_player_uid.map(props::uuid_to_guid).unwrap_or_else(FGuid::nil);
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
 pub fn remove_map_objects(
     session: &mut SaveSession,
     ids: &[uuid::Uuid],
@@ -237,6 +256,160 @@ pub fn remove_map_objects(
         None => true,
     });
     Ok(before - objects.len())
+}
+
+/// A `WorkSaveData` element's `RawData.base_data.owner_map_object_model_id`; `None`
+/// when the element carries no work base at all.
+fn work_owner(value: &StructValue) -> Option<uuid::Uuid> {
+    let StructValue::Struct(properties) = value else { return None };
+    match properties.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::Work(work))) => {
+            work.base_data.as_ref().map(|base| props::guid_to_uuid(&base.owner_map_object_model_id))
+        }
+        _ => None,
+    }
+}
+
+pub fn remove_orphaned_works(session: &mut SaveSession) -> Result<usize, CoreError> {
+    let surviving: HashSet<uuid::Uuid> = map_object_ids(session)?.into_iter().collect();
+    let Some(works) = world::work_values_mut(&mut session.level)? else {
+        return Ok(0);
+    };
+    let before = works.len();
+    works.retain(|work| match work_owner(work) {
+        Some(owner) => surviving.contains(&owner),
+        None => true,
+    });
+    Ok(before - works.len())
+}
+
+/// The same predicate `remove_orphaned_works` applies, against an externally
+/// supplied surviving-id set rather than the session's own current map
+/// objects -- lets a caller predict the count before actually removing them.
+pub fn count_orphaned_works(
+    session: &SaveSession,
+    surviving: &HashSet<uuid::Uuid>,
+) -> Result<usize, CoreError> {
+    let Some(works) = world::work_values(&session.level)? else {
+        return Ok(0);
+    };
+    Ok(works
+        .iter()
+        .filter(|work| match work_owner(work) {
+            Some(owner) => !surviving.contains(&owner),
+            None => false,
+        })
+        .count())
+}
+
+/// A `DynamicItemSaveData` element's own `RawData.id.local_id_in_created_world`;
+/// `None` for an entry that is not a `PalDynamicItem` at all.
+fn dynamic_item_id(value: &StructValue) -> Option<uuid::Uuid> {
+    let StructValue::Struct(item_props) = value else { return None };
+    match item_props.0.get(&PropertyKey::from("RawData"))? {
+        Property::Struct(StructValue::Game(PalStruct::DynamicItem(item))) => {
+            Some(props::guid_to_uuid(&item.id.local_id_in_created_world))
+        }
+        _ => None,
+    }
+}
+
+fn item_dynamic_id(item: &crate::ue::games::palworld::PalItemId) -> Option<uuid::Uuid> {
+    let id = props::guid_to_uuid(&item.dynamic_id.local_id_in_created_world);
+    (id != props::EMPTY_UUID).then_some(id)
+}
+
+/// Every dynamic item id something in the save still points at: an
+/// item-container slot, a `DropItem` map object's held item, an item booth's
+/// trade goods, or a damage-triggered drop table's payout. The last two are
+/// checked defensively -- every instance of either in this repository's
+/// fixtures carries an empty trade/drop list, so nothing has yet been
+/// observed to actually use them for a dynamic id -- but the type they share
+/// with a real slot's item (`PalItemId`, complete with a `dynamic_id`) makes
+/// them capable of carrying one, and checking them costs nothing a real
+/// orphan sweep would otherwise get wrong.
+fn referenced_dynamic_item_ids(level: &crate::ue::Save) -> Result<HashSet<uuid::Uuid>, CoreError> {
+    let mut ids = HashSet::new();
+
+    if let Ok(entries) = world::item_container_map(level) {
+        for entry in entries {
+            let Some(value_props) = props::struct_props(&entry.value) else { continue };
+            let Some(slot_values) =
+                props::get(value_props, &["Slots"]).and_then(props::struct_values)
+            else {
+                continue;
+            };
+            for slot_value in slot_values {
+                let StructValue::Struct(slot_props) = slot_value else { continue };
+                if let Some(Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw)))) =
+                    slot_props.0.get(&PropertyKey::from("RawData"))
+                {
+                    if let Some(id) = item_dynamic_id(&raw.item) {
+                        ids.insert(id);
+                    }
+                }
+            }
+        }
+    }
+
+    if let Some(objects) = world::map_object_values(level)? {
+        for object in objects {
+            let Some(variant) = concrete_variant(object) else { continue };
+            match variant {
+                PalMapConcreteModelVariant::DropItem(model) => {
+                    if let Some(id) = item_dynamic_id(&model.item_id) {
+                        ids.insert(id);
+                    }
+                }
+                PalMapConcreteModelVariant::ItemBooth(model) => {
+                    for trade in &model.trade_infos {
+                        for item in [&trade.product, &trade.cost] {
+                            if let Some(id) = item_dynamic_id(&item.item_id) {
+                                ids.insert(id);
+                            }
+                        }
+                    }
+                }
+                PalMapConcreteModelVariant::ItemDropOnDamag(model) => {
+                    for item in &model.drop_item_infos {
+                        if let Some(id) = item_dynamic_id(&item.item_id) {
+                            ids.insert(id);
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+
+    Ok(ids)
+}
+
+pub fn count_orphaned_dynamic_items(session: &SaveSession) -> Result<usize, CoreError> {
+    let referenced = referenced_dynamic_item_ids(&session.level)?;
+    let Ok(values) = world::dynamic_item_values(&session.level) else {
+        return Ok(0);
+    };
+    Ok(values
+        .iter()
+        .filter(|value| match dynamic_item_id(value) {
+            Some(id) => !referenced.contains(&id),
+            None => false,
+        })
+        .count())
+}
+
+pub fn remove_orphaned_dynamic_items(session: &mut SaveSession) -> Result<usize, CoreError> {
+    let referenced = referenced_dynamic_item_ids(&session.level)?;
+    let Ok(values) = world::dynamic_item_values_mut(&mut session.level) else {
+        return Ok(0);
+    };
+    let before = values.len();
+    values.retain(|value| match dynamic_item_id(value) {
+        Some(id) => referenced.contains(&id),
+        None => true,
+    });
+    Ok(before - values.len())
 }
 
 #[cfg(test)]
@@ -416,6 +589,163 @@ mod tests {
             remove_map_objects(&mut session, &doomed).expect("remove"),
             0,
             "a second removal of the same ids finds nothing"
+        );
+    }
+
+    fn seed_dangling_work_owner(session: &mut SaveSession, dangling_owner: uuid::Uuid) -> usize {
+        let works = world::work_values_mut(&mut session.level)
+            .expect("work values")
+            .expect("the fixture has work entries");
+        for work in works.iter_mut() {
+            let StructValue::Struct(properties) = work else { continue };
+            let Some(Property::Struct(StructValue::Game(PalStruct::Work(raw)))) =
+                properties.0.get_mut(&PropertyKey::from("RawData"))
+            else {
+                continue;
+            };
+            if let Some(base) = raw.base_data.as_mut() {
+                base.owner_map_object_model_id = props::uuid_to_guid(dangling_owner);
+                return 1;
+            }
+        }
+        0
+    }
+
+    #[test]
+    fn no_work_is_orphaned_in_the_untouched_fixture() {
+        let session = load_fixture_session("v1_relics");
+        let surviving: HashSet<uuid::Uuid> = map_object_ids(&session).expect("ids").into_iter().collect();
+        assert_eq!(
+            count_orphaned_works(&session, &surviving).expect("count"),
+            0,
+            "every work's owner must resolve to a surviving map object"
+        );
+    }
+
+    #[test]
+    fn remove_orphaned_works_removes_exactly_what_a_dangling_owner_creates() {
+        let mut session = load_fixture_session("v1_relics");
+        let works_before =
+            world::work_values(&session.level).expect("work values").expect("work entries").len();
+
+        let dangling_owner = uuid::Uuid::new_v4();
+        let seeded = seed_dangling_work_owner(&mut session, dangling_owner);
+        assert!(seeded > 0, "the fixture must carry at least one work entry with a base to dangle");
+
+        let surviving: HashSet<uuid::Uuid> = map_object_ids(&session).expect("ids").into_iter().collect();
+        assert_eq!(count_orphaned_works(&session, &surviving).expect("count"), seeded);
+
+        let removed = remove_orphaned_works(&mut session).expect("remove");
+        assert_eq!(removed, seeded);
+
+        let works_after =
+            world::work_values(&session.level).expect("work values").expect("work entries").len();
+        assert_eq!(works_after, works_before - seeded);
+        assert_eq!(count_orphaned_works(&session, &surviving).expect("count"), 0);
+    }
+
+    #[test]
+    fn set_map_object_builder_writes_and_clears_build_player_uid() {
+        let mut session = load_fixture_session("v1_relics");
+        let target = map_object_views(&session)
+            .expect("views")
+            .into_iter()
+            .find(|v| v.build_player_uid.is_some())
+            .expect("the fixture must carry a built structure");
+
+        let new_builder = uuid::Uuid::new_v4();
+        assert!(set_map_object_builder(&mut session, target.instance_id, Some(new_builder))
+            .expect("write"));
+        assert_eq!(
+            read_map_object(&session, target.instance_id).expect("resolves").build_player_uid,
+            Some(new_builder)
+        );
+
+        assert!(set_map_object_builder(&mut session, target.instance_id, None).expect("write"));
+        assert_eq!(
+            read_map_object(&session, target.instance_id).expect("resolves").build_player_uid,
+            None
+        );
+
+        assert!(
+            !set_map_object_builder(&mut session, uuid::Uuid::nil(), Some(new_builder))
+                .expect("write"),
+            "an unresolvable id reports false rather than erroring"
+        );
+    }
+
+    #[test]
+    fn count_orphaned_dynamic_items_matches_the_measured_fixture_counts() {
+        for (fixture, expected) in
+            [("v1_relics", 1025), ("v1_stats", 13), ("world1", 26), ("world2", 0)]
+        {
+            let session = load_fixture_session(fixture);
+            assert_eq!(
+                count_orphaned_dynamic_items(&session).expect("count"),
+                expected,
+                "{fixture}: orphaned dynamic item count"
+            );
+        }
+    }
+
+    #[test]
+    fn remove_orphaned_dynamic_items_removes_exactly_what_the_count_predicts() {
+        let mut session = load_fixture_session("v1_relics");
+        let items_before =
+            world::dynamic_item_values(&session.level).expect("dynamic item values").len();
+        let predicted = count_orphaned_dynamic_items(&session).expect("count");
+        assert!(predicted > 0, "the fixture must carry orphaned dynamic items");
+        assert!(predicted < items_before, "not all of them may be orphans");
+
+        let removed = remove_orphaned_dynamic_items(&mut session).expect("remove");
+        assert_eq!(removed, predicted);
+
+        let items_after =
+            world::dynamic_item_values(&session.level).expect("dynamic item values").len();
+        assert_eq!(items_after, items_before - removed);
+        assert_eq!(count_orphaned_dynamic_items(&session).expect("count"), 0);
+
+        assert_eq!(
+            remove_orphaned_dynamic_items(&mut session).expect("remove"),
+            0,
+            "a second removal finds nothing left to remove"
+        );
+    }
+
+    #[test]
+    fn remove_orphaned_dynamic_items_spares_a_referenced_entry() {
+        let mut session = load_fixture_session("v1_relics");
+        let referenced_id = {
+            let entries = world::item_container_map(&session.level).expect("item container map");
+            entries
+                .iter()
+                .find_map(|entry| {
+                    let value_props = props::struct_props(&entry.value)?;
+                    let slot_values =
+                        props::get(value_props, &["Slots"]).and_then(props::struct_values)?;
+                    slot_values.iter().find_map(|slot_value| {
+                        let StructValue::Struct(slot_props) = slot_value else { return None };
+                        let Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw))) =
+                            slot_props.0.get(&PropertyKey::from("RawData"))?
+                        else {
+                            return None;
+                        };
+                        item_dynamic_id(&raw.item)
+                    })
+                })
+                .expect("the fixture must carry at least one slotted dynamic item")
+        };
+
+        remove_orphaned_dynamic_items(&mut session).expect("remove");
+
+        let ids = world::dynamic_item_values(&session.level)
+            .expect("dynamic item values")
+            .iter()
+            .filter_map(dynamic_item_id)
+            .collect::<HashSet<_>>();
+        assert!(
+            ids.contains(&referenced_id),
+            "a dynamic item a container slot still points at must survive the sweep"
         );
     }
 }

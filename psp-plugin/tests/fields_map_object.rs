@@ -17,15 +17,15 @@ fn error_message(status: RunStatus) -> String {
     }
 }
 
-/// Every row but `hp` is a plain fact about the save's record or the
-/// instance's identity, and `hp` is the only one the save's own writer can
-/// apply in place without moving anything. A row given a write later has to
-/// justify itself here rather than arrive quietly.
+/// Every row but `hp` and `build_player_uid` is a plain fact about the
+/// save's record or the instance's identity that nothing here writes. A row
+/// given a write later has to justify itself here rather than arrive
+/// quietly.
 #[test]
-fn only_hp_is_writable() {
+fn only_hp_and_build_player_uid_are_writable() {
     for spec in psp_plugin::MAP_OBJECT_FIELDS {
-        if spec.name == "hp" {
-            assert_eq!(spec.access, Access::ReadWrite, "hp must be the one writable row");
+        if spec.name == "hp" || spec.name == "build_player_uid" {
+            assert_eq!(spec.access, Access::ReadWrite, "{} must be a writable row", spec.name);
         } else {
             assert_eq!(
                 spec.access,
@@ -87,6 +87,38 @@ fn assigning_hp_is_not_clamped_to_max_hp() {
     );
     assert_eq!(status, RunStatus::Ok);
     assert_eq!(summary.as_deref(), Some("0"), "a write below max_hp must not be clamped back up");
+}
+
+#[test]
+fn assigning_build_player_uid_nil_clears_it_and_a_uuid_sets_it() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(
+        "local target
+         for obj in save.map_objects() do
+           if obj.build_player_uid ~= nil then target = obj break end
+         end
+         local before = target.build_player_uid
+         target.build_player_uid = nil
+         local after_clear = target.build_player_uid
+         target.build_player_uid = before
+         local after_reset = target.build_player_uid
+         return tostring(before ~= nil) .. ',' .. tostring(after_clear) .. ',' .. tostring(after_reset == before)",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        summary.as_deref(),
+        Some("true,nil,true"),
+        "the fixture must carry a built structure, or this test is vacuous"
+    );
+}
+
+#[test]
+fn assigning_build_player_uid_an_invalid_string_is_refused() {
+    let mut harness = support::harness(CAPS);
+    let message = error_message(
+        harness.run(&first_map_object("target.build_player_uid = 'not-a-uuid'\nreturn 'unreachable'")).0,
+    );
+    assert!(message.contains("build_player_uid"), "must name the field, got {message:?}");
 }
 
 #[test]

@@ -224,7 +224,11 @@ const ALL_COMMANDS: &[&str] = &[
     "delete_duplicated_players",
     "delete_empty_guilds",
     "delete_imported_pals",
+    "delete_inactive_bases",
     "delete_inactive_players",
+    "delete_invalid_structure_map_objects",
+    "delete_non_base_map_objects",
+    "delete_unreferenced_data",
     "fix_all_negative_timestamps",
     "remove_invalid_items_from_save",
     "remove_invalid_pals_from_save",
@@ -295,6 +299,60 @@ fn manufacture_empty_guild(h: &mut Harness) -> Uuid {
         .player_count = 0;
 
     target_guild
+}
+
+// --- base helpers (delete_inactive_bases) ---
+
+fn count_bases(session: &SaveSession) -> usize {
+    session.base_camp_map().map(|entries| entries.len()).unwrap_or(0)
+}
+
+fn base_exists(session: &SaveSession, id: Uuid) -> bool {
+    session.base_camp_map().unwrap_or(&[]).iter().any(|entry| props::as_uuid(&entry.key) == Some(id))
+}
+
+/// Clones the fixture's first base entry under a fresh id and gives the clone
+/// a `group_id_belong_to` no player's `guild_id` resolves to -- a guild the
+/// command can find but for which `save.players()` yields no member at all,
+/// distinct from a guild whose members are merely inactive. Returns the new
+/// base's id.
+fn seed_base_with_no_visible_members(h: &mut Harness) -> Uuid {
+    let entries = h.session.base_camp_map().expect("the fixture must ship at least one base");
+    assert!(!entries.is_empty(), "the fixture must ship at least one base");
+    let mut cloned = entries[0].clone();
+
+    let new_base_id = Uuid::new_v4();
+    cloned.key = props::guid_property(new_base_id);
+
+    let known_guild_ids: std::collections::HashSet<Uuid> =
+        h.session.player_summaries.values().filter_map(|p| p.guild_id).collect();
+    let mut orphan_guild_id = Uuid::new_v4();
+    while known_guild_ids.contains(&orphan_guild_id) {
+        orphan_guild_id = Uuid::new_v4();
+    }
+
+    let value_properties =
+        props::struct_props_mut(&mut cloned.value).expect("the cloned base entry has a value struct");
+    let raw_data =
+        props::get_mut(value_properties, &["RawData"]).expect("the cloned base entry has RawData");
+    let psp_core::ue::Property::Struct(psp_core::ue::StructValue::Game(
+        psp_core::ue::PalStruct::BaseCamp(camp),
+    )) = raw_data
+    else {
+        panic!("the cloned base entry's RawData is not a BaseCamp");
+    };
+    camp.group_id_belong_to = props::uuid_to_guid(orphan_guild_id);
+
+    psp_core::domain::world::base_camp_map_mut(&mut h.session.level)
+        .expect("base camp map")
+        .expect("base camp map")
+        .push(cloned);
+
+    assert!(
+        base_exists(&h.session, new_base_id),
+        "the seeded orphan base must be readable before the command runs"
+    );
+    new_base_id
 }
 
 // --- timestamp helpers (fix_all_negative_timestamps and the temporal delete_inactive_players tests) ---
@@ -849,6 +907,316 @@ fn seed_dps_passive_skill(h: &mut Harness, uid: Uuid) -> (i32, String) {
     (slot_index, valid_skill)
 }
 
+// --- map object / work helpers (delete_non_base_map_objects, delete_invalid_structure_map_objects) ---
+
+fn count_map_objects(session: &SaveSession) -> usize {
+    psp_core::domain::map_object::map_object_ids(session).expect("map object ids").len()
+}
+
+fn count_map_objects_where(
+    session: &SaveSession,
+    predicate: impl Fn(&psp_core::domain::map_object::MapObjectView) -> bool,
+) -> usize {
+    psp_core::domain::map_object::map_object_views(session)
+        .expect("map object views")
+        .iter()
+        .filter(|v| predicate(v))
+        .count()
+}
+
+fn any_map_object_belongs_to(session: &SaveSession, base_id: Uuid) -> bool {
+    psp_core::domain::map_object::map_object_views(session)
+        .expect("map object views")
+        .iter()
+        .any(|v| v.base_id == Some(base_id))
+}
+
+fn count_work_entries(session: &SaveSession) -> usize {
+    psp_core::domain::world::work_values(&session.level)
+        .expect("work values")
+        .map(|values| values.len())
+        .unwrap_or(0)
+}
+
+/// A `WorkSaveData` element's `RawData.base_data.owner_map_object_model_id`,
+/// read directly off the raw property tree rather than through
+/// `psp_core::domain::map_object`, which is what the command under test calls.
+fn work_owner_uuid(value: &psp_core::ue::StructValue) -> Option<Uuid> {
+    let psp_core::ue::StructValue::Struct(properties) = value else { return None };
+    match properties.0.get(&psp_core::ue::PropertyKey::from("RawData"))? {
+        psp_core::ue::Property::Struct(psp_core::ue::StructValue::Game(
+            psp_core::ue::PalStruct::Work(work),
+        )) => work.base_data.as_ref().map(|base| props::guid_to_uuid(&base.owner_map_object_model_id)),
+        _ => None,
+    }
+}
+
+/// Recomputes, from `WorkSaveData` and the session's current map objects, how
+/// many work entries point at a map object id that no longer exists. Never
+/// calls `remove_orphaned_works` -- this is the independent gate on it.
+fn count_orphaned_works(session: &SaveSession) -> usize {
+    let surviving: std::collections::HashSet<Uuid> =
+        psp_core::domain::map_object::map_object_ids(session).expect("map object ids").into_iter().collect();
+    psp_core::domain::world::work_values(&session.level)
+        .expect("work values")
+        .map(|values| {
+            values
+                .iter()
+                .filter(|work| match work_owner_uuid(work) {
+                    Some(owner) => !surviving.contains(&owner),
+                    None => false,
+                })
+                .count()
+        })
+        .unwrap_or(0)
+}
+
+/// Removes the fixture's most-populated base -- so the seed is never vacuous
+/// -- from `BaseCampSaveData`, and returns its id plus how many map objects
+/// pointed at it beforehand.
+fn orphan_one_base(session: &mut SaveSession) -> (Uuid, usize) {
+    let base_ids: Vec<Uuid> = session
+        .base_camp_map()
+        .expect("the fixture must ship at least one base")
+        .iter()
+        .filter_map(|entry| props::as_uuid(&entry.key))
+        .collect();
+    assert!(!base_ids.is_empty(), "the fixture must ship at least one base");
+
+    let target = base_ids
+        .into_iter()
+        .max_by_key(|id| count_map_objects_where(session, |v| v.base_id == Some(*id)))
+        .expect("the fixture has at least one base");
+    let expected = count_map_objects_where(session, |v| v.base_id == Some(target));
+
+    psp_core::domain::world::base_camp_map_mut(&mut session.level)
+        .expect("base camp map")
+        .expect("base camp map")
+        .retain(|entry| props::as_uuid(&entry.key) != Some(target));
+
+    (target, expected)
+}
+
+/// Overwrites the first fixture map object's `MapObjectId` name property --
+/// `psp_core::props` reaches it directly, since it lives in the outer
+/// property bag rather than inside the typed `RawData` model.
+fn seed_map_object_id(session: &mut SaveSession, name: &str) {
+    let objects = psp_core::domain::world::map_object_values_mut(&mut session.level)
+        .expect("map object values")
+        .expect("the fixture must ship map objects");
+    let object = objects.first_mut().expect("the fixture has map objects");
+    let psp_core::ue::StructValue::Struct(properties) = object else {
+        panic!("map object is not a struct");
+    };
+    properties.insert("MapObjectId", props::name_property(name));
+}
+
+// --- ownerless-pal / structure-reference helpers (delete_unreferenced_data) ---
+
+/// One world pal's ownership fields, read directly off
+/// `CharacterSaveParameterMap` and `BaseCampSaveData` rather than through
+/// `pal::pal_summaries` or any function `delete_unreferenced_data` itself calls.
+struct WorldPalOwnership {
+    owner_uid: Option<Uuid>,
+    base_id: Option<Uuid>,
+}
+
+fn base_worker_container_map(session: &SaveSession) -> BTreeMap<Uuid, Uuid> {
+    let mut map = BTreeMap::new();
+    let Some(entries) = session.base_camp_map() else { return map };
+    for entry in entries {
+        let Some(base_id) = props::as_uuid(&entry.key) else { continue };
+        if let Some((_, container_id)) = psp_core::domain::guild::base_guild_and_container(entry) {
+            map.insert(container_id, base_id);
+        }
+    }
+    map
+}
+
+fn world_pal_ownership(session: &SaveSession) -> Vec<WorldPalOwnership> {
+    let containers = base_worker_container_map(session);
+    let entries = session.character_map().expect("character map must resolve");
+    entries
+        .iter()
+        .filter(|entry| !psp_core::domain::world::entry_is_player(entry))
+        .filter_map(|entry| {
+            let save_parameter = psp_core::domain::world::entry_save_parameter(entry)?;
+            let owner_uid = props::get(save_parameter, &["OwnerPlayerUId"]).and_then(props::as_uuid);
+            let base_id = props::get(save_parameter, &["SlotId", "ContainerId", "ID"])
+                .and_then(props::as_uuid)
+                .and_then(|container_id| containers.get(&container_id).copied());
+            Some(WorldPalOwnership { owner_uid, base_id })
+        })
+        .collect()
+}
+
+/// A pal counts as ownerless here exactly when `delete_unreferenced_data`'s
+/// own predicate would select it: no base worker container claims it, and
+/// its `OwnerPlayerUId` (present and non-nil) names no player this save
+/// still has a record for.
+fn count_ownerless_pals(session: &SaveSession) -> usize {
+    let known_players: std::collections::HashSet<Uuid> =
+        session.player_summaries.keys().copied().collect();
+    world_pal_ownership(session)
+        .iter()
+        .filter(|p| {
+            if p.base_id.is_some() {
+                return false;
+            }
+            match p.owner_uid {
+                None => false,
+                Some(uid) if uid.is_nil() => false,
+                Some(uid) => !known_players.contains(&uid),
+            }
+        })
+        .count()
+}
+
+fn count_stale_map_object_builders(session: &SaveSession) -> usize {
+    let known_players: std::collections::HashSet<Uuid> =
+        session.player_summaries.keys().copied().collect();
+    psp_core::domain::map_object::map_object_views(session)
+        .expect("map object views")
+        .iter()
+        .filter(|v| v.build_player_uid.is_some_and(|uid| !known_players.contains(&uid)))
+        .count()
+}
+
+fn map_object_builder(session: &SaveSession, id: Uuid) -> Option<Uuid> {
+    psp_core::domain::map_object::read_map_object(session, id).and_then(|v| v.build_player_uid)
+}
+
+/// Overwrites the first built structure's `build_player_uid` with a uuid that
+/// names no player in the fixture, returning the object's id and that ghost
+/// uid.
+fn seed_map_object_built_by_missing_player(session: &mut SaveSession) -> (Uuid, Uuid) {
+    let target = psp_core::domain::map_object::map_object_views(session)
+        .expect("map object views")
+        .into_iter()
+        .find(|v| v.build_player_uid.is_some())
+        .expect("the fixture must carry a built structure");
+    let ghost_uid = Uuid::new_v4();
+    let wrote =
+        psp_core::domain::map_object::set_map_object_builder(session, target.instance_id, Some(ghost_uid))
+            .expect("write");
+    assert!(wrote, "the target object must resolve");
+    (target.instance_id, ghost_uid)
+}
+
+// --- dynamic-item helpers (delete_unreferenced_data) ---
+
+fn dynamic_item_ids(session: &SaveSession) -> std::collections::HashSet<Uuid> {
+    use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
+    psp_core::domain::world::dynamic_item_values(&session.level)
+        .expect("dynamic item values")
+        .iter()
+        .filter_map(|value| {
+            let StructValue::Struct(item_props) = value else { return None };
+            match item_props.0.get(&PropertyKey::from("RawData"))? {
+                Property::Struct(StructValue::Game(PalStruct::DynamicItem(item))) => {
+                    Some(props::guid_to_uuid(&item.id.local_id_in_created_world))
+                }
+                _ => None,
+            }
+        })
+        .collect()
+}
+
+fn count_dynamic_items(session: &SaveSession) -> usize {
+    dynamic_item_ids(session).len()
+}
+
+fn dynamic_item_exists(session: &SaveSession, id: Uuid) -> bool {
+    dynamic_item_ids(session).contains(&id)
+}
+
+/// Every dynamic item id an item-container slot, a `DropItem`, an item
+/// booth's trade goods or a damage-drop table still points at -- walked
+/// directly off the raw save, never through `remove_orphaned_dynamic_items`
+/// or anything else `delete_unreferenced_data` calls.
+fn referenced_dynamic_item_ids(session: &SaveSession) -> std::collections::HashSet<Uuid> {
+    use psp_core::ue::games::palworld::{PalItemId, PalMapConcreteModelVariant};
+    use psp_core::ue::{PalStruct, Property, PropertyKey, StructValue};
+
+    fn item_dynamic_id(item: &PalItemId) -> Option<Uuid> {
+        let id = props::guid_to_uuid(&item.dynamic_id.local_id_in_created_world);
+        (!id.is_nil()).then_some(id)
+    }
+    fn concrete_variant(
+        object: &StructValue,
+    ) -> Option<&PalMapConcreteModelVariant<psp_core::ue::Arch>> {
+        let StructValue::Struct(properties) = object else { return None };
+        let concrete =
+            properties.0.get(&PropertyKey::from("ConcreteModel")).and_then(props::struct_props)?;
+        match concrete.0.get(&PropertyKey::from("RawData"))? {
+            Property::Struct(StructValue::Game(PalStruct::MapConcreteModel(raw))) => {
+                Some(&raw.model_data)
+            }
+            _ => None,
+        }
+    }
+
+    let mut ids = std::collections::HashSet::new();
+
+    if let Ok(entries) = session.item_container_map() {
+        for entry in entries {
+            let Some(value_props) = props::struct_props(&entry.value) else { continue };
+            let Some(slot_values) =
+                props::get(value_props, &["Slots"]).and_then(props::struct_values)
+            else {
+                continue;
+            };
+            for slot_value in slot_values {
+                let StructValue::Struct(slot_props) = slot_value else { continue };
+                if let Some(Property::Struct(StructValue::Game(PalStruct::ItemContainerSlots(raw)))) =
+                    slot_props.0.get(&PropertyKey::from("RawData"))
+                {
+                    if let Some(id) = item_dynamic_id(&raw.item) {
+                        ids.insert(id);
+                    }
+                }
+            }
+        }
+    }
+
+    if let Ok(Some(objects)) = psp_core::domain::world::map_object_values(&session.level) {
+        for object in objects {
+            let Some(variant) = concrete_variant(object) else { continue };
+            match variant {
+                PalMapConcreteModelVariant::DropItem(model) => {
+                    if let Some(id) = item_dynamic_id(&model.item_id) {
+                        ids.insert(id);
+                    }
+                }
+                PalMapConcreteModelVariant::ItemBooth(model) => {
+                    for trade in &model.trade_infos {
+                        for item in [&trade.product, &trade.cost] {
+                            if let Some(id) = item_dynamic_id(&item.item_id) {
+                                ids.insert(id);
+                            }
+                        }
+                    }
+                }
+                PalMapConcreteModelVariant::ItemDropOnDamag(model) => {
+                    for item in &model.drop_item_infos {
+                        if let Some(id) = item_dynamic_id(&item.item_id) {
+                            ids.insert(id);
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+
+    ids
+}
+
+fn count_orphaned_dynamic_items(session: &SaveSession) -> usize {
+    let referenced = referenced_dynamic_item_ids(session);
+    dynamic_item_ids(session).iter().filter(|id| !referenced.contains(id)).count()
+}
+
 // --- per-command setup shared by test 11's round trip and test 12's dry-run gate ---
 
 fn setup_for(command_id: &str, h: &mut Harness) -> serde_json::Value {
@@ -872,6 +1240,18 @@ fn setup_for(command_id: &str, h: &mut Harness) -> serde_json::Value {
             seed_pal_with_character_id(h, "PSP_NOT_A_REAL_PAL");
             serde_json::json!({})
         }
+        "delete_inactive_bases" => {
+            serde_json::json!({ "mode": "inactive", "days": 0, "level": 1 })
+        }
+        "delete_non_base_map_objects" => {
+            orphan_one_base(&mut h.session);
+            serde_json::json!({})
+        }
+        "delete_invalid_structure_map_objects" => {
+            seed_map_object_id(&mut h.session, "PSP_NOT_A_REAL_STRUCTURE");
+            serde_json::json!({})
+        }
+        "delete_unreferenced_data" => serde_json::json!({}),
         "delete_inactive_players" => {
             let max_elapsed = elapsed_days_since_last_online(&h.session);
             serde_json::json!({ "days": 1.max(max_elapsed - 20) })
@@ -902,7 +1282,7 @@ fn the_bundled_manifest_parses_and_declares_every_command() {
     assert_eq!(plugin.id, "pst.cleanup");
     let manifest =
         Manifest::parse(plugin.manifest).expect("the bundled manifest must parse");
-    assert_eq!(manifest.commands.len(), 9);
+    assert_eq!(manifest.commands.len(), 13);
     let mut ids: Vec<&str> = manifest.commands.iter().map(|c| c.id.as_str()).collect();
     ids.sort_unstable();
     let mut expected: Vec<&str> = ALL_COMMANDS.to_vec();
@@ -1379,6 +1759,264 @@ fn remove_invalid_passives_strips_a_seeded_unknown_from_dimensional_storage_and_
         after_skills.contains(&valid_skill),
         "the valid passive on the same pal must survive, got {after_skills:?}"
     );
+}
+
+// --- 10h ---
+
+#[test]
+fn delete_inactive_bases_removes_only_bases_whose_members_all_fail_the_filter() {
+    let mut h = Harness::new();
+    let before = count_bases(&h.session);
+    assert!(before > 0, "the fixture must have bases");
+
+    let none = h.run(
+        "delete_inactive_bases",
+        serde_json::json!({ "mode": "inactive", "days": 36500, "level": 1 }),
+        false,
+    );
+    assert_eq!(none.status, RunStatus::Ok, "{:?}", none.status);
+    assert_eq!(
+        none.counts.get("bases").copied(),
+        Some(0),
+        "at a 100-year threshold nobody is inactive"
+    );
+    assert_eq!(count_bases(&h.session), before);
+
+    let all = h.run(
+        "delete_inactive_bases",
+        serde_json::json!({ "mode": "inactive", "days": 0, "level": 1 }),
+        false,
+    );
+    assert_eq!(all.status, RunStatus::Ok, "{:?}", all.status);
+    let removed = all.counts.get("bases").copied().unwrap_or(0);
+    assert!(removed > 0, "at a zero-day threshold every known member is inactive");
+    assert_eq!(count_bases(&h.session), before - removed as usize);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn a_base_whose_guild_has_no_visible_members_is_skipped_not_deleted() {
+    let mut h = Harness::new();
+    let orphan_base = seed_base_with_no_visible_members(&mut h);
+    let outcome = h.run(
+        "delete_inactive_bases",
+        serde_json::json!({ "mode": "inactive", "days": 0, "level": 1 }),
+        false,
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert!(
+        base_exists(&h.session, orphan_base),
+        "no visible members means unknown, not inactive"
+    );
+    assert!(outcome.counts.get("skipped_unknown").copied().unwrap_or(0) > 0);
+}
+
+// --- 10i ---
+
+#[test]
+fn delete_non_base_map_objects_removes_exactly_what_the_deleted_base_owned() {
+    let mut h = Harness::new();
+    let (orphaned_base, expected) = orphan_one_base(&mut h.session);
+    assert!(expected > 0, "the chosen base must own map objects, or the test is vacuous");
+    let before = count_map_objects(&h.session);
+
+    let outcome = h.run("delete_non_base_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("map_objects").copied(), Some(expected as i64));
+    assert_eq!(count_map_objects(&h.session), before - expected);
+    assert!(
+        !any_map_object_belongs_to(&h.session, orphaned_base),
+        "nothing may still point at the removed base"
+    );
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_non_base_map_objects_spares_everything_still_attached() {
+    let mut h = Harness::new();
+    let attached_before = count_map_objects_where(&h.session, |v| v.base_id.is_some());
+    assert_eq!(attached_before, 2144, "the fixture's attached map objects");
+
+    let outcome = h.run("delete_non_base_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("map_objects").copied(), Some(0));
+    assert_eq!(count_map_objects_where(&h.session, |v| v.base_id.is_some()), attached_before);
+}
+
+#[test]
+fn delete_non_base_map_objects_never_touches_world_content_that_has_no_base() {
+    let mut h = Harness::new();
+    let unattached_before = count_map_objects_where(&h.session, |v| v.base_id.is_none());
+    assert_eq!(unattached_before, 3308, "the fixture's world props, chests and resource nodes");
+
+    orphan_one_base(&mut h.session);
+    let outcome = h.run("delete_non_base_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        count_map_objects_where(&h.session, |v| v.base_id.is_none()),
+        unattached_before,
+        "an object with no base at all is world content, not orphaned construction"
+    );
+}
+
+#[test]
+fn delete_invalid_structure_map_objects_keeps_treasure_boxes_and_resource_nodes() {
+    let mut h = Harness::new();
+    let treasure_before = count_map_objects_where(&h.session, |v| {
+        let id = v.map_object_id.to_ascii_lowercase();
+        id.starts_with("treasurebox") || id.starts_with("damagable") || id == "commondropitem3d"
+    });
+    assert!(treasure_before > 0, "the fixture must carry non-catalog world props");
+
+    let outcome = h.run("delete_invalid_structure_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        count_map_objects_where(&h.session, |v| {
+            let id = v.map_object_id.to_ascii_lowercase();
+            id.starts_with("treasurebox") || id.starts_with("damagable") || id == "commondropitem3d"
+        }),
+        treasure_before,
+        "these are legitimate world props, not invalid structures"
+    );
+    assert_eq!(outcome.counts.get("map_objects").copied(), Some(0));
+}
+
+#[test]
+fn delete_invalid_structure_map_objects_removes_a_seeded_unknown_structure() {
+    let mut h = Harness::new();
+    let before = count_map_objects(&h.session);
+    seed_map_object_id(&mut h.session, "PSP_NOT_A_REAL_STRUCTURE");
+
+    let outcome = h.run("delete_invalid_structure_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("map_objects").copied(), Some(1));
+    assert_eq!(count_map_objects(&h.session), before - 1);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn a_structure_id_matches_the_catalog_case_insensitively() {
+    let mut h = Harness::new();
+    seed_map_object_id(&mut h.session, "sToNe_FoUnDaTiOn");
+    let outcome = h.run("delete_invalid_structure_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        outcome.counts.get("map_objects").copied(),
+        Some(0),
+        "Stone_Foundation is a real structure whatever its casing"
+    );
+}
+
+#[test]
+fn removing_map_objects_takes_their_work_entries_with_them() {
+    let mut h = Harness::new();
+    let (_, _) = orphan_one_base(&mut h.session);
+    let works_before = count_work_entries(&h.session);
+
+    let outcome = h.run("delete_non_base_map_objects", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let works_removed = outcome.counts.get("works").copied().unwrap_or(0);
+    assert!(works_removed > 0, "a base's structures carry work entries; seed one if this fails");
+    assert_eq!(count_work_entries(&h.session), works_before - works_removed as usize);
+    assert_eq!(count_orphaned_works(&h.session), 0, "no work may dangle after the sweep");
+    assert_round_trips(&h.session);
+}
+
+// --- 10j ---
+
+#[test]
+fn delete_unreferenced_data_removes_orphans_and_leaves_referenced_data_alone() {
+    let mut h = Harness::new();
+    let items_before = count_dynamic_items(&h.session);
+    let orphans = count_orphaned_dynamic_items(&h.session);
+    assert!(orphans > 0, "the fixture must carry orphaned dynamic items");
+    assert!(orphans < items_before, "not all of them may be orphans");
+    let referenced = referenced_dynamic_item_ids(&h.session);
+    for id in &referenced {
+        assert!(
+            dynamic_item_exists(&h.session, *id),
+            "a referenced dynamic item must be readable before the command runs"
+        );
+    }
+
+    let dry = h.run("delete_unreferenced_data", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    assert_eq!(count_dynamic_items(&h.session), items_before, "a dry run changes nothing");
+
+    let wet = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(wet.status, RunStatus::Ok, "{:?}", wet.status);
+    assert_eq!(wet.counts.get("dynamic_items").copied(), Some(orphans as i64));
+    assert_eq!(count_dynamic_items(&h.session), items_before - orphans);
+
+    for id in referenced {
+        assert!(
+            dynamic_item_exists(&h.session, id),
+            "a referenced dynamic item was removed; the save now dereferences a missing entry"
+        );
+    }
+    assert_eq!(count_orphaned_dynamic_items(&h.session), 0);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_unreferenced_data_removes_exactly_the_pals_the_independent_walk_finds() {
+    let mut h = Harness::new();
+    let expected = count_ownerless_pals(&h.session);
+    assert!(expected > 0, "the fixture must carry ownerless pals");
+    let before = h.session.character_map().expect("character map").len();
+
+    let outcome = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("pals").copied(), Some(expected as i64));
+    assert_eq!(count_ownerless_pals(&h.session), 0);
+    assert_eq!(h.session.character_map().expect("character map").len(), before - expected);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_unreferenced_data_clears_stale_structure_references_naturally_present_in_the_fixture() {
+    let mut h = Harness::new();
+    let expected = count_stale_map_object_builders(&h.session);
+    assert!(expected > 0, "the fixture must carry stale structure references");
+
+    let outcome = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("references").copied(), Some(expected as i64));
+    assert_eq!(count_stale_map_object_builders(&h.session), 0);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_unreferenced_data_clears_a_map_object_reference_to_a_removed_player() {
+    let mut h = Harness::new();
+    let (object_id, ghost_uid) = seed_map_object_built_by_missing_player(&mut h.session);
+
+    let outcome = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert!(outcome.counts.get("references").copied().unwrap_or(0) > 0);
+    assert_ne!(
+        map_object_builder(&h.session, object_id),
+        Some(ghost_uid),
+        "a reference to a player who is not in the save must be cleared"
+    );
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_unreferenced_data_is_idempotent() {
+    let mut h = Harness::new();
+    let first = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(first.status, RunStatus::Ok, "{:?}", first.status);
+
+    let second = h.run("delete_unreferenced_data", serde_json::json!({}), false);
+    assert_eq!(second.status, RunStatus::Ok, "{:?}", second.status);
+    for key in ["dynamic_items", "works", "pals", "references"] {
+        assert_eq!(
+            second.counts.get(key).copied(),
+            Some(0),
+            "a second sweep must find nothing left: {key}"
+        );
+    }
 }
 
 // --- 11 ---

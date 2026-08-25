@@ -412,6 +412,90 @@ end
 -- Unknown ids are aggregated by distinct id rather than logged per stack,
 -- since a world in this state usually holds many stacks of a handful of bad
 -- ids.
+-- No `save.bases():delete_where` exists, so every base's `id`, `guild_id`
+-- and bound `delete` closure is collected up front, before any base is
+-- deleted: `base.delete` is a plain closure over the base's id (see
+-- `push_bound` in `save_write.rs`) and stays callable after a later delete
+-- bumps the mutation epoch, but reading a field off a *handle* -- `base.id`,
+-- `player.last_online_ts` -- does not, so every such read happens during
+-- this collection pass, never after deletion has started.
+--
+-- A guild with no member found here means unknown, not inactive: a member
+-- could simply ship no `.sav` in this bundle. Its bases are left alone and
+-- counted as `skipped_unknown` rather than deleted.
+local function member_fails_filter(mode, member, cutoff, level)
+  local inactive = member.last_online_ts ~= nil and member.last_online_ts < cutoff
+  local below_level = member.level ~= nil and member.level < level
+  if mode == 'inactive' then
+    return inactive
+  elseif mode == 'below level' then
+    return below_level
+  end
+  return inactive and below_level
+end
+
+function delete_inactive_bases()
+  local mode = ctx.args.mode
+  local cutoff = ctx.now - (ctx.args.days * 86400)
+  local level = ctx.args.level
+
+  local members_by_guild = {}
+  for player in save.players() do
+    local guild_id = player.guild_id
+    if guild_id then
+      local list = members_by_guild[guild_id]
+      if not list then
+        list = {}
+        members_by_guild[guild_id] = list
+      end
+      list[#list + 1] = { last_online_ts = player.last_online_ts, level = player.level }
+    end
+  end
+
+  local candidates = {}
+  for base in save.bases() do
+    candidates[#candidates + 1] = { id = base.id, guild_id = base.guild_id, delete = base.delete }
+  end
+
+  local to_delete = {}
+  local skipped_unknown = 0
+  for _, base in ipairs(candidates) do
+    local members = base.guild_id and members_by_guild[base.guild_id]
+    if not members or #members == 0 then
+      skipped_unknown = skipped_unknown + 1
+    else
+      local all_fail = true
+      for _, member in ipairs(members) do
+        if not member_fails_filter(mode, member, cutoff, level) then
+          all_fail = false
+          break
+        end
+      end
+      if all_fail then
+        to_delete[#to_delete + 1] = base
+      end
+    end
+  end
+
+  local removed = 0
+  for _, base in ipairs(to_delete) do
+    if base.delete() then
+      removed = removed + 1
+    end
+  end
+
+  local verb = ctx.dry_run and "Would remove" or "Removed"
+  local summary = string.format("%s %d inactive base(s)", verb, removed)
+  if skipped_unknown > 0 then
+    summary = summary
+      .. string.format(" (%d base(s) with no visible guild members left in place)", skipped_unknown)
+  end
+  return {
+    summary = summary,
+    counts = { bases = removed, skipped_unknown = skipped_unknown },
+  }
+end
+
 function remove_invalid_items_from_save()
   local checked = 0
   local unknown, distinct = {}, 0
@@ -444,5 +528,179 @@ function remove_invalid_items_from_save()
       verb, cleared, distinct, checked
     ),
     counts = { slots = cleared, checked = checked, distinct_items = distinct },
+  }
+end
+
+-- `owner_map_object_model_id` -- the field `save.remove_orphaned_works()`
+-- matches against -- lives in `PalWork`, a typed struct the raw walker does
+-- not descend into, so this cannot be a raw.visit-based sweep the way the
+-- rest of this file's structural cleanups are.
+function delete_non_base_map_objects()
+  local valid_bases = {}
+  for base in save.bases() do
+    valid_bases[base.id] = true
+  end
+
+  local removed, unresolved = save.map_objects():delete_where(function(object)
+    return object.base_id ~= nil and not valid_bases[object.base_id]
+  end)
+
+  local works_removed = save.remove_orphaned_works()
+
+  local verb = ctx.dry_run and "Would remove" or "Removed"
+  local summary = string.format(
+    "%s %d structure(s) outside any base and %d work record(s) that referenced them",
+    verb, removed, works_removed
+  )
+  if unresolved > 0 then
+    summary = summary .. string.format(" (%d could not be resolved and were left in place)", unresolved)
+  end
+  return {
+    summary = summary,
+    counts = { map_objects = removed, works = works_removed, unresolved = unresolved },
+  }
+end
+
+-- `buildings.json` is not a superset of what a save contains: treasure boxes,
+-- resource nodes, dropped items and death bags are all legitimate world
+-- content with no catalog entry, spared here by id rather than mistaken for
+-- invalid structures. The catalog is matched case-insensitively -- several
+-- real structure ids differ from their catalog key only in case.
+local WORLD_PROP_PREFIXES = { "treasurebox", "damagable" }
+local WORLD_PROP_EXACT = {
+  commondropitem3d = true,
+  droppedcharacter = true,
+  deathpenaltychest = true,
+  meteordrop_damagable = true,
+}
+
+local function is_world_prop(lower_id)
+  if WORLD_PROP_EXACT[lower_id] then
+    return true
+  end
+  for _, prefix in ipairs(WORLD_PROP_PREFIXES) do
+    if lower_id:sub(1, #prefix) == prefix then
+      return true
+    end
+  end
+  return false
+end
+
+function delete_invalid_structure_map_objects()
+  local valid = {}
+  for _, key in ipairs(gamedata.keys('buildings')) do
+    valid[key:lower()] = true
+  end
+
+  local removed, unresolved = save.map_objects():delete_where(function(object)
+    local lower_id = object.id:lower()
+    return not (valid[lower_id] or is_world_prop(lower_id))
+  end)
+
+  local works_removed = save.remove_orphaned_works()
+
+  local verb = ctx.dry_run and "Would remove" or "Removed"
+  local summary = string.format(
+    "%s %d invalid structure(s) and %d work record(s) that referenced them",
+    verb, removed, works_removed
+  )
+  if unresolved > 0 then
+    summary = summary .. string.format(" (%d could not be resolved and were left in place)", unresolved)
+  end
+  return {
+    summary = summary,
+    counts = { map_objects = removed, works = works_removed, unresolved = unresolved },
+  }
+end
+
+local ZERO_UUID = "00000000-0000-0000-0000-000000000000"
+
+-- `pal.owner_uid` reads nil exactly when a guild base owns the pal instead of
+-- a player (`base_id` is then set); a real, non-nil, non-zero owner uid that
+-- names no current player is what "ownerless" means here. A pal with neither
+-- an owner nor a base does not occur in this game's own data and is left
+-- alone rather than guessed at.
+--
+-- `save.pals():delete_where` cannot be used for this: its real apply phase
+-- requires the pal's owning player to still resolve, which is exactly what
+-- an ownerless pal fails. Deleting the `CharacterSaveParameterMap` entry
+-- directly, the same way `delete_duplicated_players` does, needs no owner to
+-- resolve, since the entry itself is all a pal with no owner and no base
+-- worker slot holds.
+--
+-- Clearing a stale `build_player_uid` runs after that, but touches no
+-- structural set the pal removal read: it rewrites a field in place on every
+-- surviving map object, never adding or removing one. `save.remove_orphaned_works()`
+-- and `save.remove_orphaned_dynamic_items()` run last, in that order, because
+-- a work entry carries no item reference of its own to orphan, but nothing
+-- here relies on that -- removing a work first is always safe.
+--
+-- Guild membership records (`PalStruct::GroupData`) are left as they are:
+-- `raw` cannot descend into that typed struct, and no accessor exposes it.
+function delete_unreferenced_data()
+  local known_players = {}
+  for player in save.players() do
+    known_players[player.uid] = true
+  end
+
+  local doomed_pals, doomed_pal_count = {}, 0
+  for pal in save.pals() do
+    if pal.base_id == nil then
+      local owner = pal.owner_uid
+      if owner ~= nil and owner ~= ZERO_UUID and not known_players[owner] then
+        doomed_pals[pal.instance_id] = true
+        doomed_pal_count = doomed_pal_count + 1
+      end
+    end
+  end
+
+  local pal_indexes = {}
+  raw.visit('level', 'worldSaveData.CharacterSaveParameterMap', function(node)
+    local index = csp_field_index(node.path, '%.key%.InstanceId')
+    if index and doomed_pals[node.value] then
+      pal_indexes[#pal_indexes + 1] = tonumber(index)
+    end
+  end)
+  table.sort(pal_indexes, function(a, b) return a > b end)
+
+  local removed_pals = 0
+  for _, index in ipairs(pal_indexes) do
+    if raw.delete('level', 'worldSaveData.CharacterSaveParameterMap[' .. index .. ']') then
+      removed_pals = removed_pals + 1
+    end
+  end
+  local unresolved_pals = doomed_pal_count - removed_pals
+
+  local cleared_references = 0
+  for object in save.map_objects() do
+    local builder = object.build_player_uid
+    if builder ~= nil and not known_players[builder] then
+      object.build_player_uid = nil
+      cleared_references = cleared_references + 1
+    end
+  end
+
+  local removed_works = save.remove_orphaned_works()
+  local removed_items = save.remove_orphaned_dynamic_items()
+
+  local verb = ctx.dry_run and "Would remove" or "Removed"
+  local clear_verb = ctx.dry_run and "would clear" or "cleared"
+  local remove_verb = ctx.dry_run and "would remove" or "removed"
+  local summary = string.format(
+    "%s %d ownerless pal(s); %s %d stale structure reference(s); %s %d orphaned work record(s) and %d unreferenced item record(s)",
+    verb, removed_pals, clear_verb, cleared_references, remove_verb, removed_works, removed_items
+  )
+  if unresolved_pals > 0 then
+    summary = summary .. string.format(" (%d pal(s) could not be resolved and were left in place)", unresolved_pals)
+  end
+  return {
+    summary = summary,
+    counts = {
+      pals = removed_pals,
+      references = cleared_references,
+      works = removed_works,
+      dynamic_items = removed_items,
+      unresolved = unresolved_pals,
+    },
   }
 end

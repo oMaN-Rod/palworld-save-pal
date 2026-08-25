@@ -37,6 +37,14 @@ const SCRIPTS: &[(&str, &str)] = &[
         "return tostring(save.map_objects():delete_where(function(obj) return obj.base_id == nil end))",
     ),
     (
+        "orphaned works",
+        "return tostring(save.remove_orphaned_works())",
+    ),
+    (
+        "orphaned dynamic items",
+        "return tostring(save.remove_orphaned_dynamic_items())",
+    ),
+    (
         "empty a dps slot",
         "local uid
          for p in save.players() do uid = p.uid break end

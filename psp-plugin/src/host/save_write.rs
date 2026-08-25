@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 use std::ffi::{c_int, c_void};
 
 use psp_core::domain::raw_path::{RawPath, RawScope};
@@ -609,6 +610,83 @@ fn unlock_private_chests_body(state: *mut lua_State) -> Result<c_int, HostError>
 
 host_fn!(push_unlock_private_chests, unlock_private_chests_body);
 
+/// Prunes a dry run's own `map_objects` cache to the ids `delete_where` just
+/// resolved as killed, without touching `ctx.session` -- the overlay a later
+/// `save.remove_orphaned_works()` call in the same dry run reads its surviving
+/// set from, so its predicted count matches what a real run would remove.
+fn prune_dry_run_map_objects(ctx: &mut RunContext<'_>, kill: &[Uuid]) {
+    let doomed: HashSet<Uuid> = kill.iter().copied().collect();
+    if doomed.is_empty() {
+        return;
+    }
+    if let Some((views, index)) = ctx.map_objects.as_mut() {
+        views.retain(|view| !doomed.contains(&view.instance_id));
+        index.clear();
+        for (position, view) in views.iter().enumerate() {
+            index.insert(view.instance_id, position);
+        }
+    }
+}
+
+fn count_orphaned_works_dry(ctx: &mut RunContext<'_>) -> Result<i64, HostError> {
+    super::save_read::ensure_map_objects_snapshot(ctx)?;
+    let surviving: HashSet<Uuid> = ctx
+        .map_objects
+        .as_ref()
+        .map(|(views, _)| views.iter().map(|view| view.instance_id).collect())
+        .unwrap_or_default();
+    let count = map_object::count_orphaned_works(ctx.session, &surviving).map_err(core_error)?;
+    Ok(count as i64)
+}
+
+fn remove_orphaned_works_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.remove_orphaned_works")?;
+        let removed = with_context(state, |ctx| {
+            if ctx.dry_run {
+                let count = count_orphaned_works_dry(ctx)?;
+                ctx.bump("save.remove_orphaned_works", count);
+                return Ok(count);
+            }
+            super::dto_cache::flush(ctx)?;
+            let removed = map_object::remove_orphaned_works(ctx.session).map_err(core_error)? as i64;
+            if removed > 0 {
+                ctx.note_mutation();
+            }
+            Ok(removed)
+        })?;
+        lua_pushinteger(state, removed);
+        Ok(1)
+    }
+}
+
+host_fn!(push_remove_orphaned_works, remove_orphaned_works_body);
+
+fn remove_orphaned_dynamic_items_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.remove_orphaned_dynamic_items")?;
+        let removed = with_context(state, |ctx| {
+            if ctx.dry_run {
+                let count =
+                    map_object::count_orphaned_dynamic_items(ctx.session).map_err(core_error)? as i64;
+                ctx.bump("save.remove_orphaned_dynamic_items", count);
+                return Ok(count);
+            }
+            super::dto_cache::flush(ctx)?;
+            let removed =
+                map_object::remove_orphaned_dynamic_items(ctx.session).map_err(core_error)? as i64;
+            if removed > 0 {
+                ctx.note_mutation();
+            }
+            Ok(removed)
+        })?;
+        lua_pushinteger(state, removed);
+        Ok(1)
+    }
+}
+
+host_fn!(push_remove_orphaned_dynamic_items, remove_orphaned_dynamic_items_body);
+
 fn delete_dps_pals_body(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 2, "save.delete_dps_pals")?;
@@ -877,6 +955,9 @@ fn delete_where_body(state: *mut lua_State) -> Result<c_int, HostError> {
             if ctx.dry_run {
                 let (count, skipped) = count_dry_run(ctx, dw.kind, &dw.kill)?;
                 ctx.bump(count_key(dw.kind), count);
+                if dw.kind == DeleteWhereKind::MapObject {
+                    prune_dry_run_map_objects(ctx, &dw.kill);
+                }
                 return Ok((count, skipped));
             }
 
@@ -1025,6 +1106,15 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
         capability: Some(Capability::SaveWrite),
     },
     ApiFunction {
+        name: "remove_orphaned_works",
+        params: &[],
+        returns: ApiType::Integer,
+        doc: "Removes every WorkSaveData entry whose owning map object no longer exists, \
+              returning how many were removed. A non-zero result is a structural write and \
+              invalidates every live handle and iterator.",
+        capability: Some(Capability::SaveWrite),
+    },
+    ApiFunction {
         name: "delete_dps_pals",
         params: &[
             ApiParam { name: "player_uid", ty: ApiType::String, optional: false },
@@ -1038,10 +1128,25 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
               Requires capability: players.",
         capability: Some(Capability::SaveWrite),
     },
+    ApiFunction {
+        name: "remove_orphaned_dynamic_items",
+        params: &[],
+        returns: ApiType::Integer,
+        doc: "Removes every DynamicItemSaveData entry that no item-container slot, dropped item, \
+              item booth trade or damage-drop table still points at, returning how many were \
+              removed. A non-zero result is a structural write and invalidates every live \
+              handle and iterator.",
+        capability: Some(Capability::SaveWrite),
+    },
 ];
 
-const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] =
-    [push_clear_slots_where, push_unlock_private_chests, push_delete_dps_pals];
+const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
+    push_clear_slots_where,
+    push_unlock_private_chests,
+    push_remove_orphaned_works,
+    push_delete_dps_pals,
+    push_remove_orphaned_dynamic_items,
+];
 
 fn save_write_bindings() -> [(&'static str, PushHostFn); SAVE_WRITE_FUNCTIONS.len()] {
     std::array::from_fn(|i| (SAVE_WRITE_FUNCTIONS[i].name, SAVE_WRITE_PUSH_FNS[i]))

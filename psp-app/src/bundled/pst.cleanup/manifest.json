@@ -73,6 +73,41 @@
       "description": "Where one player has more than one character record, keeps the most recently online one and removes the others. Guild membership records are left as they are.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "delete_inactive_bases",
+      "title": "Delete Inactive Bases",
+      "description": "Removes bases whose guild members all fail the chosen filter -- inactive for the given number of days, below a level, or both. A base whose guild has no readable members is left alone rather than treated as inactive. A member whose save file is not in this bundle is invisible to this command, and a member uid that belongs to more than one guild counts toward only one.",
+      "destructive": true,
+      "params": [
+        { "id": "mode", "type": "enum", "label": "Filter",
+          "options": ["inactive", "below level", "both"], "default": "inactive" },
+        { "id": "days", "type": "int", "label": "Inactive for (days)",
+          "default": 30, "min": 0, "max": 36500 },
+        { "id": "level", "type": "int", "label": "Below level",
+          "default": 10, "min": 1, "max": 255 }
+      ]
+    },
+    {
+      "id": "delete_non_base_map_objects",
+      "title": "Delete Structures Outside Bases",
+      "description": "Removes structures that belong to no base camp, along with the work entries that referenced them.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "delete_invalid_structure_map_objects",
+      "title": "Delete Invalid Structures",
+      "description": "Removes structures whose type is not in the game's building catalog, along with the work entries that referenced them. Treasure boxes, resource nodes and dropped items are kept.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "delete_unreferenced_data",
+      "title": "Delete Unreferenced Data",
+      "description": "Removes pals that no container holds, work entries whose structure is gone, and stored item data nothing refers to, and clears structure references to players who are no longer in the save. Guild membership records are left as they are.",
+      "destructive": true,
+      "params": []
     }
   ]
 }

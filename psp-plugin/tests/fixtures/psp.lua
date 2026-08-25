@@ -121,7 +121,7 @@
 ---@field instance_id string This instance's UUID, as a string -- unique even among map objects that share an id. Read-only.
 ---@field base_id string|nil The UUID, as a string, of the base this object belongs to, or nil if it is unattached. Read-only.
 ---@field guild_id string|nil The UUID, as a string, of the guild this object belongs to, or nil if it has none. Read-only.
----@field build_player_uid string|nil The UUID, as a string, of the player who built this object, or nil if it has none. Read-only.
+---@field build_player_uid string|nil The UUID, as a string, of the player who built this object, or nil if it has none. Assigning nil clears it; assigning a uuid string sets it, without checking that the uuid names a player who exists.
 ---@field hp integer This object's current hit points. Any 32-bit integer is accepted, including zero or a negative value -- lowering a structure's hp is a legitimate write, and it is not clamped to max_hp.
 ---@field max_hp integer This object's maximum hit points. Read-only.
 ---@field kind string The concrete model type name this object was built from. Read-only.
@@ -253,6 +253,12 @@ function save.clear_slots_where(predicate) end
 ---@return integer
 function save.unlock_private_chests() end
 
+---Removes every WorkSaveData entry whose owning map object no longer exists, returning how many were removed. A non-zero result is a structural write and invalidates every live handle and iterator.
+---
+---Requires capability: save.write.
+---@return integer
+function save.remove_orphaned_works() end
+
 ---Empties the given slot indexes of one player's dimensional storage in place -- nils the slot's InstanceId and resets its SaveParameter bag to an unused slot's shape, the same way the slot got there in the first place, without changing the storage array's length. Returns how many of the given indexes were valid. Requires capability: players.
 ---
 ---Requires capability: save.write.
@@ -260,6 +266,12 @@ function save.unlock_private_chests() end
 ---@param indexes integer[]
 ---@return integer
 function save.delete_dps_pals(player_uid, indexes) end
+
+---Removes every DynamicItemSaveData entry that no item-container slot, dropped item, item booth trade or damage-drop table still points at, returning how many were removed. A non-zero result is a structural write and invalidates every live handle and iterator.
+---
+---Requires capability: save.write.
+---@return integer
+function save.remove_orphaned_dynamic_items() end
 
 ---Requires capability: gamedata.
 ---

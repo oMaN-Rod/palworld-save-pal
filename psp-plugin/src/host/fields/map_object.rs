@@ -1,11 +1,14 @@
 use std::ffi::c_int;
 use std::sync::OnceLock;
 
-use psp_core::domain::map_object::{set_map_object_hp, MapObjectView};
+use psp_core::domain::map_object::{set_map_object_builder, set_map_object_hp, MapObjectView};
 use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
-use super::{ranged_int, read_field_value, Access, FieldSpec, FieldValue, FieldWrite, Reader};
+use super::{
+    field_value_type_name, ranged_int, read_field_value, Access, FieldSpec, FieldValue, FieldWrite,
+    Reader,
+};
 use crate::context::RunContext;
 use crate::host::api_def::{ApiField, ApiType};
 use crate::host::handle::{read_handle, HandleKind};
@@ -60,6 +63,26 @@ fn apply_hp(view: &mut MapObjectView, value: FieldValue) {
             view.hp = v;
         }
     }
+}
+
+fn validate_build_player_uid(_current: &MapObjectView, value: &FieldValue) -> Result<(), HostError> {
+    match value {
+        FieldValue::Nil => Ok(()),
+        FieldValue::Str(text) => Uuid::parse_str(text).map(|_| ()).map_err(|_| {
+            HostError::new(format!("build_player_uid must be a uuid or nil, got {text:?}"))
+        }),
+        other => Err(HostError::new(format!(
+            "build_player_uid must be a string uuid or nil, got {}",
+            field_value_type_name(other)
+        ))),
+    }
+}
+fn apply_build_player_uid(view: &mut MapObjectView, value: FieldValue) {
+    view.build_player_uid = match value {
+        FieldValue::Nil => None,
+        FieldValue::Str(text) => Uuid::parse_str(&text).ok(),
+        _ => view.build_player_uid,
+    };
 }
 
 const fn rw(
@@ -135,12 +158,15 @@ pub const MAP_OBJECT_FIELDS: &[FieldSpec<MapObjectView, ()>] = &[
          Read-only.",
         read_guild_id,
     ),
-    ro(
+    rw(
         "build_player_uid",
         ApiType::Union(&[ApiType::String, ApiType::Nil]),
         "The UUID, as a string, of the player who built this object, or nil if it has none. \
-         Read-only.",
+         Assigning nil clears it; assigning a uuid string sets it, without checking that the \
+         uuid names a player who exists.",
         read_build_player_uid,
+        validate_build_player_uid,
+        apply_build_player_uid,
     ),
     rw(
         "hp",
@@ -262,11 +288,26 @@ pub(crate) fn map_object_set(
         ctx.bump(&format!("map_object.{}", spec.name), 1);
         return Ok(());
     }
-    set_map_object_hp(ctx.session, id, next.hp).map_err(|error| HostError::new(error.to_string()))?;
-    if let Some((views, _)) = ctx.map_objects.as_mut() {
-        if let Some(view) = views.get_mut(position) {
-            view.hp = next.hp;
+    match spec.name {
+        "hp" => {
+            set_map_object_hp(ctx.session, id, next.hp)
+                .map_err(|error| HostError::new(error.to_string()))?;
+            if let Some((views, _)) = ctx.map_objects.as_mut() {
+                if let Some(view) = views.get_mut(position) {
+                    view.hp = next.hp;
+                }
+            }
         }
+        "build_player_uid" => {
+            set_map_object_builder(ctx.session, id, next.build_player_uid)
+                .map_err(|error| HostError::new(error.to_string()))?;
+            if let Some((views, _)) = ctx.map_objects.as_mut() {
+                if let Some(view) = views.get_mut(position) {
+                    view.build_player_uid = next.build_player_uid;
+                }
+            }
+        }
+        other => return Err(HostError::new(format!("{other} has no write path"))),
     }
     ctx.note_write();
     Ok(())
