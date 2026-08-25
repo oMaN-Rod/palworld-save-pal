@@ -970,12 +970,15 @@ it through `raw` will hit the same wall.
 
 ## The plugin editor
 
-A per-plugin panel entry (`onEdit` on each `PluginCard`) opens `/plugins/editor?id=<id>`.
-"New plugin" prompts for a name, derives an id from it (lowercased, runs of
-non-alphanumeric characters collapsed to a single `-`, leading/trailing `-`
-trimmed, and cut to the 64 characters a manifest id may hold, trimming a `-`
-the cut lands on), creates the plugin with a one-command Lua scaffold and `log` as its
-only capability, and opens the editor on it directly.
+The plugins page is master-detail: selecting a plugin from the list opens its
+detail pane, which has a Run tab and, for a user-installed plugin only, a Code
+tab that opens the editor — a bundled plugin's pane has no Code tab (see
+"Bundled plugins are read-only" below). "New plugin" prompts for a name,
+derives an id from it (lowercased, runs of non-alphanumeric characters
+collapsed to a single `-`, leading/trailing `-` trimmed, and cut to the 64
+characters a manifest id may hold, trimming a `-` the cut lands on), creates
+the plugin with a one-command Lua scaffold and `log` as its only capability,
+and opens its detail pane on the Code tab directly.
 
 ### Files, the manifest tab, and canonical storage
 
@@ -1162,9 +1165,10 @@ under the row's stored grant, and a bundled row's grant may include
 use it. Running an edited script against that grant would hand raw save
 access to code that was never shipped in the binary, so a bundled row's
 draft is refused outright rather than run with a reduced grant. A bundled
-plugin still opens in the editor and can be read in full; it just cannot be
-saved or draft-run. Its commands run normally from the plugin panel, from
-the sources the application shipped.
+plugin's detail pane has no Code tab at all, so none of this is reachable
+from the plugins page's own navigation; the refusals above still hold in the
+editor and its host handlers regardless. Its commands run normally from the
+plugin panel's Run tab, from the sources the application shipped.
 
 ### Bundle size
 
@@ -1175,19 +1179,16 @@ will differ on any other build):
   the JS/CSS asset tree (`ui_build/_app/`) is 38,999,261 bytes (~37.2 MiB) —
   the rest is game-data, wiki content, and other static assets unrelated to
   this feature.
-- The `/plugins/editor` route is its own lazy-loaded chunk: the root entry
-  modules reference it only inside a dynamic `import()` behind the router's
-  path table, never as a direct import, so it is not fetched until that route
-  is visited. Its own node chunk is 19,991 bytes; a second chunk
-  (8,318 bytes) is shared only between it and the `/plugins` panel (the
-  editor store, the agreement-warning check, and the shared run-result view).
-  Together, the editor-only code no other route pays for is about 27.6 KB.
-  That is up from about 16 KB (9,429 + 6,745 bytes) before multi-file
-  plugins, the tier probe, and the language-server client shipped: the LSP
-  client, the add/delete-file UI, and the baseline/full tier switch together
-  add roughly 12 KB, split as +10,562 bytes on the route's own chunk and
-  +1,573 bytes on the chunk it shares with the `/plugins` panel. Both editor
-  chunks remain a fraction of the ~37.2 MiB JS/CSS asset tree.
+- The editor is no longer its own lazy-loaded route. Before the plugins page
+  became master-detail, `/plugins/editor` was a separate route fetched only
+  when visited; now `CodePane.svelte` and its helpers are imported directly
+  by the plugin detail page (`/plugins/[id]`) alongside the Run tab, so they
+  are part of that route's own chunk instead of a route fetched on demand.
+  The byte breakdown this section used to give was measured against that old
+  route and no longer describes the current layout; it would take a fresh
+  build to re-measure. What that old measurement did establish, and which the
+  restructuring does not change, is that Monaco itself — the largest cost by
+  far — is never part of the bundle at all (see below).
 - **`monaco-editor` is not a cost the plugin editor introduces** —
   `ui/src/routes/editor/+page.svelte` uses it through the same shared
   `Monaco` component, and every reference to the `monaco-editor` package
@@ -1198,18 +1199,19 @@ will differ on any other build):
   `https://cdn.jsdelivr.net/npm/monaco-editor@0.55.1/min/vs` — the only trace
   of "monaco-editor" anywhere in the built output is that URL string, sitting
   in the shared vendor chunk alongside unrelated code used by 35 other
-  routes, not in either chunk the plugin editor owns. So there is no
-  "Monaco chunk" to measure, and the plugin editor route adds no new heavy
-  dependency to the web bundle.
+  routes, not in the plugin editor's own code. So there is no "Monaco chunk"
+  to measure, and the plugin editor adds no new heavy dependency to the web
+  bundle.
 
 That CDN fetch is a runtime dependency, not a build-time one: the editor's
-*chrome* — Monaco itself, on either `/editor` or `/plugins/editor` — will not
-open without network access to `cdn.jsdelivr.net`, on every deployment,
-including a fully offline desktop install; nothing in this codebase serves
-`monaco-editor` locally as a fallback. This is a property of
-`@monaco-editor/loader`'s default configuration
+*chrome* — Monaco itself, on either the save editor (`/editor`) or a
+plugin's Code tab — will not open without network access to
+`cdn.jsdelivr.net`, on every deployment, including a fully offline desktop
+install; nothing in this codebase serves `monaco-editor` locally as a
+fallback. This is a property of `@monaco-editor/loader`'s default
+configuration
 (`ui/node_modules/@monaco-editor/loader/lib/es/config/index.js:1-5`), and it
-is not specific to this route — the save editor at
+is not specific to the plugin editor — the save editor at
 `ui/src/routes/editor/+page.svelte` has the same requirement through the
 same `Monaco.svelte` component. It is unrelated to the syntax
 check described above: that check runs Lua's own parser locally inside the

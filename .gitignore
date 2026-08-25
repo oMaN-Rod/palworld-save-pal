@@ -71,3 +71,7 @@ data/json/settings.json
 
 # Wrangler local dev state (workerd cache, .dev.vars)
 .wrangler/
+
+# Plugin editor scratch: downloaded language server binary and workspace copies
+/lua-language-server/
+/plugin-workspaces/

@@ -1,8 +1,10 @@
+<script module lang="ts">
+	let owner: symbol | null = null;
+</script>
+
 <script lang="ts">
 	import type * as MonacoE from 'monaco-editor';
-	import { onDestroy, onMount } from 'svelte';
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import { onDestroy, untrack } from 'svelte';
 	import { Button, Input, Monaco, Spinner } from '$components/ui';
 	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
 	import { pluginsData } from '$lib/data';
@@ -26,15 +28,17 @@
 	import Columns2 from '@lucide/svelte/icons/columns-2';
 	import Rows2 from '@lucide/svelte/icons/rows-2';
 	import X from '@lucide/svelte/icons/x';
-	import RunResult from '../components/RunResult.svelte';
-	import ResizableSplit from './components/ResizableSplit.svelte';
-	import RunButton from './components/RunButton.svelte';
+	import RunResult from './RunResult.svelte';
+	import ResizableSplit from '../editor/components/ResizableSplit.svelte';
+	import RunButton from '../editor/components/RunButton.svelte';
 	import {
 		clampSplitRatio,
 		DEFAULT_SPLIT_RATIO,
 		toggleOrientation,
 		type SplitOrientation
-	} from './components/resizableSplit';
+	} from '../editor/components/resizableSplit';
+
+	let { id }: { id: string } = $props();
 
 	const toast = getToastState();
 	const modal = getModalState();
@@ -66,7 +70,7 @@
 	let fullTierLive = $state(false);
 	let lspDiagnosticsByPath = $state<Record<string, LspDiagnostic[]>>({});
 
-	const pluginId = $derived(page.url.searchParams.get('id'));
+	const pluginId = $derived(id);
 	const language = $derived(pluginEditor.activePath === MANIFEST_PATH ? 'json' : 'lua');
 	const snapshot: ApiSnapshot = $derived({
 		definition: pluginEditor.definition ?? { globals: [], handles: [] },
@@ -163,23 +167,43 @@
 		}
 	}
 
-	onMount(async () => {
-		splitRatio.current = clampSplitRatio(splitRatio.current);
-		if (!pluginId) {
-			await goto('/plugins');
-			return;
-		}
+	let claim: symbol | undefined;
+	let openFailed = $state(false);
+
+	async function openPlugin(openId: string): Promise<void> {
 		await pluginEditor.loadDefinition();
 		try {
-			await pluginEditor.open(pluginId);
+			await pluginEditor.open(openId);
 		} catch (e) {
 			toast.add(String(e instanceof Error ? e.message : e), 'Could not open plugin', 'error');
-			await goto('/plugins');
+			// Whatever the singleton still holds is another plugin's buffers; leaving
+			// them live would let a save here write to that plugin's files.
+			if (owner === claim) pluginEditor.reset();
+			openFailed = true;
 			return;
 		}
 		if (destroyed) return;
 
-		await probeTier(pluginId);
+		await probeTier(openId);
+	}
+
+	function retryOpen(): void {
+		openFailed = false;
+		claim = owner = Symbol();
+		void openPlugin(pluginId);
+	}
+
+	$effect(() => {
+		const openId = pluginId;
+		// Minted before any await: `pluginEditor.pluginId` only names the incoming pane
+		// once its load resolves, so it can still name this one when a deferred exit
+		// transition tears this instance down mid-load.
+		claim = owner = Symbol();
+		openFailed = false;
+		untrack(() => {
+			splitRatio.current = clampSplitRatio(splitRatio.current);
+			void openPlugin(openId);
+		});
 	});
 
 	onDestroy(() => {
@@ -188,6 +212,10 @@
 		if (tierProbeTimer) clearTimeout(tierProbeTimer);
 		providers?.dispose();
 		lspProviders.forEach((provider) => provider.dispose());
+		// A pending exit transition keeps this instance mounted after a new CodePane
+		// (another plugin, or this one reopened) has already taken over `pluginEditor`.
+		// Only tear the singleton down if it's still ours to tear down.
+		if (owner !== claim) return;
 		lspClient.dispose();
 		pluginEditor.reset();
 	});
@@ -255,7 +283,11 @@
 	function onEditorReady(instance: MonacoE.editor.IStandaloneCodeEditor) {
 		if (!monaco) return;
 		providers?.dispose();
-		providers = registerLuaProviders(monaco, () => snapshot, () => fullTierLive);
+		providers = registerLuaProviders(
+			monaco,
+			() => snapshot,
+			() => fullTierLive
+		);
 
 		const completionKind = monaco.languages.CompletionItemKind;
 		const insertAsSnippet = monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet;
@@ -462,12 +494,16 @@
 	aria-hidden="true"
 ></div>
 
-{#if pluginEditor.loading}
+{#if openFailed}
+	<div class="flex h-full flex-col items-center justify-center gap-3 p-4 text-center">
+		<p class="opacity-70">Could not open <span class="font-medium">{pluginId}</span>.</p>
+		<Button size="sm" onclick={retryOpen}>Retry</Button>
+	</div>
+{:else if pluginEditor.loading}
 	<Spinner />
 {:else}
 	<div class="flex h-full flex-col gap-2 p-2">
 		<div class="flex items-center gap-2">
-			<Button variant="ghost" size="sm" onclick={() => goto('/plugins')}>Back</Button>
 			<span class="font-bold">{pluginEditor.pluginId}</span>
 			{#if pluginEditor.bundled}
 				<span class="bg-secondary-500/25 text-secondary-300 rounded-full px-2 py-0.5 text-xs">
