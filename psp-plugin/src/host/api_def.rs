@@ -6,7 +6,7 @@ use super::fields::Access;
 use super::{gamedata, raw, save_read, save_write, services};
 use crate::manifest::Capability;
 
-#[derive(Debug, Clone, PartialEq, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
 #[serde(tag = "kind", content = "value", rename_all = "snake_case")]
 pub enum ApiType {
     Nil,
@@ -31,7 +31,7 @@ pub struct ApiParam {
     pub optional: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
 pub struct ApiFunction {
     pub name: &'static str,
     pub params: &'static [ApiParam],
@@ -155,7 +155,7 @@ mod tests {
 
         let mut names: Vec<&str> = gamedata.functions.iter().map(|f| f.name).collect();
         names.sort_unstable();
-        assert_eq!(names, ["is_valid_item", "is_valid_pal", "version"]);
+        assert_eq!(names, ["catalogs", "get", "is_valid_item", "is_valid_pal", "keys", "version"]);
 
         for function in gamedata.functions {
             assert!(

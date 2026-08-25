@@ -8,6 +8,7 @@ use std::collections::BTreeSet;
 use std::path::PathBuf;
 
 use psp_plugin::host::fields::player::read_requires_players;
+use psp_plugin::host::MAX_TABLE_NODES;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
 use psp_plugin::PLAYER_FIELDS;
@@ -424,6 +425,13 @@ fn is_identifier(text: &str) -> bool {
 }
 
 const NUMBER_WORDS: &[(&str, usize)] = &[
+    ("three", 3),
+    ("four", 4),
+    ("five", 5),
+    ("six", 6),
+    ("seven", 7),
+    ("eight", 8),
+    ("nine", 9),
     ("ten", 10),
     ("eleven", 11),
     ("twelve", 12),
@@ -496,4 +504,215 @@ fn the_player_row_of_the_handle_table_names_every_field_and_nothing_else() {
         documented, expected,
         "the player row of the handle table must name every row of PLAYER_FIELDS, plus `pals`"
     );
+}
+
+/// The `gamedata.get` size figures. Every one of them is measured against the
+/// shipped `data/json`, which is refreshed with each content patch, so all of
+/// them go stale silently -- including the claim that the section names every
+/// fetch too large to satisfy.
+const CAP_SECTION_START: &str = "**A `gamedata.get` can refuse.**";
+const CAP_SECTION_END: &str = "### `save`";
+const CALL_PREFIX: &str = "`gamedata.get(";
+const OVER_CAP: &str = "**over the cap**";
+
+/// The document's own words with every run of whitespace collapsed, so a
+/// sentence that wraps across lines reads as one.
+fn collapsed(text: &str) -> String {
+    text.split_whitespace().collect::<Vec<_>>().join(" ")
+}
+
+fn cap_section(text: &str) -> String {
+    let start = text
+        .find(CAP_SECTION_START)
+        .expect("docs/plugins.md must still explain when gamedata.get refuses");
+    let end = text[start..].find(CAP_SECTION_END).map(|at| start + at).unwrap_or(text.len());
+    collapsed(&text[start..end])
+}
+
+/// One `` `gamedata.get(...)` (N nodes) `` claim, with whether the prose that
+/// follows it calls that fetch over the cap.
+struct Quoted {
+    catalog: String,
+    key: Option<String>,
+    nodes: usize,
+    called_over_cap: bool,
+}
+
+/// Every size the cap section quotes. A `gamedata.get(` call written there
+/// without one is a hard failure: an unmeasured example is exactly how a stale
+/// figure would hide from this test.
+fn quoted_sizes(section: &str) -> Vec<Quoted> {
+    let mut spans: Vec<(usize, Quoted, usize)> = Vec::new();
+    let mut cursor = 0;
+    while let Some(offset) = section[cursor..].find(CALL_PREFIX) {
+        let call_start = cursor + offset;
+        let args_start = call_start + CALL_PREFIX.len();
+        let unreadable = |why: &str| -> ! {
+            panic!(
+                "the gamedata.get call at byte {call_start} of the cap section {why}. Every call \
+                 written there must read as `gamedata.get('catalog'[, 'key'])` (N nodes) so that \
+                 this test can measure it."
+            )
+        };
+        let Some(args_end) = section[args_start..].find(")`").map(|at| args_start + at) else {
+            unreadable("is never closed")
+        };
+        let mut args = section[args_start..args_end].split(", ").map(|arg| arg.trim_matches('\''));
+        let Some(catalog) = args.next() else { unreadable("names no catalog") };
+        let key = args.next().map(str::to_string);
+        if args.next().is_some() {
+            unreadable("takes more arguments than gamedata.get has");
+        }
+        let after = args_end + ")`".len();
+        let Some(figure) = section[after..].strip_prefix(" (") else {
+            unreadable("is not followed by a measured size in parentheses")
+        };
+        let Some(figure_len) = figure.find(')') else { unreadable("has an unclosed size") };
+        let Some(digits) = figure[..figure_len].strip_suffix(" nodes") else {
+            unreadable("has a parenthesis after it that does not read as `N nodes`")
+        };
+        let Ok(nodes) = digits.replace(',', "").parse::<usize>() else {
+            unreadable("has a size that is not a number")
+        };
+        let tail = after + " (".len() + figure_len + 1;
+        spans.push((
+            call_start,
+            Quoted { catalog: catalog.to_string(), key, nodes, called_over_cap: false },
+            tail,
+        ));
+        cursor = tail;
+    }
+
+    let starts: Vec<usize> = spans.iter().map(|(start, _, _)| *start).collect();
+    spans
+        .into_iter()
+        .enumerate()
+        .map(|(index, (_, mut quoted, tail))| {
+            let end = starts.get(index + 1).copied().unwrap_or(section.len());
+            quoted.called_over_cap = section[tail..end].contains(OVER_CAP);
+            quoted
+        })
+        .collect()
+}
+
+/// The host's own rule, called rather than restated, so the two cannot drift.
+fn node_count(value: &serde_json::Value) -> usize {
+    psp_plugin::host::gamedata::count_nodes(value, 0)
+        .expect("the shipped game data is not nested past the host's depth limit")
+}
+
+fn top_level_catalogs() -> Vec<&'static str> {
+    let mut names: Vec<&str> =
+        game_data().entry_names().filter(|name| !name.contains('/')).collect();
+    names.sort_unstable();
+    names
+}
+
+/// Every fetch `gamedata.get` would have to refuse, as `(catalog, key)` with
+/// `None` for a whole-catalog fetch.
+fn fetches_over_the_cap() -> BTreeSet<(String, Option<String>)> {
+    let mut over = BTreeSet::new();
+    for name in top_level_catalogs() {
+        let Some(value) = game_data().get(name) else { continue };
+        if node_count(value) > MAX_TABLE_NODES {
+            over.insert((name.to_string(), None));
+        }
+        if let Some(entries) = value.as_object() {
+            for (key, entry) in entries {
+                if node_count(entry) > MAX_TABLE_NODES {
+                    over.insert((name.to_string(), Some(key.clone())));
+                }
+            }
+        }
+    }
+    over
+}
+
+#[test]
+fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
+    let section = cap_section(&docs());
+    assert_eq!(
+        MAX_TABLE_NODES, 100_000,
+        "the cap moved, and docs/plugins.md spells its old value out in digits"
+    );
+    assert!(
+        section.contains("100,000 JSON nodes"),
+        "the cap section must still quote the cap itself"
+    );
+
+    let quoted = quoted_sizes(&section);
+    assert!(quoted.len() > 2, "the cap section must still measure the largest catalogs");
+
+    for claim in &quoted {
+        let call = match &claim.key {
+            Some(key) => format!("gamedata.get('{}', '{key}')", claim.catalog),
+            None => format!("gamedata.get('{}')", claim.catalog),
+        };
+        let catalog = game_data().get(&claim.catalog).unwrap_or_else(|| {
+            panic!("docs/plugins.md measures {call}, and no such catalog ships")
+        });
+        let value = match &claim.key {
+            Some(key) => catalog
+                .as_object()
+                .and_then(|entries| entries.get(key))
+                .unwrap_or_else(|| panic!("docs/plugins.md measures {call}, which holds no such key")),
+            None => catalog,
+        };
+        assert_eq!(
+            claim.nodes,
+            node_count(value),
+            "docs/plugins.md quotes {} nodes for {call}",
+            claim.nodes
+        );
+    }
+
+    let named: BTreeSet<(String, Option<String>)> = quoted
+        .iter()
+        .filter(|claim| claim.called_over_cap)
+        .map(|claim| (claim.catalog.clone(), claim.key.clone()))
+        .collect();
+    assert_eq!(
+        named,
+        fetches_over_the_cap(),
+        "docs/plugins.md must mark as over the cap exactly the fetches gamedata.get refuses"
+    );
+}
+
+/// The census in the `gamedata.keys` bullet: how many catalogs there are, and
+/// which of them are JSON arrays and so answer an empty table.
+#[test]
+fn the_documented_catalog_census_matches_the_shipped_game_data() {
+    let text = collapsed(&docs());
+    let marker = " of the loaded game data's ";
+    let at = text.find(marker).expect("docs/plugins.md must still count the top-level catalogs");
+    let spelled = text[..at]
+        .split_whitespace()
+        .last()
+        .expect("a spelled-out count before the catalog census")
+        .to_ascii_lowercase();
+    let documented_arrays = NUMBER_WORDS
+        .iter()
+        .find(|(word, _)| *word == spelled)
+        .map(|(_, value)| *value)
+        .unwrap_or_else(|| panic!("no spelled-out count in {spelled:?}"));
+    let rest = &text[at + marker.len()..];
+    let documented_total: usize = rest
+        .split_whitespace()
+        .next()
+        .and_then(|word| word.parse().ok())
+        .expect("the census must give the catalog total in digits");
+    let open = rest.find('(').expect("the census must list the array catalogs in parentheses");
+    let close = open + rest[open..].find(')').expect("the census list must be closed");
+    let named = backticked_identifiers(&[&rest[open..close]]);
+
+    let catalogs = top_level_catalogs();
+    let arrays: BTreeSet<String> = catalogs
+        .iter()
+        .filter(|name| !game_data().get(name).is_some_and(serde_json::Value::is_object))
+        .map(|name| (*name).to_string())
+        .collect();
+
+    assert_eq!(documented_total, catalogs.len(), "docs/plugins.md's catalog total must match");
+    assert_eq!(documented_arrays, arrays.len(), "docs/plugins.md's array-catalog count must match");
+    assert_eq!(named, arrays, "docs/plugins.md must name exactly the catalogs that are JSON arrays");
 }

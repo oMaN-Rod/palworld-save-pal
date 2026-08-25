@@ -105,7 +105,7 @@ script is actually allowed to touch.
 | Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a `pal`, `player`, `guild`, `base` or `slot` handle's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
 | Save raw | `save.raw` | The `raw` global (`raw.get`/`exists`/`kind`/`set`/`delete`/`len`/`visit`). **Bundled plugins only in v1** — see below. |
 | Players | `players` | Installs nothing of its own. Gates two things: the `player:<uid>` and `player_dps:<uid>` raw targets — `raw.get`/`raw.set`/etc. against a per-player scope refuse with an error unless this is also granted, and `raw` itself still needs `save.raw` — and reading any `player` handle field that is not answered from the save's own player summary. It is not a blanket gate on everything about a player: a player's entry in the level save (their `Exp`, `Level`, `FullStomach` and stat lists) is also reachable through the `level` raw target, which needs `save.raw` but not this. |
-| Game data | `gamedata` | The `gamedata` global (`gamedata.is_valid_item()`, `gamedata.is_valid_pal()`, `gamedata.version()`). |
+| Game data | `gamedata` | The `gamedata` global (`gamedata.is_valid_item()`, `gamedata.is_valid_pal()`, `gamedata.version()`, `gamedata.catalogs()`, `gamedata.keys()`, `gamedata.get()`). |
 | UI dialog | `ui.dialog` | The `ui` global (`ui.confirm()`). |
 | Storage | `storage` | The `storage` global (`storage.get()`, `storage.set()`). |
 | Log | `log` | The `log` global (`log.info()`, `log.warn()`, `log.error()`). |
@@ -205,6 +205,63 @@ Per-plugin key/value persistence across runs.
   (e.g. `CuteFox`), matched case-insensitively (a save's `character_id` casing
   does not always match the catalog).
 - `gamedata.version() -> string`
+- `gamedata.catalogs() -> string[]` — the name of every top-level catalog the
+  loaded game data ships, sorted. A catalog name is extension-less and
+  lowercase (`pals`, `items`) — never `pals.json` or `Pals`. Catalog names are
+  matched case-insensitively wherever `keys` or `get` take one below. The game
+  data also loads two nested subtrees — the game's locale strings and the
+  application's own interface strings — and neither is listed here.
+- `gamedata.keys(catalog) -> string[]|nil` — the named catalog's top-level
+  keys. `nil` if no catalog by that name exists. A catalog that exists but is
+  not a JSON object answers an empty table rather than `nil` — five of the
+  loaded game data's 33 top-level catalogs (`camps`, `eggs_spawners`,
+  `kinship_peach`, `presets`, `skill_fruits`) are JSON arrays and hit this
+  today. Unlike the catalog name — and unlike `is_valid_item` and
+  `is_valid_pal`, which both fold case — a catalog's own keys are
+  case-sensitive, and the two halves do not meet:
+  `gamedata.is_valid_pal('cutefox')` is `true` while
+  `gamedata.get('pals', 'cutefox')` is `nil`. An id that passes a validity
+  check is not thereby a key you can look one up with; take the key from
+  `gamedata.keys(catalog)`.
+- `gamedata.get(catalog) -> any|nil`, `gamedata.get(catalog, key) -> any|nil`
+  — the whole catalog, or one entry of it when `key` is given. `nil` if the
+  catalog (or, with a key, the entry) does not exist — and also if the stored
+  value there is JSON `null`; nothing distinguishes "absent" from "present
+  and null" once it has crossed into Lua.
+
+Every value `gamedata` hands back — from `keys` or `get` alike — is a
+snapshot: a fresh value each call, and a fresh table when the value is one
+(the same rule field reads follow — see below). Mutating what you get back
+changes nothing in the loaded game data.
+
+**A `gamedata.get` can refuse.** Building a value as one Lua table is capped
+at 100,000 JSON nodes — one per array element or object entry, counted over
+the whole tree — and a fetch over that cap errors, naming what was asked for
+and the count against the limit, rather than building a table nobody could
+use. The cap is one rule for the whole call: a single entry is measured the
+same way a whole catalog is, so a keyed fetch can refuse too. The figure in
+the message is that node count over the whole tree, which is not the number
+of keys `gamedata.keys` lists. Measured against the currently loaded game
+data:
+
+- `gamedata.get('breeding')` (106,942 nodes) is **over the cap** and fails
+  today; it will keep failing unless the data itself shrinks. Three of the
+  catalog's four top-level keys fetch fine on their own —
+  `gamedata.get('breeding', 'pal_info')` (1,824 nodes),
+  `gamedata.get('breeding', 'unique_combos')` (1,512 nodes) and
+  `gamedata.get('breeding', 'child_to_parents_unique')` (1,376 nodes). The
+  fourth, `gamedata.get('breeding', 'child_to_parents_formula')` (102,226
+  nodes), is **over the cap** on its own and cannot be fetched at all: `get`
+  reaches top-level keys only, so there is no smaller piece of it to ask for.
+  A plugin that needs per-pal breeding facts can work from `pal_info`, which
+  carries each pal's display name, `combi_rank`, `rarity` and `ignore_combi`.
+- `gamedata.get('breeding_distance')` (92,720 nodes) is under the cap, but
+  close enough that a content patch could push it over.
+- `gamedata.get('pals')` (51,680 nodes) is the next largest — just over half
+  the cap.
+
+Nothing else the loaded game data holds, whole catalog or single entry, comes
+near the cap.
 
 ### `save` — read half requires `save.read`
 

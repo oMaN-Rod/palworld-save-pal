@@ -262,6 +262,27 @@ function gamedata.is_valid_pal(id) end
 ---@return string
 function gamedata.version() end
 
+---The names of every top-level catalog the loaded game data ships, sorted. The nested subtrees it also loads, locale and interface strings, are not listed.
+---
+---Requires capability: gamedata.
+---@return string[]
+function gamedata.catalogs() end
+
+---The top-level keys of the named catalog, or nil if no catalog by that name exists. Catalog names are matched case-insensitively.
+---
+---Requires capability: gamedata.
+---@param catalog string
+---@return string[]|nil
+function gamedata.keys(catalog) end
+
+---The named catalog, or one entry of it if key is given, or nil if the catalog or key does not exist. A stored JSON null also arrives as nil, indistinguishable from absent. Catalog names are matched case-insensitively.
+---
+---Requires capability: gamedata.
+---@param catalog string
+---@param key? string
+---@return any|nil
+function gamedata.get(catalog, key) end
+
 ---@class progress
 
 ---@type progress

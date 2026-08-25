@@ -93,6 +93,18 @@ impl GameData {
             .contains(&id.to_lowercase())
     }
 
+    pub fn entry_names(&self) -> impl Iterator<Item = &str> {
+        self.entries.keys().map(String::as_str)
+    }
+
+    pub fn entry_keys(&self, name: &str) -> Option<Vec<&str>> {
+        let value = self.get(name)?;
+        Some(match value.as_object() {
+            Some(map) => map.keys().map(String::as_str).collect(),
+            None => Vec::new(),
+        })
+    }
+
     pub(crate) fn pal_lookup(&self) -> &PalLookup {
         self.pal_lookup.get_or_init(|| {
             let mut keys = HashSet::new();
@@ -251,5 +263,46 @@ mod tests {
             error.to_string().contains("pals"),
             "error names the entry that failed: {error}"
         );
+    }
+
+    #[test]
+    fn entry_names_lists_every_loaded_catalog_including_locales() {
+        let data = GameData::from_entries([
+            ("pals".to_string(), r#"{"Foxparks":{"tier":1}}"#.to_string()),
+            ("l10n/en/pals".to_string(), r#"{"Foxparks":"Foxparks"}"#.to_string()),
+        ])
+        .expect("game data");
+        let mut names: Vec<&str> = data.entry_names().collect();
+        names.sort_unstable();
+        assert_eq!(names, vec!["l10n/en/pals", "pals"]);
+    }
+
+    #[test]
+    fn entry_keys_lists_the_top_level_keys_of_an_object_catalog() {
+        let data = GameData::from_entries([(
+            "pals".to_string(),
+            r#"{"Foxparks":{"tier":1},"Lamball":{"tier":1}}"#.to_string(),
+        )])
+        .expect("game data");
+        let mut keys = data.entry_keys("pals").expect("pals exists");
+        keys.sort_unstable();
+        assert_eq!(keys, vec!["Foxparks", "Lamball"]);
+    }
+
+    #[test]
+    fn entry_keys_separates_an_absent_catalog_from_a_keyless_one() {
+        let data = GameData::from_entries([
+            ("elements".to_string(), r#"["fire","water"]"#.to_string()),
+        ])
+        .expect("game data");
+        assert_eq!(data.entry_keys("elements"), Some(Vec::new()), "an array has no top-level keys");
+        assert_eq!(data.entry_keys("nope"), None, "an absent catalog is None");
+    }
+
+    #[test]
+    fn entry_keys_matches_gets_case_handling() {
+        let data = GameData::from_entries([("pals".to_string(), r#"{"A":1}"#.to_string())])
+            .expect("game data");
+        assert!(data.entry_keys("PALS").is_some(), "catalog names are case-insensitive like get");
     }
 }

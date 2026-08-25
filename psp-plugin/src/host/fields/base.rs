@@ -205,7 +205,7 @@ pub(crate) fn api_fields() -> &'static [ApiField] {
                 .iter()
                 .map(|spec| ApiField {
                     name: spec.name,
-                    ty: spec.ty.clone(),
+                    ty: spec.ty,
                     access: spec.access,
                     doc: spec.doc,
                 })
