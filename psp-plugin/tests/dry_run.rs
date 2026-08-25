@@ -3,7 +3,12 @@ mod support;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
 
-const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite, Capability::GameData];
+const CAPS: &[Capability] = &[
+    Capability::SaveRead,
+    Capability::SaveWrite,
+    Capability::GameData,
+    Capability::Players,
+];
 
 const SCRIPTS: &[(&str, &str)] = &[
     (
@@ -30,6 +35,12 @@ const SCRIPTS: &[(&str, &str)] = &[
     (
         "unattached map objects",
         "return tostring(save.map_objects():delete_where(function(obj) return obj.base_id == nil end))",
+    ),
+    (
+        "empty a dps slot",
+        "local uid
+         for p in save.players() do uid = p.uid break end
+         return tostring(save.delete_dps_pals(uid, {0}))",
     ),
     (
         "invalid items",

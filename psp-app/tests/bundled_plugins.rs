@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
-use psp_core::domain::{containers, player};
+use psp_core::domain::{containers, pal, player};
 use psp_core::dto::container::{ItemContainerDto, ItemContainerSlotDto};
 use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
@@ -83,6 +83,91 @@ fn reparse(level_bytes: &[u8]) -> Result<SaveSession, CoreError> {
     reparse_with_dir(&fixture_dir(), level_bytes)
 }
 
+fn assert_round_trips(session: &SaveSession) {
+    let bytes = session.level_sav_bytes().expect("the level serializes");
+    reparse(&bytes).unwrap_or_else(|e| panic!("the written save did not reparse: {e}"));
+}
+
+/// Counts occurrences of any of `keys` as a property NAME anywhere under
+/// `session.world_properties()`, walking the raw property tree directly --
+/// independent of `raw.visit`, which is what the command under test uses.
+fn count_raw_keys(session: &SaveSession, keys: &[&str]) -> usize {
+    let wanted: std::collections::BTreeSet<&str> = keys.iter().copied().collect();
+    let mut count = 0;
+    count_raw_keys_in_properties(
+        session.world_properties().expect("world_properties must resolve"),
+        &wanted,
+        &mut count,
+    );
+    count
+}
+
+fn count_raw_keys_in_properties(
+    properties: &psp_core::ue::Properties,
+    wanted: &std::collections::BTreeSet<&str>,
+    count: &mut usize,
+) {
+    for (key, value) in properties {
+        if wanted.contains(key.1.as_str()) {
+            *count += 1;
+        }
+        count_raw_keys_in_property(value, wanted, count);
+    }
+}
+
+fn count_raw_keys_in_property(
+    property: &psp_core::ue::Property,
+    wanted: &std::collections::BTreeSet<&str>,
+    count: &mut usize,
+) {
+    use psp_core::ue::{Property, ValueVec};
+    match property {
+        Property::Struct(sv) => {
+            if let Some(properties) = game_struct_properties(sv) {
+                count_raw_keys_in_properties(properties, wanted, count);
+            }
+        }
+        Property::Map(entries) => {
+            for entry in entries {
+                count_raw_keys_in_property(&entry.key, wanted, count);
+                count_raw_keys_in_property(&entry.value, wanted, count);
+            }
+        }
+        Property::Array(ValueVec::Struct(structs)) | Property::Set(ValueVec::Struct(structs)) => {
+            for struct_value in structs {
+                if let Some(properties) = game_struct_properties(struct_value) {
+                    count_raw_keys_in_properties(properties, wanted, count);
+                }
+            }
+        }
+        _ => {}
+    }
+}
+
+/// `RawData` fields decode into a typed [`psp_core::ue::games::palworld::PalStruct`]
+/// rather than a generic struct, but several of its variants still carry a nested
+/// dynamic property bag (a live character's `object`, an egg's contained pal, a
+/// hatching egg's pal) where fields like `SkinName` actually live.
+fn game_struct_properties(sv: &psp_core::ue::StructValue) -> Option<&psp_core::ue::Properties> {
+    use psp_core::ue::games::palworld::{PalDynamicItemType, PalMapConcreteModelVariant, PalStruct};
+    use psp_core::ue::StructValue;
+    match sv {
+        StructValue::Struct(properties) => Some(properties),
+        StructValue::Game(PalStruct::CharacterData(data)) => Some(&data.object),
+        StructValue::Game(PalStruct::DynamicItem(item)) => match &item.item_type {
+            PalDynamicItemType::Egg { object, .. } => Some(object),
+            _ => None,
+        },
+        StructValue::Game(PalStruct::MapConcreteModel(model)) => match &model.model_data {
+            PalMapConcreteModelVariant::HatchingEgg(hatching) => {
+                Some(&hatching.hatched_character_save_parameter)
+            }
+            _ => None,
+        },
+        _ => None,
+    }
+}
+
 fn load_game_data() -> GameData {
     GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
 }
@@ -135,10 +220,15 @@ impl Harness {
 }
 
 const ALL_COMMANDS: &[&str] = &[
+    "delete_all_skins",
+    "delete_duplicated_players",
     "delete_empty_guilds",
+    "delete_imported_pals",
     "delete_inactive_players",
     "fix_all_negative_timestamps",
     "remove_invalid_items_from_save",
+    "remove_invalid_pals_from_save",
+    "remove_invalid_passives_from_save",
 ];
 
 // --- guild membership helpers (test 2 and the dry-run gate both need these) ---
@@ -257,6 +347,86 @@ fn seed_last_online_real_time(session: &mut SaveSession, uid: Uuid, value: i64) 
     save_parameter.insert("LastOnlineRealTime", props::int64_property(value));
 }
 
+// --- duplicate-player helpers (delete_duplicated_players) ---
+
+fn count_character_entries(session: &SaveSession) -> usize {
+    session.character_map().expect("character map must resolve").len()
+}
+
+fn character_entry_exists(session: &SaveSession, instance_id: Uuid) -> bool {
+    session
+        .character_map()
+        .expect("character map must resolve")
+        .iter()
+        .any(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(instance_id))
+}
+
+fn count_character_entries_for_uid(session: &SaveSession, uid: Uuid) -> usize {
+    session
+        .character_map()
+        .expect("character map must resolve")
+        .iter()
+        .filter(|entry| {
+            psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_player_uid(entry) == Some(uid)
+        })
+        .count()
+}
+
+/// Clones the first fixture player's `CharacterSaveParameterMap` entry under a
+/// fresh `InstanceId`, keeping the same `PlayerUId`, and gives the original
+/// entry a more recent `LastOnlineRealTime` than the clone. Returns
+/// `(uid, kept_instance, stale_instance)`.
+fn seed_duplicate_player(session: &mut SaveSession) -> (Uuid, Uuid, Uuid) {
+    let world_tick = world_now_tick(session);
+    let uid = session.player_summary_order[0];
+
+    let kept_instance = session
+        .character_map()
+        .expect("character map must resolve")
+        .iter()
+        .find(|entry| {
+            psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_player_uid(entry) == Some(uid)
+        })
+        .and_then(psp_core::domain::world::entry_instance_id)
+        .expect("the target player has a character entry");
+
+    seed_last_online_real_time(session, uid, world_tick - 1_000);
+
+    let mut cloned_entry = session
+        .character_map()
+        .expect("character map must resolve")
+        .iter()
+        .find(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(kept_instance))
+        .cloned()
+        .expect("the kept entry must still resolve");
+
+    let stale_instance = Uuid::new_v4();
+    if let Some(key_props) = props::struct_props_mut(&mut cloned_entry.key) {
+        key_props.insert("InstanceId", props::guid_property(stale_instance));
+    }
+    if let Some(save_parameter) = psp_core::domain::world::entry_save_parameter_mut(&mut cloned_entry) {
+        save_parameter.insert("LastOnlineRealTime", props::int64_property(world_tick - 1_000_000));
+    }
+
+    psp_core::domain::world::character_map_mut(&mut session.level)
+        .expect("character map")
+        .push(cloned_entry);
+
+    assert!(
+        character_entry_exists(session, stale_instance),
+        "the seeded duplicate must be readable before the command runs"
+    );
+    assert_eq!(
+        count_character_entries_for_uid(session, uid),
+        2,
+        "the seed must produce exactly two character entries for the duplicated uid"
+    );
+
+    (uid, kept_instance, stale_instance)
+}
+
 fn read_last_online_real_time(session: &SaveSession, uid: Uuid) -> Option<i64> {
     let entries = session.character_map().ok()?;
     let entry = entries.iter().find(|entry| {
@@ -365,12 +535,341 @@ fn seed_bogus_item(h: &mut Harness) -> (Uuid, i32) {
     (container_id, slot_index)
 }
 
+// --- pal helpers (delete_imported_pals, remove_invalid_pals_from_save) ---
+
+/// One world pal's fields relevant to these two commands, read directly off
+/// `CharacterSaveParameterMap` rather than through `pal::pal_summaries` or any
+/// other function the commands under test also call.
+struct WorldPalFields {
+    is_imported: bool,
+    is_boss: bool,
+}
+
+fn world_pal_fields(session: &SaveSession) -> Vec<WorldPalFields> {
+    let entries = session.character_map().expect("character map must resolve");
+    entries
+        .iter()
+        .filter(|entry| !psp_core::domain::world::entry_is_player(entry))
+        .filter_map(|entry| {
+            let save_parameter = psp_core::domain::world::entry_save_parameter(entry)?;
+            let character_id =
+                props::get(save_parameter, &["CharacterID"]).and_then(props::as_str).unwrap_or("");
+            let is_imported = props::get(save_parameter, &["bImportedCharacter"])
+                .and_then(props::as_bool)
+                .unwrap_or(false);
+            let is_boss = character_id.to_uppercase().starts_with("BOSS_");
+            Some(WorldPalFields { is_imported, is_boss })
+        })
+        .collect()
+}
+
+fn count_pals_where(session: &SaveSession, predicate: impl Fn(&WorldPalFields) -> bool) -> usize {
+    world_pal_fields(session).iter().filter(|p| predicate(p)).count()
+}
+
+/// Adds a brand-new, owner-resolvable world pal with the given species id, in
+/// the first fixture player's pal box. A command that finds and deletes
+/// exactly this one pal must bring the world pal count back to what it was
+/// before this call -- which an in-place rewrite of an existing pal's
+/// `CharacterID` cannot give a test to check against, since that pal's own
+/// prior species is lost the moment it is overwritten.
+fn seed_pal_with_character_id(h: &mut Harness, character_id: &str) {
+    let progress = null_progress();
+    let target_uid = h.session.player_summary_order[0];
+    let details = player::get_player_details(&mut h.session, &h.game_data, target_uid, &progress)
+        .expect("player details load")
+        .expect("the first fixture player exists");
+    let pal_box_id = details.pal_box_id.expect("the player has a pal box container");
+    pal::add_player_pal(&mut h.session, &h.game_data, target_uid, character_id, "psp seed", pal_box_id, None)
+        .expect("adding the seeded pal must succeed")
+        .expect("the pal box must have room for the seeded pal");
+}
+
+/// Sets `bImportedCharacter` on the first world pal entry that does not
+/// already carry it, for a fixture that ships no imported pal of its own.
+fn seed_imported_pal(session: &mut SaveSession) {
+    let entries =
+        psp_core::domain::world::character_map_mut(&mut session.level).expect("character map");
+    let entry = entries
+        .iter_mut()
+        .find(|entry| {
+            !psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_save_parameter(entry).is_some_and(|save_parameter| {
+                    !props::get(save_parameter, &["bImportedCharacter"])
+                        .and_then(props::as_bool)
+                        .unwrap_or(false)
+                })
+        })
+        .expect("the fixture must have at least one non-imported world pal entry to mutate");
+    let save_parameter = psp_core::domain::world::entry_save_parameter_mut(entry)
+        .expect("the pal entry has a SaveParameter bag");
+    save_parameter.insert("bImportedCharacter", props::bool_property(true));
+}
+
+// --- dps helpers (delete_imported_pals, remove_invalid_pals_from_save) ---
+
+/// The uid of the one `v1_relics` fixture player who ships a `_dps.sav`, found
+/// from the fixture directory itself rather than from anything a command's
+/// own DPS walk resolves.
+fn dps_player_uid() -> Uuid {
+    collect_player_file_refs(&fixture_dir())
+        .into_iter()
+        .find_map(|(uid, refs)| match refs {
+            PlayerFileData::Paths { dps: Some(_), .. } => Some(uid),
+            _ => None,
+        })
+        .expect("the fixture must have at least one player with a DPS save")
+}
+
+fn dps_slot_count(dps_bytes: &[u8]) -> usize {
+    let save = psp_core::savio::read_sav_bytes(dps_bytes).expect("the dps bytes parse");
+    props::get(&save.root.properties, &["SaveParameterArray"])
+        .and_then(props::struct_values)
+        .map(|values| values.len())
+        .unwrap_or(0)
+}
+
+fn dps_slot_character_id(dps_bytes: &[u8], slot_index: i32) -> Option<String> {
+    let save = psp_core::savio::read_sav_bytes(dps_bytes).expect("the dps bytes parse");
+    let array = props::get(&save.root.properties, &["SaveParameterArray"]).and_then(props::struct_values)?;
+    let psp_core::ue::StructValue::Struct(slot_props) = array.get(slot_index as usize)? else {
+        return None;
+    };
+    let save_parameter = slot_props
+        .0
+        .get(&psp_core::ue::PropertyKey::from("SaveParameter"))
+        .and_then(props::struct_props)?;
+    props::get(save_parameter, &["CharacterID"]).and_then(props::as_str).map(str::to_string)
+}
+
+fn dps_bytes_for(h: &Harness, uid: Uuid) -> Vec<u8> {
+    h.session
+        .player_sav_bytes()
+        .expect("player_sav_bytes must resolve")
+        .get(&uid)
+        .and_then(|(_, dps)| dps.clone())
+        .expect("the player must have dps bytes")
+}
+
+/// Adds a real pal into the dps-owning fixture player's dimensional storage and
+/// flags it imported, returning its slot index. `add_player_dps_pal` picks the
+/// first empty slot itself, so no index bookkeeping is needed to find one.
+fn seed_dps_imported_pal(h: &mut Harness, uid: Uuid) -> i32 {
+    let progress = null_progress();
+    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+        .expect("player details load")
+        .expect("the dps-owning fixture player exists");
+
+    let (slot_index, _dto) =
+        pal::add_player_dps_pal(&mut h.session, &h.game_data, uid, "Lamball", "psp seed", None)
+            .expect("adding a dps pal must succeed")
+            .expect("the player's dimensional storage must have an empty slot");
+
+    let loaded = h.session.loaded_players.get_mut(&uid).expect("player is loaded");
+    let dps_save = loaded.dps.as_mut().expect("player has a dps save");
+    props::ensure_schema(
+        dps_save,
+        format!("{}.bImportedCharacter", pal::SLOT_SAVE_PARAMETER_PREFIX),
+        psp_core::ue::PropertyTagPartial {
+            id: None,
+            data: psp_core::ue::PropertyTagDataPartial::Other(psp_core::ue::PropertyType::BoolProperty),
+        },
+    );
+    let array = props::get_mut(&mut dps_save.root.properties, &["SaveParameterArray"])
+        .and_then(props::struct_values_mut)
+        .expect("SaveParameterArray present");
+    let psp_core::ue::StructValue::Struct(slot_props) = &mut array[slot_index as usize] else {
+        panic!("dps slot is not a struct");
+    };
+    let save_parameter = slot_props
+        .0
+        .get_mut(&psp_core::ue::PropertyKey::from("SaveParameter"))
+        .and_then(props::struct_props_mut)
+        .expect("SaveParameter present");
+    save_parameter.insert("bImportedCharacter", props::bool_property(true));
+
+    slot_index
+}
+
+/// Adds a pal with a catalog-unknown species id into the dps-owning fixture
+/// player's dimensional storage, returning its slot index.
+fn seed_dps_invalid_pal(h: &mut Harness, uid: Uuid) -> i32 {
+    let progress = null_progress();
+    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+        .expect("player details load")
+        .expect("the dps-owning fixture player exists");
+
+    let (slot_index, _dto) = pal::add_player_dps_pal(
+        &mut h.session,
+        &h.game_data,
+        uid,
+        "PSP_NOT_A_REAL_PAL",
+        "psp seed",
+        None,
+    )
+    .expect("adding a dps pal must succeed")
+    .expect("the player's dimensional storage must have an empty slot");
+
+    slot_index
+}
+
+// --- passive skill helpers (remove_invalid_passives_from_save) ---
+
+const BOGUS_PASSIVE_ID: &str = "PSP_NOT_A_REAL_PASSIVE";
+
+/// Counts every passive-skill entry across every world pal's `PassiveSkillList`,
+/// read directly off `CharacterSaveParameterMap` rather than through
+/// `pal.passive_skills` or anything else the command under test calls.
+fn count_passive_entries(session: &SaveSession) -> usize {
+    let entries = session.character_map().expect("character map must resolve");
+    entries
+        .iter()
+        .filter(|entry| !psp_core::domain::world::entry_is_player(entry))
+        .filter_map(psp_core::domain::world::entry_save_parameter)
+        .filter_map(|save_parameter| props::get(save_parameter, &["PassiveSkillList"]))
+        .filter_map(props::name_values)
+        .map(|values| values.len())
+        .sum()
+}
+
+/// The passive skills of the world pal with the given instance id, read the
+/// same independent way `count_passive_entries` does.
+fn passives_of(session: &SaveSession, target: Uuid) -> Vec<String> {
+    let entries = session.character_map().expect("character map must resolve");
+    entries
+        .iter()
+        .find(|entry| {
+            !psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_instance_id(entry) == Some(target)
+        })
+        .and_then(psp_core::domain::world::entry_save_parameter)
+        .and_then(|save_parameter| props::get(save_parameter, &["PassiveSkillList"]))
+        .and_then(props::name_values)
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// Appends `skill_id` onto the first world pal that already carries at least
+/// one passive skill, so the seeded skill lands alongside real ones on the
+/// same pal, and returns that pal's instance id. The fixture ships no unknown
+/// passive of its own, so a test that did not seed would assert zero.
+fn seed_passive_skill(session: &mut SaveSession, skill_id: &str) -> Uuid {
+    let entries =
+        psp_core::domain::world::character_map_mut(&mut session.level).expect("character map");
+    let entry = entries
+        .iter_mut()
+        .find(|entry| {
+            !psp_core::domain::world::entry_is_player(entry)
+                && psp_core::domain::world::entry_save_parameter(entry).is_some_and(|save_parameter| {
+                    props::get(save_parameter, &["PassiveSkillList"])
+                        .and_then(props::name_values)
+                        .is_some_and(|values| !values.is_empty())
+                })
+        })
+        .expect("the fixture must have at least one world pal carrying passive skills");
+    let instance_id =
+        psp_core::domain::world::entry_instance_id(entry).expect("pal entry has an instance id");
+    let save_parameter = psp_core::domain::world::entry_save_parameter_mut(entry)
+        .expect("the pal entry has a SaveParameter bag");
+    let mut skills = props::get(save_parameter, &["PassiveSkillList"])
+        .and_then(props::name_values)
+        .cloned()
+        .unwrap_or_default();
+    skills.push(skill_id.to_string());
+    save_parameter.insert("PassiveSkillList", props::name_array_property(skills));
+    instance_id
+}
+
+/// One key from the loaded `passive_skills` catalog, for seeding a real
+/// passive alongside a bogus one.
+fn known_passive_skill(game_data: &GameData) -> String {
+    game_data
+        .get("passive_skills")
+        .and_then(serde_json::Value::as_object)
+        .and_then(|catalog| catalog.keys().next())
+        .expect("the passive_skills catalog has at least one entry")
+        .clone()
+}
+
+fn dps_slot_passive_skills(dps_bytes: &[u8], slot_index: i32) -> Vec<String> {
+    let save = psp_core::savio::read_sav_bytes(dps_bytes).expect("the dps bytes parse");
+    let array = props::get(&save.root.properties, &["SaveParameterArray"])
+        .and_then(props::struct_values)
+        .expect("SaveParameterArray present");
+    let psp_core::ue::StructValue::Struct(slot_props) =
+        array.get(slot_index as usize).expect("the slot is present")
+    else {
+        panic!("dps slot is not a struct");
+    };
+    let save_parameter = slot_props
+        .0
+        .get(&psp_core::ue::PropertyKey::from("SaveParameter"))
+        .and_then(props::struct_props)
+        .expect("SaveParameter present");
+    props::get(save_parameter, &["PassiveSkillList"])
+        .and_then(props::name_values)
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// Adds a real dps pal and overwrites its `PassiveSkillList` with one known
+/// catalog skill plus one bogus skill, returning the slot index and the
+/// known skill's id.
+fn seed_dps_passive_skill(h: &mut Harness, uid: Uuid) -> (i32, String) {
+    let progress = null_progress();
+    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+        .expect("player details load")
+        .expect("the dps-owning fixture player exists");
+
+    let (slot_index, _dto) =
+        pal::add_player_dps_pal(&mut h.session, &h.game_data, uid, "Lamball", "psp seed", None)
+            .expect("adding a dps pal must succeed")
+            .expect("the player's dimensional storage must have an empty slot");
+
+    let valid_skill = known_passive_skill(&h.game_data);
+
+    let loaded = h.session.loaded_players.get_mut(&uid).expect("player is loaded");
+    let dps_save = loaded.dps.as_mut().expect("player has a dps save");
+    let array = props::get_mut(&mut dps_save.root.properties, &["SaveParameterArray"])
+        .and_then(props::struct_values_mut)
+        .expect("SaveParameterArray present");
+    let psp_core::ue::StructValue::Struct(slot_props) = &mut array[slot_index as usize] else {
+        panic!("dps slot is not a struct");
+    };
+    let save_parameter = slot_props
+        .0
+        .get_mut(&psp_core::ue::PropertyKey::from("SaveParameter"))
+        .and_then(props::struct_props_mut)
+        .expect("SaveParameter present");
+    save_parameter.insert(
+        "PassiveSkillList",
+        props::name_array_property(vec![valid_skill.clone(), BOGUS_PASSIVE_ID.to_string()]),
+    );
+
+    (slot_index, valid_skill)
+}
+
 // --- per-command setup shared by test 11's round trip and test 12's dry-run gate ---
 
 fn setup_for(command_id: &str, h: &mut Harness) -> serde_json::Value {
     match command_id {
+        "delete_all_skins" => serde_json::json!({}),
+        "delete_duplicated_players" => {
+            seed_duplicate_player(&mut h.session);
+            serde_json::json!({})
+        }
         "delete_empty_guilds" => {
             manufacture_empty_guild(h);
+            serde_json::json!({})
+        }
+        "delete_imported_pals" => {
+            if count_pals_where(&h.session, |p| p.is_imported) == 0 {
+                seed_imported_pal(&mut h.session);
+            }
+            serde_json::json!({})
+        }
+        "remove_invalid_pals_from_save" => {
+            seed_pal_with_character_id(h, "PSP_NOT_A_REAL_PAL");
             serde_json::json!({})
         }
         "delete_inactive_players" => {
@@ -387,6 +886,10 @@ fn setup_for(command_id: &str, h: &mut Harness) -> serde_json::Value {
             seed_bogus_item(h);
             serde_json::json!({})
         }
+        "remove_invalid_passives_from_save" => {
+            seed_passive_skill(&mut h.session, BOGUS_PASSIVE_ID);
+            serde_json::json!({})
+        }
         other => panic!("no setup defined for {other}"),
     }
 }
@@ -394,17 +897,62 @@ fn setup_for(command_id: &str, h: &mut Harness) -> serde_json::Value {
 // --- 1 ---
 
 #[test]
-fn the_bundled_manifest_parses_and_declares_four_commands() {
+fn the_bundled_manifest_parses_and_declares_every_command() {
     let plugin = &BUNDLED[0];
     assert_eq!(plugin.id, "pst.cleanup");
     let manifest =
         Manifest::parse(plugin.manifest).expect("the bundled manifest must parse");
-    assert_eq!(manifest.commands.len(), 4);
+    assert_eq!(manifest.commands.len(), 9);
     let mut ids: Vec<&str> = manifest.commands.iter().map(|c| c.id.as_str()).collect();
     ids.sort_unstable();
     let mut expected: Vec<&str> = ALL_COMMANDS.to_vec();
     expected.sort_unstable();
     assert_eq!(ids, expected);
+}
+
+// --- 1b ---
+
+#[test]
+fn delete_all_skins_removes_every_skin_field_and_the_save_still_parses() {
+    let mut h = Harness::new();
+
+    let before = count_raw_keys(&h.session, &["SkinName", "SkinAppliedCharacterId"]);
+    assert!(before > 0, "the fixture must carry skin fields, or this test is vacuous");
+
+    let dry = h.run("delete_all_skins", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    assert_eq!(
+        count_raw_keys(&h.session, &["SkinName", "SkinAppliedCharacterId"]),
+        before,
+        "a dry run must not change the save"
+    );
+
+    let wet = h.run("delete_all_skins", serde_json::json!({}), false);
+    assert_eq!(wet.status, RunStatus::Ok, "{:?}", wet.status);
+    assert_eq!(wet.counts.get("skins").copied(), Some(before as i64));
+    assert_eq!(count_raw_keys(&h.session, &["SkinName", "SkinAppliedCharacterId"]), 0);
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_all_skins_clears_the_stored_skin_inventory_of_every_player() {
+    let mut h = Harness::new();
+
+    let first = h.run("delete_all_skins", serde_json::json!({}), false);
+    assert_eq!(first.status, RunStatus::Ok, "{:?}", first.status);
+    let cleared = first.counts.get("player_skin_inventories").copied().unwrap_or(0);
+    assert!(
+        cleared > 0,
+        "the fixture's players carry a stored skin inventory; clearing none means the          player-side branch did nothing"
+    );
+
+    let second = h.run("delete_all_skins", serde_json::json!({}), false);
+    assert_eq!(second.status, RunStatus::Ok, "{:?}", second.status);
+    assert_eq!(
+        second.counts.get("player_skin_inventories").copied(),
+        Some(0),
+        "the first run must have removed them; a branch that reports without writing would          clear the same records again"
+    );
 }
 
 // --- 2 ---
@@ -549,6 +1097,39 @@ fn the_fixture_has_players_with_readable_last_online_timestamps() {
     );
 }
 
+// --- 6b ---
+
+#[test]
+fn delete_duplicated_players_keeps_the_most_recently_online_copy() {
+    let mut h = Harness::new();
+    let (uid, kept_instance, stale_instance) = seed_duplicate_player(&mut h.session);
+    let before = count_character_entries(&h.session);
+
+    let outcome = h.run("delete_duplicated_players", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("players").copied(), Some(1));
+
+    assert_eq!(count_character_entries(&h.session), before - 1);
+    assert!(character_entry_exists(&h.session, kept_instance), "the recent copy survives");
+    assert!(!character_entry_exists(&h.session, stale_instance), "the stale copy is gone");
+    assert_eq!(
+        count_character_entries_for_uid(&h.session, uid),
+        1,
+        "exactly one entry may remain for the duplicated uid"
+    );
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn delete_duplicated_players_does_nothing_to_a_save_without_duplicates() {
+    let mut h = Harness::new();
+    let before = count_character_entries(&h.session);
+    let outcome = h.run("delete_duplicated_players", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("players").copied(), Some(0));
+    assert_eq!(count_character_entries(&h.session), before);
+}
+
 // --- 7 ---
 
 #[test]
@@ -621,6 +1202,183 @@ fn remove_invalid_items_clears_a_seeded_bogus_item_and_keeps_valid_ones() {
         .and_then(|slot| slot.static_id.as_deref())
         == Some(BOGUS_ITEM_ID);
     assert!(!still_bogus, "the bogus item must be gone after the command runs");
+}
+
+// --- 10a ---
+
+#[test]
+fn delete_imported_pals_removes_only_the_imported_ones() {
+    let mut h = Harness::new();
+    if count_pals_where(&h.session, |p| p.is_imported) == 0 {
+        seed_imported_pal(&mut h.session);
+    }
+    let imported = count_pals_where(&h.session, |p| p.is_imported);
+    let total = count_pals_where(&h.session, |_| true);
+    assert!(imported > 0, "seed an imported pal rather than asserting zero");
+    assert!(imported < total, "not every pal may be imported, or the test proves nothing");
+
+    let outcome = h.run("delete_imported_pals", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("pals").copied(), Some(imported as i64));
+    assert_eq!(count_pals_where(&h.session, |p| p.is_imported), 0);
+    assert_eq!(count_pals_where(&h.session, |_| true), total - imported);
+    assert_round_trips(&h.session);
+}
+
+// --- 10b ---
+
+#[test]
+fn remove_invalid_pals_spares_bosses_and_predators() {
+    let mut h = Harness::new();
+    let bosses = count_pals_where(&h.session, |p| p.is_boss);
+    assert!(bosses > 0, "seed a boss rather than asserting zero");
+
+    let outcome = h.run("remove_invalid_pals_from_save", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        count_pals_where(&h.session, |p| p.is_boss),
+        bosses,
+        "a boss id is not in the pal catalog verbatim; deleting one is the failure this guards"
+    );
+    assert_round_trips(&h.session);
+}
+
+// --- 10c ---
+
+#[test]
+fn remove_invalid_pals_deletes_a_seeded_unknown_species() {
+    let mut h = Harness::new();
+    let before = count_pals_where(&h.session, |_| true);
+    seed_pal_with_character_id(&mut h, "PSP_NOT_A_REAL_PAL");
+
+    let outcome = h.run("remove_invalid_pals_from_save", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("pals").copied(), Some(1));
+    assert_eq!(count_pals_where(&h.session, |_| true), before);
+    assert_round_trips(&h.session);
+}
+
+// --- 10d ---
+
+#[test]
+fn delete_imported_pals_empties_a_dps_slot_without_shrinking_the_array() {
+    let mut h = Harness::new();
+    let uid = dps_player_uid();
+    let slot_index = seed_dps_imported_pal(&mut h, uid);
+
+    let before_dps = dps_bytes_for(&h, uid);
+    let before_count = dps_slot_count(&before_dps);
+    assert_eq!(
+        dps_slot_character_id(&before_dps, slot_index).as_deref(),
+        Some("Lamball"),
+        "the seeded dps pal must be readable before the command runs"
+    );
+
+    let outcome = h.run("delete_imported_pals", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("dimensional_storage_pals").copied(), Some(1));
+
+    let after_dps = dps_bytes_for(&h, uid);
+    assert_eq!(
+        dps_slot_count(&after_dps), before_count,
+        "emptying an imported dps pal must not change the storage array's length"
+    );
+    assert_eq!(
+        dps_slot_character_id(&after_dps, slot_index).as_deref(),
+        Some("None"),
+        "the emptied slot must read back as an unused slot, not have been removed"
+    );
+}
+
+// --- 10e ---
+
+#[test]
+fn remove_invalid_pals_empties_a_dps_slot_without_shrinking_the_array() {
+    let mut h = Harness::new();
+    let uid = dps_player_uid();
+    let slot_index = seed_dps_invalid_pal(&mut h, uid);
+
+    let before_dps = dps_bytes_for(&h, uid);
+    let before_count = dps_slot_count(&before_dps);
+    assert_eq!(
+        dps_slot_character_id(&before_dps, slot_index).as_deref(),
+        Some("PSP_NOT_A_REAL_PAL"),
+        "the seeded dps pal must be readable before the command runs"
+    );
+
+    let outcome = h.run("remove_invalid_pals_from_save", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("dimensional_storage_pals").copied(), Some(1));
+
+    let after_dps = dps_bytes_for(&h, uid);
+    assert_eq!(
+        dps_slot_count(&after_dps), before_count,
+        "emptying an invalid dps pal must not change the storage array's length"
+    );
+    assert_eq!(
+        dps_slot_character_id(&after_dps, slot_index).as_deref(),
+        Some("None"),
+        "the emptied slot must read back as an unused slot, not have been removed"
+    );
+}
+
+// --- 10f ---
+
+#[test]
+fn remove_invalid_passives_strips_a_seeded_unknown_and_keeps_the_rest() {
+    let mut h = Harness::new();
+    let target = seed_passive_skill(&mut h.session, "PSP_NOT_A_REAL_PASSIVE");
+    let before = count_passive_entries(&h.session);
+    assert!(before > 1, "the fixture must carry real passives too");
+    assert!(
+        passives_of(&h.session, target).iter().any(|p| p == "PSP_NOT_A_REAL_PASSIVE"),
+        "the seed must be readable before the command runs, or this test proves nothing"
+    );
+
+    let dry = h.run("remove_invalid_passives_from_save", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    assert_eq!(count_passive_entries(&h.session), before, "a dry run changes nothing");
+
+    let wet = h.run("remove_invalid_passives_from_save", serde_json::json!({}), false);
+    assert_eq!(wet.status, RunStatus::Ok, "{:?}", wet.status);
+    assert_eq!(wet.counts.get("passives").copied(), Some(1));
+    assert_eq!(count_passive_entries(&h.session), before - 1);
+    assert!(
+        !passives_of(&h.session, target).iter().any(|p| p == "PSP_NOT_A_REAL_PASSIVE"),
+        "the seeded skill must be gone from the pal it was seeded on"
+    );
+    assert_round_trips(&h.session);
+}
+
+// --- 10g ---
+
+#[test]
+fn remove_invalid_passives_strips_a_seeded_unknown_from_dimensional_storage_and_keeps_the_rest() {
+    let mut h = Harness::new();
+    let uid = dps_player_uid();
+    let (slot_index, valid_skill) = seed_dps_passive_skill(&mut h, uid);
+
+    let before_dps = dps_bytes_for(&h, uid);
+    let before_skills = dps_slot_passive_skills(&before_dps, slot_index);
+    assert!(
+        before_skills.iter().any(|s| s == BOGUS_PASSIVE_ID) && before_skills.contains(&valid_skill),
+        "both skills must be readable before the command runs, got {before_skills:?}"
+    );
+
+    let outcome = h.run("remove_invalid_passives_from_save", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.counts.get("dimensional_storage_passives").copied(), Some(1));
+
+    let after_dps = dps_bytes_for(&h, uid);
+    let after_skills = dps_slot_passive_skills(&after_dps, slot_index);
+    assert!(
+        !after_skills.iter().any(|s| s == BOGUS_PASSIVE_ID),
+        "the seeded invalid passive must be gone, got {after_skills:?}"
+    );
+    assert!(
+        after_skills.contains(&valid_skill),
+        "the valid passive on the same pal must survive, got {after_skills:?}"
+    );
 }
 
 // --- 11 ---

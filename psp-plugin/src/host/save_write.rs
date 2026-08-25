@@ -1,5 +1,6 @@
 use std::ffi::{c_int, c_void};
 
+use psp_core::domain::raw_path::{RawPath, RawScope};
 use psp_core::domain::{containers, guild, map_object, pal, player};
 use psp_core::dto::container::{ItemContainerDto, ItemContainerSlotDto};
 use psp_core::error::CoreError;
@@ -9,7 +10,7 @@ use uuid::Uuid;
 
 use super::api_def::{ApiFunction, ApiParam, ApiType};
 use super::handle::{handle_kind_for, invalidated_handle_error};
-use super::marshal::{arg_integer, arg_string, check_args, push_str};
+use super::marshal::{arg_integer, arg_string, arg_uuid, check_args, push_str, table_to_json};
 use super::services::append_log_line;
 use super::{free_message, trampoline, with_context, HostError, HostFn, PushHostFn};
 use crate::context::{ClearSlotsState, DeleteWhereKind, DeleteWhereState, LogLevel, RunContext};
@@ -608,6 +609,59 @@ fn unlock_private_chests_body(state: *mut lua_State) -> Result<c_int, HostError>
 
 host_fn!(push_unlock_private_chests, unlock_private_chests_body);
 
+fn delete_dps_pals_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 2, "save.delete_dps_pals")?;
+        let player_uid = arg_uuid(state, 1, "player_uid")?;
+        let indexes_json = table_to_json(state, 2)?;
+        let indexes: Vec<i32> = indexes_json
+            .as_array()
+            .ok_or_else(|| HostError::new("save.delete_dps_pals expects an array table for indexes"))?
+            .iter()
+            .map(|value| {
+                value
+                    .as_i64()
+                    .and_then(|n| i32::try_from(n).ok())
+                    .ok_or_else(|| HostError::new("save.delete_dps_pals indexes must all be integers"))
+            })
+            .collect::<Result<Vec<i32>, HostError>>()?;
+
+        let emptied = with_context(state, |ctx| {
+            if !ctx.grants(Capability::Players) {
+                return Err(HostError::new("save.delete_dps_pals requires the players capability"));
+            }
+            super::dto_cache::flush(ctx)?;
+            // A player who exists but has no `_dps.sav` at all is a real, common state
+            // (dimensional storage is unlocked separately) -- `raw_len` errors for it the
+            // same way `raw.*` does, but this is not the caller's fault to handle, so it is
+            // treated the same as a DPS array with nothing in it, matching how
+            // `delete_player_dps_pals` itself is a no-op for that player. A missing player
+            // still raises, from `ensure_player_loaded` above.
+            ctx.session.ensure_player_loaded(player_uid).map_err(core_error)?;
+            let path = RawPath::parse("SaveParameterArray").map_err(core_error)?;
+            let slot_count =
+                ctx.session.raw_len(RawScope::PlayerDps(player_uid), &path).ok().flatten().unwrap_or(0);
+            let valid = indexes.iter().filter(|&&index| index >= 0 && (index as usize) < slot_count).count();
+
+            if ctx.dry_run {
+                ctx.bump("save.delete_dps_pals", valid as i64);
+                return Ok(valid);
+            }
+            if valid > 0 {
+                pal::delete_player_dps_pals(ctx.session, ctx.game_data, player_uid, &indexes)
+                    .map_err(core_error)?;
+                ctx.note_mutation();
+            }
+            Ok(valid)
+        })?;
+
+        lua_pushinteger(state, emptied as i64);
+        Ok(1)
+    }
+}
+
+host_fn!(push_delete_dps_pals, delete_dps_pals_body);
+
 fn kind_to_int(kind: DeleteWhereKind) -> i64 {
     match kind {
         DeleteWhereKind::Player => 0,
@@ -970,10 +1024,24 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
               invalidates every live handle and iterator.",
         capability: Some(Capability::SaveWrite),
     },
+    ApiFunction {
+        name: "delete_dps_pals",
+        params: &[
+            ApiParam { name: "player_uid", ty: ApiType::String, optional: false },
+            ApiParam { name: "indexes", ty: ApiType::List(&ApiType::Integer), optional: false },
+        ],
+        returns: ApiType::Integer,
+        doc: "Empties the given slot indexes of one player's dimensional storage in place -- \
+              nils the slot's InstanceId and resets its SaveParameter bag to an unused slot's \
+              shape, the same way the slot got there in the first place, without changing the \
+              storage array's length. Returns how many of the given indexes were valid. \
+              Requires capability: players.",
+        capability: Some(Capability::SaveWrite),
+    },
 ];
 
 const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] =
-    [push_clear_slots_where, push_unlock_private_chests];
+    [push_clear_slots_where, push_unlock_private_chests, push_delete_dps_pals];
 
 fn save_write_bindings() -> [(&'static str, PushHostFn); SAVE_WRITE_FUNCTIONS.len()] {
     std::array::from_fn(|i| (SAVE_WRITE_FUNCTIONS[i].name, SAVE_WRITE_PUSH_FNS[i]))

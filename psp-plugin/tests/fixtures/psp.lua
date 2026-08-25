@@ -253,6 +253,14 @@ function save.clear_slots_where(predicate) end
 ---@return integer
 function save.unlock_private_chests() end
 
+---Empties the given slot indexes of one player's dimensional storage in place -- nils the slot's InstanceId and resets its SaveParameter bag to an unused slot's shape, the same way the slot got there in the first place, without changing the storage array's length. Returns how many of the given indexes were valid. Requires capability: players.
+---
+---Requires capability: save.write.
+---@param player_uid string
+---@param indexes integer[]
+---@return integer
+function save.delete_dps_pals(player_uid, indexes) end
+
 ---Requires capability: gamedata.
 ---
 ---@class gamedata

@@ -9,6 +9,20 @@
   "capabilities": ["save.read", "save.write", "save.raw", "players", "gamedata", "log"],
   "commands": [
     {
+      "id": "delete_all_skins",
+      "title": "Delete All Skins",
+      "description": "Removes applied skins from pals and structures, and clears each player's stored skin inventory. Skins are cosmetic, so nothing else about the save changes.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "delete_imported_pals",
+      "title": "Delete Imported Pals",
+      "description": "Removes every pal flagged as DNA-imported, from the world and from each player's dimensional storage, and clears the container slots that referenced them.",
+      "destructive": true,
+      "params": []
+    },
+    {
       "id": "delete_empty_guilds",
       "title": "Delete Empty Guilds",
       "description": "Removes guilds that have no remaining members.",
@@ -33,9 +47,30 @@
       "params": []
     },
     {
+      "id": "remove_invalid_pals_from_save",
+      "title": "Remove Invalid Pals",
+      "description": "Removes pals whose species is not in the game's pal catalog, from the world and from each player's dimensional storage. Bosses, lucky pals and predators are kept, since their ids carry a prefix the catalog does not list.",
+      "destructive": true,
+      "params": []
+    },
+    {
       "id": "remove_invalid_items_from_save",
       "title": "Remove Invalid Items",
       "description": "Clears item stacks whose item id is not in the game's item catalog.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "remove_invalid_passives_from_save",
+      "title": "Remove Invalid Passive Skills",
+      "description": "Removes passive skills that are not in the game's passive-skill catalog, from pals in the world and in each player's dimensional storage.",
+      "destructive": true,
+      "params": []
+    },
+    {
+      "id": "delete_duplicated_players",
+      "title": "Delete Duplicated Players",
+      "description": "Where one player has more than one character record, keeps the most recently online one and removes the others. Guild membership records are left as they are.",
       "destructive": true,
       "params": []
     }
