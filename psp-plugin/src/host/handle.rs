@@ -112,20 +112,22 @@ fn handle_tostring(state: *mut lua_State) -> Result<c_int, HostError> {
 host_fn!(push_handle_tostring, handle_tostring);
 
 /// `__metatable` is set to a string so a script cannot replace the dispatch.
+///
+/// `newindex_fn` is not optional: every handle has an `__newindex`, `container`
+/// included, whose one job is to refuse. Taking it unconditionally is what
+/// stops a seventh handle from arriving with no assignment dispatch at all.
 unsafe fn install_one(
     state: *mut lua_State,
     kind: HandleKind,
     index_fn: PushHostFn,
-    newindex_fn: Option<PushHostFn>,
+    newindex_fn: PushHostFn,
 ) {
     let name = metatable_name(kind);
     luaL_newmetatable(state, name.as_ptr());
     index_fn(state);
     lua_setfield(state, -2, c"__index".as_ptr());
-    if let Some(newindex_fn) = newindex_fn {
-        newindex_fn(state);
-        lua_setfield(state, -2, c"__newindex".as_ptr());
-    }
+    newindex_fn(state);
+    lua_setfield(state, -2, c"__newindex".as_ptr());
     push_handle_tostring(state);
     lua_setfield(state, -2, c"__tostring".as_ptr());
     lua_pushstring(state, name.as_ptr());
@@ -138,36 +140,36 @@ pub unsafe fn install_metatables(state: *mut lua_State) {
         state,
         HandleKind::Player,
         super::save_read::push_player_index as PushHostFn,
-        Some(super::fields::player::push_player_newindex as PushHostFn),
+        super::fields::player::push_player_newindex as PushHostFn,
     );
     install_one(
         state,
         HandleKind::Pal,
         super::save_read::push_pal_index as PushHostFn,
-        Some(super::fields::pal::push_pal_newindex as PushHostFn),
+        super::fields::pal::push_pal_newindex as PushHostFn,
     );
     install_one(
         state,
         HandleKind::Guild,
         super::save_read::push_guild_index as PushHostFn,
-        Some(super::fields::guild::push_guild_newindex as PushHostFn),
+        super::fields::guild::push_guild_newindex as PushHostFn,
     );
     install_one(
         state,
         HandleKind::Base,
         super::save_read::push_base_index as PushHostFn,
-        Some(super::fields::base::push_base_newindex as PushHostFn),
+        super::fields::base::push_base_newindex as PushHostFn,
     );
     install_one(
         state,
         HandleKind::Container,
         super::save_read::push_container_index as PushHostFn,
-        Some(super::fields::container::push_container_newindex as PushHostFn),
+        super::fields::container::push_container_newindex as PushHostFn,
     );
     install_one(
         state,
         HandleKind::Slot,
         super::save_read::push_slot_index as PushHostFn,
-        Some(super::fields::slot::push_slot_newindex as PushHostFn),
+        super::fields::slot::push_slot_newindex as PushHostFn,
     );
 }

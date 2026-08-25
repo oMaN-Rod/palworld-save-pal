@@ -139,10 +139,8 @@ pub fn run_command(request: RunRequest<'_>, services: RunServices<'_>) -> RunOut
     }
 
     let (status, summary, result, lifted_counts) = execute(&mut sandbox, &request);
-    let status = match (status, host::flush_dto_cache(&mut ctx)) {
-        (RunStatus::Ok, Err(error)) => RunStatus::Error(error.into_message()),
-        (status, _) => status,
-    };
+    let flush = host::flush_dto_cache(&mut ctx);
+    let status = host::fold_flush_error(&mut ctx, status, flush);
     unsafe { host::clear_context(sandbox.as_ptr()) };
     finish(ctx, status, summary, result, lifted_counts)
 }

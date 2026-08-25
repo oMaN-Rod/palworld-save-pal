@@ -559,7 +559,8 @@ pub const PLAYER_FIELDS: &[FieldSpec<PlayerDto, PlayerSummary>] = &[
          whole set, and moves effigy_possess_num by the number of keys newly collected minus \
          the number un-collected, never below zero -- so it counts unspent effigies, not \
          collected ones, and un-collecting more than are unspent leaves it at zero rather \
-         than going negative.",
+         than going negative. That move is not immediate; effigy_possess_num says when it \
+         becomes readable.",
         read_collected_effigies,
         validate_collected_effigies,
         apply_collected_effigies,
@@ -569,7 +570,10 @@ pub const PLAYER_FIELDS: &[FieldSpec<PlayerDto, PlayerSummary>] = &[
         ApiType::Integer,
         "How many unspent Lifmunk effigies this player holds -- not how many they have \
          collected, since spending one does not un-collect it. Read-only in itself: it moves \
-         when collected_effigies is assigned, and only then.",
+         when collected_effigies is assigned, and only then. It also lags that assignment, \
+         because the count is recomputed where the player is written back rather than where \
+         the list is assigned: a read in between still answers the old number, and a dry run, \
+         which never writes the player back, answers the old number for the whole run.",
         read_effigy_possess_num,
     ),
     ro(
@@ -641,7 +645,7 @@ pub(crate) const SUMMARY_SHORTCUT_FIELDS: &[&str] = &["name", "level"];
 /// Derived from the table rather than listed, so a row added later is gated by
 /// default: opting one out means giving it a `Reader::Summary`, which is also
 /// the thing that makes it free to read.
-pub(crate) fn read_requires_players(field: &str) -> bool {
+pub fn read_requires_players(field: &str) -> bool {
     if SUMMARY_SHORTCUT_FIELDS.contains(&field) {
         return false;
     }
@@ -739,14 +743,7 @@ pub(crate) fn player_set(
     let Some(write) = spec.write.as_ref() else {
         return Err(spec.not_assignable());
     };
-    // An empty Lua table is an empty list and an empty map at once, and the
-    // reader cannot tell them apart; the row's declared type can.
-    let value = match (&spec.ty, value) {
-        (ApiType::Map { .. }, FieldValue::List(items)) if items.is_empty() => {
-            FieldValue::Map(OrderedMap::new())
-        }
-        (_, other) => other,
-    };
+    let value = spec.coerce_empty_table(value);
     let game_data = ctx.game_data;
     let current = dto_cache::player_read(ctx, uid)?;
     spec.validate_write(game_data, current, &value)?;

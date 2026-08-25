@@ -28,4 +28,10 @@ _redirects text eol=lf
 # `lua_meta` emits, which is LF. Under `core.autocrlf=true` a Windows checkout
 # rewrites it to CRLF and `the_meta_file_matches_its_golden` fails on a clean
 # tree, with a diff no regeneration can close.
-psp-plugin/tests/fixtures/psp.lua text eol=lf
+#
+# The bundled plugins are covered too, for a different reason: they are embedded
+# with `include_str!`, and a working tree that has picked up CRLF embeds the
+# carriage returns while a fresh clone does not. `pst.tools/main.lua` is already
+# in that state locally. Nothing checksums those bytes today, so the pin is what
+# keeps the divergence from ever reaching a commit.
+*.lua text eol=lf

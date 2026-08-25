@@ -249,6 +249,23 @@ pub(crate) type GameDataCheck<D> =
     fn(&GameData, &'static str, &D, &FieldValue) -> Result<(), HostError>;
 
 impl<D, S> FieldSpec<D, S> {
+    /// An empty Lua table is an empty list and an empty map at once, and
+    /// `marshal::read_collection` cannot tell them apart -- it reports
+    /// `List(vec![])`. The row's declared type can, so the correction lives
+    /// here beside `validate_write` rather than on whichever handles happen to
+    /// carry a `Map` row today: a `Map` row added to a handle that has none
+    /// would otherwise refuse `{}` with a type error naming neither cause.
+    ///
+    /// Every other value passes through untouched.
+    pub(crate) fn coerce_empty_table(&self, value: FieldValue) -> FieldValue {
+        match (&self.ty, value) {
+            (ApiType::Map { .. }, FieldValue::List(items)) if items.is_empty() => {
+                FieldValue::Map(OrderedMap::new())
+            }
+            (_, other) => other,
+        }
+    }
+
     /// Everything that has to pass before a row's `apply` may run: the row's
     /// game-data precheck, its own `validate`, then its postcheck.
     ///

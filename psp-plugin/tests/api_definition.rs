@@ -2,7 +2,7 @@ mod support;
 
 use std::collections::{BTreeMap, BTreeSet};
 
-use psp_plugin::host::api_def::{api_definition, ApiType};
+use psp_plugin::host::api_def::{api_definition, ApiField, ApiType};
 use psp_plugin::manifest::Capability;
 use psp_plugin::Access;
 use psp_plugin::status::RunStatus;
@@ -1009,4 +1009,228 @@ fn every_rows_second_refusal_also_names_the_row_it_refused() {
         "only {refused_writable} writable rows refused an implausible value; this pass is no \
          longer reaching the range, domain, key-set and catalog refusals it exists for"
     );
+}
+
+/// Renders any value a row can hand back as one comparable string. Both sides
+/// of the acceptance probe go through it, so the literal that was assigned and
+/// the value read back afterwards are rendered by the same code, and nothing
+/// about Lua's own number or table formatting has to be predicted in Rust.
+const RENDER_HELPER: &str = "local function render(v)\n\
+                             \x20 if type(v) ~= 'table' then return tostring(v) end\n\
+                             \x20 local parts = {}\n\
+                             \x20 local n = #v\n\
+                             \x20 for i = 1, n do parts[#parts+1] = tostring(v[i]) end\n\
+                             \x20 local keys = {}\n\
+                             \x20 for k in pairs(v) do\n\
+                             \x20   local positional = type(k) == 'number' and k >= 1 and k <= n and k % 1 == 0\n\
+                             \x20   if not positional then keys[#keys+1] = tostring(k) end\n\
+                             \x20 end\n\
+                             \x20 table.sort(keys)\n\
+                             \x20 for _, k in ipairs(keys) do parts[#parts+1] = k .. '=' .. tostring(v[k]) end\n\
+                             \x20 return '{' .. table.concat(parts, ',') .. '}'\n\
+                             end\n";
+
+/// One accepted assignment: what the row was handed, and what it answered when
+/// read straight back.
+struct AcceptedRow {
+    label: String,
+    assigned: String,
+    read_back: String,
+}
+
+/// Assigns `implausible_literal` to every **writable** row and, where the row
+/// accepts it, reads the row straight back. Read-only rows are left out: they
+/// refuse everything, so there is no acceptance on them to check.
+fn build_acceptance_probe(
+    literal_for: fn(&ApiType) -> Option<&'static str>,
+) -> (Vec<ProbedRow>, Vec<String>, String) {
+    let def = api_definition();
+    let mut probed: Vec<ProbedRow> = Vec::new();
+    let mut unprobeable: Vec<String> = Vec::new();
+    let mut script = String::from("local out = {}\n");
+    script.push_str(RENDER_HELPER);
+
+    for handle in &def.handles {
+        let acquire = acquire_snippet(handle.name).unwrap_or_else(|| {
+            panic!("no fixture acquisition strategy is known for handle type {:?}", handle.name)
+        });
+        let writable: Vec<&ApiField> =
+            handle.fields.iter().filter(|field| field.access == Access::ReadWrite).collect();
+        if writable.is_empty() {
+            continue;
+        }
+        script.push_str("do\n  local H\n  ");
+        script.push_str(acquire);
+        script.push_str(&format!(
+            "\n  if H == nil then error('no {} handle in the fixture') end\n",
+            handle.name
+        ));
+        for field in writable {
+            let Some(literal) = literal_for(&field.ty) else {
+                unprobeable.push(format!("{}.{} ({:?})", handle.name, field.name, field.ty));
+                continue;
+            };
+            probed.push(ProbedRow { handle: handle.name, field: field.name, access: field.access });
+            script.push_str(&format!(
+                "  do\n\
+                 \x20   local want = render({literal})\n\
+                 \x20   local ok, err = pcall(function() H['{n}'] = {literal} end)\n\
+                 \x20   local back = ''\n\
+                 \x20   if ok then back = render(H['{n}']) end\n\
+                 \x20   out[#out+1] = tostring(ok) .. '\\t' .. tostring(err) .. '\\t' .. want .. '\\t' .. back\n\
+                 \x20 end\n",
+                n = field.name
+            ));
+        }
+        script.push_str("end\n");
+    }
+    script.push_str("return table.concat(out, '\\n')");
+    (probed, unprobeable, script)
+}
+
+/// The mirror of `implausible_literal`: the most ordinary value the declared
+/// type admits, so that the rows whose ranges, domains and catalogs refuse an
+/// implausible one still reach their `apply` and get read back. Derived from the
+/// type with no per-row knowledge, exactly as the other two are.
+///
+/// A row that refuses this too is simply not covered by this pass; its refusal
+/// is what the two refusal probes are for.
+fn plausible_literal(ty: &ApiType) -> Option<&'static str> {
+    Some(match ty {
+        ApiType::Integer => "1",
+        ApiType::Number => "1.0",
+        ApiType::String => "'psp'",
+        ApiType::Boolean => "true",
+        ApiType::List(_) | ApiType::Map { .. } | ApiType::Table => "{}",
+        ApiType::Union(members) => {
+            return members.iter().find(|member| !matches!(member, ApiType::Nil)).and_then(plausible_literal)
+        }
+        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Any => return None,
+    })
+}
+
+/// Rows whose read-back is deliberately not the value that was assigned, each
+/// with the reason. Named rather than skipped quietly, and a stale entry is a
+/// failure of its own.
+const NOT_READ_BACK_AS_ASSIGNED: &[(&str, &str)] = &[
+    (
+        "player.status_point_list",
+        "assigning a partial map is a replacement, not a merge: every stat the save already \
+         carries a row for is written to zero rather than removed, since the save has no way to \
+         record a stat with no row. So `{}` reads back as every existing stat at zero, which is \
+         the documented behaviour and is pinned by fields_player.rs's own stat-point tests",
+    ),
+    (
+        "player.ext_status_point_list",
+        "the same replacement rule as status_point_list, over the extended stat set",
+    ),
+];
+
+/// Every writable row's `apply` is `if let FieldValue::X(v) = value { ... }`
+/// with a silent do-nothing else-branch. A row whose declared type, whose
+/// `validate`'s accepted variants and whose `apply`'s matched variant ever
+/// disagreed would report the write as accepted, mark the entry dirty, flush an
+/// unchanged DTO and read back the old value -- with nothing failing anywhere.
+///
+/// The two refusal probes cover refusals in both directions and say nothing
+/// about acceptance. This is the other side: for every row that *accepts* the
+/// type-valid literal, the value read straight back has to be the value handed
+/// in. Derived from the same walk, so a row added later is covered without
+/// anyone remembering to.
+#[test]
+fn every_accepted_assignment_reads_back_as_what_was_assigned() {
+    let mut accepted: Vec<AcceptedRow> = Vec::new();
+    let mut unprobeable: Vec<String> = Vec::new();
+
+    // Two passes over the same walk. The implausible literal reaches the rows
+    // with no domain of their own; the plausible one reaches the rows whose
+    // ranges, key sets and catalogs refuse the first. A row covered by neither
+    // refuses every value this file can derive, and is left to the refusal
+    // probes.
+    for literal_for in [implausible_literal, plausible_literal] {
+        let (probed, mut pass_unprobeable, script) = build_acceptance_probe(literal_for);
+        let mut h = all_capabilities_harness();
+        let (status, value) = h.run(&script);
+        assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+        let value = value.expect("a string");
+
+        let records: Vec<Vec<&str>> =
+            value.split('\n').map(|record| record.split('\t').collect()).collect();
+        assert_eq!(
+            records.len(),
+            probed.len(),
+            "the generated script and this assertion loop drifted: {} probes, {} records",
+            probed.len(),
+            records.len()
+        );
+
+        for (row, record) in probed.iter().zip(&records) {
+            assert_eq!(record.len(), 4, "expected ok<tab>err<tab>want<tab>back, got {record:?}");
+            if record[0] != "true" {
+                continue;
+            }
+            accepted.push(AcceptedRow {
+                label: row.label(),
+                assigned: record[2].to_string(),
+                read_back: record[3].to_string(),
+            });
+        }
+        unprobeable.append(&mut pass_unprobeable);
+    }
+
+    let mut disagreed: Vec<String> = Vec::new();
+    for row in &accepted {
+        if NOT_READ_BACK_AS_ASSIGNED.iter().any(|(label, _)| *label == row.label) {
+            continue;
+        }
+        if same_value(&row.assigned, &row.read_back) {
+            continue;
+        }
+        disagreed.push(format!(
+            "{} was assigned {} and read back {}",
+            row.label, row.assigned, row.read_back
+        ));
+    }
+
+    assert_eq!(
+        disagreed,
+        Vec::<String>::new(),
+        "an accepted assignment that does not read back as itself is a row whose apply did not \
+         apply: the write reported success and changed nothing"
+    );
+    assert_eq!(
+        unprobeable,
+        Vec::<String>::new(),
+        "these writable rows have no type-valid literal this probe can build, so their \
+         acceptance could not be checked -- exclude them deliberately rather than silently"
+    );
+    for (label, reason) in NOT_READ_BACK_AS_ASSIGNED {
+        assert!(
+            accepted.iter().any(|row| row.label == *label),
+            "{label} is excluded from the read-back check ({reason}) but no longer accepts the \
+             probe's literal, so the exclusion is stale"
+        );
+    }
+    // Without a floor this would stay green on a probe that reached nothing. The
+    // count is read-backs, not rows: a row each pass reaches is counted by each,
+    // so it sits above the number of distinct rows covered.
+    assert!(
+        accepted.len() >= 40,
+        "only {} read-backs succeeded across both passes; they are no longer reaching \
+         enough of the apply side to be worth running",
+        accepted.len()
+    );
+}
+
+/// Lua renders `-987654321` as an integer and, once a row has narrowed it to a
+/// float, as `-9.87654321e+08`. Those are one value, so numbers are compared as
+/// numbers and everything else as text.
+fn same_value(assigned: &str, read_back: &str) -> bool {
+    if assigned == read_back {
+        return true;
+    }
+    match (assigned.parse::<f64>(), read_back.parse::<f64>()) {
+        (Ok(a), Ok(b)) => a == b,
+        _ => false,
+    }
 }

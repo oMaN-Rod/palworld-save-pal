@@ -2,6 +2,7 @@ mod support;
 
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
 const CAPS_RAW: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite, Capability::SaveRaw];
@@ -68,6 +69,38 @@ fn a_dry_run_reads_back_the_is_lucky_it_just_set_on_a_plain_pal() {
     assert_eq!(summary.as_deref(), Some("true"), "a dry run must see its own is_lucky write");
 }
 
+/// A real run's flush drains the pal cache, so the read afterwards is answered
+/// from the rebuilt snapshot; a dry run's must not, or the write it is
+/// previewing disappears from the rest of its own preview. The flush point is
+/// reached the moment the run takes another `save.pals()` iterator, which the
+/// assignment itself has made unavoidable by dropping the snapshot.
+#[test]
+fn a_dry_run_still_reads_back_its_own_write_across_a_mid_run_flush() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(&format!(
+        "local target\n\
+         for p in save.pals() do target = p break end\n\
+         local original = tostring(target.level) .. ',' .. tostring(target.talent_hp)\n\
+         target.level = 41\n\
+         target.talent_hp = 77\n\
+         local before = tostring(target.level) .. ',' .. tostring(target.talent_hp)\n\
+         {FORCE_FLUSH}\
+         local after = tostring(target.level) .. ',' .. tostring(target.talent_hp)\n\
+         return original .. '|' .. before .. '|' .. after"
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    let summary = summary.expect("a string");
+    let parts: Vec<&str> = summary.split('|').collect();
+    assert_eq!(parts.len(), 3, "expected original|before|after, got {summary:?}");
+    assert_ne!(parts[0], "41,77", "the fixture pal must not already hold the values assigned");
+    assert_eq!(parts[1], "41,77", "the write must read back before the flush");
+    assert_eq!(
+        parts[2], "41,77",
+        "a dry run must keep reading its own pending write after a flush it never performed"
+    );
+    assert_eq!(harness.dto_flush_count(), 0, "and no dry run may write a pal back to the save");
+}
+
 /// `PAL_FIELDS` is the single source of truth a later task's agreement test
 /// reads: `guild_id`/`base_id` must actually be rows on it, not just
 /// reachable through some other path.
@@ -90,6 +123,22 @@ fn an_out_of_range_value_raises_and_names_the_field() {
         RunStatus::Error(message) => {
             assert!(message.contains("talent_hp"), "must name the field, got {message:?}");
             assert!(message.contains("500"), "must name the value, got {message:?}");
+        }
+        other => panic!("expected an error, got {other:?}"),
+    }
+}
+
+/// `nickname` is declared `string|nil`, so an author reading `psp.lua` sees a
+/// type that admits nil and gets no editor complaint for assigning one. The nil
+/// is a read-side answer only, and the refusal is the only thing that says so.
+#[test]
+fn assigning_nil_to_nickname_raises() {
+    let mut harness = support::harness(CAPS);
+    let (status, _) = harness.run(&first_pal("target.nickname = nil\nreturn 'unreachable'"));
+    match status {
+        RunStatus::Error(message) => {
+            assert!(message.contains("nickname"), "must name the field, got {message:?}");
+            assert!(message.contains("nil"), "must name what it was given, got {message:?}");
         }
         other => panic!("expected an error, got {other:?}"),
     }
@@ -327,11 +376,10 @@ fn setting_is_lucky_false_is_refused_when_the_species_catalog_is_unavailable() {
 }
 
 /// A `Boss_`-cased prefix fails an exact `starts_with("BOSS_")`, so without a
-/// case-insensitive gate this write would neither refuse nor strip --
-/// leaving `is_lucky = false` with the prefix untouched, which
-/// `apply_pal_dto`'s own case-sensitive/insensitive asymmetry then turns
-/// into a doubled `BOSS_Boss_Foxparks` id on flush. This must refuse
-/// instead.
+/// case-insensitive gate this write would neither refuse nor strip, and would
+/// report a demotion it did not perform -- `is_lucky = false` with the marker
+/// prefix still on the id. What that casing means is a guess, so this must
+/// refuse rather than pick a reading.
 #[test]
 fn setting_is_lucky_false_is_refused_for_a_mixed_case_boss_prefix() {
     let mut harness = support::harness(CAPS_RAW);

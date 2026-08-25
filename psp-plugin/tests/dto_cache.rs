@@ -2,6 +2,7 @@ mod support;
 
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
 const CAPS_RAW: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite, Capability::SaveRaw];
@@ -125,6 +126,61 @@ fn writes_to_two_entities_flush_each_once() {
     );
     assert_eq!(status, RunStatus::Ok);
     assert_eq!(harness.dto_flush_count(), 2);
+}
+
+/// `support::FORCE_FLUSH` is what seventeen tests across five files use to put
+/// a flush in the middle of a run, and a helper that quietly stops flushing
+/// leaves every one of them passing without the thing they are named for ever
+/// happening. So it is checked here, in the one condition that breaks the
+/// pal-snapshot form it used to have: the snapshot is built first, and the
+/// write is to a player, whose `note_write` leaves that snapshot standing.
+///
+/// The count is the discriminator, and two is the number that means "flushed
+/// twice". A flush drains the cache entirely, so the second write to the same
+/// player re-reads it, dirties it again, and is written a second time at the
+/// end of the run. Without a mid-run flush there is one cache entry, dirtied
+/// twice and written once, and the count is one.
+#[test]
+fn force_flush_flushes_even_when_the_pal_snapshot_is_intact() {
+    let mut harness = support::harness(CAPS_PLAYERS);
+    let (status, _) = harness.run(&format!(
+        "for p in save.pals() do local _ = p.level break end\n\
+         local target\n\
+         for p in save.players() do target = p break end\n\
+         target.exp = 111\n\
+         {FORCE_FLUSH}\
+         target.exp = 222\n\
+         return 'done'"
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        harness.dto_flush_count(),
+        2,
+        "the player must have been written once by the mid-run flush and once at the end of \
+         the run; one write means FORCE_FLUSH never reached a flush at all"
+    );
+}
+
+/// The other half of the same guarantee: the flush must not be bought by
+/// writing something. A predicate that selects nothing deletes nothing, so this
+/// must leave the save as it found it and invalidate no handle.
+#[test]
+fn force_flush_deletes_nothing_and_invalidates_nothing() {
+    let mut harness = support::harness(CAPS);
+    let before = harness.session().guild_summary_order.len();
+    let (status, summary) = harness.run(&format!(
+        "local target\n\
+         for g in save.guilds() do target = g break end\n\
+         {FORCE_FLUSH}\
+         return tostring(target.name)"
+    ));
+    assert_eq!(status, RunStatus::Ok, "the handle must survive: {summary:?}");
+    assert!(summary.is_some(), "the handle must still answer a field read after the flush");
+    assert_eq!(
+        harness.session().guild_summary_order.len(),
+        before,
+        "a predicate that selects nothing must delete nothing"
+    );
 }
 
 #[test]

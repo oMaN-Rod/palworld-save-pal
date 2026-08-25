@@ -2,6 +2,7 @@ mod support;
 
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
 
@@ -15,12 +16,6 @@ fn error_message(status: RunStatus) -> String {
         other => panic!("expected an error, got {other:?}"),
     }
 }
-
-/// Reading a pal field rebuilds the pal snapshot, and that is what flushes the
-/// DTO cache out to the save -- which also drains the base entry, so the next
-/// read of a base field comes back out of the `BaseCampSaveData` entry rather
-/// than the cache.
-const FORCE_FLUSH: &str = "for p in save.pals() do local _ = p.level break end\n";
 
 fn a_base_id(harness: &support::Harness) -> uuid::Uuid {
     let entries = harness.session().base_camp_map().expect("the corpus fixture has bases");

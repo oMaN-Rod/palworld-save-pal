@@ -163,7 +163,9 @@ pub const BASE_FIELDS: &[FieldSpec<BaseDto, MapEntry>] = &[
          rounded to what the save will actually hold. No other bound is enforced: zero and \
          negative radii are accepted and written as given, because nothing in the game's data \
          or in this app establishes what a legal radius is, and refusing them here would be \
-         inventing a rule rather than reporting one.",
+         inventing a rule rather than reporting one. Assigning nil raises, exactly as it does \
+         for name: the nil is an answer about the save's record, not a value that can be \
+         written.",
         read_area_range,
         validate_area_range,
         apply_area_range,
@@ -274,6 +276,7 @@ pub(crate) fn base_set(
              the assignment would change nothing"
         )));
     }
+    let value = spec.coerce_empty_table(value);
     let game_data = ctx.game_data;
     let current = dto_cache::base_read(ctx, id)?;
     spec.validate_write(game_data, current, &value)?;

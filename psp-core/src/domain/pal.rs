@@ -687,17 +687,19 @@ pub fn apply_pal_dto(
         heal_save_parameter(save_parameter, &dto.character_id, game_data);
     }
 
+    // Case-insensitive, because every other read of this prefix is: testing it
+    // exactly here would see `Boss_Foxparks` as unprefixed and prepend a second
+    // prefix. Taking a prefix off is the caller's job -- it hands us an already
+    // stripped `character_id` -- so there is no removal branch to pair with this.
     let current_id = dto.character_id.clone();
-    let should_be_boss =
-        current_id.to_uppercase().starts_with("BOSS_") || dto.is_lucky.unwrap_or(false);
-    let has_prefix = current_id.starts_with("BOSS_"); // the stored prefix is case-sensitive
-    if should_be_boss && !has_prefix {
+    let has_boss_prefix = current_id
+        .get(..5)
+        .is_some_and(|p| p.eq_ignore_ascii_case("BOSS_"));
+    if !has_boss_prefix && dto.is_lucky.unwrap_or(false) {
         save_parameter.insert(
             "CharacterID",
             props::name_property(&format!("BOSS_{current_id}")),
         );
-    } else if !should_be_boss && has_prefix {
-        save_parameter.insert("CharacterID", props::name_property(&current_id[5..]));
     }
 }
 

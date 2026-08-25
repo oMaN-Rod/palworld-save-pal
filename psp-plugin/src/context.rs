@@ -84,7 +84,8 @@ pub struct RunContext<'a> {
     /// first use. A structural write can reorder or remove entries, so this
     /// must be cleared alongside `pals`/`container` in `note_mutation`.
     pub pal_entry_index: Option<BTreeMap<uuid::Uuid, usize>>,
-    /// How many pals `dto_cache::flush` has actually written back this run.
+    /// How many cached entities -- pals, players, guilds and bases alike --
+    /// `dto_cache::flush` has actually written back this run.
     /// Deliberately not in `counts`: that map is user-facing plugin-run
     /// output, and this is host-internal observability for tests.
     pub dto_flush_count: u64,

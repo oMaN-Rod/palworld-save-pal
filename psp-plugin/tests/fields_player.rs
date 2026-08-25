@@ -2,6 +2,7 @@ mod support;
 
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 
 /// Reading a player row the summary cannot answer needs `players` as well;
 /// the two tests that probe the capability boundary itself grant less.
@@ -404,10 +405,109 @@ const DUMP_HELPER: &str = "local function dump(t)\n\
      return table.concat(out, ',')\n\
    end\n";
 
-/// Reading a pal field rebuilds the pal snapshot, and that is what flushes the
-/// DTO cache out to the save -- which also drains the player entry, so the next
-/// read of a player field comes back out of the save rather than the cache.
-const FORCE_FLUSH: &str = "for p in save.pals() do local _ = p.level break end\n";
+/// A real run's flush drains the player cache, so the reads afterwards come
+/// back out of the summary and the player's own `.sav`; a dry run's must not,
+/// or the write it is previewing disappears from the rest of its own preview.
+/// Both halves of the read side are covered: `name` is one of the two rows the
+/// summary can answer and reaches the cache only through its pending-write
+/// claim, while `exp` is served from the cached `PlayerDto` directly.
+#[test]
+fn a_dry_run_still_reads_back_its_own_write_across_a_mid_run_flush() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(&format!(
+        "local target\n\
+         for p in save.players() do target = p break end\n\
+         local original = tostring(target.name) .. ',' .. tostring(target.exp)\n\
+         target.name = 'Preview Only'\n\
+         target.exp = 4242\n\
+         local before = tostring(target.name) .. ',' .. tostring(target.exp)\n\
+         {FORCE_FLUSH}\
+         local after = tostring(target.name) .. ',' .. tostring(target.exp)\n\
+         return original .. ' :: ' .. before .. ' :: ' .. after"
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    let summary = summary.expect("a string");
+    let parts: Vec<&str> = summary.split(" :: ").collect();
+    assert_eq!(parts.len(), 3, "expected original :: before :: after, got {summary:?}");
+    assert_ne!(
+        parts[0], "Preview Only,4242",
+        "the fixture player must not already hold the values assigned"
+    );
+    assert_eq!(parts[1], "Preview Only,4242", "the write must read back before the flush");
+    assert_eq!(
+        parts[2], "Preview Only,4242",
+        "a dry run must keep reading its own pending write after a flush it never performed"
+    );
+    assert_eq!(harness.dto_flush_count(), 0, "and no dry run may write an entity back to the save");
+}
+
+/// The script both effigy tests run: read the count, add a key to the collected
+/// set, read the count again, cross a flush, read it a third time.
+fn effigy_script() -> String {
+    format!(
+        "local target\n\
+         for p in save.players() do target = p break end\n\
+         local before = target.effigy_possess_num\n\
+         local effigies = target.collected_effigies\n\
+         local before_len = #effigies\n\
+         effigies[#effigies + 1] = 'psp_test_effigy_flag'\n\
+         target.collected_effigies = effigies\n\
+         local cached = target.effigy_possess_num\n\
+         local listed = #target.collected_effigies\n\
+         {FORCE_FLUSH}\
+         local flushed = target.effigy_possess_num\n\
+         return before .. '|' .. cached .. '|' .. flushed .. '|' .. before_len .. '|' .. listed"
+    )
+}
+
+fn effigy_numbers(summary: Option<String>) -> [i64; 5] {
+    let summary = summary.expect("a string");
+    let parts: Vec<&str> = summary.split('|').collect();
+    assert_eq!(parts.len(), 5, "expected five numbers, got {summary:?}");
+    std::array::from_fn(|index| {
+        parts[index].parse().unwrap_or_else(|_| panic!("{:?} is not a number", parts[index]))
+    })
+}
+
+/// `apply_collected_effigies` sets the list and nothing else. The count is
+/// recomputed by the save's own writer, at the flush, so it lags its own
+/// trigger -- the row's doc says so, and this is what makes that claim
+/// checkable rather than merely written down.
+///
+/// Deliberately not fixed by computing the delta into the cached DTO: that
+/// would put the writer's floor-at-zero arithmetic in two places, which is how
+/// the cached answer and the saved one come to disagree.
+#[test]
+fn effigy_possess_num_lags_the_assignment_that_moves_it_until_the_flush() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(&effigy_script());
+    assert_eq!(status, RunStatus::Ok);
+    let [before, cached, flushed, before_len, listed] = effigy_numbers(summary);
+
+    assert_eq!(listed, before_len + 1, "the list itself must read back the key just added");
+    assert_eq!(cached, before, "the count must not move where the list is assigned");
+    assert_eq!(
+        flushed,
+        before + 1,
+        "and must move by the newly collected key once the write has reached the save"
+    );
+}
+
+/// The other half of what the row now promises. A dry run never writes the
+/// player back, so the recomputation never happens and the count reads the old
+/// number for the whole run -- including after a flush point, which under a dry
+/// run flushes nothing.
+#[test]
+fn a_dry_run_never_moves_effigy_possess_num_at_all() {
+    let mut harness = support::harness_dry(CAPS);
+    let (status, summary) = harness.run(&effigy_script());
+    assert_eq!(status, RunStatus::Ok);
+    let [before, cached, flushed, before_len, listed] = effigy_numbers(summary);
+
+    assert_eq!(listed, before_len + 1, "the previewed list must still read back the added key");
+    assert_eq!(cached, before, "a dry run must not move the count");
+    assert_eq!(flushed, before, "and must not move it at a flush point either");
+}
 
 fn parse_dump(dump: &str) -> Vec<(&str, &str)> {
     dump.split(',')

@@ -221,6 +221,83 @@ fn apply_dto_stale_is_boss_false_on_a_real_boss_pal_still_gets_boosted_hp() {
     assert_eq!(reread.hp, reread.max_hp, "update_from sets hp = max_hp");
 }
 
+fn character_id_after_apply(character_id: &str, is_lucky: Option<bool>, times: usize) -> String {
+    let data = game_data();
+    let mut save_parameter = psp_core::ue::Properties::default();
+    save_parameter.insert(
+        "CharacterID",
+        psp_core::ue::Property::Name(character_id.to_string()),
+    );
+    let instance_id = uuid::Uuid::nil();
+    for _ in 0..times {
+        let mut dto = pal::read_save_parameter_dto(&save_parameter, instance_id, false, &data);
+        dto.is_lucky = is_lucky;
+        pal::apply_pal_dto(&mut save_parameter, &dto, false, &data);
+    }
+    pal::read_save_parameter_dto(&save_parameter, instance_id, false, &data).character_id
+}
+
+/// The prefix a save stores is spelled `BOSS_`, but nothing rejects an id that
+/// spells it otherwise, and every other place that reads it -- `is_boss`, the
+/// alpha-scaling `boosted` flag, `character_key` -- matches case-insensitively.
+/// So a mixed-case prefix must be recognized here too. Testing for it exactly
+/// while deciding boss-ness case-insensitively would see `Boss_SheepBall` as
+/// both boss-eligible and unprefixed, and write `BOSS_Boss_SheepBall`.
+#[test]
+fn apply_dto_does_not_add_a_second_prefix_to_a_mixed_case_boss_id() {
+    assert_eq!(
+        character_id_after_apply("Boss_SheepBall", None, 1),
+        "Boss_SheepBall",
+        "a mixed-case prefix is already a prefix; it must not earn a second one"
+    );
+    assert_eq!(
+        character_id_after_apply("Boss_SheepBall", Some(true), 1),
+        "Boss_SheepBall",
+        "is_lucky on an already-prefixed id must not add another prefix either"
+    );
+}
+
+/// The doubling this guards against is permanent once it happens: a second pass
+/// sees the `BOSS_` it just wrote and leaves the corrupted id alone. Applying
+/// twice is what proves the fix is idempotent rather than merely one pass late.
+#[test]
+fn apply_dto_leaves_a_mixed_case_boss_id_alone_however_often_it_is_applied() {
+    assert_eq!(
+        character_id_after_apply("Boss_SheepBall", Some(true), 3),
+        "Boss_SheepBall"
+    );
+}
+
+/// The case that must keep working: a lucky pal with no prefix gets one.
+#[test]
+fn apply_dto_adds_the_prefix_to_a_lucky_pal_that_has_none() {
+    assert_eq!(
+        character_id_after_apply("SheepBall", Some(true), 1),
+        "BOSS_SheepBall"
+    );
+    assert_eq!(
+        character_id_after_apply("SheepBall", Some(false), 1),
+        "SheepBall",
+        "an ordinary pal must not be promoted"
+    );
+}
+
+/// Taking the prefix off is the caller's job: it decides what a `BOSS_` on this
+/// particular id means and supplies an already-stripped `character_id`. So
+/// clearing `is_lucky` alone leaves the id exactly as it was, whatever its
+/// casing, and nothing here should grow a branch that removes one.
+#[test]
+fn apply_dto_never_strips_a_prefix_on_its_own() {
+    assert_eq!(
+        character_id_after_apply("BOSS_SheepBall", Some(false), 1),
+        "BOSS_SheepBall"
+    );
+    assert_eq!(
+        character_id_after_apply("Boss_SheepBall", Some(false), 1),
+        "Boss_SheepBall"
+    );
+}
+
 /// An unrecognized suitability name is filtered out and never written, and an empty
 /// map removes `GotWorkSuitabilityAddRankList` outright rather than leaving an empty
 /// array behind.

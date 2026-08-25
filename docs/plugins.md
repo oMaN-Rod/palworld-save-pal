@@ -268,6 +268,14 @@ value would push authors to ask for raw access for benign reads and users to
 grant it, which is the opposite of what that capability's warnings are for.
 `save.read` plus `players` is the right bar for per-player data of either origin.
 
+A `pal` handle's `stomach` and `sanity` are the same numbers about a different
+subject, and they need only `save.read`. That is not an oversight: `players`
+gates data about a person — the account behind a save entry, what they have
+unlocked, where they have been — and a pal's condition is data about a creature
+in the world, which `save.read` has always covered. `pal.owner_uid` and
+`pal.guild_id` were reachable under `save.read` before any of these fields
+existed, for the same reason.
+
 Reading one of the eighteen without `players` raises and names the capability.
 The summary-backed fields are unaffected and need only `save.read`. `psp.lua`
 says which is which, in each field's own entry.
@@ -662,6 +670,12 @@ end
 
 `fix_missions` in the bundled `pst.reset` plugin uses exactly this shape —
 see below.
+
+Collecting first is worth reaching for even where nothing is invalidated and
+the loop would run correctly: assigning a `pal` field drops the host's pal
+snapshot, and the next step of a live `save.pals()` iterator rebuilds that
+snapshot from every pal in the save, so a walk that assigns as it goes rebuilds
+it once per pal where the two-pass shape rebuilds it not at all.
 
 ## Sandbox limits and terminating statuses
 

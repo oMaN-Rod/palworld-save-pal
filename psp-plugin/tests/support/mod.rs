@@ -12,6 +12,28 @@ use psp_plugin::runtime::{self, RunOutcome, RunRequest, RunServices};
 use psp_plugin::sandbox::{Cancel, Limits, Sandbox};
 use psp_plugin::status::RunStatus;
 
+/// Forces the run's DTO cache to flush, mid-run, from Lua, whatever the run has
+/// done up to that point.
+///
+/// `delete_where` flushes after its predicate pass and before its apply pass,
+/// unconditionally -- it has to, since the ids it is about to delete may have
+/// pending writes sitting in the cache. A predicate that selects nothing still
+/// reaches that flush, and then deletes nothing, bumps no epoch and invalidates
+/// no handle, so this is a flush and nothing else. `save.guilds()` is the
+/// cheapest of the three iterators that carry `delete_where`.
+///
+/// Reading a pal field is *not* a substitute, however it may read: the read
+/// path's only flush lives inside `ensure_pals_snapshot`'s `ctx.pals.is_none()`
+/// branch, so it flushes only when something has already dropped the snapshot.
+/// A pal write drops it; a player, guild, base or slot write does not. That
+/// made the older form a no-op after exactly the writes these tests care most
+/// about. `dto_cache.rs::force_flush_flushes_even_when_the_pal_snapshot_is_intact`
+/// is the guard: it builds the snapshot first, writes a player, and fails if
+/// this constant does not flush.
+///
+/// Requires `save.write` as well as `save.read`, which every caller grants.
+pub const FORCE_FLUSH: &str = "save.guilds():delete_where(function() return false end)\n";
+
 fn repo_root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .parent()
@@ -171,10 +193,8 @@ impl Harness {
                 Ok(()) => sandbox.eval("=harness", source),
                 Err(err) => RunStatus::Error(err.into_message()),
             };
-            let status = match (status, host::flush_dto_cache(&mut ctx)) {
-                (RunStatus::Ok, Err(err)) => RunStatus::Error(err.into_message()),
-                (status, _) => status,
-            };
+            let flush = host::flush_dto_cache(&mut ctx);
+            let status = host::fold_flush_error(&mut ctx, status, flush);
             host::clear_context(sandbox.as_ptr());
             status
         };

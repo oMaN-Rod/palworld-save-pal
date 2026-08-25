@@ -401,6 +401,7 @@ pub(crate) fn slot_set(
     let Some(write) = spec.write.as_ref() else {
         return Err(spec.not_assignable());
     };
+    let value = spec.coerce_empty_table(value);
     let game_data = ctx.game_data;
     let Some(current) = current_slot(ctx, container_id, slot_index) else {
         return Err(HostError::new(format!(

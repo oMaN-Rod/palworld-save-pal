@@ -2,6 +2,7 @@ mod support;
 
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
 
@@ -15,12 +16,6 @@ fn error_message(status: RunStatus) -> String {
         other => panic!("expected an error, got {other:?}"),
     }
 }
-
-/// Reading a pal field rebuilds the pal snapshot, and that is what flushes the
-/// DTO cache out to the save -- which also drains the guild entry, so the next
-/// read of a guild field comes back out of the guild tail rather than the
-/// cache.
-const FORCE_FLUSH: &str = "for p in save.pals() do local _ = p.level break end\n";
 
 /// The guild as `psp-core` reads it back off the save, with no part of the
 /// plugin host between. Everything about how this task caches, counts or

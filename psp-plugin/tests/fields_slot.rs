@@ -3,14 +3,10 @@ mod support;
 use psp_core::dto::container::ItemContainerDto;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
+use support::FORCE_FLUSH;
 use uuid::Uuid;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
-
-/// Reading a pal field rebuilds the pal snapshot, and that is what flushes the
-/// DTO cache out to the save. A slot write does not go through that cache at
-/// all, which is exactly what the tests either side of it are checking.
-const FORCE_FLUSH: &str = "for p in save.pals() do local _ = p.level break end\n";
 
 fn error_message(status: RunStatus) -> String {
     match status {

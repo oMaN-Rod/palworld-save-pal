@@ -264,21 +264,12 @@ fn apply_talent_defense(dto: &mut PalDto, value: FieldValue) {
     }
 }
 
-/// The stored prefix is case-sensitive everywhere in `apply_pal_dto` (see
-/// `boss_prefix_is_a_lucky_marker`'s doc), but the *gate* deciding whether a
-/// demoting write even needs scrutiny must not be: `apply_pal_dto` derives
-/// `should_be_boss` from a case-insensitive `to_uppercase().starts_with`, so
-/// a `Boss_Foxparks`-cased id is already boss-eligible there even though it
-/// fails an exact `starts_with("BOSS_")`. Missing that would let a
-/// mixed-case prefix sail through this table's checks -- since
-/// `boss_prefix_is_a_lucky_marker`'s exact-case `strip_prefix` would then
-/// fail to strip it either -- leaving `is_lucky = false` with the prefix
-/// untouched, which `apply_pal_dto`'s asymmetric case handling on flush
-/// turns into a doubled `BOSS_Boss_Foxparks` id. Widening this gate alone is
-/// enough: it makes `boss_prefix_is_a_lucky_marker`'s exact-case check fail
-/// for a mixed-case prefix, which correctly refuses instead of attempting an
-/// unreliable strip. `apply_pal_dto`'s own asymmetry is pre-existing and out
-/// of scope; this only keeps this table from writing into it.
+/// Case-insensitive, matching every other reader of this prefix: a
+/// `Boss_Foxparks`-cased id counts as prefixed, so a demoting write to
+/// `is_lucky` gets the same scrutiny an exactly-spelled one would.
+/// `boss_prefix_is_a_lucky_marker` then applies its own exact-case
+/// `strip_prefix`, which fails for that casing -- so the write is refused
+/// rather than stripped by guesswork, which is the intended outcome.
 fn character_id_carries_boss_prefix(character_id: &str) -> bool {
     character_id.to_uppercase().starts_with("BOSS_")
 }
@@ -294,10 +285,9 @@ fn character_id_carries_boss_prefix(character_id: &str) -> bool {
 /// not exist in `pals.json` at all. For an ordinary boosted pal
 /// (`BOSS_Foxparks`) `character_key` is `foxparks`, which equals the
 /// stripped, lowercased id -- that equality is the whole test. Deliberately
-/// exact-case (`strip_prefix`, not the case-insensitive gate above): a
-/// mixed-case prefix must fail this so the caller refuses rather than
-/// strips, since `apply_pal_dto` cannot reliably remove anything but an
-/// exact `BOSS_` prefix either.
+/// exact-case (`strip_prefix`, not the case-insensitive gate above): what a
+/// mixed-case prefix means is a guess, and refusing the write says so where
+/// stripping one spelling and not another would not.
 fn boss_prefix_is_a_lucky_marker(dto: &PalDto) -> bool {
     dto.character_id.strip_prefix("BOSS_").is_some_and(|stripped| dto.character_key == stripped.to_lowercase())
 }
@@ -680,7 +670,8 @@ pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
     rw(
         "nickname",
         ApiType::Union(&[ApiType::String, ApiType::Nil]),
-        "The pal's nickname, or nil if it has none.",
+        "The pal's nickname, or nil if it has none. The nil is a read-side answer only: \
+         assigning nil raises rather than clearing the nickname.",
         read_nickname,
         validate_nickname,
         apply_nickname,
@@ -1002,14 +993,7 @@ pub(crate) fn pal_set(ctx: &mut RunContext<'_>, id: Uuid, field: &str, value: Fi
     let Some(write) = spec.write.as_ref() else {
         return Err(spec.not_assignable());
     };
-    // An empty Lua table is an empty list and an empty map at once, and the
-    // reader cannot tell them apart; the row's declared type can.
-    let value = match (&spec.ty, value) {
-        (ApiType::Map { .. }, FieldValue::List(items)) if items.is_empty() => {
-            FieldValue::Map(OrderedMap::new())
-        }
-        (_, other) => other,
-    };
+    let value = spec.coerce_empty_table(value);
     let game_data = ctx.game_data;
     let current = dto_cache::pal_read(ctx, id)?;
     spec.validate_write(game_data, current, &value)?;

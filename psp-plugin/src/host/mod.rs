@@ -14,8 +14,9 @@ use std::ffi::{c_char, c_int, c_void, CString};
 
 use psp_lua_sys::ffi::*;
 
-use crate::context::RunContext;
+use crate::context::{LogLevel, LogLine, RunContext};
 use crate::manifest::Capability;
+use crate::status::RunStatus;
 
 pub const MAX_TABLE_DEPTH: usize = 32;
 pub const MAX_TABLE_NODES: usize = 100_000;
@@ -109,6 +110,88 @@ pub type PushHostFn = unsafe fn(*mut lua_State);
 /// harness) must call it too, or a run's last writes never reach the save.
 pub fn flush_dto_cache(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
     dto_cache::flush(ctx)
+}
+
+/// Folds the end-of-run flush's own result into the run's status.
+///
+/// A failed flush is never only a detail of an already-failed run: `flush`
+/// attempts every entity and reports the first failure, so a run that ends this
+/// way has written some entities and not others, and which half is which is in
+/// that message. Dropping it because the run was already going to fail leaves
+/// nothing to tell a half-written save from a clean refusal.
+///
+/// `Error` is the one status carrying a message to append to. The three
+/// message-less terminating statuses keep their own identity -- a timeout is
+/// how a caller tells "too big a world" from "a bug" -- so the flush failure is
+/// logged for them instead of overwriting what the run ended as.
+pub fn fold_flush_error(
+    ctx: &mut RunContext<'_>,
+    status: RunStatus,
+    flush: Result<usize, HostError>,
+) -> RunStatus {
+    let Err(error) = flush else {
+        return status;
+    };
+    let message = error.into_message();
+    match flush_error_status(&status, &message) {
+        Some(folded) => folded,
+        None => {
+            ctx.log.push(LogLine {
+                level: LogLevel::Error,
+                message: format!("the end-of-run flush failed: {message}"),
+            });
+            status
+        }
+    }
+}
+
+/// The status half of `fold_flush_error`, split out because it is the part with
+/// something to decide and needs no `RunContext` to decide it. `None` means the
+/// run's own terminating status carries no message to append to, so the caller
+/// logs instead of overwriting what the run ended as.
+fn flush_error_status(status: &RunStatus, message: &str) -> Option<RunStatus> {
+    match status {
+        RunStatus::Ok => Some(RunStatus::Error(message.to_string())),
+        RunStatus::Error(existing) => {
+            Some(RunStatus::Error(format!("{existing}; the end-of-run flush then failed: {message}")))
+        }
+        RunStatus::Timeout | RunStatus::Cancelled | RunStatus::MemoryExceeded => None,
+    }
+}
+
+#[cfg(test)]
+mod flush_error_tests {
+    use super::*;
+
+    #[test]
+    fn a_clean_run_takes_the_flush_failure_as_its_own() {
+        assert_eq!(
+            flush_error_status(&RunStatus::Ok, "disk gone"),
+            Some(RunStatus::Error("disk gone".to_string()))
+        );
+    }
+
+    /// The case the old code dropped: an already-failed run still has to report
+    /// which half of the save was written, and that is in the flush's message.
+    #[test]
+    fn an_already_failed_run_keeps_its_own_message_and_gains_the_flushs() {
+        let folded = flush_error_status(&RunStatus::Error("bad level".to_string()), "disk gone");
+        let RunStatus::Error(message) = folded.expect("a status") else {
+            panic!("expected an error status")
+        };
+        assert!(message.contains("bad level"), "the run's own message must survive: {message:?}");
+        assert!(message.contains("disk gone"), "the flush's message must be added: {message:?}");
+    }
+
+    /// A timeout that also failed to flush is still a timeout: the status is how
+    /// a caller tells "too big a world" from "a bug", and overwriting it would
+    /// trade one report for another rather than adding to it.
+    #[test]
+    fn a_message_less_terminating_status_is_left_alone_for_the_caller_to_log() {
+        for status in [RunStatus::Timeout, RunStatus::Cancelled, RunStatus::MemoryExceeded] {
+            assert_eq!(flush_error_status(&status, "disk gone"), None, "{status:?}");
+        }
+    }
 }
 
 /// Its address is the key; the byte's value is never read.
