@@ -188,6 +188,8 @@ define_message_types! {
     ListPluginEntities => "list_plugin_entities",
     GetPlugin => "get_plugin",
     InstallPlugin => "install_plugin",
+    ExportPlugin => "export_plugin",
+    ClonePlugin => "clone_plugin",
     UninstallPlugin => "uninstall_plugin",
     SetPluginEnabled => "set_plugin_enabled",
     RunPluginCommand => "run_plugin_command",
@@ -373,6 +375,8 @@ mod tests {
         "list_plugin_entities",
         "get_plugin",
         "install_plugin",
+        "export_plugin",
+        "clone_plugin",
         "uninstall_plugin",
         "set_plugin_enabled",
         "run_plugin_command",
@@ -431,7 +435,10 @@ mod tests {
     #[test]
     fn open_url_message_round_trips_wire_name() {
         assert_eq!(MessageType::OpenUrl.as_wire(), "open_url");
-        assert_eq!(MessageType::from_wire("open_url"), Some(MessageType::OpenUrl));
+        assert_eq!(
+            MessageType::from_wire("open_url"),
+            Some(MessageType::OpenUrl)
+        );
     }
 
     #[test]

@@ -166,6 +166,8 @@ export enum MessageType {
 	LIST_PLUGINS = 'list_plugins',
 	GET_PLUGIN = 'get_plugin',
 	INSTALL_PLUGIN = 'install_plugin',
+	EXPORT_PLUGIN = 'export_plugin',
+	CLONE_PLUGIN = 'clone_plugin',
 	UNINSTALL_PLUGIN = 'uninstall_plugin',
 	SET_PLUGIN_ENABLED = 'set_plugin_enabled',
 	RUN_PLUGIN_COMMAND = 'run_plugin_command',

@@ -574,6 +574,97 @@ pub async fn handle_install_plugin(
     Ok(())
 }
 
+fn plugin_archive_bytes(row: &psp_db::plugins::PluginRow) -> Result<Vec<u8>, HandlerError> {
+    let manifest = Manifest::parse(&row.manifest)
+        .map_err(|parse_error| HandlerError::Other(format!("plugin {} has an invalid manifest: {parse_error}", row.id)))?;
+    let sources: BTreeMap<String, String> = serde_json::from_str(&row.sources)
+        .map_err(|parse_error| HandlerError::Other(format!("plugin {} has invalid sources: {parse_error}", row.id)))?;
+    if !sources.contains_key(&manifest.entry) {
+        return Err(HandlerError::Other(format!(
+            "plugin {} is missing its entry source {:?}",
+            row.id, manifest.entry
+        )));
+    }
+
+    use std::io::Write;
+    let mut cursor = std::io::Cursor::new(Vec::new());
+    {
+        let mut zip_writer = zip::ZipWriter::new(&mut cursor);
+        let options = zip::write::SimpleFileOptions::default()
+            .compression_method(zip::CompressionMethod::Deflated);
+
+        zip_writer
+            .start_file(MANIFEST_PATH, options)
+            .map_err(|e| HandlerError::Other(format!("failed to open plugin manifest zip entry: {e}")))?;
+        let manifest_json = serde_json::to_string_pretty(&manifest)?;
+        zip_writer
+            .write_all(manifest_json.as_bytes())
+            .map_err(|e| HandlerError::Other(format!("failed to write plugin manifest entry: {e}")))?;
+
+        for (path, source) in &sources {
+            if !is_safe_source_path(path) {
+                return Err(HandlerError::Other(format!(
+                    "plugin {} has an unsafe source path {:?}",
+                    row.id, path
+                )));
+            }
+            zip_writer
+                .start_file(path.as_str(), options)
+                .map_err(|e| HandlerError::Other(format!("failed to open plugin source zip entry: {e}")))?;
+            zip_writer
+                .write_all(source.as_bytes())
+                .map_err(|e| HandlerError::Other(format!("failed to write plugin source entry: {e}")))?;
+        }
+        zip_writer
+            .finish()
+            .map_err(|e| HandlerError::Other(format!("failed to finalize plugin archive: {e}")))?;
+    }
+    Ok(cursor.into_inner())
+}
+
+pub async fn handle_export_plugin(
+    data: PluginIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    use base64::Engine as _;
+
+    let Some(row) = psp_db::plugins::get(&*ctx.app.driver, &data.id).await? else {
+        return install_error(ctx, format!("plugin {} not found", data.id));
+    };
+    let bytes = plugin_archive_bytes(&row)?;
+    let file_name = format!("{}.zip", row.id);
+
+    if ctx.app.config.desktop_mode {
+        let request = crate::desktop_dialogs::FileSaveRequest {
+            filter_name: "Plugin Archives",
+            filter_extensions: &["zip"],
+            suggested_file_name: file_name,
+            initial_directory: None,
+        };
+        let Some(path) = ctx.app.dialogs.save_file(request).await else {
+            ctx.emitter
+                .emit(MessageType::NoFileSelected, &"No file selected");
+            return Ok(());
+        };
+        std::fs::write(&path, &bytes)
+            .map_err(|e| HandlerError::Other(format!("Failed to write plugin archive: {e}")))?;
+        ctx.emitter.emit(
+            MessageType::ExportPlugin,
+            &serde_json::json!({
+                "message": format!("Plugin {} exported successfully", row.id),
+                "file_path": path,
+            }),
+        );
+    } else {
+        let encoded = base64::engine::general_purpose::STANDARD.encode(&bytes);
+        ctx.emitter.emit(
+            MessageType::ExportPlugin,
+            &serde_json::json!([{ "name": file_name, "content": encoded }]),
+        );
+    }
+    Ok(())
+}
+
 pub async fn handle_uninstall_plugin(
     data: PluginIdData,
     ctx: &mut HandlerCtx<'_>,
@@ -589,6 +680,93 @@ pub async fn handle_uninstall_plugin(
         MessageType::UninstallPlugin,
         &serde_json::json!({ "id": data.id }),
     );
+    Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct ClonePluginData {
+    pub source_id: String,
+    pub target_id: String,
+    pub target_name: String,
+}
+
+fn clone_refused(ctx: &HandlerCtx<'_>, message: impl Into<String>) -> Result<(), HandlerError> {
+    ctx.emitter
+        .emit(MessageType::ClonePlugin, &serde_json::json!({ "error": message.into() }));
+    Ok(())
+}
+
+pub async fn handle_clone_plugin(
+    data: ClonePluginData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if psp_db::plugins::get(&*ctx.app.driver, &data.target_id).await?.is_some() {
+        return clone_refused(ctx, format!("plugin {:?} already exists", data.target_id));
+    }
+    let Some(source) = psp_db::plugins::get(&*ctx.app.driver, &data.source_id).await? else {
+        return clone_refused(ctx, format!("plugin {:?} not found", data.source_id));
+    };
+
+    let mut manifest = match Manifest::parse(&source.manifest) {
+        Ok(manifest) => manifest,
+        Err(manifest_error) => {
+            return clone_refused(
+                ctx,
+                format!("plugin {} has an invalid manifest: {manifest_error}", data.source_id),
+            )
+        }
+    };
+    let display_name = if data.target_name.trim().is_empty() {
+        data.target_id.clone()
+    } else {
+        data.target_name.trim().to_string()
+    };
+    manifest.id = data.target_id;
+    manifest.name = display_name;
+    let manifest_json = serde_json::to_string(&manifest)?;
+    let manifest = match Manifest::parse(&manifest_json) {
+        Ok(manifest) => manifest,
+        Err(manifest_error) => return clone_refused(ctx, manifest_error.to_string()),
+    };
+
+    let sources: BTreeMap<String, String> = match serde_json::from_str(&source.sources) {
+        Ok(sources) => sources,
+        Err(parse_error) => {
+            return clone_refused(
+                ctx,
+                format!("plugin {} has invalid sources: {parse_error}", data.source_id),
+            )
+        }
+    };
+    if !sources.contains_key(&manifest.entry) {
+        return clone_refused(
+            ctx,
+            format!(
+                "plugin {} is missing its entry source {:?}",
+                data.source_id, manifest.entry
+            ),
+        );
+    }
+
+    let cloned = psp_db::plugins::upsert(
+        &*ctx.app.driver,
+        &psp_db::plugins::NewPlugin {
+            id: &manifest.id,
+            manifest: &serde_json::to_string(&manifest)?,
+            sources: &serde_json::to_string(&sources)?,
+            granted_capabilities: &serde_json::to_string(&manifest.capabilities)?,
+            bundled: false,
+        },
+    )
+    .await?;
+    if !source.enabled {
+        psp_db::plugins::set_enabled(&*ctx.app.driver, &manifest.id, false).await?;
+    }
+    let row = psp_db::plugins::get(&*ctx.app.driver, &manifest.id)
+        .await?
+        .unwrap_or(cloned);
+
+    ctx.emitter.emit(MessageType::ClonePlugin, &summarize(&row));
     Ok(())
 }
 

@@ -430,6 +430,12 @@ async fn route(
         MessageType::InstallPlugin => {
             handlers::plugins::handle_install_plugin(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::ExportPlugin => {
+            handlers::plugins::handle_export_plugin(serde_json::from_value(data)?, ctx).await
+        }
+        MessageType::ClonePlugin => {
+            handlers::plugins::handle_clone_plugin(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::UninstallPlugin => {
             handlers::plugins::handle_uninstall_plugin(serde_json::from_value(data)?, ctx).await
         }

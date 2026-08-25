@@ -97,6 +97,22 @@ fn zip_bytes(entries: &[(&str, &str)]) -> Vec<u8> {
     cursor.into_inner()
 }
 
+fn unzip_text_entries(bytes: &[u8]) -> std::collections::BTreeMap<String, String> {
+    use std::io::Read;
+    let mut archive = zip::ZipArchive::new(std::io::Cursor::new(bytes)).unwrap();
+    let mut out = std::collections::BTreeMap::new();
+    for index in 0..archive.len() {
+        let mut entry = archive.by_index(index).unwrap();
+        if entry.is_dir() {
+            continue;
+        }
+        let mut text = String::new();
+        entry.read_to_string(&mut text).unwrap();
+        out.insert(entry.name().to_string(), text);
+    }
+    out
+}
+
 #[tokio::test]
 async fn list_plugins_on_a_fresh_database_returns_the_bundled_set() {
     let mut test = TestContext::new(|_| {}).await;
@@ -188,6 +204,47 @@ async fn install_plugin_accepts_a_manifest_requesting_save_raw() {
 }
 
 #[tokio::test]
+async fn export_plugin_in_web_mode_answers_with_a_downloadable_zip_payload() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(
+        &test,
+        "exportable",
+        &["log"],
+        "function run() return 'ok' end",
+        &["log"],
+        false,
+    )
+    .await;
+    psp_db::plugins::set_sources(
+        &*test.app.driver,
+        "exportable",
+        &serde_json::json!({
+            "main.lua": "function run() return 'ok' end",
+            "lib/helper.lua": "return { value = 1 }"
+        })
+        .to_string(),
+    )
+    .await
+    .unwrap();
+
+    handle_export_plugin(PluginIdData { id: "exportable".to_string() }, &mut ctx(&mut test))
+        .await
+        .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "export_plugin");
+    let files = frame["data"].as_array().expect("web export answers with files");
+    assert_eq!(files.len(), 1);
+    assert_eq!(files[0]["name"], "exportable.zip");
+    let encoded = files[0]["content"].as_str().expect("base64 zip bytes");
+    let bytes = base64::engine::general_purpose::STANDARD.decode(encoded).unwrap();
+    let entries = unzip_text_entries(&bytes);
+    assert!(entries.contains_key("manifest.json"));
+    assert_eq!(entries.get("main.lua").map(String::as_str), Some("function run() return 'ok' end"));
+    assert_eq!(entries.get("lib/helper.lua").map(String::as_str), Some("return { value = 1 }"));
+}
+
+#[tokio::test]
 async fn install_plugin_rejects_an_unsupported_api_version_with_both_numbers() {
     let mut test = TestContext::new(|_| {}).await;
     let manifest = manifest_json("future-plugin", &[], "run", 2);
@@ -267,6 +324,74 @@ async fn uninstall_plugin_removes_a_user_plugin() {
     let frame = test.next_frame_json();
     assert_eq!(frame["type"], "uninstall_plugin");
     assert!(psp_db::plugins::get(&*test.app.driver, "removable").await.unwrap().is_none());
+}
+
+#[tokio::test]
+async fn clone_plugin_creates_a_user_copy_with_its_own_id_and_name() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(
+        &test,
+        "source.plugin",
+        &["save.read", "log"],
+        "function run() return 'ok' end",
+        &["save.read", "log"],
+        true,
+    )
+    .await;
+    psp_db::plugins::set_enabled(&*test.app.driver, "source.plugin", false).await.unwrap();
+
+    handle_clone_plugin(
+        ClonePluginData {
+            source_id: "source.plugin".to_string(),
+            target_id: "source.plugin-copy".to_string(),
+            target_name: "Source Plugin Copy".to_string(),
+        },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "clone_plugin");
+    assert_eq!(frame["data"]["id"], "source.plugin-copy");
+    assert_eq!(frame["data"]["name"], "Source Plugin Copy");
+    assert_eq!(frame["data"]["bundled"], false);
+    assert_eq!(frame["data"]["enabled"], false);
+
+    let cloned = psp_db::plugins::get(&*test.app.driver, "source.plugin-copy")
+        .await
+        .unwrap()
+        .expect("cloned plugin exists");
+    let manifest = psp_plugin::manifest::Manifest::parse(&cloned.manifest).unwrap();
+    assert_eq!(manifest.id, "source.plugin-copy");
+    assert_eq!(manifest.name, "Source Plugin Copy");
+}
+
+#[tokio::test]
+async fn clone_plugin_refuses_an_existing_target_id() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(&test, "source.plugin", &["log"], "function run() end", &["log"], false).await;
+    seed_row(&test, "existing.target", &["log"], "function run() end", &["log"], false).await;
+
+    handle_clone_plugin(
+        ClonePluginData {
+            source_id: "source.plugin".to_string(),
+            target_id: "existing.target".to_string(),
+            target_name: "Existing target".to_string(),
+        },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "clone_plugin");
+    assert!(
+        frame["data"]["error"]
+            .as_str()
+            .unwrap_or_default()
+            .contains("already exists")
+    );
 }
 
 #[tokio::test]

@@ -127,12 +127,7 @@
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden">
-	<div class="mx-2 my-2 flex flex-col gap-3">
-		<div class="flex items-center justify-between">
-			<h1 class="text-xl font-semibold">Plugins</h1>
-			<Button size="sm" onclick={newPlugin}>New plugin</Button>
-		</div>
-
+	<div class="mx-2 flex flex-col gap-3">
 		{#if pluginsData.running}
 			<div class="border-surface-700 flex items-center justify-between rounded-sm border p-3">
 				<div class="flex flex-col">
@@ -158,6 +153,7 @@
 
 	<div class="flex flex-1 overflow-hidden">
 		<aside class="border-surface-700 w-72 shrink-0 overflow-y-auto border-r p-3">
+			<Button size="sm" onclick={newPlugin} class="mb-2">New plugin</Button>
 			<FileDropzone
 				name="plugin-install"
 				accept=".lua,.zip"

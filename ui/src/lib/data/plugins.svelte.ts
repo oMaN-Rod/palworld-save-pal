@@ -8,6 +8,16 @@ export interface RunningCommand {
 	startedAt: number;
 }
 
+export interface ExportedPluginFile {
+	name: string;
+	content: string;
+}
+
+export interface ExportedPluginDesktopResult {
+	message: string;
+	file_path: string;
+}
+
 // psp_plugin::sandbox::DEFAULT_WALL_CLOCK_MS -- the server-side limit every run is bounded by.
 export const PLUGIN_WALL_CLOCK_LIMIT_SECONDS = 30;
 
@@ -42,6 +52,24 @@ class Plugins {
 			filename,
 			content
 		});
+		await this.list();
+		return summary;
+	}
+
+	async exportPlugin(id: string): Promise<ExportedPluginFile[] | ExportedPluginDesktopResult> {
+		return sendAndWait<ExportedPluginFile[] | ExportedPluginDesktopResult>(
+			MessageType.EXPORT_PLUGIN,
+			{ id }
+		);
+	}
+
+	async clonePlugin(sourceId: string, targetId: string, targetName: string): Promise<PluginSummary> {
+		const summary = await sendAndWait<PluginSummary & { error?: string }>(MessageType.CLONE_PLUGIN, {
+			source_id: sourceId,
+			target_id: targetId,
+			target_name: targetName
+		});
+		if (summary.error) throw new Error(summary.error);
 		await this.list();
 		return summary;
 	}

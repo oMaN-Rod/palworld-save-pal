@@ -5,6 +5,7 @@
 	import { cn } from '$theme';
 	import { pluginsData } from '$lib/data';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
+	import { slugify } from '$lib/plugins/pluginId';
 	import {
 		availableModes,
 		leaveIsSafe,
@@ -16,6 +17,7 @@
 	import { PluginViewState } from '$lib/plugins/viewState.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Button } from '$components/ui';
+	import { TextInputModal } from '$components';
 	import type { PluginCommand } from '$types';
 	import ApplyBar from '../components/ApplyBar.svelte';
 	import PluginView from '../components/view/PluginView.svelte';
@@ -126,6 +128,72 @@
 		await goto('/plugins');
 	}
 
+	function decodeBase64(content: string): Uint8Array<ArrayBuffer> {
+		const binary = atob(content);
+		const bytes = new Uint8Array(binary.length);
+		for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+		return bytes as Uint8Array<ArrayBuffer>;
+	}
+
+	function browserDownload(name: string, bytes: Uint8Array<ArrayBuffer>): void {
+		const blob = new Blob([bytes], { type: 'application/octet-stream' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = name;
+		a.click();
+		URL.revokeObjectURL(url);
+	}
+
+	async function exportPlugin() {
+		if (!plugin) return;
+		try {
+			const result = await pluginsData.exportPlugin(plugin.id);
+			if (Array.isArray(result)) {
+				for (const file of result) browserDownload(file.name, decodeBase64(file.content));
+				toast.add(`Exported ${plugin.name}.`, 'Plugin', 'success');
+				return;
+			}
+			toast.add(result.message, 'Plugin', 'success');
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Export failed', 'error');
+		}
+	}
+
+	function uniqueCloneId(baseId: string): string {
+		const ids = new Set(pluginsData.plugins.map((item) => item.id));
+		if (!ids.has(baseId)) return baseId;
+		let index = 2;
+		while (ids.has(`${baseId}-${index}`)) index += 1;
+		return `${baseId}-${index}`;
+	}
+
+	async function clonePlugin() {
+		if (!plugin) return;
+		// @ts-expect-error -- TextInputModal's `closeModal` prop is injected by Modal.svelte
+		const targetName = await modal.showModal<string>(TextInputModal, {
+			title: `Clone "${plugin.name}"`,
+			value: `${plugin.name} Copy`,
+			inputLabel: 'Name'
+		});
+		if (!targetName) return;
+
+		const baseId = slugify(targetName);
+		if (!baseId) {
+			toast.add('Plugin name must contain at least one letter or digit.', 'Plugin', 'error');
+			return;
+		}
+
+		const targetId = uniqueCloneId(baseId);
+		try {
+			const cloned = await pluginsData.clonePlugin(plugin.id, targetId, targetName.trim());
+			toast.add(`Cloned ${plugin.name} to ${cloned.name}.`, 'Plugin', 'success');
+			await goto(`/plugins/${encodeURIComponent(cloned.id)}?mode=code`);
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Clone failed', 'error');
+		}
+	}
+
 	let lastRun: { commandId: string } | null = $state(null);
 
 	function runCommand(command: PluginCommand, args: Record<string, unknown>) {
@@ -189,9 +257,13 @@
 					<div class="text-error-500 text-xs">{plugin.error}</div>
 				{/if}
 			</div>
-			{#if !plugin.bundled}
-				<Button variant="ghost" size="sm" onclick={uninstall}>Uninstall</Button>
-			{/if}
+			<div class="flex items-center gap-2">
+				<Button variant="ghost" size="sm" onclick={exportPlugin}>Export</Button>
+				<Button variant="ghost" size="sm" onclick={clonePlugin}>Clone</Button>
+				{#if !plugin.bundled}
+					<Button variant="ghost" size="sm" onclick={uninstall}>Uninstall</Button>
+				{/if}
+			</div>
 		</div>
 
 		<div class="border-surface-700 flex gap-1 border-b" role="tablist" aria-label="Plugin pane">

@@ -22,7 +22,8 @@ Use it when you need the exact behavior of the runtime.
 
 A plugin is a `manifest.json` plus one or more `.lua` source files. It can be
 installed from the UI either as a single bare `.lua` file or as a `.zip`
-containing `manifest.json` and its sources.
+containing `manifest.json` and its sources. Installed plugins can also be
+exported back to `.zip` and cloned into a new editable plugin id.
 
 ### Minimal plugin
 
@@ -1569,7 +1570,9 @@ derives an id from it (lowercased, runs of non-alphanumeric characters
 collapsed to a single `-`, leading/trailing `-` trimmed, and cut to the 64
 characters a manifest id may hold, trimming a `-` the cut lands on), creates
 the plugin with a one-command Lua scaffold and `log` as its only capability,
-and opens its detail pane on the Code tab directly.
+and opens its detail pane on the Code tab directly. The same header actions
+also allow exporting any plugin as a `.zip` and cloning a plugin into a new
+user plugin (including a bundled plugin) with a new id/name.
 
 ### Files, the manifest tab, and canonical storage
 

@@ -44,7 +44,7 @@
 					</span>
 				{/if}
 				<span class="truncate">{plugin.name}</span>
-				<span class="text-surface-500 shrink-0 text-xs">v{plugin.version}</span>
+				<span class="text-surface-500 shrink-0 text-xs grow">v{plugin.version}</span>
 				<span
 					class={cn(
 						'shrink-0 rounded-full px-2 py-0.5 text-xs',
