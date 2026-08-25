@@ -8,6 +8,19 @@
 	import { pluginsData } from '$lib/data';
 	import { MANIFEST_PATH, pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { registerLuaProviders, type ApiSnapshot } from '$lib/plugins/luaProviders';
+	import {
+		lspClient,
+		rangeFromLsp,
+		type DiagnosticSeverity,
+		type LspDiagnostic,
+		type LspRange,
+		type TierStatus
+	} from '$lib/plugins/lspClient';
+	import {
+		toCompletionSuggestions,
+		toMonacoHover,
+		type LspCompletionKind
+	} from '$lib/plugins/lspMonaco';
 	import { getModalState, getToastState, theme, type ThemeName } from '$states';
 	import { persistedState } from 'svelte-persisted-state';
 	import Columns2 from '@lucide/svelte/icons/columns-2';
@@ -37,13 +50,21 @@
 
 	const LIGHT_THEMES = new Set<ThemeName>(['light', 'lamball']);
 	const CHECK_DEBOUNCE_MS = 400;
+	const TIER_PROBE_INTERVAL_MS = 2000;
+	const MAX_TIER_PROBE_BACKOFF_MS = 30000;
 
 	let paletteProbe: HTMLElement | undefined = $state();
 	let editorThemeData = $state<MonacoE.editor.IStandaloneThemeData>();
 	let monaco = $state<typeof MonacoE | undefined>();
 	let editor = $state<MonacoE.editor.IStandaloneCodeEditor | undefined>();
 	let providers: { dispose(): void } | undefined;
+	let lspProviders: { dispose(): void }[] = [];
 	let checkTimer: ReturnType<typeof setTimeout> | undefined;
+	let tierProbeTimer: ReturnType<typeof setTimeout> | undefined;
+	let tierProbeDelayMs = TIER_PROBE_INTERVAL_MS;
+	let destroyed = false;
+	let fullTierLive = $state(false);
+	let lspDiagnosticsByPath = $state<Record<string, LspDiagnostic[]>>({});
 
 	const pluginId = $derived(page.url.searchParams.get('id'));
 	const language = $derived(pluginEditor.activePath === MANIFEST_PATH ? 'json' : 'lua');
@@ -62,6 +83,86 @@
 		);
 	});
 
+	function registerDiagnosticsListener(): void {
+		lspClient.onDiagnostics((uri, diagnostics) => {
+			const path = lspClient.pathFor(uri);
+			if (path === null) return;
+			lspDiagnosticsByPath = { ...lspDiagnosticsByPath, [path]: diagnostics };
+		});
+	}
+
+	function scheduleTierProbe(id: string, delayMs: number): void {
+		if (destroyed) return;
+		if (tierProbeTimer) clearTimeout(tierProbeTimer);
+		tierProbeTimer = setTimeout(() => void probeTier(id), delayMs);
+	}
+
+	function backOffTierProbe(): void {
+		tierProbeDelayMs = Math.min(tierProbeDelayMs * 2, MAX_TIER_PROBE_BACKOFF_MS);
+	}
+
+	/**
+	 * A rejection this deep almost always means the language server process is
+	 * gone, not a routine LSP error reply, so this both downgrades and tries to
+	 * recover: a stale session left open would keep answering to a dead root.
+	 */
+	function onLspRequestFailed(e: unknown): void {
+		if (!fullTierLive || !pluginId) return;
+		fullTierLive = false;
+		lspDiagnosticsByPath = {};
+		console.error('the plugin language server stopped responding', e);
+		lspClient.dispose();
+		scheduleTierProbe(pluginId, tierProbeDelayMs);
+		backOffTierProbe();
+	}
+
+	async function activateFullTier(id: string): Promise<void> {
+		try {
+			const sources = Object.fromEntries(
+				Object.entries(pluginEditor.files).filter(([path]) => path !== MANIFEST_PATH)
+			);
+			await lspClient.open(id, sources);
+			if (destroyed) {
+				lspClient.dispose();
+				return;
+			}
+			registerDiagnosticsListener();
+			fullTierLive = true;
+			tierProbeDelayMs = TIER_PROBE_INTERVAL_MS;
+		} catch (e) {
+			console.error('failed to start the plugin language server', e);
+			scheduleTierProbe(id, tierProbeDelayMs);
+			backOffTierProbe();
+		}
+	}
+
+	async function probeTier(id: string): Promise<void> {
+		if (destroyed) return;
+		let status: TierStatus;
+		try {
+			status = await lspClient.probe();
+		} catch (e) {
+			if (destroyed) return;
+			console.error('failed to probe the editor tier', e);
+			scheduleTierProbe(id, tierProbeDelayMs);
+			backOffTierProbe();
+			return;
+		}
+		if (destroyed) return;
+		if (status.tier === 'full') {
+			await activateFullTier(id);
+		} else if (status.tier === 'baseline') {
+			tierProbeDelayMs = TIER_PROBE_INTERVAL_MS;
+			toast.add(
+				status.reason ?? 'The language server is unavailable; editing continues without it.',
+				'Editing without full language support',
+				'warning'
+			);
+		} else {
+			scheduleTierProbe(id, TIER_PROBE_INTERVAL_MS);
+		}
+	}
+
 	onMount(async () => {
 		splitRatio.current = clampSplitRatio(splitRatio.current);
 		if (!pluginId) {
@@ -74,12 +175,20 @@
 		} catch (e) {
 			toast.add(String(e instanceof Error ? e.message : e), 'Could not open plugin', 'error');
 			await goto('/plugins');
+			return;
 		}
+		if (destroyed) return;
+
+		await probeTier(pluginId);
 	});
 
 	onDestroy(() => {
+		destroyed = true;
 		if (checkTimer) clearTimeout(checkTimer);
+		if (tierProbeTimer) clearTimeout(tierProbeTimer);
 		providers?.dispose();
+		lspProviders.forEach((provider) => provider.dispose());
+		lspClient.dispose();
 		pluginEditor.reset();
 	});
 
@@ -91,11 +200,174 @@
 		}, CHECK_DEBOUNCE_MS);
 	}
 
+	interface LspLocationFrame {
+		uri: string;
+		range: LspRange;
+	}
+
+	interface LspTextEditFrame {
+		range: LspRange;
+		newText: string;
+	}
+
+	function isLspLocation(value: unknown): value is LspLocationFrame {
+		return (
+			typeof value === 'object' &&
+			value !== null &&
+			typeof (value as LspLocationFrame).uri === 'string' &&
+			typeof (value as LspLocationFrame).range === 'object'
+		);
+	}
+
+	function toMonacoLocations(
+		raw: unknown,
+		model: MonacoE.editor.ITextModel
+	): MonacoE.languages.Location[] {
+		const locations = Array.isArray(raw)
+			? raw.filter(isLspLocation)
+			: isLspLocation(raw)
+				? [raw]
+				: [];
+		return locations
+			.filter((location) => lspClient.pathFor(location.uri) === pluginEditor.activePath)
+			.map((location) => ({ uri: model.uri, range: rangeFromLsp(location.range) }));
+	}
+
+	function toWorkspaceEdit(
+		raw: unknown,
+		model: MonacoE.editor.ITextModel
+	): MonacoE.languages.WorkspaceEdit {
+		const changes = (raw as { changes?: Record<string, LspTextEditFrame[]> } | null)?.changes ?? {};
+		const edits: MonacoE.languages.IWorkspaceTextEdit[] = [];
+		for (const [uri, textEdits] of Object.entries(changes)) {
+			if (lspClient.pathFor(uri) !== pluginEditor.activePath) continue;
+			for (const edit of textEdits) {
+				edits.push({
+					resource: model.uri,
+					textEdit: { range: rangeFromLsp(edit.range), text: edit.newText },
+					versionId: undefined
+				});
+			}
+		}
+		return { edits };
+	}
+
 	function onEditorReady(instance: MonacoE.editor.IStandaloneCodeEditor) {
 		if (!monaco) return;
 		providers?.dispose();
-		providers = registerLuaProviders(monaco, () => snapshot);
-		instance.getModel()?.onDidChangeContent(() => onSourceChanged(instance.getValue()));
+		providers = registerLuaProviders(monaco, () => snapshot, () => fullTierLive);
+
+		const completionKind = monaco.languages.CompletionItemKind;
+		const insertAsSnippet = monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet;
+		const monacoCompletionKinds: Record<LspCompletionKind, MonacoE.languages.CompletionItemKind> = {
+			text: completionKind.Text,
+			method: completionKind.Method,
+			function: completionKind.Function,
+			constructor: completionKind.Constructor,
+			field: completionKind.Field,
+			variable: completionKind.Variable,
+			class: completionKind.Class,
+			interface: completionKind.Interface,
+			module: completionKind.Module,
+			property: completionKind.Property,
+			enum: completionKind.Enum,
+			keyword: completionKind.Keyword,
+			snippet: completionKind.Snippet,
+			enumMember: completionKind.EnumMember,
+			constant: completionKind.Constant,
+			struct: completionKind.Struct,
+			event: completionKind.Event,
+			operator: completionKind.Operator,
+			typeParameter: completionKind.TypeParameter
+		};
+
+		lspProviders.forEach((provider) => provider.dispose());
+		lspProviders = [
+			monaco.languages.registerCompletionItemProvider('lua', {
+				triggerCharacters: ['.', ':'],
+				provideCompletionItems(model, position) {
+					if (!fullTierLive) return { suggestions: [] };
+					const word = model.getWordUntilPosition(position);
+					const wordRange = {
+						startLineNumber: position.lineNumber,
+						endLineNumber: position.lineNumber,
+						startColumn: word.startColumn,
+						endColumn: word.endColumn
+					};
+					return lspClient
+						.completion(pluginEditor.activePath, position.lineNumber, position.column)
+						.then((raw) => ({
+							suggestions: toCompletionSuggestions(raw).map((item) => ({
+								label: item.label,
+								kind: monacoCompletionKinds[item.kind],
+								detail: item.detail,
+								documentation: { value: item.documentation },
+								insertText: item.insertText,
+								insertTextRules: item.isSnippet ? insertAsSnippet : undefined,
+								range: item.range ? rangeFromLsp(item.range) : wordRange
+							}))
+						}))
+						.catch((e) => {
+							onLspRequestFailed(e);
+							return { suggestions: [] };
+						});
+				}
+			}),
+			monaco.languages.registerHoverProvider('lua', {
+				provideHover(model, position) {
+					if (!fullTierLive) return null;
+					return lspClient
+						.hover(pluginEditor.activePath, position.lineNumber, position.column)
+						.then((raw) => toMonacoHover(raw))
+						.catch((e) => {
+							onLspRequestFailed(e);
+							return null;
+						});
+				}
+			}),
+			monaco.languages.registerDefinitionProvider('lua', {
+				provideDefinition(model, position) {
+					if (!fullTierLive) return null;
+					return lspClient
+						.definition(pluginEditor.activePath, position.lineNumber, position.column)
+						.then((raw) => toMonacoLocations(raw, model))
+						.catch((e) => {
+							onLspRequestFailed(e);
+							return null;
+						});
+				}
+			}),
+			monaco.languages.registerReferenceProvider('lua', {
+				provideReferences(model, position) {
+					if (!fullTierLive) return [];
+					return lspClient
+						.references(pluginEditor.activePath, position.lineNumber, position.column)
+						.then((raw) => toMonacoLocations(raw, model))
+						.catch((e) => {
+							onLspRequestFailed(e);
+							return [];
+						});
+				}
+			}),
+			monaco.languages.registerRenameProvider('lua', {
+				provideRenameEdits(model, position, newName) {
+					if (!fullTierLive) return { edits: [] };
+					return lspClient
+						.rename(pluginEditor.activePath, position.lineNumber, position.column, newName)
+						.then((raw) => toWorkspaceEdit(raw, model))
+						.catch((e) => {
+							onLspRequestFailed(e);
+							return { edits: [] };
+						});
+				}
+			})
+		];
+
+		instance.getModel()?.onDidChangeContent(() => {
+			const text = instance.getValue();
+			onSourceChanged(text);
+			if (fullTierLive) lspClient.didChange(pluginEditor.activePath, text);
+		});
 	}
 
 	$effect(() => {
@@ -125,6 +397,24 @@
 			});
 		}
 		monaco.editor.setModelMarkers(model, 'psp', markers);
+	});
+
+	$effect(() => {
+		const model = editor?.getModel();
+		if (!monaco || !model) return;
+		const severities: Record<DiagnosticSeverity, MonacoE.MarkerSeverity> = {
+			error: monaco.MarkerSeverity.Error,
+			warning: monaco.MarkerSeverity.Warning,
+			info: monaco.MarkerSeverity.Info,
+			hint: monaco.MarkerSeverity.Hint
+		};
+		const diagnostics = lspDiagnosticsByPath[pluginEditor.activePath] ?? [];
+		const markers: MonacoE.editor.IMarkerData[] = diagnostics.map((diagnostic) => ({
+			severity: severities[diagnostic.severity],
+			message: diagnostic.message,
+			...diagnostic.range
+		}));
+		monaco.editor.setModelMarkers(model, 'psp-lsp', markers);
 	});
 
 	const showApplyFooter = $derived(

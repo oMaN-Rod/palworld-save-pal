@@ -1,5 +1,7 @@
 use std::collections::BTreeMap;
 
+use crate::emitter::Emitter;
+
 pub enum TierStatus {
     Available,
     Starting,
@@ -9,11 +11,19 @@ pub enum TierStatus {
 #[async_trait::async_trait]
 pub trait LspService: Send + Sync {
     fn status(&self) -> TierStatus;
-    async fn ensure_ready(
+    /// Directs the frames a language server sends unprompted — diagnostics
+    /// above all — at the connection that asked for the session. Without it
+    /// they are emitted into a channel nobody reads.
+    fn attach_client(&self, emitter: Emitter);
+    /// Starts a language server for `plugin_id` if one is not already up, and
+    /// returns the `rootUri` of the workspace it indexed. Every document URI
+    /// the client sends afterwards has to sit under that root, or the server
+    /// answers about files it has never seen.
+    async fn open_session(
         &self,
         plugin_id: &str,
         sources: &BTreeMap<String, String>,
-    ) -> Result<(), String>;
+    ) -> Result<String, String>;
     async fn request(
         &self,
         plugin_id: &str,
@@ -35,11 +45,13 @@ impl LspService for NullLspService {
         }
     }
 
-    async fn ensure_ready(
+    fn attach_client(&self, _emitter: Emitter) {}
+
+    async fn open_session(
         &self,
         _plugin_id: &str,
         _sources: &BTreeMap<String, String>,
-    ) -> Result<(), String> {
+    ) -> Result<String, String> {
         Err(NOT_AVAILABLE_REASON.to_string())
     }
 

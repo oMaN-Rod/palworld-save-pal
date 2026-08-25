@@ -180,7 +180,8 @@ export enum MessageType {
 	RUN_PLUGIN_DRAFT = 'run_plugin_draft',
 	GET_EDITOR_TIER = 'get_editor_tier',
 	LSP_REQUEST = 'lsp_request',
-	LSP_NOTIFICATION = 'lsp_notification'
+	LSP_NOTIFICATION = 'lsp_notification',
+	OPEN_LSP_SESSION = 'open_lsp_session'
 }
 
 interface UpdateSaveFileData {

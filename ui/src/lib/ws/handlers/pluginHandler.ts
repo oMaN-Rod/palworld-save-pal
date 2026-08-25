@@ -1,4 +1,5 @@
 import { pluginsData } from '$lib/data';
+import { lspClient, type LspRequestReply } from '$lib/plugins/lspClient';
 import { MessageType, type PluginRunResult, type PluginSummary } from '$types';
 import type { WSMessageHandler } from '../types';
 
@@ -22,4 +23,33 @@ export const listPluginsHandler: WSMessageHandler = {
 	}
 };
 
-export const pluginHandlers = [pluginRunResultHandler, listPluginsHandler];
+export const lspNotificationHandler: WSMessageHandler = {
+	type: MessageType.LSP_NOTIFICATION,
+	async handle(data: { plugin_id?: string; frame?: unknown; error?: string }) {
+		if (data.error) {
+			console.error(`lsp notification failed: ${data.error}`);
+			return;
+		}
+		if (!data.frame) return;
+		if (data.plugin_id !== undefined && data.plugin_id !== lspClient.pluginId) return;
+		lspClient.handleFrame(data.frame);
+	}
+};
+
+/**
+ * `lsp_request` answers are correlated by the `request_id` the client put on
+ * the request, not by message type, so several may be in flight at once.
+ */
+export const lspRequestHandler: WSMessageHandler = {
+	type: MessageType.LSP_REQUEST,
+	async handle(data: LspRequestReply) {
+		lspClient.handleRequestReply(data);
+	}
+};
+
+export const pluginHandlers = [
+	pluginRunResultHandler,
+	listPluginsHandler,
+	lspNotificationHandler,
+	lspRequestHandler
+];

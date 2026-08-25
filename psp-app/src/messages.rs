@@ -202,6 +202,7 @@ define_message_types! {
     GetEditorTier => "get_editor_tier",
     LspRequest => "lsp_request",
     LspNotification => "lsp_notification",
+    OpenLspSession => "open_lsp_session",
 }
 
 #[cfg(test)]
@@ -385,6 +386,7 @@ mod tests {
         "get_editor_tier",
         "lsp_request",
         "lsp_notification",
+        "open_lsp_session",
     ];
 
     #[test]

@@ -200,3 +200,21 @@ describe('signatureFor', () => {
 		expect(signatureFor(readOnly, 'ctx', 'dry_run')).toBeNull();
 	});
 });
+
+describe('tier arbitration', () => {
+	it('offers baseline completions when the full tier is not live', () => {
+		expect(completionItems(readOnly, 'save', false).length).toBeGreaterThan(0);
+	});
+
+	it('offers no baseline completions when the full tier is live', () => {
+		expect(completionItems(readOnly, 'save', true)).toEqual([]);
+	});
+
+	it('offers no baseline hover when the full tier is live', () => {
+		expect(hoverFor(readOnly, null, 'save', true)).toBeNull();
+	});
+
+	it('still offers signature help when the full tier is live', () => {
+		expect(signatureFor(readOnly, 'save', 'players', true)).not.toBeNull();
+	});
+});

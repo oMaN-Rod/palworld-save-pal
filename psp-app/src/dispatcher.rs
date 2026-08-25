@@ -460,12 +460,28 @@ async fn route(
             handlers::plugins::handle_run_plugin_draft(serde_json::from_value(data)?, ctx).await
         }
         MessageType::GetEditorTier => handlers::lsp::handle_get_editor_tier(ctx).await,
-        MessageType::LspRequest => match serde_json::from_value(data) {
-            Ok(payload) => handlers::lsp::handle_lsp_request(payload, ctx).await,
+        MessageType::LspRequest => {
+            // Salvaged before the payload is consumed: a client whose frame
+            // was rejected is still waiting on this id, and an answer without
+            // it matches nothing in its pending map.
+            let request_id = data.get("request_id").cloned().unwrap_or_default();
+            match serde_json::from_value(data) {
+                Ok(payload) => handlers::lsp::handle_lsp_request(payload, ctx).await,
+                Err(error) => {
+                    ctx.emitter.emit(
+                        MessageType::LspRequest,
+                        &serde_json::json!({ "request_id": request_id, "error": error.to_string() }),
+                    );
+                    Ok(())
+                }
+            }
+        }
+        MessageType::OpenLspSession => match serde_json::from_value(data) {
+            Ok(payload) => handlers::lsp::handle_open_lsp_session(payload, ctx).await,
             Err(error) => {
                 ctx.emitter.emit(
-                    MessageType::LspRequest,
-                    &serde_json::json!({ "error": error.to_string() }),
+                    MessageType::OpenLspSession,
+                    &serde_json::json!({ "root_uri": serde_json::Value::Null, "error": error.to_string() }),
                 );
                 Ok(())
             }

@@ -12,7 +12,7 @@ use psp_app::lsp::{LspService, TierStatus};
 
 use crate::emitter::Emitter;
 use crate::services::language_server;
-use crate::services::lsp_process::LspProcess;
+use crate::services::lsp_process::{ClientSlot, LspProcess};
 use crate::services::lsp_workspace::materialise;
 
 const UNSUPPORTED_HOST: &str = "no lua-language-server release is pinned for this platform";
@@ -144,7 +144,11 @@ pub struct ServerLspService {
     /// every in-flight request on every other plugin.
     acquisition: tokio::sync::Mutex<()>,
     tier: Tier,
-    client: Mutex<Option<Emitter>>,
+    /// Shared with every running child's reader task, which reads it on each
+    /// unprompted frame. Replacing its contents redirects a child that is
+    /// already up, which is what a page reload needs: the connection changes
+    /// underneath a language server that nothing shuts down.
+    client: ClientSlot,
 }
 
 impl ServerLspService {
@@ -159,28 +163,7 @@ impl ServerLspService {
             processes: tokio::sync::Mutex::new(HashMap::new()),
             acquisition: tokio::sync::Mutex::new(()),
             tier,
-            client: Mutex::new(None),
-        }
-    }
-
-    /// Directs the frames a language server sends unprompted — diagnostics
-    /// above all — at a connected client. Until one is attached they are
-    /// emitted into a dropped channel and discarded.
-    pub fn attach_client(&self, emitter: Emitter) {
-        *self.client.lock().unwrap() = Some(emitter);
-    }
-
-    fn client_emitter(&self) -> Emitter {
-        match self.client.lock().unwrap().clone() {
-            Some(emitter) => emitter,
-            None => {
-                tracing::warn!(
-                    "no client is attached to the language server; its notifications are dropped"
-                );
-                let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
-                drop(receiver);
-                Emitter::new(sender)
-            }
+            client: Arc::new(Mutex::new(None)),
         }
     }
 
@@ -194,19 +177,15 @@ impl ServerLspService {
                 format!("no language server is running for plugin {plugin_id}; open it first")
             })
     }
-}
 
-#[async_trait::async_trait]
-impl LspService for ServerLspService {
-    fn status(&self) -> TierStatus {
-        self.tier.status()
-    }
-
+    /// Acquires the binary if it is not on disk, materialises the plugin's
+    /// workspace, and leaves an initialised child process in the map.
+    /// Returns the workspace it indexed.
     async fn ensure_ready(
         &self,
         plugin_id: &str,
         sources: &BTreeMap<String, String>,
-    ) -> Result<(), String> {
+    ) -> Result<PathBuf, String> {
         if language_server::release_for_host().is_none() {
             self.tier.set_unavailable(UNSUPPORTED_HOST);
             return Err(UNSUPPORTED_HOST.to_string());
@@ -234,7 +213,7 @@ impl LspService for ServerLspService {
         {
             let mut processes = self.processes.lock().await;
             match processes.get(plugin_id).map(|process| process.is_alive()) {
-                Some(true) => return Ok(()),
+                Some(true) => return Ok(workspace),
                 // Its child exited or its stdout desynchronised. Left in the
                 // map it would answer `contains_key` forever while every
                 // request failed, and only an explicit shutdown would clear it.
@@ -248,7 +227,7 @@ impl LspService for ServerLspService {
         let process = LspProcess::spawn(
             &exe,
             &workspace,
-            self.client_emitter(),
+            Arc::clone(&self.client),
             plugin_id.to_string(),
         )
         .await?;
@@ -262,7 +241,32 @@ impl LspService for ServerLspService {
             .lock()
             .await
             .insert(plugin_id.to_string(), Arc::new(process));
-        Ok(())
+        Ok(workspace)
+    }
+}
+
+#[async_trait::async_trait]
+impl LspService for ServerLspService {
+    fn status(&self) -> TierStatus {
+        self.tier.status()
+    }
+
+    /// Until a client is attached the frames a language server sends
+    /// unprompted are emitted into a dropped channel and discarded.
+    fn attach_client(&self, emitter: Emitter) {
+        *self.client.lock().unwrap() = Some(emitter);
+    }
+
+    /// The uri returned is the same string `initialise` handed the language
+    /// server as its `rootUri`, so a client building document uris under it
+    /// names the very files the server indexed.
+    async fn open_session(
+        &self,
+        plugin_id: &str,
+        sources: &BTreeMap<String, String>,
+    ) -> Result<String, String> {
+        let workspace = self.ensure_ready(plugin_id, sources).await?;
+        file_uri(&workspace)
     }
 
     async fn request(&self, plugin_id: &str, frame: Value) -> Result<Value, String> {
@@ -363,6 +367,8 @@ fn file_uri(path: &Path) -> Result<String, String> {
 mod tests {
     use super::*;
 
+    use crate::services::lsp_process::emit_to_client;
+
     fn service(dir: &Path) -> Arc<ServerLspService> {
         Arc::new(ServerLspService::new(
             dir.join("lua-language-server"),
@@ -386,6 +392,53 @@ mod tests {
             .await
             .expect_err("no process is running");
         assert!(error.contains("user.demo"), "{error}");
+    }
+
+    fn notification_frame(text: &str) -> Value {
+        serde_json::from_str(text).expect("valid json")
+    }
+
+    #[tokio::test]
+    async fn a_running_child_emits_to_whichever_client_attached_most_recently() {
+        let dir = tempfile::tempdir().expect("a temp dir");
+        let service = service(dir.path());
+        // Exactly what `LspProcess::spawn` hands a child's reader task, taken
+        // once and never taken again — a page reload replaces the connection
+        // without shutting the language server down.
+        let held_since_spawn = Arc::clone(&service.client);
+
+        let (first, mut first_frames) = Emitter::test_channel();
+        service.attach_client(first);
+        emit_to_client(
+            &held_since_spawn,
+            psp_app::messages::MessageType::LspNotification,
+            &serde_json::json!({ "plugin_id": "user.demo" }),
+        );
+        let frame = notification_frame(
+            &first_frames
+                .try_recv()
+                .expect("a language server's diagnostics must reach the attached client"),
+        );
+        assert_eq!(frame["type"], "lsp_notification");
+        assert_eq!(frame["data"]["plugin_id"], "user.demo");
+
+        let (second, mut second_frames) = Emitter::test_channel();
+        service.attach_client(second);
+        emit_to_client(
+            &held_since_spawn,
+            psp_app::messages::MessageType::LspNotification,
+            &serde_json::json!({ "plugin_id": "user.demo" }),
+        );
+
+        let frame = notification_frame(&second_frames.try_recv().expect(
+            "a reloaded page is a new connection; the child that is still up must follow it \
+             rather than emit into the socket that went away",
+        ));
+        assert_eq!(frame["data"]["plugin_id"], "user.demo");
+        assert!(
+            first_frames.try_recv().is_err(),
+            "the connection that was replaced must stop receiving frames"
+        );
     }
 
     #[tokio::test]

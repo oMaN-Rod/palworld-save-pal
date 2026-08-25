@@ -499,6 +499,36 @@ gets these host-bumped keys — mutating functions report what they did through
 their own return values instead, so a real run's `counts` reflects only what
 the script itself put there.
 
+## Multi-file plugins and `require`
+
+A plugin's sources are not limited to the single file named by `entry`. Any
+other file in `sources` is pulled in only when something calls `require` for
+it — nothing scans the source map and runs every file it finds.
+
+`require` is implemented by the host itself, not by Lua's own `package`
+library — that library is one of the ones never opened (see the sandbox
+limits below), so there is no `loadlib`, no C searcher, and no filesystem
+`package.path`/`package.cpath` for a script to point anywhere. `load`,
+`loadfile`, and `dofile` stay `nil` as well. `require` is the only way to pull
+in another file, and it resolves exclusively against the plugin's own
+`sources` — there is no way to reach another plugin's files, the filesystem,
+or a Lua library installed on the machine running the host.
+
+A module name maps dots to path segments and always resolves to a `.lua` key:
+`require('lib.util')` looks up the source stored at `lib/util.lua`;
+`require('util')` looks up `util.lua`. The name does not need to be a valid
+Lua identifier, but the key it maps to has to exist, case-sensitively, in the
+plugin's `sources`, or the call errors.
+
+A module runs at most once per command run: the first `require` for a name
+loads and executes that file's top level and caches whatever it returns.
+Every later `require` for the same name in the same run returns the cached
+value without executing the file again. A module whose top level returns
+nothing caches as `true` rather than `nil`, so a later `require` for it does
+not look uncached. A module that ends up requiring itself, directly or
+through a chain of other requires, while its own top level is still running
+is refused with a "circular require" error rather than recursing forever.
+
 ## Worked example: `delete_empty_guilds`
 
 From the bundled `pst.cleanup` plugin (`psp-app/src/bundled/pst.cleanup/main.lua`):
@@ -669,6 +699,19 @@ transport-level error, and creating a plugin answers under `create_plugin`
 the same way. The editor keeps the unsaved buffer and shows the message as a
 toast; nothing is lost and no other tab is disturbed.
 
+### Adding and deleting source files
+
+The editor is not limited to editing files a plugin already has — it can add
+a new `.lua` source and delete an existing one, which is how a multi-file
+plugin using `require` grows past its `entry` file. A new file's path must be
+relative, use forward slashes only, and end in `.lua`; the editor checks this
+as the name is typed, but that check is convenience, not the boundary — the
+same validation runs again on the server for every add, regardless of what
+the client sent, and rejects an absolute path, a `..` or `.` segment, a
+backslash, a drive-letter prefix, and similar attempts to write outside the
+plugin's own source map. `manifest.json` cannot be deleted, and neither can
+whichever file the manifest currently names as `entry`.
+
 ### Syntax and manifest checks
 
 Every edit (debounced) is checked: a `.lua` tab is parsed — not run — with
@@ -682,6 +725,26 @@ imports the identical `dispatch` function `psp-server` uses. The
 `manifest.json` tab is checked by parsing it as a manifest under the plugin's
 real origin (bundled manifests are judged more permissively than user ones),
 using the same `Manifest::parse` the install and save paths use.
+
+### Two tiers: baseline and full
+
+The editor's checks and assists come in two tiers.
+
+The **baseline** tier works on every deployment the editor runs on — desktop,
+a self-hosted Docker deployment, and the web build alike. It is the syntax
+check described above, plus the completion, hover, and signature help
+described next, all generated from the host API definition and filtered by
+the plugin's granted capabilities.
+
+The **full** tier adds `lua-language-server` on top of the baseline, and only
+where that binary can run: desktop and a self-hosted Docker deployment. It
+adds type inference, go-to-definition, find-references, rename, and
+diagnostics beyond what a syntax-only parse can report. It is not available
+in the web build — a language server is a native process a browser has
+nowhere to run — so the web editor never attempts it and shows a visible,
+non-blocking notice explaining why, while continuing to work on the baseline
+tier. See below for how the full tier is acquired and what happens when it
+is not available.
 
 ### Completions, hover and signature help
 
@@ -734,6 +797,28 @@ M.run()`, or `function M:run()` binds no global the runtime's
 command of the same name; the editor will warn "no global function of that
 name" even though the code parses and the name reads correctly to a person.
 
+### The language server: download on first use, and graceful degradation
+
+On desktop and Docker, `lua-language-server` is downloaded on first use
+rather than shipped inside the application — the editor opens on the
+baseline tier immediately and upgrades to the full tier once the binary is
+in place. The download is a pinned release (about 4.5 MB, platform-specific)
+verified against a pinned SHA-256 digest before anything from it is
+installed; a checksum that does not match leaves nothing on disk, rather
+than installing an unverified binary. Once installed for a given version, it
+is reused on every later launch — nothing is re-downloaded unless the pinned
+version changes.
+
+Anything that keeps the full tier from being available or running —
+the platform has no pinned release, the download or verification failed, the
+server has not finished starting yet, or a running server dies mid-session —
+is a **degradation**, not a failure the editor surfaces as broken: the editor
+falls back to the baseline tier automatically, a non-blocking notice explains
+why, and typing, saving, and running a plugin all keep working. The editor
+also keeps checking in the background and upgrades itself back to the full
+tier on its own if the language server later becomes available, with no
+action needed from the plugin author.
+
 ### Running a draft
 
 The run panel below the editor runs the command as currently written,
@@ -784,17 +869,23 @@ the sources the application shipped.
 Measured from `npm run build` in `ui/` (SvelteKit's static adapter, hashes
 will differ on any other build):
 
-- Total built output (`ui_build/`): 354,489,035 bytes (~338.1 MiB), of which
-  the JS/CSS asset tree (`ui_build/_app/`) is 38,982,663 bytes (~37.2 MiB) —
+- Total built output (`ui_build/`): 354,892,569 bytes (~338.5 MiB), of which
+  the JS/CSS asset tree (`ui_build/_app/`) is 38,999,261 bytes (~37.2 MiB) —
   the rest is game-data, wiki content, and other static assets unrelated to
   this feature.
 - The `/plugins/editor` route is its own lazy-loaded chunk: the root entry
   modules reference it only inside a dynamic `import()` behind the router's
   path table, never as a direct import, so it is not fetched until that route
-  is visited. Its own node chunk is 9,429 bytes; a second chunk
-  (6,745 bytes) is shared only between it and the `/plugins` panel (the
+  is visited. Its own node chunk is 19,991 bytes; a second chunk
+  (8,318 bytes) is shared only between it and the `/plugins` panel (the
   editor store, the agreement-warning check, and the shared run-result view).
-  Together, the editor-only code no other route pays for is about 16 KB.
+  Together, the editor-only code no other route pays for is about 27.6 KB.
+  That is up from about 16 KB (9,429 + 6,745 bytes) before multi-file
+  plugins, the tier probe, and the language-server client shipped: the LSP
+  client, the add/delete-file UI, and the baseline/full tier switch together
+  add roughly 12 KB, split as +10,562 bytes on the route's own chunk and
+  +1,573 bytes on the chunk it shares with the `/plugins` panel. Both editor
+  chunks remain a fraction of the ~37.2 MiB JS/CSS asset tree.
 - **`monaco-editor` is not a cost the plugin editor introduces** —
   `ui/src/routes/editor/+page.svelte` uses it through the same shared
   `Monaco` component, and every reference to the `monaco-editor` package

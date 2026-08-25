@@ -176,6 +176,28 @@ fn parse_content_length(header_text: &str) -> Option<usize> {
 
 type PendingRequests = Arc<Mutex<HashMap<i64, oneshot::Sender<Value>>>>;
 
+/// The client a running child emits its unprompted frames to, resolved at
+/// send time rather than captured at spawn. A page reload arrives as a new
+/// connection while the child stays up, so a reader task holding the previous
+/// connection's `Emitter` would emit into a dropped channel — and go on doing
+/// so — for the rest of that child's life.
+pub type ClientSlot = Arc<Mutex<Option<Emitter>>>;
+
+pub fn emit_to_client<T: serde::Serialize>(
+    client: &ClientSlot,
+    message_type: MessageType,
+    data: &T,
+) {
+    let emitter = client.lock().unwrap().clone();
+    match emitter {
+        Some(emitter) => emitter.emit(message_type, data),
+        None => tracing::warn!(
+            message_type = message_type.as_wire(),
+            "no client is attached to the language server; its frame is dropped"
+        ),
+    }
+}
+
 /// Supervises a `lua-language-server` child process: a writer task drains
 /// outgoing frames into its stdin, a reader task decodes frames from its
 /// stdout and either completes a pending `request` or emits the frame to the
@@ -194,11 +216,77 @@ pub struct LspProcess {
     reader_task: JoinHandle<()>,
 }
 
+/// The reader half of a supervised child: decodes frames off `stdout` and
+/// either completes the `request` waiting on a frame's id or hands the frame
+/// to the attached client.
+///
+/// Generic over the stream so a test can drive it over an in-memory pipe.
+/// That is what pins the invariant below: the client is resolved from the
+/// slot on every frame, so a connection that attaches after the reader
+/// started still receives what the child says next.
+async fn read_frames<R: tokio::io::AsyncRead + Unpin>(
+    mut stdout: R,
+    pending: PendingRequests,
+    client: ClientSlot,
+    plugin_id: String,
+    alive: Arc<AtomicBool>,
+) {
+    let mut frame_reader = FrameReader::new();
+    let mut chunk = [0u8; 8192];
+    'read_loop: loop {
+        let read = stdout.read(&mut chunk).await;
+        let Ok(read_len) = read else { break };
+        if read_len == 0 {
+            break;
+        }
+        frame_reader.push(&chunk[..read_len]);
+        loop {
+            match frame_reader.next_outcome() {
+                FrameOutcome::Frame(frame) => {
+                    let id = frame.get("id").and_then(Value::as_i64);
+                    let waiter = id.and_then(|id| pending.lock().unwrap().remove(&id));
+                    match waiter {
+                        Some(sender) => {
+                            let _ = sender.send(frame);
+                        }
+                        None => emit_to_client(
+                            &client,
+                            MessageType::LspNotification,
+                            &serde_json::json!({
+                                "plugin_id": plugin_id,
+                                "frame": frame,
+                            }),
+                        ),
+                    }
+                }
+                // A dropped frame does not mean the stream ran dry —
+                // frames queued up behind it must still be pulled.
+                FrameOutcome::Dropped => continue,
+                FrameOutcome::Incomplete => break,
+                FrameOutcome::Fatal(reason) => {
+                    tracing::error!(
+                        %plugin_id,
+                        %reason,
+                        "lua-language-server stdout desynchronised; stopping reader"
+                    );
+                    break 'read_loop;
+                }
+            }
+        }
+    }
+    // The child died, closed stdout, or desynchronised the stream: dropping
+    // every pending sender fails the matching `request` awaits immediately
+    // instead of hanging them, and clearing `alive` fails every future
+    // `request` immediately too.
+    pending.lock().unwrap().clear();
+    alive.store(false, Ordering::SeqCst);
+}
+
 impl LspProcess {
     pub async fn spawn(
         exe: &Path,
         root: &Path,
-        emitter: Emitter,
+        client: ClientSlot,
         plugin_id: String,
     ) -> Result<Self, String> {
         let mut child = Command::new(exe)
@@ -215,7 +303,7 @@ impl LspProcess {
             .stdin
             .take()
             .ok_or_else(|| "child stdin was not piped".to_string())?;
-        let mut stdout = child
+        let stdout = child
             .stdout
             .take()
             .ok_or_else(|| "child stdout was not piped".to_string())?;
@@ -232,60 +320,13 @@ impl LspProcess {
             }
         });
 
-        let reader_pending = pending.clone();
-        let reader_alive = alive.clone();
-        let reader_plugin_id = plugin_id.clone();
-        let reader_task = tokio::spawn(async move {
-            let mut frame_reader = FrameReader::new();
-            let mut chunk = [0u8; 8192];
-            'read_loop: loop {
-                let read = stdout.read(&mut chunk).await;
-                let Ok(read_len) = read else { break };
-                if read_len == 0 {
-                    break;
-                }
-                frame_reader.push(&chunk[..read_len]);
-                loop {
-                    match frame_reader.next_outcome() {
-                        FrameOutcome::Frame(frame) => {
-                            let id = frame.get("id").and_then(Value::as_i64);
-                            let waiter =
-                                id.and_then(|id| reader_pending.lock().unwrap().remove(&id));
-                            match waiter {
-                                Some(sender) => {
-                                    let _ = sender.send(frame);
-                                }
-                                None => emitter.emit(
-                                    MessageType::LspNotification,
-                                    &serde_json::json!({
-                                        "plugin_id": reader_plugin_id,
-                                        "frame": frame,
-                                    }),
-                                ),
-                            }
-                        }
-                        // A dropped frame does not mean the stream ran dry —
-                        // frames queued up behind it must still be pulled.
-                        FrameOutcome::Dropped => continue,
-                        FrameOutcome::Incomplete => break,
-                        FrameOutcome::Fatal(reason) => {
-                            tracing::error!(
-                                plugin_id = %reader_plugin_id,
-                                %reason,
-                                "lua-language-server stdout desynchronised; stopping reader"
-                            );
-                            break 'read_loop;
-                        }
-                    }
-                }
-            }
-            // The child died, closed stdout, or desynchronised the stream:
-            // dropping every pending sender fails the matching `request`
-            // awaits immediately instead of hanging them, and clearing
-            // `alive` fails every future `request` immediately too.
-            reader_pending.lock().unwrap().clear();
-            reader_alive.store(false, Ordering::SeqCst);
-        });
+        let reader_task = tokio::spawn(read_frames(
+            stdout,
+            pending.clone(),
+            client,
+            plugin_id.clone(),
+            alive.clone(),
+        ));
 
         Ok(Self {
             outgoing: outgoing_tx,
@@ -377,8 +418,8 @@ impl LspProcess {
 impl Drop for LspProcess {
     /// Covers a caller that drops `LspProcess` on an error path instead of
     /// awaiting `shutdown` — without this, `kill_on_drop` alone still kills
-    /// the child, but the reader/writer tasks (and the reader's `Emitter`
-    /// clone) would otherwise leak for as long as the runtime is up.
+    /// the child, but the reader/writer tasks (and the reader's handle on the
+    /// client slot) would otherwise leak for as long as the runtime is up.
     fn drop(&mut self) {
         self.writer_task.abort();
         self.reader_task.abort();
@@ -419,12 +460,78 @@ mod tests {
         }
     }
 
+    async fn next_frame_text(frames: &mut tokio::sync::mpsc::UnboundedReceiver<String>) -> String {
+        tokio::time::timeout(Duration::from_secs(5), frames.recv())
+            .await
+            .expect("the reader task must emit within the timeout")
+            .expect("the emitter is still open")
+    }
+
+    /// Drives the real reader task over an in-memory pipe, because the thing
+    /// under test is *when* it resolves the client, and that is only
+    /// observable across two frames with a reattach between them.
+    #[tokio::test]
+    async fn a_frame_goes_to_the_client_attached_when_it_arrives() {
+        let (mut child_stdout_writer, child_stdout) = tokio::io::duplex(4096);
+        let client: ClientSlot = Arc::new(Mutex::new(None));
+        let pending: PendingRequests = Arc::new(Mutex::new(HashMap::new()));
+
+        let (first, mut first_frames) = Emitter::test_channel();
+        *client.lock().unwrap() = Some(first);
+
+        let reader = tokio::spawn(read_frames(
+            child_stdout,
+            pending,
+            Arc::clone(&client),
+            "user.demo".to_string(),
+            Arc::new(AtomicBool::new(true)),
+        ));
+
+        child_stdout_writer
+            .write_all(&encode_frame(&serde_json::json!({
+                "method": "textDocument/publishDiagnostics",
+            })))
+            .await
+            .expect("write the first frame");
+        let text = next_frame_text(&mut first_frames).await;
+        assert!(
+            text.contains("publishDiagnostics"),
+            "the attached client must receive the first frame: {text}"
+        );
+
+        // The page reloaded: same child, still reading, but a new connection.
+        let (second, mut second_frames) = Emitter::test_channel();
+        *client.lock().unwrap() = Some(second);
+
+        child_stdout_writer
+            .write_all(&encode_frame(&serde_json::json!({
+                "method": "window/logMessage",
+            })))
+            .await
+            .expect("write the second frame");
+
+        let text = next_frame_text(&mut second_frames).await;
+        assert!(
+            text.contains("logMessage"),
+            "a reader that resolved its client once, when it started, would still be \
+             emitting into the connection that went away: {text}"
+        );
+        assert!(
+            first_frames.try_recv().is_err(),
+            "the replaced connection must receive nothing after the reattach"
+        );
+
+        drop(child_stdout_writer);
+        let _ = reader.await;
+    }
+
     #[tokio::test]
     async fn is_alive_goes_false_once_the_child_is_gone() {
         let program = a_program_that_exits_immediately();
         let dir = tempfile::tempdir().expect("a temp dir");
         let (emitter, _frames) = Emitter::test_channel();
-        let process = LspProcess::spawn(&program, dir.path(), emitter, "user.demo".to_string())
+        let client: ClientSlot = Arc::new(Mutex::new(Some(emitter)));
+        let process = LspProcess::spawn(&program, dir.path(), client, "user.demo".to_string())
             .await
             .expect("spawn");
 

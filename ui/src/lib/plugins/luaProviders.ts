@@ -44,7 +44,12 @@ function visibleGlobal(snapshot: ApiSnapshot, name: string): ApiGlobal | undefin
 	);
 }
 
-export function completionItems(snapshot: ApiSnapshot, owner: string | null): CompletionEntry[] {
+export function completionItems(
+	snapshot: ApiSnapshot,
+	owner: string | null,
+	fullTierLive = false
+): CompletionEntry[] {
+	if (fullTierLive) return [];
 	if (owner === null) {
 		return visibleGlobals(snapshot.definition, snapshot.granted).map((global) => ({
 			label: global.name,
@@ -76,7 +81,13 @@ export function completionItems(snapshot: ApiSnapshot, owner: string | null): Co
 	return [...functions, ...fields];
 }
 
-export function hoverFor(snapshot: ApiSnapshot, owner: string | null, word: string): string | null {
+export function hoverFor(
+	snapshot: ApiSnapshot,
+	owner: string | null,
+	word: string,
+	fullTierLive = false
+): string | null {
+	if (fullTierLive) return null;
 	if (owner === null) {
 		const global = visibleGlobal(snapshot, word);
 		if (!global) return null;
@@ -103,8 +114,10 @@ function visibleFunction(
 export function signatureFor(
 	snapshot: ApiSnapshot,
 	owner: string,
-	name: string
+	name: string,
+	fullTierLive = false
 ): SignatureInfo | null {
+	void fullTierLive;
 	const found = visibleFunction(snapshot, owner, name);
 	if (!found) return null;
 	return {
@@ -119,7 +132,8 @@ export function signatureFor(
 
 export function registerLuaProviders(
 	monaco: typeof import('monaco-editor'),
-	getSnapshot: () => ApiSnapshot
+	getSnapshot: () => ApiSnapshot,
+	isFullTierLive: () => boolean
 ): { dispose(): void } {
 	const kinds: Record<CompletionKind, import('monaco-editor').languages.CompletionItemKind> = {
 		module: monaco.languages.CompletionItemKind.Module,
@@ -144,7 +158,11 @@ export function registerLuaProviders(
 				endColumn: word.endColumn
 			};
 			return {
-				suggestions: completionItems(getSnapshot(), ownerBeforeCursor(line)).map((entry) => ({
+				suggestions: completionItems(
+					getSnapshot(),
+					ownerBeforeCursor(line),
+					isFullTierLive()
+				).map((entry) => ({
 					label: entry.label,
 					kind: kinds[entry.kind],
 					detail: entry.detail,
@@ -167,7 +185,7 @@ export function registerLuaProviders(
 				endColumn: word.startColumn
 			});
 			const owner = ownerBeforeCursor(`${line}x`);
-			const text = hoverFor(getSnapshot(), owner, word.word);
+			const text = hoverFor(getSnapshot(), owner, word.word, isFullTierLive());
 			return text ? { contents: [{ value: text }] } : null;
 		}
 	});
@@ -183,7 +201,7 @@ export function registerLuaProviders(
 			});
 			const call = /([A-Za-z_]\w*)\.([A-Za-z_]\w*)\s*\([^()]*$/.exec(line);
 			if (!call) return null;
-			const info = signatureFor(getSnapshot(), call[1], call[2]);
+			const info = signatureFor(getSnapshot(), call[1], call[2], isFullTierLive());
 			if (!info) return null;
 			return {
 				value: {
