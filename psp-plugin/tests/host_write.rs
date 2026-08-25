@@ -582,7 +582,7 @@ fn every_write_is_absent_without_the_write_capability() {
         "local names = {}
          for p in save.players() do
            names[#names+1] = type(p.delete)
-           names[#names+1] = type(p.set_level)
+           names[#names+1] = tostring(pcall(function() p.level = 4 end))
            break
          end
          names[#names+1] = type(save.players().delete_where)
@@ -593,17 +593,20 @@ fn every_write_is_absent_without_the_write_capability() {
          return table.concat(names, ',')",
     );
     assert_eq!(status, RunStatus::Ok);
-    assert_eq!(value.as_deref(), Some("nil,nil,nil,nil"));
+    assert_eq!(value.as_deref(), Some("nil,false,nil,nil"));
 }
 
-/// `p.set_level`/`p.delete` are bound closures with no `self` argument; `delete_where` needs a real self at argument 1 for its own argument-count check to pass before `vals[i]` reaches its `lua_isfunction` check.
+/// `p.delete` is a bound closure with no `self` argument; `delete_where` needs a real self at argument 1 for its own argument-count check to pass before `vals[i]` reaches its `lua_isfunction` check. A field assignment takes no argument list at all, so the hostile value goes on the right-hand side instead.
 #[test]
 fn every_write_function_survives_hostile_arguments() {
     let mut h = write_harness();
     let (status, value) = h.run(
         "local vals = { nil, true, 0, -1, 1/0, 0/0, '', 'x', {}, print }
          for p in save.players() do
-           for i = 1, 10 do pcall(p.set_level, vals[i]) pcall(p.delete, vals[i]) end
+           for i = 1, 10 do
+             pcall(function() p.level = vals[i] end)
+             pcall(p.delete, vals[i])
+           end
            break
          end
          for i = 1, 10 do pcall(save.guilds().delete_where, save.guilds(), vals[i]) end

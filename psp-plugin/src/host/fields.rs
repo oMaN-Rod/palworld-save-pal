@@ -1,7 +1,6 @@
 use std::ffi::c_int;
 
 use psp_core::dto::ordered_map::OrderedMap;
-use psp_core::dto::summary::PalSummary;
 use psp_lua_sys::ffi::*;
 use serde::Serialize;
 
@@ -9,6 +8,7 @@ use super::api_def::ApiType;
 use super::{marshal, HostError};
 
 pub mod pal;
+pub mod player;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -29,6 +29,51 @@ pub(crate) enum FieldValue {
     Bool(bool),
     List(Vec<String>),
     Map(OrderedMap<String, i64>),
+}
+
+pub(crate) fn expect_int(name: &str, value: &FieldValue) -> Result<i64, HostError> {
+    match value {
+        FieldValue::Int(v) => Ok(*v),
+        other => {
+            Err(HostError::new(format!("expected an integer for {name}, got {}", field_value_type_name(other))))
+        }
+    }
+}
+
+pub(crate) fn expect_bool(name: &str, value: &FieldValue) -> Result<bool, HostError> {
+    match value {
+        FieldValue::Bool(v) => Ok(*v),
+        other => {
+            Err(HostError::new(format!("expected a boolean for {name}, got {}", field_value_type_name(other))))
+        }
+    }
+}
+
+pub(crate) fn expect_str<'v>(name: &str, value: &'v FieldValue) -> Result<&'v str, HostError> {
+    match value {
+        FieldValue::Str(v) => Ok(v.as_str()),
+        other => {
+            Err(HostError::new(format!("expected a string for {name}, got {}", field_value_type_name(other))))
+        }
+    }
+}
+
+pub(crate) fn expect_list<'v>(name: &str, value: &'v FieldValue) -> Result<&'v [String], HostError> {
+    match value {
+        FieldValue::List(items) => Ok(items.as_slice()),
+        other => Err(HostError::new(format!(
+            "expected a list of strings for {name}, got {}",
+            field_value_type_name(other)
+        ))),
+    }
+}
+
+pub(crate) fn ranged_int(name: &str, value: &FieldValue, lo: i64, hi: i64) -> Result<i64, HostError> {
+    let v = expect_int(name, value)?;
+    if !(lo..=hi).contains(&v) {
+        return Err(HostError::new(format!("{name} must be between {lo} and {hi}, got {v}")));
+    }
+    Ok(v)
 }
 
 pub(crate) fn field_value_type_name(value: &FieldValue) -> &'static str {
@@ -118,31 +163,34 @@ pub(crate) unsafe fn read_field_value(
 /// DTO, but a couple (`pal.guild_id`, `pal.base_id`) are computed
 /// positionally by `pal_summaries` and have no corresponding DTO field at
 /// all -- `Summary` lets a row source from the cached summary instead of
-/// forcing every row through the same shape.
-pub(crate) enum Reader<T> {
-    Dto(fn(&T) -> FieldValue),
-    Summary(fn(&PalSummary) -> FieldValue),
+/// forcing every row through the same shape. `player`'s summary rows have a
+/// second reason to take it: building a `PlayerDto` at all costs a lazy load
+/// of that player's own `.sav` from disk, which a row the summary already
+/// answers must not pay.
+pub(crate) enum Reader<D, S> {
+    Dto(fn(&D) -> FieldValue),
+    Summary(fn(&S) -> FieldValue),
 }
 
 /// One row of a handle's field table: name, declared type and access for the
 /// editor/agreement surface, plus the reader/validator/mutator that make it
-/// actually work. Every handle currently has its own concrete DTO, so this is
-/// not generic over one -- `pal.rs` is the only implementation today.
-pub struct FieldSpec<T> {
+/// actually work. `D` is the handle's full DTO, `S` the summary its cheap
+/// reads come from; the two vary together per handle.
+pub struct FieldSpec<D, S> {
     pub name: &'static str,
     pub ty: ApiType,
     pub access: Access,
     pub doc: &'static str,
-    pub(crate) read: Reader<T>,
+    pub(crate) read: Reader<D, S>,
     /// `None` for every `Access::ReadOnly` row. `validate` inspects the
     /// current DTO (some rows, like `pal.is_lucky`, need to see what else is
     /// already set before deciding whether the write is safe) and the
     /// incoming value; `apply` is the pure mutation, only ever called after
     /// `validate` returns `Ok`.
-    pub(crate) write: Option<FieldWrite<T>>,
+    pub(crate) write: Option<FieldWrite<D>>,
 }
 
-pub(crate) struct FieldWrite<T> {
-    pub(crate) validate: fn(&T, &FieldValue) -> Result<(), HostError>,
-    pub(crate) apply: fn(&mut T, FieldValue),
+pub(crate) struct FieldWrite<D> {
+    pub(crate) validate: fn(&D, &FieldValue) -> Result<(), HostError>,
+    pub(crate) apply: fn(&mut D, FieldValue),
 }

@@ -5,6 +5,13 @@ use psp_plugin::status::RunStatus;
 
 const CAPS: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite];
 const CAPS_RAW: &[Capability] = &[Capability::SaveRead, Capability::SaveWrite, Capability::SaveRaw];
+/// Reading a player row the summary cannot answer needs `players` as well.
+const CAPS_PLAYERS: &[Capability] =
+    &[Capability::SaveRead, Capability::SaveWrite, Capability::Players];
+/// `raw` reaches a player's own `.sav` only through the `player:<uid>` target,
+/// which is gated on `players` on top of `save.raw`.
+const CAPS_RAW_PLAYERS: &[Capability] =
+    &[Capability::SaveRead, Capability::SaveWrite, Capability::SaveRaw, Capability::Players];
 
 const RUNTIME_MANIFEST: &str = r#"{
   "id": "test.dto_cache", "api_version": 1, "name": "Test", "version": "1.0.0",
@@ -445,5 +452,105 @@ fn a_raw_write_between_two_cached_writes_on_the_same_pal_is_not_reverted() {
         after, new_exp,
         "the raw write between the two level assignments must survive, not revert to \
          before_exp={before_exp}; got exp={after}"
+    );
+}
+
+/// A player write reaches two different files, and a test that reads back
+/// through a handle proves neither: `player_index` serves a written field from
+/// the cache, and the two summary-backed rows are patched into
+/// `session.player_summaries` by hand at flush time. Both would keep answering
+/// correctly with `update_players` never called at all.
+///
+/// So this reads in a *second run*, whose `RunContext` -- and therefore whose
+/// DTO cache -- is empty, forcing `get_player_details` to rebuild the DTO from
+/// the save itself. `exp` comes back out of the character-map entry in
+/// `Level.sav` and `technology_points` out of the player's own `.sav`, so one
+/// assertion covers each half of what `apply_player_dto` writes.
+#[test]
+fn an_end_of_run_flush_persists_a_player_write_for_a_later_run() {
+    let mut harness = support::harness(CAPS_PLAYERS);
+    let (status, before) = harness.run(
+        "for p in save.players() do
+           return tostring(p.exp) .. '|' .. tostring(p.technology_points)
+         end
+         return 'none'",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    let before = before.expect("a string");
+    assert_ne!(
+        before, "13579|2468",
+        "the fixture must not already hold the values this test writes, or it proves nothing"
+    );
+
+    let (status, _) = harness.run(
+        "for p in save.players() do
+           p.exp = 13579
+           p.technology_points = 2468
+           break
+         end
+         return 'done'",
+    );
+    assert_eq!(status, RunStatus::Ok);
+
+    let (status, after) = harness.run(
+        "for p in save.players() do
+           return tostring(p.exp) .. '|' .. tostring(p.technology_points)
+         end
+         return 'none'",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        after.as_deref(),
+        Some("13579|2468"),
+        "the first run's write must have reached the save, not just the cache and the summary"
+    );
+}
+
+/// The same-run half of the statement above, and it reads the save tree
+/// directly rather than through any handle: `raw`'s `player:<uid>` target
+/// resolves to `session.loaded_players[uid].sav`, which is the tree
+/// `update_players` writes into and the tree that is serialized back to disk.
+/// `raw.get` flushes the cache first, so a pending write must already be there.
+#[test]
+fn raw_get_flushes_a_pending_player_write_before_reading_it() {
+    let mut harness = support::harness(CAPS_RAW_PLAYERS);
+    let uid = harness.a_player_uid();
+    let (status, summary) = harness.run(&format!(
+        "local target
+         for p in save.players() do if tostring(p.uid) == '{uid}' then target = p break end end
+         assert(target ~= nil, 'the fixture player must be reachable')
+         local before = raw.get('player:{uid}', 'SaveData.TechnologyPoint')
+         target.technology_points = before + 4321
+         return tostring(raw.get('player:{uid}', 'SaveData.TechnologyPoint')) .. '|' .. tostring(before)"
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    let summary = summary.expect("a string");
+    let mut parts = summary.split('|');
+    let after: i64 = parts.next().expect("an after value").parse().expect("an integer");
+    let before: i64 = parts.next().expect("a before value").parse().expect("an integer");
+    assert_eq!(
+        after,
+        before + 4321,
+        "raw.get must see the flushed write in the player's own save tree, not the pre-write {before}"
+    );
+}
+
+#[test]
+fn many_writes_to_one_player_cost_one_flush() {
+    let mut harness = support::harness(CAPS);
+    let (status, summary) = harness.run(
+        "local target
+         for p in save.players() do target = p break end
+         target.level = 12
+         target.exp = 34
+         target.technology_points = 56
+         return 'done'",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(summary.as_deref(), Some("done"));
+    assert_eq!(
+        harness.dto_flush_count(),
+        1,
+        "three field writes on one player must flush that player exactly once"
     );
 }

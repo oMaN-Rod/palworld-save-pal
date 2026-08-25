@@ -12,7 +12,7 @@ use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
 use super::api_def::{ApiField, ApiFunction, ApiHandle, ApiParam, ApiType};
-use super::fields::{pal as pal_fields, push_field_value, Access, FieldValue};
+use super::fields::{pal as pal_fields, player as player_fields, push_field_value, Access, FieldValue};
 use super::handle::{handle_kind_for, invalidated_handle_error, push_handle, read_handle, Handle, HandleKind};
 use super::marshal::{arg_string, check_args, push_str};
 use super::{free_message, register_table, trampoline, with_context, HostError, HostFn, PushHostFn};
@@ -63,33 +63,34 @@ pub(crate) fn ensure_pals_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostE
     Ok(())
 }
 
-fn iso_string(value: Option<IsoDateTime>) -> Option<String> {
+pub(crate) fn iso_string(value: Option<IsoDateTime>) -> Option<String> {
     let value = value?;
     serde_json::to_value(value).ok()?.as_str().map(str::to_string)
 }
 
-fn player_field(ctx: &RunContext<'_>, uid: Uuid, field: &str) -> FieldValue {
-    let Some(summary) = ctx.session.player_summaries.get(&uid) else {
-        return FieldValue::Nil;
-    };
-    match field {
-        "uid" => FieldValue::Str(summary.uid.to_string()),
+/// The two player rows the summary can answer but the field table cannot read
+/// from it: `name` and `level` are assignable, so their rows have to read the
+/// cached `PlayerDto` for a value written this run -- which means the cheap,
+/// no-load path for an *unwritten* one has to live outside the table. Every
+/// other summary-backed row is a `Reader::Summary` row and is answered by
+/// `player_get` directly, with no duplicate of its reader here.
+///
+/// `None` means "not answered here", which is a different thing from answering
+/// `nil`, and the distinction is load-bearing: `level` is legitimately `nil`
+/// for a player the save records no `Level` byte for. Reporting that as "not
+/// answered" would fall through to the row's `PlayerDto` reader, which pays a
+/// lazy `.sav` load and then hands back `build_player_dto`'s own default --
+/// turning a shipped `nil` into a `1`.
+fn player_field(ctx: &RunContext<'_>, uid: Uuid, field: &str) -> Option<FieldValue> {
+    if !player_fields::SUMMARY_SHORTCUT_FIELDS.contains(&field) {
+        return None;
+    }
+    let summary = ctx.session.player_summaries.get(&uid)?;
+    Some(match field {
         "name" => FieldValue::Str(summary.nickname.clone()),
         "level" => summary.level.map(FieldValue::Int).unwrap_or(FieldValue::Nil),
-        "guild_id" => summary
-            .guild_id
-            .map(|g| FieldValue::Str(g.to_string()))
-            .unwrap_or(FieldValue::Nil),
-        "pal_count" => FieldValue::Int(summary.pal_count),
-        "last_online" => iso_string(summary.last_online_time)
-            .map(FieldValue::Str)
-            .unwrap_or(FieldValue::Nil),
-        "last_online_ts" => summary
-            .last_online_time
-            .map(|t| FieldValue::Int(t.0.and_utc().timestamp()))
-            .unwrap_or(FieldValue::Nil),
-        _ => FieldValue::Nil,
-    }
+        _ => return None,
+    })
 }
 
 fn guild_field(ctx: &RunContext<'_>, id: Uuid, field: &str) -> FieldValue {
@@ -190,20 +191,31 @@ fn player_index(state: *mut lua_State) -> Result<c_int, HostError> {
             push_player_pals_factory(state, handle.id);
             return Ok(1);
         }
-        if field == "delete" || field == "set_level" {
-            let is_delete = field == "delete";
-            if write_granted(state)? {
-                drop(field);
-                if is_delete {
-                    super::save_write::push_player_delete(state, handle.id);
-                } else {
-                    super::save_write::push_player_set_level(state, handle.id);
-                }
-                return Ok(1);
-            }
+        if field == "delete" && write_granted(state)? {
+            drop(field);
+            super::save_write::push_player_delete(state, handle.id);
+            return Ok(1);
         }
 
-        let value = with_context(state, |ctx| Ok(player_field(ctx, handle.id, &field)))?;
+        let value = with_context(state, |ctx| {
+            // A field this run has already written but not yet flushed must be
+            // served from the DTO cache directly. The pal side does this
+            // because its summary only reflects a flush; the player side has
+            // the stronger reason that its summary is session state nothing
+            // recomputes at all, so a stale row would stay stale.
+            if super::dto_cache::player_field_was_written(ctx, handle.id, &field) {
+                return player_fields::player_get(ctx, handle.id, &field);
+            }
+            // The summary answers the two rows it has a shortcut for without
+            // touching the disk, including when its answer is nil. Every other
+            // name falls through to the field table, which knows the rest --
+            // and answers nil, loading nothing, for a name that is not a field
+            // at all.
+            match player_field(ctx, handle.id, &field) {
+                Some(value) => Ok(value),
+                None => player_fields::player_get(ctx, handle.id, &field),
+            }
+        })?;
         drop(field);
         push_field_value(state, value)?;
         Ok(1)
@@ -387,54 +399,7 @@ pub fn handle_types() -> &'static [ApiHandle] {
                 ApiHandle {
                     name: "player",
                     capability: Some(Capability::SaveRead),
-                    fields: &[
-                        ApiField {
-                            name: "uid",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The player's UUID, as a string.",
-                        },
-                        ApiField {
-                            name: "name",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The player's nickname.",
-                        },
-                        ApiField {
-                            name: "level",
-                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The player's level, or nil if the save has no level recorded for this \
-                                  player.",
-                        },
-                        ApiField {
-                            name: "guild_id",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The UUID, as a string, of the guild this player belongs to, or nil if the \
-                                  player is in no guild.",
-                        },
-                        ApiField {
-                            name: "pal_count",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "How many pals this player owns.",
-                        },
-                        ApiField {
-                            name: "last_online",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "An ISO-8601 timestamp of when the player was last online, or nil if the \
-                                  save records none.",
-                        },
-                        ApiField {
-                            name: "last_online_ts",
-                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The Unix timestamp, in seconds, of when the player was last online, or nil \
-                                  if the save records none.",
-                        },
-                    ],
+                    fields: player_fields::api_fields(),
                     methods: &[
                         ApiFunction {
                             name: "pals",
@@ -451,16 +416,6 @@ pub fn handle_types() -> &'static [ApiHandle] {
                                   player owns. Refuses (returns false, changes nothing) if the player is \
                                   their guild's admin. A true result is a structural write and invalidates \
                                   every live handle and iterator across all scopes, including this one.",
-                            capability: Some(Capability::SaveWrite),
-                        },
-                        ApiFunction {
-                            name: "set_level",
-                            params: &[ApiParam { name: "level", ty: ApiType::Integer, optional: false }],
-                            returns: ApiType::Nil,
-                            doc: "Sets the player's level; must be between 1 and 255 inclusive, or this \
-                                  raises. A non-structural write: this handle and every other live handle \
-                                  and iterator stay valid, but any container previously read through this \
-                                  run is forgotten and will be re-read on next access.",
                             capability: Some(Capability::SaveWrite),
                         },
                     ],

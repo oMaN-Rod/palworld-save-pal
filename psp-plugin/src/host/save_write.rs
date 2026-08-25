@@ -2,7 +2,6 @@ use std::ffi::{c_int, c_void};
 
 use psp_core::domain::{containers, guild, map_object, pal, player};
 use psp_core::dto::container::{ItemContainerDto, ItemContainerSlotDto};
-use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::error::CoreError;
 use psp_core::progress::{null_progress, ProgressSink};
 use psp_lua_sys::ffi::*;
@@ -156,45 +155,6 @@ fn player_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {
 
 pub(crate) unsafe fn push_player_delete(state: *mut lua_State, player_id: Uuid) {
     push_bound(state, player_delete_body, &player_id.to_string());
-}
-
-fn player_set_level_body(state: *mut lua_State) -> Result<c_int, HostError> {
-    unsafe {
-        check_args(state, 1, "player.set_level")?;
-        let player_id = bound_uuid(state, "player id")?;
-        let level = arg_integer(state, 1, "level")?;
-        if !(1..=255).contains(&level) {
-            return Err(HostError::new(format!("player level must be between 1 and 255, got {level}")));
-        }
-
-        with_context(state, |ctx| {
-            let fallback = null_progress();
-            let progress: &ProgressSink = ctx.progress.unwrap_or(&fallback);
-            let mut dto = player::get_player_details(ctx.session, ctx.game_data, player_id, progress)
-                .map_err(core_error)?
-                .ok_or_else(|| HostError::new(format!("player {player_id} not found")))?;
-
-            if ctx.dry_run {
-                ctx.bump("player.set_level", 1);
-                return Ok(());
-            }
-
-            dto.level = level;
-            let mut modified = OrderedMap::new();
-            modified.insert(player_id, dto);
-            player::update_players(ctx.session, ctx.game_data, &modified, progress).map_err(core_error)?;
-            if let Some(summary) = ctx.session.player_summaries.get_mut(&player_id) {
-                summary.level = Some(level);
-            }
-            ctx.note_write();
-            Ok(())
-        })?;
-        Ok(0)
-    }
-}
-
-pub(crate) unsafe fn push_player_set_level(state: *mut lua_State, player_id: Uuid) {
-    push_bound(state, player_set_level_body, &player_id.to_string());
 }
 
 fn pal_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {

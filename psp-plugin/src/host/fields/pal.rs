@@ -9,7 +9,10 @@ use psp_core::gamedata::GameData;
 use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
-use super::{field_value_type_name, read_field_value, Access, FieldSpec, FieldValue, FieldWrite, Reader};
+use super::{
+    expect_bool, expect_int, expect_list, expect_str, field_value_type_name, ranged_int, read_field_value,
+    Access, FieldSpec, FieldValue, FieldWrite, Reader,
+};
 use crate::context::RunContext;
 use crate::host::api_def::{ApiField, ApiType};
 use crate::host::handle::{read_handle, HandleKind};
@@ -18,41 +21,6 @@ use crate::host::save_read::ensure_pals_snapshot;
 use crate::host::{dto_cache, with_context, HostError};
 use crate::host_fn;
 use crate::manifest::Capability;
-
-fn expect_int(name: &str, value: &FieldValue) -> Result<i64, HostError> {
-    match value {
-        FieldValue::Int(v) => Ok(*v),
-        other => {
-            Err(HostError::new(format!("expected an integer for {name}, got {}", field_value_type_name(other))))
-        }
-    }
-}
-
-fn expect_bool(name: &str, value: &FieldValue) -> Result<bool, HostError> {
-    match value {
-        FieldValue::Bool(v) => Ok(*v),
-        other => {
-            Err(HostError::new(format!("expected a boolean for {name}, got {}", field_value_type_name(other))))
-        }
-    }
-}
-
-fn expect_str<'v>(name: &str, value: &'v FieldValue) -> Result<&'v str, HostError> {
-    match value {
-        FieldValue::Str(v) => Ok(v.as_str()),
-        other => {
-            Err(HostError::new(format!("expected a string for {name}, got {}", field_value_type_name(other))))
-        }
-    }
-}
-
-fn ranged_int(name: &str, value: &FieldValue, lo: i64, hi: i64) -> Result<i64, HostError> {
-    let v = expect_int(name, value)?;
-    if !(lo..=hi).contains(&v) {
-        return Err(HostError::new(format!("{name} must be between {lo} and {hi}, got {v}")));
-    }
-    Ok(v)
-}
 
 fn gender_str(gender: PalGender) -> &'static str {
     match gender {
@@ -436,16 +404,6 @@ fn apply_friendship_point(dto: &mut PalDto, value: FieldValue) {
     }
 }
 
-fn expect_list<'v>(name: &str, value: &'v FieldValue) -> Result<&'v [String], HostError> {
-    match value {
-        FieldValue::List(items) => Ok(items.as_slice()),
-        other => Err(HostError::new(format!(
-            "expected a list of strings for {name}, got {}",
-            field_value_type_name(other)
-        ))),
-    }
-}
-
 fn validate_learned_skills(_dto: &PalDto, value: &FieldValue) -> Result<(), HostError> {
     expect_list("learned_skills", value).map(|_| ())
 }
@@ -585,7 +543,7 @@ const fn rw(
     read: fn(&PalDto) -> FieldValue,
     validate: fn(&PalDto, &FieldValue) -> Result<(), HostError>,
     apply: fn(&mut PalDto, FieldValue),
-) -> FieldSpec<PalDto> {
+) -> FieldSpec<PalDto, PalSummary> {
     FieldSpec {
         name,
         ty,
@@ -596,7 +554,12 @@ const fn rw(
     }
 }
 
-const fn ro(name: &'static str, ty: ApiType, doc: &'static str, read: fn(&PalDto) -> FieldValue) -> FieldSpec<PalDto> {
+const fn ro(
+    name: &'static str,
+    ty: ApiType,
+    doc: &'static str,
+    read: fn(&PalDto) -> FieldValue,
+) -> FieldSpec<PalDto, PalSummary> {
     FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Dto(read), write: None }
 }
 
@@ -607,7 +570,7 @@ const fn ro_summary(
     ty: ApiType,
     doc: &'static str,
     read: fn(&PalSummary) -> FieldValue,
-) -> FieldSpec<PalDto> {
+) -> FieldSpec<PalDto, PalSummary> {
     FieldSpec { name, ty, access: Access::ReadOnly, doc, read: Reader::Summary(read), write: None }
 }
 
@@ -616,7 +579,7 @@ const fn ro_summary(
 /// the full `PalDto`, or only on the summary, and the four collections.
 /// `filtered_nickname` is the one `PalDto` field still missing, and stays
 /// missing -- it never applies to a `Level.sav` pal.
-pub const PAL_FIELDS: &[FieldSpec<PalDto>] = &[
+pub const PAL_FIELDS: &[FieldSpec<PalDto, PalSummary>] = &[
     ro("instance_id", ApiType::String, "This pal's unique id, as a string. Read-only.", read_instance_id),
     ro(
         "character_id",
@@ -902,7 +865,7 @@ pub(crate) fn api_fields() -> &'static [ApiField] {
         .as_slice()
 }
 
-fn find(field: &str) -> Option<&'static FieldSpec<PalDto>> {
+fn find(field: &str) -> Option<&'static FieldSpec<PalDto, PalSummary>> {
     PAL_FIELDS.iter().find(|spec| spec.name == field)
 }
 

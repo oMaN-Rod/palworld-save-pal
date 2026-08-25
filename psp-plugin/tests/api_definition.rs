@@ -26,6 +26,12 @@ fn read_only_harness() -> support::Harness {
     support::harness(&[Capability::SaveRead, Capability::GameData])
 }
 
+/// Every player row that is not answered from the session's own summary is
+/// gated on `players`, so probing the whole table needs it granted.
+fn player_read_harness() -> support::Harness {
+    support::harness(&[Capability::SaveRead, Capability::GameData, Capability::Players])
+}
+
 /// Catches a function registered outside the shared consts: `save_write` extends `save_read`'s table and `install_ctx` sets fields directly, so neither goes through `register_table`.
 #[test]
 fn every_global_lua_can_see_is_described_and_every_described_global_exists() {
@@ -269,6 +275,94 @@ fn every_described_pal_field_exists_in_the_table() {
             field.name
         );
     }
+}
+
+#[test]
+fn every_player_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "player")
+        .expect("the player handle must be described");
+
+    for spec in psp_plugin::PLAYER_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_player_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "player").expect("player");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::PLAYER_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+/// The player counterpart of the pal read-back test below, and load-bearing for
+/// the same reason: `player_index` answers seven rows from a hand-written
+/// `player_field` arm that short-circuits before the table is consulted, so a
+/// row's declared type and the value Lua actually receives can disagree with
+/// nothing objecting. It also proves every row the summary does not carry is
+/// reachable at all -- each of those costs a lazy load of the player's own
+/// `.sav`, and a row that failed to load would read nil here.
+#[test]
+fn every_player_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for p in save.players() do target = p break end\n\
+         assert(target ~= nil, 'the fixture must hold a player')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::PLAYER_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = player_read_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::PLAYER_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "player.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(psp_plugin::PLAYER_FIELDS.len(), seen.len(), "every row must be probed exactly once");
+    assert_eq!(
+        read_as_nil,
+        Vec::<&str>::new(),
+        "every row has a value on the fixture player, including the nilable ones -- a row \
+         reading nil here needs explaining, not exempting"
+    );
 }
 
 /// The two agreement tests above are structural once the description is

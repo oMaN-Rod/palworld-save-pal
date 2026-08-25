@@ -3,16 +3,33 @@
 ---Requires capability: save.read.
 ---
 ---@class player
----@field uid string The player's UUID, as a string.
----@field name string The player's nickname.
----@field level integer|nil The player's level, or nil if the save has no level recorded for this player.
----@field guild_id string|nil The UUID, as a string, of the guild this player belongs to, or nil if the player is in no guild.
----@field pal_count integer How many pals this player owns.
----@field last_online string|nil An ISO-8601 timestamp of when the player was last online, or nil if the save records none.
----@field last_online_ts integer|nil The Unix timestamp, in seconds, of when the player was last online, or nil if the save records none.
+---@field uid string The player's UUID, as a string. Read-only.
+---@field name string The player's nickname. Neither an empty string nor the save's own placeholder for a nameless player can be assigned: both would read back as something other than what was written.
+---@field level integer|nil The player's level, 1-255, or nil for a player the save records no level for at all. Assigning nil raises rather than clearing it: the save has no way to record a player with no level, so only an integer can be written.
+---@field guild_id string|nil The UUID, as a string, of the guild this player belongs to, or nil if the player is in no guild. Read-only.
+---@field pal_count integer How many pals this player owns. Read-only: it is derived by counting, not stored.
+---@field last_online string|nil An ISO-8601 timestamp of when the player was last online, or nil if the save records none. Read-only.
+---@field last_online_ts integer|nil The Unix timestamp, in seconds, of when the player was last online, or nil if the save records none. Read-only.
+---@field instance_id string|nil The id of this player's own character entry, or nil if the save records none. Read-only. Reading it requires the players capability.
+---@field exp integer The player's experience points. Reading it requires the players capability.
+---@field hp integer The player's current HP. Unlike a pal's, this is written through as given rather than recalculated when the save is written. Reading it requires the players capability.
+---@field stomach number The player's current fullness. Stored as a 32-bit float, so a value outside that range is refused rather than written as an infinity. Reading it requires the players capability.
+---@field sanity number The player's current sanity. Stored as a 32-bit float, so a value outside that range is refused rather than written as an infinity. Reading it requires the players capability.
+---@field technology_points integer Unspent technology points. Reading it requires the players capability.
+---@field boss_technology_points integer Unspent ancient technology points. Reading it requires the players capability.
+---@field technologies string[] The technologies this player has unlocked, as recipe names. Assigning replaces the whole list, and any string is accepted: nothing checks a name against the game's own technology list, here or on the way into the save. The read returns a fresh table each time, so changing that table changes nothing. Reading it requires the players capability.
+---@field completed_missions string[] The quests this player has completed, as quest names. Assigning replaces the whole list, and any string is accepted: nothing checks a name against the game's own quest list, here or on the way into the save. Reading it requires the players capability.
+---@field current_missions string[] The quests this player has in progress, as quest names. Assigning replaces the whole list; each name becomes a fresh quest entry with no progress recorded against it. Reading it requires the players capability.
+---@field unlocked_fast_travel_points string[] The fast-travel points this player has unlocked, as flag keys. Assigning replaces the whole set. Reading it requires the players capability.
+---@field collected_effigies string[] The Lifmunk effigies this player has collected, as flag keys. Assigning replaces the whole set, and moves effigy_possess_num by the number of keys newly collected minus the number un-collected, never below zero -- so it counts unspent effigies, not collected ones, and un-collecting more than are unspent leaves it at zero rather than going negative. Reading it requires the players capability.
+---@field effigy_possess_num integer How many unspent Lifmunk effigies this player holds -- not how many they have collected, since spending one does not un-collect it. Read-only in itself: it moves when collected_effigies is assigned, and only then. Reading it requires the players capability.
+---@field defeated_bosses string[] The bosses this player has defeated, as flag keys, with the tower bosses merged in. Read-only. Reading it requires the players capability.
+---@field status_point_list table<string, integer> Points spent on each base stat, keyed by max_hp, max_sp, attack, weight, capture_rate, work_speed, hunger_reduction, swim_speed, food_decay_reduction, jump_power, glider_speed, climb_speed, status_ailment_resist, exp_bonus, rainbow_passive_rate, move_speed, sphere_homing and stamina_reduction. Assigning replaces the whole map: a key you leave out is set to zero, which is the only way the save can express "no points spent" -- there is no way to remove a stat once the save carries one. A key the save has never carried and that you leave out (or assign zero) stays absent and reads back nil. A key this map does not know is refused rather than silently dropped. Reading it requires the players capability.
+---@field ext_status_point_list table<string, integer> Points spent on each extended stat, keyed by max_hp, max_sp, attack, weight and work_speed -- the base-stat keys minus capture_rate, which the extended list has no entry for. Assigning replaces the whole map on the same terms as status_point_list, and a key it does not know is refused. Reading it requires the players capability.
+---@field pal_box_id string|nil The id of this player's pal box container, or nil if the save records none. Read-only. Reading it requires the players capability.
+---@field otomo_container_id string|nil The id of this player's party container, or nil if the save records none. Read-only. Reading it requires the players capability.
 ---@field pals fun(): (fun(): pal|nil) An iterator over every pal this player owns, for use in a `for` loop. Requires capability: save.read.
 ---@field delete fun(): boolean Deletes this player, along with the item and character containers the player owns. Refuses (returns false, changes nothing) if the player is their guild's admin. A true result is a structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
----@field set_level fun(level: integer): nil Sets the player's level; must be between 1 and 255 inclusive, or this raises. A non-structural write: this handle and every other live handle and iterator stay valid, but any container previously read through this run is forgotten and will be re-read on next access. Requires capability: save.write.
 
 ---Requires capability: save.read.
 ---

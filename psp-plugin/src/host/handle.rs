@@ -134,7 +134,12 @@ unsafe fn install_one(
 }
 
 pub unsafe fn install_metatables(state: *mut lua_State) {
-    install_one(state, HandleKind::Player, super::save_read::push_player_index as PushHostFn, None);
+    install_one(
+        state,
+        HandleKind::Player,
+        super::save_read::push_player_index as PushHostFn,
+        Some(super::fields::player::push_player_newindex as PushHostFn),
+    );
     install_one(
         state,
         HandleKind::Pal,
