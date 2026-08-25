@@ -111,7 +111,7 @@
 {#if !plugin}
 	<p class="opacity-70">No such plugin.</p>
 {:else}
-	<div class="flex flex-col gap-3">
+	<div class="flex h-full flex-col gap-3">
 		<div class="flex items-start justify-between gap-4">
 			<div class="min-w-0">
 				<div class="flex items-center gap-2">
@@ -160,15 +160,21 @@
 		</div>
 
 		{#if mode === 'run'}
-			<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />
-			{#if showResult && pluginsData.lastResult}
-				<RunResult
-					result={pluginsData.lastResult}
-					pendingApply={showApplyFooter}
-					onApply={applyPending}
-					onCancel={cancelPending}
-				/>
-			{/if}
+			<div class="grid grid-cols-[25%_1fr]">
+				<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />
+				{#if showResult && pluginsData.lastResult}
+					<RunResult
+						result={pluginsData.lastResult}
+						pendingApply={showApplyFooter}
+						onApply={applyPending}
+						onCancel={cancelPending}
+					/>
+				{:else}
+					<div class="flex h-full flex-col items-center justify-center gap-2 text-center">
+						<p class="opacity-70">Run a command to see the result here.</p>
+					</div>
+				{/if}
+			</div>
 		{:else if mode === 'code'}
 			{#await import('../components/CodePane.svelte') then { default: CodePane }}
 				<CodePane id={plugin.id} />

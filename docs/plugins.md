@@ -235,33 +235,28 @@ snapshot: a fresh value each call, and a fresh table when the value is one
 changes nothing in the loaded game data.
 
 **A `gamedata.get` can refuse.** Building a value as one Lua table is capped
-at 100,000 JSON nodes — one per array element or object entry, counted over
-the whole tree — and a fetch over that cap errors, naming what was asked for
+at 150,000 JSON nodes — one per array element or object entry, counted over
+the whole tree — and a fetch past that cap errors, naming what was asked for
 and the count against the limit, rather than building a table nobody could
 use. The cap is one rule for the whole call: a single entry is measured the
 same way a whole catalog is, so a keyed fetch can refuse too. The figure in
 the message is that node count over the whole tree, which is not the number
-of keys `gamedata.keys` lists. Measured against the currently loaded game
-data:
+of keys `gamedata.keys` lists.
 
-- `gamedata.get('breeding')` (106,942 nodes) is **over the cap** and fails
-  today; it will keep failing unless the data itself shrinks. Three of the
-  catalog's four top-level keys fetch fine on their own —
-  `gamedata.get('breeding', 'pal_info')` (1,824 nodes),
-  `gamedata.get('breeding', 'unique_combos')` (1,512 nodes) and
-  `gamedata.get('breeding', 'child_to_parents_unique')` (1,376 nodes). The
-  fourth, `gamedata.get('breeding', 'child_to_parents_formula')` (102,226
-  nodes), is **over the cap** on its own and cannot be fetched at all: `get`
-  reaches top-level keys only, so there is no smaller piece of it to ask for.
-  A plugin that needs per-pal breeding facts can work from `pal_info`, which
-  carries each pal's display name, `combi_rank`, `rarity` and `ignore_combi`.
-- `gamedata.get('breeding_distance')` (92,720 nodes) is under the cap, but
-  close enough that a content patch could push it over.
-- `gamedata.get('pals')` (51,680 nodes) is the next largest — just over half
-  the cap.
+Measured against the currently loaded game data, **every catalog and every
+entry fits**, so no fetch refuses today:
 
-Nothing else the loaded game data holds, whole catalog or single entry, comes
-near the cap.
+- `gamedata.get('breeding')` (106,942 nodes) is the largest whole catalog,
+  and its largest single entry,
+  `gamedata.get('breeding', 'child_to_parents_formula')` (102,226 nodes),
+  fetches on its own too.
+- `gamedata.get('breeding_distance')` (92,720 nodes) is the next largest
+  catalog, then `gamedata.get('pals')` (51,680 nodes).
+
+The cap leaves the largest catalog room to grow by about 40% before it would
+begin refusing. It is not a budget for the whole data set: each call builds
+one table, and the 33 catalogs total roughly 390,000 nodes between them, so
+loading every catalog means 33 separate fetches rather than one.
 
 ### `save` — read half requires `save.read`
 
@@ -779,7 +774,7 @@ converts the whole table to JSON as `result`, and additionally lifts a
 top-level string `summary` field and a top-level object `counts` field (each
 value coerced to an integer) up onto the outcome directly, alongside whatever
 else the table contained. Returning nothing is a successful run with neither.
-A table deeper than 32 levels or wider than 100,000 total nodes fails the
+A table deeper than 32 levels or wider than 150,000 total nodes fails the
 conversion — the run still succeeds, but with no `result`.
 
 Under a dry run specifically, every mutating host function (`raw.set`,

@@ -19,7 +19,7 @@ use crate::manifest::Capability;
 use crate::status::RunStatus;
 
 pub const MAX_TABLE_DEPTH: usize = 32;
-pub const MAX_TABLE_NODES: usize = 100_000;
+pub const MAX_TABLE_NODES: usize = 150_000;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct HostError(String);

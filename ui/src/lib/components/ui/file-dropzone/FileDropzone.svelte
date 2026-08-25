@@ -17,6 +17,7 @@
 		baseClass = '',
 		inputClass = '',
 		interfaceClass = '',
+		iconSize = 'h-24 w-24',
 		lead,
 		message,
 		meta,
@@ -34,6 +35,7 @@
 		baseClass?: string;
 		inputClass?: string;
 		interfaceClass?: string;
+		iconSize?: string;
 		lead?: any;
 		message?: any;
 		meta?: any;
@@ -87,7 +89,7 @@
 					<strong>{m.upload_a_file()}</strong> {m.or_drag_and_drop()}
 				{/if}
 				<div class="mt-2 flex items-center justify-center">
-					<FolderArchive class="h-24 w-24" />
+					<FolderArchive class={iconSize} />
 				</div>
 				{#if files}
 					<div class="mt-4 flex flex-row items-center justify-center space-x-2">

@@ -1,5 +1,6 @@
 mod support;
 
+use psp_plugin::host::MAX_TABLE_NODES;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
 
@@ -145,7 +146,8 @@ fn a_whole_catalog_fetch_returns_a_table() {
 /// stays true regardless of how the shipped data grows or shrinks.
 #[test]
 fn get_refuses_a_whole_catalog_fetch_that_is_too_large() {
-    let entries: Vec<String> = (0..100_001).map(|i| format!("\"k{i}\":{i}")).collect();
+    let nodes = MAX_TABLE_NODES + 1;
+    let entries: Vec<String> = (0..nodes).map(|i| format!("\"k{i}\":{i}")).collect();
     let json = format!("{{{}}}", entries.join(","));
     let mut h = support::harness(&[Capability::GameData]).with_game_data_entries(&[("huge", &json)]);
     let (status, _) = h.run("return gamedata.get('huge')");
@@ -154,7 +156,7 @@ fn get_refuses_a_whole_catalog_fetch_that_is_too_large() {
             assert!(message.contains("huge"), "names the catalog: {message}");
             assert!(message.contains("keys"), "points at gamedata.keys(): {message}");
             assert!(
-                message.contains("100001 values (the limit is 100000)"),
+                message.contains(&format!("{nodes} values (the limit is {MAX_TABLE_NODES})")),
                 "reports the count against the limit, in the unit it counts: {message}"
             );
         }
@@ -168,7 +170,9 @@ fn get_refuses_a_whole_catalog_fetch_that_is_too_large() {
 /// other -- the figure the message reports is the former.
 #[test]
 fn get_refuses_a_keyed_fetch_of_an_oversized_entry() {
-    let entries: Vec<String> = (0..50_001).map(|i| format!("\"k{i}\":[{i}]")).collect();
+    let keys = MAX_TABLE_NODES / 2 + 1;
+    let nodes = keys * 2;
+    let entries: Vec<String> = (0..keys).map(|i| format!("\"k{i}\":[{i}]")).collect();
     let json = format!("{{\"big\":{{{}}}}}", entries.join(","));
     let mut h =
         support::harness(&[Capability::GameData]).with_game_data_entries(&[("nested", &json)]);
@@ -182,10 +186,32 @@ fn get_refuses_a_keyed_fetch_of_an_oversized_entry() {
             assert!(message.contains("nested"), "names the catalog: {message}");
             assert!(message.contains("big"), "names the key: {message}");
             assert!(
-                message.contains("100002 values (the limit is 100000)"),
+                message.contains(&format!("{nodes} values (the limit is {MAX_TABLE_NODES})")),
                 "reports the entry's node count, not its key count: {message}"
             );
         }
         other => panic!("expected an error naming the oversized entry, got {other:?}"),
     }
+}
+
+/// The cap exists to stop a fetch nobody could use, not to put the shipped
+/// game data out of reach. Derived rather than named, so it keeps meaning the
+/// same thing when a content patch changes which catalog is biggest.
+#[test]
+fn every_shipped_catalog_fetches_whole() {
+    let mut h = support::harness(&[Capability::GameData]);
+    let (status, value) = h.run(
+        "local refused = {}
+         for _, name in ipairs(gamedata.catalogs()) do
+           local ok = pcall(gamedata.get, name)
+           if not ok then refused[#refused + 1] = name end
+         end
+         return table.concat(refused, ',')",
+    );
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(
+        value.as_deref(),
+        Some(""),
+        "no shipped catalog may be too large for gamedata.get to return whole"
+    );
 }

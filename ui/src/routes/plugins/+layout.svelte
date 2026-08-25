@@ -133,13 +133,6 @@
 			<Button size="sm" onclick={newPlugin}>New plugin</Button>
 		</div>
 
-		<FileDropzone name="plugin-install" accept=".lua,.zip" bind:files={installFiles}>
-			{#snippet message()}
-				<h3 class="h3">Install a plugin</h3>
-				<span>Drag and drop a .lua file or a .zip archive here</span>
-			{/snippet}
-		</FileDropzone>
-
 		{#if pluginsData.running}
 			<div class="border-surface-700 flex items-center justify-between rounded-sm border p-3">
 				<div class="flex flex-col">
@@ -165,6 +158,20 @@
 
 	<div class="flex flex-1 overflow-hidden">
 		<aside class="border-surface-700 w-72 shrink-0 overflow-y-auto border-r p-3">
+			<FileDropzone
+				name="plugin-install"
+				accept=".lua,.zip"
+				bind:files={installFiles}
+				iconSize="h-12 w-12"
+				baseClass="mb-2"
+			>
+				{#snippet message()}
+					<div class="flex flex-col">
+						<span class="font-medium">Install a plugin</span>
+						<span class="text-sm">Drag and drop a .lua file or a .zip archive here</span>
+					</div>
+				{/snippet}
+			</FileDropzone>
 			{#if pluginsData.plugins.length === 0}
 				<p class="opacity-70">
 					No plugins installed yet. Drop a .lua file or a .zip archive above.

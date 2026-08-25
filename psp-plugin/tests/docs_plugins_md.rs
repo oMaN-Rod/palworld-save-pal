@@ -632,11 +632,11 @@ fn fetches_over_the_cap() -> BTreeSet<(String, Option<String>)> {
 fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
     let section = cap_section(&docs());
     assert_eq!(
-        MAX_TABLE_NODES, 100_000,
+        MAX_TABLE_NODES, 150_000,
         "the cap moved, and docs/plugins.md spells its old value out in digits"
     );
     assert!(
-        section.contains("100,000 JSON nodes"),
+        section.contains("150,000 JSON nodes"),
         "the cap section must still quote the cap itself"
     );
 
