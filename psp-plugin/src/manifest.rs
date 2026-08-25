@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
 
 pub const SUPPORTED_API_VERSION: u32 = 1;
+pub const ENTITY_KINDS: &[&str] = &["pal", "player", "guild", "base"];
 const MAX_ID_LEN: usize = 64;
 
 const LUA_RESERVED_WORDS: &[&str] = &[
@@ -37,6 +38,8 @@ pub enum ParamType {
     String,
     Bool,
     Enum,
+    Entity,
+    Multiselect,
 }
 
 impl ParamType {
@@ -47,6 +50,8 @@ impl ParamType {
             ParamType::String => "string",
             ParamType::Bool => "bool",
             ParamType::Enum => "enum",
+            ParamType::Entity => "entity",
+            ParamType::Multiselect => "multiselect",
         }
     }
 }
@@ -57,6 +62,7 @@ pub enum ParamValue {
     Float(f64),
     Text(String),
     Bool(bool),
+    List(Vec<String>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -75,6 +81,8 @@ pub struct ParamDef {
     pub max: Option<f64>,
     #[serde(default)]
     pub options: Vec<String>,
+    #[serde(default)]
+    pub entity: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -87,6 +95,73 @@ pub struct CommandDef {
     pub destructive: bool,
     #[serde(default)]
     pub params: Vec<ParamDef>,
+}
+
+pub const WIDGET_KINDS: &[&str] = &[
+    "entity_select",
+    "text_input",
+    "number_input",
+    "toggle",
+    "select",
+    "multiselect",
+    "table",
+    "list",
+    "text",
+    "button",
+];
+
+pub const INPUT_WIDGET_KINDS: &[&str] = &[
+    "entity_select",
+    "text_input",
+    "number_input",
+    "toggle",
+    "select",
+    "multiselect",
+];
+
+fn one_column() -> u32 {
+    1
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UiSection {
+    #[serde(default)]
+    pub title: Option<String>,
+    #[serde(default = "one_column")]
+    pub columns: u32,
+    #[serde(default)]
+    pub widgets: Vec<UiWidget>,
+}
+
+/// `widget_type` is a plain string, not an enum: an unknown type must install
+/// and be skipped at render, so a plugin written against a newer host keeps
+/// working here.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct UiWidget {
+    #[serde(rename = "type")]
+    pub widget_type: String,
+    #[serde(default)]
+    pub id: Option<String>,
+    #[serde(default)]
+    pub label: Option<String>,
+    #[serde(default)]
+    pub entity: Option<String>,
+    #[serde(default)]
+    pub from: Option<String>,
+    #[serde(default)]
+    pub path: Option<String>,
+    #[serde(default)]
+    pub command: Option<String>,
+    #[serde(default)]
+    pub columns: Vec<String>,
+    #[serde(default)]
+    pub selectable: bool,
+    #[serde(default)]
+    pub span: Option<String>,
+    #[serde(default)]
+    pub args: std::collections::BTreeMap<String, String>,
+    #[serde(default)]
+    pub text: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -104,6 +179,8 @@ pub struct Manifest {
     pub capabilities: Vec<Capability>,
     #[serde(default)]
     pub commands: Vec<CommandDef>,
+    #[serde(default)]
+    pub ui: Vec<UiSection>,
 }
 
 #[derive(Debug, Clone, PartialEq, thiserror::Error)]
@@ -146,6 +223,8 @@ pub enum ManifestError {
     ArgumentOutOfRange { id: String, min: f64, max: f64 },
     #[error("argument {id:?} must be one of: {options}")]
     ArgumentNotAnOption { id: String, options: String },
+    #[error("view {at}: {reason}")]
+    InvalidView { at: String, reason: String },
 }
 
 fn is_valid_id(id: &str) -> bool {
@@ -276,6 +355,8 @@ impl Manifest {
             }
         }
 
+        validate_view(&manifest)?;
+
         Ok(manifest)
     }
 
@@ -286,6 +367,133 @@ impl Manifest {
     pub fn grants(&self, capability: Capability) -> bool {
         self.capabilities.contains(&capability)
     }
+}
+
+fn is_widget_reference(reference: &str) -> Option<&str> {
+    let (widget, suffix) = reference.split_once('.')?;
+    if suffix != "selection" && suffix != "value" {
+        return None;
+    }
+    if !is_valid_param_id(widget) {
+        return None;
+    }
+    Some(widget)
+}
+
+fn validate_view(manifest: &Manifest) -> Result<(), ManifestError> {
+    let command_ids: HashSet<&str> =
+        manifest.commands.iter().map(|command| command.id.as_str()).collect();
+    let param_ids: HashSet<&str> = manifest
+        .commands
+        .iter()
+        .flat_map(|command| command.params.iter().map(|param| param.id.as_str()))
+        .collect();
+
+    let mut widget_ids: HashSet<&str> = HashSet::new();
+    for (section_index, section) in manifest.ui.iter().enumerate() {
+        let section_at = format!("section {section_index}");
+        if !(1..=3).contains(&section.columns) {
+            return Err(ManifestError::InvalidView {
+                at: section_at,
+                reason: format!("columns must be 1, 2 or 3, got {}", section.columns),
+            });
+        }
+        for (widget_index, widget) in section.widgets.iter().enumerate() {
+            let at = format!(
+                "section {section_index}, widget {widget_index} ({})",
+                widget.widget_type
+            );
+            let refuse = |reason: String| ManifestError::InvalidView { at: at.clone(), reason };
+
+            if let Some(id) = &widget.id {
+                if !is_valid_param_id(id) {
+                    return Err(refuse(format!("id {id:?} must be a Lua identifier")));
+                }
+                if !widget_ids.insert(id.as_str()) {
+                    return Err(refuse(format!("id {id:?} is declared more than once in this view")));
+                }
+            }
+
+            if let Some(span) = &widget.span {
+                if span != "full" {
+                    return Err(refuse(format!("span {span:?} is not a span; the only one is \"full\"")));
+                }
+            }
+
+            if INPUT_WIDGET_KINDS.contains(&widget.widget_type.as_str()) {
+                let Some(id) = &widget.id else {
+                    return Err(refuse("an input widget needs an id naming the parameter it feeds".to_string()));
+                };
+                if !param_ids.contains(id.as_str()) {
+                    return Err(refuse(format!("id {id:?} names no parameter declared by any command")));
+                }
+            }
+
+            if widget.widget_type == "entity_select"
+                && !manifest.capabilities.contains(&Capability::SaveRead)
+            {
+                return Err(refuse(
+                    "an entity_select reads the loaded save, so the plugin must declare save.read"
+                        .to_string(),
+                ));
+            }
+
+            if widget.widget_type == "table" && widget.selectable && widget.id.is_none() {
+                return Err(refuse(
+                    "a selectable table needs an id, or nothing can reference its selection".to_string(),
+                ));
+            }
+
+            if let Some(from) = &widget.from {
+                if !command_ids.contains(from.as_str()) {
+                    return Err(refuse(format!("from {from:?} names no command this plugin declares")));
+                }
+            }
+
+            let button_params: HashSet<&str> = if widget.widget_type == "button" {
+                let Some(command_id) = &widget.command else {
+                    return Err(refuse("a button needs a command to run".to_string()));
+                };
+                let Some(command) = manifest.command(command_id) else {
+                    return Err(refuse(format!(
+                        "command {command_id:?} names no command this plugin declares"
+                    )));
+                };
+                command.params.iter().map(|param| param.id.as_str()).collect()
+            } else {
+                HashSet::new()
+            };
+
+            for (key, reference) in &widget.args {
+                if widget.widget_type != "button" {
+                    return Err(refuse("args belongs on a button".to_string()));
+                }
+                if !button_params.contains(key.as_str()) {
+                    return Err(refuse(format!("args key {key:?} is not a parameter of this button's command")));
+                }
+                let Some(target) = is_widget_reference(reference) else {
+                    return Err(refuse(format!(
+                        "args value {reference:?} must be <widget>.selection or <widget>.value"
+                    )));
+                };
+                if !view_declares_widget(manifest, target) {
+                    return Err(refuse(format!("args value {reference:?} names no widget in this view")));
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+/// Scans the whole view rather than only the widgets seen so far: a button
+/// may legitimately sit above the table it reads, and nothing in the layout
+/// implies an order of evaluation.
+fn view_declares_widget(manifest: &Manifest, id: &str) -> bool {
+    manifest
+        .ui
+        .iter()
+        .flat_map(|section| section.widgets.iter())
+        .any(|widget| widget.id.as_deref() == Some(id))
 }
 
 fn validate_param<'a>(
@@ -321,6 +529,18 @@ fn validate_param<'a>(
         return Err(invalid("an enum parameter must offer at least one option"));
     }
 
+    if param.param_type == ParamType::Entity {
+        match param.entity.as_deref() {
+            Some(kind) if ENTITY_KINDS.contains(&kind) => {}
+            _ => {
+                return Err(invalid(&format!(
+                    "an entity parameter must name one of: {}",
+                    ENTITY_KINDS.join(", ")
+                )));
+            }
+        }
+    }
+
     if let Some(default) = &param.default {
         match param.param_type {
             ParamType::Int => {
@@ -349,6 +569,24 @@ fn validate_param<'a>(
                 };
                 if !param.options.iter().any(|option| option == text) {
                     return Err(invalid("default must be one of the declared options"));
+                }
+            }
+            ParamType::Entity => {
+                if default.as_str().is_none() {
+                    return Err(invalid("default must be a string"));
+                }
+            }
+            ParamType::Multiselect => {
+                let Some(items) = default.as_array() else {
+                    return Err(invalid("default must be an array of strings"));
+                };
+                for item in items {
+                    let Some(text) = item.as_str() else {
+                        return Err(invalid("default must be an array of strings"));
+                    };
+                    if !param.options.is_empty() && !param.options.iter().any(|option| option == text) {
+                        return Err(invalid("default must only contain declared options"));
+                    }
                 }
             }
         }
@@ -463,6 +701,25 @@ fn coerce_param_value(
                 });
             }
             Ok(ParamValue::Text(text.to_string()))
+        }
+        ParamType::Entity => {
+            let text = value.as_str().ok_or_else(type_error)?;
+            Ok(ParamValue::Text(text.to_string()))
+        }
+        ParamType::Multiselect => {
+            let items = value.as_array().ok_or_else(type_error)?;
+            let mut out = Vec::with_capacity(items.len());
+            for item in items {
+                let text = item.as_str().ok_or_else(type_error)?;
+                if !param.options.is_empty() && !param.options.iter().any(|option| option == text) {
+                    return Err(ManifestError::ArgumentNotAnOption {
+                        id: param.id.clone(),
+                        options: param.options.join(", "),
+                    });
+                }
+                out.push(text.to_string());
+            }
+            Ok(ParamValue::List(out))
         }
     }
 }

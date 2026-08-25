@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { goto, replaceState } from '$app/navigation';
+	import { untrack } from 'svelte';
 	import { cn } from '$theme';
 	import { pluginsData } from '$lib/data';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
@@ -11,9 +12,13 @@
 		resolveMode,
 		type PaneMode
 	} from '$lib/plugins/pluginPane';
+	import { buildRunRequest, type ViewWidget } from '$lib/plugins/pluginView';
+	import { PluginViewState } from '$lib/plugins/viewState.svelte';
 	import { getModalState, getToastState } from '$states';
 	import { Button } from '$components/ui';
 	import type { PluginCommand } from '$types';
+	import ApplyBar from '../components/ApplyBar.svelte';
+	import PluginView from '../components/view/PluginView.svelte';
 	import RunPane from '../components/RunPane.svelte';
 	import RunResult from '../components/RunResult.svelte';
 
@@ -33,6 +38,35 @@
 
 	let pendingApply: { commandId: string; args: Record<string, unknown> } | null = $state(null);
 	let resultPluginId: string | null = $state(null);
+
+	let view: PluginViewState | null = $state(null);
+	let viewPluginId: string | null = $state(null);
+
+	$effect(() => {
+		const id = plugin?.id ?? null;
+		if (id === untrack(() => viewPluginId)) return;
+		viewPluginId = id;
+		const current = plugin;
+		if (!current) {
+			view = null;
+			return;
+		}
+		const next = new PluginViewState(current.ui, current.commands);
+		view = next;
+		if (next.hasView) next.loadEntities();
+	});
+
+	let recordedRunId: string | null = $state(null);
+
+	$effect(() => {
+		const result = pluginsData.lastResult;
+		const active = view;
+		const ran = lastRun;
+		if (!result || !active || !ran || result.status !== 'ok') return;
+		if (untrack(() => recordedRunId) === result.run_id) return;
+		recordedRunId = result.run_id;
+		active.recordResult(ran.commandId, result.result);
+	});
 
 	const showApplyFooter = $derived(
 		pendingApply !== null && pluginsData.lastResult?.status === 'ok'
@@ -83,9 +117,12 @@
 		await goto('/plugins');
 	}
 
+	let lastRun: { commandId: string } | null = $state(null);
+
 	function runCommand(command: PluginCommand, args: Record<string, unknown>) {
 		if (!plugin) return;
 		resultPluginId = plugin.id;
+		lastRun = { commandId: command.id };
 		if (command.destructive) {
 			pendingApply = { commandId: command.id, args };
 			pluginsData.run(plugin.id, command.id, args, true);
@@ -93,6 +130,14 @@
 			pendingApply = null;
 			pluginsData.run(plugin.id, command.id, args, false);
 		}
+	}
+
+	function runFromView(widget: ViewWidget) {
+		if (!plugin || !view) return;
+		const command = plugin.commands.find((c) => c.id === widget.command);
+		if (!command) return;
+		const request = buildRunRequest(widget, command, view.runtime());
+		runCommand(command, request.args);
 	}
 
 	function applyPending() {
@@ -160,21 +205,42 @@
 		</div>
 
 		{#if mode === 'run'}
-			<div class="grid grid-cols-[25%_1fr]">
-				<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />
-				{#if showResult && pluginsData.lastResult}
-					<RunResult
-						result={pluginsData.lastResult}
-						pendingApply={showApplyFooter}
-						onApply={applyPending}
-						onCancel={cancelPending}
+			{#if view?.hasView}
+				<div class="flex flex-col gap-4">
+					<PluginView
+						state={view}
+						commands={plugin.commands}
+						disabled={!plugin.enabled || pluginsData.running !== null}
+						onRun={runFromView}
 					/>
-				{:else}
-					<div class="flex h-full flex-col items-center justify-center gap-2 text-center">
-						<p class="opacity-70">Run a command to see the result here.</p>
-					</div>
-				{/if}
-			</div>
+					{#if showApplyFooter}
+						<ApplyBar
+							summary={pluginsData.lastResult?.summary ?? null}
+							onApply={applyPending}
+							onCancel={cancelPending}
+						/>
+					{/if}
+					{#if showResult && pluginsData.lastResult && pluginsData.lastResult.status !== 'ok'}
+						<RunResult result={pluginsData.lastResult} />
+					{/if}
+				</div>
+			{:else}
+				<div class="grid grid-cols-[25%_1fr] gap-2">
+					<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />
+					{#if showResult && pluginsData.lastResult}
+						<RunResult
+							result={pluginsData.lastResult}
+							pendingApply={showApplyFooter}
+							onApply={applyPending}
+							onCancel={cancelPending}
+						/>
+					{:else}
+						<div class="flex h-full flex-col items-center justify-center gap-2 text-center">
+							<p class="opacity-70">Run a command to see the result here.</p>
+						</div>
+					{/if}
+				</div>
+			{/if}
 		{:else if mode === 'code'}
 			{#await import('../components/CodePane.svelte') then { default: CodePane }}
 				<CodePane id={plugin.id} />

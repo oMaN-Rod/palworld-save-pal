@@ -24,6 +24,7 @@ pub struct PluginSummary {
     pub enabled: bool,
     pub bundled: bool,
     pub commands: Vec<CommandDef>,
+    pub ui: Vec<psp_plugin::manifest::UiSection>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub error: Option<String>,
 }
@@ -42,6 +43,7 @@ fn summarize(row: &psp_db::plugins::PluginRow) -> PluginSummary {
             enabled: row.enabled,
             bundled: row.bundled,
             commands: manifest.commands,
+            ui: manifest.ui,
             error: None,
         },
         Err(parse_error) => PluginSummary {
@@ -52,6 +54,7 @@ fn summarize(row: &psp_db::plugins::PluginRow) -> PluginSummary {
             enabled: row.enabled,
             bundled: row.bundled,
             commands: Vec::new(),
+            ui: Vec::new(),
             error: Some(parse_error.to_string()),
         },
     }
@@ -61,6 +64,123 @@ pub async fn handle_list_plugins(ctx: &mut HandlerCtx<'_>) -> Result<(), Handler
     let rows = psp_db::plugins::get_all(&*ctx.app.driver).await?;
     let summaries: Vec<PluginSummary> = rows.iter().map(summarize).collect();
     ctx.emitter.emit(MessageType::ListPlugins, &summaries);
+    Ok(())
+}
+
+pub const MAX_ENTITY_OPTIONS: usize = 500;
+
+#[derive(Debug, serde::Deserialize)]
+pub struct ListPluginEntitiesData {
+    pub kinds: Vec<String>,
+}
+
+#[derive(Debug, serde::Serialize)]
+pub struct EntityOption {
+    pub id: String,
+    pub label: String,
+}
+
+#[derive(Debug, serde::Serialize)]
+pub struct EntityOptions {
+    pub options: Vec<EntityOption>,
+    pub total: usize,
+}
+
+fn player_options(session: &psp_core::session::SaveSession) -> Vec<EntityOption> {
+    session
+        .player_summary_order
+        .iter()
+        .filter_map(|uid| session.player_summaries.get(uid).map(|summary| (uid, summary)))
+        .map(|(uid, summary)| EntityOption {
+            id: uid.to_string(),
+            label: if summary.nickname.trim().is_empty() {
+                uid.to_string()
+            } else {
+                summary.nickname.clone()
+            },
+        })
+        .collect()
+}
+
+fn guild_options(session: &psp_core::session::SaveSession) -> Vec<EntityOption> {
+    session
+        .guild_summary_order
+        .iter()
+        .filter_map(|id| session.guild_summaries.get(id).map(|summary| (id, summary)))
+        .map(|(id, summary)| EntityOption {
+            id: id.to_string(),
+            label: if summary.name.trim().is_empty() { id.to_string() } else { summary.name.clone() },
+        })
+        .collect()
+}
+
+/// A base's own name lives in a `BaseDto` that has to be built from the save,
+/// which is far too much work for a dropdown; the guild that owns it is
+/// readable straight off the map entry, so that plus a short id is the label.
+fn base_options(session: &psp_core::session::SaveSession) -> Vec<EntityOption> {
+    let entries = session.base_camp_map().unwrap_or(&[]);
+    entries
+        .iter()
+        .filter_map(|entry| {
+            let id = psp_core::props::as_uuid(&entry.key)?;
+            let guild = psp_core::domain::guild::base_guild_and_container(entry)
+                .and_then(|(guild_id, _)| session.guild_summaries.get(&guild_id))
+                .map(|summary| summary.name.clone())
+                .filter(|name| !name.trim().is_empty());
+            let text = id.to_string();
+            let short = text.get(..8).unwrap_or(text.as_str());
+            Some(EntityOption {
+                id: text.clone(),
+                label: match guild {
+                    Some(name) => format!("{name} base {short}"),
+                    None => text,
+                },
+            })
+        })
+        .collect()
+}
+
+fn pal_options(
+    session: &psp_core::session::SaveSession,
+    game_data: &psp_core::gamedata::GameData,
+) -> Vec<EntityOption> {
+    let Ok(summaries) = psp_core::domain::pal::pal_summaries(session, game_data) else {
+        return Vec::new();
+    };
+    summaries
+        .iter()
+        .map(|summary| EntityOption {
+            id: summary.instance_id.to_string(),
+            label: match summary.nickname.as_deref() {
+                Some(nickname) if !nickname.trim().is_empty() => nickname.to_string(),
+                _ => summary.character_id.clone(),
+            },
+        })
+        .collect()
+}
+
+pub async fn handle_list_plugin_entities(
+    data: ListPluginEntitiesData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let mut entities: BTreeMap<String, EntityOptions> = BTreeMap::new();
+    if let Ok(session) = ctx.session.save_mut() {
+        for kind in &data.kinds {
+            let all = match kind.as_str() {
+                "player" => player_options(session),
+                "guild" => guild_options(session),
+                "base" => base_options(session),
+                "pal" => pal_options(session, &ctx.app.game_data),
+                _ => continue,
+            };
+            let total = all.len();
+            let mut options = all;
+            options.truncate(MAX_ENTITY_OPTIONS);
+            entities.insert(kind.clone(), EntityOptions { options, total });
+        }
+    }
+    ctx.emitter
+        .emit(MessageType::ListPluginEntities, &serde_json::json!({ "entities": entities }));
     Ok(())
 }
 

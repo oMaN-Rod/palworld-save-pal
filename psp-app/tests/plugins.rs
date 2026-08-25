@@ -1481,3 +1481,179 @@ async fn delete_plugin_source_refuses_a_bundled_plugin() {
         "the refusal must say why, got {frame}"
     );
 }
+
+fn seed_player(session: &mut psp_core::session::SaveSession, nickname: &str) -> uuid::Uuid {
+    let uid = uuid::Uuid::new_v4();
+    session.player_summaries.insert(
+        uid,
+        psp_core::dto::summary::PlayerSummary {
+            uid,
+            nickname: nickname.to_string(),
+            level: Some(1),
+            guild_id: None,
+            pal_count: 0,
+            last_online_time: None,
+            loaded: false,
+        },
+    );
+    session.player_summary_order.push(uid);
+    uid
+}
+
+async fn seed_row_with_manifest(
+    test: &TestContext,
+    id: &str,
+    manifest: &str,
+) -> psp_db::plugins::PluginRow {
+    let sources = serde_json::json!({ "main.lua": "function go() end" }).to_string();
+    psp_db::plugins::upsert(
+        &*test.app.driver,
+        &NewPlugin {
+            id,
+            manifest,
+            sources: &sources,
+            granted_capabilities: r#"["save.read"]"#,
+            bundled: false,
+        },
+    )
+    .await
+    .unwrap()
+}
+
+const VIEW_MANIFEST: &str = r#"{
+  "id": "viewer", "api_version": 1, "name": "Viewer", "version": "1.0.0",
+  "entry": "main.lua",
+  "capabilities": ["save.read"],
+  "commands": [{ "id": "go", "title": "Go" }],
+  "ui": [{ "columns": 2, "widgets": [{ "type": "button", "label": "Go", "command": "go" }] }]
+}"#;
+
+const PLAIN_MANIFEST: &str = r#"{
+  "id": "plain", "api_version": 1, "name": "Plain", "version": "1.0.0",
+  "entry": "main.lua",
+  "capabilities": ["save.read"],
+  "commands": [{ "id": "go", "title": "Go" }]
+}"#;
+
+/// `list_plugins` is the only place the browser ever learns a plugin's view,
+/// so a summary that drops it leaves every declared ui unrenderable.
+#[tokio::test]
+async fn a_plugin_summary_carries_its_declared_view() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row_with_manifest(&test, "viewer", VIEW_MANIFEST).await;
+
+    handle_list_plugins(&mut ctx(&mut test)).await.unwrap();
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "list_plugins");
+    let summary = frame["data"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|entry| entry["id"] == "viewer")
+        .expect("the installed plugin is listed");
+    assert_eq!(summary["ui"][0]["columns"], 2);
+    assert_eq!(summary["ui"][0]["widgets"][0]["type"], "button");
+    assert_eq!(summary["ui"][0]["widgets"][0]["command"], "go");
+}
+
+/// A plugin with no ui must serialize an empty list, not a null -- the
+/// browser reads `summary.ui` unconditionally.
+#[tokio::test]
+async fn a_plugin_with_no_view_summarizes_an_empty_one() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row_with_manifest(&test, "plain", PLAIN_MANIFEST).await;
+
+    handle_list_plugins(&mut ctx(&mut test)).await.unwrap();
+    let frame = test.next_frame_json();
+    let summary = frame["data"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|entry| entry["id"] == "plain")
+        .expect("the installed plugin is listed");
+    assert_eq!(summary["ui"], serde_json::json!([]));
+}
+
+#[tokio::test]
+async fn list_plugin_entities_answers_only_the_kinds_it_was_asked_for() {
+    let mut test = TestContext::new(|_| {}).await;
+    test.session.save = Some(minimal_save());
+
+    handle_list_plugin_entities(
+        ListPluginEntitiesData {
+            kinds: vec!["player".to_string(), "guild".to_string(), "nonesuch".to_string()],
+        },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "list_plugin_entities");
+    let entities = frame["data"]["entities"].as_object().expect("an entities object");
+    let mut keys: Vec<&String> = entities.keys().collect();
+    keys.sort();
+    assert_eq!(keys, vec!["guild", "player"], "an unknown kind is omitted, not an error");
+}
+
+#[tokio::test]
+async fn list_plugin_entities_labels_each_option_with_the_name_the_save_holds() {
+    let mut test = TestContext::new(|_| {}).await;
+    let mut save = minimal_save();
+    let uid = seed_player(&mut save, "Ada");
+    test.session.save = Some(save);
+
+    handle_list_plugin_entities(
+        ListPluginEntitiesData { kinds: vec!["player".to_string()] },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    let player = &frame["data"]["entities"]["player"];
+    assert_eq!(player["total"], 1);
+    assert_eq!(player["options"][0]["id"], uid.to_string());
+    assert_eq!(player["options"][0]["label"], "Ada");
+}
+
+/// Cap what is offered, but report how many exist: a silent truncation reads
+/// as a complete answer.
+#[tokio::test]
+async fn list_plugin_entities_caps_its_options_but_reports_the_true_total() {
+    let mut test = TestContext::new(|_| {}).await;
+    let mut save = minimal_save();
+    let over = MAX_ENTITY_OPTIONS + 1;
+    for index in 0..over {
+        seed_player(&mut save, &format!("p{index}"));
+    }
+    test.session.save = Some(save);
+
+    handle_list_plugin_entities(
+        ListPluginEntitiesData { kinds: vec!["player".to_string()] },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    let player = &frame["data"]["entities"]["player"];
+    assert_eq!(player["options"].as_array().unwrap().len(), MAX_ENTITY_OPTIONS);
+    assert_eq!(player["total"], over);
+}
+
+#[tokio::test]
+async fn list_plugin_entities_with_no_save_loaded_answers_an_empty_map() {
+    let mut test = TestContext::new(|_| {}).await;
+
+    handle_list_plugin_entities(
+        ListPluginEntitiesData { kinds: vec!["player".to_string()] },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "list_plugin_entities", "no save is not an error frame");
+    assert_eq!(frame["data"]["entities"], serde_json::json!({}));
+}

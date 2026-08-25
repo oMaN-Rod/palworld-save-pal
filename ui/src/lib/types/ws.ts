@@ -169,6 +169,7 @@ export enum MessageType {
 	UNINSTALL_PLUGIN = 'uninstall_plugin',
 	SET_PLUGIN_ENABLED = 'set_plugin_enabled',
 	RUN_PLUGIN_COMMAND = 'run_plugin_command',
+	LIST_PLUGIN_ENTITIES = 'list_plugin_entities',
 	CANCEL_PLUGIN_RUN = 'cancel_plugin_run',
 	PLUGIN_RUN_RESULT = 'plugin_run_result',
 	CHECK_PLUGIN_SYNTAX = 'check_plugin_syntax',
@@ -194,7 +195,14 @@ export interface Message {
 	data?: any | UpdateSaveFileData;
 }
 
-export type PluginParamType = 'int' | 'float' | 'string' | 'bool' | 'enum';
+export type PluginParamType =
+	| 'int'
+	| 'float'
+	| 'string'
+	| 'bool'
+	| 'enum'
+	| 'entity'
+	| 'multiselect';
 
 export interface PluginParam {
 	id: string;
@@ -205,6 +213,7 @@ export interface PluginParam {
 	min: number | null;
 	max: number | null;
 	options: string[];
+	entity: string | null;
 }
 
 export interface PluginCommand {
@@ -215,6 +224,37 @@ export interface PluginCommand {
 	params: PluginParam[];
 }
 
+export interface PluginUiWidget {
+	type: string;
+	id: string | null;
+	label: string | null;
+	entity: string | null;
+	from: string | null;
+	path: string | null;
+	command: string | null;
+	columns: string[];
+	selectable: boolean;
+	span: string | null;
+	args: Record<string, string>;
+	text: string | null;
+}
+
+export interface PluginUiSection {
+	title: string | null;
+	columns: number;
+	widgets: PluginUiWidget[];
+}
+
+export interface PluginEntityOption {
+	id: string;
+	label: string;
+}
+
+export interface PluginEntityOptions {
+	options: PluginEntityOption[];
+	total: number;
+}
+
 export interface PluginSummary {
 	id: string;
 	name: string;
@@ -223,6 +263,7 @@ export interface PluginSummary {
 	enabled: boolean;
 	bundled: boolean;
 	commands: PluginCommand[];
+	ui: PluginUiSection[];
 	error?: string;
 }
 

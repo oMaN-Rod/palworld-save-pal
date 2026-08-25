@@ -227,3 +227,51 @@ fn a_granted_capability_the_manifest_does_not_declare_is_not_installed() {
     assert_eq!(outcome.status, RunStatus::Ok);
     assert_eq!(outcome.summary.as_deref(), Some("nil"));
 }
+
+const LIST_MANIFEST: &str = r#"{
+  "id": "test.plugin", "api_version": 1, "name": "Test", "version": "1.0.0",
+  "entry": "main.lua",
+  "capabilities": [],
+  "commands": [
+    { "id": "echo_ids", "title": "Echo Ids",
+      "params": [{ "id": "ids", "type": "multiselect", "label": "Ids", "default": [] }] }
+  ]
+}"#;
+
+const LIST_SOURCE: &str = r#"
+function echo_ids()
+  return { summary = table.concat(ctx.args.ids, '|') .. '/' .. tostring(#ctx.args.ids) }
+end
+"#;
+
+/// A multiselect must arrive as a Lua sequence: `ipairs` and `#` are how
+/// every script will read it, and neither works on a table built as a map.
+#[test]
+fn a_multiselect_argument_arrives_as_a_lua_array() {
+    let outcome = support::run(
+        LIST_MANIFEST,
+        LIST_SOURCE,
+        "echo_ids",
+        serde_json::json!({ "ids": ["a", "b", "c"] }),
+        false,
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.summary.as_deref(), Some("a|b|c/3"));
+}
+
+#[test]
+fn an_empty_multiselect_arrives_as_an_empty_table_not_as_nil() {
+    let outcome =
+        support::run(LIST_MANIFEST, LIST_SOURCE, "echo_ids", serde_json::json!({ "ids": [] }), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.summary.as_deref(), Some("/0"));
+}
+
+/// The declared default has to survive the same push, or a command run with
+/// no selection at all raises inside the script instead of doing nothing.
+#[test]
+fn a_multiselect_default_reaches_ctx_args_as_a_table() {
+    let outcome = support::run(LIST_MANIFEST, LIST_SOURCE, "echo_ids", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(outcome.summary.as_deref(), Some("/0"));
+}

@@ -362,6 +362,13 @@ pub unsafe fn install_ctx(state: *mut lua_State, ctx: &RunContext<'_>) {
                 ParamValue::Float(float) => lua_pushnumber(state, *float),
                 ParamValue::Text(text) => push_str(state, text),
                 ParamValue::Bool(flag) => lua_pushboolean(state, c_int::from(*flag)),
+                ParamValue::List(items) => {
+                    lua_createtable(state, items.len() as c_int, 0);
+                    for (index, item) in items.iter().enumerate() {
+                        push_str(state, item);
+                        lua_rawseti(state, -2, i64::try_from(index).unwrap_or(i64::MAX).saturating_add(1));
+                    }
+                }
             }
             let Ok(field) = std::ffi::CString::new(key.as_str()) else {
                 lua_pop(state, 1);

@@ -421,6 +421,9 @@ async fn route(
             handlers::breeding::handle_breeding_chain(serde_json::from_value(data)?, ctx).await
         }
         MessageType::ListPlugins => handlers::plugins::handle_list_plugins(ctx).await,
+        MessageType::ListPluginEntities => {
+            handlers::plugins::handle_list_plugin_entities(serde_json::from_value(data)?, ctx).await
+        }
         MessageType::GetPlugin => {
             handlers::plugins::handle_get_plugin(serde_json::from_value(data)?, ctx).await
         }
