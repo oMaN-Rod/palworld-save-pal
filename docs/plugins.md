@@ -477,8 +477,8 @@ loading every catalog means 33 separate fetches rather than one.
 
 - `save.info() -> { world_name, save_id, player_count, guild_count, pal_count }`
 - `save.players()`, `save.pals()`, `save.guilds()`, `save.bases()`,
-  `save.containers()` — each returns a stateless Lua iterator over handles, for
-  use as `for x in save.players() do ... end`.
+  `save.containers()`, `save.map_objects()` — each returns a stateless Lua
+  iterator over handles, for use as `for x in save.players() do ... end`.
 
 Every handle exposes fields through `__index` (a plain field read, not a
 method call — `player.name`, not `player.name()`):
@@ -491,6 +491,19 @@ method call — `player.name`, not `player.name()`):
 | `base` | `id`, `guild_id`, `name`, `area_range` (the radius of the base's working area, in world units), `x`, `y`, `z`. Everything but `id` reads `nil` on a base whose record in the save could not be read — the iterator hands out a handle for any entry that has an id, without checking there is anything behind it. |
 | `container` | `id`, `slot_count`, `slots` (a `container.slots()` iterator factory). Nothing on this handle is assignable — see below. |
 | `slot` | `index`, `item_id` (nil for an empty slot), `count` |
+| `map_object` | `id`, `instance_id`, `base_id`, `guild_id`, `build_player_uid`, `hp`, `max_hp`, `kind` |
+
+A `map_object` handle covers built structures, chests and resource nodes.
+`id` and `instance_id` answer two different questions: `id` is the
+`MapObjectId` asset name shared by every instance of a kind — every
+`PalBoxV2` in the world reads the same `id` — while `instance_id` is the
+UUID of this one object and nothing else shares it. A predicate that wants
+to act on one specific object needs `instance_id`; one that wants to act on
+a kind of object needs `id`. `base_id`, `guild_id` and `build_player_uid`
+read `nil` when the object has none of the corresponding kind — never the
+save's own zero guid — and `kind` is the concrete model type name the
+object was built from. Of the eight fields, only `hp` and `build_player_uid`
+are assignable; the rest are read-only.
 
 An unresolvable field name returns `nil` rather than erroring — reading a
 typo'd field looks like reading an absent one. A field that *is* real can
@@ -580,15 +593,16 @@ three entity iterators that support it:
   instead. A refusal does not bump the epoch and leaves every handle valid.
 - `save.players():delete_where(fn(player) -> bool)`,
   `save.guilds():delete_where(fn(guild) -> bool)`,
-  `save.pals():delete_where(fn(pal) -> bool)` — collects a snapshot of every
-  id first, calls `fn` once per id with a handle (no save mutation may happen
-  from inside the predicate — see below), then deletes every id the predicate
-  returned truthy for. Returns two integers: `removed, unresolved`.
-  `unresolved` counts ids the predicate selected but that the host itself
-  could not resolve at apply time (e.g. an already-dangling reference) — a
-  different thing from the predicate choosing to skip an id itself, and worth
-  keeping as a separate count in a command's own summary (see the worked
-  example).
+  `save.pals():delete_where(fn(pal) -> bool)`,
+  `save.map_objects():delete_where(fn(map_object) -> bool)` — collects a
+  snapshot of every id first, calls `fn` once per id with a handle (no save
+  mutation may happen from inside the predicate — see below), then deletes
+  every id the predicate returned truthy for. Returns two integers: `removed,
+  unresolved`. `unresolved` counts ids the predicate selected but that the
+  host itself could not resolve at apply time (e.g. an already-dangling
+  reference) — a different thing from the predicate choosing to skip an id
+  itself, and worth keeping as a separate count in a command's own summary
+  (see the worked example).
 - `save.clear_slots_where(fn(slot) -> bool) -> cleared, examined` — the slot
   counterpart to `delete_where`, and the only practical way to clear more than
   one slot in a run. Walks every container once, calls `fn` with a slot handle
@@ -608,6 +622,20 @@ three entity iterators that support it:
   `container.set_slot_count()` — but only when the count is non-zero; a run
   that clears nothing (including any dry run, which never writes) leaves every
   handle and iterator valid.
+- `save.remove_orphaned_works() -> integer` — removes every `WorkSaveData`
+  entry whose owning map object no longer exists, returning how many were
+  removed. Structural on a non-zero result, the same way
+  `save.unlock_private_chests()` is.
+- `save.remove_orphaned_dynamic_items() -> integer` — removes every
+  `DynamicItemSaveData` entry that no item-container slot, dropped item, item
+  booth trade or damage-drop table still points at, returning how many were
+  removed. Structural on a non-zero result.
+- `save.delete_dps_pals(player_uid, indexes) -> integer` — empties the given
+  slot indexes of one player's dimensional storage in place: it nils the
+  slot's instance id and resets its parameter bag to an unused slot's shape,
+  the same way the slot got there in the first place, without changing the
+  storage array's length. Returns how many of the given indexes were valid.
+  Requires `players`, in addition to `save.write`.
 
 Every write method's dry-run behaviour is: validate what it can, bump an
 internal count, and return without changing anything. `slot.clear()` under a
@@ -807,6 +835,22 @@ raw.visit(target, path, fn)        -- host-driven depth-first walk; fn(node) ret
 `path` is a dotted/indexed address:
 `worldSaveData.CharacterSaveParameterMap[3].value.RawData.SaveParameter.IsPlayer`
 — a segment is a property key, or `[n]` for a map/array index.
+
+**`[n]` also steps into a scalar array's own elements**, not only into an
+array of structs. An array whose elements are themselves scalars — a `Name`,
+`Str` or `Enum` array, an array of integers of any width, a `Float` or
+`Double` array, a `Bool` array, or a `Byte`/`Label` array — has each element
+individually addressable by index, the same way `SaveParameterArray[3]`
+addresses one struct element of that array. `raw.get`, `raw.set`,
+`raw.delete`, `raw.len` and `raw.kind` all reach an element this way, and a
+`raw.visit` walk descends into one the same way it descends into a struct
+array, handing the callback one node per element with its own `path`. `raw.kind`
+reports an individual element as `"scalar"` and the array itself as
+`"array"`, exactly as it does for an array of structs. **`raw.set` writes one
+element at a time and can never write a whole array in one call** — the path
+has to name an element, not the array, so replacing an array's contents means
+setting each element (or deleting and re-adding elements) one at a time
+rather than assigning a new array wholesale.
 
 Error discipline: `raw.get` and `raw.len` **error** when `path` does not
 resolve to any node at all (a typo'd segment or an out-of-range index) — a
@@ -1076,6 +1120,125 @@ end
   outcome directly (and the whole table is also available as `result`), so a
   UI panel can render either the summary text or the structured counts
   without parsing the other.
+
+## The `pst.cleanup` plugin
+
+Bundled at `psp-app/src/bundled/pst.cleanup/` (`psp-app/src/bundled/pst.cleanup/main.lua`),
+`pst.cleanup` ("Save Cleanup") ports PalworldSaveTools' Delete family: thirteen
+commands that remove dead or invalid save entries, as against resetting
+regenerable state (`pst.reset`) or clamping a value back into range
+(`pst.repair`). The manifest declares `save.read`, `save.write`, `save.raw`,
+`players`, `gamedata`, and `log`: `save.raw` and `players` because several
+commands address a `player:<uid>` or `player_dps:<uid>` raw target directly,
+`gamedata` because several check an id against a loaded catalog, and `log`
+for `remove_invalid_items_from_save`, the only command here that reports
+unknown ids through `log.warn` rather than folding them into its result.
+
+| id | title | params | does |
+|---|---|---|---|
+| `delete_all_skins` | Delete All Skins | none | Clears every applied-skin field in the world and clears each player's own stored skin-inventory record. Skins are cosmetic, so nothing else about the save changes. |
+| `delete_imported_pals` | Delete Imported Pals | none | Removes every pal flagged DNA-imported, from the world and from each player's dimensional storage. |
+| `delete_empty_guilds` | Delete Empty Guilds | none | Removes guilds with no remaining members. This is the command quoted in the worked example above. |
+| `delete_inactive_players` | Delete Inactive Players | `days` (default `30`, `1..=3650`) | Removes players whose `last_online_ts` is older than `now - days`. Guild admins are never removed. |
+| `fix_all_negative_timestamps` | Fix Future Timestamps | none | Clamps a `last_online` timestamp that sits in the future back to the world's current time. |
+| `remove_invalid_pals_from_save` | Remove Invalid Pals | none | Removes pals whose species id is not in the game's pal catalog, from the world and from each player's dimensional storage. Bosses, lucky pals and predators are kept. |
+| `remove_invalid_items_from_save` | Remove Invalid Items | none | Clears item slots whose item id is not in the game's item catalog. |
+| `remove_invalid_passives_from_save` | Remove Invalid Passive Skills | none | Removes passive skills that are not in the game's passive-skill catalog, from pals in the world and in each player's dimensional storage. |
+| `delete_duplicated_players` | Delete Duplicated Players | none | Where one player uid has more than one character record, keeps the most recently online one and removes the rest. |
+| `delete_inactive_bases` | Delete Inactive Bases | `mode` (`inactive` / `below level` / `both`, default `inactive`), `days` (default `30`), `level` (default `10`) | Removes bases whose guild members all fail the chosen filter. |
+| `delete_non_base_map_objects` | Delete Structures Outside Bases | none | Removes structures whose `base_id` is set but does not resolve to a base, and the work entries that referenced them. |
+| `delete_invalid_structure_map_objects` | Delete Invalid Structures | none | Removes structures whose `id` is not in the game's building catalog, and the work entries that referenced them. Treasure boxes, resource nodes, dropped items and death bags are kept. |
+| `delete_unreferenced_data` | Delete Unreferenced Data | none | Removes ownerless pals, clears stale structure-builder references, and removes orphaned work records and unreferenced item records. |
+
+### Behavioural notes
+
+- **`remove_invalid_pals_from_save` keeps bosses, lucky pals and predators.**
+  A boss or predator's `character_id` carries a `BOSS_` or `PREDATOR_`
+  prefix the pal catalog does not list under, so a straight catalog lookup
+  would misread every one of them as invalid; both prefixes are checked
+  directly instead of trusting the catalog for them. A lucky pal is not
+  flagged `is_boss`, but its `character_id` carries the same `BOSS_` prefix a
+  real boss's does, for the same reason — `is_lucky` covers exactly that gap.
+- **`delete_non_base_map_objects` only removes an object whose base id is set
+  but unresolvable.** An object with no base id at all is not an orphan —
+  it is world content with no base to belong to in the first place: a
+  treasure box, a resource node, a dropped item. Those are never touched by
+  this command, only structures that name a base that no longer exists.
+- **`delete_invalid_structure_map_objects` spares treasure boxes, resource
+  nodes, dropped items and death bags.** The building catalog is not a
+  superset of everything a save's structure list holds — those four are
+  legitimate world content with no catalog entry, and are recognised by id
+  rather than mistaken for invalid structures. The catalog match itself is
+  case-insensitive, since several real structure ids differ from their
+  catalog key only in case.
+- **`delete_inactive_bases` skips a base whose guild has no readable
+  members, counting it separately rather than deleting it.** A guild with no
+  member found here means unknown, not inactive: a member's own `.sav` might
+  simply be missing from the save bundle. Such a base is left alone and
+  counted under its own `skipped_unknown`, not folded into the removed count
+  or silently treated as empty.
+- **`delete_duplicated_players` leaves guild membership records alone.** It
+  deletes the discarded character entry from `CharacterSaveParameterMap`
+  directly, but the guild roster's own copy of that player's membership
+  lives in a typed struct `raw` cannot reach — see "Data unreachable through
+  raw" below. Which record survives is decided by `last_online_ts` (most
+  recent wins); a tie, including two missing timestamps, keeps the lower map
+  index, so the outcome never depends on visit order.
+- **`delete_all_skins` also clears each player's stored skin inventory.** A
+  player's `SkinInventoryInfo` block exists in every player's save whether or
+  not a skin was ever applied, unlike the `SkinName` and
+  `SkinAppliedCharacterId` fields it clears everywhere else, which only exist
+  where a skin actually is — so it is counted separately rather than folded
+  into the same count.
+- **`fix_all_negative_timestamps` only clamps the copy `save.players()` reads
+  from.** A player's `last_online` timestamp also has a duplicate copy in the
+  guild roster's own member-info block, for guild membership display; that
+  copy is unreachable through `raw` for the same reason guild rosters always
+  are (see below), so this command cannot update it and does not claim to.
+- **`delete_unreferenced_data` cannot use `save.pals():delete_where` for its
+  ownerless-pal sweep.** That bulk form's apply phase requires the pal's
+  owning player or guild base to still resolve, which is exactly what an
+  ownerless pal fails by definition. It deletes the
+  `CharacterSaveParameterMap` entry directly instead, the same way
+  `delete_duplicated_players` does, since a pal with no owner and no base
+  worker slot needs nothing else resolved to remove it.
+
+### Data unreachable through raw
+
+Guild rosters (`GroupSaveDataMap`) decode to a typed Rust struct, not the
+generic property bag `raw.*` walks — every entry's `RawData` reports
+`raw.kind` as `"opaque"`, and an opaque node has no children no matter how
+its path is written. That is why `delete_duplicated_players` leaves the
+discarded record's guild-membership entry in place, and why
+`delete_unreferenced_data` does not cascade a removed pal's or player's
+membership out of its guild: neither command has anything to call and
+nothing to walk that would reach it. This is not unique to this plugin — see
+the note under `pst.tools` below.
+
+`save.pals()` (and so `save.pals():delete_where`) covers the world only:
+pals held in a player's own dimensional storage are a separate save file,
+`player_dps:<uid>`, reached only through `raw.*` or
+`save.delete_dps_pals()`. Coverage of dimensional storage varies by command:
+
+| Command | Dimensional storage |
+|---|---|
+| `delete_all_skins` | Not touched — only world skin fields and each player's skin-inventory record. |
+| `delete_imported_pals` | Swept, via `save.delete_dps_pals()` against every player whose storage has an imported-pal slot. |
+| `delete_empty_guilds` | Not applicable. |
+| `delete_inactive_players` | Not applicable. |
+| `fix_all_negative_timestamps` | Not touched. |
+| `remove_invalid_pals_from_save` | Swept, the same way as `delete_imported_pals`. |
+| `remove_invalid_items_from_save` | Not applicable — dimensional storage holds pals, not item slots. |
+| `remove_invalid_passives_from_save` | Swept — each stored pal's `PassiveSkillList` is filtered in place. |
+| `delete_duplicated_players` | Not touched. |
+| `delete_inactive_bases` | Not applicable. |
+| `delete_non_base_map_objects` | Not applicable. |
+| `delete_invalid_structure_map_objects` | Not applicable. |
+| `delete_unreferenced_data` | Not touched — the ownerless-pal sweep only reaches the world's `CharacterSaveParameterMap`. |
+
+A player missing a `_dps.sav` entirely — dimensional storage is unlocked
+separately from the rest of the game — is treated as empty storage rather
+than an error by every command that sweeps it.
 
 ## The `pst.reset` plugin
 

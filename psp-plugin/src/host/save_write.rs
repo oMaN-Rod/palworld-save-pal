@@ -662,13 +662,27 @@ fn remove_orphaned_works_body(state: *mut lua_State) -> Result<c_int, HostError>
 
 host_fn!(push_remove_orphaned_works, remove_orphaned_works_body);
 
+/// Predicts against the same pruned map-object overlay `count_orphaned_works_dry`
+/// reads, so a dry run that removes map objects and then sweeps dynamic items
+/// reports what a real run would remove rather than what the untouched save holds.
+fn count_orphaned_dynamic_items_dry(ctx: &mut RunContext<'_>) -> Result<i64, HostError> {
+    super::save_read::ensure_map_objects_snapshot(ctx)?;
+    let surviving: HashSet<Uuid> = ctx
+        .map_objects
+        .as_ref()
+        .map(|(views, _)| views.iter().map(|view| view.instance_id).collect())
+        .unwrap_or_default();
+    let count = map_object::count_orphaned_dynamic_items_among(ctx.session, Some(&surviving))
+        .map_err(core_error)?;
+    Ok(count as i64)
+}
+
 fn remove_orphaned_dynamic_items_body(state: *mut lua_State) -> Result<c_int, HostError> {
     unsafe {
         check_args(state, 0, "save.remove_orphaned_dynamic_items")?;
         let removed = with_context(state, |ctx| {
             if ctx.dry_run {
-                let count =
-                    map_object::count_orphaned_dynamic_items(ctx.session).map_err(core_error)? as i64;
+                let count = count_orphaned_dynamic_items_dry(ctx)?;
                 ctx.bump("save.remove_orphaned_dynamic_items", count);
                 return Ok(count);
             }

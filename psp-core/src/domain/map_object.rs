@@ -328,10 +328,17 @@ fn item_dynamic_id(item: &crate::ue::games::palworld::PalItemId) -> Option<uuid:
 /// with a real slot's item (`PalItemId`, complete with a `dynamic_id`) makes
 /// them capable of carrying one, and checking them costs nothing a real
 /// orphan sweep would otherwise get wrong.
-fn referenced_dynamic_item_ids(level: &crate::ue::Save) -> Result<HashSet<uuid::Uuid>, CoreError> {
+fn referenced_dynamic_item_ids(
+    level: &crate::ue::Save,
+    surviving: Option<&HashSet<uuid::Uuid>>,
+) -> Result<HashSet<uuid::Uuid>, CoreError> {
     let mut ids = HashSet::new();
 
-    if let Ok(entries) = world::item_container_map(level) {
+    // Propagated, never swallowed: a container map that cannot be read leaves
+    // this set empty, and an empty set means "nothing references anything",
+    // which would present every live dynamic item as an orphan.
+    {
+        let entries = world::item_container_map(level)?;
         for entry in entries {
             let Some(value_props) = props::struct_props(&entry.value) else { continue };
             let Some(slot_values) =
@@ -354,6 +361,16 @@ fn referenced_dynamic_item_ids(level: &crate::ue::Save) -> Result<HashSet<uuid::
 
     if let Some(objects) = world::map_object_values(level)? {
         for object in objects {
+            // A caller predicting a dry run's outcome passes the ids that would
+            // survive it; an object about to be removed must not still count as
+            // referencing an item, or the prediction under-reports the orphans a
+            // real run would find.
+            if let Some(surviving) = surviving {
+                match model_of(object) {
+                    Some(model) if surviving.contains(&props::guid_to_uuid(&model.instance_id)) => {}
+                    _ => continue,
+                }
+            }
             let Some(variant) = concrete_variant(object) else { continue };
             match variant {
                 PalMapConcreteModelVariant::DropItem(model) => {
@@ -386,7 +403,16 @@ fn referenced_dynamic_item_ids(level: &crate::ue::Save) -> Result<HashSet<uuid::
 }
 
 pub fn count_orphaned_dynamic_items(session: &SaveSession) -> Result<usize, CoreError> {
-    let referenced = referenced_dynamic_item_ids(&session.level)?;
+    count_orphaned_dynamic_items_among(session, None)
+}
+
+/// The same predicate against an externally supplied surviving-map-object set,
+/// so a caller can predict the count before actually removing those objects.
+pub fn count_orphaned_dynamic_items_among(
+    session: &SaveSession,
+    surviving: Option<&HashSet<uuid::Uuid>>,
+) -> Result<usize, CoreError> {
+    let referenced = referenced_dynamic_item_ids(&session.level, surviving)?;
     let Ok(values) = world::dynamic_item_values(&session.level) else {
         return Ok(0);
     };
@@ -400,7 +426,7 @@ pub fn count_orphaned_dynamic_items(session: &SaveSession) -> Result<usize, Core
 }
 
 pub fn remove_orphaned_dynamic_items(session: &mut SaveSession) -> Result<usize, CoreError> {
-    let referenced = referenced_dynamic_item_ids(&session.level)?;
+    let referenced = referenced_dynamic_item_ids(&session.level, None)?;
     let Ok(values) = world::dynamic_item_values_mut(&mut session.level) else {
         return Ok(0);
     };

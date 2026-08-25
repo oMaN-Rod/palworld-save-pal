@@ -91,7 +91,7 @@
     {
       "id": "delete_non_base_map_objects",
       "title": "Delete Structures Outside Bases",
-      "description": "Removes structures that belong to no base camp, along with the work entries that referenced them.",
+      "description": "Removes structures that point at a base camp which no longer exists, along with the work entries that referenced them. Treasure boxes, resource nodes and other world objects, which belong to no base by design, are left alone.",
       "destructive": true,
       "params": []
     },
@@ -105,7 +105,7 @@
     {
       "id": "delete_unreferenced_data",
       "title": "Delete Unreferenced Data",
-      "description": "Removes pals that no container holds, work entries whose structure is gone, and stored item data nothing refers to, and clears structure references to players who are no longer in the save. Guild membership records are left as they are.",
+      "description": "Removes pals whose owner is no longer in the save, work entries whose structure is gone, and stored item data nothing refers to, and clears structure references to players who are no longer in the save. Guild membership records are left as they are.",
       "destructive": true,
       "params": []
     }

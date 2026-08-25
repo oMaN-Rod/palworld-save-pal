@@ -298,7 +298,15 @@ function remove_invalid_pals_from_save()
     if pal.is_boss or pal.is_predator or pal.is_lucky then
       return false
     end
-    return not gamedata.is_valid_pal(pal.character_id)
+    -- An unreadable `CharacterID` arrives as an empty string, and an empty
+    -- slot's reads back the literal `"None"`. Neither is in the catalog, so
+    -- without this an entry whose species could not be parsed is destroyed
+    -- as though its species were known to be wrong.
+    local species = pal.character_id
+    if species == nil or species == '' or species == 'None' then
+      return false
+    end
+    return not gamedata.is_valid_pal(species)
   end)
 
   local dps_removed = 0
@@ -549,7 +557,7 @@ function delete_non_base_map_objects()
 
   local verb = ctx.dry_run and "Would remove" or "Removed"
   local summary = string.format(
-    "%s %d structure(s) outside any base and %d work record(s) that referenced them",
+    "%s %d structure(s) whose base camp is gone and %d work record(s) that referenced them",
     verb, removed, works_removed
   )
   if unresolved > 0 then

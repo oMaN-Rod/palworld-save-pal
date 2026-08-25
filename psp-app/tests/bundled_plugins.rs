@@ -1626,6 +1626,23 @@ fn remove_invalid_pals_spares_bosses_and_predators() {
 // --- 10c ---
 
 #[test]
+fn remove_invalid_pals_keeps_a_pal_whose_species_could_not_be_read() {
+    let mut h = Harness::new();
+    seed_pal_with_character_id(&mut h, "");
+    let before = count_pals_where(&h.session, |_| true);
+
+    let outcome = h.run("remove_invalid_pals_from_save", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        count_pals_where(&h.session, |_| true),
+        before,
+        "an unreadable species is unknown, not known-wrong; deleting it destroys an entry          whose species merely failed to parse"
+    );
+    assert_eq!(outcome.counts.get("pals").copied(), Some(0));
+    assert_round_trips(&h.session);
+}
+
+#[test]
 fn remove_invalid_pals_deletes_a_seeded_unknown_species() {
     let mut h = Harness::new();
     let before = count_pals_where(&h.session, |_| true);

@@ -128,8 +128,8 @@ const fn ro(
 /// Every field this handle answers for. `id` is the `MapObjectId` asset name
 /// two objects of the same kind share; `instance_id` is what tells them apart,
 /// and the only thing a `save.map_objects():delete_where(...)` predicate is
-/// handed. `hp` is the one writable row -- the save writes it in place, so it
-/// costs no structural change and no epoch bump.
+/// handed. `hp` and `build_player_uid` are the writable rows -- the save
+/// writes both in place, so they cost no structural change and no epoch bump.
 pub const MAP_OBJECT_FIELDS: &[FieldSpec<MapObjectView, ()>] = &[
     ro(
         "id",

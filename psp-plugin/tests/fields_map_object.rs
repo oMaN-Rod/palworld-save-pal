@@ -173,8 +173,7 @@ fn an_ungranted_assignment_is_refused_before_the_field_name_is_resolved() {
     );
 }
 
-/// Reading is untouched by the write surface this task added, and stays on
-/// `save.read` alone.
+/// Reading is untouched by the assignable rows, and stays on `save.read` alone.
 #[test]
 fn every_row_still_reads_with_save_read_alone() {
     let mut harness = support::harness(&[Capability::SaveRead]);
