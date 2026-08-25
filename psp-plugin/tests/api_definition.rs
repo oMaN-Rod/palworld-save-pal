@@ -422,3 +422,174 @@ fn every_pal_field_row_reads_back_at_its_declared_type() {
          admit nil in its declared type"
     );
 }
+
+#[test]
+fn every_guild_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "guild")
+        .expect("the guild handle must be described");
+
+    for spec in psp_plugin::GUILD_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_guild_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "guild").expect("guild");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::GUILD_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+#[test]
+fn every_base_field_row_appears_in_the_api_definition() {
+    let definition = api_definition();
+    let handle = definition
+        .handles
+        .iter()
+        .find(|h| h.name == "base")
+        .expect("the base handle must be described");
+
+    for spec in psp_plugin::BASE_FIELDS {
+        let described = handle.fields.iter().find(|f| f.name == spec.name);
+        assert!(described.is_some(), "{} is in the table but not the definition", spec.name);
+        let described = described.expect("checked above");
+        assert_eq!(described.ty, spec.ty, "{} disagrees on type", spec.name);
+        assert_eq!(described.access, spec.access, "{} disagrees on access", spec.name);
+    }
+}
+
+#[test]
+fn every_described_base_field_exists_in_the_table() {
+    let definition = api_definition();
+    let handle = definition.handles.iter().find(|h| h.name == "base").expect("base");
+
+    for field in handle.fields {
+        assert!(
+            psp_plugin::BASE_FIELDS.iter().any(|s| s.name == field.name),
+            "{} is described but has no table row",
+            field.name
+        );
+    }
+}
+
+/// The guild counterpart of the pal and player read-back tests, and load-bearing
+/// for the same reason: the two agreement tests above compare the table to
+/// itself, while this one compares it to what Lua actually receives. Three of
+/// this handle's rows are answered from the cached `GuildDto` and five from the
+/// session's guild summary, so a row's declared type and its value can disagree
+/// with nothing objecting.
+#[test]
+fn every_guild_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for g in save.guilds() do target = g break end\n\
+         assert(target ~= nil, 'the fixture must hold a guild')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::GUILD_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = read_only_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::GUILD_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "guild.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(psp_plugin::GUILD_FIELDS.len(), seen.len(), "every row must be probed exactly once");
+    assert_eq!(
+        read_as_nil,
+        Vec::<&str>::new(),
+        "every row has a value on the fixture guild, including the nilable ones -- a row \
+         reading nil here needs explaining, not exempting"
+    );
+}
+
+/// The base counterpart. Two of this handle's rows are answered from the
+/// cached `BaseDto` and five straight off the base's `BaseCampSaveData` entry,
+/// which is exactly the split a declared type can drift across.
+#[test]
+fn every_base_field_row_reads_back_at_its_declared_type() {
+    let mut script = String::from(REFINED_TYPE_HELPER);
+    script.push_str(
+        "local target\n\
+         for b in save.bases() do target = b break end\n\
+         assert(target ~= nil, 'the fixture must hold a base')\n\
+         local out = {}\n",
+    );
+    for spec in psp_plugin::BASE_FIELDS {
+        script.push_str(&format!("out[#out+1] = '{n}=' .. refined_type(target['{n}'])\n", n = spec.name));
+    }
+    script.push_str("return table.concat(out, ',')");
+
+    let mut h = read_only_harness();
+    let (status, value) = h.run(&script);
+    assert_eq!(status, RunStatus::Ok, "the probe script must run cleanly: {value:?}");
+    let value = value.expect("a string");
+
+    let seen: BTreeMap<&str, &str> = value
+        .split(',')
+        .map(|entry| entry.split_once('=').unwrap_or_else(|| panic!("expected name=type, got {entry}")))
+        .collect();
+
+    let mut read_as_nil: Vec<&str> = Vec::new();
+    for spec in psp_plugin::BASE_FIELDS {
+        let lua_type = *seen.get(spec.name).unwrap_or_else(|| {
+            panic!("{} was not probed -- the generator and this loop drifted", spec.name)
+        });
+        assert!(
+            allowed_lua_types(&spec.ty).contains(&lua_type),
+            "base.{} is declared {:?} but Lua resolved it as {lua_type}",
+            spec.name,
+            spec.ty
+        );
+        if lua_type == "nil" {
+            read_as_nil.push(spec.name);
+        }
+    }
+
+    assert_eq!(psp_plugin::BASE_FIELDS.len(), seen.len(), "every row must be probed exactly once");
+    assert_eq!(
+        read_as_nil,
+        Vec::<&str>::new(),
+        "every row has a value on the fixture base, including the nilable ones -- a row \
+         reading nil here needs explaining, not exempting"
+    );
+}

@@ -102,7 +102,7 @@ script is actually allowed to touch.
 | Capability | Wire name | Installs |
 |---|---|---|
 | Save read | `save.read` | The `save` global's read half: `save.info()`, `save.players()`, `save.pals()`, `save.guilds()`, `save.bases()`, `save.containers()`, and every handle field read — except the `player` fields that are not answered from the save's player summary, which need `players` as well (see below). |
-| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a pal's or a player's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
+| Save write | `save.write` | The `save` global's write half: `delete_where` on the player/guild/pal iterators, `save.clear_slots_where()`, every handle's mutating methods (`player.delete()`, `pal.delete()`, `slot.clear()`, ...), and assignment to a `pal`, `player`, `guild` or `base` handle's writable fields. Requires `save.read` to also be declared — the manifest is refused otherwise. |
 | Save raw | `save.raw` | The `raw` global (`raw.get`/`exists`/`kind`/`set`/`delete`/`len`/`visit`). **Bundled plugins only in v1** — see below. |
 | Players | `players` | Installs nothing of its own. Gates two things: the `player:<uid>` and `player_dps:<uid>` raw targets — `raw.get`/`raw.set`/etc. against a per-player scope refuse with an error unless this is also granted, and `raw` itself still needs `save.raw` — and reading any `player` handle field that is not answered from the save's own player summary. It is not a blanket gate on everything about a player: a player's entry in the level save (their `Exp`, `Level`, `FullStomach` and stat lists) is also reachable through the `level` raw target, which needs `save.raw` but not this. |
 | Game data | `gamedata` | The `gamedata` global (`gamedata.is_valid_item()`, `gamedata.is_valid_pal()`, `gamedata.version()`). |
@@ -221,7 +221,7 @@ method call — `player.name`, not `player.name()`):
 | `player` | `uid`, `name`, `level`, `guild_id`, `pal_count`, `last_online` (ISO string or nil), `last_online_ts` (Unix seconds or nil), `instance_id`, `exp`, `hp`, `stomach`, `sanity`, `technology_points`, `boss_technology_points`, `effigy_possess_num`, `pal_box_id`, `otomo_container_id`, eight table-valued fields: `technologies`, `completed_missions`, `current_missions`, `unlocked_fast_travel_points`, `collected_effigies`, `defeated_bosses` (lists of id strings) and `status_point_list`, `ext_status_point_list` (points keyed by stat name), plus `pals` (a `player.pals()` iterator factory) |
 | `pal` | `instance_id`, `character_id`, `character_key`, `nickname`, `owner_uid`, `guild_id`, `base_id`, `gender`, `level`, `hp`, `max_hp`, `rank`, `exp`, `talent_hp`, `talent_shot`, `talent_defense`, `rank_hp`, `rank_attack`, `rank_defense`, `rank_craftspeed`, `is_boss`, `is_lucky`, `is_awakened`, `is_imported`, `is_predator`, `is_tower`, `is_sick`, `group_id`, `stomach`, `sanity`, `friendship_point`, `storage_id`, `storage_slot`, and four table-valued fields: `learned_skills`, `active_skills`, `passive_skills` (lists of catalog id strings) and `work_suitability` (ranks keyed by work type) |
 | `guild` | `id`, `name`, `admin_uid`, `player_count`, `base_count`, `level`, `pal_count`, `chest_container_id` (a container id string, or `nil` when the guild has no chest) |
-| `base` | `id`, `guild_id`, `x`, `y`, `z` |
+| `base` | `id`, `guild_id`, `name`, `area_range` (the radius of the base's working area, in world units), `x`, `y`, `z`. Everything but `id` reads `nil` on a base whose record in the save could not be read — the iterator hands out a handle for any entry that has an id, without checking there is anything behind it. |
 | `container` | `id`, `slot_count`, `slots` (a `container.slots()` iterator factory) |
 | `slot` | `index`, `item_id` (nil for an empty slot), `count` |
 
@@ -342,10 +342,10 @@ out instead. `save.clear_slots_where` has no such split — its predicate pass i
 identical in both modes and only the apply phase is skipped — so prefer it over
 hand-rolling the loop, and reach for `ctx.dry_run` branching only if you must.
 
-#### Writing a pal's or a player's fields
+#### Writing a handle's fields
 
-The writable fields of a `pal` or a `player` handle are written by assigning to
-them, not by calling a setter:
+The writable fields of a `pal`, `player`, `guild` or `base` handle are written
+by assigning to them, not by calling a setter:
 
 ```lua
 pal.level = 60
@@ -355,34 +355,54 @@ pal.nickname = "Sparky"
 player.level = 50
 player.technology_points = 200
 player.name = "Ada"
+
+guild.name = "The Guild"
+guild.level = 12
+
+base.name = "Main Camp"
+base.area_range = 3500
 ```
 
 An out-of-range value raises rather than being clamped, and the message names
 the field. Assigning a field that does not exist raises too, so a typo is an
 error rather than a silent no-op. Not every readable field is writable —
 identity fields (a pal's `instance_id`, `owner_uid`, `guild_id`, `base_id`; a
-player's `uid`), derived ones (`player.pal_count`) and fields the game itself
-recomputes whenever the pal is saved (`pal.hp`, `pal.stomach`, ...) are
-read-only, and assigning one raises saying so. The authority on which is which
-is `psp.lua`: a type-annotation file generated from the same host API
-definition these docs describe, in which every read-only field says so in its
-own entry. It is written into the plugin's workspace only where the editor's
-full tier runs, since it exists for that tier's language server to read — on
-the baseline tier there is no such file to open, and the runtime error on a
-refused assignment is what tells you the field was read-only.
+player's `uid`; a base's `id` and `guild_id`), derived ones (`player.pal_count`,
+`guild.player_count`) and fields the game itself recomputes whenever the pal is
+saved (`pal.hp`, `pal.stomach`, ...) are read-only, and assigning one raises
+saying so. A base's `x`, `y` and `z` are read-only for a blunter reason:
+nothing in this app writes a base's position at all, so there is no write path
+to offer — and moving a base is not merely a missing setter, since its placed
+structures and working pals carry their own coordinates that nothing relates
+back to the base's. The authority on which is which is `psp.lua`: a
+type-annotation file generated from the same host API definition these docs
+describe, in which every read-only field says so in its own entry. It is
+written into the plugin's workspace only where the editor's full tier runs,
+since it exists for that tier's language server to read — on the baseline tier
+there is no such file to open, and the runtime error on a refused assignment is
+what tells you the field was read-only.
 
 Assignment is non-structural: every live handle and iterator stays valid, and a
 read straight afterwards sees the new value. That holds for a player too — a
 player write deliberately leaves the player's own item containers out of what it
 writes back, so nothing a `container` or `slot` handle points at can move under
-it.
+it. A guild write does the same with the guild's bases and its shared chest, and
+a base write with the base's storage containers: the save's own writers would
+otherwise walk each of those into a container rewrite that no handle or iterator
+could see coming.
+
+A few values are refused rather than written because the save itself reads them
+as "leave this alone", so the assignment would quietly do nothing: an empty
+`guild.name` or `base.name`, and a `guild.level` of zero. Assigning either
+writable `base` field is refused outright on a base whose record could not be
+read — the same base whose `name`, `area_range`, `x`, `y` and `z` all read
+`nil` — since there would be nothing for the write to land in.
 
 **Under a dry run** an assignment is validated and counted like the write
 methods above, but it does not simply return — the new value goes into the
-run's own cache for that pal or player, so every later read in that same run
-sees it, which is what lets a preview compute from values it has itself
-assigned. Nothing reaches the save, and the cache is discarded when the run
-ends.
+run's own cache for that handle, so every later read in that same run sees it,
+which is what lets a preview compute from values it has itself assigned. Nothing
+reaches the save, and the cache is discarded when the run ends.
 
 **Reads are snapshots, not live views.** A field read hands back a copy — for a
 table field, a fresh table each time — so mutating what you read changes
@@ -644,11 +664,11 @@ conversion — the run still succeeds, but with no `result`.
 Under a dry run specifically, every mutating host function (`raw.set`,
 `pal.delete`, `players():delete_where()`, ...) also bumps its own count key
 (for example `"guilds.delete_where"`) the moment it runs, independently of
-whatever the script itself returns. Assigning a pal or player field does the
-same, under the handle's name followed by the field name — `pal.level = 60`
-bumps `"pal.level"`, `player.level = 50` bumps `"player.level"` — once per
-assignment the host accepts, so a refused assignment contributes nothing and
-assigning the same field twice counts twice.
+whatever the script itself returns. Assigning a handle field does the same,
+under the handle's name followed by the field name — `pal.level = 60` bumps
+`"pal.level"`, `guild.name = "x"` bumps `"guild.name"` — once per assignment
+the host accepts, so a refused assignment contributes nothing and assigning the
+same field twice counts twice.
 
 The outcome's final `counts` map is the union of those host-bumped keys and
 the script's own returned `counts` table — so a dry-run caller can see keys

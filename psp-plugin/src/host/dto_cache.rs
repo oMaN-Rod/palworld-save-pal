@@ -1,11 +1,14 @@
 use std::collections::BTreeMap;
 
-use psp_core::domain::{pal, player, world};
+use psp_core::domain::{containers, guild, guild_tail, pal, player, world};
+use psp_core::dto::guild::{BaseDto, GuildDto};
 use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::dto::pal::PalDto;
 use psp_core::dto::player::PlayerDto;
 use psp_core::error::CoreError;
 use psp_core::progress::{null_progress, ProgressSink};
+use psp_core::props;
+use psp_core::ue::{MapEntry, PalStruct, Property, StructValue};
 use uuid::Uuid;
 
 use super::HostError;
@@ -35,6 +38,8 @@ pub(crate) struct CachedPal {
 pub struct DtoCache {
     pal: BTreeMap<Uuid, CachedPal>,
     player: BTreeMap<Uuid, CachedPlayer>,
+    guild: BTreeMap<Uuid, CachedGuild>,
+    base: BTreeMap<Uuid, CachedBase>,
 }
 
 pub(crate) struct CachedPlayer {
@@ -387,6 +392,412 @@ fn flush_players(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
     Ok(written_count)
 }
 
+pub(crate) struct CachedGuild {
+    dto: GuildDto,
+    dirty: bool,
+    /// Names of the fields a `guild_write` call has actually touched this run,
+    /// not yet flushed. Unlike the pal and player caches, nothing on the read
+    /// path consults this: both writable guild rows read the cached DTO
+    /// whether or not they have been written. It is kept because the flush
+    /// needs it -- the guild summary the app goes on reading is session state
+    /// nothing recomputes, so exactly the rows a write moved have to be
+    /// carried across into it by hand.
+    written: Vec<&'static str>,
+}
+
+/// No `written` list, unlike the other three caches. Those record it so a
+/// later read this run can be routed away from a stale summary; the base
+/// handle has no summary at all, and both of its writable rows read this DTO
+/// whether or not they have been written, so there is nothing for such a list
+/// to decide.
+pub(crate) struct CachedBase {
+    dto: BaseDto,
+    dirty: bool,
+}
+
+/// The guild's name and base-camp level as the *save* holds them, read
+/// straight out of the guild tail rather than out of `session.guild_summaries`.
+///
+/// That distinction is the whole reason this exists. The summary is session
+/// state built when the save was opened; sourcing the cache from it would make
+/// a read after a flush answer with whatever this run believed it wrote, even
+/// if the write never reached the save at all.
+fn guild_tail_name_and_level(ctx: &RunContext<'_>, id: Uuid) -> Option<(String, i32)> {
+    let entries = ctx.session.group_map().ok()?;
+    let entry = entries.iter().find(|entry| props::as_uuid(&entry.key) == Some(id))?;
+    let guild = guild_tail::as_guild(guild_tail::entry_group_data(entry)?)?;
+    Some((guild.guild_name.clone(), guild.base_camp_level))
+}
+
+/// Builds the guild DTO this cache holds, and the only `GuildDto` a write ever
+/// reaches `update_guilds` with.
+///
+/// `bases` and `guild_chest` are `None` here and are never populated
+/// afterwards. `apply_guild_dto` routes a populated `bases` into
+/// `apply_base_dto` for every base -- which in turn rewrites each base's
+/// storage containers -- and a populated `guild_chest` into
+/// `apply_item_container_dto`. Both rewrite containers underneath handles and
+/// iterators that have no way to know, so a guild write would have to be
+/// structural or the two have to be out of it. Building the DTO here rather
+/// than fetching one from `get_guild_details` -- which always returns
+/// `bases: Some(..)` -- makes it the second, and leaves no populated field for
+/// a later caller to forget to clear.
+///
+/// `container_id` is the one output-only field that is filled in, because the
+/// `chest_container_id` row reads it; `apply_guild_dto` never looks at it.
+fn load_guild_dto(ctx: &mut RunContext<'_>, id: Uuid) -> Result<GuildDto, HostError> {
+    // Raises where the base loader degrades to nil, and the difference is
+    // reachability rather than taste. `bases_next` hands out a handle for any
+    // uuid-keyed `BaseCampSaveData` entry, so an unreadable base is reachable
+    // under `save.read` alone on a save no plugin has touched. A guild handle
+    // can only come from `guild_summary_order`, which `build_guild_summaries`
+    // fills only with guilds whose tail already decoded, and which nothing
+    // afterwards adds to -- `psp-plugin/src/host/save_write.rs:49` only
+    // removes from it and `psp-core/src/domain/summaries.rs:344` is the sole
+    // assignment. So the only way here is a `raw` write that breaks the guild
+    // tail mid-run, which needs `save.raw`; reporting that rather than
+    // answering nil is the more useful answer to a plugin that just did it.
+    let (name, base_camp_level) = guild_tail_name_and_level(ctx, id).ok_or_else(|| {
+        HostError::new(format!("guild {id} has no readable guild record in the save"))
+    })?;
+    Ok(GuildDto {
+        bases: None,
+        guild_chest: None,
+        lab_research: None,
+        name: Some(name),
+        base_camp_level: Some(base_camp_level),
+        id: Some(id),
+        admin_player_uid: None,
+        players: Vec::new(),
+        container_id: guild::guild_chest_id(ctx.session, id),
+        lab_research_data: Vec::new(),
+    })
+}
+
+/// Parses and caches on first access; a later call for the same guild returns
+/// the cached (possibly dirty) copy instead of re-reading the guild tail.
+pub(crate) fn guild_read<'ctx>(
+    ctx: &'ctx mut RunContext<'_>,
+    id: Uuid,
+) -> Result<&'ctx GuildDto, HostError> {
+    if !ctx.dto_cache.guild.contains_key(&id) {
+        let dto = load_guild_dto(ctx, id)?;
+        ctx.dto_cache.guild.insert(id, CachedGuild { dto, dirty: false, written: Vec::new() });
+    }
+    ctx.dto_cache
+        .guild
+        .get(&id)
+        .map(|cached| &cached.dto)
+        .ok_or_else(|| HostError::new(format!("guild {id} not found")))
+}
+
+/// Mutates the cached DTO and marks it dirty; the write only lands on the save
+/// at the next `flush`. Non-structural by construction (see `load_guild_dto`),
+/// so handles and iterators stay valid and the mutation epoch does not move.
+pub(crate) fn guild_write(
+    ctx: &mut RunContext<'_>,
+    id: Uuid,
+    fields: &[&'static str],
+    f: impl FnOnce(&mut GuildDto),
+) -> Result<(), HostError> {
+    guild_read(ctx, id)?;
+    let Some(cached) = ctx.dto_cache.guild.get_mut(&id) else {
+        return Err(HostError::new(format!("guild {id} not found")));
+    };
+    f(&mut cached.dto);
+    cached.dirty = true;
+    for field in fields {
+        if !cached.written.contains(field) {
+            cached.written.push(field);
+        }
+    }
+    ctx.note_write();
+    Ok(())
+}
+
+/// The only `GuildDto` that ever reaches `update_guilds`, rebuilt field by
+/// field from the cached one rather than handed over whole.
+///
+/// `bases` and `guild_chest` are the reason this exists rather than being an
+/// extra copy. `apply_guild_dto` routes a populated `bases` into
+/// `apply_base_dto` for every base -- which in turn rewrites each base's
+/// storage containers -- and a populated `guild_chest` into
+/// `apply_item_container_dto`. Both rewrite containers underneath handles and
+/// iterators that have no way to know, so a guild write would have to be
+/// structural or the two have to be out of it. `load_guild_dto` already
+/// declines to fetch them; nulling them again here is what makes it a property
+/// of the write rather than of one loader, so a later change to what the cache
+/// holds cannot quietly turn it back on.
+///
+/// Destructured exhaustively, with no `..`, so a field added to `GuildDto`
+/// later stops compiling here rather than silently arriving in the write.
+fn guild_write_payload(cached: &GuildDto) -> GuildDto {
+    let GuildDto {
+        bases: _,
+        guild_chest: _,
+        lab_research: _,
+        name,
+        base_camp_level,
+        id,
+        admin_player_uid: _,
+        players: _,
+        container_id: _,
+        lab_research_data: _,
+    } = cached;
+    GuildDto {
+        bases: None,
+        guild_chest: None,
+        lab_research: None,
+        name: name.clone(),
+        base_camp_level: *base_camp_level,
+        id: *id,
+        admin_player_uid: None,
+        players: Vec::new(),
+        container_id: None,
+        lab_research_data: Vec::new(),
+    }
+}
+
+fn write_guild_dto(ctx: &mut RunContext<'_>, id: Uuid, dto: &GuildDto) -> Result<(), HostError> {
+    let fallback = null_progress();
+    let progress: &ProgressSink = ctx.progress.unwrap_or(&fallback);
+    let mut modified = OrderedMap::new();
+    modified.insert(id, guild_write_payload(dto));
+    guild::update_guilds(ctx.session, ctx.game_data, &modified, progress).map_err(core_error)
+}
+
+/// The guild summary is session state, not a run-scoped cache: nothing
+/// recomputes it after a write, so the two rows a write can move are carried
+/// across by hand. The handle's own reads do not depend on this -- they come
+/// from the guild tail -- but everything outside the run that reads the summary
+/// does.
+fn refresh_guild_summary(
+    ctx: &mut RunContext<'_>,
+    id: Uuid,
+    written: &[&'static str],
+    name: Option<String>,
+    level: Option<i32>,
+) {
+    let Some(summary) = ctx.session.guild_summaries.get_mut(&id) else {
+        return;
+    };
+    if written.contains(&"name") {
+        if let Some(name) = name {
+            summary.name = name;
+        }
+    }
+    if written.contains(&"level") {
+        if let Some(level) = level {
+            summary.level = Some(i64::from(level));
+        }
+    }
+}
+
+fn flush_guilds(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
+    let cache = std::mem::take(&mut ctx.dto_cache.guild);
+    if cache.is_empty() {
+        return Ok(0);
+    }
+    let mut written_count = 0usize;
+    let mut first_error: Option<HostError> = None;
+    for (id, cached) in cache {
+        if !cached.dirty {
+            continue;
+        }
+        let name = cached.dto.name.clone();
+        let level = cached.dto.base_camp_level;
+        match write_guild_dto(ctx, id, &cached.dto) {
+            Ok(()) => {
+                refresh_guild_summary(ctx, id, &cached.written, name, level);
+                ctx.dto_flush_count = ctx.dto_flush_count.saturating_add(1);
+                written_count += 1;
+            }
+            Err(error) => {
+                if first_error.is_none() {
+                    first_error = Some(error);
+                }
+            }
+        }
+    }
+    if let Some(error) = first_error {
+        return Err(error);
+    }
+    Ok(written_count)
+}
+
+/// The base's name and working radius as the save holds them, read straight
+/// off its `BaseCampSaveData` entry. `None` for an entry whose `RawData` is
+/// not a base-camp record at all -- `bases_next` hands out a handle for any
+/// uuid-keyed entry without checking, so that entry is reachable. It is also
+/// the case `apply_base_dto` cannot write.
+fn base_camp_name_and_area(entry: &MapEntry) -> Option<(String, f64)> {
+    let value_props = props::struct_props(&entry.value)?;
+    let Property::Struct(StructValue::Game(PalStruct::BaseCamp(base_camp))) =
+        props::get(value_props, &["RawData"])?
+    else {
+        return None;
+    };
+    Some((base_camp.name.clone(), f64::from(base_camp.area_range)))
+}
+
+/// Builds the base DTO this cache holds, and the only `BaseDto` a write ever
+/// reaches `apply_base_dto` with.
+///
+/// `storage_containers` is empty here and is never populated afterwards, for
+/// the reason `load_guild_dto` gives: `apply_base_dto` routes a populated one
+/// into `apply_item_container_dto`, which rewrites containers underneath
+/// handles and iterators that have no way to know. `pals` and `pal_container`
+/// are left empty and `location` `None` because `apply_base_dto` never reads
+/// any of them -- `BaseDto::location` is output-only, which is also why this
+/// handle's `x`/`y`/`z` are read-only rows.
+fn load_base_dto(ctx: &RunContext<'_>, id: Uuid) -> Result<BaseDto, HostError> {
+    let entries = ctx.session.base_camp_map().unwrap_or(&[]);
+    let entry = entries
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(id))
+        .ok_or_else(|| HostError::new(format!("base {id} not found")))?;
+    // Degraded to a pair of `None`s rather than an error, matching what
+    // `build_guild_dto` answers for the same entry and what this handle's
+    // `x`/`y`/`z` already answer for it: `base_camp_location` returns `None`
+    // too, so raising for two rows while answering nil for three on the same
+    // object would be an inconsistency no plugin author could predict. The
+    // write side refuses instead -- see `base_camp_record_exists`.
+    let (name, area_range) = match base_camp_name_and_area(entry) {
+        Some((name, area_range)) => (Some(name), Some(area_range)),
+        None => (None, None),
+    };
+    Ok(BaseDto {
+        pals: OrderedMap::new(),
+        container_id: None,
+        slot_count: None,
+        storage_containers: OrderedMap::new(),
+        pal_container: None,
+        id,
+        name,
+        location: None,
+        area_range,
+    })
+}
+
+/// Whether the save carries a base-camp record for `id` that
+/// `apply_base_dto` could actually write into.
+///
+/// Read from the save rather than from the cached DTO, and deliberately so: a
+/// cached `name` of `None` stops meaning "no record" the moment a write puts a
+/// name there, so answering from the cache would let a second assignment slip
+/// through where the first was refused.
+pub(crate) fn base_camp_record_exists(ctx: &RunContext<'_>, id: Uuid) -> bool {
+    ctx.session
+        .base_camp_map()
+        .unwrap_or(&[])
+        .iter()
+        .find(|entry| props::as_uuid(&entry.key) == Some(id))
+        .and_then(base_camp_name_and_area)
+        .is_some()
+}
+
+/// Parses and caches on first access; a later call for the same base returns
+/// the cached (possibly dirty) copy instead of re-reading the entry.
+pub(crate) fn base_read<'ctx>(
+    ctx: &'ctx mut RunContext<'_>,
+    id: Uuid,
+) -> Result<&'ctx BaseDto, HostError> {
+    if !ctx.dto_cache.base.contains_key(&id) {
+        let dto = load_base_dto(ctx, id)?;
+        ctx.dto_cache.base.insert(id, CachedBase { dto, dirty: false });
+    }
+    ctx.dto_cache
+        .base
+        .get(&id)
+        .map(|cached| &cached.dto)
+        .ok_or_else(|| HostError::new(format!("base {id} not found")))
+}
+
+/// Mutates the cached DTO and marks it dirty; the write only lands on the save
+/// at the next `flush`. Non-structural by construction (see `load_base_dto`),
+/// so handles and iterators stay valid and the mutation epoch does not move.
+pub(crate) fn base_write(
+    ctx: &mut RunContext<'_>,
+    id: Uuid,
+    f: impl FnOnce(&mut BaseDto),
+) -> Result<(), HostError> {
+    base_read(ctx, id)?;
+    let Some(cached) = ctx.dto_cache.base.get_mut(&id) else {
+        return Err(HostError::new(format!("base {id} not found")));
+    };
+    f(&mut cached.dto);
+    cached.dirty = true;
+    ctx.note_write();
+    Ok(())
+}
+
+/// The only `BaseDto` that ever reaches `apply_base_dto`, rebuilt field by
+/// field from the cached one for the reason `guild_write_payload` gives.
+/// `storage_containers` is the field that matters: `apply_base_dto` routes a
+/// populated one into `apply_item_container_dto` for every container the base
+/// owns. `pals`, `container_id`, `slot_count`, `pal_container` and `location`
+/// are output-only -- `apply_base_dto` never reads any of them -- and
+/// `location` in particular is why this handle's `x`/`y`/`z` are read-only
+/// rows and not writable ones.
+///
+/// Destructured exhaustively, with no `..`, so a field added to `BaseDto`
+/// later stops compiling here rather than silently arriving in the write.
+fn base_write_payload(cached: &BaseDto) -> BaseDto {
+    let BaseDto {
+        pals: _,
+        container_id: _,
+        slot_count: _,
+        storage_containers: _,
+        pal_container: _,
+        id,
+        name,
+        location: _,
+        area_range,
+    } = cached;
+    BaseDto {
+        pals: OrderedMap::new(),
+        container_id: None,
+        slot_count: None,
+        storage_containers: OrderedMap::new(),
+        pal_container: None,
+        id: *id,
+        name: name.clone(),
+        location: None,
+        area_range: *area_range,
+    }
+}
+
+fn flush_bases(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
+    let cache = std::mem::take(&mut ctx.dto_cache.base);
+    if cache.is_empty() {
+        return Ok(0);
+    }
+    let mut written_count = 0usize;
+    let mut first_error: Option<HostError> = None;
+    for (id, cached) in cache {
+        if !cached.dirty {
+            continue;
+        }
+        match containers::apply_base_dto(ctx.session, id, &base_write_payload(&cached.dto))
+            .map_err(core_error)
+        {
+            Ok(()) => {
+                ctx.dto_flush_count = ctx.dto_flush_count.saturating_add(1);
+                written_count += 1;
+            }
+            Err(error) => {
+                if first_error.is_none() {
+                    first_error = Some(error);
+                }
+            }
+        }
+    }
+    if let Some(error) = first_error {
+        return Err(error);
+    }
+    Ok(written_count)
+}
+
 /// Whether `field` has a pending, not-yet-flushed write for this pal this
 /// run. `false` once the entry has flushed (real run) or was never written
 /// (both runs) -- either way the pal summary is the right source then.
@@ -414,18 +825,29 @@ pub(crate) fn pal_field_was_written(ctx: &RunContext<'_>, id: Uuid, field: &str)
 /// failure mode this cache exists to prevent. The first error is reported
 /// after every entry has had its chance.
 ///
-/// Both halves are attempted for the same reason a failing pal does not abort
+/// Every half is attempted for the same reason a failing pal does not abort
 /// the rest: whichever ran first has already drained its map, so bailing out
-/// would discard the other's pending writes rather than merely deferring them.
+/// would discard the others' pending writes rather than merely deferring them.
 pub(crate) fn flush(ctx: &mut RunContext<'_>) -> Result<usize, HostError> {
     if ctx.dry_run {
         return Ok(0);
     }
-    let pals = flush_pals(ctx);
-    let players = flush_players(ctx);
-    match (pals, players) {
-        (Err(error), _) | (Ok(_), Err(error)) => Err(error),
-        (Ok(pals), Ok(players)) => Ok(pals.saturating_add(players)),
+    let halves = [flush_pals(ctx), flush_players(ctx), flush_guilds(ctx), flush_bases(ctx)];
+    let mut written = 0usize;
+    let mut first_error: Option<HostError> = None;
+    for half in halves {
+        match half {
+            Ok(count) => written = written.saturating_add(count),
+            Err(error) => {
+                if first_error.is_none() {
+                    first_error = Some(error);
+                }
+            }
+        }
+    }
+    match first_error {
+        Some(error) => Err(error),
+        None => Ok(written),
     }
 }
 
@@ -498,5 +920,74 @@ mod tests {
         ] {
             assert!(!present, "{name} still reaches update_players, so a player write is structural");
         }
+    }
+    /// Both by name rather than one representative: leaving either populated
+    /// is enough to turn a guild write into a rewrite of containers no handle
+    /// or iterator has any way to know moved.
+    ///
+    /// Deliberately built from a DTO that carries both, rather than from the
+    /// one the cache actually loads: what has to hold is that the write drops
+    /// them, not that the loader happened not to fetch them.
+    #[test]
+    fn a_guild_write_carries_neither_the_guilds_bases_nor_its_chest() {
+        let cached: GuildDto = serde_json::from_value(serde_json::json!({
+            "name": "Tester",
+            "base_camp_level": 4,
+            "id": "99999999-2222-3333-4444-555555555555",
+            "bases": {
+                "11111111-2222-3333-4444-555555555555": {
+                    "id": "11111111-2222-3333-4444-555555555555",
+                    "storage_containers": {},
+                },
+            },
+            "guild_chest": {
+                "id": "22222222-2222-3333-4444-555555555555",
+                "type": "GuildChest",
+                "slots": [],
+                "slot_num": 40,
+            },
+        }))
+        .expect("the fixture payload must deserialize");
+        assert!(cached.bases.is_some() && cached.guild_chest.is_some(), "the fixture must carry both");
+
+        let payload = guild_write_payload(&cached);
+
+        assert!(payload.bases.is_none(), "bases still reaches apply_guild_dto, which rewrites every base");
+        assert!(
+            payload.guild_chest.is_none(),
+            "guild_chest still reaches apply_guild_dto, which rewrites the chest container"
+        );
+        assert_eq!(payload.name.as_deref(), Some("Tester"), "the write must still carry the name");
+        assert_eq!(payload.base_camp_level, Some(4), "the write must still carry the level");
+    }
+
+    /// The base half of the same property: `storage_containers` is the one
+    /// field `apply_base_dto` walks into a container rewrite.
+    #[test]
+    fn a_base_write_carries_none_of_the_bases_storage_containers() {
+        let cached: BaseDto = serde_json::from_value(serde_json::json!({
+            "id": "11111111-2222-3333-4444-555555555555",
+            "name": "Tester",
+            "area_range": 3500.0,
+            "storage_containers": {
+                "22222222-2222-3333-4444-555555555555": {
+                    "id": "22222222-2222-3333-4444-555555555555",
+                    "type": "BaseContainer",
+                    "slots": [],
+                    "slot_num": 6,
+                },
+            },
+        }))
+        .expect("the fixture payload must deserialize");
+        assert!(!cached.storage_containers.is_empty(), "the fixture must carry a container");
+
+        let payload = base_write_payload(&cached);
+
+        assert!(
+            payload.storage_containers.is_empty(),
+            "a storage container still reaches apply_base_dto, which rewrites its slots"
+        );
+        assert_eq!(payload.name.as_deref(), Some("Tester"), "the write must still carry the name");
+        assert_eq!(payload.area_range, Some(3500.0), "the write must still carry the radius");
     }
 }

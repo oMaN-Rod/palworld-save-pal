@@ -76,24 +76,26 @@
 ---Requires capability: save.read.
 ---
 ---@class guild
----@field id string The guild's UUID, as a string.
----@field name string The guild's name.
----@field admin_uid string|nil The UUID, as a string, of the guild's admin player, or nil if the guild has none.
----@field player_count integer How many players belong to this guild.
----@field base_count integer How many bases this guild has.
----@field level integer|nil The guild's level, or nil if the save has no level recorded for it.
----@field pal_count integer How many pals belong to this guild's bases.
----@field chest_container_id string|nil The UUID, as a string, of this guild's shared chest container, or nil if the guild has no chest.
+---@field id string The guild's UUID, as a string. Read-only.
+---@field name string The guild's name. An empty string cannot be assigned: the save reads one as "leave the name alone", so the assignment would change nothing rather than clearing it.
+---@field admin_uid string|nil The UUID, as a string, of the guild's admin player, or nil if the guild has none. Read-only.
+---@field player_count integer How many players belong to this guild. Read-only: it is derived by counting, not stored.
+---@field base_count integer How many bases this guild has. Read-only: it is derived by counting, not stored.
+---@field level integer The guild's base-camp level. Never nil: the guild tail stores it as a plain integer with no way to record its absence, so a guild that has a handle at all has a level. Zero cannot be assigned: the save reads one as "leave the level alone", so the assignment would change nothing. Assigning nil raises for the same reason.
+---@field pal_count integer How many pals belong to this guild's bases. Read-only: it is derived by counting, not stored.
+---@field chest_container_id string|nil The UUID, as a string, of this guild's shared chest container, or nil if the guild has no chest. Read-only: it is resolved from the save itself, so a plugin cannot redirect a chest edit by assigning a different id.
 ---@field delete fun(): boolean Deletes this guild, its bases, and every loaded member player. An unloaded member is skipped, not deleted. A structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
 
 ---Requires capability: save.read.
 ---
 ---@class base
----@field id string The base's UUID, as a string.
----@field guild_id string|nil The UUID, as a string, of the guild this base belongs to, or nil if it could not be resolved.
----@field x number|nil The base's world X coordinate, or nil if its location could not be resolved.
----@field y number|nil The base's world Y coordinate, or nil if its location could not be resolved.
----@field z number|nil The base's world Z coordinate, or nil if its location could not be resolved.
+---@field id string The base's UUID, as a string. Read-only.
+---@field guild_id string|nil The UUID, as a string, of the guild this base belongs to, or nil if it could not be resolved. Read-only.
+---@field name string|nil The base's name, or nil if the save holds no base camp record for this base -- the same case x, y and z read nil for. Newly built bases carry a generated template name rather than one the player chose. An empty string cannot be assigned: the save reads one as "leave the name alone", so the assignment would change nothing rather than clearing it. Assigning nil raises: the nil is an answer about the save's record, not a value that can be written.
+---@field area_range number|nil The radius, in world units, of the base's working area, or nil in the same case name reads nil. Stored as a 32-bit float, so a value outside that range is refused rather than written as an infinity, and one that range cannot hold exactly reads back rounded to what the save will actually hold. No other bound is enforced: zero and negative radii are accepted and written as given, because nothing in the game's data or in this app establishes what a legal radius is, and refusing them here would be inventing a rule rather than reporting one.
+---@field x number|nil The base's world X coordinate, or nil if its location could not be resolved. Read-only: nothing in this app writes a base's position, so there is no write path to offer.
+---@field y number|nil The base's world Y coordinate, or nil if its location could not be resolved. Read-only, for the same reason as x.
+---@field z number|nil The base's world Z coordinate, or nil if its location could not be resolved. Read-only, for the same reason as x.
 ---@field delete fun(): boolean Deletes this base and every pal working it, and updates its guild's base_count and pal_count. A structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
 
 ---Requires capability: save.read.

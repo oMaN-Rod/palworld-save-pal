@@ -2,7 +2,6 @@ use std::collections::HashMap;
 use std::ffi::{c_int, c_void, CStr};
 use std::sync::OnceLock;
 
-use psp_core::domain::guild::{base_camp_location, base_guild_and_container, guild_chest_id};
 use psp_core::domain::{containers, pal, world};
 use psp_core::dto::summary::IsoDateTime;
 use psp_core::error::CoreError;
@@ -12,7 +11,10 @@ use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
 use super::api_def::{ApiField, ApiFunction, ApiHandle, ApiParam, ApiType};
-use super::fields::{pal as pal_fields, player as player_fields, push_field_value, Access, FieldValue};
+use super::fields::{
+    base as base_fields, guild as guild_fields, pal as pal_fields, player as player_fields,
+    push_field_value, Access, FieldValue,
+};
 use super::handle::{handle_kind_for, invalidated_handle_error, push_handle, read_handle, Handle, HandleKind};
 use super::marshal::{arg_string, check_args, push_str};
 use super::{free_message, register_table, trampoline, with_context, HostError, HostFn, PushHostFn};
@@ -93,28 +95,6 @@ fn player_field(ctx: &RunContext<'_>, uid: Uuid, field: &str) -> Option<FieldVal
     })
 }
 
-fn guild_field(ctx: &RunContext<'_>, id: Uuid, field: &str) -> FieldValue {
-    let Some(summary) = ctx.session.guild_summaries.get(&id) else {
-        return FieldValue::Nil;
-    };
-    match field {
-        "id" => FieldValue::Str(summary.id.to_string()),
-        "name" => FieldValue::Str(summary.name.clone()),
-        "admin_uid" => summary
-            .admin_player_uid
-            .map(|u| FieldValue::Str(u.to_string()))
-            .unwrap_or(FieldValue::Nil),
-        "player_count" => FieldValue::Int(summary.player_count),
-        "base_count" => FieldValue::Int(summary.base_count),
-        "level" => summary.level.map(FieldValue::Int).unwrap_or(FieldValue::Nil),
-        "pal_count" => FieldValue::Int(summary.pal_count),
-        "chest_container_id" => guild_chest_id(ctx.session, id)
-            .map(|c| FieldValue::Str(c.to_string()))
-            .unwrap_or(FieldValue::Nil),
-        _ => FieldValue::Nil,
-    }
-}
-
 fn pal_field(ctx: &RunContext<'_>, id: Uuid, field: &str) -> FieldValue {
     let Some((snapshot, index)) = ctx.pals.as_ref() else {
         return FieldValue::Nil;
@@ -155,23 +135,6 @@ fn pal_field(ctx: &RunContext<'_>, id: Uuid, field: &str) -> FieldValue {
         "rank_craftspeed" => FieldValue::Int(summary.rank_craftspeed),
         "is_boss" => FieldValue::Bool(entry.is_boss),
         "is_lucky" => FieldValue::Bool(entry.is_lucky),
-        _ => FieldValue::Nil,
-    }
-}
-
-fn base_field(ctx: &RunContext<'_>, id: Uuid, field: &str) -> FieldValue {
-    let entries = ctx.session.base_camp_map().unwrap_or(&[]);
-    let Some(entry) = entries.iter().find(|entry| props::as_uuid(&entry.key) == Some(id)) else {
-        return FieldValue::Nil;
-    };
-    match field {
-        "id" => FieldValue::Str(id.to_string()),
-        "guild_id" => base_guild_and_container(entry)
-            .map(|(guild_id, _)| FieldValue::Str(guild_id.to_string()))
-            .unwrap_or(FieldValue::Nil),
-        "x" => base_camp_location(entry).map(|(x, _, _)| FieldValue::Float(x)).unwrap_or(FieldValue::Nil),
-        "y" => base_camp_location(entry).map(|(_, y, _)| FieldValue::Float(y)).unwrap_or(FieldValue::Nil),
-        "z" => base_camp_location(entry).map(|(_, _, z)| FieldValue::Float(z)).unwrap_or(FieldValue::Nil),
         _ => FieldValue::Nil,
     }
 }
@@ -272,7 +235,7 @@ fn guild_index(state: *mut lua_State) -> Result<c_int, HostError> {
             super::save_write::push_guild_delete(state, handle.id);
             return Ok(1);
         }
-        let value = with_context(state, |ctx| Ok(guild_field(ctx, handle.id, &field)))?;
+        let value = with_context(state, |ctx| guild_fields::guild_get(ctx, handle.id, &field))?;
         drop(field);
         push_field_value(state, value)?;
         Ok(1)
@@ -289,7 +252,7 @@ fn base_index(state: *mut lua_State) -> Result<c_int, HostError> {
             super::save_write::push_base_delete(state, handle.id);
             return Ok(1);
         }
-        let value = with_context(state, |ctx| Ok(base_field(ctx, handle.id, &field)))?;
+        let value = with_context(state, |ctx| base_fields::base_get(ctx, handle.id, &field))?;
         drop(field);
         push_field_value(state, value)?;
         Ok(1)
@@ -439,58 +402,7 @@ pub fn handle_types() -> &'static [ApiHandle] {
                 ApiHandle {
                     name: "guild",
                     capability: Some(Capability::SaveRead),
-                    fields: &[
-                        ApiField {
-                            name: "id",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The guild's UUID, as a string.",
-                        },
-                        ApiField {
-                            name: "name",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The guild's name.",
-                        },
-                        ApiField {
-                            name: "admin_uid",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The UUID, as a string, of the guild's admin player, or nil if the guild \
-                                  has none.",
-                        },
-                        ApiField {
-                            name: "player_count",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "How many players belong to this guild.",
-                        },
-                        ApiField {
-                            name: "base_count",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "How many bases this guild has.",
-                        },
-                        ApiField {
-                            name: "level",
-                            ty: ApiType::Union(&[ApiType::Integer, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The guild's level, or nil if the save has no level recorded for it.",
-                        },
-                        ApiField {
-                            name: "pal_count",
-                            ty: ApiType::Integer,
-                            access: Access::ReadOnly,
-                            doc: "How many pals belong to this guild's bases.",
-                        },
-                        ApiField {
-                            name: "chest_container_id",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The UUID, as a string, of this guild's shared chest container, or nil if \
-                                  the guild has no chest.",
-                        },
-                    ],
+                    fields: guild_fields::api_fields(),
                     methods: &[ApiFunction {
                         name: "delete",
                         params: &[],
@@ -504,42 +416,7 @@ pub fn handle_types() -> &'static [ApiHandle] {
                 ApiHandle {
                     name: "base",
                     capability: Some(Capability::SaveRead),
-                    fields: &[
-                        ApiField {
-                            name: "id",
-                            ty: ApiType::String,
-                            access: Access::ReadOnly,
-                            doc: "The base's UUID, as a string.",
-                        },
-                        ApiField {
-                            name: "guild_id",
-                            ty: ApiType::Union(&[ApiType::String, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The UUID, as a string, of the guild this base belongs to, or nil if it \
-                                  could not be resolved.",
-                        },
-                        ApiField {
-                            name: "x",
-                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The base's world X coordinate, or nil if its location could not be \
-                                  resolved.",
-                        },
-                        ApiField {
-                            name: "y",
-                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The base's world Y coordinate, or nil if its location could not be \
-                                  resolved.",
-                        },
-                        ApiField {
-                            name: "z",
-                            ty: ApiType::Union(&[ApiType::Number, ApiType::Nil]),
-                            access: Access::ReadOnly,
-                            doc: "The base's world Z coordinate, or nil if its location could not be \
-                                  resolved.",
-                        },
-                    ],
+                    fields: base_fields::api_fields(),
                     methods: &[ApiFunction {
                         name: "delete",
                         params: &[],

@@ -146,8 +146,18 @@ pub unsafe fn install_metatables(state: *mut lua_State) {
         super::save_read::push_pal_index as PushHostFn,
         Some(super::fields::pal::push_pal_newindex as PushHostFn),
     );
-    install_one(state, HandleKind::Guild, super::save_read::push_guild_index as PushHostFn, None);
-    install_one(state, HandleKind::Base, super::save_read::push_base_index as PushHostFn, None);
+    install_one(
+        state,
+        HandleKind::Guild,
+        super::save_read::push_guild_index as PushHostFn,
+        Some(super::fields::guild::push_guild_newindex as PushHostFn),
+    );
+    install_one(
+        state,
+        HandleKind::Base,
+        super::save_read::push_base_index as PushHostFn,
+        Some(super::fields::base::push_base_newindex as PushHostFn),
+    );
     install_one(state, HandleKind::Container, super::save_read::push_container_index as PushHostFn, None);
     install_one(state, HandleKind::Slot, super::save_read::push_slot_index as PushHostFn, None);
 }

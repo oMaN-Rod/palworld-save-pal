@@ -7,6 +7,8 @@ use serde::Serialize;
 use super::api_def::ApiType;
 use super::{marshal, HostError};
 
+pub mod base;
+pub mod guild;
 pub mod pal;
 pub mod player;
 
@@ -66,6 +68,28 @@ pub(crate) fn expect_list<'v>(name: &str, value: &'v FieldValue) -> Result<&'v [
             field_value_type_name(other)
         ))),
     }
+}
+
+/// For a row the save persists as a 32-bit float. A value outside that window
+/// becomes an infinity on the way in rather than the number that was assigned,
+/// and a NaN stays a NaN, so both are refused here instead.
+pub(crate) fn expect_finite_f32(name: &str, value: &FieldValue) -> Result<f64, HostError> {
+    let number = match value {
+        FieldValue::Float(v) => *v,
+        FieldValue::Int(v) => *v as f64,
+        other => {
+            return Err(HostError::new(format!(
+                "expected a number for {name}, got {}",
+                field_value_type_name(other)
+            )))
+        }
+    };
+    if !number.is_finite() || number < f64::from(f32::MIN) || number > f64::from(f32::MAX) {
+        return Err(HostError::new(format!(
+            "{name} must be a finite number the save can hold as a 32-bit float, got {number}"
+        )));
+    }
+    Ok(number)
 }
 
 pub(crate) fn ranged_int(name: &str, value: &FieldValue, lo: i64, hi: i64) -> Result<i64, HostError> {

@@ -9,8 +9,8 @@ use psp_lua_sys::ffi::*;
 use uuid::Uuid;
 
 use super::{
-    expect_int, expect_list, expect_str, field_value_type_name, ranged_int, read_field_value, Access,
-    FieldSpec, FieldValue, FieldWrite, Reader,
+    expect_finite_f32, expect_int, expect_list, expect_str, field_value_type_name, ranged_int,
+    read_field_value, Access, FieldSpec, FieldValue, FieldWrite, Reader,
 };
 use crate::context::RunContext;
 use crate::host::api_def::{ApiField, ApiType};
@@ -33,28 +33,6 @@ fn string_list(items: &[String]) -> FieldValue {
 /// so a wider value would land silently truncated rather than being refused.
 fn i32_ranged(name: &str, value: &FieldValue) -> Result<(), HostError> {
     ranged_int(name, value, i64::from(i32::MIN), i64::from(i32::MAX)).map(|_| ())
-}
-
-/// `apply_player_dto` writes both through `props::float_property(x as f32)`, so
-/// a value outside the `f32` window becomes an infinity in the save rather than
-/// the number that was assigned, and a NaN becomes a NaN.
-fn expect_finite_f32(name: &str, value: &FieldValue) -> Result<f64, HostError> {
-    let number = match value {
-        FieldValue::Float(v) => *v,
-        FieldValue::Int(v) => *v as f64,
-        other => {
-            return Err(HostError::new(format!(
-                "expected a number for {name}, got {}",
-                field_value_type_name(other)
-            )))
-        }
-    };
-    if !number.is_finite() || number < f64::from(f32::MIN) || number > f64::from(f32::MAX) {
-        return Err(HostError::new(format!(
-            "{name} must be a finite number the save can hold as a 32-bit float, got {number}"
-        )));
-    }
-    Ok(number)
 }
 
 // --- readers -------------------------------------------------------------
