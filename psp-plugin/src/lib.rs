@@ -4,6 +4,7 @@
 pub mod context;
 pub mod host;
 pub mod manifest;
+pub mod modules;
 pub mod runtime;
 pub mod sandbox;
 pub mod status;

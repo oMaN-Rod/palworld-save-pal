@@ -420,3 +420,77 @@ describe('create', () => {
 		await expect(pluginEditor.create('my.first', 'My First')).rejects.toThrow('already exists');
 	});
 });
+
+describe('multi-file editing', () => {
+	it('rejects a path that escapes the plugin directory', () => {
+		expect(pluginEditor.validNewPath('../evil.lua')).toMatch(/relative/i);
+		expect(pluginEditor.validNewPath('/abs.lua')).toMatch(/relative/i);
+		expect(pluginEditor.validNewPath('a/../../b.lua')).toMatch(/relative/i);
+	});
+
+	it('rejects a path that is not a lua source', () => {
+		expect(pluginEditor.validNewPath('notes.txt')).toMatch(/\.lua/);
+	});
+
+	it('rejects the manifest path and any existing path', () => {
+		pluginEditor.files = { 'manifest.json': '{}', 'main.lua': '' };
+		expect(pluginEditor.validNewPath('manifest.json')).toBeTruthy();
+		expect(pluginEditor.validNewPath('main.lua')).toMatch(/exists/i);
+	});
+
+	it('accepts a nested lua path', () => {
+		pluginEditor.files = { 'manifest.json': '{}', 'main.lua': '' };
+		expect(pluginEditor.validNewPath('lib/util.lua')).toBeNull();
+	});
+
+	it('addFile creates an empty buffer and selects it', () => {
+		pluginEditor.files = { 'manifest.json': '{}', 'main.lua': '' };
+		pluginEditor.addFile('lib/util.lua');
+		expect(pluginEditor.files['lib/util.lua']).toBe('');
+		expect(pluginEditor.activePath).toBe('lib/util.lua');
+		expect(pluginEditor.isDirty('lib/util.lua')).toBe(true);
+	});
+});
+
+describe('deleteFile', () => {
+	beforeEach(async () => {
+		sendAndWait.mockResolvedValueOnce(
+			openResponse({
+				sources: { 'main.lua': 'function run()\nend\n', 'lib/util.lua': 'return {}' }
+			})
+		);
+		await pluginEditor.open('user.one');
+	});
+
+	it('removes the file from both maps and moves off it when it was active', async () => {
+		pluginEditor.activePath = 'lib/util.lua';
+		sendAndWait.mockResolvedValueOnce({ id: 'user.one', path: 'lib/util.lua' });
+
+		await pluginEditor.deleteFile('lib/util.lua');
+
+		expect(sendAndWait).toHaveBeenLastCalledWith(MessageType.DELETE_PLUGIN_SOURCE, {
+			id: 'user.one',
+			path: 'lib/util.lua'
+		});
+		expect('lib/util.lua' in pluginEditor.files).toBe(false);
+		expect('lib/util.lua' in pluginEditor.savedFiles).toBe(false);
+		expect(pluginEditor.activePath).toBe(MANIFEST_PATH);
+	});
+
+	it('leaves both maps unchanged and throws when the server refuses', async () => {
+		pluginEditor.activePath = 'lib/util.lua';
+		sendAndWait.mockResolvedValueOnce({
+			id: 'user.one',
+			path: 'lib/util.lua',
+			error: 'the entry source cannot be deleted'
+		});
+
+		await expect(pluginEditor.deleteFile('lib/util.lua')).rejects.toThrow(
+			'entry source cannot be deleted'
+		);
+
+		expect(pluginEditor.files['lib/util.lua']).toBe('return {}');
+		expect(pluginEditor.savedFiles['lib/util.lua']).toBe('return {}');
+		expect(pluginEditor.activePath).toBe('lib/util.lua');
+	});
+});

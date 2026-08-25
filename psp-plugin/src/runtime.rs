@@ -132,6 +132,13 @@ pub fn run_command(request: RunRequest<'_>, services: RunServices<'_>) -> RunOut
         return finish(ctx, RunStatus::Error(error.into_message()), None, None, BTreeMap::new());
     }
 
+    if let Err(error) = unsafe {
+        crate::modules::install(sandbox.as_ptr(), &request.manifest.id, request.sources)
+    } {
+        unsafe { host::clear_context(sandbox.as_ptr()) };
+        return finish(ctx, RunStatus::Error(error.into_message()), None, None, BTreeMap::new());
+    }
+
     let (status, summary, result, lifted_counts) = execute(&mut sandbox, &request);
     unsafe { host::clear_context(sandbox.as_ptr()) };
     finish(ctx, status, summary, result, lifted_counts)

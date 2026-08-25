@@ -197,6 +197,7 @@ define_message_types! {
     GetApiDefinition => "get_api_definition",
     CreatePlugin => "create_plugin",
     SavePluginSource => "save_plugin_source",
+    DeletePluginSource => "delete_plugin_source",
     RunPluginDraft => "run_plugin_draft",
 }
 
@@ -376,6 +377,7 @@ mod tests {
         "get_api_definition",
         "create_plugin",
         "save_plugin_source",
+        "delete_plugin_source",
         "run_plugin_draft",
     ];
 

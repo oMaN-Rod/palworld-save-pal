@@ -386,6 +386,7 @@ fn heal_pals_clears_sickness_and_skips_a_missing_id_without_erroring() {
     }
     let mut pal_ids: Vec<Uuid> = details.pals.iter().map(|(id, _)| *id).collect();
     let missing_id = Uuid::new_v4();
+    pal_ids.push(missing_id);
 
     pal::heal_pals(&mut session, &data, &pal_ids).unwrap();
 
@@ -957,6 +958,7 @@ fn clone_pal_with_an_unowned_source_id_also_leaves_the_orphaned_slot() {
     }
     containers::character_container_add_pal(&mut session.level, 0, Uuid::new_v4(), Some(0))
         .unwrap();
+    source_dto.instance_id = Uuid::new_v4();
 
     let entry_count_before = world::character_map(&session.level).unwrap().len();
     let result = pal::clone_pal(&mut session, &data, &source_dto).unwrap();

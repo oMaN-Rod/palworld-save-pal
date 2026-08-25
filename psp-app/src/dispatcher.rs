@@ -454,6 +454,10 @@ async fn route(
         MessageType::SavePluginSource => {
             handlers::plugins::handle_save_plugin_source(serde_json::from_value(data)?, ctx).await
         }
+        MessageType::DeletePluginSource => {
+            handlers::plugins::handle_delete_plugin_source(serde_json::from_value(data)?, ctx)
+                .await
+        }
         MessageType::RunPluginDraft => {
             handlers::plugins::handle_run_plugin_draft(serde_json::from_value(data)?, ctx).await
         }

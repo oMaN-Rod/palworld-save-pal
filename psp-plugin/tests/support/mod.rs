@@ -224,6 +224,41 @@ fn run_with_limits(
     runtime::run_command(request, services)
 }
 
+pub fn run_multi(
+    manifest_json: &str,
+    sources: BTreeMap<String, String>,
+    command_id: &str,
+    args: serde_json::Value,
+    dry_run: bool,
+) -> RunOutcome {
+    let manifest =
+        Manifest::parse(manifest_json, Origin::User).expect("the fixture manifest must parse");
+    let mut session = load_corpus();
+    let game_data = load_game_data();
+    let storage = BTreeMap::new();
+    let granted = manifest.capabilities.clone();
+
+    let request = RunRequest {
+        manifest: &manifest,
+        sources: &sources,
+        command_id,
+        args: &args,
+        dry_run,
+        granted: &granted,
+    };
+    let services = RunServices {
+        session: &mut session,
+        game_data: &game_data,
+        progress: None,
+        storage: &storage,
+        confirm: None,
+        limits: Limits::default(),
+        cancel: Cancel::new(),
+    };
+
+    runtime::run_command(request, services)
+}
+
 pub fn run(
     manifest_json: &str,
     source: &str,

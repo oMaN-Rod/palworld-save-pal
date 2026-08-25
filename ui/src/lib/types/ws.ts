@@ -176,6 +176,7 @@ export enum MessageType {
 	GET_API_DEFINITION = 'get_api_definition',
 	CREATE_PLUGIN = 'create_plugin',
 	SAVE_PLUGIN_SOURCE = 'save_plugin_source',
+	DELETE_PLUGIN_SOURCE = 'delete_plugin_source',
 	RUN_PLUGIN_DRAFT = 'run_plugin_draft'
 }
 

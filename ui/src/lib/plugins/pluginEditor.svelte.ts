@@ -51,6 +51,10 @@ class PluginEditorStore {
 	#entry = $state('main.lua');
 	#generation = 0;
 
+	get entry(): string {
+		return this.#entry;
+	}
+
 	get paths(): string[] {
 		return Object.keys(this.files).sort((a, b) => {
 			if (a === MANIFEST_PATH) return -1;
@@ -180,6 +184,48 @@ class PluginEditorStore {
 			this.savedFiles = { ...this.savedFiles, [path]: source };
 		} finally {
 			this.saving = false;
+		}
+	}
+
+	validNewPath(path: string): string | null {
+		const trimmed = path.trim();
+		if (!trimmed) return 'Enter a file name.';
+		if (trimmed.startsWith('/') || /^[A-Za-z]:/.test(trimmed) || trimmed.includes('\\')) {
+			return 'Use a relative path with forward slashes.';
+		}
+		if (trimmed.split('/').some((segment) => segment === '..' || segment === '.')) {
+			return 'Use a relative path without . or .. segments.';
+		}
+		if (!trimmed.endsWith('.lua')) return 'Plugin sources must end in .lua';
+		if (trimmed === MANIFEST_PATH) return 'That name is reserved.';
+		if (trimmed in this.files) return 'That file already exists.';
+		return null;
+	}
+
+	addFile(path: string): void {
+		if (this.validNewPath(path) !== null) return;
+		this.files = { ...this.files, [path]: '' };
+		this.activePath = path;
+		this.syntaxError = null;
+	}
+
+	async deleteFile(path: string): Promise<void> {
+		if (path === MANIFEST_PATH || path === this.#entry) return;
+		if (!this.pluginId) return;
+		const response = await sendAndWait<{ error?: string | null }>(
+			MessageType.DELETE_PLUGIN_SOURCE,
+			{ id: this.pluginId, path }
+		);
+		if (response.error) throw new Error(response.error);
+		const files = { ...this.files };
+		delete files[path];
+		this.files = files;
+		const savedFiles = { ...this.savedFiles };
+		delete savedFiles[path];
+		this.savedFiles = savedFiles;
+		if (this.activePath === path) {
+			this.activePath = MANIFEST_PATH;
+			this.syntaxError = null;
 		}
 	}
 

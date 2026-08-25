@@ -191,6 +191,19 @@ fn install_error(ctx: &HandlerCtx<'_>, message: impl Into<String>) -> Result<(),
     Ok(())
 }
 
+/// Windows resolves a reserved device name (`CON`, `NUL`, `COM1`, ...) per
+/// path component, case-insensitively, against the stem before the first
+/// `.` — regardless of extension or directory prefix, so `CON`, `CON.lua`
+/// and `CON.tar.gz` all resolve to the same device rather than a file.
+fn is_reserved_device_name(segment: &str) -> bool {
+    const RESERVED: &[&str] = &[
+        "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7",
+        "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+    ];
+    let stem = segment.split('.').next().unwrap_or(segment);
+    RESERVED.iter().any(|reserved| reserved.eq_ignore_ascii_case(stem))
+}
+
 /// Rejects names that could escape the archive on extraction, or that carry a
 /// non-ASCII character a filesystem could fold to an ASCII look-alike.
 fn is_safe_zip_entry_name(name: &str) -> bool {
@@ -211,8 +224,58 @@ fn is_safe_zip_entry_name(name: &str) -> bool {
     if name.chars().all(|c| c == '.') {
         return false;
     }
+    if is_reserved_device_name(name) {
+        return false;
+    }
     name.chars()
         .all(|c| c.is_ascii_alphanumeric() || matches!(c, '.' | '_' | '-'))
+}
+
+/// Sanity bounds on the stored key, not a guarantee about any assembled
+/// on-disk path: 240 keeps a single segment under NTFS's 255-character
+/// component limit and stops an unbounded string reaching downstream
+/// consumers; 16 segments bounds the cost of walking the path. A future
+/// on-disk writer must still budget against its own resolved root length.
+const MAX_SOURCE_PATH_LEN: usize = 240;
+const MAX_SOURCE_PATH_SEGMENTS: usize = 16;
+
+/// Rejects a plugin source path that is not a plain, relative, forward-slash
+/// `.lua` path: this key is later written to disk as a real filesystem path,
+/// so anything that could escape the plugin's own directory, resolve to a
+/// Windows device, or otherwise misbehave on write must be refused here
+/// rather than trusted from a client-controlled request.
+fn is_safe_source_path(path: &str) -> bool {
+    if path.is_empty() || path.starts_with('/') || path.contains('\\') {
+        return false;
+    }
+    if path.len() > MAX_SOURCE_PATH_LEN {
+        return false;
+    }
+    if !path.is_ascii() {
+        return false;
+    }
+    let bytes = path.as_bytes();
+    if bytes.len() >= 2 && bytes[0].is_ascii_alphabetic() && bytes[1] == b':' {
+        return false;
+    }
+    if path.chars().any(|c| c.is_control()) {
+        return false;
+    }
+    if !path.ends_with(".lua") {
+        return false;
+    }
+    let segments: Vec<&str> = path.split('/').collect();
+    if segments.len() > MAX_SOURCE_PATH_SEGMENTS {
+        return false;
+    }
+    segments.iter().all(|segment| {
+        !segment.is_empty()
+            && *segment != "."
+            && *segment != ".."
+            && !segment.ends_with('.')
+            && !segment.ends_with(' ')
+            && !is_reserved_device_name(segment)
+    })
 }
 
 struct ParsedZip {
@@ -928,6 +991,13 @@ pub async fn handle_save_plugin_source(
         )
         .await?;
     } else {
+        if !is_safe_source_path(&data.path) {
+            return save_refused(
+                ctx,
+                &data,
+                format!("{:?} is not a valid plugin source path", data.path),
+            );
+        }
         let mut sources: BTreeMap<String, String> =
             serde_json::from_str(&row.sources).unwrap_or_default();
         sources.insert(data.path.clone(), data.source);
@@ -944,4 +1014,250 @@ pub async fn handle_save_plugin_source(
         &serde_json::json!({ "id": data.id, "path": data.path, "error": null }),
     );
     Ok(())
+}
+
+#[derive(Debug, serde::Deserialize)]
+pub struct DeletePluginSourceData {
+    pub id: String,
+    pub path: String,
+}
+
+/// Answers under `delete_plugin_source`, not `MessageType::Error`, for the same
+/// request/response pairing reason as plugin creation.
+fn delete_refused(
+    ctx: &HandlerCtx<'_>,
+    data: &DeletePluginSourceData,
+    message: impl Into<String>,
+) -> Result<(), HandlerError> {
+    ctx.emitter.emit(
+        MessageType::DeletePluginSource,
+        &serde_json::json!({ "id": data.id, "path": data.path, "error": message.into() }),
+    );
+    Ok(())
+}
+
+pub async fn handle_delete_plugin_source(
+    data: DeletePluginSourceData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let Some(row) = psp_db::plugins::get(&*ctx.app.driver, &data.id).await? else {
+        return delete_refused(ctx, &data, format!("plugin {} not found", data.id));
+    };
+    if row.bundled {
+        return delete_refused(
+            ctx,
+            &data,
+            format!(
+                "plugin {:?} is bundled: its sources are restored from the app on every launch",
+                data.id
+            ),
+        );
+    }
+    if data.path == MANIFEST_PATH {
+        return delete_refused(ctx, &data, "the manifest cannot be deleted");
+    }
+
+    let manifest = match Manifest::parse(&row.manifest, origin_of(row.bundled)) {
+        Ok(manifest) => manifest,
+        Err(manifest_error) => {
+            return delete_refused(
+                ctx,
+                &data,
+                format!("plugin {} has an invalid manifest: {manifest_error}", data.id),
+            )
+        }
+    };
+    if data.path == manifest.entry {
+        return delete_refused(ctx, &data, "the entry source cannot be deleted");
+    }
+
+    let mut sources: BTreeMap<String, String> = serde_json::from_str(&row.sources)?;
+    sources.remove(&data.path);
+    psp_db::plugins::set_sources(&*ctx.app.driver, &data.id, &serde_json::to_string(&sources)?)
+        .await?;
+
+    ctx.emitter.emit(
+        MessageType::DeletePluginSource,
+        &serde_json::json!({ "id": data.id, "path": data.path }),
+    );
+    Ok(())
+}
+
+#[cfg(test)]
+mod source_path_tests {
+    use super::is_safe_source_path;
+
+    #[test]
+    fn accepts_a_nested_lua_path() {
+        assert!(is_safe_source_path("lib/util.lua"));
+    }
+
+    #[test]
+    fn accepts_a_bare_lua_path() {
+        assert!(is_safe_source_path("main.lua"));
+    }
+
+    #[test]
+    fn rejects_an_absolute_path() {
+        assert!(!is_safe_source_path("/abs.lua"));
+    }
+
+    #[test]
+    fn rejects_a_backslash() {
+        assert!(!is_safe_source_path("lib\\util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_drive_letter_prefix() {
+        assert!(!is_safe_source_path("C:/util.lua"));
+        assert!(!is_safe_source_path("c:util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_dot_segment() {
+        assert!(!is_safe_source_path("./util.lua"));
+        assert!(!is_safe_source_path("lib/./util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_dot_dot_segment() {
+        assert!(!is_safe_source_path("../util.lua"));
+        assert!(!is_safe_source_path("lib/../../util.lua"));
+    }
+
+    #[test]
+    fn rejects_an_empty_segment() {
+        assert!(!is_safe_source_path("a//b.lua"));
+    }
+
+    #[test]
+    fn rejects_a_trailing_dot_on_a_segment() {
+        assert!(!is_safe_source_path("lib./util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_trailing_space_on_a_segment() {
+        assert!(!is_safe_source_path("lib /util.lua"));
+    }
+
+    #[test]
+    fn rejects_a_control_character() {
+        assert!(!is_safe_source_path("lib/util\u{7}.lua"));
+    }
+
+    #[test]
+    fn rejects_a_path_that_does_not_end_in_lua() {
+        assert!(!is_safe_source_path("lib/util.txt"));
+    }
+
+    #[test]
+    fn rejects_an_empty_path() {
+        assert!(!is_safe_source_path(""));
+    }
+
+    #[test]
+    fn rejects_every_reserved_device_name_bare_and_with_extension() {
+        const RESERVED: &[&str] = &[
+            "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7",
+            "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+        ];
+        for reserved in RESERVED {
+            let upper = format!("{reserved}.lua");
+            let lower = format!("{}.lua", reserved.to_lowercase());
+            let nested = format!("lib/{reserved}.lua");
+            assert!(!is_safe_source_path(&upper), "{upper} must be refused");
+            assert!(!is_safe_source_path(&lower), "{lower} must be refused");
+            assert!(!is_safe_source_path(&nested), "{nested} must be refused");
+        }
+    }
+
+    #[test]
+    fn rejects_a_mixed_case_reserved_device_name() {
+        assert!(!is_safe_source_path("CoN.lua"));
+    }
+
+    #[test]
+    fn rejects_a_reserved_device_name_used_as_a_directory() {
+        assert!(!is_safe_source_path("CON/x.lua"));
+    }
+
+    #[test]
+    fn accepts_names_that_merely_resemble_a_reserved_device_name() {
+        for near_miss in [
+            "COM0.lua",
+            "COM10.lua",
+            "LPT0.lua",
+            "CONS.lua",
+            "CONSOLE.lua",
+            "MYCON.lua",
+            "CON2.lua",
+            "AUXILIARY.lua",
+            "NULL.lua",
+            "PRNT.lua",
+        ] {
+            assert!(is_safe_source_path(near_miss), "{near_miss} must be accepted");
+        }
+    }
+
+    #[test]
+    fn rejects_non_ascii_look_alikes() {
+        assert!(!is_safe_source_path("lib/\u{fc}til.lua"));
+        assert!(!is_safe_source_path("lib\u{ff0f}util.lua"));
+        assert!(!is_safe_source_path("lib/\u{202e}util.lua"));
+        assert!(!is_safe_source_path("lib/util\u{a0}.lua"));
+    }
+
+    #[test]
+    fn rejects_a_path_over_the_length_cap() {
+        let long_name = "a".repeat(super::MAX_SOURCE_PATH_LEN);
+        let path = format!("{long_name}.lua");
+        assert!(path.len() > super::MAX_SOURCE_PATH_LEN);
+        assert!(!is_safe_source_path(&path));
+    }
+
+    #[test]
+    fn accepts_a_path_at_the_length_cap() {
+        let filler = "a".repeat(super::MAX_SOURCE_PATH_LEN - ".lua".len());
+        let path = format!("{filler}.lua");
+        assert_eq!(path.len(), super::MAX_SOURCE_PATH_LEN);
+        assert!(is_safe_source_path(&path));
+    }
+
+    #[test]
+    fn rejects_a_path_over_the_segment_cap() {
+        let path = format!("{}main.lua", "a/".repeat(super::MAX_SOURCE_PATH_SEGMENTS));
+        assert!(!is_safe_source_path(&path));
+    }
+
+    #[test]
+    fn accepts_a_path_at_the_segment_cap() {
+        let path = format!("{}main.lua", "a/".repeat(super::MAX_SOURCE_PATH_SEGMENTS - 1));
+        assert!(is_safe_source_path(&path));
+    }
+}
+
+#[cfg(test)]
+mod zip_entry_name_tests {
+    use super::is_safe_zip_entry_name;
+
+    #[test]
+    fn accepts_a_plain_lua_name() {
+        assert!(is_safe_zip_entry_name("main.lua"));
+    }
+
+    #[test]
+    fn rejects_every_reserved_device_name_bare_and_with_extension() {
+        const RESERVED: &[&str] = &[
+            "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7",
+            "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+        ];
+        for reserved in RESERVED {
+            let bare = reserved.to_string();
+            let upper = format!("{reserved}.lua");
+            let lower = format!("{}.lua", reserved.to_lowercase());
+            assert!(!is_safe_zip_entry_name(&bare), "{bare} must be refused");
+            assert!(!is_safe_zip_entry_name(&upper), "{upper} must be refused");
+            assert!(!is_safe_zip_entry_name(&lower), "{lower} must be refused");
+        }
+    }
 }

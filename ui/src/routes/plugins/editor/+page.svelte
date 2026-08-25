@@ -3,15 +3,16 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
-	import { Button, Monaco, Spinner } from '$components/ui';
+	import { Button, Input, Monaco, Spinner } from '$components/ui';
 	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
 	import { pluginsData } from '$lib/data';
 	import { MANIFEST_PATH, pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { registerLuaProviders, type ApiSnapshot } from '$lib/plugins/luaProviders';
-	import { getToastState, theme, type ThemeName } from '$states';
+	import { getModalState, getToastState, theme, type ThemeName } from '$states';
 	import { persistedState } from 'svelte-persisted-state';
 	import Columns2 from '@lucide/svelte/icons/columns-2';
 	import Rows2 from '@lucide/svelte/icons/rows-2';
+	import X from '@lucide/svelte/icons/x';
 	import RunResult from '../components/RunResult.svelte';
 	import ResizableSplit from './components/ResizableSplit.svelte';
 	import RunButton from './components/RunButton.svelte';
@@ -23,6 +24,10 @@
 	} from './components/resizableSplit';
 
 	const toast = getToastState();
+	const modal = getModalState();
+
+	let newFilePath = $state('');
+	const newFileError = $derived(newFilePath.trim() ? pluginEditor.validNewPath(newFilePath) : null);
 
 	const splitOrientation = persistedState<SplitOrientation>(
 		'psp-plugin-editor-split-orientation',
@@ -134,6 +139,28 @@
 			toast.add(String(e instanceof Error ? e.message : e), 'Save failed', 'error');
 		}
 	}
+
+	function submitNewFile(event: SubmitEvent) {
+		event.preventDefault();
+		if (newFileError !== null || !newFilePath.trim()) return;
+		pluginEditor.addFile(newFilePath.trim());
+		newFilePath = '';
+	}
+
+	async function removeFile(path: string) {
+		const confirmed = await modal.showConfirmModal({
+			title: `Delete "${path}"?`,
+			confirmText: 'Delete',
+			cancelText: 'Cancel'
+		});
+		if (!confirmed) return;
+		try {
+			await pluginEditor.deleteFile(path);
+			toast.add(`Deleted ${path}.`, 'Plugin', 'success');
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Delete failed', 'error');
+		}
+	}
 </script>
 
 <!-- Palette source for the editor theme; its own data-theme makes the read
@@ -192,16 +219,49 @@
 			</Button>
 		</div>
 
-		<div class="flex gap-1">
+		<div class="flex flex-wrap items-center gap-1">
 			{#each pluginEditor.paths as path (path)}
-				<Button
-					variant={pluginEditor.activePath === path ? 'secondary' : 'ghost'}
-					size="sm"
-					onclick={() => pluginEditor.selectPath(path)}
-				>
-					{path}{pluginEditor.isDirty(path) ? ' •' : ''}
-				</Button>
+				<div class="flex items-center">
+					<Button
+						variant={pluginEditor.activePath === path ? 'secondary' : 'ghost'}
+						size="sm"
+						onclick={() => pluginEditor.selectPath(path)}
+					>
+						{path}{pluginEditor.isDirty(path) ? ' •' : ''}
+					</Button>
+					{#if !pluginEditor.bundled && path !== MANIFEST_PATH && path !== pluginEditor.entry}
+						<Button
+							variant="ghost"
+							size="icon"
+							aria-label={`Delete ${path}`}
+							onclick={() => removeFile(path)}
+						>
+							<X class="h-3 w-3" />
+						</Button>
+					{/if}
+				</div>
 			{/each}
+			{#if !pluginEditor.bundled}
+				<form class="flex items-center gap-1" onsubmit={submitNewFile}>
+					<Input
+						bind:value={newFilePath}
+						placeholder="lib/new.lua"
+						inputClass="my-0 py-1"
+						error={newFileError !== null}
+					/>
+					<Button
+						type="submit"
+						variant="ghost"
+						size="sm"
+						disabled={newFilePath.trim() === '' || newFileError !== null}
+					>
+						New file
+					</Button>
+				</form>
+				{#if newFileError}
+					<span class="text-error-400 text-xs">{newFileError}</span>
+				{/if}
+			{/if}
 		</div>
 
 		{#if pluginEditor.warnings.length > 0}

@@ -1435,3 +1435,80 @@ async fn a_bundled_rows_draft_cannot_borrow_its_save_raw_grant() {
         "the draft must never have run"
     );
 }
+
+#[tokio::test]
+async fn delete_plugin_source_removes_a_non_entry_file() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(&test, "user.multi", &[], "function run() end", &[], false).await;
+    psp_db::plugins::set_sources(
+        &*test.app.driver,
+        "user.multi",
+        &serde_json::json!({ "main.lua": "function run() end", "lib/util.lua": "return {}" })
+            .to_string(),
+    )
+    .await
+    .unwrap();
+
+    handle_delete_plugin_source(
+        DeletePluginSourceData {
+            id: "user.multi".to_string(),
+            path: "lib/util.lua".to_string(),
+        },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "delete_plugin_source");
+    assert_eq!(frame["data"]["path"], "lib/util.lua");
+
+    let row = psp_db::plugins::get(&*test.app.driver, "user.multi").await.unwrap().unwrap();
+    let stored: serde_json::Value = serde_json::from_str(&row.sources).unwrap();
+    assert!(stored.get("lib/util.lua").is_none());
+    assert!(stored.get("main.lua").is_some(), "the entry must survive");
+}
+
+#[tokio::test]
+async fn delete_plugin_source_refuses_the_entry() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(&test, "user.multi", &[], "function run() end", &[], false).await;
+
+    handle_delete_plugin_source(
+        DeletePluginSourceData { id: "user.multi".to_string(), path: "main.lua".to_string() },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "delete_plugin_source");
+    assert!(
+        frame["data"]["error"].as_str().unwrap_or_default().contains("entry"),
+        "the refusal must say why, got {frame}"
+    );
+
+    let row = psp_db::plugins::get(&*test.app.driver, "user.multi").await.unwrap().unwrap();
+    let stored: serde_json::Value = serde_json::from_str(&row.sources).unwrap();
+    assert!(stored.get("main.lua").is_some());
+}
+
+#[tokio::test]
+async fn delete_plugin_source_refuses_a_bundled_plugin() {
+    let mut test = TestContext::new(|_| {}).await;
+    seed_row(&test, "pst.demo", &[], "function run() end", &[], true).await;
+
+    handle_delete_plugin_source(
+        DeletePluginSourceData { id: "pst.demo".to_string(), path: "lib/util.lua".to_string() },
+        &mut ctx(&mut test),
+    )
+    .await
+    .unwrap();
+
+    let frame = test.next_frame_json();
+    assert_eq!(frame["type"], "delete_plugin_source");
+    assert!(
+        frame["data"]["error"].as_str().unwrap_or_default().contains("bundled"),
+        "the refusal must say why, got {frame}"
+    );
+}
