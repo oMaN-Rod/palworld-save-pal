@@ -32,7 +32,7 @@
 	}
 </script>
 
-<div class="border-surface-700 flex flex-col gap-2 rounded-sm border p-3 m-2">
+<div class="border-surface-700 flex flex-col gap-2 rounded-sm border p-3">
 	<div class="flex items-center justify-between">
 		<span class={cn('font-bold uppercase tracking-wide', statusClass)}>{result.status}</span>
 		{#if pendingApply}

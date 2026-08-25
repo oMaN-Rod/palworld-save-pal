@@ -44,7 +44,7 @@
 	{#if section.title}
 		<h3 class="text-surface-200 text-sm font-semibold">{section.title}</h3>
 	{/if}
-	<div class={`grid grid-cols-1 gap-3 ${gridClass}`}>
+	<div class={`grid grid-cols-1 gap-3 items-center ${gridClass}`}>
 		{#each section.widgets as widget, index (index)}
 			<div class={widget.span === 'full' ? 'col-span-full' : ''}>
 				{#if widget.type === 'table'}
