@@ -1,0 +1,58 @@
+{
+  "id": "pst.repair",
+  "api_version": 1,
+  "name": "Save Repair",
+  "version": "1.0.0",
+  "author": "PST",
+  "license": "GPL-3.0-only",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.write"],
+  "commands": [
+    {
+      "id": "scan_illegal_pals",
+      "title": "Scan For Illegal Pals",
+      "description": "Lists pals whose level or condensing rank is above the legal maximum. Changes nothing.",
+      "destructive": false,
+      "params": [
+        { "id": "owner", "type": "entity", "label": "Owner", "entity": "player", "default": "",
+          "description": "Leave as Any to scan every pal in the world." },
+        { "id": "max_level", "type": "int", "label": "Maximum level", "default": 60, "min": 1, "max": 255 },
+        { "id": "max_rank", "type": "int", "label": "Maximum condensing rank", "default": 4, "min": 0, "max": 255 }
+      ]
+    },
+    {
+      "id": "fix_illegal_pals",
+      "title": "Fix Selected Pals",
+      "description": "Clamps the level and condensing rank of the selected pals down to the legal maximum.",
+      "destructive": true,
+      "params": [
+        { "id": "ids", "type": "multiselect", "label": "Pals", "default": [] },
+        { "id": "max_level", "type": "int", "label": "Maximum level", "default": 60, "min": 1, "max": 255 },
+        { "id": "max_rank", "type": "int", "label": "Maximum condensing rank", "default": 4, "min": 0, "max": 255 }
+      ]
+    }
+  ],
+  "ui": [
+    {
+      "title": "Scan",
+      "columns": 3,
+      "widgets": [
+        { "type": "entity_select", "id": "owner", "entity": "player", "label": "Owner" },
+        { "type": "number_input", "id": "max_level", "label": "Maximum level" },
+        { "type": "number_input", "id": "max_rank", "label": "Maximum condensing rank" },
+        { "type": "button", "label": "Scan", "command": "scan_illegal_pals", "span": "full" }
+      ]
+    },
+    {
+      "title": "Illegal pals",
+      "columns": 1,
+      "widgets": [
+        { "type": "text", "from": "scan_illegal_pals", "path": "summary" },
+        { "type": "table", "id": "rows", "from": "scan_illegal_pals", "path": "pals",
+          "columns": ["name", "level", "rank", "problems"], "selectable": true },
+        { "type": "button", "label": "Fix selected", "command": "fix_illegal_pals",
+          "args": { "ids": "rows.selection" } }
+      ]
+    }
+  ]
+}

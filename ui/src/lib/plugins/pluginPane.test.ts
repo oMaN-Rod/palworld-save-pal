@@ -17,8 +17,10 @@ describe('availableModes', () => {
 		expect(availableModes(user)).toEqual(['run', 'code']);
 	});
 
-	it('offers only run for a bundled plugin, which cannot be edited', () => {
-		expect(availableModes(bundled)).toEqual(['run']);
+	/// A bundled plugin's code is the worked example authors copy from, so it is
+	/// readable here. The editor is what refuses to save one.
+	it('offers run and code for a bundled plugin too', () => {
+		expect(availableModes(bundled)).toEqual(['run', 'code']);
 	});
 
 	it('never offers a mode outside the declared set', () => {
@@ -43,8 +45,8 @@ describe('resolveMode', () => {
 		expect(resolveMode('CODE', user)).toBe('run');
 	});
 
-	it('falls back to run when the mode is real but unavailable on this plugin', () => {
-		expect(resolveMode('code', bundled)).toBe('run');
+	it('honours code for a bundled plugin, whose source is readable', () => {
+		expect(resolveMode('code', bundled)).toBe('code');
 	});
 
 	it('falls back to run when there is no plugin to decide against', () => {

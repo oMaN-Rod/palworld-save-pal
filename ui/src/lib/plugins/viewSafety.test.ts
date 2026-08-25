@@ -4,11 +4,17 @@ import { describe, expect, it } from 'vitest';
 import { resolvePath, toText } from './pluginView';
 
 const VIEW_DIR = 'src/routes/plugins/components/view';
+const EXTRA_FILES = ['src/routes/plugins/components/ApplyBar.svelte'];
 
 function viewSources(): { name: string; source: string }[] {
-	return readdirSync(VIEW_DIR)
+	const dirFiles = readdirSync(VIEW_DIR)
 		.filter((name) => name.endsWith('.svelte'))
 		.map((name) => ({ name, source: readFileSync(join(VIEW_DIR, name), 'utf8') }));
+	const extraFiles = EXTRA_FILES.map((path) => ({
+		name: path.slice(path.lastIndexOf('/') + 1),
+		source: readFileSync(path, 'utf8')
+	}));
+	return [...dirFiles, ...extraFiles];
 }
 
 /// The vocabulary is closed and every kind has a renderer; a kind with none
@@ -42,7 +48,7 @@ describe('the view renderer', () => {
 	/// away from being code, so no view component builds one at all.
 	it('never binds a href or a src', () => {
 		for (const { name, source } of viewSources()) {
-			expect(source, `${name} must not set href`).not.toMatch(/href=/);
+			expect(source, `${name} must not set href`).not.toMatch(/href[=}]/);
 			expect(source, `${name} must not set src`).not.toMatch(/\bsrc=/);
 		}
 	});
@@ -52,7 +58,7 @@ describe('the view renderer', () => {
 	/// the renderer has, and it comes from a clamped number, never a string.
 	it('never interpolates a plugin value into a style attribute', () => {
 		for (const { name, source } of viewSources()) {
-			expect(source, `${name} must not build a style attribute`).not.toMatch(/style=["'{]/);
+			expect(source, `${name} must not build a style attribute`).not.toMatch(/style[:=]/);
 		}
 	});
 

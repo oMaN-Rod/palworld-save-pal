@@ -716,3 +716,34 @@ fn the_documented_catalog_census_matches_the_shipped_game_data() {
     assert_eq!(documented_arrays, arrays.len(), "docs/plugins.md's array-catalog count must match");
     assert_eq!(named, arrays, "docs/plugins.md must name exactly the catalogs that are JSON arrays");
 }
+
+/// The render caps live in the browser, so nothing else in this crate can
+/// catch the docs drifting from them; pinning the figure here at least makes
+/// changing one a deliberate act.
+#[test]
+fn the_documented_render_caps_are_the_ones_the_renderer_uses() {
+    let docs = docs();
+    assert!(docs.contains("500 rows"), "the table row cap must be documented");
+    assert!(
+        docs.contains("Showing 500 of"),
+        "the docs must show the exact wording the widget uses"
+    );
+}
+
+/// Every widget type the manifest validator knows must be documented, or an
+/// author has no way to learn it exists.
+#[test]
+fn every_widget_kind_is_documented() {
+    let docs = docs();
+    for kind in psp_plugin::manifest::WIDGET_KINDS {
+        assert!(docs.contains(&format!("`{kind}`")), "widget type {kind} is undocumented");
+    }
+}
+
+#[test]
+fn every_entity_kind_is_documented() {
+    let docs = docs();
+    for kind in psp_plugin::manifest::ENTITY_KINDS {
+        assert!(docs.contains(&format!("`{kind}`")), "entity kind {kind} is undocumented");
+    }
+}

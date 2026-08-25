@@ -28,6 +28,10 @@
 		if (widget.id) state.setValue(widget.id, value);
 	}
 
+	function setChecked(event: Event) {
+		set((event.currentTarget as HTMLInputElement).checked);
+	}
+
 	function toggleMulti(value: string) {
 		if (!widget.id) return;
 		const current = Array.isArray(state.valueFor(widget.id))
@@ -43,7 +47,7 @@
 			{label}
 			options={entityOptions}
 			value={String(widget.id ? (state.valueFor(widget.id) ?? '') : '')}
-			onChange={(value) => set(value)}
+			onChange={set}
 			disabled={disabled || entityOptions.length <= 1}
 		/>
 		{#if entity && entity.total > entity.options.length}
@@ -61,7 +65,7 @@
 			min={param?.min ?? undefined}
 			max={param?.max ?? undefined}
 			value={Number(widget.id ? (state.valueFor(widget.id) ?? 0) : 0)}
-			onValueChange={(next) => set(next)}
+			onValueChange={set}
 			{disabled}
 		/>
 	{:else if widget.type === 'text_input'}
@@ -69,7 +73,7 @@
 			type="text"
 			{label}
 			value={String(widget.id ? (state.valueFor(widget.id) ?? '') : '')}
-			onValueChange={(next) => set(next)}
+			onValueChange={set}
 			{disabled}
 		/>
 	{:else if widget.type === 'toggle'}
@@ -77,20 +81,20 @@
 			{label}
 			{disabled}
 			checked={widget.id ? state.valueFor(widget.id) === true : false}
-			onchange={(event) => set((event.currentTarget as HTMLInputElement).checked)}
+			onchange={setChecked}
 		/>
 	{:else if widget.type === 'select'}
 		<Select
 			{label}
 			options={paramOptions}
 			value={String(widget.id ? (state.valueFor(widget.id) ?? '') : '')}
-			onChange={(value) => set(value)}
+			onChange={set}
 			{disabled}
 		/>
 	{:else if widget.type === 'multiselect'}
 		<fieldset class="border-surface-700 rounded-sm border p-2">
 			<legend class="text-surface-400 px-1 text-xs">{label}</legend>
-			{#each param?.options ?? [] as option (option)}
+			{#each param?.options ?? [] as option, optionIndex (optionIndex)}
 				<label class="flex items-center gap-2 text-sm">
 					<input
 						type="checkbox"

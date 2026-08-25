@@ -166,6 +166,10 @@ describe('toRows', () => {
 		expect(table.total).toBe(MAX_TABLE_ROWS + 214);
 	});
 
+	it('caps at the number the docs quote', () => {
+		expect(MAX_TABLE_ROWS).toBe(500);
+	});
+
 	it('takes a row id from the first identity field it carries', () => {
 		expect(toRows([{ id: 'A' }], ['id']).ids).toEqual(['A']);
 		expect(toRows([{ instance_id: 'B' }], []).ids).toEqual(['B']);

@@ -63,12 +63,28 @@ manifest synthesised for it — see below) or as a `.zip` containing
 | Field | Type | Required | Rule |
 |---|---|---|---|
 | `id` | string | yes | A valid Lua identifier, not a reserved word, unique within the command. This becomes the key under `ctx.args`. |
-| `type` | string | yes | One of `int`, `float`, `string`, `bool`, `enum`. |
+| `type` | string | yes | One of `int`, `float`, `string`, `bool`, `enum`, `entity`, `multiselect`. |
 | `label` | string | yes | Shown in the UI. |
 | `description` | string | no | Shown in the UI. |
-| `default` | JSON value | no | Used when the caller omits (or sends JSON `null` for) this argument. Its JSON type must match `type` (an integer for `int` — a float with a fractional part or out of `i64` range is rejected; a string that is one of `options` for `enum`; etc). If there is no default and the caller supplies nothing, the run is refused before the script starts. |
+| `default` | JSON value | no | Used when the caller omits (or sends JSON `null` for) this argument. Its JSON type must match `type` (an integer for `int` — a float with a fractional part or out of `i64` range is rejected; a string that is one of `options` for `enum`; a string for `entity`; an array of strings for `multiselect`; etc). If there is no default and the caller supplies nothing, the run is refused before the script starts. |
 | `min` / `max` | number | no | Inclusive bounds, checked for `int` and `float` only. `min` must not exceed `max`. |
-| `options` | array of strings | only for `enum` | Must be non-empty for an `enum` param. The supplied (or default) value must be one of these, compared as an exact string match. |
+| `options` | array of strings | only for `enum`; optional for `multiselect` | Must be non-empty for an `enum` param. For `multiselect`, declaring `options` constrains which strings are accepted; leaving it empty is the common case — see below. The supplied (or default) value must be one of these, compared as an exact string match. |
+| `entity` | string | only for `entity` | One of `pal`, `player`, `guild`, `base` — which kind of entity this parameter's value identifies. Required and validated at install time for an `entity` param; ignored for every other type. |
+
+Two of these types are not scalars in the way `int` or `string` are:
+
+- **`entity`** takes an entity's id as a string, and its `entity` field says which
+  kind of entity that id names. An empty string is the conventional "any" —
+  `pst.repair`'s `owner` parameter defaults to `""` and its script reads that as
+  "every player" rather than one in particular.
+- **`multiselect`** takes an array of strings. Most of the time it declares no
+  `options`, because its whole purpose is to receive a selection made over a
+  result no manifest could enumerate in advance — the ids a plugin's own
+  `table` widget just showed the user, for instance. Its `default` must be an
+  array (typically `[]`), never a bare string.
+
+Every SP1 param declaration — `int`, `float`, `string`, `bool`, `enum` — is
+unchanged by either addition.
 
 Argument coercion (`run_plugin_command`'s `args`) happens once, before the
 script runs: every declared param is resolved from the supplied JSON object,
@@ -90,6 +106,205 @@ for it:
   any capability — if the script needs `log`, `gamedata`, or save access, ship
   it as a `.zip` with an explicit manifest instead.
 - `commands` is exactly one entry: `{ "id": "main", "title": "Main" }`.
+
+## Plugin-defined interfaces
+
+Every plugin already gets a form generated from its `commands` and their
+`params` — one field per param, one button per command. A `ui` section lets a
+plugin arrange those same commands into something more purposeful: a scan
+that feeds a table, a table the user picks rows from, a button that acts on
+the pick. It does this by describing widgets, not by writing any.
+
+**A view is data, never code.** A plugin's `ui` is JSON — sections and
+widgets and the field names below, nothing else. There is no HTML, no CSS,
+no JavaScript, and no expression language, and no string a plugin supplies
+is ever rendered as markup or evaluated as a program. If the vocabulary
+below can't build the widget you want, that's a host limitation to raise,
+not a gap to route a string through — an escape hatch here would mean a
+sandboxed script drawing arbitrary markup into the host's own UI, which is
+exactly the hole the sandbox exists to close everywhere else.
+
+**`ui` is optional, and does not change how commands run.** A plugin with no
+`ui` renders and runs exactly as it did before this feature existed: the
+generated command form, one field per param. Deleting a `ui` block from a
+plugin that has one is equally harmless — its commands still exist, still
+validate arguments the same way, and still run the same way when invoked
+from the generated form. `ui` only changes how a plugin's commands are
+*arranged*; it has no say in how they are *run*.
+
+### The shape
+
+`ui` is an array of sections. A section has an optional `title`, a `columns`
+of `1`, `2` or `3` (default `1`), and an array of `widgets`. That's the
+entire grammar — sections hold widgets, and a widget holds nothing further.
+Any widget may set `"span": "full"` to take its section's full width
+regardless of `columns`, which is how the worked example's "Scan" button
+sits under three columns of inputs instead of trying to share a column with
+one of them.
+
+### The ten widget types
+
+Six are inputs, three are outputs, and one is an action. Every field below
+is a JSON field of the widget object; a field a given type doesn't use is
+simply absent.
+
+| Type | Kind | Fields |
+|---|---|---|
+| `entity_select` | input | `id`, `label`, `entity` (one of `pal`, `player`, `guild`, `base`) |
+| `text_input` | input | `id`, `label` |
+| `number_input` | input | `id`, `label` |
+| `toggle` | input | `id`, `label` |
+| `select` | input | `id`, `label` |
+| `multiselect` | input | `id`, `label` |
+| `table` | output | `from`, `path`, `columns`, `selectable`, `id` (required if `selectable`) |
+| `list` | output | `from`, `path`, `label` |
+| `text` | output | `from` and `path`, or a literal `text` |
+| `button` | action | `label`, `command`, `args` |
+
+An input widget's `label` is optional — omit it and the widget falls back to
+the label the parameter itself declares. The bounds on a `number_input`, the
+options a `select` or `multiselect` offers, and whether a value is required
+all come from the command's own `param` declaration too; the widget names
+which param it is, nothing more. An `entity_select` reads the loaded save to
+populate itself, so a manifest that uses one must declare `save.read`.
+
+### How inputs reach a command
+
+An input widget's `id` names the parameter it feeds — on **every** command
+that declares a parameter by that id, not just the one nearest it in the
+layout. That's deliberate: in the worked example below, the `max_level` and
+`max_rank` number inputs sit in the "Scan" section, but `fix_illegal_pals`
+also declares params called `max_level` and `max_rank`, so the same two
+inputs drive the fix as well as the scan, with nothing in the manifest
+saying so twice.
+
+### How results reach outputs
+
+A `table`, `list`, or `text` widget can read `from` a command and a `path`
+into what that command returned. The whole table a command's Lua function
+returns is available this way — `summary` and `counts` are pulled out of it
+separately for the host's own display, but they never leave the table the
+script built, so `"path": "summary"` reads the same field the host's own
+summary line does. `path` is a dotted walk (`"counts.illegal"` reaches a
+nested field); a path that finds nothing renders an empty widget rather than
+an error, so a command that hasn't run yet or returned a differently-shaped
+result never breaks the page around it.
+
+### A table's rows
+
+A selectable table's rows need an identity that survives a re-render, and
+nothing in a command's returned row forces one to exist — this is the one
+convention in the format that isn't spelled out anywhere in the JSON. A
+row's id is the first of `id`, `instance_id` or `uid` it carries as a
+non-empty string, checked in that order; a row with none of those falls back
+to its own index in the returned array. `pst.repair`'s scan rows below carry
+`instance_id`, which is why that's what ends up in a selection.
+
+### Chaining widgets together with `args`
+
+A `button`'s `args` pulls a value out of another widget when it runs its
+command: `"args": { "ids": "rows.selection" }` sends the table widget `rows`'
+current selection as the `ids` argument. The only two reference forms that
+parse are `<widget>.selection` (a table's checked row ids) and
+`<widget>.value` (an input widget's current value); nothing else does —
+there's no arithmetic, no string building, no reaching into a result
+directly. If a plugin needs to hand a command something more elaborate than
+one other widget's value or selection, that value belongs in the command's
+own default or in `ctx.args`, not in `args`.
+
+### What the host owns
+
+A `ui` section never bypasses the destructive-command rule that governs
+every other way of running a command: a button that runs a `destructive`
+command always previews first (see `ctx.dry_run` below), and the host draws
+its own Apply / Cancel bar over the prediction — the same bar and the same
+preview a command run from the generated form gets. A plugin cannot declare
+a widget that skips this; there is no field for it.
+
+### Limits
+
+A `table` or `list` widget renders at most 500 rows and says how many rows
+actually exist — "Showing 500 of 3,214" — rather than silently truncating.
+An `entity_select` is capped the same way: it offers at most 500 entities
+and reports the true total alongside them. Both are render caps, chosen so
+a wide save doesn't hang a browser tab; they are unrelated to the 150,000
+JSON node cap documented under `gamedata` below, which limits what a single
+`gamedata.get` call may build, not how many rows a widget draws.
+
+### What is refused at install, and what degrades at render
+
+Two different pieces of code police a view, at two different times. The
+manifest parser (`validate_view`) runs once, at install, and refuses the
+*whole manifest* if a view is malformed — nothing installs. The browser's
+own normalizer runs every time a valid view is opened, and instead of
+failing, drops just the one widget or field that doesn't make sense and
+carries on — partly so a plugin written against a newer host's widget
+vocabulary still opens, with the unfamiliar parts simply missing, rather
+than refusing outright.
+
+| Refused at install (the manifest never installs) | Degrades at render (the view opens; the offending piece is dropped) |
+|---|---|
+| a section's `columns` is not `1`, `2` or `3` | a section that isn't a JSON object is skipped |
+| a widget `id` isn't a valid Lua identifier, or is reused elsewhere in the view | a widget that isn't a JSON object is skipped |
+| a `span` is present and isn't `"full"` | an unrecognized widget `type` is skipped |
+| an input widget has no `id`, or its `id` names no parameter any command declares | an `entity_select` with a missing or unrecognized `entity` is skipped |
+| an `entity_select` appears without the manifest declaring `save.read` | a `from` naming a command that no longer exists is skipped |
+| a selectable `table` has no `id` | a `button` whose `command` names no known command is skipped |
+| a `from` names no command the manifest declares | a `path` that resolves to nothing renders as an empty widget, not an error |
+| a `button` has no `command`, or its `command` names no declared command | a section's `columns` outside `1`-`3` falls back to `1` instead of being refused |
+| `args` appears on a non-`button`, names a key the button's command doesn't declare, or has a value that isn't `<widget>.selection`/`<widget>.value` naming a widget in the view | |
+
+### Worked example: `pst.repair`'s view
+
+From the bundled `pst.repair` plugin
+(`psp-app/src/bundled/pst.repair/manifest.json`), whose two commands are
+described below:
+
+```json
+"ui": [
+  {
+    "title": "Scan",
+    "columns": 3,
+    "widgets": [
+      { "type": "entity_select", "id": "owner", "entity": "player", "label": "Owner" },
+      { "type": "number_input", "id": "max_level", "label": "Maximum level" },
+      { "type": "number_input", "id": "max_rank", "label": "Maximum condensing rank" },
+      { "type": "button", "label": "Scan", "command": "scan_illegal_pals", "span": "full" }
+    ]
+  },
+  {
+    "title": "Illegal pals",
+    "columns": 1,
+    "widgets": [
+      { "type": "text", "from": "scan_illegal_pals", "path": "summary" },
+      { "type": "table", "id": "rows", "from": "scan_illegal_pals", "path": "pals",
+        "columns": ["name", "level", "rank", "problems"], "selectable": true },
+      { "type": "button", "label": "Fix selected", "command": "fix_illegal_pals",
+        "args": { "ids": "rows.selection" } }
+    ]
+  }
+]
+```
+
+- The **"Scan" section** lays three inputs and a button across three columns:
+  an `entity_select` bound to `owner` (so the user can narrow the scan to one
+  player, or leave it at the "Any" that an empty string means), and two
+  `number_input`s bound to `max_level` and `max_rank`. The button spans the
+  full width beneath them and runs `scan_illegal_pals` with whatever the
+  three inputs currently hold.
+- The **"Illegal pals" section** is where the scan's result lands. The `text`
+  widget shows `scan_illegal_pals`'s own `summary` field verbatim. The
+  `table` widget reads that same result's `pals` array, renders the four
+  named columns, and — because `selectable` is `true` and it declares an
+  `id` of `rows` — tracks which rows the user has checked.
+- The **"Fix selected" button** runs `fix_illegal_pals` with `ids` set to
+  `rows.selection`: exactly the `instance_id`s of the checked rows. Because
+  `fix_illegal_pals` also declares `max_level` and `max_rank` params, the
+  same two number inputs from the Scan section feed it too, so a user who
+  adjusts the threshold and fixes a selection doesn't need to re-enter it.
+  `fix_illegal_pals` is `destructive`, so pressing this button previews the
+  clamp before anything is written, exactly as it would from the generated
+  form.
 
 ## Capabilities
 
@@ -962,6 +1177,41 @@ This is not unique to those two — the guild-tail data behind
 `GroupSaveDataMap` (member online timestamps, base ownership, and more) is
 opaque to `raw` for the identical reason, and any future command reaching for
 it through `raw` will hit the same wall.
+
+## The `pst.repair` plugin
+
+Bundled at `psp-app/src/bundled/pst.repair/`, `pst.repair` ("Save Repair")
+ports PalworldSaveTools' Fix family onto the plugin API, and is the plugin
+the "Worked example" above quotes the view of. It has two commands:
+`scan_illegal_pals`, which lists pals whose level or condensing rank is
+above the legal maximum and changes nothing, and `fix_illegal_pals`, which
+clamps the level and condensing rank of a selected set of pals down to that
+maximum.
+
+**This is the shape to reach for whenever a command's output is what the
+next command's input should be:** a scan, a pick, then an apply, with a
+`ui` view wiring the three steps together — the scan's table feeds the pick,
+and the pick feeds the apply's `ids` argument. Without a view, a plugin has
+no way to hand a user's row selection to a second command at all, so the
+only shape left is a single `fix_all_*` command with no selection —
+everything eligible gets fixed, whether the user wanted all of it touched or
+not. That shape is sometimes the right one, but it is worth avoiding
+whenever a selection is what the user actually wants, which is exactly the
+case a scan-then-fix pair exists to serve.
+
+**`scan_illegal_pals` checks level and condensing rank against two
+thresholds** — `max_level` and `max_rank`, both parameters with defaults of
+`60` and `4` — **and nothing else.** In particular, it does not check:
+
+- **Talents.** A talent outside `0..=100` is a third kind of illegal value,
+  but the host's own pal writer already refuses one out of range, so nothing
+  a plugin could write would ever put a talent back in range, and no
+  scan could find one to report.
+- **An unknown species.** A pal whose species id no longer resolves against
+  the loaded game data is a different kind of broken save state than an
+  out-of-range number, and there is no legal value to clamp it down to —
+  clamping only makes sense for a value with a valid range, which "which
+  species this is" does not have.
 
 ## The plugin editor
 

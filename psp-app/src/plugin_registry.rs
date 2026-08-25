@@ -25,6 +25,11 @@ pub const BUNDLED: &[BundledPlugin] = &[
         manifest: include_str!("bundled/pst.tools/manifest.json"),
         sources: &[("main.lua", include_str!("bundled/pst.tools/main.lua"))],
     },
+    BundledPlugin {
+        id: "pst.repair",
+        manifest: include_str!("bundled/pst.repair/manifest.json"),
+        sources: &[("main.lua", include_str!("bundled/pst.repair/main.lua"))],
+    },
 ];
 
 /// Holds a `Cancel` handle per in-flight run, keyed by run id, so a

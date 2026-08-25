@@ -117,4 +117,75 @@ describe('PluginViewState', () => {
 		await expect(state.loadEntities()).resolves.toBeUndefined();
 		expect(state.optionsFor('player')).toEqual({ options: [], total: 0 });
 	});
+
+	/// A widget that re-emits the value it was given must not count as a change.
+	/// Replacing `inputs` re-renders the widget, which re-mints the change
+	/// handler it passed down, which fires the handler again -- a cycle that
+	/// only ends when Svelte aborts the whole update with
+	/// `effect_update_depth_exceeded`.
+	it('leaves its inputs untouched when a value is set to what it already holds', () => {
+		const state = new PluginViewState(UI, [SCAN]);
+		const before = state.inputs;
+		state.setValue('min_level', 7);
+		expect(state.inputs).toBe(before);
+	});
+
+	it('still replaces its inputs when the value genuinely changes', () => {
+		const state = new PluginViewState(UI, [SCAN]);
+		const before = state.inputs;
+		state.setValue('min_level', 8);
+		expect(state.inputs).not.toBe(before);
+		expect(state.inputs.min_level).toBe(8);
+	});
+
+	it('treats setting a key it has never held as a change', () => {
+		const state = new PluginViewState(UI, [SCAN]);
+		const before = state.inputs;
+		state.setValue('brand_new', '');
+		expect(state.inputs).not.toBe(before);
+		expect(state.inputs.brand_new).toBe('');
+	});
+
+	/// `sendAndWait` correlates replies by message type through a single pending
+	/// slot, so a second request of the same type overwrites the first's
+	/// resolver: one caller then waits forever and the stray reply reaches no
+	/// one. Two effects legitimately ask for entities at startup, so the guard
+	/// belongs here rather than at each call site.
+	it('does not issue a second entity request while one is in flight', async () => {
+		let settle!: (value: unknown) => void;
+		sendAndWait.mockReturnValue(
+			new Promise((resolve) => {
+				settle = resolve;
+			})
+		);
+		const state = new PluginViewState(UI, [SCAN]);
+
+		const first = state.loadEntities();
+		const second = state.loadEntities();
+		expect(sendAndWait).toHaveBeenCalledTimes(1);
+
+		settle({ entities: { player: { options: [{ id: 'p', label: 'P' }], total: 1 } } });
+		await Promise.all([first, second]);
+		expect(state.optionsFor('player').options).toEqual([{ id: 'p', label: 'P' }]);
+	});
+
+	it('can load entities again once the first load has settled', async () => {
+		sendAndWait.mockResolvedValue({ entities: {} });
+		const state = new PluginViewState(UI, [SCAN]);
+		await state.loadEntities();
+		await state.loadEntities();
+		expect(sendAndWait).toHaveBeenCalledTimes(2);
+	});
+
+	it('can load entities again after a failed load', async () => {
+		sendAndWait.mockRejectedValueOnce(new Error('no save'));
+		await (async () => {})();
+		const state = new PluginViewState(UI, [SCAN]);
+		await state.loadEntities();
+		sendAndWait.mockResolvedValue({
+			entities: { player: { options: [{ id: 'p', label: 'P' }], total: 1 } }
+		});
+		await state.loadEntities();
+		expect(state.optionsFor('player').total).toBe(1);
+	});
 });

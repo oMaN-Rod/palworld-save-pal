@@ -27,13 +27,13 @@
 						{#if widget.selectable}
 							<th class="w-8 p-1"></th>
 						{/if}
-						{#each data.columns as column (column)}
+						{#each data.columns as column, columnIndex (columnIndex)}
 							<th class="p-1 text-left font-medium">{column}</th>
 						{/each}
 					</tr>
 				</thead>
 				<tbody>
-					{#each data.rows as row, index (data.ids[index])}
+					{#each data.rows as row, index (index)}
 						<tr class="border-surface-800 border-t">
 							{#if widget.selectable}
 								<td class="p-1">
@@ -45,7 +45,7 @@
 									/>
 								</td>
 							{/if}
-							{#each data.columns as column (column)}
+							{#each data.columns as column, columnIndex (columnIndex)}
 								<td class="p-1">{row[column]}</td>
 							{/each}
 						</tr>

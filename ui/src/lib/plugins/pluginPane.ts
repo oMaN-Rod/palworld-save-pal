@@ -7,9 +7,12 @@ export const MODE_LABELS: Record<PaneMode, string> = {
 	code: 'Code'
 };
 
+/// A bundled plugin's code is worth reading — it is the worked example every
+/// author copies from. The editor refuses to save one, so opening it here
+/// exposes nothing that can be changed.
 const AVAILABILITY: Record<PaneMode, (plugin: { bundled: boolean }) => boolean> = {
 	run: () => true,
-	code: (plugin) => !plugin.bundled
+	code: () => true
 };
 
 export function availableModes(plugin: { bundled: boolean }): PaneMode[] {

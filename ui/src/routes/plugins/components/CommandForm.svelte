@@ -33,6 +33,12 @@
 				case 'enum':
 					out[param.id] = param.options[0] ?? '';
 					break;
+				case 'entity':
+					out[param.id] = '';
+					break;
+				case 'multiselect':
+					out[param.id] = [];
+					break;
 			}
 		}
 		return out;
@@ -42,6 +48,13 @@
 
 	function submit() {
 		onRun({ ...values });
+	}
+
+	function toggleMulti(paramId: string, option: string) {
+		const current = Array.isArray(values[paramId]) ? (values[paramId] as string[]) : [];
+		values[paramId] = current.includes(option)
+			? current.filter((v) => v !== option)
+			: [...current, option];
 	}
 </script>
 
@@ -70,6 +83,31 @@
 					onChange={(value) => (values[param.id] = value)}
 					{disabled}
 				/>
+			{:else if param.type === 'entity'}
+				<Input
+					type="text"
+					label={param.entity ? `${param.label} (${param.entity} id)` : param.label}
+					bind:value={values[param.id] as string}
+					{disabled}
+				/>
+			{:else if param.type === 'multiselect'}
+				<fieldset class="border-surface-700 rounded-sm border p-2">
+					<legend class="text-surface-400 px-1 text-xs">{param.label}</legend>
+					{#each param.options as option, optionIndex (optionIndex)}
+						<label class="flex items-center gap-2 text-sm">
+							<input
+								type="checkbox"
+								checked={(values[param.id] as string[] | undefined)?.includes(option) ?? false}
+								onchange={() => toggleMulti(param.id, option)}
+								{disabled}
+							/>
+							{option}
+						</label>
+					{/each}
+					{#if param.options.length === 0}
+						<p class="text-surface-400 text-sm">Fed by another widget.</p>
+					{/if}
+				</fieldset>
 			{/if}
 			{#if param.description}
 				<p class="text-surface-400 text-xs">{param.description}</p>

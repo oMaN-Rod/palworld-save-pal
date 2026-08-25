@@ -14,7 +14,7 @@
 	} from '$lib/plugins/pluginPane';
 	import { buildRunRequest, type ViewWidget } from '$lib/plugins/pluginView';
 	import { PluginViewState } from '$lib/plugins/viewState.svelte';
-	import { getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import { Button } from '$components/ui';
 	import type { PluginCommand } from '$types';
 	import ApplyBar from '../components/ApplyBar.svelte';
@@ -24,6 +24,7 @@
 
 	const modal = getModalState();
 	const toast = getToastState();
+	const appState = getAppState();
 
 	const plugin = $derived(pluginsData.plugins.find((p) => p.id === page.params.id));
 
@@ -56,6 +57,13 @@
 		if (next.hasView) next.loadEntities();
 	});
 
+	$effect(() => {
+		appState.saveFile?.name;
+		const active = untrack(() => view);
+		if (!active) return;
+		active.loadEntities();
+	});
+
 	let recordedRunId: string | null = $state(null);
 
 	$effect(() => {
@@ -63,6 +71,7 @@
 		const active = view;
 		const ran = lastRun;
 		if (!result || !active || !ran || result.status !== 'ok') return;
+		if (plugin === undefined || resultPluginId !== plugin.id) return;
 		if (untrack(() => recordedRunId) === result.run_id) return;
 		recordedRunId = result.run_id;
 		active.recordResult(ran.commandId, result.result);
@@ -136,8 +145,8 @@
 		if (!plugin || !view) return;
 		const command = plugin.commands.find((c) => c.id === widget.command);
 		if (!command) return;
-		const request = buildRunRequest(widget, command, view.runtime());
-		runCommand(command, request.args);
+		const { args } = buildRunRequest(widget, command, view.runtime());
+		runCommand(command, args);
 	}
 
 	function applyPending() {
@@ -220,7 +229,7 @@
 							onCancel={cancelPending}
 						/>
 					{/if}
-					{#if showResult && pluginsData.lastResult && pluginsData.lastResult.status !== 'ok'}
+					{#if showResult && pluginsData.lastResult}
 						<RunResult result={pluginsData.lastResult} />
 					{/if}
 				</div>
