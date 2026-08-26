@@ -21,7 +21,7 @@
 </script>
 
 {#if plugin.commands.length > 0}
-	<div class="flex flex-col gap-2">
+	<div class="flex flex-col gap-2 max-h-158 2xl:max-h-216 overflow-y-auto">
 		{#each plugin.commands as command (command.id)}
 			<div class="border-surface-700 rounded-sm border p-2">
 				<div class="flex items-center justify-between gap-2">

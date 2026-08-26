@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { goto, replaceState } from '$app/navigation';
-	import { untrack } from 'svelte';
+	import { onDestroy, untrack } from 'svelte';
 	import { cn } from '$theme';
-	import { pluginsData } from '$lib/data';
+	import { PLUGIN_WALL_CLOCK_LIMIT_SECONDS, pluginsData } from '$lib/data';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { slugify } from '$lib/plugins/pluginId';
 	import {
@@ -16,7 +16,7 @@
 	import { buildRunRequest, type ViewWidget } from '$lib/plugins/pluginView';
 	import { PluginViewState } from '$lib/plugins/viewState.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Button } from '$components/ui';
+	import { Button, Tooltip } from '$components/ui';
 	import { TextInputModal } from '$components';
 	import type { PluginCommand } from '$types';
 	import ApplyBar from '../components/ApplyBar.svelte';
@@ -44,6 +44,21 @@
 
 	let view: PluginViewState | null = $state(null);
 	let viewPluginId: string | null = $state(null);
+
+	let elapsedSeconds = $state(0);
+	let elapsedTimer: ReturnType<typeof setInterval> | undefined;
+
+	$effect(() => {
+		if (pluginsData.running) {
+			elapsedSeconds = 0;
+			elapsedTimer = setInterval(() => {
+				elapsedSeconds += 1;
+			}, 1000);
+		} else if (elapsedTimer) {
+			clearInterval(elapsedTimer);
+			elapsedTimer = undefined;
+		}
+	});
 
 	$effect(() => {
 		const id = plugin?.id ?? null;
@@ -228,6 +243,10 @@
 		pendingApply = null;
 		pluginsData.lastResult = null;
 	}
+
+	onDestroy(() => {
+		if (elapsedTimer) clearInterval(elapsedTimer);
+	});
 </script>
 
 {#if !plugin}
@@ -257,6 +276,7 @@
 					<div class="text-error-500 text-xs">{plugin.error}</div>
 				{/if}
 			</div>
+
 			<div class="flex items-center gap-2">
 				<Button variant="ghost" size="sm" onclick={exportPlugin}>Export</Button>
 				<Button variant="ghost" size="sm" onclick={clonePlugin}>Clone</Button>
@@ -283,6 +303,24 @@
 					{MODE_LABELS[paneMode]}
 				</button>
 			{/each}
+		</div>
+		<div class="flex flex-col gap-3">
+			{#if pluginsData.running}
+				<div class="border-surface-700 flex items-center justify-between rounded-sm border p-2">
+					<div class="flex flex-col">
+						<span class="text-sm">
+							Running <span class="font-medium">{pluginsData.running.commandId}</span> on
+							<span class="font-medium">{pluginsData.running.pluginId}</span>...
+						</span>
+						<span class="text-surface-400 text-xs">
+							{elapsedSeconds}s elapsed -- stops automatically after {PLUGIN_WALL_CLOCK_LIMIT_SECONDS}s
+						</span>
+						{#if appState.progressMessage}
+							<span class="text-surface-400 text-xs">{appState.progressMessage}</span>
+						{/if}
+					</div>
+				</div>
+			{/if}
 		</div>
 
 		{#if mode === 'run'}

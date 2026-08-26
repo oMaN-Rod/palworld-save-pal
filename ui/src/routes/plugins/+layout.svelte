@@ -1,47 +1,28 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/state';
 	import { beforeNavigate, goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
-	import { pluginsData, PLUGIN_WALL_CLOCK_LIMIT_SECONDS } from '$lib/data';
+	import { pluginsData } from '$lib/data';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { leaveIsSafe, pluginIdFromPath } from '$lib/plugins/pluginPane';
 	import { slugify } from '$lib/plugins/pluginId';
-	import { getModalState, getToastState, getAppState } from '$states';
-	import { Button, FileDropzone, Tooltip } from '$components/ui';
+	import { getModalState, getToastState } from '$states';
+	import { Button, FileDropzone } from '$components/ui';
 	import { TextInputModal } from '$components';
 	import PluginList from './components/PluginList.svelte';
+	import { onMount } from 'svelte';
 
 	const { children } = $props();
 
 	const modal = getModalState();
 	const toast = getToastState();
-	const appState = getAppState();
 
 	let installFiles: FileList | undefined = $state();
-	let elapsedSeconds = $state(0);
-	let elapsedTimer: ReturnType<typeof setInterval> | undefined;
 
 	const selectedId = $derived(page.params.id);
 
 	onMount(() => {
 		pluginsData.list();
-	});
-
-	onDestroy(() => {
-		if (elapsedTimer) clearInterval(elapsedTimer);
-	});
-
-	$effect(() => {
-		if (pluginsData.running) {
-			elapsedSeconds = 0;
-			elapsedTimer = setInterval(() => {
-				elapsedSeconds += 1;
-			}, 1000);
-		} else if (elapsedTimer) {
-			clearInterval(elapsedTimer);
-			elapsedTimer = undefined;
-		}
 	});
 
 	$effect(() => {
@@ -127,30 +108,6 @@
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden">
-	<div class="mx-2 flex flex-col gap-3">
-		{#if pluginsData.running}
-			<div class="border-surface-700 flex items-center justify-between rounded-sm border p-3">
-				<div class="flex flex-col">
-					<span class="text-sm">
-						Running <span class="font-medium">{pluginsData.running.commandId}</span> on
-						<span class="font-medium">{pluginsData.running.pluginId}</span>...
-					</span>
-					<span class="text-surface-400 text-xs">
-						{elapsedSeconds}s elapsed -- stops automatically after {PLUGIN_WALL_CLOCK_LIMIT_SECONDS}s
-					</span>
-					{#if appState.progressMessage}
-						<span class="text-surface-400 text-xs">{appState.progressMessage}</span>
-					{/if}
-				</div>
-				<Tooltip
-					label="Cancel can't be delivered while this connection is busy running the command -- wait for it to finish or time out."
-				>
-					<Button variant="ghost" size="sm" disabled>Cancel</Button>
-				</Tooltip>
-			</div>
-		{/if}
-	</div>
-
 	<div class="flex flex-1 overflow-hidden">
 		<aside class="border-surface-700 w-72 shrink-0 overflow-y-auto border-r p-3">
 			<Button size="sm" onclick={newPlugin} class="mb-2">New plugin</Button>
