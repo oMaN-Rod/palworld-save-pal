@@ -27,15 +27,20 @@
 	let openedFromTable = $state(false);
 
 	function openEditor(row: PalRow) {
-		pendingPalId = row.instance_id;
-		openedFromTable = true;
-		palEditor.openLoading();
 		if (row.owner_uid && row.owner_uid !== NIL_OWNER_UID) {
+			pendingPalId = row.instance_id;
+			openedFromTable = true;
+			palEditor.openLoading();
 			appState.bulkDetailPlayer = undefined;
 			appState.loadPlayerDetailsForBulk(row.owner_uid);
 		} else if (row.guild_id) {
+			pendingPalId = row.instance_id;
+			openedFromTable = true;
+			palEditor.openLoading();
 			appState.bulkDetailGuild = undefined;
 			appState.loadGuildDetailsForBulk(row.guild_id);
+		} else {
+			toast.add(m.failed_get_pal_data(), m.error(), 'error');
 		}
 	}
 
