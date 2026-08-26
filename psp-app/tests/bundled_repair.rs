@@ -771,8 +771,13 @@ fn fix_invalid_pal_active_skills_removes_a_seeded_unlearnable_skill() {
     // pal. Reading everything before writing anything keeps this at the one
     // build `save.pals()` itself needs.
     assert_eq!(
-        outcome.pal_snapshot_build_count, 1,
-        "the command must read every pal field it needs before its first write"
+        outcome.pal_snapshot_build_count,
+        1,
+        "the command must read every pal field it needs before its first write -- if this \
+         regresses, check first whether reads and writes are interleaved again (the count \
+         scales with the number of pals written) before assuming the command legitimately \
+         gained another snapshot-building call, e.g. a save.info() read (the count would \
+         rise by a fixed amount instead)"
     );
     let counts = outcome.result.expect("a result")["counts"].clone();
     assert!(
