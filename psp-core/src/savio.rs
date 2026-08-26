@@ -183,4 +183,79 @@ mod tests {
             "typed container id readable after read_gvas_bytes"
         );
     }
+
+    fn corpus_player_saves() -> Vec<(String, Vec<u8>)> {
+        let dir = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves/v1_relics/Players");
+        let mut files = Vec::new();
+        for entry in std::fs::read_dir(&dir)
+            .expect("the corpus fixture is checked in")
+            .flatten()
+        {
+            let path = entry.path();
+            if path.extension().and_then(|ext| ext.to_str()) != Some("sav") {
+                continue;
+            }
+            let name = path
+                .file_name()
+                .and_then(|name| name.to_str())
+                .unwrap_or_default()
+                .to_string();
+            files.push((name, std::fs::read(&path).expect("read fixture player save")));
+        }
+        files.sort_by(|left, right| left.0.cmp(&right.0));
+        files
+    }
+
+    /// A no-edit resave of a player `.sav` is NOT byte-identical to the game's own file:
+    /// the game's Oodle encoder and this crate's spell the same payload differently, and
+    /// the container's `compressed_len` moves in both directions. What must survive is the
+    /// GVAS payload inside the container, which is what the game reads -- and every caller
+    /// that loads a player without editing anything rewrites that file from this round
+    /// trip. `decompress_save` rather than `plm_payload`: the latter routes through
+    /// `oodle::decompress`, which answers only on a thread that has been lent a bridge,
+    /// and a native test has none.
+    #[test]
+    fn untouched_player_sav_payload_survives_a_resave() {
+        let files = corpus_player_saves();
+        assert!(
+            files.len() > 1,
+            "the corpus fixture must carry several player saves"
+        );
+        assert!(
+            files.iter().any(|(name, _)| name.ends_with("_dps.sav")),
+            "the corpus fixture must carry a _dps.sav"
+        );
+
+        let mut recompressed = 0;
+        for (name, original) in &files {
+            let save = read_sav_bytes(original).unwrap_or_else(|e| panic!("{name} parses: {e}"));
+            let rewritten =
+                write_sav_bytes(&save).unwrap_or_else(|e| panic!("{name} writes back: {e}"));
+
+            let before = crate::ue::compression::decompress_save(&mut &original[..])
+                .unwrap_or_else(|e| panic!("{name} decompresses: {e}"));
+            let after = crate::ue::compression::decompress_save(&mut &rewritten[..])
+                .unwrap_or_else(|e| panic!("{name} resave decompresses: {e}"));
+
+            assert_eq!(
+                after.len(),
+                before.len(),
+                "{name}: the resaved payload changed length"
+            );
+            let first_diff = before.iter().zip(after.iter()).position(|(a, b)| a != b);
+            assert_eq!(
+                first_diff, None,
+                "{name}: the resaved GVAS payload differs from the game's own"
+            );
+            if rewritten != *original {
+                recompressed += 1;
+            }
+        }
+        assert!(
+            recompressed > 0,
+            "every file resaved byte-identically, so this proves nothing a byte-level \
+             comparison would not have caught"
+        );
+    }
 }
