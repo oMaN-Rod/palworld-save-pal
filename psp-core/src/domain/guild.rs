@@ -131,11 +131,11 @@ fn guild_chest_container_id(session: &SaveSession, extra_index: usize) -> Option
     }
 }
 
-/// The container a base pal sits in, via `SaveParameter.SlotId.ContainerId.ID`. Only the
-/// `"SlotId"` spelling is accepted here -- deliberately narrower than
-/// `pal::read_save_parameter_dto`, which also falls back to `"SlotID"`.
+/// The container a base pal sits in, via the pal's slot struct `ContainerId.ID`.
 pub(crate) fn base_container_membership(save_parameter: &Properties) -> Option<uuid::Uuid> {
-    let slot = pal::param(save_parameter, "SlotId").and_then(props::struct_props)?;
+    let slot = pal::param(save_parameter, "SlotID")
+        .or_else(|| pal::param(save_parameter, "SlotId"))
+        .and_then(props::struct_props)?;
     slot.0
         .get(&PropertyKey::from("ContainerId"))
         .and_then(props::struct_props)
@@ -1312,19 +1312,19 @@ mod tests {
         );
     }
 
-    /// The uppercase spelling `read_save_parameter_dto` accepts must resolve to `None` here.
+    /// The uppercase spelling is what `tests/fixtures/reference_saves/Level.sav` carries,
+    /// and what `new_pal_entry` writes.
     #[test]
-    fn base_container_membership_does_not_fall_back_to_slot_id_uppercase() {
+    fn base_container_membership_resolves_the_slot_id_uppercase_spelling() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
         let save_parameter = slot_save_parameter("SlotID", container_id);
 
         assert_eq!(
             base_container_membership(&save_parameter),
-            None,
-            "base-container membership has no \"SlotID\" fallback"
+            Some(container_id),
+            "base-container membership must accept the \"SlotID\" spelling"
         );
 
-        // Contrast: `read_save_parameter_dto` DOES resolve the uppercase spelling.
         let mut with_character_id = save_parameter;
         with_character_id.insert("CharacterID", crate::props::name_property("SheepBall"));
         let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
@@ -1345,6 +1345,99 @@ mod tests {
     fn base_container_membership_returns_none_when_no_slot_property_present() {
         let save_parameter = Properties::default();
         assert!(base_container_membership(&save_parameter).is_none());
+    }
+
+    fn base_worker_save_parameter(slot_key: &str) -> Properties {
+        let mut save_parameter =
+            slot_save_parameter(slot_key, CONTAINER_ID.parse().expect("a valid uuid"));
+        save_parameter.insert("CharacterID", crate::props::name_property("SheepBall"));
+        save_parameter
+    }
+
+    fn test_game_data() -> crate::gamedata::GameData {
+        let json_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json");
+        crate::gamedata::GameData::load(&json_dir).expect("data dir")
+    }
+
+    #[test]
+    fn pal_summaries_resolves_base_membership_under_both_slot_spellings() {
+        let game_data = test_game_data();
+
+        for slot_key in ["SlotId", "SlotID"] {
+            let session = session_with_world(
+                vec![guild_owning_the_player()],
+                vec![character_entry(
+                    PAL_INSTANCE_ID,
+                    base_worker_save_parameter(slot_key),
+                    fguid(GUILD_ID),
+                )],
+                vec![base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID)],
+            );
+
+            let summaries =
+                super::pal::pal_summaries(&session, &game_data).expect("pal summaries");
+            let summary = summaries
+                .iter()
+                .find(|summary| {
+                    summary.instance_id == PAL_INSTANCE_ID.parse::<uuid::Uuid>().unwrap()
+                })
+                .unwrap_or_else(|| panic!("{slot_key}: the pal must appear in the summaries"));
+
+            assert_eq!(
+                (summary.guild_id, summary.base_id),
+                (
+                    Some(GUILD_ID.parse::<uuid::Uuid>().unwrap()),
+                    Some(BASE_ID.parse::<uuid::Uuid>().unwrap())
+                ),
+                "{slot_key}: pal_summaries must place the base worker in its base"
+            );
+        }
+    }
+
+    /// `pal_summaries` and `base_container_membership` answer one question -- which base
+    /// a pal works at -- through two separate readers. Pinning them only apart is what
+    /// let one be narrowed while the other stayed wide.
+    #[test]
+    fn pal_summaries_and_base_container_membership_agree_under_both_slot_spellings() {
+        let game_data = test_game_data();
+        let base_entry = base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID);
+        let (base_guild_id, worker_container_id) =
+            base_guild_and_container(&base_entry).expect("the base has a worker container");
+        let base_id: uuid::Uuid = BASE_ID.parse().expect("a valid uuid");
+
+        for slot_key in ["SlotId", "SlotID"] {
+            let session = session_with_world(
+                vec![guild_owning_the_player()],
+                vec![character_entry(
+                    PAL_INSTANCE_ID,
+                    base_worker_save_parameter(slot_key),
+                    fguid(GUILD_ID),
+                )],
+                vec![base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID)],
+            );
+
+            let via_membership = base_container_membership(&base_worker_save_parameter(slot_key))
+                .filter(|container_id| *container_id == worker_container_id)
+                .map(|_| (base_guild_id, base_id));
+
+            let via_summaries = super::pal::pal_summaries(&session, &game_data)
+                .expect("pal summaries")
+                .iter()
+                .find(|summary| {
+                    summary.instance_id == PAL_INSTANCE_ID.parse::<uuid::Uuid>().unwrap()
+                })
+                .and_then(|summary| summary.guild_id.zip(summary.base_id));
+
+            assert_eq!(
+                via_membership, via_summaries,
+                "{slot_key}: the two base-membership readers disagree"
+            );
+            assert_eq!(
+                via_summaries,
+                Some((base_guild_id, base_id)),
+                "{slot_key}: both readers must place the pal in its base"
+            );
+        }
     }
 
     #[test]

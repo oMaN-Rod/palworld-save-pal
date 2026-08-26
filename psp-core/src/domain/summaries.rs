@@ -227,7 +227,9 @@ fn count_guild_base_pals(
             if is_player_entry(parameters) {
                 return false;
             }
-            props::get(parameters, &["SlotId", "ContainerId", "ID"])
+            props::get(parameters, &["SlotID"])
+                .or_else(|| props::get(parameters, &["SlotId"]))
+                .and_then(|slot| props::get_in(slot, &["ContainerId", "ID"]))
                 .and_then(props::as_uuid)
                 .is_some_and(|pal_container_id| container_ids.contains(&pal_container_id))
         })
@@ -421,6 +423,15 @@ mod tests {
         instance_id: &str,
         container_id: Option<&str>,
     ) -> MapEntry {
+        pal_character_entry_with_slot_key(owner_uid, instance_id, container_id, "SlotId")
+    }
+
+    fn pal_character_entry_with_slot_key(
+        owner_uid: &str,
+        instance_id: &str,
+        container_id: Option<&str>,
+        slot_key: &str,
+    ) -> MapEntry {
         let mut save_parameter = Properties::default();
         save_parameter.insert("OwnerPlayerUId", guid_property(owner_uid));
         if let Some(container) = container_id {
@@ -432,7 +443,7 @@ mod tests {
                 Property::Struct(StructValue::Struct(id_properties)),
             );
             save_parameter.insert(
-                "SlotId",
+                slot_key,
                 Property::Struct(StructValue::Struct(slot_properties)),
             );
         }
@@ -594,6 +605,33 @@ mod tests {
         assert_eq!(2, guild.pal_count); // only pals slotted into the base container
         assert!(!guild.loaded);
         assert_eq!(vec![guild_id], order);
+    }
+
+    #[test]
+    fn guild_pal_count_counts_base_workers_under_both_slot_spellings() {
+        let tail = guild(5, "The Guild", PLAYER_ONE, &[(PLAYER_ONE, 0, "Tester")]);
+        let groups = vec![guild_entry(GUILD_ID, tail)];
+        let bases = vec![base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID)];
+        let guild_id = GUILD_ID.parse::<uuid::Uuid>().unwrap();
+
+        for slot_key in ["SlotId", "SlotID"] {
+            let characters = vec![
+                player_character_entry(PLAYER_ONE, "Tester", 9),
+                pal_character_entry_with_slot_key(
+                    PLAYER_ONE,
+                    "aaaaaaaa-0000-0000-0000-000000000001",
+                    Some(CONTAINER_ID),
+                    slot_key,
+                ),
+            ];
+
+            let (summaries, _order) = build_guild_summaries(&groups, Some(&bases), &characters);
+
+            assert_eq!(
+                1, summaries[&guild_id].pal_count,
+                "{slot_key}: a base worker must be counted under either spelling"
+            );
+        }
     }
 
     #[test]

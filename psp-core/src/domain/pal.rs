@@ -361,8 +361,7 @@ pub fn pal_summaries(
             .and_then(|uid| session.player_summaries.get(&uid))
             .map(|summary| summary.nickname.clone());
 
-        // A pal this session created (add_guild_pal) spells the key "SlotID"; real
-        // save data spells it "SlotId". Both are checked, matching storage_id/storage_slot.
+        // The save format spells this key both ways across game versions.
         let (guild_id, base_id) = param(save_parameter, "SlotID")
             .or_else(|| param(save_parameter, "SlotId"))
             .and_then(props::struct_props)
@@ -1688,7 +1687,7 @@ pub fn heal_all_player_pals(
     heal_pals(session, game_data, &owned_ids)
 }
 
-/// Heals every pal in a base's worker container. Membership uses the SlotId-only rule, not the SlotId-or-SlotID fallback.
+/// Heals every pal in a base's worker container.
 pub fn heal_all_base_pals(
     session: &mut SaveSession,
     game_data: &GameData,
@@ -1750,10 +1749,9 @@ fn player_container_owners(
     owners
 }
 
-/// The pal's container, under either spelling of the slot key. Base-worker membership
-/// deliberately keys off `SlotId` alone; owner assignment is the case that wants both,
-/// since a single-spelling read would find no container for every pal written the
-/// other way and silently assign it no owner.
+/// The pal's container, under either spelling of the slot key: a single-spelling read
+/// would find no container for every pal written the other way and silently assign it
+/// no owner.
 fn slot_container_id(save_parameter: &Properties) -> Option<uuid::Uuid> {
     param(save_parameter, "SlotID")
         .or_else(|| param(save_parameter, "SlotId"))
