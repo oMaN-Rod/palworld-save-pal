@@ -1212,7 +1212,9 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
               any sickness, then gives an ownerless pal the owner of the container holding \
               it. Returns how many pals were restored, followed by how many owners were \
               assigned. Every value is written in place, so live handles and iterators stay \
-              valid. Resolving those owners loads every player's save data, under a dry run \
+              valid. Does not refresh player.pal_count, which keeps answering its pre-call \
+              number for the rest of the run. Resolving those owners loads every player's \
+              save data, under a dry run \
               too, so the call's cost and memory both scale with how many players the save \
               has. Does not touch dimensional storage.",
         capability: Some(Capability::SaveWrite),

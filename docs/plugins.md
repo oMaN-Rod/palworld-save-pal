@@ -835,6 +835,10 @@ three entity iterators that support it:
   map this walks. Not structural - every entry is rewritten in place, so no
   handle or iterator is invalidated - but it does drop the `pals` snapshot,
   since that snapshot caches the `hp` and `owner_uid` this just rewrote.
+  `player.pal_count` is the one derived value the call does not refresh: it
+  comes from the player summaries built when the save was loaded, which
+  nothing in a run rebuilds, so it keeps answering its pre-call number for
+  the rest of the run even for a player who just gained pals.
 - `save.rebuild_guild_membership() -> reassigned, unresolved` - reassigns
   every non-player pal to the guild that should own it: its owning player's
   guild, or, failing that, the guild of the base whose worker container
@@ -843,7 +847,8 @@ three entity iterators that support it:
   `delete_unreferenced_data`'s sweep removes next, so guessing wrong here
   would turn a membership bug into a deletion. Not structural, for the same
   reason `restore_pals` is not: a reassigned pal's `group_id` is overwritten
-  in place, and nothing this run caches is keyed on it.
+  in place, so no handle or iterator is invalidated - but it drops the `pals`
+  snapshot too, since that snapshot caches the `group_id` this just rewrote.
 - `save.delete_dps_pals(player_uid, indexes) -> integer` - empties the given
   slot indexes of one player's dimensional storage in place: it nils the
   slot's instance id and resets its parameter bag to an unused slot's shape,

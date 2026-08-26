@@ -1858,8 +1858,9 @@ pub fn restore_all(
     }
 
     // Entries are written in place, so every position-keyed cache stays correct. This
-    // one is not: a newly owned pal raises that player's count, and a stale entry would
-    // make `player.pal_count` read low for the rest of the session.
+    // one is not: a newly owned pal raises that player's count. Dropping it makes the
+    // next `extract_summaries` recount; the summaries already built keep the old number
+    // until then, which is what a plugin run's `player.pal_count` goes on reading.
     if owners_assigned > 0 {
         session.caches.pal_owner_counts = None;
     }
