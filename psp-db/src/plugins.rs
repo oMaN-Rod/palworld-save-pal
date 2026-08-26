@@ -49,7 +49,7 @@ pub async fn get(db: &dyn crate::DbDriver, id: &str) -> Result<Option<PluginRow>
 }
 
 /// Replaces every mutable field of an existing row, or creates it. Used for a user
-/// install: `granted_capabilities` is overwritten, unlike `seed_bundled`.
+/// install: `granted_capabilities` is overwritten.
 pub async fn upsert(db: &dyn crate::DbDriver, plugin: &NewPlugin<'_>) -> Result<PluginRow, DbError> {
     let installed_at = crate::time::now_iso_naive_utc();
     let updated_at = crate::time::now_iso_utc_offset();
