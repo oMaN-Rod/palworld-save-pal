@@ -402,10 +402,10 @@ fn validate_view(manifest: &Manifest) -> Result<(), ManifestError> {
                 reason: format!("columns must be 1, 2 or 3, got {}", section.columns),
             });
         }
-        if section.group.as_deref() == Some("") {
+        if section.group.as_deref().map(str::trim) == Some("") {
             return Err(ManifestError::InvalidView {
                 at: section_at,
-                reason: "group must be a title, not an empty string".to_string(),
+                reason: "group must be a title, not blank".to_string(),
             });
         }
         for (widget_index, widget) in section.widgets.iter().enumerate() {

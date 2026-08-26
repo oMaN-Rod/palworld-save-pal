@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { cn } from '$theme';
 	import type { PluginCommand } from '$types';
-	import { UNGROUPED, viewGroups, type ViewWidget } from '$lib/plugins/pluginView';
+	import { viewGroups, type ViewGroup, type ViewWidget } from '$lib/plugins/pluginView';
 	import type { PluginViewState } from '$lib/plugins/viewState.svelte';
 	import ViewSection from './ViewSection.svelte';
 
@@ -26,8 +26,11 @@
 
 	/// Falling back rather than storing the resolved title keeps the selection
 	/// honest when the sections change under an open pane: a title the groups
-	/// no longer have would otherwise leave the detail pane empty.
-	const selected = $derived(groups.find((g) => g.title === selectedTitle) ?? groups[0]);
+	/// no longer have would otherwise leave the detail pane empty. Undefined
+	/// only when a view declares no sections at all.
+	const selected: ViewGroup | undefined = $derived(
+		groups.find((g) => g.title === selectedTitle) ?? groups[0]
+	);
 </script>
 
 {#snippet detail()}
@@ -54,7 +57,7 @@
 					)}
 					onclick={() => (selectedTitle = group.title)}
 				>
-					{group.title === UNGROUPED ? 'Other' : group.title}
+					{group.label}
 				</button>
 			{/each}
 		</div>

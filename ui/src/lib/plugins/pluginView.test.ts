@@ -16,7 +16,8 @@ import {
 	toText,
 	UNGROUPED,
 	viewGroups,
-	type ViewSection
+	type ViewSection,
+	type ViewWidget
 } from './pluginView';
 
 const COMMAND_IDS = ['scan', 'fix'];
@@ -119,10 +120,12 @@ describe('normalizeView', () => {
 		expect(sections[1].group).toBeNull();
 	});
 
-	it('treats an empty group as no group at all, and says so', () => {
-		const { sections, warnings } = normalizeView([{ group: '', widgets: [] }], COMMAND_IDS);
-		expect(sections[0].group).toBeNull();
-		expect(warnings.length).toBeGreaterThan(0);
+	it('treats a blank group as no group at all, and says so', () => {
+		for (const group of ['', ' ', '   ', '\t', '\n  ']) {
+			const { sections, warnings } = normalizeView([{ group, widgets: [] }], COMMAND_IDS);
+			expect(sections[0].group, `${JSON.stringify(group)} is not a title`).toBeNull();
+			expect(warnings.length).toBeGreaterThan(0);
+		}
 	});
 
 	it('drops a span it does not understand instead of failing', () => {
@@ -134,22 +137,47 @@ describe('normalizeView', () => {
 	});
 });
 
+function bundledRepair() {
+	const manifest = JSON.parse(
+		readFileSync(
+			fileURLToPath(new URL('../../../../psp-app/src/bundled/pst.repair/manifest.json', import.meta.url)),
+			'utf8'
+		)
+	);
+	const commandIds = manifest.commands.map((c: { id: string }) => c.id);
+	return { manifest, ...normalizeView(manifest.ui, commandIds) };
+}
+
 describe('bundled views', () => {
 	it('normalizes pst.repair with every section keeping its declared widgets', () => {
-		const manifest = JSON.parse(
-			readFileSync(
-				fileURLToPath(new URL('../../../../psp-app/src/bundled/pst.repair/manifest.json', import.meta.url)),
-				'utf8'
-			)
-		);
-		const commandIds = manifest.commands.map((c: { id: string }) => c.id);
-		const { sections, warnings } = normalizeView(manifest.ui, commandIds);
+		const { manifest, sections, warnings } = bundledRepair();
 
 		expect(warnings).toEqual([]);
 		expect(sections).toHaveLength(manifest.ui.length);
 		sections.forEach((section, i) => {
 			expect(section.widgets).toHaveLength(manifest.ui[i].widgets.length);
 		});
+	});
+
+	it('groups pst.repair into its three functions', () => {
+		const groups = viewGroups(bundledRepair().sections);
+		expect(groups.map((g) => g.title)).toEqual(['Illegal Pals', 'Player Stats', 'Repairs']);
+		expect(groups.map((g) => g.label)).toEqual(['Illegal Pals', 'Player Stats', 'Repairs']);
+	});
+
+	it('keeps each of pst.repair scans in the same group as the fix that spends it', () => {
+		const groups = viewGroups(bundledRepair().sections);
+		const holding = (matches: (widget: ViewWidget) => boolean) =>
+			groups.find((group) =>
+				group.sections.some((section) => section.widgets.some(matches))
+			);
+
+		for (const tableId of ['pal_rows', 'player_rows']) {
+			const table = holding((w) => w.type === 'table' && w.id === tableId);
+			const fix = holding((w) => Object.values(w.args).includes(`${tableId}.selection`));
+			expect(table, `${tableId} must be in a group`).toBeDefined();
+			expect(fix, `the button spending ${tableId} must be in a group`).toBe(table);
+		}
 	});
 });
 
@@ -455,6 +483,22 @@ describe('viewGroups', () => {
 		]);
 		expect(groups.map((g) => g.title)).toEqual(['One', 'Two', UNGROUPED]);
 		expect(groups[2].sections.map((s) => s.title)).toEqual(['a', 'c']);
+		expect(groups[2].label).toBe('Other');
+	});
+
+	it('labels a group with its own title', () => {
+		expect(viewGroups([section('a', 'One')])[0].label).toBe('One');
+	});
+
+	it('never labels the ungrouped entry the same as a group a plugin declared', () => {
+		const groups = viewGroups([
+			section('a', 'Other'),
+			section('b', 'Other (2)'),
+			section('c', null)
+		]);
+		const labels = groups.map((g) => g.label);
+		expect(new Set(labels).size).toBe(labels.length);
+		expect(labels[2]).toBe('Other (3)');
 	});
 
 	it('does not let a group title collide with a section title', () => {

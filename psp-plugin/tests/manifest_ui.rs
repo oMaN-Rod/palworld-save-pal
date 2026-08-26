@@ -110,16 +110,18 @@ fn a_section_may_name_the_group_it_belongs_to() {
     assert_eq!(manifest.ui[1].group, None, "a section may belong to no group");
 }
 
-/// An empty group is neither absent nor a usable list label, so it is refused
+/// A blank group is neither absent nor a usable list label, so it is refused
 /// at install rather than shipped as a nameless entry in the group list.
 #[test]
-fn an_empty_section_group_is_refused() {
-    let ui = r#"[{ "group": "", "widgets": [] }]"#;
-    let Err(error) = manifest_with_view(ui) else {
-        panic!("an empty group must be refused");
-    };
-    let message = error.to_string();
-    assert!(message.contains("group"), "the message must name the field: {message}");
+fn a_blank_section_group_is_refused() {
+    for group in ["", " ", "   ", "\\t", "\\n  "] {
+        let ui = format!(r#"[{{ "group": "{group}", "widgets": [] }}]"#);
+        let Err(error) = manifest_with_view(&ui) else {
+            panic!("the group {group:?} is blank and must be refused");
+        };
+        let message = error.to_string();
+        assert!(message.contains("group"), "the message must name the field: {message}");
+    }
 }
 
 #[test]

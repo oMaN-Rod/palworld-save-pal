@@ -53,13 +53,16 @@ export interface ViewSection {
 
 export interface ViewGroup {
 	title: string;
+	label: string;
 	sections: ViewSection[];
 }
 
-/// No plugin group can be the empty string -- a manifest declaring one is
-/// refused at install -- so it is free to stand for the sections that named
-/// no group at all.
+/// No plugin group can be blank -- a manifest declaring one is refused at
+/// install -- so the empty string is free to stand for the sections that
+/// named no group at all.
 export const UNGROUPED = '';
+
+const UNGROUPED_LABEL = 'Other';
 
 export interface NormalizedView {
 	sections: ViewSection[];
@@ -197,14 +200,15 @@ export function normalizeView(raw: unknown, commandIds: readonly string[]): Norm
 				if (normalized) widgets.push(normalized);
 			}
 		}
-		const group = asString(record.group);
-		if (group === '') {
-			warnings.push('Section group "" is not a title; the section was left ungrouped.');
+		const declaredGroup = asString(record.group);
+		const blankGroup = declaredGroup !== null && declaredGroup.trim() === '';
+		if (blankGroup) {
+			warnings.push('A blank section group is not a title; the section was left ungrouped.');
 		}
 		sections.push({
 			title: asString(record.title),
 			columns,
-			group: group === '' ? null : group,
+			group: blankGroup ? null : declaredGroup,
 			widgets
 		});
 	}
@@ -228,7 +232,23 @@ export function viewGroups(sections: readonly ViewSection[]): ViewGroup[] {
 		bucket.push(section);
 	}
 	if (byTitle.has(UNGROUPED)) order.push(UNGROUPED);
-	return order.map((title) => ({ title, sections: byTitle.get(title) ?? [] }));
+	return order.map((title) => ({
+		title,
+		label: title === UNGROUPED ? ungroupedLabel(order) : title,
+		sections: byTitle.get(title) ?? []
+	}));
+}
+
+/// The list shows `label`, never the group key, so nothing rendering a view
+/// has to know what an ungrouped section looks like -- and a plugin that
+/// declares a group actually called "Other" cannot end up with two rows
+/// reading the same word.
+function ungroupedLabel(declared: readonly string[]): string {
+	let label = UNGROUPED_LABEL;
+	for (let attempt = 2; declared.includes(label); attempt += 1) {
+		label = `${UNGROUPED_LABEL} (${attempt})`;
+	}
+	return label;
 }
 
 /// `hasOwnProperty` rather than `in`: a path is plugin-supplied, and `in`
