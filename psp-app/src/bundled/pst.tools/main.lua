@@ -175,3 +175,152 @@ function unlock_all_private_chests()
     counts = { locks = cleared },
   }
 end
+
+local WORK_SUITABILITY_MAX = 10
+
+local function dps_element_index(field_path)
+  local index = field_path:match('^SaveParameterArray%[(%d+)%]')
+  return index and tonumber(index)
+end
+
+-- Not every player has unlocked dimensional storage, so a player may have no
+-- `_dps.sav`; that specific failure is treated as empty dimensional storage
+-- rather than failing the whole command over one player.
+local function pcall_dps_visit(uid, callback)
+  local ok, err = pcall(raw.visit, 'player_dps:' .. uid, 'SaveParameterArray', callback)
+  if not ok then
+    if type(err) == 'string' and err:find('has no DPS save', 1, true) then
+      return
+    end
+    error(err, 0)
+  end
+end
+
+local function collect_occupied_dps_slots(uid)
+  local occupied = {}
+  pcall_dps_visit(uid, function(node)
+    if node.key == 'CharacterID' then
+      local species = node.value
+      if species ~= nil and species ~= '' and species ~= 'None' then
+        local index = dps_element_index(node.path)
+        if index then
+          occupied[index] = true
+        end
+      end
+    end
+  end)
+  return occupied
+end
+
+-- `raw.set` bypasses schema validation, so only a key already present on the
+-- slot -- one this same walk actually visited -- is ever set; nothing new is
+-- added to a slot that never had it.
+local function max_dps_slots(uid, occupied, values)
+  local target = 'player_dps:' .. uid
+  pcall_dps_visit(uid, function(node)
+    local value = values[node.key]
+    if value ~= nil then
+      local index = dps_element_index(node.path)
+      if index and occupied[index] then
+        raw.set(target, node.path, value)
+      end
+    end
+  end)
+end
+
+local function count_keys(t)
+  local n = 0
+  for _ in pairs(t) do
+    n = n + 1
+  end
+  return n
+end
+
+function max_all_pals()
+  local cheat = ctx.args.cheat_mode
+  local level = cheat and 255 or 80
+  local talent = cheat and 255 or 100
+  local talent_capped = talent > 100 and 100 or talent
+  local soul = cheat and 255 or 20
+  local condense = cheat and 255 or 5
+
+  local pals, examined, skipped = 0, 0, 0
+
+  -- Every read happens in this first pass, before any write: a field write
+  -- drops the `save.pals()` snapshot a read of a not-yet-written field falls
+  -- back to, so a write on one pal would force a full snapshot rebuild for
+  -- the very next pal's `work_suitability` read -- quadratic over a save
+  -- with thousands of pals. Reading `work_suitability` here, ahead of any
+  -- write, keeps every read on the one snapshot this pass builds once.
+  local writable = {}
+  for pal in save.pals() do
+    examined = examined + 1
+    if pal.level == nil then
+      skipped = skipped + 1
+    else
+      writable[#writable + 1] = { pal = pal, work_suitability = pal.work_suitability }
+    end
+  end
+
+  for _, entry in ipairs(writable) do
+    local pal = entry.pal
+    pal.level = level
+    pal.rank = condense
+    pal.talent_hp = talent_capped
+    pal.talent_shot = talent_capped
+    pal.talent_defense = talent_capped
+    pal.rank_hp = soul
+    pal.rank_attack = soul
+    pal.rank_defense = soul
+    pal.rank_craftspeed = soul
+    pal.friendship_point = 200000
+    pal.is_awakened = true
+
+    local suitability = entry.work_suitability
+    if suitability ~= nil then
+      local changed = false
+      for work, rank in pairs(suitability) do
+        if rank ~= nil and rank < WORK_SUITABILITY_MAX then
+          suitability[work] = WORK_SUITABILITY_MAX
+          changed = true
+        end
+      end
+      if changed then pal.work_suitability = suitability end
+    end
+
+    pals = pals + 1
+  end
+
+  local dps_values = {
+    Level = level,
+    Rank = condense,
+    Talent_HP = talent_capped,
+    Talent_Shot = talent_capped,
+    Talent_Defense = talent_capped,
+    Rank_HP = soul,
+    Rank_Attack = soul,
+    Rank_Defence = soul,
+    Rank_CraftSpeed = soul,
+    FriendshipPoint = 200000,
+    bIsAwakening = true,
+  }
+
+  local dps_pals = 0
+  for player in save.players() do
+    local occupied = collect_occupied_dps_slots(player.uid)
+    local occupied_count = count_keys(occupied)
+    if occupied_count > 0 then
+      max_dps_slots(player.uid, occupied, dps_values)
+      dps_pals = dps_pals + occupied_count
+    end
+  end
+
+  local verb = ctx.dry_run and "Would max" or "Maxed"
+  return {
+    summary = string.format(
+      "%s %d of %d world pal(s) (%d could not be read) and %d dimensional storage pal(s)",
+      verb, pals, examined, skipped, dps_pals
+    ),
+    counts = { pals = pals, dps_pals = dps_pals, examined = examined, skipped = skipped },
+  }
+end

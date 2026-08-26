@@ -587,3 +587,45 @@ fn modify_all_guild_chest_slots_resizes_only_guild_chest_containers() {
     }
     assert_round_trips(&h.session);
 }
+
+#[test]
+fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
+    let mut h = Harness::new();
+    let outcome = h.run("max_all_pals", serde_json::json!({ "cheat_mode": false }), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let result = outcome.result.expect("a result");
+    let counts = result["counts"].clone();
+    let maxed = counts["pals"].as_i64().expect("pals");
+    assert!(maxed > 0, "the fixture must contain pals to max");
+    assert!(counts["dps_pals"].is_number(), "dps_pals must be reported");
+
+    let below: Vec<String> = psp_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+        .expect("pal summaries")
+        .iter()
+        .filter(|p| p.level < 80)
+        .map(|p| p.instance_id.to_string())
+        .collect();
+    assert!(below.is_empty(), "these pals were left below level 80: {below:?}");
+
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn max_all_pals_under_a_dry_run_writes_nothing() {
+    let mut h = Harness::new();
+    let before = psp_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+        .expect("pal summaries")
+        .iter()
+        .map(|p| (p.instance_id, p.level))
+        .collect::<std::collections::BTreeMap<_, _>>();
+
+    let dry = h.run("max_all_pals", serde_json::json!({ "cheat_mode": false }), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+
+    let after = psp_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+        .expect("pal summaries")
+        .iter()
+        .map(|p| (p.instance_id, p.level))
+        .collect::<std::collections::BTreeMap<_, _>>();
+    assert_eq!(before, after, "a dry run must not move a single level");
+}

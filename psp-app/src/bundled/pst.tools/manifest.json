@@ -58,6 +58,16 @@
       "description": "Clears the ownership lock on every private chest and item booth in the world so any player can open them.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "max_all_pals",
+      "title": "Max All Pals",
+      "description": "Raises every pal in the world and in dimensional storage to the maximum level, soul ranks, condensing rank and friendship, marks it awakened, and maxes the work suitabilities it already has. Cheat mode uses 255 for level and soul ranks; talents stay capped at 100, which the save writer enforces.",
+      "destructive": true,
+      "params": [
+        { "id": "cheat_mode", "type": "bool", "label": "Cheat mode", "default": false,
+          "description": "Uses 255 in place of the game's own caps for level and soul ranks. Talents stay capped at 100 regardless. The game may not display these values correctly." }
+      ]
     }
   ]
 }
