@@ -653,23 +653,6 @@ fn clone_guild_pal_invalidates_caches_and_the_rebuilt_index_reflects_both_the_cl
     )
     .unwrap()
     .expect("fixture worker container has room for the seed pal");
-    // `clone_guild_pal`'s source lookup only recognizes the mixed-case "SlotId" (how
-    // every real base pal is spelled on disk); `new_pal_entry` writes "SlotID".
-    {
-        let entries = world::character_map_mut(&mut session.level).unwrap();
-        let entry = entries
-            .iter_mut()
-            .find(|e| world::entry_instance_id(e) == Some(seed.instance_id))
-            .unwrap();
-        if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
-            if let Some(slot_property) = save_parameter
-                .0
-                .shift_remove(&psp_core::ue::PropertyKey::from("SlotID"))
-            {
-                save_parameter.insert("SlotId", slot_property);
-            }
-        }
-    }
     let entry_count_before = world::character_map(&session.level).unwrap().len();
 
     session.caches.character_index = Some(world::build_character_index(&session.level));
