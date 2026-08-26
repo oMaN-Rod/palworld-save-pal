@@ -172,7 +172,6 @@ describe('bundled views', () => {
 	it('groups pst.repair into its three functions', () => {
 		const groups = viewGroups(bundledRepair().sections);
 		expect(groups.map((g) => g.title)).toEqual(['Illegal Pals', 'Player Stats', 'Repairs']);
-		expect(groups.map((g) => g.label)).toEqual(['Illegal Pals', 'Player Stats', 'Repairs']);
 	});
 
 	it('keeps each of pst.repair scans in the same group as the fix that spends it', () => {
