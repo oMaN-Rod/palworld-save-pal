@@ -6,7 +6,7 @@
   "author": "PST",
   "license": "GPL-3.0-only",
   "entry": "main.lua",
-  "capabilities": ["save.read", "save.write"],
+  "capabilities": ["save.read", "save.write", "players"],
   "commands": [
     {
       "id": "scan_illegal_pals",
@@ -37,6 +37,25 @@
       "description": "Restores every built structure, chest and resource node in the world to full HP.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "scan_illegal_players",
+      "title": "Scan For Illegal Player Stats",
+      "description": "Lists players who have spent more points on a stat than the legal maximum. Changes nothing.",
+      "destructive": false,
+      "params": [
+        { "id": "max_points", "type": "int", "label": "Maximum points per stat", "default": 50, "min": 0, "max": 9999 }
+      ]
+    },
+    {
+      "id": "fix_illegal_players",
+      "title": "Fix Selected Player Stats",
+      "description": "Clamps every over-cap stat of the selected players down to the legal maximum.",
+      "destructive": true,
+      "params": [
+        { "id": "ids", "type": "multiselect", "label": "Players", "default": [] },
+        { "id": "max_points", "type": "int", "label": "Maximum points per stat", "default": 50, "min": 0, "max": 9999 }
+      ]
     }
   ],
   "ui": [

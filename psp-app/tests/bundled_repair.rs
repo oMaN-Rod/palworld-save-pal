@@ -1,6 +1,8 @@
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
+use psp_core::domain::player;
+use psp_core::dto::ordered_map::OrderedMap;
 use psp_core::error::CoreError;
 use psp_core::gamedata::GameData;
 use psp_core::progress::null_progress;
@@ -142,7 +144,16 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
     let manifest = Manifest::parse(plugin.manifest).expect("the bundled manifest must parse");
     let mut ids: Vec<&str> = manifest.commands.iter().map(|c| c.id.as_str()).collect();
     ids.sort_unstable();
-    assert_eq!(ids, vec!["fix_illegal_pals", "repair_structures", "scan_illegal_pals"]);
+    assert_eq!(
+        ids,
+        vec![
+            "fix_illegal_pals",
+            "fix_illegal_players",
+            "repair_structures",
+            "scan_illegal_pals",
+            "scan_illegal_players",
+        ]
+    );
 }
 
 /// The three widgets the scan-then-pick-then-apply shape is made of. Without
@@ -455,4 +466,91 @@ fn repair_structures_under_a_dry_run_changes_nothing_but_reports_the_same_count(
         predicted,
         "the dry run's prediction must match what the real run does"
     );
+}
+
+/// The corpus fixture is a real save, so it may or may not contain an
+/// over-cap player. Both branches are asserted rather than assuming one.
+#[test]
+fn scan_illegal_players_reports_exactly_the_players_over_the_cap() {
+    let mut h = Harness::new();
+    let outcome = h.run(
+        "scan_illegal_players",
+        serde_json::json!({ "max_points": 50 }),
+        false,
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let result = outcome.result.expect("a result table");
+
+    let examined = result["counts"]["examined"].as_i64().expect("examined");
+    assert!(examined > 0, "the fixture must contain at least one player");
+
+    // An empty Lua table has no length hint, so the host marshals it as a
+    // JSON object rather than an array -- zero rows must still be accepted.
+    let empty = Vec::new();
+    let rows = result["players"].as_array().unwrap_or(&empty);
+    assert_eq!(
+        result["counts"]["illegal"].as_i64(),
+        Some(rows.len() as i64),
+        "the illegal count must equal the number of rows returned"
+    );
+    for row in rows {
+        assert!(row["uid"].is_string(), "every row carries a uid for the fix step");
+        assert!(
+            row["worst"].as_i64().expect("worst") > 50,
+            "a row may only be reported when some stat exceeds the cap"
+        );
+    }
+}
+
+/// Drives the pair end to end against a value this test puts over the cap
+/// itself, so it does not depend on the fixture containing bad data. The
+/// seeding goes through `psp_core::domain::player` directly -- there is no
+/// `player_summaries()` free function, and no `__seed_over_cap` command is
+/// shipped in the manifest -- reading and writing the DTO the same way
+/// `bundled_tools.rs` does for its own player fixtures.
+#[test]
+fn fix_illegal_players_clamps_a_stat_the_scan_reported() {
+    let mut h = Harness::new();
+
+    let player_id = *h
+        .session
+        .player_summaries
+        .keys()
+        .next()
+        .expect("the fixture has a player");
+    let uid = player_id.to_string();
+
+    let mut dto = player::get_player_details(&mut h.session, &h.game_data, player_id, &null_progress())
+        .expect("player read")
+        .expect("the player exists");
+    dto.status_point_list.insert("max_hp".to_string(), 99);
+    let mut modified = OrderedMap::new();
+    modified.insert(player_id, dto);
+    player::update_players(&mut h.session, &h.game_data, &modified, &null_progress())
+        .expect("the seed write must succeed");
+
+    let scan = h.run("scan_illegal_players", serde_json::json!({ "max_points": 50 }), false);
+    let rows = scan.result.expect("a result")["players"].as_array().expect("rows").clone();
+    assert!(
+        rows.iter().any(|r| r["uid"].as_str() == Some(uid.as_str())),
+        "the seeded player must be reported"
+    );
+
+    let fixed = h.run(
+        "fix_illegal_players",
+        serde_json::json!({ "ids": [uid.clone()], "max_points": 50 }),
+        false,
+    );
+    assert_eq!(fixed.status, RunStatus::Ok, "{:?}", fixed.status);
+    assert_eq!(fixed.result.expect("a result")["counts"]["clamps"].as_i64(), Some(1));
+
+    let rescan = h.run("scan_illegal_players", serde_json::json!({ "max_points": 50 }), false);
+    let rescan_result = rescan.result.expect("a result");
+    let rows = rescan_result["players"].as_array().cloned().unwrap_or_default();
+    assert!(
+        !rows.iter().any(|r| r["uid"].as_str() == Some(uid.as_str())),
+        "the clamped player must no longer be reported"
+    );
+
+    assert_round_trips(&h.session);
 }

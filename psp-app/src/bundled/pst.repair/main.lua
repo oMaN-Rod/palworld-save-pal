@@ -106,3 +106,99 @@ function repair_structures()
     counts = { repaired = repaired, examined = examined, skipped = skipped },
   }
 end
+
+local function over_cap(points, max_points)
+  local problems, worst = {}, 0
+  if points ~= nil then
+    for stat, value in pairs(points) do
+      if value ~= nil and value > max_points then
+        problems[#problems + 1] = string.format("%s %d", stat, value)
+        if value > worst then worst = value end
+      end
+    end
+  end
+  table.sort(problems)
+  return problems, worst
+end
+
+local function clamp_points(points, max_points)
+  local clamps = 0
+  if points ~= nil then
+    for stat, value in pairs(points) do
+      if value ~= nil and value > max_points then
+        points[stat] = max_points
+        clamps = clamps + 1
+      end
+    end
+  end
+  return points, clamps
+end
+
+function scan_illegal_players()
+  local max_points = ctx.args.max_points
+  local rows, examined = {}, 0
+
+  for player in save.players() do
+    examined = examined + 1
+    local base_problems, base_worst = over_cap(player.status_point_list, max_points)
+    local ext_problems, ext_worst = over_cap(player.ext_status_point_list, max_points)
+
+    local problems = {}
+    for _, p in ipairs(base_problems) do problems[#problems + 1] = p end
+    for _, p in ipairs(ext_problems) do problems[#problems + 1] = "ex " .. p end
+
+    if #problems > 0 then
+      rows[#rows + 1] = {
+        uid = player.uid,
+        name = player.name,
+        problems = table.concat(problems, ", "),
+        worst = math.max(base_worst, ext_worst),
+      }
+    end
+  end
+
+  return {
+    summary = string.format(
+      "Found %d player(s) over the %d-point cap out of %d examined", #rows, max_points, examined
+    ),
+    counts = { illegal = #rows, examined = examined },
+    players = rows,
+  }
+end
+
+function fix_illegal_players()
+  local max_points = ctx.args.max_points
+
+  local wanted, requested = {}, 0
+  for _, id in ipairs(ctx.args.ids) do
+    if not wanted[id] then
+      wanted[id] = true
+      requested = requested + 1
+    end
+  end
+
+  local players, clamps, found = 0, 0, 0
+  for player in save.players() do
+    if wanted[player.uid] then
+      found = found + 1
+      local base, base_clamps = clamp_points(player.status_point_list, max_points)
+      local ext, ext_clamps = clamp_points(player.ext_status_point_list, max_points)
+      if base_clamps > 0 then player.status_point_list = base end
+      if ext_clamps > 0 then player.ext_status_point_list = ext end
+      if base_clamps + ext_clamps > 0 then
+        players = players + 1
+        clamps = clamps + base_clamps + ext_clamps
+      end
+    end
+  end
+
+  local verb = ctx.dry_run and "Would clamp" or "Clamped"
+  return {
+    summary = string.format(
+      "%s %d stat(s) across %d of the %d selected player(s)", verb, clamps, players, requested
+    ),
+    counts = {
+      players = players, clamps = clamps, requested = requested, missing = requested - found,
+    },
+  }
+end
