@@ -1857,14 +1857,26 @@ name.
 
 **`delete_where` is not offered as a completion, on any plugin, regardless of
 capability.** It is not a gap in the capability filter - it is a gap in what
-the API definition describes at all. `save.players()`, `save.pals()`, and
-`save.guilds()` each return a plain Lua function value, and `delete_where` is
-installed on that function's own `__index` metatable, not on any global table
-or handle the generator walks. Nothing built from `ApiDefinition` - the
-editor's completions included - knows it exists. This is a known gap, not a
-broken install: code that calls `save.players():delete_where(...)` is correct
-Lua and runs exactly as documented above; the editor simply has nothing to
-suggest for it.
+the API definition describes at all. `save.players()`, `save.pals()`,
+`save.guilds()` and `save.map_objects()` each return a plain Lua function
+value, and `delete_where` is installed on that function's own `__index`
+metatable, not on any global table or handle the generator walks. Nothing
+built from `ApiDefinition` - the editor's completions included - knows it
+exists. This is a known gap, not a broken install: code that calls
+`save.players():delete_where(...)` is correct Lua and runs exactly as
+documented above; the editor simply has nothing to suggest for it.
+
+For the same reason, the generated LuaLS stub (`psp.lua`) offers no signature
+for `delete_where` either: `save.pals()` and its siblings are declared to
+LuaLS as a bare `fun(): pal|nil`, so that the `for p in save.pals() do` idiom
+infers `p`'s type correctly - a function type carries no methods for LuaLS to
+attach `delete_where` to. Describing it as a method of the `pal`, `player`,
+`guild` or `map_object` handle would be wrong too: those handles describe the
+element the iterator yields, not the iterator itself, and `delete_where` is
+called on the iterator. There is nowhere in `ApiDefinition` to put a
+signature that would not misdescribe the call. The return arity documented
+above (`removed, unresolved`) is deliberately the only description this call
+gets.
 
 ### The command/function agreement warning
 
