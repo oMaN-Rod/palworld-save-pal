@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { resolvePath, toRows, type ViewWidget } from '$lib/plugins/pluginView';
+	import { resolvePath, selectAllState, toRows, type ViewWidget } from '$lib/plugins/pluginView';
 	import type { PluginViewState } from '$lib/plugins/viewState.svelte';
 
 	let { widget, state }: { widget: ViewWidget; state: PluginViewState } = $props();
@@ -11,6 +11,7 @@
 		)
 	);
 	const selected = $derived(widget.id ? (state.selections[widget.id] ?? []) : []);
+	const allState = $derived(selectAllState(data.ids, selected));
 </script>
 
 <div class="flex flex-col gap-1">
@@ -25,7 +26,17 @@
 				<thead class="bg-surface-800 sticky top-0">
 					<tr>
 						{#if widget.selectable}
-							<th class="w-8 p-1"></th>
+							<th class="w-8 p-1">
+								<input
+									type="checkbox"
+									aria-label={allState === 'all' ? 'Deselect all rows' : 'Select all rows'}
+									checked={allState === 'all'}
+									indeterminate={allState === 'some'}
+									onchange={() =>
+										widget.id &&
+										state.setSelection(widget.id, allState === 'all' ? [] : [...data.ids])}
+								/>
+							</th>
 						{/if}
 						{#each data.columns as column, columnIndex (columnIndex)}
 							<th class="p-1 text-left font-medium">{column}</th>

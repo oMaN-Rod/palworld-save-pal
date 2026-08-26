@@ -10,6 +10,7 @@ import {
 	normalizeView,
 	parseArgRef,
 	resolvePath,
+	selectAllState,
 	tablesFedBy,
 	toList,
 	toRows,
@@ -449,6 +450,21 @@ const section = (title: string, group: string | null): ViewSection => ({
 	columns: 1,
 	group,
 	widgets: []
+});
+
+describe('selectAllState', () => {
+	it('is none for an empty table', () => expect(selectAllState([], [])).toBe('none'));
+	it('is none when nothing is selected', () =>
+		expect(selectAllState(['a', 'b'], [])).toBe('none'));
+	it('is all when every rendered row is selected', () =>
+		expect(selectAllState(['a', 'b'], ['a', 'b'])).toBe('all'));
+	it('is some when part of the table is selected', () =>
+		expect(selectAllState(['a', 'b'], ['a'])).toBe('some'));
+	it('ignores a selection that is not among the rendered rows', () => {
+		expect(selectAllState(['a', 'b'], ['a', 'ghost'])).toBe('some');
+	});
+	it('is all when every rendered row is selected and extras linger', () =>
+		expect(selectAllState(['a'], ['a', 'ghost'])).toBe('all'));
 });
 
 describe('viewGroups', () => {

@@ -368,6 +368,20 @@ export function buildRunRequest(
 	return { commandId: command.id, args, dryRun: command.destructive };
 }
 
+export type SelectAllState = 'none' | 'some' | 'all';
+
+export function selectAllState(
+	renderedIds: readonly string[],
+	selected: readonly string[]
+): SelectAllState {
+	if (renderedIds.length === 0) return 'none';
+	const chosen = new Set(selected);
+	let hits = 0;
+	for (const id of renderedIds) if (chosen.has(id)) hits += 1;
+	if (hits === 0) return 'none';
+	return hits === renderedIds.length ? 'all' : 'some';
+}
+
 export function tablesFedBy(sections: readonly ViewSection[], commandId: string): string[] {
 	const ids: string[] = [];
 	for (const section of sections) {
