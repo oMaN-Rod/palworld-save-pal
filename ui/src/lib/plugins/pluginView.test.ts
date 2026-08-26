@@ -129,6 +129,15 @@ describe('normalizeView', () => {
 		}
 	});
 
+	it('trims a group so surrounding whitespace does not make a second key', () => {
+		const { sections } = normalizeView(
+			[{ group: 'Repairs', widgets: [] }, { group: ' Repairs\t', widgets: [] }],
+			COMMAND_IDS
+		);
+		expect(sections[0].group).toBe('Repairs');
+		expect(sections[1].group).toBe('Repairs');
+	});
+
 	it('drops a span it does not understand instead of failing', () => {
 		const { sections } = normalizeView(
 			[{ widgets: [widget({ from: 'scan', span: 'half' })] }],

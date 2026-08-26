@@ -200,15 +200,15 @@ export function normalizeView(raw: unknown, commandIds: readonly string[]): Norm
 				if (normalized) widgets.push(normalized);
 			}
 		}
-		const declaredGroup = asString(record.group);
-		const blankGroup = declaredGroup !== null && declaredGroup.trim() === '';
+		const trimmedGroup = asString(record.group)?.trim() ?? null;
+		const blankGroup = trimmedGroup === '';
 		if (blankGroup) {
 			warnings.push('A blank section group is not a title; the section was left ungrouped.');
 		}
 		sections.push({
 			title: asString(record.title),
 			columns,
-			group: blankGroup ? null : declaredGroup,
+			group: blankGroup ? null : trimmedGroup,
 			widgets
 		});
 	}
