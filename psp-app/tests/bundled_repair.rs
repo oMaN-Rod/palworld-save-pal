@@ -77,6 +77,11 @@ fn reparse(level_bytes: &[u8]) -> Result<SaveSession, CoreError> {
     reparse_with_dir(&fixture_dir(), level_bytes)
 }
 
+fn assert_round_trips(session: &SaveSession) {
+    let bytes = session.level_sav_bytes().expect("the level serializes");
+    reparse(&bytes).unwrap_or_else(|e| panic!("the written save did not reparse: {e}"));
+}
+
 fn load_game_data() -> GameData {
     GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
 }
@@ -129,7 +134,7 @@ impl Harness {
 }
 
 #[test]
-fn the_bundled_manifest_parses_and_declares_its_two_commands() {
+fn the_bundled_manifest_parses_and_declares_its_commands() {
     let plugin = BUNDLED
         .iter()
         .find(|p| p.id == "pst.repair")
@@ -137,7 +142,7 @@ fn the_bundled_manifest_parses_and_declares_its_two_commands() {
     let manifest = Manifest::parse(plugin.manifest).expect("the bundled manifest must parse");
     let mut ids: Vec<&str> = manifest.commands.iter().map(|c| c.id.as_str()).collect();
     ids.sort_unstable();
-    assert_eq!(ids, vec!["fix_illegal_pals", "scan_illegal_pals"]);
+    assert_eq!(ids, vec!["fix_illegal_pals", "repair_structures", "scan_illegal_pals"]);
 }
 
 /// The three widgets the scan-then-pick-then-apply shape is made of. Without
@@ -389,4 +394,65 @@ fn the_fixed_save_reparses() {
     assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
     let bytes = h.session.level_sav_bytes().expect("level_sav_bytes");
     reparse(&bytes).expect("the written save must reparse");
+}
+
+#[test]
+fn repair_structures_raises_every_damaged_map_object_to_full_hp() {
+    let mut h = Harness::new();
+
+    // MapObjectView.hp and .max_hp are plain i32, not Option -- verified at
+    // psp-core/src/domain/map_object.rs:13. The Lua handle's fields can still
+    // read nil, which is what the command's own guard is for.
+    let damaged_before = psp_core::domain::map_object::map_object_views(&h.session)
+        .expect("map objects read")
+        .iter()
+        .filter(|v| v.hp < v.max_hp)
+        .count();
+
+    let outcome = h.run("repair_structures", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+
+    let result = outcome.result.expect("a result table");
+    assert_eq!(
+        result["counts"]["repaired"].as_i64(),
+        Some(damaged_before as i64),
+        "every damaged object must be repaired, and no undamaged one counted"
+    );
+
+    let still_damaged = psp_core::domain::map_object::map_object_views(&h.session)
+        .expect("map objects read")
+        .iter()
+        .filter(|v| v.hp < v.max_hp)
+        .count();
+    assert_eq!(still_damaged, 0, "no map object may be left below its maximum");
+
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn repair_structures_under_a_dry_run_changes_nothing_but_reports_the_same_count() {
+    let mut h = Harness::new();
+    let before = psp_core::domain::map_object::map_object_views(&h.session)
+        .expect("map objects read")
+        .iter()
+        .map(|v| (v.instance_id, v.hp))
+        .collect::<std::collections::BTreeMap<_, _>>();
+
+    let dry = h.run("repair_structures", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    let predicted = dry.result.expect("a result")["counts"]["repaired"].as_i64();
+
+    let after = psp_core::domain::map_object::map_object_views(&h.session)
+        .expect("map objects read")
+        .iter()
+        .map(|v| (v.instance_id, v.hp))
+        .collect::<std::collections::BTreeMap<_, _>>();
+    assert_eq!(before, after, "a dry run must not move a single hp value");
+
+    let real = h.run("repair_structures", serde_json::json!({}), false);
+    assert_eq!(
+        real.result.expect("a result")["counts"]["repaired"].as_i64(),
+        predicted,
+        "the dry run's prediction must match what the real run does"
+    );
 }

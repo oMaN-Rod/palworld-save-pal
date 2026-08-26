@@ -30,6 +30,13 @@
         { "id": "max_level", "type": "int", "label": "Maximum level", "default": 60, "min": 1, "max": 255 },
         { "id": "max_rank", "type": "int", "label": "Maximum condensing rank", "default": 4, "min": 0, "max": 255 }
       ]
+    },
+    {
+      "id": "repair_structures",
+      "title": "Repair Structures",
+      "description": "Restores every built structure, chest and resource node in the world to full HP.",
+      "destructive": true,
+      "params": []
     }
   ],
   "ui": [

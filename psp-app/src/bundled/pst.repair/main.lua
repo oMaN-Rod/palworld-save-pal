@@ -83,3 +83,26 @@ function fix_illegal_pals()
     counts = { pals = pals, clamps = clamps, requested = requested, missing = requested - found },
   }
 end
+
+function repair_structures()
+  local repaired, examined, skipped = 0, 0, 0
+
+  for object in save.map_objects() do
+    examined = examined + 1
+    local hp, max_hp = object.hp, object.max_hp
+    if hp == nil or max_hp == nil then
+      skipped = skipped + 1
+    elseif hp < max_hp then
+      object.hp = max_hp
+      repaired = repaired + 1
+    end
+  end
+
+  local verb = ctx.dry_run and "Would repair" or "Repaired"
+  return {
+    summary = string.format(
+      "%s %d of %d structure(s); %d could not be read", verb, repaired, examined, skipped
+    ),
+    counts = { repaired = repaired, examined = examined, skipped = skipped },
+  }
+end
