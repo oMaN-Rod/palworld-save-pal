@@ -361,9 +361,10 @@ pub fn pal_summaries(
             .and_then(|uid| session.player_summaries.get(&uid))
             .map(|summary| summary.nickname.clone());
 
-        // Base membership keys off "SlotId" only -- no "SlotID" fallback,
-        // unlike the full dump's storage_id/storage_slot.
-        let (guild_id, base_id) = param(save_parameter, "SlotId")
+        // A pal this session created (add_guild_pal) spells the key "SlotID"; real
+        // save data spells it "SlotId". Both are checked, matching storage_id/storage_slot.
+        let (guild_id, base_id) = param(save_parameter, "SlotID")
+            .or_else(|| param(save_parameter, "SlotId"))
             .and_then(props::struct_props)
             .and_then(|slot| {
                 slot.0
