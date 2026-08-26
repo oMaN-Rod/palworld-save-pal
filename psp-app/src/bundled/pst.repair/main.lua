@@ -166,6 +166,112 @@ function scan_illegal_players()
   }
 end
 
+local SKILL_PREFIX = "EPalWazaID::"
+
+local function catalogued_skills()
+  local known = {}
+  local keys = gamedata.keys("active_skills")
+  if keys ~= nil then
+    for _, id in ipairs(keys) do known[id] = true end
+  end
+  return known
+end
+
+-- pals.json's own keys keep the game's canonical casing (e.g. "SheepBall"),
+-- while pal.character_key is always lowercased by the host, so a direct
+-- gamedata.get("pals", character_key) never matches. This mirrors the
+-- lowercase-to-canonical lookup psp-core builds for the same reason.
+local function pal_key_lookup()
+  local lookup = {}
+  local keys = gamedata.keys("pals")
+  if keys ~= nil then
+    for _, key in ipairs(keys) do
+      lookup[key:lower()] = key
+    end
+  end
+  return lookup
+end
+
+local function learnable_for(character_key, pal_keys)
+  if character_key == nil then return nil end
+  local canonical = pal_keys[character_key:lower()]
+  if canonical == nil then return nil end
+  local entry = gamedata.get("pals", canonical)
+  if entry == nil or entry.skill_set == nil then return nil end
+  local learnable = {}
+  for name, _ in pairs(entry.skill_set) do
+    learnable[SKILL_PREFIX .. name] = true
+  end
+  return learnable
+end
+
+local function all_writable(list, known)
+  if list == nil then return true end
+  for _, id in ipairs(list) do
+    if not known[id] then return false end
+  end
+  return true
+end
+
+local function without_unlearnable(list, learnable)
+  local kept, dropped = {}, 0
+  if list ~= nil then
+    for _, id in ipairs(list) do
+      if learnable[id] then
+        kept[#kept + 1] = id
+      else
+        dropped = dropped + 1
+      end
+    end
+  end
+  return kept, dropped
+end
+
+function fix_invalid_pal_active_skills()
+  local known = catalogued_skills()
+  local pal_keys = pal_key_lookup()
+  local pals, removed, examined = 0, 0, 0
+  local skipped_unknown_species, skipped_uncatalogued = 0, 0
+
+  for pal in save.pals() do
+    examined = examined + 1
+    local learnable = learnable_for(pal.character_key, pal_keys)
+    local active, learned = pal.active_skills, pal.learned_skills
+
+    if learnable == nil then
+      skipped_unknown_species = skipped_unknown_species + 1
+    elseif not (all_writable(active, known) and all_writable(learned, known)) then
+      -- Writing either list back would be refused entry by entry, failing the
+      -- whole run. A boss pal's own signature skill is not in the catalog.
+      skipped_uncatalogued = skipped_uncatalogued + 1
+    else
+      local kept_active, dropped_active = without_unlearnable(active, learnable)
+      local kept_learned, dropped_learned = without_unlearnable(learned, learnable)
+      if dropped_active > 0 then pal.active_skills = kept_active end
+      if dropped_learned > 0 then pal.learned_skills = kept_learned end
+      if dropped_active + dropped_learned > 0 then
+        pals = pals + 1
+        removed = removed + dropped_active + dropped_learned
+      end
+    end
+  end
+
+  local verb = ctx.dry_run and "Would remove" or "Removed"
+  return {
+    summary = string.format(
+      "%s %d unlearnable skill(s) from %d of %d pal(s); skipped %d with an unknown species and %d holding an uncatalogued skill",
+      verb, removed, pals, examined, skipped_unknown_species, skipped_uncatalogued
+    ),
+    counts = {
+      pals = pals,
+      removed = removed,
+      examined = examined,
+      skipped_unknown_species = skipped_unknown_species,
+      skipped_uncatalogued = skipped_uncatalogued,
+    },
+  }
+end
+
 function fix_illegal_players()
   local max_points = ctx.args.max_points
 

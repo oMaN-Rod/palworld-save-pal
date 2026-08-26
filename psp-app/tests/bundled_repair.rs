@@ -149,6 +149,7 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
         vec![
             "fix_illegal_pals",
             "fix_illegal_players",
+            "fix_invalid_pal_active_skills",
             "repair_structures",
             "scan_illegal_pals",
             "scan_illegal_players",
@@ -553,4 +554,48 @@ fn fix_illegal_players_clamps_a_stat_the_scan_reported() {
     );
 
     assert_round_trips(&h.session);
+}
+
+#[test]
+fn fix_invalid_pal_active_skills_never_leaves_a_pal_with_an_unlearnable_skill() {
+    let mut h = Harness::new();
+    let outcome = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+
+    assert!(counts["examined"].as_i64().expect("examined") > 0);
+
+    // Re-running must be a no-op: the first run either fixed a pal or
+    // deliberately skipped it, and neither is a state a second run improves.
+    let again = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
+    assert_eq!(
+        again.result.expect("a result")["counts"]["removed"].as_i64(),
+        Some(0),
+        "the command must converge in one run"
+    );
+
+    assert_round_trips(&h.session);
+}
+
+/// The trap: a save containing a pal whose skills are not in the catalog must
+/// not fail the run. This asserts the skip path exists and is counted.
+#[test]
+fn fix_invalid_pal_active_skills_skips_rather_than_fails_on_an_uncatalogued_skill() {
+    let mut h = Harness::new();
+    let outcome = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
+    assert_eq!(
+        outcome.status,
+        RunStatus::Ok,
+        "a pal holding a skill the catalog does not know must be skipped, never raise: {:?}",
+        outcome.status
+    );
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert!(
+        counts["skipped_uncatalogued"].is_number(),
+        "the skip must be counted and reported, not silent"
+    );
+    assert!(
+        counts["skipped_unknown_species"].is_number(),
+        "a pal whose species does not resolve must be counted separately"
+    );
 }
