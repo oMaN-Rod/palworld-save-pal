@@ -127,6 +127,78 @@ function repair_items()
   }
 end
 
+local BASE_INVENTORY_SLOTS = 42
+local SLOTS_PER_EXPANSION = 3
+local MAX_EXPANSIONS = 4
+local EXPANSION_PREFIX = "AdditionalInventory_"
+
+local function container_by_id()
+  local by_id = {}
+  for container in save.containers() do
+    by_id[container.id] = container
+  end
+  return by_id
+end
+
+local function expansion_count(container)
+  if container == nil then return nil end
+  local found = 0
+  for slot in container.slots() do
+    local item_id = slot.item_id
+    if item_id ~= nil and item_id:sub(1, #EXPANSION_PREFIX) == EXPANSION_PREFIX then
+      found = found + 1
+    end
+  end
+  return found
+end
+
+function trim_overfilled_inventories()
+  -- Two passes: the first only reads player handles, which never bumps the
+  -- mutation epoch. A successful resize does, and that invalidates every live
+  -- handle and iterator, including a `for player in save.players() do` still
+  -- in progress -- so the plan is fully collected before any resize happens,
+  -- and the second pass touches only container handles.
+  local containers = container_by_id()
+  local plan = {}
+  for player in save.players() do
+    plan[#plan + 1] = {
+      common_id = player.common_container_id,
+      expansions = expansion_count(containers[player.essential_container_id]),
+    }
+  end
+
+  local examined, resized, refused, skipped = 0, 0, 0, 0
+  for _, entry in ipairs(plan) do
+    examined = examined + 1
+    local common = containers[entry.common_id]
+    local expansions = entry.expansions
+
+    if common == nil or expansions == nil then
+      skipped = skipped + 1
+    else
+      if expansions > MAX_EXPANSIONS then expansions = MAX_EXPANSIONS end
+      local target = BASE_INVENTORY_SLOTS + expansions * SLOTS_PER_EXPANSION
+      if common.slot_count ~= target then
+        if common.set_slot_count(target) then
+          resized = resized + 1
+          containers = container_by_id()
+        else
+          refused = refused + 1
+        end
+      end
+    end
+  end
+
+  local verb = ctx.dry_run and "Would resize" or "Resized"
+  return {
+    summary = string.format(
+      "%s %d of %d player inventor(ies); %d refused, %d could not be read",
+      verb, resized, examined, refused, skipped
+    ),
+    counts = { resized = resized, examined = examined, refused = refused, skipped = skipped },
+  }
+end
+
 local function over_cap(points, max_points)
   local problems, worst = {}, 0
   if points ~= nil then

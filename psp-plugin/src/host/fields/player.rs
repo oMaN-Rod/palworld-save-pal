@@ -113,6 +113,16 @@ fn read_pal_box_id(dto: &PlayerDto) -> FieldValue {
 fn read_otomo_container_id(dto: &PlayerDto) -> FieldValue {
     optional_uuid(dto.otomo_container_id)
 }
+/// Never actually called: `player_get` answers `common_container_id` and
+/// `essential_container_id` from `dto_cache::player_container_ids` before it
+/// reaches this table's `Reader::Dto` dispatch, because by the time a plugin
+/// sees this `PlayerDto` its `common_container` and `essential_container` have
+/// already been nulled by `dto_cache`'s write-safety pass. The row still lives
+/// here so its name, type, access and capability gate are generated the same
+/// way every other field's are.
+fn read_container_id_unreachable(_: &PlayerDto) -> FieldValue {
+    FieldValue::Nil
+}
 fn read_effigy_possess_num(dto: &PlayerDto) -> FieldValue {
     FieldValue::Int(dto.effigy_possess_num)
 }
@@ -621,6 +631,20 @@ pub const PLAYER_FIELDS: &[FieldSpec<PlayerDto, PlayerSummary>] = &[
         "The id of this player's party container, or nil if the save records none. Read-only.",
         read_otomo_container_id,
     ),
+    ro(
+        "common_container_id",
+        ApiType::Union(&[ApiType::String, ApiType::Nil]),
+        "The id of the player's main inventory container, or nil if it could not be read. \
+         Read-only.",
+        read_container_id_unreachable,
+    ),
+    ro(
+        "essential_container_id",
+        ApiType::Union(&[ApiType::String, ApiType::Nil]),
+        "The id of the player's key-items container, whose `AdditionalInventory_` entries decide \
+         how large the main inventory should be. Read-only.",
+        read_container_id_unreachable,
+    ),
 ];
 
 /// The two rows the player summary answers on this handle's behalf, kept here
@@ -711,6 +735,15 @@ pub(crate) fn player_get(ctx: &mut RunContext<'_>, uid: Uuid, field: &str) -> Re
     let Some(spec) = find(field) else {
         return Ok(FieldValue::Nil);
     };
+    // These two answer from `dto_cache::player_container_ids` rather than
+    // `spec.read`: the ids they need are captured before
+    // `dto_cache::load_player_dto` nulls them out of the cached `PlayerDto`
+    // for write safety, so the table's own `Reader::Dto` closure never sees
+    // them.
+    if field == "common_container_id" || field == "essential_container_id" {
+        let (common, essential) = dto_cache::player_container_ids(ctx, uid)?;
+        return Ok(optional_uuid(if field == "common_container_id" { common } else { essential }));
+    }
     match spec.read {
         Reader::Dto(read) => {
             let dto = dto_cache::player_read(ctx, uid)?;

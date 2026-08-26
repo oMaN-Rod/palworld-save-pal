@@ -77,6 +77,13 @@
       "description": "Restores the per-item record for every container slot whose record has gone missing - the equipment, armour and eggs that carry one - so the item survives instead of being dropped the next time its container is written. A stackable item, which has no such record, is never touched. The restored item carries default condition, not its original durability, remaining bullets or passive skills.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "trim_overfilled_inventories",
+      "title": "Fix Inventory Sizes",
+      "description": "Resizes every player's main inventory to the size their key items entitle them to: 42 slots plus 3 for each inventory expansion, up to four. A resize that would drop an occupied slot is refused and reported.",
+      "destructive": true,
+      "params": []
     }
   ],
   "ui": [

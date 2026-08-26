@@ -669,7 +669,7 @@ method call - `player.name`, not `player.name()`):
 
 | Handle | Fields |
 |---|---|
-| `player` | `uid`, `name`, `level`, `guild_id`, `pal_count`, `last_online` (ISO string or nil), `last_online_ts` (Unix seconds or nil), `instance_id`, `exp`, `hp`, `stomach`, `sanity`, `technology_points`, `boss_technology_points`, `effigy_possess_num`, `pal_box_id`, `otomo_container_id`, eight table-valued fields: `technologies`, `completed_missions`, `current_missions`, `unlocked_fast_travel_points`, `collected_effigies`, `defeated_bosses` (lists of id strings) and `status_point_list`, `ext_status_point_list` (points keyed by stat name), plus `pals` (a `player.pals()` iterator factory) |
+| `player` | `uid`, `name`, `level`, `guild_id`, `pal_count`, `last_online` (ISO string or nil), `last_online_ts` (Unix seconds or nil), `instance_id`, `exp`, `hp`, `stomach`, `sanity`, `technology_points`, `boss_technology_points`, `effigy_possess_num`, `pal_box_id`, `otomo_container_id`, `common_container_id`, `essential_container_id`, eight table-valued fields: `technologies`, `completed_missions`, `current_missions`, `unlocked_fast_travel_points`, `collected_effigies`, `defeated_bosses` (lists of id strings) and `status_point_list`, `ext_status_point_list` (points keyed by stat name), plus `pals` (a `player.pals()` iterator factory) |
 | `pal` | `instance_id`, `character_id`, `character_key`, `nickname`, `owner_uid`, `guild_id`, `base_id`, `gender`, `level`, `hp`, `max_hp`, `rank`, `exp`, `talent_hp`, `talent_shot`, `talent_defense`, `rank_hp`, `rank_attack`, `rank_defense`, `rank_craftspeed`, `is_boss`, `is_lucky`, `is_awakened`, `is_imported`, `is_predator`, `is_tower`, `is_sick`, `group_id`, `stomach`, `sanity`, `friendship_point`, `storage_id`, `storage_slot`, and four table-valued fields: `learned_skills`, `active_skills`, `passive_skills` (lists of catalog id strings) and `work_suitability` (ranks keyed by work type) |
 | `guild` | `id`, `name`, `admin_uid`, `player_count`, `base_count`, `level`, `pal_count`, `chest_container_id` (a container id string, or `nil` when the guild has no chest) |
 | `base` | `id`, `guild_id`, `name`, `area_range` (the radius of the base's working area, in world units), `x`, `y`, `z`. Everything but `id` reads `nil` on a base whose record in the save could not be read - the iterator hands out a handle for any entry that has an id, without checking there is anything behind it. |
@@ -713,13 +713,14 @@ follows:
 - **From the player's own `.sav`** - `technologies`, `technology_points`,
   `boss_technology_points`, `completed_missions`, `current_missions`,
   `unlocked_fast_travel_points`, `collected_effigies`, `defeated_bosses`,
-  `effigy_possess_num`, `pal_box_id`, `otomo_container_id`.
+  `effigy_possess_num`, `pal_box_id`, `otomo_container_id`, `common_container_id`,
+  `essential_container_id`.
 - **From that player's entry in the level save** - `instance_id`, `exp`, `hp`,
   `stomach`, `sanity`, `status_point_list`, `ext_status_point_list`.
 
-**All eighteen need the `players` capability, not just `save.read`.** None was
+**All twenty need the `players` capability, not just `save.read`.** None was
 reachable under `save.read` before these fields existed, but not for the same
-reason: the eleven needed `raw` with a `player:<uid>` target, which `players`
+reason: the thirteen needed `raw` with a `player:<uid>` target, which `players`
 already gates, while the seven needed `raw` with the `level` target, which needs
 only `save.raw`.
 

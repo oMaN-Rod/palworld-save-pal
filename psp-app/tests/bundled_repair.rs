@@ -155,6 +155,7 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
             "repair_structures",
             "scan_illegal_pals",
             "scan_illegal_players",
+            "trim_overfilled_inventories",
         ]
     );
 }
@@ -906,4 +907,222 @@ fn repair_items_finds_nothing_in_an_intact_save() {
         Some(0)
     );
     assert_round_trips(&h.session);
+}
+
+/// A minimal ad-hoc plugin used only to break a fixture's own correct sizing,
+/// so `trim_overfilled_inventories` has something to fix. Enlarges the first
+/// player's main inventory by 3 empty slots -- a change that never refuses,
+/// since growing a container can never strand an occupied slot.
+const MISRESIZE_MANIFEST: &str = r#"{
+  "id": "test.misresize", "api_version": 1, "name": "Test", "version": "1.0.0",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.write", "players"],
+  "commands": [ { "id": "misresize_first_player", "title": "Misresize" } ]
+}"#;
+
+const MISRESIZE_SOURCE: &str = r#"
+function misresize_first_player()
+  local target_id = nil
+  for player in save.players() do
+    target_id = player.common_container_id
+    break
+  end
+  local by_id = {}
+  for container in save.containers() do
+    by_id[container.id] = container
+  end
+  local target = by_id[target_id]
+  if target == nil then return { resized = false } end
+  return { resized = target.set_slot_count(target.slot_count + 3) }
+end
+"#;
+
+fn misresize_a_players_common_container(h: &mut Harness) {
+    let manifest = Manifest::parse(MISRESIZE_MANIFEST).expect("the ad-hoc manifest must parse");
+    let mut sources = BTreeMap::new();
+    sources.insert("main.lua".to_string(), MISRESIZE_SOURCE.to_string());
+    let granted = manifest.capabilities.clone();
+    let outcome = run_command(
+        RunRequest {
+            manifest: &manifest,
+            sources: &sources,
+            command_id: "misresize_first_player",
+            args: &serde_json::json!({}),
+            dry_run: false,
+            granted: &granted,
+        },
+        RunServices {
+            session: &mut h.session,
+            game_data: &h.game_data,
+            progress: None,
+            storage: &BTreeMap::new(),
+            confirm: None,
+            limits: Limits::default(),
+            cancel: Cancel::new(),
+        },
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "misresize setup must itself succeed: {:?}", outcome.status);
+}
+
+/// A second ad-hoc plugin that manufactures a genuine refusal instead of
+/// merely asserting the `refused` key exists. The `v1_relics` fixture already
+/// has a player (`e1530496...`) with two `AdditionalInventory_` entries in
+/// their essential container and, correspondingly, a 48-slot common container
+/// whose own top three slots (indices 45-47) are occupied. Clearing one
+/// `AdditionalInventory_` entry drops the expansion count to 1 -- so
+/// `trim_overfilled_inventories` computes a target of 45 for a container that
+/// still has real items sitting at 45, 46 and 47, and `set_slot_count(45)`
+/// must refuse rather than drop them.
+///
+/// `slot.clear()` on the essential container never touches the paired common
+/// container's own size (that auto-resize is specific to a real
+/// `EssentialContainer` DTO write, which this is not), so the mismatch this
+/// sets up survives untouched until `trim_overfilled_inventories` runs.
+const OVERFILL_MANIFEST: &str = r#"{
+  "id": "test.overfill", "api_version": 1, "name": "Test", "version": "1.0.0",
+  "entry": "main.lua",
+  "capabilities": ["save.read", "save.write", "players"],
+  "commands": [ { "id": "shrink_a_players_expansions", "title": "Shrink" } ]
+}"#;
+
+const OVERFILL_SOURCE: &str = r#"
+function shrink_a_players_expansions()
+  local essential_id = nil
+  for player in save.players() do
+    if player.uid == "e1530496-0000-0000-0000-000000000000" then
+      essential_id = player.essential_container_id
+    end
+  end
+  if essential_id == nil then return { cleared = false } end
+
+  local essential = nil
+  for container in save.containers() do
+    if container.id == essential_id then essential = container end
+  end
+  if essential == nil then return { cleared = false } end
+
+  local target_index = nil
+  for slot in essential.slots() do
+    if slot.item_id == "AdditionalInventory_002" then
+      target_index = slot.index
+    end
+  end
+  if target_index == nil then return { cleared = false } end
+
+  -- A fresh handle set: the read-only pass above must finish before the
+  -- structural clear below, or the iteration that found `target_index` would
+  -- itself be invalidated by it.
+  local essential2 = nil
+  for container in save.containers() do
+    if container.id == essential_id then essential2 = container end
+  end
+  local cleared = false
+  for slot in essential2.slots() do
+    if slot.index == target_index then
+      slot.clear()
+      cleared = true
+      break
+    end
+  end
+  return { cleared = cleared }
+end
+"#;
+
+fn shrink_a_players_expansions(h: &mut Harness) {
+    let manifest = Manifest::parse(OVERFILL_MANIFEST).expect("the ad-hoc manifest must parse");
+    let mut sources = BTreeMap::new();
+    sources.insert("main.lua".to_string(), OVERFILL_SOURCE.to_string());
+    let granted = manifest.capabilities.clone();
+    let outcome = run_command(
+        RunRequest {
+            manifest: &manifest,
+            sources: &sources,
+            command_id: "shrink_a_players_expansions",
+            args: &serde_json::json!({}),
+            dry_run: false,
+            granted: &granted,
+        },
+        RunServices {
+            session: &mut h.session,
+            game_data: &h.game_data,
+            progress: None,
+            storage: &BTreeMap::new(),
+            confirm: None,
+            limits: Limits::default(),
+            cancel: Cancel::new(),
+        },
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "shrink setup must itself succeed: {:?}", outcome.status);
+    let result = outcome.result.expect("a result");
+    assert_eq!(
+        result["cleared"].as_bool(),
+        Some(true),
+        "the setup must clear an AdditionalInventory_ entry, or the refusal it sets up never happens"
+    );
+}
+
+#[test]
+fn trim_overfilled_inventories_sizes_each_common_container_to_the_expansion_formula() {
+    let mut h = Harness::new();
+    misresize_a_players_common_container(&mut h);
+
+    let outcome = h.run("trim_overfilled_inventories", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert!(counts["examined"].as_i64().expect("examined") > 0);
+    assert!(
+        counts["resized"].as_i64().expect("resized") > 0,
+        "the fixture was deliberately misresized, so this run must find and fix it"
+    );
+
+    // Converges: a second run finds nothing to resize.
+    let again = h.run("trim_overfilled_inventories", serde_json::json!({}), false);
+    assert_eq!(
+        again.result.expect("a result")["counts"]["resized"].as_i64(),
+        Some(0),
+        "the command must converge in one run"
+    );
+
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn trim_overfilled_inventories_refuses_rather_than_dropping_an_occupied_slot() {
+    use psp_core::domain::containers;
+
+    let mut h = Harness::new();
+    shrink_a_players_expansions(&mut h);
+    let common_id: Uuid = "c9b2170c-4dbf-ae4d-4593-839c432cc265".parse().expect("valid uuid literal");
+
+    let outcome = h.run("trim_overfilled_inventories", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert_eq!(
+        counts["refused"].as_i64(),
+        Some(1),
+        "the deliberately shrunk player's resize must be refused, not silently skipped or applied"
+    );
+
+    let dto = containers::read_item_container(&h.session.level, &mut h.session.caches, &h.game_data, common_id, "", None)
+        .expect("the refused container must still be readable");
+    assert_eq!(dto.slot_num, 48, "a refusal must leave the container's own size untouched");
+    let slot_47 = dto.slots.iter().find(|s| s.slot_index == 47).expect("the item at slot 47 must survive the refusal");
+    assert_eq!(slot_47.static_id.as_deref(), Some("PalSphere_Ancient_2"));
+
+    assert_round_trips(&h.session);
+}
+
+/// A healthy save has nothing to refuse: `refused` legitimately reads zero
+/// here, so `.is_number()` -- confirming the key exists rather than being
+/// omitted -- is the honest assertion this fixture supports.
+#[test]
+fn trim_overfilled_inventories_surfaces_a_refused_count_even_when_it_is_zero() {
+    let mut h = Harness::new();
+    let outcome = h.run("trim_overfilled_inventories", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert!(
+        counts["refused"].is_number(),
+        "a resize the host refuses must be counted and surfaced, never silently ignored"
+    );
 }

@@ -82,6 +82,13 @@ pub(crate) struct CachedPlayer {
     /// flush drains the entry, so the next load recaptures from the save.
     saved_status_rows: Vec<String>,
     saved_ext_status_rows: Vec<String>,
+    /// Captured from the loaded `PlayerDto` before `drop_item_container_dtos`
+    /// nulls both `Option<ItemContainerDto>` fields for write safety (see that
+    /// function's doc). The id survives here for `player.common_container_id`
+    /// / `player.essential_container_id` to answer, even though the DTO no
+    /// longer carries it.
+    common_container_id: Option<Uuid>,
+    essential_container_id: Option<Uuid>,
 }
 
 /// Records what a dry run's accepted slot assignment left the slot holding.
@@ -257,14 +264,19 @@ pub(crate) fn pal_release_field(ctx: &mut RunContext<'_>, id: Uuid, field: &str)
 /// to be structural or the containers have to be out of it. Nulling here makes
 /// it the second, and makes it impossible for a caller to opt back in by
 /// forgetting to.
-fn load_player_dto(ctx: &mut RunContext<'_>, uid: Uuid) -> Result<PlayerDto, HostError> {
+fn load_player_dto(
+    ctx: &mut RunContext<'_>,
+    uid: Uuid,
+) -> Result<(PlayerDto, Option<Uuid>, Option<Uuid>), HostError> {
     let fallback = null_progress();
     let progress: &ProgressSink = ctx.progress.unwrap_or(&fallback);
     let mut dto = player::get_player_details(ctx.session, ctx.game_data, uid, progress)
         .map_err(core_error)?
         .ok_or_else(|| HostError::new(format!("player {uid} not found")))?;
+    let common_container_id = dto.common_container.as_ref().map(|c| c.id);
+    let essential_container_id = dto.essential_container.as_ref().map(|c| c.id);
     drop_item_container_dtos(&mut dto);
-    Ok(dto)
+    Ok((dto, common_container_id, essential_container_id))
 }
 
 /// The five `Option<ItemContainerDto>` fields, and only those: they are exactly
@@ -329,18 +341,42 @@ pub(crate) fn player_read<'ctx>(
     uid: Uuid,
 ) -> Result<&'ctx PlayerDto, HostError> {
     if !ctx.dto_cache.player.contains_key(&uid) {
-        let dto = load_player_dto(ctx, uid)?;
+        let (dto, common_container_id, essential_container_id) = load_player_dto(ctx, uid)?;
         let saved_status_rows = dto.status_point_list.iter().map(|(key, _)| key.clone()).collect();
         let saved_ext_status_rows = dto.ext_status_point_list.iter().map(|(key, _)| key.clone()).collect();
         ctx.dto_cache.player.insert(
             uid,
-            CachedPlayer { dto, dirty: false, written: Vec::new(), saved_status_rows, saved_ext_status_rows },
+            CachedPlayer {
+                dto,
+                dirty: false,
+                written: Vec::new(),
+                saved_status_rows,
+                saved_ext_status_rows,
+                common_container_id,
+                essential_container_id,
+            },
         );
     }
     ctx.dto_cache
         .player
         .get(&uid)
         .map(|cached| &cached.dto)
+        .ok_or_else(|| HostError::new(format!("player {uid} not found")))
+}
+
+/// The two ids `drop_item_container_dtos` strips from the cached `PlayerDto`
+/// before any other row can see it, captured at load and kept alongside the
+/// cache entry instead. Ensures the entry is loaded the same way `player_read`
+/// does.
+pub(crate) fn player_container_ids(
+    ctx: &mut RunContext<'_>,
+    uid: Uuid,
+) -> Result<(Option<Uuid>, Option<Uuid>), HostError> {
+    player_read(ctx, uid)?;
+    ctx.dto_cache
+        .player
+        .get(&uid)
+        .map(|cached| (cached.common_container_id, cached.essential_container_id))
         .ok_or_else(|| HostError::new(format!("player {uid} not found")))
 }
 

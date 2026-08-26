@@ -28,6 +28,8 @@
 ---@field ext_status_point_list table<string, integer> Points spent on each extended stat, keyed by max_hp, max_sp, attack, weight and work_speed -- the base-stat keys minus capture_rate, which the extended list has no entry for. Assigning replaces the whole map on the same terms as status_point_list, and a key it does not know is refused. Reading it requires the players capability.
 ---@field pal_box_id string|nil The id of this player's pal box container, or nil if the save records none. Read-only. Reading it requires the players capability.
 ---@field otomo_container_id string|nil The id of this player's party container, or nil if the save records none. Read-only. Reading it requires the players capability.
+---@field common_container_id string|nil The id of the player's main inventory container, or nil if it could not be read. Read-only. Reading it requires the players capability.
+---@field essential_container_id string|nil The id of the player's key-items container, whose `AdditionalInventory_` entries decide how large the main inventory should be. Read-only. Reading it requires the players capability.
 ---@field pals fun(): (fun(): pal|nil) An iterator over every pal this player owns, for use in a `for` loop. Requires capability: save.read.
 ---@field delete fun(): boolean Deletes this player, along with the item and character containers the player owns. Refuses (returns false, changes nothing) if the player is their guild's admin. A true result is a structural write and invalidates every live handle and iterator across all scopes, including this one. Requires capability: save.write.
 
