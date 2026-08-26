@@ -334,15 +334,21 @@ fn the_gamedata_global_is_absent_without_its_capability() {
     assert_eq!(value.as_deref(), Some("table,nil"));
 }
 
+/// The budget is wall clock inside the sandbox, so it is charged for every
+/// sibling test loading its own copy of the corpus on another core. Twenty
+/// passes take about two seconds on an idle machine and comfortably over ten
+/// under the rest of this package, which is why the ceiling is set where a
+/// contended run still fits and a per-pal snapshot rebuild -- minutes, even
+/// idle -- still does not.
 #[test]
 fn iteration_over_the_whole_corpus_stays_within_the_time_budget() {
-    let mut h = support::harness_with_timeout(&[Capability::SaveRead], 10_000);
+    let mut h = support::harness_with_timeout(&[Capability::SaveRead], 60_000);
     let (status, value) = h.run(
         "local n = 0
          for _ = 1, 20 do for p in save.pals() do n = n + p.level end end
          return tostring(n > 0)",
     );
-    assert_eq!(status, RunStatus::Ok, "twenty full passes must fit in 10s");
+    assert_eq!(status, RunStatus::Ok, "twenty full passes must stay linear in the pal count");
     assert_eq!(value.as_deref(), Some("true"));
 }
 
