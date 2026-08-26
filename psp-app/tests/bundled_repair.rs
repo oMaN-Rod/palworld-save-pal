@@ -623,8 +623,16 @@ fn fix_illegal_players_clamps_a_stat_the_scan_reported() {
     assert_round_trips(&h.session);
 }
 
+/// Runs against the real corpus, unseeded, so the first run's `removed` count
+/// is not asserted here -- the fixture may hold nothing for this command to
+/// fix. What this establishes is that species resolution succeeds for nearly
+/// every pal in the corpus and that a second run is a no-op, i.e. the command
+/// converges rather than finding new work every time it runs. It does not
+/// establish that the command actually removes an unlearnable skill when one
+/// exists; `fix_invalid_pal_active_skills_removes_a_seeded_unlearnable_skill`
+/// below covers that with a pal seeded to hold one.
 #[test]
-fn fix_invalid_pal_active_skills_never_leaves_a_pal_with_an_unlearnable_skill() {
+fn fix_invalid_pal_active_skills_converges_on_the_real_corpus() {
     let mut h = Harness::new();
     let outcome = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
     assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
