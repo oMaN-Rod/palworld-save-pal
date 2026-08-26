@@ -435,7 +435,13 @@ pub fn remove_orphaned_dynamic_items(session: &mut SaveSession) -> Result<usize,
         Some(id) => referenced.contains(&id),
         None => true,
     });
-    Ok(before - values.len())
+    let removed = before - values.len();
+    if removed > 0 {
+        // `retain` shifts every survivor after the first removal, and the cache maps
+        // `local_id -> position`, so a stale entry resolves to a different item.
+        session.caches.dynamic_item_index = None;
+    }
+    Ok(removed)
 }
 
 #[cfg(test)]
@@ -772,6 +778,35 @@ mod tests {
         assert!(
             ids.contains(&referenced_id),
             "a dynamic item a container slot still points at must survive the sweep"
+        );
+    }
+
+    /// `retain` shifts every survivor after the first removal, so a `local_id -> position`
+    /// cache built before the sweep points every id at some other item's record.
+    #[test]
+    fn remove_orphaned_dynamic_items_drops_the_position_cache_it_invalidates() {
+        let mut session = load_fixture_session("v1_relics");
+        let warmed = world::build_dynamic_item_index(&session.level);
+        assert!(!warmed.is_empty(), "the fixture must index something");
+        session.caches.dynamic_item_index = Some(warmed);
+
+        let removed = remove_orphaned_dynamic_items(&mut session).expect("remove");
+        assert!(removed > 0, "the fixture must lose entries, or no position shifts");
+
+        let index = match session.caches.dynamic_item_index.take() {
+            Some(index) => index,
+            None => world::build_dynamic_item_index(&session.level),
+        };
+        let values = world::dynamic_item_values(&session.level).expect("dynamic item values");
+        let misresolved = index
+            .iter()
+            .filter(|(local_id, position)| {
+                values.get(**position).and_then(dynamic_item_id) != Some(**local_id)
+            })
+            .count();
+        assert_eq!(
+            misresolved, 0,
+            "the surviving cache resolves {misresolved} ids to the wrong dynamic item"
         );
     }
 }
