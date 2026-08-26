@@ -220,12 +220,17 @@ from the generated form. `ui` only changes how a plugin's commands are
 ### The shape
 
 `ui` is an array of sections. A section has an optional `title`, a `columns`
-of `1`, `2` or `3` (default `1`), and an array of `widgets`. That's the
-entire grammar - sections hold widgets, and a widget holds nothing further.
-Any widget may set `"span": "full"` to take its section's full width
-regardless of `columns`, which is how the worked example's "Scan" button
-sits under three columns of inputs instead of trying to share a column with
-one of them.
+of `1`, `2` or `3` (default `1`), an optional `group`, and an array of
+`widgets` - sections hold widgets, and a widget holds nothing further. Any
+widget may set `"span": "full"` to take its section's full width regardless
+of `columns`, which is how the worked example's "Scan" button sits under
+three columns of inputs instead of trying to share a column with one of
+them.
+
+A section's `group` names an entry in the view's left-hand list. Sections
+that share a group become that one entry, in the order their group was
+first declared, and render together on the right when it's selected.
+Sections with no `group` all gather into a single trailing entry.
 
 ### The ten widget types
 
@@ -337,6 +342,7 @@ than refusing outright.
 | a selectable `table` has no `id` | a `button` whose `command` names no known command is skipped |
 | a `from` names no command the manifest declares | a `path` that resolves to nothing renders as an empty widget, not an error |
 | a `button` has no `command`, or its `command` names no declared command | a section's `columns` outside `1`-`3` falls back to `1` instead of being refused |
+| a `group` is present but blank or whitespace-only | a blank `group` at render time is treated as no group, and warned about |
 | `args` appears on a non-`button`, names a key the button's command doesn't declare, or has a value that isn't `<widget>.selection`/`<widget>.value` naming a widget in the view | |
 
 ### Worked example: `pst.repair`'s view
@@ -349,6 +355,7 @@ are described below:
 "ui": [
   {
     "title": "Scan",
+    "group": "Illegal Pals",
     "columns": 3,
     "widgets": [
       { "type": "entity_select", "id": "owner", "entity": "player", "label": "Owner" },
@@ -359,18 +366,21 @@ are described below:
   },
   {
     "title": "Illegal pals",
+    "group": "Illegal Pals",
     "columns": 1,
     "widgets": [
       { "type": "text", "from": "scan_illegal_pals", "path": "summary" },
-      { "type": "table", "id": "rows", "from": "scan_illegal_pals", "path": "pals",
+      { "type": "table", "id": "pal_rows", "from": "scan_illegal_pals", "path": "pals",
         "columns": ["name", "level", "rank", "problems"], "selectable": true },
       { "type": "button", "label": "Fix selected", "command": "fix_illegal_pals",
-        "args": { "ids": "rows.selection" } }
+        "args": { "ids": "pal_rows.selection" } }
     ]
   }
 ]
 ```
 
+- Both sections share the `group` `"Illegal Pals"`, so together they are one
+  entry in the view's left-hand list rather than two.
 - The **"Scan" section** lays three inputs and a button across three columns:
   an `entity_select` bound to `owner` (so the user can narrow the scan to one
   player, or leave it at the "Any" that an empty string means), and two
@@ -381,11 +391,11 @@ are described below:
   widget shows `scan_illegal_pals`'s own `summary` field verbatim. The
   `table` widget reads that same result's `pals` array, renders the four
   named columns, and - because `selectable` is `true` and it declares an
-  `id` of `rows` - tracks which rows the user has checked.
+  `id` of `pal_rows` - tracks which rows the user has checked.
 - The **"Fix selected" button** runs `fix_illegal_pals` with `ids` set to
-  `rows.selection`: exactly the `instance_id`s of the checked rows. Because
-  `fix_illegal_pals` also declares `max_level` and `max_rank` params, the
-  same two number inputs from the Scan section feed it too, so a user who
+  `pal_rows.selection`: exactly the `instance_id`s of the checked rows.
+  Because `fix_illegal_pals` also declares `max_level` and `max_rank` params,
+  the same two number inputs from the Scan section feed it too, so a user who
   adjusts the threshold and fixes a selection doesn't need to re-enter it.
   `fix_illegal_pals` is `destructive`, so pressing this button previews the
   clamp before anything is written, exactly as it would from the generated
