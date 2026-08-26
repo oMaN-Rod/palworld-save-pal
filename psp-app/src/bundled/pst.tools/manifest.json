@@ -62,11 +62,11 @@
     {
       "id": "max_all_pals",
       "title": "Max All Pals",
-      "description": "Raises every pal in the world and in dimensional storage to the maximum level, soul ranks, condensing rank and friendship, marks it awakened, and maxes the work suitabilities it already has. Cheat mode uses 255 for level and soul ranks; talents stay capped at 100, which the save writer enforces.",
+      "description": "Raises every pal in the world and in dimensional storage to the maximum level, soul ranks, condensing rank and friendship, and marks it awakened. Also maxes the work suitabilities a world pal already has; dimensional-storage pals do not get this, since their work suitability is stored as an additive list rather than a flat set of ranks. Cheat mode uses 255 for level, soul ranks and condensing rank; talents stay capped at 100, which the save writer enforces.",
       "destructive": true,
       "params": [
         { "id": "cheat_mode", "type": "bool", "label": "Cheat mode", "default": false,
-          "description": "Uses 255 in place of the game's own caps for level and soul ranks. Talents stay capped at 100 regardless. The game may not display these values correctly." }
+          "description": "Uses 255 in place of the game's own caps for level, soul ranks and condensing rank. Talents stay capped at 100 regardless. The game may not display these values correctly." }
       ]
     }
   ]

@@ -588,16 +588,78 @@ fn modify_all_guild_chest_slots_resizes_only_guild_chest_containers() {
     assert_round_trips(&h.session);
 }
 
+fn dps_player_uid() -> Uuid {
+    collect_player_file_refs(&fixture_dir())
+        .into_iter()
+        .find_map(|(uid, refs)| match refs {
+            PlayerFileData::Paths { dps: Some(_), .. } => Some(uid),
+            _ => None,
+        })
+        .expect("the fixture must have at least one player with a DPS save")
+}
+
+/// `Level` on every dimensional-storage slot this player's DPS save reports
+/// as occupied (a `CharacterID` other than absent/empty/`"None"`), keyed by
+/// slot index. A slot the fixture's own game data left occupied without a
+/// `Level` key is not included -- there is nothing there for the command to
+/// have raised.
+fn dps_occupied_levels(h: &Harness, uid: Uuid) -> BTreeMap<usize, u8> {
+    let dps_bytes = h
+        .session
+        .player_sav_bytes()
+        .expect("player_sav_bytes must resolve")
+        .get(&uid)
+        .and_then(|(_, dps)| dps.clone())
+        .expect("the player must have dps bytes");
+    let save = psp_core::savio::read_sav_bytes(&dps_bytes).expect("the dps bytes parse");
+    let array = psp_core::props::get(&save.root.properties, &["SaveParameterArray"])
+        .and_then(psp_core::props::struct_values)
+        .expect("SaveParameterArray must be present");
+    array
+        .iter()
+        .enumerate()
+        .filter_map(|(index, slot)| {
+            let psp_core::ue::StructValue::Struct(slot_props) = slot else { return None };
+            let save_parameter = slot_props
+                .0
+                .get(&psp_core::ue::PropertyKey::from("SaveParameter"))
+                .and_then(psp_core::props::struct_props)?;
+            let character_id =
+                psp_core::props::get(save_parameter, &["CharacterID"]).and_then(psp_core::props::as_str);
+            if !matches!(character_id, Some(id) if !id.is_empty() && id != "None") {
+                return None;
+            }
+            let level = psp_core::props::get(save_parameter, &["Level"]).and_then(psp_core::props::as_byte)?;
+            Some((index, level))
+        })
+        .collect()
+}
+
 #[test]
 fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
     let mut h = Harness::new();
+
+    let dps_uid = dps_player_uid();
+    player::get_player_details(&mut h.session, &h.game_data, dps_uid, &null_progress())
+        .expect("player details load")
+        .expect("the dps-owning fixture player exists");
+    let dps_before = dps_occupied_levels(&h, dps_uid);
+    assert!(
+        dps_before.values().any(|&level| level != 80),
+        "the fixture must have a dimensional-storage pal below level 80 for this test to prove anything"
+    );
+
     let outcome = h.run("max_all_pals", serde_json::json!({ "cheat_mode": false }), false);
     assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
     let result = outcome.result.expect("a result");
     let counts = result["counts"].clone();
     let maxed = counts["pals"].as_i64().expect("pals");
     assert!(maxed > 0, "the fixture must contain pals to max");
-    assert!(counts["dps_pals"].is_number(), "dps_pals must be reported");
+    assert_eq!(
+        counts["dps_pals"].as_i64(),
+        Some(dps_before.len() as i64),
+        "dps_pals must match the fixture's actual occupied dimensional-storage slot count"
+    );
 
     let below: Vec<String> = psp_core::domain::pal::pal_summaries(&h.session, &h.game_data)
         .expect("pal summaries")
@@ -606,6 +668,16 @@ fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
         .map(|p| p.instance_id.to_string())
         .collect();
     assert!(below.is_empty(), "these pals were left below level 80: {below:?}");
+
+    let dps_after = dps_occupied_levels(&h, dps_uid);
+    assert_eq!(
+        dps_after.keys().collect::<Vec<_>>(),
+        dps_before.keys().collect::<Vec<_>>(),
+        "the same dimensional-storage slots must still be occupied after the run"
+    );
+    for (index, level) in &dps_after {
+        assert_eq!(*level, 80, "dimensional-storage slot {index} was left at level {level}, not raised to 80");
+    }
 
     assert_round_trips(&h.session);
 }

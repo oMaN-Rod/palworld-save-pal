@@ -316,11 +316,15 @@ function max_all_pals()
   end
 
   local verb = ctx.dry_run and "Would max" or "Maxed"
+  local summary = string.format(
+    "%s %d of %d world pal(s) (%d could not be read) and %d dimensional storage pal(s)",
+    verb, pals, examined, skipped, dps_pals
+  )
+  if dps_pals > 0 then
+    summary = summary .. " (work suitability was not raised in dimensional storage)"
+  end
   return {
-    summary = string.format(
-      "%s %d of %d world pal(s) (%d could not be read) and %d dimensional storage pal(s)",
-      verb, pals, examined, skipped, dps_pals
-    ),
+    summary = summary,
     counts = { pals = pals, dps_pals = dps_pals, examined = examined, skipped = skipped },
   }
 end
