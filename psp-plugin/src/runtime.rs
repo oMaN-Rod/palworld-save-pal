@@ -34,6 +34,10 @@ pub struct RunOutcome {
     /// How many pals the DTO cache actually wrote back this run. Host-internal
     /// observability, not plugin output -- kept out of `counts` on purpose.
     pub dto_flush_count: u64,
+    /// How many times the run rebuilt the `pals` snapshot. Host-internal
+    /// observability alongside `dto_flush_count`, and the only way a test can
+    /// see a command reading and writing pals in the same pass.
+    pub pal_snapshot_build_count: u64,
 }
 
 pub struct RunServices<'a> {
@@ -55,6 +59,7 @@ fn error_before_context(message: String) -> RunOutcome {
         log: Vec::new(),
         storage_writes: Vec::new(),
         dto_flush_count: 0,
+        pal_snapshot_build_count: 0,
     }
 }
 
@@ -74,6 +79,7 @@ fn finish(
         log: ctx.log,
         storage_writes: ctx.storage_writes,
         dto_flush_count: ctx.dto_flush_count,
+        pal_snapshot_build_count: ctx.pal_snapshot_build_count,
     }
 }
 

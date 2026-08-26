@@ -651,6 +651,150 @@ fn fix_invalid_pal_active_skills_never_leaves_a_pal_with_an_unlearnable_skill() 
     assert_round_trips(&h.session);
 }
 
+/// The corpus fixture holds no pal equipped with a skill its species cannot
+/// learn, so this teaches one: a catalogued active skill absent from the
+/// species' `skill_set` is appended to its equipped list. Without it the
+/// command finds nothing to remove and every count below is `0 == 0`.
+///
+/// Returns the pal and the skill it must lose.
+fn teach_a_pal_an_unlearnable_skill(h: &mut Harness) -> (Uuid, String) {
+    use psp_core::domain::world;
+    use psp_core::props;
+    use psp_core::ue::PropertyKey;
+
+    let Harness { session, game_data, .. } = h;
+
+    let catalogued: std::collections::BTreeSet<String> = game_data
+        .entry_keys("active_skills")
+        .expect("the active skill catalog is checked in")
+        .into_iter()
+        .map(str::to_string)
+        .collect();
+    let pal_keys = psp_core::domain::pal::known_pal_keys(game_data).clone();
+    let canonical: BTreeMap<String, String> =
+        pal_keys.iter().map(|key| (key.to_lowercase(), key.clone())).collect();
+    let pals_json = game_data
+        .get("pals")
+        .and_then(|value| value.as_object())
+        .expect("pals.json is checked in");
+
+    let entries = world::character_map_mut(&mut session.level).expect("the character map resolves");
+    for entry in entries.iter_mut() {
+        if world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(pal_id) = world::entry_instance_id(entry) else { continue };
+        let Some(params) = world::entry_save_parameter(entry) else { continue };
+        let Some(character_id) = params
+            .0
+            .get(&PropertyKey::from("CharacterID"))
+            .and_then(props::as_str)
+            .map(str::to_string)
+        else {
+            continue;
+        };
+        // Only a pal that already carries `EquipWaza` is a candidate: inserting the
+        // property fresh would need a schema this helper has no business minting.
+        let Some(equipped) = params
+            .0
+            .get(&PropertyKey::from("EquipWaza"))
+            .and_then(props::enum_values)
+            .cloned()
+        else {
+            continue;
+        };
+        let learned = params
+            .0
+            .get(&PropertyKey::from("MasteredWaza"))
+            .and_then(props::enum_values)
+            .cloned()
+            .unwrap_or_default();
+        // A pal holding anything the catalog does not know is skipped wholesale by
+        // the command, so seeding one would prove nothing.
+        if equipped.iter().chain(learned.iter()).any(|id| !catalogued.contains(id)) {
+            continue;
+        }
+
+        let key = psp_core::dto::pal::format_character_key(&character_id, &pal_keys);
+        let Some(canonical_key) = canonical.get(&key) else { continue };
+        let Some(skill_set) = pals_json
+            .get(canonical_key)
+            .and_then(|species| species.get("skill_set"))
+            .and_then(|set| set.as_object())
+        else {
+            continue;
+        };
+        let learnable: std::collections::BTreeSet<String> =
+            skill_set.keys().map(|name| format!("EPalWazaID::{name}")).collect();
+        let Some(unlearnable) = catalogued.iter().find(|id| !learnable.contains(*id)).cloned()
+        else {
+            continue;
+        };
+
+        let mut seeded = equipped;
+        seeded.push(unlearnable.clone());
+        let params = world::entry_save_parameter_mut(entry).expect("the parameters are still there");
+        params.insert("EquipWaza", props::enum_array_property(seeded));
+        return (pal_id, unlearnable);
+    }
+    panic!("the fixture must hold a pal whose species resolves and whose skills are all catalogued");
+}
+
+fn equipped_skills(session: &SaveSession, pal_id: Uuid) -> Vec<String> {
+    psp_core::domain::world::character_map(&session.level)
+        .expect("the character map resolves")
+        .iter()
+        .find(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(pal_id))
+        .and_then(psp_core::domain::world::entry_save_parameter)
+        .and_then(|params| params.0.get(&psp_core::ue::PropertyKey::from("EquipWaza")))
+        .and_then(psp_core::props::enum_values)
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// Damage the command exists to undo, which the clean corpus never supplies:
+/// one pal equipped with a skill its species cannot learn. The first run must
+/// remove it, and the second must find nothing left.
+#[test]
+fn fix_invalid_pal_active_skills_removes_a_seeded_unlearnable_skill() {
+    let mut h = Harness::new();
+    let (pal_id, unlearnable) = teach_a_pal_an_unlearnable_skill(&mut h);
+    assert!(
+        equipped_skills(&h.session, pal_id).contains(&unlearnable),
+        "precondition: the seeded pal must really be holding {unlearnable}"
+    );
+
+    let outcome = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    // Every pal write drops the `pals` snapshot, so a command that reads a pal
+    // field after its first write rebuilds the whole snapshot once per damaged
+    // pal. Reading everything before writing anything keeps this at the one
+    // build `save.pals()` itself needs.
+    assert_eq!(
+        outcome.pal_snapshot_build_count, 1,
+        "the command must read every pal field it needs before its first write"
+    );
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert!(
+        counts["removed"].as_i64().unwrap_or(0) > 0,
+        "the first run must actually remove the seeded skill: {counts}"
+    );
+    assert!(
+        !equipped_skills(&h.session, pal_id).contains(&unlearnable),
+        "the seeded pal must no longer hold {unlearnable}"
+    );
+
+    let again = h.run("fix_invalid_pal_active_skills", serde_json::json!({}), false);
+    assert_eq!(again.status, RunStatus::Ok, "{:?}", again.status);
+    assert_eq!(
+        again.result.expect("a result")["counts"]["removed"].as_i64(),
+        Some(0),
+        "the command must converge in one run"
+    );
+
+    assert_round_trips(&h.session);
+}
+
 /// The trap: a save containing a pal whose skills are not in the catalog must
 /// not fail the run. This asserts the skip path exists and is counted.
 #[test]

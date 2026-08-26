@@ -53,6 +53,7 @@ fn boss_and_lucky_by_pal(session: &SaveSession) -> HashMap<Uuid, (bool, bool)> {
 
 pub(crate) fn ensure_pals_snapshot(ctx: &mut RunContext<'_>) -> Result<(), HostError> {
     if ctx.pals.is_none() {
+        ctx.pal_snapshot_build_count = ctx.pal_snapshot_build_count.saturating_add(1);
         super::dto_cache::flush(ctx)?;
         let snapshot = pal::pal_summaries(ctx.session, ctx.game_data).map_err(core_error)?;
         let flags = boss_and_lucky_by_pal(ctx.session);

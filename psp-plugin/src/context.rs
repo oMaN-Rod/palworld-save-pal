@@ -103,6 +103,12 @@ pub struct RunContext<'a> {
     /// index this run. Deliberately not in `counts` for the same reason as
     /// `dto_flush_count`: host-internal observability, not plugin-run output.
     pub dto_index_build_count: u64,
+    /// How many times `ensure_pals_snapshot` has rebuilt the `pals` snapshot
+    /// this run. One build is the floor for anything that iterates pals; a
+    /// count that climbs with the number of pals written means the command is
+    /// interleaving reads and writes in one pass. Host-internal observability
+    /// for tests, like the two counters above, so not in `counts`.
+    pub pal_snapshot_build_count: u64,
     pub api_version: u32,
     pub plugin_id: String,
     pub command_id: String,
@@ -153,6 +159,7 @@ impl<'a> RunContext<'a> {
             pal_entry_index: None,
             dto_flush_count: 0,
             dto_index_build_count: 0,
+            pal_snapshot_build_count: 0,
             api_version,
             plugin_id,
             command_id,

@@ -350,6 +350,12 @@ function fix_invalid_pal_active_skills()
   local pals, removed, examined = 0, 0, 0
   local skipped_unknown_species, skipped_uncatalogued = 0, 0
 
+  -- Read-only first pass: `character_key`, `active_skills` and `learned_skills`
+  -- are all read here, before any pal is written. A pal write drops the
+  -- `save.pals()` snapshot the next pal's reads fall back to, so reading inside
+  -- the write pass below would rebuild that snapshot once per damaged pal --
+  -- quadratic on exactly the badly damaged save this command exists to repair.
+  local writable = {}
   for pal in save.pals() do
     examined = examined + 1
     local learnable = learnable_for(pal.character_key, pal_keys)
@@ -362,14 +368,19 @@ function fix_invalid_pal_active_skills()
       -- whole run. A boss pal's own signature skill is not in the catalog.
       skipped_uncatalogued = skipped_uncatalogued + 1
     else
-      local kept_active, dropped_active = without_unlearnable(active, learnable)
-      local kept_learned, dropped_learned = without_unlearnable(learned, learnable)
-      if dropped_active > 0 then pal.active_skills = kept_active end
-      if dropped_learned > 0 then pal.learned_skills = kept_learned end
-      if dropped_active + dropped_learned > 0 then
-        pals = pals + 1
-        removed = removed + dropped_active + dropped_learned
-      end
+      writable[#writable + 1] =
+        { pal = pal, learnable = learnable, active = active, learned = learned }
+    end
+  end
+
+  for _, entry in ipairs(writable) do
+    local kept_active, dropped_active = without_unlearnable(entry.active, entry.learnable)
+    local kept_learned, dropped_learned = without_unlearnable(entry.learned, entry.learnable)
+    if dropped_active > 0 then entry.pal.active_skills = kept_active end
+    if dropped_learned > 0 then entry.pal.learned_skills = kept_learned end
+    if dropped_active + dropped_learned > 0 then
+      pals = pals + 1
+      removed = removed + dropped_active + dropped_learned
     end
   end
 
