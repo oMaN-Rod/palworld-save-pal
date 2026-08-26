@@ -115,7 +115,13 @@ fn pal_routing(ctx: &mut RunContext<'_>, pal_id: Uuid) -> Result<Option<(Option<
     let Some(summary) = snapshot.get(entry.position) else {
         return Ok(None);
     };
-    Ok(Some((summary.owner_uid, summary.guild_id.zip(summary.base_id))))
+    // PSP itself writes a base worker's OwnerPlayerUId as the nil guid rather
+    // than omitting it, so a present-but-nil uid means "no player owner", not
+    // "player owner unresolved".
+    Ok(Some((
+        summary.owner_uid.filter(|uid| !uid.is_nil()),
+        summary.guild_id.zip(summary.base_id),
+    )))
 }
 
 fn player_delete_body(state: *mut lua_State) -> Result<c_int, HostError> {

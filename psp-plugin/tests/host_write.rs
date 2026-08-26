@@ -797,3 +797,89 @@ fn set_slot_count_on_a_container_removed_by_another_write_raises() {
         "calling set_slot_count on a container removed by another write must raise a catchable error: {value}"
     );
 }
+
+/// A base worker pal PSP itself created carries `OwnerPlayerUId` as the nil guid
+/// rather than omitting it (`pal::add_guild_pal` -> `new_pal_entry(.., EMPTY_UUID, ..)`,
+/// and the same shape `gps.rs` writes for an unowned clone). `pal_routing` hands that
+/// back as `Some(nil)`, which the delete match reads as "owned by a player".
+fn seed_base_worker(h: &mut support::Harness) -> uuid::Uuid {
+    let game_data = support::load_game_data();
+    let mut pairs: Vec<(uuid::Uuid, uuid::Uuid)> = {
+        let summaries =
+            psp_core::domain::pal::pal_summaries(h.session(), &game_data).expect("summaries build");
+        summaries.iter().filter_map(|s| s.guild_id.zip(s.base_id)).collect()
+    };
+    pairs.sort();
+    pairs.dedup();
+    assert!(!pairs.is_empty(), "the corpus fixture has at least one base worker pal");
+
+    for (guild_id, base_id) in pairs {
+        psp_core::domain::guild::get_guild_details(h.session_mut(), &game_data, guild_id)
+            .expect("guild details load")
+            .expect("the guild exists");
+        let added = psp_core::domain::pal::add_guild_pal(
+            h.session_mut(),
+            &game_data,
+            guild_id,
+            base_id,
+            "Lamball",
+            "NilOwnerWorker",
+            None,
+        )
+        .expect("add_guild_pal succeeds");
+        if let Some(dto) = added {
+            assert_eq!(
+                dto.owner_uid,
+                Some(uuid::Uuid::nil()),
+                "the seeded worker must carry the nil guid"
+            );
+            return dto.instance_id;
+        }
+    }
+    panic!("no base in the corpus fixture has a free worker slot");
+}
+
+#[test]
+fn pal_delete_removes_a_base_worker_whose_owner_uid_is_the_nil_guid() {
+    let mut h = write_harness();
+    let pal_id = seed_base_worker(&mut h);
+
+    let (status, value) = h.run(&format!(
+        "local target = '{pal_id}'
+         local owner, base
+         for p in save.pals() do
+           if p.instance_id == target then owner = tostring(p.owner_uid) base = tostring(p.base_id) break end
+         end
+         local deleted
+         for p in save.pals() do if p.instance_id == target then deleted = p.delete() break end end
+         local gone = true
+         for p in save.pals() do if p.instance_id == target then gone = false end end
+         return owner .. ',' .. base .. ',' .. tostring(deleted) .. ',' .. tostring(gone)"
+    ));
+    assert_eq!(status, RunStatus::Ok, "pal.delete() must not raise for a base worker");
+    let value = value.expect("the chunk returns a string");
+    let parts: Vec<&str> = value.split(',').collect();
+    assert_eq!(parts.get(2).copied(), Some("true"), "pal.delete() returned {value}");
+    assert_eq!(parts.get(3).copied(), Some("true"), "the base worker must be gone: {value}");
+}
+
+#[test]
+fn delete_where_removes_a_base_worker_whose_owner_uid_is_the_nil_guid() {
+    let mut h = write_harness();
+    let pal_id = seed_base_worker(&mut h);
+
+    let (status, value) = h.run(&format!(
+        "local target = '{pal_id}'
+         local removed, skipped = save.pals():delete_where(function(p) return p.instance_id == target end)
+         local gone = true
+         for p in save.pals() do if p.instance_id == target then gone = false end end
+         return tostring(removed) .. ',' .. tostring(skipped) .. ',' .. tostring(gone)"
+    ));
+    assert_eq!(status, RunStatus::Ok);
+    assert_eq!(value.as_deref(), Some("1,0,true"), "delete_where must remove the base worker, not skip it");
+    assert!(
+        h.log().is_empty(),
+        "a removable base worker must not be logged as an unresolvable owner: {:?}",
+        h.log()
+    );
+}
