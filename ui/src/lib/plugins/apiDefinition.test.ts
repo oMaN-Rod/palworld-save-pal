@@ -87,6 +87,12 @@ describe('typeName', () => {
 		);
 	});
 
+	it('renders a two-value return as its members joined by a comma', () => {
+		expect(typeName({ kind: 'multi', value: [{ kind: 'integer' }, { kind: 'integer' }] })).toBe(
+			'integer, integer'
+		);
+	});
+
 	it('renders a nested union without losing structure', () => {
 		expect(
 			typeName({

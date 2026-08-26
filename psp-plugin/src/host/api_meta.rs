@@ -31,6 +31,7 @@ fn lua_type(ty: &ApiType) -> String {
         ApiType::Union(members) => members.iter().map(lua_type).collect::<Vec<_>>().join("|"),
         ApiType::List(element) => format!("{}[]", lua_type(element)),
         ApiType::Map { key, value } => format!("table<{}, {}>", lua_type(key), lua_type(value)),
+        ApiType::Multi(members) => members.iter().map(lua_type).collect::<Vec<_>>().join(", "),
         ApiType::Any => "any".to_string(),
     }
 }
@@ -100,7 +101,14 @@ fn emit_global_function(out: &mut String, global: &ApiGlobal, function: &ApiFunc
     for param in function.params {
         out.push_str(&param_type_annotation(param));
     }
-    out.push_str(&format!("---@return {}\n", lua_type(&function.returns)));
+    match &function.returns {
+        ApiType::Multi(members) => {
+            for member in *members {
+                out.push_str(&format!("---@return {}\n", lua_type(member)));
+            }
+        }
+        single => out.push_str(&format!("---@return {}\n", lua_type(single))),
+    }
     let params = function.params.iter().map(|p| p.name).collect::<Vec<_>>().join(", ");
     out.push_str(&format!("function {}.{}({params}) end\n", global.name, function.name));
     out.push('\n');

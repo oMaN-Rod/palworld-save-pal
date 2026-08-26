@@ -136,6 +136,7 @@ fn allowed_lua_types(ty: &ApiType) -> Vec<&'static str> {
             vec!["nil", "boolean", "integer", "float", "string", "table", "function", "userdata", "thread"]
         }
         ApiType::Union(members) => members.iter().flat_map(allowed_lua_types).collect(),
+        ApiType::Multi(_) => panic!("Multi describes a function's returns, never a field or parameter"),
     }
 }
 
@@ -811,7 +812,7 @@ fn implausible_literal(ty: &ApiType) -> Option<&'static str> {
         ApiType::Union(members) => {
             return members.iter().find(|member| !matches!(member, ApiType::Nil)).and_then(implausible_literal)
         }
-        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Any => return None,
+        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Multi(_) | ApiType::Any => return None,
     })
 }
 
@@ -1106,7 +1107,7 @@ fn plausible_literal(ty: &ApiType) -> Option<&'static str> {
         ApiType::Union(members) => {
             return members.iter().find(|member| !matches!(member, ApiType::Nil)).and_then(plausible_literal)
         }
-        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Any => return None,
+        ApiType::Nil | ApiType::Handle(_) | ApiType::Iterator(_) | ApiType::Multi(_) | ApiType::Any => return None,
     })
 }
 

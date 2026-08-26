@@ -19,6 +19,7 @@ export type ApiType =
 	| { kind: 'handle'; value: string }
 	| { kind: 'iterator'; value: string }
 	| { kind: 'union'; value: ApiType[] }
+	| { kind: 'multi'; value: ApiType[] }
 	| { kind: 'list'; value: ApiType }
 	| { kind: 'map'; value: { key: ApiType; value: ApiType } };
 
@@ -72,6 +73,8 @@ export function typeName(type: ApiType): string {
 			return `fun(): ${type.value}|nil`;
 		case 'union':
 			return type.value.map(typeName).join('|');
+		case 'multi':
+			return type.value.map(typeName).join(', ');
 		case 'list':
 			return `${typeName(type.value)}[]`;
 		case 'map':

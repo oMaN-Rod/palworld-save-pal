@@ -1184,7 +1184,7 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
     ApiFunction {
         name: "clear_slots_where",
         params: &[ApiParam { name: "predicate", ty: ApiType::Any, optional: false }],
-        returns: ApiType::Integer,
+        returns: ApiType::Multi(&[ApiType::Integer, ApiType::Integer]),
         doc: "Calls predicate(slot) once for every item slot in the save with nothing yet \
               mutated, then clears every slot predicate returned truthy for. Returns the \
               number cleared, followed by the number examined. A non-zero clear count is a \
@@ -1206,7 +1206,7 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
     ApiFunction {
         name: "restore_pals",
         params: &[],
-        returns: ApiType::Integer,
+        returns: ApiType::Multi(&[ApiType::Integer, ApiType::Integer]),
         doc: "Heals every pal in the world, recomputing its HP from its level, talents, \
               condensing rank and awakening, restoring its sanity and fullness and clearing \
               any sickness, then gives an ownerless pal the owner of the container holding \
@@ -1265,7 +1265,7 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
     ApiFunction {
         name: "rebuild_guild_membership",
         params: &[],
-        returns: ApiType::Integer,
+        returns: ApiType::Multi(&[ApiType::Integer, ApiType::Integer]),
         doc: "Reassigns every pal to the guild that should own it, taken from its owning \
               player's guild or from the base whose worker container holds it. Returns how \
               many were reassigned, followed by how many could not be resolved. A pal that \

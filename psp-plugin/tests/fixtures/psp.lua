@@ -247,6 +247,7 @@ function save.map_objects() end
 ---Requires capability: save.write.
 ---@param predicate any
 ---@return integer
+---@return integer
 function save.clear_slots_where(predicate) end
 
 ---Clears the ownership lock on every private chest and item booth, returning how many were actually cleared. A non-zero result is a structural write and invalidates every live handle and iterator.
@@ -258,6 +259,7 @@ function save.unlock_private_chests() end
 ---Heals every pal in the world, recomputing its HP from its level, talents, condensing rank and awakening, restoring its sanity and fullness and clearing any sickness, then gives an ownerless pal the owner of the container holding it. Returns how many pals were restored, followed by how many owners were assigned. Every value is written in place, so live handles and iterators stay valid. Resolving those owners loads every player's save data, under a dry run too, so the call's cost and memory both scale with how many players the save has. Does not touch dimensional storage.
 ---
 ---Requires capability: save.write.
+---@return integer
 ---@return integer
 function save.restore_pals() end
 
@@ -290,6 +292,7 @@ function save.repair_item_links() end
 ---Reassigns every pal to the guild that should own it, taken from its owning player's guild or from the base whose worker container holds it. Returns how many were reassigned, followed by how many could not be resolved. A pal that resolves to neither is left exactly as it was, never orphaned.
 ---
 ---Requires capability: save.write.
+---@return integer
 ---@return integer
 function save.rebuild_guild_membership() end
 

@@ -20,6 +20,10 @@ pub enum ApiType {
     Union(&'static [ApiType]),
     List(&'static ApiType),
     Map { key: &'static ApiType, value: &'static ApiType },
+    /// Two or more values returned side by side, in the order Lua receives
+    /// them. Distinct from `Union`, which is one value of several possible
+    /// types.
+    Multi(&'static [ApiType]),
     Any,
 }
 
