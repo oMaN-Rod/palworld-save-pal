@@ -72,7 +72,7 @@ export function emptyGuildIds(rows: GuildRow[]): string[] {
 }
 
 // A guild-base worker pal carries this as its owner_uid, not an absent field.
-const NIL_OWNER_UID = '00000000-0000-0000-0000-000000000000';
+export const NIL_OWNER_UID = '00000000-0000-0000-0000-000000000000';
 
 export interface PalIdGroups {
 	byOwner: Map<string, string[]>;
