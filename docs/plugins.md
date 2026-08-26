@@ -90,7 +90,7 @@ end
 
 ```lua
 function save_last_run()
-  storage.set("last_run", ctx.now)
+  storage.set("last_run", tostring(ctx.now))
   log.info("Saved timestamp: " .. tostring(storage.get("last_run")))
 end
 ```
@@ -342,8 +342,8 @@ than refusing outright.
 ### Worked example: `pst.repair`'s view
 
 From the bundled `pst.repair` plugin
-(`psp-app/src/bundled/pst.repair/manifest.json`), whose two commands are
-described below:
+(`psp-app/src/bundled/pst.repair/manifest.json`), two of whose ten commands
+are described below:
 
 ```json
 "ui": [
@@ -527,7 +527,7 @@ Per-plugin key/value persistence across runs.
 - `gamedata.keys(catalog) -> string[]|nil` - the named catalog's top-level
   keys. `nil` if no catalog by that name exists. A catalog that exists but is
   not a JSON object answers an empty table rather than `nil` - five of the
-  loaded game data's 33 top-level catalogs (`camps`, `eggs_spawners`,
+  loaded game data's 34 top-level catalogs (`camps`, `eggs_spawners`,
   `kinship_peach`, `presets`, `skill_fruits`) are JSON arrays and hit this
   today. Unlike the catalog name - and unlike `is_valid_item` and
   `is_valid_pal`, which both fold case - a catalog's own keys are
@@ -654,8 +654,8 @@ entry fits**, so no fetch refuses today:
 
 The cap leaves the largest catalog room to grow by about 40% before it would
 begin refusing. It is not a budget for the whole data set: each call builds
-one table, and the 33 catalogs total roughly 390,000 nodes between them, so
-loading every catalog means 33 separate fetches rather than one.
+one table, and the 34 catalogs total roughly 390,000 nodes between them, so
+loading every catalog means 34 separate fetches rather than one.
 
 ### `save` - read half requires `save.read`
 
@@ -826,6 +826,24 @@ three entity iterators that support it:
   never given one. Structural on a non-zero result, because a restored slot
   reappears in its container's slot list and `container.slots()` walks that
   list by position.
+- `save.restore_pals() -> restored, owners_assigned` - heals and recomputes
+  HP for every non-player pal in the world's `CharacterSaveParameterMap`,
+  restoring sanity and fullness the same way, and gives any ownerless pal it
+  finds the owner of the player container holding it - `owners_assigned`
+  counts only that second part. Dimensional storage is not covered: a
+  player's dimensional storage lives in a separate `_dps.sav`, outside the
+  map this walks. Not structural - every entry is rewritten in place, so no
+  handle or iterator is invalidated - but it does drop the `pals` snapshot,
+  since that snapshot caches the `hp` and `owner_uid` this just rewrote.
+- `save.rebuild_guild_membership() -> reassigned, unresolved` - reassigns
+  every non-player pal to the guild that should own it: its owning player's
+  guild, or, failing that, the guild of the base whose worker container
+  holds it. A pal that resolves to neither is left exactly as it is and
+  counted under `unresolved` rather than orphaned - an ownerless pal is what
+  `delete_unreferenced_data`'s sweep removes next, so guessing wrong here
+  would turn a membership bug into a deletion. Not structural, for the same
+  reason `restore_pals` is not: a reassigned pal's `group_id` is overwritten
+  in place, and nothing this run caches is keyed on it.
 - `save.delete_dps_pals(player_uid, indexes) -> integer` - empties the given
   slot indexes of one player's dimensional storage in place: it nils the
   slot's instance id and resets its parameter bag to an unused slot's shape,
@@ -1503,6 +1521,8 @@ a `player:<uid>` raw target to find each player's inventory container id.
 | `modify_all_player_slots` | Resize All Player Inventories | Sets every player's main inventory to the given slot count (`42..=999`). Refuses per player rather than dropping slots that still hold items. |
 | `modify_all_guild_chest_slots` | Resize All Guild Chests | Sets every guild's chest container to the given slot count (`1..=1000`, default `50`). Refuses per container rather than dropping slots that still hold items. |
 | `unlock_all_private_chests` | Unlock All Private Chests | Clears the ownership lock on every private chest and item booth in the world. No params. |
+| `max_all_pals` | Max All Pals | Raises every world and dimensional-storage pal to the maximum level, soul ranks, condensing rank and friendship, and marks it awakened. `cheat_mode` (default `false`) uses `255` in place of the game's own caps for level, soul ranks and condensing rank. |
+| `unlock_viewing_cage_for_player` | Unlock Viewing Cage | Adds the Viewing Cage technology to one player's unlocked list, without granting any other technology. |
 
 ### Behavioural notes
 
@@ -1520,6 +1540,19 @@ a `player:<uid>` raw target to find each player's inventory container id.
   `is_private_lock` flag untouched.** It clears `private_lock_player_uid` on
   every lockable model, item booths included, but does not zero each booth's
   own `is_private_lock` flag.
+- **`max_all_pals` caps talents at 100 even under `cheat_mode`.** The host's
+  own pal writer refuses a talent outside `0..=100`, so `cheat_mode`'s `255`
+  applies to level, soul ranks and condensing rank only - a talent write is
+  clamped to 100 before it is ever attempted. It also does not raise work
+  suitability on a dimensional-storage pal: a world pal's `work_suitability`
+  is a flat rank per work type, which this command maxes out, but a
+  dimensional-storage pal's is stored as an additive list instead, a
+  different shape the command does not attempt to touch.
+- **`unlock_viewing_cage_for_player` writes a technology id it does not
+  validate.** The id is `DisplayCharacter`. `player.technologies` is one of
+  the fields nothing checks against the game's own lists (see above), so the
+  spelling has to match `technologies.json`'s own key exactly, with no
+  catalog lookup to catch a typo.
 
 ### Data unreachable through `raw`
 
@@ -1532,7 +1565,17 @@ read or write it through a host method bound onto a typed field or handle, the
 same way `save.unlock_private_chests()` and `guild.chest_container_id` do for
 the map-object lock and the guild chest id.
 
-This is not unique to those two - the guild-tail data behind
+`save.rebuild_guild_membership()` is the third and strongest example. Every
+character-map entry's `RawData` decodes to `PalCharacterData`, a typed
+struct with four fields; `raw`'s own struct-walking rule for it exposes
+exactly one of them, `object` (the `SaveParameter` property bag - which is
+why `RawData.SaveParameter.*` stays reachable everywhere else in this
+document). `group_id`, the sibling field this method reassigns, is not
+`object`, so no path expression reaches it - not opaque data with a route
+around it, but a field the walker has no rule to descend to at all, on any
+entry.
+
+This is not unique to these three - the guild-tail data behind
 `GroupSaveDataMap` (member online timestamps, base ownership, and more) is
 opaque to `raw` for the identical reason, and any future command reaching for
 it through `raw` will hit the same wall.
@@ -1540,12 +1583,32 @@ it through `raw` will hit the same wall.
 ## The `pst.repair` plugin
 
 Bundled at `psp-app/src/bundled/pst.repair/`, `pst.repair` ("Save Repair")
-ports PalworldSaveTools' Fix family onto the plugin API, and is the plugin
-the "Worked example" above quotes the view of. It has two commands:
-`scan_illegal_pals`, which lists pals whose level or condensing rank is
-above the legal maximum and changes nothing, and `fix_illegal_pals`, which
-clamps the level and condensing rank of a selected set of pals down to that
-maximum.
+ports PalworldSaveTools' Fix family onto the plugin API: ten commands that
+clamp an out-of-range value back into its legal range or restore a piece of
+state that has gone missing or drifted out of sync, as against removing dead
+entries (`pst.cleanup`) or resetting regenerable state (`pst.reset`). It is
+also the plugin the "Worked example" above quotes the view of. The manifest
+declares `save.read`, `save.write`, `players`, and `gamedata`: `players`
+because `trim_overfilled_inventories` reads a player's `common_container_id`
+and `essential_container_id`, and `scan_illegal_players`/
+`fix_illegal_players` read and write `status_point_list` and
+`ext_status_point_list` - all four are among the fields gated behind
+`players` (see the handle-fields table above) - and `gamedata` because
+`fix_invalid_pal_active_skills` checks a pal's skills against the active-skill
+and pal catalogs.
+
+| id | title | params | does |
+|---|---|---|---|
+| `scan_illegal_pals` | Scan For Illegal Pals | `owner` (a player id, default any), `max_level` (default `60`, `1..=255`), `max_rank` (default `4`, `0..=255`) | Lists pals whose level or condensing rank is above the legal maximum. Changes nothing. |
+| `fix_illegal_pals` | Fix Selected Pals | `ids` (multiselect), `max_level`, `max_rank` | Clamps the level and condensing rank of the selected pals down to the legal maximum. |
+| `repair_structures` | Repair Structures | none | Restores every built structure, chest and resource node in the world to full HP. |
+| `scan_illegal_players` | Scan For Illegal Player Stats | `max_points` (default `50`, `0..=9999`) | Lists players who have spent more points on a stat than the legal maximum. Changes nothing. |
+| `fix_illegal_players` | Fix Selected Player Stats | `ids` (multiselect), `max_points` | Clamps every over-cap stat of the selected players down to the legal maximum. |
+| `fix_all_pals` | Fix All Pals | none | Heals every pal in the world, recomputing its HP and restoring its sanity and fullness, and gives an ownerless pal the owner of the container holding it. Dimensional storage is not touched. |
+| `fix_invalid_pal_active_skills` | Fix Invalid Pal Skills | none | Removes equipped and learned skills that a pal's own species cannot learn. A pal whose species does not resolve, or that holds a skill the game data does not list at all, is left untouched and reported. |
+| `repair_items` | Repair Items | none | Restores the per-item record for every container slot whose record has gone missing, so the item survives instead of being dropped the next time its container is written. |
+| `trim_overfilled_inventories` | Fix Inventory Sizes | none | Resizes every player's main inventory to the size their key items entitle them to: 42 slots plus 3 per inventory expansion, up to four. A resize that would drop an occupied slot is refused and reported. |
+| `rebuild_all_guilds` | Rebuild Guild Membership | none | Reassigns every pal to the guild that should own it, taken from its owning player's guild or from the base whose worker container holds it. A pal that resolves to neither is reported and left untouched. |
 
 **This is the shape to reach for whenever a command's output is what the
 next command's input should be:** a scan, a pick, then an apply, with a
@@ -1557,6 +1620,8 @@ everything eligible gets fixed, whether the user wanted all of it touched or
 not. That shape is sometimes the right one, but it is worth avoiding
 whenever a selection is what the user actually wants, which is exactly the
 case a scan-then-fix pair exists to serve.
+
+### Behavioural notes
 
 **`scan_illegal_pals` checks level and condensing rank against two
 thresholds** - `max_level` and `max_rank`, both parameters with defaults of
@@ -1571,6 +1636,111 @@ thresholds** - `max_level` and `max_rank`, both parameters with defaults of
   out-of-range number, and there is no legal value to clamp it down to -
   clamping only makes sense for a value with a valid range, which "which
   species this is" does not have.
+
+- **`fix_all_pals` does not touch dimensional storage.** `save.restore_pals()`
+  walks only the world's `CharacterSaveParameterMap`; a player's dimensional
+  storage lives in a separate `_dps.sav` outside that map, so it is never
+  reached. This is not an oversight the way it would be for a command that
+  otherwise treats a DPS pal and a world pal identically: the pal writer
+  itself already treats a DPS pal's heal as a different operation, skipping
+  it outright (`apply_pal_dto`'s `if !is_dps { heal_save_parameter(...) }`).
+  A DPS pal getting no heal from this command is that same asymmetry, not
+  the same fix applied twice.
+- **`fix_invalid_pal_active_skills` skips a pal holding a skill the catalog
+  does not know, rather than dropping just that skill.** Of the 343 distinct
+  skill names the loaded pal catalog's own learnsets name, 25 have no
+  `active_skills.json` entry at all - every one of them a boss, gym or raid
+  signature move. A pal carrying one of those in its equipped or learned
+  list is left entirely untouched and counted under `skipped_uncatalogued`:
+  the write path checks a skill list entry by entry against the catalog, so
+  writing back a list that still contained an uncatalogued id would be
+  refused and fail the whole pal, not just that one entry.
+- **`repair_items` restores the link, not the condition.** The command wraps
+  `save.repair_item_links()` (see above): a repaired slot's item comes back
+  with the minted record's default condition, not its original durability,
+  remaining bullets or passive skills. Left unrepaired, such a slot is
+  invisible to `container.slots()` and to the game's own inventory reader
+  alike, and is deleted outright the next time its container is written -
+  this command exists to catch that slot before that happens.
+- **`rebuild_all_guilds` never orphans a pal it cannot place.** A pal that
+  resolves to neither its owner's guild nor the guild of the base whose
+  worker container holds it is reported and left exactly as it is, never
+  reassigned to no guild at all - an ownerless pal is exactly what
+  `delete_unreferenced_data` (`pst.cleanup`) sweeps away on its next run, so
+  guessing wrong here would turn an unresolved membership into a deletion.
+- **`trim_overfilled_inventories` counts a refusal rather than retrying it.**
+  `container.set_slot_count()` refuses outright when an occupied slot would
+  fall outside the requested capacity, and that refusal is surfaced under
+  `refused` in the result - it is not retried at a smaller size, and the
+  container is left at whatever size it already had.
+
+### Ordering reads and writes in a bulk pal loop
+
+A command that writes fields on many pals in a loop, and also reads a field
+it has not yet written on one of them, can turn into the slowest thing it
+does without ever looking like a bug: it runs, it finishes, and it is just
+slow - in the way "the sandbox is slow" reads, not "this loop is quadratic".
+
+The mechanism is in `ctx.pals`, the pal-summary snapshot `save.pals()` builds
+once and every pal handle's field read consults. Writing *any* field on *any*
+pal drops that snapshot outright - deliberately, so a later read can never
+serve a stale value out of it. A field read then takes one of two paths: if
+that exact field was already written on that exact pal this run, it is
+served straight from the cached, up-to-date DTO; otherwise the snapshot has
+to answer it, and if the snapshot is gone, answering means rebuilding it -
+`pal_summaries` over the entire `CharacterSaveParameterMap`, from scratch.
+So this:
+
+```lua
+for pal in save.pals() do
+  pal.level = 60             -- drops ctx.pals
+  local ws = pal.work_suitability  -- "work_suitability" was not the field
+                                    -- just written, so this rebuilds ctx.pals
+                                    -- right here, before the loop even
+                                    -- reaches the next pal
+end
+```
+
+rebuilds the whole snapshot on this very line, for this very pal - not only
+when the loop later moves on to find the next id to hand out (which also
+consults `ctx.pals`, and would rebuild it again if nothing had already).
+Every pal after the first can trigger its own full rebuild, which is
+quadratic in the pal count. This is not hypothetical: the natural
+single-loop form of `max_all_pals` (`pst.tools`) hit exactly this and
+exceeded the sandbox's wall clock on a 2,150-pal fixture.
+
+Moving only the *writes* into a second pass is not by itself enough: a
+second pass that still reads each pal's other fields there for the first
+time pays the identical cost, because the snapshot it falls back to is the
+same shared one, dropped by the very writes that same pass just made to an
+earlier pal. The reads have to move, not just the writes.
+
+**The rule:** in a loop that writes pal fields, read every field any pal
+will need - for every pal - before the *first* write to *any* pal in the
+loop, because the snapshot the fallback path rebuilds from is shared across
+every pal in the run, not scoped to one. The reliable shape is two full
+passes: a read-only pass over every pal first, then a write-only pass over
+the results, working from values the first pass already collected rather
+than reading anything fresh. `max_all_pals`'s bundled source
+(`psp-app/src/bundled/pst.tools/main.lua`) is the worked example - it
+collects `pal.work_suitability` for every pal in a read-only first pass,
+*then* writes every field in a second pass over the results, so no read of
+an unwritten field ever happens after the first write.
+
+### Dimensional storage coverage
+
+| Command | Dimensional storage |
+|---|---|
+| `scan_illegal_pals` | Not touched - `save.pals()` covers the world only, so a pal held in dimensional storage is invisible to the scan. |
+| `fix_illegal_pals` | Not touched, for the same reason. |
+| `repair_structures` | Not applicable. |
+| `scan_illegal_players` | Not applicable - dimensional storage holds pals, not player stat points. |
+| `fix_illegal_players` | Not applicable, for the same reason. |
+| `fix_all_pals` | Not touched - `save.restore_pals()` walks only the world's `CharacterSaveParameterMap`. |
+| `fix_invalid_pal_active_skills` | Not touched - only `save.pals()` is walked. |
+| `repair_items` | Not applicable - dimensional storage holds pals, not item container slots. |
+| `trim_overfilled_inventories` | Not applicable - dimensional storage holds pals, not inventory items. |
+| `rebuild_all_guilds` | Not touched - `save.rebuild_guild_membership()` walks the same `CharacterSaveParameterMap` `restore_pals` does. |
 
 ## The plugin editor
 

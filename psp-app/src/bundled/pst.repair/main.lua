@@ -55,23 +55,37 @@ function fix_illegal_pals()
     end
   end
 
-  local pals, clamps, found = 0, 0, 0
+  -- Read-only first pass: `level` and `rank` are read here, before any pal
+  -- is written. A write drops the `save.pals()` snapshot a not-yet-written
+  -- field's read falls back to, so checking `pal.level`/`pal.rank` inside
+  -- the write pass below would force a full snapshot rebuild on the very
+  -- next pal's first read -- quadratic once the selection is large. Reading
+  -- both fields here instead keeps every read in this pass on the one
+  -- snapshot it builds once.
+  local found = 0
+  local writable = {}
   for pal in save.pals() do
     if wanted[pal.instance_id] then
       found = found + 1
-      local changed = 0
-      if pal.level ~= nil and pal.level > max_level then
-        pal.level = max_level
-        changed = changed + 1
-      end
-      if pal.rank ~= nil and pal.rank > max_rank then
-        pal.rank = max_rank
-        changed = changed + 1
-      end
-      if changed > 0 then
-        pals = pals + 1
-        clamps = clamps + changed
-      end
+      writable[#writable + 1] = { pal = pal, level = pal.level, rank = pal.rank }
+    end
+  end
+
+  local pals, clamps = 0, 0
+  for _, entry in ipairs(writable) do
+    local pal = entry.pal
+    local changed = 0
+    if entry.level ~= nil and entry.level > max_level then
+      pal.level = max_level
+      changed = changed + 1
+    end
+    if entry.rank ~= nil and entry.rank > max_rank then
+      pal.rank = max_rank
+      changed = changed + 1
+    end
+    if changed > 0 then
+      pals = pals + 1
+      clamps = clamps + changed
     end
   end
 

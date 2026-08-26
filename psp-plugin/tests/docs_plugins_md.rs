@@ -7,6 +7,7 @@ mod support;
 use std::collections::BTreeSet;
 use std::path::PathBuf;
 
+use psp_plugin::context::LogLevel;
 use psp_plugin::host::fields::player::read_requires_players;
 use psp_plugin::host::MAX_TABLE_NODES;
 use psp_plugin::manifest::Capability;
@@ -70,11 +71,22 @@ fn first_line(block: &LuaBlock) -> &str {
 }
 
 /// The blocks this file executes, each keyed by the start of its first line.
-const EXECUTED: &[&str] =
-    &["pal.level = 60", "local uids = {}", "function delete_empty_guilds()"];
+const EXECUTED: &[&str] = &[
+    "function hello()",
+    "function list_players()",
+    "function hello_with_args()",
+    "function save_last_run()",
+    "function list_catalogs()",
+    "function list_pal_ids()",
+    "function show_first_pal()",
+    "local function dump(value, path, depth)",
+    "pal.level = 60",
+    "local uids = {}",
+    "function delete_empty_guilds()",
+];
 
 /// The blocks this file does not execute, each with the reason. Running a
-/// sample only proves something if the sample can fail; three of them cannot,
+/// sample only proves something if the sample can fail; four of them cannot,
 /// and forcing them to run would buy coverage that asserts nothing.
 const SKIPPED: &[(&str, &str)] = &[
     (
@@ -94,6 +106,12 @@ const SKIPPED: &[(&str, &str)] = &[
          has removed something; `SaveData.SomeArray` is absent from the corpus, so the run \
          would end without reaching the failure the prose describes",
     ),
+    (
+        "for pal in save.pals() do",
+        "a fragment illustrating the write-then-read shape that invalidates the pal snapshot; \
+         `pal` names nothing standalone, and running it would only prove a comment true, not \
+         the quadratic behaviour the prose describes",
+    ),
 ];
 
 /// The one block whose first line starts with `key`, panicking if the docs no
@@ -107,6 +125,81 @@ fn block(key: &str) -> String {
         .unwrap_or_else(|| panic!("docs/plugins.md has no lua block whose first line starts with {key:?}"));
     assert!(matching.next().is_none(), "more than one lua block starts with {key:?}");
     found.source
+}
+
+/// The quick-start minimal plugin. It needs nothing but `log`, so it runs
+/// standalone rather than sitting in `SKIPPED`.
+#[test]
+fn the_quick_start_hello_sample_logs_its_message() {
+    let caps = &[Capability::Log];
+    let mut harness = support::harness(caps);
+    let sample = block("function hello()");
+
+    let (status, _) = harness.run(&format!("{sample}\nhello()"));
+    assert_eq!(status, RunStatus::Ok, "the quick-start sample must run without error");
+
+    let log = harness.log();
+    assert_eq!(log.len(), 1, "hello() must log exactly one line, got {log:?}");
+    assert_eq!(log[0].level, LogLevel::Info);
+    assert_eq!(log[0].message, "Hello from the plugin");
+}
+
+/// The "Common patterns" trio under Quick start. None needs a fixture beyond
+/// its own declared capability, so all three run for real rather than sitting
+/// in `SKIPPED`.
+#[test]
+fn the_common_patterns_samples_run_without_error() {
+    let caps = &[Capability::SaveRead, Capability::Storage, Capability::Log];
+    let mut harness = support::harness(caps);
+    let players = harness.session().player_summary_order.len();
+
+    let list_players = block("function list_players()");
+    let hello_with_args = block("function hello_with_args()");
+    let save_last_run = block("function save_last_run()");
+
+    let (status, _) = harness.run(&format!(
+        "{list_players}\n{hello_with_args}\n{save_last_run}\n\
+         list_players()\nhello_with_args()\nsave_last_run()"
+    ));
+    assert_eq!(status, RunStatus::Ok, "the common-patterns samples must all run without error");
+
+    let log = harness.log();
+    assert_eq!(
+        log.iter().filter(|line| line.level == LogLevel::Info && line.message.contains("uid:")).count(),
+        players,
+        "list_players() must log one line per player in the corpus"
+    );
+    assert!(
+        harness.storage_writes().iter().any(|(key, _)| key == "last_run"),
+        "save_last_run() must write the last_run key"
+    );
+}
+
+/// The `gamedata` walkthrough examples. Each is runnable on its own against
+/// the checked-in game data, so each executes rather than sitting in
+/// `SKIPPED`.
+#[test]
+fn the_gamedata_examples_run_without_error() {
+    let caps = &[Capability::GameData, Capability::Log];
+    let mut harness = support::harness(caps);
+
+    let list_catalogs = block("function list_catalogs()");
+    let list_pal_ids = block("function list_pal_ids()");
+    let show_first_pal = block("function show_first_pal()");
+    let dump = block("local function dump(value, path, depth)");
+
+    let (status, _) = harness.run(&format!(
+        "{list_catalogs}\n{list_pal_ids}\n{show_first_pal}\n{dump}\n\
+         list_catalogs()\nlist_pal_ids()\nshow_first_pal()\ninspect_first_item()"
+    ));
+    assert_eq!(status, RunStatus::Ok, "the gamedata examples must all run without error");
+
+    let log = harness.log();
+    assert!(
+        log.iter().any(|line| line.level == LogLevel::Info && line.message.starts_with("Game data version: ")),
+        "list_catalogs() must log the game data version"
+    );
+    assert!(!log.iter().any(|line| line.level == LogLevel::Warn), "the checked-in data must satisfy every lookup");
 }
 
 #[test]
