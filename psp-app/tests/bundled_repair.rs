@@ -563,7 +563,14 @@ fn fix_invalid_pal_active_skills_never_leaves_a_pal_with_an_unlearnable_skill() 
     assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
     let counts = outcome.result.expect("a result")["counts"].clone();
 
-    assert!(counts["examined"].as_i64().expect("examined") > 0);
+    let examined = counts["examined"].as_i64().expect("examined");
+    let skipped_unknown_species = counts["skipped_unknown_species"].as_i64().expect("skipped_unknown_species");
+    assert!(examined > 0);
+    assert!(
+        skipped_unknown_species * 10 < examined,
+        "species resolution must succeed for nearly every pal in the fixture; \
+         got {skipped_unknown_species} unresolved of {examined} examined"
+    );
 
     // Re-running must be a no-op: the first run either fixed a pal or
     // deliberately skipped it, and neither is a state a second run improves.
