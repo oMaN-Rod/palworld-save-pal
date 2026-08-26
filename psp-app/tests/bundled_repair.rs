@@ -147,6 +147,7 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
     assert_eq!(
         ids,
         vec![
+            "fix_all_pals",
             "fix_illegal_pals",
             "fix_illegal_players",
             "fix_invalid_pal_active_skills",
@@ -605,4 +606,180 @@ fn fix_invalid_pal_active_skills_skips_rather_than_fails_on_an_uncatalogued_skil
         counts["skipped_unknown_species"].is_number(),
         "a pal whose species does not resolve must be counted separately"
     );
+}
+
+/// Sickness markers on NON-PLAYER character entries only. `restore_pals` skips
+/// player entries by design, so a world-wide count would assert a behaviour the
+/// command never promised.
+fn non_player_sickness_markers(session: &SaveSession) -> usize {
+    const MARKERS: [&str; 4] = ["WorkerSick", "PhysicalHealth", "PalReviveTimer", "HungerType"];
+    psp_core::domain::world::character_map(&session.level)
+        .expect("the character map resolves")
+        .iter()
+        .filter(|entry| !psp_core::domain::world::entry_is_player(entry))
+        .filter_map(psp_core::domain::world::entry_save_parameter)
+        .map(|params| {
+            params
+                .into_iter()
+                .filter(|(key, _)| MARKERS.contains(&key.1.as_str()))
+                .count()
+        })
+        .sum()
+}
+
+/// Marks the first `count` pals sick and starving through the raw property bag,
+/// so the heal assertions cannot pass on a fixture that was already healthy.
+fn seed_sick_pals(session: &mut SaveSession, count: usize) -> usize {
+    let mut seeded = 0;
+    for entry in psp_core::domain::world::character_map_mut(&mut session.level)
+        .expect("the character map resolves")
+        .iter_mut()
+    {
+        if seeded == count {
+            break;
+        }
+        if psp_core::domain::world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(params) = psp_core::domain::world::entry_save_parameter_mut(entry) else {
+            continue;
+        };
+        params.insert("WorkerSick", psp_core::props::bool_property(true));
+        params.insert("SanityValue", psp_core::props::float_property(3.0));
+        seeded += 1;
+    }
+    seeded
+}
+
+/// Orphans one pal that a player container really holds, and returns it with the
+/// owner it had. Picked through `PlayerDto`'s own pal box and party rather than
+/// guessed, so the pal is one the command can actually resolve an owner for.
+fn orphan_a_contained_pal(h: &mut Harness) -> (Uuid, Uuid) {
+    let player_id = *h.session.player_summaries.keys().next().expect("a player");
+    let details =
+        player::get_player_details(&mut h.session, &h.game_data, player_id, &null_progress())
+            .expect("player read")
+            .expect("the player exists");
+    let pal_id = details
+        .pal_box
+        .iter()
+        .chain(details.party.iter())
+        .flat_map(|container| container.slots.iter())
+        .find_map(|slot| slot.pal_id)
+        .expect("the first fixture player must hold a pal in its box or party");
+
+    let entries = psp_core::domain::world::character_map_mut(&mut h.session.level)
+        .expect("the character map resolves");
+    let entry = entries
+        .iter_mut()
+        .find(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(pal_id))
+        .expect("the pal the container names must be in the character map");
+    let params = psp_core::domain::world::entry_save_parameter_mut(entry).expect("save parameter");
+    let previous = params
+        .into_iter()
+        .find(|(key, _)| key.1.as_str() == "OwnerPlayerUId")
+        .and_then(|(_, value)| psp_core::props::as_uuid(value))
+        .expect("a pal in a player container has an owner to begin with");
+    params
+        .0
+        .shift_remove(&psp_core::ue::PropertyKey::from("OwnerPlayerUId"));
+    (pal_id, previous)
+}
+
+fn owner_of(session: &SaveSession, pal_id: Uuid) -> Option<Uuid> {
+    psp_core::domain::world::character_map(&session.level)
+        .expect("the character map resolves")
+        .iter()
+        .find(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(pal_id))
+        .and_then(psp_core::domain::world::entry_save_parameter)
+        .and_then(|params| {
+            params
+                .into_iter()
+                .find(|(key, _)| key.1.as_str() == "OwnerPlayerUId")
+                .and_then(|(_, value)| psp_core::props::as_uuid(value))
+        })
+}
+
+#[test]
+fn fix_all_pals_predicts_under_a_dry_run_exactly_what_it_does_for_real() {
+    let mut h = Harness::new();
+    assert!(seed_sick_pals(&mut h.session, 5) > 0, "the fixture must have pals to break");
+    orphan_a_contained_pal(&mut h);
+
+    let before = h.session.level_sav_bytes().expect("level_sav_bytes before the dry run");
+    let dry = h.run("fix_all_pals", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    let predicted = dry.result.expect("a result")["counts"].clone();
+    assert_eq!(
+        before,
+        h.session.level_sav_bytes().expect("level_sav_bytes after the dry run"),
+        "a dry run must not change level_sav_bytes()"
+    );
+
+    let real = h.run("fix_all_pals", serde_json::json!({}), false);
+    assert_eq!(real.status, RunStatus::Ok, "{:?}", real.status);
+    let actual = real.result.expect("a result")["counts"].clone();
+
+    assert_eq!(predicted["restored"], actual["restored"]);
+    assert_eq!(predicted["owners_assigned"], actual["owners_assigned"]);
+    assert!(
+        actual["restored"].as_i64().unwrap_or(0) > 0,
+        "the fixture must have restored something, or the parity above is vacuous"
+    );
+    assert!(
+        actual["owners_assigned"].as_i64().unwrap_or(0) > 0,
+        "the pal orphaned above must have been given an owner, or the parity above \
+         proves nothing about the owner half"
+    );
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn fix_all_pals_leaves_every_pal_at_full_sanity_and_free_of_sickness() {
+    let mut h = Harness::new();
+    assert!(seed_sick_pals(&mut h.session, 5) > 0, "the fixture must have pals to break");
+    assert!(
+        non_player_sickness_markers(&h.session) > 0,
+        "the seed must have actually made a pal sick"
+    );
+
+    let outcome = h.run("fix_all_pals", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert!(counts["restored"].as_i64().unwrap_or(0) > 0, "counts {counts:?}");
+
+    assert_eq!(
+        non_player_sickness_markers(&h.session),
+        0,
+        "no sickness marker may survive a fix_all_pals run"
+    );
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn fix_all_pals_gives_an_orphaned_pal_back_the_owner_of_its_container() {
+    let mut h = Harness::new();
+
+    let baseline = h.run("fix_all_pals", serde_json::json!({}), true);
+    assert_eq!(baseline.status, RunStatus::Ok, "{:?}", baseline.status);
+    let already_ownerless = baseline.result.expect("a result")["counts"]["owners_assigned"]
+        .as_i64()
+        .expect("owners_assigned");
+
+    let (pal_id, previous_owner) = orphan_a_contained_pal(&mut h);
+    assert_eq!(owner_of(&h.session, pal_id), None, "the seed must have cleared the owner");
+
+    let outcome = h.run("fix_all_pals", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        outcome.result.expect("a result")["counts"]["owners_assigned"].as_i64(),
+        Some(already_ownerless + 1),
+        "exactly the pal orphaned here is the one extra owner assigned"
+    );
+    assert_eq!(
+        owner_of(&h.session, pal_id),
+        Some(previous_owner),
+        "the owner must come back from the container that holds the pal"
+    );
+    assert_round_trips(&h.session);
 }

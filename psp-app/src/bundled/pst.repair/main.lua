@@ -107,6 +107,17 @@ function repair_structures()
   }
 end
 
+function fix_all_pals()
+  local restored, owners = save.restore_pals()
+  local verb = ctx.dry_run and "Would restore" or "Restored"
+  return {
+    summary = string.format(
+      "%s %d pal(s) and reassigned %d owner(s)", verb, restored, owners
+    ),
+    counts = { restored = restored, owners_assigned = owners },
+  }
+end
+
 local function over_cap(points, max_points)
   local problems, worst = {}, 0
   if points ~= nil then

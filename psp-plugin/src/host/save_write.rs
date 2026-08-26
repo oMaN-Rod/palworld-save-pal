@@ -610,6 +610,33 @@ fn unlock_private_chests_body(state: *mut lua_State) -> Result<c_int, HostError>
 
 host_fn!(push_unlock_private_chests, unlock_private_chests_body);
 
+fn restore_pals_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.restore_pals")?;
+        let (restored, owners) = with_context(state, |ctx| {
+            if ctx.dry_run {
+                let predicted = pal::count_restorable(ctx.session).map_err(core_error)?;
+                ctx.bump("save.restore_pals", predicted.0 as i64);
+                return Ok(predicted);
+            }
+            super::dto_cache::flush(ctx)?;
+            let counts = pal::restore_all(ctx.session, ctx.game_data).map_err(core_error)?;
+            if counts.0 > 0 || counts.1 > 0 {
+                // Every entry is written in place, none added or removed, so live
+                // handles and the entry index stay valid -- but the `pals` snapshot
+                // caches the hp and owner this just rewrote and has to be dropped.
+                ctx.note_pal_field_write();
+            }
+            Ok(counts)
+        })?;
+        lua_pushinteger(state, restored as i64);
+        lua_pushinteger(state, owners as i64);
+        Ok(2)
+    }
+}
+
+host_fn!(push_restore_pals, restore_pals_body);
+
 /// Prunes a dry run's own `map_objects` cache to the ids `delete_where` just
 /// resolved as killed, without touching `ctx.session` -- the overlay a later
 /// `save.remove_orphaned_works()` call in the same dry run reads its surviving
@@ -1120,6 +1147,18 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
         capability: Some(Capability::SaveWrite),
     },
     ApiFunction {
+        name: "restore_pals",
+        params: &[],
+        returns: ApiType::Integer,
+        doc: "Heals every pal in the world, recomputing its HP from its level, talents, \
+              condensing rank and awakening, restoring its sanity and fullness and clearing \
+              any sickness, then gives an ownerless pal the owner of the container holding \
+              it. Returns how many pals were restored, followed by how many owners were \
+              assigned. Every value is written in place, so live handles and iterators stay \
+              valid. Does not touch dimensional storage.",
+        capability: Some(Capability::SaveWrite),
+    },
+    ApiFunction {
         name: "remove_orphaned_works",
         params: &[],
         returns: ApiType::Integer,
@@ -1157,6 +1196,7 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
 const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
     push_clear_slots_where,
     push_unlock_private_chests,
+    push_restore_pals,
     push_remove_orphaned_works,
     push_delete_dps_pals,
     push_remove_orphaned_dynamic_items,

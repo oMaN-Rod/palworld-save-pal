@@ -1727,6 +1727,145 @@ pub fn heal_all_base_pals(
     heal_pals(session, game_data, &base_pal_ids)
 }
 
+/// Every player container id in the save mapped to its owning player. A player whose
+/// own `.sav` cannot be read contributes nothing rather than aborting the restore:
+/// a save can hold player entries whose file was never opened, and failing wholesale
+/// over one of them is the opposite of what a repair is for.
+fn player_container_owners(
+    session: &mut SaveSession,
+) -> std::collections::HashMap<uuid::Uuid, uuid::Uuid> {
+    let player_ids: Vec<uuid::Uuid> = session.player_summaries.keys().copied().collect();
+    let mut owners = std::collections::HashMap::new();
+    for player_id in player_ids {
+        if crate::transfer::ensure_player_gvas_loaded(session, player_id).is_err() {
+            continue;
+        }
+        let Ok((pal_box_id, party_id)) = player_container_ids(session, player_id) else {
+            continue;
+        };
+        owners.insert(pal_box_id, player_id);
+        owners.insert(party_id, player_id);
+    }
+    owners
+}
+
+/// The pal's container, under either spelling of the slot key. Base-worker membership
+/// deliberately keys off `SlotId` alone; owner assignment is the case that wants both,
+/// since a single-spelling read would find no container for every pal written the
+/// other way and silently assign it no owner.
+fn slot_container_id(save_parameter: &Properties) -> Option<uuid::Uuid> {
+    param(save_parameter, "SlotID")
+        .or_else(|| param(save_parameter, "SlotId"))
+        .and_then(props::struct_props)
+        .and_then(|slot| slot.0.get(&PropertyKey::from("ContainerId")))
+        .and_then(props::struct_props)
+        .and_then(|container| container.0.get(&PropertyKey::from("ID")))
+        .and_then(props::as_uuid)
+}
+
+/// Absent or nil is ownerless. A key that is present but not readable as a guid is
+/// NOT judged ownerless: nothing established what it holds, so nothing may overwrite it.
+fn is_ownerless(save_parameter: &Properties) -> bool {
+    match param(save_parameter, "OwnerPlayerUId") {
+        None => true,
+        Some(property) => match props::as_uuid(property) {
+            Some(uid) => uid == props::EMPTY_UUID,
+            None => false,
+        },
+    }
+}
+
+/// The read half `restore_all` and `count_restorable` share, so a dry run can never
+/// predict a different pair from the one the real run produces.
+fn restore_targets(
+    session: &mut SaveSession,
+) -> Result<(Vec<uuid::Uuid>, std::collections::HashMap<uuid::Uuid, uuid::Uuid>), CoreError> {
+    let container_owner = player_container_owners(session);
+    let mut restorable = Vec::new();
+    let mut owner_for = std::collections::HashMap::new();
+    for entry in world::character_map(&session.level)? {
+        if world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(instance_id) = world::entry_instance_id(entry) else {
+            continue;
+        };
+        let Some(save_parameter) = world::entry_save_parameter(entry) else {
+            continue;
+        };
+        restorable.push(instance_id);
+        if !is_ownerless(save_parameter) {
+            continue;
+        }
+        let Some(container_id) = slot_container_id(save_parameter) else {
+            continue;
+        };
+        if let Some(owner_uid) = container_owner.get(&container_id) {
+            owner_for.insert(instance_id, *owner_uid);
+        }
+    }
+    Ok((restorable, owner_for))
+}
+
+/// What `restore_all` would return, without writing. See the note on `restore_targets`.
+pub fn count_restorable(session: &mut SaveSession) -> Result<(usize, usize), CoreError> {
+    let (restorable, owner_for) = restore_targets(session)?;
+    Ok((restorable.len(), owner_for.len()))
+}
+
+/// Heals and recomputes HP for every non-player pal in `CharacterSaveParameterMap`, and
+/// gives an ownerless pal the owner of the player container holding it. Returns
+/// (restored, owners_assigned). Dimensional storage is not covered.
+pub fn restore_all(
+    session: &mut SaveSession,
+    game_data: &GameData,
+) -> Result<(usize, usize), CoreError> {
+    let (restorable, owner_for) = restore_targets(session)?;
+    heal_pals(session, game_data, &restorable)?;
+
+    let mut owners_assigned = 0usize;
+    let entries = world::character_map_mut(&mut session.level)?;
+    for entry in entries.iter_mut() {
+        if world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(instance_id) = world::entry_instance_id(entry) else {
+            continue;
+        };
+        let owner_uid = owner_for.get(&instance_id).copied();
+        let Some(save_parameter) = world::entry_save_parameter_mut(entry) else {
+            continue;
+        };
+        // `read_save_parameter_dto`, not `pal_dto_from_entry`: the two differ only in
+        // `group_id`, which `max_hp_for` never reads, and this one cannot fail, so the
+        // count returned here is exactly the one the read pass above predicted.
+        let dto = read_save_parameter_dto(save_parameter, instance_id, false, game_data);
+        let current_is_lucky = param(save_parameter, "IsRarePal")
+            .and_then(props::as_bool)
+            .unwrap_or(false);
+        let current_is_awakened = param(save_parameter, "bIsAwakening")
+            .and_then(props::as_bool)
+            .unwrap_or(false);
+        let boosted = dto.character_id.to_uppercase().starts_with("BOSS_") || current_is_lucky;
+        let max_hp = max_hp_for(&dto, boosted, current_is_awakened, game_data);
+        save_parameter.insert("Hp", props::fixed_point64_property(max_hp));
+        save_parameter.0.shift_remove(&PropertyKey::from("HP"));
+
+        if let Some(owner_uid) = owner_uid {
+            save_parameter.insert("OwnerPlayerUId", props::guid_property(owner_uid));
+            owners_assigned += 1;
+        }
+    }
+
+    // Entries are written in place, so every position-keyed cache stays correct. This
+    // one is not: a newly owned pal raises that player's count, and a stale entry would
+    // make `player.pal_count` read low for the rest of the session.
+    if owners_assigned > 0 {
+        session.caches.pal_owner_counts = None;
+    }
+    Ok((restorable.len(), owners_assigned))
+}
+
 // DPS ops read and write `SaveParameterArray` in the player's own `_dps.sav`, never
 // `Level.sav`, so none of them invalidate `session.caches`: nothing there indexes DPS data.
 
@@ -2902,5 +3041,337 @@ mod tests {
             Some(true),
             "None leaves the save's existing flag alone"
         );
+    }
+
+    fn empty_save() -> crate::ue::Save {
+        crate::ue::Save {
+            header: crate::ue::Header {
+                magic: 0,
+                save_game_version: 0,
+                package_version: crate::ue::PackageVersion { ue4: 0, ue5: None },
+                engine_version_major: 0,
+                engine_version_minor: 0,
+                engine_version_patch: 0,
+                engine_version_build: 0,
+                engine_version: String::new(),
+                custom_version: None,
+            },
+            schemas: crate::ue::PropertySchemas::default(),
+            root: crate::ue::Root {
+                save_game_type: String::new(),
+                properties: Properties::default(),
+            },
+            extra: Vec::new(),
+        }
+    }
+
+    fn slot_property(container_id: uuid::Uuid, index: i32) -> Property {
+        let mut container = Properties::default();
+        container.insert("ID", props::guid_property(container_id));
+        let mut slot = Properties::default();
+        slot.insert(
+            "ContainerId",
+            Property::Struct(StructValue::Struct(container)),
+        );
+        slot.insert("SlotIndex", props::int_property(index));
+        Property::Struct(StructValue::Struct(slot))
+    }
+
+    fn player_sav_with_containers(pal_box: uuid::Uuid, party: uuid::Uuid) -> crate::ue::Save {
+        let make = |id: uuid::Uuid| {
+            let mut inner = Properties::default();
+            inner.insert("ID", props::guid_property(id));
+            Property::Struct(StructValue::Struct(inner))
+        };
+        let mut save_data = Properties::default();
+        save_data.insert("PalStorageContainerId", make(pal_box));
+        save_data.insert("OtomoCharacterContainerId", make(party));
+        let mut sav = empty_save();
+        sav.root.properties.insert(
+            "SaveData",
+            Property::Struct(StructValue::Struct(save_data)),
+        );
+        sav
+    }
+
+    const RESTORE_PLAYER: &str = "11111111-1111-1111-1111-111111111111";
+    const RESTORE_PAL_BOX: &str = "22222222-2222-2222-2222-222222222222";
+    const RESTORE_PARTY: &str = "33333333-3333-3333-3333-333333333333";
+    const RESTORE_FIRST_PAL: &str = "44444444-4444-4444-4444-444444444444";
+    const RESTORE_SECOND_PAL: &str = "55555555-5555-5555-5555-555555555555";
+
+    /// One player, one pal in its pal box and one in its party, both owned.
+    fn session_with_owned_pals() -> (SaveSession, GameData) {
+        let player_id: uuid::Uuid = RESTORE_PLAYER.parse().expect("player uid");
+        let pal_box: uuid::Uuid = RESTORE_PAL_BOX.parse().expect("pal box id");
+        let party: uuid::Uuid = RESTORE_PARTY.parse().expect("party id");
+
+        let mut player_parameter = Properties::default();
+        player_parameter.insert("IsPlayer", props::bool_property(true));
+        player_parameter.insert("CharacterID", props::name_property("Player"));
+        player_parameter.insert("PhysicalHealth", props::enum_property("EPalStatusHP::Bad"));
+
+        let mut entries = vec![character_entry(
+            RESTORE_PLAYER,
+            player_parameter,
+            fguid("00000000-0000-0000-0000-000000000000"),
+        )];
+
+        for (instance_id, container_id) in
+            [(RESTORE_FIRST_PAL, pal_box), (RESTORE_SECOND_PAL, party)]
+        {
+            let mut save_parameter = Properties::default();
+            save_parameter.insert("CharacterID", props::name_property("SheepBall"));
+            save_parameter.insert("Gender", props::enum_property("EPalGenderType::Female"));
+            save_parameter.insert("Level", props::byte_property(10));
+            save_parameter.insert("Talent_HP", props::byte_property(50));
+            save_parameter.insert("OwnerPlayerUId", props::guid_property(player_id));
+            save_parameter.insert("Hp", props::fixed_point64_property(1));
+            save_parameter.insert("SlotID", slot_property(container_id, 0));
+            entries.push(character_entry(
+                instance_id,
+                save_parameter,
+                fguid("00000000-0000-0000-0000-000000000000"),
+            ));
+        }
+
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("CharacterSaveParameterMap", Property::Map(entries));
+        let mut level = empty_save();
+        level.root.properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+
+        let mut session = SaveSession::new_for_tests(crate::session::SaveKind::InMemory, level);
+        session.loaded_players.insert(
+            player_id,
+            crate::session::LoadedPlayer::new(
+                player_id,
+                player_sav_with_containers(pal_box, party),
+                None,
+            ),
+        );
+        session.player_summaries.insert(
+            player_id,
+            crate::dto::summary::PlayerSummary {
+                uid: player_id,
+                nickname: "Tester".to_string(),
+                level: Some(1),
+                guild_id: None,
+                pal_count: 2,
+                last_online_time: None,
+                loaded: true,
+            },
+        );
+        (session, game_data())
+    }
+
+    fn pal_parameters(session: &SaveSession, instance_id: uuid::Uuid) -> &Properties {
+        world::character_map(&session.level)
+            .expect("character map")
+            .iter()
+            .find(|entry| world::entry_instance_id(entry) == Some(instance_id))
+            .and_then(world::entry_save_parameter)
+            .expect("the entry is still there")
+    }
+
+    fn pal_parameters_mut(
+        session: &mut SaveSession,
+        instance_id: uuid::Uuid,
+    ) -> &mut Properties {
+        world::character_map_mut(&mut session.level)
+            .expect("character map")
+            .iter_mut()
+            .find(|entry| world::entry_instance_id(entry) == Some(instance_id))
+            .and_then(world::entry_save_parameter_mut)
+            .expect("the entry is there")
+    }
+
+    fn restore_pal_id(text: &str) -> uuid::Uuid {
+        text.parse().expect("a pal id")
+    }
+
+    #[test]
+    fn restore_all_heals_a_sick_pal_and_recomputes_its_hp() {
+        let (mut session, data) = session_with_owned_pals();
+        let sick_id = restore_pal_id(RESTORE_FIRST_PAL);
+        {
+            let params = pal_parameters_mut(&mut session, sick_id);
+            params.insert("WorkerSick", props::bool_property(true));
+            params.insert("FullStomach", props::float_property(1.0));
+            params.insert("SanityValue", props::float_property(3.0));
+        }
+
+        let (restored, _owners) = restore_all(&mut session, &data).expect("restore_all");
+        assert_eq!(restored, 2, "every non-player entry is restored, the player is not");
+
+        let params = pal_parameters(&session, sick_id);
+        assert!(
+            param(params, "WorkerSick").is_none(),
+            "the sickness marker must be gone"
+        );
+        assert_eq!(
+            param(params, "SanityValue").and_then(props::as_f32),
+            Some(100.0),
+            "sanity must be restored to full"
+        );
+        assert!(
+            param(params, "FullStomach")
+                .and_then(props::as_f32)
+                .unwrap_or(0.0)
+                > 1.0,
+            "the pal must be fed back up"
+        );
+        assert!(
+            param(params, "Hp")
+                .and_then(props::struct_props)
+                .and_then(|inner| param(inner, "Value"))
+                .and_then(props::as_i64)
+                .unwrap_or(0)
+                > 1,
+            "Hp must be recomputed off the level and talents, not left at the seeded 1"
+        );
+    }
+
+    /// The player entry carries a sickness marker of its own, and must keep it.
+    #[test]
+    fn restore_all_leaves_player_entries_alone() {
+        let (mut session, data) = session_with_owned_pals();
+        restore_all(&mut session, &data).expect("restore_all");
+
+        let params = pal_parameters(&session, restore_pal_id(RESTORE_PLAYER));
+        assert!(
+            param(params, "PhysicalHealth").is_some(),
+            "a player is not a pal and must not be healed by this command"
+        );
+    }
+
+    #[test]
+    fn restore_all_gives_an_ownerless_pal_the_owner_of_the_container_holding_it() {
+        let (mut session, data) = session_with_owned_pals();
+        let cleared_id = restore_pal_id(RESTORE_SECOND_PAL);
+        pal_parameters_mut(&mut session, cleared_id)
+            .0
+            .shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+
+        let (_restored, owners) = restore_all(&mut session, &data).expect("restore_all");
+        assert_eq!(owners, 1, "exactly the pal we orphaned gets an owner back");
+
+        let params = pal_parameters(&session, cleared_id);
+        assert_eq!(
+            param(params, "OwnerPlayerUId").and_then(props::as_uuid),
+            Some(restore_pal_id(RESTORE_PLAYER)),
+            "the owner must have been restored from the container that holds it"
+        );
+    }
+
+    /// Real saves spell the key `SlotId`; pals this module writes spell it `SlotID`.
+    /// Reading only one spelling would silently assign no owner to half of them.
+    #[test]
+    fn restore_all_resolves_the_container_under_either_spelling_of_the_slot_key() {
+        let (mut session, data) = session_with_owned_pals();
+        let cleared_id = restore_pal_id(RESTORE_SECOND_PAL);
+        {
+            let params = pal_parameters_mut(&mut session, cleared_id);
+            let slot = params
+                .0
+                .shift_remove(&PropertyKey::from("SlotID"))
+                .expect("the fixture writes SlotID");
+            params.insert("SlotId", slot);
+            params.0.shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+        }
+
+        let (_restored, owners) = restore_all(&mut session, &data).expect("restore_all");
+        assert_eq!(owners, 1, "the lowercase spelling must resolve too");
+    }
+
+    #[test]
+    fn restore_all_leaves_a_pal_in_no_container_ownerless_rather_than_guessing() {
+        let (mut session, data) = session_with_owned_pals();
+        let cleared_id = restore_pal_id(RESTORE_SECOND_PAL);
+        {
+            let params = pal_parameters_mut(&mut session, cleared_id);
+            params.insert(
+                "SlotID",
+                slot_property(restore_pal_id("99999999-9999-9999-9999-999999999999"), 0),
+            );
+            params.0.shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+        }
+
+        let (restored, owners) = restore_all(&mut session, &data).expect("restore_all");
+        assert_eq!(owners, 0, "an owner may only come from a container, never a guess");
+        assert_eq!(restored, 2, "it is still healed even though it gains no owner");
+        assert!(
+            param(pal_parameters(&session, cleared_id), "OwnerPlayerUId").is_none(),
+            "no owner may be invented for it"
+        );
+    }
+
+    /// A stale `pal_owner_counts` makes `player.pal_count` read low for the rest
+    /// of the session -- a wrong answer with no error.
+    #[test]
+    fn restore_all_drops_the_owner_count_cache_only_when_it_assigned_an_owner() {
+        let (mut session, data) = session_with_owned_pals();
+        session.caches.pal_owner_counts =
+            Some(std::collections::HashMap::from([(uuid::Uuid::nil(), 1)]));
+        restore_all(&mut session, &data).expect("restore_all");
+        assert!(
+            session.caches.pal_owner_counts.is_some(),
+            "assigning no owner cannot change any player's pal count"
+        );
+
+        pal_parameters_mut(&mut session, restore_pal_id(RESTORE_SECOND_PAL))
+            .0
+            .shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+        restore_all(&mut session, &data).expect("restore_all");
+        assert!(
+            session.caches.pal_owner_counts.is_none(),
+            "an assigned owner raises that player's pal count and must drop the cache"
+        );
+    }
+
+    #[test]
+    fn count_restorable_predicts_restore_all_without_writing_anything() {
+        let (mut session, data) = session_with_owned_pals();
+        pal_parameters_mut(&mut session, restore_pal_id(RESTORE_SECOND_PAL))
+            .0
+            .shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+
+        let predicted = count_restorable(&mut session).expect("count_restorable");
+        let before = pal_parameters(&session, restore_pal_id(RESTORE_FIRST_PAL)).clone();
+
+        let actual = restore_all(&mut session, &data).expect("restore_all");
+        assert_eq!(predicted, actual, "a dry run that under-reports loses user data");
+        assert_ne!(
+            &before,
+            pal_parameters(&session, restore_pal_id(RESTORE_FIRST_PAL)),
+            "the real run must actually write, or the parity above is vacuous"
+        );
+    }
+
+    #[test]
+    fn restore_all_skips_a_player_whose_sav_was_never_loaded_rather_than_failing() {
+        let (mut session, data) = session_with_owned_pals();
+        let stranger = restore_pal_id("77777777-7777-7777-7777-777777777777");
+        session.player_summaries.insert(
+            stranger,
+            crate::dto::summary::PlayerSummary {
+                uid: stranger,
+                nickname: "Never opened".to_string(),
+                level: None,
+                guild_id: None,
+                pal_count: 0,
+                last_online_time: None,
+                loaded: false,
+            },
+        );
+        pal_parameters_mut(&mut session, restore_pal_id(RESTORE_SECOND_PAL))
+            .0
+            .shift_remove(&PropertyKey::from("OwnerPlayerUId"));
+
+        let (restored, owners) = restore_all(&mut session, &data)
+            .expect("one unloaded player must not abort the whole restore");
+        assert_eq!((restored, owners), (2, 1));
     }
 }

@@ -58,6 +58,13 @@
       ]
     },
     {
+      "id": "fix_all_pals",
+      "title": "Fix All Pals",
+      "description": "Heals every pal in the world, recomputing its HP and restoring its sanity, fullness and health, and gives an ownerless pal the owner of the container holding it. Dimensional storage is not touched.",
+      "destructive": true,
+      "params": []
+    },
+    {
       "id": "fix_invalid_pal_active_skills",
       "title": "Fix Invalid Pal Skills",
       "description": "Removes equipped and mastered skills that a pal's own species cannot learn. A pal whose species does not resolve, or that holds a skill the game data does not list, is left untouched and reported.",
