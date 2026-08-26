@@ -127,6 +127,17 @@ function repair_items()
   }
 end
 
+function rebuild_all_guilds()
+  local reassigned, unresolved = save.rebuild_guild_membership()
+  local verb = ctx.dry_run and "Would reassign" or "Reassigned"
+  return {
+    summary = string.format(
+      "%s %d pal(s); %d could not be resolved and were left untouched", verb, reassigned, unresolved
+    ),
+    counts = { reassigned = reassigned, unresolved = unresolved },
+  }
+end
+
 local BASE_INVENTORY_SLOTS = 42
 local SLOTS_PER_EXPANSION = 3
 local MAX_EXPANSIONS = 4

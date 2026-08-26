@@ -666,6 +666,34 @@ fn repair_item_links_body(state: *mut lua_State) -> Result<c_int, HostError> {
 
 host_fn!(push_repair_item_links, repair_item_links_body);
 
+fn rebuild_guild_membership_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.rebuild_guild_membership")?;
+        let (reassigned, unresolved) = with_context(state, |ctx| {
+            if ctx.dry_run {
+                let predicted =
+                    guild::count_guild_membership_changes(ctx.session).map_err(core_error)?;
+                ctx.bump("save.rebuild_guild_membership", predicted.0 as i64);
+                return Ok(predicted);
+            }
+            super::dto_cache::flush(ctx)?;
+            let counts = guild::rebuild_guild_membership(ctx.session).map_err(core_error)?;
+            if counts.0 > 0 {
+                // `PalCharacterData.group_id` is overwritten in place on entries that
+                // stay where they are, so handles, iterators and the entry index all
+                // survive -- but `pal.group_id` is a field the `pals` snapshot caches.
+                ctx.note_pal_field_write();
+            }
+            Ok(counts)
+        })?;
+        lua_pushinteger(state, reassigned as i64);
+        lua_pushinteger(state, unresolved as i64);
+        Ok(2)
+    }
+}
+
+host_fn!(push_rebuild_guild_membership, rebuild_guild_membership_body);
+
 /// Prunes a dry run's own `map_objects` cache to the ids `delete_where` just
 /// resolved as killed, without touching `ctx.session` -- the overlay a later
 /// `save.remove_orphaned_works()` call in the same dry run reads its surviving
@@ -1234,6 +1262,16 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
               iterator.",
         capability: Some(Capability::SaveWrite),
     },
+    ApiFunction {
+        name: "rebuild_guild_membership",
+        params: &[],
+        returns: ApiType::Integer,
+        doc: "Reassigns every pal to the guild that should own it, taken from its owning \
+              player's guild or from the base whose worker container holds it. Returns how \
+              many were reassigned, followed by how many could not be resolved. A pal that \
+              resolves to neither is left exactly as it was, never orphaned.",
+        capability: Some(Capability::SaveWrite),
+    },
 ];
 
 const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
@@ -1244,6 +1282,7 @@ const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
     push_delete_dps_pals,
     push_remove_orphaned_dynamic_items,
     push_repair_item_links,
+    push_rebuild_guild_membership,
 ];
 
 fn save_write_bindings() -> [(&'static str, PushHostFn); SAVE_WRITE_FUNCTIONS.len()] {

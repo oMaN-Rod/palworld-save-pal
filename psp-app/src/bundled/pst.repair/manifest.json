@@ -84,6 +84,13 @@
       "description": "Resizes every player's main inventory to the size their key items entitle them to: 42 slots plus 3 for each inventory expansion, up to four. A resize that would drop an occupied slot is refused and reported.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "rebuild_all_guilds",
+      "title": "Rebuild Guild Membership",
+      "description": "Reassigns every pal to the guild that should own it, taken from its owning player's guild or from the base whose worker container holds it. A pal that resolves to neither is reported and left untouched.",
+      "destructive": true,
+      "params": []
     }
   ],
   "ui": [

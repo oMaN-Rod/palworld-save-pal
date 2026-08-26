@@ -901,6 +901,113 @@ pub fn delete_base(
     Ok(())
 }
 
+/// One non-player character-map entry's inputs to the guild it should belong to.
+struct GuildCandidate {
+    position: usize,
+    current_guild: uuid::Uuid,
+    owner: Option<uuid::Uuid>,
+    container: Option<uuid::Uuid>,
+}
+
+/// The read half `rebuild_guild_membership` and `count_guild_membership_changes` share:
+/// `(position, guild)` for every entry whose guild resolves to something other than what
+/// it already carries, plus how many resolved to nothing at all. Positions, not instance
+/// ids: the write pass adds and removes nothing, so they stay valid, and two entries
+/// sharing an instance id cannot collapse into one prediction.
+fn guild_membership_targets(
+    session: &mut SaveSession,
+) -> Result<(Vec<(usize, uuid::Uuid)>, usize), CoreError> {
+    let base_guild_by_container: HashMap<uuid::Uuid, uuid::Uuid> =
+        world::base_camp_map(&session.level)?
+            .map(|entries| entries.as_slice())
+            .unwrap_or(&[])
+            .iter()
+            .filter_map(base_guild_and_container)
+            .map(|(guild_id, container_id)| (container_id, guild_id))
+            .collect();
+
+    let candidates: Vec<GuildCandidate> = world::character_map(&session.level)?
+        .iter()
+        .enumerate()
+        .filter(|(_, entry)| !world::entry_is_player(entry))
+        .filter_map(|(position, entry)| {
+            let character_data = world::entry_character_data(entry)?;
+            let save_parameter = world::entry_save_parameter(entry)?;
+            Some(GuildCandidate {
+                position,
+                // A nil guid is "no guild", never guild zero.
+                current_guild: props::guid_to_uuid(&character_data.group_id),
+                owner: pal::param(save_parameter, "OwnerPlayerUId")
+                    .and_then(props::as_uuid)
+                    .filter(|uid| *uid != props::EMPTY_UUID),
+                container: base_container_membership(save_parameter),
+            })
+        })
+        .collect();
+
+    let mut changes = Vec::new();
+    let mut unresolved = 0usize;
+    for candidate in candidates {
+        let mut resolved = match candidate.owner {
+            Some(owner) => find_player_guild_id(session, owner)?,
+            None => None,
+        };
+        if resolved.is_none() {
+            resolved = candidate
+                .container
+                .and_then(|container_id| base_guild_by_container.get(&container_id).copied());
+        }
+        let Some(guild_id) = resolved else {
+            unresolved += 1;
+            continue;
+        };
+        if guild_id != candidate.current_guild {
+            changes.push((candidate.position, guild_id));
+        }
+    }
+    Ok((changes, unresolved))
+}
+
+/// The read-only pair `rebuild_guild_membership` would produce.
+pub fn count_guild_membership_changes(
+    session: &mut SaveSession,
+) -> Result<(usize, usize), CoreError> {
+    let (changes, unresolved) = guild_membership_targets(session)?;
+    Ok((changes.len(), unresolved))
+}
+
+/// Reassigns every non-player pal to the guild that should own it, derived from its
+/// owning player's membership or from the base whose worker container holds it. Returns
+/// (reassigned, unresolved).
+///
+/// A pal that resolves to neither is left exactly as it is rather than orphaned: an
+/// ownerless pal is what `delete_unreferenced_data` sweeps away, so guessing wrong here
+/// would turn a membership bug into a deletion. No cache is invalidated because none is
+/// keyed on a pal's group: `player_guild_map` is built from `GroupSaveDataMap`, which
+/// this never touches, and `GuildSummary::pal_count` counts base-container membership.
+pub fn rebuild_guild_membership(
+    session: &mut SaveSession,
+) -> Result<(usize, usize), CoreError> {
+    let (changes, unresolved) = guild_membership_targets(session)?;
+    if changes.is_empty() {
+        return Ok((0, unresolved));
+    }
+
+    let mut reassigned = 0usize;
+    let entries = world::character_map_mut(&mut session.level)?;
+    for (position, guild_id) in changes {
+        let Some(entry) = entries.get_mut(position) else {
+            continue;
+        };
+        let Some(character_data) = world::entry_character_data_mut(entry) else {
+            continue;
+        };
+        character_data.group_id = props::uuid_to_guid(guild_id);
+        reassigned += 1;
+    }
+    Ok((reassigned, unresolved))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1608,5 +1715,268 @@ mod tests {
         );
 
         assert!(base_structures(&session, BASE_ID.parse().unwrap()).is_empty());
+    }
+
+    use crate::ue::games::palworld::PalCharacterData;
+
+    const WRONG_GUILD_ID: &str = "99999999-9999-9999-9999-999999999999";
+    const STRANGER_ID: &str = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
+    const PAL_INSTANCE_ID: &str = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+    const PLAYER_INSTANCE_ID: &str = "cccccccc-cccc-cccc-cccc-cccccccccccc";
+
+    fn character_entry(
+        instance_id: &str,
+        save_parameter: Properties,
+        group_id: crate::ue::FGuid,
+    ) -> UMapEntry {
+        let mut key_properties = Properties::default();
+        key_properties.insert("PlayerUId", guid_property(SDM_NIL));
+        key_properties.insert("InstanceId", guid_property(instance_id));
+
+        let mut object = Properties::default();
+        object.insert(
+            "SaveParameter",
+            Property::Struct(StructValue::Struct(save_parameter)),
+        );
+        let character_data = PalCharacterData {
+            object,
+            unknown_bytes: [0; 4],
+            group_id,
+            trailing_bytes: [0; 4],
+        };
+        let mut value_properties = Properties::default();
+        value_properties.insert(
+            "RawData",
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::CharacterData(
+                character_data,
+            ))),
+        );
+        UMapEntry {
+            key: Property::Struct(StructValue::Struct(key_properties)),
+            value: Property::Struct(StructValue::Struct(value_properties)),
+        }
+    }
+
+    fn pal_save_parameter(owner: Option<&str>, container: Option<&str>) -> Properties {
+        let mut save_parameter = match container {
+            Some(container_id) => {
+                slot_save_parameter("SlotId", container_id.parse().expect("a valid uuid"))
+            }
+            None => Properties::default(),
+        };
+        save_parameter.insert("CharacterID", crate::props::name_property("SheepBall"));
+        if let Some(owner_uid) = owner {
+            save_parameter.insert(
+                "OwnerPlayerUId",
+                crate::props::guid_property(owner_uid.parse().expect("a valid uuid")),
+            );
+        }
+        save_parameter
+    }
+
+    fn player_entry(group_id: crate::ue::FGuid) -> UMapEntry {
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("IsPlayer", crate::props::bool_property(true));
+        character_entry(PLAYER_INSTANCE_ID, save_parameter, group_id)
+    }
+
+    fn session_with_world(
+        group_entries: Vec<UMapEntry>,
+        character_entries: Vec<UMapEntry>,
+        base_camp_entries: Vec<UMapEntry>,
+    ) -> SaveSession {
+        let mut world_save_data = Properties::default();
+        world_save_data.insert("GroupSaveDataMap", Property::Map(group_entries));
+        world_save_data.insert(
+            "CharacterSaveParameterMap",
+            Property::Map(character_entries),
+        );
+        world_save_data.insert("BaseCampSaveData", Property::Map(base_camp_entries));
+        let mut root_properties = Properties::default();
+        root_properties.insert(
+            "worldSaveData",
+            Property::Struct(StructValue::Struct(world_save_data)),
+        );
+        SaveSession::new_for_tests(SaveKind::InMemory, minimal_save(root_properties))
+    }
+
+    fn guild_owning_the_player() -> UMapEntry {
+        let tail = guild_tail::pre_update_guild(
+            3,
+            "The Guild",
+            PLAYER_ID.parse().expect("a valid uuid"),
+            &[(PLAYER_ID.parse().expect("a valid uuid"), 0, "Tester")],
+        );
+        guild_group_entry(GUILD_ID, tail)
+    }
+
+    /// A pal owned by a guild member, pointed at the wrong guild, next to a player
+    /// entry pointed at the same wrong guild: only the pal may move.
+    fn session_with_a_misfiled_pal() -> SaveSession {
+        session_with_world(
+            vec![guild_owning_the_player()],
+            vec![
+                player_entry(fguid(WRONG_GUILD_ID)),
+                character_entry(
+                    PAL_INSTANCE_ID,
+                    pal_save_parameter(Some(PLAYER_ID), None),
+                    fguid(WRONG_GUILD_ID),
+                ),
+            ],
+            Vec::new(),
+        )
+    }
+
+    fn pal_group_id(session: &SaveSession) -> crate::ue::FGuid {
+        let entries = world::character_map(&session.level).expect("character map");
+        let entry = entries
+            .iter()
+            .find(|entry| !world::entry_is_player(entry))
+            .expect("a pal");
+        world::entry_character_data(entry).expect("character data").group_id
+    }
+
+    #[test]
+    fn rebuild_guild_membership_moves_a_pal_to_its_owner_s_guild() {
+        let mut session = session_with_a_misfiled_pal();
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(reassigned, 1);
+        assert_eq!(unresolved, 0);
+        assert_eq!(pal_group_id(&session), fguid(GUILD_ID));
+
+        let entries = world::character_map(&session.level).expect("character map");
+        let player = entries
+            .iter()
+            .find(|entry| world::entry_is_player(entry))
+            .expect("a player");
+        assert_eq!(
+            world::entry_character_data(player).expect("character data").group_id,
+            fguid(WRONG_GUILD_ID),
+            "a player entry is never a rebuild target"
+        );
+    }
+
+    #[test]
+    fn rebuild_guild_membership_leaves_an_unresolvable_pal_exactly_as_it_was() {
+        let mut session = session_with_world(
+            vec![guild_owning_the_player()],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(Some(STRANGER_ID), Some(CONTAINER_ID)),
+                fguid(WRONG_GUILD_ID),
+            )],
+            Vec::new(),
+        );
+        let before = pal_group_id(&session);
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(reassigned, 0);
+        assert_eq!(unresolved, 1, "the pal must be counted, not silently passed over");
+        assert_eq!(
+            pal_group_id(&session),
+            before,
+            "an unresolvable pal must never be orphaned or moved"
+        );
+    }
+
+    #[test]
+    fn rebuild_guild_membership_uses_the_base_container_when_a_pal_has_no_owner() {
+        let mut session = session_with_world(
+            vec![guild_owning_the_player()],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(None, Some(CONTAINER_ID)),
+                crate::ue::FGuid::nil(),
+            )],
+            vec![base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID)],
+        );
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(unresolved, 0, "a base worker resolves through its worker container");
+        assert_eq!(reassigned, 1);
+        assert_eq!(pal_group_id(&session), fguid(GUILD_ID));
+    }
+
+    /// The owning player's guild outranks the base whose container holds the pal.
+    #[test]
+    fn rebuild_guild_membership_prefers_the_owner_over_the_holding_base() {
+        let mut session = session_with_world(
+            vec![guild_owning_the_player()],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(Some(PLAYER_ID), Some(CONTAINER_ID)),
+                crate::ue::FGuid::nil(),
+            )],
+            vec![base_camp_entry(BASE_ID, WRONG_GUILD_ID, CONTAINER_ID)],
+        );
+
+        let (reassigned, _) = rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(reassigned, 1);
+        assert_eq!(pal_group_id(&session), fguid(GUILD_ID));
+    }
+
+    #[test]
+    fn rebuild_guild_membership_is_idempotent() {
+        let mut session = session_with_a_misfiled_pal();
+
+        let (first, _) = rebuild_guild_membership(&mut session).expect("rebuild");
+        assert_eq!(first, 1, "the fixture must move on the first pass, or nothing is proven");
+        let (second, _) = rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(second, 0, "a correct save must not be rewritten, {first} changed on the first pass");
+    }
+
+    #[test]
+    fn count_guild_membership_changes_predicts_the_rebuild_without_writing() {
+        let mut session = session_with_a_misfiled_pal();
+        let before = pal_group_id(&session);
+
+        let predicted = count_guild_membership_changes(&mut session).expect("count");
+
+        assert_eq!(predicted, (1, 0));
+        assert_eq!(pal_group_id(&session), before, "counting must write nothing");
+
+        let actual = rebuild_guild_membership(&mut session).expect("rebuild");
+        assert_eq!(predicted, actual, "a dry run must predict exactly what the write does");
+
+        assert_eq!(
+            count_guild_membership_changes(&mut session).expect("count"),
+            (0, 0),
+            "the prediction must converge with the write"
+        );
+    }
+
+    #[test]
+    fn count_guild_membership_changes_predicts_an_unresolvable_pal_too() {
+        let mut session = session_with_world(
+            vec![guild_owning_the_player()],
+            vec![
+                character_entry(
+                    PAL_INSTANCE_ID,
+                    pal_save_parameter(Some(PLAYER_ID), None),
+                    fguid(WRONG_GUILD_ID),
+                ),
+                character_entry(
+                    STRANGER_ID,
+                    pal_save_parameter(Some(STRANGER_ID), None),
+                    fguid(WRONG_GUILD_ID),
+                ),
+            ],
+            Vec::new(),
+        );
+
+        assert_eq!(
+            count_guild_membership_changes(&mut session).expect("count"),
+            (1, 1)
+        );
+        assert_eq!(rebuild_guild_membership(&mut session).expect("rebuild"), (1, 1));
     }
 }

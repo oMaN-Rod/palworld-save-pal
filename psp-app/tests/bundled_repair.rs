@@ -151,6 +151,7 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
             "fix_illegal_pals",
             "fix_illegal_players",
             "fix_invalid_pal_active_skills",
+            "rebuild_all_guilds",
             "repair_items",
             "repair_structures",
             "scan_illegal_pals",
@@ -1125,4 +1126,111 @@ fn trim_overfilled_inventories_surfaces_a_refused_count_even_when_it_is_zero() {
         counts["refused"].is_number(),
         "a resize the host refuses must be counted and surfaced, never silently ignored"
     );
+}
+
+const NONEXISTENT_GUILD: &str = "deadbeef-0000-0000-0000-000000000000";
+
+/// The corpus fixture is healthy: `rebuild_all_guilds` reassigns nothing on it as
+/// checked in. So a pal that really does belong to a guild is pointed at one that does
+/// not exist, which is the only reassignment the command may then find.
+fn misfile_a_pals_guild(h: &mut Harness) -> (Uuid, Uuid) {
+    let wrong: Uuid = NONEXISTENT_GUILD.parse().expect("valid uuid literal");
+    let entries = psp_core::domain::world::character_map_mut(&mut h.session.level)
+        .expect("the character map resolves");
+    for entry in entries.iter_mut() {
+        if psp_core::domain::world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(pal_id) = psp_core::domain::world::entry_instance_id(entry) else { continue };
+        let Some(data) = psp_core::domain::world::entry_character_data_mut(entry) else { continue };
+        let belongs_to = psp_core::props::guid_to_uuid(&data.group_id);
+        if belongs_to.is_nil() || belongs_to == wrong {
+            continue;
+        }
+        data.group_id = psp_core::props::uuid_to_guid(wrong);
+        return (pal_id, belongs_to);
+    }
+    panic!("the fixture must hold at least one pal that already belongs to a guild");
+}
+
+fn guild_of(session: &SaveSession, pal_id: Uuid) -> Option<Uuid> {
+    psp_core::domain::world::character_map(&session.level)
+        .expect("the character map resolves")
+        .iter()
+        .find(|entry| psp_core::domain::world::entry_instance_id(entry) == Some(pal_id))
+        .and_then(psp_core::domain::world::entry_character_data)
+        .map(|data| psp_core::props::guid_to_uuid(&data.group_id))
+}
+
+#[test]
+fn rebuild_all_guilds_converges_and_never_orphans() {
+    let mut h = Harness::new();
+    let (pal_id, correct_guild) = misfile_a_pals_guild(&mut h);
+    let wrong: Uuid = NONEXISTENT_GUILD.parse().expect("valid uuid literal");
+
+    let dry = h.run("rebuild_all_guilds", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    let predicted = dry.result.expect("a result")["counts"].clone();
+    assert_eq!(
+        guild_of(&h.session, pal_id),
+        Some(wrong),
+        "a dry run must leave the misfiled pal where it is"
+    );
+
+    let real = h.run("rebuild_all_guilds", serde_json::json!({}), false);
+    assert_eq!(real.status, RunStatus::Ok, "{:?}", real.status);
+    let actual = real.result.expect("a result")["counts"].clone();
+    assert_eq!(predicted["reassigned"], actual["reassigned"]);
+    assert_eq!(predicted["unresolved"], actual["unresolved"]);
+    assert_eq!(
+        actual["reassigned"].as_i64(),
+        Some(1),
+        "the deliberately misfiled pal is the one and only reassignment a healthy \
+         fixture offers, so anything else means the predicate moved something it should not"
+    );
+    assert_eq!(
+        guild_of(&h.session, pal_id),
+        Some(correct_guild),
+        "the misfiled pal must land back in its owner's guild"
+    );
+
+    let again = h.run("rebuild_all_guilds", serde_json::json!({}), false);
+    assert_eq!(
+        again.result.expect("a result")["counts"]["reassigned"].as_i64(),
+        Some(0),
+        "a second run must reassign nothing"
+    );
+
+    assert_round_trips(&h.session);
+}
+
+/// The safety property: PST orphans a pal it cannot place, and an orphaned pal is what
+/// `delete_unreferenced_data` sweeps away next. This port counts it and walks away.
+#[test]
+fn rebuild_all_guilds_counts_a_pal_it_cannot_place_and_leaves_it_untouched() {
+    let mut h = Harness::new();
+    let (pal_id, _) = orphan_a_contained_pal(&mut h);
+    let before = guild_of(&h.session, pal_id).expect("the pal is in the character map");
+    assert!(
+        !before.is_nil(),
+        "the pal must start in a guild, or 'left exactly as it was' proves nothing"
+    );
+
+    let outcome = h.run("rebuild_all_guilds", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+
+    assert_eq!(
+        counts["unresolved"].as_i64(),
+        Some(1),
+        "a pal with no owner and no holding base must be counted, not silently passed over"
+    );
+    assert_eq!(counts["reassigned"].as_i64(), Some(0));
+    assert_eq!(
+        guild_of(&h.session, pal_id),
+        Some(before),
+        "an unresolvable pal must never be orphaned or moved"
+    );
+
+    assert_round_trips(&h.session);
 }

@@ -287,6 +287,12 @@ function save.remove_orphaned_dynamic_items() end
 ---@return integer
 function save.repair_item_links() end
 
+---Reassigns every pal to the guild that should own it, taken from its owning player's guild or from the base whose worker container holds it. Returns how many were reassigned, followed by how many could not be resolved. A pal that resolves to neither is left exactly as it was, never orphaned.
+---
+---Requires capability: save.write.
+---@return integer
+function save.rebuild_guild_membership() end
+
 ---Requires capability: gamedata.
 ---
 ---@class gamedata
