@@ -328,3 +328,46 @@ function max_all_pals()
     counts = { pals = pals, dps_pals = dps_pals, examined = examined, skipped = skipped },
   }
 end
+
+local VIEWING_CAGE_TECHNOLOGY = "DisplayCharacter"
+
+function unlock_viewing_cage_for_player()
+  local target = ctx.args.player_uid
+  local unlocked, already, found = 0, 0, 0
+
+  for player in save.players() do
+    if player.uid == target then
+      found = found + 1
+      local technologies = player.technologies
+      if technologies == nil then
+        technologies = {}
+      end
+
+      local has = false
+      for _, id in ipairs(technologies) do
+        if id == VIEWING_CAGE_TECHNOLOGY then
+          has = true
+          break
+        end
+      end
+
+      if has then
+        already = already + 1
+      else
+        technologies[#technologies + 1] = VIEWING_CAGE_TECHNOLOGY
+        player.technologies = technologies
+        unlocked = unlocked + 1
+      end
+    end
+  end
+
+  local verb = ctx.dry_run and "Would unlock" or "Unlocked"
+  return {
+    summary = (found == 0)
+      and "No player matched the given id"
+      or string.format(
+        "%s the viewing cage for %d player(s); %d already had it", verb, unlocked, already
+      ),
+    counts = { unlocked = unlocked, already = already, missing = (found == 0) and 1 or 0 },
+  }
+end

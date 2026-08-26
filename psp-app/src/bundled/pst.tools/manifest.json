@@ -68,6 +68,15 @@
         { "id": "cheat_mode", "type": "bool", "label": "Cheat mode", "default": false,
           "description": "Uses 255 in place of the game's own caps for level, soul ranks and condensing rank. Talents stay capped at 100 regardless. The game may not display these values correctly." }
       ]
+    },
+    {
+      "id": "unlock_viewing_cage_for_player",
+      "title": "Unlock Viewing Cage",
+      "description": "Adds the Viewing Cage technology to one player's unlocked list, without granting any other technology.",
+      "destructive": true,
+      "params": [
+        { "id": "player_uid", "type": "entity", "label": "Player", "entity": "player", "default": "" }
+      ]
     }
   ]
 }

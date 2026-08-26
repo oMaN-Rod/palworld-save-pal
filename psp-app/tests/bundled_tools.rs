@@ -701,3 +701,84 @@ fn max_all_pals_under_a_dry_run_writes_nothing() {
         .collect::<std::collections::BTreeMap<_, _>>();
     assert_eq!(before, after, "a dry run must not move a single level");
 }
+
+fn player_technologies(h: &mut Harness, uid: Uuid) -> Vec<String> {
+    player::get_player_details(&mut h.session, &h.game_data, uid, &null_progress())
+        .expect("player details load")
+        .expect("the player exists")
+        .technologies
+}
+
+/// The idempotence check alone can't tell "the write landed" from "the
+/// command never looked at this player at all": a no-op command would also
+/// report `already == 1` on both runs if it always claimed the player
+/// already had it. Reading the technology list back after the first run --
+/// and confirming it does NOT contain the id before that run -- closes that
+/// gap.
+#[test]
+fn unlock_viewing_cage_adds_the_technology_and_is_idempotent() {
+    let mut h = Harness::new();
+    let uid = *h
+        .session
+        .player_summaries
+        .keys()
+        .next()
+        .expect("the fixture has a player");
+
+    let before = player_technologies(&mut h, uid);
+    assert!(
+        !before.contains(&"DisplayCharacter".to_string()),
+        "the fixture player must not already have DisplayCharacter for this test to prove anything"
+    );
+
+    let first = h.run(
+        "unlock_viewing_cage_for_player",
+        serde_json::json!({ "player_uid": uid.to_string() }),
+        false,
+    );
+    assert_eq!(first.status, RunStatus::Ok, "{:?}", first.status);
+    let counts = first.result.expect("a result")["counts"].clone();
+    assert_eq!(
+        counts["unlocked"].as_i64().unwrap_or(0) + counts["already"].as_i64().unwrap_or(0),
+        1,
+        "the named player is either newly unlocked or already had it"
+    );
+    assert_eq!(counts["unlocked"].as_i64(), Some(1), "the fixture player did not have it, so this run must unlock it");
+
+    let after_first = player_technologies(&mut h, uid);
+    assert!(
+        after_first.contains(&"DisplayCharacter".to_string()),
+        "the technology must actually be present after the run, not just reported unlocked"
+    );
+
+    let second = h.run(
+        "unlock_viewing_cage_for_player",
+        serde_json::json!({ "player_uid": uid.to_string() }),
+        false,
+    );
+    let counts2 = second.result.expect("a result")["counts"].clone();
+    assert_eq!(counts2["unlocked"].as_i64(), Some(0), "a second run must unlock nothing");
+    assert_eq!(counts2["already"].as_i64(), Some(1));
+
+    let after_second = player_technologies(&mut h, uid);
+    assert_eq!(
+        after_second, after_first,
+        "a second run must not change the technology list at all"
+    );
+
+    assert_round_trips(&h.session);
+}
+
+#[test]
+fn unlock_viewing_cage_reports_an_unknown_player_rather_than_failing() {
+    let mut h = Harness::new();
+    let outcome = h.run(
+        "unlock_viewing_cage_for_player",
+        serde_json::json!({ "player_uid": "00000000-0000-0000-0000-000000000000" }),
+        false,
+    );
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    let counts = outcome.result.expect("a result")["counts"].clone();
+    assert_eq!(counts["missing"].as_i64(), Some(1));
+    assert_eq!(counts["unlocked"].as_i64(), Some(0));
+}
