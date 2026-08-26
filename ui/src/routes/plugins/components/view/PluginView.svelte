@@ -35,7 +35,7 @@
 
 {#snippet detail()}
 	<div class="flex flex-col gap-4">
-		{#each selected?.sections ?? [] as section, index (index)}
+		{#each selected?.sections ?? [] as section, index (`${selected?.title}:${index}`)}
 			<ViewSection {section} state={viewState} {commands} {disabled} {onRun} />
 		{/each}
 		{@render children?.()}
