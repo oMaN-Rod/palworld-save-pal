@@ -96,6 +96,7 @@
   "ui": [
     {
       "title": "Scan",
+      "group": "Illegal Pals",
       "columns": 3,
       "widgets": [
         { "type": "entity_select", "id": "owner", "entity": "player", "label": "Owner" },
@@ -106,6 +107,7 @@
     },
     {
       "title": "Illegal pals",
+      "group": "Illegal Pals",
       "columns": 1,
       "widgets": [
         { "type": "text", "from": "scan_illegal_pals", "path": "summary" },
@@ -117,6 +119,7 @@
     },
     {
       "title": "Player stats",
+      "group": "Player Stats",
       "columns": 1,
       "widgets": [
         { "type": "number_input", "id": "max_points", "label": "Maximum points per stat" },
@@ -130,6 +133,7 @@
     },
     {
       "title": "Repairs",
+      "group": "Repairs",
       "columns": 2,
       "widgets": [
         { "type": "button", "label": "Repair Structures", "command": "repair_structures" },
@@ -142,6 +146,7 @@
     },
     {
       "title": "Last result",
+      "group": "Repairs",
       "columns": 1,
       "widgets": [
         { "type": "text", "from": "repair_structures", "path": "summary" },

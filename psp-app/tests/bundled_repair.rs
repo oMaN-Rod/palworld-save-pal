@@ -246,6 +246,53 @@ fn the_view_keeps_a_scan_pick_apply_pair_for_both_scans() {
     }
 }
 
+/// A group is what the view's list of functions is built from, so a section
+/// without one would strand its widgets in an unnamed entry.
+#[test]
+fn every_view_section_names_the_function_it_belongs_to() {
+    let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");
+    let manifest = Manifest::parse(plugin.manifest).expect("the manifest parses");
+
+    let mut groups: Vec<&str> = Vec::new();
+    for section in &manifest.ui {
+        let group = section
+            .group
+            .as_deref()
+            .unwrap_or_else(|| panic!("section {:?} declares no group", section.title));
+        if !groups.contains(&group) {
+            groups.push(group);
+        }
+    }
+
+    assert_eq!(groups, vec!["Illegal Pals", "Player Stats", "Repairs"]);
+}
+
+/// A section carries the group, so a scan's table and the button that spends
+/// its selection have to be looked up section-first. Split them across groups
+/// and the table lands in one pane with its button in another.
+#[test]
+fn a_scan_table_and_the_fix_that_consumes_it_share_a_group() {
+    let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");
+    let manifest = Manifest::parse(plugin.manifest).expect("the manifest parses");
+
+    for table_id in ["pal_rows", "player_rows"] {
+        let reference = format!("{table_id}.selection");
+        let table_group = manifest
+            .ui
+            .iter()
+            .find(|s| s.widgets.iter().any(|w| w.id.as_deref() == Some(table_id)))
+            .and_then(|s| s.group.as_deref())
+            .unwrap_or_else(|| panic!("{table_id} must belong to a grouped section"));
+        let button_group = manifest
+            .ui
+            .iter()
+            .find(|s| s.widgets.iter().any(|w| w.args.values().any(|v| v == &reference)))
+            .and_then(|s| s.group.as_deref())
+            .unwrap_or_else(|| panic!("the button spending {reference} must belong to a grouped section"));
+        assert_eq!(table_group, button_group, "{table_id} and its fix button must be one function");
+    }
+}
+
 #[test]
 fn no_two_widgets_share_an_id() {
     let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");

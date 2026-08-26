@@ -100,6 +100,29 @@ fn a_section_column_count_outside_one_to_three_is_refused() {
 }
 
 #[test]
+fn a_section_may_name_the_group_it_belongs_to() {
+    let ui = r#"[
+        { "group": "Illegal Pals", "widgets": [{ "type": "text", "from": "scan" }] },
+        { "widgets": [{ "type": "text", "from": "fix" }] }
+    ]"#;
+    let manifest = manifest_with_view(ui).expect("a group is a plain label");
+    assert_eq!(manifest.ui[0].group.as_deref(), Some("Illegal Pals"));
+    assert_eq!(manifest.ui[1].group, None, "a section may belong to no group");
+}
+
+/// An empty group is neither absent nor a usable list label, so it is refused
+/// at install rather than shipped as a nameless entry in the group list.
+#[test]
+fn an_empty_section_group_is_refused() {
+    let ui = r#"[{ "group": "", "widgets": [] }]"#;
+    let Err(error) = manifest_with_view(ui) else {
+        panic!("an empty group must be refused");
+    };
+    let message = error.to_string();
+    assert!(message.contains("group"), "the message must name the field: {message}");
+}
+
+#[test]
 fn an_input_widget_whose_id_names_no_param_is_refused() {
     let ui = r#"[{ "widgets": [{ "type": "number_input", "id": "nonesuch", "label": "X" }] }]"#;
     let Err(error) = manifest_with_view(ui) else {

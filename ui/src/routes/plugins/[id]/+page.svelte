@@ -287,13 +287,12 @@
 
 		{#if mode === 'run'}
 			{#if view?.hasView}
-				<div class="flex flex-col gap-4">
-					<PluginView
-						state={view}
-						commands={plugin.commands}
-						disabled={!plugin.enabled || pluginsData.running !== null}
-						onRun={runFromView}
-					/>
+				<PluginView
+					state={view}
+					commands={plugin.commands}
+					disabled={!plugin.enabled || pluginsData.running !== null}
+					onRun={runFromView}
+				>
 					{#if showApplyFooter}
 						<ApplyBar
 							summary={pluginsData.lastResult?.summary ?? null}
@@ -304,7 +303,7 @@
 					{#if showResult && pluginsData.lastResult}
 						<RunResult result={pluginsData.lastResult} />
 					{/if}
-				</div>
+				</PluginView>
 			{:else}
 				<div class="grid grid-cols-[25%_1fr] gap-2">
 					<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />

@@ -13,7 +13,10 @@ import {
 	tablesFedBy,
 	toList,
 	toRows,
-	toText
+	toText,
+	UNGROUPED,
+	viewGroups,
+	type ViewSection
 } from './pluginView';
 
 const COMMAND_IDS = ['scan', 'fix'];
@@ -105,6 +108,21 @@ describe('normalizeView', () => {
 				columns
 			);
 		}
+	});
+
+	it('reads a section group and leaves an ungrouped section without one', () => {
+		const { sections } = normalizeView(
+			[{ group: 'Illegal Pals', widgets: [] }, { widgets: [] }],
+			COMMAND_IDS
+		);
+		expect(sections[0].group).toBe('Illegal Pals');
+		expect(sections[1].group).toBeNull();
+	});
+
+	it('treats an empty group as no group at all, and says so', () => {
+		const { sections, warnings } = normalizeView([{ group: '', widgets: [] }], COMMAND_IDS);
+		expect(sections[0].group).toBeNull();
+		expect(warnings.length).toBeGreaterThan(0);
 	});
 
 	it('drops a span it does not understand instead of failing', () => {
@@ -395,5 +413,56 @@ describe('defaultInputs', () => {
 			COMMAND_IDS
 		);
 		expect(defaultInputs(sections, [SCAN, FIX])).toEqual({ min_level: 1 });
+	});
+});
+
+const section = (title: string, group: string | null): ViewSection => ({
+	title,
+	columns: 1,
+	group,
+	widgets: []
+});
+
+describe('viewGroups', () => {
+	it('collapses sections sharing a group into one entry, in declaration order', () => {
+		const groups = viewGroups([
+			section('Scan', 'Illegal Pals'),
+			section('Illegal pals', 'Illegal Pals'),
+			section('Player stats', 'Player Stats')
+		]);
+		expect(groups.map((g) => g.title)).toEqual(['Illegal Pals', 'Player Stats']);
+		expect(groups[0].sections.map((s) => s.title)).toEqual(['Scan', 'Illegal pals']);
+	});
+
+	it('keeps a group together even when its sections are not adjacent', () => {
+		const groups = viewGroups([section('a', 'One'), section('b', 'Two'), section('c', 'One')]);
+		expect(groups.map((g) => g.title)).toEqual(['One', 'Two']);
+		expect(groups[0].sections.map((s) => s.title)).toEqual(['a', 'c']);
+	});
+
+	it('puts every ungrouped section in a single entry so an old manifest still renders', () => {
+		const groups = viewGroups([section('a', null), section('b', null)]);
+		expect(groups).toHaveLength(1);
+		expect(groups[0].sections).toHaveLength(2);
+	});
+
+	it('gathers the ungrouped sections of a half-grouped view into one trailing entry', () => {
+		const groups = viewGroups([
+			section('a', null),
+			section('b', 'One'),
+			section('c', null),
+			section('d', 'Two')
+		]);
+		expect(groups.map((g) => g.title)).toEqual(['One', 'Two', UNGROUPED]);
+		expect(groups[2].sections.map((s) => s.title)).toEqual(['a', 'c']);
+	});
+
+	it('does not let a group title collide with a section title', () => {
+		const groups = viewGroups([section('One', 'One'), section('x', null)]);
+		expect(groups).toHaveLength(2);
+	});
+
+	it('returns no groups for no sections', () => {
+		expect(viewGroups([])).toEqual([]);
 	});
 });

@@ -129,6 +129,10 @@ pub struct UiSection {
     pub title: Option<String>,
     #[serde(default = "one_column")]
     pub columns: u32,
+    /// The function this section is part of. Sections sharing a group are one
+    /// entry in the view's list, however far apart they are declared.
+    #[serde(default)]
+    pub group: Option<String>,
     #[serde(default)]
     pub widgets: Vec<UiWidget>,
 }
@@ -396,6 +400,12 @@ fn validate_view(manifest: &Manifest) -> Result<(), ManifestError> {
             return Err(ManifestError::InvalidView {
                 at: section_at,
                 reason: format!("columns must be 1, 2 or 3, got {}", section.columns),
+            });
+        }
+        if section.group.as_deref() == Some("") {
+            return Err(ManifestError::InvalidView {
+                at: section_at,
+                reason: "group must be a title, not an empty string".to_string(),
             });
         }
         for (widget_index, widget) in section.widgets.iter().enumerate() {

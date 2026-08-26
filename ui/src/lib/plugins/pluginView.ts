@@ -47,8 +47,19 @@ export interface ViewWidget {
 export interface ViewSection {
 	title: string | null;
 	columns: 1 | 2 | 3;
+	group: string | null;
 	widgets: ViewWidget[];
 }
+
+export interface ViewGroup {
+	title: string;
+	sections: ViewSection[];
+}
+
+/// No plugin group can be the empty string -- a manifest declaring one is
+/// refused at install -- so it is free to stand for the sections that named
+/// no group at all.
+export const UNGROUPED = '';
 
 export interface NormalizedView {
 	sections: ViewSection[];
@@ -186,9 +197,38 @@ export function normalizeView(raw: unknown, commandIds: readonly string[]): Norm
 				if (normalized) widgets.push(normalized);
 			}
 		}
-		sections.push({ title: asString(record.title), columns, widgets });
+		const group = asString(record.group);
+		if (group === '') {
+			warnings.push('Section group "" is not a title; the section was left ungrouped.');
+		}
+		sections.push({
+			title: asString(record.title),
+			columns,
+			group: group === '' ? null : group,
+			widgets
+		});
 	}
 	return { sections, warnings };
+}
+
+/// Grouped by the `group` label rather than one entry per command: a scan and
+/// the fix that consumes its table are one function to a user, and splitting
+/// them would put the table in one pane and its button in another.
+export function viewGroups(sections: readonly ViewSection[]): ViewGroup[] {
+	const order: string[] = [];
+	const byTitle = new Map<string, ViewSection[]>();
+	for (const section of sections) {
+		const title = section.group ?? UNGROUPED;
+		let bucket = byTitle.get(title);
+		if (!bucket) {
+			bucket = [];
+			byTitle.set(title, bucket);
+			if (title !== UNGROUPED) order.push(title);
+		}
+		bucket.push(section);
+	}
+	if (byTitle.has(UNGROUPED)) order.push(UNGROUPED);
+	return order.map((title) => ({ title, sections: byTitle.get(title) ?? [] }));
 }
 
 /// `hasOwnProperty` rather than `in`: a path is plugin-supplied, and `in`
