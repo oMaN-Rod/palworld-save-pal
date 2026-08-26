@@ -108,9 +108,10 @@ const SKIPPED: &[(&str, &str)] = &[
     ),
     (
         "for pal in save.pals() do",
-        "a fragment illustrating the write-then-read shape that invalidates the pal snapshot; \
-         `pal` names nothing standalone, and running it would only prove a comment true, not \
-         the quadratic behaviour the prose describes",
+        "an anti-pattern shown in order to be slow: it writes every pal in the corpus, so \
+         running it would cost one full snapshot rebuild per pal on a 2,150-pal fixture, and \
+         would still assert nothing -- the shape is correct Lua, and the cost it demonstrates \
+         is not something the run's result can show",
     ),
 ];
 
