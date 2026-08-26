@@ -948,14 +948,20 @@ fn guild_membership_targets(
     let mut changes = Vec::new();
     let mut unresolved = 0usize;
     for candidate in candidates {
+        // Both sources hand back an unfiltered guid: a guild group keyed by the nil guid
+        // maps its members to nil, and a base detached from its guild carries nil in
+        // `group_id_belong_to`. Writing either back is orphaning, so a nil is a source
+        // that failed, not an answer -- it falls through, and then to `unresolved`.
         let mut resolved = match candidate.owner {
             Some(owner) => find_player_guild_id(session, owner)?,
             None => None,
-        };
+        }
+        .filter(|guild_id| *guild_id != props::EMPTY_UUID);
         if resolved.is_none() {
             resolved = candidate
                 .container
-                .and_then(|container_id| base_guild_by_container.get(&container_id).copied());
+                .and_then(|container_id| base_guild_by_container.get(&container_id).copied())
+                .filter(|guild_id| *guild_id != props::EMPTY_UUID);
         }
         let Some(guild_id) = resolved else {
             unresolved += 1;
@@ -1978,5 +1984,89 @@ mod tests {
             (1, 1)
         );
         assert_eq!(rebuild_guild_membership(&mut session).expect("rebuild"), (1, 1));
+    }
+
+    fn guild_group_keyed(guild_id: &str) -> UMapEntry {
+        let tail = guild_tail::pre_update_guild(
+            1,
+            "Nameless",
+            PLAYER_ID.parse().expect("a valid uuid"),
+            &[(PLAYER_ID.parse().expect("a valid uuid"), 0, "Tester")],
+        );
+        guild_group_entry(guild_id, tail)
+    }
+
+    /// A base camp detached from its guild carries the nil guid, and writing that back is
+    /// orphaning: the next cleanup run deletes the pal.
+    #[test]
+    fn rebuild_guild_membership_never_writes_a_nil_guild_from_a_detached_base() {
+        let mut session = session_with_world(
+            vec![guild_owning_the_player()],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(None, Some(CONTAINER_ID)),
+                fguid(WRONG_GUILD_ID),
+            )],
+            vec![base_camp_entry(BASE_ID, SDM_NIL, CONTAINER_ID)],
+        );
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(
+            pal_group_id(&session),
+            fguid(WRONG_GUILD_ID),
+            "a nil guid is orphaning, never a guild to reassign a pal to"
+        );
+        assert_eq!(unresolved, 1, "a base belonging to no guild resolves to nothing");
+        assert_eq!(reassigned, 0);
+    }
+
+    /// The same hole through the other source: a guild group keyed by the nil guid maps
+    /// its members to nil, so a pal owned by one must not follow it there.
+    #[test]
+    fn rebuild_guild_membership_never_writes_a_nil_guild_from_a_nil_keyed_guild_group() {
+        let mut session = session_with_world(
+            vec![guild_group_keyed(SDM_NIL)],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(Some(PLAYER_ID), None),
+                fguid(WRONG_GUILD_ID),
+            )],
+            Vec::new(),
+        );
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(
+            pal_group_id(&session),
+            fguid(WRONG_GUILD_ID),
+            "a nil guid is orphaning, never a guild to reassign a pal to"
+        );
+        assert_eq!(unresolved, 1);
+        assert_eq!(reassigned, 0);
+    }
+
+    /// A nil first source is a failed source, not an answer, so the holding base still
+    /// gets its turn rather than the pal going straight to `unresolved`.
+    #[test]
+    fn rebuild_guild_membership_falls_through_to_the_base_when_the_owners_guild_is_nil() {
+        let mut session = session_with_world(
+            vec![guild_group_keyed(SDM_NIL)],
+            vec![character_entry(
+                PAL_INSTANCE_ID,
+                pal_save_parameter(Some(PLAYER_ID), Some(CONTAINER_ID)),
+                crate::ue::FGuid::nil(),
+            )],
+            vec![base_camp_entry(BASE_ID, GUILD_ID, CONTAINER_ID)],
+        );
+
+        let (reassigned, unresolved) =
+            rebuild_guild_membership(&mut session).expect("rebuild");
+
+        assert_eq!(unresolved, 0);
+        assert_eq!(reassigned, 1);
+        assert_eq!(pal_group_id(&session), fguid(GUILD_ID));
     }
 }
