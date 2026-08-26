@@ -151,6 +151,7 @@ fn the_bundled_manifest_parses_and_declares_its_commands() {
             "fix_illegal_pals",
             "fix_illegal_players",
             "fix_invalid_pal_active_skills",
+            "repair_items",
             "repair_structures",
             "scan_illegal_pals",
             "scan_illegal_players",
@@ -780,6 +781,129 @@ fn fix_all_pals_gives_an_orphaned_pal_back_the_owner_of_its_container() {
         owner_of(&h.session, pal_id),
         Some(previous_owner),
         "the owner must come back from the container that holds the pal"
+    );
+    assert_round_trips(&h.session);
+}
+
+/// The corpus fixture carries no broken link at all, so this makes one: an
+/// equipment slot's `DynamicItemSaveData` entry is deleted out from under it,
+/// which is exactly the damage `repair_items` exists to undo. Without it every
+/// assertion below would be `0 == 0`.
+///
+/// Returns the container and slot index that were broken.
+fn break_one_item_link(session: &mut SaveSession) -> (Uuid, i32) {
+    use psp_core::domain::world;
+    use psp_core::props;
+    use psp_core::ue::{Property, PropertyKey, StructValue};
+
+    let (container_id, slot_index, local_id) = world::item_container_map(&session.level)
+        .expect("the container map reads")
+        .iter()
+        .find_map(|entry| {
+            let container_id = props::struct_props(&entry.key)
+                .and_then(|key| props::get(key, &["ID"]))
+                .and_then(props::as_uuid)?;
+            let slots = props::struct_props(&entry.value)
+                .and_then(|value| props::get(value, &["Slots"]))
+                .and_then(props::struct_values)?;
+            slots.iter().find_map(|slot| {
+                let StructValue::Struct(slot_props) = slot else { return None };
+                let Some(Property::Struct(StructValue::Game(
+                    psp_core::ue::PalStruct::ItemContainerSlots(raw),
+                ))) = slot_props.0.get(&PropertyKey::from("RawData"))
+                else {
+                    return None;
+                };
+                let local_id = props::guid_to_uuid(&raw.item.dynamic_id.local_id_in_created_world);
+                (local_id != props::EMPTY_UUID)
+                    .then_some((container_id, raw.slot_index, local_id))
+            })
+        })
+        .expect("fixture precondition: the corpus must hold a slot backed by a record");
+
+    let values = world::dynamic_item_values_mut(&mut session.level).expect("the array reads");
+    let before = values.len();
+    values.retain(|value| {
+        let StructValue::Struct(item_props) = value else { return true };
+        !matches!(
+            item_props.0.get(&PropertyKey::from("RawData")),
+            Some(Property::Struct(StructValue::Game(psp_core::ue::PalStruct::DynamicItem(item))))
+                if props::guid_to_uuid(&item.id.local_id_in_created_world) == local_id
+        )
+    });
+    assert_eq!(before - values.len(), 1, "exactly one record must be deleted");
+    session.caches.dynamic_item_index = None;
+    (container_id, slot_index)
+}
+
+fn container_holds_slot(session: &mut SaveSession, game_data: &GameData, container_id: Uuid, slot_index: i32) -> bool {
+    psp_core::domain::containers::read_item_container(
+        &session.level,
+        &mut session.caches,
+        game_data,
+        container_id,
+        "CommonContainer",
+        None,
+    )
+    .expect("the container resolves")
+    .slots
+    .iter()
+    .any(|slot| slot.slot_index == slot_index)
+}
+
+#[test]
+fn repair_items_converges_and_round_trips() {
+    let mut h = Harness::new();
+    let (container_id, slot_index) = break_one_item_link(&mut h.session);
+    assert!(
+        !container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        "precondition: a slot whose record is gone is dropped by the reader, not reported"
+    );
+
+    let dry = h.run("repair_items", serde_json::json!({}), true);
+    assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
+    let predicted = dry.result.expect("a result")["counts"]["repaired"].as_i64();
+    assert_eq!(predicted, Some(1), "the dry run must see the one broken link");
+    assert!(
+        !container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        "a dry run must not have repaired anything"
+    );
+
+    let real = h.run("repair_items", serde_json::json!({}), false);
+    assert_eq!(real.status, RunStatus::Ok, "{:?}", real.status);
+    assert_eq!(
+        real.result.expect("a result")["counts"]["repaired"].as_i64(),
+        predicted,
+        "the dry run must predict exactly what the real run does"
+    );
+
+    // The user-visible point of the command: the item comes back instead of
+    // being silently deleted the next time its container is written.
+    assert!(
+        container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        "the repaired slot must survive the reader again"
+    );
+
+    let again = h.run("repair_items", serde_json::json!({}), false);
+    assert_eq!(
+        again.result.expect("a result")["counts"]["repaired"].as_i64(),
+        Some(0),
+        "a second run must find nothing left to repair"
+    );
+
+    assert_round_trips(&h.session);
+}
+
+/// An intact save must come out untouched: the command may not mint a record
+/// for a slot that never claimed one.
+#[test]
+fn repair_items_finds_nothing_in_an_intact_save() {
+    let mut h = Harness::new();
+    let outcome = h.run("repair_items", serde_json::json!({}), false);
+    assert_eq!(outcome.status, RunStatus::Ok, "{:?}", outcome.status);
+    assert_eq!(
+        outcome.result.expect("a result")["counts"]["repaired"].as_i64(),
+        Some(0)
     );
     assert_round_trips(&h.session);
 }

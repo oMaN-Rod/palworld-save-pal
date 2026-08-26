@@ -914,39 +914,180 @@ pub fn upsert_dynamic_item(
             }
         }
         None => {
-            let mut item_props = Properties::default();
-            item_props.insert(
-                "RawData",
-                Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(
-                    crate::ue::games::palworld::PalDynamicItem {
-                        id: crate::ue::games::palworld::PalDynamicId {
-                            created_world_id: crate::ue::FGuid::nil(),
-                            local_id_in_created_world: props::uuid_to_guid(dto.local_id),
-                        },
-                        static_id: slot_static_id.to_string(),
-                        item_type,
-                    },
-                )))),
-            );
-            let custom_version_data: Option<&[u8]> = match dto.r#type.as_deref() {
-                Some("weapon") | Some("armor") => {
-                    Some(&DYNAMIC_ITEM_WEAPON_ARMOR_CUSTOM_VERSION_DATA)
-                }
-                Some("egg") => Some(&DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA),
-                _ => None,
-            };
-            if let Some(bytes) = custom_version_data {
-                item_props.insert(
-                    "CustomVersionData",
-                    Property::Array(ValueVec::Byte(ByteArray::Byte(bytes.to_vec()))),
-                );
-            }
+            let entry = new_dynamic_item_entry(dto, slot_static_id, item_type);
             let values = world::dynamic_item_values_mut(&mut session.level)?;
-            values.push(StructValue::Struct(item_props));
+            values.push(entry);
             session.caches.dynamic_item_index = None;
         }
     }
     Ok(())
+}
+
+/// The `DynamicItemSaveData` element a record that does not exist yet is made
+/// of. `item_type` is what `build_dynamic_item_type` resolved for the DTO;
+/// `CustomVersionData` is written only for the three shapes the game records
+/// one for, so an item that is neither weapon, armor nor egg gets none.
+fn new_dynamic_item_entry(
+    dto: &DynamicItemDto,
+    slot_static_id: &str,
+    item_type: crate::ue::games::palworld::PalDynamicItemType<crate::ue::Arch>,
+) -> StructValue {
+    let mut item_props = Properties::default();
+    item_props.insert(
+        "RawData",
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::DynamicItem(Box::new(
+            crate::ue::games::palworld::PalDynamicItem {
+                id: crate::ue::games::palworld::PalDynamicId {
+                    created_world_id: crate::ue::FGuid::nil(),
+                    local_id_in_created_world: props::uuid_to_guid(dto.local_id),
+                },
+                static_id: slot_static_id.to_string(),
+                item_type,
+            },
+        )))),
+    );
+    let custom_version_data: Option<&[u8]> = match dto.r#type.as_deref() {
+        Some("weapon") | Some("armor") => Some(&DYNAMIC_ITEM_WEAPON_ARMOR_CUSTOM_VERSION_DATA),
+        Some("egg") => Some(&DYNAMIC_ITEM_EGG_CUSTOM_VERSION_DATA),
+        _ => None,
+    };
+    if let Some(bytes) = custom_version_data {
+        item_props.insert(
+            "CustomVersionData",
+            Property::Array(ValueVec::Byte(ByteArray::Byte(bytes.to_vec()))),
+        );
+    }
+    StructValue::Struct(item_props)
+}
+
+/// Every item-container slot whose dynamic-item reference resolves to nothing,
+/// as `(local_id, static_id)` in file order and deduplicated by local id: two
+/// slots sharing one broken id are both restored by one minted record.
+///
+/// The index is rebuilt from the level rather than read off
+/// `session.caches.dynamic_item_index`, so a stale cache cannot present an
+/// intact record as missing.
+fn dangling_dynamic_item_slots(
+    level: &crate::ue::Save,
+) -> Result<Vec<(uuid::Uuid, String)>, CoreError> {
+    let index = world::build_dynamic_item_index(level);
+    let mut seen = std::collections::HashSet::new();
+    let mut dangling = Vec::new();
+    for entry in world::item_container_map(level)? {
+        let Some(value_props) = props::struct_props(&entry.value) else {
+            continue;
+        };
+        let Some(slot_values) = props::get(value_props, &["Slots"]).and_then(props::struct_values)
+        else {
+            continue;
+        };
+        for slot_value in slot_values {
+            let StructValue::Struct(slot_props) = slot_value else {
+                continue;
+            };
+            let Some(Property::Struct(StructValue::Game(crate::ue::PalStruct::ItemContainerSlots(raw_slot)))) =
+                slot_props.0.get(&PropertyKey::from("RawData"))
+            else {
+                continue;
+            };
+            // "Does this slot claim a record?" is asked before "does the record
+            // exist?": a nil id means the slot never had one, which is what a
+            // plain stackable item looks like and is never a break.
+            let local_id = props::guid_to_uuid(&raw_slot.item.dynamic_id.local_id_in_created_world);
+            if local_id == props::EMPTY_UUID || index.contains_key(&local_id) {
+                continue;
+            }
+            if seen.insert(local_id) {
+                dangling.push((local_id, raw_slot.item.static_id.clone()));
+            }
+        }
+    }
+    Ok(dangling)
+}
+
+/// `items.json`'s `dynamic.type` per item id, keyed lowercased because save ids
+/// and the catalog do not agree on casing. Built once rather than scanned per
+/// slot, which would be quadratic on a badly broken save. An item the catalog
+/// does not list, and one carrying no dynamic payload at all, are both absent.
+fn catalogued_dynamic_item_types(
+    game_data: &GameData,
+) -> std::collections::HashMap<String, String> {
+    let mut types = std::collections::HashMap::new();
+    let Some(items) = game_data.get("items").and_then(|items| items.as_object()) else {
+        return types;
+    };
+    for (key, value) in items {
+        let Some(kind) = value
+            .get("dynamic")
+            .and_then(|dynamic| dynamic.get("type"))
+            .and_then(|kind| kind.as_str())
+        else {
+            continue;
+        };
+        types.insert(key.to_lowercase(), kind.to_string());
+    }
+    types
+}
+
+/// The read-only count [`repair_dangling_dynamic_items`] would mint.
+pub fn count_dangling_dynamic_items(session: &SaveSession) -> Result<usize, CoreError> {
+    Ok(dangling_dynamic_item_slots(&session.level)?.len())
+}
+
+/// Mints a `DynamicItemSaveData` entry for every item-container slot whose
+/// dynamic-item reference resolves to nothing. Returns how many were minted.
+///
+/// This restores the link, not the item's condition: the minted record carries
+/// whatever `build_dynamic_item_type` writes for an absent DTO field -- zero
+/// durability, no bullets, no passive skills. The real condition went with the
+/// entry, and inventing one would be a different repair than the advertised one.
+///
+/// Without it the slot is invisible to `read_item_container`, and the next write
+/// of its container deletes it.
+///
+/// Every id collected is by construction absent from the array, so the entries
+/// are appended in one pass rather than through `upsert_dynamic_item`, whose
+/// insert path drops the dynamic-item index and would make a save whose whole
+/// `DynamicItemSaveData` array was lost cost one full index rebuild per slot.
+pub fn repair_dangling_dynamic_items(
+    session: &mut SaveSession,
+    game_data: &GameData,
+) -> Result<usize, CoreError> {
+    let dangling = dangling_dynamic_item_slots(&session.level)?;
+    if dangling.is_empty() {
+        return Ok(0);
+    }
+    let catalogued_types = catalogued_dynamic_item_types(game_data);
+    let entries: Vec<StructValue> = dangling
+        .iter()
+        .map(|(local_id, static_id)| {
+            let dto = DynamicItemDto {
+                local_id: *local_id,
+                modified: false,
+                character_id: None,
+                character_key: None,
+                durability: None,
+                passive_skill_list: None,
+                remaining_bullets: None,
+                r#type: catalogued_types.get(&static_id.to_lowercase()).cloned(),
+                static_id: Some(static_id.clone()),
+                gender: None,
+                active_skills: None,
+                learned_skills: None,
+                passive_skills: None,
+                talent_hp: None,
+                talent_shot: None,
+                talent_defense: None,
+            };
+            let item_type = build_dynamic_item_type(&dto, None);
+            new_dynamic_item_entry(&dto, static_id, item_type)
+        })
+        .collect();
+
+    let values = world::dynamic_item_values_mut(&mut session.level)?;
+    values.extend(entries);
+    session.caches.dynamic_item_index = None;
+    Ok(dangling.len())
 }
 
 /// Resizes the paired common container (essential containers only), cleans up removed
@@ -2872,6 +3013,319 @@ mod tests {
             after.slots.len(),
             before.slots.len(),
             "no occupied slot may be lost"
+        );
+    }
+
+    const DANGLING_LOCAL_ID: &str = "dddddddd-0000-0000-0000-000000000000";
+
+    /// One slot whose `local_id_in_created_world` is non-nil while the
+    /// `DynamicItemSaveData` array is empty: exactly the shape
+    /// `read_item_container_drops_a_slot_whose_dynamic_item_is_missing` builds.
+    fn session_with_a_dangling_slot(
+        container_id: uuid::Uuid,
+        static_id: &str,
+    ) -> (SaveSession, uuid::Uuid) {
+        let dangling_local_id = uuid::Uuid::parse_str(DANGLING_LOCAL_ID).unwrap();
+        let slot = item_container_slot(0, 1, static_id, dangling_local_id);
+        (
+            session_with_item_container(container_id, 10, vec![slot], vec![]),
+            dangling_local_id,
+        )
+    }
+
+    fn read_common_container(
+        session: &mut SaveSession,
+        game_data: &GameData,
+        container_id: uuid::Uuid,
+    ) -> ItemContainerDto {
+        read_item_container(
+            &session.level,
+            &mut session.caches,
+            game_data,
+            container_id,
+            "CommonContainer",
+            None,
+        )
+        .expect("the container resolves")
+    }
+
+    #[test]
+    fn repair_dangling_dynamic_items_mints_an_entry_for_a_slot_whose_record_is_gone() {
+        let container_id = uuid::Uuid::nil();
+        let (mut session, dangling_local_id) = session_with_a_dangling_slot(container_id, "SFBow_5");
+        let game_data = game_data();
+
+        assert_eq!(count_dangling_dynamic_items(&session).expect("count"), 1);
+        assert!(
+            read_common_container(&mut session, &game_data, container_id)
+                .slots
+                .is_empty(),
+            "precondition: the broken slot is invisible to the reader before the repair"
+        );
+
+        let minted = repair_dangling_dynamic_items(&mut session, &game_data).expect("repair");
+        assert_eq!(minted, 1);
+        assert_eq!(
+            count_dangling_dynamic_items(&session).expect("count"),
+            0,
+            "the command must converge in one run"
+        );
+
+        let dto = read_common_container(&mut session, &game_data, container_id);
+        assert_eq!(dto.slots.len(), 1, "the repaired slot must survive the reader");
+        assert_eq!(dto.slots[0].static_id, Some("SFBow_5".to_string()));
+        let record = dto.slots[0]
+            .dynamic_item
+            .as_ref()
+            .expect("the repaired slot carries a record");
+        assert_eq!(record.local_id, dangling_local_id);
+        assert_eq!(record.static_id, Some("SFBow_5".to_string()));
+        assert_eq!(
+            record.r#type,
+            Some("weapon".to_string()),
+            "the minted record's type comes from the item's own catalog entry"
+        );
+        assert_eq!(
+            (record.durability, record.remaining_bullets),
+            (Some(0.0), Some(0)),
+            "a repaired weapon comes back at the minted defaults; its condition is not invented"
+        );
+        assert_eq!(record.passive_skill_list, Some(Vec::new()));
+    }
+
+    #[test]
+    fn repair_dangling_dynamic_items_recovers_a_slot_whose_item_the_catalog_does_not_list() {
+        let container_id = uuid::Uuid::nil();
+        let (mut session, _) = session_with_a_dangling_slot(container_id, "SomeWeapon");
+        let game_data = game_data();
+
+        assert_eq!(
+            repair_dangling_dynamic_items(&mut session, &game_data).expect("repair"),
+            1
+        );
+
+        let dto = read_common_container(&mut session, &game_data, container_id);
+        assert_eq!(
+            dto.slots.len(),
+            1,
+            "an item the catalog does not list must still be recovered"
+        );
+        let record = dto.slots[0]
+            .dynamic_item
+            .as_ref()
+            .expect("the repaired slot carries a record");
+        assert_eq!(
+            record.r#type,
+            Some("unknown".to_string()),
+            "an undeterminable type mints a record with no condition payload at all"
+        );
+    }
+
+    #[test]
+    fn repair_dangling_dynamic_items_ignores_a_slot_with_no_record_at_all() {
+        let container_id = uuid::Uuid::nil();
+        let slot = item_container_slot(0, 5, "Wood", props::EMPTY_UUID);
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![]);
+        let game_data = game_data();
+
+        assert_eq!(count_dangling_dynamic_items(&session).expect("count"), 0);
+        assert_eq!(
+            repair_dangling_dynamic_items(&mut session, &game_data).expect("repair"),
+            0
+        );
+        assert!(
+            world::dynamic_item_values(&session.level)
+                .expect("values")
+                .is_empty(),
+            "a stackable item's nil id means no record exists to repair"
+        );
+        assert_eq!(
+            read_common_container(&mut session, &game_data, container_id)
+                .slots
+                .len(),
+            1,
+            "the untouched slot must still read back"
+        );
+    }
+
+    #[test]
+    fn repair_dangling_dynamic_items_leaves_an_intact_record_untouched() {
+        let container_id = uuid::Uuid::nil();
+        let local_id = uuid::Uuid::parse_str("aaaaaaaa-0000-0000-0000-000000000000").unwrap();
+        let slot = item_container_slot(0, 1, "SFBow_5", local_id);
+        let weapon = dynamic_item_entry(
+            local_id,
+            "SFBow_5",
+            crate::ue::games::palworld::PalDynamicItemType::Weapon {
+                leading_bytes: [0; 4],
+                durability: 80.5,
+                remaining_bullets: 12,
+                passive_skill_list: vec!["Rare".to_string()],
+                unknown_str: None,
+                trailing_bytes: [0; 4],
+            },
+        );
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![weapon]);
+        let game_data = game_data();
+
+        let before = world::dynamic_item_values(&session.level)
+            .expect("values")
+            .clone();
+        assert_eq!(count_dangling_dynamic_items(&session).expect("count"), 0);
+        assert_eq!(
+            repair_dangling_dynamic_items(&mut session, &game_data).expect("repair"),
+            0
+        );
+        let after = world::dynamic_item_values(&session.level).expect("values");
+        assert_eq!(before.len(), after.len(), "no entry may be added or removed");
+        assert_eq!(&before, after, "an intact record must not be rewritten");
+    }
+
+    /// The dry run's prediction and the real run's mint have to be the same
+    /// number: a prediction that under-reports is a silent item loss, not a
+    /// failing test. Two slots share one broken id here, so a per-slot count
+    /// would over-report by one against the entries actually appended.
+    #[test]
+    fn count_dangling_dynamic_items_predicts_exactly_what_repair_mints() {
+        let container_id = uuid::Uuid::nil();
+        let intact_id = uuid::Uuid::parse_str("aaaaaaaa-0000-0000-0000-000000000000").unwrap();
+        let broken_id = uuid::Uuid::parse_str(DANGLING_LOCAL_ID).unwrap();
+        let other_broken_id = uuid::Uuid::parse_str("eeeeeeee-0000-0000-0000-000000000000").unwrap();
+        let weapon = dynamic_item_entry(
+            intact_id,
+            "SFBow_5",
+            crate::ue::games::palworld::PalDynamicItemType::Weapon {
+                leading_bytes: [0; 4],
+                durability: 80.5,
+                remaining_bullets: 12,
+                passive_skill_list: Vec::new(),
+                unknown_str: None,
+                trailing_bytes: [0; 4],
+            },
+        );
+        let slots = vec![
+            item_container_slot(0, 1, "SFBow_5", intact_id),
+            item_container_slot(1, 99, "Wood", props::EMPTY_UUID),
+            item_container_slot(2, 1, "SFBow_5", broken_id),
+            item_container_slot(3, 1, "SFBow_5", broken_id),
+            item_container_slot(4, 1, "PalSphere", other_broken_id),
+        ];
+        let mut session = session_with_item_container(container_id, 10, slots, vec![weapon]);
+        let game_data = game_data();
+
+        let predicted = count_dangling_dynamic_items(&session).expect("count");
+        assert_eq!(predicted, 2, "two distinct broken ids, not three broken slots");
+
+        let before = world::dynamic_item_values(&session.level).expect("values").len();
+        let minted = repair_dangling_dynamic_items(&mut session, &game_data).expect("repair");
+        let after = world::dynamic_item_values(&session.level).expect("values").len();
+
+        assert_eq!(minted, predicted, "the dry run must predict what the real run mints");
+        assert_eq!(
+            after - before,
+            minted,
+            "every minted record must be an entry actually added to the save"
+        );
+        assert_eq!(
+            read_common_container(&mut session, &game_data, container_id)
+                .slots
+                .len(),
+            5,
+            "every slot must read back once the links are restored"
+        );
+    }
+
+    #[test]
+    fn repair_dangling_dynamic_items_uses_a_freshly_built_index_not_a_stale_cache() {
+        let container_id = uuid::Uuid::nil();
+        let local_id = uuid::Uuid::parse_str("aaaaaaaa-0000-0000-0000-000000000000").unwrap();
+        let slot = item_container_slot(0, 1, "SFBow_5", local_id);
+        let weapon = dynamic_item_entry(
+            local_id,
+            "SFBow_5",
+            crate::ue::games::palworld::PalDynamicItemType::Armor {
+                leading_bytes: [0; 4],
+                durability: 10.0,
+                trailing_bytes: [0; 4],
+            },
+        );
+        let mut session = session_with_item_container(container_id, 10, vec![slot], vec![weapon]);
+        session.caches.dynamic_item_index = Some(std::collections::HashMap::new());
+        let game_data = game_data();
+
+        assert_eq!(
+            count_dangling_dynamic_items(&session).expect("count"),
+            0,
+            "an emptied cache must not make an intact record look missing"
+        );
+        assert_eq!(
+            repair_dangling_dynamic_items(&mut session, &game_data).expect("repair"),
+            0
+        );
+        assert_eq!(
+            world::dynamic_item_values(&session.level).expect("values").len(),
+            1
+        );
+    }
+
+    /// The shape this command exists for is a save whose whole
+    /// `DynamicItemSaveData` array went missing, so every equipment slot in it
+    /// dangles at once. Minting one entry at a time through a path that drops
+    /// the dynamic-item index makes that case cost one full rebuild per slot.
+    #[test]
+    fn repair_dangling_dynamic_items_mints_many_records_without_a_rebuild_per_mint() {
+        const N: usize = 4000;
+        let container_id = uuid::Uuid::nil();
+        let slots = (0..N)
+            .map(|i| {
+                let local_id =
+                    uuid::Uuid::from_u128(0x2000_0000_0000_0000_0000_0000_0000_0000 + i as u128);
+                item_container_slot(i as i32, 1, "SFBow_5", local_id)
+            })
+            .collect();
+        let mut session = session_with_item_container(container_id, N as i32, slots, vec![]);
+        let game_data = game_data();
+
+        let start = std::time::Instant::now();
+        let minted = repair_dangling_dynamic_items(&mut session, &game_data).expect("repair");
+        let elapsed = start.elapsed();
+
+        assert_eq!(minted, N);
+        assert!(
+            elapsed < std::time::Duration::from_millis(1500),
+            "repairing {N} dangling links took {elapsed:?}; a per-mint index rebuild makes this \
+             cost O(N^2)"
+        );
+    }
+
+    /// The corpus fixture is intact -- it carries no dangling link at all -- so
+    /// what this pins is the false-positive side: a sweep that misread a nil id,
+    /// or resolved records against the wrong index, would mint records for a
+    /// real save's thousands of healthy slots.
+    #[test]
+    fn the_corpus_fixture_has_no_dangling_links_and_the_sweep_mints_nothing() {
+        let mut session = load_fixture_session("v1_relics");
+        let game_data = game_data();
+
+        let before = world::dynamic_item_values(&session.level)
+            .expect("values")
+            .len();
+        assert!(
+            before > 0,
+            "fixture precondition: the corpus must hold dynamic items, or this proves nothing"
+        );
+
+        assert_eq!(count_dangling_dynamic_items(&session).expect("count"), 0);
+        assert_eq!(
+            repair_dangling_dynamic_items(&mut session, &game_data).expect("repair"),
+            0
+        );
+        assert_eq!(
+            world::dynamic_item_values(&session.level)
+                .expect("values")
+                .len(),
+            before,
+            "an intact save must come out byte-for-byte as long as it went in"
         );
     }
 }

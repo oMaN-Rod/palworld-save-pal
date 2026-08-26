@@ -70,6 +70,13 @@
       "description": "Removes equipped and mastered skills that a pal's own species cannot learn. A pal whose species does not resolve, or that holds a skill the game data does not list, is left untouched and reported.",
       "destructive": true,
       "params": []
+    },
+    {
+      "id": "repair_items",
+      "title": "Repair Items",
+      "description": "Restores the per-item record for every container slot whose record has gone missing - the equipment, armour and eggs that carry one - so the item survives instead of being dropped the next time its container is written. A stackable item, which has no such record, is never touched. The restored item carries default condition, not its original durability, remaining bullets or passive skills.",
+      "destructive": true,
+      "params": []
     }
   ],
   "ui": [

@@ -253,6 +253,12 @@ function save.clear_slots_where(predicate) end
 ---@return integer
 function save.unlock_private_chests() end
 
+---Heals every pal in the world, recomputing its HP from its level, talents, condensing rank and awakening, restoring its sanity and fullness and clearing any sickness, then gives an ownerless pal the owner of the container holding it. Returns how many pals were restored, followed by how many owners were assigned. Every value is written in place, so live handles and iterators stay valid. Resolving those owners loads every player's save data, under a dry run too, so the call's cost and memory both scale with how many players the save has. Does not touch dimensional storage.
+---
+---Requires capability: save.write.
+---@return integer
+function save.restore_pals() end
+
 ---Removes every WorkSaveData entry whose owning map object no longer exists, returning how many were removed. A non-zero result is a structural write and invalidates every live handle and iterator.
 ---
 ---Requires capability: save.write.
@@ -272,6 +278,12 @@ function save.delete_dps_pals(player_uid, indexes) end
 ---Requires capability: save.write.
 ---@return integer
 function save.remove_orphaned_dynamic_items() end
+
+---Mints a per-item record for every container slot whose record has gone missing, returning how many were minted. Without this, such a slot is invisible to container reads and is deleted the next time its container is written. The minted record carries default condition, not the item's original durability. A non-zero result is a structural write and invalidates every live handle and iterator.
+---
+---Requires capability: save.write.
+---@return integer
+function save.repair_item_links() end
 
 ---Requires capability: gamedata.
 ---

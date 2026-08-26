@@ -118,6 +118,15 @@ function fix_all_pals()
   }
 end
 
+function repair_items()
+  local minted = save.repair_item_links()
+  local verb = ctx.dry_run and "Would restore" or "Restored"
+  return {
+    summary = string.format("%s the record for %d item(s)", verb, minted),
+    counts = { repaired = minted },
+  }
+end
+
 local function over_cap(points, max_points)
   local problems, worst = {}, 0
   if points ~= nil then

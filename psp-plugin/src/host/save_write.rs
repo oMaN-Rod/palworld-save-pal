@@ -637,6 +637,35 @@ fn restore_pals_body(state: *mut lua_State) -> Result<c_int, HostError> {
 
 host_fn!(push_restore_pals, restore_pals_body);
 
+fn repair_item_links_body(state: *mut lua_State) -> Result<c_int, HostError> {
+    unsafe {
+        check_args(state, 0, "save.repair_item_links")?;
+        let minted = with_context(state, |ctx| {
+            if ctx.dry_run {
+                let predicted =
+                    containers::count_dangling_dynamic_items(ctx.session).map_err(core_error)?;
+                ctx.bump("save.repair_item_links", predicted as i64);
+                return Ok(predicted);
+            }
+            super::dto_cache::flush(ctx)?;
+            let minted = containers::repair_dangling_dynamic_items(ctx.session, ctx.game_data)
+                .map_err(core_error)?;
+            if minted > 0 {
+                // Structural, though nothing is added to or removed from a
+                // container: a restored slot becomes visible to the reader
+                // again, and `container.slots()` walks that list by position,
+                // so a live iterator would be indexing a list that just grew.
+                ctx.note_mutation();
+            }
+            Ok(minted)
+        })?;
+        lua_pushinteger(state, minted as i64);
+        Ok(1)
+    }
+}
+
+host_fn!(push_repair_item_links, repair_item_links_body);
+
 /// Prunes a dry run's own `map_objects` cache to the ids `delete_where` just
 /// resolved as killed, without touching `ctx.session` -- the overlay a later
 /// `save.remove_orphaned_works()` call in the same dry run reads its surviving
@@ -1193,6 +1222,18 @@ pub const SAVE_WRITE_FUNCTIONS: &[ApiFunction] = &[
               handle and iterator.",
         capability: Some(Capability::SaveWrite),
     },
+    ApiFunction {
+        name: "repair_item_links",
+        params: &[],
+        returns: ApiType::Integer,
+        doc: "Mints a per-item record for every container slot whose record has gone missing, \
+              returning how many were minted. Without this, such a slot is invisible to \
+              container reads and is deleted the next time its container is written. The \
+              minted record carries default condition, not the item's original durability. A \
+              non-zero result is a structural write and invalidates every live handle and \
+              iterator.",
+        capability: Some(Capability::SaveWrite),
+    },
 ];
 
 const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
@@ -1202,6 +1243,7 @@ const SAVE_WRITE_PUSH_FNS: [PushHostFn; SAVE_WRITE_FUNCTIONS.len()] = [
     push_remove_orphaned_works,
     push_delete_dps_pals,
     push_remove_orphaned_dynamic_items,
+    push_repair_item_links,
 ];
 
 fn save_write_bindings() -> [(&'static str, PushHostFn); SAVE_WRITE_FUNCTIONS.len()] {

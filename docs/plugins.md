@@ -814,6 +814,17 @@ three entity iterators that support it:
   `DynamicItemSaveData` entry that no item-container slot, dropped item, item
   booth trade or damage-drop table still points at, returning how many were
   removed. Structural on a non-zero result.
+- `save.repair_item_links() -> integer` - the inverse: mints a
+  `DynamicItemSaveData` entry for every container slot that points at one which
+  is no longer there, returning how many were minted. A slot in that state is
+  dropped by the reader, so `container.slots()` never sees it and cannot fix it
+  from Lua - and the next write of its container deletes it for good. Only the
+  link is restored: the minted record carries default condition, not the item's
+  original durability, bullets or passive skills. A slot with no record at all
+  (the nil dynamic id a plain stackable item carries) is not broken and is
+  never given one. Structural on a non-zero result, because a restored slot
+  reappears in its container's slot list and `container.slots()` walks that
+  list by position.
 - `save.delete_dps_pals(player_uid, indexes) -> integer` - empties the given
   slot indexes of one player's dimensional storage in place: it nils the
   slot's instance id and resets its parameter bag to an unused slot's shape,
