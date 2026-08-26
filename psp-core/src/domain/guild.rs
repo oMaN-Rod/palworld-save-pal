@@ -1300,7 +1300,7 @@ mod tests {
         save_parameter
     }
 
-    /// `"SlotId"` is real save data's actual spelling (11/11 world1 pals).
+    /// `"SlotId"` is the spelling world1's 11 pals carry.
     #[test]
     fn base_container_membership_resolves_the_real_slot_id_spelling() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
@@ -1312,8 +1312,9 @@ mod tests {
         );
     }
 
-    /// The uppercase spelling is what `tests/fixtures/reference_saves/Level.sav` carries,
-    /// and what `new_pal_entry` writes.
+    /// `new_pal_entry` writes this spelling on every pal PSP creates, and it persists
+    /// across save and reload; an older upstream save this reader cannot yet open carries
+    /// it too.
     #[test]
     fn base_container_membership_resolves_the_slot_id_uppercase_spelling() {
         let container_id = uuid::Uuid::parse_str(CONTAINER_ID).unwrap();
