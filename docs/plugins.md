@@ -707,6 +707,18 @@ disk, which is what makes those fields cost something: reading `uid`, `name`,
 `level`, `guild_id`, `pal_count` or the two `last_online` fields across every
 player costs nothing extra; reading `exp` does.
 
+`pal_count` is one of those summary fields: computed once, when the save's
+player summaries are built, and never rebuilt from scratch during a run.
+Deleting an owned pal keeps it accurate regardless of which write removed the
+pal - `pal.delete()` and `save.pals():delete_where(...)` both decrement the
+owning player's cached count as part of the delete - and `base.delete()`
+never touches it because a base's worker pals are guild-owned, not
+player-owned, so none of them were counted against a player to begin with.
+The one write that leaves it wrong is ownership changing without a matching
+adjustment: `save.restore_pals()` can hand a previously ownerless pal to a
+player without updating anyone's `pal_count` - see the caveat under that call
+below.
+
 The DTO draws on two files, and which one a field comes from matters for what
 follows:
 
@@ -835,10 +847,8 @@ three entity iterators that support it:
   map this walks. Not structural - every entry is rewritten in place, so no
   handle or iterator is invalidated - but it does drop the `pals` snapshot,
   since that snapshot caches the `hp` and `owner_uid` this just rewrote.
-  `player.pal_count` is the one derived value the call does not refresh: it
-  comes from the player summaries built when the save was loaded, which
-  nothing in a run rebuilds, so it keeps answering its pre-call number for
-  the rest of the run even for a player who just gained pals.
+  Assigning an owner does not refresh that player's `player.pal_count` - see
+  the caveat under that field above.
 - `save.rebuild_guild_membership() -> reassigned, unresolved` - reassigns
   every non-player pal to the guild that should own it: its owning player's
   guild, or, failing that, the guild of the base whose worker container
