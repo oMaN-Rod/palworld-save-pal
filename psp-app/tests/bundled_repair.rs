@@ -190,9 +190,72 @@ fn the_bundled_view_wires_an_entity_select_a_button_and_a_selectable_table() {
         .expect("the view must have a button that fixes");
     assert_eq!(
         fix.args.get("ids").map(String::as_str),
-        Some("rows.selection"),
+        Some("pal_rows.selection"),
         "the fix button must take its ids from the table's selection"
     );
+}
+
+#[test]
+fn every_declared_command_is_reachable_from_the_view() {
+    let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");
+    let manifest = Manifest::parse(plugin.manifest).expect("the manifest parses");
+
+    let wired: std::collections::BTreeSet<&str> = manifest
+        .ui
+        .iter()
+        .flat_map(|section| section.widgets.iter())
+        .filter_map(|w| w.command.as_deref())
+        .collect();
+
+    let missing: Vec<&str> = manifest
+        .commands
+        .iter()
+        .map(|c| c.id.as_str())
+        .filter(|id| !wired.contains(id))
+        .collect();
+
+    assert!(missing.is_empty(), "these commands have no button: {missing:?}");
+}
+
+#[test]
+fn the_view_keeps_a_scan_pick_apply_pair_for_both_scans() {
+    let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");
+    let manifest = Manifest::parse(plugin.manifest).expect("the manifest parses");
+    let widgets: Vec<&psp_plugin::manifest::UiWidget> =
+        manifest.ui.iter().flat_map(|s| s.widgets.iter()).collect();
+
+    for (scan, fix) in [
+        ("scan_illegal_pals", "fix_illegal_pals"),
+        ("scan_illegal_players", "fix_illegal_players"),
+    ] {
+        let table = widgets
+            .iter()
+            .find(|w| w.widget_type == "table" && w.selectable && w.from.as_deref() == Some(scan))
+            .unwrap_or_else(|| panic!("{scan} must feed a selectable table"));
+        let table_id = table.id.as_deref().unwrap_or_else(|| panic!("{scan}'s table needs an id"));
+
+        let button = widgets
+            .iter()
+            .find(|w| w.widget_type == "button" && w.command.as_deref() == Some(fix))
+            .unwrap_or_else(|| panic!("{fix} must have a button"));
+        assert_eq!(
+            button.args.get("ids").map(String::as_str),
+            Some(format!("{table_id}.selection").as_str()),
+            "{fix} must take its ids from {scan}'s own table"
+        );
+    }
+}
+
+#[test]
+fn no_two_widgets_share_an_id() {
+    let plugin = BUNDLED.iter().find(|p| p.id == "pst.repair").expect("pst.repair");
+    let manifest = Manifest::parse(plugin.manifest).expect("the manifest parses");
+    let mut seen = std::collections::BTreeSet::new();
+    for widget in manifest.ui.iter().flat_map(|s| s.widgets.iter()) {
+        if let Some(id) = widget.id.as_deref() {
+            assert!(seen.insert(id), "duplicate widget id: {id}");
+        }
+    }
 }
 
 #[test]

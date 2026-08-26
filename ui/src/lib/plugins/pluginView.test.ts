@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import type { PluginCommand } from '$types';
 import {
@@ -111,6 +113,25 @@ describe('normalizeView', () => {
 			COMMAND_IDS
 		);
 		expect(sections[0].widgets[0].span).toBeNull();
+	});
+});
+
+describe('bundled views', () => {
+	it('normalizes pst.repair with every section keeping its declared widgets', () => {
+		const manifest = JSON.parse(
+			readFileSync(
+				fileURLToPath(new URL('../../../../psp-app/src/bundled/pst.repair/manifest.json', import.meta.url)),
+				'utf8'
+			)
+		);
+		const commandIds = manifest.commands.map((c: { id: string }) => c.id);
+		const { sections, warnings } = normalizeView(manifest.ui, commandIds);
+
+		expect(warnings).toEqual([]);
+		expect(sections).toHaveLength(manifest.ui.length);
+		sections.forEach((section, i) => {
+			expect(section.widgets).toHaveLength(manifest.ui[i].widgets.length);
+		});
 	});
 });
 

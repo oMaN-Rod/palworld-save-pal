@@ -109,10 +109,47 @@
       "columns": 1,
       "widgets": [
         { "type": "text", "from": "scan_illegal_pals", "path": "summary" },
-        { "type": "table", "id": "rows", "from": "scan_illegal_pals", "path": "pals",
+        { "type": "table", "id": "pal_rows", "from": "scan_illegal_pals", "path": "pals",
           "columns": ["name", "level", "rank", "problems"], "selectable": true },
         { "type": "button", "label": "Fix selected", "command": "fix_illegal_pals",
-          "args": { "ids": "rows.selection" } }
+          "args": { "ids": "pal_rows.selection" } }
+      ]
+    },
+    {
+      "title": "Player stats",
+      "columns": 1,
+      "widgets": [
+        { "type": "number_input", "id": "max_points", "label": "Maximum points per stat" },
+        { "type": "button", "label": "Scan", "command": "scan_illegal_players" },
+        { "type": "text", "from": "scan_illegal_players", "path": "summary" },
+        { "type": "table", "id": "player_rows", "from": "scan_illegal_players", "path": "players",
+          "columns": ["name", "problems", "worst"], "selectable": true },
+        { "type": "button", "label": "Fix selected", "command": "fix_illegal_players",
+          "args": { "ids": "player_rows.selection" } }
+      ]
+    },
+    {
+      "title": "Repairs",
+      "columns": 2,
+      "widgets": [
+        { "type": "button", "label": "Repair Structures", "command": "repair_structures" },
+        { "type": "button", "label": "Fix All Pals", "command": "fix_all_pals" },
+        { "type": "button", "label": "Repair Items", "command": "repair_items" },
+        { "type": "button", "label": "Fix Inventory Sizes", "command": "trim_overfilled_inventories" },
+        { "type": "button", "label": "Rebuild Guild Membership", "command": "rebuild_all_guilds" },
+        { "type": "button", "label": "Fix Invalid Pal Skills", "command": "fix_invalid_pal_active_skills" }
+      ]
+    },
+    {
+      "title": "Last result",
+      "columns": 1,
+      "widgets": [
+        { "type": "text", "from": "repair_structures", "path": "summary" },
+        { "type": "text", "from": "fix_all_pals", "path": "summary" },
+        { "type": "text", "from": "repair_items", "path": "summary" },
+        { "type": "text", "from": "trim_overfilled_inventories", "path": "summary" },
+        { "type": "text", "from": "rebuild_all_guilds", "path": "summary" },
+        { "type": "text", "from": "fix_invalid_pal_active_skills", "path": "summary" }
       ]
     }
   ]
