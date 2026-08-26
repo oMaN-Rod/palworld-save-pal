@@ -235,6 +235,103 @@ fn world1_fixture_base_camp_worker_director_decodes_to_known_real_values() {
     assert!(summaries.iter().all(|summary| summary.base_id.is_none()));
 }
 
+fn fixture_level_sav(name: &str) -> std::path::PathBuf {
+    std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../tests/fixtures/saves")
+        .join(name)
+        .join("Level.sav")
+}
+
+/// `(SlotID, SlotId)` occurrences as GVAS *property names*. A name is written
+/// length-prefixed and NUL-terminated, so the prefixed needle excludes the struct type
+/// name `PalCharacterSlotId`, whose tail a bare `SlotId` search matches instead.
+fn slot_key_name_counts(level_sav: &std::path::Path) -> (usize, usize) {
+    let bytes = std::fs::read(level_sav).expect("read committed Level.sav");
+    let gvas =
+        psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(bytes.as_slice()))
+            .expect("decompress committed Level.sav");
+    (
+        count_bytes(&gvas, b"\x07\x00\x00\x00SlotID\x00"),
+        count_bytes(&gvas, b"\x07\x00\x00\x00SlotId\x00"),
+    )
+}
+
+fn count_bytes(haystack: &[u8], needle: &[u8]) -> usize {
+    haystack
+        .windows(needle.len())
+        .filter(|window| *window == needle)
+        .count()
+}
+
+/// `(SlotID, SlotId)` pals, as the reader resolves them.
+fn resolved_slot_key_counts(session: &SaveSession) -> (usize, usize) {
+    let mut counts = (0, 0);
+    for entry in world::character_map(&session.level).expect("character map") {
+        if world::entry_is_player(entry) {
+            continue;
+        }
+        let Some(save_parameter) = world::entry_save_parameter(entry) else {
+            continue;
+        };
+        if psp_core::props::get(save_parameter, &["SlotID"]).is_some() {
+            counts.0 += 1;
+        }
+        if psp_core::props::get(save_parameter, &["SlotId"]).is_some() {
+            counts.1 += 1;
+        }
+    }
+    counts
+}
+
+#[test]
+fn every_committed_save_fixture_spells_the_pal_slot_key_slot_id() {
+    for (name, pal_count) in [
+        ("v1_relics", 2150),
+        ("v1_stats", 210),
+        ("world1", 11),
+        ("world2", 0),
+    ] {
+        let session = common::load_fixture_session(name);
+        let resolved = resolved_slot_key_counts(&session);
+
+        assert_eq!(
+            resolved,
+            (0, pal_count),
+            "{name}: every pal must spell the slot key \"SlotId\""
+        );
+        assert_eq!(
+            slot_key_name_counts(&fixture_level_sav(name)),
+            resolved,
+            "{name}: the raw property-name census must agree with the reader"
+        );
+    }
+}
+
+/// The upstream reference save spells the key the other way. The current reader cannot
+/// parse this save -- it is an older format than the fixtures above -- so the census is
+/// taken over its decompressed bytes, by the method the test above validates against the
+/// reader on every save that does parse.
+#[test]
+fn the_reference_save_spells_the_pal_slot_key_slot_id_uppercase() {
+    let level_sav = psp_core::gamepass::fixture::reference_saves_dir().join("Level.sav");
+
+    assert_eq!(
+        slot_key_name_counts(&level_sav),
+        (2, 0),
+        "the reference save's slot keys are all spelled \"SlotID\""
+    );
+
+    let bytes = std::fs::read(&level_sav).expect("read the reference Level.sav");
+    let gvas =
+        psp_core::ue::compression::decompress_save(&mut std::io::Cursor::new(bytes.as_slice()))
+            .expect("decompress the reference Level.sav");
+    assert_eq!(
+        count_bytes(&gvas, b"SlotId"),
+        count_bytes(&gvas, b"PalCharacterSlotId"),
+        "a bare \"SlotId\" search finds only the struct type name, never a property name"
+    );
+}
+
 #[test]
 fn pal_dto_from_entry_returns_none_for_a_malformed_entry() {
     let malformed = psp_core::ue::MapEntry {
