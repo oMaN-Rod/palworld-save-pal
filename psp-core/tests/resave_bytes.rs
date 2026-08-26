@@ -456,3 +456,119 @@ fn writing_the_same_session_twice_is_byte_identical() {
         "a second write of an unmodified session must be byte-identical"
     );
 }
+
+/// A raw `assert_eq!` on two multi-kilobyte byte vectors prints both in full and
+/// names no offset, which says nothing about how far the drift goes.
+fn describe_byte_drift(label: &str, written: &[u8], original: &[u8]) -> Option<String> {
+    if written == original {
+        return None;
+    }
+    let first_diff = written
+        .iter()
+        .zip(original.iter())
+        .position(|(a, b)| a != b);
+    let differing = written
+        .iter()
+        .zip(original.iter())
+        .filter(|(a, b)| a != b)
+        .count();
+    let window = first_diff.map(|at| {
+        let end = (at + 16).min(written.len().min(original.len()));
+        (written[at..end].to_vec(), original[at..end].to_vec())
+    });
+    // A `PlM` container opens with u32 uncompressed_len, u32 compressed_len: the pair
+    // separates a payload that really changed from one only the compressor spelled
+    // differently.
+    let plm_lengths = |bytes: &[u8]| -> Option<(u32, u32)> {
+        Some((
+            u32::from_le_bytes(bytes.get(0..4)?.try_into().ok()?),
+            u32::from_le_bytes(bytes.get(4..8)?.try_into().ok()?),
+        ))
+    };
+    Some(format!(
+        "{label}: written {} bytes, original {} bytes ({:+}); \
+         PlM (uncompressed_len, compressed_len) written {:?}, original {:?}; \
+         first differing offset {:?}; {differing} differing bytes in the common prefix; \
+         window written {:?}; window original {:?}",
+        written.len(),
+        original.len(),
+        written.len() as i64 - original.len() as i64,
+        plm_lengths(written),
+        plm_lengths(original),
+        first_diff,
+        window.as_ref().map(|(w, _)| w),
+        window.as_ref().map(|(_, o)| o),
+    ))
+}
+
+/// A no-edit resave of a player's own `.sav` must reproduce the original file
+/// byte-for-byte, the same way `untouched_level_resaves_byte_identical` pins
+/// `Level.sav`. Nothing else in the repo covers the player files, and any caller
+/// that force-loads a player's GVAS to read it -- without editing anything --
+/// makes every subsequent save-out rewrite that file from this round trip.
+#[test]
+fn untouched_player_sav_resaves_byte_identical() {
+    let mut session = common::load_corpus_session();
+    let refs: Vec<(uuid::Uuid, Option<std::path::PathBuf>, Option<std::path::PathBuf>)> = session
+        .player_file_refs
+        .iter()
+        .map(|(uid, data)| match data {
+            psp_core::session::PlayerFileData::Paths { sav, dps } => {
+                (*uid, sav.clone(), dps.clone())
+            }
+            _ => (*uid, None, None),
+        })
+        .collect();
+    assert!(
+        refs.iter().filter(|(_, sav, _)| sav.is_some()).count() > 1,
+        "the corpus fixture must carry several player .sav files"
+    );
+    assert!(
+        refs.iter().any(|(_, _, dps)| dps.is_some()),
+        "the corpus fixture must carry at least one _dps.sav"
+    );
+
+    for (uid, _, _) in &refs {
+        session
+            .ensure_player_loaded(*uid)
+            .unwrap_or_else(|error| panic!("force-load player {uid}: {error}"));
+    }
+
+    let written = session.player_sav_bytes().expect("write player savs");
+    let mut compared = 0;
+    // Every file is compared before reporting: stopping at the first would hide whether
+    // the drift is one bad file or all of them.
+    let mut drift = Vec::new();
+    for (uid, sav_path, dps_path) in &refs {
+        let Some((sav_bytes, dps_bytes)) = written.get(uid) else {
+            panic!("player {uid} was force-loaded but emitted no bytes");
+        };
+        if let Some(path) = sav_path {
+            let original = std::fs::read(path).expect("read fixture player .sav");
+            assert!(original.len() > 100, "fixture player .sav must be a real save");
+            drift.extend(describe_byte_drift(
+                &format!("player {uid}'s .sav"),
+                sav_bytes,
+                &original,
+            ));
+            compared += 1;
+        }
+        if let Some(path) = dps_path {
+            let original = std::fs::read(path).expect("read fixture player _dps.sav");
+            let rewritten = dps_bytes.as_ref().expect("a loaded dps must emit bytes");
+            drift.extend(describe_byte_drift(
+                &format!("player {uid}'s _dps.sav"),
+                rewritten,
+                &original,
+            ));
+            compared += 1;
+        }
+    }
+    assert!(compared > 1, "the comparison must have actually run");
+    assert!(
+        drift.is_empty(),
+        "{} of {compared} player file(s) did not resave byte-identically:\n{}",
+        drift.len(),
+        drift.join("\n")
+    );
+}

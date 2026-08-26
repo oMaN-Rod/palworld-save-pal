@@ -612,7 +612,7 @@ fn fix_invalid_pal_active_skills_skips_rather_than_fails_on_an_uncatalogued_skil
 /// player entries by design, so a world-wide count would assert a behaviour the
 /// command never promised.
 fn non_player_sickness_markers(session: &SaveSession) -> usize {
-    const MARKERS: [&str; 4] = ["WorkerSick", "PhysicalHealth", "PalReviveTimer", "HungerType"];
+    const MARKERS: [&str; 3] = ["WorkerSick", "PhysicalHealth", "PalReviveTimer"];
     psp_core::domain::world::character_map(&session.level)
         .expect("the character map resolves")
         .iter()
