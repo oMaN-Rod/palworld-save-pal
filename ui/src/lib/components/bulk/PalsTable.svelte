@@ -12,7 +12,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import { filterBySearch, resolveBulkPal } from './bulk.utils';
+	import { filterBySearch, groupPalIds, resolveBulkPal } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
@@ -87,29 +87,8 @@
 		filterBySearch(allRows, query, ['nickname', 'species_name', 'character_id', 'owner_name'])
 	);
 
-	function groupPalIds(ids: string[]) {
-		const rowById = new Map(allRows.map((row) => [row.instance_id, row]));
-		const byOwner = new Map<string, string[]>();
-		const byBase = new Map<string, { guildId: string; baseId: string; palIds: string[] }>();
-		for (const id of ids) {
-			const row = rowById.get(id);
-			if (!row) continue;
-			if (row.owner_uid) {
-				const group = byOwner.get(row.owner_uid) ?? [];
-				group.push(id);
-				byOwner.set(row.owner_uid, group);
-			} else if (row.guild_id && row.base_id) {
-				const key = `${row.guild_id}:${row.base_id}`;
-				const group = byBase.get(key) ?? { guildId: row.guild_id, baseId: row.base_id, palIds: [] };
-				group.palIds.push(id);
-				byBase.set(key, group);
-			}
-		}
-		return { byOwner, byBase };
-	}
-
 	async function deletePalIds(ids: string[]) {
-		const { byOwner, byBase } = groupPalIds(ids);
+		const { byOwner, byBase } = groupPalIds(allRows, ids);
 		for (const [ownerUid, palIds] of byOwner) {
 			send(MessageType.DELETE_PALS, { player_id: ownerUid, pal_ids: palIds });
 		}

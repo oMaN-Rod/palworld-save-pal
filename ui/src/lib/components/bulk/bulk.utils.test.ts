@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import type { GuildSummary, PlayerSummary } from '$types';
+import type { GuildSummary, PalSummary, PlayerSummary } from '$types';
 import {
 	buildGuildRows,
 	buildPlayerRows,
 	daysSince,
 	emptyGuildIds,
 	filterBySearch,
+	groupPalIds,
 	inactivePlayerUids,
 	resolveBulkPal
 } from './bulk.utils';
@@ -69,6 +70,36 @@ describe('inactivePlayerUids', () => {
 describe('emptyGuildIds', () => {
 	it('selects guilds with zero members', () => {
 		expect(emptyGuildIds(buildGuildRows(guilds))).toEqual(['g2']);
+	});
+});
+
+describe('groupPalIds', () => {
+	const rows = [
+		{ instance_id: 'p1', owner_uid: 'owner-1' },
+		{
+			instance_id: 'w1',
+			owner_uid: '00000000-0000-0000-0000-000000000000',
+			guild_id: 'g1',
+			base_id: 'b1'
+		}
+	] as PalSummary[];
+
+	it('groups a player-owned pal under its owner', () => {
+		const { byOwner, byBase } = groupPalIds(rows, ['p1']);
+		expect(byOwner.get('owner-1')).toEqual(['p1']);
+		expect(byBase.size).toBe(0);
+	});
+
+	it('groups a base worker with the nil owner guid under its base, not its owner', () => {
+		const { byOwner, byBase } = groupPalIds(rows, ['w1']);
+		expect(byOwner.size).toBe(0);
+		expect(byBase.get('g1:b1')).toEqual({ guildId: 'g1', baseId: 'b1', palIds: ['w1'] });
+	});
+
+	it('ignores an id absent from the given rows', () => {
+		const { byOwner, byBase } = groupPalIds(rows, ['missing']);
+		expect(byOwner.size).toBe(0);
+		expect(byBase.size).toBe(0);
 	});
 });
 

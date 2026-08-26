@@ -1,4 +1,4 @@
-import type { Guild, GuildSummary, Pal, Player, PlayerSummary } from '$types';
+import type { Guild, GuildSummary, Pal, PalSummary, Player, PlayerSummary } from '$types';
 
 export interface PlayerRow {
 	uid: string;
@@ -69,6 +69,35 @@ export function inactivePlayerUids(rows: PlayerRow[], minDays: number, nowMs: nu
 
 export function emptyGuildIds(rows: GuildRow[]): string[] {
 	return rows.filter((row) => row.player_count === 0).map((row) => row.id);
+}
+
+// A guild-base worker pal carries this as its owner_uid, not an absent field.
+const NIL_OWNER_UID = '00000000-0000-0000-0000-000000000000';
+
+export interface PalIdGroups {
+	byOwner: Map<string, string[]>;
+	byBase: Map<string, { guildId: string; baseId: string; palIds: string[] }>;
+}
+
+export function groupPalIds(rows: PalSummary[], ids: string[]): PalIdGroups {
+	const rowById = new Map(rows.map((row) => [row.instance_id, row]));
+	const byOwner = new Map<string, string[]>();
+	const byBase = new Map<string, { guildId: string; baseId: string; palIds: string[] }>();
+	for (const id of ids) {
+		const row = rowById.get(id);
+		if (!row) continue;
+		if (row.owner_uid && row.owner_uid !== NIL_OWNER_UID) {
+			const group = byOwner.get(row.owner_uid) ?? [];
+			group.push(id);
+			byOwner.set(row.owner_uid, group);
+		} else if (row.guild_id && row.base_id) {
+			const key = `${row.guild_id}:${row.base_id}`;
+			const group = byBase.get(key) ?? { guildId: row.guild_id, baseId: row.base_id, palIds: [] };
+			group.palIds.push(id);
+			byBase.set(key, group);
+		}
+	}
+	return { byOwner, byBase };
 }
 
 export function resolveBulkPal(
