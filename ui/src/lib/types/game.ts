@@ -259,6 +259,7 @@ export type Base = {
 export type MapObject = {
 	x: number;
 	y: number;
+	z: number;
 	type?: string;
 	localized_name?: string;
 	pal?: string;
@@ -316,6 +317,7 @@ export type MapUnlockPoint = {
 	guid: string;
 	x: number;
 	y: number;
+	z: number;
 	localized_name: string;
 	class?: string;
 	unlocked?: boolean;

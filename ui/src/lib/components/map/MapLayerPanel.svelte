@@ -10,6 +10,7 @@
 		type PanelOptionId
 	} from './layerPanelModel';
 	import { isMapLayerId } from './layerRegistry';
+	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	let {
 		layers,
@@ -26,6 +27,8 @@
 		loading?: (id: PanelOptionId) => boolean;
 		available?: (id: PanelOptionId) => boolean;
 	} = $props();
+
+	let value = $state(['general']);
 
 	// peek, never getLayer: the panel reports what is already cached and must not
 	// pull an artifact over the wire just by being rendered.
@@ -55,32 +58,38 @@
 	</div>
 {/if}
 
-{#each groups as group, index (group.group)}
-	<div class={index < groups.length - 1 ? 'border-b-surface-800 border-b-2 pb-2' : ''}>
-		<span class="text-surface-500 mb-1 block text-xs font-semibold tracking-wide uppercase">
-			{group.label}
-		</span>
-		<div class="grid grid-cols-2 gap-2">
-			{#each group.rows as row (row.id)}
-				<button
-					type="button"
-					data-option={row.id}
-					class="flex items-center space-x-2 {row.visible ? '' : 'opacity-25'}"
-					onclick={() => onVisibilityChange({ [row.id]: !row.visible })}
-				>
-					<img src={row.icon} alt={row.label} class="mr-2 h-6 w-6" />
-					<span>{row.label}</span>
-					{#if row.loading}
-						<LoaderCircle
-							data-loading={row.id}
-							class="text-surface-500 h-3 w-3 animate-spin"
-							aria-label={loadingLabel()}
-						/>
-					{:else if row.count !== undefined}
-						<span class="text-surface-500 text-xs">{row.count}</span>
-					{/if}
-				</button>
-			{/each}
-		</div>
-	</div>
-{/each}
+<Accordion {value} onValueChange={(e: { value: string[] }) => (value = e.value)} multiple>
+	{#each groups as group (group.group)}
+		<Accordion.Item
+			value={group.group}
+			controlHover="hover:bg-secondary-500/25"
+			classes="border-b-surface-800 border-b"
+		>
+			{#snippet control()}{group.label}{/snippet}
+			{#snippet panel()}
+				<div class="grid grid-cols-2 gap-2">
+					{#each group.rows as row (row.id)}
+						<button
+							type="button"
+							data-option={row.id}
+							class="flex items-center space-x-2 {row.visible ? '' : 'opacity-25'}"
+							onclick={() => onVisibilityChange({ [row.id]: !row.visible })}
+						>
+							<img src={row.icon} alt={row.label} class="mr-2 h-6 w-6" />
+							<span>{row.label}</span>
+							{#if row.loading}
+								<LoaderCircle
+									data-loading={row.id}
+									class="text-surface-500 h-3 w-3 animate-spin"
+									aria-label={loadingLabel()}
+								/>
+							{:else if row.count !== undefined}
+								<span class="text-surface-500 text-xs">{row.count}</span>
+							{/if}
+						</button>
+					{/each}
+				</div>
+			{/snippet}
+		</Accordion.Item>
+	{/each}
+</Accordion>

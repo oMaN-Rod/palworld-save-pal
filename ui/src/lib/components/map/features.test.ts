@@ -1,6 +1,5 @@
+import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
 import { describe, expect, it } from 'vitest';
-import { MAP_SIZE, worldToPixel } from './utils';
-import { lngLatToPixel } from './mercator';
 import {
 	buildBaseRadiusFC,
 	buildBossFC,
@@ -14,7 +13,8 @@ import {
 	type StructureFC
 } from './features';
 import { ICON_BOSS, ICON_BOUNTY } from './iconIds';
-import type { MapObject, MapUnlockPoint, RelicPoint } from '$types';
+import { lngLatToPixel } from './mercator';
+import { MAP_SIZE, worldToPixel } from './utils';
 
 const TREE_POINT = { x: 512112, y: -510663 };
 const MAIN_POINT = { x: -343155, y: 244585 };
@@ -27,8 +27,8 @@ describe('emptyFC', () => {
 
 describe('buildFastTravelFC', () => {
 	const points: MapUnlockPoint[] = [
-		{ guid: 'A', x: MAIN_POINT.x, y: MAIN_POINT.y, localized_name: 'Main', unlocked: false },
-		{ guid: 'B', x: TREE_POINT.x, y: TREE_POINT.y, localized_name: 'Tree', unlocked: true }
+		{ guid: 'A', x: MAIN_POINT.x, y: MAIN_POINT.y, z: 0, localized_name: 'Main', unlocked: false },
+		{ guid: 'B', x: TREE_POINT.x, y: TREE_POINT.y, z: 0, localized_name: 'Tree', unlocked: true }
 	];
 
 	it('keeps only points belonging to the requested area', () => {
@@ -46,10 +46,9 @@ describe('buildFastTravelFC', () => {
 	});
 
 	it('assigns unique numeric ids', () => {
-		const ids = buildFastTravelFC(
-			[points[0], { ...points[0], guid: 'C' }],
-			'MainMap'
-		).features.map((f) => f.id);
+		const ids = buildFastTravelFC([points[0], { ...points[0], guid: 'C' }], 'MainMap').features.map(
+			(f) => f.id
+		);
 		expect(new Set(ids).size).toBe(2);
 	});
 
@@ -63,7 +62,7 @@ describe('buildFastTravelFC', () => {
 
 	it('preserves the undefined unlocked tri-state', () => {
 		const noPlayer: MapUnlockPoint[] = [
-			{ guid: 'A', x: MAIN_POINT.x, y: MAIN_POINT.y, localized_name: 'Main' }
+			{ guid: 'A', x: MAIN_POINT.x, y: MAIN_POINT.y, z: 0, localized_name: 'Main' }
 		];
 		expect(buildFastTravelFC(noPlayer, 'MainMap').features[0].properties.locked).toBe(false);
 		expect(buildFastTravelFC(points, 'MainMap').features[0].properties.locked).toBe(true);
@@ -75,6 +74,7 @@ describe('buildFastTravelFC', () => {
 				guid: 'W',
 				x: MAIN_POINT.x,
 				y: MAIN_POINT.y,
+				z: 0,
 				localized_name: 'Tower',
 				class: 'BP_LevelObject_UnlockMapPoint_C'
 			}
@@ -90,6 +90,7 @@ describe('buildRelicFC', () => {
 			guid: 'R1',
 			x: MAIN_POINT.x,
 			y: MAIN_POINT.y,
+			z: 0,
 			localized_name: 'Effigy',
 			relic_type: 'capture_power',
 			unlocked: false
@@ -114,6 +115,7 @@ describe('buildMapObjectFC', () => {
 		{
 			x: MAIN_POINT.x,
 			y: MAIN_POINT.y,
+			z: 0,
 			type: 'alpha_pal',
 			localized_name: 'Chillet',
 			pal: 'Chillet'
@@ -190,7 +192,7 @@ describe('buildBaseRadiusFC', () => {
 describe('area filtering', () => {
 	it('drops points that belong to no area', () => {
 		const orphan: MapObject[] = [
-			{ x: 5_000_000, y: 5_000_000, type: 'dungeon', localized_name: 'X', pal: '' }
+			{ x: 5_000_000, y: 5_000_000, z: 0, type: 'dungeon', localized_name: 'X', pal: '' }
 		];
 		expect(buildMapObjectFC(orphan, 'dungeon', 'MainMap').features).toHaveLength(0);
 	});
@@ -205,10 +207,18 @@ describe('MAP_SIZE sanity', () => {
 const footprint = { sx: 400, sy: 200, sz: 300, ox: 0, oy: 0, oz: 0, typeA: 'Storage' };
 
 const structure = (over = {}) => ({
-	instance_id: 'i1', map_object_id: 'Box',
-	x: 0, y: 0, z: 1000, yaw: 0,
-	scale_x: 1, scale_y: 1, scale_z: 1,
-	hp_current: 850, hp_max: 1000, build_player_uid: 'player-1',
+	instance_id: 'i1',
+	map_object_id: 'Box',
+	x: 0,
+	y: 0,
+	z: 1000,
+	yaw: 0,
+	scale_x: 1,
+	scale_y: 1,
+	scale_z: 1,
+	hp_current: 850,
+	hp_max: 1000,
+	build_player_uid: 'player-1',
 	...over
 });
 
@@ -245,11 +255,15 @@ describe('buildStructureFC', () => {
 	it('scales the box by the saved scale', () => {
 		const plain = buildStructureFC([structure()], { Box: footprint }, 1000, 'MainMap');
 		const doubled = buildStructureFC(
-			[structure({ scale_z: 2 })], { Box: footprint }, 1000, 'MainMap'
+			[structure({ scale_z: 2 })],
+			{ Box: footprint },
+			1000,
+			'MainMap'
 		);
 
 		expect(doubled.features[0].properties.h - doubled.features[0].properties.b).toBeCloseTo(
-			(plain.features[0].properties.h - plain.features[0].properties.b) * 2, 6
+			(plain.features[0].properties.h - plain.features[0].properties.b) * 2,
+			6
 		);
 	});
 
@@ -292,9 +306,7 @@ describe('buildStructureFC', () => {
 			];
 		};
 
-		const [ux, uy] = centre(
-			buildStructureFC([structure()], { Box: offsetBox }, 1000, 'MainMap')
-		);
+		const [ux, uy] = centre(buildStructureFC([structure()], { Box: offsetBox }, 1000, 'MainMap'));
 		const [rx, ry] = centre(
 			buildStructureFC([structure({ yaw: Math.PI / 2 })], { Box: offsetBox }, 1000, 'MainMap')
 		);
@@ -337,7 +349,12 @@ describe('structureCentroid', () => {
 
 describe('buildStructureFC identity', () => {
 	it('does not assign positional ids, so promoteId can own identity', () => {
-		const fc = buildStructureFC([structure(), structure({ instance_id: 'i2' })], { Box: footprint }, 1000, 'MainMap');
+		const fc = buildStructureFC(
+			[structure(), structure({ instance_id: 'i2' })],
+			{ Box: footprint },
+			1000,
+			'MainMap'
+		);
 		for (const f of fc.features) expect(f.id).toBeUndefined();
 	});
 

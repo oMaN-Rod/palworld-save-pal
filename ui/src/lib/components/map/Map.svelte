@@ -269,6 +269,7 @@
 				guid,
 				x: point.x,
 				y: point.y,
+				z: point.z,
 				class: point.class,
 				localized_name: point.localized_name ?? point.id,
 				unlocked: selectedPlayer ? unlocked.has(guid.toUpperCase()) : undefined
@@ -299,6 +300,7 @@
 				guid,
 				x: point.x,
 				y: point.y,
+				z: point.z,
 				relic_type: point.relic_type,
 				localized_name: relicData.relicData[point.relic_type]?.localized_name ?? point.relic_type,
 				unlocked: selectedPlayer
@@ -341,7 +343,7 @@
 			}))
 	);
 	const alphaPalPoints = $derived(
-		alphaSpawnPoints.map((b) => ({ x: b.x, y: b.y, pal: b.palKey ?? '' }))
+		alphaSpawnPoints.map((b) => ({ x: b.x, y: b.y, z: b.z, pal: b.palKey ?? '' }))
 	);
 
 	const bountyPoints = $derived(
@@ -358,7 +360,7 @@
 		spawnPartition.predator.filter((p) => mapOf(p.x, p.y) === area)
 	);
 	const predatorPalPoints = $derived(
-		predatorSpawnsInArea.map((p) => ({ x: p.x, y: p.y, pal: p.pal }))
+		predatorSpawnsInArea.map((p) => ({ x: p.x, y: p.y, z: p.z, pal: p.pal }))
 	);
 
 	const originFC = $derived(showOrigin && area === 'MainMap' ? buildOriginFC(area) : emptyFC());
@@ -516,7 +518,7 @@
 		}
 	});
 
-	let coordDisplayText = $state('World: 0, 0<br>Map: 0, 0<br>Zoom: 0');
+	let coordDisplayText = $state('Coords: 0, 0<br>Zoom: 0');
 	type ScreenPoint = { x: number; y: number };
 
 	let hovered = $state<{
@@ -653,7 +655,7 @@
 		const [px, py] = lngLatToPixel(ev.lngLat.lng, ev.lngLat.lat);
 		const { worldX, worldY } = pixelToWorld(px, py, area);
 		const { gameX, gameY } = pixelToGameCoords(px, py, area);
-		coordDisplayText = `World: ${Math.round(worldX)}, ${Math.round(worldY)}<br>Map: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}<br>Pitch: ${pitch.toFixed(1)}	`;
+		coordDisplayText = `Coords: ${gameX}, ${gameY}<br>Zoom: ${zoom.toFixed(2)}<br>Pitch: ${pitch.toFixed(1)}	`;
 
 		if (placement) {
 			if (ghostDragging) {

@@ -1,14 +1,17 @@
 <script lang="ts">
 	import type { MapFeatureType } from './features';
-	import OriginPopup from './OriginPopup.svelte';
-	import PlayerPopup from './PlayerPopup.svelte';
-	import BasePopup from './BasePopup.svelte';
-	import FastTravelPopup from './FastTravelPopup.svelte';
-	import RelicPopup from './RelicPopup.svelte';
-	import DungeonPopup from './DungeonPopup.svelte';
-	import BossPopup from './BossPopup.svelte';
-	import PalPopup from './PalPopup.svelte';
-	import StructurePopup from './StructurePopup.svelte';
+	import {
+		BasePopup,
+		BossPopup,
+		FastTravelPopup,
+		featureTypeLabel,
+		OriginPopup,
+		PalPopup,
+		PlayerPopup,
+		Popup,
+		RelicPopup,
+		StructurePopup
+	} from './popups';
 
 	let {
 		type,
@@ -23,6 +26,10 @@
 		onExportBase?: (base: any) => void;
 		onDeleteBase?: (base: any) => void;
 	} = $props();
+
+	const coords = $derived(
+		typeof data?.x === 'number' ? { x: data.x, y: data.y, z: data.z ?? 0 } : undefined
+	);
 </script>
 
 {#if type === 'origin'}
@@ -35,14 +42,12 @@
 	<FastTravelPopup point={data} />
 {:else if type === 'relic'}
 	<RelicPopup point={data} />
-{:else if type === 'dungeon'}
-	<DungeonPopup point={data} />
 {:else if type === 'boss'}
-	<BossPopup point={data} />
-{:else if type === 'alpha_pal'}
-	<PalPopup point={data} isPredator={false} />
-{:else if type === 'predator_pal'}
-	<PalPopup point={data} isPredator={true} />
+	<BossPopup boss={data} />
+{:else if type === 'alpha_pal' || type === 'predator_pal'}
+	<PalPopup point={data} isPredator={type === 'predator_pal'} />
 {:else if type === 'structure' && data}
 	<StructurePopup structure={data} />
+{:else}
+	<Popup title={featureTypeLabel(type)} {coords} />
 {/if}

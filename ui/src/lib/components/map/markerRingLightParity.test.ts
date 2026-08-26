@@ -20,11 +20,18 @@ const WORLD_X = -400000;
 const WORLD_Y = -300000;
 const SCALES = [0.5, 1, 3, 20];
 
-const FT_POINT: MapUnlockPoint = { guid: 'ft1', x: WORLD_X, y: WORLD_Y, localized_name: 'Statue' };
+const FT_POINT: MapUnlockPoint = {
+	guid: 'ft1',
+	x: WORLD_X,
+	y: WORLD_Y,
+	z: 0,
+	localized_name: 'Statue'
+};
 const RELIC_POINT: RelicPoint = {
 	guid: 'r1',
 	x: WORLD_X,
 	y: WORLD_Y,
+	z: 0,
 	localized_name: 'Relic',
 	relic_type: 'jump_power'
 };

@@ -17,7 +17,7 @@ import {
 import { lngLatToPixel } from './mercator';
 import { cmPerPx, worldToPixel } from './utils';
 
-const FT_POINT: MapUnlockPoint = { guid: 'ft1', x: 100, y: 200, localized_name: 'Statue' };
+const FT_POINT: MapUnlockPoint = { guid: 'ft1', x: 100, y: 200, z: 500, localized_name: 'Statue' };
 const FT_SOURCE: FastTravelPoint = {
 	class: 'BP_LevelObject_TowerFastTravelPoint_C',
 	x: 100,
@@ -30,6 +30,7 @@ const WT_POINT: MapUnlockPoint = {
 	guid: 'wt1',
 	x: 500,
 	y: 600,
+	z: 700,
 	localized_name: 'Tower',
 	class: WATCHTOWER_CLASS
 };
@@ -45,6 +46,7 @@ const RELIC_POINT: RelicPoint = {
 	guid: 'r1',
 	x: 300,
 	y: 400,
+	z: 0,
 	localized_name: 'Relic',
 	relic_type: 'jump_power'
 };
