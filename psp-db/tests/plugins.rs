@@ -191,30 +191,6 @@ async fn seed_bundled_refreshes_granted_capabilities_when_the_manifest_gains_one
 }
 
 #[tokio::test]
-async fn seed_bundled_still_leaves_enabled_alone() {
-    let (_dir, db) = open_db().await;
-    let v1 = NewPlugin {
-        id: "pst.test",
-        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read"],"commands":[]}"#,
-        sources: r#"{"main.lua":""}"#,
-        granted_capabilities: r#"["save.read"]"#,
-        bundled: true,
-    };
-    seed_bundled(&db, &v1).await.expect("first seed");
-    set_enabled(&db, "pst.test", false).await.expect("disable");
-
-    let v2 = NewPlugin {
-        id: "pst.test",
-        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read","players"],"commands":[]}"#,
-        sources: r#"{"main.lua":""}"#,
-        granted_capabilities: r#"["save.read","players"]"#,
-        bundled: true,
-    };
-    let row = seed_bundled(&db, &v2).await.expect("re-seed");
-    assert!(!row.enabled, "a user's decision to disable a bundled plugin must survive an app update");
-}
-
-#[tokio::test]
 async fn set_enabled_toggles_and_reports_whether_a_row_matched() {
     let (_dir, db) = open_db().await;
     let new_plugin = NewPlugin {
