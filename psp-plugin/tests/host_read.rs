@@ -339,7 +339,10 @@ fn the_gamedata_global_is_absent_without_its_capability() {
 /// passes take about two seconds on an idle machine and comfortably over ten
 /// under the rest of this package, which is why the ceiling is set where a
 /// contended run still fits and a per-pal snapshot rebuild -- minutes, even
-/// idle -- still does not.
+/// idle -- still does not. `sandbox::Limits` has no instruction-count or
+/// CPU-time budget to prefer instead: the only enforcement is
+/// `interrupt_hook`'s `Utc::now()` check against a deadline, ticked by a
+/// `LUA_MASKCOUNT` hook, so wall clock is the only knob available here.
 #[test]
 fn iteration_over_the_whole_corpus_stays_within_the_time_budget() {
     let mut h = support::harness_with_timeout(&[Capability::SaveRead], 60_000);
@@ -348,7 +351,13 @@ fn iteration_over_the_whole_corpus_stays_within_the_time_budget() {
          for _ = 1, 20 do for p in save.pals() do n = n + p.level end end
          return tostring(n > 0)",
     );
-    assert_eq!(status, RunStatus::Ok, "twenty full passes must stay linear in the pal count");
+    assert_eq!(
+        status,
+        RunStatus::Ok,
+        "twenty full passes must stay linear in the pal count; before suspecting a \
+         regression here, rule out contention from sibling tests loading the corpus on \
+         other cores at the same time -- this budget is charged for that too"
+    );
     assert_eq!(value.as_deref(), Some("true"));
 }
 
