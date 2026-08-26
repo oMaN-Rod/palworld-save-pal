@@ -83,7 +83,7 @@ fn load_corpus() -> SaveSession {
     .expect("the corpus fixture must load; a failure here is a repo bug")
 }
 
-fn load_game_data() -> GameData {
+pub fn load_game_data() -> GameData {
     GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
 }
 

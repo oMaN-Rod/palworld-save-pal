@@ -4,8 +4,18 @@ use psp_plugin::host::MAX_TABLE_NODES;
 use psp_plugin::manifest::Capability;
 use psp_plugin::status::RunStatus;
 
+/// Counted from the shipped tree rather than written down: a literal here went
+/// stale the moment `data/json` gained a catalog.
+fn shipped_top_level_catalogs() -> usize {
+    support::load_game_data()
+        .entry_names()
+        .filter(|name| !name.contains('/'))
+        .count()
+}
+
 #[test]
 fn catalogs_lists_the_shipped_catalogs_sorted() {
+    let expected = shipped_top_level_catalogs();
     let mut h = support::harness(&[Capability::GameData]);
     let (status, value) = h.run(
         "local names = gamedata.catalogs()
@@ -18,9 +28,10 @@ fn catalogs_lists_the_shipped_catalogs_sorted() {
     let parts: Vec<&str> = value.split(',').collect();
     assert_eq!(
         parts[0].parse::<usize>().expect("a count"),
-        33,
-        "the shipped game data has 33 top-level catalogs, the number docs/plugins.md quotes: {value}"
+        expected,
+        "catalogs() must list every top-level catalog the shipped game data holds: {value}"
     );
+    assert_eq!(parts[2], "true", "the list must not be empty: {value}");
     assert_eq!(parts[1], "true", "catalogs must come back sorted: {value}");
 }
 
