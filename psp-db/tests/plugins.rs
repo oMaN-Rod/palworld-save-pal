@@ -129,7 +129,7 @@ async fn seed_bundled_preserves_a_disabled_flag_the_user_set() {
 }
 
 #[tokio::test]
-async fn seed_bundled_preserves_granted_capabilities_the_user_chose() {
+async fn seed_bundled_refreshes_granted_capabilities_even_if_the_row_was_edited_directly() {
     let (_dir, db) = open_db().await;
     let v1 = NewPlugin {
         id: "pst.egg-timer",
@@ -155,9 +155,63 @@ async fn seed_bundled_preserves_granted_capabilities_the_user_chose() {
     let row = seed_bundled(&db, &v2).await.unwrap();
 
     assert_eq!(
-        row.granted_capabilities, r#"["storage","clock"]"#,
-        "re-seeding must not clobber capabilities the user granted"
+        row.granted_capabilities, r#"[]"#,
+        "re-seeding a bundled plugin must refresh capabilities from the manifest, not preserve a prior DB value"
     );
+}
+
+#[tokio::test]
+async fn seed_bundled_refreshes_granted_capabilities_when_the_manifest_gains_one() {
+    let (_dir, db) = open_db().await;
+
+    // First seed: the manifest this build shipped a version ago.
+    seed_bundled(&db, &NewPlugin {
+        id: "pst.test",
+        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read"],"commands":[]}"#,
+        sources: r#"{"main.lua":""}"#,
+        granted_capabilities: r#"["save.read"]"#,
+        bundled: true,
+    }).await.expect("first seed");
+
+    // Second seed: the same plugin after an app update added a capability.
+    let row = seed_bundled(&db, &NewPlugin {
+        id: "pst.test",
+        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read","players"],"commands":[]}"#,
+        sources: r#"{"main.lua":""}"#,
+        granted_capabilities: r#"["save.read","players"]"#,
+        bundled: true,
+    }).await.expect("re-seed");
+
+    assert!(
+        row.granted_capabilities.contains("players"),
+        "a bundled plugin's capabilities must track its manifest across an app update, \
+         or a newly-added capability leaves the shipped command broken: {}",
+        row.granted_capabilities
+    );
+}
+
+#[tokio::test]
+async fn seed_bundled_still_leaves_enabled_alone() {
+    let (_dir, db) = open_db().await;
+    let v1 = NewPlugin {
+        id: "pst.test",
+        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read"],"commands":[]}"#,
+        sources: r#"{"main.lua":""}"#,
+        granted_capabilities: r#"["save.read"]"#,
+        bundled: true,
+    };
+    seed_bundled(&db, &v1).await.expect("first seed");
+    set_enabled(&db, "pst.test", false).await.expect("disable");
+
+    let v2 = NewPlugin {
+        id: "pst.test",
+        manifest: r#"{"id":"pst.test","api_version":1,"name":"T","version":"1.0.0","entry":"main.lua","capabilities":["save.read","players"],"commands":[]}"#,
+        sources: r#"{"main.lua":""}"#,
+        granted_capabilities: r#"["save.read","players"]"#,
+        bundled: true,
+    };
+    let row = seed_bundled(&db, &v2).await.expect("re-seed");
+    assert!(!row.enabled, "a user's decision to disable a bundled plugin must survive an app update");
 }
 
 #[tokio::test]

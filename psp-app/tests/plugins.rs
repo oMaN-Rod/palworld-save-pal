@@ -126,6 +126,28 @@ async fn list_plugins_on_a_fresh_database_returns_the_bundled_set() {
 }
 
 #[tokio::test]
+async fn seeding_bundled_plugins_twice_refreshes_a_stale_installs_granted_capabilities() {
+    let test = TestContext::new(|_| {}).await;
+    seed_bundled_plugins(&test.app).await.unwrap();
+
+    // Simulate an install that predates pst.repair's manifest gaining `players` and
+    // `gamedata`: its stored grant is stuck on the older, shorter list.
+    psp_db::plugins::set_granted(&*test.app.driver, "pst.repair", r#"["save.read","save.write"]"#)
+        .await
+        .unwrap();
+
+    seed_bundled_plugins(&test.app).await.unwrap();
+
+    let row = psp_db::plugins::get(&*test.app.driver, "pst.repair").await.unwrap().unwrap();
+    let manifest: serde_json::Value = serde_json::from_str(&row.manifest).unwrap();
+    let granted: serde_json::Value = serde_json::from_str(&row.granted_capabilities).unwrap();
+    assert_eq!(
+        granted, manifest["capabilities"],
+        "re-seeding the bundled set must refresh a stale install's capabilities from the current manifest"
+    );
+}
+
+#[tokio::test]
 async fn get_plugin_returns_the_manifest_and_sources() {
     let mut test = TestContext::new(|_| {}).await;
     seed_row(&test, "sample", &["log"], "function run() end", &["log"], false).await;

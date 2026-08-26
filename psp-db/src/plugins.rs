@@ -71,16 +71,19 @@ pub async fn upsert(db: &dyn crate::DbDriver, plugin: &NewPlugin<'_>) -> Result<
     fetch_or_err(db, plugin.id).await
 }
 
-/// Refreshes `manifest`, `sources`, `bundled` and `updated_at` from the binary on
-/// startup, leaving `enabled` and `granted_capabilities` untouched so a user's
-/// choices survive an app update that ships new bundled scripts.
+/// Refreshes `manifest`, `sources`, `granted_capabilities`, `bundled` and `updated_at`
+/// from the binary on startup, leaving `enabled` untouched so a user's choice to
+/// disable a bundled plugin survives an app update. `granted_capabilities` is not a
+/// user grant for a bundled plugin — it is always the manifest's own capability
+/// list, so it is refreshed along with the manifest rather than preserved.
 pub async fn seed_bundled(db: &dyn crate::DbDriver, plugin: &NewPlugin<'_>) -> Result<PluginRow, DbError> {
     let installed_at = crate::time::now_iso_naive_utc();
     let updated_at = crate::time::now_iso_utc_offset();
     db.execute(
         "INSERT INTO plugins (id, manifest, sources, granted_capabilities, bundled, installed_at, updated_at) \
          VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7) \
-         ON CONFLICT(id) DO UPDATE SET manifest = ?2, sources = ?3, bundled = ?5, updated_at = ?7",
+         ON CONFLICT(id) DO UPDATE SET manifest = ?2, sources = ?3, granted_capabilities = ?4, \
+         bundled = ?5, updated_at = ?7",
         &[
             plugin.id.into(),
             plugin.manifest.into(),
