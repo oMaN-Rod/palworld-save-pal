@@ -5,6 +5,7 @@
 	import { DESCRIPTORS } from '$lib/utils/wikiDescriptors';
 	import { categoryLabel, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
 	import { buildSlugIndex, keyFromSlug, stripKeyPrefix } from '$lib/utils/wikiSlug';
+	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 
 	let {
@@ -41,6 +42,11 @@
 	const icon = $derived(
 		record && rawKey && descriptor.icon ? descriptor.icon(rawKey, record) : null
 	);
+	const iconBackground = $derived(
+		record && rawKey && descriptor.iconBackground
+			? descriptor.iconBackground(rawKey, record)
+			: null
+	);
 	const relatedItems = $derived(
 		record && rawKey && descriptor.related ? descriptor.related(rawKey, record) : []
 	);
@@ -76,7 +82,10 @@
 	<div class="flex flex-col items-center gap-4">
 		{#if icon}
 			<div
-				class="bg-surface-900 flex h-40 w-40 items-center justify-center rounded-full"
+				class={cn(
+					'flex h-40 w-40 items-center justify-center rounded-full',
+					iconBackground || 'bg-surface-900'
+				)}
 				style={icon.color ? `background-color: ${icon.color}33` : ''}
 			>
 				<img

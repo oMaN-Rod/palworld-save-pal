@@ -1,3 +1,5 @@
+import { Rarity } from '$types/game';
+
 function getComputedColor(varName: string) {
 	// Read during component init, which also happens server-side while
 	// prerendering. There is no computed style there; the client recomputes on
@@ -113,5 +115,49 @@ export function skillFilter(rank: number) {
 			return calculateFilters('#68ffd8');
 		default:
 			return calculateFilters('#FF0000');
+	}
+}
+export function rarityGradientClass(rarity: number | undefined) {
+	switch (rarity) {
+		case Rarity.Uncommon:
+			return 'bg-linear-to-tl from-green-200/50 to-green-800/75';
+		case Rarity.Rare:
+			return 'bg-linear-to-tl from-blue-200/50 to-blue-800/75';
+		case Rarity.Epic:
+			return 'bg-linear-to-tl from-purple-200/50 to-purple-800/75';
+		case Rarity.Legendary:
+			return 'bg-linear-to-tl from-yellow-200/50 to-yellow-700/75';
+		default:
+			return '';
+	}
+}
+
+export function rarityAccentClass(rarity: number | undefined) {
+	switch (rarity) {
+		case Rarity.Uncommon:
+			return 'text-green-300 border-green-500';
+		case Rarity.Rare:
+			return 'text-blue-300 border-blue-500';
+		case Rarity.Epic:
+			return 'text-purple-300 border-purple-500';
+		case Rarity.Legendary:
+			return 'text-yellow-300 border-yellow-500';
+		default:
+			return '';
+	}
+}
+
+export function raritySolidClass(rarity: number | undefined) {
+	switch (rarity) {
+		case Rarity.Uncommon:
+			return 'bg-green-800 text-green-300 border-green-500';
+		case Rarity.Rare:
+			return 'bg-blue-800 text-blue-300 border-blue-500';
+		case Rarity.Epic:
+			return 'bg-purple-800 text-purple-300 border-purple-500';
+		case Rarity.Legendary:
+			return 'bg-yellow-800 text-yellow-300 border-yellow-500';
+		default:
+			return 'bg-surface-900 text-surface-300 border-surface-500';
 	}
 }

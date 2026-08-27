@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { WikiIcon } from '$lib/utils/wikiDescriptors';
+	import { cn } from '$theme';
 
 	type Props = {
 		href: string;
@@ -12,6 +13,7 @@
 		variant?: 'list' | 'grid';
 		iconClass?: string;
 		gridIconClass?: string;
+		iconBackground?: string;
 	};
 
 	let {
@@ -23,7 +25,8 @@
 		badges = undefined,
 		variant = 'list',
 		iconClass = 'h-9 w-9',
-		gridIconClass = 'h-12 w-12'
+		gridIconClass = 'h-12 w-12',
+		iconBackground = ''
 	}: Props = $props();
 </script>
 
@@ -33,12 +36,14 @@
 		class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 flex flex-col items-center rounded-lg border p-2.5 text-center transition-colors"
 	>
 		{#if icon}
-			<img
-				src={icon.src}
-				alt=""
-				class="shrink-0 object-contain {gridIconClass}"
-				style={icon.filter ? `filter: ${icon.filter};` : undefined}
-			/>
+			<div class={cn('flex shrink-0 items-center justify-center rounded-md', iconBackground)}>
+				<img
+					src={icon.src}
+					alt=""
+					class="object-contain {gridIconClass}"
+					style={icon.filter ? `filter: ${icon.filter};` : undefined}
+				/>
+			</div>
 		{/if}
 		<span class="mt-1.5 line-clamp-2 w-full text-sm font-medium">{name}</span>
 		{#if meta}
@@ -56,12 +61,14 @@
 		class="border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 flex items-center gap-2 rounded-md border p-2 text-left transition-colors"
 	>
 		{#if icon}
-			<img
-				src={icon.src}
-				alt=""
-				class="shrink-0 object-contain {iconClass}"
-				style={icon.filter ? `filter: ${icon.filter};` : undefined}
-			/>
+			<div class={cn('flex shrink-0 items-center justify-center rounded-md', iconBackground)}>
+				<img
+					src={icon.src}
+					alt=""
+					class="object-contain {iconClass}"
+					style={icon.filter ? `filter: ${icon.filter};` : undefined}
+				/>
+			</div>
 		{/if}
 		<span class="flex min-w-0 flex-1 flex-col leading-tight">
 			<span class="truncate text-sm font-medium">{name}</span>

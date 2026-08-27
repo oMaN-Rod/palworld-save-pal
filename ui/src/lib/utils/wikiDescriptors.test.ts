@@ -14,6 +14,8 @@ vi.mock('$lib/data', () => ({
 
 import { DESCRIPTORS, descriptorFor } from './wikiDescriptors';
 import { WIKI_CATEGORIES } from './wikiCategories';
+import { rarityGradientClass } from './colors';
+import { Rarity } from '$types/game';
 
 describe('DESCRIPTORS', () => {
 	it('has a descriptor for every WikiCategory', () => {
@@ -66,5 +68,20 @@ describe('DESCRIPTORS', () => {
 				}
 			}
 		});
+	});
+});
+
+describe('items iconBackground', () => {
+	it.each([Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary])(
+		'matches the item badge gradient for rarity %i',
+		(rarity) => {
+			expect(DESCRIPTORS.items.iconBackground?.('AIcore', { details: { rarity } })).toBe(
+				rarityGradientClass(rarity)
+			);
+		}
+	);
+
+	it('returns null when the record carries no rarity', () => {
+		expect(DESCRIPTORS.items.iconBackground?.('AIcore', { details: {} })).toBeNull();
 	});
 });

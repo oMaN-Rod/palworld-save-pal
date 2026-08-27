@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
-import { skillBorderClass, skillFilter, skillOpacity } from './colors';
+import {
+	rarityAccentClass,
+	rarityGradientClass,
+	raritySolidClass,
+	skillBorderClass,
+	skillFilter,
+	skillOpacity
+} from './colors';
+import { Rarity } from '$types/game';
 
 // Rank 5 is the WorldTree passive tier: a top-tier positive passive that must
 // read the same as rank 4; red is reserved for the detrimental ranks (-1, -2, -3).
@@ -34,5 +42,28 @@ describe('rank colouring', () => {
 		expect(skillBorderClass(4)).toBe('border-l-[#68ffd8]');
 		expect(skillFilter(1)).toBe('');
 		expect(skillOpacity(1)).toBe('opacity-25');
+	});
+});
+
+describe('rarity colouring', () => {
+	it.each([
+		[Rarity.Uncommon, 'green'],
+		[Rarity.Rare, 'blue'],
+		[Rarity.Epic, 'purple'],
+		[Rarity.Legendary, 'yellow']
+	])('paints rarity %i in its own hue', (rarity, hue) => {
+		expect(rarityGradientClass(rarity)).toContain(`from-${hue}-200/50`);
+		expect(rarityAccentClass(rarity)).toContain(`text-${hue}-300`);
+		expect(raritySolidClass(rarity)).toContain(`bg-${hue}-800`);
+	});
+
+	it('leaves common items ungradiented', () => {
+		expect(rarityGradientClass(Rarity.Common)).toBe('');
+		expect(rarityAccentClass(Rarity.Common)).toBe('');
+		expect(raritySolidClass(Rarity.Common)).toContain('bg-surface-900');
+	});
+
+	it.each([undefined, 5, 99])('leaves out-of-range rarity %s ungradiented', (rarity) => {
+		expect(rarityGradientClass(rarity)).toBe('');
 	});
 });

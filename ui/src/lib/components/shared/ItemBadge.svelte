@@ -14,7 +14,12 @@
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import Package from '@lucide/svelte/icons/package';
-	import { assetLoader } from '$utils';
+	import {
+		assetLoader,
+		rarityAccentClass,
+		rarityGradientClass,
+		raritySolidClass
+	} from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -103,49 +108,15 @@
 		}
 	});
 
-	const itemClass = $derived.by(() => {
-		switch (item?.details.rarity) {
-			case Rarity.Uncommon:
-				return 'bg-linear-to-tl from-green-200/50 to-green-800/75';
-			case Rarity.Rare:
-				return 'bg-linear-to-tl from-blue-200/50 to-blue-800/75';
-			case Rarity.Epic:
-				return 'bg-linear-to-tl from-purple-200/50 to-purple-800/75';
-			case Rarity.Legendary:
-				return 'bg-linear-to-tl from-yellow-200/50 to-yellow-700/75';
-			default:
-				return '';
-		}
-	});
-	const itemPopupHeaderClass = $derived.by(() => {
-		switch (item?.details.rarity) {
-			case Rarity.Uncommon:
-				return 'bg-linear-to-tl from-green-200/50 to-green-800/75 text-green-300 border-green-500';
-			case Rarity.Rare:
-				return 'bg-linear-to-tl from-blue-200/50 to-blue-800/75 text-blue-300 border-blue-500';
-			case Rarity.Epic:
-				return 'bg-linear-to-tl from-purple-200/50 to-purple-800/75 text-purple-300 border-purple-500';
-			case Rarity.Legendary:
-				return 'bg-linear-to-tl from-yellow-200/50 to-yellow-700/75 text-yellow-300 border-yellow-500';
-			default:
-				return 'bg-surface-800';
-		}
-	});
+	const itemClass = $derived(rarityGradientClass(item?.details.rarity));
+	const itemPopupHeaderClass = $derived(
+		cn(
+			rarityGradientClass(item?.details.rarity) || 'bg-surface-800',
+			rarityAccentClass(item?.details.rarity)
+		)
+	);
 
-	const itemPopupTierClass = $derived.by(() => {
-		switch (item?.details.rarity) {
-			case Rarity.Uncommon:
-				return 'bg-green-800 text-green-300 border-green-500';
-			case Rarity.Rare:
-				return 'bg-blue-800 text-blue-300 border-blue-500';
-			case Rarity.Epic:
-				return 'bg-purple-800 text-purple-300 border-purple-500';
-			case Rarity.Legendary:
-				return 'bg-yellow-800 text-yellow-300 border-yellow-500';
-			default:
-				return 'bg-surface-900 text-surface-300 border-surface-500';
-		}
-	});
+	const itemPopupTierClass = $derived(raritySolidClass(item?.details.rarity));
 
 	const palIcon = $derived.by(() => {
 		if (slot.static_id && slot.static_id.includes('SkillUnlock_')) {

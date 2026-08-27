@@ -88,7 +88,15 @@
 				{@const link = entityLink(data.category, key)}
 				{@const icon = descriptor.icon?.(key, record) ?? null}
 				{@const meta = descriptor.cardMeta?.(key, record) ?? null}
-				<WikiCard href={link.href} {name} {icon} {meta} variant={wikiPrefs.viewMode} />
+				{@const iconBackground = descriptor.iconBackground?.(key, record) ?? ''}
+				<WikiCard
+					href={link.href}
+					{name}
+					{icon}
+					{meta}
+					{iconBackground}
+					variant={wikiPrefs.viewMode}
+				/>
 			{/snippet}
 		</WikiGrid>
 	{/if}

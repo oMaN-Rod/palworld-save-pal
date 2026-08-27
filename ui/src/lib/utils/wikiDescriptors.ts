@@ -11,7 +11,7 @@ import {
 } from '$lib/data';
 import { ASSET_DATA_PATH } from '$lib/constants';
 import { assetLoader } from './assetLoader';
-import { skillFilter } from './colors';
+import { rarityGradientClass, skillFilter } from './colors';
 import { suitabilityImageMap } from './pals';
 import type { ElementType, PalData, WorkSuitability } from '$types';
 import type { WikiCategory } from './wikiCategories';
@@ -42,6 +42,7 @@ export type WikiDescriptor = {
 	description?: (record: Record<string, unknown>) => string | null;
 	icon?: (key: string, record: Record<string, unknown>) => WikiIcon | null;
 	cardMeta?: (key: string, record: Record<string, unknown>) => string | null;
+	iconBackground?: (key: string, record: Record<string, unknown>) => string | null;
 	extras?: (key: string, record: Record<string, unknown>) => WikiExtra[];
 	related?: (key: string, record: Record<string, unknown>) => WikiRelated[];
 };
@@ -239,6 +240,10 @@ export const DESCRIPTORS: Record<WikiCategory, WikiDescriptor> = {
 		displayName: (key, record) => nameOr(key, record, 'info', 'localized_name'),
 		description: descriptionField('info', 'description'),
 		icon: iconField('details', 'icon'),
+		iconBackground: (_key, record) => {
+			const rarity = get(record, 'details', 'rarity');
+			return typeof rarity === 'number' ? rarityGradientClass(rarity) : null;
+		},
 		fields: [
 			{ label: 'Group', value: (r) => field(r, 'details', 'group') },
 			{ label: 'Type', value: (r) => field(r, 'details', 'type_a') },
