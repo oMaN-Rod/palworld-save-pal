@@ -97,6 +97,15 @@ export function groupPalIds(rows: PalSummary[], ids: string[]): PalIdGroups {
 	return { byOwner, byBase };
 }
 
+// How many ids groupPalIds actually routed. Ids it could place in neither group are
+// dropped silently, so a caller that reports its own input length over-reports.
+export function groupedPalIdCount({ byOwner, byBase }: PalIdGroups): number {
+	let count = 0;
+	for (const palIds of byOwner.values()) count += palIds.length;
+	for (const group of byBase.values()) count += group.palIds.length;
+	return count;
+}
+
 export function resolveBulkPal(
 	player: Player | undefined,
 	guild: Guild | undefined,

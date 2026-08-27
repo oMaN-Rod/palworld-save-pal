@@ -7,6 +7,7 @@ import {
 	emptyGuildIds,
 	filterBySearch,
 	groupPalIds,
+	groupedPalIdCount,
 	inactivePlayerUids,
 	resolveBulkPal
 } from './bulk.utils';
@@ -78,7 +79,8 @@ describe('groupPalIds', () => {
 	// the nil guid its own writer produces, so `w1` here is the real wire shape.
 	const rows = [
 		{ instance_id: 'p1', owner_uid: 'owner-1' },
-		{ instance_id: 'w1', guild_id: 'g1', base_id: 'b1' }
+		{ instance_id: 'w1', guild_id: 'g1', base_id: 'b1' },
+		{ instance_id: 'x1' }
 	] as PalSummary[];
 
 	it('groups a player-owned pal under its owner', () => {
@@ -97,6 +99,30 @@ describe('groupPalIds', () => {
 		const { byOwner, byBase } = groupPalIds(rows, ['missing']);
 		expect(byOwner.size).toBe(0);
 		expect(byBase.size).toBe(0);
+	});
+
+	it('drops a row with neither an owner nor a base', () => {
+		const { byOwner, byBase } = groupPalIds(rows, ['x1']);
+		expect(byOwner.size).toBe(0);
+		expect(byBase.size).toBe(0);
+	});
+});
+
+describe('groupedPalIdCount', () => {
+	const rows = [
+		{ instance_id: 'p1', owner_uid: 'owner-1' },
+		{ instance_id: 'w1', guild_id: 'g1', base_id: 'b1' },
+		{ instance_id: 'x1' }
+	] as PalSummary[];
+
+	it('counts every routed id across both groups', () => {
+		expect(groupedPalIdCount(groupPalIds(rows, ['p1', 'w1']))).toBe(2);
+	});
+
+	it('counts fewer than the caller asked for when ids were dropped', () => {
+		const ids = ['p1', 'w1', 'x1', 'missing'];
+		expect(groupedPalIdCount(groupPalIds(rows, ids))).toBe(2);
+		expect(groupedPalIdCount(groupPalIds(rows, ids))).toBeLessThan(ids.length);
 	});
 });
 

@@ -12,7 +12,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import { filterBySearch, groupPalIds, resolveBulkPal } from './bulk.utils';
+	import { filterBySearch, groupPalIds, groupedPalIdCount, resolveBulkPal } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
@@ -93,7 +93,8 @@
 	);
 
 	async function deletePalIds(ids: string[]) {
-		const { byOwner, byBase } = groupPalIds(allRows, ids);
+		const groups = groupPalIds(allRows, ids);
+		const { byOwner, byBase } = groups;
 		for (const [ownerUid, palIds] of byOwner) {
 			send(MessageType.DELETE_PALS, { player_id: ownerUid, pal_ids: palIds });
 		}
@@ -104,7 +105,20 @@
 				pal_ids: group.palIds
 			});
 		}
-		toast.add(m.deleted_entity({ entity: c.pals, count: ids.length }), m.success(), 'success');
+		// `delete_pals` has no response frame, so the count reported is the count
+		// dispatched, never the count the backend confirmed.
+		const dispatched = groupedPalIdCount(groups);
+		if (dispatched === 0) {
+			toast.add(m.no_pals_deleted({ pals: c.pals }), m.error(), 'error');
+		} else if (dispatched < ids.length) {
+			toast.add(
+				m.deleted_partial({ count: dispatched, total: ids.length, pals: c.pals }),
+				m.warning(),
+				'warning'
+			);
+		} else {
+			toast.add(m.deleted_entity({ entity: c.pals, count: dispatched }), m.success(), 'success');
+		}
 		selected = new Set<string>();
 		await loadSummaries();
 	}
