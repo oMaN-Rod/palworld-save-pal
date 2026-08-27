@@ -652,7 +652,7 @@ fn set_character_container_slots(
 }
 
 /// Copies the pal box and party slot arrays, then repoints every transferred pal's
-/// `SlotId.ContainerId.ID` at the target container when the ids differ.
+/// `SlotID`/`SlotId` `ContainerId.ID` at the target container when the ids differ.
 fn copy_pal_container_slots(
     source: &SaveSession,
     source_uid: Uuid,
@@ -691,15 +691,18 @@ fn copy_pal_container_slots(
         }
 
         // Repoint pals whose slot still references the source container. The
-        // key is `SlotId`; there is no `SlotID` spelling on this path.
+        // save format spells this key both ways across game versions.
         if source_id != target_id {
             for pal_entry in transferred.iter_mut() {
                 let Some(save_parameter) = world::entry_save_parameter_mut(pal_entry) else {
                     continue;
                 };
-                if let Some(id_property) =
-                    props::get_mut(save_parameter, &["SlotId", "ContainerId", "ID"])
-                {
+                let id_property =
+                    match props::get_mut(save_parameter, &["SlotID", "ContainerId", "ID"]) {
+                        Some(id_property) => Some(id_property),
+                        None => props::get_mut(save_parameter, &["SlotId", "ContainerId", "ID"]),
+                    };
+                if let Some(id_property) = id_property {
                     if props::as_uuid(id_property) == Some(source_id) {
                         *id_property = props::guid_property(target_id);
                     }
