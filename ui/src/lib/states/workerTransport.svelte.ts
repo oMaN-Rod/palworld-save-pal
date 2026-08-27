@@ -11,7 +11,9 @@ export type WorkerTransportOptions = {
 
 export class WorkerTransport {
 	#worker: Worker | null = null;
-	#message = $state<Message | null>(null);
+	// $state.raw: dispatched frames are handed to the dispatcher and forgotten —
+	// nothing reads `ws.message` deeply, so a deep proxy only adds per-payload cost.
+	#message = $state.raw<Message | null>(null);
 	#connected = $state(false);
 	#dispatcher = getDispatcher();
 	#queue = new Map<string, (value: unknown) => void>();

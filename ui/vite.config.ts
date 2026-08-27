@@ -2,8 +2,9 @@ import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, type Plugin } from 'vitest/config';
 import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 
 // Vite serves HTTP/2 only over TLS (resolveHttpServer hands https options to
@@ -12,6 +13,39 @@ import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 // points its webview at http://localhost:5173, which WebView2 will not load over a
 // self-signed origin.
 const useHttps = process.env.VITE_HTTPS === '1';
+
+// Self-host Monaco: @monaco-editor/loader pulls the editor from jsdelivr at
+// runtime, which breaks the offline desktop app and costs a multi-MB CDN
+// round-trip. The copy lands in static/vs (gitignored) so dev, desktop and the
+// webapp all serve '/vs'.
+//
+// The copy is keyed on the installed monaco version stamped into the
+// destination, not on mtimes: a directory's mtime does not reflect nested
+// changes, and an interrupted copy leaves a fresh mtime that would never be
+// repaired. The stamp is written last, so a partial copy has no stamp and is
+// redone on the next build.
+function selfHostMonaco(): Plugin {
+	const src = fileURLToPath(new URL('./node_modules/monaco-editor/min/vs', import.meta.url));
+	const pkg = fileURLToPath(new URL('./node_modules/monaco-editor/package.json', import.meta.url));
+	const dest = fileURLToPath(new URL('./static/vs', import.meta.url));
+	const stamp = fileURLToPath(new URL('./static/vs/.monaco-version', import.meta.url));
+	return {
+		name: 'psp:self-host-monaco',
+		buildStart() {
+			if (!existsSync(src) || !existsSync(pkg)) {
+				this.warn('monaco-editor is not installed; /editor will fall back to the CDN');
+				return;
+			}
+			const version = JSON.parse(readFileSync(pkg, 'utf8')).version;
+			if (existsSync(stamp) && readFileSync(stamp, 'utf8') === version) return;
+			rmSync(dest, { recursive: true, force: true });
+			mkdirSync(dest, { recursive: true });
+			cpSync(src, dest, { recursive: true });
+			writeFileSync(stamp, version);
+		}
+	};
+}
+
 
 export default defineConfig({
 	plugins: [
@@ -25,6 +59,7 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 		sveltekit(),
+		selfHostMonaco(),
 		...(useHttps ? [basicSsl()] : [])
 	],
 	worker: {

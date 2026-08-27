@@ -8,7 +8,9 @@ const RECONNECT_DELAY = 5000;
 class SocketState {
 	#clientId = Date.now();
 	#websocket!: WebSocket;
-	#message = $state<Message | null>(null);
+	// $state.raw: handler-routed frames are dispatched and forgotten — nothing
+	// reads `ws.message` deeply, so a deep proxy only adds per-payload cost.
+	#message = $state.raw<Message | null>(null);
 	#connected = $state(false);
 	#dispatcher = getDispatcher();
 	#messageQueue = new Map<string, (value: any) => void>();
@@ -41,7 +43,10 @@ class SocketState {
 
 			this.#message = data;
 
-			console.log(`Received message: ${data.type}`, data);
+			// Dev-only and type-only: logging full payloads retains them in DevTools
+			// (a leak sized to the save) and serializing MB-scale frames during a
+			// load costs tens of milliseconds.
+			if (import.meta.env.DEV) console.log('Received message:', data.type);
 
 			await this.#dispatcher.dispatch(data, context);
 		};
@@ -60,7 +65,13 @@ class SocketState {
 		while (this.#websocket.readyState !== this.#websocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
-		console.log(`Sending message: ${messageData}`);
+		// Dev-only and type-only — see the note in onmessage above. The type is
+		// pulled out with a regex instead of JSON.parse so logging never pays a
+		// second serialization pass on MB-scale frames.
+		if (import.meta.env.DEV) {
+			const type = messageData.match(/"type"\s*:\s*"([^"]+)"/)?.[1];
+			console.log('Sending message:', type ?? messageData);
+		}
 		this.#websocket.send(messageData);
 	}
 

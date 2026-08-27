@@ -12,7 +12,7 @@
 	import { itemsData, palsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getModalState } from '$states';
-	import { ItemSelectModal } from '$components';
+	import ItemSelectModal from '$components/modals/item-select/ItemSelectModal.svelte';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import {
 		assetLoader,

@@ -1,5 +1,6 @@
 import { goto } from '$app/navigation';
-import { TextInputModal } from '$components';
+// Deep import: this store sits in the root layout graph; see modalState.svelte.ts.
+import TextInputModal from '$components/modals/text-input/TextInputModal.svelte';
 import { send, sendAndWait } from '$lib/utils/websocketUtils';
 import { upsState } from '$states';
 import type { GuildDTO, ItemContainer, UPSPal } from '$types';
@@ -62,7 +63,20 @@ export function processGuilds(state: AppState) {
 	let modifiedGuilds: [string, GuildDTO][] = [];
 	let modifiedPals: [string, Pal][] = [];
 	for (const guild of Object.values(state.guilds ?? {})) {
-		const guildClone = deepCopy(guild);
+		// deepCopy clones the whole guild tree (bases -> pals -> storage
+		// containers -> guild chest), so only pay it for guilds that will
+		// actually be emitted: the guild DTO itself is modified, or one of its
+		// base storage containers is (which marks the guild modified below).
+		// Base-pal and guild-chest edits never emit the guild, so they must not
+		// trigger the clone either.
+		const hasModifiedContainers = Object.values(guild.bases ?? {}).some((base) =>
+			Object.values(base.storage_containers ?? {}).some(
+				(container) => container.state === EntryState.MODIFIED
+			)
+		);
+		const guildClone =
+			guild.state === EntryState.MODIFIED || hasModifiedContainers ? deepCopy(guild) : undefined;
+
 		if (guild.bases) {
 			for (const base of Object.values(guild.bases)) {
 				if (base.pals) {
@@ -80,7 +94,7 @@ export function processGuilds(state: AppState) {
 						container.state = EntryState.NONE;
 					}
 				}
-				if (modifiedContainers.length > 0) {
+				if (modifiedContainers.length > 0 && guildClone) {
 					guildClone.bases[base.id].storage_containers =
 						Object.fromEntries(modifiedContainers);
 					guild.state = EntryState.MODIFIED;
@@ -89,10 +103,10 @@ export function processGuilds(state: AppState) {
 		}
 		if (guild.guild_chest && guild.guild_chest.state === EntryState.MODIFIED) {
 			guild.guild_chest.state = EntryState.NONE;
-		} else if (guildClone.guild_chest) {
+		} else if (guildClone?.guild_chest) {
 			guildClone.guild_chest = undefined;
 		}
-		if (guild.state === EntryState.MODIFIED) {
+		if (guild.state === EntryState.MODIFIED && guildClone) {
 			modifiedGuilds = [...modifiedGuilds, [guildClone.id, guildClone]];
 			guild.state = EntryState.NONE;
 		}

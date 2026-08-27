@@ -14,7 +14,10 @@ import NukeUpsConfirmModal from './nuke-ups-confirm/NukeUpsConfirmModal.svelte';
 import NumberInputModal from './number-input/NumberInputModal.svelte';
 import NumberSliderModal from './number-slider/NumberSliderModal.svelte';
 import OpenFolder from './open-folder/OpenFolder.svelte';
-import PalEditModal from './pal-edit/PalEditModal.svelte';
+// PalEditModal is deliberately NOT re-exported here: it pulls PalModelViewer
+// (three.js) into every consumer of this barrel, including the root layout
+// graph via Sidebar. Import the file directly, or dynamically from
+// PalEditorOverlay.
 import PresetConfigModal from './pal-preset-config/PalPresetConfigModal.svelte';
 import PalPresetSelectModal from './pal-preset-select/PalPresetSelectModal.svelte';
 import PalSelectModal from './pal-select/PalSelectModal.svelte';
@@ -42,7 +45,6 @@ export {
 	NumberInputModal,
 	NumberSliderModal,
 	OpenFolder,
-	PalEditModal,
 	PalPresetSelectModal,
 	PalSelectModal,
 	PresetConfigModal,

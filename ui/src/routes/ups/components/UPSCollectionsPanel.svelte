@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getUpsState, getModalState } from '$states';
 	import { TooltipButton } from '$components/ui';
-	import { TextInputModal } from '$components';
+	import TextInputModal from '$components/modals/text-input/TextInputModal.svelte';
 	import type { UPSCollection } from '$types';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';

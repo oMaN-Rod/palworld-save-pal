@@ -3,7 +3,6 @@
 	import {
 		ActiveSkillBadge,
 		PalHeader,
-		PalModelViewer,
 		PassiveSkillBadge,
 		Souls,
 		StatsBadges,
@@ -11,6 +10,8 @@
 		Talents,
 		WorkSuitabilities
 	} from '$components/pal';
+	// Deep import so the (three.js) viewer stays out of the light pal barrel.
+	import PalModelViewer from '$components/pal/PalModelViewer.svelte';
 	import {
 		LearnedSkillSelectModal,
 		MultiSkillSelectModal,
@@ -349,11 +350,7 @@
 </script>
 
 {#snippet palImageFallback()}
-	<img
-		src={palImage}
-		alt={`${appState.selectedPal?.name} icon`}
-		class="size-full object-contain"
-	/>
+	<img src={palImage} alt={`${appState.selectedPal?.name} icon`} class="size-full object-contain" />
 {/snippet}
 
 {#snippet activeSkillsHeader()}
@@ -420,7 +417,11 @@
 {#snippet activeSkillsBody()}
 	<div class="flex max-h-36 flex-col space-y-2 overflow-y-auto">
 		{#each activeSkills as skill}
-			<ActiveSkillBadge {skill} pal={appState.selectedPal} onSkillUpdate={handleUpdateActiveSkill} />
+			<ActiveSkillBadge
+				{skill}
+				pal={appState.selectedPal}
+				onSkillUpdate={handleUpdateActiveSkill}
+			/>
 		{/each}
 	</div>
 {/snippet}
@@ -476,7 +477,11 @@
 {#snippet passiveSkillsBody()}
 	<div class="grid max-h-24 grid-cols-2 gap-2 overflow-y-auto">
 		{#each passiveSkills as skill}
-			<PassiveSkillBadge {skill} pal={appState.selectedPal} onSkillUpdate={handleUpdatePassiveSkill} />
+			<PassiveSkillBadge
+				{skill}
+				pal={appState.selectedPal}
+				onSkillUpdate={handleUpdatePassiveSkill}
+			/>
 		{/each}
 	</div>
 {/snippet}
