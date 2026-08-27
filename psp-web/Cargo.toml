@@ -7,6 +7,23 @@ license.workspace = true
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+# Size-focused wasm-opt pass for the browser bundle (default is just `-O`);
+# the engine is parse-bound, not compute-bound, so `-Oz` wins on download size.
+# The --enable flags spell out the wasm features rustc emits; older cached
+# Binaryen builds (v117, which wasm-pack may reuse locally) don't auto-detect
+# them, and newer ones accept the explicit set unchanged.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = [
+    "-Oz",
+    "--strip-debug",
+    "--enable-bulk-memory",
+    "--enable-nontrapping-float-to-int",
+    "--enable-sign-ext",
+    "--enable-reference-types",
+    "--enable-mutable-globals",
+    "--enable-multivalue",
+]
+
 [dependencies]
 psp-app = { workspace = true }
 psp-core = { workspace = true }

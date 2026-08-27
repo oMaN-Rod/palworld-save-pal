@@ -5,7 +5,8 @@ use std::path::{Component, Path};
 use std::sync::Arc;
 
 use axum::extract::{Request, State};
-use axum::http::{StatusCode, Uri};
+use axum::http::header::{CACHE_CONTROL, CONTENT_TYPE};
+use axum::http::{HeaderValue, StatusCode, Uri};
 use axum::middleware::Next;
 use axum::response::{IntoResponse, Redirect, Response};
 use percent_encoding::{percent_decode_str, utf8_percent_encode, AsciiSet, NON_ALPHANUMERIC};
@@ -18,6 +19,28 @@ const QUOTE_SET: &AsciiSet = &NON_ALPHANUMERIC
     .remove(b'.')
     .remove(b'-')
     .remove(b'~');
+
+/// Cache policy for the SPA assets: fingerprinted SvelteKit output under
+/// `/_app/immutable/` never changes content for its name, so it gets a
+/// 1-year immutable cache; HTML entry points always revalidate so a new
+/// deploy is picked up instead of a stale shell.
+pub async fn cache_control_headers(request: Request, next: Next) -> Response {
+    let immutable = request.uri().path().starts_with("/_app/immutable/");
+    let mut response = next.run(request).await;
+    let headers = response.headers_mut();
+    if immutable {
+        headers.insert(
+            CACHE_CONTROL,
+            HeaderValue::from_static("public, max-age=31536000, immutable"),
+        );
+    } else if headers
+        .get(CONTENT_TYPE)
+        .is_some_and(|value| value.as_bytes().starts_with(b"text/html"))
+    {
+        headers.insert(CACHE_CONTROL, HeaderValue::from_static("no-cache"));
+    }
+    response
+}
 
 pub async fn spa_fallback_redirect(
     State(ui_dir): State<Arc<Path>>,
