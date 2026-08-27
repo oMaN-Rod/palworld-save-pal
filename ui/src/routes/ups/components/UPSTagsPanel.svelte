@@ -1,9 +1,5 @@
 <script lang="ts">
-	import Plus from '@lucide/svelte/icons/plus';
-	import Tag from '@lucide/svelte/icons/tag';
-	import X from '@lucide/svelte/icons/x';
-	import Edit from '@lucide/svelte/icons/square-pen';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getUpsState, getModalState } from '$states';
 	import { Input, TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
@@ -96,7 +92,7 @@
 				class="hover:bg-secondary-500/25 text-secondary-300"
 				popupLabel={m.add_entity({ entity: c.tag })}
 			>
-				<Plus class="h-4 w-4" />
+				<Icon icon="tabler:plus" class="h-4 w-4" />
 			</TooltipButton>
 		</div>
 
@@ -107,7 +103,10 @@
 				inputClass="w-full pl-7 my-1"
 				placeholder={m.search_placeholder({ entity: c.tags })}
 			/>
-			<Tag class="text-surface-500 pointer-events-none absolute bottom-3 left-3 h-3 w-3" />
+			<Icon
+				icon="tabler:tag"
+				class="text-surface-500 pointer-events-none absolute bottom-3 left-3 h-3 w-3"
+			/>
 		</div>
 
 		{#if upsState.filters.tags.length > 0}
@@ -127,7 +126,7 @@
 						>
 							{tagName}
 							<button onclick={() => toggleTagFilter(tagName)} class="hover:text-error-400">
-								<X class="h-3 w-3" />
+								<Icon icon="tabler:x" class="h-3 w-3" />
 							</button>
 						</span>
 					{/each}
@@ -174,7 +173,7 @@
 								popupLabel={m.edit_entity({ entity: c.tag })}
 								size="sm"
 							>
-								<Edit class="h-3 w-3" />
+								<Icon icon="tabler:edit" class="h-3 w-3" />
 							</TooltipButton>
 							<TooltipButton
 								onclick={(e: MouseEvent) => {
@@ -185,7 +184,7 @@
 								popupLabel={m.delete_entity({ entity: c.tag })}
 								size="sm"
 							>
-								<Trash2 class="h-3 w-3" />
+								<Icon icon="tabler:trash-x" class="h-3 w-3" />
 							</TooltipButton>
 						</div>
 					</div>
@@ -193,7 +192,7 @@
 			</div>
 		{:else if searchTags}
 			<div class="py-8 text-center">
-				<Tag class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<Icon icon="tabler:tag" class="text-surface-500 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-400 mb-2 text-sm">
 					{m.no_entity_matching({ entity: c.tags, query: searchTags })}
 				</p>
@@ -203,7 +202,7 @@
 			</div>
 		{:else if upsState.availableTags.length === 0}
 			<div class="py-8 text-center">
-				<Tag class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<Icon icon="tabler:tag" class="text-surface-500 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-400 mb-2 text-sm">{m.no_entity_yet({ entity: c.tags })}</p>
 				<button onclick={createTag} class="text-primary-400 hover:text-primary-300 text-sm">
 					{m.create_first_entity({ entity: c.tag })}

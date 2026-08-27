@@ -1,8 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox, Input } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -106,7 +105,7 @@
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 				{#snippet popup()}
 					<span>{c.save}</span>
@@ -114,7 +113,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 				{#snippet popup()}
 					<span>{m.cancel()}</span>

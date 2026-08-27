@@ -1,11 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Card, Tooltip, Button } from '$components/ui';
 	import { SaveDropzone } from '$components/upload';
 	import { MessageType } from '$types';
 	import { getAppState, getToastState } from '$states';
-	import Download from '@lucide/svelte/icons/download';
-	import Settings2 from '@lucide/svelte/icons/settings-2';
-	import FolderOpen from '@lucide/svelte/icons/folder-open';
 	import { goto } from '$app/navigation';
 	import { send, sendBytes, pushProgressMessage } from '$lib/utils/websocketUtils';
 	import { startSaveLoad } from '$lib/data/loadSave';
@@ -59,7 +57,7 @@
 <div class="animate-fade-in flex h-full w-full flex-col items-center justify-center space-y-4">
 	{#if recentName && !appState.saveFile}
 		<Button variant="secondary" onclick={resume}>
-			<FolderOpen size={16} />
+			<Icon icon="tabler:folder-open" size={16} />
 			{m.upload_resume({ name: recentName })}
 		</Button>
 	{/if}
@@ -79,7 +77,7 @@
 				<div class="flex flex-col space-y-2">
 					<Tooltip>
 						<Button variant="primary" class="font-bold" onclick={handleDownloadSaveFile}>
-							<Download />
+							<Icon icon="tabler:download" />
 							{m.download()}
 						</Button>
 						{#snippet popup()}
@@ -88,13 +86,13 @@
 					</Tooltip>
 					{#if isWebBuild && getActiveDirectory().writable}
 						<Button variant="secondary" onclick={saveToFolder}>
-							<FolderOpen size={16} />
+							<Icon icon="tabler:folder-open" size={16} />
 							{m.upload_save_to_folder()}
 						</Button>
 					{/if}
 					{#if appState.saveFile.world_option_present}
 						<Button variant="secondary" onclick={openWorldOptionModal}>
-							<Settings2 size={16} />
+							<Icon icon="tabler:adjustments" size={16} />
 							World Options
 						</Button>
 					{/if}

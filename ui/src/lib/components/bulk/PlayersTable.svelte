@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Table, Input, Button, Popover, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
 	import * as m from '$i18n/messages';
@@ -11,14 +12,10 @@
 		inactivePlayerUids,
 		type PlayerRow
 	} from './bulk.utils';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { send } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
-	import ClockAlert from '@lucide/svelte/icons/clock-alert';
-	import Trash from '@lucide/svelte/icons/trash';
 	
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
@@ -136,7 +133,7 @@
 				<Popover position="bottom-end">
 					<Tooltip label={m.delete_inactive_players()}>
 						<Button variant="ghost">
-							<ClockAlert class="h-4 w-4" />
+							<Icon icon="tabler:clock-exclamation" class="h-4 w-4" />
 						</Button>
 					</Tooltip>
 					{#snippet content({ close })}
@@ -168,7 +165,7 @@
 					label={m.delete_selected_entity({ entity: c.players })}
 				>
 					<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete} disabled={selected.size === 0}>
-						<Trash class="h-4 w-4" />
+						<Icon icon="tabler:trash" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -203,14 +200,14 @@
 						onclick={() => editPlayer(row.uid)}
 						title={m.edit_entity({ entity: c.player })}
 					>
-						<Pencil class="h-4 w-4" />
+						<Icon icon="tabler:pencil" class="h-4 w-4" />
 					</Button>
 					<Button
 						variant="ghost"
 						onclick={() => deleteOne(row)}
 						title={m.delete_entity({ entity: c.player })}
 					>
-						<Trash2 class="h-4 w-4" />
+						<Icon icon="tabler:trash-x" class="h-4 w-4" />
 					</Button>
 				</div>
 			{/snippet}

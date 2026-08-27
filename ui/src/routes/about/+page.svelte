@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo } from '$lib/components/seo';
 	import { getAppState } from '$states';
 	import { Card, Tooltip } from '$components/ui';
@@ -11,11 +12,6 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
-	import Palette from '@lucide/svelte/icons/palette';
-	import GitMerge from '@lucide/svelte/icons/git-merge';
-	import Github from '@lucide/svelte/icons/github';
-	import Sparkles from '@lucide/svelte/icons/sparkles';
-	import X from '@lucide/svelte/icons/x';
 	import { fade } from 'svelte/transition';
 
 	const appState = getAppState();
@@ -110,7 +106,7 @@
 				onclick={() => (easterEgg = false)}
 				aria-label={m.compat_dismiss()}
 			>
-				<X size={18} />
+				<Icon icon="tabler:x" size={18} />
 			</button>
 
 			<a
@@ -120,22 +116,22 @@
 				class="group flex items-center gap-2.5"
 				onclick={(event) => openLink(event, AUTHOR_URL)}
 			>
-				<Sparkles size={20} class="text-primary-400 shrink-0" />
+				<Icon icon="tabler:sparkles" size={20} class="text-primary-400 shrink-0" />
 				<h2 class="heading-gradient text-lg font-bold">CyrixJD115</h2>
-				<Github size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
+				<Icon icon="tabler:brand-github" size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
 			</a>
 
 			<div class="mt-4 space-y-2.5">
 				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
 				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
-					<Palette size={18} class="text-secondary-400 shrink-0" />
+					<Icon icon="tabler:palette" size={18} class="text-secondary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Theme UI/UX Overhaul</p>
 						<p class="text-muted text-xs">Frontier theme, design tokens, palette system</p>
 					</div>
 				</div>
 				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
-					<GitMerge size={18} class="text-tertiary-400 shrink-0" />
+					<Icon icon="tabler:git-merge" size={18} class="text-tertiary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Breeding Calculator</p>
 						<p class="text-muted text-xs">Standalone breeding chain solver + dendrogram</p>

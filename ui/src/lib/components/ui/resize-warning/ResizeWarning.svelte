@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Maximize from '@lucide/svelte/icons/maximize';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState } from '$states';
 	import { isWebBuild } from '$lib/utils/platform';
 
@@ -33,7 +33,7 @@
 		class="fixed inset-0 z-[99999] flex animate-fade-in flex-col items-center justify-center bg-surface-950 px-6 text-center"
 		role="alert"
 	>
-		<Maximize class="text-warning-400 mb-3 size-12 shrink-0" />
+		<Icon icon="tabler:arrows-maximize" class="text-warning-400 mb-3 size-12 shrink-0" />
 		<h2 class="mb-1 text-lg font-bold text-surface-50">Window Too Small</h2>
 		<p class="max-w-xs text-xs text-surface-400">
 			Please resize to at least {MIN_WIDTH}×{MIN_HEIGHT} px.

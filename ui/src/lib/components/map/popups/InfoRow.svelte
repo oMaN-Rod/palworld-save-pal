@@ -1,14 +1,16 @@
 <script lang="ts">
-	import type { Component, Snippet } from 'svelte';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import type { Snippet } from 'svelte';
 
 	let {
-		icon: Icon,
+		icon,
 		iconClass = 'text-primary-500',
 		label,
 		value,
 		children
 	}: {
-		icon?: Component<{ class?: string }>;
+		/** Iconify icon name, e.g. `tabler:map`. */
+		icon?: string;
 		iconClass?: string;
 		label: string;
 		value?: string;
@@ -17,8 +19,8 @@
 </script>
 
 <div class="flex items-start gap-2">
-	{#if Icon}
-		<Icon class="mt-0.5 h-3.5 w-3.5 shrink-0 {iconClass}" />
+	{#if icon}
+		<Icon {icon} class="mt-0.5 h-3.5 w-3.5 shrink-0 {iconClass}" />
 	{/if}
 	<div class="min-w-0 flex-1">
 		<div class="text-primary-500 text-xs font-medium">{label}</div>

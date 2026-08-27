@@ -1,9 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { browser } from '$app/environment';
 	import { persistedState } from 'svelte-persisted-state';
-	import MonitorDown from '@lucide/svelte/icons/monitor-down';
-	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
-	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import {
 		detectCapabilities,
@@ -51,7 +49,7 @@
 		role="status"
 	>
 		<div class="flex items-start gap-3">
-			<TriangleAlert class="text-warning-400 mt-0.5 h-5 w-5 shrink-0" />
+			<Icon icon="tabler:alert-triangle" class="text-warning-400 mt-0.5 h-5 w-5 shrink-0" />
 			<div class="min-w-0 flex-1">
 				{#if isMobile}
 					<h3 class="h4 font-semibold">{m.compat_mobile_title()}</h3>
@@ -75,7 +73,7 @@
 						rel="noopener noreferrer"
 						class="btn btn-sm preset-filled-primary-500 flex items-center gap-2"
 					>
-						<MonitorDown size={14} />
+						<Icon icon="tabler:device-desktop-down" size={14} />
 						{m.compat_desktop_cta()}
 					</a>
 					{#if showChromiumHint}
@@ -88,7 +86,7 @@
 				aria-label={m.compat_dismiss()}
 				onclick={() => (dismissed.current = signature)}
 			>
-				<X size={16} />
+				<Icon icon="tabler:x" size={16} />
 			</button>
 		</div>
 	</div>

@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type * as MonacoE from 'monaco-editor';
 	import { onDestroy, untrack } from 'svelte';
 	import { Button, Input, Monaco, Spinner } from '$components/ui';
@@ -25,9 +26,6 @@
 	} from '$lib/plugins/lspMonaco';
 	import { getModalState, getToastState, theme, type ThemeName } from '$states';
 	import { persistedState } from 'svelte-persisted-state';
-	import Columns2 from '@lucide/svelte/icons/columns-2';
-	import Rows2 from '@lucide/svelte/icons/rows-2';
-	import X from '@lucide/svelte/icons/x';
 	import RunResult from './RunResult.svelte';
 	import ResizableSplit from '../editor/components/ResizableSplit.svelte';
 	import RunButton from '../editor/components/RunButton.svelte';
@@ -523,9 +521,9 @@
 				onclick={() => (splitOrientation.current = toggleOrientation(splitOrientation.current))}
 			>
 				{#if splitOrientation.current === 'horizontal'}
-					<Columns2 class="h-4 w-4" />
+					<Icon icon="tabler:layout-columns" class="h-4 w-4" />
 				{:else}
-					<Rows2 class="h-4 w-4" />
+					<Icon icon="tabler:layout-rows" class="h-4 w-4" />
 				{/if}
 			</Button>
 			<RunButton
@@ -562,7 +560,7 @@
 							aria-label={`Delete ${path}`}
 							onclick={() => removeFile(path)}
 						>
-							<X class="h-3 w-3" />
+							<Icon icon="tabler:x" class="h-3 w-3" />
 						</Button>
 					{/if}
 				</div>

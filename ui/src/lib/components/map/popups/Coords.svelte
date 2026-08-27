@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { WorldMapPoint } from '$types';
-	import Globe from '@lucide/svelte/icons/globe';
-	import MapIcon from '@lucide/svelte/icons/map';
 	import { worldToMap } from '../utils';
 	import InfoRow from './InfoRow.svelte';
 	import * as m from '$i18n/messages';
@@ -17,5 +15,5 @@
 	);
 </script>
 
-<InfoRow icon={Globe} label={m.world_coordinates()} value={world} />
-<InfoRow icon={MapIcon} label={m.map_coordinates()} value="{mapCoords.x}, {mapCoords.y * -1}" />
+<InfoRow icon={'tabler:world'} label={m.world_coordinates()} value={world} />
+<InfoRow icon={'tabler:map'} label={m.map_coordinates()} value="{mapCoords.x}, {mapCoords.y * -1}" />

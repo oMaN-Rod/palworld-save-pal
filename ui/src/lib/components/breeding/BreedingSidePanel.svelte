@@ -1,8 +1,5 @@
 <script lang="ts">
-	import ChevronRight from '@lucide/svelte/icons/chevron-right';
-	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
-	import Play from '@lucide/svelte/icons/play';
-	import X from '@lucide/svelte/icons/x';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 	import type { BreedablePal, Chain, PlayerSummaryT } from '$lib/breeding/types';
 	import PalPicker from './PalPicker.svelte';
@@ -127,7 +124,7 @@
 			onclick={() => oncollapsedChange?.(!collapsed)}
 			title={m.breeding_collapse_panel()}
 		>
-			<ChevronRight size={13} />
+			<Icon icon="tabler:chevron-right" size={13} />
 		</button>
 	</div>
 
@@ -137,7 +134,7 @@
 			onclick={() => oncollapsedChange?.(!collapsed)}
 			title={m.breeding_expand_panel()}
 		>
-			<ChevronLeft size={14} />
+			<Icon icon="tabler:chevron-left" size={14} />
 			<span class="text-[10px] font-medium tracking-widest uppercase [writing-mode:vertical-rl]">
 				{m.breeding_cfg()}
 			</span>
@@ -229,7 +226,7 @@
 					disabled={!canRunDirect || directLoading}
 					onclick={oncomputeDirect}
 				>
-					{#if directLoading}<Spinner size="size-3.5" />{:else}<Play size={13} />{/if}
+					{#if directLoading}<Spinner size="size-3.5" />{:else}<Icon icon="tabler:player-play" size={13} />{/if}
 					{m.breeding_compute()}
 				</button>
 				{#if error}<p class="text-error-400 text-xs">{error}</p>{/if}
@@ -342,7 +339,7 @@
 											onclick={() => onremoveFromPool?.(member.tribe)}
 											title={m.breeding_remove()}
 										>
-											<X size={10} />
+											<Icon icon="tabler:x" size={10} />
 										</button>
 									</div>
 								{/each}

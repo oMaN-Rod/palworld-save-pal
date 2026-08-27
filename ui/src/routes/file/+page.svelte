@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { goto } from '$app/navigation';
 	import { getAppState, getModalState } from '$states';
@@ -11,7 +12,6 @@
 	import { GamepassBrowser } from '$components/gamepass';
 	import { TextInputModal } from '$components/modals';
 	import { openWorldOptionModal } from '$components/worldoption';
-	import Settings2 from '@lucide/svelte/icons/settings-2';
 	import type { GamepassSave } from '$types';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
@@ -128,7 +128,7 @@
 				{#if appState.saveFile.world_option_present}
 					<div class="flex justify-center">
 						<Button variant="secondary" onclick={openWorldOptionModal}>
-							<Settings2 size={16} />
+							<Icon icon="tabler:adjustments" size={16} />
 							Edit World Options
 						</Button>
 					</div>

@@ -1,11 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { List, Loading, Spinner, Tooltip } from '$components/ui';
 	import { getAppState, getPalEditorState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import X from '@lucide/svelte/icons/x';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import User from '@lucide/svelte/icons/user';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
@@ -41,12 +39,12 @@
 				onclick={() => onclose?.()}
 				aria-label={m.close_drawer()}
 			>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 			</button>
 		</div>
 		{#if appState.loadingPlayer}
 			<div class="flex flex-1 items-center justify-center">
-				<Loading label={m.loading_entity({ entity: m.player({count: 1}) })} loadingComplete={!appState.loadingPlayer} icon={User}/>
+				<Loading label={m.loading_entity({ entity: m.player({count: 1}) })} loadingComplete={!appState.loadingPlayer} icon={'tabler:user'}/>
 			</div>
 		{:else if player}
 			<div class="flex flex-col gap-3">
@@ -118,7 +116,7 @@
 									class="text-left text-sm hover:underline"
 									onclick={() => editPal(pal.instance_id)}
 								>
-									<Pencil class="h-4 w-4" />
+									<Icon icon="tabler:pencil" class="h-4 w-4" />
 								</button>
 							{/snippet}
 							{#snippet listItemPopup(pal)}

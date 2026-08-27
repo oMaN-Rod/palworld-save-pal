@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { MissionDetails, MissionList } from '$components';
 	import { ConfirmModal } from '$components/modals';
 	import { TooltipButton } from '$components/ui';
@@ -6,9 +7,6 @@
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import { EntryState, type Mission, type MissionType } from '$types';
-	import CheckCheck from '@lucide/svelte/icons/check-check';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import ListX from '@lucide/svelte/icons/list-x';
 	import * as m from '$i18n/messages';
 
 	const appState = getAppState();
@@ -221,7 +219,7 @@
 					position="bottom"
 					onclick={markAllCurrentAsComplete}
 				>
-					<CheckCheck class="h-5 w-5" />
+					<Icon icon="tabler:checks" class="h-5 w-5" />
 				</TooltipButton>
 				<TooltipButton
 					id="missions-clear-current"
@@ -230,7 +228,7 @@
 					position="bottom"
 					onclick={clearAllCurrentMissions}
 				>
-					<ListX class="h-5 w-5" />
+					<Icon icon="tabler:playlist-x" class="h-5 w-5" />
 				</TooltipButton>
 				<TooltipButton
 					id="missions-clear-completed"
@@ -239,7 +237,7 @@
 					position="bottom"
 					onclick={clearAllCompletedMissions}
 				>
-					<Trash2 class="h-5 w-5" />
+					<Icon icon="tabler:trash-x" class="h-5 w-5" />
 				</TooltipButton>
 			</div>
 	</div>

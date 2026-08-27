@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Checkbox, Popover, Select } from '$components/ui';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import type { DraftCommand } from '$lib/plugins/pluginEditor.svelte';
 
 	let {
@@ -43,7 +43,7 @@
 	<Popover position="bottom-end" popoverClass="w-64" class="flex">
 		{#snippet children()}
 			<Button size="sm" variant="secondary" class="rounded-l-none px-1" aria-label="Run options">
-				<ChevronDown class="h-4 w-4" />
+				<Icon icon="tabler:chevron-down" class="h-4 w-4" />
 			</Button>
 		{/snippet}
 		{#snippet content()}

@@ -1,11 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { CornerDotButton, Tooltip } from '$components/ui';
 	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState, getToastState } from '$states';
-	import Bug from '@lucide/svelte/icons/bug';
 	import { assetLoader, editLucky, editAlpha, editAwakened, editImported } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -87,7 +87,7 @@
 					}}
 					class="h-8 w-8 p-1"
 				>
-					<Bug />
+					<Icon icon="tabler:bug" />
 				</CornerDotButton>
 			</Tooltip>
 		{/if}

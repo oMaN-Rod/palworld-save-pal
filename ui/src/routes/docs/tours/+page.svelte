@@ -1,9 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { tours } from '$docs/tours';
 	import { tourService } from '$docs/tours/tourService.svelte';
 	import { getAppState } from '$states';
-	import Play from '@lucide/svelte/icons/play';
-	import AlertCircle from '@lucide/svelte/icons/circle-alert';
 	import * as m from '$i18n/messages';
 	import { Button } from '$components/ui';
 
@@ -23,7 +22,7 @@
 
 				{#if disabled}
 					<div class="mt-3 flex items-center gap-1 text-xs text-amber-400">
-						<AlertCircle class="h-3.5 w-3.5" />
+						<Icon icon="tabler:alert-circle" class="h-3.5 w-3.5" />
 						<span>{m.docs_tour_requires_save()}</span>
 					</div>
 				{/if}
@@ -35,7 +34,7 @@
 					{disabled}
 					onclick={() => tourService.startTour(tour.id)}
 				>
-					<Play class="h-4 w-4" />
+					<Icon icon="tabler:player-play" class="h-4 w-4" />
 					{m.docs_start_tour()}
 				</Button>
 			</div>

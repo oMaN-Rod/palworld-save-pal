@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 	import {
@@ -21,26 +22,18 @@
 		WIKI_CATEGORIES,
 		type WikiCategory
 	} from '$lib/utils/wikiCategories';
-	import Egg from '@lucide/svelte/icons/egg';
-	import Package from '@lucide/svelte/icons/package';
-	import Building from '@lucide/svelte/icons/building';
-	import Swords from '@lucide/svelte/icons/swords';
-	import Shield from '@lucide/svelte/icons/shield';
-	import FlaskConical from '@lucide/svelte/icons/flask-conical';
-	import Flame from '@lucide/svelte/icons/flame';
-	import Hammer from '@lucide/svelte/icons/hammer';
 
 	let query = $state('');
 
-	const categoryMeta: Record<WikiCategory, { icon: typeof Egg; description: string }> = {
-		pals: { icon: Egg, description: 'Stats, elements, skills, and work suitabilities for all Pals.' },
-		items: { icon: Package, description: 'All items including weapons, armor, consumables, and materials.' },
-		buildings: { icon: Building, description: 'Building recipes, materials, and stats.' },
-		'active-skills': { icon: Swords, description: 'Combat skills with element types, power, and cooldowns.' },
-		'passive-skills': { icon: Shield, description: 'Passive abilities and their stat effects.' },
-		technologies: { icon: FlaskConical, description: 'Technology tree, unlock requirements, and costs.' },
-		elements: { icon: Flame, description: 'Element types and their properties.' },
-		'work-suitability': { icon: Hammer, description: 'Work types and which Pals excel at each.' }
+	const categoryMeta: Record<WikiCategory, { icon: string; description: string }> = {
+		pals: { icon: 'tabler:egg', description: 'Stats, elements, skills, and work suitabilities for all Pals.' },
+		items: { icon: 'tabler:package', description: 'All items including weapons, armor, consumables, and materials.' },
+		buildings: { icon: 'tabler:building', description: 'Building recipes, materials, and stats.' },
+		'active-skills': { icon: 'tabler:swords', description: 'Combat skills with element types, power, and cooldowns.' },
+		'passive-skills': { icon: 'tabler:shield', description: 'Passive abilities and their stat effects.' },
+		technologies: { icon: 'tabler:flask', description: 'Technology tree, unlock requirements, and costs.' },
+		elements: { icon: 'tabler:flame', description: 'Element types and their properties.' },
+		'work-suitability': { icon: 'tabler:hammer', description: 'Work types and which Pals excel at each.' }
 	};
 
 	const entriesByCategory = $derived.by(() => {
@@ -160,7 +153,7 @@
 					class="group border-surface-800 hover:border-primary-500/50 hover:bg-surface-700 rounded-lg border p-4 transition-colors"
 				>
 					<div class="mb-2 flex items-center gap-2">
-						<meta.icon class="text-primary-500 h-5 w-5" />
+						<Icon icon={meta.icon} class="text-primary-500 h-5 w-5" />
 						<h2 class="text-lg font-semibold">{categoryLabel(category.id)}</h2>
 					</div>
 					<p class="text-surface-400 text-sm">{meta.description}</p>

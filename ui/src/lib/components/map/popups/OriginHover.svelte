@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Crosshair from '@lucide/svelte/icons/crosshair';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { mapToWorld } from '../utils';
 	import Hover from './Hover.svelte';
 	import * as m from '$i18n/messages';
@@ -9,6 +9,6 @@
 
 <Hover title={m.origin_point()} subtitle={m.map_coordinate_origin_point()} {coords}>
 	{#snippet icon()}
-		<Crosshair class="text-primary-500 h-4 w-4" />
+		<Icon icon="tabler:crosshair" class="text-primary-500 h-4 w-4" />
 	{/snippet}
 </Hover>

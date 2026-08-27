@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { blueprintsData, type BlueprintFormat } from '$lib/data/blueprints.svelte';
@@ -6,7 +7,6 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { ExportBlueprintModal, SelectBaseModal } from '$components/modals';
 	import { Button, Card, FileDropzone } from '$components/ui';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import type { BlueprintRow } from '$types';
 
 	const appState = getAppState();
@@ -148,7 +148,7 @@
 							>.json</Button
 						>
 						<Button variant="ghost" title="Delete" onclick={() => deleteRow(row)}>
-							<Trash2 size={16} />
+							<Icon icon="tabler:trash-x" size={16} />
 						</Button>
 					</div>
 				</Card>

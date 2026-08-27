@@ -2,11 +2,6 @@
 	import { PalBadge } from '$components/pal';
 	import { EditTagsModal, AddToCollectionModal, ExportPalModal } from '$components/modals';
 	import { ContextMenu } from '$components/ui';
-	import Copy from '@lucide/svelte/icons/copy';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Upload from '@lucide/svelte/icons/upload';
-	import FolderPlus from '@lucide/svelte/icons/folder-plus';
-	import Tag from '@lucide/svelte/icons/tag';
 	import {
 		getUpsState,
 		getModalState,
@@ -44,27 +39,27 @@
 		{
 			label: m.clone_selected_pal({ pal: c.pal }),
 			onClick: () => handleClonePal(),
-			icon: Copy
+			icon: 'tabler:copy'
 		},
 		{
 			label: m.export(),
 			onClick: () => handleExport(),
-			icon: Upload
+			icon: 'tabler:upload'
 		},
 		{
 			label: m.add_to_collection(),
 			onClick: () => handleAddToCollection(),
-			icon: FolderPlus
+			icon: 'tabler:folder-plus'
 		},
 		{
 			label: m.edit_entity({ entity: c.tags }),
 			onClick: () => handleManageTags(),
-			icon: Tag
+			icon: 'tabler:tag'
 		},
 		{
 			label: m.delete_entity({ entity: m.ups() }),
 			onClick: () => handleDeleteFromUPS(),
-			icon: Trash
+			icon: 'tabler:trash'
 		}
 	]);
 

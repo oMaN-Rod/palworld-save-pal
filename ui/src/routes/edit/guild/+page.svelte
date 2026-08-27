@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
@@ -12,14 +13,6 @@
 		Rarity
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import Ambulance from '@lucide/svelte/icons/ambulance';
-	import X from '@lucide/svelte/icons/x';
-	import ReplaceAll from '@lucide/svelte/icons/replace-all';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Bandage from '@lucide/svelte/icons/bandage';
-	import Play from '@lucide/svelte/icons/play';
-	import RefreshCcw from '@lucide/svelte/icons/refresh-ccw';
 	import { PalBadge } from '$components/pal';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';
@@ -840,7 +833,7 @@
 								size="icon"
 								onclick={() => currentBase && handleAddPal(currentBase[0])}
 							>
-								<Plus class="h-4 w-4" />
+								<Icon icon="tabler:plus" class="h-4 w-4" />
 							</Button>
 						</Tooltip>
 						<Tooltip label={m.select_all_current_base()}>
@@ -850,33 +843,33 @@
 								size="icon"
 								onclick={handleSelectAll}
 							>
-								<ReplaceAll class="h-4 w-4" />
+								<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
 							</Button>
 						</Tooltip>
 						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
 							<Button id="guild-pals-heal-all" variant="ghost" size="icon" onclick={handleHealAll}>
-								<Bandage class="h-4 w-4" />
+								<Icon icon="tabler:bandage" class="h-4 w-4" />
 							</Button>
 						</Tooltip>
 						{#if selectedPals.length > 0}
 							<Tooltip label={m.apply_preset_to_selected(p.pals)}>
 								<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-									<Play class="h-4 w-4" />
+									<Icon icon="tabler:player-play" class="h-4 w-4" />
 								</Button>
 							</Tooltip>
 							<Tooltip label={m.heal_selected_pals(p.pals)}>
 								<Button variant="ghost" size="icon" onclick={healSelectedPals}>
-									<Ambulance class="h-4 w-4" />
+									<Icon icon="tabler:ambulance" class="h-4 w-4" />
 								</Button>
 							</Tooltip>
 							<Tooltip label={m.delete_selected_entity({ entity: c.pals })}>
 								<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-									<Trash class="h-4 w-4" />
+									<Icon icon="tabler:trash" class="h-4 w-4" />
 								</Button>
 							</Tooltip>
 							<Tooltip label={m.clear_entity({ entity: m.selected() })}>
 								<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-									<X class="h-4 w-4" />
+									<Icon icon="tabler:x" class="h-4 w-4" />
 								</Button>
 							</Tooltip>
 						{/if}
@@ -892,7 +885,7 @@
 								selectedInventoryItem = '';
 							}}
 						>
-							<RefreshCcw class="h-6 w-6" />
+							<Icon icon="tabler:rotate" class="h-6 w-6" />
 						</Button>
 					</div>
 					<List

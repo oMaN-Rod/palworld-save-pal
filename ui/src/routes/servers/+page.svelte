@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount, onDestroy } from 'svelte';
 	import { getServerState, getModalState } from '$states';
 	import { Button, Card } from '$components/ui';
@@ -8,9 +9,6 @@
 		CreateServerModal,
 		ImportServerModal
 	} from '$components/servers';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Server from '@lucide/svelte/icons/server';
-	import Download from '@lucide/svelte/icons/download';
 	import type { CreateServerData, ImportServerData, Server as ServerType } from '$types';
 
 	const serverState = getServerState();
@@ -102,11 +100,11 @@
 					class="flex items-center gap-2"
 					onclick={handleImport}
 				>
-					<Download size={14} />
+					<Icon icon="tabler:download" size={14} />
 					Import
 				</Button>
 				<Button variant="primary" size="sm" class="flex items-center gap-2" onclick={handleCreate}>
-					<Plus size={14} />
+					<Icon icon="tabler:plus" size={14} />
 					New
 				</Button>
 			</div>
@@ -124,7 +122,7 @@
 		<div class="flex flex-col gap-2">
 			{#if servers.length === 0 && !loading}
 				<Card class="text-surface-400 text-center">
-					<Server size={32} class="mx-auto mb-2 opacity-50" />
+					<Icon icon="tabler:server" size={32} class="mx-auto mb-2 opacity-50" />
 					<p>No servers configured</p>
 					<p class="mt-1 text-sm">Create one to get started</p>
 				</Card>
@@ -148,7 +146,7 @@
 		{:else}
 			<div class="text-surface-400 flex h-full items-center justify-center">
 				<div class="text-center">
-					<Server size={48} class="mx-auto mb-4 opacity-30" />
+					<Icon icon="tabler:server" size={48} class="mx-auto mb-4 opacity-30" />
 					<p class="text-lg">Select a server to view details</p>
 				</div>
 			</div>

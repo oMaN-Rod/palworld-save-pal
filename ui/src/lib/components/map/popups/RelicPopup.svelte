@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Check from '@lucide/svelte/icons/check';
-	import X from '@lucide/svelte/icons/x';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { RelicPoint } from '$types';
 	import { relicTypeIcon } from '../styles';
 	import Popup from './Popup.svelte';
@@ -24,10 +23,10 @@
 		{#if point.unlocked !== undefined}
 			<Badge variant={point.unlocked ? 'success' : 'error'}>
 				{#if point.unlocked}
-					<Check class="h-3 w-3 shrink-0" />
+					<Icon icon="tabler:check" class="h-3 w-3 shrink-0" />
 					{m.collected()}
 				{:else}
-					<X class="h-3 w-3 shrink-0" />
+					<Icon icon="tabler:x" class="h-3 w-3 shrink-0" />
 					{m.not_collected()}
 				{/if}
 			</Badge>

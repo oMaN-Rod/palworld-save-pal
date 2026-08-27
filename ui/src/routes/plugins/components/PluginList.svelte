@@ -1,7 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import { Checkbox } from '$components/ui';
-	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
 	import type { PluginSummary } from '$types';
 
 	let {
@@ -40,7 +40,7 @@
 						aria-label={`Failed to load: ${plugin.error}`}
 						title={plugin.error}
 					>
-						<TriangleAlert class="h-4 w-4" />
+						<Icon icon="tabler:alert-triangle" class="h-4 w-4" />
 					</span>
 				{/if}
 				<span class="truncate">{plugin.name}</span>

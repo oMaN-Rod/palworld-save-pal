@@ -1,12 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState, getModalState } from '$states';
 	import { buildingsData, itemsData, technologiesData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { NumberInputModal } from '$components/modals';
 	import { Button, Tooltip } from '$components/ui';
-	import Lock from '@lucide/svelte/icons/lock';
-	import Unlock from '@lucide/svelte/icons/lock-open';
 	import { EntryState, type Technology } from '$types';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -242,7 +241,7 @@
 						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
 						onclick={resetAll}
 					>
-						<Lock class="inline h-4 w-4" />
+						<Icon icon="tabler:lock" class="inline h-4 w-4" />
 						{m.lock_all()}
 					</Button>
 					<Button
@@ -252,7 +251,7 @@
 						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
 						onclick={unlockAll}
 					>
-						<Unlock class="inline h-4 w-4" />
+						<Icon icon="tabler:lock-open" class="inline h-4 w-4" />
 						{m.unlock_all()}
 					</Button>
 				</div>

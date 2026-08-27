@@ -1,10 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import UPSPalBadge from './UPSPalBadge.svelte';
 	import { getUpsState } from '$states';
 	import type { UPSPal } from '$types';
-	import Tag from '@lucide/svelte/icons/tag';
-	import Upload from '@lucide/svelte/icons/upload';
-	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 	import * as m from '$i18n/messages';
 
 	const upsState = getUpsState();
@@ -31,7 +29,7 @@
 						<div
 							class="bg-surface-950/80 text-surface-100 rounded px-2 py-1 text-xs backdrop-blur-sm"
 						>
-							{upsPal.tags.length}<Tag size={10} class="ml-0.5 inline" />
+							{upsPal.tags.length}<Icon icon="tabler:tag" size={10} class="ml-0.5 inline" />
 						</div>
 					{/if}
 				</div>
@@ -43,12 +41,16 @@
 						>
 							{#if upsPal.transfer_count > 0}
 								<div title={m.transfer({ count: 2 })}>
-									<Upload size={10} class="mr-0.5 inline" />{upsPal.transfer_count}
+									<Icon
+										icon="tabler:upload"
+										size={10}
+										class="mr-0.5 inline"
+									/>{upsPal.transfer_count}
 								</div>
 							{/if}
 							{#if upsPal.clone_count > 0}
 								<div title={m.clones()}>
-									<RefreshCw size={10} class="mr-0.5 inline" />{upsPal.clone_count}
+									<Icon icon="tabler:refresh" size={10} class="mr-0.5 inline" />{upsPal.clone_count}
 								</div>
 							{/if}
 						</div>

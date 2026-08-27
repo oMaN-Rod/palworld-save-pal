@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { Slider } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/slider';
 	import { onMount } from 'svelte';
@@ -81,7 +80,7 @@
 			<div class="flex w-full justify-end">
 				<Tooltip position="bottom">
 					<Button variant="ghost" size="icon" onclick={() => handleClose(true)} data-modal-primary>
-						<Save />
+						<Icon icon="tabler:device-floppy" />
 					</Button>
 					{#snippet popup()}
 						<span>{c.save}</span>
@@ -89,7 +88,7 @@
 				</Tooltip>
 				<Tooltip position="bottom">
 					<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-						<X />
+						<Icon icon="tabler:x" />
 					</Button>
 					{#snippet popup()}
 						<span>{m.cancel()}</span>

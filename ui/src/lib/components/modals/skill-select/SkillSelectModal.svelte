@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox } from '$components/ui';
 	import {
 		type ActiveSkill,
@@ -7,10 +8,6 @@
 		type SelectOption,
 		type SkillType
 	} from '$types';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Delete from '@lucide/svelte/icons/delete';
-	import TimerReset from '@lucide/svelte/icons/timer-reset';
 	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
@@ -96,7 +93,7 @@
 		</div>
 		<div class="flex flex-col">
 			<div class="flex items-center justify-end space-x-1">
-				<TimerReset class="h-4 w-4" />
+				<Icon icon="tabler:history" class="h-4 w-4" />
 				<span class="font-bold">{activeSkill?.details.cool_time}</span>
 				<span class="text-xs">Pwr</span>
 				<span class="font-bold">{activeSkill?.details.power}</span>
@@ -143,7 +140,7 @@
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleClear}>
-				<Delete />
+				<Icon icon="tabler:backspace" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
@@ -151,7 +148,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(value)}>
-				<Save />
+				<Icon icon="tabler:device-floppy" />
 			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
@@ -159,7 +156,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(null)}>
-				<X />
+				<Icon icon="tabler:x" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

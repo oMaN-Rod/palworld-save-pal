@@ -1,9 +1,8 @@
 <script lang="ts">
 	// A `.breed-row` subgrid cell -- the enclosing `.breed-list` owns the column template, so icons and operators line up across every row.
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 	import type { BreedablePal, DirectResultItem } from '$lib/breeding/types';
-	import Plus from '@lucide/svelte/icons/plus';
-	import ArrowRight from '@lucide/svelte/icons/arrow-right';
 	import PalSlot from './PalSlot.svelte';
 	import GenderRatio from './GenderRatio.svelte';
 
@@ -29,7 +28,7 @@
 		gender={result.parent_a_gender}
 	/>
 
-	<span class="breed-op"><Plus size={18} class="text-primary-400" /></span>
+	<span class="breed-op"><Icon icon="tabler:plus" size={18} class="text-primary-400" /></span>
 
 	<PalSlot
 		tribe={result.parent_b}
@@ -39,7 +38,7 @@
 		gender={result.parent_b_gender}
 	/>
 
-	<span class="breed-op"><ArrowRight size={20} class="text-primary-400" /></span>
+	<span class="breed-op"><Icon icon="tabler:arrow-right" size={20} class="text-primary-400" /></span>
 
 	<div class="flex min-w-0 items-center gap-2">
 		<PalSlot tribe={result.child} display={childDisplay} characterId={result.child} size="md" />

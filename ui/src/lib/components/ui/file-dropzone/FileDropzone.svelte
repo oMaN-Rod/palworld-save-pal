@@ -1,5 +1,5 @@
 <script lang="ts">
-	import FolderArchive from '@lucide/svelte/icons/folder-archive';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -89,7 +89,7 @@
 					<strong>{m.upload_a_file()}</strong> {m.or_drag_and_drop()}
 				{/if}
 				<div class="mt-2 flex items-center justify-center">
-					<FolderArchive class={iconSize} />
+					<Icon icon="tabler:archive" class={iconSize} />
 				</div>
 				{#if files}
 					<div class="mt-4 flex flex-row items-center justify-center space-x-2">

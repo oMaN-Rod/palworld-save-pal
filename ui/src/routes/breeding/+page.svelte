@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo } from '$lib/components/seo';
 	import { onMount } from 'svelte';
 	import * as m from '$i18n/messages';
@@ -10,17 +11,6 @@
 	import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { palSkillName } from '$lib/utils/breedingHelpers';
 	import Spinner from '$lib/components/ui/spinner/Spinner.svelte';
-	import GitMerge from '@lucide/svelte/icons/git-merge';
-	import ArrowRightLeft from '@lucide/svelte/icons/arrow-right-left';
-	import ListChecks from '@lucide/svelte/icons/list-checks';
-	import Database from '@lucide/svelte/icons/database';
-	import List from '@lucide/svelte/icons/list';
-	import Play from '@lucide/svelte/icons/play';
-	import Route from '@lucide/svelte/icons/route';
-	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
-	import Ban from '@lucide/svelte/icons/ban';
-	import SearchX from '@lucide/svelte/icons/search-x';
-	import X from '@lucide/svelte/icons/x';
 	import PalPicker from '$lib/components/breeding/PalPicker.svelte';
 	import OwnerSelect from '$lib/components/breeding/OwnerSelect.svelte';
 	import DirectResult from '$lib/components/breeding/DirectResult.svelte';
@@ -365,10 +355,10 @@
 		return players.reduce((sum, p) => sum + Object.keys(p?.pals ?? {}).length, 0);
 	});
 
-	const allTabs: { id: Mode; icon: typeof ArrowRightLeft; label: () => string }[] = [
-		{ id: 'direct', icon: ArrowRightLeft, label: () => m.breeding_tabs_direct() },
-		{ id: 'selection', icon: ListChecks, label: () => m.breeding_tabs_selection() },
-		{ id: 'save', icon: Database, label: () => m.breeding_tabs_save() }
+	const allTabs: { id: Mode; icon: string; label: () => string }[] = [
+		{ id: 'direct', icon: 'tabler:transfer', label: () => m.breeding_tabs_direct() },
+		{ id: 'selection', icon: 'tabler:list-check', label: () => m.breeding_tabs_selection() },
+		{ id: 'save', icon: 'tabler:database', label: () => m.breeding_tabs_save() }
 	];
 
 	// `mode` starts on 'direct', so hiding the save tab for a public-shell
@@ -387,7 +377,7 @@
 >
 	<div class="flex flex-wrap items-center justify-between gap-3">
 		<div class="flex items-center gap-2">
-			<GitMerge size={20} class="text-primary-400" />
+			<Icon icon="tabler:git-merge" size={20} class="text-primary-400" />
 			<h1 class="heading-gradient text-xl font-bold">{m.breeding_title()}</h1>
 		</div>
 		{#if chainElapsedMs !== null}
@@ -397,12 +387,11 @@
 
 	<div class="flex items-center gap-1.5">
 		{#each tabs as tab (tab.id)}
-			{@const TabIcon = tab.icon}
 			<button
 				class="rounded-sm flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium transition-all {tabPill(mode === tab.id)}"
 				onclick={() => switchMode(tab.id)}
 			>
-				<TabIcon size={15} />
+				<Icon icon={tab.icon} size={15} />
 				{tab.label()}
 			</button>
 		{/each}
@@ -415,14 +404,14 @@
 				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-xs font-medium transition-all {tabPill(chainViewMode === 'list')}"
 				onclick={() => (chainViewMode = 'list')}
 			>
-				<List size={12} />
+				<Icon icon="tabler:list" size={12} />
 				{m.breeding_view_list()}
 			</button>
 			<button
 				class="rounded-sm flex items-center gap-1 px-2.5 py-1 text-xs font-medium transition-all {tabPill(chainViewMode === 'graph')}"
 				onclick={() => (chainViewMode = 'graph')}
 			>
-				<GitMerge size={12} />
+				<Icon icon="tabler:git-merge" size={12} />
 				{m.breeding_view_graph()}
 			</button>
 		</div>
@@ -489,7 +478,10 @@
 						disabled={!canRunDirect || directLoading}
 						onclick={runDirect}
 					>
-						{#if directLoading}<Spinner size="size-4" />{:else}<Play size={15} />{/if}
+						{#if directLoading}<Spinner size="size-4" />{:else}<Icon
+								icon="tabler:player-play"
+								size={15}
+							/>{/if}
 						{m.breeding_compute()}
 					</button>
 				</div>
@@ -497,7 +489,7 @@
 				{#if error}<div
 						class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
 					>
-						<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+						<Icon icon="tabler:alert-triangle" size={13} class="shrink-0" /><span>{error}</span>
 					</div>{/if}
 
 				{#if directSub === 'forward' && directResult}
@@ -513,7 +505,7 @@
 							</div>
 						{:else}
 							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
-								<Ban size={24} />
+								<Icon icon="tabler:ban" size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
 						{/if}
@@ -533,7 +525,7 @@
 							</div>
 						{:else}
 							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
-								<Ban size={24} />
+								<Icon icon="tabler:ban" size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
 						{/if}
@@ -553,7 +545,7 @@
 							</div>
 						{:else}
 							<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-8">
-								<Ban size={24} />
+								<Icon icon="tabler:ban" size={24} />
 								<span class="text-xs">{m.breeding_no_combo()}</span>
 							</div>
 						{/if}
@@ -565,7 +557,7 @@
 				<div
 					class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
 				>
-					<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+					<Icon icon="tabler:alert-triangle" size={13} class="shrink-0" /><span>{error}</span>
 				</div>
 			{/if}
 			<div class="flex min-h-0 flex-1 gap-4">
@@ -637,7 +629,7 @@
 			<div class="space-y-4">
 				{#if mode === 'save' && !appState.saveFile}
 					<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
-						<Database size={32} />
+						<Icon icon="tabler:database" size={32} />
 						<span class="text-sm font-medium">{m.breeding_save_required()}</span>
 						<p class="text-xs">{m.breeding_save_required_hint()}</p>
 					</div>
@@ -733,7 +725,7 @@
 													onclick={() => removeFromPool(member.tribe)}
 													title={m.breeding_remove()}
 												>
-													<X size={10} />
+													<Icon icon="tabler:x" size={10} />
 												</button>
 											</div>
 										{/each}
@@ -769,7 +761,10 @@
 							disabled={!canRunChain || computing}
 							onclick={runChain}
 						>
-							{#if computing}<Spinner size="size-4" />{:else}<Route size={15} />{/if}
+							{#if computing}<Spinner size="size-4" />{:else}<Icon
+									icon="tabler:route"
+									size={15}
+								/>{/if}
 							{m.breeding_find_chains()}
 						</button>
 					</div>
@@ -777,11 +772,11 @@
 					{#if error}<div
 							class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
 						>
-							<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+							<Icon icon="tabler:alert-triangle" size={13} class="shrink-0" /><span>{error}</span>
 						</div>{/if}
 					{#each chainWarnings as w, i (i)}
 						<p class="text-warning-400 flex items-center gap-1 text-xs">
-							<AlertTriangle size={13} />{w}
+							<Icon icon="tabler:alert-triangle" size={13} />{w}
 						</p>
 					{/each}
 
@@ -801,7 +796,7 @@
 						</div>
 					{:else if !computing && chainElapsedMs !== null}
 						<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
-							<SearchX size={28} />
+							<Icon icon="tabler:search-off" size={28} />
 							<span class="text-sm">{m.breeding_no_chains()}</span>
 						</div>
 					{/if}
@@ -810,7 +805,7 @@
 		{:else}
 			{#if mode === 'save' && !appState.saveFile}
 				<div class="text-surface-400 flex flex-col items-center justify-center gap-2 py-12">
-					<Database size={32} />
+					<Icon icon="tabler:database" size={32} />
 					<span class="text-sm font-medium">{m.breeding_save_required()}</span>
 					<p class="text-xs">{m.breeding_save_required_hint()}</p>
 				</div>
@@ -818,11 +813,11 @@
 				{#if error}<div
 						class="rounded-md bg-error-500/10 border-error-500/30 text-error-300 flex items-center gap-1.5 border px-3 py-2 text-xs"
 					>
-						<AlertTriangle size={13} class="shrink-0" /><span>{error}</span>
+						<Icon icon="tabler:alert-triangle" size={13} class="shrink-0" /><span>{error}</span>
 					</div>{/if}
 				{#each chainWarnings as w, i (i)}
 					<p class="text-warning-400 flex items-center gap-1 text-xs">
-						<AlertTriangle size={13} />{w}
+						<Icon icon="tabler:alert-triangle" size={13} />{w}
 					</p>
 				{/each}
 

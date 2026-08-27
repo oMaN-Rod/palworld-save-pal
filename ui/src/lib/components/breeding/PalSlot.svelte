@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { assetLoader } from '$lib/utils/assetLoader';
-	import Mars from '@lucide/svelte/icons/mars';
-	import Venus from '@lucide/svelte/icons/venus';
 
 	let {
 		tribe,
@@ -21,7 +20,7 @@
 	const textSize = $derived({ sm: 'text-sm', md: 'text-base', lg: 'text-lg' }[size]);
 	const shown = $derived(display || tribe);
 	const iconSrc = $derived(assetLoader.loadMenuImage(characterId ?? tribe));
-	const GenderIcon = $derived(gender === 'Male' ? Mars : gender === 'Female' ? Venus : null);
+	const genderIcon = $derived(gender === 'Male' ? 'ph:gender-male' : gender === 'Female' ? 'ph:gender-female' : null);
 	const genderColor = $derived(
 		gender === 'Male' ? 'text-primary-300' : gender === 'Female' ? 'text-tertiary-400' : ''
 	);
@@ -35,9 +34,9 @@
 			class="{dims} rounded-sm border-surface-600 bg-surface-900 border object-contain"
 			loading="lazy"
 		/>
-		{#if GenderIcon}
+		{#if genderIcon}
 			<div class="absolute -right-0.5 -bottom-0.5 {genderColor} bg-surface-900 rounded-full">
-				<GenderIcon size={12} />
+				<Icon icon={genderIcon} size={12} />
 			</div>
 		{/if}
 	</div>

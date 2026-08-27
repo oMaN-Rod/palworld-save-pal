@@ -1,10 +1,5 @@
 <script lang="ts">
-	import Plus from '@lucide/svelte/icons/plus';
-	import Folder from '@lucide/svelte/icons/folder';
-	import Star from '@lucide/svelte/icons/star';
-	import Archive from '@lucide/svelte/icons/archive';
-	import Edit from '@lucide/svelte/icons/square-pen';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getUpsState, getModalState } from '$states';
 	import { TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
@@ -96,7 +91,7 @@
 				class="hover:bg-secondary-500/25 text-secondary-300"
 				popupLabel={m.create_new_collection()}
 			>
-				<Plus class="h-4 w-4" />
+				<Icon icon="tabler:plus" class="h-4 w-4" />
 			</TooltipButton>
 		</div>
 
@@ -107,7 +102,7 @@
 				? 'bg-secondary-500/25'
 				: ''}"
 		>
-			<Folder class="h-4 w-4" />
+			<Icon icon="tabler:folder" class="h-4 w-4" />
 			<span class="flex-1">{m.all_entity({ entity: c.pals })}</span>
 			<span class="text-muted text-xs">
 				{upsState.stats?.total_pals || 0}
@@ -154,7 +149,7 @@
 									popupLabel={m.remove_from_favorites()}
 									size="sm"
 								>
-									<Star class="h-3 w-3 fill-current" />
+									<Icon icon="tabler:star" class="h-3 w-3 fill-current" />
 								</TooltipButton>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -165,7 +160,7 @@
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
-									<Edit class="h-3 w-3" />
+									<Icon icon="tabler:edit" class="h-3 w-3" />
 								</TooltipButton>
 							</div>
 						</div>
@@ -214,7 +209,7 @@
 									popupLabel={m.add_to_favorites()}
 									size="sm"
 								>
-									<Star class="h-3 w-3" />
+									<Icon icon="tabler:star" class="h-3 w-3" />
 								</TooltipButton>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -225,7 +220,7 @@
 									popupLabel={m.edit_entity({ entity: c.collection })}
 									size="sm"
 								>
-									<Edit class="h-3 w-3" />
+									<Icon icon="tabler:edit" class="h-3 w-3" />
 								</TooltipButton>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -236,7 +231,7 @@
 									popupLabel={m.archive_entity({ entity: c.collection })}
 									size="sm"
 								>
-									<Archive class="h-3 w-3" />
+									<Icon icon="tabler:archive" class="h-3 w-3" />
 								</TooltipButton>
 								<TooltipButton
 									onclick={(e: MouseEvent) => {
@@ -247,7 +242,7 @@
 									popupLabel={m.delete_entity({ entity: c.collection })}
 									size="sm"
 								>
-									<Trash2 class="h-3 w-3" />
+									<Icon icon="tabler:trash-x" class="h-3 w-3" />
 								</TooltipButton>
 							</div>
 						</div>
@@ -258,7 +253,7 @@
 
 		{#if visibleCollections.length === 0}
 			<div class="py-8 text-center">
-				<Folder class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<Icon icon="tabler:folder" class="text-surface-500 mx-auto mb-3 h-12 w-12" />
 				<p class="text-surface-400 text-sm">
 					{showArchived
 						? m.no_archived_entity({ entity: c.collections })

@@ -1,9 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { Button, Input } from '$components/ui';
 	import { getServerState } from '$states';
-	import Save from '@lucide/svelte/icons/save';
-	import ExternalLink from '@lucide/svelte/icons/external-link';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { envGroups, PALWORLD_DOCS_URL } from './envGroups';
 	import EnvField from './EnvField.svelte';
@@ -61,12 +60,12 @@
 				rel="noopener noreferrer"
 				class="text-surface-400 hover:text-primary-400 flex items-center gap-1 text-xs transition-colors"
 			>
-				<ExternalLink size={12} />
+				<Icon icon="tabler:external-link" size={12} />
 				Official Docs
 			</a>
 		</div>
 		<Button variant="primary" size="sm" onclick={handleSave} disabled={saving}>
-			<Save size={14} />
+			<Icon icon="tabler:device-floppy" size={14} />
 			{saving ? 'Saving...' : 'Save Changes'}
 		</Button>
 	</div>

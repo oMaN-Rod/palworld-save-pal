@@ -1,9 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { getServerState, getModalState } from '$states';
 	import { Button, Card } from '$components/ui';
-	import FolderOpen from '@lucide/svelte/icons/folder-open';
-	import AlertTriangle from '@lucide/svelte/icons/triangle-alert';
 	import { goto } from '$app/navigation';
 
 	let { server } = $props<{ server: Server }>();
@@ -36,7 +35,7 @@
 	{#if isRunning}
 		<Card class="border border-yellow-500/30">
 			<div class="flex items-center gap-3 text-yellow-400">
-				<AlertTriangle size={20} />
+				<Icon icon="tabler:alert-triangle" size={20} />
 				<div>
 					<p class="font-medium">Server is running</p>
 					<p class="text-surface-400 text-sm">
@@ -58,7 +57,7 @@
 				<p class="text-surface-500 mt-1 text-xs">Save path: {server.saves_path}</p>
 			</div>
 			<Button variant="primary" onclick={handleLoadSave}>
-				<FolderOpen size={14} />
+				<Icon icon="tabler:folder-open" size={14} />
 				Load in Editor
 			</Button>
 		</div>

@@ -6,12 +6,6 @@
 	import { cn } from '$theme';
 	import { getAppState, getPalEditorState } from '$states';
 	import { palsData } from '$lib/data';
-	import Plus from '@lucide/svelte/icons/plus';
-	import ArchiveRestore from '@lucide/svelte/icons/archive-restore';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Copy from '@lucide/svelte/icons/copy';
-	import Upload from '@lucide/svelte/icons/upload';
-	import Users from '@lucide/svelte/icons/users';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -73,21 +67,25 @@
 				{
 					label: m.add_new_pal({ pal: c.pal }),
 					onClick: onAdd,
-					icon: Plus
+					icon: 'tabler:plus'
 				}
 			];
 		}
 
 		const items = [
-			{ label: m.move_to_entity({ entity: m.party() }), onClick: onMove, icon: ArchiveRestore },
-			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: Copy }
+			{
+				label: m.move_to_entity({ entity: m.party() }),
+				onClick: onMove,
+				icon: 'tabler:archive-off'
+			},
+			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: 'tabler:copy' }
 		];
 
 		if (onCloneToUps && showCloneToUps) {
 			items.push({
 				label: m.clone_to_entity({ entity: m.ups() }),
 				onClick: onCloneToUps,
-				icon: Upload
+				icon: 'tabler:upload'
 			});
 		}
 
@@ -95,11 +93,15 @@
 			items.push({
 				label: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
 				onClick: onCloneToPlayer,
-				icon: Users
+				icon: 'tabler:users'
 			});
 		}
 
-		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
+		items.push({
+			label: m.delete_entity({ entity: c.pal }),
+			onClick: onDelete,
+			icon: 'tabler:trash'
+		});
 
 		return items;
 	});

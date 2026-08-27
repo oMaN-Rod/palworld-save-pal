@@ -1,13 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input, List, TooltipButton } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Folder from '@lucide/svelte/icons/folder';
-	import Tag from '@lucide/svelte/icons/tag';
-	import FileText from '@lucide/svelte/icons/file-text';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Trash from '@lucide/svelte/icons/trash';
-	import ReplaceAll from '@lucide/svelte/icons/replace-all';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getAppState, getUpsState } from '$states';
@@ -224,7 +217,7 @@
 	<Card class="max-w-2xl min-w-[calc(100vw/2)]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
-				<FileText class="h-5 w-5" />
+				<Icon icon="tabler:file-text" class="h-5 w-5" />
 				{title}
 			</h3>
 		</div>
@@ -276,7 +269,7 @@
 				<div>
 					<div class="flex items-center gap-2">
 						<label class="flex items-center text-sm font-medium">
-							<Folder class="mr-2 h-4 w-4" />
+							<Icon icon="tabler:folder" class="mr-2 h-4 w-4" />
 							{m.collection_optional()}
 						</label>
 						<TooltipButton
@@ -284,7 +277,7 @@
 							onclick={() => (isCreatingCollection = true)}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
-							<Plus class="h-4 w-4" />
+							<Icon icon="tabler:plus" class="h-4 w-4" />
 						</TooltipButton>
 					</div>
 					{#if !isCreatingCollection}
@@ -342,7 +335,7 @@
 
 				<div>
 					<label class="mb-2 flex items-center gap-2 text-sm font-medium">
-						<Tag class="h-4 w-4" />
+						<Icon icon="tabler:tag" class="h-4 w-4" />
 						{m.tags_optional()}
 					</label>
 
@@ -378,7 +371,7 @@
 							onclick={addNewTag}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
-							<Plus class="h-4 w-4" />
+							<Icon icon="tabler:plus" class="h-4 w-4" />
 						</TooltipButton>
 					</div>
 
@@ -392,7 +385,7 @@
 									>
 										{tag}
 										<button onclick={() => toggleTag(tag)} class="hover:bg-primary-600 rounded">
-											<X class="h-3 w-3" />
+											<Icon icon="tabler:x" class="h-3 w-3" />
 										</button>
 									</span>
 								{/each}
@@ -429,14 +422,14 @@
 							onclick={() => addPal(selectedPalId)}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
-							<Plus class="h-4 w-4" />
+							<Icon icon="tabler:plus" class="h-4 w-4" />
 						</TooltipButton>
 						<TooltipButton
 							popupLabel={m.transfer_all_pals(p.pals)}
 							onclick={() => addAllPals()}
 							buttonClass="bg-primary-500 hover:bg-primary-800"
 						>
-							<ReplaceAll class="h-4 w-4" />
+							<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
 						</TooltipButton>
 					</div>
 					<List items={pals} idKey="instance_id" baseClass="max-h-[435px]">
@@ -449,7 +442,7 @@
 								onclick={() => removePal(pal.instance_id)}
 								buttonClass="hover:bg-red-600"
 							>
-								<Trash class="h-4 w-4" />
+								<Icon icon="tabler:trash" class="h-4 w-4" />
 							</TooltipButton>
 						{/snippet}
 						{#snippet listItemPopup(pal)}
@@ -466,7 +459,7 @@
 				variant="neutral"
 				onclick={() => handleClose(false)}
 			>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
 			<Button
@@ -475,7 +468,7 @@
 				onclick={() => handleClose(true)}
 				data-modal-primary
 			>
-				<Save class="h-4 w-4" />
+				<Icon icon="tabler:device-floppy" class="h-4 w-4" />
 				{m.import()}
 			</Button>
 		</div>

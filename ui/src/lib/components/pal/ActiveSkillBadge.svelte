@@ -1,12 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { activeSkillsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';
 	import { Tooltip } from '$components/ui';
 	import type { Pal } from '$types';
-	import TimerReset from '@lucide/svelte/icons/timer-reset';
-	import HelpCircle from '@lucide/svelte/icons/circle-question-mark';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -94,7 +93,7 @@
 							</div>
 						</span>
 						<div class="flex items-center space-x-2">
-							<TimerReset class="h-4 w-4" />
+							<Icon icon="tabler:history" class="h-4 w-4" />
 							<span class="font-bold">{activeSkill?.details.cool_time}</span>
 							<span class="text-xs">{m.pwr()}</span>
 							<span class="font-bold">{activeSkill?.details.power}</span>
@@ -131,7 +130,7 @@
 			{#if skill === 'Empty'}
 				<img src={staticIcons.sadIcon} alt="Sad face icon" class="mr-2 h-6 w-6" />
 			{:else}
-				<HelpCircle size={18} class="text-surface-500 mr-2" />
+				<Icon icon="tabler:help-circle" size={18} class="text-surface-500 mr-2" />
 			{/if}
 		</div>
 	</div>

@@ -1,10 +1,5 @@
 <script lang="ts">
-	import Clock from '@lucide/svelte/icons/clock';
-	import Gamepad2 from '@lucide/svelte/icons/gamepad-2';
-	import Heart from '@lucide/svelte/icons/heart';
-	import Pencil from '@lucide/svelte/icons/pencil';
-	import Swords from '@lucide/svelte/icons/swords';
-	import Users from '@lucide/svelte/icons/users';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Player } from '$types';
 	import { Button } from '$components/ui';
 	import { getAppState, getNavigationState } from '$states';
@@ -49,22 +44,22 @@
 	{/snippet}
 	{#snippet content()}
 		{#if guildName}
-			<InfoRow icon={Users} label={m.guild({ count: 1 })} value={guildName} />
+			<InfoRow icon={'tabler:users'} label={m.guild({ count: 1 })} value={guildName} />
 		{/if}
-		<InfoRow icon={Heart} iconClass="text-error-500" label={m.hp()} value={String(player.hp)} />
-		<InfoRow icon={Gamepad2} label={m.pal({ count: 2 })} value={String(palCount)} />
+		<InfoRow icon={'tabler:heart'} iconClass="text-error-500" label={m.hp()} value={String(player.hp)} />
+		<InfoRow icon={'tabler:device-gamepad-2'} label={m.pal({ count: 2 })} value={String(palCount)} />
 		{#if dpsCount > 0}
-			<InfoRow icon={Swords} iconClass="text-warning-500" label="DPS" value={String(dpsCount)} />
+			<InfoRow icon={'tabler:swords'} iconClass="text-warning-500" label="DPS" value={String(dpsCount)} />
 		{/if}
 		<InfoRow
-			icon={Clock}
+			icon={'tabler:clock'}
 			label={m.last_online()}
 			value={new Date(player.last_online_time).toLocaleString()}
 		/>
 	{/snippet}
 	{#snippet actions()}
 		<Button variant="secondary" onclick={handleEdit}>
-			<Pencil class="h-3.5 w-3.5" />
+			<Icon icon="tabler:pencil" class="h-3.5 w-3.5" />
 			{m.edit()}
 		</Button>
 	{/snippet}

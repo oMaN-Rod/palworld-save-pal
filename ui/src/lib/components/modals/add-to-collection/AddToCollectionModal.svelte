@@ -1,9 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input, TooltipButton } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Folder from '@lucide/svelte/icons/folder';
-	import Plus from '@lucide/svelte/icons/plus';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
@@ -103,7 +100,7 @@
 	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
-				<Folder class="h-5 w-5" />
+				<Icon icon="tabler:folder" class="h-5 w-5" />
 				{title}
 			</h3>
 		</div>
@@ -143,7 +140,7 @@
 							onclick={() => (isCreatingCollection = true)}
 							buttonClass="bg-primary-500 hover:bg-primary-600"
 						>
-							<Plus class="h-4 w-4" />
+							<Icon icon="tabler:plus" class="h-4 w-4" />
 						</TooltipButton>
 					{/if}
 				</div>
@@ -229,7 +226,7 @@
 				variant="neutral"
 				onclick={() => handleClose(false)}
 			>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
 			<Button
@@ -239,7 +236,7 @@
 				data-modal-primary
 				disabled={isCreatingCollection}
 			>
-				<Save class="h-4 w-4" />
+				<Icon icon="tabler:device-floppy" class="h-4 w-4" />
 				{selectedCollectionId === undefined ? m.remove() : m.move()}
 				{m.to_collection()}
 			</Button>

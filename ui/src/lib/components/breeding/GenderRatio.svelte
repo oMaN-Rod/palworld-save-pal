@@ -1,8 +1,7 @@
 <script lang="ts">
-	// Identity never rests on hue alone -- each side keeps its Mars/Venus glyph, so the split still reads under CVD or in a greyscale export.
+	// Identity never rests on hue alone -- each side keeps its 'ph:gender-male'/'ph:gender-female' glyph, so the split still reads under CVD or in a greyscale export.
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
-	import Mars from '@lucide/svelte/icons/mars';
-	import Venus from '@lucide/svelte/icons/venus';
 
 	let {
 		prob,
@@ -26,12 +25,12 @@
 	<div class="flex items-center gap-2 leading-none font-bold tabular-nums {numCls}">
 		{#if male > 0}
 			<span class="text-primary-300 flex items-center gap-0.5">
-				<Mars size={iconSize} class="shrink-0" />{male}%
+				<Icon icon="ph:gender-male" size={iconSize} class="shrink-0" />{male}%
 			</span>
 		{/if}
 		{#if female > 0}
 			<span class="text-tertiary-300 flex items-center gap-0.5">
-				<Venus size={iconSize} class="shrink-0" />{female}%
+				<Icon icon="ph:gender-female" size={iconSize} class="shrink-0" />{female}%
 			</span>
 		{/if}
 	</div>

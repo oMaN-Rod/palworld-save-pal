@@ -1,9 +1,5 @@
 <script lang="ts">
-	import House from '@lucide/svelte/icons/house';
-	import LandPlot from '@lucide/svelte/icons/land-plot';
-	import PawPrint from '@lucide/svelte/icons/paw-print';
-	import Package from '@lucide/svelte/icons/package';
-	import Users from '@lucide/svelte/icons/users';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Base } from '$types';
 	import { Button } from '$components/ui';
 	import { itemsData } from '$lib/data';
@@ -45,15 +41,15 @@
 
 <Popup title={base.name ?? base.id} subtitle={base.id} coords={base.location}>
 	{#snippet icon()}
-		<House class="text-primary-500 h-5 w-5" />
+		<Icon icon="tabler:home" class="text-primary-500 h-5 w-5" />
 	{/snippet}
 	{#snippet content()}
 		{#if guildName}
-			<InfoRow icon={Users} label={m.guild({ count: 1 })} value={guildName} />
+			<InfoRow icon={'tabler:users'} label={m.guild({ count: 1 })} value={guildName} />
 		{/if}
-		<InfoRow icon={LandPlot} label="Area" value={String(base.area_range)} />
-		<InfoRow icon={PawPrint} label={m.pal({ count: 2 })} value={String(palCount)} />
-		<InfoRow icon={Package} label={m.storage()}>
+		<InfoRow icon={'tabler:fence'} label="Area" value={String(base.area_range)} />
+		<InfoRow icon={'ph:paw-print'} label={m.pal({ count: 2 })} value={String(palCount)} />
+		<InfoRow icon={'tabler:package'} label={m.storage()}>
 			<div class="flex items-center gap-2">
 				<span class="font-mono text-xs">{containerCount}</span>
 				<span class="flex items-center gap-0.5">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { applySettings, getAppState, getModalState } from '$states';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { OpenFolder, SettingsModal } from '$components/modals';
@@ -30,7 +31,7 @@
 
 	const activeTile = $derived(activeNavId(page.url.pathname, ctx));
 	const menuItem = $derived(navItems.find((item) => item.id === 'menu')!);
-	const MenuIcon = $derived(menuItem.icon(ctx));
+	const menuIcon = $derived(menuItem.icon(ctx));
 	const actionItems = $derived([
 		...itemsFor('header').filter((item) => item.id !== 'menu'),
 		...itemsFor('footer')
@@ -111,13 +112,12 @@
 </script>
 
 {#snippet actionButton(item: NavItem)}
-	{@const Icon = item.icon(ctx)}
 	<button
 		class="nav-link nav-link-inactive w-full text-left"
 		title={(item.title ?? item.label)?.()}
 		onclick={() => runAction(item.action!)}
 	>
-		<Icon class="h-4 w-4 flex-shrink-0" />
+		<Icon icon={item.icon(ctx)} class="h-4 w-4 flex-shrink-0" />
 		<span class="sidebar-label truncate">{item.label?.()}</span>
 	</button>
 {/snippet}
@@ -141,7 +141,7 @@
 			title={(menuItem.title ?? menuItem.label)?.()}
 			onclick={() => runAction(menuItem.action!)}
 		>
-			<MenuIcon class="h-4 w-4" />
+			<Icon icon={menuIcon} class="h-4 w-4" />
 		</button>
 	</div>
 
@@ -151,14 +151,13 @@
 			{#if tiles.length > 0}
 				<div class="nav-group-label">{group.label()}</div>
 				{#each tiles as item (item.id)}
-					{@const Icon = item.icon(ctx)}
 					<a
 						href={hrefFor(item)}
 						class="nav-link nav-link-{item.id === activeTile ? 'active' : 'inactive'}"
 						title={(item.title ?? item.label)?.()}
 						onclick={() => (item.action ? runAction(item.action) : handleNavigate(item))}
 					>
-						<Icon class="h-4 w-4 shrink-0" />
+						<Icon icon={item.icon(ctx)} class="h-4 w-4 shrink-0" />
 						<span class="sidebar-label truncate">{item.label?.()}</span>
 					</a>
 				{/each}

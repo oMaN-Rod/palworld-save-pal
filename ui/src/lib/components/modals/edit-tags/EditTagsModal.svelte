@@ -1,9 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, TooltipButton } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Tag from '@lucide/svelte/icons/tag';
-	import Plus from '@lucide/svelte/icons/plus';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { getUpsState } from '$states';
@@ -85,7 +82,7 @@
 	<Card class="max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
-				<Tag class="h-5 w-5" />
+				<Icon icon="tabler:tag" class="h-5 w-5" />
 				{title}
 			</h3>
 		</div>
@@ -138,7 +135,7 @@
 						onclick={addNewTag}
 						buttonClass="bg-primary-500 hover:bg-primary-600"
 					>
-						<Plus class="h-4 w-4" />
+						<Icon icon="tabler:plus" class="h-4 w-4" />
 					</TooltipButton>
 				</div>
 			</div>
@@ -157,7 +154,7 @@
 									class="hover:bg-primary-600 rounded"
 									type="button"
 								>
-									<X class="h-3 w-3" />
+									<Icon icon="tabler:x" class="h-3 w-3" />
 								</button>
 							</span>
 						{/each}
@@ -194,7 +191,7 @@
 				variant="neutral"
 				onclick={() => handleClose(false)}
 			>
-				<X class="h-4 w-4" />
+				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
 			<Button
@@ -203,7 +200,7 @@
 				onclick={() => handleClose(true)}
 				data-modal-primary
 			>
-				<Save class="h-4 w-4" />
+				<Icon icon="tabler:device-floppy" class="h-4 w-4" />
 				{m.save_changes()}
 			</Button>
 		</div>

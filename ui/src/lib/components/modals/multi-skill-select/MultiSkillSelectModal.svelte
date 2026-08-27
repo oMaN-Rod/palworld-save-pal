@@ -1,11 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox, List, TooltipButton } from '$components/ui';
 	import { type Pal, type SelectOption, type SkillType } from '$types';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
-	import Delete from '@lucide/svelte/icons/delete';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Plus from '@lucide/svelte/icons/plus';
 	import { activeSkillsData, passiveSkillsData } from '$lib/data';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components/pal';
@@ -78,7 +74,7 @@
 			onclick={() => values.push(...selectOptions.map((option) => option.value as string))}
 			popupLabel={m.add_all_skills()}
 		>
-			<Plus />
+			<Icon icon="tabler:plus" />
 		</TooltipButton>
 	</div>
 
@@ -108,7 +104,7 @@
 					size="icon"
 					onclick={() => (values = values.filter((s) => s !== skill))}
 				>
-					<Trash size={16} />
+					<Icon icon="tabler:trash" size={16} />
 				</Button>
 			{/snippet}
 			{#snippet listItemPopup(skill)}
@@ -132,7 +128,7 @@
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={handleClear}>
-				<Delete />
+				<Icon icon="tabler:backspace" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.clear()}</span>
@@ -140,7 +136,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(values)}>
-				<Save />
+				<Icon icon="tabler:device-floppy" />
 			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
@@ -148,7 +144,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(null)}>
-				<X />
+				<Icon icon="tabler:x" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

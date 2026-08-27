@@ -1,10 +1,9 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { IControl } from 'maplibre-gl';
 	import { untrack } from 'svelte';
 	import { getMapContext, type ControlPosition } from '$components/maplibre';
 	import { Accordion, Slider, Switch } from '@skeletonlabs/skeleton-svelte';
-	import Eye from '@lucide/svelte/icons/eye';
-	import EyeClosed from '@lucide/svelte/icons/eye-closed';
 	import * as m from '$i18n/messages';
 	import { debounce } from '$utils';
 	import {
@@ -323,8 +322,8 @@
 									classes="h-6 w-6"
 								>
 									<span>{type}</span>
-									{#snippet inactiveChild()}<EyeClosed class="h-4 w-4" />{/snippet}
-									{#snippet activeChild()}<Eye class="h-4 w-4" />{/snippet}
+									{#snippet inactiveChild()}<Icon icon="tabler:eye-closed" class="h-4 w-4" />{/snippet}
+									{#snippet activeChild()}<Icon icon="tabler:eye" class="h-4 w-4" />{/snippet}
 								</Switch>
 							</div>
 						{/each}

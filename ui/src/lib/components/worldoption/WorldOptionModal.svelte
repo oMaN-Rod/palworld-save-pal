@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -155,7 +154,7 @@
 					disabled={patch.length === 0}
 					data-modal-primary
 				>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 				{#snippet popup()}
 					<span>Apply changes</span>
@@ -163,7 +162,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 				{#snippet popup()}
 					<span>Cancel</span>

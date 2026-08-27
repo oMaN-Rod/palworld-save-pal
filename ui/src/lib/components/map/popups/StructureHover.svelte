@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Box from '@lucide/svelte/icons/box';
-	import Heart from '@lucide/svelte/icons/heart';
 	import type { BaseStructure } from '$types';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';
@@ -33,9 +31,9 @@
 		<span class="block h-3 w-3 rounded-full" style="background-color: {swatchColor}"></span>
 	{/snippet}
 	{#snippet content()}
-		<InfoRow icon={Box} label={m.type({ count: 1 })} value={info.typeA} />
+		<InfoRow icon={'tabler:box'} label={m.type({ count: 1 })} value={info.typeA} />
 		<InfoRow
-			icon={Heart}
+			icon={'tabler:heart'}
 			iconClass="text-error-500"
 			label={m.hp()}
 			value="{info.hp} / {info.hpMax}"

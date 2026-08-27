@@ -1,11 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState, getToastState } from '$states';
 	import { Button, Card, Spinner } from '$components/ui';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
-	import HardDrive from '@lucide/svelte/icons/hard-drive';
-	import Repeat from '@lucide/svelte/icons/repeat';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -47,7 +46,7 @@
 	{#if !hasLoadedSave}
 		<Card class="mx-auto max-w-lg">
 			<div class="flex flex-col items-center gap-4 p-4">
-				<HardDrive size={48} class="text-surface-400" />
+				<Icon icon="ph:hard-drives" size={48} class="text-surface-400" />
 				<p class="text-surface-300 text-center">{m.tools_uid_swap_load_first()}</p>
 			</div>
 		</Card>
@@ -87,7 +86,7 @@
 					</div>
 
 					<div class="flex items-center justify-center">
-						<Repeat size={20} class="text-primary-400" />
+						<Icon icon="tabler:repeat" size={20} class="text-primary-400" />
 					</div>
 
 					<div class="flex flex-col gap-2">
@@ -129,7 +128,7 @@
 							onclick={() => (showSwapConfirm = true)}
 							disabled={!swapPlayerA || !swapPlayerB || swapPlayerA === swapPlayerB}
 						>
-							<Repeat size={16} />
+							<Icon icon="tabler:repeat" size={16} />
 							<span>{m.tools_swap_uids()}</span>
 						</Button>
 					{/if}

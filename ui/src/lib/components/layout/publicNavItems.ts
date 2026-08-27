@@ -1,20 +1,17 @@
 import * as m from '$i18n/messages';
-import Map from '@lucide/svelte/icons/map';
-import BookOpen from '@lucide/svelte/icons/book-open';
-import FlaskConical from '@lucide/svelte/icons/flask-conical';
-import type { Component } from 'svelte';
 
 export type PublicNavItem = {
 	id: string;
 	href: string;
-	icon: Component;
+	/** Iconify icon name, e.g. `tabler:map`. */
+	icon: string;
 	label: () => string;
 };
 
 export const publicNavItems: PublicNavItem[] = [
-	{ id: 'map', href: '/map', icon: Map, label: () => m.map() },
-	{ id: 'wiki', href: '/wiki', icon: BookOpen, label: () => m.docs_wiki() },
-	{ id: 'breeding', href: '/breeding', icon: FlaskConical, label: () => m.breeding() }
+	{ id: 'map', href: '/map', icon: 'tabler:map', label: () => m.map() },
+	{ id: 'wiki', href: '/wiki', icon: 'tabler:book', label: () => m.docs_wiki() },
+	{ id: 'breeding', href: '/breeding', icon: 'tabler:flask', label: () => m.breeding() }
 ];
 
 export function activePublicNavId(pathname: string): string {

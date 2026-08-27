@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
@@ -9,21 +10,6 @@
 	import { ItemBadge } from '$components/shared';
 	import { PlayerPresets } from '$components/presets';
 	import { TextInputModal, NumberInputModal, ItemSelectModal } from '$components/modals';
-	import Bomb from '@lucide/svelte/icons/bomb';
-	import ChevronsLeftRight from '@lucide/svelte/icons/chevrons-left-right';
-	import Key from '@lucide/svelte/icons/key';
-	import Pizza from '@lucide/svelte/icons/pizza';
-	import Shield from '@lucide/svelte/icons/shield';
-	import Swords from '@lucide/svelte/icons/swords';
-	import ArrowUp01 from '@lucide/svelte/icons/arrow-up-0-1';
-	import Minus from '@lucide/svelte/icons/minus';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Edit from '@lucide/svelte/icons/square-pen';
-	import Hash from '@lucide/svelte/icons/hash';
-	import PaintBucket from '@lucide/svelte/icons/paint-bucket';
-	import PawPrint from '@lucide/svelte/icons/paw-print';
-	import Activity from '@lucide/svelte/icons/activity';
-	import Rocket from '@lucide/svelte/icons/rocket';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
@@ -593,65 +579,65 @@
 				{#if group === 'inventory'}
 					<Tooltip label={m.sort_inventory()}>
 						<Button variant="ghost" size="icon" onclick={sortCommonContainer}>
-							<ArrowUp01 class="h-6 w-6" />
+							<Icon icon="ph:sort-ascending" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.fill_entity({ entity: m.inventory() })}>
 						<Button variant="ghost" size="icon" onclick={fillCommonContainer}>
-							<PaintBucket class="h-6 w-6" />
+							<Icon icon="tabler:paint" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.set_inventory_count()}>
 						<Button variant="ghost" size="icon" onclick={setCommonContainerCount}>
-							<Hash class="h-6 w-6" />
+							<Icon icon="tabler:hash" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.inventory() })}>
 						<Button variant="ghost" size="icon" onclick={clearCommonContainer}>
-							<ChevronsLeftRight class="h-6 w-6" />
+							<Icon icon="tabler:arrows-move-horizontal" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 				{/if}
 				{#if group === 'key_items'}
 					<Tooltip label={m.add_all_pal_gear(p.pal)}>
 						<Button variant="ghost" size="icon" onclick={() => setEssentialList('gear')}>
-							<PawPrint class="h-6 w-6" />
+							<Icon icon="ph:paw-print" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_all_implants()}>
 						<Button variant="ghost" size="icon" onclick={() => setEssentialList('implants')}>
-							<Activity class="h-6 w-6" />
+							<Icon icon="tabler:activity" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.add_other_key_items()}>
 						<Button variant="ghost" size="icon" onclick={() => setEssentialList('misc')}>
-							<Key class="h-6 w-6" />
+							<Icon icon="tabler:key" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 					<Tooltip label={m.clear_entity({ entity: m.key_items() })}>
 						<Button variant="ghost" size="icon" onclick={clearEssentialContainer}>
-							<ChevronsLeftRight class="h-6 w-6" />
+							<Icon icon="tabler:arrows-move-horizontal" class="h-6 w-6" />
 						</Button>
 					</Tooltip>
 				{/if}
 				<Tooltip label={m.clear_entity({ entity: m.weapon({ count: 2 }) })}>
 					<Button variant="ghost" size="icon" onclick={clearWeaponLoadOutContainer}>
-						<Swords class="h-6 w-6" />
+						<Icon icon="tabler:swords" class="h-6 w-6" />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.armor() })}>
 					<Button variant="ghost" size="icon" onclick={clearEquipmentArmorContainer}>
-						<Shield class="h-6 w-6" />
+						<Icon icon="tabler:shield" class="h-6 w-6" />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_entity({ entity: m.food() })}>
 					<Button variant="ghost" size="icon" onclick={clearFoodEquipContainer}>
-						<Pizza class="h-6 w-6" />
+						<Icon icon="tabler:pizza" class="h-6 w-6" />
 					</Button>
 				</Tooltip>
 				<Tooltip label={m.clear_all()}>
 					<Button variant="ghost" size="icon" onclick={clearAll}>
-						<Bomb class="h-6 w-6" />
+						<Icon icon="tabler:bomb" class="h-6 w-6" />
 					</Button>
 				</Tooltip>
 			</nav>
@@ -860,7 +846,7 @@
 									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
 									onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 								>
-									<Minus class="text-primary-500" size={16} />
+									<Icon icon="tabler:minus" class="text-primary-500" size={16} />
 								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
@@ -916,7 +902,7 @@
 									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
 									onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 								>
-									<Plus class="text-primary-500" size={16} />
+									<Icon icon="tabler:plus" class="text-primary-500" size={16} />
 								</Button>
 								{#snippet popup()}
 									<div class="flex items-center space-x-2">
@@ -967,7 +953,7 @@
 									class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
 									onclick={handleUpdateNickname}
 								>
-									<Edit class="h-4 w-4" />
+									<Icon icon="tabler:edit" class="h-4 w-4" />
 								</button>
 								<Tooltip
 									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
@@ -1024,7 +1010,7 @@
 {:else}
 	<div class="flex w-full items-center justify-center">
 		<h2 class="h2 flex items-center gap-2">
-			<Rocket class="text-secondary-400 h-6 w-6" />
+			<Icon icon="tabler:rocket" class="text-secondary-400 h-6 w-6" />
 			{m.select_entity_to_edit({ entity: c.player })}
 		</h2>
 	</div>

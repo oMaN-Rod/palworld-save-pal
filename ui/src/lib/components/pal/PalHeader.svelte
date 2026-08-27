@@ -1,12 +1,11 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
 	import { EntryState, type Pal } from '$types';
 	import { palsData, expData } from '$lib/data';
 	import { cn } from '$theme';
 	import { getAppState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
-	import Minus from '@lucide/svelte/icons/minus';
-	import Plus from '@lucide/svelte/icons/plus';
 	import { staticIcons } from '$types/icons';
 	import NumberFlow from '@number-flow/svelte';
 	import type { ValueChangeDetails } from '@zag-js/rating-group';
@@ -173,7 +172,7 @@
 							class="mr-4"
 							onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 						>
-							<Minus class="text-primary-500" />
+							<Icon icon="tabler:minus" class="text-primary-500" />
 						</Button>
 						{#snippet popup()}
 							<div class="flex gap-2">
@@ -248,7 +247,7 @@
 							class="ml-4"
 							onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 						>
-							<Plus class="text-primary-500" />
+							<Icon icon="tabler:plus" class="text-primary-500" />
 						</Button>
 						{#snippet popup()}
 							<div class="flex gap-2">

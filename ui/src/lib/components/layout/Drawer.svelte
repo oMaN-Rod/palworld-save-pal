@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
-	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
-	import ArrowRight from '@lucide/svelte/icons/arrow-right';
 	import * as m from '$i18n/messages';
 
 	type Position = 'left' | 'right';
@@ -67,14 +66,14 @@
 	>
 		{#if position === 'left'}
 			{#if isOpen}
-				<ArrowLeft />
+				<Icon icon="tabler:arrow-left" />
 			{:else}
-				<ArrowRight />
+				<Icon icon="tabler:arrow-right" />
 			{/if}
 		{:else if isOpen}
-			<ArrowRight />
+			<Icon icon="tabler:arrow-right" />
 		{:else}
-			<ArrowLeft />
+			<Icon icon="tabler:arrow-left" />
 		{/if}
 	</button>
 </div>

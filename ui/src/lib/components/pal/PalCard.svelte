@@ -8,11 +8,6 @@
 	import StatusBadge from './StatusBadge.svelte';
 	import { palsData } from '$lib/data';
 	import { ContextMenu } from '$components/ui';
-	import Plus from '@lucide/svelte/icons/plus';
-	import ArchiveRestore from '@lucide/svelte/icons/archive-restore';
-	import Trash from '@lucide/svelte/icons/trash';
-	import Copy from '@lucide/svelte/icons/copy';
-	import Upload from '@lucide/svelte/icons/upload';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';
@@ -69,25 +64,33 @@
 				{
 					label: m.add_new_pal({ pal: c.pal }),
 					onClick: onAdd,
-					icon: Plus
+					icon: 'tabler:plus'
 				}
 			];
 		}
 
 		const items = [
-			{ label: m.move_to_entity({ entity: m.palbox() }), onClick: onMove, icon: ArchiveRestore },
-			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: Copy }
+			{
+				label: m.move_to_entity({ entity: m.palbox() }),
+				onClick: onMove,
+				icon: 'tabler:archive-off'
+			},
+			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: 'tabler:copy' }
 		];
 
 		if (onCloneToUps && showCloneToUps) {
 			items.push({
 				label: m.clone_to_entity({ entity: m.ups() }),
 				onClick: onCloneToUps,
-				icon: Upload
+				icon: 'tabler:upload'
 			});
 		}
 
-		items.push({ label: m.delete_entity({ entity: c.pal }), onClick: onDelete, icon: Trash });
+		items.push({
+			label: m.delete_entity({ entity: c.pal }),
+			onClick: onDelete,
+			icon: 'tabler:trash'
+		});
 
 		return items;
 	});

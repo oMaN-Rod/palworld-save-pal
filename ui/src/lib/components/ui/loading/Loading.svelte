@@ -1,19 +1,20 @@
 <script lang="ts">
-	import Loader2 from '@lucide/svelte/icons/loader-circle';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Stopwatch } from '$lib/components/ui';
 	import { onMount } from 'svelte';
 
 	let {
         label = '',
 		loadingComplete = $bindable(false),
-        progressMessage = $bindable(''),
-		icon: Icon,
+		progressMessage = $bindable(''),
+		icon,
 		iconSize
 	}: {
         label: string;
 		loadingComplete?: boolean;
-        progressMessage?: string;
-		icon?: typeof Loader2;
+		progressMessage?: string;
+		/** Iconify icon name, e.g. `tabler:map`. Rendered in the ring's center. */
+		icon?: string;
 		iconSize?: number;
 	} = $props();
     
@@ -36,13 +37,14 @@
 <div class="loading-overlay" class:loading-dismiss={loadingComplete}>
 	<div class="loading-content">
 		<div class="relative">
-			<Loader2
+			<Icon
+				icon="svg-spinners:180-ring-with-bg"
 				size={64}
-				class="text-secondary-400 animate-spin"
+				class="text-secondary-400"
 				style="filter: drop-shadow(0 0 20px color-mix(in srgb, var(--color-secondary-400) 50%, transparent));"
 			/>
-			{#if Icon}
-				<Icon size={iconSize} class="text-secondary-300 absolute inset-0 m-auto" />
+			{#if icon}
+				<Icon {icon} size={iconSize} class="text-secondary-300 absolute inset-0 m-auto" />
 			{/if}
 		</div>
 		<p class="loading-text">{label}</p>

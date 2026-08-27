@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
-	import Check from '@lucide/svelte/icons/check';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';
@@ -43,7 +42,7 @@
 		<div class="flex justify-end space-x-4">
 			<Tooltip position="bottom">
 				<Button variant="secondary" onclick={handleCancel}>
-				<X size={20} />
+				<Icon icon="tabler:x" size={20} />
 				<span>{cancelText}</span>
 			</Button>
 				{#snippet popup()}
@@ -52,7 +51,7 @@
 			</Tooltip>
 			<Tooltip position="bottom">
 				<Button variant="primary" onclick={handleConfirm} data-modal-primary>
-				<Check size={20} />
+				<Icon icon="tabler:check" size={20} />
 				<span>{confirmText}</span>
 			</Button>
 				{#snippet popup()}

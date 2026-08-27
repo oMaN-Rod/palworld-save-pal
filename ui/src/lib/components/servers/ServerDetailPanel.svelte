@@ -1,20 +1,8 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { cn } from '$theme';
 	import { Button, Card } from '$components/ui';
-	import Settings from '@lucide/svelte/icons/settings';
-	import Package from '@lucide/svelte/icons/package';
-	import Terminal from '@lucide/svelte/icons/terminal';
-	import FolderOpen from '@lucide/svelte/icons/folder-open';
-	import LayoutDashboard from '@lucide/svelte/icons/layout-dashboard';
-	import Users from '@lucide/svelte/icons/users';
-	import Play from '@lucide/svelte/icons/play';
-	import Square from '@lucide/svelte/icons/square';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
-	import Cpu from '@lucide/svelte/icons/cpu';
-	import MemoryStick from '@lucide/svelte/icons/memory-stick';
-	import Network from '@lucide/svelte/icons/network';
-	import HardDrive from '@lucide/svelte/icons/hard-drive';
 	import { getServerState, getModalState } from '$states';
 	import ServerSettingsForm from './ServerSettingsForm.svelte';
 	import ServerModsPanel from './ServerModsPanel.svelte';
@@ -71,12 +59,12 @@
 		}
 	});
 
-	const tabs: { id: Tab; label: string; icon: typeof Settings }[] = [
-		{ id: 'overview', label: 'Overview', icon: LayoutDashboard },
-		{ id: 'settings', label: 'Settings', icon: Settings },
-		{ id: 'mods', label: 'Mods', icon: Package },
-		{ id: 'console', label: 'Console', icon: Terminal },
-		{ id: 'saves', label: 'Saves', icon: FolderOpen }
+	const tabs: { id: Tab; label: string; icon: string }[] = [
+		{ id: 'overview', label: 'Overview', icon: 'tabler:layout-dashboard' },
+		{ id: 'settings', label: 'Settings', icon: 'tabler:settings' },
+		{ id: 'mods', label: 'Mods', icon: 'tabler:package' },
+		{ id: 'console', label: 'Console', icon: 'tabler:terminal-2' },
+		{ id: 'saves', label: 'Saves', icon: 'tabler:folder-open' }
 	];
 
 	async function handleDelete() {
@@ -115,15 +103,15 @@
 					isRunning ? serverState.stopServer(server.id) : serverState.startServer(server.id)}
 			>
 				{#if isRunning}
-					<Square size={14} class={cn('mr-2 inline', 'text-red-400')} />
+					<Icon icon="tabler:square" size={14} class={cn('mr-2 inline', 'text-red-400')} />
 					Stop
 				{:else}
-					<Play size={14} class={cn('mr-2 inline', 'text-green-400')} />
+					<Icon icon="tabler:player-play" size={14} class={cn('mr-2 inline', 'text-green-400')} />
 					Start
 				{/if}
 			</Button>
 			<Button variant="ghost" size="icon" onclick={handleDelete}>
-				<Trash2 size={14} class="text-red-400" />
+				<Icon icon="tabler:trash-x" size={14} class="text-red-400" />
 			</Button>
 		</div>
 	</div>
@@ -139,7 +127,7 @@
 				)}
 				onclick={() => (activeTab = tab.id)}
 			>
-				<tab.icon size={16} />
+				<Icon icon={tab.icon} size={16} />
 				{tab.label}
 			</button>
 		{/each}
@@ -158,14 +146,14 @@
 					<Card>
 						<h4 class="text-surface-400 mb-1 text-xs font-medium uppercase">Online Players</h4>
 						<p class="flex items-center gap-2 text-lg font-bold">
-							<Users size={18} class="text-green-400" />
+							<Icon icon="tabler:users" size={18} class="text-green-400" />
 							{server.player_count ?? 0} / {server.max_players}
 						</p>
 					</Card>
 					<Card>
 						<h4 class="text-surface-400 mb-1 text-xs font-medium uppercase">Total Players</h4>
 						<p class="flex items-center gap-2 text-lg font-bold">
-							<Users size={18} class="text-surface-400" />
+							<Icon icon="tabler:users" size={18} class="text-surface-400" />
 							{server.total_players ?? 0}
 						</p>
 						{#if (server.total_players ?? 0) > 0}
@@ -203,14 +191,14 @@
 					<div class="grid grid-cols-2 gap-4">
 						<Card>
 							<div class="flex items-center gap-2">
-								<Cpu size={16} class="text-blue-400" />
+								<Icon icon="tabler:cpu" size={16} class="text-blue-400" />
 								<h4 class="text-surface-400 text-xs font-medium uppercase">CPU</h4>
 							</div>
 							<p class="mt-1 text-2xl font-bold">{stats.cpu_percent}%</p>
 						</Card>
 						<Card>
 							<div class="flex items-center gap-2">
-								<MemoryStick size={16} class="text-purple-400" />
+								<Icon icon="ph:memory" size={16} class="text-purple-400" />
 								<h4 class="text-surface-400 text-xs font-medium uppercase">Memory</h4>
 							</div>
 							<p class="mt-1 text-2xl font-bold">{stats.mem_percent}%</p>
@@ -220,7 +208,7 @@
 						</Card>
 						<Card>
 							<div class="flex items-center gap-2">
-								<Network size={16} class="text-green-400" />
+								<Icon icon="tabler:topology-star-3" size={16} class="text-green-400" />
 								<h4 class="text-surface-400 text-xs font-medium uppercase">Network</h4>
 							</div>
 							<div class="mt-1 grid grid-cols-2 gap-2">
@@ -236,7 +224,7 @@
 						</Card>
 						<Card>
 							<div class="flex items-center gap-2">
-								<HardDrive size={16} class="text-orange-400" />
+								<Icon icon="ph:hard-drives" size={16} class="text-orange-400" />
 								<h4 class="text-surface-400 text-xs font-medium uppercase">Disk I/O</h4>
 							</div>
 							<div class="mt-1 grid grid-cols-2 gap-2">

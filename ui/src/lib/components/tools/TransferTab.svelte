@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { getAppState, getToastState } from '$states';
 	import { Button, Card, Spinner } from '$components/ui';
@@ -6,8 +7,6 @@
 	import { MessageType, type PlayerSummary } from '$types';
 	import { c } from '$lib/utils/commonTranslations';
 	import * as m from '$i18n/messages';
-	import Monitor from '@lucide/svelte/icons/monitor';
-	import Upload from '@lucide/svelte/icons/upload';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -149,7 +148,7 @@
 	{#if !isDesktopMode}
 		<Card class="mx-auto max-w-lg">
 			<div class="flex flex-col items-center gap-4 p-4">
-				<Monitor size={48} class="text-surface-400" />
+				<Icon icon="tabler:device-desktop" size={48} class="text-surface-400" />
 				<p class="text-surface-300 text-center">{m.tools_transfer_desktop_required()}</p>
 			</div>
 		</Card>
@@ -192,7 +191,7 @@
 								{:else}
 									<p class="text-surface-400 text-center text-sm">{m.tools_select_source_hint()}</p>
 									<Button variant="primary" onclick={() => handleLoadTransferSave('source')}>
-										<Upload size={16} />
+										<Icon icon="tabler:upload" size={16} />
 										<span>{m.tools_select_source()}</span>
 									</Button>
 								{/if}
@@ -228,7 +227,7 @@
 								{:else}
 									<p class="text-surface-400 text-center text-sm">{m.tools_select_target_hint()}</p>
 									<Button variant="primary" onclick={() => handleLoadTransferSave('target')}>
-										<Upload size={16} />
+										<Icon icon="tabler:upload" size={16} />
 										<span>{m.tools_select_target()}</span>
 									</Button>
 								{/if}
@@ -319,7 +318,7 @@
 						onclick={handleTransfer}
 						disabled={!selectedSourcePlayer}
 					>
-						<Upload size={16} />
+						<Icon icon="tabler:upload" size={16} />
 						<span>{m.tools_transfer_player()}</span>
 					</Button>
 				</div>

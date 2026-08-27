@@ -1,7 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Table, Input, Button, Tooltip } from '$components/ui';
 	import type { ColumnDef } from '$components/ui/table/table.types';
-	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { getAppState, getModalState, getToastState } from '$states';
@@ -10,7 +10,6 @@
 	import { buildGuildRows, filterBySearch, emptyGuildIds, type GuildRow } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import GuildDetailPanel from './GuildDetailPanel.svelte';
-	import Trash from '@lucide/svelte/icons/trash';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -110,13 +109,13 @@
 					disabled={selected.size === 0}
 				>
 					<Button variant="ghost" disabled={selected.size === 0} onclick={bulkDelete}>
-						<Trash class="h-4 w-4" />
+						<Icon icon="tabler:trash" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 
 				<Tooltip label={m.delete_empty_guilds()}>
 					<Button variant="ghost" onclick={deleteEmpty}>
-						<Trash2 class="h-4 w-4" />
+						<Icon icon="tabler:trash-x" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
 			</div>
@@ -148,7 +147,7 @@
 					onclick={() => deleteOne(row)}
 					title={m.delete_entity({ entity: c.guild })}
 				>
-					<Trash2 class="h-4 w-4" />
+					<Icon icon="tabler:trash-x" class="h-4 w-4" />
 				</Button>
 			{/snippet}
 			{#snippet empty()}

@@ -1,11 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { fade } from 'svelte/transition';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { Loading } from '$components/ui';
 	import { PalEditModal } from '$components/modals';
 	import { onMount } from 'svelte';
-	import PawPrint from '@lucide/svelte/icons/paw-print';
-	import X from '@lucide/svelte/icons/x';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -53,7 +52,7 @@
 						<Loading
 							label={m.loading_entity({ entity: c.pal })}
 							loadingComplete={false}
-							icon={PawPrint}
+							icon="ph:paw-print"
 						/>
 					</div>
 				{:else if appState.selectedPal}
@@ -66,7 +65,7 @@
 				aria-label={m.close()}
 				onclick={() => palEditor.close()}
 			>
-				<X size={24} />
+				<Icon icon="tabler:x" size={24} />
 			</button>
 		</div>
 	</div>

@@ -34,12 +34,7 @@ export default defineConfig({
 		// Pre-bundling relocates the emscripten JS to .vite/deps, where its
 		// locateFile lookup for the sibling sqlite3.wasm 404s. Keep it in its own
 		// package folder so the wasm resolves in dev.
-		exclude: ['@sqlite.org/sqlite-wasm'],
-		// Each icon is its own deep-import entry, so lazy discovery re-runs the
-		// optimizer once per route that introduces new ones. Every round swaps
-		// .vite/deps through a temp dir; interrupt one and deps is left missing,
-		// after which every pre-bundled import 504s and routes render as 500s.
-		include: ['@lucide/svelte/icons/*']
+		exclude: ['@sqlite.org/sqlite-wasm']
 	},
 	server: {
 		// tauri.conf.json devUrl points here; fail loudly rather than drifting to

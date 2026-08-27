@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { elementsData } from '$lib/data';
 	import {
@@ -9,8 +10,6 @@
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader, focusModal } from '$utils';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 
@@ -99,7 +98,7 @@
 							disabled={!name}
 							data-modal-primary
 						>
-							<Save />
+							<Icon icon="tabler:device-floppy" />
 						</Button>
 					{/snippet}
 					{#snippet popup()}
@@ -109,7 +108,7 @@
 				<Tooltip position="bottom">
 					{#snippet children()}
 						<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-							<X />
+							<Icon icon="tabler:x" />
 						</Button>
 					{/snippet}
 					{#snippet popup()}

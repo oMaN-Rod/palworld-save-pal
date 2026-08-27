@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip } from '$components/ui';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { type Pal } from '$types';
 	import * as m from '$i18n/messages';
@@ -91,7 +90,7 @@
 		<Tooltip position="bottom">
 			{#snippet children()}
 				<Button variant="ghost" size="icon" class="rounded-md px-3 py-1.5" onclick={handleSave}>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 			{/snippet}
 			{#snippet popup()}
@@ -102,7 +101,7 @@
 		<Tooltip position="bottom">
 			{#snippet children()}
 				<Button variant="ghost" size="icon" class="rounded-md px-3 py-1.5" onclick={handleCancel}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 			{/snippet}
 			{#snippet popup()}

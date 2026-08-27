@@ -1,9 +1,4 @@
 <script lang="ts">
-	import Award from '@lucide/svelte/icons/award';
-	import Box from '@lucide/svelte/icons/box';
-	import Heart from '@lucide/svelte/icons/heart';
-	import Ruler from '@lucide/svelte/icons/ruler';
-	import User from '@lucide/svelte/icons/user';
 	import type { BaseStructure } from '$types';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';
@@ -39,23 +34,23 @@
 		{#if info.description}
 			<p class="text-xs">{info.description}</p>
 		{/if}
-		<InfoRow icon={Box} label={m.type({ count: 1 })} value={info.typeA} />
+		<InfoRow icon={'tabler:box'} label={m.type({ count: 1 })} value={info.typeA} />
 		<InfoRow
-			icon={Heart}
+			icon={'tabler:heart'}
 			iconClass="text-error-500"
 			label={m.hp()}
 			value="{info.hp} / {info.hpMax}"
 		/>
 		<InfoRow
-			icon={Ruler}
+			icon={'tabler:ruler-2'}
 			label={m.size()}
 			value="{info.sizeM.x.toFixed(2)} x {info.sizeM.y.toFixed(2)} x {info.sizeM.z.toFixed(2)} m"
 		/>
 		{#if info.rank !== undefined}
-			<InfoRow icon={Award} label="Rank" value={String(info.rank)} />
+			<InfoRow icon={'tabler:award'} label="Rank" value={String(info.rank)} />
 		{/if}
 		{#if info.builder}
-			<InfoRow icon={User} label="Builder" value={info.builder} />
+			<InfoRow icon={'tabler:user'} label="Builder" value={info.builder} />
 		{/if}
 	{/snippet}
 </Popup>

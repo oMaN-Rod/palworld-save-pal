@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { TextInputModal } from '$components/modals';
 	import { Button, List, TooltipButton } from '$components/ui';
 	import { itemsData, presetsData } from '$lib/data';
@@ -6,15 +7,6 @@
 	import { getModalState, sortPresets } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
-	import Edit from '@lucide/svelte/icons/square-pen';
-	import PaintBucket from '@lucide/svelte/icons/paint-bucket';
-	import Play from '@lucide/svelte/icons/play';
-	import Plus from '@lucide/svelte/icons/plus';
-	import Trash from '@lucide/svelte/icons/trash';
-	import X from '@lucide/svelte/icons/x';
-	import Hash from '@lucide/svelte/icons/hash';
-	import ChevronsLeftRight from '@lucide/svelte/icons/chevrons-left-right';
-	import PackagePlus from '@lucide/svelte/icons/package-plus';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
@@ -248,35 +240,35 @@
 			onclick={handleAddPreset}
 			popupLabel={m.create_preset_from_current({ entity: c.container })}
 		>
-			<Plus />
+			<Icon icon="tabler:plus" />
 		</TooltipButton>
 		<TooltipButton
 			onclick={handleFillContainer}
 			popupLabel={m.fill_current_entity({ entity: c.container })}
 		>
-			<PaintBucket />
+			<Icon icon="tabler:paint" />
 		</TooltipButton>
 		<TooltipButton
 			onclick={handleSetContainerCount}
 			popupLabel={m.set_entity_item_count({ entity: c.container })}
 		>
-			<Hash />
+			<Icon icon="tabler:hash" />
 		</TooltipButton>
 		<TooltipButton
 			onclick={handleClearContainer}
 			popupLabel={m.clear_entity({ entity: c.container })}
 		>
-			<ChevronsLeftRight />
+			<Icon icon="tabler:arrows-move-horizontal" />
 		</TooltipButton>
 		{#if selectedPresets.length >= 1}
 			<TooltipButton
 				onclick={handleApplyPreset}
 				popupLabel={m.apply_selected_entity({ entity: c.preset })}
 			>
-				<Play />
+				<Icon icon="tabler:player-play" />
 			</TooltipButton>
 			<TooltipButton onclick={handleAppendPreset} popupLabel={m.append_to_empty_slots()}>
-				<PackagePlus />
+				<Icon icon="tabler:package-import" />
 			</TooltipButton>
 			<TooltipButton
 				onclick={handleDeletePresets}
@@ -284,10 +276,10 @@
 					entity: m.preset({ count: selectedPresets.length })
 				})}
 			>
-				<Trash />
+				<Icon icon="tabler:trash" />
 			</TooltipButton>
 			<TooltipButton onclick={() => (selectedPresets = [])} popupLabel={m.clear_selected()}>
-				<X />
+				<Icon icon="tabler:x" />
 			</TooltipButton>
 		{/if}
 	</div>
@@ -309,7 +301,7 @@
 		{/snippet}
 		{#snippet listItemActions(preset)}
 			<Button variant="ghost" size="icon" onclick={() => handleEditPresetName(preset)}>
-				<Edit class="h-4 w-4" />
+				<Icon icon="tabler:edit" class="h-4 w-4" />
 			</Button>
 		{/snippet}
 		{#snippet listItemPopup(preset)}

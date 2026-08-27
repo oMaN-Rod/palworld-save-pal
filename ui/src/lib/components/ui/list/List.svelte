@@ -1,8 +1,8 @@
 <script lang="ts" generics="T extends Record<string, any> | string">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import { Checkbox, Tooltip } from '$components/ui';
-	import GripVertical from '@lucide/svelte/icons/grip-vertical';
 
 	let {
 		items = $bindable([]),
@@ -235,7 +235,7 @@
 						tabindex="0"
 						aria-label="Drag to reorder"
 					>
-						<GripVertical class="h-4 w-4" />
+						<Icon icon="tabler:grip-vertical" class="h-4 w-4" />
 					</span>
 				{/if}
 				{#if canSelect}

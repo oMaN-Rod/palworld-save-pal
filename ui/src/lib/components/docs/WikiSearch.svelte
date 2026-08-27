@@ -1,13 +1,12 @@
 <script lang="ts">
-	import Search from '@lucide/svelte/icons/search';
-	import X from '@lucide/svelte/icons/x';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 
 	let { value = $bindable(''), placeholder = `${m.docs_search_placeholder()}` }: { value?: string; placeholder?: string } = $props();
 </script>
 
 <div class="relative">
-	<Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+	<Icon icon="line-md:search" class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
 	<input
 		type="text"
 		bind:value
@@ -19,7 +18,7 @@
 			class="absolute right-3 top-1/2 -translate-y-1/2 text-surface-400 hover:text-surface-200"
 			onclick={() => (value = '')}
 		>
-			<X class="h-4 w-4" />
+			<Icon icon="tabler:x" class="h-4 w-4" />
 		</button>
 	{/if}
 </div>

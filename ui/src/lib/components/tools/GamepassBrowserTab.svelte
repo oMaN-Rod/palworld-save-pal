@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { getToastState } from '$states';
 	import { Card, Spinner } from '$components/ui';
@@ -6,8 +7,6 @@
 	import { MessageType, type GamepassSave } from '$types';
 	import { GamepassBrowser } from '$components/gamepass';
 	import * as m from '$i18n/messages';
-	import Monitor from '@lucide/svelte/icons/monitor';
-	import RefreshCw from '@lucide/svelte/icons/refresh-cw';
 
 	// Skeleton keeps every tab panel mounted, so the first scan is gated on `active` rather than firing for every hidden tab on load.
 	let { active = false }: { active?: boolean } = $props();
@@ -48,7 +47,7 @@
 	{#if !isDesktopMode}
 		<Card class="mx-auto max-w-lg">
 			<div class="flex flex-col items-center gap-4 p-4">
-				<Monitor size={48} class="text-surface-400" />
+				<Icon icon="tabler:device-desktop" size={48} class="text-surface-400" />
 				<p class="text-surface-300 text-center">{m.tools_gamepass_desktop_required()}</p>
 			</div>
 		</Card>
@@ -64,7 +63,7 @@
 				class="text-surface-400 hover:text-surface-200 flex items-center gap-1.5 text-sm"
 				onclick={loadBrowserSaves}
 			>
-				<RefreshCw size={14} />
+				<Icon icon="tabler:refresh" size={14} />
 				{m.tools_refresh()}
 			</button>
 		</div>

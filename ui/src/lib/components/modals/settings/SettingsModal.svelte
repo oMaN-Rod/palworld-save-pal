@@ -1,7 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Combobox, Input, Tooltip } from '$components/ui';
-	import X from '@lucide/svelte/icons/x';
-	import Save from '@lucide/svelte/icons/save';
 	import { languages } from '$types';
 	import type { AppSettings, SelectOption } from '$types';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
@@ -70,13 +69,13 @@
 		<div class="mt-2 flex justify-end space-x-2">
 			<Tooltip position="bottom" label={c.save}>
 				<Button variant="ghost" size="icon" onclick={() => closeModal(settings)} data-modal-primary>
-					<Save />
+					<Icon icon="tabler:device-floppy" />
 				</Button>
 			</Tooltip>
 
 			<Tooltip position="bottom" label={m.cancel()}>
 				<Button variant="ghost" size="icon" onclick={() => closeModal(null)}>
-					<X />
+					<Icon icon="tabler:x" />
 				</Button>
 			</Tooltip>
 		</div>

@@ -1,35 +1,48 @@
 <script lang="ts">
-	import PawPrint from '@lucide/svelte/icons/paw-print';
-	import User from '@lucide/svelte/icons/user';
-	import Package from '@lucide/svelte/icons/package';
-	import FlaskConical from '@lucide/svelte/icons/flask-conical';
-	import Blocks from '@lucide/svelte/icons/blocks';
-	import Users from '@lucide/svelte/icons/users';
-	import Bookmark from '@lucide/svelte/icons/bookmark';
-	import Languages from '@lucide/svelte/icons/languages';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 
 	const features = [
-		{ icon: PawPrint, title: m.landing_feature_pals_title, body: m.landing_feature_pals_body },
-		{ icon: User, title: m.landing_feature_players_title, body: m.landing_feature_players_body },
 		{
-			icon: Package,
+			icon: 'ph:paw-print',
+			title: m.landing_feature_pals_title,
+			body: m.landing_feature_pals_body
+		},
+		{
+			icon: 'tabler:user',
+			title: m.landing_feature_players_title,
+			body: m.landing_feature_players_body
+		},
+		{
+			icon: 'tabler:package',
 			title: m.landing_feature_inventory_title,
 			body: m.landing_feature_inventory_body
 		},
-		{ icon: FlaskConical, title: m.landing_feature_tech_title, body: m.landing_feature_tech_body },
 		{
-			icon: Blocks,
+			icon: 'tabler:flask',
+			title: m.landing_feature_tech_title,
+			body: m.landing_feature_tech_body
+		},
+		{
+			icon: 'tabler:blocks',
 			title: m.landing_feature_blueprints_title,
 			body: m.landing_feature_blueprints_body
 		},
-		{ icon: Users, title: m.landing_feature_guilds_title, body: m.landing_feature_guilds_body },
 		{
-			icon: Bookmark,
+			icon: 'tabler:users',
+			title: m.landing_feature_guilds_title,
+			body: m.landing_feature_guilds_body
+		},
+		{
+			icon: 'tabler:bookmark',
 			title: m.landing_feature_presets_title,
 			body: m.landing_feature_presets_body
 		},
-		{ icon: Languages, title: m.landing_feature_names_title, body: m.landing_feature_names_body }
+		{
+			icon: 'tabler:language',
+			title: m.landing_feature_names_title,
+			body: m.landing_feature_names_body
+		}
 	];
 </script>
 
@@ -40,7 +53,7 @@
 	<div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 		{#each features as f (f.title)}
 			<div class="card flex gap-4 p-5">
-				<f.icon class="text-primary-400 h-8 w-8 shrink-0" />
+				<Icon icon={f.icon} class="text-primary-400 h-8 w-8 shrink-0" />
 				<div>
 					<h3 class="h4 font-semibold">{f.title()}</h3>
 					<p class="text-surface-300 text-sm">{f.body()}</p>

@@ -22,7 +22,7 @@ export interface FeatureStyleProperties {
 	lineDash?: number[];
 	markerColor?: string;
 	markerIcon?: string;
-	markerIconSource?: 'builtin' | 'lucide';
+	markerIconSource?: 'builtin' | 'iconify';
 }
 
 export interface FeatureMetadata {

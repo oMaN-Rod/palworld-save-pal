@@ -1,9 +1,9 @@
 <script lang="ts" generics="T">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { SelectOption } from '$types';
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
 	import * as m from '$i18n/messages';
 
 	let {
@@ -156,7 +156,7 @@
 				{options.find((opt: SelectOption) => opt.value.toString() === selected)?.label ||
 					placeholder}
 			</span>
-			<ChevronDown class={cn('transition-transform', isOpen && 'rotate-180')} />
+			<Icon icon="tabler:chevron-down" class={cn('transition-transform', isOpen && 'rotate-180')} />
 		</div>
 		{#if isOpen}
 			<div

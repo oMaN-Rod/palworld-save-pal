@@ -1,4 +1,5 @@
 <script lang="ts" module>
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 
 	/** Single source for both the rendered accordion and the FAQPage schema. */
@@ -17,8 +18,6 @@
 </script>
 
 <script lang="ts">
-	import ChevronDown from '@lucide/svelte/icons/chevron-down';
-
 	const faqs = $derived(faqEntries());
 </script>
 
@@ -31,7 +30,10 @@
 			<details class="card group p-0">
 				<summary class="flex cursor-pointer list-none items-center justify-between p-4 font-medium">
 					<span>{item.question}</span>
-					<ChevronDown class="h-4 w-4 transition-transform group-open:rotate-180" />
+					<Icon
+						icon="tabler:chevron-down"
+						class="h-4 w-4 transition-transform group-open:rotate-180"
+					/>
 				</summary>
 				<p class="text-surface-300 px-4 pb-4 text-sm">{item.answer}</p>
 			</details>

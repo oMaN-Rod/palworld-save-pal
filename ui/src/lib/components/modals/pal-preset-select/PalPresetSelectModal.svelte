@@ -1,9 +1,7 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import Lock from '@lucide/svelte/icons/lock';
-	import Save from '@lucide/svelte/icons/save';
-	import X from '@lucide/svelte/icons/x';
 	import { presetsData, palsData } from '$lib/data';
 	import { sortPresets } from '$states';
 	import * as m from '$i18n/messages';
@@ -65,7 +63,7 @@
 						{palsData.getByKey(palCharacterKey)?.localized_name ||
 							presetProfile.pal_preset?.character_id}
 					</span>
-					<Lock class="h-4 w-4" />
+					<Icon icon="tabler:lock" class="h-4 w-4" />
 				{/if}
 			</div>
 		{/snippet}
@@ -74,7 +72,7 @@
 	<div class="mt-2 flex flex-row items-center space-x-2">
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(true)}>
-				<Save />
+				<Icon icon="tabler:device-floppy" />
 			</Button>
 			{#snippet popup()}
 				<span>{c.save}</span>
@@ -82,7 +80,7 @@
 		</Tooltip>
 		<Tooltip position="bottom">
 			<Button variant="ghost" size="icon" onclick={() => handleClose(false)}>
-				<X />
+				<Icon icon="tabler:x" />
 			</Button>
 			{#snippet popup()}
 				<span>{m.cancel()}</span>

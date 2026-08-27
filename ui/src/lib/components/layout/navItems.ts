@@ -2,30 +2,6 @@ import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
 import { isWebBuild } from '$lib/utils/platform';
 import type { AppState } from '$states';
-import Blocks from '@lucide/svelte/icons/blocks';
-import BookOpen from '@lucide/svelte/icons/book-open';
-import Bug from '@lucide/svelte/icons/bug';
-import ChevronsLeft from '@lucide/svelte/icons/chevrons-left';
-import ChevronsRight from '@lucide/svelte/icons/chevrons-right';
-import CircleX from '@lucide/svelte/icons/circle-x';
-import Database from '@lucide/svelte/icons/database';
-import FileHeart from '@lucide/svelte/icons/file-heart';
-import FileText from '@lucide/svelte/icons/file-text';
-import FlaskConical from '@lucide/svelte/icons/flask-conical';
-import Folder from '@lucide/svelte/icons/folder';
-import Globe from '@lucide/svelte/icons/globe';
-import Info from '@lucide/svelte/icons/info';
-import Layers from '@lucide/svelte/icons/layers';
-import LayoutGrid from '@lucide/svelte/icons/layout-grid';
-import Map from '@lucide/svelte/icons/map';
-import NotebookPen from '@lucide/svelte/icons/notebook-pen';
-import Pencil from '@lucide/svelte/icons/pencil';
-import Puzzle from '@lucide/svelte/icons/puzzle';
-import Save from '@lucide/svelte/icons/save';
-import Server from '@lucide/svelte/icons/server';
-import Settings from '@lucide/svelte/icons/settings';
-import Wrench from '@lucide/svelte/icons/wrench';
-import type { Component } from 'svelte';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
@@ -43,7 +19,8 @@ export type NavItem = {
 	id: string;
 	section: NavSection;
 	group?: NavGroup;
-	icon: (ctx: NavContext) => Component;
+	/** Iconify icon name, e.g. `tabler:map`. */
+	icon: (ctx: NavContext) => string;
 	label?: () => string;
 	title?: () => string;
 	href?: string | ((ctx: NavContext) => string);
@@ -62,14 +39,14 @@ export const navItems: NavItem[] = [
 	{
 		id: 'menu',
 		section: 'header',
-		icon: (ctx) => (ctx.expanded ? ChevronsLeft : ChevronsRight),
+		icon: (ctx) => (ctx.expanded ? 'tabler:chevrons-left' : 'tabler:chevrons-right'),
 		title: () => m.toggle_entity({ entity: '' }),
 		action: 'toggle-expanded'
 	},
 	{
 		id: 'save',
 		section: 'header',
-		icon: () => Save,
+		icon: () => 'tabler:device-floppy',
 		label: () => c.save,
 		action: 'save',
 		visible: (ctx) => Boolean(ctx.appState.saveFile) && ctx.desktop
@@ -77,7 +54,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'eject',
 		section: 'header',
-		icon: () => CircleX,
+		icon: () => 'tabler:circle-x',
 		label: () => m.eject(),
 		action: 'eject',
 		visible: (ctx) => Boolean(ctx.appState.saveFile)
@@ -87,7 +64,7 @@ export const navItems: NavItem[] = [
 		id: 'files',
 		section: 'tiles',
 		group: 'main',
-		icon: () => LayoutGrid,
+		icon: () => 'tabler:layout-grid',
 		label: () => m.file({ count: 2 }),
 		href: (ctx) => (ctx.desktop ? '/file' : '/upload')
 	},
@@ -95,7 +72,7 @@ export const navItems: NavItem[] = [
 		id: 'edit',
 		section: 'tiles',
 		group: 'main',
-		icon: () => Pencil,
+		icon: () => 'tabler:pencil',
 		label: () => m.edit(),
 		href: '/edit'
 	},
@@ -103,7 +80,7 @@ export const navItems: NavItem[] = [
 		id: 'bulk',
 		section: 'tiles',
 		group: 'main',
-		icon: () => Layers,
+		icon: () => 'tabler:stack-2',
 		label: () => m.bulk_actions(),
 		href: '/bulk'
 	},
@@ -111,7 +88,7 @@ export const navItems: NavItem[] = [
 		id: 'map',
 		section: 'tiles',
 		group: 'main',
-		icon: () => Map,
+		icon: () => 'tabler:map',
 		label: () => m.map(),
 		href: '/map'
 	},
@@ -119,7 +96,7 @@ export const navItems: NavItem[] = [
 		id: 'presets',
 		section: 'tiles',
 		group: 'main',
-		icon: () => FileHeart,
+		icon: () => 'tabler:file-like',
 		label: () => c.presets,
 		href: '/presets'
 	},
@@ -128,7 +105,7 @@ export const navItems: NavItem[] = [
 		id: 'blueprints',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Blocks,
+		icon: () => 'tabler:blocks',
 		label: () => 'Blueprints',
 		href: '/blueprints'
 	},
@@ -136,7 +113,7 @@ export const navItems: NavItem[] = [
 		id: 'gps',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Globe,
+		icon: () => 'tabler:world',
 		label: () => m.gps(),
 		href: '/gps',
 		visible: (ctx) => ctx.appState.hasGpsAvailable
@@ -145,7 +122,7 @@ export const navItems: NavItem[] = [
 		id: 'ups',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Database,
+		icon: () => 'tabler:database',
 		label: () => m.ups(),
 		href: '/ups'
 	},
@@ -153,17 +130,17 @@ export const navItems: NavItem[] = [
 		id: 'servers',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Server,
+		icon: () => 'tabler:server',
 		label: () => 'Servers',
 		href: '/servers',
-		// Server management drives Docker/native services the browser build cannot reach.
+		// 'tabler:server' management drives Docker/native services the browser build cannot reach.
 		visible: () => !isWebBuild
 	},
 	{
 		id: 'editor',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => NotebookPen,
+		icon: () => 'tabler:notebook',
 		label: () => m.editor(),
 		href: '/editor'
 	},
@@ -171,7 +148,7 @@ export const navItems: NavItem[] = [
 		id: 'plugins',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Puzzle,
+		icon: () => 'tabler:puzzle',
 		label: () => 'Plugins',
 		href: '/plugins'
 	},
@@ -179,7 +156,7 @@ export const navItems: NavItem[] = [
 		id: 'debug',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => Bug,
+		icon: () => 'tabler:bug',
 		label: () => m.debug(),
 		href: '/debug',
 		visible: (ctx) => Boolean(ctx.appState.settings.debug_mode)
@@ -188,7 +165,7 @@ export const navItems: NavItem[] = [
 		id: 'breeding',
 		section: 'tiles',
 		group: 'tools',
-		icon: () => FlaskConical,
+		icon: () => 'tabler:flask',
 		label: () => m.breeding(),
 		href: '/breeding'
 	},
@@ -197,7 +174,7 @@ export const navItems: NavItem[] = [
 		id: 'tools',
 		section: 'tiles',
 		group: 'help',
-		icon: () => Wrench,
+		icon: () => 'tabler:tool',
 		label: () => m.tools(),
 		href: '/tools'
 	},
@@ -205,7 +182,7 @@ export const navItems: NavItem[] = [
 		id: 'docs',
 		section: 'tiles',
 		group: 'help',
-		icon: () => FileText,
+		icon: () => 'tabler:file-text',
 		label: () => m.docs(),
 		href: '/docs'
 	},
@@ -213,7 +190,7 @@ export const navItems: NavItem[] = [
 		id: 'wiki',
 		section: 'tiles',
 		group: 'help',
-		icon: () => BookOpen,
+		icon: () => 'tabler:book',
 		label: () => m.docs_wiki(),
 		href: '/wiki'
 	},
@@ -221,7 +198,7 @@ export const navItems: NavItem[] = [
 		id: 'about',
 		section: 'tiles',
 		group: 'help',
-		icon: () => Info,
+		icon: () => 'tabler:info-circle',
 		label: () => m.about(),
 		href: '/about'
 	},
@@ -229,7 +206,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'open-folder',
 		section: 'footer',
-		icon: () => Folder,
+		icon: () => 'tabler:folder',
 		label: () => m.open_folder(),
 		action: 'open-folder',
 		visible: (ctx) => ctx.desktop
@@ -237,7 +214,7 @@ export const navItems: NavItem[] = [
 	{
 		id: 'settings',
 		section: 'footer',
-		icon: () => Settings,
+		icon: () => 'tabler:settings',
 		label: () => m.settings(),
 		action: 'settings'
 	}

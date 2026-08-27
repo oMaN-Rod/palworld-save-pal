@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tooltip } from '$components/ui';
 	import {
 		type DynamicItem,
@@ -13,7 +14,6 @@
 	import { getAppState, getModalState } from '$states';
 	import { ItemSelectModal } from '$components';
 	import { Progress } from '@skeletonlabs/skeleton-svelte';
-	import Package from '@lucide/svelte/icons/package';
 	import {
 		assetLoader,
 		rarityAccentClass,
@@ -367,7 +367,7 @@
 			<div
 				class="bg-surface-800 relative flex h-12 w-12 items-center justify-center 2xl:h-16 2xl:w-16"
 			>
-				<Package class="h-8 w-8 2xl:h-12 2xl:w-12" />
+				<Icon icon="tabler:package" class="h-8 w-8 2xl:h-12 2xl:w-12" />
 				<span class="absolute right-0 bottom-0 text-xs">{slot.count}</span>
 			</div>
 

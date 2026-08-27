@@ -1,6 +1,6 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState, getNavigationState } from '$states';
-	import Bug from '@lucide/svelte/icons/bug';
 	import { Button } from '$components/ui';
 
 	const appState = getAppState();
@@ -25,5 +25,5 @@
 		nav.saveAndNavigate(href);
 	}}
 >
-	<Bug class={iconClass} />
+	<Icon icon="tabler:bug" class={iconClass} />
 </Button>

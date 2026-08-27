@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo, breadcrumbSchema } from '$lib/components/seo';
 	import { palsData, elementsData } from '$lib/data';
 	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle } from '$components/docs';
@@ -9,14 +10,6 @@
 	import { classifyPalCategory, type PalCategory } from '$lib/utils/palFilters';
 	import { wikiPrefs } from '$lib/utils/wikiPrefs.svelte';
 	import { cn } from '$theme';
-	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
-	import ArrowDownZA from '@lucide/svelte/icons/arrow-down-z-a';
-	import ArrowDownWideNarrow from '@lucide/svelte/icons/arrow-down-wide-narrow';
-	import ArrowDownNarrowWide from '@lucide/svelte/icons/arrow-down-narrow-wide';
-	import GalleryVerticalEnd from '@lucide/svelte/icons/gallery-vertical-end';
-	import Check from '@lucide/svelte/icons/check';
-	import List from '@lucide/svelte/icons/list';
-	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
 
 	type SortBy = 'name' | 'paldeck-index';
 	type SortOrder = 'asc' | 'desc';
@@ -53,12 +46,14 @@
 		cn('btn', sortBy === value ? 'bg-secondary-500/25' : '');
 
 	const NameSortIcon = $derived.by(() => {
-		if (sortBy !== 'name') return ArrowDownAZ;
-		return sortOrder === 'asc' ? ArrowDownAZ : ArrowDownZA;
+		if (sortBy !== 'name') return 'tabler:sort-ascending-letters';
+		return sortOrder === 'asc' ? 'tabler:sort-ascending-letters' : 'tabler:sort-descending-letters';
 	});
 	const PaldeckSortIcon = $derived.by(() => {
-		if (sortBy !== 'paldeck-index') return ArrowDownWideNarrow;
-		return sortOrder === 'asc' ? ArrowDownWideNarrow : ArrowDownNarrowWide;
+		if (sortBy !== 'paldeck-index') return 'tabler:arrows-sort';
+		return sortOrder === 'asc'
+			? 'tabler:sort-ascending-numbers'
+			: 'tabler:sort-descending-numbers';
 	});
 
 	function toggleSort(newSortBy: SortBy) {
@@ -166,7 +161,7 @@
 							onclick={() => toggleSort('name')}
 							title="Name"
 						>
-							<NameSortIcon class="h-4 w-4" />
+							<Icon icon={NameSortIcon} class="h-4 w-4" />
 						</button>
 						<button
 							type="button"
@@ -174,7 +169,7 @@
 							onclick={() => toggleSort('paldeck-index')}
 							title="Paldeck #"
 						>
-							<PaldeckSortIcon class="h-4 w-4" />
+							<Icon icon={PaldeckSortIcon} class="h-4 w-4" />
 						</button>
 					</div>
 					<WikiViewToggle />
@@ -189,7 +184,7 @@
 							onclick={() => toggleCategory(id)}
 						>
 							{#if selectedCategories.has(id)}
-								<Check class="h-3.5 w-3.5" />
+								<Icon icon="tabler:check" class="h-3.5 w-3.5" />
 							{/if}
 							{label}
 						</button>
@@ -203,7 +198,7 @@
 						onclick={() => (selectedElement = null)}
 						title="All elements"
 					>
-						<GalleryVerticalEnd class="h-4 w-4" />
+						<Icon icon="tabler:layout-list" class="h-4 w-4" />
 					</button>
 					{#each elementTypes as element (element)}
 						<button

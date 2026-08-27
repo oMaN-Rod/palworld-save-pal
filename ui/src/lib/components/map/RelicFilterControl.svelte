@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Gem from '@lucide/svelte/icons/gem';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { relicTypeIcon } from './styles';
 	import { relicData } from '$lib/data';
 	import * as m from '$i18n/messages';
@@ -32,7 +32,7 @@
 		aria-expanded={open}
 		onclick={() => (open = !open)}
 	>
-		<Gem class="h-5 w-5" />
+		<Icon icon="tabler:diamond" class="h-5 w-5" />
 	</button>
 
 	{#if open}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { labResearchData, workSuitabilityData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -6,7 +7,6 @@
 	import { staticIcons } from '$types/icons';
 	import type { Guild, GuildLabResearchInfo, WorkSuitability } from '$types';
 	import NumberFlow from '@number-flow/svelte';
-	import Unlock from '@lucide/svelte/icons/lock-open';
 	import { Button } from '$components/ui';
 	import * as m from '$i18n/messages';
 
@@ -109,7 +109,7 @@
 					category: workSuitability.localized_name || category
 				})}
 			>
-				<Unlock class="h-4 w-4" />
+				<Icon icon="tabler:lock-open" class="h-4 w-4" />
 			</Button>
 		</div>
 	{/each}

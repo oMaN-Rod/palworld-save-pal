@@ -1,11 +1,10 @@
 <script lang="ts">
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { onMount } from 'svelte';
 	import type { Component } from 'svelte';
 	import Logo from '$components/layout/Logo.svelte';
 	import { SaveDropzone } from '$components/upload';
 	import { Button, Tooltip } from '$components/ui';
-	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
-	import Lock from '@lucide/svelte/icons/lock';
 	import * as m from '$i18n/messages';
 
 	interface Props {
@@ -52,14 +51,14 @@
 			</p>
 		</div>
 		<p class="text-surface-300 mt-4 flex items-center justify-center gap-2 text-sm">
-			<Lock size={14} />
+			<Icon icon="tabler:lock" size={14} />
 			{m.landing_hero_privacy()}
 		</p>
 		{#if resumeName && onResume}
 			<div class="hidden md:block">
 				<Tooltip label={resumeName}>
 					<Button variant="secondary" class="mt-4" onclick={onResume}>
-						<RotateCcw size={16} />
+						<Icon icon="tabler:rotate" size={16} />
 						{m.landing_hero_resume()}
 					</Button>
 				</Tooltip>
