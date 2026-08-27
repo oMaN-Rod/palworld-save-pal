@@ -65,6 +65,11 @@ export const envGroups: EnvGroup[] = [
 				key: 'ITEM_CORRUPTION_MULTIPLIER',
 				label: 'Item Corruption Rate',
 				default: '1.000000'
+			},
+			{
+				key: 'MONSTER_FARM_ACTION_SPEED_RATE',
+				label: 'Ranch Pal Work Speed',
+				default: '1.000000'
 			}
 		]
 	},
@@ -111,6 +116,27 @@ export const envGroups: EnvGroup[] = [
 				key: 'CROSSPLAY_PLATFORMS',
 				label: 'Crossplay Platforms',
 				default: '(Steam,Xbox,PS5,Mac)'
+			},
+			{
+				key: 'DENY_TECHNOLOGY_LIST',
+				label: 'Blocked Technology IDs (e.g. PalBox,RepairBench)',
+				default: ''
+			}
+		]
+	},
+	{
+		title: 'Voice Chat',
+		keys: [
+			bool('ENABLE_VOICE_CHAT', 'Voice Chat', 'False'),
+			{
+				key: 'VOICE_CHAT_MAX_VOLUME_DISTANCE',
+				label: 'Full Volume Distance',
+				default: '3000.000000'
+			},
+			{
+				key: 'VOICE_CHAT_ZERO_VOLUME_DISTANCE',
+				label: 'Silence Distance',
+				default: '15000.000000'
 			}
 		]
 	},
@@ -211,13 +237,39 @@ export const envGroups: EnvGroup[] = [
 				label: 'Reset Time (hrs)',
 				default: '72.000000'
 			},
-			bool('INVISIBLE_OTHER_GUILD_BASE_CAMP_AREA_FX', 'Hide Other Guild FX', 'False')
+			bool('INVISIBLE_OTHER_GUILD_BASE_CAMP_AREA_FX', 'Hide Other Guild FX', 'False'),
+			bool(
+				'ALLOW_ENEMY_CAMP_SPAWN_NEAR_BASE_CAMP',
+				'Allow Enemy Camps Near Bases',
+				'False'
+			),
+			{
+				key: 'AUTO_TRANSFER_MASTER_THRESHOLD_DAYS',
+				label: 'Guild Master Transfer After (days)',
+				default: '14'
+			},
+			{
+				key: 'AUTO_TRANSFER_MASTER_CHECK_INTERVAL_SECONDS',
+				label: 'Guild Master Transfer Check (sec)',
+				default: '3600.000000'
+			},
+			bool('ENABLE_BUILDING_PLAYER_UID_DISPLAY', 'Show Builder Name', 'False'),
+			{
+				key: 'BUILDING_NAME_DISPLAY_CACHE_TTL_SECONDS',
+				label: 'Builder Name Cache TTL (sec)',
+				default: '60'
+			}
 		]
 	},
 	{
 		title: 'Items & Drops',
 		keys: [
 			{ key: 'DROP_ITEM_MAX_NUM', label: 'Drop Item Max', default: '3000' },
+			{
+				key: 'PHYSICS_ACTIVE_DROP_ITEM_MAX_NUM',
+				label: 'Physics Drop Item Max (-1=unlimited)',
+				default: '-1'
+			},
 			{ key: 'DROP_ITEM_MAX_NUM_UNKO', label: 'Fertilizer Max', default: '100' },
 			bool('ACTIVE_UNKO', 'Active Fertilizer', 'False'),
 			{ key: 'COOP_PLAYER_MAX_NUM', label: 'Co-op Max Players', default: '4' },
@@ -308,6 +360,12 @@ export const envGroups: EnvGroup[] = [
 			{
 				key: 'ITEM_CONTAINER_FORCE_MARK_DIRTY_INTERVAL',
 				label: 'Container Sync Interval',
+				default: '1.000000'
+			},
+			{ key: 'MAX_GUILDS_PER_FRAME', label: 'Guilds Processed Per Frame', default: '10' },
+			{
+				key: 'PLAYER_DATA_PAL_STORAGE_UPDATE_CHECK_TICK_INTERVAL',
+				label: 'Pal Storage Sync Interval',
 				default: '1.000000'
 			}
 		]

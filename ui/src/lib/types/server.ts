@@ -46,6 +46,8 @@ export interface ServerMod {
 	mod_type: 'ue4ss' | 'logic' | 'native' | 'lua' | 'palschema' | 'paks' | 'unknown';
 	mod_version?: string;
 	mod_author?: string;
+	/** False when no InstallRule in Info.json opts in with IsServer. */
+	is_server?: boolean;
 	source?: 'workshop' | 'local' | 'config';
 	enabled: boolean;
 }

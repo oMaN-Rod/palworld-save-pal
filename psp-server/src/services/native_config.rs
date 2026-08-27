@@ -231,6 +231,49 @@ const ENV_TO_INI: &[(&str, &str)] = &[
         "IS_RANDOMIZER_PAL_LEVEL_RANDOM",
         "bIsRandomizerPalLevelRandom",
     ),
+    ("ENABLE_VOICE_CHAT", "bEnableVoiceChat"),
+    (
+        "VOICE_CHAT_MAX_VOLUME_DISTANCE",
+        "VoiceChatMaxVolumeDistance",
+    ),
+    (
+        "VOICE_CHAT_ZERO_VOLUME_DISTANCE",
+        "VoiceChatZeroVolumeDistance",
+    ),
+    (
+        "MONSTER_FARM_ACTION_SPEED_RATE",
+        "MonsterFarmActionSpeedRate",
+    ),
+    (
+        "ALLOW_ENEMY_CAMP_SPAWN_NEAR_BASE_CAMP",
+        "bAllowEnemyCampSpawnNearBaseCamp",
+    ),
+    ("DENY_TECHNOLOGY_LIST", "DenyTechnologyList"),
+    (
+        "PHYSICS_ACTIVE_DROP_ITEM_MAX_NUM",
+        "PhysicsActiveDropItemMaxNum",
+    ),
+    (
+        "AUTO_TRANSFER_MASTER_CHECK_INTERVAL_SECONDS",
+        "AutoTransferMasterCheckIntervalSeconds",
+    ),
+    (
+        "AUTO_TRANSFER_MASTER_THRESHOLD_DAYS",
+        "AutoTransferMasterThresholdDays",
+    ),
+    ("MAX_GUILDS_PER_FRAME", "MaxGuildsPerFrame"),
+    (
+        "ENABLE_BUILDING_PLAYER_UID_DISPLAY",
+        "bEnableBuildingPlayerUIdDisplay",
+    ),
+    (
+        "BUILDING_NAME_DISPLAY_CACHE_TTL_SECONDS",
+        "BuildingNameDisplayCacheTTLSeconds",
+    ),
+    (
+        "PLAYER_DATA_PAL_STORAGE_UPDATE_CHECK_TICK_INTERVAL",
+        "PlayerDataPalStorageUpdateCheckTickInterval",
+    ),
 ];
 
 /// Consumed by the Docker image's entrypoint, not by the game — never written to
@@ -310,6 +353,9 @@ const BOOL_INI_KEYS: &[&str] = &[
     "bAdditionalDropItemWhenPlayerKillingInPvPMode",
     "bDisplayPvPItemNumOnWorldMap_BaseCamp",
     "bDisplayPvPItemNumOnWorldMap_Player",
+    "bEnableVoiceChat",
+    "bAllowEnemyCampSpawnNearBaseCamp",
+    "bEnableBuildingPlayerUIdDisplay",
 ];
 
 const STRING_INI_KEYS: &[&str] = &[
@@ -338,6 +384,19 @@ pub fn is_docker_only_key(env_key: &str) -> bool {
     DOCKER_ONLY_KEYS.contains(&env_key)
 }
 
+/// `("PALBOX","RepairBench")` — the only shape the game accepts; anything else
+/// parses to an empty list and the technologies stay unlocked.
+fn technology_ids(value: &str) -> Vec<&str> {
+    value
+        .trim()
+        .trim_start_matches('(')
+        .trim_end_matches(')')
+        .split(',')
+        .map(|id| id.trim().trim_matches('"').trim())
+        .filter(|id| !id.is_empty())
+        .collect()
+}
+
 pub fn format_ini_value(ini_key: &str, value: &str) -> String {
     if STRING_INI_KEYS.contains(&ini_key) {
         if value.starts_with('"') && value.ends_with('"') {
@@ -345,7 +404,20 @@ pub fn format_ini_value(ini_key: &str, value: &str) -> String {
         }
         return format!("\"{value}\"");
     }
-    if ini_key == "CrossplayPlatforms" || ini_key == "DenyTechnologyList" {
+    if ini_key == "DenyTechnologyList" {
+        let ids = technology_ids(value);
+        if ids.is_empty() {
+            return String::new();
+        }
+        return format!(
+            "({})",
+            ids.iter()
+                .map(|id| format!("\"{id}\""))
+                .collect::<Vec<_>>()
+                .join(",")
+        );
+    }
+    if ini_key == "CrossplayPlatforms" {
         return value.to_string();
     }
     if BOOL_INI_KEYS.contains(&ini_key) {
@@ -392,13 +464,30 @@ pub fn split_option_settings(options: &str) -> Vec<String> {
     pairs
 }
 
+/// Offset of the `)` closing the `OptionSettings=(` at the start of `body`,
+/// skipping the ones that close a nested tuple or sit inside a quoted string.
+fn option_settings_close_offset(body: &str) -> Option<usize> {
+    let mut depth = 0usize;
+    let mut in_quote = false;
+    for (offset, character) in body.char_indices() {
+        match character {
+            '"' if depth == 0 => in_quote = !in_quote,
+            '(' if !in_quote => depth += 1,
+            ')' if !in_quote && depth == 0 => return Some(offset),
+            ')' if !in_quote => depth -= 1,
+            _ => {}
+        }
+    }
+    None
+}
+
 /// Parses the `OptionSettings=(...)` list from an ini file. Returns `None` when
 /// the file is missing or has no OptionSettings line.
 pub fn parse_option_settings_ini(path: &Path) -> Option<Vec<(String, String)>> {
     let contents = std::fs::read_to_string(path).ok()?;
     let start_index = contents.find("OptionSettings=(")?;
     let after_open = start_index + "OptionSettings=(".len();
-    let close_offset = contents[after_open..].find(')')?;
+    let close_offset = option_settings_close_offset(&contents[after_open..])?;
     let options = &contents[after_open..after_open + close_offset];
     let mut pairs = Vec::new();
     for pair in split_option_settings(options) {
@@ -440,6 +529,9 @@ fn ini_value_to_env(ini_key: &str, value: &str) -> String {
     let trimmed = value.trim();
     if STRING_INI_KEYS.contains(&ini_key) {
         return trimmed.trim_matches('"').to_string();
+    }
+    if ini_key == "DenyTechnologyList" {
+        return technology_ids(trimmed).join(",");
     }
     if BOOL_INI_KEYS.contains(&ini_key) {
         return match trimmed.to_ascii_lowercase().as_str() {
@@ -521,7 +613,9 @@ pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
             continue;
         };
         let value_text = crate::services::python_str(env_value);
-        if value_text.is_empty() {
+        // Empty means "leave the shipped value alone", except for the deny list,
+        // where it is the only way to unblock a technology again.
+        if value_text.is_empty() && ini_key != "DenyTechnologyList" {
             continue;
         }
         upsert(
@@ -711,6 +805,18 @@ fn hardcoded_defaults() -> Vec<(String, String)> {
         ("bAllowEnhanceStat_Stamina", "True"),
         ("bAllowEnhanceStat_Weight", "True"),
         ("bAllowEnhanceStat_WorkSpeed", "True"),
+        ("bEnableVoiceChat", "False"),
+        ("VoiceChatMaxVolumeDistance", "3000.000000"),
+        ("VoiceChatZeroVolumeDistance", "15000.000000"),
+        ("MonsterFarmActionSpeedRate", "1.000000"),
+        ("bAllowEnemyCampSpawnNearBaseCamp", "False"),
+        ("PhysicsActiveDropItemMaxNum", "-1"),
+        ("AutoTransferMasterCheckIntervalSeconds", "3600.000000"),
+        ("AutoTransferMasterThresholdDays", "14"),
+        ("MaxGuildsPerFrame", "10"),
+        ("bEnableBuildingPlayerUIdDisplay", "False"),
+        ("BuildingNameDisplayCacheTTLSeconds", "60"),
+        ("PlayerDataPalStorageUpdateCheckTickInterval", "1.000000"),
     ]
     .iter()
     .map(|(key, value)| (key.to_string(), value.to_string()))
@@ -781,6 +887,215 @@ mod tests {
             format_ini_value("CrossplayPlatforms", "(Steam,Xbox)"),
             "(Steam,Xbox)"
         );
+    }
+
+    /// `CrossplayPlatforms=(...)` closes a paren mid-list, so scanning for the
+    /// first `)` truncates every setting declared after it — they then vanish
+    /// from the file the next time it is rewritten.
+    #[test]
+    fn parse_option_settings_ini_reads_past_nested_parens() {
+        let scratch = tempfile::tempdir().unwrap();
+        let path = scratch.path().join("PalWorldSettings.ini");
+        std::fs::write(
+            &path,
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ExpRate=1.000000,\
+             CrossplayPlatforms=(Steam,Xbox,PS5,Mac),ServerDescription=\"a) b\",\
+             bEnableVoiceChat=True,DenyTechnologyList=)\n",
+        )
+        .unwrap();
+        let pairs = parse_option_settings_ini(&path).unwrap();
+        assert_eq!(
+            pairs,
+            vec![
+                ("ExpRate".to_string(), "1.000000".to_string()),
+                (
+                    "CrossplayPlatforms".to_string(),
+                    "(Steam,Xbox,PS5,Mac)".to_string()
+                ),
+                ("ServerDescription".to_string(), "\"a) b\"".to_string()),
+                ("bEnableVoiceChat".to_string(), "True".to_string()),
+                ("DenyTechnologyList".to_string(), String::new()),
+            ]
+        );
+    }
+
+    /// The shipped defaults are the source of truth for how many settings the
+    /// running build understands; parsing must not silently lose a chunk of them.
+    #[test]
+    fn parse_option_settings_ini_reads_every_shipped_default_key() {
+        let scratch = tempfile::tempdir().unwrap();
+        let path = scratch.path().join("DefaultPalWorldSettings.ini");
+        let keys: Vec<String> = (0..40).map(|index| format!("Key{index}=0")).collect();
+        std::fs::write(
+            &path,
+            format!(
+                "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(CrossplayPlatforms=(Steam,Xbox),{})\n",
+                keys.join(",")
+            ),
+        )
+        .unwrap();
+        assert_eq!(parse_option_settings_ini(&path).unwrap().len(), 41);
+    }
+
+    /// The fallback defaults are the inventory of settings PSP claims to know,
+    /// so every one of them has to be reachable from the settings UI.
+    #[test]
+    fn every_default_setting_has_an_env_mapping() {
+        let unmapped: Vec<String> = hardcoded_defaults()
+            .into_iter()
+            .map(|(key, _)| key)
+            .filter(|key| ini_to_env_key(key).is_none())
+            .collect();
+        assert!(unmapped.is_empty(), "settings with no env key: {unmapped:?}");
+    }
+
+    /// Settings added since Palworld v1.0 — voice chat, the auto-transfer of an
+    /// inactive guild master, building name display, and friends.
+    #[test]
+    fn v1_settings_are_mapped_and_written() {
+        let expected = [
+            ("ENABLE_VOICE_CHAT", "bEnableVoiceChat", "true", "True"),
+            (
+                "VOICE_CHAT_MAX_VOLUME_DISTANCE",
+                "VoiceChatMaxVolumeDistance",
+                "3000.000000",
+                "3000.000000",
+            ),
+            (
+                "VOICE_CHAT_ZERO_VOLUME_DISTANCE",
+                "VoiceChatZeroVolumeDistance",
+                "15000.000000",
+                "15000.000000",
+            ),
+            (
+                "MONSTER_FARM_ACTION_SPEED_RATE",
+                "MonsterFarmActionSpeedRate",
+                "2.000000",
+                "2.000000",
+            ),
+            (
+                "ALLOW_ENEMY_CAMP_SPAWN_NEAR_BASE_CAMP",
+                "bAllowEnemyCampSpawnNearBaseCamp",
+                "false",
+                "False",
+            ),
+            (
+                "DENY_TECHNOLOGY_LIST",
+                "DenyTechnologyList",
+                "Ride_Direhowl",
+                "(\"Ride_Direhowl\")",
+            ),
+            (
+                "PHYSICS_ACTIVE_DROP_ITEM_MAX_NUM",
+                "PhysicsActiveDropItemMaxNum",
+                "-1",
+                "-1",
+            ),
+            (
+                "AUTO_TRANSFER_MASTER_CHECK_INTERVAL_SECONDS",
+                "AutoTransferMasterCheckIntervalSeconds",
+                "3600.000000",
+                "3600.000000",
+            ),
+            (
+                "AUTO_TRANSFER_MASTER_THRESHOLD_DAYS",
+                "AutoTransferMasterThresholdDays",
+                "14",
+                "14",
+            ),
+            ("MAX_GUILDS_PER_FRAME", "MaxGuildsPerFrame", "10", "10"),
+            (
+                "ENABLE_BUILDING_PLAYER_UID_DISPLAY",
+                "bEnableBuildingPlayerUIdDisplay",
+                "true",
+                "True",
+            ),
+            (
+                "BUILDING_NAME_DISPLAY_CACHE_TTL_SECONDS",
+                "BuildingNameDisplayCacheTTLSeconds",
+                "60",
+                "60",
+            ),
+            (
+                "PLAYER_DATA_PAL_STORAGE_UPDATE_CHECK_TICK_INTERVAL",
+                "PlayerDataPalStorageUpdateCheckTickInterval",
+                "1.000000",
+                "1.000000",
+            ),
+        ];
+
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        let mut record = native_record(&install);
+        for (env_key, ini_key, env_value, _) in expected {
+            assert_eq!(env_to_ini_key(env_key), Some(ini_key), "{env_key}");
+            record
+                .env_vars
+                .insert(env_key.to_string(), serde_json::json!(env_value));
+        }
+
+        let content = build_palworld_settings_content(&record);
+        for (_, ini_key, _, ini_value) in expected {
+            assert!(
+                content.contains(&format!("{ini_key}={ini_value}")),
+                "missing {ini_key}={ini_value} in {content}"
+            );
+        }
+        // DenyTechnologyList is a bare comma list, never a quoted string.
+        assert!(!content.contains("DenyTechnologyList=\""));
+    }
+
+    /// The game reads DenyTechnologyList as a parenthesised list of quoted ids
+    /// and silently ignores any other shape, so a plain comma list typed into
+    /// the settings field has to be reshaped on the way out.
+    #[test]
+    fn deny_technology_list_is_written_as_a_quoted_tuple() {
+        assert_eq!(
+            format_ini_value("DenyTechnologyList", "PALBOX,RepairBench"),
+            "(\"PALBOX\",\"RepairBench\")"
+        );
+        assert_eq!(
+            format_ini_value("DenyTechnologyList", " PALBOX , RepairBench , "),
+            "(\"PALBOX\",\"RepairBench\")"
+        );
+        // Already-normalised input is left alone, so the value is idempotent.
+        assert_eq!(
+            format_ini_value("DenyTechnologyList", "(\"PALBOX\",\"RepairBench\")"),
+            "(\"PALBOX\",\"RepairBench\")"
+        );
+        assert_eq!(format_ini_value("DenyTechnologyList", ""), "");
+    }
+
+    #[test]
+    fn deny_technology_list_reads_back_as_a_plain_comma_list() {
+        assert_eq!(
+            ini_value_to_env("DenyTechnologyList", "(\"PALBOX\", \"RepairBench\")"),
+            "PALBOX,RepairBench"
+        );
+        assert_eq!(ini_value_to_env("DenyTechnologyList", ""), "");
+    }
+
+    /// An empty value normally means "leave the ini alone", but for the deny
+    /// list that would make a blocked technology impossible to unblock again.
+    #[test]
+    fn clearing_deny_technology_list_unblocks_the_technologies() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ExpRate=1.000000,\
+             DenyTechnologyList=(\"PALBOX\"))\n",
+        )
+        .unwrap();
+        let mut record = native_record(&install);
+        record
+            .env_vars
+            .insert("DENY_TECHNOLOGY_LIST".to_string(), serde_json::json!(""));
+        let content = build_palworld_settings_content(&record);
+        assert!(content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n"));
+        assert!(!content.contains("PALBOX"));
     }
 
     #[test]

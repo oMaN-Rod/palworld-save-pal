@@ -1,7 +1,10 @@
 //! Native-server mod management via the game's own `Mods/PalModSettings.ini`:
-//! a flat key=value file with `bGlobalEnableMod`, an optional `WorkshopRootDir`,
-//! and one repeated `ActiveModList=<PackageName>` line per enabled mod. Mods
-//! themselves live in per-mod directories, each carrying an `Info.json`.
+//! a `[PalModSettings]` section holding `bGlobalEnableMod`, an optional
+//! `WorkshopRootDir`, and one repeated `ActiveModList=<PackageName>` line per
+//! enabled mod. Mods themselves live in per-mod directories, each carrying an
+//! `Info.json`. PalServer.exe reads the file through the Unreal config system,
+//! which only sees keys under the section header and rewrites the file from its
+//! own state at launch — so anything written outside the header is discarded.
 use std::path::{Path, PathBuf};
 
 use psp_db::servers::ServerRecord;
@@ -9,6 +12,9 @@ use serde_json::Value;
 
 /// Palworld Steam app id for workshop content (not the dedicated-server app id).
 const WORKSHOP_APP_ID: &str = "1623730";
+
+const MOD_SECTION_HEADER: &str = "[PalModSettings]";
+const DEFAULT_CONFIG_VERSION: &str = "1.0";
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct PalModSettings {
@@ -27,33 +33,57 @@ pub fn local_workshop_path(install_path: &str) -> PathBuf {
     Path::new(install_path).join("Mods").join("Workshop")
 }
 
-pub fn read_palmodsettings(install_path: &str) -> PalModSettings {
-    let mut settings = PalModSettings {
-        enabled: false,
-        active_mods: Vec::new(),
-        workshop_root_dir: String::new(),
+/// Everything in the section, including the keys this module does not own.
+struct RawModSettings {
+    settings: PalModSettings,
+    config_version: String,
+    other_keys: Vec<String>,
+}
+
+fn read_raw_palmodsettings(install_path: &str) -> RawModSettings {
+    let mut raw = RawModSettings {
+        settings: PalModSettings {
+            enabled: false,
+            active_mods: Vec::new(),
+            workshop_root_dir: String::new(),
+        },
+        config_version: DEFAULT_CONFIG_VERSION.to_string(),
+        other_keys: Vec::new(),
     };
     let Ok(contents) = std::fs::read_to_string(palmodsettings_path(install_path)) else {
-        return settings;
+        return raw;
     };
+    // Files written before the header was emitted start straight in at the keys,
+    // so the leading run counts as in-section.
+    let mut in_section = true;
     for line in contents.lines() {
         let line = line.trim();
-        if line.is_empty() || line.starts_with(';') || line.starts_with('#') {
+        if line.starts_with('[') && line.ends_with(']') {
+            in_section = line.eq_ignore_ascii_case(MOD_SECTION_HEADER);
+            continue;
+        }
+        if !in_section || line.is_empty() || line.starts_with(';') || line.starts_with('#') {
             continue;
         }
         let Some((key, value)) = line.split_once('=') else {
             continue;
         };
-        match (key.trim(), value.trim()) {
-            ("bGlobalEnableMod", flag) => settings.enabled = flag.eq_ignore_ascii_case("true"),
-            ("ActiveModList", package) if !package.is_empty() => {
-                settings.active_mods.push(package.to_string());
+        let value = value.trim();
+        match key.trim() {
+            "bGlobalEnableMod" => raw.settings.enabled = value.eq_ignore_ascii_case("true"),
+            "ActiveModList" if !value.is_empty() => {
+                raw.settings.active_mods.push(value.to_string());
             }
-            ("WorkshopRootDir", dir) => settings.workshop_root_dir = dir.to_string(),
-            _ => {}
+            "WorkshopRootDir" => raw.settings.workshop_root_dir = value.to_string(),
+            "ConfigVersion" if !value.is_empty() => raw.config_version = value.to_string(),
+            _ => raw.other_keys.push(line.to_string()),
         }
     }
-    settings
+    raw
+}
+
+pub fn read_palmodsettings(install_path: &str) -> PalModSettings {
+    read_raw_palmodsettings(install_path).settings
 }
 
 pub fn write_palmodsettings(
@@ -62,18 +92,24 @@ pub fn write_palmodsettings(
     active_mods: &[String],
     workshop_root_dir: &str,
 ) -> std::io::Result<()> {
+    let existing = read_raw_palmodsettings(install_path);
     let mods_dir = Path::new(install_path).join("Mods");
     std::fs::create_dir_all(&mods_dir)?;
-    let mut lines = vec![format!(
-        "bGlobalEnableMod={}",
-        if enabled { "true" } else { "false" }
-    )];
+    let mut lines = vec![
+        MOD_SECTION_HEADER.to_string(),
+        format!("ConfigVersion={}", existing.config_version),
+        format!(
+            "bGlobalEnableMod={}",
+            if enabled { "true" } else { "false" }
+        ),
+    ];
     if !workshop_root_dir.is_empty() {
         lines.push(format!("WorkshopRootDir={workshop_root_dir}"));
     }
     for package in active_mods {
         lines.push(format!("ActiveModList={package}"));
     }
+    lines.extend(existing.other_keys);
     std::fs::write(palmodsettings_path(install_path), lines.join("\n") + "\n")
 }
 
@@ -102,15 +138,20 @@ pub fn ensure_mod_settings(record: &ServerRecord) -> std::io::Result<()> {
 
 /// Reads a mod directory's Info.json. `mod_type` comes from the first InstallRule:
 /// an unrecognized Type passes through lowercased, and only a missing or empty
-/// InstallRule yields "unknown".
+/// InstallRule yields "unknown". `is_server` is true when any rule opts in with
+/// `IsServer`; without one the game deploys no payload on a dedicated server.
 pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
     let contents = std::fs::read_to_string(mod_dir.join("Info.json")).ok()?;
     let data: Value = serde_json::from_str(&contents).ok()?;
-    let mod_type = match data
-        .get("InstallRule")
-        .and_then(Value::as_array)
-        .and_then(|rules| rules.first())
-    {
+    let install_rules = data.get("InstallRule").and_then(Value::as_array);
+    let is_server = install_rules.is_some_and(|rules| {
+        rules.iter().any(|rule| {
+            rule.get("IsServer")
+                .and_then(Value::as_bool)
+                .unwrap_or(false)
+        })
+    });
+    let mod_type = match install_rules.and_then(|rules| rules.first()) {
         Some(rule) => {
             let rule_type = rule
                 .get("Type")
@@ -144,6 +185,7 @@ pub fn parse_info_json(mod_dir: &Path) -> Option<Value> {
         "mod_version": text("Version"),
         "mod_author": text("Author"),
         "mod_type": mod_type,
+        "is_server": is_server,
         "dependencies": dependencies
     }))
 }
@@ -173,6 +215,7 @@ pub fn list_workshop_mods(workshop_dir: &str, source: &str) -> Vec<Value> {
             "mod_type": info["mod_type"],
             "mod_version": info["mod_version"],
             "mod_author": info["mod_author"],
+            "is_server": info["is_server"],
             "source": source,
             "enabled": false
         }));
@@ -211,6 +254,7 @@ pub fn list_native_server_mods(record: &ServerRecord) -> Vec<Value> {
                 "mod_type": "unknown",
                 "mod_version": "",
                 "mod_author": "",
+                "is_server": true,
                 "source": "config",
                 "enabled": true
             }));
@@ -233,7 +277,7 @@ pub fn toggle_native_mod(
     }
     write_palmodsettings(
         install_path,
-        settings.enabled,
+        settings.enabled || enabled,
         &active_mods,
         &settings.workshop_root_dir,
     )
@@ -313,7 +357,7 @@ mod tests {
         let contents = std::fs::read_to_string(palmodsettings_path(&install)).unwrap();
         assert_eq!(
             contents,
-            "bGlobalEnableMod=true\nWorkshopRootDir=C:/steam/workshop/content/1623730\nActiveModList=PackA\nActiveModList=PackB\n"
+            "[PalModSettings]\nConfigVersion=1.0\nbGlobalEnableMod=true\nWorkshopRootDir=C:/steam/workshop/content/1623730\nActiveModList=PackA\nActiveModList=PackB\n"
         );
         let settings = read_palmodsettings(&install);
         assert!(settings.enabled);
@@ -333,6 +377,89 @@ mod tests {
         assert_eq!(settings.workshop_root_dir, "");
     }
 
+    /// A mod is server-capable only if some InstallRule opts in with IsServer;
+    /// the rest install on a client but deploy no payload on a dedicated server.
+    #[test]
+    fn parse_info_json_reports_server_capability_from_any_install_rule() {
+        let client_only = tempfile::tempdir().unwrap();
+        std::fs::write(client_only.path().join("Info.json"), INFO_JSON).unwrap();
+        assert_eq!(
+            parse_info_json(client_only.path()).unwrap()["is_server"],
+            false
+        );
+
+        // UE4SS ships a client rule and a server rule; the server one counts.
+        let dual = tempfile::tempdir().unwrap();
+        std::fs::write(
+            dual.path().join("Info.json"),
+            serde_json::json!({
+                "PackageName": "P",
+                "InstallRule": [
+                    {"Type": "UE4SS", "Targets": ["."]},
+                    {"Type": "UE4SS", "IsServer": true, "Targets": ["."]}
+                ]
+            })
+            .to_string(),
+        )
+        .unwrap();
+        assert_eq!(parse_info_json(dual.path()).unwrap()["is_server"], true);
+
+        let no_rules = tempfile::tempdir().unwrap();
+        std::fs::write(
+            no_rules.path().join("Info.json"),
+            serde_json::json!({"PackageName": "P"}).to_string(),
+        )
+        .unwrap();
+        assert_eq!(parse_info_json(no_rules.path()).unwrap()["is_server"], false);
+    }
+
+    #[test]
+    fn list_native_server_mods_flags_client_only_mods() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().join("server");
+        let workshop = scratch.path().join("workshop");
+        let client_only = workshop.join("111");
+        std::fs::create_dir_all(&client_only).unwrap();
+        std::fs::write(client_only.join("Info.json"), INFO_JSON).unwrap();
+        let server_ready = workshop.join("222");
+        std::fs::create_dir_all(&server_ready).unwrap();
+        std::fs::write(
+            server_ready.join("Info.json"),
+            serde_json::json!({
+                "PackageName": "ServerPack",
+                "InstallRule": [{"Type": "Paks", "IsServer": true}]
+            })
+            .to_string(),
+        )
+        .unwrap();
+        let record = native_record(
+            &install.to_string_lossy(),
+            &workshop.to_string_lossy(),
+        );
+        let mods = list_native_server_mods(&record);
+        let flag = |name: &str| {
+            mods.iter()
+                .find(|entry| entry["mod_name"] == name)
+                .map(|entry| entry["is_server"].clone())
+        };
+        assert_eq!(flag("CoolPackage"), Some(Value::Bool(false)));
+        assert_eq!(flag("ServerPack"), Some(Value::Bool(true)));
+    }
+
+    /// A package named in ActiveModList but absent from disk cannot be judged,
+    /// so it must not be reported as client-only.
+    #[test]
+    fn list_native_server_mods_reports_config_only_packages_as_server_capable() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        write_palmodsettings(&install, true, &["GhostPackage".to_string()], "").unwrap();
+        let record = native_record(&install, "");
+        let mods = list_native_server_mods(&record);
+        assert_eq!(mods.len(), 1);
+        assert_eq!(mods[0]["source"], "config");
+        assert_eq!(mods[0]["is_server"], true);
+    }
+
     #[test]
     fn parse_info_json_maps_install_rule_type() {
         let scratch = tempfile::tempdir().unwrap();
@@ -346,6 +473,7 @@ mod tests {
                 "mod_version": "1.2.0",
                 "mod_author": "someone",
                 "mod_type": "logic",
+                "is_server": false,
                 "dependencies": []
             })
         );
@@ -428,6 +556,7 @@ mod tests {
                 "mod_type": "unknown",
                 "mod_version": "",
                 "mod_author": "",
+                "is_server": true,
                 "source": "config",
                 "enabled": true
             })
@@ -443,6 +572,76 @@ mod tests {
         assert_eq!(read_palmodsettings(&install).active_mods, vec!["PackA"]);
         toggle_native_mod(&install, "PackA", false).unwrap();
         assert!(read_palmodsettings(&install).active_mods.is_empty());
+    }
+
+    /// The keys only take effect under the [PalModSettings] header; without it
+    /// PalServer.exe rewrites the file to bare defaults on the next launch and
+    /// every enabled mod silently turns itself off.
+    #[test]
+    fn read_palmodsettings_ignores_keys_outside_the_mod_section() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        std::fs::create_dir_all(Path::new(&install).join("Mods")).unwrap();
+        std::fs::write(
+            palmodsettings_path(&install),
+            "[PalModSettings]\nbGlobalEnableMod=true\nActiveModList=PackA\n\
+             [Other]\nActiveModList=NotMine\nWorkshopRootDir=D:/wrong\n",
+        )
+        .unwrap();
+        let settings = read_palmodsettings(&install);
+        assert!(settings.enabled);
+        assert_eq!(settings.active_mods, vec!["PackA"]);
+        assert_eq!(settings.workshop_root_dir, "");
+    }
+
+    /// Files written by earlier builds have no header at all; they are still
+    /// read so a user's mod selection survives the upgrade.
+    #[test]
+    fn read_palmodsettings_accepts_headerless_legacy_files() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        std::fs::create_dir_all(Path::new(&install).join("Mods")).unwrap();
+        std::fs::write(
+            palmodsettings_path(&install),
+            "bGlobalEnableMod=true\nActiveModList=PackA\n",
+        )
+        .unwrap();
+        let settings = read_palmodsettings(&install);
+        assert!(settings.enabled);
+        assert_eq!(settings.active_mods, vec!["PackA"]);
+    }
+
+    /// ConfigVersion and the game's own bookkeeping keys are round-tripped;
+    /// dropping DeleteModList would strand mods the game meant to uninstall.
+    #[test]
+    fn write_palmodsettings_preserves_config_version_and_unknown_keys() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        std::fs::create_dir_all(Path::new(&install).join("Mods")).unwrap();
+        std::fs::write(
+            palmodsettings_path(&install),
+            "[PalModSettings]\nConfigVersion=2.5\nDeleteModList=OldPack\n\
+             bNeedShowErrorOnNextStart=true\n",
+        )
+        .unwrap();
+        write_palmodsettings(&install, true, &["PackA".to_string()], "").unwrap();
+        assert_eq!(
+            std::fs::read_to_string(palmodsettings_path(&install)).unwrap(),
+            "[PalModSettings]\nConfigVersion=2.5\nbGlobalEnableMod=true\nActiveModList=PackA\n\
+             DeleteModList=OldPack\nbNeedShowErrorOnNextStart=true\n"
+        );
+    }
+
+    /// PalServer.exe resets bGlobalEnableMod to false whenever it rewrites the
+    /// file, and nothing else in PSP ever sets it back, so enabling a mod has to
+    /// raise the global flag or the selection stays inert.
+    #[test]
+    fn toggle_native_mod_reenables_the_global_flag() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        write_palmodsettings(&install, false, &[], "").unwrap();
+        toggle_native_mod(&install, "PackA", true).unwrap();
+        assert!(read_palmodsettings(&install).enabled);
     }
 
     #[test]

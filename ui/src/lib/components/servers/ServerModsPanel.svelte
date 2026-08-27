@@ -6,6 +6,7 @@
 	import Package from '@lucide/svelte/icons/package';
 	import Shield from '@lucide/svelte/icons/shield';
 	import FolderOpen from '@lucide/svelte/icons/folder-open';
+	import TriangleAlert from '@lucide/svelte/icons/triangle-alert';
 	import { cn } from '$theme';
 
 	let { server } = $props<{ server: Server }>();
@@ -169,6 +170,15 @@
 												)}
 											>
 												{sourceLabel[mod.source] || mod.source}
+											</span>
+										{/if}
+										{#if mod.is_server === false}
+											<span
+												class="bg-warning-500/20 text-warning-400 flex items-center gap-1 rounded-xs px-1"
+												title="No InstallRule in this mod's Info.json sets IsServer, so a dedicated server will not deploy its files."
+											>
+												<TriangleAlert size={11} />
+												Client only
 											</span>
 										{/if}
 									</div>
