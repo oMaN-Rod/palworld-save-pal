@@ -422,17 +422,64 @@ function Ensure-BunInstall([bool]$force) {
 }
 
 function Ensure-Wasm([bool]$rebuild) {
+    # psp_bg.wasm existing is not a safe skip condition: psp.js is tracked and
+    # psp_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
+    # over the real entry while the stale .wasm survives. Mirrors ensure_wasm
+    # in easyrun.sh.
     $wasmFile = Join-Path $WasmOut "psp_bg.wasm"
-    if ((Test-Path $wasmFile) -and -not $rebuild) {
-        Log-Info "WASM already built (ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
+    $entryJs  = Join-Path $WasmOut "psp.js"
+    $pkgJson  = Join-Path $WasmOut "package.json"
+    $stubMarker = "psp wasm not built" # text baked into the committed psp.js placeholder
+
+    $reason = $null
+    if ($rebuild) {
+        $reason = "-RebuildWasm"
+    } elseif (-not (Test-Path $wasmFile)) {
+        $reason = "psp_bg.wasm missing"
+    } elseif (-not (Test-Path $pkgJson) -or -not (Test-Path $entryJs)) {
+        $reason = "incomplete wasm package (interrupted build?)"
+    } elseif (Select-String -Path $entryJs -Pattern $stubMarker -Quiet) {
+        $reason = "psp.js is the committed placeholder (git restored it over the build output)"
+    } else {
+        $wasmMtime = (Get-Item $wasmFile).LastWriteTime
+        $crateDirs = @("psp-web", "psp-app", "psp-core", "psp-db") |
+            ForEach-Object { Join-Path $RepoRoot $_ } |
+            Where-Object { Test-Path $_ }
+        $newer = Get-ChildItem -Path $crateDirs -Recurse -File -Include *.rs, Cargo.toml -ErrorAction SilentlyContinue |
+            Where-Object { $_.LastWriteTime -gt $wasmMtime } |
+            Select-Object -First 1
+        $rootToml = Join-Path $RepoRoot "Cargo.toml"
+        if (-not $newer -and (Test-Path $rootToml) -and ((Get-Item $rootToml).LastWriteTime -gt $wasmMtime)) {
+            $newer = Get-Item $rootToml
+        }
+        if ($newer) { $reason = "newer Rust sources (e.g. $($newer.FullName))" }
+    }
+
+    if (-not $reason) {
+        Log-Info "WASM up to date (ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
         return
     }
+
     $cargo = Resolve-Tool "cargo"
     $wasmPack = Resolve-Tool "wasm-pack"
     if (-not $cargo)    { Die "cargo not found — run .\easyrun.ps1 -Check first." }
     if (-not $wasmPack) { Die "wasm-pack not found — run .\easyrun.ps1 -InstallWasm first." }
-    Log-Info "Building psp-web (wasm-pack)…"
-    if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
+    Log-Info "Building psp-web (wasm-pack): $reason"
+    # Clear generated output only — an interrupted build must still leave a
+    # resolvable $lib/wasm/psp behind, so the tracked placeholders have to
+    # survive for wasm-pack to overwrite.
+    $cleaned = $false
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        Push-Location $RepoRoot
+        try {
+            $rel = $WasmOut.Substring($RepoRoot.Length).TrimStart('\', '/')
+            & git clean -fdx -- $rel *> $null
+            $cleaned = ($LASTEXITCODE -eq 0)
+        } catch { } finally { Pop-Location }
+    }
+    if (-not $cleaned) {
+        if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
+    }
     Push-Location $PspWebDir
     try {
         & $wasmPack build --target web --out-name psp --out-dir $WasmOut
