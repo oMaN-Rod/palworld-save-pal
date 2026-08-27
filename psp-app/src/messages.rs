@@ -398,6 +398,22 @@ mod tests {
         "open_lsp_session",
     ];
 
+    /// `Emitter::emit` splices `as_wire()` straight into the frame text
+    /// without JSON-escaping it, so every wire name must be a bare
+    /// snake_case identifier -- no quote, backslash or control character.
+    #[test]
+    fn every_wire_name_is_json_safe_snake_case() {
+        for wire in MessageType::ALL.iter().map(|t| t.as_wire()) {
+            assert!(
+                !wire.is_empty()
+                    && wire
+                        .bytes()
+                        .all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'_'),
+                "wire name {wire:?} is not bare snake_case; Emitter::emit would emit invalid JSON"
+            );
+        }
+    }
+
     #[test]
     fn message_type_count_is_expected() {
         assert_eq!(EXPECTED_WIRE_NAMES.len(), 130);

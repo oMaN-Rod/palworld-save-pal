@@ -339,34 +339,50 @@ pub async fn handle_select_save(
     }
 
     let layout = validate_steam_save_directory(&save_path)?;
-    let level_sav_bytes = std::fs::read(&layout.level_sav).map_err(CoreError::Io)?;
-    let level_meta_bytes = match &layout.level_meta {
-        Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
-        None => None,
-    };
-    let world_option_bytes = match &layout.world_option {
-        Some(world_option_path) => Some(std::fs::read(world_option_path).map_err(CoreError::Io)?),
-        None => None,
-    };
-    let (player_file_refs, player_discovery_order) =
-        discover_player_file_refs(&layout.players_dir)?;
-
     let progress = ctx.emitter.progress_sink();
-    let session = SaveSession::load(
-        SaveKind::Steam {
-            level_path: layout.level_sav.clone(),
-        },
-        save_path.clone(),
-        "steam",
-        &level_sav_bytes,
-        level_meta_bytes.as_deref(),
-        world_option_bytes.as_deref(),
-        player_file_refs,
-        layout.global_pal_storage_sav.clone(),
-        // Emit the leading generic "Loading Level.sav..." progress frame.
-        true,
-        &progress,
-    )?;
+
+    // Blocking read + parse of a potentially huge save — keep it off the async
+    // workers. Progress frames still flow through the same emitter channel, in
+    // the same order, because the tail frames below only go out after the
+    // `.await`.
+    let level_sav_path = layout.level_sav.clone();
+    let level_meta_path = layout.level_meta.clone();
+    let world_option_path = layout.world_option.clone();
+    let players_dir = layout.players_dir.clone();
+    let gps_path = layout.global_pal_storage_sav.clone();
+    let (session, player_discovery_order) =
+        crate::blocking::run_blocking(move || -> Result<(SaveSession, Vec<Uuid>), HandlerError> {
+            let level_sav_bytes = std::fs::read(&level_sav_path).map_err(CoreError::Io)?;
+            let level_meta_bytes = match &level_meta_path {
+                Some(meta_path) => Some(std::fs::read(meta_path).map_err(CoreError::Io)?),
+                None => None,
+            };
+            let world_option_bytes = match &world_option_path {
+                Some(world_option_path) => {
+                    Some(std::fs::read(world_option_path).map_err(CoreError::Io)?)
+                }
+                None => None,
+            };
+            let (player_file_refs, player_discovery_order) =
+                discover_player_file_refs(&players_dir)?;
+            let session = SaveSession::load(
+                SaveKind::Steam {
+                    level_path: level_sav_path.clone(),
+                },
+                save_path,
+                "steam",
+                &level_sav_bytes,
+                level_meta_bytes.as_deref(),
+                world_option_bytes.as_deref(),
+                player_file_refs,
+                gps_path,
+                // Emit the leading generic "Loading Level.sav..." progress frame.
+                true,
+                &progress,
+            )?;
+            Ok((session, player_discovery_order))
+        })
+        .await?;
 
     let session_id = ctx.register_current_session();
     let payload = LoadedSaveFilesData {
@@ -487,6 +503,27 @@ pub async fn handle_load_zip_file(
     data: Vec<u8>,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
+    let progress = ctx.emitter.progress_sink();
+    // Blocking inflate + parse of the uploaded archive — keep it off the async
+    // workers. Progress frames still flow through the same emitter channel, in
+    // the same order; the tail frames below only go out after the `.await`.
+    let blocking_progress = progress.clone();
+    let (session, player_order, gps_file_path) =
+        crate::blocking::run_blocking(move || load_zip_file_blocking(data, &blocking_progress))
+            .await?;
+
+    progress("Zip file uploaded and processed successfully, results coming right up!");
+    emit_loaded_save(ctx, session, player_order, gps_file_path.is_some())?;
+    Ok(())
+}
+
+/// The blocking half of `handle_load_zip_file`: zip validation + inflate plus
+/// the full `SaveSession::load` parse. Returns the session, the zip-encounter
+/// player order, and the temp path a staged `GlobalPalStorage.sav` landed on.
+fn load_zip_file_blocking(
+    data: Vec<u8>,
+    progress: &ProgressSink,
+) -> Result<(SaveSession, Vec<Uuid>, Option<PathBuf>), HandlerError> {
     let mut archive = zip::ZipArchive::new(std::io::Cursor::new(data))
         .map_err(|zip_error| HandlerError::Other(zip_error.to_string()))?;
     ensure_entry_count_within_limit(archive.len(), MAX_ZIP_ENTRIES)?;
@@ -604,7 +641,6 @@ pub async fn handle_load_zip_file(
         None
     };
 
-    let progress = ctx.emitter.progress_sink();
     let session = SaveSession::load(
         SaveKind::InMemory,
         layout.save_id.clone(),
@@ -616,12 +652,10 @@ pub async fn handle_load_zip_file(
         gps_file_path.clone(),
         // Emit the leading generic "Loading Level.sav..." progress frame.
         true,
-        &progress,
+        progress,
     )?;
 
-    progress("Zip file uploaded and processed successfully, results coming right up!");
-    emit_loaded_save(ctx, session, player_order, gps_file_path.is_some())?;
-    Ok(())
+    Ok((session, player_order, gps_file_path))
 }
 
 /// Every field is optional, and a present-but-EMPTY map skips its update
@@ -693,11 +727,40 @@ pub(crate) fn download_player_stem(player_id: &Uuid) -> String {
 /// iterates the array, so the wrapper must stay even for a single file.
 pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let progress = ctx.emitter.progress_sink();
-    let Some(session) = ctx.session.save.as_ref() else {
+    if ctx.session.save.is_none() {
         return Err(HandlerError::Other("No save file loaded".to_string()));
-    };
+    }
 
     progress("Generating save files in memory... 💾");
+    // Re-serialize + DEFLATE + base64 is CPU-heavy — keep it off the async
+    // workers. The session cannot cross into the blocking closure as a borrow,
+    // so it is taken out and restored around it; the connection's per-session
+    // guard is held for this whole handler, so nothing else observes the gap.
+    let session_slot = ctx.session.save.take().expect("checked Some above");
+    let blocking_progress = progress.clone();
+    let (work, session) = crate::blocking::run_blocking(move || {
+        let work = build_download_zip(&session_slot, &blocking_progress);
+        (work, session_slot)
+    })
+    .await;
+    ctx.session.save = Some(session);
+    let (encoded_zip, filename) = work?;
+
+    progress("Sending ZIP file to client... 🚀");
+    ctx.emitter.emit(
+        MessageType::DownloadSaveFile,
+        &json!([{ "name": filename, "content": encoded_zip }]),
+    );
+    Ok(())
+}
+
+/// The blocking half of `handle_download_save_file`: re-serializes every save,
+/// packs the DEFLATE zip, and base64-encodes it. Returns the encoded archive
+/// and the download filename (`{world_name}_{timestamp}.zip`).
+fn build_download_zip(
+    session: &SaveSession,
+    progress: &ProgressSink,
+) -> Result<(String, String), HandlerError> {
     let level_sav_bytes = session.level_sav_bytes()?;
     let player_files = session.player_sav_bytes()?;
 
@@ -765,13 +828,7 @@ pub async fn handle_download_save_file(ctx: &mut HandlerCtx<'_>) -> Result<(), H
         session.world_name.as_str()
     };
     let filename = format!("{world_name}_{timestamp}.zip");
-
-    progress("Sending ZIP file to client... 🚀");
-    ctx.emitter.emit(
-        MessageType::DownloadSaveFile,
-        &json!([{ "name": filename, "content": encoded_zip }]),
-    );
-    Ok(())
+    Ok((encoded_zip, filename))
 }
 
 /// A player's uuid as it appears in the ON-DISK Steam write: UPPERCASE hex, no
@@ -1016,25 +1073,40 @@ async fn save_modded_steam_save(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerE
     let save_dir = psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir;
     let progress = ctx.emitter.progress_sink();
 
-    let Some(session) = ctx.session.save.as_ref() else {
-        return Err(HandlerError::Other("No save file loaded".to_string()));
-    };
-    let SaveKind::Steam { level_path } = &session.kind else {
+    let level_path = match ctx.session.save.as_ref().map(|session| &session.kind) {
+        None => {
+            return Err(HandlerError::Other("No save file loaded".to_string()));
+        }
         // A zip-uploaded (InMemory) session has no on-disk level path to
         // overwrite; disk write-back is only defined for real Steam loads.
-        return Err(HandlerError::Other(
-            "Only on-disk Steam saves can be written back yet".to_string(),
-        ));
+        Some(SaveKind::Steam { level_path }) => level_path.clone(),
+        Some(_) => {
+            return Err(HandlerError::Other(
+                "Only on-disk Steam saves can be written back yet".to_string(),
+            ));
+        }
     };
-    let level_path = level_path.clone();
+    let backup_base = steam_backup_base();
 
-    write_steam_modded_save(
-        session,
-        &level_path,
-        Path::new(&save_dir),
-        &steam_backup_base(),
-        &progress,
-    )?;
+    // Backup copy + re-serialize + write-back are blocking — keep them off the
+    // async workers. `write_steam_modded_save` only reads the session, but the
+    // borrow cannot cross into the blocking closure, so the session is taken
+    // out and restored around it; the connection's per-session guard is held
+    // for this whole handler, so nothing else observes the gap.
+    let session_slot = ctx.session.save.take().expect("checked Some above");
+    let (write_result, session) = crate::blocking::run_blocking(move || {
+        let result = write_steam_modded_save(
+            &session_slot,
+            &level_path,
+            Path::new(&save_dir),
+            &backup_base,
+            &progress,
+        );
+        (result, session_slot)
+    })
+    .await;
+    ctx.session.save = Some(session);
+    write_result?;
 
     ctx.emitter.emit(
         MessageType::SaveModdedSave,

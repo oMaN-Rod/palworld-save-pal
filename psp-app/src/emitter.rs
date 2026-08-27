@@ -19,17 +19,24 @@ impl Emitter {
     pub fn emit<T: serde::Serialize>(&self, message_type: MessageType, data: &T) {
         // A failing `Serialize` impl must not panic the connection, so log and
         // drop the frame instead.
-        let payload = match serde_json::to_value(data) {
-            Ok(value) => value,
+        let payload = match serde_json::to_string(data) {
+            Ok(payload) => payload,
             Err(serialize_error) => {
                 tracing::error!(%serialize_error, message_type = message_type.as_wire(),
                     "failed to serialize outgoing message");
                 return;
             }
         };
-        let frame = serde_json::json!({ "type": message_type.as_wire(), "data": payload });
-        let text =
-            serde_json::to_string(&frame).expect("envelope of a Value cannot fail to serialize");
+        // Assemble the envelope around the pre-serialized payload instead of
+        // round-tripping it through a `Value` tree, which deep-copies large
+        // frames (pal lists, download blobs) twice.
+        let mut text = String::with_capacity(payload.len() + message_type.as_wire().len() + 24);
+        text.push_str("{\"type\":\"");
+        // Wire strings are snake_case identifiers — no JSON escaping needed.
+        text.push_str(message_type.as_wire());
+        text.push_str("\",\"data\":");
+        text.push_str(&payload);
+        text.push('}');
         // Send failure just means the client disconnected — drop silently.
         let _ = self.sender.send(text);
     }

@@ -26,6 +26,11 @@ base64 = { workspace = true }
 async-trait = { workspace = true }
 tempfile = { workspace = true, optional = true }
 
+# `blocking::run_blocking` uses `tokio::task::spawn_blocking` (rt) natively;
+# wasm32 has no blocking pool and keeps the sync-only feature set above.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { version = "1", default-features = false, features = ["rt"] }
+
 [dev-dependencies]
 tempfile = { workspace = true }
 psp-core = { path = "../psp-core", features = ["test-fixtures"] }

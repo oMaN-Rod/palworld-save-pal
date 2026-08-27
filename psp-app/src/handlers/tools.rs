@@ -223,7 +223,15 @@ pub async fn handle_load_source_save(
     let label = if is_target { "target" } else { "source" };
     let progress = ctx.emitter.progress_sink();
 
-    match load_steam_save_for_transfer(&resolved_path, label, &progress) {
+    // Blocking read + parse of a potentially huge save — keep it off the async
+    // workers. Progress frames still flow through the same emitter channel, in
+    // the same order, because the response frames below only go out after the
+    // `.await`.
+    let loaded = crate::blocking::run_blocking(move || {
+        load_steam_save_for_transfer(&resolved_path, label, &progress)
+    })
+    .await;
+    match loaded {
         Ok((session, save_info)) => {
             let player_count = session.player_summaries.len();
             let world_name = session.world_name.clone();
@@ -297,6 +305,21 @@ fn copy_dir_ignoring(
         }
     }
     Ok(())
+}
+
+/// The blocking half of `handle_transfer_player`'s auto-save: the recursive
+/// backup copy (taken once, never over an existing backup) and the target's
+/// save re-serialization + write-back. Split out so it can run on the blocking
+/// pool via `run_blocking`.
+fn backup_and_write_transfer_target(
+    target: &TransferTarget,
+    backup_path: &std::path::Path,
+) -> Result<(), HandlerError> {
+    if !backup_path.exists() {
+        copy_dir_ignoring(&target.save_info.save_dir, backup_path, "backups")
+            .map_err(|error| HandlerError::Other(error.to_string()))?;
+    }
+    save_file::write_transfer_target_save(&target.session, &target.save_info)
 }
 
 /// A missing target is reported before a missing source. A successful transfer
@@ -383,16 +406,37 @@ pub async fn handle_transfer_player(
             .join("backups")
             .join("transfer")
             .join(format!("backup_{timestamp}"));
-        if !backup_path.exists() {
-            copy_dir_ignoring(&target.save_info.save_dir, &backup_path, "backups")
-                .map_err(|error| HandlerError::Other(error.to_string()))?;
-        }
-        save_file::write_transfer_target_save(&target.session, &target.save_info)?;
+
+        // Recursive backup copy + save re-serialization are blocking — keep
+        // them off the async workers. The target cannot cross into the
+        // blocking closure as a borrow, so it is taken out and restored
+        // around it; the connection's per-session guard is held for this
+        // whole handler, so nothing else observes the gap.
+        let target_slot = ctx
+            .session
+            .transfer_target
+            .take()
+            .expect("checked Some above");
+        let (write_result, target) = crate::blocking::run_blocking(move || {
+            let result = backup_and_write_transfer_target(&target_slot, &backup_path);
+            (result, target_slot)
+        })
+        .await;
+        ctx.session.transfer_target = Some(target);
+        write_result?;
+
         ctx.emitter.emit(
             MessageType::ProgressMessage,
             &"Target save written to disk.",
         );
-        result["saved_to"] = serde_json::json!(target.save_info.save_dir.to_string_lossy());
+        result["saved_to"] = serde_json::json!(ctx
+            .session
+            .transfer_target
+            .as_ref()
+            .expect("restored above")
+            .save_info
+            .save_dir
+            .to_string_lossy());
     }
 
     ctx.emitter.emit(MessageType::TransferPlayer, &result);

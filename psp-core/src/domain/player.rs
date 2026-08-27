@@ -475,12 +475,21 @@ pub fn build_player_dto(
         if world::entry_is_player(pal_entry) {
             continue;
         }
+        // Ownership gate before the DTO build: `pal_dto_from_entry` decodes
+        // every pal in the world, but only this player's pals survive, so the
+        // single `OwnerPlayerUId` lookup (the same read `PalDto::owner_uid`
+        // gets) skips that work for everyone else's pals.
+        let owned_by_player = world::entry_save_parameter(pal_entry)
+            .and_then(|parameters| props::get(parameters, &["OwnerPlayerUId"]))
+            .and_then(props::as_uuid)
+            == Some(player_id);
+        if !owned_by_player {
+            continue;
+        }
         let Some(pal_dto) = pal::pal_dto_from_entry(pal_entry, game_data) else {
             continue;
         };
-        if pal_dto.owner_uid == Some(player_id) {
-            player_pals.insert(pal_dto.instance_id, pal_dto);
-        }
+        player_pals.insert(pal_dto.instance_id, pal_dto);
     }
 
     // Populated only when a `_dps.sav` exists; `None` (JSON `null`) is a legitimate wire shape.
