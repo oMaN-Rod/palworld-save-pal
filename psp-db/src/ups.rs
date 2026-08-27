@@ -339,19 +339,91 @@ pub async fn log_transfer(
     Ok(())
 }
 
+/// Chunk size for IN lists and multi-row VALUES: keeps the bound-parameter
+/// count per statement well under SQLite's variable limit on every driver
+/// (native sqlx and the wasm OPFS bridge alike).
+const SQL_CHUNK: usize = 500;
+
+/// Column 0 of every row as an i64.
+fn ids_from_rows(rows: &[crate::DbRow]) -> Result<Vec<i64>, DbError> {
+    rows.iter().map(|r| r.get_i64_at(0)).collect()
+}
+
+/// Multi-row sibling of `log_transfer`'s insert: one statement per chunk,
+/// writing exactly the rows `log_transfer` would write for
+/// `{source_type: Some("ups"), success: true}` with every other column NULL.
+/// Each row gets its own timestamp, as N `log_transfer` calls would.
+fn build_ups_log_rows(pal_ids: &[i64], operation_type: &str) -> Vec<(String, Vec<crate::DbValue>)> {
+    let mut statements = Vec::new();
+    for chunk in pal_ids.chunks(SQL_CHUNK) {
+        let mut sql = String::from(
+            "INSERT INTO ups_transfer_log
+             (pal_id, operation_type, source_type, destination_type, save_file_name,
+              player_name, player_uid, success, timestamp)
+             VALUES ",
+        );
+        let mut params: Vec<crate::DbValue> = Vec::with_capacity(chunk.len() * 9);
+        for (i, pal_id) in chunk.iter().enumerate() {
+            if i > 0 {
+                sql.push_str(", ");
+            }
+            sql.push_str("(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            params.extend([
+                (*pal_id).into(),
+                operation_type.into(),
+                "ups".into(),
+                crate::DbValue::Null,
+                crate::DbValue::Null,
+                crate::DbValue::Null,
+                crate::DbValue::Null,
+                true.into(),
+                crate::time::now_iso_naive_utc().into(),
+            ]);
+        }
+        statements.push((sql, params));
+    }
+    statements
+}
+
+/// One chunked `DELETE ... WHERE id IN (...)` per chunk.
+fn build_delete_statements(pal_ids: &[i64]) -> Vec<(String, Vec<crate::DbValue>)> {
+    let mut statements = Vec::new();
+    for chunk in pal_ids.chunks(SQL_CHUNK) {
+        let mut builder = crate::SqlBuilder::new("DELETE FROM ups_pals WHERE id IN (");
+        let mut separated = builder.separated(", ");
+        for pal_id in chunk {
+            separated.push_bind(*pal_id);
+        }
+        builder.push(")");
+        statements.push(builder.into_parts());
+    }
+    statements
+}
+
+/// Adapts owned (sql, params) pairs to the borrowed shape `execute_batch` takes.
+fn as_batch(statements: &[(String, Vec<crate::DbValue>)]) -> Vec<(&str, Vec<crate::DbValue>)> {
+    statements
+        .iter()
+        .map(|(sql, params)| (sql.as_str(), params.clone()))
+        .collect()
+}
+
 pub async fn add_pal(
     db: &dyn crate::DbDriver,
     new_pal: NewUpsPal,
     pals_game_data: &serde_json::Value,
 ) -> Result<UpsPalRecord, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    let pal_id: i64 = crate::scalar_i64(
-        &db.query(
+    // RETURNING * yields the full inserted row (column defaults included), so no
+    // follow-up SELECT is needed. An empty result must surface as an error, not
+    // a panic: on wasm `panic = abort` would kill the module.
+    let record = db
+        .query(
             "INSERT INTO ups_pals
          (instance_id, character_id, nickname, level, pal_data, source_save_file,
           source_player_uid, source_player_name, source_storage_type, source_storage_slot,
           collection_id, tags, notes, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id",
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *",
             &[
                 uuid::Uuid::new_v4().to_string().into(),
                 new_pal.character_id.clone().into(),
@@ -372,15 +444,18 @@ pub async fn add_pal(
                 now.clone().into(),
             ],
         )
-        .await?,
-    )?;
+        .await?
+        .first()
+        .map(map_pal)
+        .transpose()?
+        .ok_or_else(|| DbError::Backend("INSERT RETURNING produced no row".into()))?;
 
     recompute_stats(db, pals_game_data).await?;
     update_collection_counts(db).await?;
     log_transfer(
         db,
         TransferLogEntry {
-            pal_id,
+            pal_id: record.id,
             operation_type: "import",
             source_type: new_pal.source_storage_type.as_deref(),
             destination_type: Some("ups"),
@@ -392,7 +467,7 @@ pub async fn add_pal(
     )
     .await?;
 
-    Ok(get_pal_by_id(db, pal_id).await?.expect("row just inserted"))
+    Ok(record)
 }
 
 #[derive(Debug, Clone, serde::Serialize)]
@@ -457,22 +532,33 @@ pub async fn recompute_stats(
 ) -> Result<(), DbError> {
     ensure_stats_row(db).await?;
 
-    let total_pals: i64 =
-        crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_pals", &[]).await?)?;
-    let total_collections: i64 = crate::scalar_i64(
-        &db.query("SELECT COUNT(id) FROM ups_collections", &[])
-            .await?,
-    )?;
-    let total_tags: i64 =
-        crate::scalar_i64(&db.query("SELECT COUNT(id) FROM ups_tags", &[]).await?)?;
-    let total_transfers: i64 = crate::scalar_i64(
-        &db.query("SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals", &[])
-            .await?,
-    )?;
-    let total_clones: i64 = crate::scalar_i64(
-        &db.query("SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals", &[])
-            .await?,
-    )?;
+    // One round-trip for the plain COUNT/SUM stats; each scalar subquery is the
+    // former standalone query verbatim.
+    let counts = db
+        .query(
+            "SELECT
+               (SELECT COUNT(id) FROM ups_pals),
+               (SELECT COUNT(id) FROM ups_collections),
+               (SELECT COUNT(id) FROM ups_tags),
+               (SELECT COALESCE(SUM(transfer_count), 0) FROM ups_pals),
+               (SELECT COALESCE(SUM(clone_count), 0) FROM ups_pals),
+               (SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals)",
+            &[],
+        )
+        .await?;
+    let counts = counts
+        .first()
+        .ok_or_else(|| DbError::Backend("stats count query returned no rows".into()))?;
+    let total_pals = counts.get_i64_at(0)?;
+    let total_collections = counts.get_i64_at(1)?;
+    let total_tags = counts.get_i64_at(2)?;
+    let total_transfers = counts.get_i64_at(3)?;
+    let total_clones = counts.get_i64_at(4)?;
+    // CAST to BLOB so LENGTH() returns the UTF-8 byte count; on TEXT it counts characters,
+    // which under-reports storage for any multi-byte pal_data.
+    let total_bytes = counts.get_i64_at(5)?;
+    let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);
+
     let most_transferred: Option<i64> = crate::opt_scalar_i64(
         &db.query(
             "SELECT id FROM ups_pals ORDER BY transfer_count DESC LIMIT 1",
@@ -498,36 +584,53 @@ pub async fn recompute_stats(
         .map(|r| r.get_opt_str_at(0))
         .transpose()?
         .flatten();
-    // CAST to BLOB so LENGTH() returns the UTF-8 byte count; on TEXT it counts characters,
-    // which under-reports storage for any multi-byte pal_data.
-    let total_bytes: i64 = crate::scalar_i64(
-        &db.query(
-            "SELECT COALESCE(SUM(LENGTH(CAST(pal_data AS BLOB))), 0) FROM ups_pals",
+
+    // The pal_data boolean flags counted in SQL instead of parsing every row's
+    // JSON in Rust. json_extract, not LIKE on the raw text: a substring match
+    // would also fire on a nickname or a nested object containing the pattern,
+    // and depends on serde's exact spacing. json_valid guards each row because
+    // json_extract errors out on malformed JSON, which would abort the whole
+    // query -- the Rust version skipped such a row and counted the rest.
+    let flags = db
+        .query(
+            r#"SELECT
+               COALESCE(SUM(CASE WHEN json_valid(pal_data)
+                   AND json_extract(pal_data, '$.is_boss') THEN 1 ELSE 0 END), 0),
+               COALESCE(SUM(CASE WHEN json_valid(pal_data)
+                   AND json_extract(pal_data, '$.is_lucky') THEN 1 ELSE 0 END), 0),
+               COALESCE(SUM(CASE WHEN json_valid(pal_data)
+                   AND json_extract(pal_data, '$.is_awakened') THEN 1 ELSE 0 END), 0),
+               COALESCE(SUM(CASE WHEN json_valid(pal_data)
+                   AND json_extract(pal_data, '$.is_imported') THEN 1 ELSE 0 END), 0)
+             FROM ups_pals"#,
             &[],
         )
-        .await?,
-    )?;
-    let storage_size_mb = total_bytes as f64 / (1024.0 * 1024.0);
+        .await?;
+    let flags = flags
+        .first()
+        .ok_or_else(|| DbError::Backend("stats flag query returned no rows".into()))?;
+    let alpha = flags.get_i64_at(0)?;
+    let lucky = flags.get_i64_at(1)?;
+    let awakened = flags.get_i64_at(2)?;
+    let imported = flags.get_i64_at(3)?;
 
-    let rows: Vec<(String, String)> = db
-        .query("SELECT character_id, pal_data FROM ups_pals", &[])
-        .await?
-        .iter()
-        .map(|r| Ok((r.get_str_at(0)?.to_string(), r.get_str_at(1)?.to_string())))
-        .collect::<Result<Vec<_>, DbError>>()?;
+    // The element histogram / human / predator / oilrig / summon counts run per
+    // DISTINCT character_id (weighted by its row count), not per pal_data row.
+    // ORDER BY MIN(id) walks groups in first-appearance order, so the
+    // element_distribution key order matches a row-by-row scan's.
+    let character_groups = db
+        .query(
+            "SELECT character_id, COUNT(*) FROM ups_pals
+             GROUP BY character_id ORDER BY MIN(id)",
+            &[],
+        )
+        .await?;
     let mut element_counts: serde_json::Map<String, serde_json::Value> = serde_json::Map::new();
-    let (
-        mut alpha,
-        mut lucky,
-        mut awakened,
-        mut imported,
-        mut human,
-        mut predator,
-        mut oilrig,
-        mut summon,
-    ) = (0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64, 0i64);
-    for (character_id, pal_data_text) in rows {
-        if let Some(character_info) = pals_game_data.get(&character_id) {
+    let (mut human, mut predator, mut oilrig, mut summon) = (0i64, 0i64, 0i64, 0i64);
+    for group in &character_groups {
+        let character_id = group.get_str_at(0)?;
+        let rows = group.get_i64_at(1)?;
+        if let Some(character_info) = pals_game_data.get(character_id) {
             if let Some(elements) = character_info
                 .get("element_types")
                 .and_then(|v| v.as_array())
@@ -537,7 +640,7 @@ pub async fn recompute_stats(
                         .get(element)
                         .and_then(|v| v.as_i64())
                         .unwrap_or(0);
-                    element_counts.insert(element.to_string(), serde_json::json!(current + 1));
+                    element_counts.insert(element.to_string(), serde_json::json!(current + rows));
                 }
             }
             if !character_info
@@ -545,46 +648,16 @@ pub async fn recompute_stats(
                 .and_then(|v| v.as_bool())
                 .unwrap_or(true)
             {
-                human += 1;
-            }
-        }
-        if let Ok(pal_data) = serde_json::from_str::<serde_json::Value>(&pal_data_text) {
-            if pal_data
-                .get("is_boss")
-                .and_then(|v| v.as_bool())
-                .unwrap_or(false)
-            {
-                alpha += 1;
-            }
-            if pal_data
-                .get("is_lucky")
-                .and_then(|v| v.as_bool())
-                .unwrap_or(false)
-            {
-                lucky += 1;
-            }
-            if pal_data
-                .get("is_awakened")
-                .and_then(|v| v.as_bool())
-                .unwrap_or(false)
-            {
-                awakened += 1;
-            }
-            if pal_data
-                .get("is_imported")
-                .and_then(|v| v.as_bool())
-                .unwrap_or(false)
-            {
-                imported += 1;
+                human += rows;
             }
         }
         let lower = character_id.to_lowercase();
         if lower.contains("predator_") {
-            predator += 1;
+            predator += rows;
         } else if lower.contains("_oilrig") {
-            oilrig += 1;
+            oilrig += rows;
         } else if lower.contains("summon_") {
-            summon += 1;
+            summon += rows;
         }
     }
 
@@ -895,28 +968,37 @@ pub async fn delete_pals(
     pal_ids: &[i64],
     pals_game_data: &serde_json::Value,
 ) -> Result<i64, DbError> {
-    let mut deleted = 0i64;
-    for pal_id in pal_ids {
-        if get_pal_by_id(db, *pal_id).await?.is_some() {
-            log_transfer(
-                db,
-                TransferLogEntry {
-                    pal_id: *pal_id,
-                    operation_type: "delete",
-                    source_type: Some("ups"),
-                    success: true,
-                    ..Default::default()
-                },
-            )
-            .await?;
-            db.execute("DELETE FROM ups_pals WHERE id = ?", &[(*pal_id).into()])
-                .await?;
-            deleted += 1;
+    // Which of the requested ids exist, fetched in chunked IN lists instead of
+    // one SELECT per id.
+    let mut existing: Vec<i64> = Vec::new();
+    for chunk in pal_ids.chunks(SQL_CHUNK) {
+        let mut builder = crate::SqlBuilder::new("SELECT id FROM ups_pals WHERE id IN (");
+        let mut separated = builder.separated(", ");
+        for pal_id in chunk {
+            separated.push_bind(*pal_id);
         }
+        builder.push(")");
+        let (sql, params) = builder.into_parts();
+        existing.extend(ids_from_rows(&db.query(&sql, &params).await?)?);
+    }
+    // Log (and count) each existing id once, in first-occurrence order — the
+    // rows the per-id loop used to write.
+    let existing_set: std::collections::HashSet<i64> = existing.iter().copied().collect();
+    let mut seen = std::collections::HashSet::new();
+    let to_delete: Vec<i64> = pal_ids
+        .iter()
+        .copied()
+        .filter(|pal_id| existing_set.contains(pal_id) && seen.insert(*pal_id))
+        .collect();
+
+    if !to_delete.is_empty() {
+        let mut statements = build_ups_log_rows(&to_delete, "delete");
+        statements.extend(build_delete_statements(&to_delete));
+        db.execute_batch(&as_batch(&statements)).await?;
     }
     recompute_stats(db, pals_game_data).await?;
     update_collection_counts(db).await?;
-    Ok(deleted)
+    Ok(to_delete.len() as i64)
 }
 
 pub async fn clone_pal(
@@ -988,34 +1070,19 @@ pub async fn nuke_all_pals(
     db: &dyn crate::DbDriver,
     pals_game_data: &serde_json::Value,
 ) -> Result<i64, DbError> {
-    let all_ids: Vec<i64> = db
-        .query("SELECT id FROM ups_pals", &[])
-        .await?
-        .iter()
-        .map(|r| r.get_i64_at(0))
-        .collect::<Result<Vec<_>, _>>()?;
+    let all_ids = ids_from_rows(&db.query("SELECT id FROM ups_pals", &[]).await?)?;
     if all_ids.is_empty() {
         return Ok(0);
     }
-    for pal_id in &all_ids {
-        log_transfer(
-            db,
-            TransferLogEntry {
-                pal_id: *pal_id,
-                operation_type: "nuke_delete",
-                source_type: Some("ups"),
-                success: true,
-                ..Default::default()
-            },
-        )
-        .await?;
-    }
-    db.execute("DELETE FROM ups_pals", &[]).await?;
-    db.execute(
-        "UPDATE ups_collections SET pal_count = 0, updated_at = ?",
-        &[crate::time::now_iso_naive_utc().into()],
-    )
-    .await?;
+    // One multi-row log insert + the delete + the collection reset, committed
+    // together — instead of one logged statement per pal.
+    let mut statements = build_ups_log_rows(&all_ids, "nuke_delete");
+    statements.push(("DELETE FROM ups_pals".to_string(), Vec::new()));
+    statements.push((
+        "UPDATE ups_collections SET pal_count = 0, updated_at = ?".to_string(),
+        vec![crate::time::now_iso_naive_utc().into()],
+    ));
+    db.execute_batch(&as_batch(&statements)).await?;
     recompute_stats(db, pals_game_data).await?;
     Ok(all_ids.len() as i64)
 }
@@ -1186,23 +1253,17 @@ pub async fn create_or_update_tag(
     )?;
     match existing {
         Some(tag_id) => {
-            if let Some(description) = description {
-                db.execute(
-                    "UPDATE ups_tags SET description = ? WHERE id = ?",
-                    &[description.into(), tag_id.into()],
-                )
-                .await?;
-            }
-            if let Some(color) = color {
-                db.execute(
-                    "UPDATE ups_tags SET color = ? WHERE id = ?",
-                    &[color.into(), tag_id.into()],
-                )
-                .await?;
-            }
+            // COALESCE keeps the current value where None was passed, so one
+            // statement replaces the former per-field updates.
             db.execute(
-                "UPDATE ups_tags SET updated_at = ? WHERE id = ?",
-                &[crate::time::now_iso_utc_offset().into(), tag_id.into()],
+                "UPDATE ups_tags SET description = COALESCE(?, description),
+                   color = COALESCE(?, color), updated_at = ? WHERE id = ?",
+                &[
+                    description.into(),
+                    color.into(),
+                    crate::time::now_iso_utc_offset().into(),
+                    tag_id.into(),
+                ],
             )
             .await?;
             Ok(get_tag_by_id(db, tag_id).await?.expect("existing tag"))
@@ -1243,6 +1304,9 @@ async fn rewrite_pal_tags(
         .iter()
         .map(|r| Ok((r.get_i64_at(0)?, r.get_str_at(1)?.to_string())))
         .collect::<Result<Vec<_>, DbError>>()?;
+    // The rewritten tag arrays still have to be computed per row in Rust, but
+    // all the UPDATEs commit as one batch.
+    let mut updates: Vec<(String, Vec<crate::DbValue>)> = Vec::new();
     for (pal_id, tags_text) in rows {
         let Ok(serde_json::Value::Array(tags)) = serde_json::from_str(&tags_text) else {
             continue;
@@ -1259,15 +1323,17 @@ async fn rewrite_pal_tags(
                 _ => Some(tag),
             })
             .collect();
-        db.execute(
-            "UPDATE ups_pals SET tags = ?, updated_at = ? WHERE id = ?",
-            &[
+        updates.push((
+            "UPDATE ups_pals SET tags = ?, updated_at = ? WHERE id = ?".to_string(),
+            vec![
                 serde_json::Value::Array(rewritten).to_string().into(),
                 crate::time::now_iso_utc_offset().into(),
                 pal_id.into(),
             ],
-        )
-        .await?;
+        ));
+    }
+    if !updates.is_empty() {
+        db.execute_batch(&as_batch(&updates)).await?;
     }
     Ok(())
 }

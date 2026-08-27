@@ -147,6 +147,20 @@ impl Separated<'_> {
 pub trait DbDriver: Send + Sync {
     async fn execute(&self, sql: &str, params: &[DbValue]) -> Result<u64, DbError>;
     async fn query(&self, sql: &str, params: &[DbValue]) -> Result<Vec<DbRow>, DbError>;
+
+    /// Runs several statements as one atomic unit where the driver supports it.
+    /// The default loops `execute()`, which is today's behavior — lightweight
+    /// drivers (the wasm OPFS driver, test doubles) need no change. Drivers
+    /// with a real transaction facility (see `SqlxSqliteDriver`) override this
+    /// so multi-statement mutations pay one commit instead of one transaction
+    /// per statement and cannot interleave across pool connections. Statements
+    /// must be writes; rows are not returned.
+    async fn execute_batch(&self, statements: &[(&str, Vec<DbValue>)]) -> Result<(), DbError> {
+        for (sql, params) in statements {
+            self.execute(sql, params).await?;
+        }
+        Ok(())
+    }
 }
 
 /// An empty result must surface as an error, not a panic: on wasm `panic = abort`

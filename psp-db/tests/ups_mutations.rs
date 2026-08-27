@@ -157,6 +157,54 @@ async fn stats_count_awakened_and_imported_pals() {
     assert_eq!(stats.imported_count, 1);
 }
 
+/// The flag counts parse pal_data as JSON rather than pattern-matching its
+/// text. Substring matching would miss both pretty-printed alphas (the space
+/// after the colon) and would fire on the nested object that is not the
+/// top-level flag, landing on 1 instead of 2. A row whose pal_data will not
+/// parse is skipped rather than aborting the whole query.
+#[tokio::test]
+async fn stats_flag_counts_read_json_not_text() {
+    let (db, pool) = test_db().await;
+    let game_data = pals_game_data();
+    for character_id in ["SheepBall", "Kitsunebi", "Believer_CrossBow", "Depresso"] {
+        psp_db::ups::add_pal(&db, new_pal(character_id, false), &game_data)
+            .await
+            .unwrap();
+    }
+
+    let set_pal_data = |character_id: &'static str, pal_data: &'static str| {
+        let pool = pool.clone();
+        async move {
+            sqlx::query("UPDATE ups_pals SET pal_data = ? WHERE character_id = ?")
+                .bind(pal_data)
+                .bind(character_id)
+                .execute(&pool)
+                .await
+                .unwrap();
+        }
+    };
+    // Two alphas stored pretty-printed: `"is_boss": true`, with the space.
+    set_pal_data("SheepBall", "{
+  \"is_boss\": true
+}").await;
+    set_pal_data("Kitsunebi", "{
+  \"is_boss\": true
+}").await;
+    // Not an alpha: the flag is true only inside a nested object.
+    set_pal_data(
+        "Believer_CrossBow",
+        r#"{"is_boss":false,"source":{"is_boss":true}}"#,
+    )
+    .await;
+    // Unparseable: skipped, and must not abort the stats query.
+    set_pal_data("Depresso", "{not json at all").await;
+
+    let stats = psp_db::ups::get_stats(&db, &game_data).await.unwrap();
+
+    assert_eq!(stats.total_pals, 4);
+    assert_eq!(stats.alpha_count, 2);
+}
+
 #[tokio::test]
 async fn collection_counts_follow_membership() {
     let (db, _) = test_db().await;
@@ -169,4 +217,66 @@ async fn collection_counts_follow_membership() {
     psp_db::ups::add_pal(&db, pal, &game_data).await.unwrap();
     let collections = psp_db::ups::get_collections(&db).await.unwrap();
     assert_eq!(collections[0].pal_count, 1);
+}
+
+#[tokio::test]
+async fn delete_pals_deduplicates_ids_and_logs_each_pal_once() {
+    let (db, pool) = test_db().await;
+    let game_data = pals_game_data();
+    let pal = psp_db::ups::add_pal(&db, new_pal("SheepBall", false), &game_data)
+        .await
+        .unwrap();
+
+    let deleted = psp_db::ups::delete_pals(&db, &[pal.id, pal.id, 9999], &game_data)
+        .await
+        .unwrap();
+    assert_eq!(deleted, 1, "a duplicated id counts — and logs — once");
+
+    let log_count: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM ups_transfer_log WHERE operation_type = 'delete' AND pal_id = ?",
+    )
+    .bind(pal.id)
+    .fetch_one(&pool)
+    .await
+    .unwrap();
+    assert_eq!(log_count, 1);
+    let remaining: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM ups_pals")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    assert_eq!(remaining, 0);
+}
+
+#[tokio::test]
+async fn element_distribution_counts_and_key_order_follow_first_appearance() {
+    let (db, _) = test_db().await;
+    let game_data = pals_game_data();
+    psp_db::ups::add_pal(&db, new_pal("Kitsunebi", false), &game_data)
+        .await
+        .unwrap();
+    psp_db::ups::add_pal(&db, new_pal("SheepBall", false), &game_data)
+        .await
+        .unwrap();
+    psp_db::ups::add_pal(&db, new_pal("Kitsunebi", true), &game_data)
+        .await
+        .unwrap();
+
+    let stats = psp_db::ups::get_stats(&db, &game_data).await.unwrap();
+    assert_eq!(stats.element_distribution, "{\"Fire\":2,\"Neutral\":1}");
+}
+
+#[tokio::test]
+async fn tag_update_keeps_untouched_fields() {
+    let (db, _) = test_db().await;
+    let tag = psp_db::ups::create_or_update_tag(&db, "shiny", Some("desc"), Some("#0f0"))
+        .await
+        .unwrap();
+
+    // Passing None for a field must leave its stored value alone.
+    let updated = psp_db::ups::create_or_update_tag(&db, "shiny", None, Some("#f00"))
+        .await
+        .unwrap();
+    assert_eq!(updated.id, tag.id);
+    assert_eq!(updated.description.as_deref(), Some("desc"));
+    assert_eq!(updated.color.as_deref(), Some("#f00"));
 }

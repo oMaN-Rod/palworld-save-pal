@@ -26,13 +26,20 @@ pub mod import_legacy;
 use std::path::Path;
 
 #[cfg(feature = "sqlx-driver")]
-use sqlx::sqlite::{SqliteConnectOptions, SqlitePool, SqlitePoolOptions};
+use sqlx::sqlite::{
+    SqliteConnectOptions, SqliteJournalMode, SqlitePool, SqlitePoolOptions, SqliteSynchronous,
+};
 
 #[cfg(feature = "sqlx-driver")]
 pub async fn open(db_path: &Path) -> Result<SqlitePool, DbError> {
     let options = SqliteConnectOptions::new()
         .filename(db_path)
-        .create_if_missing(true);
+        .create_if_missing(true)
+        // WAL + NORMAL: every statement otherwise pays a rollback-journal
+        // fsync (synchronous defaults to FULL), which multiplies latency on
+        // the multi-statement UPS/preset/server mutations.
+        .journal_mode(SqliteJournalMode::Wal)
+        .synchronous(SqliteSynchronous::Normal);
     let pool = SqlitePoolOptions::new()
         .max_connections(4)
         .connect_with(options)
