@@ -1,3 +1,4 @@
+import { page } from '$app/state';
 import * as m from '$i18n/messages';
 import { baseStructuresData } from '$lib/data';
 import { getActiveDirectory, takeSaveTarget, writeSaveInPlace } from '$lib/fs';
@@ -23,7 +24,7 @@ export const noFileSelectedHandler: WSMessageHandler = {
 
 export const loadedSaveFilesHandler: WSMessageHandler = {
 	type: MessageType.LOADED_SAVE_FILES,
-	async handle(data) {
+	async handle(data, { goto }) {
 		const appState = getAppState();
 		const { level, players, world_name, type, has_gps, session_id, size, world_option_present } =
 			data;
@@ -51,6 +52,10 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 			if (storedPlayerUid) {
 				appState.selectPlayerLazy(storedPlayerUid, 'reattach');
 			}
+		}
+
+		if (!page.url.pathname.startsWith('/bulk')) {
+			await goto('/edit');
 		}
 	}
 };
