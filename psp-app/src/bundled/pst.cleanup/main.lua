@@ -621,8 +621,6 @@ function delete_invalid_structure_map_objects()
   }
 end
 
-local ZERO_UUID = "00000000-0000-0000-0000-000000000000"
-
 -- `pal.owner_uid` reads nil exactly when a guild base owns the pal instead of
 -- a player (`base_id` is then set); a real, non-nil, non-zero owner uid that
 -- names no current player is what "ownerless" means here. A pal with neither
@@ -655,7 +653,7 @@ function delete_unreferenced_data()
   for pal in save.pals() do
     if pal.base_id == nil then
       local owner = pal.owner_uid
-      if owner ~= nil and owner ~= ZERO_UUID and not known_players[owner] then
+      if owner ~= nil and not known_players[owner] then
         doomed_pals[pal.instance_id] = true
         doomed_pal_count = doomed_pal_count + 1
       end
