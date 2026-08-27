@@ -12,13 +12,13 @@
 	import { fade } from 'svelte/transition';
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
-	import { c } from '$lib/utils/commonTranslations';
 	import {
 		setStoredSelectedPlayerUid,
 		clearStoredSelectedPlayerUid,
 		getStoredSessionId
 	} from '$lib/utils/sessionPersistence';
 	import { isWebBuild } from '$lib/utils/platform';
+	import { syncLocaleToPath } from '$lib/i18n/appLocale';
 	import { browser } from '$app/environment';
 	import { CompatBanner, UnsupportedBrowser } from '$components/compat';
 	import { detectCapabilities, hardBlocked } from '$lib/utils/browserCapabilities';
@@ -43,6 +43,10 @@
 	// switching themes swaps the active color palette (client-side only).
 	$effect(() => {
 		document.body.dataset.theme = theme.current;
+	});
+
+	$effect(() => {
+		syncLocaleToPath(page.url.pathname);
 	});
 
 	$effect(() => {

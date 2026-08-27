@@ -1,23 +1,12 @@
 import { getLocale, setLocale } from '$i18n/runtime';
+import { bumpLocaleVersion, localeState } from '$lib/i18n/localeVersion.svelte';
 import { applyEditedSettings, switchLocale } from '$lib/utils/localeSwitch';
 import { send } from '$lib/utils/websocketUtils';
 import type { SupportedLanguage } from '$types';
 import { MessageType } from '$types';
 import { getAppState } from './appState.svelte';
 
-let version = $state(0);
-
-// Paraglide message accessors read module-scoped state, so a locale change does
-// not re-render on its own. The layout keys on this counter to force it.
-export const localeState = {
-	get version(): number {
-		return version;
-	}
-};
-
-export function bumpLocaleVersion(): void {
-	version += 1;
-}
+export { bumpLocaleVersion, localeState };
 
 function localeDeps() {
 	const appState = getAppState();

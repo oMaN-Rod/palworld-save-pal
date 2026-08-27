@@ -1,62 +1,148 @@
 import * as m from '$i18n/messages';
 
 export const c = {
-	activeSkill: m.active_skill({ count: 1 }),
-	activeSkills: m.active_skill({ count: 2 }),
-	alphaPal: m.alpha_pal({ pals: m.pal({ count: 1 }) }),
-	alphaPals: m.alpha_pal({ pals: m.pal({ count: 2 }) }),
-	base: m.base({ count: 1 }),
-	bases: m.base({ count: 2 }),
-	dimensionalPalStorage: m.dimensional_pal_storage({ pal: m.pal({ count: 1 }) }),
-	globalPalStorage: m.global_pal_storage({ pal: m.pal({ count: 1 }) }),
-	guild: m.guild({ count: 1 }),
-	guilds: m.guild({ count: 2 }),
-	human: m.human({ count: 1 }),
-	humans: m.human({ count: 2 }),
-	item: m.item({ count: 1 }),
-	items: m.item({ count: 2 }),
-	luckyPal: m.lucky_pals({ pals: m.pal({ count: 1 }) }),
-	luckyPals: m.lucky_pals({ pals: m.pal({ count: 2 }) }),
-	oilRigPal: m.oil_rig_pals({ pals: m.pal({ count: 1 }) }),
-	oilRigPals: m.oil_rig_pals({ pals: m.pal({ count: 2 }) }),
-	pal: m.pal({ count: 1 }),
-	pals: m.pal({ count: 2 }),
-	passiveSkill: m.passive_skill({ count: 1 }),
-	passiveSkills: m.passive_skill({ count: 2 }),
-	player: m.player({ count: 1 }),
-	players: m.player({ count: 2 }),
-	predatorPal: m.predator_pals({ pals: m.pal({ count: 1 }) }),
-	predatorPals: m.predator_pals({ pals: m.pal({ count: 2 }) }),
-	preset: m.preset({ count: 1 }),
-	presets: m.preset({ count: 2 }),
-	save: m.save({ count: 1 }),
-	saves: m.save({ count: 2 }),
-	tag: m.tag({ count: 1 }),
-	tags: m.tag({ count: 2 }),
-	summonedPal: m.summoned_pals({ pals: m.pal({ count: 1 }) }),
-	summonedPals: m.summoned_pals({ pals: m.pal({ count: 2 }) }),
-	universalPalStorage: m.universal_pal_storage({ pal: m.pal({ count: 1 }) }),
-	weapon: m.weapon({ count: 1 }),
-	weapons: m.weapon({ count: 2 }),
-	collection: m.collection({ count: 1 }),
-	collections: m.collection({ count: 2 }),
-	filter: m.filter({ count: 1 }),
-	filters: m.filter({ count: 2 }),
-	container: m.storage_container(),
-	storage: m.storage()
+	get activeSkill() {
+		return m.active_skill({ count: 1 });
+	},
+	get activeSkills() {
+		return m.active_skill({ count: 2 });
+	},
+	get alphaPal() {
+		return m.alpha_pal({ pals: m.pal({ count: 1 }) });
+	},
+	get alphaPals() {
+		return m.alpha_pal({ pals: m.pal({ count: 2 }) });
+	},
+	get base() {
+		return m.base({ count: 1 });
+	},
+	get bases() {
+		return m.base({ count: 2 });
+	},
+	get dimensionalPalStorage() {
+		return m.dimensional_pal_storage({ pal: m.pal({ count: 1 }) });
+	},
+	get globalPalStorage() {
+		return m.global_pal_storage({ pal: m.pal({ count: 1 }) });
+	},
+	get guild() {
+		return m.guild({ count: 1 });
+	},
+	get guilds() {
+		return m.guild({ count: 2 });
+	},
+	get human() {
+		return m.human({ count: 1 });
+	},
+	get humans() {
+		return m.human({ count: 2 });
+	},
+	get item() {
+		return m.item({ count: 1 });
+	},
+	get items() {
+		return m.item({ count: 2 });
+	},
+	get luckyPal() {
+		return m.lucky_pals({ pals: m.pal({ count: 1 }) });
+	},
+	get luckyPals() {
+		return m.lucky_pals({ pals: m.pal({ count: 2 }) });
+	},
+	get oilRigPal() {
+		return m.oil_rig_pals({ pals: m.pal({ count: 1 }) });
+	},
+	get oilRigPals() {
+		return m.oil_rig_pals({ pals: m.pal({ count: 2 }) });
+	},
+	get pal() {
+		return m.pal({ count: 1 });
+	},
+	get pals() {
+		return m.pal({ count: 2 });
+	},
+	get passiveSkill() {
+		return m.passive_skill({ count: 1 });
+	},
+	get passiveSkills() {
+		return m.passive_skill({ count: 2 });
+	},
+	get player() {
+		return m.player({ count: 1 });
+	},
+	get players() {
+		return m.player({ count: 2 });
+	},
+	get predatorPal() {
+		return m.predator_pals({ pals: m.pal({ count: 1 }) });
+	},
+	get predatorPals() {
+		return m.predator_pals({ pals: m.pal({ count: 2 }) });
+	},
+	get preset() {
+		return m.preset({ count: 1 });
+	},
+	get presets() {
+		return m.preset({ count: 2 });
+	},
+	get save() {
+		return m.save({ count: 1 });
+	},
+	get saves() {
+		return m.save({ count: 2 });
+	},
+	get tag() {
+		return m.tag({ count: 1 });
+	},
+	get tags() {
+		return m.tag({ count: 2 });
+	},
+	get summonedPal() {
+		return m.summoned_pals({ pals: m.pal({ count: 1 }) });
+	},
+	get summonedPals() {
+		return m.summoned_pals({ pals: m.pal({ count: 2 }) });
+	},
+	get universalPalStorage() {
+		return m.universal_pal_storage({ pal: m.pal({ count: 1 }) });
+	},
+	get weapon() {
+		return m.weapon({ count: 1 });
+	},
+	get weapons() {
+		return m.weapon({ count: 2 });
+	},
+	get collection() {
+		return m.collection({ count: 1 });
+	},
+	get collections() {
+		return m.collection({ count: 2 });
+	},
+	get filter() {
+		return m.filter({ count: 1 });
+	},
+	get filters() {
+		return m.filter({ count: 2 });
+	},
+	get container() {
+		return m.storage_container();
+	},
+	get storage() {
+		return m.storage();
+	}
 };
 
 export const p = {
-	pal: {
-		pal: c.pal
+	get pal() {
+		return { pal: c.pal };
 	},
-	pals: {
-		pals: c.pals
+	get pals() {
+		return { pals: c.pals };
 	},
-	human: {
-		human: c.human
+	get human() {
+		return { human: c.human };
 	},
-	humans: {
-		humans: c.humans
+	get humans() {
+		return { humans: c.humans };
 	}
 };
