@@ -2196,6 +2196,7 @@
           "collected_relics": {},
           "defeated_bosses": [],
           "effigy_possess_num": 0,
+          "relic_possess_num_map": null,
           "location": {
             "x": 707.447639502036,
             "y": -136659.84283941242,

@@ -167,6 +167,37 @@ fn collected_relics_by_type(record_data: &Properties) -> BTreeMap<String, Vec<St
     out
 }
 
+/// Unspent relic counts per type (bare `relic::RELIC_TYPE_MAP` key), read from
+/// `RecordData.RelicPossessNumMap`. `None` when the property is absent -- a
+/// pre-1.0 save never gains one, and the Effigies editor treats that as
+/// "unsupported" rather than all-zero. A type the map carries that
+/// `RELIC_TYPE_MAP` does not know passes through under its raw enum name so
+/// the UI can surface it instead of silently dropping it.
+fn relic_possess_counts(record_data: &Properties) -> Option<BTreeMap<String, i64>> {
+    let entries = record_data
+        .0
+        .get(&PropertyKey::from("RelicPossessNumMap"))
+        .and_then(props::map_entries)?;
+
+    let mut out = BTreeMap::new();
+    for entry in entries {
+        // One corrupt key hides only itself, not the whole map — a `None`
+        // return here would read as "pre-1.0 save" in the UI.
+        let Some(type_name) = relic_type_name(&entry.key) else {
+            continue;
+        };
+        let key = relic::RELIC_TYPE_MAP
+            .iter()
+            .find(|(enum_name, _)| *enum_name == type_name)
+            .map(|(_, key)| key.to_string())
+            .unwrap_or_else(|| type_name.to_string());
+        // A count that fails to read as an int is corrupt, not zero: keep the
+        // entry visible to the UI rather than dropping it.
+        out.insert(key, props::as_i64(&entry.value).unwrap_or(0));
+    }
+    Some(out)
+}
+
 /// One `english_name -> StatusPoint` entry per list element whose `StatusName` resolves.
 /// A `"None"` or unrecognized row is skipped: save data is untrusted input.
 fn status_points(
@@ -407,6 +438,7 @@ pub fn build_player_dto(
         .and_then(|record| record.0.get(&PropertyKey::from("RelicPossessNum")))
         .and_then(props::as_i32)
         .unwrap_or(0) as i64;
+    let relic_possess_num_map = record_data.and_then(relic_possess_counts);
 
     let completed_missions = save_data
         .0
@@ -562,6 +594,7 @@ pub fn build_player_dto(
         collected_relics: Some(collected_relics),
         defeated_bosses: Some(defeated_bosses),
         effigy_possess_num,
+        relic_possess_num_map,
         location,
         last_online_time,
         dps,
@@ -619,16 +652,17 @@ pub fn update_player_technologies(
     Ok(())
 }
 
-/// `_game_data` is unused here; the whole `update_*` family shares one uniform signature.
+/// `game_data` supplies the per-type `cumulative_max` the Effigies count write
+/// clamps to; the rest of the `update_*` family shares this uniform signature anyway.
 pub fn update_players(
     session: &mut SaveSession,
-    _game_data: &GameData,
+    game_data: &GameData,
     modified_players: &OrderedMap<uuid::Uuid, PlayerDto>,
     progress: &crate::progress::ProgressSink,
 ) -> Result<(), CoreError> {
     for (player_id, dto) in modified_players.iter() {
         progress(&format!("Updating player {}", dto.nickname));
-        apply_player_dto(session, *player_id, dto)?;
+        apply_player_dto(session, game_data, *player_id, dto)?;
     }
     Ok(())
 }
@@ -660,6 +694,7 @@ fn player_inventory_container_id(save_data: &Properties, id_key: &str) -> Option
 /// arbitrary container anywhere in the save.
 fn apply_player_dto(
     session: &mut SaveSession,
+    game_data: &GameData,
     player_id: uuid::Uuid,
     dto: &PlayerDto,
 ) -> Result<(), CoreError> {
@@ -721,6 +756,18 @@ fn apply_player_dto(
         );
     }
     {
+        // Snapshot the possess map as it stands BEFORE the flag-delta counters
+        // run: the Effigies count write below reconciles against it to tell an
+        // edited count from an unedited round-trip echo.
+        let pre_relic_counts = {
+            let loaded = session.loaded_players.get(&player_id).expect("checked");
+            save_data_props(&loaded.sav)
+                .ok()
+                .and_then(|save_data| save_data.0.get(&PropertyKey::from("RecordData")))
+                .and_then(props::struct_props)
+                .and_then(relic_possess_counts)
+                .unwrap_or_default()
+        };
         let loaded = session.loaded_players.get_mut(&player_id).expect("checked");
         // Both quest arrays are written under the name this save actually uses. Writing the
         // bare name onto a 1.0 save would invent a property the game never reads and leave
@@ -798,7 +845,12 @@ fn apply_player_dto(
                 "collected_relics present without collected_effigies; dropping typed relic write"
             );
         }
-        // Must follow the relic counters, which own every type's possess-map entry.
+        // Must follow the relic counters, which own every type's possess-map entry;
+        // the Effigies editor's absolute counts then land last, so an explicit
+        // edit wins over the flag-delta nudges above.
+        if let Some(counts) = &dto.relic_possess_num_map {
+            apply_relic_possess_counts(&mut loaded.sav, game_data, counts, &pre_relic_counts);
+        }
         ensure_relic_possess_map_keys(&mut loaded.sav, &dto.status_point_list);
     }
     // Resolve every container id from the player's own save data first, then
@@ -1368,6 +1420,204 @@ fn apply_relic_counters(
             })
             .unwrap_or(0);
         record_data.insert("RelicBonusExpTableIndex", props::int_property(total));
+    }
+}
+
+/// Sets the player's per-type unspent relic counts directly, from the Effigies
+/// editor's absolute values, and re-syncs the CapturePower mirror fields.
+///
+/// This is the "spend at the Statue of Power" write: the flags say what was
+/// ever COLLECTED, this map says what is still HELD, and only a direct edit can
+/// move it downward. It runs AFTER `apply_relic_counters`, which nudges the
+/// same counters by collection deltas, and reconciles against `pre_counts` --
+/// the map as it stood BEFORE those nudges -- so the two writers never fight:
+///   - a type whose DTO count equals its pre-edit value is an UNEDITED echo of
+///     what the frontend loaded (the common round-trip). Whatever the flag
+///     deltas just did to it stands -- exactly the pre-Effigies behavior a
+///     flags-only client still relies on;
+///   - a type whose DTO count DIFFERS from its pre-edit value is an explicit
+///     Effigies edit and lands absolutely, flag deltas notwithstanding.
+///
+/// A client cannot "edit" a type back to its pre-edit value through this path
+/// in the same save that also toggles that type's flags -- the echo rule
+/// swallows it. Editing counts and toggling that type's map flags in one save
+/// is not a workflow the UI offers.
+///
+/// Mirrors `apply_relic_counters`' format contract:
+///   - `RelicPossessNum` mirrors `RelicPossessNumMap[CapturePower]`, NOT the
+///     total across types (the legacy scalar is a CapturePower-only mirror).
+///     It is re-mirrored only when CapturePower was explicitly edited;
+///     otherwise the flag-delta write above owns it.
+///   - Every write is conditional on the map already existing, EXCEPT when some
+///     type ends up holding relics -- then the map is created, schema first,
+///     matching `apply_unlock_flags`' precedent for a lazily-created property.
+///     A pre-1.0 save edited to all-zero counts therefore stays untouched.
+///   - A type the DTO names gains a key even at 0: 0-keys are a real game
+///     state (the fixture saves carry them), and PalSavTools' PUT writes every
+///     provided key the same way. Types the DTO does NOT name are left alone.
+///   - Each count clamps to `[0, cumulative_max]` from `data/json/relic_data.json`,
+///     the illegal-value guard: the game has no UI for an over-max count.
+///   - Unknown keys in `counts` (a forged or future-typed payload) are dropped,
+///     and entries the save carries for types NOT in `counts` are left alone --
+///     an unknown-to-us type the game wrote must survive the round-trip.
+fn apply_relic_possess_counts(
+    player_sav: &mut crate::ue::Save,
+    game_data: &GameData,
+    counts: &BTreeMap<String, i64>,
+    pre_counts: &BTreeMap<String, i64>,
+) {
+    let record_data_key = PropertyKey::from("RecordData");
+    let possess_map_key = PropertyKey::from("RelicPossessNumMap");
+    let relic_key = PropertyKey::from("RelicPossessNum");
+
+    // Resolve to enum names and clamp up front, dropping unknown types and
+    // unedited echoes of the pre-edit map (see the doc comment's reconcile rule).
+    let clamped: Vec<(&'static str, i64)> = counts
+        .iter()
+        .filter_map(|(bare_key, count)| {
+            let (enum_name, key) = relic::RELIC_TYPE_MAP
+                .iter()
+                .find(|(_, key)| key == bare_key)?;
+            let cap = relic::cumulative_max(game_data, key).unwrap_or(i64::MAX);
+            let count = (*count).clamp(0, cap);
+            if pre_counts.get(bare_key) == Some(&count) {
+                return None;
+            }
+            Some((*enum_name, count))
+        })
+        .collect();
+    if clamped.is_empty() {
+        return;
+    }
+
+    let map_already_present = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .map(|record_data| record_data.0.contains_key(&possess_map_key))
+        .unwrap_or(false);
+    if !map_already_present {
+        // A count above zero is what legitimizes creating the map at all; an
+        // all-zero edit of a save that never carried one must not conjure it.
+        // A save with no `RecordData` struct at all is left untouched, as every
+        // other relic writer here does.
+        let any_positive = clamped.iter().any(|(_, count)| *count > 0);
+        let has_record_data = save_data_props(player_sav)
+            .ok()
+            .and_then(|save_data| save_data.0.get(&record_data_key))
+            .and_then(props::struct_props)
+            .is_some();
+        if !any_positive || !has_record_data {
+            return;
+        }
+        if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
+            props::ensure_schema(
+                player_sav,
+                format!("{prefix}RecordData.RelicPossessNumMap"),
+                crate::ue::PropertyTagPartial {
+                    id: None,
+                    data: crate::ue::PropertyTagDataPartial::Map {
+                        key_type: Box::new(crate::ue::PropertyTagDataPartial::Enum(
+                            "EPalRelicType".to_string(),
+                            None,
+                        )),
+                        value_type: Box::new(crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::IntProperty,
+                        )),
+                    },
+                },
+            );
+        }
+    }
+
+    // The legacy scalar mirrors CapturePower only -- see `apply_relic_counters`
+    // for why it is not the total. Re-mirrored only on an explicit edit, which
+    // is the only case `capture_power_count` is set; created only at a positive
+    // count, matching the counters' `relic_already_present || net > 0` rule.
+    // Both the scalar check and its schema primer run BEFORE the mutable
+    // borrow of the property tree below.
+    let capture_power_count = clamped
+        .iter()
+        .find(|(relic_type, _)| *relic_type == CAPTURE_POWER_RELIC)
+        .map(|(_, count)| *count);
+    let scalar_present = save_data_props(player_sav)
+        .ok()
+        .and_then(|save_data| save_data.0.get(&record_data_key))
+        .and_then(props::struct_props)
+        .map(|record_data| record_data.0.contains_key(&relic_key))
+        .unwrap_or(false);
+    if let Some(count) = capture_power_count {
+        if !scalar_present && count > 0 {
+            if let Some(prefix) = props::schema_prefix_ending_with(player_sav, "RecordData") {
+                props::ensure_schema(
+                    player_sav,
+                    format!("{prefix}RecordData.RelicPossessNum"),
+                    crate::ue::PropertyTagPartial {
+                        id: None,
+                        data: crate::ue::PropertyTagDataPartial::Other(
+                            crate::ue::PropertyType::IntProperty,
+                        ),
+                    },
+                );
+            }
+        }
+    }
+
+    let Ok(save_data) = save_data_props_mut(player_sav) else {
+        return;
+    };
+    let Some(record_data) = save_data
+        .0
+        .get_mut(&record_data_key)
+        .and_then(props::struct_props_mut)
+    else {
+        return;
+    };
+
+    // Create the map on first positive write, the way the game's own writer
+    // would have; every later edit finds it present.
+    if !record_data.0.contains_key(&possess_map_key) {
+        record_data.insert("RelicPossessNumMap", Property::Map(Vec::new()));
+    }
+    let Some(entries) = record_data
+        .0
+        .get_mut(&possess_map_key)
+        .and_then(props::map_entries_mut)
+    else {
+        return;
+    };
+
+    for (relic_type, count) in clamped {
+        match entries
+            .iter_mut()
+            .find(|entry| relic_type_name(&entry.key) == Some(relic_type))
+        {
+            Some(entry) => {
+                entry.value = props::int_property(count.clamp(0, i32::MAX as i64) as i32)
+            }
+            // A type the DTO names gains a key even at 0: a 0-key is a real
+            // game state (the fixture saves carry them -- "bought the statue
+            // listing, nothing held"), and PalSavTools' PUT writes the same.
+            None => entries.push(crate::ue::MapEntry {
+                // The map's declared key type is EnumProperty; a NameProperty
+                // here would not read back as a relic type.
+                key: props::enum_property(relic_type),
+                value: props::int_property(count.clamp(0, i32::MAX as i64) as i32),
+            }),
+        }
+    }
+
+    // The legacy scalar mirrors CapturePower only -- see `apply_relic_counters`
+    // for why it is not the total. Re-mirrored only on an explicit edit, which
+    // is the only case `capture_power_count` is set; created only at a positive
+    // count, matching the counters' `relic_already_present || net > 0` rule.
+    if let Some(count) = capture_power_count {
+        if scalar_present || count > 0 {
+            record_data.insert(
+                "RelicPossessNum",
+                props::int_property(count.clamp(0, i32::MAX as i64) as i32),
+            );
+        }
     }
 }
 

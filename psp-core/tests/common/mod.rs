@@ -201,6 +201,29 @@ pub fn relic_possess_num_map(sav: &serde_json::Value) -> BTreeMap<String, i64> {
         .unwrap_or_default()
 }
 
+/// Whether the save carries a `RelicPossessNumMap` property at all -- a
+/// present-but-empty map and an absent one are different states, and
+/// `relic_possess_num_map` cannot tell them apart.
+#[allow(dead_code)]
+pub fn relic_possess_map_present(sav: &serde_json::Value) -> bool {
+    find(sav, "RelicPossessNumMap").is_some()
+}
+
+/// Ordered variant of `relic_possess_num_map`: entries in on-disk order, so a
+/// test can catch a write that silently reordered the map.
+#[allow(dead_code)]
+pub fn relic_possess_num_map_ordered(sav: &serde_json::Value) -> Vec<(String, i64)> {
+    find(sav, "RelicPossessNumMap")
+        .and_then(|v| v.as_array())
+        .map(|entries| {
+            entries
+                .iter()
+                .filter_map(|e| Some((e["key"].as_str()?.to_string(), e["value"].as_i64()?)))
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
 #[allow(dead_code)]
 pub fn relic_bonus_exp_table_index(sav: &serde_json::Value) -> i64 {
     find(sav, "RelicBonusExpTableIndex")

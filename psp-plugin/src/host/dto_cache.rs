@@ -323,6 +323,7 @@ fn drop_item_container_dtos(dto: &mut PlayerDto) {
         collected_relics: _,
         defeated_bosses: _,
         effigy_possess_num: _,
+        relic_possess_num_map: _,
         location: _,
         last_online_time: _,
         dps: _,
