@@ -7,7 +7,7 @@
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
-	import { theme, themeOptions } from '$states';
+	import { cornerArt, theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -63,6 +63,23 @@
 					label={m.cheat_mode()}
 				/>
 				<span>{m.cheat_mode()}</span>
+			</div>
+		</div>
+
+		<div class="mt-2 flex flex-col space-y-2">
+			<!-- Purely visual, so this one is local UI state (like the theme picker
+			     above), applied immediately and persisted to localStorage — not part
+			     of the backend-persisted AppSettings payload. -->
+			<div class="flex space-x-2">
+				<Switch
+					checked={cornerArt.current}
+					onCheckedChange={(mode: CheckedChangeDetails) => {
+						cornerArt.current = mode.checked;
+					}}
+					name="corner_art"
+					label={m.show_corner_art()}
+				/>
+				<span>{m.show_corner_art()}</span>
 			</div>
 		</div>
 

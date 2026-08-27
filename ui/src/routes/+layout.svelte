@@ -3,9 +3,10 @@
 	import { Sidebar, PublicNav } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
-	import { getAppState, getSocketState, theme, localeState } from '$states';
+	import { cornerArt, getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
 	import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from '$lib/utils/shellRoutes';
+	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
 	import { onMount } from 'svelte';
@@ -34,6 +35,13 @@
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
+
+	// Every locale's landing root (`/`, `/de`, `/zh`, …) — the marketing page
+	// stays clean of the ambient corner art.
+	const landingPaths = new Set(['/', ...siteLocales.map((locale) => localizedPath('/', locale))]);
+	function isLandingPath(pathname: string): boolean {
+		return landingPaths.has(pathname.replace(/\/+$/, '') || '/');
+	}
 
 	handlers.forEach((handler) => {
 		dispatcher.register(handler);
@@ -71,9 +79,11 @@
 	// Only redirect when no session could possibly reattach — a stored session
 	// id means bootstrap() may still populate saveFile, so let that race resolve
 	// instead of bouncing a refreshing editor user off their save-only route.
+	// Save-less visitors land on the upload page, matching where the sidebar
+	// links already point.
 	$effect(() => {
 		if (publicShell && !getStoredSessionId() && isSaveRequiredRoute(page.url.pathname)) {
-			goto('/');
+			goto('/upload');
 		}
 	});
 
@@ -125,6 +135,14 @@
 			</div>
 		</Modal>
 	{/key}
+	<!-- Sits under the z-[1] shell, above the body gradients. -->
+	{#if cornerArt.current && !isLandingPath(page.url.pathname)}
+		<div
+			class="pointer-events-none fixed inset-0 z-0"
+			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.5;"
+			aria-hidden="true"
+		></div>
+	{/if}
 	<PalEditorOverlay />
 	<ResizeWarning />
 {/if}
