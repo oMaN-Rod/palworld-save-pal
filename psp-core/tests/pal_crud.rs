@@ -157,6 +157,62 @@ fn add_and_delete_player_pal_invalidate_caches_and_shift_the_rebuilt_index() {
     );
 }
 
+/// Regression for the orphaning `9d55c461` fixed as a side effect: a GPS pal's raw
+/// `OwnerPlayerUId` is the present nil guid, which `pal_dto_from_dps_slot` must report as
+/// `owner_uid: None` so `apply_pal_dto` leaves `new_pal_entry`'s player-owned write alone,
+/// instead of overwriting it back to nil.
+#[test]
+fn add_player_pal_from_dto_writes_the_target_player_as_owner_when_the_source_owner_was_nil() {
+    let mut session = common::load_fixture_session("world1");
+    let data = game_data();
+    let player_id = loaded_session(&mut session, &data);
+    let details = player::build_player_dto(&session, &data, player_id)
+        .unwrap()
+        .unwrap();
+    let pal_box_id = details.pal_box_id.expect("pal box exists");
+
+    let mut gps_slot_props = match dps_slot("Sheepball", Uuid::new_v4()) {
+        StructValue::Struct(p) => p,
+        _ => unreachable!(),
+    };
+    if let Some(save_parameter) = gps_slot_props
+        .0
+        .get_mut(&psp_core::ue::PropertyKey::from("SaveParameter"))
+        .and_then(psp_core::props::struct_props_mut)
+    {
+        save_parameter.insert("OwnerPlayerUId", guid_property(psp_core::props::EMPTY_UUID));
+    }
+    let gps_dto = pal::pal_dto_from_dps_slot(&StructValue::Struct(gps_slot_props), &data)
+        .expect("well-formed GPS slot");
+
+    let cloned = pal::add_player_pal_from_dto(
+        &mut session,
+        &data,
+        player_id,
+        &gps_dto,
+        pal_box_id,
+        None,
+    )
+    .unwrap()
+    .expect("world1's pal box has room for one more pal");
+
+    let raw_owner = world::character_map(&session.level)
+        .unwrap()
+        .iter()
+        .find(|e| world::entry_instance_id(e) == Some(cloned.instance_id))
+        .and_then(world::entry_save_parameter)
+        .and_then(|save_parameter| {
+            psp_core::props::get(save_parameter, &["OwnerPlayerUId"])
+                .and_then(psp_core::props::as_uuid)
+        });
+    assert_eq!(
+        raw_owner,
+        Some(player_id),
+        "cloning a GPS pal (nil raw owner) into a player's pal box must write the raw \
+         OwnerPlayerUId as the target player, not leave it overwritten with nil"
+    );
+}
+
 #[test]
 fn unloaded_player_errors_with_python_message() {
     let mut session = common::load_fixture_session("world1");
