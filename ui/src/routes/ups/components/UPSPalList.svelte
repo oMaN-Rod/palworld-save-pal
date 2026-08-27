@@ -28,11 +28,11 @@
 <div class="space-y-2 p-4">
 	{#each upsState.pals as upsPal (upsPal.id)}
 		<div
-			class="border-surface-300 dark:border-surface-700 hover:border-primary-500 dark:hover:border-primary-400 flex cursor-pointer items-center gap-4 rounded-lg border p-3 transition-colors {isPalSelected(
+			class="card-hover hover:border-primary-500/40 hover:bg-surface-800/75 flex cursor-pointer items-center gap-4 rounded-sm border border-surface-700/60 bg-surface-800/50 p-3 transition-colors {isPalSelected(
 				upsPal.id
 			)
-				? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 ring-secondary-500 ring-4'
-				: 'dark:bg-surface-800'}"
+				? 'border-secondary-500/60 bg-secondary-500/10 ring-secondary-500 ring-2'
+				: ''}"
 		>
 			<div class="shrink-0">
 				<div class="h-16 w-16">
@@ -42,15 +42,15 @@
 
 			<div class="min-w-0 flex-1">
 				<div class="mb-1 flex items-center gap-2">
-					<h3 class="text-surface-900 dark:text-surface-100 truncate text-base font-medium">
+					<h3 class="text-surface-100 truncate text-base font-medium">
 						{upsPal.nickname || upsPal.character_id}
 					</h3>
 					{#if upsPal.nickname && upsPal.nickname !== upsPal.character_id}
-						<span class="text-surface-500 dark:text-surface-400 truncate text-sm">
+						<span class="text-surface-400 truncate text-sm">
 							({upsPal.character_id})
 						</span>
 					{/if}
-					<span class="text-surface-600 dark:text-surface-300 text-sm">
+					<span class="text-surface-300 text-sm">
 						{m.level_abbr()}. {upsPal.level}
 					</span>
 				</div>
@@ -59,13 +59,13 @@
 					<div class="mb-2 flex flex-wrap gap-1">
 						{#each upsPal.tags.slice(0, 3) as tag}
 							<span
-								class="bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-300 inline-flex items-center rounded px-2 py-0.5 text-xs font-medium"
+								class="bg-secondary-500/20 text-secondary-300 inline-flex items-center rounded px-2 py-0.5 text-xs font-medium"
 							>
 								{tag}
 							</span>
 						{/each}
 						{#if upsPal.tags.length > 3}
-							<span class="text-surface-500 text-xs"
+							<span class="text-surface-400 text-xs"
 								>{m.and_more_count({ count: upsPal.tags.length - 3 })}</span
 							>
 						{/if}
@@ -73,12 +73,12 @@
 				{/if}
 
 				{#if upsPal.notes}
-					<p class="text-surface-600 dark:text-surface-400 mb-1 line-clamp-2 text-sm">
+					<p class="text-surface-400 mb-1 line-clamp-2 text-sm">
 						{upsPal.notes}
 					</p>
 				{/if}
 
-				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
+				<div class="text-surface-500 space-y-1 text-xs">
 					{#if upsPal.source_save_file}
 						<div>
 							{m.origin_label()} <span class="font-medium">{upsPal.source_save_file}</span>
@@ -102,7 +102,7 @@
 			</div>
 
 			<div class="shrink-0 text-right">
-				<div class="text-surface-500 dark:text-surface-400 space-y-1 text-xs">
+				<div class="text-surface-400 space-y-1 text-xs">
 					{#if upsPal.transfer_count > 0}
 						<div title={m.transfer({ count: 2 })}>
 							<Upload size={12} class="mr-1 inline" />

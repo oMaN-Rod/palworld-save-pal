@@ -5,7 +5,7 @@
 	import Edit from '@lucide/svelte/icons/square-pen';
 	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { getUpsState, getModalState } from '$states';
-	import { TooltipButton } from '$components/ui';
+	import { Input, TooltipButton } from '$components/ui';
 	import { TextInputModal } from '$components';
 	import type { UPSTag } from '$types';
 	import * as m from '$i18n/messages';
@@ -85,14 +85,15 @@
 	}
 </script>
 
-<div class="flex h-full flex-col">
-	<div class="border-surface-300 dark:border-surface-700 border-b p-4">
-		<div class="mb-3 flex items-center justify-between">
-			<h2 class="text-lg font-semibold">{c.tags}</h2>
+<div class="bg-surface-900/60 flex h-full min-h-0 flex-col overflow-hidden rounded-sm">
+	<div class="border-surface-700/40 mb-2 border-b px-4 pt-4 pb-2">
+		<div class="flex items-center justify-between">
+			<h2 class="text-surface-100 text-sm font-bold tracking-wide uppercase">{c.tags}</h2>
 			<TooltipButton
 				onclick={createTag}
-				variant="secondary"
+				variant="ghost"
 				size="icon"
+				class="hover:bg-secondary-500/25 text-secondary-300"
 				popupLabel={m.add_entity({ entity: c.tag })}
 			>
 				<Plus class="h-4 w-4" />
@@ -100,34 +101,32 @@
 		</div>
 
 		<div class="relative">
-			<input
+			<Input
 				type="text"
 				bind:value={searchTags}
+				inputClass="w-full pl-7 my-1"
 				placeholder={m.search_placeholder({ entity: c.tags })}
-				class="border-surface-300 dark:border-surface-600 dark:bg-surface-800 bg-surface-900 w-full rounded-md border py-2 pr-3 pl-8 text-sm"
 			/>
-			<Tag class="text-surface-500 absolute top-1/2 left-2.5 h-3 w-3 -translate-y-1/2" />
+			<Tag class="text-surface-500 pointer-events-none absolute bottom-3 left-3 h-3 w-3" />
 		</div>
 
 		{#if upsState.filters.tags.length > 0}
 			<div class="mt-3">
 				<div class="mb-2 flex items-center justify-between">
-					<span
-						class="text-surface-600 dark:text-surface-400 text-xs font-medium tracking-wide uppercase"
-					>
+					<span class="text-muted text-xs font-bold tracking-wider uppercase">
 						{m.active_filters_count({ count: upsState.filters.tags.length })}
 					</span>
-					<button onclick={clearTagFilters} class="text-primary-600 hover:text-primary-700 text-xs">
+					<button onclick={clearTagFilters} class="text-primary-400 hover:text-primary-300 text-xs">
 						{m.clear_all()}
 					</button>
 				</div>
 				<div class="flex flex-wrap gap-1">
 					{#each upsState.filters.tags as tagName}
 						<span
-							class="bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-300 inline-flex items-center gap-1 rounded px-2 py-1 text-xs"
+							class="bg-secondary-500/20 text-secondary-300 inline-flex items-center gap-1 rounded px-2 py-1 text-xs"
 						>
 							{tagName}
-							<button onclick={() => toggleTagFilter(tagName)} class="hover:text-primary-600">
+							<button onclick={() => toggleTagFilter(tagName)} class="hover:text-error-400">
 								<X class="h-3 w-3" />
 							</button>
 						</span>
@@ -137,7 +136,7 @@
 		{/if}
 	</div>
 
-	<div class="flex-1 overflow-auto p-4">
+	<div class="flex-1 overflow-auto px-4 pb-4">
 		{#if filteredTags.length > 0}
 			<div class="space-y-1">
 				{#each filteredTags as tag (tag.id)}
@@ -145,8 +144,8 @@
 					<div class="group relative">
 						<button
 							onclick={() => toggleTagFilter(tag.name)}
-							class="hover:bg-surface-200 dark:hover:bg-surface-700 flex w-full items-center gap-3 rounded-md p-2 text-left transition-colors {isSelected
-								? 'bg-primary-500 text-white'
+							class="hover:bg-secondary-500/25 flex w-full items-center gap-3 rounded-sm p-2 text-left transition-colors {isSelected
+								? 'bg-secondary-500/25'
 								: ''}"
 						>
 							<div
@@ -158,7 +157,7 @@
 								{tag.name}
 							</span>
 
-							<span class="shrink-0 text-xs {isSelected ? 'text-primary-100' : 'text-surface-500'}">
+							<span class="text-muted shrink-0 text-xs">
 								{tag.usage_count}
 							</span>
 						</button>
@@ -171,7 +170,7 @@
 									e.stopPropagation();
 									editTag(tag);
 								}}
-								class="bg-surface-900/60 text-surface-200 hover:bg-surface-700/60 rounded p-1"
+								class="bg-surface-950/80 text-surface-200 hover:bg-surface-700 rounded p-1 backdrop-blur-sm"
 								popupLabel={m.edit_entity({ entity: c.tag })}
 								size="sm"
 							>
@@ -194,19 +193,19 @@
 			</div>
 		{:else if searchTags}
 			<div class="py-8 text-center">
-				<Tag class="text-surface-400 mx-auto mb-3 h-12 w-12" />
-				<p class="text-surface-500 mb-2 text-sm">
+				<Tag class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<p class="text-surface-400 mb-2 text-sm">
 					{m.no_entity_matching({ entity: c.tags, query: searchTags })}
 				</p>
-				<button onclick={createTag} class="text-primary-600 hover:text-primary-700 text-sm">
+				<button onclick={createTag} class="text-primary-400 hover:text-primary-300 text-sm">
 					{m.create_entity_name({ name: searchTags, entity: c.tag })}
 				</button>
 			</div>
 		{:else if upsState.availableTags.length === 0}
 			<div class="py-8 text-center">
-				<Tag class="text-surface-400 mx-auto mb-3 h-12 w-12" />
-				<p class="text-surface-500 mb-2 text-sm">{m.no_entity_yet({ entity: c.tags })}</p>
-				<button onclick={createTag} class="text-primary-600 hover:text-primary-700 text-sm">
+				<Tag class="text-surface-500 mx-auto mb-3 h-12 w-12" />
+				<p class="text-surface-400 mb-2 text-sm">{m.no_entity_yet({ entity: c.tags })}</p>
+				<button onclick={createTag} class="text-primary-400 hover:text-primary-300 text-sm">
 					{m.create_first_entity({ entity: c.tag })}
 				</button>
 			</div>
@@ -214,8 +213,8 @@
 	</div>
 
 	{#if upsState.availableTags.length > 0}
-		<div class="border-surface-300 dark:border-surface-700 border-t p-4">
-			<p class="text-surface-500 text-center text-xs">
+		<div class="border-surface-700/40 border-t px-4 py-3">
+			<p class="text-surface-400 text-center text-xs">
 				{m.entity_count_available({
 					count: upsState.availableTags.length,
 					entity: m.tag({ count: upsState.availableTags.length })
