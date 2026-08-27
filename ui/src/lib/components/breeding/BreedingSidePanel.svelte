@@ -115,26 +115,33 @@
 
 <div class="flex h-full flex-col overflow-y-auto">
 	<div
-		class="border-surface-700/20 flex shrink-0 items-center justify-between border-b px-3 py-1.5"
+		class="border-surface-700/20 flex shrink-0 items-center justify-between border-b px-3 py-1.5 {collapsed
+			? 'hidden'
+			: ''}"
 	>
-		<span
-			class="text-surface-400 text-xs font-semibold tracking-wider uppercase {collapsed
-				? 'hidden'
-				: ''}">{m.breeding_controls()}</span
+		<span class="text-surface-400 text-xs font-semibold tracking-wider uppercase"
+			>{m.breeding_controls()}</span
 		>
 		<button
 			class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors"
 			onclick={() => oncollapsedChange?.(!collapsed)}
-			title={collapsed ? m.breeding_expand_panel() : m.breeding_collapse_panel()}
+			title={m.breeding_collapse_panel()}
 		>
-			{#if collapsed}<ChevronLeft size={13} />{:else}<ChevronRight size={13} />{/if}
+			<ChevronRight size={13} />
 		</button>
 	</div>
 
 	{#if collapsed}
-		<div class="text-surface-400 flex flex-col items-center gap-2 py-3">
-			<span class="text-[10px] font-medium">{m.breeding_cfg()}</span>
-		</div>
+		<button
+			class="text-surface-400 hover:text-surface-100 flex w-full flex-1 flex-col items-center justify-center gap-3 py-3 transition-colors"
+			onclick={() => oncollapsedChange?.(!collapsed)}
+			title={m.breeding_expand_panel()}
+		>
+			<ChevronLeft size={14} />
+			<span class="text-[10px] font-medium tracking-widest uppercase [writing-mode:vertical-rl]">
+				{m.breeding_cfg()}
+			</span>
+		</button>
 	{:else}
 		{#if chains.length > 0}
 			<div class="border-surface-700/20 border-b px-3 pt-3 pb-2">
