@@ -92,6 +92,8 @@ define_message_types! {
     GetItems => "get_items",
     GetMissions => "get_missions",
     GetPalSummaries => "get_pal_summaries",
+    // Overview dashboard (whole-save statistics + illegal-pal report)
+    GetOverviewStats => "get_overview_stats",
     GetPassiveSkills => "get_passive_skills",
     GetPlayers => "get_players",
     GetTechnologies => "get_technologies",
@@ -276,6 +278,7 @@ mod tests {
         "get_items",
         "get_missions",
         "get_pal_summaries",
+        "get_overview_stats",
         "get_passive_skills",
         "get_players",
         "get_technologies",
@@ -397,7 +400,7 @@ mod tests {
 
     #[test]
     fn message_type_count_is_expected() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 129);
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 130);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

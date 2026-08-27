@@ -5,6 +5,7 @@ pub mod gamepass;
 pub mod gps;
 pub mod guilds;
 pub mod lsp;
+pub mod overview;
 pub mod pals;
 pub mod players;
 pub mod plugins;

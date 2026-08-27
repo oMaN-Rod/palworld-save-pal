@@ -7,7 +7,7 @@ export const SAVE_REQUIRED_ROUTES = [
 	'/editor',
 	'/debug',
 	'/servers',
-	'/file'
+	'/overview'
 ] as const;
 
 export function isSaveRequiredRoute(pathname: string): boolean {

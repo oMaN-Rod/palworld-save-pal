@@ -100,7 +100,7 @@
 		appState.resetState();
 		baseStructuresData.reset();
 		clearSessionPersistence();
-		await goto('/file');
+		await goto('/overview');
 	}
 
 	async function handleOpenFolder(): Promise<void> {

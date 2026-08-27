@@ -347,6 +347,8 @@ export type SaveFile = {
 	world_name?: string;
 	size?: number;
 	world_option_present: boolean;
+	/** Server session backing this save; the overview stats cache key. */
+	session_id?: string;
 };
 export interface DynamicItem {
 	local_id: string;

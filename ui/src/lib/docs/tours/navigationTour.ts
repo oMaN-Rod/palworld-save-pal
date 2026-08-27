@@ -23,7 +23,7 @@ export const navigationTour: TourDefinition = {
 			}
 		},
 		{
-			element: 'a[href="/file"], a[href="/upload"]',
+			element: 'a[href="/overview"], a[href="/upload"]',
 			popover: {
 				title: 'File Management',
 				description:

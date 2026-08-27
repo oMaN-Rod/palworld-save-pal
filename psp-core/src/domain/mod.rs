@@ -5,6 +5,7 @@ pub mod gps;
 pub mod guild;
 pub mod guild_tail;
 pub mod map_object;
+pub mod overview;
 pub mod pal;
 pub mod player;
 pub mod raw;

@@ -61,12 +61,14 @@ export const navItems: NavItem[] = [
 	},
 
 	{
-		id: 'files',
+		id: 'overview',
 		section: 'tiles',
 		group: 'main',
 		icon: () => 'tabler:layout-grid',
-		label: () => m.file({ count: 2 }),
-		href: (ctx) => (ctx.desktop ? '/file' : '/upload')
+		label: () => m.overview(),
+		// The overview is the file tab on both builds once a save is loaded;
+		// on the web build without a save it points at the dropzone.
+		href: (ctx) => (ctx.desktop || ctx.appState.saveFile ? '/overview' : '/upload')
 	},
 	{
 		id: 'edit',

@@ -87,6 +87,34 @@ pub fn guild_player_uids(guild: &PalGuildGroup) -> Vec<Uuid> {
     }
 }
 
+/// Every member's `(player_uid, player_name)` pair, in tail order. The first
+/// is the guild admin. The name is the roster's stored name, which survives
+/// even when the player's own save file is absent from the world.
+pub fn guild_roster(guild: &PalGuildGroup) -> Vec<(Uuid, String)> {
+    match &guild.tail {
+        PalGuildTail::PreUpdate(tail) => tail
+            .players
+            .iter()
+            .map(|player| {
+                (
+                    props::guid_to_uuid(&player.player_uid),
+                    player.player_info.player_name.clone(),
+                )
+            })
+            .collect(),
+        PalGuildTail::PostUpdate(tail) => tail
+            .players
+            .iter()
+            .map(|player| {
+                (
+                    props::guid_to_uuid(&player.player_uid),
+                    player.player_info.player_name.clone(),
+                )
+            })
+            .collect(),
+    }
+}
+
 pub fn guild_player_count(guild: &PalGuildGroup) -> usize {
     match &guild.tail {
         PalGuildTail::PreUpdate(tail) => tail.players.len(),

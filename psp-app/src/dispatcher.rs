@@ -198,6 +198,7 @@ async fn route(
             handlers::guilds::handle_request_guild_details(serde_json::from_value(data)?, ctx).await
         }
         MessageType::GetPalSummaries => handlers::pals::handle_get_pal_summaries(ctx).await,
+        MessageType::GetOverviewStats => handlers::overview::handle_get_overview_stats(ctx).await,
         MessageType::AddPal => {
             handlers::pals::handle_add_pal(serde_json::from_value(data)?, ctx).await
         }
