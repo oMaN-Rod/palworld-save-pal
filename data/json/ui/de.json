@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Unbekannte Effigy-Typen im Spielstand: {types}",
   "effigies_unsupported": "Dieser Spielstand stammt von vor den Effigy-Typen — Bestände sind nicht verfügbar.",
   "effigies_updated": "Effigies aktualisiert.",
+  "entity_registry": "Register",
+  "guild_leader": "Gildenleiter",
   "map_labels": "Etiketten",
   "box": "Kasten",
   "bulk_actions": "Massenaktionen",

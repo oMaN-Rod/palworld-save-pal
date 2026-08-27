@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Неизвестные типы эффигий в сейве: {types}",
   "effigies_unsupported": "Этот сейв создан до появления типов эффигий — данные о количестве недоступны.",
   "effigies_updated": "Эффигии обновлены.",
+  "entity_registry": "Реестр",
+  "guild_leader": "Лидер гильдии",
   "map_labels": "Метки",
   "box": "Коробка",
   "bulk_actions": "Массовые действия",

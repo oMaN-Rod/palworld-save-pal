@@ -16,7 +16,6 @@
 	import { MessageType } from '$types';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 	import PlayerDetailPanel from './PlayerDetailPanel.svelte';
-	
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
 
@@ -77,7 +76,6 @@
 	}
 
 	async function deleteOne(row: PlayerRow) {
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.player }),
 			message: m.delete_entity_by_name_confirm({ name: row.nickname }),
@@ -90,7 +88,6 @@
 	async function bulkDelete() {
 		const uids = [...selected];
 		if (uids.length === 0) return;
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_selected_entity({ entity: c.players }),
 			message: m.delete_count_entities_confirm({ count: uids.length, entity: c.players }),
@@ -106,7 +103,6 @@
 			toast.add(m.no_players_match(), undefined, 'info');
 			return;
 		}
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_inactive_players(),
 			message: m.delete_count_entities_confirm({ count: uids.length, entity: c.players }),
@@ -161,10 +157,13 @@
 						</div>
 					{/snippet}
 				</Popover>
-				<Tooltip
-					label={m.delete_selected_entity({ entity: c.players })}
-				>
-					<Button variant="ghost" class="hover:bg-error-500" onclick={bulkDelete} disabled={selected.size === 0}>
+				<Tooltip label={m.delete_selected_entity({ entity: c.players })}>
+					<Button
+						variant="ghost"
+						class="hover:bg-error-500"
+						onclick={bulkDelete}
+						disabled={selected.size === 0}
+					>
 						<Icon icon="tabler:trash" class="h-4 w-4" />
 					</Button>
 				</Tooltip>
@@ -189,6 +188,15 @@
 					{lastActiveLabel(row)}
 				{:else if column.key === 'level'}
 					{row.level ?? '—'}
+				{:else if column.key === 'nickname'}
+					<span class="flex items-center gap-1">
+						<span class="truncate">{row.nickname}</span>
+						{#if row.isLeader}
+							<Tooltip label={m.guild_leader()}>
+								<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
+							</Tooltip>
+						{/if}
+					</span>
 				{:else}
 					{row[column.key as keyof PlayerRow]}
 				{/if}

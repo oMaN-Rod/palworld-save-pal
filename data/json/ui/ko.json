@@ -107,6 +107,8 @@
   "effigies_unknown_types": "세이브에 알 수 없는 에피지 유형: {types}",
   "effigies_unsupported": "이 세이브는 에피지 유형 도입 이전의 것입니다 — 수량을 사용할 수 없습니다.",
   "effigies_updated": "에피지가 업데이트되었습니다.",
+  "entity_registry": "레지스트리",
+  "guild_leader": "길드 리더",
   "map_labels": "라벨",
   "box": "상자",
   "bulk_actions": "대량 작업",

@@ -107,6 +107,8 @@
   "effigies_unknown_types": "ประเภทเอฟฟิจีที่ไม่รู้จักในเซฟ: {types}",
   "effigies_unsupported": "เซฟนี้เก่ากว่าการมีประเภทเอฟฟิจี — ไม่มีจำนวนให้ใช้",
   "effigies_updated": "อัปเดตเอฟฟิจีแล้ว",
+  "entity_registry": "ทะเบียน",
+  "guild_leader": "หัวหน้ากิลด์",
   "map_labels": "ป้ายกำกับ",
   "box": "กล่อง",
   "bulk_actions": "การดำเนินการจำนวนมาก",

@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Tipe effigi tidak dikenal di save: {types}",
   "effigies_unsupported": "Save ini mendahului tipe effigi — jumlah tidak tersedia.",
   "effigies_updated": "Effigi diperbarui.",
+  "entity_registry": "Registri",
+  "guild_leader": "Pemimpin guild",
   "map_labels": "Label",
   "box": "Kotak",
   "bulk_actions": "Tindakan Massal",

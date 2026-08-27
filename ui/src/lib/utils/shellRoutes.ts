@@ -1,6 +1,6 @@
 export const SAVE_REQUIRED_ROUTES = [
 	'/edit',
-	'/bulk',
+	'/registry',
 	'/gps',
 	'/ups',
 	'/blueprints',

@@ -1,13 +1,12 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { List, Loading, Spinner, Tooltip } from '$components/ui';
+	import { List, Loading } from '$components/ui';
 	import { getAppState, getPalEditorState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import { PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { PalInfoPopup } from '$components/pal';
 	import { palsData } from '$lib/data';
@@ -44,7 +43,11 @@
 		</div>
 		{#if appState.loadingPlayer}
 			<div class="flex flex-1 items-center justify-center">
-				<Loading label={m.loading_entity({ entity: m.player({count: 1}) })} loadingComplete={!appState.loadingPlayer} icon={'tabler:user'}/>
+				<Loading
+					label={m.loading_entity({ entity: m.player({ count: 1 }) })}
+					loadingComplete={!appState.loadingPlayer}
+					icon="tabler:user"
+				/>
 			</div>
 		{:else if player}
 			<div class="flex flex-col gap-3">

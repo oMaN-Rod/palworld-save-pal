@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Types d'effigies inconnus dans la sauvegarde : {types}",
   "effigies_unsupported": "Cette sauvegarde précède les types d'effigies — les comptes sont indisponibles.",
   "effigies_updated": "Effigies mises à jour.",
+  "entity_registry": "Registre",
+  "guild_leader": "Chef de guilde",
   "map_labels": "Étiquettes",
   "box": "Boîte",
   "bulk_actions": "Actions groupées",

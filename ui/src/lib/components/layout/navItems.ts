@@ -79,12 +79,12 @@ export const navItems: NavItem[] = [
 		href: '/edit'
 	},
 	{
-		id: 'bulk',
+		id: 'registry',
 		section: 'tiles',
 		group: 'main',
 		icon: () => 'tabler:stack-2',
-		label: () => m.bulk_actions(),
-		href: '/bulk'
+		label: () => m.entity_registry(),
+		href: '/registry'
 	},
 	{
 		id: 'map',

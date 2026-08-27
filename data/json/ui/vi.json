@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Các loại effigy không rõ trong bản lưu: {types}",
   "effigies_unsupported": "Bản lưu này ra đời trước các loại effigy — số lượng không khả dụng.",
   "effigies_updated": "Đã cập nhật effigy.",
+  "entity_registry": "Sổ đăng ký",
+  "guild_leader": "Thủ lĩnh guild",
   "map_labels": "Nhãn",
   "box": "Hộp",
   "bulk_actions": "Thao tác hàng loạt",

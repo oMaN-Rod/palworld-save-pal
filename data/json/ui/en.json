@@ -200,6 +200,8 @@
   "effigies_unknown_types": "Unknown effigy types in save: {types}",
   "effigies_unsupported": "This save predates effigy types — counts are unavailable.",
   "effigies_updated": "Effigies updated.",
+  "entity_registry": "Registry",
+  "guild_leader": "Guild Leader",
   "map_labels": "Labels",
   "box": "Box",
   "bulk_actions": "Bulk Actions",

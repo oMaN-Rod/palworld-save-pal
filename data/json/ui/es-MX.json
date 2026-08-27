@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Tipos de efigias desconocidos en la partida: {types}",
   "effigies_unsupported": "Esta partida es anterior a los tipos de efigias: los recuentos no están disponibles.",
   "effigies_updated": "Efigias actualizadas.",
+  "entity_registry": "Registro",
+  "guild_leader": "Líder de gremio",
   "map_labels": "Etiquetas",
   "box": "Caja",
   "bulk_actions": "Acciones masivas",

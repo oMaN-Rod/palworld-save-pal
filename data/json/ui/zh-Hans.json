@@ -268,6 +268,7 @@
   "enter_tag_name": "输入标签名称",
   "entity_count_available": "{count} 个{entity}可用",
   "entity_not_available": "{entity}不可用。",
+  "entity_registry": "档案",
   "epic": "史诗",
   "error": "错误",
   "error_copied": "错误详情已复制到剪贴板",
@@ -355,6 +356,7 @@
       ]
     }
   ],
+  "guild_leader": "公会会长",
   "guild_name": "公会名称",
   "head": "头部",
   "heal_all_in_entity": "治愈{entity}中的所有帕鲁",

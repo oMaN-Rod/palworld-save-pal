@@ -5,6 +5,7 @@ export interface PlayerRow {
 	nickname: string;
 	level: number | null;
 	guildName: string;
+	isLeader: boolean;
 	pal_count: number;
 	lastOnline: string | null;
 }
@@ -16,30 +17,43 @@ export interface GuildRow {
 	pal_count: number;
 	level: number | null;
 	base_count: number;
+	leaderUid: string | null;
+	leaderName: string | null;
 }
 
 const UNKNOWN = '—';
 
 export function buildPlayerRows(players: PlayerSummary[], guilds: GuildSummary[]): PlayerRow[] {
 	const guildNameById = new Map(guilds.map((guild) => [guild.id, guild.name]));
+	const adminByGuildId = new Map(
+		guilds
+			.filter((guild) => guild.admin_player_uid)
+			.map((guild) => [guild.id, guild.admin_player_uid!])
+	);
 	return players.map((player) => ({
 		uid: player.uid,
 		nickname: player.nickname,
 		level: player.level ?? null,
 		guildName: (player.guild_id && guildNameById.get(player.guild_id)) || UNKNOWN,
+		isLeader: Boolean(player.guild_id && adminByGuildId.get(player.guild_id) === player.uid),
 		pal_count: player.pal_count,
 		lastOnline: player.last_online_time ?? null
 	}));
 }
 
-export function buildGuildRows(guilds: GuildSummary[]): GuildRow[] {
+export function buildGuildRows(
+	guilds: GuildSummary[],
+	playerNameByUid?: Map<string, string>
+): GuildRow[] {
 	return guilds.map((guild) => ({
 		id: guild.id,
 		name: guild.name,
 		player_count: guild.player_count,
 		pal_count: guild.pal_count,
 		level: guild.level ?? null,
-		base_count: guild.base_count
+		base_count: guild.base_count,
+		leaderUid: guild.admin_player_uid ?? null,
+		leaderName: (guild.admin_player_uid && playerNameByUid?.get(guild.admin_player_uid)) || null
 	}));
 }
 
@@ -47,7 +61,11 @@ export function filterBySearch<T>(rows: T[], query: string, fields: (keyof T)[])
 	const needle = query.trim().toLowerCase();
 	if (!needle) return rows;
 	return rows.filter((row) =>
-		fields.some((field) => String(row[field] ?? '').toLowerCase().includes(needle))
+		fields.some((field) =>
+			String(row[field] ?? '')
+				.toLowerCase()
+				.includes(needle)
+		)
 	);
 }
 

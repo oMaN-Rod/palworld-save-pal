@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Tipi di effigi sconosciuti nel salvataggio: {types}",
   "effigies_unsupported": "Questo salvataggio precede i tipi di effigi: i conteggi non sono disponibili.",
   "effigies_updated": "Effigi aggiornati.",
+  "entity_registry": "Registro",
+  "guild_leader": "Leader della gilda",
   "map_labels": "Etichette",
   "box": "Scatola",
   "bulk_actions": "Operazioni di massa",

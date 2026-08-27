@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { List, Loading } from '$components/ui';
+	import { List, Loading, Tooltip } from '$components/ui';
 	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -18,11 +18,11 @@
 
 	const guildPlayers = $derived(
 		guild
-			? guild.players?.map((uid) => ({
+			? (guild.players?.map((uid) => ({
 					uid,
 					name: memberName(uid),
 					level: appState.playerSummaries[uid]?.level
-				})) ?? []
+				})) ?? [])
 			: undefined
 	);
 
@@ -63,7 +63,7 @@
 				<Loading
 					label={m.loading_entity({ entity: c.guild })}
 					loadingComplete={!appState.loadingGuild}
-					icon={'tabler:users'}
+					icon="tabler:users"
 				/>
 			</div>
 		{:else if guild}
@@ -79,20 +79,34 @@
 				</dl>
 				<div class="flex flex-col gap-1">
 					<h4 class="text-sm font-semibold">{c.players}</h4>
-					<List items={filteredPlayers} idKey="uid" canSelect={false} class="flex flex-col gap-1" headerClass="flex p-0">
+					<List
+						items={filteredPlayers}
+						idKey="uid"
+						canSelect={false}
+						class="flex flex-col gap-1"
+						headerClass="flex p-0"
+					>
 						{#snippet listHeader()}
 							{#if filteredPlayers.length > 5}
-								<Input bind:value={query} inputClass="my-0" placeholder={m.search_entity({ entity: c.players })} />
+								<Input
+									bind:value={query}
+									inputClass="my-0"
+									placeholder={m.search_entity({ entity: c.players })}
+								/>
 							{:else}
 								<div></div>
 							{/if}
 						{/snippet}
 						{#snippet listItem(member)}
-							<div class="flex gap-2">
+							<div class="flex items-center gap-2">
 								<span class="font-bold">Lvl {member?.level ?? '—'}</span>
 								<span class="truncate">{member?.name}</span>
+								{#if guild?.admin_player_uid && guild.admin_player_uid === member.uid}
+									<Tooltip label={m.guild_leader()}>
+										<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
+									</Tooltip>
+								{/if}
 							</div>
-
 						{/snippet}
 						{#snippet listItemActions(member)}
 							<button

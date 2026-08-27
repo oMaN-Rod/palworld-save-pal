@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Tipos de efígies desconhecidos no save: {types}",
   "effigies_unsupported": "Este save antecede os tipos de efígies — as contagens não estão disponíveis.",
   "effigies_updated": "Efígies atualizadas.",
+  "entity_registry": "Registro",
+  "guild_leader": "Líder da guilda",
   "map_labels": "Etiquetas",
   "box": "Caixa",
   "bulk_actions": "Ações em massa",

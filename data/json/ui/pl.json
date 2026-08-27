@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Nieznane typy efigi w zapisie: {types}",
   "effigies_unsupported": "Ten zapis pochodzi sprzed wprowadzenia typów efigi — liczby są niedostępne.",
   "effigies_updated": "Efigi zaktualizowane.",
+  "entity_registry": "Rejestr",
+  "guild_leader": "Lider gildii",
   "map_labels": "Etykiety",
   "box": "Skrzynka",
   "bulk_actions": "Akcje zbiorcze",

@@ -54,7 +54,7 @@ export const loadedSaveFilesHandler: WSMessageHandler = {
 			}
 		}
 
-		if (!page.url.pathname.startsWith('/bulk')) {
+		if (!page.url.pathname.startsWith('/registry')) {
 			await goto('/edit');
 		}
 	}

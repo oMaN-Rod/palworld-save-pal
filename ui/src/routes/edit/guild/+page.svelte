@@ -16,7 +16,7 @@
 	import { PalBadge } from '$components/pal';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';
-	import { LabResearch } from '$components';
+	import LabResearch from '$components/guilds/LabResearch.svelte';
 	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,
@@ -25,13 +25,7 @@
 		NumberSliderModal,
 		TextInputModal
 	} from '$components/modals';
-	import {
-		assetLoader,
-		debounce,
-		deepCopy,
-		formatBossCharacterId,
-		formatNickname
-	} from '$utils';
+	import { assetLoader, debounce, deepCopy, formatBossCharacterId, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import { send } from '$lib/utils/websocketUtils';
@@ -877,7 +871,10 @@
 				{/if}
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
-						<Input bind:value={inventorySearchQuery} placeholder={m.search_entity({ entity: m.inventory() })} />
+						<Input
+							bind:value={inventorySearchQuery}
+							placeholder={m.search_entity({ entity: m.inventory() })}
+						/>
 						<Button
 							variant="ghost"
 							onclick={() => {
@@ -1043,7 +1040,7 @@
 								baseClass="w-1/4"
 								listClass="h-[calc(100vh-175px)]"
 								canSelect={false}
-							idKey="id"
+								idKey="id"
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
 								multiple={false}
 							>

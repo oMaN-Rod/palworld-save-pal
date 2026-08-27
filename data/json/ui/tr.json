@@ -107,6 +107,8 @@
   "effigies_unknown_types": "Kayıtta bilinmeyen effigy türleri: {types}",
   "effigies_unsupported": "Bu kayıt effigy türlerinden öncedir — sayımlar kullanılamaz.",
   "effigies_updated": "Effigy'ler güncellendi.",
+  "entity_registry": "Sicil",
+  "guild_leader": "Lonca Lideri",
   "map_labels": "Etiketler",
   "box": "Kutu",
   "bulk_actions": "Toplu İşlemler",

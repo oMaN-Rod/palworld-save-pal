@@ -107,6 +107,8 @@
   "effigies_unknown_types": "存檔中存在未知的雕像類型：{types}",
   "effigies_unsupported": "此存檔早於雕像類型 — 數量不可用。",
   "effigies_updated": "雕像已更新。",
+  "entity_registry": "檔案",
+  "guild_leader": "公會會長",
   "map_labels": "標籤",
   "box": "盒子",
   "bulk_actions": "批量操作",

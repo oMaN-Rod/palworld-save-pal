@@ -122,7 +122,6 @@
 	}
 
 	async function deleteOne(row: PalRow) {
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_entity({ entity: c.pal }),
 			message: m.delete_entity_by_name_confirm({ name: row.nickname || row.species_name }),
@@ -135,7 +134,6 @@
 	async function bulkDelete() {
 		const ids = [...selected];
 		if (ids.length === 0) return;
-		// @ts-ignore
 		const confirmed = await modal.showConfirmModal({
 			title: m.delete_selected_entity({ entity: c.pals }),
 			message: m.delete_count_entities_confirm({ count: ids.length, entity: c.pals }),
@@ -197,7 +195,7 @@
 				<Loading
 					label={m.loading_entity({ entity: c.pals })}
 					loadingComplete={!loadingRows}
-					icon={'ph:paw-print'}
+					icon="ph:paw-print"
 				/>
 			</div>
 		{:else}
