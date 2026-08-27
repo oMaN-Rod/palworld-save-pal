@@ -476,7 +476,6 @@
 				is_sick: false,
 				gender: PalGender.MALE,
 				friendship_point: 0,
-				owner_uid: '',
 				storage_id: '00000000-0000-0000-0000-000000000000',
 				storage_slot: 0,
 				group_id: null,

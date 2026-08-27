@@ -12,7 +12,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { palsData, elementsData } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import { filterBySearch, groupPalIds, resolveBulkPal, NIL_OWNER_UID } from './bulk.utils';
+	import { filterBySearch, groupPalIds, resolveBulkPal } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';
 
 	let { selected = $bindable(new Set<string>()) }: { selected?: Set<string> } = $props();
@@ -27,7 +27,7 @@
 	let openedFromTable = $state(false);
 
 	function openEditor(row: PalRow) {
-		if (row.owner_uid && row.owner_uid !== NIL_OWNER_UID) {
+		if (row.owner_uid) {
 			pendingPalId = row.instance_id;
 			openedFromTable = true;
 			palEditor.openLoading();

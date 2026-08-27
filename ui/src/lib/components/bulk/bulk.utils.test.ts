@@ -74,14 +74,11 @@ describe('emptyGuildIds', () => {
 });
 
 describe('groupPalIds', () => {
+	// A base worker reaches the frontend with no owner_uid at all: the backend filters
+	// the nil guid its own writer produces, so `w1` here is the real wire shape.
 	const rows = [
 		{ instance_id: 'p1', owner_uid: 'owner-1' },
-		{
-			instance_id: 'w1',
-			owner_uid: '00000000-0000-0000-0000-000000000000',
-			guild_id: 'g1',
-			base_id: 'b1'
-		}
+		{ instance_id: 'w1', guild_id: 'g1', base_id: 'b1' }
 	] as PalSummary[];
 
 	it('groups a player-owned pal under its owner', () => {
@@ -90,7 +87,7 @@ describe('groupPalIds', () => {
 		expect(byBase.size).toBe(0);
 	});
 
-	it('groups a base worker with the nil owner guid under its base, not its owner', () => {
+	it('groups an ownerless base worker under its base, not its owner', () => {
 		const { byOwner, byBase } = groupPalIds(rows, ['w1']);
 		expect(byOwner.size).toBe(0);
 		expect(byBase.get('g1:b1')).toEqual({ guildId: 'g1', baseId: 'b1', palIds: ['w1'] });

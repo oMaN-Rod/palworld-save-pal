@@ -71,9 +71,6 @@ export function emptyGuildIds(rows: GuildRow[]): string[] {
 	return rows.filter((row) => row.player_count === 0).map((row) => row.id);
 }
 
-// A guild-base worker pal carries this as its owner_uid, not an absent field.
-export const NIL_OWNER_UID = '00000000-0000-0000-0000-000000000000';
-
 export interface PalIdGroups {
 	byOwner: Map<string, string[]>;
 	byBase: Map<string, { guildId: string; baseId: string; palIds: string[] }>;
@@ -86,7 +83,7 @@ export function groupPalIds(rows: PalSummary[], ids: string[]): PalIdGroups {
 	for (const id of ids) {
 		const row = rowById.get(id);
 		if (!row) continue;
-		if (row.owner_uid && row.owner_uid !== NIL_OWNER_UID) {
+		if (row.owner_uid) {
 			const group = byOwner.get(row.owner_uid) ?? [];
 			group.push(id);
 			byOwner.set(row.owner_uid, group);

@@ -81,7 +81,7 @@ export type EggConfig = {
 export type Pal = {
 	name: string;
 	instance_id: string;
-	owner_uid: string;
+	owner_uid?: string;
 	character_id: string;
 	character_key: string;
 	is_lucky: boolean;

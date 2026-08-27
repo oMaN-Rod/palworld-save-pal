@@ -171,7 +171,11 @@ pub fn read_save_parameter_dto(
 
     let mut dto = PalDto {
         instance_id,
-        owner_uid: param(save_parameter, "OwnerPlayerUId").and_then(props::as_uuid),
+        // A base worker's OwnerPlayerUId is written as a present nil guid, not omitted,
+        // so nil must report as "no owner" and never as "owned by the nil player".
+        owner_uid: param(save_parameter, "OwnerPlayerUId")
+            .and_then(props::as_uuid)
+            .filter(|uid| *uid != props::EMPTY_UUID),
         character_key,
         is_lucky: Some(is_lucky),
         is_boss: Some(is_boss),
@@ -356,7 +360,9 @@ pub fn pal_summaries(
             .and_then(props::as_str)
             .unwrap_or("")
             .to_string();
-        let owner_uid = param(save_parameter, "OwnerPlayerUId").and_then(props::as_uuid);
+        let owner_uid = param(save_parameter, "OwnerPlayerUId")
+            .and_then(props::as_uuid)
+            .filter(|uid| *uid != props::EMPTY_UUID);
         let owner_name = owner_uid
             .and_then(|uid| session.player_summaries.get(&uid))
             .map(|summary| summary.nickname.clone());

@@ -800,8 +800,8 @@ fn set_slot_count_on_a_container_removed_by_another_write_raises() {
 
 /// A base worker pal PSP itself created carries `OwnerPlayerUId` as the nil guid
 /// rather than omitting it (`pal::add_guild_pal` -> `new_pal_entry(.., EMPTY_UUID, ..)`,
-/// and the same shape `gps.rs` writes for an unowned clone). `pal_routing` hands that
-/// back as `Some(nil)`, which the delete match reads as "owned by a player".
+/// and the same shape `gps.rs` writes for an unowned clone). The summary readers filter
+/// that nil out, so the delete match must route the worker by its base, not its owner.
 fn seed_base_worker(h: &mut support::Harness) -> uuid::Uuid {
     let game_data = support::load_game_data();
     let mut pairs: Vec<(uuid::Uuid, uuid::Uuid)> = {
@@ -828,10 +828,21 @@ fn seed_base_worker(h: &mut support::Harness) -> uuid::Uuid {
         )
         .expect("add_guild_pal succeeds");
         if let Some(dto) = added {
+            let raw_owner = psp_core::domain::world::character_map(&h.session().level)
+                .expect("the character map")
+                .iter()
+                .find(|e| {
+                    psp_core::domain::world::entry_instance_id(e) == Some(dto.instance_id)
+                })
+                .and_then(psp_core::domain::world::entry_save_parameter)
+                .and_then(|save_parameter| {
+                    psp_core::props::get(save_parameter, &["OwnerPlayerUId"])
+                        .and_then(psp_core::props::as_uuid)
+                });
             assert_eq!(
-                dto.owner_uid,
+                raw_owner,
                 Some(uuid::Uuid::nil()),
-                "the seeded worker must carry the nil guid"
+                "the seeded worker's OwnerPlayerUId must be present and nil"
             );
             return dto.instance_id;
         }

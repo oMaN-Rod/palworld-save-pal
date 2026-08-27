@@ -473,11 +473,22 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
     assert_eq!(new_pal.storage_slot, 0);
     assert_eq!(new_pal.storage_id, worker_container_id);
     assert_eq!(
-        new_pal.owner_uid,
-        Some(psp_core::props::EMPTY_UUID),
-        "reproduces base.py's safe_remove-wrong-dict no-op: OwnerPlayerUId \
-         stays present (nil), never actually removed -- see this task's report"
+        new_pal.owner_uid, None,
+        "a base worker has no player owner, whatever the raw key holds"
     );
+    // Reproduces base.py's safe_remove-wrong-dict no-op: OwnerPlayerUId stays present
+    // (nil), never actually removed. Only the raw key can show that -- the dto reports
+    // a nil owner as `None`, exactly as it reports an absent one.
+    let raw_owner = world::character_map(&session.level)
+        .unwrap()
+        .iter()
+        .find(|e| world::entry_instance_id(e) == Some(new_pal.instance_id))
+        .and_then(world::entry_save_parameter)
+        .and_then(|save_parameter| {
+            psp_core::props::get(save_parameter, &["OwnerPlayerUId"])
+                .and_then(psp_core::props::as_uuid)
+        });
+    assert_eq!(raw_owner, Some(psp_core::props::EMPTY_UUID));
     assert!(
         session.caches.character_container_index.is_none(),
         "add_guild_pal must invalidate caches"

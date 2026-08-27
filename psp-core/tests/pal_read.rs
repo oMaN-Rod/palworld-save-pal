@@ -378,3 +378,67 @@ fn read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter() {
     assert!(dto.passive_skills.is_empty());
     assert!(dto.work_suitability.is_empty());
 }
+
+/// `new_pal_entry` writes a base worker's `OwnerPlayerUId` as a present nil guid rather
+/// than omitting the key, so both readers must report nil as "no owner". A real owner
+/// still has to survive, or the filter would just be reporting `None` for everything.
+#[test]
+fn a_present_nil_owner_player_uid_reads_as_no_owner_in_both_readers() {
+    let data = game_data();
+    let real_owner = "99999999-2222-3333-4444-555555555555";
+
+    let mut worker_parameter = Properties::default();
+    worker_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+    worker_parameter.insert(
+        "OwnerPlayerUId",
+        guid_property("00000000-0000-0000-0000-000000000000"),
+    );
+    let worker_id = "11111111-2222-3333-4444-555555555555";
+
+    let mut owned_parameter = Properties::default();
+    owned_parameter.insert("CharacterID", Property::Name("SheepBall".to_string()));
+    owned_parameter.insert("OwnerPlayerUId", guid_property(real_owner));
+    let owned_id = "22222222-2222-3333-4444-555555555555";
+
+    let worker_dto = pal::pal_dto_from_entry(
+        &pal_character_entry(worker_id, worker_parameter.clone()),
+        &data,
+    )
+    .expect("the worker entry reads into a dto");
+    assert_eq!(
+        worker_dto.owner_uid, None,
+        "PalDto must not report the nil guid as an owner"
+    );
+    let owned_dto =
+        pal::pal_dto_from_entry(&pal_character_entry(owned_id, owned_parameter.clone()), &data)
+            .expect("the owned entry reads into a dto");
+    assert_eq!(
+        owned_dto.owner_uid,
+        Some(real_owner.parse().unwrap()),
+        "a real owner must still reach PalDto"
+    );
+
+    let session = session_with_character_map_entries(vec![
+        pal_character_entry(worker_id, worker_parameter),
+        pal_character_entry(owned_id, owned_parameter),
+    ]);
+    let summaries = pal::pal_summaries(&session, &data).unwrap();
+    assert_eq!(2, summaries.len());
+    let worker = summaries
+        .iter()
+        .find(|s| s.instance_id.to_string() == worker_id)
+        .expect("the worker summary");
+    assert_eq!(
+        worker.owner_uid, None,
+        "pal_summaries must not report the nil guid as an owner"
+    );
+    let owned = summaries
+        .iter()
+        .find(|s| s.instance_id.to_string() == owned_id)
+        .expect("the owned summary");
+    assert_eq!(
+        owned.owner_uid,
+        Some(real_owner.parse().unwrap()),
+        "a real owner must still reach PalSummary"
+    );
+}

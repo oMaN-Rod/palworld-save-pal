@@ -531,6 +531,17 @@ mod tests {
         assert_eq!(session.find_first_empty_gps_slot(), Some(0));
     }
 
+    /// The raw key, not `PalDto.owner_uid`: the dto reports a nil owner as `None`, so
+    /// only the property itself distinguishes "written nil" from "never written".
+    fn raw_slot_owner_uid(session: &SaveSession, slot: i32) -> Option<Uuid> {
+        let save = session.gps.save.as_ref()?;
+        let slots = gps_slots(save)?;
+        let StructValue::Struct(slot_props) = slots.get(slot as usize)? else {
+            return None;
+        };
+        props::get(slot_props, &["SaveParameter", "OwnerPlayerUId"]).and_then(props::as_uuid)
+    }
+
     #[test]
     fn add_gps_pal_fills_the_first_empty_slot_and_heals_to_full() {
         let (mut session, data) = gps_fixture_session();
@@ -543,7 +554,8 @@ mod tests {
         assert_eq!(slot, 0);
         assert_eq!(new_pal.character_id, "SheepBall");
         assert_eq!(new_pal.nickname.as_deref(), Some("TestSheep"));
-        assert_eq!(new_pal.owner_uid, Some(props::EMPTY_UUID));
+        assert_eq!(new_pal.owner_uid, None);
+        assert_eq!(raw_slot_owner_uid(&session, slot), Some(props::EMPTY_UUID));
         assert_eq!(new_pal.hp, new_pal.max_hp);
         assert!(new_pal.hp > 0);
         assert_eq!(session.gps_pals().unwrap().len(), 2);
@@ -576,7 +588,12 @@ mod tests {
             .expect("a second empty slot exists");
         assert_ne!(clone_slot, source_slot);
         assert_ne!(clone.instance_id, source.instance_id);
-        assert_eq!(clone.owner_uid, Some(props::EMPTY_UUID));
+        assert_eq!(clone.owner_uid, None);
+        assert_eq!(
+            raw_slot_owner_uid(&session, clone_slot),
+            Some(props::EMPTY_UUID),
+            "the clone's OwnerPlayerUId must be written nil, not left unwritten"
+        );
         assert_eq!(clone.character_id, source.character_id);
         assert_eq!(session.gps_pals().unwrap().len(), 3);
     }
