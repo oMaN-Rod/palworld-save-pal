@@ -51,7 +51,7 @@ export function mapLayerIcon(id: MapLayerId): string {
 
 const ICON_SCALES: Partial<Record<MapLayerId, number>> = {
 	journals: 0.25,
-	kinship_peach: 0.15,
+	kinship_peach: 0.25,
 	ancient_ruins: 0.6,
 };
 

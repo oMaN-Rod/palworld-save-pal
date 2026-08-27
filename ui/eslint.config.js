@@ -28,6 +28,18 @@ export default [
 		}
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/']
+		ignores: [
+			'build/',
+			'.svelte-kit/',
+			'dist/',
+			// Generated: paraglide compiler output (rewritten on every sync/build)
+			'src/paraglide/',
+			// Generated: wasm-pack output
+			'src/lib/wasm/',
+			// Vendored minified Draco decoder (three.js mesh decompression)
+			'static/draco/',
+			// Vendored emscripten build of the Ooz decompressor
+			'vendor/ooz/**/*.mjs'
+		]
 	}
 ];

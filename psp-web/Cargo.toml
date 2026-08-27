@@ -8,7 +8,7 @@ license.workspace = true
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-psp-app = { workspace = true, default-features = false }
+psp-app = { workspace = true }
 psp-core = { workspace = true }
 psp-db = { workspace = true }
 # `AppState` holds `tokio::sync::{watch,mpsc,Mutex}`; these channels/primitives
