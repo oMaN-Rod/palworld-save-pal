@@ -3,7 +3,7 @@
 	import type { IControl } from 'maplibre-gl';
 	import { untrack } from 'svelte';
 	import { getMapContext, type ControlPosition } from '$components/maplibre';
-	import { Accordion, Slider, Switch } from '@skeletonlabs/skeleton-svelte';
+	import { Accordion, Switch } from '@skeletonlabs/skeleton-svelte';
 	import * as m from '$i18n/messages';
 	import { debounce } from '$utils';
 	import {
@@ -18,8 +18,7 @@
 		setStructureColor,
 		structureColors
 	} from './mapColors.svelte';
-	import { Button } from '$components/ui';
-	import type { ValueChangeDetails } from '@zag-js/slider';
+	import { Button, Slider } from '$components/ui';
 	import type { ValueChangeDetails as AccordionValueChangeDetails } from '@zag-js/accordion';
 	import { sliderToScale as palSliderToScale, scaleToSlider as palScaleToSlider } from './palSize';
 	import {
@@ -265,15 +264,28 @@
 		class="border-surface-800 flex items-center justify-between gap-1.5 border-b py-1.5 text-xs whitespace-nowrap"
 	>
 		<span>{label}</span>
-		<Switch {checked} onCheckedChange={() => onchange()} compact classes="h-6 w-6" />
+		<Switch {checked} onCheckedChange={() => onchange()} />
 	</label>
+{/snippet}
+
+{#snippet sizeRow(
+	label: string,
+	percent: number,
+	readout: string,
+	onpercent: (percent: number) => void,
+	min = 0,
+	max = 100
+)}
+	<span>{label}</span>
+	<Slider size="xs" {min} {max} {label} value={percent} onchange={onpercent} />
+	<span class="w-9.5 shrink-0 text-right tabular-nums">{readout}</span>
 {/snippet}
 
 <div
 	bind:this={panel}
 	use:stopMapGesturesAction
 	class={[
-		'absolute top-full right-0 z-10 mt-1 max-h-[min(80vh,620px)] min-w-80 overflow-y-auto rounded bg-(--svlibre-ctrl-bg,#fff) p-2 text-(--svlibre-ctrl-color,#333) shadow-(--svlibre-ctrl-shadow,0_0_0_2px_rgba(0,0,0,0.1))',
+		'absolute top-full right-0 z-10 mt-1 max-h-[min(80vh,620px)] min-w-80 overflow-y-auto rounded bg-surface-900/95 p-2 text-(--svlibre-ctrl-color,#333) shadow-(--svlibre-ctrl-shadow,0_0_0_2px_rgba(0,0,0,0.1))',
 		open ? 'flex flex-col gap-1.5' : 'hidden'
 	]}
 	role="group"
@@ -355,11 +367,10 @@
 								/>
 								<span class="w-[58px] shrink-0">{material}</span>
 								<Slider
-									height="h-1"
-									thumbSize="size-3"
-									value={[opacityPercents[material]]}
-									onValueChange={(e: ValueChangeDetails) =>
-										queueMaterialOpacity(material, Number(e.value[0]))}
+									size="xs"
+									label="{material} opacity"
+									value={opacityPercents[material]}
+									onchange={(percent) => queueMaterialOpacity(material, percent)}
 								/>
 								<span class="w-[34px] shrink-0 text-right tabular-nums"
 									>{opacityPercents[material]}%</span
@@ -367,19 +378,19 @@
 							</div>
 						{/each}
 					</div>
-					<label class="mt-1.5 flex items-center gap-1.5 text-xs whitespace-nowrap">
+					<div class="mt-1.5 flex items-center gap-1.5 text-xs whitespace-nowrap">
 						<span>{m.material_blend()}</span>
 						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[blendPercent]}
-							onValueChange={(e: ValueChangeDetails) => {
-								blendPercent = Number(e.value[0]);
+							size="xs"
+							label={m.material_blend()}
+							value={blendPercent}
+							onchange={(percent) => {
+								blendPercent = percent;
 								flushBlend(blendPercent / 100);
 							}}
 						/>
 						<span class="w-8.5 text-right tabular-nums">{blendPercent}%</span>
-					</label>
+					</div>
 				{/snippet}
 			</Accordion.Item>
 		{/if}
@@ -395,64 +406,46 @@
 			{#snippet panel()}
 				<div class="grid grid-cols-[auto_1fr_auto] items-center gap-1.5">
 					{#if show3d}
-						<span>{m.pal_size()}</span>
-						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[Math.round(palScaleToSlider(palSize) * 100)]}
-							onValueChange={(e: ValueChangeDetails) =>
-								onPalSizeChange(palSliderToScale(Number(e.value[0]) / 100))}
-						/>
-						<span class="w-9.5 shrink-0 text-right tabular-nums">{palSize.toFixed(1)}x</span>
-						<span>{m.fast_travel_size()}</span>
-						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[Math.round(objectScaleToSlider(fastTravelSize) * 100)]}
-							onValueChange={(e: ValueChangeDetails) =>
-								onFastTravelSizeChange(objectSliderToScale(Number(e.value[0]) / 100))}
-						/>
-						<span class="w-9.5 shrink-0 text-right tabular-nums">{fastTravelSize.toFixed(1)}x</span>
-						<span>{m.watchtower_size()}</span>
-						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[Math.round(objectScaleToSlider(watchtowerSize) * 100)]}
-							onValueChange={(e: ValueChangeDetails) =>
-								onWatchtowerSizeChange(objectSliderToScale(Number(e.value[0]) / 100))}
-						/>
-						<span class="w-9.5 shrink-0 text-right tabular-nums">{watchtowerSize.toFixed(1)}x</span>
-						<span>{m.relic_size()}</span>
-						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[Math.round(objectScaleToSlider(relicSize) * 100)]}
-							onValueChange={(e: ValueChangeDetails) =>
-								onRelicSizeChange(objectSliderToScale(Number(e.value[0]) / 100))}
-						/>
-						<span class="w-9.5 shrink-0 text-right tabular-nums">{relicSize.toFixed(1)}x</span>
-						<span>{m.pal_height()}</span>
-						<Slider
-							height="h-1"
-							thumbSize="size-3"
-							value={[palHeight]}
-							max={5000}
-							onValueChange={(e: ValueChangeDetails) => onPalHeightChange(Number(e.value[0]))}
-						/>
-						<span class="w-9.5 shrink-0 text-right tabular-nums"
-							>{Math.round(palHeight / 100)}m</span
-						>
+						{@render sizeRow(
+							m.pal_size(),
+							Math.round(palScaleToSlider(palSize) * 100),
+							`${palSize.toFixed(1)}x`,
+							(percent) => onPalSizeChange(palSliderToScale(percent / 100))
+						)}
+						{@render sizeRow(
+							m.fast_travel_size(),
+							Math.round(objectScaleToSlider(fastTravelSize) * 100),
+							`${fastTravelSize.toFixed(1)}x`,
+							(percent) => onFastTravelSizeChange(objectSliderToScale(percent / 100))
+						)}
+						{@render sizeRow(
+							m.watchtower_size(),
+							Math.round(objectScaleToSlider(watchtowerSize) * 100),
+							`${watchtowerSize.toFixed(1)}x`,
+							(percent) => onWatchtowerSizeChange(objectSliderToScale(percent / 100))
+						)}
+						{@render sizeRow(
+							m.relic_size(),
+							Math.round(objectScaleToSlider(relicSize) * 100),
+							`${relicSize.toFixed(1)}x`,
+							(percent) => onRelicSizeChange(objectSliderToScale(percent / 100))
+						)}
+						{@render sizeRow(
+							m.pal_height(),
+							palHeight,
+							`${Math.round(palHeight / 100)}m`,
+							onPalHeightChange,
+							0,
+							5000
+						)}
 					{/if}
-					<span>{m.map_opacity()}</span>
-					<Slider
-						height="h-1"
-						thumbSize="size-3"
-						min={MAP_OPACITY_MIN * 100}
-						value={[Math.round(mapOpacity * 100)]}
-						onValueChange={(e: ValueChangeDetails) => onMapOpacityChange(Number(e.value[0]) / 100)}
-					/>
-					<span class="w-9.5 shrink-0 text-right tabular-nums">{Math.round(mapOpacity * 100)}%</span
-					>
+					{@render sizeRow(
+						m.map_opacity(),
+						Math.round(mapOpacity * 100),
+						`${Math.round(mapOpacity * 100)}%`,
+						(percent) => onMapOpacityChange(percent / 100),
+						MAP_OPACITY_MIN * 100
+					)}
 				</div>
 			{/snippet}
 		</Accordion.Item>

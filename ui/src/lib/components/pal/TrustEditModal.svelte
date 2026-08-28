@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { Button, Card, Tooltip } from '$components/ui';
+	import { Button, Card, Slider, Tooltip } from '$components/ui';
 	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { type Pal } from '$types';
 	import * as m from '$i18n/messages';
@@ -66,21 +66,18 @@
 		</div>
 
 		<div>
-			<label for="trust-slider" class="text-surface-50/80 mb-1 block text-sm font-medium"
-				>{m.trust_xp()}</label
-			>
-			<input
-				id="trust-slider"
-				type="range"
+			<span class="text-surface-50/80 mb-1 block text-sm font-medium">{m.trust_xp()}</span>
+			<Slider
+				value={currentTrust}
 				min={minTrust}
 				max={maxTrust}
-				step="1"
-				value={currentTrust}
-				oninput={(e) => updateTrust(+(e.target as HTMLInputElement).value)}
+				color="tertiary"
+				showSteppers={false}
+				label={m.trust_xp()}
+				onchange={updateTrust}
 			/>
 			<div class="text-surface-50/70 mt-2 flex justify-between text-sm">
 				<span>{minTrust}</span>
-				<span class="text-surface-50 font-semibold">{currentTrust}</span>
 				<span>{maxTrust}</span>
 			</div>
 		</div>
@@ -110,42 +107,3 @@
 		</Tooltip>
 	</div>
 </Card>
-
-<style>
-	input[type='range'] {
-		appearance: none;
-		-webkit-appearance: none;
-		width: 100%;
-		height: 6px;
-		background: var(--color-surface-700);
-		border-radius: 3px;
-		outline: none;
-	}
-
-	input[type='range']::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		appearance: none;
-		width: 16px;
-		height: 16px;
-		border-radius: 9999px;
-		background: var(--color-tertiary-400);
-		border: 2px solid var(--color-surface-50);
-		cursor: pointer;
-		transition: transform 0.2s ease;
-	}
-
-	input[type='range']::-moz-range-thumb {
-		width: 16px;
-		height: 16px;
-		border-radius: 9999px;
-		background: var(--color-tertiary-400);
-		border: 2px solid var(--color-surface-50);
-		cursor: pointer;
-		transition: transform 0.2s ease;
-	}
-
-	input[type='range']::-webkit-slider-thumb:hover,
-	input[type='range']::-moz-range-thumb:hover {
-		transform: scale(1.1);
-	}
-</style>

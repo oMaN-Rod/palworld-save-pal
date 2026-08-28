@@ -1,9 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { Button, Card, Input, Tooltip } from '$components/ui';
-	import { Slider } from '@skeletonlabs/skeleton-svelte';
-	import type { ValueChangeDetails } from '@zag-js/slider';
-	import { onMount } from 'svelte';
+	import { Button, Card, Input, Slider, Tooltip } from '$components/ui';
+	import { onMount, untrack } from 'svelte';
 	import { focusModal } from '$utils/modalUtils';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -26,7 +24,7 @@
 		closeModal: (value: any) => void;
 	}>();
 
-	let sliderValue: number[] = $state([value]);
+	let sliderValue: number = $state(untrack(() => value));
 	let modalContainer: HTMLDivElement;
 
 	// Derives roughly ten evenly spaced marks inside [min, max] when the caller doesn't pass explicit markers,
@@ -47,7 +45,7 @@
 			return;
 		}
 		// Clearing the number input yields NaN, which would sail straight through Math.min/Math.max.
-		const raw = sliderValue[0];
+		const raw = sliderValue;
 		const value = typeof raw === 'number' && Number.isFinite(raw) ? raw : min;
 		closeModal(Math.min(Math.max(value, min), max));
 	}
@@ -64,18 +62,15 @@
 		<div class="mt-2 flex flex-col items-center space-x-2">
 			<div class="flex w-full items-center">
 				<Slider
-					classes="w-10/12 mr-2"
-					value={sliderValue}
+					class="mr-2 w-10/12"
+					bind:value={sliderValue}
 					{min}
 					{max}
-					markers={sliderMarkers}
 					{step}
-					height="h-2"
-					meterBg="bg-secondary-500"
-					thumbRingColor="ring-secondary-500"
-					onValueChange={(e: ValueChangeDetails) => (sliderValue[0] = e.value[0])}
+					markers={sliderMarkers}
+					label={title}
 				/>
-				<Input labelClass="w-2/12" type="number" bind:value={sliderValue[0]} {min} {max} />
+				<Input labelClass="w-2/12" type="number" bind:value={sliderValue} {min} {max} />
 			</div>
 			<div class="flex w-full justify-end">
 				<Tooltip position="bottom">

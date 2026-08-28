@@ -13,6 +13,7 @@ import Popover from './popover/Popover.svelte';
 import Progress from './progress/Progress.svelte';
 import SectionHeader from './section-header/SectionHeader.svelte';
 import Select from './select/Select.svelte';
+import Slider from './slider/Slider.svelte';
 import TooltipButton from './tooltip-button/TooltipButton.svelte';
 import Tooltip from './tooltip/Tooltip.svelte';
 import Modal from './modal/Modal.svelte';
@@ -41,6 +42,7 @@ export {
 	Progress,
 	SectionHeader,
 	Select,
+	Slider,
 	Modal,
 	PalEditorOverlay,
 	ResizeWarning,

@@ -5,6 +5,7 @@
 	import type { TreeNode } from '$lib/breeding/dendrogram/types';
 	import type { LayoutMode } from '$lib/breeding/dendrogram/layouts';
 	import ChainDendrogram from './ChainDendrogram.svelte';
+	import { Slider } from '$components/ui';
 
 	let {
 		trees,
@@ -64,7 +65,7 @@
 			{#if totalTrees > 0}
 				<div class="mr-1 flex items-center gap-0.5">
 					<button
-						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+						class="btn btn-secondary text-surface-400 hover:text-surface-50 rounded-sm p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={prev}
 						disabled={activeIndex <= 0}
 						title={m.breeding_previous()}
@@ -75,7 +76,7 @@
 						{totalTrees > 0 ? `${activeIndex + 1}/${totalTrees}` : '0/0'}
 					</span>
 					<button
-						class="btn btn-secondary rounded-sm text-surface-400 hover:text-surface-50 p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+						class="btn btn-secondary text-surface-400 hover:text-surface-50 rounded-sm p-1 transition-colors disabled:cursor-not-allowed disabled:opacity-30"
 						onclick={next}
 						disabled={activeIndex >= totalTrees - 1}
 						title={m.breeding_next()}
@@ -112,7 +113,7 @@
 		</div>
 
 		<div class="flex shrink-0 items-center gap-1.5">
-			<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
+			<div class="bg-surface-950/50 border-surface-700/30 flex gap-0.5 rounded-sm border p-0.5">
 				{#each VIEWS as view (view.mode)}
 					<button
 						class="rounded-sm p-1 transition-all {viewMode === view.mode
@@ -128,7 +129,7 @@
 			</div>
 
 			{#if chains.length > 0 && maxDepth !== undefined && maxDepth > 1}
-				<div class="rounded-sm bg-surface-950/50 border-surface-700/30 flex gap-0.5 border p-0.5">
+				<div class="bg-surface-950/50 border-surface-700/30 flex gap-0.5 rounded-sm border p-0.5">
 					<button
 						class="rounded-sm px-1.5 py-0.5 text-xs font-medium transition-all {graphLayout ===
 						'all-in-one'
@@ -150,18 +151,19 @@
 				{#if graphLayout === 'per-gen'}
 					<div class="flex items-center gap-1">
 						<span class="text-surface-400 text-[10px] whitespace-nowrap">{m.breeding_gen()}</span>
-						<input
-							type="range"
-							min="1"
+						<Slider
+							class="w-16"
+							size="xs"
+							color="primary"
+							min={1}
 							max={maxDepth}
-							class="accent-primary-500 h-1 w-16 cursor-pointer"
 							value={currentGen}
-							oninput={(e) =>
-								oncurrentGenChange?.(parseInt((e.currentTarget as HTMLInputElement).value) || 1)}
+							label={m.breeding_gen()}
+							onchange={(gen) => oncurrentGenChange?.(gen)}
 						/>
-						<span class="text-surface-50 w-4 text-right font-mono text-xs tabular-nums"
-							>{currentGen}</span
-						>
+						<span class="text-surface-50 w-4 text-right font-mono text-xs tabular-nums">
+							{currentGen}
+						</span>
 					</div>
 				{/if}
 			{/if}
