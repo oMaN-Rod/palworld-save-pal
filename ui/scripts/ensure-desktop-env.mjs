@@ -11,6 +11,8 @@ import { fileURLToPath } from 'node:url';
 
 export const DESKTOP_ENV = 'PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true\n';
 
+export const ENV_PATH = join(dirname(dirname(fileURLToPath(import.meta.url))), '.env');
+
 function parseEnv(contents) {
 	const vars = {};
 	for (const line of contents.split('\n')) {
@@ -35,9 +37,26 @@ export function desktopEnvNeedsWrite(existing, { force = false } = {}) {
 	return vars.PUBLIC_DESKTOP_MODE !== 'true' || !vars.PUBLIC_WS_URL;
 }
 
+/**
+ * The build target, read from the same ui/.env that `$env/static/public` serves
+ * to the app. A missing file means web, so a fresh clone still produces the full
+ * SEO output rather than silently shipping a desktop-shaped build.
+ *
+ * @param {string | null} contents contents of ui/.env, or null when absent
+ */
+export function isDesktopEnv(contents) {
+	if (contents === null) return false;
+	return parseEnv(contents).PUBLIC_DESKTOP_MODE === 'true';
+}
+
+/** @param {string} [envPath] */
+export function readIsDesktopBuild(envPath = ENV_PATH) {
+	return isDesktopEnv(existsSync(envPath) ? readFileSync(envPath, 'utf8') : null);
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
 	const force = process.argv.includes('--force');
-	const envPath = join(dirname(dirname(fileURLToPath(import.meta.url))), '.env');
+	const envPath = ENV_PATH;
 	const existing = existsSync(envPath) ? readFileSync(envPath, 'utf8') : null;
 
 	if (desktopEnvNeedsWrite(existing, { force })) {

@@ -10,9 +10,7 @@ export const load: LayoutLoad = ({ url }) => {
 	// Runs in Node during prerender for routes that opt into SSR, where there is
 	// nothing to navigate.
 	if (!browser) return;
+
 	const path = url.searchParams.get('path');
-	if (path) {
-		const decodedPath = decodeURIComponent(path);
-		goto(`${resolve('/')}${decodedPath}`);
-	}
+	if (path) goto(`${resolve('/')}${path.replace(/^\/+/, '')}`);
 };

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DESKTOP_ENV, desktopEnvNeedsWrite } from './ensure-desktop-env.mjs';
+import { DESKTOP_ENV, desktopEnvNeedsWrite, isDesktopEnv } from './ensure-desktop-env.mjs';
 
 const WEB_ENV = 'PUBLIC_WS_URL=\nPUBLIC_DESKTOP_MODE=false\n';
 
@@ -31,5 +31,23 @@ describe('desktopEnvNeedsWrite', () => {
 
 	it('overwrites unconditionally when forced', () => {
 		expect(desktopEnvNeedsWrite(DESKTOP_ENV, { force: true })).toBe(true);
+	});
+});
+
+describe('isDesktopEnv', () => {
+	it('recognizes the desktop env', () => {
+		expect(isDesktopEnv(DESKTOP_ENV)).toBe(true);
+	});
+
+	it('recognizes the web env', () => {
+		expect(isDesktopEnv(WEB_ENV)).toBe(false);
+	});
+
+	it('treats a missing env as a web build, so a fresh clone still gets full SEO output', () => {
+		expect(isDesktopEnv(null)).toBe(false);
+	});
+
+	it('ignores comments and blank lines', () => {
+		expect(isDesktopEnv('# desktop\n\nPUBLIC_DESKTOP_MODE=true\n')).toBe(true);
 	});
 });

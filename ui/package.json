@@ -11,7 +11,7 @@
 		"dev:wasm": "node scripts/ensure-web-env.mjs && node ../scripts/gen-json-manifest.mjs && cross-env VITE_TRANSPORT=worker vite dev",
 		"build:wasm": "cd ../psp-web && wasm-pack build --target web --out-name psp --out-dir ../ui/src/lib/wasm/psp",
 		"build": "node scripts/generate-sitemap.mjs && vite build",
-		"build:desktop": "node scripts/ensure-desktop-env.mjs --force && vite build",
+		"build:desktop": "node scripts/ensure-desktop-env.mjs --force && vite build && node scripts/prune-desktop-build.mjs",
 		"build:web": "node scripts/ensure-web-env.mjs && node ../scripts/gen-json-manifest.mjs && cd ../psp-web && wasm-pack build --target web --out-name psp --out-dir ../ui/src/lib/wasm/psp && cd ../ui && node scripts/generate-sitemap.mjs && cross-env VITE_TRANSPORT=worker vite build",
 		"verify:build": "node scripts/check-build-output.mjs",
 		"generate:sitemap": "node scripts/generate-sitemap.mjs",

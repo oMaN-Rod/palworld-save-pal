@@ -13,7 +13,7 @@
       "cwd": "../ui"
     },
     "devUrl": "http://localhost:5173",
-    "frontendDist": "../ui_build"
+    "frontendDist": "http://127.0.0.1:5174"
   },
   "app": {
     "windows": [],

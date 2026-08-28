@@ -30,7 +30,7 @@
 
 	if (browser) {
 		if (desktop) {
-			if (!appState.saveFile) goto('/file');
+			if (!appState.saveFile) goto('/overview');
 		} else if (appState.saveFile) {
 			goto('/edit');
 		} else if (isWebBuild) {

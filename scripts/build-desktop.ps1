@@ -16,10 +16,6 @@ if (-not (Get-Command "cargo-tauri" -ErrorAction SilentlyContinue) -and
 $version = (Select-String -Path "Cargo.toml" -Pattern '^version = "([^"]*)"').Matches[0].Groups[1].Value
 Write-Host "Building Palworld Save Pal desktop v$version (windows)"
 
-if (-not $SkipUi) {
-    & (Join-Path $PSScriptRoot "build-ui-desktop.ps1")
-}
-
 Push-Location "psp-desktop"
 try {
     cargo tauri build --bundles msi

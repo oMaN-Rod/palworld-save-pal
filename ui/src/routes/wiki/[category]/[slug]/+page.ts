@@ -1,11 +1,12 @@
 import { error } from '@sveltejs/kit';
+import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 import { descriptorFor } from '$lib/utils/wikiDescriptors';
 import { WIKI_CATEGORIES, type WikiCategory } from '$lib/utils/wikiCategories';
 import { loadEntitySeo } from '$lib/utils/wikiL10n';
 import { isDisabledRecord, stripKeyPrefix, toSlug } from '$lib/utils/wikiSlug';
 
 export const ssr = true;
-export const prerender = true;
+export const prerender = PUBLIC_DESKTOP_MODE !== 'true';
 
 const CATEGORIES = WIKI_CATEGORIES.map((category) => category.id).filter(
 	(id) => id !== 'pals'
