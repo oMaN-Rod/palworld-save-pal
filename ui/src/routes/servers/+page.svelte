@@ -92,7 +92,7 @@
 <div class="flex h-full min-h-screen w-full gap-4 p-4">
 	<div class="flex w-80 shrink-0 flex-col gap-4">
 		<div class="flex items-center justify-between">
-			<h2 class="text-primary-400 text-xl font-bold">Servers</h2>
+			<h2 class="heading-gradient text-xl font-bold">Servers</h2>
 			<div class="flex items-center gap-2">
 				<Button
 					variant="secondary"

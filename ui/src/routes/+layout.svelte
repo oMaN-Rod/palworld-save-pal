@@ -139,7 +139,7 @@
 	{#if cornerArt.current && !isLandingPath(page.url.pathname)}
 		<div
 			class="pointer-events-none fixed inset-0 z-0"
-			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.5;"
+			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.1;"
 			aria-hidden="true"
 		></div>
 	{/if}
