@@ -5,7 +5,7 @@ import type { WSMessageHandler } from '../types';
 type ExportFile = { name: string; content: string };
 type ExportResult = { message: string; file_path: string };
 
-function browserDownload(name: string, base64: string): void {
+export function browserDownload(name: string, base64: string): void {
 	const binary = atob(base64);
 	const bytes = new Uint8Array(binary.length);
 	for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);

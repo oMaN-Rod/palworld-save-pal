@@ -65,19 +65,14 @@
 		send(MessageType.RENAME_WORLD, result);
 	}
 
+	// The backend owns the write: on desktop it picks a path and saves the file
+	// itself, because the webview ignores <a download>. Web mode still gets a
+	// browser download, just routed through the same export frame.
 	function exportJson() {
 		if (!overviewState.stats) return;
 		const world = appState.saveFile?.world_name ?? 'world';
 		const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-		const blob = new Blob([JSON.stringify(overviewState.stats, null, 2)], {
-			type: 'application/json'
-		});
-		const url = URL.createObjectURL(blob);
-		const anchor = document.createElement('a');
-		anchor.href = url;
-		anchor.download = `overview_${world}_${stamp}.json`;
-		anchor.click();
-		URL.revokeObjectURL(url);
+		send(MessageType.EXPORT_OVERVIEW_STATS, { file_name: `overview_${world}_${stamp}.json` });
 	}
 
 	async function handleDownloadSaveFile() {
@@ -162,10 +157,17 @@
 								{m.overview_edit_world_options()}
 							</Button>
 						{/if}
-						<Button variant="outline" size="sm" onclick={handleDownloadSaveFile}>
-							<Icon icon="tabler:download" size={14} />
-							{m.download()}
-						</Button>
+						{#if isDesktopMode}
+							<Button variant="outline" size="sm" onclick={() => appState.writeSave()}>
+								<Icon icon="tabler:device-floppy" size={14} />
+								{c.save}
+							</Button>
+						{:else}
+							<Button variant="outline" size="sm" onclick={handleDownloadSaveFile}>
+								<Icon icon="tabler:download" size={14} />
+								{m.download()}
+							</Button>
+						{/if}
 						<Button variant="outline" size="sm" onclick={exportJson} disabled={!stats}>
 							<Icon icon="tabler:braces" size={14} />
 							{m.overview_export_json()}

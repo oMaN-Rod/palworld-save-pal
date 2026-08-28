@@ -111,6 +111,7 @@ export enum MessageType {
 	GET_GUILD_SUMMARIES = 'get_guild_summaries',
 	GET_PAL_SUMMARIES = 'get_pal_summaries',
 	GET_OVERVIEW_STATS = 'get_overview_stats',
+	EXPORT_OVERVIEW_STATS = 'export_overview_stats',
 	REQUEST_PLAYER_DETAILS = 'request_player_details',
 	GET_PLAYER_DETAILS_RESPONSE = 'get_player_details_response',
 	REQUEST_GUILD_DETAILS = 'request_guild_details',
