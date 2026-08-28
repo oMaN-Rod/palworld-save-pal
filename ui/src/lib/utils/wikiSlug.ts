@@ -32,14 +32,22 @@ export function stripKeyPrefix(key: string): string {
 
 // Lives here rather than alongside the descriptors so build-time route modules
 // can filter without importing the runtime data stores.
-export function isDisabledRecord(record: unknown): boolean {
+//
+// Two distinct reasons a record has no wiki entry of its own:
+//   `disabled`    - the parser could not resolve the record (a missing icon row, a placeholder
+//                   name), so there is nothing to show.
+//   `redirect_to` - the game retires this id onto a surviving one when it loads a save. The
+//                   two share a name and a stat block, so listing both is a duplicate whose
+//                   page describes the survivor anyway.
+// Only retired ids carry `redirect_to`; the rarity variants of an item (ClothArmor_2..5 and
+// the rest) are live rows with pages of their own.
+export function isHiddenRecord(record: unknown): boolean {
 	if (!record || typeof record !== 'object') return false;
 	const value = record as Record<string, unknown>;
-	if (value.disabled === true) return true;
+	if (value.disabled === true || typeof value.redirect_to === 'string') return true;
 	const details = value.details;
-	return (
-		!!details &&
-		typeof details === 'object' &&
-		(details as Record<string, unknown>).disabled === true
-	);
+	if (!details || typeof details !== 'object') return false;
+	const detail = details as Record<string, unknown>;
+	return detail.disabled === true || typeof detail.redirect_to === 'string';
 }
+

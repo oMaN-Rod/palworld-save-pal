@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle, ElementExplorer, PassiveSkillExplorer, WorkSuitabilityExplorer } from '$components/docs';
 	import { Seo, breadcrumbSchema, itemListSchema } from '$lib/components/seo';
-	import { descriptorFor, isDisabledRecord } from '$lib/utils/wikiDescriptors';
+	import { descriptorFor, isHiddenRecord } from '$lib/utils/wikiDescriptors';
 	import { categoryLabel, categoryLabelPlural, entityLink, type WikiCategory } from '$lib/utils/wikiCategories';
 	import { wikiPrefs } from '$lib/utils/wikiPrefs.svelte';
 
@@ -14,7 +14,7 @@
 	const descriptor = $derived(descriptorFor(data.category));
 	const allEntries = $derived(
 		(Object.entries(descriptor.runtime()) as [string, Record<string, unknown>][]).filter(
-			([, record]) => !isDisabledRecord(record)
+			([, record]) => !isHiddenRecord(record)
 		)
 	);
 

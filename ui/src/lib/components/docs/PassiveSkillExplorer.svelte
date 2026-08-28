@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { passiveSkillsData } from '$lib/data';
 	import { groupPassiveFamilies, type PassiveFamily, type PassiveMember } from '$lib/utils/passiveFamilies';
-	import { isDisabledRecord } from '$lib/utils/wikiSlug';
+	import { isHiddenRecord } from '$lib/utils/wikiSlug';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { skillBorderClass, skillFilter } from '$utils/colors';
@@ -13,7 +13,7 @@
 
 	const allEntries = $derived(
 		Object.entries(passiveSkillsData.passiveSkills).filter(([, record]) =>
-			!isDisabledRecord(record)
+			!isHiddenRecord(record)
 		)
 	);
 

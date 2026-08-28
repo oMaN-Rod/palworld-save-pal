@@ -1,6 +1,6 @@
 import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 import { loadEntitySeo } from '$lib/utils/wikiL10n';
-import { isDisabledRecord, toSlug } from '$lib/utils/wikiSlug';
+import { isHiddenRecord, toSlug } from '$lib/utils/wikiSlug';
 
 export const ssr = true;
 export const prerender = PUBLIC_DESKTOP_MODE !== 'true';
@@ -8,7 +8,7 @@ export const prerender = PUBLIC_DESKTOP_MODE !== 'true';
 export async function entries() {
 	const palsJson = (await import('../../../../../../data/json/pals.json')).default;
 	return Object.entries(palsJson as Record<string, unknown>)
-		.filter(([, record]) => !isDisabledRecord(record))
+		.filter(([, record]) => !isHiddenRecord(record))
 		.map(([key]) => ({ slug: toSlug(key) }));
 }
 

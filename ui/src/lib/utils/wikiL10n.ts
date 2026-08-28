@@ -1,5 +1,5 @@
 import type { WikiCategory } from './wikiCategories';
-import { isDisabledRecord, stripKeyPrefix, toSlug } from './wikiSlug';
+import { isHiddenRecord, stripKeyPrefix, toSlug } from './wikiSlug';
 
 export type EntitySeo = { key: string; name: string; description: string | null };
 
@@ -52,7 +52,7 @@ function cached<T>(
 async function enabledKeys(category: WikiCategory): Promise<string[]> {
 	const json = await cached(rawCache, RAW_LOADERS, category);
 	return Object.entries(json)
-		.filter(([, record]) => !isDisabledRecord(record))
+		.filter(([, record]) => !isHiddenRecord(record))
 		.map(([key]) => key);
 }
 

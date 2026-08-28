@@ -1,6 +1,6 @@
 import { ASSET_DATA_PATH } from '$lib/constants';
 import { itemsData, palsData } from '$lib/data';
-import { Rarity, type Item } from '$types';
+import { ItemTypeA, Rarity, type Item } from '$types';
 import { staticIcons } from '$types/icons';
 import { assetLoader } from '$utils';
 
@@ -59,4 +59,13 @@ export function getPalIcon(palId: string): string {
 	if (!palId) return staticIcons.unknownIcon;
 	const palData = palsData.getByKey(palId);
 	return assetLoader.loadMenuImage(palId, palData?.is_pal ?? true);
+}
+
+export function isSelectableItem(item: Item): boolean {
+	return (
+		item.details.type_a !== ItemTypeA.None &&
+		item.details.type_a !== ItemTypeA.MonsterEquipWeapon &&
+		!item.details.disabled &&
+		!item.details.redirect_to
+	);
 }

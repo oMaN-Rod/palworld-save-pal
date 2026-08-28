@@ -22,7 +22,7 @@
 	import { focusModal } from '$utils/modalUtils';
 	import { onMount } from 'svelte';
 	import EggConfigSection from './EggConfigSection.svelte';
-	import { getItemIcon, getItemTier, getBackgroundColor } from './itemUtils';
+	import { getItemIcon, getItemTier, getBackgroundColor, isSelectableItem } from './itemUtils';
 
 	let {
 		title = '',
@@ -99,11 +99,7 @@
 
 	const items: Item[] = $derived.by(() => {
 		return Object.values(itemsData.items).filter((item) => {
-			if (
-				item.details.type_a == ItemTypeA.None ||
-				item.details.type_a == ItemTypeA.MonsterEquipWeapon ||
-				item.details.disabled
-			) {
+			if (!isSelectableItem(item)) {
 				return false;
 			}
 			switch (group as ItemGroup) {

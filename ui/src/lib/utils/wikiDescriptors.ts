@@ -103,7 +103,7 @@ function iconField(...path: string[]) {
 		assetIcon(get(record, ...path));
 }
 
-export { isDisabledRecord } from './wikiSlug';
+export { isHiddenRecord } from './wikiSlug';
 
 function palIcon(key: string, pal: PalData): WikiIcon | null {
 	const src = assetLoader.loadPalImage(key, pal.is_pal ?? true);
