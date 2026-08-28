@@ -510,12 +510,6 @@ impl SaveSession {
         Ok(())
     }
 
-    /// ROOT properties, one level above `worldSaveData`:
-    /// `props::swap_uuid_values_deep` must walk the whole root.
-    pub fn level_properties_mut(&mut self) -> &mut crate::ue::Properties {
-        &mut self.level.root.properties
-    }
-
     pub fn swap_player_gvas_uids(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         fn set_player_uid(sav: &mut crate::ue::Save, new_uid: uuid::Uuid) {
             let Ok(save_data) = crate::domain::player::save_data_props_mut(sav) else {
@@ -536,9 +530,9 @@ impl SaveSession {
         }
     }
 
-    /// Runs only when BOTH uids have a loaded GVAS and a file reference.
-    /// Note the asymmetry: the two `.sav` trees trade places, but each uid KEEPS its
-    /// own original `_dps.sav` companion.
+    /// Runs only when BOTH uids have a loaded GVAS and a file reference. A player's
+    /// `_dps.sav` holds pals their `.sav` alone does not account for, so it travels with
+    /// the `.sav` rather than staying behind with the uid.
     pub fn swap_player_file_refs(&mut self, first: uuid::Uuid, second: uuid::Uuid) {
         if let (Some(first_loaded), Some(second_loaded)) = (
             self.loaded_players.remove(&first),
@@ -549,7 +543,7 @@ impl SaveSession {
                 LoadedPlayer {
                     uid: first,
                     sav: second_loaded.sav,
-                    dps: first_loaded.dps,
+                    dps: second_loaded.dps,
                 },
             );
             self.loaded_players.insert(
@@ -557,7 +551,7 @@ impl SaveSession {
                 LoadedPlayer {
                     uid: second,
                     sav: first_loaded.sav,
-                    dps: second_loaded.dps,
+                    dps: first_loaded.dps,
                 },
             );
         }
