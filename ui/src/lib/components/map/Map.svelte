@@ -302,7 +302,7 @@
 				y: point.y,
 				z: point.z,
 				relic_type: point.relic_type,
-				localized_name: relicData.relicData[point.relic_type]?.localized_name ?? point.relic_type,
+				localized_name: relicData.relics[point.relic_type]?.localized_name ?? point.relic_type,
 				unlocked: selectedPlayer
 					? (collectedRelicGuids[point.relic_type]?.has(guid.toUpperCase()) ?? false)
 					: undefined

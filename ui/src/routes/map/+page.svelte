@@ -259,7 +259,7 @@
 		computeRelicTypeStats(relics.points, activeArea, appState.selectedPlayer ?? undefined)
 	);
 	const relicTypeList = $derived(
-		orderedRelicTypes(relicTypeStats, Object.keys(relicData.relicData))
+		orderedRelicTypes(relicTypeStats, Object.keys(relicData.relics))
 	);
 	const relicCount = $derived(
 		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)

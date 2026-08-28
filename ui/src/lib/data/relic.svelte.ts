@@ -15,13 +15,13 @@ export interface RelicRankData {
 class RelicDataHandler {
 	private loading: boolean = false;
 
-	relicData: Record<string, RelicRankData> = $state({});
+	relics: Record<string, RelicRankData> = $state({});
 
 	private async ensureLoaded(): Promise<void> {
-		if (Object.keys(this.relicData).length === 0 && !this.loading) {
+		if (Object.keys(this.relics).length === 0 && !this.loading) {
 			try {
 				this.loading = true;
-				this.relicData = await sendAndWait(MessageType.GET_RELIC_DATA);
+				this.relics = await sendAndWait(MessageType.GET_RELIC_DATA);
 				this.loading = false;
 			} catch (error) {
 				this.loading = false;
@@ -37,11 +37,11 @@ class RelicDataHandler {
 
 	async getRelicData(): Promise<Record<string, RelicRankData>> {
 		await this.ensureLoaded();
-		return this.relicData;
+		return this.relics;
 	}
 
 	async reset(): Promise<void> {
-		this.relicData = {};
+		this.relics = {};
 		await this.ensureLoaded();
 	}
 }

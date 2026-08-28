@@ -49,11 +49,11 @@
 				>
 					<img
 						src={relicTypeIcon(relicType)}
-						alt={relicData.relicData[relicType]?.localized_name ?? relicType}
+						alt={relicData.relics[relicType]?.localized_name ?? relicType}
 						class="mr-1 h-5 w-5"
 					/>
 					<span class="truncate text-xs">
-						{relicData.relicData[relicType]?.localized_name ?? relicType}
+						{relicData.relics[relicType]?.localized_name ?? relicType}
 					</span>
 					<span class="text-surface-500 text-xs">
 						{showCollected ? `${entry.collected ?? 0}/${entry.total}` : entry.total}
