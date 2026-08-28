@@ -1,3 +1,4 @@
+import { baseName, saveRoot, underSaveRoot } from '$lib/utils/saveRoot';
 import { unzipSync, unzlibSync, zipSync } from 'fflate';
 import { initOoz, oozCompress, oozCompressSync, oozDecompress, oozDecompressSync } from './ooz';
 import type { SavHeader } from './savframe';
@@ -61,33 +62,35 @@ function uidFromStem(stem: string): string {
 export async function stageSavZip(zipBytes: Uint8Array, stage: StageFn): Promise<string> {
 	const files = unzipSync(zipBytes);
 	const names = Object.keys(files);
-	const levelName = names.find((n) => n.endsWith('Level.sav'));
-	if (!levelName) throw new Error("Zip does not contain 'Level.sav'");
+	const root = saveRoot(names);
+	if (root === null) throw new Error("Zip does not contain 'Level.sav'");
+	const own = names.filter((n) => n.toLowerCase().endsWith('.sav') && underSaveRoot(n, root));
 
 	const hand = async (name: string, slot: GvasSlot, uid = '') => {
 		const gvas = await savToGvas(files[name]);
 		delete files[name];
 		stage(slot, uid, gvas);
 	};
+	const named = (base: string) => own.find((n) => baseName(n) === base);
 
-	await hand(levelName, 'level');
-	const metaName = names.find((n) => n.endsWith('LevelMeta.sav'));
+	await hand(named('level.sav')!, 'level');
+	const metaName = named('levelmeta.sav');
 	if (metaName) await hand(metaName, 'level_meta');
-	const woName = names.find((n) => n.endsWith('WorldOption.sav'));
+	const woName = named('worldoption.sav');
 	if (woName) await hand(woName, 'world_option');
 
-	for (const n of names) {
-		if (!n.includes('Players') || !n.endsWith('.sav')) continue;
+	for (const n of own) {
+		if (!n.slice(root.length).toLowerCase().startsWith('players/')) continue;
 		const stem = n
 			.split('/')
 			.pop()!
-			.replace(/\.sav$/, '');
-		const isDps = stem.endsWith('_dps');
+			.replace(/\.sav$/i, '');
+		const isDps = stem.toLowerCase().endsWith('_dps');
 		const uid = uidFromStem(isDps ? stem.slice(0, -4) : stem);
 		await hand(n, isDps ? 'player_dps' : 'player_sav', uid);
 	}
 
-	return levelName.includes('/') ? levelName.split('/')[0] : 'save';
+	return root === '' ? 'save' : root.split('/')[0];
 }
 
 export async function gvasFilesToSavZip(

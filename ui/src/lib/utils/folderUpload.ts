@@ -1,4 +1,5 @@
 import { zipSync } from 'fflate';
+import { saveRoot, underSaveRoot } from './saveRoot';
 
 export interface ZipEntry {
 	path: string;
@@ -9,14 +10,28 @@ function isSaveFile(path: string): boolean {
 	return path.toLowerCase().endsWith('.sav');
 }
 
-export async function readInputFolder(fileList: FileList): Promise<ZipEntry[]> {
+/**
+ * Bytes are read only for the files the save itself owns — a backup tree next
+ * to it can be as large as the save again, and none of it is ever loaded.
+ */
+async function readOwnFiles(found: { path: string; file: File }[]): Promise<ZipEntry[]> {
+	const root = saveRoot(found.map((f) => f.path));
+	const own = root === null ? found : found.filter((f) => underSaveRoot(f.path, root));
 	const entries: ZipEntry[] = [];
-	for (const file of Array.from(fileList)) {
-		const path = (file as File & { webkitRelativePath?: string }).webkitRelativePath || file.name;
-		if (!isSaveFile(path)) continue;
+	for (const { path, file } of own) {
 		entries.push({ path, data: new Uint8Array(await file.arrayBuffer()) });
 	}
 	return entries;
+}
+
+export async function readInputFolder(fileList: FileList): Promise<ZipEntry[]> {
+	const found = Array.from(fileList)
+		.map((file) => ({
+			path: (file as File & { webkitRelativePath?: string }).webkitRelativePath || file.name,
+			file
+		}))
+		.filter(({ path }) => isSaveFile(path));
+	return readOwnFiles(found);
 }
 
 interface FsEntry {
@@ -38,12 +53,12 @@ export async function readDroppedItems(items: DataTransferItemList): Promise<Zip
 		if (entry) roots.push(entry);
 	}
 
-	const out: ZipEntry[] = [];
+	const found: { path: string; file: File }[] = [];
 	async function walk(entry: FsEntry, prefix: string): Promise<void> {
 		if (entry.isFile && entry.file) {
-			const file = await new Promise<File>((res, rej) => entry.file!(res, rej));
 			const path = `${prefix}${entry.name}`;
-			if (isSaveFile(path)) out.push({ path, data: new Uint8Array(await file.arrayBuffer()) });
+			if (!isSaveFile(path)) return;
+			found.push({ path, file: await new Promise<File>((res, rej) => entry.file!(res, rej)) });
 		} else if (entry.isDirectory && entry.createReader) {
 			const reader = entry.createReader();
 			let batch: FsEntry[];
@@ -54,7 +69,7 @@ export async function readDroppedItems(items: DataTransferItemList): Promise<Zip
 		}
 	}
 	for (const root of roots) await walk(root, '');
-	return out;
+	return readOwnFiles(found);
 }
 
 export function zipEntries(entries: ZipEntry[]): Uint8Array {

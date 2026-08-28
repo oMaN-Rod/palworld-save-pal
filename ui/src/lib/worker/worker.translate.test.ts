@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { unzipSync, zipSync } from 'fflate';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { unzipSync, zipSync } from 'fflate';
-import { stageSavZip, gvasFilesToSavZip, type GvasSlot } from './psp.worker';
+import { describe, expect, it } from 'vitest';
+import { gvasFilesToSavZip, savToGvas, stageSavZip, type GvasSlot } from './psp.worker';
 
 const root = resolve(__dirname, '..', '..', '..', '..');
 const fixture = (name: string) =>
@@ -56,6 +56,33 @@ describe('worker staging', () => {
 			new Set(['43797f87-0000-0000-0000-000000000000'])
 		);
 		expect(players.map((s) => s.slot).sort()).toEqual(['player_dps', 'player_sav']);
+	});
+
+	it('ignores a backup copy of the save nested inside the save folder', async () => {
+		const level = fixture('Level.sav');
+		const player = fixture('Players/43797F87000000000000000000000000.sav');
+		// The backup's Level.sav is LevelMeta bytes so the two are told apart by size.
+		const zip = zipSync({
+			'world1/backups/2026-08-01/Level.sav': fixture('LevelMeta.sav'),
+			'world1/backups/2026-08-01/Players/43797F87000000000000000000000000.sav': player,
+			'world1/Level.sav': level,
+			'world1/Players/43797F87000000000000000000000000.sav': player
+		});
+		const { staged, stage } = collect();
+
+		const saveId = await stageSavZip(zip, stage);
+
+		expect(saveId).toBe('world1');
+		const staged_level = staged.filter((s) => s.slot === 'level');
+		expect(staged_level).toHaveLength(1);
+		expect(staged_level[0].gvas.length).toBe((await savToGvas(level)).length);
+		expect(staged.filter((s) => s.slot === 'player_sav')).toHaveLength(1);
+		expect(staged.some((s) => s.slot === 'level_meta')).toBe(false);
+	});
+
+	it('rejects a zip whose only Level.sav is missing', async () => {
+		const zip = zipSync({ 'world1/LevelMeta.sav': fixture('LevelMeta.sav') });
+		await expect(stageSavZip(zip, collect().stage)).rejects.toThrow("does not contain 'Level.sav'");
 	});
 
 	it('writes every manifest entry into the download zip verbatim', async () => {
