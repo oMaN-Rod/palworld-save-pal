@@ -375,6 +375,7 @@ export interface DynamicItem {
 
 export enum ItemTypeA {
 	None = 'None',
+	SphereModule = 'SphereModule',
 	Weapon = 'Weapon',
 	SpecialWeapon = 'SpecialWeapon',
 	Armor = 'Armor',
@@ -390,7 +391,8 @@ export enum ItemTypeA {
 }
 
 export enum ItemTypeB {
-	None = 'None',
+	None = 'NONE',
+	SphereModule = 'SphereModule',
 	WeaponMelee = 'WeaponMelee',
 	WeaponBow = 'WeaponBow',
 	WeaponCrossbow = 'WeaponCrossbow',
@@ -448,7 +450,22 @@ export enum ItemTypeB {
 	MonsterEquipWeapon = 'MonsterEquipWeapon',
 	Blueprint = 'Blueprint',
 	ReturnToBaseCamp = 'ReturnToBaseCamp',
-	Essential_PalGear = 'Essential_PalGear'
+	Essential_PalGear = 'Essential_PalGear',
+	CaptureItemModifier = 'CaptureItemModifier',
+	ConsumeFishingBait = 'ConsumeFishingBait',
+	ConsumePalAwakening = 'ConsumePalAwakening',
+	ConsumePalGainFriendshipPoint = 'ConsumePalGainFriendshipPoint',
+	ConsumePalRevive = 'ConsumePalRevive',
+	ConsumePalWorkSuitabilityUp = 'ConsumePalWorkSuitabilityUp',
+	ConsumePassiveSkillChange = 'ConsumePassiveSkillChange',
+	ConsumeTreasureMap = 'ConsumeTreasureMap',
+	ConsumeWorldTreeHolyWater = 'ConsumeWorldTreeHolyWater',
+	Essential_AdditionalInventory = 'Essential_AdditionalInventory',
+	Essential_BossReward = 'Essential_BossReward',
+	Essential_Lamp = 'Essential_Lamp',
+	Essential_PassiveSkillChange = 'Essential_PassiveSkillChange',
+	WeaponFishingRod = 'WeaponFishingRod',
+	WeaponMetalDetector = 'WeaponMetalDetector'
 }
 
 export interface ItemContainerSlot {
@@ -650,6 +667,8 @@ export interface ItemDetails {
 	damage?: number;
 	dynamic?: DynamicItemDetails;
 	disabled?: boolean;
+	/** Set when the game retires this id onto another on load; the value is the surviving id. */
+	redirect_to?: string;
 }
 
 export interface ItemInfo {
@@ -666,15 +685,15 @@ export interface Item {
 export type Scaling = { hp: number; attack: number; defense: number };
 
 export type ElementType =
-	| 'Fire'
-	| 'Water'
-	| 'Ground'
-	| 'Ice'
-	| 'Neutral'
 	| 'Dark'
-	| 'Grass'
 	| 'Dragon'
-	| 'Electric';
+	| 'Earth'
+	| 'Electricity'
+	| 'Fire'
+	| 'Ice'
+	| 'Leaf'
+	| 'Normal'
+	| 'Water';
 export interface PalData {
 	localized_name: string;
 	description: string;

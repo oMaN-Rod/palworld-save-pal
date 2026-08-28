@@ -48,7 +48,8 @@
         "Attack_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_AT_1"
   },
   "Accessory_AT_3": {
     "group": "Accessory",
@@ -67,7 +68,8 @@
         "Attack_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_AT_1"
   },
   "Accessory_AirDash1": {
     "group": "Accessory",
@@ -181,7 +183,8 @@
         "ElementResist_Aqua_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_AquaResist_1"
   },
   "Accessory_AquaResist_3": {
     "group": "Accessory",
@@ -200,7 +203,8 @@
         "ElementResist_Aqua_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_AquaResist_1"
   },
   "Accessory_Avoid_1": {
     "group": "Accessory",
@@ -277,7 +281,8 @@
         "TemperatureResist_Cold3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_CoolResist_1"
   },
   "Accessory_CoolResist_3": {
     "group": "Accessory",
@@ -296,7 +301,8 @@
         "TemperatureResist_Cold3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_CoolResist_1"
   },
   "Accessory_DFHP_1": {
     "group": "Accessory",
@@ -354,7 +360,8 @@
         "ElementResist_Dark_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_DarkResist_1"
   },
   "Accessory_DarkResist_3": {
     "group": "Accessory",
@@ -373,7 +380,8 @@
         "ElementResist_Dark_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_DarkResist_1"
   },
   "Accessory_DragonResist_1": {
     "group": "Accessory",
@@ -411,7 +419,8 @@
         "ElementResist_Dragon_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_DragonResist_1"
   },
   "Accessory_DragonResist_3": {
     "group": "Accessory",
@@ -430,7 +439,8 @@
         "ElementResist_Dragon_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_DragonResist_1"
   },
   "Accessory_EarthResist_1": {
     "group": "Accessory",
@@ -468,7 +478,8 @@
         "ElementResist_Earth_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_EarthResist_1"
   },
   "Accessory_EarthResist_3": {
     "group": "Accessory",
@@ -487,7 +498,8 @@
         "ElementResist_Earth_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_EarthResist_1"
   },
   "Accessory_ExplosionResist": {
     "group": "Accessory",
@@ -544,7 +556,8 @@
         "ElementResist_Fire_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_FireResist_1"
   },
   "Accessory_FireResist_3": {
     "group": "Accessory",
@@ -563,7 +576,8 @@
         "ElementResist_Fire_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_FireResist_1"
   },
   "Accessory_HCHP_1": {
     "group": "Accessory",
@@ -641,7 +655,8 @@
         "HP_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HP_1"
   },
   "Accessory_HP_3": {
     "group": "Accessory",
@@ -660,7 +675,8 @@
         "HP_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HP_1"
   },
   "Accessory_HeatColdResist_1": {
     "group": "Accessory",
@@ -698,7 +714,8 @@
         "TemperatureResist_Heat3Cold3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HeatColdResist_1"
   },
   "Accessory_HeatColdResist_3": {
     "group": "Accessory",
@@ -717,7 +734,8 @@
         "TemperatureResist_Heat3Cold3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HeatColdResist_1"
   },
   "Accessory_HeatFire_1": {
     "group": "Accessory",
@@ -775,7 +793,8 @@
         "TemperatureResist_Heat3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HeatResist_1"
   },
   "Accessory_HeatResist_3": {
     "group": "Accessory",
@@ -794,7 +813,8 @@
         "TemperatureResist_Heat3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_HeatResist_1"
   },
   "Accessory_IceResist_1": {
     "group": "Accessory",
@@ -832,7 +852,8 @@
         "ElementResist_Ice_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_IceResist_1"
   },
   "Accessory_IceResist_3": {
     "group": "Accessory",
@@ -851,7 +872,8 @@
         "ElementResist_Ice_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_IceResist_1"
   },
   "Accessory_JumpAir_1": {
     "group": "Accessory",
@@ -1005,7 +1027,8 @@
         "ElementResist_Leaf_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_LeafResist_1"
   },
   "Accessory_LeafResist_3": {
     "group": "Accessory",
@@ -1024,7 +1047,8 @@
         "ElementResist_Leaf_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_LeafResist_1"
   },
   "Accessory_MaxWeightUp_01": {
     "group": "Accessory",
@@ -1062,7 +1086,8 @@
         "MaxInventoryWeight_up_Equip_2"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_MaxWeightUp_01"
   },
   "Accessory_MaxWeightUp_03": {
     "group": "Accessory",
@@ -1081,7 +1106,8 @@
         "MaxInventoryWeight_up_Equip_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_MaxWeightUp_01"
   },
   "Accessory_NonkChecker_1": {
     "group": "Accessory",
@@ -1157,7 +1183,8 @@
         "ElementResist_Normal_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_NormalResist_1"
   },
   "Accessory_NormalResist_3": {
     "group": "Accessory",
@@ -1176,7 +1203,8 @@
         "ElementResist_Normal_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_NormalResist_1"
   },
   "Accessory_Otomo_Dargon_1": {
     "group": "Accessory",
@@ -1491,7 +1519,8 @@
         "ElementResist_Thunder_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_ThunderResist_1"
   },
   "Accessory_ThunderResist_3": {
     "group": "Accessory",
@@ -1510,7 +1539,8 @@
         "ElementResist_Thunder_3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_ThunderResist_1"
   },
   "Accessory_WKMC_1": {
     "group": "Accessory",
@@ -1568,7 +1598,8 @@
         "WorkSpeed_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_WorkSpeed_1"
   },
   "Accessory_WorkSpeed_3": {
     "group": "Accessory",
@@ -1587,7 +1618,8 @@
         "WorkSpeed_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_WorkSpeed_1"
   },
   "Accessory_defense_1": {
     "group": "Accessory",
@@ -1625,7 +1657,8 @@
         "defense_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_defense_1"
   },
   "Accessory_defense_3": {
     "group": "Accessory",
@@ -1644,12 +1677,13 @@
         "defense_ACC_up3"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Accessory_defense_1"
   },
   "AdditionalInventory_001": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_AdditionalInventory",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -1662,7 +1696,7 @@
   "AdditionalInventory_002": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_AdditionalInventory",
     "rank": 2,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -1675,7 +1709,7 @@
   "AdditionalInventory_003": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_AdditionalInventory",
     "rank": 3,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -1688,7 +1722,7 @@
   "AdditionalInventory_004": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_AdditionalInventory",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -1699,9 +1733,9 @@
     "disabled": false
   },
   "AffectionFruit_01": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalGainFriendshipPoint",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -1712,9 +1746,9 @@
     "disabled": false
   },
   "AffectionFruit_02": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalGainFriendshipPoint",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11176,7 +11210,7 @@
   "BossDefeatReward_AmaterasuWolf_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11189,7 +11223,7 @@
   "BossDefeatReward_Anubis": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11202,7 +11236,7 @@
   "BossDefeatReward_BadCatgirl": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11215,7 +11249,7 @@
   "BossDefeatReward_BerryGoat_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11228,7 +11262,7 @@
   "BossDefeatReward_BlackMetalDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11241,7 +11275,7 @@
   "BossDefeatReward_BlackPuppy": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11254,7 +11288,7 @@
   "BossDefeatReward_BlueDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11267,7 +11301,7 @@
   "BossDefeatReward_BlueThunderHorse": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11280,7 +11314,7 @@
   "BossDefeatReward_BlueberryFairy": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11293,7 +11327,7 @@
   "BossDefeatReward_BossRush": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11306,7 +11340,7 @@
   "BossDefeatReward_CactusDoll": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11319,7 +11353,7 @@
   "BossDefeatReward_CaptainPenguin": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11332,7 +11366,7 @@
   "BossDefeatReward_CatMage": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11345,7 +11379,7 @@
   "BossDefeatReward_CatVampire": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11358,7 +11392,7 @@
   "BossDefeatReward_CubeTurtle": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11371,7 +11405,7 @@
   "BossDefeatReward_CubeTurtle_Neutral": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11384,7 +11418,7 @@
   "BossDefeatReward_DarkScorpion": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11397,7 +11431,7 @@
   "BossDefeatReward_DarkScorpion_Ground": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11410,7 +11444,7 @@
   "BossDefeatReward_DomeArmorDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11423,7 +11457,7 @@
   "BossDefeatReward_ElecLizard": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11436,7 +11470,7 @@
   "BossDefeatReward_ElecPanda": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11449,7 +11483,7 @@
   "BossDefeatReward_ElecSnail": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11462,7 +11496,7 @@
   "BossDefeatReward_FairyDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11475,7 +11509,7 @@
   "BossDefeatReward_FengyunDeeper": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11488,7 +11522,7 @@
   "BossDefeatReward_FengyunDeeper_Electric": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11501,7 +11535,7 @@
   "BossDefeatReward_FireKirin": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11514,7 +11548,7 @@
   "BossDefeatReward_FlameBuffalo": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11527,7 +11561,7 @@
   "BossDefeatReward_FlowerDinosaur_Electric": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11540,7 +11574,7 @@
   "BossDefeatReward_FlowerDoll": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11553,7 +11587,7 @@
   "BossDefeatReward_FlowerPrince": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11566,7 +11600,7 @@
   "BossDefeatReward_FoxExorcist": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11579,7 +11613,7 @@
   "BossDefeatReward_FoxMage": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11592,7 +11626,7 @@
   "BossDefeatReward_GhostDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11605,7 +11639,7 @@
   "BossDefeatReward_GhostRabbit": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11618,7 +11652,7 @@
   "BossDefeatReward_GoldenHorse": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11631,7 +11665,7 @@
   "BossDefeatReward_GrassGolem": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11644,7 +11678,7 @@
   "BossDefeatReward_GrassGolem_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11657,7 +11691,7 @@
   "BossDefeatReward_GrassMammoth": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11670,7 +11704,7 @@
   "BossDefeatReward_GrassPanda_Electric": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11683,7 +11717,7 @@
   "BossDefeatReward_GrassRabbitMan": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11696,7 +11730,7 @@
   "BossDefeatReward_GrimGirl": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11709,7 +11743,7 @@
   "BossDefeatReward_HawkBird": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11722,7 +11756,7 @@
   "BossDefeatReward_HerculesBeetle": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11735,7 +11769,7 @@
   "BossDefeatReward_HerculesBeetle_Ground": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11748,7 +11782,7 @@
   "BossDefeatReward_Horus_Water": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11761,7 +11795,7 @@
   "BossDefeatReward_IceFox": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11774,7 +11808,7 @@
   "BossDefeatReward_IceHorse": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11787,7 +11821,7 @@
   "BossDefeatReward_IceHorse_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11800,7 +11834,7 @@
   "BossDefeatReward_IceNarwhal": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11813,7 +11847,7 @@
   "BossDefeatReward_IceNarwhal_Fire": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11826,7 +11860,7 @@
   "BossDefeatReward_JetDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11839,7 +11873,7 @@
   "BossDefeatReward_KabukiMan": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11852,7 +11886,7 @@
   "BossDefeatReward_KingAlpaca": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11865,7 +11899,7 @@
   "BossDefeatReward_KingAlpaca_Ice": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11878,7 +11912,7 @@
   "BossDefeatReward_KingBahamut": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11891,7 +11925,7 @@
   "BossDefeatReward_Kirin": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11904,7 +11938,7 @@
   "BossDefeatReward_Kitsunebi_Ice": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11917,7 +11951,7 @@
   "BossDefeatReward_LazyCatfish": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -11930,7 +11964,7 @@
   "BossDefeatReward_LazyDragon_Electric": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -11943,7 +11977,7 @@
   "BossDefeatReward_LilyQueen": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11956,7 +11990,7 @@
   "BossDefeatReward_LilyQueen_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -11969,7 +12003,7 @@
   "BossDefeatReward_LotusDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -11982,7 +12016,7 @@
   "BossDefeatReward_Manticore": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -11995,7 +12029,7 @@
   "BossDefeatReward_MoonChild": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12008,7 +12042,7 @@
   "BossDefeatReward_MopKing": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12021,7 +12055,7 @@
   "BossDefeatReward_Mothman": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12034,7 +12068,7 @@
   "BossDefeatReward_MushroomLady": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12047,7 +12081,7 @@
   "BossDefeatReward_Mutant": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12060,7 +12094,7 @@
   "BossDefeatReward_MysteryMask": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12073,7 +12107,7 @@
   "BossDefeatReward_NaughtyCat": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12086,7 +12120,7 @@
   "BossDefeatReward_NightBlueHorse": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12099,7 +12133,7 @@
   "BossDefeatReward_PinkRabbit_Grass": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12112,7 +12146,7 @@
   "BossDefeatReward_PlantSlime": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12125,7 +12159,7 @@
   "BossDefeatReward_PoseidonOrca": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12138,7 +12172,7 @@
   "BossDefeatReward_PurpleSpider": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12151,7 +12185,7 @@
   "BossDefeatReward_QueenBee": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12164,7 +12198,7 @@
   "BossDefeatReward_RaijinDaughter_Water": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12177,7 +12211,7 @@
   "BossDefeatReward_RockBeast": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12190,7 +12224,7 @@
   "BossDefeatReward_RockBeast_Ice": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12203,7 +12237,7 @@
   "BossDefeatReward_Ronin": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12216,7 +12250,7 @@
   "BossDefeatReward_SaintCentaur": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12229,7 +12263,7 @@
   "BossDefeatReward_SakuraSaurus": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12242,7 +12276,7 @@
   "BossDefeatReward_SakuraSaurus_Water": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12255,7 +12289,7 @@
   "BossDefeatReward_ScorpionMan_Electric": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12268,7 +12302,7 @@
   "BossDefeatReward_SkyDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12281,7 +12315,7 @@
   "BossDefeatReward_Suzaku": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12294,7 +12328,7 @@
   "BossDefeatReward_ThunderBird": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12307,7 +12341,7 @@
   "BossDefeatReward_ThunderFluffyBird": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12320,7 +12354,7 @@
   "BossDefeatReward_Umihebi": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12333,7 +12367,7 @@
   "BossDefeatReward_VioletFairy": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12346,7 +12380,7 @@
   "BossDefeatReward_VolcanicMonster": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12359,7 +12393,7 @@
   "BossDefeatReward_VolcanoDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12372,7 +12406,7 @@
   "BossDefeatReward_VolcanoDragon_Ice": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12385,7 +12419,7 @@
   "BossDefeatReward_WeaselDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -12398,7 +12432,7 @@
   "BossDefeatReward_Werewolf_Ice": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12411,7 +12445,7 @@
   "BossDefeatReward_WhiteDeer": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12424,7 +12458,7 @@
   "BossDefeatReward_WhiteDeer_Dark": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -12437,7 +12471,7 @@
   "BossDefeatReward_WhiteMoth": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -12450,7 +12484,7 @@
   "BossDefeatReward_WhiteShieldDragon": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12463,7 +12497,7 @@
   "BossDefeatReward_WhiteTiger_Ground": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -12476,7 +12510,7 @@
   "BossDefeatReward_WingGolem": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -12489,7 +12523,7 @@
   "BossDefeatReward_Yeti_Grass": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -15419,9 +15453,9 @@
     "disabled": false
   },
   "FishingBait_1": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -15432,9 +15466,9 @@
     "disabled": false
   },
   "FishingBait_1_A": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -15445,9 +15479,9 @@
     "disabled": false
   },
   "FishingBait_1_B": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -15458,9 +15492,9 @@
     "disabled": false
   },
   "FishingBait_2": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -15471,9 +15505,9 @@
     "disabled": false
   },
   "FishingBait_2_A": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -15484,9 +15518,9 @@
     "disabled": false
   },
   "FishingBait_2_B": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -15497,9 +15531,9 @@
     "disabled": false
   },
   "FishingBait_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -15510,9 +15544,9 @@
     "disabled": false
   },
   "FishingBait_3_A": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -15523,9 +15557,9 @@
     "disabled": false
   },
   "FishingBait_3_B": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeFishingBait",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -15536,9 +15570,9 @@
     "disabled": false
   },
   "FishingRod_01_1": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 2,
     "rarity": 0,
     "max_stack_count": 1,
@@ -15555,9 +15589,9 @@
     "disabled": false
   },
   "FishingRod_01_2": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 2,
     "rarity": 0,
     "max_stack_count": 1,
@@ -15574,9 +15608,9 @@
     "disabled": false
   },
   "FishingRod_02_1": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 3,
     "rarity": 1,
     "max_stack_count": 1,
@@ -15593,9 +15627,9 @@
     "disabled": false
   },
   "FishingRod_02_2": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 3,
     "rarity": 2,
     "max_stack_count": 1,
@@ -15612,9 +15646,9 @@
     "disabled": false
   },
   "FishingRod_03_1": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 1,
@@ -15631,9 +15665,9 @@
     "disabled": false
   },
   "FishingRod_03_2": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponFishingRod",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 1,
@@ -21373,7 +21407,7 @@
   "Lantern": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_Lamp",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -21386,7 +21420,7 @@
   "Lantern_High": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_Lamp",
     "rank": 3,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -22905,9 +22939,9 @@
     "disabled": false
   },
   "MetalDetector": {
-    "group": "None",
+    "group": "Weapon",
     "type_a": "Weapon",
-    "type_b": "NONE",
+    "type_b": "WeaponMetalDetector",
     "rank": 3,
     "rarity": 3,
     "max_stack_count": 1,
@@ -24116,7 +24150,8 @@
         "Attack_ACC_up3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_Attack_up1"
   },
   "Otomo_Attack_up3": {
     "group": "Accessory",
@@ -24135,7 +24170,8 @@
         "Attack_ACC_up3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_Attack_up1"
   },
   "Otomo_DFDark_ElementBoost_1": {
     "group": "Accessory",
@@ -24353,7 +24389,8 @@
         "Defense_ACC_up3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_Defense_up1"
   },
   "Otomo_Defense_up3": {
     "group": "Accessory",
@@ -24372,7 +24409,8 @@
         "Defense_ACC_up3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_Defense_up1"
   },
   "Otomo_ElementBoost_Dark_1": {
     "group": "Accessory",
@@ -24410,7 +24448,8 @@
         "ElementBoost_Dark_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Dark_1"
   },
   "Otomo_ElementBoost_Dark_3": {
     "group": "Accessory",
@@ -24429,7 +24468,8 @@
         "ElementBoost_Dark_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Dark_1"
   },
   "Otomo_ElementBoost_Dragon_1": {
     "group": "Accessory",
@@ -24467,7 +24507,8 @@
         "ElementBoost_Dragon_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Dragon_1"
   },
   "Otomo_ElementBoost_Dragon_3": {
     "group": "Accessory",
@@ -24486,7 +24527,8 @@
         "ElementBoost_Dragon_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Dragon_1"
   },
   "Otomo_ElementBoost_Earth_1": {
     "group": "Accessory",
@@ -24524,7 +24566,8 @@
         "ElementBoost_Earth_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Earth_1"
   },
   "Otomo_ElementBoost_Earth_3": {
     "group": "Accessory",
@@ -24543,7 +24586,8 @@
         "ElementBoost_Earth_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Earth_1"
   },
   "Otomo_ElementBoost_Electricity_1": {
     "group": "Accessory",
@@ -24581,7 +24625,8 @@
         "ElementBoost_Electricity_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Electricity_1"
   },
   "Otomo_ElementBoost_Electricity_3": {
     "group": "Accessory",
@@ -24600,7 +24645,8 @@
         "ElementBoost_Electricity_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Electricity_1"
   },
   "Otomo_ElementBoost_Fire_1": {
     "group": "Accessory",
@@ -24638,7 +24684,8 @@
         "ElementBoost_Fire_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Fire_1"
   },
   "Otomo_ElementBoost_Fire_3": {
     "group": "Accessory",
@@ -24657,7 +24704,8 @@
         "ElementBoost_Fire_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Fire_1"
   },
   "Otomo_ElementBoost_Ice_1": {
     "group": "Accessory",
@@ -24695,7 +24743,8 @@
         "ElementBoost_Ice_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Ice_1"
   },
   "Otomo_ElementBoost_Ice_3": {
     "group": "Accessory",
@@ -24714,7 +24763,8 @@
         "ElementBoost_Ice_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Ice_1"
   },
   "Otomo_ElementBoost_Leaf_1": {
     "group": "Accessory",
@@ -24752,7 +24802,8 @@
         "ElementBoost_Leaf_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Leaf_1"
   },
   "Otomo_ElementBoost_Leaf_3": {
     "group": "Accessory",
@@ -24771,7 +24822,8 @@
         "ElementBoost_Leaf_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Leaf_1"
   },
   "Otomo_ElementBoost_Normal_1": {
     "group": "Accessory",
@@ -24809,7 +24861,8 @@
         "ElementBoost_Normal_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Normal_1"
   },
   "Otomo_ElementBoost_Normal_3": {
     "group": "Accessory",
@@ -24828,7 +24881,8 @@
         "ElementBoost_Normal_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Normal_1"
   },
   "Otomo_ElementBoost_Water_1": {
     "group": "Accessory",
@@ -24866,7 +24920,8 @@
         "ElementBoost_Water_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Water_1"
   },
   "Otomo_ElementBoost_Water_3": {
     "group": "Accessory",
@@ -24885,7 +24940,8 @@
         "ElementBoost_Water_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_ElementBoost_Water_1"
   },
   "Otomo_MoveSpeed_up_1": {
     "group": "Accessory",
@@ -24961,7 +25017,8 @@
         "PalExp_Increase_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_PalExp_Increase_1"
   },
   "Otomo_PalExp_Increase_3": {
     "group": "Accessory",
@@ -24980,7 +25037,8 @@
         "PalExp_Increase_3_Otomo_Only_Equip"
       ]
     },
-    "disabled": false
+    "disabled": false,
+    "redirect_to": "Otomo_PalExp_Increase_1"
   },
   "OverheatRifle": {
     "group": "Weapon",
@@ -25108,9 +25166,9 @@
     "disabled": true
   },
   "PalAwakening_Dark": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25121,9 +25179,9 @@
     "disabled": false
   },
   "PalAwakening_Dragon": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25134,9 +25192,9 @@
     "disabled": false
   },
   "PalAwakening_Electric": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25147,9 +25205,9 @@
     "disabled": false
   },
   "PalAwakening_Fire": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25160,9 +25218,9 @@
     "disabled": false
   },
   "PalAwakening_Grass": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25173,9 +25231,9 @@
     "disabled": false
   },
   "PalAwakening_Ground": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25186,9 +25244,9 @@
     "disabled": false
   },
   "PalAwakening_Ice": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25316,9 +25374,9 @@
     "disabled": false
   },
   "PalAwakening_Neutral": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -25329,9 +25387,9 @@
     "disabled": false
   },
   "PalAwakening_Water": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalAwakening",
     "rank": 10,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -26971,7 +27029,7 @@
   "PalPassiveSkillChange_AutoHPRegeneRate_Passive": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -26982,9 +27040,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_CraftSpeed_up3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -26995,9 +27053,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Deffence_up3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27008,9 +27066,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_EternalFlame": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27021,9 +27079,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Invader": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27034,9 +27092,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Legend": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27047,9 +27105,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_MoveSpeed_up_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27060,9 +27118,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_MutationPal_Babysitter": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27073,9 +27131,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_MutationPal_ExplosionResist": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27086,9 +27144,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_MutationPal_Immortal": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27099,9 +27157,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_MutationPal_Mutant": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27112,9 +27170,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Nushi": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27125,9 +27183,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_PAL_ALLAttack_up3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27138,9 +27196,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_PAL_FullStomach_Down_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27151,9 +27209,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_PAL_Sanity_Down_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27164,9 +27222,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Rare": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27177,9 +27235,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_RideJumpCount_Increase2": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27190,9 +27248,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Salvation": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27203,9 +27261,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Stamina_Up_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27216,9 +27274,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_SwimSpeed_up_3": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27229,9 +27287,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Vampire": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27242,9 +27300,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_Witch": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 99,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27255,9 +27313,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_ATK": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27268,9 +27326,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_ATK_DEF": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27281,9 +27339,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_CraftSpeed": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27294,9 +27352,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_DEF": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27307,9 +27365,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_FullStomach": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27320,9 +27378,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_MoveSpeed": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27333,9 +27391,9 @@
     "disabled": false
   },
   "PalPassiveSkillChange_Consumable_WorldTree_Sanity": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27348,7 +27406,7 @@
   "PalPassiveSkillChange_CoolTimeReduction_Up_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27361,7 +27419,7 @@
   "PalPassiveSkillChange_CoolTimeReduction_Up_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27374,7 +27432,7 @@
   "PalPassiveSkillChange_CraftSpeed_up1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27387,7 +27445,7 @@
   "PalPassiveSkillChange_CraftSpeed_up2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27400,7 +27458,7 @@
   "PalPassiveSkillChange_CraftSpeed_up3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27413,7 +27471,7 @@
   "PalPassiveSkillChange_Deffence_up1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27426,7 +27484,7 @@
   "PalPassiveSkillChange_Deffence_up2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27439,7 +27497,7 @@
   "PalPassiveSkillChange_Deffence_up3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27452,7 +27510,7 @@
   "PalPassiveSkillChange_HatchingSpeed_Up": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27465,7 +27523,7 @@
   "PalPassiveSkillChange_MoveSpeed_up_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27478,7 +27536,7 @@
   "PalPassiveSkillChange_MoveSpeed_up_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27491,7 +27549,7 @@
   "PalPassiveSkillChange_MoveSpeed_up_3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27504,7 +27562,7 @@
   "PalPassiveSkillChange_Nocturnal": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27517,7 +27575,7 @@
   "PalPassiveSkillChange_NonKilling": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27530,7 +27588,7 @@
   "PalPassiveSkillChange_Noukin": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27543,7 +27601,7 @@
   "PalPassiveSkillChange_PAL_ALLAttack_up1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27556,7 +27614,7 @@
   "PalPassiveSkillChange_PAL_ALLAttack_up2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27569,7 +27627,7 @@
   "PalPassiveSkillChange_PAL_ALLAttack_up3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27582,7 +27640,7 @@
   "PalPassiveSkillChange_PAL_CorporateSlave": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27595,7 +27653,7 @@
   "PalPassiveSkillChange_PAL_FullStomach_Down_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27608,7 +27666,7 @@
   "PalPassiveSkillChange_PAL_FullStomach_Down_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27621,7 +27679,7 @@
   "PalPassiveSkillChange_PAL_FullStomach_Down_3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27634,7 +27692,7 @@
   "PalPassiveSkillChange_PAL_Sanity_Down_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27647,7 +27705,7 @@
   "PalPassiveSkillChange_PAL_Sanity_Down_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27660,7 +27718,7 @@
   "PalPassiveSkillChange_PAL_Sanity_Down_3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27673,7 +27731,7 @@
   "PalPassiveSkillChange_PlayerSP_DecreaseRate_Passive": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27686,7 +27744,7 @@
   "PalPassiveSkillChange_ReloadSpeedUp_Passive": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27699,7 +27757,7 @@
   "PalPassiveSkillChange_SalePrice_Up_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27712,7 +27770,7 @@
   "PalPassiveSkillChange_SalePrice_Up_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27725,7 +27783,7 @@
   "PalPassiveSkillChange_Stamina_Up_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27738,7 +27796,7 @@
   "PalPassiveSkillChange_Stamina_Up_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27751,7 +27809,7 @@
   "PalPassiveSkillChange_Stamina_Up_3": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -27764,7 +27822,7 @@
   "PalPassiveSkillChange_SwimSpeed_up_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -27777,7 +27835,7 @@
   "PalPassiveSkillChange_SwimSpeed_up_2": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27790,7 +27848,7 @@
   "PalPassiveSkillChange_TrainerATK_UP_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27803,7 +27861,7 @@
   "PalPassiveSkillChange_TrainerDEF_UP_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27816,7 +27874,7 @@
   "PalPassiveSkillChange_TrainerLogging_up1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -27829,7 +27887,7 @@
   "PalPassiveSkillChange_TrainerMining_up1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -27842,7 +27900,7 @@
   "PalPassiveSkillChange_TrainerWorkSpeed_UP_1": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_PassiveSkillChange",
     "rank": 4,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -27853,9 +27911,9 @@
     "disabled": false
   },
   "PalRevive": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalRevive",
     "rank": 5,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -36088,7 +36146,7 @@
   "TEST_BossDefeatReward": {
     "group": "KeyItem",
     "type_a": "Essential",
-    "type_b": "NONE",
+    "type_b": "Essential_BossReward",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -36099,9 +36157,9 @@
     "disabled": true
   },
   "TEST_CaptureItemModifier": {
-    "group": "None",
+    "group": "Common",
     "type_a": "None",
-    "type_b": "NONE",
+    "type_b": "CaptureItemModifier",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 1,
@@ -36253,9 +36311,9 @@
     "disabled": false
   },
   "TreasureMap01": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeTreasureMap",
     "rank": 1,
     "rarity": 0,
     "max_stack_count": 9999,
@@ -36266,9 +36324,9 @@
     "disabled": false
   },
   "TreasureMap02": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeTreasureMap",
     "rank": 1,
     "rarity": 1,
     "max_stack_count": 9999,
@@ -36279,9 +36337,9 @@
     "disabled": false
   },
   "TreasureMap03": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeTreasureMap",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
@@ -36292,9 +36350,9 @@
     "disabled": false
   },
   "TreasureMap04": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeTreasureMap",
     "rank": 1,
     "rarity": 3,
     "max_stack_count": 9999,
@@ -36305,9 +36363,9 @@
     "disabled": false
   },
   "TreasureMap05": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeTreasureMap",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36901,9 +36959,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Collection": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36914,9 +36972,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Cool": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36927,9 +36985,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Deforest": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36940,9 +36998,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_EmitFlame": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36953,9 +37011,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_GenerateElectricity": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36966,9 +37024,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Handcraft": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36979,9 +37037,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Mining": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -36992,9 +37050,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_MonsterFarm": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -37005,9 +37063,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_ProductMedicine": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -37018,9 +37076,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Seeding": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -37031,9 +37089,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Transport": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -37044,9 +37102,9 @@
     "disabled": false
   },
   "WorkSuitability_AddTicket_Watering": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumePalWorkSuitabilityUp",
     "rank": 1,
     "rarity": 4,
     "max_stack_count": 9999,
@@ -37057,9 +37115,9 @@
     "disabled": false
   },
   "WorldTreeHolyWater": {
-    "group": "None",
+    "group": "Common",
     "type_a": "Consume",
-    "type_b": "NONE",
+    "type_b": "ConsumeWorldTreeHolyWater",
     "rank": 1,
     "rarity": 2,
     "max_stack_count": 9999,
