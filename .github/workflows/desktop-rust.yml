@@ -76,14 +76,8 @@ jobs:
 
       - name: Install Tauri CLI
         uses: taiki-e/install-action@v2
-
-
-      - name: Install Tauri CLI
         with:
-
-
-      - name: Install Tauri CLI
-          tool: cargo-tauri
+          tool: tauri-cli@2
 
       - name: Build Tauri bundles
         working-directory: palworld-save-pal/psp-desktop
