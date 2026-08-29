@@ -62,7 +62,7 @@ jobs:
       # only fail at instantiation, in the browser, for the user.
       - name: Check wasm imports
         working-directory: ui
-        run: node ../psp-lua-sys/scripts/check-wasm-imports.mjs src/lib/wasm/psp/psp_web_bg.wasm
+        run: node ../psp-lua-sys/scripts/check-wasm-imports.mjs src/lib/wasm/psp/psp_bg.wasm
 
       # Fails the run before upload if the asset budget is breached or a public
       # page lost its title/description/canonical/h1.
