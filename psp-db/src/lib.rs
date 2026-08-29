@@ -7,6 +7,7 @@ pub mod plugins;
 pub mod presets;
 pub mod servers;
 pub mod settings;
+pub mod signal;
 pub mod time;
 pub mod ups;
 

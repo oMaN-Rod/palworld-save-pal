@@ -5,6 +5,7 @@ pub mod rfd_dialogs;
 pub mod router;
 pub mod server_ext;
 pub mod servers_handlers;
+pub mod signal_handlers;
 pub mod services;
 pub mod static_files;
 pub mod system_native;
@@ -106,16 +107,19 @@ pub async fn start_server_with(
         .parent()
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("."));
+    let driver = Arc::new(psp_db::SqlxSqliteDriver::new(db));
+    let signal_manager = crate::signal_setup(Arc::clone(&driver)).await;
     let state = Arc::new(AppState {
         config: AppConfig {
             desktop_mode: config.desktop_mode,
         },
         game_data,
-        driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
+        driver,
         dialogs,
         live_connections,
         ext: Arc::new(crate::server_ext::ServerExtRouter {
             services: Arc::new(crate::services::ServerServices::real()),
+            signal: signal_manager,
         }),
         lsp: Arc::new(crate::lsp_service::ServerLspService::new(
             app_dir.join("lua-language-server"),
@@ -148,4 +152,79 @@ pub async fn start_server_with(
         shutdown_sender,
         serve_task,
     })
+}
+
+/// A SignalManager over an in-memory store (port 0, not started) — for
+/// tests and embeddings that don't need persistence.
+pub async fn memory_signal_manager() -> Arc<psp_signal::manager::SignalManager> {
+    let stored = psp_signal::store::SignalStored {
+        port: 0,
+        ..psp_signal::store::SignalStored::defaults()
+    };
+    Arc::new(
+        psp_signal::manager::SignalManager::new(Box::new(
+            psp_signal::store::MemorySignalStore::new(stored),
+        ))
+        .await,
+    )
+}
+
+/// Builds the Signal manager from persisted settings, restoring the source
+/// and auto-starting when it was enabled at shutdown. The REST password is
+/// never restored (never stored) — the tab asks for it again.
+async fn signal_setup(driver: Arc<psp_db::SqlxSqliteDriver>) -> Arc<psp_signal::manager::SignalManager> {
+    struct DbStore(Arc<psp_db::SqlxSqliteDriver>);
+
+    #[async_trait::async_trait]
+    impl psp_signal::store::SignalStore for DbStore {
+        async fn load(&self) -> psp_signal::store::SignalStored {
+            psp_db::signal::get_signal_config(&*self.0)
+                .await
+                .map(|row| psp_signal::store::SignalStored {
+                    enabled: row.enabled,
+                    bind: row.bind,
+                    port: row.port,
+                    interval_ms: row.interval_ms,
+                    allowed_origins: row.allowed_origins,
+                    source_type: row.source_type,
+                    source_url: row.source_url,
+                    gamedata_path: row.gamedata_path,
+                    token: row.token,
+                })
+                .unwrap_or_else(|error| {
+                    tracing::warn!(%error, "signal config load failed; using defaults");
+                    psp_signal::store::SignalStored::defaults()
+                })
+        }
+
+        async fn save(&self, stored: &psp_signal::store::SignalStored) {
+            let row = psp_db::signal::SignalConfigRow {
+                enabled: stored.enabled,
+                bind: stored.bind.clone(),
+                port: stored.port,
+                interval_ms: stored.interval_ms,
+                allowed_origins: stored.allowed_origins.clone(),
+                source_type: stored.source_type.clone(),
+                source_url: stored.source_url.clone(),
+                gamedata_path: stored.gamedata_path.clone(),
+                token: stored.token.clone(),
+            };
+            if let Err(error) = psp_db::signal::save_signal_config(&*self.0, &row).await {
+                tracing::warn!(%error, "signal config save failed");
+            }
+        }
+    }
+
+    let manager = psp_signal::manager::SignalManager::new(Box::new(DbStore(driver))).await;
+    if let Some(source) = crate::signal_handlers::source_from_stored(&manager.stored().await) {
+        if let Err(error) = manager.set_source(Some(source)).await {
+            tracing::warn!(%error, "signal source restore failed");
+        }
+    }
+    if manager.stored().await.enabled {
+        if let Err(error) = manager.start().await {
+            tracing::warn!(%error, "signal autostart failed");
+        }
+    }
+    Arc::new(manager)
 }

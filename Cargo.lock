@@ -3664,6 +3664,7 @@ dependencies = [
  "psp-core",
  "psp-db",
  "psp-plugin",
+ "psp-signal",
  "reqwest 0.12.28",
  "rfd",
  "serde",
@@ -3683,6 +3684,23 @@ dependencies = [
  "uesave",
  "uuid",
  "zip",
+]
+
+[[package]]
+name = "psp-signal"
+version = "1.4.1"
+dependencies = [
+ "async-trait",
+ "axum",
+ "chrono",
+ "reqwest 0.12.28",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
 ]
 
 [[package]]

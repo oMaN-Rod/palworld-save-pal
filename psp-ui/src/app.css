@@ -19,6 +19,9 @@
 @import './themes/lamball.css';
 @import './themes/sakurajima.css';
 @import './themes/wildlands.css';
+/* Not a selectable theme: a `.rwby-skin` scoped palette the Signal page's
+ * easter egg toggles, so it intentionally has no data-theme entry. */
+@import './themes/rwby.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 

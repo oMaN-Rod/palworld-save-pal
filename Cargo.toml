@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-web", "psp-lua-sys", "psp-plugin"]
+members = ["psp-core", "psp-db", "psp-app", "psp-server", "psp-desktop", "psp-web", "psp-lua-sys", "psp-plugin", "psp-signal"]
 
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
@@ -32,6 +32,7 @@ psp-core = { path = "psp-core", default-features = false }
 psp-db = { path = "psp-db", default-features = false }
 psp-lua-sys = { path = "psp-lua-sys" }
 psp-plugin = { path = "psp-plugin" }
+psp-signal = { path = "psp-signal" }
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }

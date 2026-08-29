@@ -155,6 +155,16 @@ export enum MessageType {
 	SERVER_CREATION_PROGRESS = 'server_creation_progress',
 	IMPORT_SERVER = 'import_server',
 
+	GET_SIGNAL_STATUS = 'get_signal_status',
+	SIGNAL_STATUS_UPDATE = 'signal_status_update',
+	UPDATE_SIGNAL_CONFIG = 'update_signal_config',
+	SIGNAL_START = 'signal_start',
+	SIGNAL_STOP = 'signal_stop',
+	SET_SIGNAL_SOURCE = 'set_signal_source',
+	CLEAR_SIGNAL_SOURCE = 'clear_signal_source',
+	REGENERATE_SIGNAL_TOKEN = 'regenerate_signal_token',
+	DISCOVER_SIGNAL_GAMEDATA = 'discover_signal_gamedata',
+
 	GET_WORLD_OPTION = 'get_world_option',
 	UPDATE_WORLD_OPTION = 'update_world_option',
 

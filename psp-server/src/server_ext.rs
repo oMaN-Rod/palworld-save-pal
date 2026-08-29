@@ -10,10 +10,12 @@ use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 use crate::servers_handlers as servers;
 use crate::services::ServerServices;
+use crate::signal_handlers as signal;
 use crate::system_native;
 
 pub struct ServerExtRouter {
     pub services: Arc<ServerServices>,
+    pub signal: Arc<psp_signal::manager::SignalManager>,
 }
 
 #[async_trait::async_trait]
@@ -94,6 +96,25 @@ impl ExtRouter for ServerExtRouter {
                 Ok(payload) => servers::handle_load_server_save(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
+
+            // Signal — live world feed. Routed here (not the dispatcher)
+            // because it owns a raw listener and LAN sockets, which the
+            // wasm transport cannot provide.
+            MessageType::GetSignalStatus => signal::handle_get_status(&self.signal, ctx.emitter).await,
+            MessageType::SignalStart => signal::handle_start(&self.signal, ctx.emitter).await,
+            MessageType::SignalStop => signal::handle_stop(&self.signal, ctx.emitter).await,
+            MessageType::SignalStatusUpdate => signal::handle_get_status(&self.signal, ctx.emitter).await,
+            MessageType::ClearSignalSource => signal::handle_clear_source(&self.signal, ctx.emitter).await,
+            MessageType::RegenerateSignalToken => signal::handle_regenerate_token(&self.signal, ctx.emitter).await,
+            MessageType::DiscoverSignalGamedata => signal::handle_discover_gamedata(&self.signal, ctx.emitter).await,
+            MessageType::UpdateSignalConfig => match serde_json::from_value(data) {
+                Ok(payload) => signal::handle_update_config(&self.signal, payload, ctx.emitter).await,
+                Err(error) => Err(error.into()),
+            },
+            MessageType::SetSignalSource => match serde_json::from_value(data) {
+                Ok(payload) => signal::handle_set_source(&self.signal, payload, ctx.emitter).await,
+                Err(error) => Err(error.into()),
+            },
             _ => return None,
         })
     }
@@ -123,6 +144,15 @@ mod tests {
         "toggle_server_mod",
         "install_server_mod",
         "load_server_save",
+        "get_signal_status",
+        "signal_status_update",
+        "update_signal_config",
+        "signal_start",
+        "signal_stop",
+        "set_signal_source",
+        "clear_signal_source",
+        "regenerate_signal_token",
+        "discover_signal_gamedata",
     ];
 
     /// Asserts ownership, not behavior: every wire name above must come back
@@ -134,6 +164,7 @@ mod tests {
         let mut env = TestEnv::new().await;
         let router = ServerExtRouter {
             services: env.services.clone(),
+            signal: crate::memory_signal_manager().await,
         };
 
         for message_type in MessageType::ALL {

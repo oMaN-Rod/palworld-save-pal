@@ -3,7 +3,7 @@
 	import { Sidebar, PublicNav } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
-	import { cornerArt, getAppState, getSocketState, theme, localeState } from '$states';
+	import { cornerArt, getAppState, getSocketState, theme, localeState, rwbySkin } from '$states';
 	import { goto } from '$app/navigation';
 	import {
 		isSaveRequiredRoute,
@@ -56,6 +56,13 @@
 	// switching themes swaps the active color palette (client-side only).
 	$effect(() => {
 		document.body.dataset.theme = theme.current;
+	});
+
+	// Same idea for the Signal tab's RWBY easter egg: the class carries a
+	// palette override scoped below every [data-theme], so toggling it
+	// reskins the whole shell — nav, pages, modals and toasts alike.
+	$effect(() => {
+		document.body.classList.toggle('rwby-skin', rwbySkin.current);
 	});
 
 	$effect(() => {
@@ -140,11 +147,21 @@
 			</div>
 		</Modal>
 	{/key}
-	<!-- Sits under the z-[1] shell, above the body gradients. -->
-	{#if cornerArt.current && !isLandingPath(page.url.pathname)}
+	<!-- Sits under the z-[1] shell, above the body gradients. The RWBY skin
+	     swaps the Palworld corner art for its own rose watermark. -->
+	{#if cornerArt.current && !rwbySkin.current && !isLandingPath(page.url.pathname)}
 		<div
 			class="pointer-events-none fixed inset-0 z-0"
 			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.1;"
+			aria-hidden="true"
+		></div>
+	{:else if rwbySkin.current}
+		<div
+			class="pointer-events-none fixed inset-0 z-0"
+			style="background:
+				radial-gradient(ellipse at 70% 15%, rgb(238 52 80 / 0.08), transparent 60%),
+				url('/rwby-rose.webp') no-repeat bottom right / 560px auto;
+				opacity: 0.14;"
 			aria-hidden="true"
 		></div>
 	{/if}

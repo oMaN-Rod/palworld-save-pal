@@ -1,0 +1,22 @@
+[package]
+name = "psp-signal"
+description = "Signal - live Palworld world feed: sources, poller, local API"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+axum = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+reqwest = { workspace = true }
+uuid = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+chrono = { workspace = true }
+async-trait = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+reqwest = { workspace = true }

@@ -11,6 +11,7 @@ import { pluginHandlers } from './pluginHandler';
 import { saveFileHandlers } from './saveFileHandler';
 import { upsHandlers } from './upsHandler';
 import { serverHandlers } from './serverHandler';
+import { signalHandlers } from './signalHandler';
 
 export const handlers = [
 	...appStateHandlers,
@@ -25,5 +26,6 @@ export const handlers = [
 	...upsHandlers,
 	...lazyLoadHandlers,
 	...overviewHandlers,
-	...serverHandlers
+	...serverHandlers,
+	...signalHandlers
 ];

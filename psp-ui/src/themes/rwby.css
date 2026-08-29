@@ -1,0 +1,143 @@
+/*
+ * RWBY easter-egg palette — color palette only, like every other theme file.
+ * Instead of a `[data-theme]` selector it hooks onto `.rwby-skin`, a class the
+ * Signal page toggles after the rose easter egg is unlocked, so the reskin
+ * stays scoped to that page. All ramps follow the dark theme's neutral
+ * lightness curve so contrast ratios keep working:
+ *   primary   = Ruby Rose red
+ *   secondary = Yang Xiao Long gold
+ *   tertiary  = Blake Belladonna violet
+ *   success   = Weiss Schnee ice blue
+ *   surface   = Vale night with a faint warm tint
+ */
+.rwby-skin {
+	/* ── Primary: Ruby red ── */
+	--color-primary-50: rgb(255, 227, 230);
+	--color-primary-100: rgb(254, 199, 205);
+	--color-primary-200: rgb(252, 165, 175);
+	--color-primary-300: rgb(250, 128, 143);
+	--color-primary-400: rgb(247, 92, 113);
+	--color-primary-500: rgb(238, 52, 80);
+	--color-primary-600: rgb(214, 31, 58);
+	--color-primary-700: rgb(181, 23, 46);
+	--color-primary-800: rgb(147, 18, 37);
+	--color-primary-900: rgb(113, 14, 28);
+	--color-primary-950: rgb(79, 7, 18);
+	--color-primary-contrast-dark: var(--color-primary-950);
+	--color-primary-contrast-light: var(--color-primary-50);
+	--color-primary-contrast-50: var(--color-primary-contrast-dark);
+	--color-primary-contrast-100: var(--color-primary-contrast-dark);
+	--color-primary-contrast-200: var(--color-primary-contrast-dark);
+	--color-primary-contrast-300: var(--color-primary-contrast-dark);
+	--color-primary-contrast-400: var(--color-primary-contrast-dark);
+	--color-primary-contrast-500: var(--color-primary-contrast-light);
+	--color-primary-contrast-600: var(--color-primary-contrast-light);
+	--color-primary-contrast-700: var(--color-primary-contrast-light);
+	--color-primary-contrast-800: var(--color-primary-contrast-light);
+	--color-primary-contrast-900: var(--color-primary-contrast-light);
+	--color-primary-contrast-950: var(--color-primary-contrast-light);
+
+	/* ── Secondary: Yang gold ── */
+	--color-secondary-50: rgb(255, 251, 235);
+	--color-secondary-100: rgb(254, 243, 199);
+	--color-secondary-200: rgb(253, 230, 148);
+	--color-secondary-300: rgb(252, 214, 96);
+	--color-secondary-400: rgb(251, 196, 48);
+	--color-secondary-500: rgb(245, 171, 10);
+	--color-secondary-600: rgb(201, 127, 5);
+	--color-secondary-700: rgb(157, 87, 4);
+	--color-secondary-800: rgb(118, 62, 4);
+	--color-secondary-900: rgb(96, 47, 4);
+	--color-secondary-950: rgb(56, 26, 2);
+	--color-secondary-contrast-dark: var(--color-secondary-950);
+	--color-secondary-contrast-light: var(--color-secondary-50);
+	--color-secondary-contrast-50: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-100: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-200: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-300: var(--color-secondary-contrast-dark);
+	--color-secondary-contrast-400: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-500: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-600: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-700: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-800: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-900: var(--color-secondary-contrast-light);
+	--color-secondary-contrast-950: var(--color-secondary-contrast-light);
+
+	/* ── Tertiary: Blake violet ── */
+	--color-tertiary-50: rgb(240, 236, 255);
+	--color-tertiary-100: rgb(227, 220, 253);
+	--color-tertiary-200: rgb(209, 197, 250);
+	--color-tertiary-300: rgb(186, 167, 247);
+	--color-tertiary-400: rgb(160, 131, 243);
+	--color-tertiary-500: rgb(135, 96, 239);
+	--color-tertiary-600: rgb(114, 72, 224);
+	--color-tertiary-700: rgb(94, 56, 199);
+	--color-tertiary-800: rgb(77, 45, 168);
+	--color-tertiary-900: rgb(62, 36, 136);
+	--color-tertiary-950: rgb(46, 25, 101);
+	--color-tertiary-contrast-dark: var(--color-tertiary-950);
+	--color-tertiary-contrast-light: var(--color-tertiary-50);
+	--color-tertiary-contrast-50: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-100: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-200: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-300: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-400: var(--color-tertiary-contrast-dark);
+	--color-tertiary-contrast-500: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-600: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-700: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-800: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-900: var(--color-tertiary-contrast-light);
+	--color-tertiary-contrast-950: var(--color-tertiary-contrast-light);
+
+	/* ── Success: Weiss ice blue ── */
+	--color-success-50: rgb(235, 248, 255);
+	--color-success-100: rgb(213, 240, 253);
+	--color-success-200: rgb(183, 228, 250);
+	--color-success-300: rgb(148, 212, 247);
+	--color-success-400: rgb(113, 194, 243);
+	--color-success-500: rgb(82, 176, 238);
+	--color-success-600: rgb(58, 152, 219);
+	--color-success-700: rgb(44, 124, 185);
+	--color-success-800: rgb(36, 99, 150);
+	--color-success-900: rgb(31, 78, 119);
+	--color-success-950: rgb(24, 55, 83);
+	--color-success-contrast-dark: var(--color-success-950);
+	--color-success-contrast-light: var(--color-success-50);
+	--color-success-contrast-50: var(--color-success-contrast-dark);
+	--color-success-contrast-100: var(--color-success-contrast-dark);
+	--color-success-contrast-200: var(--color-success-contrast-dark);
+	--color-success-contrast-300: var(--color-success-contrast-dark);
+	--color-success-contrast-400: var(--color-success-contrast-dark);
+	--color-success-contrast-500: var(--color-success-contrast-light);
+	--color-success-contrast-600: var(--color-success-contrast-light);
+	--color-success-contrast-700: var(--color-success-contrast-light);
+	--color-success-contrast-800: var(--color-success-contrast-light);
+	--color-success-contrast-900: var(--color-success-contrast-light);
+	--color-success-contrast-950: var(--color-success-contrast-light);
+
+	/* ── Surface: Vale night, faint warm tint ── */
+	--color-surface-50: rgb(253, 252, 252);
+	--color-surface-100: rgb(243, 232, 233);
+	--color-surface-200: rgb(233, 212, 214);
+	--color-surface-300: rgb(213, 184, 187);
+	--color-surface-400: rgb(183, 150, 154);
+	--color-surface-500: rgb(152, 118, 122);
+	--color-surface-600: rgb(124, 94, 98);
+	--color-surface-700: rgb(97, 72, 76);
+	--color-surface-800: rgb(71, 51, 54);
+	--color-surface-900: rgb(46, 32, 34);
+	--color-surface-950: rgb(24, 16, 17);
+	--color-surface-contrast-dark: var(--color-surface-950);
+	--color-surface-contrast-light: var(--color-surface-50);
+	--color-surface-contrast-50: var(--color-surface-contrast-dark);
+	--color-surface-contrast-100: var(--color-surface-contrast-dark);
+	--color-surface-contrast-200: var(--color-surface-contrast-dark);
+	--color-surface-contrast-300: var(--color-surface-contrast-dark);
+	--color-surface-contrast-400: var(--color-surface-contrast-dark);
+	--color-surface-contrast-500: var(--color-surface-contrast-light);
+	--color-surface-contrast-600: var(--color-surface-contrast-light);
+	--color-surface-contrast-700: var(--color-surface-contrast-light);
+	--color-surface-contrast-800: var(--color-surface-contrast-light);
+	--color-surface-contrast-900: var(--color-surface-contrast-light);
+	--color-surface-contrast-950: var(--color-surface-contrast-light);
+}

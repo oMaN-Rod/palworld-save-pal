@@ -171,6 +171,15 @@ export const navItems: NavItem[] = [
 		label: () => m.breeding(),
 		href: '/breeding'
 	},
+	{
+		id: 'signal',
+		section: 'tiles',
+		group: 'tools',
+		// A broadcast antenna: the tab's whole job is radiating the live feed.
+		icon: () => 'tabler:antenna',
+		label: () => 'Signal',
+		href: '/signal'
+	},
 
 	{
 		id: 'tools',

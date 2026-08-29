@@ -16,6 +16,7 @@ pub const MIGRATIONS: &[Migration] = &[
     Migration { version: 6, name: "blueprints", sql: include_str!("../migrations/0006_blueprints.sql") },
     Migration { version: 7, name: "ups_awakened_imported", sql: include_str!("../migrations/0007_ups_awakened_imported.sql") },
     Migration { version: 8, name: "plugins", sql: include_str!("../migrations/0008_plugins.sql") },
+    Migration { version: 9, name: "signal", sql: include_str!("../migrations/0009_signal.sql") },
 ];
 
 const CREATE_TRACKER: &str =
@@ -85,7 +86,7 @@ mod tests {
     async fn applies_all_then_is_idempotent() {
         let driver = MockDriver { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]) };
         run_migrations(&driver).await.unwrap();
-        assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7, 8]);
+        assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7, 8, 9]);
         let migration_execs = driver
             .executes
             .lock()

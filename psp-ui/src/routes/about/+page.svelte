@@ -102,7 +102,7 @@
 			transition:fade={{ duration: 150 }}
 		>
 			<button
-				class="text-muted hover:text-surface-50 absolute right-3 top-3 transition-colors"
+				class="text-muted hover:text-surface-50 absolute top-3 right-3 transition-colors"
 				onclick={() => (easterEgg = false)}
 				aria-label={m.compat_dismiss()}
 			>
@@ -118,23 +118,60 @@
 			>
 				<Icon icon="tabler:sparkles" size={20} class="text-primary-400 shrink-0" />
 				<h2 class="heading-gradient text-lg font-bold">CyrixJD115</h2>
-				<Icon icon="tabler:brand-github" size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
+				<Icon
+					icon="tabler:brand-github"
+					size={16}
+					class="text-surface-400 group-hover:text-primary-300 transition-colors"
+				/>
 			</a>
 
 			<div class="mt-4 space-y-2.5">
 				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<Icon icon="tabler:palette" size={18} class="text-secondary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Theme UI/UX Overhaul</p>
 						<p class="text-muted text-xs">Frontier theme, design tokens, palette system</p>
 					</div>
 				</div>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<Icon icon="tabler:git-merge" size={18} class="text-tertiary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Breeding Calculator</p>
 						<p class="text-muted text-xs">Standalone breeding chain solver + dendrogram</p>
+					</div>
+				</div>
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
+					<Icon icon="tabler:antenna" size={18} class="text-primary-400 shrink-0" />
+					<div>
+						<p class="text-surface-50 text-sm font-medium">Signal Live Feed</p>
+							<p class="text-muted text-xs">
+								Set the foundation for the Signal module that brings the live feed here
+							</p>
+					</div>
+				</div>
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
+					<Icon icon="tabler:medal" size={18} class="text-warning-400 shrink-0" />
+					<div>
+						<p class="text-surface-50 text-sm font-medium">Effigies Editor</p>
+						<p class="text-muted text-xs">
+							Lifmunk relic boosts for every Statue of Power stat, per player
+						</p>
+					</div>
+				</div>
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
+					<img
+						src="/rwby-rose.webp"
+						alt="RWBY rose"
+						width="18"
+						height="18"
+						class="h-[18px] w-[18px] shrink-0"
+					/>
+					<div>
+						<p class="text-surface-50 text-sm font-medium">RWBY Skin Easter Egg</p>
+						<p class="text-muted text-xs">
+							Red like roses - whisper the team's name on the Signal tab
+						</p>
 					</div>
 				</div>
 			</div>

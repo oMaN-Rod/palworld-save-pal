@@ -38,6 +38,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             live_connections,
             ext: Arc::new(psp_server::server_ext::ServerExtRouter {
                 services: server_services,
+                signal: psp_server::memory_signal_manager().await,
             }),
             lsp: Arc::new(psp_app::lsp::NullLspService),
             sessions: std::sync::Mutex::new(psp_server::SessionStore::default()),
