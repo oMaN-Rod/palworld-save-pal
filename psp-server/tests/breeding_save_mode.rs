@@ -5,7 +5,7 @@
 //! pals parsed) → `breeding_chain` with those owned pals and a reachable
 //! target (chains computed from the player's data).
 //!
-//! This mirrors `ui/src/routes/breeding/+page.svelte`: the page sends the
+//! This mirrors `psp-ui/src/routes/breeding/+page.svelte`: the page sends the
 //! already-parsed `appState.players[uid].pals` back as `origin: "owned"`
 //! inputs (the same shape `saveOwnedPals()` produces) and only computes after
 //! the player's pals are loaded.

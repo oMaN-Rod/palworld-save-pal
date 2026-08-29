@@ -32,7 +32,7 @@ const RELIC_KEYS = [
 ];
 
 const srcDir = join(contentRoot, 'Pal', 'Texture', 'UI', 'IngameMenu', 'Buildup');
-const outDir = join('ui', 'src', 'lib', 'assets', 'img');
+const outDir = join('psp-ui', 'src', 'lib', 'assets', 'img');
 
 for (const [index, key] of RELIC_KEYS.entries()) {
 	const nn = String(index).padStart(2, '0');

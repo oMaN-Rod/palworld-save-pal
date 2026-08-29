@@ -127,7 +127,7 @@ behavior.
 `dev:web` starts the Vite dev server and the Rust backend together:
 
 ```bash
-cd ui
+cd psp-ui
 bun install
 bun run dev:web
 ```
@@ -140,7 +140,7 @@ Run the app in dev mode with hot-reload — Tauri starts the Vite dev server for
 you (requires the Tauri CLI: `cargo install tauri-cli --version "^2" --locked`):
 
 ```bash
-cd ui && bun install && cd ..
+cd psp-ui && bun install && cd ..
 cd psp-desktop
 cargo tauri dev
 ```

@@ -1,4 +1,4 @@
-// Writes ui/.env for desktop builds. Default mode repairs the file only when it
+// Writes psp-ui/.env for desktop builds. Default mode repairs the file only when it
 // is absent or not a usable desktop env, so `cargo tauri dev` works on a fresh
 // clone and after a `build:web` run (which force-writes the web values into the
 // same file) without stomping a customized desktop env. `--force` overwrites
@@ -26,7 +26,7 @@ function parseEnv(contents) {
 }
 
 /**
- * @param {string | null} existing contents of ui/.env, or null when absent
+ * @param {string | null} existing contents of psp-ui/.env, or null when absent
  * @param {{ force?: boolean }} [options]
  */
 export function desktopEnvNeedsWrite(existing, { force = false } = {}) {
@@ -38,11 +38,11 @@ export function desktopEnvNeedsWrite(existing, { force = false } = {}) {
 }
 
 /**
- * The build target, read from the same ui/.env that `$env/static/public` serves
+ * The build target, read from the same psp-ui/.env that `$env/static/public` serves
  * to the app. A missing file means web, so a fresh clone still produces the full
  * SEO output rather than silently shipping a desktop-shaped build.
  *
- * @param {string | null} contents contents of ui/.env, or null when absent
+ * @param {string | null} contents contents of psp-ui/.env, or null when absent
  */
 export function isDesktopEnv(contents) {
 	if (contents === null) return false;
@@ -61,8 +61,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
 
 	if (desktopEnvNeedsWrite(existing, { force })) {
 		writeFileSync(envPath, DESKTOP_ENV);
-		console.log(`[ensure-desktop-env] wrote ui/.env for desktop${force ? ' (forced)' : ''}`);
+		console.log(`[ensure-desktop-env] wrote psp-ui/.env for desktop${force ? ' (forced)' : ''}`);
 	} else {
-		console.log('[ensure-desktop-env] ui/.env already set for desktop, leaving it alone');
+		console.log('[ensure-desktop-env] psp-ui/.env already set for desktop, leaving it alone');
 	}
 }

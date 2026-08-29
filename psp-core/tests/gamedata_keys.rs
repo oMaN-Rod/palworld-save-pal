@@ -53,7 +53,7 @@ fn pals_json_keys_are_upper_camel_and_boss_prefixes_are_uppercase() {
 /// (`es-MX`, `pt-BR`, `zh-Hans`, `zh-Hant`) while the app sends lowercase locale codes; an
 /// exact-case lookup resolves those four to nothing, for every table.
 ///
-/// The codes below are `SupportedLanguage` in `ui/src/lib/types/settings.ts`.
+/// The codes below are `SupportedLanguage` in `psp-ui/src/lib/types/settings.ts`.
 #[test]
 fn every_supported_language_resolves_its_l10n_tables() {
     const APP_LOCALES: [&str; 16] = [

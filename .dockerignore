@@ -15,8 +15,8 @@ psp-rs.db
 *.db-shm
 *.db-wal
 node_modules
-ui/node_modules
-ui/.svelte-kit
+psp-ui/node_modules
+psp-ui/.svelte-kit
 ui_build
 target
 docs

@@ -28,7 +28,7 @@ let total = 0;
 let bytes = 0;
 
 for (const { dir, src } of AREAS) {
-	const outRoot = join('ui', 'static', 'maps', dir);
+	const outRoot = join('psp-ui', 'static', 'maps', dir);
 	rmSync(outRoot, { recursive: true, force: true });
 
 	const meta = await sharp(src).metadata();

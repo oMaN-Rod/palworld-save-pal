@@ -11,7 +11,7 @@ const localizedEntries = LOCALIZED_PATHS.flatMap((pathname) =>
 	siteLocales.map((locale) => localizedPath(pathname, locale))
 );
 
-// build:desktop force-writes ui/.env before vite starts, so this reads the same
+// build:desktop force-writes psp-ui/.env before vite starts, so this reads the same
 // source `$env/static/public` serves to the app.
 const isDesktop = readIsDesktopBuild();
 

@@ -5,7 +5,7 @@ export const SITE_ORIGIN = 'https://palworldsavepal.app';
  */
 
 /**
- * Mirrors ui/project.inlang/settings.json. Keep the two in sync.
+ * Mirrors psp-ui/project.inlang/settings.json. Keep the two in sync.
  * @type {readonly SiteLocale[]}
  */
 export const siteLocales = Object.freeze([

@@ -76,7 +76,7 @@ export default defineConfig({
 		// another port and leaving the desktop webview on a dead URL.
 		port: 5173,
 		strictPort: true,
-		// The Oodle (ooz) wasm module lives in ui/vendor, outside Vite's default dev
+		// The Oodle (ooz) wasm module lives in psp-ui/vendor, outside Vite's default dev
 		// fs sandbox; allow it so the web worker can load ooz.mjs/ooz.wasm in dev.
 		fs: {
 			allow: [fileURLToPath(new URL('./vendor', import.meta.url))]

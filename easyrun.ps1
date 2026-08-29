@@ -27,7 +27,7 @@ $ErrorActionPreference = "Stop"
 
 # Every port/path below is load-bearing in the real config.
 $RepoRoot       = Split-Path -Parent $MyInvocation.MyCommand.Path
-$UiDir          = Join-Path $RepoRoot "ui"
+$UiDir          = Join-Path $RepoRoot "psp-ui"
 $PspDesktopDir  = Join-Path $RepoRoot "psp-desktop"
 $PspWebDir      = Join-Path $RepoRoot "psp-web"
 $EnvFile        = Join-Path $UiDir ".env"
@@ -181,7 +181,7 @@ function Check-Repo() {
         return $null
     }
     return @{ Name="PSP repo"; Status="crit";
-              Detail="psp-server/Cargo.toml or ui/ not found at $RepoRoot";
+              Detail="psp-server/Cargo.toml or psp-ui/ not found at $RepoRoot";
               Hint="Run easyrun.ps1 from the Palworld Save Pal repository root." }
 }
 
@@ -293,7 +293,7 @@ function Report-Preflight($mode, [bool]$asJson) {
     if ($nCrit -gt 0) { return 1 } else { return 0 }
 }
 
-# Mirrors ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
+# Mirrors psp-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 function Snapshot-Env() {
     if (Test-Path $EnvFile) {
         $script:PreviousEnvExists = $true
@@ -317,13 +317,13 @@ function Write-WebEnv([string]$wsUrl) {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
     $val = if ($wsUrl) { $wsUrl } else { "" }
     Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=$val`nPUBLIC_DESKTOP_MODE=false`n"
-    Log-Info "Wrote ui/.env (web mode, WS_URL=$(if ($wsUrl) { $wsUrl } else { '<empty>' }))"
+    Log-Info "Wrote psp-ui/.env (web mode, WS_URL=$(if ($wsUrl) { $wsUrl } else { '<empty>' }))"
 }
 
 function Write-DesktopEnv() {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
     Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=127.0.0.1:5174/ws`nPUBLIC_DESKTOP_MODE=true`n"
-    Log-Info "Wrote ui/.env (desktop mode)"
+    Log-Info "Wrote psp-ui/.env (desktop mode)"
 }
 
 # We let child processes inherit the console (no output redirection), so their
@@ -409,10 +409,10 @@ function Ensure-BunInstall([bool]$force) {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found — run .\easyrun.ps1 -Check first." }
     if ((Test-Path $NodeModules) -and -not $force) {
-        Log-Info "ui/node_modules present — skipping bun install."
+        Log-Info "psp-ui/node_modules present — skipping bun install."
         return
     }
-    Log-Info "Running 'bun install' in ui/ (first run can take a while)…"
+    Log-Info "Running 'bun install' in psp-ui/ (first run can take a while)…"
     Push-Location $UiDir
     try {
         & $bun install
@@ -456,7 +456,7 @@ function Ensure-Wasm([bool]$rebuild) {
     }
 
     if (-not $reason) {
-        Log-Info "WASM up to date (ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
+        Log-Info "WASM up to date (psp-ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
         return
     }
 
@@ -580,7 +580,7 @@ function Run-Web($opts) {
     Wait-ForHttp "http://${h}:$vitePort" "Vite" 60 | Out-Null
     Write-Host ""
     Write-Host "  ▸ PSP web dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
-    Write-Host "  Ctrl-C to stop. easyrun restores ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C to stop. easyrun restores psp-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
 }
@@ -600,7 +600,7 @@ function Run-Desktop($opts) {
     }
     Banner "Dev: desktop  (Tauri + embedded psp-server)"
     $tauri = Spawn-BgTagged "tauri" @($cargo, "tauri", "dev") $PspDesktopDir $null
-    Write-Host "  Ctrl-C to stop. easyrun restores ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C to stop. easyrun restores psp-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($tauri) @()
 }

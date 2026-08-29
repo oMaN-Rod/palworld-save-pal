@@ -70,12 +70,12 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: bun-ci-${{ runner.os }}-${{ hashFiles('ui/bun.lock') }}
+          key: bun-ci-${{ runner.os }}-${{ hashFiles('psp-ui/bun.lock') }}
 
       - name: Install frontend dependencies
-        working-directory: ui
+        working-directory: psp-ui
         run: bun install --frozen-lockfile
 
       - name: Desktop web build succeeds
-        working-directory: ui
+        working-directory: psp-ui
         run: bun run build

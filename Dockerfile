@@ -14,9 +14,9 @@ ARG PUBLIC_WS_URL=127.0.0.1:5174/ws
 
 # Copy only what the UI build reads, so Rust-only changes do not invalidate the
 # bun-install/vite layers: generate-sitemap.mjs reads ../../data/json.
-COPY ui /app/ui
+COPY psp-ui /app/psp-ui
 COPY data/json /app/data/json
-WORKDIR /app/ui
+WORKDIR /app/psp-ui
 RUN echo "PUBLIC_WS_URL=${PUBLIC_WS_URL}" >.env; \
     echo "PUBLIC_DESKTOP_MODE=false" >>.env; \
     bun install --frozen-lockfile; \

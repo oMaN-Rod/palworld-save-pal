@@ -45,14 +45,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: bun-web-${{ runner.os }}-${{ hashFiles('ui/bun.lock') }}
+          key: bun-web-${{ runner.os }}-${{ hashFiles('psp-ui/bun.lock') }}
 
       - name: Install frontend dependencies
-        working-directory: ui
+        working-directory: psp-ui
         run: bun install --frozen-lockfile
 
       - name: Build web bundle
-        working-directory: ui
+        working-directory: psp-ui
         env:
           PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
         run: bun run build:web
@@ -61,13 +61,13 @@ jobs:
       # own glue -- an unstubbed WASI symbol would otherwise link silently and
       # only fail at instantiation, in the browser, for the user.
       - name: Check wasm imports
-        working-directory: ui
+        working-directory: psp-ui
         run: node ../psp-lua-sys/scripts/check-wasm-imports.mjs src/lib/wasm/psp/psp_bg.wasm
 
       # Fails the run before upload if the asset budget is breached or a public
       # page lost its title/description/canonical/h1.
       - name: Verify build output
-        working-directory: ui
+        working-directory: psp-ui
         run: bun run verify:build
 
       - name: Deploy to Cloudflare

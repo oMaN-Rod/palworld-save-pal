@@ -11,7 +11,7 @@ set -euo pipefail
 
 # Every port/path below is load-bearing in the real config.
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UI_DIR="$REPO_ROOT/ui"
+UI_DIR="$REPO_ROOT/psp-ui"
 PSP_DESKTOP_DIR="$REPO_ROOT/psp-desktop"
 PSP_WEB_DIR="$REPO_ROOT/psp-web"
 ENV_FILE="$UI_DIR/.env"
@@ -80,7 +80,7 @@ check_repo() {
     if [[ -f "$REPO_ROOT/psp-server/Cargo.toml" ]] && [[ -d "$UI_DIR" ]]; then
         return 0
     fi
-    printf 'PSP repo\tcrit\tpsp-server/Cargo.toml or ui/ not found at %s\tRun easyrun from the PSP repo root.\n' "$REPO_ROOT"
+    printf 'PSP repo\tcrit\tpsp-server/Cargo.toml or psp-ui/ not found at %s\tRun easyrun from the PSP repo root.\n' "$REPO_ROOT"
 }
 
 check_bun() {
@@ -323,7 +323,7 @@ report_preflight() {
     return 0
 }
 
-# Mirrors ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
+# Mirrors psp-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 snapshot_env() {
     if [[ -f "$ENV_FILE" ]]; then
         PREVIOUS_ENV_EXISTS=1
@@ -347,13 +347,13 @@ write_web_env() {
     # $1 = ws_url (may be empty for the worker/browser-only build)
     mkdir -p "$UI_DIR"
     printf 'PUBLIC_WS_URL=%s\nPUBLIC_DESKTOP_MODE=false\n' "${1:-}" > "$ENV_FILE"
-    log_info "Wrote ui/.env (web mode, WS_URL=${1:-<empty>})"
+    log_info "Wrote psp-ui/.env (web mode, WS_URL=${1:-<empty>})"
 }
 
 write_desktop_env() {
     mkdir -p "$UI_DIR"
     printf 'PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true\n' > "$ENV_FILE"
-    log_info "Wrote ui/.env (desktop mode)"
+    log_info "Wrote psp-ui/.env (desktop mode)"
 }
 
 # Children run in the SCRIPT's own process group (NOT a new session via setsid).
@@ -415,7 +415,7 @@ cleanup_children() {
         # This shell is a member of the group it is about to signal. SIGTERM is
         # survivable (ignored below for the duration), but a group-wide SIGKILL
         # is not trappable and would kill us before restore_env_on_exit runs,
-        # leaving ui/.env pointing at the dev build. So pass 2 enumerates the
+        # leaving psp-ui/.env pointing at the dev build. So pass 2 enumerates the
         # survivors and skips our own PID instead of killing the group.
         trap '' TERM
         kill -TERM -- -"$self_pgid" 2>/dev/null
@@ -459,10 +459,10 @@ ensure_bun_install() {
     bun="$(resolve_tool bun || true)"
     [[ -n "$bun" ]] || die "bun not found — run ./easyrun.sh --check first."
     if [[ -d "$NODE_MODULES" ]] && (( ! force )); then
-        log_info "ui/node_modules present — skipping bun install."
+        log_info "psp-ui/node_modules present — skipping bun install."
         return
     fi
-    log_info "Running \`bun install\` in ui/ (first run can take a while)…"
+    log_info "Running \`bun install\` in psp-ui/ (first run can take a while)…"
     ( cd "$UI_DIR" && "$bun" install ) >&2
     log_ok "bun install complete."
 }
@@ -504,7 +504,7 @@ ensure_wasm() {
     fi
 
     if [[ -z "$reason" ]]; then
-        log_info "WASM up to date (ui/src/lib/wasm/psp/psp_bg.wasm) (--rebuild-wasm to redo)."
+        log_info "WASM up to date (psp-ui/src/lib/wasm/psp/psp_bg.wasm) (--rebuild-wasm to redo)."
         return
     fi
 
@@ -608,7 +608,7 @@ run_web() {
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
     printf '\n%s%s  ▸ PSP web dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$vite_port" "$RESET" >&2
-    printf '%s  Ctrl-C to stop. easyrun restores ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
         wait_on_pids "$vite_pid" "$server_pid"
     else
@@ -636,7 +636,7 @@ run_desktop() {
     # cargo tauri dev must run from psp-desktop/.
     SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
     tauri_pid="$LAST_BG_PID"
-    printf '%s  Ctrl-C to stop. easyrun restores ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$tauri_pid"
 }
 

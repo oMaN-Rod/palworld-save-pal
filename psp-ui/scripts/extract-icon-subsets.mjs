@@ -4,7 +4,7 @@
  * `src/`. Keeps the bundle small (full Tabler is ~2.9 MB, Phosphor ~2 MB)
  * while staying fully offline: no icon data is ever fetched at runtime.
  *
- * Run from ui/ whenever icons are added or removed in source:
+ * Run from psp-ui/ whenever icons are added or removed in source:
  *
  *   node scripts/extract-icon-subsets.mjs
  *

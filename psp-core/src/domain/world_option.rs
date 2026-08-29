@@ -349,7 +349,7 @@ pub fn apply_patch(save: &mut crate::ue::Save, patch: &[WorldOptionPatch]) -> Re
 
 impl WoKind {
     /// Lowercase wire tag. Must match `WoFieldKind` in
-    /// `ui/src/lib/components/worldoption/worldOptionFields.ts`.
+    /// `psp-ui/src/lib/components/worldoption/worldOptionFields.ts`.
     pub fn wire_tag(self) -> &'static str {
         match self {
             WoKind::Bool => "bool",

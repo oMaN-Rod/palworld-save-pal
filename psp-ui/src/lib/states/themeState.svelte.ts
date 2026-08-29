@@ -28,7 +28,7 @@ export const themeOptions: SelectOption[] = [
 // swaps the color palette is kept in sync from the root layout, not from here.
 export const theme = persistedState<ThemeName>('psp-theme', DEFAULT_THEME);
 
-// Light-background themes (by --color-surface-950 in ui/src/themes/*.css); a new
+// Light-background themes (by --color-surface-950 in psp-ui/src/themes/*.css); a new
 // theme not added here silently gets the dark-logo variant.
 export const LIGHT_THEMES: ReadonlySet<ThemeName> = new Set<ThemeName>(['light', 'lamball']);
 

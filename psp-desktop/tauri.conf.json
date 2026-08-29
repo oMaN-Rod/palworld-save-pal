@@ -6,11 +6,11 @@
   "build": {
     "beforeDevCommand": {
       "script": "bun run dev:desktop",
-      "cwd": "../ui"
+      "cwd": "../psp-ui"
     },
     "beforeBuildCommand": {
       "script": "bun run build:desktop",
-      "cwd": "../ui"
+      "cwd": "../psp-ui"
     },
     "devUrl": "http://localhost:5173",
     "frontendDist": "http://127.0.0.1:5174"

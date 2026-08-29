@@ -2,13 +2,13 @@
 //! should have a matching `.webp` asset, so that newly-added pals ship with
 //! real artwork instead of silently falling back to art-less rendering.
 //!
-//! This is NOT a crash guard. `ui/src/lib/utils/assetLoader.ts` (`AssetLoader`)
+//! This is NOT a crash guard. `psp-ui/src/lib/utils/assetLoader.ts` (`AssetLoader`)
 //! falls back to a shared `unknownIcon` (`img/unknown.webp`) whenever a
 //! per-key lookup misses, so a missing asset degrades gracefully to a
 //! generic icon rather than a broken image / 404. The value of this test is
 //! purely to flag the gap early so someone remembers to add the art.
 //!
-//! Filename derivation mirrors `ui/src/lib/utils/assetLoader.ts`:
+//! Filename derivation mirrors `psp-ui/src/lib/utils/assetLoader.ts`:
 //! - `AssetLoader.cleanseCharacterId` lowercases the key and strips the
 //!   `predator_`, `_oilrig`, `raid_`, `summon_`, `_max`, trailing `_<digits>`,
 //!   `boss_`, `quest_farmer03_`, and `_otomo` tokens.
@@ -48,7 +48,7 @@ fn game_data() -> GameData {
     GameData::load(&json_dir).expect("data dir")
 }
 
-/// Mirrors `AssetLoader.cleanseCharacterId` in `ui/src/lib/utils/assetLoader.ts`.
+/// Mirrors `AssetLoader.cleanseCharacterId` in `psp-ui/src/lib/utils/assetLoader.ts`.
 fn cleanse_character_id(key: &str) -> String {
     let mut s = key.to_lowercase();
     s = s.replace("predator_", "");
@@ -76,7 +76,7 @@ fn is_missing_art(key: &str, existing: &HashSet<String>) -> bool {
 }
 
 fn existing_assets() -> HashSet<String> {
-    let img_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../ui/src/lib/assets/img");
+    let img_dir = Path::new(env!("CARGO_MANIFEST_DIR")).join("../psp-ui/src/lib/assets/img");
     std::fs::read_dir(&img_dir)
         .expect("img dir present")
         .filter_map(|entry| entry.ok())
@@ -116,7 +116,7 @@ fn every_pal_key_has_an_image_asset() {
     assert!(
         missing.is_empty(),
         "{} pal(s) have no .webp asset and are not in KNOWN_MISSING_ART: {:?}\n\
-         Either add the missing asset(s) under ui/src/lib/assets/img, or if the \
+         Either add the missing asset(s) under psp-ui/src/lib/assets/img, or if the \
          pal is a genuinely un-ownable internal entity (like a raid-boss body \
          part), deliberately add it to KNOWN_MISSING_ART in psp-core/tests/pal_images.rs \
          with a comment explaining why.",

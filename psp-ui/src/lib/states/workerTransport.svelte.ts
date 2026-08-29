@@ -24,7 +24,7 @@ export class WorkerTransport {
 		this.#createWorker =
 			options.createWorker ??
 			// Relative URL (not `$lib`) so Vite's worker plugin resolves it; this
-			// file is ui/src/lib/states, the worker is ui/src/lib/worker.
+			// file is psp-ui/src/lib/states, the worker is psp-ui/src/lib/worker.
 			(() => new Worker(new URL('../worker/psp.worker.ts', import.meta.url), { type: 'module' }));
 		this.#unloadTarget =
 			options.unloadTarget !== undefined

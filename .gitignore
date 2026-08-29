@@ -24,18 +24,18 @@ logs/
 *.db-shm
 *.db-wal
 
-# UI specific (respecting the existing .gitignore in ui/)
-/ui/node_modules
-/ui/.output
-/ui/.vercel
+# UI specific (respecting the existing .gitignore in psp-ui/)
+/psp-ui/node_modules
+/psp-ui/.output
+/psp-ui/.vercel
 .svelte-kit
-/ui/build
-/ui/.env
-/ui/.env.*
-!/ui/.env.example
-!/ui/.env.test
-/ui/vite.config.js.timestamp-*
-/ui/vite.config.ts.timestamp-*
+/psp-ui/build
+/psp-ui/.env
+/psp-ui/.env.*
+!/psp-ui/.env.example
+!/psp-ui/.env.test
+/psp-ui/vite.config.js.timestamp-*
+/psp-ui/vite.config.ts.timestamp-*
 
 # Dependency directories
 node_modules/
@@ -59,11 +59,11 @@ data/json/settings.json
 /contract/tmp/
 
 # wasm-pack binary output (overwrites the committed placeholder module locally)
-/ui/src/lib/wasm/psp/psp_bg.wasm
-/ui/src/lib/wasm/psp/*_bg.js
+/psp-ui/src/lib/wasm/psp/psp_bg.wasm
+/psp-ui/src/lib/wasm/psp/*_bg.js
 
 # ooz wasm build scratch (cloned source + emcc intermediates); the vendored
-# artifact lives under ui/vendor/ooz and IS committed.
+# artifact lives under psp-ui/vendor/ooz and IS committed.
 /vendor/
 
 # Superpowers scratch: SDD ledgers, task briefs, brainstorm mockups

@@ -43,7 +43,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/ui
+        working-directory: palworld-save-pal/psp-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -105,7 +105,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/ui
+        working-directory: palworld-save-pal/psp-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -164,7 +164,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/ui
+        working-directory: palworld-save-pal/psp-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand

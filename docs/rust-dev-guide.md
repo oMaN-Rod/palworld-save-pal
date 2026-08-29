@@ -33,7 +33,7 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace                  # unit + integration + wire-contract
 ```
 
-Frontend type check: `bun run check` (from `ui/`).
+Frontend type check: `bun run check` (from `psp-ui/`).
 
 ## Server CLI
 

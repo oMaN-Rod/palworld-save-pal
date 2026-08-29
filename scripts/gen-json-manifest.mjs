@@ -3,10 +3,10 @@ import { dirname, resolve, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Anchor to the repo root from this file's own location, so the result does not
-// depend on the caller's working directory (bun runs scripts with cwd = ui/).
+// depend on the caller's working directory (bun runs scripts with cwd = psp-ui/).
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const srcDir = resolve(repoRoot, 'data/json');
-const destDir = resolve(repoRoot, 'ui/static/data/json');
+const destDir = resolve(repoRoot, 'psp-ui/static/data/json');
 
 if (existsSync(destDir)) rmSync(destDir, { recursive: true, force: true });
 cpSync(srcDir, destDir, { recursive: true });
@@ -29,4 +29,4 @@ function listJson(dir) {
 
 const files = listJson(destDir);
 writeFileSync(resolve(destDir, 'manifest.json'), JSON.stringify(files, null, 0));
-console.log(`web assets: ${files.length} json files + manifest → ui/static/data/json`);
+console.log(`web assets: ${files.length} json files + manifest → psp-ui/static/data/json`);
