@@ -1,4 +1,4 @@
-//! Pins `docs/plugins.md` against the host it describes: the Lua samples are
+//! Pins `docs/plugin-api.md` against the host it describes: the Lua samples are
 //! extracted and run, and the hand-written list of `player` rows that need the
 //! `players` capability is compared against the field table that decides it.
 
@@ -33,7 +33,7 @@ fn read_normalized(relative: &str) -> String {
 }
 
 fn docs() -> String {
-    read_normalized("docs/plugins.md")
+    read_normalized("docs/plugin-api.md")
 }
 
 struct LuaBlock {
@@ -62,7 +62,7 @@ fn lua_blocks(text: &str) -> Vec<LuaBlock> {
             }
         }
     }
-    assert!(open.is_none(), "docs/plugins.md has an unterminated ```lua fence");
+    assert!(open.is_none(), "docs/plugin-api.md has an unterminated ```lua fence");
     blocks
 }
 
@@ -123,7 +123,7 @@ fn block(key: &str) -> String {
     let mut matching = lua_blocks(&text).into_iter().filter(|block| first_line(block).starts_with(key));
     let found = matching
         .next()
-        .unwrap_or_else(|| panic!("docs/plugins.md has no lua block whose first line starts with {key:?}"));
+        .unwrap_or_else(|| panic!("docs/plugin-api.md has no lua block whose first line starts with {key:?}"));
     assert!(matching.next().is_none(), "more than one lua block starts with {key:?}");
     found.source
 }
@@ -212,7 +212,7 @@ fn every_lua_block_in_the_docs_is_executed_or_named_as_skipped() {
         let accounted = EXECUTED.iter().chain(SKIPPED.iter().map(|(key, _)| key)).any(|key| first.starts_with(key));
         assert!(
             accounted,
-            "the lua block at docs/plugins.md:{} is neither executed by this file nor listed \
+            "the lua block at docs/plugin-api.md:{} is neither executed by this file nor listed \
              in SKIPPED with a reason; its first line is {first:?}",
             block.line
         );
@@ -220,7 +220,7 @@ fn every_lua_block_in_the_docs_is_executed_or_named_as_skipped() {
     for key in EXECUTED.iter().chain(SKIPPED.iter().map(|(key, _)| key)) {
         assert!(
             blocks.iter().any(|block| first_line(block).starts_with(key)),
-            "no lua block in docs/plugins.md starts with {key:?} any more"
+            "no lua block in docs/plugin-api.md starts with {key:?} any more"
         );
     }
     assert_eq!(
@@ -489,11 +489,11 @@ fn documented_gated_player_fields(text: &str) -> BTreeSet<String> {
     let start = lines
         .iter()
         .position(|line| line.starts_with("- **From the player's own"))
-        .expect("docs/plugins.md must still list the player rows by origin");
+        .expect("docs/plugin-api.md must still list the player rows by origin");
     let end = lines
         .iter()
         .position(|line| line.contains("need the `players` capability"))
-        .expect("docs/plugins.md must still state how many rows need the capability");
+        .expect("docs/plugin-api.md must still state how many rows need the capability");
     assert!(end > start, "the origin lists must come before the count that totals them");
     backticked_identifiers(&lines[start..end])
 }
@@ -545,7 +545,7 @@ fn documented_gated_count(text: &str) -> usize {
     let line = text
         .lines()
         .find(|line| line.contains("need the `players` capability"))
-        .expect("docs/plugins.md must still state how many rows need the capability");
+        .expect("docs/plugin-api.md must still state how many rows need the capability");
     let word = line
         .split_whitespace()
         .find_map(|word| {
@@ -570,13 +570,13 @@ fn the_documented_player_rows_needing_players_are_the_ones_the_field_table_gates
 
     assert_eq!(
         documented, gated,
-        "docs/plugins.md's two origin lists must together name exactly the player rows that \
+        "docs/plugin-api.md's two origin lists must together name exactly the player rows that \
          need the players capability to read"
     );
     assert_eq!(
         documented_gated_count(&text),
         gated.len(),
-        "docs/plugins.md's spelled-out count must match how many rows are gated"
+        "docs/plugin-api.md's spelled-out count must match how many rows are gated"
     );
 }
 
@@ -589,7 +589,7 @@ fn the_player_row_of_the_handle_table_names_every_field_and_nothing_else() {
     let row = text
         .lines()
         .find(|line| line.starts_with("| `player` |"))
-        .expect("docs/plugins.md must still carry a player row in the handle table");
+        .expect("docs/plugin-api.md must still carry a player row in the handle table");
     let fields_cell = row.split('|').nth(2).expect("the row must have a fields cell");
     let documented = backticked_identifiers(&[fields_cell]);
     let mut expected: BTreeSet<String> = PLAYER_FIELDS.iter().map(|spec| spec.name.to_string()).collect();
@@ -618,7 +618,7 @@ fn collapsed(text: &str) -> String {
 fn cap_section(text: &str) -> String {
     let start = text
         .find(CAP_SECTION_START)
-        .expect("docs/plugins.md must still explain when gamedata.get refuses");
+        .expect("docs/plugin-api.md must still explain when gamedata.get refuses");
     let end = text[start..].find(CAP_SECTION_END).map(|at| start + at).unwrap_or(text.len());
     collapsed(&text[start..end])
 }
@@ -727,7 +727,7 @@ fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
     let section = cap_section(&docs());
     assert_eq!(
         MAX_TABLE_NODES, 150_000,
-        "the cap moved, and docs/plugins.md spells its old value out in digits"
+        "the cap moved, and docs/plugin-api.md spells its old value out in digits"
     );
     assert!(
         section.contains("150,000 JSON nodes"),
@@ -743,19 +743,19 @@ fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
             None => format!("gamedata.get('{}')", claim.catalog),
         };
         let catalog = game_data().get(&claim.catalog).unwrap_or_else(|| {
-            panic!("docs/plugins.md measures {call}, and no such catalog ships")
+            panic!("docs/plugin-api.md measures {call}, and no such catalog ships")
         });
         let value = match &claim.key {
             Some(key) => catalog
                 .as_object()
                 .and_then(|entries| entries.get(key))
-                .unwrap_or_else(|| panic!("docs/plugins.md measures {call}, which holds no such key")),
+                .unwrap_or_else(|| panic!("docs/plugin-api.md measures {call}, which holds no such key")),
             None => catalog,
         };
         assert_eq!(
             claim.nodes,
             node_count(value),
-            "docs/plugins.md quotes {} nodes for {call}",
+            "docs/plugin-api.md quotes {} nodes for {call}",
             claim.nodes
         );
     }
@@ -768,7 +768,7 @@ fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
     assert_eq!(
         named,
         fetches_over_the_cap(),
-        "docs/plugins.md must mark as over the cap exactly the fetches gamedata.get refuses"
+        "docs/plugin-api.md must mark as over the cap exactly the fetches gamedata.get refuses"
     );
 }
 
@@ -778,7 +778,7 @@ fn the_documented_gamedata_sizes_are_the_shipped_game_datas_own() {
 fn the_documented_catalog_census_matches_the_shipped_game_data() {
     let text = collapsed(&docs());
     let marker = " of the loaded game data's ";
-    let at = text.find(marker).expect("docs/plugins.md must still count the top-level catalogs");
+    let at = text.find(marker).expect("docs/plugin-api.md must still count the top-level catalogs");
     let spelled = text[..at]
         .split_whitespace()
         .last()
@@ -806,9 +806,9 @@ fn the_documented_catalog_census_matches_the_shipped_game_data() {
         .map(|name| (*name).to_string())
         .collect();
 
-    assert_eq!(documented_total, catalogs.len(), "docs/plugins.md's catalog total must match");
-    assert_eq!(documented_arrays, arrays.len(), "docs/plugins.md's array-catalog count must match");
-    assert_eq!(named, arrays, "docs/plugins.md must name exactly the catalogs that are JSON arrays");
+    assert_eq!(documented_total, catalogs.len(), "docs/plugin-api.md's catalog total must match");
+    assert_eq!(documented_arrays, arrays.len(), "docs/plugin-api.md's array-catalog count must match");
+    assert_eq!(named, arrays, "docs/plugin-api.md must name exactly the catalogs that are JSON arrays");
 }
 
 /// The render caps live in the browser, so nothing else in this crate can

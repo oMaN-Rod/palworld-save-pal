@@ -118,6 +118,10 @@ Docker/web is also supported. The backend is a Rust workspace at the repo
 root — see [docs/rust-dev-guide.md](docs/rust-dev-guide.md) for the full
 guide.
 
+Plugin authors should start with the [plugin guide](docs/plugins.md). The
+[Plugin API reference](docs/plugin-api.md) covers exact schemas and runtime
+behavior.
+
 ### Web
 
 `dev:web` starts the Vite dev server and the Rust backend together:
