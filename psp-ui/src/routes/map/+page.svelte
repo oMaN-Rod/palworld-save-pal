@@ -3,42 +3,42 @@
 	import { Seo } from '$lib/components/seo';
 	import { Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/utils';
-	import { pixelToLngLat } from '$components/map/mercator';
-	import { isWatchtower } from '$components/map/fastTravel';
-	import { PAL_SCALE_DEFAULT } from '$components/map/palSize';
-	import { MAP_OBJECT_SCALE_DEFAULT } from '$components/map/mapObjectSize';
-	import { clampMapOpacity } from '$components/map/mapOpacity';
-	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
-	import MapOptionsPanel from '$components/map/MapOptionsPanel.svelte';
-	import MapOptionsSheet from '$components/map/MapOptionsSheet.svelte';
-	import type { SheetSnap } from '$components/map/mapSheet';
-	import PlacementPanel from '$components/map/PlacementPanel.svelte';
-	import { mapOptionsState } from '$components/map/mapOptions.svelte';
+	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/geo/utils';
+	import { pixelToLngLat } from '$components/map/geo/mercator';
+	import { isWatchtower } from '$components/map/features/fastTravel';
+	import { PAL_SCALE_DEFAULT } from '$components/map/scene/pal/palSize';
+	import { MAP_OBJECT_SCALE_DEFAULT } from '$components/map/scene/objects/mapObjectSize';
+	import { clampMapOpacity } from '$components/map/style/mapOpacity';
+	import RelicFilterControl from '$components/map/controls/RelicFilterControl.svelte';
+	import MapOptionsPanel from '$components/map/panels/MapOptionsPanel.svelte';
+	import MapOptionsSheet from '$components/map/panels/MapOptionsSheet.svelte';
+	import type { SheetSnap } from '$components/map/state/mapSheet';
+	import PlacementPanel from '$components/map/panels/PlacementPanel.svelte';
+	import { mapOptionsState } from '$components/map/state/mapOptions.svelte';
 	import {
 		areaFastTravelGuids,
 		unlockedInArea,
 		relicTypeStats as computeRelicTypeStats,
 		orderedRelicTypes,
 		pointsInArea
-	} from '$components/map/mapCounts';
+	} from '$components/map/layers/mapCounts';
 	import {
 		toggleRelicPoint,
 		toggleFastTravelPoint,
 		unlockFastTravelGuids,
 		collectAllRelics
-	} from '$components/map/saveMapActions';
+	} from '$components/map/state/saveMapActions';
 	import {
 		allVisibilityPatch,
 		defaultPanelVisibility,
 		type MapLayerVisibility,
 		type PanelOptionId
-	} from '$components/map/layerPanelModel';
-	import { MAP_LAYERS, isMapLayerId, type MapLayerId } from '$components/map/layerRegistry';
-	import { mapLayerMarkerCount } from '$components/map/mapLayerFeatures';
+	} from '$components/map/layers/layerPanelModel';
+	import { MAP_LAYERS, isMapLayerId, type MapLayerId } from '$components/map/layers/layerRegistry';
+	import { mapLayerMarkerCount } from '$components/map/layers/mapLayerFeatures';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
-	import { partitionSpawns } from '$components/map/spawns';
+	import { partitionSpawns } from '$components/map/features/spawns';
 	import { placementState } from '$lib/data/placement.svelte';
 	import { blueprintsData } from '$lib/data/blueprints.svelte';
 	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
@@ -115,8 +115,8 @@
 	// rendered in Node at build time and shipped to visitors with no save at all.
 	let saveUi = $state<
 		| {
-				Panel: typeof import('$components/map/SaveMapPanel.svelte').default;
-				Controls: typeof import('$components/map/SaveMapControls.svelte').default;
+				Panel: typeof import('$components/map/panels/SaveMapPanel.svelte').default;
+				Controls: typeof import('$components/map/controls/SaveMapControls.svelte').default;
 		  }
 		| undefined
 	>(undefined);
@@ -126,8 +126,8 @@
 		if (!appState.saveFile || saveUiRequested) return;
 		saveUiRequested = true;
 		Promise.all([
-			import('$components/map/SaveMapPanel.svelte'),
-			import('$components/map/SaveMapControls.svelte')
+			import('$components/map/panels/SaveMapPanel.svelte'),
+			import('$components/map/controls/SaveMapControls.svelte')
 		]).then(([panel, controls]) => {
 			saveUi = { Panel: panel.default, Controls: controls.default };
 		});

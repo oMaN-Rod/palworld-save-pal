@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { mapToWorld } from '../utils';
+	import { mapToWorld } from '../geo/utils';
 	import Popup from './Popup.svelte';
 	import * as m from '$i18n/messages';
 

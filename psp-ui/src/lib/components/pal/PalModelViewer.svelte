@@ -6,7 +6,7 @@
 		palMeshFailed,
 		palModelUrl,
 		requestPalMesh
-	} from '$components/map/palMeshLibrary';
+	} from '$components/map/scene/pal/palMeshLibrary';
 	import { fitDistance, palBounds } from './palViewer';
 	import { PalSpin } from './palSpin';
 	import * as m from '$i18n/messages';

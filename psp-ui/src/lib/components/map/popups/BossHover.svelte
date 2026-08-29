@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Boss } from '$types';
 	import { palsData } from '$lib/data';
-	import { bossPalKey, humanizeSpawnerId } from '../utils';
+	import { bossPalKey, humanizeSpawnerId } from '../geo/utils';
 	import Hover from './Hover.svelte';
 	import Badge from './Badge.svelte';
 	import * as m from '$i18n/messages';

@@ -39,11 +39,11 @@
 		MAP_AREA_ORDER,
 		MAP_TILE_DIR,
 		type MapArea
-	} from './utils';
-	import { lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './mercator';
-	import { worldFittingConstrain } from './constrain';
-	import { haloRadiusPx, zoomScaledIconSize, zoomScaledRadius } from './expressions';
-	import { partitionSpawns } from './spawns';
+	} from './geo/utils';
+	import { lngLatToPixel, pixelToLngLat, verticalScaleFactor } from './geo/mercator';
+	import { worldFittingConstrain } from './geo/constrain';
+	import { haloRadiusPx, zoomScaledIconSize, zoomScaledRadius } from './style/expressions';
+	import { partitionSpawns } from './features/spawns';
 	import {
 		buildBaseFC,
 		buildBaseRadiusFC,
@@ -61,23 +61,23 @@
 		type MapFeatureType,
 		type StructureFC,
 		type StructureFeature
-	} from './features';
-	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './icons';
-	import { ICON_BOUNTY, palIconId } from './iconIds';
+	} from './features/features';
+	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './style/icons';
+	import { ICON_BOUNTY, palIconId } from './style/iconIds';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
-	import { genericRenderLayers, getMapLayer, type MapLayerId } from './layerRegistry';
-	import type { MapLayerVisibility } from './layerPanelModel';
-	import { buildMapLayerFC, mapLayerIconScale } from './mapLayerFeatures';
-	import { relicsByType } from './relics';
-	import { isWatchtower } from './fastTravel';
-	import { portalRingColorExpression, PORTAL_HEX } from './mapObjectPortal';
+	import { genericRenderLayers, getMapLayer, type MapLayerId } from './layers/layerRegistry';
+	import type { MapLayerVisibility } from './layers/layerPanelModel';
+	import { buildMapLayerFC, mapLayerIconScale } from './layers/mapLayerFeatures';
+	import { relicsByType } from './features/relics';
+	import { isWatchtower } from './features/fastTravel';
+	import { portalRingColorExpression, PORTAL_HEX } from './scene/objects/mapObjectPortal';
 	import {
 		STRUCTURE_TYPE_ORDER,
 		materialBlend,
 		materialOpacities,
 		materialTints,
 		structureColors
-	} from './mapColors.svelte';
+	} from './style/mapColors.svelte';
 	import {
 		dungeons,
 		fastTravelPoints,
@@ -89,30 +89,30 @@
 		buildingsData
 	} from '$lib/data';
 	import { assetLoader } from '$utils';
-	import MapTooltip from './MapTooltip.svelte';
-	import MapPopup from './MapPopup.svelte';
-	import BenchOverlay from './BenchOverlay.svelte';
-	import Toggle3dControl from './Toggle3dControl.svelte';
-	import Map3dOptionsControl from './Map3dOptionsControl.svelte';
-	import { createStructureLayer, type StructureLayer } from './structureLayer';
-	import { createGhostLayer, type GhostLayer } from './ghostLayer';
-	import { createSceneryLayer, type SceneryLayer } from './sceneryLayer';
-	import { beforeIdFor, LAYER_ORDER_3D } from './layerOrder';
+	import MapTooltip from './popups/MapTooltip.svelte';
+	import MapPopup from './popups/MapPopup.svelte';
+	import BenchOverlay from './bench/BenchOverlay.svelte';
+	import Toggle3dControl from './controls/Toggle3dControl.svelte';
+	import Map3dOptionsControl from './controls/Map3dOptionsControl.svelte';
+	import { createStructureLayer, type StructureLayer } from './scene/structures/structureLayer';
+	import { createGhostLayer, type GhostLayer } from './scene/mesh/ghostLayer';
+	import { createSceneryLayer, type SceneryLayer } from './scene/scenery/sceneryLayer';
+	import { beforeIdFor, LAYER_ORDER_3D } from './layers/layerOrder';
 	import {
 		createPalLayer,
 		predatorPalBosses,
 		type PalLayer,
 		type PalBoss,
 		type PalPredator
-	} from './palLayer';
-	import { createMapObjectLayer, type MapObjectItem, type MapObjectLayer } from './mapObjectLayer';
-	import { buildMapObjectItems, buildFastTravelRingFC, buildRelicRingFC } from './mapObjectItems';
-	import { buildPalPortalFC } from './palPortalFC';
-	import { PAL_SCALE_DEFAULT } from './palSize';
-	import { MAP_OBJECT_SCALE_DEFAULT } from './mapObjectSize';
-	import { decodeSceneryStream, type SceneryStream } from './sceneryFormat';
-	import { loadTintMosaic, type TintMosaic } from './sceneryTint';
-	import { composeWorld } from './ghostTransform';
+	} from './scene/pal/palLayer';
+	import { createMapObjectLayer, type MapObjectItem, type MapObjectLayer } from './scene/objects/mapObjectLayer';
+	import { buildMapObjectItems, buildFastTravelRingFC, buildRelicRingFC } from './scene/objects/mapObjectItems';
+	import { buildPalPortalFC } from './scene/pal/palPortalFC';
+	import { PAL_SCALE_DEFAULT } from './scene/pal/palSize';
+	import { MAP_OBJECT_SCALE_DEFAULT } from './scene/objects/mapObjectSize';
+	import { decodeSceneryStream, type SceneryStream } from './scene/scenery/sceneryFormat';
+	import { loadTintMosaic, type TintMosaic } from './scene/scenery/sceneryTint';
+	import { composeWorld } from './scene/mesh/ghostTransform';
 	import type {
 		BaseStructure,
 		BlueprintStructureGeometry,

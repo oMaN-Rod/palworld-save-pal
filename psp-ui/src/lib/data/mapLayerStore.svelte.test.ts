@@ -1,4 +1,4 @@
-import { WATCHTOWER_CLASS } from '$lib/components/map/fastTravel';
+import { WATCHTOWER_CLASS } from '$lib/components/map/features/fastTravel';
 import { MessageType } from '$types';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';

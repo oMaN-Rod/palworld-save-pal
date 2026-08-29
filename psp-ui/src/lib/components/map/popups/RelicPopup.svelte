@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { RelicPoint } from '$types';
-	import { relicTypeIcon } from '../styles';
+	import { relicTypeIcon } from '../style/styles';
 	import Popup from './Popup.svelte';
 	import Badge from './Badge.svelte';
 	import * as m from '$i18n/messages';

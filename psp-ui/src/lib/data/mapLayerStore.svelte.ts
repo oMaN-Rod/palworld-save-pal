@@ -7,7 +7,7 @@ import {
 	type MapLayerId,
 	type MapLayerSelection,
 	type RawArtifact
-} from '$lib/components/map/layerRegistry';
+} from '$lib/components/map/layers/layerRegistry';
 import { sendAndWait } from '$lib/utils/websocketUtils';
 import { MessageType } from '$types';
 

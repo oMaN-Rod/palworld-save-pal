@@ -2,7 +2,7 @@
 	import type { Boss } from '$types';
 	import { palsData } from '$lib/data';
 	import { assetLoader } from '$utils';
-	import { bossPalKey, humanizeSpawnerId } from '../utils';
+	import { bossPalKey, humanizeSpawnerId } from '../geo/utils';
 	import Popup from './Popup.svelte';
 	import Badge from './Badge.svelte';
 	import * as m from '$i18n/messages';

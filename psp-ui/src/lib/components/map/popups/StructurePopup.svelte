@@ -2,8 +2,8 @@
 	import type { BaseStructure } from '$types';
 	import { baseStructuresData, buildingsData } from '$lib/data';
 	import { getAppState } from '$states';
-	import { structureInfo } from '../structureInfo';
-	import { structureColors } from '../mapColors.svelte';
+	import { structureInfo } from '../scene/structures/structureInfo';
+	import { structureColors } from '../style/mapColors.svelte';
 	import Popup from './Popup.svelte';
 	import InfoRow from './InfoRow.svelte';
 	import * as m from '$i18n/messages';

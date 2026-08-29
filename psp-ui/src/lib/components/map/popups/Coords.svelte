@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { WorldMapPoint } from '$types';
-	import { worldToMap } from '../utils';
+	import { worldToMap } from '../geo/utils';
 	import InfoRow from './InfoRow.svelte';
 	import * as m from '$i18n/messages';
 

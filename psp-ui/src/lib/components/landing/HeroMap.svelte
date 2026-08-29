@@ -4,8 +4,8 @@
 	import type maplibregl from 'maplibre-gl';
 	import type { StyleSpecification } from 'maplibre-gl';
 	import { Map as MLMap, Source, Layer, Terrain } from '$components/maplibre';
-	import { MAP_MAX_BOUNDS, verticalScaleFactor } from '$components/map/mercator';
-	import { cmPerPx } from '$components/map/utils';
+	import { MAP_MAX_BOUNDS, verticalScaleFactor } from '$components/map/geo/mercator';
+	import { cmPerPx } from '$components/map/geo/utils';
 
 	const EMPTY_STYLE: StyleSpecification = {
 		version: 8,
