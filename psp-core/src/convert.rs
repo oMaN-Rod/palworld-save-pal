@@ -1,25 +1,20 @@
 //! In-memory sav<->json conversion. The JSON shape is `uesave`'s own schema.
-
-use std::io::Cursor;
+//!
+//! Both directions go through `savio`, never `uesave`'s own Oodle: on wasm32
+//! that codec is not linked, and a `PlM` container would fail with
+//! "Compression support not enabled" on a target that has a bridge lent to it.
 
 use crate::error::CoreError;
 
 pub fn sav_to_json_string(sav_bytes: &[u8]) -> Result<String, CoreError> {
-    let save = crate::ue::SaveReader::new()
-        .game::<crate::ue::Palworld>()
-        .types(crate::ue::games::palworld::palworld_types())
-        .read(Cursor::new(sav_bytes))
-        .map_err(|error| CoreError::Parse(error.to_string()))?;
+    let save = crate::savio::read_sav_bytes(sav_bytes)?;
     serde_json::to_string(&save).map_err(|error| CoreError::Other(error.to_string()))
 }
 
 pub fn json_to_sav_bytes(json_bytes: &[u8]) -> Result<Vec<u8>, CoreError> {
     let save: crate::ue::Save =
         serde_json::from_slice(json_bytes).map_err(|error| CoreError::Parse(error.to_string()))?;
-    let mut sav_bytes = Vec::new();
-    save.write_plm(&mut sav_bytes)
-        .map_err(|error| CoreError::Parse(error.to_string()))?;
-    Ok(sav_bytes)
+    crate::savio::write_sav_bytes(&save)
 }
 
 #[cfg(test)]
@@ -47,6 +42,36 @@ mod tests {
             crate::ue::compression::decompress_save(&mut std::io::Cursor::new(rebuilt_sav.as_slice()))
                 .unwrap();
         assert_eq!(original_gvas, rebuilt_gvas);
+    }
+
+    /// The web build links no Oodle codec and lends one instead, so a `PlM`
+    /// container has to be written and read through that bridge. Going to
+    /// `uesave`'s own compressor there fails with "Compression support not
+    /// enabled", which is what the browser's raw editor used to hit.
+    #[test]
+    fn conversion_uses_a_lent_codec_when_one_is_installed() {
+        crate::oodle::set_bridge(
+            |data| Ok([b"OOZ".as_slice(), data].concat()),
+            |payload, _| Ok(payload[3..].to_vec()),
+        );
+        let sav_bytes =
+            std::fs::read(reference_saves_dir().join("00000000000000000000000000000001.sav"))
+                .unwrap();
+
+        let json = sav_to_json_string(&sav_bytes).unwrap();
+        let rebuilt = json_to_sav_bytes(json.as_bytes()).unwrap();
+
+        assert_eq!(&rebuilt[8..12], b"PlM1");
+        assert_eq!(
+            &rebuilt[12..15],
+            b"OOZ",
+            "the container was not compressed by the lent codec"
+        );
+        assert_eq!(
+            sav_to_json_string(&rebuilt).unwrap(),
+            json,
+            "reading back through the lent codec lost the save"
+        );
     }
 
     #[test]

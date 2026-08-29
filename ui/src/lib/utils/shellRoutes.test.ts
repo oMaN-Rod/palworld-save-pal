@@ -13,7 +13,6 @@ describe('isSaveRequiredRoute', () => {
 		expect(isSaveRequiredRoute('/gps')).toBe(true);
 		expect(isSaveRequiredRoute('/ups')).toBe(true);
 		expect(isSaveRequiredRoute('/blueprints')).toBe(true);
-		expect(isSaveRequiredRoute('/editor')).toBe(true);
 		expect(isSaveRequiredRoute('/debug')).toBe(true);
 		expect(isSaveRequiredRoute('/servers')).toBe(true);
 		expect(isSaveRequiredRoute('/overview')).toBe(true);
@@ -32,12 +31,13 @@ describe('isSaveRequiredRoute', () => {
 		expect(isSaveRequiredRoute('/about')).toBe(false);
 		expect(isSaveRequiredRoute('/tools')).toBe(false);
 		expect(isSaveRequiredRoute('/upload')).toBe(false);
+		// The raw editor brings its own file; it needs no loaded save.
+		expect(isSaveRequiredRoute('/editor')).toBe(false);
 		expect(isSaveRequiredRoute('/docs')).toBe(false);
 		expect(isSaveRequiredRoute('/docs/wiki/pals')).toBe(false);
 	});
 
 	it('does not match on bare string prefixes', () => {
-		expect(isSaveRequiredRoute('/editorial')).toBe(false);
 		expect(isSaveRequiredRoute('/filesystem')).toBe(false);
 		expect(isSaveRequiredRoute('/upsell')).toBe(false);
 	});

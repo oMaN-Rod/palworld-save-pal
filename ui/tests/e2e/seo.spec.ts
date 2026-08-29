@@ -7,10 +7,7 @@ test.describe('SEO head tags', () => {
 		await page.goto('/');
 		await expect(page).toHaveTitle(/Palworld Save Editor/i);
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${ORIGIN}/`);
-		await expect(page.locator('meta[name="description"]')).toHaveAttribute(
-			'content',
-			/Palworld/i
-		);
+		await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /Palworld/i);
 		await expect(page.locator('h1')).toHaveCount(1);
 	});
 
@@ -34,6 +31,15 @@ test.describe('SEO head tags', () => {
 			'href',
 			`${ORIGIN}/wiki/pals/sheepball`
 		);
+		await expect(page.locator('link[rel="alternate"]')).toHaveCount(0);
+	});
+
+	test('raw editor page is English-only with canonical, description and h1', async ({ page }) => {
+		await page.goto('/editor');
+		await expect(page).toHaveTitle(/JSON Save Editor/i);
+		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${ORIGIN}/editor`);
+		await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /\.sav/i);
+		await expect(page.locator('h1')).toHaveCount(1);
 		await expect(page.locator('link[rel="alternate"]')).toHaveCount(0);
 	});
 

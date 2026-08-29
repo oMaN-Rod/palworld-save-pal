@@ -31,6 +31,13 @@ const WIKI_CATEGORIES = [
 
 const GUIDES = ['getting-started', 'save-management', 'server-setup'];
 
+/**
+ * Public pages outside `LOCALIZED_PATHS`: one English URL each, no alternates.
+ * The raw editor is a tool page, not a hub -- prefixing it into all 16 locales
+ * would ship 16 copies of an interface that is English either way.
+ */
+const ENGLISH_ONLY_PAGES = ['/editor'];
+
 export function xmlEscape(value) {
 	return value
 		.replaceAll('&', '&amp;')
@@ -124,7 +131,14 @@ async function main() {
 			})
 		)
 	);
-	await writeFile(resolve(staticDir, 'sitemaps/pages.xml'), buildUrlset(hubEntries), 'utf8');
+	const englishOnlyEntries = ENGLISH_ONLY_PAGES.map((pathname) =>
+		buildUrlEntry(pathname, { localized: false, priority: '0.7' })
+	);
+	await writeFile(
+		resolve(staticDir, 'sitemaps/pages.xml'),
+		buildUrlset([...hubEntries, ...englishOnlyEntries]),
+		'utf8'
+	);
 	children.push('sitemaps/pages.xml');
 
 	let wikiCount = 0;
@@ -157,7 +171,8 @@ async function main() {
 
 	await writeFile(resolve(staticDir, 'sitemap.xml'), buildSitemapIndex(children), 'utf8');
 	console.log(
-		`Sitemap: ${hubEntries.length} hub URLs, ${wikiCount} wiki URLs, ${guides.length} guides across ${children.length} child sitemaps.`
+		`Sitemap: ${hubEntries.length} hub URLs, ${englishOnlyEntries.length} English-only URLs, ` +
+			`${wikiCount} wiki URLs, ${guides.length} guides across ${children.length} child sitemaps.`
 	);
 }
 

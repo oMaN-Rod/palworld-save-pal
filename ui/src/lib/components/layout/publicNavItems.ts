@@ -11,7 +11,8 @@ export type PublicNavItem = {
 export const publicNavItems: PublicNavItem[] = [
 	{ id: 'map', href: '/map', icon: 'tabler:map', label: () => m.map() },
 	{ id: 'wiki', href: '/wiki', icon: 'tabler:book', label: () => m.docs_wiki() },
-	{ id: 'breeding', href: '/breeding', icon: 'tabler:flask', label: () => m.breeding() }
+	{ id: 'breeding', href: '/breeding', icon: 'tabler:flask', label: () => m.breeding() },
+	{ id: 'editor', href: '/editor', icon: 'tabler:notebook', label: () => m.editor() }
 ];
 
 export function activePublicNavId(pathname: string): string {

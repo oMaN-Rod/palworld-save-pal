@@ -638,6 +638,8 @@
   "breeding_meta_description": "Work out which parents produce the Pal you want, including multi-generation breeding chains, optionally using the Pals in your own save.",
   "about_meta_title": "About Palworld Save Pal",
   "about_meta_description": "Palworld Save Pal is a free, open-source save editor for Palworld, built by the community and auditable on GitHub.",
+  "editor_meta_title": "Palworld Online JSON Save Editor - Edit Any .sav File",
+  "editor_meta_description": "Open any Palworld .sav file as readable JSON, change the raw values and download it back. Runs entirely in your browser, with no upload and no save to load first.",
   "landing_values_heading": "Built different, on purpose",
   "language": "Language",
   "last_accessed": "Last accessed",

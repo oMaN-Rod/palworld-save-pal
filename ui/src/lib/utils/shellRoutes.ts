@@ -1,10 +1,11 @@
+// `/editor` is deliberately absent: the raw editor reads and writes a single
+// `.sav` on its own, so it works in the public shell with no save loaded.
 export const SAVE_REQUIRED_ROUTES = [
 	'/edit',
 	'/registry',
 	'/gps',
 	'/ups',
 	'/blueprints',
-	'/editor',
 	'/debug',
 	'/servers',
 	'/overview'

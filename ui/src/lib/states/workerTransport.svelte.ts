@@ -84,6 +84,21 @@ export class WorkerTransport {
 		this.#worker?.postMessage({ type, bytes }, [bytes.buffer]);
 	}
 
+	// A structured-clone request/response for payloads no JSON frame can carry:
+	// raw bytes in either direction, or a whole save's worth of editor JSON.
+	// The reply correlates by type, like `sendAndWait`.
+	async sendRawAndWait<T>(
+		message: { type: string } & Record<string, unknown>,
+		transfer: Transferable[] = []
+	): Promise<T> {
+		const worker = this.#worker;
+		if (!worker) throw new Error('The worker transport is not connected.');
+		return new Promise<T>((resolve) => {
+			this.#queue.set(message.type, resolve as (value: unknown) => void);
+			worker.postMessage(message, transfer);
+		});
+	}
+
 	async sendAndWait(messageData: any): Promise<any> {
 		return new Promise((resolve) => {
 			this.#queue.set(messageData.type, resolve);

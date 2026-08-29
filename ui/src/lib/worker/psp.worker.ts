@@ -162,14 +162,20 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		);
 	}
 
-	// Bulk bytes ride their own binary message rather than a JSON frame, in both
-	// directions. Everything else stays a JSON string.
-	type BinaryFrame = { type: string; bytes: Uint8Array };
+	// Save-sized payloads ride a structured clone rather than a JSON frame, in
+	// both directions. Everything else stays a JSON string.
+	type BinaryFrame =
+		| { type: 'load_zip_file'; bytes: Uint8Array }
+		| { type: 'convert_sav_to_json'; bytes: Uint8Array }
+		| { type: 'convert_json_to_sav'; json: string };
+
 	const postBinary = (message: object, transfer: Transferable[]) =>
 		(self as unknown as { postMessage: (m: object, t: Transferable[]) => void }).postMessage(
 			message,
 			transfer
 		);
+
+	const messageOf = (err: unknown) => (err instanceof Error ? err.message : String(err));
 
 	// Every engine entry point takes the module state out of its cell for the
 	// duration of the call, so two overlapping calls would find it missing and
@@ -186,14 +192,39 @@ if (typeof WorkerGlobalScope !== 'undefined' && self instanceof (WorkerGlobalSco
 		try {
 			const mod = await wasm();
 			if (typeof ev.data !== 'string') {
-				if (ev.data.type !== 'load_zip_file') {
-					throw new Error(`unsupported binary frame: ${ev.data.type}`);
+				const frame = ev.data;
+				switch (frame.type) {
+					case 'load_zip_file': {
+						const saveId = await stageSavZip(frame.bytes, (slot, uid, gvas) =>
+							mod.stage_gvas(slot, uid, gvas)
+						);
+						await mod.load_staged_gvas(saveId);
+						return;
+					}
+					// Both conversions answer on their own type, failures included:
+					// a file the engine cannot parse is the raw editor's to report,
+					// where an `error` frame would navigate the user off to /error.
+					case 'convert_sav_to_json': {
+						try {
+							const json = mod.sav_to_json(frame.bytes);
+							self.postMessage({ type: frame.type, data: { json } });
+						} catch (err) {
+							self.postMessage({ type: frame.type, data: { error: messageOf(err) } });
+						}
+						return;
+					}
+					case 'convert_json_to_sav': {
+						try {
+							const bytes = mod.json_to_sav(frame.json);
+							postBinary({ type: frame.type, data: { bytes } }, [bytes.buffer]);
+						} catch (err) {
+							self.postMessage({ type: frame.type, data: { error: messageOf(err) } });
+						}
+						return;
+					}
+					default:
+						throw new Error(`unsupported binary frame: ${(frame as BinaryFrame).type}`);
 				}
-				const saveId = await stageSavZip(ev.data.bytes, (slot, uid, gvas) =>
-					mod.stage_gvas(slot, uid, gvas)
-				);
-				await mod.load_staged_gvas(saveId);
-				return;
 			}
 			const frame = JSON.parse(ev.data) as { type: string; data: unknown };
 			if (frame.type === 'download_save_file') {

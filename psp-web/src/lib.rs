@@ -216,6 +216,21 @@ pub async fn export_gvas_file(name: String) -> Result<Vec<u8>, JsValue> {
     .await
 }
 
+/// The raw editor's `.sav` -> uesave JSON direction. Stateless -- it reads no
+/// session and stages nothing -- so it is safe to run while a save is loaded.
+#[wasm_bindgen]
+pub fn sav_to_json(sav_bytes: &[u8]) -> Result<String, JsValue> {
+    psp_core::convert::sav_to_json_string(sav_bytes)
+        .map_err(|error| JsValue::from_str(&error.to_string()))
+}
+
+/// The reverse direction, writing PlM/Oodle through the bridged codec.
+#[wasm_bindgen]
+pub fn json_to_sav(json: &str) -> Result<Vec<u8>, JsValue> {
+    psp_core::convert::json_to_sav_bytes(json.as_bytes())
+        .map_err(|error| JsValue::from_str(&error.to_string()))
+}
+
 /// Borrows the loaded save. `STATE` is put back on every path — an early
 /// return between the take and the restore would leave the module permanently
 /// uninitialized for every later call.

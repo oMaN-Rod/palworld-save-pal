@@ -3,8 +3,11 @@
 	import type * as MonacoE from 'monaco-editor';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { FileDropzone, Monaco, Spinner, Stopwatch } from '$components/ui';
+	import { Seo } from '$lib/components/seo';
+	import * as m from '$i18n/messages';
 	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
 	import { getToastState, theme, type ThemeName } from '$states';
+	import { jsonToSav, savToJson } from '$lib/data/convertSav';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
 
@@ -77,13 +80,8 @@
 
 	async function saveViaDownload(json: string) {
 		try {
-			const response = await fetch('/api/convert/json-to-sav', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: json
-			});
-			if (!response.ok) throw new Error(`Server error: ${response.status}`);
-			const blob = await response.blob();
+			const savBytes = await jsonToSav(json);
+			const blob = new Blob([savBytes as BlobPart], { type: 'application/octet-stream' });
 			const url = URL.createObjectURL(blob);
 			const a = document.createElement('a');
 			a.href = url;
@@ -94,7 +92,7 @@
 			URL.revokeObjectURL(url);
 		} catch (error) {
 			console.error('Error saving file:', error);
-			toast.add('Failed to save file.');
+			toast.add(errorMessage(error), 'Failed to save file', 'error');
 		}
 	}
 
@@ -117,55 +115,68 @@
 		}
 	}
 
-	$effect(() => {
-		if (files && files.length > 0) {
-			isLoading = true;
-			intervalId = setInterval(() => {
-				elapsed += 1;
-			}, 1000);
-			const file = files[0];
-			fileName = file.name;
-			const reader = new FileReader();
-			reader.onload = async function () {
-				try {
-					const arrayBuffer = reader.result as ArrayBuffer;
-					const formData = new FormData();
-					formData.append('file', new Blob([arrayBuffer]), file.name);
-					const response = await fetch('/api/convert/sav-to-json', {
-						method: 'POST',
-						body: formData
-					});
-					if (!response.ok) throw new Error(`Server error: ${response.status}`);
-					const json = await response.text();
-					const prettyJson = JSON.stringify(JSON.parse(json), null, 2);
-					largeFile = prettyJson.length > LARGE_FILE_THRESHOLD;
-					formatted = true;
-					content = { text: prettyJson };
-				} catch (error) {
-					console.error('Error converting file:', error);
-					content = undefined;
-				}
-				isLoading = false;
-				if (intervalId) {
-					clearInterval(intervalId);
-					intervalId = null;
-				}
-			};
-			reader.readAsArrayBuffer(file);
-		} else {
-			content = undefined;
+	function errorMessage(error: unknown): string {
+		return error instanceof Error ? error.message : String(error);
+	}
+
+	async function loadFile(file: File) {
+		try {
+			const savBytes = new Uint8Array(await file.arrayBuffer());
+			const json = await savToJson(savBytes, file.name);
+			const prettyJson = JSON.stringify(JSON.parse(json), null, 2);
+			largeFile = prettyJson.length > LARGE_FILE_THRESHOLD;
+			formatted = true;
+			content = { text: prettyJson };
+		} catch (error) {
+			console.error('Error converting file:', error);
+			// Clearing `files` both empties the editor and lets the dropzone accept
+			// the same file again after a fix -- an unchanged FileList would not
+			// re-trigger this effect.
+			files = undefined;
+			toast.add(errorMessage(error), 'Could not read that save file', 'error');
+		} finally {
+			isLoading = false;
+			if (intervalId) {
+				clearInterval(intervalId);
+				intervalId = null;
+			}
 		}
+	}
+
+	$effect(() => {
+		if (!files || files.length === 0) {
+			content = undefined;
+			return;
+		}
+		const file = files[0];
+		fileName = file.name;
+		isLoading = true;
+		elapsed = 0;
+		intervalId = setInterval(() => {
+			elapsed += 1;
+		}, 1000);
+		void loadFile(file);
+		return () => {
+			if (intervalId) clearInterval(intervalId);
+			intervalId = null;
+		};
 	});
 </script>
 
+<Seo pathname="/editor" title={m.editor_meta_title()} description={m.editor_meta_description()} />
+
 <!-- Never visible; its own data-theme lets the editor theme be read independently
      of the layout's <body> theme effect. -->
-<div bind:this={paletteProbe} data-theme={theme.current} class="palette-probe" aria-hidden="true">
-</div>
+<div
+	bind:this={paletteProbe}
+	data-theme={theme.current}
+	class="palette-probe"
+	aria-hidden="true"
+></div>
 
 {#if content}
 	<div class="editor-wrapper">
-		<div class="toolbar">
+		<div class="bg-surface-800">
 			<button class="toolbar-btn" title="Save SAV file" onclick={handleSave}>
 				<Icon icon="tabler:device-floppy" size={18} />
 				<span>Save</span>
@@ -202,7 +213,7 @@
 		{:else}
 			<FileDropzone baseClass="w-1/2 hover:bg-surface-800" name="file" accept=".sav" bind:files>
 				{#snippet message()}
-					<h3 class="h3">Edit SAV</h3>
+					<h1 class="h3">Palworld JSON Save Editor</h1>
 					<span>Drag and drop a *.sav file here</span>
 				{/snippet}
 			</FileDropzone>

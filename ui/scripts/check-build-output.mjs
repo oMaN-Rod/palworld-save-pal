@@ -16,6 +16,7 @@ const SAMPLE_PAGES = [
 	'wiki.html',
 	'breeding.html',
 	'about.html',
+	'editor.html',
 	'wiki/pals/sheepball.html',
 	'wiki/items.html',
 	'es.html',
