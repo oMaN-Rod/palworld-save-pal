@@ -42,6 +42,7 @@
 	import { placementState } from '$lib/data/placement.svelte';
 	import { blueprintsData } from '$lib/data/blueprints.svelte';
 	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
+	import { browser } from '$app/environment';
 	import { isPublicShell } from '$lib/utils/shellRoutes';
 	import { isCoarsePointer, isMobileViewport } from '$lib/utils/viewport.svelte';
 	import { isWebBuild } from '$lib/utils/platform';
@@ -94,11 +95,21 @@
 	let selectedPlayerUid = $state('');
 	let map: maplibregl.Map | undefined = $state(undefined);
 
-	const mapLoader = import('$components/map/Map.svelte');
 	let MapComponent = $state<typeof import('$components/map/Map.svelte').default | undefined>(
 		undefined
 	);
-	mapLoader.then((mod) => (MapComponent = mod.default));
+
+	// Browser-only, and the rejection is handled. The map needs WebGL, so the
+	// server always renders the Loading fallback below no matter what this
+	// resolves to — pulling the component in on the server only costs prerender
+	// time. It also cannot be left unhandled: this promise is never awaited by
+	// the render, so a rejection lands after the response is already sent, where
+	// Node treats it as fatal and takes the whole dev server down with it.
+	if (browser) {
+		import('$components/map/Map.svelte')
+			.then((mod) => (MapComponent = mod.default))
+			.catch((e) => console.error('Failed to load the map component', e));
+	}
 
 	// The editing surfaces stay out of the prerendered public entry: this route is
 	// rendered in Node at build time and shipped to visitors with no save at all.

@@ -92,7 +92,14 @@ export default defineConfig({
 		// Skeleton's Zag packages pin mixed versions of @zag-js/core. Externalizing
 		// them for SSR resolves every import to the single root install, which then
 		// lacks exports the older packages expect. Bundling lets each resolve its own.
-		noExternal: [/^@skeletonlabs\//, /^@zag-js\//]
+		//
+		// maplibre-gl ships only a UMD bundle (`module.exports = factory()`) and marks
+		// dist/ as `"type": "commonjs"`, so externalizing it hands Node a CJS module
+		// whose named exports cjs-module-lexer cannot see through the UMD wrapper —
+		// `import { MercatorCoordinate }` then throws. Only /map sets `ssr = true`, so
+		// this surfaced there alone, and only in dev: the production build bundles SSR
+		// code through Rollup's commonjs plugin, which reads the UMD fine.
+		noExternal: [/^@skeletonlabs\//, /^@zag-js\//, 'maplibre-gl']
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}', 'scripts/**/*.test.mjs', '../scripts/**/*.test.mjs']
