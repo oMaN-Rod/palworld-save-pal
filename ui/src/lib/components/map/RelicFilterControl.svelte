@@ -9,12 +9,14 @@
 		stats,
 		enabled,
 		showCollected = false,
+		touch = false,
 		ontoggle
 	}: {
 		types: string[];
 		stats: Record<string, { total: number; collected?: number }>;
 		enabled: Record<string, boolean>;
 		showCollected?: boolean;
+		touch?: boolean;
 		ontoggle: (type: string) => void;
 	} = $props();
 
@@ -26,7 +28,9 @@
 <div class="relative">
 	<button
 		type="button"
-		class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+		class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
+			? 'flex min-h-11 min-w-11 items-center justify-center'
+			: ''}"
 		title={m.relic_types()}
 		aria-label={m.relic_types()}
 		aria-expanded={open}
@@ -37,14 +41,16 @@
 
 	{#if open}
 		<div
-			class="bg-surface-900/95 absolute top-4 left-full z-20 ml-2 grid max-h-[min(70vh,520px)] w-72 grid-cols-2 gap-2 overflow-y-auto rounded-lg p-2 shadow-lg"
+			class="bg-surface-900/95 absolute top-4 left-full z-20 ml-2 grid max-h-[min(70vh,520px)] w-[min(18rem,calc(100vw-5rem))] grid-cols-2 gap-2 overflow-y-auto rounded-lg p-2 shadow-lg"
 			role="group"
 			aria-label={m.relic_types()}
 		>
 			{#each types as relicType (relicType)}
 				{@const entry = stats[relicType]}
 				<button
-					class="flex items-center space-x-2 {isVisible(relicType) ? '' : 'opacity-25'}"
+					class="flex items-center space-x-2 {touch ? 'min-h-11' : ''} {isVisible(relicType)
+						? ''
+						: 'opacity-25'}"
 					onclick={() => ontoggle(relicType)}
 				>
 					<img

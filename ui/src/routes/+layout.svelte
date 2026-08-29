@@ -5,7 +5,12 @@
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { cornerArt, getAppState, getSocketState, theme, localeState } from '$states';
 	import { goto } from '$app/navigation';
-	import { isSaveRequiredRoute, isFullBleedRoute, isPublicShell } from '$lib/utils/shellRoutes';
+	import {
+		isSaveRequiredRoute,
+		isFullBleedRoute,
+		isPublicShell,
+		isCompatExemptRoute
+	} from '$lib/utils/shellRoutes';
 	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
 	import { getDispatcher } from '$lib/ws/dispatcher';
 	import { handlers } from '$lib/ws/handlers';
@@ -103,7 +108,7 @@
 	     on a locale change by itself. Keying the whole shell — not just the routed
 	     page — is what re-translates the nav, banner and indicator too. -->
 	{#key localeState.version}
-		{#if publicShell}
+		{#if publicShell && !isCompatExemptRoute(page.url.pathname)}
 			<CompatBanner />
 		{/if}
 		<Modal>

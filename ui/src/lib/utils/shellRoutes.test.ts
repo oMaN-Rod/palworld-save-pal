@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { isFullBleedRoute, isPublicShell, isSaveRequiredRoute } from './shellRoutes';
+import {
+	isCompatExemptRoute,
+	isFullBleedRoute,
+	isPublicShell,
+	isSaveRequiredRoute
+} from './shellRoutes';
 
 describe('isSaveRequiredRoute', () => {
 	it('matches save-required roots exactly', () => {
@@ -74,5 +79,22 @@ describe('isPublicShell', () => {
 
 	it('is false on desktop even with no save, because the sidebar renders', () => {
 		expect(isPublicShell(false, undefined)).toBe(false);
+	});
+});
+
+describe('isCompatExemptRoute', () => {
+	it('exempts the map, which browses without a save or filesystem access', () => {
+		expect(isCompatExemptRoute('/map')).toBe(true);
+	});
+
+	it('keeps the notice on routes that do load or write a save', () => {
+		expect(isCompatExemptRoute('/')).toBe(false);
+		expect(isCompatExemptRoute('/upload')).toBe(false);
+		expect(isCompatExemptRoute('/editor')).toBe(false);
+		expect(isCompatExemptRoute('/edit/palbox')).toBe(false);
+	});
+
+	it('does not match on bare string prefixes', () => {
+		expect(isCompatExemptRoute('/mapping')).toBe(false);
 	});
 });

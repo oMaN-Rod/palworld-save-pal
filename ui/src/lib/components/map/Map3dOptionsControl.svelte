@@ -285,7 +285,7 @@
 	bind:this={panel}
 	use:stopMapGesturesAction
 	class={[
-		'absolute top-full right-0 z-10 mt-1 max-h-[min(80vh,620px)] min-w-80 overflow-y-auto rounded bg-surface-900/95 p-2 text-(--svlibre-ctrl-color,#333) shadow-(--svlibre-ctrl-shadow,0_0_0_2px_rgba(0,0,0,0.1))',
+		'absolute top-full right-0 z-10 mt-1 max-h-[min(80vh,620px)] w-[min(20rem,calc(100vw-1rem))] overflow-y-auto rounded bg-surface-900/95 p-2 text-(--svlibre-ctrl-color,#333) shadow-(--svlibre-ctrl-shadow,0_0_0_2px_rgba(0,0,0,0.1))',
 		open ? 'flex flex-col gap-1.5' : 'hidden'
 	]}
 	role="group"

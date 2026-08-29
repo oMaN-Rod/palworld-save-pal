@@ -18,7 +18,8 @@
 		onShowAll,
 		count = markerCount,
 		loading = layerLoading,
-		available
+		available,
+		touch = false
 	}: {
 		layers: MapLayerVisibility;
 		onVisibilityChange: (patch: MapLayerVisibility) => void;
@@ -26,7 +27,10 @@
 		count?: (id: PanelOptionId) => string | undefined;
 		loading?: (id: PanelOptionId) => boolean;
 		available?: (id: PanelOptionId) => boolean;
+		touch?: boolean;
 	} = $props();
+
+	const rowClass = $derived(touch ? 'min-h-11 px-1' : '');
 
 	let value = $state(['general']);
 
@@ -47,11 +51,19 @@
 
 {#if onShowAll}
 	<div class="border-b-surface-800 grid grid-cols-2 border-b-2 pb-2">
-		<button type="button" class="flex items-center space-x-2" onclick={() => onShowAll(true)}>
+		<button
+			type="button"
+			class="flex items-center space-x-2 {rowClass}"
+			onclick={() => onShowAll(true)}
+		>
 			<Icon icon="tabler:eye" class="mr-2 h-4 w-4" />
 			<span class="text-sm">{showAllLabel()}</span>
 		</button>
-		<button type="button" class="flex items-center space-x-2" onclick={() => onShowAll(false)}>
+		<button
+			type="button"
+			class="flex items-center space-x-2 {rowClass}"
+			onclick={() => onShowAll(false)}
+		>
 			<Icon icon="tabler:eye-off" class="mr-2 h-4 w-4" />
 			<span class="text-sm">{hideAllLabel()}</span>
 		</button>
@@ -63,6 +75,7 @@
 		<Accordion.Item
 			value={group.group}
 			controlHover="hover:bg-secondary-500/25"
+			controlPadding={touch ? 'px-2 py-3' : undefined}
 			classes="border-b-surface-800 border-b"
 		>
 			{#snippet control()}{group.label}{/snippet}
@@ -72,7 +85,7 @@
 						<button
 							type="button"
 							data-option={row.id}
-							class="flex items-center space-x-2 {row.visible ? '' : 'opacity-25'}"
+							class="flex items-center space-x-2 {rowClass} {row.visible ? '' : 'opacity-25'}"
 							onclick={() => onVisibilityChange({ [row.id]: !row.visible })}
 						>
 							<img src={row.icon} alt={row.label} class="mr-2 h-6 w-6" />

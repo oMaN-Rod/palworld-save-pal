@@ -1939,6 +1939,35 @@
 		cursor: pointer;
 	}
 
+	/* A card anchored 12px right of a marker near the right edge would otherwise
+	   render mostly off-screen on a phone. Pinning it to the left margin and
+	   capping the width to the viewport keeps the whole card reachable; the
+	   vertical anchor still tracks the feature. */
+	@media (max-width: 767px) {
+		.map-anchored-card {
+			left: 8px !important;
+			max-width: calc(100vw - 16px);
+			transform: translateY(-50%);
+		}
+
+		.map-popup-close {
+			top: 0;
+			right: 0;
+			width: 44px;
+			height: 44px;
+			font-size: 20px;
+		}
+	}
+
+	/* The hover card is driven by mousemove, which a touch browser synthesizes on
+	   tap but never follows with a mouseout — the card would stick over the map
+	   with nothing to clear it. Tap already opens the real popup via click. */
+	@media (pointer: coarse) {
+		.map-anchored-card:not(.map-popup-card) {
+			display: none;
+		}
+	}
+
 	.coordinate-display {
 		position: absolute;
 		bottom: 8px;
@@ -1975,6 +2004,36 @@
 		left: auto;
 		right: 52px;
 		transform: none;
+	}
+
+	/* Below 768px the public shell's nav stops being a centered floating pill and
+	   becomes a full-width bar pinned to the top (app.css), so everything the map
+	   anchors at `top: 8px` lands underneath it. Recentring the area switch is
+	   deliberate: at this width the right-aligned variant would collide with the
+	   control stack it was originally offset to avoid. */
+	@media (max-width: 767px) {
+		:global(.maplibregl-ctrl-top-right),
+		:global(.maplibregl-ctrl-top-left) {
+			top: 3.25rem;
+		}
+
+		.map-area-switch,
+		.map-area-switch.align-right {
+			top: 3.5rem;
+			left: 50%;
+			right: auto;
+			transform: translateX(-50%);
+		}
+
+		.map-area-btn {
+			min-height: 44px;
+		}
+
+		/* Bottom-right is where the options sheet lives, and this outranks it on
+		   z-index. It also only ever updated from a mouse. */
+		.coordinate-display {
+			display: none;
+		}
 	}
 
 	.map-area-btn {

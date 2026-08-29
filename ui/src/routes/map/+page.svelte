@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo } from '$lib/components/seo';
-	import { Button, Loading, SectionHeader } from '$components/ui';
+	import { Loading } from '$components/ui';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { worldToPixel, mapOf, DEFAULT_MAP_AREA, type MapArea } from '$components/map/utils';
 	import { pixelToLngLat } from '$components/map/mercator';
@@ -10,8 +10,9 @@
 	import { MAP_OBJECT_SCALE_DEFAULT } from '$components/map/mapObjectSize';
 	import { clampMapOpacity } from '$components/map/mapOpacity';
 	import RelicFilterControl from '$components/map/RelicFilterControl.svelte';
-	import MapLayerPanel from '$components/map/MapLayerPanel.svelte';
-	import MapHints from '$components/map/MapHints.svelte';
+	import MapOptionsPanel from '$components/map/MapOptionsPanel.svelte';
+	import MapOptionsSheet from '$components/map/MapOptionsSheet.svelte';
+	import type { SheetSnap } from '$components/map/mapSheet';
 	import PlacementPanel from '$components/map/PlacementPanel.svelte';
 	import { mapOptionsState } from '$components/map/mapOptions.svelte';
 	import {
@@ -42,6 +43,7 @@
 	import { blueprintsData } from '$lib/data/blueprints.svelte';
 	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { isPublicShell } from '$lib/utils/shellRoutes';
+	import { isCoarsePointer, isMobileViewport } from '$lib/utils/viewport.svelte';
 	import { isWebBuild } from '$lib/utils/platform';
 	import { debounce } from '$utils';
 	import { sendAndWait } from '$utils/websocketUtils';
@@ -72,6 +74,22 @@
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
 	const panelOpen = $derived(mapOptions.panelOpen ?? true);
 	const mapOpacity = $derived(clampMapOpacity(mapOptions.mapOpacity));
+
+	// The sheet's open state is deliberately local: `mapOptions.panelOpen` is
+	// persisted and defaults to open, which on a phone would bury the map behind
+	// the options on every visit — and a phone toggling it would follow the user
+	// back to their desktop.
+	const mobile = $derived(isMobileViewport.current);
+	const touch = $derived(isCoarsePointer.current);
+	let sheetOpen = $state(false);
+	let sheetSnap = $state<SheetSnap>('peek');
+
+	const optionsOpen = $derived(mobile ? sheetOpen : panelOpen);
+
+	function toggleOptions() {
+		if (mobile) sheetOpen = !sheetOpen;
+		else mapOptions.panelOpen = !panelOpen;
+	}
 
 	let selectedPlayerUid = $state('');
 	let map: maplibregl.Map | undefined = $state(undefined);
@@ -535,74 +553,81 @@
 	<!-- The map has no visible heading; this gives screen readers and crawlers one. -->
 	<h1 class="sr-only">{m.map_meta_title()}</h1>
 
-	{#if panelOpen}
+	{#snippet optionsBody()}
+		<MapOptionsPanel
+			{saveLoaded}
+			{touch}
+			showHeader={!mobile}
+			layers={layerVisibility}
+			onVisibilityChange={handleLayerVisibility}
+			onShowAll={handleShowAll}
+			count={layerCount}
+			available={layerAvailable}
+			onUnlockMap={handleUnlockMap}
+			savePanel={saveUi ? savePanelSnippet : undefined}
+		/>
+	{/snippet}
+
+	{#snippet savePanelSnippet()}
+		{#if saveUi}
+			<saveUi.Panel
+				hideUnlockedFastTravel={mapOptions.hideUnlockedFastTravel}
+				hideCollectedRelics={mapOptions.hideCollectedRelics}
+				showPlayers={mapOptions.showPlayers}
+				showBases={mapOptions.showBases}
+				{selectedPlayerUid}
+				onToggleHideUnlocked={() =>
+					(mapOptions.hideUnlockedFastTravel = !mapOptions.hideUnlockedFastTravel)}
+				onToggleHideCollected={() =>
+					(mapOptions.hideCollectedRelics = !mapOptions.hideCollectedRelics)}
+				onPlayerLoaded={handlePlayerLoaded}
+				onPlayerFocus={handlePlayerFocus}
+				onBaseFocus={handleBaseFocus}
+				onEditBase={handleEditBase}
+			/>
+		{/if}
+	{/snippet}
+
+	{#if !mobile && panelOpen}
 		<aside
-			class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
+			class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col rounded-lg shadow-lg"
 			transition:fly={{ x: -(PANEL_W + 16), duration: 300, easing: cubicOut }}
 		>
-			<div class="flex flex-col gap-2">
-				<div class="flex items-center">
-					<SectionHeader text={m.map_options()}>
-						{#snippet action()}
-							{#if saveLoaded}
-								<Button
-									variant="ghost"
-									size="sm"
-									class="flex items-center gap-2"
-									onclick={handleUnlockMap}
-								>
-									<Icon icon="tabler:lock-open" class="h-4 w-4" />
-									<span>{m.unlock_map()}</span>
-								</Button>
-							{/if}
-						{/snippet}
-					</SectionHeader>
-				</div>
-
-				<MapLayerPanel
-					layers={layerVisibility}
-					onVisibilityChange={handleLayerVisibility}
-					onShowAll={handleShowAll}
-					count={layerCount}
-					available={layerAvailable}
-				/>
-			</div>
-
-			{#if saveUi}
-				<saveUi.Panel
-					hideUnlockedFastTravel={mapOptions.hideUnlockedFastTravel}
-					hideCollectedRelics={mapOptions.hideCollectedRelics}
-					showPlayers={mapOptions.showPlayers}
-					showBases={mapOptions.showBases}
-					{selectedPlayerUid}
-					onToggleHideUnlocked={() =>
-						(mapOptions.hideUnlockedFastTravel = !mapOptions.hideUnlockedFastTravel)}
-					onToggleHideCollected={() =>
-						(mapOptions.hideCollectedRelics = !mapOptions.hideCollectedRelics)}
-					onPlayerLoaded={handlePlayerLoaded}
-					onPlayerFocus={handlePlayerFocus}
-					onBaseFocus={handleBaseFocus}
-					onEditBase={handleEditBase}
-				/>
-			{/if}
-
-			<MapHints saveHints={saveLoaded} />
+			{@render optionsBody()}
 		</aside>
 	{/if}
 
+	{#if mobile && sheetOpen}
+		<MapOptionsSheet
+			bind:snap={sheetSnap}
+			title={m.map_options()}
+			onClose={() => (sheetOpen = false)}
+		>
+			{@render optionsBody()}
+		</MapOptionsSheet>
+	{/if}
+
+	<!-- Cleared of the public shell's nav, which is a full-width bar on phones and a
+	     centred pill on desktop — at ~1440px that pill sits directly over this column
+	     once the panel pushes it right. The desktop app has a left sidebar and no top
+	     nav, so it keeps the original 8px inset. -->
 	<div
-		class="absolute top-2 z-20 flex flex-col items-start gap-2 transition-[left] duration-300 ease-out"
-		style:left="{panelOpen ? PANEL_W + 16 : 8}px"
+		class="absolute top-16 z-20 flex flex-col items-start gap-2 md:transition-[left] md:duration-300 md:ease-out {publicShell
+			? ''
+			: 'md:top-2'}"
+		style:left="{!mobile && panelOpen ? PANEL_W + 16 : 8}px"
 	>
 		<button
 			type="button"
-			class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg"
+			class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
+				? 'min-h-11 min-w-11 flex items-center justify-center'
+				: ''}"
 			title={m.map_options()}
 			aria-label={m.map_options()}
-			aria-expanded={panelOpen}
-			onclick={() => (mapOptions.panelOpen = !panelOpen)}
+			aria-expanded={optionsOpen}
+			onclick={toggleOptions}
 		>
-			{#if panelOpen}
+			{#if optionsOpen}
 				<Icon icon="tabler:layout-sidebar-left-collapse" class="h-5 w-5" />
 			{:else}
 				<Icon icon="tabler:layout-sidebar" class="h-5 w-5" />
@@ -615,6 +640,7 @@
 				stats={relicTypeStats}
 				enabled={mapOptions.relicTypes ?? {}}
 				showCollected={saveLoaded && !!appState.selectedPlayer}
+				{touch}
 				ontoggle={(relicType) =>
 					(mapOptions.relicTypes = {
 						...(mapOptions.relicTypes ?? {}),
