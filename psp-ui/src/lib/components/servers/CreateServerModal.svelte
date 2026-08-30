@@ -33,31 +33,24 @@
 		{ id: 'advanced', label: 'Advanced' }
 	];
 
-	const generalGroupTitles = ['Server Settings', 'REST API & Logging'];
+	const generalGroupTitles = ['Server Settings', 'REST API & Logging', 'Voice Chat'];
 	const gameplayGroupTitles = [
 		'Gameplay Rates',
 		'Time & Difficulty',
+		'Stat Enhancement',
 		'PvP / Hardcore',
+		'PvP Respawn & Rewards',
 		'Guild / Building',
 		'Items & Drops'
 	];
-	const advancedGroupTitles = [
-		'Backup Settings',
-		'Auto Update / Reboot',
-		'Discord Integration',
-		'UE4SS / Mods',
-		'Engine Settings',
-		'Randomizer'
-	];
 
+	// Advanced is the catch-all so a new group can never go unrendered.
 	function groupsForTab(tab: Tab) {
-		const titles =
-			tab === 'general'
-				? generalGroupTitles
-				: tab === 'gameplay'
-					? gameplayGroupTitles
-					: advancedGroupTitles;
-		return envGroups.filter((g) => titles.includes(g.title));
+		if (tab === 'general') return envGroups.filter((g) => generalGroupTitles.includes(g.title));
+		if (tab === 'gameplay') return envGroups.filter((g) => gameplayGroupTitles.includes(g.title));
+		return envGroups.filter(
+			(g) => !generalGroupTitles.includes(g.title) && !gameplayGroupTitles.includes(g.title)
+		);
 	}
 
 	let name = $state('');
