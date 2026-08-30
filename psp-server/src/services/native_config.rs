@@ -430,14 +430,35 @@ pub fn format_ini_value(ini_key: &str, value: &str) -> String {
     value.to_string()
 }
 
+/// Whether `rest` opens another `Key=` pair, which ends a tuple that was never
+/// closed rather than continuing it.
+fn starts_new_pair(rest: &str) -> bool {
+    let mut characters = rest.chars();
+    match characters.next() {
+        Some(first) if first.is_ascii_alphabetic() || first == '_' => {}
+        _ => return false,
+    }
+    for character in characters {
+        if character == '=' {
+            return true;
+        }
+        if !character.is_ascii_alphanumeric() && character != '_' {
+            return false;
+        }
+    }
+    false
+}
+
 /// Splits the `OptionSettings` list on commas, ignoring those inside quoted
-/// strings and parenthesized tuples like `CrossplayPlatforms=(Steam,Xbox)`.
+/// strings and parenthesized tuples like `CrossplayPlatforms=(Steam,Xbox)`. A
+/// tuple an older PSP left open ends at the next `Key=` instead of swallowing
+/// the rest of the list.
 pub fn split_option_settings(options: &str) -> Vec<String> {
     let mut pairs = Vec::new();
     let mut current = String::new();
     let mut depth = 0usize;
     let mut in_quote = false;
-    for character in options.chars() {
+    for (offset, character) in options.char_indices() {
         match character {
             '"' if depth == 0 => {
                 in_quote = !in_quote;
@@ -451,7 +472,10 @@ pub fn split_option_settings(options: &str) -> Vec<String> {
                 depth = depth.saturating_sub(1);
                 current.push(character);
             }
-            ',' if !in_quote && depth == 0 => {
+            ',' if !in_quote
+                && (depth == 0 || starts_new_pair(&options[offset + character.len_utf8()..])) =>
+            {
+                depth = 0;
                 pairs.push(current.trim().to_string());
                 current = String::new();
             }
@@ -478,7 +502,22 @@ fn option_settings_close_offset(body: &str) -> Option<usize> {
             _ => {}
         }
     }
-    None
+    // Nothing balances when an older PSP left a tuple open, but the list still
+    // ends at the last `)` on the line.
+    let line_end = body.find('\n').unwrap_or(body.len());
+    body[..line_end].rfind(')')
+}
+
+/// Closes a tuple an older PSP left open so the healed value goes back to disk.
+fn balance_tuple(value: &str) -> String {
+    if !value.starts_with('(') {
+        return value.to_string();
+    }
+    let missing = value
+        .matches('(')
+        .count()
+        .saturating_sub(value.matches(')').count());
+    format!("{value}{}", ")".repeat(missing))
 }
 
 /// Parses the `OptionSettings=(...)` list from an ini file. Returns `None` when
@@ -493,7 +532,7 @@ pub fn parse_option_settings_ini(path: &Path) -> Option<Vec<(String, String)>> {
     for pair in split_option_settings(options) {
         if let Some((key, value)) = pair.split_once('=') {
             if !key.trim().is_empty() {
-                pairs.push((key.trim().to_string(), value.trim().to_string()));
+                pairs.push((key.trim().to_string(), balance_tuple(value.trim())));
             }
         }
     }
@@ -1096,6 +1135,97 @@ mod tests {
         let content = build_palworld_settings_content(&record);
         assert!(content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n"));
         assert!(!content.contains("PALBOX"));
+    }
+
+    /// PSP 1.3.3 and earlier truncated the list at the first `)`, so every ini
+    /// they wrote back ends up with `CrossplayPlatforms=(` never closed and the
+    /// real terminator doubling as its closer. Every setting after it has to
+    /// still be readable, or importing such a server yields nothing but defaults.
+    #[test]
+    fn parse_option_settings_ini_recovers_from_an_unclosed_tuple() {
+        let scratch = tempfile::tempdir().unwrap();
+        let path = scratch.path().join("PalWorldSettings.ini");
+        std::fs::write(
+            &path,
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ExpRate=1.000000,\
+             CrossplayPlatforms=(Steam,Xbox,PS5,Mac,ServerName=\"Briar Feetpics\",\
+             ServerPlayerMaxNum=4,PublicPort=8211)\n",
+        )
+        .unwrap();
+        let pairs = parse_option_settings_ini(&path).unwrap();
+        assert_eq!(
+            pairs,
+            vec![
+                ("ExpRate".to_string(), "1.000000".to_string()),
+                (
+                    "CrossplayPlatforms".to_string(),
+                    "(Steam,Xbox,PS5,Mac)".to_string()
+                ),
+                ("ServerName".to_string(), "\"Briar Feetpics\"".to_string()),
+                ("ServerPlayerMaxNum".to_string(), "4".to_string()),
+                ("PublicPort".to_string(), "8211".to_string()),
+            ]
+        );
+    }
+
+    /// The end of the reported 1.4.0 import regression: a server whose ini PSP
+    /// itself mangled came in with a blank name and stock player count.
+    #[test]
+    fn import_reads_an_ini_written_by_an_older_psp() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ExpRate=2.000000,\
+             CrossplayPlatforms=(Steam,Xbox,PS5,Mac,ServerName=\"Briar Feetpics\",\
+             ServerDescription=\"Feet first\",ServerPlayerMaxNum=4,PublicPort=8211,\
+             RESTAPIPort=8212)\n",
+        )
+        .unwrap();
+        let parsed = parse_server_config_from_ini(&install);
+        assert_eq!(parsed.server_name, "Briar Feetpics");
+        assert_eq!(parsed.server_description, "Feet first");
+        assert_eq!(parsed.max_players, 4);
+        assert_eq!(parsed.game_port, 8211);
+        assert_eq!(parsed.rest_api_port, 8212);
+        assert_eq!(parsed.env_vars["EXP_RATE"], "2.000000");
+        assert_eq!(
+            parsed.env_vars["CROSSPLAY_PLATFORMS"],
+            "(Steam,Xbox,PS5,Mac)"
+        );
+    }
+
+    /// Reading a mangled ini has to heal it, or the next write hands the game
+    /// back the same list it cannot parse either.
+    #[test]
+    fn build_content_closes_a_tuple_an_older_psp_left_open() {
+        let scratch = tempfile::tempdir().unwrap();
+        let install = scratch.path().to_string_lossy().to_string();
+        let cfg = config_dir(&install);
+        std::fs::create_dir_all(&cfg).unwrap();
+        std::fs::write(
+            cfg.join("PalWorldSettings.ini"),
+            "[/Script/Pal.PalGameWorldSettings]\nOptionSettings=(ExpRate=1.000000,\
+             CrossplayPlatforms=(Steam,Xbox,PS5,Mac,MyCustomKey=42)\n",
+        )
+        .unwrap();
+        let content = build_palworld_settings_content(&native_record(&install));
+        assert!(
+            content.contains("CrossplayPlatforms=(Steam,Xbox,PS5,Mac),"),
+            "tuple left open in {content}"
+        );
+        assert!(content.contains("MyCustomKey=42"));
+        assert!(content.contains("ServerName=\"My Native Server\""));
+    }
+
+    #[test]
+    fn split_option_settings_recovers_at_the_next_key_when_a_tuple_is_open() {
+        assert_eq!(
+            split_option_settings("A=1,CrossplayPlatforms=(Steam,Xbox,B=\"x, y\",C=2"),
+            vec!["A=1", "CrossplayPlatforms=(Steam,Xbox", "B=\"x, y\"", "C=2"]
+        );
     }
 
     #[test]
