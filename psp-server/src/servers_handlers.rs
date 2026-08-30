@@ -742,9 +742,13 @@ async fn update_server_impl(
     .iter()
     .any(|key| data.updates.contains_key(*key));
     let needs_apply = env_changed || ports_changed || identity_changed;
+    // Only consumed when spawning PalServer.exe, so they matter to native only.
+    let native_runtime_changed = ["launch_args", "workshop_dir"]
+        .iter()
+        .any(|key| data.updates.contains_key(*key));
 
     if record.server_type == "native" {
-        if needs_apply {
+        if needs_apply || native_runtime_changed {
             native_config::write_palworld_settings(&record).map_err(|error| error.to_string())?;
             if record.pid.is_some() {
                 let status = native_process::process_status(record.pid);
