@@ -24,6 +24,8 @@
 		method: string;
 		hasPayload: boolean;
 		payloadTemplate?: Record<string, string>;
+		/** Lowercase launch argument the game server must be started with. */
+		requiresLaunchArg?: string;
 	};
 
 	const endpoints: ApiEndpoint[] = [
@@ -31,6 +33,13 @@
 		{ id: 'players', label: 'Players', method: 'GET', hasPayload: false },
 		{ id: 'settings', label: 'Settings', method: 'GET', hasPayload: false },
 		{ id: 'metrics', label: 'Metrics', method: 'GET', hasPayload: false },
+		{
+			id: 'game-data',
+			label: 'Game Data',
+			method: 'GET',
+			hasPayload: false,
+			requiresLaunchArg: '-enable-gamedata-api'
+		},
 		{ id: 'save', label: 'Save World', method: 'POST', hasPayload: false },
 		{
 			id: 'shutdown',
@@ -84,6 +93,22 @@
 	const isRunning = $derived(server.status?.running ?? false);
 	const hasResponse = $derived(apiResponse && apiResponse.server_id === server.id);
 
+	const launchArgs = $derived(
+		(server.launch_args ?? '').toLowerCase().split(/\s+/).filter(Boolean)
+	);
+
+	function isAvailable(endpoint: ApiEndpoint): boolean {
+		return !endpoint.requiresLaunchArg || launchArgs.includes(endpoint.requiresLaunchArg);
+	}
+
+	const missingArgs = $derived([
+		...new Set(
+			endpoints.filter((ep) => !isAvailable(ep)).map((ep) => ep.requiresLaunchArg as string)
+		)
+	]);
+
+	const canSend = $derived(isAvailable(selectedEndpoint));
+
 	async function handleCall() {
 		const payload = selectedEndpoint.hasPayload ? payloadValues : undefined;
 		await serverState.callApi(server.id, selectedEndpoint.id, selectedEndpoint.method, payload);
@@ -101,13 +126,18 @@
 	{:else}
 		<div class="flex flex-wrap gap-2">
 			{#each endpoints as ep (ep.id)}
+				{@const available = isAvailable(ep)}
 				<button
 					class={cn(
 						'rounded-sm px-3 py-1.5 text-xs font-medium transition-colors',
-						selectedEndpoint.id === ep.id
-							? 'bg-secondary-500 text-white'
-							: 'bg-surface-700 text-surface-300 hover:bg-surface-600'
+						!available
+							? 'bg-surface-800 text-surface-500 cursor-not-allowed'
+							: selectedEndpoint.id === ep.id
+								? 'bg-secondary-500 text-white'
+								: 'bg-surface-700 text-surface-300 hover:bg-surface-600'
 					)}
+					disabled={!available}
+					title={available ? undefined : `Requires the ${ep.requiresLaunchArg} launch argument`}
 					onclick={() => (selectedEndpoint = ep)}
 				>
 					<span class="text-surface-400 mr-1 text-[10px]">{ep.method}</span>
@@ -115,6 +145,16 @@
 				</button>
 			{/each}
 		</div>
+
+		{#each missingArgs as arg (arg)}
+			<p class="text-surface-400 flex items-center gap-1.5 text-xs">
+				<Icon icon="tabler:info-circle" size={14} class="shrink-0" />
+				<span>
+					Dimmed endpoints require the server to be launched with
+					<code class="bg-surface-800 rounded-sm px-1 py-0.5">{arg}</code>.
+				</span>
+			</p>
+		{/each}
 
 		{#if selectedEndpoint.hasPayload && selectedEndpoint.payloadTemplate}
 			<Card padding="p-3">
@@ -134,7 +174,7 @@
 		{/if}
 
 		<div class="flex items-center gap-3">
-			<Button variant="primary" onclick={handleCall}>
+			<Button variant="primary" disabled={!canSend} onclick={handleCall}>
 				<Icon icon="tabler:send" size={14} />
 				Send Request
 			</Button>
