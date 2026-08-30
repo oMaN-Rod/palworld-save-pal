@@ -94,7 +94,9 @@
 					{isNative ? 'Native' : 'Docker'}
 				</span>
 			</div>
-			<p class="text-surface-400 text-sm">{server.container_name}</p>
+			{#if !isNative}
+				<p class="text-surface-400 text-sm">{server.container_name}</p>
+			{/if}
 		</div>
 		<div class="flex items-center gap-2">
 			<Button

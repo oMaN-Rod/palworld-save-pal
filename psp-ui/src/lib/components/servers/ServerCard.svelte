@@ -19,6 +19,7 @@
 	}>();
 
 	const isRunning = $derived(server.status?.running ?? false);
+	const isDocker = $derived(server.server_type === 'docker');
 
 	const statusColor = $derived.by(() => {
 		const status = server.status?.status ?? 'not_found';
@@ -52,7 +53,9 @@
 				<div class={cn('h-3 w-3 rounded-full', statusColor)}></div>
 				<div>
 					<h4 class="font-bold">{server.name}</h4>
-					<p class="text-surface-400 text-xs">{server.container_name}</p>
+					{#if isDocker}
+						<p class="text-surface-400 text-xs">{server.container_name}</p>
+					{/if}
 				</div>
 			</div>
 			<div class="flex items-center gap-3">
