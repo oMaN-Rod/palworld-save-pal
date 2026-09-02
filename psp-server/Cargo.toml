@@ -21,7 +21,6 @@ tokio = { workspace = true }
 tower-http = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-sqlx = { workspace = true }
 thiserror = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
@@ -46,6 +45,7 @@ tar = { workspace = true }
 
 [dev-dependencies]
 psp-app = { workspace = true, features = ["test-support"] }
+sqlx = { workspace = true }
 tokio-tungstenite = { workspace = true }
 tempfile = { workspace = true }
 pretty_assertions = { workspace = true }

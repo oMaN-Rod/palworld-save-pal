@@ -15,7 +15,6 @@ export enum MessageType {
 	WARNING = 'warning',
 	GET_GUILDS = 'get_guilds',
 	GET_PLAYERS = 'get_players',
-	GET_PAL_DETAILS = 'get_pal_details',
 	LOAD_ZIP_FILE = 'load_zip_file',
 	PROGRESS_MESSAGE = 'progress_message',
 	SYNC_APP_STATE = 'sync_app_state',
@@ -49,7 +48,6 @@ export enum MessageType {
 	GET_UI_COMMON = 'get_ui_common',
 	NO_FILE_SELECTED = 'no_file_selected',
 	SELECT_GAMEPASS_SAVE = 'select_gamepass_save',
-	GET_SAVE_TYPE = 'get_save_type',
 	GET_WORK_SUITABILITY = 'get_work_suitability',
 	GET_BUILDINGS = 'get_buildings',
 	GET_MAP_OBJECT_FOOTPRINTS = 'get_map_object_footprints',
@@ -82,7 +80,6 @@ export enum MessageType {
 	ADD_GPS_PAL = 'add_gps_pal',
 	CLONE_GPS_PAL = 'clone_gps_pal',
 	DELETE_GPS_PALS = 'delete_gps_pals',
-	UPDATE_GPS_PAL = 'update_gps_pal',
 	GET_GPS_PALS = 'get_gps_pals',
 
 	GET_UPS_PALS = 'get_ups_pals',

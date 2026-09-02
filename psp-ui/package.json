@@ -48,7 +48,6 @@
 		"@types/eslint": "^9.6.1",
 		"@types/node": "^20.19.9",
 		"@types/three": "^0.185.1",
-		"@types/uuid": "^10.0.0",
 		"@vitejs/plugin-basic-ssl": "^2.3.0",
 		"concurrently": "^9.2.0",
 		"cross-env": "^10.1.0",
@@ -86,10 +85,8 @@
 		"@number-flow/svelte": "^0.3.9",
 		"@skeletonlabs/floating-ui-svelte": "^0.3.9",
 		"@sqlite.org/sqlite-wasm": "^3.53.0-build1",
-		"@sveltejs/vite-plugin-svelte-inspector": "^5.0.0",
 		"@zag-js/types": "^1.21.1",
 		"clsx": "^2.1.1",
-		"cockatiel": "^3.2.1",
 		"d3-hierarchy": "^3.1.2",
 		"d3-selection": "^3.0.0",
 		"d3-transition": "^3.0.1",
@@ -101,8 +98,7 @@
 		"svelte-jsoneditor": "^3.11.0",
 		"svelte-persisted-state": "^1.2.0",
 		"tailwind-merge": "^2.6.0",
-		"three": "^0.185.1",
-		"uuid": "^11.1.0"
+		"three": "^0.185.1"
 	},
 	"trustedDependencies": [
 		"@sveltejs/kit",
