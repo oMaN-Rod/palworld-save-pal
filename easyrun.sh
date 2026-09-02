@@ -214,6 +214,7 @@ check_disk_space() {
         web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
         webapp) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
         build-desktop|build-web) min_mb=3500 ;;
+        browser) min_mb=2500 ;; build-browser) min_mb=3500 ;;
     esac
     local free
     free="$(disk_free_mb "$REPO_ROOT")"
@@ -245,16 +246,25 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        web|desktop|serve|webapp|build|build-desktop|build-web|docker) needs_rust=1 ;;
+        web|desktop|browser|serve|webapp|build|build-desktop|build-browser|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|serve|web|build|build-desktop) needs_strict_rust=1 ;;
+        desktop|browser|serve|web|build|build-desktop|build-browser) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
     fi
     case "$mode" in
         desktop|build-desktop)
+            check_tauri_cli 1
+            check_webkit_linux 1
+            ;;
+        # browser-mode compiles the same tauri crate tree (webkit2gtk headers),
+        # but only the AppImage build needs the tauri CLI itself.
+        browser)
+            check_webkit_linux 1
+            ;;
+        build-browser)
             check_tauri_cli 1
             check_webkit_linux 1
             ;;
@@ -274,7 +284,7 @@ run_preflight() {
     check_disk_space "$mode"
     case "$mode" in
         web) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
-        serve|docker) check_port "$SERVER_PORT_DEFAULT" ;;
+        serve|docker|browser) check_port "$SERVER_PORT_DEFAULT" ;;
         webapp|landing) check_port "$VITE_PORT_DEFAULT" ;;
     esac
 }
@@ -640,6 +650,31 @@ run_desktop() {
     wait_on_pids "$tauri_pid"
 }
 
+run_browser() {
+    # browser-mode: the psp-desktop binary compiled with --features browser-mode
+    # runs the embedded server with NO webview — terminal progress, then it
+    # opens the system browser itself. Linux only (feature is inert elsewhere).
+    local cargo bun
+    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
+    bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
+    ensure_bun_install 0
+    write_desktop_env
+    # No webview means no Vite dev server: the launcher serves the BUILT SPA,
+    # so ui_build/ must exist before it starts.
+    if [[ ! -f "$REPO_ROOT/ui_build/index.html" ]]; then
+        log_info "ui_build/ missing — building the desktop UI first…"
+        SPAWN_CWD="$UI_DIR" spawn_fg_tagged ui-build "$bun" run build:desktop \
+            || die "desktop UI build failed."
+    fi
+    banner "Dev: browser-mode  (embedded server + control window + system browser)"
+    local psp_pid
+    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-browser "$cargo" run -p psp-desktop --features browser-mode
+    psp_pid="$LAST_BG_PID"
+    printf '%s  A small control window opens (boot status + Quit button); the editor runs in your browser.%s\n' "$DIM" "$RESET" >&2
+    printf '%s  Close the control window (or its Quit button / Ctrl-C) to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    wait_on_pids "$psp_pid"
+}
+
 run_webapp() {
     local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
@@ -721,6 +756,21 @@ run_build_desktop() {
     log_ok "Desktop build complete."
 }
 
+run_build_browser() {
+    local cargo script
+    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
+    ensure_bun_install 1
+    write_desktop_env
+    banner "Build: browser-mode AppImage (cargo tauri build --features browser-mode)"
+    script="$REPO_ROOT/scripts/build-desktop-browser.sh"
+    if [[ -f "$script" ]]; then
+        spawn_fg_tagged build-browser bash "$script" || die "browser-mode build failed."
+    else
+        die "scripts/build-desktop-browser.sh not found — browser-mode builds need it."
+    fi
+    log_ok "Browser-mode AppImage build complete → dist/."
+}
+
 run_build_web() {
     local bun
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
@@ -783,11 +833,14 @@ Runs from source; does NOT auto-install tools (run --check for a report card).
 mode (pick one; defaults to --web):
   --web              Dev: Vite + psp-server (tool-only SPA).
   --desktop          Dev: Tauri native window + embedded server.
+  --browser          Dev: browser-mode — terminal launcher + system browser,
+                     no webview (Linux only; --features browser-mode).
   --webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   --docker           Build & run the self-build Docker image.
   --serve            Run only the Rust psp-server.
   --build-desktop    Production desktop build → dist/.
+  --build-browser    Production browser-mode AppImage → dist/ (Linux only).
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
 
@@ -821,11 +874,13 @@ parse_args() {
         case "$1" in
             --web) ARG_MODE="web"; shift ;;
             --desktop) ARG_MODE="desktop"; shift ;;
+            --browser) ARG_MODE="browser"; shift ;;
             --webapp) ARG_MODE="webapp"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
             --docker) ARG_MODE="docker"; shift ;;
             --serve) ARG_MODE="serve"; shift ;;
             --build-desktop) ARG_MODE="build-desktop"; shift ;;
+            --build-browser) ARG_MODE="build-browser"; shift ;;
             --build-web) ARG_MODE="build-web"; shift ;;
             --build) ARG_MODE="build"; shift ;;
             --check|--doctor) ARG_CHECK=1; shift ;;
@@ -847,6 +902,16 @@ parse_args() {
 
 main() {
     parse_args "$@"
+
+    # browser-mode swaps the webview for a terminal launcher; the cargo
+    # feature is inert off Linux, so refuse it instead of silently building
+    # the normal webview app.
+    case "${ARG_MODE:-web}" in
+        browser|build-browser)
+            [[ "$(uname -s)" == "Linux" ]] \
+                || die "browser-mode is Linux-only — use --desktop / --build-desktop instead."
+            ;;
+    esac
 
     local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-web}}"
 
@@ -910,11 +975,13 @@ main() {
     case "${ARG_MODE:-web}" in
         web) run_web ;;
         desktop) run_desktop ;;
+        browser) run_browser ;;
         webapp) run_webapp ;;
         landing) run_landing ;;
         docker) run_docker ;;
         serve) run_serve ;;
         build-desktop) run_build_desktop ;;
+        build-browser) run_build_browser ;;
         build-web) run_build_web ;;
         build) run_build_plain ;;
         *) die "internal: unknown mode ${ARG_MODE}" ;;

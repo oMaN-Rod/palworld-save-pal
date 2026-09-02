@@ -88,6 +88,22 @@ pub async fn handle_open_in_browser(
     Ok(())
 }
 
+/// Fired by the browser-mode control panel's Quit button: asks the embedded
+/// server to begin a graceful shutdown. The embedding shell observes the
+/// server stopping and exits — this handler never kills the process itself.
+pub async fn handle_shutdown(
+    _data: serde_json::Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if !crate::request_shutdown() {
+        return Err(HandlerError::Other(
+            "no shutdown channel is installed in this process".to_string(),
+        ));
+    }
+    ctx.emitter.emit(MessageType::Shutdown, &"shutting down");
+    Ok(())
+}
+
 /// Only http(s) URLs may be handed to `opener`; anything else (a `file://`
 /// path, a `javascript:` payload, an arbitrary scheme) is refused so a WS
 /// message can't coax the host into launching an unexpected handler.

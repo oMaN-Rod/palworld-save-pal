@@ -17,6 +17,17 @@
 	const appState = getAppState();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
+	// Desktop-only: the Tauri webview (WebKitGTK on Linux) renders slower than a
+	// full browser. This opens the same UI at 127.0.0.1:5174 in the host OS
+	// browser for heavy editing tasks. Hidden in web mode where it's a no-op.
+	function openBrowser(event: MouseEvent) {
+		if (!isDesktopMode) return;
+		event.preventDefault();
+		// Server maps "127.0.0.1:5174" -> http://localhost:5174 and opens it in
+		// the host OS browser (the Tauri webview can't open its own URL).
+		send(MessageType.OPEN_IN_BROWSER, '127.0.0.1:5174');
+	}
+
 	const AUTHOR_URL = 'https://github.com/CyrixJD115';
 
 	let hoveringTop = $state(false);
@@ -102,7 +113,7 @@
 			transition:fade={{ duration: 150 }}
 		>
 			<button
-				class="text-muted hover:text-surface-50 absolute right-3 top-3 transition-colors"
+				class="text-muted hover:text-surface-50 absolute top-3 right-3 transition-colors"
 				onclick={() => (easterEgg = false)}
 				aria-label={m.compat_dismiss()}
 			>
@@ -118,19 +129,23 @@
 			>
 				<Icon icon="tabler:sparkles" size={20} class="text-primary-400 shrink-0" />
 				<h2 class="heading-gradient text-lg font-bold">CyrixJD115</h2>
-				<Icon icon="tabler:brand-github" size={16} class="text-surface-400 group-hover:text-primary-300 transition-colors" />
+				<Icon
+					icon="tabler:brand-github"
+					size={16}
+					class="text-surface-400 group-hover:text-primary-300 transition-colors"
+				/>
 			</a>
 
 			<div class="mt-4 space-y-2.5">
 				<p class="text-muted text-xs font-semibold tracking-wider uppercase">Contributions</p>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<Icon icon="tabler:palette" size={18} class="text-secondary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Theme UI/UX Overhaul</p>
 						<p class="text-muted text-xs">Frontier theme, design tokens, palette system</p>
 					</div>
 				</div>
-				<div class="flex items-center gap-3 rounded-md bg-surface-800/60 px-3 py-2">
+				<div class="bg-surface-800/60 flex items-center gap-3 rounded-md px-3 py-2">
 					<Icon icon="tabler:git-merge" size={18} class="text-tertiary-400 shrink-0" />
 					<div>
 						<p class="text-surface-50 text-sm font-medium">Breeding Calculator</p>
@@ -201,6 +216,26 @@
 				</div>
 			</Card>
 		</div>
+		{#if isDesktopMode}
+			<div use:tilt class="card-tilt">
+				<Card>
+					<div class="flex flex-col items-center gap-2 px-4 py-2">
+						<p class="text-muted text-xs font-semibold tracking-wider uppercase">Performance</p>
+						<button
+							type="button"
+							onclick={openBrowser}
+							class="z-10 flex flex-col items-center gap-2 transition-opacity hover:opacity-80"
+						>
+							<Icon icon="tabler:external-link" size={22} class="text-primary-400" />
+							<span class="align-bottom text-xs">Open in Browser</span>
+						</button>
+						<p class="text-muted text-center text-[11px]">
+							WebKit webview is slower than Firefox/Chrome. Use the browser for large save edits.
+						</p>
+					</div>
+				</Card>
+			</div>
+		{/if}
 		<div use:tilt class="card-tilt">
 			<Card>
 				<div class="flex-col space-y-2">

@@ -11,6 +11,15 @@ license.workspace = true
 name = "psp"
 path = "src/main.rs"
 
+[features]
+default = []
+# Linux-only launcher: same embedded server, but instead of the full webview
+# editor, a small control-panel window (`/browser-mode` in the SPA) shows the
+# boot sequence and status while the real UI opens in the system browser. On
+# Windows/macOS (or default Linux builds) the feature is inert and the normal
+# webview app runs.
+browser-mode = ["dep:opener"]
+
 [build-dependencies]
 tauri-build = { workspace = true }
 
@@ -22,3 +31,4 @@ tokio = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["env-filter"] }
+opener = { workspace = true, optional = true }

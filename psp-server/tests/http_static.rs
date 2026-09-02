@@ -299,6 +299,76 @@ async fn redirect_escapes_percent_encoded_hash() {
     assert_eq!(location, "/?path=/pals/foo%23bar");
 }
 
+// adapter-static emits prerendered pages as extensionless "pretty URLs"
+// (browser-mode.html next to index.html). A request for the extensionless
+// path must serve that file DIRECTLY — 200, not a /?path= bounce — so the
+// browser-mode control window opens on the page with no client-side
+// redirect. The query string must survive the internal rewrite.
+#[tokio::test]
+async fn prerendered_page_is_served_directly_with_its_query() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let router = test_router(&temp_dir).await;
+    std::fs::write(
+        temp_dir.path().join("ui/browser-mode.html"),
+        "<html>control</html>",
+    )
+    .unwrap();
+
+    let response = router
+        .oneshot(
+            Request::get("/browser-mode?x=1")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    let body = response.into_body().collect().await.unwrap().to_bytes();
+    assert_eq!(&body[..], b"<html>control</html>");
+}
+
+// The .html-sibling lookup must not become a traversal vector: a
+// "../secret_dir.html" stat would resolve outside ui_dir if the parent-dir
+// guard were missing from the new branch.
+#[tokio::test]
+async fn path_traversal_via_html_sibling_is_not_served() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let router = test_router(&temp_dir).await;
+    let secret = b"top secret sibling contents";
+    std::fs::write(temp_dir.path().join("secret_dir.html"), secret).unwrap();
+
+    let response = router
+        .oneshot(Request::get("/../secret_dir").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    assert_ne!(response.status(), StatusCode::OK);
+    let body = response.into_body().collect().await.unwrap().to_bytes();
+    assert!(
+        !body_leaks_secret(&body, secret),
+        "path traversal via the .html sibling leaked the secret file's contents"
+    );
+}
+
+// Paths whose sibling does not exist (dynamic routes like wiki slugs, or
+// directories without their own page file) keep the ONE-HOP /?path= redirect.
+#[tokio::test]
+async fn path_without_html_sibling_still_redirects() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let router = test_router(&temp_dir).await;
+    let response = router
+        .oneshot(Request::get("/wiki/pals/sheepball").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
+    let location = response
+        .headers()
+        .get("location")
+        .unwrap()
+        .to_str()
+        .unwrap();
+    assert_eq!(location, "/?path=/wiki/pals/sheepball");
+}
+
 // "%E3%83%91%E3%83%AB" is UTF-8 for "パル" (U+30D1 U+30EB). Every non-ASCII
 // byte is outside the unreserved set, so the decoded string must round-trip to
 // the identical percent-encoded bytes, in uppercase hex.

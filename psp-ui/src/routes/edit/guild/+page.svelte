@@ -202,6 +202,14 @@
 		return staticIcons.unknownIcon;
 	});
 
+	// Index base pals by slot once, instead of the O(n) `find` per slot that made
+	// currentPageItems O(n²) for large bases.
+	const pPalsBySlot = $derived(
+		currentBase
+			? new Map(Object.values(currentBase[1].pals).map((p) => [p.storage_slot, p]))
+			: new Map()
+	);
+
 	const currentPageItems = $derived.by(() => {
 		if (!currentBase) return [];
 		const [baseId, base] = currentBase;
@@ -213,7 +221,7 @@
 		return Array(base.slot_count)
 			.fill(undefined)
 			.map((_, index) => {
-				const existingPal = Object.values(base.pals).find((p) => p.storage_slot === index);
+				const existingPal = pPalsBySlot.get(index);
 				if (existingPal) {
 					return {
 						pal: existingPal,
@@ -234,6 +242,23 @@
 	});
 
 	const debouncedFilterPals = debounce(filterPals, 300);
+
+	// Slot-level paging for the base pals grid. A base can hold up to `slot_count`
+	// pals; rendering all at once chokes WebKitGTK, so render only a visible chunk.
+	// `currentPage` already means "which base", so page slots separately.
+	const PALS_PER_GRID_PAGE = 90;
+	let palPage = $state(1);
+	const palGridPageCount = $derived(
+		Math.max(1, Math.ceil(currentPageItems.length / PALS_PER_GRID_PAGE))
+	);
+	const palGridItems = $derived(
+		currentPageItems.slice((palPage - 1) * PALS_PER_GRID_PAGE, palPage * PALS_PER_GRID_PAGE)
+	);
+	$effect(() => {
+		// Resets slot page to 1 when the base or search changes: palGridPageCount
+		// transitively depends on currentPage and palSearchQuery, so this re-runs.
+		if (palPage > palGridPageCount) palPage = 1;
+	});
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.target instanceof HTMLInputElement) return;
@@ -1014,10 +1039,35 @@
 				{/if}
 				{#if activeTab == 'pals'}
 					<div id="guild-pals-grid" class="overflow-hidden">
+						{#if currentPageItems.length > PALS_PER_GRID_PAGE}
+							<div class="flex items-center justify-center space-x-3 py-2">
+								<Button
+									class="rounded-full p-2! font-bold"
+									variant="ghost"
+									size="sm"
+									onclick={() => (palPage = Math.max(1, palPage - 1))}
+									disabled={palPage <= 1}
+								>
+									<Icon icon="tabler:chevron-left" size={18} />
+								</Button>
+								<span class="text-muted text-xs">
+									{palPage} / {palGridPageCount}
+								</span>
+								<Button
+									class="rounded-full p-2! font-bold"
+									variant="ghost"
+									size="sm"
+									onclick={() => (palPage = Math.min(palGridPageCount, palPage + 1))}
+									disabled={palPage >= palGridPageCount}
+								>
+									<Icon icon="tabler:chevron-right" size={18} />
+								</Button>
+							</div>
+						{/if}
 						<div
 							class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
 						>
-							{#each currentPageItems as item (item.pal.instance_id)}
+							{#each palGridItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !palSearchQuery}
 									<PalBadge
 										pal={item.pal}

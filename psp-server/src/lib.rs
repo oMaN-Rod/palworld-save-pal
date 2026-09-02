@@ -41,9 +41,25 @@ pub struct ServerHandle {
     /// connection is accepted, so tests can await connection teardown instead
     /// of sleeping.
     pub live_connections: tokio::sync::watch::Receiver<usize>,
+    /// Fires when a client sends the `shutdown` message (the browser-mode
+    /// control panel's Quit button) — the embedding shell watches it to exit
+    /// the app while the server drains gracefully.
+    pub shutdown_requested: tokio::sync::watch::Receiver<bool>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
 }
+
+/// Set once by `start_server_with`; fired by the `shutdown` WS message so a
+/// connected UI can ask the whole process to stop. Returns false when no
+/// server is running in this process (e.g. unit tests calling the handler).
+pub fn request_shutdown() -> bool {
+    SHUTDOWN_REQUESTED
+        .get()
+        .is_some_and(|sender| sender.send(true).is_ok())
+}
+
+static SHUTDOWN_REQUESTED: std::sync::OnceLock<tokio::sync::watch::Sender<bool>> =
+    std::sync::OnceLock::new();
 
 impl ServerHandle {
     pub async fn shutdown(self) {
@@ -132,11 +148,24 @@ pub async fn start_server_with(
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
+    let (shutdown_request_tx, mut shutdown_request_rx) = tokio::sync::watch::channel(false);
+    let shutdown_requested = shutdown_request_tx.subscribe();
+    // The first server in the process owns the shutdown message's channel;
+    // later servers (parallel test servers) keep their own sender ALIVE — a
+    // dropped sender resolves `changed()` with an error, which the graceful
+    // select below treats as a stop request and would kill the server at
+    // once. Deliberate leak with process-lifetime ownership semantics.
+    if let Err(sender) = SHUTDOWN_REQUESTED.set(shutdown_request_tx) {
+        std::mem::forget(sender);
+    }
     let application = router::build_router(Arc::clone(&state), &config.ui_dir);
     let serve_task = tokio::spawn(async move {
         axum::serve(listener, application)
-            .with_graceful_shutdown(async {
-                let _ = shutdown_receiver.await;
+            .with_graceful_shutdown(async move {
+                tokio::select! {
+                    _ = shutdown_receiver => {},
+                    _ = shutdown_request_rx.changed() => {},
+                }
             })
             .await
     });
@@ -145,6 +174,7 @@ pub async fn start_server_with(
         addr,
         app: state,
         live_connections: live_connections_rx,
+        shutdown_requested,
         shutdown_sender,
         serve_task,
     })

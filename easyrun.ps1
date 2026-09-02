@@ -16,6 +16,7 @@
 param(
     [switch]$Web, [switch]$Desktop, [switch]$Webapp, [switch]$Landing,
     [switch]$Docker, [switch]$Serve,
+    [switch]$Browser, [switch]$BuildBrowser,
     [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
     [string]$HostAddr, [int]$VitePort, [int]$ServerPort,
@@ -758,6 +759,7 @@ mode (pick one; defaults to -Web):
   -BuildDesktop     Production desktop build → dist/.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
+  (-Browser / -BuildBrowser exist on Linux only — see easyrun.sh.)
 
 options:
   -Check            Run only the preflight for the selected mode, then exit.
@@ -782,6 +784,13 @@ common parameter name.
 }
 
 if ($Help) { Show-Usage; exit 0 }
+
+# browser-mode replaces the webview with a terminal launcher — a Linux-only
+# feature. The cargo feature is inert on Windows, so refuse the flags instead
+# of silently building the normal webview app.
+if ($Browser -or $BuildBrowser) {
+    Die "browser-mode is Linux-only. On Linux use: ./easyrun.sh --browser (dev) or --build-browser (AppImage)."
+}
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
         elseif ($Desktop)     { "desktop" }

@@ -128,6 +128,7 @@ define_message_types! {
     SyncAppState => "sync_app_state",
     Warning => "warning",
     OpenInBrowser => "open_in_browser",
+    Shutdown => "shutdown",
     GetRawData => "get_raw_data",
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",

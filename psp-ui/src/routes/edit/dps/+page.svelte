@@ -85,6 +85,10 @@
 		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
 	);
 
+	// Index of each pal by slot number, rebuilt once per filter change instead of
+	// scanning filteredPals (O(n)) for every one of 9600 slots (O(n²)) each render.
+	const palsByIndex = $derived(new Map(filteredPals.map((p) => [p.index, p])));
+
 	const currentPageItems = $derived.by(() => {
 		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
 		const endIndex = startIndex + PALS_PER_PAGE;
@@ -93,28 +97,26 @@
 			return filteredPals.slice(startIndex, endIndex);
 		}
 
-		const paddedPals = Array(TOTAL_SLOTS)
-			.fill(undefined)
-			.map((_, index) => {
-				const pal = filteredPals.find((p) => p.index == index);
-				if (pal) {
-					return pal;
-				} else {
-					return {
-						id: `empty-${index}`,
-						index: index,
-						pal: {
-							character_id: 'None',
-							character_key: 'None',
-							storage_slot: index,
-							instance_id: `empty-${index}`,
-							storage_id: appState.selectedPlayer?.pal_box_id
-						} as Pal
-					};
-				}
-			});
-
-		return paddedPals.slice(startIndex, endIndex);
+		// Only materialize the current page's 30 slots, not all 9600.
+		return Array.from({ length: endIndex - startIndex }, (_, i) => {
+			const index = startIndex + i;
+			const pal = palsByIndex.get(index);
+			if (pal) {
+				return pal;
+			} else {
+				return {
+					id: `empty-${index}`,
+					index: index,
+					pal: {
+						character_id: 'None',
+						character_key: 'None',
+						storage_slot: index,
+						instance_id: `empty-${index}`,
+						storage_id: appState.selectedPlayer?.pal_box_id
+					} as Pal
+				};
+			}
+		});
 	});
 
 	const sortButtonClass = (currentSortBy: SortBy) =>

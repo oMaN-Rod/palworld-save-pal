@@ -61,10 +61,19 @@ pub async fn spa_fallback_redirect(
     // slash on the request. ServeDir only does this when the URL already
     // ends in "/" (otherwise it redirects to add one), so directories are
     // resolved here and handed to ServeDir as a concrete file path.
+    // Prerendered extensionless pages (adapter-static's "pretty URL" output,
+    // e.g. /browser-mode → browser-mode.html) are served the same way, so a
+    // window that opens on the page hydrates it in place instead of bouncing
+    // through /?path= and a client-side redirect.
     if !has_parent_dir_segment(&decoded_path) {
         let candidate = ui_dir.join(decoded_path.trim_start_matches('/'));
         if candidate.join("index.html").is_file() {
             *request.uri_mut() = append_index_html(request.uri());
+        } else if ui_dir
+            .join(format!("{}.html", decoded_path.trim_start_matches('/')))
+            .is_file()
+        {
+            *request.uri_mut() = rewrite_path(request.uri(), format!("{}.html", decoded_path));
         }
     }
 
@@ -90,6 +99,10 @@ fn append_index_html(uri: &Uri) -> Uri {
     } else {
         format!("{path}/index.html")
     };
+    rewrite_path(uri, new_path)
+}
+
+fn rewrite_path(uri: &Uri, new_path: String) -> Uri {
     let path_and_query = match uri.query() {
         Some(query) => format!("{new_path}?{query}"),
         None => new_path,

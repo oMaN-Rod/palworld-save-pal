@@ -9,7 +9,8 @@
 		isSaveRequiredRoute,
 		isFullBleedRoute,
 		isPublicShell,
-		isCompatExemptRoute
+		isCompatExemptRoute,
+		isControlRoute
 	} from '$lib/utils/shellRoutes';
 	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
 	import { getDispatcher } from '$lib/ws/dispatcher';
@@ -40,6 +41,16 @@
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
+	// The browser-mode control panel renders with no shell chrome at all. The
+	// `?path=` arm matters at boot: the server 307s /browser-mode to
+	// /?path=/browser-mode, and the client-side goto lands a beat later —
+	// without it the small-window overlay (480px control window) mounts during
+	// that interim. searchParams is runtime-only: reading it during prerender
+	// throws, so gate on `browser`.
+	const controlShell = $derived(
+		isControlRoute(page.url.pathname) ||
+			(browser && isControlRoute(page.url.searchParams.get('path') ?? ''))
+	);
 
 	// Every locale's landing root (`/`, `/de`, `/zh`, …) — the marketing page
 	// stays clean of the ambient corner art.
@@ -115,7 +126,7 @@
 			<div class="relative z-[1] flex h-screen w-full overflow-hidden">
 				{#if publicShell}
 					<PublicNav />
-				{:else}
+				{:else if !controlShell}
 					<Sidebar />
 				{/if}
 				<div class="relative flex flex-1 flex-col overflow-hidden">
@@ -141,7 +152,7 @@
 		</Modal>
 	{/key}
 	<!-- Sits under the z-[1] shell, above the body gradients. -->
-	{#if cornerArt.current && !isLandingPath(page.url.pathname)}
+	{#if cornerArt.current && !isLandingPath(page.url.pathname) && !controlShell}
 		<div
 			class="pointer-events-none fixed inset-0 z-0"
 			style="background: url('/bg-corner.webp') no-repeat bottom right / 880px auto; opacity: 0.1;"
@@ -149,5 +160,7 @@
 		></div>
 	{/if}
 	<PalEditorOverlay />
-	<ResizeWarning />
+	{#if !controlShell}
+		<ResizeWarning />
+	{/if}
 {/if}

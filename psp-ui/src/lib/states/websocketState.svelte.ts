@@ -58,11 +58,14 @@ class SocketState {
 	}
 
 	isConnected(): boolean {
-		return this.#websocket.readyState === this.#websocket.OPEN;
+		return this.#websocket?.readyState === WebSocket.OPEN;
 	}
 
 	async send(messageData: string) {
-		while (this.#websocket.readyState !== this.#websocket.OPEN) {
+		// #websocket is assigned in connect(), which the root layout runs from
+		// ITS onMount — child components mount first, so an early send (e.g.
+		// the browser-mode boot page) must also wait for the socket to exist.
+		while (!this.#websocket || this.#websocket.readyState !== WebSocket.OPEN) {
 			await new Promise((resolve) => setTimeout(resolve, 250));
 		}
 		// Dev-only and type-only — see the note in onmessage above. The type is

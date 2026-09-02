@@ -25,6 +25,14 @@ export function isFullBleedRoute(pathname: string): boolean {
 	);
 }
 
+// The browser-mode launcher's control panel renders bare: no sidebar, no nav,
+// no corner art — the small Tauri window IS the whole interface.
+export const CONTROL_ROUTES = ['/browser-mode'] as const;
+
+export function isControlRoute(pathname: string): boolean {
+	return CONTROL_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
+}
+
 export function isPublicShell(webBuild: boolean, saveFile: unknown): boolean {
 	return webBuild && !saveFile;
 }

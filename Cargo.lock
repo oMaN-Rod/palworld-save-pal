@@ -3610,6 +3610,7 @@ name = "psp-desktop"
 version = "1.4.2"
 dependencies = [
  "anyhow",
+ "opener",
  "psp-server",
  "tauri",
  "tauri-build",

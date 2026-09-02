@@ -29,8 +29,13 @@
 	let resumeName = $state<string | null>(null);
 
 	if (browser) {
+		// psp-server 307s deep links to /?path=<target> and the root layout
+		// restores them — when one is pending, don't race it with the desktop
+		// auto-redirect (that buried /browser-mode under /overview and tripped
+		// the small-window overlay in the control window).
+		const restorePath = new URLSearchParams(window.location.search).get('path');
 		if (desktop) {
-			if (!appState.saveFile) goto('/overview');
+			if (!restorePath && !appState.saveFile) goto('/overview');
 		} else if (appState.saveFile) {
 			goto('/edit');
 		} else if (isWebBuild) {
