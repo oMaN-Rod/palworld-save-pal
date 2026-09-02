@@ -27,6 +27,14 @@ pub const SAFE_RANK_MAX: i64 = 5;
 pub const SAFE_SOUL_MAX: i64 = 20;
 pub const SAFE_IV_MAX: i64 = 100;
 pub const SAFE_PASSIVE_SLOTS: usize = 4;
+/// The game's equip bar holds three active skills (`EquipWaza`).
+pub const SAFE_ACTIVE_SLOTS: usize = 3;
+
+/// How many independent soft suspicions one pal may carry before the
+/// combination itself is treated as a hard illegal. Each `SUSPICIOUS_*` alone
+/// might be cross-version catalog drift; two or more on the same pal cannot
+/// occur in a legitimate save.
+const SUSPICIOUS_COMBINATION_MIN: usize = 2;
 
 /// Tolerated MaxHP overshoot (fraction of the computed ceiling) before
 /// `ILLEGAL_HP` fires. Absorbs cross-version formula drift; cheat-inflated HP
@@ -41,17 +49,25 @@ pub const ILLEGAL_RANK: &str = "ILLEGAL_RANK";
 pub const SUSPICIOUS_SOUL_RANK: &str = "SUSPICIOUS_SOUL_RANK";
 pub const SUSPICIOUS_TALENT: &str = "SUSPICIOUS_TALENT";
 pub const SUSPICIOUS_PASSIVE_SLOTS: &str = "SUSPICIOUS_PASSIVE_SLOTS";
+pub const SUSPICIOUS_ACTIVE_SLOTS: &str = "SUSPICIOUS_ACTIVE_SLOTS";
+pub const SUSPICIOUS_DUPLICATE_PASSIVE: &str = "SUSPICIOUS_DUPLICATE_PASSIVE";
+pub const SUSPICIOUS_DUPLICATE_ACTIVE: &str = "SUSPICIOUS_DUPLICATE_ACTIVE";
+/// Escalation code: multiple independent soft suspicions on one pal (see
+/// [`SUSPICIOUS_COMBINATION_MIN`]) — the configuration as a whole is
+/// impossible even when no single value is.
+pub const ILLEGAL_COMBINATION: &str = "ILLEGAL_COMBINATION";
 pub const ILLEGAL_PASSIVE: &str = "ILLEGAL_PASSIVE";
 pub const ILLEGAL_ACTIVE: &str = "ILLEGAL_ACTIVE";
 pub const ILLEGAL_HP: &str = "ILLEGAL_HP";
 
-const DANGER_CODES: [&str; 6] = [
+const DANGER_CODES: [&str; 7] = [
     ILLEGAL_SPECIES,
     ILLEGAL_LEVEL,
     ILLEGAL_RANK,
     ILLEGAL_PASSIVE,
     ILLEGAL_ACTIVE,
     ILLEGAL_HP,
+    ILLEGAL_COMBINATION,
 ];
 
 /// `"danger"` for hard illegals, `"warning"` for soft suspicions.
@@ -110,6 +126,11 @@ pub(crate) fn detect_pal_issues(
     if passives.len() > SAFE_PASSIVE_SLOTS {
         issues.push(SUSPICIOUS_PASSIVE_SLOTS);
     }
+    // The game never writes the same passive twice; compare lowercased because
+    // casing has drifted between game versions.
+    if has_duplicates(passives.iter().map(|passive| passive.to_lowercase())) {
+        issues.push(SUSPICIOUS_DUPLICATE_PASSIVE);
+    }
     if catalogs.passives_loaded() && passives.iter().any(|p| !catalogs.has_passive(p)) {
         issues.push(ILLEGAL_PASSIVE);
     }
@@ -121,6 +142,14 @@ pub(crate) fn detect_pal_issues(
     if catalogs.actives_loaded() && actives.iter().any(|a| !catalogs.has_active(a)) {
         issues.push(ILLEGAL_ACTIVE);
     }
+    if actives.len() > SAFE_ACTIVE_SLOTS {
+        issues.push(SUSPICIOUS_ACTIVE_SLOTS);
+    }
+    // Compare in the catalog's bare form so the stored `EPalWazaID::` prefix
+    // (or its absence) cannot mask a duplicate.
+    if has_duplicates(actives.iter().map(|active| normalize_active(active))) {
+        issues.push(SUSPICIOUS_DUPLICATE_ACTIVE);
+    }
 
     let stored_max = stored_max_hp(save_parameter);
     if stored_max > 0 {
@@ -130,7 +159,32 @@ pub(crate) fn detect_pal_issues(
         }
     }
 
+    if issues
+        .iter()
+        .filter(|code| severity_of(code) == "warning")
+        .count()
+        >= SUSPICIOUS_COMBINATION_MIN
+    {
+        issues.push(ILLEGAL_COMBINATION);
+    }
+
     issues
+}
+
+/// Whether any value appears twice in `values` (already normalized by the
+/// caller).
+fn has_duplicates(mut values: impl Iterator<Item = String>) -> bool {
+    let mut seen = std::collections::HashSet::new();
+    values.any(|value| !seen.insert(value))
+}
+
+/// Lowercased, prefix-stripped form of an `EquipWaza` entry.
+fn normalize_active(active: &str) -> String {
+    let lower = active.to_lowercase();
+    lower
+        .strip_prefix("epalwazaid::")
+        .unwrap_or(&lower)
+        .to_string()
 }
 
 /// Stored MaxHP (×1000). `MaxHP` is a FixedPoint64 `{Value}`; a bare Int64 is
@@ -238,6 +292,7 @@ mod tests {
                     "HP_ACC_up1": {"effects": [{"type": "MaxHP", "value": 10.0, "target": "ToSelf"}]},
                     "HP_ACC_up3": {"effects": [{"type": "MaxHP", "value": 30.0, "target": "ToSelf"}]},
                     "TrainerStamina": {"effects": [{"type": "TrainerStamina", "value": 50.0, "target": "ToTrainer"}]},
+                    "Aggressive": {"effects": [{"type": "Attack", "value": 10.0, "target": "ToSelf"}]},
                     "Legend": {"effects": [
                         {"type": "MaxHP", "value": 20.0, "target": "ToSelf"},
                         {"type": "Attack", "value": 20.0, "target": "ToSelf"}
@@ -294,8 +349,10 @@ mod tests {
     fn severity_splits_danger_from_warning() {
         assert_eq!(severity_of(ILLEGAL_HP), "danger");
         assert_eq!(severity_of(ILLEGAL_SPECIES), "danger");
+        assert_eq!(severity_of(ILLEGAL_COMBINATION), "danger");
         assert_eq!(severity_of(SUSPICIOUS_TALENT), "warning");
         assert_eq!(severity_of(SUSPICIOUS_PASSIVE_SLOTS), "warning");
+        assert_eq!(severity_of(SUSPICIOUS_ACTIVE_SLOTS), "warning");
     }
 
     #[test]
@@ -349,12 +406,75 @@ mod tests {
                 "HP_ACC_up1",
                 "HP_ACC_up3",
                 "TrainerStamina",
-                "Legend",
+                "Aggressive",
             ]),
         );
         assert_eq!(
             detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
             vec![SUSPICIOUS_PASSIVE_SLOTS]
+        );
+    }
+
+    #[test]
+    fn active_slot_and_duplicate_checks_fire() {
+        let catalogs = catalogs();
+
+        // Four equipped actives (two distinct skills, each twice) trip the
+        // slot cap and the duplicate check at once.
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "EquipWaza",
+            enum_array(&["AirCanon", "SandBlast", "EPalWazaID::AirCanon", "SandBlast"]),
+        );
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![
+                SUSPICIOUS_ACTIVE_SLOTS,
+                SUSPICIOUS_DUPLICATE_ACTIVE,
+                ILLEGAL_COMBINATION
+            ]
+        );
+
+        // The stored `EPalWazaID::` prefix must not mask a duplicate.
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "EquipWaza",
+            enum_array(&["AirCanon", "EPalWazaID::AirCanon"]),
+        );
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_DUPLICATE_ACTIVE]
+        );
+    }
+
+    #[test]
+    fn duplicate_passives_fire() {
+        let catalogs = catalogs();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("PassiveSkillList", name_array(&["Legend", "Legend"]));
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_DUPLICATE_PASSIVE]
+        );
+    }
+
+    #[test]
+    fn combined_suspicions_escalate_to_danger() {
+        let catalogs = catalogs();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("Rank_HP", byte_property(21));
+        save_parameter.insert("Talent_Shot", byte_property(101));
+        // Two independent soft suspicions → the combination is a hard flag.
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_SOUL_RANK, SUSPICIOUS_TALENT, ILLEGAL_COMBINATION]
+        );
+        // One soft suspicion alone stays a warning.
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("Rank_HP", byte_property(21));
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_SOUL_RANK]
         );
     }
 

@@ -52,6 +52,11 @@ export interface OverviewStats {
 		nickname: string;
 		level: number | null;
 		pal_count: number;
+		lucky_count: number;
+		avg_pal_level: number | null;
+		max_pal_level: number | null;
+		total_power: number;
+		dps_pal_count: number;
 	}[];
 	anomalies: {
 		pal_count: number;
@@ -64,6 +69,8 @@ export interface OverviewStats {
 			level: number;
 			severity: 'danger' | 'warning';
 			codes: string[];
+			owner_uid: string | null;
+			source: 'world' | 'dps';
 		}[];
 	};
 }

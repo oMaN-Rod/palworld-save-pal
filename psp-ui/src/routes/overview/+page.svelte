@@ -324,7 +324,7 @@
 
 				<!-- Pals needing review -->
 				{#if stats.anomalies.pal_count > 0}
-					<NeedsReviewCard anomalies={stats.anomalies} />
+					<NeedsReviewCard anomalies={stats.anomalies} players={stats.top_players} />
 				{/if}
 
 				<!-- Traits & conditions -->

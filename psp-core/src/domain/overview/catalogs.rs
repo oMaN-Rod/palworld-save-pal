@@ -15,11 +15,13 @@ const FRIENDSHIP_THRESHOLDS: [i64; 11] = [
     0, 6_000, 13_000, 21_000, 30_000, 40_000, 55_000, 80_000, 110_000, 150_000, 200_000,
 ];
 
-/// Per-species numbers the HP ceiling formula needs, resolved from
-/// `pals.json`.
+/// Per-species numbers the HP ceiling formula and the raw-power score need,
+/// resolved from `pals.json`.
 #[derive(Debug, Clone, Copy)]
 pub(crate) struct SpeciesVitals {
     pub(crate) scaling_hp: f64,
+    pub(crate) scaling_attack: f64,
+    pub(crate) scaling_defense: f64,
     pub(crate) friendship_hp: f64,
 }
 
@@ -37,6 +39,9 @@ pub(crate) struct OverviewCatalogs {
     active_assets: HashSet<String>,
     /// Lowercased passive id → summed MaxHP% effects as a fraction (0.10).
     passive_hp_fraction: HashMap<String, f64>,
+    /// Lowercased passive id → summed Attack% effects as a fraction, for the
+    /// raw-power score.
+    passive_attack_fraction: HashMap<String, f64>,
     /// Lowercased species key → HP formula inputs.
     vitals: HashMap<String, SpeciesVitals>,
     /// Ascending friendship-point thresholds; index == rank.
@@ -51,6 +56,7 @@ impl OverviewCatalogs {
             passive_assets: HashSet::new(),
             active_assets: HashSet::new(),
             passive_hp_fraction: HashMap::new(),
+            passive_attack_fraction: HashMap::new(),
             vitals: HashMap::new(),
             friendship_thresholds: FRIENDSHIP_THRESHOLDS.to_vec(),
         };
@@ -68,6 +74,14 @@ impl OverviewCatalogs {
                         lower,
                         SpeciesVitals {
                             scaling_hp,
+                            scaling_attack: info
+                                .pointer("/scaling/attack")
+                                .and_then(|value| value.as_f64())
+                                .unwrap_or(0.0),
+                            scaling_defense: info
+                                .pointer("/scaling/defense")
+                                .and_then(|value| value.as_f64())
+                                .unwrap_or(0.0),
                             friendship_hp: info
                                 .get("friendship_hp")
                                 .and_then(|value| value.as_f64())
@@ -87,7 +101,8 @@ impl OverviewCatalogs {
             for (key, info) in passives {
                 let lower = key.to_lowercase();
                 catalogs.passive_assets.insert(lower.clone());
-                let mut bonus_pct = 0.0;
+                let mut hp_pct = 0.0;
+                let mut attack_pct = 0.0;
                 for effect in info
                     .get("effects")
                     .and_then(|value| value.as_array())
@@ -95,17 +110,23 @@ impl OverviewCatalogs {
                 {
                     let effect_type = effect.get("type").and_then(|v| v.as_str()).unwrap_or("");
                     let target = effect.get("target").and_then(|v| v.as_str()).unwrap_or("");
-                    // Trainer-only effects never raise the pal's own HP pool.
+                    // Trainer-only effects never raise the pal's own stats.
                     if target.contains("ToTrainer") && !target.contains("ToSelf") {
                         continue;
                     }
                     if effect_type.contains("MaxHP") {
-                        bonus_pct += effect.get("value").and_then(|v| v.as_f64()).unwrap_or(0.0);
+                        hp_pct += effect.get("value").and_then(|v| v.as_f64()).unwrap_or(0.0);
+                    }
+                    if effect_type.contains("Attack") {
+                        attack_pct += effect.get("value").and_then(|v| v.as_f64()).unwrap_or(0.0);
                     }
                 }
                 catalogs
                     .passive_hp_fraction
-                    .insert(lower, bonus_pct / 100.0);
+                    .insert(lower.clone(), hp_pct / 100.0);
+                catalogs
+                    .passive_attack_fraction
+                    .insert(lower, attack_pct / 100.0);
             }
         }
 
@@ -183,6 +204,13 @@ impl OverviewCatalogs {
             .copied()
     }
 
+    /// Summed Attack% effects of a passive, as a fraction (0.10 = +10%).
+    pub(crate) fn passive_attack_fraction(&self, passive: &str) -> Option<f64> {
+        self.passive_attack_fraction
+            .get(&passive.to_lowercase())
+            .copied()
+    }
+
     pub(crate) fn has_passive(&self, passive: &str) -> bool {
         self.passive_assets.contains(&passive.to_lowercase())
     }
@@ -209,13 +237,16 @@ mod tests {
             (
                 "pals".to_string(),
                 r#"{
-                    "Alpaca": {"is_pal": true, "scaling": {"hp": 90}, "friendship_hp": 4.5},
-                    "Human": {"is_pal": false, "scaling": {"hp": 70}, "friendship_hp": 1.0}
+                    "Alpaca": {"is_pal": true, "scaling": {"hp": 90, "attack": 75, "defense": 90}, "friendship_hp": 4.5},
+                    "Human": {"is_pal": false, "scaling": {"hp": 70, "attack": 70, "defense": 70}, "friendship_hp": 1.0}
                 }"#.to_string(),
             ),
             (
                 "passive_skills".to_string(),
-                r#"{"Legend": {"effects": [{"type": "MaxHP", "value": 20.0, "target": "ToSelf"}]}}"#.to_string(),
+                r#"{
+                    "Legend": {"effects": [{"type": "MaxHP", "value": 20.0, "target": "ToSelf"}]},
+                    "Aggressive": {"effects": [{"type": "Attack", "value": 10.0, "target": "ToSelf"}]}
+                }"#.to_string(),
             ),
             (
                 "active_skills".to_string(),
@@ -248,18 +279,20 @@ mod tests {
         let game_data = GameData::from_entries([(
             "pals".to_string(),
             r#"{
-                "Alpaca": {"is_pal": true, "scaling": {"hp": 90}, "friendship_hp": 4.5},
-                "BOSS_Alpaca": {"is_pal": true, "scaling": {"hp": 500}, "friendship_hp": 4.5}
+                "Alpaca": {"is_pal": true, "scaling": {"hp": 90, "attack": 75, "defense": 90}, "friendship_hp": 4.5},
+                "BOSS_Alpaca": {"is_pal": true, "scaling": {"hp": 500, "attack": 400, "defense": 450}, "friendship_hp": 4.5}
             }"#
             .to_string(),
         )])
         .unwrap();
         let catalogs = OverviewCatalogs::from_game_data(&game_data);
-        assert_eq!(
-            catalogs.vitals_for("BOSS_Alpaca").unwrap().scaling_hp,
-            500.0
-        );
-        assert_eq!(catalogs.vitals_for("Alpaca").unwrap().scaling_hp, 90.0);
+        let boss = catalogs.vitals_for("BOSS_Alpaca").unwrap();
+        assert_eq!(boss.scaling_hp, 500.0);
+        assert_eq!(boss.scaling_attack, 400.0);
+        assert_eq!(boss.scaling_defense, 450.0);
+        let base = catalogs.vitals_for("Alpaca").unwrap();
+        assert_eq!(base.scaling_hp, 90.0);
+        assert_eq!(base.scaling_attack, 75.0);
         assert!(catalogs.vitals_for("NotAPal").is_none());
     }
 
@@ -287,5 +320,7 @@ mod tests {
         assert!(catalogs.has_active("AirCanon"));
         assert!(!catalogs.has_active("HackSkill"));
         assert_eq!(catalogs.passive_hp_fraction("Legend"), Some(0.20));
+        assert_eq!(catalogs.passive_attack_fraction("Aggressive"), Some(0.10));
+        assert_eq!(catalogs.passive_attack_fraction("Legend"), Some(0.0));
     }
 }

@@ -82,18 +82,35 @@ pub struct OverviewSpeciesCount {
     pub count: i64,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+/// One leaderboard row. The backend orders rows by pal count (the default
+/// ranking); every other metric travels along so the dashboard can re-sort
+/// client-side without a refetch.
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct OverviewPlayerRow {
     pub uid: uuid::Uuid,
     pub nickname: String,
     pub level: Option<i64>,
     pub pal_count: i64,
+    /// Lucky (`IsRarePal`) pals owned.
+    pub lucky_count: i64,
+    /// Mean level of the owned pals that were readable; `None` when none were.
+    pub avg_pal_level: Option<f64>,
+    /// Highest level among the owned pals that were readable; `None` when
+    /// none were.
+    pub max_pal_level: Option<i64>,
+    /// Summed per-pal raw power score (estimated HP + attack + defense, in
+    /// stat points).
+    pub total_power: i64,
+    /// Pals stored in this player's Dimensional Pal Storage save.
+    pub dps_pal_count: i64,
 }
 
 /// One flagged pal from the legality scan. `codes` are the stable machine
 /// codes (`ILLEGAL_HP`, `SUSPICIOUS_TALENT`, …) the frontend translates to
 /// localized text; `severity` is `"danger"` when any code is a danger code,
-/// else `"warning"`.
+/// else `"warning"`. `source` tells where the pal lives — `"world"`
+/// (`Level.sav`) or `"dps"` (a player's Dimensional Pal Storage save); DPS
+/// rows carry the storing player's uid in `owner_uid`.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub struct OverviewAnomalyRow {
     pub instance_id: uuid::Uuid,
@@ -103,6 +120,9 @@ pub struct OverviewAnomalyRow {
     pub level: i64,
     pub severity: &'static str,
     pub codes: Vec<&'static str>,
+    pub owner_uid: Option<uuid::Uuid>,
+    /// `"world"` or `"dps"`.
+    pub source: &'static str,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
