@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import Select from '$lib/components/ui/select/Select.svelte';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';
 	import type { OverviewStats } from '$states';
@@ -31,6 +32,10 @@
 		dps_pal_count: m.overview_metric_dps
 	};
 
+	const metricOptions = $derived(
+		LEADERBOARD_METRICS.map((key) => ({ value: key, label: metricLabels[key]() }))
+	);
+
 	function metricPill(player: OverviewStats['top_players'][number]): string {
 		// Null metrics (no known level, no readable pals) render as an em-dash
 		// rather than a misleading 0.
@@ -38,17 +43,13 @@
 			case 'pal_count':
 				return m.overview_pal_count({ count: player.pal_count.toLocaleString() });
 			case 'level':
-				return player.level == null
-					? '—'
-					: m.overview_lv({ level: player.level });
+				return player.level == null ? '—' : m.overview_lv({ level: player.level });
 			case 'avg_pal_level':
 				return player.avg_pal_level == null
 					? '—'
 					: m.overview_avg_lv({ level: player.avg_pal_level.toFixed(1) });
 			case 'max_pal_level':
-				return player.max_pal_level == null
-					? '—'
-					: m.overview_lv({ level: player.max_pal_level });
+				return player.max_pal_level == null ? '—' : m.overview_lv({ level: player.max_pal_level });
 			case 'lucky_count':
 				return m.overview_lucky_count({ count: player.lucky_count.toLocaleString() });
 			case 'total_power':
@@ -67,26 +68,21 @@
 </script>
 
 <div class="card h-full">
-	<h3 class="text-surface-400 mb-4 text-xs font-semibold tracking-wider uppercase">
-		{m.overview_top_players()}
-	</h3>
-
-	<!-- Ranking metric selector: one pill per leaderboard view -->
-	<div class="mb-4 flex flex-wrap gap-1" role="group" aria-label={m.overview_rank_by()}>
-		{#each LEADERBOARD_METRICS as key (key)}
-			<button
-				type="button"
-				class={cn(
-					'rounded-sm px-2.5 py-1 text-[11px] font-medium transition-all',
-					metric === key
-						? 'bg-surface-800 text-surface-50 border-surface-600/60 border shadow-sm'
-						: 'text-surface-400 hover:bg-surface-800/60 hover:text-surface-200 border border-transparent'
-				)}
-				onclick={() => (metric = key)}
-			>
-				{metricLabels[key]()}
-			</button>
-		{/each}
+	<!-- Title row with the ranking-metric dropdown docked to the far right -->
+	<div class="mb-4 flex items-center justify-between gap-2">
+		<h3 class="text-surface-400 text-xs font-semibold tracking-wider uppercase">
+			{m.overview_top_players()}
+		</h3>
+		<div class="w-44 shrink-0">
+			<Select
+				options={metricOptions}
+				value={metric}
+				onChange={(v) => (metric = v as LeaderboardMetric)}
+				selectClass="bg-surface-900/60 border-surface-600/60 border p-1.5 px-2.5 text-xs"
+				labelClass="my-0"
+				aria-label={m.overview_rank_by()}
+			/>
+		</div>
 	</div>
 
 	<ul class="flex flex-col gap-2">
