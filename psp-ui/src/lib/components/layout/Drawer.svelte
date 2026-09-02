@@ -22,7 +22,7 @@
 		children: any;
 	}>();
 
-	let isOpen = $state(initiallyExpanded);
+	let isOpen = $state((() => initiallyExpanded)());
 
 	const toggleDrawer = () => {
 		isOpen = !isOpen;

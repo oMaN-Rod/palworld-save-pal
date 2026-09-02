@@ -32,12 +32,20 @@ struct Cli {
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
-    let log_level = if cli.dev {
-        tracing::Level::DEBUG
+
+    // App debug logs stay at DEBUG in dev, but sqlx's per-query debug lines
+    // (full SQL text) are dropped to INFO to keep dev output readable.
+    let filters = if cli.dev {
+        tracing_subscriber::filter::Targets::new()
+            .with_default(tracing::Level::DEBUG)
+            .with_target("sqlx", tracing::Level::INFO)
     } else {
-        tracing::Level::INFO
+        tracing_subscriber::filter::Targets::new().with_default(tracing::Level::INFO)
     };
-    tracing_subscriber::fmt().with_max_level(log_level).init();
+    use tracing_subscriber::layer::{Layer, SubscriberExt};
+    use tracing_subscriber::util::SubscriberInitExt;
+    let layer = tracing_subscriber::fmt::layer().with_filter(filters);
+    tracing_subscriber::registry().with(layer).init();
 
     let handle = start_server(ServerConfig {
         host: cli.host,

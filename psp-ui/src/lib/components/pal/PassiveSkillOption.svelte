@@ -8,7 +8,7 @@
 		option: SelectOption;
 	}>();
 
-	const passiveSkill = passiveSkillsData.getByKey(option.value);
+	const passiveSkill = $derived(passiveSkillsData.getByKey(option.value));
 	const icon = $derived(
 		assetLoader.loadImage(`${ASSET_DATA_PATH}/img/rank_${passiveSkill?.details.rank}.webp`)
 	);

@@ -5,12 +5,13 @@ import type { Handle } from '@sveltejs/kit';
 
 // Runs at prerender time under adapter-static, which is what substitutes
 // %lang%/%dir% into the static HTML. Without it the placeholders ship literally.
-const BEACON_BLOCK = /<!--CF_BEACON_START-->[\s\S]*?<!--CF_BEACON_END-->/;
-
-/** Drop the analytics beacon entirely rather than shipping a dead request. */
+//
+// The CF beacon block is dropped from the template at config load when no token
+// is set (see svelte.config.js), so this only substitutes placeholders and never
+// removes an HTML comment — Svelte's hydration anchors stay intact.
 function applyBeacon(html: string): string {
 	const token = env.PUBLIC_CF_BEACON_TOKEN;
-	if (!token) return html.replace(BEACON_BLOCK, '');
+	if (!token) return html;
 	return html.replace('%CF_BEACON_TOKEN%', token);
 }
 

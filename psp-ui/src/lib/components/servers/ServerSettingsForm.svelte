@@ -11,19 +11,22 @@
 
 	const serverState = getServerState();
 
-	let name = $state(server.name);
-	let serverName = $state(server.server_name);
-	let serverDescription = $state(server.server_description);
-	let serverPassword = $state(server.server_password);
-	let adminPassword = $state(server.admin_password);
-	let maxPlayers = $state(server.max_players);
-	let gamePort = $state(server.game_port);
-	let queryPort = $state(server.query_port);
-	let restApiPort = $state(server.rest_api_port);
-	let launchArgs = $state(server.launch_args ?? '');
-	let workshopDir = $state(server.workshop_dir ?? '');
-	let steamcmdPath = $state(server.steamcmd_path ?? '');
-	let envVars = $state<Record<string, string>>({ ...server.env_vars });
+	// Seed form fields once from the prop; captures avoid a spurious
+	// `state_referenced_locally` warning on each `$state(server.x)` read.
+	const seed = (() => server)();
+	let name = $state(seed.name);
+	let serverName = $state(seed.server_name);
+	let serverDescription = $state(seed.server_description);
+	let serverPassword = $state(seed.server_password);
+	let adminPassword = $state(seed.admin_password);
+	let maxPlayers = $state(seed.max_players);
+	let gamePort = $state(seed.game_port);
+	let queryPort = $state(seed.query_port);
+	let restApiPort = $state(seed.rest_api_port);
+	let launchArgs = $state(seed.launch_args ?? '');
+	let workshopDir = $state(seed.workshop_dir ?? '');
+	let steamcmdPath = $state(seed.steamcmd_path ?? '');
+	let envVars = $state<Record<string, string>>({ ...seed.env_vars });
 
 	let detectingWorkshop = $state(false);
 

@@ -60,9 +60,12 @@
 	let serverPassword = $state('');
 	let adminPassword = $state('admin');
 	let maxPlayers = $state(16);
-	let gamePort = $state(suggestedPorts.game_port);
-	let queryPort = $state(suggestedPorts.query_port);
-	let restApiPort = $state(suggestedPorts.rest_api_port);
+	// Seed port defaults once from the prop; captures avoid a spurious
+	// `state_referenced_locally` warning on each `$state(suggestedPorts.x)` read.
+	const seed = (() => suggestedPorts)();
+	let gamePort = $state(seed.game_port);
+	let queryPort = $state(seed.query_port);
+	let restApiPort = $state(seed.rest_api_port);
 	// Pre-populated with all defaults so every displayed value is submitted, even if untouched.
 	let envVars = $state<Record<string, string>>(
 		Object.fromEntries(envGroups.flatMap((g) => g.keys.map((k) => [k.key, k.default])))

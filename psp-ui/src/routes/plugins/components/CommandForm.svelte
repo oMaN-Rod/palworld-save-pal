@@ -44,7 +44,7 @@
 		return out;
 	}
 
-	let values: Record<string, unknown> = $state(defaultValues(command));
+	let values: Record<string, unknown> = $state((() => defaultValues(command))());
 
 	function submit() {
 		onRun({ ...values });

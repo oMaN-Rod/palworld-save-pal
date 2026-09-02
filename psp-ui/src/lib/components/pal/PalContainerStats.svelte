@@ -25,14 +25,16 @@
 		elementsData?: any;
 	}>();
 
-	elements = elements || elementsData;
-
 	const appState = getAppState();
+
+	// Fall back to the bundled table when the caller passes none; derived so a
+	// later `elementsData` prop keeps the lookups current.
+	const resolvedElements = $derived(elements || elementsData);
 
 	let elementIcons = $derived.by(() => {
 		let icons: Record<string, string> = {};
 		for (const element of elementTypes) {
-			const elementData = elements.elements[element];
+			const elementData = resolvedElements.elements[element];
 			if (elementData) {
 				icons[element] = assetLoader.loadImage(
 					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`

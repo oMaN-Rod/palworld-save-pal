@@ -1,3 +1,4 @@
+import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
@@ -15,6 +16,19 @@ const localizedEntries = LOCALIZED_PATHS.flatMap((pathname) =>
 // source `$env/static/public` serves to the app.
 const isDesktop = readIsDesktopBuild();
 
+// The CF analytics beacon is gated on a runtime token. Stripping it inside
+// hooks.server.ts's transformPageChunk removes HTML comments from the SSR
+// output, which SvelteKit flags (dev-only) as a hydration hazard. Instead the
+// template is materialised once here: when no token is set the beacon block is
+// dropped a priori, so the runtime transform never touches a comment. The
+// generated template lives under .svelte-kit, which is gitignored.
+const BEACON = /<!--CF_BEACON_START-->[\s\S]*?<!--CF_BEACON_END-->/;
+const appTemplate = readFileSync(new URL('./src/app.html', import.meta.url), 'utf8');
+const appTemplatePath = new URL('./.svelte-kit/app.html', import.meta.url);
+mkdirSync(new URL('.', appTemplatePath), { recursive: true });
+writeFileSync(appTemplatePath, process.env.PUBLIC_CF_BEACON_TOKEN ? appTemplate : appTemplate.replace(BEACON, ''));
+const app = appTemplatePath.pathname;
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.svx', '.md'],
@@ -31,6 +45,7 @@ const config = {
 	],
 
 	kit: {
+		files: { appTemplate: app },
 		adapter: adapter({
 			pages: '../ui_build',
 			// Paired with not_found_handling: "404-page" in wrangler.jsonc, so an

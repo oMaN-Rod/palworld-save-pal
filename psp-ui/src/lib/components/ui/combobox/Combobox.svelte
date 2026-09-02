@@ -4,7 +4,6 @@
 	import { nanoid } from 'nanoid';
 	import { cn } from '$theme';
 	import { onMount, type Snippet } from 'svelte';
-	import { debounce } from '$utils';
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list'
 	import * as m from '$i18n/messages';
 
@@ -43,16 +42,19 @@
 	let containerRef: HTMLDivElement;
 	let listboxId = nanoid();
 	let searchTerm = $state('');
-	let filteredOptions = $state(options);
 	let isUserSearching = $state(false);
 
-	async function searchOptions() {
-		filteredOptions = options.filter((option: SelectOption) =>
-			option.label.toLowerCase().includes(searchTerm.toLowerCase())
-		);
-	}
-
-	const debounceSearch = debounce(searchOptions, 200);
+	// Derived from options + search so a later options prop change stays in sync
+	// (the old `$state(options)` snapshot didn't) and no manual re-assignments
+	// are needed. `isUserSearching` guards the filter so a stray reselect of the
+	// same value doesn't re-scope the list mid-navigation.
+	let filteredOptions = $derived(
+		isUserSearching && searchTerm
+			? options.filter((option: SelectOption) =>
+					option.label.toLowerCase().includes(searchTerm.toLowerCase())
+				)
+			: options
+	);
 
 	const selectClass = $derived(
 		cn(
@@ -83,7 +85,6 @@
 
 	function handleFocus() {
 		isUserSearching = false;
-		filteredOptions = options;
 		isOpen = true;
 	}
 
@@ -140,14 +141,6 @@
 	}
 
 	$effect(() => {
-		if (isUserSearching && searchTerm) {
-			debounceSearch();
-		} else {
-			filteredOptions = options;
-		}
-	});
-
-	$effect(() => {
 		if (value === 'None' || value === '' || value === undefined) {
 			searchTerm = '';
 		} else {
@@ -170,7 +163,6 @@
 		if (value !== 'None') {
 			searchTerm = options.find((opt: SelectOption) => opt.value === value)?.label || '';
 		}
-		filteredOptions = options;
 
 		return () => {
 			document.removeEventListener('click', handleClickOutside);
@@ -210,7 +202,6 @@
 				onclick={() => {
 					if (!isOpen) {
 						isUserSearching = false;
-						filteredOptions = options;
 					}
 					isOpen = !isOpen;
 				}}

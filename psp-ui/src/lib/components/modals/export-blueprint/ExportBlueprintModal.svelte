@@ -20,7 +20,7 @@
 	const toast = getToastState();
 
 	let modalContainer: HTMLDivElement;
-	let name = $state(baseName || 'Blueprint');
+	let name = $state((() => baseName || 'Blueprint')());
 	let options = $state<CaptureOptions>(captureOptionsForPreset('blueprint'));
 	let showAdvanced = $state(false);
 	let toLibrary = $state(true);

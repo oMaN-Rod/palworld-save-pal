@@ -31,7 +31,7 @@
 	let referenceEl: HTMLElement;
 	let floatingEl: HTMLElement | null = $state(null);
 	let arrowEl: HTMLElement | null = $state(null);
-	let floatingArrowColor = getComputedColorHex(`--${menuClass.replace('bg', 'color')}`);
+	let floatingArrowColor = $derived(getComputedColorHex(`--${menuClass.replace('bg', 'color')}`));
 
 	$effect(() => {
 		if (open && referenceEl && floatingEl) {
