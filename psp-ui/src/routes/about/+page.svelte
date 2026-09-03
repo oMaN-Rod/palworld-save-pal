@@ -229,9 +229,10 @@
 							<Icon icon="tabler:external-link" size={22} class="text-primary-400" />
 							<span class="align-bottom text-xs">Open in Browser</span>
 						</button>
-						<p class="text-muted text-center text-[11px]">
-							WebKit webview is slower than Firefox/Chrome. Use the browser for large save edits.
-						</p>
+							<p class="text-muted text-center text-[11px]">
+								The WebKitGTK webview can degrade performance on large edits. Open in a
+								Chromium-based browser (Chrome, Edge, Brave, Opera) for the smoothest experience.
+							</p>
 					</div>
 				</Card>
 			</div>

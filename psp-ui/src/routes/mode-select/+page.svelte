@@ -61,8 +61,8 @@
 				<div>
 					<p class="text-surface-50 text-sm font-bold">Desktop Mode</p>
 					<p class="text-muted mt-0.5 text-xs">
-						The familiar app window. Recommended if you have a capable GPU and prefer a
-						dedicated window.
+						The familiar app window. Recommended if you prefer a dedicated window app
+						experience.
 					</p>
 				</div>
 			</button>
@@ -84,8 +84,9 @@
 		</div>
 
 		<p class="text-muted text-center text-[11px]">
-			WebKitGTK can be slower on integrated or virtual GPUs; the browser build typically runs at
-			full speed.
+			Tauri on Linux renders through WebKitGTK, which can be prone to degraded performance
+			compared with a full browser. For the smoothest experience, use Browser Mode with a
+			Chromium-based browser (Chrome, Edge, Brave, Opera) — Firefox has limited support with PSP.
 		</p>
 	{/if}
 </div>
