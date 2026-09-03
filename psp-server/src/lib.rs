@@ -41,9 +41,10 @@ pub struct ServerHandle {
     /// connection is accepted, so tests can await connection teardown instead
     /// of sleeping.
     pub live_connections: tokio::sync::watch::Receiver<usize>,
-    /// Fires when a client sends the `shutdown` message (the browser-mode
-    /// control panel's Quit button) — the embedding shell watches it to exit
-    /// the app while the server drains gracefully.
+    /// Fires when a client sends the `shutdown` message (the Quit control the
+    /// browser editor shows when no tray icon can be displayed) — the
+    /// embedding shell watches it to exit the app while the server drains
+    /// gracefully.
     pub shutdown_requested: tokio::sync::watch::Receiver<bool>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
@@ -127,6 +128,32 @@ pub fn display_mode() -> Option<Option<String>> {
     DISPLAY_MODE
         .get()
         .map(|cell| cell.lock().expect("display mode mutex poisoned").clone())
+}
+
+/// Whether the shell's tray icon is actually displayable, as reported by the
+/// shell after it built the tray. The inner `None` means "not reported" — no
+/// tray-reporting shell, or the report hasn't landed yet — in which case the
+/// UI keeps the tray assumption. The Linux launcher is the only reporter: on
+/// Linux, libappindicator creation "succeeds" even when no StatusNotifierItem
+/// host will ever show the icon, so the shell probes the DBus session bus and
+/// publishes the verdict here for the `get_display_mode` reply.
+static TRAY_AVAILABLE: std::sync::OnceLock<std::sync::Mutex<Option<bool>>> =
+    std::sync::OnceLock::new();
+
+/// Publish whether the shell's tray icon can actually be displayed. Only a
+/// mode-switching shell (the Linux launcher) calls this; it reports once per
+/// process, right after building (or failing to build) the tray.
+pub fn set_tray_available(available: bool) {
+    let cell = TRAY_AVAILABLE.get_or_init(|| std::sync::Mutex::new(None));
+    *cell.lock().expect("tray availability mutex poisoned") = Some(available);
+}
+
+/// `Some(available)` when the shell reported tray displayability, `None` when
+/// nothing has reported (no tray shell, or the tray isn't built yet).
+pub fn tray_available() -> Option<bool> {
+    TRAY_AVAILABLE
+        .get()
+        .and_then(|cell| *cell.lock().expect("tray availability mutex poisoned"))
 }
 
 impl ServerHandle {

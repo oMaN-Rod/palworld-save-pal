@@ -128,14 +128,17 @@ define_message_types! {
     SyncAppState => "sync_app_state",
     Warning => "warning",
     OpenInBrowser => "open_in_browser",
+    // Browser-mode Quit control (shown when the Linux shell can't display a
+    // tray icon): the embedding shell observes the request and exits the app.
     Shutdown => "shutdown",
     SetMode => "set_mode",
     // Desktop shell: the editor UI signals it finished bootstrapping so the
     // hidden Tauri window can be shown only once fully loaded.
     Ready => "ready",
     // Desktop shell: query the shell's current display mode (see SetMode);
-    // replied to under DisplayMode with supported/mode so the Settings dialog
-    // only offers switching where a mode-switching shell exists.
+    // replied to under DisplayMode with supported/mode (+ tray availability
+    // on the Linux shell) so the Settings dialog only offers switching where
+    // a mode-switching shell exists.
     GetDisplayMode => "get_display_mode",
     DisplayMode => "display_mode",
     GetRawData => "get_raw_data",

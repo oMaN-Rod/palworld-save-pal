@@ -15,10 +15,13 @@
 //! StatusNotifier (KDE Plasma, Ubuntu's GNOME via its AppIndicator extension,
 //! XFCE/MATE/Cinnamon with their SNI applets) show the icon. Vanilla GNOME and
 //! some tiling-WM setups ship no such host, and libappindicator has no
-//! legacy-XEmbed fallback — there the icon simply never appears (creation
-//! still succeeds, silently). The app keeps running headless regardless: the
-//! browser is auto-opened once ready, and Quit also works via the `shutdown`
-//! WS message in addition to the tray.
+//! legacy-XEmbed fallback — there the icon simply never appears even though
+//! creation succeeds silently. `build_tray` therefore probes the DBus session
+//! bus for a registered StatusNotifier watcher and publishes the verdict via
+//! `psp_server::set_tray_available`, so the browser editor can show a Quit
+//! banner (`shutdown` WS message) when the tray is invisible. The app keeps
+//! running headless regardless: the browser is auto-opened once ready, and
+//! Quit also works via the WS `shutdown` message in addition to the tray.
 
 use std::io::{ErrorKind, Read, Write};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr, TcpStream};
@@ -225,14 +228,6 @@ fn server_url() -> String {
 
 /// The editor webview — the `Mode::Desktop` experience (same as Windows/macOS).
 fn open_desktop_window(app: &tauri::AppHandle) -> Result<()> {
-    // WebKitGTK often keeps the webview blank on virtual GPUs; default the
-    // DMABUF renderer off unless the user chose otherwise.
-    if let Ok(current) = std::env::var("WEBKIT_DISABLE_DMABUF_RENDERER") {
-        let _ = current;
-    } else {
-        std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
-    }
-
     let allow_dev_server = cfg!(debug_assertions) && tauri::is_dev();
     let webview_url = if allow_dev_server {
         app.config()
@@ -317,35 +312,110 @@ fn tray_icon() -> Option<Image<'static>> {
     Image::new_owned(rgba.to_vec(), rgba.width(), rgba.height()).into()
 }
 
+// Well-known DBus names a StatusNotifierItem host registers: the KDE name is
+// what KDE/GNOME-extension/XFCE/Cinnamon hosts own; ayatana-only hosts
+// (Unity7) own the ayatana alias instead, and libayatana-appindicator (the
+// library behind the tray) accepts either.
+const SNI_WATCHER_NAMES: [&str; 2] = [
+    "org.kde.StatusNotifierWatcher",
+    "org.ayatana.StatusNotifierWatcher",
+];
+
+/// `ListNames` off the DBus session bus, via `gdbus` (ships with glib, itself
+/// a GTK dependency) with `dbus-send` (ships with the dbus daemon package) as
+/// the fallback for minimal distro layouts. `None` when neither tool ran
+/// successfully (no session bus, neither binary installed).
+fn dbus_list_names() -> Option<String> {
+    let gdbus = Command::new("gdbus")
+        .args([
+            "call",
+            "--session",
+            "--dest",
+            "org.freedesktop.DBus",
+            "--object-path",
+            "/org/freedesktop/DBus",
+            "--method",
+            "org.freedesktop.DBus.ListNames",
+        ])
+        .stdin(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .output();
+    if let Ok(output) = &gdbus {
+        if output.status.success() {
+            // GVariant text: (['org.freedesktop.DBus', …],)
+            return Some(String::from_utf8_lossy(&output.stdout).into_owned());
+        }
+    }
+    let dbus_send = Command::new("dbus-send")
+        .args([
+            "--session",
+            "--print-reply=limited",
+            "--dest=org.freedesktop.DBus",
+            "/org/freedesktop/DBus",
+            "org.freedesktop.DBus.ListNames",
+        ])
+        .stdin(std::process::Stdio::null())
+        .stderr(std::process::Stdio::null())
+        .output()
+        .ok()?;
+    if !dbus_send.status.success() {
+        return None;
+    }
+    // One `   string "name"` line per name.
+    Some(String::from_utf8_lossy(&dbus_send.stdout).into_owned())
+}
+
+/// Whether a raw `ListNames` dump — in either tool's output format — contains
+/// a StatusNotifier watcher registration.
+fn names_include_sni_watcher(names: &str) -> bool {
+    SNI_WATCHER_NAMES.iter().any(|name| {
+        // gdbus quotes names with ', dbus-send with " — requiring the quote
+        // rules out substring matches against unrelated well-known names.
+        names.contains(&format!("'{name}'")) || names.contains(&format!("\"{name}\""))
+    })
+}
+
+/// Whether a StatusNotifierItem host is registered on the session bus — the
+/// authoritative "will the tray icon actually be displayed" check on Linux,
+/// because libappindicator treats "no watcher answered" as a silent no-op
+/// while still reporting creation success. `None` means the probe itself
+/// failed; callers then keep the tray assumption rather than warning about a
+/// tray that may well be fine.
+fn sni_host_available() -> Option<bool> {
+    Some(names_include_sni_watcher(&dbus_list_names()?))
+}
+
 /// Build the tray with Open / Switch-to-Desktop / Restart / Quit. A missing tray
 /// host is logged, not fatal — the browser is already open and the process stays
-/// as the service.
+/// as the service. Every exit path publishes tray availability
+/// (`psp_server::set_tray_available`) so the browser editor knows whether to
+/// show its own Quit fallback.
 fn build_tray(app: &tauri::AppHandle, assets: &AssetDirs) {
     let build_item = |id: &str, text: &str| -> Result<MenuItem<tauri::Wry>> {
         MenuItem::with_id(app, id, text, true, Option::<&str>::None).map_err(Into::into)
     };
     let open = match build_item(MENU_OPEN, MENU_OPEN_LABEL) {
         Ok(i) => i,
-        Err(e) => return warn_tray_fail(e),
+        Err(e) => return tray_unusable(e),
     };
     let to_desktop = match build_item(MENU_TO_DESKTOP, MENU_TO_DESKTOP_LABEL) {
         Ok(i) => i,
-        Err(e) => return warn_tray_fail(e),
+        Err(e) => return tray_unusable(e),
     };
     let restart = match build_item(MENU_RESTART, MENU_RESTART_LABEL) {
         Ok(i) => i,
-        Err(e) => return warn_tray_fail(e),
+        Err(e) => return tray_unusable(e),
     };
     let quit = match build_item(MENU_QUIT, MENU_QUIT_LABEL) {
         Ok(i) => i,
-        Err(e) => return warn_tray_fail(e),
+        Err(e) => return tray_unusable(e),
     };
     let menu = match MenuBuilder::new(app)
         .items(&[&open, &to_desktop, &restart, &quit])
         .build()
     {
         Ok(m) => m,
-        Err(e) => return warn_tray_fail(e),
+        Err(e) => return tray_unusable(e),
     };
 
     let mut builder = TrayIconBuilder::with_id("psp-browser-mode")
@@ -373,14 +443,37 @@ fn build_tray(app: &tauri::AppHandle, assets: &AssetDirs) {
         .build(app);
 
     if let Err(error) = result {
-        warn_tray_fail(error);
+        return tray_unusable(error);
     }
+
+    // The tray object exists, but on Linux that does NOT mean it is displayed:
+    // libappindicator silently no-ops when no StatusNotifierItem host is
+    // registered, so creation success must not be read as usable. Probe the
+    // session bus and publish the verdict; an inconclusive probe (None) keeps
+    // the tray assumption instead of warning users whose tray works.
+    let host = sni_host_available();
+    if host == Some(false) {
+        tracing::warn!(
+            "no StatusNotifierItem host on the session bus — the tray icon will not be \
+             displayed; the browser editor shows its Quit banner as the fallback"
+        );
+    }
+    psp_server::set_tray_available(host != Some(false));
+}
+
+/// Tray construction failed outright (missing libappindicator, no menu
+/// backend): warn as before and report the tray as unusable so the browser
+/// editor shows its Quit fallback.
+fn tray_unusable(error: impl std::fmt::Display) {
+    warn_tray_fail(error);
+    psp_server::set_tray_available(false);
 }
 
 fn warn_tray_fail(error: impl std::fmt::Display) {
     tracing::warn!(
-        "no system tray available on this desktop ({error}); the service is still running — \
-         reopen the editor at http://localhost:{SERVER_PORT}, quit via pkill psp or the tray/Quit entry"
+        "could not create the system tray on this desktop ({error}); the service is still \
+         running — reopen the editor at http://localhost:{SERVER_PORT}, quit from the Quit \
+         control in the browser editor or pkill psp"
     );
 }
 
@@ -627,6 +720,17 @@ fn switch_display_mode(app: &tauri::AppHandle, requested: Mode) {
 // ---------------------------------------------------------------------------
 
 pub fn run(mode: Mode) {
+    // WebKitGTK often keeps webviews blank on virtual GPUs; default the DMABUF
+    // renderer off unless the user set the variable themselves. Must happen
+    // before ANY webview is built — including the first-run mode-select
+    // window, which would otherwise render blank on exactly the machines this
+    // workaround exists for, bricking first run — because WebKit reads the
+    // env var when it spawns the web process (same constraint as
+    // `webview_app::run`).
+    if std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none() {
+        std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+    }
+
     tracing_subscriber::fmt()
         .with_env_filter(
             tracing_subscriber::EnvFilter::try_from_default_env()
@@ -754,5 +858,33 @@ mod tests {
     #[test]
     fn bind_addr_is_loopback_server_port() {
         assert_eq!(bind_addr(), SocketAddr::from(([127, 0, 0, 1], crate::SERVER_PORT)));
+    }
+
+    #[test]
+    fn sni_matching_accepts_both_watcher_names_in_both_output_formats() {
+        // gdbus GVariant text format
+        assert!(names_include_sni_watcher(
+            "(['org.freedesktop.DBus', 'org.kde.StatusNotifierWatcher', ':1.42'],)"
+        ));
+        // dbus-send line format
+        assert!(names_include_sni_watcher(
+            "   string \"org.kde.StatusNotifierWatcher\"\n   string \"org.a11y.Bus\""
+        ));
+        // ayatana-only hosts (Unity7) register the alias instead
+        assert!(names_include_sni_watcher(
+            "(['org.ayatana.StatusNotifierWatcher'],)"
+        ));
+    }
+
+    #[test]
+    fn sni_matching_rejects_dumps_without_a_watcher() {
+        // An unrelated name that merely starts like the watcher must not match:
+        // the matcher requires the closing quote right after the name.
+        assert!(!names_include_sni_watcher(
+            "(['org.freedesktop.DBus', 'org.kde.StatusNotifierWatcher.Host', 'org.a11y.Bus'],)"
+        ));
+        assert!(!names_include_sni_watcher(
+            "   string \"org.freedesktop.DBus\"\n   string \":1.7\""
+        ));
     }
 }

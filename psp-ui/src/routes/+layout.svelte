@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { Sidebar, PublicNav } from '$components/layout';
+	import { Sidebar, PublicNav, TrayUnavailableBanner } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { cornerArt, getAppState, getSocketState, theme, localeState } from '$states';
@@ -139,6 +139,10 @@
 					<Sidebar />
 				{/if}
 				<div class="relative flex flex-1 flex-col overflow-hidden">
+					<!-- Linux browser mode with no displayable tray icon: the shell's
+					     Quit fallback. Renders nothing everywhere else (it self-queries
+					     the shell via get_display_mode). -->
+					<TrayUnavailableBanner />
 					{#if appState.autoSave}
 						<div class="auto-save-indicator" transition:fade>
 							<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>

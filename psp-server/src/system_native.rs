@@ -88,9 +88,10 @@ pub async fn handle_open_in_browser(
     Ok(())
 }
 
-/// Fired by the browser-mode control panel's Quit button: asks the embedded
-/// server to begin a graceful shutdown. The embedding shell observes the
-/// server stopping and exits — this handler never kills the process itself.
+/// Fired by the browser UI's Quit control (the banner the Linux shell's editor
+/// shows when no tray icon can be displayed): asks the embedded server to
+/// begin a graceful shutdown. The embedding shell observes the server stopping
+/// and exits — this handler never kills the process itself.
 pub async fn handle_shutdown(
     _data: serde_json::Value,
     ctx: &mut HandlerCtx<'_>,
@@ -152,6 +153,12 @@ pub struct DisplayModeInfo {
     /// The shell's current mode: "desktop" | "browser" | null (first run).
     /// Null when unsupported.
     pub mode: Option<String>,
+    /// Whether the shell's tray icon is actually displayable. `Some(false)`
+    /// means browser mode is running with no visible tray (no
+    /// StatusNotifierItem host), so the browser UI should surface its own Quit
+    /// control. Null when unsupported or not yet reported — never a reason to
+    /// warn.
+    pub tray_available: Option<bool>,
 }
 
 /// Reports the embedded shell's display mode so the Settings dialog can show
@@ -163,10 +170,12 @@ pub async fn handle_get_display_mode(ctx: &mut HandlerCtx<'_>) -> Result<(), Han
         Some(mode) => DisplayModeInfo {
             supported: true,
             mode,
+            tray_available: crate::tray_available(),
         },
         None => DisplayModeInfo {
             supported: false,
             mode: None,
+            tray_available: None,
         },
     };
     ctx.emitter.emit(MessageType::DisplayMode, &info);
