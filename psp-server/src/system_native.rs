@@ -135,6 +135,16 @@ pub async fn handle_set_mode(
     Ok(())
 }
 
+/// Fired once the desktop editor UI finishes bootstrapping. Relays to the shell
+/// so it can show the hidden editor window only when fully loaded. No-op (and
+/// never errors) when no shell listener is installed — e.g. web/build mode or a
+/// bare server, where there is no hidden window to show anyway.
+pub async fn handle_ready(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let _ = crate::emit_ready_event();
+    ctx.emitter.emit(MessageType::Ready, &());
+    Ok(())
+}
+
 /// Only http(s) URLs may be handed to `opener`; anything else (a `file://`
 /// path, a `javascript:` payload, an arbitrary scheme) is refused so a WS
 /// message can't coax the host into launching an unexpected handler.

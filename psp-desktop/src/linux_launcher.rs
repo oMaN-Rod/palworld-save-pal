@@ -227,6 +227,10 @@ fn open_desktop_window(app: &tauri::AppHandle) -> Result<()> {
         .inner_size(1366.0, 768.0)
         .min_inner_size(1366.0, 768.0)
         .maximized(true)
+        // Show only once the editor UI reports it finished bootstrapping (see
+        // the `ready` WS listener in `run`), so the user never sees the blank
+        // WebKitGTK flash while the SPA loads in the background.
+        .visible(false)
         .disable_drag_drop_handler()
         .build()?;
     Ok(())
@@ -248,6 +252,26 @@ fn close_window(app: &tauri::AppHandle, label: &str) {
     if let Some(window) = app.get_webview_window(label) {
         let _ = window.close();
     }
+}
+
+/// Reveal the editor window once it has finished bootstrapping. No-op if the
+/// window isn't present (e.g. Browser mode, where there is no desktop window).
+fn show_desktop_window(app: &tauri::AppHandle) {
+    if let Some(window) = app.get_webview_window("main") {
+        let _ = window.show();
+        let _ = window.set_focus();
+    }
+}
+
+/// Safety net: if the editor UI never reports ready (a hung boot, or a listener
+/// race), fall back to showing the hidden window after `timeout` so the user is
+/// never left staring at nothing.
+fn schedule_show_fallback(app: tauri::AppHandle, timeout: Duration) {
+    std::thread::spawn(move || {
+        std::thread::sleep(timeout);
+        let show = app.clone();
+        let _ = app.run_on_main_thread(move || show_desktop_window(&show));
+    });
 }
 
 // ---------------------------------------------------------------------------
@@ -567,6 +591,22 @@ pub fn run(mode: Mode) {
                     handle_mode_event(&listener, event);
                 }
             });
+
+            // Reveal the hidden editor window once the UI reports it finished
+            // bootstrapping (the `ready` WS message), so the user never sees the
+            // blank WebKitGTK flash. Fall back so a hung boot can't strand it.
+            let (ready_tx, mut ready_rx) = tokio::sync::mpsc::unbounded_channel::<()>();
+            psp_server::set_ready_listener(ready_tx);
+            let ready_app = app_handle.clone();
+            tauri::async_runtime::spawn(async move {
+                while ready_rx.recv().await.is_some() {
+                    let show = ready_app.clone();
+                    let _ = ready_app.run_on_main_thread(move || {
+                        show_desktop_window(&show);
+                    });
+                }
+            });
+            schedule_show_fallback(app_handle.clone(), Duration::from_secs(12));
 
             // Enter the chosen (or unset) shell.
             match mode {

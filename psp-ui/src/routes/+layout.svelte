@@ -19,6 +19,9 @@
 	import { fade } from 'svelte/transition';
 	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
+	import { send } from '$utils/websocketUtils';
+	import { MessageType } from '$types';
+	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import {
 		setStoredSelectedPlayerUid,
 		clearStoredSelectedPlayerUid,
@@ -107,6 +110,13 @@
 		ws.connect({ goto });
 
 		await bootstrap();
+
+		// Linux desktop shell: the editor finished bootstrapping — signal it so
+		// it can reveal the hidden window instead of flashing a blank webview.
+		// Skip the mode-select overlay, which has no editor window to reveal.
+		if (PUBLIC_DESKTOP_MODE === 'true' && !controlShell) {
+			send(MessageType.READY);
+		}
 	});
 </script>
 

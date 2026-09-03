@@ -35,6 +35,7 @@ export enum MessageType {
 	OPEN_URL = 'open_url',
 	SHUTDOWN = 'shutdown',
 	SET_MODE = 'set_mode',
+	READY = 'ready',
 	GET_EXP_DATA = 'get_exp_data',
 	GET_RELIC_DATA = 'get_relic_data',
 	GET_VERSION = 'get_version',

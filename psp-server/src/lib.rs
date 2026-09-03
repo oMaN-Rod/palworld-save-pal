@@ -89,6 +89,21 @@ pub fn emit_mode_event(event: ModeEvent) -> bool {
         .is_some_and(|tx| tx.send(event).is_ok())
 }
 
+static READY_LISTENER: std::sync::OnceLock<tokio::sync::mpsc::UnboundedSender<()>> =
+    std::sync::OnceLock::new();
+
+/// Register the shell's "editor UI finished bootstrapping" listener. The shell
+/// uses it to show the hidden desktop window only once the editor is ready.
+pub fn set_ready_listener(tx: tokio::sync::mpsc::UnboundedSender<()>) {
+    let _ = READY_LISTENER.set(tx);
+}
+
+/// Relay a `ready` event (the desktop editor UI finished bootstrapping) to the
+/// shell. Returns false when no listener is installed.
+pub fn emit_ready_event() -> bool {
+    READY_LISTENER.get().is_some_and(|tx| tx.send(()).is_ok())
+}
+
 impl ServerHandle {
     pub async fn shutdown(self) {
         let _ = self.shutdown_sender.send(());

@@ -130,6 +130,9 @@ define_message_types! {
     OpenInBrowser => "open_in_browser",
     Shutdown => "shutdown",
     SetMode => "set_mode",
+    // Desktop shell: the editor UI signals it finished bootstrapping so the
+    // hidden Tauri window can be shown only once fully loaded.
+    Ready => "ready",
     GetRawData => "get_raw_data",
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",
