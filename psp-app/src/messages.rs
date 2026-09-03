@@ -427,7 +427,7 @@ mod tests {
 
     #[test]
     fn message_type_count_is_expected() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 131);
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 133);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()
