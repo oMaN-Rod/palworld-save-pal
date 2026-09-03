@@ -12,7 +12,8 @@ appimage_path="$(readlink -f "$appimage_path")"
 work_dir="$(dirname "$appimage_path")"
 
 # libwayland-* is the confirmed culprit; the rest are graphics/driver-adjacent
-# libs from the AppImage excludelist that are unsafe to ship pinned.
+# libs from the AppImage excludelist (glvnd, Mesa, and the DRI xcb protocol
+# libs) that are unsafe to ship pinned.
 strip_globs=(
   'libwayland-client.so*'
   'libwayland-server.so*'
@@ -22,9 +23,21 @@ strip_globs=(
   'libEGL.so*'
   'libGLdispatch.so*'
   'libGLX.so*'
+  'libOpenGL.so*'
   'libdrm.so*'
+  'libglapi.so*'
   'libgbm.so*'
+  'libxcb-dri2.so*'
+  'libxcb-dri3.so*'
 )
+
+# One find(1) clause per glob, joined with -o, so the strip loop and the
+# verification below can never drift apart.
+name_clauses=()
+for glob in "${strip_globs[@]}"; do
+  name_clauses+=(-name "$glob" -o)
+done
+unset 'name_clauses[-1]'
 
 cd "$work_dir"
 rm -rf squashfs-root
@@ -33,14 +46,22 @@ rm -rf squashfs-root
 
 lib_dir="squashfs-root/usr/lib"
 removed=0
-for glob in "${strip_globs[@]}"; do
-  while IFS= read -r -d '' lib; do
-    echo "stripping bundled $(basename "$lib")"
-    rm -f "$lib"
-    removed=$((removed + 1))
-  done < <(find "$lib_dir" -type f -name "$glob" -print0 2>/dev/null)
-done
+while IFS= read -r -d '' lib; do
+  echo "stripping bundled $(basename "$lib")"
+  rm -f "$lib"
+  removed=$((removed + 1))
+done < <(find "$lib_dir" -type f \( "${name_clauses[@]}" \) -print0 2>/dev/null)
 echo "stripped $removed host-graphics lib(s) from AppDir"
+
+# Guard the workaround itself: any surviving match anywhere in the AppDir —
+# not just usr/lib; a bundler layout change would otherwise silently reship
+# the EGL_BAD_ALLOC crash — must fail the build loudly.
+leftovers=$(find squashfs-root -type f \( "${name_clauses[@]}" \) -print)
+if [ -n "$leftovers" ]; then
+  echo "ERROR: host-graphics libs still present after stripping:" >&2
+  echo "$leftovers" >&2
+  exit 1
+fi
 
 # extract-and-run avoids the FUSE requirement.
 tool_dir="$(mktemp -d)"
