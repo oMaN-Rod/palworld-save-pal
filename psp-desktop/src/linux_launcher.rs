@@ -318,6 +318,7 @@ fn build_tray(app: &tauri::AppHandle, assets: &AssetDirs) {
             MENU_RESTART => tray_restart(app, assets.clone()),
             MENU_QUIT => {
                 tracing::info!("quit requested from the tray");
+                app.state::<UserQuitting>().0.store(true, Ordering::SeqCst);
                 app.exit(0)
             }
             _ => {}
@@ -390,6 +391,10 @@ struct ServerState(Mutex<Option<psp_server::ServerHandle>>);
 /// be ignored instead of exiting.
 struct ServiceMode(AtomicBool);
 
+/// Set to `true` when the user deliberately quits from the tray, so the
+/// `ServiceMode` exit-guard lets the exit through instead of swallowing it.
+struct UserQuitting(AtomicBool);
+
 fn server_addr(app: &tauri::AppHandle) -> Option<SocketAddr> {
     app.state::<ServerState>()
         .0
@@ -414,6 +419,10 @@ fn is_service_mode(app: &tauri::AppHandle) -> bool {
     app.state::<ServiceMode>().0.load(Ordering::SeqCst)
 }
 
+fn user_wants_quit(app: &tauri::AppHandle) -> bool {
+    app.state::<UserQuitting>().0.load(Ordering::SeqCst)
+}
+
 // ---------------------------------------------------------------------------
 // Mode switching
 // ---------------------------------------------------------------------------
@@ -428,6 +437,9 @@ static CURRENT_MODE: std::sync::OnceLock<Mutex<Mode>> = std::sync::OnceLock::new
 /// can't be swapped into a running headless runtime). Works from the AppImage's
 /// mounted AppRun. The current process exits shortly after.
 fn relaunch(app: &tauri::AppHandle) {
+    // The parent must actually die so the child can bind the port; flag the exit
+    // so the ServiceMode exit-guard lets it through.
+    app.state::<UserQuitting>().0.store(true, Ordering::SeqCst);
     let exe = std::env::current_exe().expect("current exe path");
     tracing::info!("relaunching in the new mode: {}", exe.display());
     // SAFETY: pre_exec runs in the child before exec, single-threaded there.
@@ -540,6 +552,7 @@ pub fn run(mode: Mode) {
             MODE_FILE.set(mode_file).expect("MODE_FILE set once");
             app.manage(ServerState(Mutex::new(Some(server))));
             app.manage(ServiceMode(AtomicBool::new(matches!(mode, Mode::Browser))));
+            app.manage(UserQuitting(AtomicBool::new(false)));
 
             // Listen for `set_mode` from the first-run overlay / Settings.
             let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel::<ModeEvent>();
@@ -569,7 +582,10 @@ pub fn run(mode: Mode) {
         .run(|app, event| match event {
             // In Browser/headless mode there are no permanent windows; a
             // transient close (mode-select) must not take the service down.
-            RunEvent::ExitRequested { api, .. } if is_service_mode(app) => {
+            // A deliberate Quit from the tray is flagged and allowed through.
+            RunEvent::ExitRequested { api, .. }
+                if is_service_mode(app) && !user_wants_quit(app) =>
+            {
                 api.prevent_exit();
             }
             RunEvent::Exit => {
