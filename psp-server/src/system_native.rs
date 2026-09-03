@@ -145,10 +145,39 @@ pub async fn handle_ready(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> 
     Ok(())
 }
 
+#[derive(Debug, serde::Serialize)]
+pub struct DisplayModeInfo {
+    /// Whether this process embeds a mode-switching shell (the Linux launcher).
+    pub supported: bool,
+    /// The shell's current mode: "desktop" | "browser" | null (first run).
+    /// Null when unsupported.
+    pub mode: Option<String>,
+}
+
+/// Reports the embedded shell's display mode so the Settings dialog can show
+/// the current value and only offer switching where a shell supports it. On
+/// builds without a mode-switching shell (web/worker, bare server,
+/// Windows/macOS desktop) this replies `supported: false` — never an error.
+pub async fn handle_get_display_mode(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+    let info = match crate::display_mode() {
+        Some(mode) => DisplayModeInfo {
+            supported: true,
+            mode,
+        },
+        None => DisplayModeInfo {
+            supported: false,
+            mode: None,
+        },
+    };
+    ctx.emitter.emit(MessageType::DisplayMode, &info);
+    Ok(())
+}
+
 /// Only http(s) URLs may be handed to `opener`; anything else (a `file://`
 /// path, a `javascript:` payload, an arbitrary scheme) is refused so a WS
 /// message can't coax the host into launching an unexpected handler.
-fn is_openable_url(url: &str) -> bool {    url.starts_with("http://") || url.starts_with("https://")
+fn is_openable_url(url: &str) -> bool {
+    url.starts_with("http://") || url.starts_with("https://")
 }
 
 /// Opens an external URL in the OS default browser. The Tauri webview drops

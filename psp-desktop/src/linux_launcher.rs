@@ -11,10 +11,14 @@
 //! first-run pivot (Unset → a concrete mode) happens in-process.
 //!
 //! Tray reachability: built on Tauri's `tray-icon` support, which on Linux
-//! implements the StatusNotifierItem spec (GNOME/Plasma/most modern DEs) and
-//! falls back to legacy XEmbed/GTK where that spec is absent. When no tray host
-//! exists at all the app still runs headless — the browser is auto-opened on
-//! ready, and Quit/switch degrade to documented `psp` entrypoints.
+//! goes through libappindicator's StatusNotifierItem spec. Desktops that host
+//! StatusNotifier (KDE Plasma, Ubuntu's GNOME via its AppIndicator extension,
+//! XFCE/MATE/Cinnamon with their SNI applets) show the icon. Vanilla GNOME and
+//! some tiling-WM setups ship no such host, and libappindicator has no
+//! legacy-XEmbed fallback — there the icon simply never appears (creation
+//! still succeeds, silently). The app keeps running headless regardless: the
+//! browser is auto-opened once ready, and Quit also works via the `shutdown`
+//! WS message in addition to the tray.
 
 use std::io::{ErrorKind, Read, Write};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr, TcpStream};
@@ -159,6 +163,25 @@ fn start_server_blocking(assets: &AssetDirs) -> Result<psp_server::ServerHandle>
     tracing::info!("embedded server listening on {}", server.addr);
     wait_until_responding(server.addr)?;
     Ok(server)
+}
+
+/// Exit the whole app when a client sends the `shutdown` WS message — the
+/// Quit affordance for browser-mode setups with no visible tray. Each server
+/// owns its watch channel, so every start (first run, Open recovery, restart)
+/// re-arms the watcher. Flags a deliberate quit so the ServiceMode exit-guard
+/// lets it through; `RunEvent::Exit` then drains the server gracefully.
+fn watch_shutdown_requests(app: &tauri::AppHandle, server: &psp_server::ServerHandle) {
+    let app = app.clone();
+    let mut requests = server.shutdown_requested.clone();
+    tauri::async_runtime::spawn(async move {
+        while requests.changed().await.is_ok() {
+            if *requests.borrow() {
+                tracing::info!("shutdown requested over the WebSocket — quitting");
+                app.state::<UserQuitting>().0.store(true, Ordering::SeqCst);
+                app.exit(0);
+            }
+        }
+    });
 }
 
     /// Port 7257 is occupied by another PSP instance: open it in the browser and
@@ -371,13 +394,23 @@ fn tray_open(app: &tauri::AppHandle, assets: &AssetDirs) {
     // must not be called from inside a tokio worker.
     let app = app.clone();
     let assets = assets.clone();
-    std::thread::spawn(move || match start_server_blocking(&assets) {
-        Ok(server) => {
-            let addr = server.addr;
-            set_server_handle(&app, Some(server));
-            open_url(&url_for(addr));
+    std::thread::spawn(move || {
+        // One starter at a time: a concurrent start would lose the port race
+        // and take the whole process down via the port-busy exit.
+        if !try_begin_server_start(&app) {
+            tracing::warn!("a server start is already in progress");
+            return;
         }
-        Err(error) => tracing::error!("Open Editor could not start the server: {error}"),
+        match start_server_blocking(&assets) {
+            Ok(server) => {
+                watch_shutdown_requests(&app, &server);
+                let addr = server.addr;
+                set_server_handle(&app, Some(server));
+                open_url(&url_for(addr));
+            }
+            Err(error) => tracing::error!("Open Editor could not start the server: {error}"),
+        }
+        end_server_start(&app);
     });
 }
 
@@ -387,6 +420,10 @@ fn tray_restart(app: &tauri::AppHandle, assets: AssetDirs) {
     // runtime and panic if invoked from inside a tokio worker.
     let app = app.clone();
     std::thread::spawn(move || {
+        if !try_begin_server_start(&app) {
+            tracing::warn!("a server restart is already in progress");
+            return;
+        }
         let taken = set_server_handle(&app, None);
         if let Some(server) = taken {
             tracing::info!("restart: shutting down the current server");
@@ -394,6 +431,7 @@ fn tray_restart(app: &tauri::AppHandle, assets: AssetDirs) {
         }
         match start_server_blocking(&assets) {
             Ok(server) => {
+                watch_shutdown_requests(&app, &server);
                 let addr = server.addr;
                 set_server_handle(&app, Some(server));
                 tracing::info!("restart complete — reopened {}", url_for(addr));
@@ -401,6 +439,7 @@ fn tray_restart(app: &tauri::AppHandle, assets: AssetDirs) {
             }
             Err(error) => tracing::error!("restart failed: {error:#}"),
         }
+        end_server_start(&app);
     });
 }
 
@@ -418,6 +457,22 @@ struct ServiceMode(AtomicBool);
 /// Set to `true` when the user deliberately quits from the tray, so the
 /// `ServiceMode` exit-guard lets the exit through instead of swallowing it.
 struct UserQuitting(AtomicBool);
+
+/// Held while a tray-triggered server start runs, so two rapid tray actions
+/// can't race each other into `handle_port_busy`'s process exit.
+struct ServerStarting(AtomicBool);
+
+/// Claims the single server-start slot. False means another start is already
+/// running and this one must not proceed.
+fn try_begin_server_start(app: &tauri::AppHandle) -> bool {
+    !app.state::<ServerStarting>().0.swap(true, Ordering::SeqCst)
+}
+
+fn end_server_start(app: &tauri::AppHandle) {
+    app.state::<ServerStarting>()
+        .0
+        .store(false, Ordering::SeqCst);
+}
 
 fn server_addr(app: &tauri::AppHandle) -> Option<SocketAddr> {
     app.state::<ServerState>()
@@ -501,6 +556,18 @@ fn apply_mode_requested(app: &tauri::AppHandle, requested: Mode) {
         return;
     }
 
+    // The choice is now committed, so the process must believe it too: without
+    // this, a later `set_mode` re-enters the first-run pivot branch below and
+    // builds a second tray / leaves ServiceMode stale. The relaunch path
+    // re-reads mode.json in the child anyway; updating here keeps both paths
+    // consistent and lets the UI query the live mode.
+    *CURRENT_MODE
+        .get()
+        .expect("current mode set at startup")
+        .lock()
+        .expect("mode mutex poisoned") = requested;
+    psp_server::set_display_mode(requested.as_str().map(str::to_string));
+
     // First-run pivot: no committed mode yet, so swap windows in-process.
     // Window close/build must run on the main UI thread — the SET_MODE handler
     // runs on a background task, so dispatch there.
@@ -509,6 +576,9 @@ fn apply_mode_requested(app: &tauri::AppHandle, requested: Mode) {
         app.run_on_main_thread(move || match requested {
             Mode::Desktop => {
                 close_window(&app2, "mode-select");
+                // Explicit for coherence with the Browser arm: Desktop owns the
+                // window lifecycle, so closing the window should quit.
+                app2.state::<ServiceMode>().0.store(false, Ordering::SeqCst);
                 if let Err(error) = open_desktop_window(&app2) {
                     tracing::error!("could not open the editor window: {error}");
                 }
@@ -572,15 +642,21 @@ pub fn run(mode: Mode) {
             let mode_file = crate::mode::mode_file_path(&app_data_dir);
 
             let server = start_server_blocking(&assets)?;
+            watch_shutdown_requests(&app_handle, &server);
 
             CURRENT_MODE
                 .set(Mutex::new(mode))
                 .expect("CURRENT_MODE set once");
             ASSETS.set(assets.clone()).expect("ASSETS set once");
             MODE_FILE.set(mode_file).expect("MODE_FILE set once");
+            // Publish the current display mode so the UI's Settings dialog can
+            // show it and only offer switching where a shell supports it
+            // (absent on Windows/macOS and the web build → control hidden).
+            psp_server::set_display_mode(mode.as_str().map(str::to_string));
             app.manage(ServerState(Mutex::new(Some(server))));
             app.manage(ServiceMode(AtomicBool::new(matches!(mode, Mode::Browser))));
             app.manage(UserQuitting(AtomicBool::new(false)));
+            app.manage(ServerStarting(AtomicBool::new(false)));
 
             // Listen for `set_mode` from the first-run overlay / Settings.
             let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel::<ModeEvent>();

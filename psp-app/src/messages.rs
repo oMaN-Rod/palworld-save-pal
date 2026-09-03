@@ -133,6 +133,11 @@ define_message_types! {
     // Desktop shell: the editor UI signals it finished bootstrapping so the
     // hidden Tauri window can be shown only once fully loaded.
     Ready => "ready",
+    // Desktop shell: query the shell's current display mode (see SetMode);
+    // replied to under DisplayMode with supported/mode so the Settings dialog
+    // only offers switching where a mode-switching shell exists.
+    GetDisplayMode => "get_display_mode",
+    DisplayMode => "display_mode",
     GetRawData => "get_raw_data",
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",
@@ -231,7 +236,6 @@ mod tests {
         "delete_gps_pals",
         "get_pal_details",
         "get_pals",
-        "get_gps_pals",
         "heal_all_pals",
         "heal_pals",
         "move_pal",
@@ -317,7 +321,11 @@ mod tests {
         "sync_app_state",
         "warning",
         "open_in_browser",
-        "get_guild_raw_data",
+        "shutdown",
+        "set_mode",
+        "ready",
+        "get_display_mode",
+        "display_mode",
         "get_raw_data",
         "open_folder",
         "convert_sav_file",
@@ -342,7 +350,6 @@ mod tests {
         "server_status_update",
         "server_api_call",
         "server_api_response",
-        "server_player_count",
         "list_server_mods",
         "toggle_server_mod",
         "install_server_mod",

@@ -104,6 +104,31 @@ pub fn emit_ready_event() -> bool {
     READY_LISTENER.get().is_some_and(|tx| tx.send(()).is_ok())
 }
 
+/// The display mode the mode-switching shell (the Linux launcher) currently
+/// runs in. The shell registers itself at startup and updates the value on
+/// every pivot/switch; the inner `None` means "registered but no choice made
+/// yet" (first run). Absent entirely — `display_mode()` returning `None` —
+/// when this process has no mode-switching shell (web/worker build, a bare
+/// server, the Windows/macOS desktop app), which is what the
+/// `get_display_mode` handler reports as unsupported.
+static DISPLAY_MODE: std::sync::OnceLock<std::sync::Mutex<Option<String>>> =
+    std::sync::OnceLock::new();
+
+/// Publish the shell's current display mode (`"desktop"`/`"browser"`, or None
+/// before the first-run choice). Only a mode-switching shell calls this.
+pub fn set_display_mode(mode: Option<String>) {
+    let cell = DISPLAY_MODE.get_or_init(|| std::sync::Mutex::new(None));
+    *cell.lock().expect("display mode mutex poisoned") = mode;
+}
+
+/// `Some(mode)` — the registered shell's mode (itself None on first run) —
+/// when a mode-switching shell is embedded in this process, `None` otherwise.
+pub fn display_mode() -> Option<Option<String>> {
+    DISPLAY_MODE
+        .get()
+        .map(|cell| cell.lock().expect("display mode mutex poisoned").clone())
+}
+
 impl ServerHandle {
     pub async fn shutdown(self) {
         let _ = self.shutdown_sender.send(());

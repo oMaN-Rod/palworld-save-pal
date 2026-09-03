@@ -10,12 +10,15 @@
 	import { cornerArt, theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
-	import { send } from '$utils/websocketUtils';
+	import { send, sendAndWait } from '$utils/websocketUtils';
 	import { MessageType } from '$types';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 
-	// Display-mode switching is a Linux desktop concern; the web/worker build has
-	// no shell to switch. Baked at build time, so this is a per-build constant.
+	// Display-mode switching is a Linux-shell concern: the web/worker build has
+	// no shell to switch, and the Windows/macOS desktop shells have no tray or
+	// browser mode. Baked at build time, this only prunes the WS query for
+	// non-desktop builds; the shell reports support and its current mode at
+	// runtime, so the control appears (pre-synced) only where it works.
 	const isDesktop = PUBLIC_DESKTOP_MODE === 'true';
 
 	// Combination: desktop | browser
@@ -24,15 +27,36 @@
 		{ value: 'browser', label: 'System Tray / Browser' }
 	];
 
-	// The shell relaunches on a non-empty switch (webview ↔ headless cannot
+	// The shell relaunches on a real switch (webview ↔ headless cannot
 	// hot-swap), so once fired the current session is leaving anyway — lock the
-	// control to avoid a second change racing the relaunch.
+	// control to avoid a second change racing the relaunch. Re-picking the
+	// shell's current mode is a no-op, not a switch.
 	let switching = $state(false);
 	let displayMode = $state('desktop');
+	// The mode the shell reports; null when not chosen yet (first run) or
+	// unreadable.
+	let shellMode = $state<string | null>(null);
+	let modeSupported = $state(false);
+
+	onMount(async () => {
+		if (!isDesktop) return;
+		try {
+			const info = await sendAndWait<{ supported: boolean; mode: string | null }>(
+				MessageType.GET_DISPLAY_MODE
+			);
+			modeSupported = info.supported;
+			shellMode = info.mode;
+			displayMode = info.mode ?? 'desktop';
+		} catch {
+			// No mode-switching shell (or the query failed): keep it hidden.
+			modeSupported = false;
+		}
+	});
 
 	function switchMode(mode: string) {
-		if (switching) return;
+		if (switching || mode === shellMode) return;
 		switching = true;
+		shellMode = mode;
 		send(MessageType.SET_MODE, { mode });
 	}
 
@@ -91,7 +115,7 @@
 			</div>
 		</div>
 
-		{#if isDesktop}
+		{#if modeSupported}
 			<div class="mt-2 border-surface-500/40 border-t pt-2">
 				<Combobox
 					options={modeOptions}
