@@ -341,24 +341,27 @@ fn tray_open(app: &tauri::AppHandle, assets: &AssetDirs) {
         open_url(&url_for(addr));
         return;
     }
-    // Server is down (e.g. a crash): boot it fresh, then open.
+    // Server is down (e.g. a crash): boot it fresh, then open. Runs on a plain
+    // std thread because start_server_blocking blocks on the tauri runtime and
+    // must not be called from inside a tokio worker.
     let app = app.clone();
     let assets = assets.clone();
-    tauri::async_runtime::spawn(async move {
-        match start_server_blocking(&assets) {
-            Ok(server) => {
-                let addr = server.addr;
-                set_server_handle(&app, Some(server));
-                open_url(&url_for(addr));
-            }
-            Err(error) => tracing::error!("Open Editor could not start the server: {error}"),
+    std::thread::spawn(move || match start_server_blocking(&assets) {
+        Ok(server) => {
+            let addr = server.addr;
+            set_server_handle(&app, Some(server));
+            open_url(&url_for(addr));
         }
+        Err(error) => tracing::error!("Open Editor could not start the server: {error}"),
     });
 }
 
 fn tray_restart(app: &tauri::AppHandle, assets: AssetDirs) {
+    // Runs on a plain std thread: both start_server_blocking and
+    // tauri::async_runtime::block_on(server.shutdown()) block on the tauri
+    // runtime and panic if invoked from inside a tokio worker.
     let app = app.clone();
-    tauri::async_runtime::spawn(async move {
+    std::thread::spawn(move || {
         let taken = set_server_handle(&app, None);
         if let Some(server) = taken {
             tracing::info!("restart: shutting down the current server");
