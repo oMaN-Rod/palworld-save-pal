@@ -478,24 +478,28 @@ fn apply_mode_requested(app: &tauri::AppHandle, requested: Mode) {
     }
 
     // First-run pivot: no committed mode yet, so swap windows in-process.
+    // Window close/build must run on the main UI thread — the SET_MODE handler
+    // runs on a background task, so dispatch there.
     if current == Mode::Unset {
-        match requested {
+        let app2 = app.clone();
+        app.run_on_main_thread(move || match requested {
             Mode::Desktop => {
-                close_window(app, "mode-select");
-                if let Err(error) = open_desktop_window(app) {
+                close_window(&app2, "mode-select");
+                if let Err(error) = open_desktop_window(&app2) {
                     tracing::error!("could not open the editor window: {error}");
                 }
             }
             Mode::Browser => {
-                close_window(app, "mode-select");
-                app.state::<ServiceMode>().0.store(true, Ordering::SeqCst);
-                build_tray(app, ASSETS.get().expect("assets set at startup"));
-                if let Some(addr) = server_addr(app) {
+                close_window(&app2, "mode-select");
+                app2.state::<ServiceMode>().0.store(true, Ordering::SeqCst);
+                build_tray(&app2, ASSETS.get().expect("assets set at startup"));
+                if let Some(addr) = server_addr(&app2) {
                     open_url(&url_for(addr));
                 }
             }
             Mode::Unset => unreachable!("requested is always concrete"),
-        }
+        })
+        .expect("first-run pivot dispatch to the main thread");
         return;
     }
 
