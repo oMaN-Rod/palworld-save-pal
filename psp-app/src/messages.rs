@@ -129,6 +129,7 @@ define_message_types! {
     Warning => "warning",
     OpenInBrowser => "open_in_browser",
     Shutdown => "shutdown",
+    SetMode => "set_mode",
     GetRawData => "get_raw_data",
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",

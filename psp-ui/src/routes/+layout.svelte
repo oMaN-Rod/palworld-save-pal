@@ -41,12 +41,11 @@
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
-	// The browser-mode control panel renders with no shell chrome at all. The
-	// `?path=` arm matters at boot: the server 307s /browser-mode to
-	// /?path=/browser-mode, and the client-side goto lands a beat later —
-	// without it the small-window overlay (480px control window) mounts during
-	// that interim. searchParams is runtime-only: reading it during prerender
-	// throws, so gate on `browser`.
+	// The Linux first-run mode-select overlay renders with no shell chrome at
+	// all. The `?path=` arm is a boot safety net (a deep link could still arrive
+	// as `/?path=/mode-select`): without it the small-window overlay mounts
+	// during that interim. searchParams is runtime-only: reading it during
+	// prerender throws, so gate on `browser`.
 	const controlShell = $derived(
 		isControlRoute(page.url.pathname) ||
 			(browser && isControlRoute(page.url.searchParams.get('path') ?? ''))

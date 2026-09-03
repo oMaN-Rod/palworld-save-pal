@@ -53,7 +53,7 @@ zip = { version = "2", default-features = false, features = ["deflate"] }
 chrono = { version = "0.4", features = ["serde"] }
 rfd = "0.15"
 opener = "0.7"
-tauri = { version = "2", features = [] }
+tauri = { version = "2", features = ["tray-icon"] }
 tauri-build = { version = "2", features = [] }
 tauri-plugin-single-instance = "2"
 bollard = "0.18"

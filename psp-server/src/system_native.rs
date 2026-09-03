@@ -104,11 +104,41 @@ pub async fn handle_shutdown(
     Ok(())
 }
 
+#[derive(Debug, serde::Deserialize)]
+pub struct SetModeData {
+    pub mode: String,
+}
+
+/// Fired by the first-run mode-select overlay or the Settings "Display mode"
+/// control. Relays the request to the embedding shell (which persists the
+/// choice to `mode.json` and pivots/relaunches); this handler only validates,
+/// forwards, and acknowledges under the same wire type so `sendAndWait`
+/// resolves. Replied under `SetMode`, not `Shutdown`/`Error`.
+pub async fn handle_set_mode(
+    data: SetModeData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if data.mode != "desktop" && data.mode != "browser" {
+        return Err(HandlerError::Other(format!(
+            "Refusing unknown display mode: {}",
+            data.mode
+        )));
+    }
+    if !crate::emit_mode_event(crate::ModeEvent {
+        mode: data.mode.clone(),
+    }) {
+        return Err(HandlerError::Other(
+            "no mode listener is installed in this process".to_string(),
+        ));
+    }
+    ctx.emitter.emit(MessageType::SetMode, &data.mode);
+    Ok(())
+}
+
 /// Only http(s) URLs may be handed to `opener`; anything else (a `file://`
 /// path, a `javascript:` payload, an arbitrary scheme) is refused so a WS
 /// message can't coax the host into launching an unexpected handler.
-fn is_openable_url(url: &str) -> bool {
-    url.starts_with("http://") || url.starts_with("https://")
+fn is_openable_url(url: &str) -> bool {    url.starts_with("http://") || url.starts_with("https://")
 }
 
 /// Opens an external URL in the OS default browser. The Tauri webview drops
@@ -158,6 +188,40 @@ mod tests {
             attachment: None,
         };
         let result = handle_open_url("file:///etc/passwd".to_string(), &mut ctx).await;
+        assert!(result.is_err());
+    }
+
+    #[tokio::test]
+    async fn set_mode_rejects_unknown_modes() {
+        let mut test = TestContext::new(|_| {}).await;
+        let mut ctx = HandlerCtx {
+            session: &mut test.session,
+            app: &test.app,
+            emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
+            attachment: None,
+        };
+        for bogus in ["", "terminal", "kiosk", "DESKTOP"] {
+            let result = handle_set_mode(SetModeData { mode: bogus.to_string() }, &mut ctx).await;
+            assert!(result.is_err(), "unexpected mode {bogus:?} must be refused");
+        }
+    }
+
+    #[tokio::test]
+    async fn set_mode_reports_missing_listener() {
+        // No mode listener is installed in a unit-test process, so a valid
+        // request must surface that as an error rather than pretending it
+        // applied. (The shell's per-process listener is what makes it succeed
+        // in the real app.)
+        let mut test = TestContext::new(|_| {}).await;
+        let mut ctx = HandlerCtx {
+            session: &mut test.session,
+            app: &test.app,
+            emitter: &test.emitter,
+            blueprints: &mut test.blueprints,
+            attachment: None,
+        };
+        let result = handle_set_mode(SetModeData { mode: "browser".into() }, &mut ctx).await;
         assert!(result.is_err());
     }
 }

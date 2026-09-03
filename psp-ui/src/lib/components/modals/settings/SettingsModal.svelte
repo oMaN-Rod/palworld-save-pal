@@ -10,6 +10,31 @@
 	import { cornerArt, theme, themeOptions } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import { send } from '$utils/websocketUtils';
+	import { MessageType } from '$types';
+	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
+
+	// Display-mode switching is a Linux desktop concern; the web/worker build has
+	// no shell to switch. Baked at build time, so this is a per-build constant.
+	const isDesktop = PUBLIC_DESKTOP_MODE === 'true';
+
+	// Combination: desktop | browser
+	const modeOptions: SelectOption[] = [
+		{ value: 'desktop', label: 'Desktop Mode' },
+		{ value: 'browser', label: 'System Tray / Browser' }
+	];
+
+	// The shell relaunches on a non-empty switch (webview ↔ headless cannot
+	// hot-swap), so once fired the current session is leaving anyway — lock the
+	// control to avoid a second change racing the relaunch.
+	let switching = $state(false);
+	let displayMode = $state('desktop');
+
+	function switchMode(mode: string) {
+		if (switching) return;
+		switching = true;
+		send(MessageType.SET_MODE, { mode });
+	}
 
 	let {
 		title = '',
@@ -65,6 +90,21 @@
 				<span>{m.cheat_mode()}</span>
 			</div>
 		</div>
+
+		{#if isDesktop}
+			<div class="mt-2 border-surface-500/40 border-t pt-2">
+				<Combobox
+					options={modeOptions}
+					bind:value={displayMode}
+					label="Display mode"
+					onChange={(value) => switchMode(String(value))}
+				/>
+				<p class="text-muted mt-1 text-xs">
+					Switches between the app window and a quiet background tray that opens the editor in
+					your browser. The app restarts to apply it.
+				</p>
+			</div>
+		{/if}
 
 		<div class="mt-2 flex flex-col space-y-2">
 			<!-- Purely visual, so this one is local UI state (like the theme picker

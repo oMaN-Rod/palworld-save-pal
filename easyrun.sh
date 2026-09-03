@@ -255,16 +255,7 @@ run_preflight() {
         check_cargo "$needs_strict_rust"
     fi
     case "$mode" in
-        desktop|build-desktop)
-            check_tauri_cli 1
-            check_webkit_linux 1
-            ;;
-        # browser-mode compiles the same tauri crate tree (webkit2gtk headers),
-        # but only the AppImage build needs the tauri CLI itself.
-        browser)
-            check_webkit_linux 1
-            ;;
-        build-browser)
+        desktop|browser|build-desktop|build-browser)
             check_tauri_cli 1
             check_webkit_linux 1
             ;;
@@ -651,28 +642,11 @@ run_desktop() {
 }
 
 run_browser() {
-    # browser-mode: the psp-desktop binary compiled with --features browser-mode
-    # runs the embedded server with NO webview — terminal progress, then it
-    # opens the system browser itself. Linux only (feature is inert elsewhere).
-    local cargo bun
-    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
-    bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
-    ensure_bun_install 0
-    write_desktop_env
-    # No webview means no Vite dev server: the launcher serves the BUILT SPA,
-    # so ui_build/ must exist before it starts.
-    if [[ ! -f "$REPO_ROOT/ui_build/index.html" ]]; then
-        log_info "ui_build/ missing — building the desktop UI first…"
-        SPAWN_CWD="$UI_DIR" spawn_fg_tagged ui-build "$bun" run build:desktop \
-            || die "desktop UI build failed."
-    fi
-    banner "Dev: browser-mode  (embedded server + control window + system browser)"
-    local psp_pid
-    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-browser "$cargo" run -p psp-desktop --features browser-mode
-    psp_pid="$LAST_BG_PID"
-    printf '%s  A small control window opens (boot status + Quit button); the editor runs in your browser.%s\n' "$DIM" "$RESET" >&2
-    printf '%s  Close the control window (or its Quit button / Ctrl-C) to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
-    wait_on_pids "$psp_pid"
+    # Deprecated alias: there is one Linux binary that handles both display
+    # modes at runtime (first-run overlay → Desktop or System Tray / Browser;
+    # switchable from Settings/tray). `--browser` just runs the desktop binary —
+    # the tray/browser mode is one of its persisted choices.
+    run_desktop
 }
 
 run_webapp() {
@@ -757,18 +731,10 @@ run_build_desktop() {
 }
 
 run_build_browser() {
-    local cargo script
-    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
-    ensure_bun_install 1
-    write_desktop_env
-    banner "Build: browser-mode AppImage (cargo tauri build --features browser-mode)"
-    script="$REPO_ROOT/scripts/build-desktop-browser.sh"
-    if [[ -f "$script" ]]; then
-        spawn_fg_tagged build-browser bash "$script" || die "browser-mode build failed."
-    else
-        die "scripts/build-desktop-browser.sh not found — browser-mode builds need it."
-    fi
-    log_ok "Browser-mode AppImage build complete → dist/."
+    # Deprecated alias: one Linux AppImage handles both display modes at
+    # runtime (see run_browser). `--build-browser` just builds the desktop
+    # AppImage — the tray/browser mode is a persisted runtime choice.
+    run_build_desktop
 }
 
 run_build_web() {
@@ -832,15 +798,16 @@ Runs from source; does NOT auto-install tools (run --check for a report card).
 
 mode (pick one; defaults to --web):
   --web              Dev: Vite + psp-server (tool-only SPA).
-  --desktop          Dev: Tauri native window + embedded server.
-  --browser          Dev: browser-mode — terminal launcher + system browser,
-                     no webview (Linux only; --features browser-mode).
+  --desktop          Dev: Tauri native window + embedded server (Linux picks
+                     Desktop vs System Tray / Browser on first run).
+  --browser          Deprecated alias for --desktop (one binary runs both
+                     display modes at runtime; tray/browser is a saved choice).
   --webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   --docker           Build & run the self-build Docker image.
   --serve            Run only the Rust psp-server.
   --build-desktop    Production desktop build → dist/.
-  --build-browser    Production browser-mode AppImage → dist/ (Linux only).
+  --build-browser    Deprecated alias for --build-desktop (single AppImage).
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
 
@@ -903,15 +870,10 @@ parse_args() {
 main() {
     parse_args "$@"
 
-    # browser-mode swaps the webview for a terminal launcher; the cargo
-    # feature is inert off Linux, so refuse it instead of silently building
-    # the normal webview app.
-    case "${ARG_MODE:-web}" in
-        browser|build-browser)
-            [[ "$(uname -s)" == "Linux" ]] \
-                || die "browser-mode is Linux-only — use --desktop / --build-desktop instead."
-            ;;
-    esac
+    # `--browser` / `--build-browser` are deprecated aliases for the desktop
+    # run/build — one binary handles both display modes at runtime (first-run
+    # overlay on Linux, switchable from Settings/tray). No separate guard: the
+    # aliases are valid on every OS.
 
     local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-web}}"
 

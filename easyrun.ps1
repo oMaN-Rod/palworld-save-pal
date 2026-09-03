@@ -759,7 +759,7 @@ mode (pick one; defaults to -Web):
   -BuildDesktop     Production desktop build → dist/.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
-  (-Browser / -BuildBrowser exist on Linux only — see easyrun.sh.)
+  (-Browser / -BuildBrowser are deprecated aliases for -Desktop / -BuildDesktop.)
 
 options:
   -Check            Run only the preflight for the selected mode, then exit.
@@ -785,20 +785,18 @@ common parameter name.
 
 if ($Help) { Show-Usage; exit 0 }
 
-# browser-mode replaces the webview with a terminal launcher — a Linux-only
-# feature. The cargo feature is inert on Windows, so refuse the flags instead
-# of silently building the normal webview app.
-if ($Browser -or $BuildBrowser) {
-    Die "browser-mode is Linux-only. On Linux use: ./easyrun.sh --browser (dev) or --build-browser (AppImage)."
-}
+# -Browser / -BuildBrowser are deprecated aliases: one binary runs both display
+# modes at runtime (Desktop vs System Tray / Browser, pickable on first Linux
+# launch and switchable from Settings/tray). On Windows there is no tray, so
+# they behave exactly like -Desktop / -BuildDesktop.
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
-        elseif ($Desktop)     { "desktop" }
+        elseif ($Desktop -or $Browser) { "desktop" }
         elseif ($Webapp)      { "webapp" }
         elseif ($Landing)     { "landing" }
         elseif ($Docker)      { "docker" }
         elseif ($Serve)       { "serve" }
-        elseif ($BuildDesktop){ "build-desktop" }
+        elseif ($BuildDesktop -or $BuildBrowser){ "build-desktop" }
         elseif ($BuildWeb)    { "build-web" }
         elseif ($Build)       { "build" }
         else                  { "web" }

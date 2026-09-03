@@ -61,6 +61,34 @@ pub fn request_shutdown() -> bool {
 static SHUTDOWN_REQUESTED: std::sync::OnceLock<tokio::sync::watch::Sender<bool>> =
     std::sync::OnceLock::new();
 
+/// A request to change the Linux launch mode (`set_mode` WS message). The
+/// desktop shell registers a listener so it can persist the new mode to
+/// `mode.json` and pivot/relaunch; psp-server itself only relays the event and
+/// stays Tauri-agnostic. `Send + Sync` via the channel; the shell owns the
+/// receiver task.
+#[derive(Debug, Clone)]
+pub struct ModeEvent {
+    /// Wire value: `"desktop"` or `"browser"`.
+    pub mode: String,
+}
+
+static MODE_LISTENER: std::sync::OnceLock<tokio::sync::mpsc::UnboundedSender<ModeEvent>> =
+    std::sync::OnceLock::new();
+
+/// Register the shell's mode-change listener. Only the first registration
+/// sticks (a server is started once per process); later ones are dropped.
+pub fn set_mode_listener(tx: tokio::sync::mpsc::UnboundedSender<ModeEvent>) {
+    let _ = MODE_LISTENER.set(tx);
+}
+
+/// Relay a `set_mode` event to the shell's listener. Returns false when no
+/// listener is installed (e.g. unit tests, or a non-desktop server).
+pub fn emit_mode_event(event: ModeEvent) -> bool {
+    MODE_LISTENER
+        .get()
+        .is_some_and(|tx| tx.send(event).is_ok())
+}
+
 impl ServerHandle {
     pub async fn shutdown(self) {
         let _ = self.shutdown_sender.send(());

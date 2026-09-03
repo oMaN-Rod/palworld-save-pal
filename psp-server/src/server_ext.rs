@@ -41,6 +41,10 @@ impl ExtRouter for ServerExtRouter {
                 Err(error) => Err(error.into()),
             },
             MessageType::Shutdown => system_native::handle_shutdown(data, ctx).await,
+            MessageType::SetMode => match serde_json::from_value(data) {
+                Ok(payload) => system_native::handle_set_mode(payload, ctx).await,
+                Err(error) => Err(error.into()),
+            },
             MessageType::ListServers => servers::handle_list_servers(services, data, ctx).await,
             MessageType::GetServer => match serde_json::from_value(data) {
                 Ok(payload) => servers::handle_get_server(services, payload, ctx).await,
@@ -110,6 +114,7 @@ mod tests {
         "open_in_browser",
         "open_url",
         "shutdown",
+        "set_mode",
         "list_servers",
         "get_server",
         "detect_workshop_dir",
