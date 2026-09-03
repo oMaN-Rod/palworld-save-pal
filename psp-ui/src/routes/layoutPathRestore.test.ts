@@ -11,7 +11,7 @@ import { load } from './+layout';
 
 const run = (search: string) =>
 	(load as (event: { url: URL }) => void)({
-		url: new URL(`http://127.0.0.1:5174/${search}`)
+		url: new URL(`http://127.0.0.1:7257/${search}`)
 	});
 
 describe('?path= restore', () => {
@@ -24,7 +24,7 @@ describe('?path= restore', () => {
 
 		expect(nav.goto).toHaveBeenCalledWith('/wiki/pals/sheepball');
 		const target = nav.goto.mock.calls[0][0] as unknown as string;
-		expect(new URL(target, 'http://127.0.0.1:5174/').origin).toBe('http://127.0.0.1:5174');
+		expect(new URL(target, 'http://127.0.0.1:7257/').origin).toBe('http://127.0.0.1:7257');
 	});
 
 	it('decodes an encoded path before navigating', () => {

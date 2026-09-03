@@ -161,9 +161,9 @@ fn start_server_blocking(assets: &AssetDirs) -> Result<psp_server::ServerHandle>
     Ok(server)
 }
 
-/// Port 5174 is occupied by another PSP instance: open it in the browser and
+    /// Port 7257 is occupied by another PSP instance: open it in the browser and
 /// leave (single-instance-like). If a non-PSP app owns the port, error out —
-/// the UI's WebSocket URL is baked to 5174 and cannot silently move.
+    /// the UI's WebSocket URL is baked to 7257 and cannot silently move.
 fn handle_port_busy(error: anyhow::Error, addr: SocketAddr) -> ! {
     if let Some((200, body)) = http_get(addr, "/") {
         if body.contains("Palworld") {
@@ -628,11 +628,11 @@ mod tests {
 
     #[test]
     fn url_for_maps_loopback_to_localhost() {
-        assert_eq!(url_for(SocketAddr::from(([127, 0, 0, 1], 5174))), "http://localhost:5174");
+        assert_eq!(url_for(SocketAddr::from(([127, 0, 0, 1], SERVER_PORT))), "http://localhost:7257");
     }
 
     #[test]
-    fn bind_addr_is_loopback_5174() {
+    fn bind_addr_is_loopback_server_port() {
         assert_eq!(bind_addr(), SocketAddr::from(([127, 0, 0, 1], crate::SERVER_PORT)));
     }
 }

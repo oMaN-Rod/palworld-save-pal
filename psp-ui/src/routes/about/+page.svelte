@@ -18,14 +18,14 @@
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
 	// Desktop-only: the Tauri webview (WebKitGTK on Linux) renders slower than a
-	// full browser. This opens the same UI at 127.0.0.1:5174 in the host OS
+	// full browser. This opens the same UI at 127.0.0.1:7257 in the host OS
 	// browser for heavy editing tasks. Hidden in web mode where it's a no-op.
 	function openBrowser(event: MouseEvent) {
 		if (!isDesktopMode) return;
 		event.preventDefault();
-		// Server maps "127.0.0.1:5174" -> http://localhost:5174 and opens it in
+		// Server maps "127.0.0.1:7257" -> http://localhost:7257 and opens it in
 		// the host OS browser (the Tauri webview can't open its own URL).
-		send(MessageType.OPEN_IN_BROWSER, '127.0.0.1:5174');
+		send(MessageType.OPEN_IN_BROWSER, '127.0.0.1:7257');
 	}
 
 	const AUTHOR_URL = 'https://github.com/CyrixJD115';

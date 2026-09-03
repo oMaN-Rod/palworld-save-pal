@@ -9,7 +9,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const DESKTOP_ENV = 'PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true\n';
+export const DESKTOP_ENV = 'PUBLIC_WS_URL=127.0.0.1:7257/ws\nPUBLIC_DESKTOP_MODE=true\n';
 
 export const ENV_PATH = join(dirname(dirname(fileURLToPath(import.meta.url))), '.env');
 

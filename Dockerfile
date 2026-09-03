@@ -10,7 +10,7 @@
 # ---- Stage 1: UI build (SvelteKit SPA, output -> /app/ui_build) ----
 FROM oven/bun AS ui_builder
 
-ARG PUBLIC_WS_URL=127.0.0.1:5174/ws
+ARG PUBLIC_WS_URL=127.0.0.1:7257/ws
 
 # Copy only what the UI build reads, so Rust-only changes do not invalidate the
 # bun-install/vite layers: generate-sitemap.mjs reads ../../data/json.
@@ -74,8 +74,8 @@ COPY data /app/data
 # new psp-rs.db. Drop a legacy psp.db into the volume to have it imported.
 WORKDIR /app/db
 
-EXPOSE 5174
+EXPOSE 7257
 
-CMD ["psp-server", "--host", "0.0.0.0", "--port", "5174", \
+CMD ["psp-server", "--host", "0.0.0.0", "--port", "7257", \
      "--ui-dir", "/app/ui", "--data-dir", "/app/data", \
      "--db", "/app/db/psp-rs.db"]

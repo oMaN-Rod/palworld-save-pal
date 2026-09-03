@@ -18,8 +18,8 @@ ENV_FILE="$UI_DIR/.env"
 NODE_MODULES="$UI_DIR/node_modules"
 WASM_OUT="$UI_DIR/src/lib/wasm/psp"
 
-VITE_PORT_DEFAULT=5173   # vite.config.ts server.port, strictPort:true
-SERVER_PORT_DEFAULT=5174 # psp-server default + Docker EXPOSE + WS_URL host
+VITE_PORT_DEFAULT=7258   # vite.config.ts server.port, strictPort:true
+SERVER_PORT_DEFAULT=7257 # psp-server default + Docker EXPOSE + WS_URL host
 
 if [[ -t 1 ]] && [[ "${EASYRUN_NO_COLOR:-}" != "1" ]] && [[ "${EASYRUN_NO_COLOR:-}" != "true" ]]; then
     RESET=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'
@@ -353,7 +353,7 @@ write_web_env() {
 
 write_desktop_env() {
     mkdir -p "$UI_DIR"
-    printf 'PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true\n' > "$ENV_FILE"
+    printf 'PUBLIC_WS_URL=127.0.0.1:7257/ws\nPUBLIC_DESKTOP_MODE=true\n' > "$ENV_FILE"
     log_info "Wrote psp-ui/.env (desktop mode)"
 }
 
@@ -818,8 +818,8 @@ options:
                      The one opt-in installer; everything else stays
                      fail-with-instructions. Skips anything already present.
   --host <ip>        Host/IP bind or WS_URL host (--web/--serve/--docker).
-  --vite-port <p>    Vite port (default 5173).
-  --server-port <p>  psp-server port (default 5174).
+  --vite-port <p>    Vite port (default 7258).
+  --server-port <p>  psp-server port (default 7257).
   --no-server        (--web) skip psp-server (Vite only).
   --skip-check       Skip the preflight (advanced).
   --no-install       Skip bun install if node_modules exists.

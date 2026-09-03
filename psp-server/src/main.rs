@@ -13,7 +13,7 @@ struct Cli {
     #[arg(long, default_value = "0.0.0.0")]
     host: IpAddr,
     /// Port to run the server on.
-    #[arg(long, default_value_t = 5174)]
+    #[arg(long, default_value_t = 7257)]
     port: u16,
     /// Directory containing json/ game data.
     #[arg(long, default_value = "data")]

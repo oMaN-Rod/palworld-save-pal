@@ -10,7 +10,7 @@ import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 // Vite serves HTTP/2 only over TLS (resolveHttpServer hands https options to
 // node:http2's createSecureServer), and browsers only negotiate h2 over TLS. Opt-in
 // rather than always-on: the cert is self-signed, and psp-desktop/tauri.conf.json
-// points its webview at http://localhost:5173, which WebView2 will not load over a
+// points its webview at http://localhost:7258, which WebView2 will not load over a
 // self-signed origin.
 const useHttps = process.env.VITE_HTTPS === '1';
 
@@ -74,7 +74,7 @@ export default defineConfig({
 	server: {
 		// tauri.conf.json devUrl points here; fail loudly rather than drifting to
 		// another port and leaving the desktop webview on a dead URL.
-		port: 5173,
+		port: 7258,
 		strictPort: true,
 		// The Oodle (ooz) wasm module lives in psp-ui/vendor, outside Vite's default dev
 		// fs sandbox; allow it so the web worker can load ooz.mjs/ooz.wasm in dev.
@@ -83,7 +83,7 @@ export default defineConfig({
 		},
 		proxy: {
 			'/api': {
-				target: 'http://localhost:5174',
+				target: 'http://localhost:7257',
 				changeOrigin: true
 			}
 		}

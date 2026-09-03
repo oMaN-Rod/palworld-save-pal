@@ -13,8 +13,8 @@
 use std::path::PathBuf;
 
 /// Port of the embedded server in all modes; the desktop UI's baked WebSocket
-/// URL (`PUBLIC_WS_URL=127.0.0.1:5174/ws`) depends on it.
-pub(crate) const SERVER_PORT: u16 = 5174;
+/// URL (`PUBLIC_WS_URL=127.0.0.1:7257/ws`) depends on it.
+pub(crate) const SERVER_PORT: u16 = 7257;
 
 #[cfg(target_os = "linux")]
 mod linux_launcher;

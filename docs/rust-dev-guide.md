@@ -8,7 +8,7 @@ with four crates:
 | `psp-core` | Domain logic: save sessions over uesave-rs typed structs, DTOs, game-data loading, presets/transfer/steam-id logic. No web deps. |
 | `psp-db` | sqlx + SQLite (`psp-rs.db`), embedded migrations, one-time legacy `psp.db` importer. |
 | `psp-server` | Axum: SPA static serving, `GET /ws/{client_id}` WebSocket (the 123-message API), `POST /api/convert/*`. Lib + bin. |
-| `psp-desktop` | Tauri v2 shell: spawns the embedded server on `127.0.0.1:5174`, native dialogs. |
+| `psp-desktop` | Tauri v2 shell: spawns the embedded server on `127.0.0.1:7257`, native dialogs. |
 
 Save parsing is provided by [uesave-rs](https://github.com/oMaN-Rod/uesave-rs),
 consumed as a **git dependency** (branch `palworld-v1`) pinned to an exact
@@ -26,7 +26,7 @@ uesave = { path = "../uesave-rs/uesave" }
 All from the repo root:
 
 ```bash
-cargo run -p psp-server -- --dev        # backend on 127.0.0.1:5174
+cargo run -p psp-server -- --dev        # backend on 127.0.0.1:7257
 (cd psp-desktop && cargo tauri dev)     # desktop app, hot-reload
 cargo fmt --all                         # required before every commit
 cargo clippy --workspace --all-targets -- -D warnings
@@ -37,7 +37,7 @@ Frontend type check: `bun run check` (from `psp-ui/`).
 
 ## Server CLI
 
-`psp-server --host 0.0.0.0 --port 5174 --ui-dir ./ui --data-dir ./data --db ./psp-rs.db [--dev]`
+`psp-server --host 0.0.0.0 --port 7257 --ui-dir ./ui --data-dir ./data --db ./psp-rs.db [--dev]`
 
 On first start, a legacy Python `psp.db` found next to the `--db` file is
 backed up and imported (settings, presets, UPS, servers) — once. This is a

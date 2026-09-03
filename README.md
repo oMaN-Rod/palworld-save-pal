@@ -95,9 +95,9 @@ To run Palworld Save Pal using Docker:
             dockerfile: Dockerfile
             args:
               # Change this to the host:port browsers will use to reach the server
-              - PUBLIC_WS_URL=127.0.0.1:5174/ws
+              - PUBLIC_WS_URL=127.0.0.1:7257/ws
           ports:
-            - "5174:5174"
+            - "7257:7257"
           volumes:
             - ./data:/app/data
             # Persists psp-rs.db (settings, presets, UPS). To import a legacy
@@ -132,7 +132,7 @@ bun install
 bun run dev:web
 ```
 
-Then open `http://127.0.0.1:5173`.
+Then open `http://127.0.0.1:7258`.
 
 ### Desktop App
 

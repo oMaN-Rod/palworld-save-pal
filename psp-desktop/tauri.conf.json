@@ -12,8 +12,8 @@
       "script": "bun run build:desktop",
       "cwd": "../psp-ui"
     },
-    "devUrl": "http://localhost:5173",
-    "frontendDist": "http://127.0.0.1:5174"
+    "devUrl": "http://localhost:7258",
+    "frontendDist": "http://127.0.0.1:7257"
   },
   "app": {
     "windows": [],

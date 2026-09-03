@@ -189,8 +189,8 @@ mod tests {
 
     #[test]
     fn dev_server_loaded_only_when_allowed() {
-        let dev = url("http://localhost:5173/");
-        let server = url("http://127.0.0.1:5174/");
+        let dev = url("http://localhost:7258/");
+        let server = url("http://127.0.0.1:7257/");
 
         assert_eq!(
             choose_webview_url(Some(dev.clone()), server.clone(), true),

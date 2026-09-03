@@ -166,7 +166,7 @@ mod tests {
 
     #[test]
     fn is_openable_url_accepts_only_http_schemes() {
-        assert!(is_openable_url("http://localhost:5173"));
+        assert!(is_openable_url("http://localhost:7258"));
         assert!(is_openable_url("https://github.com/oMaN-Rod/palworld-save-pal"));
         assert!(is_openable_url("https://buymeacoffee.com/i_am_o"));
 
@@ -255,7 +255,7 @@ mod desktop_system_tests {
 
     #[test]
     fn browser_url_maps_loopback_to_localhost() {
-        assert_eq!(browser_url_from("127.0.0.1:5174"), "http://localhost:5174");
+        assert_eq!(browser_url_from("127.0.0.1:7257"), "http://localhost:7257");
         assert_eq!(browser_url_from("myhost:8080"), "http://myhost:8080");
     }
 }

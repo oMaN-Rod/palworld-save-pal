@@ -35,8 +35,8 @@ $EnvFile        = Join-Path $UiDir ".env"
 $NodeModules    = Join-Path $UiDir "node_modules"
 $WasmOut        = Join-Path $UiDir "src/lib/wasm/psp"
 
-$VitePortDefault   = 5173   # vite.config.ts server.port, strictPort:true
-$ServerPortDefault = 5174   # psp-server default + Docker EXPOSE + WS_URL host
+$VitePortDefault   = 7258   # vite.config.ts server.port, strictPort:true
+$ServerPortDefault = 7257   # psp-server default + Docker EXPOSE + WS_URL host
 
 $script:ChildJobs            = New-Object System.Collections.Generic.List[object]
 $script:PreviousEnvExists    = $false
@@ -323,7 +323,7 @@ function Write-WebEnv([string]$wsUrl) {
 
 function Write-DesktopEnv() {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
-    Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=127.0.0.1:5174/ws`nPUBLIC_DESKTOP_MODE=true`n"
+    Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=127.0.0.1:7257/ws`nPUBLIC_DESKTOP_MODE=true`n"
     Log-Info "Wrote psp-ui/.env (desktop mode)"
 }
 
@@ -766,8 +766,8 @@ options:
                     Combine with a mode flag (e.g. -Check -Desktop).
   -InstallWasm      Install the WASM toolchain (wasm32 target + wasm-pack).
   -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker).
-  -VitePort <p>     Vite port (default 5173).
-  -ServerPort <p>   psp-server port (default 5174).
+  -VitePort <p>     Vite port (default 7258).
+  -ServerPort <p>   psp-server port (default 7257).
   -NoServer         (-Web) skip psp-server (Vite only).
   -SkipCheck        Skip the preflight (advanced).
   -NoInstall        Skip bun install if node_modules exists.
