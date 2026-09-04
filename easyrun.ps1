@@ -16,7 +16,6 @@
 param(
     [switch]$Web, [switch]$Desktop, [switch]$Webapp, [switch]$Landing,
     [switch]$Docker, [switch]$Serve,
-    [switch]$Browser, [switch]$BuildBrowser,
     [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build,
     [switch]$BuildAppImage,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
@@ -748,7 +747,6 @@ mode (pick one; defaults to -Web):
   -Build            Plain SPA build (server-served) → ui_build/.
   -BuildAppImage    Linux-only AppImage build — NOT available on Windows (see
                     the note below).
-  (-Browser / -BuildBrowser are deprecated aliases for -Desktop / -BuildDesktop.)
 
 options:
   -Check            Run only the preflight for the selected mode, then exit.
@@ -781,21 +779,16 @@ if ($BuildAppImage) {
     Die "Building AppImages is Linux-only (tauri bundles for the host OS).`nUse WSL or a Linux machine:  ./easyrun.sh --build-appimage"
 }
 
-# -Browser / -BuildBrowser are deprecated aliases: one binary runs both display
-# modes at runtime (Desktop vs System Tray / Browser, pickable on first Linux
-# launch and switchable from Settings/tray). On Windows there is no tray, so
-# they behave exactly like -Desktop / -BuildDesktop.
-
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
-        elseif ($Desktop -or $Browser) { "desktop" }
-        elseif ($Webapp)      { "webapp" }
-        elseif ($Landing)     { "landing" }
-        elseif ($Docker)      { "docker" }
-        elseif ($Serve)       { "serve" }
-        elseif ($BuildDesktop -or $BuildBrowser){ "build-desktop" }
-        elseif ($BuildWeb)    { "build-web" }
-        elseif ($Build)       { "build" }
-        else                  { "web" }
+        elseif ($Desktop)      { "desktop" }
+        elseif ($Webapp)       { "webapp" }
+        elseif ($Landing)      { "landing" }
+        elseif ($Docker)       { "docker" }
+        elseif ($Serve)        { "serve" }
+        elseif ($BuildDesktop) { "build-desktop" }
+        elseif ($BuildWeb)     { "build-web" }
+        elseif ($Build)        { "build" }
+        else                   { "web" }
 
 if ($InstallWasm) { Run-InstallWasm; return }
 

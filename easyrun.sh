@@ -846,8 +846,6 @@ mode (pick one; defaults to --web):
                      same pipeline as release CI) → dist/. Linux only.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
-  (--browser / --build-browser are deprecated aliases for --desktop /
-   --build-desktop: one binary runs both display modes at runtime.)
 
 options:
   --check, --doctor  Run only the preflight for the selected mode, then exit.
@@ -879,15 +877,11 @@ parse_args() {
         case "$1" in
             --web) ARG_MODE="web"; shift ;;
             --desktop) ARG_MODE="desktop"; shift ;;
-            # Deprecated aliases folded at parse time: one Linux binary runs
-            # both display modes at runtime, so --browser IS --desktop.
-            --browser) ARG_MODE="desktop"; shift ;;
             --webapp) ARG_MODE="webapp"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
             --docker) ARG_MODE="docker"; shift ;;
             --serve) ARG_MODE="serve"; shift ;;
             --build-desktop) ARG_MODE="build-desktop"; shift ;;
-            --build-browser) ARG_MODE="build-desktop"; shift ;;
             --build-appimage) ARG_MODE="build-appimage"; shift ;;
             --build-web) ARG_MODE="build-web"; shift ;;
             --build) ARG_MODE="build"; shift ;;
@@ -910,10 +904,6 @@ parse_args() {
 
 main() {
     parse_args "$@"
-
-    # `--browser` / `--build-browser` are folded to desktop modes in
-    # parse_args — one binary handles both display modes at runtime (first-run
-    # overlay on Linux, switchable from Settings/tray). Valid on every OS.
 
     local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-web}}"
 
