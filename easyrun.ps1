@@ -9,7 +9,7 @@
 #
 # PowerShell execution policy: if blocked, use:
 #   powershell -ExecutionPolicy Bypass -File .\easyrun.ps1 [args]
-# Or: Set-ExecutionPolicy -Scope CurrentUser RemoteOnce
+# Or: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 # param() MUST be the first executable statement in a .ps1. Everything else
 # (the comment header above, then blank lines/comments) is allowed before it.
@@ -18,6 +18,7 @@ param(
     [switch]$Docker, [switch]$Serve,
     [switch]$Browser, [switch]$BuildBrowser,
     [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build,
+    [switch]$BuildAppImage,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
     [string]$HostAddr, [int]$VitePort, [int]$ServerPort,
     [switch]$NoServer, [switch]$SkipCheck, [switch]$NoInstall,
@@ -211,12 +212,6 @@ function Check-DiskSpace($mode) {
               Hint="Free space on $RepoRoot" }
 }
 
-function Check-Port($port) {
-    # On Windows we skip the bind probe (unreliable); the dev server reports
-    # clearly if it can't bind.
-    return @{ Name="Port $port"; Status="ok"; Detail="checked at launch (Windows)"; Hint="" }
-}
-
 function Run-Preflight($mode) {
     $results = New-Object System.Collections.Generic.List[object]
     $results.Add((Check-Bun)) | Out-Null
@@ -240,14 +235,6 @@ function Run-Preflight($mode) {
     if ($repo) { $results.Add($repo) | Out-Null }
     $results.Add((Check-DiskSpace $mode)) | Out-Null
 
-    if ($mode -eq "web") {
-        $results.Add((Check-Port $VitePortDefault)) | Out-Null
-        $results.Add((Check-Port $ServerPortDefault)) | Out-Null
-    } elseif ($mode -in @("serve","docker")) {
-        $results.Add((Check-Port $ServerPortDefault)) | Out-Null
-    } elseif ($mode -in @("webapp","landing")) {
-        $results.Add((Check-Port $VitePortDefault)) | Out-Null
-    }
     return $results
 }
 
@@ -556,7 +543,7 @@ function Run-InstallWasm() {
     Report-Preflight "webapp" $false | Out-Null
 }
 
-function Run-Web($opts) {
+function Run-Web {
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
     $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
     $serverPort = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
@@ -586,7 +573,7 @@ function Run-Web($opts) {
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
 }
 
-function Run-Desktop($opts) {
+function Run-Desktop {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     try { & cargo tauri --version *> $null } catch { }
@@ -606,7 +593,7 @@ function Run-Desktop($opts) {
     Wait-OnProcs @($tauri) @()
 }
 
-function Run-Webapp($opts) {
+function Run-Webapp {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
@@ -625,7 +612,7 @@ function Run-Webapp($opts) {
     Wait-OnProcs @($vite) @()
 }
 
-function Run-Landing($opts) {
+function Run-Landing {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
@@ -643,7 +630,7 @@ function Run-Landing($opts) {
     Wait-OnProcs @($vite) @()
 }
 
-function Run-Serve($opts) {
+function Run-Serve {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     $h = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
@@ -656,7 +643,7 @@ function Run-Serve($opts) {
     Wait-OnProcs @($server) @()
 }
 
-function Run-Docker($opts) {
+function Run-Docker {
     $docker = Resolve-Tool "docker"
     if (-not $docker) { Die "docker not found." }
     if (-not (Test-Path (Join-Path $RepoRoot "docker-compose.yml"))) {
@@ -675,7 +662,7 @@ function Run-Docker($opts) {
     Write-Host "  Logs: docker compose logs -f   ·   Stop: docker compose down" -ForegroundColor DarkGray
 }
 
-function Run-BuildDesktop($opts) {
+function Run-BuildDesktop {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     Ensure-BunInstall $true
@@ -692,7 +679,7 @@ function Run-BuildDesktop($opts) {
     Log-Ok "Desktop build complete."
 }
 
-function Run-BuildWeb($opts) {
+function Run-BuildWeb {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     Ensure-BunInstall $true
@@ -705,7 +692,7 @@ function Run-BuildWeb($opts) {
     Log-Ok "Web build complete → ui_build/"
 }
 
-function Run-BuildPlain($opts) {
+function Run-BuildPlain {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     Ensure-BunInstall $true
@@ -759,6 +746,8 @@ mode (pick one; defaults to -Web):
   -BuildDesktop     Production desktop build → dist/.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
+  -BuildAppImage    Linux-only AppImage build — NOT available on Windows (see
+                    the note below).
   (-Browser / -BuildBrowser are deprecated aliases for -Desktop / -BuildDesktop.)
 
 options:
@@ -780,10 +769,17 @@ macOS/Linux users: run easyrun.sh instead.
 
 NOTE: -HostAddr (not -Host) is used because -Host is a reserved PowerShell
 common parameter name.
+
+NOTE: AppImages bundle the build host's OS — tauri's appimage bundler only
+runs on Linux. From Windows, use WSL:  ./easyrun.sh --build-appimage
 '@ | Write-Host
 }
 
 if ($Help) { Show-Usage; exit 0 }
+
+if ($BuildAppImage) {
+    Die "Building AppImages is Linux-only (tauri bundles for the host OS).`nUse WSL or a Linux machine:  ./easyrun.sh --build-appimage"
+}
 
 # -Browser / -BuildBrowser are deprecated aliases: one binary runs both display
 # modes at runtime (Desktop vs System Tray / Browser, pickable on first Linux
@@ -855,14 +851,14 @@ function Invoke-WithCleanup([scriptblock]$body) {
 
 Invoke-WithCleanup {
     switch ($mode) {
-        "web"           { Run-Web $null }
-        "desktop"       { Run-Desktop $null }
-        "webapp"        { Run-Webapp $null }
-        "landing"       { Run-Landing $null }
-        "docker"        { Run-Docker $null }
-        "serve"         { Run-Serve $null }
-        "build-desktop" { Run-BuildDesktop $null }
-        "build-web"     { Run-BuildWeb $null }
-        "build"         { Run-BuildPlain $null }
+        "web"           { Run-Web }
+        "desktop"       { Run-Desktop }
+        "webapp"        { Run-Webapp }
+        "landing"       { Run-Landing }
+        "docker"        { Run-Docker }
+        "serve"         { Run-Serve }
+        "build-desktop" { Run-BuildDesktop }
+        "build-web"     { Run-BuildWeb }
+        "build"         { Run-BuildPlain }
     }
 }

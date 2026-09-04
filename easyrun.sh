@@ -28,11 +28,9 @@ else
     RESET=""; BOLD=""; DIM=""; RED=""; GREEN=""; YELLOW=""; CYAN=""
 fi
 
-CHILD_PIDS=()
 PREVIOUS_ENV_EXISTS=0
 PREVIOUS_ENV_CONTENT=""
 RESTORE_ENV=0
-HTTP_POLL_PIDS=()
 
 log_info()  { printf '%s›%s %s\n' "${CYAN}${BOLD}" "$RESET" "$*" >&2; }
 log_ok()    { printf '%s✓%s %s\n' "$GREEN" "$RESET" "$*" >&2; }
@@ -202,6 +200,35 @@ check_webkit_linux() {
     printf 'WebKit2GTK 4.1\t%s\tpkg-config can'\''t find webkit2gtk-4.1\tDebian/Ubuntu: apt install libwebkit2gtk-4.1-dev   ·   Fedora: dnf install webkit2gtk4.1-devel\n' "$status"
 }
 
+check_appindicator_linux() {
+    # Only meaningful on Linux (tray backend; macOS/Windows print nothing).
+    if [[ "$(uname -s)" != "Linux" ]]; then return; fi
+    local strict="${1:-1}" status
+    if ! resolve_tool pkg-config >/dev/null 2>&1; then
+        status="warn"; [[ "$strict" == "1" ]] && status="crit"
+        printf 'AppIndicator\t%s\tpkg-config not found\tapt/dnf install pkg-config libayatana-appindicator3-dev\n' "$status"
+        return
+    fi
+    # tauri's tray-icon feature links libappindicator at build time; pkg-config
+    # accepts either the ayatana or the legacy Ubuntu name.
+    if pkg-config --exists ayatana-appindicator3-0.1 2>/dev/null \
+        || pkg-config --exists appindicator3-0.1 2>/dev/null; then
+        printf 'AppIndicator\tok\tfound\t\n'
+        return
+    fi
+    status="warn"; [[ "$strict" == "1" ]] && status="crit"
+    printf 'AppIndicator\t%s\tpkg-config can'\''t find ayatana-appindicator3-0.1\tDebian/Ubuntu: apt install libayatana-appindicator3-dev   ·   Fedora: dnf install libayatana-appindicator3-devel\n' "$status"
+}
+
+check_wget() {
+    # appimage-strip-graphics.sh fetches appimagetool with wget.
+    if resolve_tool wget >/dev/null 2>&1; then
+        printf 'wget\tok\t%s\t\n' "$(probe_version wget --version)"
+        return
+    fi
+    printf 'wget\tcrit\tnot found (the AppImage repack step fetches appimagetool)\tapt/dnf install wget\n'
+}
+
 disk_free_mb() {
     # df in 1K-blocks; awk to MB. Portable across Linux/macOS.
     df -k "$1" 2>/dev/null | awk 'NR==2 {printf "%d", $4/1024}' || echo 0
@@ -213,8 +240,7 @@ check_disk_space() {
     case "$mode" in
         web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
         webapp) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
-        build-desktop|build-web) min_mb=3500 ;;
-        browser) min_mb=2500 ;; build-browser) min_mb=3500 ;;
+        build-desktop|build-web|build-appimage) min_mb=3500 ;;
     esac
     local free
     free="$(disk_free_mb "$REPO_ROOT")"
@@ -246,18 +272,19 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        web|desktop|browser|serve|webapp|build|build-desktop|build-browser|build-web|docker) needs_rust=1 ;;
+        web|desktop|serve|webapp|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|browser|serve|web|build|build-desktop|build-browser) needs_strict_rust=1 ;;
+        desktop|serve|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
     fi
     case "$mode" in
-        desktop|browser|build-desktop|build-browser)
+        desktop|build-desktop|build-appimage)
             check_tauri_cli 1
             check_webkit_linux 1
+            check_appindicator_linux 1
             ;;
     esac
     case "$mode" in
@@ -267,6 +294,7 @@ run_preflight() {
             ;;
     esac
     if [[ "$mode" == "docker" ]]; then check_docker 1; fi
+    if [[ "$mode" == "build-appimage" ]]; then check_wget; fi
     check_node
     check_git
     local repo_row
@@ -275,7 +303,10 @@ run_preflight() {
     check_disk_space "$mode"
     case "$mode" in
         web) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
-        serve|docker|browser) check_port "$SERVER_PORT_DEFAULT" ;;
+        # The embedded psp-server binds 7257 in desktop mode too; a busy port
+        # makes the launcher exit via its port-busy path.
+        desktop) check_port "$SERVER_PORT_DEFAULT" ;;
+        serve|docker) check_port "$SERVER_PORT_DEFAULT" ;;
         webapp|landing) check_port "$VITE_PORT_DEFAULT" ;;
     esac
 }
@@ -412,7 +443,14 @@ cleanup_children() {
     if [[ -z "$self_pgid" ]]; then
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
-    if [[ -n "$self_pgid" ]]; then
+    # Group-kill ONLY when this script owns its process group — the interactive
+    # case, where the terminal's job control ran easyrun as its own job. When a
+    # non-interactive caller (make, CI, another script) shares our group, a
+    # negative-PGID kill would take out the CALLER too; there we fall back to
+    # the per-PID kills below, which still cover everything we spawned.
+    local parent_pgid
+    parent_pgid="$(ps -o pgid= -p "${PPID}" 2>/dev/null | tr -d ' ' || true)"
+    if [[ -n "$self_pgid" && "$self_pgid" != "$parent_pgid" ]]; then
         # This shell is a member of the group it is about to signal. SIGTERM is
         # survivable (ignored below for the duration), but a group-wide SIGKILL
         # is not trappable and would kill us before restore_env_on_exit runs,
@@ -641,14 +679,6 @@ run_desktop() {
     wait_on_pids "$tauri_pid"
 }
 
-run_browser() {
-    # Deprecated alias: there is one Linux binary that handles both display
-    # modes at runtime (first-run overlay → Desktop or System Tray / Browser;
-    # switchable from Settings/tray). `--browser` just runs the desktop binary —
-    # the tray/browser mode is one of its persisted choices.
-    run_desktop
-}
-
 run_webapp() {
     local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
@@ -730,11 +760,18 @@ run_build_desktop() {
     log_ok "Desktop build complete."
 }
 
-run_build_browser() {
-    # Deprecated alias: one Linux AppImage handles both display modes at
-    # runtime (see run_browser). `--build-browser` just builds the desktop
-    # AppImage — the tray/browser mode is a persisted runtime choice.
-    run_build_desktop
+run_build_appimage() {
+    [[ "$(uname -s)" == "Linux" ]] \
+        || die "--build-appimage is Linux-only (tauri's appimage bundler targets the host OS; from Windows use WSL + easyrun.sh)."
+    local script="$REPO_ROOT/scripts/build-appimage.sh"
+    [[ -f "$script" ]] || die "scripts/build-appimage.sh not found."
+    ensure_bun_install 1
+    write_desktop_env
+    banner "Build: AppImage (tauri appimage bundle + host-graphics strip)"
+    # Same pipeline as the release CI: bundle, strip bundled graphics libs, copy
+    # to dist/ — so local and shipped AppImages behave identically.
+    spawn_fg_tagged build-appimage bash "$script" || die "AppImage build failed."
+    log_ok "AppImage build complete → dist/PalworldSavePal-<version>-linux.AppImage"
 }
 
 run_build_web() {
@@ -800,16 +837,17 @@ mode (pick one; defaults to --web):
   --web              Dev: Vite + psp-server (tool-only SPA).
   --desktop          Dev: Tauri native window + embedded server (Linux picks
                      Desktop vs System Tray / Browser on first run).
-  --browser          Deprecated alias for --desktop (one binary runs both
-                     display modes at runtime; tray/browser is a saved choice).
   --webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   --docker           Build & run the self-build Docker image.
   --serve            Run only the Rust psp-server.
   --build-desktop    Production desktop build → dist/.
-  --build-browser    Deprecated alias for --build-desktop (single AppImage).
+  --build-appimage   Production Linux AppImage (bundle + host-graphics strip,
+                     same pipeline as release CI) → dist/. Linux only.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
+  (--browser / --build-browser are deprecated aliases for --desktop /
+   --build-desktop: one binary runs both display modes at runtime.)
 
 options:
   --check, --doctor  Run only the preflight for the selected mode, then exit.
@@ -841,13 +879,16 @@ parse_args() {
         case "$1" in
             --web) ARG_MODE="web"; shift ;;
             --desktop) ARG_MODE="desktop"; shift ;;
-            --browser) ARG_MODE="browser"; shift ;;
+            # Deprecated aliases folded at parse time: one Linux binary runs
+            # both display modes at runtime, so --browser IS --desktop.
+            --browser) ARG_MODE="desktop"; shift ;;
             --webapp) ARG_MODE="webapp"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
             --docker) ARG_MODE="docker"; shift ;;
             --serve) ARG_MODE="serve"; shift ;;
             --build-desktop) ARG_MODE="build-desktop"; shift ;;
-            --build-browser) ARG_MODE="build-browser"; shift ;;
+            --build-browser) ARG_MODE="build-desktop"; shift ;;
+            --build-appimage) ARG_MODE="build-appimage"; shift ;;
             --build-web) ARG_MODE="build-web"; shift ;;
             --build) ARG_MODE="build"; shift ;;
             --check|--doctor) ARG_CHECK=1; shift ;;
@@ -870,10 +911,9 @@ parse_args() {
 main() {
     parse_args "$@"
 
-    # `--browser` / `--build-browser` are deprecated aliases for the desktop
-    # run/build — one binary handles both display modes at runtime (first-run
-    # overlay on Linux, switchable from Settings/tray). No separate guard: the
-    # aliases are valid on every OS.
+    # `--browser` / `--build-browser` are folded to desktop modes in
+    # parse_args — one binary handles both display modes at runtime (first-run
+    # overlay on Linux, switchable from Settings/tray). Valid on every OS.
 
     local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-web}}"
 
@@ -937,13 +977,12 @@ main() {
     case "${ARG_MODE:-web}" in
         web) run_web ;;
         desktop) run_desktop ;;
-        browser) run_browser ;;
         webapp) run_webapp ;;
         landing) run_landing ;;
         docker) run_docker ;;
         serve) run_serve ;;
         build-desktop) run_build_desktop ;;
-        build-browser) run_build_browser ;;
+        build-appimage) run_build_appimage ;;
         build-web) run_build_web ;;
         build) run_build_plain ;;
         *) die "internal: unknown mode ${ARG_MODE}" ;;
