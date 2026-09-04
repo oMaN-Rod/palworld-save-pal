@@ -1,14 +1,14 @@
-# easyrun.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
-# Windows entry point (the bash sibling is easyrun.sh for macOS/Linux).
+# dev.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
+# Windows entry point (the bash sibling is dev.sh for macOS/Linux).
 #
 # Does NOT auto-install anything (except the opt-in -InstallWasm): on a missing
 # or wrong tool it prints the exact command to fix it and exits non-zero.
 # Preflight does not verify the WebView2/MSVC build tools needed by
-# -Desktop/-BuildDesktop. Defaults to -Web; run `.\easyrun.ps1 -Help` for the
+# -Desktop/-BuildDesktop. Defaults to -Web; run `.\dev.ps1 -Help` for the
 # full flag list.
 #
 # PowerShell execution policy: if blocked, use:
-#   powershell -ExecutionPolicy Bypass -File .\easyrun.ps1 [args]
+#   powershell -ExecutionPolicy Bypass -File .\dev.ps1 [args]
 # Or: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 # param() MUST be the first executable statement in a .ps1. Everything else
@@ -183,7 +183,7 @@ function Check-Repo() {
     }
     return @{ Name="PSP repo"; Status="crit";
               Detail="psp-server/Cargo.toml or psp-ui/ not found at $RepoRoot";
-              Hint="Run easyrun.ps1 from the Palworld Save Pal repository root." }
+              Hint="Run dev.ps1 from the Palworld Save Pal repository root." }
 }
 
 function Check-DiskSpace($mode) {
@@ -274,8 +274,8 @@ function Report-Preflight($mode, [bool]$asJson) {
     Write-Host "$nCrit critical" -NoNewline -ForegroundColor Red
     Write-Host ""
     if ($nCrit -gt 0) {
-        Write-Host "  Fix the $nCrit critical issue(s) above, then re-run easyrun.ps1." -ForegroundColor Red
-        Write-Host "  (Tip: easyrun.ps1 -Check for a standalone report.)" -ForegroundColor DarkGray
+        Write-Host "  Fix the $nCrit critical issue(s) above, then re-run dev.ps1." -ForegroundColor Red
+        Write-Host "  (Tip: dev.ps1 -Check for a standalone report.)" -ForegroundColor DarkGray
     }
     if ($nCrit -gt 0) { return 1 } else { return 0 }
 }
@@ -394,7 +394,7 @@ function Wait-ForHttp($url, $label, [int]$timeout = 60) {
 
 function Ensure-BunInstall([bool]$force) {
     $bun = Resolve-Tool "bun"
-    if (-not $bun) { Die "bun not found — run .\easyrun.ps1 -Check first." }
+    if (-not $bun) { Die "bun not found — run .\dev.ps1 -Check first." }
     if ((Test-Path $NodeModules) -and -not $force) {
         Log-Info "psp-ui/node_modules present — skipping bun install."
         return
@@ -412,7 +412,7 @@ function Ensure-Wasm([bool]$rebuild) {
     # psp_bg.wasm existing is not a safe skip condition: psp.js is tracked and
     # psp_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
     # over the real entry while the stale .wasm survives. Mirrors ensure_wasm
-    # in easyrun.sh.
+    # in dev.sh.
     $wasmFile = Join-Path $WasmOut "psp_bg.wasm"
     $entryJs  = Join-Path $WasmOut "psp.js"
     $pkgJson  = Join-Path $WasmOut "package.json"
@@ -449,8 +449,8 @@ function Ensure-Wasm([bool]$rebuild) {
 
     $cargo = Resolve-Tool "cargo"
     $wasmPack = Resolve-Tool "wasm-pack"
-    if (-not $cargo)    { Die "cargo not found — run .\easyrun.ps1 -Check first." }
-    if (-not $wasmPack) { Die "wasm-pack not found — run .\easyrun.ps1 -InstallWasm first." }
+    if (-not $cargo)    { Die "cargo not found — run .\dev.ps1 -Check first." }
+    if (-not $wasmPack) { Die "wasm-pack not found — run .\dev.ps1 -InstallWasm first." }
     Log-Info "Building psp-web (wasm-pack): $reason"
     # Clear generated output only — an interrupted build must still leave a
     # resolvable $lib/wasm/psp behind, so the tracked placeholders have to
@@ -497,7 +497,7 @@ function Run-InstallWasm() {
         Die "rustup is required to manage the wasm32 target, but it's not on PATH.
     Install it first:
       winget install Rustlang.Rustup   (or https://rustup.rs)
-    Then open a NEW terminal and re-run:  .\easyrun.ps1 -InstallWasm"
+    Then open a NEW terminal and re-run:  .\dev.ps1 -InstallWasm"
     }
     $installed = & $rustup target list --installed 2>&1
     if ($installed -match "wasm32-unknown-unknown") {
@@ -531,7 +531,7 @@ function Run-InstallWasm() {
             Write-Host "  It's at ~/.cargo/bin/wasm-pack." -ForegroundColor DarkGray
             Write-Host "  Open a NEW terminal (so PATH refreshes), then verify:" -ForegroundColor DarkGray
             Write-Host "    wasm-pack --version" -ForegroundColor DarkGray
-            Write-Host "  Then re-run: .\easyrun.ps1 -Check -Webapp" -ForegroundColor White
+            Write-Host "  Then re-run: .\dev.ps1 -Check -Webapp" -ForegroundColor White
             return
         }
         Log-Ok "wasm-pack installed ($(probe_version 'wasm-pack' @('--version')))."
@@ -567,7 +567,7 @@ function Run-Web {
     Wait-ForHttp "http://${h}:$vitePort" "Vite" 60 | Out-Null
     Write-Host ""
     Write-Host "  ▸ PSP web dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
-    Write-Host "  Ctrl-C to stop. easyrun restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C to stop. dev.ps1 restores psp-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
 }
@@ -587,7 +587,7 @@ function Run-Desktop {
     }
     Banner "Dev: desktop  (Tauri + embedded psp-server)"
     $tauri = Spawn-BgTagged "tauri" @($cargo, "tauri", "dev") $PspDesktopDir $null
-    Write-Host "  Ctrl-C to stop. easyrun restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C to stop. dev.ps1 restores psp-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($tauri) @()
 }
@@ -732,7 +732,7 @@ function Wait-OnProcs($primary, $secondary) {
 
 function Show-Usage() {
     @'
-easyrun.ps1 — Palworld Save Pal dev/launch/build helper (Windows).
+dev.ps1 — Palworld Save Pal dev/launch/build helper (Windows).
 Runs from source; does NOT auto-install tools (run -Check for a report card).
 
 mode (pick one; defaults to -Web):
@@ -763,20 +763,20 @@ options:
   -ForceCheckMode <m>   Override the preflight mode (advanced).
   -Help             Show this help.
 
-macOS/Linux users: run easyrun.sh instead.
+macOS/Linux users: run dev.sh instead.
 
 NOTE: -HostAddr (not -Host) is used because -Host is a reserved PowerShell
 common parameter name.
 
 NOTE: AppImages bundle the build host's OS — tauri's appimage bundler only
-runs on Linux. From Windows, use WSL:  ./easyrun.sh --build-appimage
+runs on Linux. From Windows, use WSL:  ./dev.sh --build-appimage
 '@ | Write-Host
 }
 
 if ($Help) { Show-Usage; exit 0 }
 
 if ($BuildAppImage) {
-    Die "Building AppImages is Linux-only (tauri bundles for the host OS).`nUse WSL or a Linux machine:  ./easyrun.sh --build-appimage"
+    Die "Building AppImages is Linux-only (tauri bundles for the host OS).`nUse WSL or a Linux machine:  ./dev.sh --build-appimage"
 }
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }

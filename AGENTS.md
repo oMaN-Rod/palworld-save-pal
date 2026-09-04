@@ -14,7 +14,7 @@ Palworld Save Pal (PSP): a Palworld save-file manager. Rust backend (axum server
 | `psp-ui` | SvelteKit app, adapter-static → `../ui_build`. Svelte 5 runes + Skeleton + Tailwind. |
 | `psp-web`, `psp-plugin`, `psp-lua-sys` | WASM build, Lua plugin host, Lua FFI. |
 | `data/json` | Game data (`json/`) + UI strings per locale (`ui/*.json`). |
-| `easyrun.sh` / `easyrun.ps1` | All-in-one dev/build wrappers (see `--help`). |
+| `dev.sh` / `dev.ps1` | All-in-one dev/build wrappers (see `--help`). |
 | `docs/`, `contract/` | Dev guide, plugin API docs, wire-contract fixtures. |
 
 ## Commands
@@ -26,7 +26,7 @@ cargo fmt --all                                   # required before every commit
 cargo clippy --workspace --all-targets -- -D warnings
 cargo run -p psp-server -- --dev                  # backend only, 127.0.0.1:7257
 cargo test -p psp-core <name>                     # focused tests (full suite is slow)
-./easyrun.sh --web | --desktop | --serve | --build-desktop | --build-appimage   # wrappers (Linux AppImage pipeline = tauri bundle + scripts/appimage-strip-graphics.sh, same as release CI)
+./dev.sh --web | --desktop | --serve | --build-desktop | --build-appimage   # wrappers (Linux AppImage pipeline = tauri bundle + scripts/appimage-strip-graphics.sh, same as release CI)
 ```
 
 From `psp-ui/`: `bun run check` (svelte-check), `bun run lint`, `bun run test:unit` (vitest), `bun run test:integration` (playwright), `bun run dev:web`.
@@ -35,7 +35,7 @@ Desktop: `cd psp-desktop && cargo tauri dev`. Before any non-dev `cargo run -p p
 
 ## Ports (keep in sync everywhere)
 
-- PSP server: **7257** (Dockerfile, docker-compose.yml, scripts/build-docker.*, easyrun defaults, `SERVER_PORT` in psp-desktop, `PUBLIC_WS_URL=127.0.0.1:7257/ws` baked into desktop builds).
+- PSP server: **7257** (Dockerfile, docker-compose.yml, scripts/build-docker.*, dev.sh defaults, `SERVER_PORT` in psp-desktop, `PUBLIC_WS_URL=127.0.0.1:7257/ws` baked into desktop builds).
 - Vite dev: **7258**, `strictPort: true` (tauri.conf.json devUrl points at it).
 - Changing one without the others ships a UI with a dead WebSocket. Grep for the old number repo-wide.
 
