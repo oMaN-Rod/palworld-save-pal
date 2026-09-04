@@ -70,8 +70,11 @@ wget -qO "$appimagetool" \
   "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
 chmod +x "$appimagetool"
 
+# The appimagetool source dir must be ABSOLUTE: the current continuous build
+# resolves relative paths against its own --appimage-extract-and-run temp dir,
+# not the caller's CWD, and fails with "no such file or directory: squashfs-root".
 ARCH=x86_64 "$appimagetool" --appimage-extract-and-run \
-  squashfs-root "$appimage_path"
+  "$work_dir/squashfs-root" "$appimage_path"
 
 rm -rf squashfs-root "$tool_dir"
 echo "repackaged $appimage_path without host-graphics libs"
