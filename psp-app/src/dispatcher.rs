@@ -18,6 +18,7 @@ pub struct HandlerCtx<'a> {
     pub app: &'a Arc<AppState>,
     pub emitter: &'a Emitter,
     pub blueprints: &'a mut crate::blueprint_registry::BlueprintRegistry,
+    pub is_loopback: bool,
     pub attachment: Option<SessionAttachment<'a>>,
 }
 
@@ -564,6 +565,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -581,6 +583,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -598,6 +601,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -622,6 +626,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -640,6 +645,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -660,6 +666,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )
@@ -706,6 +713,7 @@ mod tests {
                 app: &test.app,
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
+                is_loopback: false,
                 attachment: None,
             },
         )

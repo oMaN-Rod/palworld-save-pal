@@ -139,6 +139,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         };
         let result = handle_open_url("file:///etc/passwd".to_string(), &mut ctx).await;

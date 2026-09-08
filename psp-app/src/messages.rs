@@ -209,6 +209,39 @@ define_message_types! {
     LspRequest => "lsp_request",
     LspNotification => "lsp_notification",
     OpenLspSession => "open_lsp_session",
+    SubscribeLive => "subscribe_live",
+    LiveFrame => "live_frame",
+    EnsureGamedataLaunchArg => "ensure_gamedata_launch_arg",
+    SignalSetSource => "signal_set_source",
+    SignalStatus => "signal_status",
+    SignalStartPairing => "signal_start_pairing",
+    SignalStopPairing => "signal_stop_pairing",
+    SignalSetArmed => "signal_set_armed",
+    SignalListDevices => "signal_list_devices",
+    SignalRenameDevice => "signal_rename_device",
+    SignalRevokeDevice => "signal_revoke_device",
+    SignalResetRemoteAccess => "signal_reset_remote_access",
+    ListLocalSaves => "list_local_saves",
+    BrowseDirectory => "browse_directory",
+    GameStatus => "game_status",
+    GamePlayers => "game_players",
+    GamePals => "game_pals",
+    GamePalDetail => "game_pal_detail",
+    GameCapabilities => "game_capabilities",
+    GameHealPals => "game_heal_pals",
+    GameSetItemSlot => "game_set_item_slot",
+    GameRemovePal => "game_remove_pal",
+    GameMovePal => "game_move_pal",
+    GameAddPal => "game_add_pal",
+    GameEditPal => "game_edit_pal",
+    GameEditPlayer => "game_edit_player",
+    GameInventory => "game_inventory",
+    GameGuild => "game_guild",
+    GameGuilds => "game_guilds",
+    GameBasePals => "game_base_pals",
+    GameGuildContainers => "game_guild_containers",
+    GameEditGuild => "game_edit_guild",
+    GameSetGuildRole => "game_set_guild_role",
 }
 
 #[cfg(test)]
@@ -398,6 +431,39 @@ mod tests {
         "lsp_request",
         "lsp_notification",
         "open_lsp_session",
+        "subscribe_live",
+        "live_frame",
+        "ensure_gamedata_launch_arg",
+        "signal_set_source",
+        "signal_status",
+        "signal_start_pairing",
+        "signal_stop_pairing",
+        "signal_set_armed",
+        "signal_list_devices",
+        "signal_rename_device",
+        "signal_revoke_device",
+        "signal_reset_remote_access",
+        "list_local_saves",
+        "browse_directory",
+        "game_status",
+        "game_players",
+        "game_pals",
+        "game_pal_detail",
+        "game_capabilities",
+        "game_heal_pals",
+        "game_set_item_slot",
+        "game_remove_pal",
+        "game_move_pal",
+        "game_add_pal",
+        "game_edit_pal",
+        "game_edit_player",
+        "game_inventory",
+        "game_guild",
+        "game_guilds",
+        "game_base_pals",
+        "game_guild_containers",
+        "game_edit_guild",
+        "game_set_guild_role",
     ];
 
     /// `Emitter::emit` splices `as_wire()` straight into the frame text
@@ -460,6 +526,42 @@ mod tests {
             MessageType::from_wire("open_url"),
             Some(MessageType::OpenUrl)
         );
+    }
+
+    #[test]
+    fn remote_access_control_messages_round_trip_wire_names() {
+        for (message_type, wire) in [
+            (MessageType::SignalSetArmed, "signal_set_armed"),
+            (MessageType::SignalListDevices, "signal_list_devices"),
+            (MessageType::SignalRenameDevice, "signal_rename_device"),
+            (MessageType::SignalRevokeDevice, "signal_revoke_device"),
+            (
+                MessageType::SignalResetRemoteAccess,
+                "signal_reset_remote_access",
+            ),
+        ] {
+            assert_eq!(message_type.as_wire(), wire);
+            assert_eq!(MessageType::from_wire(wire), Some(message_type));
+        }
+    }
+
+    #[test]
+    fn game_write_message_types_round_trip_wire_names() {
+        for (message_type, wire) in [
+            (MessageType::GameCapabilities, "game_capabilities"),
+            (MessageType::GameHealPals, "game_heal_pals"),
+            (MessageType::GameSetItemSlot, "game_set_item_slot"),
+            (MessageType::GameRemovePal, "game_remove_pal"),
+            (MessageType::GameMovePal, "game_move_pal"),
+            (MessageType::GameAddPal, "game_add_pal"),
+            (MessageType::GameEditPal, "game_edit_pal"),
+            (MessageType::GameEditPlayer, "game_edit_player"),
+            (MessageType::GameEditGuild, "game_edit_guild"),
+            (MessageType::GameSetGuildRole, "game_set_guild_role"),
+        ] {
+            assert_eq!(message_type.as_wire(), wire);
+            assert_eq!(MessageType::from_wire(wire), Some(message_type));
+        }
     }
 
     #[test]

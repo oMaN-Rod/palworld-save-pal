@@ -1,9 +1,10 @@
 //! The /ws/{client_id} endpoint: one connection loop per client.
 
+use std::net::SocketAddr;
 use std::sync::Arc;
 
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
-use axum::extract::{Path, State};
+use axum::extract::{ConnectInfo, Path, State};
 use axum::response::Response;
 use futures::{SinkExt, StreamExt};
 
@@ -25,12 +26,18 @@ pub const MAX_WS_MESSAGE_BYTES: usize = 1 << 30;
 pub async fn ws_upgrade(
     upgrade: WebSocketUpgrade,
     Path(client_id): Path<String>,
+    ConnectInfo(peer): ConnectInfo<SocketAddr>,
     State(app): State<Arc<AppState>>,
 ) -> Response {
+    let is_loopback = is_loopback_peer(peer);
     upgrade
         .max_message_size(MAX_WS_MESSAGE_BYTES)
         .max_frame_size(MAX_WS_MESSAGE_BYTES)
-        .on_upgrade(move |socket| connection_loop(socket, client_id, app))
+        .on_upgrade(move |socket| connection_loop(socket, client_id, is_loopback, app))
+}
+
+fn is_loopback_peer(peer: SocketAddr) -> bool {
+    peer.ip().to_canonical().is_loopback()
 }
 
 /// Increments `AppState::live_connections` on construction and decrements it on
@@ -54,8 +61,13 @@ impl Drop for LiveConnectionGuard {
 
 /// Receives text frames until the client disconnects. Each connection owns its
 /// own `Session`, so two browser tabs never clobber each other.
-async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState>) {
-    tracing::info!(%client_id, "client connected");
+async fn connection_loop(
+    socket: WebSocket,
+    client_id: String,
+    is_loopback: bool,
+    app: Arc<AppState>,
+) {
+    tracing::info!(%client_id, is_loopback, "client connected");
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
@@ -101,6 +113,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
                     &app,
                     &emitter,
                     &mut blueprints,
+                    is_loopback,
                 )
                 .await;
             }
@@ -120,6 +133,7 @@ async fn connection_loop(socket: WebSocket, client_id: String, app: Arc<AppState
     tracing::warn!(%client_id, "client disconnected");
 }
 
+#[allow(clippy::too_many_arguments)]
 async fn process_text_frame(
     text: &str,
     current_session: &mut Arc<tokio::sync::Mutex<Session>>,
@@ -127,6 +141,7 @@ async fn process_text_frame(
     app: &Arc<AppState>,
     emitter: &Emitter,
     blueprints: &mut crate::blueprint_registry::BlueprintRegistry,
+    is_loopback: bool,
 ) {
     // A JSON decode failure sends an `error` message whose `data` is a plain
     // STRING, not the usual {message, trace} object.
@@ -179,6 +194,7 @@ async fn process_text_frame(
                 app,
                 emitter,
                 blueprints,
+                is_loopback,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,
@@ -195,6 +211,7 @@ async fn process_text_frame(
                 app,
                 emitter,
                 blueprints,
+                is_loopback,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,
@@ -215,5 +232,25 @@ mod tests {
         // value `ws_upgrade` feeds to max_message_size/max_frame_size instead of
         // exercising the limit end-to-end.
         assert_eq!(MAX_WS_MESSAGE_BYTES, 1 << 30);
+    }
+
+    #[test]
+    fn an_ipv4_mapped_loopback_peer_is_recognized_as_loopback() {
+        let peer: SocketAddr = "[::ffff:127.0.0.1]:12345".parse().unwrap();
+        assert!(is_loopback_peer(peer));
+    }
+
+    #[test]
+    fn a_plain_loopback_peer_is_recognized_as_loopback() {
+        let peer: SocketAddr = "127.0.0.1:12345".parse().unwrap();
+        assert!(is_loopback_peer(peer));
+        let peer: SocketAddr = "[::1]:12345".parse().unwrap();
+        assert!(is_loopback_peer(peer));
+    }
+
+    #[test]
+    fn a_remote_peer_is_not_loopback() {
+        let peer: SocketAddr = "203.0.113.5:12345".parse().unwrap();
+        assert!(!is_loopback_peer(peer));
     }
 }

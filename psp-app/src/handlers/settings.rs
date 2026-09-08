@@ -59,6 +59,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         };
         handle_get_settings(&mut ctx).await.unwrap();
@@ -82,6 +83,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         };
         let update: psp_core::dto::settings::SettingsUpdateDto =

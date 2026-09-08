@@ -64,6 +64,25 @@ pub fn server_to_wire_json(record: &ServerRecord) -> Value {
     })
 }
 
+pub fn server_public_wire_json(record: &ServerRecord) -> Value {
+    serde_json::json!({
+        "id": record.id,
+        "name": record.name,
+        "container_name": record.container_name,
+        "image_name": record.image_name,
+        "server_type": record.server_type,
+        "game_port": record.game_port,
+        "query_port": record.query_port,
+        "rest_api_port": record.rest_api_port,
+        "data_volume_name": record.data_volume_name,
+        "server_name": record.server_name,
+        "server_description": record.server_description,
+        "max_players": record.max_players,
+        "created_at": record.created_at,
+        "updated_at": record.updated_at,
+    })
+}
+
 /// The FIRST world dir under saves/SaveGames/0 that has a Players dir wins;
 /// later world dirs are not counted.
 pub fn count_total_players(saves_path: &str) -> u64 {
@@ -702,6 +721,31 @@ pub async fn handle_import_server(
     Ok(())
 }
 
+async fn apply_native_runtime_change(
+    services: &ServerServices,
+    db: &dyn psp_db::DbDriver,
+    mut record: ServerRecord,
+) -> Result<ServerRecord, String> {
+    native_config::write_palworld_settings(&record).map_err(|error| error.to_string())?;
+    if record.pid.is_some() {
+        let status = native_process::process_status(record.pid);
+        if status.running {
+            native_process::stop_server_process(&record, &services.palworld_api).await;
+            if let Some(new_pid) = native_process::start_server_process(&record) {
+                let mut pid_update = serde_json::Map::new();
+                pid_update.insert("pid".to_string(), Value::from(new_pid));
+                if let Some(refreshed) = psp_db::servers::update_server(db, record.id, &pid_update)
+                    .await
+                    .map_err(|error| error.to_string())?
+                {
+                    record = refreshed;
+                }
+            }
+        }
+    }
+    Ok(record)
+}
+
 async fn update_server_impl(
     services: &ServerServices,
     data: UpdateServerData,
@@ -749,24 +793,7 @@ async fn update_server_impl(
 
     if record.server_type == "native" {
         if needs_apply || native_runtime_changed {
-            native_config::write_palworld_settings(&record).map_err(|error| error.to_string())?;
-            if record.pid.is_some() {
-                let status = native_process::process_status(record.pid);
-                if status.running {
-                    native_process::stop_server_process(&record, &services.palworld_api).await;
-                    if let Some(new_pid) = native_process::start_server_process(&record) {
-                        let mut pid_update = serde_json::Map::new();
-                        pid_update.insert("pid".to_string(), Value::from(new_pid));
-                        if let Some(refreshed) =
-                            psp_db::servers::update_server(db, record.id, &pid_update)
-                                .await
-                                .map_err(|error| error.to_string())?
-                        {
-                            record = refreshed;
-                        }
-                    }
-                }
-            }
+            record = apply_native_runtime_change(services, db, record).await?;
         }
     } else if needs_apply {
         let docker_api = services.docker.as_ref();
@@ -791,6 +818,93 @@ pub async fn handle_update_server(
 ) -> Result<(), HandlerError> {
     if let Err(message) = update_server_impl(services, data, ctx).await {
         emit_business_error(ctx.emitter, format!("Failed to update server: {message}"));
+    }
+    Ok(())
+}
+
+const GAMEDATA_LAUNCH_ARG: &str = "-enable-gamedata-api";
+
+fn has_launch_arg(launch_args: &str, arg: &str) -> bool {
+    launch_args
+        .split_whitespace()
+        .any(|existing| existing.eq_ignore_ascii_case(arg))
+}
+
+fn with_launch_arg_appended(launch_args: &str, arg: &str) -> String {
+    if launch_args.trim().is_empty() {
+        arg.to_string()
+    } else {
+        format!("{launch_args} {arg}")
+    }
+}
+
+fn refuse_gamedata_launch_arg(emitter: &Emitter, message: impl Into<String>) {
+    emitter.emit(
+        MessageType::EnsureGamedataLaunchArg,
+        &serde_json::json!({ "error": message.into() }),
+    );
+}
+
+async fn ensure_gamedata_launch_arg_impl(
+    services: &ServerServices,
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), String> {
+    let emitter = ctx.emitter;
+    let db = &*ctx.app.driver;
+    let Some(record) = psp_db::servers::get_server(db, data.server_id)
+        .await
+        .map_err(|error| error.to_string())?
+    else {
+        refuse_gamedata_launch_arg(emitter, "Server not found");
+        return Ok(());
+    };
+    if record.server_type != "native" {
+        refuse_gamedata_launch_arg(
+            emitter,
+            "Launch arguments are not supported for container servers yet",
+        );
+        return Ok(());
+    }
+
+    let record = if has_launch_arg(&record.launch_args, GAMEDATA_LAUNCH_ARG) {
+        record
+    } else {
+        let mut updates = serde_json::Map::new();
+        updates.insert(
+            "launch_args".to_string(),
+            Value::from(with_launch_arg_appended(
+                &record.launch_args,
+                GAMEDATA_LAUNCH_ARG,
+            )),
+        );
+        let Some(updated) = psp_db::servers::update_server(db, record.id, &updates)
+            .await
+            .map_err(|error| error.to_string())?
+        else {
+            refuse_gamedata_launch_arg(emitter, "Failed to update server");
+            return Ok(());
+        };
+        apply_native_runtime_change(services, db, updated).await?
+    };
+
+    let status = server_status(services, &record).await;
+    let mut result = server_to_wire_json(&record);
+    result["status"] = serde_json::to_value(&status).expect("serializes");
+    emitter.emit(MessageType::EnsureGamedataLaunchArg, &result);
+    Ok(())
+}
+
+pub async fn handle_ensure_gamedata_launch_arg(
+    services: &ServerServices,
+    data: ServerIdData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    if let Err(message) = ensure_gamedata_launch_arg_impl(services, data, ctx).await {
+        emit_business_error(
+            ctx.emitter,
+            format!("Failed to enable the world data endpoint: {message}"),
+        );
     }
     Ok(())
 }
@@ -1329,6 +1443,7 @@ pub(crate) mod test_env {
                 Arc::new(psp_core::gamedata::GameData::load(&data_dir).expect("repo data dir"));
             let docker = Arc::new(MockDocker::default());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+            let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
             let app = Arc::new(AppState {
                 config: AppConfig {
                     desktop_mode: false,
@@ -1337,6 +1452,7 @@ pub(crate) mod test_env {
                 driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
+                live_bus,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 lsp: Arc::new(psp_app::lsp::NullLspService),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
@@ -1365,6 +1481,7 @@ pub(crate) mod test_env {
             let mut config = env.app.config.clone();
             config.desktop_mode = true;
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+            let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
             let app = std::sync::Arc::new(AppState {
                 config,
                 game_data: env.app.game_data.clone(),
@@ -1373,6 +1490,7 @@ pub(crate) mod test_env {
                     folders,
                 )),
                 live_connections,
+                live_bus,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 lsp: Arc::new(psp_app::lsp::NullLspService),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
@@ -1389,6 +1507,7 @@ pub(crate) mod test_env {
                 app: &self.app,
                 emitter: &self.emitter,
                 blueprints: &mut self.blueprints,
+                is_loopback: false,
                 attachment: None,
             }
         }
@@ -1752,6 +1871,123 @@ mod tests {
         let messages = env.drain();
         assert_eq!(messages[0]["type"], "error");
         assert_eq!(messages[0]["data"]["message"], "Server not found");
+    }
+
+    #[tokio::test]
+    async fn ensure_gamedata_launch_arg_appends_to_native_server() {
+        let mut env = TestEnv::new().await;
+        let mut new_server = docker_new_server("alpha");
+        new_server.server_type = "native".to_string();
+        new_server.install_path = env
+            ._scratch
+            .path()
+            .join("alpha")
+            .to_string_lossy()
+            .into_owned();
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
+            .await
+            .unwrap();
+        let services = env.services.clone();
+        let mut ctx = env.ctx();
+        handle_ensure_gamedata_launch_arg(
+            &services,
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "ensure_gamedata_launch_arg");
+        assert_eq!(messages[0]["data"]["launch_args"], "-enable-gamedata-api");
+    }
+
+    #[tokio::test]
+    async fn ensure_gamedata_launch_arg_is_idempotent() {
+        let mut env = TestEnv::new().await;
+        let mut new_server = docker_new_server("beta");
+        new_server.server_type = "native".to_string();
+        new_server.launch_args = "-someflag".to_string();
+        new_server.install_path = env
+            ._scratch
+            .path()
+            .join("beta")
+            .to_string_lossy()
+            .into_owned();
+        let record = psp_db::servers::create_server(&*env.app.driver, new_server)
+            .await
+            .unwrap();
+        let services = env.services.clone();
+
+        let mut ctx = env.ctx();
+        handle_ensure_gamedata_launch_arg(
+            &services,
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        env.drain();
+
+        let mut ctx = env.ctx();
+        handle_ensure_gamedata_launch_arg(
+            &services,
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        let launch_args = messages[0]["data"]["launch_args"].as_str().unwrap();
+        assert_eq!(launch_args.matches("-enable-gamedata-api").count(), 1);
+        assert_eq!(launch_args, "-someflag -enable-gamedata-api");
+    }
+
+    #[tokio::test]
+    async fn ensure_gamedata_launch_arg_refuses_docker_server() {
+        let mut env = TestEnv::new().await;
+        let record = psp_db::servers::create_server(&*env.app.driver, docker_new_server("gamma"))
+            .await
+            .unwrap();
+        let services = env.services.clone();
+        let mut ctx = env.ctx();
+        handle_ensure_gamedata_launch_arg(
+            &services,
+            ServerIdData {
+                server_id: record.id,
+            },
+            &mut ctx,
+        )
+        .await
+        .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "ensure_gamedata_launch_arg");
+        assert_eq!(
+            messages[0]["data"]["error"],
+            "Launch arguments are not supported for container servers yet"
+        );
+    }
+
+    #[tokio::test]
+    async fn ensure_gamedata_launch_arg_unknown_server_replies_under_its_own_type() {
+        let mut env = TestEnv::new().await;
+        let services = env.services.clone();
+        let mut ctx = env.ctx();
+        handle_ensure_gamedata_launch_arg(&services, ServerIdData { server_id: 42 }, &mut ctx)
+            .await
+            .unwrap();
+        let messages = env.drain();
+        assert_eq!(messages.len(), 1);
+        assert_eq!(messages[0]["type"], "ensure_gamedata_launch_arg");
+        assert_eq!(messages[0]["data"]["error"], "Server not found");
     }
 
     #[tokio::test]
@@ -2156,6 +2392,7 @@ mod tests {
             app: &env.app,
             emitter: &env.emitter,
             blueprints: &mut env.blueprints,
+            is_loopback: false,
             attachment: Some(crate::dispatcher::SessionAttachment {
                 current_id: &mut current_id,
                 arc: &mut session_arc,
@@ -2393,5 +2630,56 @@ mod tests {
         let ((game, query, rest), notes) = reassign_import_ports(9000, 9001, 9002, &allocated);
         assert_eq!((game, query, rest), (9000, 9001, 9002));
         assert!(notes.is_empty());
+    }
+
+    #[test]
+    fn public_projection_carries_no_secrets_or_paths() {
+        let mut env_vars = serde_json::Map::new();
+        env_vars.insert("SECRET_KEY".to_string(), serde_json::Value::String("secret_value".to_string()));
+
+        let record = ServerRecord {
+            id: 42,
+            name: "test-server".to_string(),
+            container_name: "test-container".to_string(),
+            image_name: "test-image".to_string(),
+            server_type: "docker".to_string(),
+            game_port: 8211,
+            query_port: 27015,
+            rest_api_port: 8212,
+            data_volume_name: "test-volume".to_string(),
+            saves_path: "C:/Users/serveradmin/Saved/SaveGames".to_string(),
+            mods_path: "C:/srv/mods".to_string(),
+            logicmods_path: "C:/srv/logicmods".to_string(),
+            nativemods_path: "C:/srv/nativemods".to_string(),
+            install_path: "C:/srv".to_string(),
+            steamcmd_path: "/usr/steamcmd".to_string(),
+            pid: Some(1234),
+            launch_args: "-arg1 -arg2".to_string(),
+            workshop_dir: "/workshop".to_string(),
+            server_name: "My Server".to_string(),
+            server_description: "Test server".to_string(),
+            server_password: "hunter2".to_string(),
+            admin_password: "hunter2".to_string(),
+            max_players: 32,
+            env_vars,
+            created_at: "2026-01-01T00:00:00Z".to_string(),
+            updated_at: "2026-01-02T00:00:00Z".to_string(),
+        };
+
+        let v = server_public_wire_json(&record);
+        let s = v.to_string();
+
+        for banned in &["admin_password", "server_password", "hunter2", "install_path",
+                       "C:/srv", "C:/Users", "serveradmin", "env_vars", "launch_args", "pid",
+                       "steamcmd", "workshop", "saves_path", "mods_path", "logicmods_path",
+                       "nativemods_path", "SECRET_KEY", "secret_value"] {
+            assert!(!s.contains(banned), "leaked: {}", banned);
+        }
+
+        assert!(v.get("name").is_some());
+        assert!(v.get("server_type").is_some());
+        assert!(v.get("server_name").is_some());
+        assert_eq!(v["id"], 42);
+        assert_eq!(v["max_players"], 32);
     }
 }

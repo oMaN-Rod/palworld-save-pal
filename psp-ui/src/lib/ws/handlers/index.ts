@@ -3,14 +3,16 @@ import { blueprintHandlers } from './blueprintHandler';
 import { gpsHandlers } from './gpsHandler';
 import { guildHandlers } from './guildHandler';
 import { lazyLoadHandlers } from './lazyLoadHandler';
+import { liveHandlers } from './liveHandler';
 import { overviewHandlers } from './overviewHandler';
 import { palHandlers } from './palHandler';
 import { playerHandlers } from './playerHandler';
-import { presetHandlers } from './presetHandler';
 import { pluginHandlers } from './pluginHandler';
+import { presetHandlers } from './presetHandler';
 import { saveFileHandlers } from './saveFileHandler';
-import { upsHandlers } from './upsHandler';
 import { serverHandlers } from './serverHandler';
+import { signalHandlers } from './signalHandler';
+import { upsHandlers } from './upsHandler';
 
 export const handlers = [
 	...appStateHandlers,
@@ -25,5 +27,7 @@ export const handlers = [
 	...upsHandlers,
 	...lazyLoadHandlers,
 	...overviewHandlers,
-	...serverHandlers
+	...serverHandlers,
+	...liveHandlers,
+	...signalHandlers
 ];

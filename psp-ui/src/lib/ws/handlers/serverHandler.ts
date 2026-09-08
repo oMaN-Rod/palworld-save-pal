@@ -88,6 +88,21 @@ export const updateServerHandler: WSMessageHandler = {
 	}
 };
 
+export const ensureGamedataLaunchArgHandler: WSMessageHandler = {
+	type: MessageType.ENSURE_GAMEDATA_LAUNCH_ARG,
+	async handle(data: Server & { error?: string }) {
+		if (data.error) return;
+		const state = getServerState();
+		const idx = state.servers.findIndex((s) => s.id === data.id);
+		if (idx >= 0) {
+			state.servers[idx] = data;
+		}
+		if (state.selectedServer?.id === data.id) {
+			state.selectedServer = data;
+		}
+	}
+};
+
 export const deleteServerHandler: WSMessageHandler = {
 	type: MessageType.DELETE_SERVER,
 	async handle(data: { server_id: number }) {
@@ -193,6 +208,7 @@ export const serverHandlers = [
 	getServerHandler,
 	createServerHandler,
 	updateServerHandler,
+	ensureGamedataLaunchArgHandler,
 	deleteServerHandler,
 	serverStatusUpdateHandler,
 	serverApiResponseHandler,

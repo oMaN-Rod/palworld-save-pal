@@ -15,6 +15,7 @@ fn ctx<'a>(test: &'a mut TestContext) -> HandlerCtx<'a> {
         app: &test.app,
         emitter: &test.emitter,
         blueprints: &mut test.blueprints,
+        is_loopback: false,
         attachment: None,
     }
 }

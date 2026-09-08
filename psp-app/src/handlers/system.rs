@@ -70,6 +70,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
@@ -194,6 +195,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();

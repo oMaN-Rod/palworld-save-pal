@@ -693,6 +693,7 @@ mod tests {
                 app: &$test.app,
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
+                is_loopback: false,
                 attachment: None,
             };
             $handler(&mut ctx).await.unwrap();
@@ -790,6 +791,7 @@ mod tests {
                 app: &$test.app,
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
+                is_loopback: false,
                 attachment: None,
             };
             $handler($data, &mut ctx).await

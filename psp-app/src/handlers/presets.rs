@@ -394,6 +394,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         })
         .await
@@ -413,6 +414,7 @@ mod tests {
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
+            is_loopback: false,
             attachment: None,
         })
         .await

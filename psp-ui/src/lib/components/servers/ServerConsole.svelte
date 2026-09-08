@@ -1,14 +1,20 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import type { Server } from '$types';
-	import { getServerState } from '$states';
+	import { MessageType, type Server } from '$types';
+	import { getModalState, getServerState, getToastState } from '$states';
 	import { Button, Card, Input } from '$components/ui';
 	import { cn } from '$theme';
+	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { JSONEditor } from 'svelte-jsoneditor';
+	import * as m from '$i18n/messages';
+
+	const GAMEDATA_LAUNCH_ARG = '-enable-gamedata-api';
 
 	let { server } = $props<{ server: Server }>();
 
 	const serverState = getServerState();
+	const toast = getToastState();
+	const modal = getModalState();
 	const apiResponse = $derived(serverState.apiResponse);
 
 	let editorContent = $derived.by(() => {
@@ -38,7 +44,7 @@
 			label: 'Game Data',
 			method: 'GET',
 			hasPayload: false,
-			requiresLaunchArg: '-enable-gamedata-api'
+			requiresLaunchArg: GAMEDATA_LAUNCH_ARG
 		},
 		{ id: 'save', label: 'Save World', method: 'POST', hasPayload: false },
 		{
@@ -108,10 +114,44 @@
 	]);
 
 	const canSend = $derived(isAvailable(selectedEndpoint));
+	const isNative = $derived(server.server_type === 'native');
+
+	let enablingArg = $state<string | null>(null);
 
 	async function handleCall() {
 		const payload = selectedEndpoint.hasPayload ? payloadValues : undefined;
 		await serverState.callApi(server.id, selectedEndpoint.id, selectedEndpoint.method, payload);
+	}
+
+	async function handleEnableLaunchArg(arg: string) {
+		if (isRunning) {
+			const confirmed = await modal.showConfirmModal({
+				title: m.enable_gamedata_restart_title(),
+				message: m.enable_gamedata_restart_message({ name: server.name }),
+				confirmText: m.enable_gamedata_restart_confirm(),
+				cancelText: m.cancel()
+			});
+			if (!confirmed) return;
+		}
+		enablingArg = arg;
+		try {
+			const updated = await sendAndWait<Server & { error?: string }>(
+				MessageType.ENSURE_GAMEDATA_LAUNCH_ARG,
+				{ server_id: server.id }
+			);
+			if (updated.error) throw new Error(updated.error);
+			const idx = serverState.servers.findIndex((s) => s.id === updated.id);
+			if (idx >= 0) {
+				serverState.servers[idx] = updated;
+			}
+			if (serverState.selectedServer?.id === updated.id) {
+				serverState.selectedServer = updated;
+			}
+		} catch (err: any) {
+			toast.add(err.message, m.error(), 'error');
+		} finally {
+			enablingArg = null;
+		}
 	}
 </script>
 
@@ -153,6 +193,16 @@
 					Dimmed endpoints require the server to be launched with
 					<code class="bg-surface-800 rounded-sm px-1 py-0.5">{arg}</code>.
 				</span>
+				{#if isNative && arg === GAMEDATA_LAUNCH_ARG}
+					<Button
+						size="sm"
+						variant="ghost"
+						loading={enablingArg === arg}
+						onclick={() => handleEnableLaunchArg(arg)}
+					>
+						{m.enable_gamedata_launch_arg()}
+					</Button>
+				{/if}
 			</p>
 		{/each}
 

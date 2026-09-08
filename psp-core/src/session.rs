@@ -593,6 +593,7 @@ pub struct Session {
     pub transfer_target: Option<TransferTarget>,
     pub gamepass_saves: HashMap<String, crate::dto::gamepass::GamepassSaveData>,
     pub selected_gamepass_save: Option<crate::dto::gamepass::GamepassSaveData>,
+    pub live_subscribed: bool,
 }
 
 impl Session {

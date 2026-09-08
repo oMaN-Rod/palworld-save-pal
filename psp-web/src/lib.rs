@@ -35,6 +35,7 @@ struct WebState {
 pub fn init() {
     console_error_panic_hook::set_once();
     let (live_connections, _rx) = tokio::sync::watch::channel(0usize);
+    let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
     // GameData is empty until `init_game_data`; handlers that need it before
     // then simply return empty lists.
     let app = Arc::new(AppState {
@@ -43,6 +44,7 @@ pub fn init() {
         driver: Arc::new(opfs_driver::OpfsSqlDriver),
         dialogs: Arc::new(psp_app::desktop_dialogs::NullDialogProvider),
         live_connections,
+        live_bus,
         ext: Arc::new(NullExtRouter),
         lsp: Arc::new(psp_app::lsp::NullLspService),
         sessions: std::sync::Mutex::new(SessionStore::default()),
@@ -295,6 +297,7 @@ async fn run_with_ctx(op: Op) -> Result<(), JsValue> {
             app: &state.app,
             emitter: &emitter,
             blueprints: &mut state.blueprints,
+            is_loopback: true,
             attachment: Some(SessionAttachment {
                 current_id: &mut state.current_id,
                 arc: &mut state.current,

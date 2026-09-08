@@ -9,6 +9,7 @@ import { MessageType, type AppSettings, type SupportedLanguage } from '$types';
 import { isUpdateAvailableOnGitHub } from '$utils/appVersion';
 import { reconcileSettingsLocale } from '$utils/localeReconcile';
 import type { WSMessageHandler } from '../types';
+import { isWebBuild } from '$lib/utils/platform';
 
 export const progressMessageHandler: WSMessageHandler = {
 	type: MessageType.PROGRESS_MESSAGE,
@@ -24,7 +25,7 @@ export const getVersionHandler: WSMessageHandler = {
 		const appState = getAppState();
 		const modal = getModalState();
 		appState.version = data;
-
+		if (isWebBuild) return;
 		const isUpdateAvailable = await isUpdateAvailableOnGitHub(data);
 		if (isUpdateAvailable) {
 			// @ts-ignore-next-line

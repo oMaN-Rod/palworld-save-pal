@@ -6,6 +6,7 @@ pub mod emitter;
 pub mod envelope;
 pub mod handler_error;
 pub mod handlers;
+pub mod live;
 pub mod lsp;
 pub mod messages;
 pub mod plugin_registry;
@@ -74,6 +75,7 @@ pub struct AppState {
     /// The transport maintains this with a `Drop` guard around each connection
     /// so it also decrements on panic or early return.
     pub live_connections: tokio::sync::watch::Sender<usize>,
+    pub live_bus: tokio::sync::watch::Sender<Option<crate::live::LiveFrame>>,
     /// Transport-owned router for native-only message types (server
     /// management, shell-open). `NullExtRouter` on targets without them.
     pub ext: Arc<dyn crate::dispatcher::ExtRouter>,
@@ -142,6 +144,33 @@ mod session_store_tests {
     }
 }
 
+#[cfg(test)]
+mod app_state_tests {
+    use crate::live::{LiveFrame, LiveSourceKind};
+    use crate::test_support::TestContext;
+
+    #[tokio::test]
+    async fn live_bus_delivers_latest_frame_to_subscribers() {
+        let test = TestContext::new(|_| {}).await;
+        let mut rx = test.app.live_bus.subscribe();
+        assert!(rx.borrow().is_none());
+
+        let frame = LiveFrame {
+            seq: 1,
+            source: LiveSourceKind::File,
+            captured_at_ms: 1,
+            observed_at_ms: 1,
+            fps: None,
+            ingame_time: None,
+            ingame_days: None,
+            actors: vec![],
+        };
+        test.app.live_bus.send(Some(frame.clone())).unwrap();
+        rx.changed().await.unwrap();
+        assert_eq!(rx.borrow().as_ref().unwrap().seq, 1);
+    }
+}
+
 #[cfg(any(test, feature = "test-support"))]
 pub mod test_support {
     use std::sync::Arc;
@@ -175,6 +204,7 @@ pub mod test_support {
             let pool = psp_db::open(&db_path).await.unwrap();
             let game_data = Arc::new(GameData::load(&json_dir).unwrap());
             let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+            let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
             let app = Arc::new(AppState {
                 config: AppConfig {
                     desktop_mode: false,
@@ -183,6 +213,7 @@ pub mod test_support {
                 driver: Arc::new(psp_db::SqlxSqliteDriver::new(pool)),
                 dialogs: Arc::new(crate::desktop_dialogs::NullDialogProvider),
                 live_connections,
+                live_bus,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
                 lsp: Arc::new(crate::lsp::NullLspService),
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),

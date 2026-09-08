@@ -48,6 +48,10 @@ impl Emitter {
         );
     }
 
+    pub async fn closed(&self) {
+        self.sender.closed().await;
+    }
+
     pub fn progress_sink(&self) -> ProgressSink {
         let emitter = self.clone();
         std::sync::Arc::new(move |progress_text: &str| {

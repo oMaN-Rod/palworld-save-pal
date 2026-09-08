@@ -320,7 +320,7 @@ pub async fn handle_select_save(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let mut resolved_path = data.path.clone();
-    if ctx.app.config.desktop_mode {
+    if ctx.app.config.desktop_mode && ctx.is_loopback {
         let Some(selected) = pick_save_file_via_dialog(&data.r#type, ctx).await? else {
             return Ok(()); // canceled; no_file_selected already emitted
         };
