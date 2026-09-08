@@ -614,7 +614,7 @@ export class GameState {
 
 	#adoptInstances(ticket: number, response: GameReply<GameInstancesJson>): void {
 		if (!this.#instancesGuard.isCurrent(ticket)) return;
-		if ('error' in response) return;
+		if ('error' in response || !Array.isArray(response.instances)) return;
 		this.instances = response.instances;
 		this.activeInstanceId = response.activeId;
 	}
@@ -631,54 +631,42 @@ export class GameState {
 
 	async addInstance(fields: GameInstanceFields): Promise<void> {
 		const ticket = this.#instancesGuard.next();
-		try {
-			const response = await sendAndWait<GameReply<GameInstancesJson>>(
-				MessageType.GAME_ADD_INSTANCE,
-				{ ...fields }
-			);
-			this.#adoptInstances(ticket, response);
-		} catch (error) {
-			console.error('game_add_instance failed', error);
-		}
+		const response = await sendAndWait<GameReply<GameInstancesJson>>(
+			MessageType.GAME_ADD_INSTANCE,
+			{ ...fields }
+		);
+		if ('error' in response) throw new GameCommandError(response.error, response.code);
+		this.#adoptInstances(ticket, response);
 	}
 
 	async updateInstance(id: string, fields: GameInstanceFields): Promise<void> {
 		const ticket = this.#instancesGuard.next();
-		try {
-			const response = await sendAndWait<GameReply<GameInstancesJson>>(
-				MessageType.GAME_UPDATE_INSTANCE,
-				{ id, ...fields }
-			);
-			this.#adoptInstances(ticket, response);
-		} catch (error) {
-			console.error('game_update_instance failed', error);
-		}
+		const response = await sendAndWait<GameReply<GameInstancesJson>>(
+			MessageType.GAME_UPDATE_INSTANCE,
+			{ id, ...fields }
+		);
+		if ('error' in response) throw new GameCommandError(response.error, response.code);
+		this.#adoptInstances(ticket, response);
 	}
 
 	async deleteInstance(id: string): Promise<void> {
 		const ticket = this.#instancesGuard.next();
-		try {
-			const response = await sendAndWait<GameReply<GameInstancesJson>>(
-				MessageType.GAME_DELETE_INSTANCE,
-				{ id }
-			);
-			this.#adoptInstances(ticket, response);
-		} catch (error) {
-			console.error('game_delete_instance failed', error);
-		}
+		const response = await sendAndWait<GameReply<GameInstancesJson>>(
+			MessageType.GAME_DELETE_INSTANCE,
+			{ id }
+		);
+		if ('error' in response) throw new GameCommandError(response.error, response.code);
+		this.#adoptInstances(ticket, response);
 	}
 
 	async selectInstance(id: string): Promise<void> {
 		const ticket = this.#instancesGuard.next();
-		try {
-			const response = await sendAndWait<GameReply<GameInstancesJson>>(
-				MessageType.GAME_SELECT_INSTANCE,
-				{ id }
-			);
-			this.#adoptInstances(ticket, response);
-		} catch (error) {
-			console.error('game_select_instance failed', error);
-		}
+		const response = await sendAndWait<GameReply<GameInstancesJson>>(
+			MessageType.GAME_SELECT_INSTANCE,
+			{ id }
+		);
+		if ('error' in response) throw new GameCommandError(response.error, response.code);
+		this.#adoptInstances(ticket, response);
 	}
 
 	async testInstance(fields: GameInstanceFields): Promise<GameTestInstanceJson> {

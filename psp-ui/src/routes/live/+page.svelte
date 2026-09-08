@@ -2,10 +2,12 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import * as m from '$i18n/messages';
-	import { Card, Spinner } from '$components/ui';
+	import { Card, Popover, Spinner } from '$components/ui';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { SidebarDetail } from '$components/layout';
 	import PalSelectModal from '$components/modals/pal-select/PalSelectModal.svelte';
+	import LiveInstanceModal from '$components/live/LiveInstanceModal.svelte';
+	import LiveInstanceSwitcher from '$components/live/LiveInstanceSwitcher.svelte';
 	import LivePalEditModal from '$components/live/LivePalEditModal.svelte';
 	import LivePlayerDetail from '$components/live/LivePlayerDetail.svelte';
 	import LivePartyRail from '$components/live/LivePartyRail.svelte';
@@ -18,6 +20,8 @@
 	import { getGameState, getModalState, getToastState, GameCommandError } from '$states';
 	import type {
 		GameHealPalsJson,
+		GameInstanceFields,
+		GameInstanceJson,
 		GamePalEditRequest,
 		GamePalJson,
 		GamePlayerJson
@@ -112,6 +116,9 @@
 	let healingPalId = $state<string | null>(null);
 	let movePendingSlot = $state<number | null>(null);
 	let levelBusy = $state(false);
+	let instanceSelectPending = $state(false);
+	let editingInstanceId = $state<string | null>(null);
+	let instancesPolling = false;
 
 	const chipState = $derived(bridgeChipState(gameState.status, gameState.statusError));
 	const modeLabelKey = $derived(
@@ -157,6 +164,11 @@
 		!selectedPlayer ? 'sm:w-72 md:w-100' : partyExpanded ? 'sm:w-90' : 'sm:w-20'
 	);
 
+	const activeInstanceConnected = $derived(gameState.status !== null);
+	const activeInstance = $derived(
+		gameState.instances.find((instance) => instance.id === gameState.activeInstanceId) ?? null
+	);
+
 	async function refresh() {
 		await Promise.all([
 			gameState.refreshStatus(),
@@ -180,12 +192,79 @@
 		}
 	}
 
+	async function pollInstances() {
+		if (instancesPolling) return;
+		instancesPolling = true;
+		try {
+			await gameState.refreshInstances();
+		} finally {
+			instancesPolling = false;
+		}
+	}
+
+	function defaultInstanceFields(): GameInstanceFields {
+		return { name: '', host: '127.0.0.1', port: 8788, token: '' };
+	}
+
+	async function saveInstance(fields: GameInstanceFields) {
+		try {
+			if (editingInstanceId) {
+				await gameState.updateInstance(editingInstanceId, fields);
+			} else {
+				await gameState.addInstance(fields);
+			}
+			modal.closeModal();
+		} catch (error) {
+			toast.add(commandErrorText(error), m.error(), 'error');
+		}
+	}
+
+	function openAddInstanceModal() {
+		editingInstanceId = null;
+		// @ts-ignore
+		void modal.showModal(LiveInstanceModal, {
+			initial: defaultInstanceFields(),
+			ontest: (fields: GameInstanceFields) => gameState.testInstance(fields),
+			onsave: saveInstance,
+			oncancel: () => modal.closeModal()
+		});
+	}
+
+	function openEditInstanceModal(instance: GameInstanceJson) {
+		editingInstanceId = instance.id;
+		// @ts-ignore
+		void modal.showModal(LiveInstanceModal, {
+			initial: { name: instance.name, host: instance.host, port: instance.port, token: '' },
+			ontest: (fields: GameInstanceFields) => gameState.testInstance(fields),
+			onsave: saveInstance,
+			oncancel: () => modal.closeModal()
+		});
+	}
+
+	async function selectInstance(id: string) {
+		if (instanceSelectPending) return;
+		instanceSelectPending = true;
+		try {
+			await gameState.selectInstance(id);
+		} catch (error) {
+			toast.add(commandErrorText(error), m.error(), 'error');
+		} finally {
+			instanceSelectPending = false;
+		}
+	}
+
 	onMount(() => {
 		void refresh();
+		void pollInstances();
 	});
 
 	$effect(() => {
 		const interval = setInterval(() => void refresh(), 5000);
+		return () => clearInterval(interval);
+	});
+
+	$effect(() => {
+		const interval = setInterval(() => void pollInstances(), 5000);
 		return () => clearInterval(interval);
 	});
 
@@ -552,6 +631,40 @@
 				</p>
 			</div>
 		</div>
+
+		<Popover position="bottom-start" popoverClass="w-80 max-h-96 overflow-y-auto">
+			<button
+				type="button"
+				id="live-instance-switcher-trigger"
+				aria-label={m.live_instance_switch()}
+				class="bg-surface-800 hover:bg-surface-700 flex shrink-0 items-center gap-2 rounded-sm px-2 py-1 text-xs"
+			>
+				<Icon icon="tabler:server-2" size={16} />
+				<span class="max-w-32 truncate">{activeInstance?.name ?? m.live_instance_switch()}</span>
+				<Icon icon="tabler:chevron-down" size={14} class="text-surface-400" />
+			</button>
+
+			{#snippet content({ close }: { close: () => void })}
+				<LiveInstanceSwitcher
+					instances={gameState.instances}
+					activeId={gameState.activeInstanceId}
+					activeConnected={activeInstanceConnected}
+					pending={instanceSelectPending}
+					onselect={(id) => {
+						close();
+						void selectInstance(id);
+					}}
+					onedit={(instance) => {
+						close();
+						openEditInstanceModal(instance);
+					}}
+					onadd={() => {
+						close();
+						openAddInstanceModal();
+					}}
+				/>
+			{/snippet}
+		</Popover>
 
 		{#if selectedPlayer}
 			<div class="flex min-w-0 items-center gap-3" in:fade={{ delay: 150, duration: 250 }}>
