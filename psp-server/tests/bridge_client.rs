@@ -3,7 +3,7 @@ mod common;
 use std::time::Duration;
 
 use common::mock_mod::{spawn_mock_mod, spawn_mock_mod_on, write_endpoint_file, MockMod};
-use psp_server::bridge::service::{BridgeError, BridgeService, BridgeStatus};
+use psp_server::bridge::service::{BridgeError, BridgeService, BridgeStatus, BridgeTarget};
 use tokio_util::sync::CancellationToken;
 
 const STATUS_FIXTURE: &str = include_str!("../../psp-amity/fixtures/status.json");
@@ -14,6 +14,16 @@ const CAPABILITIES_FIXTURE: &str = include_str!("../../psp-amity/fixtures/capabi
 
 fn fixture_data(json: &str) -> serde_json::Value {
     serde_json::from_str::<serde_json::Value>(json).unwrap()["data"].clone()
+}
+
+fn bridge_target(addr: std::net::SocketAddr, token: &str) -> BridgeTarget {
+    BridgeTarget {
+        id: "test".to_string(),
+        name: "Mock".to_string(),
+        host: addr.ip().to_string(),
+        port: addr.port(),
+        token: token.to_string(),
+    }
 }
 
 static BRIDGE_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
@@ -100,6 +110,7 @@ async fn discovery_connects_and_reports_status() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
 
     let status = wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
@@ -130,6 +141,7 @@ async fn get_status_returns_the_configured_payload() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -164,6 +176,7 @@ async fn get_players_returns_the_configured_payload() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -202,6 +215,7 @@ async fn mod_error_passes_through_as_typed_error() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -273,6 +287,7 @@ async fn wrong_token_backs_off_and_records_unauthorized() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "wrong-token")));
 
     let status = wait_for_status(
         service.status_rx(),
@@ -313,6 +328,7 @@ async fn reconnects_after_the_mod_restarts_on_the_same_port() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -362,6 +378,7 @@ async fn shutdown_completes_quickly_with_a_request_in_flight() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -414,6 +431,7 @@ async fn a_stalled_dial_fails_pending_requests_offline_and_then_records_a_transp
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     tokio::time::sleep(Duration::from_millis(200)).await;
 
     let started = tokio::time::Instant::now();
@@ -496,6 +514,7 @@ async fn command_round_trips_the_mod_result_verbatim() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -531,6 +550,7 @@ async fn command_mod_error_passes_through_as_typed_error() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -566,6 +586,7 @@ async fn get_capabilities_round_trips_the_mod_payload() {
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })
@@ -601,6 +622,7 @@ async fn unsolicited_capabilities_push_is_dropped_without_disturbing_pending_req
 
     let service = BridgeService::new();
     service.start();
+    service.set_target(Some(bridge_target(addr, "secret-token")));
     wait_for_status(service.status_rx(), Duration::from_secs(5), "connect", |s| {
         s.connected
     })

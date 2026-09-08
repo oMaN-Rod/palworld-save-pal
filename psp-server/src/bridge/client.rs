@@ -11,9 +11,8 @@ use tokio_tungstenite::tungstenite::Message;
 use tokio_tungstenite::{MaybeTlsStream, WebSocketStream};
 use tokio_util::sync::CancellationToken;
 
-use super::endpoint::DiscoveredEndpoint;
 use super::protocol::{BridgeEnvelope, BridgeErrorData, BRIDGE_PROTOCOL_VERSION};
-use super::service::BridgeError;
+use super::service::{BridgeError, BridgeTarget};
 
 type WsStream = WebSocketStream<MaybeTlsStream<TcpStream>>;
 pub type WsWriteHalf = SplitSink<WsStream, Message>;
@@ -60,6 +59,7 @@ pub enum ConnectError {
 pub enum ConnectionEnd {
     Cancelled,
     Disconnected,
+    Retarget,
 }
 
 pub struct Connected {
@@ -115,10 +115,10 @@ fn recv_error_to_connect_error(error: RecvOutcome) -> ConnectError {
 }
 
 pub async fn connect_and_handshake(
-    endpoint: &DiscoveredEndpoint,
+    target: &BridgeTarget,
     cancel: &CancellationToken,
 ) -> Result<Connected, ConnectError> {
-    let url = format!("ws://127.0.0.1:{}", endpoint.port);
+    let url = format!("ws://{}:{}", target.host, target.port);
     let socket = tokio::select! {
         _ = cancel.cancelled() => return Err(ConnectError::Cancelled),
         connected = tokio_tungstenite::connect_async(&url) => match connected {
@@ -168,7 +168,7 @@ pub async fn connect_and_handshake(
         &mut write,
         AUTH_ID,
         "auth",
-        serde_json::json!({ "proof": compute_proof(&endpoint.token, &nonce) }),
+        serde_json::json!({ "proof": compute_proof(&target.token, &nonce) }),
     )
     .await
     .map_err(|_| ConnectError::Transport)?;
@@ -197,12 +197,17 @@ pub async fn pump(
     mut read: WsReadHalf,
     cancel: &CancellationToken,
     command_rx: &mut mpsc::Receiver<Command>,
+    target_rx: &mut tokio::sync::watch::Receiver<Option<BridgeTarget>>,
 ) -> ConnectionEnd {
     let mut pending: HashMap<String, oneshot::Sender<Result<Value, BridgeError>>> = HashMap::new();
 
     let end = loop {
         tokio::select! {
             _ = cancel.cancelled() => break ConnectionEnd::Cancelled,
+            changed = target_rx.changed() => {
+                if changed.is_err() { break ConnectionEnd::Disconnected; }
+                break ConnectionEnd::Retarget;
+            }
             command = command_rx.recv() => {
                 match command {
                     None => break ConnectionEnd::Disconnected,
@@ -300,15 +305,15 @@ mod tests {
             let _ = ws.send(Message::Text(error.to_string().into())).await;
         });
 
-        let endpoint = DiscoveredEndpoint {
-            pid: std::process::id(),
+        let target = BridgeTarget {
+            id: "solo".to_string(),
             name: "Solo".to_string(),
+            host: "127.0.0.1".to_string(),
             port: addr.port(),
             token: "irrelevant".to_string(),
-            bind: "127.0.0.1".to_string(),
         };
         let cancel = CancellationToken::new();
-        let result = connect_and_handshake(&endpoint, &cancel).await;
+        let result = connect_and_handshake(&target, &cancel).await;
         server.await.unwrap();
 
         match result {

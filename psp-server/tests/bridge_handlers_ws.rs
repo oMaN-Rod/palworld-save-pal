@@ -4,7 +4,7 @@ use std::time::Duration;
 
 use common::mock_mod::{spawn_mock_mod, write_endpoint_file, MockMod};
 use common::{connect, next_json, send_json, start_test_server};
-use psp_server::bridge::service::BridgeStatus;
+use psp_server::bridge::service::{BridgeStatus, BridgeTarget};
 use psp_server::messages::MessageType;
 use psp_server::signal::remote_ctl::REMOTE_DENYLIST;
 
@@ -87,6 +87,13 @@ async fn start_server_connected_to(
     std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.to_str().unwrap());
 
     let server = start_test_server().await;
+    server.handle.services.bridge.set_target(Some(BridgeTarget {
+        id: "test".to_string(),
+        name: "Mock".to_string(),
+        host: addr.ip().to_string(),
+        port: addr.port(),
+        token: "secret-token".to_string(),
+    }));
     wait_for_connected(server.handle.services.bridge.status_rx()).await;
     (server, addr, mock_cancel, mock_handle)
 }
