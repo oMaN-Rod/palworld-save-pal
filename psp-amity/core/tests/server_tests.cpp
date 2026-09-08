@@ -1,4 +1,5 @@
 #include <doctest/doctest.h>
+#include <amity/hmac.hpp>
 #include <amity/server.hpp>
 #include <amity/protocol.hpp>
 
@@ -123,11 +124,13 @@ amity::Envelope must_parse(const std::optional<std::string>& text) {
 
 void handshake(TestClient& client, const std::string& token) {
     REQUIRE(client.wait_open());
-    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":1}})");
+    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
     auto helloReply = must_parse(client.wait_message());
     REQUIRE(helloReply.type == "hello_ok");
+    std::string nonce = helloReply.data["nonce"].get<std::string>();
 
-    client.send(R"({"id":"2","type":"auth","data":{"token":")" + token + R"("}})");
+    std::string proof = amity::hmac_sha256_hex(token, nonce);
+    client.send(R"({"id":"2","type":"auth","data":{"proof":")" + proof + R"("}})");
     auto authReply = must_parse(client.wait_message());
     REQUIRE(authReply.type == "auth_ok");
 
@@ -152,13 +155,15 @@ TEST_CASE("full handshake then get_status round-trip") {
 
     TestClient client(server.port());
     REQUIRE(client.wait_open());
-    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":1}})");
+    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
     auto helloReply = must_parse(client.wait_message());
     CHECK(helloReply.type == "hello_ok");
     CHECK(helloReply.data["mod"] == "psp-amity");
     CHECK(helloReply.data["version"] == "0.1.0");
+    std::string nonce = helloReply.data["nonce"].get<std::string>();
 
-    client.send(R"({"id":"2","type":"auth","data":{"token":"s3cr3t"}})");
+    std::string proof = amity::hmac_sha256_hex("s3cr3t", nonce);
+    client.send(R"({"id":"2","type":"auth","data":{"proof":")" + proof + R"("}})");
     auto authReply = must_parse(client.wait_message());
     CHECK(authReply.type == "auth_ok");
 
@@ -210,16 +215,18 @@ TEST_CASE("wrong token exhausts attempts and closes the connection") {
 
     TestClient client(server.port());
     REQUIRE(client.wait_open());
-    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":1}})");
-    must_parse(client.wait_message());
+    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
+    auto helloReply = must_parse(client.wait_message());
+    std::string nonce = helloReply.data["nonce"].get<std::string>();
+    std::string wrongProof = amity::hmac_sha256_hex("wrong", nonce);
 
     for (int i = 0; i < 2; ++i) {
-        client.send(R"({"id":"2","type":"auth","data":{"token":"wrong"}})");
+        client.send(R"({"id":"2","type":"auth","data":{"proof":")" + wrongProof + R"("}})");
         auto reply = must_parse(client.wait_message());
         CHECK(reply.type == "error");
         CHECK(reply.data["code"] == "unauthorized");
     }
-    client.send(R"({"id":"2","type":"auth","data":{"token":"wrong"}})");
+    client.send(R"({"id":"2","type":"auth","data":{"proof":")" + wrongProof + R"("}})");
     auto lastReply = must_parse(client.wait_message());
     CHECK(lastReply.data["code"] == "unauthorized");
     CHECK(client.wait_closed());
@@ -272,7 +279,7 @@ TEST_CASE("stop() with a connected client returns cleanly") {
 
     TestClient client(server.port());
     REQUIRE(client.wait_open());
-    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":1}})");
+    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
     must_parse(client.wait_message());
 
     server.stop();
@@ -380,10 +387,12 @@ TEST_CASE("capabilities push follows auth_ok with the configured snapshot") {
 
     TestClient client(server.port());
     REQUIRE(client.wait_open());
-    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":1}})");
-    must_parse(client.wait_message());
+    client.send(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
+    auto helloReply = must_parse(client.wait_message());
+    std::string nonce = helloReply.data["nonce"].get<std::string>();
 
-    client.send(R"({"id":"2","type":"auth","data":{"token":"s3cr3t"}})");
+    std::string proof = amity::hmac_sha256_hex("s3cr3t", nonce);
+    client.send(R"({"id":"2","type":"auth","data":{"proof":")" + proof + R"("}})");
     auto authReply = must_parse(client.wait_message());
     CHECK(authReply.type == "auth_ok");
 

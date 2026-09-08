@@ -6,7 +6,7 @@
 
 namespace amity {
 
-inline constexpr int PROTOCOL_VERSION = 1;
+inline constexpr int PROTOCOL_VERSION = 2;
 
 struct Envelope {
     std::string id;

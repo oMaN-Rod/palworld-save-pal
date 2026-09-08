@@ -1,5 +1,7 @@
 #include <amity/auth.hpp>
 
+#include <amity/hmac.hpp>
+
 namespace amity {
 
 bool fixed_time_equals(std::string_view a, std::string_view b) {
@@ -13,8 +15,10 @@ bool fixed_time_equals(std::string_view a, std::string_view b) {
     return diff == 0;
 }
 
-Session::Session(std::string expected_token, nlohmann::json hello_info, int max_auth_attempts)
+Session::Session(std::string expected_token, std::string nonce, nlohmann::json hello_info,
+                 int max_auth_attempts)
     : expected_token_(std::move(expected_token)),
+      nonce_(std::move(nonce)),
       hello_info_(std::move(hello_info)),
       max_auth_attempts_(max_auth_attempts) {}
 
@@ -71,6 +75,7 @@ Session::Output Session::on_message(const std::string& text) {
             }
             nlohmann::json data = hello_info_;
             data["protocolVersion"] = PROTOCOL_VERSION;
+            data["nonce"] = nonce_;
             Output out;
             out.send.push_back(make_reply(e.id, "hello_ok", std::move(data)));
             state_ = State::WaitAuth;
@@ -83,17 +88,17 @@ Session::Output Session::on_message(const std::string& text) {
     }
 
     if (e.type == "auth") {
-        std::string token = (e.data.contains("token") && e.data["token"].is_string())
-            ? e.data["token"].get<std::string>()
+        std::string proof = (e.data.contains("proof") && e.data["proof"].is_string())
+            ? e.data["proof"].get<std::string>()
             : std::string();
-        if (fixed_time_equals(token, expected_token_)) {
+        if (!proof.empty() && fixed_time_equals(proof, hmac_sha256_hex(expected_token_, nonce_))) {
             state_ = State::Ready;
             Output out;
             out.send.push_back(make_reply(e.id, "auth_ok", nlohmann::json::object()));
             return out;
         }
         ++auth_attempts_;
-        return reject(e, "unauthorized", "invalid token", auth_attempts_ >= max_auth_attempts_);
+        return reject(e, "unauthorized", "invalid proof", auth_attempts_ >= max_auth_attempts_);
     }
     if (e.type == "hello") {
         return reject(e, "bad_request", "hello already received", true);

@@ -1,6 +1,7 @@
 #include <amity/server.hpp>
 
 #include <amity/protocol.hpp>
+#include <amity/token.hpp>
 #include <ixwebsocket/IXNetSystem.h>
 #include <ixwebsocket/IXWebSocketServer.h>
 
@@ -126,7 +127,7 @@ void BridgeServer::handle_message(std::shared_ptr<ix::ConnectionState> state, ix
 
     if (msg->type == ix::WebSocketMessageType::Open) {
         std::lock_guard<std::mutex> lock(sessions_mutex_);
-        sessions_[key] = std::make_unique<Session>(cfg_.token, cfg_.hello_info);
+        sessions_[key] = std::make_unique<Session>(cfg_.token, generate_token_hex(), cfg_.hello_info);
         return;
     }
 

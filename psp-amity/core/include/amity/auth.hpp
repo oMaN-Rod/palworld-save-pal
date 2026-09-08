@@ -19,7 +19,8 @@ public:
         std::optional<Envelope> request;
     };
 
-    Session(std::string expected_token, nlohmann::json hello_info, int max_auth_attempts = 3);
+    Session(std::string expected_token, std::string nonce, nlohmann::json hello_info,
+            int max_auth_attempts = 3);
 
     Output on_message(const std::string& text);
     bool ready() const;
@@ -31,6 +32,7 @@ private:
     Output finish(Output out);
 
     std::string expected_token_;
+    std::string nonce_;
     nlohmann::json hello_info_;
     int max_auth_attempts_;
     int auth_attempts_ = 0;
