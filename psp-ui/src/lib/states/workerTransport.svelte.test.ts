@@ -6,6 +6,7 @@ class FakeWorker {
 	posted: unknown[] = [];
 	transfers: Transferable[][] = [];
 	onmessage: ((event: MessageEvent<unknown>) => void) | null = null;
+	onerror: ((event: unknown) => void) | null = null;
 	postMessage(data: unknown, transfer: Transferable[] = []) {
 		this.posted.push(data);
 		this.transfers.push(transfer);
@@ -112,5 +113,87 @@ describe('WorkerTransport', () => {
 
 		expect(ws.message).toEqual(frame);
 		void dispatched;
+	});
+});
+
+describe('WorkerTransport.sendAndWait', () => {
+	it('rejects a request in flight when the worker tears down, instead of hanging forever', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+
+		const pending = ws.sendAndWait({ type: 'ping' });
+		let settled = false;
+		const guard = pending.catch(() => {});
+		guard.finally(() => {
+			settled = true;
+		});
+
+		unload.hide(false);
+		await guard;
+
+		expect(settled).toBe(true);
+		await expect(pending).rejects.toThrow();
+	});
+
+	it('lets a caller with a catch observe the rejection cleanly', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+
+		let caught: unknown;
+		const handled = ws.sendAndWait({ type: 'ping' }).catch((err) => {
+			caught = err;
+		});
+
+		unload.hide(false);
+		await handled;
+
+		expect(caught).toBeInstanceOf(Error);
+	});
+
+	it('rejects a pending request on a worker error, instead of hanging forever', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+
+		let caught: unknown;
+		const handled = ws.sendAndWait({ type: 'ping' }).catch((err) => {
+			caught = err;
+		});
+
+		workers[0].onerror?.(undefined);
+		await handled;
+
+		expect(caught).toBeInstanceOf(Error);
+	});
+
+	it('still resolves requests made against a reconnected worker', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+
+		const dropped = ws.sendAndWait({ type: 'ping' }).catch(() => {});
+		unload.hide(false);
+		await dropped;
+
+		ws.connect({ goto: async () => {} });
+		expect(workers.length).toBe(2);
+
+		const pending = ws.sendAndWait({ type: 'pong' });
+		workers[1].onmessage?.({
+			data: JSON.stringify({ type: 'pong', ok: true })
+		} as MessageEvent<unknown>);
+
+		await expect(pending).resolves.toEqual({ type: 'pong', ok: true });
+	});
+
+	it('does not reject a request whose reply already arrived before a later teardown', async () => {
+		const ws = transport();
+		ws.connect({ goto: async () => {} });
+
+		const pending = ws.sendAndWait({ type: 'ping' });
+		workers[0].onmessage?.({
+			data: JSON.stringify({ type: 'ping', ok: true })
+		} as MessageEvent<unknown>);
+		await expect(pending).resolves.toEqual({ type: 'ping', ok: true });
+
+		unload.hide(false);
 	});
 });

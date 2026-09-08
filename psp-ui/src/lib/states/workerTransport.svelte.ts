@@ -1,5 +1,5 @@
 import { getDispatcher } from '$lib/ws/dispatcher';
-import type { WSHandlerContext } from '$lib/ws/types';
+import type { Transport, WSHandlerContext } from '$lib/ws/types';
 import type { Message } from '$types';
 
 type UnloadTarget = Pick<EventTarget, 'addEventListener' | 'removeEventListener'>;
@@ -9,14 +9,15 @@ export type WorkerTransportOptions = {
 	unloadTarget?: UnloadTarget | null;
 };
 
-export class WorkerTransport {
+export class WorkerTransport implements Transport {
+	readonly kind = 'worker' as const;
 	#worker: Worker | null = null;
 	// $state.raw: dispatched frames are handed to the dispatcher and forgotten —
 	// nothing reads `ws.message` deeply, so a deep proxy only adds per-payload cost.
 	#message = $state.raw<Message | null>(null);
 	#connected = $state(false);
 	#dispatcher = getDispatcher();
-	#queue = new Map<string, (value: unknown) => void>();
+	#queue = new Map<string, { resolve: (value: unknown) => void; reject: (err: unknown) => void }>();
 	#createWorker: () => Worker;
 	#unloadTarget: UnloadTarget | null;
 
@@ -54,18 +55,30 @@ export class WorkerTransport {
 			const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
 			if (!data) return;
 			if (data.type && this.#queue.has(data.type)) {
-				this.#queue.get(data.type)!(data);
-				this.#queue.delete(data.type);
-				return;
+				const waiter = this.#queue.get(data.type);
+				if (waiter) {
+					waiter.resolve(data);
+					this.#queue.delete(data.type);
+					return;
+				}
 			}
 			this.#message = data;
 			await this.#dispatcher.dispatch(data, context);
 		};
+		this.#worker.onerror = () => {
+			this.#rejectPending(new Error('Worker connection error'));
+		};
 		this.#connected = true;
+	}
+
+	#rejectPending(reason: unknown) {
+		for (const waiter of this.#queue.values()) waiter.reject(reason);
+		this.#queue.clear();
 	}
 
 	disconnect() {
 		this.#unloadTarget?.removeEventListener('pagehide', this.#onPageHide);
+		this.#rejectPending(new Error('Worker connection closed'));
 		this.#worker?.terminate();
 		this.#worker = null;
 		this.#connected = false;
@@ -93,15 +106,15 @@ export class WorkerTransport {
 	): Promise<T> {
 		const worker = this.#worker;
 		if (!worker) throw new Error('The worker transport is not connected.');
-		return new Promise<T>((resolve) => {
-			this.#queue.set(message.type, resolve as (value: unknown) => void);
+		return new Promise<T>((resolve, reject) => {
+			this.#queue.set(message.type, { resolve: resolve as (value: unknown) => void, reject });
 			worker.postMessage(message, transfer);
 		});
 	}
 
 	async sendAndWait(messageData: any): Promise<any> {
-		return new Promise((resolve) => {
-			this.#queue.set(messageData.type, resolve);
+		return new Promise((resolve, reject) => {
+			this.#queue.set(messageData.type, { resolve, reject });
 			this.send(JSON.stringify(messageData));
 		});
 	}

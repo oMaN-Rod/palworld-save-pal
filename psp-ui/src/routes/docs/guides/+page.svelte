@@ -15,6 +15,12 @@
 			description: 'Understand save file formats, backups, and conversions.',
 			href: '/docs/guides/save-management',
 			icon: 'ph:hard-drives'
+		},
+		{
+			title: 'Remote Access',
+			description: 'Pair a phone or tablet to view your world live.',
+			href: '/docs/guides/remote-access',
+			icon: 'tabler:device-mobile'
 		}
 	];
 </script>

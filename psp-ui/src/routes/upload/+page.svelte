@@ -15,11 +15,13 @@
 		getActiveDirectory
 	} from '$lib/fs';
 	import { isWebBuild } from '$lib/utils/platform';
+	import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
 	let appState = getAppState();
 	let toast = getToastState();
+	const remoteMode = getRemoteMode();
 
 	let recentName = $state<string | null>(null);
 
@@ -55,7 +57,7 @@
 </script>
 
 <div class="animate-fade-in flex h-full w-full flex-col items-center justify-center space-y-4">
-	{#if recentName && !appState.saveFile}
+	{#if recentName && !appState.saveFile && !remoteMode.active}
 		<Button variant="secondary" onclick={resume}>
 			<Icon icon="tabler:folder-open" size={16} />
 			{m.upload_resume({ name: recentName })}
@@ -76,15 +78,20 @@
 				</div>
 				<div class="flex flex-col space-y-2">
 					<Tooltip>
-						<Button variant="primary" class="font-bold" onclick={handleDownloadSaveFile}>
+						<Button
+							variant="primary"
+							class="font-bold"
+							onclick={handleDownloadSaveFile}
+							disabled={remoteMode.active}
+						>
 							<Icon icon="tabler:download" />
 							{m.download()}
 						</Button>
 						{#snippet popup()}
-							<span>{m.download_modified_save()}</span>
+							<span>{remoteMode.active ? m.signal_remote_mode_hint() : m.download_modified_save()}</span>
 						{/snippet}
 					</Tooltip>
-					{#if isWebBuild && getActiveDirectory().writable}
+					{#if isWebBuild && getActiveDirectory().writable && !remoteMode.active}
 						<Button variant="secondary" onclick={saveToFolder}>
 							<Icon icon="tabler:folder-open" size={16} />
 							{m.upload_save_to_folder()}
@@ -100,10 +107,14 @@
 			</div>
 		</Card>
 	{/if}
-	<div class="flex w-full max-w-xl flex-col items-center px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
-		<SaveDropzone onLoad={startSaveLoad} />
-		<p class="mt-2 max-w-md text-center text-xs opacity-60">
-			{m.upload_path_hint()}
-		</p>
-	</div>
+	{#if !remoteMode.active}
+		<div class="flex w-full max-w-xl flex-col items-center px-4 sm:w-3/4 md:w-1/2 lg:w-1/3">
+			<SaveDropzone onLoad={startSaveLoad} />
+			<p class="mt-2 max-w-md text-center text-xs opacity-60">
+				{m.upload_path_hint()}
+			</p>
+		</div>
+	{:else}
+		<p class="max-w-md px-4 text-center text-sm opacity-60">{m.signal_remote_mode_hint()}</p>
+	{/if}
 </div>

@@ -29,7 +29,9 @@ class NavigationStateManager implements NavigationState {
 
 	saveAndNavigate(page: string): void {
 		if (!this.#initialLoad && page !== 'save') {
-			this.#appState.saveState();
+			this.#appState.saveState().catch((error) => {
+				console.error('Error saving state on navigate:', error);
+			});
 		}
 		this.#activePage = page;
 		this.#initialLoad = false;
@@ -46,7 +48,9 @@ class NavigationStateManager implements NavigationState {
 
 	set activeTab(tab: Tab) {
 		if (!this.#initialLoad) {
-			this.#appState.saveState();
+			this.#appState.saveState().catch((error) => {
+				console.error('Error saving state on navigate:', error);
+			});
 		}
 		this.#activeTab = tab;
 		this.#initialLoad = false;

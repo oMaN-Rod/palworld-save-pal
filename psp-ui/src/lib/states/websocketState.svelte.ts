@@ -1,11 +1,12 @@
 import { PUBLIC_WS_URL } from '$env/static/public';
 import { getDispatcher } from '$lib/ws/dispatcher';
-import type { WSHandlerContext } from '$lib/ws/types';
+import type { Transport, WSHandlerContext } from '$lib/ws/types';
 import { type Message } from '$types';
 
 const RECONNECT_DELAY = 5000;
 
-class SocketState {
+class SocketState implements Transport {
+	readonly kind = 'ws' as const;
 	#clientId = Date.now();
 	#websocket!: WebSocket;
 	// $state.raw: handler-routed frames are dispatched and forgotten — nothing
@@ -13,7 +14,7 @@ class SocketState {
 	#message = $state.raw<Message | null>(null);
 	#connected = $state(false);
 	#dispatcher = getDispatcher();
-	#messageQueue = new Map<string, (value: any) => void>();
+	#messageQueue = new Map<string, { resolve: (value: any) => void; reject: (err: unknown) => void }>();
 
 	connect(context: WSHandlerContext) {
 		const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
@@ -22,7 +23,7 @@ class SocketState {
 
 		this.#websocket.onopen = () => {
 			this.#connected = true;
-			console.log('Connected to backend!');
+			if (import.meta.env.DEV) console.log('Connected to backend!');
 		};
 
 		this.#websocket.onmessage = async (event) => {
@@ -33,9 +34,9 @@ class SocketState {
 			// through the #message $state proxy makes every consumer read through a
 			// deeply reactive proxy (thousands of tracked reads for large payloads).
 			if (data.type && this.#messageQueue.has(data.type)) {
-				const resolve = this.#messageQueue.get(data.type);
-				if (resolve) {
-					resolve(data);
+				const waiter = this.#messageQueue.get(data.type);
+				if (waiter) {
+					waiter.resolve(data);
 					this.#messageQueue.delete(data.type);
 					return;
 				}
@@ -53,8 +54,14 @@ class SocketState {
 
 		this.#websocket.onclose = () => {
 			this.#connected = false;
+			this.#rejectPending(new Error('WebSocket connection closed'));
 			setTimeout(() => this.connect(context), RECONNECT_DELAY);
 		};
+	}
+
+	#rejectPending(reason: unknown) {
+		for (const waiter of this.#messageQueue.values()) waiter.reject(reason);
+		this.#messageQueue.clear();
 	}
 
 	isConnected(): boolean {
@@ -83,9 +90,9 @@ class SocketState {
 	}
 
 	async sendAndWait(messageData: any): Promise<any> {
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 			const messageType = messageData.type;
-			this.#messageQueue.set(messageType, resolve);
+			this.#messageQueue.set(messageType, { resolve, reject });
 			this.send(JSON.stringify(messageData));
 		});
 	}
@@ -113,7 +120,53 @@ import { WorkerTransport } from './workerTransport.svelte';
 
 // Vite statically replaces `import.meta.env.VITE_TRANSPORT`; unset (desktop/Docker
 // builds) → undefined → the WebSocket transport. `build:web` sets it to 'worker'.
-const socketStateInstance =
+const bootTransport: Transport =
 	import.meta.env.VITE_TRANSPORT === 'worker' ? new WorkerTransport() : new SocketState();
 
-export const getSocketState = () => socketStateInstance;
+let delegate = $state<Transport>(bootTransport);
+let bootContext: WSHandlerContext | null = null;
+
+const transportFacade: Transport = {
+	get kind() {
+		return delegate.kind;
+	},
+	connect(context: WSHandlerContext) {
+		bootContext = context;
+		delegate.connect(context);
+	},
+	isConnected() {
+		return delegate.isConnected();
+	},
+	send(messageData: string) {
+		return delegate.send(messageData);
+	},
+	sendBytes(type: string, bytes: Uint8Array) {
+		return delegate.sendBytes(type, bytes);
+	},
+	sendAndWait(messageData: any) {
+		return delegate.sendAndWait(messageData);
+	},
+	clear(messageType: string) {
+		delegate.clear(messageType);
+	},
+	get message() {
+		return delegate.message;
+	},
+	set message(value: Message | null) {
+		delegate.message = value;
+	},
+	get connected() {
+		return delegate.connected;
+	}
+};
+
+export function setTransportDelegate(transport: Transport): void {
+	delegate = transport;
+	if (bootContext) transport.connect(bootContext);
+}
+
+export function resetTransportDelegate(): void {
+	delegate = bootTransport;
+}
+
+export const getSocketState = (): Transport => transportFacade;

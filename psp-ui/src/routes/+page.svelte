@@ -7,6 +7,7 @@
 	import {
 		Hero,
 		MapAdvantage,
+		Signal,
 		Values,
 		Features,
 		HowItWorks,
@@ -69,6 +70,7 @@
 	<main class="landing-page animate-fade-in flex w-full flex-col items-center">
 		<Hero onLoad={startSaveLoad} onResume={resume} {resumeName} />
 		<MapAdvantage />
+		<Signal />
 		<Values />
 		<Features />
 		<HowItWorks />

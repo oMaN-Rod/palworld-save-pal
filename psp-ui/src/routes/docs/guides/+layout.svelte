@@ -18,7 +18,8 @@
 	const guides = [
 		{ label: 'All Guides', href: '/docs/guides', slug: '' },
 		{ label: 'Server Setup', href: '/docs/guides/server-setup', slug: 'server-setup' },
-		{ label: 'Save Management', href: '/docs/guides/save-management', slug: 'save-management' }
+		{ label: 'Save Management', href: '/docs/guides/save-management', slug: 'save-management' },
+		{ label: 'Remote Access', href: '/docs/guides/remote-access', slug: 'remote-access' }
 	];
 
 	const activeGuide = $derived.by(() => {

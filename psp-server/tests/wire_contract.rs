@@ -1813,3 +1813,242 @@ fn gps_response_masking_is_neither_too_weak_nor_too_strong() {
         "a real nickname difference must NOT be masked away"
     );
 }
+
+#[test]
+fn chunk_envelope_shape_is_pinned() {
+    use psp_server::signal::framing::chunk_frame;
+
+    let oversized_frame =
+        serde_json::json!({"type":"get_version","data":"x".repeat(100 * 1024)}).to_string();
+    let mut next_id = 0u64;
+    let pieces = chunk_frame(oversized_frame, &mut next_id);
+    assert!(pieces.len() > 1, "a >64 KiB frame must split into chunks");
+
+    let first: Value = serde_json::from_str(&pieces[0]).unwrap();
+    assert_eq!(first["type"], "chunk");
+    let mut keys: Vec<&str> = first["data"]
+        .as_object()
+        .expect("chunk data is an object")
+        .keys()
+        .map(String::as_str)
+        .collect();
+    keys.sort();
+    assert_eq!(keys, vec!["data", "id", "part", "parts"]);
+    assert_eq!(first["data"]["id"], 0);
+    assert_eq!(first["data"]["part"], 0);
+    assert!(first["data"]["parts"].as_u64().unwrap() > 1);
+    assert!(first["data"]["data"].is_string());
+}
+
+async fn recv_ws_json(
+    socket: &mut (impl futures::Stream<Item = Result<Message, tokio_tungstenite::tungstenite::Error>>
+              + Unpin),
+) -> Value {
+    let frame = tokio::time::timeout(Duration::from_secs(10), socket.next())
+        .await
+        .expect("timed out waiting for a frame")
+        .expect("socket closed")
+        .unwrap();
+    serde_json::from_str(frame.to_text().unwrap()).unwrap()
+}
+
+#[tokio::test]
+async fn list_local_saves_is_refused_without_desktop_mode() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let handle = start_server(ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir: temp_dir.path().join("ui"),
+        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("wire.db"),
+        desktop_mode: false,
+    })
+    .await
+    .unwrap();
+
+    let (mut socket, _) = connect_async(format!("ws://{}/ws/wire-contract", handle.addr))
+        .await
+        .unwrap();
+    socket
+        .send(Message::Text(
+            serde_json::json!({"type": "list_local_saves"}).to_string(),
+        ))
+        .await
+        .unwrap();
+    let frame = recv_ws_json(&mut socket).await;
+
+    assert_eq!(frame["type"], "list_local_saves");
+    assert!(frame["data"]["error"].is_string());
+
+    handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn list_local_saves_response_shape_is_pinned() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let handle = start_server(ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir: temp_dir.path().join("ui"),
+        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("wire.db"),
+        desktop_mode: true,
+    })
+    .await
+    .unwrap();
+
+    let (mut socket, _) = connect_async(format!("ws://{}/ws/wire-contract", handle.addr))
+        .await
+        .unwrap();
+    socket
+        .send(Message::Text(
+            serde_json::json!({"type": "list_local_saves"}).to_string(),
+        ))
+        .await
+        .unwrap();
+    let frame = recv_ws_json(&mut socket).await;
+
+    assert_eq!(frame["type"], "list_local_saves");
+    let saves = frame["data"]["saves"]
+        .as_array()
+        .expect("data.saves is an array");
+    for save in saves {
+        let object = save.as_object().expect("each save is an object");
+        let mut keys: Vec<&str> = object.keys().map(String::as_str).collect();
+        keys.sort();
+        assert_eq!(keys, vec!["modified_ms", "name", "path", "save_type"]);
+    }
+
+    handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn browse_directory_is_refused_without_desktop_mode() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let browsed_dir = temp_dir.path().join("browsed");
+    std::fs::create_dir_all(&browsed_dir).unwrap();
+
+    let handle = start_server(ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir: temp_dir.path().join("ui"),
+        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("wire.db"),
+        desktop_mode: false,
+    })
+    .await
+    .unwrap();
+
+    let (mut socket, _) = connect_async(format!("ws://{}/ws/wire-contract", handle.addr))
+        .await
+        .unwrap();
+    socket
+        .send(Message::Text(
+            serde_json::json!({
+                "type": "browse_directory",
+                "data": {"path": browsed_dir.to_string_lossy()}
+            })
+            .to_string(),
+        ))
+        .await
+        .unwrap();
+    let frame = recv_ws_json(&mut socket).await;
+
+    assert_eq!(frame["type"], "browse_directory");
+    assert!(frame["data"]["error"].is_string());
+
+    handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn browse_directory_response_shape_is_pinned() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let browsed_dir = temp_dir.path().join("browsed");
+    std::fs::create_dir_all(browsed_dir.join("child_dir")).unwrap();
+    std::fs::write(browsed_dir.join("child_file.txt"), b"x").unwrap();
+
+    let handle = start_server(ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir: temp_dir.path().join("ui"),
+        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("wire.db"),
+        desktop_mode: true,
+    })
+    .await
+    .unwrap();
+
+    let (mut socket, _) = connect_async(format!("ws://{}/ws/wire-contract", handle.addr))
+        .await
+        .unwrap();
+    socket
+        .send(Message::Text(
+            serde_json::json!({
+                "type": "browse_directory",
+                "data": {"path": browsed_dir.to_string_lossy()}
+            })
+            .to_string(),
+        ))
+        .await
+        .unwrap();
+    let frame = recv_ws_json(&mut socket).await;
+
+    assert_eq!(frame["type"], "browse_directory");
+    assert_eq!(
+        frame["data"]["path"],
+        browsed_dir.to_string_lossy().as_ref()
+    );
+    let entries = frame["data"]["entries"]
+        .as_array()
+        .expect("data.entries is an array");
+    assert_eq!(entries.len(), 2);
+    for entry in entries {
+        let object = entry.as_object().expect("each entry is an object");
+        let mut keys: Vec<&str> = object.keys().map(String::as_str).collect();
+        keys.sort();
+        assert_eq!(keys, vec!["is_dir", "name", "path"]);
+    }
+    assert_eq!(entries[0]["name"], "child_dir");
+    assert_eq!(entries[0]["is_dir"], true);
+    assert_eq!(entries[1]["name"], "child_file.txt");
+    assert_eq!(entries[1]["is_dir"], false);
+
+    handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn browse_directory_of_a_missing_path_replies_with_an_inline_error() {
+    let temp_dir = tempfile::tempdir().unwrap();
+    let missing = temp_dir.path().join("does_not_exist");
+
+    let handle = start_server(ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir: temp_dir.path().join("ui"),
+        data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("wire.db"),
+        desktop_mode: true,
+    })
+    .await
+    .unwrap();
+
+    let (mut socket, _) = connect_async(format!("ws://{}/ws/wire-contract", handle.addr))
+        .await
+        .unwrap();
+    socket
+        .send(Message::Text(
+            serde_json::json!({
+                "type": "browse_directory",
+                "data": {"path": missing.to_string_lossy()}
+            })
+            .to_string(),
+        ))
+        .await
+        .unwrap();
+    let frame = recv_ws_json(&mut socket).await;
+
+    assert_eq!(frame["type"], "browse_directory");
+    assert!(frame["data"]["error"].is_string());
+
+    handle.shutdown().await;
+}

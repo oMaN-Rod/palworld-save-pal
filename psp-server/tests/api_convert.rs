@@ -24,6 +24,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     let db = psp_db::open(&db_path).await.unwrap();
     let game_data = Arc::new(psp_core::gamedata::GameData::load(&data_dir.join("json")).unwrap());
     let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
+    let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
     let server_services = Arc::new(psp_server::services::ServerServices::with_docker(Arc::new(
         psp_server::services::docker::mock::MockDocker::default(),
     )));
@@ -36,6 +37,7 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
             dialogs: Arc::new(psp_server::desktop_dialogs::NullDialogProvider),
             live_connections,
+            live_bus,
             ext: Arc::new(psp_server::server_ext::ServerExtRouter {
                 services: server_services,
             }),

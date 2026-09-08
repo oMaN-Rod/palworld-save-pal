@@ -1,4 +1,4 @@
-import { WorkerTransport } from '$lib/states/workerTransport.svelte';
+import type { WorkerTransport } from '$lib/states/workerTransport.svelte';
 import { getSocketState } from '$states/websocketState.svelte';
 
 // Worker-internal frame types, deliberately absent from `MessageType`: nothing
@@ -20,10 +20,11 @@ function replyError(reply: ConvertReply): Error | null {
  */
 export async function savToJson(bytes: Uint8Array, fileName: string): Promise<string> {
 	const transport = getSocketState();
-	if (transport instanceof WorkerTransport) {
-		const reply = await transport.sendRawAndWait<ConvertReply>({ type: SAV_TO_JSON, bytes }, [
-			bytes.buffer as ArrayBuffer
-		]);
+	if (transport.kind === 'worker') {
+		const reply = await (transport as unknown as WorkerTransport).sendRawAndWait<ConvertReply>(
+			{ type: SAV_TO_JSON, bytes },
+			[bytes.buffer as ArrayBuffer]
+		);
 		const error = replyError(reply);
 		if (error) throw error;
 		return reply.data.json ?? '';
@@ -39,8 +40,11 @@ export async function savToJson(bytes: Uint8Array, fileName: string): Promise<st
 /** Writes edited uesave JSON back to `.sav` bytes. */
 export async function jsonToSav(json: string): Promise<Uint8Array> {
 	const transport = getSocketState();
-	if (transport instanceof WorkerTransport) {
-		const reply = await transport.sendRawAndWait<ConvertReply>({ type: JSON_TO_SAV, json });
+	if (transport.kind === 'worker') {
+		const reply = await (transport as unknown as WorkerTransport).sendRawAndWait<ConvertReply>({
+			type: JSON_TO_SAV,
+			json
+		});
 		const error = replyError(reply);
 		if (error) throw error;
 		return reply.data.bytes ?? new Uint8Array();

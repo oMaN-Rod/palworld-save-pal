@@ -8,6 +8,7 @@
 	import { TextInputModal } from '$components/modals';
 	import { openWorldOptionModal } from '$components/worldoption';
 	import { send, pushProgressMessage } from '$lib/utils/websocketUtils';
+	import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 	import { MessageType } from '$types';
 	import type { GamepassSave } from '$types';
 	import { untrack } from 'svelte';
@@ -27,6 +28,7 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const overviewState = getOverviewState();
+	const remoteMode = getRemoteMode();
 	const isDesktopMode = PUBLIC_DESKTOP_MODE === 'true';
 
 	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`);
@@ -158,12 +160,25 @@
 							</Button>
 						{/if}
 						{#if isDesktopMode}
-							<Button variant="outline" size="sm" onclick={() => appState.writeSave()}>
+							<Button
+								variant="outline"
+								size="sm"
+								onclick={() =>
+									appState.writeSave().catch((error) => {
+										console.error('Error writing save:', error);
+									})}
+							>
 								<Icon icon="tabler:device-floppy" size={14} />
 								{c.save}
 							</Button>
 						{:else}
-							<Button variant="outline" size="sm" onclick={handleDownloadSaveFile}>
+							<Button
+								variant="outline"
+								size="sm"
+								onclick={handleDownloadSaveFile}
+								disabled={remoteMode.active}
+								title={remoteMode.active ? m.signal_remote_mode_hint() : undefined}
+							>
 								<Icon icon="tabler:download" size={14} />
 								{m.download()}
 							</Button>
