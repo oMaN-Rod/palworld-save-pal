@@ -1021,13 +1021,14 @@ async fn game_move_pal_forwards_both_ends() {
 }
 
 #[test]
-fn game_messages_are_not_on_the_remote_denylist() {
+fn game_messages_are_split_between_remote_reachable_and_denylisted() {
     let game_messages: Vec<MessageType> = MessageType::ALL
         .iter()
         .copied()
         .filter(|message_type| message_type.as_wire().starts_with("game_"))
         .collect();
-    for expected in [
+
+    let reachable = [
         MessageType::GameStatus,
         MessageType::GamePlayers,
         MessageType::GamePals,
@@ -1047,16 +1048,30 @@ fn game_messages_are_not_on_the_remote_denylist() {
         MessageType::GameAddPal,
         MessageType::GameEditPal,
         MessageType::GameEditPlayer,
-    ] {
+    ];
+    // Instance management (list/add/update/delete/select) exposes the user's LAN
+    // topology and saved credentials to a remote guest, and a test probe makes
+    // the host dial an arbitrary host:port on the guest's behalf -- all denied.
+    let denylisted = [
+        MessageType::GameInstances,
+        MessageType::GameAddInstance,
+        MessageType::GameUpdateInstance,
+        MessageType::GameDeleteInstance,
+        MessageType::GameSelectInstance,
+        MessageType::GameTestInstance,
+    ];
+
+    for expected in reachable.iter().chain(denylisted.iter()) {
         assert!(
-            game_messages.contains(&expected),
+            game_messages.contains(expected),
             "{expected:?} should be picked up by the game_ prefix"
         );
     }
     for message_type in game_messages {
-        assert!(
-            !REMOTE_DENYLIST.contains(&message_type),
-            "{message_type:?} must be reachable by a paired remote guest"
+        assert_eq!(
+            REMOTE_DENYLIST.contains(&message_type),
+            denylisted.contains(&message_type),
+            "{message_type:?} denylist membership does not match the expected split"
         );
     }
 }
