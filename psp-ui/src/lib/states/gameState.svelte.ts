@@ -25,6 +25,33 @@ export interface GameStatusJson {
 	worldLoaded: boolean;
 }
 
+export interface GameInstanceJson {
+	id: string;
+	source: 'auto' | 'saved';
+	name: string;
+	host: string;
+	port: number;
+	live: boolean;
+}
+
+export interface GameInstancesJson {
+	instances: GameInstanceJson[];
+	activeId: string | null;
+}
+
+export interface GameInstanceFields {
+	name: string;
+	host: string;
+	port: number;
+	token: string;
+}
+
+export interface GameTestInstanceJson {
+	ok: boolean;
+	modVersion?: string;
+	error?: string;
+}
+
 export interface GamePlayerJson {
 	uid: string;
 	nickname?: string;
@@ -363,6 +390,8 @@ export class GameState {
 	basePalsError = $state<GameRefusalJson | null>(null);
 	guildContainers = $state<GameGuildContainersJson | null>(null);
 	guildContainersError = $state<GameRefusalJson | null>(null);
+	instances = $state<GameInstanceJson[]>([]);
+	activeInstanceId = $state<string | null>(null);
 
 	writeBusy = $state(false);
 
@@ -375,6 +404,7 @@ export class GameState {
 	#guildsGuard = new RequestGuard();
 	#basePalsGuard = new RequestGuard();
 	#guildContainersGuard = new RequestGuard();
+	#instancesGuard = new RequestGuard();
 	#healTracker = new CommandIdTracker();
 	#setItemSlotTracker = new CommandIdTracker();
 	#removePalTracker = new CommandIdTracker();
@@ -579,6 +609,91 @@ export class GameState {
 			if (!this.#guildContainersGuard.isCurrent(ticket)) return;
 			this.guildContainersError = transportRefusal(error);
 			this.guildContainers = null;
+		}
+	}
+
+	#adoptInstances(ticket: number, response: GameReply<GameInstancesJson>): void {
+		if (!this.#instancesGuard.isCurrent(ticket)) return;
+		if ('error' in response) return;
+		this.instances = response.instances;
+		this.activeInstanceId = response.activeId;
+	}
+
+	async refreshInstances(): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		try {
+			const response = await sendAndWait<GameReply<GameInstancesJson>>(MessageType.GAME_INSTANCES);
+			this.#adoptInstances(ticket, response);
+		} catch (error) {
+			console.error('game_instances failed', error);
+		}
+	}
+
+	async addInstance(fields: GameInstanceFields): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		try {
+			const response = await sendAndWait<GameReply<GameInstancesJson>>(
+				MessageType.GAME_ADD_INSTANCE,
+				{ ...fields }
+			);
+			this.#adoptInstances(ticket, response);
+		} catch (error) {
+			console.error('game_add_instance failed', error);
+		}
+	}
+
+	async updateInstance(id: string, fields: GameInstanceFields): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		try {
+			const response = await sendAndWait<GameReply<GameInstancesJson>>(
+				MessageType.GAME_UPDATE_INSTANCE,
+				{ id, ...fields }
+			);
+			this.#adoptInstances(ticket, response);
+		} catch (error) {
+			console.error('game_update_instance failed', error);
+		}
+	}
+
+	async deleteInstance(id: string): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		try {
+			const response = await sendAndWait<GameReply<GameInstancesJson>>(
+				MessageType.GAME_DELETE_INSTANCE,
+				{ id }
+			);
+			this.#adoptInstances(ticket, response);
+		} catch (error) {
+			console.error('game_delete_instance failed', error);
+		}
+	}
+
+	async selectInstance(id: string): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		try {
+			const response = await sendAndWait<GameReply<GameInstancesJson>>(
+				MessageType.GAME_SELECT_INSTANCE,
+				{ id }
+			);
+			this.#adoptInstances(ticket, response);
+		} catch (error) {
+			console.error('game_select_instance failed', error);
+		}
+	}
+
+	async testInstance(fields: GameInstanceFields): Promise<GameTestInstanceJson> {
+		try {
+			const response = await sendAndWait<GameReply<GameTestInstanceJson>>(
+				MessageType.GAME_TEST_INSTANCE,
+				{ ...fields }
+			);
+			if ('error' in response) {
+				return { ok: false, error: String(response.error) };
+			}
+			return response;
+		} catch (error) {
+			console.error('game_test_instance failed', error);
+			return { ok: false, error: transportRefusal(error).error };
 		}
 	}
 

@@ -7,6 +7,8 @@ vi.mock('$lib/utils/websocketUtils', () => ({
 	send: vi.fn()
 }));
 
+import { MessageType } from '$types';
+
 import type {
 	GameCapabilitiesJson,
 	GameCommandResultJson,
@@ -890,5 +892,132 @@ describe('GameState.loadGuild addressing', () => {
 		sendAndWait.mockResolvedValueOnce(guildJson());
 		await gameState.loadGuild({ playerUid: 'p1' });
 		expect(sendAndWait.mock.calls[0][1]).toEqual({ player_uid: 'p1' });
+	});
+});
+
+describe('GameState instances', () => {
+	it('refreshInstances stores the list and the active id', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{ id: 'auto:11', source: 'auto', name: 'Solo', host: '127.0.0.1', port: 52104, live: true }
+			],
+			activeId: 'auto:11'
+		});
+
+		const gameState = new GameState();
+		await gameState.refreshInstances();
+
+		expect(gameState.instances).toHaveLength(1);
+		expect(gameState.instances[0].name).toBe('Solo');
+		expect(gameState.activeInstanceId).toBe('auto:11');
+	});
+
+	it('selectInstance sends the id and adopts the returned list', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{ id: 'saved:1', source: 'saved', name: 'Remote', host: '10.0.0.14', port: 8788, live: false }
+			],
+			activeId: 'saved:1'
+		});
+
+		const gameState = new GameState();
+		await gameState.selectInstance('saved:1');
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.GAME_SELECT_INSTANCE, { id: 'saved:1' });
+		expect(gameState.activeInstanceId).toBe('saved:1');
+	});
+
+	it('addInstance sends every field and adopts the returned list', async () => {
+		sendAndWait.mockResolvedValueOnce({ instances: [], activeId: null });
+
+		const gameState = new GameState();
+		await gameState.addInstance({ name: 'Remote', host: '10.0.0.14', port: 8788, token: 's3cr3t' });
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.GAME_ADD_INSTANCE, {
+			name: 'Remote',
+			host: '10.0.0.14',
+			port: 8788,
+			token: 's3cr3t'
+		});
+	});
+
+	it('updateInstance sends the id with every field and adopts the returned list', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{ id: 'saved:1', source: 'saved', name: 'Renamed', host: '10.0.0.14', port: 8788, live: false }
+			],
+			activeId: null
+		});
+
+		const gameState = new GameState();
+		await gameState.updateInstance('saved:1', {
+			name: 'Renamed',
+			host: '10.0.0.14',
+			port: 8788,
+			token: 's3cr3t'
+		});
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.GAME_UPDATE_INSTANCE, {
+			id: 'saved:1',
+			name: 'Renamed',
+			host: '10.0.0.14',
+			port: 8788,
+			token: 's3cr3t'
+		});
+		expect(gameState.instances[0].name).toBe('Renamed');
+	});
+
+	it('deleteInstance sends the id and adopts the returned list', async () => {
+		sendAndWait.mockResolvedValueOnce({ instances: [], activeId: null });
+
+		const gameState = new GameState();
+		await gameState.deleteInstance('saved:1');
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.GAME_DELETE_INSTANCE, { id: 'saved:1' });
+		expect(gameState.instances).toHaveLength(0);
+		expect(gameState.activeInstanceId).toBeNull();
+	});
+
+	it('testInstance returns the probe result without touching stored state', async () => {
+		sendAndWait.mockResolvedValueOnce({ ok: false, error: 'timeout' });
+
+		const gameState = new GameState();
+		const result = await gameState.testInstance({
+			name: 'Dead',
+			host: '127.0.0.1',
+			port: 1,
+			token: 't'
+		});
+
+		expect(result.ok).toBe(false);
+		expect(result.error).toBe('timeout');
+		expect(gameState.instances).toHaveLength(0);
+	});
+
+	it('a stale refreshInstances reply does not clobber a newer selectInstance result', async () => {
+		const gameState = new GameState();
+		const stale = deferred<{ instances: unknown[]; activeId: string | null }>();
+
+		sendAndWait.mockImplementationOnce(() => stale.promise);
+		const refreshPromise = gameState.refreshInstances();
+
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{ id: 'saved:1', source: 'saved', name: 'Remote', host: '10.0.0.14', port: 8788, live: false }
+			],
+			activeId: 'saved:1'
+		});
+		await gameState.selectInstance('saved:1');
+
+		stale.resolve({
+			instances: [
+				{ id: 'auto:11', source: 'auto', name: 'Solo', host: '127.0.0.1', port: 52104, live: true }
+			],
+			activeId: 'auto:11'
+		});
+		await refreshPromise;
+
+		expect(gameState.activeInstanceId).toBe('saved:1');
+		expect(gameState.instances[0].id).toBe('saved:1');
 	});
 });

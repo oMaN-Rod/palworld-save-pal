@@ -219,7 +219,13 @@ export enum MessageType {
 	GAME_MOVE_PAL = 'game_move_pal',
 	GAME_ADD_PAL = 'game_add_pal',
 	GAME_EDIT_PAL = 'game_edit_pal',
-	GAME_EDIT_PLAYER = 'game_edit_player'
+	GAME_EDIT_PLAYER = 'game_edit_player',
+	GAME_INSTANCES = 'game_instances',
+	GAME_ADD_INSTANCE = 'game_add_instance',
+	GAME_UPDATE_INSTANCE = 'game_update_instance',
+	GAME_DELETE_INSTANCE = 'game_delete_instance',
+	GAME_SELECT_INSTANCE = 'game_select_instance',
+	GAME_TEST_INSTANCE = 'game_test_instance'
 }
 
 interface UpdateSaveFileData {
