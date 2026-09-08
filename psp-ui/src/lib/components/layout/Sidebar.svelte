@@ -54,7 +54,9 @@
 	// Leaving a section flushes pending edits to the backend.
 	function handleNavigate(item: NavItem): void {
 		if (item.id === activeTile || !appState.saveFile) return;
-		appState.saveState();
+		appState.saveState().catch((error) => {
+			console.error('Error saving state on navigate:', error);
+		});
 	}
 
 	function runAction(action: NavAction): void {
@@ -63,7 +65,9 @@
 				expanded.current = !expanded.current;
 				break;
 			case 'save':
-				appState.writeSave();
+				appState.writeSave().catch((error) => {
+					console.error('Error writing save:', error);
+				});
 				break;
 			case 'eject':
 				handleEject();
@@ -151,13 +155,28 @@
 			{#if tiles.length > 0}
 				<div class="nav-group-label">{group.label()}</div>
 				{#each tiles as item (item.id)}
+					{@const badge = item.badge?.(ctx) ?? null}
 					<a
 						href={hrefFor(item)}
 						class="nav-link nav-link-{item.id === activeTile ? 'active' : 'inactive'}"
 						title={(item.title ?? item.label)?.()}
 						onclick={() => (item.action ? runAction(item.action) : handleNavigate(item))}
 					>
-						<Icon icon={item.icon(ctx)} class="h-4 w-4 shrink-0" />
+						<span class="relative shrink-0">
+							<Icon icon={item.icon(ctx)} class="h-4 w-4" />
+							{#if badge}
+								<span
+									class="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full {badge === 'remote'
+										? 'bg-secondary-400'
+										: 'bg-success-400'}"
+									title={badge === 'remote'
+										? m.signal_remote_mode_chip()
+										: badge === 'connected'
+											? m.signal_connected_heading()
+											: m.signal_nav_armed_indicator_title()}
+								></span>
+							{/if}
+						</span>
 						<span class="sidebar-label truncate">{item.label?.()}</span>
 					</a>
 				{/each}

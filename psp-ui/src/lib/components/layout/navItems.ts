@@ -1,13 +1,18 @@
 import * as m from '$i18n/messages';
+import { browser } from '$app/environment';
 import { c } from '$lib/utils/commonTranslations';
 import { isWebBuild } from '$lib/utils/platform';
-import type { AppState } from '$states';
+import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
+import { getWebSignalSession } from '$lib/signal/webSession';
+import { getSignalState, type AppState } from '$states';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
 
 export type NavGroup = 'main' | 'tools' | 'help';
 
 export type NavAction = 'toggle-expanded' | 'save' | 'eject' | 'open-folder' | 'settings';
+
+export type NavBadge = 'armed' | 'connected' | 'remote';
 
 export type NavContext = {
 	appState: AppState;
@@ -26,6 +31,7 @@ export type NavItem = {
 	href?: string | ((ctx: NavContext) => string);
 	action?: NavAction;
 	visible?: (ctx: NavContext) => boolean;
+	badge?: (ctx: NavContext) => NavBadge | null;
 };
 
 // Labels are functions, not strings, so a locale switch re-reads them.
@@ -79,6 +85,15 @@ export const navItems: NavItem[] = [
 		href: '/edit'
 	},
 	{
+		id: 'gps',
+		section: 'tiles',
+		group: 'main',
+		icon: () => 'tabler:world',
+		label: () => m.gps(),
+		href: '/gps',
+		visible: (ctx) => ctx.appState.hasGpsAvailable
+	},
+	{
 		id: 'registry',
 		section: 'tiles',
 		group: 'main',
@@ -112,15 +127,6 @@ export const navItems: NavItem[] = [
 		href: '/blueprints'
 	},
 	{
-		id: 'gps',
-		section: 'tiles',
-		group: 'tools',
-		icon: () => 'tabler:world',
-		label: () => m.gps(),
-		href: '/gps',
-		visible: (ctx) => ctx.appState.hasGpsAvailable
-	},
-	{
 		id: 'ups',
 		section: 'tiles',
 		group: 'tools',
@@ -131,12 +137,33 @@ export const navItems: NavItem[] = [
 	{
 		id: 'servers',
 		section: 'tiles',
-		group: 'tools',
+		group: 'main',
 		icon: () => 'tabler:server',
 		label: () => 'Servers',
 		href: '/servers',
-		// 'tabler:server' management drives Docker/native services the browser build cannot reach.
-		visible: () => !isWebBuild
+		visible: () => !isWebBuild || getRemoteMode().active
+	},
+	{
+		id: 'signal',
+		section: 'tiles',
+		group: 'main',
+		icon: () => 'tabler:broadcast',
+		label: () => m.signal(),
+		href: '/signal',
+		visible: () => !isWebBuild || getRemoteMode().active,
+		badge: () => {
+			if (!isWebBuild) return getSignalState().armed ? 'armed' : null;
+			if (!browser || !getWebSignalSession().connected) return null;
+			return getRemoteMode().active ? 'remote' : 'connected';
+		}
+	},
+	{
+		id: 'live',
+		section: 'tiles',
+		group: 'main',
+		icon: () => 'tabler:activity',
+		label: () => m.live_nav(),
+		href: '/live'
 	},
 	{
 		id: 'editor',
@@ -171,13 +198,12 @@ export const navItems: NavItem[] = [
 		label: () => m.breeding(),
 		href: '/breeding'
 	},
-
 	{
 		id: 'tools',
 		section: 'tiles',
-		group: 'help',
-		icon: () => 'tabler:tool',
-		label: () => m.tools(),
+		group: 'tools',
+		icon: () => 'tabler:transform-filled',
+		label: () => m.save_migration(),
 		href: '/tools'
 	},
 	{

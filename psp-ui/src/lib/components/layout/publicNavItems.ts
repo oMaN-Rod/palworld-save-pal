@@ -12,7 +12,8 @@ export const publicNavItems: PublicNavItem[] = [
 	{ id: 'map', href: '/map', icon: 'tabler:map', label: () => m.map() },
 	{ id: 'wiki', href: '/wiki', icon: 'tabler:book', label: () => m.docs_wiki() },
 	{ id: 'breeding', href: '/breeding', icon: 'tabler:flask', label: () => m.breeding() },
-	{ id: 'editor', href: '/editor', icon: 'tabler:notebook', label: () => m.editor() }
+	{ id: 'editor', href: '/editor', icon: 'tabler:notebook', label: () => m.editor() },
+	{ id: 'signal', href: '/signal', icon: 'local:rwby-rose', label: () => m.signal() }
 ];
 
 export function activePublicNavId(pathname: string): string {
