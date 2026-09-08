@@ -56,57 +56,72 @@ TEST_CASE("generate_token_hex differs between calls") {
     CHECK(a != b);
 }
 
-TEST_CASE("write_endpoint_file writes valid JSON with all five keys and this process's pid") {
-    TempDirGuard guard(unique_temp_path());
+TEST_CASE("write_endpoint_file writes a per-pid file with the full descriptor") {
+    TempDirGuard dir(unique_temp_path());
     std::string error;
-    bool ok = amity::write_endpoint_file(guard.path, 12345, "sometoken", error);
-    REQUIRE(ok);
-    CHECK(error.empty());
+    REQUIRE(amity::write_endpoint_file(dir.path, 8788, "s3cr3t", "Solo World", "127.0.0.1", error));
 
-    auto content = read_file(guard.path / "endpoint.json");
-    auto j = nlohmann::json::parse(content);
+    auto expected = dir.path / (std::to_string(GetCurrentProcessId()) + ".json");
+    REQUIRE(std::filesystem::exists(expected));
 
-    CHECK(j["protocolVersion"] == 1);
-    CHECK(j["port"] == 12345);
-    CHECK(j["token"] == "sometoken");
-    CHECK(j["pid"] == static_cast<int>(GetCurrentProcessId()));
-    REQUIRE(j.contains("startedAt"));
-    CHECK(j["startedAt"].is_string());
+    auto parsed = nlohmann::json::parse(read_file(expected));
+    CHECK(parsed["protocolVersion"] == 2);
+    CHECK(parsed["port"] == 8788);
+    CHECK(parsed["token"] == "s3cr3t");
+    CHECK(parsed["name"] == "Solo World");
+    CHECK(parsed["bind"] == "127.0.0.1");
+    CHECK(parsed["pid"] == static_cast<int>(GetCurrentProcessId()));
+    CHECK(parsed["startedAt"].get<std::string>().size() == 20);
 }
 
-TEST_CASE("write_endpoint_file leaves no .tmp sibling after a successful write") {
-    TempDirGuard guard(unique_temp_path());
+TEST_CASE("write_endpoint_file creates the directory and leaves no temp file") {
+    auto root = unique_temp_path();
+    TempDirGuard guard(root);
+    auto nested = root / "endpoints";
     std::string error;
-    bool ok = amity::write_endpoint_file(guard.path, 1, "t", error);
-    REQUIRE(ok);
+    REQUIRE(amity::write_endpoint_file(nested, 9000, "t", "n", "0.0.0.0", error));
 
-    bool found_tmp = false;
-    for (auto const& entry : std::filesystem::directory_iterator(guard.path)) {
-        if (entry.path().extension() == ".tmp") {
-            found_tmp = true;
-        }
+    int count = 0;
+    for (const auto& entry : std::filesystem::directory_iterator(nested)) {
+        CHECK(entry.path().extension() == ".json");
+        ++count;
     }
-    CHECK_FALSE(found_tmp);
+    CHECK(count == 1);
 }
 
-TEST_CASE("write_endpoint_file creates a nonexistent nested directory") {
-    TempDirGuard guard(unique_temp_path());
-    auto dir = guard.path / "nested" / "more";
+TEST_CASE("write_endpoint_file overwrites this process's own stale file") {
+    TempDirGuard dir(unique_temp_path());
     std::string error;
-    bool ok = amity::write_endpoint_file(dir, 1, "t", error);
-    REQUIRE(ok);
-    CHECK(std::filesystem::exists(dir / "endpoint.json"));
+    REQUIRE(amity::write_endpoint_file(dir.path, 1111, "old", "Old", "127.0.0.1", error));
+    REQUIRE(amity::write_endpoint_file(dir.path, 2222, "new", "New", "127.0.0.1", error));
+
+    auto parsed = nlohmann::json::parse(
+        read_file(dir.path / (std::to_string(GetCurrentProcessId()) + ".json")));
+    CHECK(parsed["port"] == 2222);
+    CHECK(parsed["name"] == "New");
 }
 
-TEST_CASE("remove_endpoint_file deletes the file and a second remove is a no-op") {
-    TempDirGuard guard(unique_temp_path());
+TEST_CASE("remove_endpoint_file removes only this process's file") {
+    TempDirGuard dir(unique_temp_path());
     std::string error;
-    REQUIRE(amity::write_endpoint_file(guard.path, 1, "t", error));
-    REQUIRE(std::filesystem::exists(guard.path / "endpoint.json"));
+    REQUIRE(amity::write_endpoint_file(dir.path, 8788, "s3cr3t", "Solo", "127.0.0.1", error));
+    auto other = dir.path / "999999.json";
+    std::ofstream(other) << "{}";
 
-    amity::remove_endpoint_file(guard.path);
-    CHECK_FALSE(std::filesystem::exists(guard.path / "endpoint.json"));
+    amity::remove_endpoint_file(dir.path);
+    CHECK_FALSE(std::filesystem::exists(dir.path / (std::to_string(GetCurrentProcessId()) + ".json")));
+    CHECK(std::filesystem::exists(other));
+}
 
-    amity::remove_endpoint_file(guard.path);
-    CHECK_FALSE(std::filesystem::exists(guard.path / "endpoint.json"));
+TEST_CASE("write_endpoint_file reports an empty directory as an error") {
+    std::string error;
+    CHECK_FALSE(amity::write_endpoint_file({}, 1, "t", "n", "127.0.0.1", error));
+    CHECK_FALSE(error.empty());
+}
+
+TEST_CASE("default_endpoint_dir ends in the endpoints subdirectory") {
+    auto dir = amity::default_endpoint_dir();
+    REQUIRE_FALSE(dir.empty());
+    CHECK(dir.filename() == "endpoints");
+    CHECK(dir.parent_path().filename() == "PSPAmity");
 }

@@ -1,4 +1,5 @@
 #include <amity/endpoint_file.hpp>
+#include <amity/protocol.hpp>
 
 #include <windows.h>
 
@@ -32,10 +33,11 @@ std::filesystem::path default_endpoint_dir() {
     if (len == 0 || len >= std::size(buf)) {
         return std::filesystem::path();
     }
-    return std::filesystem::path(std::wstring(buf, len)) / "Pal" / "Saved" / "PSPAmity";
+    return std::filesystem::path(std::wstring(buf, len)) / "Pal" / "Saved" / "PSPAmity" / "endpoints";
 }
 
-bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::string& token, std::string& error) {
+bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::string& token,
+                         const std::string& name, const std::string& bind, std::string& error) {
     if (dir.empty()) {
         error = "endpoint directory is empty (LOCALAPPDATA not resolved)";
         return false;
@@ -48,17 +50,21 @@ bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::
         return false;
     }
 
+    std::string filename = std::to_string(static_cast<int>(GetCurrentProcessId()));
+
     nlohmann::json j = {
-        {"protocolVersion", 1},
+        {"protocolVersion", PROTOCOL_VERSION},
         {"port", port},
         {"token", token},
+        {"name", name},
+        {"bind", bind},
         {"pid", static_cast<int>(GetCurrentProcessId())},
         {"startedAt", current_time_iso8601_utc()},
     };
     std::string content = j.dump();
 
-    std::filesystem::path target = dir / "endpoint.json";
-    std::filesystem::path temp = dir / "endpoint.json.tmp";
+    std::filesystem::path target = dir / (filename + ".json");
+    std::filesystem::path temp = dir / (filename + ".json.tmp");
 
     {
         std::ofstream out(temp, std::ios::binary | std::ios::trunc);
@@ -87,7 +93,7 @@ bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::
 
 void remove_endpoint_file(const std::filesystem::path& dir) {
     std::error_code ec;
-    std::filesystem::remove(dir / "endpoint.json", ec);
+    std::filesystem::remove(dir / (std::to_string(static_cast<int>(GetCurrentProcessId())) + ".json"), ec);
 }
 
 }

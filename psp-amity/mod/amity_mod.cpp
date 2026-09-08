@@ -81,7 +81,7 @@ auto AmityMod::on_unreal_init() -> void
         return;
     }
 
-    if (!amity::write_endpoint_file(m_endpoint_dir, m_server->port(), token, error))
+    if (!amity::write_endpoint_file(m_endpoint_dir, m_server->port(), token, "PSPAmity", "127.0.0.1", error))
     {
         Output::send<LogLevel::Error>(STR("[PSPAmity] failed to write endpoint file: {}\n"), amity_rt::widen(error));
         m_server->stop();

@@ -6,7 +6,8 @@
 namespace amity {
 
 std::filesystem::path default_endpoint_dir();
-bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::string& token, std::string& error);
+bool write_endpoint_file(const std::filesystem::path& dir, int port, const std::string& token,
+                         const std::string& name, const std::string& bind, std::string& error);
 void remove_endpoint_file(const std::filesystem::path& dir);
 
 }
