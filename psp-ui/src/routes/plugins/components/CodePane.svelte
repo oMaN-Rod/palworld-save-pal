@@ -169,8 +169,8 @@
 	let openFailed = $state(false);
 
 	async function openPlugin(openId: string): Promise<void> {
-		await pluginEditor.loadDefinition();
 		try {
+			await pluginEditor.loadDefinition();
 			await pluginEditor.open(openId);
 		} catch (e) {
 			toast.add(String(e instanceof Error ? e.message : e), 'Could not open plugin', 'error');
@@ -222,7 +222,9 @@
 		pluginEditor.setSource(pluginEditor.activePath, text);
 		if (checkTimer) clearTimeout(checkTimer);
 		checkTimer = setTimeout(() => {
-			pluginEditor.checkActive();
+			pluginEditor.checkActive().catch((error) => {
+				console.error('Error checking plugin source:', error);
+			});
 		}, CHECK_DEBOUNCE_MS);
 	}
 

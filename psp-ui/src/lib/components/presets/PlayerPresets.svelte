@@ -4,7 +4,7 @@
 	import { Button, List, TooltipButton } from '$components/ui';
 	import { presetsData, itemsData } from '$lib/data';
 	import type { ItemContainerSlot, Player, PresetProfile } from '$lib/types';
-	import { getAppState, getModalState, sortPresets } from '$states';
+	import { getAppState, getModalState, getToastState, sortPresets } from '$states';
 	import { EntryState, ItemTypeA } from '$types';
 	import { deepCopy } from '$utils';
 	import * as m from '$i18n/messages';
@@ -17,6 +17,7 @@
 
 	const appState = getAppState();
 	const modal = getModalState();
+	const toast = getToastState();
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
@@ -142,7 +143,13 @@
 			player_equipment_armor_container: processSlots(player.player_equipment_armor_container.slots),
 			food_equip_container: processSlots(player.food_equip_container.slots)
 		} as PresetProfile;
-		await presetsData.addPresetProfile(newPreset);
+		try {
+			await presetsData.addPresetProfile(newPreset);
+		} catch (error) {
+			console.error('Error adding preset:', error);
+			toast.add(m.preset_save_failed(), m.error(), 'error');
+			return;
+		}
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -159,7 +166,14 @@
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
-		await presetsData.removePresetProfiles(presetIds);
+		const count = selectedPresets.length;
+		try {
+			await presetsData.removePresetProfiles(presetIds);
+		} catch (error) {
+			console.error('Error removing preset profiles:', error);
+			toast.add(m.delete_entity_failed({ entity: m.preset({ count }) }), m.error(), 'error');
+			return;
+		}
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -171,7 +185,12 @@
 			value: preset.name
 		});
 		if (!result) return;
-		await presetsData.changePresetName(preset.id, result);
+		try {
+			await presetsData.changePresetName(preset.id, result);
+		} catch (error) {
+			console.error('Error changing profile name:', error);
+			toast.add(m.preset_rename_failed(), m.error(), 'error');
+		}
 	}
 
 	$effect(() => {

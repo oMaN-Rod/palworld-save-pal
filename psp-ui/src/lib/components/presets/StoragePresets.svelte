@@ -4,7 +4,7 @@
 	import { Button, List, TooltipButton } from '$components/ui';
 	import { itemsData, presetsData } from '$lib/data';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
-	import { getModalState, sortPresets } from '$states';
+	import { getModalState, getToastState, sortPresets } from '$states';
 	import { EntryState } from '$types';
 	import { deepCopy } from '$utils';
 	import { ItemSelectModal, NumberInputModal } from '$components/modals';
@@ -17,6 +17,7 @@
 	} = $props();
 
 	const modal = getModalState();
+	const toast = getToastState();
 
 	type ExtendedPresetProfile = PresetProfile & { id: string };
 
@@ -143,7 +144,13 @@
 			}
 		} as PresetProfile;
 
-		await presetsData.addPresetProfile(newPreset);
+		try {
+			await presetsData.addPresetProfile(newPreset);
+		} catch (error) {
+			console.error('Error adding preset:', error);
+			toast.add(m.preset_save_failed(), m.error(), 'error');
+			return;
+		}
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -159,7 +166,14 @@
 		});
 		if (!result) return;
 		const presetIds = selectedPresets.map((preset) => preset.id);
-		await presetsData.removePresetProfiles(presetIds);
+		const count = selectedPresets.length;
+		try {
+			await presetsData.removePresetProfiles(presetIds);
+		} catch (error) {
+			console.error('Error removing preset profiles:', error);
+			toast.add(m.delete_entity_failed({ entity: m.preset({ count }) }), m.error(), 'error');
+			return;
+		}
 		selectedPresets = [];
 		selectAll = false;
 	}
@@ -171,7 +185,12 @@
 			value: preset.name
 		});
 		if (!result) return;
-		await presetsData.changePresetName(preset.id, result);
+		try {
+			await presetsData.changePresetName(preset.id, result);
+		} catch (error) {
+			console.error('Error changing profile name:', error);
+			toast.add(m.preset_rename_failed(), m.error(), 'error');
+		}
 	}
 
 	async function handleFillContainer() {

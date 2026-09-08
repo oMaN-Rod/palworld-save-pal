@@ -140,7 +140,9 @@
 		selectedSourcePlayer = '';
 		selectedTargetPlayer = '';
 		transferResult = null;
-		sendAndWait(MessageType.UNLOAD_SOURCE_SAVE, {});
+		sendAndWait(MessageType.UNLOAD_SOURCE_SAVE, {}).catch((error) => {
+			console.error('Error unloading source save:', error);
+		});
 	}
 </script>
 

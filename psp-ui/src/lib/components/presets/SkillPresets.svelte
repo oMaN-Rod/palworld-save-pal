@@ -3,7 +3,7 @@
 	import { Combobox, TooltipButton } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
-	import { getModalState, sortPresets } from '$states';
+	import { getModalState, getToastState, sortPresets } from '$states';
 	import { cn } from '$theme';
 	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';
 	import { assetLoader, calculateFilters, deepCopy } from '$utils';
@@ -17,6 +17,7 @@
 	}>();
 
 	const modal = getModalState();
+	const toast = getToastState();
 	const backgroundImage = assetLoader.loadImage(`${ASSET_DATA_PATH}/img/bg.webp`);
 	let selected: string[] = $state(['passive']);
 
@@ -98,7 +99,12 @@
 			cancelText: m.cancel()
 		});
 		if (!confirmed) return;
-		await presetsData.removePresetProfiles([presetId]);
+		try {
+			await presetsData.removePresetProfiles([presetId]);
+		} catch (error) {
+			console.error('Error removing preset profiles:', error);
+			toast.add(m.delete_entity_failed({ entity: m.preset({ count: 1 }) }), m.error(), 'error');
+		}
 	}
 
 	function getPassiveSkillIconFilter(skillId: string): string {

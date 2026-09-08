@@ -343,30 +343,34 @@
 	}
 
 	async function handleGetRawData(type: RawDataType) {
-		switch (type) {
-			case 'guild':
-				if (!guild) return;
-				await fetchGuildRawData(guild.id);
-				break;
-			case 'base':
-				if (!base) return;
-				await fetchBaseRawData(base.id);
-				break;
-			case 'player':
-				if (!player) return;
-				await fetchPlayerRawData(player.uid);
-				break;
-			case 'pal':
-				if (!pal) return;
-				await fetchPalRawData(pal.instance_id);
-				break;
-			case 'character_container':
-				if (!characterContainer) return;
-				await fetchCharacterContainerRawData(characterContainer.id);
-				break;
-			case 'level':
-				await fetchLevelSavRawData();
-				break;
+		try {
+			switch (type) {
+				case 'guild':
+					if (!guild) return;
+					await fetchGuildRawData(guild.id);
+					break;
+				case 'base':
+					if (!base) return;
+					await fetchBaseRawData(base.id);
+					break;
+				case 'player':
+					if (!player) return;
+					await fetchPlayerRawData(player.uid);
+					break;
+				case 'pal':
+					if (!pal) return;
+					await fetchPalRawData(pal.instance_id);
+					break;
+				case 'character_container':
+					if (!characterContainer) return;
+					await fetchCharacterContainerRawData(characterContainer.id);
+					break;
+				case 'level':
+					await fetchLevelSavRawData();
+					break;
+			}
+		} catch (error) {
+			console.error('Error fetching raw data:', error);
 		}
 	}
 

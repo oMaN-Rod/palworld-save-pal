@@ -22,7 +22,9 @@
 	const selectedId = $derived(page.params.id);
 
 	onMount(() => {
-		pluginsData.list();
+		pluginsData.list().catch((error) => {
+			console.error('Error listing plugins:', error);
+		});
 	});
 
 	$effect(() => {

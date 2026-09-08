@@ -128,11 +128,18 @@
 
 		if (confirmed) {
 			const presetIds = selectedPresets.map((preset) => preset.id);
-			await presetsData.removePresetProfiles(presetIds);
+			const count = selectedPresets.length;
+			try {
+				await presetsData.removePresetProfiles(presetIds);
+			} catch (error) {
+				console.error('Error removing preset profiles:', error);
+				toast.add(m.delete_entity_failed({ entity: m.preset({ count }) }), m.error(), 'error');
+				return;
+			}
 			toast.add(
 				m.deleted_entity({
-					entity: m.preset({ count: selectedPresets.length }),
-					count: selectedPresets.length
+					entity: m.preset({ count }),
+					count
 				}),
 				m.success(),
 				'success'
@@ -149,7 +156,13 @@
 			cancelText: m.cancel()
 		});
 		if (!confirmed) return;
-		presetsData.removePresetProfiles([preset.id]);
+		try {
+			await presetsData.removePresetProfiles([preset.id]);
+		} catch (error) {
+			console.error('Error removing preset profiles:', error);
+			toast.add(m.delete_entity_failed({ entity: m.preset({ count: 1 }) }), m.error(), 'error');
+			return;
+		}
 		selectedPresets = selectedPresets.filter((p) => p.id !== preset.id);
 		toast.add(
 			m.deleted_entity({ entity: preset.name, count: m.preset({ count: 1 }) }),
@@ -172,8 +185,12 @@
 			cancelText: m.cancel()
 		});
 		if (!confirmed) return;
-		await sendAndWait(MessageType.NUKE_PRESETS);
-		presetsData.reset();
+		try {
+			await sendAndWait(MessageType.NUKE_PRESETS);
+			await presetsData.reset();
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Failed to nuke presets', 'error');
+		}
 	}
 
 	async function handleExportPreset(preset: ExtendedPresetProfile) {

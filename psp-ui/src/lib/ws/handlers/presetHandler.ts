@@ -24,7 +24,11 @@ export const importPresetHandler: WSMessageHandler = {
 	async handle(data: { message: string; count: number }) {
 		const toast = getToastState();
 		toast.add(data.message, 'Import Success', 'success');
-		await presetsData.reset();
+		try {
+			await presetsData.reset();
+		} catch (error) {
+			console.error('Error reloading presets after import:', error);
+		}
 	}
 };
 

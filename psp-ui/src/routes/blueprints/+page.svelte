@@ -16,7 +16,9 @@
 	let importFiles: FileList | undefined = $state();
 
 	onMount(() => {
-		blueprintsData.list();
+		blueprintsData.list().catch((error) => {
+			console.error('Error listing blueprints:', error);
+		});
 	});
 
 	function loadedBases(): { id: string; name: string; guildName: string }[] {
@@ -87,9 +89,21 @@
 	}
 
 	async function placeRow(row: BlueprintRow) {
-		const res = await blueprintsData.loadFromId(row.id);
-		placementState.enter(res.handle, res.header);
-		await goto('/map');
+		try {
+			const res = await blueprintsData.loadFromId(row.id);
+			placementState.enter(res.handle, res.header);
+			await goto('/map');
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Failed to load blueprint', 'error');
+		}
+	}
+
+	async function exportRow(row: BlueprintRow, format: BlueprintFormat) {
+		try {
+			await blueprintsData.exportRow(row.id, format);
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Export failed', 'error');
+		}
 	}
 
 	async function deleteRow(row: BlueprintRow) {
@@ -99,8 +113,12 @@
 			cancelText: 'Cancel'
 		});
 		if (!ok) return;
-		await blueprintsData.remove(row.id);
-		toast.add(`Deleted ${row.name}.`, 'Blueprint', 'success');
+		try {
+			await blueprintsData.remove(row.id);
+			toast.add(`Deleted ${row.name}.`, 'Blueprint', 'success');
+		} catch (e) {
+			toast.add(String(e instanceof Error ? e.message : e), 'Delete failed', 'error');
+		}
 	}
 </script>
 
@@ -141,10 +159,10 @@
 						>
 							Place
 						</Button>
-						<Button variant="secondary" onclick={() => blueprintsData.exportRow(row.id, 'psp')}
+						<Button variant="secondary" onclick={() => exportRow(row, 'psp')}
 							>Export .psp</Button
 						>
-						<Button variant="ghost" onclick={() => blueprintsData.exportRow(row.id, 'json')}
+						<Button variant="ghost" onclick={() => exportRow(row, 'json')}
 							>.json</Button
 						>
 						<Button variant="ghost" title="Delete" onclick={() => deleteRow(row)}>
