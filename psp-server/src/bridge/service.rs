@@ -8,8 +8,7 @@ use tokio::sync::{mpsc, oneshot, watch};
 use tokio_util::sync::CancellationToken;
 
 use super::client::{self, Command, ConnectError, Connected, ConnectionEnd};
-use super::endpoint;
-use super::protocol::BridgeEndpointFile;
+use super::endpoint::{self, DiscoveredEndpoint};
 
 const REQUEST_TIMEOUT: Duration = Duration::from_secs(6);
 const DIAL_TIMEOUT: Duration = Duration::from_secs(5);
@@ -193,7 +192,7 @@ async fn wait(
 }
 
 async fn dial_and_drain(
-    endpoint: &BridgeEndpointFile,
+    endpoint: &DiscoveredEndpoint,
     cancel: &CancellationToken,
     command_rx: &mut mpsc::Receiver<Command>,
 ) -> Result<Connected, ConnectError> {
@@ -221,17 +220,11 @@ async fn run_supervisor(
             break;
         }
 
-        let endpoint_path = endpoint::default_endpoint_path();
-        let present = endpoint_path.as_deref().is_some_and(|path| path.exists());
-        let discovered = if present {
-            endpoint_path
-                .as_deref()
-                .and_then(|path| endpoint::read_endpoint(path, &endpoint::sysinfo_liveness))
-        } else {
-            None
-        };
-
-        let Some(discovered) = discovered else {
+        let discovered = endpoint::default_endpoint_dir()
+            .map(|dir| endpoint::scan_endpoints(&dir, &endpoint::sysinfo_liveness))
+            .unwrap_or_default();
+        let present = !discovered.is_empty();
+        let Some(discovered) = discovered.into_iter().next() else {
             publish(&status_tx, false, present, None, None, None);
             if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx).await {
                 break;

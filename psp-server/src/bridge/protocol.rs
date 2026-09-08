@@ -20,8 +20,12 @@ pub struct BridgeEndpointFile {
     pub protocol_version: i64,
     pub port: u16,
     pub token: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub bind: String,
     pub pid: u32,
     pub started_at: String,
 }
 
-pub const BRIDGE_PROTOCOL_VERSION: i64 = 1;
+pub const BRIDGE_PROTOCOL_VERSION: i64 = 2;

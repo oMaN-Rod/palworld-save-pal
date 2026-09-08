@@ -9,7 +9,8 @@ use tokio_tungstenite::tungstenite::Message;
 use tokio_tungstenite::{MaybeTlsStream, WebSocketStream};
 use tokio_util::sync::CancellationToken;
 
-use super::protocol::{BridgeEndpointFile, BridgeEnvelope, BridgeErrorData, BRIDGE_PROTOCOL_VERSION};
+use super::endpoint::DiscoveredEndpoint;
+use super::protocol::{BridgeEnvelope, BridgeErrorData, BRIDGE_PROTOCOL_VERSION};
 use super::service::BridgeError;
 
 type WsStream = WebSocketStream<MaybeTlsStream<TcpStream>>;
@@ -101,7 +102,7 @@ fn recv_error_to_connect_error(error: RecvOutcome) -> ConnectError {
 }
 
 pub async fn connect_and_handshake(
-    endpoint: &BridgeEndpointFile,
+    endpoint: &DiscoveredEndpoint,
     cancel: &CancellationToken,
 ) -> Result<Connected, ConnectError> {
     let url = format!("ws://127.0.0.1:{}", endpoint.port);
@@ -261,12 +262,12 @@ mod tests {
             let _ = ws.send(Message::Text(error.to_string().into())).await;
         });
 
-        let endpoint = BridgeEndpointFile {
-            protocol_version: BRIDGE_PROTOCOL_VERSION,
+        let endpoint = DiscoveredEndpoint {
+            pid: std::process::id(),
+            name: "Solo".to_string(),
             port: addr.port(),
             token: "irrelevant".to_string(),
-            pid: std::process::id(),
-            started_at: "2026-09-03T00:00:00Z".to_string(),
+            bind: "127.0.0.1".to_string(),
         };
         let cancel = CancellationToken::new();
         let result = connect_and_handshake(&endpoint, &cancel).await;
