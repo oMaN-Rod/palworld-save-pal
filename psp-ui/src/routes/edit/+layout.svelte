@@ -21,7 +21,7 @@
 		KeyL: 'player',
 		KeyT: 'technologies',
 		KeyB: 'palbox',
-		KeyE: 'effigies',
+		KeyF: 'effigies',
 		KeyD: 'dps',
 		KeyG: 'guild',
 		KeyM: 'missions',
@@ -127,7 +127,7 @@
 				<KeyboardShortcut
 					id="effigies-tab"
 					text={m.edit_effigies()}
-					key="E"
+					key="F"
 					href="/edit/effigies"
 				/>
 			{/if}
