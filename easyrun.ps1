@@ -1,4 +1,4 @@
-# easyrun.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
+﻿# easyrun.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
 # Windows entry point (the bash sibling is easyrun.sh for macOS/Linux).
 #
 # Does NOT auto-install anything (except the opt-in -InstallWasm): on a missing
@@ -7,6 +7,7 @@
 # -Desktop/-BuildDesktop. Defaults to -Web; run `.\easyrun.ps1 -Help` for the
 # full flag list.
 #
+# Keep the UTF-8 BOM: without it 5.1 reads the file as ANSI and fails to parse.
 # PowerShell execution policy: if blocked, use:
 #   powershell -ExecutionPolicy Bypass -File .\easyrun.ps1 [args]
 # Or: Set-ExecutionPolicy -Scope CurrentUser RemoteOnce
@@ -15,13 +16,30 @@
 # (the comment header above, then blank lines/comments) is allowed before it.
 param(
     [switch]$Web, [switch]$Desktop, [switch]$Webapp, [switch]$Landing,
-    [switch]$Docker, [switch]$Serve,
-    [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build,
+    [switch]$Docker, [switch]$Serve, [switch]$Signal,
+    [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build, [switch]$Amity,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
+    [string]$GameDir, [string]$AmityWorkspace, [string]$Ue4ssZip,
+    [switch]$SkipUe4ss, [switch]$RemoveWin64Ue4ss,
     [string]$HostAddr, [int]$VitePort, [int]$ServerPort,
-    [switch]$NoServer, [switch]$SkipCheck, [switch]$NoInstall,
-    [switch]$RebuildWasm, [string]$ForceCheckMode, [switch]$Help
+    [int]$BrokerPort, [int]$WebPort, [switch]$LocalOnly,
+    [switch]$NoServer, [switch]$SkipCheck, [switch]$NoInstall, [switch]$NoMux,
+    [switch]$RebuildWasm, [string]$ForceCheckMode, [switch]$LiveTurn, [switch]$Help
 )
+
+if ($PSVersionTable.PSVersion.Major -lt 7) {
+    $pwsh = Get-Command pwsh -ErrorAction SilentlyContinue
+    if (-not $pwsh) {
+        Write-Host "easyrun.ps1 needs PowerShell 7+. Install:  winget install Microsoft.PowerShell" -ForegroundColor Red
+        exit 1
+    }
+    $forward = @(foreach ($kv in $PSBoundParameters.GetEnumerator()) {
+        if ($kv.Value -is [switch]) { if ($kv.Value) { "-$($kv.Key)" } }
+        else { "-$($kv.Key)"; "$($kv.Value)" }
+    })
+    & $pwsh.Source -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath @forward
+    exit $LASTEXITCODE
+}
 
 $ErrorActionPreference = "Stop"
 
@@ -30,12 +48,23 @@ $RepoRoot       = Split-Path -Parent $MyInvocation.MyCommand.Path
 $UiDir          = Join-Path $RepoRoot "psp-ui"
 $PspDesktopDir  = Join-Path $RepoRoot "psp-desktop"
 $PspWebDir      = Join-Path $RepoRoot "psp-web"
+$BrokerDir      = Join-Path $RepoRoot "signal-broker"
+$AmityDir       = Join-Path $RepoRoot "psp-amity"
 $EnvFile        = Join-Path $UiDir ".env"
 $NodeModules    = Join-Path $UiDir "node_modules"
+$BrokerModules  = Join-Path $BrokerDir "node_modules"
 $WasmOut        = Join-Path $UiDir "src/lib/wasm/psp"
 
 $VitePortDefault   = 5173   # vite.config.ts server.port, strictPort:true
 $ServerPortDefault = 5174   # psp-server default + Docker EXPOSE + WS_URL host
+$BrokerPortDefault = 8787
+$WebPortDefault    = 5175
+
+$DesktopWsUrl = "127.0.0.1:$ServerPortDefault/ws"
+
+$MuxSession = "psp"
+
+$AmityWorkspaceDefault = Join-Path (Split-Path -Parent $RepoRoot) "amity-build"
 
 $script:ChildJobs            = New-Object System.Collections.Generic.List[object]
 $script:PreviousEnvExists    = $false
@@ -176,6 +205,79 @@ function Check-Docker([bool]$strict) {
               Hint="Start Docker Desktop." }
 }
 
+function Find-VsCMake() {
+    $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    if (-not (Test-Path $vswhere)) { return $null }
+    $install = & $vswhere -latest -products * -property installationPath 2>$null | Select-Object -First 1
+    if (-not $install) { return $null }
+    $bundled = Join-Path $install "Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
+    if (Test-Path $bundled) { return $bundled } else { return $null }
+}
+
+function Check-CMake() {
+    $cmake = Resolve-Tool "cmake"
+    if (-not $cmake) { $cmake = Find-VsCMake }
+    if (-not $cmake) {
+        return @{ Name="cmake"; Status="crit"; Detail="not found on PATH or in a Visual Studio install";
+                  Hint="winget install Kitware.CMake, or add the 'C++ CMake tools for Windows' VS component" }
+    }
+    $v = try { ((& $cmake --version 2>&1 | Select-Object -First 1) -as [string]).Trim() } catch { "" }
+    return @{ Name="cmake"; Status="ok"; Detail=$(if ($v) { $v } else { $cmake }); Hint="" }
+}
+
+function Find-PalworldDir() {
+    $steam = try { (Get-ItemProperty "HKCU:\Software\Valve\Steam" -ErrorAction Stop).SteamPath } catch { $null }
+    if (-not $steam) { return $null }
+    $libraries = @($steam)
+    $vdf = Join-Path $steam "steamapps\libraryfolders.vdf"
+    if (Test-Path $vdf) {
+        $libraries += @(Select-String -Path $vdf -Pattern '"path"\s+"([^"]+)"' |
+            ForEach-Object { $_.Matches[0].Groups[1].Value -replace '\\\\', '\' })
+    }
+    foreach ($library in $libraries) {
+        $candidate = Join-Path $library "steamapps\common\Palworld"
+        if (Test-Path (Join-Path $candidate "Pal\Binaries\Win64\Palworld-Win64-Shipping.exe")) { return $candidate }
+    }
+    return $null
+}
+
+function Resolve-GameDir() { if ($GameDir) { $GameDir } else { Find-PalworldDir } }
+function Resolve-AmityWorkspace() { if ($AmityWorkspace) { $AmityWorkspace } else { $AmityWorkspaceDefault } }
+
+function Check-Palworld() {
+    $dir = Resolve-GameDir
+    if (-not $dir -or -not (Test-Path (Join-Path $dir "Pal\Binaries\Win64\Palworld-Win64-Shipping.exe"))) {
+        return @{ Name="Palworld"; Status="crit";
+                  Detail=$(if ($dir) { "no game executable under $dir" } else { "no Steam install found" });
+                  Hint="Pass -GameDir <...\steamapps\common\Palworld>" }
+    }
+    if (Get-Process -Name "Palworld-Win64-Shipping" -ErrorAction SilentlyContinue) {
+        return @{ Name="Palworld"; Status="crit"; Detail="running — the mod DLL is locked while the game is open";
+                  Hint="Close Palworld, then re-run." }
+    }
+    $native = Test-Path (Join-Path $dir "Mods\NativeMods\UE4SS\UE4SS.dll")
+    $win64 = Test-Path (Join-Path $dir "Pal\Binaries\Win64\ue4ss\UE4SS.dll")
+    if ($native -and $win64) {
+        return @{ Name="Palworld"; Status="crit"; Detail="$dir has BOTH the Workshop UE4SS and a Win64 UE4SS; running both crashes the game";
+                  Hint="Add -RemoveWin64Ue4ss to drop the Win64 copy, or remove it yourself." }
+    }
+    $instance = if ($native) { "Workshop UE4SS" } elseif ($win64) { "Win64 UE4SS" } else { "no UE4SS" }
+    if (-not $native -and -not $win64 -and -not $Ue4ssZip -and -not $SkipUe4ss) {
+        return @{ Name="Palworld"; Status="crit"; Detail="$dir ($instance)";
+                  Hint="Subscribe to the Steam Workshop UE4SS, or pass -Ue4ssZip <UE4SS release zip>." }
+    }
+    return @{ Name="Palworld"; Status="ok"; Detail="$dir ($instance)"; Hint="" }
+}
+
+function Check-AmityWorkspace() {
+    $ws = Resolve-AmityWorkspace
+    if (-not (Test-Path (Join-Path $ws "RE-UE4SS\CMakeLists.txt"))) {
+        return @{ Name="UE4SS workspace"; Status="crit"; Detail="not set up at $ws";
+                  Hint="One-time: .\psp-amity\scripts\setup-workspace.ps1 -Root `"$ws`"   (clones the pinned RE-UE4SS fork; needs git)" }
+    }
+    return @{ Name="UE4SS workspace"; Status="ok"; Detail=$ws; Hint="" }
+}
+
 function Check-Repo() {
     if ((Test-Path (Join-Path $RepoRoot "psp-server/Cargo.toml")) -and (Test-Path $UiDir)) {
         return $null
@@ -193,8 +295,10 @@ function Check-DiskSpace($mode) {
         "webapp"        { 1500 }
         "landing"       { 300 }
         "docker"        { 2500 }
+        "signal"        { 3000 }
         "build-desktop" { 3500 }
         "build-web"     { 3500 }
+        "amity"         { 4000 }
         default         { 800 }
     }
     $free = 100000
@@ -210,24 +314,45 @@ function Check-DiskSpace($mode) {
               Hint="Free space on $RepoRoot" }
 }
 
+function Get-PortOwner([int]$port) {
+    try {
+        return (Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction Stop |
+            Select-Object -First 1).OwningProcess
+    } catch { return $null }
+}
+
 function Check-Port($port) {
-    # On Windows we skip the bind probe (unreliable); the dev server reports
-    # clearly if it can't bind.
-    return @{ Name="Port $port"; Status="ok"; Detail="checked at launch (Windows)"; Hint="" }
+    $owner = Get-PortOwner $port
+    if ($owner) {
+        $name = try { (Get-Process -Id $owner -ErrorAction Stop).ProcessName } catch { "pid $owner" }
+        return @{ Name="Port $port"; Status="warn"; Detail="in use by $name (pid $owner)";
+                  Hint="Stop it, or pick another port. -Signal skips components whose port is taken." }
+    }
+    return @{ Name="Port $port"; Status="ok"; Detail="free"; Hint="" }
 }
 
 function Run-Preflight($mode) {
     $results = New-Object System.Collections.Generic.List[object]
+    if ($mode -eq "amity") {
+        $results.Add((Check-CMake)) | Out-Null
+        $results.Add((Check-Git)) | Out-Null
+        $repo = Check-Repo
+        if ($repo) { $results.Add($repo) | Out-Null }
+        $results.Add((Check-AmityWorkspace)) | Out-Null
+        $results.Add((Check-Palworld)) | Out-Null
+        $results.Add((Check-DiskSpace $mode)) | Out-Null
+        return $results
+    }
     $results.Add((Check-Bun)) | Out-Null
 
-    $needsRust = $mode -in @("web","desktop","serve","webapp","build","build-desktop","build-web","docker")
-    $needsStrictRust = $mode -in @("desktop","serve","web","build","build-desktop")
+    $needsRust = $mode -in @("web","desktop","serve","webapp","build","build-desktop","build-web","docker","signal")
+    $needsStrictRust = $mode -in @("desktop","serve","web","build","build-desktop","signal")
     if ($needsRust) { $results.Add((Check-Cargo $needsStrictRust)) | Out-Null }
 
-    if ($mode -in @("desktop","build-desktop")) {
+    if ($mode -in @("desktop","build-desktop","signal")) {
         $results.Add((Check-TauriCli $true)) | Out-Null
     }
-    if ($mode -in @("webapp","build-web")) {
+    if ($mode -in @("webapp","build-web","signal")) {
         $results.Add((Check-WasmPack $true)) | Out-Null
         $results.Add((Check-WasmTarget $true)) | Out-Null
     }
@@ -246,6 +371,11 @@ function Run-Preflight($mode) {
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
     } elseif ($mode -in @("webapp","landing")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
+    } elseif ($mode -eq "signal") {
+        $results.Add((Check-Port $(if ($BrokerPort) { $BrokerPort } else { $BrokerPortDefault }))) | Out-Null
+        $results.Add((Check-Port $VitePortDefault)) | Out-Null
+        $results.Add((Check-Port $ServerPortDefault)) | Out-Null
+        $results.Add((Check-Port $(if ($WebPort) { $WebPort } else { $WebPortDefault }))) | Out-Null
     }
     return $results
 }
@@ -322,8 +452,24 @@ function Write-WebEnv([string]$wsUrl) {
 
 function Write-DesktopEnv() {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
-    Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=127.0.0.1:5174/ws`nPUBLIC_DESKTOP_MODE=true`n"
+    Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=$DesktopWsUrl`nPUBLIC_DESKTOP_MODE=true`n"
     Log-Info "Wrote psp-ui/.env (desktop mode)"
+}
+
+function Ensure-BrokerInstall() {
+    $bun = Resolve-Tool "bun"
+    if (-not $bun) { Die "bun not found — run .\easyrun.ps1 -Check first." }
+    if (Test-Path $BrokerModules) {
+        Log-Info "signal-broker/node_modules present — skipping bun install."
+        return
+    }
+    Log-Info "Running 'bun install' in signal-broker/…"
+    Push-Location $BrokerDir
+    try {
+        & $bun install
+        if ($LASTEXITCODE -ne 0) { Pop-Location; Die "bun install (signal-broker) failed." }
+    } finally { Pop-Location }
+    Log-Ok "signal-broker install complete."
 }
 
 # We let child processes inherit the console (no output redirection), so their
@@ -369,6 +515,68 @@ function Spawn-BgTagged($tag, [string[]]$cmd, [string]$cwd, $envVars) {
     return $p
 }
 
+function Get-Mux() {
+    if ($NoMux) { return $null }
+    $mux = Resolve-Tool "psmux"
+    if (-not $mux) { return $null }
+    try { if ([Console]::IsOutputRedirected) { return $null } } catch { }
+    return $mux
+}
+
+function Quote-Ps([string]$s) { "'" + ($s -replace "'", "''") + "'" }
+
+function Mux-PaneBody($tag, [string[]]$cmd, [string]$cwd, $envVars) {
+    $parts = @()
+    if ($cwd) { $parts += "Set-Location $(Quote-Ps $cwd)" }
+    if ($envVars) {
+        foreach ($k in $envVars.Keys) { $parts += "`$env:$k = $(Quote-Ps $envVars[$k])" }
+    }
+    $parts += "& " + (($cmd | ForEach-Object { Quote-Ps $_ }) -join " ")
+    $parts += "Write-Host $(Quote-Ps "[easyrun] $tag exited") -ForegroundColor Yellow"
+    return $parts -join "; "
+}
+
+function Mux-Launch($mux, $panes) {
+    & $mux has-session -t $MuxSession *> $null
+    if ($LASTEXITCODE -eq 0) {
+        Die "psmux session '$MuxSession' already exists.
+    Attach:  psmux attach -t $MuxSession
+    Stop:    psmux kill-session -t $MuxSession
+    Or re-run with -NoMux to run inline."
+    }
+    $pwsh = (Get-Process -Id $PID).Path
+    $first = $true
+    foreach ($pane in $panes) {
+        Log-Info "Starting $($pane.Tag) (psmux pane): $($pane.Cmd -join ' ')"
+        # psmux silently drops some -Command bodies (paths, env assignments)
+        # while reporting success; base64 gives it nothing to parse.
+        $body = Mux-PaneBody $pane.Tag $pane.Cmd $pane.Cwd $pane.Env
+        $enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($body))
+        if ($first) {
+            & $mux new-session -d -s $MuxSession -n $mode -- $pwsh -NoProfile -NoExit -EncodedCommand $enc
+            $first = $false
+        } else {
+            & $mux split-window -t $MuxSession -- $pwsh -NoProfile -NoExit -EncodedCommand $enc
+        }
+        if ($LASTEXITCODE -ne 0) { Die "psmux failed to start pane '$($pane.Tag)'." }
+    }
+    & $mux select-layout -t $MuxSession tiled *> $null
+}
+
+function Mux-Attach($mux) {
+    Write-Host "  psmux session '$MuxSession': Ctrl-B d detaches (keeps running); Ctrl-B x kills a pane." -ForegroundColor DarkGray
+    Write-Host "  Stop everything: psmux kill-session -t $MuxSession" -ForegroundColor DarkGray
+    Write-Host ""
+    if ($env:TMUX) { & $mux switch-client -t $MuxSession } else { & $mux attach -t $MuxSession }
+    & $mux has-session -t $MuxSession *> $null
+    if ($LASTEXITCODE -eq 0) {
+        Log-Info "Session '$MuxSession' still running. Reattach: psmux attach -t $MuxSession"
+        $script:RestoreEnv = $false
+    } else {
+        Log-Info "Session '$MuxSession' ended."
+    }
+}
+
 function Cleanup-Children() {
     # Idempotent: safe to call from both Wait-OnProcs's finally and the
     # script-scope Invoke-WithCleanup finally. The list is cleared each call.
@@ -403,6 +611,94 @@ function Wait-ForHttp($url, $label, [int]$timeout = 60) {
     }
     Log-Warn "$label did not become reachable at $url within ${timeout}s"
     return $false
+}
+
+function Test-TcpPort([string]$targetHost, [int]$port, [int]$timeoutMs = 3000) {
+    $client = New-Object System.Net.Sockets.TcpClient
+    try {
+        $iar = $client.BeginConnect($targetHost, $port, $null, $null)
+        if ($iar.AsyncWaitHandle.WaitOne($timeoutMs) -and $client.Connected) {
+            $client.EndConnect($iar); return $true
+        }
+        return $false
+    } catch { return $false } finally { $client.Close() }
+}
+
+function Wait-TcpPort([string]$targetHost, [int]$port, [string]$label, [int]$timeout = 60) {
+    Log-Info "Waiting for $label at ${targetHost}:$port …"
+    $deadline = (Get-Date).AddSeconds($timeout)
+    while ((Get-Date) -lt $deadline) {
+        if (Test-TcpPort $targetHost $port 2000) { Log-Ok "$label is up: ${targetHost}:$port"; return $true }
+        Start-Sleep -Seconds 1
+    }
+    Log-Warn "$label not reachable at ${targetHost}:$port within ${timeout}s"
+    return $false
+}
+
+function Get-TurnMintStatus([int]$brokerPort) {
+    $url = "http://127.0.0.1:$brokerPort/signal/turn"
+    try {
+        $resp = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 15 -SkipHttpErrorCheck
+        $code = [int]$resp.StatusCode
+        if ($code -eq 200 -and $resp.Content -match '"credential"') {
+            return @{ Ok = $true; Definitive = $true; Detail = "minting (/signal/turn 200)" }
+        }
+        if ($code -eq 503 -and $resp.Content -match 'unconfigured') {
+            return @{ Ok = $false; Definitive = $true; Detail = "503 unconfigured (no TURN_SECRET loaded)" }
+        }
+        return @{ Ok = $false; Definitive = $false; Detail = "status $code (broker still starting?)" }
+    } catch {
+        return @{ Ok = $false; Definitive = $false; Detail = "no response yet ($($_.Exception.Message))" }
+    }
+}
+
+function Assert-LiveTurnSecret() {
+    $devVars = Join-Path $RepoRoot ".dev.vars"
+    if (-not (Test-Path $devVars)) {
+        Die "-LiveTurn needs the real relay secret. Create $devVars with:
+    TURN_SECRET=<value of /etc/turnserver.secret on the relay host>
+  (it is gitignored)."
+    }
+    $line = Get-Content $devVars | Where-Object { $_ -match '^\s*TURN_SECRET\s*=' } | Select-Object -First 1
+    if (-not $line) { Die "-LiveTurn: $devVars has no TURN_SECRET= line." }
+    $val = ($line -replace '^\s*TURN_SECRET\s*=\s*', '').Trim()
+    if (-not $val) { Die "-LiveTurn: TURN_SECRET in $devVars is empty." }
+    if ($val -eq 'local-dev-secret') {
+        Die "-LiveTurn: $devVars still holds the throwaway 'local-dev-secret'; the live relay rejects credentials minted with it. Use the real /etc/turnserver.secret value."
+    }
+    Log-Ok "-LiveTurn: real TURN_SECRET present in .dev.vars (value not shown)."
+}
+
+function Check-LiveRelayReachable() {
+    $relayHost = "turn.palworldsavepal.app"
+    foreach ($p in @(443, 3478)) {
+        if (Test-TcpPort $relayHost $p 3000) {
+            Log-Ok "live relay reachable: ${relayHost}:$p/tcp"
+        } else {
+            Log-Warn "live relay NOT reachable: ${relayHost}:$p/tcp — a restrictive local network or the relay host's provider firewall may block it. turns:443 is the fallback; relay tests can still pass if 443 is open."
+        }
+    }
+}
+
+function Report-TurnReadiness([int]$brokerPort) {
+    Wait-TcpPort "127.0.0.1" $brokerPort "broker" 60 | Out-Null
+    Log-Info "Checking /signal/turn (wrangler compiles the worker on its first request; this can take a bit)…"
+    $deadline = (Get-Date).AddSeconds(90)
+    $st = Get-TurnMintStatus $brokerPort
+    while (-not $st.Definitive -and (Get-Date) -lt $deadline) {
+        Start-Sleep -Seconds 2
+        $st = Get-TurnMintStatus $brokerPort
+    }
+    if ($st.Ok) {
+        Log-Ok "TURN: broker is $($st.Detail)."
+        return $true
+    }
+    if ($LiveTurn) {
+        Log-Fail "TURN: broker $($st.Detail). -LiveTurn requires a minting broker."
+        return $false
+    }
+    Log-Warn "TURN: broker $($st.Detail) — sessions will be STUN-only. Put a real TURN_SECRET in .dev.vars (repo root) and add -LiveTurn to test the relay."
+    return $true
 }
 
 function Ensure-BunInstall([bool]$force) {
@@ -569,13 +865,29 @@ function Run-Web($opts) {
     Write-WebEnv $wsUrl
     Banner "Dev: web  (${h}:$vitePort  +  psp-server :$serverPort)"
 
-    $vite = Spawn-BgTagged "vite" @($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") $UiDir $null
-    $server = $null
+    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
+        Cmd=@($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") })
     if (-not $NoServer) {
-        $server = Spawn-BgTagged "psp-server" @($cargo, "run", "-p", "psp-server", "--",
-            "--host", $h, "--port", "$serverPort",
-            "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
-            "--db", (Join-Path $RepoRoot "psp-rs.db"), "--dev") $RepoRoot $null
+        $components += @{ Tag="psp-server"; Cwd=$RepoRoot; Env=$null
+            Cmd=@($cargo, "run", "-p", "psp-server", "--",
+                "--host", $h, "--port", "$serverPort",
+                "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
+                "--db", (Join-Path $RepoRoot "psp-rs.db"), "--dev") }
+    }
+
+    $mux = Get-Mux
+    if ($mux -and $components.Count -ge 2) {
+        Mux-Launch $mux $components
+        Write-Host ""
+        Write-Host "  ▸ PSP web dev:  http://${h}:$vitePort" -ForegroundColor Cyan
+        Mux-Attach $mux
+        return
+    }
+
+    $vite = Spawn-BgTagged $components[0].Tag $components[0].Cmd $components[0].Cwd $null
+    $server = $null
+    if ($components.Count -gt 1) {
+        $server = Spawn-BgTagged $components[1].Tag $components[1].Cmd $components[1].Cwd $null
     }
     Wait-ForHttp "http://${h}:$vitePort" "Vite" 60 | Out-Null
     Write-Host ""
@@ -640,6 +952,122 @@ function Run-Landing($opts) {
     Write-Host "  Buttons that load a save won't work. Ctrl-C to stop." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($vite) @()
+}
+
+function Run-Signal($opts) {
+    $bun = Resolve-Tool "bun"
+    $cargo = Resolve-Tool "cargo"
+    if (-not $bun)   { Die "bun not found." }
+    if (-not $cargo) { Die "cargo not found." }
+    try { & cargo tauri --version *> $null } catch { }
+    if ($LASTEXITCODE -ne 0) {
+        Die "Tauri CLI not available. Install it:`n    cargo install tauri-cli --version `"^2`" --locked"
+    }
+    if (-not (Test-Path (Join-Path $RepoRoot "wrangler.jsonc"))) { Die "wrangler.jsonc not found at repo root." }
+
+    $brokerPort = if ($BrokerPort) { $BrokerPort } else { $BrokerPortDefault }
+    $webPort    = if ($WebPort)    { $WebPort }    else { $WebPortDefault }
+    if ($webPort -in @($VitePortDefault, $ServerPortDefault, $brokerPort)) {
+        Die "-WebPort $webPort collides with the desktop vite ($VitePortDefault), psp-server ($ServerPortDefault) or broker ($brokerPort)."
+    }
+
+    $lanIp = $null
+    if (-not $LocalOnly) {
+        $lanIp = if ($HostAddr) { $HostAddr } else { Detect-LanIp }
+        if (-not $lanIp) { Log-Warn "No LAN IP detected; binding to localhost only (phones won't reach it)." }
+    }
+    $advertiseHost = if ($lanIp) { $lanIp } else { "localhost" }
+    $bind          = if ($lanIp) { "0.0.0.0" } else { "127.0.0.1" }
+
+    if ($LiveTurn) {
+        Assert-LiveTurnSecret
+        Check-LiveRelayReachable
+    }
+
+    Ensure-BunInstall $false
+    Ensure-BrokerInstall
+    Ensure-Wasm $RebuildWasm
+    Gen-JsonManifest
+    Write-DesktopEnv
+    if (-not (Test-Path (Join-Path $RepoRoot "ui_build"))) {
+        New-Item -ItemType Directory -Force -Path (Join-Path $RepoRoot "ui_build") | Out-Null
+        Log-Info "Created empty ui_build/ (Tauri dev resource check)."
+    }
+
+    $brokerUrl  = "ws://${advertiseHost}:$brokerPort"
+    $pairingUrl = "http://${advertiseHost}:$webPort"
+    Banner "Dev: signal  (broker :$brokerPort  +  desktop  +  web $pairingUrl)"
+
+    $components = @()
+    $owner = Get-PortOwner $brokerPort
+    if ($owner) {
+        Log-Warn "broker: port $brokerPort already in use (pid $owner) — skipped."
+    } else {
+        $components += @{ Tag="broker"; Cwd=$BrokerDir; Env=$null
+            Cmd=@($bun, "run", "dev", "--", "--ip", $bind, "--port", "$brokerPort") }
+    }
+
+    $owner = Get-PortOwner $VitePortDefault
+    if ($owner) {
+        Log-Warn "desktop: port $VitePortDefault already in use (pid $owner) — skipped."
+    } else {
+        $components += @{ Tag="tauri"; Cwd=$PspDesktopDir; Cmd=@($cargo, "tauri", "dev")
+            Env=@{
+                "PSP_SIGNAL_BROKER_URL"       = "ws://localhost:$brokerPort"
+                "PSP_SIGNAL_PAIRING_URL_BASE" = $pairingUrl
+                "PUBLIC_DESKTOP_MODE"         = "true"
+                "PUBLIC_WS_URL"               = $DesktopWsUrl
+            } }
+    }
+
+    $webStarted = $false
+    $owner = Get-PortOwner $webPort
+    if ($owner) {
+        Log-Warn "web: port $webPort already in use (pid $owner) — skipped."
+    } else {
+        $webStarted = $true
+        $components += @{ Tag="web"; Cwd=$UiDir
+            Cmd=@($bun, "run", "dev:vite", "--", "--host", $bind, "--port", "$webPort")
+            Env=@{
+                "VITE_TRANSPORT"         = "worker"
+                "VITE_SIGNAL_BROKER_URL" = $brokerUrl
+                "PUBLIC_DESKTOP_MODE"    = "false"
+            } }
+    }
+
+    if ($components.Count -eq 0) { Die "Every component's port is already in use — nothing to start." }
+
+    $summary = {
+        Write-Host ""
+        Write-Host "  ▸ broker:   $brokerUrl" -ForegroundColor Cyan
+        Write-Host "  ▸ desktop:  cargo tauri dev (pairing links point at $pairingUrl)" -ForegroundColor Cyan
+        Write-Host "  ▸ web:      $pairingUrl" -ForegroundColor Cyan
+        if ($LiveTurn) {
+            Write-Host "  ▸ relay:    turn.palworldsavepal.app (live) — force it with $pairingUrl/signal?relay=1" -ForegroundColor Magenta
+            Write-Host "              a direct LAN connection never touches TURN; ?relay=1 makes it, then confirm 'Connected via relay' on the card." -ForegroundColor DarkGray
+        }
+    }
+
+    $mux = Get-Mux
+    if ($mux -and $components.Count -ge 2) {
+        Mux-Launch $mux $components
+        if (-not (Report-TurnReadiness $brokerPort)) {
+            & $mux kill-session -t $MuxSession *> $null
+            Die "-LiveTurn: broker is not minting TURN credentials (see above)."
+        }
+        & $summary
+        Mux-Attach $mux
+        return
+    }
+
+    $started = @()
+    foreach ($c in $components) { $started += Spawn-BgTagged $c.Tag $c.Cmd $c.Cwd $c.Env }
+    if (-not (Report-TurnReadiness $brokerPort)) { Die "-LiveTurn: broker is not minting TURN credentials (see above)." }
+    if ($webStarted) { Wait-ForHttp "http://127.0.0.1:$webPort" "Vite (web)" 60 | Out-Null }
+    & $summary
+    Write-Host "  Ctrl-C stops everything. easyrun restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host ""
+    Wait-OnProcs $started @()
 }
 
 function Run-Serve($opts) {
@@ -715,7 +1143,33 @@ function Run-BuildPlain($opts) {
     Log-Ok "Plain SPA build complete → ui_build/"
 }
 
+function Run-Amity($opts) {
+    $dir = Resolve-GameDir
+    if (-not $dir) { Die "Palworld install not found. Pass -GameDir <...\steamapps\common\Palworld>." }
+    $ws = Resolve-AmityWorkspace
+    Banner "Amity: build the UE4SS mod and install it into $dir"
+    $script = Join-Path $AmityDir "scripts/install-local.ps1"
+    $argList = @("-NoProfile", "-ExecutionPolicy", "Bypass", "-File", $script, "-GameDir", $dir, "-Root", $ws)
+    if ($Ue4ssZip)         { $argList += @("-Ue4ssZip", $Ue4ssZip) }
+    if ($SkipUe4ss)        { $argList += "-SkipUe4ss" }
+    if ($RemoveWin64Ue4ss) { $argList += "-RemoveWin64Ue4ss" }
+    $pwsh = (Get-Command pwsh).Source
+    $rc = Spawn-FgTagged "amity" (@($pwsh) + $argList) $AmityDir $null
+    if ($rc -ne 0) { Die "Amity mod build/install failed." }
+    Log-Ok "PSPAmity installed. Launch Palworld, load a world, and look for '[PSPAmity] bridge listening' in UE4SS.log."
+    Write-Host "  Then: -Desktop and open the Game (live mod) source, or bun psp-amity/tools/probe.ts caps" -ForegroundColor DarkGray
+}
+
 function Detect-LanIp() {
+    try {
+        $defaultRoute = Get-NetRoute -DestinationPrefix '0.0.0.0/0' -ErrorAction Stop |
+            Sort-Object RouteMetric | Select-Object -First 1
+        if ($defaultRoute) {
+            $ip = (Get-NetIPAddress -InterfaceIndex $defaultRoute.ifIndex -AddressFamily IPv4 -ErrorAction Stop |
+                Select-Object -First 1).IPAddress
+            if ($ip) { return $ip }
+        }
+    } catch { }
     try {
         $ips = Get-NetIPAddress -AddressFamily IPv4 |
             Where-Object { $_.IPAddress -ne '127.0.0.1' -and $_.IPAddress -notlike '169.254.*' -and $_.IPAddress -notlike '172.*' } |
@@ -755,21 +1209,49 @@ mode (pick one; defaults to -Web):
   -Landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   -Docker           Build & run the self-build Docker image.
   -Serve            Run only the Rust psp-server.
+  -Signal           Dev: PSP Signal loop — broker (wrangler) + desktop (Tauri)
+                    + web site on :5175, advertised on the LAN IP so phones
+                    can pair. Components whose port is taken are skipped.
   -BuildDesktop     Production desktop build → dist/.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
+  -Amity            Build the PSP Amity UE4SS mod and install it into the local
+                    Palworld install (auto-detected from Steam). The game must
+                    be closed. One-time setup first:
+                    .\psp-amity\scripts\setup-workspace.ps1
 
 options:
   -Check            Run only the preflight for the selected mode, then exit.
                     Combine with a mode flag (e.g. -Check -Desktop).
   -InstallWasm      Install the WASM toolchain (wasm32 target + wasm-pack).
-  -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker).
+  -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker);
+                    LAN IP to advertise (-Signal, auto-detected by default).
   -VitePort <p>     Vite port (default 5173).
   -ServerPort <p>   psp-server port (default 5174).
+  -BrokerPort <p>   (-Signal) wrangler dev port (default 8787).
+  -WebPort <p>      (-Signal) web site port (default 5175).
+  -LocalOnly        (-Signal) bind everything to localhost; no LAN advertising.
+  -LiveTurn         (-Signal) test against the LIVE coturn relay: require a real
+                    TURN_SECRET in repo-root .dev.vars, probe the relay's ports,
+                    fail if the broker isn't minting, and print the
+                    /signal?relay=1 forced-relay test URL. Plain -Signal already
+                    reports TURN status but never fails on it.
   -NoServer         (-Web) skip psp-server (Vite only).
   -SkipCheck        Skip the preflight (advanced).
   -NoInstall        Skip bun install if node_modules exists.
+  -NoMux            Run components inline instead of in psmux panes. Modes
+                    that start several components (-Web, -Signal) use psmux
+                    when it is installed: one pane each, session "psp".
   -RebuildWasm      (-Webapp/-BuildWeb) force wasm-pack rebuild.
+  -GameDir <path>   (-Amity) Palworld install dir (…\steamapps\common\Palworld)
+                    when Steam auto-detection does not find it.
+  -AmityWorkspace <path>  (-Amity) the UE4SS CMake workspace (default: an
+                    amity-build folder beside this repo).
+  -Ue4ssZip <path>  (-Amity) UE4SS release zip to install under Win64 when the
+                    game has no UE4SS instance and the Workshop one is absent.
+  -SkipUe4ss        (-Amity) install only the mod, never UE4SS itself.
+  -RemoveWin64Ue4ss (-Amity) drop a Win64 UE4SS that would run beside the
+                    Workshop one (running both crashes the game).
   -Json             Machine-readable preflight JSON (implies -Check).
   -ForceCheckMode <m>   Override the preflight mode (advanced).
   -Help             Show this help.
@@ -789,9 +1271,11 @@ $mode = if ($ForceCheckMode) { $ForceCheckMode }
         elseif ($Landing)     { "landing" }
         elseif ($Docker)      { "docker" }
         elseif ($Serve)       { "serve" }
+        elseif ($Signal)      { "signal" }
         elseif ($BuildDesktop){ "build-desktop" }
         elseif ($BuildWeb)    { "build-web" }
         elseif ($Build)       { "build" }
+        elseif ($Amity)       { "amity" }
         else                  { "web" }
 
 if ($InstallWasm) { Run-InstallWasm; return }
@@ -854,8 +1338,10 @@ Invoke-WithCleanup {
         "landing"       { Run-Landing $null }
         "docker"        { Run-Docker $null }
         "serve"         { Run-Serve $null }
+        "signal"        { Run-Signal $null }
         "build-desktop" { Run-BuildDesktop $null }
         "build-web"     { Run-BuildWeb $null }
         "build"         { Run-BuildPlain $null }
+        "amity"         { Run-Amity $null }
     }
 }

@@ -68,10 +68,15 @@ data/json/settings.json
 
 # Superpowers scratch: SDD ledgers, task briefs, brainstorm mockups
 /.superpowers/
+/PSP_SIGNAL_PLANNING.md
 
 # Wrangler local dev state (workerd cache, .dev.vars)
 .wrangler/
+.dev.vars
 
 # Plugin editor scratch: downloaded language server binary and workspace copies
 /lua-language-server/
 /plugin-workspaces/
+
+# PSP Signal: real world snapshots with account identifiers
+psp-signal-gamedata-sample.json

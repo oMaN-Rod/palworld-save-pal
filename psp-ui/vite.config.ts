@@ -1,5 +1,6 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import tailwindcss from '@tailwindcss/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -102,6 +103,35 @@ export default defineConfig({
 		noExternal: [/^@skeletonlabs\//, /^@zag-js\//, 'maplibre-gl']
 	},
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}', 'scripts/**/*.test.mjs', '../scripts/**/*.test.mjs']
+		// Split by project instead of a global `environment`: component render
+		// tests (`*.render.test.ts`) need jsdom and the `browser` resolve
+		// condition so `mount()` and SvelteKit's runtime resolve to their client
+		// build; every other suite stays on the fast, default node environment
+		// and must not pick up that condition, which flips `BROWSER` on for
+		// `@sveltejs/kit` runtime modules that then reach for `window`/`location`.
+		projects: [
+			{
+				extends: true,
+				test: {
+					name: 'node',
+					environment: 'node',
+					include: [
+						'src/**/*.{test,spec}.{js,ts}',
+						'scripts/**/*.test.mjs',
+						'../scripts/**/*.test.mjs'
+					],
+					exclude: ['src/**/*.render.test.ts']
+				}
+			},
+			{
+				extends: true,
+				plugins: [svelteTesting()],
+				test: {
+					name: 'component',
+					environment: 'jsdom',
+					include: ['src/**/*.render.test.ts']
+				}
+			}
+		]
 	}
 });

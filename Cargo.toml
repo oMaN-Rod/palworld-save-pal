@@ -35,6 +35,7 @@ psp-plugin = { path = "psp-plugin" }
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
+tokio-util = "0.7"
 tower-http = { version = "0.6", features = ["fs", "compression-gzip"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["float_roundtrip", "preserve_order"] }
@@ -60,9 +61,13 @@ bollard = "0.18"
 reqwest = { version = "0.12", features = ["json"] }
 sysinfo = "0.33"
 sha2 = "0.10"
+hkdf = "0.12"
+aes-gcm = "0.11"
+rand = "0.9"
 flate2 = "1"
 tar = "0.4"
 async-trait = "0.1"
+webrtc = "=0.20.4"
 futures-util = "0.3"
 # dev-dependencies
 tokio-tungstenite = "0.24"

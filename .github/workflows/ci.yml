@@ -70,11 +70,25 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: bun-ci-${{ runner.os }}-${{ hashFiles('psp-ui/bun.lock') }}
+          key: bun-ci-${{ runner.os }}-${{ hashFiles('psp-ui/bun.lock', 'signal-broker/bun.lock') }}
 
       - name: Install frontend dependencies
         working-directory: psp-ui
         run: bun install --frozen-lockfile
+
+      # Named files, not the whole suite: the rest of it has failures that
+      # predate this workflow and would drown anything a change here breaks.
+      - name: Signal frontend tests
+        working-directory: psp-ui
+        run: bunx vitest run src/lib/signal/crypto.test.ts src/lib/signal/session.test.ts src/lib/components/map/features/liveActorFC.test.ts
+
+      - name: Install broker dependencies
+        working-directory: signal-broker
+        run: bun install --frozen-lockfile
+
+      - name: Broker tests
+        working-directory: signal-broker
+        run: bun run test
 
       - name: Desktop web build succeeds
         working-directory: psp-ui

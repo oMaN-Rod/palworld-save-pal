@@ -790,6 +790,7 @@ mode (pick one; defaults to --web):
   --build-desktop    Production desktop build → dist/.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
+  (The PSP Amity UE4SS mod is Windows-only: easyrun.ps1 -Amity.)
 
 options:
   --check, --doctor  Run only the preflight for the selected mode, then exit.
