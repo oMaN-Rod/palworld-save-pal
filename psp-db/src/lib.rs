@@ -1,3 +1,4 @@
+pub mod amity_instances;
 pub mod blueprints;
 pub mod driver;
 pub mod error;
