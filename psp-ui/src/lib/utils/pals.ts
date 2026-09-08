@@ -127,7 +127,13 @@ export async function handleMaxOutPal(pal: Pal, player: Player): Promise<void> {
 	if (!pal) return;
 	const appState = getAppState();
 	pal.level = appState.settings.cheat_mode ? 255 : MAX_LEVEL;
-	const maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
+	let maxLevelData;
+	try {
+		maxLevelData = await expData.getExpDataByLevel(pal.level + 1);
+	} catch (error) {
+		console.error('Error maxing out pal:', error);
+		return;
+	}
 	pal.exp = maxLevelData.PalTotalEXP - maxLevelData.PalNextEXP;
 	editAlpha(pal, true);
 	pal.is_awakened = true;

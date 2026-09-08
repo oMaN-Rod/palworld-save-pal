@@ -23,20 +23,22 @@
 		onSelect,
 		showCloneToUps = true,
 		showCloneToPlayer = true,
-		disabled = false
+		disabled = false,
+		levelCap
 	} = $props<{
 		pal: Pal;
-		onMove: () => void;
-		onAdd: () => void;
-		onClone: () => void;
+		onMove?: () => void;
+		onAdd?: () => void;
+		onClone?: () => void;
 		onCloneToUps?: () => void;
 		onCloneToPlayer?: () => void;
-		onDelete: () => void;
+		onDelete?: () => void;
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
 		showCloneToUps?: boolean;
 		showCloneToPlayer?: boolean;
 		disabled?: boolean;
+		levelCap?: number;
 	}>();
 
 	const appState = getAppState();
@@ -61,25 +63,38 @@
 
 	const palData = $derived(palsData.getByKey(pal.character_key));
 
+	type MenuItem = { label: string; onClick: () => void; icon?: string };
+
 	const menuItems = $derived.by(() => {
 		if (!pal || pal.character_id === 'None') {
-			return [
-				{
-					label: m.add_new_pal({ pal: c.pal }),
-					onClick: onAdd,
-					icon: 'tabler:plus'
-				}
-			];
+			return onAdd
+				? [
+						{
+							label: m.add_new_pal({ pal: c.pal }),
+							onClick: onAdd,
+							icon: 'tabler:plus'
+						}
+					]
+				: [];
 		}
 
-		const items = [
-			{
+		const items: MenuItem[] = [];
+
+		if (onMove) {
+			items.push({
 				label: m.move_to_entity({ entity: m.party() }),
 				onClick: onMove,
 				icon: 'tabler:archive-off'
-			},
-			{ label: m.clone_selected_pal({ pal: c.pal }), onClick: onClone, icon: 'tabler:copy' }
-		];
+			});
+		}
+
+		if (onClone) {
+			items.push({
+				label: m.clone_selected_pal({ pal: c.pal }),
+				onClick: onClone,
+				icon: 'tabler:copy'
+			});
+		}
 
 		if (onCloneToUps && showCloneToUps) {
 			items.push({
@@ -97,11 +112,13 @@
 			});
 		}
 
-		items.push({
-			label: m.delete_entity({ entity: c.pal }),
-			onClick: onDelete,
-			icon: 'tabler:trash'
-		});
+		if (onDelete) {
+			items.push({
+				label: m.delete_entity({ entity: c.pal }),
+				onClick: onDelete,
+				icon: 'tabler:trash'
+			});
+		}
 
 		return items;
 	});
@@ -111,17 +128,18 @@
 		if (!pal) return '';
 		return assetLoader.loadMenuImage(pal.character_key, palData ? palData.is_pal : false);
 	});
+	const effectiveLevelCap = $derived(levelCap ?? appState.selectedPlayer?.level);
 	const palLevel = $derived(
-		appState.selectedPlayer?.level! < pal.level ? appState.selectedPlayer?.level : pal.level
+		effectiveLevelCap !== undefined && effectiveLevelCap < pal.level ? effectiveLevelCap : pal.level
 	);
 	const levelSyncClass = $derived(
-		appState.selectedPlayer?.level! < pal.level ? 'text-error-500' : ''
+		effectiveLevelCap !== undefined && effectiveLevelCap < pal.level ? 'text-error-500' : ''
 	);
 
 	function handleClick(event: MouseEvent) {
 		if (disabled) return;
 		if (!pal || pal.character_id === 'None') {
-			onAdd();
+			onAdd?.();
 			return;
 		}
 

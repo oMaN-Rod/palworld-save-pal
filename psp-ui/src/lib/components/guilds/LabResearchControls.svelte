@@ -17,7 +17,7 @@
 	} = $props<{
 		guild: Guild;
 		selectedCategory: string;
-		unlockAllForCategory: (category: string) => void;
+		unlockAllForCategory?: (category: string) => void;
 	}>();
 
 	const categories = $derived.by(() => {
@@ -79,20 +79,20 @@
 </script>
 
 <div class="flex flex-col space-y-1 overflow-y-auto">
-	{#each categories as category}
+	{#each categories as category (category)}
 		{@const iconSrc = categoryIcons[category] || staticIcons.unknownIcon}
 		{@const workSuitability = workSuitabilityData.workSuitability[category as WorkSuitability]}
 		{@const categoryProgress = getCategoryProgress(category)}
-		<div class="flex items-center gap-2">
+		<div class="flex w-full items-center gap-2">
 			<button
 				class={cn(
-					'btn border-surface-800 hover:ring-secondary-500 flex flex-1 items-center justify-start space-x-2 rounded-none border p-2 text-start text-sm hover:ring-2 hover:ring-inset',
+					'btn border-surface-800 hover:ring-secondary-500 grid min-w-0 flex-1 grid-cols-[2rem_minmax(0,1fr)_auto] items-center gap-2 rounded-none border p-2 text-left text-sm hover:ring-2 hover:ring-inset',
 					selectedCategory === category ? 'bg-secondary-800/50' : ''
 				)}
 				onclick={() => (selectedCategory = category)}
 			>
-				<img src={iconSrc} alt={category} class="h-8 w-8" />
-				<span class="grow">
+				<img src={iconSrc} alt={category} class="h-8 w-8 shrink-0" />
+				<span class="min-w-0 grow text-left">
 					{workSuitability.localized_name || category}
 				</span>
 				<div class="flex gap-2">
@@ -100,17 +100,19 @@
 					<span class="text-sm"> / {categoryProgress.total}</span>
 				</div>
 			</button>
-			<Button
-				variant="ghost"
-				size="icon"
-				class="border-surface-800 hover:ring-secondary-500 border hover:ring-2 hover:ring-inset"
-				onclick={() => unlockAllForCategory(category)}
-				title={m.unlock_all_category_research({
-					category: workSuitability.localized_name || category
-				})}
-			>
-				<Icon icon="tabler:lock-open" class="h-4 w-4" />
-			</Button>
+			{#if unlockAllForCategory}
+				<Button
+					variant="ghost"
+					size="icon"
+					class="border-surface-800 hover:ring-secondary-500 border hover:ring-2 hover:ring-inset"
+					onclick={() => unlockAllForCategory(category)}
+					title={m.unlock_all_category_research({
+						category: workSuitability.localized_name || category
+					})}
+				>
+					<Icon icon="tabler:lock-open" class="h-4 w-4" />
+				</Button>
+			{/if}
 		</div>
 	{/each}
 </div>

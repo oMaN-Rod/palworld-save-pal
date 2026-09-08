@@ -71,6 +71,8 @@
 		try {
 			const response = await sendAndWait<{ pals: PalSummary[] }>(MessageType.GET_PAL_SUMMARIES);
 			summaries = response.pals ?? [];
+		} catch (error) {
+			console.error('Error fetching pal summaries:', error);
 		} finally {
 			loadingRows = false;
 		}

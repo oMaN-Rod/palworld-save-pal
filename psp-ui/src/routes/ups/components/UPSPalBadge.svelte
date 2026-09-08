@@ -195,9 +195,6 @@
 			await upsState.deletePals([upsPal.id]);
 		}
 	}
-
-	// Required by PalBadge's props but unused in the UPS context.
-	function dummyHandler() {}
 </script>
 
 <ContextMenu items={menuItems} menuClass="bg-surface-700" xOffset={-32}>
@@ -210,10 +207,6 @@
 					onSelect(p, e);
 				}
 			}}
-			onMove={dummyHandler}
-			onAdd={dummyHandler}
-			onClone={dummyHandler}
-			onDelete={dummyHandler}
 		/>
 	</div>
 </ContextMenu>

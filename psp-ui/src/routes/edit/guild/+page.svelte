@@ -13,7 +13,7 @@
 		Rarity
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { PalBadge } from '$components/pal';
+	import { PalBadge, PalGrid } from '$components/pal';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';
 	import LabResearch from '$components/guilds/LabResearch.svelte';
@@ -1014,9 +1014,7 @@
 				{/if}
 				{#if activeTab == 'pals'}
 					<div id="guild-pals-grid" class="overflow-hidden">
-						<div
-							class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
-						>
+						<PalGrid>
 							{#each currentPageItems as item (item.pal.instance_id)}
 								{#if item.pal.character_id !== 'None' || !palSearchQuery}
 									<PalBadge
@@ -1030,7 +1028,7 @@
 									/>
 								{/if}
 							{/each}
-						</div>
+						</PalGrid>
 					</div>
 				{:else if activeTab == 'storage'}
 					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}

@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-const mockAppState = { selectedPal: undefined as unknown, saveState: vi.fn() };
+const mockAppState = {
+	selectedPal: undefined as unknown,
+	saveState: vi.fn().mockResolvedValue(undefined)
+};
 vi.mock('./appState.svelte', () => ({
 	getAppState: () => mockAppState
 }));
@@ -11,7 +14,7 @@ const pal = { instance_id: 'abc' } as never;
 
 beforeEach(() => {
 	mockAppState.selectedPal = undefined;
-	mockAppState.saveState = vi.fn();
+	mockAppState.saveState = vi.fn().mockResolvedValue(undefined);
 });
 
 describe('palEditorState', () => {

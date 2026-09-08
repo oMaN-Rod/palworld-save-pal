@@ -29,7 +29,11 @@ class PalEditorState {
 	}
 
 	close() {
-		getAppState().saveState();
+		getAppState()
+			.saveState()
+			.catch((error) => {
+				console.error('Error saving state on close:', error);
+			});
 		this.#isOpen = false;
 		this.#loading = false;
 	}

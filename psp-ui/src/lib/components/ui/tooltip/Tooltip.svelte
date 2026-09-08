@@ -53,6 +53,8 @@
 				]
 			});
 
+			if (!floatingEl) return;
+
 			Object.assign(floatingEl.style, {
 				left: `${x}px`,
 				top: `${y}px`

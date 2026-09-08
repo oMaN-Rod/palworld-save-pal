@@ -5,6 +5,7 @@ import PalBadge from './PalBadge.svelte';
 import PalCard from './PalCard.svelte';
 import PalContainerStats from './PalContainerStats.svelte';
 import PalFilterButtons from './PalFilterButtons.svelte';
+import PalGrid from './PalGrid.svelte';
 import PalHeader from './PalHeader.svelte';
 import PalInfoPopup from './PalInfoPopup.svelte';
 // PalModelViewer is deliberately NOT re-exported here: it imports three.js and
@@ -27,6 +28,7 @@ export {
 	PalCard,
 	PalContainerStats,
 	PalFilterButtons,
+	PalGrid,
 	PalHeader,
 	PalInfoPopup,
 	PassiveSkillBadge,

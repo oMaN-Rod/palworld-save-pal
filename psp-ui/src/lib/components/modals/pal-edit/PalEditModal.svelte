@@ -22,7 +22,7 @@
 	} from '$components/modals';
 	import { Button, SectionHeader, Tooltip } from '$components/ui';
 	import { expData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState } from '$states';
+	import { getAppState, getModalState, getToastState } from '$states';
 	import {
 		defaultPresetConfig,
 		EntryState,
@@ -40,6 +40,8 @@
 	const appState = getAppState();
 
 	const modal = getModalState();
+
+	const toast = getToastState();
 
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
@@ -90,10 +92,14 @@
 				palLevelProgressMax = 1;
 				return;
 			}
-			const nextExp = await expData.getExpDataByLevel(appState.selectedPal.level + 1);
-			palLevelProgressToNext = nextExp.PalTotalEXP - appState.selectedPal.exp;
-			palLevelProgressValue = nextExp.PalNextEXP - palLevelProgressToNext;
-			palLevelProgressMax = nextExp.PalNextEXP;
+			try {
+				const nextExp = await expData.getExpDataByLevel(appState.selectedPal.level + 1);
+				palLevelProgressToNext = nextExp.PalTotalEXP - appState.selectedPal.exp;
+				palLevelProgressValue = nextExp.PalNextEXP - palLevelProgressToNext;
+				palLevelProgressMax = nextExp.PalNextEXP;
+			} catch (error) {
+				console.error('Error calculating pal level progress:', error);
+			}
 		}
 	}
 
@@ -196,7 +202,12 @@
 			skills
 		} as PresetProfile;
 
-		await presetsData.addPresetProfile(newPreset);
+		try {
+			await presetsData.addPresetProfile(newPreset);
+		} catch (error) {
+			console.error('Error adding preset:', error);
+			toast.add(m.preset_save_failed(), m.error(), 'error');
+		}
 	}
 
 	function handleMaxIVs() {
@@ -341,7 +352,12 @@
 			}
 		} as PresetProfile;
 
-		await presetsData.addPresetProfile(newPreset);
+		try {
+			await presetsData.addPresetProfile(newPreset);
+		} catch (error) {
+			console.error('Error adding preset:', error);
+			toast.add(m.preset_save_failed(), m.error(), 'error');
+		}
 	}
 
 	$effect(() => {

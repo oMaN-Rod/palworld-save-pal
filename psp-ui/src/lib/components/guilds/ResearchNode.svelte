@@ -10,15 +10,17 @@
 	let {
 		node,
 		selectedNode = $bindable(),
-		unlockResearch,
+		unlockResearch = undefined,
 		selectNode,
-		nodeElements = $bindable()
+		nodeElements = $bindable(),
+		showProgress = false
 	} = $props<{
 		node: TreeNode;
 		selectedNode?: TreeNode | null;
-		unlockResearch: (node: TreeNode) => void;
+		unlockResearch?: (node: TreeNode) => void;
 		selectNode: (node: TreeNode) => void;
 		nodeElements?: { [key: string]: HTMLElement };
+		showProgress?: boolean;
 	}>();
 
 	let isHovered = $state(false);
@@ -35,7 +37,7 @@
 	}
 
 	function handleClick() {
-		if (!node.isCompleted && node.isUnlocked) {
+		if (unlockResearch && !node.isCompleted && node.isUnlocked) {
 			unlockResearch(node);
 		}
 		selectNode(node);
@@ -62,8 +64,22 @@
 	const baseButtonClass =
 		'flex h-20 w-20 items-center justify-center transition-all relative bg-cover bg-center 2xl:h-24 2xl:w-24 focus:outline-none';
 
+	const progress = $derived(
+		node.totalWorkAmount > 0 ? Math.min(1, node.workAmount / node.totalWorkAmount) : 0
+	);
+
+	const nodeOpacity = $derived(
+		!showProgress
+			? !node.isUnlocked && !node.isCompleted
+				? 0.5
+				: 1
+			: node.isCompleted
+				? 1
+				: 0.34 + 0.56 * progress
+	);
+
 	const dynamicButtonClass = $derived(
-		cn(!node.isUnlocked && !node.isCompleted && 'cursor-not-allowed opacity-50')
+		cn(!node.isUnlocked && !node.isCompleted && 'cursor-not-allowed')
 	);
 </script>
 
@@ -73,8 +89,9 @@
 			<button
 				class={cn(baseButtonClass, dynamicButtonClass)}
 				style:background-image={backgroundImageUrl ? `url('${backgroundImageUrl}')` : 'none'}
+				style:opacity={nodeOpacity}
 				onclick={handleClick}
-				disabled={!node.isUnlocked && !node.isCompleted}
+				disabled={!!unlockResearch && !node.isUnlocked && !node.isCompleted}
 				onmouseenter={() => {
 					isHovered = true;
 					selectNode(node);
@@ -83,6 +100,23 @@
 				onfocus={() => selectNode(node)}
 				aria-label={node.research.localized_name}
 			>
+				{#if showProgress && !node.isCompleted && progress > 0}
+					<svg class="pointer-events-none absolute inset-0" viewBox="0 0 68 68" aria-hidden="true">
+						<circle cx="34" cy="34" r="30" fill="none" stroke="var(--color-surface-700)" stroke-width="3" />
+						<circle
+							cx="34"
+							cy="34"
+							r="30"
+							fill="none"
+							stroke="var(--color-primary-500)"
+							stroke-width="3"
+							stroke-linecap="round"
+							stroke-dasharray={2 * Math.PI * 30}
+							stroke-dashoffset={2 * Math.PI * 30 * (1 - progress)}
+							transform="rotate(-90 34 34)"
+						/>
+					</svg>
+				{/if}
 				<img
 					src={getNodeIcon(node.research)}
 					alt=""
@@ -93,7 +127,12 @@
 			{#snippet popup()}
 				<div class="text-center">
 					{node.research.localized_name}
-					{#if !node.isCompleted && node.isUnlocked}
+					{#if showProgress && !node.isCompleted && progress > 0}
+						<br /><span class="text-primary-400 text-xs tabular-nums"
+							>{Math.round(progress * 100)}%</span
+						>
+					{/if}
+					{#if unlockResearch && !node.isCompleted && node.isUnlocked}
 						<br /><span class="text-warning-400 text-xs">({m.click_to_complete()})</span>
 					{/if}
 					{#if node.isCompleted}
@@ -116,6 +155,7 @@
 					{unlockResearch}
 					{selectNode}
 					bind:nodeElements
+					{showProgress}
 				/>
 			{/each}
 		</div>

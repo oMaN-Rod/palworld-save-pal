@@ -484,6 +484,28 @@ export interface ItemContainer {
 	state?: EntryState;
 }
 
+export enum EPalPlayerEquipItemSlotType {
+	Head = 0,
+	Body = 1,
+	Accessory1 = 2,
+	Accessory2 = 3,
+	Shield = 4,
+	Glider = 5,
+	Accessory3 = 6,
+	Accessory4 = 7,
+	CaptureItemModifier = 8,
+	Max = 9
+}
+
+export const SPHERE_MODULE_SLOT = EPalPlayerEquipItemSlotType.CaptureItemModifier;
+
+export const PLAYER_EQUIP_ACCESSORY_SLOTS = [
+	EPalPlayerEquipItemSlotType.Accessory1,
+	EPalPlayerEquipItemSlotType.Accessory2,
+	EPalPlayerEquipItemSlotType.Accessory3,
+	EPalPlayerEquipItemSlotType.Accessory4
+] as const;
+
 export type PalPresetConfig = { [K in keyof PalPreset]: boolean };
 
 export type PalPresetPropertyNames = keyof PalPresetConfig;

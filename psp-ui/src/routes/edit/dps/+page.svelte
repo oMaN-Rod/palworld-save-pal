@@ -24,7 +24,7 @@
 	} from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
-	import { PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
+	import { PalBadge, PalContainerStats, PalFilterButtons, PalGrid } from '$components/pal';
 	import { send } from '$lib/utils/websocketUtils';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -747,9 +747,7 @@
 			</div>
 
 			<div id="dps-grid" class="overflow-hidden">
-				<div
-					class="grid grid-cols-3 place-items-center gap-4 p-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6"
-				>
+				<PalGrid>
 					{#each currentPageItems as item (item.pal.instance_id)}
 						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
 							<PalBadge
@@ -764,7 +762,7 @@
 							/>
 						{/if}
 					{/each}
-				</div>
+				</PalGrid>
 			</div>
 		</div>
 

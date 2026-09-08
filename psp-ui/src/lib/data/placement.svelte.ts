@@ -38,9 +38,13 @@ class Placement {
 
 	async runValidate(): Promise<void> {
 		if (!this.handle || !this.targetGuild) return;
-		const res = await blueprintsData.validate(this.handle, this.anchor, this.targetGuild);
-		this.findings = res.findings;
-		this.hasBlocking = res.has_blocking;
+		try {
+			const res = await blueprintsData.validate(this.handle, this.anchor, this.targetGuild);
+			this.findings = res.findings;
+			this.hasBlocking = res.has_blocking;
+		} catch (error) {
+			console.error('Error validating blueprint placement:', error);
+		}
 	}
 
 	async commit(): Promise<PlaceBlueprintResponse> {

@@ -19,20 +19,23 @@ export type WorldOptionPayload = {
 type PatchResult = { entries: { key: string; value: unknown }[] } | null;
 
 export async function openWorldOptionModal(): Promise<void> {
-	const payload = await sendAndWait<WorldOptionPayload>(MessageType.GET_WORLD_OPTION);
-	if (!payload?.present) return;
+	try {
+		const payload = await sendAndWait<WorldOptionPayload>(MessageType.GET_WORLD_OPTION);
+		if (!payload?.present) return;
 
-	// technologiesData is populated during app bootstrap, so it's already loaded by the time this button can show.
-	const technologies = Object.keys(technologiesData.technologies);
+		const technologies = Object.keys(technologiesData.technologies);
 
-	const modal = getModalState();
-	// @ts-ignore -- Svelte component types don't satisfy Component; every call site does this.
-	const result = await modal.showModal<PatchResult>(WorldOptionModal, {
-		title: 'World Options',
-		settings: payload.settings,
-		technologies
-	});
-	if (!result) return;
+		const modal = getModalState();
+		// @ts-ignore -- Svelte component types don't satisfy Component; every call site does this.
+		const result = await modal.showModal<PatchResult>(WorldOptionModal, {
+			title: 'World Options',
+			settings: payload.settings,
+			technologies
+		});
+		if (!result) return;
 
-	await sendAndWait(MessageType.UPDATE_WORLD_OPTION, { entries: result.entries });
+		await sendAndWait(MessageType.UPDATE_WORLD_OPTION, { entries: result.entries });
+	} catch (error) {
+		console.error('Error opening world options:', error);
+	}
 }

@@ -2,7 +2,14 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { getAppState, getToastState, getModalState } from '$states';
-	import { EntryState, type ItemContainerSlot, type ItemContainer } from '$types';
+	import {
+		EntryState,
+		EPalPlayerEquipItemSlotType,
+		PLAYER_EQUIP_ACCESSORY_SLOTS,
+		SPHERE_MODULE_SLOT,
+		type ItemContainerSlot,
+		type ItemContainer
+	} from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
@@ -442,7 +449,7 @@
 			const container = appState.selectedPlayer.player_equipment_armor_container;
 			container.slots.sort((a, b) => a.slot_index - b.slot_index);
 			let containerSlots = [];
-			for (let i = 0; i < 9; i++) {
+			for (let i = 0; i < EPalPlayerEquipItemSlotType.Max; i++) {
 				const slot = container.slots.find((s) => s.slot_index === i);
 				if (!slot) {
 					const emptySlot = {
@@ -458,12 +465,12 @@
 				}
 			}
 
-			headGear = containerSlots[0];
-			bodyGear = containerSlots[1];
-			shieldGear = containerSlots[4];
-			gliderGear = containerSlots[5];
-			sphereModule = containerSlots[8];
-			accessoryGear = containerSlots.slice(2, 4).concat(containerSlots.slice(6, 8));
+			headGear = containerSlots[EPalPlayerEquipItemSlotType.Head];
+			bodyGear = containerSlots[EPalPlayerEquipItemSlotType.Body];
+			shieldGear = containerSlots[EPalPlayerEquipItemSlotType.Shield];
+			gliderGear = containerSlots[EPalPlayerEquipItemSlotType.Glider];
+			sphereModule = containerSlots[SPHERE_MODULE_SLOT];
+			accessoryGear = PLAYER_EQUIP_ACCESSORY_SLOTS.map((slot) => containerSlots[slot]);
 			playerEquipmentArmorContainer.slots = containerSlots;
 		}
 	}
@@ -510,11 +517,15 @@
 
 		if (newLevel === appState.selectedPlayer.level) return;
 
-		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
+		try {
+			const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
-		appState.selectedPlayer.level = newLevel;
-		appState.selectedPlayer.exp = nextLevelData.TotalEXP - nextLevelData.NextEXP;
-		appState.selectedPlayer.state = EntryState.MODIFIED;
+			appState.selectedPlayer.level = newLevel;
+			appState.selectedPlayer.exp = nextLevelData.TotalEXP - nextLevelData.NextEXP;
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		} catch (error) {
+			console.error('Error incrementing player level:', error);
+		}
 	}
 
 	async function handleLevelDecrement(event: MouseEvent) {
@@ -537,11 +548,15 @@
 
 		if (newLevel === appState.selectedPlayer.level) return;
 
-		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
+		try {
+			const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
-		appState.selectedPlayer.level = newLevel;
-		appState.selectedPlayer.exp = newLevelData.TotalEXP - newLevelData.NextEXP;
-		appState.selectedPlayer.state = EntryState.MODIFIED;
+			appState.selectedPlayer.level = newLevel;
+			appState.selectedPlayer.exp = newLevelData.TotalEXP - newLevelData.NextEXP;
+			appState.selectedPlayer.state = EntryState.MODIFIED;
+		} catch (error) {
+			console.error('Error decrementing player level:', error);
+		}
 	}
 
 	$effect(() => {

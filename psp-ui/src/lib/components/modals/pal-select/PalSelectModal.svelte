@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { Button, Card, Tooltip, Combobox, Input } from '$components/ui';
-	import { type SelectOption } from '$types';
+	import { Button, Card, CornerDotButton, Tooltip, Combobox, Input } from '$components/ui';
+	import { PalGender, type SelectOption } from '$types';
 	import { palsData, elementsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
@@ -11,8 +11,15 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
-	let { title = m.select_entity({ entity: c.pal }), closeModal } = $props<{
+	let {
+		title = m.select_entity({ entity: c.pal }),
+		showNickname = true,
+		showGender = false,
+		closeModal
+	} = $props<{
 		title?: string;
+		showNickname?: boolean;
+		showGender?: boolean;
 		closeModal: (value: any) => void;
 	}>();
 
@@ -30,6 +37,7 @@
 	});
 	let selectedPal: string = $state('');
 	let nickname: string = $state('');
+	let gender: PalGender = $state(PalGender.FEMALE);
 	let modalContainer: HTMLDivElement;
 
 	function formatLabel(palId: string, palName: string) {
@@ -57,7 +65,11 @@
 	}
 
 	function handleClose(confirmed: boolean) {
-		closeModal(confirmed ? [selectedPal, nickname] : undefined);
+		closeModal(confirmed ? [selectedPal, nickname, gender] : undefined);
+	}
+
+	function toggleGender() {
+		gender = gender === PalGender.FEMALE ? PalGender.MALE : PalGender.FEMALE;
 	}
 
 	function getIconPath(option: SelectOption) {
@@ -100,7 +112,25 @@
 				</div>
 			{/snippet}
 		</Combobox>
-		<Input label={m.nickname()} inputClass="grow" bind:value={nickname} />
+		{#if showNickname}
+			<Input label={m.nickname()} inputClass="grow" bind:value={nickname} />
+		{/if}
+		{#if showGender}
+			<div class="mt-2 flex items-center space-x-2">
+				<span class="text-sm font-bold">{m.gender()}</span>
+				<Tooltip position="bottom">
+					<CornerDotButton onClick={toggleGender} class="h-8 w-8 p-1">
+						<img
+							src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${gender}.webp`)}
+							alt={gender}
+						/>
+					</CornerDotButton>
+					{#snippet popup()}
+						<span>{m.toggle_entity({ entity: m.gender() })}</span>
+					{/snippet}
+				</Tooltip>
+			</div>
+		{/if}
 
 		<div class="mt-2 flex flex-row items-center space-x-2">
 			<Tooltip position="bottom">

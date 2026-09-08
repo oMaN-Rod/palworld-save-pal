@@ -161,6 +161,7 @@
 		if (slot.static_id == 'None') {
 			slot.count = 0;
 			slot.dynamic_item = undefined;
+			onUpdate?.(slot);
 			return;
 		}
 		const itemData = itemsData.getByKey(slot.static_id);

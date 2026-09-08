@@ -157,27 +157,32 @@
 
 	async function addPal(character_id: string, nickname: string, name: string) {
 		let res: { player_uid: string; pal: Pal; index: number } | undefined = undefined;
-		switch (target) {
-			case 'pal-box':
-				res = await sendAndWait(MessageType.ADD_PAL, {
-					player_id: appState.selectedPlayer!.uid,
-					character_id,
-					nickname,
-					container_id: appState.selectedPlayer!.pal_box_id
-				});
-				break;
-			case 'dps':
-				res = await sendAndWait(MessageType.ADD_DPS_PAL, {
-					player_id: appState.selectedPlayer!.uid,
-					character_id,
-					nickname
-				});
-			case 'gps':
-				res = await sendAndWait(MessageType.ADD_GPS_PAL, {
-					character_id,
-					nickname
-				});
-				break;
+		try {
+			switch (target) {
+				case 'pal-box':
+					res = await sendAndWait(MessageType.ADD_PAL, {
+						player_id: appState.selectedPlayer!.uid,
+						character_id,
+						nickname,
+						container_id: appState.selectedPlayer!.pal_box_id
+					});
+					break;
+				case 'dps':
+					res = await sendAndWait(MessageType.ADD_DPS_PAL, {
+						player_id: appState.selectedPlayer!.uid,
+						character_id,
+						nickname
+					});
+				case 'gps':
+					res = await sendAndWait(MessageType.ADD_GPS_PAL, {
+						character_id,
+						nickname
+					});
+					break;
+			}
+		} catch (error) {
+			console.error(`Failed to add pal ${character_id}:`, error);
+			res = undefined;
 		}
 
 		if (!res) {

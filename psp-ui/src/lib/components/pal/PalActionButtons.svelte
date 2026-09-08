@@ -13,10 +13,12 @@
 	let {
 		pal = $bindable(),
 		showActions = true,
+		showSpeciesActions = true,
 		popup = false
 	}: {
 		pal: Pal;
 		showActions?: boolean;
+		showSpeciesActions?: boolean;
 		popup?: boolean;
 	} = $props();
 
@@ -77,7 +79,7 @@
 		<span class="text-xs">{pal.character_id}</span>
 	</div>
 	<div class="flex space-x-2">
-		{#if appState.settings.debug_mode && showActions}
+		{#if appState.settings.debug_mode && showActions && showSpeciesActions}
 			<Tooltip position="bottom" label={m.debug()}>
 				<CornerDotButton
 					onClick={() => {
@@ -99,7 +101,8 @@
 				/>
 			</CornerDotButton>
 		</Tooltip>
-		<Tooltip position="bottom" label={m.toggle_entity({ entity: m.lucky() })}>
+		{#if showSpeciesActions}
+			<Tooltip position="bottom" label={m.toggle_entity({ entity: m.lucky() })}>
 			<CornerDotButton
 				onClick={handleEditLucky}
 				class={cn('h-8 w-8 p-1', pal.is_lucky && 'bg-secondary-500/25')}
@@ -122,6 +125,7 @@
 				/>
 			</CornerDotButton>
 		</Tooltip>
+		{/if}
 		<Tooltip position="bottom" label={m.toggle_entity({ entity: m.awakened() })}>
 			<CornerDotButton
 				onClick={() => editAwakened(pal)}
@@ -131,7 +135,8 @@
 				<img src={staticIcons.awakeningIcon} alt="Awakened" class="pal-element-badge" />
 			</CornerDotButton>
 		</Tooltip>
-		<Tooltip position="bottom" label={m.toggle_entity({ entity: m.imported() })}>
+		{#if showSpeciesActions}
+			<Tooltip position="bottom" label={m.toggle_entity({ entity: m.imported() })}>
 			<CornerDotButton
 				onClick={() => editImported(pal)}
 				class={cn('h-8 w-8 p-1', pal.is_imported && 'bg-secondary-500/25')}
@@ -140,6 +145,7 @@
 				<img src={staticIcons.importedIcon} alt="Imported" class="pal-element-badge" />
 			</CornerDotButton>
 		</Tooltip>
+		{/if}
 		{#if getPalElementTypes(pal.character_key)}
 			{#each getPalElementTypes(pal.character_key)! as elementType}
 				{#if getPalElementBadge(elementType)}

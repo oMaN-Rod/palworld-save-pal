@@ -51,6 +51,8 @@
 				]
 			});
 
+			if (!floatingEl) return;
+
 			Object.assign(floatingEl.style, {
 				left: `${x + xOffset}px`,
 				top: `${y + yOffset}px`
@@ -79,6 +81,7 @@
 	}
 
 	function handleContextMenu(event: MouseEvent) {
+		if (!items?.length) return;
 		event.preventDefault();
 		open = true;
 	}

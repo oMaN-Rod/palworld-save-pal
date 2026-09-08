@@ -63,15 +63,19 @@
 	{@render children()}
 </div>
 
-{#if modal.isOpen}
+{#each modal.stack as entry, depth (entry.id)}
+	{@const isTop = depth === modal.stack.length - 1}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
-		class={cn('modal-content fixed inset-0 flex items-center justify-center', overlayClass)}
+		class={cn('fixed inset-0 flex items-center justify-center', overlayClass)}
+		style="z-index: {50000 + depth * 10}"
 		transition:fade={{ duration: 200 }}
-		onclick={handleOutsideClick}
-		onkeydown={handleKeydown}
+		onclick={isTop ? handleOutsideClick : undefined}
+		onkeydown={isTop ? handleKeydown : undefined}
 		role="dialog"
 		aria-modal="true"
+		aria-hidden={!isTop}
+		inert={!isTop}
 		tabindex="-1"
 	>
 		<div class={cn('relative', contentClass, rounded)}>
@@ -79,17 +83,11 @@
 				type="button"
 				class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
 				aria-label={m.close()}
-				onclick={() => modal.closeModal()}
+				onclick={() => modal.closeEntry(entry.id)}
 			>
 				<Icon icon="tabler:x" size={24} />
 			</button>
-			<modal.component {...modal.props} closeModal={modal.closeModal} />
+			<entry.component {...entry.props} closeModal={(value: any) => modal.closeEntry(entry.id, value)} />
 		</div>
 	</div>
-{/if}
-
-<style>
-	.modal-content {
-		z-index: 50000;
-	}
-</style>
+{/each}

@@ -15,16 +15,20 @@
 
 	let {
 		pal = $bindable(),
+		palIconSize = "h-20 w-20 2xl:h-24 2xl:w-24",
 		onMove,
 		onAdd,
 		onClone,
 		onCloneToUps,
 		onDelete,
-		selected = $bindable(new Set()),
+		selected = $bindable<string[]>([]),
 		onSelect,
-		showCloneToUps = true
+		showCloneToUps = true,
+		disabled = false,
+		levelCap
 	} = $props<{
 		pal: Pal;
+		palIconSize?: string;
 		onMove?: () => void;
 		onAdd?: () => void;
 		onClone?: () => void;
@@ -33,6 +37,8 @@
 		selected?: string[];
 		onSelect?: (pal: Pal, event: MouseEvent) => void;
 		showCloneToUps?: boolean;
+		disabled?: boolean;
+		levelCap?: number;
 	}>();
 
 	const appState = getAppState();
@@ -43,17 +49,23 @@
 			'relative w-full outline outline-2 outline-surface-600',
 			pal && selected.includes(pal.instance_id)
 				? 'ring-4 ring-secondary-500'
-				: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
+				: disabled
+					? 'outline-surface-600'
+					: 'hover:ring-4 hover:ring-secondary-500 outline-surface-600'
 		)
 	);
 	const sickClass = $derived(pal && pal.is_sick ? 'animate-pulse ring-4 ring-error-500' : '');
 	const awakenedClass = $derived(pal && pal.is_awakened ? 'awakened-ring' : '');
 	const palData = $derived(palsData.getByKey(pal.character_key));
+	const effectiveLevelCap = $derived(levelCap ?? appState.selectedPlayer?.level);
+	const displayLevel = $derived(
+		effectiveLevelCap !== undefined && effectiveLevelCap < pal.level ? effectiveLevelCap : pal.level
+	);
 	const levelSyncTxt = $derived(
-		appState.selectedPlayer!.level < pal.level
+		effectiveLevelCap !== undefined && effectiveLevelCap < pal.level
 			? m.level_sync_display({
 					from: pal.level.toString(),
-					to: appState.selectedPlayer!.level.toString()
+					to: effectiveLevelCap.toString()
 				})
 			: m.no_level_sync()
 	);
@@ -102,8 +114,9 @@
 	});
 
 	function handleClick(event: MouseEvent) {
+		if (disabled) return;
 		if (!pal || pal.character_id === 'None') {
-			onAdd();
+			onAdd?.();
 			return;
 		}
 
@@ -137,11 +150,7 @@
 							<Tooltip label={levelSyncTxt}>
 								<div class="flex items-end space-x-0.5">
 									<span class="text-xs"> LV </span>
-									<span class="text-lg font-bold">
-										{pal.level < appState.selectedPlayer!.level
-											? pal.level
-											: appState.selectedPlayer!.level}
-									</span>
+									<span class="text-lg font-bold">{displayLevel}</span>
 								</div>
 							</Tooltip>
 							<span class="truncate text-lg font-bold">{pal.name}</span>
@@ -184,7 +193,7 @@
 					</div>
 					<div class="flex flex-col">
 						<div class={cn('relative flex items-center justify-center ')}>
-							<img src={palIcon} alt={pal.name} class="h-20 w-20 2xl:h-24 2xl:w-24" />
+							<img src={palIcon} alt={pal.name} class={palIconSize} />
 						</div>
 					</div>
 				</div>

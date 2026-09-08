@@ -16,14 +16,20 @@
 	let {
 		pal = $bindable(),
 		showActions = true,
+		showSpeciesActions = true,
+		levelCap,
 		popup = false
 	}: {
 		pal: Pal;
 		showActions?: boolean;
+		showSpeciesActions?: boolean;
+		levelCap?: number;
 		popup?: boolean;
 	} = $props();
 
 	const appState = getAppState();
+
+	const syncLevel = $derived(levelCap ?? appState.selectedPlayer?.level);
 
 	const max_level = $derived(appState.settings.cheat_mode ? 255 : MAX_LEVEL);
 	const max_rank = $derived(appState.settings.cheat_mode ? 255 : 5);
@@ -33,24 +39,20 @@
 	let palLevelProgressMax: number = $state(1);
 
 	const palLevel = $derived.by(() => {
-		if (appState.selectedPlayer && pal) {
-			return appState.selectedPlayer.level < pal.level
-				? appState.selectedPlayer.level.toString()
-				: pal.level.toString();
+		if (syncLevel !== undefined && pal) {
+			return syncLevel < pal.level ? syncLevel.toString() : pal.level.toString();
 		} else if (pal) {
 			return pal.level.toString();
 		}
 	});
 	const palLevelClass = $derived.by(() => {
-		if (appState.selectedPlayer && pal) {
-			return appState.selectedPlayer.level < pal.level ? 'text-error-500' : '';
+		if (syncLevel !== undefined && pal) {
+			return syncLevel < pal.level ? 'text-error-500' : '';
 		}
 	});
 	const palLevelMessage = $derived.by(() => {
-		if (appState.selectedPlayer && pal) {
-			return appState.selectedPlayer.level < pal.level
-				? `Level sync ${pal.level} → ${appState.selectedPlayer.level}`
-				: 'No Level Sync';
+		if (syncLevel !== undefined && pal) {
+			return syncLevel < pal.level ? `Level sync ${pal.level} → ${syncLevel}` : 'No Level Sync';
 		}
 	});
 	const palRank = $derived(pal ? pal.rank - 1 : 0);
@@ -63,10 +65,14 @@
 				palLevelProgressMax = 1;
 				return;
 			}
-			const nextExp = await expData.getExpDataByLevel(pal.level + 1);
-			palLevelProgressToNext = nextExp.PalTotalEXP - pal.exp;
-			palLevelProgressValue = nextExp.PalNextEXP - palLevelProgressToNext;
-			palLevelProgressMax = nextExp.PalNextEXP;
+			try {
+				const nextExp = await expData.getExpDataByLevel(pal.level + 1);
+				palLevelProgressToNext = nextExp.PalTotalEXP - pal.exp;
+				palLevelProgressValue = nextExp.PalNextEXP - palLevelProgressToNext;
+				palLevelProgressMax = nextExp.PalNextEXP;
+			} catch (error) {
+				console.error('Error calculating pal level progress:', error);
+			}
 		}
 	}
 
@@ -89,13 +95,17 @@
 
 		if (newLevel === pal.level) return;
 
-		const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
+		try {
+			const nextLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
-		pal.level = newLevel;
-		pal.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
-		pal.state = EntryState.MODIFIED;
+			pal.level = newLevel;
+			pal.exp = nextLevelData.PalTotalEXP - nextLevelData.PalNextEXP;
+			pal.state = EntryState.MODIFIED;
 
-		await calcPalLevelProgress();
+			await calcPalLevelProgress();
+		} catch (error) {
+			console.error('Error incrementing pal level:', error);
+		}
 	}
 
 	async function handleLevelDecrement(event: MouseEvent) {
@@ -117,13 +127,17 @@
 
 		if (newLevel === pal.level) return;
 
-		const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
+		try {
+			const newLevelData = await expData.getExpDataByLevel(newLevel + 1);
 
-		pal.level = newLevel;
-		pal.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
-		pal.state = EntryState.MODIFIED;
+			pal.level = newLevel;
+			pal.exp = newLevelData.PalTotalEXP - newLevelData.PalNextEXP;
+			pal.state = EntryState.MODIFIED;
 
-		await calcPalLevelProgress();
+			await calcPalLevelProgress();
+		} catch (error) {
+			console.error('Error decrementing pal level:', error);
+		}
 	}
 
 	async function handleInputUpdate(value: number) {
@@ -305,7 +319,7 @@
 
 		<div class="min-w-0 grow">
 			<div class="flex flex-col">
-				<PalActionButtons bind:pal {showActions} {popup} />
+				<PalActionButtons bind:pal {showActions} {showSpeciesActions} {popup} />
 				<hr class="hr my-1" />
 				<div class="flex flex-col space-y-2">
 					<div class="flex">
