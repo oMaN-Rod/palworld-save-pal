@@ -80,7 +80,14 @@ export const hrefLanguageTags = htmlLanguageTags;
  * pages are deliberately absent: 5,013 x 15 locales would add 75,195 files and
  * break the Cloudflare static-asset limit.
  */
-export const LOCALIZED_PATHS = Object.freeze(['/', '/map', '/wiki', '/breeding', '/about']);
+export const LOCALIZED_PATHS = Object.freeze([
+	'/',
+	'/map',
+	'/wiki',
+	'/breeding',
+	'/about',
+	'/signal'
+]);
 
 /**
  * @param {string} pathname

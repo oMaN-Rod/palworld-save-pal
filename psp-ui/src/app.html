@@ -5,6 +5,15 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.webp" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#0f172a" />
+		<script>
+			(function () {
+				var hash = location.hash;
+				if (hash.indexOf('#v1.') === 0) {
+					window.__pspSignalPairing = hash;
+					history.replaceState(null, '', location.pathname + location.search);
+				}
+			})();
+		</script>
 		<!--CF_BEACON_START--><!-- Cookieless analytics: no personal data, no
 		     consent banner, and the landing page's no-tracking claim stays true.
 		     This block is removed at prerender when the token is unset. --><script

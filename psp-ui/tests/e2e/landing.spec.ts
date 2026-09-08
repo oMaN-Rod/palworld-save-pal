@@ -18,10 +18,12 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 	await expect(page.getByRole('button', { name: 'Choose .zip', exact: true })).toBeVisible();
 	await expect(page.getByRole('button', { name: 'Choose folder', exact: true })).toBeVisible();
 
-	// 3D map claim
-	await expect(
-		page.getByText(/first palworld save editor with a full 3d world map/i)
-	).toBeVisible();
+	await expect(page.getByText(/your world on a full 3d map, now live/i)).toBeVisible();
+	await expect(page.getByText(/or any browser, with psp signal/i)).toBeVisible();
+	await expect(page.getByRole('link', { name: /remote access guide/i })).toHaveAttribute(
+		'href',
+		'/docs/guides/remote-access'
+	);
 
 	// Section headings
 	await expect(page.getByText(/built different, on purpose/i)).toBeVisible();

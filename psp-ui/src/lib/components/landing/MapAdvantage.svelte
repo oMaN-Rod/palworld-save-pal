@@ -5,7 +5,10 @@
 	const points = [
 		{ icon: 'tabler:box-multiple', text: m.landing_map_point_terrain },
 		{ icon: 'tabler:map-pin', text: m.landing_map_point_pins },
-		{ icon: 'tabler:hand-click', text: m.landing_map_point_click }
+		{ icon: 'tabler:hand-click', text: m.landing_map_point_click },
+		{ icon: 'tabler:activity', text: m.landing_map_point_live },
+		{ icon: 'tabler:crosshair', text: m.landing_map_point_follow },
+		{ icon: 'tabler:picture-in-picture-on', text: m.landing_map_point_pip }
 	];
 </script>
 

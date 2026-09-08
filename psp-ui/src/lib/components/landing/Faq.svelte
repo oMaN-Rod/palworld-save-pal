@@ -9,6 +9,7 @@
 			{ question: m.landing_faq_q_upload(), answer: m.landing_faq_a_upload() },
 			{ question: m.landing_faq_q_files(), answer: m.landing_faq_a_files() },
 			{ question: m.landing_faq_q_platforms(), answer: m.landing_faq_a_platforms() },
+			{ question: m.landing_faq_q_signal(), answer: m.landing_faq_a_signal() },
 			{ question: m.landing_faq_q_free(), answer: m.landing_faq_a_free() },
 			{ question: m.landing_faq_q_browsers(), answer: m.landing_faq_a_browsers() },
 			{ question: m.landing_faq_q_which(), answer: m.landing_faq_a_which() },

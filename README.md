@@ -160,6 +160,19 @@ collects the shipped artifacts into `dist/`:
 ./scripts/build-desktop.sh
 ```
 
+### Amity mod (live game bridge)
+
+[PSP Amity](psp-amity/README.md) is the UE4SS mod that lets the desktop app read and
+edit a running world. On Windows, with the game closed:
+
+```powershell
+.\psp-amity\scripts\setup-workspace.ps1   # once: clones the pinned UE4SS fork
+.\easyrun.ps1 -Amity                       # build the mod and install it into Palworld
+```
+
+`easyrun.ps1 -Amity -Check` reports what is missing; `-GameDir` overrides the Steam
+auto-detection. See [psp-amity/INSTALL.md](psp-amity/INSTALL.md) for the shipped zip.
+
 ## 🔥 Features
 
 ### General

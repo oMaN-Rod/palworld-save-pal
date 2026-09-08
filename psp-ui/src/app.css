@@ -19,6 +19,7 @@
 @import './themes/lamball.css';
 @import './themes/sakurajima.css';
 @import './themes/wildlands.css';
+@import './themes/rwby.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -1617,7 +1618,6 @@ body::after {
 		gap: 0.125rem;
 	}
 }
-
 
 .public-chip:hover {
 	background: color-mix(in srgb, var(--color-surface-700) 70%, transparent);

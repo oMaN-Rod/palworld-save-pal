@@ -1761,6 +1761,358 @@
 		<priority>0.8</priority>
 	</url>
 	<url>
+		<loc>https://palworldsavepal.app/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/es/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/es/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/es/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/es/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/es/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/es/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/es/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/es/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/es/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/es/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/es/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/es/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/es/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/es/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/es/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/es/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/es/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/es/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/de/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/de/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/de/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/de/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/de/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/de/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/de/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/de/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/de/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/de/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/de/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/de/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/de/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/de/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/de/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/de/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/es-mx/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/es-mx/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/fr/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/fr/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/id-id/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/id-id/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/it/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/it/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/it/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/it/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/it/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/it/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/it/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/it/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/it/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/it/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/it/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/it/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/it/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/it/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/it/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/it/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/ko/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/ko/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/pl/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/pl/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/pt-br/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/pt-br/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/ru/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/ru/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/th/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/th/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/th/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/th/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/th/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/th/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/th/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/th/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/th/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/th/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/th/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/th/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/th/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/th/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/th/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/th/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/th/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/th/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/tr/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/tr/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/vi/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/vi/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/zh/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/zh/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palworldsavepal.app/zh-hant/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palworldsavepal.app/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palworldsavepal.app/es/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palworldsavepal.app/de/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palworldsavepal.app/es-mx/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palworldsavepal.app/fr/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palworldsavepal.app/id-id/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palworldsavepal.app/it/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palworldsavepal.app/ko/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palworldsavepal.app/pl/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palworldsavepal.app/pt-br/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palworldsavepal.app/ru/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palworldsavepal.app/th/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palworldsavepal.app/tr/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palworldsavepal.app/vi/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palworldsavepal.app/zh/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palworldsavepal.app/zh-hant/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palworldsavepal.app/zh-hant/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
 		<loc>https://palworldsavepal.app/editor</loc>
 		<changefreq>weekly</changefreq>
 		<priority>0.7</priority>

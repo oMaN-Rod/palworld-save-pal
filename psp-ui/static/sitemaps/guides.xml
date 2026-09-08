@@ -15,4 +15,9 @@
 		<changefreq>weekly</changefreq>
 		<priority>0.7</priority>
 	</url>
+	<url>
+		<loc>https://palworldsavepal.app/docs/guides/remote-access</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
 </urlset>

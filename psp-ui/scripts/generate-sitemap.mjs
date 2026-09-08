@@ -29,7 +29,7 @@ const WIKI_CATEGORIES = [
 	{ id: 'work-suitability', file: 'l10n/en/work_suitability.json', stripPrefix: true }
 ];
 
-const GUIDES = ['getting-started', 'save-management', 'server-setup'];
+const GUIDES = ['getting-started', 'save-management', 'server-setup', 'remote-access'];
 
 /**
  * Public pages outside `LOCALIZED_PATHS`: one English URL each, no alternates.

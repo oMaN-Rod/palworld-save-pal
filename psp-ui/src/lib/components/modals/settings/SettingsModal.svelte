@@ -7,7 +7,8 @@
 	import type { CheckedChangeDetails } from '@zag-js/switch';
 	import { onMount } from 'svelte';
 	import { focusModal } from '$utils';
-	import { cornerArt, theme, themeOptions } from '$states';
+	import { cornerArt, ROSE_RED, rwbySkin, rwbyUnlocked, theme, themeOptions } from '$states';
+	import type { ThemeName } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
@@ -26,6 +27,24 @@
 		label: name
 	}));
 
+	const RWBY_OPTION = 'rwby';
+	const themeSelectOptions = $derived(
+		rwbyUnlocked.current ? [...themeOptions, { value: RWBY_OPTION, label: 'RWBY' }] : themeOptions
+	);
+	let selectedTheme = $state<string>(rwbySkin.current ? RWBY_OPTION : theme.current);
+	$effect(() => {
+		selectedTheme = rwbySkin.current ? RWBY_OPTION : theme.current;
+	});
+
+	function handleThemeChange(value: string | number): void {
+		if (value === RWBY_OPTION) {
+			rwbySkin.current = true;
+		} else {
+			rwbySkin.current = false;
+			theme.current = value as ThemeName;
+		}
+	}
+
 	let modalContainer: HTMLDivElement;
 
 	onMount(() => {
@@ -39,7 +58,23 @@
 
 		<div class="mt-2 flex flex-col space-y-2">
 			<Combobox options={languageOptions} bind:value={settings.language} label={m.language()} />
-			<Combobox options={themeOptions} bind:value={theme.current} label={m.theme()} />
+			<Combobox
+				options={themeSelectOptions}
+				bind:value={selectedTheme}
+				onChange={handleThemeChange}
+				label={m.theme()}
+			>
+				{#snippet selectOption(option)}
+					{#if option.value === RWBY_OPTION}
+						<span class="flex items-center gap-1.5">
+							<Icon icon="local:rwby-rose" size={16} color={ROSE_RED} />
+							{option.label}
+						</span>
+					{:else}
+						{option.label}
+					{/if}
+				{/snippet}
+			</Combobox>
 			<Input bind:value={settings.clone_prefix} label={m.clone_prefix()} />
 			<Input bind:value={settings.new_pal_prefix} label={m.new_pal_prefix()} />
 			<div class="flex space-x-2">

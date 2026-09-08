@@ -5,7 +5,10 @@
 	import Logo from '$components/layout/Logo.svelte';
 	import { SaveDropzone } from '$components/upload';
 	import { Button, Tooltip } from '$components/ui';
+	import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 	import * as m from '$i18n/messages';
+
+	const remoteMode = getRemoteMode();
 
 	interface Props {
 		onLoad: (
@@ -44,7 +47,11 @@
 		<div class="mt-6">
 			<!-- Phones can't run the editor; the dropzone is replaced by a desktop-only notice below. -->
 			<div class="hidden md:block">
-				<SaveDropzone {onLoad} />
+				{#if !remoteMode.active}
+					<SaveDropzone {onLoad} />
+				{:else}
+					<p class="text-surface-300 text-sm">{m.signal_remote_mode_hint()}</p>
+				{/if}
 			</div>
 			<p class="text-surface-300 mx-auto mt-2 max-w-xs text-sm leading-relaxed md:hidden">
 				{m.landing_mobile_notice()}
@@ -54,7 +61,7 @@
 			<Icon icon="tabler:lock" size={14} />
 			{m.landing_hero_privacy()}
 		</p>
-		{#if resumeName && onResume}
+		{#if resumeName && onResume && !remoteMode.active}
 			<div class="hidden md:block">
 				<Tooltip label={resumeName}>
 					<Button variant="secondary" class="mt-4" onclick={onResume}>

@@ -6,8 +6,9 @@
  *
  * The design language is Tabler (stroke-based), with Phosphor fills for gaps,
  * `svg-spinners` for loading states and `line-md` for animated flourishes.
- * Only the icons actually used in `src/` are bundled — regenerate the subset
- * file after adding or removing icons:
+ * App-specific artwork lives under `./local/` as plain SVGs and is addressed
+ * as `local:<file-name>`. Only the icons actually used in `src/` are bundled —
+ * regenerate the subset file after adding or removing icons:
  *
  *   node scripts/extract-icon-subsets.mjs
  */
