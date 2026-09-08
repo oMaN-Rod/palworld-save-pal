@@ -401,8 +401,72 @@ mod tests {
         );
     }
 
+    /// Serializes tests in this module that mutate `PSP_BRIDGE_ENDPOINT_DIR`
+    /// (only this file's tests touch it, but the lock costs nothing and
+    /// matches the `SignalEnvGuard` convention used elsewhere for the same
+    /// reason: this is process-global state).
+    static BRIDGE_ENDPOINT_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
+    struct BridgeEndpointEnvGuard {
+        _lock: tokio::sync::MutexGuard<'static, ()>,
+        previous: Option<std::ffi::OsString>,
+    }
+
+    impl BridgeEndpointEnvGuard {
+        async fn acquire(dir: &std::path::Path) -> Self {
+            let lock = BRIDGE_ENDPOINT_ENV_LOCK.lock().await;
+            let previous = std::env::var_os("PSP_BRIDGE_ENDPOINT_DIR");
+            std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir);
+            Self {
+                _lock: lock,
+                previous,
+            }
+        }
+    }
+
+    impl Drop for BridgeEndpointEnvGuard {
+        fn drop(&mut self) {
+            match &self.previous {
+                Some(value) => std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", value),
+                None => std::env::remove_var("PSP_BRIDGE_ENDPOINT_DIR"),
+            }
+        }
+    }
+
+    /// With nothing discovered, `resolve_active_target` returning `None` on a
+    /// DB failure is indistinguishable from it returning `None` because there
+    /// was genuinely nothing to pick -- `target_for("", [], [])` and
+    /// `default_target([])` are both `None` regardless of the DB. To actually
+    /// exercise the abort-on-error path, a live instance must be discoverable
+    /// so that the *wrong* (pre-fix) behavior has something to wrongly land
+    /// on: falling through a swallowed error to `default_target(discovered)`
+    /// would auto-select it. The fix aborts before ever calling
+    /// `default_target` and must return `None` here instead.
     #[tokio::test]
-    async fn a_transient_db_failure_resolves_to_no_target_at_startup() {
-        assert!(resolve_active_target(&FailingDriver).await.is_none());
+    async fn a_transient_db_failure_resolves_to_no_target_even_with_a_live_discovered_instance() {
+        let dir = tempfile::tempdir().unwrap();
+        let pid = std::process::id();
+        std::fs::write(
+            dir.path().join(format!("{pid}.json")),
+            serde_json::json!({
+                "protocolVersion": 2,
+                "port": 8788,
+                "token": "t",
+                "name": "Solo",
+                "bind": "127.0.0.1",
+                "pid": pid,
+                "startedAt": "now",
+            })
+            .to_string(),
+        )
+        .unwrap();
+        let _env = BridgeEndpointEnvGuard::acquire(dir.path()).await;
+
+        assert!(
+            resolve_active_target(&FailingDriver).await.is_none(),
+            "a DB failure must abort resolution even though a live instance was discovered on \
+             disk -- landing on it anyway would mean the error was silently treated as \
+             \"nothing saved\" instead of aborting"
+        );
     }
 }
