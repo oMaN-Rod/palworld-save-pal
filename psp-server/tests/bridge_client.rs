@@ -93,7 +93,7 @@ async fn wait_for_status<F: Fn(&BridgeStatus) -> bool>(
 }
 
 #[tokio::test]
-async fn discovery_connects_and_reports_status() {
+async fn an_explicit_target_connects_and_reports_status() {
     let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
@@ -235,33 +235,26 @@ async fn mod_error_passes_through_as_typed_error() {
 }
 
 #[tokio::test]
-async fn dead_pid_never_dials_the_endpoint() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
-    let dir = tempfile::tempdir().unwrap();
+async fn a_service_with_no_target_never_dials_anything() {
     let mock = MockMod::new(
         "secret-token",
         fixture_data(STATUS_FIXTURE),
         fixture_data(PLAYERS_FIXTURE),
     );
     let connections = mock.connections.clone();
-    let (addr, mock_cancel, mock_handle) = spawn_mock_mod(mock).await;
-    write_endpoint_file(dir.path(), addr.port(), "secret-token", 4_294_000_000);
-    std::env::set_var(
-        "PSP_BRIDGE_ENDPOINT_DIR",
-        dir.path().to_str().unwrap(),
-    );
+    let (_addr, mock_cancel, mock_handle) = spawn_mock_mod(mock).await;
 
     let service = BridgeService::new();
     service.start();
 
-    tokio::time::sleep(Duration::from_secs(3)).await;
+    tokio::time::sleep(Duration::from_millis(300)).await;
 
     let status = service.status_rx().borrow().clone();
     assert!(!status.connected);
     assert_eq!(
         connections.load(std::sync::atomic::Ordering::Relaxed),
         0,
-        "a dead pid must never be dialed"
+        "a service with no target must never dial anything"
     );
 
     service.shutdown().await;

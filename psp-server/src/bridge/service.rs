@@ -125,7 +125,14 @@ impl BridgeService {
     }
 
     pub fn set_target(&self, target: Option<BridgeTarget>) {
-        let _ = self.target_tx.send(target);
+        self.target_tx.send_if_modified(|current| {
+            if *current == target {
+                false
+            } else {
+                *current = target;
+                true
+            }
+        });
     }
 
     pub fn target(&self) -> Option<BridgeTarget> {
@@ -227,13 +234,14 @@ async fn run_supervisor(
     cancel: CancellationToken,
 ) {
     let mut backoff = Backoff::new();
+    let mut last_id: Option<String> = None;
 
     loop {
         if cancel.is_cancelled() {
             break;
         }
 
-        let Some(target) = target_rx.borrow().clone() else {
+        let Some(target) = target_rx.borrow_and_update().clone() else {
             publish(&status_tx, BridgeStatus::default());
             tokio::select! {
                 _ = cancel.cancelled() => break,
@@ -244,6 +252,11 @@ async fn run_supervisor(
             }
             continue;
         };
+
+        if last_id.as_deref() != Some(target.id.as_str()) {
+            backoff = Backoff::new();
+            last_id = Some(target.id.clone());
+        }
 
         let identity = |connected: bool, last_error: Option<String>| BridgeStatus {
             connected,
@@ -364,27 +377,27 @@ mod tests {
         service.shutdown().await;
     }
 
-    #[tokio::test]
+    #[tokio::test(start_paused = true)]
     async fn a_target_switch_during_backoff_is_acted_on_without_waiting_out_the_backoff() {
         let service = BridgeService::new();
         service.start();
         service.set_target(Some(target("dead:1", 1)));
 
         let mut status_rx = service.status_rx();
-        let mut failed_dials = 0;
-        // Port 1 never accepts, so every dial fails and the supervisor backs off. By the
-        // 4th failure the backoff wait's floor is MIN_BACKOFF * 2^2 = 4s -- comfortably
-        // above the 2.5s window below, so an unfixed `wait()` (one that doesn't race the
-        // target change) would still be sleeping when that window elapses.
-        tokio::time::timeout(Duration::from_secs(15), async {
+        let mut failures = 0;
+        // Port 1 never accepts, so every dial fails and the supervisor backs off between
+        // attempts. Climbing to the 3rd failure pushes the backoff wait's floor to
+        // MIN_BACKOFF * 2^1 = 2s -- comfortably above the 1s window asserted below. None
+        // of this costs real wall-clock time: it's all paused, virtual time.
+        tokio::time::timeout(Duration::from_secs(60), async {
             loop {
                 if status_rx.changed().await.is_err() {
                     panic!("status channel closed while backoff was building up");
                 }
                 let status = status_rx.borrow().clone();
                 if status.instance_id.as_deref() == Some("dead:1") && status.last_error.is_some() {
-                    failed_dials += 1;
-                    if failed_dials >= 4 {
+                    failures += 1;
+                    if failures >= 3 {
                         return;
                     }
                 }
@@ -393,22 +406,36 @@ mod tests {
         .await
         .expect("the target should have failed to dial repeatedly by now");
 
-        service.set_target(Some(target("dead:2", 1)));
+        // Switching to `None` here (rather than a second live target) is deliberate: the
+        // no-target branch publishes immediately without dialing anything, so this
+        // isolates the wait's own interruptibility from a redial's cost. A redial always
+        // goes through `dial_and_drain`'s `tokio::time::timeout(DIAL_TIMEOUT, ..)`, and
+        // under a paused clock that resolves at the full DIAL_TIMEOUT even for a
+        // same-tick success or failure -- confirmed by direct experiment -- which would
+        // swamp the very effect this test means to isolate.
+        service.set_target(None);
+        let t0 = tokio::time::Instant::now();
 
-        tokio::time::timeout(Duration::from_millis(2_500), async {
+        tokio::time::timeout(Duration::from_secs(10), async {
             loop {
                 if status_rx.changed().await.is_err() {
                     panic!("status channel closed while waiting for the switch to take effect");
                 }
-                if status_rx.borrow().instance_id.as_deref() == Some("dead:2") {
+                if status_rx.borrow().instance_id.is_none() {
                     return;
                 }
             }
         })
         .await
-        .expect(
-            "a target switch during backoff must be picked up well inside the backoff wait, \
-             not after it elapses",
+        .expect("a target switch during backoff must be picked up without waiting out the backoff");
+
+        // On a paused clock, picking the switch up via the `changed()` branch costs no
+        // virtual time; only actually sleeping through the backoff would advance it, and
+        // by now that sleep's floor (2s) is well above this 1s assertion window.
+        assert!(
+            t0.elapsed() < Duration::from_secs(1),
+            "expected ~0 elapsed (picked up via changed()), got {:?} (waited out the backoff sleep instead)",
+            t0.elapsed()
         );
 
         service.shutdown().await;
