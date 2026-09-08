@@ -100,3 +100,56 @@ TEST_CASE("repeated bad proofs close the connection at the attempt limit") {
     auto second = session.on_message(auth_message("3", "wrong", kNonce));
     CHECK(second.close);
 }
+
+TEST_CASE("hello twice is bad_request and closes") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object());
+    session.on_message(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
+    auto out = session.on_message(R"({"id":"2","type":"hello","data":{"protocolVersion":2}})");
+    REQUIRE(out.send.size() == 1);
+    CHECK(out.close);
+    std::string err;
+    auto reply = amity::parse_envelope(out.send[0], err);
+    REQUIRE(reply.has_value());
+    CHECK(reply->data["code"] == "bad_request");
+    CHECK_FALSE(session.ready());
+}
+
+TEST_CASE("auth before hello is bad_request and closes") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object());
+    auto out = session.on_message(auth_message("1", "s3cr3t", kNonce));
+    REQUIRE(out.send.size() == 1);
+    CHECK(out.close);
+    std::string err;
+    auto reply = amity::parse_envelope(out.send[0], err);
+    REQUIRE(reply.has_value());
+    CHECK(reply->data["code"] == "bad_request");
+    CHECK_FALSE(session.ready());
+}
+
+TEST_CASE("malformed json before ready is bad_request and closes") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object());
+    auto out = session.on_message("not json");
+    REQUIRE(out.send.size() == 1);
+    CHECK(out.close);
+    std::string err;
+    auto reply = amity::parse_envelope(out.send[0], err);
+    REQUIRE(reply.has_value());
+    CHECK(reply->data["code"] == "bad_request");
+}
+
+TEST_CASE("malformed json after ready is bad_request without closing") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object());
+    session.on_message(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
+    session.on_message(auth_message("2", "s3cr3t", kNonce));
+    REQUIRE(session.ready());
+
+    auto out = session.on_message("not json");
+    REQUIRE(out.send.size() == 1);
+    CHECK_FALSE(out.close);
+    CHECK_FALSE(out.request.has_value());
+    std::string err;
+    auto reply = amity::parse_envelope(out.send[0], err);
+    REQUIRE(reply.has_value());
+    CHECK(reply->data["code"] == "bad_request");
+    CHECK(session.ready());
+}
