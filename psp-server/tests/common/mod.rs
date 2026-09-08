@@ -16,39 +16,40 @@ pub struct TestServer {
     /// Deletes the temp tree on drop; also read by tests that need the
     /// server's SQLite file at `_temp_dir.path().join("psp-rs.db")`.
     pub _temp_dir: tempfile::TempDir,
-    _bridge_endpoint_dir: Option<HermeticBridgeEndpointDir>,
 }
 
 /// Startup and the background reconciler both read `PSP_BRIDGE_ENDPOINT_DIR`
 /// (falling back to the real per-user Palworld directory when unset). A test
 /// that cares about bridge discovery already sets this var itself (guarded by
-/// `BridgeEnvGuard`, held for the whole test); this only fills in an isolated,
+/// `BridgeEnvGuard`, held for the whole test); this fills in an isolated,
 /// always-empty directory for the many tests that never touch the bridge at
 /// all, so they can't end up scanning -- and auto-connecting to -- a real
 /// running game on the developer's machine.
-struct HermeticBridgeEndpointDir {
-    _dir: tempfile::TempDir,
-}
+///
+/// Set once per process and never unset. Several such tests can run
+/// concurrently in one binary without a `BridgeEnvGuard` of their own (they
+/// have no reason to take one); if teardown of any single test's server
+/// removed the var, it could pull it out from under another test's
+/// still-running server, whose background reconciler keeps re-reading the
+/// var for the server's entire lifetime -- turning a one-time startup read
+/// into a sustained window onto the real directory. A `OnceLock` shared by
+/// the whole process sidesteps that: every such test converges on the same
+/// directory, and nothing ever un-sets it.
+static HERMETIC_BRIDGE_ENDPOINT_DIR: std::sync::OnceLock<tempfile::TempDir> =
+    std::sync::OnceLock::new();
 
-impl Drop for HermeticBridgeEndpointDir {
-    fn drop(&mut self) {
-        std::env::remove_var("PSP_BRIDGE_ENDPOINT_DIR");
-    }
-}
-
-fn hermetic_bridge_endpoint_dir_if_unset() -> Option<HermeticBridgeEndpointDir> {
+fn ensure_hermetic_bridge_endpoint_dir() {
     if std::env::var_os("PSP_BRIDGE_ENDPOINT_DIR").is_some() {
-        return None;
+        return;
     }
-    let dir = tempfile::tempdir().unwrap();
+    let dir = HERMETIC_BRIDGE_ENDPOINT_DIR.get_or_init(|| tempfile::tempdir().unwrap());
     std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.path());
-    Some(HermeticBridgeEndpointDir { _dir: dir })
 }
 
 /// Starts a web-mode server on an ephemeral port (`port: 0`).
 #[allow(dead_code)]
 pub async fn start_test_server() -> TestServer {
-    let bridge_endpoint_dir = hermetic_bridge_endpoint_dir_if_unset();
+    ensure_hermetic_bridge_endpoint_dir();
     let temp_dir = tempfile::tempdir().unwrap();
     let ui_dir = temp_dir.path().join("ui");
     std::fs::create_dir_all(&ui_dir).unwrap();
@@ -64,7 +65,6 @@ pub async fn start_test_server() -> TestServer {
     TestServer {
         handle,
         _temp_dir: temp_dir,
-        _bridge_endpoint_dir: bridge_endpoint_dir,
     }
 }
 
@@ -74,7 +74,7 @@ pub async fn start_test_server() -> TestServer {
 pub async fn start_desktop_test_server(
     dialogs: std::sync::Arc<dyn psp_server::desktop_dialogs::FileDialogProvider>,
 ) -> TestServer {
-    let bridge_endpoint_dir = hermetic_bridge_endpoint_dir_if_unset();
+    ensure_hermetic_bridge_endpoint_dir();
     let temp_dir = tempfile::tempdir().unwrap();
     let ui_dir = temp_dir.path().join("ui");
     std::fs::create_dir_all(&ui_dir).unwrap();
@@ -92,7 +92,6 @@ pub async fn start_desktop_test_server(
     TestServer {
         handle,
         _temp_dir: temp_dir,
-        _bridge_endpoint_dir: bridge_endpoint_dir,
     }
 }
 

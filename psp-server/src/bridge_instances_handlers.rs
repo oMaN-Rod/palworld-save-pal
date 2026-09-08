@@ -58,41 +58,93 @@ fn discovered_now() -> Vec<endpoint::DiscoveredEndpoint> {
         .unwrap_or_default()
 }
 
+struct Snapshot {
+    discovered: Vec<endpoint::DiscoveredEndpoint>,
+    saved: Vec<amity_instances::AmityInstance>,
+}
+
+/// A `list_instances` failure (a busy pool, a lock timeout) is not the same
+/// fact as "there are no saved instances" -- collapsing the two would make a
+/// transient DB hiccup look like every saved instance vanished. On failure
+/// this logs and returns `None` so callers skip the tick instead of resolving
+/// from an empty list they can't tell apart from a real one.
+async fn read_snapshot(driver: &dyn psp_db::DbDriver) -> Option<Snapshot> {
+    let discovered = discovered_now();
+    match amity_instances::list_instances(driver).await {
+        Ok(saved) => Some(Snapshot { discovered, saved }),
+        Err(error) => {
+            tracing::warn!(
+                %error,
+                "failed to list saved Amity instances; skipping Amity target resolution"
+            );
+            None
+        }
+    }
+}
+
+/// Same reasoning as [`read_snapshot`]: a failed read is not "nothing stored".
+async fn read_stored_active_id(driver: &dyn psp_db::DbDriver) -> Option<String> {
+    match psp_db::meta::get(driver, ACTIVE_INSTANCE_KEY).await {
+        Ok(value) => Some(value.unwrap_or_default()),
+        Err(error) => {
+            tracing::warn!(
+                %error,
+                "failed to read the persisted active Amity instance; skipping resolution"
+            );
+            None
+        }
+    }
+}
+
 /// Resolves what the bridge target should be right now: the stored (last
 /// explicitly selected) instance if it still exists, otherwise the first
 /// discovered instance. Pure with respect to `BridgeService` -- callers decide
-/// whether and when to act on the result.
+/// whether and when to act on the result. Returns `None` both when nothing
+/// should be targeted and when a DB read failed; at startup (the only direct
+/// caller) both cases mean the same thing -- start with no target, and let
+/// the reconciler correct it once the read succeeds.
 pub async fn resolve_active_target(driver: &dyn psp_db::DbDriver) -> Option<BridgeTarget> {
-    let discovered = discovered_now();
-    let saved = amity_instances::list_instances(driver).await.unwrap_or_default();
-    let stored = psp_db::meta::get(driver, ACTIVE_INSTANCE_KEY)
-        .await
-        .ok()
-        .flatten()
-        .unwrap_or_default();
+    let snapshot = read_snapshot(driver).await?;
+    let stored = read_stored_active_id(driver).await?;
 
-    registry::target_for(&stored, &discovered, &saved)
-        .or_else(|| registry::default_target(&discovered))
+    registry::target_for(&stored, &snapshot.discovered, &snapshot.saved)
+        .or_else(|| registry::default_target(&snapshot.discovered))
 }
 
 /// Leaves a still-resolvable target alone (a saved instance being unreachable
-/// is not a reason to switch away from it) and otherwise re-resolves via
-/// [`resolve_active_target`]. Called once at startup and repeatedly by a
-/// background reconciler so a game that starts after PSP, or restarts under a
-/// new pid, gets adopted without requiring a manual reselect.
+/// is not a reason to switch away from it) and otherwise re-resolves. Called
+/// once at startup and repeatedly by a background reconciler so a game that
+/// starts after PSP, or restarts under a new pid, gets adopted without
+/// requiring a manual reselect.
+///
+/// A DB read failure at any point aborts the tick without touching the
+/// target -- see [`read_snapshot`]. A target set by an explicit user
+/// selection landing on the bridge while this tick was awaiting the DB is
+/// re-checked for immediately before the final `set_target`, so it always
+/// wins over a resolution computed before it happened.
 pub async fn reconcile_active_target(driver: &dyn psp_db::DbDriver, bridge: &BridgeService) {
-    let discovered = discovered_now();
-    let saved = amity_instances::list_instances(driver).await.unwrap_or_default();
+    let Some(snapshot) = read_snapshot(driver).await else {
+        return;
+    };
 
     let current = bridge.target();
-    let still_valid = current
-        .as_ref()
-        .is_some_and(|target| registry::target_for(&target.id, &discovered, &saved).is_some());
+    let still_valid = current.as_ref().is_some_and(|target| {
+        registry::target_for(&target.id, &snapshot.discovered, &snapshot.saved).is_some()
+    });
     if still_valid {
         return;
     }
 
-    bridge.set_target(resolve_active_target(driver).await);
+    let Some(stored) = read_stored_active_id(driver).await else {
+        return;
+    };
+    let resolved = registry::target_for(&stored, &snapshot.discovered, &snapshot.saved)
+        .or_else(|| registry::default_target(&snapshot.discovered));
+
+    if bridge.target() != current {
+        return;
+    }
+    bridge.set_target(resolved);
 }
 
 pub async fn handle_game_instances(
@@ -177,9 +229,14 @@ pub async fn handle_game_update_instance(
     // the (already-successful) edit into a reported failure for.
     if active_row_id(services) == Some(row) {
         let discovered = discovered_now();
-        if let Ok(saved) = amity_instances::list_instances(&*ctx.app.driver).await {
-            if let Some(target) = registry::target_for(&payload.id, &discovered, &saved) {
-                services.bridge.set_target(Some(target));
+        match amity_instances::list_instances(&*ctx.app.driver).await {
+            Ok(saved) => {
+                if let Some(target) = registry::target_for(&payload.id, &discovered, &saved) {
+                    services.bridge.set_target(Some(target));
+                }
+            }
+            Err(error) => {
+                tracing::warn!(%error, "failed to re-list Amity instances while retargeting");
             }
         }
     }
@@ -293,4 +350,59 @@ pub async fn handle_game_test_instance(
 
     ctx.emitter.emit(MessageType::GameTestInstance, &reply);
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A driver whose every query/execute fails, standing in for a transient
+    /// DB error (a busy pool, a lock timeout) rather than a real empty table.
+    struct FailingDriver;
+
+    #[async_trait::async_trait]
+    impl psp_db::DbDriver for FailingDriver {
+        async fn execute(
+            &self,
+            _sql: &str,
+            _params: &[psp_db::DbValue],
+        ) -> Result<u64, psp_db::DbError> {
+            Err(psp_db::DbError::Other("simulated failure".to_string()))
+        }
+
+        async fn query(
+            &self,
+            _sql: &str,
+            _params: &[psp_db::DbValue],
+        ) -> Result<Vec<psp_db::DbRow>, psp_db::DbError> {
+            Err(psp_db::DbError::Other("simulated failure".to_string()))
+        }
+    }
+
+    #[tokio::test]
+    async fn a_transient_db_failure_does_not_change_an_explicitly_selected_target() {
+        let bridge = BridgeService::new();
+        let selected = BridgeTarget {
+            id: "saved:3".to_string(),
+            name: "Remote".to_string(),
+            host: "10.0.0.14".to_string(),
+            port: 8788,
+            token: "s3cr3t".to_string(),
+        };
+        bridge.set_target(Some(selected.clone()));
+
+        reconcile_active_target(&FailingDriver, &bridge).await;
+
+        assert_eq!(
+            bridge.target(),
+            Some(selected),
+            "a DB read failure must leave an explicit selection untouched, not fall through to \
+             a default"
+        );
+    }
+
+    #[tokio::test]
+    async fn a_transient_db_failure_resolves_to_no_target_at_startup() {
+        assert!(resolve_active_target(&FailingDriver).await.is_none());
+    }
 }

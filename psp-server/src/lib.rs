@@ -57,10 +57,12 @@ pub struct ServerHandle {
 
 impl ServerHandle {
     pub async fn shutdown(self) {
-        self.services.bridge.shutdown().await;
-        self.services.signal.lock().await.shutdown().await;
+        // Stop the reconciler before the bridge so it cannot call `set_target`
+        // on a bridge that has already shut down.
         self.instance_reconciler_cancel.cancel();
         let _ = self.instance_reconciler_task.await;
+        self.services.bridge.shutdown().await;
+        self.services.signal.lock().await.shutdown().await;
         let _ = self.shutdown_sender.send(());
         let _ = self.serve_task.await;
     }
