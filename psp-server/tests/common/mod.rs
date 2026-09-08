@@ -5,6 +5,9 @@
 use futures::{SinkExt, StreamExt};
 use tokio_tungstenite::tungstenite::Message;
 
+#[allow(dead_code)]
+pub mod mock_mod;
+
 pub struct TestServer {
     pub handle: psp_server::ServerHandle,
     /// Deletes the temp tree on drop; also read by tests that need the
@@ -59,19 +62,23 @@ pub async fn start_desktop_test_server(
     }
 }
 
+#[allow(dead_code)]
 pub type WsClient =
     tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>>;
 
+#[allow(dead_code)]
 pub async fn connect(server: &TestServer) -> WsClient {
     let url = format!("ws://{}/ws/test-client", server.handle.addr);
     let (socket, _) = tokio_tungstenite::connect_async(url).await.unwrap();
     socket
 }
 
+#[allow(dead_code)]
 pub async fn send_json(socket: &mut WsClient, value: serde_json::Value) {
     socket.send(Message::Text(value.to_string())).await.unwrap();
 }
 
+#[allow(dead_code)]
 pub async fn next_json(socket: &mut WsClient) -> serde_json::Value {
     loop {
         // 30s: a flow that (de)compresses a real Level.sav via Oodle can stall

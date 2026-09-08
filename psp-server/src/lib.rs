@@ -1,4 +1,7 @@
 pub mod api_convert;
+pub mod bridge;
+pub mod bridge_handlers;
+pub mod local_saves_handlers;
 pub mod lsp_service;
 #[cfg(feature = "desktop")]
 pub mod rfd_dialogs;
@@ -6,6 +9,8 @@ pub mod router;
 pub mod server_ext;
 pub mod servers_handlers;
 pub mod services;
+pub mod signal;
+pub mod signal_handlers;
 pub mod static_files;
 pub mod system_native;
 pub mod ws;
@@ -37,16 +42,20 @@ pub struct ServerConfig {
 pub struct ServerHandle {
     pub addr: SocketAddr,
     pub app: Arc<AppState>,
+    pub services: Arc<crate::services::ServerServices>,
     /// Subscriber on `AppState::live_connections`, seeded at 0 before any
     /// connection is accepted, so tests can await connection teardown instead
     /// of sleeping.
     pub live_connections: tokio::sync::watch::Receiver<usize>,
+    _live_bus_keepalive: tokio::sync::watch::Receiver<Option<psp_app::live::LiveFrame>>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
 }
 
 impl ServerHandle {
     pub async fn shutdown(self) {
+        self.services.bridge.shutdown().await;
+        self.services.signal.lock().await.shutdown().await;
         let _ = self.shutdown_sender.send(());
         let _ = self.serve_task.await;
     }
@@ -99,6 +108,7 @@ pub async fn start_server_with(
         }
     }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
+    let (live_bus, live_bus_keepalive) = tokio::sync::watch::channel(None);
     // Both roots sit beside the database, the one directory the deployment
     // already guarantees is writable.
     let app_dir = config
@@ -106,6 +116,7 @@ pub async fn start_server_with(
         .parent()
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("."));
+    let services = Arc::new(crate::services::ServerServices::real());
     let state = Arc::new(AppState {
         config: AppConfig {
             desktop_mode: config.desktop_mode,
@@ -114,8 +125,9 @@ pub async fn start_server_with(
         driver: Arc::new(psp_db::SqlxSqliteDriver::new(db)),
         dialogs,
         live_connections,
+        live_bus,
         ext: Arc::new(crate::server_ext::ServerExtRouter {
-            services: Arc::new(crate::services::ServerServices::real()),
+            services: Arc::clone(&services),
         }),
         lsp: Arc::new(crate::lsp_service::ServerLspService::new(
             app_dir.join("lua-language-server"),
@@ -126,6 +138,10 @@ pub async fn start_server_with(
         plugins: Default::default(),
     });
     psp_app::handlers::plugins::seed_bundled_plugins(&state).await?;
+    if let Err(error) = services.signal.lock().await.restore_armed(&state).await {
+        tracing::warn!(%error, "signal: remote access was left armed but could not be restored");
+    }
+    services.bridge.start();
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
     let addr = listener.local_addr()?;
@@ -134,17 +150,22 @@ pub async fn start_server_with(
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
     let application = router::build_router(Arc::clone(&state), &config.ui_dir);
     let serve_task = tokio::spawn(async move {
-        axum::serve(listener, application)
-            .with_graceful_shutdown(async {
-                let _ = shutdown_receiver.await;
-            })
-            .await
+        axum::serve(
+            listener,
+            application.into_make_service_with_connect_info::<SocketAddr>(),
+        )
+        .with_graceful_shutdown(async {
+            let _ = shutdown_receiver.await;
+        })
+        .await
     });
 
     Ok(ServerHandle {
         addr,
         app: state,
+        services,
         live_connections: live_connections_rx,
+        _live_bus_keepalive: live_bus_keepalive,
         shutdown_sender,
         serve_task,
     })

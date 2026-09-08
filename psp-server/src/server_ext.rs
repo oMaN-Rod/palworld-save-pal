@@ -5,11 +5,14 @@ use std::sync::Arc;
 
 use serde_json::Value;
 
+use crate::bridge_handlers;
 use crate::dispatcher::{ExtRouter, HandlerCtx};
 use crate::handler_error::HandlerError;
+use crate::local_saves_handlers;
 use crate::messages::MessageType;
 use crate::servers_handlers as servers;
 use crate::services::ServerServices;
+use crate::signal_handlers;
 use crate::system_native;
 
 pub struct ServerExtRouter {
@@ -62,6 +65,12 @@ impl ExtRouter for ServerExtRouter {
                 Ok(payload) => servers::handle_update_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
+            MessageType::EnsureGamedataLaunchArg => match serde_json::from_value(data) {
+                Ok(payload) => {
+                    servers::handle_ensure_gamedata_launch_arg(services, payload, ctx).await
+                }
+                Err(error) => Err(error.into()),
+            },
             MessageType::DeleteServer => match serde_json::from_value(data) {
                 Ok(payload) => servers::handle_delete_server(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
@@ -94,6 +103,93 @@ impl ExtRouter for ServerExtRouter {
                 Ok(payload) => servers::handle_load_server_save(services, payload, ctx).await,
                 Err(error) => Err(error.into()),
             },
+            MessageType::SubscribeLive => signal_handlers::handle_subscribe_live(data, ctx).await,
+            MessageType::SignalStatus => {
+                signal_handlers::handle_signal_status(services, data, ctx).await
+            }
+            MessageType::SignalSetSource => match serde_json::from_value(data) {
+                Ok(payload) => {
+                    signal_handlers::handle_signal_set_source(services, payload, ctx).await
+                }
+                Err(error) => Err(error.into()),
+            },
+            MessageType::SignalStartPairing => {
+                signal_handlers::handle_signal_start_pairing(services, data, ctx).await
+            }
+            MessageType::SignalStopPairing => {
+                signal_handlers::handle_signal_stop_pairing(services, data, ctx).await
+            }
+            MessageType::SignalSetArmed => {
+                signal_handlers::handle_signal_set_armed(services, data, ctx).await
+            }
+            MessageType::SignalListDevices => {
+                signal_handlers::handle_signal_list_devices(services, data, ctx).await
+            }
+            MessageType::SignalRenameDevice => {
+                signal_handlers::handle_signal_rename_device(services, data, ctx).await
+            }
+            MessageType::SignalRevokeDevice => {
+                signal_handlers::handle_signal_revoke_device(services, data, ctx).await
+            }
+            MessageType::SignalResetRemoteAccess => {
+                signal_handlers::handle_signal_reset_remote_access(services, data, ctx).await
+            }
+            MessageType::ListLocalSaves => local_saves_handlers::handle_list_local_saves(ctx).await,
+            MessageType::BrowseDirectory => match serde_json::from_value(data) {
+                Ok(payload) => local_saves_handlers::handle_browse_directory(payload, ctx).await,
+                Err(error) => Err(error.into()),
+            },
+            MessageType::GameStatus => bridge_handlers::handle_game_status(services, ctx).await,
+            MessageType::GamePlayers => bridge_handlers::handle_game_players(services, ctx).await,
+            MessageType::GamePals => bridge_handlers::handle_game_pals(services, data, ctx).await,
+            MessageType::GamePalDetail => {
+                bridge_handlers::handle_game_pal_detail(services, data, ctx).await
+            }
+            MessageType::GameInventory => {
+                bridge_handlers::handle_game_inventory(services, data, ctx).await
+            }
+            MessageType::GameGuild => {
+                bridge_handlers::handle_game_guild(services, data, ctx).await
+            }
+            MessageType::GameGuilds => {
+                bridge_handlers::handle_game_guilds(services, ctx).await
+            }
+            MessageType::GameBasePals => {
+                bridge_handlers::handle_game_base_pals(services, data, ctx).await
+            }
+            MessageType::GameGuildContainers => {
+                bridge_handlers::handle_game_guild_containers(services, data, ctx).await
+            }
+            MessageType::GameEditGuild => {
+                bridge_handlers::handle_game_edit_guild(services, data, ctx).await
+            }
+            MessageType::GameSetGuildRole => {
+                bridge_handlers::handle_game_set_guild_role(services, data, ctx).await
+            }
+            MessageType::GameCapabilities => {
+                bridge_handlers::handle_game_capabilities(services, ctx).await
+            }
+            MessageType::GameHealPals => {
+                bridge_handlers::handle_game_heal_pals(services, data, ctx).await
+            }
+            MessageType::GameSetItemSlot => {
+                bridge_handlers::handle_game_set_item_slot(services, data, ctx).await
+            }
+            MessageType::GameRemovePal => {
+                bridge_handlers::handle_game_remove_pal(services, data, ctx).await
+            }
+            MessageType::GameMovePal => {
+                bridge_handlers::handle_game_move_pal(services, data, ctx).await
+            }
+            MessageType::GameAddPal => {
+                bridge_handlers::handle_game_add_pal(services, data, ctx).await
+            }
+            MessageType::GameEditPal => {
+                bridge_handlers::handle_game_edit_pal(services, data, ctx).await
+            }
+            MessageType::GameEditPlayer => {
+                bridge_handlers::handle_game_edit_player(services, data, ctx).await
+            }
             _ => return None,
         })
     }
@@ -115,6 +211,7 @@ mod tests {
         "create_server",
         "import_server",
         "update_server",
+        "ensure_gamedata_launch_arg",
         "delete_server",
         "start_server",
         "stop_server",
@@ -123,6 +220,37 @@ mod tests {
         "toggle_server_mod",
         "install_server_mod",
         "load_server_save",
+        "subscribe_live",
+        "signal_status",
+        "signal_set_source",
+        "signal_start_pairing",
+        "signal_stop_pairing",
+        "signal_set_armed",
+        "signal_list_devices",
+        "signal_rename_device",
+        "signal_revoke_device",
+        "signal_reset_remote_access",
+        "list_local_saves",
+        "browse_directory",
+        "game_status",
+        "game_players",
+        "game_pals",
+        "game_pal_detail",
+        "game_inventory",
+        "game_guild",
+        "game_guilds",
+        "game_base_pals",
+        "game_guild_containers",
+        "game_edit_guild",
+        "game_set_guild_role",
+        "game_capabilities",
+        "game_heal_pals",
+        "game_set_item_slot",
+        "game_remove_pal",
+        "game_move_pal",
+        "game_add_pal",
+        "game_edit_pal",
+        "game_edit_player",
     ];
 
     /// Asserts ownership, not behavior: every wire name above must come back

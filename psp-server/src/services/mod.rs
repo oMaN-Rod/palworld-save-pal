@@ -88,6 +88,8 @@ pub fn python_str(value: &serde_json::Value) -> String {
 pub struct ServerServices {
     pub docker: std::sync::Arc<dyn docker::DockerApi>,
     pub palworld_api: palworld_api::PalworldApiClient,
+    pub signal: std::sync::Arc<tokio::sync::Mutex<crate::signal::manager::SignalManager>>,
+    pub bridge: std::sync::Arc<crate::bridge::service::BridgeService>,
 }
 
 impl ServerServices {
@@ -99,6 +101,10 @@ impl ServerServices {
         Self {
             docker,
             palworld_api: palworld_api::PalworldApiClient::new(),
+            signal: std::sync::Arc::new(tokio::sync::Mutex::new(
+                crate::signal::manager::SignalManager::new(),
+            )),
+            bridge: crate::bridge::service::BridgeService::new(),
         }
     }
 }
