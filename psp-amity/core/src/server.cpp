@@ -14,13 +14,18 @@ namespace amity {
 
 namespace {
 
-bool normalize_loopback_bind(const std::string& bind, std::string& normalized, std::string& error) {
-    if (bind == "127.0.0.1" || bind == "localhost") {
+bool normalize_bind(const std::string& bind, std::string& normalized, std::string& error) {
+    if (bind == "localhost") {
         normalized = "127.0.0.1";
         return true;
     }
-    error = "bind address must be IPv4 loopback (127.0.0.1 or localhost) in this version";
-    return false;
+    sockaddr_in probe{};
+    if (::inet_pton(AF_INET, bind.c_str(), &probe.sin_addr) != 1) {
+        error = "bind must be 127.0.0.1, localhost, 0.0.0.0 or an IPv4 address";
+        return false;
+    }
+    normalized = bind;
+    return true;
 }
 
 std::string reply_type_for(const std::string& request_type) {
@@ -36,8 +41,8 @@ std::string reply_type_for(const std::string& request_type) {
 // value back (still 0), never the real one. So the real port is discovered up front by
 // binding a throwaway probe socket to port 0, reading it back with getsockname, and closing
 // it before the real server binds the same port number. This is a TOCTOU race in principle
-// (another process could grab that port in the gap) but is accepted for this version: bind is
-// loopback-only.
+// (another process could grab or start serving the port in the gap) but is accepted for this
+// version, as is the equivalent race in the already-serving check below.
 bool find_ephemeral_port(const std::string& host, int& out_port, std::string& error) {
     SOCKET probe = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (probe == INVALID_SOCKET) {
@@ -72,6 +77,54 @@ bool find_ephemeral_port(const std::string& host, int& out_port, std::string& er
     return true;
 }
 
+// A bind-based check would false-positive on a TIME_WAIT entry from a prior connection, which
+// accepts no new connections but still occupies the port for a bind. Connecting instead avoids
+// that: only something actually listening will accept.
+bool port_already_serving(const std::string& host, int port) {
+    std::string probe_host = host == "0.0.0.0" ? "127.0.0.1" : host;
+
+    SOCKET probe = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (probe == INVALID_SOCKET) {
+        return false;
+    }
+
+    u_long non_blocking = 1;
+    ioctlsocket(probe, FIONBIO, &non_blocking);
+
+    sockaddr_in addr{};
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(static_cast<u_short>(port));
+    if (::inet_pton(AF_INET, probe_host.c_str(), &addr.sin_addr) != 1) {
+        closesocket(probe);
+        return false;
+    }
+
+    if (connect(probe, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == 0) {
+        closesocket(probe);
+        return true;
+    }
+
+    if (WSAGetLastError() != WSAEWOULDBLOCK) {
+        closesocket(probe);
+        return false;
+    }
+
+    fd_set writable{};
+    FD_ZERO(&writable);
+    FD_SET(probe, &writable);
+    timeval timeout{0, 250000};
+    if (select(0, nullptr, &writable, nullptr, &timeout) <= 0) {
+        closesocket(probe);
+        return false;
+    }
+
+    int so_error = 0;
+    int so_error_len = sizeof(so_error);
+    getsockopt(probe, SOL_SOCKET, SO_ERROR, reinterpret_cast<char*>(&so_error), &so_error_len);
+    closesocket(probe);
+    return so_error == 0;
+}
+
 }
 
 BridgeServer::BridgeServer(ServerConfig cfg, GamePort& port) : cfg_(std::move(cfg)), game_port_(port) {}
@@ -86,12 +139,17 @@ bool BridgeServer::start(std::string& error) {
         return false;
     }
     std::string bind_host;
-    if (!normalize_loopback_bind(cfg_.bind, bind_host, error)) {
+    if (!normalize_bind(cfg_.bind, bind_host, error)) {
         return false;
     }
 
     int listen_port = cfg_.port;
-    if (listen_port == 0 && !find_ephemeral_port(bind_host, listen_port, error)) {
+    if (listen_port == 0) {
+        if (!find_ephemeral_port(bind_host, listen_port, error)) {
+            return false;
+        }
+    } else if (port_already_serving(bind_host, listen_port)) {
+        error = "port " + std::to_string(listen_port) + " on " + bind_host + " is already serving another connection";
         return false;
     }
 
@@ -102,7 +160,7 @@ bool BridgeServer::start(std::string& error) {
 
     auto result = server->listen();
     if (!result.first) {
-        error = result.second;
+        error = "failed to listen on " + bind_host + ":" + std::to_string(listen_port) + ": " + result.second;
         return false;
     }
     server->start();

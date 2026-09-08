@@ -333,19 +333,6 @@ TEST_CASE("a failing game response is passed through as an error") {
     server.stop();
 }
 
-TEST_CASE("non-loopback bind fails before listening") {
-    StubGamePort stub;
-    amity::ServerConfig cfg;
-    cfg.bind = "0.0.0.0";
-    cfg.token = "s3cr3t";
-    amity::BridgeServer server(cfg, stub);
-
-    std::string error;
-    CHECK_FALSE(server.start(error));
-    CHECK(error.find("loopback") != std::string::npos);
-    CHECK(server.port() == 0);
-}
-
 TEST_CASE("bind ::1 fails before listening with an IPv4 error") {
     StubGamePort stub;
     amity::ServerConfig cfg;
@@ -525,4 +512,62 @@ TEST_CASE("a command round-trips to a command_result reply") {
     CHECK(stub.last_request.args["playerUid"] == "x");
 
     server.stop();
+}
+
+TEST_CASE("start binds a configured port instead of an ephemeral one") {
+    amity::ServerConfig cfg;
+    cfg.token = "s3cr3t";
+    cfg.port = 47913;
+    StubGamePort port;
+    amity::BridgeServer server(std::move(cfg), port);
+
+    std::string error;
+    REQUIRE_MESSAGE(server.start(error), error);
+    CHECK(server.port() == 47913);
+    server.stop();
+}
+
+TEST_CASE("start accepts a non-loopback bind when a token is set") {
+    amity::ServerConfig cfg;
+    cfg.token = "s3cr3t";
+    cfg.bind = "0.0.0.0";
+    StubGamePort port;
+    amity::BridgeServer server(std::move(cfg), port);
+
+    std::string error;
+    REQUIRE_MESSAGE(server.start(error), error);
+    CHECK(server.port() != 0);
+    server.stop();
+}
+
+TEST_CASE("start rejects a bind that is not an IPv4 address") {
+    amity::ServerConfig cfg;
+    cfg.token = "s3cr3t";
+    cfg.bind = "example.com";
+    StubGamePort port;
+    amity::BridgeServer server(std::move(cfg), port);
+
+    std::string error;
+    CHECK_FALSE(server.start(error));
+    CHECK(error.find("bind") != std::string::npos);
+}
+
+TEST_CASE("a configured port that is already taken fails loudly") {
+    StubGamePort port_a;
+    amity::ServerConfig first;
+    first.token = "s3cr3t";
+    first.port = 47914;
+    amity::BridgeServer a(std::move(first), port_a);
+    std::string error;
+    REQUIRE_MESSAGE(a.start(error), error);
+
+    StubGamePort port_b;
+    amity::ServerConfig second;
+    second.token = "s3cr3t";
+    second.port = 47914;
+    amity::BridgeServer b(std::move(second), port_b);
+    CHECK_FALSE(b.start(error));
+    CHECK_FALSE(error.empty());
+
+    a.stop();
 }
