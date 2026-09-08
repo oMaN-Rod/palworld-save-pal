@@ -8,6 +8,8 @@
 	const MIN_WIDTH = 800;
 	const MIN_HEIGHT = 500;
 
+	const { exempt = false }: { exempt?: boolean } = $props();
+
 	const appState = getAppState();
 	const isPublicShell = $derived(isWebBuild && !appState.saveFile);
 
@@ -28,7 +30,7 @@
 	let tooSmall = $derived(winW > 0 && (winW < MIN_WIDTH || winH < MIN_HEIGHT));
 </script>
 
-{#if tooSmall && !isPublicShell}
+{#if tooSmall && !isPublicShell && !exempt}
 	<div
 		class="fixed inset-0 z-[99999] flex animate-fade-in flex-col items-center justify-center bg-surface-950 px-6 text-center"
 		role="alert"

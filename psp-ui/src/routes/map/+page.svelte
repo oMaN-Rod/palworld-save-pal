@@ -38,11 +38,13 @@
 	import { mapLayerMarkerCount } from '$components/map/layers/mapLayerFeatures';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
 	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { getLiveActors } from '$lib/data/liveActors.svelte';
 	import { partitionSpawns } from '$components/map/features/spawns';
 	import { placementState } from '$lib/data/placement.svelte';
 	import { blueprintsData } from '$lib/data/blueprints.svelte';
 	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { browser } from '$app/environment';
+	import { page } from '$app/state';
 	import { isPublicShell } from '$lib/utils/shellRoutes';
 	import { isCoarsePointer, isMobileViewport } from '$lib/utils/viewport.svelte';
 	import { isWebBuild } from '$lib/utils/platform';
@@ -57,10 +59,13 @@
 		Player,
 		RelicPoint
 	} from '$types';
+	import PipPanel from '$components/map/pip/PipPanel.svelte';
+	import { openDesktopPip } from '$components/map/pip/desktopPip';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import type maplibregl from 'maplibre-gl';
 	import * as m from '$i18n/messages';
+	import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 
 	const PANEL_W = 420;
 
@@ -69,7 +74,25 @@
 	const toast = getToastState();
 
 	const saveLoaded = $derived(!!appState.saveFile);
-	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile));
+	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile, getRemoteMode().active));
+	// Prerender renders this route in Node, where reading `searchParams` is a
+	// build-time throw — there is no query string to read for a static file.
+	const pipMode = $derived(browser && page.url.searchParams.get('pip') === '1');
+	const liveActorsStreaming = $derived(getLiveActors().frameAt != null);
+	let pipPanelOpen = $state(false);
+
+	interface TauriGlobal {
+		core?: { invoke?: (cmd: string) => Promise<unknown> };
+	}
+
+	const tauri = () => (window as Window & { __TAURI__?: TauriGlobal }).__TAURI__;
+	const hasDesktopPip = browser && typeof tauri()?.core?.invoke === 'function';
+
+	function handleOpenDesktopPip() {
+		void openDesktopPip(tauri()?.core?.invoke, (message) =>
+			toast.add(message, m.pip_button(), 'error')
+		);
+	}
 
 	const mapOptions = $derived(mapOptionsState.current);
 	const activeArea = $derived(mapOptions.area ?? DEFAULT_MAP_AREA);
@@ -111,6 +134,10 @@
 			.catch((e) => console.error('Failed to load the map component', e));
 	}
 
+	$effect(() => {
+		if (page.url.searchParams.get('live') === '1') mapOptions.showLiveActors = true;
+	});
+
 	// The editing surfaces stay out of the prerendered public entry: this route is
 	// rendered in Node at build time and shipped to visitors with no save at all.
 	let saveUi = $state<
@@ -145,6 +172,7 @@
 		| 'showOrigin'
 		| 'showPlayers'
 		| 'showBases'
+		| 'showLiveActors'
 		| 'showLabels';
 
 	const LEGACY_LAYER_OPTION: Partial<Record<PanelOptionId, LayerOptionKey>> = {
@@ -159,6 +187,7 @@
 		origin: 'showOrigin',
 		players: 'showPlayers',
 		bases: 'showBases',
+		live_actors: 'showLiveActors',
 		labels: 'showLabels'
 	};
 
@@ -173,7 +202,9 @@
 	});
 
 	function layerAvailable(id: PanelOptionId): boolean {
-		return (id !== 'players' && id !== 'bases') || saveLoaded;
+		if (id === 'players' || id === 'bases') return saveLoaded;
+		if (id === 'live_actors') return getLiveActors().frameAt != null;
+		return true;
 	}
 
 	function layerCount(id: PanelOptionId): string | undefined {
@@ -194,6 +225,12 @@
 				return `${loadedPlayerCount}/${totalPlayerCount}`;
 			case 'bases':
 				return `${loadedBaseCount}/${totalBaseCount}`;
+			case 'live_actors': {
+				const liveActors = getLiveActors();
+				if (liveActors.frameAt == null) return undefined;
+				const count = String(liveActors.actors.length);
+				return liveActors.stale ? `${count} · ${m.live_stale()}` : count;
+			}
 			case 'dungeons':
 				return String(dungeonCount);
 			case 'boss_pals':
@@ -287,9 +324,7 @@
 	const relicTypeStats = $derived(
 		computeRelicTypeStats(relics.points, activeArea, appState.selectedPlayer ?? undefined)
 	);
-	const relicTypeList = $derived(
-		orderedRelicTypes(relicTypeStats, Object.keys(relicData.relics))
-	);
+	const relicTypeList = $derived(orderedRelicTypes(relicTypeStats, Object.keys(relicData.relics)));
 	const relicCount = $derived(
 		Object.values(relicTypeStats).reduce((acc, entry) => acc + entry.total, 0)
 	);
@@ -471,13 +506,17 @@
 		});
 
 		if (confirmed) {
-			const response: { success: boolean; message: string } = await sendAndWait(
-				MessageType.UNLOCK_MAP,
-				{}
-			);
-			const { success, message } = response;
-			if (success) {
-				toast.add(message, 'Success!', 'success');
+			try {
+				const response: { success: boolean; message: string } = await sendAndWait(
+					MessageType.UNLOCK_MAP,
+					{}
+				);
+				const { success, message } = response;
+				if (success) {
+					toast.add(message, 'Success!', 'success');
+				}
+			} catch (e) {
+				toast.add(String(e instanceof Error ? e.message : e), 'Failed to unlock map', 'error');
 			}
 		}
 	}
@@ -599,86 +638,113 @@
 		{/if}
 	{/snippet}
 
-	{#if !mobile && panelOpen}
-		<aside
-			class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col rounded-lg shadow-lg"
-			transition:fly={{ x: -(PANEL_W + 16), duration: 300, easing: cubicOut }}
-		>
-			{@render optionsBody()}
-		</aside>
-	{/if}
+	{#if !pipMode}
+		{#if !mobile && panelOpen}
+			<aside
+				class="bg-surface-900/95 absolute top-2 bottom-2 left-2 z-10 flex w-[420px] flex-col rounded-lg shadow-lg"
+				transition:fly={{ x: -(PANEL_W + 16), duration: 300, easing: cubicOut }}
+			>
+				{@render optionsBody()}
+			</aside>
+		{/if}
 
-	{#if mobile && sheetOpen}
-		<MapOptionsSheet
-			bind:snap={sheetSnap}
-			title={m.map_options()}
-			onClose={() => (sheetOpen = false)}
-		>
-			{@render optionsBody()}
-		</MapOptionsSheet>
-	{/if}
+		{#if mobile && sheetOpen}
+			<MapOptionsSheet
+				bind:snap={sheetSnap}
+				title={m.map_options()}
+				onClose={() => (sheetOpen = false)}
+			>
+				{@render optionsBody()}
+			</MapOptionsSheet>
+		{/if}
 
-	<!-- Cleared of the public shell's nav, which is a full-width bar on phones and a
-	     centred pill on desktop — at ~1440px that pill sits directly over this column
-	     once the panel pushes it right. The desktop app has a left sidebar and no top
-	     nav, so it keeps the original 8px inset. -->
-	<div
-		class="absolute top-16 z-20 flex flex-col items-start gap-2 md:transition-[left] md:duration-300 md:ease-out {publicShell
-			? ''
-			: 'md:top-2'}"
-		style:left="{!mobile && panelOpen ? PANEL_W + 16 : 8}px"
-	>
-		<button
-			type="button"
-			class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
-				? 'min-h-11 min-w-11 flex items-center justify-center'
-				: ''}"
-			title={m.map_options()}
-			aria-label={m.map_options()}
-			aria-expanded={optionsOpen}
-			onclick={toggleOptions}
+		<div
+			class="absolute top-16 z-20 flex flex-col items-start gap-2 md:transition-[left] md:duration-300 md:ease-out {publicShell
+				? ''
+				: 'md:top-2'}"
+			style:left="{!mobile && panelOpen ? PANEL_W + 16 : 8}px"
 		>
-			{#if optionsOpen}
-				<Icon icon="tabler:layout-sidebar-left-collapse" class="h-5 w-5" />
-			{:else}
-				<Icon icon="tabler:layout-sidebar" class="h-5 w-5" />
+			<button
+				type="button"
+				class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
+					? 'flex min-h-11 min-w-11 items-center justify-center'
+					: ''}"
+				title={m.map_options()}
+				aria-label={m.map_options()}
+				aria-expanded={optionsOpen}
+				onclick={toggleOptions}
+			>
+				{#if optionsOpen}
+					<Icon icon="tabler:layout-sidebar-left-collapse" class="h-5 w-5" />
+				{:else}
+					<Icon icon="tabler:layout-sidebar" class="h-5 w-5" />
+				{/if}
+			</button>
+
+			{#if mapOptions.showRelics && relicTypeList.length > 0}
+				<RelicFilterControl
+					types={relicTypeList}
+					stats={relicTypeStats}
+					enabled={mapOptions.relicTypes ?? {}}
+					showCollected={saveLoaded && !!appState.selectedPlayer}
+					{touch}
+					ontoggle={(relicType) =>
+						(mapOptions.relicTypes = {
+							...(mapOptions.relicTypes ?? {}),
+							[relicType]: !isRelicTypeVisible(relicType)
+						})}
+				/>
 			{/if}
-		</button>
 
-		{#if mapOptions.showRelics && relicTypeList.length > 0}
-			<RelicFilterControl
-				types={relicTypeList}
-				stats={relicTypeStats}
-				enabled={mapOptions.relicTypes ?? {}}
-				showCollected={saveLoaded && !!appState.selectedPlayer}
-				{touch}
-				ontoggle={(relicType) =>
-					(mapOptions.relicTypes = {
-						...(mapOptions.relicTypes ?? {}),
-						[relicType]: !isRelicTypeVisible(relicType)
-					})}
-			/>
-		{/if}
+			{#if saveUi && appState.selectedPlayer}
+				<saveUi.Controls
+					showRelics={mapOptions.showRelics}
+					onUnlockAllFastTravel={handleUnlockAllFastTravel}
+					onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
+					onCollectAllRelics={handleCollectAllRelics}
+				/>
+			{/if}
 
-		{#if saveUi && appState.selectedPlayer}
-			<saveUi.Controls
-				showRelics={mapOptions.showRelics}
-				onUnlockAllFastTravel={handleUnlockAllFastTravel}
-				onUnlockAllWatchtowers={handleUnlockAllWatchtowers}
-				onCollectAllRelics={handleCollectAllRelics}
-			/>
-		{/if}
-	</div>
+			{#if isWebBuild && liveActorsStreaming}
+				<button
+					type="button"
+					class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
+						? 'flex min-h-11 min-w-11 items-center justify-center'
+						: ''}"
+					title={m.pip_button()}
+					aria-label={m.pip_button()}
+					aria-pressed={pipPanelOpen}
+					onclick={() => (pipPanelOpen = !pipPanelOpen)}
+				>
+					<Icon icon="tabler:picture-in-picture-on" class="h-5 w-5" />
+				</button>
+			{:else if !isWebBuild && liveActorsStreaming && hasDesktopPip}
+				<button
+					type="button"
+					class="bg-surface-900/95 hover:bg-surface-800 rounded-lg p-2 shadow-lg {touch
+						? 'flex min-h-11 min-w-11 items-center justify-center'
+						: ''}"
+					title={m.pip_button()}
+					aria-label={m.pip_button()}
+					onclick={handleOpenDesktopPip}
+				>
+					<Icon icon="tabler:picture-in-picture-on" class="h-5 w-5" />
+				</button>
+			{/if}
+		</div>
+	{/if}
 
 	<div class="absolute inset-0">
 		{#if MapComponent}
 			<MapComponent
 				bind:map
+				pip={pipMode}
 				area={activeArea}
 				onAreaChange={(next: MapArea) => (mapOptions.area = next)}
 				showOrigin={mapOptions.showOrigin}
 				showPlayers={saveLoaded && mapOptions.showPlayers}
 				showBases={saveLoaded && mapOptions.showBases}
+				showLiveActors={pipMode || mapOptions.showLiveActors}
 				showFastTravel={mapOptions.showFastTravel}
 				showWatchtower={mapOptions.showWatchtower}
 				showRelics={mapOptions.showRelics}
@@ -724,7 +790,7 @@
 				onRelicSizeChange={(scale: number) => (mapOptions.relicSize = scale)}
 				onPalHeightChange={(height: number) => (mapOptions.palHeight = height)}
 				onMapOpacityChange={(opacity: number) => (mapOptions.mapOpacity = opacity)}
-				placement={placementState.active}
+				placement={!pipMode && placementState.active}
 				placementGeometry={placementState.geometry}
 				placementAnchor={placementState.anchor}
 				onPlacementAnchorChange={(a) => {
@@ -736,7 +802,7 @@
 			<Loading label={m.initializing_entity({ entity: m.map() })} icon="tabler:map" iconSize={24} />
 		{/if}
 
-		{#if saveLoaded && placementState.active}
+		{#if !pipMode && saveLoaded && placementState.active}
 			<PlacementPanel
 				{guildOptions}
 				{playerOptions}
@@ -745,4 +811,8 @@
 			/>
 		{/if}
 	</div>
+
+	{#if pipPanelOpen}
+		<PipPanel onClose={() => (pipPanelOpen = false)} />
+	{/if}
 </div>

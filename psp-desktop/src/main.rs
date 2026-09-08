@@ -79,6 +79,55 @@ fn choose_webview_url(
     dev_url.filter(|_| allow_dev_server).unwrap_or(server_url)
 }
 
+fn pip_path(main_path: &str) -> String {
+    let first = main_path
+        .trim_start_matches('/')
+        .split('/')
+        .next()
+        .unwrap_or_default();
+    let (language, region) = match first.split_once('-') {
+        Some((language, region)) => (language, Some(region)),
+        None => (first, None),
+    };
+    let is_locale = language.len() == 2
+        && language.chars().all(|c| c.is_ascii_lowercase())
+        && region.is_none_or(|r| {
+            (2..=4).contains(&r.len()) && r.chars().all(|c| c.is_ascii_alphanumeric())
+        });
+    if is_locale {
+        format!("/{first}/map")
+    } else {
+        "/map".to_string()
+    }
+}
+
+/// Deliberately `async`: a synchronous command runs on the main thread, and
+/// `WebviewWindowBuilder::build` there deadlocks on Windows waiting for an event
+/// loop it is itself blocking — the window frame appears, the webview never
+/// loads, and the app stops answering, so the blank window cannot even be
+/// closed. Tauri documents `async` commands as the fix.
+#[tauri::command]
+async fn open_pip(app: tauri::AppHandle) -> Result<(), String> {
+    if let Some(pip) = app.get_webview_window("pip") {
+        let _ = pip.unminimize();
+        let _ = pip.set_focus();
+        return Ok(());
+    }
+    let main = app.get_webview_window("main").ok_or("no main window")?;
+    let mut url = main.url().map_err(|e| e.to_string())?;
+    url.set_path(&pip_path(url.path()));
+    url.set_query(Some("pip=1"));
+    WebviewWindowBuilder::new(&app, "pip", WebviewUrl::External(url))
+        .title("Live Map")
+        .inner_size(360.0, 280.0)
+        .min_inner_size(240.0, 180.0)
+        .always_on_top(true)
+        .decorations(true)
+        .build()
+        .map_err(|e| e.to_string())?;
+    Ok(())
+}
+
 /// WebKitGTK's DMABUF renderer leaves the WebView blank-white on many virtual
 /// GPUs and driver combos; default it off on Linux unless the user already set
 /// `WEBKIT_DISABLE_DMABUF_RENDERER` themselves.
@@ -160,6 +209,7 @@ fn main() {
 
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![open_pip])
         .build(tauri::generate_context!())
         .expect("failed to build Palworld Save Pal desktop app")
         .run(|app, event| {
@@ -181,7 +231,7 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::{choose_webview_url, dmabuf_disable_value};
+    use super::{choose_webview_url, dmabuf_disable_value, pip_path};
 
     fn url(s: &str) -> tauri::Url {
         s.parse().expect("valid url")
@@ -212,5 +262,17 @@ mod tests {
         // pick the dev URL, even though tauri.conf.json still carries a dev_url.
         assert_eq!(choose_webview_url(Some(dev), server.clone(), false), server);
         assert_eq!(choose_webview_url(None, server.clone(), true), server);
+    }
+
+    #[test]
+    fn pip_inherits_the_main_windows_locale_prefix() {
+        assert_eq!(pip_path("/de/map"), "/de/map");
+        assert_eq!(pip_path("/pt-br/wiki"), "/pt-br/map");
+        assert_eq!(pip_path("/zh-hant/"), "/zh-hant/map");
+        assert_eq!(pip_path("/map"), "/map");
+        assert_eq!(pip_path("/"), "/map");
+        assert_eq!(pip_path(""), "/map");
+        assert_eq!(pip_path("/breeding"), "/map");
+        assert_eq!(pip_path("/wiki/pal/lamball"), "/map");
     }
 }

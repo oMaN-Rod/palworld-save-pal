@@ -25,8 +25,12 @@ export function isFullBleedRoute(pathname: string): boolean {
 	);
 }
 
-export function isPublicShell(webBuild: boolean, saveFile: unknown): boolean {
-	return webBuild && !saveFile;
+export function isPublicShell(
+	webBuild: boolean,
+	saveFile: unknown,
+	remoteActive = false
+): boolean {
+	return webBuild && !saveFile && !remoteActive;
 }
 
 // Browsing the map loads no save and touches no filesystem API, so the compat
@@ -39,4 +43,9 @@ export function isCompatExemptRoute(pathname: string): boolean {
 	return COMPAT_EXEMPT_ROUTES.some(
 		(route) => pathname === route || pathname.startsWith(`${route}/`)
 	);
+}
+
+export function isPipWindow(url: URL): boolean {
+	if (url.searchParams.get('pip') !== '1') return false;
+	return (url.pathname.replace(/\/+$/, '') || '/').endsWith('/map');
 }

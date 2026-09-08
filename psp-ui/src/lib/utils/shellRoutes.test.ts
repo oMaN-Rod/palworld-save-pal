@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	isCompatExemptRoute,
 	isFullBleedRoute,
+	isPipWindow,
 	isPublicShell,
 	isSaveRequiredRoute
 } from './shellRoutes';
@@ -80,6 +81,15 @@ describe('isPublicShell', () => {
 	it('is false on desktop even with no save, because the sidebar renders', () => {
 		expect(isPublicShell(false, undefined)).toBe(false);
 	});
+
+	it('is false while remote mode routes this browser through a desktop', () => {
+		expect(isPublicShell(true, undefined, true)).toBe(false);
+		expect(isPublicShell(true, null, true)).toBe(false);
+	});
+
+	it('stays public on the web build when remote mode is off', () => {
+		expect(isPublicShell(true, undefined, false)).toBe(true);
+	});
 });
 
 describe('isCompatExemptRoute', () => {
@@ -96,5 +106,25 @@ describe('isCompatExemptRoute', () => {
 
 	it('does not match on bare string prefixes', () => {
 		expect(isCompatExemptRoute('/mapping')).toBe(false);
+	});
+});
+
+describe('isPipWindow', () => {
+	const url = (href: string) => new URL(href, 'http://127.0.0.1:5174');
+
+	it('recognises the desktop pip window by its query flag', () => {
+		expect(isPipWindow(url('/map?pip=1'))).toBe(true);
+		expect(isPipWindow(url('/de/map?pip=1'))).toBe(true);
+	});
+
+	it('leaves the ordinary map window with its shell', () => {
+		expect(isPipWindow(url('/map'))).toBe(false);
+		expect(isPipWindow(url('/map?pip=0'))).toBe(false);
+		expect(isPipWindow(url('/map?pip'))).toBe(false);
+	});
+
+	it('only strips the shell on the map', () => {
+		expect(isPipWindow(url('/edit/palbox?pip=1'))).toBe(false);
+		expect(isPipWindow(url('/?pip=1'))).toBe(false);
 	});
 });
