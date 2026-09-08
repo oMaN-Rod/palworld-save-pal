@@ -2,6 +2,7 @@
 	// Worker name stays `psp`: renaming would orphan the existing deployment.
 	"name": "psp",
 	"compatibility_date": "2026-08-02",
+	"main": "signal-broker/src/index.ts",
 	"routes": [
 		{
 			"pattern": "palworldsavepal.app",
@@ -10,8 +11,21 @@
 	],
 	"assets": {
 		"directory": "./ui_build",
+		"binding": "ASSETS",
 		// Verified every static route is prerendered, so unknown URLs are genuinely
 		// unknown and should say so rather than returning a 200 soft-404.
 		"not_found_handling": "404-page"
+	},
+	"durable_objects": {
+		"bindings": [{ "name": "SIGNAL_ROOM", "class_name": "SignalRoom" }]
+	},
+	// SQLite-backed: the free-plan-compatible Durable Object storage class.
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["SignalRoom"] }],
+	"vars": {
+		"TURN_URLS": "turn:turn.palworldsavepal.app:3478?transport=udp,turn:turn.palworldsavepal.app:3478?transport=tcp,turns:turn.palworldsavepal.app:443?transport=tcp",
+		"TURN_TTL_SECONDS": "3600"
+	},
+	"unsafe": {
+		"bindings": [{ "type": "ratelimit", "name": "TURN_RATE", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } }]
 	}
 }
