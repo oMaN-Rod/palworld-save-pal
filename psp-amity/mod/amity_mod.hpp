@@ -1,0 +1,35 @@
+#pragma once
+#include <Mod/CppUserModBase.hpp>
+
+#include "game_executor.hpp"
+
+#include <amity/capability_registry.hpp>
+#include <amity/command_queue.hpp>
+#include <amity/server.hpp>
+
+#include <filesystem>
+#include <memory>
+
+#define AMITY_VERSION "0.1.0"
+#define AMITY_STR_EXPAND(x) STR(x)
+
+class AmityMod : public RC::CppUserModBase
+{
+public:
+    AmityMod();
+    ~AmityMod() override;
+    auto on_unreal_init() -> void override;
+    auto on_update() -> void override;
+
+private:
+    amity::CommandQueue m_queue;
+    amity::CapabilityRegistry m_registry;
+    GameExecutorImpl m_executor;
+    std::unique_ptr<amity::BridgeServer> m_server;
+    std::filesystem::path m_endpoint_dir;
+
+    bool m_resolution_report_started{false};
+    bool m_resolution_report_done{false};
+    int m_ticks_since_last_resolution_attempt{0};
+    int m_ticks_since_last_capability_refresh{0};
+};
