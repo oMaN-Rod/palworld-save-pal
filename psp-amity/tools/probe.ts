@@ -1,7 +1,65 @@
-const jsonMode = process.argv.includes("--json");
+import { createHmac } from "node:crypto";
+import { readdir } from "node:fs/promises";
 
-const dir = `${process.env.LOCALAPPDATA}\\Pal\\Saved\\PSPAmity`;
-const ep = JSON.parse(await Bun.file(`${dir}\\endpoint.json`).text());
+const jsonMode = process.argv.includes("--json");
+const pidArg = process.argv.find((a) => a.startsWith("--pid="));
+const wantPid = pidArg ? Number(pidArg.slice("--pid=".length)) : undefined;
+
+const PROTOCOL_VERSION = 2;
+
+type Endpoint = { protocolVersion: number; port: number; token: string; name: string; bind: string; pid: number };
+
+function isAlive(pid: number): boolean {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function computeProof(token: string, nonce: string): string {
+  return createHmac("sha256", token).update(nonce).digest("hex");
+}
+
+async function findEndpoint(): Promise<Endpoint> {
+  const dir = `${process.env.LOCALAPPDATA}\\Pal\\Saved\\PSPAmity\\endpoints`;
+  let files: string[];
+  try {
+    files = await readdir(dir);
+  } catch {
+    throw new Error(`no endpoints directory at ${dir} - is PSPAmity running?`);
+  }
+
+  const found: Endpoint[] = [];
+  for (const file of files) {
+    if (!file.endsWith(".json")) continue;
+    let ep: Endpoint;
+    try {
+      ep = JSON.parse(await Bun.file(`${dir}\\${file}`).text());
+    } catch {
+      continue;
+    }
+    if (ep.protocolVersion !== PROTOCOL_VERSION) continue;
+    if (!isAlive(ep.pid)) continue;
+    found.push(ep);
+  }
+  found.sort((a, b) => a.pid - b.pid);
+
+  if (wantPid !== undefined) {
+    const match = found.find((ep) => ep.pid === wantPid);
+    if (!match) throw new Error(`no live v${PROTOCOL_VERSION} endpoint with pid ${wantPid} in ${dir}`);
+    return match;
+  }
+  if (found.length === 0) throw new Error(`no live v${PROTOCOL_VERSION} endpoints found in ${dir}`);
+  if (found.length > 1 && !jsonMode) {
+    console.error(`multiple instances found, using pid ${found[0].pid} ("${found[0].name}"); pass --pid=<pid> to pick another:`);
+    for (const ep of found) console.error(`  ${ep.pid}  ${ep.name}  port ${ep.port}`);
+  }
+  return found[0];
+}
+
+const ep = await findEndpoint();
 const ws = new WebSocket(`ws://127.0.0.1:${ep.port}`);
 
 let nextId = 1;
@@ -171,8 +229,9 @@ if (name && !subcommands[name]) {
 
 ws.onopen = async () => {
   try {
-    report("hello", await request("hello", { protocolVersion: 1 }));
-    await request("auth", { token: ep.token });
+    const hello = await request("hello", { protocolVersion: PROTOCOL_VERSION });
+    report("hello", hello);
+    await request("auth", { proof: computeProof(ep.token, hello.nonce) });
 
     if (name) {
       const args = process.argv.slice(3).filter((a) => !a.startsWith("--"));

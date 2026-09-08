@@ -4,6 +4,10 @@ PSPAmity is a UE4SS C++ mod. It does not run on its own — it loads into an
 already-running UE4SS instance inside Palworld. Install UE4SS first, then
 install PSPAmity into that same UE4SS instance.
 
+> **Already had PSPAmity installed?** This release changes the bridge's wire
+> protocol and is not compatible with older installs — see section 8,
+> "Upgrading from an older PSPAmity", before you assume something broke.
+
 ## 1. Prerequisite: UE4SS
 
 Palworld ships an official UE4SS build via Steam Workshop. Get UE4SS onto
@@ -62,8 +66,11 @@ Example lines:
 ```
 [PSPAmity] loaded v0.1.0
 [PSPAmity] unreal initialized
-[PSPAmity] bridge listening on 127.0.0.1:<port>
+[PSPAmity] bridge listening on 127.0.0.1:<port> as "PSPAmity"
 ```
+
+The last line now names both the bind address and the instance name (`"PSPAmity"` by
+default, or whatever `name` is set to in `PSPAmity.ini` — see section 6).
 
 Once a world is loaded the log also carries a `[PSPAmity] resolve ...` line per game
 symbol the mod depends on, ending in `resolution report complete: <n> ok, <m> MISSING`.
@@ -76,18 +83,108 @@ manual), and that UE4SS itself loaded successfully earlier in the log.
 
 ## 5. Discovery (how PSP finds the running game)
 
-Once loaded, PSPAmity writes a per-launch connection file to
-`%LOCALAPPDATA%\Pal\Saved\PSPAmity\endpoint.json`, containing the protocol
-version, the local port, a token generated fresh for that session, the game's
-process id and the launch time. PSP reads this file to connect automatically —
-no manual configuration is required.
+Once loaded, PSPAmity writes a small connection file to
+`%LOCALAPPDATA%\Pal\Saved\PSPAmity\endpoints\<pid>.json`, named after its own
+process id. Each running instance gets its own file in that `endpoints`
+folder, so a solo game and a dedicated server running on the same machine at
+the same time are both discovered correctly instead of one overwriting the
+other's connection info. With no configuration at all, a single local
+instance is found automatically and nothing needs setting up.
 
-If the game crashes, this file can be left over from the previous session.
-PSP checks the process id recorded in the file and will not treat a stale
-file as a live connection. The file is rewritten on the next launch, so no
-manual cleanup is needed.
+Each file records the protocol version, the port, the token, the instance
+name, the bind address, the process id and the launch time. PSP checks the
+recorded process id against the running processes, so a file left behind by
+a crashed instance is ignored rather than treated as live — no manual
+cleanup is needed.
 
-## 6. Co-op clients (non-host players)
+## 6. Configuration (optional)
+
+PSPAmity reads settings from `PSPAmity.ini`, which lives in the mod's own
+folder — `Mods\PSPAmity\PSPAmity.ini` under whichever `Mods` directory you
+installed into (see section 3), alongside `dlls\`, `enabled.txt` and
+`THIRD_PARTY_NOTICES.md`. The zip ships this file with every setting
+commented out. Left untouched, the mod behaves exactly as it always has: a
+loopback-only bridge on an OS-assigned port with a fresh random token every
+launch, discovered automatically by PSP with no setup.
+
+All settings live under a `[bridge]` section:
+
+| Key     | Default                              | Meaning |
+|---------|---------------------------------------|---------|
+| `name`  | `PSPAmity`                            | Friendly name shown in PSP's instance list. |
+| `port`  | `0` (OS picks a free port)            | Fixed port; needed to reach this instance from another machine. |
+| `token` | *(blank — a fresh random token every launch)* | Shared secret PSP must present to connect. |
+| `bind`  | `127.0.0.1`                           | Interface to listen on. `0.0.0.0` accepts connections from the network — see Security below. |
+
+Each setting can also be supplied as an environment variable, which wins over
+the file: `PSPAMITY_NAME`, `PSPAMITY_PORT`, `PSPAMITY_TOKEN`, `PSPAMITY_BIND`.
+
+Two rules are enforced. Breaking either keeps the bridge from starting at all,
+rather than silently doing something else:
+
+- **A non-loopback `bind` requires an explicit `token`.** Without one, the
+  bridge refuses to start and says so in `UE4SS.log`.
+- **A configured `port` that is already in use makes the bridge fail to
+  start, rather than silently choosing a different port.** PSPAmity actively
+  probes the port before binding to it, because on Windows the socket
+  library would otherwise let two servers share the same port silently. So
+  the port you set here is always the port you should point PSP at.
+
+The shipped example, exactly as it appears in `PSPAmity.ini`:
+
+```ini
+; PSPAmity bridge configuration.
+; Every setting below is optional. With this file untouched the mod behaves
+; exactly as it did before: a loopback-only bridge on an OS-assigned port with
+; a fresh random token each launch, discovered automatically by PSP.
+;
+; Each setting can also be supplied as an environment variable, which wins over
+; this file: PSPAMITY_NAME, PSPAMITY_PORT, PSPAMITY_TOKEN, PSPAMITY_BIND.
+
+[bridge]
+
+; Friendly name shown in PSP's instance list.
+; name = Dedicated - psp4
+
+; 0 (default) lets the OS pick a free port. A fixed port is required to reach
+; this instance from another machine. If the port is already taken the bridge
+; does not start rather than silently moving.
+; port = 8788
+
+; Shared secret PSP must present to connect. Blank (default) means a new random
+; token every launch, which only works for automatic local discovery.
+; A non-loopback bind REQUIRES an explicit token here.
+; token = choose-a-long-random-secret
+
+; 127.0.0.1 (default) accepts connections only from this machine.
+; 0.0.0.0 accepts them from the network. Traffic after the login handshake is
+; NOT encrypted, so only use this on a LAN or over a VPN.
+; bind = 0.0.0.0
+```
+
+## 7. Security
+
+Only the login handshake protects the token: PSPAmity issues a random nonce,
+and PSP proves it knows the token by sending back an HMAC of that nonce — the
+token itself is never sent over the wire in the clear. But everything that
+happens after login — reading pal and player data, and every edit command —
+travels over that same WebSocket connection unencrypted. There is no TLS.
+
+Because of that, `bind = 0.0.0.0` belongs on a trusted LAN or over a VPN, and
+should never be used on a host exposed directly to the internet. The
+handshake keeps the token itself from leaking; it does not make the rest of
+the traffic safe on an untrusted network.
+
+## 8. Upgrading from an older PSPAmity
+
+This release changes the bridge's wire protocol (v1 to v2), with no backward
+compatibility. **The mod and PSP must be updated together.** If only one
+side is updated, PSP reports `protocol_mismatch` for that instance instead of
+connecting — that is expected, not a sign that the update broke something.
+Reinstall PSPAmity from this release (section 3) and make sure PSP is
+updated to match, and the connection will work as before.
+
+## 9. Co-op clients (non-host players)
 
 If you are a joining client in a co-op session rather than the host, the
 bridge is not authoritative for the same data the host sees. Some read

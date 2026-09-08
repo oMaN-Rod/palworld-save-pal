@@ -21,7 +21,9 @@ an argument and default to an `amity-build` workspace folder beside the repo:
   from `mod/amity_mod.hpp`
 - `tools/probe.ts` — bun client for driving the bridge by hand: every read and write op has
   a subcommand, and `reflect`, `find` and `holder` answer reflection questions over the live
-  socket. Run it with no arguments for a usage list.
+  socket. It discovers the running instance from `%LOCALAPPDATA%\Pal\Saved\PSPAmity\endpoints\`
+  and performs the v2 nonce/HMAC handshake; pass `--pid=<pid>` to pick a specific instance when
+  more than one is running. Run it with no arguments for a usage list.
 
 The mod's startup resolution report (`[PSPAmity] resolve ...` lines in UE4SS.log) checks
 every game symbol the ops depend on against the running build and ends with a one-line
