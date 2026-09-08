@@ -1,0 +1,1 @@
+{"id":"23","type":"capabilities","data":{"version":1,"ops":{"pal.heal":{"available":true,"reason":null},"player.edit":{"available":true,"reason":null},"item.setSlot":{"available":false,"reason":"item database not loaded"}}}}

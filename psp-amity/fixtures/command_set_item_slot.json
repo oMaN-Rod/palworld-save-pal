@@ -1,0 +1,1 @@
+{"id":"24","type":"command","data":{"commandId":"set-slot-cmd-1","op":"item.setSlot","args":{"playerUid":"11111111-2222-3333-4444-555555555555","containerId":"66666666-7777-8888-9999-000000000000","slotIndex":4,"staticItemId":"Wood","count":20}}}

@@ -1,0 +1,1 @@
+{"id":"24","type":"command_result","data":{"commandId":"set-slot-cmd-1","op":"item.setSlot","applied":true,"verified":true,"retrySafe":false,"data":{"steps":{"dispose":"skipped","grant":"ok","move":"ok"},"slotBefore":{"staticItemId":null,"count":0},"slotAfter":{"staticItemId":"Wood","count":20}}}}

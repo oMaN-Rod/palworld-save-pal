@@ -1,0 +1,1 @@
+{"id":"20","type":"command_result","data":{"commandId":"heal-cmd-1","op":"pal.heal","applied":true,"verified":true,"retrySafe":true,"data":{"steps":{"physicalHealth":"ok","hp":"ok","stomach":"ok","sanity":"ok","workerSick":"ok"}}}}
