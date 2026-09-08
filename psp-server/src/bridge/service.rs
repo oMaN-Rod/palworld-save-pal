@@ -189,6 +189,7 @@ async fn wait(
     duration: Duration,
     cancel: &CancellationToken,
     command_rx: &mut mpsc::Receiver<Command>,
+    target_rx: &mut watch::Receiver<Option<BridgeTarget>>,
 ) -> bool {
     let sleep = tokio::time::sleep(duration);
     tokio::pin!(sleep);
@@ -196,6 +197,7 @@ async fn wait(
         tokio::select! {
             _ = cancel.cancelled() => return true,
             _ = &mut sleep => return false,
+            changed = target_rx.changed() => return changed.is_err(),
             Some(command) = command_rx.recv() => command.fail_offline(),
         }
     }
@@ -269,7 +271,7 @@ async fn run_supervisor(
                     ConnectionEnd::Cancelled => break,
                     ConnectionEnd::Retarget => continue,
                     ConnectionEnd::Disconnected => {
-                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx).await {
+                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx, &mut target_rx).await {
                             break;
                         }
                     }
@@ -278,13 +280,13 @@ async fn run_supervisor(
             Err(ConnectError::Cancelled) => break,
             Err(ConnectError::Transport) => {
                 publish(&status_tx, identity(false, Some("bridge transport error".to_string())));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx).await {
+                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
                     break;
                 }
             }
             Err(ConnectError::Auth { code }) => {
                 publish(&status_tx, identity(false, Some(code)));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx).await {
+                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
                     break;
                 }
             }
@@ -359,6 +361,56 @@ mod tests {
         let status = settled.expect("status channel stayed open");
         assert!(!status.connected);
         assert_eq!(status.instance_name.as_deref(), Some("instance auto:42"));
+        service.shutdown().await;
+    }
+
+    #[tokio::test]
+    async fn a_target_switch_during_backoff_is_acted_on_without_waiting_out_the_backoff() {
+        let service = BridgeService::new();
+        service.start();
+        service.set_target(Some(target("dead:1", 1)));
+
+        let mut status_rx = service.status_rx();
+        let mut failed_dials = 0;
+        // Port 1 never accepts, so every dial fails and the supervisor backs off. By the
+        // 4th failure the backoff wait's floor is MIN_BACKOFF * 2^2 = 4s -- comfortably
+        // above the 2.5s window below, so an unfixed `wait()` (one that doesn't race the
+        // target change) would still be sleeping when that window elapses.
+        tokio::time::timeout(Duration::from_secs(15), async {
+            loop {
+                if status_rx.changed().await.is_err() {
+                    panic!("status channel closed while backoff was building up");
+                }
+                let status = status_rx.borrow().clone();
+                if status.instance_id.as_deref() == Some("dead:1") && status.last_error.is_some() {
+                    failed_dials += 1;
+                    if failed_dials >= 4 {
+                        return;
+                    }
+                }
+            }
+        })
+        .await
+        .expect("the target should have failed to dial repeatedly by now");
+
+        service.set_target(Some(target("dead:2", 1)));
+
+        tokio::time::timeout(Duration::from_millis(2_500), async {
+            loop {
+                if status_rx.changed().await.is_err() {
+                    panic!("status channel closed while waiting for the switch to take effect");
+                }
+                if status_rx.borrow().instance_id.as_deref() == Some("dead:2") {
+                    return;
+                }
+            }
+        })
+        .await
+        .expect(
+            "a target switch during backoff must be picked up well inside the backoff wait, \
+             not after it elapses",
+        );
+
         service.shutdown().await;
     }
 }
