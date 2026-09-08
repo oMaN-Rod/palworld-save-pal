@@ -93,6 +93,51 @@ describe('LiveInstanceSwitcher', () => {
 		});
 		expect(getByText('No instances found')).toBeTruthy();
 	});
+
+	it('marks the active auto-discovered instance disconnected once the bridge drops, not live', () => {
+		const { container } = render(LiveInstanceSwitcher, {
+			props: {
+				instances: INSTANCES,
+				activeId: 'auto:11',
+				activeConnected: false,
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				onadd: vi.fn()
+			}
+		});
+		const dot = container.querySelector('[data-instance-id="auto:11"] [data-dot-status]');
+		expect(dot?.getAttribute('data-dot-status')).toBe('disconnected');
+	});
+
+	it('marks the active instance connected when the bridge is up', () => {
+		const { container } = render(LiveInstanceSwitcher, {
+			props: {
+				instances: INSTANCES,
+				activeId: 'auto:11',
+				activeConnected: true,
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				onadd: vi.fn()
+			}
+		});
+		const dot = container.querySelector('[data-instance-id="auto:11"] [data-dot-status]');
+		expect(dot?.getAttribute('data-dot-status')).toBe('connected');
+	});
+
+	it('marks a saved, inactive instance unknown rather than live or dead', () => {
+		const { container } = render(LiveInstanceSwitcher, {
+			props: {
+				instances: INSTANCES,
+				activeId: 'auto:11',
+				activeConnected: true,
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				onadd: vi.fn()
+			}
+		});
+		const dot = container.querySelector('[data-instance-id="saved:1"] [data-dot-status]');
+		expect(dot?.getAttribute('data-dot-status')).toBe('unknown');
+	});
 });
 
 describe('LiveInstanceModal', () => {

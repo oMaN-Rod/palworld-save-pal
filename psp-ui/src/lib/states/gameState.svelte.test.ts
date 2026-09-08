@@ -10,18 +10,18 @@ vi.mock('$lib/utils/websocketUtils', () => ({
 import { MessageType } from '$types';
 
 import type {
+	GameBasePalsJson,
 	GameCapabilitiesJson,
 	GameCommandResultJson,
-	GameHealPalsJson,
-	GameBasePalsJson,
 	GameGuildJson,
+	GameHealPalsJson,
 	GameInventoryJson,
 	GamePalJson,
 	GamePalsJson,
 	GamePlayersJson,
 	GameStatusJson
 } from './gameState.svelte';
-import { GameState } from './gameState.svelte';
+import { GameCommandError, GameState } from './gameState.svelte';
 
 function statusJson(overrides: Partial<GameStatusJson> = {}): GameStatusJson {
 	return {
@@ -66,7 +66,18 @@ function palJson(): GamePalJson {
 }
 
 function palsJson(overrides: Partial<GamePalsJson> = {}): GamePalsJson {
-	return { pals: [palJson()], page: 0, pageCount: 1, slotCount: 30, slotBase: 0, containerId: 'c-1', party: [], partyStatus: 'ok', status: 'ok', ...overrides };
+	return {
+		pals: [palJson()],
+		page: 0,
+		pageCount: 1,
+		slotCount: 30,
+		slotBase: 0,
+		containerId: 'c-1',
+		party: [],
+		partyStatus: 'ok',
+		status: 'ok',
+		...overrides
+	};
 }
 
 function deferred<T>() {
@@ -239,7 +250,9 @@ describe('GameState detail loads rejected by the transport', () => {
 
 	it('keeps the slot count the page reported', async () => {
 		const gameState = new GameState();
-		sendAndWait.mockResolvedValueOnce(palsJson({ page: 2, pageCount: 32, slotCount: 30, slotBase: 60 }));
+		sendAndWait.mockResolvedValueOnce(
+			palsJson({ page: 2, pageCount: 32, slotCount: 30, slotBase: 60 })
+		);
 
 		await gameState.loadPals('p1', 2);
 
@@ -360,7 +373,8 @@ describe('GameState command id reuse', () => {
 		const targets = [{ slot_index: 0 }];
 		const failed: GameHealPalsJson = {
 			results: [
-				{ slot_index: 0,
+				{
+					slot_index: 0,
 					ok: false,
 					result: null,
 					error: { code: 'not_authoritative', message: 'this instance cannot write' }
@@ -382,7 +396,8 @@ describe('GameState command id reuse', () => {
 		const targets = [{ slot_index: 0 }];
 		const offline: GameHealPalsJson = {
 			results: [
-				{ slot_index: 0,
+				{
+					slot_index: 0,
 					ok: false,
 					result: null,
 					error: { code: 'timeout', message: 'command timed out' }
@@ -409,7 +424,9 @@ describe('GameState single in-flight write gate', () => {
 		const inFlight = gameState.editPlayer('p1', 81, 100);
 		expect(gameState.writeBusy).toBe(true);
 
-		await expect(gameState.editPlayer('p2', 81, 100)).rejects.toThrow('another change is still in flight');
+		await expect(gameState.editPlayer('p2', 81, 100)).rejects.toThrow(
+			'another change is still in flight'
+		);
 		expect(sendAndWait).toHaveBeenCalledTimes(1);
 
 		first.resolve(commandResult());
@@ -668,11 +685,15 @@ describe('GameState editPal', () => {
 	it('carries the lists and the work map through', async () => {
 		const gameState = new GameState();
 		sendAndWait.mockResolvedValueOnce(commandResult({ op: 'pal.edit' }));
-		await gameState.editPal('p1', { slotIndex: 4 }, {
-			activeSkills: ['Waza1'],
-			passiveSkills: ['Legend'],
-			workSuitability: { Mining: 3 }
-		});
+		await gameState.editPal(
+			'p1',
+			{ slotIndex: 4 },
+			{
+				activeSkills: ['Waza1'],
+				passiveSkills: ['Legend'],
+				workSuitability: { Mining: 3 }
+			}
+		);
 
 		const payload = sentEdit();
 		expect(payload.active_skills).toEqual(['Waza1']);
@@ -720,7 +741,9 @@ describe('GameState editPal', () => {
 	it('keys the command id by slot', async () => {
 		const gameState = new GameState();
 		sendAndWait.mockRejectedValueOnce(new Error('socket closed'));
-		await expect(gameState.editPal('p1', { slotIndex: 4 }, { level: 5 })).rejects.toThrow('socket closed');
+		await expect(gameState.editPal('p1', { slotIndex: 4 }, { level: 5 })).rejects.toThrow(
+			'socket closed'
+		);
 
 		sendAndWait.mockResolvedValueOnce(commandResult({ op: 'pal.edit' }));
 		await gameState.editPal('p1', { slotIndex: 4 }, { level: 9 });
@@ -873,7 +896,10 @@ describe('GameState.loadGuilds', () => {
 			status: 'ok'
 		});
 		await gameState.loadGuilds();
-		sendAndWait.mockResolvedValueOnce({ error: 'world not loaded', code: 'capability_unavailable' });
+		sendAndWait.mockResolvedValueOnce({
+			error: 'world not loaded',
+			code: 'capability_unavailable'
+		});
 		await gameState.loadGuilds();
 		expect(gameState.guilds).toBeNull();
 	});
@@ -915,7 +941,14 @@ describe('GameState instances', () => {
 	it('selectInstance sends the id and adopts the returned list', async () => {
 		sendAndWait.mockResolvedValueOnce({
 			instances: [
-				{ id: 'saved:1', source: 'saved', name: 'Remote', host: '10.0.0.14', port: 8788, live: false }
+				{
+					id: 'saved:1',
+					source: 'saved',
+					name: 'Remote',
+					host: '10.0.0.14',
+					port: 8788,
+					live: false
+				}
 			],
 			activeId: 'saved:1'
 		});
@@ -944,7 +977,14 @@ describe('GameState instances', () => {
 	it('updateInstance sends the id with every field and adopts the returned list', async () => {
 		sendAndWait.mockResolvedValueOnce({
 			instances: [
-				{ id: 'saved:1', source: 'saved', name: 'Renamed', host: '10.0.0.14', port: 8788, live: false }
+				{
+					id: 'saved:1',
+					source: 'saved',
+					name: 'Renamed',
+					host: '10.0.0.14',
+					port: 8788,
+					live: false
+				}
 			],
 			activeId: null
 		});
@@ -1003,7 +1043,14 @@ describe('GameState instances', () => {
 
 		sendAndWait.mockResolvedValueOnce({
 			instances: [
-				{ id: 'saved:1', source: 'saved', name: 'Remote', host: '10.0.0.14', port: 8788, live: false }
+				{
+					id: 'saved:1',
+					source: 'saved',
+					name: 'Remote',
+					host: '10.0.0.14',
+					port: 8788,
+					live: false
+				}
 			],
 			activeId: 'saved:1'
 		});
@@ -1019,5 +1066,59 @@ describe('GameState instances', () => {
 
 		expect(gameState.activeInstanceId).toBe('saved:1');
 		expect(gameState.instances[0].id).toBe('saved:1');
+	});
+
+	it('a business refusal from a mutating call throws a GameCommandError and leaves the stored list untouched', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{
+					id: 'saved:1',
+					source: 'saved',
+					name: 'Remote',
+					host: '10.0.0.14',
+					port: 8788,
+					live: false
+				}
+			],
+			activeId: 'saved:1'
+		});
+		const gameState = new GameState();
+		await gameState.refreshInstances();
+
+		sendAndWait.mockResolvedValueOnce({ error: 'name already used', code: 'duplicate_name' });
+		let caught: unknown;
+		try {
+			await gameState.updateInstance('saved:1', {
+				name: 'Renamed',
+				host: '10.0.0.14',
+				port: 8788,
+				token: 's3cr3t'
+			});
+		} catch (error) {
+			caught = error;
+		}
+
+		expect(caught).toBeInstanceOf(GameCommandError);
+		expect((caught as GameCommandError).code).toBe('duplicate_name');
+		expect(gameState.instances[0].name).toBe('Remote');
+		expect(gameState.activeInstanceId).toBe('saved:1');
+	});
+
+	it('ignores a malformed reply whose instances is not an array', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{ id: 'auto:11', source: 'auto', name: 'Solo', host: '127.0.0.1', port: 52104, live: true }
+			],
+			activeId: 'auto:11'
+		});
+		const gameState = new GameState();
+		await gameState.refreshInstances();
+
+		sendAndWait.mockResolvedValueOnce({});
+		await expect(gameState.refreshInstances()).resolves.toBeUndefined();
+
+		expect(gameState.instances).toHaveLength(1);
+		expect(gameState.instances[0].id).toBe('auto:11');
+		expect(gameState.activeInstanceId).toBe('auto:11');
 	});
 });

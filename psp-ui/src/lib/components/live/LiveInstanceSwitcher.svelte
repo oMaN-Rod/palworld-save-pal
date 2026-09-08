@@ -25,10 +25,16 @@
 	const ACTIVE = 'bg-surface-700 text-surface-50';
 	const IDLE = 'text-surface-300 hover:bg-surface-800';
 
-	function dotClass(instance: GameInstanceJson): string {
-		if (instance.source === 'auto') return 'bg-green-400';
-		if (instance.id === activeId) return activeConnected ? 'bg-green-400' : 'bg-red-400';
-		return 'border border-surface-500';
+	const DOT_CLASS: Record<'connected' | 'disconnected' | 'unknown', string> = {
+		connected: 'bg-green-400',
+		disconnected: 'bg-red-400',
+		unknown: 'border border-surface-500'
+	};
+
+	function dotStatus(instance: GameInstanceJson): 'connected' | 'disconnected' | 'unknown' {
+		if (instance.id === activeId) return activeConnected ? 'connected' : 'disconnected';
+		if (instance.source === 'auto') return 'connected';
+		return 'unknown';
 	}
 </script>
 
@@ -46,7 +52,10 @@
 					class={cn(ROW, instance.id === activeId ? ACTIVE : IDLE)}
 					onclick={() => onselect(instance.id)}
 				>
-					<span class={cn('size-1.5 shrink-0 rounded-full', dotClass(instance))}></span>
+					<span
+						data-dot-status={dotStatus(instance)}
+						class={cn('size-1.5 shrink-0 rounded-full', DOT_CLASS[dotStatus(instance)])}
+					></span>
 					<span class="grow truncate">{instance.name}</span>
 					<span class="text-surface-400 shrink-0">{instance.host}:{instance.port}</span>
 					<span class="text-surface-500 shrink-0">

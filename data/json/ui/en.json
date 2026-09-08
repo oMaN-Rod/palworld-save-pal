@@ -681,6 +681,7 @@
   "live_instance_test_failed": "Could not connect",
   "live_instance_test_ok": "Connected",
   "live_instance_token": "Token",
+  "live_instance_token_hint": "Enter the token again — it isn't sent back to the browser once saved.",
   "live_inventory_partial": "Part of this loadout could not be read.",
   "live_item_count": "Count",
   "live_item_id": "Item ID",

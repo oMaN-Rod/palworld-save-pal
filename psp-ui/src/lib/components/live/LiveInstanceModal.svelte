@@ -6,11 +6,13 @@
 
 	let {
 		initial,
+		editing = false,
 		ontest,
 		onsave,
 		oncancel
 	}: {
 		initial: GameInstanceFields;
+		editing?: boolean;
 		ontest: (fields: GameInstanceFields) => Promise<GameTestInstanceJson>;
 		onsave: (fields: GameInstanceFields) => void | Promise<void>;
 		oncancel: () => void;
@@ -78,6 +80,9 @@
 	<label class="flex flex-col gap-1 text-xs">
 		<span class="text-surface-300">{m.live_instance_token()}</span>
 		<input type="password" class="bg-surface-800 rounded-sm px-2 py-1" bind:value={token} />
+		{#if editing}
+			<span class="text-surface-500">{m.live_instance_token_hint()}</span>
+		{/if}
 	</label>
 
 	{#if isRemote}
@@ -85,7 +90,7 @@
 	{/if}
 
 	{#if testResult}
-		<p class={testResult.ok ? 'text-xs text-green-400' : 'text-xs text-red-400'}>
+		<p aria-live="polite" class={testResult.ok ? 'text-xs text-green-400' : 'text-xs text-red-400'}>
 			{testResult.ok ? m.live_instance_test_ok() : m.live_instance_test_failed()}
 		</p>
 	{/if}

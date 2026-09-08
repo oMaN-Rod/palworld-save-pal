@@ -235,6 +235,7 @@
 		// @ts-ignore
 		void modal.showModal(LiveInstanceModal, {
 			initial: { name: instance.name, host: instance.host, port: instance.port, token: '' },
+			editing: true,
 			ontest: (fields: GameInstanceFields) => gameState.testInstance(fields),
 			onsave: saveInstance,
 			oncancel: () => modal.closeModal()
