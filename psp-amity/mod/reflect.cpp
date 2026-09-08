@@ -1,5 +1,7 @@
 #include "reflect.hpp"
 
+#include "game_thread.hpp"
+
 #include <Unreal/Core/Containers/Array.hpp>
 #include <Unreal/NameTypes.hpp>
 
@@ -40,6 +42,23 @@ struct NoParamsObjectReturn
 {
     UObject* ReturnValue{};
 };
+
+// FindAllOf hands back everything still in the object array, including the previous world's actors
+// while they wait for collection; calling into one of those is what a reload trips over.
+bool object_is_live(UObject* object)
+{
+    if (!object)
+    {
+        return false;
+    }
+    if (object->HasAnyInternalFlags(EInternalObjectFlags::Unreachable | EInternalObjectFlags::PendingKill |
+                                    EInternalObjectFlags::PendingConstruction))
+    {
+        return false;
+    }
+    return !object->HasAnyFlags(
+        static_cast<EObjectFlags>(RF_ClassDefaultObject | RF_BeginDestroyed | RF_FinishDestroyed));
+}
 
 bool call_world_context_bool(UObject* world_context, UFunction* function)
 {
@@ -127,11 +146,15 @@ FProperty* find_struct_prop(UStruct* strct, std::initializer_list<const wchar_t*
 
 UObject* any_player_controller()
 {
+    if (world_transitioning())
+    {
+        return nullptr;
+    }
     std::vector<UObject*> controllers{};
     UObjectGlobals::FindAllOf(STR("PalPlayerController"), controllers);
     for (UObject* controller : controllers)
     {
-        if (controller)
+        if (object_is_live(controller))
         {
             return controller;
         }
@@ -141,11 +164,15 @@ UObject* any_player_controller()
 
 bool world_ready()
 {
+    if (world_transitioning())
+    {
+        return false;
+    }
     std::vector<UObject*> player_states{};
     UObjectGlobals::FindAllOf(STR("PalPlayerState"), player_states);
     for (UObject* player_state : player_states)
     {
-        if (player_state)
+        if (object_is_live(player_state))
         {
             return true;
         }

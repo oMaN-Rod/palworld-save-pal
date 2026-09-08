@@ -22,6 +22,8 @@ public:
     auto on_update() -> void override;
 
 private:
+    auto pump_game_thread() -> void;
+
     amity::CommandQueue m_queue;
     amity::CapabilityRegistry m_registry;
     GameExecutorImpl m_executor;
@@ -32,4 +34,7 @@ private:
     bool m_resolution_report_done{false};
     int m_ticks_since_last_resolution_attempt{0};
     int m_ticks_since_last_capability_refresh{0};
+
+    bool m_pump_checked{false};
+    int m_ticks_without_pump{0};
 };

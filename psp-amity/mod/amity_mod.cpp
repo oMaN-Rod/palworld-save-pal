@@ -1,5 +1,6 @@
 #include "amity_mod.hpp"
 #include "game_commands.hpp"
+#include "game_thread.hpp"
 #include "reflect.hpp"
 #include "resolution_report.hpp"
 
@@ -26,6 +27,7 @@ AmityMod::AmityMod() : m_queue(), m_registry(), m_executor(m_queue)
 
 AmityMod::~AmityMod()
 {
+    amity_rt::stop_game_thread_pump();
     m_queue.shutdown();
     if (m_server)
     {
@@ -88,15 +90,37 @@ auto AmityMod::on_unreal_init() -> void
     }
 
     Output::send<LogLevel::Verbose>(STR("[PSPAmity] bridge listening on 127.0.0.1:{}\n"), m_server->port());
+
+    amity_rt::install_game_thread_pump([this] { pump_game_thread(); });
 }
 
 namespace
 {
 constexpr int kResolutionRetryTicks = 60;
 constexpr int kCapabilityRefreshTicks = 60;
+constexpr int kPumpWarningTicks = 1000;
 }
 
 auto AmityMod::on_update() -> void
+{
+    if (m_pump_checked || !m_server)
+    {
+        return;
+    }
+    if (amity_rt::game_thread_pumped())
+    {
+        m_pump_checked = true;
+        return;
+    }
+    if (++m_ticks_without_pump < kPumpWarningTicks)
+    {
+        return;
+    }
+    m_pump_checked = true;
+    Output::send<LogLevel::Error>(STR("[PSPAmity] engine tick hook never fired; live game features are unavailable\n"));
+}
+
+auto AmityMod::pump_game_thread() -> void
 {
     m_queue.drain(m_executor, 4, std::chrono::milliseconds(2));
 

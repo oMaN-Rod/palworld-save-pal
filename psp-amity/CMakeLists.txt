@@ -37,6 +37,7 @@ add_library(PSPAmity SHARED
     mod/command_pal_edit.cpp
     mod/command_player_edit.cpp
     mod/game_executor.cpp
+    mod/game_thread.cpp
     mod/snapshot_players.cpp
     mod/snapshot_pals.cpp
     mod/snapshot_inventory.cpp
