@@ -57,24 +57,21 @@ pub async fn get_instance(db: &dyn crate::DbDriver, id: i64) -> Result<Option<Am
 
 pub async fn insert_instance(db: &dyn crate::DbDriver, new: &NewAmityInstance) -> Result<i64, DbError> {
     let now = crate::time::now_iso_naive_utc();
-    db.execute(
-        "INSERT INTO amity_instances (name, host, port, token, created_at, updated_at) \
-         VALUES (?, ?, ?, ?, ?, ?)",
-        &[
-            new.name.as_str().into(),
-            new.host.as_str().into(),
-            new.port.into(),
-            new.token.as_str().into(),
-            now.as_str().into(),
-            now.as_str().into(),
-        ],
+    crate::scalar_i64(
+        &db.query(
+            "INSERT INTO amity_instances (name, host, port, token, created_at, updated_at) \
+             VALUES (?, ?, ?, ?, ?, ?) RETURNING id",
+            &[
+                new.name.as_str().into(),
+                new.host.as_str().into(),
+                new.port.into(),
+                new.token.as_str().into(),
+                now.as_str().into(),
+                now.as_str().into(),
+            ],
+        )
+        .await?,
     )
-    .await?;
-
-    let rows = db.query("SELECT id FROM amity_instances ORDER BY id DESC LIMIT 1", &[]).await?;
-    rows.first()
-        .ok_or_else(|| DbError::Other("inserted instance not found".into()))?
-        .get_i64("id")
 }
 
 pub async fn update_instance(db: &dyn crate::DbDriver, id: i64, new: &NewAmityInstance) -> Result<(), DbError> {
@@ -123,6 +120,21 @@ mod tests {
         assert_eq!(all[0].host, "10.0.0.14");
         assert_eq!(all[0].port, 8788);
         assert_eq!(all[0].token, "s3cr3t");
+    }
+
+    #[tokio::test]
+    async fn insert_twice_returns_distinct_correct_ids() {
+        let db = test_driver().await;
+        let first = insert_instance(&db, &NewAmityInstance {
+            name: "First".into(), host: "10.0.0.1".into(), port: 1111, token: "a".into(),
+        }).await.unwrap();
+        let second = insert_instance(&db, &NewAmityInstance {
+            name: "Second".into(), host: "10.0.0.2".into(), port: 2222, token: "b".into(),
+        }).await.unwrap();
+
+        assert_ne!(first, second);
+        assert_eq!(get_instance(&db, first).await.unwrap().unwrap().name, "First");
+        assert_eq!(get_instance(&db, second).await.unwrap().unwrap().name, "Second");
     }
 
     #[tokio::test]
