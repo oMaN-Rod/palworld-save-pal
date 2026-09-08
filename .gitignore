@@ -41,7 +41,7 @@ logs/
 node_modules/
 
 # Distribution / packaging
-dist/
+dist/*
 build/
 ui_build/
 

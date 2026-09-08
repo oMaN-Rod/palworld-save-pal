@@ -24,6 +24,7 @@ New-Item -ItemType Directory -Force (Join-Path $modDir "dlls") | Out-Null
 Copy-Item $dll (Join-Path $modDir "dlls\main.dll") -Force
 Set-Content -Path (Join-Path $modDir "enabled.txt") -Value "" -NoNewline -Encoding ascii
 Copy-Item (Join-Path $repoRoot "THIRD_PARTY_NOTICES.md") (Join-Path $modDir "THIRD_PARTY_NOTICES.md") -Force
+Copy-Item (Join-Path $repoRoot "dist\PSPAmity.ini") (Join-Path $modDir "PSPAmity.ini") -Force
 
 $zipPath = Join-Path $distDir "PSPAmity-UE4SS-$Version.zip"
 if (Test-Path $zipPath) { Remove-Item -Force $zipPath }

@@ -5,6 +5,7 @@
 #include "resolution_report.hpp"
 
 #include <amity/endpoint_file.hpp>
+#include <amity/mod_paths.hpp>
 #include <amity/token.hpp>
 
 #include <DynamicOutput/DynamicOutput.hpp>
@@ -43,15 +44,30 @@ auto AmityMod::on_unreal_init() -> void
 {
     Output::send<LogLevel::Verbose>(STR("[PSPAmity] unreal initialized\n"));
 
-    std::string token;
-    try
+    static const int kModuleAnchor = 0;
+    m_config = amity::load_config(amity::config_path_beside_module(&kModuleAnchor));
+
+    std::string config_error;
+    if (!amity::validate_config(m_config, config_error))
     {
-        token = amity::generate_token_hex();
-    }
-    catch (const std::exception& e)
-    {
-        Output::send<LogLevel::Error>(STR("[PSPAmity] failed to generate bridge token: {}\n"), amity_rt::widen(e.what()));
+        Output::send<LogLevel::Error>(STR("[PSPAmity] invalid configuration: {}; bridge server not started\n"),
+                                      amity_rt::widen(config_error));
         return;
+    }
+
+    std::string token = m_config.token;
+    if (token.empty())
+    {
+        try
+        {
+            token = amity::generate_token_hex();
+        }
+        catch (const std::exception& e)
+        {
+            Output::send<LogLevel::Error>(STR("[PSPAmity] failed to generate bridge token: {}\n"),
+                                          amity_rt::widen(e.what()));
+            return;
+        }
     }
 
     m_endpoint_dir = amity::default_endpoint_dir();
@@ -66,7 +82,9 @@ auto AmityMod::on_unreal_init() -> void
 
     amity::ServerConfig cfg;
     cfg.token = token;
-    cfg.hello_info = {{"mod", "PSPAmity"}, {"version", AMITY_VERSION}};
+    cfg.bind = m_config.bind;
+    cfg.port = m_config.port;
+    cfg.hello_info = {{"mod", "PSPAmity"}, {"version", AMITY_VERSION}, {"name", m_config.name}};
     amity::CapabilityRegistry* registry = &m_registry;
     cfg.capabilities_provider = [registry] { return registry->snapshot(); };
     cfg.capability_check = [registry](const std::string& op, std::string& reason) { return registry->available(op, reason); };
@@ -81,7 +99,7 @@ auto AmityMod::on_unreal_init() -> void
         return;
     }
 
-    if (!amity::write_endpoint_file(m_endpoint_dir, m_server->port(), token, "PSPAmity", "127.0.0.1", error))
+    if (!amity::write_endpoint_file(m_endpoint_dir, m_server->port(), token, m_config.name, m_config.bind, error))
     {
         Output::send<LogLevel::Error>(STR("[PSPAmity] failed to write endpoint file: {}\n"), amity_rt::widen(error));
         m_server->stop();
@@ -89,7 +107,9 @@ auto AmityMod::on_unreal_init() -> void
         return;
     }
 
-    Output::send<LogLevel::Verbose>(STR("[PSPAmity] bridge listening on 127.0.0.1:{}\n"), m_server->port());
+    Output::send<LogLevel::Verbose>(STR("[PSPAmity] bridge listening on {}:{} as \"{}\"\n"),
+                                    amity_rt::widen(m_config.bind), m_server->port(),
+                                    amity_rt::widen(m_config.name));
 
     amity_rt::install_game_thread_pump([this] { pump_game_thread(); });
 }

@@ -5,6 +5,7 @@
 
 #include <amity/capability_registry.hpp>
 #include <amity/command_queue.hpp>
+#include <amity/config.hpp>
 #include <amity/server.hpp>
 
 #include <filesystem>
@@ -26,6 +27,7 @@ private:
 
     amity::CommandQueue m_queue;
     amity::CapabilityRegistry m_registry;
+    amity::BridgeConfig m_config;
     GameExecutorImpl m_executor;
     std::unique_ptr<amity::BridgeServer> m_server;
     std::filesystem::path m_endpoint_dir;
