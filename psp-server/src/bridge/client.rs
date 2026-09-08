@@ -2,7 +2,9 @@ use std::collections::HashMap;
 
 use futures::stream::{SplitSink, SplitStream};
 use futures::{SinkExt, StreamExt};
+use hmac::{Hmac, Mac};
 use serde_json::Value;
+use sha2::Sha256;
 use tokio::net::TcpStream;
 use tokio::sync::{mpsc, oneshot};
 use tokio_tungstenite::tungstenite::Message;
@@ -19,6 +21,17 @@ pub type WsReadHalf = SplitStream<WsStream>;
 
 const HELLO_ID: &str = "h1";
 const AUTH_ID: &str = "h2";
+
+pub fn compute_proof(token: &str, nonce: &str) -> String {
+    let mut mac = Hmac::<Sha256>::new_from_slice(token.as_bytes())
+        .expect("HMAC accepts keys of any length");
+    mac.update(nonce.as_bytes());
+    mac.finalize()
+        .into_bytes()
+        .iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect()
+}
 
 pub enum Command {
     Request {
@@ -141,12 +154,21 @@ pub async fn connect_and_handshake(
         .and_then(Value::as_str)
         .unwrap_or_default()
         .to_string();
+    let nonce = hello_reply
+        .data
+        .get("nonce")
+        .and_then(Value::as_str)
+        .unwrap_or_default()
+        .to_string();
+    if nonce.is_empty() {
+        return Err(ConnectError::Transport);
+    }
 
     send_envelope(
         &mut write,
         AUTH_ID,
         "auth",
-        serde_json::json!({ "token": endpoint.token }),
+        serde_json::json!({ "proof": compute_proof(&endpoint.token, &nonce) }),
     )
     .await
     .map_err(|_| ConnectError::Transport)?;
@@ -245,6 +267,22 @@ pub async fn pump(
 mod tests {
     use super::*;
     use tokio::net::TcpListener;
+
+    #[test]
+    fn proof_matches_the_shared_rfc_4231_vector() {
+        assert_eq!(
+            compute_proof("Jefe", "what do ya want for nothing?"),
+            "5bdcc146bf60754e6a042426089575c75a003f089d2739839dec58b964ec3843"
+        );
+    }
+
+    #[test]
+    fn proof_is_bound_to_the_nonce() {
+        let a = compute_proof("token", "nonce-one");
+        let b = compute_proof("token", "nonce-two");
+        assert_ne!(a, b);
+        assert_eq!(a.len(), 64);
+    }
 
     #[tokio::test]
     async fn hello_error_reply_preserves_the_mod_error_code() {

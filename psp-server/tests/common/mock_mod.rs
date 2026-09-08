@@ -169,6 +169,8 @@ async fn connection_loop(mut socket: WebSocket, state: MockState) {
         return;
     }
 
+    const MOCK_NONCE: &str = "00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff";
+
     let Some(Ok(AxumMessage::Text(text))) = socket.recv().await else {
         return;
     };
@@ -178,7 +180,10 @@ async fn connection_loop(mut socket: WebSocket, state: MockState) {
     let hello_ok = serde_json::json!({
         "id": envelope_id(&hello),
         "type": "hello_ok",
-        "data": { "mod": "PSPAmity", "protocolVersion": 1, "version": "0.1.0" },
+        "data": {
+            "mod": "PSPAmity", "protocolVersion": 2, "version": "0.1.0",
+            "name": "Mock", "nonce": MOCK_NONCE,
+        },
     });
     if socket
         .send(AxumMessage::Text(hello_ok.to_string().into()))
@@ -195,12 +200,12 @@ async fn connection_loop(mut socket: WebSocket, state: MockState) {
         return;
     };
     let auth_id = envelope_id(&auth);
-    let token = auth
+    let proof = auth
         .get("data")
-        .and_then(|data| data.get("token"))
-        .and_then(|token| token.as_str())
+        .and_then(|data| data.get("proof"))
+        .and_then(|proof| proof.as_str())
         .unwrap_or_default();
-    if token != state.mock.token {
+    if proof != psp_server::bridge::client::compute_proof(&state.mock.token, MOCK_NONCE) {
         let error = serde_json::json!({
             "id": auth_id,
             "type": "error",
@@ -421,11 +426,13 @@ pub fn write_endpoint_file(
     token: &str,
     pid: u32,
 ) -> std::path::PathBuf {
-    let path = dir.join("endpoint.json");
+    let path = dir.join(format!("{pid}.json"));
     let json = serde_json::json!({
-        "protocolVersion": 1,
+        "protocolVersion": 2,
         "port": port,
         "token": token,
+        "name": "Mock",
+        "bind": "127.0.0.1",
         "pid": pid,
         "startedAt": "2026-09-03T00:00:00Z",
     });

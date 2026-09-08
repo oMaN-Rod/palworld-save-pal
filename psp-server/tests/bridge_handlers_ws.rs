@@ -83,8 +83,8 @@ async fn start_server_connected_to(
     tokio::task::JoinHandle<()>,
 ) {
     let (addr, mock_cancel, mock_handle) = spawn_mock_mod(mock).await;
-    let endpoint_path = write_endpoint_file(dir, addr.port(), "secret-token", std::process::id());
-    std::env::set_var("PSP_BRIDGE_ENDPOINT_PATH", endpoint_path.to_str().unwrap());
+    write_endpoint_file(dir, addr.port(), "secret-token", std::process::id());
+    std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.to_str().unwrap());
 
     let server = start_test_server().await;
     wait_for_connected(server.handle.services.bridge.status_rx()).await;
@@ -101,7 +101,7 @@ async fn kill_mock(
 
 #[tokio::test]
 async fn game_status_returns_the_bridge_status() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -127,7 +127,7 @@ async fn game_status_returns_the_bridge_status() {
 
 #[tokio::test]
 async fn game_players_returns_the_bridge_players() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -153,7 +153,7 @@ async fn game_players_returns_the_bridge_players() {
 
 #[tokio::test]
 async fn game_pals_forwards_camel_case_and_returns_the_fixture_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -195,7 +195,7 @@ async fn game_pals_forwards_camel_case_and_returns_the_fixture_verbatim() {
 
 #[tokio::test]
 async fn game_pal_detail_forwards_camel_case_and_returns_the_fixture_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -244,7 +244,7 @@ async fn game_pal_detail_forwards_camel_case_and_returns_the_fixture_verbatim() 
 
 #[tokio::test]
 async fn game_inventory_forwards_camel_case_and_returns_the_fixture_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -286,7 +286,7 @@ async fn game_inventory_forwards_camel_case_and_returns_the_fixture_verbatim() {
 
 #[tokio::test]
 async fn game_capabilities_returns_the_bridge_capabilities_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -313,7 +313,7 @@ async fn game_capabilities_returns_the_bridge_capabilities_verbatim() {
 
 #[tokio::test]
 async fn game_edit_player_forwards_camel_case_and_returns_the_command_result_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let expected = serde_json::json!({
         "commandId": "edit-player-cmd-1",
@@ -374,7 +374,7 @@ async fn game_edit_player_forwards_camel_case_and_returns_the_command_result_ver
 
 #[tokio::test]
 async fn game_write_command_ids_are_minted_when_absent_and_forwarded_when_given() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -437,7 +437,7 @@ async fn game_write_command_ids_are_minted_when_absent_and_forwarded_when_given(
 
 #[tokio::test]
 async fn game_set_item_slot_passes_a_capability_unavailable_refusal_through() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -478,7 +478,7 @@ async fn game_set_item_slot_passes_a_capability_unavailable_refusal_through() {
 
 #[tokio::test]
 async fn game_heal_pals_fans_out_one_command_per_target_keyed_by_slot() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -555,7 +555,7 @@ async fn game_heal_pals_fans_out_one_command_per_target_keyed_by_slot() {
 
 #[tokio::test]
 async fn game_heal_pals_command_ids_are_order_independent() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -636,7 +636,7 @@ async fn game_heal_pals_command_ids_are_order_independent() {
 
 #[tokio::test]
 async fn game_heal_pals_partial_failure_mid_list_still_emits_the_full_results_array() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -686,11 +686,11 @@ async fn game_heal_pals_partial_failure_mid_list_still_emits_the_full_results_ar
 
 #[tokio::test]
 async fn game_heal_pals_rejects_an_out_of_range_target_count() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     std::env::set_var(
-        "PSP_BRIDGE_ENDPOINT_PATH",
-        dir.path().join("endpoint.json").to_str().unwrap(),
+        "PSP_BRIDGE_ENDPOINT_DIR",
+        dir.path().to_str().unwrap(),
     );
     let server = start_test_server().await;
     let mut client = connect(&server).await;
@@ -720,11 +720,11 @@ async fn game_heal_pals_rejects_an_out_of_range_target_count() {
 
 #[tokio::test]
 async fn a_malformed_game_payload_is_refused_inline_on_its_own_request_type() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     std::env::set_var(
-        "PSP_BRIDGE_ENDPOINT_PATH",
-        dir.path().join("endpoint.json").to_str().unwrap(),
+        "PSP_BRIDGE_ENDPOINT_DIR",
+        dir.path().to_str().unwrap(),
     );
     let server = start_test_server().await;
     let mut client = connect(&server).await;
@@ -777,11 +777,11 @@ async fn a_malformed_game_payload_is_refused_inline_on_its_own_request_type() {
 
 #[tokio::test]
 async fn game_write_offline_requests_reply_with_the_bridge_offline_code() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     std::env::set_var(
-        "PSP_BRIDGE_ENDPOINT_PATH",
-        dir.path().join("endpoint.json").to_str().unwrap(),
+        "PSP_BRIDGE_ENDPOINT_DIR",
+        dir.path().to_str().unwrap(),
     );
     let server = start_test_server().await;
     let mut client = connect(&server).await;
@@ -830,11 +830,11 @@ async fn game_write_offline_requests_reply_with_the_bridge_offline_code() {
 
 #[tokio::test]
 async fn a_bridge_offline_request_replies_with_the_bridge_offline_code() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     std::env::set_var(
-        "PSP_BRIDGE_ENDPOINT_PATH",
-        dir.path().join("endpoint.json").to_str().unwrap(),
+        "PSP_BRIDGE_ENDPOINT_DIR",
+        dir.path().to_str().unwrap(),
     );
 
     let server = start_test_server().await;
@@ -854,7 +854,7 @@ async fn a_bridge_offline_request_replies_with_the_bridge_offline_code() {
 
 #[tokio::test]
 async fn game_set_item_slot_forwards_camel_case_and_returns_the_command_result_verbatim() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -915,7 +915,7 @@ async fn game_set_item_slot_forwards_camel_case_and_returns_the_command_result_v
 
 #[tokio::test]
 async fn game_set_item_slot_forwards_nulls_when_clearing_a_slot() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -961,7 +961,7 @@ async fn game_set_item_slot_forwards_nulls_when_clearing_a_slot() {
 
 #[tokio::test]
 async fn game_remove_pal_forwards_camel_case() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",
@@ -1009,7 +1009,7 @@ async fn game_remove_pal_forwards_camel_case() {
 
 #[tokio::test]
 async fn game_move_pal_forwards_both_ends() {
-    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_PATH", None)]).await;
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
     let mock = MockMod::new(
         "secret-token",

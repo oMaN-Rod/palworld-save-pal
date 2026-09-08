@@ -42,6 +42,7 @@ sysinfo = { workspace = true }
 futures-util = { workspace = true }
 bollard = { workspace = true }
 sha2 = { workspace = true }
+hmac = { workspace = true }
 hkdf = { workspace = true }
 aes-gcm = { workspace = true }
 rand = { workspace = true }

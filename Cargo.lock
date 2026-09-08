@@ -4347,6 +4347,7 @@ dependencies = [
  "futures",
  "futures-util",
  "hkdf",
+ "hmac",
  "http-body-util",
  "opener",
  "percent-encoding",
