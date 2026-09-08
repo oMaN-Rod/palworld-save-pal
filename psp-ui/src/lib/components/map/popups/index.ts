@@ -8,6 +8,8 @@ import FastTravelHover from './FastTravelHover.svelte';
 import FastTravelPopup from './FastTravelPopup.svelte';
 import Hover from './Hover.svelte';
 import InfoRow from './InfoRow.svelte';
+import LiveHover from './LiveHover.svelte';
+import LivePopup from './LivePopup.svelte';
 import OriginHover from './OriginHover.svelte';
 import OriginPopup from './OriginPopup.svelte';
 import PalHover from './PalHover.svelte';
@@ -33,6 +35,8 @@ export {
 	FastTravelPopup,
 	Hover,
 	InfoRow,
+	LiveHover,
+	LivePopup,
 	OriginHover,
 	OriginPopup,
 	PalHover,

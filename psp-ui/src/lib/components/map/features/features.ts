@@ -1,3 +1,4 @@
+import type { LiveActorJson } from '$lib/signal/session.svelte';
 import type {
 	Base,
 	BaseStructure,
@@ -8,19 +9,22 @@ import type {
 	WorldMapPoint
 } from '$types';
 import { pixelCirclePolygon, pixelToLngLat } from '../geo/mercator';
-import { cmPerPx, mapOf, MAP_SIZE, mapToWorld, worldToPixel, type MapArea } from '../geo/utils';
-import { isWatchtower } from './fastTravel';
+import { cmPerPx, MAP_SIZE, mapOf, mapToWorld, worldToPixel, type MapArea } from '../geo/utils';
 import {
 	ICON_BASE,
 	ICON_BOSS,
 	ICON_DUNGEON,
 	ICON_FAST_TRAVEL,
+	ICON_LIVE_PAL,
+	ICON_LIVE_PLAYER,
 	ICON_ORIGIN,
 	ICON_PLAYER,
 	ICON_WATCHTOWER,
+	livePalIconId,
 	palIconId,
 	relicIconId
 } from '../style/iconIds';
+import { isWatchtower } from './fastTravel';
 
 export type MapFeatureType =
 	| 'origin'
@@ -33,7 +37,10 @@ export type MapFeatureType =
 	| 'alpha_pal'
 	| 'predator_pal'
 	| 'bounty'
-	| 'structure';
+	| 'structure'
+	| 'live_player'
+	| 'live_pal'
+	| 'live_palbox';
 
 export type MapFeatureProps = {
 	key: string;
@@ -108,7 +115,7 @@ function point(
 	};
 }
 
-function inArea(x: number, y: number, area: MapArea): boolean {
+export function inArea(x: number, y: number, area: MapArea): boolean {
 	return mapOf(x, y) === area;
 }
 
@@ -245,6 +252,40 @@ export function buildBossFC(
 				level: b.level,
 				defeated: b.defeated,
 				icon: marker.icon
+			})
+		);
+	}
+	return { type: 'FeatureCollection', features };
+}
+
+export function liveActorFeatureType(kind: string): MapFeatureType {
+	if (kind === 'player') return 'live_player';
+	if (kind === 'palbox') return 'live_palbox';
+	return 'live_pal';
+}
+
+function liveActorIcon(featureType: MapFeatureType, species: string): string {
+	if (featureType === 'live_player') return ICON_LIVE_PLAYER;
+	if (featureType === 'live_palbox') return ICON_BASE;
+	return species ? livePalIconId(species) : ICON_LIVE_PAL;
+}
+
+export function buildLiveActorFC(actors: LiveActorJson[], area: MapArea): PointFC {
+	const features: PointFeature[] = [];
+	for (const actor of actors) {
+		if (!Number.isFinite(actor.x) || !Number.isFinite(actor.y)) continue;
+		if (!inArea(actor.x, actor.y, area)) continue;
+		const featureType = liveActorFeatureType(actor.kind);
+		const species = actor.species ?? '';
+		features.push(
+			point(features.length, actor.x, actor.y, area, {
+				key: actor.id,
+				type: featureType,
+				featureType,
+				name: actor.name ?? '',
+				yaw: actor.yaw ?? 0,
+				species,
+				icon: liveActorIcon(featureType, species)
 			})
 		);
 	}

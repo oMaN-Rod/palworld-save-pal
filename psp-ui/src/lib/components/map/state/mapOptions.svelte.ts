@@ -1,15 +1,19 @@
 import { persistedState } from 'svelte-persisted-state';
-import type { MapLayerVisibility } from '../layers/layerPanelModel';
-import { STRUCTURE_TYPE_ORDER } from '../style/mapColors.svelte';
-import { MAP_OBJECT_SCALE_DEFAULT, MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT } from '../scene/objects/mapObjectSize';
-import { PAL_SCALE_DEFAULT } from '../scene/pal/palSize';
 import { DEFAULT_MAP_AREA, type MapArea } from '../geo/utils';
+import type { MapLayerVisibility } from '../layers/layerPanelModel';
+import {
+	MAP_OBJECT_SCALE_DEFAULT,
+	MAP_OBJECT_WATCHTOWER_SCALE_DEFAULT
+} from '../scene/objects/mapObjectSize';
+import { PAL_SCALE_DEFAULT } from '../scene/pal/palSize';
+import { STRUCTURE_TYPE_ORDER } from '../style/mapColors.svelte';
 
 export type MapOptions = {
 	area: MapArea;
 	showOrigin: boolean;
 	showPlayers: boolean;
 	showBases: boolean;
+	showLiveActors: boolean;
 	showFastTravel: boolean;
 	showWatchtower: boolean;
 	showRelics: boolean;
@@ -45,6 +49,7 @@ export const mapOptionsState = persistedState<MapOptions>('psp-map-options', {
 	showOrigin: false,
 	showPlayers: true,
 	showBases: true,
+	showLiveActors: false,
 	showFastTravel: true,
 	showWatchtower: true,
 	showRelics: true,

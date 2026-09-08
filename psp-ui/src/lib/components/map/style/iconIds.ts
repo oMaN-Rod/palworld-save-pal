@@ -29,6 +29,10 @@ export const ICON_BOUNTY = 'bounty';
 export const ICON_SKILL_FRUIT = 'skillFruit';
 export const ICON_KINSHIP_PEACH = 'kinshipPeach';
 export const ICON_ANCIENT_RUIN = 'ancientRuin';
+export const ICON_LIVE_PAL = 'liveActorPal';
+export const ICON_LIVE_POINTER = 'liveActorPointer';
+export const ICON_LIVE_PLAYER = 'liveActorPlayer';
+export const ICON_LIVE_PLAYER_POINTER = 'liveActorPlayerPointer';
 
 export function relicIconId(relicType: string): string {
 	return `relic:${relicType}`;
@@ -36,4 +40,8 @@ export function relicIconId(relicType: string): string {
 
 export function palIconId(pal: string, predator: boolean): string {
 	return predator ? `pal:predator:${pal}` : `pal:alpha:${pal}`;
+}
+
+export function livePalIconId(species: string): string {
+	return `pal:live:${species}`;
 }

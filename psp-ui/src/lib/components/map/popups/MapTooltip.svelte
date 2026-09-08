@@ -6,6 +6,7 @@
 		FastTravelHover,
 		featureTypeLabel,
 		Hover,
+		LiveHover,
 		OriginHover,
 		PalHover,
 		PlayerHover,
@@ -36,6 +37,8 @@
 	<PalHover point={data} isPredator={type === 'predator_pal'} />
 {:else if type === 'structure' && data}
 	<StructureHover structure={data} />
+{:else if (type === 'live_player' || type === 'live_pal' || type === 'live_palbox') && data}
+	<LiveHover actor={data} />
 {:else}
 	<Hover title={featureTypeLabel(type)} {coords} />
 {/if}

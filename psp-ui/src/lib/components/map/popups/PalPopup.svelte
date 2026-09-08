@@ -29,14 +29,7 @@
 
 <Popup title={palData?.localized_name ?? point.pal ?? ''} subtitle={point.pal} {coords}>
 	{#snippet icon()}
-		<PalBadge
-			{pal}
-			onMove={() => {}}
-			onAdd={() => {}}
-			onClone={() => {}}
-			onDelete={() => {}}
-			disabled
-		/>
+		<PalBadge {pal} disabled />
 	{/snippet}
 	{#snippet action()}
 		<Badge variant={isPredator ? 'error' : 'warning'}>

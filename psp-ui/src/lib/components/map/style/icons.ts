@@ -1,8 +1,8 @@
 import compass from '$lib/assets/img/compass.webp';
 import {
+	ICON_ANCIENT_RUIN,
 	ICON_BASE,
 	ICON_BOSS,
-	ICON_ANCIENT_RUIN,
 	ICON_BOUNTY,
 	ICON_CAMP,
 	ICON_DUNGEON,
@@ -10,6 +10,7 @@ import {
 	ICON_FAST_TRAVEL,
 	ICON_JOURNAL,
 	ICON_KINSHIP_PEACH,
+	ICON_LIVE_PAL,
 	ICON_ORIGIN,
 	ICON_PLAYER,
 	ICON_SKILL_FRUIT,
@@ -22,6 +23,8 @@ import { mapImg, relicTypeIcon } from './styles';
 
 export const PAL_BORDER_ALPHA = '#ffffff';
 export const PAL_BORDER_PREDATOR = '#ef4444';
+export const PAL_BORDER_LIVE = '#22c55e';
+export const LIVE_PLAYER_BORDER = '#3b82f6';
 
 export function staticIconUrls(): Record<string, string> {
 	const urls: Record<string, string> = {
@@ -39,7 +42,8 @@ export function staticIconUrls(): Record<string, string> {
 		[ICON_BOUNTY]: mapImg.bounty,
 		[ICON_SKILL_FRUIT]: mapImg.fruit,
 		[ICON_KINSHIP_PEACH]: mapImg.kinshipPeach,
-		[ICON_ANCIENT_RUIN]: mapImg.ancientRuin
+		[ICON_ANCIENT_RUIN]: mapImg.ancientRuin,
+		[ICON_LIVE_PAL]: mapImg.marker
 	};
 	for (const type of RELIC_TYPES) {
 		urls[relicIconId(type)] = relicTypeIcon(type);
@@ -47,7 +51,11 @@ export function staticIconUrls(): Record<string, string> {
 	return urls;
 }
 
-export function renderPalIcon(palImageUrl: string, borderColor: string): Promise<ImageData> {
+export function renderPalIcon(
+	palImageUrl: string,
+	borderColor: string,
+	backgroundColor?: string
+): Promise<ImageData> {
 	const size = 40;
 	const borderWidth = 2;
 	const innerRadius = size / 2 - borderWidth;
@@ -72,6 +80,11 @@ export function renderPalIcon(palImageUrl: string, borderColor: string): Promise
 			ctx.closePath();
 			ctx.clip();
 
+			if (backgroundColor) {
+				ctx.fillStyle = backgroundColor;
+				ctx.fillRect(0, 0, size, size);
+			}
+
 			const scale = Math.max(size / img.width, size / img.height);
 			const w = img.width * scale;
 			const h = img.height * scale;
@@ -89,4 +102,27 @@ export function renderPalIcon(palImageUrl: string, borderColor: string): Promise
 		img.onerror = () => reject(new Error(`failed to load ${palImageUrl}`));
 		img.src = palImageUrl;
 	});
+}
+
+export function renderPointerIcon(color: string): ImageData | null {
+	const size = 16;
+	const canvas = document.createElement('canvas');
+	canvas.width = size;
+	canvas.height = size;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return null;
+
+	ctx.beginPath();
+	ctx.moveTo(size / 2, 1);
+	ctx.lineTo(size - 2, size - 3);
+	ctx.lineTo(2, size - 3);
+	ctx.closePath();
+	ctx.fillStyle = color;
+	ctx.fill();
+	ctx.lineJoin = 'round';
+	ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)';
+	ctx.lineWidth = 1.5;
+	ctx.stroke();
+
+	return ctx.getImageData(0, 0, size, size);
 }

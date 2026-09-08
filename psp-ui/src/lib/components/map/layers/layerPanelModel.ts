@@ -2,6 +2,7 @@ import * as m from '$i18n/messages';
 import compass from '$lib/assets/img/compass.webp';
 import { c } from '$lib/utils/commonTranslations';
 import { assetLoader } from '$utils';
+import { mapImg } from '../style/styles';
 import {
 	MAP_LAYERS,
 	MAP_LAYER_GROUPS,
@@ -10,7 +11,6 @@ import {
 	type MapLayerGroup,
 	type MapLayerId
 } from './layerRegistry';
-import { mapImg } from '../style/styles';
 
 // Not artifact-backed layers: they read app state rather than a `get_map_layer`
 // artifact, so the registry's `artifact` field would have to lie if they were rows.
@@ -18,6 +18,7 @@ export const PANEL_EXTRAS = [
 	{ id: 'origin', group: 'general', defaultVisible: false },
 	{ id: 'players', group: 'general', defaultVisible: true },
 	{ id: 'bases', group: 'general', defaultVisible: true },
+	{ id: 'live_actors', group: 'general', defaultVisible: false },
 	{ id: 'labels', group: 'general', defaultVisible: true }
 ] as const satisfies readonly {
 	readonly id: string;
@@ -50,6 +51,7 @@ const EXTRA_LABELS: Record<PanelExtraId, () => string> = {
 	origin: m.origin,
 	players: () => c.players,
 	bases: () => c.bases,
+	live_actors: m.live_actors,
 	labels: m.map_labels
 };
 
@@ -82,6 +84,7 @@ const EXTRA_ICONS: Record<PanelExtraId, () => string> = {
 	origin: () => compass,
 	players: () => mapImg.player,
 	bases: () => mapImg.baseCamp,
+	live_actors: () => mapImg.marker,
 	labels: () => mapImg.signboard
 };
 

@@ -49,6 +49,7 @@
 		buildBaseRadiusFC,
 		buildBossFC,
 		buildFastTravelFC,
+		buildLiveActorFC,
 		buildMapObjectFC,
 		buildOriginCrosshairFC,
 		buildOriginFC,
@@ -56,20 +57,45 @@
 		buildRelicFC,
 		buildStructureFC,
 		emptyFC,
+		liveActorFeatureType,
 		lookupFootprint,
 		structureCentroid,
 		type MapFeatureType,
 		type StructureFC,
 		type StructureFeature
 	} from './features/features';
-	import { PAL_BORDER_ALPHA, PAL_BORDER_PREDATOR, renderPalIcon, staticIconUrls } from './style/icons';
-	import { ICON_BOUNTY, palIconId } from './style/iconIds';
+	import {
+		LIVE_PLAYER_BORDER,
+		PAL_BORDER_ALPHA,
+		PAL_BORDER_LIVE,
+		PAL_BORDER_PREDATOR,
+		renderPalIcon,
+		renderPointerIcon,
+		staticIconUrls
+	} from './style/icons';
+	import {
+		ICON_BOUNTY,
+		ICON_LIVE_PAL,
+		ICON_LIVE_PLAYER,
+		ICON_LIVE_PLAYER_POINTER,
+		ICON_LIVE_POINTER,
+		ICON_PLAYER,
+		livePalIconId,
+		palIconId
+	} from './style/iconIds';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
+	import { getLiveActors } from '$lib/data/liveActors.svelte';
+	import { isWebBuild } from '$lib/utils/platform';
+	import { send } from '$utils/websocketUtils';
+	import { getSocketState } from '$states/websocketState.svelte';
+	import { MessageType } from '$types';
 	import { genericRenderLayers, getMapLayer, type MapLayerId } from './layers/layerRegistry';
 	import type { MapLayerVisibility } from './layers/layerPanelModel';
 	import { buildMapLayerFC, mapLayerIconScale } from './layers/mapLayerFeatures';
 	import { relicsByType } from './features/relics';
 	import { isWatchtower } from './features/fastTravel';
+	import { followVerdict } from './features/follow';
+	import { liveKindLabel } from './popups/labels';
 	import { portalRingColorExpression, PORTAL_HEX } from './scene/objects/mapObjectPortal';
 	import {
 		STRUCTURE_TYPE_ORDER,
@@ -105,8 +131,16 @@
 		type PalBoss,
 		type PalPredator
 	} from './scene/pal/palLayer';
-	import { createMapObjectLayer, type MapObjectItem, type MapObjectLayer } from './scene/objects/mapObjectLayer';
-	import { buildMapObjectItems, buildFastTravelRingFC, buildRelicRingFC } from './scene/objects/mapObjectItems';
+	import {
+		createMapObjectLayer,
+		type MapObjectItem,
+		type MapObjectLayer
+	} from './scene/objects/mapObjectLayer';
+	import {
+		buildMapObjectItems,
+		buildFastTravelRingFC,
+		buildRelicRingFC
+	} from './scene/objects/mapObjectItems';
 	import { buildPalPortalFC } from './scene/pal/palPortalFC';
 	import { PAL_SCALE_DEFAULT } from './scene/pal/palSize';
 	import { MAP_OBJECT_SCALE_DEFAULT } from './scene/objects/mapObjectSize';
@@ -121,15 +155,19 @@
 		RelicPoint
 	} from '$types';
 	import * as m from '$i18n/messages';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import { getWebSignalSession, getStoredDesktop } from '$lib/signal/webSession';
 	import 'maplibre-gl/dist/maplibre-gl.css';
 
 	let {
 		map = $bindable(),
 		area = DEFAULT_MAP_AREA,
+		pip = false,
 		onAreaChange,
 		showOrigin = false,
 		showPlayers = true,
 		showBases = true,
+		showLiveActors = false,
 		showFastTravel = true,
 		showWatchtower = true,
 		showRelics = true,
@@ -179,10 +217,12 @@
 	}: {
 		map?: maplibregl.Map;
 		area?: MapArea;
+		pip?: boolean;
 		onAreaChange?: (area: MapArea) => void;
 		showOrigin?: boolean;
 		showPlayers?: boolean;
 		showBases?: boolean;
+		showLiveActors?: boolean;
 		showFastTravel?: boolean;
 		showWatchtower?: boolean;
 		showRelics?: boolean;
@@ -378,6 +418,91 @@
 		buildBossFC(bountyPoints as never, area, { type: 'bounty', icon: ICON_BOUNTY })
 	);
 
+	const liveActors = getLiveActors();
+	const liveActorFC = $derived(buildLiveActorFC(liveActors.actors, area));
+
+	let followLastSeenMs: number | null = null;
+	let prevFollowedId: string | null = null;
+	let followVerdictKind = $state<'ease' | 'waiting' | null>(null);
+	let followedActorName = $state('');
+
+	let followSuppressed = $state(false);
+	let prevFollowEpoch = liveActors.followEpoch;
+
+	$effect(() => {
+		const epoch = liveActors.followEpoch;
+		if (epoch === prevFollowEpoch) return;
+		prevFollowEpoch = epoch;
+		followSuppressed = !showLiveActors;
+		followLastSeenMs = null;
+	});
+
+	$effect(() => {
+		const followedId = liveActors.followedId;
+		const instance = map;
+		void liveActors.frameAt;
+		if (followSuppressed) return;
+		if (followedId !== prevFollowedId) {
+			followLastSeenMs = null;
+			prevFollowedId = followedId;
+		}
+		if (!followedId) {
+			followVerdictKind = null;
+			return;
+		}
+
+		const rawActor = liveActors.actors.find((a) => a.id === followedId);
+		if (rawActor) {
+			followedActorName = rawActor.name || rawActor.species || liveKindLabel(rawActor.kind);
+		}
+
+		if (!instance) return;
+
+		const { verdict, lastSeenMs } = followVerdict(
+			liveActors.actors,
+			followedId,
+			area,
+			Date.now(),
+			followLastSeenMs
+		);
+		followLastSeenMs = lastSeenMs;
+
+		if (verdict.kind === 'drop') {
+			followVerdictKind = null;
+			liveActors.unfollow();
+			return;
+		}
+
+		followVerdictKind = verdict.kind;
+		if (verdict.kind === 'ease') {
+			const [px, py] = worldToPixel(verdict.x, verdict.y, area);
+			instance.easeTo({ center: pixelToLngLat(px, py), duration: 950, easing: (t) => t });
+		}
+	});
+
+	$effect(() => {
+		if (!showLiveActors) followSuppressed = true;
+	});
+
+	const signalSession = isWebBuild ? getWebSignalSession() : null;
+	const reconnecting = $derived(signalSession?.state === 'reconnecting');
+	const reconnectingDesktopName = $derived.by(() => {
+		void signalSession?.state;
+		return getStoredDesktop()?.desktopName ?? m.signal_desktop_fallback_name();
+	});
+
+	$effect(() => {
+		if (!isWebBuild || !showLiveActors || !signalSession?.canAutoResume) return;
+		const stored = getStoredDesktop();
+		if (!stored) return;
+		signalSession.resumeStored(stored);
+	});
+
+	$effect(() => {
+		if (isWebBuild) return;
+		if (getSocketState().connected) send(MessageType.SUBSCRIBE_LIVE);
+	});
+
 	// Memoized by point-list identity: rebuilding ~580 ring polygons on every unrelated
 	// recompute made MapLibre re-tessellate and re-upload both sources.
 	function sameRingPoints<T>(a: T[], b: T[]): boolean {
@@ -446,6 +571,8 @@
 		for (const p of predatorPalPoints)
 			table.set(`predator_pal:predator_pal:${p.x}:${p.y}`, { data: p });
 		for (const b of bossPoints) table.set(`boss:${b.rowKey}`, { data: b });
+		for (const a of liveActors.actors)
+			table.set(`${liveActorFeatureType(a.kind)}:${a.id}`, { data: a });
 		if (show3d) {
 			for (const { base } of bases) {
 				for (const s of baseStructuresData.for(base.id)) {
@@ -478,7 +605,7 @@
 	);
 
 	const palIcons = $derived.by(() => {
-		const wanted = new Map<string, { url: string; border: string }>();
+		const wanted = new Map<string, { url: string; border: string; background?: string }>();
 		for (const p of alphaPalPoints) {
 			wanted.set(palIconId(p.pal, false), {
 				url: assetLoader.loadMenuImage(p.pal),
@@ -491,6 +618,19 @@
 				border: PAL_BORDER_PREDATOR
 			});
 		}
+		for (const a of liveActors.actors) {
+			if (!a.species || liveActorFeatureType(a.kind) !== 'live_pal') continue;
+			wanted.set(livePalIconId(a.species), {
+				url: assetLoader.loadMenuImage(a.species),
+				border: PAL_BORDER_LIVE,
+				background: '#000000'
+			});
+		}
+		wanted.set(ICON_LIVE_PLAYER, {
+			url: staticIcons[ICON_PLAYER],
+			border: LIVE_PLAYER_BORDER,
+			background: '#000000'
+		});
 		return wanted;
 	});
 
@@ -507,10 +647,18 @@
 	$effect(() => {
 		const instance = map;
 		if (!instance) return;
-		for (const [id, { url, border }] of palIcons) {
+		if (!instance.hasImage(ICON_LIVE_POINTER)) {
+			const pointer = renderPointerIcon(PAL_BORDER_LIVE);
+			if (pointer) instance.addImage(ICON_LIVE_POINTER, pointer);
+		}
+		if (!instance.hasImage(ICON_LIVE_PLAYER_POINTER)) {
+			const pointer = renderPointerIcon(LIVE_PLAYER_BORDER);
+			if (pointer) instance.addImage(ICON_LIVE_PLAYER_POINTER, pointer);
+		}
+		for (const [id, { url, border, background }] of palIcons) {
 			if (registeredPalIcons.has(id)) continue;
 			registeredPalIcons.add(id);
-			renderPalIcon(url, border)
+			renderPalIcon(url, border, background)
 				.then((image) => {
 					if (!instance.hasImage(id)) instance.addImage(id, image);
 				})
@@ -533,6 +681,14 @@
 		key: string;
 		lngLat: [number, number];
 	} | null>(null);
+
+	let prevFollowEpochForPopup = liveActors.followEpoch;
+	$effect(() => {
+		const epoch = liveActors.followEpoch;
+		if (epoch === prevFollowEpochForPopup) return;
+		prevFollowEpochForPopup = epoch;
+		selected = null;
+	});
 
 	// Reprojected on every map move so the popup stays pinned to its feature across pan/zoom.
 	let moveTick = $state(0);
@@ -559,6 +715,8 @@
 		'origin-icons',
 		'player-icons',
 		'base-icons',
+		'live-icons',
+		'live-direction',
 		'fast-travel-icons',
 		'relic-icons',
 		'dungeon-icons',
@@ -1370,6 +1528,7 @@
 		touchZoomRotate={show3d}
 		attributionControl={false}
 		onmove={() => moveTick++}
+		ondragstart={() => (followSuppressed = true)}
 		onmousemove={handleMouseMove}
 		onmouseout={handleMouseOut}
 		onmousedown={handleMouseDown}
@@ -1379,41 +1538,43 @@
 	>
 		<Control.Navigation position="top-right" visualizePitch />
 		<Control.Fullscreen position="top-right" />
-		<Toggle3dControl
-			position="top-right"
-			active={show3d}
-			title={showStructureControls ? `3D ${m.structures()}` : '3D'}
-			onchange={onToggle3d}
-		/>
-		<Map3dOptionsControl
-			position="top-right"
-			types={structureTypeList}
-			enabled={structureTypes}
-			open={options3dOpen}
-			onToggleOpen={() => (options3dOpen = !options3dOpen)}
-			ontoggle={(type) => onToggleStructureType?.(type)}
-			title={m.map_3d_options()}
-			{show3d}
-			{showStructureControls}
-			{detailed}
-			textured={structureTextured}
-			{palAutoFollow}
-			ontoggledetailed={() => onToggleRenderMode?.()}
-			ontoggletextured={() => onToggleStructureTextured?.()}
-			ontogglepalautofollow={() => onTogglePalAutoFollow?.()}
-			{palSize}
-			{fastTravelSize}
-			{watchtowerSize}
-			{relicSize}
-			{palHeight}
-			{mapOpacity}
-			onPalSizeChange={(scale) => onPalSizeChange?.(scale)}
-			onFastTravelSizeChange={(scale) => onFastTravelSizeChange?.(scale)}
-			onWatchtowerSizeChange={(scale) => onWatchtowerSizeChange?.(scale)}
-			onRelicSizeChange={(scale) => onRelicSizeChange?.(scale)}
-			onPalHeightChange={(height) => onPalHeightChange?.(height)}
-			onMapOpacityChange={(opacity) => onMapOpacityChange?.(opacity)}
-		/>
+		{#if !pip}
+			<Toggle3dControl
+				position="top-right"
+				active={show3d}
+				title={showStructureControls ? `3D ${m.structures()}` : '3D'}
+				onchange={onToggle3d}
+			/>
+			<Map3dOptionsControl
+				position="top-right"
+				types={structureTypeList}
+				enabled={structureTypes}
+				open={options3dOpen}
+				onToggleOpen={() => (options3dOpen = !options3dOpen)}
+				ontoggle={(type) => onToggleStructureType?.(type)}
+				title={m.map_3d_options()}
+				{show3d}
+				{showStructureControls}
+				{detailed}
+				textured={structureTextured}
+				{palAutoFollow}
+				ontoggledetailed={() => onToggleRenderMode?.()}
+				ontoggletextured={() => onToggleStructureTextured?.()}
+				ontogglepalautofollow={() => onTogglePalAutoFollow?.()}
+				{palSize}
+				{fastTravelSize}
+				{watchtowerSize}
+				{relicSize}
+				{palHeight}
+				{mapOpacity}
+				onPalSizeChange={(scale) => onPalSizeChange?.(scale)}
+				onFastTravelSizeChange={(scale) => onFastTravelSizeChange?.(scale)}
+				onWatchtowerSizeChange={(scale) => onWatchtowerSizeChange?.(scale)}
+				onRelicSizeChange={(scale) => onRelicSizeChange?.(scale)}
+				onPalHeightChange={(height) => onPalHeightChange?.(height)}
+				onMapOpacityChange={(opacity) => onMapOpacityChange?.(opacity)}
+			/>
+		{/if}
 
 		<ImageLoader images={staticIcons}>
 			<!-- Declared before the DEM block so the hillshade always has a raster to anchor
@@ -1575,6 +1736,67 @@
 						'icon-image': ['get', 'icon'],
 						'icon-allow-overlap': true,
 						'icon-size': zoomScaledIconSize(0.6, 1.0)
+					}}
+				/>
+			</Source.GeoJSON>
+
+			<!-- promoteId: live actors reshuffle every tick, so a stable id keyed off the
+			     actor id (not array position) is required for feature-state hover to track
+			     the right marker across frames. -->
+			<Source.GeoJSON id="live-src" data={liveActorFC} promoteId="key">
+				<Layer.Symbol
+					id="live-direction"
+					visible={showLiveActors}
+					filter={[
+						'any',
+						['==', ['get', 'featureType'], 'live_player'],
+						['all', ['==', ['get', 'featureType'], 'live_pal'], ['!=', ['get', 'species'], '']]
+					]}
+					layout={{
+						'icon-image': [
+							'case',
+							['==', ['get', 'featureType'], 'live_player'],
+							ICON_LIVE_PLAYER_POINTER,
+							ICON_LIVE_POINTER
+						],
+						'icon-allow-overlap': true,
+						'icon-rotate': ['get', 'yaw'],
+						'icon-rotation-alignment': 'map',
+						// icon-offset rotates with icon-rotate, so this rides the circle's edge.
+						'icon-offset': [0, -23],
+						'icon-size': zoomScaledIconSize(0.5, 0.85)
+					}}
+				/>
+				<Layer.Symbol
+					id="live-icons"
+					visible={showLiveActors}
+					layout={{
+						'icon-image': [
+							'coalesce',
+							['image', ['get', 'icon']],
+							[
+								'image',
+								[
+									'case',
+									['==', ['get', 'featureType'], 'live_player'],
+									ICON_PLAYER,
+									ICON_LIVE_PAL
+								]
+							]
+						],
+						'icon-allow-overlap': true,
+						'icon-rotate': [
+							'case',
+							[
+								'any',
+								['==', ['get', 'featureType'], 'live_player'],
+								['all', ['==', ['get', 'featureType'], 'live_pal'], ['!=', ['get', 'species'], '']]
+							],
+							0,
+							['get', 'yaw']
+						],
+						'icon-rotation-alignment': 'map',
+						'icon-size': zoomScaledIconSize(0.5, 0.85)
 					}}
 				/>
 			</Source.GeoJSON>
@@ -1860,6 +2082,38 @@
 		{/if}
 	</MLMap>
 
+	{#if reconnecting}
+		<div class="reconnect-banner" role="status">
+			<Icon icon="svg-spinners:180-ring-with-bg" size={18} class="shrink-0" />
+			<span class="reconnect-banner-text">
+				{m.signal_reconnecting({
+					name: reconnectingDesktopName,
+					attempt: signalSession?.reconnectAttempt ?? 0
+				})}
+			</span>
+			<button
+				type="button"
+				class="reconnect-banner-cancel"
+				onclick={() => signalSession?.cancelReconnect()}
+			>
+				{m.cancel()}
+			</button>
+		</div>
+	{/if}
+
+	{#if liveActors.followedId && !followSuppressed}
+		<div class="follow-chip" class:follow-chip-waiting={followVerdictKind === 'waiting'} role="status">
+			<span class="follow-chip-text">
+				{followVerdictKind === 'waiting'
+					? m.live_following_waiting({ name: followedActorName })
+					: m.live_following({ name: followedActorName })}
+			</span>
+			<button type="button" class="follow-chip-close" onclick={() => liveActors.unfollow()}>
+				×
+			</button>
+		</div>
+	{/if}
+
 	{#if import.meta.env.DEV && typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('bench')}
 		<BenchOverlay {map} {area} />
 	{/if}
@@ -1893,22 +2147,24 @@
 		</div>
 	{/if}
 
-	<div class="map-area-switch" class:align-right={areaSwitchAlign === 'right'}>
-		{#each MAP_AREA_ORDER as candidate}
-			<button
-				type="button"
-				class="map-area-btn"
-				class:active={area === candidate}
-				onclick={() => onAreaChange?.(candidate)}
-			>
-				{candidate === 'MainMap' ? m.map_area_mainmap() : m.map_area_tree()}
-			</button>
-		{/each}
-	</div>
+	{#if !pip}
+		<div class="map-area-switch" class:align-right={areaSwitchAlign === 'right'}>
+			{#each MAP_AREA_ORDER as candidate}
+				<button
+					type="button"
+					class="map-area-btn"
+					class:active={area === candidate}
+					onclick={() => onAreaChange?.(candidate)}
+				>
+					{candidate === 'MainMap' ? m.map_area_mainmap() : m.map_area_tree()}
+				</button>
+			{/each}
+		</div>
 
-	<div class="coordinate-display">
-		{@html coordDisplayText}
-	</div>
+		<div class="coordinate-display">
+			{@html coordDisplayText}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -1946,7 +2202,7 @@
 	@media (max-width: 767px) {
 		.map-anchored-card {
 			left: 8px !important;
-			max-width: calc(100vw - 16px);
+			max-width: calc(100% - 16px);
 			transform: translateY(-50%);
 		}
 
@@ -1965,6 +2221,95 @@
 	@media (pointer: coarse) {
 		.map-anchored-card:not(.map-popup-card) {
 			display: none;
+		}
+	}
+
+	.reconnect-banner {
+		position: absolute;
+		bottom: 12px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		max-width: calc(100% - 24px);
+		padding: 6px 8px 6px 14px;
+		background: color-mix(in srgb, var(--color-warning-500) 25%, var(--color-surface-900) 85%);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-warning-500) 45%, transparent);
+		border-radius: 999px;
+		color: white;
+		font-size: 13px;
+	}
+
+	.reconnect-banner-text {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.reconnect-banner-cancel {
+		flex-shrink: 0;
+		padding: 3px 12px;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--color-warning-500) 55%, transparent);
+		color: white;
+		font-size: 12px;
+		cursor: pointer;
+		transition: background-color 0.15s ease-out;
+	}
+
+	.reconnect-banner-cancel:hover {
+		background: color-mix(in srgb, var(--color-warning-500) 30%, transparent);
+	}
+
+	@media (max-width: 767px) {
+		.reconnect-banner {
+			max-width: calc(100% - 16px);
+		}
+	}
+
+	.follow-chip {
+		position: absolute;
+		bottom: 12px;
+		left: 12px;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		max-width: calc(100% - 24px);
+		padding: 6px 8px 6px 14px;
+		background: color-mix(in srgb, var(--color-primary-500) 20%, var(--color-surface-900) 85%);
+		backdrop-filter: blur(8px);
+		border: 1px solid color-mix(in srgb, var(--color-primary-500) 40%, transparent);
+		border-radius: 999px;
+		color: white;
+		font-size: 13px;
+	}
+
+	.follow-chip-waiting {
+		opacity: 0.6;
+	}
+
+	.follow-chip-text {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	.follow-chip-close {
+		flex-shrink: 0;
+		width: 20px;
+		height: 20px;
+		line-height: 1;
+		color: white;
+		cursor: pointer;
+	}
+
+	@media (max-width: 767px) {
+		.follow-chip {
+			max-width: calc(100% - 16px);
 		}
 	}
 

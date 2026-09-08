@@ -5,6 +5,7 @@
 		BossPopup,
 		FastTravelPopup,
 		featureTypeLabel,
+		LivePopup,
 		OriginPopup,
 		PalPopup,
 		PlayerPopup,
@@ -48,6 +49,8 @@
 	<PalPopup point={data} isPredator={type === 'predator_pal'} />
 {:else if type === 'structure' && data}
 	<StructurePopup structure={data} />
+{:else if (type === 'live_player' || type === 'live_pal' || type === 'live_palbox') && data}
+	<LivePopup actor={data} />
 {:else}
 	<Popup title={featureTypeLabel(type)} {coords} />
 {/if}
