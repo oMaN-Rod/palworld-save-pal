@@ -109,20 +109,23 @@ bool port_already_serving(const std::string& host, int port) {
         return false;
     }
 
+    // Winsock signals a failed non-blocking connect only via the except set, never the write
+    // set; without watching it here, a refused connection would sit out the full timeout.
     fd_set writable{};
+    fd_set failed{};
     FD_ZERO(&writable);
+    FD_ZERO(&failed);
     FD_SET(probe, &writable);
+    FD_SET(probe, &failed);
     timeval timeout{0, 250000};
-    if (select(0, nullptr, &writable, nullptr, &timeout) <= 0) {
+    if (select(0, nullptr, &writable, &failed, &timeout) <= 0) {
         closesocket(probe);
         return false;
     }
 
-    int so_error = 0;
-    int so_error_len = sizeof(so_error);
-    getsockopt(probe, SOL_SOCKET, SO_ERROR, reinterpret_cast<char*>(&so_error), &so_error_len);
+    bool connected = FD_ISSET(probe, &writable) != 0;
     closesocket(probe);
-    return so_error == 0;
+    return connected;
 }
 
 }
