@@ -1067,6 +1067,11 @@ fn game_messages_are_split_between_remote_reachable_and_denylisted() {
             "{expected:?} should be picked up by the game_ prefix"
         );
     }
+    assert_eq!(
+        game_messages.len(),
+        reachable.len() + denylisted.len(),
+        "a game_ message missing from both arrays would otherwise pass this test silently"
+    );
     for message_type in game_messages {
         assert_eq!(
             REMOTE_DENYLIST.contains(&message_type),

@@ -51,18 +51,47 @@ pub struct ServerHandle {
     _live_bus_keepalive: tokio::sync::watch::Receiver<Option<psp_app::live::LiveFrame>>,
     shutdown_sender: tokio::sync::oneshot::Sender<()>,
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
+    instance_reconciler_cancel: tokio_util::sync::CancellationToken,
+    instance_reconciler_task: tokio::task::JoinHandle<()>,
 }
 
 impl ServerHandle {
     pub async fn shutdown(self) {
         self.services.bridge.shutdown().await;
         self.services.signal.lock().await.shutdown().await;
+        self.instance_reconciler_cancel.cancel();
+        let _ = self.instance_reconciler_task.await;
         let _ = self.shutdown_sender.send(());
         let _ = self.serve_task.await;
     }
 
     pub async fn wait(self) {
         let _ = self.serve_task.await;
+    }
+}
+
+const INSTANCE_RECONCILE_INTERVAL_ENV: &str = "PSP_BRIDGE_RECONCILE_INTERVAL_MS";
+const INSTANCE_RECONCILE_INTERVAL_DEFAULT: std::time::Duration = std::time::Duration::from_secs(3);
+
+fn instance_reconcile_interval() -> std::time::Duration {
+    std::env::var(INSTANCE_RECONCILE_INTERVAL_ENV)
+        .ok()
+        .and_then(|value| value.parse::<u64>().ok())
+        .map(std::time::Duration::from_millis)
+        .unwrap_or(INSTANCE_RECONCILE_INTERVAL_DEFAULT)
+}
+
+async fn run_instance_reconciler(
+    driver: Arc<dyn psp_db::DbDriver>,
+    bridge: Arc<crate::bridge::service::BridgeService>,
+    cancel: tokio_util::sync::CancellationToken,
+) {
+    loop {
+        tokio::select! {
+            _ = cancel.cancelled() => break,
+            _ = tokio::time::sleep(instance_reconcile_interval()) => {}
+        }
+        crate::bridge_instances_handlers::reconcile_active_target(&*driver, &bridge).await;
     }
 }
 
@@ -144,25 +173,16 @@ pub async fn start_server_with(
     }
     services.bridge.start();
 
-    {
-        let discovered = crate::bridge::endpoint::default_endpoint_dir()
-            .map(|dir| {
-                crate::bridge::endpoint::scan_endpoints(&dir, &crate::bridge::endpoint::sysinfo_liveness)
-            })
-            .unwrap_or_default();
-        let saved = psp_db::amity_instances::list_instances(&*state.driver)
-            .await
-            .unwrap_or_default();
-        let stored = psp_db::meta::get(&*state.driver, crate::bridge::registry::ACTIVE_INSTANCE_KEY)
-            .await
-            .ok()
-            .flatten()
-            .unwrap_or_default();
+    let initial_target =
+        crate::bridge_instances_handlers::resolve_active_target(&*state.driver).await;
+    services.bridge.set_target(initial_target);
 
-        let target = crate::bridge::registry::target_for(&stored, &discovered, &saved)
-            .or_else(|| crate::bridge::registry::default_target(&discovered));
-        services.bridge.set_target(target);
-    }
+    let instance_reconciler_cancel = tokio_util::sync::CancellationToken::new();
+    let instance_reconciler_task = tokio::spawn(run_instance_reconciler(
+        Arc::clone(&state.driver),
+        Arc::clone(&services.bridge),
+        instance_reconciler_cancel.clone(),
+    ));
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
     let addr = listener.local_addr()?;
@@ -189,5 +209,7 @@ pub async fn start_server_with(
         _live_bus_keepalive: live_bus_keepalive,
         shutdown_sender,
         serve_task,
+        instance_reconciler_cancel,
+        instance_reconciler_task,
     })
 }
