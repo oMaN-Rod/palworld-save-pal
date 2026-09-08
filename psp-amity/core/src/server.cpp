@@ -6,6 +6,7 @@
 #include <ixwebsocket/IXWebSocketServer.h>
 
 #include <cstdint>
+#include <exception>
 #include <future>
 #include <utility>
 
@@ -125,6 +126,21 @@ void BridgeServer::handle_message(std::shared_ptr<ix::ConnectionState> state, ix
                                    const std::unique_ptr<ix::WebSocketMessage>& msg) {
     ix::ConnectionState* key = state.get();
 
+    try {
+        handle_message_inner(key, ws, msg);
+    } catch (const std::exception&) {
+        ws.close();
+        std::lock_guard<std::mutex> lock(sessions_mutex_);
+        sessions_.erase(key);
+    } catch (...) {
+        ws.close();
+        std::lock_guard<std::mutex> lock(sessions_mutex_);
+        sessions_.erase(key);
+    }
+}
+
+void BridgeServer::handle_message_inner(ix::ConnectionState* key, ix::WebSocket& ws,
+                                         const std::unique_ptr<ix::WebSocketMessage>& msg) {
     if (msg->type == ix::WebSocketMessageType::Open) {
         std::lock_guard<std::mutex> lock(sessions_mutex_);
         sessions_[key] = std::make_unique<Session>(cfg_.token, generate_token_hex(), cfg_.hello_info);

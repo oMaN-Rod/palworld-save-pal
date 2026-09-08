@@ -46,6 +46,8 @@ public:
 private:
     void handle_message(std::shared_ptr<ix::ConnectionState> state, ix::WebSocket& ws,
                          const std::unique_ptr<ix::WebSocketMessage>& msg);
+    void handle_message_inner(ix::ConnectionState* key, ix::WebSocket& ws,
+                               const std::unique_ptr<ix::WebSocketMessage>& msg);
 
     ServerConfig cfg_;
     GamePort& game_port_;

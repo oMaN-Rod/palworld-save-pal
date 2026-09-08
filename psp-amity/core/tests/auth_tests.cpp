@@ -153,3 +153,37 @@ TEST_CASE("malformed json after ready is bad_request without closing") {
     CHECK(reply->data["code"] == "bad_request");
     CHECK(session.ready());
 }
+
+TEST_CASE("closed latch survives a correct token sent after lockout") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object(), 3);
+    session.on_message(R"({"id":"1","type":"hello","data":{"protocolVersion":2}})");
+    session.on_message(auth_message("2", "wrong", kNonce));
+    session.on_message(auth_message("3", "wrong", kNonce));
+    auto lockout = session.on_message(auth_message("4", "wrong", kNonce));
+    REQUIRE(lockout.close);
+    CHECK_FALSE(session.ready());
+
+    auto afterLockout = session.on_message(auth_message("5", "s3cr3t", kNonce));
+    CHECK(afterLockout.send.empty());
+    CHECK(afterLockout.close);
+    CHECK_FALSE(afterLockout.request.has_value());
+    CHECK_FALSE(session.ready());
+}
+
+TEST_CASE("closed latch survives a valid hello sent after a protocol_mismatch close") {
+    amity::Session session("s3cr3t", kNonce, nlohmann::json::object());
+    auto mismatch = session.on_message(R"({"id":"1","type":"hello","data":{"protocolVersion":99}})");
+    REQUIRE(mismatch.close);
+    CHECK_FALSE(session.ready());
+
+    auto afterClose = session.on_message(R"({"id":"2","type":"hello","data":{"protocolVersion":2}})");
+    CHECK(afterClose.send.empty());
+    CHECK(afterClose.close);
+    CHECK_FALSE(afterClose.request.has_value());
+    CHECK_FALSE(session.ready());
+
+    auto authAttempt = session.on_message(auth_message("3", "s3cr3t", kNonce));
+    CHECK(authAttempt.send.empty());
+    CHECK(authAttempt.close);
+    CHECK_FALSE(session.ready());
+}

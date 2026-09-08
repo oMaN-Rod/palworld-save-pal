@@ -2,6 +2,8 @@
 
 #include <amity/hmac.hpp>
 
+#include <exception>
+
 namespace amity {
 
 bool fixed_time_equals(std::string_view a, std::string_view b) {
@@ -91,7 +93,13 @@ Session::Output Session::on_message(const std::string& text) {
         std::string proof = (e.data.contains("proof") && e.data["proof"].is_string())
             ? e.data["proof"].get<std::string>()
             : std::string();
-        if (!proof.empty() && fixed_time_equals(proof, hmac_sha256_hex(expected_token_, nonce_))) {
+        std::string expected_proof;
+        try {
+            expected_proof = hmac_sha256_hex(expected_token_, nonce_);
+        } catch (const std::exception&) {
+            return reject(e, "internal_error", "authentication unavailable", true);
+        }
+        if (!proof.empty() && fixed_time_equals(proof, expected_proof)) {
             state_ = State::Ready;
             Output out;
             out.send.push_back(make_reply(e.id, "auth_ok", nlohmann::json::object()));
