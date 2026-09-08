@@ -1,6 +1,7 @@
 pub mod api_convert;
 pub mod bridge;
 pub mod bridge_handlers;
+pub mod bridge_instances_handlers;
 pub mod local_saves_handlers;
 pub mod lsp_service;
 #[cfg(feature = "desktop")]
@@ -142,6 +143,26 @@ pub async fn start_server_with(
         tracing::warn!(%error, "signal: remote access was left armed but could not be restored");
     }
     services.bridge.start();
+
+    {
+        let discovered = crate::bridge::endpoint::default_endpoint_dir()
+            .map(|dir| {
+                crate::bridge::endpoint::scan_endpoints(&dir, &crate::bridge::endpoint::sysinfo_liveness)
+            })
+            .unwrap_or_default();
+        let saved = psp_db::amity_instances::list_instances(&*state.driver)
+            .await
+            .unwrap_or_default();
+        let stored = psp_db::meta::get(&*state.driver, crate::bridge::registry::ACTIVE_INSTANCE_KEY)
+            .await
+            .ok()
+            .flatten()
+            .unwrap_or_default();
+
+        let target = crate::bridge::registry::target_for(&stored, &discovered, &saved)
+            .or_else(|| crate::bridge::registry::default_target(&discovered));
+        services.bridge.set_target(target);
+    }
 
     let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
     let addr = listener.local_addr()?;

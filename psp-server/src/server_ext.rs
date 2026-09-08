@@ -6,6 +6,7 @@ use std::sync::Arc;
 use serde_json::Value;
 
 use crate::bridge_handlers;
+use crate::bridge_instances_handlers;
 use crate::dispatcher::{ExtRouter, HandlerCtx};
 use crate::handler_error::HandlerError;
 use crate::local_saves_handlers;
@@ -166,6 +167,24 @@ impl ExtRouter for ServerExtRouter {
             MessageType::GameSetGuildRole => {
                 bridge_handlers::handle_game_set_guild_role(services, data, ctx).await
             }
+            MessageType::GameInstances => {
+                bridge_instances_handlers::handle_game_instances(services, ctx).await
+            }
+            MessageType::GameAddInstance => {
+                bridge_instances_handlers::handle_game_add_instance(services, data, ctx).await
+            }
+            MessageType::GameUpdateInstance => {
+                bridge_instances_handlers::handle_game_update_instance(services, data, ctx).await
+            }
+            MessageType::GameDeleteInstance => {
+                bridge_instances_handlers::handle_game_delete_instance(services, data, ctx).await
+            }
+            MessageType::GameSelectInstance => {
+                bridge_instances_handlers::handle_game_select_instance(services, data, ctx).await
+            }
+            MessageType::GameTestInstance => {
+                bridge_instances_handlers::handle_game_test_instance(services, data, ctx).await
+            }
             MessageType::GameCapabilities => {
                 bridge_handlers::handle_game_capabilities(services, ctx).await
             }
@@ -251,6 +270,12 @@ mod tests {
         "game_add_pal",
         "game_edit_pal",
         "game_edit_player",
+        "game_instances",
+        "game_add_instance",
+        "game_update_instance",
+        "game_delete_instance",
+        "game_select_instance",
+        "game_test_instance",
     ];
 
     /// Asserts ownership, not behavior: every wire name above must come back

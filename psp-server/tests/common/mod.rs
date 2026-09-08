@@ -8,6 +8,9 @@ use tokio_tungstenite::tungstenite::Message;
 #[allow(dead_code)]
 pub mod mock_mod;
 
+#[allow(unused_imports)]
+pub use mock_mod::{spawn_mock_mod, MockMod};
+
 pub struct TestServer {
     pub handle: psp_server::ServerHandle,
     /// Deletes the temp tree on drop; also read by tests that need the
@@ -65,6 +68,9 @@ pub async fn start_desktop_test_server(
 #[allow(dead_code)]
 pub type WsClient =
     tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<tokio::net::TcpStream>>;
+
+#[allow(dead_code)]
+pub type TestClient = WsClient;
 
 #[allow(dead_code)]
 pub async fn connect(server: &TestServer) -> WsClient {
@@ -134,4 +140,54 @@ impl Drop for GamepassEnvGuard {
             }
         }
     }
+}
+
+/// Serializes tests that mutate the PROCESS-GLOBAL bridge env vars (e.g.
+/// `PSP_BRIDGE_ENDPOINT_DIR`) and restores their prior values on Drop.
+#[allow(dead_code)]
+pub static BRIDGE_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
+#[allow(dead_code)]
+pub struct BridgeEnvGuard {
+    _lock: tokio::sync::MutexGuard<'static, ()>,
+    previous: Vec<(&'static str, Option<std::ffi::OsString>)>,
+}
+
+#[allow(dead_code)]
+impl BridgeEnvGuard {
+    pub async fn acquire(vars: &[(&'static str, Option<&str>)]) -> Self {
+        let lock = BRIDGE_ENV_LOCK.lock().await;
+        let mut previous = Vec::new();
+        for (name, value) in vars {
+            previous.push((*name, std::env::var_os(name)));
+            match value {
+                Some(value) => std::env::set_var(name, value),
+                None => std::env::remove_var(name),
+            }
+        }
+        Self {
+            _lock: lock,
+            previous,
+        }
+    }
+}
+
+impl Drop for BridgeEnvGuard {
+    fn drop(&mut self) {
+        for (name, prior) in &self.previous {
+            match prior {
+                Some(value) => std::env::set_var(name, value),
+                None => std::env::remove_var(name),
+            }
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub async fn kill_mock(
+    cancel: tokio_util::sync::CancellationToken,
+    handle: tokio::task::JoinHandle<()>,
+) {
+    cancel.cancel();
+    let _ = tokio::time::timeout(std::time::Duration::from_secs(2), handle).await;
 }

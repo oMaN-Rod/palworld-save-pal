@@ -3,7 +3,7 @@ mod common;
 use std::time::Duration;
 
 use common::mock_mod::{spawn_mock_mod, write_endpoint_file, MockMod};
-use common::{connect, next_json, send_json, start_test_server};
+use common::{connect, kill_mock, next_json, send_json, start_test_server, BridgeEnvGuard};
 use psp_server::bridge::service::{BridgeStatus, BridgeTarget};
 use psp_server::messages::MessageType;
 use psp_server::signal::remote_ctl::REMOTE_DENYLIST;
@@ -21,42 +21,6 @@ const COMMAND_RESULT_SET_ITEM_SLOT_FIXTURE: &str =
 
 fn fixture_data(json: &str) -> serde_json::Value {
     serde_json::from_str::<serde_json::Value>(json).unwrap()["data"].clone()
-}
-
-static BRIDGE_ENV_LOCK: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
-
-struct BridgeEnvGuard {
-    _lock: tokio::sync::MutexGuard<'static, ()>,
-    previous: Vec<(&'static str, Option<std::ffi::OsString>)>,
-}
-
-impl BridgeEnvGuard {
-    async fn acquire(vars: &[(&'static str, Option<&str>)]) -> Self {
-        let lock = BRIDGE_ENV_LOCK.lock().await;
-        let mut previous = Vec::new();
-        for (name, value) in vars {
-            previous.push((*name, std::env::var_os(name)));
-            match value {
-                Some(value) => std::env::set_var(name, value),
-                None => std::env::remove_var(name),
-            }
-        }
-        Self {
-            _lock: lock,
-            previous,
-        }
-    }
-}
-
-impl Drop for BridgeEnvGuard {
-    fn drop(&mut self) {
-        for (name, prior) in &self.previous {
-            match prior {
-                Some(value) => std::env::set_var(name, value),
-                None => std::env::remove_var(name),
-            }
-        }
-    }
 }
 
 async fn wait_for_connected(mut rx: tokio::sync::watch::Receiver<BridgeStatus>) {
@@ -96,14 +60,6 @@ async fn start_server_connected_to(
     }));
     wait_for_connected(server.handle.services.bridge.status_rx()).await;
     (server, addr, mock_cancel, mock_handle)
-}
-
-async fn kill_mock(
-    cancel: tokio_util::sync::CancellationToken,
-    handle: tokio::task::JoinHandle<()>,
-) {
-    cancel.cancel();
-    let _ = tokio::time::timeout(Duration::from_secs(2), handle).await;
 }
 
 #[tokio::test]

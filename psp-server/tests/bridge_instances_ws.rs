@@ -1,0 +1,134 @@
+mod common;
+
+use std::time::Duration;
+
+use common::{BridgeEnvGuard, MockMod};
+
+async fn send_and_wait(
+    client: &mut common::TestClient,
+    kind: &str,
+    data: serde_json::Value,
+) -> serde_json::Value {
+    common::send_json(client, serde_json::json!({ "type": kind, "data": data })).await;
+    common::next_json(client).await["data"].clone()
+}
+
+#[tokio::test]
+async fn saved_instances_round_trip_through_list_select_update_and_delete() {
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
+
+    let server = common::start_test_server().await;
+    let mut client = common::connect(&server).await;
+
+    let empty = send_and_wait(&mut client, "game_instances", serde_json::json!({})).await;
+    assert_eq!(empty["instances"].as_array().unwrap().len(), 0);
+    assert!(empty["activeId"].is_null());
+
+    send_and_wait(
+        &mut client,
+        "game_add_instance",
+        serde_json::json!({ "name": "Remote", "host": "10.0.0.14", "port": 8788, "token": "s3cr3t" }),
+    )
+    .await;
+
+    let listed = send_and_wait(&mut client, "game_instances", serde_json::json!({})).await;
+    let instances = listed["instances"].as_array().unwrap();
+    assert_eq!(instances.len(), 1);
+    assert_eq!(instances[0]["source"], "saved");
+    assert_eq!(instances[0]["name"], "Remote");
+    assert_eq!(instances[0]["host"], "10.0.0.14");
+    assert_eq!(instances[0]["live"], false);
+    let id = instances[0]["id"].as_str().unwrap().to_string();
+    assert!(listed["activeId"].is_null(), "adding must not select");
+
+    let selected =
+        send_and_wait(&mut client, "game_select_instance", serde_json::json!({ "id": id })).await;
+    assert_eq!(selected["activeId"], id);
+
+    let renamed = send_and_wait(
+        &mut client,
+        "game_update_instance",
+        serde_json::json!({ "id": id, "name": "Renamed", "host": "10.0.0.14", "port": 8788, "token": "s3cr3t" }),
+    )
+    .await;
+    assert_eq!(renamed["instances"][0]["name"], "Renamed");
+
+    let after =
+        send_and_wait(&mut client, "game_delete_instance", serde_json::json!({ "id": id })).await;
+    assert_eq!(after["instances"].as_array().unwrap().len(), 0);
+    assert!(after["activeId"].is_null(), "deleting the active instance must clear it");
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn selecting_an_unknown_instance_is_refused() {
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
+
+    let server = common::start_test_server().await;
+    let mut client = common::connect(&server).await;
+
+    let reply = send_and_wait(
+        &mut client,
+        "game_select_instance",
+        serde_json::json!({ "id": "saved:404" }),
+    )
+    .await;
+    assert_eq!(reply["code"], "validation_failed");
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn testing_an_unreachable_instance_reports_failure() {
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
+
+    let server = common::start_test_server().await;
+    let mut client = common::connect(&server).await;
+
+    let reply = send_and_wait(
+        &mut client,
+        "game_test_instance",
+        serde_json::json!({ "name": "Dead", "host": "127.0.0.1", "port": 1, "token": "t" }),
+    )
+    .await;
+    assert_eq!(reply["ok"], false);
+    assert!(reply["error"].as_str().is_some());
+
+    server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn testing_a_reachable_instance_reports_success() {
+    let _env = BridgeEnvGuard::acquire(&[("PSP_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    std::env::set_var("PSP_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
+
+    let mock = MockMod::new("s3cr3t", serde_json::json!({}), serde_json::json!({}));
+    let (addr, mock_cancel, mock_handle) = common::spawn_mock_mod(mock).await;
+
+    let server = common::start_test_server().await;
+    let mut client = common::connect(&server).await;
+
+    let reply = send_and_wait(
+        &mut client,
+        "game_test_instance",
+        serde_json::json!({ "name": "Mock", "host": "127.0.0.1", "port": addr.port(), "token": "s3cr3t" }),
+    )
+    .await;
+    assert_eq!(reply["ok"], true);
+    assert_eq!(reply["modVersion"], "0.1.0");
+
+    server.handle.shutdown().await;
+    let _ = tokio::time::timeout(Duration::from_secs(2), async {
+        mock_cancel.cancel();
+        let _ = mock_handle.await;
+    })
+    .await;
+}

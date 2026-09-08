@@ -242,6 +242,12 @@ define_message_types! {
     GameGuildContainers => "game_guild_containers",
     GameEditGuild => "game_edit_guild",
     GameSetGuildRole => "game_set_guild_role",
+    GameInstances => "game_instances",
+    GameAddInstance => "game_add_instance",
+    GameUpdateInstance => "game_update_instance",
+    GameDeleteInstance => "game_delete_instance",
+    GameSelectInstance => "game_select_instance",
+    GameTestInstance => "game_test_instance",
 }
 
 #[cfg(test)]
@@ -464,6 +470,12 @@ mod tests {
         "game_guild_containers",
         "game_edit_guild",
         "game_set_guild_role",
+        "game_instances",
+        "game_add_instance",
+        "game_update_instance",
+        "game_delete_instance",
+        "game_select_instance",
+        "game_test_instance",
     ];
 
     /// `Emitter::emit` splices `as_wire()` straight into the frame text
