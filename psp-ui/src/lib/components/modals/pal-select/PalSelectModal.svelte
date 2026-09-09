@@ -29,11 +29,24 @@
 				if (!pal.localized_name || pal.localized_name === '-') return false;
 				return !pal.disabled;
 			})
+			.sort(([codeNameA, palA], [codeNameB, palB]) => {
+				const indexA = palA.pal_deck_index;
+				const indexB = palB.pal_deck_index;
+				const hasPositiveIndexA = indexA > 0;
+				const hasPositiveIndexB = indexB > 0;
+
+				if (hasPositiveIndexA && hasPositiveIndexB) return indexA - indexB;
+				if (hasPositiveIndexA) return -1;
+				if (hasPositiveIndexB) return 1;
+
+				return formatLabel(codeNameA, palA.localized_name).localeCompare(
+					formatLabel(codeNameB, palB.localized_name)
+				);
+			})
 			.map(([code_name, pal]) => ({
 				value: code_name,
 				label: formatLabel(code_name, pal.localized_name)
-			}))
-			.sort((a, b) => a.label.localeCompare(b.label));
+			}));
 	});
 	let selectedPal: string = $state('');
 	let nickname: string = $state('');
@@ -95,7 +108,13 @@
 			{#snippet selectOption(option)}
 				{@const palData = palsData.getByKey(option.value as string)}
 				<div class="flex items-center space-x-2">
+					{#if (palData?.pal_deck_index ?? 0) > 0}
+							<span class="text-xs">#{palData?.pal_deck_index}</span>
+					{:else}
+						<span class="text-xs">----</span>
+					{/if}
 					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
+					
 					<div class="flex flex-col grow">
 						<span>{option.label}</span>
 						<span class="text-xs">{option.value}</span>
