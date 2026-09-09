@@ -64,7 +64,7 @@ inside the folder holding `UE4SS.dll`:
 Example lines:
 
 ```
-[PSPAmity] loaded v0.1.0
+[PSPAmity] loaded v0.2.0
 [PSPAmity] unreal initialized
 [PSPAmity] bridge listening on 127.0.0.1:<port> as "PSPAmity"
 ```
