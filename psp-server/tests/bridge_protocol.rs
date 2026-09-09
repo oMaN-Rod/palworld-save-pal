@@ -78,10 +78,10 @@ fn status_fixture_carries_the_documented_fields() {
     let envelope = envelope_of(STATUS, "status");
     assert_eq!(envelope.data["mode"], "coop_host");
     assert_eq!(envelope.data["authoritative"], true);
-    assert_eq!(envelope.data["protocolVersion"], 1);
+    assert_eq!(envelope.data["protocolVersion"], 2);
     assert_eq!(envelope.data["queueDepth"], 0);
     assert_eq!(envelope.data["worldLoaded"], true);
-    assert_eq!(envelope.data["modVersion"], "0.1.0");
+    assert_eq!(envelope.data["modVersion"], "0.2.0");
 }
 
 #[test]

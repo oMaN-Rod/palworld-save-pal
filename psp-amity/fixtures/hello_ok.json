@@ -1,1 +1,1 @@
-{"id":"1","type":"hello_ok","data":{"mod":"PSPAmity","protocolVersion":1,"version":"0.1.0"}}
+{"id":"1","type":"hello_ok","data":{"mod":"PSPAmity","protocolVersion":2,"version":"0.2.0","name":"PSPAmity","nonce":"a2ad7d63e1967d5d0b0a88d50f07d696ddf50a564a221247ecf1e1df6670bdaa"}}

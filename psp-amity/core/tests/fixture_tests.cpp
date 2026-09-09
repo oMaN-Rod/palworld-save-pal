@@ -124,6 +124,27 @@ TEST_CASE("status.json data carries the six status keys") {
         CHECK(e.data.contains(key));
     }
     CHECK(e.data.size() == 6);
+    CHECK(e.data["protocolVersion"] == amity::PROTOCOL_VERSION);
+}
+
+TEST_CASE("hello.json and hello_ok.json describe the current protocol version") {
+    auto hello = load_envelope("hello.json");
+    CHECK(hello.data["protocolVersion"] == amity::PROTOCOL_VERSION);
+
+    auto hello_ok = load_envelope("hello_ok.json");
+    for (const std::string key : {"mod", "protocolVersion", "version", "name", "nonce"}) {
+        CAPTURE(key);
+        CHECK(hello_ok.data.contains(key));
+    }
+    CHECK(hello_ok.data["protocolVersion"] == amity::PROTOCOL_VERSION);
+    CHECK(hello_ok.data["nonce"].get<std::string>().size() == 64);
+}
+
+TEST_CASE("auth.json carries a proof, never a cleartext token") {
+    auto e = load_envelope("auth.json");
+    CHECK(e.data.contains("proof"));
+    CHECK_FALSE(e.data.contains("token"));
+    CHECK(e.data["proof"].get<std::string>().size() == 64);
 }
 
 TEST_CASE("players.json players[0] has the ten player keys") {
