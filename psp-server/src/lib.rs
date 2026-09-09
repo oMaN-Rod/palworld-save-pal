@@ -179,16 +179,16 @@ pub async fn start_server_with(
         crate::bridge_instances_handlers::resolve_active_target(&*state.driver).await;
     services.bridge.set_target(initial_target);
 
+    let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
+    let addr = listener.local_addr()?;
+    tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
+
     let instance_reconciler_cancel = tokio_util::sync::CancellationToken::new();
     let instance_reconciler_task = tokio::spawn(run_instance_reconciler(
         Arc::clone(&state.driver),
         Arc::clone(&services.bridge),
         instance_reconciler_cancel.clone(),
     ));
-
-    let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
-    let addr = listener.local_addr()?;
-    tracing::info!(%addr, desktop_mode = config.desktop_mode, "psp-server listening");
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
     let application = router::build_router(Arc::clone(&state), &config.ui_dir);
