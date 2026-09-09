@@ -21,12 +21,23 @@ impl std::fmt::Debug for AmityInstance {
     }
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Clone, Default)]
 pub struct NewAmityInstance {
     pub name: String,
     pub host: String,
     pub port: i64,
     pub token: String,
+}
+
+impl std::fmt::Debug for NewAmityInstance {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("NewAmityInstance")
+            .field("name", &self.name)
+            .field("host", &self.host)
+            .field("port", &self.port)
+            .field("token", &"<redacted>")
+            .finish()
+    }
 }
 
 const SELECT_COLUMNS: &str = "id, name, host, port, token";
@@ -177,6 +188,16 @@ mod tests {
             id: 1, name: "n".into(), host: "h".into(), port: 1, token: "super-secret".into(),
         };
         let rendered = format!("{instance:?}");
+        assert!(!rendered.contains("super-secret"));
+        assert!(rendered.contains("redacted"));
+    }
+
+    #[test]
+    fn new_amity_instance_debug_redacts_the_token() {
+        let new = NewAmityInstance {
+            name: "n".into(), host: "h".into(), port: 1, token: "super-secret".into(),
+        };
+        let rendered = format!("{new:?}");
         assert!(!rendered.contains("super-secret"));
         assert!(rendered.contains("redacted"));
     }
