@@ -12,13 +12,30 @@ use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 use crate::services::ServerServices;
 
+fn parse_payload<T: serde::de::DeserializeOwned>(
+    data: Value,
+    request: MessageType,
+    ctx: &mut HandlerCtx<'_>,
+) -> Option<T> {
+    match serde_json::from_value(data) {
+        Ok(payload) => Some(payload),
+        Err(error) => {
+            ctx.emitter.emit(
+                request,
+                &serde_json::json!({ "error": error.to_string(), "code": "validation_failed" }),
+            );
+            None
+        }
+    }
+}
+
 #[derive(Debug, serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct InstanceIdData {
     pub id: String,
 }
 
-#[derive(Debug, serde::Deserialize)]
+#[derive(serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct InstanceFieldsData {
     pub name: String,
@@ -27,7 +44,18 @@ pub struct InstanceFieldsData {
     pub token: String,
 }
 
-#[derive(Debug, serde::Deserialize)]
+impl std::fmt::Debug for InstanceFieldsData {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("InstanceFieldsData")
+            .field("name", &self.name)
+            .field("host", &self.host)
+            .field("port", &self.port)
+            .field("token", &"<redacted>")
+            .finish()
+    }
+}
+
+#[derive(serde::Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateInstanceData {
     pub id: String,
@@ -35,6 +63,18 @@ pub struct UpdateInstanceData {
     pub host: String,
     pub port: u16,
     pub token: String,
+}
+
+impl std::fmt::Debug for UpdateInstanceData {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("UpdateInstanceData")
+            .field("id", &self.id)
+            .field("name", &self.name)
+            .field("host", &self.host)
+            .field("port", &self.port)
+            .field("token", &"<redacted>")
+            .finish()
+    }
 }
 
 fn refuse(emitter: &Emitter, request: MessageType, code: &str, message: &str) {
@@ -151,11 +191,23 @@ pub async fn handle_game_instances(
     services: &ServerServices,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
+    reply_with_instances(services, MessageType::GameInstances, ctx).await
+}
+
+/// Emits the current `{instances, activeId}` snapshot under `reply_type`
+/// rather than always `game_instances`, so a mutator that ends by refreshing
+/// the list replies on its OWN request type -- the wire type the browser's
+/// waiter for that request is keyed on.
+async fn reply_with_instances(
+    services: &ServerServices,
+    reply_type: MessageType,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
     let discovered = discovered_now();
     let saved = match amity_instances::list_instances(&*ctx.app.driver).await {
         Ok(saved) => saved,
         Err(error) => {
-            refuse(ctx.emitter, MessageType::GameInstances, "db_error", &error.to_string());
+            refuse(ctx.emitter, reply_type, "db_error", &error.to_string());
             return Ok(());
         }
     };
@@ -163,7 +215,7 @@ pub async fn handle_game_instances(
     let active = services.bridge.target().map(|target| target.id);
 
     ctx.emitter.emit(
-        MessageType::GameInstances,
+        reply_type,
         &serde_json::json!({ "instances": entries, "activeId": active }),
     );
     Ok(())
@@ -174,7 +226,10 @@ pub async fn handle_game_add_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let payload: InstanceFieldsData = serde_json::from_value(data)?;
+    let Some(payload) = parse_payload::<InstanceFieldsData>(data, MessageType::GameAddInstance, ctx)
+    else {
+        return Ok(());
+    };
     let outcome = amity_instances::insert_instance(
         &*ctx.app.driver,
         &NewAmityInstance {
@@ -189,7 +244,7 @@ pub async fn handle_game_add_instance(
         refuse(ctx.emitter, MessageType::GameAddInstance, "db_error", &error.to_string());
         return Ok(());
     }
-    handle_game_instances(services, ctx).await
+    reply_with_instances(services, MessageType::GameAddInstance, ctx).await
 }
 
 pub async fn handle_game_update_instance(
@@ -197,7 +252,11 @@ pub async fn handle_game_update_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let payload: UpdateInstanceData = serde_json::from_value(data)?;
+    let Some(payload) =
+        parse_payload::<UpdateInstanceData>(data, MessageType::GameUpdateInstance, ctx)
+    else {
+        return Ok(());
+    };
     let Some(row) = saved_row_id(&payload.id) else {
         refuse(
             ctx.emitter,
@@ -241,7 +300,7 @@ pub async fn handle_game_update_instance(
         }
     }
 
-    handle_game_instances(services, ctx).await
+    reply_with_instances(services, MessageType::GameUpdateInstance, ctx).await
 }
 
 pub async fn handle_game_delete_instance(
@@ -249,7 +308,10 @@ pub async fn handle_game_delete_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let payload: InstanceIdData = serde_json::from_value(data)?;
+    let Some(payload) = parse_payload::<InstanceIdData>(data, MessageType::GameDeleteInstance, ctx)
+    else {
+        return Ok(());
+    };
     let Some(row) = saved_row_id(&payload.id) else {
         refuse(
             ctx.emitter,
@@ -277,7 +339,7 @@ pub async fn handle_game_delete_instance(
         }
     }
 
-    handle_game_instances(services, ctx).await
+    reply_with_instances(services, MessageType::GameDeleteInstance, ctx).await
 }
 
 pub async fn handle_game_select_instance(
@@ -285,7 +347,10 @@ pub async fn handle_game_select_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let payload: InstanceIdData = serde_json::from_value(data)?;
+    let Some(payload) = parse_payload::<InstanceIdData>(data, MessageType::GameSelectInstance, ctx)
+    else {
+        return Ok(());
+    };
     let discovered = discovered_now();
     let saved = match amity_instances::list_instances(&*ctx.app.driver).await {
         Ok(saved) => saved,
@@ -313,7 +378,7 @@ pub async fn handle_game_select_instance(
     if let Err(error) = persisted {
         tracing::warn!(%error, "failed to persist the selected Amity instance");
     }
-    handle_game_instances(services, ctx).await
+    reply_with_instances(services, MessageType::GameSelectInstance, ctx).await
 }
 
 pub async fn handle_game_test_instance(
@@ -321,7 +386,11 @@ pub async fn handle_game_test_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let payload: InstanceFieldsData = serde_json::from_value(data)?;
+    let Some(payload) =
+        parse_payload::<InstanceFieldsData>(data, MessageType::GameTestInstance, ctx)
+    else {
+        return Ok(());
+    };
     let target = BridgeTarget {
         id: "test".to_string(),
         name: payload.name,
@@ -355,6 +424,33 @@ pub async fn handle_game_test_instance(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn instance_fields_data_debug_redacts_the_token() {
+        let data = InstanceFieldsData {
+            name: "n".to_string(),
+            host: "h".to_string(),
+            port: 1,
+            token: "super-secret".to_string(),
+        };
+        let rendered = format!("{data:?}");
+        assert!(!rendered.contains("super-secret"));
+        assert!(rendered.contains("redacted"));
+    }
+
+    #[test]
+    fn update_instance_data_debug_redacts_the_token() {
+        let data = UpdateInstanceData {
+            id: "saved:1".to_string(),
+            name: "n".to_string(),
+            host: "h".to_string(),
+            port: 1,
+            token: "super-secret".to_string(),
+        };
+        let rendered = format!("{data:?}");
+        assert!(!rendered.contains("super-secret"));
+        assert!(rendered.contains("redacted"));
+    }
 
     /// A driver whose every query/execute fails, standing in for a transient
     /// DB error (a busy pool, a lock timeout) rather than a real empty table.

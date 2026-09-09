@@ -10,7 +10,12 @@ async fn send_and_wait(
     data: serde_json::Value,
 ) -> serde_json::Value {
     common::send_json(client, serde_json::json!({ "type": kind, "data": data })).await;
-    common::next_json(client).await["data"].clone()
+    let reply = common::next_json(client).await;
+    assert_eq!(
+        reply["type"], kind,
+        "a reply must be emitted on the request's own type or the client's await never resolves"
+    );
+    reply["data"].clone()
 }
 
 #[tokio::test]
