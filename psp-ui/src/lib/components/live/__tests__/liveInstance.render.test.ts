@@ -33,6 +33,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeId: 'auto:11',
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -49,6 +50,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeId: 'saved:1',
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -64,6 +66,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeId: 'auto:11',
 				onselect,
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -80,6 +83,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeId: 'auto:11',
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -87,9 +91,49 @@ describe('LiveInstanceSwitcher', () => {
 		expect(container.querySelector('[data-edit-id="auto:11"]')).toBeNull();
 	});
 
+	it('offers delete only for saved instances', () => {
+		const { container } = render(LiveInstanceSwitcher, {
+			props: {
+				instances: INSTANCES,
+				activeId: 'auto:11',
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				ondelete: vi.fn(),
+				onadd: vi.fn()
+			}
+		});
+		expect(container.querySelector('[data-delete-id="saved:1"]')).toBeTruthy();
+		expect(container.querySelector('[data-delete-id="auto:11"]')).toBeNull();
+	});
+
+	it('calls ondelete with the clicked saved instance', async () => {
+		const ondelete = vi.fn();
+		const { container } = render(LiveInstanceSwitcher, {
+			props: {
+				instances: INSTANCES,
+				activeId: 'auto:11',
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				ondelete,
+				onadd: vi.fn()
+			}
+		});
+		const button = container.querySelector('[data-delete-id="saved:1"]') as HTMLElement;
+		button.click();
+		await tick();
+		expect(ondelete).toHaveBeenCalledWith(INSTANCES[1]);
+	});
+
 	it('renders an empty state with nothing detected or saved', () => {
 		const { getByText } = render(LiveInstanceSwitcher, {
-			props: { instances: [], activeId: null, onselect: vi.fn(), onedit: vi.fn(), onadd: vi.fn() }
+			props: {
+				instances: [],
+				activeId: null,
+				onselect: vi.fn(),
+				onedit: vi.fn(),
+				ondelete: vi.fn(),
+				onadd: vi.fn()
+			}
 		});
 		expect(getByText('No instances found')).toBeTruthy();
 	});
@@ -102,6 +146,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeConnected: false,
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -117,6 +162,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeConnected: true,
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -132,6 +178,7 @@ describe('LiveInstanceSwitcher', () => {
 				activeConnected: true,
 				onselect: vi.fn(),
 				onedit: vi.fn(),
+				ondelete: vi.fn(),
 				onadd: vi.fn()
 			}
 		});
@@ -179,5 +226,24 @@ describe('LiveInstanceModal', () => {
 		await tick();
 		await tick();
 		expect(getByText('Could not connect')).toBeTruthy();
+	});
+
+	it('blocks test when the port is cleared', async () => {
+		const ontest = vi.fn();
+		const { container } = render(LiveInstanceModal, {
+			props: {
+				initial: { name: 'Remote', host: '10.0.0.14', port: 8788, token: 's3cr3t' },
+				ontest,
+				onsave: vi.fn(),
+				oncancel: vi.fn()
+			}
+		});
+		const portInput = container.querySelector('input[type="number"]') as HTMLInputElement;
+		portInput.value = '';
+		portInput.dispatchEvent(new Event('input'));
+		await tick();
+		(container.querySelector('[data-action="test"]') as HTMLElement).click();
+		await tick();
+		expect(ontest).not.toHaveBeenCalled();
 	});
 });

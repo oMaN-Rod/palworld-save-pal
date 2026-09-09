@@ -254,6 +254,20 @@
 		}
 	}
 
+	async function deleteInstance(instance: GameInstanceJson) {
+		const confirmed = await modal.showConfirmModal({
+			title: m.live_instance_delete(),
+			message: m.delete_entity_by_name_confirm({ name: instance.name }),
+			confirmText: m.delete()
+		});
+		if (!confirmed) return;
+		try {
+			await gameState.deleteInstance(instance.id);
+		} catch (error) {
+			toast.add(commandErrorText(error), m.error(), 'error');
+		}
+	}
+
 	onMount(() => {
 		void refresh();
 		void pollInstances();
@@ -658,6 +672,10 @@
 					onedit={(instance) => {
 						close();
 						openEditInstanceModal(instance);
+					}}
+					ondelete={(instance) => {
+						close();
+						void deleteInstance(instance);
 					}}
 					onadd={() => {
 						close();

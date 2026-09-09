@@ -10,6 +10,7 @@
 		pending = false,
 		onselect,
 		onedit,
+		ondelete,
 		onadd
 	}: {
 		instances: GameInstanceJson[];
@@ -18,6 +19,7 @@
 		pending?: boolean;
 		onselect: (id: string) => void;
 		onedit: (instance: GameInstanceJson) => void;
+		ondelete: (instance: GameInstanceJson) => void;
 		onadd: () => void;
 	} = $props();
 
@@ -70,6 +72,15 @@
 						onclick={() => onedit(instance)}
 					>
 						{m.live_instance_edit()}
+					</button>
+					<button
+						type="button"
+						data-delete-id={instance.id}
+						aria-label={m.live_instance_delete()}
+						class="text-surface-400 hover:text-red-400 rounded-sm px-1.5 py-1 text-xs"
+						onclick={() => ondelete(instance)}
+					>
+						{m.live_instance_delete()}
 					</button>
 				{/if}
 			</div>

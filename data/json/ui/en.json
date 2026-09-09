@@ -669,6 +669,7 @@
   "live_healed_unconfirmed": "{count} unconfirmed",
   "live_instance_add": "Add instance",
   "live_instance_auto": "Detected",
+  "live_instance_delete": "Delete instance",
   "live_instance_edit": "Edit instance",
   "live_instance_host": "Address",
   "live_instance_name": "Name",
