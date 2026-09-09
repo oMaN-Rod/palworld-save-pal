@@ -3,6 +3,7 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import type { GameInstanceFields, GameTestInstanceJson } from '$states/gameState.svelte';
+	import { Button, Input } from '$components/ui';
 
 	let {
 		initial,
@@ -58,32 +59,11 @@
 	}
 </script>
 
-<div class="flex flex-col gap-3">
-	<label class="flex flex-col gap-1 text-xs">
-		<span class="text-surface-300">{m.live_instance_name()}</span>
-		<input class="bg-surface-800 rounded-sm px-2 py-1" bind:value={name} />
-	</label>
-	<label class="flex flex-col gap-1 text-xs">
-		<span class="text-surface-300">{m.live_instance_host()}</span>
-		<input class="bg-surface-800 rounded-sm px-2 py-1" bind:value={host} />
-	</label>
-	<label class="flex flex-col gap-1 text-xs">
-		<span class="text-surface-300">{m.live_instance_port()}</span>
-		<input
-			type="number"
-			min="1"
-			max="65535"
-			class="bg-surface-800 rounded-sm px-2 py-1"
-			bind:value={port}
-		/>
-	</label>
-	<label class="flex flex-col gap-1 text-xs">
-		<span class="text-surface-300">{m.live_instance_token()}</span>
-		<input type="password" class="bg-surface-800 rounded-sm px-2 py-1" bind:value={token} />
-		{#if editing}
-			<span class="text-surface-500">{m.live_instance_token_hint()}</span>
-		{/if}
-	</label>
+<div class="flex flex-col gap-3 bg-surface-900 p-8 rounded-md">
+	<Input bind:value={name} label={m.live_instance_name()} />
+	<Input bind:value={host} label={m.live_instance_host()} />
+	<Input bind:value={port} label={m.live_instance_port()} type="number" min={1} max={65535} />
+	<Input bind:value={token} label={m.live_instance_token()} type="password" {editing} hint={editing ? m.live_instance_token_hint() : undefined} />
 
 	{#if isRemote}
 		<p class="text-xs text-yellow-400">{m.live_instance_remote_warning()}</p>
@@ -96,31 +76,8 @@
 	{/if}
 
 	<div class="flex justify-end gap-2">
-		<button
-			type="button"
-			data-action="test"
-			disabled={!valid || testing}
-			class="rounded-sm px-2 py-1 text-xs disabled:opacity-50"
-			onclick={test}
-		>
-			{m.live_instance_test()}
-		</button>
-		<button
-			type="button"
-			data-action="cancel"
-			class="rounded-sm px-2 py-1 text-xs"
-			onclick={oncancel}
-		>
-			{m.cancel()}
-		</button>
-		<button
-			type="button"
-			data-action="save"
-			disabled={!valid || saving}
-			class="bg-primary-600 rounded-sm px-2 py-1 text-xs disabled:opacity-50"
-			onclick={save}
-		>
-			{c.save}
-		</button>
+		<Button variant="ghost" disabled={!valid || testing} onClick={test}>{m.live_instance_test()}</Button>
+		<Button variant="ghost" onClick={oncancel}>{m.cancel()}</Button>
+		<Button variant="primary" disabled={!valid || saving} onClick={save}>{c.save}</Button>
 	</div>
 </div>
