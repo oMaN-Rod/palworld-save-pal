@@ -38,7 +38,7 @@
 	const isRemote = $derived(fields.host !== '127.0.0.1' && fields.host !== 'localhost');
 
 	async function test() {
-		if (testing) return;
+		if (!valid || testing) return;
 		testing = true;
 		try {
 			testResult = await ontest(fields);
@@ -99,7 +99,7 @@
 		<button
 			type="button"
 			data-action="test"
-			disabled={testing}
+			disabled={!valid || testing}
 			class="rounded-sm px-2 py-1 text-xs disabled:opacity-50"
 			onclick={test}
 		>
