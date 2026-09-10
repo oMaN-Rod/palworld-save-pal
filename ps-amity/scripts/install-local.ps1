@@ -59,6 +59,17 @@ $dll = ($buildOut | Select-String "^MOD_DLL=(.+)$").Matches[0].Groups[1].Value
 if (-not $dll) { throw "build.ps1 did not report MOD_DLL" }
 
 $modDir = Join-Path $modsRoot "PSAmity"
+# A pre-rename install would load alongside this one and contend for the port.
+$legacyModDir = Join-Path $modsRoot "PSPAmity"
+if (Test-Path $legacyModDir) {
+    $legacyIni = Join-Path $legacyModDir "PSPAmity.ini"
+    if ((Test-Path $legacyIni) -and -not (Test-Path (Join-Path $modDir "PSAmity.ini"))) {
+        New-Item -ItemType Directory -Force $modDir | Out-Null
+        Copy-Item $legacyIni (Join-Path $modDir "PSAmity.ini")
+    }
+    Remove-Item -Recurse -Force $legacyModDir
+    Write-Host "removed pre-rename install at $legacyModDir"
+}
 New-Item -ItemType Directory -Force (Join-Path $modDir "dlls") | Out-Null
 Copy-Item $dll (Join-Path $modDir "dlls\main.dll") -Force
 Set-Content -Path (Join-Path $modDir "enabled.txt") -Value "" -NoNewline -Encoding ascii
