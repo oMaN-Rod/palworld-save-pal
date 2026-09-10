@@ -256,21 +256,19 @@ pub async fn stop_server_container(api: &dyn DockerApi, container_name: &str) ->
 /// `DockerApi::remove_volume` folds "volume not found" into `Ok(())`, so any
 /// `Err` here is a genuine removal failure and must report `false` even though
 /// the container itself was already removed.
+///
+/// The volume name comes from the stored record rather than the container
+/// name: servers created before the rename own `psp-`-prefixed volumes.
 pub async fn remove_server_container(
     api: &dyn DockerApi,
     container_name: &str,
-    remove_volumes: bool,
+    data_volume: Option<&str>,
 ) -> bool {
     match api.remove_container_forced(container_name).await {
-        Ok(()) => {
-            if remove_volumes {
-                api.remove_volume(&format!("ps-{container_name}-data"))
-                    .await
-                    .is_ok()
-            } else {
-                true
-            }
-        }
+        Ok(()) => match data_volume {
+            Some(volume) => api.remove_volume(volume).await.is_ok(),
+            None => true,
+        },
         Err(_) => false,
     }
 }
@@ -883,10 +881,10 @@ mod tests {
             "alpha".to_string(),
             serde_json::json!({"State": {"Status": "exited", "Running": false}}),
         );
-        assert!(remove_server_container(&api, "alpha", true).await);
+        assert!(remove_server_container(&api, "alpha", Some("psp-alpha-data")).await);
         let calls = api.calls.lock().unwrap().clone();
         assert!(calls.contains(&"remove_container:alpha".to_string()));
-        assert!(calls.contains(&"remove_volume:ps-alpha-data".to_string()));
+        assert!(calls.contains(&"remove_volume:psp-alpha-data".to_string()));
     }
 
     #[tokio::test]
@@ -900,7 +898,7 @@ mod tests {
             .lock()
             .unwrap()
             .insert("ps-alpha-data".to_string());
-        assert!(!remove_server_container(&api, "alpha", true).await);
+        assert!(!remove_server_container(&api, "alpha", Some("ps-alpha-data")).await);
         let calls = api.calls.lock().unwrap().clone();
         assert!(calls.contains(&"remove_container:alpha".to_string()));
         assert!(calls.contains(&"remove_volume:ps-alpha-data".to_string()));
@@ -913,7 +911,7 @@ mod tests {
             .lock()
             .unwrap()
             .insert("ps-alpha-data".to_string());
-        assert!(remove_server_container(&api, "alpha", false).await);
+        assert!(remove_server_container(&api, "alpha", None).await);
         let calls = api.calls.lock().unwrap().clone();
         assert!(!calls.iter().any(|call| call.starts_with("remove_volume")));
     }

@@ -798,7 +798,7 @@ async fn update_server_impl(
     } else if needs_apply {
         let docker_api = services.docker.as_ref();
         docker::stop_server_container(docker_api, &old_record.container_name).await;
-        docker::remove_server_container(docker_api, &old_record.container_name, false).await;
+        docker::remove_server_container(docker_api, &old_record.container_name, None).await;
         docker::create_server_container(docker_api, &record)
             .await
             .map_err(|error| error.to_string())?;
@@ -934,7 +934,12 @@ pub async fn handle_delete_server(
             docker::stop_server_container(docker_api, &record.container_name).await;
             // Removal result is deliberately ignored: a Docker-side failure must
             // not block deleting the DB row or change the response.
-            docker::remove_server_container(docker_api, &record.container_name, true).await;
+            docker::remove_server_container(
+                docker_api,
+                &record.container_name,
+                Some(&record.data_volume_name),
+            )
+            .await;
         }
         ps_db::servers::delete_server(db, record.id)
             .await
