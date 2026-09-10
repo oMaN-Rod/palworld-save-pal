@@ -3,16 +3,6 @@ import { getAppState, getNavigationState } from '$states';
 import { MessageType, type Pal } from '$types';
 import type { WSMessageHandler } from '$ws/types';
 
-export const getGpsPalsHandler: WSMessageHandler = {
-	type: MessageType.GET_GPS_PALS,
-	async handle(data: Record<string, Pal>, { goto }) {
-		const appState = getAppState();
-		appState.gps = data;
-		appState.gpsLoaded = true;
-		appState.loadingGps = false;
-	}
-};
-
 export const getGpsResponseHandler: WSMessageHandler = {
 	type: MessageType.GET_GPS_RESPONSE,
 	async handle(
@@ -57,4 +47,4 @@ export const addGpsPalHandler: WSMessageHandler = {
 	}
 };
 
-export const gpsHandlers = [getGpsPalsHandler, getGpsResponseHandler, addGpsPalHandler];
+export const gpsHandlers = [getGpsResponseHandler, addGpsPalHandler];

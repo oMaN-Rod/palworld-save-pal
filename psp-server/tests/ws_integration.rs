@@ -180,15 +180,15 @@ async fn unknown_type_is_silent() {
 async fn registered_but_unimplemented_type_is_silent() {
     // Covers a different silence path than `unknown_type_is_silent`: a wire
     // string that HAS a MessageType variant but no handler arm, hitting
-    // `route`'s catch-all. `get_guild_raw_data` is registered but never routed
-    // by design, which keeps this test durable.
+    // `route`'s catch-all. `progress_message` is emit-only, so it is never
+    // routed inbound.
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_test_server(&temp_dir).await;
     let mut socket = connect(&handle).await;
 
     socket
         .send(Message::Text(
-            r#"{"type":"get_guild_raw_data","data":null}"#.into(),
+            r#"{"type":"progress_message","data":null}"#.into(),
         ))
         .await
         .unwrap();

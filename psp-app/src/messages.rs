@@ -40,9 +40,7 @@ define_message_types! {
     DeletePals => "delete_pals",
     DeleteDpsPals => "delete_dps_pals",
     DeleteGpsPals => "delete_gps_pals",
-    GetPalDetails => "get_pal_details",
     GetPals => "get_pals",
-    GetGpsPals => "get_gps_pals",
     HealAllPals => "heal_all_pals",
     HealPals => "heal_pals",
     MovePal => "move_pal",
@@ -129,7 +127,6 @@ define_message_types! {
     SyncAppState => "sync_app_state",
     Warning => "warning",
     OpenInBrowser => "open_in_browser",
-    GetGuildRawData => "get_guild_raw_data",
     GetRawData => "get_raw_data",
     OpenFolder => "open_folder",
     ConvertSavFile => "convert_sav_file",
@@ -154,7 +151,6 @@ define_message_types! {
     ServerStatusUpdate => "server_status_update",
     ServerApiCall => "server_api_call",
     ServerApiResponse => "server_api_response",
-    ServerPlayerCount => "server_player_count",
     ListServerMods => "list_server_mods",
     ToggleServerMod => "toggle_server_mod",
     InstallServerMod => "install_server_mod",
@@ -266,9 +262,7 @@ mod tests {
         "delete_pals",
         "delete_dps_pals",
         "delete_gps_pals",
-        "get_pal_details",
         "get_pals",
-        "get_gps_pals",
         "heal_all_pals",
         "heal_pals",
         "move_pal",
@@ -354,7 +348,6 @@ mod tests {
         "sync_app_state",
         "warning",
         "open_in_browser",
-        "get_guild_raw_data",
         "get_raw_data",
         "open_folder",
         "convert_sav_file",
@@ -379,7 +372,6 @@ mod tests {
         "server_status_update",
         "server_api_call",
         "server_api_response",
-        "server_player_count",
         "list_server_mods",
         "toggle_server_mod",
         "install_server_mod",
@@ -496,7 +488,7 @@ mod tests {
 
     #[test]
     fn message_type_count_is_expected() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 131);
+        assert_eq!(EXPECTED_WIRE_NAMES.len(), 127);
         assert_eq!(
             MessageType::ALL.len(),
             EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()

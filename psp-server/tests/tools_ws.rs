@@ -91,12 +91,12 @@ async fn get_raw_data_without_resolvable_target_returns_empty_object() {
     assert_eq!(response["type"], "get_raw_data");
     assert_eq!(response["data"], serde_json::json!({}));
 
-    // `get_guild_raw_data` has no handler and must stay SILENT. Prove it by
-    // ordering: send the dead type, then a live probe -- the very next frame
-    // answering the probe means the dead type emitted nothing.
+    // `progress_message` is emit-only, so inbound it has no handler and must
+    // stay SILENT. Prove it by ordering: send it, then a live probe -- the very
+    // next frame answering the probe means it emitted nothing.
     common::send_json(
         &mut ws,
-        serde_json::json!({"type": "get_guild_raw_data", "data": null}),
+        serde_json::json!({"type": "progress_message", "data": null}),
     )
     .await;
     common::send_json(

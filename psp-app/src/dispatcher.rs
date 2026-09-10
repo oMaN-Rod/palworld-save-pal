@@ -308,7 +308,6 @@ async fn route(
         MessageType::ExportUpsPal => {
             handlers::ups::handle_export_ups_pal(serde_json::from_value(data)?, ctx).await
         }
-        // GetGpsPals has no arm on purpose: it is a permanently dead wire type.
         MessageType::RequestGps => handlers::gps::handle_request_gps(ctx).await,
         MessageType::AddGpsPal => {
             handlers::gps::handle_add_gps_pal(serde_json::from_value(data)?, ctx).await
@@ -336,7 +335,6 @@ async fn route(
         MessageType::SwapPlayerUids => {
             handlers::tools::handle_swap_player_uids(serde_json::from_value(data)?, ctx).await
         }
-        // GetGuildRawData has no arm on purpose: a permanently dead wire type.
         MessageType::GetRawData => {
             handlers::tools::handle_get_raw_data(serde_json::from_value(data)?, ctx).await
         }
@@ -362,7 +360,6 @@ async fn route(
         MessageType::UnlockMap => {
             handlers::save_file::handle_unlock_map(serde_json::from_value(data)?, ctx).await
         }
-        // ServerPlayerCount has no arm on purpose: a permanently dead wire type.
         // session_not_found is emit-only, so it has no inbound arm.
         MessageType::ReattachSession => {
             handlers::session::handle_reattach_session(serde_json::from_value(data)?, ctx).await
@@ -577,7 +574,7 @@ mod tests {
     async fn valid_but_unimplemented_type_sends_nothing() {
         let mut test = TestContext::new(|_| {}).await;
         dispatch(
-            envelope("get_guild_raw_data", serde_json::Value::Null),
+            envelope("progress_message", serde_json::Value::Null),
             HandlerCtx {
                 session: &mut test.session,
                 app: &test.app,
