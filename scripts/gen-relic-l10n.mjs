@@ -37,9 +37,9 @@ const RELIC_KEYS = [
 // [source dir in the game dump, destination dir under data/json/l10n].
 //
 // These are NOT always the same string. The game dumps Indonesian as `id`, but this
-// repo's Indonesian l10n lives in `id-id` (there is also a stale `id/` directory that
-// nothing reads). Writing to `id/` would silently leave Indonesian users with raw keys,
-// so the destination is stated explicitly rather than inferred from the source.
+// repo's Indonesian l10n lives in `id-id`. Writing to `id/` would silently leave
+// Indonesian users with raw keys, so the destination is stated explicitly rather than
+// inferred from the source.
 const LANGS = [
 	['de', 'de'],
 	['en', 'en'],
