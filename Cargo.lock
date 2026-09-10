@@ -4241,17 +4241,17 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-app"
+name = "ps-app"
 version = "1.4.2"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
  "chrono",
  "futures-util",
- "psp-app",
- "psp-core",
- "psp-db",
- "psp-plugin",
+ "ps-app",
+ "ps-core",
+ "ps-db",
+ "ps-plugin",
  "serde",
  "serde_json",
  "tempfile",
@@ -4263,13 +4263,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-core"
+name = "ps-core"
 version = "1.4.2"
 dependencies = [
  "chrono",
  "cityhasher",
  "indexmap 2.14.0",
- "psp-core",
+ "ps-core",
  "serde",
  "serde_json",
  "tempfile",
@@ -4280,7 +4280,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-db"
+name = "ps-db"
 version = "1.4.2"
 dependencies = [
  "async-trait",
@@ -4296,11 +4296,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-desktop"
+name = "ps-desktop"
 version = "1.4.2"
 dependencies = [
  "anyhow",
- "psp-server",
+ "ps-server",
  "tauri",
  "tauri-build",
  "tauri-plugin-single-instance",
@@ -4310,7 +4310,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-lua-sys"
+name = "ps-lua-sys"
 version = "1.4.2"
 dependencies = [
  "cc",
@@ -4318,13 +4318,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-plugin"
+name = "ps-plugin"
 version = "1.4.2"
 dependencies = [
  "chrono",
  "pretty_assertions",
- "psp-core",
- "psp-lua-sys",
+ "ps-core",
+ "ps-lua-sys",
  "serde",
  "serde_json",
  "thiserror 2.0.18",
@@ -4333,7 +4333,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-server"
+name = "ps-server"
 version = "1.4.2"
 dependencies = [
  "aes-gcm 0.11.1",
@@ -4353,10 +4353,10 @@ dependencies = [
  "opener",
  "percent-encoding",
  "pretty_assertions",
- "psp-app",
- "psp-core",
- "psp-db",
- "psp-plugin",
+ "ps-app",
+ "ps-core",
+ "ps-db",
+ "ps-plugin",
  "rand 0.9.4",
  "reqwest 0.12.28",
  "rfd",
@@ -4382,16 +4382,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "psp-web"
+name = "ps-web"
 version = "1.4.2"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
  "console_error_panic_hook",
  "js-sys",
- "psp-app",
- "psp-core",
- "psp-db",
+ "ps-app",
+ "ps-core",
+ "ps-db",
  "serde",
  "serde-wasm-bindgen",
  "serde_json",

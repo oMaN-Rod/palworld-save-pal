@@ -1,6 +1,6 @@
 # Plugins
 
-Plugins add repeatable save-management commands to Palworld Save Pal. You can
+Plugins add repeatable save-management commands to PalStudio. You can
 install one written by someone else or create one in the built-in editor with
 Lua.
 

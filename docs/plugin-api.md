@@ -4,7 +4,7 @@
 > complete runtime reference for authors who need exact schemas, APIs, and
 > sandbox behavior.
 
-This is the plugin reference for Palworld Save Pal. It covers the manifest,
+This is the plugin reference for PalStudio. It covers the manifest,
 command model, UI contract, capability model, host API, and sandbox rules.
 Use it when you need the exact behavior of the runtime.
 
@@ -352,7 +352,7 @@ than refusing outright.
 ### Worked example: `pst.repair`'s view
 
 From the bundled `pst.repair` plugin
-(`psp-app/src/bundled/pst.repair/manifest.json`), two of whose ten commands
+(`ps-app/src/bundled/pst.repair/manifest.json`), two of whose ten commands
 are described below:
 
 ```json
@@ -496,7 +496,7 @@ called:
 
 - `progress.report(message, fraction)` - `fraction` is optional; when given it
   must be a finite number in `[0.0, 1.0]` or the call errors. Reports go to the
-  same progress sink `psp-core`'s own domain calls use, so a consumer can see
+  same progress sink `ps-core`'s own domain calls use, so a consumer can see
   more updates than the script explicitly sent - treat it as "more updates
   than expected," not a 1:1 count with `report` calls.
 
@@ -768,7 +768,7 @@ in the world, which `save.read` has always covered. `pal.owner_uid` and
 existed, for the same reason.
 
 Reading one of the eighteen without `players` raises and names the capability.
-The summary-backed fields are unaffected and need only `save.read`. `psp.lua`
+The summary-backed fields are unaffected and need only `save.read`. `ps.lua`
 says which is which, in each field's own entry.
 
 *Writing* one of those fields needs only `save.write` - rewriting a player's
@@ -923,7 +923,7 @@ saying so. A base's `x`, `y` and `z` are read-only for a blunter reason:
 nothing in this app writes a base's position at all, so there is no write path
 to offer - and moving a base is not merely a missing setter, since its placed
 structures and working pals carry their own coordinates that nothing relates
-back to the base's. The authority on which is which is `psp.lua`: a
+back to the base's. The authority on which is which is `ps.lua`: a
 type-annotation file generated from the same host API definition these docs
 describe, in which every read-only field says so in its own entry. It says so in
 prose only: LuaLS has no read-only field modifier, so an assignment to one
@@ -1129,7 +1129,7 @@ reentering.
 ## The API definition
 
 Every global table, its functions, and every handle and its fields also
-exist as data, not just as prose. `psp_plugin::host::api_def::api_definition()`
+exist as data, not just as prose. `ps_plugin::host::api_def::api_definition()`
 returns an `ApiDefinition` built from the same Rust source that registers
 these functions with Lua - not maintained separately from it - describing
 every global table, every function's parameters, return type, and doc string,
@@ -1137,7 +1137,7 @@ every handle type and its fields, and the capability each one requires. It
 serialises to JSON, adjacently tagged so a consumer can discriminate on a
 single `kind` field per type variant (a type's own key on the wire is named
 `type`). The same definition can also be rendered as a `---@meta` file
-(`psp_plugin::host::api_meta::lua_meta`) in the annotation format
+(`ps_plugin::host::api_meta::lua_meta`) in the annotation format
 `lua-language-server` reads, for anyone who wants type information for the
 host API in their own Lua tooling.
 
@@ -1328,7 +1328,7 @@ is refused with a "circular require" error rather than recursing forever.
 
 ## Worked example: `delete_empty_guilds`
 
-From the bundled `pst.cleanup` plugin (`psp-app/src/bundled/pst.cleanup/main.lua`):
+From the bundled `pst.cleanup` plugin (`ps-app/src/bundled/pst.cleanup/main.lua`):
 
 ```lua
 function delete_empty_guilds()
@@ -1366,7 +1366,7 @@ end
 
 ## The `pst.cleanup` plugin
 
-Bundled at `psp-app/src/bundled/pst.cleanup/` (`psp-app/src/bundled/pst.cleanup/main.lua`),
+Bundled at `ps-app/src/bundled/pst.cleanup/` (`ps-app/src/bundled/pst.cleanup/main.lua`),
 `pst.cleanup` ("Save Cleanup") ports PalworldSaveTools' Delete family: thirteen
 commands that remove dead or invalid save entries, as against resetting
 regenerable state (`pst.reset`) or clamping a value back into range
@@ -1485,7 +1485,7 @@ than an error by every command that sweeps it.
 
 ## The `pst.reset` plugin
 
-Bundled alongside `pst.cleanup` (`psp-app/src/bundled/pst.reset/`), `pst.reset`
+Bundled alongside `pst.cleanup` (`ps-app/src/bundled/pst.reset/`), `pst.reset`
 ("World Reset") ports PalworldSaveTools' Reset family: seven commands that
 each clear save state the game regenerates on next load. Every command but
 one is a single `raw.delete` against one key under the level's
@@ -1534,7 +1534,7 @@ be acceptable once either exists.
 
 ## The `pst.tools` plugin
 
-Bundled at `psp-app/src/bundled/pst.tools/`, `pst.tools` ("Save Tools") ports
+Bundled at `ps-app/src/bundled/pst.tools/`, `pst.tools` ("Save Tools") ports
 PalworldSaveTools' Misc family of world-clock, diagnostic, and
 inventory-resize functions. The manifest declares `save.read`, `save.write`,
 `save.raw`, and `players`: `save.write` for `container.set_slot_count()` and
@@ -1611,7 +1611,7 @@ it through `raw` will hit the same wall.
 
 ## The `pst.repair` plugin
 
-Bundled at `psp-app/src/bundled/pst.repair/`, `pst.repair` ("Save Repair")
+Bundled at `ps-app/src/bundled/pst.repair/`, `pst.repair` ("Save Repair")
 ports PalworldSaveTools' Fix family onto the plugin API: ten commands that
 clamp an out-of-range value back into its legal range or restore a piece of
 state that has gone missing or drifted out of sync, as against removing dead
@@ -1751,7 +1751,7 @@ every pal in the run, not scoped to one. The reliable shape is two full
 passes: a read-only pass over every pal first, then a write-only pass over
 the results, working from values the first pass already collected rather
 than reading anything fresh. `max_all_pals`'s bundled source
-(`psp-app/src/bundled/pst.tools/main.lua`) is the worked example - it
+(`ps-app/src/bundled/pst.tools/main.lua`) is the worked example - it
 collects `pal.work_suitability` for every pal in a read-only first pass,
 *then* writes every field in a second pass over the results, so no read of
 an unwritten field ever happens after the first write.
@@ -1828,8 +1828,8 @@ before invoking a command, so a syntax error the editor flags is a syntax
 error a real run would also hit. This holds on every deployment, because
 desktop, the standalone server, and the web build all dispatch
 `CheckPluginSyntax` (and every other plugin message) through the same
-`psp-app` handler table - desktop embeds `psp-server` directly, and `psp-web`
-imports the identical `dispatch` function `psp-server` uses. The
+`ps-app` handler table - desktop embeds `ps-server` directly, and `ps-web`
+imports the identical `dispatch` function `ps-server` uses. The
 `manifest.json` tab is checked by parsing it as a manifest under the plugin's
 real origin (bundled manifests are judged more permissively than user ones),
 using the same `Manifest::parse` the install and save paths use.
@@ -1874,7 +1874,7 @@ knowing that `p` holds a player handle means inferring the type of an
 expression, and the editor does no type inference. Handle types - player,
 pal, guild, container - are exactly where that shows: they are fully
 described in the `ApiDefinition` and rendered in the `---@meta` output
-(`psp.lua`, written into the workspace alongside your sources when the full
+(`ps.lua`, written into the workspace alongside your sources when the full
 tier starts), so `lua-language-server` reading that file does offer their
 fields, but the editor's own completion lists only ever start from a global
 name.
@@ -1890,7 +1890,7 @@ exists. This is a known gap, not a broken install: code that calls
 `save.players():delete_where(...)` is correct Lua and runs exactly as
 documented above; the editor simply has nothing to suggest for it.
 
-For the same reason, the generated LuaLS stub (`psp.lua`) offers no signature
+For the same reason, the generated LuaLS stub (`ps.lua`) offers no signature
 for `delete_where` either: `save.pals()` and its siblings are declared to
 LuaLS as a bare `fun(): pal|nil`, so that the `for p in save.pals() do` idiom
 infers `p`'s type correctly - a function type carries no methods for LuaLS to

@@ -13,26 +13,26 @@ jobs:
             bundles: msi,nsis
             artifact_name: desktop-windows
             artifact_paths: |
-              palworld-save-pal/target/release/bundle/msi/*.msi
-              palworld-save-pal/target/release/bundle/nsis/*.exe
+              palstudio/target/release/bundle/msi/*.msi
+              palstudio/target/release/bundle/nsis/*.exe
           - os: macos-latest
             bundles: dmg
             artifact_name: desktop-macos
             artifact_paths: |
-              palworld-save-pal/target/release/bundle/dmg/*.dmg
+              palstudio/target/release/bundle/dmg/*.dmg
           - os: ubuntu-22.04
             bundles: deb,rpm,appimage
             artifact_name: desktop-linux
             artifact_paths: |
-              palworld-save-pal/target/release/bundle/deb/*.deb
-              palworld-save-pal/target/release/bundle/rpm/*.rpm
-              palworld-save-pal/target/release/bundle/appimage/*.AppImage
+              palstudio/target/release/bundle/deb/*.deb
+              palstudio/target/release/bundle/rpm/*.rpm
+              palstudio/target/release/bundle/appimage/*.AppImage
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout palworld-save-pal
+      - name: Checkout palstudio
         uses: actions/checkout@v3
         with:
-          path: palworld-save-pal
+          path: palstudio
 
       - name: Install Linux system dependencies
         if: matrix.os == 'ubuntu-22.04'
@@ -46,7 +46,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/psp-ui
+        working-directory: palstudio/ps-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -58,19 +58,19 @@ jobs:
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: palworld-save-pal
+          workspaces: palstudio
           prefix-key: "v0-rust-${{ matrix.os }}"
 
-      - name: psp-app stays transport-free
-        working-directory: palworld-save-pal
+      - name: ps-app stays transport-free
+        working-directory: palstudio
         shell: bash
         run: |
-          if ! tree_output=$(cargo tree -p psp-app -e normal); then
-            echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
+          if ! tree_output=$(cargo tree -p ps-app -e normal); then
+            echo "::error::cargo tree failed to run for ps-app; dependency guard could not verify anything"
             exit 1
           fi
           if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap"; then
-            echo "::error::forbidden native dependency in psp-app tree"
+            echo "::error::forbidden native dependency in ps-app tree"
             exit 1
           fi
 
@@ -80,12 +80,12 @@ jobs:
           tool: tauri-cli@2
 
       - name: Build Tauri bundles
-        working-directory: palworld-save-pal/psp-desktop
+        working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles ${{ matrix.bundles }}
 
       - name: Strip host-graphics libs from AppImage
         if: matrix.os == 'ubuntu-22.04'
-        working-directory: palworld-save-pal
+        working-directory: palstudio
         run: |
           appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
           bash scripts/appimage-strip-graphics.sh "$appimage"

@@ -18,15 +18,15 @@ case "$(uname -s)" in
   *) echo "Unsupported OS $(uname -s); use scripts/build-desktop.ps1 on Windows." >&2; exit 1 ;;
 esac
 
-echo "Building Palworld Save Pal desktop v$version ($os)"
+echo "Building PalStudio desktop v$version ($os)"
 
 if [ "${1:-}" != "--skip-ui" ]; then
   bash "$repo_root/scripts/build-ui-desktop.sh"
 fi
 
-( cd psp-desktop && cargo tauri build --bundles "$bundle" )
+( cd ps-desktop && cargo tauri build --bundles "$bundle" )
 
 mkdir -p dist
 artifact="$(ls "target/release/bundle/$bundle/"*."$ext" | head -n 1)"
-cp "$artifact" "dist/PalworldSavePal-$version-$os.$ext"
-echo "Done: dist/PalworldSavePal-$version-$os.$ext"
+cp "$artifact" "dist/PalStudio-$version-$os.$ext"
+echo "Done: dist/PalStudio-$version-$os.$ext"

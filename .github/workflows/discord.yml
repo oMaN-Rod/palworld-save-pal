@@ -13,9 +13,9 @@ jobs:
           with:
             webhook_url: ${{ secrets.WEBHOOK_URL }}
             color: "2105893"
-            username: "PSPBot"
-            avatar_url: "https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/refs/heads/main/psp-ui/static/psp.png"
+            username: "PalStudioBot"
+            avatar_url: "https://raw.githubusercontent.com/oMaN-Rod/palstudio/refs/heads/main/ps-ui/static/ps.png"
             content: "<@&1354671583863640165>\nGrab the latest release:\nNexus Mods: https://www.nexusmods.com/palworld/mods/1827\nGithub: ${{ github.event.release.html_url }}"
             footer_title: "Changelog"
-            footer_icon_url: "https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/refs/heads/main/psp-ui/static/psp.png"
+            footer_icon_url: "https://raw.githubusercontent.com/oMaN-Rod/palstudio/refs/heads/main/ps-ui/static/ps.png"
             footer_timestamp: true  

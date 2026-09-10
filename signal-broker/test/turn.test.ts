@@ -3,10 +3,10 @@ import { mintTurnCredential, handleTurnRequest } from '../src/turn';
 
 describe('mintTurnCredential', () => {
 	it('matches the reference HMAC-SHA1 vector', async () => {
-		// printf '%s' "1700000000:psp" | openssl dgst -sha1 -hmac "test-secret" -binary | base64
+		// printf '%s' "1700000000:ps" | openssl dgst -sha1 -hmac "test-secret" -binary | base64
 		const { username, credential } = await mintTurnCredential('test-secret', 1_699_996_400_000, 3600);
-		expect(username).toBe('1700000000:psp');
-		expect(credential).toBe('Dn8vNPXjsckn9OsWXsGqjUT+H1I=');
+		expect(username).toBe('1700000000:ps');
+		expect(credential).toBe('gcTJTYkt1EYSGfIec80pYtcc2II=');
 	});
 });
 
@@ -25,7 +25,7 @@ describe('handleTurnRequest', () => {
 		expect(res.headers.get('cache-control')).toBe('no-store');
 		const body = (await res.json()) as any;
 		expect(body.urls).toHaveLength(2);
-		expect(body.username.endsWith(':psp')).toBe(true);
+		expect(body.username.endsWith(':ps')).toBe(true);
 		expect(body.ttl_seconds).toBe(3600);
 	});
 

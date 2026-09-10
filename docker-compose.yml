@@ -10,6 +10,6 @@ services:
       - "5174:5174"
     volumes:
       - ./data:/app/data
-      # Persists psp-rs.db (settings, presets, UPS). To import a legacy
+      # Persists ps-rs.db (settings, presets, UPS). To import a legacy
       # Python psp.db, copy it to ./db/psp.db before first start.
       - ./db:/app/db

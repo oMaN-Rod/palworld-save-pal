@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Provision coturn for PSP Signal on AlmaLinux/EL9 (EPEL packaging). Idempotent; safe to re-run.
+# Provision coturn for PalStudio Signal on AlmaLinux/EL9 (EPEL packaging). Idempotent; safe to re-run.
 # Run from the directory holding turnserver.conf.tmpl (e.g. `cd ~/turn && bash provision.sh`).
 set -euo pipefail
 
-DOMAIN=turn.palworldsavepal.app
+DOMAIN=turn.palstudio.app
 SVCUSER=coturn
 SVCGROUP=coturn
 CONF=/etc/coturn/turnserver.conf

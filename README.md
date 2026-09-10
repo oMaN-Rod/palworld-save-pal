@@ -1,12 +1,12 @@
-# Palworld Save Pal
+# PalStudio
 
 ⚠️ **Backup your save files before using this tool!!** ⚠️
 
-Palworld Save Pal is a tool for managing and analyzing save files.
+PalStudio is a tool for managing and analyzing save files.
 
 ## 📋 Table of Contents
 
-- [Palworld Save Pal](#palworld-save-pal)
+- [PalStudio](#palstudio)
   - [📋 Table of Contents](#-table-of-contents)
   - [🚀 Installation](#-installation)
   - [🎮 Usage](#-usage)
@@ -31,21 +31,21 @@ Palworld Save Pal is a tool for managing and analyzing save files.
 
 ## 🚀 Installation
 
-Grab the latest release from the [releases](https://github.com/oMaN-Rod/palworld-save-pal/releases) page and extract it to a folder of your choice.
+Grab the latest release from the [releases](https://github.com/oMaN-Rod/palstudio/releases) page and extract it to a folder of your choice.
 
 ## 🎮 Usage
 
-Details for using Palworld Save Pal can be found in the [User Guide](https://github.com/oMaN-Rod/palworld-save-pal/wiki/%F0%9F%8E%AE-Usage)
+Details for using PalStudio can be found in the [User Guide](https://github.com/oMaN-Rod/palstudio/wiki/%F0%9F%8E%AE-Usage)
 
 ## 🦀 Rust backend migration
 
-The backend is now a single Rust binary (`psp-server`) — the Python/FastAPI
+The backend is now a single Rust binary (`ps-server`) — the Python/FastAPI
 backend is retired. The UI, save-editing features, and WebSocket API are
 unchanged.
 
 **Your existing database (`psp.db`) is imported automatically.** On first
 start, if a legacy `psp.db` sits next to the new database file
-(`psp-rs.db`) and no new database exists yet, your settings, presets,
+(`ps-rs.db`) and no new database exists yet, your settings, presets,
 Universal Pal Storage, and server configs are imported; the legacy file is
 backed up, never modified, and the import runs only once.
 
@@ -61,12 +61,12 @@ supported within the same tooling generation.
 
 ## 🐳 Docker
 
-To run Palworld Save Pal using Docker:
+To run PalStudio using Docker:
 
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/oMaN-Rod/palworld-save-pal.git
+   git clone https://github.com/oMaN-Rod/palstudio.git
    ```
 
 2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
@@ -100,7 +100,7 @@ To run Palworld Save Pal using Docker:
             - "5174:5174"
           volumes:
             - ./data:/app/data
-            # Persists psp-rs.db (settings, presets, UPS). To import a legacy
+            # Persists ps-rs.db (settings, presets, UPS). To import a legacy
             # Python psp.db, copy it to ./db/psp.db before first start.
             - ./db:/app/db
       ```
@@ -113,7 +113,7 @@ To run Palworld Save Pal using Docker:
 
 ## 👨‍💻 Developer Guide
 
-Desktop (Windows/Linux/Mac) is the primary way Palworld Save Pal ships;
+Desktop (Windows/Linux/Mac) is the primary way PalStudio ships;
 Docker/web is also supported. The backend is a Rust workspace at the repo
 root — see [docs/rust-dev-guide.md](docs/rust-dev-guide.md) for the full
 guide.
@@ -127,7 +127,7 @@ behavior.
 `dev:web` starts the Vite dev server and the Rust backend together:
 
 ```bash
-cd psp-ui
+cd ps-ui
 bun install
 bun run dev:web
 ```
@@ -140,8 +140,8 @@ Run the app in dev mode with hot-reload — Tauri starts the Vite dev server for
 you (requires the Tauri CLI: `cargo install tauri-cli --version "^2" --locked`):
 
 ```bash
-cd psp-ui && bun install && cd ..
-cd psp-desktop
+cd ps-ui && bun install && cd ..
+cd ps-desktop
 cargo tauri dev
 ```
 
@@ -162,16 +162,16 @@ collects the shipped artifacts into `dist/`:
 
 ### Amity mod (live game bridge)
 
-[PSP Amity](psp-amity/README.md) is the UE4SS mod that lets the desktop app read and
+[PalStudio Amity](ps-amity/README.md) is the UE4SS mod that lets the desktop app read and
 edit a running world. On Windows, with the game closed:
 
 ```powershell
-.\psp-amity\scripts\setup-workspace.ps1   # once: clones the pinned UE4SS fork
+.\ps-amity\scripts\setup-workspace.ps1   # once: clones the pinned UE4SS fork
 .\dev.ps1 -Amity                           # build the mod and install it into Palworld
 ```
 
 `dev.ps1 -Amity -Check` reports what is missing; `-GameDir` overrides the Steam
-auto-detection. See [psp-amity/INSTALL.md](psp-amity/INSTALL.md) for the shipped zip.
+auto-detection. See [ps-amity/INSTALL.md](ps-amity/INSTALL.md) for the shipped zip.
 
 ## 🔥 Features
 
@@ -221,7 +221,7 @@ auto-detection. See [psp-amity/INSTALL.md](psp-amity/INSTALL.md) for the shipped
 - [x] Edit Guild Chest
 - [x] Edit Base Pals
 - [x] Edit Base Inventory
-- [x] Edit Base Name (Currently only applies in PSP, not exposed in game)
+- [x] Edit Base Name (Currently only applies in PalStudio, not exposed in game)
 - [x] Edit Lab Research
 - [x] Delete Guilds (Deletes all players, map objects, items, and pals)
 
@@ -267,11 +267,11 @@ same license and their source is made available.
 
 These are projects I've found that specifically target Palworld save files, each was helpful in some way during the development of this project:
 
-- [PalEdit](https://github.com/EternalWraith/PalEdit) - PSP was inspired by it.
+- [PalEdit](https://github.com/EternalWraith/PalEdit) - PalStudio was inspired by it.
 - [uesave-rs](https://github.com/oMaN-Rod/uesave-rs) - The Rust library the current backend uses to read and write Palworld save files.
-- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - Python library for parsing Palworld saves; PSP's original Python backend was built on it.
+- [palworld-save-tools](https://github.com/cheahjs/palworld-save-tools) - Python library for parsing Palworld saves; PalStudio's original Python backend was built on it.
 - [palworld-uesave-rs](https://github.com/DKingAlpha/palworld-uesave-rs) - An early reference while exploring save parsing.
-- [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for Palworld Save Pal, adopted some of this projects approach.
+- [Palworld Pal Editor](https://github.com/KrisCris/Palworld-Pal-Editor) - Also served as a reference for PalStudio, adopted some of this projects approach.
 - [PalWorldSaveTools](https://github.com/deafdudecomputers/PalWorldSaveTools) - Has a bunch of useful features for parsing, editing, and converting save files.
 
 ## ☕ Buy me a Coffee

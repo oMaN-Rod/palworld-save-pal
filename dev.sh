@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# dev.sh — one-shot launcher / preflight for Palworld Save Pal (PSP).
+# dev.sh — one-shot launcher / preflight for PalStudio.
 # macOS/Linux entry point (the PowerShell sibling is dev.ps1 for Windows).
 #
 # Does NOT auto-install anything (except the opt-in --install-wasm): on a
@@ -11,17 +11,17 @@ set -euo pipefail
 
 # Every port/path below is load-bearing in the real config.
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UI_DIR="$REPO_ROOT/psp-ui"
-PSP_DESKTOP_DIR="$REPO_ROOT/psp-desktop"
-PSP_WEB_DIR="$REPO_ROOT/psp-web"
+UI_DIR="$REPO_ROOT/ps-ui"
+PS_DESKTOP_DIR="$REPO_ROOT/ps-desktop"
+PS_WEB_DIR="$REPO_ROOT/ps-web"
 ENV_FILE="$UI_DIR/.env"
 NODE_MODULES="$UI_DIR/node_modules"
-WASM_OUT="$UI_DIR/src/lib/wasm/psp"
+WASM_OUT="$UI_DIR/src/lib/wasm/ps"
 
 VITE_PORT_DEFAULT=5173   # vite.config.ts server.port, strictPort:true
-SERVER_PORT_DEFAULT=5174 # psp-server default + Docker EXPOSE + WS_URL host
+SERVER_PORT_DEFAULT=5174 # ps-server default + Docker EXPOSE + WS_URL host
 
-if [[ -t 1 ]] && [[ "${PSP_DEV_NO_COLOR:-}" != "1" ]] && [[ "${PSP_DEV_NO_COLOR:-}" != "true" ]]; then
+if [[ -t 1 ]] && [[ "${PS_DEV_NO_COLOR:-}" != "1" ]] && [[ "${PS_DEV_NO_COLOR:-}" != "true" ]]; then
     RESET=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'
     RED=$'\033[31m'; GREEN=$'\033[32m'; YELLOW=$'\033[33m'; CYAN=$'\033[36m'
 else
@@ -75,10 +75,10 @@ probe_version() {
 # status ∈ ok|warn|crit. run_preflight collects them.
 
 check_repo() {
-    if [[ -f "$REPO_ROOT/psp-server/Cargo.toml" ]] && [[ -d "$UI_DIR" ]]; then
+    if [[ -f "$REPO_ROOT/ps-server/Cargo.toml" ]] && [[ -d "$UI_DIR" ]]; then
         return 0
     fi
-    printf 'PSP repo\tcrit\tpsp-server/Cargo.toml or psp-ui/ not found at %s\tRun dev.sh from the PSP repo root.\n' "$REPO_ROOT"
+    printf 'PalStudio repo\tcrit\tps-server/Cargo.toml or ps-ui/ not found at %s\tRun dev.sh from the PalStudio repo root.\n' "$REPO_ROOT"
 }
 
 check_bun() {
@@ -331,7 +331,7 @@ report_preflight() {
     return 0
 }
 
-# Mirrors psp-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
+# Mirrors ps-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 snapshot_env() {
     if [[ -f "$ENV_FILE" ]]; then
         PREVIOUS_ENV_EXISTS=1
@@ -355,13 +355,13 @@ write_web_env() {
     # $1 = ws_url (may be empty for the worker/browser-only build)
     mkdir -p "$UI_DIR"
     printf 'PUBLIC_WS_URL=%s\nPUBLIC_DESKTOP_MODE=false\n' "${1:-}" > "$ENV_FILE"
-    log_info "Wrote psp-ui/.env (web mode, WS_URL=${1:-<empty>})"
+    log_info "Wrote ps-ui/.env (web mode, WS_URL=${1:-<empty>})"
 }
 
 write_desktop_env() {
     mkdir -p "$UI_DIR"
     printf 'PUBLIC_WS_URL=127.0.0.1:5174/ws\nPUBLIC_DESKTOP_MODE=true\n' > "$ENV_FILE"
-    log_info "Wrote psp-ui/.env (desktop mode)"
+    log_info "Wrote ps-ui/.env (desktop mode)"
 }
 
 # Children run in the SCRIPT's own process group (NOT a new session via setsid).
@@ -411,11 +411,11 @@ spawn_bg_tagged() {
 cleanup_children() {
     # Kill the whole process group rooted at THIS script. Because children run
     # in the same process group (no setsid), a negative-PGID kill reaches every
-    # child AND grandchild (vite→esbuild, cargo→rustc, psp-server→…). This is
+    # child AND grandchild (vite→esbuild, cargo→rustc, ps-server→…). This is
     # more reliable than tracking individual child PIDs, which can be reaped
     # before we resolve their PGID. SIGTERM first (grace), then SIGKILL.
     set +e
-    local self_pgid="${PSP_DEV_PGID:-}"
+    local self_pgid="${PS_DEV_PGID:-}"
     if [[ -z "$self_pgid" ]]; then
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
@@ -429,7 +429,7 @@ cleanup_children() {
         # This shell is a member of the group it is about to signal. SIGTERM is
         # survivable (ignored below for the duration), but a group-wide SIGKILL
         # is not trappable and would kill us before restore_env_on_exit runs,
-        # leaving psp-ui/.env pointing at the dev build. So pass 2 enumerates the
+        # leaving ps-ui/.env pointing at the dev build. So pass 2 enumerates the
         # survivors and skips our own PID instead of killing the group.
         trap '' TERM
         kill -TERM -- -"$self_pgid" 2>/dev/null
@@ -473,10 +473,10 @@ ensure_bun_install() {
     bun="$(resolve_tool bun || true)"
     [[ -n "$bun" ]] || die "bun not found — run ./dev.sh --check first."
     if [[ -d "$NODE_MODULES" ]] && (( ! force )); then
-        log_info "psp-ui/node_modules present — skipping bun install."
+        log_info "ps-ui/node_modules present — skipping bun install."
         return
     fi
-    log_info "Running \`bun install\` in psp-ui/ (first run can take a while)…"
+    log_info "Running \`bun install\` in ps-ui/ (first run can take a while)…"
     ( cd "$UI_DIR" && "$bun" install ) >&2
     log_ok "bun install complete."
 }
@@ -484,29 +484,29 @@ ensure_bun_install() {
 ensure_wasm() {
     # $1 = rebuild (1) to force wasm-pack even if the artifact exists.
     #
-    # psp_bg.wasm existing is not a safe skip condition: psp.js is tracked and
-    # psp_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
+    # ps_bg.wasm existing is not a safe skip condition: ps.js is tracked and
+    # ps_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
     # over the real entry while the stale .wasm survives.
     local rebuild="${1:-0}"
-    local wasm_file="$WASM_OUT/psp_bg.wasm"
-    local entry_js="$WASM_OUT/psp.js"
+    local wasm_file="$WASM_OUT/ps_bg.wasm"
+    local entry_js="$WASM_OUT/ps.js"
     local pkg_json="$WASM_OUT/package.json"
-    local stub_marker='psp wasm not built' # text baked into the committed psp.js placeholder
+    local stub_marker='ps wasm not built' # text baked into the committed ps.js placeholder
 
     local reason=""
     if (( rebuild )); then
         reason="--rebuild-wasm"
     elif [[ ! -f "$wasm_file" ]]; then
-        reason="psp_bg.wasm missing"
+        reason="ps_bg.wasm missing"
     elif [[ ! -f "$pkg_json" || ! -f "$entry_js" ]]; then
         reason="incomplete wasm package (interrupted build?)"
     elif grep -q "$stub_marker" "$entry_js" 2>/dev/null; then
-        reason="psp.js is the committed placeholder (git restored it over the build output)"
+        reason="ps.js is the committed placeholder (git restored it over the build output)"
     else
         # head -n1 rather than find -quit, for BSD/macOS find.
         local stale=""
-        stale="$(find "$REPO_ROOT/psp-web" "$REPO_ROOT/psp-app" "$REPO_ROOT/psp-core" \
-            "$REPO_ROOT/psp-db" \
+        stale="$(find "$REPO_ROOT/ps-web" "$REPO_ROOT/ps-app" "$REPO_ROOT/ps-core" \
+            "$REPO_ROOT/ps-db" \
             \( -name '*.rs' -o -name 'Cargo.toml' \) -newer "$wasm_file" -print 2>/dev/null \
             | head -n1 || true)"
         if [[ -z "$stale" && -f "$REPO_ROOT/Cargo.toml" && "$REPO_ROOT/Cargo.toml" -nt "$wasm_file" ]]; then
@@ -518,16 +518,16 @@ ensure_wasm() {
     fi
 
     if [[ -z "$reason" ]]; then
-        log_info "WASM up to date (psp-ui/src/lib/wasm/psp/psp_bg.wasm) (--rebuild-wasm to redo)."
+        log_info "WASM up to date (ps-ui/src/lib/wasm/ps/ps_bg.wasm) (--rebuild-wasm to redo)."
         return
     fi
 
     local cargo wasm_pack
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found — run ./dev.sh --check first."
     wasm_pack="$(resolve_tool wasm-pack || true)"; [[ -n "$wasm_pack" ]] || die "wasm-pack not found — run ./dev.sh --install-wasm first."
-    log_info "Building psp-web (wasm-pack): $reason"
+    log_info "Building ps-web (wasm-pack): $reason"
     # Clear generated output only — an interrupted build must still leave a
-    # resolvable $lib/wasm/psp behind, so the tracked placeholders have to
+    # resolvable $lib/wasm/ps behind, so the tracked placeholders have to
     # survive for wasm-pack to overwrite. Outside a work tree nothing is
     # tracked, so rm -rf is the only option.
     if ( cd "$REPO_ROOT" && git rev-parse --is-inside-work-tree >/dev/null 2>&1 ); then
@@ -535,12 +535,12 @@ ensure_wasm() {
     else
         rm -rf "$WASM_OUT"
     fi
-    # --out-name psp keeps output aligned with the committed placeholder, the
-    # worker import ($lib/wasm/psp), and the .gitignore (psp_bg.wasm).
-    ( cd "$PSP_WEB_DIR" && "$wasm_pack" build --target web --out-name psp --out-dir "$WASM_OUT" ) >&2 || \
+    # --out-name ps keeps output aligned with the committed placeholder, the
+    # worker import ($lib/wasm/ps), and the .gitignore (ps_bg.wasm).
+    ( cd "$PS_WEB_DIR" && "$wasm_pack" build --target web --out-name ps --out-dir "$WASM_OUT" ) >&2 || \
         die "wasm-pack build failed."
-    [[ -f "$wasm_file" ]] || die "wasm-pack reported success but psp_bg.wasm is missing — check output above."
-    log_ok "psp-web WASM built."
+    [[ -f "$wasm_file" ]] || die "wasm-pack reported success but ps_bg.wasm is missing — check output above."
+    log_ok "ps-web WASM built."
 }
 
 gen_json_manifest() {
@@ -607,22 +607,22 @@ run_web() {
 
     ensure_bun_install 0
     write_web_env "$ws_url"
-    banner "Dev: web  (${host}:${vite_port}  +  psp-server :${server_port})"
+    banner "Dev: web  (${host}:${vite_port}  +  ps-server :${server_port})"
 
     local vite_pid server_pid
     SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
     vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
-        SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+        SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
             --host "$host" --port "$server_port" \
             --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-            --db "$REPO_ROOT/psp-rs.db" --dev
+            --db "$REPO_ROOT/ps-rs.db" --dev
         server_pid="$LAST_BG_PID"
     fi
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
-    printf '\n%s%s  ▸ PSP web dev running:%s  %shttp://%s:%s%s\n\n' \
+    printf '\n%s%s  ▸ PalStudio web dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$vite_port" "$RESET" >&2
-    printf '%s  Ctrl-C to stop. dev.sh restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
         wait_on_pids "$vite_pid" "$server_pid"
     else
@@ -645,12 +645,12 @@ run_desktop() {
         mkdir -p "$REPO_ROOT/ui_build"
         log_info "Created empty ui_build/ (Tauri dev resource check)."
     fi
-    banner "Dev: desktop  (Tauri + embedded psp-server)"
+    banner "Dev: desktop  (Tauri + embedded ps-server)"
     local tauri_pid
-    # cargo tauri dev must run from psp-desktop/.
-    SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
+    # cargo tauri dev must run from ps-desktop/.
+    SPAWN_CWD="$PS_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
     tauri_pid="$LAST_BG_PID"
-    printf '%s  Ctrl-C to stop. dev.sh restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$tauri_pid"
 }
 
@@ -666,7 +666,7 @@ run_webapp() {
     VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
     vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (webapp)" 60 || true
-    printf '\n%s%s  ▸ PSP webapp dev running:%s  %shttp://%s:%s%s\n\n' \
+    printf '\n%s%s  ▸ PalStudio webapp dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
     printf '%s  Landing-page mode (VITE_TRANSPORT=worker). Ctrl-C to stop.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$vite_pid"
@@ -682,7 +682,7 @@ run_landing() {
     VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
     vite_pid="$LAST_BG_PID"
     wait_for_http "http://${host}:${port}" "Vite (landing)" 60 || true
-    printf '\n%s%s  ▸ PSP landing preview:%s  %shttp://%s:%s%s\n' \
+    printf '\n%s%s  ▸ PalStudio landing preview:%s  %shttp://%s:%s%s\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
     printf '%s  Landing page only — WASM/server skipped (VITE_LANDING_ONLY).%s\n' "$DIM" "$RESET" >&2
     printf '%s  Buttons that load a save won'\''t work. Ctrl-C to stop.%s\n\n' "$DIM" "$RESET" >&2
@@ -692,12 +692,12 @@ run_landing() {
 run_serve() {
     local cargo host="${ARG_HOST:-0.0.0.0}" port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
-    banner "Serve: psp-server  (${host}:${port})"
+    banner "Serve: ps-server  (${host}:${port})"
     local server_pid
-    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged psp-server "$cargo" run -p psp-server -- \
+    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
         --host "$host" --port "$port" \
         --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
-        --db "$REPO_ROOT/psp-rs.db" --dev
+        --db "$REPO_ROOT/ps-rs.db" --dev
     server_pid="$LAST_BG_PID"
     wait_on_pids "$server_pid"
 }
@@ -802,21 +802,21 @@ wait_on_pids() {
 
 usage() {
     cat <<'EOF' >&2
-dev.sh — Palworld Save Pal dev/launch/build helper (macOS/Linux).
+dev.sh — PalStudio dev/launch/build helper (macOS/Linux).
 Runs from source; does NOT auto-install tools (run --check for a report card).
 
 mode (pick one; defaults to --web):
-  --web              Dev: Vite + psp-server (tool-only SPA).
+  --web              Dev: Vite + ps-server (tool-only SPA).
   --desktop          Dev: Tauri native window + embedded server.
   --webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   --docker           Build & run the self-build Docker image.
-  --serve            Run only the Rust psp-server.
+  --serve            Run only the Rust ps-server.
   --build-desktop    Production desktop build → dist/.
   --build-appimage   Linux AppImage, built and stripped like release CI → dist/.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
-  (The PSP Amity UE4SS mod is Windows-only: dev.ps1 -Amity.)
+  (The PalStudio Amity UE4SS mod is Windows-only: dev.ps1 -Amity.)
 
 options:
   --check, --doctor  Run only the preflight for the selected mode, then exit.
@@ -826,8 +826,8 @@ options:
                      fail-with-instructions. Skips anything already present.
   --host <ip>        Host/IP bind or WS_URL host (--web/--serve/--docker).
   --vite-port <p>    Vite port (default 5173).
-  --server-port <p>  psp-server port (default 5174).
-  --no-server        (--web) skip psp-server (Vite only).
+  --server-port <p>  ps-server port (default 5174).
+  --no-server        (--web) skip ps-server (Vite only).
   --skip-check       Skip the preflight (advanced).
   --no-install       Skip bun install if node_modules exists.
   --rebuild-wasm     (--webapp/--build-web) force wasm-pack rebuild.
@@ -888,7 +888,7 @@ main() {
     # Capture OUR process-group ID now, before any child spawns. All children
     # run in this same group (no setsid), so a negative-PGID kill in cleanup
     # reaches the whole tree even if individual child PIDs have been reaped.
-    export PSP_DEV_PGID="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ')"
+    export PS_DEV_PGID="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ')"
     # Install the cleanup trap EARLY — before any child is spawned — so an
     # interrupt at ANY point (during preflight, bun install, wait_for_http, or
     # the run loop) tears down spawned children. INT/TERM print a message and

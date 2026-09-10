@@ -34,29 +34,29 @@ jobs:
         with:
           prefix-key: "v0-ci"
 
-      - name: psp-app stays transport-free
+      - name: ps-app stays transport-free
         shell: bash
         run: |
-          if ! tree_output=$(cargo tree -p psp-app -e normal); then
-            echo "::error::cargo tree failed to run for psp-app; dependency guard could not verify anything"
+          if ! tree_output=$(cargo tree -p ps-app -e normal); then
+            echo "::error::cargo tree failed to run for ps-app; dependency guard could not verify anything"
             exit 1
           fi
           if echo "$tree_output" | grep -E "axum|rfd|opener|bollard|sysinfo|reqwest|tower-http|clap|sqlx"; then
-            echo "::error::forbidden native dependency in psp-app tree"
+            echo "::error::forbidden native dependency in ps-app tree"
             exit 1
           fi
 
-      - name: psp-db core compiles without sqlx
-        run: cargo check -p psp-db --no-default-features
+      - name: ps-db core compiles without sqlx
+        run: cargo check -p ps-db --no-default-features
 
       - name: Add wasm32 target
         run: rustup target add wasm32-unknown-unknown
 
       - name: Core crates compile for wasm32
-        run: cargo check --target wasm32-unknown-unknown --no-default-features -p psp-core -p psp-db -p psp-app -p psp-lua-sys -p psp-plugin
+        run: cargo check --target wasm32-unknown-unknown --no-default-features -p ps-core -p ps-db -p ps-app -p ps-lua-sys -p ps-plugin
 
-      - name: psp-web builds for wasm32
-        run: cargo build --target wasm32-unknown-unknown -p psp-web -j 2
+      - name: ps-web builds for wasm32
+        run: cargo build --target wasm32-unknown-unknown -p ps-web -j 2
 
       - name: Test workspace
         run: cargo test --workspace
@@ -70,16 +70,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.bun/install/cache
-          key: bun-ci-${{ runner.os }}-${{ hashFiles('psp-ui/bun.lock', 'signal-broker/bun.lock') }}
+          key: bun-ci-${{ runner.os }}-${{ hashFiles('ps-ui/bun.lock', 'signal-broker/bun.lock') }}
 
       - name: Install frontend dependencies
-        working-directory: psp-ui
+        working-directory: ps-ui
         run: bun install --frozen-lockfile
 
       # Named files, not the whole suite: the rest of it has failures that
       # predate this workflow and would drown anything a change here breaks.
       - name: Signal frontend tests
-        working-directory: psp-ui
+        working-directory: ps-ui
         run: bunx vitest run src/lib/signal/crypto.test.ts src/lib/signal/session.test.ts src/lib/components/map/features/liveActorFC.test.ts
 
       - name: Install broker dependencies
@@ -91,5 +91,5 @@ jobs:
         run: bun run test
 
       - name: Desktop web build succeeds
-        working-directory: psp-ui
+        working-directory: ps-ui
         run: bun run build

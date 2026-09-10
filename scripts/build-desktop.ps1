@@ -1,7 +1,7 @@
 # Usage: .\scripts\build-desktop.ps1 [-SkipUi]   (-SkipUi if ui_build is current)
 #
-# The portable zip runs as extract-and-run: psp.exe serves the bundled
-# ui_build/ and keeps its psp-rs.db alongside the exe. Requires the
+# The portable zip runs as extract-and-run: palstudio.exe serves the bundled
+# ui_build/ and keeps its ps-rs.db alongside the exe. Requires the
 # Microsoft Edge WebView2 runtime (present on up-to-date Windows 10/11).
 param([switch]$SkipUi)
 $ErrorActionPreference = "Stop"
@@ -14,9 +14,9 @@ if (-not (Get-Command "cargo-tauri" -ErrorAction SilentlyContinue) -and
 }
 
 $version = (Select-String -Path "Cargo.toml" -Pattern '^version = "([^"]*)"').Matches[0].Groups[1].Value
-Write-Host "Building Palworld Save Pal desktop v$version (windows)"
+Write-Host "Building PalStudio desktop v$version (windows)"
 
-Push-Location "psp-desktop"
+Push-Location "ps-desktop"
 try {
     cargo tauri build --bundles msi
     if ($LASTEXITCODE -ne 0) { throw "cargo tauri build failed" }
@@ -27,19 +27,19 @@ $dist = Join-Path $repoRoot "dist"
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
 
 $msi = Get-ChildItem "target/release/bundle/msi/*.msi" | Select-Object -First 1
-Copy-Item $msi.FullName (Join-Path $dist "PalworldSavePal-$version-windows.msi")
+Copy-Item $msi.FullName (Join-Path $dist "PalStudio-$version-windows.msi")
 
-$staging = Join-Path $dist "PalworldSavePal"
+$staging = Join-Path $dist "PalStudio"
 if (Test-Path $staging) { Remove-Item -Recurse -Force $staging }
 New-Item -ItemType Directory -Force -Path $staging | Out-Null
-Copy-Item "target/release/psp.exe" (Join-Path $staging "psp.exe")
+Copy-Item "target/release/palstudio.exe" (Join-Path $staging "palstudio.exe")
 Copy-Item -Recurse "ui_build" (Join-Path $staging "ui_build")
 Copy-Item -Recurse "data" (Join-Path $staging "data")
 
-$zip = Join-Path $dist "PalworldSavePal-$version-windows-standalone.zip"
+$zip = Join-Path $dist "PalStudio-$version-windows-standalone.zip"
 if (Test-Path $zip) { Remove-Item -Force $zip }
 Compress-Archive -Path $staging -DestinationPath $zip
 Remove-Item -Recurse -Force $staging
 
 Write-Host "Done. Artifacts in dist/:"
-Get-ChildItem $dist -Filter "PalworldSavePal-$version-windows*" | ForEach-Object { Write-Host "  $($_.Name)" }
+Get-ChildItem $dist -Filter "PalStudio-$version-windows*" | ForEach-Object { Write-Host "  $($_.Name)" }

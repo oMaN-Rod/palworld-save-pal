@@ -15,7 +15,7 @@ export async function mintTurnCredential(
 	ttlSeconds: number,
 ): Promise<{ username: string; credential: string }> {
 	const expiry = Math.floor(nowMs / 1000) + ttlSeconds;
-	const username = `${expiry}:psp`;
+	const username = `${expiry}:ps`;
 	const key = await crypto.subtle.importKey(
 		'raw',
 		new TextEncoder().encode(secret),

@@ -1,6 +1,6 @@
 // Source: Pal/Texture/UI/IngameMenu/Buildup/T_icon_Buildup_Player_NN.png, NN = 00..12.
 // NN is the EPalRelicType enum value; that enum is dense 0..12 and its order matches
-// RELIC_TYPE_MAP in psp-core/src/domain/relic.rs, which is how index joins to key.
+// RELIC_TYPE_MAP in ps-core/src/domain/relic.rs, which is how index joins to key.
 //
 // Output is named by relic KEY, not index, so the mapping is legible at the call site.
 // Webp is mandatory: AssetLoader's glob only picks up **/*.webp.
@@ -32,7 +32,7 @@ const RELIC_KEYS = [
 ];
 
 const srcDir = join(contentRoot, 'Pal', 'Texture', 'UI', 'IngameMenu', 'Buildup');
-const outDir = join('psp-ui', 'src', 'lib', 'assets', 'img');
+const outDir = join('ps-ui', 'src', 'lib', 'assets', 'img');
 
 for (const [index, key] of RELIC_KEYS.entries()) {
 	const nn = String(index).padStart(2, '0');

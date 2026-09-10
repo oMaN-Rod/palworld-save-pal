@@ -10,13 +10,13 @@ logs
 servers
 db
 psp.db
-psp-rs.db
+ps-rs.db
 *.db
 *.db-shm
 *.db-wal
 node_modules
-psp-ui/node_modules
-psp-ui/.svelte-kit
+ps-ui/node_modules
+ps-ui/.svelte-kit
 ui_build
 target
 docs

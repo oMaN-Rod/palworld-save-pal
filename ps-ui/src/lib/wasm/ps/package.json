@@ -1,0 +1,16 @@
+{
+  "name": "ps-web",
+  "type": "module",
+  "version": "1.4.2",
+  "license": "GPL-3.0-only",
+  "files": [
+    "ps_bg.wasm",
+    "ps.js",
+    "ps.d.ts"
+  ],
+  "main": "ps.js",
+  "types": "ps.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

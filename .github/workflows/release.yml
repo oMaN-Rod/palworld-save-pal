@@ -2,10 +2,10 @@ name: Build and Release
 
 # Publishing the draft release fires nexus-upload.yml and discord.yml. Release
 # assets are named canonically so nexus-upload.yml can pattern-match them:
-#   PalworldSavePal-<tag>-windows.msi              (MSI installer)
-#   PalworldSavePal-<tag>-windows-standalone.zip   (portable: exe + ui + data)
-#   PalworldSavePal-<tag>-macos.dmg                (DMG)
-#   PalworldSavePal-<tag>-linux.AppImage           (cross-distro AppImage)
+#   PalStudio-<tag>-windows.msi              (MSI installer)
+#   PalStudio-<tag>-windows-standalone.zip   (portable: exe + ui + data)
+#   PalStudio-<tag>-macos.dmg                (DMG)
+#   PalStudio-<tag>-linux.AppImage           (cross-distro AppImage)
 
 on:
   workflow_dispatch:
@@ -32,10 +32,10 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: Checkout palworld-save-pal
+      - name: Checkout palstudio
         uses: actions/checkout@v4
         with:
-          path: palworld-save-pal
+          path: palstudio
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -43,7 +43,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/psp-ui
+        working-directory: palstudio/ps-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -55,7 +55,7 @@ jobs:
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: palworld-save-pal
+          workspaces: palstudio
 
       - name: Install Tauri CLI
         uses: taiki-e/install-action@v2
@@ -63,41 +63,41 @@ jobs:
           tool: tauri-cli@2
 
       - name: Build Tauri bundles
-        working-directory: palworld-save-pal/psp-desktop
+        working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles msi
 
       - name: Collect MSI + portable standalone
         shell: pwsh
-        working-directory: palworld-save-pal
+        working-directory: palstudio
         run: |
           $tag = "${{ github.event.inputs.version }}"
           New-Item -ItemType Directory -Force dist | Out-Null
           # The only Windows installer we ship.
           $msi = Get-ChildItem target/release/bundle/msi/*.msi | Select-Object -First 1
-          Copy-Item $msi.FullName "dist/PalworldSavePal-$tag-windows.msi"
+          Copy-Item $msi.FullName "dist/PalStudio-$tag-windows.msi"
           # extract-and-run: keeps its DB alongside the exe.
-          $staging = "dist/PalworldSavePal"
+          $staging = "dist/PalStudio"
           New-Item -ItemType Directory -Force $staging | Out-Null
-          Copy-Item target/release/psp.exe "$staging/psp.exe"
+          Copy-Item target/release/palstudio.exe "$staging/palstudio.exe"
           Copy-Item -Recurse ui_build "$staging/ui_build"
           Copy-Item -Recurse data "$staging/data"
-          Compress-Archive -Path $staging -DestinationPath "dist/PalworldSavePal-$tag-windows-standalone.zip"
+          Compress-Archive -Path $staging -DestinationPath "dist/PalStudio-$tag-windows-standalone.zip"
           Remove-Item -Recurse -Force $staging
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: palworld-save-pal/dist/*
+          path: palstudio/dist/*
           if-no-files-found: error
 
   build-macos:
     runs-on: macos-latest
     steps:
-      - name: Checkout palworld-save-pal
+      - name: Checkout palstudio
         uses: actions/checkout@v4
         with:
-          path: palworld-save-pal
+          path: palstudio
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -105,7 +105,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/psp-ui
+        working-directory: palstudio/ps-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -117,7 +117,7 @@ jobs:
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: palworld-save-pal
+          workspaces: palstudio
 
       - name: Install Tauri CLI
         uses: taiki-e/install-action@v2
@@ -125,33 +125,33 @@ jobs:
           tool: tauri-cli@2
 
       - name: Build Tauri bundles
-        working-directory: palworld-save-pal/psp-desktop
+        working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles dmg
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Collect and rename installer
-        working-directory: palworld-save-pal
+        working-directory: palstudio
         run: |
           tag="${{ github.event.inputs.version }}"
           mkdir -p dist
           dmg=$(ls target/release/bundle/dmg/*.dmg | head -n 1)
-          cp "$dmg" "dist/PalworldSavePal-$tag-macos.dmg"
+          cp "$dmg" "dist/PalStudio-$tag-macos.dmg"
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
         with:
           name: macos
-          path: palworld-save-pal/dist/*
+          path: palstudio/dist/*
           if-no-files-found: error
 
   build-linux:
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout palworld-save-pal
+      - name: Checkout palstudio
         uses: actions/checkout@v4
         with:
-          path: palworld-save-pal
+          path: palstudio
 
       - name: Install Linux system dependencies
         run: |
@@ -164,7 +164,7 @@ jobs:
           bun-version: latest
 
       - name: Install UI deps
-        working-directory: palworld-save-pal/psp-ui
+        working-directory: palstudio/ps-ui
         shell: bash
         run: bun install
         # The frontend itself is built by Tauri's beforeBuildCommand
@@ -176,7 +176,7 @@ jobs:
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
         with:
-          workspaces: palworld-save-pal
+          workspaces: palstudio
           prefix-key: "v0-rust-ubuntu-2204"
 
       - name: Install Tauri CLI
@@ -185,30 +185,30 @@ jobs:
           tool: tauri-cli@2
 
       - name: Build Tauri bundles
-        working-directory: palworld-save-pal/psp-desktop
+        working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles deb,appimage
 
       - name: Strip host-graphics libs from AppImage
-        working-directory: palworld-save-pal
+        working-directory: palstudio
         run: |
           appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
           bash scripts/appimage-strip-graphics.sh "$appimage"
 
       - name: Collect and rename installers
-        working-directory: palworld-save-pal
+        working-directory: palstudio
         run: |
           tag="${{ github.event.inputs.version }}"
           mkdir -p dist
           deb=$(ls target/release/bundle/deb/*.deb | head -n 1)
-          cp "$deb" "dist/PalworldSavePal-$tag-linux.deb"
+          cp "$deb" "dist/PalStudio-$tag-linux.deb"
           appimage=$(ls target/release/bundle/appimage/*.AppImage | head -n 1)
-          cp "$appimage" "dist/PalworldSavePal-$tag-linux.AppImage"
+          cp "$appimage" "dist/PalStudio-$tag-linux.AppImage"
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
         with:
           name: linux
-          path: palworld-save-pal/dist/*
+          path: palstudio/dist/*
           if-no-files-found: error
 
   create-release:

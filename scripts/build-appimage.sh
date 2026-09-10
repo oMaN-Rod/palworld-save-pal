@@ -19,15 +19,15 @@ if ! cargo tauri --version >/dev/null 2>&1; then
 fi
 
 version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -n 1)"
-echo "Building Palworld Save Pal AppImage v$version"
+echo "Building PalStudio AppImage v$version"
 
-(cd psp-ui && bun install)
+(cd ps-ui && bun install)
 
 # linuxdeploy's bundled strip predates SHT_RELR and aborts on the libraries of
 # current distros ("unknown type [0x13]"). Those libraries ship stripped.
 export NO_STRIP=1
 # Tauri's beforeBuildCommand builds the desktop UI, as in CI.
-(cd psp-desktop && cargo tauri build --bundles appimage)
+(cd ps-desktop && cargo tauri build --bundles appimage)
 
 shopt -s nullglob
 appimages=(target/release/bundle/appimage/*_"$version"_*.AppImage)
@@ -40,5 +40,5 @@ appimage="${appimages[0]}"
 bash scripts/appimage-strip-graphics.sh "$appimage"
 
 mkdir -p dist
-cp "$appimage" "dist/PalworldSavePal-$version-linux.AppImage"
-echo "Done: dist/PalworldSavePal-$version-linux.AppImage"
+cp "$appimage" "dist/PalStudio-$version-linux.AppImage"
+echo "Done: dist/PalStudio-$version-linux.AppImage"

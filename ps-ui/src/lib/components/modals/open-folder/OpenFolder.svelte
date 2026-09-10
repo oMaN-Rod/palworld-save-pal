@@ -1,0 +1,74 @@
+<script lang="ts">
+	import { Card, Tooltip } from '$components/ui';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import { onMount } from 'svelte';
+	import { assetLoader, focusModal } from '$utils';
+	import { send } from '$utils/websocketUtils';
+	import * as m from '$i18n/messages';
+	import { ASSET_DATA_PATH } from '$lib/constants';
+	import { MessageType } from '$types';
+
+	let { title = m.open_folder(), closeModal } = $props<{
+		title?: string;
+		closeModal: () => void;
+	}>();
+
+	type Folder = {
+		name: string;
+		/** Iconify icon name, e.g. `tabler:history`. */
+		icon: string;
+		folderType: string;
+		/** Raw inline SVG (brand assets) rendered instead of `icon` when set. */
+		svg?: string;
+	};
+
+	const steamIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/steam.svg`) as string;
+	const xboxIcon = assetLoader.loadSvg(`${ASSET_DATA_PATH}/img/app/xbox.svg`) as string;
+
+	const folders: Folder[] = [
+		{ name: 'Backups', icon: 'tabler:history', folderType: 'backups' },
+		{ name: 'Steam', icon: 'tabler:folder', folderType: 'steam', svg: steamIcon },
+		{ name: 'Game pass', icon: 'tabler:folder', folderType: 'gamepass', svg: xboxIcon },
+		{ name: 'PalStudio Root', icon: 'tabler:folder-share', folderType: 'ps_root' }
+	];
+
+	function handleFolderClick(folderType: string) {
+		send(MessageType.OPEN_FOLDER, { folder_type: folderType });
+		closeModal();
+	}
+
+	let modalContainer: HTMLDivElement;
+
+	onMount(() => {
+		focusModal(modalContainer);
+	});
+</script>
+
+<div bind:this={modalContainer}>
+	<Card class="min-w-auto">
+		<h3 class="h3">{title}</h3>
+
+		<div class="mt-2 flex gap-2">
+			{#each folders as folder}
+				<Tooltip>
+					<button
+						type="button"
+						class="border-secondary-500/50 hover:bg-secondary-500/25 flex cursor-pointer flex-col items-center space-y-1 rounded-md border p-4"
+						onclick={() => handleFolderClick(folder.folderType)}
+					>
+						{#if folder.svg}
+							<div class="h-12 w-12">
+								{@html folder.svg}
+							</div>
+						{:else}
+							<Icon icon={folder.icon} class="h-12 w-12" />
+						{/if}
+					</button>
+					{#snippet popup()}
+						<span class="text-sm font-medium">{folder.name}</span>
+					{/snippet}
+				</Tooltip>
+			{/each}
+		</div>
+	</Card>
+</div>

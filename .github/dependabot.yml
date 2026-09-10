@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/psp-ui"
+    directory: "/ps-ui"
     schedule:
       interval: "monthly"
     target-branch: "main"

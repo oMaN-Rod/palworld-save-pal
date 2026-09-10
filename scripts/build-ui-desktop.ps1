@@ -1,9 +1,9 @@
 # The desktop env (PUBLIC_DESKTOP_MODE=true) and the build are owned by the
-# psp-ui `build:desktop` script so local, CI, and Tauri's beforeBuildCommand agree.
+# ps-ui `build:desktop` script so local, CI, and Tauri's beforeBuildCommand agree.
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
 
-Push-Location (Join-Path $repoRoot "psp-ui")
+Push-Location (Join-Path $repoRoot "ps-ui")
 try {
     bun install
     if ($LASTEXITCODE -ne 0) { throw "bun install failed" }

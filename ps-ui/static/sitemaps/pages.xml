@@ -1,0 +1,2120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<url>
+		<loc>https://palstudio.app/</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant" />
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant/map</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant/map" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant/map" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant/wiki</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant/wiki" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant/wiki" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant/breeding</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant/breeding" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant/breeding" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant/about</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant/about" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant/about" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/de/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/de/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/de/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/de/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/de/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/de/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/de/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/de/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/de/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/de/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/de/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/de/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/de/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/de/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/de/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/de/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/de/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/es-mx/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/es-mx/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/es-mx/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/fr/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/fr/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/fr/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/id-id/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/id-id/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/id-id/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/it/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/it/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/it/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/it/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/it/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/it/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/it/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/it/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/it/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/it/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/it/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/it/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/it/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/it/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/it/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/it/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/it/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ko/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ko/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ko/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pl/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pl/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pl/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/pt-br/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/pt-br/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/pt-br/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/ru/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/ru/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/ru/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/th/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/th/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/th/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/th/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/th/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/th/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/th/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/th/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/th/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/th/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/th/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/th/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/th/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/th/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/th/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/th/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/th/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/th/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/tr/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/tr/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/tr/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/vi/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/vi/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/vi/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/zh-hant/signal</loc>
+		<xhtml:link rel="alternate" hreflang="en" href="https://palstudio.app/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="es" href="https://palstudio.app/es/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="de" href="https://palstudio.app/de/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="es-MX" href="https://palstudio.app/es-mx/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="fr" href="https://palstudio.app/fr/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="id-ID" href="https://palstudio.app/id-id/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="it" href="https://palstudio.app/it/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="ko" href="https://palstudio.app/ko/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="pl" href="https://palstudio.app/pl/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="pt-BR" href="https://palstudio.app/pt-br/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://palstudio.app/ru/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="th" href="https://palstudio.app/th/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="tr" href="https://palstudio.app/tr/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="vi" href="https://palstudio.app/vi/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hans" href="https://palstudio.app/zh/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="zh-Hant" href="https://palstudio.app/zh-hant/zh-hant/signal" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://palstudio.app/zh-hant/signal" />
+		<changefreq>weekly</changefreq>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/editor</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.7</priority>
+	</url>
+</urlset>

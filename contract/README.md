@@ -1,7 +1,7 @@
 # Wire-contract fixtures
 
 Committed golden snapshots of the WebSocket wire protocol the Svelte frontend
-consumes. `psp-server/tests/wire_contract.rs` replays each fixture against an
+consumes. `ps-server/tests/wire_contract.rs` replays each fixture against an
 in-process Rust server and asserts every response frame still matches, in order.
 The suite is a regression net against **accidental protocol drift** — it fails
 loudly if the committed corpus is missing, so it can never pass with zero
@@ -43,7 +43,7 @@ over one WebSocket connection per corpus. Committed corpora:
 
 When a wire response legitimately changes (a new field, a reordered frame),
 update the affected `responses` in the fixture `.json` to match the new expected
-output, and confirm `cargo test -p psp-server --test wire_contract` passes. Keep
+output, and confirm `cargo test -p ps-server --test wire_contract` passes. Keep
 the change scoped to the intended protocol change — an unexplained diff in an
 unrelated frame means a regression, not a fixture that needs updating.
 

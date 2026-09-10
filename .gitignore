@@ -24,18 +24,18 @@ logs/
 *.db-shm
 *.db-wal
 
-# UI specific (respecting the existing .gitignore in psp-ui/)
-/psp-ui/node_modules
-/psp-ui/.output
-/psp-ui/.vercel
+# UI specific (respecting the existing .gitignore in ps-ui/)
+/ps-ui/node_modules
+/ps-ui/.output
+/ps-ui/.vercel
 .svelte-kit
-/psp-ui/build
-/psp-ui/.env
-/psp-ui/.env.*
-!/psp-ui/.env.example
-!/psp-ui/.env.test
-/psp-ui/vite.config.js.timestamp-*
-/psp-ui/vite.config.ts.timestamp-*
+/ps-ui/build
+/ps-ui/.env
+/ps-ui/.env.*
+!/ps-ui/.env.example
+!/ps-ui/.env.test
+/ps-ui/vite.config.js.timestamp-*
+/ps-ui/vite.config.ts.timestamp-*
 
 # Dependency directories
 node_modules/
@@ -59,11 +59,11 @@ data/json/settings.json
 /contract/tmp/
 
 # wasm-pack binary output (overwrites the committed placeholder module locally)
-/psp-ui/src/lib/wasm/psp/psp_bg.wasm
-/psp-ui/src/lib/wasm/psp/*_bg.js
+/ps-ui/src/lib/wasm/ps/ps_bg.wasm
+/ps-ui/src/lib/wasm/ps/*_bg.js
 
 # ooz wasm build scratch (cloned source + emcc intermediates); the vendored
-# artifact lives under psp-ui/vendor/ooz and IS committed.
+# artifact lives under ps-ui/vendor/ooz and IS committed.
 /vendor/
 
 # Superpowers scratch: SDD ledgers, task briefs, brainstorm mockups
@@ -78,5 +78,5 @@ data/json/settings.json
 /lua-language-server/
 /plugin-workspaces/
 
-# PSP Signal: real world snapshots with account identifiers
+# PalStudio Signal: real world snapshots with account identifiers
 psp-signal-gamedata-sample.json

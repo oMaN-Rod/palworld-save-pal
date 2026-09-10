@@ -5,10 +5,10 @@ with four crates:
 
 | Crate | Role |
 |---|---|
-| `psp-core` | Domain logic: save sessions over uesave-rs typed structs, DTOs, game-data loading, presets/transfer/steam-id logic. No web deps. |
-| `psp-db` | sqlx + SQLite (`psp-rs.db`), embedded migrations, one-time legacy `psp.db` importer. |
-| `psp-server` | Axum: SPA static serving, `GET /ws/{client_id}` WebSocket (the 123-message API), `POST /api/convert/*`. Lib + bin. |
-| `psp-desktop` | Tauri v2 shell: spawns the embedded server on `127.0.0.1:5174`, native dialogs. |
+| `ps-core` | Domain logic: save sessions over uesave-rs typed structs, DTOs, game-data loading, presets/transfer/steam-id logic. No web deps. |
+| `ps-db` | sqlx + SQLite (`ps-rs.db`), embedded migrations, one-time legacy `psp.db` importer. |
+| `ps-server` | Axum: SPA static serving, `GET /ws/{client_id}` WebSocket (the 123-message API), `POST /api/convert/*`. Lib + bin. |
+| `ps-desktop` | Tauri v2 shell: spawns the embedded server on `127.0.0.1:5174`, native dialogs. |
 
 Save parsing is provided by [uesave-rs](https://github.com/oMaN-Rod/uesave-rs),
 consumed as a **git dependency** (branch `palworld-v1`) pinned to an exact
@@ -26,18 +26,18 @@ uesave = { path = "../uesave-rs/uesave" }
 All from the repo root:
 
 ```bash
-cargo run -p psp-server -- --dev        # backend on 127.0.0.1:5174
-(cd psp-desktop && cargo tauri dev)     # desktop app, hot-reload
+cargo run -p ps-server -- --dev        # backend on 127.0.0.1:5174
+(cd ps-desktop && cargo tauri dev)     # desktop app, hot-reload
 cargo fmt --all                         # required before every commit
 cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace                  # unit + integration + wire-contract
 ```
 
-Frontend type check: `bun run check` (from `psp-ui/`).
+Frontend type check: `bun run check` (from `ps-ui/`).
 
 ## Server CLI
 
-`psp-server --host 0.0.0.0 --port 5174 --ui-dir ./ui --data-dir ./data --db ./psp-rs.db [--dev]`
+`ps-server --host 0.0.0.0 --port 5174 --ui-dir ./ui --data-dir ./data --db ./ps-rs.db [--dev]`
 
 On first start, a legacy Python `psp.db` found next to the `--db` file is
 backed up and imported (settings, presets, UPS, servers) — once. This is a
@@ -46,7 +46,7 @@ a single time, records a guard, and is inert thereafter.
 
 ## Wire-contract harness
 
-`psp-server/tests/wire_contract.rs` guards the WebSocket wire protocol the
+`ps-server/tests/wire_contract.rs` guards the WebSocket wire protocol the
 Svelte frontend depends on. It starts an in-process Rust server, replays each
 committed fixture under `contract/fixtures/<corpus>/<nnn>_<message_type>.json`
 in filename order, and asserts response-sequence equality
@@ -57,7 +57,7 @@ drift — **not** a comparison against any prior implementation.
 Run it alone:
 
 ```bash
-cargo test -p psp-server --test wire_contract -- --nocapture
+cargo test -p ps-server --test wire_contract -- --nocapture
 ```
 
 The fixtures are committed golden inputs, so the suite always runs and **fails

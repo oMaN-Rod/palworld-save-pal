@@ -1,9 +1,13 @@
 {
-	// Worker name stays `psp`: renaming would orphan the existing deployment.
-	"name": "psp",
+	"name": "ps",
 	"compatibility_date": "2026-08-02",
 	"main": "signal-broker/src/index.ts",
 	"routes": [
+		{
+			"pattern": "palstudio.app",
+			"custom_domain": true
+		},
+		// Older desktop builds and shared links still point at the previous domain.
 		{
 			"pattern": "palworldsavepal.app",
 			"custom_domain": true
@@ -22,7 +26,7 @@
 	// SQLite-backed: the free-plan-compatible Durable Object storage class.
 	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["SignalRoom"] }],
 	"vars": {
-		"TURN_URLS": "turn:turn.palworldsavepal.app:3478?transport=udp,turn:turn.palworldsavepal.app:3478?transport=tcp,turns:turn.palworldsavepal.app:443?transport=tcp",
+		"TURN_URLS": "turn:turn.palstudio.app:3478?transport=udp,turn:turn.palstudio.app:3478?transport=tcp,turns:turn.palstudio.app:443?transport=tcp",
 		"TURN_TTL_SECONDS": "3600"
 	},
 	"unsafe": {

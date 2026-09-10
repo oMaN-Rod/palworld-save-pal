@@ -1,4 +1,4 @@
-﻿# dev.ps1 — one-shot launcher / preflight for Palworld Save Pal (PSP).
+﻿# dev.ps1 — one-shot launcher / preflight for PalStudio.
 # Windows entry point (the bash sibling is dev.sh for macOS/Linux).
 #
 # Does NOT auto-install anything (except the opt-in -InstallWasm): on a missing
@@ -45,24 +45,24 @@ $ErrorActionPreference = "Stop"
 
 # Every port/path below is load-bearing in the real config.
 $RepoRoot       = Split-Path -Parent $MyInvocation.MyCommand.Path
-$UiDir          = Join-Path $RepoRoot "psp-ui"
-$PspDesktopDir  = Join-Path $RepoRoot "psp-desktop"
-$PspWebDir      = Join-Path $RepoRoot "psp-web"
+$UiDir          = Join-Path $RepoRoot "ps-ui"
+$PsDesktopDir  = Join-Path $RepoRoot "ps-desktop"
+$PsWebDir      = Join-Path $RepoRoot "ps-web"
 $BrokerDir      = Join-Path $RepoRoot "signal-broker"
-$AmityDir       = Join-Path $RepoRoot "psp-amity"
+$AmityDir       = Join-Path $RepoRoot "ps-amity"
 $EnvFile        = Join-Path $UiDir ".env"
 $NodeModules    = Join-Path $UiDir "node_modules"
 $BrokerModules  = Join-Path $BrokerDir "node_modules"
-$WasmOut        = Join-Path $UiDir "src/lib/wasm/psp"
+$WasmOut        = Join-Path $UiDir "src/lib/wasm/ps"
 
 $VitePortDefault   = 5173   # vite.config.ts server.port, strictPort:true
-$ServerPortDefault = 5174   # psp-server default + Docker EXPOSE + WS_URL host
+$ServerPortDefault = 5174   # ps-server default + Docker EXPOSE + WS_URL host
 $BrokerPortDefault = 8787
 $WebPortDefault    = 5175
 
 $DesktopWsUrl = "127.0.0.1:$ServerPortDefault/ws"
 
-$MuxSession = "psp"
+$MuxSession = "ps"
 
 $AmityWorkspaceDefault = Join-Path (Split-Path -Parent $RepoRoot) "amity-build"
 
@@ -273,18 +273,18 @@ function Check-AmityWorkspace() {
     $ws = Resolve-AmityWorkspace
     if (-not (Test-Path (Join-Path $ws "RE-UE4SS\CMakeLists.txt"))) {
         return @{ Name="UE4SS workspace"; Status="crit"; Detail="not set up at $ws";
-                  Hint="One-time: .\psp-amity\scripts\setup-workspace.ps1 -Root `"$ws`"   (clones the pinned RE-UE4SS fork; needs git)" }
+                  Hint="One-time: .\ps-amity\scripts\setup-workspace.ps1 -Root `"$ws`"   (clones the pinned RE-UE4SS fork; needs git)" }
     }
     return @{ Name="UE4SS workspace"; Status="ok"; Detail=$ws; Hint="" }
 }
 
 function Check-Repo() {
-    if ((Test-Path (Join-Path $RepoRoot "psp-server/Cargo.toml")) -and (Test-Path $UiDir)) {
+    if ((Test-Path (Join-Path $RepoRoot "ps-server/Cargo.toml")) -and (Test-Path $UiDir)) {
         return $null
     }
-    return @{ Name="PSP repo"; Status="crit";
-              Detail="psp-server/Cargo.toml or psp-ui/ not found at $RepoRoot";
-              Hint="Run dev.ps1 from the Palworld Save Pal repository root." }
+    return @{ Name="PalStudio repo"; Status="crit";
+              Detail="ps-server/Cargo.toml or ps-ui/ not found at $RepoRoot";
+              Hint="Run dev.ps1 from the PalStudio repository root." }
 }
 
 function Check-DiskSpace($mode) {
@@ -423,7 +423,7 @@ function Report-Preflight($mode, [bool]$asJson) {
     if ($nCrit -gt 0) { return 1 } else { return 0 }
 }
 
-# Mirrors psp-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
+# Mirrors ps-ui/scripts/ensure-{desktop,web}-env.mjs — keep both in sync.
 function Snapshot-Env() {
     if (Test-Path $EnvFile) {
         $script:PreviousEnvExists = $true
@@ -447,13 +447,13 @@ function Write-WebEnv([string]$wsUrl) {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
     $val = if ($wsUrl) { $wsUrl } else { "" }
     Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=$val`nPUBLIC_DESKTOP_MODE=false`n"
-    Log-Info "Wrote psp-ui/.env (web mode, WS_URL=$(if ($wsUrl) { $wsUrl } else { '<empty>' }))"
+    Log-Info "Wrote ps-ui/.env (web mode, WS_URL=$(if ($wsUrl) { $wsUrl } else { '<empty>' }))"
 }
 
 function Write-DesktopEnv() {
     New-Item -ItemType Directory -Force -Path $UiDir | Out-Null
     Set-Content -NoNewline -Path $EnvFile -Value "PUBLIC_WS_URL=$DesktopWsUrl`nPUBLIC_DESKTOP_MODE=true`n"
-    Log-Info "Wrote psp-ui/.env (desktop mode)"
+    Log-Info "Wrote ps-ui/.env (desktop mode)"
 }
 
 function Ensure-BrokerInstall() {
@@ -670,7 +670,7 @@ function Assert-LiveTurnSecret() {
 }
 
 function Check-LiveRelayReachable() {
-    $relayHost = "turn.palworldsavepal.app"
+    $relayHost = "turn.palstudio.app"
     foreach ($p in @(443, 3478)) {
         if (Test-TcpPort $relayHost $p 3000) {
             Log-Ok "live relay reachable: ${relayHost}:$p/tcp"
@@ -705,10 +705,10 @@ function Ensure-BunInstall([bool]$force) {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found — run .\dev.ps1 -Check first." }
     if ((Test-Path $NodeModules) -and -not $force) {
-        Log-Info "psp-ui/node_modules present — skipping bun install."
+        Log-Info "ps-ui/node_modules present — skipping bun install."
         return
     }
-    Log-Info "Running 'bun install' in psp-ui/ (first run can take a while)…"
+    Log-Info "Running 'bun install' in ps-ui/ (first run can take a while)…"
     Push-Location $UiDir
     try {
         & $bun install
@@ -718,27 +718,27 @@ function Ensure-BunInstall([bool]$force) {
 }
 
 function Ensure-Wasm([bool]$rebuild) {
-    # psp_bg.wasm existing is not a safe skip condition: psp.js is tracked and
-    # psp_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
+    # ps_bg.wasm existing is not a safe skip condition: ps.js is tracked and
+    # ps_bg.wasm is gitignored, so a checkout/pull restores the throwing stub
     # over the real entry while the stale .wasm survives. Mirrors ensure_wasm
     # in dev.sh.
-    $wasmFile = Join-Path $WasmOut "psp_bg.wasm"
-    $entryJs  = Join-Path $WasmOut "psp.js"
+    $wasmFile = Join-Path $WasmOut "ps_bg.wasm"
+    $entryJs  = Join-Path $WasmOut "ps.js"
     $pkgJson  = Join-Path $WasmOut "package.json"
-    $stubMarker = "psp wasm not built" # text baked into the committed psp.js placeholder
+    $stubMarker = "ps wasm not built" # text baked into the committed ps.js placeholder
 
     $reason = $null
     if ($rebuild) {
         $reason = "-RebuildWasm"
     } elseif (-not (Test-Path $wasmFile)) {
-        $reason = "psp_bg.wasm missing"
+        $reason = "ps_bg.wasm missing"
     } elseif (-not (Test-Path $pkgJson) -or -not (Test-Path $entryJs)) {
         $reason = "incomplete wasm package (interrupted build?)"
     } elseif (Select-String -Path $entryJs -Pattern $stubMarker -Quiet) {
-        $reason = "psp.js is the committed placeholder (git restored it over the build output)"
+        $reason = "ps.js is the committed placeholder (git restored it over the build output)"
     } else {
         $wasmMtime = (Get-Item $wasmFile).LastWriteTime
-        $crateDirs = @("psp-web", "psp-app", "psp-core", "psp-db") |
+        $crateDirs = @("ps-web", "ps-app", "ps-core", "ps-db") |
             ForEach-Object { Join-Path $RepoRoot $_ } |
             Where-Object { Test-Path $_ }
         $newer = Get-ChildItem -Path $crateDirs -Recurse -File -Include *.rs, Cargo.toml -ErrorAction SilentlyContinue |
@@ -752,7 +752,7 @@ function Ensure-Wasm([bool]$rebuild) {
     }
 
     if (-not $reason) {
-        Log-Info "WASM up to date (psp-ui/src/lib/wasm/psp/psp_bg.wasm) (-RebuildWasm to redo)."
+        Log-Info "WASM up to date (ps-ui/src/lib/wasm/ps/ps_bg.wasm) (-RebuildWasm to redo)."
         return
     }
 
@@ -760,9 +760,9 @@ function Ensure-Wasm([bool]$rebuild) {
     $wasmPack = Resolve-Tool "wasm-pack"
     if (-not $cargo)    { Die "cargo not found — run .\dev.ps1 -Check first." }
     if (-not $wasmPack) { Die "wasm-pack not found — run .\dev.ps1 -InstallWasm first." }
-    Log-Info "Building psp-web (wasm-pack): $reason"
+    Log-Info "Building ps-web (wasm-pack): $reason"
     # Clear generated output only — an interrupted build must still leave a
-    # resolvable $lib/wasm/psp behind, so the tracked placeholders have to
+    # resolvable $lib/wasm/ps behind, so the tracked placeholders have to
     # survive for wasm-pack to overwrite.
     $cleaned = $false
     if (Get-Command git -ErrorAction SilentlyContinue) {
@@ -776,13 +776,13 @@ function Ensure-Wasm([bool]$rebuild) {
     if (-not $cleaned) {
         if (Test-Path $WasmOut) { Remove-Item -Recurse -Force $WasmOut }
     }
-    Push-Location $PspWebDir
+    Push-Location $PsWebDir
     try {
-        & $wasmPack build --target web --out-name psp --out-dir $WasmOut
+        & $wasmPack build --target web --out-name ps --out-dir $WasmOut
         if ($LASTEXITCODE -ne 0) { Pop-Location; Die "wasm-pack build failed." }
     } finally { Pop-Location }
-    if (-not (Test-Path $wasmFile)) { Die "wasm-pack reported success but psp_bg.wasm is missing." }
-    Log-Ok "psp-web WASM built."
+    if (-not (Test-Path $wasmFile)) { Die "wasm-pack reported success but ps_bg.wasm is missing." }
+    Log-Ok "ps-web WASM built."
 }
 
 function Gen-JsonManifest() {
@@ -863,23 +863,23 @@ function Run-Web {
 
     Ensure-BunInstall $false
     Write-WebEnv $wsUrl
-    Banner "Dev: web  (${h}:$vitePort  +  psp-server :$serverPort)"
+    Banner "Dev: web  (${h}:$vitePort  +  ps-server :$serverPort)"
 
     $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
         Cmd=@($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") })
     if (-not $NoServer) {
-        $components += @{ Tag="psp-server"; Cwd=$RepoRoot; Env=$null
-            Cmd=@($cargo, "run", "-p", "psp-server", "--",
+        $components += @{ Tag="ps-server"; Cwd=$RepoRoot; Env=$null
+            Cmd=@($cargo, "run", "-p", "ps-server", "--",
                 "--host", $h, "--port", "$serverPort",
                 "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
-                "--db", (Join-Path $RepoRoot "psp-rs.db"), "--dev") }
+                "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") }
     }
 
     $mux = Get-Mux
     if ($mux -and $components.Count -ge 2) {
         Mux-Launch $mux $components
         Write-Host ""
-        Write-Host "  ▸ PSP web dev:  http://${h}:$vitePort" -ForegroundColor Cyan
+        Write-Host "  ▸ PalStudio web dev:  http://${h}:$vitePort" -ForegroundColor Cyan
         Mux-Attach $mux
         return
     }
@@ -891,8 +891,8 @@ function Run-Web {
     }
     Wait-ForHttp "http://${h}:$vitePort" "Vite" 60 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PSP web dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
-    Write-Host "  Ctrl-C to stop. dev.ps1 restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  ▸ PalStudio web dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
+    Write-Host "  Ctrl-C to stop. dev.ps1 restores ps-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
 }
@@ -910,9 +910,9 @@ function Run-Desktop {
         New-Item -ItemType Directory -Force -Path (Join-Path $RepoRoot "ui_build") | Out-Null
         Log-Info "Created empty ui_build/ (Tauri dev resource check)."
     }
-    Banner "Dev: desktop  (Tauri + embedded psp-server)"
-    $tauri = Spawn-BgTagged "tauri" @($cargo, "tauri", "dev") $PspDesktopDir $null
-    Write-Host "  Ctrl-C to stop. dev.ps1 restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Banner "Dev: desktop  (Tauri + embedded ps-server)"
+    $tauri = Spawn-BgTagged "tauri" @($cargo, "tauri", "dev") $PsDesktopDir $null
+    Write-Host "  Ctrl-C to stop. dev.ps1 restores ps-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($tauri) @()
 }
@@ -930,7 +930,7 @@ function Run-Webapp {
     $vite = Spawn-BgTagged "vite" @($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$port") $UiDir @{ "VITE_TRANSPORT" = "worker" }
     Wait-ForHttp "http://${h}:$port" "Vite (webapp)" 60 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PSP webapp dev running:  http://${h}:$port" -ForegroundColor Cyan
+    Write-Host "  ▸ PalStudio webapp dev running:  http://${h}:$port" -ForegroundColor Cyan
     Write-Host "  Landing-page mode (VITE_TRANSPORT=worker). Ctrl-C to stop." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($vite) @()
@@ -947,7 +947,7 @@ function Run-Landing {
     $vite = Spawn-BgTagged "vite" @($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$port") $UiDir @{ "VITE_TRANSPORT" = "worker"; "VITE_LANDING_ONLY" = "true" }
     Wait-ForHttp "http://${h}:$port" "Vite (landing)" 60 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PSP landing preview:  http://${h}:$port" -ForegroundColor Cyan
+    Write-Host "  ▸ PalStudio landing preview:  http://${h}:$port" -ForegroundColor Cyan
     Write-Host "  Landing page only — WASM/server skipped (VITE_LANDING_ONLY)." -ForegroundColor DarkGray
     Write-Host "  Buttons that load a save won't work. Ctrl-C to stop." -ForegroundColor DarkGray
     Write-Host ""
@@ -968,7 +968,7 @@ function Run-Signal {
     $brokerPort = if ($BrokerPort) { $BrokerPort } else { $BrokerPortDefault }
     $webPort    = if ($WebPort)    { $WebPort }    else { $WebPortDefault }
     if ($webPort -in @($VitePortDefault, $ServerPortDefault, $brokerPort)) {
-        Die "-WebPort $webPort collides with the desktop vite ($VitePortDefault), psp-server ($ServerPortDefault) or broker ($brokerPort)."
+        Die "-WebPort $webPort collides with the desktop vite ($VitePortDefault), ps-server ($ServerPortDefault) or broker ($brokerPort)."
     }
 
     $lanIp = $null
@@ -1011,10 +1011,10 @@ function Run-Signal {
     if ($owner) {
         Log-Warn "desktop: port $VitePortDefault already in use (pid $owner) — skipped."
     } else {
-        $components += @{ Tag="tauri"; Cwd=$PspDesktopDir; Cmd=@($cargo, "tauri", "dev")
+        $components += @{ Tag="tauri"; Cwd=$PsDesktopDir; Cmd=@($cargo, "tauri", "dev")
             Env=@{
-                "PSP_SIGNAL_BROKER_URL"       = "ws://localhost:$brokerPort"
-                "PSP_SIGNAL_PAIRING_URL_BASE" = $pairingUrl
+                "PS_SIGNAL_BROKER_URL"       = "ws://localhost:$brokerPort"
+                "PS_SIGNAL_PAIRING_URL_BASE" = $pairingUrl
                 "PUBLIC_DESKTOP_MODE"         = "true"
                 "PUBLIC_WS_URL"               = $DesktopWsUrl
             } }
@@ -1043,7 +1043,7 @@ function Run-Signal {
         Write-Host "  ▸ desktop:  cargo tauri dev (pairing links point at $pairingUrl)" -ForegroundColor Cyan
         Write-Host "  ▸ web:      $pairingUrl" -ForegroundColor Cyan
         if ($LiveTurn) {
-            Write-Host "  ▸ relay:    turn.palworldsavepal.app (live) — force it with $pairingUrl/signal?relay=1" -ForegroundColor Magenta
+            Write-Host "  ▸ relay:    turn.palstudio.app (live) — force it with $pairingUrl/signal?relay=1" -ForegroundColor Magenta
             Write-Host "              a direct LAN connection never touches TURN; ?relay=1 makes it, then confirm 'Connected via relay' on the card." -ForegroundColor DarkGray
         }
     }
@@ -1065,7 +1065,7 @@ function Run-Signal {
     if (-not (Report-TurnReadiness $brokerPort)) { Die "-LiveTurn: broker is not minting TURN credentials (see above)." }
     if ($webStarted) { Wait-ForHttp "http://127.0.0.1:$webPort" "Vite (web)" 60 | Out-Null }
     & $summary
-    Write-Host "  Ctrl-C stops everything. dev.ps1 restores psp-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C stops everything. dev.ps1 restores ps-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs $started @()
 }
@@ -1075,11 +1075,11 @@ function Run-Serve {
     if (-not $cargo) { Die "cargo not found." }
     $h = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
     $port = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
-    Banner "Serve: psp-server  (${h}:$port)"
-    $server = Spawn-BgTagged "psp-server" @($cargo, "run", "-p", "psp-server", "--",
+    Banner "Serve: ps-server  (${h}:$port)"
+    $server = Spawn-BgTagged "ps-server" @($cargo, "run", "-p", "ps-server", "--",
         "--host", $h, "--port", "$port",
         "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
-        "--db", (Join-Path $RepoRoot "psp-rs.db"), "--dev") $RepoRoot $null
+        "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") $RepoRoot $null
     Wait-OnProcs @($server) @()
 }
 
@@ -1156,8 +1156,8 @@ function Run-Amity {
     $pwsh = (Get-Command pwsh).Source
     $rc = Spawn-FgTagged "amity" (@($pwsh) + $argList) $AmityDir $null
     if ($rc -ne 0) { Die "Amity mod build/install failed." }
-    Log-Ok "PSPAmity installed. Launch Palworld, load a world, and look for '[PSPAmity] bridge listening' in UE4SS.log."
-    Write-Host "  Then: -Desktop and open the Game (live mod) source, or bun psp-amity/tools/probe.ts caps" -ForegroundColor DarkGray
+    Log-Ok "PSAmity installed. Launch Palworld, load a world, and look for '[PSAmity] bridge listening' in UE4SS.log."
+    Write-Host "  Then: -Desktop and open the Game (live mod) source, or bun ps-amity/tools/probe.ts caps" -ForegroundColor DarkGray
 }
 
 function Detect-LanIp() {
@@ -1199,27 +1199,27 @@ function Wait-OnProcs($primary, $secondary) {
 
 function Show-Usage() {
     @'
-dev.ps1 — Palworld Save Pal dev/launch/build helper (Windows).
+dev.ps1 — PalStudio dev/launch/build helper (Windows).
 Runs from source; does NOT auto-install tools (run -Check for a report card).
 
 mode (pick one; defaults to -Web):
-  -Web              Dev: Vite + psp-server (tool-only SPA).
+  -Web              Dev: Vite + ps-server (tool-only SPA).
   -Desktop          Dev: Tauri native window + embedded server.
   -Webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
   -Landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   -Docker           Build & run the self-build Docker image.
-  -Serve            Run only the Rust psp-server.
-  -Signal           Dev: PSP Signal loop — broker (wrangler) + desktop (Tauri)
+  -Serve            Run only the Rust ps-server.
+  -Signal           Dev: PalStudio Signal loop — broker (wrangler) + desktop (Tauri)
                     + web site on :5175, advertised on the LAN IP so phones
                     can pair. Components whose port is taken are skipped.
   -BuildDesktop     Production desktop build → dist/.
   -BuildAppImage    Linux only; from Windows run ./dev.sh --build-appimage in WSL.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
-  -Amity            Build the PSP Amity UE4SS mod and install it into the local
+  -Amity            Build the PalStudio Amity UE4SS mod and install it into the local
                     Palworld install (auto-detected from Steam). The game must
                     be closed. One-time setup first:
-                    .\psp-amity\scripts\setup-workspace.ps1
+                    .\ps-amity\scripts\setup-workspace.ps1
 
 options:
   -Check            Run only the preflight for the selected mode, then exit.
@@ -1228,7 +1228,7 @@ options:
   -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker);
                     LAN IP to advertise (-Signal, auto-detected by default).
   -VitePort <p>     Vite port (default 5173).
-  -ServerPort <p>   psp-server port (default 5174).
+  -ServerPort <p>   ps-server port (default 5174).
   -BrokerPort <p>   (-Signal) wrangler dev port (default 8787).
   -WebPort <p>      (-Signal) web site port (default 5175).
   -LocalOnly        (-Signal) bind everything to localhost; no LAN advertising.
@@ -1237,12 +1237,12 @@ options:
                     fail if the broker isn't minting, and print the
                     /signal?relay=1 forced-relay test URL. Plain -Signal already
                     reports TURN status but never fails on it.
-  -NoServer         (-Web) skip psp-server (Vite only).
+  -NoServer         (-Web) skip ps-server (Vite only).
   -SkipCheck        Skip the preflight (advanced).
   -NoInstall        Skip bun install if node_modules exists.
   -NoMux            Run components inline instead of in psmux panes. Modes
                     that start several components (-Web, -Signal) use psmux
-                    when it is installed: one pane each, session "psp".
+                    when it is installed: one pane each, session "ps".
   -RebuildWasm      (-Webapp/-BuildWeb) force wasm-pack rebuild.
   -GameDir <path>   (-Amity) Palworld install dir (…\steamapps\common\Palworld)
                     when Steam auto-detection does not find it.
