@@ -210,10 +210,15 @@
 			return filteredPals;
 		}
 
+		const palsBySlot = new Map<number, (typeof base.pals)[string]>();
+		for (const pal of Object.values(base.pals)) {
+			if (!palsBySlot.has(pal.storage_slot)) palsBySlot.set(pal.storage_slot, pal);
+		}
+
 		return Array(base.slot_count)
 			.fill(undefined)
 			.map((_, index) => {
-				const existingPal = Object.values(base.pals).find((p) => p.storage_slot === index);
+				const existingPal = palsBySlot.get(index);
 				if (existingPal) {
 					return {
 						pal: existingPal,

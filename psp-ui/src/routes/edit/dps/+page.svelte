@@ -85,6 +85,16 @@
 		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
 	);
 
+	// `index` is an Object.entries key, so it arrives as a string.
+	const palsBySlot = $derived.by(() => {
+		const bySlot = new Map<number, PalWithData>();
+		for (const pal of filteredPals) {
+			const slot = Number(pal.index);
+			if (!bySlot.has(slot)) bySlot.set(slot, pal);
+		}
+		return bySlot;
+	});
+
 	const currentPageItems = $derived.by(() => {
 		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
 		const endIndex = startIndex + PALS_PER_PAGE;
@@ -93,28 +103,22 @@
 			return filteredPals.slice(startIndex, endIndex);
 		}
 
-		const paddedPals = Array(TOTAL_SLOTS)
-			.fill(undefined)
-			.map((_, index) => {
-				const pal = filteredPals.find((p) => p.index == index);
-				if (pal) {
-					return pal;
-				} else {
-					return {
-						id: `empty-${index}`,
-						index: index,
-						pal: {
-							character_id: 'None',
-							character_key: 'None',
-							storage_slot: index,
-							instance_id: `empty-${index}`,
-							storage_id: appState.selectedPlayer?.pal_box_id
-						} as Pal
-					};
+		return Array.from({ length: Math.min(endIndex, TOTAL_SLOTS) - startIndex }, (_, offset) => {
+			const index = startIndex + offset;
+			return (
+				palsBySlot.get(index) ?? {
+					id: `empty-${index}`,
+					index: index,
+					pal: {
+						character_id: 'None',
+						character_key: 'None',
+						storage_slot: index,
+						instance_id: `empty-${index}`,
+						storage_id: appState.selectedPlayer?.pal_box_id
+					} as Pal
 				}
-			});
-
-		return paddedPals.slice(startIndex, endIndex);
+			);
+		});
 	});
 
 	const sortButtonClass = (currentSortBy: SortBy) =>
