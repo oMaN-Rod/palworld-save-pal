@@ -1,12 +1,14 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::net::{IpAddr, Ipv4Addr};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::Mutex;
 
 use tauri::{Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
 
 const SERVER_PORT: u16 = 5174;
+
+const LEGACY_IDENTIFIER: &str = "com.palworldsavepal.desktop";
 
 /// Holds the running embedded server so the exit handler can shut it down.
 struct EmbeddedServer(Mutex<Option<ps_server::ServerHandle>>);
@@ -31,12 +33,34 @@ fn repo_root() -> anyhow::Result<PathBuf> {
     Ok(std::env::current_dir()?)
 }
 
+/// The per-user dirs are named after the bundle identifier, so the old
+/// identifier's dirs hold the database, backups and the webview profile.
+/// Must run before anything creates the new dir or opens a webview.
+fn adopt_legacy_dir(dir: &Path) {
+    let legacy = dir.with_file_name(LEGACY_IDENTIFIER);
+    if dir.exists() || !legacy.is_dir() {
+        return;
+    }
+    match std::fs::rename(&legacy, dir) {
+        Ok(()) => tracing::info!("moved {} to {}", legacy.display(), dir.display()),
+        Err(error) => {
+            tracing::warn!(%error, "could not move {} to {}", legacy.display(), dir.display())
+        }
+    }
+}
+
 /// Packaged app: serve bundled resources, keep mutable state in the per-user app
 /// data dir. Unpackaged: use the repo's ui_build/ and data/ directly.
 fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
     if let Ok(resource_dir) = app.path().resource_dir() {
         let bundled_ui = resource_dir.join("ui");
         if bundled_ui.join("index.html").is_file() {
+            for dir in [app.path().app_data_dir(), app.path().app_local_data_dir()]
+                .into_iter()
+                .flatten()
+            {
+                adopt_legacy_dir(&dir);
+            }
             let app_data_dir = app.path().app_data_dir()?;
             std::fs::create_dir_all(&app_data_dir)?;
             // backups/, servers/ and open_folder("ps_root") resolve against
@@ -231,10 +255,37 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::{choose_webview_url, dmabuf_disable_value, pip_path};
+    use super::{adopt_legacy_dir, choose_webview_url, dmabuf_disable_value, pip_path, LEGACY_IDENTIFIER};
 
     fn url(s: &str) -> tauri::Url {
         s.parse().expect("valid url")
+    }
+
+    #[test]
+    fn adopts_the_legacy_identifier_dir_when_the_new_one_is_absent() {
+        let root = tempfile::tempdir().expect("a temp dir");
+        let legacy = root.path().join(LEGACY_IDENTIFIER);
+        std::fs::create_dir(&legacy).unwrap();
+        std::fs::write(legacy.join("ps-rs.db"), b"db").unwrap();
+        let current = root.path().join("com.palstudio.desktop");
+
+        adopt_legacy_dir(&current);
+
+        assert_eq!(std::fs::read(current.join("ps-rs.db")).unwrap(), b"db");
+        assert!(!legacy.exists());
+    }
+
+    #[test]
+    fn leaves_the_legacy_dir_alone_once_the_new_one_exists() {
+        let root = tempfile::tempdir().expect("a temp dir");
+        let legacy = root.path().join(LEGACY_IDENTIFIER);
+        std::fs::create_dir(&legacy).unwrap();
+        let current = root.path().join("com.palstudio.desktop");
+        std::fs::create_dir(&current).unwrap();
+
+        adopt_legacy_dir(&current);
+
+        assert!(legacy.is_dir());
     }
 
     #[test]
