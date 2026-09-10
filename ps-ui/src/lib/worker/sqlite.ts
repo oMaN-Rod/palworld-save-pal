@@ -54,14 +54,23 @@ export interface OpenSqliteOptions {
 const POOL_ATTEMPTS = 5;
 const POOL_RETRY_MS = 250;
 
+const POOL = 'ps-sahpool';
+const DB_FILE = '/ps.db';
+const LEGACY_POOL = 'psp-sahpool';
+const LEGACY_DB_FILE = '/psp.db';
+
+type Sqlite3 = Awaited<ReturnType<typeof sqlite3InitModule>>;
+type SahPool = Awaited<ReturnType<Sqlite3['installOpfsSAHPoolVfs']>>;
+
 async function installPool(
-	sqlite3: Awaited<ReturnType<typeof sqlite3InitModule>>,
+	sqlite3: Sqlite3,
+	name: string,
 	{ poolAttempts = POOL_ATTEMPTS, retryDelayMs = POOL_RETRY_MS }: OpenSqliteOptions
 ) {
 	let last: unknown;
 	for (let attempt = 1; attempt <= poolAttempts; attempt++) {
 		try {
-			return await sqlite3.installOpfsSAHPoolVfs({ name: 'ps-sahpool' });
+			return await sqlite3.installOpfsSAHPoolVfs({ name });
 		} catch (e) {
 			last = e;
 			if (attempt < poolAttempts) {
@@ -71,6 +80,30 @@ async function installPool(
 		}
 	}
 	throw last;
+}
+
+// The pool keeps its files in `.<name>`; probing for it keeps a fresh origin
+// from materialising an empty legacy pool on its first load.
+async function legacyPoolExists(): Promise<boolean> {
+	try {
+		const root = await navigator.storage.getDirectory();
+		await root.getDirectoryHandle(`.${LEGACY_POOL}`);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+// The database file must not be created before the legacy one is copied in, or
+// the empty file would win on every later load. A tab of the old build still
+// holding the legacy pool therefore fails this like any other busy pool.
+async function adoptLegacyPool(sqlite3: Sqlite3, pool: SahPool, options: OpenSqliteOptions) {
+	if (pool.getFileNames().includes(DB_FILE) || !(await legacyPoolExists())) return;
+	const legacy = await installPool(sqlite3, LEGACY_POOL, options);
+	if (legacy.getFileNames().includes(LEGACY_DB_FILE)) {
+		await pool.importDb(DB_FILE, await legacy.exportFile(LEGACY_DB_FILE));
+	}
+	await legacy.removeVfs().catch((e) => console.warn('[ps] could not remove the legacy OPFS pool:', e));
 }
 
 // Opens the persistent OPFS database; falls back to in-memory when the browser
@@ -85,8 +118,9 @@ export async function openSqlite(options: OpenSqliteOptions = {}): Promise<Sqlit
 		let db: Database | OpfsSAHPoolDatabase;
 		let persistent = false;
 		try {
-			const pool = await installPool(sqlite3, options);
-			db = new pool.OpfsSAHPoolDb('/ps.db');
+			const pool = await installPool(sqlite3, POOL, options);
+			await adoptLegacyPool(sqlite3, pool, options);
+			db = new pool.OpfsSAHPoolDb(DB_FILE);
 			persistent = true;
 		} catch (e) {
 			console.error('[ps] OPFS SAH pool unavailable; sqlite is in-memory for this session:', e);

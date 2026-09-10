@@ -19,7 +19,7 @@ vi.mock('@sqlite.org/sqlite-wasm', () => ({
 					'NoModificationAllowedError: Access Handles cannot be created if there is another open Access Handle'
 				);
 			}
-			return { OpfsSAHPoolDb: FakeDb };
+			return { OpfsSAHPoolDb: FakeDb, getFileNames: () => ['/ps.db'] };
 		},
 		oo1: { DB: FakeDb }
 	})

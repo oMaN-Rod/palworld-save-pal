@@ -52,6 +52,9 @@ class FakeDir {
 	async removeEntry(name: string) {
 		this.entries_.delete(name);
 	}
+	async *entries() {
+		yield* this.entries_.entries();
+	}
 }
 
 let opfsRoot: FakeDir;
@@ -79,5 +82,22 @@ describe('opfsBlobStore', () => {
 		// Partial file removed → the ps-saves dir has no 'big.zip'.
 		const dir = await opfsRoot.getDirectoryHandle('ps-saves', { create: true });
 		expect((dir as FakeDir).entries_.has('big.zip')).toBe(false);
+	});
+
+	it('adopts saves from the legacy directory, keeping newer copies', async () => {
+		vi.resetModules();
+		const legacy = await opfsRoot.getDirectoryHandle('psp-saves', { create: true });
+		(await legacy.getFileHandle('old.zip', { create: true })).file = new FakeFile(new Uint8Array([1, 2]));
+		(await legacy.getFileHandle('both.zip', { create: true })).file = new FakeFile(new Uint8Array([3]));
+		const current = await opfsRoot.getDirectoryHandle('ps-saves', { create: true });
+		(await current.getFileHandle('both.zip', { create: true })).file = new FakeFile(new Uint8Array([4]));
+		const fresh = await import('./opfsBlobStore');
+
+		const old = await fresh.getBlob('old.zip');
+		const both = await fresh.getBlob('both.zip');
+
+		expect(old && Array.from(old)).toEqual([1, 2]);
+		expect(both && Array.from(both)).toEqual([4]);
+		expect(opfsRoot.entries_.has('psp-saves')).toBe(false);
 	});
 });

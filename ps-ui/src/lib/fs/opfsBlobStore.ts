@@ -1,4 +1,5 @@
 const DIR = 'ps-saves';
+const LEGACY_DIR = 'psp-saves';
 
 export class QuotaError extends Error {
 	constructor() {
@@ -7,8 +8,38 @@ export class QuotaError extends Error {
 	}
 }
 
+let legacyAdopted: Promise<void> | undefined;
+
+/** The legacy dir is only removed once every entry has been copied across. */
+async function adoptLegacyDir(root: FileSystemDirectoryHandle): Promise<void> {
+	let legacy: FileSystemDirectoryHandle;
+	try {
+		legacy = await root.getDirectoryHandle(LEGACY_DIR);
+	} catch {
+		return;
+	}
+	const current = await root.getDirectoryHandle(DIR, { create: true });
+	for await (const [name, handle] of (legacy as unknown as {
+		entries(): AsyncIterableIterator<[string, FileSystemHandle]>;
+	}).entries()) {
+		if (handle.kind !== 'file') continue;
+		const exists = await current.getFileHandle(name).then(
+			() => true,
+			() => false
+		);
+		if (exists) continue;
+		const file = await (handle as FileSystemFileHandle).getFile();
+		const writable = await (await current.getFileHandle(name, { create: true })).createWritable();
+		await writable.write(new Uint8Array(await file.arrayBuffer()));
+		await writable.close();
+	}
+	await root.removeEntry(LEGACY_DIR, { recursive: true });
+}
+
 async function dir(): Promise<FileSystemDirectoryHandle> {
 	const root = await navigator.storage.getDirectory();
+	legacyAdopted ??= adoptLegacyDir(root).catch(() => {});
+	await legacyAdopted;
 	return root.getDirectoryHandle(DIR, { create: true });
 }
 

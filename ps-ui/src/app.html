@@ -13,6 +13,22 @@
 					history.replaceState(null, '', location.pathname + location.search);
 				}
 			})();
+			// Storage keys lost their `psp-` prefix; carry them over before any
+			// module hydrates its persisted state.
+			(function () {
+				try {
+					var keys = [];
+					for (var i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+					keys.forEach(function (key) {
+						if (!key || key.indexOf('psp-') !== 0) return;
+						var renamed = 'ps-' + key.slice(4);
+						if (localStorage.getItem(renamed) === null) {
+							localStorage.setItem(renamed, localStorage.getItem(key));
+						}
+						localStorage.removeItem(key);
+					});
+				} catch (e) {}
+			})();
 		</script>
 		<!--CF_BEACON_START--><!-- Cookieless analytics: no personal data, no
 		     consent banner, and the landing page's no-tracking claim stays true.

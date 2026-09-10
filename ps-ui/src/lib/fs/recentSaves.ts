@@ -9,9 +9,10 @@ export interface RecentSave {
 }
 
 const DB = 'ps-recent-saves';
+const LEGACY_DB = 'psp-recent-saves';
 const STORE = 'saves';
 
-function open(): Promise<IDBDatabase> {
+function openCurrent(): Promise<IDBDatabase> {
 	return new Promise((resolve, reject) => {
 		const req = indexedDB.open(DB, 1);
 		req.onupgradeneeded = () => {
@@ -20,6 +21,57 @@ function open(): Promise<IDBDatabase> {
 		req.onsuccess = () => resolve(req.result);
 		req.onerror = () => reject(req.error);
 	});
+}
+
+/** Resolves to null when the legacy database does not exist; aborting the
+ *  upgrade keeps the probe from creating it. */
+function readLegacy(): Promise<RecentSave[] | null> {
+	return new Promise((resolve) => {
+		const req = indexedDB.open(LEGACY_DB);
+		req.onupgradeneeded = () => req.transaction?.abort();
+		req.onerror = () => resolve(null);
+		req.onsuccess = () => {
+			const db = req.result;
+			if (!db.objectStoreNames.contains(STORE)) {
+				db.close();
+				resolve(null);
+				return;
+			}
+			const all = db.transaction(STORE, 'readonly').objectStore(STORE).getAll();
+			all.onsuccess = () => {
+				db.close();
+				resolve(all.result as RecentSave[]);
+			};
+			all.onerror = () => {
+				db.close();
+				resolve(null);
+			};
+		};
+	});
+}
+
+async function adoptLegacy(): Promise<void> {
+	const records = await readLegacy();
+	if (!records) return;
+	const db = await openCurrent();
+	await new Promise<void>((resolve, reject) => {
+		const t = db.transaction(STORE, 'readwrite');
+		const store = t.objectStore(STORE);
+		for (const rec of records) store.add(rec).onerror = (e) => e.preventDefault();
+		t.oncomplete = () => resolve();
+		t.onabort = () => reject(t.error);
+	}).finally(() => db.close());
+	await new Promise<void>((resolve) => {
+		const req = indexedDB.deleteDatabase(LEGACY_DB);
+		req.onsuccess = req.onerror = req.onblocked = () => resolve();
+	});
+}
+
+let legacyAdopted: Promise<void> | undefined;
+
+function open(): Promise<IDBDatabase> {
+	legacyAdopted ??= adoptLegacy().catch(() => {});
+	return legacyAdopted.then(openCurrent);
 }
 
 function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<T>): Promise<T> {

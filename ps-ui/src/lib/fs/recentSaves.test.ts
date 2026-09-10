@@ -41,6 +41,35 @@ describe('recentSaves', () => {
 		await removeRecent('a');
 		expect(await getMostRecent()).toBeNull();
 	});
+
+	it('adopts records from the legacy database, keeping newer copies', async () => {
+		await putRecent({ ...rec('kept', 500), worldName: 'current' });
+		await new Promise<void>((resolve, reject) => {
+			const req = indexedDB.open('psp-recent-saves', 1);
+			req.onupgradeneeded = () => req.result.createObjectStore('saves', { keyPath: 'id' });
+			req.onsuccess = () => {
+				const t = req.result.transaction('saves', 'readwrite');
+				t.objectStore('saves').put(rec('old', 100));
+				t.objectStore('saves').put({ ...rec('kept', 50), worldName: 'legacy' });
+				t.oncomplete = () => {
+					req.result.close();
+					resolve();
+				};
+			};
+			req.onerror = () => reject(req.error);
+		});
+		vi.resetModules();
+		const fresh = await import('./recentSaves');
+
+		const all = await fresh.listRecent();
+
+		expect(all.map((r) => [r.id, r.worldName])).toEqual([
+			['kept', 'current'],
+			['old', 'old']
+		]);
+		const names = (await indexedDB.databases()).map((d) => d.name);
+		expect(names).not.toContain('psp-recent-saves');
+	});
 });
 
 describe('recentSaves when IndexedDB is unavailable', () => {
