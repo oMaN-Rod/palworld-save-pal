@@ -10,7 +10,7 @@
 # Keep the UTF-8 BOM: without it 5.1 reads the file as ANSI and fails to parse.
 # PowerShell execution policy: if blocked, use:
 #   powershell -ExecutionPolicy Bypass -File .\dev.ps1 [args]
-# Or: Set-ExecutionPolicy -Scope CurrentUser RemoteOnce
+# Or: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 # param() MUST be the first executable statement in a .ps1. Everything else
 # (the comment header above, then blank lines/comments) is allowed before it.
@@ -364,7 +364,7 @@ function Run-Preflight($mode) {
     if ($repo) { $results.Add($repo) | Out-Null }
     $results.Add((Check-DiskSpace $mode)) | Out-Null
 
-    if ($mode -eq "web") {
+    if ($mode -in @("web","desktop")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
     } elseif ($mode -in @("serve","docker")) {
@@ -851,7 +851,7 @@ function Run-InstallWasm() {
     Report-Preflight "webapp" $false | Out-Null
 }
 
-function Run-Web($opts) {
+function Run-Web {
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
     $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
     $serverPort = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
@@ -897,7 +897,7 @@ function Run-Web($opts) {
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
 }
 
-function Run-Desktop($opts) {
+function Run-Desktop {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     try { & cargo tauri --version *> $null } catch { }
@@ -917,7 +917,7 @@ function Run-Desktop($opts) {
     Wait-OnProcs @($tauri) @()
 }
 
-function Run-Webapp($opts) {
+function Run-Webapp {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
@@ -936,7 +936,7 @@ function Run-Webapp($opts) {
     Wait-OnProcs @($vite) @()
 }
 
-function Run-Landing($opts) {
+function Run-Landing {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
@@ -954,7 +954,7 @@ function Run-Landing($opts) {
     Wait-OnProcs @($vite) @()
 }
 
-function Run-Signal($opts) {
+function Run-Signal {
     $bun = Resolve-Tool "bun"
     $cargo = Resolve-Tool "cargo"
     if (-not $bun)   { Die "bun not found." }
@@ -1070,7 +1070,7 @@ function Run-Signal($opts) {
     Wait-OnProcs $started @()
 }
 
-function Run-Serve($opts) {
+function Run-Serve {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     $h = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
@@ -1083,7 +1083,7 @@ function Run-Serve($opts) {
     Wait-OnProcs @($server) @()
 }
 
-function Run-Docker($opts) {
+function Run-Docker {
     $docker = Resolve-Tool "docker"
     if (-not $docker) { Die "docker not found." }
     if (-not (Test-Path (Join-Path $RepoRoot "docker-compose.yml"))) {
@@ -1102,7 +1102,7 @@ function Run-Docker($opts) {
     Write-Host "  Logs: docker compose logs -f   ·   Stop: docker compose down" -ForegroundColor DarkGray
 }
 
-function Run-BuildDesktop($opts) {
+function Run-BuildDesktop {
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     Ensure-BunInstall $true
@@ -1119,7 +1119,7 @@ function Run-BuildDesktop($opts) {
     Log-Ok "Desktop build complete."
 }
 
-function Run-BuildWeb($opts) {
+function Run-BuildWeb {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     Ensure-BunInstall $true
@@ -1132,7 +1132,7 @@ function Run-BuildWeb($opts) {
     Log-Ok "Web build complete → ui_build/"
 }
 
-function Run-BuildPlain($opts) {
+function Run-BuildPlain {
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     Ensure-BunInstall $true
@@ -1143,7 +1143,7 @@ function Run-BuildPlain($opts) {
     Log-Ok "Plain SPA build complete → ui_build/"
 }
 
-function Run-Amity($opts) {
+function Run-Amity {
     $dir = Resolve-GameDir
     if (-not $dir) { Die "Palworld install not found. Pass -GameDir <...\steamapps\common\Palworld>." }
     $ws = Resolve-AmityWorkspace
@@ -1332,16 +1332,16 @@ function Invoke-WithCleanup([scriptblock]$body) {
 
 Invoke-WithCleanup {
     switch ($mode) {
-        "web"           { Run-Web $null }
-        "desktop"       { Run-Desktop $null }
-        "webapp"        { Run-Webapp $null }
-        "landing"       { Run-Landing $null }
-        "docker"        { Run-Docker $null }
-        "serve"         { Run-Serve $null }
-        "signal"        { Run-Signal $null }
-        "build-desktop" { Run-BuildDesktop $null }
-        "build-web"     { Run-BuildWeb $null }
-        "build"         { Run-BuildPlain $null }
-        "amity"         { Run-Amity $null }
+        "web"           { Run-Web }
+        "desktop"       { Run-Desktop }
+        "webapp"        { Run-Webapp }
+        "landing"       { Run-Landing }
+        "docker"        { Run-Docker }
+        "serve"         { Run-Serve }
+        "signal"        { Run-Signal }
+        "build-desktop" { Run-BuildDesktop }
+        "build-web"     { Run-BuildWeb }
+        "build"         { Run-BuildPlain }
+        "amity"         { Run-Amity }
     }
 }

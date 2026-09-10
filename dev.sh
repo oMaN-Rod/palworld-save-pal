@@ -28,11 +28,9 @@ else
     RESET=""; BOLD=""; DIM=""; RED=""; GREEN=""; YELLOW=""; CYAN=""
 fi
 
-CHILD_PIDS=()
 PREVIOUS_ENV_EXISTS=0
 PREVIOUS_ENV_CONTENT=""
 RESTORE_ENV=0
-HTTP_POLL_PIDS=()
 
 log_info()  { printf '%s›%s %s\n' "${CYAN}${BOLD}" "$RESET" "$*" >&2; }
 log_ok()    { printf '%s✓%s %s\n' "$GREEN" "$RESET" "$*" >&2; }
@@ -273,7 +271,8 @@ run_preflight() {
     [[ -n "$repo_row" ]] && printf '%s\n' "$repo_row"
     check_disk_space "$mode"
     case "$mode" in
-        web) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
+        # desktop: tauri dev starts Vite and the embedded server binds its port.
+        web|desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
         serve|docker) check_port "$SERVER_PORT_DEFAULT" ;;
         webapp|landing) check_port "$VITE_PORT_DEFAULT" ;;
     esac
@@ -411,7 +410,13 @@ cleanup_children() {
     if [[ -z "$self_pgid" ]]; then
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
-    if [[ -n "$self_pgid" ]]; then
+    # Group-kill only when this script leads its own process group (an
+    # interactive terminal job). A non-interactive caller such as make or CI
+    # shares the group, and a negative-PGID kill would take the caller down too;
+    # the per-PID kills below still cover everything spawned here.
+    local parent_pgid
+    parent_pgid="$(ps -o pgid= -p "$PPID" 2>/dev/null | tr -d ' ' || true)"
+    if [[ -n "$self_pgid" && "$self_pgid" != "$parent_pgid" ]]; then
         # This shell is a member of the group it is about to signal. SIGTERM is
         # survivable (ignored below for the duration), but a group-wide SIGKILL
         # is not trappable and would kill us before restore_env_on_exit runs,
