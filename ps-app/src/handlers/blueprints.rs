@@ -193,7 +193,7 @@ pub async fn handle_export_blueprint_file(
         };
         match data.format.as_str() {
             "json" => (gvas::to_json(blueprint)?.into_bytes(), "json"),
-            "psbp" => (gvas::to_psbp_bytes(blueprint)?, "psbp"),
+            "psbp" | "psp" => (gvas::to_psbp_bytes(blueprint)?, "psbp"),
             other => return Err(HandlerError::Other(format!("unknown export format {other}"))),
         }
     };

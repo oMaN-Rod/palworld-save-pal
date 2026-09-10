@@ -392,6 +392,28 @@ fn an_unparsed_raw_data_sibling_does_not_erase_a_typed_one() {
 }
 
 #[test]
+fn a_file_with_the_legacy_magic_still_decodes() {
+    let original = empty_blueprint();
+    let mut bytes = gvas::to_psbp_bytes(&original).expect("psbp encode");
+    bytes[..gvas::LEGACY_MAGIC.len()].copy_from_slice(gvas::LEGACY_MAGIC);
+
+    let restored = gvas::from_psbp_bytes(&bytes).expect("a legacy .psp file must decode");
+
+    assert_eq!(restored.header.name, original.header.name);
+}
+
+#[test]
+fn a_save_with_the_legacy_game_type_still_decodes() {
+    let original = empty_blueprint();
+    let mut save = gvas::to_save(&original).expect("to save");
+    save.root.save_game_type = gvas::LEGACY_SAVE_GAME_TYPE.to_string();
+
+    let restored = gvas::from_save(&save).expect("a legacy blueprint must decode");
+
+    assert_eq!(restored.header.name, original.header.name);
+}
+
+#[test]
 fn a_file_without_the_magic_header_is_rejected_clearly() {
     let result = gvas::from_psbp_bytes(b"not a blueprint at all");
 

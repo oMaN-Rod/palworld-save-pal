@@ -130,7 +130,7 @@
 		</div>
 	</div>
 
-	<FileDropzone name="blueprint-import" accept=".psbp,.json" bind:files={importFiles}>
+	<FileDropzone name="blueprint-import" accept=".psbp,.psp,.json" bind:files={importFiles}>
 		{#snippet message()}
 			<h3 class="h3">Import a blueprint</h3>
 			<span>Drag and drop a .psbp or .json file here</span>

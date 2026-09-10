@@ -13,11 +13,14 @@ use crate::ue::{
 };
 use crate::ue::{Properties, Property};
 
-pub const PSBP_MAGIC: &[u8; 8] = b"PSBP1\0\0\0";
+pub const PSBP_MAGIC: &[u8] = b"PSBP1\0\0\0";
+/// Written by releases before the rename; still accepted on decode.
+pub const LEGACY_MAGIC: &[u8] = b"PSPBP1\0\0";
 
 /// The `Root::save_game_type` every blueprint carries. Checked on decode so a
 /// foreign `Save` cannot be read as a blueprint through the JSON door.
 pub const SAVE_GAME_TYPE: &str = "PsBaseBlueprint";
+pub const LEGACY_SAVE_GAME_TYPE: &str = "PspBaseBlueprint";
 
 /// The blueprint's payload lives under the SAME property names the game's own
 /// `Level.sav` uses, nested under the same `worldSaveData` root struct.
@@ -52,7 +55,8 @@ pub fn to_psbp_bytes(blueprint: &BaseBlueprint) -> Result<Vec<u8>, CoreError> {
 
 pub fn from_psbp_bytes(bytes: &[u8]) -> Result<BaseBlueprint, CoreError> {
     let prefix = PSBP_MAGIC.len() + 4;
-    if bytes.len() < prefix || &bytes[..PSBP_MAGIC.len()] != PSBP_MAGIC {
+    let magic = bytes.get(..PSBP_MAGIC.len());
+    if bytes.len() < prefix || (magic != Some(PSBP_MAGIC) && magic != Some(LEGACY_MAGIC)) {
         return Err(CoreError::Parse("not a psbp blueprint file".to_string()));
     }
     let mut version_bytes = [0u8; 4];
@@ -170,7 +174,7 @@ pub fn placement_schemas(blueprint: &BaseBlueprint) -> Result<PropertySchemas, C
 }
 
 pub fn from_save(save: &Save) -> Result<BaseBlueprint, CoreError> {
-    if save.root.save_game_type != SAVE_GAME_TYPE {
+    if save.root.save_game_type != SAVE_GAME_TYPE && save.root.save_game_type != LEGACY_SAVE_GAME_TYPE {
         return Err(CoreError::Parse(format!(
             "not a psbp blueprint: save game type is {:?}, expected {SAVE_GAME_TYPE:?}",
             save.root.save_game_type
