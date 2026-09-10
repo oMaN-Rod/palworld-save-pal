@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# easyrun.sh — one-shot launcher / preflight for Palworld Save Pal (PSP).
-# macOS/Linux entry point (the PowerShell sibling is easyrun.ps1 for Windows).
+# dev.sh — one-shot launcher / preflight for Palworld Save Pal (PSP).
+# macOS/Linux entry point (the PowerShell sibling is dev.ps1 for Windows).
 #
 # Does NOT auto-install anything (except the opt-in --install-wasm): on a
 # missing or wrong tool it prints the exact command to fix it and exits
-# non-zero. Defaults to --web; run `./easyrun.sh --help` for the full flag
+# non-zero. Defaults to --web; run `./dev.sh --help` for the full flag
 # list.
 set -euo pipefail
 
@@ -21,7 +21,7 @@ WASM_OUT="$UI_DIR/src/lib/wasm/psp"
 VITE_PORT_DEFAULT=5173   # vite.config.ts server.port, strictPort:true
 SERVER_PORT_DEFAULT=5174 # psp-server default + Docker EXPOSE + WS_URL host
 
-if [[ -t 1 ]] && [[ "${EASYRUN_NO_COLOR:-}" != "1" ]] && [[ "${EASYRUN_NO_COLOR:-}" != "true" ]]; then
+if [[ -t 1 ]] && [[ "${PSP_DEV_NO_COLOR:-}" != "1" ]] && [[ "${PSP_DEV_NO_COLOR:-}" != "true" ]]; then
     RESET=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'
     RED=$'\033[31m'; GREEN=$'\033[32m'; YELLOW=$'\033[33m'; CYAN=$'\033[36m'
 else
@@ -80,7 +80,7 @@ check_repo() {
     if [[ -f "$REPO_ROOT/psp-server/Cargo.toml" ]] && [[ -d "$UI_DIR" ]]; then
         return 0
     fi
-    printf 'PSP repo\tcrit\tpsp-server/Cargo.toml or psp-ui/ not found at %s\tRun easyrun from the PSP repo root.\n' "$REPO_ROOT"
+    printf 'PSP repo\tcrit\tpsp-server/Cargo.toml or psp-ui/ not found at %s\tRun dev.sh from the PSP repo root.\n' "$REPO_ROOT"
 }
 
 check_bun() {
@@ -315,8 +315,8 @@ report_preflight() {
         printf '\n  %s%s ok%s  %s%s warn%s  %s%s critical%s\n' \
             "$BOLD" "$n_ok" "$RESET" "$YELLOW" "$n_warn" "$RESET" "$RED" "$n_crit" "$RESET" >&2
         if (( n_crit > 0 )); then
-            printf '  %sFix the %s critical issue(s) above, then re-run easyrun.%s\n' "$RED" "$n_crit" "$RESET" >&2
-            printf '  %s(Tip: easyrun.sh --check for a standalone report.)%s\n' "$DIM" "$RESET" >&2
+            printf '  %sFix the %s critical issue(s) above, then re-run dev.sh.%s\n' "$RED" "$n_crit" "$RESET" >&2
+            printf '  %s(Tip: dev.sh --check for a standalone report.)%s\n' "$DIM" "$RESET" >&2
         fi
     fi
     (( n_crit > 0 )) && return 1
@@ -407,7 +407,7 @@ cleanup_children() {
     # more reliable than tracking individual child PIDs, which can be reaped
     # before we resolve their PGID. SIGTERM first (grace), then SIGKILL.
     set +e
-    local self_pgid="${EASYRUN_PGID:-}"
+    local self_pgid="${PSP_DEV_PGID:-}"
     if [[ -z "$self_pgid" ]]; then
         self_pgid="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ' || true)"
     fi
@@ -457,7 +457,7 @@ ensure_bun_install() {
     # $1 = force (1) to run bun install even if node_modules exists.
     local force="${1:-0}" bun
     bun="$(resolve_tool bun || true)"
-    [[ -n "$bun" ]] || die "bun not found — run ./easyrun.sh --check first."
+    [[ -n "$bun" ]] || die "bun not found — run ./dev.sh --check first."
     if [[ -d "$NODE_MODULES" ]] && (( ! force )); then
         log_info "psp-ui/node_modules present — skipping bun install."
         return
@@ -509,8 +509,8 @@ ensure_wasm() {
     fi
 
     local cargo wasm_pack
-    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found — run ./easyrun.sh --check first."
-    wasm_pack="$(resolve_tool wasm-pack || true)"; [[ -n "$wasm_pack" ]] || die "wasm-pack not found — run ./easyrun.sh --install-wasm first."
+    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found — run ./dev.sh --check first."
+    wasm_pack="$(resolve_tool wasm-pack || true)"; [[ -n "$wasm_pack" ]] || die "wasm-pack not found — run ./dev.sh --install-wasm first."
     log_info "Building psp-web (wasm-pack): $reason"
     # Clear generated output only — an interrupted build must still leave a
     # resolvable $lib/wasm/psp behind, so the tracked placeholders have to
@@ -545,7 +545,7 @@ run_install_wasm() {
     [[ -n "$rustup" ]] || die "rustup is required to manage the wasm32 target, but it's not on PATH.
     Install it first:
       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    Then open a NEW terminal and re-run:  ./easyrun.sh --install-wasm"
+    Then open a NEW terminal and re-run:  ./dev.sh --install-wasm"
 
     if "$rustup" target list --installed 2>/dev/null | grep -q 'wasm32-unknown-unknown'; then
         log_ok "wasm32-unknown-unknown target already installed."
@@ -570,7 +570,7 @@ run_install_wasm() {
             printf '\n%swasm-pack installed but not on PATH.%s\n' "$YELLOW" "$RESET" >&2
             printf '  It'\''s at %s~/.cargo/bin/wasm-pack%s.\n' "$DIM" "$RESET" >&2
             printf '  Open a NEW terminal (so PATH refreshes), then verify:\n    wasm-pack --version\n' >&2
-            printf '  Then re-run: %s./easyrun.sh --check --webapp%s\n' "$BOLD" "$RESET" >&2
+            printf '  Then re-run: %s./dev.sh --check --webapp%s\n' "$BOLD" "$RESET" >&2
             return 0
         fi
         log_ok "wasm-pack installed ($(probe_version wasm-pack --version))."
@@ -608,7 +608,7 @@ run_web() {
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
     printf '\n%s%s  ▸ PSP web dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$vite_port" "$RESET" >&2
-    printf '%s  Ctrl-C to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
         wait_on_pids "$vite_pid" "$server_pid"
     else
@@ -636,7 +636,7 @@ run_desktop() {
     # cargo tauri dev must run from psp-desktop/.
     SPAWN_CWD="$PSP_DESKTOP_DIR" spawn_bg_tagged tauri "$cargo" tauri dev
     tauri_pid="$LAST_BG_PID"
-    printf '%s  Ctrl-C to stop. easyrun restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores psp-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$tauri_pid"
 }
 
@@ -777,7 +777,7 @@ wait_on_pids() {
 
 usage() {
     cat <<'EOF' >&2
-easyrun.sh — Palworld Save Pal dev/launch/build helper (macOS/Linux).
+dev.sh — Palworld Save Pal dev/launch/build helper (macOS/Linux).
 Runs from source; does NOT auto-install tools (run --check for a report card).
 
 mode (pick one; defaults to --web):
@@ -790,7 +790,7 @@ mode (pick one; defaults to --web):
   --build-desktop    Production desktop build → dist/.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
-  (The PSP Amity UE4SS mod is Windows-only: easyrun.ps1 -Amity.)
+  (The PSP Amity UE4SS mod is Windows-only: dev.ps1 -Amity.)
 
 options:
   --check, --doctor  Run only the preflight for the selected mode, then exit.
@@ -809,7 +809,7 @@ options:
   --force-check-mode <m>  Override the preflight mode (advanced).
   -h, --help         Show this help.
 
-Windows users: run easyrun.ps1 instead.
+Windows users: run dev.ps1 instead.
 EOF
 }
 
@@ -861,7 +861,7 @@ main() {
     # Capture OUR process-group ID now, before any child spawns. All children
     # run in this same group (no setsid), so a negative-PGID kill in cleanup
     # reaches the whole tree even if individual child PIDs have been reaped.
-    export EASYRUN_PGID="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ')"
+    export PSP_DEV_PGID="$(ps -o pgid= -p $$ 2>/dev/null | tr -d ' ')"
     # Install the cleanup trap EARLY — before any child is spawned — so an
     # interrupt at ANY point (during preflight, bun install, wait_for_http, or
     # the run loop) tears down spawned children. INT/TERM print a message and

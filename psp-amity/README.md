@@ -3,7 +3,7 @@
 In-game bridge mod for Palworld (UE4SS C++ mod). Hosts a local, token-authenticated
 WebSocket that PSP connects to for live game state.
 
-The everyday path is the repo-root launcher: `.\easyrun.ps1 -Amity` builds the mod and
+The everyday path is the repo-root launcher: `.\dev.ps1 -Amity` builds the mod and
 installs it into the Palworld install Steam reports, with the game closed. Its `-Check`
 form lists what is missing. The scripts underneath take every machine-specific value as
 an argument and default to an `amity-build` workspace folder beside the repo:

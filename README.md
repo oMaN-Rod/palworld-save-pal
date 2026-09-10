@@ -167,10 +167,10 @@ edit a running world. On Windows, with the game closed:
 
 ```powershell
 .\psp-amity\scripts\setup-workspace.ps1   # once: clones the pinned UE4SS fork
-.\easyrun.ps1 -Amity                       # build the mod and install it into Palworld
+.\dev.ps1 -Amity                           # build the mod and install it into Palworld
 ```
 
-`easyrun.ps1 -Amity -Check` reports what is missing; `-GameDir` overrides the Steam
+`dev.ps1 -Amity -Check` reports what is missing; `-GameDir` overrides the Steam
 auto-detection. See [psp-amity/INSTALL.md](psp-amity/INSTALL.md) for the shipped zip.
 
 ## 🔥 Features
