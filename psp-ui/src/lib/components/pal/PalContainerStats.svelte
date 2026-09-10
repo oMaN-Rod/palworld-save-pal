@@ -25,14 +25,14 @@
 		elementsData?: any;
 	}>();
 
-	elements = elements || elementsData;
+	const resolvedElements = $derived(elements || elementsData);
 
 	const appState = getAppState();
 
 	let elementIcons = $derived.by(() => {
 		let icons: Record<string, string> = {};
 		for (const element of elementTypes) {
-			const elementData = elements.elements[element];
+			const elementData = resolvedElements.elements[element];
 			if (elementData) {
 				icons[element] = assetLoader.loadImage(
 					`${ASSET_DATA_PATH}/img/${elementData.icon}.webp`
@@ -136,7 +136,7 @@
 					<img src={elementIcons[element]} alt={element} class="pal-element-badge mr-2" />
 					<div class="grow">
 						<span class="text-xs 2xl:text-base">
-							{elements.elements[element]?.localized_name || element}
+							{resolvedElements.elements[element]?.localized_name || element}
 						</span>
 					</div>
 					<span>{count}</span>
