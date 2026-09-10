@@ -19,6 +19,8 @@ const PAIRING_GATE_MESSAGE: &str =
 const REMOTE_ACCESS_GATE_MESSAGE: &str =
     "Remote access must be managed from PalStudio on the machine it is running on.";
 const ALLOW_REMOTE_PAIRING_VAR: &str = "PS_SIGNAL_ALLOW_REMOTE_PAIRING";
+/// Documented for self-hosts before the rename, so existing configs set it.
+const LEGACY_ALLOW_REMOTE_PAIRING_VAR: &str = "PSP_SIGNAL_ALLOW_REMOTE_PAIRING";
 const UNKNOWN_DEVICE_MESSAGE: &str = "That device is not paired with this desktop.";
 const EMPTY_DEVICE_NAME_MESSAGE: &str = "A device name cannot be empty.";
 
@@ -167,8 +169,12 @@ fn remote_pairing_env_allows(value: Option<&str>) -> bool {
 }
 
 fn pairing_control_allowed(ctx: &HandlerCtx<'_>) -> bool {
-    let allow_remote =
-        remote_pairing_env_allows(std::env::var(ALLOW_REMOTE_PAIRING_VAR).ok().as_deref());
+    let allow_remote = remote_pairing_env_allows(
+        std::env::var(ALLOW_REMOTE_PAIRING_VAR)
+            .or_else(|_| std::env::var(LEGACY_ALLOW_REMOTE_PAIRING_VAR))
+            .ok()
+            .as_deref(),
+    );
     pairing_allowed(ctx.is_loopback, allow_remote)
 }
 
