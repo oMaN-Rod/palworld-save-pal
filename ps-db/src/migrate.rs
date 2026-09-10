@@ -23,10 +23,28 @@ pub const MIGRATIONS: &[Migration] = &[
 const CREATE_TRACKER: &str =
     "CREATE TABLE IF NOT EXISTS _ps_migrations (version INTEGER PRIMARY KEY)";
 const SELECT_APPLIED: &str = "SELECT version FROM _ps_migrations";
+const SELECT_TRACKERS: &str = "SELECT \
+    (SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = '_psp_migrations') AS legacy, \
+    (SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = '_ps_migrations') AS current";
+const RENAME_LEGACY_TRACKER: &str = "ALTER TABLE _psp_migrations RENAME TO _ps_migrations";
+
+/// A database created under the old tracker name keeps its applied versions;
+/// without this every migration would re-run against existing tables.
+async fn adopt_legacy_tracker(db: &dyn DbDriver) -> Result<(), DbError> {
+    let rows = db.query(SELECT_TRACKERS, &[]).await?;
+    let Some(row) = rows.first() else {
+        return Ok(());
+    };
+    if row.get_i64("legacy")? == 1 && row.get_i64("current")? == 0 {
+        db.execute(RENAME_LEGACY_TRACKER, &[]).await?;
+    }
+    Ok(())
+}
 
 /// Each migration's SQL runs as a single `execute` call — the driver must run
 /// multi-statement scripts when given no params.
 pub async fn run_migrations(db: &dyn DbDriver) -> Result<(), DbError> {
+    adopt_legacy_tracker(db).await?;
     db.execute(CREATE_TRACKER, &[]).await?;
     let applied: std::collections::HashSet<i64> = db
         .query(SELECT_APPLIED, &[])
@@ -58,6 +76,13 @@ mod tests {
     struct MockDriver {
         applied: Mutex<Vec<i64>>,
         executes: Mutex<Vec<String>>,
+        legacy_tracker: bool,
+    }
+
+    impl MockDriver {
+        fn new(legacy_tracker: bool) -> Self {
+            Self { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]), legacy_tracker }
+        }
     }
 
     #[async_trait::async_trait]
@@ -71,7 +96,13 @@ mod tests {
             }
             Ok(0)
         }
-        async fn query(&self, _sql: &str, _params: &[DbValue]) -> Result<Vec<DbRow>, DbError> {
+        async fn query(&self, sql: &str, _params: &[DbValue]) -> Result<Vec<DbRow>, DbError> {
+            if sql == SELECT_TRACKERS {
+                let cols = Arc::new(vec!["legacy".to_string(), "current".to_string()]);
+                let renamed = self.executes.lock().unwrap().iter().any(|s| s == RENAME_LEGACY_TRACKER);
+                let legacy = i64::from(self.legacy_tracker && !renamed);
+                return Ok(vec![DbRow::from_parts(cols, vec![DbValue::Integer(legacy), DbValue::Integer(1 - legacy)])]);
+            }
             let cols = Arc::new(vec!["version".to_string()]);
             Ok(self
                 .applied
@@ -84,8 +115,18 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn renames_the_legacy_tracker_once() {
+        let driver = MockDriver::new(true);
+        run_migrations(&driver).await.unwrap();
+        run_migrations(&driver).await.unwrap();
+        let renames =
+            driver.executes.lock().unwrap().iter().filter(|s| *s == RENAME_LEGACY_TRACKER).count();
+        assert_eq!(renames, 1);
+    }
+
+    #[tokio::test]
     async fn applies_all_then_is_idempotent() {
-        let driver = MockDriver { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]) };
+        let driver = MockDriver::new(false);
         run_migrations(&driver).await.unwrap();
         assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         let migration_execs = driver

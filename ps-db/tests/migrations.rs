@@ -60,6 +60,36 @@ async fn meta_get_set_roundtrip() {
     );
 }
 
+#[tokio::test]
+async fn run_migrations_adopts_the_legacy_tracker_table() {
+    let pool = sqlx::sqlite::SqlitePoolOptions::new()
+        .max_connections(1)
+        .connect("sqlite::memory:")
+        .await
+        .unwrap();
+    let db = ps_db::SqlxSqliteDriver::new(pool.clone());
+    ps_db::run_migrations(&db).await.unwrap();
+    sqlx::query("ALTER TABLE _ps_migrations RENAME TO _psp_migrations")
+        .execute(&pool)
+        .await
+        .unwrap();
+
+    ps_db::run_migrations(&db).await.unwrap();
+
+    let trackers: Vec<String> = sqlx::query_scalar(
+        "SELECT name FROM sqlite_master WHERE name IN ('_psp_migrations', '_ps_migrations')",
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+    assert_eq!(trackers, vec!["_ps_migrations".to_string()]);
+    let applied: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM _ps_migrations")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    assert_eq!(applied, ps_db::MIGRATIONS.len() as i64);
+}
+
 #[test]
 fn iso_naive_formats_without_timezone_suffix() {
     let with_micros = chrono::NaiveDate::from_ymd_opt(2026, 1, 2)

@@ -22,10 +22,42 @@ pub use ps_app::{
 };
 
 use std::net::{IpAddr, SocketAddr};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
 use ps_core::gamedata::GameData;
+
+const DB_FILE: &str = "ps-rs.db";
+const LEGACY_DB_FILE: &str = "psp-rs.db";
+
+fn with_suffix(path: &Path, suffix: &str) -> PathBuf {
+    let mut name = path.as_os_str().to_owned();
+    name.push(suffix);
+    PathBuf::from(name)
+}
+
+/// Takes over the database under its previous file name, WAL and shared-memory
+/// siblings included, so no committed-but-uncheckpointed pages are left behind.
+fn adopt_legacy_db_file(db_path: &Path) {
+    if db_path.file_name() != Some(DB_FILE.as_ref()) || db_path.exists() {
+        return;
+    }
+    let legacy = db_path.with_file_name(LEGACY_DB_FILE);
+    if !legacy.is_file() {
+        return;
+    }
+    for suffix in ["-wal", "-shm", ""] {
+        let from = with_suffix(&legacy, suffix);
+        if !from.exists() {
+            continue;
+        }
+        if let Err(error) = std::fs::rename(&from, with_suffix(db_path, suffix)) {
+            tracing::warn!(%error, "could not rename {}", from.display());
+            return;
+        }
+    }
+    tracing::info!("renamed {} to {}", legacy.display(), db_path.display());
+}
 
 #[derive(Debug, Clone)]
 pub struct ServerConfig {
@@ -119,6 +151,7 @@ pub async fn start_server_with(
     dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
 ) -> anyhow::Result<ServerHandle> {
     let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
+    adopt_legacy_db_file(&config.db_path);
     let db = ps_db::open(&config.db_path).await?;
     let legacy_db_path = config
         .db_path
@@ -214,4 +247,37 @@ pub async fn start_server_with(
         instance_reconciler_cancel,
         instance_reconciler_task,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{adopt_legacy_db_file, DB_FILE, LEGACY_DB_FILE};
+
+    #[test]
+    fn adopts_the_legacy_db_with_its_wal() {
+        let dir = tempfile::tempdir().unwrap();
+        std::fs::write(dir.path().join(LEGACY_DB_FILE), b"main").unwrap();
+        std::fs::write(dir.path().join(format!("{LEGACY_DB_FILE}-wal")), b"wal").unwrap();
+        let db_path = dir.path().join(DB_FILE);
+
+        adopt_legacy_db_file(&db_path);
+
+        assert_eq!(std::fs::read(&db_path).unwrap(), b"main");
+        assert_eq!(std::fs::read(dir.path().join(format!("{DB_FILE}-wal"))).unwrap(), b"wal");
+        assert!(!dir.path().join(LEGACY_DB_FILE).exists());
+    }
+
+    #[test]
+    fn keeps_an_existing_db_and_ignores_custom_names() {
+        let dir = tempfile::tempdir().unwrap();
+        std::fs::write(dir.path().join(LEGACY_DB_FILE), b"old").unwrap();
+        std::fs::write(dir.path().join(DB_FILE), b"new").unwrap();
+
+        adopt_legacy_db_file(&dir.path().join(DB_FILE));
+        adopt_legacy_db_file(&dir.path().join("custom.db"));
+
+        assert_eq!(std::fs::read(dir.path().join(DB_FILE)).unwrap(), b"new");
+        assert!(dir.path().join(LEGACY_DB_FILE).exists());
+        assert!(!dir.path().join("custom.db").exists());
+    }
 }
