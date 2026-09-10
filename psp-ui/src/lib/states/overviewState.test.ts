@@ -54,7 +54,8 @@ const sampleStats = {
 		danger_count: 0,
 		by_code: [],
 		flagged: []
-	}
+	},
+	dps_pending_players: 0
 };
 
 beforeEach(() => {
@@ -110,6 +111,20 @@ describe('overviewState', () => {
 		expect(overviewState.error).toBe('No save file loaded');
 		expect(overviewState.loading).toBe(false);
 		expect(overviewState.stats).toBeNull();
+	});
+
+	it('requests a DPS scan once and clears the flag on the reply', () => {
+		mockAppState.saveFile = { session_id: 'session-a', world_name: 'A' };
+		const overviewState = getOverviewState();
+		overviewState.scanDps();
+		overviewState.scanDps();
+		overviewState.load(true);
+		expect(sendMock).toHaveBeenCalledTimes(1);
+		expect(sendMock).toHaveBeenCalledWith(MessageType.GET_OVERVIEW_STATS, { scan_dps: true });
+		expect(overviewState.scanningDps).toBe(true);
+
+		getOverviewStatsHandler.handle({ stats: sampleStats }, mockContext);
+		expect(overviewState.scanningDps).toBe(false);
 	});
 
 	it('is registered for the get_overview_stats message type', () => {

@@ -133,6 +133,7 @@ pub fn transfer_player(
             LoadedPlayer::new(target_player_uid, sav, dps),
         );
         target.player_file_refs.insert(target_player_uid, file_ref);
+        target.dps_scans.remove(&target_player_uid);
         source_instance_id
     } else {
         ensure_player_gvas_loaded(target, target_player_uid)?;

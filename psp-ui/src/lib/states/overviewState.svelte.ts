@@ -52,6 +52,12 @@ export interface OverviewStats {
 		nickname: string;
 		level: number | null;
 		pal_count: number;
+		lucky_count: number;
+		avg_pal_level: number | null;
+		max_pal_level: number | null;
+		total_power: number;
+		/** Null until the player's Dimensional Pal Storage is scanned. */
+		dps_pal_count: number | null;
 	}[];
 	anomalies: {
 		pal_count: number;
@@ -64,8 +70,12 @@ export interface OverviewStats {
 			level: number;
 			severity: 'danger' | 'warning';
 			codes: string[];
+			owner_uid: string | null;
+			source: 'world' | 'dps';
 		}[];
 	};
+	/** Players whose Dimensional Pal Storage has not been scanned yet. */
+	dps_pending_players: number;
 }
 
 /**
@@ -77,6 +87,7 @@ export interface OverviewStats {
 class OverviewStateClass {
 	stats = $state<OverviewStats | null>(null);
 	loading = $state(false);
+	scanningDps = $state(false);
 	error = $state<string | null>(null);
 	/** The session id the cached stats belong to. */
 	cachedSessionId = $state<string | null>(null);
@@ -84,6 +95,7 @@ class OverviewStateClass {
 	reset() {
 		this.stats = null;
 		this.loading = false;
+		this.scanningDps = false;
 		this.error = null;
 		this.cachedSessionId = null;
 	}
@@ -91,6 +103,7 @@ class OverviewStateClass {
 	setStats(stats: OverviewStats) {
 		this.stats = stats;
 		this.loading = false;
+		this.scanningDps = false;
 		this.error = null;
 		this.cachedSessionId = currentSessionId();
 	}
@@ -98,12 +111,13 @@ class OverviewStateClass {
 	setError(error: string) {
 		this.error = error;
 		this.loading = false;
+		this.scanningDps = false;
 	}
 
 	/** Fetches unless a cache for the current session already exists. */
 	load(force = false) {
 		if (!getAppState().saveFile) return;
-		if (this.loading) return;
+		if (this.loading || this.scanningDps) return;
 		if (
 			!force &&
 			this.stats &&
@@ -116,6 +130,15 @@ class OverviewStateClass {
 		this.loading = true;
 		this.error = null;
 		send(MessageType.GET_OVERVIEW_STATS);
+	}
+
+	/** Parses every unscanned `_dps.sav` (about a second each), then refreshes. */
+	scanDps() {
+		if (!getAppState().saveFile || this.loading || this.scanningDps || !isReady()) return;
+		this.scanningDps = true;
+		this.error = null;
+		getAppState().progressMessage = '';
+		send(MessageType.GET_OVERVIEW_STATS, { scan_dps: true });
 	}
 }
 

@@ -148,6 +148,9 @@ pub struct SaveSession {
     /// Guild ids whose full `GuildDto` detail has been lazily loaded.
     pub loaded_guilds: HashSet<Uuid>,
     pub caches: WorldCaches,
+    /// Overview DPS scans for players not in `loaded_players`, keyed by the
+    /// uid whose file reference they were read from.
+    pub(crate) dps_scans: HashMap<Uuid, crate::domain::overview::DpsScan>,
 }
 
 /// `SaveReader`'s default `error_to_raw(false)` is deliberate: on an editor path
@@ -247,6 +250,7 @@ impl SaveSession {
             loaded_players: BTreeMap::new(),
             loaded_guilds: HashSet::new(),
             caches: WorldCaches::default(),
+            dps_scans: HashMap::new(),
         }
     }
 
@@ -563,6 +567,8 @@ impl SaveSession {
             self.player_file_refs.insert(first, second_ref);
             self.player_file_refs.insert(second, first_ref);
         }
+        self.dps_scans.remove(&first);
+        self.dps_scans.remove(&second);
     }
 }
 

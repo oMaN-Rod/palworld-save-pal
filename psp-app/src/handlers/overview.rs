@@ -6,23 +6,36 @@
 use base64::Engine as _;
 use serde_json::json;
 
-use psp_core::domain::overview::overview_stats;
+use psp_core::domain::overview::{overview_stats, scan_dps_storage};
 
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
+#[derive(Debug, Default, serde::Deserialize)]
+pub struct GetOverviewStatsData {
+    /// Parse every unscanned `_dps.sav` first; about a second per player.
+    #[serde(default)]
+    pub scan_dps: bool,
+}
+
 /// With no save loaded, answers under `get_overview_stats` with
 /// `{"error": ...}` rather than an `error` frame — the frontend correlates
 /// the failure to this request by message type.
-pub async fn handle_get_overview_stats(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
-    let Some(session) = ctx.session.save.as_ref() else {
+pub async fn handle_get_overview_stats(
+    data: Option<GetOverviewStatsData>,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let Some(session) = ctx.session.save.as_mut() else {
         ctx.emitter.emit(
             MessageType::GetOverviewStats,
             &json!({"error": "No save file loaded"}),
         );
         return Ok(());
     };
+    if data.unwrap_or_default().scan_dps {
+        scan_dps_storage(session, &ctx.app.game_data, &ctx.emitter.progress_sink());
+    }
     let stats = match overview_stats(session, &ctx.app.game_data) {
         Ok(stats) => stats,
         Err(error) => {
@@ -173,6 +186,28 @@ mod tests {
         assert_eq!(frame["data"]["stats"]["totals"]["players"], 0);
         assert_eq!(frame["data"]["stats"]["totals"]["pals"], 0);
         assert_eq!(frame["data"]["stats"]["anomalies"]["pal_count"], 0);
+        assert_eq!(frame["data"]["stats"]["dps_pending_players"], 0);
+        test.assert_no_more_frames();
+    }
+
+    #[tokio::test]
+    async fn scan_request_replies_under_the_request_type() {
+        let mut test = TestContext::new(|json_dir| {
+            std::fs::write(json_dir.join("pals.json"), r#"{"Alpaca": {"is_pal": true}}"#).unwrap();
+        })
+        .await;
+        test.session.save = Some(psp_core::session::SaveSession::new_for_tests(
+            psp_core::session::SaveKind::InMemory,
+            minimal_level(),
+        ));
+        dispatch(
+            envelope("get_overview_stats", serde_json::json!({"scan_dps": true})),
+            ctx(&mut test),
+        )
+        .await;
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "get_overview_stats");
+        assert_eq!(frame["data"]["stats"]["dps_pending_players"], 0);
         test.assert_no_more_frames();
     }
 

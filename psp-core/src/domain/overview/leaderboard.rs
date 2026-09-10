@@ -1,10 +1,12 @@
-//! The player leaderboard: top players ranked by how many pals they own.
+//! The player leaderboard: every known player with the metrics the dashboard
+//! ranks by (pal count, level, lucky pals, average/max pal level, raw power,
+//! DPS storage).
 //!
 //! Rows come from the guild rosters (name + membership survive even when a
 //! player's own save file is absent from the world) joined with the eager
-//! player summaries (save-file nicknames for players with saves). Pal counts
-//! and levels come from a tally over the character map — the same source the
-//! reference implementation uses — so players without save files still rank.
+//! player summaries (save-file nicknames for players with saves). Pal metrics
+//! come from a tally over the character map — the same source the reference
+//! implementation uses — so players without save files still rank.
 
 use std::collections::{HashMap, HashSet};
 
@@ -12,10 +14,40 @@ use crate::dto::overview::OverviewPlayerRow;
 use crate::session::SaveSession;
 use uuid::Uuid;
 
-/// How many players the overview leaderboard previews.
-pub(crate) const LEADERBOARD_SIZE: usize = 6;
+use super::composition::round1;
 
-/// The top [`LEADERBOARD_SIZE`] players by owned-pal count.
+/// `pal_count` includes owned entries too corrupt to read; the level and power
+/// tallies only see readable ones, so `leveled_count` gates the averages.
+#[derive(Debug, Default, Clone)]
+pub(crate) struct OwnerMetrics {
+    pub(crate) pal_count: i64,
+    pub(crate) lucky_count: i64,
+    pub(crate) level_sum: i64,
+    pub(crate) leveled_count: i64,
+    pub(crate) max_pal_level: i64,
+    pub(crate) total_power: i64,
+}
+
+impl OwnerMetrics {
+    pub(crate) fn note_pal(&mut self, level: i64, lucky: bool, power: i64) {
+        self.leveled_count += 1;
+        self.level_sum += level;
+        self.max_pal_level = self.max_pal_level.max(level);
+        self.lucky_count += i64::from(lucky);
+        self.total_power += power;
+    }
+
+    fn avg_pal_level(&self) -> Option<f64> {
+        (self.leveled_count > 0).then(|| round1(self.level_sum as f64 / self.leveled_count as f64))
+    }
+
+    fn max_pal_level(&self) -> Option<i64> {
+        (self.leveled_count > 0).then_some(self.max_pal_level)
+    }
+}
+
+/// Every known player, ordered by owned-pal count; the dashboard re-sorts per
+/// metric client-side.
 ///
 /// Candidates are the union of guild-roster members (in guild-tail order,
 /// deduplicated) and players with eager summaries (in summary order),
@@ -26,8 +58,9 @@ pub(crate) const LEADERBOARD_SIZE: usize = 6;
 pub(crate) fn top_players(
     session: &SaveSession,
     roster: &[(Uuid, String)],
-    owner_counts: &HashMap<Uuid, i64>,
+    owner_metrics: &HashMap<Uuid, OwnerMetrics>,
     player_levels: &HashMap<Uuid, i64>,
+    dps_pal_counts: &HashMap<Uuid, Option<i64>>,
 ) -> Vec<OverviewPlayerRow> {
     let mut candidates: Vec<(Uuid, String)> = Vec::new();
     let mut seen: HashSet<Uuid> = HashSet::new();
@@ -51,6 +84,7 @@ pub(crate) fn top_players(
         .into_iter()
         .map(|(uid, roster_name)| {
             let summary = session.player_summaries.get(&uid);
+            let metrics = owner_metrics.get(&uid);
             OverviewPlayerRow {
                 uid,
                 nickname: summary
@@ -60,15 +94,18 @@ pub(crate) fn top_players(
                     .get(&uid)
                     .copied()
                     .or_else(|| summary.and_then(|summary| summary.level)),
-                pal_count: owner_counts
-                    .get(&uid)
-                    .copied()
+                pal_count: metrics
+                    .map(|metrics| metrics.pal_count)
                     .unwrap_or_else(|| summary.map(|summary| summary.pal_count).unwrap_or(0)),
+                lucky_count: metrics.map_or(0, |metrics| metrics.lucky_count),
+                avg_pal_level: metrics.and_then(OwnerMetrics::avg_pal_level),
+                max_pal_level: metrics.and_then(OwnerMetrics::max_pal_level),
+                total_power: metrics.map_or(0, |metrics| metrics.total_power),
+                dps_pal_count: dps_pal_counts.get(&uid).copied().unwrap_or(Some(0)),
             }
         })
         .collect();
     rows.sort_by_key(|row| std::cmp::Reverse(row.pal_count));
-    rows.truncate(LEADERBOARD_SIZE);
     rows
 }
 
@@ -131,7 +168,7 @@ mod tests {
     }
 
     #[test]
-    fn ranks_by_pal_count_and_caps_at_leaderboard_size() {
+    fn ranks_every_player_by_pal_count_and_carries_metrics() {
         let session = session_with_players(vec![
             (
                 "22222222-2222-2222-2222-222222222222",
@@ -165,31 +202,66 @@ mod tests {
                 "ZeroPal".into(),
             ),
         ];
-        let mut owner_counts = HashMap::new();
-        owner_counts.insert(uid("33333333-3333-3333-3333-333333333333"), 6);
-        owner_counts.insert(uid("22222222-2222-2222-2222-222222222222"), 12);
-        owner_counts.insert(uid("11111111-1111-1111-1111-111111111111"), 3);
-        owner_counts.insert(uid("55555555-5555-5555-5555-555555555555"), 7);
-        owner_counts.insert(uid("99999999-9999-9999-9999-999999999999"), 5);
-        owner_counts.insert(uid("88888888-8888-8888-8888-888888888888"), 5);
-        owner_counts.insert(uid("77777777-7777-7777-7777-777777777777"), 0);
+        let counted = |pal_count: i64| OwnerMetrics {
+            pal_count,
+            ..OwnerMetrics::default()
+        };
+        let mut owner_metrics = HashMap::new();
+        owner_metrics.insert(uid("33333333-3333-3333-3333-333333333333"), counted(6));
+        let mut second = counted(12);
+        second.note_pal(50, true, 2075);
+        second.note_pal(31, false, 1000);
+        owner_metrics.insert(uid("22222222-2222-2222-2222-222222222222"), second);
+        owner_metrics.insert(uid("11111111-1111-1111-1111-111111111111"), counted(3));
+        owner_metrics.insert(uid("55555555-5555-5555-5555-555555555555"), counted(7));
+        owner_metrics.insert(uid("99999999-9999-9999-9999-999999999999"), counted(5));
+        owner_metrics.insert(uid("88888888-8888-8888-8888-888888888888"), counted(5));
+        owner_metrics.insert(uid("77777777-7777-7777-7777-777777777777"), counted(0));
         let mut player_levels = HashMap::new();
         player_levels.insert(uid("33333333-3333-3333-3333-333333333333"), 33);
+        let mut dps_pal_counts = HashMap::new();
+        dps_pal_counts.insert(uid("22222222-2222-2222-2222-222222222222"), Some(4));
+        dps_pal_counts.insert(uid("11111111-1111-1111-1111-111111111111"), None);
 
-        let top = top_players(&session, &roster, &owner_counts, &player_levels);
-        assert_eq!(top.len(), LEADERBOARD_SIZE);
+        let top = top_players(
+            &session,
+            &roster,
+            &owner_metrics,
+            &player_levels,
+            &dps_pal_counts,
+        );
         let nicknames: Vec<&str> = top.iter().map(|row| row.nickname.as_str()).collect();
         // Second (12), Fifth (7), RosterOnly (6, roster name + map level),
         // then the 5-tie: roster member TieA before summary-only AlsoTie
-        // (which uses the map tally, not its summary count of 3), then First (3).
-        // ZeroPal (0) falls outside the top 6.
+        // (which uses the map tally, not its summary count of 3), then First (3)
+        // and ZeroPal (0).
         assert_eq!(
             nicknames,
-            vec!["Second", "Fifth", "RosterOnly", "TieA", "AlsoTie", "First"]
+            vec![
+                "Second",
+                "Fifth",
+                "RosterOnly",
+                "TieA",
+                "AlsoTie",
+                "First",
+                "ZeroPal"
+            ]
         );
         assert_eq!(top[2].level, Some(33));
         assert_eq!(top[4].pal_count, 5);
-        assert_eq!(top[3].nickname, "TieA");
+
+        let second = &top[0];
+        assert_eq!(second.lucky_count, 1);
+        assert_eq!(second.avg_pal_level, Some(40.5));
+        assert_eq!(second.max_pal_level, Some(50));
+        assert_eq!(second.total_power, 3075);
+        assert_eq!(second.dps_pal_count, Some(4));
+
+        let first = &top[5];
+        assert_eq!(first.avg_pal_level, None);
+        assert_eq!(first.max_pal_level, None);
+        assert_eq!(first.dps_pal_count, None);
+        assert_eq!(top[6].dps_pal_count, Some(0));
     }
 
     #[test]
@@ -198,7 +270,13 @@ mod tests {
             "11111111-1111-1111-1111-111111111111",
             summary("11111111-1111-1111-1111-111111111111", "Solo", 9, 4),
         )]);
-        let top = top_players(&session, &[], &HashMap::new(), &HashMap::new());
+        let top = top_players(
+            &session,
+            &[],
+            &HashMap::new(),
+            &HashMap::new(),
+            &HashMap::new(),
+        );
         assert_eq!(top.len(), 1);
         assert_eq!(top[0].nickname, "Solo");
         assert_eq!(top[0].pal_count, 4);
@@ -208,6 +286,13 @@ mod tests {
     #[test]
     fn empty_sessions_yield_an_empty_leaderboard() {
         let session = session_with_players(vec![]);
-        assert!(top_players(&session, &[], &HashMap::new(), &HashMap::new()).is_empty());
+        assert!(top_players(
+            &session,
+            &[],
+            &HashMap::new(),
+            &HashMap::new(),
+            &HashMap::new()
+        )
+        .is_empty());
     }
 }

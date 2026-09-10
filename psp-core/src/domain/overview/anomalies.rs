@@ -7,11 +7,35 @@
 use std::collections::HashMap;
 
 use crate::dto::overview::{OverviewAnomalies, OverviewAnomalyRow, OverviewCodeCount};
-use crate::ue::MapEntry;
-
-use crate::domain::world;
 
 use super::illegal_pals::severity_of;
+
+pub(crate) const SOURCE_WORLD: &str = "world";
+pub(crate) const SOURCE_DPS: &str = "dps";
+
+/// `codes` is the validator's non-empty result; severity is `"danger"` when
+/// any code is a danger code, else `"warning"`.
+pub(crate) fn flagged_row(
+    instance_id: uuid::Uuid,
+    owner_uid: Option<uuid::Uuid>,
+    source: &'static str,
+    character_id: &str,
+    character_key: String,
+    level: i64,
+    codes: Vec<&'static str>,
+) -> OverviewAnomalyRow {
+    let is_danger = codes.iter().any(|code| severity_of(code) == "danger");
+    OverviewAnomalyRow {
+        instance_id,
+        character_id: character_id.to_string(),
+        character_key,
+        level,
+        severity: if is_danger { "danger" } else { "warning" },
+        codes,
+        owner_uid,
+        source,
+    }
+}
 
 pub(crate) struct AnomalyCollector {
     by_code: HashMap<&'static str, i64>,
@@ -30,22 +54,11 @@ impl AnomalyCollector {
         }
     }
 
-    /// Records one flagged pal. `codes` is the validator's non-empty result;
-    /// severity is `"danger"` when any code is a danger code, else
-    /// `"warning"`.
-    pub(crate) fn record(
-        &mut self,
-        entry: &MapEntry,
-        character_id: &str,
-        character_key: String,
-        level: i64,
-        codes: Vec<&'static str>,
-    ) {
-        let is_danger = codes.iter().any(|code| severity_of(code) == "danger");
-        if is_danger {
+    pub(crate) fn record(&mut self, row: OverviewAnomalyRow) {
+        if row.severity == "danger" {
             self.danger_count += 1;
         }
-        for code in &codes {
+        for code in &row.codes {
             if let Some(count) = self.by_code.get_mut(code) {
                 *count += 1;
             } else {
@@ -53,14 +66,7 @@ impl AnomalyCollector {
                 self.by_code.insert(code, 1);
             }
         }
-        self.flagged.push(OverviewAnomalyRow {
-            instance_id: world::entry_instance_id(entry).unwrap_or(uuid::Uuid::nil()),
-            character_id: character_id.to_string(),
-            character_key,
-            level,
-            severity: if is_danger { "danger" } else { "warning" },
-            codes,
-        });
+        self.flagged.push(row);
     }
 
     /// Per-code tallies sorted by count descending, first-seen order on ties.
@@ -86,46 +92,24 @@ impl AnomalyCollector {
 mod tests {
     use super::super::illegal_pals::{ILLEGAL_LEVEL, SUSPICIOUS_TALENT};
     use super::*;
-    use crate::ue::{Properties, Property, StructValue};
 
-    fn guid_property(text: &str) -> Property {
-        Property::Struct(StructValue::Guid(
-            serde_json::from_value(serde_json::Value::String(text.to_string())).unwrap(),
-        ))
-    }
-
-    fn entry(instance_id: &str) -> MapEntry {
-        let mut key_properties = Properties::default();
-        key_properties.insert(
-            "PlayerUId",
-            guid_property("00000000-0000-0000-0000-000000000000"),
-        );
-        key_properties.insert("InstanceId", guid_property(instance_id));
-        MapEntry {
-            key: Property::Struct(StructValue::Struct(key_properties)),
-            value: Property::Struct(StructValue::Struct(Properties::default())),
-        }
+    fn row(instance_id: u128, level: i64, codes: Vec<&'static str>) -> OverviewAnomalyRow {
+        flagged_row(
+            uuid::Uuid::from_u128(instance_id),
+            None,
+            SOURCE_WORLD,
+            "Sheepball",
+            "Sheepball".to_string(),
+            level,
+            codes,
+        )
     }
 
     #[test]
     fn tallies_codes_ranks_by_count_and_marks_severity() {
         let mut collector = AnomalyCollector::new();
-        // First pal: one warning code.
-        collector.record(
-            &entry("aaaaaaaa-0000-0000-0000-000000000001"),
-            "Sheepball",
-            "Sheepball".to_string(),
-            50,
-            vec![SUSPICIOUS_TALENT],
-        );
-        // Second pal: a danger + a warning code → danger severity.
-        collector.record(
-            &entry("aaaaaaaa-0000-0000-0000-000000000002"),
-            "Sheepball",
-            "Sheepball".to_string(),
-            200,
-            vec![ILLEGAL_LEVEL, SUSPICIOUS_TALENT],
-        );
+        collector.record(row(1, 50, vec![SUSPICIOUS_TALENT]));
+        collector.record(row(2, 200, vec![ILLEGAL_LEVEL, SUSPICIOUS_TALENT]));
 
         let anomalies = collector.finish();
         assert_eq!(anomalies.pal_count, 2);

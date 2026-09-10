@@ -15,12 +15,21 @@ const FRIENDSHIP_THRESHOLDS: [i64; 11] = [
     0, 6_000, 13_000, 21_000, 30_000, 40_000, 55_000, 80_000, 110_000, 150_000, 200_000,
 ];
 
-/// Per-species numbers the HP ceiling formula needs, resolved from
-/// `pals.json`.
+/// Per-species numbers the HP ceiling formula and the power score need,
+/// resolved from `pals.json`.
 #[derive(Debug, Clone, Copy)]
 pub(crate) struct SpeciesVitals {
     pub(crate) scaling_hp: f64,
+    pub(crate) scaling_attack: f64,
+    pub(crate) scaling_defense: f64,
     pub(crate) friendship_hp: f64,
+}
+
+fn scaling(info: &serde_json::Value, stat: &str) -> f64 {
+    info.get("scaling")
+        .and_then(|scaling| scaling.get(stat))
+        .and_then(|value| value.as_f64())
+        .unwrap_or(0.0)
 }
 
 pub(crate) struct OverviewCatalogs {
@@ -37,6 +46,8 @@ pub(crate) struct OverviewCatalogs {
     active_assets: HashSet<String>,
     /// Lowercased passive id → summed MaxHP% effects as a fraction (0.10).
     passive_hp_fraction: HashMap<String, f64>,
+    /// Lowercased passive id → summed Attack% effects as a fraction.
+    passive_attack_fraction: HashMap<String, f64>,
     /// Lowercased species key → HP formula inputs.
     vitals: HashMap<String, SpeciesVitals>,
     /// Ascending friendship-point thresholds; index == rank.
@@ -51,6 +62,7 @@ impl OverviewCatalogs {
             passive_assets: HashSet::new(),
             active_assets: HashSet::new(),
             passive_hp_fraction: HashMap::new(),
+            passive_attack_fraction: HashMap::new(),
             vitals: HashMap::new(),
             friendship_thresholds: FRIENDSHIP_THRESHOLDS.to_vec(),
         };
@@ -59,15 +71,14 @@ impl OverviewCatalogs {
             for (key, info) in pals {
                 let lower = key.to_lowercase();
                 catalogs.known_species.insert(lower.clone());
-                let scaling_hp = info
-                    .pointer("/scaling/hp")
-                    .and_then(|value| value.as_f64())
-                    .unwrap_or(0.0);
+                let scaling_hp = scaling(info, "hp");
                 if scaling_hp > 0.0 {
                     catalogs.vitals.insert(
                         lower,
                         SpeciesVitals {
                             scaling_hp,
+                            scaling_attack: scaling(info, "attack"),
+                            scaling_defense: scaling(info, "defense"),
                             friendship_hp: info
                                 .get("friendship_hp")
                                 .and_then(|value| value.as_f64())
@@ -87,7 +98,8 @@ impl OverviewCatalogs {
             for (key, info) in passives {
                 let lower = key.to_lowercase();
                 catalogs.passive_assets.insert(lower.clone());
-                let mut bonus_pct = 0.0;
+                let mut hp_pct = 0.0;
+                let mut attack_pct = 0.0;
                 for effect in info
                     .get("effects")
                     .and_then(|value| value.as_array())
@@ -95,17 +107,24 @@ impl OverviewCatalogs {
                 {
                     let effect_type = effect.get("type").and_then(|v| v.as_str()).unwrap_or("");
                     let target = effect.get("target").and_then(|v| v.as_str()).unwrap_or("");
-                    // Trainer-only effects never raise the pal's own HP pool.
+                    // Trainer-only effects never raise the pal's own stats.
                     if target.contains("ToTrainer") && !target.contains("ToSelf") {
                         continue;
                     }
+                    let value = effect.get("value").and_then(|v| v.as_f64()).unwrap_or(0.0);
                     if effect_type.contains("MaxHP") {
-                        bonus_pct += effect.get("value").and_then(|v| v.as_f64()).unwrap_or(0.0);
+                        hp_pct += value;
+                    }
+                    if effect_type.contains("Attack") {
+                        attack_pct += value;
                     }
                 }
                 catalogs
                     .passive_hp_fraction
-                    .insert(lower, bonus_pct / 100.0);
+                    .insert(lower.clone(), hp_pct / 100.0);
+                catalogs
+                    .passive_attack_fraction
+                    .insert(lower, attack_pct / 100.0);
             }
         }
 
@@ -179,6 +198,12 @@ impl OverviewCatalogs {
 
     pub(crate) fn passive_hp_fraction(&self, passive: &str) -> Option<f64> {
         self.passive_hp_fraction
+            .get(&passive.to_lowercase())
+            .copied()
+    }
+
+    pub(crate) fn passive_attack_fraction(&self, passive: &str) -> Option<f64> {
+        self.passive_attack_fraction
             .get(&passive.to_lowercase())
             .copied()
     }

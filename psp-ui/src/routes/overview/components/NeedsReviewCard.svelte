@@ -7,7 +7,10 @@
 	import * as m from '$i18n/messages';
 	import type { OverviewStats } from '$states';
 
-	let { anomalies }: { anomalies: OverviewStats['anomalies'] } = $props();
+	let {
+		anomalies,
+		players = []
+	}: { anomalies: OverviewStats['anomalies']; players?: OverviewStats['top_players'] } = $props();
 
 	/** The dashboard previews this many rows before the expand toggle. */
 	const PREVIEW_ROWS = 25;
@@ -19,6 +22,13 @@
 
 	const warningCount = $derived(anomalies.pal_count - anomalies.danger_count);
 
+	const ownerNames = $derived(new Map(players.map((player) => [player.uid, player.nickname])));
+
+	function ownerName(row: FlaggedRow): string {
+		if (!row.owner_uid) return '';
+		return ownerNames.get(row.owner_uid) ?? row.owner_uid.slice(0, 8);
+	}
+
 	const filtered = $derived.by(() => {
 		const query = search.trim().toLowerCase();
 		if (!query) return anomalies.flagged;
@@ -29,7 +39,8 @@
 				(palsData.getByKey(row.character_key)?.localized_name ?? '')
 					.toLowerCase()
 					.includes(query) ||
-				row.instance_id.toLowerCase().includes(query)
+				row.instance_id.toLowerCase().includes(query) ||
+				(row.source === 'dps' && ownerName(row).toLowerCase().includes(query))
 		);
 	});
 
@@ -152,6 +163,14 @@
 							<span class="text-surface-500 shrink-0 text-xs">
 								{m.overview_lv({ level: row.level })}
 							</span>
+							{#if row.source === 'dps'}
+								<span
+									class="border-secondary-500/40 bg-secondary-500/10 text-secondary-300 shrink-0 rounded-full border px-1.5 py-0.5 text-[10px] font-medium"
+									title={m.overview_dps_storage()}
+								>
+									{m.overview_dps_source({ player: ownerName(row) })}
+								</span>
+							{/if}
 						</div>
 						<div class="flex flex-wrap gap-1">
 							{#each row.codes as code (code)}

@@ -19,6 +19,7 @@
 	import { c } from '$lib/utils/commonTranslations';
 	import OverviewTile from './components/OverviewTile.svelte';
 	import NeedsReviewCard from './components/NeedsReviewCard.svelte';
+	import DpsScanNotice from './components/DpsScanNotice.svelte';
 	import TraitsCard from './components/TraitsCard.svelte';
 	import CompositionCard from './components/CompositionCard.svelte';
 	import FunCard from './components/FunCard.svelte';
@@ -339,7 +340,10 @@
 
 				<!-- Pals needing review -->
 				{#if stats.anomalies.pal_count > 0}
-					<NeedsReviewCard anomalies={stats.anomalies} />
+					<NeedsReviewCard anomalies={stats.anomalies} players={stats.top_players} />
+				{/if}
+				{#if stats.dps_pending_players > 0}
+					<DpsScanNotice pending={stats.dps_pending_players} />
 				{/if}
 
 				<!-- Traits & conditions -->

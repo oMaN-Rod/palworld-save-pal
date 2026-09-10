@@ -1942,6 +1942,7 @@ pub(crate) fn delete_player_and_pals_for_guild(
     });
     session.invalidate_performance_caches();
     session.player_file_refs.remove(&player_id);
+    session.dps_scans.remove(&player_id);
     Ok((item_container_ids, character_container_ids))
 }
 

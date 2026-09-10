@@ -82,12 +82,19 @@ pub struct OverviewSpeciesCount {
     pub count: i64,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[derive(Debug, Clone, PartialEq, Serialize)]
 pub struct OverviewPlayerRow {
     pub uid: uuid::Uuid,
     pub nickname: String,
     pub level: Option<i64>,
     pub pal_count: i64,
+    pub lucky_count: i64,
+    /// `None` when none of the player's pals had a readable level.
+    pub avg_pal_level: Option<f64>,
+    pub max_pal_level: Option<i64>,
+    pub total_power: i64,
+    /// `None` while the player's `_dps.sav` has not been scanned.
+    pub dps_pal_count: Option<i64>,
 }
 
 /// One flagged pal from the legality scan. `codes` are the stable machine
@@ -103,6 +110,10 @@ pub struct OverviewAnomalyRow {
     pub level: i64,
     pub severity: &'static str,
     pub codes: Vec<&'static str>,
+    /// Always set for `"dps"` rows.
+    pub owner_uid: Option<uuid::Uuid>,
+    /// `"world"` (`Level.sav`) or `"dps"` (a player's `_dps.sav`).
+    pub source: &'static str,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -132,4 +143,7 @@ pub struct OverviewStats {
     pub top_species: Vec<OverviewSpeciesCount>,
     pub top_players: Vec<OverviewPlayerRow>,
     pub anomalies: OverviewAnomalies,
+    /// Players whose `_dps.sav` is not covered by `anomalies` or
+    /// `dps_pal_count` until a DPS scan runs.
+    pub dps_pending_players: i64,
 }

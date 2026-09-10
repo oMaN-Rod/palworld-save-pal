@@ -8,26 +8,34 @@
 //!
 //! * [`illegal_pals`] — the pal legality validator ("illegal pals checker"),
 //!   including the game-accurate MaxHP ceiling formula.
-//! * [`leaderboard`] — top players ranked by owned-pal count.
+//! * [`leaderboard`] — the player leaderboard and its ranking metrics.
+//! * [`power`] — the per-pal raw-power score behind the power ranking.
+//! * [`dps`] — the legality scan over per-player Dimensional Pal Storage.
 //! * [`catalogs`] — the game-data catalogs everything resolves against.
 //! * [`classify`] — boss-prefix/gender/sick/fainted classification helpers.
 //! * [`composition`] — level/gender/talent/skill composition accumulation.
 //! * [`anomalies`] — the flagged-pal report collection.
 //!
-//! Everything is computed live from the parsed `Level.sav` tree against the
-//! bundled game data — no precomputed or hard-coded values.
+//! Everything is computed live from the parsed `Level.sav` tree (plus each
+//! player's `_dps.sav` for the legality scan) against the bundled game data —
+//! no precomputed or hard-coded values.
 
 mod anomalies;
 mod catalogs;
 mod classify;
 mod composition;
+mod dps;
 mod illegal_pals;
 mod leaderboard;
+mod power;
 
+pub(crate) use dps::DpsScan;
 pub use illegal_pals::{
     severity_of, ILLEGAL_ACTIVE, ILLEGAL_HP, ILLEGAL_LEVEL, ILLEGAL_PASSIVE, ILLEGAL_RANK,
-    ILLEGAL_SPECIES, SAFE_IV_MAX, SAFE_LEVEL_MAX, SAFE_PASSIVE_SLOTS, SAFE_RANK_MAX, SAFE_SOUL_MAX,
-    SUSPICIOUS_PASSIVE_SLOTS, SUSPICIOUS_SOUL_RANK, SUSPICIOUS_TALENT,
+    ILLEGAL_SPECIES, SAFE_ACTIVE_SLOTS, SAFE_IV_MAX, SAFE_LEVEL_MAX, SAFE_PASSIVE_SLOTS,
+    SAFE_RANK_MAX, SAFE_SOUL_MAX, SUSPICIOUS_ACTIVE_SLOTS, SUSPICIOUS_DUPLICATE_ACTIVE,
+    SUSPICIOUS_DUPLICATE_PASSIVE, SUSPICIOUS_PASSIVE_SLOTS, SUSPICIOUS_SOUL_RANK,
+    SUSPICIOUS_TALENT,
 };
 
 use std::collections::HashMap;
@@ -37,6 +45,7 @@ use crate::dto::overview::{
 };
 use crate::error::CoreError;
 use crate::gamedata::GameData;
+use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::SaveSession;
 use crate::ue::Properties;
@@ -44,21 +53,30 @@ use crate::ue::Properties;
 use crate::domain::pal::param;
 use crate::domain::{guild_tail, summaries, world};
 
-use anomalies::AnomalyCollector;
+use anomalies::{flagged_row, AnomalyCollector, SOURCE_WORLD};
 use catalogs::OverviewCatalogs;
 use classify::{canonical_character_key, is_boss_id, is_fainted, is_sick, strip_boss_prefix};
 use composition::{CompositionAccumulator, OrderedCounter};
-use leaderboard::top_players;
+use leaderboard::{top_players, OwnerMetrics};
 
 /// How many species the overview's "top species" card previews.
 const TOP_SPECIES_SIZE: usize = 6;
 
 const GROUP_TYPE_GUILD: &str = "EPalGroupType::Guild";
 
+/// Parses every unloaded player's `_dps.sav` not scanned yet this session,
+/// so later [`overview_stats`] calls include their pals.
+pub fn scan_dps_storage(session: &mut SaveSession, game_data: &GameData, progress: &ProgressSink) {
+    let catalogs = OverviewCatalogs::from_game_data(game_data);
+    dps::fill_cache(session, &catalogs, game_data, progress);
+}
+
 /// Computes the full Overview dataset in one pass over
 /// `CharacterSaveParameterMap`, plus small reads of the group / base-camp /
 /// item-container maps for the guild, base, and container counts, and a pure
-/// ranking over the eager player summaries for the leaderboard.
+/// ranking over the eager player summaries for the leaderboard. DPS pals are
+/// covered for loaded players and for whatever [`scan_dps_storage`] has
+/// cached; the rest are counted in `dps_pending_players`.
 pub fn overview_stats(
     session: &SaveSession,
     game_data: &GameData,
@@ -91,10 +109,10 @@ pub fn overview_stats(
     let mut species_display: HashMap<String, String> = HashMap::new();
     let mut composition = CompositionAccumulator::new();
     let mut anomalies = AnomalyCollector::new();
-    // Leaderboard inputs, collected in the same pass: owned-pal tallies and
+    // Leaderboard inputs, collected in the same pass: owned-pal metrics and
     // per-player levels straight off the character map, so players whose own
     // save files are missing from the world still rank (reference behavior).
-    let mut owner_counts: HashMap<uuid::Uuid, i64> = HashMap::new();
+    let mut owner_metrics: HashMap<uuid::Uuid, OwnerMetrics> = HashMap::new();
     let mut player_levels: HashMap<uuid::Uuid, i64> = HashMap::new();
 
     for entry in character_entries {
@@ -118,8 +136,10 @@ pub fn overview_stats(
         // The ownership tally counts every non-player entry with an owner —
         // including ones too corrupt to classify — like the reference
         // implementation's precomputed pal counts.
-        if let Some(owner) = param(save_parameter, "OwnerPlayerUId").and_then(props::as_uuid) {
-            *owner_counts.entry(owner).or_insert(0) += 1;
+        let owner = param(save_parameter, "OwnerPlayerUId").and_then(props::as_uuid);
+        let mut metrics = owner.map(|owner| owner_metrics.entry(owner).or_default());
+        if let Some(metrics) = metrics.as_mut() {
+            metrics.pal_count += 1;
         }
 
         let character_id = param(save_parameter, "CharacterID")
@@ -144,10 +164,10 @@ pub fn overview_stats(
         if is_boss_id(character_id) {
             traits.boss_pals += 1;
         }
-        if param(save_parameter, "IsRarePal")
+        let is_lucky = param(save_parameter, "IsRarePal")
             .and_then(props::as_bool)
-            .unwrap_or(false)
-        {
+            .unwrap_or(false);
+        if is_lucky {
             traits.rare_pals += 1;
         }
         if param(save_parameter, "bIsAwakening")
@@ -163,15 +183,65 @@ pub fn overview_stats(
             condition.fainted_pals += 1;
         }
 
-        let codes = illegal_pals::detect_pal_issues(save_parameter, character_id, &catalogs);
+        let level = current_level(save_parameter);
+        let mut hp_ceiling = None;
+        if let Some(metrics) = metrics {
+            let power = match catalogs.vitals_for(character_id) {
+                Some(vitals) => {
+                    let ceiling =
+                        illegal_pals::validator_max_hp(save_parameter, character_id, &catalogs);
+                    hp_ceiling = Some(ceiling);
+                    power::pal_power_score(save_parameter, vitals, ceiling, &catalogs)
+                }
+                None => 0,
+            };
+            metrics.note_pal(level, is_lucky, power);
+        }
+
+        let codes = illegal_pals::detect_pal_issues_with_ceiling(
+            save_parameter,
+            character_id,
+            &catalogs,
+            hp_ceiling,
+        );
         if !codes.is_empty() {
-            anomalies.record(
-                entry,
+            anomalies.record(flagged_row(
+                world::entry_instance_id(entry).unwrap_or_default(),
+                owner,
+                SOURCE_WORLD,
                 character_id,
                 canonical_character_key(character_id, game_data),
-                current_level(save_parameter),
+                level,
                 codes,
-            );
+            ));
+        }
+    }
+
+    let mut dps_pal_counts: HashMap<uuid::Uuid, Option<i64>> = HashMap::new();
+    let mut dps_pending_players = 0;
+    for (uid, file_ref) in &session.player_file_refs {
+        if dps::is_pending(session, uid, file_ref) {
+            dps_pending_players += 1;
+            dps_pal_counts.insert(*uid, None);
+            continue;
+        }
+        let fresh;
+        let scan = match session.loaded_players.get(uid) {
+            Some(loaded) => match &loaded.dps {
+                Some(save) => {
+                    fresh = dps::scan(save, *uid, &catalogs, game_data);
+                    &fresh
+                }
+                None => continue,
+            },
+            None => match session.dps_scans.get(uid) {
+                Some(cached) => cached,
+                None => continue,
+            },
+        };
+        dps_pal_counts.insert(*uid, Some(scan.pal_count));
+        for row in &scan.flagged {
+            anomalies.record(row.clone());
         }
     }
 
@@ -223,8 +293,15 @@ pub fn overview_stats(
         condition,
         composition: composition.finish(),
         top_species,
-        top_players: top_players(session, &roster, &owner_counts, &player_levels),
+        top_players: top_players(
+            session,
+            &roster,
+            &owner_metrics,
+            &player_levels,
+            &dps_pal_counts,
+        ),
         anomalies: anomalies.finish(),
+        dps_pending_players,
     })
 }
 
@@ -399,9 +476,11 @@ mod tests {
                     character_entry("Tester", save_parameter)
                 },
                 {
-                    // Clean creature pal, level 30 male with a passive+active.
+                    // Clean creature pal, level 30 male with a passive+active,
+                    // owned by the player.
                     let mut save_parameter = Properties::default();
                     save_parameter.insert("Level", byte_property(30));
+                    save_parameter.insert("OwnerPlayerUId", guid_property(PLAYER_ONE));
                     save_parameter.insert("Gender", Property::Enum("EPalGenderType::Male".into()));
                     save_parameter.insert("Talent_HP", byte_property(10));
                     save_parameter.insert(
@@ -506,7 +585,13 @@ mod tests {
 
         assert_eq!(stats.top_players.len(), 1);
         assert_eq!(stats.top_players[0].nickname, "Tester");
-        assert_eq!(stats.top_players[0].pal_count, 4);
+        // The character-map tally (one owned pal) wins over the summary's 4.
+        assert_eq!(stats.top_players[0].pal_count, 1);
+        assert_eq!(stats.top_players[0].avg_pal_level, Some(30.0));
+        assert_eq!(stats.top_players[0].max_pal_level, Some(30));
+        assert!(stats.top_players[0].total_power > 0);
+        assert_eq!(stats.top_players[0].dps_pal_count, Some(0));
+        assert_eq!(stats.dps_pending_players, 0);
 
         assert_eq!(stats.anomalies.pal_count, 1);
         assert_eq!(stats.anomalies.danger_count, 1);
@@ -521,6 +606,8 @@ mod tests {
         );
         assert_eq!(stats.anomalies.flagged[0].severity, "danger");
         assert_eq!(stats.anomalies.flagged[0].character_key, "Sheepball");
+        assert_eq!(stats.anomalies.flagged[0].source, "world");
+        assert_eq!(stats.anomalies.flagged[0].owner_uid, None);
     }
 
     /// A world with no maps at all still aggregates to zeroed sections.
@@ -536,5 +623,181 @@ mod tests {
         assert_eq!(stats.top_players.len(), 0);
         assert_eq!(stats.anomalies.pal_count, 0);
         assert_eq!(stats.composition.avg_level, 0.0);
+    }
+
+    /// A loaded player's DPS is read from memory on every call, so an edit
+    /// clears its flag without waiting on any cache.
+    #[test]
+    fn loaded_player_dps_is_scanned_from_memory() {
+        let game_data = game_data();
+        let mut session = minimal_session(vec![], vec![]);
+        let uid: uuid::Uuid = PLAYER_ONE.parse().unwrap();
+        let mut hacked = dps::tests::slot("Sheepball", "bbbbbbbb-0000-0000-0000-000000000001", 200);
+        if let StructValue::Struct(slot) = &mut hacked {
+            let parameter = crate::props::struct_props_mut(
+                slot.0
+                    .get_mut(&crate::ue::PropertyKey::from("SaveParameter"))
+                    .unwrap(),
+            )
+            .unwrap();
+            parameter.insert("Talent_HP", byte_property(255));
+        }
+        let dps_save = dps::tests::dps_save(vec![
+            hacked,
+            dps::tests::slot("Alpaca", "bbbbbbbb-0000-0000-0000-000000000002", 12),
+        ]);
+        session.player_file_refs.insert(
+            uid,
+            crate::session::PlayerFileData::Bytes {
+                sav: None,
+                dps: None,
+            },
+        );
+        session.loaded_players.insert(
+            uid,
+            crate::session::LoadedPlayer::new(uid, dps::tests::dps_save(vec![]), Some(dps_save)),
+        );
+
+        let stats = overview_stats(&session, &game_data).unwrap();
+        assert!(session.dps_scans.is_empty());
+        assert_eq!(stats.dps_pending_players, 0);
+        assert_eq!(stats.anomalies.pal_count, 1);
+        let row = &stats.anomalies.flagged[0];
+        assert_eq!(row.source, "dps");
+        assert_eq!(row.owner_uid, Some(uid));
+        assert_eq!(row.codes, vec![ILLEGAL_LEVEL, SUSPICIOUS_TALENT]);
+
+        let loaded = session.loaded_players.get_mut(&uid).unwrap();
+        loaded.dps = Some(dps::tests::dps_save(vec![dps::tests::slot(
+            "Alpaca",
+            "bbbbbbbb-0000-0000-0000-000000000002",
+            12,
+        )]));
+        let stats = overview_stats(&session, &game_data).unwrap();
+        assert_eq!(stats.anomalies.pal_count, 0);
+    }
+
+    fn load_fixture_session(name: &str) -> SaveSession {
+        let save_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../tests/fixtures/saves")
+            .join(name);
+        let level_sav_bytes = std::fs::read(save_dir.join("Level.sav")).unwrap();
+        let mut player_file_refs = std::collections::BTreeMap::new();
+        for entry in std::fs::read_dir(save_dir.join("Players"))
+            .unwrap()
+            .flatten()
+        {
+            let path = entry.path();
+            let stem = path.file_stem().unwrap().to_str().unwrap().to_string();
+            let uid: uuid::Uuid = stem.trim_end_matches("_dps").parse().unwrap();
+            let file_ref =
+                player_file_refs
+                    .entry(uid)
+                    .or_insert(crate::session::PlayerFileData::Paths {
+                        sav: None,
+                        dps: None,
+                    });
+            if let crate::session::PlayerFileData::Paths { sav, dps } = file_ref {
+                if stem.ends_with("_dps") {
+                    *dps = Some(path);
+                } else {
+                    *sav = Some(path);
+                }
+            }
+        }
+        SaveSession::load(
+            crate::session::SaveKind::Steam {
+                level_path: save_dir.join("Level.sav"),
+            },
+            save_dir.to_string_lossy().into_owned(),
+            "steam",
+            &level_sav_bytes,
+            None,
+            None,
+            player_file_refs,
+            None,
+            true,
+            &crate::progress::null_progress(),
+        )
+        .unwrap()
+    }
+
+    /// The committed `v1_relics` fixture has one player storing 9 pals in
+    /// their `_dps.sav`. A plain overview never parses it; a scan does, once,
+    /// and rewiring the player's file reference drops the cached result.
+    #[test]
+    fn unloaded_dps_is_scanned_on_request_and_cached() {
+        let game_data =
+            GameData::load(&std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../data/json"))
+                .unwrap();
+        let mut session = load_fixture_session("v1_relics");
+        let owner = *session
+            .player_file_refs
+            .iter()
+            .find(|(_, file_ref)| {
+                matches!(
+                    file_ref,
+                    crate::session::PlayerFileData::Paths { dps: Some(_), .. }
+                )
+            })
+            .unwrap()
+            .0;
+
+        let stats = overview_stats(&session, &game_data).unwrap();
+        let row = stats
+            .top_players
+            .iter()
+            .find(|row| row.uid == owner)
+            .unwrap();
+        assert_eq!(row.dps_pal_count, None);
+        assert_eq!(stats.dps_pending_players, 1);
+
+        let progress_lines = std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
+        let sink_lines = progress_lines.clone();
+        let progress: crate::progress::ProgressSink = std::sync::Arc::new(move |line: &str| {
+            sink_lines.lock().unwrap().push(line.to_string())
+        });
+        scan_dps_storage(&mut session, &game_data, &progress);
+        assert_eq!(progress_lines.lock().unwrap().len(), 1);
+        let stats = overview_stats(&session, &game_data).unwrap();
+        let row = stats
+            .top_players
+            .iter()
+            .find(|row| row.uid == owner)
+            .unwrap();
+        assert_eq!(row.dps_pal_count, Some(9));
+        assert_eq!(stats.dps_pending_players, 0);
+
+        if let Some(crate::session::PlayerFileData::Paths { dps, .. }) =
+            session.player_file_refs.get_mut(&owner)
+        {
+            *dps = Some(std::path::PathBuf::from("does-not-exist_dps.sav"));
+        }
+        scan_dps_storage(&mut session, &game_data, &progress);
+        assert_eq!(
+            progress_lines.lock().unwrap().len(),
+            1,
+            "nothing left to scan"
+        );
+        let stats = overview_stats(&session, &game_data).unwrap();
+        let row = stats
+            .top_players
+            .iter()
+            .find(|row| row.uid == owner)
+            .unwrap();
+        assert_eq!(
+            row.dps_pal_count,
+            Some(9),
+            "a cache hit never touches the file"
+        );
+
+        let other = *session
+            .player_file_refs
+            .keys()
+            .find(|uid| **uid != owner)
+            .unwrap();
+        session.swap_player_file_refs(owner, other);
+        assert!(!session.dps_scans.contains_key(&owner));
+        assert!(!session.dps_scans.contains_key(&other));
     }
 }

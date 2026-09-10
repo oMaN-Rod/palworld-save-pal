@@ -27,6 +27,7 @@ pub const SAFE_RANK_MAX: i64 = 5;
 pub const SAFE_SOUL_MAX: i64 = 20;
 pub const SAFE_IV_MAX: i64 = 100;
 pub const SAFE_PASSIVE_SLOTS: usize = 4;
+pub const SAFE_ACTIVE_SLOTS: usize = 3;
 
 /// Tolerated MaxHP overshoot (fraction of the computed ceiling) before
 /// `ILLEGAL_HP` fires. Absorbs cross-version formula drift; cheat-inflated HP
@@ -41,6 +42,9 @@ pub const ILLEGAL_RANK: &str = "ILLEGAL_RANK";
 pub const SUSPICIOUS_SOUL_RANK: &str = "SUSPICIOUS_SOUL_RANK";
 pub const SUSPICIOUS_TALENT: &str = "SUSPICIOUS_TALENT";
 pub const SUSPICIOUS_PASSIVE_SLOTS: &str = "SUSPICIOUS_PASSIVE_SLOTS";
+pub const SUSPICIOUS_ACTIVE_SLOTS: &str = "SUSPICIOUS_ACTIVE_SLOTS";
+pub const SUSPICIOUS_DUPLICATE_PASSIVE: &str = "SUSPICIOUS_DUPLICATE_PASSIVE";
+pub const SUSPICIOUS_DUPLICATE_ACTIVE: &str = "SUSPICIOUS_DUPLICATE_ACTIVE";
 pub const ILLEGAL_PASSIVE: &str = "ILLEGAL_PASSIVE";
 pub const ILLEGAL_ACTIVE: &str = "ILLEGAL_ACTIVE";
 pub const ILLEGAL_HP: &str = "ILLEGAL_HP";
@@ -70,6 +74,16 @@ pub(crate) fn detect_pal_issues(
     save_parameter: &Properties,
     character_id: &str,
     catalogs: &OverviewCatalogs,
+) -> Vec<&'static str> {
+    detect_pal_issues_with_ceiling(save_parameter, character_id, catalogs, None)
+}
+
+/// `hp_ceiling` is a [`validator_max_hp`] result the caller already has.
+pub(crate) fn detect_pal_issues_with_ceiling(
+    save_parameter: &Properties,
+    character_id: &str,
+    catalogs: &OverviewCatalogs,
+    hp_ceiling: Option<i64>,
 ) -> Vec<&'static str> {
     let mut issues: Vec<&'static str> = Vec::new();
 
@@ -105,10 +119,12 @@ pub(crate) fn detect_pal_issues(
 
     let passives = param(save_parameter, "PassiveSkillList")
         .and_then(props::name_values)
-        .cloned()
-        .unwrap_or_default();
+        .map_or(&[][..], Vec::as_slice);
     if passives.len() > SAFE_PASSIVE_SLOTS {
         issues.push(SUSPICIOUS_PASSIVE_SLOTS);
+    }
+    if has_duplicate(passives, |passive| passive) {
+        issues.push(SUSPICIOUS_DUPLICATE_PASSIVE);
     }
     if catalogs.passives_loaded() && passives.iter().any(|p| !catalogs.has_passive(p)) {
         issues.push(ILLEGAL_PASSIVE);
@@ -116,21 +132,45 @@ pub(crate) fn detect_pal_issues(
 
     let actives = param(save_parameter, "EquipWaza")
         .and_then(props::enum_values)
-        .cloned()
-        .unwrap_or_default();
+        .map_or(&[][..], Vec::as_slice);
     if catalogs.actives_loaded() && actives.iter().any(|a| !catalogs.has_active(a)) {
         issues.push(ILLEGAL_ACTIVE);
+    }
+    if actives.len() > SAFE_ACTIVE_SLOTS {
+        issues.push(SUSPICIOUS_ACTIVE_SLOTS);
+    }
+    if has_duplicate(actives, bare_active) {
+        issues.push(SUSPICIOUS_DUPLICATE_ACTIVE);
     }
 
     let stored_max = stored_max_hp(save_parameter);
     if stored_max > 0 {
-        let computed = validator_max_hp(save_parameter, character_id, catalogs);
+        let computed =
+            hp_ceiling.unwrap_or_else(|| validator_max_hp(save_parameter, character_id, catalogs));
         if computed > 0 && stored_max as f64 > computed as f64 * (1.0 + HP_TOLERANCE) {
             issues.push(ILLEGAL_HP);
         }
     }
 
     issues
+}
+
+/// Case-insensitive, so skill-id casing drift between game versions cannot
+/// hide a duplicate.
+fn has_duplicate(values: &[String], key: fn(&str) -> &str) -> bool {
+    values.iter().enumerate().any(|(index, value)| {
+        values[index + 1..]
+            .iter()
+            .any(|other| key(value).eq_ignore_ascii_case(key(other)))
+    })
+}
+
+fn bare_active(active: &str) -> &str {
+    const PREFIX: &str = "EPalWazaID::";
+    match active.get(..PREFIX.len()) {
+        Some(head) if head.eq_ignore_ascii_case(PREFIX) => &active[PREFIX.len()..],
+        _ => active,
+    }
 }
 
 /// Stored MaxHP (×1000). `MaxHP` is a FixedPoint64 `{Value}`; a bare Int64 is
@@ -238,6 +278,7 @@ mod tests {
                     "HP_ACC_up1": {"effects": [{"type": "MaxHP", "value": 10.0, "target": "ToSelf"}]},
                     "HP_ACC_up3": {"effects": [{"type": "MaxHP", "value": 30.0, "target": "ToSelf"}]},
                     "TrainerStamina": {"effects": [{"type": "TrainerStamina", "value": 50.0, "target": "ToTrainer"}]},
+                    "Aggressive": {"effects": [{"type": "ShotAttack", "value": 10.0, "target": "ToSelf"}]},
                     "Legend": {"effects": [
                         {"type": "MaxHP", "value": 20.0, "target": "ToSelf"},
                         {"type": "Attack", "value": 20.0, "target": "ToSelf"}
@@ -349,12 +390,48 @@ mod tests {
                 "HP_ACC_up1",
                 "HP_ACC_up3",
                 "TrainerStamina",
-                "Legend",
+                "Aggressive",
             ]),
         );
         assert_eq!(
             detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
             vec![SUSPICIOUS_PASSIVE_SLOTS]
+        );
+    }
+
+    #[test]
+    fn active_slot_and_duplicate_checks_fire() {
+        let catalogs = catalogs();
+
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "EquipWaza",
+            enum_array(&["AirCanon", "SandBlast", "EPalWazaID::AirCanon", "SandBlast"]),
+        );
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_ACTIVE_SLOTS, SUSPICIOUS_DUPLICATE_ACTIVE]
+        );
+
+        let mut save_parameter = Properties::default();
+        save_parameter.insert(
+            "EquipWaza",
+            enum_array(&["airCanon", "EPalWazaID::AirCanon"]),
+        );
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_DUPLICATE_ACTIVE]
+        );
+    }
+
+    #[test]
+    fn duplicate_passives_fire_regardless_of_casing() {
+        let catalogs = catalogs();
+        let mut save_parameter = Properties::default();
+        save_parameter.insert("PassiveSkillList", name_array(&["Legend", "legend"]));
+        assert_eq!(
+            detect_pal_issues(&save_parameter, "Alpaca", &catalogs),
+            vec![SUSPICIOUS_DUPLICATE_PASSIVE]
         );
     }
 
