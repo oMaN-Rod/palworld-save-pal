@@ -17,7 +17,7 @@
 param(
     [switch]$Web, [switch]$Desktop, [switch]$Webapp, [switch]$Landing,
     [switch]$Docker, [switch]$Serve, [switch]$Signal,
-    [switch]$BuildDesktop, [switch]$BuildWeb, [switch]$Build, [switch]$Amity,
+    [switch]$BuildDesktop, [switch]$BuildAppImage, [switch]$BuildWeb, [switch]$Build, [switch]$Amity,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
     [string]$GameDir, [string]$AmityWorkspace, [string]$Ue4ssZip,
     [switch]$SkipUe4ss, [switch]$RemoveWin64Ue4ss,
@@ -1213,6 +1213,7 @@ mode (pick one; defaults to -Web):
                     + web site on :5175, advertised on the LAN IP so phones
                     can pair. Components whose port is taken are skipped.
   -BuildDesktop     Production desktop build → dist/.
+  -BuildAppImage    Linux only; from Windows run ./dev.sh --build-appimage in WSL.
   -BuildWeb         Production web build (landing page) → ui_build/.
   -Build            Plain SPA build (server-served) → ui_build/.
   -Amity            Build the PSP Amity UE4SS mod and install it into the local
@@ -1264,6 +1265,10 @@ common parameter name.
 }
 
 if ($Help) { Show-Usage; exit 0 }
+
+if ($BuildAppImage) {
+    Die "AppImages can only be built on Linux. From WSL or a Linux machine:  ./dev.sh --build-appimage"
+}
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
         elseif ($Desktop)     { "desktop" }

@@ -168,6 +168,14 @@ check_wasm_target() {
     printf 'wasm32-unknown-unknown\t%s\ttarget not installed\trustup target add wasm32-unknown-unknown\n' "$status"
 }
 
+check_wget() {
+    if resolve_tool wget >/dev/null 2>&1; then
+        printf 'wget\tok\t%s\t\n' "$(probe_version wget --version)"
+        return
+    fi
+    printf 'wget\tcrit\tnot found (the AppImage repack downloads appimagetool)\tapt/dnf install wget\n'
+}
+
 check_docker() {
     local strict="${1:-1}" status
     if ! resolve_tool docker >/dev/null 2>&1; then
@@ -211,7 +219,7 @@ check_disk_space() {
     case "$mode" in
         web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
         webapp) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
-        build-desktop|build-web) min_mb=3500 ;;
+        build-desktop|build-web|build-appimage) min_mb=3500 ;;
     esac
     local free
     free="$(disk_free_mb "$REPO_ROOT")"
@@ -243,16 +251,16 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        web|desktop|serve|webapp|build|build-desktop|build-web|docker) needs_rust=1 ;;
+        web|desktop|serve|webapp|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|serve|web|build|build-desktop) needs_strict_rust=1 ;;
+        desktop|serve|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
     fi
     case "$mode" in
-        desktop|build-desktop)
+        desktop|build-desktop|build-appimage)
             check_tauri_cli 1
             check_webkit_linux 1
             ;;
@@ -264,6 +272,7 @@ run_preflight() {
             ;;
     esac
     if [[ "$mode" == "docker" ]]; then check_docker 1; fi
+    if [[ "$mode" == "build-appimage" ]]; then check_wget; fi
     check_node
     check_git
     local repo_row
@@ -726,6 +735,17 @@ run_build_desktop() {
     log_ok "Desktop build complete."
 }
 
+run_build_appimage() {
+    [[ "$(uname -s)" == "Linux" ]] \
+        || die "--build-appimage is Linux-only: Tauri bundles AppImages on Linux hosts. From Windows, use WSL."
+    ensure_bun_install 1
+    write_desktop_env
+    banner "Build: AppImage (Tauri bundle + host-graphics strip, as in release CI)"
+    spawn_fg_tagged build-appimage bash "$REPO_ROOT/scripts/build-appimage.sh" \
+        || die "AppImage build failed."
+    log_ok "AppImage build complete → dist/"
+}
+
 run_build_web() {
     local bun
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
@@ -793,6 +813,7 @@ mode (pick one; defaults to --web):
   --docker           Build & run the self-build Docker image.
   --serve            Run only the Rust psp-server.
   --build-desktop    Production desktop build → dist/.
+  --build-appimage   Linux AppImage, built and stripped like release CI → dist/.
   --build-web        Production web build (landing page) → ui_build/.
   --build            Plain SPA build (server-served) → ui_build/.
   (The PSP Amity UE4SS mod is Windows-only: dev.ps1 -Amity.)
@@ -832,6 +853,7 @@ parse_args() {
             --docker) ARG_MODE="docker"; shift ;;
             --serve) ARG_MODE="serve"; shift ;;
             --build-desktop) ARG_MODE="build-desktop"; shift ;;
+            --build-appimage) ARG_MODE="build-appimage"; shift ;;
             --build-web) ARG_MODE="build-web"; shift ;;
             --build) ARG_MODE="build"; shift ;;
             --check|--doctor) ARG_CHECK=1; shift ;;
@@ -921,6 +943,7 @@ main() {
         docker) run_docker ;;
         serve) run_serve ;;
         build-desktop) run_build_desktop ;;
+        build-appimage) run_build_appimage ;;
         build-web) run_build_web ;;
         build) run_build_plain ;;
         *) die "internal: unknown mode ${ARG_MODE}" ;;
