@@ -56,7 +56,7 @@ pub fn scan_saves(container_dir: &Path) -> Result<OrderedMap<String, GamepassSav
         let all_for_save = containers_by_save
             .get(save_id)
             .expect("save_order only contains keys present in containers_by_save");
-        let latest = index.latest_save_containers(save_id);
+        let latest = index.latest_save_containers(save_id, container_dir);
         let Some(level_meta_entry) = latest.get("LevelMeta") else {
             continue;
         };
@@ -247,7 +247,7 @@ mod tests {
         let container_dir = build_wgs_tree(temp.path(), &[save]).unwrap();
 
         let index = ContainerIndex::read_from_dir(&container_dir).unwrap();
-        let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+        let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF", &container_dir);
         let meta_entry = latest.get("LevelMeta").unwrap();
         let meta_dir = container_dir.join(guid_file_name(&meta_entry.container_uuid));
         write_extra_container_revision(&meta_dir, 10, "Data", &new_meta);

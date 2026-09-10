@@ -359,6 +359,11 @@ pub fn save_modified_gamepass(
         if key == "Level" {
             continue;
         }
+        // Xbox keeps some containers in the cloud only; there is nothing to copy and
+        // copy_container's read_dir would fail the whole save.
+        if !crate::gamepass::format::has_local_payload(container_dir, original) {
+            continue;
+        }
         let mut replacement: Option<Vec<u8>> = None;
         if key.contains("Player") && !key.contains("_dps") {
             let raw_id = key.split('-').nth(1).unwrap_or_default();
@@ -724,7 +729,8 @@ mod tests {
 
         let mut index =
             crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
-        let originals = index.latest_save_containers("OLDID000OLDID000OLDID000OLDID000");
+        let originals =
+            index.latest_save_containers("OLDID000OLDID000OLDID000OLDID000", &container_dir);
         let mut player_data = std::collections::HashMap::new();
         player_data.insert(
             player_id,
@@ -748,7 +754,8 @@ mod tests {
 
         let reloaded =
             crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
-        let new_latest = reloaded.latest_save_containers("NEWID000NEWID000NEWID000NEWID000");
+        let new_latest =
+            reloaded.latest_save_containers("NEWID000NEWID000NEWID000NEWID000", &container_dir);
         assert_eq!(new_latest.len(), 3); // Level, LevelMeta, player
 
         let (_, level_blob) = read_first_blob(&container_dir, new_latest.get("Level").unwrap())
@@ -772,7 +779,7 @@ mod tests {
             "Renamed World"
         );
         assert!(!reloaded
-            .latest_save_containers("OLDID000OLDID000OLDID000OLDID000")
+            .latest_save_containers("OLDID000OLDID000OLDID000OLDID000", &container_dir)
             .is_empty());
     }
 
@@ -840,7 +847,7 @@ mod tests {
         let container_dir =
             crate::gamepass::fixture::build_wgs_tree(temp.path(), &[synthetic]).unwrap();
         let mut index = ContainerIndex::read_from_dir(&container_dir).unwrap();
-        let originals = index.latest_save_containers(save_id);
+        let originals = index.latest_save_containers(save_id, &container_dir);
 
         save_modified_gamepass(
             &mut index,
@@ -854,10 +861,63 @@ mod tests {
         )
         .unwrap();
 
-        let latest = index.latest_save_containers(save_id);
+        let latest = index.latest_save_containers(save_id, &container_dir);
         let entry = latest.get("WorldOption").unwrap();
         let (_seq, blob) = read_first_blob(&container_dir, entry).unwrap().unwrap();
         assert_eq!(blob, b"NEW_WORLD_OPTION");
+    }
+
+    /// Regression: a real Game Pass index lists containers Xbox keeps only in the
+    /// cloud. `copy_container` reads their blob dir unconditionally, so one of these
+    /// in the original set made every save of that world fail with an OS "path not
+    /// found" rather than writing the containers that do exist.
+    #[test]
+    fn save_modified_gamepass_skips_a_container_with_no_local_blob_dir() {
+        let temp = tempfile::tempdir().unwrap();
+        let save_id = "0123456789ABCDEF0123456789ABCDEF";
+        let synthetic = crate::gamepass::fixture::SyntheticSave {
+            save_id: save_id.to_string(),
+            level_sav: b"LEVEL".to_vec(),
+            level_meta: None,
+            local_data: None,
+            world_option: None,
+            players: vec![],
+        };
+        let container_dir =
+            crate::gamepass::fixture::build_wgs_tree(temp.path(), &[synthetic]).unwrap();
+        let mut index = ContainerIndex::read_from_dir(&container_dir).unwrap();
+
+        let mut originals = index.latest_save_containers(save_id, &container_dir);
+        originals.insert(
+            "WorldOption".to_string(),
+            ContainerEntry {
+                container_name: format!("{save_id}-WorldOption"),
+                cloud_id: String::new(),
+                seq: 4,
+                flag: 5,
+                container_uuid: uuid::Uuid::new_v4(), // never written to disk
+                mtime: Filetime::now(),
+                size: 4498,
+            },
+        );
+
+        save_modified_gamepass(
+            &mut index,
+            &container_dir,
+            save_id,
+            b"NEW_LEVEL",
+            &HashMap::new(),
+            &originals,
+            "MyWorld",
+            None,
+        )
+        .unwrap();
+
+        let latest = index.latest_save_containers(save_id, &container_dir);
+        let (_seq, level) = read_first_blob(&container_dir, latest.get("Level").unwrap())
+            .unwrap()
+            .unwrap();
+        assert_eq!(level, b"NEW_LEVEL");
     }
 
     #[test]
@@ -876,7 +936,7 @@ mod tests {
         let container_dir =
             crate::gamepass::fixture::build_wgs_tree(temp.path(), &[synthetic]).unwrap();
         let mut index = ContainerIndex::read_from_dir(&container_dir).unwrap();
-        let originals = index.latest_save_containers(save_id);
+        let originals = index.latest_save_containers(save_id, &container_dir);
 
         save_modified_gamepass(
             &mut index,
@@ -890,7 +950,7 @@ mod tests {
         )
         .unwrap();
 
-        let latest = index.latest_save_containers(save_id);
+        let latest = index.latest_save_containers(save_id, &container_dir);
         let entry = latest.get("WorldOption").unwrap();
         let (_seq, blob) = read_first_blob(&container_dir, entry).unwrap().unwrap();
         assert_eq!(

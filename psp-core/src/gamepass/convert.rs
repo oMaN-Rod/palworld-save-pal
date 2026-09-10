@@ -232,7 +232,7 @@ mod tests {
         let container_dir = build_wgs_tree(temp.path(), &[save]).unwrap();
         let index = ContainerIndex::read_from_dir(&container_dir).unwrap();
         let containers: OrderedMap<String, crate::gamepass::format::ContainerEntry> =
-            index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+            index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF", &container_dir);
 
         let messages = std::sync::Arc::new(std::sync::Mutex::new(Vec::<String>::new()));
         let sink_messages = messages.clone();
@@ -326,7 +326,7 @@ mod tests {
             .containers
             .iter()
             .any(|entry| entry.container_name.starts_with("EggTest")));
-        let latest = reloaded.latest_save_containers(&new_save_id);
+        let latest = reloaded.latest_save_containers(&new_save_id, &container_dir);
         assert!(latest.get("Level").is_some());
         assert!(latest.get("LevelMeta").is_some());
         assert!(latest

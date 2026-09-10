@@ -147,9 +147,10 @@ pub struct RenameGamepassWorldData {
     pub new_name: String,
 }
 
-/// Appends a brand-new LevelMeta container rather than editing in place;
-/// `ContainerIndex::latest_save_containers`'s seq/mtime rule then makes the
-/// new container win on every subsequent read.
+/// Appends a brand-new LevelMeta container rather than editing in place.
+/// `store::create_container` stamps it seq 1, so on an index whose existing
+/// LevelMeta carries a higher seq, `latest_save_containers` keeps returning the
+/// old container and the rename does not take effect on subsequent reads.
 pub async fn handle_rename_gamepass_world(
     data: RenameGamepassWorldData,
     ctx: &mut HandlerCtx<'_>,
@@ -168,7 +169,7 @@ pub async fn handle_rename_gamepass_world(
     };
     store::backup_container_dir(&container_dir, &store::backups_root().join("gamepass"))?;
     let mut index = ContainerIndex::read_from_dir(&container_dir)?;
-    let latest = index.latest_save_containers(&data.save_id);
+    let latest = index.latest_save_containers(&data.save_id, &container_dir);
 
     let Some(level_meta_entry) = latest.get("LevelMeta") else {
         ctx.emitter.emit(
@@ -227,7 +228,7 @@ pub async fn handle_select_gamepass_save(
 
     let container_dir = PathBuf::from(psp_db::settings::get_settings(&*ctx.app.driver).await?.save_dir);
     let index = ContainerIndex::read_from_dir(&container_dir)?;
-    let containers = index.latest_save_containers(&save_id);
+    let containers = index.latest_save_containers(&save_id, &container_dir);
 
     let Some(level_entry) = containers.get("Level") else {
         return Ok(());
@@ -418,7 +419,7 @@ async fn extract_named_gamepass_save_to_steam(
     };
     progress("Reading GamePass container index...");
     let index = ContainerIndex::read_from_dir(&container_dir)?;
-    let containers = index.latest_save_containers(save_id);
+    let containers = index.latest_save_containers(save_id, &container_dir);
     if containers.get("Level").is_none() {
         return emit_convert_error(ctx, format!("Save {save_id} not found in GamePass containers."));
     }
@@ -583,7 +584,7 @@ async fn standalone_gamepass_to_steam(
     }
     let output_root = PathBuf::from(output_path);
     for save_id in &save_ids {
-        let containers = index.latest_save_containers(save_id);
+        let containers = index.latest_save_containers(save_id, &container_dir);
         if containers.get("Level").is_none() {
             continue;
         }

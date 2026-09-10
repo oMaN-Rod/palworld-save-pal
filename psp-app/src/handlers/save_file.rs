@@ -1162,7 +1162,7 @@ async fn write_modded_gamepass_containers(
 
     let mut index = ContainerIndex::read_from_dir(&container_dir)?;
     store::cleanup_container_dir(&mut index, &container_dir)?;
-    let original_containers = index.latest_save_containers(&selected.save_id);
+    let original_containers = index.latest_save_containers(&selected.save_id, &container_dir);
     if original_containers.is_empty() {
         return Err(HandlerError::Other(format!(
             "No containers found for save: {}",

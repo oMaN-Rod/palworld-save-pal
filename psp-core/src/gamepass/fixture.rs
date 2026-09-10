@@ -136,7 +136,7 @@ mod tests {
 
         let index = ContainerIndex::read_from_dir(&container_dir).unwrap();
         assert_eq!(index.containers.len(), 4); // Level, LevelMeta, player sav, player dps
-        let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+        let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF", &container_dir);
         let level = latest.get("Level").unwrap();
         let (seq, blob) = read_first_blob(&container_dir, level).unwrap().unwrap();
         assert_eq!((seq, blob.as_slice()), (1, b"LEVEL".as_slice()));

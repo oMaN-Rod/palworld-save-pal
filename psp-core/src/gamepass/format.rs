@@ -42,6 +42,23 @@ pub fn guid_file_name(id: &uuid::Uuid) -> String {
         .collect()
 }
 
+/// Whether a container's payload is actually on disk: its GUID dir must hold at
+/// least one `container.<seq>` revision. A dir that exists but holds no file list
+/// yields nothing from `store::read_first_blob`, so it does not count as present.
+pub fn has_local_payload(container_dir: &Path, entry: &ContainerEntry) -> bool {
+    let blob_dir = container_dir.join(guid_file_name(&entry.container_uuid));
+    std::fs::read_dir(blob_dir)
+        .into_iter()
+        .flatten()
+        .flatten()
+        .any(|dir_entry| {
+            dir_entry
+                .file_name()
+                .to_string_lossy()
+                .starts_with("container.")
+        })
+}
+
 fn read_u32(reader: &mut impl Read) -> Result<u32, CoreError> {
     let mut buffer = [0u8; 4];
     reader.read_exact(&mut buffer)?;
@@ -264,11 +281,20 @@ impl ContainerIndex {
     }
 
     /// Latest container per key (`Level`, `LevelMeta`, `LocalData`, `WorldOption`,
-    /// `Players-<HEX>`, `Players-<HEX>_dps`) for one save id. "Latest" is highest
-    /// `seq`, breaking ties on newest `mtime`.
-    pub fn latest_save_containers(&self, save_id: &str) -> OrderedMap<String, ContainerEntry> {
+    /// `Players-<HEX>`, `Players-<HEX>_dps`) for one save id. A container whose
+    /// payload is on disk always beats one that is not; among equals, "latest" is
+    /// highest `seq`, breaking ties on newest `mtime`.
+    ///
+    /// Presence has to outrank seq: an index also lists the containers Xbox holds
+    /// only in the cloud — the game's `-SlotN-` backups among them — and those run
+    /// ahead on seq while having no bytes locally. Picking one loses the save.
+    pub fn latest_save_containers(
+        &self,
+        save_id: &str,
+        container_dir: &Path,
+    ) -> OrderedMap<String, ContainerEntry> {
         let prefix = format!("{save_id}-");
-        let mut latest: OrderedMap<String, ContainerEntry> = OrderedMap::new();
+        let mut latest: OrderedMap<String, (bool, ContainerEntry)> = OrderedMap::new();
         for entry in &self.containers {
             if !entry.container_name.starts_with(&prefix) {
                 continue;
@@ -291,18 +317,24 @@ impl ContainerIndex {
             } else {
                 continue;
             };
+            let present = has_local_payload(container_dir, entry);
             let replace = match latest.get(&key) {
                 None => true,
-                Some(current) => {
+                Some((current_present, _)) if present != *current_present => present,
+                Some((_, current)) => {
                     entry.seq > current.seq
                         || (entry.seq == current.seq && entry.mtime > current.mtime)
                 }
             };
             if replace {
-                latest.insert(key, entry.clone());
+                latest.insert(key, (present, entry.clone()));
             }
         }
-        latest
+        let mut resolved: OrderedMap<String, ContainerEntry> = OrderedMap::new();
+        for (key, (_, entry)) in latest.iter() {
+            resolved.insert(key.clone(), entry.clone());
+        }
+        resolved
     }
 }
 
@@ -467,7 +499,7 @@ mod tests {
             ],
         };
         index.containers.push(sample_entry("EggTest", 9, 9)); // no dash prefix match
-        let latest = index.latest_save_containers("AAAA");
+        let latest = index.latest_save_containers("AAAA", Path::new("no-such-container-dir"));
         assert_eq!(latest.len(), 6);
         assert_eq!(latest.get("Level").unwrap().seq, 2);
         assert_eq!(latest.get("LevelMeta").unwrap().mtime, Filetime(200));
@@ -481,4 +513,92 @@ mod tests {
             .is_some());
     }
 
+    fn index_of(containers: Vec<ContainerEntry>) -> ContainerIndex {
+        ContainerIndex {
+            flag1: 0,
+            package_name: String::new(),
+            mtime: Filetime(0),
+            flag2: 0,
+            index_uuid: String::new(),
+            unknown: 0,
+            containers,
+        }
+    }
+
+    fn entry_with_uuid(name: &str, seq: u8, mtime: u64, id: Uuid) -> ContainerEntry {
+        let mut entry = sample_entry(name, seq, mtime);
+        entry.container_uuid = id;
+        entry
+    }
+
+    fn stage_blob_dir(container_dir: &Path, id: &Uuid, file_list: bool) {
+        let blob_dir = container_dir.join(guid_file_name(id));
+        std::fs::create_dir_all(&blob_dir).unwrap();
+        if file_list {
+            std::fs::write(blob_dir.join("container.1"), b"").unwrap();
+        }
+    }
+
+    /// Regression: a Game Pass index lists the game's cloud-only `-SlotN-` backups
+    /// alongside the downloaded containers, and those carry higher seq numbers. Ranking
+    /// on seq alone hands back a container with no bytes on disk and the save vanishes.
+    #[test]
+    fn latest_save_containers_prefers_the_candidate_whose_blobs_are_on_disk() {
+        let temp = tempfile::tempdir().unwrap();
+        let local_id = Uuid::from_u128(0xAA);
+        let cloud_id = Uuid::from_u128(0xBB);
+        stage_blob_dir(temp.path(), &local_id, true);
+
+        let index = index_of(vec![
+            entry_with_uuid("AAAA-LevelMeta", 36, 100, local_id),
+            entry_with_uuid("AAAA-Slot3-LevelMeta", 47, 200, cloud_id),
+        ]);
+
+        let latest = index.latest_save_containers("AAAA", temp.path());
+        assert_eq!(
+            latest.get("LevelMeta").unwrap().container_name,
+            "AAAA-LevelMeta",
+            "a cloud-only container must not outrank one whose blobs are on disk"
+        );
+    }
+
+    /// Presence means a readable revision, not just a directory: `read_first_blob`
+    /// returns nothing for a dir holding no `container.<seq>` list.
+    #[test]
+    fn latest_save_containers_ignores_a_blob_dir_with_no_file_list() {
+        let temp = tempfile::tempdir().unwrap();
+        let empty_id = Uuid::from_u128(0xCC);
+        let cloud_id = Uuid::from_u128(0xDD);
+        stage_blob_dir(temp.path(), &empty_id, false);
+
+        let index = index_of(vec![
+            entry_with_uuid("AAAA-Level", 36, 100, empty_id),
+            entry_with_uuid("AAAA-Slot3-Level", 47, 200, cloud_id),
+        ]);
+
+        let latest = index.latest_save_containers("AAAA", temp.path());
+        assert_eq!(latest.get("Level").unwrap().seq, 47);
+    }
+
+    #[test]
+    fn latest_save_containers_still_ranks_present_candidates_by_seq_then_mtime() {
+        let temp = tempfile::tempdir().unwrap();
+        let older = Uuid::from_u128(0x01);
+        let newer = Uuid::from_u128(0x02);
+        let same_seq = Uuid::from_u128(0x03);
+        for id in [&older, &newer, &same_seq] {
+            stage_blob_dir(temp.path(), id, true);
+        }
+
+        let index = index_of(vec![
+            entry_with_uuid("AAAA-Level", 34, 900, older),
+            entry_with_uuid("AAAA-Level", 36, 100, newer),
+            entry_with_uuid("AAAA-LevelMeta", 36, 100, older),
+            entry_with_uuid("AAAA-LevelMeta", 36, 300, same_seq),
+        ]);
+
+        let latest = index.latest_save_containers("AAAA", temp.path());
+        assert_eq!(latest.get("Level").unwrap().seq, 36);
+        assert_eq!(latest.get("LevelMeta").unwrap().mtime, Filetime(300));
+    }
 }

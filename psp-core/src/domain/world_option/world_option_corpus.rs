@@ -187,7 +187,7 @@ fn gamepass_fixture_round_trips_world_option_container() {
     let container_dir = crate::gamepass::fixture::build_wgs_tree(temp.path(), &[save]).unwrap();
 
     let index = crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
-    let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF");
+    let latest = index.latest_save_containers("0123456789ABCDEF0123456789ABCDEF", &container_dir);
     let entry = latest
         .get("WorldOption")
         .expect("WorldOption container must be discoverable");
