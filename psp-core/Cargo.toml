@@ -13,6 +13,7 @@ uesave = { workspace = true }
 chrono = { workspace = true }
 tracing = { workspace = true }
 cityhasher = { workspace = true }
+indexmap = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }

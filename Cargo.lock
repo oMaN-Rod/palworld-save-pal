@@ -4268,6 +4268,7 @@ version = "1.4.2"
 dependencies = [
  "chrono",
  "cityhasher",
+ "indexmap 2.14.0",
  "psp-core",
  "serde",
  "serde_json",

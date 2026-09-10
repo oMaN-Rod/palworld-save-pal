@@ -3,6 +3,25 @@
 //! untrusted save is a normal condition. Failures carry no path, so callers
 //! should name it in their own `CoreError`.
 
+/// Borrowed stand-in for `PropertyKey(0, name)`. It hashes and compares
+/// exactly like the owned key, so a lookup needs no `String` allocation.
+#[derive(Hash)]
+struct NameKey<'a>(u32, &'a str);
+
+impl indexmap::Equivalent<crate::ue::PropertyKey> for NameKey<'_> {
+    fn equivalent(&self, key: &crate::ue::PropertyKey) -> bool {
+        key.0 == self.0 && key.1 == self.1
+    }
+}
+
+/// The same lookup as `properties.0.get(&PropertyKey::from(name))`.
+pub fn named<'a>(
+    properties: &'a crate::ue::Properties,
+    name: &str,
+) -> Option<&'a crate::ue::Property> {
+    properties.0.get(&NameKey(0, name))
+}
+
 /// Looks up a property by name, descending nested user structs for multi-segment paths.
 pub fn get<'a>(properties: &'a crate::ue::Properties, path: &[&str]) -> Option<&'a crate::ue::Property> {
     let (segment, rest) = path.split_first()?;
@@ -325,6 +344,24 @@ pub fn merge_schemas(target: &mut crate::ue::Save, source: &crate::ue::Save) {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn named_finds_exactly_what_an_owned_key_finds() {
+        let mut properties = crate::ue::Properties::default();
+        properties.insert("Level", crate::ue::Property::Int(7));
+        properties.0.insert(
+            crate::ue::PropertyKey(1, "Indexed".to_string()),
+            crate::ue::Property::Int(9),
+        );
+        for name in ["Level", "Indexed", "level", "Missing"] {
+            assert_eq!(
+                named(&properties, name),
+                properties.0.get(&crate::ue::PropertyKey::from(name)),
+                "{name}"
+            );
+        }
+        assert!(named(&properties, "Level").is_some());
+    }
+
     use super::*;
     use crate::ue::{Properties, Property, StructValue};
 

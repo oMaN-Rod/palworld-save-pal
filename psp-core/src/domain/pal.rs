@@ -16,7 +16,7 @@ use crate::session::SaveSession;
 use super::world;
 
 pub(crate) fn param<'a>(save_parameter: &'a Properties, name: &str) -> Option<&'a Property> {
-    save_parameter.0.get(&PropertyKey::from(name))
+    props::named(save_parameter, name)
 }
 
 /// Every key in `pals.json`, used by `format_character_key` to decide whether a
