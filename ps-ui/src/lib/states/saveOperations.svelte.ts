@@ -295,7 +295,7 @@ export async function writeSave(state: AppState) {
 	if (!state.saveFile) return;
 	await saveState(state);
 	if (state.saveFile.type === 'gamepass') {
-		const split = state.saveFile.world_name?.split('PalStudio-') || [];
+		const split = state.saveFile.world_name?.split(/PalStudio-|PSP-/) || [];
 		const baseName = split.length > 1 ? split[0].trim() : state.saveFile.world_name || 'PalStudio';
 		const timestamp = new Date()
 			.toLocaleString('en-GB', {
