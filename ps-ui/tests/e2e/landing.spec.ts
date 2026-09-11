@@ -4,7 +4,7 @@ test('web landing shows the Adventure Atlas redesign', async ({ page }) => {
 	await page.goto('/');
 
 	// Theme logo
-	await expect(page.getByRole('img', { name: /palworld save pal/i })).toBeVisible({
+	await expect(page.getByRole('img', { name: /palstudio/i })).toBeVisible({
 		timeout: 15_000
 	});
 
@@ -70,7 +70,7 @@ test('mobile landing hides save editing and shows the desktop-only notice', asyn
 	await page.goto('/');
 
 	// Title + desktop-only disclaimer
-	await expect(page.getByRole('img', { name: /palworld save pal/i })).toBeVisible({
+	await expect(page.getByRole('img', { name: /palstudio/i })).toBeVisible({
 		timeout: 15_000
 	});
 	await expect(page.getByText(/desktop browser/i)).toBeVisible();

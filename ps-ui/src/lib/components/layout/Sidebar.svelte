@@ -137,7 +137,7 @@
 			<span
 				class="sidebar-label heading-gradient text-xs font-extrabold tracking-tight whitespace-nowrap"
 			>
-				PALWORLD SAVE PAL
+				PALSTUDIO
 			</span>
 		</div>
 		<button

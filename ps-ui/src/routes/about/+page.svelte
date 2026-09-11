@@ -150,7 +150,7 @@
 	<div class="flex flex-col space-y-2">
 		<div use:trackHover use:tilt class="card-tilt">
 			<Card>
-				<div class="flex space-x-2">
+				<div class="flex space-x-2 justify-center">
 					<img src={staticIcons.psWhite} alt="PalStudio" class="mb-2" />
 					<span class="font-bold">{appState.version ? `v${appState.version}` : ''}</span>
 				</div>
