@@ -69,9 +69,6 @@ COPY --from=rust_builder /build/target/release/ps-server /usr/local/bin/ps-serve
 COPY --from=ui_builder /app/ui_build /app/ui
 COPY data /app/data
 
-# WORKDIR doubles as the DB directory: the legacy psp.db import resolves to
-# db_path.parent()/psp.db, i.e. /app/db/psp.db — same mounted volume as the
-# new ps-rs.db. Drop a legacy psp.db into the volume to have it imported.
 WORKDIR /app/db
 
 EXPOSE 5174

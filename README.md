@@ -16,6 +16,7 @@ PalStudio is a tool for managing and analyzing save files.
     - [Web](#web)
     - [Desktop App](#desktop-app)
     - [Build Desktop App](#build-desktop-app)
+    - [Amity mod (live game bridge)](#amity-mod-live-game-bridge)
   - [🔥 Features](#-features)
     - [General](#general)
     - [Pals](#pals)
@@ -42,16 +43,6 @@ Details for using PalStudio can be found in the [User Guide](https://github.com/
 The backend is now a single Rust binary (`ps-server`) — the Python/FastAPI
 backend is retired. The UI, save-editing features, and WebSocket API are
 unchanged.
-
-**Your existing database (`psp.db`) is imported automatically.** On first
-start, if a legacy `psp.db` sits next to the new database file
-(`ps-rs.db`) and no new database exists yet, your settings, presets,
-Universal Pal Storage, and server configs are imported; the legacy file is
-backed up, never modified, and the import runs only once.
-
-- Desktop: nothing to do — the app finds your existing `psp.db`.
-- Docker: copy your old `psp.db` into the `./db/` folder (see the Docker
-  section) before first start.
 
 **Breaking change:** JSON files exported by the old Python tooling
 (palworld-save-tools `convert.py` output) can no longer be converted back to
@@ -100,8 +91,7 @@ To run PalStudio using Docker:
             - "5174:5174"
           volumes:
             - ./data:/app/data
-            # Persists ps-rs.db (settings, presets, UPS). To import a legacy
-            # Python psp.db, copy it to ./db/psp.db before first start.
+            # Persists ps-rs.db (settings, presets, UPS).
             - ./db:/app/db
       ```
 
