@@ -1,7 +1,7 @@
 //! Cross-player UID swap: exchanges two players' UIDs everywhere they appear in
 //! `Level.sav`, their own `.sav`/`_dps.sav` files, and the on-disk file names.
 //!
-//! Fog of war is NOT among them. Its mask lives in `LocalData.sav` (see
+//! Fog of war is NOT among them either. Its mask lives in `LocalData.sav` (see
 //! `crate::localdata`), which is per-machine and absent from a dedicated-server save, so
 //! there is nothing to exchange.
 
@@ -68,36 +68,6 @@ fn swap_pal_ownership(level: &mut crate::ue::Save, old: Uuid, new: Uuid) -> Resu
     for entry in world::character_map_mut(level)?.iter_mut() {
         if let Some(save_parameter) = world::entry_save_parameter_mut(entry) {
             swap_save_parameter_owner(save_parameter, old, new);
-        }
-    }
-    Ok(())
-}
-
-/// A pal box travels with the `.sav` that names its container id, so the slot owners
-/// recorded inside the container have to travel with it.
-fn swap_character_container_slot_owners(
-    level: &mut crate::ue::Save,
-    old: Uuid,
-    new: Uuid,
-) -> Result<(), CoreError> {
-    for entry in world::character_container_map_mut(level)?.iter_mut() {
-        let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
-            continue;
-        };
-        let Some(slots) =
-            props::get_mut(value_props, &["Slots"]).and_then(props::struct_values_mut)
-        else {
-            continue;
-        };
-        for slot in slots.iter_mut() {
-            let StructValue::Struct(slot_props) = slot else {
-                continue;
-            };
-            if let Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) =
-                slot_props.0.get_mut(&PropertyKey::from("RawData"))
-            {
-                swap_guid_field(&mut raw.player_uid, old, new);
-            }
         }
     }
     Ok(())
@@ -328,7 +298,6 @@ impl SaveSession {
 
         progress("Swapping pal ownership...");
         swap_pal_ownership(&mut self.level, old_player_uid, new_player_uid)?;
-        swap_character_container_slot_owners(&mut self.level, old_player_uid, new_player_uid)?;
 
         progress("Swapping structure ownership...");
         swap_map_object_ownership(&mut self.level, old_player_uid, new_player_uid)?;
