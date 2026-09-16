@@ -9,6 +9,17 @@ use tower::ServiceExt;
 use ps_server::router::build_router;
 use ps_server::{AppConfig, AppState};
 
+/// The network gate reads the peer from ConnectInfo; oneshot requests carry
+/// no socket, so tests stamp a loopback peer like production would see.
+fn local_peer<B>(mut request: axum::http::Request<B>) -> axum::http::Request<B> {
+    use axum::extract::connect_info::ConnectInfo;
+    use std::net::SocketAddr;
+    request.extensions_mut().insert(ConnectInfo(
+        "127.0.0.1:51515".parse::<SocketAddr>().unwrap(),
+    ));
+    request
+}
+
 async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     // Real repo game data; synthetic UI dir.
     let ui_dir = temp_dir.path().join("ui");
@@ -42,8 +53,12 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             sessions: std::sync::Mutex::new(ps_server::SessionStore::default()),
             breeding_db: Default::default(),
             plugins: Default::default(),
+            network_policy: None,
         }),
         &ui_dir,
+        Arc::new(ps_server::network::NetworkRuntime::new(
+            ps_network::NetworkConfig::default(),
+        )),
     )
 }
 
@@ -52,7 +67,7 @@ async fn root_serves_index_html() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/").body(Body::empty()).unwrap())
+        .oneshot(local_peer(Request::get("/").body(Body::empty()).unwrap()))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -65,7 +80,9 @@ async fn static_asset_is_served() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/assets/app.js").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/assets/app.js").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -78,7 +95,9 @@ async fn unknown_path_redirects_to_spa_root_with_encoded_path() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/edit/pal%20box").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/edit/pal%20box").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -97,12 +116,14 @@ async fn api_and_ws_paths_bypass_the_spa_redirect() {
     let router = test_router(&temp_dir).await;
     let api_response = router
         .clone()
-        .oneshot(Request::get("/api/nope").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/api/nope").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(api_response.status(), StatusCode::NOT_FOUND);
     let ws_response = router
-        .oneshot(Request::get("/ws").body(Body::empty()).unwrap())
+        .oneshot(local_peer(Request::get("/ws").body(Body::empty()).unwrap()))
         .await
         .unwrap();
     assert_eq!(ws_response.status(), StatusCode::NOT_FOUND);
@@ -121,7 +142,9 @@ async fn directory_without_index_html_redirects_in_one_hop_without_adding_a_slas
     std::fs::write(edit_dir.join("pal.html"), "<html>pal</html>").unwrap();
 
     let response = router
-        .oneshot(Request::get("/edit").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/edit").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -143,7 +166,9 @@ async fn directory_with_index_html_is_served_without_a_trailing_slash() {
     std::fs::write(docs_dir.join("index.html"), "<html>docs</html>").unwrap();
 
     let response = router
-        .oneshot(Request::get("/docs").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/docs").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -158,7 +183,9 @@ async fn path_traversal_outside_ui_dir_is_not_served() {
     std::fs::write(temp_dir.path().join("secret.txt"), "top secret").unwrap();
 
     let response = router
-        .oneshot(Request::get("/../secret.txt").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/../secret.txt").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_ne!(response.status(), StatusCode::OK);
@@ -207,7 +234,9 @@ async fn path_traversal_percent_and_backslash_forms_are_not_served() {
     for (request_path, expected_location) in cases {
         let response = router
             .clone()
-            .oneshot(Request::get(request_path).body(Body::empty()).unwrap())
+            .oneshot(local_peer(
+                Request::get(request_path).body(Body::empty()).unwrap(),
+            ))
             .await
             .unwrap();
         assert_ne!(
@@ -247,7 +276,9 @@ async fn path_traversal_to_a_directory_with_index_html_is_not_served() {
     std::fs::write(secret_dir.join("index.html"), secret).unwrap();
 
     let response = router
-        .oneshot(Request::get("/../secret_dir").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/../secret_dir").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_ne!(response.status(), StatusCode::OK);
@@ -267,7 +298,9 @@ async fn redirect_escapes_percent_encoded_question_mark() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/pals/foo%3Fbar").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/pals/foo%3Fbar").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -288,7 +321,9 @@ async fn redirect_escapes_percent_encoded_hash() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/pals/foo%23bar").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/pals/foo%23bar").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -309,11 +344,11 @@ async fn redirect_escapes_non_ascii_utf8_bytes() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(
+        .oneshot(local_peer(
             Request::get("/pals/%E3%83%91%E3%83%AB")
                 .body(Body::empty())
                 .unwrap(),
-        )
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -334,7 +369,9 @@ async fn redirect_leaves_unreserved_characters_unescaped() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(Request::get("/pals/a~b.c-d_e").body(Body::empty()).unwrap())
+        .oneshot(local_peer(
+            Request::get("/pals/a~b.c-d_e").body(Body::empty()).unwrap(),
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::TEMPORARY_REDIRECT);
@@ -352,11 +389,11 @@ async fn map_tile_paths_bypass_the_spa_redirect() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(
+        .oneshot(local_peer(
             Request::get("/maps/mainmap/9/999/999.webp")
                 .body(Body::empty())
                 .unwrap(),
-        )
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::NOT_FOUND);

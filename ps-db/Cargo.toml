@@ -3,6 +3,8 @@ name = "ps-db"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio persistence layer: driver-agnostic repositories with an optional Sqlx/SQLite backend"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
 
 [features]
 default = ["sqlx-driver"]

@@ -144,6 +144,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         }
     }
@@ -193,7 +194,11 @@ mod tests {
     #[tokio::test]
     async fn scan_request_replies_under_the_request_type() {
         let mut test = TestContext::new(|json_dir| {
-            std::fs::write(json_dir.join("pals.json"), r#"{"Alpaca": {"is_pal": true}}"#).unwrap();
+            std::fs::write(
+                json_dir.join("pals.json"),
+                r#"{"Alpaca": {"is_pal": true}}"#,
+            )
+            .unwrap();
         })
         .await;
         test.session.save = Some(ps_core::session::SaveSession::new_for_tests(
@@ -219,7 +224,11 @@ mod tests {
         use base64::Engine as _;
 
         let mut test = TestContext::new(|json_dir| {
-            std::fs::write(json_dir.join("pals.json"), r#"{"Alpaca": {"is_pal": true}}"#).unwrap();
+            std::fs::write(
+                json_dir.join("pals.json"),
+                r#"{"Alpaca": {"is_pal": true}}"#,
+            )
+            .unwrap();
         })
         .await;
         test.session.save = Some(ps_core::session::SaveSession::new_for_tests(
@@ -252,7 +261,11 @@ mod tests {
     #[tokio::test]
     async fn a_blank_file_name_falls_back() {
         let mut test = TestContext::new(|json_dir| {
-            std::fs::write(json_dir.join("pals.json"), r#"{"Alpaca": {"is_pal": true}}"#).unwrap();
+            std::fs::write(
+                json_dir.join("pals.json"),
+                r#"{"Alpaca": {"is_pal": true}}"#,
+            )
+            .unwrap();
         })
         .await;
         test.session.save = Some(ps_core::session::SaveSession::new_for_tests(
@@ -260,7 +273,10 @@ mod tests {
             minimal_level(),
         ));
         dispatch(
-            envelope("export_overview_stats", serde_json::json!({"file_name": "  "})),
+            envelope(
+                "export_overview_stats",
+                serde_json::json!({"file_name": "  "}),
+            ),
             ctx(&mut test),
         )
         .await;

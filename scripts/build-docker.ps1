@@ -22,7 +22,9 @@ $IPAddress = Get-BestIPAddress
 
 Write-Host "Using IP Address: $IPAddress"
 
-docker-compose build --build-arg PUBLIC_WS_URL="${IPAddress}:5174/ws"
-docker-compose up -d
+# The base compose file pulls the prebuilt image; the build override rebuilds
+# it locally with this machine's IP baked into the UI's WebSocket URL.
+$env:PUBLIC_WS_URL = "${IPAddress}:5174/ws"
+docker compose -f docker-compose.yml -f docker-compose.build.yml up -d --build
 
 Write-Host "Build and deployment completed successfully."

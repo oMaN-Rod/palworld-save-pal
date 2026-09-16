@@ -55,6 +55,16 @@ class SocketState implements Transport {
 		this.#websocket.onclose = () => {
 			this.#connected = false;
 			this.#rejectPending(new Error('WebSocket connection closed'));
+			// A dropped socket may be the network policy demanding a PIN
+			// (the upgrade is refused with 401 while locked). Probe once per
+			// reconnect and route to the server-rendered unlock page — it
+			// sets the session cookie and bounces back here. The timeout
+			// keeps a hung backend from dangling the probe forever.
+			fetch('/api/network/config', { signal: AbortSignal.timeout(5_000) })
+				.then((resp) => {
+					if (resp.status === 401) window.location.replace('/network-unlock');
+				})
+				.catch(() => {});
 			setTimeout(() => this.connect(context), RECONNECT_DELAY);
 		};
 	}

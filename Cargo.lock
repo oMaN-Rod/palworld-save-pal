@@ -475,6 +475,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
 
 [[package]]
+name = "attohttpc"
+version = "0.30.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "16e2cdb6d5ed835199484bb92bb8b3edd526effe995c61732580439c1a67e2e9"
+dependencies = [
+ "base64 0.22.1",
+ "http",
+ "log",
+ "url",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2867,6 +2879,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "igd-next"
+version = "0.17.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "de7238d487a9aff61f81b5ab41c0a841532a115a398b5fa92a2fadd0885e2581"
+dependencies = [
+ "attohttpc",
+ "bytes",
+ "futures",
+ "http",
+ "http-body-util",
+ "hyper",
+ "hyper-util",
+ "log",
+ "rand 0.10.2",
+ "tokio",
+ "url",
+ "xmltree",
+]
+
+[[package]]
 name = "indexmap"
 version = "1.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3855,6 +3887,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "palstudio"
+version = "1.4.2"
+dependencies = [
+ "anyhow",
+ "clap",
+ "flate2",
+ "opener",
+ "ps-server",
+ "reqwest 0.12.28",
+ "serde_json",
+ "sha2",
+ "tar",
+ "tempfile",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "pango"
 version = "0.18.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4319,6 +4370,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "ps-network"
+version = "1.4.2"
+dependencies = [
+ "hmac",
+ "igd-next",
+ "rand 0.9.4",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tempfile",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
 name = "ps-plugin"
 version = "1.4.2"
 dependencies = [
@@ -4357,6 +4424,7 @@ dependencies = [
  "ps-app",
  "ps-core",
  "ps-db",
+ "ps-network",
  "ps-plugin",
  "rand 0.9.4",
  "reqwest 0.12.28",
@@ -6946,7 +7014,7 @@ dependencies = [
 [[package]]
 name = "uesave"
 version = "0.7.1"
-source = "git+https://github.com/oMaN-Rod/uesave-rs.git?branch=pluggable-game-support#0aaf74173b9d7f926934c3a43f25969faa8a1af9"
+source = "git+https://github.com/oMaN-Rod/uesave-rs.git?branch=pluggable-game-support#416b89053858828c652a52a4308e362b6551fa75"
 dependencies = [
  "bitflags 2.13.0",
  "byteorder",
@@ -8253,6 +8321,21 @@ checksum = "32e45ad4206f6d2479085147f02bc2ef834ac85886624a23575ae137c8aa8156"
 dependencies = [
  "libc",
  "rustix",
+]
+
+[[package]]
+name = "xml-rs"
+version = "0.8.29"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e450f9b2ed1dff33c94c12589a87338689467b9c4f5d8a5710bd09a847d2c8a7"
+
+[[package]]
+name = "xmltree"
+version = "0.10.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d7d8a75eaf6557bb84a65ace8609883db44a29951042ada9b393151532e41fcb"
+dependencies = [
+ "xml-rs",
 ]
 
 [[package]]

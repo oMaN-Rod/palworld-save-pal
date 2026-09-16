@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["ps-core", "ps-db", "ps-app", "ps-server", "ps-desktop", "ps-web", "ps-lua-sys", "ps-plugin"]
+members = ["ps-core", "ps-db", "ps-app", "ps-server", "ps-desktop", "ps-web", "ps-lua-sys", "ps-plugin", "ps-network", "palstudio"]
 
 [workspace.package]
 # Single source of truth for the project version (get_version, Tauri bundle,
@@ -31,7 +31,12 @@ ps-core = { path = "ps-core", default-features = false }
 # crates that need the SqlxSqliteDriver opt in with `features = ["sqlx-driver"]`.
 ps-db = { path = "ps-db", default-features = false }
 ps-lua-sys = { path = "ps-lua-sys" }
+ps-network = { path = "ps-network" }
 ps-plugin = { path = "ps-plugin" }
+ps-server = { path = "ps-server" }
+# Vendored copies lived here for the (since-removed) crates.io publishing
+# channel; the fork carries the pluggable-game-support changes and its
+# `oodle` feature pulls in the Oodle codec from the ooz repo transitively.
 uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }

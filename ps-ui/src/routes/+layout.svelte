@@ -53,6 +53,10 @@
 	const remoteMode = getRemoteMode();
 	const remoteSession = browser && isWebBuild ? getWebSignalSession() : null;
 
+	// PIN gate: 'checking' until the onMount probe resolves — the shell stays
+	// unmounted (and no websocket connects) while the instance may be locked.
+	let pinGate = $state<'checking' | 'open'>('checking');
+
 	// Web build only: desktop and Docker ship a real backend and native file
 	// access, so none of these browser limits apply there. The `browser` guard
 	// matters because adapter-static prerenders in Node, where `Worker` is not a
@@ -151,6 +155,24 @@
 	});
 
 	onMount(async () => {
+		// PIN-gated instances must not render (or connect) anything until the
+		// session cookie is presented: probe once before the shell mounts.
+		// Only a definitive 401 locks — a 404/Network error (or a hung
+		// backend, hence the timeout) means no server to lock this build and
+		// opens the gate instead of spinning forever.
+		try {
+			const resp = await fetch('/api/network/config', {
+				signal: AbortSignal.timeout(5_000)
+			});
+			if (resp.status === 401) {
+				window.location.replace('/network-unlock');
+				return;
+			}
+		} catch {
+			/* no server behind this build */
+		}
+		pinGate = 'open';
+
 		if (blocked) return;
 		ws.connect({ goto });
 
@@ -162,7 +184,12 @@
 	});
 </script>
 
-{#if blocked}
+{#if pinGate !== 'open'}
+	<!-- Locked or probing: a neutral loader only — no shell, no websocket. -->
+	<div class="grid h-screen w-screen place-items-center">
+		<Spinner size="size-8" />
+	</div>
+{:else if blocked}
 	<UnsupportedBrowser />
 {:else}
 	<Toast position="bottom-center" transition={{ type: 'fly', params: { y: 300 } }} />

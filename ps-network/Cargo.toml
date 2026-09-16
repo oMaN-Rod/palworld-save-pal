@@ -1,0 +1,32 @@
+# PalStudio's OWN networking controls (listen mode, allowlists, PIN auth,
+# tailscale detection, optional UPnP) — deliberately separate from the
+# Palworld game-server management in ps-server/services. Pure domain crate:
+# no axum/tokio in the default build so it stays unit-testable and usable
+# from the `palstudio` launcher; the server wires it into middleware.
+[package]
+name = "ps-network"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "PalStudio network policy: listen modes, IP allowlists, PIN auth, tailscale detection"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
+
+[features]
+default = []
+# UPnP port mapping via igd-next; off by default because the runtime mapping
+# is a user opt-in (and discouraged) — only builds that can act on it pay for it.
+upnp = ["dep:igd-next", "dep:tokio"]
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+hmac = { workspace = true }
+sha2 = { workspace = true }
+rand = { workspace = true }
+igd-next = { version = "0.17", optional = true, features = ["aio_tokio"] }
+tokio = { workspace = true, optional = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

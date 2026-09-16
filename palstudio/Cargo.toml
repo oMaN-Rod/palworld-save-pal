@@ -1,0 +1,33 @@
+# The launcher CLI shipped inside every release artifact (zip / server
+# tarballs): picks the runtime — desktop/webapp picker, `webapp`, `host`,
+# `serve`. When it runs without bundled UI/game data (e.g. a from-source
+# `cargo install --git` build), it downloads the matching release's server
+# bundle into the platform data home on first run. ps-server keeps its own
+# bare CLI for Docker and dev use.
+[package]
+name = "palstudio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "PalStudio server — a Palworld save editor backend that provisions its web UI on first run"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
+readme = "README.md"
+keywords = ["palworld", "save-editor", "server"]
+categories = ["command-line-utilities"]
+
+[dependencies]
+ps-server = { workspace = true }
+anyhow = { workspace = true }
+clap = { workspace = true }
+opener = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+reqwest = { workspace = true }
+flate2 = { workspace = true }
+tar = { workspace = true }
+sha2 = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

@@ -3,6 +3,8 @@ name = "ps-core"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio core domain: Palworld save-file parsing and game data"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
 
 [dependencies]
 serde = { workspace = true }

@@ -17,11 +17,12 @@ async fn startup_imports_legacy_db_next_to_new_db() {
 
     let config = ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir,
         data_dir: repo_data_dir(),
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
+        hosted: false,
     };
     let handle = ps_server::start_server(config).await.unwrap();
 

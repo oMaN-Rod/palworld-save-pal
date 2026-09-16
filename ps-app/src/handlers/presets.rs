@@ -395,6 +395,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         })
         .await
@@ -415,6 +416,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         })
         .await
@@ -448,7 +450,13 @@ mod tests {
         ]);
         let added = import_preset_value(&*test.app.driver, value).await.unwrap();
         assert_eq!(added, 2);
-        assert_eq!(ps_db::presets::get_all(&*test.app.driver).await.unwrap().len(), 2);
+        assert_eq!(
+            ps_db::presets::get_all(&*test.app.driver)
+                .await
+                .unwrap()
+                .len(),
+            2
+        );
     }
 
     #[test]

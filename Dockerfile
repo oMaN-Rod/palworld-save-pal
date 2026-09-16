@@ -62,7 +62,7 @@ RUN cargo build --release --locked --package ps-server
 FROM debian:bookworm-slim
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates libstdc++6 \
+    && apt-get install -y --no-install-recommends ca-certificates libstdc++6 curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=rust_builder /build/target/release/ps-server /usr/local/bin/ps-server
@@ -73,6 +73,14 @@ WORKDIR /app/db
 
 EXPOSE 5174
 
-CMD ["ps-server", "--host", "0.0.0.0", "--port", "5174", \
+# The SPA middleware serves ui/index.html at "/" (200) once the server is up,
+# which makes it a suitable liveness probe without a dedicated health route.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl -fsS -o /dev/null http://127.0.0.1:5174/ || exit 1
+
+# Port comes from the network policy (PS_PORT env / Network page; default
+# 5174) rather than a CLI pin, so it stays editable at runtime. The bind
+# address is 0.0.0.0 — exposure is governed by the policy's listen mode.
+CMD ["ps-server", "--hosted", "--host", "0.0.0.0", \
      "--ui-dir", "/app/ui", "--data-dir", "/app/data", \
      "--db", "/app/db/ps-rs.db"]

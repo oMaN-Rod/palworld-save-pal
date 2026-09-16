@@ -3,12 +3,19 @@ name = "ps-desktop"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio desktop app (Tauri shell around the embedded server)"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
+# Not publishable: the Tauri bundle resources (ui_build/, data/) are built by
+# bun + the release workflow, not `cargo install`.
+publish = false
 
 # The package stays `ps-desktop` (workspace members, `-p ps-desktop`, the
-# Dockerfile and CI working-dirs all key off it); only the emitted binary is
-# `palstudio`. Keep this in step with `mainBinaryName` in tauri.conf.json.
+# Dockerfile and CI working-dirs all key off it). The cargo output is
+# `palstudio-desktop` so it can coexist with the `palstudio` launcher crate's
+# binary in one target dir; tauri-cli renames it to `mainBinaryName`
+# (`palstudio`) inside every bundle it packages.
 [[bin]]
-name = "palstudio"
+name = "palstudio-desktop"
 path = "src/main.rs"
 
 [build-dependencies]

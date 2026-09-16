@@ -70,6 +70,12 @@ jobs:
         working-directory: ps-ui
         run: bun run verify:build
 
+      # The palstudio.app/install endpoint redirects curl/irm to these two
+      # static assets; they must ride along with every site deploy.
+      - name: Stage the install scripts
+        run: |
+          cp install.sh install.ps1 ui_build/
+
       - name: Deploy to Cloudflare
         uses: cloudflare/wrangler-action@v3
         with:

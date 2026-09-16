@@ -14,11 +14,12 @@ async fn start_server_binds_the_port_before_returning() {
 
     let config = ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
+        hosted: false,
     };
 
     let handle = start_server(config).await.unwrap();
@@ -49,11 +50,12 @@ async fn shutdown_completes_and_frees_the_port() {
 
     let config = ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
+        hosted: false,
     };
 
     let handle = start_server(config).await.unwrap();

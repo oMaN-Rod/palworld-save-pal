@@ -3,9 +3,19 @@ name: Build and Release
 # Publishing the draft release fires nexus-upload.yml and discord.yml. Release
 # assets are named canonically so nexus-upload.yml can pattern-match them:
 #   PalStudio-<tag>-windows.msi              (MSI installer)
-#   PalStudio-<tag>-windows-standalone.zip   (portable: exe + ui + data)
-#   PalStudio-<tag>-macos.dmg                (DMG)
+#   PalStudio-<tag>-windows-standalone.zip   (portable: launcher CLI + desktop
+#                                             app + ui + data, bin/ layout)
+#   PalStudio-<tag>-macos.dmg                (universal DMG: arm64 + x64)
 #   PalStudio-<tag>-linux.AppImage           (cross-distro AppImage)
+#   PalStudio-<tag>-linux.deb
+# The install scripts served at palstudio.app/install (repo root install.sh /
+# install.ps1, staged into the site by deploy-web.yml) download the four
+# standalone artifacts and verify them against:
+#   PalStudio-<tag>-checksums.txt            (sha256sum-style, desktop artifacts)
+# Server bundles feed scripts/install-server.sh / .ps1 and the palstudio
+# crate's first-run provisioning (asset names are load-bearing there):
+#   palstudio-<tag>-server-<platform>.tar.gz (binaries + ui + data)
+#   palstudio-<tag>-server-checksums.txt     (sha256sum-style, all bundles)
 
 on:
   workflow_dispatch:
@@ -66,6 +76,28 @@ jobs:
         working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles msi
 
+      - name: Set aside the desktop binary
+        working-directory: palstudio
+        shell: bash
+        run: |
+          # tauri-cli renames the cargo output (palstudio-desktop.exe) to
+          # mainBinaryName (palstudio.exe) while packaging; either spelling
+          # may be on disk afterwards. Copy it aside now — the launcher build
+          # below writes its own palstudio.exe to that path.
+          if [ -f target/release/palstudio-desktop.exe ]; then
+            cp target/release/palstudio-desktop.exe dist-desktop.exe
+          elif [ -f target/release/palstudio.exe ]; then
+            cp target/release/palstudio.exe dist-desktop.exe
+          else
+            echo "no desktop binary found after the tauri build" >&2
+            exit 1
+          fi
+
+      - name: Build the launcher CLI
+        working-directory: palstudio
+        shell: bash
+        run: cargo build --release --locked --package palstudio
+
       - name: Collect MSI + portable standalone
         shell: pwsh
         working-directory: palstudio
@@ -75,10 +107,14 @@ jobs:
           # The only Windows installer we ship.
           $msi = Get-ChildItem target/release/bundle/msi/*.msi | Select-Object -First 1
           Copy-Item $msi.FullName "dist/PalStudio-$tag-windows.msi"
-          # extract-and-run: keeps its DB alongside the exe.
+          # Portable standalone: launcher CLI (bin/palstudio.exe, all verbs)
+          # + the desktop app (bin/palstudio-desktop.exe) + the UI and game
+          # data the unpackaged app resolves from its working directory. The
+          # launcher expects exactly this layout (bundled_install_for).
           $staging = "dist/PalStudio"
-          New-Item -ItemType Directory -Force $staging | Out-Null
-          Copy-Item target/release/palstudio.exe "$staging/palstudio.exe"
+          New-Item -ItemType Directory -Force "$staging/bin" | Out-Null
+          Copy-Item target/release/palstudio.exe "$staging/bin/palstudio.exe"
+          Copy-Item dist-desktop.exe "$staging/bin/palstudio-desktop.exe"
           Copy-Item -Recurse ui_build "$staging/ui_build"
           Copy-Item -Recurse data "$staging/data"
           Compress-Archive -Path $staging -DestinationPath "dist/PalStudio-$tag-windows-standalone.zip"
@@ -113,6 +149,9 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          # The universal dmg lipo-joins both architectures.
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
 
       - name: Cache Rust build
         uses: Swatinem/rust-cache@v2
@@ -126,7 +165,7 @@ jobs:
 
       - name: Build Tauri bundles
         working-directory: palstudio/ps-desktop
-        run: cargo tauri build --bundles dmg
+        run: cargo tauri build --bundles dmg --target universal-apple-darwin
         env:
           NODE_OPTIONS: --max-old-space-size=4096
 
@@ -135,7 +174,7 @@ jobs:
         run: |
           tag="${{ github.event.inputs.version }}"
           mkdir -p dist
-          dmg=$(ls target/release/bundle/dmg/*.dmg | head -n 1)
+          dmg=$(ls target/universal-apple-darwin/release/bundle/dmg/*.dmg | head -n 1)
           cp "$dmg" "dist/PalStudio-$tag-macos.dmg"
 
       - name: Upload macOS artifacts
@@ -211,8 +250,233 @@ jobs:
           path: palstudio/dist/*
           if-no-files-found: error
 
-  create-release:
+  # The web UI is platform-independent static output; build it once and share
+  # it with every server-bundle job below.
+  build-server-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout palstudio
+        uses: actions/checkout@v4
+        with:
+          path: palstudio
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Build the web UI
+        working-directory: palstudio/ps-ui
+        run: |
+          echo "PUBLIC_WS_URL=127.0.0.1:5174/ws" > .env
+          echo "PUBLIC_DESKTOP_MODE=false" >> .env
+          bun install --frozen-lockfile
+          bun run build
+
+      - name: Upload the built UI
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-ui
+          path: palstudio/ui_build/
+          if-no-files-found: error
+
+  # Prebuilt server bundles consumed by install.sh / install.ps1 and the
+  # palstudio crate's first-run provisioning. macOS x86_64 is cross-compiled
+  # from the arm64 runner (GitHub no longer ships Intel macOS runners);
+  # `target` empty means a native build.
+  build-server:
+    needs: build-server-ui
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest,    platform: linux-x86_64,  target: "" }
+          - { os: ubuntu-24.04-arm, platform: linux-aarch64, target: "" }
+          - { os: macos-latest,     platform: macos-aarch64, target: "" }
+          - { os: macos-latest,     platform: macos-x86_64,  target: x86_64-apple-darwin }
+          - { os: windows-latest,   platform: windows-x64,   target: "" }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout palstudio
+        uses: actions/checkout@v4
+        with:
+          path: palstudio
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Cache Rust build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: palstudio
+
+      - name: Install Linux webview dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libayatana-appindicator3-dev
+
+      - name: Download the built UI
+        uses: actions/download-artifact@v4
+        with:
+          name: server-ui
+          path: palstudio/ui_build
+
+      - name: Build the server and desktop binaries
+        working-directory: palstudio
+        shell: bash
+        run: |
+          if [ -n "${{ matrix.target }}" ]; then
+            cargo build --release --locked --package palstudio --package ps-desktop --target ${{ matrix.target }}
+          else
+            cargo build --release --locked --package palstudio --package ps-desktop
+          fi
+
+      - name: Locate the built binaries
+        id: binary
+        working-directory: palstudio
+        shell: bash
+        run: |
+          if [ -n "${{ matrix.target }}" ]; then
+            bin="target/${{ matrix.target }}/release/palstudio"
+            desktop="target/${{ matrix.target }}/release/palstudio-desktop"
+          else
+            bin="target/release/palstudio$( [ '${{ runner.os }}' = Windows ] && echo '.exe' )"
+            desktop="target/release/palstudio-desktop$( [ '${{ runner.os }}' = Windows ] && echo '.exe' )"
+          fi
+          echo "path=$bin" >> "$GITHUB_OUTPUT"
+          # The desktop app is optional per-platform: include when produced.
+          if [ -f "$desktop" ]; then
+            echo "desktop=$desktop" >> "$GITHUB_OUTPUT"
+          else
+            echo "desktop=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Assemble the bundle (unix)
+        if: runner.os != 'Windows'
+        working-directory: palstudio
+        run: |
+          tag="${{ github.event.inputs.version }}"
+          asset="palstudio-${tag}-server-${{ matrix.platform }}.tar.gz"
+          mkdir -p dist/stage/palstudio/bin
+          cp "${{ steps.binary.outputs.path }}" dist/stage/palstudio/bin/palstudio
+          if [ -n "${{ steps.binary.outputs.desktop }}" ]; then
+            cp "${{ steps.binary.outputs.desktop }}" dist/stage/palstudio/bin/palstudio-desktop
+          fi
+          cp -r ui_build dist/stage/palstudio/ui
+          cp -r data dist/stage/palstudio/data
+          cat > dist/stage/palstudio/README.txt <<EOF
+          PalStudio server $tag (${{ matrix.platform }})
+
+          Run:  bin/palstudio --ui-dir ui --data-dir data --db ps-rs.db
+          Then: http://127.0.0.1:5174
+
+          The recommended entry point is the install script:
+          https://github.com/oMaN-Rod/palworld-save-pal#installation
+          EOF
+          tar -czf "dist/$asset" -C dist/stage palstudio
+          rm -rf dist/stage
+
+      - name: Assemble the bundle (windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        working-directory: palstudio
+        run: |
+          $tag = "${{ github.event.inputs.version }}"
+          $asset = "palstudio-$tag-server-${{ matrix.platform }}.tar.gz"
+          New-Item -ItemType Directory -Force -Path dist/stage/palstudio/bin | Out-Null
+          Copy-Item "${{ steps.binary.outputs.path }}" dist/stage/palstudio/bin/palstudio.exe
+          if ("${{ steps.binary.outputs.desktop }}" -ne "") {
+            Copy-Item "${{ steps.binary.outputs.desktop }}" dist/stage/palstudio/bin/palstudio-desktop.exe
+          }
+          Copy-Item -Recurse ui_build dist/stage/palstudio/ui
+          Copy-Item -Recurse data dist/stage/palstudio/data
+          @("
+          PalStudio server $tag (${{ matrix.platform }})
+
+          Run:  bin\palstudio.exe --ui-dir ui --data-dir data --db ps-rs.db
+          Then: http://127.0.0.1:5174
+
+          The recommended entry point is the install script:
+          https://github.com/oMaN-Rod/palworld-save-pal#installation
+          ") | Set-Content dist/stage/palstudio/README.txt
+          tar -czf "dist/$asset" -C dist/stage palstudio
+          Remove-Item -Recurse -Force dist/stage
+
+      - name: Upload server bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-${{ matrix.platform }}
+          path: palstudio/dist/*
+          if-no-files-found: error
+
+  # sha256 manifest for the desktop artifacts the install scripts download.
+  # install.sh / install.ps1 fetch this file and verify their download
+  # against it (warn-and-skip when a release predates it).
+  desktop-checksums:
     needs: [build-windows, build-macos, build-linux]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Collect the desktop artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: windows
+          path: artifacts
+      - name: Collect the desktop artifacts (macos)
+        uses: actions/download-artifact@v4
+        with:
+          name: macos
+          path: artifacts
+      - name: Collect the desktop artifacts (linux)
+        uses: actions/download-artifact@v4
+        with:
+          name: linux
+          path: artifacts
+
+      - name: Write the checksum manifest
+        run: |
+          tag="${{ github.event.inputs.version }}"
+          find artifacts -type f -exec sha256sum {} + \
+            | sed 's#artifacts/##' \
+            > "PalStudio-${tag}-checksums.txt"
+          cat "PalStudio-${tag}-checksums.txt"
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-checksums
+          path: PalStudio-*-checksums.txt
+          if-no-files-found: error
+
+  server-checksums:
+    needs: build-server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Collect the server bundles
+        uses: actions/download-artifact@v4
+        with:
+          pattern: server-*
+          path: bundles
+
+      - name: Write the checksum manifest
+        run: |
+          tag="${{ github.event.inputs.version }}"
+          find bundles -name 'palstudio-*-server-*.tar.gz' -exec sha256sum {} + \
+            | sed 's#bundles/[^/]*/##' \
+            > "palstudio-${tag}-server-checksums.txt"
+          cat "palstudio-${tag}-server-checksums.txt"
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-checksums
+          path: palstudio-*-server-checksums.txt
+          if-no-files-found: error
+
+  create-release:
+    needs: [build-windows, build-macos, build-linux, desktop-checksums, server-checksums]
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
@@ -231,5 +495,7 @@ jobs:
             artifacts/windows/*
             artifacts/macos/*
             artifacts/linux/*
+            artifacts/desktop-checksums/*
+            artifacts/server-*/palstudio-*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

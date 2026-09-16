@@ -27,11 +27,12 @@ async fn start_test_server() -> (ps_server::ServerHandle, tempfile::TempDir) {
     let scratch = tempfile::tempdir().unwrap();
     let config = ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: root.join("ui"),
         data_dir: root.join("data"),
         db_path: scratch.path().join("phase2-ws-test.db"),
         desktop_mode: false,
+        hosted: false,
     };
     let handle = ps_server::start_server(config).await.unwrap();
     (handle, scratch)

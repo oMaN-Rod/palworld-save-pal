@@ -11,6 +11,18 @@ use ps_server::{AppConfig, AppState};
 
 /// A plain-GVAS (non-Palworld) save, vendored so this test needs no external
 /// checkout.
+
+/// The network gate reads the peer from ConnectInfo; oneshot requests carry
+/// no socket, so tests stamp a loopback peer like production would see.
+fn local_peer<B>(mut request: axum::http::Request<B>) -> axum::http::Request<B> {
+    use axum::extract::connect_info::ConnectInfo;
+    use std::net::SocketAddr;
+    request.extensions_mut().insert(ConnectInfo(
+        "127.0.0.1:51515".parse::<SocketAddr>().unwrap(),
+    ));
+    request
+}
+
 fn sample_save_bytes() -> Vec<u8> {
     let path =
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/drg-save-test.sav");
@@ -45,8 +57,12 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             sessions: std::sync::Mutex::new(ps_server::SessionStore::default()),
             breeding_db: Default::default(),
             plugins: Default::default(),
+            network_policy: None,
         }),
         &ui_dir,
+        Arc::new(ps_server::network::NetworkRuntime::new(
+            ps_network::NetworkConfig::default(),
+        )),
     )
 }
 
@@ -80,10 +96,10 @@ async fn sav_to_json_to_sav_round_trips() {
 
     let response = router
         .clone()
-        .oneshot(multipart_file_request(
+        .oneshot(local_peer(multipart_file_request(
             "/api/convert/sav-to-json",
             &sample_save_bytes(),
-        ))
+        )))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -100,12 +116,12 @@ async fn sav_to_json_to_sav_round_trips() {
 
     let response = router
         .clone()
-        .oneshot(
+        .oneshot(local_peer(
             Request::post("/api/convert/json-to-sav")
                 .header("content-type", "application/json")
                 .body(Body::from(first_json.clone()))
                 .unwrap(),
-        )
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -132,10 +148,10 @@ async fn sav_to_json_to_sav_round_trips() {
     );
 
     let response = router
-        .oneshot(multipart_file_request(
+        .oneshot(local_peer(multipart_file_request(
             "/api/convert/sav-to-json",
             &compressed_save,
-        ))
+        )))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::OK);
@@ -154,7 +170,7 @@ async fn sav_to_json_without_file_field_is_422() {
         "--{boundary}\r\nContent-Disposition: form-data; name=\"other\"\r\n\r\nx\r\n--{boundary}--\r\n"
     );
     let response = router
-        .oneshot(
+        .oneshot(local_peer(
             Request::post("/api/convert/sav-to-json")
                 .header(
                     "content-type",
@@ -162,7 +178,7 @@ async fn sav_to_json_without_file_field_is_422() {
                 )
                 .body(Body::from(body))
                 .unwrap(),
-        )
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::UNPROCESSABLE_ENTITY);
@@ -173,10 +189,10 @@ async fn sav_to_json_with_corrupt_bytes_is_500() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(multipart_file_request(
+        .oneshot(local_peer(multipart_file_request(
             "/api/convert/sav-to-json",
             b"not a save file at all, way too short and wrong magic",
-        ))
+        )))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::INTERNAL_SERVER_ERROR);
@@ -187,11 +203,11 @@ async fn json_to_sav_with_garbage_body_is_500() {
     let temp_dir = tempfile::tempdir().unwrap();
     let router = test_router(&temp_dir).await;
     let response = router
-        .oneshot(
+        .oneshot(local_peer(
             Request::post("/api/convert/json-to-sav")
                 .body(Body::from("not json at all"))
                 .unwrap(),
-        )
+        ))
         .await
         .unwrap();
     assert_eq!(response.status(), StatusCode::INTERNAL_SERVER_ERROR);

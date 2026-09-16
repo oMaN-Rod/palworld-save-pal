@@ -10,7 +10,9 @@ use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
 
 async fn current_language(ctx: &HandlerCtx<'_>) -> Result<String, HandlerError> {
-    Ok(ps_db::settings::get_settings(&*ctx.app.driver).await?.language)
+    Ok(ps_db::settings::get_settings(&*ctx.app.driver)
+        .await?
+        .language)
 }
 
 fn object_table(game_data: &GameData, key: &str) -> Map<String, Value> {
@@ -304,12 +306,16 @@ pub async fn handle_get_relics(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerEr
 pub async fn handle_get_fast_travel_points(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
     let language = current_language(ctx).await?;
     let base = object_table(&ctx.app.game_data, "fast_travel_points");
-    let localization =
-        object_table(&ctx.app.game_data, &format!("l10n/{language}/fast_travel_points"));
+    let localization = object_table(
+        &ctx.app.game_data,
+        &format!("l10n/{language}/fast_travel_points"),
+    );
     let mut merged = Map::new();
     for (guid, mut entry_value) in base {
         let entry = entry_value.as_object_mut().ok_or_else(|| {
-            HandlerError::Other(format!("fast_travel_points.json entry {guid} is not an object"))
+            HandlerError::Other(format!(
+                "fast_travel_points.json entry {guid} is not an object"
+            ))
         })?;
         let l10n_entry = localization.get(&guid);
         entry.insert(
@@ -694,6 +700,7 @@ mod tests {
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             };
             $handler(&mut ctx).await.unwrap();
@@ -792,6 +799,7 @@ mod tests {
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             };
             $handler($data, &mut ctx).await
@@ -1034,7 +1042,10 @@ mod tests {
         let mut test = TestContext::new(write_fixture_tree).await;
         let frame = run_handler!(test, handle_get_bosses);
         assert_eq!(frame["type"], "get_bosses");
-        assert!(frame["data"].is_object(), "bosses payload must be an object");
+        assert!(
+            frame["data"].is_object(),
+            "bosses payload must be an object"
+        );
     }
 
     #[tokio::test]

@@ -5,7 +5,7 @@
 #
 # Does NOT auto-install anything (except the opt-in --install-wasm): on a
 # missing or wrong tool it prints the exact command to fix it and exits
-# non-zero. Defaults to --web; run `./dev.sh --help` for the full flag
+# non-zero. Defaults to --webapp; run `./dev.sh --help` for the full flag
 # list.
 set -euo pipefail
 
@@ -217,8 +217,8 @@ check_disk_space() {
     local mode="$1"
     local min_mb=800
     case "$mode" in
-        web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
-        webapp) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
+        webapp|webhost|web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
+        websuite) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
         build-desktop|build-web|build-appimage) min_mb=3500 ;;
     esac
     local free
@@ -251,10 +251,10 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        web|desktop|serve|webapp|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
+        webapp|webhost|web|desktop|serve|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|serve|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
+        desktop|serve|webapp|webhost|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
@@ -266,7 +266,7 @@ run_preflight() {
             ;;
     esac
     case "$mode" in
-        webapp|build-web)
+        websuite|build-web)
             check_wasm_pack 1
             check_wasm_target 1
             ;;
@@ -281,9 +281,9 @@ run_preflight() {
     check_disk_space "$mode"
     case "$mode" in
         # desktop: tauri dev starts Vite and the embedded server binds its port.
-        web|desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
+        webapp|webhost|web|desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
         serve|docker) check_port "$SERVER_PORT_DEFAULT" ;;
-        webapp|landing) check_port "$VITE_PORT_DEFAULT" ;;
+        websuite|landing) check_port "$VITE_PORT_DEFAULT" ;;
     esac
 }
 
@@ -368,7 +368,10 @@ write_desktop_env() {
 # This is deliberate: when the user hits Ctrl-C, the terminal sends SIGINT to
 # the foreground process group, which reaches the script AND every child in the
 # same group — including grandchildren vite/cargo spawn — so they die naturally.
-# We still install traps to guarantee cleanup even if a child ignores SIGINT or
+# Ctrl-Z (SIGTSTP) reaches the same group but only STOPS it; the traps below
+# (INT/TERM/TSTP) turn both keystrokes into a full cleanup + exit, otherwise a
+# suspended stack keeps its ports and the next launch fails to bind.
+# We still install traps to guarantee cleanup even if a child ignores signals or
 # the script exits via a non-signal path (set -e failure, etc.).
 CHILD_PIDS=()
 
@@ -584,18 +587,21 @@ run_install_wasm() {
             printf '\n%swasm-pack installed but not on PATH.%s\n' "$YELLOW" "$RESET" >&2
             printf '  It'\''s at %s~/.cargo/bin/wasm-pack%s.\n' "$DIM" "$RESET" >&2
             printf '  Open a NEW terminal (so PATH refreshes), then verify:\n    wasm-pack --version\n' >&2
-            printf '  Then re-run: %s./dev.sh --check --webapp%s\n' "$BOLD" "$RESET" >&2
+            printf '  Then re-run: %s./dev.sh --check --websuite%s\n' "$BOLD" "$RESET" >&2
             return 0
         fi
         log_ok "wasm-pack installed ($(probe_version wasm-pack --version))."
     fi
 
     printf '\n' >&2
-    banner "Verifying  (--check --webapp)"
-    report_preflight webapp 0 >&2 || true
+    banner "Verifying  (--check --websuite)"
+    report_preflight websuite 0 >&2 || true
 }
 
-run_web() {
+run_webapp() {
+    # The tool-only SPA against a hand-launched LOCAL webapp server: the
+    # network policy is clamped to localhost (the Network page offers just
+    # the port). Use --webhost for the full hosted policy.
     # env already snapshotted by main; write web env for this run.
     local host="${ARG_HOST:-127.0.0.1}"
     local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
@@ -607,7 +613,7 @@ run_web() {
 
     ensure_bun_install 0
     write_web_env "$ws_url"
-    banner "Dev: web  (${host}:${vite_port}  +  ps-server :${server_port})"
+    banner "Dev: webapp  (${host}:${vite_port}  +  ps-server :${server_port}, localhost-tier)"
 
     local vite_pid server_pid
     SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
@@ -620,8 +626,53 @@ run_web() {
         server_pid="$LAST_BG_PID"
     fi
     wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
-    printf '\n%s%s  ▸ PalStudio web dev running:%s  %shttp://%s:%s%s\n\n' \
+    printf '\n%s%s  ▸ PalStudio webapp dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$vite_port" "$RESET" >&2
+    printf '%s  Local tool tier — the Network page offers the port only.%s\n' "$DIM" "$RESET" >&2
+    printf '%s  For full network settings: ./dev.sh --webhost%s\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
+        wait_on_pids "$vite_pid" "$server_pid"
+    else
+        wait_on_pids "$vite_pid"
+    fi
+}
+
+run_webhost() {
+    # The SERVER edition from source: same children as --webapp, but the
+    # server runs hosted (--hosted), so the full network policy applies and
+    # the Network page is unrestricted (listen modes, allowlists, PIN, ...).
+    # The stored policy still defaults to localhost-only; open the Network
+    # page to expose it to the LAN/tailnet. The server binds broadly
+    # (0.0.0.0) so a listen-mode switch needs no rebind; pass --host to pin.
+    local vite_host="${ARG_HOST:-127.0.0.1}"
+    local server_host="${ARG_HOST:-0.0.0.0}"
+    local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
+    local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
+    local ws_url="${ARG_HOST:-127.0.0.1}:${server_port}/ws"
+    local bun cargo
+    bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
+    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
+
+    ensure_bun_install 0
+    write_web_env "$ws_url"
+    banner "Dev: webhost  (${vite_host}:${vite_port}  +  ps-server :${server_port} hosted)"
+
+    local vite_pid server_pid
+    SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$vite_host" --port "$vite_port"
+    vite_pid="$LAST_BG_PID"
+    if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
+        SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
+            --host "$server_host" --port "$server_port" --hosted \
+            --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
+            --db "$REPO_ROOT/ps-rs.db" --dev
+        server_pid="$LAST_BG_PID"
+    fi
+    wait_for_http "http://${vite_host}:${vite_port}" "Vite" 60 || true
+    printf '\n%s%s  ▸ PalStudio webhost dev running:%s  %shttp://%s:%s%s\n\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_host" "$vite_port" "$RESET" >&2
+    printf '%s  Hosted tier — full Network settings (listen modes, allowlists, PIN).%s\n' "$DIM" "$RESET" >&2
+    printf '%s  Default policy is still localhost-only; open the Network page to expose.%s\n' "$DIM" "$RESET" >&2
     printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
         wait_on_pids "$vite_pid" "$server_pid"
@@ -654,19 +705,21 @@ run_desktop() {
     wait_on_pids "$tauri_pid"
 }
 
-run_webapp() {
+run_websuite() {
+    # The full public website from source: landing page + tool running
+    # entirely in the browser (VITE_TRANSPORT=worker, wasm build).
     local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     ensure_bun_install 0
     ensure_wasm "${ARG_REBUILD_WASM:-0}"
     gen_json_manifest
     write_web_env ""
-    banner "Dev: webapp  (landing page + tool, browser-only)"
+    banner "Dev: websuite  (landing page + tool, browser-only)"
     local vite_pid
     VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
     vite_pid="$LAST_BG_PID"
-    wait_for_http "http://${host}:${port}" "Vite (webapp)" 60 || true
-    printf '\n%s%s  ▸ PalStudio webapp dev running:%s  %shttp://%s:%s%s\n\n' \
+    wait_for_http "http://${host}:${port}" "Vite (websuite)" 60 || true
+    printf '\n%s%s  ▸ PalStudio websuite dev running:%s  %shttp://%s:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
     printf '%s  Landing-page mode (VITE_TRANSPORT=worker). Ctrl-C to stop.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$vite_pid"
@@ -690,12 +743,14 @@ run_landing() {
 }
 
 run_serve() {
+    # Hosted like the real server edition (Docker CMD, `palstudio serve`,
+    # background services): full network policy, Network page unrestricted.
     local cargo host="${ARG_HOST:-0.0.0.0}" port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
-    banner "Serve: ps-server  (${host}:${port})"
+    banner "Serve: ps-server hosted  (${host}:${port})"
     local server_pid
     SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
-        --host "$host" --port "$port" \
+        --host "$host" --port "$port" --hosted \
         --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
         --db "$REPO_ROOT/ps-rs.db" --dev
     server_pid="$LAST_BG_PID"
@@ -706,14 +761,21 @@ run_docker() {
     local docker host ws_url
     docker="$(resolve_tool docker || true)"; [[ -n "$docker" ]] || die "docker not found."
     [[ -f "$REPO_ROOT/docker-compose.yml" ]] || die "docker-compose.yml not found at repo root."
+    [[ -f "$REPO_ROOT/docker-compose.build.yml" ]] || die "docker-compose.build.yml not found at repo root."
     host="${ARG_HOST:-$(detect_lan_ip)}"
     host="${host:-127.0.0.1}"
     ws_url="${host}:${SERVER_PORT_DEFAULT}/ws"
     banner "Docker: build + up  (PUBLIC_WS_URL=${ws_url}, port ${SERVER_PORT_DEFAULT})"
     log_info "Building image (first build is slow; bakes WS_URL into the SPA)…"
-    spawn_fg_tagged docker-build "$docker" compose build --build-arg "PUBLIC_WS_URL=${ws_url}" \
+    # The base compose file pulls the prebuilt GHCR image; the build override
+    # rebuilds it locally with this machine's WS_URL baked in — the same
+    # command scripts/build-docker.sh runs.
+    export PUBLIC_WS_URL="${ws_url}"
+    spawn_fg_tagged docker-build "$docker" compose \
+        -f docker-compose.yml -f docker-compose.build.yml build \
         || die "docker compose build failed."
-    spawn_fg_tagged docker-up "$docker" compose up -d \
+    spawn_fg_tagged docker-up "$docker" compose \
+        -f docker-compose.yml -f docker-compose.build.yml up -d \
         || die "docker compose up failed."
     log_ok "Docker backend up — connect at http://${host}:${SERVER_PORT_DEFAULT}"
     printf '%s  Logs: docker compose logs -f   ·   Stop: docker compose down%s\n' "$DIM" "$RESET" >&2
@@ -805,13 +867,20 @@ usage() {
 dev.sh — PalStudio dev/launch/build helper (macOS/Linux).
 Runs from source; does NOT auto-install tools (run --check for a report card).
 
-mode (pick one; defaults to --web):
-  --web              Dev: Vite + ps-server (tool-only SPA).
+run — launch from source (pick one; defaults to --webapp):
   --desktop          Dev: Tauri native window + embedded server.
-  --webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
+  --webapp           Dev: Vite + ps-server — the tool-only SPA against a
+                     local server (localhost-clamped; Network page = port
+                     only). Alias: --web (the old name).
+  --webhost          Dev: Vite + ps-server --hosted — the server edition:
+                     full Network page (listen modes, allowlists, PIN).
+  --websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
-  --docker           Build & run the self-build Docker image.
-  --serve            Run only the Rust ps-server.
+  --docker           Build & run the self-build Docker image (compose).
+  --serve            Run only the Rust ps-server, hosted like the real
+                     server edition (Docker CMD / `palstudio serve`).
+
+build — production artifacts (run mode stays untouched):
   --build-desktop    Production desktop build → dist/.
   --build-appimage   Linux AppImage, built and stripped like release CI → dist/.
   --build-web        Production web build (landing page) → ui_build/.
@@ -824,13 +893,13 @@ options:
   --install-wasm     Install the WASM toolchain (wasm32 target + wasm-pack).
                      The one opt-in installer; everything else stays
                      fail-with-instructions. Skips anything already present.
-  --host <ip>        Host/IP bind or WS_URL host (--web/--serve/--docker).
+  --host <ip>        Host/IP bind or WS_URL host (--webapp/--webhost/--serve/--docker).
   --vite-port <p>    Vite port (default 5173).
   --server-port <p>  ps-server port (default 5174).
-  --no-server        (--web) skip ps-server (Vite only).
+  --no-server        (--webapp/--webhost) skip ps-server (Vite only).
   --skip-check       Skip the preflight (advanced).
   --no-install       Skip bun install if node_modules exists.
-  --rebuild-wasm     (--webapp/--build-web) force wasm-pack rebuild.
+  --rebuild-wasm     (--websuite/--build-web) force wasm-pack rebuild.
   --json             Machine-readable preflight JSON (implies --check).
   --force-check-mode <m>  Override the preflight mode (advanced).
   -h, --help         Show this help.
@@ -846,9 +915,11 @@ ARG_NO_INSTALL=0; ARG_REBUILD_WASM=0; ARG_JSON=0; ARG_FORCE_CHECK_MODE=""
 parse_args() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --web) ARG_MODE="web"; shift ;;
-            --desktop) ARG_MODE="desktop"; shift ;;
+            --web) ARG_MODE="webapp"; shift ;; # legacy alias
             --webapp) ARG_MODE="webapp"; shift ;;
+            --webhost) ARG_MODE="webhost"; shift ;;
+            --websuite) ARG_MODE="websuite"; shift ;;
+            --desktop) ARG_MODE="desktop"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
             --docker) ARG_MODE="docker"; shift ;;
             --serve) ARG_MODE="serve"; shift ;;
@@ -876,7 +947,7 @@ parse_args() {
 main() {
     parse_args "$@"
 
-    local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-web}}"
+    local mode="${ARG_FORCE_CHECK_MODE:-${ARG_MODE:-webapp}}"
 
     if (( ARG_INSTALL_WASM )); then
         run_install_wasm
@@ -908,7 +979,18 @@ main() {
         _on_exit_or_interrupt
         exit 130
     }
+    # Ctrl-Z must TEAR THE STACK DOWN, not park it. A plain ^Z stops the
+    # whole foreground process group — the children never die and keep their
+    # ports, so the next launch dies on "Address already in use". Trapping
+    # TSTP here runs the same cleanup as Ctrl-C (stopped children still fall
+    # to the TERM/KILL passes) and exits instead of suspending.
+    _on_suspend() {
+        printf '\n%sCtrl-Z — stopping the dev stack and freeing its ports…%s\n' "$YELLOW" "$RESET" >&2
+        _on_exit_or_interrupt
+        exit 148  # 128 + SIGTSTP(20)
+    }
     trap _on_interrupt INT TERM
+    trap _on_suspend TSTP
     trap _on_exit_or_interrupt EXIT
 
     if (( ARG_CHECK )); then
@@ -935,10 +1017,11 @@ main() {
         ensure_bun_install() { log_info "--no-install: skipping bun install."; }
     fi
 
-    case "${ARG_MODE:-web}" in
-        web) run_web ;;
+    case "${ARG_MODE:-webapp}" in
+        web|webapp) run_webapp ;;
+        webhost) run_webhost ;;
+        websuite) run_websuite ;;
         desktop) run_desktop ;;
-        webapp) run_webapp ;;
         landing) run_landing ;;
         docker) run_docker ;;
         serve) run_serve ;;

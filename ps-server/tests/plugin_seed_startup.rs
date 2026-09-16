@@ -15,17 +15,23 @@ async fn startup_seeds_the_bundled_plugin_set_without_an_explicit_call() {
 
     let config = ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir,
         data_dir: repo_data_dir(),
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
+        hosted: false,
     };
     let handle = ps_server::start_server(config).await.unwrap();
 
     let rows = ps_db::plugins::get_all(&*handle.app.driver).await.unwrap();
-    let bundled_ids: Vec<&str> =
-        handle.app.plugins.bundled().iter().map(|plugin| plugin.id).collect();
+    let bundled_ids: Vec<&str> = handle
+        .app
+        .plugins
+        .bundled()
+        .iter()
+        .map(|plugin| plugin.id)
+        .collect();
     assert_eq!(
         rows.len(),
         bundled_ids.len(),

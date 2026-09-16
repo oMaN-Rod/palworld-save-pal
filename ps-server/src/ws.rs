@@ -29,11 +29,17 @@ pub async fn ws_upgrade(
     ConnectInfo(peer): ConnectInfo<SocketAddr>,
     State(app): State<Arc<AppState>>,
 ) -> Response {
+    // The network gate has already refused disallowed/unauthenticated peers;
+    // here the verdict is stamped onto the connection so the dispatcher can
+    // enforce the write allowlist per message.
+    let acl = crate::network_policy::acl_for(&app.network_policy, peer.ip());
     let is_loopback = is_loopback_peer(peer);
     upgrade
         .max_message_size(MAX_WS_MESSAGE_BYTES)
         .max_frame_size(MAX_WS_MESSAGE_BYTES)
-        .on_upgrade(move |socket| connection_loop(socket, client_id, is_loopback, app))
+        .on_upgrade(move |socket| {
+            connection_loop(socket, client_id, is_loopback, acl.can_write, app)
+        })
 }
 
 fn is_loopback_peer(peer: SocketAddr) -> bool {
@@ -65,9 +71,10 @@ async fn connection_loop(
     socket: WebSocket,
     client_id: String,
     is_loopback: bool,
+    write_allowed: bool,
     app: Arc<AppState>,
 ) {
-    tracing::info!(%client_id, is_loopback, "client connected");
+    tracing::info!(%client_id, is_loopback, write_allowed, "client connected");
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
@@ -79,7 +86,11 @@ async fn connection_loop(
     // `None` or the loop `break`s, so this task always terminates.
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
-            if outgoing_sink.send(Message::Text(frame.into())).await.is_err() {
+            if outgoing_sink
+                .send(Message::Text(frame.into()))
+                .await
+                .is_err()
+            {
                 break;
             }
         }
@@ -114,6 +125,7 @@ async fn connection_loop(
                     &emitter,
                     &mut blueprints,
                     is_loopback,
+                    write_allowed,
                 )
                 .await;
             }
@@ -142,6 +154,7 @@ async fn process_text_frame(
     emitter: &Emitter,
     blueprints: &mut crate::blueprint_registry::BlueprintRegistry,
     is_loopback: bool,
+    write_allowed: bool,
 ) {
     // A JSON decode failure sends an `error` message whose `data` is a plain
     // STRING, not the usual {message, trace} object.
@@ -195,6 +208,7 @@ async fn process_text_frame(
                 emitter,
                 blueprints,
                 is_loopback,
+                write_allowed,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,
@@ -212,6 +226,7 @@ async fn process_text_frame(
                 emitter,
                 blueprints,
                 is_loopback,
+                write_allowed,
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,

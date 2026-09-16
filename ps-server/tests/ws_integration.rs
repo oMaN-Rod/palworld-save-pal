@@ -11,11 +11,12 @@ use ps_server::{start_server, ServerConfig, ServerHandle};
 async fn start_test_server(temp_dir: &tempfile::TempDir) -> ServerHandle {
     start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
+        hosted: false,
     })
     .await
     .unwrap()
@@ -248,7 +249,10 @@ async fn get_fast_travel_points_merges_l10n_and_preserves_class() {
     // A watchtower: same merge path, distinct class.
     let watchtower = &response["data"]["0C0AF9F34C0491BCAD80B1BF355B9A98"];
     assert_eq!(watchtower["class"], "BP_LevelObject_UnlockMapPoint_C");
-    assert_eq!(watchtower["localized_name"], "Deep Bamboo Thicket Watchtower");
+    assert_eq!(
+        watchtower["localized_name"],
+        "Deep Bamboo Thicket Watchtower"
+    );
 
     handle.shutdown().await;
 }
