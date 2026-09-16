@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ps-desktop/icons/icon.png" width="96" alt="PalStudio icon">
+</p>
+
 # PalStudio
 
 ⚠️ **Backup your save files before using this tool!!** ⚠️
@@ -33,6 +37,10 @@ PalStudio is a tool for managing and analyzing save files.
 ## 🚀 Installation
 
 Grab the latest release from the [releases](https://github.com/oMaN-Rod/palstudio/releases) page and extract it to a folder of your choice.
+
+### macOS DMG preview
+
+![PalStudio macOS installer window](docs/images/palstudio-dmg-background.png)
 
 ## 🎮 Usage
 

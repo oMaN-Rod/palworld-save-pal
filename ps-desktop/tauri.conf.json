@@ -37,6 +37,28 @@
     "resources": {
       "../ui_build": "ui",
       "../data": "data"
+    },
+    "macOS": {
+      "hardenedRuntime": true,
+      "dmg": {
+        "background": "dmg/palstudio-dmg-background.png",
+        "windowPosition": {
+          "x": 180,
+          "y": 120
+        },
+        "windowSize": {
+          "width": 860,
+          "height": 520
+        },
+        "appPosition": {
+          "x": 220,
+          "y": 302
+        },
+        "applicationFolderPosition": {
+          "x": 640,
+          "y": 302
+        }
+      }
     }
   }
 }

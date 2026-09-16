@@ -22,24 +22,29 @@ import { technologiesData } from './technologies.svelte';
 import { workSuitabilityData } from './workSuitability.svelte';
 
 export const bootstrap = async () => {
-	await presetsData.reset();
-	await palsData.reset();
-	await activeSkillsData.reset();
-	await passiveSkillsData.reset();
-	await technologiesData.reset();
-	await elementsData.reset();
-	await expData.reset();
-	await friendshipData.reset();
-	await itemsData.reset();
-	await workSuitabilityData.reset();
-	await buildingsData.reset();
-	await dungeons.reset();
-	await fastTravelPoints.reset();
-	await relics.reset();
-	await bosses.reset();
-	await labResearchData.reset();
-	await missionsData.reset();
-	await relicData.reset();
+	// Each reset requests a distinct game-data response type. Start them
+	// together so the first screen is not delayed by 18 sequential localhost
+	// round trips; the websocket queue still resolves each response by type.
+	await Promise.all([
+		presetsData.reset(),
+		palsData.reset(),
+		activeSkillsData.reset(),
+		passiveSkillsData.reset(),
+		technologiesData.reset(),
+		elementsData.reset(),
+		expData.reset(),
+		friendshipData.reset(),
+		itemsData.reset(),
+		workSuitabilityData.reset(),
+		buildingsData.reset(),
+		dungeons.reset(),
+		fastTravelPoints.reset(),
+		relics.reset(),
+		bosses.reset(),
+		labResearchData.reset(),
+		missionsData.reset(),
+		relicData.reset()
+	]);
 	const upsState = getUpsState();
 	await upsState.loadAll();
 
