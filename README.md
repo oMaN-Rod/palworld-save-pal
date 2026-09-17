@@ -38,10 +38,6 @@ PalStudio is a tool for managing and analyzing save files.
 
 Grab the latest release from the [releases](https://github.com/oMaN-Rod/palstudio/releases) page and extract it to a folder of your choice.
 
-### macOS DMG preview
-
-![PalStudio macOS installer window](docs/images/palstudio-dmg-background.png)
-
 ## 🎮 Usage
 
 Details for using PalStudio can be found in the [User Guide](https://github.com/oMaN-Rod/palstudio/wiki/%F0%9F%8E%AE-Usage)
