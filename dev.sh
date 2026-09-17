@@ -465,7 +465,10 @@ wait_for_http() {
     log_info "Waiting for $label at $url …"
     local i
     for ((i=0; i<timeout; i++)); do
-        if curl -sf -o /dev/null --connect-timeout 2 "${curl_tls_args[@]}" "$url" 2>/dev/null; then
+        # ${arr[@]+…} guards the empty case: stock macOS bash 3.2 treats
+        # "${arr[@]}" as unbound under set -u when no TLS args were added.
+        if curl -sf -o /dev/null --connect-timeout 2 \
+            ${curl_tls_args[@]+"${curl_tls_args[@]}"} "$url" 2>/dev/null; then
             log_ok "$label is up: $url"
             return 0
         fi
