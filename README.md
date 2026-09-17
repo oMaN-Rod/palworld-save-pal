@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ps-desktop/icons/icon.png" width="96" alt="PalStudio icon">
+</p>
+
 # PalStudio
 
 ⚠️ **Backup your save files before using this tool!!** ⚠️

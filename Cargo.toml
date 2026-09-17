@@ -23,6 +23,10 @@ opt-level = 3
 [profile.release]
 lto = "thin"
 codegen-units = 1
+# Keep Cargo from passing `-C strip=debuginfo` to proc-macros and release
+# libraries. macOS 27's dyld rejects the misaligned LINKEDIT string pools that
+# the current Rust/LLVM toolchain can produce on that strip path.
+strip = "none"
 
 [workspace.dependencies]
 ps-app = { path = "ps-app" }

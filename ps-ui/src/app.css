@@ -459,6 +459,15 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+
 	.awakened-ring::before {
 		animation: none;
 		box-shadow:
@@ -467,6 +476,30 @@ body::after {
 	}
 	.awakened-ring::after {
 		animation: none;
+	}
+}
+
+/* WebKit exposes this preference on macOS. Removing blur and layered washes
+ * gives low-power/reduced-transparency users a cheaper compositing path while
+ * retaining the full glass treatment by default. */
+@media (prefers-reduced-transparency: reduce) {
+	body {
+		background-image: none;
+	}
+
+	body::before,
+	body::after {
+		display: none;
+	}
+
+	.card,
+	.sidebar,
+	.glass-panel,
+	.auto-save-indicator,
+	.public-nav {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		background: var(--color-surface-800);
 	}
 }
 
