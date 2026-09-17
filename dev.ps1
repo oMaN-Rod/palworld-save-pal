@@ -871,7 +871,9 @@ function Run-Webapp {
     Write-WebEnv $wsUrl
     Banner "Dev: webapp  (${h}:$vitePort  +  ps-server :$serverPort, localhost-tier)"
 
-    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
+    # PS_SERVER_PORT feeds the proxy targets in vite.config.ts, so /api and
+    # /network-unlock follow -ServerPort instead of the hardcoded 5174.
+    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=@{ "PS_SERVER_PORT" = "$serverPort" }
         Cmd=@($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") })
     if (-not $NoServer) {
         $components += @{ Tag="ps-server"; Cwd=$RepoRoot; Env=$null
@@ -926,7 +928,7 @@ function Run-Webhost {
     Write-WebEnv $wsUrl
     Banner "Dev: webhost  (${viteHost}:$vitePort  +  ps-server :$serverPort hosted)"
 
-    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
+    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=@{ "PS_SERVER_PORT" = "$serverPort" }
         Cmd=@($bun, "run", "dev:vite", "--", "--host", $viteHost, "--port", "$vitePort") })
     if (-not $NoServer) {
         $components += @{ Tag="ps-server"; Cwd=$RepoRoot; Env=$null
