@@ -1,159 +1,130 @@
-#!/bin/sh
-# PalStudio desktop — one-line installer (Linux / macOS).
+#!/usr/bin/env bash
+# PalStudio desktop — fail-closed Linux/macOS installer.
 #
 #   curl -fsSL https://palstudio.app/install | bash
 #
-# palstudio.app/install sniffs the caller and serves this script to curl;
-# the actual artifacts always come from the GitHub releases. This script
-# detects OS and architecture, then:
-#   Linux  → downloads the AppImage into ~/.local/bin (/usr/local/bin as root)
-#   macOS  → downloads the .dmg and copies PalStudio.app into /Applications
-#            (the quarantine attribute is cleared so unsigned builds open)
-#
-# The .deb and every other artifact stay available on the releases page:
-#   https://github.com/oMaN-Rod/palworld-save-pal/releases
-# Server/headless installs (launcher CLI + systemd/launchd service) use
-# scripts/install-server.sh — see docs/install.md.
-#
-# Environment overrides (for curl|bash, CI, or unattended boxes):
-#   PALSTUDIO_VERSION        pin a release tag            (e.g. v1.4.2)
-#   PALSTUDIO_REPO           GitHub owner/name            (default oMaN-Rod/palworld-save-pal)
-#   PALSTUDIO_API_BASE       GitHub API base              (default https://api.github.com)
-#   PALSTUDIO_DOWNLOAD_BASE  release download base        (default https://github.com)
-#   PALSTUDIO_BIN_DIR        AppImage destination         (Linux; default ~/.local/bin,
-#                                                          /usr/local/bin as root)
-#   PALSTUDIO_APP_DIR        .app destination             (macOS; default /Applications,
-#                                                          ~/Applications when unwritable)
-set -eu
+# Release artifacts are accepted only when their signed checksum manifest
+# verifies. Installation is staged and atomically swapped; a failed copy or
+# post-install validation restores the previous application.
+
+set -euo pipefail
+IFS=$'\n\t'
 
 REPO="${PALSTUDIO_REPO:-oMaN-Rod/palworld-save-pal}"
 VERSION="${PALSTUDIO_VERSION:-}"
 API_BASE="${PALSTUDIO_API_BASE:-https://api.github.com}"
 DL_BASE="${PALSTUDIO_DOWNLOAD_BASE:-https://github.com}"
+BIN_DIR_OVERRIDE="${PALSTUDIO_BIN_DIR:-}"
+APP_DIR_OVERRIDE="${PALSTUDIO_APP_DIR:-}"
+
+SIGNING_PUBLIC_KEY='-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+-----END PUBLIC KEY-----'
 
 log()  { printf '==> %s\n' "$*"; }
 warn() { printf 'warning: %s\n' "$*" >&2; }
 die()  { printf 'error: %s\n' "$*" >&2; exit 1; }
+need() { command -v "$1" >/dev/null 2>&1 || die "$1 is required but was not found"; }
 
-need() { command -v "$1" >/dev/null 2>&1 || die "$1 is required but not found"; }
-need curl
+validate_repo() {
+  [[ "$REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || die 'PALSTUDIO_REPO must be a GitHub owner/name pair'
+}
 
-# ---------------------------------------------------------------- host info
-kernel=$(uname -s)
-machine=$(uname -m)
-case "$kernel" in
-  Linux)  os=linux ;;
-  Darwin) os=macos ;;
-  *) die "unsupported OS '$kernel' — this installer covers Linux and macOS" ;;
-esac
-case "$machine" in
-  x86_64|amd64) arch=x86_64 ;;
-  aarch64|arm64) arch=aarch64 ;;
-  *) die "unsupported architecture '$machine'" ;;
-esac
-if [ "$os" = linux ]; then
-  [ "$arch" = x86_64 ] || die "no aarch64 Linux AppImage yet — use the server installer (scripts/install-server.sh, aarch64 bundles) or the releases page"
-  asset_kind=linux.AppImage
-else
-  # The dmg is a universal binary: both arm64 and x86_64 Macs.
-  asset_kind=macos.dmg
-fi
+validate_version() {
+  [[ "$VERSION" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]] || die 'release tag must look like v1.5.0'
+}
 
-# ---------------------------------------------------------------- version
-if [ -z "$VERSION" ]; then
-  log "looking up the latest release of $REPO"
-  VERSION=$(curl -fsSL -H 'Accept: application/vnd.github+json' \
-    "$API_BASE/repos/$REPO/releases/latest" \
-    | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' | head -n 1)
-  [ -n "$VERSION" ] || die "could not resolve the latest release tag from GitHub"
-fi
-asset="PalStudio-${VERSION}-${asset_kind}"
-checksums_asset="PalStudio-${VERSION}-checksums.txt"
-log "installing PalStudio desktop $VERSION ($os $arch)"
+validate_https_base() {
+  local name="$1" value="$2"
+  [[ "$value" = https://* ]] || die "$name must use HTTPS"
+  [[ "$value" != *$'\n'* && "$value" != *$'\r'* ]] || die "$name contains a control character"
+}
 
-# ---------------------------------------------------------------- download
-tmp=$(mktemp -d) || die "mktemp failed"
-trap 'rm -rf "$tmp"' EXIT
-download="$tmp/$asset"
-base_url="$DL_BASE/$REPO/releases/download/$VERSION"
-log "downloading $base_url/$asset"
-curl -fSL --retry 3 -o "$download" "$base_url/$asset" \
-  || die "download failed — does $VERSION ship a $asset_kind asset?"
+sha256_file() {
+  if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | awk '{print $1}'; else shasum -a 256 "$1" | awk '{print $1}'; fi
+}
 
-# sha256 verification against the release's desktop checksums manifest.
-checksums="$tmp/checksums.txt"
-if curl -fSL --retry 2 -o "$checksums" "$base_url/$checksums_asset"; then
-  # sha256sum lines are "<hash>  <name>"; compare the name as a plain string
-  # so dots in the asset name cannot act as regex wildcards.
-  expected=$(awk -v f="$asset" '$2 == f { print $1; exit }' "$checksums")
-  if [ -n "$expected" ]; then
-    if command -v sha256sum >/dev/null 2>&1; then
-      actual=$(sha256sum "$download" | cut -d' ' -f1)
-    else
-      need shasum
-      actual=$(shasum -a 256 "$download" | cut -d' ' -f1)
-    fi
-    [ "$actual" = "$expected" ] || die "checksum mismatch for $asset (expected $expected, got $actual)"
-    log "checksum verified"
+secure_directory() {
+  local path="$1" expected_uid="$2" mode owner
+  mkdir -p "$path"
+  [[ ! -L "$path" ]] || die "refusing to use symlinked directory: $path"
+  if stat -c '%u %a' "$path" >/dev/null 2>&1; then read -r owner mode < <(stat -c '%u %a' "$path"); else owner=$(stat -f '%u' "$path"); mode=$(stat -f '%Lp' "$path"); fi
+  [[ "$owner" = "$expected_uid" ]] || die "$path is not owned by uid $expected_uid"
+  (( (8#$mode & 022) == 0 )) || die "$path is writable by group or other"
+}
+
+rollback=0
+backup_path=""
+target_path=""
+mounted_path=""
+restore_previous() {
+  set +e
+  [[ -z "$mounted_path" ]] || hdiutil detach "$mounted_path" >/dev/null 2>&1
+  if (( rollback )); then
+    [[ ! -e "$target_path" && ! -L "$target_path" ]] || mv "$target_path" "${target_path}.failed.$$"
+    [[ -z "$backup_path" || ! -e "$backup_path" ]] || mv "$backup_path" "$target_path"
+  fi
+}
+
+main() {
+  need curl; need awk; need openssl; need mktemp; need stat; need cp; need mv
+  validate_repo; validate_https_base PALSTUDIO_API_BASE "$API_BASE"; validate_https_base PALSTUDIO_DOWNLOAD_BASE "$DL_BASE"
+  local kernel machine os arch asset_kind asset checksums_asset base_url tmp download checksums signature public_key expected actual
+  kernel="$(uname -s)"; machine="$(uname -m)"
+  case "$kernel" in Linux) os=linux ;; Darwin) os=macos ;; *) die "unsupported OS: $kernel" ;; esac
+  case "$machine" in x86_64|amd64) arch=x86_64 ;; aarch64|arm64) arch=aarch64 ;; *) die "unsupported architecture: $machine" ;; esac
+  if [[ "$os" = linux ]]; then [[ "$arch" = x86_64 ]] || die 'no aarch64 AppImage is published; use the server installer'; asset_kind=linux.AppImage; else asset_kind=macos.dmg; fi
+  if [[ -z "$VERSION" ]]; then
+    log "looking up the latest release of $REPO"
+    VERSION="$(curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -H 'Accept: application/vnd.github+json' "$API_BASE/repos/$REPO/releases/latest" | awk -F'"' '/"tag_name"[[:space:]]*:/ {print $4; exit}')"
+  fi
+  validate_version
+  asset="PalStudio-${VERSION}-${asset_kind}"; checksums_asset="PalStudio-${VERSION}-checksums.txt"; base_url="$DL_BASE/$REPO/releases/download/$VERSION"
+  tmp="$(mktemp -d "${TMPDIR:-/tmp}/palstudio-desktop-install.XXXXXX")"; trap 'restore_previous; rm -rf "$tmp"' EXIT
+  download="$tmp/$asset"; checksums="$tmp/$checksums_asset"; signature="$checksums.sig"; public_key="$tmp/release-public.pem"
+  log "downloading $base_url/$asset"
+  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 180 -o "$download" "$base_url/$asset"
+  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$checksums" "$base_url/$checksums_asset"
+  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$signature" "$base_url/$checksums_asset.sig"
+  printf '%s\n' "$SIGNING_PUBLIC_KEY" > "$public_key"; chmod 0644 "$public_key"
+  openssl pkeyutl -verify -pubin -inkey "$public_key" -rawin -in "$checksums" -sigfile "$signature" >/dev/null || die 'signed release manifest verification failed'
+  expected="$(awk -v f="$asset" '$2 == f {print $1; exit}' "$checksums")"; [[ "$expected" =~ ^[0-9a-fA-F]{64}$ ]] || die "signed manifest has no valid checksum for $asset"
+  actual="$(sha256_file "$download")"; [[ "$actual" = "$expected" ]] || die "checksum mismatch for $asset"; log 'signed manifest and checksum verified'
+
+  if [[ "$os" = linux ]]; then
+    need chmod; local bin_dir dest staged
+    if [[ -n "$BIN_DIR_OVERRIDE" ]]; then bin_dir="$BIN_DIR_OVERRIDE"; elif [[ "$(id -u)" = 0 ]]; then bin_dir=/usr/local/bin; else bin_dir="$HOME/.local/bin"; fi
+    secure_directory "$bin_dir" "$(id -u)"
+    dest="$bin_dir/PalStudio.AppImage"; staged="$tmp/PalStudio.AppImage.new"
+    cp "$download" "$staged"; chmod 0755 "$staged"; [[ -s "$staged" ]] || die 'downloaded AppImage is empty'
+    target_path="$dest"; backup_path="${dest}.previous.$$"; [[ ! -e "$backup_path" && ! -L "$backup_path" ]] || die "rollback path already exists: $backup_path"
+    if [[ -e "$dest" || -L "$dest" ]]; then [[ ! -L "$dest" ]] || die "existing AppImage is a symlink: $dest"; mv "$dest" "$backup_path"; fi
+    rollback=1; mv "$staged" "$dest"; chmod 0755 "$dest"; [[ -x "$dest" && -s "$dest" ]] || die 'installed AppImage validation failed'
+    [[ ! -e "$backup_path" ]] || rm -f "$backup_path"; rollback=0
+    log "PalStudio $VERSION installed: $dest"
   else
-    warn "no '$asset' entry in $checksums_asset; skipping verification"
+    need hdiutil; need ditto; need codesign; need spctl
+    local app_dir mnt app app_count dest staged_app
+    app_dir="${APP_DIR_OVERRIDE:-/Applications}"
+    if [[ ! -d "$app_dir" ]]; then mkdir -p "$app_dir"; fi
+    if [[ ! -w "$app_dir" ]]; then app_dir="$HOME/Applications"; mkdir -p "$app_dir"; fi
+    secure_directory "$app_dir" "$(id -u)"
+    mnt="$tmp/mnt"; mkdir -p "$mnt"
+    hdiutil attach -readonly -nobrowse -mountpoint "$mnt" "$download" >/dev/null
+    mounted_path="$mnt"
+    app_count="$(find "$mnt" -maxdepth 1 -type d -name '*.app' -print | wc -l | tr -d ' ')"; [[ "$app_count" = 1 ]] || die 'DMG must contain exactly one application bundle'
+    app="$(find "$mnt" -maxdepth 1 -type d -name '*.app' -print -quit)"; staged_app="$tmp/PalStudio.app"
+    ditto "$app" "$staged_app"
+    hdiutil detach "$mnt" >/dev/null
+    mounted_path=""
+    codesign --verify --deep --strict --verbose=2 "$staged_app" >/dev/null
+    spctl --assess --type execute --strict "$staged_app" >/dev/null
+    dest="$app_dir/$(basename "$app")"; target_path="$dest"; backup_path="${dest}.previous.$$"; [[ ! -e "$backup_path" && ! -L "$backup_path" ]] || die "rollback path already exists: $backup_path"
+    if [[ -e "$dest" || -L "$dest" ]]; then [[ ! -L "$dest" ]] || die "existing application is a symlink: $dest"; mv "$dest" "$backup_path"; fi
+    rollback=1; mv "$staged_app" "$dest"; codesign --verify --deep --strict "$dest" >/dev/null; rollback=0
+    [[ ! -e "$backup_path" ]] || rm -rf "$backup_path"
+    log "PalStudio $VERSION installed: $dest"
   fi
-else
-  warn "no $checksums_asset on the release; skipping verification"
-fi
+}
 
-# ---------------------------------------------------------------- install
-if [ "$os" = linux ]; then
-  if [ -z "${PALSTUDIO_BIN_DIR:-}" ]; then
-    if [ "$(id -u)" = 0 ]; then bin_dir=/usr/local/bin; else bin_dir="$HOME/.local/bin"; fi
-  else
-    bin_dir="$PALSTUDIO_BIN_DIR"
-  fi
-  mkdir -p "$bin_dir"
-  dest="$bin_dir/PalStudio.AppImage"
-  # Stage beside the destination and rename over: replacing a running
-  # AppImage in place would fail with ETXTBSY, a rename never does.
-  cp "$download" "$dest.new"
-  chmod 0755 "$dest.new"
-  mv -f "$dest.new" "$dest"
-  log "installed $dest"
-  case ":$PATH:" in
-    *":$bin_dir:"*) ;;
-    *) warn "$bin_dir is not on your PATH — add it to launch PalStudio by name" ;;
-  esac
-  printf '\n'
-  log "PalStudio $VERSION installed."
-  printf '  Launch it:  %s\n' "$dest"
-  printf '  AppImages need libfuse2; without it run:  %s --appimage-extract-and-run\n' "$dest"
-  printf '  Menu integration (optional): AppImageLauncher or appimaged.\n'
-else
-  need hdiutil
-  need xattr
-  app_dir="${PALSTUDIO_APP_DIR:-/Applications}"
-  if [ ! -w "$app_dir" ] 2>/dev/null; then
-    app_dir="$HOME/Applications"
-    mkdir -p "$app_dir"
-    warn "/Applications is not writable; using $app_dir"
-  fi
-  mnt="$tmp/mnt"
-  mkdir -p "$mnt"
-  log "mounting the dmg"
-  hdiutil attach -readonly -nobrowse -mountpoint "$mnt" "$download" >/dev/null \
-    || die "could not mount $asset"
-  app=$(find "$mnt" -maxdepth 1 -type d -name '*.app' | head -n 1)
-  if [ -z "$app" ]; then
-    hdiutil detach "$mnt" >/dev/null 2>&1 || true
-    die "no .app found inside $asset"
-  fi
-  dest="$app_dir/$(basename "$app")"
-  log "installing into $app_dir"
-  rm -rf "$dest"
-  cp -R "$app" "$dest"
-  hdiutil detach "$mnt" >/dev/null 2>&1 || true
-  # Unsigned/un-notarized builds would be blocked by Gatekeeper because the
-  # dmg was downloaded; clearing the attribute lets them open normally.
-  xattr -dr com.apple.quarantine "$dest" 2>/dev/null || true
-  printf '\n'
-  log "PalStudio $VERSION installed."
-  printf '  Launch it:  open -a PalStudio\n'
-fi
+main "$@"

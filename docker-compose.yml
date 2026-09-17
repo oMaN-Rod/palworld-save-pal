@@ -21,21 +21,29 @@ services:
     image: ghcr.io/oman-rod/palworld-save-pal:latest
     container_name: palstudio
     restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     ports:
-      - "${PALSTUDIO_PORT:-5174}:5174"
+      - "${PALSTUDIO_BIND_ADDRESS:-127.0.0.1}:${PALSTUDIO_PORT:-5174}:5174"
     environment:
       # In containers the environment is the operator's source of truth:
       # these re-apply on every boot (PS_NETWORK_ENV=always), overriding the
       # stored policy. Set them to taste; everything is also editable in the
       # UI's Network page while the container runs.
       PS_NETWORK_ENV: always
-      # Listen policy: localhost | lan | tailscale | wan. The default `lan`
-      # matches how containers are reached (bridge-network peers are
-      # private-range).
-      PS_LISTEN: ${PALSTUDIO_LISTEN:-lan}
+      # Listen policy: localhost | lan | tailscale | wan. The default is
+      # localhost; opt into LAN/WAN exposure explicitly and configure a PIN.
+      PS_LISTEN: ${PALSTUDIO_LISTEN:-localhost}
       # Optional: demand this PIN from non-loopback peers (recommended the
       # moment you expose the port).
       PS_PIN: ${PALSTUDIO_PIN:-}
+      PS_PORT: 5174
     volumes:
       # Only the database is stateful: the ~28 MB game-data tree ships inside
       # the image, so never bind-mount over /app/data — that would shadow it

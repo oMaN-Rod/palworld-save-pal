@@ -109,17 +109,22 @@ class NetworkState {
 	 */
 	async loadConfig(): Promise<void> {
 		try {
-			const [config, runtime] = await Promise.all([
-				fetchJson<NetworkConfigDto>('/api/network/config'),
-				fetchJson<RuntimeInfoDto>('/api/network/runtime')
-			]);
+			const config = await fetchJson<NetworkConfigDto>('/api/network/config');
 			// Older servers omit empty allowlists entirely; the form reads
 			// these unconditionally, so make them arrays once, here.
 			this.config = {
 				...config,
 				allow: { connect: config.allow?.connect ?? [], write: config.allow?.write ?? [] }
 			};
-			this.runtime = runtime;
+			// Service control is deliberately a separately authenticated local
+			// control plane. A normal localhost browser must still be able to
+			// render and edit network policy when no admin token/session exists;
+			// in that posture the optional runtime controls remain unavailable.
+			try {
+				this.runtime = await fetchJson<RuntimeInfoDto>('/api/network/runtime');
+			} catch {
+				this.runtime = null;
+			}
 			this.error = null;
 		} catch (error) {
 			// The panel gates its form on this resolving: a failure must

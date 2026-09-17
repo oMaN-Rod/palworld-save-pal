@@ -149,12 +149,8 @@ impl ExtRouter for ServerExtRouter {
             MessageType::GameInventory => {
                 bridge_handlers::handle_game_inventory(services, data, ctx).await
             }
-            MessageType::GameGuild => {
-                bridge_handlers::handle_game_guild(services, data, ctx).await
-            }
-            MessageType::GameGuilds => {
-                bridge_handlers::handle_game_guilds(services, ctx).await
-            }
+            MessageType::GameGuild => bridge_handlers::handle_game_guild(services, data, ctx).await,
+            MessageType::GameGuilds => bridge_handlers::handle_game_guilds(services, ctx).await,
             MessageType::GameBasePals => {
                 bridge_handlers::handle_game_base_pals(services, data, ctx).await
             }

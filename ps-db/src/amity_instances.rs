@@ -54,19 +54,31 @@ fn map_instance(r: &crate::DbRow) -> Result<AmityInstance, DbError> {
 
 pub async fn list_instances(db: &dyn crate::DbDriver) -> Result<Vec<AmityInstance>, DbError> {
     let rows = db
-        .query(&format!("SELECT {SELECT_COLUMNS} FROM amity_instances ORDER BY id"), &[])
+        .query(
+            &format!("SELECT {SELECT_COLUMNS} FROM amity_instances ORDER BY id"),
+            &[],
+        )
         .await?;
     rows.iter().map(map_instance).collect()
 }
 
-pub async fn get_instance(db: &dyn crate::DbDriver, id: i64) -> Result<Option<AmityInstance>, DbError> {
+pub async fn get_instance(
+    db: &dyn crate::DbDriver,
+    id: i64,
+) -> Result<Option<AmityInstance>, DbError> {
     let rows = db
-        .query(&format!("SELECT {SELECT_COLUMNS} FROM amity_instances WHERE id = ?"), &[id.into()])
+        .query(
+            &format!("SELECT {SELECT_COLUMNS} FROM amity_instances WHERE id = ?"),
+            &[id.into()],
+        )
         .await?;
     rows.first().map(map_instance).transpose()
 }
 
-pub async fn insert_instance(db: &dyn crate::DbDriver, new: &NewAmityInstance) -> Result<i64, DbError> {
+pub async fn insert_instance(
+    db: &dyn crate::DbDriver,
+    new: &NewAmityInstance,
+) -> Result<i64, DbError> {
     let now = crate::time::now_iso_naive_utc();
     crate::scalar_i64(
         &db.query(
@@ -85,7 +97,11 @@ pub async fn insert_instance(db: &dyn crate::DbDriver, new: &NewAmityInstance) -
     )
 }
 
-pub async fn update_instance(db: &dyn crate::DbDriver, id: i64, new: &NewAmityInstance) -> Result<(), DbError> {
+pub async fn update_instance(
+    db: &dyn crate::DbDriver,
+    id: i64,
+    new: &NewAmityInstance,
+) -> Result<(), DbError> {
     db.execute(
         "UPDATE amity_instances SET name = ?, host = ?, port = ?, token = ?, updated_at = ? WHERE id = ?",
         &[
@@ -102,7 +118,8 @@ pub async fn update_instance(db: &dyn crate::DbDriver, id: i64, new: &NewAmityIn
 }
 
 pub async fn delete_instance(db: &dyn crate::DbDriver, id: i64) -> Result<(), DbError> {
-    db.execute("DELETE FROM amity_instances WHERE id = ?", &[id.into()]).await?;
+    db.execute("DELETE FROM amity_instances WHERE id = ?", &[id.into()])
+        .await?;
     Ok(())
 }
 
@@ -120,9 +137,17 @@ mod tests {
     #[tokio::test]
     async fn insert_then_list_round_trips() {
         let db = test_driver().await;
-        let id = insert_instance(&db, &NewAmityInstance {
-            name: "Remote box".into(), host: "10.0.0.14".into(), port: 8788, token: "s3cr3t".into(),
-        }).await.unwrap();
+        let id = insert_instance(
+            &db,
+            &NewAmityInstance {
+                name: "Remote box".into(),
+                host: "10.0.0.14".into(),
+                port: 8788,
+                token: "s3cr3t".into(),
+            },
+        )
+        .await
+        .unwrap();
 
         let all = list_instances(&db).await.unwrap();
         assert_eq!(all.len(), 1);
@@ -136,16 +161,38 @@ mod tests {
     #[tokio::test]
     async fn insert_twice_returns_distinct_correct_ids() {
         let db = test_driver().await;
-        let first = insert_instance(&db, &NewAmityInstance {
-            name: "First".into(), host: "10.0.0.1".into(), port: 1111, token: "a".into(),
-        }).await.unwrap();
-        let second = insert_instance(&db, &NewAmityInstance {
-            name: "Second".into(), host: "10.0.0.2".into(), port: 2222, token: "b".into(),
-        }).await.unwrap();
+        let first = insert_instance(
+            &db,
+            &NewAmityInstance {
+                name: "First".into(),
+                host: "10.0.0.1".into(),
+                port: 1111,
+                token: "a".into(),
+            },
+        )
+        .await
+        .unwrap();
+        let second = insert_instance(
+            &db,
+            &NewAmityInstance {
+                name: "Second".into(),
+                host: "10.0.0.2".into(),
+                port: 2222,
+                token: "b".into(),
+            },
+        )
+        .await
+        .unwrap();
 
         assert_ne!(first, second);
-        assert_eq!(get_instance(&db, first).await.unwrap().unwrap().name, "First");
-        assert_eq!(get_instance(&db, second).await.unwrap().unwrap().name, "Second");
+        assert_eq!(
+            get_instance(&db, first).await.unwrap().unwrap().name,
+            "First"
+        );
+        assert_eq!(
+            get_instance(&db, second).await.unwrap().unwrap().name,
+            "Second"
+        );
     }
 
     #[tokio::test]
@@ -157,12 +204,29 @@ mod tests {
     #[tokio::test]
     async fn update_replaces_every_field() {
         let db = test_driver().await;
-        let id = insert_instance(&db, &NewAmityInstance {
-            name: "Old".into(), host: "127.0.0.1".into(), port: 1024, token: "old".into(),
-        }).await.unwrap();
-        update_instance(&db, id, &NewAmityInstance {
-            name: "New".into(), host: "10.0.0.2".into(), port: 9999, token: "new".into(),
-        }).await.unwrap();
+        let id = insert_instance(
+            &db,
+            &NewAmityInstance {
+                name: "Old".into(),
+                host: "127.0.0.1".into(),
+                port: 1024,
+                token: "old".into(),
+            },
+        )
+        .await
+        .unwrap();
+        update_instance(
+            &db,
+            id,
+            &NewAmityInstance {
+                name: "New".into(),
+                host: "10.0.0.2".into(),
+                port: 9999,
+                token: "new".into(),
+            },
+        )
+        .await
+        .unwrap();
 
         let found = get_instance(&db, id).await.unwrap().unwrap();
         assert_eq!(found.name, "New");
@@ -174,9 +238,17 @@ mod tests {
     #[tokio::test]
     async fn delete_removes_the_row() {
         let db = test_driver().await;
-        let id = insert_instance(&db, &NewAmityInstance {
-            name: "Gone".into(), host: "127.0.0.1".into(), port: 8788, token: "t".into(),
-        }).await.unwrap();
+        let id = insert_instance(
+            &db,
+            &NewAmityInstance {
+                name: "Gone".into(),
+                host: "127.0.0.1".into(),
+                port: 8788,
+                token: "t".into(),
+            },
+        )
+        .await
+        .unwrap();
         delete_instance(&db, id).await.unwrap();
         assert!(get_instance(&db, id).await.unwrap().is_none());
         assert!(list_instances(&db).await.unwrap().is_empty());
@@ -185,7 +257,11 @@ mod tests {
     #[test]
     fn debug_redacts_the_token() {
         let instance = AmityInstance {
-            id: 1, name: "n".into(), host: "h".into(), port: 1, token: "super-secret".into(),
+            id: 1,
+            name: "n".into(),
+            host: "h".into(),
+            port: 1,
+            token: "super-secret".into(),
         };
         let rendered = format!("{instance:?}");
         assert!(!rendered.contains("super-secret"));
@@ -195,7 +271,10 @@ mod tests {
     #[test]
     fn new_amity_instance_debug_redacts_the_token() {
         let new = NewAmityInstance {
-            name: "n".into(), host: "h".into(), port: 1, token: "super-secret".into(),
+            name: "n".into(),
+            host: "h".into(),
+            port: 1,
+            token: "super-secret".into(),
         };
         let rendered = format!("{new:?}");
         assert!(!rendered.contains("super-secret"));

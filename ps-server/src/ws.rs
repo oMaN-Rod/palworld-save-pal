@@ -1,10 +1,12 @@
 //! The /ws/{client_id} endpoint: one connection loop per client.
 
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr};
 use std::sync::Arc;
+use std::time::Duration;
 
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
 use axum::extract::{ConnectInfo, Path, State};
+use axum::http::HeaderMap;
 use axum::response::Response;
 use futures::{SinkExt, StreamExt};
 
@@ -18,15 +20,20 @@ use crate::envelope::Envelope;
 use crate::messages::MessageType;
 use crate::AppState;
 
-/// 1 GiB, applied to both the message and frame limit. It has to be this large
-/// because payloads carry whole parsed saves, and `load_zip_file` sends an
-/// entire zip as a JSON int array.
-pub const MAX_WS_MESSAGE_BYTES: usize = 1 << 30;
+/// Network messages are deliberately bounded. A save import must fit inside
+/// this limit, but a peer must never be able to reserve a gigabyte per frame.
+pub const MAX_WS_MESSAGE_BYTES: usize = 64 * 1024 * 1024;
+pub const MAX_WS_FRAME_BYTES: usize = MAX_WS_MESSAGE_BYTES;
+const WS_OUTGOING_CAPACITY: usize = 2;
+const WS_WRITE_TIMEOUT: Duration = Duration::from_secs(30);
+const WS_IDLE_TIMEOUT: Duration = Duration::from_secs(5 * 60);
+const POLICY_POLL_INTERVAL: Duration = Duration::from_secs(1);
 
 pub async fn ws_upgrade(
     upgrade: WebSocketUpgrade,
     Path(client_id): Path<String>,
     ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
     State(app): State<Arc<AppState>>,
 ) -> Response {
     // The network gate has already refused disallowed/unauthenticated peers;
@@ -34,11 +41,22 @@ pub async fn ws_upgrade(
     // enforce the write allowlist per message.
     let acl = crate::network_policy::acl_for(&app.network_policy, peer.ip());
     let is_loopback = is_loopback_peer(peer);
+    let policy_generation = crate::network_policy::policy_generation(&app.network_policy);
+    let session_token = crate::network::session_token_from(&headers);
     upgrade
         .max_message_size(MAX_WS_MESSAGE_BYTES)
-        .max_frame_size(MAX_WS_MESSAGE_BYTES)
+        .max_frame_size(MAX_WS_FRAME_BYTES)
         .on_upgrade(move |socket| {
-            connection_loop(socket, client_id, is_loopback, acl.can_write, app)
+            connection_loop(
+                socket,
+                client_id,
+                peer.ip(),
+                is_loopback,
+                acl.can_write,
+                policy_generation,
+                session_token,
+                app,
+            )
         })
 }
 
@@ -70,15 +88,19 @@ impl Drop for LiveConnectionGuard {
 async fn connection_loop(
     socket: WebSocket,
     client_id: String,
+    peer: IpAddr,
     is_loopback: bool,
     write_allowed: bool,
+    policy_generation: u64,
+    session_token: Option<String>,
     app: Arc<AppState>,
 ) {
     tracing::info!(%client_id, is_loopback, write_allowed, "client connected");
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
-    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<String>();
+    let (frame_sender, mut frame_receiver) =
+        tokio::sync::mpsc::channel::<String>(WS_OUTGOING_CAPACITY);
 
     // Drains the mpsc channel onto the socket so handlers never block on I/O.
     // Exits when the channel closes (all Emitters dropped) or the send fails
@@ -86,17 +108,26 @@ async fn connection_loop(
     // `None` or the loop `break`s, so this task always terminates.
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
-            if outgoing_sink
-                .send(Message::Text(frame.into()))
-                .await
-                .is_err()
+            match tokio::time::timeout(
+                WS_WRITE_TIMEOUT,
+                outgoing_sink.send(Message::Text(frame.into())),
+            )
+            .await
             {
-                break;
+                Ok(Ok(())) => {}
+                Ok(Err(error)) => {
+                    tracing::debug!(%error, "websocket writer closed");
+                    break;
+                }
+                Err(_) => {
+                    tracing::warn!("websocket writer timed out; closing connection");
+                    break;
+                }
             }
         }
     });
 
-    let emitter = Emitter::new(frame_sender);
+    let emitter = Emitter::new_bounded(frame_sender, MAX_WS_MESSAGE_BYTES);
 
     // The connection owns ONE session `Arc` slot, reused for every message so
     // per-connection state (a loaded save, gamepass scan results, a transfer
@@ -114,9 +145,45 @@ async fn connection_loop(
     // `Some(Err(_))` on a protocol error (e.g. the client vanishing mid-frame
     // without a Close handshake); handlers run serially, each awaited before the
     // next frame is read. So the loop always terminates via one of the arms below.
+    let idle_deadline = tokio::time::Instant::now() + WS_IDLE_TIMEOUT;
+    let mut idle_deadline = idle_deadline;
     loop {
-        match incoming_stream.next().await {
-            Some(Ok(Message::Text(text))) => {
+        // Polling the generation makes policy changes revoke already-open WS
+        // sessions within one second, even when the browser is idle. The
+        // connection is also re-evaluated immediately before every dispatch.
+        if crate::network_policy::policy_generation(&app.network_policy) != policy_generation {
+            tracing::info!(%client_id, "websocket invalidated by network policy change");
+            break;
+        }
+        let remaining = idle_deadline.saturating_duration_since(tokio::time::Instant::now());
+        if remaining.is_zero() {
+            tracing::info!(%client_id, "websocket idle timeout");
+            break;
+        }
+        tokio::select! {
+            _ = tokio::time::sleep(POLICY_POLL_INTERVAL) => continue,
+            incoming = tokio::time::timeout(remaining, incoming_stream.next()) => match incoming {
+            Ok(Some(Ok(Message::Text(text)))) => {
+                idle_deadline = tokio::time::Instant::now() + WS_IDLE_TIMEOUT;
+                if crate::network_policy::policy_generation(&app.network_policy) != policy_generation {
+                    tracing::info!(%client_id, "websocket invalidated before dispatch");
+                    break;
+                }
+                let acl = crate::network_policy::acl_for(&app.network_policy, peer);
+                if !acl.can_connect {
+                    tracing::info!(%client_id, %peer, "websocket peer is no longer admitted");
+                    break;
+                }
+                if acl.auth_required
+                    && !session_token.as_deref().is_some_and(|token| {
+                        app.network_policy
+                            .as_ref()
+                            .is_some_and(|policy| policy.has_valid_session(token))
+                    })
+                {
+                    tracing::info!(%client_id, %peer, "websocket session expired or was revoked");
+                    break;
+                }
                 process_text_frame(
                     text.as_str(),
                     &mut current_session,
@@ -125,18 +192,25 @@ async fn connection_loop(
                     &emitter,
                     &mut blueprints,
                     is_loopback,
-                    write_allowed,
+                    acl.can_write,
                 )
                 .await;
             }
-            Some(Ok(Message::Close(_))) => break,
+            Ok(Some(Ok(Message::Close(_)))) => break,
             // Ping/pong handled by axum; binary frames are not part of the protocol.
-            Some(Ok(_)) => {}
-            Some(Err(protocol_error)) => {
+            Ok(Some(Ok(_))) => {
+                idle_deadline = tokio::time::Instant::now() + WS_IDLE_TIMEOUT;
+            }
+            Ok(Some(Err(protocol_error))) => {
                 tracing::warn!(%client_id, %protocol_error, "websocket protocol error; closing connection");
                 break;
             }
-            None => break,
+            Ok(None) => break,
+            Err(_) => {
+                tracing::info!(%client_id, "websocket idle timeout");
+                break;
+            }
+            }
         }
     }
 
@@ -242,11 +316,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn max_ws_message_bytes_is_one_gibibyte() {
-        // Sending a >1GiB frame in a test is not affordable, so this pins the
-        // value `ws_upgrade` feeds to max_message_size/max_frame_size instead of
-        // exercising the limit end-to-end.
-        assert_eq!(MAX_WS_MESSAGE_BYTES, 1 << 30);
+    fn max_ws_message_and_frame_bytes_are_bounded() {
+        assert_eq!(MAX_WS_MESSAGE_BYTES, 64 * 1024 * 1024);
+        assert_eq!(MAX_WS_FRAME_BYTES, MAX_WS_MESSAGE_BYTES);
     }
 
     #[test]

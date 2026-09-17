@@ -168,7 +168,11 @@ pub async fn handle_game_guilds(
     services: &ServerServices,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    match services.bridge.request("get_guilds", serde_json::json!({})).await {
+    match services
+        .bridge
+        .request("get_guilds", serde_json::json!({}))
+        .await
+    {
         Ok(payload) => ctx.emitter.emit(MessageType::GameGuilds, &payload),
         Err(error) => refuse_bridge_error(ctx.emitter, MessageType::GameGuilds, &error),
     }
@@ -232,7 +236,11 @@ pub async fn handle_game_guild_containers(
         return Ok(());
     };
     let request = serde_json::json!({ "guildId": data.guild_id });
-    match services.bridge.request("get_guild_containers", request).await {
+    match services
+        .bridge
+        .request("get_guild_containers", request)
+        .await
+    {
         Ok(payload) => ctx.emitter.emit(MessageType::GameGuildContainers, &payload),
         Err(error) => refuse_bridge_error(ctx.emitter, MessageType::GameGuildContainers, &error),
     }
@@ -448,7 +456,8 @@ pub async fn handle_game_remove_pal(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let Some(data) = parse_payload::<GameRemovePalData>(data, MessageType::GameRemovePal, ctx) else {
+    let Some(data) = parse_payload::<GameRemovePalData>(data, MessageType::GameRemovePal, ctx)
+    else {
         return Ok(());
     };
     let command_id = data
@@ -459,7 +468,11 @@ pub async fn handle_game_remove_pal(
         "playerUid": data.player_uid,
         "slotIndex": data.slot_index,
     });
-    match services.bridge.command("pal.remove", &command_id, args).await {
+    match services
+        .bridge
+        .command("pal.remove", &command_id, args)
+        .await
+    {
         Ok(payload) => ctx.emitter.emit(MessageType::GameRemovePal, &payload),
         Err(error) => refuse_bridge_error(ctx.emitter, MessageType::GameRemovePal, &error),
     }

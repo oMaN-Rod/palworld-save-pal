@@ -202,7 +202,9 @@ pub fn evaluate(config: &NetworkConfig, peer: IpAddr) -> PeerAcl {
         return PeerAcl::denied();
     }
 
-    let can_write = config.allow.write.is_empty() || matches_any(&config.allow.write);
+    // An empty write list is a safe default: an operator must explicitly
+    // name network writers. Loopback was handled above and remains trusted.
+    let can_write = !config.allow.write.is_empty() && matches_any(&config.allow.write);
 
     PeerAcl {
         can_connect: true,

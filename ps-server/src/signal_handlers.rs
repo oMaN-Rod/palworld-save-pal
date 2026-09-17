@@ -284,10 +284,7 @@ pub async fn handle_signal_set_source(
     };
 
     let mut manager = services.signal.lock().await;
-    match manager
-        .set_source(selection, ctx.app)
-        .await
-    {
+    match manager.set_source(selection, ctx.app).await {
         Ok(()) => {
             let payload = manager_status_payload(&manager, true);
             drop(manager);
@@ -728,9 +725,7 @@ mod tests {
             !services.signal.lock().await.armed(),
             "a refused arm must not leave the desktop listening"
         );
-        let devices = ps_db::signal_devices::list_devices(&*driver)
-            .await
-            .unwrap();
+        let devices = ps_db::signal_devices::list_devices(&*driver).await.unwrap();
         assert_eq!(devices.len(), 1, "a refused revoke must not delete a row");
         assert_eq!(devices[0].name, "Phone", "a refused rename must not land");
     }

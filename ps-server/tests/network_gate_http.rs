@@ -71,9 +71,14 @@ async fn test_router(config: NetworkConfig) -> axum::Router {
 }
 
 fn peer_request(peer: &str, method: &str, uri: &str) -> Request<Body> {
+    let request_uri = if peer.parse::<std::net::IpAddr>().unwrap().is_loopback() {
+        uri.to_owned()
+    } else {
+        format!("https://palstudio.test{uri}")
+    };
     let mut request = Request::builder()
         .method(method)
-        .uri(uri)
+        .uri(request_uri)
         .body(Body::empty())
         .unwrap();
     request.extensions_mut().insert(ConnectInfo(
@@ -149,7 +154,10 @@ async fn pin_flow_unlocks_network_peers_and_unlock_page_stays_reachable() {
         .get("location")
         .and_then(|v| v.to_str().ok())
         .expect("unlock redirect location");
-    assert!(location.starts_with("/network-unlock?next="), "got {location}");
+    assert!(
+        location.starts_with("/network-unlock?next="),
+        "got {location}"
+    );
 
     // …machine clients (API/websocket) still get the detectable 401…
     let api = router

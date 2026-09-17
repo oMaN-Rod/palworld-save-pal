@@ -985,7 +985,10 @@ mod tests {
             .map(|(key, _)| key)
             .filter(|key| ini_to_env_key(key).is_none())
             .collect();
-        assert!(unmapped.is_empty(), "settings with no env key: {unmapped:?}");
+        assert!(
+            unmapped.is_empty(),
+            "settings with no env key: {unmapped:?}"
+        );
     }
 
     /// Settings added since Palworld v1.0 — voice chat, the auto-transfer of an
@@ -1133,7 +1136,9 @@ mod tests {
             .env_vars
             .insert("DENY_TECHNOLOGY_LIST".to_string(), serde_json::json!(""));
         let content = build_palworld_settings_content(&record);
-        assert!(content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n"));
+        assert!(
+            content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n")
+        );
         assert!(!content.contains("PALBOX"));
     }
 

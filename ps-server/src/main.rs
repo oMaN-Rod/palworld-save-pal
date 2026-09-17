@@ -78,6 +78,9 @@ async fn main() -> anyhow::Result<()> {
                 return Ok(());
             }
             ps_server::ListenerExit::Stopped => return Ok(()),
+            ps_server::ListenerExit::Failed(error) => {
+                return Err(anyhow::anyhow!("ps-server listener failed: {error}"));
+            }
         }
     }
 }

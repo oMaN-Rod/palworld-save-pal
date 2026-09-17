@@ -78,7 +78,10 @@ impl std::fmt::Debug for UpdateInstanceData {
 }
 
 fn refuse(emitter: &Emitter, request: MessageType, code: &str, message: &str) {
-    emitter.emit(request, &serde_json::json!({ "code": code, "error": message }));
+    emitter.emit(
+        request,
+        &serde_json::json!({ "code": code, "error": message }),
+    );
 }
 
 fn saved_row_id(id: &str) -> Option<i64> {
@@ -226,7 +229,8 @@ pub async fn handle_game_add_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let Some(payload) = parse_payload::<InstanceFieldsData>(data, MessageType::GameAddInstance, ctx)
+    let Some(payload) =
+        parse_payload::<InstanceFieldsData>(data, MessageType::GameAddInstance, ctx)
     else {
         return Ok(());
     };
@@ -241,7 +245,12 @@ pub async fn handle_game_add_instance(
     )
     .await;
     if let Err(error) = outcome {
-        refuse(ctx.emitter, MessageType::GameAddInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameAddInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
     reply_with_instances(services, MessageType::GameAddInstance, ctx).await
@@ -279,7 +288,12 @@ pub async fn handle_game_update_instance(
     )
     .await;
     if let Err(error) = outcome {
-        refuse(ctx.emitter, MessageType::GameUpdateInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameUpdateInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
 
@@ -323,7 +337,12 @@ pub async fn handle_game_delete_instance(
     };
 
     if let Err(error) = amity_instances::delete_instance(&*ctx.app.driver, row).await {
-        refuse(ctx.emitter, MessageType::GameDeleteInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameDeleteInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
 
@@ -355,7 +374,12 @@ pub async fn handle_game_select_instance(
     let saved = match amity_instances::list_instances(&*ctx.app.driver).await {
         Ok(saved) => saved,
         Err(error) => {
-            refuse(ctx.emitter, MessageType::GameSelectInstance, "db_error", &error.to_string());
+            refuse(
+                ctx.emitter,
+                MessageType::GameSelectInstance,
+                "db_error",
+                &error.to_string(),
+            );
             return Ok(());
         }
     };
@@ -373,8 +397,7 @@ pub async fn handle_game_select_instance(
     services.bridge.set_target(Some(target));
     // The selection already took effect above; a failure to persist it only
     // risks losing the choice across a restart, not the current session.
-    let persisted =
-        ps_db::meta::set(&*ctx.app.driver, ACTIVE_INSTANCE_KEY, &payload.id).await;
+    let persisted = ps_db::meta::set(&*ctx.app.driver, ACTIVE_INSTANCE_KEY, &payload.id).await;
     if let Err(error) = persisted {
         tracing::warn!(%error, "failed to persist the selected Amity instance");
     }

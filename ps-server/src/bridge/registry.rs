@@ -36,7 +36,10 @@ fn saved_target(instance: &AmityInstance) -> Option<BridgeTarget> {
     })
 }
 
-pub fn merge_instances(discovered: &[DiscoveredEndpoint], saved: &[AmityInstance]) -> Vec<InstanceEntry> {
+pub fn merge_instances(
+    discovered: &[DiscoveredEndpoint],
+    saved: &[AmityInstance],
+) -> Vec<InstanceEntry> {
     let auto = discovered.iter().map(|endpoint| InstanceEntry {
         id: format!("auto:{}", endpoint.pid),
         source: "auto".to_string(),
@@ -160,7 +163,11 @@ mod tests {
 
     #[test]
     fn default_target_picks_the_first_discovered_instance() {
-        let target = default_target(&[discovered(11, "Solo", 52104), discovered(30, "Server", 8788)]).unwrap();
+        let target = default_target(&[
+            discovered(11, "Solo", 52104),
+            discovered(30, "Server", 8788),
+        ])
+        .unwrap();
         assert_eq!(target.id, "auto:11");
     }
 

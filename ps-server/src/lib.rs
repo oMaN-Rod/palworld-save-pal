@@ -26,6 +26,7 @@ pub use ps_app::{
 use std::net::{IpAddr, SocketAddr};
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
+use std::time::Duration;
 
 use ps_core::gamedata::GameData;
 
@@ -96,24 +97,73 @@ pub struct ServerHandle {
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
     instance_reconciler_cancel: tokio_util::sync::CancellationToken,
     instance_reconciler_task: tokio::task::JoinHandle<()>,
+    network_reconciler_cancel: tokio_util::sync::CancellationToken,
+    network_reconciler_task: tokio::task::JoinHandle<()>,
     restart_flag: Arc<std::sync::atomic::AtomicBool>,
     exit_flag: Arc<std::sync::atomic::AtomicBool>,
 }
 
+const SHUTDOWN_TIMEOUT: Duration = Duration::from_secs(10);
+
+async fn stop_unit_task(mut task: tokio::task::JoinHandle<()>, name: &str) {
+    if tokio::time::timeout(SHUTDOWN_TIMEOUT, &mut task)
+        .await
+        .is_err()
+    {
+        tracing::warn!(task = name, "background task did not stop; aborting");
+        task.abort();
+        let _ = task.await;
+    }
+}
+
+async fn join_serve_task(
+    mut task: tokio::task::JoinHandle<std::io::Result<()>>,
+) -> Result<(), String> {
+    match tokio::time::timeout(SHUTDOWN_TIMEOUT, &mut task).await {
+        Ok(Ok(Ok(()))) => Ok(()),
+        Ok(Ok(Err(error))) => Err(error.to_string()),
+        Ok(Err(error)) => Err(format!("listener task panicked or was cancelled: {error}")),
+        Err(_) => {
+            task.abort();
+            let _ = task.await;
+            Err("listener did not stop within the shutdown deadline".into())
+        }
+    }
+}
+
+async fn stop_services(services: &Arc<crate::services::ServerServices>) {
+    if tokio::time::timeout(SHUTDOWN_TIMEOUT, services.bridge.shutdown())
+        .await
+        .is_err()
+    {
+        tracing::warn!("bridge service did not stop within the shutdown deadline");
+    }
+    let signal = Arc::clone(&services.signal);
+    if tokio::time::timeout(SHUTDOWN_TIMEOUT, async move {
+        signal.lock().await.shutdown().await;
+    })
+    .await
+    .is_err()
+    {
+        tracing::warn!("signal service did not stop within the shutdown deadline");
+    }
+}
+
 impl ServerHandle {
     pub async fn shutdown(self) {
-        // Stop the reconciler before the bridge so it cannot call `set_target`
-        // on a bridge that has already shut down.
-        self.instance_reconciler_cancel.cancel();
-        let _ = self.instance_reconciler_task.await;
-        self.services.bridge.shutdown().await;
-        self.services.signal.lock().await.shutdown().await;
         let _ = self.shutdown_sender.send(());
-        let _ = self.serve_task.await;
+        self.instance_reconciler_cancel.cancel();
+        self.network_reconciler_cancel.cancel();
+        stop_unit_task(self.instance_reconciler_task, "instance reconciler").await;
+        stop_unit_task(self.network_reconciler_task, "network reconciler").await;
+        if let Err(error) = join_serve_task(self.serve_task).await {
+            tracing::warn!(%error, "server listener did not stop cleanly");
+        }
+        stop_services(&self.services).await;
     }
 
     pub async fn wait(self) {
-        let _ = self.serve_task.await;
+        let _ = self.wait_or_restart().await;
     }
 
     /// True when the network policy changed the port and the caller should
@@ -137,13 +187,18 @@ impl ServerHandle {
             serve_task,
             instance_reconciler_cancel,
             instance_reconciler_task,
+            network_reconciler_cancel,
+            network_reconciler_task,
             restart_flag,
             exit_flag,
         } = self;
         // The listener's task is the lifecycle clock: it ends on graceful
         // shutdown, a Network-page port change, or a runtime-mode switch.
-        let _ = serve_task.await;
-        let reason = if exit_flag.load(std::sync::atomic::Ordering::SeqCst) {
+        let listener_result = join_serve_task(serve_task).await;
+        let reason = if let Err(error) = listener_result {
+            tracing::error!(%error, "PalStudio listener failed");
+            ListenerExit::Failed(error)
+        } else if exit_flag.load(std::sync::atomic::Ordering::SeqCst) {
             ListenerExit::ExitRequested
         } else if restart_flag.load(std::sync::atomic::Ordering::SeqCst) {
             ListenerExit::RebindRequested
@@ -151,16 +206,17 @@ impl ServerHandle {
             ListenerExit::Stopped
         };
         instance_reconciler_cancel.cancel();
-        let _ = instance_reconciler_task.await;
-        services.bridge.shutdown().await;
-        services.signal.lock().await.shutdown().await;
+        network_reconciler_cancel.cancel();
+        stop_unit_task(instance_reconciler_task, "instance reconciler").await;
+        stop_unit_task(network_reconciler_task, "network reconciler").await;
         let _ = shutdown_sender.send(());
+        stop_services(&services).await;
         reason
     }
 }
 
 /// Why the listener ended — see [`ServerHandle::wait_or_restart`].
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ListenerExit {
     /// External shutdown (ServerHandle::shutdown or signal): stop cleanly.
     Stopped,
@@ -168,10 +224,13 @@ pub enum ListenerExit {
     RebindRequested,
     /// A runtime-mode switch (service_control): exit without rebinding.
     ExitRequested,
+    /// The listener returned an I/O error or could not shut down cleanly.
+    Failed(String),
 }
 
 const INSTANCE_RECONCILE_INTERVAL_ENV: &str = "PS_BRIDGE_RECONCILE_INTERVAL_MS";
 const INSTANCE_RECONCILE_INTERVAL_DEFAULT: std::time::Duration = std::time::Duration::from_secs(3);
+const NETWORK_RECONCILE_INTERVAL: Duration = Duration::from_secs(6 * 60 * 60);
 
 fn instance_reconcile_interval() -> std::time::Duration {
     std::env::var(INSTANCE_RECONCILE_INTERVAL_ENV)
@@ -192,6 +251,65 @@ async fn run_instance_reconciler(
             _ = tokio::time::sleep(instance_reconcile_interval()) => {}
         }
         crate::bridge_instances_handlers::reconcile_active_target(&*driver, &bridge).await;
+    }
+}
+
+async fn run_network_reconciler(
+    runtime: Arc<crate::network::NetworkRuntime>,
+    cancel: tokio_util::sync::CancellationToken,
+) {
+    let mut first_run = true;
+    loop {
+        let delay = if first_run {
+            Duration::from_secs(1)
+        } else {
+            NETWORK_RECONCILE_INTERVAL
+        };
+        first_run = false;
+        tokio::select! {
+            _ = cancel.cancelled() => break,
+            _ = tokio::time::sleep(delay) => {}
+        }
+        let config = runtime.effective_config();
+        if let Err(error) = crate::network::reconcile_current_resources(&config).await {
+            tracing::error!(%error, "network resource renewal failed; retaining current policy");
+        }
+    }
+}
+
+async fn listener_bind_ip(
+    config: &ServerConfig,
+    network: &crate::network::NetworkRuntime,
+) -> anyhow::Result<IpAddr> {
+    match network.effective_config().listen {
+        ps_network::ListenMode::Localhost => Ok(if config.host.is_ipv6() {
+            IpAddr::from([0, 0, 0, 0, 0, 0, 0, 1])
+        } else {
+            IpAddr::from([127, 0, 0, 1])
+        }),
+        ps_network::ListenMode::Tailscale => {
+            let status = tokio::task::spawn_blocking(ps_network::tailscale::detect)
+                .await
+                .map_err(|error| anyhow::anyhow!("Tailscale detection task failed: {error}"))?;
+            anyhow::ensure!(
+                status.available && status.logged_in,
+                "Tailscale listen mode requires an available, logged-in Tailscale node"
+            );
+            status.ipv4.into_iter().next().ok_or_else(|| {
+                anyhow::anyhow!("Tailscale listen mode requires an active Tailscale IPv4 address")
+            })
+        }
+        ps_network::ListenMode::Lan | ps_network::ListenMode::Wan => {
+            if config.host.is_loopback() || config.host.is_unspecified() {
+                Ok(if config.host.is_ipv6() {
+                    IpAddr::from([0, 0, 0, 0, 0, 0, 0, 0])
+                } else {
+                    IpAddr::from([0, 0, 0, 0])
+                })
+            } else {
+                Ok(config.host)
+            }
+        }
     }
 }
 
@@ -263,6 +381,9 @@ pub async fn start_server_with(
             .map_err(|error| anyhow::anyhow!("could not load network config: {error}"))?
             .into_tier(tier),
     );
+    if network.effective_config().listen == ps_network::ListenMode::Tailscale {
+        network.refresh_tailnet_peers().await?;
+    }
     // The desktop app is localhost by construction; every other context gets
     // a loud reminder when the stored policy leaves it exposed or locked out.
     if tier != ps_network::NetworkTier::Desktop {
@@ -305,6 +426,25 @@ pub async fn start_server_with(
         network_policy: Some(Arc::clone(&network) as Arc<dyn ps_app::network_policy::NetworkPolicy>),
     });
     ps_app::handlers::plugins::seed_bundled_plugins(&state).await?;
+    anyhow::ensure!(
+        effective_port != 0,
+        "server port must be between 1 and 65535"
+    );
+    let bind_ip = listener_bind_ip(&config, &network).await?;
+    let listener = tokio::net::TcpListener::bind((bind_ip, effective_port)).await?;
+    let addr = listener.local_addr()?;
+    tracing::info!(%addr, desktop_mode = config.desktop_mode, "ps-server listening");
+
+    // Reconcile configured router/tailnet exposure after the socket is bound,
+    // but before any background service is started. A configured external
+    // resource that cannot be established is a startup error, not a silently
+    // half-working deployment.
+    if network.tier() == ps_network::NetworkTier::Hosted {
+        crate::network::reconcile_current_resources(&network.effective_config())
+            .await
+            .map_err(|error| anyhow::anyhow!("could not reconcile network resources: {error}"))?;
+    }
+
     if let Err(error) = services.signal.lock().await.restore_armed(&state).await {
         tracing::warn!(%error, "signal: remote access was left armed but could not be restored");
     }
@@ -314,15 +454,16 @@ pub async fn start_server_with(
         crate::bridge_instances_handlers::resolve_active_target(&*state.driver).await;
     services.bridge.set_target(initial_target);
 
-    let listener = tokio::net::TcpListener::bind((config.host, effective_port)).await?;
-    let addr = listener.local_addr()?;
-    tracing::info!(%addr, desktop_mode = config.desktop_mode, "ps-server listening");
-
     let instance_reconciler_cancel = tokio_util::sync::CancellationToken::new();
     let instance_reconciler_task = tokio::spawn(run_instance_reconciler(
         Arc::clone(&state.driver),
         Arc::clone(&services.bridge),
         instance_reconciler_cancel.clone(),
+    ));
+    let network_reconciler_cancel = tokio_util::sync::CancellationToken::new();
+    let network_reconciler_task = tokio::spawn(run_network_reconciler(
+        Arc::clone(&network),
+        network_reconciler_cancel.clone(),
     ));
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
@@ -362,6 +503,8 @@ pub async fn start_server_with(
         serve_task,
         instance_reconciler_cancel,
         instance_reconciler_task,
+        network_reconciler_cancel,
+        network_reconciler_task,
         restart_flag,
         exit_flag,
     })

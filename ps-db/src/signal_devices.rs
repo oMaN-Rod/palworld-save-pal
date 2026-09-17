@@ -1,4 +1,3 @@
-
 use crate::error::DbError;
 
 pub struct SignalDevice {
@@ -182,7 +181,10 @@ mod tests {
     fn debug_redacts_the_secret() {
         let device = sample("dev-1");
         let formatted = format!("{device:?}");
-        assert!(!formatted.contains("deadbeef"), "secret leaked into Debug output");
+        assert!(
+            !formatted.contains("deadbeef"),
+            "secret leaked into Debug output"
+        );
         assert!(formatted.contains("<redacted>"));
         assert!(formatted.contains("dev-1"));
     }

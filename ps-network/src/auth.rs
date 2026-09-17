@@ -5,6 +5,7 @@
 //! ~20 lines of well-understood loop, and it keeps the crate dependency
 //! surface minimal. Comparison of derived keys is constant-time.
 use std::collections::HashMap;
+use std::net::IpAddr;
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
@@ -15,10 +16,13 @@ use sha2::Digest;
 /// OWASP 2023 recommends >= 600k iterations for PBKDF2-HMAC-SHA256; this
 /// runs once per unlock attempt, not per request, so the latency is fine.
 pub const PIN_ITERATIONS: u32 = 600_000;
+pub const MIN_PIN_ITERATIONS: u32 = PIN_ITERATIONS;
+pub const MAX_PIN_ITERATIONS: u32 = 1_200_000;
 
 const SESSION_TOKEN_BYTES: usize = 32;
 /// Hard cap so a leaked token cannot outlive its config'd TTL by much.
 const MAX_SESSION_TTL: Duration = Duration::from_secs(30 * 24 * 60 * 60);
+const MAX_SESSIONS: usize = 1024;
 
 pub fn pbkdf2_hmac_sha256(secret: &[u8], salt: &[u8], iterations: u32) -> [u8; 32] {
     // PBKDF2 (RFC 8018) with one 32-byte block: SHA-256 output == block size,
@@ -90,22 +94,31 @@ impl SessionRegistry {
     pub fn issue(&self, ttl: Duration) -> String {
         let token = new_session_token();
         let ttl = ttl.min(MAX_SESSION_TTL);
-        self.retain_expired(Instant::now());
-        self.sessions
+        let now = Instant::now();
+        let mut sessions = self
+            .sessions
             .lock()
-            .expect("session registry mutex poisoned")
-            .insert(token.clone(), Instant::now() + ttl);
+            .expect("session registry mutex poisoned");
+        sessions.retain(|_, expiry| *expiry > now);
+        while sessions.len() >= MAX_SESSIONS {
+            if let Some(oldest) = sessions.keys().next().cloned() {
+                sessions.remove(&oldest);
+            } else {
+                break;
+            }
+        }
+        sessions.insert(token.clone(), now + ttl);
         token
     }
 
     pub fn is_valid(&self, token: &str) -> bool {
         let now = Instant::now();
-        self.retain_expired(now);
-        self.sessions
+        let mut sessions = self
+            .sessions
             .lock()
-            .expect("session registry mutex poisoned")
-            .get(token)
-            .is_some_and(|expiry| *expiry > now)
+            .expect("session registry mutex poisoned");
+        sessions.retain(|_, expiry| *expiry > now);
+        sessions.get(token).is_some_and(|expiry| *expiry > now)
     }
 
     pub fn revoke(&self, token: &str) {
@@ -115,11 +128,120 @@ impl SessionRegistry {
             .remove(token);
     }
 
-    fn retain_expired(&self, now: Instant) {
+    /// Revoke every in-memory session after an authentication or access-policy
+    /// change. Persisted configuration never contains session tokens, so a
+    /// full clear is both deterministic and the safest response to a policy
+    /// transition.
+    pub fn revoke_all(&self) {
         self.sessions
             .lock()
             .expect("session registry mutex poisoned")
-            .retain(|_, expiry| *expiry > now);
+            .clear();
+    }
+}
+
+const AUTH_WINDOW: Duration = Duration::from_secs(5 * 60);
+const AUTH_LOCKOUT: Duration = Duration::from_secs(60);
+const AUTH_FAILURE_LIMIT: u32 = 5;
+const MAX_RATE_LIMIT_KEYS: usize = 4096;
+
+#[derive(Debug, Clone, Copy)]
+struct AttemptState {
+    window_started: Instant,
+    failures: u32,
+    locked_until: Option<Instant>,
+}
+
+/// Bounded per-peer online PIN protection. Failed guesses never allocate
+/// sessions and stale peer entries are pruned on every access.
+#[derive(Default)]
+pub struct AuthRateLimiter {
+    attempts: Mutex<HashMap<IpAddr, AttemptState>>,
+}
+
+impl AuthRateLimiter {
+    pub fn retry_after(&self, peer: IpAddr) -> Option<Duration> {
+        let peer = crate::policy::canonical(peer);
+        let now = Instant::now();
+        let mut attempts = self.attempts.lock().expect("auth limiter mutex poisoned");
+        Self::prune_locked(&mut attempts, now);
+        attempts
+            .get(&peer)
+            .and_then(|state| state.locked_until)
+            .and_then(|until| until.checked_duration_since(now))
+    }
+
+    pub fn record_failure(&self, peer: IpAddr) -> Option<Duration> {
+        let peer = crate::policy::canonical(peer);
+        let now = Instant::now();
+        let mut attempts = self.attempts.lock().expect("auth limiter mutex poisoned");
+        Self::prune_locked(&mut attempts, now);
+        let retry_after = {
+            let state = attempts.entry(peer).or_insert(AttemptState {
+                window_started: now,
+                failures: 0,
+                locked_until: None,
+            });
+            if let Some(until) = state.locked_until {
+                if until > now {
+                    until.checked_duration_since(now)
+                } else {
+                    state.locked_until = None;
+                    state.failures = 0;
+                    state.window_started = now;
+                    None
+                }
+            } else {
+                None
+            }
+            .or_else(|| {
+                if now.duration_since(state.window_started) >= AUTH_WINDOW {
+                    state.window_started = now;
+                    state.failures = 0;
+                }
+                state.failures = state.failures.saturating_add(1);
+                if state.failures >= AUTH_FAILURE_LIMIT {
+                    state.locked_until = Some(now + AUTH_LOCKOUT);
+                    Some(AUTH_LOCKOUT)
+                } else {
+                    None
+                }
+            })
+        };
+        while attempts.len() > MAX_RATE_LIMIT_KEYS {
+            if let Some(evicted) = attempts
+                .keys()
+                .copied()
+                .find(|candidate| *candidate != peer)
+            {
+                attempts.remove(&evicted);
+            } else {
+                break;
+            }
+        }
+        retry_after
+    }
+
+    pub fn record_success(&self, peer: IpAddr) {
+        let peer = crate::policy::canonical(peer);
+        self.attempts
+            .lock()
+            .expect("auth limiter mutex poisoned")
+            .remove(&peer);
+    }
+
+    fn prune_locked(attempts: &mut HashMap<IpAddr, AttemptState>, now: Instant) {
+        attempts.retain(|_, state| {
+            state.locked_until.is_some_and(|until| until > now)
+                || now.duration_since(state.window_started) < AUTH_WINDOW
+        });
+        while attempts.len() > MAX_RATE_LIMIT_KEYS {
+            if let Some(peer) = attempts.keys().next().copied() {
+                attempts.remove(&peer);
+            } else {
+                break;
+            }
+        }
     }
 }
 
@@ -178,6 +300,16 @@ mod tests {
         let token = registry.issue(Duration::from_millis(20));
         std::thread::sleep(Duration::from_millis(40));
         assert!(!registry.is_valid(&token));
+    }
+
+    #[test]
+    fn revoke_all_invalidates_every_issued_session() {
+        let registry = SessionRegistry::default();
+        let first = registry.issue(Duration::from_secs(60));
+        let second = registry.issue(Duration::from_secs(60));
+        registry.revoke_all();
+        assert!(!registry.is_valid(&first));
+        assert!(!registry.is_valid(&second));
     }
 
     #[test]

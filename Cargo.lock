@@ -3888,7 +3888,7 @@ dependencies = [
 
 [[package]]
 name = "palstudio"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -3896,6 +3896,7 @@ dependencies = [
  "opener",
  "ps-server",
  "reqwest 0.12.28",
+ "ring",
  "serde_json",
  "sha2",
  "tar",
@@ -4293,7 +4294,7 @@ dependencies = [
 
 [[package]]
 name = "ps-app"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -4315,7 +4316,7 @@ dependencies = [
 
 [[package]]
 name = "ps-core"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "chrono",
  "cityhasher",
@@ -4332,7 +4333,7 @@ dependencies = [
 
 [[package]]
 name = "ps-db"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "async-trait",
  "chrono",
@@ -4348,7 +4349,7 @@ dependencies = [
 
 [[package]]
 name = "ps-desktop"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "anyhow",
  "ps-server",
@@ -4363,7 +4364,7 @@ dependencies = [
 
 [[package]]
 name = "ps-lua-sys"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "cc",
  "wasm-bindgen-test",
@@ -4371,7 +4372,7 @@ dependencies = [
 
 [[package]]
 name = "ps-network"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "hmac",
  "igd-next",
@@ -4387,7 +4388,7 @@ dependencies = [
 
 [[package]]
 name = "ps-plugin"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "chrono",
  "pretty_assertions",
@@ -4402,7 +4403,7 @@ dependencies = [
 
 [[package]]
 name = "ps-server"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "aes-gcm 0.11.1",
  "anyhow",
@@ -4452,7 +4453,7 @@ dependencies = [
 
 [[package]]
 name = "ps-web"
-version = "1.4.2"
+version = "1.5.0"
 dependencies = [
  "async-trait",
  "base64 0.22.1",

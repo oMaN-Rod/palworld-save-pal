@@ -1,5 +1,11 @@
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
+#[derive(Clone)]
+enum EmitterSender {
+    Unbounded(UnboundedSender<String>),
+    Bounded(tokio::sync::mpsc::Sender<String>),
+}
+
 use ps_core::progress::ProgressSink;
 
 use crate::messages::MessageType;
@@ -8,12 +14,29 @@ use crate::messages::MessageType;
 /// per-connection writer task.
 #[derive(Clone)]
 pub struct Emitter {
-    sender: UnboundedSender<String>,
+    sender: EmitterSender,
+    max_payload_bytes: Option<usize>,
 }
 
 impl Emitter {
     pub fn new(sender: UnboundedSender<String>) -> Self {
-        Self { sender }
+        Self {
+            sender: EmitterSender::Unbounded(sender),
+            max_payload_bytes: None,
+        }
+    }
+
+    /// Creates a bounded emitter for network transports. A bounded queue is
+    /// deliberate: a slow or malicious client must not be able to turn every
+    /// large save/progress response into unbounded process memory.
+    pub fn new_bounded(
+        sender: tokio::sync::mpsc::Sender<String>,
+        max_payload_bytes: usize,
+    ) -> Self {
+        Self {
+            sender: EmitterSender::Bounded(sender),
+            max_payload_bytes: Some(max_payload_bytes),
+        }
     }
 
     pub fn emit<T: serde::Serialize>(&self, message_type: MessageType, data: &T) {
@@ -37,8 +60,27 @@ impl Emitter {
         text.push_str("\",\"data\":");
         text.push_str(&payload);
         text.push('}');
-        // Send failure just means the client disconnected — drop silently.
-        let _ = self.sender.send(text);
+        if self.max_payload_bytes.is_some_and(|max| text.len() > max) {
+            tracing::warn!(
+                message_type = message_type.as_wire(),
+                bytes = text.len(),
+                "outgoing websocket message exceeded the configured limit"
+            );
+            return;
+        }
+        // Send failure just means the client disconnected or its bounded
+        // queue is full. Dropping a frame is safer than blocking a handler or
+        // allowing an unbounded queue to grow.
+        match &self.sender {
+            EmitterSender::Unbounded(sender) => {
+                let _ = sender.send(text);
+            }
+            EmitterSender::Bounded(sender) => {
+                if let Err(error) = sender.try_send(text) {
+                    tracing::debug!(%error, "could not queue outgoing websocket message");
+                }
+            }
+        }
     }
 
     pub fn emit_error(&self, message: &str, trace: &str) {
@@ -49,7 +91,10 @@ impl Emitter {
     }
 
     pub async fn closed(&self) {
-        self.sender.closed().await;
+        match &self.sender {
+            EmitterSender::Unbounded(sender) => sender.closed().await,
+            EmitterSender::Bounded(sender) => sender.closed().await,
+        }
     }
 
     pub fn progress_sink(&self) -> ProgressSink {

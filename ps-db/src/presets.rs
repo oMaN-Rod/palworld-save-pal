@@ -20,7 +20,9 @@ fn json_or_null(text: Option<String>) -> serde_json::Value {
 pub async fn get_all(
     db: &dyn crate::DbDriver,
 ) -> Result<serde_json::Map<String, serde_json::Value>, DbError> {
-    let rows = db.query("SELECT * FROM presets ORDER BY rowid", &[]).await?;
+    let rows = db
+        .query("SELECT * FROM presets ORDER BY rowid", &[])
+        .await?;
     let mut result = serde_json::Map::new();
     for row in &rows {
         let id = row.get_string("id")?;
