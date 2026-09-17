@@ -248,6 +248,8 @@ check_port() {
 # run_preflight <mode> — prints all check rows to stdout (TSV).
 run_preflight() {
     local mode="$1"
+    local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
+    local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
@@ -281,9 +283,10 @@ run_preflight() {
     check_disk_space "$mode"
     case "$mode" in
         # desktop: tauri dev starts Vite and the embedded server binds its port.
-        webapp|webhost|web|desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
-        serve|docker) check_port "$SERVER_PORT_DEFAULT" ;;
-        websuite|landing) check_port "$VITE_PORT_DEFAULT" ;;
+        webapp|webhost|web) check_port "$vite_port"; check_port "$server_port" ;;
+        desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
+        serve|docker) check_port "$server_port" ;;
+        websuite|landing) check_port "$vite_port" ;;
     esac
 }
 
@@ -457,10 +460,12 @@ cleanup_children() {
 wait_for_http() {
     # $1=url $2=label $3=timeout(sec, default 60)
     local url="$1" label="$2" timeout="${3:-60}"
+    local -a curl_tls_args=()
+    [[ "$url" == https://* ]] && curl_tls_args+=(--insecure)
     log_info "Waiting for $label at $url …"
     local i
     for ((i=0; i<timeout; i++)); do
-        if curl -sf -o /dev/null --connect-timeout 2 "$url" 2>/dev/null; then
+        if curl -sf -o /dev/null --connect-timeout 2 "${curl_tls_args[@]}" "$url" 2>/dev/null; then
             log_ok "$label is up: $url"
             return 0
         fi
@@ -468,6 +473,10 @@ wait_for_http() {
     done
     log_warn "$label did not become reachable at $url within ${timeout}s"
     return 1
+}
+
+vite_url_scheme() {
+    [[ "${VITE_HTTPS:-0}" == "1" ]] && printf 'https' || printf 'http'
 }
 
 ensure_bun_install() {
@@ -606,16 +615,20 @@ run_webapp() {
     local host="${ARG_HOST:-127.0.0.1}"
     local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
+    local vite_scheme
+    vite_scheme="$(vite_url_scheme)"
     local ws_url="${host}:${server_port}/ws"
+    [[ "$vite_scheme" == "https" ]] && ws_url="${host}:${vite_port}/ws"
     local bun cargo
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
 
     ensure_bun_install 0
     write_web_env "$ws_url"
-    banner "Dev: webapp  (${host}:${vite_port}  +  ps-server :${server_port}, localhost-tier)"
+    banner "Dev: webapp  (${vite_scheme}://${host}:${vite_port}  +  ps-server :${server_port}, localhost-tier)"
 
     local vite_pid server_pid
+    export PS_SERVER_PORT="$server_port"
     SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
     vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
@@ -625,9 +638,9 @@ run_webapp() {
             --db "$REPO_ROOT/ps-rs.db" --dev
         server_pid="$LAST_BG_PID"
     fi
-    wait_for_http "http://${host}:${vite_port}" "Vite" 60 || true
-    printf '\n%s%s  ▸ PalStudio webapp dev running:%s  %shttp://%s:%s%s\n\n' \
-        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$vite_port" "$RESET" >&2
+    wait_for_http "${vite_scheme}://${host}:${vite_port}" "Vite" 60 || true
+    printf '\n%s%s  ▸ PalStudio webapp dev running:%s  %s%s://%s:%s%s\n\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_scheme" "$host" "$vite_port" "$RESET" >&2
     printf '%s  Local tool tier — the Network page offers the port only.%s\n' "$DIM" "$RESET" >&2
     printf '%s  For full network settings: ./dev.sh --webhost%s\n' "$DIM" "$RESET" >&2
     printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
@@ -649,16 +662,20 @@ run_webhost() {
     local server_host="${ARG_HOST:-0.0.0.0}"
     local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
+    local vite_scheme
+    vite_scheme="$(vite_url_scheme)"
     local ws_url="${ARG_HOST:-127.0.0.1}:${server_port}/ws"
+    [[ "$vite_scheme" == "https" ]] && ws_url="${ARG_HOST:-127.0.0.1}:${vite_port}/ws"
     local bun cargo
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
 
     ensure_bun_install 0
     write_web_env "$ws_url"
-    banner "Dev: webhost  (${vite_host}:${vite_port}  +  ps-server :${server_port} hosted)"
+    banner "Dev: webhost  (${vite_scheme}://${vite_host}:${vite_port}  +  ps-server :${server_port} hosted)"
 
     local vite_pid server_pid
+    export PS_SERVER_PORT="$server_port"
     SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$vite_host" --port "$vite_port"
     vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
@@ -668,9 +685,9 @@ run_webhost() {
             --db "$REPO_ROOT/ps-rs.db" --dev
         server_pid="$LAST_BG_PID"
     fi
-    wait_for_http "http://${vite_host}:${vite_port}" "Vite" 60 || true
-    printf '\n%s%s  ▸ PalStudio webhost dev running:%s  %shttp://%s:%s%s\n\n' \
-        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_host" "$vite_port" "$RESET" >&2
+    wait_for_http "${vite_scheme}://${vite_host}:${vite_port}" "Vite" 60 || true
+    printf '\n%s%s  ▸ PalStudio webhost dev running:%s  %s%s://%s:%s%s\n\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_scheme" "$vite_host" "$vite_port" "$RESET" >&2
     printf '%s  Hosted tier — full Network settings (listen modes, allowlists, PIN).%s\n' "$DIM" "$RESET" >&2
     printf '%s  Default policy is still localhost-only; open the Network page to expose.%s\n' "$DIM" "$RESET" >&2
     printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
@@ -708,7 +725,8 @@ run_desktop() {
 run_websuite() {
     # The full public website from source: landing page + tool running
     # entirely in the browser (VITE_TRANSPORT=worker, wasm build).
-    local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
+    local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}" vite_scheme
+    vite_scheme="$(vite_url_scheme)"
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     ensure_bun_install 0
     ensure_wasm "${ARG_REBUILD_WASM:-0}"
@@ -718,15 +736,16 @@ run_websuite() {
     local vite_pid
     VITE_TRANSPORT=worker SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
     vite_pid="$LAST_BG_PID"
-    wait_for_http "http://${host}:${port}" "Vite (websuite)" 60 || true
-    printf '\n%s%s  ▸ PalStudio websuite dev running:%s  %shttp://%s:%s%s\n\n' \
-        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
+    wait_for_http "${vite_scheme}://${host}:${port}" "Vite (websuite)" 60 || true
+    printf '\n%s%s  ▸ PalStudio websuite dev running:%s  %s%s://%s:%s%s\n\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_scheme" "$host" "$port" "$RESET" >&2
     printf '%s  Landing-page mode (VITE_TRANSPORT=worker). Ctrl-C to stop.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$vite_pid"
 }
 
 run_landing() {
-    local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
+    local bun host="${ARG_HOST:-127.0.0.1}" port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}" vite_scheme
+    vite_scheme="$(vite_url_scheme)"
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     ensure_bun_install 0
     write_web_env ""
@@ -734,9 +753,9 @@ run_landing() {
     local vite_pid
     VITE_TRANSPORT=worker VITE_LANDING_ONLY=true SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$port"
     vite_pid="$LAST_BG_PID"
-    wait_for_http "http://${host}:${port}" "Vite (landing)" 60 || true
-    printf '\n%s%s  ▸ PalStudio landing preview:%s  %shttp://%s:%s%s\n' \
-        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$host" "$port" "$RESET" >&2
+    wait_for_http "${vite_scheme}://${host}:${port}" "Vite (landing)" 60 || true
+    printf '\n%s%s  ▸ PalStudio landing preview:%s  %s%s://%s:%s%s\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$vite_scheme" "$host" "$port" "$RESET" >&2
     printf '%s  Landing page only — WASM/server skipped (VITE_LANDING_ONLY).%s\n' "$DIM" "$RESET" >&2
     printf '%s  Buttons that load a save won'\''t work. Ctrl-C to stop.%s\n\n' "$DIM" "$RESET" >&2
     wait_on_pids "$vite_pid"

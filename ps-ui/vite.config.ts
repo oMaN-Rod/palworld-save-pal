@@ -14,6 +14,14 @@ import { paraglideUrlPatterns } from './src/lib/i18n/routingConfig.js';
 // points its webview at http://localhost:5173, which WebView2 will not load over a
 // self-signed origin.
 const useHttps = process.env.VITE_HTTPS === '1';
+const configuredServerPort = Number.parseInt(process.env.PS_SERVER_PORT ?? '5174', 10);
+const serverPort =
+	Number.isInteger(configuredServerPort) &&
+	configuredServerPort > 0 &&
+	configuredServerPort <= 65535
+		? configuredServerPort
+		: 5174;
+const backendTarget = `http://localhost:${serverPort}`;
 
 // Self-host Monaco: @monaco-editor/loader pulls the editor from jsdelivr at
 // runtime, which breaks the offline desktop app and costs a multi-MB CDN
@@ -84,14 +92,21 @@ export default defineConfig({
 		},
 		proxy: {
 			'/api': {
-				target: 'http://localhost:5174',
+				target: backendTarget,
 				changeOrigin: true
 			},
 			// The server-rendered PIN unlock page (a ps-server route, not an
 			// SPA route) — without this proxy the locked-SPA redirect 404s in dev.
 			'/network-unlock': {
-				target: 'http://localhost:5174',
+				target: backendTarget,
 				changeOrigin: true
+			},
+			// HTTPS dev pages need a same-origin secure WebSocket. Vite terminates
+			// TLS while the local ps-server stays on plain HTTP.
+			'/ws': {
+				target: backendTarget,
+				changeOrigin: true,
+				ws: true
 			}
 		}
 	},
