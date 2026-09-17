@@ -20,7 +20,7 @@ Welcome to **PalStudio** — a save file editor for Palworld that lets you modif
 For server environments or advanced users, a Docker image is available:
 
 ```bash
-docker pull ghcr.io/oman-rod/palstudio:latest
+docker pull ghcr.io/oman-rod/palworld-save-pal:latest
 ```
 
 ## Loading a Save File {.toc}

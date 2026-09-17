@@ -1,8 +1,10 @@
 # Usage: .\scripts\build-desktop.ps1 [-SkipUi]   (-SkipUi if ui_build is current)
 #
-# The portable zip runs as extract-and-run: palstudio.exe serves the bundled
-# ui_build/ and keeps its ps-rs.db alongside the exe. Requires the
-# Microsoft Edge WebView2 runtime (present on up-to-date Windows 10/11).
+# The portable zip mirrors the release workflow's standalone: launcher CLI in
+# bin\ (all verbs), desktop app in bin\palstudio-desktop.exe, plus ui_build\
+# and data\ which the unpackaged desktop app resolves from its working
+# directory. Requires the Microsoft Edge WebView2 runtime (present on
+# up-to-date Windows 10/11).
 param([switch]$SkipUi)
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $PSScriptRoot
@@ -23,6 +25,18 @@ try {
 }
 finally { Pop-Location }
 
+# tauri-cli renames the cargo output (palstudio-desktop.exe) to mainBinaryName
+# (palstudio.exe) while packaging; grab whichever spelling is on disk before
+# the launcher build claims the palstudio.exe path.
+$desktopExe = if (Test-Path "target/release/palstudio-desktop.exe") {
+    "target/release/palstudio-desktop.exe"
+} else {
+    "target/release/palstudio.exe"
+}
+
+cargo build --release --package palstudio
+if ($LASTEXITCODE -ne 0) { throw "cargo build -p palstudio failed" }
+
 $dist = Join-Path $repoRoot "dist"
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
 
@@ -31,8 +45,9 @@ Copy-Item $msi.FullName (Join-Path $dist "PalStudio-$version-windows.msi")
 
 $staging = Join-Path $dist "PalStudio"
 if (Test-Path $staging) { Remove-Item -Recurse -Force $staging }
-New-Item -ItemType Directory -Force -Path $staging | Out-Null
-Copy-Item "target/release/palstudio.exe" (Join-Path $staging "palstudio.exe")
+New-Item -ItemType Directory -Force -Path (Join-Path $staging "bin") | Out-Null
+Copy-Item "target/release/palstudio.exe" (Join-Path $staging "bin/palstudio.exe")
+Copy-Item $desktopExe (Join-Path $staging "bin/palstudio-desktop.exe")
 Copy-Item -Recurse "ui_build" (Join-Path $staging "ui_build")
 Copy-Item -Recurse "data" (Join-Path $staging "data")
 

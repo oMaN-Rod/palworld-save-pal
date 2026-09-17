@@ -1,0 +1,127 @@
+# Builds and pushes the multi-arch server image to GHCR.
+#
+#   ghcr.io/oman-rod/palworld-save-pal:{latest,1.4.2,1.4,1,sha-<git>}
+#
+# amd64 and arm64 build on their native runners (free for public repos, and
+# much faster than QEMU-emulated Rust builds), then a merge job stitches the
+# digests into one multi-arch manifest. The image is what docker-compose.yml
+# pulls, so `docker compose up -d` needs no local build.
+name: Publish Docker image
+
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - .github/workflows/docker-publish.yml
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/oman-rod/palworld-save-pal
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: build (linux/${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { arch: amd64, os: ubuntu-latest }
+          - { arch: arm64, os: ubuntu-24.04-arm }
+    steps:
+      - name: Checkout palstudio
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Push by digest only; the merge job owns the human-readable tags.
+      - name: Build and push by digest
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/${{ matrix.arch }}
+          build-args: |
+            PUBLIC_WS_URL=127.0.0.1:5174/ws
+          outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          cache-from: type=gha,scope=build-${{ matrix.arch }}
+          cache-to: type=gha,scope=build-${{ matrix.arch }},mode=max
+
+      - name: Export the digest
+        run: |
+          mkdir -p /tmp/digests
+          digest="${{ steps.build.outputs.digest }}"
+          touch "/tmp/digests/${digest#sha256:}"
+
+      - name: Upload the digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-${{ matrix.arch }}
+          path: /tmp/digests/*
+          if-no-files-found: error
+          retention-days: 1
+
+  merge:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the digests
+        uses: actions/download-artifact@v4
+        with:
+          path: /tmp/digests
+          pattern: digests-*
+          merge-multiple: true
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Release tags become :1.4.2 / :1.4 / :1 / :latest (prereleases never
+      # claim :latest); main pushes become :main and :sha-<short>.
+      - name: Compute the tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=ref,event=branch
+            type=sha,prefix=sha-
+
+      - name: Create the multi-arch manifest
+        working-directory: /tmp/digests
+        run: |
+          sources=$(ls -1 | sed "s|^|${{ env.IMAGE }}@sha256:|" | tr '\n' ' ')
+          echo "merging into tags: ${{ steps.meta.outputs.tags }}"
+          echo "from sources: $sources"
+          while IFS= read -r tag; do
+            [ -n "$tag" ] || continue
+            docker buildx imagetools create --tag "$tag" $sources
+          done <<EOF
+          ${{ steps.meta.outputs.tags }}
+          EOF
+          docker buildx imagetools inspect "${{ env.IMAGE }}:${{ steps.meta.outputs.version }}"

@@ -3,6 +3,8 @@ name = "ps-plugin"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio Lua plugin runtime and hook system"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
 autobenches = false
 
 [dependencies]

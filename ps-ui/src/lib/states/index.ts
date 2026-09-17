@@ -12,5 +12,6 @@ export * from './rwbyState.svelte';
 export * from './toastState.svelte';
 export * from './upsState.svelte';
 export * from './serverState.svelte';
+export * from './networkState.svelte';
 export * from './signalState.svelte';
 export * from './websocketState.svelte';

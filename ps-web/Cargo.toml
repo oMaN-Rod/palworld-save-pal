@@ -1,5 +1,7 @@
 [package]
 name = "ps-web"
+# wasm browser module built by wasm-pack in deploy-web.yml; not a registry artifact.
+publish = false
 version.workspace = true
 edition.workspace = true
 license.workspace = true

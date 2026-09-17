@@ -86,6 +86,12 @@ export default defineConfig({
 			'/api': {
 				target: 'http://localhost:5174',
 				changeOrigin: true
+			},
+			// The server-rendered PIN unlock page (a ps-server route, not an
+			// SPA route) — without this proxy the locked-SPA redirect 404s in dev.
+			'/network-unlock': {
+				target: 'http://localhost:5174',
+				changeOrigin: true
 			}
 		}
 	},

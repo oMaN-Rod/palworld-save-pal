@@ -4,7 +4,7 @@
 # Does NOT auto-install anything (except the opt-in -InstallWasm): on a missing
 # or wrong tool it prints the exact command to fix it and exits non-zero.
 # Preflight does not verify the WebView2/MSVC build tools needed by
-# -Desktop/-BuildDesktop. Defaults to -Web; run `.\dev.ps1 -Help` for the
+# -Desktop/-BuildDesktop. Defaults to -Webapp; run `.\dev.ps1 -Help` for the
 # full flag list.
 #
 # Keep the UTF-8 BOM: without it 5.1 reads the file as ANSI and fails to parse.
@@ -15,7 +15,8 @@
 # param() MUST be the first executable statement in a .ps1. Everything else
 # (the comment header above, then blank lines/comments) is allowed before it.
 param(
-    [switch]$Web, [switch]$Desktop, [switch]$Webapp, [switch]$Landing,
+    [switch]$Web, [switch]$Webapp, [switch]$Webhost, [switch]$Websuite,
+    [switch]$Desktop, [switch]$Landing,
     [switch]$Docker, [switch]$Serve, [switch]$Signal,
     [switch]$BuildDesktop, [switch]$BuildAppImage, [switch]$BuildWeb, [switch]$Build, [switch]$Amity,
     [switch]$Check, [switch]$InstallWasm, [switch]$Json,
@@ -290,9 +291,11 @@ function Check-Repo() {
 function Check-DiskSpace($mode) {
     $min = switch ($mode) {
         "web"           { 800 }
+        "webapp"        { 800 }
+        "webhost"       { 800 }
         "desktop"       { 2500 }
         "build"         { 3500 }
-        "webapp"        { 1500 }
+        "websuite"      { 1500 }
         "landing"       { 300 }
         "docker"        { 2500 }
         "signal"        { 3000 }
@@ -345,14 +348,14 @@ function Run-Preflight($mode) {
     }
     $results.Add((Check-Bun)) | Out-Null
 
-    $needsRust = $mode -in @("web","desktop","serve","webapp","build","build-desktop","build-web","docker","signal")
-    $needsStrictRust = $mode -in @("desktop","serve","web","build","build-desktop","signal")
+    $needsRust = $mode -in @("web","webapp","webhost","desktop","serve","build","build-desktop","build-web","docker","signal")
+    $needsStrictRust = $mode -in @("desktop","serve","web","webapp","webhost","build","build-desktop","signal")
     if ($needsRust) { $results.Add((Check-Cargo $needsStrictRust)) | Out-Null }
 
     if ($mode -in @("desktop","build-desktop","signal")) {
         $results.Add((Check-TauriCli $true)) | Out-Null
     }
-    if ($mode -in @("webapp","build-web","signal")) {
+    if ($mode -in @("websuite","build-web","signal")) {
         $results.Add((Check-WasmPack $true)) | Out-Null
         $results.Add((Check-WasmTarget $true)) | Out-Null
     }
@@ -364,12 +367,12 @@ function Run-Preflight($mode) {
     if ($repo) { $results.Add($repo) | Out-Null }
     $results.Add((Check-DiskSpace $mode)) | Out-Null
 
-    if ($mode -in @("web","desktop")) {
+    if ($mode -in @("web","webapp","webhost","desktop")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
     } elseif ($mode -in @("serve","docker")) {
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
-    } elseif ($mode -in @("webapp","landing")) {
+    } elseif ($mode -in @("websuite","landing")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
     } elseif ($mode -eq "signal") {
         $results.Add((Check-Port $(if ($BrokerPort) { $BrokerPort } else { $BrokerPortDefault }))) | Out-Null
@@ -840,18 +843,21 @@ function Run-InstallWasm() {
             Write-Host "  It's at ~/.cargo/bin/wasm-pack." -ForegroundColor DarkGray
             Write-Host "  Open a NEW terminal (so PATH refreshes), then verify:" -ForegroundColor DarkGray
             Write-Host "    wasm-pack --version" -ForegroundColor DarkGray
-            Write-Host "  Then re-run: .\dev.ps1 -Check -Webapp" -ForegroundColor White
+            Write-Host "  Then re-run: .\dev.ps1 -Check -Websuite" -ForegroundColor White
             return
         }
         Log-Ok "wasm-pack installed ($(probe_version 'wasm-pack' @('--version')))."
     }
 
     Write-Host ""
-    Banner "Verifying  (-Check -Webapp)"
-    Report-Preflight "webapp" $false | Out-Null
+    Banner "Verifying  (-Check -Websuite)"
+    Report-Preflight "websuite" $false | Out-Null
 }
 
-function Run-Web {
+function Run-Webapp {
+    # The tool-only SPA against a hand-launched LOCAL webapp server: the
+    # network policy is clamped to localhost (the Network page offers just
+    # the port). Use -Webhost for the full hosted policy.
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
     $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
     $serverPort = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
@@ -863,7 +869,7 @@ function Run-Web {
 
     Ensure-BunInstall $false
     Write-WebEnv $wsUrl
-    Banner "Dev: web  (${h}:$vitePort  +  ps-server :$serverPort)"
+    Banner "Dev: webapp  (${h}:$vitePort  +  ps-server :$serverPort, localhost-tier)"
 
     $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
         Cmd=@($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") })
@@ -879,7 +885,7 @@ function Run-Web {
     if ($mux -and $components.Count -ge 2) {
         Mux-Launch $mux $components
         Write-Host ""
-        Write-Host "  ▸ PalStudio web dev:  http://${h}:$vitePort" -ForegroundColor Cyan
+        Write-Host "  ▸ PalStudio webapp dev:  http://${h}:$vitePort" -ForegroundColor Cyan
         Mux-Attach $mux
         return
     }
@@ -891,7 +897,64 @@ function Run-Web {
     }
     Wait-ForHttp "http://${h}:$vitePort" "Vite" 60 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PalStudio web dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
+    Write-Host "  ▸ PalStudio webapp dev running:  http://${h}:$vitePort" -ForegroundColor Cyan
+    Write-Host "  Local tool tier — the Network page offers the port only." -ForegroundColor DarkGray
+    Write-Host "  For full network settings: .\dev.ps1 -Webhost" -ForegroundColor DarkGray
+    Write-Host "  Ctrl-C to stop. dev.ps1 restores ps-ui/.env on exit." -ForegroundColor DarkGray
+    Write-Host ""
+    if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
+}
+
+function Run-Webhost {
+    # The SERVER edition from source: same children as -Webapp, but the
+    # server runs hosted (--hosted) so the full network policy applies and
+    # the Network page is unrestricted (listen modes, allowlists, PIN, ...).
+    # The stored policy still defaults to localhost-only; open the Network
+    # page to expose it to the LAN/tailnet. The server binds broadly
+    # (0.0.0.0) so a listen-mode switch needs no rebind; -HostAddr pins it.
+    $viteHost   = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
+    $serverHost = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
+    $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
+    $serverPort = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
+    $wsUrl = "$(if ($HostAddr) { $HostAddr } else { '127.0.0.1' }):$serverPort/ws"
+    $bun = Resolve-Tool "bun"
+    $cargo = Resolve-Tool "cargo"
+    if (-not $bun)   { Die "bun not found." }
+    if (-not $cargo) { Die "cargo not found." }
+
+    Ensure-BunInstall $false
+    Write-WebEnv $wsUrl
+    Banner "Dev: webhost  (${viteHost}:$vitePort  +  ps-server :$serverPort hosted)"
+
+    $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
+        Cmd=@($bun, "run", "dev:vite", "--", "--host", $viteHost, "--port", "$vitePort") })
+    if (-not $NoServer) {
+        $components += @{ Tag="ps-server"; Cwd=$RepoRoot; Env=$null
+            Cmd=@($cargo, "run", "-p", "ps-server", "--",
+                "--host", $serverHost, "--port", "$serverPort", "--hosted",
+                "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
+                "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") }
+    }
+
+    $mux = Get-Mux
+    if ($mux -and $components.Count -ge 2) {
+        Mux-Launch $mux $components
+        Write-Host ""
+        Write-Host "  ▸ PalStudio webhost dev:  http://${viteHost}:$vitePort" -ForegroundColor Cyan
+        Mux-Attach $mux
+        return
+    }
+
+    $vite = Spawn-BgTagged $components[0].Tag $components[0].Cmd $components[0].Cwd $null
+    $server = $null
+    if ($components.Count -gt 1) {
+        $server = Spawn-BgTagged $components[1].Tag $components[1].Cmd $components[1].Cwd $null
+    }
+    Wait-ForHttp "http://${viteHost}:$vitePort" "Vite" 60 | Out-Null
+    Write-Host ""
+    Write-Host "  ▸ PalStudio webhost dev running:  http://${viteHost}:$vitePort" -ForegroundColor Cyan
+    Write-Host "  Hosted tier — full Network settings (listen modes, allowlists, PIN)." -ForegroundColor DarkGray
+    Write-Host "  Default policy is still localhost-only; open the Network page to expose." -ForegroundColor DarkGray
     Write-Host "  Ctrl-C to stop. dev.ps1 restores ps-ui/.env on exit." -ForegroundColor DarkGray
     Write-Host ""
     if ($server) { Wait-OnProcs @($vite) @($server) } else { Wait-OnProcs @($vite) @() }
@@ -917,7 +980,9 @@ function Run-Desktop {
     Wait-OnProcs @($tauri) @()
 }
 
-function Run-Webapp {
+function Run-Websuite {
+    # The full public website from source: landing page + tool running
+    # entirely in the browser (VITE_TRANSPORT=worker, wasm build).
     $bun = Resolve-Tool "bun"
     if (-not $bun) { Die "bun not found." }
     $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
@@ -926,11 +991,11 @@ function Run-Webapp {
     Ensure-Wasm $RebuildWasm
     Gen-JsonManifest
     Write-WebEnv ""
-    Banner "Dev: webapp  (landing page + tool, browser-only)"
+    Banner "Dev: websuite  (landing page + tool, browser-only)"
     $vite = Spawn-BgTagged "vite" @($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$port") $UiDir @{ "VITE_TRANSPORT" = "worker" }
-    Wait-ForHttp "http://${h}:$port" "Vite (webapp)" 60 | Out-Null
+    Wait-ForHttp "http://${h}:$port" "Vite (websuite)" 60 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PalStudio webapp dev running:  http://${h}:$port" -ForegroundColor Cyan
+    Write-Host "  ▸ PalStudio websuite dev running:  http://${h}:$port" -ForegroundColor Cyan
     Write-Host "  Landing-page mode (VITE_TRANSPORT=worker). Ctrl-C to stop." -ForegroundColor DarkGray
     Write-Host ""
     Wait-OnProcs @($vite) @()
@@ -1071,13 +1136,15 @@ function Run-Signal {
 }
 
 function Run-Serve {
+    # Hosted like the real server edition (Docker CMD, `palstudio serve`,
+    # background services): full network policy, Network page unrestricted.
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     $h = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
     $port = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
-    Banner "Serve: ps-server  (${h}:$port)"
+    Banner "Serve: ps-server hosted  (${h}:$port)"
     $server = Spawn-BgTagged "ps-server" @($cargo, "run", "-p", "ps-server", "--",
-        "--host", $h, "--port", "$port",
+        "--host", $h, "--port", "$port", "--hosted",
         "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
         "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") $RepoRoot $null
     Wait-OnProcs @($server) @()
@@ -1089,14 +1156,23 @@ function Run-Docker {
     if (-not (Test-Path (Join-Path $RepoRoot "docker-compose.yml"))) {
         Die "docker-compose.yml not found at repo root."
     }
+    if (-not (Test-Path (Join-Path $RepoRoot "docker-compose.build.yml"))) {
+        Die "docker-compose.build.yml not found at repo root."
+    }
     $h = if ($HostAddr) { $HostAddr } else { (Detect-LanIp) }
     if (-not $h) { $h = "127.0.0.1" }
     $wsUrl = "${h}:$ServerPortDefault/ws"
     Banner "Docker: build + up  (PUBLIC_WS_URL=$wsUrl, port $ServerPortDefault)"
     Log-Info "Building image (first build is slow; bakes WS_URL into the SPA)…"
-    $rc = Spawn-FgTagged "docker-build" @($docker, "compose", "build", "--build-arg", "PUBLIC_WS_URL=$wsUrl") $RepoRoot $null
+    # The base compose file pulls the prebuilt GHCR image; the build override
+    # rebuilds it locally with this machine's WS_URL baked in — the same
+    # command scripts/build-docker.ps1 runs.
+    $env:PUBLIC_WS_URL = $wsUrl
+    $rc = Spawn-FgTagged "docker-build" @($docker, "compose",
+        "-f", "docker-compose.yml", "-f", "docker-compose.build.yml", "build") $RepoRoot $null
     if ($rc -ne 0) { Die "docker compose build failed." }
-    $rc = Spawn-FgTagged "docker-up" @($docker, "compose", "up", "-d") $RepoRoot $null
+    $rc = Spawn-FgTagged "docker-up" @($docker, "compose",
+        "-f", "docker-compose.yml", "-f", "docker-compose.build.yml", "up", "-d") $RepoRoot $null
     if ($rc -ne 0) { Die "docker compose up failed." }
     Log-Ok "Docker backend up — connect at http://${h}:$ServerPortDefault"
     Write-Host "  Logs: docker compose logs -f   ·   Stop: docker compose down" -ForegroundColor DarkGray
@@ -1202,16 +1278,23 @@ function Show-Usage() {
 dev.ps1 — PalStudio dev/launch/build helper (Windows).
 Runs from source; does NOT auto-install tools (run -Check for a report card).
 
-mode (pick one; defaults to -Web):
-  -Web              Dev: Vite + ps-server (tool-only SPA).
+run — launch from source (pick one; defaults to -Webapp):
   -Desktop          Dev: Tauri native window + embedded server.
-  -Webapp           Dev: landing page + tool (VITE_TRANSPORT=worker).
+  -Webapp           Dev: Vite + ps-server — the tool-only SPA against a local
+                    server (localhost-clamped; Network page = port only).
+                    Alias: -Web (the old name).
+  -Webhost          Dev: Vite + ps-server --hosted — the server edition:
+                    full Network page (listen modes, allowlists, PIN).
+  -Websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   -Landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
-  -Docker           Build & run the self-build Docker image.
-  -Serve            Run only the Rust ps-server.
+  -Docker           Build & run the self-build Docker image (compose).
+  -Serve            Run only the Rust ps-server, hosted like the real server
+                    edition (Docker CMD / `palstudio serve`).
   -Signal           Dev: PalStudio Signal loop — broker (wrangler) + desktop (Tauri)
                     + web site on :5175, advertised on the LAN IP so phones
                     can pair. Components whose port is taken are skipped.
+
+build — production artifacts:
   -BuildDesktop     Production desktop build → dist/.
   -BuildAppImage    Linux only; from Windows run ./dev.sh --build-appimage in WSL.
   -BuildWeb         Production web build (landing page) → ui_build/.
@@ -1225,7 +1308,7 @@ options:
   -Check            Run only the preflight for the selected mode, then exit.
                     Combine with a mode flag (e.g. -Check -Desktop).
   -InstallWasm      Install the WASM toolchain (wasm32 target + wasm-pack).
-  -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker);
+  -HostAddr <ip>    Host/IP bind or WS_URL host (-Webapp/-Webhost/-Serve/-Docker);
                     LAN IP to advertise (-Signal, auto-detected by default).
   -VitePort <p>     Vite port (default 5173).
   -ServerPort <p>   ps-server port (default 5174).
@@ -1237,13 +1320,13 @@ options:
                     fail if the broker isn't minting, and print the
                     /signal?relay=1 forced-relay test URL. Plain -Signal already
                     reports TURN status but never fails on it.
-  -NoServer         (-Web) skip ps-server (Vite only).
+  -NoServer         (-Webapp/-Webhost) skip ps-server (Vite only).
   -SkipCheck        Skip the preflight (advanced).
   -NoInstall        Skip bun install if node_modules exists.
   -NoMux            Run components inline instead of in psmux panes. Modes
-                    that start several components (-Web, -Signal) use psmux
-                    when it is installed: one pane each, session "ps".
-  -RebuildWasm      (-Webapp/-BuildWeb) force wasm-pack rebuild.
+                    that start several components (-Webapp, -Webhost, -Signal)
+                    use psmux when it is installed: one pane each, session "ps".
+  -RebuildWasm      (-Websuite/-BuildWeb) force wasm-pack rebuild.
   -GameDir <path>   (-Amity) Palworld install dir (…\steamapps\common\Palworld)
                     when Steam auto-detection does not find it.
   -AmityWorkspace <path>  (-Amity) the UE4SS CMake workspace (default: an
@@ -1271,8 +1354,10 @@ if ($BuildAppImage) {
 }
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
+        elseif ($Webhost)     { "webhost" }
+        elseif ($Websuite)    { "websuite" }
+        elseif ($Webapp -or $Web) { "webapp" }
         elseif ($Desktop)     { "desktop" }
-        elseif ($Webapp)      { "webapp" }
         elseif ($Landing)     { "landing" }
         elseif ($Docker)      { "docker" }
         elseif ($Serve)       { "serve" }
@@ -1281,7 +1366,7 @@ $mode = if ($ForceCheckMode) { $ForceCheckMode }
         elseif ($BuildWeb)    { "build-web" }
         elseif ($Build)       { "build" }
         elseif ($Amity)       { "amity" }
-        else                  { "web" }
+        else                  { "webapp" }
 
 if ($InstallWasm) { Run-InstallWasm; return }
 
@@ -1337,9 +1422,10 @@ function Invoke-WithCleanup([scriptblock]$body) {
 
 Invoke-WithCleanup {
     switch ($mode) {
-        "web"           { Run-Web }
-        "desktop"       { Run-Desktop }
         "webapp"        { Run-Webapp }
+        "webhost"       { Run-Webhost }
+        "websuite"      { Run-Websuite }
+        "desktop"       { Run-Desktop }
         "landing"       { Run-Landing }
         "docker"        { Run-Docker }
         "serve"         { Run-Serve }

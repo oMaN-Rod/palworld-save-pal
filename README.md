@@ -32,7 +32,47 @@ PalStudio is a tool for managing and analyzing save files.
 
 ## 🚀 Installation
 
-Grab the latest release from the [releases](https://github.com/oMaN-Rod/palstudio/releases) page and extract it to a folder of your choice.
+PalStudio ships through several channels — see [docs/install.md](docs/install.md)
+for details and troubleshooting.
+
+**One-line install** (desktop app; the endpoint serves the right script per
+platform and verifies checksums):
+
+```bash
+curl -fsSL https://palstudio.app/install | bash
+```
+
+```powershell
+irm https://palstudio.app/install | iex
+```
+
+On Windows the standalone zip lands under `%LOCALAPPDATA%\PalStudio` with
+the `palstudio` CLI and desktop-app shortcuts; prefer the MSI with
+`$env:PALSTUDIO_MSI = '1'` before the `iex`. Direct downloads (MSI, zip,
+dmg, AppImage, deb) stay available on the
+[releases](https://github.com/oMaN-Rod/palworld-save-pal/releases) page.
+
+**Server / headless** (prebuilt bundle with launcher + desktop app + web UI +
+game data — asks for standalone vs background service on interactive
+terminals, and seeds the [network policy](docs/install.md#network-policy-all-editions-incl-docker)):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/main/scripts/install-server.sh | sh
+```
+
+```powershell
+irm https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/main/scripts/install-server.ps1 | iex
+```
+
+**From source** (Rust toolchains; the binary provisions its UI/game data on
+first run):
+
+```bash
+cargo install --git https://github.com/oMaN-Rod/palworld-save-pal palstudio
+palstudio   # → http://127.0.0.1:5174
+```
+
+**Docker** — see [🐳 Docker](#-docker) below (`docker compose up -d`).
 
 ## 🎮 Usage
 
@@ -52,54 +92,40 @@ supported within the same tooling generation.
 
 ## 🐳 Docker
 
-To run PalStudio using Docker:
+The prebuilt multi-arch image lives on GHCR, so a compose file is all you
+need:
 
-1. Clone this repository:
+```bash
+mkdir palstudio && cd palstudio
+curl -fsSLO https://raw.githubusercontent.com/oMaN-Rod/palworld-save-pal/main/docker-compose.yml
+docker compose up -d     # → http://127.0.0.1:5174
+```
 
-   ```bash
-   git clone https://github.com/oMaN-Rod/palstudio.git
-   ```
+The published image bakes `PUBLIC_WS_URL=127.0.0.1:5174/ws`, which is right
+when the browser runs on the Docker host itself. To serve browsers on **other
+machines** (LAN self-hosting), build locally so your host IP is baked into
+the UI — either run the helper scripts, which auto-detect the IP:
 
-2. Run the build script based on your environment, these scripts capture the system IP address and set the environment variable for the svelte SPA:
+> Linux
 
-   > Linux
+```bash
+git clone https://github.com/oMaN-Rod/palworld-save-pal.git && cd palworld-save-pal
+./scripts/build-docker.sh
+```
 
-   ```bash
-   ./scripts/build-docker.sh
-   ```
+> Windows
 
-   > Windows
+```powershell
+git clone https://github.com/oMaN-Rod/palworld-save-pal.git; cd palworld-save-pal
+.\scripts\build-docker.ps1
+```
 
-   ```powershell
-   .\scripts\build-docker.ps1
-   ```
+…or do it manually with the build override:
 
-3. Or you can follow these steps:
-
-   1. Modify the `docker-compose.yml` file to set the IP/URL address of your docker host:
-
-      ```yaml
-      services:
-        backend:
-          build:
-            context: .
-            dockerfile: Dockerfile
-            args:
-              # Change this to the host:port browsers will use to reach the server
-              - PUBLIC_WS_URL=127.0.0.1:5174/ws
-          ports:
-            - "5174:5174"
-          volumes:
-            - ./data:/app/data
-            # Persists ps-rs.db (settings, presets, UPS).
-            - ./db:/app/db
-      ```
-
-   2. Build the docker container:
-
-      ```bash
-      docker compose up --build -d
-      ```
+```bash
+PUBLIC_WS_URL=192.168.1.20:5174/ws \
+  docker compose -f docker-compose.yml -f docker-compose.build.yml up -d --build
+```
 
 ## 👨‍💻 Developer Guide
 

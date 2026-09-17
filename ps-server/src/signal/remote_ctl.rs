@@ -159,6 +159,7 @@ async fn handle_envelope(
         emitter,
         blueprints,
         is_loopback: false,
+        write_allowed: true,
         attachment: Some(SessionAttachment {
             current_id,
             arc: session_arc,

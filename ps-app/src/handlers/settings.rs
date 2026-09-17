@@ -60,6 +60,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
         handle_get_settings(&mut ctx).await.unwrap();
@@ -84,6 +85,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
         let update: ps_core::dto::settings::SettingsUpdateDto =

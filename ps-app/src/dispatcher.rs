@@ -19,6 +19,11 @@ pub struct HandlerCtx<'a> {
     pub emitter: &'a Emitter,
     pub blueprints: &'a mut crate::blueprint_registry::BlueprintRegistry,
     pub is_loopback: bool,
+    /// Whether this connection's peer passes the network policy's write
+    /// allowlist. Loopback is always true. When false, only the read-only
+    /// message types in [`is_read_only`] dispatch; everything else is
+    /// refused with an error frame.
+    pub write_allowed: bool,
     pub attachment: Option<SessionAttachment<'a>>,
 }
 
@@ -74,6 +79,49 @@ impl ExtRouter for NullExtRouter {
     }
 }
 
+/// Message types a write-restricted (view-only) connection may still send.
+///
+/// Fail-closed: anything not listed — including every `MessageType` the
+/// dispatcher does not own (server management, live game editing, signal)
+/// and any type added later — requires write permission. Entries are
+/// reads/pure computations, session-scoped view loads (they choose what to
+/// look at but never mutate saves, presets, plugins or settings), and
+/// listings.
+fn is_read_only(message_type: MessageType) -> bool {
+    use MessageType::*;
+    matches!(
+        message_type,
+        // Settings / app state reads
+        GetSettings | SyncAppState | GetVersion | GetUiCommon
+        // Static game data
+        | GetActiveSkills | GetPassiveSkills | GetTechnologies | GetElements | GetItems
+        | GetMissions | GetBuildings | GetMapObjectFootprints | GetBaseStructures
+        | GetWorkSuitability | GetExpData | GetRelicData | GetFriendshipData | GetDungeons
+        | GetBosses | GetRelics | GetFastTravelPoints | GetEffigies | GetMapLayer | GetPals
+        | GetLabResearch
+        // Session-scoped view loads (mutate only this connection's session)
+        | SelectSave | SelectGamepassSave | LoadZipFile | LoadSourceSave | UnloadSourceSave
+        | GameSelectInstance | LoadServerSave
+        // Reads of loaded data
+        | RequestPlayerDetails | RequestGuildDetails | GetPalSummaries | GetOverviewStats
+        | GetUpsPals | GetUpsAllFilteredIds | GetUpsStats | GetUpsCollections | GetUpsTags
+        | RequestGps | GetSourcePlayers | GetRawData | GetWorldOption | DownloadSaveFile
+        // Pure computations
+        | ConvertSteamId | BreedingDirectChild | BreedingDirectPartners | BreedingDirectParents
+        | BreedingChain | ValidateBlueprintPlacement
+        // Listings & read-only filesystem scans
+        | ScanGamepassSaves | ListLocalSaves | ListBlueprints | RequestBlueprintGeometry
+        | ListPlugins | ListPluginEntities | GetPlugin | CheckPluginSyntax
+        | CheckPluginManifest | GetApiDefinition | GetEditorTier
+        // Game-server management reads
+        | ListServers | GetServer | GetServerStats | ListServerMods | DetectWorkshopDir
+        | GameStatus | GamePals | GamePalDetail | GamePlayers | GameGuilds | GameGuild
+        | GameGuildContainers | GameInstances | GameBasePals | GameInventory | GameCapabilities
+        // Live-bridge subscriptions & signal status
+        | SubscribeLive | SignalStatus | SignalListDevices
+    )
+}
+
 /// Wire contract: unknown/unrouted type → warn log, nothing sent; handler
 /// `Err` or panic → `error` message. Never returns an error itself — the
 /// connection loop and socket always survive.
@@ -82,6 +130,19 @@ pub async fn dispatch(envelope: Envelope, mut ctx: HandlerCtx<'_>) {
         tracing::warn!(message_type = %envelope.message_type, "invalid message type");
         return;
     };
+
+    if !ctx.write_allowed && !is_read_only(message_type) {
+        tracing::warn!(
+            message_type = message_type.as_wire(),
+            "refused write from a view-only network peer"
+        );
+        ctx.emitter.emit_error(
+            "read-only access: this connection's IP is not in the write allowlist \
+             (see Settings → Network)",
+            "network policy",
+        );
+        return;
+    }
 
     let emitter = ctx.emitter;
     let routed = catch_handler_panic(
@@ -565,6 +626,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
@@ -583,6 +645,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
@@ -601,6 +664,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
@@ -626,6 +690,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
@@ -645,11 +710,87 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
         .await;
         assert_eq!(test.next_frame_json()["type"], "get_settings");
+    }
+
+    #[tokio::test]
+    async fn write_gate_refuses_mutations_for_view_only_peers() {
+        let mut test = TestContext::new(|_| {}).await;
+        dispatch(
+            envelope("update_settings", serde_json::json!({"language": "en"})),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
+                is_loopback: false,
+                write_allowed: false,
+                attachment: None,
+            },
+        )
+        .await;
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "error");
+        assert!(
+            frame["data"]["message"]
+                .as_str()
+                .unwrap()
+                .contains("read-only access"),
+            "expected the read-only refusal, got {frame:?}"
+        );
+        test.assert_no_more_frames();
+    }
+
+    #[tokio::test]
+    async fn write_gate_still_serves_reads_to_view_only_peers() {
+        let mut test = TestContext::new(|_| {}).await;
+        dispatch(
+            envelope("get_settings", serde_json::Value::Null),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
+                is_loopback: false,
+                write_allowed: false,
+                attachment: None,
+            },
+        )
+        .await;
+        assert_eq!(test.next_frame_json()["type"], "get_settings");
+        test.assert_no_more_frames();
+    }
+
+    #[tokio::test]
+    async fn write_gate_fail_closes_on_unlisted_types() {
+        // start_server is owned by the ext router; anything the read
+        // whitelist does not list must require write permission.
+        let mut test = TestContext::new(|_| {}).await;
+        dispatch(
+            envelope("start_server", serde_json::json!({"id": "x"})),
+            HandlerCtx {
+                session: &mut test.session,
+                app: &test.app,
+                emitter: &test.emitter,
+                blueprints: &mut test.blueprints,
+                is_loopback: false,
+                write_allowed: false,
+                attachment: None,
+            },
+        )
+        .await;
+        let frame = test.next_frame_json();
+        assert_eq!(frame["type"], "error");
+        assert!(frame["data"]["message"]
+            .as_str()
+            .unwrap()
+            .contains("read-only access"));
+        test.assert_no_more_frames();
     }
 
     #[tokio::test]
@@ -666,6 +807,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )
@@ -713,6 +855,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             },
         )

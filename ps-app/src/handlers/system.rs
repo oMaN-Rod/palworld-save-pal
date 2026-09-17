@@ -71,6 +71,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();
@@ -196,6 +197,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
         handle_sync_app_state(&mut ctx).await.unwrap();

@@ -4,11 +4,13 @@ pub mod bridge_handlers;
 pub mod bridge_instances_handlers;
 pub mod local_saves_handlers;
 pub mod lsp_service;
+pub mod network;
 #[cfg(feature = "desktop")]
 pub mod rfd_dialogs;
 pub mod router;
 pub mod server_ext;
 pub mod servers_handlers;
+pub mod service_control;
 pub mod services;
 pub mod signal;
 pub mod signal_handlers;
@@ -18,7 +20,7 @@ pub mod ws;
 
 pub use ps_app::{
     blueprint_registry, desktop_dialogs, dispatcher, emitter, envelope, handler_error, handlers,
-    messages, AppConfig, AppState, SessionStore, SharedSession,
+    messages, network_policy, AppConfig, AppState, SessionStore, SharedSession,
 };
 
 use std::net::{IpAddr, SocketAddr};
@@ -61,21 +63,30 @@ fn adopt_legacy_db_file(db_path: &Path) {
 
 #[derive(Debug, Clone)]
 pub struct ServerConfig {
-    /// Web default 0.0.0.0; desktop 127.0.0.1.
+    /// Web default 0.0.0.0; desktop 127.0.0.1. Listen MODES are enforced
+    /// per-peer (see ps-network), so this stays the raw bind address.
     pub host: IpAddr,
-    pub port: u16,
+    /// Port override (CLI flag, install script, desktop app). `None` defers
+    /// to the network policy's configured port so the in-app Network page
+    /// can change it without fighting the command line.
+    pub port: Option<u16>,
     pub ui_dir: PathBuf,
     /// Directory holding "json/" with the game data.
     pub data_dir: PathBuf,
     pub db_path: PathBuf,
     /// Enables native file dialogs and the local folder/browser handlers.
     pub desktop_mode: bool,
+    /// A network-facing context (`serve`/`host` verb, service, container):
+    /// full network policy. `false` marks a hand-launched local webapp,
+    /// which is hard-clamped to localhost with only the port editable.
+    pub hosted: bool,
 }
 
 pub struct ServerHandle {
     pub addr: SocketAddr,
     pub app: Arc<AppState>,
     pub services: Arc<crate::services::ServerServices>,
+    pub network: Arc<crate::network::NetworkRuntime>,
     /// Subscriber on `AppState::live_connections`, seeded at 0 before any
     /// connection is accepted, so tests can await connection teardown instead
     /// of sleeping.
@@ -85,6 +96,8 @@ pub struct ServerHandle {
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
     instance_reconciler_cancel: tokio_util::sync::CancellationToken,
     instance_reconciler_task: tokio::task::JoinHandle<()>,
+    restart_flag: Arc<std::sync::atomic::AtomicBool>,
+    exit_flag: Arc<std::sync::atomic::AtomicBool>,
 }
 
 impl ServerHandle {
@@ -102,6 +115,59 @@ impl ServerHandle {
     pub async fn wait(self) {
         let _ = self.serve_task.await;
     }
+
+    /// True when the network policy changed the port and the caller should
+    /// rebuild the listener (in-process "restart").
+    pub fn restart_requested(&self) -> bool {
+        self.restart_flag.load(std::sync::atomic::Ordering::SeqCst)
+    }
+
+    /// Waits for the listener to end, then tears down services. The reason
+    /// tells main loops whether to rebind (port change), exit (runtime-mode
+    /// switch), or simply finish (external shutdown).
+    pub async fn wait_or_restart(self) -> ListenerExit {
+        let ServerHandle {
+            app: _,
+            addr: _,
+            services,
+            network: _,
+            live_connections: _,
+            _live_bus_keepalive: _,
+            shutdown_sender,
+            serve_task,
+            instance_reconciler_cancel,
+            instance_reconciler_task,
+            restart_flag,
+            exit_flag,
+        } = self;
+        // The listener's task is the lifecycle clock: it ends on graceful
+        // shutdown, a Network-page port change, or a runtime-mode switch.
+        let _ = serve_task.await;
+        let reason = if exit_flag.load(std::sync::atomic::Ordering::SeqCst) {
+            ListenerExit::ExitRequested
+        } else if restart_flag.load(std::sync::atomic::Ordering::SeqCst) {
+            ListenerExit::RebindRequested
+        } else {
+            ListenerExit::Stopped
+        };
+        instance_reconciler_cancel.cancel();
+        let _ = instance_reconciler_task.await;
+        services.bridge.shutdown().await;
+        services.signal.lock().await.shutdown().await;
+        let _ = shutdown_sender.send(());
+        reason
+    }
+}
+
+/// Why the listener ended — see [`ServerHandle::wait_or_restart`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ListenerExit {
+    /// External shutdown (ServerHandle::shutdown or signal): stop cleanly.
+    Stopped,
+    /// The Network page changed the port: rebuild the listener.
+    RebindRequested,
+    /// A runtime-mode switch (service_control): exit without rebinding.
+    ExitRequested,
 }
 
 const INSTANCE_RECONCILE_INTERVAL_ENV: &str = "PS_BRIDGE_RECONCILE_INTERVAL_MS";
@@ -159,8 +225,7 @@ pub async fn start_server_with(
         .map(|dir| dir.join("psp.db"))
         .unwrap_or_else(|| std::path::PathBuf::from("psp.db"));
     let pal_data_validator = |value: &serde_json::Value| -> Result<serde_json::Value, String> {
-        let dto =
-            ps_core::dto::pal::PalDto::from_json_lenient(value).map_err(|e| e.to_string())?;
+        let dto = ps_core::dto::pal::PalDto::from_json_lenient(value).map_err(|e| e.to_string())?;
         serde_json::to_value(&dto).map_err(|e| e.to_string())
     };
     match ps_db::import_legacy::import_legacy_if_needed(&db, &legacy_db_path, &pal_data_validator)
@@ -181,13 +246,49 @@ pub async fn start_server_with(
         .parent()
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("."));
+    let driver = Arc::new(ps_db::SqlxSqliteDriver::new(db));
+    // PalStudio's own network policy (listen mode/allowlists/PIN) loads
+    // before the bind so the configured port is honored; listen MODES are
+    // enforced per-request, so only a port edit needs a rebind.
+    let tier = if config.desktop_mode {
+        ps_network::NetworkTier::Desktop
+    } else if config.hosted {
+        ps_network::NetworkTier::Hosted
+    } else {
+        ps_network::NetworkTier::LocalWebapp
+    };
+    let network = Arc::new(
+        crate::network::NetworkRuntime::load(&*driver)
+            .await
+            .map_err(|error| anyhow::anyhow!("could not load network config: {error}"))?
+            .into_tier(tier),
+    );
+    // The desktop app is localhost by construction; every other context gets
+    // a loud reminder when the stored policy leaves it exposed or locked out.
+    if tier != ps_network::NetworkTier::Desktop {
+        for warning in crate::network::security_warnings(&network.effective_config()) {
+            tracing::warn!("network policy: {warning}");
+        }
+    }
+    let effective_port = config
+        .port
+        .inspect(|override_port| {
+            if *override_port != network.effective_port() {
+                tracing::info!(
+                    override_port,
+                    configured_port = network.effective_port(),
+                    "port override active; the Network page's port setting is ignored while it is set"
+                );
+            }
+        })
+        .unwrap_or_else(|| network.effective_port());
     let services = Arc::new(crate::services::ServerServices::real());
     let state = Arc::new(AppState {
         config: AppConfig {
             desktop_mode: config.desktop_mode,
         },
         game_data,
-        driver: Arc::new(ps_db::SqlxSqliteDriver::new(db)),
+        driver,
         dialogs,
         live_connections,
         live_bus,
@@ -201,6 +302,7 @@ pub async fn start_server_with(
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
         plugins: Default::default(),
+        network_policy: Some(Arc::clone(&network) as Arc<dyn ps_app::network_policy::NetworkPolicy>),
     });
     ps_app::handlers::plugins::seed_bundled_plugins(&state).await?;
     if let Err(error) = services.signal.lock().await.restore_armed(&state).await {
@@ -212,7 +314,7 @@ pub async fn start_server_with(
         crate::bridge_instances_handlers::resolve_active_target(&*state.driver).await;
     services.bridge.set_target(initial_target);
 
-    let listener = tokio::net::TcpListener::bind((config.host, config.port)).await?;
+    let listener = tokio::net::TcpListener::bind((config.host, effective_port)).await?;
     let addr = listener.local_addr()?;
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "ps-server listening");
 
@@ -224,14 +326,27 @@ pub async fn start_server_with(
     ));
 
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
-    let application = router::build_router(Arc::clone(&state), &config.ui_dir);
+    let application =
+        router::build_router(Arc::clone(&state), &config.ui_dir, Arc::clone(&network));
+    let restart_notify = Arc::clone(&network);
+    let exit_notify = Arc::clone(&network);
+    let restart_flag = network.restart_flag();
+    let exit_flag = network.exit_flag_handle();
     let serve_task = tokio::spawn(async move {
         axum::serve(
             listener,
             application.into_make_service_with_connect_info::<SocketAddr>(),
         )
-        .with_graceful_shutdown(async {
-            let _ = shutdown_receiver.await;
+        .with_graceful_shutdown(async move {
+            tokio::select! {
+                _ = shutdown_receiver => {}
+                // A port change from the Network page: end this listener so
+                // the main loop rebinds with the new configuration.
+                () = restart_notify.restart_wait() => {}
+                // A runtime-mode switch (service_control): end the listener
+                // AND let the main loop exit rather than rebind.
+                () = exit_notify.exit_wait() => {}
+            }
         })
         .await
     });
@@ -240,12 +355,15 @@ pub async fn start_server_with(
         addr,
         app: state,
         services,
+        network,
         live_connections: live_connections_rx,
         _live_bus_keepalive: live_bus_keepalive,
         shutdown_sender,
         serve_task,
         instance_reconciler_cancel,
         instance_reconciler_task,
+        restart_flag,
+        exit_flag,
     })
 }
 
@@ -263,7 +381,10 @@ mod tests {
         adopt_legacy_db_file(&db_path);
 
         assert_eq!(std::fs::read(&db_path).unwrap(), b"main");
-        assert_eq!(std::fs::read(dir.path().join(format!("{DB_FILE}-wal"))).unwrap(), b"wal");
+        assert_eq!(
+            std::fs::read(dir.path().join(format!("{DB_FILE}-wal"))).unwrap(),
+            b"wal"
+        );
         assert!(!dir.path().join(LEGACY_DB_FILE).exists());
     }
 

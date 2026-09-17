@@ -611,13 +611,19 @@ fn import_slug(name: &str) -> String {
     }
 }
 
-async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) -> Result<(), String> {
+async fn import_server_impl(
+    data: ImportServerData,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), String> {
     let emitter = ctx.emitter;
     let db = &*ctx.app.driver;
 
     let install_path = if data.install_path == "__select__" {
         if !ctx.app.config.desktop_mode {
-            emit_business_error(emitter, "Desktop mode is required to browse for a folder".to_string());
+            emit_business_error(
+                emitter,
+                "Desktop mode is required to browse for a folder".to_string(),
+            );
             return Ok(());
         }
         match ctx.app.dialogs.pick_folder(None).await {
@@ -629,7 +635,10 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
     };
 
     if !Path::new(&install_path).join("PalServer.exe").exists() {
-        emit_business_error(emitter, "PalServer.exe not found in the selected folder".to_string());
+        emit_business_error(
+            emitter,
+            "PalServer.exe not found in the selected folder".to_string(),
+        );
         return Ok(());
     }
 
@@ -649,8 +658,12 @@ async fn import_server_impl(data: ImportServerData, ctx: &mut HandlerCtx<'_>) ->
         .await
         .map_err(|error| error.to_string())?;
     let query_port = data.query_port.unwrap_or(27015);
-    let ((game_port, query_port, rest_api_port), notifications) =
-        reassign_import_ports(config.game_port, query_port, config.rest_api_port, &allocated);
+    let ((game_port, query_port, rest_api_port), notifications) = reassign_import_ports(
+        config.game_port,
+        query_port,
+        config.rest_api_port,
+        &allocated,
+    );
 
     let steamcmd_path = native_process::find_steamcmd().unwrap_or_default();
     let mut workshop_dir = data.workshop_dir.clone().unwrap_or_default();
@@ -1463,6 +1476,7 @@ pub(crate) mod test_env {
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
                 plugins: Default::default(),
+                network_policy: None,
             });
             let (emitter, receiver) = crate::emitter::Emitter::test_channel();
             Self {
@@ -1491,9 +1505,9 @@ pub(crate) mod test_env {
                 config,
                 game_data: env.app.game_data.clone(),
                 driver: env.app.driver.clone(),
-                dialogs: Arc::new(crate::desktop_dialogs::QueuedDialogProvider::new_with_folders(
-                    folders,
-                )),
+                dialogs: Arc::new(
+                    crate::desktop_dialogs::QueuedDialogProvider::new_with_folders(folders),
+                ),
                 live_connections,
                 live_bus,
                 ext: Arc::new(crate::dispatcher::NullExtRouter),
@@ -1501,6 +1515,7 @@ pub(crate) mod test_env {
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
                 plugins: Default::default(),
+                network_policy: None,
             });
             env.app = app;
             env
@@ -1513,6 +1528,7 @@ pub(crate) mod test_env {
                 emitter: &self.emitter,
                 blueprints: &mut self.blueprints,
                 is_loopback: false,
+                write_allowed: true,
                 attachment: None,
             }
         }
@@ -1744,7 +1760,9 @@ mod tests {
         assert_eq!(created["status"]["running"], true); // mock create starts it
         assert_eq!(created["player_count"], 0);
         assert!(created.get("total_players").is_none()); // create has no total_players
-        let listed = ps_db::servers::list_servers(&*env.app.driver).await.unwrap();
+        let listed = ps_db::servers::list_servers(&*env.app.driver)
+            .await
+            .unwrap();
         assert_eq!(listed.len(), 1);
         // Host mount dirs are under <cwd>/servers/alpha
         assert!(listed[0].saves_path.ends_with(&format!(
@@ -2398,6 +2416,7 @@ mod tests {
             emitter: &env.emitter,
             blueprints: &mut env.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: Some(crate::dispatcher::SessionAttachment {
                 current_id: &mut current_id,
                 arc: &mut session_arc,
@@ -2454,7 +2473,11 @@ mod tests {
     fn write_importable_install(root: &std::path::Path, option_settings: &str) -> String {
         std::fs::create_dir_all(root).unwrap();
         std::fs::write(root.join("PalServer.exe"), b"x").unwrap();
-        let cfg = root.join("Pal").join("Saved").join("Config").join("WindowsServer");
+        let cfg = root
+            .join("Pal")
+            .join("Saved")
+            .join("Config")
+            .join("WindowsServer");
         std::fs::create_dir_all(&cfg).unwrap();
         std::fs::write(
             cfg.join("PalWorldSettings.ini"),
@@ -2502,14 +2525,19 @@ mod tests {
         // Non-destructive: we did not rewrite the ini (custom key + original port intact).
         let ini = std::fs::read_to_string(
             install_dir
-                .join("Pal").join("Saved").join("Config").join("WindowsServer")
+                .join("Pal")
+                .join("Saved")
+                .join("Config")
+                .join("WindowsServer")
                 .join("PalWorldSettings.ini"),
         )
         .unwrap();
         assert!(ini.contains("MyCustomKey=42"));
         assert!(ini.contains("PublicPort=9911"));
 
-        let listed = ps_db::servers::list_servers(&*env.app.driver).await.unwrap();
+        let listed = ps_db::servers::list_servers(&*env.app.driver)
+            .await
+            .unwrap();
         assert_eq!(listed.len(), 1);
         assert_eq!(listed[0].server_type, "native");
         assert!(listed[0].pid.is_none());
@@ -2541,11 +2569,16 @@ mod tests {
     async fn import_server_duplicate_install_path_errors() {
         let mut env = TestEnv::new().await;
         let install_dir = env._scratch.path().join("Dup");
-        let install = write_importable_install(&install_dir, "ServerName=\"Dup\",PublicPort=9921,RESTAPIPort=9922");
+        let install = write_importable_install(
+            &install_dir,
+            "ServerName=\"Dup\",PublicPort=9921,RESTAPIPort=9922",
+        );
         let mut existing = docker_new_server("dup");
         existing.server_type = "native".to_string();
         existing.install_path = install.clone();
-        ps_db::servers::create_server(&*env.app.driver, existing).await.unwrap();
+        ps_db::servers::create_server(&*env.app.driver, existing)
+            .await
+            .unwrap();
 
         let data = ImportServerData {
             install_path: install.clone(),
@@ -2558,7 +2591,10 @@ mod tests {
         handle_import_server(data, &mut ctx).await.unwrap();
         let messages = env.drain();
         assert_eq!(messages[0]["type"], "error");
-        assert_eq!(messages[0]["data"]["message"], "This server is already registered");
+        assert_eq!(
+            messages[0]["data"]["message"],
+            "This server is already registered"
+        );
     }
 
     #[tokio::test]
@@ -2568,7 +2604,9 @@ mod tests {
         occupant.game_port = 9911;
         occupant.query_port = 27015;
         occupant.rest_api_port = 9912;
-        ps_db::servers::create_server(&*env.app.driver, occupant).await.unwrap();
+        ps_db::servers::create_server(&*env.app.driver, occupant)
+            .await
+            .unwrap();
 
         let install_dir = env._scratch.path().join("Conflict");
         let install = write_importable_install(
@@ -2586,7 +2624,10 @@ mod tests {
         handle_import_server(data, &mut ctx).await.unwrap();
 
         let messages = env.drain();
-        let d = &messages.iter().find(|m| m["type"] == "import_server").unwrap()["data"];
+        let d = &messages
+            .iter()
+            .find(|m| m["type"] == "import_server")
+            .unwrap()["data"];
         assert_ne!(d["game_port"], 9911);
         assert_ne!(d["rest_api_port"], 9912);
         assert_ne!(d["query_port"], 27015);
@@ -2595,7 +2636,12 @@ mod tests {
 
         // The ini on disk still holds the ORIGINAL ports (import wrote nothing).
         let ini = std::fs::read_to_string(
-            install_dir.join("Pal").join("Saved").join("Config").join("WindowsServer").join("PalWorldSettings.ini"),
+            install_dir
+                .join("Pal")
+                .join("Saved")
+                .join("Config")
+                .join("WindowsServer")
+                .join("PalWorldSettings.ini"),
         )
         .unwrap();
         assert!(ini.contains("PublicPort=9911"));
@@ -2623,7 +2669,10 @@ mod tests {
         handle_import_server(data, &mut ctx).await.unwrap();
 
         let messages = env.drain();
-        let d = &messages.iter().find(|m| m["type"] == "import_server").unwrap()["data"];
+        let d = &messages
+            .iter()
+            .find(|m| m["type"] == "import_server")
+            .unwrap()["data"];
         assert_eq!(d["install_path"], install);
         assert_eq!(d["name"], "Chosen Name");
         assert_eq!(d["game_port"], 9931);
@@ -2640,7 +2689,10 @@ mod tests {
     #[test]
     fn public_projection_carries_no_secrets_or_paths() {
         let mut env_vars = serde_json::Map::new();
-        env_vars.insert("SECRET_KEY".to_string(), serde_json::Value::String("secret_value".to_string()));
+        env_vars.insert(
+            "SECRET_KEY".to_string(),
+            serde_json::Value::String("secret_value".to_string()),
+        );
 
         let record = ServerRecord {
             id: 42,
@@ -2674,10 +2726,26 @@ mod tests {
         let v = server_public_wire_json(&record);
         let s = v.to_string();
 
-        for banned in &["admin_password", "server_password", "hunter2", "install_path",
-                       "C:/srv", "C:/Users", "serveradmin", "env_vars", "launch_args", "pid",
-                       "steamcmd", "workshop", "saves_path", "mods_path", "logicmods_path",
-                       "nativemods_path", "SECRET_KEY", "secret_value"] {
+        for banned in &[
+            "admin_password",
+            "server_password",
+            "hunter2",
+            "install_path",
+            "C:/srv",
+            "C:/Users",
+            "serveradmin",
+            "env_vars",
+            "launch_args",
+            "pid",
+            "steamcmd",
+            "workshop",
+            "saves_path",
+            "mods_path",
+            "logicmods_path",
+            "nativemods_path",
+            "SECRET_KEY",
+            "secret_value",
+        ] {
             assert!(!s.contains(banned), "leaked: {}", banned);
         }
 

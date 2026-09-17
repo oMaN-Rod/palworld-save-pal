@@ -55,11 +55,12 @@ pub async fn start_test_server() -> TestServer {
     std::fs::create_dir_all(&ui_dir).unwrap();
     let config = ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir,
         data_dir: std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
+        hosted: false,
     };
     let handle = ps_server::start_server(config).await.unwrap();
     TestServer {
@@ -80,15 +81,14 @@ pub async fn start_desktop_test_server(
     std::fs::create_dir_all(&ui_dir).unwrap();
     let config = ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir,
         data_dir: std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: true,
+        hosted: false,
     };
-    let handle = ps_server::start_server_with(config, dialogs)
-        .await
-        .unwrap();
+    let handle = ps_server::start_server_with(config, dialogs).await.unwrap();
     TestServer {
         handle,
         _temp_dir: temp_dir,

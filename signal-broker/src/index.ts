@@ -1,6 +1,7 @@
 import { SignalRoom } from './room';
 import { validateUpgrade } from './policy';
 import { handleTurnRequest, type RateLimit } from './turn';
+import { handleInstall } from './install';
 
 export { SignalRoom };
 
@@ -23,6 +24,9 @@ export default {
 			return env.SIGNAL_ROOM.get(id).fetch(request);
 		}
 		if (url.pathname === '/signal/turn') return handleTurnRequest(request, env);
+		if (url.pathname === '/install' || url.pathname === '/install/') {
+			return handleInstall(request);
+		}
 		return env.ASSETS.fetch(request);
 	},
 } satisfies ExportedHandler<Env>;

@@ -258,13 +258,17 @@ mod tests {
     #[tokio::test]
     async fn browse_of_a_missing_path_replies_with_an_inline_error() {
         let mut test = ps_app::test_support::TestContext::new(|_| {}).await;
-        std::sync::Arc::get_mut(&mut test.app).unwrap().config.desktop_mode = true;
+        std::sync::Arc::get_mut(&mut test.app)
+            .unwrap()
+            .config
+            .desktop_mode = true;
         let mut ctx = HandlerCtx {
             session: &mut test.session,
             app: &test.app,
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
         let missing = tempfile::tempdir().unwrap().path().join("does_not_exist");
@@ -294,6 +298,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
 
@@ -303,7 +308,9 @@ mod tests {
 
         let frame = test.next_frame_json();
         assert_eq!(frame["type"], "browse_directory");
-        let error = frame["data"]["error"].as_str().expect("refusal carries data.error");
+        let error = frame["data"]["error"]
+            .as_str()
+            .expect("refusal carries data.error");
         assert!(error.to_lowercase().contains("desktop mode"));
         test.assert_no_more_frames();
     }
@@ -318,6 +325,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            write_allowed: true,
             attachment: None,
         };
 
@@ -325,7 +333,9 @@ mod tests {
 
         let frame = test.next_frame_json();
         assert_eq!(frame["type"], "list_local_saves");
-        let error = frame["data"]["error"].as_str().expect("refusal carries data.error");
+        let error = frame["data"]["error"]
+            .as_str()
+            .expect("refusal carries data.error");
         assert!(error.to_lowercase().contains("desktop mode"));
         test.assert_no_more_frames();
     }

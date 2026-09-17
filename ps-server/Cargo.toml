@@ -3,17 +3,25 @@ name = "ps-server"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio HTTP/WebSocket server: axum backend serving the web UI and save-editing API"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
 
 [features]
 # Desktop-only native file dialogs (rfd). Off by default so the server/Docker
 # build stays headless — rfd's Linux backend (ashpd) pulls wayland system libs.
 # ps-desktop enables it.
 desktop = ["dep:rfd"]
+# UPnP port mapping for the Network page (off = the toggle reports
+# "unsupported build"). On by default: ps-server only builds for native
+# targets where igd-next is harmless.
+default = ["upnp"]
+upnp = ["ps-network/upnp"]
 
 [dependencies]
 ps-app = { workspace = true }
 ps-core = { workspace = true, features = ["oodle"] }
 ps-db = { workspace = true, features = ["sqlx-driver"] }
+ps-network = { workspace = true }
 ps-plugin = { workspace = true }
 uesave = { workspace = true }
 axum = { workspace = true }
@@ -25,7 +33,7 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 anyhow = { workspace = true }
 tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter"] }
 clap = { workspace = true }
 futures = { workspace = true }
 percent-encoding = { workspace = true }

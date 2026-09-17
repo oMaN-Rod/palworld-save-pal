@@ -9,6 +9,7 @@ pub mod handlers;
 pub mod live;
 pub mod lsp;
 pub mod messages;
+pub mod network_policy;
 pub mod plugin_registry;
 
 use std::collections::{HashMap, VecDeque};
@@ -87,6 +88,10 @@ pub struct AppState {
     pub breeding_db: std::sync::OnceLock<Arc<ps_core::breeding::BreedingDB>>,
     /// Bundled plugin sources and in-flight run cancellation handles.
     pub plugins: plugin_registry::PluginRegistry,
+    /// PalStudio's own network policy (listen/allowlist/PIN). Installed by
+    /// the native server; `None` on wasm and in unit tests, where every
+    /// connection is treated as trusted.
+    pub network_policy: Option<Arc<dyn crate::network_policy::NetworkPolicy>>,
 }
 
 impl AppState {
@@ -96,7 +101,9 @@ impl AppState {
         if let Some(cached) = self.breeding_db.get() {
             return Ok(cached);
         }
-        let db = Arc::new(ps_core::breeding::BreedingDB::from_game_data(&self.game_data)?);
+        let db = Arc::new(ps_core::breeding::BreedingDB::from_game_data(
+            &self.game_data,
+        )?);
         // `set` succeeds on the first writer; on a race the cell already holds a
         // valid Arc either way, so re-fetch rather than trust this call's result.
         let _ = self.breeding_db.set(db);
@@ -219,6 +226,7 @@ pub mod test_support {
                 sessions: std::sync::Mutex::new(crate::SessionStore::default()),
                 breeding_db: Default::default(),
                 plugins: Default::default(),
+                network_policy: None,
             });
             let (sender, frames) = tokio::sync::mpsc::unbounded_channel();
             Self {

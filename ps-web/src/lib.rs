@@ -39,7 +39,9 @@ pub fn init() {
     // GameData is empty until `init_game_data`; handlers that need it before
     // then simply return empty lists.
     let app = Arc::new(AppState {
-        config: AppConfig { desktop_mode: false },
+        config: AppConfig {
+            desktop_mode: false,
+        },
         game_data: Arc::new(GameData::from_entries(Vec::new()).expect("empty game data")),
         driver: Arc::new(opfs_driver::OpfsSqlDriver),
         dialogs: Arc::new(ps_app::desktop_dialogs::NullDialogProvider),
@@ -50,6 +52,7 @@ pub fn init() {
         sessions: std::sync::Mutex::new(SessionStore::default()),
         breeding_db: Default::default(),
         plugins: Default::default(),
+        network_policy: None,
     });
     STATE.with(|s| {
         *s.borrow_mut() = Some(WebState {
@@ -298,6 +301,7 @@ async fn run_with_ctx(op: Op) -> Result<(), JsValue> {
             emitter: &emitter,
             blueprints: &mut state.blueprints,
             is_loopback: true,
+            write_allowed: true,
             attachment: Some(SessionAttachment {
                 current_id: &mut state.current_id,
                 arc: &mut state.current,

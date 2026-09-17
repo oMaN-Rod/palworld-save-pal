@@ -77,13 +77,20 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
     }
     let repo_root = repo_root()?;
     // Under `tauri dev` the webview loads Vite, so no static build is required.
+    // The install bundle names the dir `ui` (it predates the desktop app);
+    // `ui_build` is the repo checkout's spelling.
+    let bundled_ui = ["ui_build", "ui"]
+        .iter()
+        .map(|name| repo_root.join(name))
+        .find(|dir| dir.join("index.html").is_file());
     anyhow::ensure!(
-        tauri::is_dev() || repo_root.join("ui_build").join("index.html").is_file(),
-        "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p ps-desktop`, from the repo root"
+        tauri::is_dev() || bundled_ui.is_some(),
+        "no built UI found under {} (ui_build/ or ui/) — run scripts/build-ui-desktop before `cargo run -p ps-desktop`, from the repo root",
+        repo_root.display()
     );
     std::env::set_var("PS_APP_ROOT", &repo_root);
     Ok(AssetDirs {
-        ui_dir: repo_root.join("ui_build"),
+        ui_dir: bundled_ui.unwrap_or_else(|| repo_root.join("ui_build")),
         data_dir: repo_root.join("data"),
         db_path: repo_root.join("ps-rs.db"),
     })
@@ -194,11 +201,14 @@ fn main() {
 
             let server_config = ps_server::ServerConfig {
                 host: IpAddr::V4(Ipv4Addr::LOCALHOST),
-                port: SERVER_PORT,
+                // The desktop app's embedded server is fixed to its port;
+                // network settings live in the server/webapp editions.
+                port: Some(SERVER_PORT),
                 ui_dir: asset_dirs.ui_dir,
                 data_dir: asset_dirs.data_dir,
                 db_path: asset_dirs.db_path,
                 desktop_mode: true,
+                hosted: false,
             };
 
             // start_server binds the listener before returning, so once this
@@ -255,7 +265,9 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::{adopt_legacy_dir, choose_webview_url, dmabuf_disable_value, pip_path, LEGACY_IDENTIFIER};
+    use super::{
+        adopt_legacy_dir, choose_webview_url, dmabuf_disable_value, pip_path, LEGACY_IDENTIFIER,
+    };
 
     fn url(s: &str) -> tauri::Url {
         s.parse().expect("valid url")

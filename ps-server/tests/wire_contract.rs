@@ -565,11 +565,12 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("contract.db"),
         desktop_mode: false,
+        hosted: false,
     })
     .await
     .unwrap();
@@ -911,7 +912,9 @@ fn compare_raw_data_structural_errs_when_actual_is_empty_but_expected_was_not() 
 
     let error =
         compare_raw_data_structural("fixtures/tools/005_get_raw_data.json", &expected, &actual)
-            .expect_err("an unresolved Rust target the fixture recorded as resolved must be reported");
+            .expect_err(
+                "an unresolved Rust target the fixture recorded as resolved must be reported",
+            );
     assert!(
         error.contains("fixtures/tools/005_get_raw_data.json"),
         "error must name the offending fixture; got: {error}"
@@ -1857,11 +1860,12 @@ async fn list_local_saves_is_refused_without_desktop_mode() {
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: false,
+        hosted: false,
     })
     .await
     .unwrap();
@@ -1888,11 +1892,12 @@ async fn list_local_saves_response_shape_is_pinned() {
     let temp_dir = tempfile::tempdir().unwrap();
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
+        hosted: false,
     })
     .await
     .unwrap();
@@ -1930,11 +1935,12 @@ async fn browse_directory_is_refused_without_desktop_mode() {
 
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: false,
+        hosted: false,
     })
     .await
     .unwrap();
@@ -1969,11 +1975,12 @@ async fn browse_directory_response_shape_is_pinned() {
 
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
+        hosted: false,
     })
     .await
     .unwrap();
@@ -2023,11 +2030,12 @@ async fn browse_directory_of_a_missing_path_replies_with_an_inline_error() {
 
     let handle = start_server(ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir: temp_dir.path().join("ui"),
         data_dir: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
+        hosted: false,
     })
     .await
     .unwrap();

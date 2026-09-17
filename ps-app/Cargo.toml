@@ -3,6 +3,8 @@ name = "ps-app"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description = "PalStudio application services: use-cases over the save-editing core"
+repository = "https://github.com/oMaN-Rod/palworld-save-pal"
 
 [features]
 # Exposes `test_support` to downstream crates' tests (ps-server), the way

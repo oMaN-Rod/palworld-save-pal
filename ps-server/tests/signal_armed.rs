@@ -1011,11 +1011,12 @@ async fn a_desktop_left_armed_arms_itself_at_startup() {
 
     let handle = ps_server::start_server(ps_server::ServerConfig {
         host: "127.0.0.1".parse().unwrap(),
-        port: 0,
+        port: Some(0),
         ui_dir,
         data_dir: std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
         db_path,
         desktop_mode: false,
+        hosted: false,
     })
     .await
     .unwrap();

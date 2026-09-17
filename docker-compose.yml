@@ -1,13 +1,46 @@
+# PalStudio — pre-built image from GHCR. Webapp-only (no desktop mode in a
+# container); the same Network page / policy engine as the native builds.
+#
+#   docker compose up -d
+#   → http://127.0.0.1:5174
+#
+# The published image bakes PUBLIC_WS_URL=127.0.0.1:5174/ws (the browser
+# connects back to the same host that serves the page), which is correct when
+# you browse from the machine running Docker. To serve browsers on other
+# machines, build locally with your host IP baked in instead:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.build.yml up -d --build
+#
+# (scripts/build-docker.sh / .ps1 do the same and detect the IP for you.)
+#
+# Ports: change the HOST side with PALSTUDIO_PORT below — not the in-app
+# Network page, whose port edit would rebind the listener away from the
+# published mapping and strand the UI (the server warns when it happens).
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        # Change this to the host:port browsers will use to reach the server
-        - PUBLIC_WS_URL=127.0.0.1:5174/ws
+  palstudio:
+    image: ghcr.io/oman-rod/palworld-save-pal:latest
+    container_name: palstudio
+    restart: unless-stopped
     ports:
-      - "5174:5174"
+      - "${PALSTUDIO_PORT:-5174}:5174"
+    environment:
+      # In containers the environment is the operator's source of truth:
+      # these re-apply on every boot (PS_NETWORK_ENV=always), overriding the
+      # stored policy. Set them to taste; everything is also editable in the
+      # UI's Network page while the container runs.
+      PS_NETWORK_ENV: always
+      # Listen policy: localhost | lan | tailscale | wan. The default `lan`
+      # matches how containers are reached (bridge-network peers are
+      # private-range).
+      PS_LISTEN: ${PALSTUDIO_LISTEN:-lan}
+      # Optional: demand this PIN from non-loopback peers (recommended the
+      # moment you expose the port).
+      PS_PIN: ${PALSTUDIO_PIN:-}
     volumes:
-      - ./data:/app/data
-      - ./db:/app/db
+      # Only the database is stateful: the ~28 MB game-data tree ships inside
+      # the image, so never bind-mount over /app/data — that would shadow it
+      # with an empty directory.
+      - palstudio-db:/app/db
+
+volumes:
+  palstudio-db:
