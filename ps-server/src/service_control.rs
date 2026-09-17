@@ -7,10 +7,11 @@
 //! Definitions this module must stay in step with: the systemd unit and
 //! launchd plist written by install.sh, and the Scheduled Task written by
 //! install.ps1 (name `PalStudio`, agent label `app.palstudio.server`).
+use std::net::SocketAddr;
 use std::sync::Arc;
 
-use axum::extract::State;
-use axum::http::StatusCode;
+use axum::extract::{ConnectInfo, State};
+use axum::http::{HeaderMap, StatusCode};
 use axum::response::{IntoResponse, Response};
 use axum::routing::get;
 use axum::{Json, Router};
@@ -28,6 +29,9 @@ const SYSTEMD_UNIT_NAME: &str = "palstudio.service";
 const LAUNCHD_LABEL: &str = "app.palstudio.server";
 const LAUNCHD_PLIST: &str = "Library/LaunchAgents/app.palstudio.server.plist";
 const WINDOWS_TASK: &str = "PalStudio";
+const ADMIN_TOKEN_ENV: &str = "PS_ADMIN_TOKEN";
+const SERVICE_USER: &str = "palstudio";
+const SERVICE_GROUP: &str = "palstudio";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ServiceManager {
@@ -81,7 +85,7 @@ fn which_version_ok(program: &str) -> bool {
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::null())
         .status()
-        .is_ok()
+        .is_ok_and(|status| status.success())
 }
 
 fn am_root() -> bool {
@@ -135,6 +139,48 @@ fn current_args() -> Vec<String> {
     args
 }
 
+fn constant_time_equal(left: &[u8], right: &[u8]) -> bool {
+    if left.len() != right.len() {
+        return false;
+    }
+    left.iter()
+        .zip(right)
+        .fold(0u8, |difference, (a, b)| difference | (a ^ b))
+        == 0
+}
+
+/// Service-control is a local privileged control plane. Loopback alone is not
+/// an authorization boundary, so callers must also present either the
+/// in-process PIN session or a separately provisioned high-entropy token.
+fn control_authorized(
+    peer: SocketAddr,
+    headers: &HeaderMap,
+    runtime: &crate::network::NetworkRuntime,
+) -> bool {
+    if !ps_network::canonical(peer.ip()).is_loopback() {
+        return false;
+    }
+    if runtime.session_valid(headers) {
+        return true;
+    }
+    let Some(expected) = std::env::var(ADMIN_TOKEN_ENV).ok() else {
+        return false;
+    };
+    if expected.len() < 32 || expected.bytes().any(|byte| byte.is_ascii_control()) {
+        return false;
+    }
+    let Some(value) = headers.get(axum::http::header::AUTHORIZATION) else {
+        return false;
+    };
+    let Ok(value) = value.to_str() else {
+        return false;
+    };
+    let Some(provided) = value.strip_prefix("Bearer ") else {
+        return false;
+    };
+    constant_time_equal(provided.as_bytes(), expected.as_bytes())
+}
+
 fn desktop_binary_path() -> Option<std::path::PathBuf> {
     let exe = std::env::current_exe().ok()?;
     let install_dir = exe.parent()?.parent()?;
@@ -167,19 +213,25 @@ fn home_dir() -> Option<std::path::PathBuf> {
 // Service definition builders (pure — unit tested)
 // ---------------------------------------------------------------------------
 
-/// Escapes one token for a systemd `ExecStart=` line: embedded quotes are
-/// escaped with backslashes, the whole token is quoted when it contains
-/// whitespace.
-fn systemd_quote(token: &str) -> String {
+/// Quotes one token for a systemd `ExecStart=` line. Rejecting controls and
+/// specifier characters is important: unit files are not shell scripts, but
+/// systemd still interprets escapes and `%` specifiers.
+fn systemd_quote(token: &str) -> Result<String, String> {
     if token.is_empty() {
-        return String::from("\"\"");
+        return Ok(String::from("\"\""));
+    }
+    if token.chars().any(char::is_control) || token.contains('%') {
+        return Err("service arguments may not contain control characters or '%'".into());
     }
     let escaped = token.replace('\\', "\\\\").replace('"', "\\\"");
-    if escaped.contains(char::is_whitespace) {
-        format!("\"{escaped}\"")
-    } else {
-        escaped
+    Ok(format!("\"{escaped}\""))
+}
+
+fn secure_line_value(value: &str, kind: &str) -> Result<(), String> {
+    if value.is_empty() || value.chars().any(char::is_control) || value.contains('%') {
+        return Err(format!("invalid {kind} for service definition"));
     }
+    Ok(())
 }
 
 pub fn systemd_unit_contents(
@@ -187,40 +239,83 @@ pub fn systemd_unit_contents(
     args: &[String],
     working_dir: &str,
     user_unit: bool,
-) -> String {
-    let exec = std::iter::once(systemd_quote(exe))
+) -> Result<String, String> {
+    systemd_unit_contents_with_data_dir(exe, args, working_dir, working_dir, user_unit)
+}
+
+pub fn systemd_unit_contents_with_data_dir(
+    exe: &str,
+    args: &[String],
+    working_dir: &str,
+    data_dir: &str,
+    user_unit: bool,
+) -> Result<String, String> {
+    secure_line_value(exe, "executable path")?;
+    secure_line_value(working_dir, "working directory")?;
+    secure_line_value(data_dir, "data directory")?;
+    let exec = std::iter::once(Ok(systemd_quote(exe)?))
         .chain(args.iter().map(|a| systemd_quote(a)))
-        .collect::<Vec<_>>()
+        .collect::<Result<Vec<_>, _>>()?
         .join(" ");
+    let quoted_dir = systemd_quote(working_dir)?;
+    let quoted_data_dir = systemd_quote(data_dir)?;
     let install_target = if user_unit {
         "default.target"
     } else {
         "multi-user.target"
     };
-    format!(
+    let user_lines = if user_unit {
+        String::new()
+    } else {
+        format!("User={SERVICE_USER}\nGroup={SERVICE_GROUP}\n")
+    };
+    let protect_home = if user_unit { "read-only" } else { "true" };
+    Ok(format!(
         "[Unit]\nDescription=PalStudio server\nAfter=network.target\n\n\
          [Service]\nEnvironment={SERVICE_MARKER_ENV}=1\n\
+         {user_lines}\
          ExecStart={exec}\n\
          WorkingDirectory={quoted_dir}\n\
+         ReadWritePaths={quoted_data_dir}\n\
+         UMask=0077\n\
+         NoNewPrivileges=true\nPrivateTmp=true\n\
+         ProtectSystem=strict\nProtectHome={protect_home}\n\
+         ProtectKernelTunables=true\nProtectKernelModules=true\n\
+         ProtectControlGroups=true\n\
+         RestrictSUIDSGID=true\nLockPersonality=true\n\
+         PrivateDevices=true\nRestrictAddressFamilies=AF_UNIX AF_INET AF_INET6\n\
+         CapabilityBoundingSet=\n\
          Restart=on-failure\nRestartSec=5\n\n\
          [Install]\nWantedBy={install_target}\n",
-        quoted_dir = systemd_quote(working_dir)
-    )
+        exec = exec,
+        user_lines = user_lines,
+        quoted_data_dir = quoted_data_dir,
+        protect_home = protect_home,
+        install_target = install_target,
+    ))
 }
 
-fn xml_escape(value: &str) -> String {
-    value
+fn xml_escape(value: &str) -> Result<String, String> {
+    if value.chars().any(char::is_control) {
+        return Err("service XML values may not contain control characters".into());
+    }
+    Ok(value
         .replace('&', "&amp;")
         .replace('<', "&lt;")
         .replace('>', "&gt;")
+        .replace('"', "&quot;"))
 }
 
-pub fn launchd_plist_contents(exe: &str, args: &[String], working_dir: &str) -> String {
-    let mut program_args = format!("    <string>{}</string>\n", xml_escape(exe));
+pub fn launchd_plist_contents(
+    exe: &str,
+    args: &[String],
+    working_dir: &str,
+) -> Result<String, String> {
+    let mut program_args = format!("    <string>{}</string>\n", xml_escape(exe)?);
     for arg in args {
-        program_args.push_str(&format!("    <string>{}</string>\n", xml_escape(arg)));
+        program_args.push_str(&format!("    <string>{}</string>\n", xml_escape(arg)?));
     }
-    format!(
+    Ok(format!(
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
          <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n\
          <plist version=\"1.0\">\n<dict>\n\
@@ -235,9 +330,9 @@ pub fn launchd_plist_contents(exe: &str, args: &[String], working_dir: &str) -> 
          \x20 <key>StandardOutPath</key>\n\x20 <string>{log_path}</string>\n\
          \x20 <key>StandardErrorPath</key>\n\x20 <string>{log_path}</string>\n\
          </dict>\n</plist>\n",
-        working_dir = xml_escape(working_dir),
-        log_path = xml_escape(&format!("{working_dir}/palstudio.log")),
-    )
+        working_dir = xml_escape(working_dir)?,
+        log_path = xml_escape(&format!("{working_dir}/palstudio.log"))?,
+    ))
 }
 
 /// One PowerShell-single-quoted literal.
@@ -245,18 +340,48 @@ fn ps_quote(value: &str) -> String {
     format!("'{}'", value.replace('\'', "''"))
 }
 
-pub fn windows_register_command(exe: &str, args: &[String], working_dir: &str) -> Vec<String> {
+fn windows_quote_arg(value: &str) -> Result<String, String> {
+    if value.chars().any(char::is_control) {
+        return Err("Task Scheduler arguments may not contain control characters".into());
+    }
+    if value.is_empty() {
+        return Ok("\"\"".into());
+    }
+    if !value.chars().any(|ch| ch.is_whitespace() || ch == '"') {
+        return Ok(value.to_owned());
+    }
+    let mut out = String::from("\"");
+    let mut backslashes = 0usize;
+    for ch in value.chars() {
+        if ch == '\\' {
+            backslashes += 1;
+        } else if ch == '"' {
+            out.push_str(&"\\".repeat(backslashes * 2 + 1));
+            out.push('"');
+            backslashes = 0;
+        } else {
+            out.push_str(&"\\".repeat(backslashes));
+            out.push(ch);
+            backslashes = 0;
+        }
+    }
+    out.push_str(&"\\".repeat(backslashes * 2));
+    out.push('"');
+    Ok(out)
+}
+
+pub fn windows_register_command(
+    exe: &str,
+    args: &[String],
+    working_dir: &str,
+) -> Result<Vec<String>, String> {
     let argument = args
         .iter()
-        .map(|a| {
-            if a.contains(' ') {
-                format!("\"{a}\"")
-            } else {
-                a.clone()
-            }
-        })
-        .collect::<Vec<_>>()
+        .map(|a| windows_quote_arg(a))
+        .collect::<Result<Vec<_>, _>>()?
         .join(" ");
+    secure_line_value(exe, "executable path")?;
+    secure_line_value(working_dir, "working directory")?;
     let script = format!(
         "$action = New-ScheduledTaskAction -Execute {exe} -Argument {argument} -WorkingDirectory {working_dir}; \
          $trigger = New-ScheduledTaskTrigger -AtLogOn; \
@@ -270,12 +395,107 @@ pub fn windows_register_command(exe: &str, args: &[String], working_dir: &str) -
         working_dir = ps_quote(working_dir),
         task = ps_quote(WINDOWS_TASK),
     );
-    vec![
+    Ok(vec![
         "-NoProfile".into(),
         "-NonInteractive".into(),
         "-Command".into(),
         script,
-    ]
+    ])
+}
+
+fn atomic_write(path: &std::path::Path, contents: &str, mode: u32) -> Result<(), String> {
+    if let Ok(metadata) = std::fs::symlink_metadata(path) {
+        if metadata.file_type().is_symlink() || !metadata.file_type().is_file() {
+            return Err(format!(
+                "refusing to replace non-regular file {}",
+                path.display()
+            ));
+        }
+    }
+    let parent = path
+        .parent()
+        .ok_or_else(|| format!("service path has no parent: {}", path.display()))?;
+    std::fs::create_dir_all(parent)
+        .map_err(|error| format!("could not create {}: {error}", parent.display()))?;
+    let file_name = path
+        .file_name()
+        .map(|name| name.to_string_lossy().into_owned())
+        .unwrap_or_else(|| "service-definition".into());
+    let temp = parent.join(format!(".{file_name}.tmp-{}", std::process::id()));
+    let mut file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&temp)
+        .map_err(|error| format!("could not create {}: {error}", temp.display()))?;
+    use std::io::Write;
+    if let Err(error) = file
+        .write_all(contents.as_bytes())
+        .and_then(|_| file.sync_all())
+    {
+        let _ = std::fs::remove_file(&temp);
+        return Err(format!("could not write {}: {error}", temp.display()));
+    }
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        std::fs::set_permissions(&temp, std::fs::Permissions::from_mode(mode))
+            .map_err(|error| format!("could not set permissions on {}: {error}", temp.display()))?;
+    }
+    if let Err(error) = std::fs::rename(&temp, path) {
+        let _ = std::fs::remove_file(&temp);
+        return Err(format!("could not install {}: {error}", path.display()));
+    }
+    Ok(())
+}
+
+fn service_account_secure() -> bool {
+    if !cfg!(target_os = "linux") {
+        return true;
+    }
+    let Ok(output) = std::process::Command::new("getent")
+        .args(["passwd", SERVICE_USER])
+        .output()
+    else {
+        return false;
+    };
+    if !output.status.success() {
+        return false;
+    }
+    let fields = String::from_utf8_lossy(&output.stdout)
+        .trim()
+        .split(':')
+        .map(str::to_owned)
+        .collect::<Vec<_>>();
+    if fields.len() < 7 || fields[0] != SERVICE_USER || fields[2] == "0" {
+        return false;
+    }
+    if !matches!(fields[6].as_str(), "/usr/sbin/nologin" | "/sbin/nologin") {
+        return false;
+    }
+    let Ok(group) = std::process::Command::new("getent")
+        .args(["group", SERVICE_GROUP])
+        .output()
+    else {
+        return false;
+    };
+    if !group.status.success() {
+        return false;
+    }
+    String::from_utf8_lossy(&group.stdout)
+        .trim()
+        .split(':')
+        .nth(2)
+        .and_then(|gid| gid.parse::<u32>().ok())
+        .is_some_and(|gid| gid != 0)
+}
+
+fn data_dir_from_args(args: &[String], fallback: &str) -> String {
+    args.windows(2)
+        .find(|pair| pair[0] == "--db")
+        .and_then(|pair| std::path::Path::new(&pair[1]).parent())
+        .map(|path| path.to_string_lossy().into_owned())
+        .filter(|path| !path.is_empty())
+        .unwrap_or_else(|| fallback.to_owned())
 }
 
 // ---------------------------------------------------------------------------
@@ -334,6 +554,7 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
         .into_owned();
     let args = current_args();
     let workdir = install_dir().to_string_lossy().into_owned();
+    let data_dir = data_dir_from_args(&args, &workdir);
 
     match manager {
         ServiceManager::SystemdUser => {
@@ -342,12 +563,8 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
             };
             let unit_dir = home.join(".config/systemd/user");
             let unit_path = unit_dir.join(SYSTEMD_UNIT_NAME);
-            std::fs::create_dir_all(&unit_dir).map_err(|e| e.to_string())?;
-            std::fs::write(
-                &unit_path,
-                systemd_unit_contents(&exe, &args, &workdir, true),
-            )
-            .map_err(|e| e.to_string())?;
+            let unit = systemd_unit_contents_with_data_dir(&exe, &args, &workdir, &data_dir, true)?;
+            atomic_write(&unit_path, &unit, 0o600)?;
             run(&["systemctl", "--user", "daemon-reload"])?;
             // --now starts immediately; while this process still holds the
             // port the unit enters its restart backoff and takes over the
@@ -355,12 +572,19 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
             run(&["systemctl", "--user", "enable", "--now", SYSTEMD_UNIT_NAME])
         }
         ServiceManager::SystemdSystem => {
+            if !am_root() {
+                return Err("system service installation requires root".into());
+            }
+            if !service_account_secure() {
+                return Err(format!(
+                    "required locked service account '{}' is missing; install-server.sh must create it first",
+                    SERVICE_USER
+                ));
+            }
             let unit_path = std::path::Path::new("/etc/systemd/system").join(SYSTEMD_UNIT_NAME);
-            std::fs::write(
-                &unit_path,
-                systemd_unit_contents(&exe, &args, &workdir, false),
-            )
-            .map_err(|e| e.to_string())?;
+            let unit =
+                systemd_unit_contents_with_data_dir(&exe, &args, &workdir, &data_dir, false)?;
+            atomic_write(&unit_path, &unit, 0o644)?;
             run(&["systemctl", "daemon-reload"])?;
             run(&["systemctl", "enable", "--now", SYSTEMD_UNIT_NAME])
         }
@@ -369,10 +593,8 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
                 return Err("HOME is not set".into());
             };
             let plist_path = home.join(LAUNCHD_PLIST);
-            std::fs::create_dir_all(plist_path.parent().expect("plist has a parent"))
-                .map_err(|e| e.to_string())?;
-            std::fs::write(&plist_path, launchd_plist_contents(&exe, &args, &workdir))
-                .map_err(|e| e.to_string())?;
+            let plist = launchd_plist_contents(&exe, &args, &workdir)?;
+            atomic_write(&plist_path, &plist, 0o600)?;
             // Out with any previous agent, in with the new definition.
             let uid = nix_uid().to_string();
             let _ = run(&[
@@ -389,7 +611,7 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
             ])
         }
         ServiceManager::TaskScheduler => {
-            let command = windows_register_command(&exe, &args, &workdir);
+            let command = windows_register_command(&exe, &args, &workdir)?;
             let referenced: Vec<&str> = command.iter().map(String::as_str).collect();
             let mut argv = vec!["powershell.exe"];
             argv.extend(referenced);
@@ -407,26 +629,28 @@ fn install_service(manager: ServiceManager) -> Result<(), String> {
 fn uninstall_service(manager: ServiceManager) -> Result<(), String> {
     match manager {
         ServiceManager::SystemdUser => {
-            let _ = run(&["systemctl", "--user", "disable", SYSTEMD_UNIT_NAME]);
-            let removed = home_dir().map(|home| {
-                std::fs::remove_file(
-                    std::path::Path::new(&home)
-                        .join(".config/systemd/user")
-                        .join(SYSTEMD_UNIT_NAME),
-                )
-            });
-            let _ = run(&["systemctl", "--user", "daemon-reload"]);
-            match removed {
-                Some(Ok(())) | None => Ok(()),
-                Some(Err(e)) => Err(e.to_string()),
+            let Some(home) = home_dir() else {
+                return Err("HOME is not set".into());
+            };
+            let unit_path = home.join(".config/systemd/user").join(SYSTEMD_UNIT_NAME);
+            if unit_path.exists() {
+                run(&["systemctl", "--user", "disable", SYSTEMD_UNIT_NAME])?;
+                std::fs::remove_file(&unit_path).map_err(|e| e.to_string())?;
+                run(&["systemctl", "--user", "daemon-reload"])?;
             }
+            Ok(())
         }
         ServiceManager::SystemdSystem => {
-            let _ = run(&["systemctl", "disable", SYSTEMD_UNIT_NAME]);
-            std::fs::remove_file(
-                std::path::Path::new("/etc/systemd/system").join(SYSTEMD_UNIT_NAME),
-            )
-            .map_err(|e| e.to_string())
+            if !am_root() {
+                return Err("system service removal requires root".into());
+            }
+            let unit_path = std::path::Path::new("/etc/systemd/system").join(SYSTEMD_UNIT_NAME);
+            if unit_path.exists() {
+                run(&["systemctl", "disable", SYSTEMD_UNIT_NAME])?;
+                std::fs::remove_file(&unit_path).map_err(|e| e.to_string())?;
+                run(&["systemctl", "daemon-reload"])?;
+            }
+            Ok(())
         }
         ServiceManager::Launchd => {
             let Some(home) = home_dir() else {
@@ -437,13 +661,15 @@ fn uninstall_service(manager: ServiceManager) -> Result<(), String> {
             // Disable for future logins; the running instance ends when the
             // caller exits, and booting the (removed) plist again is then
             // impossible.
-            let disabled = run(&[
+            run(&[
                 "launchctl",
                 "disable",
                 &format!("gui/{uid}/{LAUNCHD_LABEL}"),
-            ]);
-            let removed = std::fs::remove_file(&plist_path).map_err(|e| e.to_string());
-            disabled.or(removed)
+            ])?;
+            if plist_path.exists() {
+                std::fs::remove_file(&plist_path).map_err(|e| e.to_string())?;
+            }
+            Ok(())
         }
         ServiceManager::TaskScheduler => run(&[
             "powershell.exe",
@@ -467,8 +693,16 @@ pub fn routes() -> Router<Arc<AppState>> {
 }
 
 async fn get_runtime(
+    ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
     axum::Extension(runtime): axum::Extension<Arc<crate::network::NetworkRuntime>>,
 ) -> Response {
+    if !control_authorized(peer, &headers, &runtime) {
+        return error_response(
+            StatusCode::FORBIDDEN,
+            "service control requires local authentication",
+        );
+    }
     let manager = ServiceManager::detect();
     let installed = tokio::task::spawn_blocking(move || service_installed(manager))
         .await
@@ -495,8 +729,16 @@ struct RuntimeSwitch {
 async fn set_runtime(
     State(app): State<Arc<AppState>>,
     axum::Extension(runtime): axum::Extension<Arc<crate::network::NetworkRuntime>>,
+    ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
     Json(request): Json<RuntimeSwitch>,
 ) -> Response {
+    if !control_authorized(peer, &headers, &runtime) {
+        return error_response(
+            StatusCode::FORBIDDEN,
+            "service control requires local authentication",
+        );
+    }
     if app.config.desktop_mode {
         return error_response(
             StatusCode::FORBIDDEN,
@@ -578,16 +820,22 @@ mod tests {
             ],
             "/opt/pal studio",
             true,
-        );
+        )
+        .unwrap();
         assert!(unit.contains("Environment=PALSTUDIO_SERVICE=1"));
         assert!(unit.contains(
-            "ExecStart=\"/opt/pal studio/bin/palstudio\" serve --ui-dir \"/opt/pal studio/ui\""
+            "ExecStart=\"/opt/pal studio/bin/palstudio\" \"serve\" \"--ui-dir\" \"/opt/pal studio/ui\""
         ));
         assert!(unit.contains("WorkingDirectory=\"/opt/pal studio\""));
         assert!(unit.contains("WantedBy=default.target"));
         let system =
-            systemd_unit_contents("/opt/p/bin/palstudio", &["serve".into()], "/opt/p", false);
+            systemd_unit_contents("/opt/p/bin/palstudio", &["serve".into()], "/opt/p", false)
+                .unwrap();
         assert!(system.contains("WantedBy=multi-user.target"));
+        assert!(system.contains("User=palstudio"));
+        assert!(system.contains("ProtectSystem=strict"));
+        assert!(system.contains("CapabilityBoundingSet="));
+        assert!(!system.contains("PS_PIN"));
     }
 
     #[test]
@@ -596,7 +844,8 @@ mod tests {
             "/usr/local/bin/palstudio",
             &["serve".into(), "--port".into(), "5174".into()],
             "/usr/local/share/palstudio",
-        );
+        )
+        .unwrap();
         assert!(plist.contains("<string>app.palstudio.server</string>"));
         assert!(plist.contains("<key>PALSTUDIO_SERVICE</key>"));
         assert!(plist.contains("<string>serve</string>"));
@@ -605,7 +854,8 @@ mod tests {
             "/x&a<y>/palstudio",
             &["--name".into(), "<script>".into()],
             "/x&a<y>",
-        );
+        )
+        .unwrap();
         assert!(hostile.contains("<string>/x&amp;a&lt;y&gt;/palstudio</string>"));
         assert!(hostile.contains("<string>&lt;script&gt;</string>"));
         assert!(!hostile.contains("<script>"));
@@ -621,7 +871,8 @@ mod tests {
                 r"C:\Program Files\PalStudio\ui".into(),
             ],
             r"C:\Program Files\PalStudio",
-        );
+        )
+        .unwrap();
         assert_eq!(command[0], "-NoProfile");
         let script = &command[3];
         assert!(script.contains(

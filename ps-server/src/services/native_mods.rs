@@ -410,7 +410,10 @@ mod tests {
             serde_json::json!({"PackageName": "P"}).to_string(),
         )
         .unwrap();
-        assert_eq!(parse_info_json(no_rules.path()).unwrap()["is_server"], false);
+        assert_eq!(
+            parse_info_json(no_rules.path()).unwrap()["is_server"],
+            false
+        );
     }
 
     #[test]
@@ -432,10 +435,7 @@ mod tests {
             .to_string(),
         )
         .unwrap();
-        let record = native_record(
-            &install.to_string_lossy(),
-            &workshop.to_string_lossy(),
-        );
+        let record = native_record(&install.to_string_lossy(), &workshop.to_string_lossy());
         let mods = list_native_server_mods(&record);
         let flag = |name: &str| {
             mods.iter()

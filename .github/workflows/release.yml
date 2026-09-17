@@ -12,10 +12,12 @@ name: Build and Release
 # install.ps1, staged into the site by deploy-web.yml) download the four
 # standalone artifacts and verify them against:
 #   PalStudio-<tag>-checksums.txt            (sha256sum-style, desktop artifacts)
+#   PalStudio-<tag>-checksums.txt.sig        (Ed25519 signature)
 # Server bundles feed scripts/install-server.sh / .ps1 and the palstudio
 # crate's first-run provisioning (asset names are load-bearing there):
 #   palstudio-<tag>-server-<platform>.tar.gz (binaries + ui + data)
 #   palstudio-<tag>-server-checksums.txt     (sha256sum-style, all bundles)
+#   palstudio-<tag>-server-checksums.txt.sig (Ed25519 signature)
 
 on:
   workflow_dispatch:
@@ -412,9 +414,9 @@ jobs:
           path: palstudio/dist/*
           if-no-files-found: error
 
-  # sha256 manifest for the desktop artifacts the install scripts download.
-  # install.sh / install.ps1 fetch this file and verify their download
-  # against it (warn-and-skip when a release predates it).
+  # Signed sha256 manifest for the desktop artifacts the install scripts
+  # download. The signing key is never committed; the matching public key is
+  # pinned in the installers.
   desktop-checksums:
     needs: [build-windows, build-macos, build-linux]
     runs-on: ubuntu-latest
@@ -443,11 +445,24 @@ jobs:
             > "PalStudio-${tag}-checksums.txt"
           cat "PalStudio-${tag}-checksums.txt"
 
+      - name: Sign the checksum manifest
+        env:
+          RELEASE_SIGNING_KEY: ${{ secrets.PALSTUDIO_RELEASE_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$RELEASE_SIGNING_KEY"
+          umask 077
+          trap 'rm -f release-signing-key.pem' EXIT
+          printf '%s\n' "$RELEASE_SIGNING_KEY" > release-signing-key.pem
+          openssl pkeyutl -sign -rawin -inkey release-signing-key.pem \
+            -in "PalStudio-${{ github.event.inputs.version }}-checksums.txt" \
+            -out "PalStudio-${{ github.event.inputs.version }}-checksums.txt.sig"
+
       - name: Upload checksums
         uses: actions/upload-artifact@v4
         with:
           name: desktop-checksums
-          path: PalStudio-*-checksums.txt
+          path: PalStudio-*-checksums.txt*
           if-no-files-found: error
 
   server-checksums:
@@ -468,11 +483,24 @@ jobs:
             > "palstudio-${tag}-server-checksums.txt"
           cat "palstudio-${tag}-server-checksums.txt"
 
+      - name: Sign the checksum manifest
+        env:
+          RELEASE_SIGNING_KEY: ${{ secrets.PALSTUDIO_RELEASE_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$RELEASE_SIGNING_KEY"
+          umask 077
+          trap 'rm -f release-signing-key.pem' EXIT
+          printf '%s\n' "$RELEASE_SIGNING_KEY" > release-signing-key.pem
+          openssl pkeyutl -sign -rawin -inkey release-signing-key.pem \
+            -in "palstudio-${{ github.event.inputs.version }}-server-checksums.txt" \
+            -out "palstudio-${{ github.event.inputs.version }}-server-checksums.txt.sig"
+
       - name: Upload checksums
         uses: actions/upload-artifact@v4
         with:
           name: server-checksums
-          path: palstudio-*-server-checksums.txt
+          path: palstudio-*-server-checksums.txt*
           if-no-files-found: error
 
   create-release:

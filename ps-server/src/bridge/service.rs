@@ -54,7 +54,9 @@ struct Backoff {
 
 impl Backoff {
     fn new() -> Self {
-        Self { current: MIN_BACKOFF }
+        Self {
+            current: MIN_BACKOFF,
+        }
     }
 
     fn on_success(&mut self) {
@@ -165,7 +167,12 @@ impl BridgeService {
         }
     }
 
-    pub async fn command(&self, op: &str, command_id: &str, args: Value) -> Result<Value, BridgeError> {
+    pub async fn command(
+        &self,
+        op: &str,
+        command_id: &str,
+        args: Value,
+    ) -> Result<Value, BridgeError> {
         self.request(
             "command",
             serde_json::json!({
@@ -176,7 +183,8 @@ impl BridgeService {
     }
 
     pub async fn get_capabilities(&self) -> Result<Value, BridgeError> {
-        self.request("get_capabilities", serde_json::json!({})).await
+        self.request("get_capabilities", serde_json::json!({}))
+            .await
     }
 
     pub async fn shutdown(&self) {
@@ -275,7 +283,11 @@ async fn run_supervisor(
                 publish(&status_tx, status);
 
                 let end = client::pump(
-                    connected.write, connected.read, &cancel, &mut command_rx, &mut target_rx,
+                    connected.write,
+                    connected.read,
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
                 )
                 .await;
                 publish(&status_tx, identity(false, None));
@@ -284,7 +296,8 @@ async fn run_supervisor(
                     ConnectionEnd::Cancelled => break,
                     ConnectionEnd::Retarget => continue,
                     ConnectionEnd::Disconnected => {
-                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx, &mut target_rx).await {
+                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx, &mut target_rx).await
+                        {
                             break;
                         }
                     }
@@ -292,14 +305,31 @@ async fn run_supervisor(
             }
             Err(ConnectError::Cancelled) => break,
             Err(ConnectError::Transport) => {
-                publish(&status_tx, identity(false, Some("bridge transport error".to_string())));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
+                publish(
+                    &status_tx,
+                    identity(false, Some("bridge transport error".to_string())),
+                );
+                if wait(
+                    backoff.next_delay(),
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
+                )
+                .await
+                {
                     break;
                 }
             }
             Err(ConnectError::Auth { code }) => {
                 publish(&status_tx, identity(false, Some(code)));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
+                if wait(
+                    backoff.next_delay(),
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
+                )
+                .await
+                {
                     break;
                 }
             }
@@ -344,7 +374,10 @@ mod tests {
     async fn requests_fail_offline_with_no_target() {
         let service = BridgeService::new();
         service.start();
-        let error = service.request("get_status", serde_json::json!({})).await.unwrap_err();
+        let error = service
+            .request("get_status", serde_json::json!({}))
+            .await
+            .unwrap_err();
         assert!(matches!(error, BridgeError::Offline));
         service.shutdown().await;
     }

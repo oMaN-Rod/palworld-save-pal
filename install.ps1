@@ -1,182 +1,395 @@
-# PalStudio desktop — one-line installer (Windows PowerShell).
+# PalStudio desktop — fail-closed Windows PowerShell installer.
 #
-#   irm https://palstudio.app/install | iex
-#
-# palstudio.app/install sniffs the caller and serves this script to
-# PowerShell; the actual artifacts always come from the GitHub releases.
-# Installs the standalone zip (launcher CLI + desktop app + web UI + game
-# data) under %LOCALAPPDATA%\PalStudio, adds bin\ to the user PATH, and
-# creates Start Menu / Desktop shortcuts to the desktop app.
-#
-# Prefer the MSI installer instead?
-#   $env:PALSTUDIO_MSI = '1'; irm https://palstudio.app/install | iex
-# or, with the script downloaded:
-#   irm https://palstudio.app/install.ps1 -OutFile install.ps1
-#   .\install.ps1 -Msi
-#
-# Direct downloads (MSI, zip), the deb, etc. all stay available on the
-# releases page: https://github.com/oMaN-Rod/palworld-save-pal/releases
-# Server/headless installs use scripts/install-server.ps1 — see docs/install.md.
-#
-# Environment overrides (set before invoking, e.g. `$env:PALSTUDIO_VERSION='v1.4.2'`):
-#   PALSTUDIO_MSI=1             install the MSI instead of the zip
-#   PALSTUDIO_VERSION           pin a release tag (default: latest)
-#   PALSTUDIO_REPO              GitHub owner/name (default oMaN-Rod/palworld-save-pal)
-#   PALSTUDIO_API_BASE          GitHub API base (default https://api.github.com)
-#   PALSTUDIO_DOWNLOAD_BASE     release download base (default https://github.com)
-#   PALSTUDIO_INSTALL_DIR       zip install location (default %LOCALAPPDATA%\PalStudio)
-#   PALSTUDIO_SKIP_SHORTCUTS=1  do not create Start Menu / Desktop shortcuts
+# The release asset, checksum manifest, and Ed25519 signature are fetched over
+# HTTPS. The manifest is mandatory. ZIP members are validated and extracted
+# into a private staging directory before the existing installation is moved
+# aside and replaced in one recoverable transaction.
+
+[CmdletBinding()]
 param([switch]$Msi)
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
-# Windows PowerShell 5.1 on older Windows 10 builds may default to TLS 1.0.
 try {
     [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-} catch {}
+} catch {
+    throw 'TLS 1.2 is required to download release metadata and artifacts'
+}
 
-# `$IsWindows` only exists on PowerShell 6+; RuntimeInformation works everywhere.
-$onWindows = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform(
-    [System.Runtime.InteropServices.OSPlatform]::Windows)
-
-function Write-Info($msg) { Write-Host "==> $msg" -ForegroundColor Cyan }
-function Write-Warn($msg) { Write-Host "warning: $msg" -ForegroundColor Yellow }
-function Die($msg) { Write-Host "error: $msg" -ForegroundColor Red; exit 1 }
+$onWindows = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform(
+    [Runtime.InteropServices.OSPlatform]::Windows)
+if (-not $onWindows) { throw 'This installer is for Windows only' }
 
 $Repo = if ($env:PALSTUDIO_REPO) { $env:PALSTUDIO_REPO } else { 'oMaN-Rod/palworld-save-pal' }
-$Version = $env:PALSTUDIO_VERSION
-$ApiBase = if ($env:PALSTUDIO_API_BASE) { $env:PALSTUDIO_API_BASE } else { 'https://api.github.com' }
-$DlBase = if ($env:PALSTUDIO_DOWNLOAD_BASE) { $env:PALSTUDIO_DOWNLOAD_BASE } else { 'https://github.com' }
+$Version = if ($env:PALSTUDIO_VERSION) { $env:PALSTUDIO_VERSION } else { '' }
 $UseMsi = $Msi.IsPresent -or $env:PALSTUDIO_MSI -eq '1'
+$InstallInput = if ($env:PALSTUDIO_INSTALL_DIR) {
+    $env:PALSTUDIO_INSTALL_DIR
+} else {
+    Join-Path $env:LOCALAPPDATA 'PalStudio'
+}
+$SkipShortcuts = $env:PALSTUDIO_SKIP_SHORTCUTS -eq '1'
 
-# --------------------------------------------------------------- host info
-switch ($env:PROCESSOR_ARCHITECTURE) {
-    'AMD64' { }
-    'ARM64' { Die 'Windows ARM64 has no prebuilt build yet; build from source: https://github.com/oMaN-Rod/palworld-save-pal' }
-    default { Die "unsupported architecture '$($env:PROCESSOR_ARCHITECTURE)'" }
+$SigningPublicKey = @'
+-----BEGIN PUBLIC KEY-----
+MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+-----END PUBLIC KEY-----
+'@
+
+function Write-Info([string]$Message) { Write-Host "==> $Message" -ForegroundColor Cyan }
+function Fail([string]$Message) { throw $Message }
+
+function Require-Command([string]$Name) {
+    if (-not (Get-Command $Name -ErrorAction SilentlyContinue)) {
+        Fail "$Name is required but was not found"
+    }
 }
 
-# ---------------------------------------------------------------- version
-if (-not $Version) {
-    Write-Info "looking up the latest release of $Repo"
-    $latest = Invoke-RestMethod -Headers @{ 'User-Agent' = 'palstudio-installer' } `
-        -Uri "$ApiBase/repos/$Repo/releases/latest"
-    if (-not $latest.tag_name) { Die 'could not resolve the latest release tag from GitHub' }
-    $Version = $latest.tag_name
-}
-$kind = if ($UseMsi) { 'windows.msi' } else { 'windows-standalone.zip' }
-$Asset = "PalStudio-$Version-$kind"
-$ChecksumsAsset = "PalStudio-$Version-checksums.txt"
-Write-Info "installing PalStudio desktop $Version ($kind)"
-
-# ---------------------------------------------------------------- download
-$Base = "$DlBase/$Repo/releases/download/$Version"
-$tmp = New-Item -ItemType Directory -Force -Path (Join-Path ([System.IO.Path]::GetTempPath()) "palstudio-install-$(Get-Random)")
-$download = Join-Path $tmp $Asset
-Write-Info "downloading $Base/$Asset"
-try {
-    Invoke-WebRequest -UseBasicParsing -Uri "$Base/$Asset" -OutFile $download
-} catch {
-    Die "download failed - does $Version ship a $kind asset? ($_)"
+function Assert-Repository([string]$Value) {
+    if ($Value -notmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$') {
+        Fail 'PALSTUDIO_REPO must be a GitHub owner/name pair'
+    }
 }
 
-$checksums = Join-Path $tmp $ChecksumsAsset
-try {
-    Invoke-WebRequest -UseBasicParsing -Uri "$Base/$ChecksumsAsset" -OutFile $checksums
-    $expected = (Get-Content $checksums | Where-Object { $_ -match "\s$([regex]::Escape($Asset))$" } |
-        Select-Object -First 1) -replace '\s.*$', ''
-    if ($expected) {
-        $actual = (Get-FileHash -Algorithm SHA256 $download).Hash.ToLower()
-        if ($actual -ne $expected.ToLower()) {
-            Die "checksum mismatch for $Asset (expected $expected, got $actual)"
+function Assert-Version([string]$Value) {
+    if ($Value -notmatch '^v?[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$') {
+        Fail 'release tag must look like v1.5.0'
+    }
+}
+
+function Test-Reparse([string]$Path) {
+    $item = Get-Item -LiteralPath $Path -Force -ErrorAction Stop
+    return (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0)
+}
+
+function Assert-NoReparseTree([string]$Root) {
+    if (Test-Reparse $Root) { Fail "reparse points are not allowed in $Root" }
+    Get-ChildItem -LiteralPath $Root -Force -Recurse -ErrorAction Stop | ForEach-Object {
+        if (($_.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+            Fail "reparse point is not allowed: $($_.FullName)"
         }
-        Write-Info 'checksum verified'
+    }
+}
+
+function Assert-NoReparsePath([string]$Path) {
+    $current = [IO.Path]::GetFullPath($Path)
+    while ($current) {
+        if (Test-Path -LiteralPath $current) {
+            if (Test-Reparse $current) { Fail "reparse point is not allowed in path: $current" }
+        }
+        $parent = Split-Path -Parent $current
+        if (-not $parent -or $parent -eq $current) { break }
+        $current = $parent
+    }
+}
+
+function Assert-DedicatedInstallPath([string]$Path) {
+    $full = [IO.Path]::GetFullPath($Path)
+    $root = [IO.Path]::GetPathRoot($full)
+    if ([string]::IsNullOrWhiteSpace($full) -or $full.TrimEnd('\') -eq $root.TrimEnd('\')) {
+        Fail 'PALSTUDIO_INSTALL_DIR must name a dedicated installation directory'
+    }
+    $parent = Split-Path -Parent $full
+    if (-not $parent) { Fail 'PALSTUDIO_INSTALL_DIR has no usable parent directory' }
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    Assert-NoReparsePath $parent
+    if (Test-Path -LiteralPath $full) {
+        if (Test-Reparse $full) { Fail 'PALSTUDIO_INSTALL_DIR may not be a reparse point' }
+        if (-not (Get-Item -LiteralPath $full).PSIsContainer) { Fail 'PALSTUDIO_INSTALL_DIR must be a directory' }
+    }
+    return $full
+}
+
+function Set-PrivateAcl([string]$Path) {
+    if (Test-Reparse $Path) { Fail "refusing to secure a reparse point: $Path" }
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent().Name
+    $grant = '{0}:(OI)(CI)F' -f $identity
+    & icacls.exe $Path '/inheritance:r' '/grant:r' $grant '/T' | Out-Null
+    if ($LASTEXITCODE -ne 0) { Fail "could not apply private ACLs to $Path" }
+}
+
+function Invoke-ReleaseDownload([string]$Uri, [string]$Destination) {
+    $parsed = $null
+    if (-not [Uri]::TryCreate($Uri, [UriKind]::Absolute, [ref]$parsed) -or
+        $parsed.Scheme -ne 'https' -or [string]::IsNullOrWhiteSpace($parsed.Host) -or
+        $Uri -match '[\r\n\x00]') {
+        Fail "refusing non-HTTPS release URL: $Uri"
+    }
+    Add-Type -AssemblyName System.Net.Http
+    $handler = [Net.Http.HttpClientHandler]::new()
+    $handler.AllowAutoRedirect = $false
+    $client = [Net.Http.HttpClient]::new($handler)
+    $current = $Uri
+    try {
+        for ($redirect = 0; $redirect -le 5; $redirect++) {
+            $currentParsed = $null
+            if (-not [Uri]::TryCreate($current, [UriKind]::Absolute, [ref]$currentParsed) -or
+                $currentParsed.Scheme -ne 'https' -or [string]::IsNullOrWhiteSpace($currentParsed.Host)) {
+                Fail "release download redirected to a non-HTTPS URL: $current"
+            }
+            $response = $client.GetAsync($current, [Net.Http.HttpCompletionOption]::ResponseHeadersRead).GetAwaiter().GetResult()
+            try {
+                $status = [int]$response.StatusCode
+                if ($status -ge 300 -and $status -lt 400) {
+                    $location = $response.Headers.Location
+                    if ($null -eq $location) { Fail 'release download returned a redirect without a location' }
+                    $current = ([Uri]::new($currentParsed, $location)).AbsoluteUri
+                    continue
+                }
+                if (-not $response.IsSuccessStatusCode) { Fail "release download failed with HTTP $status" }
+                $stream = [IO.File]::Open($Destination, [IO.FileMode]::Create, [IO.FileAccess]::Write, [IO.FileShare]::None)
+                try {
+                    $response.Content.CopyToAsync($stream).GetAwaiter().GetResult()
+                } finally {
+                    $stream.Dispose()
+                }
+                return
+            } finally {
+                $response.Dispose()
+            }
+        }
+        Fail 'release download followed too many redirects'
+    } finally {
+        $client.Dispose()
+        $handler.Dispose()
+    }
+}
+
+function ConvertTo-PsLiteral([string]$Value) {
+    return "'{0}'" -f $Value.Replace("'", "''")
+}
+
+function Assert-SafeZip([string]$Archive) {
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [IO.Compression.ZipFile]::OpenRead($Archive)
+    $names = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
+    $total = 0L
+    try {
+        foreach ($entry in $zip.Entries) {
+            $name = ([string]$entry.FullName).Replace('\', '/')
+            $trimmed = $name.TrimEnd('/')
+            if ([string]::IsNullOrWhiteSpace($trimmed) -or $name -match '[\r\n\x00]' -or
+                $name.StartsWith('/') -or $name -match '^[A-Za-z]:/' -or
+                $name -match '(^|/)\.\.?(/|$)' -or
+                (-not $trimmed.Equals('PalStudio', [StringComparison]::OrdinalIgnoreCase) -and
+                 -not $trimmed.StartsWith('PalStudio/', [StringComparison]::OrdinalIgnoreCase))) {
+                Fail "unsafe or unexpected ZIP member: $name"
+            }
+            if (-not $names.Add($trimmed)) { Fail "duplicate ZIP member: $name" }
+
+            $external = [uint32]$entry.ExternalAttributes
+            $unixMode = ($external -shr 16) -band 0xFFFF
+            $fileType = $unixMode -band 0xF000
+            if ($fileType -ne 0 -and $fileType -ne 0x4000 -and $fileType -ne 0x8000) {
+                Fail "ZIP links or special files are not permitted: $name"
+            }
+            if (($unixMode -band 0x0E00) -ne 0) { Fail "privileged ZIP mode is not permitted: $name" }
+            if ($entry.Length -gt 536870912) { Fail "ZIP member is too large: $name" }
+            $total += [int64]$entry.Length
+            if ($total -gt 2147483648) { Fail 'ZIP expands beyond the permitted size limit' }
+        }
+    } finally {
+        $zip.Dispose()
+    }
+}
+
+function Expand-SafeZip([string]$Archive, [string]$Destination) {
+    Assert-SafeZip $Archive
+    Add-Type -AssemblyName System.IO.Compression
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $root = ([IO.Path]::GetFullPath($Destination)).TrimEnd('\') + '\'
+    $zip = [IO.Compression.ZipFile]::OpenRead($Archive)
+    try {
+        foreach ($entry in $zip.Entries) {
+            $name = ([string]$entry.FullName).Replace('\', '/')
+            $destinationPath = [IO.Path]::GetFullPath((Join-Path $Destination ($name -replace '/', '\')))
+            if (-not $destinationPath.StartsWith($root, [StringComparison]::OrdinalIgnoreCase)) {
+                Fail "ZIP member escapes the extraction directory: $name"
+            }
+            $isDirectory = $name.EndsWith('/')
+            if ($isDirectory) {
+                New-Item -ItemType Directory -Force -Path $destinationPath | Out-Null
+                continue
+            }
+            $parent = Split-Path -Parent $destinationPath
+            New-Item -ItemType Directory -Force -Path $parent | Out-Null
+            Assert-NoReparsePath $parent
+            if (Test-Path -LiteralPath $destinationPath) { Fail "ZIP member collision: $name" }
+            $input = $entry.Open()
+            $output = [IO.File]::Open($destinationPath, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
+            try { $input.CopyTo($output) } finally { $output.Dispose(); $input.Dispose() }
+        }
+    } finally {
+        $zip.Dispose()
+    }
+    Assert-NoReparseTree $Destination
+}
+
+function Preserve-UserState([string]$Existing, [string]$Staged) {
+    foreach ($name in @('ps-rs.db', 'launcher.json')) {
+        $source = Join-Path $Existing $name
+        if (-not (Test-Path -LiteralPath $source)) { continue }
+        if (Test-Reparse $source) { Fail "existing user state may not be a reparse point: $source" }
+        Copy-Item -LiteralPath $source -Destination (Join-Path $Staged $name) -Force
+    }
+}
+
+function New-Shortcut([string]$Path, [string]$Target, [string]$WorkingDirectory) {
+    $parent = Split-Path -Parent $Path
+    New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    if (Test-Path -LiteralPath $Path) {
+        if (Test-Reparse $Path) { Fail "shortcut path is a reparse point: $Path" }
+        Remove-Item -LiteralPath $Path -Force
+    }
+    $shell = New-Object -ComObject WScript.Shell
+    $shortcut = $shell.CreateShortcut($Path)
+    $shortcut.TargetPath = $Target
+    $shortcut.WorkingDirectory = $WorkingDirectory
+    $shortcut.Description = 'PalStudio desktop app'
+    $shortcut.Save()
+}
+
+$Prefix = $null
+$Temporary = $null
+$Backup = $null
+$RollbackNeeded = $false
+$ShortcutChanges = @()
+
+try {
+    Assert-Repository $Repo
+    Require-Command 'openssl.exe'
+    Require-Command 'icacls.exe'
+    $Prefix = Assert-DedicatedInstallPath $InstallInput
+
+    if (-not $Version) {
+        Write-Info "looking up the latest release of $Repo"
+        $latest = Invoke-RestMethod -UseBasicParsing -Uri "https://api.github.com/repos/$Repo/releases/latest" -Headers @{
+            'User-Agent' = 'palstudio-installer'
+            Accept = 'application/vnd.github+json'
+        } -TimeoutSec 30
+        $Version = [string]$latest.tag_name
+    }
+    Assert-Version $Version
+
+    $kind = if ($UseMsi) { 'windows.msi' } else { 'windows-standalone.zip' }
+    $asset = "PalStudio-$Version-$kind"
+    $checksumsAsset = "PalStudio-$Version-checksums.txt"
+    $base = "https://github.com/$Repo/releases/download/$Version"
+    Write-Info "installing PalStudio desktop $Version ($kind)"
+
+    $Temporary = Join-Path ([IO.Path]::GetTempPath()) ("palstudio-install-{0}" -f ([Guid]::NewGuid().ToString('N')))
+    New-Item -ItemType Directory -Path $Temporary | Out-Null
+    $download = Join-Path $Temporary $asset
+    $checksums = Join-Path $Temporary $checksumsAsset
+    $signature = "$checksums.sig"
+    $publicKey = Join-Path $Temporary 'release-public.pem'
+    Invoke-ReleaseDownload "$base/$asset" $download
+    Invoke-ReleaseDownload "$base/$checksumsAsset" $checksums
+    Invoke-ReleaseDownload "$base/$checksumsAsset.sig" $signature
+    [IO.File]::WriteAllText($publicKey, $SigningPublicKey, [Text.UTF8Encoding]::new($false))
+    & openssl.exe pkeyutl -verify -pubin -inkey $publicKey -rawin -in $checksums -sigfile $signature 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) { Fail 'signed release manifest verification failed' }
+
+    $expected = $null
+    foreach ($line in Get-Content -LiteralPath $checksums) {
+        $parts = $line -split '\s+'
+        if ($parts.Count -ge 2 -and $parts[1] -eq $asset) { $expected = $parts[0]; break }
+    }
+    if ($expected -notmatch '^[0-9a-fA-F]{64}$') { Fail "signed manifest has no valid checksum for $asset" }
+    $actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $download).Hash
+    if ($actual -ine $expected) { Fail "checksum mismatch for $asset" }
+    Write-Info 'signed manifest and checksum verified'
+
+    if ($UseMsi) {
+        Write-Info 'running the verified MSI installer'
+        $process = Start-Process -FilePath 'msiexec.exe' -ArgumentList @('/i', $download, '/passive', '/norestart') -Wait -PassThru
+        if ($process.ExitCode -ne 0 -and $process.ExitCode -ne 3010) {
+            Fail "msiexec failed with exit code $($process.ExitCode)"
+        }
+        Write-Host "PalStudio $Version installed by MSI." -ForegroundColor Green
     } else {
-        Write-Warn "no '$Asset' entry in $ChecksumsAsset; skipping verification"
+        $extract = Join-Path $Temporary 'extract'
+        New-Item -ItemType Directory -Path $extract | Out-Null
+        Expand-SafeZip $download $extract
+        $staged = Join-Path $extract 'PalStudio'
+        $launcher = Join-Path $staged 'bin\palstudio.exe'
+        if (-not (Test-Path -LiteralPath $launcher -PathType Leaf)) { Fail 'bundle layout error: expected PalStudio\bin\palstudio.exe' }
+        if (-not (Test-Path -LiteralPath (Join-Path $staged 'ui_build\index.html') -PathType Leaf)) { Fail 'bundle is missing ui_build\index.html' }
+        if (-not (Test-Path -LiteralPath (Join-Path $staged 'data\json') -PathType Container)) { Fail 'bundle is missing data\json' }
+        if (Test-Path -LiteralPath $Prefix) {
+            Assert-NoReparseTree $Prefix
+            Preserve-UserState $Prefix $staged
+        }
+        Assert-NoReparseTree $extract
+
+        $Backup = "$Prefix.previous.$PID"
+        if (Test-Path -LiteralPath $Backup) { Fail "rollback path already exists: $Backup" }
+        if (Test-Path -LiteralPath $Prefix) { Move-Item -LiteralPath $Prefix -Destination $Backup }
+        $RollbackNeeded = $true
+        Move-Item -LiteralPath $staged -Destination $Prefix
+        Set-PrivateAcl $Prefix
+        if (-not (Test-Path -LiteralPath (Join-Path $Prefix 'bin\palstudio.exe') -PathType Leaf)) { Fail 'installed launcher validation failed' }
+        if (-not (Test-Path -LiteralPath (Join-Path $Prefix 'ui_build\index.html') -PathType Leaf)) { Fail 'installed UI validation failed' }
+
+        if (-not $SkipShortcuts) {
+            $desktopExe = Join-Path $Prefix 'bin\palstudio-desktop.exe'
+            if (-not (Test-Path -LiteralPath $desktopExe -PathType Leaf)) { Fail 'bundle has no desktop executable' }
+            $shortcutPaths = @(
+                (Join-Path ([Environment]::GetFolderPath('Programs')) 'PalStudio\PalStudio.lnk'),
+                (Join-Path ([Environment]::GetFolderPath('Desktop')) 'PalStudio.lnk')
+            )
+            foreach ($shortcutPath in $shortcutPaths) {
+                $oldPath = Join-Path $Temporary ("old-shortcut-{0}.lnk" -f ([Guid]::NewGuid().ToString('N')))
+                $hadOld = Test-Path -LiteralPath $shortcutPath
+                if ($hadOld) {
+                    if (Test-Reparse $shortcutPath) { Fail "shortcut path is a reparse point: $shortcutPath" }
+                    Copy-Item -LiteralPath $shortcutPath -Destination $oldPath -Force
+                }
+                $ShortcutChanges += [pscustomobject]@{ Path = $shortcutPath; Old = $oldPath; HadOld = $hadOld }
+                New-Shortcut $shortcutPath $desktopExe $Prefix
+            }
+        }
+
+        if ($env:PALSTUDIO_SKIP_PATH -ne '1') {
+            $binDir = Join-Path $Prefix 'bin'
+            $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+            $pathEntries = @()
+            if ($userPath) { $pathEntries = @($userPath -split ';' | Where-Object { $_ }) }
+            if ($pathEntries -notcontains $binDir) {
+                [Environment]::SetEnvironmentVariable('Path', (($pathEntries + $binDir) -join ';'), 'User')
+            }
+        }
+
+        if (Test-Path -LiteralPath $Backup) { Remove-Item -LiteralPath $Backup -Recurse -Force }
+        $RollbackNeeded = $false
+        Write-Host "PalStudio $Version installed under $Prefix." -ForegroundColor Green
     }
 } catch {
-    Write-Warn "no $ChecksumsAsset on the release; skipping verification"
-}
-
-# ---------------------------------------------------------------- install
-if ($UseMsi) {
-    Write-Info 'running the MSI installer (a UAC prompt may appear)'
-    # msiexec elevates itself when the package needs it; /passive shows the
-    # progress bar only, /norestart never reboots the machine under us.
-    $proc = Start-Process msiexec -ArgumentList '/i', "`"$download`"", '/passive', '/norestart' -Wait -PassThru
-    if ($proc.ExitCode -ne 0 -and $proc.ExitCode -ne 3010) {
-        Die "msiexec failed with exit code $($proc.ExitCode) (0 or 3010 = success)"
+    $message = $_.Exception.Message
+    if ($RollbackNeeded) {
+        try {
+            if (Test-Path -LiteralPath $Prefix) { Move-Item -LiteralPath $Prefix -Destination "$Prefix.failed.$PID" -Force }
+            if ($Backup -and (Test-Path -LiteralPath $Backup)) { Move-Item -LiteralPath $Backup -Destination $Prefix -Force }
+        } catch {
+            Write-Error "installation rollback failed: $($_.Exception.Message)"
+        }
     }
-    Write-Host ''
-    Write-Host "  PalStudio $Version installed (MSI)." -ForegroundColor Green
-    Write-Host '  Launch it from the Start Menu.'
-    exit 0
-}
-
-$installDir = if ($env:PALSTUDIO_INSTALL_DIR) { $env:PALSTUDIO_INSTALL_DIR }
-              else { Join-Path $env:LOCALAPPDATA 'PalStudio' }
-
-# Replacing files under a running instance fails on Windows; stop both first.
-Get-Process -Name 'palstudio', 'palstudio-desktop' -ErrorAction SilentlyContinue |
-    Stop-Process -Force -ErrorAction SilentlyContinue
-
-Write-Info "installing under $installDir"
-$extract = Join-Path $tmp 'extract'
-Expand-Archive -Path $download -DestinationPath $extract
-$staged = Join-Path $extract 'PalStudio'
-if (-not (Test-Path (Join-Path $staged 'bin'))) {
-    Die "unexpected zip layout: no PalStudio\bin inside $Asset (pre-rebrand zips are not supported; use the latest release)"
-}
-New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-foreach ($dir in 'bin', 'ui_build', 'data') {
-    $src = Join-Path $staged $dir
-    if (-not (Test-Path $src)) { continue }
-    $dst = Join-Path $installDir $dir
-    if (Test-Path $dst) { Remove-Item -Recurse -Force $dst }
-    Move-Item $src $dst
-}
-# The pre-rebrand zip kept the desktop exe at the install root; drop the
-# leftover so only bin\palstudio-desktop.exe remains. ps-rs.db and any other
-# user files at the root are preserved.
-$legacyExe = Join-Path $installDir 'palstudio.exe'
-if ((Test-Path $legacyExe) -and (Test-Path (Join-Path $installDir 'bin\palstudio.exe'))) {
-    Remove-Item -Force $legacyExe
-}
-
-$binDir = Join-Path $installDir 'bin'
-if ($onWindows) {
-    # User PATH so `palstudio` works in new shells; the current shell keeps
-    # its inherited PATH.
-    $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
-    if ($userPath -notlike "*$binDir*") {
-        [Environment]::SetEnvironmentVariable('Path', "$userPath;$binDir", 'User')
-        Write-Info "added $binDir to the user PATH (new terminals only)"
+    foreach ($change in $ShortcutChanges) {
+        try {
+            if (Test-Path -LiteralPath $change.Path) { Remove-Item -LiteralPath $change.Path -Force }
+            if ($change.HadOld -and (Test-Path -LiteralPath $change.Old)) {
+                New-Item -ItemType Directory -Force -Path (Split-Path -Parent $change.Path) | Out-Null
+                Move-Item -LiteralPath $change.Old -Destination $change.Path -Force
+            }
+        } catch {
+            Write-Error "shortcut rollback failed for $($change.Path): $($_.Exception.Message)"
+        }
+    }
+    throw "PalStudio installation failed: $message"
+} finally {
+    if ($Temporary -and (Test-Path -LiteralPath $Temporary)) {
+        Remove-Item -LiteralPath $Temporary -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
-
-if ($onWindows -and $env:PALSTUDIO_SKIP_SHORTCUTS -ne '1') {
-    $desktopExe = Join-Path $binDir 'palstudio-desktop.exe'
-    # WorkingDirectory = the install root, where the unpackaged desktop app
-    # finds ui_build\ and data\.
-    $shell = New-Object -ComObject WScript.Shell
-    foreach ($shortcutDir in @(
-            Join-Path ([Environment]::GetFolderPath('Programs')) 'PalStudio',
-            [Environment]::GetFolderPath('Desktop'))) {
-        New-Item -ItemType Directory -Force -Path $shortcutDir | Out-Null
-        $shortcut = $shell.CreateShortcut((Join-Path $shortcutDir 'PalStudio.lnk'))
-        $shortcut.TargetPath = $desktopExe
-        $shortcut.WorkingDirectory = $installDir
-        $shortcut.Description = 'PalStudio desktop app'
-        $shortcut.Save()
-    }
-    Write-Info 'Start Menu and Desktop shortcuts created'
-}
-
-Write-Host ''
-Write-Host "  PalStudio $Version installed under $installDir." -ForegroundColor Green
-Write-Host '  Start it from the Start Menu / Desktop shortcut, and in a NEW terminal:'
-Write-Host '    palstudio            (desktop/webapp picker)'
-Write-Host '    palstudio webapp     (server + browser)'
-Write-Host '    palstudio serve      (headless server)'
-Write-Host '  Your database stays at ps-rs.db inside the install dir.'

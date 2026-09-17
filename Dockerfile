@@ -65,9 +65,19 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates libstdc++6 curl \
     && rm -rf /var/lib/apt/lists/*
 
+RUN groupadd --system palstudio \
+    && useradd --system --gid palstudio --home-dir /nonexistent --shell /usr/sbin/nologin palstudio \
+    && install -d --owner palstudio --group palstudio --mode 0750 /app/db
+
 COPY --from=rust_builder /build/target/release/ps-server /usr/local/bin/ps-server
 COPY --from=ui_builder /app/ui_build /app/ui
 COPY data /app/data
+
+RUN chown root:root /usr/local/bin/ps-server \
+    && chmod 0755 /usr/local/bin/ps-server \
+    && chown -R root:root /app/ui /app/data \
+    && find /app/ui /app/data -type d -exec chmod 0755 {} + \
+    && find /app/ui /app/data -type f -exec chmod 0644 {} +
 
 WORKDIR /app/db
 
@@ -78,9 +88,10 @@ EXPOSE 5174
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD curl -fsS -o /dev/null http://127.0.0.1:5174/ || exit 1
 
-# Port comes from the network policy (PS_PORT env / Network page; default
-# 5174) rather than a CLI pin, so it stays editable at runtime. The bind
-# address is 0.0.0.0 — exposure is governed by the policy's listen mode.
+# The container listener uses all container interfaces so Docker can publish
+# it; the compose file binds the host side to loopback by default, while the
+# application policy remains the authority for admitted peers.
+USER palstudio
 CMD ["ps-server", "--hosted", "--host", "0.0.0.0", \
      "--ui-dir", "/app/ui", "--data-dir", "/app/data", \
      "--db", "/app/db/ps-rs.db"]

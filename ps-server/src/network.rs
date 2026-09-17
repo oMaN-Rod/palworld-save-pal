@@ -5,19 +5,23 @@
 //! peer) → verdict; this one owns the live config, persists it in the `meta`
 //! table, evaluates every inbound HTTP/WS request, and applies edits from
 //! the UI (including tailscale funnel toggling and optional UPnP mapping).
+use std::collections::HashSet;
 use std::net::{IpAddr, SocketAddr};
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::{Arc, RwLock};
 use std::time::Duration;
 
-use axum::extract::{Request, State};
-use axum::http::{header, HeaderValue, Method, StatusCode};
+use axum::extract::{ConnectInfo, Request, State};
+use axum::http::{header, HeaderMap, HeaderValue, Method, StatusCode};
 use axum::middleware::Next;
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::routing::get;
 use axum::{Json, Router};
-use ps_network::auth::SessionRegistry;
-use ps_network::{AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict};
+use ps_network::auth::{AuthRateLimiter, SessionRegistry};
+use ps_network::{
+    AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict, MAX_PIN_CHARS,
+    MAX_SESSION_TTL_SECS, MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
+};
 
 use crate::network_policy::{ConnectionAcl, NetworkPolicy};
 use crate::AppState;
@@ -43,6 +47,10 @@ pub struct NetworkRuntime {
     restart_flag: Arc<AtomicBool>,
     exit: tokio::sync::Notify,
     exit_flag: Arc<AtomicBool>,
+    policy_generation: AtomicU64,
+    update_lock: tokio::sync::Mutex<()>,
+    auth_limiter: AuthRateLimiter,
+    tailnet_peer_ips: RwLock<Option<HashSet<IpAddr>>>,
 }
 
 impl NetworkRuntime {
@@ -61,6 +69,10 @@ impl NetworkRuntime {
             restart_flag: Arc::new(AtomicBool::new(false)),
             exit: tokio::sync::Notify::new(),
             exit_flag: Arc::new(AtomicBool::new(false)),
+            policy_generation: AtomicU64::new(0),
+            update_lock: tokio::sync::Mutex::new(()),
+            auth_limiter: AuthRateLimiter::default(),
+            tailnet_peer_ips: RwLock::new(None),
         }
     }
 
@@ -79,8 +91,10 @@ impl NetworkRuntime {
     /// later hosted run).
     pub fn effective_config(&self) -> NetworkConfig {
         match self.tier {
-            NetworkTier::LocalWebapp => self.config().clamped_for_local_webapp(),
-            NetworkTier::Desktop | NetworkTier::Hosted => self.config(),
+            NetworkTier::Desktop | NetworkTier::LocalWebapp => {
+                self.config().clamped_for_local_webapp()
+            }
+            NetworkTier::Hosted => self.config(),
         }
     }
 
@@ -92,7 +106,68 @@ impl NetworkRuntime {
     }
 
     pub fn set_config(&self, config: NetworkConfig) {
-        *self.config.write().expect("network config lock poisoned") = config;
+        let changed = {
+            let mut current = self.config.write().expect("network config lock poisoned");
+            if *current == config {
+                false
+            } else {
+                *current = config;
+                true
+            }
+        };
+        if changed {
+            self.sessions.revoke_all();
+            self.policy_generation.fetch_add(1, Ordering::SeqCst);
+        }
+    }
+
+    pub(crate) async fn lock_updates(&self) -> tokio::sync::MutexGuard<'_, ()> {
+        self.update_lock.lock().await
+    }
+
+    pub fn policy_generation(&self) -> u64 {
+        self.policy_generation.load(Ordering::SeqCst)
+    }
+
+    pub fn auth_retry_after(&self, peer: IpAddr) -> Option<Duration> {
+        self.auth_limiter.retry_after(peer)
+    }
+
+    pub fn record_auth_failure(&self, peer: IpAddr) -> Option<Duration> {
+        self.auth_limiter.record_failure(peer)
+    }
+
+    pub fn record_auth_success(&self, peer: IpAddr) {
+        self.auth_limiter.record_success(peer);
+    }
+
+    pub async fn refresh_tailnet_peers(&self) -> anyhow::Result<()> {
+        let status = tokio::task::spawn_blocking(ps_network::tailscale::detect)
+            .await
+            .map_err(|error| anyhow::anyhow!("tailscale detection task failed: {error}"))?;
+        if !status.available || !status.logged_in {
+            return Err(anyhow::anyhow!(
+                "Tailscale is unavailable or this node is not logged in"
+            ));
+        }
+        let peers = status
+            .peer_ipv4
+            .into_iter()
+            .map(ps_network::canonical)
+            .collect::<HashSet<_>>();
+        *self
+            .tailnet_peer_ips
+            .write()
+            .expect("tailnet peer lock poisoned") = Some(peers);
+        Ok(())
+    }
+
+    fn tailnet_peer_is_verified(&self, peer: IpAddr) -> bool {
+        self.tailnet_peer_ips
+            .read()
+            .expect("tailnet peer lock poisoned")
+            .as_ref()
+            .is_some_and(|peers| peers.contains(&ps_network::canonical(peer)))
     }
 
     pub fn effective_port(&self) -> u16 {
@@ -100,7 +175,20 @@ impl NetworkRuntime {
     }
 
     pub fn evaluate(&self, peer: IpAddr) -> Verdict {
-        ps_network::evaluate(&self.effective_config(), peer)
+        let config = self.effective_config();
+        let verdict = ps_network::evaluate(&config, peer);
+        if verdict.can_connect
+            && config.listen == ListenMode::Tailscale
+            && ps_network::classify(peer) != ps_network::PeerClass::Loopback
+            && !self.tailnet_peer_is_verified(peer)
+        {
+            return Verdict {
+                can_connect: false,
+                can_write: false,
+                auth_required: false,
+            };
+        }
+        verdict
     }
 
     /// The flag the server main loops poll after the listener exits; true
@@ -149,11 +237,15 @@ impl NetworkRuntime {
         match stored {
             Some(raw) => {
                 let config = NetworkConfig::from_json(&raw)?;
-                let config = if always { config.apply_env() } else { config };
+                let config = if always {
+                    apply_env_blocking(config).await?
+                } else {
+                    config
+                };
                 Ok(NetworkRuntime::new(config))
             }
             None => {
-                let seeded = NetworkConfig::default().apply_env();
+                let seeded = apply_env_blocking(NetworkConfig::default()).await?;
                 ps_db::meta::set(driver, META_KEY, &seeded.to_json()).await?;
                 Ok(NetworkRuntime::new(seeded))
             }
@@ -166,12 +258,7 @@ impl NetworkRuntime {
     }
 
     fn cookie_token(&self, headers: &axum::http::HeaderMap) -> Option<String> {
-        let cookie = headers.get(header::COOKIE)?.to_str().ok()?;
-        cookie.split(';').find_map(|part| {
-            let part = part.trim();
-            part.strip_prefix(SESSION_COOKIE)
-                .map(|rest| rest.trim_start_matches('=').trim().to_owned())
-        })
+        session_token_from(headers)
     }
 
     pub fn session_valid(&self, headers: &axum::http::HeaderMap) -> bool {
@@ -193,6 +280,10 @@ impl NetworkPolicy for NetworkRuntime {
     fn has_valid_session(&self, token: &str) -> bool {
         self.sessions.is_valid(token)
     }
+
+    fn policy_generation(&self) -> u64 {
+        self.policy_generation()
+    }
 }
 
 /// The outermost request gate: listen mode, allowlists, PIN session, and
@@ -207,12 +298,6 @@ pub async fn network_gate(
     let path = request.uri().path().to_owned();
     let method = request.method().clone();
 
-    // The unlock page and the session endpoint must work while locked,
-    // otherwise nobody could ever present the PIN.
-    if path == "/network-unlock" || path == "/api/network/session" {
-        return next.run(request).await;
-    }
-
     let peer = request
         .extensions()
         .get::<axum::extract::ConnectInfo<SocketAddr>>()
@@ -225,6 +310,7 @@ pub async fn network_gate(
             "client address unavailable",
         );
     };
+    let peer_is_loopback = ps_network::canonical(peer).is_loopback();
 
     let verdict = runtime.evaluate(peer);
     if !verdict.can_connect {
@@ -233,6 +319,19 @@ pub async fn network_gate(
             StatusCode::FORBIDDEN,
             "refused: your address is not allowed to connect to this PalStudio instance",
         );
+    }
+    if !peer_is_loopback && !secure_transport(&request) {
+        tracing::warn!(%peer, %path, "refused cleartext network request");
+        return error_response(
+            StatusCode::UPGRADE_REQUIRED,
+            "HTTPS is required for non-loopback connections",
+        );
+    }
+    // These routes are intentionally unauthenticated only after the peer has
+    // passed listen mode and the connect allowlist. Otherwise a public client
+    // could use this exception as an unrestricted online PIN oracle.
+    if path == "/network-unlock" || path == "/api/network/session" {
+        return next.run(request).await;
     }
     if verdict.auth_required && !runtime.session_valid(request.headers()) {
         tracing::info!(%peer, %path, "PIN session required");
@@ -265,6 +364,10 @@ pub async fn network_gate(
     next.run(request).await
 }
 
+fn secure_transport(request: &Request) -> bool {
+    request.uri().scheme_str() == Some("https")
+}
+
 pub(crate) fn error_response(status: StatusCode, message: &str) -> Response {
     (status, Json(serde_json::json!({ "error": message }))).into_response()
 }
@@ -292,16 +395,14 @@ pub(crate) fn security_warnings(config: &NetworkConfig) -> Vec<String> {
     let mut warnings = Vec::new();
     if config.listen != ListenMode::Localhost && config.auth.scope == AuthScope::Never {
         warnings.push(format!(
-            "listening on '{}' without a PIN — {} can connect AND edit saves; \
-             set a PIN (PS_PIN or the Network page)",
+            "listening on '{}' without a PIN — {} can read only; set a PIN and an explicit \
+             write allowlist for network edits",
             config.listen.as_str(),
             ps_network::default_audience(config.listen)
         ));
     }
     if config.auth.scope != AuthScope::Never && config.auth.pin.is_none() {
-        warnings.push(
-            "auth is on but no PIN is set — non-loopback peers are refused until one is".into(),
-        );
+        warnings.push("auth is enabled but no PIN is set; network peers are refused".into());
     }
     warnings
 }
@@ -310,6 +411,13 @@ pub(crate) fn security_warnings(config: &NetworkConfig) -> Vec<String> {
 /// every boot (the Docker posture set by docker-compose.yml).
 fn env_mode_always() -> bool {
     std::env::var(ENV_MODE).is_ok_and(|mode| mode.trim().eq_ignore_ascii_case("always"))
+}
+
+async fn apply_env_blocking(config: NetworkConfig) -> anyhow::Result<NetworkConfig> {
+    tokio::task::spawn_blocking(move || config.apply_env())
+        .await
+        .map_err(|error| anyhow::anyhow!("network environment task failed: {error}"))?
+        .map_err(anyhow::Error::from)
 }
 
 // ---------------------------------------------------------------------------
@@ -403,29 +511,43 @@ fn redact(config: &NetworkConfig) -> NetworkConfigDto {
     }
 }
 
-/// Validates a candidate config beyond serde: port range and parseable
-/// CIDR entries in both allowlists.
+/// Validates an API update before it is allowed to reach either the database
+/// or an external networking daemon.
 fn validate(update: &NetworkConfigUpdate) -> Vec<String> {
     let mut errors = Vec::new();
     if update.port == 0 {
         errors.push("port must be between 1 and 65535".into());
     }
+    if !(MIN_SESSION_TTL_SECS..=MAX_SESSION_TTL_SECS).contains(&update.auth.session_ttl_secs) {
+        errors.push(format!(
+            "session_ttl_secs must be between {MIN_SESSION_TTL_SECS} and {MAX_SESSION_TTL_SECS}"
+        ));
+    }
     for (label, rules) in [
         ("allow.connect", &update.allow.connect),
         ("allow.write", &update.allow.write),
     ] {
+        if rules.len() > 256 {
+            errors.push(format!("{label} contains too many entries"));
+        }
         for entry in rules {
-            if ps_network::policy::IpNet::parse(entry).is_none() {
-                errors.push(format!(
-                    "{label}: '{entry}' is not a valid IP or CIDR range"
-                ));
+            if entry.len() > 64
+                || entry.chars().any(char::is_control)
+                || ps_network::policy::IpNet::parse(entry).is_none()
+            {
+                errors.push(format!("{label}: invalid entry `{entry}`"));
             }
         }
     }
     if let Some(pin) = update.auth.new_pin.as_deref() {
-        if pin.chars().count() < 4 && !pin.is_empty() {
-            errors.push("new_pin: use at least 4 characters (or empty to clear)".into());
+        if !pin.is_empty() {
+            if let Err(error) = ps_network::validate_pin(pin) {
+                errors.push(format!("new_pin: {error}"));
+            }
         }
+    }
+    if update.funnel_enabled && update.auth.scope != AuthScope::Always {
+        errors.push("Tailscale Funnel requires AuthScope::Always".into());
     }
     errors
 }
@@ -442,11 +564,24 @@ async fn put_config(
         );
     }
 
+    let errors = validate(&update);
+    if !errors.is_empty() {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({ "error": errors.join("; ") })),
+        )
+            .into_response();
+    }
+
+    // Serialize the complete update workflow. This prevents two requests
+    // from interleaving router/daemon changes and database commits.
+    let _update_guard = runtime.lock_updates().await;
+    let old = runtime.config();
+
     // A hand-launched local webapp is a local tool: only the port is
     // editable, everything else stays clamped to localhost. The stored
     // policy is preserved untouched for a later hosted/service run.
     if runtime.tier() == NetworkTier::LocalWebapp {
-        let stored = runtime.config();
         if update.listen != ListenMode::Localhost
             || !update.allow.connect.is_empty()
             || !update.allow.write.is_empty()
@@ -461,16 +596,19 @@ async fn put_config(
                  run it as a background service or `palstudio host` for full network settings",
             );
         }
-        let port_changed = update.port != stored.port;
-        let mut merged = stored;
+        let port_changed = update.port != old.port;
+        let mut merged = old.clone();
         merged.port = update.port;
-        runtime.set_config(merged);
-        if let Err(error) = runtime.save(&*app.driver).await {
+        if let Err(error) = merged.validate() {
+            return error_response(StatusCode::BAD_REQUEST, &error.to_string());
+        }
+        if let Err(error) = ps_db::meta::set(&*app.driver, META_KEY, &merged.to_json()).await {
             return error_response(
                 StatusCode::INTERNAL_SERVER_ERROR,
                 &format!("could not persist network config: {error}"),
             );
         }
+        runtime.set_config(merged);
         if port_changed {
             tracing::info!(
                 new = update.port,
@@ -492,21 +630,11 @@ async fn put_config(
             .into_response();
     }
 
-    let errors = validate(&update);
-    if !errors.is_empty() {
-        return (
-            StatusCode::BAD_REQUEST,
-            Json(serde_json::json!({ "error": errors.join("; ") })),
-        )
-            .into_response();
-    }
-
-    let old = runtime.config();
     let mut merged = NetworkConfig {
         version: old.version,
         listen: update.listen,
         port: update.port,
-        allow: update.allow,
+        allow: update.allow.clone(),
         auth: ps_network::AuthConfig {
             scope: update.auth.scope,
             pin: old.auth.pin.clone(),
@@ -517,80 +645,75 @@ async fn put_config(
     };
     match update.auth.new_pin.as_deref() {
         Some("") => merged.auth.pin = None,
-        Some(pin) => merged.auth.pin = Some(ps_network::PinHash::generate(pin)),
+        Some(pin) => {
+            let pin = pin.to_owned();
+            let generated =
+                tokio::task::spawn_blocking(move || ps_network::PinHash::generate(&pin))
+                    .await
+                    .map_err(|error| format!("PIN hashing task failed: {error}"));
+            match generated {
+                Ok(hash) => merged.auth.pin = Some(hash),
+                Err(error) => return error_response(StatusCode::INTERNAL_SERVER_ERROR, &error),
+            }
+        }
         None => {}
     }
 
-    let mut warnings = security_warnings(&merged);
-    if merged.funnel_enabled && merged.auth.scope == AuthScope::Never {
-        warnings.push(
-            "tailscale funnel forwards arrive via the local tailscale proxy and cannot be \
-             IP-filtered; set a PIN before exposing funnel"
-                .into(),
-        );
+    if let Err(error) = merged.validate() {
+        return error_response(StatusCode::BAD_REQUEST, &error.to_string());
     }
+
+    if merged.listen == ListenMode::Tailscale {
+        if let Err(error) = runtime.refresh_tailnet_peers().await {
+            return error_response(
+                StatusCode::BAD_GATEWAY,
+                &format!("Tailscale peer identity could not be verified: {error}"),
+            );
+        }
+    }
+
+    let mut warnings = security_warnings(&merged);
     if merged.upnp_enabled {
         warnings
             .push("UPnP opens a port on your router — tailscale is the safer remote path".into());
     }
 
-    // Side effects first; only persist what actually took effect. The
-    // decision compares against the LIVE funnel state, not just the stored
-    // one: when reality drifted (funnel toggled outside the tool, or a prior
-    // save's CLI call failed), saving the same toggle again must still
-    // reconcile instead of being a no-op. Without tailscale the probe fails
-    // fast and reports "off", which only matters when funnel was requested.
-    let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
-        .await
-        .unwrap_or_default();
-    let port_suffix = format!(":{}", merged.port);
-    let pointing_elsewhere =
-        merged.funnel_enabled && !live.targets.iter().any(|t| t.ends_with(&port_suffix));
-    if live.on != merged.funnel_enabled || pointing_elsewhere {
-        let enable = merged.funnel_enabled;
-        let port = merged.port;
-        let outcome =
-            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(enable, port))
-                .await
-                .unwrap_or_else(|error| Err(format!("funnel task failed: {error}")));
-        if let Err(error) = outcome {
-            warnings.push(format!("tailscale funnel could not be updated: {error}"));
-            merged.funnel_enabled = old.funnel_enabled;
-        }
+    // Commit the candidate first. External changes are a compensating
+    // transaction: if reconciliation fails, restore both the old resources
+    // and the old database row before exposing the new runtime state.
+    if let Err(error) = ps_db::meta::set(&*app.driver, META_KEY, &merged.to_json()).await {
+        return error_response(
+            StatusCode::INTERNAL_SERVER_ERROR,
+            &format!("could not persist network config: {error}"),
+        );
     }
-    if merged.upnp_enabled && !old.upnp_enabled {
-        let port = merged.port;
-        #[cfg(feature = "upnp")]
-        let outcome = ps_network::upnp::map_port(port, "PalStudio").await.err();
-        #[cfg(not(feature = "upnp"))]
-        let outcome = Some("this build does not include UPnP support".to_owned());
-        if let Some(error) = outcome {
-            warnings.push(format!("UPnP mapping failed: {error}"));
-            merged.upnp_enabled = false;
+
+    if let Err(error) = reconcile_network_resources(&old, &merged).await {
+        tracing::error!(%error, "network resource transaction failed; rolling back");
+        if let Err(rollback_error) = reconcile_network_resources(&merged, &old).await {
+            tracing::error!(%rollback_error, "network resource rollback failed");
         }
-    } else if !merged.upnp_enabled && old.upnp_enabled {
-        #[cfg(feature = "upnp")]
-        if let Err(error) = ps_network::upnp::unmap_port(old.port).await {
-            warnings.push(format!("could not remove the UPnP mapping: {error}"));
+        if let Err(rollback_error) = ps_db::meta::set(&*app.driver, META_KEY, &old.to_json()).await
+        {
+            tracing::error!(%rollback_error, "network config database rollback failed");
         }
+        return error_response(
+            StatusCode::BAD_GATEWAY,
+            &format!("network resource update failed; previous configuration restored when possible: {error}"),
+        );
     }
 
     let port_changed = merged.port != old.port;
+    let listen_changed = merged.listen != old.listen;
     let new_port = merged.port;
-    runtime.set_config(merged);
-    if let Err(error) = runtime.save(&*app.driver).await {
-        return (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            Json(serde_json::json!({ "error": format!("could not persist network config: {error}") })),
-        )
-            .into_response();
-    }
+    runtime.set_config(merged.clone());
 
-    if port_changed {
+    if port_changed || listen_changed {
         tracing::info!(
             old = old.port,
             new = new_port,
-            "network port changed; requesting rebind"
+            listen_changed,
+            "network listener configuration changed; requesting rebind"
         );
         if env_mode_always() {
             // The container posture: the published port mapping (docker -p /
@@ -610,11 +733,125 @@ async fn put_config(
         StatusCode::OK,
         Json(serde_json::json!({
             "config": redact(&runtime.config()),
-            "restart_required": port_changed,
+            "restart_required": port_changed || listen_changed,
             "warnings": warnings,
         })),
     )
         .into_response()
+}
+
+pub(crate) async fn reconcile_current_resources(config: &NetworkConfig) -> Result<(), String> {
+    if config.funnel_enabled {
+        let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
+            .await
+            .map_err(|error| format!("funnel probe task failed: {error}"))?;
+        if !live.available {
+            return Err("Tailscale Funnel is enabled but the CLI is unavailable".into());
+        }
+        let target_matches =
+            live.on && ps_network::tailscale::funnel_owns_local_port(&live, config.port);
+        if !live.on || !target_matches {
+            let port = config.port;
+            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(true, port))
+                .await
+                .map_err(|error| format!("funnel update task failed: {error}"))??;
+        }
+    } else {
+        let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
+            .await
+            .map_err(|error| format!("funnel cleanup probe task failed: {error}"))?;
+        if live.available && live.on && ps_network::tailscale::funnel_owns_local_targets(&live) {
+            let port = config.port;
+            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(false, port))
+                .await
+                .map_err(|error| format!("funnel cleanup task failed: {error}"))??;
+        }
+    }
+
+    #[cfg(feature = "upnp")]
+    if config.upnp_enabled {
+        tokio::time::timeout(
+            Duration::from_secs(20),
+            ps_network::upnp::map_port(config.port, "PalStudio"),
+        )
+        .await
+        .map_err(|_| "UPnP mapping timed out".to_owned())??;
+        tokio::time::timeout(
+            Duration::from_secs(20),
+            ps_network::upnp::remove_owned_mappings_except("PalStudio", Some(config.port)),
+        )
+        .await
+        .map_err(|_| "stale UPnP mapping cleanup timed out".to_owned())??;
+    } else {
+        tokio::time::timeout(
+            Duration::from_secs(20),
+            ps_network::upnp::remove_owned_mappings("PalStudio"),
+        )
+        .await
+        .map_err(|_| "stale UPnP mapping cleanup timed out".to_owned())??;
+    }
+    #[cfg(not(feature = "upnp"))]
+    if config.upnp_enabled {
+        return Err("this build does not include UPnP support".into());
+    }
+    Ok(())
+}
+
+async fn reconcile_network_resources(
+    old: &NetworkConfig,
+    new: &NetworkConfig,
+) -> Result<(), String> {
+    if old.funnel_enabled != new.funnel_enabled
+        || old.port != new.port
+        || (new.funnel_enabled && old.funnel_enabled)
+    {
+        let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
+            .await
+            .map_err(|error| format!("funnel probe task failed: {error}"))?;
+        if !live.available && (old.funnel_enabled || new.funnel_enabled) {
+            return Err("Tailscale CLI is unavailable while Funnel state must change".into());
+        }
+        let pointing_at_new_port =
+            live.on && ps_network::tailscale::funnel_owns_local_port(&live, new.port);
+        if live.on != new.funnel_enabled || (new.funnel_enabled && !pointing_at_new_port) {
+            let enabled = new.funnel_enabled;
+            let port = new.port;
+            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(enabled, port))
+                .await
+                .map_err(|error| format!("funnel update task failed: {error}"))??;
+        }
+    }
+
+    #[cfg(feature = "upnp")]
+    {
+        if new.upnp_enabled {
+            tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::map_port(new.port, "PalStudio"),
+            )
+            .await
+            .map_err(|_| "UPnP mapping timed out".to_owned())??;
+            tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::remove_owned_mappings_except("PalStudio", Some(new.port)),
+            )
+            .await
+            .map_err(|_| "stale UPnP mapping cleanup timed out".to_owned())??;
+        } else if old.upnp_enabled {
+            tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::remove_owned_mappings("PalStudio"),
+            )
+            .await
+            .map_err(|_| "UPnP unmapping timed out".to_owned())??;
+        }
+    }
+    #[cfg(not(feature = "upnp"))]
+    if new.upnp_enabled {
+        return Err("this build does not include UPnP support".into());
+    }
+
+    Ok(())
 }
 
 #[derive(serde::Deserialize)]
@@ -623,55 +860,106 @@ struct SessionRequest {
 }
 
 async fn create_session(
+    ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
     axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime>>,
     Json(request): Json<SessionRequest>,
 ) -> Response {
-    let config = runtime.config();
+    if let Some(retry_after) = runtime.auth_retry_after(peer.ip()) {
+        let mut response = error_response(
+            StatusCode::TOO_MANY_REQUESTS,
+            "too many failed PIN attempts; try again later",
+        );
+        if let Ok(value) = HeaderValue::from_str(&retry_after.as_secs().max(1).to_string()) {
+            response.headers_mut().insert(header::RETRY_AFTER, value);
+        }
+        return response;
+    }
+
+    let config = runtime.effective_config();
     let Some(hash) = config.auth.pin.clone() else {
         return error_response(StatusCode::CONFLICT, "no PIN is configured");
     };
     let ttl = Duration::from_secs(config.auth.session_ttl_secs);
-    if !hash.matches(&request.pin) {
+    let pin = request.pin;
+    let pin_shape_ok = (MIN_PIN_CHARS..=MAX_PIN_CHARS).contains(&pin.chars().count())
+        && !pin.chars().any(char::is_control);
+    let matches = tokio::task::spawn_blocking(move || pin_shape_ok && hash.matches(&pin))
+        .await
+        .unwrap_or(false);
+    if !matches {
+        let retry_after = runtime.record_auth_failure(peer.ip());
         tokio::time::sleep(FAILED_PIN_DELAY).await;
-        return error_response(StatusCode::UNAUTHORIZED, "wrong PIN");
+        let mut response = error_response(StatusCode::UNAUTHORIZED, "wrong PIN");
+        if let Some(retry_after) = retry_after {
+            if let Ok(value) = HeaderValue::from_str(&retry_after.as_secs().max(1).to_string()) {
+                response.headers_mut().insert(header::RETRY_AFTER, value);
+            }
+        }
+        return response;
     }
+    runtime.record_auth_success(peer.ip());
     let token = runtime.sessions.issue(ttl);
-    let cookie = format!(
-        "{SESSION_COOKIE}={token}; Path=/; HttpOnly; SameSite=Lax; Max-Age={}",
+    let secure = config.funnel_enabled
+        || !ps_network::canonical(peer.ip()).is_loopback()
+        || secure_transport_from_headers(&headers);
+    let mut cookie = format!(
+        "{SESSION_COOKIE}={token}; Path=/; HttpOnly; SameSite=Strict; Max-Age={}",
         config.auth.session_ttl_secs
     );
+    if secure {
+        cookie.push_str("; Secure");
+    }
     let mut response = (StatusCode::OK, Json(serde_json::json!({ "ok": true }))).into_response();
     response.headers_mut().insert(
         header::SET_COOKIE,
         HeaderValue::from_str(&cookie).expect("session cookie is header-safe"),
     );
     response
-}
-
-async fn delete_session(
-    State(_app): State<Arc<AppState>>,
-    axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime>>,
-    request: Request,
-) -> Response {
-    if let Some(token) = cookie_token_from(request.headers()) {
-        runtime.sessions.revoke(&token);
-    }
-    // Clear the cookie regardless so the browser drops it.
-    let mut response = (StatusCode::OK, Json(serde_json::json!({ "ok": true }))).into_response();
-    response.headers_mut().insert(
-        header::SET_COOKIE,
-        HeaderValue::from_static("ps_network_session=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0"),
-    );
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-store"));
     response
 }
 
-fn cookie_token_from(headers: &axum::http::HeaderMap) -> Option<String> {
+async fn delete_session(
+    ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
+    axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime>>,
+) -> Response {
+    if let Some(token) = session_token_from(&headers) {
+        runtime.sessions.revoke(&token);
+    }
+    // Clear the cookie regardless so the browser drops it.
+    let secure = runtime.effective_config().funnel_enabled
+        || !ps_network::canonical(peer.ip()).is_loopback()
+        || secure_transport_from_headers(&headers);
+    let suffix = if secure { "; Secure" } else { "" };
+    let cookie = format!("{SESSION_COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0{suffix}");
+    let mut response = (StatusCode::OK, Json(serde_json::json!({ "ok": true }))).into_response();
+    response.headers_mut().insert(
+        header::SET_COOKIE,
+        HeaderValue::from_str(&cookie).expect("session cookie is header-safe"),
+    );
+    response
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-store"));
+    response
+}
+
+pub(crate) fn session_token_from(headers: &axum::http::HeaderMap) -> Option<String> {
     let cookie = headers.get(header::COOKIE)?.to_str().ok()?;
     cookie.split(';').find_map(|part| {
         let part = part.trim();
-        part.strip_prefix(SESSION_COOKIE)
-            .map(|rest| rest.trim_start_matches('=').trim().to_owned())
+        let (name, value) = part.split_once('=')?;
+        (name.trim() == SESSION_COOKIE && !value.trim().is_empty()).then(|| value.trim().to_owned())
     })
+}
+
+fn secure_transport_from_headers(headers: &HeaderMap) -> bool {
+    headers
+        .get("x-forwarded-proto")
+        .and_then(|value| value.to_str().ok())
+        .is_some_and(|value| value.eq_ignore_ascii_case("https"))
 }
 
 async fn get_status(
@@ -718,8 +1006,12 @@ async fn get_status(
 
 /// Self-contained PIN entry page — inline CSS/JS, no SPA assets, so it can
 /// be served (and pass the gate) while everything else is locked.
-pub async fn unlock_page() -> Html<&'static str> {
-    Html(UNLOCK_PAGE_HTML)
+pub async fn unlock_page() -> Response {
+    let mut response = Html(UNLOCK_PAGE_HTML).into_response();
+    response
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-store"));
+    response
 }
 
 const UNLOCK_PAGE_HTML: &str = r#"<!doctype html>

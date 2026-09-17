@@ -8,16 +8,56 @@ pub struct Migration {
 }
 
 pub const MIGRATIONS: &[Migration] = &[
-    Migration { version: 1, name: "settings", sql: include_str!("../migrations/0001_settings.sql") },
-    Migration { version: 2, name: "presets", sql: include_str!("../migrations/0002_presets.sql") },
-    Migration { version: 3, name: "ups", sql: include_str!("../migrations/0003_ups.sql") },
-    Migration { version: 4, name: "servers", sql: include_str!("../migrations/0004_servers.sql") },
-    Migration { version: 5, name: "meta", sql: include_str!("../migrations/0005_meta.sql") },
-    Migration { version: 6, name: "blueprints", sql: include_str!("../migrations/0006_blueprints.sql") },
-    Migration { version: 7, name: "ups_awakened_imported", sql: include_str!("../migrations/0007_ups_awakened_imported.sql") },
-    Migration { version: 8, name: "plugins", sql: include_str!("../migrations/0008_plugins.sql") },
-    Migration { version: 9, name: "signal_devices", sql: include_str!("../migrations/0009_signal_devices.sql") },
-    Migration { version: 10, name: "amity_instances", sql: include_str!("../migrations/0010_amity_instances.sql") },
+    Migration {
+        version: 1,
+        name: "settings",
+        sql: include_str!("../migrations/0001_settings.sql"),
+    },
+    Migration {
+        version: 2,
+        name: "presets",
+        sql: include_str!("../migrations/0002_presets.sql"),
+    },
+    Migration {
+        version: 3,
+        name: "ups",
+        sql: include_str!("../migrations/0003_ups.sql"),
+    },
+    Migration {
+        version: 4,
+        name: "servers",
+        sql: include_str!("../migrations/0004_servers.sql"),
+    },
+    Migration {
+        version: 5,
+        name: "meta",
+        sql: include_str!("../migrations/0005_meta.sql"),
+    },
+    Migration {
+        version: 6,
+        name: "blueprints",
+        sql: include_str!("../migrations/0006_blueprints.sql"),
+    },
+    Migration {
+        version: 7,
+        name: "ups_awakened_imported",
+        sql: include_str!("../migrations/0007_ups_awakened_imported.sql"),
+    },
+    Migration {
+        version: 8,
+        name: "plugins",
+        sql: include_str!("../migrations/0008_plugins.sql"),
+    },
+    Migration {
+        version: 9,
+        name: "signal_devices",
+        sql: include_str!("../migrations/0009_signal_devices.sql"),
+    },
+    Migration {
+        version: 10,
+        name: "amity_instances",
+        sql: include_str!("../migrations/0010_amity_instances.sql"),
+    },
 ];
 
 const CREATE_TRACKER: &str =
@@ -81,7 +121,11 @@ mod tests {
 
     impl MockDriver {
         fn new(legacy_tracker: bool) -> Self {
-            Self { applied: Mutex::new(vec![]), executes: Mutex::new(vec![]), legacy_tracker }
+            Self {
+                applied: Mutex::new(vec![]),
+                executes: Mutex::new(vec![]),
+                legacy_tracker,
+            }
         }
     }
 
@@ -99,9 +143,17 @@ mod tests {
         async fn query(&self, sql: &str, _params: &[DbValue]) -> Result<Vec<DbRow>, DbError> {
             if sql == SELECT_TRACKERS {
                 let cols = Arc::new(vec!["legacy".to_string(), "current".to_string()]);
-                let renamed = self.executes.lock().unwrap().iter().any(|s| s == RENAME_LEGACY_TRACKER);
+                let renamed = self
+                    .executes
+                    .lock()
+                    .unwrap()
+                    .iter()
+                    .any(|s| s == RENAME_LEGACY_TRACKER);
                 let legacy = i64::from(self.legacy_tracker && !renamed);
-                return Ok(vec![DbRow::from_parts(cols, vec![DbValue::Integer(legacy), DbValue::Integer(1 - legacy)])]);
+                return Ok(vec![DbRow::from_parts(
+                    cols,
+                    vec![DbValue::Integer(legacy), DbValue::Integer(1 - legacy)],
+                )]);
             }
             let cols = Arc::new(vec!["version".to_string()]);
             Ok(self
@@ -119,8 +171,13 @@ mod tests {
         let driver = MockDriver::new(true);
         run_migrations(&driver).await.unwrap();
         run_migrations(&driver).await.unwrap();
-        let renames =
-            driver.executes.lock().unwrap().iter().filter(|s| *s == RENAME_LEGACY_TRACKER).count();
+        let renames = driver
+            .executes
+            .lock()
+            .unwrap()
+            .iter()
+            .filter(|s| *s == RENAME_LEGACY_TRACKER)
+            .count();
         assert_eq!(renames, 1);
     }
 
@@ -128,7 +185,10 @@ mod tests {
     async fn applies_all_then_is_idempotent() {
         let driver = MockDriver::new(false);
         run_migrations(&driver).await.unwrap();
-        assert_eq!(driver.applied.lock().unwrap().clone(), vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        assert_eq!(
+            driver.applied.lock().unwrap().clone(),
+            vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        );
         let migration_execs = driver
             .executes
             .lock()

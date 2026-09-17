@@ -61,7 +61,10 @@ pub fn scan_endpoints(dir: &Path, liveness: &dyn Fn(u32) -> bool) -> Vec<Discove
 
 pub fn sysinfo_liveness(pid: u32) -> bool {
     let mut system = System::new();
-    system.refresh_processes(sysinfo::ProcessesToUpdate::Some(&[Pid::from_u32(pid)]), true);
+    system.refresh_processes(
+        sysinfo::ProcessesToUpdate::Some(&[Pid::from_u32(pid)]),
+        true,
+    );
     system
         .process(Pid::from_u32(pid))
         .map(|process| !matches!(process.status(), ProcessStatus::Zombie))
@@ -107,8 +110,11 @@ mod tests {
     #[test]
     fn multiple_live_instances_are_returned_sorted_by_pid() {
         let dir = tempfile::tempdir().unwrap();
-        write(dir.path(), "30.json",
-            r#"{"protocolVersion":2,"port":2,"token":"b","name":"B","bind":"0.0.0.0","pid":30,"startedAt":"n"}"#);
+        write(
+            dir.path(),
+            "30.json",
+            r#"{"protocolVersion":2,"port":2,"token":"b","name":"B","bind":"0.0.0.0","pid":30,"startedAt":"n"}"#,
+        );
         write(dir.path(), "11.json", LIVE);
         let found = scan_endpoints(dir.path(), &|_| true);
         assert_eq!(found.len(), 2);
@@ -126,8 +132,11 @@ mod tests {
     #[test]
     fn wrong_protocol_version_is_skipped() {
         let dir = tempfile::tempdir().unwrap();
-        write(dir.path(), "11.json",
-            r#"{"protocolVersion":1,"port":1,"token":"t","pid":11,"startedAt":"n"}"#);
+        write(
+            dir.path(),
+            "11.json",
+            r#"{"protocolVersion":1,"port":1,"token":"t","pid":11,"startedAt":"n"}"#,
+        );
         assert!(scan_endpoints(dir.path(), &|_| true).is_empty());
     }
 
@@ -151,8 +160,11 @@ mod tests {
     #[test]
     fn missing_name_falls_back_to_a_placeholder() {
         let dir = tempfile::tempdir().unwrap();
-        write(dir.path(), "11.json",
-            r#"{"protocolVersion":2,"port":1,"token":"t","pid":11,"startedAt":"n"}"#);
+        write(
+            dir.path(),
+            "11.json",
+            r#"{"protocolVersion":2,"port":1,"token":"t","pid":11,"startedAt":"n"}"#,
+        );
         let found = scan_endpoints(dir.path(), &|_| true);
         assert_eq!(found.len(), 1);
         assert_eq!(found[0].name, "PSAmity");

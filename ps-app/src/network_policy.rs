@@ -34,6 +34,12 @@ impl ConnectionAcl {
 pub trait NetworkPolicy: Send + Sync {
     fn acl_for(&self, peer: IpAddr) -> ConnectionAcl;
     fn has_valid_session(&self, token: &str) -> bool;
+    /// Changes to listen/auth/write policy invalidate existing WebSocket
+    /// connections. Implementations without a mutable policy keep generation
+    /// zero for wasm and test transports.
+    fn policy_generation(&self) -> u64 {
+        0
+    }
 }
 
 /// Convenience for call sites that only have `Option<Arc<dyn NetworkPolicy>>`.
@@ -42,4 +48,11 @@ pub fn acl_for(app_policy: &Option<Arc<dyn NetworkPolicy>>, peer: IpAddr) -> Con
         .as_ref()
         .map(|policy| policy.acl_for(peer))
         .unwrap_or_else(ConnectionAcl::unrestricted)
+}
+
+pub fn policy_generation(app_policy: &Option<Arc<dyn NetworkPolicy>>) -> u64 {
+    app_policy
+        .as_ref()
+        .map(|policy| policy.policy_generation())
+        .unwrap_or(0)
 }

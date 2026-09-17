@@ -22,8 +22,8 @@ const HELLO_ID: &str = "h1";
 const AUTH_ID: &str = "h2";
 
 pub fn compute_proof(token: &str, nonce: &str) -> String {
-    let mut mac = Hmac::<Sha256>::new_from_slice(token.as_bytes())
-        .expect("HMAC accepts keys of any length");
+    let mut mac =
+        Hmac::<Sha256>::new_from_slice(token.as_bytes()).expect("HMAC accepts keys of any length");
     mac.update(nonce.as_bytes());
     mac.finalize()
         .into_bytes()
@@ -39,7 +39,9 @@ pub enum Command {
         data: Value,
         reply: oneshot::Sender<Result<Value, BridgeError>>,
     },
-    CancelRequest { id: String },
+    CancelRequest {
+        id: String,
+    },
 }
 
 impl Command {
@@ -318,8 +320,12 @@ mod tests {
 
         match result {
             Err(ConnectError::Auth { code }) => assert_eq!(code, "protocol_version_unsupported"),
-            Err(ConnectError::Transport) => panic!("hello-phase error lost its code, fell back to Transport"),
-            Err(ConnectError::Cancelled) => panic!("expected Err(ConnectError::Auth), got Cancelled"),
+            Err(ConnectError::Transport) => {
+                panic!("hello-phase error lost its code, fell back to Transport")
+            }
+            Err(ConnectError::Cancelled) => {
+                panic!("expected Err(ConnectError::Auth), got Cancelled")
+            }
             Ok(_) => panic!("expected Err(ConnectError::Auth), got Ok(Connected)"),
         }
     }

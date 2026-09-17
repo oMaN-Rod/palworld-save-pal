@@ -9,6 +9,7 @@
 use std::path::{Path, PathBuf};
 
 use anyhow::{anyhow, Context, Result};
+use ring::signature::{UnparsedPublicKey, ED25519};
 use sha2::{Digest, Sha256};
 
 /// Where the versioned UI and game data live during a normal install.
@@ -18,9 +19,13 @@ pub struct AssetPaths {
 }
 
 const DEFAULT_REPO: &str = "oMaN-Rod/palworld-save-pal";
+const SIGNING_PUBLIC_KEY: &[u8; 32] = &[
+    28, 163, 7, 28, 242, 168, 116, 229, 210, 190, 104, 92, 159, 94, 44, 123, 68, 38, 75, 85, 152,
+    226, 47, 222, 127, 71, 31, 160, 31, 13, 81, 222,
+];
 
 /// The server-bundle platform token used in release asset names, e.g.
-/// `palstudio-v1.4.2-server-linux-x86_64.tar.gz`.
+/// `palstudio-v1.5.0-server-linux-x86_64.tar.gz`.
 fn asset_platform() -> Option<&'static str> {
     match (std::env::consts::OS, std::env::consts::ARCH) {
         ("linux", "x86_64") => Some("linux-x86_64"),
@@ -30,6 +35,24 @@ fn asset_platform() -> Option<&'static str> {
         ("windows", "x86_64") => Some("windows-x64"),
         _ => None,
     }
+}
+
+async fn get_https(
+    client: &reqwest::Client,
+    url: &str,
+    description: &str,
+) -> Result<reqwest::Response> {
+    let response = client
+        .get(url)
+        .send()
+        .await
+        .with_context(|| format!("{description} request failed"))?;
+    if response.url().scheme() != "https" || response.status().is_redirection() {
+        return Err(anyhow!("{description} did not complete over HTTPS"));
+    }
+    response
+        .error_for_status()
+        .with_context(|| format!("{description} returned an error status"))
 }
 
 /// Per-user root for `ui/`, `data/` and the database — the conventional data
@@ -79,20 +102,22 @@ pub async fn ensure_assets(data_home: &Path) -> Result<AssetPaths> {
     })?;
     let bundle_name = format!("palstudio-{tag}-server-{platform}.tar.gz");
     let checksums_name = format!("palstudio-{tag}-server-checksums.txt");
+    let signature_name = format!("{checksums_name}.sig");
 
     let client = reqwest::Client::builder()
         .user_agent(concat!("palstudio/", env!("CARGO_PKG_VERSION")))
+        .redirect(reqwest::redirect::Policy::custom(|attempt| {
+            if attempt.url().scheme() == "https" {
+                attempt.follow()
+            } else {
+                attempt.stop()
+            }
+        }))
         .build()?;
     let release: serde_json::Value = {
-        let resp = client
-            .get(format!(
-                "https://api.github.com/repos/{repo}/releases/tags/{tag}"
-            ))
-            .send()
-            .await
-            .map_err(|error| anyhow!("release {tag} lookup on {repo} failed: {error}"))?;
-        resp.error_for_status()
-            .map_err(|error| anyhow!("release {tag} lookup on {repo} failed: {error}"))?
+        let url = format!("https://api.github.com/repos/{repo}/releases/tags/{tag}");
+        get_https(&client, &url, &format!("release {tag} lookup on {repo}"))
+            .await?
             .json()
             .await
             .context("could not parse the release metadata")?
@@ -113,39 +138,60 @@ pub async fn ensure_assets(data_home: &Path) -> Result<AssetPaths> {
              install script"
         )
     })?;
+    let checksums_url = asset_url(&checksums_name)
+        .ok_or_else(|| anyhow!("release {tag} has no signed checksum manifest {checksums_name}"))?;
+    let signature_url = asset_url(&signature_name).ok_or_else(|| {
+        anyhow!("release {tag} has no signed checksum signature {signature_name}")
+    })?;
+    for (name, url) in [
+        (bundle_name.as_str(), bundle_url.as_str()),
+        (checksums_name.as_str(), checksums_url.as_str()),
+        (signature_name.as_str(), signature_url.as_str()),
+    ] {
+        let parsed = reqwest::Url::parse(url)
+            .with_context(|| format!("release asset {name} has an invalid URL"))?;
+        if parsed.scheme() != "https" || parsed.host_str().is_none() {
+            return Err(anyhow!("release asset {name} did not use HTTPS"));
+        }
+    }
 
     tracing::info!("provisioning first-run assets from {repo} {tag} (~25 MB)");
-    let bundle = client
-        .get(&bundle_url)
-        .send()
-        .await
-        .and_then(|resp| resp.error_for_status())
-        .map_err(|error| anyhow!("downloading {bundle_name}: {error}"))?
+    let bundle = get_https(&client, &bundle_url, &format!("downloading {bundle_name}"))
+        .await?
         .bytes()
         .await
         .context("downloaded bundle is truncated")?;
 
-    // The checksum asset is how the install scripts verify too; a release
-    // built without it still works, we just skip verification.
-    if let Some(checksums_url) = asset_url(&checksums_name) {
-        let checksums = client
-            .get(&checksums_url)
-            .send()
-            .await
-            .and_then(|resp| resp.error_for_status())
-            .map_err(|error| anyhow!("downloading {checksums_name}: {error}"))?
-            .text()
-            .await?;
-        let expected = parse_checksum(&checksums, &bundle_name)
-            .ok_or_else(|| anyhow!("{checksums_name} has no entry for {bundle_name}"))?;
-        let actual = hex(&Sha256::digest(&bundle));
-        if !expected.eq_ignore_ascii_case(&actual) {
-            return Err(anyhow!(
-                "checksum mismatch for {bundle_name}: expected {expected}, got {actual}"
-            ));
-        }
-    } else {
-        tracing::warn!("release carries no {checksums_name}; skipping verification");
+    let checksums = get_https(
+        &client,
+        &checksums_url,
+        &format!("downloading {checksums_name}"),
+    )
+    .await?
+    .bytes()
+    .await
+    .with_context(|| format!("downloading {checksums_name}"))?;
+    let signature = get_https(
+        &client,
+        &signature_url,
+        &format!("downloading {signature_name}"),
+    )
+    .await?
+    .bytes()
+    .await
+    .with_context(|| format!("downloading {signature_name}"))?;
+    UnparsedPublicKey::new(&ED25519, SIGNING_PUBLIC_KEY)
+        .verify(&checksums, &signature)
+        .map_err(|_| anyhow!("signed checksum manifest verification failed"))?;
+    let checksums_text =
+        std::str::from_utf8(&checksums).context("signed checksum manifest is not UTF-8")?;
+    let expected = parse_checksum(checksums_text, &bundle_name)
+        .ok_or_else(|| anyhow!("{checksums_name} has no entry for {bundle_name}"))?;
+    let actual = hex(&Sha256::digest(&bundle));
+    if !expected.eq_ignore_ascii_case(&actual) {
+        return Err(anyhow!(
+            "checksum mismatch for {bundle_name}: expected {expected}, got {actual}"
+        ));
     }
 
     extract_assets(&bundle, data_home)
@@ -172,14 +218,57 @@ fn hex(bytes: &[u8]) -> String {
 /// Pulls `palstudio/ui/**` and `palstudio/data/**` out of the bundle, staging
 /// first so a failed extract never replaces a working layout.
 fn extract_assets(bundle: &[u8], data_home: &Path) -> Result<()> {
+    if data_home.exists() {
+        let metadata = std::fs::symlink_metadata(data_home)?;
+        if !metadata.is_dir() || metadata.file_type().is_symlink() {
+            return Err(anyhow!(
+                "data home is not a private directory: {}",
+                data_home.display()
+            ));
+        }
+    } else {
+        std::fs::create_dir_all(data_home)?;
+    }
+    set_mode(data_home, 0o700)?;
     let stage = data_home.join(".provision-stage");
-    let _ = std::fs::remove_dir_all(&stage);
+    if stage.exists() {
+        let metadata = std::fs::symlink_metadata(&stage)?;
+        if !metadata.is_dir() || metadata.file_type().is_symlink() {
+            return Err(anyhow!(
+                "provision staging path is unsafe: {}",
+                stage.display()
+            ));
+        }
+        std::fs::remove_dir_all(&stage)?;
+    }
     std::fs::create_dir_all(&stage)?;
 
     let mut archive = tar::Archive::new(flate2::read::GzDecoder::new(bundle));
     for entry in archive.entries()? {
         let mut entry = entry?;
         let path = entry.path()?.to_path_buf();
+        if !safe_member(&path) {
+            return Err(anyhow!(
+                "refusing unsafe archive member: {}",
+                path.display()
+            ));
+        }
+        let entry_type = entry.header().entry_type();
+        if entry_type.is_symlink()
+            || entry_type.is_hard_link()
+            || !entry_type.is_file() && !entry_type.is_dir()
+        {
+            return Err(anyhow!(
+                "archive links and special files are not permitted: {}",
+                path.display()
+            ));
+        }
+        if entry.header().mode()? & 0o6000 != 0 {
+            return Err(anyhow!(
+                "archive privileged mode is not permitted: {}",
+                path.display()
+            ));
+        }
         let Some(rest) = strip_bundle_prefix(&path) else {
             continue; // bin/ and README.txt are not needed here
         };
@@ -188,6 +277,10 @@ fn extract_assets(bundle: &[u8], data_home: &Path) -> Result<()> {
                 "refusing bundle member outside ui/ or data/: {}",
                 path.display()
             ));
+        }
+        if !matches!(rest.components().next(), Some(std::path::Component::Normal(name)) if name == "ui" || name == "data")
+        {
+            continue;
         }
         let dest = stage.join(rest);
         if entry.header().entry_type().is_dir() {
@@ -200,23 +293,100 @@ fn extract_assets(bundle: &[u8], data_home: &Path) -> Result<()> {
         }
     }
 
-    for dir in ["ui", "data"] {
-        let staged = stage.join(dir);
-        if !staged.is_dir() {
-            continue;
+    harden_tree(&stage)?;
+
+    let mut retired = Vec::new();
+    let mut installed = Vec::new();
+    let swap_result: Result<()> = (|| {
+        for dir in ["ui", "data"] {
+            let staged = stage.join(dir);
+            if !staged.is_dir() {
+                continue;
+            }
+            let live = data_home.join(dir);
+            let retire = data_home.join(format!(".{dir}.retired"));
+            if retire.exists() {
+                let metadata = std::fs::symlink_metadata(&retire)?;
+                if !metadata.is_dir() || metadata.file_type().is_symlink() {
+                    return Err(anyhow!("retirement path is unsafe: {}", retire.display()));
+                }
+                std::fs::remove_dir_all(&retire)?;
+            }
+            if live.exists() {
+                let metadata = std::fs::symlink_metadata(&live)?;
+                if !metadata.is_dir() || metadata.file_type().is_symlink() {
+                    return Err(anyhow!("live asset path is unsafe: {}", live.display()));
+                }
+                std::fs::rename(&live, &retire)
+                    .with_context(|| format!("retiring {}", live.display()))?;
+                retired.push((live.clone(), retire.clone()));
+            }
+            std::fs::rename(&staged, &live)
+                .with_context(|| format!("moving {} into place", live.display()))?;
+            installed.push(live);
         }
-        let live = data_home.join(dir);
-        let retire = data_home.join(format!(".{dir}.retired"));
-        let _ = std::fs::remove_dir_all(&retire);
-        if live.exists() && std::fs::rename(&live, &retire).is_err() {
-            std::fs::remove_dir_all(&live)
-                .with_context(|| format!("replacing {}", live.display()))?;
+        Ok(())
+    })();
+    if let Err(error) = swap_result {
+        for live in installed.iter().rev() {
+            let _ = std::fs::remove_dir_all(live);
         }
-        std::fs::rename(&staged, &live)
-            .with_context(|| format!("moving {} into place", live.display()))?;
-        let _ = std::fs::remove_dir_all(&retire);
+        for (old_live, old_retire) in retired.iter().rev() {
+            if old_retire.exists() {
+                let _ = std::fs::rename(old_retire, old_live);
+            }
+        }
+        return Err(error);
     }
-    let _ = std::fs::remove_dir_all(&stage);
+    for (_, retire) in &retired {
+        if let Err(error) = std::fs::remove_dir_all(retire) {
+            tracing::warn!(path = %retire.display(), %error, "could not remove retired asset directory");
+        }
+    }
+    if let Err(error) = std::fs::remove_dir_all(&stage) {
+        tracing::warn!(path = %stage.display(), %error, "could not remove provisioning staging directory");
+    }
+    Ok(())
+}
+
+fn harden_tree(root: &Path) -> Result<()> {
+    for entry in walkdir(root)? {
+        let metadata = std::fs::symlink_metadata(&entry)?;
+        if metadata.file_type().is_symlink() {
+            return Err(anyhow!(
+                "extracted asset contains a symlink: {}",
+                entry.display()
+            ));
+        }
+        let permissions = if metadata.is_dir() { 0o700 } else { 0o600 };
+        set_mode(&entry, permissions)?;
+    }
+    Ok(())
+}
+
+fn walkdir(root: &Path) -> Result<Vec<PathBuf>> {
+    let mut entries = vec![root.to_path_buf()];
+    let mut index = 0;
+    while index < entries.len() {
+        let current = entries[index].clone();
+        if std::fs::symlink_metadata(&current)?.is_dir() {
+            for child in std::fs::read_dir(&current)? {
+                entries.push(child?.path());
+            }
+        }
+        index += 1;
+    }
+    Ok(entries)
+}
+
+fn set_mode(path: &Path, mode: u32) -> Result<()> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt;
+        std::fs::set_permissions(path, std::fs::Permissions::from_mode(mode))?;
+    }
+    #[cfg(not(unix))]
+    let _ = (path, mode);
     Ok(())
 }
 
@@ -235,8 +405,8 @@ fn strip_bundle_prefix(path: &Path) -> Option<PathBuf> {
 /// corrupted archive: everything under ui/ and data/ must be relative and
 /// purely normal path components. (The tar writer rejects `..` when creating
 /// archives, but a hostile file needs no cooperation from our writer.)
-fn safe_member(rest: &Path) -> bool {
-    rest.components()
+fn safe_member(path: &Path) -> bool {
+    path.components()
         .all(|c| matches!(c, std::path::Component::Normal(_)))
 }
 

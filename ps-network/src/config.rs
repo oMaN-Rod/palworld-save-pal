@@ -12,11 +12,17 @@
 //! - Loopback is always allowed to connect AND write; it is the trusted
 //!   operator seat (the desktop app and the launcher run there).
 //! - `allow.connect` narrows who may talk to us at all; `allow.write`
-//!   narrows who may mutate saves/settings (reads stay available).
+//!   narrows who may mutate saves/settings (reads stay available). An empty
+//!   write list denies non-loopback writes.
 //! - `auth` gates non-loopback (or, if the user insists, all) peers behind
 //!   a PIN; sessions are short-lived in-memory tokens issued by the server.
 
 use serde::{Deserialize, Serialize};
+
+pub const MIN_SESSION_TTL_SECS: u64 = 60;
+pub const MAX_SESSION_TTL_SECS: u64 = 30 * 24 * 60 * 60;
+pub const MIN_PIN_CHARS: usize = 4;
+pub const MAX_PIN_CHARS: usize = 128;
 
 /// Where PalStudio accepts connections from.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -109,19 +115,26 @@ impl PinHash {
         let Some(salt) = crate::auth::unhex(&self.salt) else {
             return false;
         };
+        let Some(expected) = crate::auth::unhex(&self.hash) else {
+            return false;
+        };
+        if salt.len() != 16
+            || expected.len() != 32
+            || !(crate::auth::MIN_PIN_ITERATIONS..=crate::auth::MAX_PIN_ITERATIONS)
+                .contains(&self.iterations)
+        {
+            return false;
+        }
         let candidate = crate::auth::pbkdf2_hmac_sha256(pin.as_bytes(), &salt, self.iterations);
-        crate::auth::constant_time_eq(
-            &candidate,
-            &crate::auth::unhex(&self.hash).unwrap_or_default(),
-        )
+        crate::auth::constant_time_eq(&candidate, &expected)
     }
 }
 
 /// CIDR allowlists. Empty `connect` means "the listen mode's default
-/// audience"; empty `write` means "anyone allowed to connect may write"
-/// (loopback always can). The fields always serialize — the Network page's
-/// DTO renders them unconditionally, and a missing key there reads as
-/// `undefined` in the browser.
+/// audience"; empty `write` denies non-loopback writes (loopback always can).
+/// The fields always serialize — the Network page's DTO renders them
+/// unconditionally, and a missing key there reads as `undefined` in the
+/// browser.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct AllowRules {
     #[serde(default)]
@@ -209,36 +222,116 @@ impl NetworkConfig {
     }
 
     pub fn from_json(raw: &str) -> Result<Self, ConfigError> {
-        serde_json::from_str(raw).map_err(ConfigError::Parse)
+        let config: Self = serde_json::from_str(raw).map_err(ConfigError::Parse)?;
+        config.validate()?;
+        Ok(config)
+    }
+
+    pub fn validate(&self) -> Result<(), ConfigError> {
+        if self.port == 0 {
+            return Err(ConfigError::Invalid(
+                "port must be between 1 and 65535".into(),
+            ));
+        }
+        if !(MIN_SESSION_TTL_SECS..=MAX_SESSION_TTL_SECS).contains(&self.auth.session_ttl_secs) {
+            return Err(ConfigError::Invalid(format!(
+                "session_ttl_secs must be between {MIN_SESSION_TTL_SECS} and {MAX_SESSION_TTL_SECS}"
+            )));
+        }
+        for (name, rules) in [
+            ("allow.connect", &self.allow.connect),
+            ("allow.write", &self.allow.write),
+        ] {
+            if rules.len() > 256 {
+                return Err(ConfigError::Invalid(format!(
+                    "{name} contains too many entries"
+                )));
+            }
+            for rule in rules {
+                if rule.len() > 64 || rule.chars().any(char::is_control) {
+                    return Err(ConfigError::Invalid(format!(
+                        "{name} contains an invalid entry"
+                    )));
+                }
+                if crate::policy::IpNet::parse(rule).is_none() {
+                    return Err(ConfigError::Invalid(format!(
+                        "{name} contains an invalid IP or CIDR entry"
+                    )));
+                }
+            }
+        }
+        if let Some(pin) = &self.auth.pin {
+            let salt = crate::auth::unhex(&pin.salt);
+            let hash = crate::auth::unhex(&pin.hash);
+            if salt.as_ref().is_none_or(|value| value.len() != 16)
+                || hash.as_ref().is_none_or(|value| value.len() != 32)
+                || !(crate::auth::MIN_PIN_ITERATIONS..=crate::auth::MAX_PIN_ITERATIONS)
+                    .contains(&pin.iterations)
+            {
+                return Err(ConfigError::Invalid(
+                    "PIN hash parameters are invalid".into(),
+                ));
+            }
+        }
+        if self.auth.scope != AuthScope::Never && self.auth.pin.is_none() {
+            return Err(ConfigError::Invalid(
+                "a PIN is required when authentication is enabled".into(),
+            ));
+        }
+        if self.funnel_enabled && self.auth.scope != AuthScope::Always {
+            return Err(ConfigError::Invalid(
+                "Tailscale Funnel requires AuthScope::Always".into(),
+            ));
+        }
+        Ok(())
     }
 
     /// Merges install-time env overrides (`PS_LISTEN`, `PS_PORT`, `PS_PIN`)
     /// on top of this config. Used only when the operator asked for them —
     /// i.e. the install script wrote them into the service definition or a
     /// container environment.
-    pub fn apply_env(self) -> Self {
+    pub fn apply_env(self) -> Result<Self, ConfigError> {
         let mut config = self;
         if let Ok(mode) = std::env::var("PS_LISTEN") {
-            if let Some(mode) = ListenMode::parse(&mode) {
-                config.listen = mode;
-            }
+            config.listen = ListenMode::parse(&mode).ok_or_else(|| {
+                ConfigError::Invalid("PS_LISTEN must be localhost, lan, tailscale, or wan".into())
+            })?;
         }
         if let Ok(port) = std::env::var("PS_PORT") {
-            if let Ok(port) = port.trim().parse::<u16>() {
-                config.port = port;
-            }
+            config.port = port
+                .trim()
+                .parse::<u16>()
+                .map_err(|_| ConfigError::Invalid("PS_PORT must be between 1 and 65535".into()))?;
         }
         if let Ok(pin) = std::env::var("PS_PIN") {
-            let pin = pin.trim();
-            if !pin.is_empty() {
-                config.auth.pin = Some(PinHash::generate(pin));
+            if pin.is_empty() {
+                config.auth.pin = None;
+            } else {
+                validate_pin(&pin)?;
+                config.auth.pin = Some(PinHash::generate(&pin));
                 if config.auth.scope == AuthScope::Never && config.listen != ListenMode::Localhost {
                     config.auth.scope = AuthScope::NetworkOnly;
                 }
             }
         }
-        config
+        config.validate()?;
+        Ok(config)
     }
+}
+
+pub fn validate_pin(pin: &str) -> Result<(), ConfigError> {
+    let length = pin.chars().count();
+    if !(MIN_PIN_CHARS..=MAX_PIN_CHARS).contains(&length) {
+        return Err(ConfigError::Invalid(format!(
+            "PIN length must be between {MIN_PIN_CHARS} and {MAX_PIN_CHARS} characters"
+        )));
+    }
+    if pin.chars().any(char::is_control) {
+        return Err(ConfigError::Invalid(
+            "PIN must not contain control characters".into(),
+        ));
+    }
+    Ok(())
 }
 
 /// Which runtime context the server is running in — decides how much of the
@@ -302,6 +395,8 @@ impl NetworkConfig {
 pub enum ConfigError {
     #[error("could not parse network config JSON: {0}")]
     Parse(#[from] serde_json::Error),
+    #[error("invalid network config: {0}")]
+    Invalid(String),
 }
 
 #[cfg(test)]
@@ -344,7 +439,7 @@ mod tests {
         std::env::set_var("PS_LISTEN", "lan");
         std::env::set_var("PS_PORT", "9100");
         std::env::set_var("PS_PIN", "1234");
-        let merged = config.apply_env();
+        let merged = config.apply_env().unwrap();
         std::env::remove_var("PS_LISTEN");
         std::env::remove_var("PS_PORT");
         std::env::remove_var("PS_PIN");

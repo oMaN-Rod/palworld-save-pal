@@ -355,6 +355,9 @@ async fn run_server(
                 return Ok(());
             }
             ps_server::ListenerExit::Stopped => return Ok(()),
+            ps_server::ListenerExit::Failed(error) => {
+                return Err(anyhow::anyhow!("PalStudio listener failed: {error}"));
+            }
         }
     }
 }

@@ -55,21 +55,14 @@ const SESSION_END_FLUSH: Duration = Duration::from_millis(200);
 #[derive(Debug, Clone, PartialEq)]
 pub enum SourceSelection {
     Off,
-    File {
-        path: Option<PathBuf>,
-    },
-    Server {
-        server_id: i64,
-    },
+    File { path: Option<PathBuf> },
+    Server { server_id: i64 },
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PairingState {
     Off,
-    Waiting {
-        code: String,
-        expires_at_ms: i64,
-    },
+    Waiting { code: String, expires_at_ms: i64 },
     Connected,
     Failed,
 }
@@ -1780,9 +1773,7 @@ mod tests {
             .expect("the mint task ends once the ack is handled")
             .unwrap();
 
-        let devices = ps_db::signal_devices::list_devices(&*driver)
-            .await
-            .unwrap();
+        let devices = ps_db::signal_devices::list_devices(&*driver).await.unwrap();
         assert_eq!(devices.len(), 1);
         assert_eq!(devices[0].device_id, device_id);
         assert_eq!(devices[0].secret_hex, device_secret);
@@ -1822,9 +1813,7 @@ mod tests {
             .unwrap()
             .unwrap();
 
-        let devices = ps_db::signal_devices::list_devices(&*driver)
-            .await
-            .unwrap();
+        let devices = ps_db::signal_devices::list_devices(&*driver).await.unwrap();
         assert_eq!(devices[0].name, "Paired device");
     }
 
@@ -1996,9 +1985,7 @@ mod tests {
             })
         );
 
-        let devices = ps_db::signal_devices::list_devices(&*driver)
-            .await
-            .unwrap();
+        let devices = ps_db::signal_devices::list_devices(&*driver).await.unwrap();
         assert!(devices[0].last_seen_ms.expect("touched on connect") >= before_ms);
 
         drop(events);
@@ -2211,8 +2198,7 @@ mod tests {
     #[tokio::test]
     async fn pairing_url_honors_the_base_env_override_and_trims_trailing_slashes() {
         let _env_guard =
-            SignalEnvGuard::acquire(&[(PAIRING_URL_BASE_ENV, Some("https://example.test/"))])
-                .await;
+            SignalEnvGuard::acquire(&[(PAIRING_URL_BASE_ENV, Some("https://example.test/"))]).await;
         let code = generate_pairing_code();
 
         assert_eq!(
