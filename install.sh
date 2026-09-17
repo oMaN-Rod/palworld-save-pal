@@ -18,7 +18,7 @@ BIN_DIR_OVERRIDE="${PALSTUDIO_BIN_DIR:-}"
 APP_DIR_OVERRIDE="${PALSTUDIO_APP_DIR:-}"
 
 SIGNING_PUBLIC_KEY='-----BEGIN PUBLIC KEY-----
-MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+MCowBQYDK2VwAyEAe6TtXDrzhlHFk605YUwwC9oKz42CkwFcrta4jVGWdUM=
 -----END PUBLIC KEY-----'
 
 log()  { printf '==> %s\n' "$*"; }
@@ -34,11 +34,29 @@ validate_version() {
   [[ "$VERSION" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+([.-][A-Za-z0-9.-]+)?$ ]] || die 'release tag must look like v1.5.0'
 }
 
+is_loopback_base() {
+  [[ "$1" = http://127.* || "$1" = 'http://[::1]'* ]]
+}
+
 validate_https_base() {
   local name="$1" value="$2"
-  [[ "$value" = https://* ]] || die "$name must use HTTPS"
+  [[ "$value" = https://* ]] || is_loopback_base "$value" || die "$name must use HTTPS (plain http is only allowed for loopback test mocks)"
   [[ "$value" != *$'\n'* && "$value" != *$'\r'* ]] || die "$name contains a control character"
 }
+
+# Test hook for scripts/test-install-flow.sh: a loopback mock may substitute
+# its own signing key so the signed-manifest path can be exercised end to end.
+if [[ -n "${PALSTUDIO_SIGNING_PUBLIC_KEY_FILE:-}" ]]; then
+  is_loopback_base "$DL_BASE" || die 'PALSTUDIO_SIGNING_PUBLIC_KEY_FILE requires a loopback download base'
+  SIGNING_PUBLIC_KEY="$(<"$PALSTUDIO_SIGNING_PUBLIC_KEY_FILE")"
+fi
+
+# Every URL this script touches is built from the validated bases above, so
+# widening curl to plain http is safe exactly when a base is a loopback mock.
+CURL_PROTO=(--proto '=https' --proto-redir '=https')
+if is_loopback_base "$API_BASE" || is_loopback_base "$DL_BASE"; then
+  CURL_PROTO=(--proto '=http,https' --proto-redir '=http,https')
+fi
 
 sha256_file() {
   if command -v sha256sum >/dev/null 2>&1; then sha256sum "$1" | awk '{print $1}'; else shasum -a 256 "$1" | awk '{print $1}'; fi
@@ -48,7 +66,7 @@ secure_directory() {
   local path="$1" expected_uid="$2" mode owner
   mkdir -p "$path"
   [[ ! -L "$path" ]] || die "refusing to use symlinked directory: $path"
-  if stat -c '%u %a' "$path" >/dev/null 2>&1; then read -r owner mode < <(stat -c '%u %a' "$path"); else owner=$(stat -f '%u' "$path"); mode=$(stat -f '%Lp' "$path"); fi
+  if stat -c '%u %a' "$path" >/dev/null 2>&1; then IFS=' ' read -r owner mode < <(stat -c '%u %a' "$path"); else owner=$(stat -f '%u' "$path"); mode=$(stat -f '%Lp' "$path"); fi
   [[ "$owner" = "$expected_uid" ]] || die "$path is not owned by uid $expected_uid"
   (( (8#$mode & 022) == 0 )) || die "$path is writable by group or other"
 }
@@ -69,23 +87,24 @@ restore_previous() {
 main() {
   need curl; need awk; need openssl; need mktemp; need stat; need cp; need mv
   validate_repo; validate_https_base PALSTUDIO_API_BASE "$API_BASE"; validate_https_base PALSTUDIO_DOWNLOAD_BASE "$DL_BASE"
-  local kernel machine os arch asset_kind asset checksums_asset base_url tmp download checksums signature public_key expected actual
+  local kernel machine os arch asset_kind asset checksums_asset base_url tmp download checksums signature public_key sig_http expected actual
   kernel="$(uname -s)"; machine="$(uname -m)"
   case "$kernel" in Linux) os=linux ;; Darwin) os=macos ;; *) die "unsupported OS: $kernel" ;; esac
   case "$machine" in x86_64|amd64) arch=x86_64 ;; aarch64|arm64) arch=aarch64 ;; *) die "unsupported architecture: $machine" ;; esac
   if [[ "$os" = linux ]]; then [[ "$arch" = x86_64 ]] || die 'no aarch64 AppImage is published; use the server installer'; asset_kind=linux.AppImage; else asset_kind=macos.dmg; fi
   if [[ -z "$VERSION" ]]; then
     log "looking up the latest release of $REPO"
-    VERSION="$(curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -H 'Accept: application/vnd.github+json' "$API_BASE/repos/$REPO/releases/latest" | awk -F'"' '/"tag_name"[[:space:]]*:/ {print $4; exit}')"
+    VERSION="$(curl --fail --silent --show-error --location "${CURL_PROTO[@]}" --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -H 'Accept: application/vnd.github+json' "$API_BASE/repos/$REPO/releases/latest" | awk -F'"' '/"tag_name"[[:space:]]*:/ {print $4; exit}')"
   fi
   validate_version
   asset="PalStudio-${VERSION}-${asset_kind}"; checksums_asset="PalStudio-${VERSION}-checksums.txt"; base_url="$DL_BASE/$REPO/releases/download/$VERSION"
   tmp="$(mktemp -d "${TMPDIR:-/tmp}/palstudio-desktop-install.XXXXXX")"; trap 'restore_previous; rm -rf "$tmp"' EXIT
   download="$tmp/$asset"; checksums="$tmp/$checksums_asset"; signature="$checksums.sig"; public_key="$tmp/release-public.pem"
   log "downloading $base_url/$asset"
-  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 180 -o "$download" "$base_url/$asset"
-  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$checksums" "$base_url/$checksums_asset"
-  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$signature" "$base_url/$checksums_asset.sig"
+  curl --fail --silent --show-error --location "${CURL_PROTO[@]}" --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 180 -o "$download" "$base_url/$asset"
+  curl --fail --silent --show-error --location "${CURL_PROTO[@]}" --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$checksums" "$base_url/$checksums_asset"
+  sig_http="$(curl --silent --show-error --location "${CURL_PROTO[@]}" --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -w '%{http_code}' -o "$signature" "$base_url/$checksums_asset.sig")" || die "could not fetch the signature for $asset"
+  [[ "$sig_http" = 200 ]] || die "release $VERSION has no signed checksum manifest (HTTP $sig_http fetching ${checksums_asset}.sig); releases published before signed manifests cannot be installed"
   printf '%s\n' "$SIGNING_PUBLIC_KEY" > "$public_key"; chmod 0644 "$public_key"
   openssl pkeyutl -verify -pubin -inkey "$public_key" -rawin -in "$checksums" -sigfile "$signature" >/dev/null || die 'signed release manifest verification failed'
   expected="$(awk -v f="$asset" '$2 == f {print $1; exit}' "$checksums")"; [[ "$expected" =~ ^[0-9a-fA-F]{64}$ ]] || die "signed manifest has no valid checksum for $asset"

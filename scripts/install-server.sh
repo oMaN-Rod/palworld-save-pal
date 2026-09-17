@@ -24,7 +24,7 @@ NO_SERVICE="${NO_SERVICE:-0}"
 # This key is the release publisher's Ed25519 public key. The matching private
 # key is kept only in the release CI secret PALSTUDIO_RELEASE_PRIVATE_KEY.
 SIGNING_PUBLIC_KEY='-----BEGIN PUBLIC KEY-----
-MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+MCowBQYDK2VwAyEAe6TtXDrzhlHFk605YUwwC9oKz42CkwFcrta4jVGWdUM=
 -----END PUBLIC KEY-----'
 
 log()  { printf '==> %s\n' "$*"; }
@@ -92,7 +92,7 @@ secure_path() {
   [[ -e "$path" ]] || die "required path does not exist: $path"
   [[ ! -L "$path" ]] || die "refusing to use symlinked path: $path"
   if stat -c '%u %a' "$path" >/dev/null 2>&1; then
-    read -r owner mode < <(stat -c '%u %a' "$path")
+    IFS=' ' read -r owner mode < <(stat -c '%u %a' "$path")
   else
     owner=$(stat -f '%u' "$path")
     mode=$(stat -f '%Lp' "$path")
@@ -516,7 +516,8 @@ main() {
   log "downloading $base_url/$asset"
   curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 180 -o "$bundle" "$base_url/$asset"
   curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$checksums" "$base_url/$checksums_asset"
-  curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -o "$signature" "$base_url/$checksums_asset.sig"
+  sig_http="$(curl --silent --show-error --location --proto '=https' --proto-redir '=https' --tlsv1.2 --retry 3 --connect-timeout 10 --max-time 30 -w '%{http_code}' -o "$signature" "$base_url/$checksums_asset.sig")" || die "could not fetch the signature for $asset"
+  [[ "$sig_http" = 200 ]] || die "release $VERSION has no signed checksum manifest (HTTP $sig_http fetching ${checksums_asset}.sig); releases published before signed manifests cannot be installed"
   printf '%s\n' "$SIGNING_PUBLIC_KEY" > "$public_key"; chmod 0644 "$public_key"
   openssl pkeyutl -verify -pubin -inkey "$public_key" -rawin -in "$checksums" -sigfile "$signature" >/dev/null || die 'signed release manifest verification failed'
   expected="$(awk -v f="$asset" '$2 == f { print $1; exit }' "$checksums")"; [[ "$expected" =~ ^[0-9a-fA-F]{64}$ ]] || die "signed manifest has no valid checksum for $asset"

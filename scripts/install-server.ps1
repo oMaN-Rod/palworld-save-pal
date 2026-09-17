@@ -25,7 +25,7 @@ $Mode = if ($env:MODE) { $env:MODE } elseif ($env:NO_SERVICE -eq '1') { 'standal
 
 $SigningPublicKey = @'
 -----BEGIN PUBLIC KEY-----
-MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+MCowBQYDK2VwAyEAe6TtXDrzhlHFk605YUwwC9oKz42CkwFcrta4jVGWdUM=
 -----END PUBLIC KEY-----
 '@
 
@@ -111,8 +111,10 @@ $ChecksumsAsset = "palstudio-$Version-server-checksums.txt"
 $Base = "https://github.com/$Repo/releases/download/$Version"
 Write-Info "installing PalStudio server $Version ($platform)"
 
+# openssl ships as openssl.exe on Windows; pwsh on Linux/macOS uses the plain name.
+$OpenSsl = if ($IsLinux -or $IsMacOS) { 'openssl' } else { 'openssl.exe' }
 Require-Command 'tar.exe'
-Require-Command 'openssl.exe'
+Require-Command $OpenSsl
 $tmp = Join-Path ([IO.Path]::GetTempPath()) ("palstudio-install-{0}" -f ([Guid]::NewGuid().ToString('N')))
 New-Item -ItemType Directory -Path $tmp | Out-Null
 $rollbackNeeded = $false
@@ -167,9 +169,13 @@ try {
     $publicKey = Join-Path $tmp 'release-public.pem'
     Invoke-ReleaseDownload "$Base/$Asset" $bundle
     Invoke-ReleaseDownload "$Base/$ChecksumsAsset" $checksums
-    Invoke-ReleaseDownload "$Base/$ChecksumsAsset.sig" $signature
+    try {
+        Invoke-ReleaseDownload "$Base/$ChecksumsAsset.sig" $signature
+    } catch {
+        Fail "release $Version has no signed checksum manifest ($ChecksumsAsset.sig); releases published before signed manifests cannot be installed"
+    }
     [IO.File]::WriteAllText($publicKey, $SigningPublicKey, [Text.UTF8Encoding]::new($false))
-    & openssl.exe pkeyutl -verify -pubin -inkey $publicKey -rawin -in $checksums -sigfile $signature 2>&1 | Out-Null
+    & $OpenSsl pkeyutl -verify -pubin -inkey $publicKey -rawin -in $checksums -sigfile $signature 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) { Fail 'signed release manifest verification failed' }
     $expected = $null
     foreach ($line in Get-Content -LiteralPath $checksums) {

@@ -19,10 +19,19 @@ try {
 
 $onWindows = [Runtime.InteropServices.RuntimeInformation]::IsOSPlatform(
     [Runtime.InteropServices.OSPlatform]::Windows)
-if (-not $onWindows) { throw 'This installer is for Windows only' }
 
 $Repo = if ($env:PALSTUDIO_REPO) { $env:PALSTUDIO_REPO } else { 'oMaN-Rod/palworld-save-pal' }
 $Version = if ($env:PALSTUDIO_VERSION) { $env:PALSTUDIO_VERSION } else { '' }
+$ApiBase = if ($env:PALSTUDIO_API_BASE) { $env:PALSTUDIO_API_BASE } else { 'https://api.github.com' }
+$DlBase = if ($env:PALSTUDIO_DOWNLOAD_BASE) { $env:PALSTUDIO_DOWNLOAD_BASE } else { 'https://github.com' }
+
+# Real installs run on Windows only; the loopback-mock E2E test
+# (scripts/test-install-flow.sh) drives this script under pwsh on
+# Linux/macOS, so a loopback download base also relaxes the platform gate.
+$dlUri = $null
+$onTestMock = [Uri]::TryCreate($DlBase, [UriKind]::Absolute, [ref]$dlUri) -and $dlUri.Scheme -eq 'http' -and
+    ($dlUri.Host -eq '127.0.0.1' -or $dlUri.Host -eq '::1' -or $dlUri.Host -eq '[::1]')
+if (-not $onWindows -and -not $onTestMock) { throw 'This installer is for Windows only' }
 $UseMsi = $Msi.IsPresent -or $env:PALSTUDIO_MSI -eq '1'
 $InstallInput = if ($env:PALSTUDIO_INSTALL_DIR) {
     $env:PALSTUDIO_INSTALL_DIR
@@ -33,12 +42,28 @@ $SkipShortcuts = $env:PALSTUDIO_SKIP_SHORTCUTS -eq '1'
 
 $SigningPublicKey = @'
 -----BEGIN PUBLIC KEY-----
-MCowBQYDK2VwAyEAHKMHHPKodOXSvmhcn14se0QmS1WY4i/ef0cfoB8NUd4=
+MCowBQYDK2VwAyEAe6TtXDrzhlHFk605YUwwC9oKz42CkwFcrta4jVGWdUM=
 -----END PUBLIC KEY-----
 '@
 
 function Write-Info([string]$Message) { Write-Host "==> $Message" -ForegroundColor Cyan }
 function Fail([string]$Message) { throw $Message }
+
+# openssl ships as openssl.exe on Windows; pwsh on Linux/macOS uses the plain name.
+$OpenSsl = if ($IsLinux -or $IsMacOS) { 'openssl' } else { 'openssl.exe' }
+
+# Test hook for scripts/test-install-flow.sh: a loopback mock may substitute
+# its own signing key so the signed-manifest path can be exercised end to end.
+if ($env:PALSTUDIO_SIGNING_PUBLIC_KEY_FILE) {
+    $dlParsed = $null
+    if ([Uri]::TryCreate($DlBase, [UriKind]::Absolute, [ref]$dlParsed) -and
+        $dlParsed.Scheme -eq 'http' -and
+        ($dlParsed.Host -eq '127.0.0.1' -or $dlParsed.Host -eq '::1' -or $dlParsed.Host -eq '[::1]')) {
+        $SigningPublicKey = [IO.File]::ReadAllText($env:PALSTUDIO_SIGNING_PUBLIC_KEY_FILE)
+    } else {
+        Fail 'PALSTUDIO_SIGNING_PUBLIC_KEY_FILE requires a loopback download base'
+    }
+}
 
 function Require-Command([string]$Name) {
     if (-not (Get-Command $Name -ErrorAction SilentlyContinue)) {
@@ -109,10 +134,16 @@ function Set-PrivateAcl([string]$Path) {
     if ($LASTEXITCODE -ne 0) { Fail "could not apply private ACLs to $Path" }
 }
 
+function Test-LoopbackUri([Uri]$Parsed) {
+    return $Parsed.Scheme -eq 'http' -and
+        ($Parsed.Host -eq '127.0.0.1' -or $Parsed.Host -eq '::1' -or $Parsed.Host -eq '[::1]')
+}
+
 function Invoke-ReleaseDownload([string]$Uri, [string]$Destination) {
     $parsed = $null
     if (-not [Uri]::TryCreate($Uri, [UriKind]::Absolute, [ref]$parsed) -or
-        $parsed.Scheme -ne 'https' -or [string]::IsNullOrWhiteSpace($parsed.Host) -or
+        ($parsed.Scheme -ne 'https' -and -not (Test-LoopbackUri $parsed)) -or
+        [string]::IsNullOrWhiteSpace($parsed.Host) -or
         $Uri -match '[\r\n\x00]') {
         Fail "refusing non-HTTPS release URL: $Uri"
     }
@@ -125,7 +156,8 @@ function Invoke-ReleaseDownload([string]$Uri, [string]$Destination) {
         for ($redirect = 0; $redirect -le 5; $redirect++) {
             $currentParsed = $null
             if (-not [Uri]::TryCreate($current, [UriKind]::Absolute, [ref]$currentParsed) -or
-                $currentParsed.Scheme -ne 'https' -or [string]::IsNullOrWhiteSpace($currentParsed.Host)) {
+                ($currentParsed.Scheme -ne 'https' -and -not (Test-LoopbackUri $currentParsed)) -or
+                [string]::IsNullOrWhiteSpace($currentParsed.Host)) {
                 Fail "release download redirected to a non-HTTPS URL: $current"
             }
             $response = $client.GetAsync($current, [Net.Http.HttpCompletionOption]::ResponseHeadersRead).GetAwaiter().GetResult()
@@ -199,12 +231,13 @@ function Expand-SafeZip([string]$Archive, [string]$Destination) {
     Assert-SafeZip $Archive
     Add-Type -AssemblyName System.IO.Compression
     Add-Type -AssemblyName System.IO.Compression.FileSystem
-    $root = ([IO.Path]::GetFullPath($Destination)).TrimEnd('\') + '\'
+    $sep = [IO.Path]::DirectorySeparatorChar
+    $root = ([IO.Path]::GetFullPath($Destination)).TrimEnd('\', '/') + $sep
     $zip = [IO.Compression.ZipFile]::OpenRead($Archive)
     try {
         foreach ($entry in $zip.Entries) {
             $name = ([string]$entry.FullName).Replace('\', '/')
-            $destinationPath = [IO.Path]::GetFullPath((Join-Path $Destination ($name -replace '/', '\')))
+            $destinationPath = [IO.Path]::GetFullPath((Join-Path $Destination ($name -replace '/', [string]$sep)))
             if (-not $destinationPath.StartsWith($root, [StringComparison]::OrdinalIgnoreCase)) {
                 Fail "ZIP member escapes the extraction directory: $name"
             }
@@ -259,13 +292,13 @@ $ShortcutChanges = @()
 
 try {
     Assert-Repository $Repo
-    Require-Command 'openssl.exe'
-    Require-Command 'icacls.exe'
+    Require-Command $OpenSsl
+    if ($onWindows) { Require-Command 'icacls.exe' }
     $Prefix = Assert-DedicatedInstallPath $InstallInput
 
     if (-not $Version) {
         Write-Info "looking up the latest release of $Repo"
-        $latest = Invoke-RestMethod -UseBasicParsing -Uri "https://api.github.com/repos/$Repo/releases/latest" -Headers @{
+        $latest = Invoke-RestMethod -UseBasicParsing -Uri "$ApiBase/repos/$Repo/releases/latest" -Headers @{
             'User-Agent' = 'palstudio-installer'
             Accept = 'application/vnd.github+json'
         } -TimeoutSec 30
@@ -276,7 +309,7 @@ try {
     $kind = if ($UseMsi) { 'windows.msi' } else { 'windows-standalone.zip' }
     $asset = "PalStudio-$Version-$kind"
     $checksumsAsset = "PalStudio-$Version-checksums.txt"
-    $base = "https://github.com/$Repo/releases/download/$Version"
+    $base = "$DlBase/$Repo/releases/download/$Version"
     Write-Info "installing PalStudio desktop $Version ($kind)"
 
     $Temporary = Join-Path ([IO.Path]::GetTempPath()) ("palstudio-install-{0}" -f ([Guid]::NewGuid().ToString('N')))
@@ -287,9 +320,13 @@ try {
     $publicKey = Join-Path $Temporary 'release-public.pem'
     Invoke-ReleaseDownload "$base/$asset" $download
     Invoke-ReleaseDownload "$base/$checksumsAsset" $checksums
-    Invoke-ReleaseDownload "$base/$checksumsAsset.sig" $signature
+    try {
+        Invoke-ReleaseDownload "$base/$checksumsAsset.sig" $signature
+    } catch {
+        Fail "release $Version has no signed checksum manifest ($checksumsAsset.sig); releases published before signed manifests cannot be installed"
+    }
     [IO.File]::WriteAllText($publicKey, $SigningPublicKey, [Text.UTF8Encoding]::new($false))
-    & openssl.exe pkeyutl -verify -pubin -inkey $publicKey -rawin -in $checksums -sigfile $signature 2>&1 | Out-Null
+    & $OpenSsl pkeyutl -verify -pubin -inkey $publicKey -rawin -in $checksums -sigfile $signature 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) { Fail 'signed release manifest verification failed' }
 
     $expected = $null
@@ -329,11 +366,11 @@ try {
         if (Test-Path -LiteralPath $Prefix) { Move-Item -LiteralPath $Prefix -Destination $Backup }
         $RollbackNeeded = $true
         Move-Item -LiteralPath $staged -Destination $Prefix
-        Set-PrivateAcl $Prefix
+        if ($onWindows) { Set-PrivateAcl $Prefix }
         if (-not (Test-Path -LiteralPath (Join-Path $Prefix 'bin\palstudio.exe') -PathType Leaf)) { Fail 'installed launcher validation failed' }
         if (-not (Test-Path -LiteralPath (Join-Path $Prefix 'ui_build\index.html') -PathType Leaf)) { Fail 'installed UI validation failed' }
 
-        if (-not $SkipShortcuts) {
+        if ($onWindows -and -not $SkipShortcuts) {
             $desktopExe = Join-Path $Prefix 'bin\palstudio-desktop.exe'
             if (-not (Test-Path -LiteralPath $desktopExe -PathType Leaf)) { Fail 'bundle has no desktop executable' }
             $shortcutPaths = @(

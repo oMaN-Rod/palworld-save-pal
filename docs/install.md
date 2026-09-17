@@ -266,9 +266,42 @@ The channels are produced by CI, in this order:
 1. `scripts/bump.ps1 <version>` → commit → tag `v<version>`.
 2. Run **Build and Release** (`release.yml`) from the tag — desktop
    installers (MSI, standalone zip with the `bin/` layout, universal dmg,
-   AppImage, deb) plus `PalStudio-<tag>-checksums.txt` and the five
-   `palstudio-<tag>-server-*.tar.gz` bundles with their checksums.
+   AppImage, deb) plus `PalStudio-<tag>-checksums.txt` with its Ed25519
+   signature and the five `palstudio-<tag>-server-*.tar.gz` bundles with
+   their signed checksums.
 3. Publishing the draft release fires **Publish Docker image** (GHCR) and
    the Nexus/Discord uploads. Deploy Web (`deploy-web.yml`) ships the site
    **including the current `install.sh` / `install.ps1`** to
    palstudio.app/install — re-run it manually after installer-only changes.
+
+### Release signing key
+
+Every installer refuses a release whose checksum manifest is missing or fails
+Ed25519 verification, so the signing key is a release blocker: CI fails the
+build when the secret is absent, and no release can be installed until a
+matching key signs it.
+
+- The **private key** lives only in the `PALSTUDIO_RELEASE_PRIVATE_KEY` repo
+  secret; CI signs both manifests with `openssl pkeyutl -sign -rawin`. Keep an
+  offline backup (e.g. `~/.palstudio-release-signing-private.pem`, mode 0600) —
+  losing it means rotating the pinned keys before the next release can ship.
+- The **public key** is pinned in all four installers (`install.sh`,
+  `install.ps1`, `scripts/install-server.sh/.ps1`); all four must carry the
+  same key. Releases published before signed manifests (≤ v1.4.x) are
+  rejected with a dedicated error — that is intentional (fail closed).
+
+To rotate the key:
+
+1. `openssl genpkey -algorithm ed25519 -out release-private.pem` (print the
+   public half with `openssl pkey -in release-private.pem -pubout`).
+2. Update the repo secret and replace the pinned PEM block in all four
+   installers in the same change.
+3. Ship with the next release and re-run Deploy Web so palstudio.app/install
+   serves the new pinned keys. Installs pinned to releases signed with the
+   old key stop verifying on the new installers, so rotate only when needed.
+
+`scripts/test-install-flow.sh` exercises the full signed path (plus tampered
+artifact, stale signature, and unsigned-release rejection) against a local
+mock using a throwaway key injected via `PALSTUDIO_SIGNING_PUBLIC_KEY_FILE` —
+that override, and plain-http download bases, are honored only for loopback
+addresses and exist solely for this test.

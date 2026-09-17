@@ -12,7 +12,9 @@ base="http://127.0.0.1:$port"
 
 work="$(mktemp -d)"
 mock_pid=""
+unsigned_pid=""
 cleanup() {
+  [ -n "$unsigned_pid" ] && kill "$unsigned_pid" 2>/dev/null || true
   [ -n "$mock_pid" ] && kill "$mock_pid" 2>/dev/null || true
   rm -rf "$work"
 }
@@ -43,6 +45,15 @@ PY
     "PalStudio-$tag-windows.msi" "PalStudio-$tag-windows-standalone.zip" \
     > "PalStudio-$tag-checksums.txt"
 )
+# A throwaway signing key stands in for the release key pinned in the real
+# installers; the runs below inject it through the loopback-only override.
+test_signing_key="$work/test-signing-key.pem"
+test_signing_pub="$work/test-signing-public.pem"
+openssl genpkey -algorithm ed25519 -out "$test_signing_key" 2>/dev/null
+openssl pkey -in "$test_signing_key" -pubout -out "$test_signing_pub"
+openssl pkeyutl -sign -rawin -inkey "$test_signing_key" \
+  -in "$release_dir/PalStudio-$tag-checksums.txt" \
+  -out "$release_dir/PalStudio-$tag-checksums.txt.sig"
 
 # ------------------------------------------------------------ mock server
 python3 "$repo_root/scripts/install-mock-server.py" \
@@ -69,7 +80,8 @@ pass "endpoint serves the right script per User-Agent"
 
 # ------------------------------------------------------------ sh install
 sh_env() {
-  env PALSTUDIO_API_BASE="$base/api" PALSTUDIO_DOWNLOAD_BASE="$base" "$@"
+  env PALSTUDIO_API_BASE="$base/api" PALSTUDIO_DOWNLOAD_BASE="$base" \
+    PALSTUDIO_SIGNING_PUBLIC_KEY_FILE="$test_signing_pub" "$@"
 }
 bin_dir="$work/sh-bin"
 mkdir -p "$bin_dir"
@@ -91,6 +103,7 @@ if command -v pwsh >/dev/null 2>&1; then
   run_ps() {
     env PROCESSOR_ARCHITECTURE=AMD64 \
       PALSTUDIO_API_BASE="$base/api" PALSTUDIO_DOWNLOAD_BASE="$base" \
+      PALSTUDIO_SIGNING_PUBLIC_KEY_FILE="$test_signing_pub" \
       PALSTUDIO_INSTALL_DIR="$ps_dir" \
       pwsh -NoProfile -Command "Invoke-RestMethod '$base/install' -UserAgent 'WindowsPowerShell/5.1.19041' | Invoke-Expression"
   }
@@ -112,26 +125,66 @@ else
   echo "skip pwsh not found — irm|iex path untested here" >&2
 fi
 
-# ------------------------------------------------------- tampered checksums
-sed -i 's/^[0-9a-f]/0000000000000000000000000000000000000000000000000000000000000000/' \
-  "$release_dir/PalStudio-$tag-checksums.txt"
+# ------------------------------------------- tampered artifact (checksum layer)
+printf '\0tamper' >>"$release_dir/PalStudio-$tag-linux.AppImage"
 neg_dir="$work/neg-bin"; mkdir -p "$neg_dir"
 if sh_env PALSTUDIO_BIN_DIR="$neg_dir" \
   sh -c "curl -fsSL $base/install | sh" >"$work/sh-neg.log" 2>&1; then
-  fail "sh install accepted a tampered checksum"
+  fail "sh install accepted a tampered artifact"
 fi
 grep -q "checksum mismatch" "$work/sh-neg.log" || fail "sh negative test lacked the mismatch error"
 if command -v pwsh >/dev/null 2>&1; then
+  printf '\0tamper' >>"$release_dir/PalStudio-$tag-windows-standalone.zip"
   neg_ps="$work/neg-ps"
   if env PROCESSOR_ARCHITECTURE=AMD64 \
     PALSTUDIO_API_BASE="$base/api" PALSTUDIO_DOWNLOAD_BASE="$base" \
+    PALSTUDIO_SIGNING_PUBLIC_KEY_FILE="$test_signing_pub" \
     PALSTUDIO_INSTALL_DIR="$neg_ps" \
     pwsh -NoProfile -Command "Invoke-RestMethod '$base/install' -UserAgent 'WindowsPowerShell/5.1.19041' | Invoke-Expression" \
     >"$work/ps-neg.log" 2>&1; then
-    fail "ps1 install accepted a tampered checksum"
+    fail "ps1 install accepted a tampered artifact"
   fi
   grep -q "checksum mismatch" "$work/ps-neg.log" || fail "ps1 negative test lacked the mismatch error"
 fi
-pass "tampered checksums are rejected on both scripts"
+pass "tampered artifacts are rejected on both scripts"
+
+# ------------------------------- tampered manifest (signature layer, stale sig)
+sed -i 's/^[0-9a-f]/0000000000000000000000000000000000000000000000000000000000000000/' \
+  "$release_dir/PalStudio-$tag-checksums.txt"
+stale_dir="$work/stale-bin"; mkdir -p "$stale_dir"
+if sh_env PALSTUDIO_BIN_DIR="$stale_dir" \
+  sh -c "curl -fsSL $base/install | sh" >"$work/sh-stale.log" 2>&1; then
+  fail "sh install accepted a manifest that does not match its signature"
+fi
+grep -q "signed release manifest verification failed" "$work/sh-stale.log" \
+  || fail "stale-signature test lacked the verification error"
+pass "tampered manifests fail signature verification"
+
+# ------------------------------------------- unsigned release (missing .sig)
+unsigned_dir="$work/release-unsigned"
+mkdir -p "$unsigned_dir"
+for f in "$release_dir"/*; do
+  case "$f" in *.sig) ;; *) cp "$f" "$unsigned_dir/" ;; esac
+done
+unsigned_port=$((port + 1))
+unsigned_base="http://127.0.0.1:$unsigned_port"
+python3 "$repo_root/scripts/install-mock-server.py" \
+  --release-dir "$unsigned_dir" --tag "$tag" --port "$unsigned_port" &
+unsigned_pid=$!
+for _ in $(seq 1 50); do
+  curl -fsS -o /dev/null "$unsigned_base/install.sh" 2>/dev/null && break
+  sleep 0.1
+done
+curl -fsS -o /dev/null "$unsigned_base/install.sh" || fail "unsigned mock server did not come up"
+uns_dir="$work/uns-bin"; mkdir -p "$uns_dir"
+if env PALSTUDIO_API_BASE="$unsigned_base/api" PALSTUDIO_DOWNLOAD_BASE="$unsigned_base" \
+  PALSTUDIO_SIGNING_PUBLIC_KEY_FILE="$test_signing_pub" \
+  PALSTUDIO_BIN_DIR="$uns_dir" \
+  sh -c "curl -fsSL $unsigned_base/install.sh | sh" >"$work/sh-uns.log" 2>&1; then
+  fail "sh install accepted an unsigned release"
+fi
+grep -q "has no signed checksum manifest" "$work/sh-uns.log" \
+  || fail "unsigned-release test lacked the missing-manifest error"
+pass "unsigned releases are rejected with a clear error"
 
 printf '\nall install-flow checks passed\n'
