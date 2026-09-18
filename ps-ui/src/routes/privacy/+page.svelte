@@ -45,15 +45,25 @@
 	<section class="mt-8 space-y-3">
 		<h2 class="text-xl font-semibold text-white">Remote sessions</h2>
 		<p>
-			If you pair a phone or another computer with your PC, that is the one feature where save data
-			does travel over the network. The two devices connect directly to each other over WebRTC, and
-			the connection is encrypted end to end.
+			If you pair a phone or another computer with your PC, the two devices connect directly to each
+			other over WebRTC, encrypted end to end. Your PC is the only machine that reads the save: it
+			opens the file from its own disk and sends across only the values you are looking at or
+			changing, such as a Pal's stats or a player's inventory.
+		</p>
+		<p>
+			The save file itself is never transferred. Operations that would move one — downloading it,
+			importing an archive, or writing an edited copy — are refused over a remote session by design,
+			not merely hidden from the interface.
+		</p>
+		<p>
+			The exception is mods: if you install one from the paired device, that mod archive is uploaded
+			to your PC, because that is the point of the feature.
 		</p>
 		<p>
 			When a direct connection is impossible — commonly on mobile hotspots or carrier-grade NAT —
-			the encrypted traffic is relayed through a TURN server we operate at turn.palstudio.app. The
-			relay forwards encrypted packets; it cannot read what passes through it, and nothing is
-			written to disk there.
+			the same encrypted traffic is relayed through a TURN server we operate at turn.palstudio.app.
+			A relay changes the route, not the contents: it forwards packets it cannot read, and writes
+			nothing to disk.
 		</p>
 		<p>
 			Pairing itself goes through a broker that passes sealed messages between the two devices. A

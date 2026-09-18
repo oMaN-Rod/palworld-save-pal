@@ -539,7 +539,7 @@
   "landing_faq_a_platforms": "Both. The browser editor handles Steam, Game Pass and dedicated server saves. The desktop app adds direct Game Pass folder access and server management.",
   "landing_faq_a_safe": "Your save is parsed locally, writing back to a folder is opt-in, and originals are backed up first. Save editing always carries some risk, so keep a copy of the world folder before you start.",
   "landing_faq_a_signal": "Yes. Signal, built into the desktop app, pairs a phone, tablet or any other browser with a QR code over an encrypted peer-to-peer connection. It streams a live map of your world and lets you edit saves and manage servers on that PC remotely.",
-  "landing_faq_a_upload": "No. Editing runs entirely in your browser. Your save only travels if you start a remote session, and then it is encrypted end to end.",
+  "landing_faq_a_upload": "No. Editing runs entirely in your browser, and your save file is never uploaded. In a remote session your PC sends only the values you are viewing to your own paired device, encrypted end to end.",
   "landing_faq_a_which": "Use the web version for zero-install editing anywhere. Use the desktop app for maximum performance and dedicated server features.",
   "landing_faq_heading": "Common questions",
   "landing_faq_q_browsers": "Which browsers work?",
