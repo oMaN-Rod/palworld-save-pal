@@ -18,6 +18,6 @@
 	}>();
 </script>
 
-<div class={cn('card', hover ? 'card-hover' : '', background, rounded, padding, _class)}>
+<div class={cn('bg-surface-900 rounded', hover ? 'border border-secondary-500' : '', background, rounded, padding, _class)}>
 	{@render children()}
 </div>

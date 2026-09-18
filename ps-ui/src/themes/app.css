@@ -428,7 +428,7 @@ body {
 }
 
 .editor-wrapper {
-	height: calc(100vh - 72px);
+	height: calc(100vh - var(--titlebar-h) - 72px);
 	--jse-theme: dark;
 	--jse-theme-color: var(--color-surface-900);
 	--jse-theme-color-highlight: var(--color-primary-400);
