@@ -1,4 +1,4 @@
-use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, WeakUnboundedSender};
 
 use ps_core::progress::ProgressSink;
 
@@ -63,6 +63,40 @@ impl Emitter {
         let (sender, receiver) = tokio::sync::mpsc::unbounded_channel();
         (Self::new(sender), receiver)
     }
+
+    pub fn downgrade(&self) -> WeakEmitter {
+        WeakEmitter {
+            sender: self.sender.downgrade(),
+        }
+    }
+}
+
+/// Holds no sender alive, so a registry that outlives a handler cannot keep a
+/// closed connection's writer task running.
+#[derive(Clone)]
+pub struct WeakEmitter {
+    sender: WeakUnboundedSender<String>,
+}
+
+impl WeakEmitter {
+    pub fn is_connected(&self) -> bool {
+        self.sender
+            .upgrade()
+            .is_some_and(|sender| !sender.is_closed())
+    }
+
+    pub fn upgrade(&self) -> Option<Emitter> {
+        self.sender
+            .upgrade()
+            .filter(|sender| !sender.is_closed())
+            .map(|sender| Emitter { sender })
+    }
+
+    pub fn is_same_connection(&self, emitter: &Emitter) -> bool {
+        self.sender
+            .upgrade()
+            .is_some_and(|sender| sender.same_channel(&emitter.sender))
+    }
 }
 
 #[cfg(test)]
@@ -96,6 +130,29 @@ mod tests {
             value,
             serde_json::json!({"type": "error", "data": {"message": "boom", "trace": "trace-lines"}})
         );
+    }
+
+    #[test]
+    fn a_weak_emitter_knows_its_connection_and_upgrades_only_while_open() {
+        let (first, first_rx) = Emitter::test_channel();
+        let (second, _second_rx) = Emitter::test_channel();
+        let weak = first.downgrade();
+        assert!(weak.is_same_connection(&first));
+        assert!(weak.is_same_connection(&first.clone()));
+        assert!(!weak.is_same_connection(&second));
+        assert!(weak.upgrade().is_some());
+
+        drop(first_rx);
+        assert!(
+            weak.upgrade().is_none(),
+            "a closed connection does not upgrade"
+        );
+
+        let (third, _third_rx) = Emitter::test_channel();
+        let weak_third = third.downgrade();
+        drop(third);
+        assert!(weak_third.upgrade().is_none(), "no strong sender is left");
+        assert!(!weak_third.is_same_connection(&second));
     }
 
     /// A payload whose `Serialize` impl always fails. A bare `f64::NAN` does
@@ -157,5 +214,26 @@ mod phase6_tests {
         let envelope: serde_json::Value = serde_json::from_str(&frame).unwrap();
         assert_eq!(envelope["type"], "detect_workshop_dir");
         assert_eq!(envelope["data"]["workshop_dir"], "");
+    }
+
+    #[test]
+    fn a_weak_emitter_reports_the_connection_gone_once_every_strong_handle_drops() {
+        let (emitter, receiver) = Emitter::test_channel();
+        let weak = emitter.downgrade();
+        assert!(weak.is_connected());
+        let clone = emitter.clone();
+        drop(emitter);
+        assert!(weak.is_connected());
+        drop(clone);
+        assert!(!weak.is_connected());
+        drop(receiver);
+    }
+
+    #[test]
+    fn a_weak_emitter_reports_a_dropped_receiver_as_gone() {
+        let (emitter, receiver) = Emitter::test_channel();
+        let weak = emitter.downgrade();
+        drop(receiver);
+        assert!(!weak.is_connected());
     }
 }

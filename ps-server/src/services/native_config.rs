@@ -19,9 +19,25 @@ pub fn mods_path(install_path: &str) -> String {
         .join("Pal")
         .join("Binaries")
         .join("Win64")
+        .join("ue4ss")
         .join("Mods")
         .to_string_lossy()
         .to_string()
+}
+
+/// `mods_path`, unless the install still has the pre-UE4SS-mods-folder legacy
+/// layout: `Mods` beside the binary with no `ue4ss/Mods` yet created.
+pub fn mods_path_for_import(install_path: &str) -> String {
+    let base = Path::new(install_path)
+        .join("Pal")
+        .join("Binaries")
+        .join("Win64");
+    let legacy = base.join("Mods");
+    let current = base.join("ue4ss").join("Mods");
+    if legacy.is_dir() && !current.is_dir() {
+        return legacy.to_string_lossy().to_string();
+    }
+    mods_path(install_path)
 }
 
 pub fn logicmods_path(install_path: &str) -> String {
@@ -40,6 +56,16 @@ pub fn nativemods_path(install_path: &str) -> String {
         .join("Binaries")
         .join("Win64")
         .join("NativeMods")
+        .to_string_lossy()
+        .to_string()
+}
+
+pub fn paks_path(install_path: &str) -> String {
+    Path::new(install_path)
+        .join("Pal")
+        .join("Content")
+        .join("Paks")
+        .join("~mods")
         .to_string_lossy()
         .to_string()
 }
@@ -651,7 +677,7 @@ pub fn build_palworld_settings_content(record: &ServerRecord) -> String {
         let Some(ini_key) = env_to_ini_key(env_key) else {
             continue;
         };
-        let value_text = crate::services::python_str(env_value);
+        let value_text = crate::services::env_value_text(env_value);
         // Empty means "leave the shipped value alone", except for the deny list,
         // where it is the only way to unblock a technology again.
         if value_text.is_empty() && ini_key != "DenyTechnologyList" {
@@ -882,7 +908,7 @@ mod tests {
     }
 
     #[test]
-    fn path_helpers_match_python_layout() {
+    fn path_helpers_follow_the_dedicated_server_layout() {
         let sep = std::path::MAIN_SEPARATOR;
         assert_eq!(
             saves_path("/srv/pal"),
@@ -890,7 +916,7 @@ mod tests {
         );
         assert_eq!(
             mods_path("/srv/pal"),
-            format!("/srv/pal{sep}Pal{sep}Binaries{sep}Win64{sep}Mods")
+            format!("/srv/pal{sep}Pal{sep}Binaries{sep}Win64{sep}ue4ss{sep}Mods")
         );
         assert_eq!(
             logicmods_path("/srv/pal"),
@@ -900,6 +926,55 @@ mod tests {
             nativemods_path("/srv/pal"),
             format!("/srv/pal{sep}Pal{sep}Binaries{sep}Win64{sep}NativeMods")
         );
+    }
+
+    #[test]
+    fn mods_path_for_import_prefers_the_legacy_mods_folder_when_only_it_exists() {
+        let dir = tempfile::tempdir().unwrap();
+        let install = dir.path().to_string_lossy().into_owned();
+        std::fs::create_dir_all(dir.path().join("Pal/Binaries/Win64/Mods")).unwrap();
+
+        let path = mods_path_for_import(&install);
+
+        assert_eq!(
+            std::path::Path::new(&path),
+            dir.path().join("Pal/Binaries/Win64/Mods")
+        );
+    }
+
+    #[test]
+    fn mods_path_for_import_prefers_ue4ss_mods_when_both_exist() {
+        let dir = tempfile::tempdir().unwrap();
+        let install = dir.path().to_string_lossy().into_owned();
+        std::fs::create_dir_all(dir.path().join("Pal/Binaries/Win64/Mods")).unwrap();
+        std::fs::create_dir_all(dir.path().join("Pal/Binaries/Win64/ue4ss/Mods")).unwrap();
+
+        let path = mods_path_for_import(&install);
+
+        assert_eq!(
+            std::path::Path::new(&path),
+            dir.path().join("Pal/Binaries/Win64/ue4ss/Mods")
+        );
+    }
+
+    #[test]
+    fn mods_path_for_import_defaults_to_ue4ss_mods_when_neither_exists() {
+        let dir = tempfile::tempdir().unwrap();
+        let install = dir.path().to_string_lossy().into_owned();
+
+        let path = mods_path_for_import(&install);
+
+        assert_eq!(
+            std::path::Path::new(&path),
+            dir.path().join("Pal/Binaries/Win64/ue4ss/Mods")
+        );
+    }
+
+    #[test]
+    fn paks_path_points_at_the_tilde_mods_directory() {
+        let path = paks_path("D:/Palworld Server");
+        assert!(path.ends_with("~mods"), "{path}");
+        assert!(path.contains("Paks"), "{path}");
     }
 
     #[test]
@@ -985,7 +1060,10 @@ mod tests {
             .map(|(key, _)| key)
             .filter(|key| ini_to_env_key(key).is_none())
             .collect();
-        assert!(unmapped.is_empty(), "settings with no env key: {unmapped:?}");
+        assert!(
+            unmapped.is_empty(),
+            "settings with no env key: {unmapped:?}"
+        );
     }
 
     /// Settings added since Palworld v1.0 — voice chat, the auto-transfer of an
@@ -1133,7 +1211,9 @@ mod tests {
             .env_vars
             .insert("DENY_TECHNOLOGY_LIST".to_string(), serde_json::json!(""));
         let content = build_palworld_settings_content(&record);
-        assert!(content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n"));
+        assert!(
+            content.contains("DenyTechnologyList=,") || content.ends_with("DenyTechnologyList=)\n")
+        );
         assert!(!content.contains("PALBOX"));
     }
 

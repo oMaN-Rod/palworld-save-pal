@@ -226,6 +226,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: Some(crate::dispatcher::SessionAttachment {
                     current_id: &mut current_id,
                     arc: &mut arc,
@@ -269,6 +270,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: Some(crate::dispatcher::SessionAttachment {
                     current_id: &mut current_id,
                     arc: &mut arc,
@@ -303,6 +305,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: Some(crate::dispatcher::SessionAttachment {
                     current_id: &mut current_id,
                     arc: &mut arc,

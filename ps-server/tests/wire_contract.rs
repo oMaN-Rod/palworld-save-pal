@@ -1916,7 +1916,10 @@ async fn list_local_saves_response_shape_is_pinned() {
         let object = save.as_object().expect("each save is an object");
         let mut keys: Vec<&str> = object.keys().map(String::as_str).collect();
         keys.sort();
-        assert_eq!(keys, vec!["modified_ms", "name", "path", "save_type"]);
+        assert_eq!(
+            keys,
+            vec!["mod_profile", "modified_ms", "name", "path", "save_type", "world_key"]
+        );
     }
 
     handle.shutdown().await;

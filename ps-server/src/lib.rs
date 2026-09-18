@@ -4,6 +4,17 @@ pub mod bridge_handlers;
 pub mod bridge_instances_handlers;
 pub mod local_saves_handlers;
 pub mod lsp_service;
+pub mod mod_target_service;
+pub mod mods_conflict_handlers;
+pub mod mods_framework_handlers;
+pub mod mods_handlers;
+pub mod mods_iostore_handlers;
+pub mod mods_profile_entry_handlers;
+pub mod mods_profile_handlers;
+pub mod mods_share_handlers;
+pub mod mods_upload_handlers;
+pub mod mods_verification_handlers;
+pub mod nexus_handlers;
 #[cfg(feature = "desktop")]
 pub mod rfd_dialogs;
 pub mod router;
@@ -85,14 +96,18 @@ pub struct ServerHandle {
     serve_task: tokio::task::JoinHandle<std::io::Result<()>>,
     instance_reconciler_cancel: tokio_util::sync::CancellationToken,
     instance_reconciler_task: tokio::task::JoinHandle<()>,
+    verifier_cancel: tokio_util::sync::CancellationToken,
+    verifier_task: tokio::task::JoinHandle<()>,
 }
 
 impl ServerHandle {
     pub async fn shutdown(self) {
-        // Stop the reconciler before the bridge so it cannot call `set_target`
-        // on a bridge that has already shut down.
+        // Stop the reconciler and verifier before the bridge, so neither can
+        // call into a bridge that has already shut down.
         self.instance_reconciler_cancel.cancel();
         let _ = self.instance_reconciler_task.await;
+        self.verifier_cancel.cancel();
+        let _ = self.verifier_task.await;
         self.services.bridge.shutdown().await;
         self.services.signal.lock().await.shutdown().await;
         let _ = self.shutdown_sender.send(());
@@ -150,6 +165,23 @@ pub async fn start_server_with(
     config: ServerConfig,
     dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
 ) -> anyhow::Result<ServerHandle> {
+    start_server_with_services(
+        config,
+        dialogs,
+        Arc::new(crate::services::ServerServices::real()),
+    )
+    .await
+}
+
+/// `start_server_with` taking an already-built `ServerServices` rather than
+/// always constructing the real one, so a test can start a hermetic server
+/// around a fake service (an `IoStoreConverter` that writes stub bytes, for
+/// instance) instead of the production implementation.
+pub async fn start_server_with_services(
+    config: ServerConfig,
+    dialogs: Arc<dyn crate::desktop_dialogs::FileDialogProvider>,
+    services: Arc<crate::services::ServerServices>,
+) -> anyhow::Result<ServerHandle> {
     let game_data = Arc::new(GameData::load(&config.data_dir.join("json"))?);
     adopt_legacy_db_file(&config.db_path);
     let db = ps_db::open(&config.db_path).await?;
@@ -159,8 +191,7 @@ pub async fn start_server_with(
         .map(|dir| dir.join("psp.db"))
         .unwrap_or_else(|| std::path::PathBuf::from("psp.db"));
     let pal_data_validator = |value: &serde_json::Value| -> Result<serde_json::Value, String> {
-        let dto =
-            ps_core::dto::pal::PalDto::from_json_lenient(value).map_err(|e| e.to_string())?;
+        let dto = ps_core::dto::pal::PalDto::from_json_lenient(value).map_err(|e| e.to_string())?;
         serde_json::to_value(&dto).map_err(|e| e.to_string())
     };
     match ps_db::import_legacy::import_legacy_if_needed(&db, &legacy_db_path, &pal_data_validator)
@@ -172,6 +203,14 @@ pub async fn start_server_with(
             tracing::error!(%error, "legacy psp.db import failed; continuing with new DB")
         }
     }
+    let driver = ps_db::SqlxSqliteDriver::new(db.clone());
+    match crate::mod_target_service::ensure_all(&driver, &services.app_root).await {
+        Ok(created) if !created.is_empty() => {
+            tracing::info!(?created, "created mod targets for existing servers")
+        }
+        Ok(_) => {}
+        Err(error) => tracing::error!(%error, "mod target reconciliation failed; continuing"),
+    }
     let (live_connections, live_connections_rx) = tokio::sync::watch::channel(0usize);
     let (live_bus, live_bus_keepalive) = tokio::sync::watch::channel(None);
     // Both roots sit beside the database, the one directory the deployment
@@ -181,7 +220,20 @@ pub async fn start_server_with(
         .parent()
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("."));
-    let services = Arc::new(crate::services::ServerServices::real());
+    let uploads = Arc::new(crate::services::mods::uploads::UploadStore::new(&app_dir));
+    let framework_scratch = crate::services::mods::frameworks::install::scratch_root(
+        &crate::services::mods::LibraryPaths::new(&app_dir),
+    );
+    match std::fs::remove_dir_all(&framework_scratch) {
+        Ok(()) => {}
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
+        Err(error) => {
+            tracing::warn!(%error, ?framework_scratch, "failed to clear framework install scratch directory")
+        }
+    }
+    tokio::spawn(crate::services::mods::uploads::sweep_while_alive(
+        Arc::downgrade(&uploads),
+    ));
     let state = Arc::new(AppState {
         config: AppConfig {
             desktop_mode: config.desktop_mode,
@@ -193,6 +245,8 @@ pub async fn start_server_with(
         live_bus,
         ext: Arc::new(crate::server_ext::ServerExtRouter {
             services: Arc::clone(&services),
+            library: crate::services::mods::LibraryPaths::new(&app_dir),
+            uploads,
         }),
         lsp: Arc::new(crate::lsp_service::ServerLspService::new(
             app_dir.join("lua-language-server"),
@@ -223,6 +277,14 @@ pub async fn start_server_with(
         instance_reconciler_cancel.clone(),
     ));
 
+    let verifier_cancel = tokio_util::sync::CancellationToken::new();
+    let verifier_task = tokio::spawn(crate::services::mods::verifier::run_verifier(
+        Arc::clone(&state.driver),
+        Arc::clone(&services.bridge),
+        Arc::clone(&services.verification),
+        verifier_cancel.clone(),
+    ));
+
     let (shutdown_sender, shutdown_receiver) = tokio::sync::oneshot::channel::<()>();
     let application = router::build_router(Arc::clone(&state), &config.ui_dir);
     let serve_task = tokio::spawn(async move {
@@ -246,6 +308,8 @@ pub async fn start_server_with(
         serve_task,
         instance_reconciler_cancel,
         instance_reconciler_task,
+        verifier_cancel,
+        verifier_task,
     })
 }
 
@@ -263,7 +327,10 @@ mod tests {
         adopt_legacy_db_file(&db_path);
 
         assert_eq!(std::fs::read(&db_path).unwrap(), b"main");
-        assert_eq!(std::fs::read(dir.path().join(format!("{DB_FILE}-wal"))).unwrap(), b"wal");
+        assert_eq!(
+            std::fs::read(dir.path().join(format!("{DB_FILE}-wal"))).unwrap(),
+            b"wal"
+        );
         assert!(!dir.path().join(LEGACY_DB_FILE).exists());
     }
 

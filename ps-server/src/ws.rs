@@ -98,6 +98,10 @@ async fn connection_loop(
     // Owned per-connection, dropped when the socket closes; lives across every
     // message the connection dispatches.
     let mut blueprints = crate::blueprint_registry::BlueprintRegistry::default();
+    // Independent of `current_session`: a reattach or reset must not carry
+    // this flag in from a dead connection, or drop it while this one is
+    // still subscribed.
+    let mut mod_verification_subscribed = false;
 
     // `incoming_stream.next()` returns `None` on a clean disconnect and
     // `Some(Err(_))` on a protocol error (e.g. the client vanishing mid-frame
@@ -113,6 +117,7 @@ async fn connection_loop(
                     &app,
                     &emitter,
                     &mut blueprints,
+                    &mut mod_verification_subscribed,
                     is_loopback,
                 )
                 .await;
@@ -141,6 +146,7 @@ async fn process_text_frame(
     app: &Arc<AppState>,
     emitter: &Emitter,
     blueprints: &mut crate::blueprint_registry::BlueprintRegistry,
+    mod_verification_subscribed: &mut bool,
     is_loopback: bool,
 ) {
     // A JSON decode failure sends an `error` message whose `data` is a plain
@@ -195,6 +201,7 @@ async fn process_text_frame(
                 emitter,
                 blueprints,
                 is_loopback,
+                mod_verification_subscribed: Some(mod_verification_subscribed),
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,
@@ -212,6 +219,7 @@ async fn process_text_frame(
                 emitter,
                 blueprints,
                 is_loopback,
+                mod_verification_subscribed: Some(mod_verification_subscribed),
                 attachment: Some(SessionAttachment {
                     current_id: current_session_id,
                     arc: current_session,

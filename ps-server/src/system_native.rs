@@ -140,6 +140,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            mod_verification_subscribed: None,
             attachment: None,
         };
         let result = handle_open_url("file:///etc/passwd".to_string(), &mut ctx).await;
@@ -153,7 +154,7 @@ mod desktop_system_tests {
     use std::path::Path;
 
     #[test]
-    fn folder_path_resolves_all_four_python_folder_types() {
+    fn folder_path_resolves_all_four_folder_types() {
         let app_root = Path::new("/opt/ps-data");
         assert_eq!(
             folder_path_for("backups", app_root),

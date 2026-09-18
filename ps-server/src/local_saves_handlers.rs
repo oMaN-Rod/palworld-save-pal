@@ -1,6 +1,8 @@
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
+use serde_json::Value;
+
 use crate::dispatcher::HandlerCtx;
 use crate::handler_error::HandlerError;
 use crate::messages::MessageType;
@@ -12,6 +14,19 @@ pub struct LocalSaveEntry {
     pub name: String,
     pub save_type: &'static str,
     pub modified_ms: u64,
+    pub world_key: String,
+    pub mod_profile: Option<SaveModProfile>,
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
+pub struct SaveModProfile {
+    pub profile_id: String,
+    pub profile_name: String,
+    pub target_id: String,
+}
+
+pub fn world_key_of(save_dir: &Path) -> String {
+    ps_core::mods::native_separators(&save_dir.to_string_lossy(), cfg!(windows))
 }
 
 fn modified_ms(path: &Path) -> u64 {
@@ -44,6 +59,8 @@ fn scan_dir(
                     .unwrap_or_default(),
                 save_type: "steam",
                 modified_ms: modified_ms(&level_sav),
+                world_key: world_key_of(dir),
+                mod_profile: None,
             });
         }
     }
@@ -70,7 +87,16 @@ pub fn scan_save_roots(roots: &[PathBuf]) -> Vec<LocalSaveEntry> {
     results
 }
 
-pub async fn handle_list_local_saves(ctx: &mut HandlerCtx<'_>) -> Result<(), HandlerError> {
+#[derive(Debug, Default, serde::Deserialize)]
+pub struct ListLocalSavesData {
+    #[serde(default)]
+    pub include_gamepass: bool,
+}
+
+pub async fn handle_list_local_saves(
+    data: Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
     if !ctx.app.config.desktop_mode {
         refuse(
             ctx.emitter,
@@ -79,6 +105,13 @@ pub async fn handle_list_local_saves(ctx: &mut HandlerCtx<'_>) -> Result<(), Han
         );
         return Ok(());
     }
+    // `null`/absent means "no payload", and the derived Deserialize rejects
+    // null outright, so it needs its own branch rather than a default field.
+    let ListLocalSavesData { include_gamepass } = if data.is_null() {
+        ListLocalSavesData::default()
+    } else {
+        serde_json::from_value(data)?
+    };
     let mut roots = Vec::new();
     let default_root = ps_db::settings::default_steam_save_dir();
     if !default_root.is_empty() {
@@ -89,12 +122,75 @@ pub async fn handle_list_local_saves(ctx: &mut HandlerCtx<'_>) -> Result<(), Han
             roots.push(PathBuf::from(saved_dir));
         }
     }
-    let saves = scan_save_roots(&roots);
+    let mut saves = scan_save_roots(&roots);
+    let db = &*ctx.app.driver;
+    for entry in &mut saves {
+        entry.mod_profile = mod_profile_for_world(db, &entry.world_key).await;
+    }
+    if include_gamepass {
+        saves.extend(gamepass_save_entries(db).await);
+    }
     ctx.emitter.emit(
         MessageType::ListLocalSaves,
         &serde_json::json!({ "saves": saves }),
     );
     Ok(())
+}
+
+/// A machine without Game Pass installed is the normal case: no container,
+/// no entries, no log. A scan failure on an existing container is unusual
+/// enough to log once, but still yields no entries rather than a refusal.
+async fn gamepass_save_entries(db: &dyn ps_db::DbDriver) -> Vec<LocalSaveEntry> {
+    let Ok(container_dir) = ps_core::gamepass::store::find_container_dir() else {
+        return Vec::new();
+    };
+    let saves = match ps_core::gamepass::scan::scan_saves(&container_dir) {
+        Ok(saves) => saves,
+        Err(error) => {
+            tracing::warn!(%error, "failed to scan gamepass saves for list_local_saves");
+            return Vec::new();
+        }
+    };
+    let path = ps_core::mods::native_separators(&container_dir.to_string_lossy(), cfg!(windows));
+    let mut entries = Vec::new();
+    for (save_id, save_data) in saves.iter() {
+        let world_key = format!("gamepass:{save_id}");
+        let mod_profile = mod_profile_for_world(db, &world_key).await;
+        entries.push(LocalSaveEntry {
+            path: path.clone(),
+            name: save_data.world_name.clone(),
+            save_type: "gamepass",
+            modified_ms: (save_data.last_modified * 1000.0) as u64,
+            world_key,
+            mod_profile,
+        });
+    }
+    entries
+}
+
+async fn mod_profile_for_world(
+    db: &dyn ps_db::DbDriver,
+    world_key: &str,
+) -> Option<SaveModProfile> {
+    let link = match ps_db::mod_profiles::world_link(db, world_key).await {
+        Ok(link) => link?,
+        Err(error) => {
+            tracing::warn!(%error, %world_key, "failed to look up world link");
+            return None;
+        }
+    };
+    match ps_db::mod_profiles::get(db, &link.profile_id).await {
+        Ok(Some(profile)) => Some(SaveModProfile {
+            profile_id: profile.id,
+            profile_name: profile.name,
+            target_id: profile.target_id,
+        }),
+        Ok(None) => None,
+        Err(error) => {
+            tracing::warn!(%error, profile_id = %link.profile_id, "failed to load linked profile");
+            None
+        }
+    }
 }
 
 #[derive(Debug, serde::Deserialize)]
@@ -212,6 +308,11 @@ mod tests {
             entries[0].path,
             with_save.join("Level.sav").to_string_lossy()
         );
+        assert_eq!(
+            entries[0].world_key,
+            ps_core::mods::native_separators(&with_save.to_string_lossy(), cfg!(windows))
+        );
+        assert_eq!(entries[0].mod_profile, None);
     }
 
     #[test]
@@ -229,6 +330,11 @@ mod tests {
             "the same save dir reached via both roots must appear once"
         );
         assert_eq!(entries[0].name, "world1");
+        assert_eq!(
+            entries[0].world_key,
+            ps_core::mods::native_separators(&world_dir.to_string_lossy(), cfg!(windows))
+        );
+        assert_eq!(entries[0].mod_profile, None);
     }
 
     #[test]
@@ -265,6 +371,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            mod_verification_subscribed: None,
             attachment: None,
         };
         let missing = tempfile::tempdir().unwrap().path().join("does_not_exist");
@@ -294,6 +401,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            mod_verification_subscribed: None,
             attachment: None,
         };
 
@@ -318,10 +426,11 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            mod_verification_subscribed: None,
             attachment: None,
         };
 
-        handle_list_local_saves(&mut ctx).await.unwrap();
+        handle_list_local_saves(Value::Null, &mut ctx).await.unwrap();
 
         let frame = test.next_frame_json();
         assert_eq!(frame["type"], "list_local_saves");

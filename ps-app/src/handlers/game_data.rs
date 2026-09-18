@@ -694,6 +694,7 @@ mod tests {
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             };
             $handler(&mut ctx).await.unwrap();
@@ -792,6 +793,7 @@ mod tests {
                 emitter: &$test.emitter,
                 blueprints: &mut $test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             };
             $handler($data, &mut ctx).await

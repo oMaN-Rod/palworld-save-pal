@@ -257,7 +257,7 @@ mod tests {
     }
 
     #[test]
-    fn steam_selection_rejects_other_filenames_with_exact_python_message() {
+    fn steam_selection_rejects_other_filenames_by_name() {
         let selected = Path::new("/saves/ABC123/LevelMeta.sav");
         let app_root = Path::new("/opt/ps");
         assert_eq!(
@@ -287,7 +287,7 @@ mod tests {
     }
 
     #[test]
-    fn selection_inside_app_root_is_rejected_with_exact_python_message() {
+    fn selection_inside_app_root_is_rejected() {
         let selected = Path::new("/opt/ps/backups/Level.sav");
         let app_root = Path::new("/opt/ps");
         assert_eq!(

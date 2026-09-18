@@ -10,7 +10,7 @@ use sysinfo::{Pid, ProcessStatus, System};
 
 use super::palworld_api::PalworldApiClient;
 use super::{
-    native_config, native_mods, python_isoformat, round_to, ServerProcessStatus, ServiceError,
+    native_config, iso_timestamp, round_to, ServerProcessStatus, ServiceError,
 };
 
 pub const STEAMCMD_ZIP_URL: &str = "https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip";
@@ -21,6 +21,19 @@ pub const PALWORLD_APP_ID: &str = "2394010";
 fn system() -> &'static Mutex<System> {
     static SYSTEM: OnceLock<Mutex<System>> = OnceLock::new();
     SYSTEM.get_or_init(|| Mutex::new(System::new()))
+}
+
+pub(crate) fn any_process_named(matches: impl Fn(&str) -> bool) -> bool {
+    let mut system = system().lock().unwrap();
+    system.refresh_processes_specifics(
+        sysinfo::ProcessesToUpdate::All,
+        true,
+        sysinfo::ProcessRefreshKind::nothing(),
+    );
+    system
+        .processes()
+        .values()
+        .any(|process| matches(&process.name().to_string_lossy()))
 }
 
 pub fn default_steamcmd_dir() -> PathBuf {
@@ -95,15 +108,51 @@ pub fn steamcmd_install_args(install_dir: &str) -> Vec<String> {
     ]
 }
 
+/// Without `validate`, so an up-to-date install costs only a build id check
+/// and files mods placed over the depot are left alone.
+pub fn steamcmd_update_args(install_dir: &str) -> Vec<String> {
+    steamcmd_install_args(install_dir)
+        .into_iter()
+        .filter(|arg| arg != "validate")
+        .collect()
+}
+
+/// `UPDATE_ON_BOOT` defaults to on, as it does in the Docker image.
+pub fn update_on_boot(record: &ServerRecord) -> bool {
+    record
+        .env_vars
+        .get("UPDATE_ON_BOOT")
+        .map(|value| {
+            matches!(
+                super::env_value_text(value).to_ascii_lowercase().as_str(),
+                "true" | "1"
+            )
+        })
+        .unwrap_or(true)
+}
+
+pub async fn install_server(steamcmd_exe: &str, install_dir: &str) -> bool {
+    run_steamcmd(
+        steamcmd_exe,
+        install_dir,
+        steamcmd_install_args(install_dir),
+    )
+    .await
+}
+
+pub async fn update_server(steamcmd_exe: &str, install_dir: &str) -> bool {
+    run_steamcmd(steamcmd_exe, install_dir, steamcmd_update_args(install_dir)).await
+}
+
 /// SteamCMD's exit codes are unreliable, so success is judged by PalServer.exe
 /// existing afterwards. The 1800 s cap covers a cold full download of the app; on
 /// timeout the child is killed rather than left running detached.
-pub async fn install_server(steamcmd_exe: &str, install_dir: &str) -> bool {
+async fn run_steamcmd(steamcmd_exe: &str, install_dir: &str, args: Vec<String>) -> bool {
     if std::fs::create_dir_all(install_dir).is_err() {
         return false;
     }
     let spawned = tokio::process::Command::new(steamcmd_exe)
-        .args(steamcmd_install_args(install_dir))
+        .args(args)
         .stdout(std::process::Stdio::null())
         .stderr(std::process::Stdio::null())
         .spawn();
@@ -210,19 +259,39 @@ pub async fn create_native_server(record: &ServerRecord, source_server_path: Opt
     native_config::write_palworld_settings(record).is_ok()
 }
 
+/// Why a native server did not start, as a wire `error` code and message.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct StartFailure {
+    pub code: &'static str,
+    pub message: String,
+}
+
 /// Rewrites the ini files first, since PalServer.exe only reads them at launch.
 /// On Windows the child gets its own process group so a Ctrl-C to ps-server does
 /// not take the game server down with it.
-pub fn start_server_process(record: &ServerRecord) -> Option<u32> {
+pub fn start_server_process(record: &ServerRecord) -> Result<u32, StartFailure> {
     let exe_path = Path::new(&record.install_path).join("PalServer.exe");
     if !exe_path.exists() {
-        return None;
+        return Err(StartFailure {
+            code: "server_executable_missing",
+            message: format!("{} does not exist", exe_path.display()),
+        });
     }
-    if native_config::write_palworld_settings(record).is_err() {
-        return None;
+    if let Err(error) = native_config::write_palworld_settings(record) {
+        return Err(StartFailure {
+            code: "settings_write_failed",
+            message: format!("PalWorldSettings.ini could not be written: {error}"),
+        });
     }
-    if native_mods::ensure_mod_settings(record).is_err() {
-        return None;
+    if let Err(error) = super::mods::settings::ensure_mod_settings(record) {
+        let code = match error {
+            super::mods::settings::ModSettingsError::Unreadable { .. } => "settings_unreadable",
+            super::mods::settings::ModSettingsError::Write { .. } => "settings_write_failed",
+        };
+        return Err(StartFailure {
+            code,
+            message: error.to_string(),
+        });
     }
     let mut command = std::process::Command::new(&exe_path);
     command
@@ -243,7 +312,13 @@ pub fn start_server_process(record: &ServerRecord) -> Option<u32> {
         const CREATE_NEW_PROCESS_GROUP: u32 = 0x0000_0200;
         command.creation_flags(CREATE_NEW_PROCESS_GROUP);
     }
-    command.spawn().ok().map(|child| child.id())
+    command
+        .spawn()
+        .map(|child| child.id())
+        .map_err(|error| StartFailure {
+            code: "server_start_failed",
+            message: format!("{} did not start: {error}", exe_path.display()),
+        })
 }
 
 fn pid_alive(pid: u32) -> bool {
@@ -332,7 +407,7 @@ pub fn process_status(pid: Option<i64>) -> ServerProcessStatus {
             let started_at = chrono::Local
                 .timestamp_opt(process.start_time() as i64, 0)
                 .single()
-                .map(|start| python_isoformat(start.naive_local()));
+                .map(|start| iso_timestamp(start.naive_local()));
             return ServerProcessStatus {
                 status: "running".to_string(),
                 running: true,
@@ -409,7 +484,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn steamcmd_install_args_match_python_command() {
+    fn steamcmd_install_args_pin_the_app_id_and_validate_flag() {
         assert_eq!(
             steamcmd_install_args("D:/servers/world1"),
             vec![
@@ -423,6 +498,33 @@ mod tests {
                 "+quit".to_string(),
             ]
         );
+    }
+
+    #[test]
+    fn steamcmd_update_args_skip_validate() {
+        let args = steamcmd_update_args("D:/servers/world1");
+        assert!(!args.contains(&"validate".to_string()));
+        assert_eq!(
+            args[4..6],
+            ["+app_update".to_string(), "2394010".to_string()]
+        );
+    }
+
+    #[test]
+    fn update_on_boot_defaults_on_and_reads_env_value() {
+        let mut record = crate::services::docker::test_support::docker_record();
+        record.env_vars.remove("UPDATE_ON_BOOT");
+        assert!(update_on_boot(&record));
+        for (value, expected) in [
+            (serde_json::json!("true"), true),
+            (serde_json::json!("True"), true),
+            (serde_json::json!(true), true),
+            (serde_json::json!("false"), false),
+            (serde_json::json!(false), false),
+        ] {
+            record.env_vars.insert("UPDATE_ON_BOOT".to_string(), value);
+            assert_eq!(update_on_boot(&record), expected);
+        }
     }
 
     #[test]

@@ -19,6 +19,10 @@ pub struct HandlerCtx<'a> {
     pub emitter: &'a Emitter,
     pub blueprints: &'a mut crate::blueprint_registry::BlueprintRegistry,
     pub is_loopback: bool,
+    /// Lives as long as the connection, not the (swappable, resettable)
+    /// `Session`. `None` for a synthetic, single-shot dispatch that has no
+    /// real connection behind it.
+    pub mod_verification_subscribed: Option<&'a mut bool>,
     pub attachment: Option<SessionAttachment<'a>>,
 }
 
@@ -58,6 +62,12 @@ pub trait ExtRouter: Send + Sync {
         data: serde_json::Value,
         ctx: &mut HandlerCtx<'_>,
     ) -> Option<Result<(), HandlerError>>;
+
+    /// A denylisted message may still run over a remote session when its
+    /// payload names a finished upload, whichever connection uploaded it.
+    fn remote_allows(&self, _message_type: MessageType, _data: &serde_json::Value) -> bool {
+        false
+    }
 }
 
 pub struct NullExtRouter;
@@ -565,6 +575,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -583,6 +594,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -601,6 +613,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -626,6 +639,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -645,6 +659,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -666,6 +681,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )
@@ -713,6 +729,7 @@ mod tests {
                 emitter: &test.emitter,
                 blueprints: &mut test.blueprints,
                 is_loopback: false,
+                mod_verification_subscribed: None,
                 attachment: None,
             },
         )

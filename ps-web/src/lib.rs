@@ -298,6 +298,7 @@ async fn run_with_ctx(op: Op) -> Result<(), JsValue> {
             emitter: &emitter,
             blueprints: &mut state.blueprints,
             is_loopback: true,
+            mod_verification_subscribed: None,
             attachment: Some(SessionAttachment {
                 current_id: &mut state.current_id,
                 arc: &mut state.current,

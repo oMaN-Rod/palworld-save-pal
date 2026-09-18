@@ -1,13 +1,14 @@
 //! Server-management services: Docker and native Palworld dedicated servers.
 pub mod docker;
-pub mod docker_mods;
 pub mod language_server;
 pub mod lsp_process;
 pub mod lsp_workspace;
+pub mod mods;
 pub mod native_config;
-pub mod native_mods;
 pub mod native_process;
+pub mod nexus;
 pub mod palworld_api;
+pub mod steam_news;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ServiceError {
@@ -63,7 +64,7 @@ pub fn round_to(value: f64, decimals: u32) -> f64 {
 
 /// ISO-8601 timestamp for the wire format: "T" separator, microseconds omitted
 /// when zero.
-pub fn python_isoformat(timestamp: chrono::NaiveDateTime) -> String {
+pub fn iso_timestamp(timestamp: chrono::NaiveDateTime) -> String {
     if timestamp.and_utc().timestamp_subsec_micros() == 0 {
         timestamp.format("%Y-%m-%dT%H:%M:%S").to_string()
     } else {
@@ -73,7 +74,7 @@ pub fn python_isoformat(timestamp: chrono::NaiveDateTime) -> String {
 
 /// Stringifies env-var values the way the server image and PalWorldSettings.ini
 /// expect them: bools as `True`/`False`, null as `None`.
-pub fn python_str(value: &serde_json::Value) -> String {
+pub fn env_value_text(value: &serde_json::Value) -> String {
     match value {
         serde_json::Value::String(text) => text.clone(),
         serde_json::Value::Bool(true) => "True".to_string(),
@@ -88,19 +89,117 @@ pub fn python_str(value: &serde_json::Value) -> String {
 pub struct ServerServices {
     pub docker: std::sync::Arc<dyn docker::DockerApi>,
     pub palworld_api: palworld_api::PalworldApiClient,
+    pub latest_version: steam_news::LatestVersion,
     pub signal: std::sync::Arc<tokio::sync::Mutex<crate::signal::manager::SignalManager>>,
     pub bridge: std::sync::Arc<crate::bridge::service::BridgeService>,
+    /// Where Docker servers' default host folders live.
+    pub app_root: std::path::PathBuf,
+    pub relocation_retries: RelocationRetries,
+    pub server_locks: ServerLocks,
+    pub launcher: std::sync::Arc<dyn mods::launch::GameLauncher>,
+    pub iostore: std::sync::Arc<dyn mods::iostore::IoStoreConverter>,
+    /// Answers every running check in place of the process scan when set.
+    pub running_override: Option<bool>,
+    pub frameworks: std::sync::Arc<dyn mods::frameworks::source::FrameworkSource>,
+    pub verification: std::sync::Arc<mods::verify::VerificationStore>,
+    pub nexus_keys: std::sync::Arc<dyn nexus::keystore::NexusKeyStore>,
+    pub nexus: std::sync::Arc<dyn nexus::api::NexusApi>,
+    pub nexus_links: std::sync::Arc<nexus::links::NexusLinks>,
+    pub protocol_registry: std::sync::Arc<dyn nexus::protocol::ProtocolRegistry>,
+}
+
+/// One async mutex per server, held across anything that removes, creates or
+/// starts its container or moves its mods, so two of those never interleave.
+#[derive(Default)]
+pub struct ServerLocks {
+    locks: std::sync::Mutex<std::collections::HashMap<i64, std::sync::Arc<tokio::sync::Mutex<()>>>>,
+}
+
+impl ServerLocks {
+    pub fn of(&self, server_id: i64) -> std::sync::Arc<tokio::sync::Mutex<()>> {
+        self.locks
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .entry(server_id)
+            .or_default()
+            .clone()
+    }
+}
+
+type Clock = Box<dyn Fn() -> std::time::Instant + Send + Sync>;
+
+/// Rate-limits the relocation attempts a polled server listing makes, per
+/// server, across every connection.
+pub struct RelocationRetries {
+    last_attempt: std::sync::Mutex<std::collections::HashMap<i64, std::time::Instant>>,
+    clock: Clock,
+}
+
+impl RelocationRetries {
+    pub const INTERVAL: std::time::Duration = std::time::Duration::from_secs(300);
+
+    pub fn with_clock(clock: Clock) -> Self {
+        Self {
+            last_attempt: Default::default(),
+            clock,
+        }
+    }
+
+    /// Stamps the attempt before it runs, so a long move cannot let the next poll
+    /// start a second one. False when an attempt was stamped within the interval.
+    pub fn begin_attempt(&self, server_id: i64) -> bool {
+        let now = (self.clock)();
+        let mut last_attempt = self
+            .last_attempt
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        if let Some(previous) = last_attempt.get(&server_id) {
+            if now.saturating_duration_since(*previous) < Self::INTERVAL {
+                return false;
+            }
+        }
+        last_attempt.insert(server_id, now);
+        true
+    }
+}
+
+impl Default for RelocationRetries {
+    fn default() -> Self {
+        Self::with_clock(Box::new(std::time::Instant::now))
+    }
 }
 
 impl ServerServices {
     pub fn real() -> Self {
-        Self::with_docker(std::sync::Arc::new(LazyDocker::default()))
+        Self::with_docker(
+            std::sync::Arc::new(LazyDocker::default()),
+            ps_core::paths::app_root(),
+        )
     }
 
-    pub fn with_docker(docker: std::sync::Arc<dyn docker::DockerApi>) -> Self {
+    pub fn with_docker(
+        docker: std::sync::Arc<dyn docker::DockerApi>,
+        app_root: impl Into<std::path::PathBuf>,
+    ) -> Self {
+        let app_root = app_root.into();
         Self {
+            iostore: std::sync::Arc::new(mods::iostore::RetocConverter::github(&app_root)),
+            app_root,
+            relocation_retries: RelocationRetries::default(),
+            server_locks: ServerLocks::default(),
+            launcher: std::sync::Arc::new(mods::launch::SystemLauncher),
+            running_override: None,
+            frameworks: std::sync::Arc::new(mods::frameworks::github::ReleaseSources::github(
+                std::env::var_os("PS_AMITY_BUNDLE_DIR").map(std::path::PathBuf::from),
+            )),
+            verification: std::sync::Arc::new(mods::verify::VerificationStore::new()),
+            nexus_keys: nexus::keystore::system_key_store(),
+            nexus: std::sync::Arc::new(nexus::api::HttpNexusApi::production()),
+            nexus_links: std::sync::Arc::new(nexus::links::NexusLinks::default()),
+            protocol_registry: nexus::protocol::system_registry(),
             docker,
             palworld_api: palworld_api::PalworldApiClient::new(),
+            latest_version: steam_news::LatestVersion::new(),
             signal: std::sync::Arc::new(tokio::sync::Mutex::new(
                 crate::signal::manager::SignalManager::new(),
             )),
@@ -135,6 +234,10 @@ impl docker::DockerApi for LazyDocker {
         spec: docker::ContainerSpec,
     ) -> Result<String, ServiceError> {
         self.api().await?.create_and_start_container(spec).await
+    }
+
+    async fn create_container(&self, spec: docker::ContainerSpec) -> Result<String, ServiceError> {
+        self.api().await?.create_container(spec).await
     }
 
     async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
@@ -194,24 +297,24 @@ mod tests {
     }
 
     #[test]
-    fn python_isoformat_omits_zero_microseconds() {
+    fn iso_timestamp_omits_zero_microseconds() {
         let whole = NaiveDate::from_ymd_opt(2026, 7, 9)
             .unwrap()
             .and_hms_opt(18, 22, 33)
             .unwrap();
-        assert_eq!(python_isoformat(whole), "2026-07-09T18:22:33");
+        assert_eq!(iso_timestamp(whole), "2026-07-09T18:22:33");
         let fractional = whole + chrono::Duration::microseconds(123456);
-        assert_eq!(python_isoformat(fractional), "2026-07-09T18:22:33.123456");
+        assert_eq!(iso_timestamp(fractional), "2026-07-09T18:22:33.123456");
     }
 
     #[test]
-    fn python_str_formats_floats_without_trailing_zeros() {
-        assert_eq!(python_str(&serde_json::json!("text")), "text");
-        assert_eq!(python_str(&serde_json::json!(true)), "True");
-        assert_eq!(python_str(&serde_json::json!(false)), "False");
-        assert_eq!(python_str(&serde_json::json!(8211)), "8211");
-        assert_eq!(python_str(&serde_json::json!(1.5)), "1.5");
-        assert_eq!(python_str(&serde_json::Value::Null), "None");
+    fn env_value_text_renders_bools_and_null_the_way_the_server_image_reads_them() {
+        assert_eq!(env_value_text(&serde_json::json!("text")), "text");
+        assert_eq!(env_value_text(&serde_json::json!(true)), "True");
+        assert_eq!(env_value_text(&serde_json::json!(false)), "False");
+        assert_eq!(env_value_text(&serde_json::json!(8211)), "8211");
+        assert_eq!(env_value_text(&serde_json::json!(1.5)), "1.5");
+        assert_eq!(env_value_text(&serde_json::Value::Null), "None");
     }
 
     #[test]
@@ -238,7 +341,7 @@ mod tests {
     #[tokio::test]
     async fn server_services_with_docker_delegates_to_injected_api() {
         let mock = std::sync::Arc::new(docker::mock::MockDocker::default());
-        let services = ServerServices::with_docker(mock.clone());
+        let services = ServerServices::with_docker(mock.clone(), "unused");
         services
             .docker
             .ensure_image("omanrod/psp-palworld-server")

@@ -3,7 +3,7 @@
 use ps_db::servers::ServerRecord;
 use serde_json::Value;
 
-use super::{python_str, round_to, ServerProcessStatus, ServiceError};
+use super::{env_value_text, round_to, ServerProcessStatus, ServiceError};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct PortBinding {
@@ -36,7 +36,7 @@ pub fn build_environment(record: &ServerRecord) -> Vec<String> {
     let mut env: Vec<(String, String)> = record
         .env_vars
         .iter()
-        .map(|(key, value)| (key.clone(), python_str(value)))
+        .map(|(key, value)| (key.clone(), env_value_text(value)))
         .collect();
     upsert_env(&mut env, "PORT", record.game_port.to_string());
     upsert_env(&mut env, "QUERY_PORT", record.query_port.to_string());
@@ -75,8 +75,12 @@ pub fn build_port_bindings(record: &ServerRecord) -> Vec<PortBinding> {
     ]
 }
 
+const PAKS_MODS_CONTAINER_DIR: &str = "/palworld/Pal/Content/Paks/~mods/";
+
+/// An empty `paks_path` gets no `~mods` bind, because Docker rejects a bind with
+/// an empty host side.
 pub fn build_binds(record: &ServerRecord) -> Vec<String> {
-    vec![
+    let mut binds = vec![
         format!("{}:/palworld/:rw", record.data_volume_name),
         format!("{}:/palworld/Pal/Saved/:rw", record.saves_path),
         format!("{}:/palworld/Pal/Binaries/Win64/Mods/:rw", record.mods_path),
@@ -85,7 +89,41 @@ pub fn build_binds(record: &ServerRecord) -> Vec<String> {
             record.logicmods_path
         ),
         format!("{}:/palworld/nativemods/:rw", record.nativemods_path),
-    ]
+    ];
+    if !record.paks_path.is_empty() {
+        binds.push(format!("{}:{PAKS_MODS_CONTAINER_DIR}:rw", record.paks_path));
+    }
+    binds
+}
+
+/// The container side of a `host:container[:mode]` bind. Split from the right,
+/// because a Windows host path carries a drive-letter colon.
+fn bind_container_target(bind: &str) -> Option<&str> {
+    let mut segments = bind.rsplitn(3, ':');
+    let last = segments.next()?;
+    if last.starts_with('/') {
+        Some(last)
+    } else {
+        segments.next()
+    }
+}
+
+/// Whether an inspected container mounts the paks `~mods` directory. This
+/// deliberately compares strings, because the container side is a POSIX path
+/// inside the container, not a host path; the host side is never compared, so
+/// a host path spelled differently cannot make a correct container look stale.
+/// A trailing `/` is ignored because some Docker-compatible engines strip it.
+pub fn mounts_paks_mods(inspect: &Value) -> bool {
+    let wanted = PAKS_MODS_CONTAINER_DIR.trim_end_matches('/');
+    inspect
+        .pointer("/HostConfig/Binds")
+        .and_then(Value::as_array)
+        .is_some_and(|binds| {
+            binds.iter().filter_map(Value::as_str).any(|bind| {
+                bind_container_target(bind).map(|target| target.trim_end_matches('/'))
+                    == Some(wanted)
+            })
+        })
 }
 
 pub fn container_spec(record: &ServerRecord) -> ContainerSpec {
@@ -212,6 +250,7 @@ pub trait DockerApi: Send + Sync {
     async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError>;
     async fn create_and_start_container(&self, spec: ContainerSpec)
         -> Result<String, ServiceError>;
+    async fn create_container(&self, spec: ContainerSpec) -> Result<String, ServiceError>;
     async fn start_container(&self, container_name: &str) -> Result<(), ServiceError>;
     async fn stop_container(
         &self,
@@ -229,11 +268,7 @@ pub trait DockerApi: Send + Sync {
 
 /// The bind-mount host directories must exist before the container starts, or
 /// Docker creates them root-owned.
-pub async fn create_server_container(
-    api: &dyn DockerApi,
-    record: &ServerRecord,
-) -> Result<String, ServiceError> {
-    api.ensure_image(&record.image_name).await?;
+pub fn create_bind_host_dirs(record: &ServerRecord) -> Result<(), ServiceError> {
     for host_path in [
         &record.saves_path,
         &record.mods_path,
@@ -242,7 +277,38 @@ pub async fn create_server_container(
     ] {
         std::fs::create_dir_all(host_path)?;
     }
+    if !record.paks_path.is_empty() {
+        std::fs::create_dir_all(&record.paks_path)?;
+    }
+    Ok(())
+}
+
+/// The fallible steps of container creation, which a recreation runs before
+/// removing the old container.
+pub async fn prepare_server_container(
+    api: &dyn DockerApi,
+    record: &ServerRecord,
+) -> Result<(), ServiceError> {
+    api.ensure_image(&record.image_name).await?;
+    create_bind_host_dirs(record)
+}
+
+pub async fn create_server_container(
+    api: &dyn DockerApi,
+    record: &ServerRecord,
+) -> Result<String, ServiceError> {
+    prepare_server_container(api, record).await?;
     api.create_and_start_container(container_spec(record)).await
+}
+
+/// Like `create_server_container`, but leaves the container stopped, so a
+/// server the user had stopped is not started as a side effect.
+pub async fn create_server_container_stopped(
+    api: &dyn DockerApi,
+    record: &ServerRecord,
+) -> Result<String, ServiceError> {
+    prepare_server_container(api, record).await?;
+    api.create_container(container_spec(record)).await
 }
 
 pub async fn start_server_container(api: &dyn DockerApi, container_name: &str) -> bool {
@@ -279,8 +345,14 @@ pub async fn container_status(
     api: &dyn DockerApi,
     container_name: &str,
 ) -> Option<ServerProcessStatus> {
-    match api.inspect_container(container_name).await {
-        Ok(Some(inspect)) => Some(status_from_inspect(&inspect)),
+    status_from_inspect_result(&api.inspect_container(container_name).await)
+}
+
+pub fn status_from_inspect_result(
+    inspected: &Result<Option<Value>, ServiceError>,
+) -> Option<ServerProcessStatus> {
+    match inspected {
+        Ok(Some(inspect)) => Some(status_from_inspect(inspect)),
         Ok(None) => Some(ServerProcessStatus::not_found()),
         Err(_) => None,
     }
@@ -326,28 +398,8 @@ fn docker_err(error: bollard::errors::Error) -> ServiceError {
 // ::image / ::volume, and the create-container body is bollard::container::Config
 // — newer bollard releases move these to bollard::query_parameters and
 // bollard::models::ContainerCreateBody, so upgrading requires rewriting the calls.
-#[async_trait::async_trait]
-impl DockerApi for BollardDocker {
-    async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
-        use futures_util::StreamExt;
-        if self.docker.inspect_image(image_name).await.is_ok() {
-            return Ok(());
-        }
-        let options = bollard::image::CreateImageOptions {
-            from_image: image_name,
-            ..Default::default()
-        };
-        let mut pull_progress = self.docker.create_image(Some(options), None, None);
-        while let Some(step) = pull_progress.next().await {
-            step.map_err(docker_err)?;
-        }
-        Ok(())
-    }
-
-    async fn create_and_start_container(
-        &self,
-        spec: ContainerSpec,
-    ) -> Result<String, ServiceError> {
+impl BollardDocker {
+    async fn create_from_spec(&self, spec: &ContainerSpec) -> Result<String, ServiceError> {
         use std::collections::HashMap;
         let mut port_bindings = HashMap::new();
         let mut exposed_ports = HashMap::new();
@@ -386,6 +438,33 @@ impl DockerApi for BollardDocker {
             .create_container(Some(options), config)
             .await
             .map_err(docker_err)?;
+        Ok(created.id)
+    }
+}
+
+#[async_trait::async_trait]
+impl DockerApi for BollardDocker {
+    async fn ensure_image(&self, image_name: &str) -> Result<(), ServiceError> {
+        use futures_util::StreamExt;
+        if self.docker.inspect_image(image_name).await.is_ok() {
+            return Ok(());
+        }
+        let options = bollard::image::CreateImageOptions {
+            from_image: image_name,
+            ..Default::default()
+        };
+        let mut pull_progress = self.docker.create_image(Some(options), None, None);
+        while let Some(step) = pull_progress.next().await {
+            step.map_err(docker_err)?;
+        }
+        Ok(())
+    }
+
+    async fn create_and_start_container(
+        &self,
+        spec: ContainerSpec,
+    ) -> Result<String, ServiceError> {
+        let id = self.create_from_spec(&spec).await?;
         self.docker
             .start_container(
                 &spec.name,
@@ -393,7 +472,11 @@ impl DockerApi for BollardDocker {
             )
             .await
             .map_err(docker_err)?;
-        Ok(created.id)
+        Ok(id)
+    }
+
+    async fn create_container(&self, spec: ContainerSpec) -> Result<String, ServiceError> {
+        self.create_from_spec(&spec).await
     }
 
     async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
@@ -495,24 +578,44 @@ pub mod mock {
 
     #[derive(Default)]
     pub struct MockDocker {
-        /// container_name -> inspect JSON ({"State": {...}})
+        /// container_name -> inspect JSON ({"State": {...}, "HostConfig": {"Binds": [...]}})
         pub statuses: Mutex<HashMap<String, Value>>,
         /// container_name -> raw stats JSON
         pub stats: Mutex<HashMap<String, Value>>,
         /// Ordered call log: "ensure_image:x", "create_and_start:x", "start:x", ...
         pub calls: Mutex<Vec<String>>,
         pub fail_start: Mutex<HashSet<String>>,
+        pub fail_create: Mutex<HashSet<String>>,
+        /// When set, `ensure_image` waits up to 250 ms for a second caller to
+        /// reach it too, standing in for an image pull two handlers overlap on.
+        pub ensure_image_rendezvous: Mutex<Option<std::sync::Arc<tokio::sync::Barrier>>>,
         pub fail_stop: Mutex<HashSet<String>>,
         pub fail_inspect: Mutex<HashSet<String>>,
         /// Bare volume names (e.g. "ps-alpha-data") whose removal fails with a
         /// non-NotFound error.
         pub fail_remove_volume: Mutex<HashSet<String>>,
+        /// Run with the call ("create:x", "start:x") before a create or start
+        /// takes effect, while the caller is suspended inside it.
+        #[allow(clippy::type_complexity)]
+        pub on_create_or_start: Mutex<Option<Box<dyn Fn(&str) + Send + Sync>>>,
     }
 
     fn running_state() -> Value {
-        serde_json::json!({
-            "State": {"Status": "running", "Running": true, "StartedAt": "2026-07-09T00:00:00Z"}
-        })
+        serde_json::json!({"Status": "running", "Running": true, "StartedAt": "2026-07-09T00:00:00Z"})
+    }
+
+    impl MockDocker {
+        /// Replaces only `State`, so a start or stop keeps the recorded binds.
+        fn set_state(&self, container_name: &str, state: Value) {
+            let mut statuses = self.statuses.lock().unwrap();
+            let entry = statuses
+                .entry(container_name.to_string())
+                .or_insert_with(|| serde_json::json!({}));
+            if !entry.is_object() {
+                *entry = serde_json::json!({});
+            }
+            entry["State"] = state;
+        }
     }
 
     #[async_trait::async_trait]
@@ -522,6 +625,12 @@ pub mod mock {
                 .lock()
                 .unwrap()
                 .push(format!("ensure_image:{image_name}"));
+            let rendezvous = self.ensure_image_rendezvous.lock().unwrap().clone();
+            if let Some(barrier) = rendezvous {
+                let _ =
+                    tokio::time::timeout(std::time::Duration::from_millis(250), barrier.wait())
+                        .await;
+            }
             Ok(())
         }
 
@@ -529,29 +638,58 @@ pub mod mock {
             &self,
             spec: ContainerSpec,
         ) -> Result<String, ServiceError> {
+            if self.fail_create.lock().unwrap().contains(&spec.name) {
+                return Err(ServiceError::Docker("mock create failure".to_string()));
+            }
             self.calls
                 .lock()
                 .unwrap()
                 .push(format!("create_and_start:{}", spec.name));
-            self.statuses
+            self.statuses.lock().unwrap().insert(
+                spec.name.clone(),
+                serde_json::json!({"State": running_state(), "HostConfig": {"Binds": spec.binds}}),
+            );
+            Ok(format!("mock-{}", spec.name))
+        }
+
+        async fn create_container(&self, spec: ContainerSpec) -> Result<String, ServiceError> {
+            if let Some(hook) = &*self.on_create_or_start.lock().unwrap() {
+                hook(&format!("create:{}", spec.name));
+            }
+            if self.fail_create.lock().unwrap().contains(&spec.name) {
+                return Err(ServiceError::Docker("mock create failure".to_string()));
+            }
+            self.calls
                 .lock()
                 .unwrap()
-                .insert(spec.name.clone(), running_state());
+                .push(format!("create:{}", spec.name));
+            self.statuses.lock().unwrap().insert(
+                spec.name.clone(),
+                serde_json::json!({
+                    "State": {"Status": "created", "Running": false, "StartedAt": null},
+                    "HostConfig": {"Binds": spec.binds}
+                }),
+            );
             Ok(format!("mock-{}", spec.name))
         }
 
         async fn start_container(&self, container_name: &str) -> Result<(), ServiceError> {
+            if let Some(hook) = &*self.on_create_or_start.lock().unwrap() {
+                hook(&format!("start:{container_name}"));
+            }
             if self.fail_start.lock().unwrap().contains(container_name) {
                 return Err(ServiceError::Docker("mock start failure".to_string()));
+            }
+            if !self.statuses.lock().unwrap().contains_key(container_name) {
+                return Err(ServiceError::Docker(format!(
+                    "No such container: {container_name}"
+                )));
             }
             self.calls
                 .lock()
                 .unwrap()
                 .push(format!("start:{container_name}"));
-            self.statuses
-                .lock()
-                .unwrap()
-                .insert(container_name.to_string(), running_state());
+            self.set_state(container_name, running_state());
             Ok(())
         }
 
@@ -567,9 +705,9 @@ pub mod mock {
                 .lock()
                 .unwrap()
                 .push(format!("stop:{container_name}"));
-            self.statuses.lock().unwrap().insert(
-                container_name.to_string(),
-                serde_json::json!({"State": {"Status": "exited", "Running": false, "StartedAt": null}}),
+            self.set_state(
+                container_name,
+                serde_json::json!({"Status": "exited", "Running": false, "StartedAt": null}),
             );
             Ok(())
         }
@@ -643,6 +781,7 @@ pub(crate) mod test_support {
             mods_path: "/srv/alpha/mods".to_string(),
             logicmods_path: "/srv/alpha/logicmods".to_string(),
             nativemods_path: "/srv/alpha/nativemods".to_string(),
+            paks_path: "/srv/alpha/paks".to_string(),
             install_path: String::new(),
             steamcmd_path: String::new(),
             pid: None,
@@ -654,6 +793,7 @@ pub(crate) mod test_support {
             admin_password: "admin".to_string(),
             max_players: 16,
             env_vars,
+            pending_relocation: None,
             created_at: timestamp.clone(),
             updated_at: timestamp,
         }
@@ -714,7 +854,7 @@ mod tests {
     }
 
     #[test]
-    fn build_binds_covers_volume_and_four_host_paths() {
+    fn build_binds_covers_volume_and_five_host_paths() {
         let binds = build_binds(&test_support::docker_record());
         assert_eq!(
             binds,
@@ -724,8 +864,67 @@ mod tests {
                 "/srv/alpha/mods:/palworld/Pal/Binaries/Win64/Mods/:rw",
                 "/srv/alpha/logicmods:/palworld/Pal/Content/Paks/LogicMods/:rw",
                 "/srv/alpha/nativemods:/palworld/nativemods/:rw",
+                "/srv/alpha/paks:/palworld/Pal/Content/Paks/~mods/:rw",
             ]
         );
+    }
+
+    #[test]
+    fn build_binds_omits_paks_mods_when_paks_path_is_empty() {
+        let mut record = test_support::docker_record();
+        record.paks_path = String::new();
+        assert_eq!(
+            build_binds(&record),
+            vec![
+                "ps-alpha-data:/palworld/:rw",
+                "/srv/alpha/saves:/palworld/Pal/Saved/:rw",
+                "/srv/alpha/mods:/palworld/Pal/Binaries/Win64/Mods/:rw",
+                "/srv/alpha/logicmods:/palworld/Pal/Content/Paks/LogicMods/:rw",
+                "/srv/alpha/nativemods:/palworld/nativemods/:rw",
+            ]
+        );
+    }
+
+    #[test]
+    fn mounts_paks_mods_compares_the_container_side_only() {
+        let inspect = |binds: Value| serde_json::json!({"HostConfig": {"Binds": binds}});
+        assert!(mounts_paks_mods(&inspect(serde_json::json!(build_binds(
+            &test_support::docker_record()
+        )))));
+        assert!(mounts_paks_mods(&inspect(serde_json::json!([
+            r"C:\srv\alpha\paks:/palworld/Pal/Content/Paks/~mods/:rw"
+        ]))));
+        assert!(mounts_paks_mods(&inspect(serde_json::json!([
+            "/srv/alpha/paks:/palworld/Pal/Content/Paks/~mods/"
+        ]))));
+        assert!(mounts_paks_mods(&inspect(serde_json::json!([
+            "/srv/alpha/paks:/palworld/Pal/Content/Paks/~mods:rw"
+        ]))));
+        assert!(!mounts_paks_mods(&inspect(serde_json::json!([
+            "/srv/alpha/paks:/palworld/Pal/Content/Paks/~mods-old/:rw"
+        ]))));
+        assert!(!mounts_paks_mods(&inspect(serde_json::json!([
+            "/srv/alpha/~mods:/palworld/Pal/Content/Paks/LogicMods/:rw"
+        ]))));
+        let mut record = test_support::docker_record();
+        record.paks_path = String::new();
+        assert!(!mounts_paks_mods(&inspect(serde_json::json!(build_binds(
+            &record
+        )))));
+        assert!(!mounts_paks_mods(&serde_json::json!({"State": {}})));
+    }
+
+    #[tokio::test]
+    async fn mock_inspect_reports_created_binds_across_stop_and_start() {
+        let api = mock::MockDocker::default();
+        let spec = container_spec(&test_support::docker_record());
+        let binds = spec.binds.clone();
+        api.create_and_start_container(spec).await.unwrap();
+        api.stop_container("alpha", 30).await.unwrap();
+        api.start_container("alpha").await.unwrap();
+        let inspect = api.inspect_container("alpha").await.unwrap().unwrap();
+        assert_eq!(inspect["HostConfig"]["Binds"], serde_json::json!(binds));
+        assert_eq!(inspect["State"]["Running"], true);
     }
 
     #[test]
@@ -770,7 +969,7 @@ mod tests {
     }
 
     #[test]
-    fn stats_from_raw_computes_python_stats_dict() {
+    fn stats_from_raw_computes_the_wire_stats_object() {
         let raw = serde_json::json!({
             "cpu_stats": {
                 "cpu_usage": {"total_usage": 400_000_000u64},
@@ -829,11 +1028,13 @@ mod tests {
             .join("nativemods")
             .to_string_lossy()
             .to_string();
+        record.paks_path = scratch.path().join("paks").to_string_lossy().to_string();
         let api = mock::MockDocker::default();
         let container_id = create_server_container(&api, &record).await.unwrap();
         assert_eq!(container_id, "mock-alpha");
         assert!(std::path::Path::new(&record.saves_path).is_dir());
         assert!(std::path::Path::new(&record.nativemods_path).is_dir());
+        assert!(std::path::Path::new(&record.paks_path).is_dir());
         let calls = api.calls.lock().unwrap().clone();
         assert_eq!(
             calls,
@@ -842,6 +1043,34 @@ mod tests {
                 "create_and_start:alpha".to_string()
             ]
         );
+    }
+
+    #[tokio::test]
+    async fn create_server_container_stopped_creates_without_starting() {
+        let scratch = tempfile::tempdir().unwrap();
+        let mut record = test_support::docker_record();
+        for (field, name) in [
+            (&mut record.saves_path, "saves"),
+            (&mut record.mods_path, "mods"),
+            (&mut record.logicmods_path, "logicmods"),
+            (&mut record.nativemods_path, "nativemods"),
+            (&mut record.paks_path, "paks"),
+        ] {
+            *field = scratch.path().join(name).to_string_lossy().into_owned();
+        }
+        let api = mock::MockDocker::default();
+        create_server_container_stopped(&api, &record).await.unwrap();
+        assert!(std::path::Path::new(&record.paks_path).is_dir());
+        assert_eq!(
+            api.calls.lock().unwrap().clone(),
+            vec![
+                "ensure_image:omanrod/psp-palworld-server".to_string(),
+                "create:alpha".to_string()
+            ]
+        );
+        let inspect = api.inspect_container("alpha").await.unwrap().unwrap();
+        assert_eq!(inspect["State"]["Running"], false);
+        assert!(mounts_paks_mods(&inspect));
     }
 
     #[tokio::test]
@@ -914,6 +1143,13 @@ mod tests {
         assert!(remove_server_container(&api, "alpha", None).await);
         let calls = api.calls.lock().unwrap().clone();
         assert!(!calls.iter().any(|call| call.starts_with("remove_volume")));
+    }
+
+    #[tokio::test]
+    async fn mock_start_fails_for_a_container_that_does_not_exist() {
+        let api = mock::MockDocker::default();
+        assert!(!start_server_container(&api, "ghost").await);
+        assert!(api.calls.lock().unwrap().is_empty());
     }
 
     #[tokio::test]

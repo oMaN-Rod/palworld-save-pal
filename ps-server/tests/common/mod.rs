@@ -8,6 +8,15 @@ use tokio_tungstenite::tungstenite::Message;
 #[allow(dead_code)]
 pub mod mock_mod;
 
+#[allow(dead_code)]
+pub mod mods;
+
+#[allow(dead_code)]
+pub mod mods_ws;
+
+#[allow(dead_code)]
+pub mod nexus_stub;
+
 #[allow(unused_imports)]
 pub use mock_mod::{spawn_mock_mod, MockMod};
 
@@ -89,6 +98,36 @@ pub async fn start_desktop_test_server(
     let handle = ps_server::start_server_with(config, dialogs)
         .await
         .unwrap();
+    TestServer {
+        handle,
+        _temp_dir: temp_dir,
+    }
+}
+
+/// Same as `start_desktop_test_server`, but around a caller-built
+/// `ServerServices` rather than the real one, so a test can inject a fake
+/// implementation of a service seam (an `IoStoreConverter`, for instance).
+#[allow(dead_code)]
+pub async fn start_desktop_test_server_with_services(
+    dialogs: std::sync::Arc<dyn ps_server::desktop_dialogs::FileDialogProvider>,
+    services: ps_server::services::ServerServices,
+) -> TestServer {
+    ensure_hermetic_bridge_endpoint_dir();
+    let temp_dir = tempfile::tempdir().unwrap();
+    let ui_dir = temp_dir.path().join("ui");
+    std::fs::create_dir_all(&ui_dir).unwrap();
+    let config = ps_server::ServerConfig {
+        host: "127.0.0.1".parse().unwrap(),
+        port: 0,
+        ui_dir,
+        data_dir: std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data"),
+        db_path: temp_dir.path().join("ps-rs.db"),
+        desktop_mode: true,
+    };
+    let handle =
+        ps_server::start_server_with_services(config, dialogs, std::sync::Arc::new(services))
+            .await
+            .unwrap();
     TestServer {
         handle,
         _temp_dir: temp_dir,

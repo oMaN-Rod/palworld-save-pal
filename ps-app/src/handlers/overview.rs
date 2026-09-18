@@ -144,6 +144,7 @@ mod tests {
             emitter: &test.emitter,
             blueprints: &mut test.blueprints,
             is_loopback: false,
+            mod_verification_subscribed: None,
             attachment: None,
         }
     }

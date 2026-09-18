@@ -151,9 +151,6 @@ define_message_types! {
     ServerStatusUpdate => "server_status_update",
     ServerApiCall => "server_api_call",
     ServerApiResponse => "server_api_response",
-    ListServerMods => "list_server_mods",
-    ToggleServerMod => "toggle_server_mod",
-    InstallServerMod => "install_server_mod",
     DetectWorkshopDir => "detect_workshop_dir",
     LoadServerSave => "load_server_save",
     GetServerStats => "get_server_stats",
@@ -244,6 +241,64 @@ define_message_types! {
     GameDeleteInstance => "game_delete_instance",
     GameSelectInstance => "game_select_instance",
     GameTestInstance => "game_test_instance",
+    ModTargetList => "mod_target_list",
+    ModTargetDetect => "mod_target_detect",
+    ModTargetAdd => "mod_target_add",
+    ModTargetRemove => "mod_target_remove",
+    ModTargetScan => "mod_target_scan",
+    ModAdopt => "mod_adopt",
+    ModAnalyze => "mod_analyze",
+    ModInstall => "mod_install",
+    ModList => "mod_list",
+    ModRemove => "mod_remove",
+    ModVersionSetCurrent => "mod_version_set_current",
+    ModVersionDelete => "mod_version_delete",
+    ModBackupList => "mod_backup_list",
+    ModBackupRestore => "mod_backup_restore",
+    ModBackupDelete => "mod_backup_delete",
+    ProfileList => "profile_list",
+    ProfileSetMod => "profile_set_mod",
+    ProfilePlan => "profile_plan",
+    ProfileApply => "profile_apply",
+    ModProgress => "mod_progress",
+    ProfileCreate => "profile_create",
+    ProfileRename => "profile_rename",
+    ProfileDelete => "profile_delete",
+    ProfileActivate => "profile_activate",
+    ProfileReorder => "profile_reorder",
+    ProfileSetOptions => "profile_set_options",
+    WorldProfileSet => "world_profile_set",
+    GameLaunch => "game_launch",
+    ModUploadBegin => "mod_upload_begin",
+    ModUploadChunk => "mod_upload_chunk",
+    ModUploadEnd => "mod_upload_end",
+    ProfileExport => "profile_export",
+    ProfileImport => "profile_import",
+    FrameworkStatus => "framework_status",
+    FrameworkInstall => "framework_install",
+    FrameworkRemove => "framework_remove",
+    FrameworkHazardRemove => "framework_hazard_remove",
+    GameInstanceSetTarget => "game_instance_set_target",
+    ModVerificationGet => "mod_verification_get",
+    ModVerificationSubscribe => "mod_verification_subscribe",
+    ModVerification => "mod_verification",
+    ModConflicts => "mod_conflicts",
+    ModIostoreConvert => "mod_iostore_convert",
+    ProfileRemoveMod => "profile_remove_mod",
+    ModReleaseProfiles => "mod_release_profiles",
+    NexusAccountGet => "nexus_account_get",
+    NexusKeySet => "nexus_key_set",
+    NexusKeyClear => "nexus_key_clear",
+    NexusCategories => "nexus_categories",
+    NexusSearch => "nexus_search",
+    NexusModFiles => "nexus_mod_files",
+    NexusDownload => "nexus_download",
+    NexusLinkSubscribe => "nexus_link_subscribe",
+    NexusLink => "nexus_link",
+    NexusHandlerStatus => "nexus_handler_status",
+    NexusHandlerRegister => "nexus_handler_register",
+    ModUpdateCheck => "mod_update_check",
+    ModUpdateIgnore => "mod_update_ignore",
 }
 
 #[cfg(test)]
@@ -372,17 +427,11 @@ mod tests {
         "server_status_update",
         "server_api_call",
         "server_api_response",
-        "list_server_mods",
-        "toggle_server_mod",
-        "install_server_mod",
         "detect_workshop_dir",
         "load_server_save",
         "get_server_stats",
         "server_creation_progress",
         "import_server",
-    ];
-
-    const FEATURE_ADDITION_WIRE_NAMES: &[&str] = &[
         "reattach_session",
         "eject_session",
         "session_not_found",
@@ -468,6 +517,64 @@ mod tests {
         "game_delete_instance",
         "game_select_instance",
         "game_test_instance",
+        "mod_target_list",
+        "mod_target_detect",
+        "mod_target_add",
+        "mod_target_remove",
+        "mod_target_scan",
+        "mod_adopt",
+        "mod_analyze",
+        "mod_install",
+        "mod_list",
+        "mod_remove",
+        "mod_version_set_current",
+        "mod_version_delete",
+        "mod_backup_list",
+        "mod_backup_restore",
+        "mod_backup_delete",
+        "profile_list",
+        "profile_set_mod",
+        "profile_plan",
+        "profile_apply",
+        "mod_progress",
+        "profile_create",
+        "profile_rename",
+        "profile_delete",
+        "profile_activate",
+        "profile_reorder",
+        "profile_set_options",
+        "world_profile_set",
+        "game_launch",
+        "mod_upload_begin",
+        "mod_upload_chunk",
+        "mod_upload_end",
+        "profile_export",
+        "profile_import",
+        "framework_status",
+        "framework_install",
+        "framework_remove",
+        "framework_hazard_remove",
+        "game_instance_set_target",
+        "mod_verification_get",
+        "mod_verification_subscribe",
+        "mod_verification",
+        "mod_conflicts",
+        "mod_iostore_convert",
+        "profile_remove_mod",
+        "mod_release_profiles",
+        "nexus_account_get",
+        "nexus_key_set",
+        "nexus_key_clear",
+        "nexus_categories",
+        "nexus_search",
+        "nexus_mod_files",
+        "nexus_download",
+        "nexus_link_subscribe",
+        "nexus_link",
+        "nexus_handler_status",
+        "nexus_handler_register",
+        "mod_update_check",
+        "mod_update_ignore",
     ];
 
     /// `Emitter::emit` splices `as_wire()` straight into the frame text
@@ -487,23 +594,14 @@ mod tests {
     }
 
     #[test]
-    fn message_type_count_is_expected() {
-        assert_eq!(EXPECTED_WIRE_NAMES.len(), 127);
-        assert_eq!(
-            MessageType::ALL.len(),
-            EXPECTED_WIRE_NAMES.len() + FEATURE_ADDITION_WIRE_NAMES.len()
-        );
+    fn every_message_type_is_covered_by_the_expected_table() {
+        assert_eq!(MessageType::ALL.len(), EXPECTED_WIRE_NAMES.len());
     }
 
     #[test]
-    fn wire_names_match_python_enum_exactly() {
+    fn wire_names_match_the_expected_table_exactly() {
         let actual: Vec<&str> = MessageType::ALL.iter().map(|t| t.as_wire()).collect();
-        let expected: Vec<&str> = EXPECTED_WIRE_NAMES
-            .iter()
-            .chain(FEATURE_ADDITION_WIRE_NAMES)
-            .copied()
-            .collect();
-        assert_eq!(actual, expected);
+        assert_eq!(actual, EXPECTED_WIRE_NAMES);
     }
 
     #[test]
