@@ -23,6 +23,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:e2e:web": "playwright test --config playwright.web.config.ts",
+		"test:e2e:mods": "playwright test --config playwright.mods.config.ts",
 		"test:unit": "vitest",
 		"machine-translate": "inlang machine translate --project project.inlang"
 	},

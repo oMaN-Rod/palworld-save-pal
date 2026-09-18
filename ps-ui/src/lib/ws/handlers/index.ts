@@ -4,6 +4,8 @@ import { gpsHandlers } from './gpsHandler';
 import { guildHandlers } from './guildHandler';
 import { lazyLoadHandlers } from './lazyLoadHandler';
 import { liveHandlers } from './liveHandler';
+import { modsHandlers } from './modsHandler';
+import { nexusHandlers } from './nexusHandler';
 import { overviewHandlers } from './overviewHandler';
 import { palHandlers } from './palHandler';
 import { playerHandlers } from './playerHandler';
@@ -28,6 +30,8 @@ export const handlers = [
 	...lazyLoadHandlers,
 	...overviewHandlers,
 	...serverHandlers,
+	...modsHandlers,
+	...nexusHandlers,
 	...liveHandlers,
 	...signalHandlers
 ];

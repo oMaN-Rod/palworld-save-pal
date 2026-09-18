@@ -1,8 +1,12 @@
+import type { SaveModProfile } from '$types';
+
 export interface LocalSaveEntry {
 	path: string;
 	name: string;
 	save_type: string;
 	modified_ms: number;
+	world_key?: string;
+	mod_profile?: SaveModProfile | null;
 }
 
 export interface GamepassSaveEntry {

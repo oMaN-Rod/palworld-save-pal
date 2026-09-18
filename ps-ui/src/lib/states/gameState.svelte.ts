@@ -1,14 +1,14 @@
 import {
 	addPalActionKey,
 	CommandIdTracker,
-	editPalActionKey,
 	editGuildActionKey,
-	setGuildRoleActionKey,
+	editPalActionKey,
 	editPlayerActionKey,
 	healActionKey,
 	movePalActionKey,
 	removePalActionKey,
 	RequestGuard,
+	setGuildRoleActionKey,
 	setItemSlotActionKey,
 	type PalAddress,
 	type PalAddTarget
@@ -32,6 +32,7 @@ export interface GameInstanceJson {
 	host: string;
 	port: number;
 	live: boolean;
+	targetId: string | null;
 }
 
 export interface GameInstancesJson {
@@ -531,10 +532,7 @@ export class GameState {
 			const payload = target.guildId
 				? { guild_id: target.guildId }
 				: { player_uid: target.playerUid };
-			const response = await sendAndWait<GameReply<GameGuildJson>>(
-				MessageType.GAME_GUILD,
-				payload
-			);
+			const response = await sendAndWait<GameReply<GameGuildJson>>(MessageType.GAME_GUILD, payload);
 			if (!this.#guildGuard.isCurrent(ticket)) return;
 			if ('error' in response) {
 				this.guildError = response;
@@ -554,10 +552,7 @@ export class GameState {
 	async loadGuilds(): Promise<void> {
 		const ticket = this.#guildsGuard.next();
 		try {
-			const response = await sendAndWait<GameReply<GameGuildsJson>>(
-				MessageType.GAME_GUILDS,
-				{}
-			);
+			const response = await sendAndWait<GameReply<GameGuildsJson>>(MessageType.GAME_GUILDS, {});
 			if (!this.#guildsGuard.isCurrent(ticket)) return;
 			this.guilds = 'error' in response ? null : response;
 		} catch (error) {
@@ -664,6 +659,16 @@ export class GameState {
 		const response = await sendAndWait<GameReply<GameInstancesJson>>(
 			MessageType.GAME_SELECT_INSTANCE,
 			{ id }
+		);
+		if ('error' in response) throw new GameCommandError(response.error, response.code);
+		this.#adoptInstances(ticket, response);
+	}
+
+	async setInstanceTarget(id: string, targetId: string | null): Promise<void> {
+		const ticket = this.#instancesGuard.next();
+		const response = await sendAndWait<GameReply<GameInstancesJson>>(
+			MessageType.GAME_INSTANCE_SET_TARGET,
+			{ id, targetId }
 		);
 		if ('error' in response) throw new GameCommandError(response.error, response.code);
 		this.#adoptInstances(ticket, response);

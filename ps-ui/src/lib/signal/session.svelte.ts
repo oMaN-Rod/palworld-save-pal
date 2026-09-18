@@ -36,6 +36,7 @@ export interface LiveFrameJson {
 export interface SignalSession {
 	readonly state: SignalConnState;
 	readonly connected: boolean;
+	readonly channelOpen: boolean;
 	readonly failure: SignalFailure;
 	readonly failureHint: string | null;
 	readonly lastFrame: LiveFrameJson | null;
@@ -259,6 +260,10 @@ class SignalSessionImpl implements SignalSession {
 
 	get connected() {
 		return this.#state === 'connected';
+	}
+
+	get channelOpen() {
+		return this.#ctl?.readyState === 'open';
 	}
 
 	get canAutoResume() {

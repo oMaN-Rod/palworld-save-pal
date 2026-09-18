@@ -1,10 +1,14 @@
 import { getDispatcher } from '$lib/ws/dispatcher';
 import type { Transport, WSHandlerContext } from '$lib/ws/types';
-import type { Message } from '$types';
+import { MessageType, type Message } from '$types';
 import { ChunkAssembler, chunkFrame } from './ctlFraming';
 import type { SignalSession } from './session.svelte';
 
 const REMOTE_SEND_AND_WAIT_TIMEOUT_MS = 30_000;
+
+function frameType(text: string): string | undefined {
+	return text.match(/^\{\s*"type"\s*:\s*"([^"]+)"/)?.[1];
+}
 
 export class RemoteTransport implements Transport {
 	readonly kind = 'remote' as const;
@@ -19,6 +23,7 @@ export class RemoteTransport implements Transport {
 		{ token: number; resolve: (value: unknown) => void; reject: (err: unknown) => void }
 	>();
 	#waiterToken = 0;
+	#disposed = false;
 	#message = $state.raw<Message | null>(null);
 	#lastSessionId = $state<string | null>(null);
 
@@ -37,9 +42,13 @@ export class RemoteTransport implements Transport {
 	}
 
 	async send(messageData: string): Promise<void> {
+		const type = frameType(messageData);
+		if (this.#disposed) throw new Error(`not sent: ${type ?? 'frame'}: RemoteTransport disposed`);
+		if (!this.#session.channelOpen) throw new Error(`not sent: ${type ?? 'frame'}: channel closed`);
 		for (const piece of chunkFrame(messageData, () => this.#nextChunkId++)) {
 			this.#session.sendRaw(piece);
 		}
+		if (type === MessageType.EJECT_SESSION) this.#lastSessionId = null;
 	}
 
 	async sendBytes(_type: string, _bytes: Uint8Array): Promise<void> {
@@ -87,6 +96,7 @@ export class RemoteTransport implements Transport {
 			this.#unsubscribe = null;
 		}
 		this.resetFraming();
+		this.#disposed = true;
 		const reason = new Error('RemoteTransport disposed');
 		for (const waiter of this.#waiters.values()) waiter.reject(reason);
 		this.#waiters.clear();
@@ -123,9 +133,11 @@ export class RemoteTransport implements Transport {
 	}
 
 	async #deliver(data: { type: string; data?: unknown }): Promise<void> {
-		if (data.type === 'loaded_save_files') {
+		if (data.type === MessageType.LOADED_SAVE_FILES) {
 			const sessionId = (data.data as { session_id?: unknown } | undefined)?.session_id;
 			if (typeof sessionId === 'string') this.#lastSessionId = sessionId;
+		} else if (data.type === MessageType.SESSION_NOT_FOUND && data.data === this.#lastSessionId) {
+			this.#lastSessionId = null;
 		}
 
 		const waiter = this.#waiters.get(data.type);

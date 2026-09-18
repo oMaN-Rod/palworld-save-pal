@@ -10,13 +10,16 @@ vi.mock('$lib/ws/dispatcher', () => ({
 
 type CtlListener = (envelope: { type: string; data: unknown }) => void;
 
-function createFakeSession(overrides: Partial<{ connected: boolean; state: string }> = {}) {
+function createFakeSession(
+	overrides: Partial<{ connected: boolean; channelOpen: boolean; state: string }> = {}
+) {
 	const listeners = new Set<CtlListener>();
 	const sent: string[] = [];
-	return {
+	const session = {
 		sent,
 		listeners,
 		connected: overrides.connected ?? true,
+		channelOpen: overrides.channelOpen ?? overrides.connected ?? true,
 		state: overrides.state ?? 'connected',
 		message: {
 			subscribe(fn: CtlListener) {
@@ -25,9 +28,13 @@ function createFakeSession(overrides: Partial<{ connected: boolean; state: strin
 			}
 		},
 		sendRaw(text: string) {
+			if (!session.channelOpen) {
+				throw new Error('SignalSession: cannot send before the ctl channel is open');
+			}
 			sent.push(text);
 		}
 	};
+	return session;
 }
 
 type FakeSession = ReturnType<typeof createFakeSession>;
@@ -42,6 +49,8 @@ function deliverChunked(session: FakeSession, frame: string) {
 		deliver(session, JSON.parse(piece));
 	}
 }
+
+const frame = (type: string, data: unknown = null) => JSON.stringify({ type, data });
 
 const fakeContext = { goto: vi.fn() } as unknown as WSHandlerContext;
 
@@ -155,20 +164,6 @@ describe('RemoteTransport', () => {
 		await expect(waitingB).resolves.toEqual({ type: 'list_servers', data: { servers: [] } });
 	});
 
-	it('updates lastSessionId from a loaded_save_files frame', async () => {
-		const transport = await makeTransport();
-		transport.connect(fakeContext);
-
-		expect(transport.lastSessionId).toBeNull();
-
-		deliver(fakeSession, {
-			type: 'loaded_save_files',
-			data: { session_id: 'abc', level: 'Level.sav' }
-		});
-
-		expect(transport.lastSessionId).toBe('abc');
-	});
-
 	it('rejects sendBytes', async () => {
 		const transport = await makeTransport();
 		transport.connect(fakeContext);
@@ -193,7 +188,106 @@ describe('RemoteTransport', () => {
 		expect(transport.kind).toBe('remote');
 	});
 
+	describe('when the ctl channel is closed', () => {
+		it('rejects a send at once and writes nothing, even while the session still reads connected', async () => {
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+			fakeSession.channelOpen = false;
+
+			await expect(transport.send(frame('mod_list'))).rejects.toThrow(
+				'not sent: mod_list: channel closed'
+			);
+
+			expect(fakeSession.connected).toBe(true);
+			expect(fakeSession.sent).toEqual([]);
+		});
+
+		it('writes a send made after the channel reopens exactly once and never the rejected one', async () => {
+			vi.useFakeTimers();
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+			fakeSession.channelOpen = false;
+			await transport.send(frame('profile_apply', { target_id: 'server-1' })).catch(() => {});
+
+			fakeSession.channelOpen = true;
+			await transport.send(frame('mod_list'));
+			await vi.advanceTimersByTimeAsync(60_000);
+
+			expect(fakeSession.sent).toEqual([frame('mod_list')]);
+			expect(vi.getTimerCount()).toBe(0);
+		});
+
+		it('rejects sendAndWait at once without writing and leaves no timers behind', async () => {
+			vi.useFakeTimers();
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+			fakeSession.channelOpen = false;
+
+			await expect(transport.sendAndWait({ type: 'list_servers' })).rejects.toThrow(
+				'not sent: list_servers: channel closed'
+			);
+
+			expect(fakeSession.sent).toEqual([]);
+			expect(vi.getTimerCount()).toBe(0);
+		});
+	});
+
+	describe('lastSessionId', () => {
+		it('updates from a loaded_save_files frame', async () => {
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+
+			expect(transport.lastSessionId).toBeNull();
+
+			deliver(fakeSession, {
+				type: 'loaded_save_files',
+				data: { session_id: 'abc', level: 'Level.sav' }
+			});
+
+			expect(transport.lastSessionId).toBe('abc');
+		});
+
+		it('forgets a session the desktop no longer has, and only that one', async () => {
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+			deliver(fakeSession, { type: 'loaded_save_files', data: { session_id: 'abc' } });
+
+			deliver(fakeSession, { type: 'session_not_found', data: 'other' });
+			expect(transport.lastSessionId).toBe('abc');
+
+			deliver(fakeSession, { type: 'session_not_found', data: 'abc' });
+			expect(transport.lastSessionId).toBeNull();
+		});
+
+		it('forgets the session once an eject is written, but not when the eject is refused', async () => {
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+			deliver(fakeSession, { type: 'loaded_save_files', data: { session_id: 'abc' } });
+
+			fakeSession.channelOpen = false;
+			await transport.send(frame('eject_session', { session_id: 'abc' })).catch(() => {});
+			expect(transport.lastSessionId).toBe('abc');
+
+			fakeSession.channelOpen = true;
+			await transport.send(frame('eject_session', { session_id: 'abc' }));
+			expect(transport.lastSessionId).toBeNull();
+		});
+	});
+
 	describe('dispose', () => {
+		it('rejects every send after it and writes nothing', async () => {
+			const transport = await makeTransport();
+			transport.connect(fakeContext);
+
+			transport.dispose();
+
+			await expect(transport.send(frame('mod_list'))).rejects.toThrow(
+				'not sent: mod_list: RemoteTransport disposed'
+			);
+			await expect(transport.sendAndWait({ type: 'list_servers' })).rejects.toThrow(/disposed/i);
+			expect(fakeSession.sent).toEqual([]);
+		});
+
 		it('unsubscribes from the session so a later frame is never dispatched', async () => {
 			const transport = await makeTransport();
 			transport.connect(fakeContext);

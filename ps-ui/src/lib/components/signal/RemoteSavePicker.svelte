@@ -58,7 +58,9 @@
 			if (error) {
 				localError = error;
 			} else {
-				localSaves = sortLocalSaves(result.saves ?? []);
+				localSaves = sortLocalSaves(
+					(result.saves ?? []).filter((save) => save.save_type !== 'gamepass')
+				);
 			}
 		} catch (err: any) {
 			localError = err?.message ?? String(err);
@@ -198,6 +200,11 @@
 					<div class="min-w-0">
 						<p class="truncate font-medium">{save.name}</p>
 						<p class="text-surface-400 truncate text-xs">{save.path}</p>
+						{#if save.mod_profile}
+							<p class="text-primary-400 truncate text-xs">
+								{m.mods_worlds_linked({ name: save.mod_profile.profile_name })}
+							</p>
+						{/if}
 						{#if modified}
 							<p class="text-surface-500 text-xs">{modified}</p>
 						{/if}
@@ -249,7 +256,7 @@
 				{@const running = isServerRunning(server)}
 				<button
 					type="button"
-					class="bg-surface-800 hover:bg-surface-700 flex w-full items-center justify-between gap-3 rounded-sm p-3 text-left disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-surface-800"
+					class="bg-surface-800 hover:bg-surface-700 disabled:hover:bg-surface-800 flex w-full items-center justify-between gap-3 rounded-sm p-3 text-left disabled:cursor-not-allowed disabled:opacity-50"
 					disabled={running}
 					onclick={() => loadServerSave(server.id)}
 				>

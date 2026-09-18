@@ -960,6 +960,47 @@ describe('GameState instances', () => {
 		expect(gameState.activeInstanceId).toBe('saved:1');
 	});
 
+	it('setInstanceTarget sends the id and target and adopts the returned list', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			instances: [
+				{
+					id: 'saved:1',
+					source: 'saved',
+					name: 'Remote',
+					host: '10.0.0.14',
+					port: 8788,
+					live: false,
+					targetId: 'client-palworld'
+				}
+			],
+			activeId: null
+		});
+
+		const gameState = new GameState();
+		await gameState.setInstanceTarget('saved:1', 'client-palworld');
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.GAME_INSTANCE_SET_TARGET, {
+			id: 'saved:1',
+			targetId: 'client-palworld'
+		});
+		expect(gameState.instances[0].targetId).toBe('client-palworld');
+	});
+
+	it('setInstanceTarget throws a GameCommandError on a refusal', async () => {
+		sendAndWait.mockResolvedValueOnce({ error: 'not found', code: 'target_not_found' });
+
+		const gameState = new GameState();
+		let caught: unknown;
+		try {
+			await gameState.setInstanceTarget('saved:1', 'client-palworld');
+		} catch (error) {
+			caught = error;
+		}
+
+		expect(caught).toBeInstanceOf(GameCommandError);
+		expect((caught as GameCommandError).code).toBe('target_not_found');
+	});
+
 	it('addInstance sends every field and adopts the returned list', async () => {
 		sendAndWait.mockResolvedValueOnce({ instances: [], activeId: null });
 

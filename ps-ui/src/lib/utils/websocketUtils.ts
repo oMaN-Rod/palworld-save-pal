@@ -17,17 +17,23 @@ export async function sendAndWait<T>(type: MessageType, data?: any): Promise<T> 
 
 export function send(type: MessageType, data?: any): void {
 	const ws = getSocketState();
-	ws.send(
-		JSON.stringify({
-			type,
-			data
-		})
-	);
+	Promise.resolve(
+		ws.send(
+			JSON.stringify({
+				type,
+				data
+			})
+		)
+	).catch((error: unknown) => {
+		console.error(`Failed to send ${type}:`, error);
+	});
 }
 
 /** Sends bulk bytes. May transfer the buffer — do not reuse `bytes` after. */
 export function sendBytes(type: MessageType, bytes: Uint8Array): void {
-	getSocketState().sendBytes(type, bytes);
+	Promise.resolve(getSocketState().sendBytes(type, bytes)).catch((error: unknown) => {
+		console.error(`Failed to send ${type}:`, error);
+	});
 }
 
 export function isReady(): boolean {
