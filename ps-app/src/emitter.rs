@@ -1,41 +1,99 @@
-use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::sync::Arc;
 
-#[derive(Clone)]
-enum EmitterSender {
-    Unbounded(UnboundedSender<String>),
-    Bounded(tokio::sync::mpsc::Sender<String>),
-}
+use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 use ps_core::progress::ProgressSink;
 
 use crate::messages::MessageType;
 
+/// Per-connection outgoing byte budget shared between the [`Emitter`] and the
+/// connection's writer task.
+///
+/// Frames are NEVER silently dropped from a live connection: a dropped
+/// response frame wedges the client protocol forever (a caller cannot tell a
+/// slow handler from a lost frame). Instead, a client that stops draining
+/// its frames — slow, malicious, or gone — trips the budget and has the
+/// whole connection terminated by the writer.
+#[derive(Debug)]
+pub struct OutgoingQueueGuard {
+    queued_bytes: AtomicUsize,
+    max_queued_bytes: usize,
+    terminated: AtomicBool,
+}
+
+impl OutgoingQueueGuard {
+    pub fn new(max_queued_bytes: usize) -> Arc<Self> {
+        Arc::new(Self {
+            queued_bytes: AtomicUsize::new(0),
+            max_queued_bytes,
+            terminated: AtomicBool::new(false),
+        })
+    }
+
+    /// True once the budget was exceeded; every further emit is a no-op and
+    /// the writer closes the socket.
+    pub fn is_terminated(&self) -> bool {
+        self.terminated.load(Ordering::Acquire)
+    }
+
+    /// Reserves `bytes` of queue budget. `false` means the budget tripped and
+    /// the frame must not be queued. Charging before checking only ever
+    /// terminates a connection earlier, never later, so clones racing here
+    /// stay safe.
+    fn charge(&self, bytes: usize) -> bool {
+        let queued = self.queued_bytes.fetch_add(bytes, Ordering::AcqRel) + bytes;
+        if queued > self.max_queued_bytes {
+            if !self.terminated.swap(true, Ordering::AcqRel) {
+                tracing::warn!(
+                    queued_bytes = queued,
+                    max_queued_bytes = self.max_queued_bytes,
+                    "outgoing websocket queue exceeded its budget; terminating the connection"
+                );
+            }
+            false
+        } else {
+            true
+        }
+    }
+
+    /// Gives budget back once the writer handed a frame to the socket.
+    pub fn release(&self, bytes: usize) {
+        self.queued_bytes.fetch_sub(bytes, Ordering::AcqRel);
+    }
+}
+
 /// Cheaply cloneable handle that queues outgoing frames onto the
 /// per-connection writer task.
 #[derive(Clone)]
 pub struct Emitter {
-    sender: EmitterSender,
+    sender: UnboundedSender<String>,
     max_payload_bytes: Option<usize>,
+    guard: Option<Arc<OutgoingQueueGuard>>,
 }
 
 impl Emitter {
     pub fn new(sender: UnboundedSender<String>) -> Self {
         Self {
-            sender: EmitterSender::Unbounded(sender),
+            sender,
             max_payload_bytes: None,
+            guard: None,
         }
     }
 
-    /// Creates a bounded emitter for network transports. A bounded queue is
-    /// deliberate: a slow or malicious client must not be able to turn every
-    /// large save/progress response into unbounded process memory.
-    pub fn new_bounded(
-        sender: tokio::sync::mpsc::Sender<String>,
+    /// Network transports hand the per-connection writer channel plus a
+    /// queue guard: while the connection is healthy every frame is delivered,
+    /// and a client that stops draining trips the budget and is disconnected
+    /// wholesale — bounding memory without ever losing a live frame.
+    pub fn new_network(
+        sender: UnboundedSender<String>,
         max_payload_bytes: usize,
+        guard: Arc<OutgoingQueueGuard>,
     ) -> Self {
         Self {
-            sender: EmitterSender::Bounded(sender),
+            sender,
             max_payload_bytes: Some(max_payload_bytes),
+            guard: Some(guard),
         }
     }
 
@@ -68,19 +126,15 @@ impl Emitter {
             );
             return;
         }
-        // Send failure just means the client disconnected or its bounded
-        // queue is full. Dropping a frame is safer than blocking a handler or
-        // allowing an unbounded queue to grow.
-        match &self.sender {
-            EmitterSender::Unbounded(sender) => {
-                let _ = sender.send(text);
+        if let Some(guard) = &self.guard {
+            // Send failure just means the client disconnected; the guard is
+            // per-connection and dies with it.
+            if !guard.is_terminated() && guard.charge(text.len()) {
+                let _ = self.sender.send(text);
             }
-            EmitterSender::Bounded(sender) => {
-                if let Err(error) = sender.try_send(text) {
-                    tracing::debug!(%error, "could not queue outgoing websocket message");
-                }
-            }
+            return;
         }
+        let _ = self.sender.send(text);
     }
 
     pub fn emit_error(&self, message: &str, trace: &str) {
@@ -91,10 +145,7 @@ impl Emitter {
     }
 
     pub async fn closed(&self) {
-        match &self.sender {
-            EmitterSender::Unbounded(sender) => sender.closed().await,
-            EmitterSender::Bounded(sender) => sender.closed().await,
-        }
+        self.sender.closed().await
     }
 
     pub fn progress_sink(&self) -> ProgressSink {
@@ -185,6 +236,55 @@ mod tests {
             serde_json::json!({"type": "progress_message", "data": "Loading Level.sav..."})
         );
     }
+
+    #[test]
+    fn network_emitter_never_drops_frames_under_budget() {
+        // Regression: a save load emits a burst of progress frames plus the
+        // final response faster than any reader drains; every frame must
+        // still arrive while the connection is within budget.
+        let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
+        let guard = OutgoingQueueGuard::new(1024 * 1024);
+        let emitter = Emitter::new_network(sender, MAX_TEST_PAYLOAD, guard);
+        for index in 0..200 {
+            emitter.emit(MessageType::ProgressMessage, &format!("step {index}"));
+        }
+        emitter.emit(MessageType::GetVersion, &"final-response");
+        let mut seen_final = false;
+        while let Ok(frame) = receiver.try_recv() {
+            if frame.contains("final-response") {
+                seen_final = true;
+            }
+        }
+        assert!(seen_final, "the response frame must survive the burst");
+    }
+
+    #[test]
+    fn over_budget_connection_is_terminated_not_trickled() {
+        // Measure a real frame so the budget arithmetic is exact: two frames
+        // fit, the third trips the budget and the connection is terminated.
+        let payload = "x".repeat(60);
+        let (probe_tx, mut probe_rx) = tokio::sync::mpsc::unbounded_channel();
+        Emitter::new(probe_tx).emit(MessageType::ProgressMessage, &payload);
+        let one_frame = probe_rx.try_recv().unwrap().len();
+
+        let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
+        let guard = OutgoingQueueGuard::new(one_frame * 2 + 10);
+        let emitter = Emitter::new_network(sender, MAX_TEST_PAYLOAD, Arc::clone(&guard));
+        emitter.emit(MessageType::ProgressMessage, &payload);
+        emitter.emit(MessageType::ProgressMessage, &payload);
+        assert!(!guard.is_terminated());
+        emitter.emit(MessageType::ProgressMessage, &payload); // trips the budget
+        emitter.emit(MessageType::GetVersion, &"never-queued");
+        assert!(guard.is_terminated());
+        let mut delivered = 0;
+        while let Ok(frame) = receiver.try_recv() {
+            assert!(!frame.contains("never-queued"), "{frame}");
+            delivered += 1;
+        }
+        assert_eq!(delivered, 2, "the two in-budget frames queue; nothing after");
+    }
+
+    const MAX_TEST_PAYLOAD: usize = 1024 * 1024;
 }
 
 #[cfg(test)]

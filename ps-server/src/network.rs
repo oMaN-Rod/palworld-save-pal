@@ -748,61 +748,112 @@ async fn put_config(
         .into_response()
 }
 
-pub(crate) async fn reconcile_current_resources(config: &NetworkConfig) -> Result<(), String> {
+/// Brings the live router/tailnet exposure in line with `config`, as best
+/// the current environment allows. Failures are collected, not fatal: a
+/// missing Tailscale CLI or a network without a UPnP gateway degrades the
+/// deployment loudly (each caller warns) instead of stopping the server
+/// from serving at all. Strict error handling belongs to the interactive
+/// config-change path (`reconcile_network_resources`), where the operator
+/// is present and a rollback exists.
+pub(crate) async fn reconcile_current_resources(config: &NetworkConfig) -> Vec<String> {
+    let mut failures = Vec::new();
+
     if config.funnel_enabled {
-        let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
-            .await
-            .map_err(|error| format!("funnel probe task failed: {error}"))?;
-        if !live.available {
-            return Err("Tailscale Funnel is enabled but the CLI is unavailable".into());
-        }
-        let target_matches =
-            live.on && ps_network::tailscale::funnel_owns_local_port(&live, config.port);
-        if !live.on || !target_matches {
-            let port = config.port;
-            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(true, port))
-                .await
-                .map_err(|error| format!("funnel update task failed: {error}"))??;
+        match tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe).await {
+            Ok(live) if live.available => {
+                let target_matches =
+                    live.on && ps_network::tailscale::funnel_owns_local_port(&live, config.port);
+                if !live.on || !target_matches {
+                    let port = config.port;
+                    match tokio::task::spawn_blocking(move || {
+                        ps_network::tailscale::set_funnel(true, port)
+                    })
+                    .await
+                    {
+                        Ok(Ok(_)) => {}
+                        Ok(Err(error)) => {
+                            failures.push(format!("Tailscale Funnel could not be enabled: {error}"))
+                        }
+                        Err(error) => failures.push(format!("funnel update task failed: {error}")),
+                    }
+                }
+            }
+            Ok(_) => failures.push(
+                "Tailscale Funnel is enabled but the CLI is unavailable".into(),
+            ),
+            Err(error) => failures.push(format!("funnel probe task failed: {error}")),
         }
     } else {
-        let live = tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe)
-            .await
-            .map_err(|error| format!("funnel cleanup probe task failed: {error}"))?;
-        if live.available && live.on && ps_network::tailscale::funnel_owns_local_targets(&live) {
-            let port = config.port;
-            tokio::task::spawn_blocking(move || ps_network::tailscale::set_funnel(false, port))
+        match tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe).await {
+            Ok(live)
+                if live.available && live.on && ps_network::tailscale::funnel_owns_local_targets(&live) =>
+            {
+                let port = config.port;
+                match tokio::task::spawn_blocking(move || {
+                    ps_network::tailscale::set_funnel(false, port)
+                })
                 .await
-                .map_err(|error| format!("funnel cleanup task failed: {error}"))??;
+                {
+                    Ok(Ok(_)) => {}
+                    Ok(Err(error)) => {
+                        failures.push(format!("Tailscale Funnel could not be turned off: {error}"))
+                    }
+                    Err(error) => failures.push(format!("funnel cleanup task failed: {error}")),
+                }
+            }
+            Ok(_) => {}
+            Err(error) => failures.push(format!("funnel cleanup probe task failed: {error}")),
         }
     }
 
     #[cfg(feature = "upnp")]
-    if config.upnp_enabled {
-        tokio::time::timeout(
-            Duration::from_secs(20),
-            ps_network::upnp::map_port(config.port, "PalStudio"),
-        )
-        .await
-        .map_err(|_| "UPnP mapping timed out".to_owned())??;
-        tokio::time::timeout(
-            Duration::from_secs(20),
-            ps_network::upnp::remove_owned_mappings_except("PalStudio", Some(config.port)),
-        )
-        .await
-        .map_err(|_| "stale UPnP mapping cleanup timed out".to_owned())??;
-    } else {
-        tokio::time::timeout(
-            Duration::from_secs(20),
-            ps_network::upnp::remove_owned_mappings("PalStudio"),
-        )
-        .await
-        .map_err(|_| "stale UPnP mapping cleanup timed out".to_owned())??;
+    {
+        if config.upnp_enabled {
+            match tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::map_port(config.port, "PalStudio"),
+            )
+            .await
+            {
+                Ok(Ok(())) => {}
+                Ok(Err(error)) => {
+                    failures.push(format!("UPnP port mapping could not be created: {error}"))
+                }
+                Err(_) => failures.push("UPnP port mapping timed out".into()),
+            }
+            match tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::remove_owned_mappings_except("PalStudio", Some(config.port)),
+            )
+            .await
+            {
+                Ok(Ok(())) => {}
+                Ok(Err(error)) => {
+                    failures.push(format!("stale UPnP mappings could not be cleaned: {error}"))
+                }
+                Err(_) => failures.push("stale UPnP mapping cleanup timed out".into()),
+            }
+        } else {
+            // Best-effort cleanup of mappings an earlier run may have left;
+            // a network without a UPnP gateway simply has nothing to remove.
+            if let Ok(Err(error)) = tokio::time::timeout(
+                Duration::from_secs(20),
+                ps_network::upnp::remove_owned_mappings("PalStudio"),
+            )
+            .await
+            {
+                if !error.contains("no UPnP gateway") {
+                    failures.push(format!("stale UPnP mappings could not be cleaned: {error}"));
+                }
+            }
+        }
     }
     #[cfg(not(feature = "upnp"))]
     if config.upnp_enabled {
-        return Err("this build does not include UPnP support".into());
+        failures.push("this build does not include UPnP support".into());
     }
-    Ok(())
+
+    failures
 }
 
 async fn reconcile_network_resources(

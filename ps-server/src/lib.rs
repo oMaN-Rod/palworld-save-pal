@@ -116,18 +116,36 @@ async fn stop_unit_task(mut task: tokio::task::JoinHandle<()>, name: &str) {
     }
 }
 
+/// Waits for the listener to end on its own — shutdown signal, port-change
+/// rebind, or runtime-mode switch. This is the server's lifecycle clock and
+/// must carry NO deadline: a healthy server runs indefinitely.
 async fn join_serve_task(
+    task: tokio::task::JoinHandle<std::io::Result<()>>,
+) -> Result<(), String> {
+    match task.await {
+        Ok(Ok(())) => Ok(()),
+        Ok(Err(error)) => Err(error.to_string()),
+        Err(error) => Err(format!("listener task panicked or was cancelled: {error}")),
+    }
+}
+
+/// Bounded stop for a listener whose shutdown was already requested; a slow
+/// or stuck listener is aborted after the deadline. The join result is
+/// consumed exactly once (re-awaiting a completed JoinHandle panics).
+async fn stop_serve_task(
     mut task: tokio::task::JoinHandle<std::io::Result<()>>,
 ) -> Result<(), String> {
-    match tokio::time::timeout(SHUTDOWN_TIMEOUT, &mut task).await {
-        Ok(Ok(Ok(()))) => Ok(()),
-        Ok(Ok(Err(error))) => Err(error.to_string()),
-        Ok(Err(error)) => Err(format!("listener task panicked or was cancelled: {error}")),
+    let joined = match tokio::time::timeout(SHUTDOWN_TIMEOUT, &mut task).await {
+        Ok(joined) => joined,
         Err(_) => {
             task.abort();
-            let _ = task.await;
-            Err("listener did not stop within the shutdown deadline".into())
+            task.await
         }
+    };
+    match joined {
+        Ok(Ok(())) => Ok(()),
+        Ok(Err(error)) => Err(error.to_string()),
+        Err(error) => Err(format!("listener task panicked or was cancelled: {error}")),
     }
 }
 
@@ -156,7 +174,7 @@ impl ServerHandle {
         self.network_reconciler_cancel.cancel();
         stop_unit_task(self.instance_reconciler_task, "instance reconciler").await;
         stop_unit_task(self.network_reconciler_task, "network reconciler").await;
-        if let Err(error) = join_serve_task(self.serve_task).await {
+        if let Err(error) = stop_serve_task(self.serve_task).await {
             tracing::warn!(%error, "server listener did not stop cleanly");
         }
         stop_services(&self.services).await;
@@ -271,8 +289,8 @@ async fn run_network_reconciler(
             _ = tokio::time::sleep(delay) => {}
         }
         let config = runtime.effective_config();
-        if let Err(error) = crate::network::reconcile_current_resources(&config).await {
-            tracing::error!(%error, "network resource renewal failed; retaining current policy");
+        for failure in crate::network::reconcile_current_resources(&config).await {
+            tracing::error!("network resource renewal failed; retaining current policy: {failure}");
         }
     }
 }
@@ -426,9 +444,11 @@ pub async fn start_server_with(
         network_policy: Some(Arc::clone(&network) as Arc<dyn ps_app::network_policy::NetworkPolicy>),
     });
     ps_app::handlers::plugins::seed_bundled_plugins(&state).await?;
+    // Port 0 asks the OS for a free ephemeral port (tests rely on it); the
+    // bound address reported back always carries a concrete port.
     anyhow::ensure!(
-        effective_port != 0,
-        "server port must be between 1 and 65535"
+        effective_port <= 65535,
+        "server port must be between 0 and 65535"
     );
     let bind_ip = listener_bind_ip(&config, &network).await?;
     let listener = tokio::net::TcpListener::bind((bind_ip, effective_port)).await?;
@@ -436,13 +456,16 @@ pub async fn start_server_with(
     tracing::info!(%addr, desktop_mode = config.desktop_mode, "ps-server listening");
 
     // Reconcile configured router/tailnet exposure after the socket is bound,
-    // but before any background service is started. A configured external
-    // resource that cannot be established is a startup error, not a silently
-    // half-working deployment.
+    // but before any background service is started. The environment not
+    // matching the policy (no Tailscale CLI, no UPnP gateway) degrades the
+    // deployment loudly rather than stopping the server from serving; the
+    // listen policy itself still gates every peer.
     if network.tier() == ps_network::NetworkTier::Hosted {
-        crate::network::reconcile_current_resources(&network.effective_config())
+        for failure in crate::network::reconcile_current_resources(&network.effective_config())
             .await
-            .map_err(|error| anyhow::anyhow!("could not reconcile network resources: {error}"))?;
+        {
+            tracing::warn!("network exposure not fully established: {failure}");
+        }
     }
 
     if let Err(error) = services.signal.lock().await.restore_armed(&state).await {

@@ -24,7 +24,10 @@ use crate::AppState;
 /// this limit, but a peer must never be able to reserve a gigabyte per frame.
 pub const MAX_WS_MESSAGE_BYTES: usize = 64 * 1024 * 1024;
 pub const MAX_WS_FRAME_BYTES: usize = MAX_WS_MESSAGE_BYTES;
-const WS_OUTGOING_CAPACITY: usize = 2;
+/// Per-connection outgoing byte budget: frames may pile up while the client
+/// is slow, but a client that stops draining entirely is disconnected rather
+/// than allowed to grow the queue without bound.
+const WS_MAX_QUEUED_BYTES: usize = 64 * 1024 * 1024;
 const WS_WRITE_TIMEOUT: Duration = Duration::from_secs(30);
 const WS_IDLE_TIMEOUT: Duration = Duration::from_secs(5 * 60);
 const POLICY_POLL_INTERVAL: Duration = Duration::from_secs(1);
@@ -99,22 +102,29 @@ async fn connection_loop(
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
-    let (frame_sender, mut frame_receiver) =
-        tokio::sync::mpsc::channel::<String>(WS_OUTGOING_CAPACITY);
+    let (frame_sender, mut frame_receiver) = tokio::sync::mpsc::unbounded_channel::<String>();
+    let queue_guard = ps_app::emitter::OutgoingQueueGuard::new(WS_MAX_QUEUED_BYTES);
 
     // Drains the mpsc channel onto the socket so handlers never block on I/O.
     // Exits when the channel closes (all Emitters dropped) or the send fails
     // (client gone) — either way `frame_receiver.recv()` eventually returns
-    // `None` or the loop `break`s, so this task always terminates.
+    // `None` or the loop `break`s, so this task always terminates. A client
+    // that stops draining trips the queue budget and is disconnected here:
+    // frames are never dropped one by one from a live connection.
+    let writer_guard = Arc::clone(&queue_guard);
     let writer_task = tokio::spawn(async move {
         while let Some(frame) = frame_receiver.recv().await {
+            if writer_guard.is_terminated() {
+                tracing::warn!("websocket writer terminating an over-budget connection");
+                break;
+            }
             match tokio::time::timeout(
                 WS_WRITE_TIMEOUT,
-                outgoing_sink.send(Message::Text(frame.into())),
+                outgoing_sink.send(Message::Text(frame.clone().into())),
             )
             .await
             {
-                Ok(Ok(())) => {}
+                Ok(Ok(())) => writer_guard.release(frame.len()),
                 Ok(Err(error)) => {
                     tracing::debug!(%error, "websocket writer closed");
                     break;
@@ -127,7 +137,7 @@ async fn connection_loop(
         }
     });
 
-    let emitter = Emitter::new_bounded(frame_sender, MAX_WS_MESSAGE_BYTES);
+    let emitter = Emitter::new_network(frame_sender, MAX_WS_MESSAGE_BYTES, queue_guard);
 
     // The connection owns ONE session `Arc` slot, reused for every message so
     // per-connection state (a loaded save, gamepass scan results, a transfer
