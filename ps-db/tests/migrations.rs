@@ -1,3 +1,5 @@
+use ps_db::DbDriver;
+
 #[tokio::test]
 async fn migrations_create_full_phase3_schema() {
     let temp_dir = tempfile::tempdir().unwrap();
@@ -19,6 +21,15 @@ async fn migrations_create_full_phase3_schema() {
         "ups_stats",
         "ups_tags",
         "ups_transfer_log",
+        "mod_targets",
+        "mods",
+        "mod_versions",
+        "profiles",
+        "profile_mods",
+        "target_frameworks",
+        "deployment_files",
+        "apply_journal",
+        "world_profiles",
     ] {
         assert!(
             tables.iter().any(|t| t == expected),
@@ -108,6 +119,36 @@ fn iso_naive_formats_without_timezone_suffix() {
         ps_db::time::iso_naive(without_micros),
         "2026-01-02T03:04:05"
     );
+}
+
+#[tokio::test]
+async fn migration_eleven_adds_the_new_columns() {
+    let dir = tempfile::tempdir().unwrap();
+    let pool = ps_db::open(&dir.path().join("test.db")).await.unwrap();
+    let db = ps_db::SqlxSqliteDriver::new(pool);
+    let rows = db
+        .query("SELECT name FROM pragma_table_info('servers')", &[])
+        .await
+        .unwrap();
+    let names: Vec<String> = rows
+        .iter()
+        .map(|row| row.get_string("name").unwrap())
+        .collect();
+    assert!(names.contains(&"paks_path".to_string()), "{names:?}");
+    assert!(
+        names.contains(&"pending_relocation".to_string()),
+        "{names:?}"
+    );
+
+    let rows = db
+        .query("SELECT name FROM pragma_table_info('amity_instances')", &[])
+        .await
+        .unwrap();
+    let names: Vec<String> = rows
+        .iter()
+        .map(|row| row.get_string("name").unwrap())
+        .collect();
+    assert!(names.contains(&"target_id".to_string()), "{names:?}");
 }
 
 /// `sqlx::migrate!` checksums migration files as they sit on disk; a CRLF checkout

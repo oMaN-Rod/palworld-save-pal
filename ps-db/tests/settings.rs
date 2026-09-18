@@ -3,7 +3,7 @@ use ps_db::settings::{
 };
 
 #[tokio::test]
-async fn first_get_inserts_python_default_row() {
+async fn first_get_inserts_the_default_row() {
     let temp_dir = tempfile::tempdir().unwrap();
     let pool = ps_db::open(&temp_dir.path().join("test.db"))
         .await

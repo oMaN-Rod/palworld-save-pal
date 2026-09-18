@@ -13,3 +13,8 @@ pub async fn set(db: &dyn crate::DbDriver, key: &str, value: &str) -> Result<(),
     ).await?;
     Ok(())
 }
+
+pub async fn delete(db: &dyn crate::DbDriver, key: &str) -> Result<(), DbError> {
+    db.execute("DELETE FROM meta WHERE key = ?", &[key.into()]).await?;
+    Ok(())
+}

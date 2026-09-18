@@ -19,6 +19,7 @@ pub struct ServerRecord {
     pub mods_path: String,
     pub logicmods_path: String,
     pub nativemods_path: String,
+    pub paks_path: String,
     pub install_path: String,
     pub steamcmd_path: String,
     pub pid: Option<i64>,
@@ -30,6 +31,7 @@ pub struct ServerRecord {
     pub admin_password: String,
     pub max_players: i64,
     pub env_vars: Map<String, Value>,
+    pub pending_relocation: Option<String>,
     pub created_at: String,
     pub updated_at: String,
 }
@@ -48,6 +50,7 @@ pub struct NewServer {
     pub mods_path: String,
     pub logicmods_path: String,
     pub nativemods_path: String,
+    pub paks_path: String,
     pub install_path: String,
     pub steamcmd_path: String,
     pub launch_args: String,
@@ -62,9 +65,9 @@ pub struct NewServer {
 
 const SELECT_COLUMNS: &str = "id, name, container_name, image_name, server_type, game_port, \
     query_port, rest_api_port, data_volume_name, saves_path, mods_path, logicmods_path, \
-    nativemods_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, server_name, \
-    server_description, server_password, admin_password, max_players, env_vars, created_at, \
-    updated_at";
+    nativemods_path, paks_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
+    server_name, server_description, server_password, admin_password, max_players, env_vars, \
+    pending_relocation, created_at, updated_at";
 
 /// `update_server` interpolates update keys straight into SQL, so they must be
 /// checked against this whitelist first.
@@ -81,6 +84,7 @@ const UPDATABLE_COLUMNS: &[&str] = &[
     "mods_path",
     "logicmods_path",
     "nativemods_path",
+    "paks_path",
     "install_path",
     "steamcmd_path",
     "pid",
@@ -92,6 +96,7 @@ const UPDATABLE_COLUMNS: &[&str] = &[
     "admin_password",
     "max_players",
     "env_vars",
+    "pending_relocation",
 ];
 
 fn map_server(r: &crate::DbRow) -> Result<ServerRecord, DbError> {
@@ -109,6 +114,7 @@ fn map_server(r: &crate::DbRow) -> Result<ServerRecord, DbError> {
         mods_path: r.get_string("mods_path")?,
         logicmods_path: r.get_string("logicmods_path")?,
         nativemods_path: r.get_string("nativemods_path")?,
+        paks_path: r.get_string("paks_path")?,
         install_path: r.get_string("install_path")?,
         steamcmd_path: r.get_string("steamcmd_path")?,
         pid: r.get_opt_i64("pid")?,
@@ -123,6 +129,7 @@ fn map_server(r: &crate::DbRow) -> Result<ServerRecord, DbError> {
             Value::Object(m) => m,
             _ => Map::new(),
         },
+        pending_relocation: r.get_opt_str("pending_relocation")?,
         created_at: r.get_string("created_at")?,
         updated_at: r.get_string("updated_at")?,
     })
@@ -138,10 +145,10 @@ pub async fn create_server(
         &db.query(
             "INSERT INTO servers (name, container_name, image_name, server_type, game_port, \
              query_port, rest_api_port, data_volume_name, saves_path, mods_path, logicmods_path, \
-             nativemods_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
+             nativemods_path, paks_path, install_path, steamcmd_path, pid, launch_args, workshop_dir, \
              server_name, server_description, server_password, admin_password, max_players, \
              env_vars, created_at, updated_at) \
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) \
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) \
              RETURNING id",
             &[
                 new_server.name.clone().into(),
@@ -156,6 +163,7 @@ pub async fn create_server(
                 new_server.mods_path.clone().into(),
                 new_server.logicmods_path.clone().into(),
                 new_server.nativemods_path.clone().into(),
+                new_server.paks_path.clone().into(),
                 new_server.install_path.clone().into(),
                 new_server.steamcmd_path.clone().into(),
                 new_server.launch_args.clone().into(),

@@ -23,6 +23,7 @@ fn sample_server(container_name: &str) -> NewServer {
         mods_path: "/srv/mods".to_string(),
         logicmods_path: "/srv/logicmods".to_string(),
         nativemods_path: "/srv/nativemods".to_string(),
+        paks_path: "/srv/paks".to_string(),
         install_path: String::new(),
         steamcmd_path: String::new(),
         launch_args: String::new(),
@@ -216,4 +217,66 @@ async fn server_with_install_path_finds_matching_row() {
 
     let missing = server_with_install_path(&db, "C:\\Nope").await.unwrap();
     assert!(missing.is_none());
+}
+
+#[tokio::test]
+async fn paks_path_round_trips_and_is_updatable() {
+    let (db, _dir) = test_driver().await;
+    let mut new_server = ps_db::servers::NewServer {
+        name: "alpha".to_string(),
+        container_name: "alpha".to_string(),
+        ..Default::default()
+    };
+    new_server.paks_path = "/srv/alpha/paks".to_string();
+    let record = ps_db::servers::create_server(&db, new_server).await.unwrap();
+    assert_eq!(record.paks_path, "/srv/alpha/paks");
+    assert_eq!(record.pending_relocation, None);
+
+    let mut updates = serde_json::Map::new();
+    updates.insert(
+        "paks_path".to_string(),
+        serde_json::Value::from("/srv/alpha/other"),
+    );
+    let updated = ps_db::servers::update_server(&db, record.id, &updates)
+        .await
+        .unwrap()
+        .unwrap();
+    assert_eq!(updated.paks_path, "/srv/alpha/other");
+}
+
+#[tokio::test]
+async fn pending_relocation_is_set_and_cleared_through_update() {
+    let (db, _dir) = test_driver().await;
+    let record = ps_db::servers::create_server(
+        &db,
+        ps_db::servers::NewServer {
+            name: "beta".to_string(),
+            container_name: "beta".to_string(),
+            ..Default::default()
+        },
+    )
+    .await
+    .unwrap();
+
+    let mut set = serde_json::Map::new();
+    set.insert(
+        "pending_relocation".to_string(),
+        serde_json::json!({ "op": "relocate", "was_running": true }),
+    );
+    let during = ps_db::servers::update_server(&db, record.id, &set)
+        .await
+        .unwrap()
+        .unwrap();
+    let stored: serde_json::Value =
+        serde_json::from_str(during.pending_relocation.as_deref().unwrap()).unwrap();
+    assert_eq!(stored["op"], "relocate");
+    assert_eq!(stored["was_running"], true);
+
+    let mut clear = serde_json::Map::new();
+    clear.insert("pending_relocation".to_string(), serde_json::Value::Null);
+    let after = ps_db::servers::update_server(&db, record.id, &clear)
+        .await
+        .unwrap()
+        .unwrap();
+    assert_eq!(after.pending_relocation, None);
 }

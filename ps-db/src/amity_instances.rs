@@ -7,6 +7,7 @@ pub struct AmityInstance {
     pub host: String,
     pub port: i64,
     pub token: String,
+    pub target_id: Option<String>,
 }
 
 impl std::fmt::Debug for AmityInstance {
@@ -17,6 +18,7 @@ impl std::fmt::Debug for AmityInstance {
             .field("host", &self.host)
             .field("port", &self.port)
             .field("token", &"<redacted>")
+            .field("target_id", &self.target_id)
             .finish()
     }
 }
@@ -40,7 +42,7 @@ impl std::fmt::Debug for NewAmityInstance {
     }
 }
 
-const SELECT_COLUMNS: &str = "id, name, host, port, token";
+const SELECT_COLUMNS: &str = "id, name, host, port, token, target_id";
 
 fn map_instance(r: &crate::DbRow) -> Result<AmityInstance, DbError> {
     Ok(AmityInstance {
@@ -49,6 +51,7 @@ fn map_instance(r: &crate::DbRow) -> Result<AmityInstance, DbError> {
         host: r.get_string("host")?,
         port: r.get_i64("port")?,
         token: r.get_string("token")?,
+        target_id: r.get_opt_str("target_id")?,
     })
 }
 
@@ -93,6 +96,19 @@ pub async fn update_instance(db: &dyn crate::DbDriver, id: i64, new: &NewAmityIn
             new.host.as_str().into(),
             new.port.into(),
             new.token.as_str().into(),
+            crate::time::now_iso_naive_utc().as_str().into(),
+            id.into(),
+        ],
+    )
+    .await?;
+    Ok(())
+}
+
+pub async fn set_target(db: &dyn crate::DbDriver, id: i64, target_id: Option<&str>) -> Result<(), DbError> {
+    db.execute(
+        "UPDATE amity_instances SET target_id = ?, updated_at = ? WHERE id = ?",
+        &[
+            target_id.map(str::to_string).into(),
             crate::time::now_iso_naive_utc().as_str().into(),
             id.into(),
         ],
@@ -186,10 +202,42 @@ mod tests {
     fn debug_redacts_the_token() {
         let instance = AmityInstance {
             id: 1, name: "n".into(), host: "h".into(), port: 1, token: "super-secret".into(),
+            target_id: Some("client-steam".into()),
         };
         let rendered = format!("{instance:?}");
         assert!(!rendered.contains("super-secret"));
         assert!(rendered.contains("redacted"));
+        assert!(rendered.contains("client-steam"));
+    }
+
+    #[tokio::test]
+    async fn target_id_starts_unset_and_survives_an_edit() {
+        let db = test_driver().await;
+        crate::mod_targets::upsert(&db, &crate::mod_targets::NewModTarget {
+            id: "client-steam".into(), kind: "client".into(), server_id: None,
+            name: "Steam".into(), root_path: "/".into(), platform: "win64".into(),
+            ue4ss_mode: "none".into(), layout_overrides: "{}".into(), detected: "{}".into(),
+        }).await.unwrap();
+        let id = insert_instance(&db, &NewAmityInstance {
+            name: "Box".into(), host: "10.0.0.1".into(), port: 8788, token: "t".into(),
+        }).await.unwrap();
+        assert_eq!(get_instance(&db, id).await.unwrap().unwrap().target_id, None);
+
+        set_target(&db, id, Some("client-steam")).await.unwrap();
+        assert_eq!(
+            get_instance(&db, id).await.unwrap().unwrap().target_id.as_deref(),
+            Some("client-steam"),
+        );
+
+        update_instance(&db, id, &NewAmityInstance {
+            name: "Renamed".into(), host: "10.0.0.2".into(), port: 9999, token: "t2".into(),
+        }).await.unwrap();
+        let found = get_instance(&db, id).await.unwrap().unwrap();
+        assert_eq!(found.name, "Renamed");
+        assert_eq!(found.target_id.as_deref(), Some("client-steam"), "an edit must not clear the pairing");
+
+        set_target(&db, id, None).await.unwrap();
+        assert_eq!(get_instance(&db, id).await.unwrap().unwrap().target_id, None);
     }
 
     #[test]
