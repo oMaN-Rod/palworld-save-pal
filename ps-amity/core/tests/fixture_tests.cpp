@@ -66,6 +66,12 @@ const std::vector<std::string> kFixtureFiles = {
     "error_validation_failed.json",
     "error_game_error.json",
     "error_shutting_down.json",
+    "get_build_info.json",
+    "build_info.json",
+    "get_loaded_mods.json",
+    "loaded_mods.json",
+    "get_resolution_report.json",
+    "resolution_report.json",
 };
 
 const std::vector<std::pair<std::string, std::string>> kRequestReplyPairs = {
@@ -79,6 +85,9 @@ const std::vector<std::pair<std::string, std::string>> kRequestReplyPairs = {
     {"command_heal.json", "command_result_heal.json"},
     {"command_set_item_slot.json", "command_result_set_item_slot.json"},
     {"get_capabilities.json", "capabilities.json"},
+    {"get_build_info.json", "build_info.json"},
+    {"get_loaded_mods.json", "loaded_mods.json"},
+    {"get_resolution_report.json", "resolution_report.json"},
 };
 
 }
@@ -125,6 +134,39 @@ TEST_CASE("status.json data carries the six status keys") {
     }
     CHECK(e.data.size() == 6);
     CHECK(e.data["protocolVersion"] == amity::PROTOCOL_VERSION);
+}
+
+TEST_CASE("build_info.json data carries the seven build keys") {
+    auto e = load_envelope("build_info.json");
+    for (const std::string key : {"amityVersion", "engineVersion", "gameVersion", "platform",
+                                  "ue4ssBuild", "ue4ssMode", "ue4ssVersion"}) {
+        CAPTURE(key);
+        CHECK(e.data.contains(key));
+    }
+    CHECK(e.data.size() == 7);
+    CHECK(e.data["gameVersion"].is_null());
+}
+
+TEST_CASE("loaded_mods.json lists ue4ss mods with four keys and no paks") {
+    auto e = load_envelope("loaded_mods.json");
+    REQUIRE(e.data.contains("ue4ss"));
+    REQUIRE(e.data["ue4ss"].is_array());
+    REQUIRE_FALSE(e.data["ue4ss"].empty());
+    const auto& mod = e.data["ue4ss"][0];
+    for (const std::string key : {"enabled", "hasDll", "hasLua", "name"}) {
+        CAPTURE(key);
+        CHECK(mod.contains(key));
+    }
+    CHECK(mod.size() == 4);
+    CHECK_FALSE(e.data.contains("paks"));
+}
+
+TEST_CASE("resolution_report.json carries ok, missing and complete") {
+    auto e = load_envelope("resolution_report.json");
+    CHECK(e.data["ok"].is_array());
+    CHECK(e.data["missing"].is_array());
+    CHECK(e.data["complete"].is_boolean());
+    CHECK(e.data.size() == 3);
 }
 
 TEST_CASE("hello.json and hello_ok.json describe the current protocol version") {

@@ -15,6 +15,27 @@ const DISCOVERY_INTERVAL: Duration = Duration::from_secs(2);
 const MIN_BACKOFF: Duration = Duration::from_secs(1);
 const MAX_BACKOFF: Duration = Duration::from_secs(60);
 const COMMAND_CHANNEL_CAPACITY: usize = 32;
+const PROBE_TIMEOUT: Duration = Duration::from_secs(5);
+const PROBE_BACKOFFS: [Duration; 3] = [
+    Duration::from_secs(5),
+    Duration::from_secs(10),
+    Duration::from_secs(20),
+];
+const PROBE_STEADY_INTERVAL: Duration = Duration::from_secs(30);
+/// Test seam: shrinks the probe's timeout and every backoff step to this many
+/// milliseconds, so a test can exercise a retry without a multi-second sleep.
+const PROBE_TIMEOUT_MS_ENV: &str = "PS_BRIDGE_PROBE_TIMEOUT_MS";
+
+const BUILD_INFO_KEYS: &[&str] = &[
+    "gameVersion",
+    "engineVersion",
+    "ue4ssVersion",
+    "ue4ssBuild",
+    "amityVersion",
+    "platform",
+    "ue4ssMode",
+];
+const BUILD_INFO_MAX_LEN: usize = 64;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct BridgeTarget {
@@ -34,6 +55,7 @@ pub struct BridgeStatus {
     pub last_error: Option<String>,
     pub instance_id: Option<String>,
     pub instance_name: Option<String>,
+    pub build_info: Option<Value>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -54,7 +76,9 @@ struct Backoff {
 
 impl Backoff {
     fn new() -> Self {
-        Self { current: MIN_BACKOFF }
+        Self {
+            current: MIN_BACKOFF,
+        }
     }
 
     fn on_success(&mut self) {
@@ -116,6 +140,7 @@ impl BridgeService {
             command_rx,
             self.target_rx.clone(),
             self.cancel.clone(),
+            self.command_tx.clone(),
         ));
         *self.supervisor.lock().unwrap() = Some(handle);
     }
@@ -165,7 +190,12 @@ impl BridgeService {
         }
     }
 
-    pub async fn command(&self, op: &str, command_id: &str, args: Value) -> Result<Value, BridgeError> {
+    pub async fn command(
+        &self,
+        op: &str,
+        command_id: &str,
+        args: Value,
+    ) -> Result<Value, BridgeError> {
         self.request(
             "command",
             serde_json::json!({
@@ -176,7 +206,8 @@ impl BridgeService {
     }
 
     pub async fn get_capabilities(&self) -> Result<Value, BridgeError> {
-        self.request("get_capabilities", serde_json::json!({})).await
+        self.request("get_capabilities", serde_json::json!({}))
+            .await
     }
 
     pub async fn shutdown(&self) {
@@ -190,6 +221,106 @@ impl BridgeService {
 
 fn publish(status_tx: &watch::Sender<BridgeStatus>, status: BridgeStatus) {
     let _ = status_tx.send(status);
+}
+
+struct ProbeSchedule {
+    timeout: Duration,
+    backoffs: [Duration; 3],
+    steady: Duration,
+}
+
+fn probe_schedule() -> ProbeSchedule {
+    if let Some(ms) = std::env::var(PROBE_TIMEOUT_MS_ENV)
+        .ok()
+        .and_then(|value| value.parse::<u64>().ok())
+        .filter(|ms| *ms > 0)
+    {
+        let unit = Duration::from_millis(ms);
+        return ProbeSchedule {
+            timeout: unit,
+            backoffs: [unit, unit, unit],
+            steady: unit,
+        };
+    }
+    ProbeSchedule {
+        timeout: PROBE_TIMEOUT,
+        backoffs: PROBE_BACKOFFS,
+        steady: PROBE_STEADY_INTERVAL,
+    }
+}
+
+/// Build info is a string blob from the game process, not a trusted payload:
+/// only known keys survive, each capped at a short length.
+fn sanitize_build_info(value: Value) -> Value {
+    let mut sanitized = serde_json::Map::new();
+    if let Value::Object(object) = value {
+        for key in BUILD_INFO_KEYS {
+            if let Some(Value::String(text)) = object.get(*key) {
+                if text.chars().count() <= BUILD_INFO_MAX_LEN {
+                    sanitized.insert((*key).to_string(), Value::String(text.clone()));
+                }
+            }
+        }
+    }
+    Value::Object(sanitized)
+}
+
+/// Retries `get_build_info` until the first success, so a slow game start
+/// does not leave `build_info` unset for the rest of the connection. Runs
+/// until `probe.abort()` cancels it (called once `pump` returns).
+async fn probe_build_info(
+    command_tx: mpsc::Sender<Command>,
+    status_tx: watch::Sender<BridgeStatus>,
+    instance_id: String,
+) {
+    let schedule = probe_schedule();
+    let mut attempt: usize = 0;
+    loop {
+        let id = format!("probe-build-info-{attempt}");
+        let (reply_tx, reply_rx) = oneshot::channel();
+        let sent = command_tx
+            .send(Command::Request {
+                id: id.clone(),
+                kind: "get_build_info".to_string(),
+                data: serde_json::json!({}),
+                reply: reply_tx,
+            })
+            .await;
+        if sent.is_err() {
+            return;
+        }
+        match tokio::time::timeout(schedule.timeout, reply_rx).await {
+            Ok(Ok(Ok(build_info))) => {
+                let build_info = sanitize_build_info(build_info);
+                status_tx.send_if_modified(|status| {
+                    if status.connected
+                        && status.instance_id.as_deref() == Some(instance_id.as_str())
+                    {
+                        status.build_info = Some(build_info);
+                        true
+                    } else {
+                        false
+                    }
+                });
+                return;
+            }
+            // An Amity that does not know the op will never learn it.
+            Ok(Ok(Err(BridgeError::Mod { ref code, .. }))) if code == "capability_unavailable" => {
+                return;
+            }
+            Ok(_) => {}
+            Err(_) => {
+                let _ = command_tx.send(Command::CancelRequest { id }).await;
+            }
+        }
+        let delay = schedule
+            .backoffs
+            .get(attempt)
+            .copied()
+            .unwrap_or(schedule.steady);
+        tokio::time::sleep(delay).await;
+        attempt += 1;
+    }
 }
 
 async fn wait(
@@ -232,6 +363,7 @@ async fn run_supervisor(
     mut command_rx: mpsc::Receiver<Command>,
     mut target_rx: watch::Receiver<Option<BridgeTarget>>,
     cancel: CancellationToken,
+    command_tx: mpsc::Sender<Command>,
 ) {
     let mut backoff = Backoff::new();
     let mut last_id: Option<String> = None;
@@ -265,6 +397,7 @@ async fn run_supervisor(
             last_error,
             instance_id: Some(target.id.clone()),
             instance_name: Some(target.name.clone()),
+            build_info: None,
         };
 
         match dial_and_drain(&target, &cancel, &mut command_rx).await {
@@ -274,17 +407,29 @@ async fn run_supervisor(
                 status.mod_version = Some(connected.mod_version);
                 publish(&status_tx, status);
 
+                let probe = tokio::spawn(probe_build_info(
+                    command_tx.clone(),
+                    status_tx.clone(),
+                    target.id.clone(),
+                ));
+
                 let end = client::pump(
-                    connected.write, connected.read, &cancel, &mut command_rx, &mut target_rx,
+                    connected.write,
+                    connected.read,
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
                 )
                 .await;
+                probe.abort();
                 publish(&status_tx, identity(false, None));
 
                 match end {
                     ConnectionEnd::Cancelled => break,
                     ConnectionEnd::Retarget => continue,
                     ConnectionEnd::Disconnected => {
-                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx, &mut target_rx).await {
+                        if wait(DISCOVERY_INTERVAL, &cancel, &mut command_rx, &mut target_rx).await
+                        {
                             break;
                         }
                     }
@@ -292,14 +437,31 @@ async fn run_supervisor(
             }
             Err(ConnectError::Cancelled) => break,
             Err(ConnectError::Transport) => {
-                publish(&status_tx, identity(false, Some("bridge transport error".to_string())));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
+                publish(
+                    &status_tx,
+                    identity(false, Some("bridge transport error".to_string())),
+                );
+                if wait(
+                    backoff.next_delay(),
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
+                )
+                .await
+                {
                     break;
                 }
             }
             Err(ConnectError::Auth { code }) => {
                 publish(&status_tx, identity(false, Some(code)));
-                if wait(backoff.next_delay(), &cancel, &mut command_rx, &mut target_rx).await {
+                if wait(
+                    backoff.next_delay(),
+                    &cancel,
+                    &mut command_rx,
+                    &mut target_rx,
+                )
+                .await
+                {
                     break;
                 }
             }
@@ -325,6 +487,33 @@ mod tests {
         }
     }
 
+    #[test]
+    fn sanitize_build_info_keeps_only_known_short_string_values() {
+        let sanitized = sanitize_build_info(serde_json::json!({
+            "amityVersion": "0.3.0",
+            "gameVersion": null,
+            "engineVersion": 51,
+            "unknownKey": "x",
+            "ue4ssBuild": "a".repeat(65),
+        }));
+        assert_eq!(sanitized, serde_json::json!({ "amityVersion": "0.3.0" }));
+    }
+
+    #[test]
+    fn sanitize_build_info_keeps_a_string_at_exactly_the_length_cap() {
+        let value = "a".repeat(64);
+        let sanitized = sanitize_build_info(serde_json::json!({ "platform": value.clone() }));
+        assert_eq!(sanitized, serde_json::json!({ "platform": value }));
+    }
+
+    #[test]
+    fn sanitize_build_info_on_a_non_object_is_empty() {
+        assert_eq!(
+            sanitize_build_info(serde_json::json!("not an object")),
+            serde_json::json!({})
+        );
+    }
+
     #[tokio::test]
     async fn a_new_service_has_no_target() {
         let service = BridgeService::new();
@@ -344,7 +533,10 @@ mod tests {
     async fn requests_fail_offline_with_no_target() {
         let service = BridgeService::new();
         service.start();
-        let error = service.request("get_status", serde_json::json!({})).await.unwrap_err();
+        let error = service
+            .request("get_status", serde_json::json!({}))
+            .await
+            .unwrap_err();
         assert!(matches!(error, BridgeError::Offline));
         service.shutdown().await;
     }

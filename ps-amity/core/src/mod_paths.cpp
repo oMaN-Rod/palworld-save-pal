@@ -27,6 +27,15 @@ std::filesystem::path config_path_beside_module(const void* address_in_module) {
     return dll.parent_path().parent_path() / "PSAmity.ini";
 }
 
+std::filesystem::path game_executable_path() {
+    wchar_t buf[4096];
+    DWORD len = GetModuleFileNameW(nullptr, buf, static_cast<DWORD>(std::size(buf)));
+    if (len == 0 || len >= std::size(buf)) {
+        return {};
+    }
+    return std::filesystem::path(std::wstring(buf, len));
+}
+
 BridgeConfig load_config(const std::filesystem::path& ini_path) {
     BridgeConfig cfg;
 

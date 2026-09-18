@@ -3,6 +3,7 @@
 #include "amity_mod.hpp"
 #include "game_commands.hpp"
 #include "reflect.hpp"
+#include "resolution_report.hpp"
 #include "snapshots.hpp"
 
 #include <amity/protocol.hpp>
@@ -36,6 +37,23 @@ amity::GameResponse GameExecutorImpl::execute(const amity::GameRequest& req)
     if (req.op == "reflect")
     {
         return amity_rt::snapshot_reflect(req.args);
+    }
+
+    if (req.op == "build_info")
+    {
+        return amity_rt::snapshot_build_info();
+    }
+
+    if (req.op == "loaded_mods")
+    {
+        return amity_rt::snapshot_loaded_mods();
+    }
+
+    if (req.op == "resolution_report")
+    {
+        amity::GameResponse response;
+        response.data = amity_rt::resolution_report_json();
+        return response;
     }
 
     using Snapshot = amity::GameResponse (*)(const nlohmann::json&);

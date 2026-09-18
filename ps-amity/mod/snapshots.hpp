@@ -29,6 +29,8 @@ amity::GameResponse snapshot_guilds(const nlohmann::json& args);
 amity::GameResponse snapshot_base_pals(const nlohmann::json& args);
 amity::GameResponse snapshot_guild_containers(const nlohmann::json& args);
 amity::GameResponse snapshot_reflect(const nlohmann::json& args);
+amity::GameResponse snapshot_build_info();
+amity::GameResponse snapshot_loaded_mods();
 
 namespace snap
 {

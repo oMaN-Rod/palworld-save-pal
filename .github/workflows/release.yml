@@ -62,6 +62,35 @@ jobs:
         with:
           tool: tauri-cli@2
 
+      - name: Check UEPseudo access
+        id: access
+        shell: pwsh
+        env:
+          UEPSEUDO_TOKEN: ${{ secrets.UEPSEUDO_TOKEN }}
+        run: |
+          if ([string]::IsNullOrEmpty($env:UEPSEUDO_TOKEN)) {
+            Write-Output "::notice::UEPSEUDO_TOKEN is not set, so Amity is not built. Add a token from a GitHub account linked to Epic Games to build it."
+            "available=false" >> $env:GITHUB_OUTPUT
+          } else {
+            "available=true" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Set up the UE4SS workspace
+        if: steps.access.outputs.available == 'true'
+        continue-on-error: true
+        shell: pwsh
+        env:
+          GIT_CONFIG_COUNT: 1
+          GIT_CONFIG_KEY_0: "url.https://x-access-token:${{ secrets.UEPSEUDO_TOKEN }}@github.com/.insteadOf"
+          GIT_CONFIG_VALUE_0: "git@github.com:"
+        run: ./palstudio/ps-amity/scripts/setup-workspace.ps1 -Root "$env:RUNNER_TEMP\amity-build"
+
+      - name: Build and bundle Amity
+        if: steps.access.outputs.available == 'true'
+        continue-on-error: true
+        shell: pwsh
+        run: ./palstudio/ps-amity/scripts/package-mod.ps1 -Root "$env:RUNNER_TEMP\amity-build" -Bundle
+
       - name: Build Tauri bundles
         working-directory: palstudio/ps-desktop
         run: cargo tauri build --bundles msi
@@ -81,6 +110,7 @@ jobs:
           Copy-Item target/release/palstudio.exe "$staging/palstudio.exe"
           Copy-Item -Recurse ui_build "$staging/ui_build"
           Copy-Item -Recurse data "$staging/data"
+          if (Test-Path ps-amity/dist) { New-Item -ItemType Directory -Force "$staging/ps-amity/dist" | Out-Null; Copy-Item ps-amity/dist/PSAmity-UE4SS-*.zip "$staging/ps-amity/dist/" -ErrorAction SilentlyContinue }
           Compress-Archive -Path $staging -DestinationPath "dist/PalStudio-$tag-windows-standalone.zip"
           Remove-Item -Recurse -Force $staging
 

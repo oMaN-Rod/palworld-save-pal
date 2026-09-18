@@ -43,6 +43,7 @@ add_library(PSAmity SHARED
     mod/snapshot_inventory.cpp
     mod/snapshot_guild.cpp
     mod/snapshot_reflect.cpp
+    mod/snapshot_amity.cpp
     mod/command_guild_edit.cpp
 )
 target_include_directories(PSAmity PRIVATE mod)

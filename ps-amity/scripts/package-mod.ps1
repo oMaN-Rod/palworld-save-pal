@@ -1,6 +1,7 @@
 param(
     [string]$Root = "",
-    [string]$Config = "Game__Shipping__Win64"
+    [string]$Config = "Game__Shipping__Win64",
+    [switch]$Bundle
 )
 $ErrorActionPreference = "Stop"
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
@@ -29,5 +30,13 @@ Copy-Item (Join-Path $repoRoot "dist\PSAmity.ini") (Join-Path $modDir "PSAmity.i
 $zipPath = Join-Path $distDir "PSAmity-UE4SS-$Version.zip"
 if (Test-Path $zipPath) { Remove-Item -Force $zipPath }
 Compress-Archive -Path (Join-Path $stageDir "PSAmity") -DestinationPath $zipPath
+
+if ($Bundle) {
+    $bundleDir = Join-Path (Split-Path -Parent $repoRoot) "ps-desktop\resources\amity"
+    New-Item -ItemType Directory -Force $bundleDir | Out-Null
+    Get-ChildItem $bundleDir -Filter "PSAmity-UE4SS-*.zip" | Remove-Item -Force
+    Copy-Item $zipPath $bundleDir -Force
+    Write-Host "BUNDLED=$(Join-Path $bundleDir (Split-Path -Leaf $zipPath))"
+}
 
 Write-Host "ZIP=$zipPath"

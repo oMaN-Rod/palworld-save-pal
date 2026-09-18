@@ -11,7 +11,7 @@
 #include <filesystem>
 #include <memory>
 
-#define AMITY_VERSION "0.2.0"
+#define AMITY_VERSION "0.3.0"
 #define AMITY_STR_EXPAND(x) STR(x)
 
 class AmityMod : public RC::CppUserModBase

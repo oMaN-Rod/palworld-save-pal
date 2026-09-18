@@ -1,7 +1,9 @@
 #include "resolution_report.hpp"
 #include "reflect.hpp"
 #include "signature_check.hpp"
+#include "snapshots.hpp"
 
+#include <algorithm>
 #include <initializer_list>
 #include <string>
 #include <unordered_map>
@@ -13,6 +15,7 @@
 
 using namespace RC;
 using namespace RC::Unreal;
+using namespace amity_rt::snap;
 
 namespace
 {
@@ -356,5 +359,26 @@ bool update_resolution_report()
         state.complete = true;
     }
     return state.complete;
+}
+
+nlohmann::json resolution_report_json()
+{
+    const ReportState& state = report_state();
+    std::vector<std::string> ok;
+    std::vector<std::string> missing;
+    for (const auto& [name, item_state] : state.items)
+    {
+        if (item_state == ItemState::Ok)
+        {
+            ok.push_back(to_utf8(name));
+        }
+        else if (item_state == ItemState::Missing)
+        {
+            missing.push_back(to_utf8(name));
+        }
+    }
+    std::sort(ok.begin(), ok.end());
+    std::sort(missing.begin(), missing.end());
+    return {{"ok", ok}, {"missing", missing}, {"complete", state.complete}};
 }
 }

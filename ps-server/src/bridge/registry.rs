@@ -14,6 +14,7 @@ pub struct InstanceEntry {
     pub host: String,
     pub port: u16,
     pub live: bool,
+    pub target_id: Option<String>,
 }
 
 fn auto_target(endpoint: &DiscoveredEndpoint) -> BridgeTarget {
@@ -36,7 +37,10 @@ fn saved_target(instance: &AmityInstance) -> Option<BridgeTarget> {
     })
 }
 
-pub fn merge_instances(discovered: &[DiscoveredEndpoint], saved: &[AmityInstance]) -> Vec<InstanceEntry> {
+pub fn merge_instances(
+    discovered: &[DiscoveredEndpoint],
+    saved: &[AmityInstance],
+) -> Vec<InstanceEntry> {
     let auto = discovered.iter().map(|endpoint| InstanceEntry {
         id: format!("auto:{}", endpoint.pid),
         source: "auto".to_string(),
@@ -44,6 +48,7 @@ pub fn merge_instances(discovered: &[DiscoveredEndpoint], saved: &[AmityInstance
         host: "127.0.0.1".to_string(),
         port: endpoint.port,
         live: true,
+        target_id: None,
     });
 
     let stored = saved.iter().filter_map(|instance| {
@@ -54,6 +59,7 @@ pub fn merge_instances(discovered: &[DiscoveredEndpoint], saved: &[AmityInstance
             host: instance.host.clone(),
             port: u16::try_from(instance.port).ok()?,
             live: false,
+            target_id: instance.target_id.clone(),
         })
     });
 
@@ -104,6 +110,7 @@ mod tests {
             host: host.to_string(),
             port,
             token: format!("token-saved-{id}"),
+            target_id: None,
         }
     }
 
@@ -119,10 +126,21 @@ mod tests {
         assert_eq!(entries[0].host, "127.0.0.1");
         assert_eq!(entries[0].port, 52104);
         assert!(entries[0].live);
+        assert_eq!(entries[0].target_id, None);
         assert_eq!(entries[1].id, "saved:1");
         assert_eq!(entries[1].source, "saved");
         assert_eq!(entries[1].host, "10.0.0.14");
         assert!(!entries[1].live);
+        assert_eq!(entries[1].target_id, None);
+    }
+
+    #[test]
+    fn merge_copies_a_saved_instances_target_id_and_leaves_discovered_ones_unbound() {
+        let mut instance = saved(1, "Remote", "10.0.0.14", 8788);
+        instance.target_id = Some("client-steam".to_string());
+        let entries = merge_instances(&[discovered(11, "Solo", 52104)], &[instance]);
+        assert_eq!(entries[0].target_id, None);
+        assert_eq!(entries[1].target_id.as_deref(), Some("client-steam"));
     }
 
     #[test]
@@ -160,7 +178,11 @@ mod tests {
 
     #[test]
     fn default_target_picks_the_first_discovered_instance() {
-        let target = default_target(&[discovered(11, "Solo", 52104), discovered(30, "Server", 8788)]).unwrap();
+        let target = default_target(&[
+            discovered(11, "Solo", 52104),
+            discovered(30, "Server", 8788),
+        ])
+        .unwrap();
         assert_eq!(target.id, "auto:11");
     }
 

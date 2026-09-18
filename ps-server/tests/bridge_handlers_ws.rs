@@ -18,9 +18,18 @@ const COMMAND_RESULT_HEAL_FIXTURE: &str =
     include_str!("../../ps-amity/fixtures/command_result_heal.json");
 const COMMAND_RESULT_SET_ITEM_SLOT_FIXTURE: &str =
     include_str!("../../ps-amity/fixtures/command_result_set_item_slot.json");
+const BUILD_INFO_FIXTURE: &str = include_str!("../../ps-amity/fixtures/build_info.json");
 
 fn fixture_data(json: &str) -> serde_json::Value {
     serde_json::from_str::<serde_json::Value>(json).unwrap()["data"].clone()
+}
+
+/// What the probe stores after sanitizing `build_info.json`'s fixture data:
+/// `gameVersion` is `null`, not a string, so it is dropped.
+fn sanitized_build_info_fixture() -> serde_json::Value {
+    let mut data = fixture_data(BUILD_INFO_FIXTURE);
+    data.as_object_mut().unwrap().remove("gameVersion");
+    data
 }
 
 async fn wait_for_connected(mut rx: tokio::sync::watch::Receiver<BridgeStatus>) {
@@ -83,6 +92,94 @@ async fn game_status_returns_the_bridge_status() {
     let reply = next_json(&mut client).await;
     assert_eq!(reply["type"], "game_status");
     assert_eq!(reply["data"], fixture_data(STATUS_FIXTURE));
+
+    server.handle.shutdown().await;
+    kill_mock(mock_cancel, mock_handle).await;
+}
+
+#[tokio::test]
+async fn a_connected_bridge_carries_the_build_info() {
+    let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    let mock = MockMod::new(
+        "secret-token",
+        fixture_data(STATUS_FIXTURE),
+        fixture_data(PLAYERS_FIXTURE),
+    )
+    .with_build_info(fixture_data(BUILD_INFO_FIXTURE));
+    let (server, _addr, mock_cancel, mock_handle) =
+        start_server_connected_to(dir.path(), mock).await;
+
+    let mut status_rx = server.handle.services.bridge.status_rx();
+    let deadline = tokio::time::Instant::now() + Duration::from_secs(5);
+    let build_info = loop {
+        if let Some(build_info) = status_rx.borrow().build_info.clone() {
+            break build_info;
+        }
+        let remaining = deadline.saturating_duration_since(tokio::time::Instant::now());
+        if remaining.is_zero() {
+            panic!("timed out waiting for build_info to be populated");
+        }
+        let _ = tokio::time::timeout(remaining, status_rx.changed()).await;
+    };
+    assert_eq!(build_info, sanitized_build_info_fixture());
+
+    server.handle.shutdown().await;
+    kill_mock(mock_cancel, mock_handle).await;
+}
+
+#[tokio::test]
+async fn an_amity_without_build_info_still_connects() {
+    let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    let mock = MockMod::new(
+        "secret-token",
+        fixture_data(STATUS_FIXTURE),
+        fixture_data(PLAYERS_FIXTURE),
+    );
+    let (server, _addr, mock_cancel, mock_handle) =
+        start_server_connected_to(dir.path(), mock).await;
+
+    let status_rx = server.handle.services.bridge.status_rx();
+    assert!(status_rx.borrow().connected);
+
+    tokio::time::sleep(Duration::from_millis(500)).await;
+    assert!(status_rx.borrow().build_info.is_none());
+
+    server.handle.shutdown().await;
+    kill_mock(mock_cancel, mock_handle).await;
+}
+
+#[tokio::test]
+async fn a_probe_retries_past_an_unanswered_first_request() {
+    let _env = BridgeEnvGuard::acquire(&[
+        ("PS_BRIDGE_ENDPOINT_DIR", None),
+        ("PS_BRIDGE_PROBE_TIMEOUT_MS", Some("30")),
+    ])
+    .await;
+    let dir = tempfile::tempdir().unwrap();
+    let mock = MockMod::new(
+        "secret-token",
+        fixture_data(STATUS_FIXTURE),
+        fixture_data(PLAYERS_FIXTURE),
+    )
+    .with_build_info_after(1, fixture_data(BUILD_INFO_FIXTURE));
+    let (server, _addr, mock_cancel, mock_handle) =
+        start_server_connected_to(dir.path(), mock).await;
+
+    let mut status_rx = server.handle.services.bridge.status_rx();
+    let deadline = tokio::time::Instant::now() + Duration::from_secs(5);
+    let build_info = loop {
+        if let Some(build_info) = status_rx.borrow().build_info.clone() {
+            break build_info;
+        }
+        let remaining = deadline.saturating_duration_since(tokio::time::Instant::now());
+        if remaining.is_zero() {
+            panic!("timed out waiting for a retried probe to populate build_info");
+        }
+        let _ = tokio::time::timeout(remaining, status_rx.changed()).await;
+    };
+    assert_eq!(build_info, sanitized_build_info_fixture());
 
     server.handle.shutdown().await;
     kill_mock(mock_cancel, mock_handle).await;
@@ -573,7 +670,11 @@ async fn game_heal_pals_command_ids_are_order_independent() {
         .iter()
         .filter(|request| request["type"] == "command" && request["data"]["op"] == "pal.heal")
         .collect();
-    assert_eq!(heal_requests.len(), 6, "expected three commands per submission");
+    assert_eq!(
+        heal_requests.len(),
+        6,
+        "expected three commands per submission"
+    );
 
     let id_for = |slot_index: i64, requests: &[&serde_json::Value]| {
         requests
@@ -651,10 +752,7 @@ async fn game_heal_pals_partial_failure_mid_list_still_emits_the_full_results_ar
 async fn game_heal_pals_rejects_an_out_of_range_target_count() {
     let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
-    std::env::set_var(
-        "PS_BRIDGE_ENDPOINT_DIR",
-        dir.path().to_str().unwrap(),
-    );
+    std::env::set_var("PS_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
     let server = start_test_server().await;
     let mut client = connect(&server).await;
 
@@ -685,10 +783,7 @@ async fn game_heal_pals_rejects_an_out_of_range_target_count() {
 async fn a_malformed_game_payload_is_refused_inline_on_its_own_request_type() {
     let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
-    std::env::set_var(
-        "PS_BRIDGE_ENDPOINT_DIR",
-        dir.path().to_str().unwrap(),
-    );
+    std::env::set_var("PS_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
     let server = start_test_server().await;
     let mut client = connect(&server).await;
 
@@ -742,10 +837,7 @@ async fn a_malformed_game_payload_is_refused_inline_on_its_own_request_type() {
 async fn game_write_offline_requests_reply_with_the_bridge_offline_code() {
     let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
-    std::env::set_var(
-        "PS_BRIDGE_ENDPOINT_DIR",
-        dir.path().to_str().unwrap(),
-    );
+    std::env::set_var("PS_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
     let server = start_test_server().await;
     let mut client = connect(&server).await;
 
@@ -795,10 +887,7 @@ async fn game_write_offline_requests_reply_with_the_bridge_offline_code() {
 async fn a_bridge_offline_request_replies_with_the_bridge_offline_code() {
     let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
     let dir = tempfile::tempdir().unwrap();
-    std::env::set_var(
-        "PS_BRIDGE_ENDPOINT_DIR",
-        dir.path().to_str().unwrap(),
-    );
+    std::env::set_var("PS_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
 
     let server = start_test_server().await;
     let mut client = connect(&server).await;
@@ -914,7 +1003,10 @@ async fn game_set_item_slot_forwards_nulls_when_clearing_a_slot() {
         .iter()
         .find(|request| request["type"] == "command")
         .expect("command should have been forwarded to the mock");
-    assert_eq!(forwarded["data"]["args"]["staticItemId"], serde_json::Value::Null);
+    assert_eq!(
+        forwarded["data"]["args"]["staticItemId"],
+        serde_json::Value::Null
+    );
     assert_eq!(forwarded["data"]["args"]["count"], serde_json::Value::Null);
     drop(logged);
 
@@ -1059,6 +1151,8 @@ fn game_messages_are_split_between_remote_reachable_and_denylisted() {
         MessageType::GameDeleteInstance,
         MessageType::GameSelectInstance,
         MessageType::GameTestInstance,
+        MessageType::GameInstanceSetTarget,
+        MessageType::GameLaunch,
     ];
 
     for expected in reachable.iter().chain(denylisted.iter()) {

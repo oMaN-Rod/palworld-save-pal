@@ -1,0 +1,64 @@
+name: Amity
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "ps-amity/**"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: palstudio
+
+      - name: Check UEPseudo access
+        id: access
+        shell: pwsh
+        env:
+          UEPSEUDO_TOKEN: ${{ secrets.UEPSEUDO_TOKEN }}
+        run: |
+          if ([string]::IsNullOrEmpty($env:UEPSEUDO_TOKEN)) {
+            Write-Output "::notice::UEPSEUDO_TOKEN is not set, so Amity is not built. Add a token from a GitHub account linked to Epic Games to build it."
+            "available=false" >> $env:GITHUB_OUTPUT
+          } else {
+            "available=true" >> $env:GITHUB_OUTPUT
+          }
+
+      - name: Set up the UE4SS workspace
+        if: steps.access.outputs.available == 'true'
+        shell: pwsh
+        env:
+          GIT_CONFIG_COUNT: 1
+          GIT_CONFIG_KEY_0: "url.https://x-access-token:${{ secrets.UEPSEUDO_TOKEN }}@github.com/.insteadOf"
+          GIT_CONFIG_VALUE_0: "git@github.com:"
+        run: ./palstudio/ps-amity/scripts/setup-workspace.ps1 -Root "$env:RUNNER_TEMP\amity-build"
+
+      - name: Build Amity and its core tests
+        if: steps.access.outputs.available == 'true'
+        shell: pwsh
+        run: ./palstudio/ps-amity/scripts/build.ps1 -Root "$env:RUNNER_TEMP\amity-build" -Targets PSAmity,AmityCoreTests
+
+      - name: Run the core tests
+        if: steps.access.outputs.available == 'true'
+        shell: pwsh
+        run: |
+          $tests = Get-ChildItem -Recurse -Filter AmityCoreTests.exe "$env:RUNNER_TEMP\amity-build\build" |
+            Where-Object { $_.FullName -like "*Game__Shipping__Win64*" } | Select-Object -First 1
+          if (-not $tests) { throw "AmityCoreTests.exe not found" }
+          & $tests.FullName
+          if ($LASTEXITCODE -ne 0) { throw "core tests failed" }
+
+      - name: Package
+        if: steps.access.outputs.available == 'true'
+        shell: pwsh
+        run: ./palstudio/ps-amity/scripts/package-mod.ps1 -Root "$env:RUNNER_TEMP\amity-build"
+
+      - name: Upload the package
+        if: steps.access.outputs.available == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: PSAmity-UE4SS
+          path: palstudio/ps-amity/dist/PSAmity-UE4SS-*.zip

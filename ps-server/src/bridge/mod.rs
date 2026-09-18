@@ -1,3 +1,4 @@
+pub mod binding;
 pub mod client;
 pub mod endpoint;
 pub mod protocol;

@@ -48,8 +48,12 @@ async fn saved_instances_round_trip_through_list_select_update_and_delete() {
     let id = instances[0]["id"].as_str().unwrap().to_string();
     assert!(listed["activeId"].is_null(), "adding must not select");
 
-    let selected =
-        send_and_wait(&mut client, "game_select_instance", serde_json::json!({ "id": id })).await;
+    let selected = send_and_wait(
+        &mut client,
+        "game_select_instance",
+        serde_json::json!({ "id": id }),
+    )
+    .await;
     assert_eq!(selected["activeId"], id);
 
     let renamed = send_and_wait(
@@ -60,10 +64,17 @@ async fn saved_instances_round_trip_through_list_select_update_and_delete() {
     .await;
     assert_eq!(renamed["instances"][0]["name"], "Renamed");
 
-    let after =
-        send_and_wait(&mut client, "game_delete_instance", serde_json::json!({ "id": id })).await;
+    let after = send_and_wait(
+        &mut client,
+        "game_delete_instance",
+        serde_json::json!({ "id": id }),
+    )
+    .await;
     assert_eq!(after["instances"].as_array().unwrap().len(), 0);
-    assert!(after["activeId"].is_null(), "deleting the active instance must clear it");
+    assert!(
+        after["activeId"].is_null(),
+        "deleting the active instance must clear it"
+    );
 
     server.handle.shutdown().await;
 }
@@ -110,7 +121,12 @@ async fn updating_the_active_instance_retargets_the_live_connection() {
     let listed = send_and_wait(&mut client, "game_instances", serde_json::json!({})).await;
     let id = listed["instances"][0]["id"].as_str().unwrap().to_string();
 
-    send_and_wait(&mut client, "game_select_instance", serde_json::json!({ "id": id })).await;
+    send_and_wait(
+        &mut client,
+        "game_select_instance",
+        serde_json::json!({ "id": id }),
+    )
+    .await;
     assert_eq!(
         server.handle.services.bridge.target().unwrap().port,
         8788,
@@ -132,8 +148,14 @@ async fn updating_the_active_instance_retargets_the_live_connection() {
         .bridge
         .target()
         .expect("editing the active instance must not clear the target");
-    assert_eq!(target.port, 9999, "the live target must pick up the edited port");
-    assert_eq!(target.token, "new-token", "the live target must pick up the edited token");
+    assert_eq!(
+        target.port, 9999,
+        "the live target must pick up the edited port"
+    );
+    assert_eq!(
+        target.token, "new-token",
+        "the live target must pick up the edited token"
+    );
 
     server.handle.shutdown().await;
 }
@@ -186,6 +208,76 @@ async fn testing_a_reachable_instance_reports_success() {
         let _ = mock_handle.await;
     })
     .await;
+}
+
+#[tokio::test]
+async fn setting_a_saved_instances_target_binds_it_and_shows_in_the_list() {
+    let _env = BridgeEnvGuard::acquire(&[("PS_BRIDGE_ENDPOINT_DIR", None)]).await;
+    let dir = tempfile::tempdir().unwrap();
+    std::env::set_var("PS_BRIDGE_ENDPOINT_DIR", dir.path().to_str().unwrap());
+
+    let server = common::start_test_server().await;
+    let mut client = common::connect(&server).await;
+    let install = common::mods_ws::fake_windows_install();
+
+    let added_target = send_and_wait(
+        &mut client,
+        "mod_target_add",
+        serde_json::json!({ "root_path": install.path().to_string_lossy(), "name": "Test Install" }),
+    )
+    .await;
+    let target_id = added_target["target"]["id"].as_str().unwrap().to_string();
+
+    let added_instance = send_and_wait(
+        &mut client,
+        "game_add_instance",
+        serde_json::json!({ "name": "Remote", "host": "10.0.0.14", "port": 8788, "token": "s3cr3t" }),
+    )
+    .await;
+    let instance_id = added_instance["instances"][0]["id"]
+        .as_str()
+        .unwrap()
+        .to_string();
+
+    let bound = send_and_wait(
+        &mut client,
+        "game_instance_set_target",
+        serde_json::json!({ "id": instance_id, "targetId": target_id }),
+    )
+    .await;
+    assert_eq!(bound["instances"][0]["targetId"], target_id);
+
+    let cleared = send_and_wait(
+        &mut client,
+        "game_instance_set_target",
+        serde_json::json!({ "id": instance_id, "targetId": null }),
+    )
+    .await;
+    assert!(cleared["instances"][0]["targetId"].is_null());
+
+    common::send_json(
+        &mut client,
+        serde_json::json!({
+            "type": "game_instance_set_target",
+            "data": { "id": instance_id, "targetId": "no-such-target" }
+        }),
+    )
+    .await;
+    let unknown_target = common::next_json(&mut client).await;
+    assert_eq!(unknown_target["data"]["code"], "target_not_found");
+
+    common::send_json(
+        &mut client,
+        serde_json::json!({
+            "type": "game_instance_set_target",
+            "data": { "id": "auto:1", "targetId": target_id }
+        }),
+    )
+    .await;
+    let not_saved = common::next_json(&mut client).await;
+    assert_eq!(not_saved["data"]["code"], "validation_failed");
+
+    server.handle.shutdown().await;
 }
 
 /// The zero-configuration property users actually notice: launch PalStudio with no

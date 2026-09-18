@@ -2,6 +2,7 @@ use serde_json::Value;
 
 use ps_db::amity_instances::{self, NewAmityInstance};
 
+use crate::bridge::binding;
 use crate::bridge::client;
 use crate::bridge::endpoint;
 use crate::bridge::registry::{self, ACTIVE_INSTANCE_KEY};
@@ -77,8 +78,18 @@ impl std::fmt::Debug for UpdateInstanceData {
     }
 }
 
+#[derive(Debug, serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SetInstanceTargetData {
+    pub id: String,
+    pub target_id: Option<String>,
+}
+
 fn refuse(emitter: &Emitter, request: MessageType, code: &str, message: &str) {
-    emitter.emit(request, &serde_json::json!({ "code": code, "error": message }));
+    emitter.emit(
+        request,
+        &serde_json::json!({ "code": code, "error": message }),
+    );
 }
 
 fn saved_row_id(id: &str) -> Option<i64> {
@@ -211,7 +222,28 @@ async fn reply_with_instances(
             return Ok(());
         }
     };
-    let entries = registry::merge_instances(&discovered, &saved);
+    let mut entries = registry::merge_instances(&discovered, &saved);
+    if entries.iter().any(|entry| entry.source == "auto") {
+        match ps_db::mod_targets::list(&*ctx.app.driver).await {
+            Ok(targets) => {
+                for entry in entries.iter_mut().filter(|entry| entry.source == "auto") {
+                    let Some(pid) = entry
+                        .id
+                        .strip_prefix("auto:")
+                        .and_then(|rest| rest.parse::<u32>().ok())
+                    else {
+                        continue;
+                    };
+                    entry.target_id =
+                        binding::bound_auto_target(pid, &targets, binding::process_exe)
+                            .map(|target| target.id.clone());
+                }
+            }
+            Err(error) => {
+                tracing::warn!(%error, "failed to list mod targets while resolving bound instances");
+            }
+        }
+    }
     let active = services.bridge.target().map(|target| target.id);
 
     ctx.emitter.emit(
@@ -226,7 +258,8 @@ pub async fn handle_game_add_instance(
     data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let Some(payload) = parse_payload::<InstanceFieldsData>(data, MessageType::GameAddInstance, ctx)
+    let Some(payload) =
+        parse_payload::<InstanceFieldsData>(data, MessageType::GameAddInstance, ctx)
     else {
         return Ok(());
     };
@@ -241,7 +274,12 @@ pub async fn handle_game_add_instance(
     )
     .await;
     if let Err(error) = outcome {
-        refuse(ctx.emitter, MessageType::GameAddInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameAddInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
     reply_with_instances(services, MessageType::GameAddInstance, ctx).await
@@ -279,7 +317,12 @@ pub async fn handle_game_update_instance(
     )
     .await;
     if let Err(error) = outcome {
-        refuse(ctx.emitter, MessageType::GameUpdateInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameUpdateInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
 
@@ -303,6 +346,87 @@ pub async fn handle_game_update_instance(
     reply_with_instances(services, MessageType::GameUpdateInstance, ctx).await
 }
 
+pub async fn handle_game_instance_set_target(
+    services: &ServerServices,
+    data: Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let Some(payload) =
+        parse_payload::<SetInstanceTargetData>(data, MessageType::GameInstanceSetTarget, ctx)
+    else {
+        return Ok(());
+    };
+    let Some(row) = saved_row_id(&payload.id) else {
+        refuse(
+            ctx.emitter,
+            MessageType::GameInstanceSetTarget,
+            "validation_failed",
+            "only saved instances can be bound to a target",
+        );
+        return Ok(());
+    };
+
+    match amity_instances::get_instance(&*ctx.app.driver, row).await {
+        Ok(Some(_)) => {}
+        Ok(None) => {
+            refuse(
+                ctx.emitter,
+                MessageType::GameInstanceSetTarget,
+                "not_found",
+                "no saved instance with that id",
+            );
+            return Ok(());
+        }
+        Err(error) => {
+            refuse(
+                ctx.emitter,
+                MessageType::GameInstanceSetTarget,
+                "db_error",
+                &error.to_string(),
+            );
+            return Ok(());
+        }
+    }
+
+    if let Some(target_id) = &payload.target_id {
+        match ps_db::mod_targets::get(&*ctx.app.driver, target_id).await {
+            Ok(Some(_)) => {}
+            Ok(None) => {
+                refuse(
+                    ctx.emitter,
+                    MessageType::GameInstanceSetTarget,
+                    "target_not_found",
+                    "no mod target with that id",
+                );
+                return Ok(());
+            }
+            Err(error) => {
+                refuse(
+                    ctx.emitter,
+                    MessageType::GameInstanceSetTarget,
+                    "db_error",
+                    &error.to_string(),
+                );
+                return Ok(());
+            }
+        }
+    }
+
+    if let Err(error) =
+        amity_instances::set_target(&*ctx.app.driver, row, payload.target_id.as_deref()).await
+    {
+        refuse(
+            ctx.emitter,
+            MessageType::GameInstanceSetTarget,
+            "db_error",
+            &error.to_string(),
+        );
+        return Ok(());
+    }
+
+    reply_with_instances(services, MessageType::GameInstanceSetTarget, ctx).await
+}
+
 pub async fn handle_game_delete_instance(
     services: &ServerServices,
     data: Value,
@@ -323,7 +447,12 @@ pub async fn handle_game_delete_instance(
     };
 
     if let Err(error) = amity_instances::delete_instance(&*ctx.app.driver, row).await {
-        refuse(ctx.emitter, MessageType::GameDeleteInstance, "db_error", &error.to_string());
+        refuse(
+            ctx.emitter,
+            MessageType::GameDeleteInstance,
+            "db_error",
+            &error.to_string(),
+        );
         return Ok(());
     }
 
@@ -355,7 +484,12 @@ pub async fn handle_game_select_instance(
     let saved = match amity_instances::list_instances(&*ctx.app.driver).await {
         Ok(saved) => saved,
         Err(error) => {
-            refuse(ctx.emitter, MessageType::GameSelectInstance, "db_error", &error.to_string());
+            refuse(
+                ctx.emitter,
+                MessageType::GameSelectInstance,
+                "db_error",
+                &error.to_string(),
+            );
             return Ok(());
         }
     };
@@ -373,8 +507,7 @@ pub async fn handle_game_select_instance(
     services.bridge.set_target(Some(target));
     // The selection already took effect above; a failure to persist it only
     // risks losing the choice across a restart, not the current session.
-    let persisted =
-        ps_db::meta::set(&*ctx.app.driver, ACTIVE_INSTANCE_KEY, &payload.id).await;
+    let persisted = ps_db::meta::set(&*ctx.app.driver, ACTIVE_INSTANCE_KEY, &payload.id).await;
     if let Err(error) = persisted {
         tracing::warn!(%error, "failed to persist the selected Amity instance");
     }
