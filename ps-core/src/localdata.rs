@@ -168,7 +168,7 @@ mod tests {
     }
 
     #[test]
-    fn unlock_world_map_reports_python_error_for_missing_save_data() {
+    fn unlock_world_map_rejects_bytes_that_are_not_a_sav() {
         let error = unlock_world_map(b"not a sav file").unwrap_err();
         assert!(matches!(error, crate::error::CoreError::Parse(_)));
     }

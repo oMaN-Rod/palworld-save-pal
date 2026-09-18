@@ -30,7 +30,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn gamepass_save_data_serializes_with_python_field_names_and_order() {
+    fn gamepass_save_data_pins_exact_wire_names_and_order() {
         let save = GamepassSaveData {
             save_id: "8C4B8D0846A067700F2E54BBDA266D0E".to_string(),
             world_name: "My World".to_string(),

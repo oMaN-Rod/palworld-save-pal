@@ -100,8 +100,7 @@ pub fn build_wgs_tree(root: &Path, saves: &[SyntheticSave]) -> Result<PathBuf, C
 }
 
 /// Committed directory of real PlZ/zlib reference saves (`Level.sav`, `LevelMeta.sav`,
-/// `LocalData.sav`, `00000000000000000000000000000001.sav`), copied from the upstream
-/// palworld-save-tools public test corpus.
+/// `LocalData.sav`, `00000000000000000000000000000001.sav`).
 pub fn reference_saves_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/reference_saves")
 }

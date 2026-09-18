@@ -484,7 +484,7 @@ mod tests {
     }
 
     #[test]
-    fn wgs_dir_name_matcher_mirrors_python_regex() {
+    fn wgs_dir_name_matcher_accepts_only_the_container_dir_shape() {
         assert!(is_wgs_container_dir_name(
             "000900000487F3B6_0000000000000000000000006B210A9C"
         ));
@@ -498,7 +498,7 @@ mod tests {
     }
 
     #[test]
-    fn find_container_dir_under_reports_python_error_strings() {
+    fn find_container_dir_under_reports_each_missing_level_distinctly() {
         let missing = std::path::Path::new("Z:/definitely/not/here");
         let error = find_container_dir_under(missing).unwrap_err();
         assert_eq!(
