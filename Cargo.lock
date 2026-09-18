@@ -4458,7 +4458,7 @@ dependencies = [
 
 [[package]]
 name = "ps-app"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "async-trait",
  "base64 0.22.1",
@@ -4480,7 +4480,7 @@ dependencies = [
 
 [[package]]
 name = "ps-core"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "chrono",
  "cityhasher",
@@ -4498,7 +4498,7 @@ dependencies = [
 
 [[package]]
 name = "ps-db"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "async-trait",
  "chrono",
@@ -4514,7 +4514,7 @@ dependencies = [
 
 [[package]]
 name = "ps-desktop"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "anyhow",
  "ps-server",
@@ -4529,7 +4529,7 @@ dependencies = [
 
 [[package]]
 name = "ps-lua-sys"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "cc",
  "wasm-bindgen-test",
@@ -4537,7 +4537,7 @@ dependencies = [
 
 [[package]]
 name = "ps-plugin"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "chrono",
  "pretty_assertions",
@@ -4552,7 +4552,7 @@ dependencies = [
 
 [[package]]
 name = "ps-server"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "aes-gcm 0.11.1",
  "anyhow",
@@ -4605,7 +4605,7 @@ dependencies = [
 
 [[package]]
 name = "ps-web"
-version = "1.4.2"
+version = "1.5.0-beta.1"
 dependencies = [
  "async-trait",
  "base64 0.22.1",

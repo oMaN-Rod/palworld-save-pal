@@ -2,17 +2,18 @@
 	"name": "ps",
 	"compatibility_date": "2026-08-02",
 	"main": "signal-broker/src/index.ts",
+	// palworldsavepal.app stays bound to the `psp` worker until the post-beta
+	// cutover; claiming it here would move the live domain onto this worker.
 	"routes": [
 		{
 			"pattern": "palstudio.app",
 			"custom_domain": true
-		},
-		// Older desktop builds and shared links still point at the previous domain.
-		{
-			"pattern": "palworldsavepal.app",
-			"custom_domain": true
 		}
 	],
+	"workers_dev": false,
+	"observability": {
+		"enabled": true
+	},
 	"assets": {
 		"directory": "./ui_build",
 		"binding": "ASSETS",

@@ -147,7 +147,7 @@ const FAILURE_HINTS: Record<Exclude<SignalFailure, null>, string> = {
 	'pairing-failed':
 		"That code didn't reach a waiting app. Check the code, or start pairing again on your PC — codes expire after 5 minutes.",
 	'direct-connect-failed':
-		"Found your PC, but a direct connection couldn't be established. Restrictive networks (mobile hotspots, CGNAT) need a relay — you can add your own TURN server in settings."
+		"Found your PC, but a direct connection couldn't be established. Restrictive networks (mobile hotspots, CGNAT) block direct links — try again, or connect both devices to a different network."
 };
 
 const STORED_PAIRING_FAILED_HINT =

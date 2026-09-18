@@ -2,7 +2,6 @@ name: CI
 
 on:
   push:
-    branches: [main, v1.3.x]
   pull_request:
 
 # Superseded PR runs are cancelled; main-branch pushes stay serialized.
@@ -16,6 +15,9 @@ env:
 
 jobs:
   test:
+    # Same-repo pushes already run this workflow; without the guard a branch
+    # with an open PR would build twice under two different refs.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout

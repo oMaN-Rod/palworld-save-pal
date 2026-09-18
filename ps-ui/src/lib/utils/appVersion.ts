@@ -19,18 +19,50 @@ export async function isUpdateAvailableOnGitHub(version: string): Promise<boolea
 	}
 }
 
-function isNewerVersion(latestVersion: string, currentVersion: string): boolean {
-	const partsLatest = latestVersion.split('.').map((part) => parseInt(part) || 0);
-	const partsCurrent = currentVersion.split('.').map((part) => parseInt(part) || 0);
+export function isNewerVersion(latestVersion: string, currentVersion: string): boolean {
+	const latest = parseVersion(latestVersion);
+	const current = parseVersion(currentVersion);
 
-	const maxLength = Math.max(partsLatest.length, partsCurrent.length);
-	while (partsLatest.length < maxLength) partsLatest.push(0);
-	while (partsCurrent.length < maxLength) partsCurrent.push(0);
-
-	for (let i = 0; i < maxLength; i++) {
-		if (partsLatest[i] > partsCurrent[i]) return true;
-		if (partsLatest[i] < partsCurrent[i]) return false;
+	const fields = Math.max(latest.release.length, current.release.length);
+	for (let i = 0; i < fields; i++) {
+		const difference = (latest.release[i] ?? 0) - (current.release[i] ?? 0);
+		if (difference !== 0) return difference > 0;
 	}
 
-	return false;
+	return comparePreRelease(latest.preRelease, current.preRelease) > 0;
+}
+
+function parseVersion(version: string): { release: number[]; preRelease: string[] } {
+	const withoutBuild = version.split('+')[0];
+	const dash = withoutBuild.indexOf('-');
+	const release = dash === -1 ? withoutBuild : withoutBuild.slice(0, dash);
+	const preRelease = dash === -1 ? '' : withoutBuild.slice(dash + 1);
+
+	return {
+		release: release.split('.').map((part) => parseInt(part, 10) || 0),
+		preRelease: preRelease === '' ? [] : preRelease.split('.')
+	};
+}
+
+function comparePreRelease(latest: string[], current: string[]): number {
+	if (latest.length === 0 && current.length === 0) return 0;
+	if (latest.length === 0) return 1;
+	if (current.length === 0) return -1;
+
+	for (let i = 0; i < Math.min(latest.length, current.length); i++) {
+		const difference = compareIdentifier(latest[i], current[i]);
+		if (difference !== 0) return difference;
+	}
+
+	return latest.length - current.length;
+}
+
+function compareIdentifier(latest: string, current: string): number {
+	const latestNumeric = /^\d+$/.test(latest);
+	const currentNumeric = /^\d+$/.test(current);
+
+	if (latestNumeric && currentNumeric) return parseInt(latest, 10) - parseInt(current, 10);
+	if (latestNumeric !== currentNumeric) return latestNumeric ? -1 : 1;
+	if (latest === current) return 0;
+	return latest < current ? -1 : 1;
 }
