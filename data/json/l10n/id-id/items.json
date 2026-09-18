@@ -7418,5 +7418,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Nightglow",
     "description": "[Kolaborasi dengan Terraria] Lentera gaib yang memancarkan sinar dengan warna pelangi. Saat lentara ini diangkat, lentera ini akan memancarkan peluru cahaya yang mengejar musuh dan menyerang berkali-kali."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Senapan Runduk",
+    "description": "Senapan jarak jauh dengan akurasi luar biasa. Mudah digunakan dan efektif dalam pertarungan jarak jauh."
+  },
+  "LargeBullet": {
+    "localized_name": "Peluru Senapan Runduk",
+    "description": "Peluru besar yang digunakan Senapan Runduk. Memiliki akurasi dan daya tembak yang tinggi."
   }
 }

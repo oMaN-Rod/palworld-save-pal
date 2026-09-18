@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "夜光",
     "description": "【泰拉瑞亞合作】 散發出七彩光輝的神秘提燈。 舉起此提燈後，它會發射能夠追蹤敵人並進行多次攻擊的光彈。"
+  },
+  "SniperRifle_Default": {
+    "localized_name": "狙擊步槍",
+    "description": "一款具有卓越精準度的遠程步槍。它易於操作，在遠距離戰鬥中十分有效。"
+  },
+  "LargeBullet": {
+    "localized_name": "狙擊彈藥",
+    "description": "一種用於狙擊步槍的大口徑子彈。具有高精度和強大威力。"
   }
 }

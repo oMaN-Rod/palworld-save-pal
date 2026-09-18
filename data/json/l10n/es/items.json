@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Brillo nocturno",
     "description": "[Colaboración con Terraria] Una linterna mística de brillo irisado. Al alzarla, dispara orbes de luz que persiguen al enemigo y atacan varias veces."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Rifle de francotirador",
+    "description": "Un rifle de largo alcance con precisión excepcional. Es fácil de manejar y efectivo en combate a larga distancia."
+  },
+  "LargeBullet": {
+    "localized_name": "Munición de francotirador",
+    "description": "Una bala grande para usar con un rifle de francotirador. Tiene alta precisión y potencia."
   }
 }

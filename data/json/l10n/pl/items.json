@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Poświata",
     "description": "[Tides of Terraria] Tajemniczy lampion rozświetlający otoczenie tęczowym blaskiem. Po uniesieniu wypuszcza świetlne pociski, które ścigają wrogów i uderzają kilkukrotnie."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Karabin snajperski",
+    "description": "Karabin dalekiego zasięgu o wyjątkowej celności. Jest łatwy w obsłudze i skuteczny w walce na dużym dystansie."
+  },
+  "LargeBullet": {
+    "localized_name": "Amunicja: Karabin snajperski",
+    "description": "Duży pocisk do karabinu snajperskiego. Zapewnia wysoką celność i siłę rażenia."
   }
 }

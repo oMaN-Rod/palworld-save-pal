@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Illuminuit",
     "description": "[Collaboration Terraria] Une lanterne mystique à la lueur irisée. La tenir libère une boule de lumière qui traque l'ennemi pour l'attaquer à plusieurs reprises."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Fusil de précision",
+    "description": "Un fusil à longue portée d'une précision exceptionnelle. Il est facile à manier et efficace dans les combats à longue distance."
+  },
+  "LargeBullet": {
+    "localized_name": "Munitions de précision",
+    "description": "Une grosse balle destinée au fusil de précision. Elle offre une grande précision et puissance."
   }
 }

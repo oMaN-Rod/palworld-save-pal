@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Ánh Sáng Đêm",
     "description": "[Hợp tác với Terraria] Một chiếc đèn lồng thần bí phát ra ánh sáng cầu vồng. Khi giơ cao, nó sẽ phóng ra những quả cầu ánh sáng truy đuổi và tấn công kẻ địch liên tục."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Súng Bắn Tỉa",
+    "description": "Súng trường tầm xa có độ chính xác vượt trội. Dễ sử dụng và hiệu quả trong chiến đấu tầm xa."
+  },
+  "LargeBullet": {
+    "localized_name": "Đạn Súng Bắn Tỉa",
+    "description": "Đạn cỡ lớn dùng cho súng bắn tỉa. Có độ chính xác và sức công phá cao."
   }
 }

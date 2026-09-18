@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Gece Parıltısı",
     "description": "[Terraria İş Birliği] Gökkuşağı renklerinde parlayan gizemli bir fener. Bu feneri kaldırdığında, düşmanları takip edip birden fazla kez saldıran ışık mermileri fırlatır."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Keskin Nişancı Tüfeği",
+    "description": "Olağanüstü isabet oranına sahip uzun menzilli bir tüfek. Kullanımı kolaydır ve uzak mesafe çatışmalarında etkilidir."
+  },
+  "LargeBullet": {
+    "localized_name": "Keskin Nişancı Tüfeği Mermisi",
+    "description": "Keskin nişancı tüfeğinde kullanılan büyük mermi. Yüksek isabet ve güce sahiptir."
   }
 }

@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Brilho Noturno",
     "description": "[Colaboração com Terraria] Lampião místico que emite um brilho iridescente. Quando erguido, este lampião solta projéteis de luz que perseguem e atacam os inimigos várias vezes."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Rifle de precisão",
+    "description": "Um rifle de longo alcance com precisão excepcional. É fácil de manusear e eficaz em combates de longa distância."
+  },
+  "LargeBullet": {
+    "localized_name": "Munição de precisão",
+    "description": "Uma bala grande para uso com rifle de precisão. Possui alta precisão e poder."
   }
 }

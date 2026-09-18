@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Nightglow",
     "description": "[Tides of Terraria] A lantern that radiates a rainbow-hued light. Holding it aloft releases homing light projectiles that strike enemies multiple times."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Sniper Rifle",
+    "description": "A long-range rifle with exceptional accuracy. It’s easy to handle and effective in long-range combat."
+  },
+  "LargeBullet": {
+    "localized_name": "Sniper Ammo",
+    "description": "A large bullet for use with a Sniper Rifle. It has high accuracy and power."
   }
 }

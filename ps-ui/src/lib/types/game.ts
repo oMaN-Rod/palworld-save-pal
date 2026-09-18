@@ -398,7 +398,7 @@ export enum ItemTypeB {
 	WeaponCrossbow = 'WeaponCrossbow',
 	WeaponHandgun = 'WeaponHandgun',
 	WeaponAssaultRifle = 'WeaponAssaultRifle',
-	WeaponSniperRifle = 'WeaponSniperRifle',
+	WeaponSniper = 'WeaponSniper',
 	WeaponRocketLauncher = 'WeaponRocketLauncher',
 	WeaponShotgun = 'WeaponShotgun',
 	WeaponFlameThrower = 'WeaponFlameThrower',

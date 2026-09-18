@@ -11765,4 +11765,14 @@
 		<changefreq>weekly</changefreq>
 		<priority>0.5</priority>
 	</url>
+	<url>
+		<loc>https://palstudio.app/wiki/items/sniper-rifle-default</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.5</priority>
+	</url>
+	<url>
+		<loc>https://palstudio.app/wiki/items/large-bullet</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.5</priority>
+	</url>
 </urlset>

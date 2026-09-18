@@ -12,7 +12,7 @@
 	<a href="/" class="public-nav-brand" aria-label="PalStudio home">
 		<img src="/ps.png" alt="" class="h-5 w-5 rounded object-contain" />
 		<span class="heading-gradient hidden text-xs font-extrabold tracking-tight md:inline">
-			PALWORLD SAVE PAL
+			PALSTUDIO
 		</span>
 	</a>
 

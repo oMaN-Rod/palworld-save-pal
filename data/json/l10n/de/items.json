@@ -9426,5 +9426,13 @@
   "YakushimaLantern001_5": {
     "localized_name": "Nachtglüh",
     "description": "[Terraria-Collab] Eine mystische Laterne, die ein regenbogenfarbenes Licht ausstrahlt. Wenn du diese Laterne hochhältst, verschießt sie zielsuchende Lichtprojektile, die Gegner mehrmals angreifen."
+  },
+  "SniperRifle_Default": {
+    "localized_name": "Scharfschützengewehr",
+    "description": "Ein Gewehr mit außergewöhnlicher Präzision für große Entfernungen. Es ist leicht zu handhaben und effektiv im Fernkampf."
+  },
+  "LargeBullet": {
+    "localized_name": "Scharfschützenmunition",
+    "description": "Eine großkalibrige Kugel für Scharfschützengewehre. Sie bietet hohe Präzision und Durchschlagskraft."
   }
 }
