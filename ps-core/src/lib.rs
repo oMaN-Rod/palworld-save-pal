@@ -7,6 +7,8 @@ pub mod error;
 pub mod gamedata;
 pub mod gamepass;
 pub mod localdata;
+pub mod mods;
+pub mod nexus;
 pub mod oodle;
 pub mod palbin;
 pub mod paths;

@@ -1,0 +1,2 @@
+{"archive_name":"Cool 100 2 2026-01-01T00-00Z abc.zip","platform":"win64","entries":["(Steam)/Cool_P.pak","(Xbox)/Cool_P.pak","(Xbox)/Cool_P.utoc","(Xbox)/Cool_P.ucas"],
+ "expect":{"mod_type":"pak","folder_name":"Cool_P","platform_filtered":"win64","routes":[["(Steam)/Cool_P.pak","pak","Cool_P.pak"]],"decisions":["pak_destination"]}}

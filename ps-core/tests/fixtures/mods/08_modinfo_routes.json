@@ -1,0 +1,2 @@
+{"archive_name":"x.zip","platform":"win64","modinfo":{"name":"Declared","version":"4.2","routes":[{"path":"stuff/thing.bin","kind":"ue4ss"}]},"entries":["stuff/thing.bin","modinfo.json"],
+ "expect":{"mod_type":"ue4ss","folder_name":"Declared","routes":[["stuff/thing.bin","ue4ss","Declared/stuff/thing.bin"]],"decisions":[]}}

@@ -1,0 +1,2 @@
+{"archive_name":"x.zip","platform":"win64","entries":["CoolMod/CoolMod/Scripts/main.lua","CoolMod/CoolMod/Scripts/CoolMod/util.lua"],
+ "expect":{"mod_type":"ue4ss","folder_name":"CoolMod","routes":[["CoolMod/CoolMod/Scripts/main.lua","ue4ss","CoolMod/Scripts/main.lua"],["CoolMod/CoolMod/Scripts/CoolMod/util.lua","ue4ss","CoolMod/Scripts/CoolMod/util.lua"]],"decisions":[]}}

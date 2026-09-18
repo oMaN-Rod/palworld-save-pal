@@ -1,0 +1,2 @@
+{"archive_name":"Cool Mod.zip","platform":"win64","entries":["main.lua","config.lua"],
+ "expect":{"mod_type":"ue4ss","folder_name":"Cool Mod","routes":[["main.lua","ue4ss","Cool Mod/Scripts/main.lua"],["config.lua","ue4ss","Cool Mod/config.lua"]],"decisions":[]}}

@@ -1,0 +1,2 @@
+{"archive_name":"x.zip","platform":"wingdk","entries":["Palworld/Pal/Binaries/Win64/ue4ss/Mods/CoolMod/Scripts/main.lua","Palworld/Pal/Content/Paks/~mods/Cool_P.pak"],
+ "expect":{"mod_type":"hybrid","folder_name":"CoolMod","routes":[["Palworld/Pal/Binaries/Win64/ue4ss/Mods/CoolMod/Scripts/main.lua","passthrough","Pal/Binaries/WinGDK/ue4ss/Mods/CoolMod/Scripts/main.lua"],["Palworld/Pal/Content/Paks/~mods/Cool_P.pak","passthrough","Pal/Content/Paks/~mods/Cool_P.pak"]],"decisions":[]}}

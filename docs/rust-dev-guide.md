@@ -10,6 +10,8 @@ with four crates:
 | `ps-server` | Axum: SPA static serving, `GET /ws/{client_id}` WebSocket (the 123-message API), `POST /api/convert/*`. Lib + bin. |
 | `ps-desktop` | Tauri v2 shell: spawns the embedded server on `127.0.0.1:5174`, native dialogs. |
 
+`ps_core::mods` is the pure half of mod management: archive analysis and routing (`build_manifest`), target layouts (`resolve_layout`), the `mods.txt` and `PalModSettings.ini` codecs, and the deployment diff (`build_plan`). It never touches the filesystem; routing rules are pinned by JSON fixtures in `ps-core/tests/fixtures/mods/` (see the README there to add one).
+
 Save parsing is provided by [uesave-rs](https://github.com/oMaN-Rod/uesave-rs),
 consumed as a **git dependency** (branch `palworld-v1`) pinned to an exact
 commit via `Cargo.lock`. To pull newer uesave-rs commits:

@@ -1,0 +1,2 @@
+{"archive_name":"x.zip","platform":"win64","entries":["000_Foo/pals/a.json","000_Foo/translations/en.json"],
+ "expect":{"mod_type":"palschema","folder_name":"000_Foo","routes":[["000_Foo/pals/a.json","palschema","000_Foo/pals/a.json"],["000_Foo/translations/en.json","palschema","000_Foo/translations/en.json"]],"decisions":[]}}

@@ -1,0 +1,2 @@
+{"archive_name":"x.zip","platform":"win64","entries":["CppMod/dlls/main.dll","CppMod/enabled.txt"],
+ "expect":{"mod_type":"ue4ss","folder_name":"CppMod","routes":[["CppMod/dlls/main.dll","ue4ss","CppMod/dlls/main.dll"],["CppMod/enabled.txt","ue4ss","CppMod/enabled.txt"]],"decisions":[]}}

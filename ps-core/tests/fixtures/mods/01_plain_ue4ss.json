@@ -1,0 +1,2 @@
+{"archive_name":"CoolMod.zip","platform":"win64","entries":["CoolMod/Scripts/main.lua","CoolMod/enabled.txt","CoolMod/readme.md"],
+ "expect":{"mod_type":"ue4ss","folder_name":"CoolMod","routes":[["CoolMod/Scripts/main.lua","ue4ss","CoolMod/Scripts/main.lua"],["CoolMod/enabled.txt","ue4ss","CoolMod/enabled.txt"],["CoolMod/readme.md","ue4ss","CoolMod/readme.md"]],"decisions":[]}}

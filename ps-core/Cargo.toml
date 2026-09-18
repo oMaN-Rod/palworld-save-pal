@@ -16,6 +16,7 @@ cityhasher = { workspace = true }
 indexmap = { workspace = true }
 
 [dev-dependencies]
+pretty_assertions = { workspace = true }
 tempfile = { workspace = true }
 # The integration tests link ps-core as an external crate, so `cfg(test)` does
 # not reach it; this is what makes the `test-fixtures` surface visible to them.
