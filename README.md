@@ -253,6 +253,18 @@ auto-detection. See [ps-amity/INSTALL.md](ps-amity/INSTALL.md) for the shipped z
 redistribute this software, provided derivative works are released under the
 same license and their source is made available.
 
+The GPL covers PalStudio's own source. It does not extend to the Palworld game
+data and derived assets this repository carries so the map and wiki can render —
+those remain the property of their owners. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## ⚖️ Not Affiliated With Pocketpair
+
+PalStudio is a fan-made tool. It is not affiliated with, endorsed by, or
+sponsored by Pocketpair, Inc. Palworld is a trademark of Pocketpair, Inc. All
+game names, artwork, models and data belong to their respective owners and
+appear here only so the tool can read and display your own save file.
+
 ## ➡️ Related Projects
 
 These are projects I've found that specifically target Palworld save files, each was helpful in some way during the development of this project:
