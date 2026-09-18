@@ -5,10 +5,10 @@ edition.workspace = true
 license.workspace = true
 
 [features]
-# Desktop-only native file dialogs (rfd). Off by default so the server/Docker
-# build stays headless — rfd's Linux backend (ashpd) pulls wayland system libs.
-# ps-desktop enables it.
-desktop = ["dep:rfd"]
+# Desktop-only native file dialogs (rfd) and the OS keyring that holds the
+# Nexus Mods API key. Off by default so the server/Docker build stays headless
+# and never carries keyring code. ps-desktop enables it.
+desktop = ["dep:rfd", "dep:keyring"]
 
 [dependencies]
 ps-app = { workspace = true }
@@ -30,10 +30,14 @@ clap = { workspace = true }
 futures = { workspace = true }
 percent-encoding = { workspace = true }
 zip = { workspace = true }
+sevenz-rust2 = { workspace = true }
+blake3 = { workspace = true }
+walkdir = { workspace = true }
 uuid = { workspace = true }
 base64 = { workspace = true }
 chrono = { workspace = true }
 rfd = { workspace = true, optional = true }
+keyring = { workspace = true, optional = true }
 opener = { workspace = true }
 reqwest = { workspace = true }
 async-trait = { workspace = true }
@@ -49,12 +53,12 @@ flate2 = { workspace = true }
 tar = { workspace = true }
 webrtc = { workspace = true }
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
+tempfile = { workspace = true }
 
 [dev-dependencies]
 sqlx = { workspace = true }
 ps-app = { workspace = true, features = ["test-support"] }
 tokio = { workspace = true, features = ["test-util"] }
-tempfile = { workspace = true }
 pretty_assertions = { workspace = true }
 tower = { workspace = true }
 http-body-util = { workspace = true }

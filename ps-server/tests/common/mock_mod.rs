@@ -32,6 +32,13 @@ pub struct MockMod {
     command_errors_at: HashMap<String, (usize, String, String)>,
     capabilities: Option<serde_json::Value>,
     capabilities_push: Option<serde_json::Value>,
+    build_info: Option<serde_json::Value>,
+    build_info_skip_first: usize,
+    build_info_calls: Arc<AtomicUsize>,
+    loaded_mods: Option<serde_json::Value>,
+    loaded_mods_delay: Option<Duration>,
+    resolution_report: Option<serde_json::Value>,
+    silent_kinds: std::collections::HashSet<String>,
 }
 
 #[allow(dead_code)]
@@ -59,6 +66,13 @@ impl MockMod {
             command_errors_at: HashMap::new(),
             capabilities: None,
             capabilities_push: None,
+            build_info: None,
+            build_info_skip_first: 0,
+            build_info_calls: Arc::new(AtomicUsize::new(0)),
+            loaded_mods: None,
+            loaded_mods_delay: None,
+            resolution_report: None,
+            silent_kinds: std::collections::HashSet::new(),
         }
     }
 
@@ -136,6 +150,41 @@ impl MockMod {
 
     pub fn with_capabilities_push(mut self, capabilities: serde_json::Value) -> Self {
         self.capabilities_push = Some(capabilities);
+        self
+    }
+
+    pub fn with_build_info(mut self, build_info: serde_json::Value) -> Self {
+        self.build_info = Some(build_info);
+        self
+    }
+
+    /// The first `skip` requests for `get_build_info` go unanswered; the
+    /// request after that gets `build_info`.
+    pub fn with_build_info_after(mut self, skip: usize, build_info: serde_json::Value) -> Self {
+        self.build_info = Some(build_info);
+        self.build_info_skip_first = skip;
+        self
+    }
+
+    pub fn with_loaded_mods(mut self, loaded_mods: serde_json::Value) -> Self {
+        self.loaded_mods = Some(loaded_mods);
+        self
+    }
+
+    pub fn with_loaded_mods_delay(mut self, delay: Duration) -> Self {
+        self.loaded_mods_delay = Some(delay);
+        self
+    }
+
+    pub fn with_resolution_report(mut self, resolution_report: serde_json::Value) -> Self {
+        self.resolution_report = Some(resolution_report);
+        self
+    }
+
+    /// Requests of this wire type are logged (so a test can observe that one
+    /// arrived) but never answered.
+    pub fn with_silent(mut self, kind: impl Into<String>) -> Self {
+        self.silent_kinds.insert(kind.into());
         self
     }
 }
@@ -248,6 +297,16 @@ async fn connection_loop(mut socket: WebSocket, state: MockState) {
                         let id = envelope_id(&request);
                         let kind = request.get("type").and_then(|v| v.as_str()).unwrap_or_default();
                         state.mock.requests.lock().unwrap().push(request.clone());
+                        if state.mock.silent_kinds.contains(kind) {
+                            continue;
+                        }
+                        if kind == "get_build_info" {
+                            let call_index =
+                                state.mock.build_info_calls.fetch_add(1, Ordering::Relaxed);
+                            if call_index < state.mock.build_info_skip_first {
+                                continue;
+                            }
+                        }
                         let reply = match kind {
                             "get_status" => {
                                 if let Some(delay) = state.mock.status_delay {
@@ -343,6 +402,35 @@ async fn connection_loop(mut socket: WebSocket, state: MockState) {
                                     })
                                 }
                             }
+                            "get_build_info" => match &state.mock.build_info {
+                                Some(data) => serde_json::json!({ "id": id, "type": "build_info", "data": data }),
+                                None => serde_json::json!({
+                                    "id": id,
+                                    "type": "error",
+                                    "data": { "code": "capability_unavailable", "message": "get_build_info not configured" },
+                                }),
+                            },
+                            "get_loaded_mods" => {
+                                if let Some(delay) = state.mock.loaded_mods_delay {
+                                    tokio::time::sleep(delay).await;
+                                }
+                                match &state.mock.loaded_mods {
+                                    Some(data) => serde_json::json!({ "id": id, "type": "loaded_mods", "data": data }),
+                                    None => serde_json::json!({
+                                        "id": id,
+                                        "type": "error",
+                                        "data": { "code": "capability_unavailable", "message": "get_loaded_mods not configured" },
+                                    }),
+                                }
+                            }
+                            "get_resolution_report" => match &state.mock.resolution_report {
+                                Some(data) => serde_json::json!({ "id": id, "type": "resolution_report", "data": data }),
+                                None => serde_json::json!({
+                                    "id": id,
+                                    "type": "error",
+                                    "data": { "code": "capability_unavailable", "message": "get_resolution_report not configured" },
+                                }),
+                            },
                             "get_capabilities" => match &state.mock.capabilities {
                                 Some(capabilities) => {
                                     serde_json::json!({ "id": id, "type": "capabilities", "data": capabilities })
