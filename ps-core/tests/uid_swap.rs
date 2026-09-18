@@ -166,11 +166,10 @@ fn structure_count(session: &SaveSession, builder: Uuid) -> usize {
         .count()
 }
 
-/// `CharacterContainerSaveData` slots whose `RawData.player_uid` names `owner`. A pal box
-/// travels with the `.sav` that references it, so its slot owners must travel too.
-fn container_slot_owner_count(session: &SaveSession, owner: Uuid) -> usize {
+/// Every occupied `CharacterContainerSaveData` slot's `(player_uid, instance_id)`.
+fn container_slot_identities(session: &SaveSession) -> Vec<(Uuid, Uuid)> {
     let Ok(entries) = world::character_container_map(&session.level) else {
-        return 0;
+        return Vec::new();
     };
     entries
         .iter()
@@ -179,16 +178,47 @@ fn container_slot_owner_count(session: &SaveSession, owner: Uuid) -> usize {
             props::get(value_props, &["Slots"]).and_then(props::struct_values)
         })
         .flatten()
-        .filter(|slot| {
+        .filter_map(|slot| {
             let StructValue::Struct(slot_props) = slot else {
-                return false;
+                return None;
             };
-            matches!(
-                slot_props.0.get(&PropertyKey::from("RawData")),
-                Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw))))
-                    if props::guid_to_uuid(&raw.player_uid) == owner
-            )
+            match slot_props.0.get(&PropertyKey::from("RawData")) {
+                Some(Property::Struct(StructValue::Game(PalStruct::CharacterContainer(raw)))) => Some((
+                    props::guid_to_uuid(&raw.player_uid),
+                    props::guid_to_uuid(&raw.instance_id),
+                )),
+                _ => None,
+            }
         })
+        .filter(|(_, instance_id)| *instance_id != Uuid::nil())
+        .collect()
+}
+
+/// Slots whose identity names no `CharacterSaveParameterMap` key -- pals the game drops
+/// from their container, and then deletes, when the world loads.
+fn unresolved_container_slots(session: &SaveSession) -> usize {
+    let keys: std::collections::HashSet<(Uuid, Uuid)> = session
+        .character_map()
+        .unwrap()
+        .iter()
+        .filter_map(|entry| {
+            let key = props::struct_props(&entry.key)?;
+            Some((
+                props::get(key, &["PlayerUId"]).and_then(props::as_uuid)?,
+                props::get(key, &["InstanceId"]).and_then(props::as_uuid)?,
+            ))
+        })
+        .collect();
+    container_slot_identities(session)
+        .iter()
+        .filter(|identity| !keys.contains(identity))
+        .count()
+}
+
+fn container_slots_naming(session: &SaveSession, uid: Uuid) -> usize {
+    container_slot_identities(session)
+        .iter()
+        .filter(|(player_uid, _)| *player_uid == uid)
         .count()
 }
 
@@ -251,25 +281,24 @@ fn corpus_swap_moves_structure_ownership() {
     assert_eq!(structure_count(&session, rich), poor_built);
 }
 
-/// Every `v1_relics` container slot carries the nil owner, so only `v1_stats` can tell a
-/// working rewrite from a missing one here.
+/// A slot's `player_uid` is half of the pal's instance id, not its owner. `v1_stats` is a
+/// co-op save, where 168 slots carry the host uid to match their pals' map keys; a host
+/// swap that rewrites them orphans every pal in every container.
 #[test]
-fn v1_stats_swap_moves_character_container_slot_owners() {
+fn v1_stats_host_swap_keeps_container_slots_resolving_to_their_pals() {
     let mut session = common::load_fixture_session("v1_stats");
-    let (rich, poor) = richest_and_poorest(&session);
-    let rich_slots = container_slot_owner_count(&session, rich);
-    let poor_slots = container_slot_owner_count(&session, poor);
-    assert!(
-        rich_slots > 0 || poor_slots > 0,
-        "the fixture must name a player on some container slot"
-    );
+    let host: Uuid = "00000000-0000-0000-0000-000000000001".parse().unwrap();
+    let guest: Uuid = "5de00645-0000-0000-0000-000000000000".parse().unwrap();
+    assert_eq!(unresolved_container_slots(&session), 0);
+    assert_eq!(container_slots_naming(&session, host), 168);
 
     session
-        .swap_player_uids(rich, poor, &null_progress())
+        .swap_player_uids(host, guest, &null_progress())
         .expect("swap succeeds");
 
-    assert_eq!(container_slot_owner_count(&session, poor), rich_slots);
-    assert_eq!(container_slot_owner_count(&session, rich), poor_slots);
+    assert_eq!(unresolved_container_slots(&session), 0);
+    assert_eq!(container_slots_naming(&session, host), 168);
+    assert_eq!(container_slots_naming(&session, guest), 0);
 }
 
 /// The swap is bidirectional, so applying it twice must restore the save byte for byte.

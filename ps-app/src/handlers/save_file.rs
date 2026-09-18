@@ -1001,9 +1001,12 @@ fn write_steam_modded_save(
         let stem = save_modded_player_stem(&player_id);
         std::fs::write(players_dir.join(format!("{stem}.sav")), &sav_bytes)
             .map_err(CoreError::Io)?;
-        if let Some(dps_bytes) = dps_bytes {
-            std::fs::write(players_dir.join(format!("{stem}_dps.sav")), &dps_bytes)
-                .map_err(CoreError::Io)?;
+        let dps_path = players_dir.join(format!("{stem}_dps.sav"));
+        match dps_bytes {
+            Some(dps_bytes) => std::fs::write(&dps_path, &dps_bytes).map_err(CoreError::Io)?,
+            // A uid swap can move a player's dimensional storage to the other uid.
+            None if dps_path.exists() => std::fs::remove_file(&dps_path).map_err(CoreError::Io)?,
+            None => {}
         }
     }
     write_gps_if_loaded(session, progress)?;
@@ -1935,6 +1938,60 @@ mod tests {
             std::fs::read(backup_dirs[0].join("Level.sav")).unwrap(),
             "backup must contain the pre-overwrite Level.sav"
         );
+    }
+
+    /// A swap that moves the only `_dps.sav` to the other player leaves the file under the
+    /// old uid stale, and the game would hand that player a duplicate of the moved storage.
+    #[test]
+    fn write_steam_modded_save_removes_a_dps_file_the_player_no_longer_has() {
+        let fixture = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../tests/fixtures/saves/v1_stats");
+        let temp_dir = tempfile::tempdir().unwrap();
+        let save_dir = temp_dir.path().join("world");
+        copy_dir_recursive(&fixture, &save_dir).unwrap();
+        let players_dir = save_dir.join("Players");
+        let host_dps = players_dir.join("00000000000000000000000000000001_dps.sav");
+        let guest_dps = players_dir.join("5DE00645000000000000000000000000_dps.sav");
+        assert!(host_dps.is_file());
+        assert!(!guest_dps.exists());
+
+        let level_path = save_dir.join("Level.sav");
+        let level_bytes = std::fs::read(&level_path).unwrap();
+        let meta_bytes = std::fs::read(save_dir.join("LevelMeta.sav")).unwrap();
+        let (player_file_refs, _) = discover_player_file_refs(&players_dir).unwrap();
+        let mut session = SaveSession::load(
+            SaveKind::Steam {
+                level_path: level_path.clone(),
+            },
+            level_path.to_string_lossy().into_owned(),
+            "steam",
+            &level_bytes,
+            Some(&meta_bytes),
+            None,
+            player_file_refs,
+            None,
+            true,
+            &ps_core::progress::null_progress(),
+        )
+        .unwrap();
+        session
+            .swap_player_uids(
+                "00000000-0000-0000-0000-000000000001".parse().unwrap(),
+                "5de00645-0000-0000-0000-000000000000".parse().unwrap(),
+                &ps_core::progress::null_progress(),
+            )
+            .unwrap();
+
+        write_steam_modded_save(
+            &session,
+            &level_path,
+            &save_dir,
+            &temp_dir.path().join("backups/steam"),
+            &ps_core::progress::null_progress(),
+        )
+        .unwrap();
+
+        assert!(guest_dps.is_file());
+        assert!(!host_dps.exists());
     }
 
     fn fixture_world1_dir() -> PathBuf {

@@ -355,6 +355,7 @@ pub fn save_modified_gamepass(
         create_container(container_dir, save_id, modified_level_data, "Data", "Level")?;
     index.containers.push(level_container);
 
+    let mut players_with_dps_container = std::collections::HashSet::new();
     for (key, original) in original_containers.iter() {
         if key == "Level" {
             continue;
@@ -386,6 +387,11 @@ pub fn save_modified_gamepass(
                     let player = player_sav_data.get(&player_uuid).ok_or_else(|| {
                         CoreError::Other(format!("player {player_uuid} missing dps data"))
                     })?;
+                    // A uid swap can move a player's dimensional storage to the other uid.
+                    if player.dps.is_none() {
+                        continue;
+                    }
+                    players_with_dps_container.insert(player_uuid);
                     replacement = player.dps.clone();
                 }
                 Err(_) => continue,
@@ -404,6 +410,23 @@ pub fn save_modified_gamepass(
             replacement.as_deref(),
         )?;
         index.containers.push(copied);
+    }
+
+    let mut new_dps: Vec<_> = player_sav_data
+        .iter()
+        .filter(|(uuid, _)| !players_with_dps_container.contains(*uuid))
+        .filter_map(|(uuid, player)| Some((*uuid, player.dps.as_deref()?)))
+        .collect();
+    new_dps.sort_by_key(|(uuid, _)| *uuid);
+    for (player_uuid, dps) in new_dps {
+        let player_hex = player_uuid.as_simple().to_string().to_uppercase();
+        index.containers.push(create_container(
+            container_dir,
+            save_id,
+            dps,
+            "Data",
+            &format!("Players-{player_hex}_dps"),
+        )?);
     }
 
     index.mtime = Filetime::now();
@@ -781,6 +804,81 @@ mod tests {
         assert!(!reloaded
             .latest_save_containers("OLDID000OLDID000OLDID000OLDID000", &container_dir)
             .is_empty());
+    }
+
+    /// A uid swap moves the only `_dps.sav` to the other player: the giver's old `_dps`
+    /// container is stale, and the taker had none for the moved storage to be copied into.
+    #[test]
+    fn save_modified_gamepass_follows_dps_that_moved_between_players() {
+        use crate::gamepass::PlayerSavBytes;
+        let testdata = crate::gamepass::fixture::reference_saves_dir();
+        let meta_bytes = std::fs::read(testdata.join("LevelMeta.sav")).unwrap();
+
+        let temp = tempfile::tempdir().unwrap();
+        let giver = uuid::Uuid::new_v4();
+        let taker = uuid::Uuid::new_v4();
+        let hex = |id: uuid::Uuid| id.as_simple().to_string().to_uppercase();
+        let save = crate::gamepass::fixture::SyntheticSave {
+            save_id: "OLDID000OLDID000OLDID000OLDID000".to_string(),
+            level_sav: b"OLD-LEVEL".to_vec(),
+            level_meta: Some(meta_bytes),
+            local_data: None,
+            world_option: None,
+            players: vec![
+                crate::gamepass::fixture::SyntheticPlayer {
+                    id: giver,
+                    sav: b"GIVER".to_vec(),
+                    dps: Some(b"OLD-DPS".to_vec()),
+                },
+                crate::gamepass::fixture::SyntheticPlayer {
+                    id: taker,
+                    sav: b"TAKER".to_vec(),
+                    dps: None,
+                },
+            ],
+        };
+        let container_dir = crate::gamepass::fixture::build_wgs_tree(temp.path(), &[save]).unwrap();
+
+        let mut index =
+            crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
+        let originals = index.latest_save_containers("OLDID000OLDID000OLDID000OLDID000", &container_dir);
+        let mut player_data = std::collections::HashMap::new();
+        player_data.insert(
+            giver,
+            PlayerSavBytes {
+                sav: Some(b"GIVER-NEW".to_vec()),
+                dps: None,
+            },
+        );
+        player_data.insert(
+            taker,
+            PlayerSavBytes {
+                sav: Some(b"TAKER-NEW".to_vec()),
+                dps: Some(b"MOVED-DPS".to_vec()),
+            },
+        );
+
+        save_modified_gamepass(
+            &mut index,
+            &container_dir,
+            "NEWID000NEWID000NEWID000NEWID000",
+            b"NEW-LEVEL",
+            &player_data,
+            &originals,
+            "World",
+            None,
+        )
+        .unwrap();
+
+        let reloaded =
+            crate::gamepass::format::ContainerIndex::read_from_dir(&container_dir).unwrap();
+        let new_latest = reloaded.latest_save_containers("NEWID000NEWID000NEWID000NEWID000", &container_dir);
+        assert!(new_latest.get(&format!("Players-{}_dps", hex(giver))).is_none());
+        let taker_dps = new_latest
+            .get(&format!("Players-{}_dps", hex(taker)))
+            .expect("the taker's moved dps gets a container");
+        let (_, blob) = read_first_blob(&container_dir, taker_dps).unwrap().unwrap();
+        assert_eq!(blob, b"MOVED-DPS");
     }
 
     #[test]
