@@ -2,7 +2,9 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Server } from '$types';
 	import { Card } from '$components/ui';
+	import { getServerState } from '$states';
 	import { cn } from '$theme';
+	import * as m from '$i18n/messages';
 
 	let {
 		server,
@@ -18,7 +20,10 @@
 		onstop: (server: Server) => void;
 	}>();
 
+	const serverState = getServerState();
+
 	const isRunning = $derived(server.status?.running ?? false);
+	const starting = $derived(!isRunning && (serverState.starting[server.id] ?? false));
 	const isDocker = $derived(server.server_type === 'docker');
 
 	const statusColor = $derived.by(() => {
@@ -40,14 +45,19 @@
 	const statusText = $derived(server.status?.status ?? 'unknown');
 </script>
 
-<button
+<div
 	class={cn(
-		'w-full text-left transition-all',
-		selected ? 'ring-2 ring-secondary-500 rounded-sm' : ''
+		'group relative w-full text-left transition-all',
+		selected ? 'ring-secondary-500 rounded-sm ring-2' : ''
 	)}
-	onclick={() => onselect(server)}
 >
-	<Card class="hover:bg-surface-800 cursor-pointer">
+	<button
+		class="focus-visible:outline-primary-300 absolute inset-0 z-0 cursor-pointer rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2"
+		aria-label={server.name}
+		aria-pressed={selected}
+		onclick={() => onselect(server)}
+	></button>
+	<Card class="group-hover:bg-surface-800 pointer-events-none">
 		<div class="flex items-center justify-between">
 			<div class="flex items-center gap-3">
 				<div class={cn('h-3 w-3 rounded-full', statusColor)}></div>
@@ -67,18 +77,24 @@
 				{/if}
 				<button
 					class={cn(
-						'btn btn-sm rounded-sm p-1.5',
+						'btn btn-sm pointer-events-auto rounded-sm p-1.5',
 						isRunning
 							? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
 							: 'bg-green-500/20 text-green-400 hover:bg-green-500/30'
 					)}
-					onclick={(e) => {
-						e.stopPropagation();
+					data-server-toggle
+					aria-label={isRunning ? m.servers_stop() : m.servers_start()}
+					disabled={starting}
+					aria-busy={starting}
+					onclick={() => {
+						if (starting) return;
 						isRunning ? onstop(server) : onstart(server);
 					}}
 				>
 					{#if isRunning}
 						<Icon icon="tabler:square" size={14} />
+					{:else if starting}
+						<Icon icon="tabler:loader-2" size={14} class="animate-spin" />
 					{:else}
 						<Icon icon="tabler:player-play" size={14} />
 					{/if}
@@ -101,4 +117,4 @@
 			<span class="capitalize">{statusText}</span>
 		</div>
 	</Card>
-</button>
+</div>

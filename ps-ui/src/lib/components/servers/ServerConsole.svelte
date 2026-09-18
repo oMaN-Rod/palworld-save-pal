@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { MessageType, type Server } from '$types';
+	import { MessageType, type ModError, type Server } from '$types';
+	import { serverErrorText } from './serverErrors';
 	import { getModalState, getServerState, getToastState } from '$states';
 	import { Button, Card, Input } from '$components/ui';
 	import { cn } from '$theme';
@@ -135,18 +136,14 @@
 		}
 		enablingArg = arg;
 		try {
-			const updated = await sendAndWait<Server & { error?: string }>(
+			const updated = await sendAndWait<Server & { error?: string | ModError }>(
 				MessageType.ENSURE_GAMEDATA_LAUNCH_ARG,
 				{ server_id: server.id }
 			);
-			if (updated.error) throw new Error(updated.error);
-			const idx = serverState.servers.findIndex((s) => s.id === updated.id);
-			if (idx >= 0) {
-				serverState.servers[idx] = updated;
-			}
-			if (serverState.selectedServer?.id === updated.id) {
-				serverState.selectedServer = updated;
-			}
+			if (typeof updated.error === 'string') throw new Error(updated.error);
+			const { error, ...saved } = updated;
+			serverState.storeServer(saved);
+			if (error) toast.add(serverErrorText(error, 'update'), m.warning(), 'warning');
 		} catch (err: any) {
 			toast.add(err.message, m.error(), 'error');
 		} finally {

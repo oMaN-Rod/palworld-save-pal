@@ -96,6 +96,24 @@ impl PalworldApiClient {
             Err(_) => 0,
         }
     }
+
+    pub async fn get_server_version(
+        &self,
+        host: &str,
+        port: u16,
+        admin_password: &str,
+    ) -> Option<String> {
+        let result = self
+            .rest_api_call(host, port, admin_password, "info", "GET", None)
+            .await
+            .ok()?;
+        result
+            .get("data")?
+            .get("version")?
+            .as_str()
+            .filter(|version| !version.is_empty())
+            .map(str::to_string)
+    }
 }
 
 #[cfg(test)]
@@ -142,7 +160,10 @@ mod tests {
                 Json(serde_json::json!({"error": "boom"})),
             )
         };
+        let info =
+            || async { Json(serde_json::json!({"version": "v1.0.4.102642", "servername": "s"})) };
         let router = Router::new()
+            .route("/v1/api/info", get(info))
             .route("/v1/api/players", get(players))
             .route("/v1/api/announce", post(announce))
             .route("/v1/api/error", get(server_error))
@@ -212,5 +233,22 @@ mod tests {
         );
         // Nothing listens on port 1 — must return 0, not error.
         assert_eq!(client.get_player_count("127.0.0.1", 1, "secret").await, 0);
+    }
+
+    #[tokio::test]
+    async fn get_server_version_reads_info_and_swallows_errors() {
+        let port = spawn_stub(Captured::default()).await;
+        let client = PalworldApiClient::new();
+        assert_eq!(
+            client
+                .get_server_version("127.0.0.1", port, "secret")
+                .await
+                .as_deref(),
+            Some("v1.0.4.102642")
+        );
+        assert_eq!(
+            client.get_server_version("127.0.0.1", 1, "secret").await,
+            None
+        );
     }
 }

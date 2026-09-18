@@ -1,26 +1,125 @@
 import type {
-	Server,
-	ServerMod,
-	ServerApiResponse,
+	ApplyResult,
 	ContainerStats,
 	CreateServerData,
-	ImportServerData
+	ImportServerData,
+	ModError,
+	Server,
+	ServerApiResponse
 } from '$types';
 import { MessageType } from '$types';
-import { send, sendAndWait } from '$utils/websocketUtils';
+import { send } from '$utils/websocketUtils';
+import { untrack } from 'svelte';
 
-class ServerState {
+function without<T>(record: Record<number, T>, key: number): Record<number, T> {
+	return Object.fromEntries(
+		Object.entries(record).filter(([entry]) => Number(entry) !== key)
+	) as Record<number, T>;
+}
+
+function withKnownRecreate(incoming: Server, stored: Server | null | undefined): Server {
+	if (
+		incoming.container_needs_recreate !== undefined ||
+		stored?.container_needs_recreate === undefined
+	) {
+		return incoming;
+	}
+	return { ...incoming, container_needs_recreate: stored.container_needs_recreate };
+}
+
+export class ServerState {
 	servers = $state<Server[]>([]);
 	selectedServer = $state<Server | null>(null);
 	loading = $state(false);
-	mods = $state<ServerMod[]>([]);
 	apiResponse = $state<ServerApiResponse | null>(null);
 	containerStats = $state<ContainerStats | null>(null);
 	saving = $state(false);
 	creationProgress = $state('');
 	detectedWorkshopDir = $state('');
+	/**
+	 * Cleared by that server's `server_status_update`, which can wait behind a relocation, or when
+	 * the connection that would carry it goes away.
+	 */
+	starting = $state<Record<number, boolean>>({});
+	/** The apply result of the unfinished move, or `true` when there is none to show. */
+	relocationPending = $state<Record<number, ApplyResult | true>>({});
+	relocationError = $state<Record<number, ModError>>({});
+	/** The mods reached their new folders, but setting the server up afterwards failed. */
+	relocationMoved = $state<Record<number, boolean>>({});
 
 	#pollInterval: ReturnType<typeof setInterval> | null = null;
+	#connected: boolean | undefined;
+	#wasConnected = false;
+	#transport: object | null | undefined;
+
+	/**
+	 * A request sent before a drop is never answered, and the remote transport rejects one sent
+	 * during the gap, so a drop and a remote reconnect both release starts and saves.
+	 */
+	connectionChanged(connected: boolean, transport: 'socket' | 'remote' = 'socket'): void {
+		untrack(() => {
+			const dropped = this.#connected === true && !connected;
+			const reconnected = this.#connected === false && connected && this.#wasConnected;
+			this.#connected = connected;
+			if (connected) this.#wasConnected = true;
+			if (dropped || (reconnected && transport === 'remote')) this.#forgetInFlight();
+		});
+	}
+
+	/** The first transport seen is the one in use; any other will never answer earlier requests. */
+	transportChanged(transport: object | null): void {
+		const changed = this.#transport !== undefined && transport !== this.#transport;
+		this.#transport = transport;
+		if (changed) this.#forgetInFlight();
+	}
+
+	#forgetInFlight(): void {
+		this.starting = {};
+		this.saving = false;
+	}
+
+	storeServer(incoming: Server): void {
+		const idx = this.servers.findIndex((s) => s.id === incoming.id);
+		if (idx >= 0) {
+			this.servers[idx] = withKnownRecreate(incoming, this.servers[idx]);
+		}
+		if (this.selectedServer?.id === incoming.id) {
+			this.selectedServer = withKnownRecreate(incoming, this.selectedServer);
+		}
+	}
+
+	finishStart(serverId: number): void {
+		this.starting = without(
+			untrack(() => this.starting),
+			serverId
+		);
+	}
+
+	setRelocation(
+		serverId: number,
+		apply: ApplyResult | null | undefined,
+		error?: ModError,
+		moved = false
+	): void {
+		this.relocationPending = { ...this.relocationPending, [serverId]: apply ?? true };
+		this.relocationError = error
+			? { ...this.relocationError, [serverId]: error }
+			: without(this.relocationError, serverId);
+		this.relocationMoved = moved
+			? { ...this.relocationMoved, [serverId]: true }
+			: without(this.relocationMoved, serverId);
+	}
+
+	/** Keeps whatever detail is already known about the move. */
+	markRelocationPending(serverId: number): void {
+		if (!untrack(() => this.relocationPending[serverId])) this.setRelocation(serverId, null);
+	}
+
+	clearRelocation(serverId: number): void {
+		this.relocationPending = without(this.relocationPending, serverId);
+		this.relocationError = without(this.relocationError, serverId);
+		this.relocationMoved = without(this.relocationMoved, serverId);
+	}
 
 	async loadServers(): Promise<void> {
 		this.loading = true;
@@ -49,6 +148,8 @@ class ServerState {
 	}
 
 	async startServer(serverId: number): Promise<void> {
+		if (untrack(() => this.starting[serverId])) return;
+		this.starting = { ...untrack(() => this.starting), [serverId]: true };
 		send(MessageType.START_SERVER, { server_id: serverId });
 	}
 
@@ -67,32 +168,6 @@ class ServerState {
 			endpoint,
 			method,
 			payload
-		});
-	}
-
-	async loadMods(serverId: number): Promise<void> {
-		send(MessageType.LIST_SERVER_MODS, { server_id: serverId });
-	}
-
-	async toggleMod(serverId: number, modName: string, enabled: boolean): Promise<void> {
-		send(MessageType.TOGGLE_SERVER_MOD, {
-			server_id: serverId,
-			mod_name: modName,
-			enabled
-		});
-	}
-
-	async installMod(
-		serverId: number,
-		modName: string,
-		modData: string,
-		modType: string = 'ue4ss'
-	): Promise<void> {
-		send(MessageType.INSTALL_SERVER_MOD, {
-			server_id: serverId,
-			mod_name: modName,
-			mod_data: modData,
-			mod_type: modType
 		});
 	}
 

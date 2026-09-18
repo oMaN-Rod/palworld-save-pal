@@ -22,6 +22,7 @@ export interface Server {
 	mods_path: string;
 	logicmods_path: string;
 	nativemods_path: string;
+	paks_path: string;
 	install_path: string;
 	steamcmd_path: string;
 	pid: number | null;
@@ -35,21 +36,15 @@ export interface Server {
 	env_vars: Record<string, any>;
 	created_at: string;
 	updated_at: string;
+	/** Sent only by list_servers and get_server; other server replies omit it. */
+	container_needs_recreate?: boolean;
 	status?: ServerStatus;
 	player_count?: number;
 	total_players?: number;
-}
-
-export interface ServerMod {
-	mod_name: string;
-	display_name?: string;
-	mod_type: 'ue4ss' | 'logic' | 'native' | 'lua' | 'palschema' | 'paks' | 'unknown';
-	mod_version?: string;
-	mod_author?: string;
-	/** False when no InstallRule in Info.json opts in with IsServer. */
-	is_server?: boolean;
-	source?: 'workshop' | 'local' | 'config';
-	enabled: boolean;
+	/** Reported by the server's REST API, so only known while it runs. */
+	version?: string | null;
+	/** Newest version Pocketpair announced on Steam; sent only alongside `version`. */
+	latest_version?: string | null;
 }
 
 export interface CreateServerData {

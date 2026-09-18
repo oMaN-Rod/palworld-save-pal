@@ -8,6 +8,11 @@
 	import ServerModsPanel from './ServerModsPanel.svelte';
 	import ServerConsole from './ServerConsole.svelte';
 	import ServerSavePanel from './ServerSavePanel.svelte';
+	import ApplyResult from '$components/mods/ApplyResult.svelte';
+	import type { ModsTab } from '$components/mods';
+	import * as m from '$i18n/messages';
+	import { serverErrorText } from './serverErrors';
+	import { availableUpdate } from './serverVersion';
 
 	let { server } = $props<{ server: Server }>();
 
@@ -16,9 +21,21 @@
 
 	type Tab = 'overview' | 'settings' | 'mods' | 'console' | 'saves';
 	let activeTab: Tab = $state('overview');
+	let modsTab = $state<ModsTab>('mods');
+
+	const starting = $derived(serverState.starting[server.id] ?? false);
+	const relocation = $derived(serverState.relocationPending[server.id]);
+	const relocationError = $derived(serverState.relocationError[server.id]);
+	const relocationMoved = $derived(serverState.relocationMoved[server.id] ?? false);
+
+	function showModsTab(tab: ModsTab) {
+		modsTab = tab;
+		activeTab = 'mods';
+	}
 
 	const isRunning = $derived(server.status?.running ?? false);
 	const isNative = $derived(server.server_type === 'native');
+	const updateVersion = $derived(availableUpdate(server.version, server.latest_version));
 	const stats = $derived(serverState.containerStats);
 
 	let statsInterval: ReturnType<typeof setInterval> | null = null;
@@ -101,6 +118,7 @@
 		<div class="flex items-center gap-2">
 			<Button
 				variant="neutral"
+				loading={!isRunning && starting}
 				onclick={() =>
 					isRunning ? serverState.stopServer(server.id) : serverState.startServer(server.id)}
 			>
@@ -117,6 +135,35 @@
 			</Button>
 		</div>
 	</div>
+
+	{#if server.container_needs_recreate === true}
+		<Card padding="p-3" class="flex items-start gap-2 text-sm">
+			<Icon icon="tabler:info-circle" size={16} class="text-primary-400 mt-0.5 shrink-0" />
+			<span role="status">{m.servers_container_recreate_notice()}</span>
+		</Card>
+	{/if}
+
+	{#if relocation}
+		<Card padding="p-3" class="border-warning-500/40 bg-warning-500/10 flex flex-col gap-3 border">
+			<p class="text-warning-400 flex items-start gap-2 text-sm font-medium">
+				<Icon icon="tabler:alert-triangle" size={16} class="mt-0.5 shrink-0" />
+				<span>
+					{relocationMoved ? m.servers_relocation_setup_failed() : m.servers_relocation_pending()}
+				</span>
+			</p>
+			{#if relocationError}
+				<p class="text-error-400 text-sm">{serverErrorText(relocationError, 'start')}</p>
+			{/if}
+			{#if relocation !== true}
+				<ApplyResult result={relocation} targetId={`server-${server.id}`} onShowTab={showModsTab} />
+			{/if}
+			<div>
+				<Button size="sm" loading={starting} onclick={() => serverState.startServer(server.id)}>
+					{m.servers_try_again()}
+				</Button>
+			</div>
+		</Card>
+	{/if}
 
 	<div class="border-surface-700 flex gap-1 border-b">
 		{#each tabs as tab}
@@ -161,6 +208,23 @@
 						{#if (server.total_players ?? 0) > 0}
 							<p class="text-surface-400 text-xs">
 								{Math.max(0, (server.total_players ?? 0) - (server.player_count ?? 0))} offline
+							</p>
+						{/if}
+					</Card>
+					<Card>
+						<h4 class="text-surface-400 mb-1 text-xs font-medium uppercase">Server Version</h4>
+						<p class="flex items-center gap-2 text-lg font-bold">
+							<Icon icon="tabler:versions" size={18} class="text-primary-400" />
+							{server.version ?? '—'}
+						</p>
+						{#if updateVersion}
+							<p class="text-warning-400 flex items-center gap-1 text-xs">
+								<Icon icon="tabler:arrow-up-circle" size={12} />
+								Update {updateVersion} available
+							</p>
+						{:else if !server.version}
+							<p class="text-surface-400 text-xs">
+								{isRunning ? 'Waiting for REST API' : 'Available while running'}
 							</p>
 						{/if}
 					</Card>
@@ -250,7 +314,7 @@
 		{:else if activeTab === 'settings'}
 			<ServerSettingsForm {server} />
 		{:else if activeTab === 'mods'}
-			<ServerModsPanel {server} />
+			<ServerModsPanel {server} bind:tab={modsTab} />
 		{:else if activeTab === 'console'}
 			<ServerConsole {server} />
 		{:else if activeTab === 'saves'}
