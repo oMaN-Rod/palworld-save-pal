@@ -1,9 +1,8 @@
-//! The pal legality validator — the "illegal pals checker" ported from
-//! PalSavTools' `pal_validator.py`. A pure function over one pal's
-//! `SaveParameter` and CharacterID against the game-data catalogs; no I/O, no
-//! per-instance state.
+//! The pal legality validator — the "illegal pals checker". A pure function
+//! over one pal's `SaveParameter` and CharacterID against the game-data
+//! catalogs; no I/O, no per-instance state.
 //!
-//! Design rules (inherited from the reference):
+//! Design rules:
 //! * **Low false-positive rate.** Only flag what is *impossible* in a
 //!   legitimate save, never merely unusual. A legitimately-caught level-60
 //!   pal must never be flagged.
@@ -477,9 +476,7 @@ mod tests {
         );
     }
 
-    /// Reference value verified by running the original Python
-    /// `_compute_max_hp` over PalSavTools' own characters.json/skills.json
-    /// with these inputs: Alpaca (hp 90, friendship_hp 4.5), level 12, rank 2,
+    /// The expected value is the game-accurate ceiling for these inputs: Alpaca (hp 90, friendship_hp 4.5), level 12, rank 2,
     /// Talent_HP 40, Rank_HP 3, friendship 7500 (rank 1), HP_ACC_up1 (+10%)
     /// → base 1164, base_wc 1222, trust 37, final floor(1259·1.09·1.10)=1509.
     #[test]

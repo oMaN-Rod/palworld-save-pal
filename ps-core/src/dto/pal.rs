@@ -183,7 +183,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn pal_dto_deserializes_python_input_shape() {
+    fn pal_dto_deserializes_the_frontend_edit_payload() {
         // Shape sent by the frontend for clone_pal: no character_key,
         // is_predator or filtered_nickname.
         let payload = serde_json::json!({

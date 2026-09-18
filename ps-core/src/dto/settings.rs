@@ -28,7 +28,7 @@ mod tests {
     use super::{SettingsDto, SettingsUpdateDto};
 
     #[test]
-    fn settings_dto_serializes_all_six_fields_in_python_order() {
+    fn settings_dto_pins_all_six_fields_in_wire_order() {
         let dto = SettingsDto {
             language: "en".into(),
             save_dir: "C:\\Saves".into(),

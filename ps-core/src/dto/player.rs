@@ -176,7 +176,7 @@ mod tests {
     }
 
     #[test]
-    fn player_dto_deserializes_minimal_python_input_shape_with_defaults() {
+    fn player_dto_deserializes_a_minimal_payload_with_defaults() {
         let dto: PlayerDto = serde_json::from_value(minimal_player_dto_request_payload()).unwrap();
         assert_eq!(dto.nickname, "Tester");
         assert_eq!(dto.level, 25);

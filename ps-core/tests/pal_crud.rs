@@ -214,7 +214,7 @@ fn add_player_pal_from_dto_writes_the_target_player_as_owner_when_the_source_own
 }
 
 #[test]
-fn unloaded_player_errors_with_python_message() {
+fn unloaded_player_errors_with_the_documented_message() {
     let mut session = common::load_fixture_session("world1");
     let data = game_data();
     let ghost = Uuid::new_v4();
@@ -532,9 +532,9 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
         new_pal.owner_uid, None,
         "a base worker has no player owner, whatever the raw key holds"
     );
-    // Reproduces base.py's safe_remove-wrong-dict no-op: OwnerPlayerUId stays present
-    // (nil), never actually removed. Only the raw key can show that -- the dto reports
-    // a nil owner as `None`, exactly as it reports an absent one.
+    // OwnerPlayerUId stays present (nil) rather than being removed. Only the raw key
+    // can show that -- the dto reports a nil owner as `None`, exactly as it reports an
+    // absent one.
     let raw_owner = world::character_map(&session.level)
         .unwrap()
         .iter()
@@ -979,8 +979,8 @@ fn clone_pal_at_slot_zero_is_reported_as_box_full() {
     assert_eq!(
         view.slots.len(),
         1,
-        "the orphaned slot from the failed clone attempt must remain, matching \
-         Python's own mutate-then-bail behavior"
+        "the orphaned slot from the failed clone attempt must remain: the clone \
+         mutates before it bails"
     );
     assert_eq!(view.slots[0].slot_index, 0);
     let orphan_pal_id = view.slots[0].pal_id.unwrap();
@@ -1187,8 +1187,7 @@ fn add_player_dps_pal_into_a_recycled_slot_inherits_a_stale_is_rare_pal_flag() {
         new_pal.is_lucky,
         Some(true),
         "reset() never touches IsRarePal -- a recycled slot's stale lucky \
-         flag survives into the freshly created pal (a found-but-unlisted \
-         save-fidelity quirk; see this task's report)"
+         flag survives into the freshly created pal (a save-fidelity quirk, not a design choice)"
     );
 }
 
@@ -1283,9 +1282,8 @@ fn add_player_dps_pal_writes_a_flat_default_full_stomach_for_a_never_used_slot()
     assert_eq!(slot_index, 0);
     assert_eq!(
         new_pal.stomach, 300.0,
-        "_set_max_stomach() (pal.py) falls back to the flat 300.0 default \
-         when the slot's PREVIOUS (pre-reset) CharacterID -- \"None\" here \
-         -- has no pals.json entry"
+        "max stomach falls back to the flat 300.0 default when the slot's \
+         PREVIOUS (pre-reset) CharacterID -- \"None\" here -- has no pals.json entry"
     );
 }
 
@@ -1309,11 +1307,10 @@ fn add_player_dps_pal_into_a_recycled_slot_overwrites_stale_full_stomach_using_t
     assert_eq!(slot_index, 1);
     assert_eq!(
         new_pal.stomach, 540.0,
-        "_set_max_stomach() (pal.py) runs during Pal.__init__, BEFORE reset()/ \
-         character_id reassignment -- it keys off the slot's PREVIOUS \
-         occupant (\"Anubis\", max_full_stomach 540.0 per data/json/pals.json), \
-         never the stale 999.0 already in the slot and never the newly- \
-         requested \"Sheepball\" -- see this task's report"
+        "max stomach is resolved BEFORE the character_id reassignment, so it \
+         keys off the slot's PREVIOUS occupant (\"Anubis\", max_full_stomach \
+         540.0 per data/json/pals.json), never the stale 999.0 already in the \
+         slot and never the newly-requested \"Sheepball\""
     );
 }
 
@@ -1369,8 +1366,7 @@ fn delete_player_dps_pals_resets_the_slot_and_clears_the_outer_instance_id() {
         outer_instance_id,
         ps_core::props::EMPTY_UUID,
         "the outer slot InstanceId.InstanceId must also be cleared to EMPTY \
-         (Pal.reset()'s `self.instance_id = PalObjects.EMPTY_UUID`, missed \
-         by the brief's own reference code -- see this task's report)"
+         not just the nested one"
     );
 }
 

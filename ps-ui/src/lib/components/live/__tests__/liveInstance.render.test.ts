@@ -1,5 +1,7 @@
 // @vitest-environment jsdom
-import { render } from '@testing-library/svelte';
+import * as m from '$i18n/messages';
+import { c } from '$lib/utils/commonTranslations';
+import { fireEvent, render } from '@testing-library/svelte';
 import { tick } from 'svelte';
 import { describe, expect, it, vi } from 'vitest';
 import '../../pal/__tests__/fixtures/matchMediaPolyfill';
@@ -13,7 +15,8 @@ const INSTANCES = [
 		name: 'Solo World',
 		host: '127.0.0.1',
 		port: 52104,
-		live: true
+		live: true,
+		targetId: null
 	},
 	{
 		id: 'saved:1',
@@ -21,7 +24,8 @@ const INSTANCES = [
 		name: 'Remote box',
 		host: '10.0.0.14',
 		port: 8788,
-		live: false
+		live: false,
+		targetId: null
 	}
 ];
 
@@ -192,10 +196,12 @@ describe('LiveInstanceModal', () => {
 
 	it('blocks save until host, port and token are filled', async () => {
 		const onsave = vi.fn();
-		const { container } = render(LiveInstanceModal, {
+		const { getByRole } = render(LiveInstanceModal, {
 			props: { initial, ontest: vi.fn(), onsave, oncancel: vi.fn() }
 		});
-		(container.querySelector('[data-action="save"]') as HTMLElement).click();
+		const save = getByRole('button', { name: c.save }) as HTMLButtonElement;
+		expect(save.disabled).toBe(true);
+		save.click();
 		await tick();
 		expect(onsave).not.toHaveBeenCalled();
 	});
@@ -214,7 +220,7 @@ describe('LiveInstanceModal', () => {
 
 	it('surfaces a failed test result', async () => {
 		const ontest = vi.fn().mockResolvedValue({ ok: false, error: 'timeout' });
-		const { container, getByText } = render(LiveInstanceModal, {
+		const { getByRole, getByText } = render(LiveInstanceModal, {
 			props: {
 				initial: { name: 'Dead', host: '127.0.0.1', port: 1, token: 't' },
 				ontest,
@@ -222,15 +228,49 @@ describe('LiveInstanceModal', () => {
 				oncancel: vi.fn()
 			}
 		});
-		(container.querySelector('[data-action="test"]') as HTMLElement).click();
+		await fireEvent.click(getByRole('button', { name: m.live_instance_test() }));
 		await tick();
 		await tick();
+		expect(ontest).toHaveBeenCalled();
 		expect(getByText('Could not connect')).toBeTruthy();
+	});
+
+	it('hands cancel straight back to the caller', async () => {
+		const oncancel = vi.fn();
+		const { getByRole } = render(LiveInstanceModal, {
+			props: {
+				initial: { name: 'Remote', host: '127.0.0.1', port: 8788, token: 's3cr3t' },
+				ontest: vi.fn(),
+				onsave: vi.fn(),
+				oncancel
+			}
+		});
+		await fireEvent.click(getByRole('button', { name: m.cancel() }));
+		expect(oncancel).toHaveBeenCalled();
+	});
+
+	it('saves the trimmed fields once they are all filled', async () => {
+		const onsave = vi.fn();
+		const { getByRole } = render(LiveInstanceModal, {
+			props: {
+				initial: { name: '  Home  ', host: ' 127.0.0.1 ', port: 8788, token: 's3cr3t' },
+				ontest: vi.fn(),
+				onsave,
+				oncancel: vi.fn()
+			}
+		});
+		await fireEvent.click(getByRole('button', { name: c.save }));
+		expect(onsave).toHaveBeenCalledWith({
+			name: 'Home',
+			host: '127.0.0.1',
+			port: 8788,
+			token: 's3cr3t'
+		});
 	});
 
 	it('blocks test when the port is cleared', async () => {
 		const ontest = vi.fn();
-		const { container } = render(LiveInstanceModal, {
+		const { container, getByRole } = render(LiveInstanceModal, {
 			props: {
 				initial: { name: 'Remote', host: '10.0.0.14', port: 8788, token: 's3cr3t' },
 				ontest,
@@ -242,7 +282,9 @@ describe('LiveInstanceModal', () => {
 		portInput.value = '';
 		portInput.dispatchEvent(new Event('input'));
 		await tick();
-		(container.querySelector('[data-action="test"]') as HTMLElement).click();
+		const test = getByRole('button', { name: m.live_instance_test() }) as HTMLButtonElement;
+		expect(test.disabled).toBe(true);
+		test.click();
 		await tick();
 		expect(ontest).not.toHaveBeenCalled();
 	});

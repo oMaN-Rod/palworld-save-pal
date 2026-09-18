@@ -5,9 +5,10 @@
 pub enum SteamIdError {
     #[error("Vanity URLs (/id/) are not supported. Use the numeric Steam ID from the profile URL (/profiles/...) instead.")]
     VanityUrl,
-    // Carries the text left after URL / `steam_` prefix stripping. The message
-    // wording is part of the wire contract the frontend matches on.
-    #[error("invalid literal for int() with base 10: '{0}'")]
+    // Quotes the text left after URL / `steam_` prefix stripping, not the raw
+    // input: that is the part that actually failed to parse. The frontend shows
+    // this string to the user as-is.
+    #[error("'{0}' is not a numeric Steam ID")]
     NotNumeric(String),
     #[error("invalid uuid")]
     BadUuid,

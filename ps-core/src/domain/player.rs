@@ -1462,8 +1462,8 @@ fn apply_relic_counters(
 ///     matching `apply_unlock_flags`' precedent for a lazily-created property.
 ///     A pre-1.0 save edited to all-zero counts therefore stays untouched.
 ///   - A type the DTO names gains a key even at 0: 0-keys are a real game
-///     state (the fixture saves carry them), and PalSavTools' PUT writes every
-///     provided key the same way. Types the DTO does NOT name are left alone.
+///     state (the fixture saves carry them), so every provided key is written.
+///     Types the DTO does NOT name are left alone.
 ///   - Each count clamps to `[0, cumulative_max]` from `data/json/relic_data.json`,
 ///     the illegal-value guard: the game has no UI for an over-max count.
 ///   - Unknown keys in `counts` (a forged or future-typed payload) are dropped,
@@ -1606,7 +1606,7 @@ fn apply_relic_possess_counts(
             }
             // A type the DTO names gains a key even at 0: a 0-key is a real
             // game state (the fixture saves carry them -- "bought the statue
-            // listing, nothing held"), and PalSavTools' PUT writes the same.
+            // listing, nothing held"), so the key is written either way.
             None => entries.push(crate::ue::MapEntry {
                 // The map's declared key type is EnumProperty; a NameProperty
                 // here would not read back as a relic type.

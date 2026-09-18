@@ -84,13 +84,18 @@ fn assert_round_trips(session: &SaveSession) {
     reparse(&bytes).unwrap_or_else(|e| panic!("the written save did not reparse: {e}"));
 }
 
-fn load_game_data() -> GameData {
-    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+/// Shared across every test in this binary: `GameData` is read-only here, and
+/// parsing 28 MB of JSON once per test dominated the run.
+fn load_game_data() -> &'static GameData {
+    static GAME_DATA: std::sync::LazyLock<GameData> = std::sync::LazyLock::new(|| {
+        GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+    });
+    &GAME_DATA
 }
 
 struct Harness {
     session: SaveSession,
-    game_data: GameData,
+    game_data: &'static GameData,
     manifest: Manifest,
     sources: BTreeMap<String, String>,
 }
@@ -124,7 +129,7 @@ impl Harness {
             },
             RunServices {
                 session: &mut self.session,
-                game_data: &self.game_data,
+                game_data: self.game_data,
                 progress: None,
                 storage: &BTreeMap::new(),
                 confirm: None,
@@ -391,7 +396,7 @@ fn scanning_then_fixing_the_selection_writes_the_clamps_to_the_save() {
         .filter_map(|row| row.get("instance_id").and_then(|v| v.as_str()).map(str::to_string))
         .collect();
     let spared_levels_before: Vec<(Uuid, i64)> = {
-        let all = ps_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+        let all = ps_core::domain::pal::pal_summaries(&h.session, h.game_data)
             .expect("pal summaries");
         all.iter()
             .filter(|s| !selected.iter().any(|chosen| chosen == &s.instance_id.to_string()))
@@ -418,7 +423,7 @@ fn scanning_then_fixing_the_selection_writes_the_clamps_to_the_save() {
     assert!(fix.counts.get("clamps").copied().unwrap_or(0) > 0);
 
     // Read the save back, not the widget.
-    let after = ps_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+    let after = ps_core::domain::pal::pal_summaries(&h.session, h.game_data)
         .expect("pal summaries after the fix");
     for id in &selected {
         let summary = after
@@ -635,13 +640,13 @@ fn fix_illegal_players_clamps_a_stat_the_scan_reported() {
         .expect("the fixture has a player");
     let uid = player_id.to_string();
 
-    let mut dto = player::get_player_details(&mut h.session, &h.game_data, player_id, &null_progress())
+    let mut dto = player::get_player_details(&mut h.session, h.game_data, player_id, &null_progress())
         .expect("player read")
         .expect("the player exists");
     dto.status_point_list.insert("max_hp".to_string(), 99);
     let mut modified = OrderedMap::new();
     modified.insert(player_id, dto);
-    player::update_players(&mut h.session, &h.game_data, &modified, &null_progress())
+    player::update_players(&mut h.session, h.game_data, &modified, &null_progress())
         .expect("the seed write must succeed");
 
     let scan = h.run("scan_illegal_players", serde_json::json!({ "max_points": 50 }), false);
@@ -927,7 +932,7 @@ fn seed_sick_pals(session: &mut SaveSession, count: usize) -> usize {
 fn orphan_a_contained_pal(h: &mut Harness) -> (Uuid, Uuid) {
     let player_id = *h.session.player_summaries.keys().next().expect("a player");
     let details =
-        player::get_player_details(&mut h.session, &h.game_data, player_id, &null_progress())
+        player::get_player_details(&mut h.session, h.game_data, player_id, &null_progress())
             .expect("player read")
             .expect("the player exists");
     let pal_id = details
@@ -1125,7 +1130,7 @@ fn repair_items_converges_and_round_trips() {
     let mut h = Harness::new();
     let (container_id, slot_index) = break_one_item_link(&mut h.session);
     assert!(
-        !container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        !container_holds_slot(&mut h.session, h.game_data, container_id, slot_index),
         "precondition: a slot whose record is gone is dropped by the reader, not reported"
     );
 
@@ -1134,7 +1139,7 @@ fn repair_items_converges_and_round_trips() {
     let predicted = dry.result.expect("a result")["counts"]["repaired"].as_i64();
     assert_eq!(predicted, Some(1), "the dry run must see the one broken link");
     assert!(
-        !container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        !container_holds_slot(&mut h.session, h.game_data, container_id, slot_index),
         "a dry run must not have repaired anything"
     );
 
@@ -1149,7 +1154,7 @@ fn repair_items_converges_and_round_trips() {
     // The user-visible point of the command: the item comes back instead of
     // being silently deleted the next time its container is written.
     assert!(
-        container_holds_slot(&mut h.session, &h.game_data, container_id, slot_index),
+        container_holds_slot(&mut h.session, h.game_data, container_id, slot_index),
         "the repaired slot must survive the reader again"
     );
 
@@ -1221,7 +1226,7 @@ fn misresize_a_players_common_container(h: &mut Harness) {
         },
         RunServices {
             session: &mut h.session,
-            game_data: &h.game_data,
+            game_data: h.game_data,
             progress: None,
             storage: &BTreeMap::new(),
             confirm: None,
@@ -1312,7 +1317,7 @@ fn shrink_a_players_expansions(h: &mut Harness) {
         },
         RunServices {
             session: &mut h.session,
-            game_data: &h.game_data,
+            game_data: h.game_data,
             progress: None,
             storage: &BTreeMap::new(),
             confirm: None,
@@ -1371,7 +1376,7 @@ fn trim_overfilled_inventories_refuses_rather_than_dropping_an_occupied_slot() {
         "the deliberately shrunk player's resize must be refused, not silently skipped or applied"
     );
 
-    let dto = containers::read_item_container(&h.session.level, &mut h.session.caches, &h.game_data, common_id, "", None)
+    let dto = containers::read_item_container(&h.session.level, &mut h.session.caches, h.game_data, common_id, "", None)
         .expect("the refused container must still be readable");
     assert_eq!(dto.slot_num, 48, "a refusal must leave the container's own size untouched");
     let slot_47 = dto.slots.iter().find(|s| s.slot_index == 47).expect("the item at slot 47 must survive the refusal");

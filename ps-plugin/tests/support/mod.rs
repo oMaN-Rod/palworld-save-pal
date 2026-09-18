@@ -83,15 +83,35 @@ fn load_corpus() -> SaveSession {
     .expect("the corpus fixture must load; a failure here is a repo bug")
 }
 
-pub fn load_game_data() -> GameData {
-    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+/// Parsed once per test binary: 28 MB of JSON, read-only, and every harness
+/// wants the same catalogs.
+pub fn load_game_data() -> &'static GameData {
+    static GAME_DATA: std::sync::LazyLock<GameData> = std::sync::LazyLock::new(|| {
+        GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+    });
+    &GAME_DATA
+}
+
+/// The shared catalogs, unless a test swapped in a purpose-built set.
+enum TestGameData {
+    Shipped,
+    Custom(GameData),
+}
+
+impl TestGameData {
+    fn get(&self) -> &GameData {
+        match self {
+            TestGameData::Shipped => load_game_data(),
+            TestGameData::Custom(data) => data,
+        }
+    }
 }
 
 type ConfirmFn = Box<dyn Fn(&str) -> bool>;
 
 pub struct Harness {
     session: SaveSession,
-    game_data: GameData,
+    game_data: TestGameData,
     granted: Vec<Capability>,
     dry_run: bool,
     limits: Limits,
@@ -108,7 +128,7 @@ pub struct Harness {
 fn build(granted: &[Capability], dry_run: bool, limits: Limits) -> Harness {
     Harness {
         session: load_corpus(),
-        game_data: load_game_data(),
+        game_data: TestGameData::Shipped,
         granted: granted.to_vec(),
         dry_run,
         limits,
@@ -149,7 +169,9 @@ impl Harness {
     /// both by leaving its catalog empty rather than erroring, so this is
     /// `GameData::from_entries` over nothing, not a corrupted-file fixture.
     pub fn with_empty_game_data(mut self) -> Self {
-        self.game_data = GameData::from_entries(std::iter::empty()).expect("an empty entry set always parses");
+        self.game_data = TestGameData::Custom(
+            GameData::from_entries(std::iter::empty()).expect("an empty entry set always parses"),
+        );
         self
     }
 
@@ -158,7 +180,9 @@ impl Harness {
     /// not happen to contain.
     pub fn with_game_data_entries(mut self, entries: &[(&str, &str)]) -> Self {
         let owned = entries.iter().map(|(key, json)| (key.to_string(), json.to_string()));
-        self.game_data = GameData::from_entries(owned).expect("the test entries must parse");
+        self.game_data = TestGameData::Custom(
+            GameData::from_entries(owned).expect("the test entries must parse"),
+        );
         self
     }
 
@@ -171,7 +195,7 @@ impl Harness {
         let mut sandbox = Sandbox::new(self.limits, Cancel::new()).expect("a sandbox must open");
         let mut ctx = RunContext::new(
             &mut self.session,
-            &self.game_data,
+            self.game_data.get(),
             self.granted.clone(),
             self.dry_run,
             std::mem::take(&mut self.log),

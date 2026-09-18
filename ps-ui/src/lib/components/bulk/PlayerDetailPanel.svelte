@@ -27,7 +27,7 @@
 </script>
 
 <div
-	class="bg-surface-800/80 text-on-surface h-[calc(100vh-84px)] shrink-0 overflow-hidden shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out"
+	class="bg-surface-800/80 text-on-surface h-[calc(100vh-var(--titlebar-h)-84px)] shrink-0 overflow-hidden shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out"
 	style:width={expanded ? '420px' : '0px'}
 >
 	<div class="flex h-full w-105 flex-col overflow-y-auto p-4">

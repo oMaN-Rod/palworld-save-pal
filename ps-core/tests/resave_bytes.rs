@@ -238,7 +238,7 @@ fn rename_world_updates_meta_and_survives_resave() {
 }
 
 #[test]
-fn set_world_name_without_level_meta_errors_with_python_message() {
+fn set_world_name_without_level_meta_errors() {
     let level = read_level_only();
     let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
     assert!(session.level_meta.is_none());
@@ -368,7 +368,7 @@ fn add_player_pal_then_resave_succeeds_and_pal_round_trips() {
     // `HP` property: the reader looks at `Hp`, which the new entry never sets.
     assert_eq!(
         new_pal.hp, 545_000,
-        "a newly added pal must report Python's placeholder HP, not the computed max_hp"
+        "a newly added pal must report the placeholder HP, not the computed max_hp"
     );
 
     let sav_bytes = session
@@ -419,7 +419,7 @@ fn add_guild_pal_then_resave_succeeds_and_pal_round_trips() {
 
     assert_eq!(
         new_pal.hp, 545_000,
-        "a newly added guild pal must report Python's placeholder HP, not the computed max_hp"
+        "a newly added guild pal must report the placeholder HP, not the computed max_hp"
     );
 
     let sav_bytes = session

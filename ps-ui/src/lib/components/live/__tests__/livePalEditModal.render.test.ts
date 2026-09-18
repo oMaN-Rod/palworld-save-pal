@@ -3,6 +3,11 @@ import '../../pal/__tests__/fixtures/matchMediaPolyfill';
 import './fixtures/animatePolyfill';
 import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
+vi.mock('$components/pal/PalModelViewer.svelte', async () => ({
+	default: (await import('./fixtures/PalModelViewerStub.svelte')).default
+}));
+
 import LivePalEditModal from '../LivePalEditModal.svelte';
 import { expData } from '$lib/data';
 import { clearFriendship, seedFriendship } from './fixtures/friendshipFixture';
@@ -175,6 +180,6 @@ describe('LivePalEditModal', () => {
 		});
 
 		expect(screen.getByText('Fluffy')).toBeTruthy();
-		expect(screen.getByText('TestPal')).toBeTruthy();
+		expect(screen.getAllByText('TestPal').length).toBeGreaterThan(0);
 	});
 });

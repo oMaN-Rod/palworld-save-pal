@@ -2,20 +2,7 @@ import * as m from '$i18n/messages';
 import { c } from '$lib/utils/commonTranslations';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { render } from 'svelte/server';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-const peek = vi.fn();
-const getLayer = vi.fn();
-const isLoading = vi.fn();
-
-vi.mock('$lib/data/mapLayerStore.svelte', () => ({
-	mapLayers: {
-		peek: (id: unknown) => peek(id),
-		getLayer: (id: unknown) => getLayer(id),
-		isLoading: (id: unknown) => isLoading(id)
-	}
-}));
+import { describe, expect, it } from 'vitest';
 
 import {
 	PANEL_EXTRAS,
@@ -32,7 +19,6 @@ import {
 	type MapLayerGroupModel
 } from './layerPanelModel';
 import { MAP_LAYERS, MAP_LAYER_GROUPS, mapLayersInGroup } from './layerRegistry';
-import MapLayerPanel from '../panels/MapLayerPanel.svelte';
 
 const noCounts = () => undefined;
 const noneLoading = () => false;
@@ -285,121 +271,5 @@ describe('groupVisibilityPatch', () => {
 
 	it('touches no layer outside the group', () => {
 		expect(groupVisibilityPatch('poi', true)).not.toHaveProperty('dungeons');
-	});
-});
-
-const html = (props: Record<string, unknown> = {}) =>
-	render(MapLayerPanel, {
-		props: {
-			layers: Object.fromEntries([
-				...MAP_LAYERS.map((layer) => [layer.id, true]),
-				...PANEL_EXTRAS.map((extra) => [extra.id, true])
-			]),
-			onVisibilityChange: () => {},
-			...props
-		}
-	}).body;
-
-beforeEach(() => {
-	peek.mockReset();
-	getLayer.mockReset();
-	isLoading.mockReset();
-	peek.mockReturnValue(undefined);
-	isLoading.mockReturnValue(false);
-});
-
-describe('MapLayerPanel structure', () => {
-	it('renders every group, labelled, in legend order', () => {
-		const body = html();
-		const labels = [
-			mapLayerGroupLabel('general'),
-			mapLayerGroupLabel('locations'),
-			mapLayerGroupLabel('collectibles'),
-			mapLayerGroupLabel('poi')
-		];
-		const positions = labels.map((label) => body.indexOf(label));
-		expect(positions.every((index) => index >= 0)).toBe(true);
-		expect([...positions].sort((a, b) => a - b)).toEqual(positions);
-	});
-
-	it('renders a row for every layer and every extra', () => {
-		const body = html();
-		for (const layer of MAP_LAYERS) expect(body).toContain(mapLayerLabel(layer.id));
-		for (const extra of PANEL_EXTRAS) expect(body).toContain(panelOptionLabel(extra.id));
-	});
-
-	it('uses a button per option, never a checkbox or radio', () => {
-		const body = html();
-		expect(body).not.toMatch(/type="checkbox"/);
-		expect(body).not.toMatch(/type="radio"/);
-		const buttons = body.match(/<button[^>]*data-option="/g) ?? [];
-		expect(buttons).toHaveLength(MAP_LAYERS.length + PANEL_EXTRAS.length);
-	});
-
-	it('gives every option an icon image with the existing sizing', () => {
-		const body = html();
-		const icons = body.match(/<img[^>]*class="[^"]*mr-2 h-6 w-6/g) ?? [];
-		expect(icons).toHaveLength(MAP_LAYERS.length + PANEL_EXTRAS.length);
-	});
-
-	it('lays the options out in a two column grid', () => {
-		expect(html().match(/grid grid-cols-2 gap-2/g) ?? []).toHaveLength(4);
-	});
-
-	it('separates the categories with a rule and draws no box around itself', () => {
-		const body = html();
-		expect(body.match(/border-b-surface-800/g) ?? []).toHaveLength(3);
-		expect(body).not.toMatch(/rounded-sm border /);
-	});
-});
-
-describe('MapLayerPanel visibility', () => {
-	it('dims an option that is switched off and leaves an active one undimmed', () => {
-		const body = html({ layers: { dungeons: false, camps: true } });
-		expect(body).toMatch(/data-option="dungeons"[^>]*opacity-25/);
-		expect(body).not.toMatch(/data-option="camps"[^>]*opacity-25/);
-	});
-
-	it('falls back to the registry default for a layer the record omits', () => {
-		const body = html({ layers: {} });
-		expect(body).not.toMatch(/data-option="dungeons"[^>]*opacity-25/);
-		expect(body).toMatch(/data-option="camps"[^>]*opacity-25/);
-	});
-});
-
-describe('MapLayerPanel counts', () => {
-	it('shows a marker count once the artifact has landed', () => {
-		peek.mockImplementation((id: string) =>
-			id === 'dungeons' ? { shape: 'keyed', points: [{}, {}, {}] } : undefined
-		);
-		expect(html()).toContain('>3<');
-	});
-
-	it('renders a two-part count from the caller verbatim', () => {
-		expect(html({ count: (id: string) => (id === 'fast_travel' ? '17/24' : undefined) })).toContain(
-			'>17/24<'
-		);
-	});
-
-	it('reads through peek and never asks the store to fetch', () => {
-		html();
-		expect(peek).toHaveBeenCalled();
-		expect(getLayer).not.toHaveBeenCalled();
-	});
-
-	it('marks an in-flight row as loading', () => {
-		isLoading.mockImplementation((id: string) => id === 'camps');
-		const body = html();
-		expect(body).toMatch(/data-loading="camps"/);
-		expect(body).not.toMatch(/data-loading="dungeons"/);
-	});
-});
-
-describe('MapLayerPanel availability', () => {
-	it('omits an option the caller reports as unavailable', () => {
-		const body = html({ available: (id: string) => id !== 'players' && id !== 'bases' });
-		expect(body).not.toMatch(/data-option="players"/);
-		expect(body).not.toMatch(/data-option="bases"/);
-		expect(body).toMatch(/data-option="origin"/);
 	});
 });

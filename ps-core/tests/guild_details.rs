@@ -45,7 +45,7 @@ fn guild_details_load_real_base_lab_research_and_guild_chest() {
     assert_eq!(
         details.admin_player_uid,
         Some(details.players[0]),
-        "admin = first player (guild.py:76-77)"
+        "the guild admin is its first player"
     );
 
     let lab_research = details.lab_research.clone().unwrap_or_default();

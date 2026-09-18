@@ -523,7 +523,7 @@ fn new_pal_entry_writes_the_real_owned_time_tick_constant() {
         .expect("OwnedTime must be a DateTime struct property");
     assert_eq!(
         owned_time, 638_486_453_957_560_000,
-        "OwnedTime must be PalObjects.TIME verbatim (pal_objects.py), not 0 or the current time"
+        "OwnedTime must be the fixed constant the writer stamps, not 0 or the current time"
     );
 }
 

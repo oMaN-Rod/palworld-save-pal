@@ -12,8 +12,7 @@ use crate::domain::pal::param;
 
 use super::classify::gender_bucket;
 
-/// First-seen-ordered counter: `most_common` in Python, without the
-/// nondeterministic HashMap iteration a plain counter would introduce.
+/// First-seen-ordered counter, so results never depend on HashMap iteration order.
 pub(crate) struct OrderedCounter {
     counts: std::collections::HashMap<String, i64>,
     order: Vec<String>,
@@ -55,8 +54,8 @@ impl OrderedCounter {
     }
 }
 
-/// Python `round(x, 1)` (banker's rounding) — the reference averages use it,
-/// and half-away-from-zero would drift the displayed tenths on exact `.x5`.
+/// Banker's rounding to one decimal: half-away-from-zero would drift the
+/// displayed tenths on an exact `.x5`.
 pub(crate) fn round1(value: f64) -> f64 {
     (value * 10.0).round_ties_even() / 10.0
 }

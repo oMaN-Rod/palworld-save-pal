@@ -179,7 +179,7 @@ mod tests {
     }
 
     #[test]
-    fn item_container_slot_dto_deserializes_python_input_shape_without_local_id() {
+    fn item_container_slot_dto_deserializes_a_payload_without_local_id() {
         let payload = serde_json::json!({
             "slot_index": 0,
             "count": 5,

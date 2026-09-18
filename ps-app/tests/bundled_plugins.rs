@@ -168,8 +168,13 @@ fn game_struct_properties(sv: &ps_core::ue::StructValue) -> Option<&ps_core::ue:
     }
 }
 
-fn load_game_data() -> GameData {
-    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+/// Shared across every test in this binary: `GameData` is read-only here, and
+/// parsing 28 MB of JSON once per test dominated the run.
+fn load_game_data() -> &'static GameData {
+    static GAME_DATA: std::sync::LazyLock<GameData> = std::sync::LazyLock::new(|| {
+        GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+    });
+    &GAME_DATA
 }
 
 /// One `pst.cleanup` command run against a fresh copy of the `v1_relics`
@@ -177,7 +182,7 @@ fn load_game_data() -> GameData {
 /// between tests, matching the pattern `ps-plugin`'s own test harness uses.
 struct Harness {
     session: SaveSession,
-    game_data: GameData,
+    game_data: &'static GameData,
     manifest: Manifest,
     sources: BTreeMap<String, String>,
 }
@@ -208,7 +213,7 @@ impl Harness {
             },
             RunServices {
                 session: &mut self.session,
-                game_data: &self.game_data,
+                game_data: self.game_data,
                 progress: None,
                 storage: &BTreeMap::new(),
                 confirm: None,
@@ -284,10 +289,10 @@ fn manufacture_empty_guild(h: &mut Harness) -> Uuid {
         // `delete_player` requires the player already in `loaded_players`,
         // same as the plugin's own `player.delete()` (`save_write.rs`) does
         // by calling `get_player_details` first.
-        player::get_player_details(&mut h.session, &h.game_data, victim, &progress)
+        player::get_player_details(&mut h.session, h.game_data, victim, &progress)
             .expect("loading a guild's non-admin member must succeed")
             .expect("non-admin member must resolve");
-        let deleted = player::delete_player(&mut h.session, &h.game_data, victim, &progress)
+        let deleted = player::delete_player(&mut h.session, h.game_data, victim, &progress)
             .expect("deleting a guild's non-admin member must succeed");
         assert!(deleted, "non-admin member {victim} must not be refused");
     }
@@ -516,7 +521,7 @@ const BOGUS_ITEM_ID: &str = "PS_Test_Definitely_Bogus_Item";
 fn seed_bogus_item(h: &mut Harness) -> (Uuid, i32) {
     let progress = null_progress();
     let target_uid = h.session.player_summary_order[0];
-    let details = player::get_player_details(&mut h.session, &h.game_data, target_uid, &progress)
+    let details = player::get_player_details(&mut h.session, h.game_data, target_uid, &progress)
         .expect("player details load")
         .expect("the first fixture player exists");
     let container_id = details
@@ -542,7 +547,7 @@ fn seed_bogus_item(h: &mut Harness) -> (Uuid, i32) {
     let slot_index = containers::read_item_container(
         &h.session.level,
         &mut h.session.caches,
-        &h.game_data,
+        h.game_data,
         container_id,
         "",
         None,
@@ -576,7 +581,7 @@ fn seed_bogus_item(h: &mut Harness) -> (Uuid, i32) {
     let seeded = containers::read_item_container(
         &h.session.level,
         &mut h.session.caches,
-        &h.game_data,
+        h.game_data,
         container_id,
         "",
         None,
@@ -634,11 +639,11 @@ fn count_pals_where(session: &SaveSession, predicate: impl Fn(&WorldPalFields) -
 fn seed_pal_with_character_id(h: &mut Harness, character_id: &str) {
     let progress = null_progress();
     let target_uid = h.session.player_summary_order[0];
-    let details = player::get_player_details(&mut h.session, &h.game_data, target_uid, &progress)
+    let details = player::get_player_details(&mut h.session, h.game_data, target_uid, &progress)
         .expect("player details load")
         .expect("the first fixture player exists");
     let pal_box_id = details.pal_box_id.expect("the player has a pal box container");
-    pal::add_player_pal(&mut h.session, &h.game_data, target_uid, character_id, "ps seed", pal_box_id, None)
+    pal::add_player_pal(&mut h.session, h.game_data, target_uid, character_id, "ps seed", pal_box_id, None)
         .expect("adding the seeded pal must succeed")
         .expect("the pal box must have room for the seeded pal");
 }
@@ -714,12 +719,12 @@ fn dps_bytes_for(h: &Harness, uid: Uuid) -> Vec<u8> {
 /// first empty slot itself, so no index bookkeeping is needed to find one.
 fn seed_dps_imported_pal(h: &mut Harness, uid: Uuid) -> i32 {
     let progress = null_progress();
-    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+    player::get_player_details(&mut h.session, h.game_data, uid, &progress)
         .expect("player details load")
         .expect("the dps-owning fixture player exists");
 
     let (slot_index, _dto) =
-        pal::add_player_dps_pal(&mut h.session, &h.game_data, uid, "Lamball", "ps seed", None)
+        pal::add_player_dps_pal(&mut h.session, h.game_data, uid, "Lamball", "ps seed", None)
             .expect("adding a dps pal must succeed")
             .expect("the player's dimensional storage must have an empty slot");
 
@@ -753,13 +758,13 @@ fn seed_dps_imported_pal(h: &mut Harness, uid: Uuid) -> i32 {
 /// player's dimensional storage, returning its slot index.
 fn seed_dps_invalid_pal(h: &mut Harness, uid: Uuid) -> i32 {
     let progress = null_progress();
-    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+    player::get_player_details(&mut h.session, h.game_data, uid, &progress)
         .expect("player details load")
         .expect("the dps-owning fixture player exists");
 
     let (slot_index, _dto) = pal::add_player_dps_pal(
         &mut h.session,
-        &h.game_data,
+        h.game_data,
         uid,
         "PS_NOT_A_REAL_PAL",
         "ps seed",
@@ -875,16 +880,16 @@ fn dps_slot_passive_skills(dps_bytes: &[u8], slot_index: i32) -> Vec<String> {
 /// known skill's id.
 fn seed_dps_passive_skill(h: &mut Harness, uid: Uuid) -> (i32, String) {
     let progress = null_progress();
-    player::get_player_details(&mut h.session, &h.game_data, uid, &progress)
+    player::get_player_details(&mut h.session, h.game_data, uid, &progress)
         .expect("player details load")
         .expect("the dps-owning fixture player exists");
 
     let (slot_index, _dto) =
-        pal::add_player_dps_pal(&mut h.session, &h.game_data, uid, "Lamball", "ps seed", None)
+        pal::add_player_dps_pal(&mut h.session, h.game_data, uid, "Lamball", "ps seed", None)
             .expect("adding a dps pal must succeed")
             .expect("the player's dimensional storage must have an empty slot");
 
-    let valid_skill = known_passive_skill(&h.game_data);
+    let valid_skill = known_passive_skill(h.game_data);
 
     let loaded = h.session.loaded_players.get_mut(&uid).expect("player is loaded");
     let dps_save = loaded.dps.as_mut().expect("player has a dps save");
@@ -1569,7 +1574,7 @@ fn remove_invalid_items_clears_a_seeded_bogus_item_and_keeps_valid_ones() {
     let after = containers::read_item_container(
         &h.session.level,
         &mut h.session.caches,
-        &h.game_data,
+        h.game_data,
         container_id,
         "",
         None,

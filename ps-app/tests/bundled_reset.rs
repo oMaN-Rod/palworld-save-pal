@@ -78,13 +78,18 @@ fn reparse(level_bytes: &[u8]) -> Result<SaveSession, CoreError> {
     reparse_with_dir(&fixture_dir(), level_bytes)
 }
 
-fn load_game_data() -> GameData {
-    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+/// Shared across every test in this binary: `GameData` is read-only here, and
+/// parsing 28 MB of JSON once per test dominated the run.
+fn load_game_data() -> &'static GameData {
+    static GAME_DATA: std::sync::LazyLock<GameData> = std::sync::LazyLock::new(|| {
+        GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+    });
+    &GAME_DATA
 }
 
 struct Harness {
     session: SaveSession,
-    game_data: GameData,
+    game_data: &'static GameData,
     manifest: Manifest,
     sources: BTreeMap<String, String>,
 }
@@ -118,7 +123,7 @@ impl Harness {
             },
             RunServices {
                 session: &mut self.session,
-                game_data: &self.game_data,
+                game_data: self.game_data,
                 progress: None,
                 storage: &BTreeMap::new(),
                 confirm: None,

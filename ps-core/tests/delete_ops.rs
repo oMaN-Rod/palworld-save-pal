@@ -75,7 +75,7 @@ fn delete_admin_player_is_refused_and_nothing_is_deleted() {
 
     let deleted = player::delete_player(&mut session, &data, admin_id, &null_progress()).unwrap();
 
-    assert!(!deleted, "admin deletion refused (player_ops.py:34-40)");
+    assert!(!deleted, "admin deletion refused -- the save never loses its guild admin");
     assert!(session.player_file_refs.contains_key(&admin_id));
     assert!(session.loaded_players.contains_key(&admin_id));
     assert_eq!(
@@ -667,8 +667,8 @@ fn delete_admin_player_is_allowed_when_their_guild_was_never_loaded_this_session
     assert!(
         deleted,
         "an admin whose guild was never loaded this session must be treated as \
-         guildless by delete_player, matching real Python's self._guilds-scoped \
-         _player_guild lookup -- deletion must proceed, not be refused"
+         guildless by delete_player: the guild lookup only sees guilds loaded \
+         this session, so deletion must proceed, not be refused"
     );
     assert!(!world::character_map(&session.level)
         .unwrap()

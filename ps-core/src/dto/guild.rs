@@ -166,7 +166,7 @@ mod tests {
     }
 
     #[test]
-    fn base_dto_deserializes_python_input_shape() {
+    fn base_dto_deserializes_the_frontend_payload_shape() {
         let payload = serde_json::json!({
             "id": "11111111-2222-3333-4444-555555555555",
             "storage_containers": {},

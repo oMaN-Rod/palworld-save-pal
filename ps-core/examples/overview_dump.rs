@@ -1,7 +1,6 @@
 //! Dev-only verification harness: loads a real save directory, computes the
 //! Overview stats, and dumps them as JSON to stdout (or a path given as the
-//! first argument). Used to diff PalStudio's Rust overview against PalSavTools'
-//! reference implementation over the same save.
+//! first argument). Used to eyeball the Overview numbers for a real save.
 //!
 //! Usage: cargo run -p ps-core --example overview_dump -- <save_dir> [out.json]
 

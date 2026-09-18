@@ -105,7 +105,7 @@ fn every_corpus_pal_reads_into_a_dto() {
 }
 
 #[test]
-fn pal_summaries_match_python_defaults() {
+fn pal_summaries_report_sane_levels_and_ranks_for_every_corpus_pal() {
     let session = common::load_corpus_session();
     let data = game_data();
     let summaries = pal::pal_summaries(&session, &data).unwrap();
@@ -121,7 +121,7 @@ fn pal_summaries_match_python_defaults() {
         // covered separately by `pal_summaries_defaults_rank_to_one_when_rank_is_absent`.
         assert!(
             summary.rank >= 1,
-            "no corpus pal has Rank == 0 (summaries.py get_pal_summaries)"
+            "no corpus pal has Rank == 0"
         );
     }
 }
@@ -142,7 +142,7 @@ fn pal_summaries_defaults_rank_to_one_when_rank_is_absent() {
     assert_eq!(1, summaries.len());
     assert_eq!(
         1, summaries[0].rank,
-        "PalSummary defaults rank to 1 when Rank is absent (summaries.py get_pal_summaries)"
+        "PalSummary defaults rank to 1 when Rank is absent"
     );
 }
 
@@ -353,18 +353,18 @@ fn read_save_parameter_dto_applies_every_default_for_an_empty_save_parameter() {
 
     assert_eq!(dto.instance_id, instance_id);
     assert_eq!(dto.character_id, "");
-    assert_eq!(dto.level, 1, "Level defaults to 1 (game/pal.py Pal.level)");
+    assert_eq!(dto.level, 1, "Level defaults to 1");
     assert_eq!(
         dto.rank, 0,
-        "Rank defaults to 0 in the full Pal dump (game/pal.py Pal.rank)"
+        "Rank defaults to 0 in the full Pal dump"
     );
     assert_eq!(
         dto.stomach, 150.0,
-        "FullStomach defaults to 150.0 (game/pal.py Pal.stomach)"
+        "FullStomach defaults to 150.0"
     );
     assert_eq!(
         dto.sanity, 100.0,
-        "SanityValue defaults to 100.0 (game/pal.py Pal.sanity)"
+        "SanityValue defaults to 100.0"
     );
     assert_eq!(dto.hp, 0);
     assert_eq!(dto.exp, 0);

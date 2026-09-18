@@ -148,7 +148,7 @@ async fn save_mode_parses_players_and_computes_chains_from_owned_pals() {
     // To prove chains are COMPUTED (not just echoed), target species the player
     // does NOT own that two owned species combine into — the
     // `breeding_direct_child` handler lists exactly those. The chain solver is
-    // gender-aware (faithful to PalSavTools: a pair needs M+F, wildcard counts
+    // gender-aware (a pair needs M+F, wildcard counts
     // as either), so the solver — not the test — decides which combos actually
     // breed.
     let owned_norm: Vec<String> = owned_species.iter().map(|s| strip_boss(s)).collect();

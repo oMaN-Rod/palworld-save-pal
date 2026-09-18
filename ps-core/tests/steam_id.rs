@@ -6,7 +6,7 @@ struct Vector {
 }
 
 #[test]
-fn conversions_match_python_reference_vectors() {
+fn conversions_match_the_checked_in_reference_vectors() {
     let raw = std::fs::read_to_string(
         std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("tests/fixtures/steam_id_vectors.json"),
@@ -46,19 +46,19 @@ fn input_parsing_accepts_all_supported_formats() {
         ps_core::steam_id::parse_steam_input("https://steamcommunity.com/id/somebody"),
         Err(ps_core::steam_id::SteamIdError::VanityUrl)
     ));
-    // The error message is the wire contract: it quotes the PROCESSED string
-    // (after prefix/URL stripping), not the raw input.
+    // The message quotes the PROCESSED string (after prefix/URL stripping),
+    // not the raw input -- that is the part that failed to parse.
     assert_eq!(
         ps_core::steam_id::parse_steam_input("garbage!!")
             .unwrap_err()
             .to_string(),
-        "invalid literal for int() with base 10: 'garbage!!'"
+        "'garbage!!' is not a numeric Steam ID"
     );
     assert_eq!(
         ps_core::steam_id::parse_steam_input("steam_abc")
             .unwrap_err()
             .to_string(),
-        "invalid literal for int() with base 10: 'abc'"
+        "'abc' is not a numeric Steam ID"
     );
     assert!(ps_core::steam_id::is_palworld_uid(
         "AABBCCDD000000000000000000000000"

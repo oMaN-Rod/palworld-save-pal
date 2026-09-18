@@ -22,9 +22,10 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
     let game_data = Arc::new(ps_core::gamedata::GameData::load(&data_dir.join("json")).unwrap());
     let (live_connections, _live_connections_rx) = tokio::sync::watch::channel(0usize);
     let (live_bus, _live_bus_rx) = tokio::sync::watch::channel(None);
-    let server_services = Arc::new(ps_server::services::ServerServices::with_docker(Arc::new(
-        ps_server::services::docker::mock::MockDocker::default(),
-    )));
+    let server_services = Arc::new(ps_server::services::ServerServices::with_docker(
+        Arc::new(ps_server::services::docker::mock::MockDocker::default()),
+        temp_dir.path(),
+    ));
     build_router(
         Arc::new(AppState {
             config: AppConfig {
@@ -37,6 +38,10 @@ async fn test_router(temp_dir: &tempfile::TempDir) -> axum::Router {
             live_bus,
             ext: Arc::new(ps_server::server_ext::ServerExtRouter {
                 services: server_services,
+                library: ps_server::services::mods::LibraryPaths::new(temp_dir.path()),
+                uploads: Arc::new(ps_server::services::mods::uploads::UploadStore::new(
+                    temp_dir.path(),
+                )),
             }),
             lsp: Arc::new(ps_app::lsp::NullLspService),
             sessions: std::sync::Mutex::new(ps_server::SessionStore::default()),

@@ -82,13 +82,18 @@ fn reparse(level_bytes: &[u8]) -> Result<SaveSession, CoreError> {
     reparse_with_dir(&fixture_dir(), level_bytes)
 }
 
-fn load_game_data() -> GameData {
-    GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+/// Shared across every test in this binary: `GameData` is read-only here, and
+/// parsing 28 MB of JSON once per test dominated the run.
+fn load_game_data() -> &'static GameData {
+    static GAME_DATA: std::sync::LazyLock<GameData> = std::sync::LazyLock::new(|| {
+        GameData::load(&repo_root().join("data/json")).expect("game data is checked in")
+    });
+    &GAME_DATA
 }
 
 struct Harness {
     session: SaveSession,
-    game_data: GameData,
+    game_data: &'static GameData,
     manifest: Manifest,
     sources: BTreeMap<String, String>,
 }
@@ -122,7 +127,7 @@ impl Harness {
             },
             RunServices {
                 session: &mut self.session,
-                game_data: &self.game_data,
+                game_data: self.game_data,
                 progress: None,
                 storage: &BTreeMap::new(),
                 confirm: None,
@@ -275,7 +280,7 @@ fn container_slot_num(session: &mut SaveSession, game_data: &GameData, id: Uuid)
 fn modify_one_container_slots_covers_resize_refusal_and_unknown_id() {
     let mut h = Harness::new();
     let (container_id, original_slots, highest_occupied) =
-        find_occupied_container(&mut h.session, &h.game_data);
+        find_occupied_container(&mut h.session, h.game_data);
 
     let grow_target = original_slots + 5;
     let grown = h.run(
@@ -292,7 +297,7 @@ fn modify_one_container_slots_covers_resize_refusal_and_unknown_id() {
     assert_eq!(grown_counts.get("containers").and_then(|v| v.as_i64()), Some(1));
     assert_eq!(grown_counts.get("refused").and_then(|v| v.as_i64()), Some(0));
     assert_eq!(
-        container_slot_num(&mut h.session, &h.game_data, container_id),
+        container_slot_num(&mut h.session, h.game_data, container_id),
         grow_target,
         "the container must actually hold the requested slot count after a resize"
     );
@@ -312,7 +317,7 @@ fn modify_one_container_slots_covers_resize_refusal_and_unknown_id() {
     assert_eq!(refused_counts.get("containers").and_then(|v| v.as_i64()), Some(0));
     assert_eq!(refused_counts.get("refused").and_then(|v| v.as_i64()), Some(1));
     assert_eq!(
-        container_slot_num(&mut h.session, &h.game_data, container_id),
+        container_slot_num(&mut h.session, h.game_data, container_id),
         grow_target,
         "a refused shrink must leave the container's capacity exactly as the resize left it"
     );
@@ -352,7 +357,7 @@ fn all_container_slot_counts(h: &mut Harness) -> BTreeMap<Uuid, i32> {
         .collect();
     ids.into_iter()
         .filter_map(|id| {
-            containers::read_item_container(&h.session.level, &mut h.session.caches, &h.game_data, id, "", None)
+            containers::read_item_container(&h.session.level, &mut h.session.caches, h.game_data, id, "", None)
                 .map(|dto| (id, dto.slot_num))
         })
         .collect()
@@ -418,7 +423,7 @@ fn guild_chest_container_ids(session: &SaveSession) -> BTreeSet<Uuid> {
 fn modify_all_player_slots_resizes_only_player_common_containers() {
     let mut h = Harness::new();
     let before: BTreeMap<Uuid, i32> = all_container_slot_counts(&mut h);
-    let targets: BTreeSet<Uuid> = player_common_container_ids(&mut h.session, &h.game_data);
+    let targets: BTreeSet<Uuid> = player_common_container_ids(&mut h.session, h.game_data);
     assert!(
         !targets.is_empty(),
         "the fixture must have players with a main inventory for this test to mean anything"
@@ -463,7 +468,7 @@ fn modify_all_player_slots_resizes_only_player_common_containers() {
 #[test]
 fn modify_all_player_slots_continues_past_a_refused_container() {
     let mut h = Harness::new();
-    let mut occupancy = player_common_container_occupancy(&mut h.session, &h.game_data);
+    let mut occupancy = player_common_container_occupancy(&mut h.session, h.game_data);
     assert!(
         occupancy.len() >= 2,
         "the fixture must have at least two players with an occupied common container \
@@ -483,7 +488,7 @@ fn modify_all_player_slots_continues_past_a_refused_container() {
          occupied index, or nothing would be refused"
     );
 
-    let targets: BTreeSet<Uuid> = player_common_container_ids(&mut h.session, &h.game_data);
+    let targets: BTreeSet<Uuid> = player_common_container_ids(&mut h.session, h.game_data);
 
     let real = h.run("modify_all_player_slots", serde_json::json!({ "slots": slots }), false);
     assert_eq!(real.status, RunStatus::Ok, "{:?}", real.status);
@@ -640,7 +645,7 @@ fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
     let mut h = Harness::new();
 
     let dps_uid = dps_player_uid();
-    player::get_player_details(&mut h.session, &h.game_data, dps_uid, &null_progress())
+    player::get_player_details(&mut h.session, h.game_data, dps_uid, &null_progress())
         .expect("player details load")
         .expect("the dps-owning fixture player exists");
     let dps_before = dps_occupied_levels(&h, dps_uid);
@@ -661,7 +666,7 @@ fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
         "dps_pals must match the fixture's actual occupied dimensional-storage slot count"
     );
 
-    let below: Vec<String> = ps_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+    let below: Vec<String> = ps_core::domain::pal::pal_summaries(&h.session, h.game_data)
         .expect("pal summaries")
         .iter()
         .filter(|p| p.level < 80)
@@ -685,7 +690,7 @@ fn max_all_pals_raises_every_world_pal_to_the_legal_maximum() {
 #[test]
 fn max_all_pals_under_a_dry_run_writes_nothing() {
     let mut h = Harness::new();
-    let before = ps_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+    let before = ps_core::domain::pal::pal_summaries(&h.session, h.game_data)
         .expect("pal summaries")
         .iter()
         .map(|p| (p.instance_id, p.level))
@@ -694,7 +699,7 @@ fn max_all_pals_under_a_dry_run_writes_nothing() {
     let dry = h.run("max_all_pals", serde_json::json!({ "cheat_mode": false }), true);
     assert_eq!(dry.status, RunStatus::Ok, "{:?}", dry.status);
 
-    let after = ps_core::domain::pal::pal_summaries(&h.session, &h.game_data)
+    let after = ps_core::domain::pal::pal_summaries(&h.session, h.game_data)
         .expect("pal summaries")
         .iter()
         .map(|p| (p.instance_id, p.level))
@@ -703,7 +708,7 @@ fn max_all_pals_under_a_dry_run_writes_nothing() {
 }
 
 fn player_technologies(h: &mut Harness, uid: Uuid) -> Vec<String> {
-    player::get_player_details(&mut h.session, &h.game_data, uid, &null_progress())
+    player::get_player_details(&mut h.session, h.game_data, uid, &null_progress())
         .expect("player details load")
         .expect("the player exists")
         .technologies

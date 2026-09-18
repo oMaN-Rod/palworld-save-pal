@@ -45,7 +45,7 @@
 </script>
 
 <aside
-	class="bg-surface-900/95 absolute top-2 right-14 bottom-2 z-10 flex w-90 h-[calc(100vh-80px)] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
+	class="bg-surface-900/95 absolute top-2 right-14 bottom-2 z-10 flex w-90 h-[calc(100vh-var(--titlebar-h)-80px)] flex-col gap-4 overflow-y-auto rounded-lg p-4 shadow-lg"
 >
 	<div class="flex flex-col gap-1">
 		<h2 class="text-lg font-bold">Place Blueprint</h2>

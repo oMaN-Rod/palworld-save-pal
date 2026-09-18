@@ -1,5 +1,4 @@
-//! Whole-save overview statistics, ported from PalSavTools' Python overview
-//! services to pure Rust.
+//! Whole-save overview statistics.
 //!
 //! Public entry point: [`overview_stats`] — the single-pass aggregation behind
 //! the Overview dashboard (totals, traits, conditions, composition, top

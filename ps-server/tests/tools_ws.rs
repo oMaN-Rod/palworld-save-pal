@@ -45,11 +45,11 @@ async fn convert_steam_id_handles_uid_steam_id_and_garbage() {
     )
     .await;
     let garbage = common::next_json(&mut ws).await;
-    // The frontend matches on this exact string, so unparseable input must keep
-    // reporting it verbatim rather than falling back to a generic message.
+    // The frontend shows this string to the user as-is, so it must name the
+    // offending input rather than fall back to a generic message.
     assert_eq!(
         garbage["data"]["error"],
-        "invalid literal for int() with base 10: 'garbage!!'"
+        "'garbage!!' is not a numeric Steam ID"
     );
 
     server.handle.shutdown().await;

@@ -76,8 +76,8 @@
 	{/if}
 
 	<div class="flex justify-end gap-2">
-		<Button variant="ghost" disabled={!valid || testing} onClick={test}>{m.live_instance_test()}</Button>
-		<Button variant="ghost" onClick={oncancel}>{m.cancel()}</Button>
-		<Button variant="primary" disabled={!valid || saving} onClick={save}>{c.save}</Button>
+		<Button variant="ghost" disabled={!valid || testing} onclick={test}>{m.live_instance_test()}</Button>
+		<Button variant="ghost" onclick={oncancel}>{m.cancel()}</Button>
+		<Button variant="primary" disabled={!valid || saving} onclick={save}>{c.save}</Button>
 	</div>
 </div>

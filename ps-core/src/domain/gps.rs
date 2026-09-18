@@ -701,7 +701,7 @@ mod tests {
     }
 
     #[test]
-    fn add_gps_pal_errors_with_pythons_message_when_not_loaded() {
+    fn add_gps_pal_errors_when_the_gps_file_is_not_loaded() {
         let level = minimal_save(Properties::default());
         let mut session = SaveSession::new_for_tests(SaveKind::InMemory, level);
         let data = game_data();

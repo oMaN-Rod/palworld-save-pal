@@ -337,9 +337,8 @@ fn pre_1_0_save_reads_none_and_invents_nothing_on_zero_edits() {
     assert!(checked > 0, "no fixture player was loaded from world1");
 }
 
-/// A positive count on a save that never carried the map creates it -- the
-/// PalSavTools behavior of schema-gated creation, which PalStudio matches for the
-/// possess map specifically.
+/// A positive count on a save that never carried the map creates it: creation is
+/// schema-gated, and the possess map is the one map PalStudio creates on demand.
 #[test]
 fn positive_count_creates_the_map_on_a_save_without_one() {
     let data = game_data();
