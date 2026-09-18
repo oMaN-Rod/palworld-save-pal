@@ -236,7 +236,15 @@ impl NetworkRuntime {
         let always = env_mode_always();
         match stored {
             Some(raw) => {
-                let config = NetworkConfig::from_json(&raw)?;
+                let mut config = NetworkConfig::from_json_lenient(&raw)?;
+                let adjustments = config.normalize_legacy();
+                config.validate()?;
+                if !adjustments.is_empty() {
+                    for note in &adjustments {
+                        tracing::warn!("stored network policy adjusted: {note}");
+                    }
+                    ps_db::meta::set(driver, META_KEY, &config.to_json()).await?;
+                }
                 let config = if always {
                     apply_env_blocking(config).await?
                 } else {

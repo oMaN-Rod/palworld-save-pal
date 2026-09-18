@@ -227,6 +227,31 @@ impl NetworkConfig {
         Ok(config)
     }
 
+    /// Parses without validating. Loading a stored config needs this so a
+    /// row saved by an older build can be normalized before the current
+    /// invariants would reject it.
+    pub fn from_json_lenient(raw: &str) -> Result<Self, ConfigError> {
+        serde_json::from_str(raw).map_err(ConfigError::Parse)
+    }
+
+    /// Adjusts a stored config so it satisfies the current invariants,
+    /// always failing toward less exposure. Returns one human-readable note
+    /// per adjustment; an empty result means nothing changed.
+    pub fn normalize_legacy(&mut self) -> Vec<String> {
+        let mut notes = Vec::new();
+        if self.funnel_enabled && self.auth.scope != AuthScope::Always {
+            self.funnel_enabled = false;
+            notes.push(
+                "Tailscale Funnel disabled: it now requires authentication scope 'always'".into(),
+            );
+        }
+        if self.auth.scope != AuthScope::Never && self.auth.pin.is_none() {
+            self.auth.scope = AuthScope::Never;
+            notes.push("authentication disabled: no PIN was configured".into());
+        }
+        notes
+    }
+
     pub fn validate(&self) -> Result<(), ConfigError> {
         if self.port == 0 {
             return Err(ConfigError::Invalid(
@@ -502,6 +527,59 @@ mod tests {
         assert_eq!(NetworkTier::parse("desktop"), Some(NetworkTier::Desktop));
         assert_eq!(NetworkTier::parse("other"), None);
         assert_eq!(NetworkTier::default(), NetworkTier::Hosted);
+    }
+
+    #[test]
+    fn legacy_funnel_with_auth_off_is_normalized_not_rejected() {
+        // Saved by builds before Funnel required AuthScope::Always: Funnel
+        // on with authentication off (a leftover PIN hash is harmless).
+        let legacy = NetworkConfig {
+            listen: ListenMode::Localhost,
+            port: 5174,
+            auth: AuthConfig {
+                scope: AuthScope::Never,
+                pin: Some(PinHash::generate("1234")),
+                session_ttl_secs: NetworkConfig::default().auth.session_ttl_secs,
+            },
+            funnel_enabled: true,
+            ..NetworkConfig::default()
+        };
+        let raw = legacy.to_json();
+        // The current invariants reject that row on a strict parse…
+        assert!(NetworkConfig::from_json(&raw).is_err());
+        // …so loading normalizes it toward less exposure instead of failing.
+        let mut loaded = NetworkConfig::from_json_lenient(&raw).unwrap();
+        let notes = loaded.normalize_legacy();
+        assert!(loaded.validate().is_ok());
+        assert!(!loaded.funnel_enabled);
+        assert_eq!(notes.len(), 1);
+        assert!(notes[0].to_lowercase().contains("funnel"));
+    }
+
+    #[test]
+    fn legacy_auth_without_pin_normalizes_to_auth_off() {
+        let legacy = NetworkConfig {
+            auth: AuthConfig {
+                scope: AuthScope::NetworkOnly,
+                pin: None,
+                session_ttl_secs: NetworkConfig::default().auth.session_ttl_secs,
+            },
+            ..NetworkConfig::default()
+        };
+        let raw = legacy.to_json();
+        assert!(NetworkConfig::from_json(&raw).is_err());
+        let mut loaded = NetworkConfig::from_json_lenient(&raw).unwrap();
+        let notes = loaded.normalize_legacy();
+        assert!(loaded.validate().is_ok());
+        assert_eq!(loaded.auth.scope, AuthScope::Never);
+        assert_eq!(notes.len(), 1);
+    }
+
+    #[test]
+    fn current_configs_pass_through_normalization_untouched() {
+        let mut config = NetworkConfig::default();
+        assert!(config.normalize_legacy().is_empty());
+        assert!(config.validate().is_ok());
     }
 
     #[test]
