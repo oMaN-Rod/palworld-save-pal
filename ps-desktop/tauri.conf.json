@@ -36,7 +36,8 @@
     ],
     "resources": {
       "../ui_build": "ui",
-      "../data": "data"
+      "../data": "data",
+      "resources/amity": "amity"
     }
   }
 }

@@ -5,5 +5,6 @@ import PublicNav from './PublicNav.svelte';
 import Sidebar from './Sidebar.svelte';
 import SidebarDetail from './SidebarDetail.svelte';
 import ThemeChip from './ThemeChip.svelte';
+import TitleBar from './TitleBar.svelte';
 
-export { DebugButton, Drawer, LocaleChip, PublicNav, Sidebar, SidebarDetail, ThemeChip };
+export { DebugButton, Drawer, LocaleChip, PublicNav, Sidebar, SidebarDetail, ThemeChip, TitleBar };

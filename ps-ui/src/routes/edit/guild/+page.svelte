@@ -893,7 +893,7 @@
 					<List
 						bind:items={currentBaseInventory.current}
 						baseClass="w-full"
-						listClass="h-[calc(100vh-350px)]"
+						listClass="h-[calc(100vh-var(--titlebar-h)-350px)]"
 						canSelect={false}
 						idKey="static_id"
 						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
@@ -1041,7 +1041,7 @@
 							<List
 								items={currentBaseStorageContainers}
 								baseClass="w-1/4"
-								listClass="h-[calc(100vh-175px)]"
+								listClass="h-[calc(100vh-var(--titlebar-h)-175px)]"
 								canSelect={false}
 								idKey="id"
 								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
@@ -1089,7 +1089,7 @@
 									{/if}
 								{/snippet}
 							</List>
-							<div class="max-h-[calc(100vh-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-200px)]">
+							<div class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]">
 								{#if currentStorageContainer}
 									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
@@ -1142,7 +1142,7 @@
 					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
 					<div
 						id="guild-chest-content"
-						class="max-h-[calc(100vh-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-200px)]"
+						class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]"
 					>
 						<div class="flex items-start space-x-4">
 							<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">

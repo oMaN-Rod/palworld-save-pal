@@ -204,7 +204,7 @@
 {/snippet}
 
 {#if appState.selectedPlayer}
-	<main class="h-full min-h-screen p-8">
+	<main class="h-full min-h-[calc(100vh-var(--titlebar-h))] p-8">
 		<div class="mx-auto max-w-7xl">
 			<div class="mb-8 flex items-center justify-between">
 				<div class="flex gap-8">

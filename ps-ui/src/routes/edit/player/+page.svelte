@@ -844,7 +844,7 @@
 			</div>
 
 			<div
-				class="fixed right-2 max-h-screen w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
+				class="fixed right-2 max-h-[calc(100vh-var(--titlebar-h))] w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
 				bind:this={sideBarWrapper}
 			>
 				<div

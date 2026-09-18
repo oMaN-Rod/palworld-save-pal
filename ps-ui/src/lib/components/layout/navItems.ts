@@ -18,6 +18,8 @@ export type NavContext = {
 	appState: AppState;
 	desktop: boolean;
 	expanded: boolean;
+	/** True when the custom title bar is mounted and owns the relocated actions. */
+	titleBar: boolean;
 };
 
 export type NavItem = {
@@ -46,7 +48,8 @@ export const navItems: NavItem[] = [
 		id: 'menu',
 		section: 'header',
 		icon: (ctx) => (ctx.expanded ? 'tabler:chevrons-left' : 'tabler:chevrons-right'),
-		title: () => m.toggle_entity({ entity: '' }),
+		label: () => m.menu(),
+		title: () => m.toggle_entity({ entity: m.menu() }),
 		action: 'toggle-expanded'
 	},
 	{
@@ -141,6 +144,15 @@ export const navItems: NavItem[] = [
 		icon: () => 'tabler:server',
 		label: () => 'Servers',
 		href: '/servers',
+		visible: () => !isWebBuild || getRemoteMode().active
+	},
+	{
+		id: 'mods',
+		section: 'tiles',
+		group: 'main',
+		icon: () => 'tabler:packages',
+		label: () => m.mods_nav(),
+		href: '/mods',
 		visible: () => !isWebBuild || getRemoteMode().active
 	},
 	{
@@ -263,4 +275,12 @@ export function activeNavId(pathname: string, ctx: NavContext): string {
 		}
 	}
 	return bestId;
+}
+
+// The single source of truth for the sidebar → title bar relocation: the sidebar
+// excludes exactly this set when `ctx.titleBar`, and the title bar renders it.
+export const TITLE_BAR_ACTION_IDS = ['save', 'eject', 'open-folder', 'settings'] as const;
+
+export function isTitleBarAction(id: string): boolean {
+	return (TITLE_BAR_ACTION_IDS as readonly string[]).includes(id);
 }

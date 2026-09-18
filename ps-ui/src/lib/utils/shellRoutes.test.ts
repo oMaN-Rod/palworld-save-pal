@@ -4,7 +4,8 @@ import {
 	isFullBleedRoute,
 	isPipWindow,
 	isPublicShell,
-	isSaveRequiredRoute
+	isSaveRequiredRoute,
+	landingRedirect
 } from './shellRoutes';
 
 describe('isSaveRequiredRoute', () => {
@@ -126,5 +127,29 @@ describe('isPipWindow', () => {
 	it('only strips the shell on the map', () => {
 		expect(isPipWindow(url('/edit/palbox?pip=1'))).toBe(false);
 		expect(isPipWindow(url('/?pip=1'))).toBe(false);
+	});
+});
+
+describe('landingRedirect', () => {
+	const at = (search = '') => new URL(`http://127.0.0.1:5174/${search}`);
+	const base = { desktop: false, webBuild: false, hasSave: false, url: at() };
+
+	it('sends each build to its own start page', () => {
+		expect(landingRedirect({ ...base, desktop: true })).toBe('/overview');
+		expect(landingRedirect({ ...base, desktop: true, hasSave: true })).toBeNull();
+		expect(landingRedirect({ ...base, hasSave: true })).toBe('/edit');
+		expect(landingRedirect(base)).toBe('/upload');
+		expect(landingRedirect({ ...base, webBuild: true })).toBeNull();
+	});
+
+	it('yields to a ?path= restore so a reloaded route is not overridden', () => {
+		const url = at('?path=/mods');
+		expect(landingRedirect({ ...base, url })).toBeNull();
+		expect(landingRedirect({ ...base, desktop: true, url })).toBeNull();
+		expect(landingRedirect({ ...base, hasSave: true, url })).toBeNull();
+	});
+
+	it('ignores an empty path parameter', () => {
+		expect(landingRedirect({ ...base, url: at('?path=') })).toBe('/upload');
 	});
 });

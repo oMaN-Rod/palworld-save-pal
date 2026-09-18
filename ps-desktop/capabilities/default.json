@@ -3,7 +3,15 @@
   "identifier": "default",
   "description": "Capability for the main window and the PIP live-map window.",
   "windows": ["main", "pip"],
-  "permissions": ["core:default"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-close",
+    "core:window:allow-is-maximized"
+  ],
   "remote": {
     "urls": ["http://localhost:5173/*", "http://127.0.0.1:5174/*"]
   }

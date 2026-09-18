@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { Sidebar, PublicNav } from '$components/layout';
+	import { Sidebar, PublicNav, TitleBar } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { bootstrap } from '$lib/data/bootstrap';
@@ -9,6 +9,8 @@
 	import {
 		cornerArt,
 		getAppState,
+		getModsState,
+		getServerState,
 		getSignalState,
 		getSocketState,
 		theme,
@@ -37,7 +39,7 @@
 		clearSessionPersistence,
 		getStoredSessionId
 	} from '$lib/utils/sessionPersistence';
-	import { isWebBuild } from '$lib/utils/platform';
+	import { desktopChrome, isWebBuild } from '$lib/utils/platform';
 	import { syncLocaleToPath } from '$lib/i18n/appLocale';
 	import { browser } from '$app/environment';
 	import { CompatBanner, UnsupportedBrowser } from '$components/compat';
@@ -60,6 +62,7 @@
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile, remoteMode.active));
 	const pipWindow = $derived(browser && isPipWindow(page.url));
+	const showTitleBar = $derived(browser && desktopChrome() && !pipWindow);
 
 	// Every locale's landing root (`/`, `/de`, `/zh`, …) — the marketing page
 	// stays clean of the ambient corner art.
@@ -80,6 +83,17 @@
 
 	$effect(() => {
 		document.body.classList.toggle('rwby-skin', rwbySkin.current);
+	});
+
+	// The title bar eats the top of the viewport, so every `100vh` in the app has
+	// to subtract it. That has to be readable from anywhere, hence the document
+	// element rather than a component — app.css defaults it to `0px` so the web
+	// and Docker builds stay correct without this ever running.
+	$effect(() => {
+		document.documentElement.style.setProperty(
+			'--titlebar-h',
+			showTitleBar ? 'var(--titlebar-size)' : '0px'
+		);
 	});
 
 	$effect(() => {
@@ -123,6 +137,19 @@
 		if (isWebBuild || signalSeeded || !ws.connected) return;
 		signalSeeded = true;
 		getSignalState().refresh();
+	});
+
+	$effect(() => {
+		const connected = ws.connected;
+		const kind = remoteMode.active ? 'remote' : 'socket';
+		getModsState().connectionChanged(connected, kind);
+		getServerState().connectionChanged(connected, kind);
+	});
+
+	$effect(() => {
+		const transport = remoteMode.active ? remoteMode.transport : null;
+		getModsState().transportChanged(transport);
+		getServerState().transportChanged(transport);
 	});
 
 	$effect(() => {
@@ -174,31 +201,41 @@
 			<CompatBanner />
 		{/if}
 		<Modal>
-			<div class="relative z-[1] flex h-screen w-full overflow-hidden">
-				{#if !pipWindow}
-					{#if publicShell}
-						<PublicNav />
-					{:else}
-						<Sidebar />
-					{/if}
+			<!-- The shell wrapper must not carry a `z-index`: that would trap the title
+			     bar in a stacking context pinned below the modal overlays, leaving the
+			     window undraggable and unclosable while a modal is open. The stacking
+			     context lives on the inner wrapper instead, so `.title-bar` competes
+			     directly in the root context and stays on top. -->
+			<div class="relative flex h-screen w-full flex-col overflow-hidden">
+				{#if showTitleBar}
+					<TitleBar />
 				{/if}
-				<div class="relative flex flex-1 flex-col overflow-hidden">
-					{#if appState.autoSave}
-						<div class="auto-save-indicator" transition:fade>
-							<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
-							<Spinner size="size-5" />
-						</div>
+				<div class="relative z-[1] flex min-h-0 w-full flex-1 overflow-hidden">
+					{#if !pipWindow}
+						{#if publicShell}
+							<PublicNav />
+						{:else}
+							<Sidebar />
+						{/if}
 					{/if}
-					<div class="relative flex-1 overflow-hidden">
-						{#key page.url.pathname}
-							<main
-								class="absolute inset-0 overflow-y-auto"
-								class:public-shell-main={publicShell && !isFullBleedRoute(page.url.pathname)}
-								transition:fade={{ duration: 150 }}
-							>
-								{@render children()}
-							</main>
-						{/key}
+					<div class="relative flex flex-1 flex-col overflow-hidden">
+						{#if appState.autoSave}
+							<div class="auto-save-indicator" transition:fade>
+								<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>
+								<Spinner size="size-5" />
+							</div>
+						{/if}
+						<div class="relative flex-1 overflow-hidden">
+							{#key page.url.pathname}
+								<main
+									class="absolute inset-0 overflow-y-auto"
+									class:public-shell-main={publicShell && !isFullBleedRoute(page.url.pathname)}
+									transition:fade={{ duration: 150 }}
+								>
+									{@render children()}
+								</main>
+							{/key}
+						</div>
 					</div>
 				</div>
 			</div>

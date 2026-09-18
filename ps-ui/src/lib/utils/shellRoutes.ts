@@ -49,3 +49,17 @@ export function isPipWindow(url: URL): boolean {
 	if (url.searchParams.get('pip') !== '1') return false;
 	return (url.pathname.replace(/\/+$/, '') || '/').endsWith('/map');
 }
+
+// The root layout restores `?path=` (the server's redirect for a reloaded route)
+// with its own navigation; a landing redirect started after it would win.
+export function landingRedirect(options: {
+	desktop: boolean;
+	webBuild: boolean;
+	hasSave: boolean;
+	url: URL;
+}): string | null {
+	if (options.url.searchParams.get('path')) return null;
+	if (options.desktop) return options.hasSave ? null : '/overview';
+	if (options.hasSave) return '/edit';
+	return options.webBuild ? null : '/upload';
+}

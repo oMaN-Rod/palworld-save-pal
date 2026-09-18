@@ -7,6 +7,7 @@
 	import PlayersTable from '$lib/components/bulk/PlayersTable.svelte';
 	import GuildsTable from '$lib/components/bulk/GuildsTable.svelte';
 	import PalsTable from '$lib/components/bulk/PalsTable.svelte';
+	import Icon from '$components/ui/icons/Icon.svelte';
 
 	let selectedTab = $state('players');
 	let playerSelection = $state(new Set<string>());
@@ -24,6 +25,7 @@
 	);
 </script>
 
+{#if appState.saveFile}
 <div class="flex h-full flex-col gap-4 p-4">
 	<header class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-1">
 		<h1 class="heading-gradient text-xl font-extrabold tracking-tight sm:text-2xl">
@@ -56,3 +58,11 @@
 		{/snippet}
 	</Tabs>
 </div>
+{:else}
+	<div class="flex w-full items-center justify-center h-full">
+		<h2 class="h2 flex items-center gap-2">
+			<Icon icon="tabler:alert-circle" class="text-secondary-400 h-6 w-6" />
+			{m.no_save_loaded()}
+		</h2>
+	</div>
+{/if}

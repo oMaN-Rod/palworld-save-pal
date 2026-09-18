@@ -6,6 +6,8 @@ use std::sync::Mutex;
 
 use tauri::{Manager, RunEvent, WebviewUrl, WebviewWindowBuilder};
 
+mod nxm;
+
 const SERVER_PORT: u16 = 5174;
 
 const LEGACY_IDENTIFIER: &str = "com.palworldsavepal.desktop";
@@ -68,6 +70,7 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
             // here: the AppImage's bundled WebKit spawns its helper processes via
             // a cwd-relative path, so changing the cwd crashes the webview.
             std::env::set_var("PS_APP_ROOT", &app_data_dir);
+            std::env::set_var("PS_AMITY_BUNDLE_DIR", resource_dir.join("amity"));
             return Ok(AssetDirs {
                 ui_dir: bundled_ui,
                 data_dir: resource_dir.join("data"),
@@ -82,6 +85,10 @@ fn resolve_asset_dirs(app: &tauri::AppHandle) -> anyhow::Result<AssetDirs> {
         "ui_build/index.html not found — run scripts/build-ui-desktop before `cargo run -p ps-desktop`, from the repo root"
     );
     std::env::set_var("PS_APP_ROOT", &repo_root);
+    std::env::set_var(
+        "PS_AMITY_BUNDLE_DIR",
+        repo_root.join("ps-amity").join("dist"),
+    );
     Ok(AssetDirs {
         ui_dir: repo_root.join("ui_build"),
         data_dir: repo_root.join("data"),
@@ -163,6 +170,18 @@ fn dmabuf_disable_value(current: Option<std::ffi::OsString>) -> Option<&'static 
     }
 }
 
+fn embedded_services<R: tauri::Runtime>(
+    app: &tauri::AppHandle<R>,
+) -> Option<std::sync::Arc<ps_server::services::ServerServices>> {
+    let server = app.state::<EmbeddedServer>();
+    let guard = server.0.lock().ok()?;
+    let services = guard
+        .as_ref()
+        .map(|handle| std::sync::Arc::clone(&handle.services));
+    drop(guard);
+    services
+}
+
 fn main() {
     // Must run before any WebKitGTK init, which reads this env var when it
     // spawns the web process.
@@ -181,7 +200,16 @@ fn main() {
     tauri::Builder::default()
         // Single instance: a second launch fires this callback in the FIRST
         // instance, which focuses its window; the second process then exits.
-        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
+        .plugin(tauri_plugin_single_instance::init(|app, argv, _cwd| {
+            match embedded_services(app) {
+                Some(services) => {
+                    nxm::deliver(&services.nexus_links, &argv);
+                }
+                None if !nxm::nxm_arguments(&argv).is_empty() => {
+                    tracing::warn!("an nxm:// link arrived before the embedded server was ready");
+                }
+                None => {}
+            }
             if let Some(main_window) = app.get_webview_window("main") {
                 let _ = main_window.unminimize();
                 let _ = main_window.set_focus();
@@ -216,20 +244,39 @@ fn main() {
             );
             tracing::info!("webview loading {}", webview_url);
 
+            let services = std::sync::Arc::clone(&server_handle.services);
             app_handle
                 .state::<EmbeddedServer>()
                 .0
                 .lock()
                 .expect("server state mutex poisoned")
                 .replace(server_handle);
+            nxm::deliver(&services.nexus_links, std::env::args().skip(1));
 
-            WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(webview_url))
-                .title(format!("PalStudio v{}", env!("CARGO_PKG_VERSION")))
-                .inner_size(1366.0, 768.0)
-                .min_inner_size(1366.0, 768.0)
-                .maximized(true)
-                .disable_drag_drop_handler()
-                .build()?;
+            let builder =
+                WebviewWindowBuilder::new(&app_handle, "main", WebviewUrl::External(webview_url))
+                    .title(format!("PalStudio v{}", env!("CARGO_PKG_VERSION")))
+                    .inner_size(1366.0, 768.0)
+                    .min_inner_size(1366.0, 768.0)
+                    .maximized(true)
+                    // Disables Tauri's OS-level file-drop interception so HTML5
+                    // drag/drop reaches the webview. SaveDropzone depends on it.
+                    .disable_drag_drop_handler();
+
+            // macOS keeps its native frame so the traffic lights stay real; the
+            // webview just extends under the bar.
+            #[cfg(target_os = "macos")]
+            let builder = builder
+                .title_bar_style(tauri::TitleBarStyle::Overlay)
+                .hidden_title(true);
+
+            // `shadow` stays at its default of true: it keeps the real DWM frame,
+            // which is what supplies the drop shadow, Aero Snap and the side and
+            // bottom resize borders.
+            #[cfg(not(target_os = "macos"))]
+            let builder = builder.decorations(false);
+
+            builder.build()?;
 
             Ok(())
         })
@@ -255,7 +302,9 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
-    use super::{adopt_legacy_dir, choose_webview_url, dmabuf_disable_value, pip_path, LEGACY_IDENTIFIER};
+    use super::{
+        adopt_legacy_dir, choose_webview_url, dmabuf_disable_value, pip_path, LEGACY_IDENTIFIER,
+    };
 
     fn url(s: &str) -> tauri::Url {
         s.parse().expect("valid url")

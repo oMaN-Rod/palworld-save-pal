@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-const nav = vi.hoisted(() => ({ goto: vi.fn(async () => {}) }));
+const nav = vi.hoisted(() => ({ goto: vi.fn<(target: string) => Promise<void>>(async () => {}) }));
 vi.mock('$app/navigation', () => ({ goto: nav.goto }));
 vi.mock('$app/environment', () => ({ browser: true }));
 // Mirrors SvelteKit's resolve(): base + resolve_route(id), and base is '' here
@@ -23,7 +23,7 @@ describe('?path= restore', () => {
 		run('?path=/wiki/pals/sheepball');
 
 		expect(nav.goto).toHaveBeenCalledWith('/wiki/pals/sheepball');
-		const target = nav.goto.mock.calls[0][0] as unknown as string;
+		const target = nav.goto.mock.calls[0][0];
 		expect(new URL(target, 'http://127.0.0.1:5174/').origin).toBe('http://127.0.0.1:5174');
 	});
 

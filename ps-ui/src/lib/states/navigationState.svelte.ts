@@ -13,7 +13,7 @@ class NavigationStateManager implements NavigationState {
 	#activePage = $state('file');
 	#activeTab = $state<Tab>('pal');
 	#initialLoad = true;
-	#appState = getAppState();
+
 	constructor(initialPage: string = 'file', initialTab: Tab = 'pal') {
 		this.#activePage = initialPage;
 		this.#activeTab = initialTab;
@@ -28,8 +28,9 @@ class NavigationStateManager implements NavigationState {
 	}
 
 	saveAndNavigate(page: string): void {
+		const appState = getAppState();
 		if (!this.#initialLoad && page !== 'save') {
-			this.#appState.saveState().catch((error) => {
+			appState.saveState().catch((error) => {
 				console.error('Error saving state on navigate:', error);
 			});
 		}
@@ -47,8 +48,9 @@ class NavigationStateManager implements NavigationState {
 	}
 
 	set activeTab(tab: Tab) {
+		const appState = getAppState();
 		if (!this.#initialLoad) {
-			this.#appState.saveState().catch((error) => {
+			appState.saveState().catch((error) => {
 				console.error('Error saving state on navigate:', error);
 			});
 		}

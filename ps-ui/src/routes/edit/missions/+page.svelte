@@ -175,7 +175,7 @@
 					{/snippet}
 					{#snippet content()}
 						<Tabs.Panel value="Main">
-							<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
+							<div class="mt-4 grid h-[calc(100vh-var(--titlebar-h)-200px)] grid-cols-[25%_1fr] gap-4">
 								<div id="missions-list" class="overflow-y-auto">
 									<MissionList
 										currentMissions={appState.selectedPlayer?.current_missions ?? []}
@@ -192,7 +192,7 @@
 							</div>
 						</Tabs.Panel>
 						<Tabs.Panel value="Sub">
-							<div class="mt-4 grid h-[calc(100vh-200px)] grid-cols-[25%_1fr] gap-4">
+							<div class="mt-4 grid h-[calc(100vh-var(--titlebar-h)-200px)] grid-cols-[25%_1fr] gap-4">
 								<div class="overflow-y-auto">
 									<MissionList
 										currentMissions={appState.selectedPlayer?.current_missions ?? []}

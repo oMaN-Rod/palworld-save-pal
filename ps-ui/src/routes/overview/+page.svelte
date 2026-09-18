@@ -129,7 +129,7 @@
 	const stats = $derived(overviewState.stats);
 </script>
 
-<div class="animate-fade-in min-h-screen w-full">
+<div class="animate-fade-in min-h-[calc(100vh-var(--titlebar-h))] w-full">
 	<div class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 lg:py-8">
 		{#if appState.saveFile}
 			<!-- ── Loaded save: the overview dashboard ── -->

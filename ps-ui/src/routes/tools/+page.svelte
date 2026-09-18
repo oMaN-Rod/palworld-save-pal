@@ -14,7 +14,7 @@
 	let activeTab = $state('convert');
 </script>
 
-<div class="flex min-h-screen w-full flex-col items-center py-8">
+<div class="flex min-h-[calc(100vh-var(--titlebar-h))] w-full flex-col items-center py-8">
 	<div class="flex w-full max-w-3xl flex-col gap-8">
 		<Tabs value={activeTab} onValueChange={(e: ValueChangeDetails) => (activeTab = e.value)}>
 			{#snippet list()}

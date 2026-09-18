@@ -1,17 +1,13 @@
 <script lang="ts">
-	import { applySettings, getAppState, getModalState } from '$states';
+	import { getAppState } from '$states';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
-	import { OpenFolder, SettingsModal } from '$components/modals';
-	import { MessageType } from '$types';
-	import { send } from '$lib/utils/websocketUtils';
-	import { baseStructuresData } from '$lib/data';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';
 	import { persistedState } from 'svelte-persisted-state';
-	import { getStoredSessionId, clearSessionPersistence } from '$lib/utils/sessionPersistence';
+	import { createNavActions } from './navActions.svelte';
+	import { desktopChrome } from '$lib/utils/platform';
 	import {
 		activeNavId,
 		navItems,
@@ -19,26 +15,38 @@
 		type NavAction,
 		type NavContext,
 		type NavItem,
-		type NavGroup
+		type NavGroup,
+		isTitleBarAction
 	} from './navItems';
 
 	let appState = getAppState();
-	let modal = getModalState();
 	let expanded = persistedState('navbar.expanded', false);
+	const actions = createNavActions();
 
 	const desktop = PUBLIC_DESKTOP_MODE === 'true';
-	const ctx = $derived<NavContext>({ appState, desktop, expanded: expanded.current });
+	// The sidebar never renders in the PiP window, so desktopChrome() alone is the
+	// right gate here; +layout.svelte additionally excludes PiP.
+	const ctx = $derived<NavContext>({
+		appState,
+		desktop,
+		expanded: expanded.current,
+		titleBar: desktopChrome()
+	});
 
 	const activeTile = $derived(activeNavId(page.url.pathname, ctx));
 	const menuItem = $derived(navItems.find((item) => item.id === 'menu')!);
-	const menuIcon = $derived(menuItem.icon(ctx));
 	const actionItems = $derived([
 		...itemsFor('header').filter((item) => item.id !== 'menu'),
 		...itemsFor('footer')
 	]);
 
 	function itemsFor(section: 'header' | 'footer'): NavItem[] {
-		return navItems.filter((item) => item.section === section && (item.visible?.(ctx) ?? true));
+		return navItems.filter(
+			(item) =>
+				item.section === section &&
+				(item.visible?.(ctx) ?? true) &&
+				!(ctx.titleBar && isTitleBarAction(item.id))
+		);
 	}
 
 	function tilesForGroup(group: NavGroup): NavItem[] {
@@ -65,60 +73,27 @@
 				expanded.current = !expanded.current;
 				break;
 			case 'save':
-				appState.writeSave().catch((error) => {
-					console.error('Error writing save:', error);
-				});
+				actions.save();
 				break;
 			case 'eject':
-				handleEject();
+				void actions.eject();
 				break;
 			case 'open-folder':
-				handleOpenFolder();
+				void actions.openFolder();
 				break;
 			case 'settings':
-				handleLanguageSelect();
+				void actions.settings();
 				break;
 		}
-	}
-
-	async function handleLanguageSelect(): Promise<void> {
-		// @ts-ignore
-		const result = await modal.showModal<string>(SettingsModal, {
-			title: m.settings(),
-			settings: appState.settings
-		});
-
-		if (result) {
-			applySettings();
-			setTimeout(() => {
-				location.reload();
-			}, 500);
-		}
-	}
-
-	async function handleEject(): Promise<void> {
-		const sessionId = getStoredSessionId();
-		if (sessionId) {
-			send(MessageType.EJECT_SESSION, { session_id: sessionId });
-		}
-		appState.resetState();
-		baseStructuresData.reset();
-		clearSessionPersistence();
-		await goto('/overview');
-	}
-
-	async function handleOpenFolder(): Promise<void> {
-		// @ts-ignore
-		await modal.showModal(OpenFolder, {
-			title: m.open_folder()
-		});
 	}
 </script>
 
 {#snippet actionButton(item: NavItem)}
 	<button
 		class="nav-link nav-link-inactive w-full text-left"
+		data-testid="nav-action-{item.id}"
 		title={(item.title ?? item.label)?.()}
+		aria-label={(item.title ?? item.label)?.()}
 		onclick={() => runAction(item.action!)}
 	>
 		<Icon icon={item.icon(ctx)} class="h-4 w-4 flex-shrink-0" />
@@ -127,28 +102,6 @@
 {/snippet}
 
 <aside class="sidebar flex flex-col" class:collapsed={!expanded.current}>
-	<div class="sidebar-header">
-		<div class="flex items-center gap-2.5 overflow-hidden">
-			<img
-				src="/ps.png"
-				alt="PalStudio"
-				class="animate-breathe h-6 w-6 shrink-0 rounded object-contain"
-			/>
-			<span
-				class="sidebar-label heading-gradient text-xs font-extrabold tracking-tight whitespace-nowrap"
-			>
-				PALSTUDIO
-			</span>
-		</div>
-		<button
-			class="text-surface-500 hover:text-surface-200 transition-fast ml-auto p-1"
-			title={(menuItem.title ?? menuItem.label)?.()}
-			onclick={() => runAction(menuItem.action!)}
-		>
-			<Icon icon={menuIcon} class="h-4 w-4" />
-		</button>
-	</div>
-
 	<nav class="flex-1 overflow-y-auto py-2">
 		{#each navGroups as group (group.id)}
 			{@const tiles = tilesForGroup(group.id)}
@@ -185,6 +138,9 @@
 	</nav>
 
 	<div class="border-surface-700/30 border-t py-2">
+		<div class="flex justify-center">
+			{@render actionButton(menuItem)}
+		</div>
 		{#each actionItems as item (item.id)}
 			<div class="flex justify-center">
 				{@render actionButton(item)}

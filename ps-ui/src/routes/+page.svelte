@@ -2,8 +2,10 @@
 	import { getAppState, getToastState } from '$states';
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import { isWebBuild } from '$lib/utils/platform';
+	import { landingRedirect } from '$lib/utils/shellRoutes';
 	import {
 		Hero,
 		MapAdvantage,
@@ -30,14 +32,16 @@
 	let resumeName = $state<string | null>(null);
 
 	if (browser) {
-		if (desktop) {
-			if (!appState.saveFile) goto('/overview');
-		} else if (appState.saveFile) {
-			goto('/edit');
-		} else if (isWebBuild) {
+		const target = landingRedirect({
+			desktop,
+			webBuild: isWebBuild,
+			hasSave: !!appState.saveFile,
+			url: page.url
+		});
+		if (target) {
+			goto(target);
+		} else if (!desktop && isWebBuild && !appState.saveFile) {
 			hasRecent().then((r) => (resumeName = r?.worldName ?? null));
-		} else {
-			goto('/upload');
 		}
 	}
 

@@ -176,7 +176,7 @@
 
 {#if content}
 	<div class="editor-wrapper">
-		<div class="bg-surface-800">
+		<div class="bg-surface-800 flex gap-2">
 			<button class="toolbar-btn" title="Save SAV file" onclick={handleSave}>
 				<Icon icon="tabler:device-floppy" size={18} />
 				<span>Save</span>
@@ -239,15 +239,6 @@
 		display: flex;
 		flex-direction: column;
 	}
-
-	.toolbar {
-		display: flex;
-		gap: 0.5rem;
-		padding: 0.5rem;
-		background-color: rgb(var(--color-surface-800));
-		border-bottom: 1px solid rgb(var(--color-surface-600));
-	}
-
 	.toolbar-btn {
 		display: flex;
 		align-items: center;

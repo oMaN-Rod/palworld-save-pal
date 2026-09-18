@@ -362,7 +362,7 @@
 
 			<List
 				items={filteredPresets}
-				listClass="h-[calc(100vh-300px)] overflow-y-auto"
+				listClass="h-[calc(100vh-var(--titlebar-h)-300px)] overflow-y-auto"
 				bind:selectedItems={selectedPresets}
 				multiple={true}
 				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
@@ -402,7 +402,7 @@
 		</div>
 
 		<div class="overflow-y-auto p-4">
-			<div class="h-[calc(100vh-32px)] overflow-auto">
+			<div class="h-[calc(100vh-var(--titlebar-h)-32px)] overflow-auto">
 				{#if selectedPresets.length === 1}
 					{@render presetContent(0)}
 				{:else if selectedPresets.length > 1}
