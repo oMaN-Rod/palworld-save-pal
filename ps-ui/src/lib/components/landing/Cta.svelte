@@ -17,4 +17,7 @@
 	<p class="text-surface-400 mt-6 text-xs">
 		{m.landing_cta_footnote()}
 	</p>
+	<p class="text-surface-400 mt-2 text-xs">
+		<a href="/privacy" class="hover:text-surface-200 underline">Privacy</a>
+	</p>
 </footer>
