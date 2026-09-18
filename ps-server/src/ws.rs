@@ -5,7 +5,8 @@ use std::sync::Arc;
 
 use axum::extract::ws::{Message, WebSocket, WebSocketUpgrade};
 use axum::extract::{ConnectInfo, Path, State};
-use axum::response::Response;
+use axum::http::{header, HeaderMap, StatusCode};
+use axum::response::{IntoResponse, Response};
 use futures::{SinkExt, StreamExt};
 
 use uuid::Uuid;
@@ -23,17 +24,57 @@ use crate::AppState;
 /// entire zip as a JSON int array.
 pub const MAX_WS_MESSAGE_BYTES: usize = 1 << 30;
 
+/// The Vite dev server the desktop shell loads in debug builds. It is a
+/// different origin from the server answering the socket, so it needs naming.
+const DEV_SERVER_ORIGIN: &str = "http://localhost:5173";
+
 pub async fn ws_upgrade(
     upgrade: WebSocketUpgrade,
     Path(client_id): Path<String>,
     ConnectInfo(peer): ConnectInfo<SocketAddr>,
+    headers: HeaderMap,
     State(app): State<Arc<AppState>>,
 ) -> Response {
+    let header_value = |name: axum::http::HeaderName| {
+        headers
+            .get(name)
+            .and_then(|value| value.to_str().ok())
+            .map(str::trim)
+    };
+    let origin = header_value(header::ORIGIN);
+
+    if !origin_allowed(origin, header_value(header::HOST), cfg!(debug_assertions)) {
+        tracing::warn!(?origin, "refused a websocket upgrade from another origin");
+        return StatusCode::FORBIDDEN.into_response();
+    }
+
     let is_loopback = is_loopback_peer(peer);
     upgrade
         .max_message_size(MAX_WS_MESSAGE_BYTES)
         .max_frame_size(MAX_WS_MESSAGE_BYTES)
         .on_upgrade(move |socket| connection_loop(socket, client_id, is_loopback, app))
+}
+
+/// Browsers attach `Origin` to cross-site WebSocket handshakes but, unlike
+/// `fetch`, never preflight them -- so without this any page a user visits
+/// could drive the whole handler surface against their local install.
+fn origin_allowed(origin: Option<&str>, host: Option<&str>, allow_dev_server: bool) -> bool {
+    let Some(origin) = origin else {
+        return true;
+    };
+
+    if allow_dev_server && origin.eq_ignore_ascii_case(DEV_SERVER_ORIGIN) {
+        return true;
+    }
+
+    let Some(host) = host else {
+        return false;
+    };
+    let Some((_, authority)) = origin.split_once("://") else {
+        return false;
+    };
+
+    authority.trim_end_matches('/').eq_ignore_ascii_case(host)
 }
 
 fn is_loopback_peer(peer: SocketAddr) -> bool {
@@ -260,5 +301,85 @@ mod tests {
     fn a_remote_peer_is_not_loopback() {
         let peer: SocketAddr = "203.0.113.5:12345".parse().unwrap();
         assert!(!is_loopback_peer(peer));
+    }
+
+    #[test]
+    fn a_request_without_an_origin_is_allowed() {
+        assert!(origin_allowed(None, Some("127.0.0.1:5174"), false));
+    }
+
+    #[test]
+    fn the_page_this_server_served_is_allowed() {
+        assert!(origin_allowed(
+            Some("http://127.0.0.1:5174"),
+            Some("127.0.0.1:5174"),
+            false
+        ));
+        assert!(origin_allowed(
+            Some("https://saves.example.com"),
+            Some("saves.example.com"),
+            false
+        ));
+    }
+
+    #[test]
+    fn a_page_from_another_site_is_refused() {
+        assert!(!origin_allowed(
+            Some("https://evil.example"),
+            Some("127.0.0.1:5174"),
+            false
+        ));
+    }
+
+    #[test]
+    fn a_different_port_on_the_same_dev_machine_is_refused() {
+        assert!(!origin_allowed(
+            Some("http://127.0.0.1:8080"),
+            Some("127.0.0.1:5174"),
+            false
+        ));
+    }
+
+    #[test]
+    fn an_opaque_origin_is_refused() {
+        assert!(!origin_allowed(Some("null"), Some("127.0.0.1:5174"), false));
+        assert!(!origin_allowed(Some(""), Some("127.0.0.1:5174"), false));
+    }
+
+    #[test]
+    fn the_vite_dev_server_is_allowed_only_in_dev_builds() {
+        assert!(origin_allowed(
+            Some(DEV_SERVER_ORIGIN),
+            Some("127.0.0.1:5174"),
+            true
+        ));
+        assert!(!origin_allowed(
+            Some(DEV_SERVER_ORIGIN),
+            Some("127.0.0.1:5174"),
+            false
+        ));
+    }
+
+    #[test]
+    fn a_dev_build_still_refuses_other_cross_origins() {
+        assert!(!origin_allowed(
+            Some("https://evil.example"),
+            Some("127.0.0.1:5174"),
+            true
+        ));
+    }
+
+    #[test]
+    fn a_request_without_a_host_is_refused() {
+        assert!(!origin_allowed(Some("http://127.0.0.1:5174"), None, false));
+    }
+
+    #[test]
+    fn host_comparison_ignores_ascii_case_and_a_trailing_slash() {
+        assert!(origin_allowed(
+            Some("https://Saves.Example.COM/"),
+            Some("saves.example.com"),
+            false
+        ));
     }
 }
