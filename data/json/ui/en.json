@@ -842,6 +842,7 @@
   "network_funnel": "Publish via tailscale funnel",
   "network_funnel_live_off": "Funnel is live but saved as off — saving will turn it off.",
   "network_funnel_live_on": "Funnel is saved as on but not currently published — saving will publish it.",
+  "network_funnel_scope_forced": "Funnel publishes to the public internet, so the PIN must apply to every session — PIN protection was set to \u201cEverywhere\u201d.",
   "network_funnel_warning": "Funnel forwards arrive through the local tailscale proxy and cannot be IP-filtered — set a PIN before enabling.",
   "network_listen_lan": "LAN",
   "network_listen_lan_hint": "This machine and your local network.",

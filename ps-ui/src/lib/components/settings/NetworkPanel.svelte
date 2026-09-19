@@ -36,6 +36,8 @@
 	let clearPin = $state(false);
 	let upnpEnabled = $state(false);
 	let funnelEnabled = $state(false);
+	/** True after enabling Funnel auto-raised the PIN scope (server rule). */
+	let funnelScopeForced = $state(false);
 	let saved = $state(false);
 	let switching = $state(false);
 	let standaloneNote = $state<string | null>(null);
@@ -68,6 +70,7 @@
 				authScope = config.auth.scope;
 				upnpEnabled = config.upnp_enabled;
 				funnelEnabled = config.funnel_enabled;
+				funnelScopeForced = false;
 				ready = true;
 			})
 			.catch((error) => {
@@ -119,6 +122,9 @@
 			funnelLive != null &&
 			funnelLive.on !== funnelEnabled
 	);
+	// The server rejects Funnel unless the PIN applies to every session; the
+	// notice covers both the auto-raise and a manual scope drop while on.
+	const funnelNeedsAlwaysScope = $derived(funnelEnabled && authScope !== 'always');
 
 	async function switchToService() {
 		const confirmed = await getModalState().showConfirmModal({
@@ -162,7 +168,9 @@
 			port,
 			connectRules,
 			writeRules,
-			scope: authScope,
+			// Belt to the toggle handler: the server rejects Funnel with any
+			// laxer scope, so never send that combination.
+			scope: funnelEnabled && authScope !== 'always' ? 'always' : authScope,
 			// Empty string clears the PIN server-side; undefined keeps it.
 			newPin: clearPin ? '' : newPin ? newPin : undefined,
 			upnpEnabled,
@@ -173,10 +181,12 @@
 			newPin = '';
 			confirmPin = '';
 			clearPin = false;
+			funnelScopeForced = false;
 			// If a side effect failed (e.g. the tailscale CLI errored), the
 			// server rolled that toggle back — reflect the truth in the form.
 			funnelEnabled = result.config.funnel_enabled;
 			upnpEnabled = result.config.upnp_enabled;
+			authScope = result.config.auth.scope;
 			// Re-read what tailscale says now that the save applied.
 			network.loadStatus();
 		}
@@ -296,7 +306,17 @@
 						<Switch
 							name="funnel"
 							checked={funnelEnabled}
-							onCheckedChange={(e: CheckedChangeDetails) => (funnelEnabled = e.checked)}
+							onCheckedChange={(e: CheckedChangeDetails) => {
+								funnelEnabled = e.checked;
+								// The server rejects Funnel unless the PIN
+								// covers every session; adopt that scope with
+								// the toggle so the save cannot 400.
+								if (funnelEnabled && authScope !== 'always') {
+									authScope = 'always';
+									funnelScopeForced = true;
+								}
+								if (!funnelEnabled) funnelScopeForced = false;
+							}}
 						/>
 						<span class="text-sm">{m.network_funnel()}</span>
 						{#if funnelLive}
@@ -312,6 +332,9 @@
 						{/if}
 					</div>
 					<p class="text-xs text-warning-500">{m.network_funnel_warning()}</p>
+				{#if funnelScopeForced || funnelNeedsAlwaysScope}
+					<p class="text-xs text-warning-500">{m.network_funnel_scope_forced()}</p>
+				{/if}
 					{#if funnelMismatch}
 						<p class="text-xs text-surface-300">
 							⚠ {funnelLive?.on ? m.network_funnel_live_off() : m.network_funnel_live_on()}
