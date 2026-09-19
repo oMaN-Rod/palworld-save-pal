@@ -541,7 +541,7 @@ Per-plugin key/value persistence across runs.
 - `gamedata.keys(catalog) -> string[]|nil` - the named catalog's top-level
   keys. `nil` if no catalog by that name exists. A catalog that exists but is
   not a JSON object answers an empty table rather than `nil` - five of the
-  loaded game data's 34 top-level catalogs (`camps`, `eggs_spawners`,
+  loaded game data's 33 top-level catalogs (`camps`, `eggs_spawners`,
   `kinship_peach`, `presets`, `skill_fruits`) are JSON arrays and hit this
   today. Unlike the catalog name - and unlike `is_valid_item` and
   `is_valid_pal`, which both fold case - a catalog's own keys are
