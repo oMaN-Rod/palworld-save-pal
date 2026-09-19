@@ -58,6 +58,11 @@ zip = { version = "2", default-features = false, features = ["deflate", "deflate
 sevenz-rust2 = "0.22"
 blake3 = "1"
 walkdir = "2"
+# Pure-Rust throughout: the PST container is zstd(brotli(cbor(..))) and this
+# workspace targets wasm32-unknown-unknown, which has no libc for the C bindings.
+ruzstd = "0.7"
+brotli = { version = "7", default-features = false, features = ["std"] }
+ciborium = "0.2"
 chrono = { version = "0.4", features = ["serde"] }
 rfd = "0.15"
 keyring = { version = "3.6", features = ["apple-native", "windows-native", "sync-secret-service", "crypto-rust"] }

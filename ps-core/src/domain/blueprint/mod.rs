@@ -3,6 +3,7 @@
 pub mod capture;
 pub mod gvas;
 pub mod place;
+pub mod pst;
 pub mod remap;
 pub mod scrub;
 pub mod transform;

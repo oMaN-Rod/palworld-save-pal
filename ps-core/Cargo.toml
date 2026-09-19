@@ -14,6 +14,9 @@ chrono = { workspace = true }
 tracing = { workspace = true }
 cityhasher = { workspace = true }
 indexmap = { workspace = true }
+ruzstd = { workspace = true }
+brotli = { workspace = true }
+ciborium = { workspace = true }
 
 [dev-dependencies]
 pretty_assertions = { workspace = true }
