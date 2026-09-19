@@ -1,4 +1,5 @@
 use ps_core::domain::blueprint::pst;
+use ps_core::domain::blueprint::validate::Severity;
 
 /// zstd's frame magic, which is how a .pstbase is told from a .json.
 const ZSTD_MAGIC: [u8; 4] = [0x28, 0xb5, 0x2f, 0xfd];
@@ -114,4 +115,79 @@ fn the_fixture_carries_the_sections_the_assembler_needs() {
     for section in ["base_camp", "base_camp_level", "map_objects"] {
         assert!(payload.get(section).is_some(), "fixture is missing {section}");
     }
+}
+
+#[test]
+fn importing_the_fixture_produces_structures_at_relative_positions() {
+    let imported = pst::import(&fixture("v1_relics_base.json"), "v1_relics_base").expect("imports");
+    assert!(
+        !imported.blueprint.structures.is_empty(),
+        "the fixture base has structures"
+    );
+    assert_eq!(
+        imported.blueprint.header.structure_count as usize,
+        imported.blueprint.structures.len()
+    );
+    // Relative, not absolute: a base camp's own structures sit near its anchor, never
+    // at the world coordinates PST stored.
+    let furthest = imported
+        .blueprint
+        .structures
+        .iter()
+        .map(|s| s.relative_transform.translation.x.0.abs())
+        .fold(0.0f64, f64::max);
+    assert!(furthest < 100_000.0, "structures should be anchor-relative, got {furthest}");
+}
+
+#[test]
+fn an_import_declares_a_full_manifest_and_an_unnamed_source() {
+    let imported = pst::import(&fixture("v1_relics_base.json"), "v1_relics_base").expect("imports");
+    let header = &imported.blueprint.header;
+    assert_eq!(header.schema_version, 1, "no schema bump");
+    assert_eq!(header.manifest, ps_core::domain::blueprint::CaptureOptions::full());
+    assert_eq!(header.name, "v1_relics_base");
+    assert_eq!(header.source_world, "", "identity is scrubbed");
+    assert_eq!(header.source_base, "");
+}
+
+/// PalStudio's blueprint has nowhere to put the guild's base level.
+#[test]
+fn the_base_camp_level_is_dropped_with_a_warning() {
+    let imported = pst::import(&fixture("v1_relics_base.json"), "v1_relics_base").expect("imports");
+    let warning = imported
+        .findings
+        .iter()
+        .find(|f| f.code == "pst.base_camp_level_dropped")
+        .expect("base camp level is reported as dropped");
+    assert!(matches!(warning.severity, Severity::Warning));
+}
+
+/// These files are shared publicly; an import must carry no stranger's identity.
+#[test]
+fn an_import_is_scrubbed_like_a_native_capture() {
+    use ps_core::ue::{PalStruct, Property, PropertyKey, StructValue};
+
+    let imported = pst::import(&fixture("v1_relics_base.json"), "v1_relics_base").expect("imports");
+    for structure in &imported.blueprint.structures {
+        let Some(model) = structure.properties.0.get(&PropertyKey::from("Model")) else {
+            continue;
+        };
+        let Some(model) = ps_core::props::struct_props(model) else { continue };
+        if let Some(Property::Struct(StructValue::Game(PalStruct::MapModel(raw)))) =
+            model.0.get(&PropertyKey::from("RawData"))
+        {
+            assert!(raw.build_player_uid.is_nil(), "build_player_uid must be scrubbed");
+            assert!(raw.group_id_belong_to.is_nil(), "group_id_belong_to must be scrubbed");
+        }
+    }
+}
+
+/// A payload PST itself would call outdated is refused, not half-imported.
+#[test]
+fn an_outdated_payload_is_refused() {
+    let err = pst::import(br#"{"base_camp":{},"map_objects":[]}"#, "old").expect_err("refuses");
+    assert!(
+        err.to_string().contains("re-export"),
+        "the error should tell the user to re-export, got: {err}"
+    );
 }
