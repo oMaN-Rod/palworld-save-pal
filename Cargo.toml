@@ -51,7 +51,10 @@ indexmap = "2"             # uesave's Properties map, for borrowed-key lookups
 futures = "0.3"
 percent-encoding = "2"
 base64 = "0.22"
-zip = { version = "2", default-features = false, features = ["deflate", "deflate64", "bzip2", "zstd", "lzma"] }
+# Pure-Rust codecs only: ps-app reads and writes zips on the wasm32 web build,
+# and bzip2/zstd/lzma each pull a C library that has no libc for that target.
+# ps-server adds them back for mod archives, which can use any method.
+zip = { version = "2", default-features = false, features = ["deflate", "deflate64"] }
 sevenz-rust2 = "0.22"
 blake3 = "1"
 walkdir = "2"

@@ -29,7 +29,7 @@ tracing-subscriber = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }
 percent-encoding = { workspace = true }
-zip = { workspace = true }
+zip = { workspace = true, features = ["bzip2", "zstd", "lzma"] }
 sevenz-rust2 = { workspace = true }
 blake3 = { workspace = true }
 walkdir = { workspace = true }
