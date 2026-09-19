@@ -1039,10 +1039,12 @@ function Report-TailscalePosture {
 
 function Run-WebSpa {
     # Single-port mode: no Vite. ps-server alone serves the BUILT SPA
-    # (ui_build/) plus the API on one port, which is exactly what a Tailscale
-    # Funnel visitor hits — -Webhost/-Serve serve no UI on the server port
-    # (the SPA is Vite's :5173 in those modes). Startup reports the live
-    # tailscale posture so Funnel drift is obvious instead of mysterious.
+    # (ui_build/) plus the API on one port — the same shape as the installed
+    # product, so it is the closest dev stand-in for what users actually hit
+    # (localhost, LAN, or Tailscale Funnel). -Webhost/-Serve serve no UI on
+    # the server port (the SPA is Vite's :5173 in those modes). Startup
+    # reports the live tailscale posture so Funnel drift is obvious instead
+    # of mysterious.
     $cargo = Resolve-Tool "cargo"
     if (-not $cargo) { Die "cargo not found." }
     $h = if ($HostAddr) { $HostAddr } else { "0.0.0.0" }
@@ -1396,12 +1398,14 @@ run — launch from source (pick one; defaults to -Webapp):
   -Webhost          Dev: Vite + ps-server --hosted — the server edition:
                     full Network page (listen modes, allowlists, PIN).
   -WebSpa           Single-port SPA mode: no Vite — ps-server serves the
-                    BUILT SPA (ui_build/, same-origin WS) + API, which is
-                    exactly what a Tailscale Funnel visitor hits;
-                    -Webhost/-Serve serve no UI on the server port. Reports
-                    the live tailscale posture at startup (the app's Network
-                    page owns Funnel state; the server reconciles it at boot).
-                    Builds ui_build/ first if missing (-RebuildSpa to redo).
+                    BUILT SPA (ui_build/, same-origin WS) + API on one port,
+                    the same shape as the installed product. The closest dev
+                    setup to the real thing: test the served UI from
+                    localhost, the LAN, or Tailscale Funnel (startup probes
+                    the live tailscale posture and reports whether Funnel
+                    points at this port; the app's Network page owns Funnel
+                    state, the server reconciles it at boot). Builds
+                    ui_build/ first if missing (-RebuildSpa to redo).
   -Websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   -Landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   -Docker           Build & run the self-build Docker image (compose).
