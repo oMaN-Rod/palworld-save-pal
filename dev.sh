@@ -219,7 +219,7 @@ check_disk_space() {
     case "$mode" in
         webapp|webhost|web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
         websuite) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
-        build-desktop|build-web|build-appimage) min_mb=3500 ;;
+        webhost-spa|build-desktop|build-web|build-appimage) min_mb=3500 ;;
     esac
     local free
     free="$(disk_free_mb "$REPO_ROOT")"
@@ -253,10 +253,10 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        webapp|webhost|web|desktop|serve|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
+        webapp|webhost|webhost-spa|web|desktop|serve|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|serve|webapp|webhost|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
+        desktop|serve|webapp|webhost|webhost-spa|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
@@ -285,7 +285,7 @@ run_preflight() {
         # desktop: tauri dev starts Vite and the embedded server binds its port.
         webapp|webhost|web) check_port "$vite_port"; check_port "$server_port" ;;
         desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
-        serve|docker) check_port "$server_port" ;;
+        serve|docker|webhost-spa) check_port "$server_port" ;;
         websuite|landing) check_port "$vite_port" ;;
     esac
 }
@@ -701,6 +701,65 @@ run_webhost() {
     fi
 }
 
+run_webhost_spa() {
+    # Production-like single-port preview: no Vite. ps-server alone serves
+    # the BUILT SPA (ui_build/) plus the API on one port, so tailscale Funnel
+    # and LAN visitors get the real app — --webhost/--serve serve no UI on
+    # the server port (the SPA is Vite's :5173 in those modes).
+    local server_host="${ARG_HOST:-0.0.0.0}"
+    local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
+    local cargo
+    cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
+
+    ensure_bun_install 0
+    ensure_spa "${ARG_REBUILD_SPA:-0}"
+    banner "Dev: webhost-spa  (ps-server :${server_port} serves built SPA + API)"
+    local server_pid
+    SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
+        --host "$server_host" --port "$server_port" --hosted \
+        --ui-dir "$REPO_ROOT/ui_build" --data-dir "$REPO_ROOT/data" \
+        --db "$REPO_ROOT/ps-rs.db" --dev
+    server_pid="$LAST_BG_PID"
+    wait_for_http "http://127.0.0.1:${server_port}" "ps-server" 300 || true
+    printf '\n%s%s  ▸ PalStudio webhost-spa running:%s  %shttp://127.0.0.1:%s%s\n\n' \
+        "$GREEN" "$BOLD" "$RESET" "$CYAN" "$server_port" "$RESET" >&2
+    printf '%s  One port serves app + API — funnel/LAN visitors work as they would%s\n' "$DIM" "$RESET" >&2
+    printf '%s  against the installed server. Rebuild the SPA after UI edits: --rebuild-spa.%s\n' "$DIM" "$RESET" >&2
+    printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
+    wait_on_pids "$server_pid"
+}
+
+ensure_spa() {
+    # $1 = force (1) to rebuild ui_build/ even when it looks current.
+    # Bakes an EMPTY PUBLIC_WS_URL: the SPA derives its websocket from the
+    # page origin, so the same build works from localhost, the LAN IP, or a
+    # tailscale Funnel domain.
+    local rebuild="${1:-0}"
+    local reason=""
+    if (( rebuild )); then
+        reason="--rebuild-spa"
+    elif [[ ! -f "$REPO_ROOT/ui_build/index.html" ]]; then
+        reason="ui_build/index.html missing"
+    else
+        # head -n1 rather than find -quit, for BSD/macOS find.
+        local stale=""
+        stale="$(find "$UI_DIR/src" "$REPO_ROOT/data/json/ui" \
+            \( -name '*.svelte' -o -name '*.ts' -o -name '*.json' \) -newer "$REPO_ROOT/ui_build/index.html" -print 2>/dev/null \
+            | head -n1 || true)"
+        [[ -n "$stale" ]] && reason="UI sources changed since the last build"
+    fi
+    if [[ -z "$reason" ]]; then
+        log_info "ui_build/ up to date (--rebuild-spa to force a rebuild)."
+        return
+    fi
+    local bun
+    bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
+    log_info "Building the SPA into ui_build/ (${reason})…"
+    write_web_env ""
+    SPAWN_CWD="$UI_DIR" spawn_fg_tagged build "$bun" run build || die "SPA build failed."
+    log_ok "SPA built → ui_build/ (same-origin WS)"
+}
+
 run_desktop() {
     local cargo
     cargo="$(resolve_tool cargo || true)"; [[ -n "$cargo" ]] || die "cargo not found."
@@ -847,7 +906,9 @@ run_build_plain() {
     local bun
     bun="$(resolve_tool bun || true)"; [[ -n "$bun" ]] || die "bun not found."
     ensure_bun_install 1
-    write_web_env "127.0.0.1:${SERVER_PORT_DEFAULT}/ws"
+    # Empty WS URL: a server-served build must dial whatever origin served
+    # the page (localhost, LAN IP, funnel domain), not a baked address.
+    write_web_env ""
     banner "Build: plain SPA (server-served → ui_build/)"
     SPAWN_CWD="$UI_DIR" spawn_fg_tagged build "$bun" run build || die "build failed."
     log_ok "Plain SPA build complete → ui_build/"
@@ -896,6 +957,11 @@ run — launch from source (pick one; defaults to --webapp):
                      only). Alias: --web (the old name).
   --webhost          Dev: Vite + ps-server --hosted — the server edition:
                      full Network page (listen modes, allowlists, PIN).
+  --webhost-spa      Production-like single port: no Vite — ps-server serves
+                     the BUILT SPA (ui_build/, same-origin WS) + API. This is
+                     the mode to test tailscale Funnel / LAN visitors from,
+                     since --webhost/--serve serve no UI on the server port.
+                     Builds ui_build/ first if missing (--rebuild-spa to redo).
   --websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   --docker           Build & run the self-build Docker image (compose).
@@ -922,6 +988,7 @@ options:
   --skip-check       Skip the preflight (advanced).
   --no-install       Skip bun install if node_modules exists.
   --rebuild-wasm     (--websuite/--build-web) force wasm-pack rebuild.
+  --rebuild-spa      (--webhost-spa) force the ui_build/ rebuild.
   --json             Machine-readable preflight JSON (implies --check).
   --force-check-mode <m>  Override the preflight mode (advanced).
   -h, --help         Show this help.
@@ -932,7 +999,7 @@ EOF
 
 ARG_MODE=""; ARG_CHECK=0; ARG_INSTALL_WASM=0; ARG_HOST=""
 ARG_VITE_PORT=""; ARG_SERVER_PORT=""; ARG_NO_SERVER=0; ARG_SKIP_CHECK=0
-ARG_NO_INSTALL=0; ARG_REBUILD_WASM=0; ARG_JSON=0; ARG_FORCE_CHECK_MODE=""
+ARG_NO_INSTALL=0; ARG_REBUILD_WASM=0; ARG_REBUILD_SPA=0; ARG_JSON=0; ARG_FORCE_CHECK_MODE=""
 
 parse_args() {
     while [[ $# -gt 0 ]]; do
@@ -940,6 +1007,7 @@ parse_args() {
             --web) ARG_MODE="webapp"; shift ;; # legacy alias
             --webapp) ARG_MODE="webapp"; shift ;;
             --webhost) ARG_MODE="webhost"; shift ;;
+            --webhost-spa) ARG_MODE="webhost-spa"; shift ;;
             --websuite) ARG_MODE="websuite"; shift ;;
             --desktop) ARG_MODE="desktop"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
@@ -958,6 +1026,7 @@ parse_args() {
             --skip-check) ARG_SKIP_CHECK=1; shift ;;
             --no-install) ARG_NO_INSTALL=1; shift ;;
             --rebuild-wasm) ARG_REBUILD_WASM=1; shift ;;
+            --rebuild-spa) ARG_REBUILD_SPA=1; shift ;;
             --json) ARG_JSON=1; ARG_CHECK=1; shift ;;
             --force-check-mode) ARG_FORCE_CHECK_MODE="$2"; shift 2 ;;
             -h|--help) usage; exit 0 ;;
@@ -1042,6 +1111,7 @@ main() {
     case "${ARG_MODE:-webapp}" in
         web|webapp) run_webapp ;;
         webhost) run_webhost ;;
+        webhost-spa) run_webhost_spa ;;
         websuite) run_websuite ;;
         desktop) run_desktop ;;
         landing) run_landing ;;

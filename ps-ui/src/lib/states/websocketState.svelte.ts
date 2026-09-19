@@ -18,7 +18,11 @@ class SocketState implements Transport {
 
 	connect(context: WSHandlerContext) {
 		const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
-		const wsUrl = `${protocol}${PUBLIC_WS_URL}/${this.#clientId}`;
+		// Server/webapp builds bake an empty PUBLIC_WS_URL: the page's own
+		// origin IS the server, so the websocket follows it (localhost, a LAN
+		// IP, or a tailscale Funnel domain) instead of a build-time address.
+		const wsBase = PUBLIC_WS_URL || `${window.location.host}/ws`;
+		const wsUrl = `${protocol}${wsBase}/${this.#clientId}`;
 		this.#websocket = new WebSocket(wsUrl);
 
 		this.#websocket.onopen = () => {

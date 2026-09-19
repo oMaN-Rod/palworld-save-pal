@@ -444,12 +444,9 @@ pub async fn start_server_with(
         network_policy: Some(Arc::clone(&network) as Arc<dyn ps_app::network_policy::NetworkPolicy>),
     });
     ps_app::handlers::plugins::seed_bundled_plugins(&state).await?;
-    // Port 0 asks the OS for a free ephemeral port (tests rely on it); the
-    // bound address reported back always carries a concrete port.
-    anyhow::ensure!(
-        effective_port <= 65535,
-        "server port must be between 0 and 65535"
-    );
+    // The port type is u16, so the only special value is 0: ask the OS for a
+    // free ephemeral port (tests rely on it); the bound address reported
+    // back always carries a concrete port.
     let bind_ip = listener_bind_ip(&config, &network).await?;
     let listener = tokio::net::TcpListener::bind((bind_ip, effective_port)).await?;
     let addr = listener.local_addr()?;

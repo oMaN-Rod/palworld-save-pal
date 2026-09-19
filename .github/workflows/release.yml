@@ -270,7 +270,9 @@ jobs:
       - name: Build the web UI
         working-directory: palstudio/ps-ui
         run: |
-          echo "PUBLIC_WS_URL=127.0.0.1:5174/ws" > .env
+          # Empty WS URL: the SPA derives its websocket from the page origin,
+          # so one build works from localhost, a LAN IP, or a funnel domain.
+          echo "PUBLIC_WS_URL=" > .env
           echo "PUBLIC_DESKTOP_MODE=false" >> .env
           bun install --frozen-lockfile
           bun run build

@@ -10,7 +10,9 @@
 # ---- Stage 1: UI build (SvelteKit SPA, output -> /app/ui_build) ----
 FROM oven/bun AS ui_builder
 
-ARG PUBLIC_WS_URL=127.0.0.1:5174/ws
+# Empty by default: the SPA derives its websocket from the page origin, so
+# the image works from localhost, a LAN IP, or any published port mapping.
+ARG PUBLIC_WS_URL=
 
 # Copy only what the UI build reads, so Rust-only changes do not invalidate the
 # bun-install/vite layers: generate-sitemap.mjs reads ../../data/json.

@@ -1,7 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { WSHandlerContext } from '$lib/ws/types';
 
-vi.mock('$env/static/public', () => ({ PUBLIC_WS_URL: 'localhost:9999' }));
+// Mutable so individual tests can exercise the empty (same-origin) build.
+// Real deployments bake host:port/ws (see dev.sh write_web_env).
+let publicWsUrl = 'localhost:9999/ws';
+vi.mock('$env/static/public', () => ({ get PUBLIC_WS_URL() { return publicWsUrl; } }));
 
 class FakeWebSocket {
 	static readonly CONNECTING = 0;
@@ -36,6 +39,7 @@ let sockets: FakeWebSocket[] = [];
 
 beforeEach(() => {
 	sockets = [];
+	publicWsUrl = 'localhost:9999/ws';
 	vi.useFakeTimers();
 	vi.stubGlobal(
 		'WebSocket',
@@ -57,6 +61,25 @@ afterEach(() => {
 const context: WSHandlerContext = { goto: (async () => {}) as WSHandlerContext['goto'] };
 
 describe('SocketState.sendAndWait', () => {
+	it('dials the baked address when PUBLIC_WS_URL is set', async () => {
+		const { getSocketState } = await import('./websocketState.svelte');
+		getSocketState().connect(context);
+
+		expect(sockets[0].url.startsWith('wss://localhost:9999/ws/')).toBe(true);
+	});
+
+	it('falls back to the page origin when PUBLIC_WS_URL is empty (server build)', async () => {
+		// The installed/webapp SPA is served BY the server, so the websocket
+		// must follow whatever host served the page — localhost, a LAN IP, or
+		// a tailscale Funnel domain — never a build-time address.
+		publicWsUrl = '';
+		vi.stubGlobal('window', { location: { protocol: 'https:', host: 'pal.example.ts.net' } });
+		const { getSocketState } = await import('./websocketState.svelte');
+		getSocketState().connect(context);
+
+		expect(sockets[0].url.startsWith('wss://pal.example.ts.net/ws/')).toBe(true);
+	});
+
 	it('rejects a request in flight when the socket closes, instead of hanging forever', async () => {
 		const { getSocketState } = await import('./websocketState.svelte');
 		const socket = getSocketState();
