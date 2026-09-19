@@ -60,6 +60,12 @@ jobs:
       - name: ps-web builds for wasm32
         run: cargo build --target wasm32-unknown-unknown -p ps-web -j 2
 
+      # ps-desktop's Tauri build script checks that every resource in
+      # tauri.conf.json exists, and the frontend that fills ui_build is only
+      # built further down. The directory existing is enough to satisfy it.
+      - name: Stub the desktop resource directory
+        run: mkdir -p ui_build && touch ui_build/.gitkeep
+
       - name: Test workspace
         run: cargo test --workspace
 
