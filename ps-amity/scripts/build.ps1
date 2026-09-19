@@ -29,10 +29,37 @@ function Find-CMake {
 }
 $cmake = Find-CMake
 
+# CMake names its Visual Studio generators "Visual Studio <major> <year>", and
+# vswhere reports both halves, so the installed toolchain picks its own generator.
+# Pinning one breaks whenever a runner image rolls forward: `windows-latest` moved
+# from VS 2022 to VS 2026 and a hardcoded "Visual Studio 17 2022" stopped resolving.
+function Find-Generator {
+    if ($env:AMITY_CMAKE_GENERATOR) { return $env:AMITY_CMAKE_GENERATOR }
+    $vswhere = Join-Path ${env:ProgramFiles(x86)} "Microsoft Visual Studio\Installer\vswhere.exe"
+    if (-not (Test-Path $vswhere)) { return $null }
+    $version = & $vswhere -latest -products * -property installationVersion 2>$null | Select-Object -First 1
+    $year = & $vswhere -latest -products * -property catalog_productLineVersion 2>$null | Select-Object -First 1
+    if (-not $version -or -not $year) { return $null }
+    $generator = "Visual Studio $($version.Split('.')[0]) $year"
+    # A cmake too old to know this Visual Studio would fail the same way a stale
+    # pin does, so only pass a generator cmake actually advertises.
+    $known = & $cmake --help 2>$null | Select-String -SimpleMatch $generator
+    if (-not $known) { return $null }
+    return $generator
+}
+
 Push-Location $Root
 try {
     if (-not (Test-Path (Join-Path $Root "build\CMakeCache.txt"))) {
-        & $cmake -B build -G "Visual Studio 17 2022"
+        $generator = Find-Generator
+        if ($generator) {
+            Write-Host "configuring with generator: $generator"
+            & $cmake -B build -G $generator
+        } else {
+            # No vswhere: let CMake fall back to its own newest-VS default.
+            Write-Host "configuring with CMake's default generator"
+            & $cmake -B build
+        }
         if ($LASTEXITCODE -ne 0) { throw "configure failed" }
     }
     & $cmake --build build --config $Config --target @Targets
