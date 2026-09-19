@@ -15,7 +15,7 @@
 # param() MUST be the first executable statement in a .ps1. Everything else
 # (the comment header above, then blank lines/comments) is allowed before it.
 param(
-    [switch]$Web, [switch]$Webapp, [switch]$Webhost, [switch]$WebhostTailscale, [switch]$Websuite,
+    [switch]$Web, [switch]$Webapp, [switch]$Webhost, [switch]$WebSpa, [switch]$Websuite,
     [switch]$Desktop, [switch]$Landing,
     [switch]$Docker, [switch]$Serve, [switch]$Signal,
     [switch]$BuildDesktop, [switch]$BuildAppImage, [switch]$BuildWeb, [switch]$Build, [switch]$Amity,
@@ -293,7 +293,7 @@ function Check-DiskSpace($mode) {
         "web"           { 800 }
         "webapp"        { 800 }
         "webhost"       { 800 }
-        "webhost-tailscale" { 3500 }
+        "web-spa" { 3500 }
         "desktop"       { 2500 }
         "build"         { 3500 }
         "websuite"      { 1500 }
@@ -349,8 +349,8 @@ function Run-Preflight($mode) {
     }
     $results.Add((Check-Bun)) | Out-Null
 
-    $needsRust = $mode -in @("web","webapp","webhost","webhost-tailscale","desktop","serve","build","build-desktop","build-web","docker","signal")
-    $needsStrictRust = $mode -in @("desktop","serve","web","webapp","webhost","webhost-tailscale","build","build-desktop","signal")
+    $needsRust = $mode -in @("web","webapp","webhost","web-spa","desktop","serve","build","build-desktop","build-web","docker","signal")
+    $needsStrictRust = $mode -in @("desktop","serve","web","webapp","webhost","web-spa","build","build-desktop","signal")
     if ($needsRust) { $results.Add((Check-Cargo $needsStrictRust)) | Out-Null }
 
     if ($mode -in @("desktop","build-desktop","signal")) {
@@ -371,7 +371,7 @@ function Run-Preflight($mode) {
     if ($mode -in @("web","webapp","webhost","desktop")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
-    } elseif ($mode -in @("serve","docker","webhost-tailscale")) {
+    } elseif ($mode -in @("serve","docker","web-spa")) {
         $results.Add((Check-Port $ServerPortDefault)) | Out-Null
     } elseif ($mode -in @("websuite","landing")) {
         $results.Add((Check-Port $VitePortDefault)) | Out-Null
@@ -1037,9 +1037,9 @@ function Report-TailscalePosture {
     Log-Info "If the app's policy has Funnel enabled, its boot reconcile repoints it; otherwise enable it on the Network page."
 }
 
-function Run-WebhostTailscale {
-    # Tailscale-shaped single-port mode: no Vite. ps-server alone serves the
-    # BUILT SPA (ui_build/) plus the API on one port, which is exactly what a
+function Run-WebSpa {
+    # Single-port mode: no Vite. ps-server alone serves the BUILT SPA
+    # (ui_build/) plus the API on one port, which is exactly what a Tailscale
     # Funnel visitor hits — -Webhost/-Serve serve no UI on the server port
     # (the SPA is Vite's :5173 in those modes). Startup reports the live
     # tailscale posture so Funnel drift is obvious instead of mysterious.
@@ -1050,14 +1050,14 @@ function Run-WebhostTailscale {
 
     Ensure-BunInstall $false
     Ensure-Spa $RebuildSpa
-    Banner "Dev: webhost-tailscale  (ps-server :$port serves built SPA + API)"
+    Banner "Dev: web-spa  (ps-server :$port serves built SPA + API)"
     $server = Spawn-BgTagged "ps-server" @($cargo, "run", "-p", "ps-server", "--",
         "--host", $h, "--port", "$port", "--hosted",
         "--ui-dir", (Join-Path $RepoRoot "ui_build"), "--data-dir", (Join-Path $RepoRoot "data"),
         "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") $RepoRoot $null
     Wait-ForHttp "http://127.0.0.1:$port" "ps-server" 300 | Out-Null
     Write-Host ""
-    Write-Host "  ▸ PalStudio webhost-tailscale running:  http://127.0.0.1:$port" -ForegroundColor Cyan
+    Write-Host "  ▸ PalStudio web-spa running:  http://127.0.0.1:$port" -ForegroundColor Cyan
     # Give the server's own Funnel reconcile a beat, then report posture.
     Start-Sleep -Seconds 2
     Report-TailscalePosture $port
@@ -1395,13 +1395,13 @@ run — launch from source (pick one; defaults to -Webapp):
                     Alias: -Web (the old name).
   -Webhost          Dev: Vite + ps-server --hosted — the server edition:
                     full Network page (listen modes, allowlists, PIN).
-  -WebhostTailscale Tailscale-shaped single port: no Vite — ps-server serves
-                    the BUILT SPA (ui_build/, same-origin WS) + API, which is
-                    exactly what a Funnel visitor hits; -Webhost/-Serve serve
-                    no UI on the server port. Reports the live tailscale
-                    posture at startup (the app's Network page owns Funnel
-                    state; the server reconciles it at boot). Builds ui_build/
-                    first if missing (-RebuildSpa to redo).
+  -WebSpa           Single-port SPA mode: no Vite — ps-server serves the
+                    BUILT SPA (ui_build/, same-origin WS) + API, which is
+                    exactly what a Tailscale Funnel visitor hits;
+                    -Webhost/-Serve serve no UI on the server port. Reports
+                    the live tailscale posture at startup (the app's Network
+                    page owns Funnel state; the server reconciles it at boot).
+                    Builds ui_build/ first if missing (-RebuildSpa to redo).
   -Websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   -Landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
   -Docker           Build & run the self-build Docker image (compose).
@@ -1444,7 +1444,7 @@ options:
                     that start several components (-Webapp, -Webhost, -Signal)
                     use psmux when it is installed: one pane each, session "ps".
   -RebuildWasm      (-Websuite/-BuildWeb) force wasm-pack rebuild.
-  -RebuildSpa       (-WebhostTailscale) force the ui_build/ rebuild.
+  -RebuildSpa       (-WebSpa) force the ui_build/ rebuild.
   -GameDir <path>   (-Amity) Palworld install dir (…\steamapps\common\Palworld)
                     when Steam auto-detection does not find it.
   -AmityWorkspace <path>  (-Amity) the UE4SS CMake workspace (default: an
@@ -1472,7 +1472,7 @@ if ($BuildAppImage) {
 }
 
 $mode = if ($ForceCheckMode) { $ForceCheckMode }
-        elseif ($WebhostTailscale) { "webhost-tailscale" }
+        elseif ($WebSpa)       { "web-spa" }
         elseif ($Webhost)     { "webhost" }
         elseif ($Websuite)    { "websuite" }
         elseif ($Webapp -or $Web) { "webapp" }
@@ -1543,7 +1543,7 @@ Invoke-WithCleanup {
     switch ($mode) {
         "webapp"        { Run-Webapp }
         "webhost"       { Run-Webhost }
-        "webhost-tailscale" { Run-WebhostTailscale }
+        "web-spa"       { Run-WebSpa }
         "websuite"      { Run-Websuite }
         "desktop"       { Run-Desktop }
         "landing"       { Run-Landing }
