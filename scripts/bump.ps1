@@ -29,3 +29,18 @@ if ($content -notmatch '(?m)^version = "[^"]*"') {
 $updated = $content -replace '(?m)^version = "[^"]*"', "version = `"$Version`""
 Set-Content -Path $cargoToml -Value $updated -NoNewline
 Write-Host "Bumped project version to $Version (Cargo.toml [workspace.package])"
+
+# The MSI bundler rejects a pre-release identifier that isn't numeric, so the
+# installer carries just the numeric core while the app keeps the full string.
+# Kept in step here because a version hardcoded in two places always drifts.
+$tauriConf = Join-Path $PSScriptRoot "..\ps-desktop\tauri.conf.json"
+$numericVersion = [regex]::Match($Version, '^\d+\.\d+\.\d+').Value
+$conf = Get-Content -Path $tauriConf -Raw
+$wixVersion = '("wix"\s*:\s*\{\s*"version"\s*:\s*")[^"]*(")'
+if ($conf -notmatch $wixVersion) {
+    Write-Error "Could not find bundle.windows.wix.version in $tauriConf"
+    exit 1
+}
+$conf = [regex]::Replace($conf, $wixVersion, '${1}' + $numericVersion + '${2}')
+Set-Content -Path $tauriConf -Value $conf -NoNewline
+Write-Host "Set the MSI installer version to $numericVersion (tauri.conf.json bundle.windows.wix.version)"

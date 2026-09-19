@@ -38,6 +38,11 @@
       "../ui_build": "ui",
       "../data": "data",
       "resources/amity": "amity"
+    },
+    "windows": {
+      "wix": {
+        "version": "1.5.0"
+      }
     }
   }
 }
