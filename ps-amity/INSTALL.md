@@ -64,7 +64,7 @@ inside the folder holding `UE4SS.dll`:
 Example lines:
 
 ```
-[PSAmity] loaded v0.2.0
+[PSAmity] loaded v0.3.1
 [PSAmity] unreal initialized
 [PSAmity] bridge listening on 127.0.0.1:<port> as "PSAmity"
 ```
