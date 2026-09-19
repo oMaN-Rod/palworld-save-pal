@@ -219,7 +219,7 @@ check_disk_space() {
     case "$mode" in
         webapp|webhost|web) min_mb=800 ;; desktop) min_mb=2500 ;; build) min_mb=3500 ;;
         websuite) min_mb=1500 ;; landing) min_mb=300 ;; docker) min_mb=2500 ;;
-        webhost-spa|build-desktop|build-web|build-appimage) min_mb=3500 ;;
+        webhost-tailscale|build-desktop|build-web|build-appimage) min_mb=3500 ;;
     esac
     local free
     free="$(disk_free_mb "$REPO_ROOT")"
@@ -253,10 +253,10 @@ run_preflight() {
     check_bun
     local needs_rust=0 needs_strict_rust=0
     case "$mode" in
-        webapp|webhost|webhost-spa|web|desktop|serve|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
+        webapp|webhost|webhost-tailscale|web|desktop|serve|build|build-desktop|build-appimage|build-web|docker) needs_rust=1 ;;
     esac
     case "$mode" in
-        desktop|serve|webapp|webhost|webhost-spa|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
+        desktop|serve|webapp|webhost|webhost-tailscale|web|build|build-desktop|build-appimage) needs_strict_rust=1 ;;
     esac
     if (( needs_rust )); then
         check_cargo "$needs_strict_rust"
@@ -285,7 +285,7 @@ run_preflight() {
         # desktop: tauri dev starts Vite and the embedded server binds its port.
         webapp|webhost|web) check_port "$vite_port"; check_port "$server_port" ;;
         desktop) check_port "$VITE_PORT_DEFAULT"; check_port "$SERVER_PORT_DEFAULT" ;;
-        serve|docker|webhost-spa) check_port "$server_port" ;;
+        serve|docker|webhost-tailscale) check_port "$server_port" ;;
         websuite|landing) check_port "$vite_port" ;;
     esac
 }
@@ -701,11 +701,49 @@ run_webhost() {
     fi
 }
 
-run_webhost_spa() {
-    # Production-like single-port preview: no Vite. ps-server alone serves
-    # the BUILT SPA (ui_build/) plus the API on one port, so tailscale Funnel
-    # and LAN visitors get the real app — --webhost/--serve serve no UI on
-    # the server port (the SPA is Vite's :5173 in those modes).
+report_tailscale_posture() {
+    # $1 = the local port this server listens on. Read-only probe of the
+    # tailscale CLI; the APP stays the single writer of Funnel state (its
+    # startup reconcile enables/repoints Funnel when its policy says so), so
+    # this only reports and guides — it never toggles anything.
+    local ts json proxy_port host
+    ts="$(resolve_tool tailscale || true)"
+    if [[ -z "$ts" ]]; then
+        log_warn "tailscale CLI not found — Funnel cannot be probed here."
+        return 0
+    fi
+    json="$("$ts" funnel status --json 2>/dev/null || true)"
+    if [[ -z "$json" ]]; then
+        log_warn "tailscale did not answer (daemon down or logged out?) — Funnel status unknown."
+        return 0
+    fi
+    # `|| true` on each pipeline: grep exits 1 on no match, and under
+    # `set -o pipefail` an unguarded substitution would kill the script.
+    proxy_port="$(printf '%s' "$json" | grep -oE '127\.0\.0\.1:[0-9]+' | head -n1 | cut -d: -f2 || true)"
+    host="$(printf '%s' "$json" | grep -oE '[a-z0-9-]+\.[a-z0-9-]+\.ts\.net' | head -n1 || true)"
+    if ! printf '%s' "$json" | grep -qE '"AllowFunnel"[^}]*true'; then
+        log_warn "Funnel is OFF — enable it in the app: Settings → Network → 'Publish via tailscale funnel'."
+        log_info "The app owns Funnel state; its boot reconcile will then keep it pointed at :$1."
+        return 0
+    fi
+    if [[ -z "$proxy_port" ]]; then
+        log_warn "Funnel is allowed but has no local target — enable it from the app's Network page."
+        return 0
+    fi
+    if [[ "$proxy_port" == "$1" ]]; then
+        log_ok "Funnel is LIVE → https://${host:-<this-machine>}"
+        return 0
+    fi
+    log_warn "Funnel points at 127.0.0.1:$proxy_port, not this server's :$1."
+    log_info "If the app's policy has Funnel enabled, its boot reconcile repoints it; otherwise enable it on the Network page."
+}
+
+run_webhost_tailscale() {
+    # Tailscale-shaped single-port mode: no Vite. ps-server alone serves the
+    # BUILT SPA (ui_build/) plus the API on one port, which is exactly what a
+    # Funnel visitor hits — --webhost/--serve serve no UI on the server port
+    # (the SPA is Vite's :5173 in those modes). Startup reports the live
+    # tailscale posture so Funnel drift is obvious instead of mysterious.
     local server_host="${ARG_HOST:-0.0.0.0}"
     local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
     local cargo
@@ -713,7 +751,7 @@ run_webhost_spa() {
 
     ensure_bun_install 0
     ensure_spa "${ARG_REBUILD_SPA:-0}"
-    banner "Dev: webhost-spa  (ps-server :${server_port} serves built SPA + API)"
+    banner "Dev: webhost-tailscale  (ps-server :${server_port} serves built SPA + API)"
     local server_pid
     SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
         --host "$server_host" --port "$server_port" --hosted \
@@ -721,8 +759,11 @@ run_webhost_spa() {
         --db "$REPO_ROOT/ps-rs.db" --dev
     server_pid="$LAST_BG_PID"
     wait_for_http "http://127.0.0.1:${server_port}" "ps-server" 300 || true
-    printf '\n%s%s  ▸ PalStudio webhost-spa running:%s  %shttp://127.0.0.1:%s%s\n\n' \
+    printf '\n%s%s  ▸ PalStudio webhost-tailscale running:%s  %shttp://127.0.0.1:%s%s\n\n' \
         "$GREEN" "$BOLD" "$RESET" "$CYAN" "$server_port" "$RESET" >&2
+    # Give the server's own Funnel reconcile a beat, then report posture.
+    sleep 2
+    report_tailscale_posture "$server_port"
     printf '%s  One port serves app + API — funnel/LAN visitors work as they would%s\n' "$DIM" "$RESET" >&2
     printf '%s  against the installed server. Rebuild the SPA after UI edits: --rebuild-spa.%s\n' "$DIM" "$RESET" >&2
     printf '%s  Ctrl-C to stop. dev.sh restores ps-ui/.env on exit.%s\n\n' "$DIM" "$RESET" >&2
@@ -957,10 +998,12 @@ run — launch from source (pick one; defaults to --webapp):
                      only). Alias: --web (the old name).
   --webhost          Dev: Vite + ps-server --hosted — the server edition:
                      full Network page (listen modes, allowlists, PIN).
-  --webhost-spa      Production-like single port: no Vite — ps-server serves
-                     the BUILT SPA (ui_build/, same-origin WS) + API. This is
-                     the mode to test tailscale Funnel / LAN visitors from,
-                     since --webhost/--serve serve no UI on the server port.
+  --webhost-tailscale  Tailscale-shaped single port: no Vite — ps-server
+                     serves the BUILT SPA (ui_build/, same-origin WS) + API,
+                     which is exactly what a Funnel visitor hits. Probes the
+                     live tailscale posture at startup and tells you whether
+                     Funnel points at this port (the app's Network page owns
+                     Funnel state; the server reconciles it at boot).
                      Builds ui_build/ first if missing (--rebuild-spa to redo).
   --websuite         Dev: landing page + tool (VITE_TRANSPORT=worker).
   --landing          Dev: landing page ONLY — no WASM, no server (VITE_LANDING_ONLY).
@@ -988,7 +1031,7 @@ options:
   --skip-check       Skip the preflight (advanced).
   --no-install       Skip bun install if node_modules exists.
   --rebuild-wasm     (--websuite/--build-web) force wasm-pack rebuild.
-  --rebuild-spa      (--webhost-spa) force the ui_build/ rebuild.
+  --rebuild-spa      (--webhost-tailscale) force the ui_build/ rebuild.
   --json             Machine-readable preflight JSON (implies --check).
   --force-check-mode <m>  Override the preflight mode (advanced).
   -h, --help         Show this help.
@@ -1007,7 +1050,7 @@ parse_args() {
             --web) ARG_MODE="webapp"; shift ;; # legacy alias
             --webapp) ARG_MODE="webapp"; shift ;;
             --webhost) ARG_MODE="webhost"; shift ;;
-            --webhost-spa) ARG_MODE="webhost-spa"; shift ;;
+            --webhost-tailscale) ARG_MODE="webhost-tailscale"; shift ;;
             --websuite) ARG_MODE="websuite"; shift ;;
             --desktop) ARG_MODE="desktop"; shift ;;
             --landing) ARG_MODE="landing"; shift ;;
@@ -1111,7 +1154,7 @@ main() {
     case "${ARG_MODE:-webapp}" in
         web|webapp) run_webapp ;;
         webhost) run_webhost ;;
-        webhost-spa) run_webhost_spa ;;
+        webhost-tailscale) run_webhost_tailscale ;;
         websuite) run_websuite ;;
         desktop) run_desktop ;;
         landing) run_landing ;;
