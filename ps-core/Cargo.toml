@@ -9,7 +9,7 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
 uuid = { workspace = true }
-uesave = { workspace = true }
+uesave = { workspace = true, features = ["gvas-json"] }
 chrono = { workspace = true }
 tracing = { workspace = true }
 cityhasher = { workspace = true }

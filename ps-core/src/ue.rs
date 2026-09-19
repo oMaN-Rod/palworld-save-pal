@@ -9,7 +9,9 @@
 
 pub use uesave::*;
 
-pub use uesave::games::palworld::{compression, CompressionFormat, PalStruct, Palworld};
+pub use uesave::games::palworld::{
+    compression, CompressionFormat, PalStruct, PalWorkCollection, PalWorkerDirector, Palworld,
+};
 
 /// The Palworld archive type parameter carried by every value type below.
 pub type Arch = uesave::SaveGameArchiveType<Palworld>;

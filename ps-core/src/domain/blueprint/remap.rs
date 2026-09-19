@@ -258,23 +258,20 @@ fn rewrite_references(blueprint: &mut BaseBlueprint, remap: &IdRemap) -> Result<
     Ok(())
 }
 
-/// A base names its worker character container a second time, inside the opaque
-/// `WorkerDirector` blob uesave keeps raw. Missed, the placed base's workers resolve to
-/// the SOURCE base's container.
-///
-/// A blob that does not decode is refused rather than carried over: the layout is fixed at
-/// 118 bytes, so a game update changing it would silently reinstate that defect.
+/// A base names its worker character container a second time, in the typed
+/// `WorkerDirector` struct. Missed, the placed base's workers resolve to the SOURCE
+/// base's container.
 fn rewrite_worker_director_container(
     remap: &IdRemap,
     base_camp: &mut Properties,
 ) -> Result<(), CoreError> {
-    let Some(raw_data) = props::get_mut(base_camp, &["WorkerDirector", "RawData"]) else {
+    let Some(Property::Struct(StructValue::Game(PalStruct::WorkerDirector(director)))) =
+        props::get_mut(base_camp, &["WorkerDirector", "RawData"])
+    else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else { return Ok(()) };
-    let mut director = palbin::read_worker_director(bytes)?;
-    director.container_id = remap.get(director.container_id).unwrap_or(Uuid::nil());
-    *bytes = director.to_bytes();
+    let container_id = props::guid_to_uuid(&director.container_id);
+    director.container_id = props::uuid_to_guid(remap.get(container_id).unwrap_or(Uuid::nil()));
     Ok(())
 }
 
@@ -384,12 +381,9 @@ fn rewrite_work(remap: &IdRemap, work: &mut StructValue) {
     });
 }
 
-/// The base camp names its works a second time, in an opaque blob uesave keeps raw.
+/// The base camp names its works a second time, in the typed `WorkCollection` struct.
 /// `own_id` is a definition; the list is replaced wholesale with the blueprint's
 /// post-remap work ids, dropping ids already dangling in the source save.
-///
-/// A blob that does not decode is refused rather than carried over: kept, it would leave
-/// the placed base naming the SOURCE save's works and calling itself by its base id.
 fn rebuild_work_collection(
     blueprint: &mut BaseBlueprint,
     remap: &mut IdRemap,
@@ -402,13 +396,13 @@ fn rebuild_work_collection(
         .collect();
 
     let Some(base_camp) = &mut blueprint.base_camp else { return Ok(()) };
-    let Some(raw_data) = props::get_mut(base_camp, &["WorkCollection", "RawData"]) else {
+    let Some(Property::Struct(StructValue::Game(PalStruct::WorkCollection(collection)))) =
+        props::get_mut(base_camp, &["WorkCollection", "RawData"])
+    else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else { return Ok(()) };
-    let mut collection = palbin::read_work_collection(bytes)?;
-    collection.own_id = remap.new_for(collection.own_id);
-    collection.work_ids = work_ids;
-    *bytes = collection.to_bytes();
+    let own_id = props::guid_to_uuid(&collection.own_id);
+    collection.own_id = props::uuid_to_guid(remap.new_for(own_id));
+    collection.work_ids = work_ids.into_iter().map(props::uuid_to_guid).collect();
     Ok(())
 }

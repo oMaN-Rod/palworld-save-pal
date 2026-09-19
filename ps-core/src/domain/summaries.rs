@@ -4,7 +4,6 @@ use std::collections::{BTreeMap, HashMap};
 
 use crate::dto::summary::{ticks_to_datetime, GuildSummary, IsoDateTime, PlayerSummary};
 use crate::error::CoreError;
-use crate::palbin;
 use crate::progress::ProgressSink;
 use crate::props;
 use crate::session::{parse_palworld_save, SaveSession};
@@ -161,7 +160,7 @@ fn parse_player_save_and_timestamp(
 }
 
 /// Worker-container ids for every base belonging to `guild_id`. A base whose
-/// `WorkerDirector` blob fails to decode contributes no id rather than aborting the count.
+/// `WorkerDirector` is not a typed struct contributes no id rather than aborting the count.
 fn guild_worker_container_ids(base_camp_entries: &[crate::ue::MapEntry], guild_id: Uuid) -> Vec<Uuid> {
     let mut container_ids = Vec::new();
     for base_entry in base_camp_entries {
@@ -176,13 +175,14 @@ fn guild_worker_container_ids(base_camp_entries: &[crate::ue::MapEntry], guild_i
         if props::fguid_to_uuid(&camp.group_id_belong_to) != guild_id {
             continue;
         }
-        let Some(worker_blob) = props::get(value_properties, &["WorkerDirector", "RawData"])
-            .and_then(props::as_byte_array)
-        else {
+        let Some(raw) = props::get(value_properties, &["WorkerDirector", "RawData"]) else {
             continue;
         };
-        if let Ok(container_id) = palbin::worker_director_container_id(worker_blob) {
-            container_ids.push(container_id);
+        if let crate::ue::Property::Struct(crate::ue::StructValue::Game(
+            crate::ue::PalStruct::WorkerDirector(director),
+        )) = raw
+        {
+            container_ids.push(props::guid_to_uuid(&director.container_id));
         }
     }
     container_ids
@@ -355,13 +355,10 @@ pub fn extract_summaries(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::palbin::test_bytes::shuffle_guid_bytes;
     use crate::ue::games::palworld::{
         PalBaseCamp, PalCharacterData, PalGroupData, PalGroupVariant, PalGuildGroup, PalTransform,
     };
-    use crate::ue::{
-        ByteArray, Double, MapEntry, Properties, Property, Quat, StructValue, ValueVec, Vector,
-    };
+    use crate::ue::{Double, MapEntry, Properties, Property, Quat, StructValue, Vector};
 
     const NIL_UUID: &str = "00000000-0000-0000-0000-000000000000";
     const PLAYER_ONE: &str = "11111111-1111-1111-1111-111111111111";
@@ -523,17 +520,19 @@ mod tests {
             owner_map_object_instance_id: crate::ue::FGuid::nil(),
             trailing_bytes: [0; 4],
         };
-        let mut worker_blob = vec![0u8; 118];
-        let display_bytes = *worker_container_id
-            .parse::<uuid::Uuid>()
-            .unwrap()
-            .as_bytes();
-        worker_blob[98..114].copy_from_slice(&shuffle_guid_bytes(display_bytes));
-
         let mut worker_properties = Properties::default();
         worker_properties.insert(
             "RawData",
-            Property::Array(ValueVec::Byte(ByteArray::Byte(worker_blob))),
+            Property::Struct(StructValue::Game(crate::ue::PalStruct::WorkerDirector(Box::new(
+                crate::ue::PalWorkerDirector {
+                    id: crate::ue::FGuid::nil(),
+                    spawn_transform: zero_transform(),
+                    current_order_type: 0,
+                    current_battle_type: 0,
+                    container_id: fguid(worker_container_id),
+                    trailing_bytes: [0; 4],
+                },
+            )))),
         );
         let mut value_properties = Properties::default();
         value_properties.insert(

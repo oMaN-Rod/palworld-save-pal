@@ -739,5 +739,7 @@ fn pal_struct_name(value: &PalStruct<crate::ue::Arch>) -> &'static str {
         PalStruct::MapModel(_) => "PalMapModel",
         PalStruct::MapConcreteModel(_) => "PalMapConcreteModel",
         PalStruct::MapConcreteModelModule(_) => "PalMapConcreteModelModule",
+        PalStruct::WorkerDirector(_) => "PalWorkerDirector",
+        PalStruct::WorkCollection(_) => "PalWorkCollection",
     }
 }

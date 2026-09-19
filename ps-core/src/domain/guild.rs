@@ -27,9 +27,8 @@ pub fn base_camp_location(entry: &crate::ue::MapEntry) -> Option<(f64, f64, f64)
 
 /// From a `BaseCampSaveData` entry: `(group_id_belong_to, WorkerDirector container_id)`.
 ///
-/// `uesave` registers `BaseCampSaveData.WorkerDirector.RawData` as a generic `Struct(None)`
-/// hint it never decodes, so the property arrives as a raw byte array;
-/// `palbin::worker_director_container_id` bounds-checks and parses that fixed 118-byte layout.
+/// `uesave` registers `BaseCampSaveData.WorkerDirector.RawData` with a `PalWorkerDirector`
+/// type hint, so the property arrives as a typed struct rather than a raw byte array.
 pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uuid, uuid::Uuid)> {
     let value_properties = props::struct_props(&entry.value)?;
     let raw_data = props::get(value_properties, &["RawData"])?;
@@ -38,9 +37,14 @@ pub fn base_guild_and_container(entry: &crate::ue::MapEntry) -> Option<(uuid::Uu
     };
     let guild_id = props::guid_to_uuid(&base_camp.group_id_belong_to);
 
-    let worker_director_blob = props::get(value_properties, &["WorkerDirector", "RawData"])
-        .and_then(props::as_byte_array)?;
-    let container_id = crate::palbin::worker_director_container_id(worker_director_blob).ok()?;
+    let raw = props::get(value_properties, &["WorkerDirector", "RawData"])?;
+    let crate::ue::Property::Struct(crate::ue::StructValue::Game(
+        crate::ue::PalStruct::WorkerDirector(director),
+    )) = raw
+    else {
+        return None;
+    };
+    let container_id = props::guid_to_uuid(&director.container_id);
 
     Some((guild_id, container_id))
 }
@@ -1017,7 +1021,6 @@ pub fn rebuild_guild_membership(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::palbin::test_bytes::shuffle_guid_bytes;
     use crate::ue::games::palworld::{PalBaseCamp, PalTransform};
     use crate::ue::{
         ByteArray, Double, MapEntry, Properties, Property, Quat, StructValue, ValueVec, Vector,
@@ -1056,11 +1059,17 @@ mod tests {
         }
     }
 
-    fn worker_director_blob(container_id: &str) -> Vec<u8> {
-        let mut blob = vec![0u8; 118];
-        let display_bytes = *container_id.parse::<uuid::Uuid>().unwrap().as_bytes();
-        blob[98..114].copy_from_slice(&shuffle_guid_bytes(display_bytes));
-        blob
+    fn worker_director_property(container_id: &str) -> Property {
+        Property::Struct(StructValue::Game(crate::ue::PalStruct::WorkerDirector(Box::new(
+            crate::ue::PalWorkerDirector {
+                id: crate::ue::FGuid::nil(),
+                spawn_transform: zero_transform(),
+                current_order_type: 0,
+                current_battle_type: 0,
+                container_id: fguid(container_id),
+                trailing_bytes: [0; 4],
+            },
+        ))))
     }
 
     fn base_camp_entry(base_id: &str, guild_id: &str, worker_container_id: &str) -> MapEntry {
@@ -1076,12 +1085,7 @@ mod tests {
             trailing_bytes: [0; 4],
         };
         let mut worker_properties = Properties::default();
-        worker_properties.insert(
-            "RawData",
-            Property::Array(ValueVec::Byte(ByteArray::Byte(worker_director_blob(
-                worker_container_id,
-            )))),
-        );
+        worker_properties.insert("RawData", worker_director_property(worker_container_id));
         let mut value_properties = Properties::default();
         value_properties.insert(
             "RawData",
@@ -1120,7 +1124,7 @@ mod tests {
     }
 
     #[test]
-    fn base_guild_and_container_returns_none_when_worker_director_blob_is_wrong_length() {
+    fn base_guild_and_container_returns_none_when_worker_director_is_not_a_typed_struct() {
         let camp = PalBaseCamp {
             id: fguid(BASE_ID),
             name: String::new(),

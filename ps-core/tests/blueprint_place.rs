@@ -1186,24 +1186,34 @@ fn base_camp_raw(
     }
 }
 
-/// The base camp's `WorkerDirector`, decoded from an opaque byte blob uesave leaves
-/// untyped; names the worker container id and the worker spawn point.
-fn worker_director(session: &SaveSession, base_id: Uuid) -> ps_core::palbin::WorkerDirector {
+/// The base camp's `WorkerDirector`, now a typed struct rather than an opaque blob.
+fn worker_director(session: &SaveSession, base_id: Uuid) -> ps_core::ue::PalWorkerDirector {
     let entry = base_camp_entry(session, base_id);
-    let value_props = ps_core::props::struct_props(&entry.value).expect("base camp value");
-    let bytes = ps_core::props::get(value_props, &["WorkerDirector", "RawData"])
-        .and_then(ps_core::props::as_byte_array)
-        .expect("base camp carries a WorkerDirector blob");
-    ps_core::palbin::read_worker_director(bytes).expect("WorkerDirector blob decodes")
+    let value_props = ps_core::props::struct_props(&entry.value).expect("base camp struct");
+    let raw = ps_core::props::get(value_props, &["WorkerDirector", "RawData"])
+        .expect("base camp carries a WorkerDirector");
+    let ps_core::ue::Property::Struct(ps_core::ue::StructValue::Game(
+        ps_core::ue::PalStruct::WorkerDirector(director),
+    )) = raw
+    else {
+        panic!("WorkerDirector is not a typed struct");
+    };
+    (**director).clone()
 }
 
-fn work_collection(session: &SaveSession, base_id: Uuid) -> ps_core::palbin::WorkCollection {
+/// The base camp's `WorkCollection`, now a typed struct rather than an opaque blob.
+fn work_collection(session: &SaveSession, base_id: Uuid) -> ps_core::ue::PalWorkCollection {
     let entry = base_camp_entry(session, base_id);
-    let value_props = ps_core::props::struct_props(&entry.value).expect("base camp value");
-    let bytes = ps_core::props::get(value_props, &["WorkCollection", "RawData"])
-        .and_then(ps_core::props::as_byte_array)
-        .expect("base camp carries a WorkCollection blob");
-    ps_core::palbin::read_work_collection(bytes).expect("WorkCollection blob decodes")
+    let value_props = ps_core::props::struct_props(&entry.value).expect("base camp struct");
+    let raw = ps_core::props::get(value_props, &["WorkCollection", "RawData"])
+        .expect("base camp carries a WorkCollection");
+    let ps_core::ue::Property::Struct(ps_core::ue::StructValue::Game(
+        ps_core::ue::PalStruct::WorkCollection(collection),
+    )) = raw
+    else {
+        panic!("WorkCollection is not a typed struct");
+    };
+    collection.clone()
 }
 
 /// `(character handle ids, base ids, base_camp_point ids)` a placement registers itself in.
@@ -1510,144 +1520,17 @@ fn a_destination_missing_a_collection_is_refused_before_anything_lands() {
     );
 }
 
-/// `WorkerDirector` is a fixed 118-byte layout; `WorkCollection` is checked to its last
-/// byte -- one extra byte fails either to decode.
-fn lengthen_base_camp_blob(base_camp: &mut ps_core::ue::Properties, field: &str) {
-    let raw_data = ps_core::props::get_mut(base_camp, &[field, "RawData"])
-        .unwrap_or_else(|| panic!("the base camp must carry a {field} blob"));
-    let bytes = ps_core::props::as_byte_array_mut(raw_data)
-        .unwrap_or_else(|| panic!("{field} RawData must be a byte array"));
-    bytes.push(0);
-}
-
-fn lengthen_session_base_camp_blob(session: &mut SaveSession, base_id: Uuid, field: &str) {
-    let entries = ps_core::domain::world::base_camp_map_mut(&mut session.level)
-        .expect("base camp map")
-        .expect("the fixture must have BaseCampSaveData");
-    let entry = entries
-        .iter_mut()
-        .find(|entry| ps_core::props::as_uuid(&entry.key) == Some(base_id))
-        .expect("the named base camp entry exists");
-    let value_props =
-        ps_core::props::struct_props_mut(&mut entry.value).expect("base camp value");
-    lengthen_base_camp_blob(value_props, field);
-}
-
-/// `WorkerDirector` and `WorkCollection` are opaque blobs a placement must rewrite before
-/// claiming a base as its own; neither is modelled by uesave.
-#[test]
-fn a_blueprint_blob_that_does_not_decode_refuses_the_placement() {
-    let source = common::load_fixture_session("v1_relics");
-    let intact = source_blueprint(&source, CaptureOptions::full());
-
-    {
-        let mut target = common::load_fixture_session("world1");
-        let guild_id = first_guild_id(&target);
-        let owner = guild_member_uid(&target, guild_id);
-        place::place(
-            &mut target,
-            &intact,
-            &new_base_request(anchor_far_from_everything(), guild_id, owner),
-            &game_data(),
-        )
-        .expect("setup: the intact blueprint must place, or the refusals below prove nothing");
-    }
-
-    for field in ["WorkerDirector", "WorkCollection"] {
-        let mut blueprint = intact.clone();
-        lengthen_base_camp_blob(
-            blueprint.base_camp.as_mut().expect("the captured base has a base camp"),
-            field,
-        );
-
-        let mut target = common::load_fixture_session("world1");
-        let bytes_before = target.level_sav_bytes().expect("world1 must serialize at baseline");
-        let fingerprint_before = session_fingerprint(&target);
-        let guild_id = first_guild_id(&target);
-        let owner = guild_member_uid(&target, guild_id);
-
-        let error = match place::place(
-            &mut target,
-            &blueprint,
-            &new_base_request(anchor_far_from_everything(), guild_id, owner),
-            &game_data(),
-        ) {
-            Err(error) => error,
-            Ok(result) => panic!(
-                "{field}: a blob that does not decode must refuse the placement, got {result:?}"
-            ),
-        };
-        assert!(
-            error.to_string().contains(field),
-            "{field}: the refusal must name the blob that failed: {error}"
-        );
-        assert_eq!(
-            session_fingerprint(&target),
-            fingerprint_before,
-            "{field}: a refused placement must not half-apply"
-        );
-        assert_eq!(
-            target.level_sav_bytes().expect("world1 must still serialize"),
-            bytes_before,
-            "{field}: a refused placement must leave the destination byte-identical"
-        );
-    }
-}
-
-/// A merge appends to the TARGET base's `WorkCollection`; the blob must decode during
-/// preflight, before `commit` runs the append.
-#[test]
-fn a_merge_into_a_base_whose_work_collection_is_corrupt_lands_nothing() {
-    let mut session = session_with_limits();
-    let base_id = common::fixture_base_id(&session);
-    let blueprint = blueprint_of(&session, base_id);
-    let owner = common::fixture_player_uid(&session);
-    assert!(!blueprint.works.is_empty(), "the blueprint must carry works to append");
-
-    let mut anchor = common::fixture_base_anchor(&session, base_id);
-    anchor.x += 20_000.0;
-
-    {
-        let mut control = session_with_limits();
-        place::place(
-            &mut control,
-            &blueprint,
-            &merge_request(anchor, base_id, owner),
-            &game_data(),
-        )
-        .expect("setup: the merge must succeed against an intact target, or this proves nothing");
-    }
-
-    lengthen_session_base_camp_blob(&mut session, base_id, "WorkCollection");
-    let bytes_before = session.level_sav_bytes().expect("the target must serialize at baseline");
-    let fingerprint_before = session_fingerprint(&session);
-
-    let error = match place::place(
-        &mut session,
-        &blueprint,
-        &merge_request(anchor, base_id, owner),
-        &game_data(),
-    ) {
-        Err(error) => error,
-        Ok(result) => {
-            panic!("a target WorkCollection that does not decode must refuse the merge, got {result:?}")
-        }
-    };
-    assert!(
-        error.to_string().contains("WorkCollection"),
-        "the refusal must name the blob that failed: {error}"
-    );
-    assert_eq!(
-        session_fingerprint(&session),
-        fingerprint_before,
-        "a refused merge must not half-apply"
-    );
-    assert_eq!(
-        session.level_sav_bytes().expect("the target must still serialize"),
-        bytes_before,
-        "a refused merge must leave the target byte-identical"
-    );
-}
+// `WorkerDirector`/`WorkCollection` were opaque byte blobs that `place` decoded and
+// re-serialized itself, so two tests here used to corrupt one in an already-loaded
+// blueprint or session and assert `place::place` refused it. Both are now typed
+// structs uesave decodes while reading the save/blueprint, before `place` ever runs,
+// and `session::parse_palworld_save` reads with `error_to_raw(false)` (deliberately,
+// so an unparseable property is a hard error rather than a silent fallback to raw
+// bytes -- see its doc comment). A corrupt WorkerDirector/WorkCollection therefore
+// cannot reach this file as an already-loaded blueprint or session at all; the
+// refusal now happens at decode, one layer earlier than either test exercised. That
+// decode-time refusal is proven in
+// `blueprint_format.rs::a_malformed_encoded_body_is_refused_not_silently_decoded`.
 
 // ---- what a placement rebinds ----
 
@@ -1898,8 +1781,11 @@ fn merging_appends_its_works_to_the_target_bases_work_collection() {
         "a merge must not disturb the works the target base already had"
     );
     assert_eq!(
-        collection_after.work_ids[collection_before.work_ids.len()..],
-        merged_works[..],
+        collection_after.work_ids[collection_before.work_ids.len()..]
+            .iter()
+            .map(ps_core::props::guid_to_uuid)
+            .collect::<Vec<_>>(),
+        merged_works,
         "the ids appended to the WorkCollection must be the works that landed"
     );
 }
@@ -1952,8 +1838,8 @@ fn placing_invalidates_the_world_lookup_caches() {
 
 // ---- the base camp's opaque WorkerDirector blob ----
 
-/// `WorkerDirector` is a raw byte blob the typed remap never touches; carried over
-/// verbatim it still names the source save's worker container.
+/// `WorkerDirector` is a typed struct the generic remap pass never touches; carried
+/// over verbatim it still names the source save's worker container.
 #[test]
 fn the_placed_bases_worker_director_is_retargeted() {
     let source = common::load_fixture_session("v1_relics");
@@ -1995,9 +1881,11 @@ fn the_placed_bases_worker_director_is_retargeted() {
         .unwrap_or_else(|error| panic!("{target_name}: placement failed: {error}"));
         let placed_base = result.base_id.expect("a new base must report its id");
         let director = worker_director(&target, placed_base);
+        let container_id = ps_core::props::guid_to_uuid(&director.container_id);
 
         assert_eq!(
-            director.id, placed_base,
+            ps_core::props::guid_to_uuid(&director.id),
+            placed_base,
             "{target_name}: the director must name the base it now belongs to"
         );
 
@@ -2008,17 +1896,16 @@ fn the_placed_bases_worker_director_is_retargeted() {
             "{target_name}: the director must not still name the source save's worker container"
         );
         assert!(
-            placed_containers.contains(&director.container_id),
+            placed_containers.contains(&container_id),
             "{target_name}: the director must name one of the containers this placement \
-             inserted, got {}",
-            director.container_id
+             inserted, got {container_id}"
         );
         assert_eq!(
             ps_core::domain::guild::base_guild_and_container(base_camp_entry(
                 &target,
                 placed_base
             )),
-            Some((guild_id, director.container_id)),
+            Some((guild_id, container_id)),
             "{target_name}: the app's own base -> worker container lookup must agree"
         );
 
@@ -2088,29 +1975,29 @@ fn every_capture_layer_gives_the_placed_base_a_worker_container() {
             .unwrap_or_else(|error| panic!("{layer} -> {target_name}: placement failed: {error}"));
             let placed_base = result.base_id.expect("a new base must report its id");
             let director = worker_director(&target, placed_base);
+            let container_id = ps_core::props::guid_to_uuid(&director.container_id);
 
             assert!(
-                !director.container_id.is_nil(),
+                !container_id.is_nil(),
                 "{layer} -> {target_name}: the placed base's director names no worker container"
             );
             let placed_containers: BTreeSet<Uuid> =
                 character_container_ids(&target).difference(&containers_before).copied().collect();
             assert!(
-                placed_containers.contains(&director.container_id),
+                placed_containers.contains(&container_id),
                 "{layer} -> {target_name}: the director must name a container this placement \
-                 inserted, got {}",
-                director.container_id
+                 inserted, got {container_id}"
             );
             assert_eq!(
                 ps_core::domain::guild::base_guild_and_container(base_camp_entry(
                     &target,
                     placed_base
                 )),
-                Some((guild_id, director.container_id)),
+                Some((guild_id, container_id)),
                 "{layer} -> {target_name}: the app's own base -> worker container lookup must agree"
             );
             assert_eq!(
-                common::container_slot_census(character_container_entry(&target, director.container_id)),
+                common::container_slot_census(character_container_entry(&target, container_id)),
                 (source_slots, expected_pals),
                 "{layer} -> {target_name}: the worker container must keep the base's capacity and \
                  hold only the pals this layer captures"
@@ -2281,7 +2168,7 @@ fn a_placed_bases_work_collection_names_the_base_the_placement_founded() {
     let source_base = common::fixture_base_id(&source);
     let blueprint = source_blueprint(&source, CaptureOptions::full());
 
-    let source_own_id = work_collection(&source, source_base).own_id;
+    let source_own_id = ps_core::props::guid_to_uuid(&work_collection(&source, source_base).own_id);
     assert_eq!(
         source_own_id, source_base,
         "setup: a base's WorkCollection must name the base it belongs to"
@@ -2300,7 +2187,7 @@ fn a_placed_bases_work_collection_names_the_base_the_placement_founded() {
     .expect("placement");
     let placed_base = result.base_id.expect("a new base must report its id");
 
-    let placed_own_id = work_collection(&target, placed_base).own_id;
+    let placed_own_id = ps_core::props::guid_to_uuid(&work_collection(&target, placed_base).own_id);
     assert_ne!(
         placed_own_id, source_own_id,
         "the placed base must not still name the base it was captured from"

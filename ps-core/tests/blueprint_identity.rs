@@ -7,6 +7,7 @@ use ps_core::domain::world;
 use ps_core::palbin;
 use ps_core::props;
 use ps_core::session::SaveSession;
+use ps_core::ue;
 use ps_core::ue::games::palworld::{PalConnector, PalMapConcreteModelModuleData};
 use ps_core::ue::{MapEntry, PalStruct, Properties, Property, PropertyKey, StructValue};
 use std::collections::{BTreeSet, HashSet};
@@ -210,12 +211,17 @@ fn base_camp_owner_id(blueprint: &BaseBlueprint) -> Option<Uuid> {
     }
 }
 
-fn work_collection(blueprint: &BaseBlueprint) -> palbin::WorkCollection {
-    let base_camp = blueprint.base_camp.as_ref().expect("the fixture base has a BaseCampSaveData");
-    let bytes = props::get(base_camp, &["WorkCollection", "RawData"])
-        .and_then(props::as_byte_array)
-        .expect("the fixture base camp carries a WorkCollection blob");
-    palbin::read_work_collection(bytes).expect("WorkCollection decodes")
+/// The blueprint's `WorkCollection`, now a typed struct rather than an opaque blob.
+fn work_collection(blueprint: &BaseBlueprint) -> ps_core::ue::PalWorkCollection {
+    let base_camp = blueprint.base_camp.as_ref().expect("blueprint carries a base camp");
+    let raw = props::get(base_camp, &["WorkCollection", "RawData"])
+        .expect("base camp carries a WorkCollection");
+    let ue::Property::Struct(ue::StructValue::Game(ue::PalStruct::WorkCollection(collection))) =
+        raw
+    else {
+        panic!("WorkCollection is not a typed struct");
+    };
+    collection.clone()
 }
 
 #[test]
@@ -428,10 +434,15 @@ fn the_work_collection_lists_exactly_the_remapped_works() {
         before.work_ids.len() > before_works.len(),
         "the fixture's WorkCollection must carry ids the capture drops, or the rebuild is untested"
     );
-    assert_eq!(after.work_ids, after_works, "the collection must list the post-remap works, in order");
+    assert_eq!(
+        after.work_ids.iter().map(props::guid_to_uuid).collect::<Vec<_>>(),
+        after_works,
+        "the collection must list the post-remap works, in order"
+    );
     assert_ne!(after.own_id, before.own_id, "the collection's own id is a definition too");
     assert!(
-        set_of(after.work_ids.clone()).is_disjoint(&set_of(before.work_ids)),
+        set_of(after.work_ids.iter().map(props::guid_to_uuid))
+            .is_disjoint(&set_of(before.work_ids.iter().map(props::guid_to_uuid))),
         "no pre-remap work id may survive in the collection"
     );
 }
@@ -458,42 +469,16 @@ fn a_remapped_blueprint_still_round_trips_through_both_encodings() {
     );
 }
 
-/// `WorkerDirector` is a fixed 118-byte layout; `WorkCollection` is checked to its last
-/// byte -- one extra byte fails either to decode.
-fn lengthen_base_camp_blob(base_camp: &mut Properties, field: &str) {
-    let raw_data = props::get_mut(base_camp, &[field, "RawData"])
-        .unwrap_or_else(|| panic!("the fixture base camp must carry a {field} blob"));
-    let bytes = props::as_byte_array_mut(raw_data)
-        .unwrap_or_else(|| panic!("{field} RawData must be a byte array"));
-    bytes.push(0);
-}
-
-/// Both of `remap`'s opaque-blob rewrites are read by offset, so a Palworld update
-/// that moved a field would make either refuse to decode.
-#[test]
-fn a_base_camp_blob_that_does_not_decode_refuses_the_remap() {
-    let blueprint = fixture_blueprint();
-
-    assert!(
-        remap::remap_blueprint(&mut blueprint.clone()).is_ok(),
-        "setup: an intact blueprint must remap, or the refusals below prove nothing"
-    );
-
-    for field in ["WorkerDirector", "WorkCollection"] {
-        let mut corrupt = blueprint.clone();
-        lengthen_base_camp_blob(
-            corrupt.base_camp.as_mut().expect("the fixture base has a base camp"),
-            field,
-        );
-
-        let error = remap::remap_blueprint(&mut corrupt)
-            .expect_err(&format!("{field}: a blob that does not decode must refuse the remap"));
-        assert!(
-            error.to_string().contains(field),
-            "{field}: the refusal must name the blob that failed: {error}"
-        );
-    }
-}
+// `WorkerDirector`/`WorkCollection` were opaque byte blobs that `remap` decoded and
+// re-serialized itself, so a test here used to corrupt one in an already-loaded
+// `BaseBlueprint` and assert `remap_blueprint` refused it. Both are now typed structs
+// uesave decodes while reading the save/blueprint, before `remap` ever runs, and
+// `session::parse_palworld_save` reads with `error_to_raw(false)` (deliberately, so an
+// unparseable property is a hard error rather than a silent fallback to raw bytes --
+// see its doc comment). A corrupt WorkerDirector/WorkCollection therefore cannot reach
+// this file as a loaded `BaseBlueprint` at all; the refusal now happens at decode, one
+// layer earlier than this test ever exercised. That decode-time refusal is proven in
+// `blueprint_format.rs::a_malformed_encoded_body_is_refused_not_silently_decoded`.
 
 #[test]
 fn a_nil_id_stays_nil() {

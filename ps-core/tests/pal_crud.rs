@@ -565,19 +565,17 @@ fn add_guild_pal_at_slot_zero_succeeds_and_leaves_owner_player_uid_present() {
 // real can exercise `clone_guild_pal` or a cross-guild ownership mismatch; the
 // synthetic fixtures below give full control over occupancy.
 
-fn shuffle_guid_bytes(b: [u8; 16]) -> [u8; 16] {
-    [
-        b[3], b[2], b[1], b[0], b[7], b[6], b[5], b[4], b[11], b[10], b[9], b[8], b[15], b[14],
-        b[13], b[12],
-    ]
-}
-
-/// `WorkerDirector.RawData` is a fixed 118-byte blob carrying `container_id`
-/// at byte offset 98 (see `ps_core::palbin::worker_director_container_id`).
-fn worker_director_blob(container_id: Uuid) -> Vec<u8> {
-    let mut blob = vec![0u8; 118];
-    blob[98..114].copy_from_slice(&shuffle_guid_bytes(*container_id.as_bytes()));
-    blob
+fn worker_director_property(container_id: Uuid) -> Property {
+    Property::Struct(StructValue::Game(ps_core::ue::PalStruct::WorkerDirector(Box::new(
+        ps_core::ue::PalWorkerDirector {
+            id: ps_core::ue::FGuid::nil(),
+            spawn_transform: zero_transform(),
+            current_order_type: 0,
+            current_battle_type: 0,
+            container_id: ps_core::props::uuid_to_guid(container_id),
+            trailing_bytes: [0; 4],
+        },
+    ))))
 }
 
 fn zero_transform() -> ps_core::ue::games::palworld::PalTransform {
@@ -604,7 +602,6 @@ fn zero_transform() -> ps_core::ue::games::palworld::PalTransform {
 
 fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> MapEntry {
     use ps_core::ue::games::palworld::PalBaseCamp;
-    use ps_core::ue::ByteArray;
     let camp = PalBaseCamp {
         id: ps_core::props::uuid_to_guid(base_id),
         name: String::new(),
@@ -617,12 +614,7 @@ fn base_camp_entry(base_id: Uuid, guild_id: Uuid, worker_container_id: Uuid) -> 
         trailing_bytes: [0; 4],
     };
     let mut worker_properties = Properties::default();
-    worker_properties.insert(
-        "RawData",
-        Property::Array(ValueVec::Byte(ByteArray::Byte(worker_director_blob(
-            worker_container_id,
-        )))),
-    );
+    worker_properties.insert("RawData", worker_director_property(worker_container_id));
     let mut value_properties = Properties::default();
     value_properties.insert(
         "RawData",

@@ -14,7 +14,6 @@ use super::{capture, gvas, remap, transform, BaseBlueprint};
 use crate::domain::{guild, guild_tail, world};
 use crate::error::CoreError;
 use crate::gamedata::GameData;
-use crate::palbin;
 use crate::props;
 use crate::session::SaveSession;
 use crate::ue::games::palworld::{
@@ -204,9 +203,10 @@ fn preflight(
     Ok(())
 }
 
-/// Read-only twin of the rewrite `append_work_ids` performs: it decodes the same blob, so
-/// a merge that could not register its works is refused before any of them land. A base
-/// camp carrying no such property is not an error -- `append_work_ids` skips it too.
+/// Read-only twin of the rewrite `append_work_ids` performs: it checks the same typed
+/// struct, so a merge that could not register its works is refused before any of them
+/// land. A base camp carrying no such property is not an error -- `append_work_ids`
+/// skips it too.
 fn check_target_work_collection(
     session: &SaveSession,
     base_id: Uuid,
@@ -220,12 +220,13 @@ fn check_target_work_collection(
     let Some(value_props) = props::struct_props(&entry.value) else {
         return Ok(());
     };
-    let Some(bytes) =
-        props::get(value_props, &["WorkCollection", "RawData"]).and_then(props::as_byte_array)
-    else {
-        return Ok(());
-    };
-    palbin::read_work_collection(bytes).map(|_| ())
+    match props::get(value_props, &["WorkCollection", "RawData"]) {
+        Some(Property::Struct(StructValue::Game(PalStruct::WorkCollection(_)))) => Ok(()),
+        Some(_) => Err(CoreError::Parse(
+            "target base camp WorkCollection is not a typed struct".to_string(),
+        )),
+        None => Ok(()),
+    }
 }
 
 fn stage_transforms(blueprint: &mut BaseBlueprint, anchor_transform: &PalTransform) {
@@ -317,31 +318,24 @@ fn stage_identity(
     Ok(minted)
 }
 
-/// Rebinds the two fields the base camp's opaque `WorkerDirector` blob carries that
+/// Rebinds the two fields the base camp's `WorkerDirector` struct carries that
 /// placement owns: the base camp it belongs to, and the world-space point its workers
-/// spawn at, which otherwise travels verbatim out of the source save. The blob's
+/// spawn at, which otherwise travels verbatim out of the source save. The struct's
 /// `container_id` is remapped by `remap`.
-///
-/// A blob that does not decode refuses the placement rather than degrading to the source
-/// save's values: kept, the placed base would send its workers to the capture coordinates
-/// and still call itself by the base id it was captured from.
 fn stage_worker_director(
     base_camp: &mut Properties,
     base_id: Uuid,
     source_anchor: &PalTransform,
     anchor_transform: &PalTransform,
 ) -> Result<(), CoreError> {
-    let Some(raw_data) = props::get_mut(base_camp, &["WorkerDirector", "RawData"]) else {
+    let Some(Property::Struct(StructValue::Game(PalStruct::WorkerDirector(director)))) =
+        props::get_mut(base_camp, &["WorkerDirector", "RawData"])
+    else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else {
-        return Ok(());
-    };
-    let mut director = palbin::read_worker_director(bytes)?;
-    director.id = base_id;
+    director.id = props::uuid_to_guid(base_id);
     let relative = transform::to_relative(source_anchor, &director.spawn_transform);
     director.spawn_transform = transform::to_world(anchor_transform, &relative);
-    *bytes = director.to_bytes();
     Ok(())
 }
 
@@ -533,8 +527,8 @@ fn base_camp_owner_instance_id(base_camp: &Properties) -> Option<Uuid> {
     }
 }
 
-/// Adds the merged works to the target base's `WorkCollection`, the opaque
-/// blob in which a base names its works a second time.
+/// Adds the merged works to the target base's `WorkCollection`, the typed struct in
+/// which a base names its works a second time.
 fn append_work_ids(
     session: &mut SaveSession,
     base_id: Uuid,
@@ -552,16 +546,13 @@ fn append_work_ids(
     let Some(value_props) = props::struct_props_mut(&mut entry.value) else {
         return Ok(());
     };
-    let Some(raw_data) = props::get_mut(value_props, &["WorkCollection", "RawData"]) else {
+    let Some(Property::Struct(StructValue::Game(PalStruct::WorkCollection(collection)))) =
+        props::get_mut(value_props, &["WorkCollection", "RawData"])
+    else {
         return Ok(());
     };
-    let Some(bytes) = props::as_byte_array_mut(raw_data) else {
-        return Ok(());
-    };
-    // `preflight` already decoded this blob, so the merged works cannot be dropped on the floor here.
-    let mut collection = palbin::read_work_collection(bytes)?;
-    collection.work_ids.extend_from_slice(work_ids);
-    *bytes = collection.to_bytes();
+    // `preflight` already checked this struct, so the merged works cannot be dropped on the floor here.
+    collection.work_ids.extend(work_ids.iter().copied().map(props::uuid_to_guid));
     Ok(())
 }
 

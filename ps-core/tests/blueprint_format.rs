@@ -437,6 +437,34 @@ fn a_container_written_by_a_newer_schema_is_refused() {
     );
 }
 
+/// `WorkerDirector`/`WorkCollection` moved from opaque byte blobs `remap`/`place`
+/// decoded and re-encoded themselves to typed structs uesave decodes while reading the
+/// save/blueprint, so the guarantee "a corrupt one is refused, not silently carried
+/// over" now lives here, at decode, rather than at `remap`/`place`. Corrupting an
+/// encoded body's payload -- one that carries a real WorkerDirector and WorkCollection,
+/// per `captured_fixture_blueprint` -- proves that a malformed payload is refused
+/// before it ever becomes a blueprint, whichever property inside it broke.
+#[test]
+fn a_malformed_encoded_body_is_refused_not_silently_decoded() {
+    let original = captured_fixture_blueprint();
+    let mut bytes = gvas::to_psbp_bytes(&original).expect("psbp encode");
+    // `PSBP_MAGIC` + schema version, then a 12-byte compression header (whose declared
+    // lengths must stay accurate, or slicing the payload out of `bytes` panics instead
+    // of erroring), then the compressed payload itself: flip bytes inside that payload
+    // without changing the buffer's length.
+    let payload_start = gvas::PSBP_MAGIC.len() + 4 + 12;
+    assert!(
+        bytes.len() > payload_start + 32,
+        "setup: the encoded payload must be long enough to corrupt meaningfully"
+    );
+    for byte in &mut bytes[payload_start + 8..payload_start + 24] {
+        *byte ^= 0xFF;
+    }
+
+    gvas::from_psbp_bytes(&bytes)
+        .expect_err("a payload corrupted mid-stream must not decode, silently or otherwise");
+}
+
 #[test]
 fn json_from_a_save_that_is_not_a_blueprint_is_refused() {
     let original = empty_blueprint();
