@@ -2,9 +2,13 @@
 //!
 //! The listener binds broadly and every request is judged here, per peer —
 //! so switching listen mode never rebinds a socket. Loopback is always the
-//! trusted operator seat; everything else must pass the mode gate, then the
-//! optional connect allowlist; writes additionally pass the write allowlist;
-//! and a configured auth scope can demand a PIN session first.
+//! trusted operator seat; everything else must pass the allowlists, whose
+//! empty-list fallback is selected by the listen mode and `AllowMode`;
+//! writes additionally pass the write allowlist; and a configured auth
+//! scope can demand a PIN session first. An address explicitly listed in
+//! an allowlist is admitted regardless of the listen mode's default
+//! audience (except `Localhost`, which stays loopback-only, matching its
+//! loopback-only listener).
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
 
 use crate::config::{AuthScope, ListenMode, NetworkConfig};
@@ -162,6 +166,14 @@ impl PeerAcl {
 /// Fail-closed rule: if the auth scope demands a PIN (NetworkOnly/Always)
 /// but no PIN is configured, non-loopback peers are refused outright rather
 /// than silently admitted without the protection the operator asked for.
+///
+/// Allowlists widen, listen modes narrow: an address explicitly listed in
+/// the connect (or write) allowlist is admitted regardless of the listen
+/// mode's default audience — the operator typed it, so it connects. The
+/// only exception is `Localhost`, which never admits non-loopback peers
+/// (its listener is loopback-only, so a listed external address would be
+/// unreachable anyway). An EMPTY list falls back to the mode-selected
+/// default audience (`AllowMode`).
 pub fn evaluate(config: &NetworkConfig, peer: IpAddr) -> PeerAcl {
     let peer = canonical(peer);
     let is_loopback = classify(peer) == PeerClass::Loopback;
@@ -175,56 +187,108 @@ pub fn evaluate(config: &NetworkConfig, peer: IpAddr) -> PeerAcl {
         };
     }
 
-    if !mode_admits(config.listen, peer) {
+    if let Some(verdict) = auth_fail_closed(config) {
+        return verdict;
+    }
+
+    let listed_connect = matches_any(&config.allow.connect, peer);
+    let listed_write = matches_any(&config.allow.write, peer);
+
+    let admitted_by_listing =
+        (listed_connect || listed_write) && config.listen != ListenMode::Localhost;
+    let admitted_by_default = config.allow.connect.is_empty()
+        && empty_connect_admits(config.allow.mode)
+        && mode_admits(config.listen, peer);
+    if !admitted_by_listing && !admitted_by_default {
         return PeerAcl::denied();
     }
 
-    let pin_configured = config.auth.pin.is_some();
-    let auth_required = match config.auth.scope {
-        AuthScope::Never => false,
-        AuthScope::NetworkOnly | AuthScope::Always => true,
-    };
-    if auth_required && !pin_configured {
-        // Operator asked for protection they never configured — refuse
-        // instead of quietly exposing the tool.
-        return PeerAcl::denied();
-    }
-
-    let matches_any = |rules: &[String]| {
-        rules
-            .iter()
-            .filter_map(|r| IpNet::parse(r))
-            .any(|net| net.contains(peer))
-    };
-
-    // A non-empty list always means "exactly these addresses"; the mode only
-    // decides what an EMPTY list falls back to. Loopback was handled above
-    // and stays trusted in every mode.
-    let (connect_empty_admits, write_empty_admits) = match config.allow.mode {
-        crate::config::AllowMode::Open => (true, true),
-        crate::config::AllowMode::Balanced => (true, false),
-        crate::config::AllowMode::Strict => (false, false),
-    };
-    let can_connect = if config.allow.connect.is_empty() {
-        connect_empty_admits
-    } else {
-        matches_any(&config.allow.connect)
-    };
-    if !can_connect {
-        return PeerAcl::denied();
-    }
-
-    let can_write = if config.allow.write.is_empty() {
-        write_empty_admits
-    } else {
-        matches_any(&config.allow.write)
-    };
+    let can_write =
+        listed_write || (config.allow.write.is_empty() && empty_write_admits(config.allow.mode));
 
     PeerAcl {
         can_connect: true,
         can_write,
-        auth_required,
+        auth_required: auth_required(config),
     }
+}
+
+/// Evaluate a peer that reached us through a trusted local proxy (Tailscale
+/// Funnel forwards arrive on loopback carrying `X-Forwarded-For`).
+///
+/// The proxy is an exposure the operator toggled separately from the listen
+/// mode, so the mode's default audience does not apply — but the allowlists
+/// absolutely do: a non-empty connect list means "exactly these addresses"
+/// on this path too, which is what makes removing an IP take effect for
+/// funnel clients. A proxied peer is never the trusted loopback seat, even
+/// when the forwarded address claims to be loopback.
+pub fn evaluate_forwarded(config: &NetworkConfig, client: IpAddr) -> PeerAcl {
+    let client = canonical(client);
+    if classify(client) == PeerClass::Loopback {
+        // A real operator on loopback connects directly, not through the
+        // funnel proxy; a forwarded loopback claim is not the trusted seat.
+        return PeerAcl::denied();
+    }
+
+    if let Some(verdict) = auth_fail_closed(config) {
+        return verdict;
+    }
+
+    let listed_connect = matches_any(&config.allow.connect, client);
+    let listed_write = matches_any(&config.allow.write, client);
+    if !(listed_connect
+        || listed_write
+        || (config.allow.connect.is_empty() && empty_connect_admits(config.allow.mode)))
+    {
+        return PeerAcl::denied();
+    }
+
+    let can_write =
+        listed_write || (config.allow.write.is_empty() && empty_write_admits(config.allow.mode));
+
+    PeerAcl {
+        can_connect: true,
+        can_write,
+        auth_required: auth_required(config),
+    }
+}
+
+/// True when the peer is explicitly named by either allowlist — the state
+/// that makes an address admitted regardless of the listen-mode audience.
+pub fn explicitly_listed(config: &NetworkConfig, peer: IpAddr) -> bool {
+    let peer = canonical(peer);
+    matches_any(&config.allow.connect, peer) || matches_any(&config.allow.write, peer)
+}
+
+/// The operator asked for PIN protection that was never configured — refuse
+/// instead of quietly exposing the tool.
+fn auth_fail_closed(config: &NetworkConfig) -> Option<PeerAcl> {
+    (auth_required(config) && config.auth.pin.is_none()).then(PeerAcl::denied)
+}
+
+fn auth_required(config: &NetworkConfig) -> bool {
+    match config.auth.scope {
+        AuthScope::Never => false,
+        AuthScope::NetworkOnly | AuthScope::Always => true,
+    }
+}
+
+fn matches_any(rules: &[String], peer: IpAddr) -> bool {
+    rules
+        .iter()
+        .filter_map(|r| IpNet::parse(r))
+        .any(|net| net.contains(peer))
+}
+
+fn empty_connect_admits(mode: crate::config::AllowMode) -> bool {
+    matches!(
+        mode,
+        crate::config::AllowMode::Open | crate::config::AllowMode::Balanced
+    )
+}
+
+fn empty_write_admits(mode: crate::config::AllowMode) -> bool {
+    mode == crate::config::AllowMode::Open
 }
 
 fn mode_admits(mode: ListenMode, peer: IpAddr) -> bool {
@@ -320,7 +384,7 @@ mod tests {
                 allow: AllowRules {
                     connect: vec!["10.0.0.0/8".into()],
                     write: vec!["10.0.0.0/8".into()],
-                ..Default::default()
+                    ..Default::default()
                 },
                 auth: AuthConfig {
                     scope: AuthScope::NetworkOnly,
@@ -367,7 +431,10 @@ mod tests {
             ..NetworkConfig::default()
         };
         let peer = evaluate(&config, ip("192.168.1.4"));
-        assert!(peer.can_connect && peer.can_write, "open: empty lists admit all");
+        assert!(
+            peer.can_connect && peer.can_write,
+            "open: empty lists admit all"
+        );
     }
 
     #[test]
@@ -396,7 +463,10 @@ mod tests {
             ..NetworkConfig::default()
         };
         let peer = evaluate(&config, ip("192.168.1.4"));
-        assert!(!peer.can_connect && !peer.can_write, "strict: unlisted peers are denied");
+        assert!(
+            !peer.can_connect && !peer.can_write,
+            "strict: unlisted peers are denied"
+        );
 
         // Listing the address admits connecting; edits still need the write list.
         let listed = NetworkConfig {
@@ -409,8 +479,141 @@ mod tests {
             ..NetworkConfig::default()
         };
         let admitted = evaluate(&listed, ip("192.168.1.4"));
-        assert!(admitted.can_connect, "strict: a listed peer may connect and view");
+        assert!(
+            admitted.can_connect,
+            "strict: a listed peer may connect and view"
+        );
         assert!(!admitted.can_write, "strict: edits need the write list too");
+    }
+
+    #[test]
+    fn listed_addresses_are_admitted_regardless_of_listen_mode() {
+        // The operator typed the address; the listen mode's default audience
+        // (here: LAN) must not veto it. Covers the "allowlisted tailnet IP
+        // refused under lan" report.
+        let config = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                connect: vec!["100.115.95.115".into()],
+                mode: AllowMode::Strict,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let tailnet_peer = evaluate(&config, ip("100.115.95.115"));
+        assert!(
+            tailnet_peer.can_connect,
+            "a listed tailnet IP connects under lan"
+        );
+
+        let listed_public = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                connect: vec!["203.0.113.9".into()],
+                mode: AllowMode::Strict,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let public_peer = evaluate(&listed_public, ip("203.0.113.9"));
+        assert!(
+            public_peer.can_connect,
+            "a listed public IP connects under lan"
+        );
+
+        // The mode still caps the DEFAULT (empty-list) audience: an unlisted
+        // tailnet peer stays refused under lan even in open mode.
+        let open = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                mode: AllowMode::Open,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        assert!(!evaluate(&open, ip("100.115.95.115")).can_connect);
+    }
+
+    #[test]
+    fn localhost_mode_stays_loopback_only_even_with_listings() {
+        let config = NetworkConfig {
+            listen: ListenMode::Localhost,
+            allow: AllowRules {
+                connect: vec!["192.168.1.4".into()],
+                mode: AllowMode::Open,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        assert!(!evaluate(&config, ip("192.168.1.4")).can_connect);
+    }
+
+    #[test]
+    fn write_listing_implies_connect() {
+        // Write ⊆ connect in every mode: naming someone as an editor must
+        // not leave them unable to connect because of the mode's audience.
+        let config = NetworkConfig {
+            listen: ListenMode::Tailscale,
+            allow: AllowRules {
+                write: vec!["192.168.1.7".into()],
+                mode: AllowMode::Balanced,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let editor = evaluate(&config, ip("192.168.1.7"));
+        assert!(editor.can_connect && editor.can_write);
+    }
+
+    #[test]
+    fn forwarded_peers_follow_the_allowlists_not_the_listen_mode() {
+        // Funnel forwards arrive on loopback with X-Forwarded-For; the proxy
+        // is its own exposure decision, so the mode's default audience does
+        // not apply — but the allowlists do.
+        let mut config = NetworkConfig {
+            listen: ListenMode::Lan,
+            auth: AuthConfig {
+                scope: AuthScope::Always,
+                pin: Some(PinHash::generate("1234")),
+                ..AuthConfig::default()
+            },
+            ..NetworkConfig::default()
+        };
+
+        // Balanced + empty lists: anyone may view (the funnel posture).
+        let anyone = evaluate_forwarded(&config, ip("203.0.113.9"));
+        assert!(anyone.can_connect && anyone.auth_required);
+        assert!(!anyone.can_write, "balanced: edits still require listing");
+
+        // Strict + empty lists: nobody but the loopback seat.
+        config.allow.mode = AllowMode::Strict;
+        assert!(!evaluate_forwarded(&config, ip("203.0.113.9")).can_connect);
+
+        // Listed in connect: admitted, read-only until write-listed.
+        config.allow.connect = vec!["203.0.113.9".into()];
+        let listed = evaluate_forwarded(&config, ip("203.0.113.9"));
+        assert!(listed.can_connect && !listed.can_write && listed.auth_required);
+
+        // Removal takes effect: a peer that is no longer listed is refused.
+        config.allow.connect = vec!["198.51.100.1".into()];
+        assert!(!evaluate_forwarded(&config, ip("203.0.113.9")).can_connect);
+    }
+
+    #[test]
+    fn forwarded_loopback_claims_are_not_the_trusted_seat() {
+        // A forwarded X-Forwarded-For claiming 127.0.0.1 is spoof-shaped,
+        // not the local operator: never trust it.
+        let config = NetworkConfig {
+            listen: ListenMode::Wan,
+            allow: AllowRules {
+                connect: vec!["127.0.0.1".into()],
+                mode: AllowMode::Strict,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        assert!(!evaluate_forwarded(&config, ip("127.0.0.1")).can_connect);
+        assert!(!evaluate_forwarded(&config, ip("::1")).can_connect);
     }
 
     #[test]
@@ -431,7 +634,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["203.0.113.0/24".into()],
                 write: vec!["203.0.113.7".into()],
-            ..Default::default()
+                ..Default::default()
             },
             ..NetworkConfig::default()
         };
@@ -476,7 +679,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec![],
                 write: vec!["192.168.1.0/24".into()],
-            ..Default::default()
+                ..Default::default()
             },
             ..NetworkConfig::default()
         };

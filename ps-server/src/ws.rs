@@ -38,12 +38,21 @@ pub async fn ws_upgrade(
     ConnectInfo(peer): ConnectInfo<SocketAddr>,
     headers: HeaderMap,
     State(app): State<Arc<AppState>>,
+    axum::Extension(runtime): axum::Extension<Arc<crate::network::NetworkRuntime>>,
 ) -> Response {
     // The network gate has already refused disallowed/unauthenticated peers;
     // here the verdict is stamped onto the connection so the dispatcher can
-    // enforce the write allowlist per message.
-    let acl = crate::network_policy::acl_for(&app.network_policy, peer.ip());
-    let is_loopback = is_loopback_peer(peer);
+    // enforce the write allowlist per message. Funnel-forwarded clients are
+    // judged by their forwarded address, never as the proxy's loopback.
+    let inbound = runtime.inbound(peer.ip(), &headers);
+    let direct = matches!(inbound, crate::network::InboundPeer::Direct(_));
+    let peer_ip = inbound.effective();
+    let acl = if direct {
+        crate::network_policy::acl_for(&app.network_policy, peer_ip)
+    } else {
+        crate::network_policy::acl_for_forwarded(&app.network_policy, peer_ip)
+    };
+    let is_loopback = is_loopback_peer(peer) && direct;
     let policy_generation = crate::network_policy::policy_generation(&app.network_policy);
     let session_token = crate::network::session_token_from(&headers);
     upgrade
@@ -53,7 +62,8 @@ pub async fn ws_upgrade(
             connection_loop(
                 socket,
                 client_id,
-                peer.ip(),
+                peer_ip,
+                !direct,
                 is_loopback,
                 acl.can_write,
                 policy_generation,
@@ -92,13 +102,14 @@ async fn connection_loop(
     socket: WebSocket,
     client_id: String,
     peer: IpAddr,
+    forwarded: bool,
     is_loopback: bool,
     write_allowed: bool,
     policy_generation: u64,
     session_token: Option<String>,
     app: Arc<AppState>,
 ) {
-    tracing::info!(%client_id, is_loopback, write_allowed, "client connected");
+    tracing::info!(%client_id, %peer, forwarded, is_loopback, write_allowed, "client connected");
     let _live_connection_guard = LiveConnectionGuard::new(app.live_connections.clone());
 
     let (mut outgoing_sink, mut incoming_stream) = socket.split();
@@ -179,7 +190,11 @@ async fn connection_loop(
                     tracing::info!(%client_id, "websocket invalidated before dispatch");
                     break;
                 }
-                let acl = crate::network_policy::acl_for(&app.network_policy, peer);
+                let acl = if forwarded {
+                    crate::network_policy::acl_for_forwarded(&app.network_policy, peer)
+                } else {
+                    crate::network_policy::acl_for(&app.network_policy, peer)
+                };
                 if !acl.can_connect {
                     tracing::info!(%client_id, %peer, "websocket peer is no longer admitted");
                     break;

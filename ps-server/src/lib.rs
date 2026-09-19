@@ -119,9 +119,7 @@ async fn stop_unit_task(mut task: tokio::task::JoinHandle<()>, name: &str) {
 /// Waits for the listener to end on its own — shutdown signal, port-change
 /// rebind, or runtime-mode switch. This is the server's lifecycle clock and
 /// must carry NO deadline: a healthy server runs indefinitely.
-async fn join_serve_task(
-    task: tokio::task::JoinHandle<std::io::Result<()>>,
-) -> Result<(), String> {
+async fn join_serve_task(task: tokio::task::JoinHandle<std::io::Result<()>>) -> Result<(), String> {
     match task.await {
         Ok(Ok(())) => Ok(()),
         Ok(Err(error)) => Err(error.to_string()),
@@ -306,6 +304,10 @@ async fn listener_bind_ip(
             IpAddr::from([127, 0, 0, 1])
         }),
         ps_network::ListenMode::Tailscale => {
+            // Still fail loudly at boot when the tailnet is not there — but
+            // bind broadly like lan/wan: policy-level allowlists can admit
+            // explicitly listed addresses outside the CGNAT range, and those
+            // must be reachable, not just permitted.
             let status = tokio::task::spawn_blocking(ps_network::tailscale::detect)
                 .await
                 .map_err(|error| anyhow::anyhow!("Tailscale detection task failed: {error}"))?;
@@ -313,9 +315,11 @@ async fn listener_bind_ip(
                 status.available && status.logged_in,
                 "Tailscale listen mode requires an available, logged-in Tailscale node"
             );
-            status.ipv4.into_iter().next().ok_or_else(|| {
-                anyhow::anyhow!("Tailscale listen mode requires an active Tailscale IPv4 address")
-            })
+            anyhow::ensure!(
+                !status.ipv4.is_empty(),
+                "Tailscale listen mode requires an active Tailscale IPv4 address"
+            );
+            Ok(IpAddr::from([0, 0, 0, 0]))
         }
         ps_network::ListenMode::Lan | ps_network::ListenMode::Wan => {
             if config.host.is_loopback() || config.host.is_unspecified() {
@@ -458,8 +462,8 @@ pub async fn start_server_with(
     // deployment loudly rather than stopping the server from serving; the
     // listen policy itself still gates every peer.
     if network.tier() == ps_network::NetworkTier::Hosted {
-        for failure in crate::network::reconcile_current_resources(&network.effective_config())
-            .await
+        for failure in
+            crate::network::reconcile_current_resources(&network.effective_config()).await
         {
             tracing::warn!("network exposure not fully established: {failure}");
         }

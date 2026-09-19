@@ -4,16 +4,18 @@
 //! edited from the in-app Network page.
 //!
 //! Enforcement model (Sunshine-inspired, strict by default):
-//! - The listener binds broadly, but **listen mode is enforced per peer**:
-//!   `Localhost` rejects everything non-loopback, `Lan` rejects public peers,
-//!   `Tailscale` only accepts loopback + the tailnet's CGNAT range (and,
-//!   when detected, the machine's own tailscale IPs' peers), `Wan` accepts
-//!   any peer — modes never require a socket rebind.
+//! - The listener binds broadly, but **listen mode shapes the default
+//!   audience enforced per peer**: `Localhost` rejects everything
+//!   non-loopback, `Lan` defaults to private ranges, `Tailscale` defaults to
+//!   the tailnet's CGNAT range (100.64.0.0/10), `Wan` defaults to any peer —
+//!   modes never require a socket rebind.
 //! - Loopback is always allowed to connect AND write; it is the trusted
 //!   operator seat (the desktop app and the launcher run there).
-//! - `allow.connect` narrows who may talk to us at all; `allow.write`
-//!   narrows who may mutate saves/settings (reads stay available). An empty
-//!   write list denies non-loopback writes.
+//! - `allow.connect` decides who may talk to us at all; `allow.write`
+//!   decides who may mutate saves/settings (reads stay available). A
+//!   LISTED address is admitted regardless of the listen mode's default
+//!   audience — the operator typed it — while an EMPTY list falls back to
+//!   that audience as selected by `AllowMode`.
 //! - `auth` gates non-loopback (or, if the user insists, all) peers behind
 //!   a PIN; sessions are short-lived in-memory tokens issued by the server.
 
@@ -130,11 +132,12 @@ impl PinHash {
     }
 }
 
-/// CIDR allowlists. Empty `connect` means "the listen mode's default
-/// audience"; empty `write` denies non-loopback writes (loopback always can).
-/// The fields always serialize — the Network page's DTO renders them
-/// unconditionally, and a missing key there reads as `undefined` in the
-/// browser.
+/// CIDR allowlists. A listed address is admitted regardless of the listen
+/// mode's default audience (except under `Localhost`, whose listener is
+/// loopback-only anyway); an empty list falls back to that audience as
+/// shaped by `AllowMode`. The fields always serialize — the Network page's
+/// DTO renders them unconditionally, and a missing key there reads as
+/// `undefined` in the browser.
 /// What an EMPTY allowlist grants. The mode only decides the fallback when a
 /// list is empty; a non-empty list always means "exactly these addresses",
 /// and loopback is always trusted regardless.
@@ -463,7 +466,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["100.64.1.5/32".into()],
                 write: vec![],
-            ..Default::default()
+                ..Default::default()
             },
             ..NetworkConfig::default()
         };
@@ -477,9 +480,10 @@ mod tests {
 
         // Configs saved before the allowlist mode existed keep their exact
         // legacy semantics: view-all, edit-nobody-unless-listed.
-        let legacy =
-            NetworkConfig::from_json(r#"{"listen":"lan","port":9000,"allow":{"connect":[],"write":[]}}"#)
-                .unwrap();
+        let legacy = NetworkConfig::from_json(
+            r#"{"listen":"lan","port":9000,"allow":{"connect":[],"write":[]}}"#,
+        )
+        .unwrap();
         assert_eq!(legacy.allow.mode, AllowMode::Balanced);
         assert_eq!(minimal.auth.scope, AuthScope::Never);
     }
@@ -522,7 +526,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["0.0.0.0/0".into()],
                 write: vec!["10.0.0.0/8".into()],
-            ..Default::default()
+                ..Default::default()
             },
             auth: AuthConfig {
                 scope: AuthScope::NetworkOnly,

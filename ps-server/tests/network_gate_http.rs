@@ -29,6 +29,10 @@ fn config(listen: ListenMode, scope: AuthScope, pin: bool) -> NetworkConfig {
 }
 
 async fn test_router(config: NetworkConfig) -> axum::Router {
+    test_router_with_runtime(config).await.0
+}
+
+async fn test_router_with_runtime(config: NetworkConfig) -> (axum::Router, Arc<NetworkRuntime>) {
     let temp_dir = tempfile::tempdir().unwrap();
     let ui_dir = temp_dir.path().join("ui");
     std::fs::create_dir_all(&ui_dir).unwrap();
@@ -46,7 +50,8 @@ async fn test_router(config: NetworkConfig) -> axum::Router {
     let server_services = Arc::new(ps_server::services::ServerServices::with_docker(Arc::new(
         ps_server::services::docker::mock::MockDocker::default(),
     )));
-    build_router(
+    let runtime = Arc::new(NetworkRuntime::new(config));
+    let router = build_router(
         Arc::new(AppState {
             config: AppConfig {
                 desktop_mode: false,
@@ -63,11 +68,14 @@ async fn test_router(config: NetworkConfig) -> axum::Router {
             sessions: std::sync::Mutex::new(ps_server::SessionStore::default()),
             breeding_db: Default::default(),
             plugins: Default::default(),
-            network_policy: None,
+            network_policy: Some(
+                Arc::clone(&runtime) as Arc<dyn ps_app::network_policy::NetworkPolicy>
+            ),
         }),
         &ui_dir,
-        Arc::new(NetworkRuntime::new(config)),
-    )
+        Arc::clone(&runtime),
+    );
+    (router, runtime)
 }
 
 fn peer_request(peer: &str, method: &str, uri: &str) -> Request<Body> {
@@ -101,6 +109,16 @@ fn with_cookie(mut request: Request<Body>, cookie: &str) -> Request<Body> {
     request.headers_mut().insert(
         axum::http::header::COOKIE,
         axum::http::HeaderValue::from_str(cookie).unwrap(),
+    );
+    request
+}
+
+/// Marks a request as forwarded by the trusted local proxy (loopback socket
+/// + Funnel on is the trust condition the gate applies).
+fn with_forwarded_for(mut request: Request<Body>, client: &str) -> Request<Body> {
+    request.headers_mut().insert(
+        "x-forwarded-for",
+        axum::http::HeaderValue::from_str(client).unwrap(),
     );
     request
 }
@@ -345,6 +363,184 @@ async fn fail_closed_when_auth_is_demanded_without_a_pin() {
         .await
         .unwrap();
     assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+}
+
+#[tokio::test]
+async fn a_listed_tailnet_ip_connects_under_lan_listen_mode() {
+    // The reported trap: a tailscale CGNAT address listed in the connect
+    // allowlist was refused because the lan mode gate ran first. Listing an
+    // address is operator intent and must admit it regardless of the mode's
+    // default audience.
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.allow.mode = ps_network::AllowMode::Strict;
+    policy.allow.connect = vec!["100.115.95.115".into()];
+    let router = test_router(policy).await;
+
+    let view = router
+        .clone()
+        .oneshot(peer_request("100.115.95.115", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(view.status(), StatusCode::OK);
+
+    // Listed for connect only: still read-only.
+    let edit = router
+        .clone()
+        .oneshot(peer_json_request(
+            "100.115.95.115",
+            "PUT",
+            "/api/network/config",
+            "{}",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(edit.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(edit).await.contains("read-only"));
+}
+
+#[tokio::test]
+async fn removing_an_address_takes_effect_without_a_restart() {
+    // The live runtime is the source of truth for every request: saving a
+    // policy without the peer's address must refuse it on the NEXT request,
+    // with no server restart in between.
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.allow.mode = ps_network::AllowMode::Strict;
+    policy.allow.connect = vec!["192.168.1.50".into()];
+    let (router, runtime) = test_router_with_runtime(policy).await;
+
+    let admitted = router
+        .clone()
+        .oneshot(peer_request("192.168.1.50", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(admitted.status(), StatusCode::OK);
+
+    // `put_config` persists + set_config()s in one step; set_config alone is
+    // the in-memory half of that save.
+    let mut updated = runtime.config();
+    updated.allow.connect = Vec::new();
+    runtime.set_config(updated);
+
+    let refused = router
+        .oneshot(peer_request("192.168.1.50", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(refused).await.contains("not allowed to connect"));
+}
+
+#[tokio::test]
+async fn funnel_forwards_are_filtered_by_the_forwarded_client_address() {
+    // Funnel terminates TLS and proxies over loopback; the allowlist must
+    // apply to the X-Forwarded-For address, not to the proxy's loopback.
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.funnel_enabled = true;
+    policy.allow.mode = ps_network::AllowMode::Strict;
+    policy.allow.connect = vec!["74.133.65.35".into()];
+    let router = test_router(policy).await;
+
+    // Listed funnel client: admitted (auth off here to isolate the IP layer).
+    let admitted = router
+        .clone()
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(admitted.status(), StatusCode::OK);
+
+    // The reported behavior: an address that was REMOVED keeps connecting.
+    // With the forwarded address enforced, an unlisted client is refused
+    // even though the socket peer is the trusted loopback proxy.
+    let mut removed = config(ListenMode::Lan, AuthScope::Never, false);
+    removed.funnel_enabled = true;
+    removed.allow.mode = ps_network::AllowMode::Strict;
+    let router = test_router(removed).await;
+    let refused = router
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(refused).await.contains("not allowed to connect"));
+}
+
+#[tokio::test]
+async fn forwarded_peers_do_not_inherit_the_loopback_seat() {
+    // Loopback with NetworkOnly needs no PIN; the same socket presenting a
+    // forwarded address must be judged as that network peer instead.
+    let mut policy = config(ListenMode::Lan, AuthScope::NetworkOnly, true);
+    policy.funnel_enabled = true;
+    policy.allow.connect = vec!["74.133.65.35".into()];
+    let router = test_router(policy).await;
+
+    let pin_required = router
+        .clone()
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(pin_required.status(), StatusCode::UNAUTHORIZED);
+
+    // A forwarded claim of loopback is not the operator.
+    let spoof = router
+        .clone()
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "127.0.0.1",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(spoof.status(), StatusCode::FORBIDDEN);
+
+    // Unparsable forwarding header on a trusted proxy path: fail closed.
+    let garbage = router
+        .clone()
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "not-an-ip",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(garbage.status(), StatusCode::FORBIDDEN);
+}
+
+#[tokio::test]
+async fn forwarding_headers_are_ignored_without_funnel_or_from_remote_sockets() {
+    // Funnel off: XFF is client-controlled noise, the loopback operator
+    // stays the trusted seat (dev proxies rely on this).
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.allow.mode = ps_network::AllowMode::Strict;
+    let router = test_router(policy).await;
+    let trusted = router
+        .clone()
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "8.8.8.8",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(trusted.status(), StatusCode::OK);
+
+    // Funnel on but the socket is not loopback: the direct peer decides.
+    let mut funnel = config(ListenMode::Lan, AuthScope::Never, false);
+    funnel.funnel_enabled = true;
+    funnel.allow.mode = ps_network::AllowMode::Strict;
+    funnel.allow.connect = vec!["74.133.65.35".into()];
+    let router = test_router(funnel).await;
+    let direct = router
+        .oneshot(with_forwarded_for(
+            peer_request("192.168.1.50", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(direct.status(), StatusCode::FORBIDDEN);
 }
 
 #[tokio::test]

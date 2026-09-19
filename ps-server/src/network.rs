@@ -19,8 +19,8 @@ use axum::routing::get;
 use axum::{Json, Router};
 use ps_network::auth::{AuthRateLimiter, SessionRegistry};
 use ps_network::{
-    AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict, MAX_PIN_CHARS,
-    MAX_SESSION_TTL_SECS, MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
+    AllowMode, AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict,
+    MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
 };
 
 use crate::network_policy::{ConnectionAcl, NetworkPolicy};
@@ -180,6 +180,9 @@ impl NetworkRuntime {
         if verdict.can_connect
             && config.listen == ListenMode::Tailscale
             && ps_network::classify(peer) != ps_network::PeerClass::Loopback
+            // An explicitly listed address is operator intent and does not
+            // depend on the live tailnet peer set being fresh.
+            && !ps_network::explicitly_listed(&config, peer)
             && !self.tailnet_peer_is_verified(peer)
         {
             return Verdict {
@@ -189,6 +192,35 @@ impl NetworkRuntime {
             };
         }
         verdict
+    }
+
+    /// Who is actually talking to us on one inbound request: the socket
+    /// peer, unless a trusted local proxy (Tailscale Funnel forwarding to
+    /// loopback) supplied a usable forwarding header.
+    pub(crate) fn inbound(&self, socket: IpAddr, headers: &HeaderMap) -> InboundPeer {
+        match forwarded_client(self.effective_config().funnel_enabled, socket, headers) {
+            ForwardedClient::None => InboundPeer::Direct(socket),
+            ForwardedClient::At(client) => InboundPeer::Forwarded { client },
+            ForwardedClient::Unparsable => InboundPeer::Unparsable { socket },
+        }
+    }
+
+    /// Policy verdict for one inbound request, proxy-aware: forwarded
+    /// clients are judged by `evaluate_forwarded`, everyone else directly.
+    pub(crate) fn evaluate_inbound(&self, inbound: &InboundPeer) -> Verdict {
+        match inbound {
+            InboundPeer::Direct(peer) => self.evaluate(*peer),
+            InboundPeer::Forwarded { client, .. } => {
+                ps_network::evaluate_forwarded(&self.effective_config(), *client)
+            }
+            // A trusted proxy path whose forwarding header cannot be parsed
+            // has an unknowable identity — fail closed rather than guess.
+            InboundPeer::Unparsable { .. } => Verdict {
+                can_connect: false,
+                can_write: false,
+                auth_required: false,
+            },
+        }
     }
 
     /// The flag the server main loops poll after the listener exits; true
@@ -275,9 +307,76 @@ impl NetworkRuntime {
     }
 }
 
+/// The peer behind one inbound request/connection.
+#[derive(Debug, Clone, Copy)]
+pub(crate) enum InboundPeer {
+    /// No trusted proxy involved: the socket address IS the client.
+    Direct(IpAddr),
+    /// A trusted local proxy (Funnel) forwarded this request; the address
+    /// the policy must judge is the forwarded client, not the proxy.
+    Forwarded { client: IpAddr },
+    /// A trusted proxy path whose forwarding header could not be parsed.
+    /// The socket address survives only for logging; the verdict is denial.
+    Unparsable { socket: IpAddr },
+}
+
+impl InboundPeer {
+    /// The address the policy is evaluated against.
+    pub(crate) fn effective(&self) -> IpAddr {
+        match self {
+            InboundPeer::Direct(peer) => *peer,
+            InboundPeer::Forwarded { client, .. } => *client,
+            InboundPeer::Unparsable { socket } => *socket,
+        }
+    }
+
+    pub(crate) fn forwarded(&self) -> bool {
+        matches!(self, InboundPeer::Forwarded { .. })
+    }
+}
+
+enum ForwardedClient {
+    None,
+    At(IpAddr),
+    Unparsable,
+}
+
+/// Resolves the client address from the `X-Forwarded-For` header of a
+/// trusted proxy hop. Tailscale Funnel terminates TLS and forwards to
+/// loopback, overwriting client-supplied forwarding headers, so a loopback
+/// socket with Funnel on is exactly the shape worth trusting. Everywhere
+/// else the header is client-controlled noise and is ignored.
+fn forwarded_client(funnel_enabled: bool, socket: IpAddr, headers: &HeaderMap) -> ForwardedClient {
+    if !funnel_enabled || !ps_network::canonical(socket).is_loopback() {
+        return ForwardedClient::None;
+    }
+    let Some(value) = headers
+        .get("x-forwarded-for")
+        .and_then(|value| value.to_str().ok())
+    else {
+        return ForwardedClient::None;
+    };
+    // Leftmost entry is the originating client; later entries are proxies
+    // it passed through.
+    let first = value.split(',').next().unwrap_or("").trim();
+    match first.parse::<IpAddr>() {
+        Ok(client) => ForwardedClient::At(client),
+        Err(_) => ForwardedClient::Unparsable,
+    }
+}
+
 impl NetworkPolicy for NetworkRuntime {
     fn acl_for(&self, peer: IpAddr) -> ConnectionAcl {
         let verdict = self.evaluate(peer);
+        ConnectionAcl {
+            can_connect: verdict.can_connect,
+            can_write: verdict.can_write,
+            auth_required: verdict.auth_required,
+        }
+    }
+
+    fn acl_for_forwarded(&self, client: IpAddr) -> ConnectionAcl {
+        let verdict = ps_network::evaluate_forwarded(&self.effective_config(), client);
         ConnectionAcl {
             can_connect: verdict.can_connect,
             can_write: verdict.can_write,
@@ -306,11 +405,11 @@ pub async fn network_gate(
     let path = request.uri().path().to_owned();
     let method = request.method().clone();
 
-    let peer = request
+    let socket_peer = request
         .extensions()
         .get::<axum::extract::ConnectInfo<SocketAddr>>()
         .map(|info| info.0.ip());
-    let Some(peer) = peer else {
+    let Some(socket_peer) = socket_peer else {
         // No ConnectInfo means no real socket peer (unit-level plumbing);
         // refuse rather than guess.
         return error_response(
@@ -318,17 +417,26 @@ pub async fn network_gate(
             "client address unavailable",
         );
     };
-    let peer_is_loopback = ps_network::canonical(peer).is_loopback();
+    let inbound = runtime.inbound(socket_peer, request.headers());
+    let peer = inbound.effective();
 
-    let verdict = runtime.evaluate(peer);
+    let verdict = runtime.evaluate_inbound(&inbound);
     if !verdict.can_connect {
-        tracing::warn!(%peer, %path, "connection refused by network policy");
+        tracing::warn!(
+            peer = %peer,
+            socket = %socket_peer,
+            forwarded = inbound.forwarded(),
+            %path,
+            "connection refused by network policy"
+        );
         return error_response(
             StatusCode::FORBIDDEN,
             "refused: your address is not allowed to connect to this PalStudio instance",
         );
     }
-    if !peer_is_loopback && !secure_transport(&request) {
+    // The cleartext refusal keys on the SOCKET peer: a Funnel forward hops
+    // over plain HTTP on loopback after tailscale terminates TLS upstream.
+    if !ps_network::canonical(socket_peer).is_loopback() && !secure_transport(&request) {
         tracing::warn!(%peer, %path, "refused cleartext network request");
         return error_response(
             StatusCode::UPGRADE_REQUIRED,
@@ -411,6 +519,17 @@ pub(crate) fn security_warnings(config: &NetworkConfig) -> Vec<String> {
     }
     if config.auth.scope != AuthScope::Never && config.auth.pin.is_none() {
         warnings.push("auth is enabled but no PIN is set; network peers are refused".into());
+    }
+    if config.funnel_enabled
+        && config.allow.mode == AllowMode::Strict
+        && config.allow.connect.is_empty()
+        && config.allow.write.is_empty()
+    {
+        warnings.push(
+            "Funnel is published but strict mode admits nobody unlisted — remote funnel \
+             visitors will all be refused until their addresses are listed"
+                .into(),
+        );
     }
     warnings
 }
@@ -778,15 +897,15 @@ pub(crate) async fn reconcile_current_resources(config: &NetworkConfig) -> Vec<S
                     }
                 }
             }
-            Ok(_) => failures.push(
-                "Tailscale Funnel is enabled but the CLI is unavailable".into(),
-            ),
+            Ok(_) => failures.push("Tailscale Funnel is enabled but the CLI is unavailable".into()),
             Err(error) => failures.push(format!("funnel probe task failed: {error}")),
         }
     } else {
         match tokio::task::spawn_blocking(ps_network::tailscale::funnel_probe).await {
             Ok(live)
-                if live.available && live.on && ps_network::tailscale::funnel_owns_local_targets(&live) =>
+                if live.available
+                    && live.on
+                    && ps_network::tailscale::funnel_owns_local_targets(&live) =>
             {
                 let port = config.port;
                 match tokio::task::spawn_blocking(move || {
@@ -924,7 +1043,11 @@ async fn create_session(
     axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime>>,
     Json(request): Json<SessionRequest>,
 ) -> Response {
-    if let Some(retry_after) = runtime.auth_retry_after(peer.ip()) {
+    // Funnel clients all share the proxy's loopback socket; rate limiting
+    // and attribution must key on the forwarded client instead.
+    let inbound = runtime.inbound(peer.ip(), &headers);
+    let client = inbound.effective();
+    if let Some(retry_after) = runtime.auth_retry_after(client) {
         let mut response = error_response(
             StatusCode::TOO_MANY_REQUESTS,
             "too many failed PIN attempts; try again later",
@@ -947,7 +1070,7 @@ async fn create_session(
         .await
         .unwrap_or(false);
     if !matches {
-        let retry_after = runtime.record_auth_failure(peer.ip());
+        let retry_after = runtime.record_auth_failure(client);
         tokio::time::sleep(FAILED_PIN_DELAY).await;
         let mut response = error_response(StatusCode::UNAUTHORIZED, "wrong PIN");
         if let Some(retry_after) = retry_after {
@@ -957,9 +1080,10 @@ async fn create_session(
         }
         return response;
     }
-    runtime.record_auth_success(peer.ip());
+    runtime.record_auth_success(client);
     let token = runtime.sessions.issue(ttl);
     let secure = config.funnel_enabled
+        || inbound.forwarded()
         || !ps_network::canonical(peer.ip()).is_loopback()
         || secure_transport_from_headers(&headers);
     let mut cookie = format!(
@@ -1242,7 +1366,7 @@ mod tests {
             allow: ps_network::AllowRules {
                 connect: vec!["192.168.o.0/24".into()],
                 write: vec!["10.0.0.999".into()],
-            ..Default::default()
+                ..Default::default()
             },
             auth: AuthUpdate {
                 scope: AuthScope::NetworkOnly,
@@ -1357,5 +1481,89 @@ mod tests {
         let warnings = security_warnings(&broken);
         assert_eq!(warnings.len(), 1);
         assert!(warnings[0].contains("no PIN is set"));
+    }
+
+    #[test]
+    fn funnel_with_strict_empty_lists_warns_that_visitors_are_refused() {
+        let mut config = config_with_pin(AuthScope::Always);
+        config.funnel_enabled = true;
+        config.allow.mode = AllowMode::Strict;
+        let warnings = security_warnings(&config);
+        assert!(
+            warnings.iter().any(|warning| warning.contains("Funnel")),
+            "got {warnings:?}"
+        );
+
+        // Naming any allowed address (or leaving balanced/open) silences it.
+        config.allow.connect = vec!["203.0.113.9".into()];
+        assert!(!security_warnings(&config)
+            .iter()
+            .any(|w| w.contains("Funnel")));
+    }
+
+    #[test]
+    fn forwarding_headers_are_trusted_only_on_loopback_sockets_with_funnel() {
+        let mut headers = HeaderMap::new();
+        headers.insert("x-forwarded-for", HeaderValue::from_static("74.133.65.35"));
+        let loopback = ip("127.0.0.1");
+        let remote = ip("192.168.1.50");
+
+        assert!(matches!(
+            forwarded_client(true, loopback, &headers),
+            ForwardedClient::At(client) if client == ip("74.133.65.35")
+        ));
+        // Funnel off (the dev-proxy posture): the header is noise.
+        assert!(matches!(
+            forwarded_client(false, loopback, &headers),
+            ForwardedClient::None
+        ));
+        // Funnel on but the socket is not the local proxy: still noise.
+        assert!(matches!(
+            forwarded_client(true, remote, &headers),
+            ForwardedClient::None
+        ));
+        // A trusted proxy path with a garbage header fails closed.
+        let mut garbage = HeaderMap::new();
+        garbage.insert("x-forwarded-for", HeaderValue::from_static("not-an-ip"));
+        assert!(matches!(
+            forwarded_client(true, loopback, &garbage),
+            ForwardedClient::Unparsable
+        ));
+        // Leftmost entry wins when hops are chained.
+        let mut chained = HeaderMap::new();
+        chained.insert(
+            "x-forwarded-for",
+            HeaderValue::from_static("203.0.113.9, 10.0.0.1"),
+        );
+        assert!(matches!(
+            forwarded_client(true, loopback, &chained),
+            ForwardedClient::At(client) if client == ip("203.0.113.9")
+        ));
+    }
+
+    #[test]
+    fn evaluate_inbound_tracks_config_changes_for_forwarded_peers() {
+        let mut config = NetworkConfig {
+            listen: ListenMode::Lan,
+            ..NetworkConfig::default()
+        };
+        config.funnel_enabled = true;
+        config.allow.mode = AllowMode::Strict;
+        config.allow.connect = vec!["74.133.65.35".into()];
+        let runtime = NetworkRuntime::new(config);
+
+        let mut headers = HeaderMap::new();
+        headers.insert("x-forwarded-for", HeaderValue::from_static("74.133.65.35"));
+        let inbound = runtime.inbound(ip("127.0.0.1"), &headers);
+        assert!(inbound.forwarded());
+        assert!(runtime.evaluate_inbound(&inbound).can_connect);
+
+        // Saving without the address flips the verdict for the NEXT request;
+        // nothing restarts.
+        let mut removed = runtime.config();
+        removed.allow.connect = Vec::new();
+        runtime.set_config(removed);
+        let inbound = runtime.inbound(ip("127.0.0.1"), &headers);
+        assert!(!runtime.evaluate_inbound(&inbound).can_connect);
     }
 }

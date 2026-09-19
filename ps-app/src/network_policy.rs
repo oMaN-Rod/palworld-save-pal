@@ -33,6 +33,14 @@ impl ConnectionAcl {
 /// write permission (HTTP enforcement happens in axum middleware).
 pub trait NetworkPolicy: Send + Sync {
     fn acl_for(&self, peer: IpAddr) -> ConnectionAcl;
+    /// Verdict for a peer that reached the server through a trusted local
+    /// proxy (Tailscale Funnel): the allowlists apply, the listen mode's
+    /// default audience does not, and the peer is never the trusted
+    /// loopback seat. Defaults to the direct verdict for implementations
+    /// without proxy awareness (wasm, tests).
+    fn acl_for_forwarded(&self, client: IpAddr) -> ConnectionAcl {
+        self.acl_for(client)
+    }
     fn has_valid_session(&self, token: &str) -> bool;
     /// Changes to listen/auth/write policy invalidate existing WebSocket
     /// connections. Implementations without a mutable policy keep generation
@@ -47,6 +55,16 @@ pub fn acl_for(app_policy: &Option<Arc<dyn NetworkPolicy>>, peer: IpAddr) -> Con
     app_policy
         .as_ref()
         .map(|policy| policy.acl_for(peer))
+        .unwrap_or_else(ConnectionAcl::unrestricted)
+}
+
+pub fn acl_for_forwarded(
+    app_policy: &Option<Arc<dyn NetworkPolicy>>,
+    client: IpAddr,
+) -> ConnectionAcl {
+    app_policy
+        .as_ref()
+        .map(|policy| policy.acl_for_forwarded(client))
         .unwrap_or_else(ConnectionAcl::unrestricted)
 }
 

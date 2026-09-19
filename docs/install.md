@@ -114,15 +114,20 @@ from the Palworld game servers it manages), configured on the in-app
 **Network** page (server/webapp editions) or seeded at install time:
 
 - **Listen modes** — `localhost` (default; this machine only), `lan`,
-  `tailscale` (only the tailnet's 100.64.0.0/10 range), `wan`. Modes are
-  enforced per connection, so switching never restarts the listener.
+  `tailscale` (tailnet's 100.64.0.0/10 range), `wan`. The mode sets the
+  DEFAULT audience; it is enforced per connection, so switching never
+  restarts the listener.
 - **Port** — editable in the Network page (the server rebinds in place) or
   pinned via `PORT`/`--port`/`PS_PORT`. Loopback is always trusted and can
   always write.
 - **Allowlists** — `connect` decides who may talk to the instance at all,
   `write` who may edit (everyone else gets a read-only UI; mutations over
   HTTP and WS are refused with 403 / a read-only error frame). Entries are
-  IPs or CIDR ranges; empty means "everyone the listen mode admits".
+  IPs or CIDR ranges; a LISTED address is admitted even when the listen
+  mode's default audience would not include it (the one exception is
+  `localhost`, which stays loopback-only like its listener), and a
+  write-listed address may connect too. An empty list falls back to the
+  mode-selected default (see the table below).
 - **PIN** — optional password for network peers (`networkonly`) or even
   localhost (`always`). Wrong attempts are PBKDF2-slowed; sessions are
   in-memory cookies that die with the process. Locked-out browsers land on
@@ -130,9 +135,11 @@ from the Palworld game servers it manages), configured on the in-app
 - **Fail-closed** — auth demanded without a PIN configured refuses network
   peers outright instead of silently letting them in.
 - **Tailscale** — the Network page shows this node's tailnet addresses and
-  can toggle `tailscale funnel` for the port when the CLI is present
-  (funnel traffic arrives via the local proxy and cannot be IP-filtered —
-  the page insists on a PIN first).
+  can toggle `tailscale funnel` for the port when the CLI is present.
+  Funnel forwards arrive through the local proxy on loopback; PalStudio
+  reads the forwarded client address and applies the allowlists to it, so
+  removing an address cuts off its funnel access too (the page still
+  insists on a PIN first — Funnel requires the "everywhere" scope).
 - **UPnP** — an explicit, clearly-discouraged toggle (feature-gated at
   build time); tailscale is the recommended remote path.
 
@@ -182,8 +189,9 @@ graduating to a hosted context restores whatever was configured before.
 ### Allowlists and what "empty" means
 
 The connect and write allowlists (IPs/CIDRs) always mean "exactly these
-addresses" when non-empty, and localhost is always trusted. What an EMPTY
-list falls back to is a setting on the Network page:
+addresses" when non-empty — including for Funnel-forwarded clients, who
+are judged by their real address — and localhost is always trusted. What
+an EMPTY list falls back to is a setting on the Network page:
 
 | Mode | Empty connect list | Empty write list |
 | --- | --- | --- |
@@ -194,6 +202,11 @@ list falls back to is a setting on the Network page:
 `strict` is the lockdown posture: only localhost until you explicitly list
 an address to connect, and separately to edit. Configs saved before the
 setting existed keep the default behavior unchanged.
+
+Changes apply immediately: verdicts are computed per request (and
+re-checked on live WebSocket connections within a second), so adding or
+removing an address takes effect as soon as the page saves — no restart,
+no rebind (only the port and listen mode rebind).
 
 ## From source
 

@@ -22,4 +22,7 @@ pub use config::{
     NetworkConfig, NetworkTier, PinHash, MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS,
     MIN_SESSION_TTL_SECS,
 };
-pub use policy::{canonical, classify, default_audience, evaluate, PeerAcl, PeerClass};
+pub use policy::{
+    canonical, classify, default_audience, evaluate, evaluate_forwarded, explicitly_listed,
+    PeerAcl, PeerClass,
+};
