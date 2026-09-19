@@ -17,10 +17,12 @@ indexmap = { workspace = true }
 ruzstd = { workspace = true }
 brotli = { workspace = true }
 ciborium = { workspace = true }
+base64 = { workspace = true }
 
 [dev-dependencies]
 pretty_assertions = { workspace = true }
 tempfile = { workspace = true }
+flate2 = { workspace = true }
 # The integration tests link ps-core as an external crate, so `cfg(test)` does
 # not reach it; this is what makes the `test-fixtures` surface visible to them.
 ps-core = { path = ".", features = ["test-fixtures"] }

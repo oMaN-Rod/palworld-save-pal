@@ -1,9 +1,14 @@
 //! The PST container. `.pstbase` is `zstd(brotli(cbor(payload)))`; `.json` is the same
-//! payload as plain JSON. Both normalize to one `serde_json::Value`, with byte arrays
-//! as integer arrays, so nothing downstream branches on the encoding.
+//! payload as plain JSON, except that some exports wrap byte arrays as `{"~b": "<base64>"}`
+//! rather than inlining them. All forms normalize to one `serde_json::Value`, with byte
+//! arrays as integer arrays, so nothing downstream branches on the encoding.
 
 use crate::error::CoreError;
+use base64::Engine as _;
 use serde_json::Value;
+
+/// The lone key of PST's base64-wrapped byte-array form: `{"~b": "<base64>"}`.
+const BASE64_BYTES_KEY: &str = "~b";
 
 /// zstd's frame magic.
 const ZSTD_MAGIC: [u8; 4] = [0x28, 0xb5, 0x2f, 0xfd];
@@ -23,9 +28,40 @@ pub fn decode(bytes: &[u8]) -> Result<Value, CoreError> {
         let cbor_bytes = unbrotli(&brotli_bytes)?;
         decode_cbor(&cbor_bytes)
     } else {
-        serde_json::from_slice(bytes)
-            .map_err(|e| CoreError::Parse(format!("not a PST blueprint: {e}")))
+        let value: Value = serde_json::from_slice(bytes)
+            .map_err(|e| CoreError::Parse(format!("not a PST blueprint: {e}")))?;
+        normalize_json(value)
     }
+}
+
+/// Rewrites `{"~b": "<base64>"}` objects into the same integer-array shape the CBOR
+/// path produces, recursing everywhere else unchanged. A `~b` key sharing an object
+/// with other keys is left alone -- it is not this marker, just a field that happens
+/// to be named `~b`.
+fn normalize_json(value: Value) -> Result<Value, CoreError> {
+    Ok(match value {
+        Value::Object(map) => {
+            if map.len() == 1 {
+                if let Some(Value::String(encoded)) = map.get(BASE64_BYTES_KEY) {
+                    let bytes = base64::engine::general_purpose::STANDARD
+                        .decode(encoded)
+                        .map_err(|e| CoreError::Parse(format!("invalid ~b base64: {e}")))?;
+                    return Ok(Value::Array(
+                        bytes.into_iter().map(|b| Value::from(b as u64)).collect(),
+                    ));
+                }
+            }
+            let mut object = serde_json::Map::new();
+            for (key, value) in map {
+                object.insert(key, normalize_json(value)?);
+            }
+            Value::Object(object)
+        }
+        Value::Array(items) => {
+            Value::Array(items.into_iter().map(normalize_json).collect::<Result<_, _>>()?)
+        }
+        other => other,
+    })
 }
 
 /// CBOR carries byte strings natively where JSON carries integer arrays. Normalizing
