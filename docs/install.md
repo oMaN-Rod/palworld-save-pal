@@ -179,6 +179,22 @@ PUTs that try to change anything but the port are refused with a pointer to
 `palstudio host` or the service. The stored policy is left untouched, so
 graduating to a hosted context restores whatever was configured before.
 
+### Allowlists and what "empty" means
+
+The connect and write allowlists (IPs/CIDRs) always mean "exactly these
+addresses" when non-empty, and localhost is always trusted. What an EMPTY
+list falls back to is a setting on the Network page:
+
+| Mode | Empty connect list | Empty write list |
+| --- | --- | --- |
+| `Anyone can view and edit` (open) | anyone the listen mode admits | anyone who can connect |
+| `Anyone can view; edits must be listed` (default) | anyone the listen mode admits | nobody — read-only |
+| `Nobody — list every address` (strict) | nobody | nobody |
+
+`strict` is the lockdown posture: only localhost until you explicitly list
+an address to connect, and separately to edit. Configs saved before the
+setting existed keep the default behavior unchanged.
+
 ## From source
 
 ```sh
@@ -207,17 +223,11 @@ Pulls `ghcr.io/oman-rod/palworld-save-pal:latest` (multi-arch: amd64/arm64),
 persists the database in the `palstudio-db` volume, restarts unless stopped,
 and healthchecks the HTTP listener.
 
-The UI's WebSocket endpoint is baked at image build time as
-`127.0.0.1:5174/ws` — correct when you browse from the Docker host. To serve
-browsers on other machines, rebuild with your host IP instead:
+The UI dials its websocket same-origin (the page's own host), so the image
+works unchanged from the Docker host, other machines on the LAN, or any
+published port mapping — no rebuild with a baked address is needed.
 
-```bash
-PUBLIC_WS_URL=192.168.1.20:5174/ws \
-  docker compose -f docker-compose.yml -f docker-compose.build.yml up -d --build
-```
-
-(or `scripts/build-docker.sh` / `.ps1`, which detect the IP). Do not
-bind-mount over `/app/data` — the game data ships inside the image and a
+Do not bind-mount over `/app/data` — the game data ships inside the image and a
 bind mount would shadow it with an empty dir.
 
 **Changing the port in Docker**: change it in the compose file

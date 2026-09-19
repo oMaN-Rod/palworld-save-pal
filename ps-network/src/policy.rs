@@ -197,14 +197,28 @@ pub fn evaluate(config: &NetworkConfig, peer: IpAddr) -> PeerAcl {
             .any(|net| net.contains(peer))
     };
 
-    let can_connect = config.allow.connect.is_empty() || matches_any(&config.allow.connect);
+    // A non-empty list always means "exactly these addresses"; the mode only
+    // decides what an EMPTY list falls back to. Loopback was handled above
+    // and stays trusted in every mode.
+    let (connect_empty_admits, write_empty_admits) = match config.allow.mode {
+        crate::config::AllowMode::Open => (true, true),
+        crate::config::AllowMode::Balanced => (true, false),
+        crate::config::AllowMode::Strict => (false, false),
+    };
+    let can_connect = if config.allow.connect.is_empty() {
+        connect_empty_admits
+    } else {
+        matches_any(&config.allow.connect)
+    };
     if !can_connect {
         return PeerAcl::denied();
     }
 
-    // An empty write list is a safe default: an operator must explicitly
-    // name network writers. Loopback was handled above and remains trusted.
-    let can_write = !config.allow.write.is_empty() && matches_any(&config.allow.write);
+    let can_write = if config.allow.write.is_empty() {
+        write_empty_admits
+    } else {
+        matches_any(&config.allow.write)
+    };
 
     PeerAcl {
         can_connect: true,
@@ -237,7 +251,7 @@ pub fn default_audience(mode: ListenMode) -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::config::{AllowRules, AuthConfig, PinHash};
+    use crate::config::{AllowMode, AllowRules, AuthConfig, PinHash};
 
     fn ip(s: &str) -> IpAddr {
         s.parse().unwrap()
@@ -306,6 +320,7 @@ mod tests {
                 allow: AllowRules {
                     connect: vec!["10.0.0.0/8".into()],
                     write: vec!["10.0.0.0/8".into()],
+                ..Default::default()
                 },
                 auth: AuthConfig {
                     scope: AuthScope::NetworkOnly,
@@ -342,6 +357,63 @@ mod tests {
     }
 
     #[test]
+    fn allow_mode_open_lets_empty_lists_grant_view_and_edits() {
+        let config = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                mode: AllowMode::Open,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let peer = evaluate(&config, ip("192.168.1.4"));
+        assert!(peer.can_connect && peer.can_write, "open: empty lists admit all");
+    }
+
+    #[test]
+    fn allow_mode_balanced_keeps_the_legacy_split() {
+        let config = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                mode: AllowMode::Balanced,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let peer = evaluate(&config, ip("192.168.1.4"));
+        assert!(peer.can_connect, "balanced: anyone admitted may view");
+        assert!(!peer.can_write, "balanced: edits still require listing");
+    }
+
+    #[test]
+    fn allow_mode_strict_locks_empty_lists_to_loopback() {
+        let config = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                mode: AllowMode::Strict,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let peer = evaluate(&config, ip("192.168.1.4"));
+        assert!(!peer.can_connect && !peer.can_write, "strict: unlisted peers are denied");
+
+        // Listing the address admits connecting; edits still need the write list.
+        let listed = NetworkConfig {
+            listen: ListenMode::Lan,
+            allow: AllowRules {
+                connect: vec!["192.168.1.4".into()],
+                mode: AllowMode::Strict,
+                ..Default::default()
+            },
+            ..NetworkConfig::default()
+        };
+        let admitted = evaluate(&listed, ip("192.168.1.4"));
+        assert!(admitted.can_connect, "strict: a listed peer may connect and view");
+        assert!(!admitted.can_write, "strict: edits need the write list too");
+    }
+
+    #[test]
     fn tailscale_mode_admits_only_the_tailnet_range() {
         let config = NetworkConfig {
             listen: ListenMode::Tailscale,
@@ -359,6 +431,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["203.0.113.0/24".into()],
                 write: vec!["203.0.113.7".into()],
+            ..Default::default()
             },
             ..NetworkConfig::default()
         };
@@ -403,6 +476,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec![],
                 write: vec!["192.168.1.0/24".into()],
+            ..Default::default()
             },
             ..NetworkConfig::default()
         };

@@ -18,7 +18,8 @@ pub mod tailscale;
 pub mod upnp;
 
 pub use config::{
-    validate_pin, AllowRules, AuthConfig, AuthScope, ConfigError, ListenMode, NetworkConfig,
-    NetworkTier, PinHash, MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
+    validate_pin, AllowMode, AllowRules, AuthConfig, AuthScope, ConfigError, ListenMode,
+    NetworkConfig, NetworkTier, PinHash, MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS,
+    MIN_SESSION_TTL_SECS,
 };
 pub use policy::{canonical, classify, default_audience, evaluate, PeerAcl, PeerClass};

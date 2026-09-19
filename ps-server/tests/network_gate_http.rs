@@ -279,6 +279,65 @@ async fn write_allowlist_blocks_mutating_http_for_view_only_peers() {
 }
 
 #[tokio::test]
+async fn strict_allow_mode_denies_unlisted_peers_entirely() {
+    // "Nobody — list every address": with empty lists, only localhost gets
+    // in; a LAN peer is refused before any handler runs.
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.allow.mode = ps_network::AllowMode::Strict;
+    let router = test_router(policy).await;
+
+    let refused = router
+        .oneshot(peer_request("192.168.1.50", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+
+    // Listing the address in the connect allowlist restores view access…
+    let mut listed = config(ListenMode::Lan, AuthScope::Never, false);
+    listed.allow.mode = ps_network::AllowMode::Strict;
+    listed.allow.connect = vec!["192.168.1.50".into()];
+    let router = test_router(listed).await;
+    let view = router
+        .clone()
+        .oneshot(peer_request("192.168.1.50", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(view.status(), StatusCode::OK);
+
+    // …but edits stay blocked until the write allowlist names the peer too.
+    let edit = router
+        .oneshot(peer_json_request(
+            "192.168.1.50",
+            "PUT",
+            "/api/network/config",
+            "{}",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(edit.status(), StatusCode::FORBIDDEN);
+}
+
+#[tokio::test]
+async fn open_allow_mode_lets_admitted_peers_edit_with_empty_lists() {
+    let mut policy = config(ListenMode::Lan, AuthScope::Never, false);
+    policy.allow.mode = ps_network::AllowMode::Open;
+    let router = test_router(policy).await;
+
+    let edit = router
+        .oneshot(peer_json_request(
+            "192.168.1.50",
+            "PUT",
+            "/api/network/config",
+            "{}",
+        ))
+        .await
+        .unwrap();
+    // Reaches the handler (422 for the field-less body, NOT the gate's 403):
+    // with empty lists in open mode, an admitted peer may also write.
+    assert_eq!(edit.status(), StatusCode::UNPROCESSABLE_ENTITY);
+}
+
+#[tokio::test]
 async fn fail_closed_when_auth_is_demanded_without_a_pin() {
     let router = test_router(config(ListenMode::Lan, AuthScope::NetworkOnly, false)).await;
     let refused = router

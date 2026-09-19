@@ -26,10 +26,17 @@
 		{ value: 'always', label: m.network_auth_always() }
 	];
 
+	const allowModeOptions: { value: 'open' | 'balanced' | 'strict'; label: string }[] = [
+		{ value: 'open', label: m.network_allow_mode_open() },
+		{ value: 'balanced', label: m.network_allow_mode_balanced() },
+		{ value: 'strict', label: m.network_allow_mode_strict() }
+	];
+
 	let listen = $state<ListenMode>('localhost');
 	let port = $state<number>(5174);
 	let connectRules = $state('');
 	let writeRules = $state('');
+	let allowMode = $state<'open' | 'balanced' | 'strict'>('balanced');
 	let authScope = $state<AuthScope>('never');
 	let newPin = $state('');
 	let confirmPin = $state('');
@@ -67,6 +74,7 @@
 				port = config.port;
 				connectRules = (config.allow.connect ?? []).join('\n');
 				writeRules = (config.allow.write ?? []).join('\n');
+				allowMode = config.allow.mode ?? 'balanced';
 				authScope = config.auth.scope;
 				upnpEnabled = config.upnp_enabled;
 				funnelEnabled = config.funnel_enabled;
@@ -168,8 +176,7 @@
 			port,
 			connectRules,
 			writeRules,
-			// Belt to the toggle handler: the server rejects Funnel with any
-			// laxer scope, so never send that combination.
+			allowMode,
 			scope: funnelEnabled && authScope !== 'always' ? 'always' : authScope,
 			// Empty string clears the PIN server-side; undefined keeps it.
 			newPin: clearPin ? '' : newPin ? newPin : undefined,
@@ -187,6 +194,7 @@
 			funnelEnabled = result.config.funnel_enabled;
 			upnpEnabled = result.config.upnp_enabled;
 			authScope = result.config.auth.scope;
+			allowMode = result.config.allow?.mode ?? 'balanced';
 			// Re-read what tailscale says now that the save applied.
 			network.loadStatus();
 		}
@@ -379,16 +387,28 @@
 			<!-- Advanced: allowlists + runtime mode, collapsed by default -->
 			<details class="text-sm">
 				<summary class="cursor-pointer text-surface-300">IP / CIDR</summary>
-				<Card class="mt-2 flex flex-col gap-2 p-3">
-					<label class="flex flex-col gap-1">
-						<span class="text-sm">{m.network_allow_connect()}</span>
-						<textarea
-							class="textarea h-20 font-mono text-sm"
-							placeholder="192.168.1.0/24&#10;100.71.3.9"
-							bind:value={connectRules}
-						></textarea>
-						<span class="text-xs text-surface-400">{m.network_allow_connect_hint()}</span>
-					</label>
+			<Card class="mt-2 flex flex-col gap-2 p-3">
+				<label class="flex flex-col gap-1">
+					<span class="text-sm">{m.network_allow_mode()}</span>
+					<select
+						class="bg-surface-900 border-surface-700 rounded-sm border px-2 py-1.5 text-sm"
+						bind:value={allowMode}
+					>
+						{#each allowModeOptions as option (option.value)}
+							<option value={option.value}>{option.label}</option>
+						{/each}
+					</select>
+					<span class="text-xs text-surface-400">{m.network_allow_mode_hint()}</span>
+				</label>
+				<label class="flex flex-col gap-1">
+					<span class="text-sm">{m.network_allow_connect()}</span>
+					<textarea
+						class="textarea h-20 font-mono text-sm"
+						placeholder="192.168.1.0/24&#10;100.71.3.9"
+						bind:value={connectRules}
+					></textarea>
+					<span class="text-xs text-surface-400">{m.network_allow_connect_hint()}</span>
+				</label>
 					<label class="flex flex-col gap-1">
 						<span class="text-sm">{m.network_allow_write()}</span>
 						<textarea

@@ -9,13 +9,15 @@
 
 export type ListenMode = 'localhost' | 'lan' | 'tailscale' | 'wan';
 export type AuthScope = 'never' | 'networkonly' | 'always';
+/** What an EMPTY allowlist falls back to; listed addresses always apply. */
+export type AllowMode = 'open' | 'balanced' | 'strict';
 
 export interface NetworkConfigDto {
 	tier?: string;
 	listen: ListenMode;
 	port: number;
 	/** Absent when empty on older servers — normalized on load. */
-	allow: { connect?: string[]; write?: string[] };
+	allow: { connect?: string[]; write?: string[]; mode?: AllowMode };
 	auth: { scope: AuthScope; pin_set: boolean; session_ttl_secs: number };
 	upnp_enabled: boolean;
 	funnel_enabled: boolean;
@@ -114,7 +116,11 @@ class NetworkState {
 			// these unconditionally, so make them arrays once, here.
 			this.config = {
 				...config,
-				allow: { connect: config.allow?.connect ?? [], write: config.allow?.write ?? [] }
+				allow: {
+					connect: config.allow?.connect ?? [],
+					write: config.allow?.write ?? [],
+					mode: config.allow?.mode ?? 'balanced'
+				}
 			};
 			// Service control is deliberately a separately authenticated local
 			// control plane. A normal localhost browser must still be able to
@@ -189,6 +195,7 @@ class NetworkState {
 		port: number;
 		connectRules: string;
 		writeRules: string;
+		allowMode: AllowMode;
 		scope: AuthScope;
 		newPin?: string;
 		upnpEnabled: boolean;
@@ -203,7 +210,8 @@ class NetworkState {
 				port: update.port,
 				allow: {
 					connect: update.connectRules.split('\n').map((l) => l.trim()).filter(Boolean),
-					write: update.writeRules.split('\n').map((l) => l.trim()).filter(Boolean)
+					write: update.writeRules.split('\n').map((l) => l.trim()).filter(Boolean),
+					mode: update.allowMode
 				},
 				auth: { scope: update.scope, new_pin: update.newPin ?? null },
 				upnp_enabled: update.upnpEnabled,

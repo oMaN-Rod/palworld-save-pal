@@ -135,12 +135,30 @@ impl PinHash {
 /// The fields always serialize — the Network page's DTO renders them
 /// unconditionally, and a missing key there reads as `undefined` in the
 /// browser.
+/// What an EMPTY allowlist grants. The mode only decides the fallback when a
+/// list is empty; a non-empty list always means "exactly these addresses",
+/// and loopback is always trusted regardless.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "lowercase")]
+pub enum AllowMode {
+    /// Empty connect list: anyone the listen mode admits may view AND edit.
+    Open,
+    /// The legacy default: anyone admitted may view; edits require listing.
+    #[default]
+    Balanced,
+    /// Empty lists admit nobody but loopback — addresses must be listed both
+    /// to connect and to edit.
+    Strict,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct AllowRules {
     #[serde(default)]
     pub connect: Vec<String>,
     #[serde(default)]
     pub write: Vec<String>,
+    #[serde(default)]
+    pub mode: AllowMode,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -445,6 +463,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["100.64.1.5/32".into()],
                 write: vec![],
+            ..Default::default()
             },
             ..NetworkConfig::default()
         };
@@ -455,6 +474,13 @@ mod tests {
         let minimal = NetworkConfig::from_json(r#"{"listen":"lan","port":9000}"#).unwrap();
         assert_eq!(minimal.listen, ListenMode::Lan);
         assert_eq!(minimal.port, 9000);
+
+        // Configs saved before the allowlist mode existed keep their exact
+        // legacy semantics: view-all, edit-nobody-unless-listed.
+        let legacy =
+            NetworkConfig::from_json(r#"{"listen":"lan","port":9000,"allow":{"connect":[],"write":[]}}"#)
+                .unwrap();
+        assert_eq!(legacy.allow.mode, AllowMode::Balanced);
         assert_eq!(minimal.auth.scope, AuthScope::Never);
     }
 
@@ -496,6 +522,7 @@ mod tests {
             allow: AllowRules {
                 connect: vec!["0.0.0.0/0".into()],
                 write: vec!["10.0.0.0/8".into()],
+            ..Default::default()
             },
             auth: AuthConfig {
                 scope: AuthScope::NetworkOnly,

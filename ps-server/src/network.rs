@@ -1242,6 +1242,7 @@ mod tests {
             allow: ps_network::AllowRules {
                 connect: vec!["192.168.o.0/24".into()],
                 write: vec!["10.0.0.999".into()],
+            ..Default::default()
             },
             auth: AuthUpdate {
                 scope: AuthScope::NetworkOnly,
