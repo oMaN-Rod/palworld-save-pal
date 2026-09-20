@@ -7323,6 +7323,7 @@ dependencies = [
 [[package]]
 name = "uesave"
 version = "0.7.1"
+source = "git+https://github.com/oMaN-Rod/uesave-rs.git?rev=75f9c2405725ec417448791b04939d819ad0d286#75f9c2405725ec417448791b04939d819ad0d286"
 dependencies = [
  "bitflags 2.13.0",
  "byteorder",

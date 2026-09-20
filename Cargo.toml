@@ -32,7 +32,7 @@ ps-core = { path = "ps-core", default-features = false }
 ps-db = { path = "ps-db", default-features = false }
 ps-lua-sys = { path = "ps-lua-sys" }
 ps-plugin = { path = "ps-plugin" }
-uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", branch = "pluggable-game-support", default-features = false }
+uesave = { git = "https://github.com/oMaN-Rod/uesave-rs.git", rev = "75f9c2405725ec417448791b04939d819ad0d286", default-features = false }
 axum = { version = "0.8", features = ["ws", "multipart"] }
 tokio = { version = "1", features = ["full"] }
 tokio-util = "0.7"
@@ -89,11 +89,3 @@ tempfile = "3"
 pretty_assertions = "1"
 tower = { version = "0.5", features = ["util"] }
 http-body-util = "0.1"
-
-# TEMPORARY local override: the uesave dependency above still points at
-# pluggable-game-support, but the commit this repository needs only exists locally in
-# the sibling uesave-rs repository -- nothing has been pushed yet. Replace this patch
-# with a `rev = "..."` pin on the workspace `uesave` dependency once that branch is
-# pushed, and never commit this override past that point.
-[patch."https://github.com/oMaN-Rod/uesave-rs.git"]
-uesave = { path = "../uesave-rs/uesave" }
