@@ -154,7 +154,7 @@ describe('TargetList', () => {
 		render(TargetList, { selectedId: 'client-abc', onselect: vi.fn() });
 
 		const select = within(row('client-abc')).getByRole('button', { name: 'Palworld' });
-		expect(select.querySelector('[role="tooltip"]')).toBeNull();
+		expect(select.querySelector('[data-tooltip-trigger]')).toBeNull();
 		expect(select.querySelector('div')).toBeNull();
 	});
 

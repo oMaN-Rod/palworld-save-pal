@@ -691,6 +691,19 @@ body::after {
 	width: 4rem;
 }
 
+.nav-drawer {
+	width: 17.75rem;
+	flex-shrink: 0;
+	overflow: clip;
+	border-right: 1px solid color-mix(in srgb, var(--color-surface-700) 40%, transparent);
+	background: linear-gradient(
+		180deg,
+		color-mix(in srgb, var(--color-surface-900) 82%, transparent),
+		color-mix(in srgb, var(--color-surface-950) 88%, transparent)
+	);
+	backdrop-filter: blur(12px);
+}
+
 .nav-group-label {
 	padding: 0 0.75rem;
 	margin-top: 1rem;
@@ -759,6 +772,13 @@ body::after {
 .nav-link:focus-visible {
 	outline: 2px solid var(--color-primary-300);
 	outline-offset: -2px;
+}
+
+.context-bar-active {
+	background: color-mix(in srgb, var(--color-primary-500) 16%, transparent);
+	color: var(--color-primary-300);
+	border: 1px solid color-mix(in srgb, var(--color-primary-500) 42%, transparent);
+	font-weight: 700;
 }
 
 /* Collapsed-mode: center icons, hide labels + group headers */
@@ -919,6 +939,35 @@ body::after {
 }
 .btn-icon {
 	padding: 0.5rem;
+}
+
+/*
+ * Touch needs a 44px target; the mouse does not. Widening by pointer type
+ * rather than viewport width keeps a touchscreen laptop correct and leaves a
+ * narrow mouse-driven window alone.
+ */
+@media (pointer: coarse) {
+	.btn-icon {
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+	}
+	.btn-sm {
+		min-height: 2.75rem;
+	}
+	.nav-link {
+		min-height: 2.75rem;
+	}
+}
+
+.safe-top {
+	padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+	padding-bottom: env(safe-area-inset-bottom);
+}
+.safe-x {
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
 }
 
 /* ── Inputs ──────────────────────────────────────────────────────────── */

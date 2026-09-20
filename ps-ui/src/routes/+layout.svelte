@@ -1,11 +1,13 @@
 <script lang="ts">
 	import '../app.css';
-	import { Sidebar, PublicNav, TitleBar } from '$components/layout';
-	import { Toast, Modal, Spinner, PalEditorOverlay, ResizeWarning } from '$components/ui';
+	import { Sidebar, PublicNav, TitleBar, NavDrawer } from '$components/layout';
+	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { bootstrap } from '$lib/data/bootstrap';
 	import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 	import { getWebSignalSession } from '$lib/signal/webSession';
+	import { layout } from '$utils/layout.svelte';
+	import { navDrawer } from '$states/navDrawer.svelte';
 	import {
 		cornerArt,
 		getAppState,
@@ -214,6 +216,8 @@
 					{#if !pipWindow}
 						{#if publicShell}
 							<PublicNav />
+						{:else if layout.phone}
+							<NavDrawer bind:open={navDrawer.open} onClose={() => (navDrawer.open = false)} />
 						{:else}
 							<Sidebar />
 						{/if}
@@ -257,5 +261,4 @@
 		</div>
 	{/if}
 	<PalEditorOverlay />
-	<ResizeWarning exempt={pipWindow} />
 {/if}

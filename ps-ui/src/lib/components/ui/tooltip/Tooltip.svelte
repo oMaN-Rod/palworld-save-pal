@@ -3,6 +3,7 @@
 	import { computePosition, flip, shift, offset, arrow, type Placement } from '@floating-ui/dom';
 	import { cn } from '$theme';
 	import { getComputedColorHex, portal } from '$utils';
+	import { layout } from '$utils/layout.svelte';
 	import type { Snippet } from 'svelte';
 
 	let {
@@ -41,6 +42,45 @@
 		if (open && referenceEl && floatingEl) {
 			updatePosition();
 		}
+	});
+
+	function closeCoarse(): void {
+		open = false;
+	}
+
+	// `focusin` opens before `click` fires, so a tap toggles from the `open` snapshotted on `pointerdown`.
+	// Keyboard activation has no `pointerdown` and toggles the live value.
+	let openBeforeTap = false;
+	let pointerFlaggedTap = false;
+
+	function handlePointerDown(): void {
+		if (!layout.coarse) return;
+		openBeforeTap = open;
+		pointerFlaggedTap = true;
+	}
+
+	function toggleCoarse(): void {
+		if (!layout.coarse) return;
+		if (pointerFlaggedTap) {
+			open = !openBeforeTap;
+			pointerFlaggedTap = false;
+		} else {
+			open = !open;
+		}
+	}
+
+	// No hover on a coarse pointer: tapping elsewhere or another trigger must close this one.
+	$effect(() => {
+		if (!open || !layout.coarse) return;
+
+		function handleOutsidePointerDown(event: PointerEvent): void {
+			const target = event.target as Node | null;
+			if (target && (referenceEl?.contains(target) || floatingEl?.contains(target))) return;
+			closeCoarse();
+		}
+
+		document.addEventListener('pointerdown', handleOutsidePointerDown);
+		return () => document.removeEventListener('pointerdown', handleOutsidePointerDown);
 	});
 
 	async function updatePosition() {
@@ -88,11 +128,22 @@
 <div
 	class={baseClass}
 	bind:this={referenceEl}
-	onmouseenter={() => (open = true)}
-	onmouseleave={() => (open = false)}
+	onmouseenter={() => {
+		if (!layout.coarse) open = true;
+	}}
+	onmouseleave={() => {
+		if (!layout.coarse) open = false;
+	}}
 	onfocusin={() => (open = true)}
-	onfocusout={() => (open = false)}
-	role="tooltip"
+	onfocusout={(event) => {
+		const next = event.relatedTarget as Node | null;
+		if (next && floatingEl?.contains(next)) return;
+		open = false;
+	}}
+	onpointerdown={handlePointerDown}
+	onclick={toggleCoarse}
+	role="presentation"
+	data-tooltip-trigger
 >
 	{@render children()}
 </div>
@@ -102,6 +153,7 @@
 		bind:this={floatingEl}
 		{@attach portal()}
 		class={cn('floating tooltip-popup', background, popupClass, rounded)}
+		role="tooltip"
 		transition:fade={{ duration: 100 }}
 	>
 		{#if popup}

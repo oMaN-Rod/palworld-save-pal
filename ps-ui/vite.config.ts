@@ -1,7 +1,7 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { svelteTesting } from '@testing-library/svelte/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { svelteTesting } from '@testing-library/svelte/vite';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -46,7 +46,6 @@ function selfHostMonaco(): Plugin {
 		}
 	};
 }
-
 
 export default defineConfig({
 	plugins: [
@@ -129,6 +128,7 @@ export default defineConfig({
 				test: {
 					name: 'component',
 					environment: 'jsdom',
+					setupFiles: ['./src/lib/utils/__tests__/fixtures/matchMediaPolyfill.ts'],
 					include: ['src/**/*.render.test.ts']
 				}
 			}

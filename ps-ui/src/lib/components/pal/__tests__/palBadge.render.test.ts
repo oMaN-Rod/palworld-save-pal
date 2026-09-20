@@ -1,10 +1,10 @@
 // @vitest-environment jsdom
-import './fixtures/matchMediaPolyfill';
-import { render, screen, fireEvent } from '@testing-library/svelte';
+import { getAppState, getPalEditorState } from '$states';
+import { EntryState, PalGender, type Pal, type Player, type WorkSuitability } from '$types';
+import { fireEvent, render, screen } from '@testing-library/svelte';
 import { beforeEach, describe, expect, it } from 'vitest';
 import PalBadge from '../PalBadge.svelte';
-import { getAppState, getPalEditorState } from '$states';
-import { PalGender, EntryState, type Pal, type WorkSuitability, type Player } from '$types';
+import './fixtures/matchMediaPolyfill';
 
 function makePal(overrides: Partial<Pal> = {}): Pal {
 	return {
@@ -84,11 +84,13 @@ describe('PalBadge level chip', () => {
 describe('PalBadge disabled', () => {
 	it('suppresses both the click-to-edit path and the info tooltip', async () => {
 		const palEditor = getPalEditorState();
-		render(PalBadge, {
+		const { container } = render(PalBadge, {
 			props: { pal: makePal(), disabled: true, ...requiredHandlers }
 		});
 
-		await fireEvent.mouseEnter(screen.getByRole('tooltip'));
+		const tooltipTrigger = container.querySelector('[data-tooltip-trigger]');
+		expect(tooltipTrigger).not.toBeNull();
+		await fireEvent.mouseEnter(tooltipTrigger!);
 		expect(document.querySelector('.tooltip-popup')).toBeNull();
 
 		await fireEvent.click(screen.getByRole('button'));
