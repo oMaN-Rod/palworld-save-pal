@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { MercatorCoordinate } from 'maplibre-gl';
 import { MAP_SIZE } from './utils';
 import {
 	MAP_MAX_BOUNDS,
@@ -6,6 +7,7 @@ import {
 	lngLatToPixel,
 	pixelCirclePolygon,
 	pixelToLngLat,
+	pixelToMercator,
 	verticalScaleFactor
 } from './mercator';
 
@@ -123,5 +125,27 @@ describe('verticalScaleFactor', () => {
 		expect(verticalScaleFactor(0, tree)).toBeGreaterThan(
 			verticalScaleFactor(0, MAIN_MAP_CM_PER_PX)
 		);
+	});
+});
+
+describe('pixelToMercator', () => {
+	// The closed form exists only because the Gudermannian pair cancels. If either
+	// pixelToLngLat or MapLibre's projection changes, this is where it shows up.
+	it('agrees with pixelToLngLat composed with MercatorCoordinate.fromLngLat', () => {
+		for (let i = 0; i <= 40; i++) {
+			const px = (i / 40) * MAP_SIZE;
+			for (let j = 0; j <= 40; j++) {
+				const py = (j / 40) * MAP_SIZE;
+				const [lng, lat] = pixelToLngLat(px, py);
+				const expected = MercatorCoordinate.fromLngLat([lng, lat]);
+				const [x, y] = pixelToMercator(px, py);
+				expect(Math.abs(x - expected.x)).toBeLessThan(1e-12);
+				expect(Math.abs(y - expected.y)).toBeLessThan(1e-12);
+			}
+		}
+	});
+
+	it('puts the map centre at the mercator centre', () => {
+		expect(pixelToMercator(MAP_SIZE / 2, MAP_SIZE / 2)).toEqual([0.5, 0.5]);
 	});
 });

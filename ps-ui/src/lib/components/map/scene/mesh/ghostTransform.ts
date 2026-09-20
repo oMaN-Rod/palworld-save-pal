@@ -25,15 +25,43 @@ function rotateVec(q: Quat, v: Vec3): Vec3 {
 	};
 }
 
+export type WorldTransform = { translation: Vec3; rotation: Quat; scale: Vec3 };
+
+export function emptyWorldTransform(): WorldTransform {
+	return {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 0, w: 1 },
+		scale: { x: 1, y: 1, z: 1 }
+	};
+}
+
+// Writes into a caller-owned transform. The ghost layer rebakes every instance
+// whenever the anchor moves, so the allocating form below would churn four objects
+// per instance per frame for the length of a drag.
+export function composeWorldInto(
+	anchor: PlacementAnchor,
+	relative: { translation: Vec3; rotation: Quat; scale: Vec3 },
+	out: WorldTransform
+): WorldTransform {
+	const aq = yawQuat(anchor.yaw);
+	const offset = rotateVec(aq, relative.translation);
+	out.translation.x = anchor.x + offset.x;
+	out.translation.y = anchor.y + offset.y;
+	out.translation.z = anchor.z + offset.z;
+	const rotation = quatMul(aq, relative.rotation);
+	out.rotation.x = rotation.x;
+	out.rotation.y = rotation.y;
+	out.rotation.z = rotation.z;
+	out.rotation.w = rotation.w;
+	out.scale.x = relative.scale.x;
+	out.scale.y = relative.scale.y;
+	out.scale.z = relative.scale.z;
+	return out;
+}
+
 export function composeWorld(
 	anchor: PlacementAnchor,
 	relative: { translation: Vec3; rotation: Quat; scale: Vec3 }
-): { translation: Vec3; rotation: Quat; scale: Vec3 } {
-	const aq = yawQuat(anchor.yaw);
-	const offset = rotateVec(aq, relative.translation);
-	return {
-		translation: { x: anchor.x + offset.x, y: anchor.y + offset.y, z: anchor.z + offset.z },
-		rotation: quatMul(aq, relative.rotation),
-		scale: relative.scale
-	};
+): WorldTransform {
+	return composeWorldInto(anchor, relative, emptyWorldTransform());
 }

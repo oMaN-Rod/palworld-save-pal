@@ -11,7 +11,9 @@ class Placement {
 	active = $state(false);
 	handle = $state<string | null>(null);
 	header = $state<BlueprintHeader | null>(null);
-	geometry = $state<BlueprintStructureGeometry[]>([]);
+	// $state.raw, not $state: a blueprint holds thousands of structures, read in full
+	// on every ghost rebake, and it is replaced wholesale rather than mutated.
+	geometry = $state.raw<BlueprintStructureGeometry[]>([]);
 	anchor = $state<PlacementAnchor>({ x: 0, y: 0, z: 0, yaw: 0 });
 	targetGuild = $state('');
 	targetPlayer = $state('');

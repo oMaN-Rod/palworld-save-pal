@@ -20,6 +20,10 @@ export function pixelToLngLat(px: number, py: number): [number, number] {
 	return [lng, lat];
 }
 
+export function pixelToMercator(px: number, py: number): [number, number] {
+	return [px / MAP_SIZE, 1 - py / MAP_SIZE];
+}
+
 export function lngLatToPixel(lng: number, lat: number): [number, number] {
 	const px = ((lng + 180) / 360) * MAP_SIZE;
 	const rad = (lat * Math.PI) / 180;

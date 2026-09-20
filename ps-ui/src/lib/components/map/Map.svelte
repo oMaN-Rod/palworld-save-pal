@@ -8,6 +8,8 @@
 	const RELIC_ART_PX = 42;
 	const FAST_TRAVEL_ART_PX = 52;
 	const WATCHTOWER_ART_PX = 77;
+	const EMPTY_GEOMETRY: BlueprintStructureGeometry[] = [];
+	const ORIGIN_ANCHOR: PlacementAnchor = { x: 0, y: 0, z: 0, yaw: 0 };
 </script>
 
 <script lang="ts">
@@ -768,9 +770,22 @@
 
 	const STRUCTURE_HIT_CM = 800;
 
+	// The anchor's yaw only rotates the offsets, so the blueprint's furthest structure
+	// is the same one at every yaw and this bound holds for the whole drag.
+	const ghostRadiusCm = $derived.by(() => {
+		let furthest = 0;
+		for (const s of placementGeometry ?? EMPTY_GEOMETRY) {
+			furthest = Math.max(furthest, Math.hypot(s.translation.x, s.translation.y));
+		}
+		return furthest + STRUCTURE_HIT_CM;
+	});
+
 	function clickIsOnGhost(worldX: number, worldY: number): boolean {
 		const base = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
-		return (placementGeometry ?? []).some((s) => {
+		// Runs on every mousemove in placement mode purely to pick the cursor, so the
+		// pointer being nowhere near the blueprint must not cost a pass over it.
+		if (Math.hypot(worldX - base.x, worldY - base.y) > ghostRadiusCm) return false;
+		return (placementGeometry ?? EMPTY_GEOMETRY).some((s) => {
 			const w = composeWorld(base, {
 				translation: s.translation,
 				rotation: s.rotation,
@@ -1316,8 +1331,8 @@
 				mount3dLayer(instance, layer);
 				ghostLayer = layer;
 				ghostLayer.update(
-					placementGeometry ?? [],
-					placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 },
+					placementGeometry ?? EMPTY_GEOMETRY,
+					placementAnchor ?? ORIGIN_ANCHOR,
 					area,
 					verticalScale
 				);
@@ -1357,10 +1372,13 @@
 		return () => window.removeEventListener('mouseup', endGhostDrag);
 	});
 
+	// Fires at pointer rate while dragging, and once per pan frame through
+	// verticalScale. update() is a request, not the work: the layer coalesces onto a
+	// single animation frame and redoes only what actually changed.
 	$effect(() => {
 		const isPlacement = placement;
-		const geometry = placementGeometry ?? [];
-		const anchor = placementAnchor ?? { x: 0, y: 0, z: 0, yaw: 0 };
+		const geometry = placementGeometry ?? EMPTY_GEOMETRY;
+		const anchor = placementAnchor ?? ORIGIN_ANCHOR;
 		const currentArea = area;
 		const vScale = verticalScale;
 		if (!isPlacement || !ghostLayer) return;
