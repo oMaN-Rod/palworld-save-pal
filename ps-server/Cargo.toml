@@ -57,6 +57,11 @@ flate2 = { workspace = true }
 tar = { workspace = true }
 webrtc = { workspace = true }
 tokio-tungstenite = { workspace = true, features = ["rustls-tls-webpki-roots"] }
+# Native HTTPS hosting: rustls must stay on the ring provider (default
+# features off) — the workspace lock has no aws-lc-rs.
+tokio-rustls = "0.26"
+rustls = { version = "0.23", default-features = false, features = ["ring", "logging", "std", "tls12"] }
+rustls-pki-types = "1"
 
 [dev-dependencies]
 sqlx = { workspace = true }

@@ -21,6 +21,10 @@ fn config(listen: ListenMode, scope: AuthScope, pin: bool) -> NetworkConfig {
         listen,
         ..NetworkConfig::default()
     };
+    // These suites exercise listen/auth/write verdicts, not transport, so
+    // they run in the relaxed cleartext posture (what the asset-transport
+    // tests below cover is the default's refusal).
+    config.asset_transport = ps_network::AssetTransport::HttpsHttp;
     config.auth.scope = scope;
     if pin {
         config.auth.pin = Some(PinHash::generate("4321"));
@@ -168,52 +172,120 @@ async fn localhost_mode_admits_loopback_and_refuses_lan() {
 }
 
 #[tokio::test]
-async fn cleartext_http_follows_the_listen_mode() {
-    // localhost/lan are plain-HTTP tiers: a cleartext (origin-form, no
-    // scheme) request from an admitted LAN peer serves the SPA.
-    let lan = test_router(config(ListenMode::Lan, AuthScope::Never, false)).await;
-    let served = lan
-        .oneshot(peer_request("192.168.1.50", "GET", "/"))
-        .await
-        .unwrap();
-    assert_eq!(served.status(), StatusCode::OK);
-
-    // tailscale/wan demand TLS for non-loopback peers: the same browser-
-    // shaped request is refused with 426 even though the policy admits the
-    // peer (a listed tailnet address under tailscale, everyone under wan).
-    let mut tailnet_policy = config(ListenMode::Tailscale, AuthScope::Never, false);
-    tailnet_policy.allow.connect = vec!["100.115.95.115".into()];
-    let tailnet = test_router(tailnet_policy).await;
-    let refused = tailnet
-        .oneshot(peer_request("100.115.95.115", "GET", "/"))
-        .await
-        .unwrap();
-    assert_eq!(refused.status(), StatusCode::UPGRADE_REQUIRED);
-    assert!(body_text(refused).await.contains("Funnel"));
-
-    let wan = test_router(config(ListenMode::Wan, AuthScope::Never, false)).await;
-    let refused = wan
+async fn asset_transport_governs_remote_streaming() {
+    // Default (HTTPS only): a browser-shaped cleartext request from an
+    // admitted LAN peer is refused — even though the listen mode admits it,
+    // because no HTTPS endpoint is hosted.
+    let strict = NetworkConfig {
+        listen: ListenMode::Lan,
+        ..NetworkConfig::default()
+    };
+    let router = test_router(strict).await;
+    let refused = router
         .clone()
         .oneshot(peer_request("192.168.1.50", "GET", "/"))
         .await
         .unwrap();
     assert_eq!(refused.status(), StatusCode::UPGRADE_REQUIRED);
+    assert!(body_text(refused).await.contains("asset streaming"));
 
-    // Loopback stays exempt in a tls-required mode…
-    let local = wan
+    // Relaxed (HTTPS or HTTP): the same cleartext request serves the SPA.
+    let mut relaxed = NetworkConfig {
+        listen: ListenMode::Lan,
+        ..NetworkConfig::default()
+    };
+    relaxed.asset_transport = ps_network::AssetTransport::HttpsHttp;
+    let router = test_router(relaxed).await;
+    let served = router
+        .oneshot(peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(served.status(), StatusCode::OK);
+
+    // Native HTTPS hosting: every request that reached us came through our
+    // own TLS listener, so origin-form (scheme-less) requests pass the
+    // HTTPS requirement.
+    let mut hosted = NetworkConfig {
+        listen: ListenMode::Lan,
+        ..NetworkConfig::default()
+    };
+    hosted.https_enabled = true;
+    let router = test_router(hosted).await;
+    let served = router
+        .oneshot(peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(served.status(), StatusCode::OK);
+
+    // Loopback only: remote peers are refused regardless of transport…
+    let mut local_only = NetworkConfig {
+        listen: ListenMode::Wan,
+        ..NetworkConfig::default()
+    };
+    local_only.asset_transport = ps_network::AssetTransport::Loopback;
+    let router = test_router(local_only).await;
+    let refused = router
+        .clone()
+        .oneshot(peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(refused).await.contains("limited to this machine"));
+    let refused_https = router
+        .clone()
+        .oneshot(secure_peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(refused_https.status(), StatusCode::FORBIDDEN);
+
+    // …while the local operator seat (direct loopback) always streams…
+    let local = router
         .clone()
         .oneshot(peer_request("127.0.0.1", "GET", "/"))
         .await
         .unwrap();
     assert_eq!(local.status(), StatusCode::OK);
 
-    // …and a proxied request that still shows its https origin passes the
-    // requirement without Funnel in the picture.
-    let proxied = wan
-        .oneshot(secure_peer_request("192.168.1.50", "GET", "/"))
+    // …and a Funnel forward is its remote client, not the loopback seat,
+    // so loopback-only streaming refuses it too.
+    let mut funnel_local_only = NetworkConfig {
+        listen: ListenMode::Lan,
+        ..NetworkConfig::default()
+    };
+    funnel_local_only.funnel_enabled = true;
+    funnel_local_only.auth.scope = AuthScope::Always;
+    funnel_local_only.auth.pin = Some(PinHash::generate("4321"));
+    funnel_local_only.allow.connect = vec!["74.133.65.35".into()];
+    funnel_local_only.asset_transport = ps_network::AssetTransport::Loopback;
+    let router = test_router(funnel_local_only).await;
+    let refused = router
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
         .await
         .unwrap();
-    assert_eq!(proxied.status(), StatusCode::OK);
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+
+    // Under the default transport, the same Funnel forward IS HTTPS (tailscale
+    // terminated TLS upstream) and passes.
+    let mut funnel_https = NetworkConfig {
+        listen: ListenMode::Lan,
+        ..NetworkConfig::default()
+    };
+    funnel_https.funnel_enabled = true;
+    funnel_https.auth.scope = AuthScope::Always;
+    funnel_https.auth.pin = Some(PinHash::generate("4321"));
+    funnel_https.allow.connect = vec!["74.133.65.35".into()];
+    let router = test_router(funnel_https).await;
+    let served = router
+        .oneshot(with_forwarded_for(
+            peer_request("127.0.0.1", "GET", "/api/network/config"),
+            "74.133.65.35",
+        ))
+        .await
+        .unwrap();
+    assert_eq!(served.status(), StatusCode::UNAUTHORIZED); // PIN stands; transport does not 426
 }
 
 #[tokio::test]
@@ -491,6 +563,25 @@ async fn removing_an_address_takes_effect_without_a_restart() {
 }
 
 #[tokio::test]
+async fn native_https_and_funnel_cannot_be_saved_together() {
+    // Both on would strand Funnel: it forwards to this port over plain
+    // HTTP and a TLS listener declines the handshake. The save is refused
+    // before anything (db, tailscale) changes.
+    let router = test_router(config(ListenMode::Lan, AuthScope::Always, false)).await;
+    let conflict = router
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "PUT",
+            "/api/network/config",
+            r#"{"listen":"lan","port":5174,"auth":{"scope":"always"},"allow":{},"funnel_enabled":true,"https_enabled":true}"#,
+        ))
+        .await
+        .unwrap();
+    assert_eq!(conflict.status(), StatusCode::BAD_REQUEST);
+    assert!(body_text(conflict).await.contains("mutually exclusive"));
+}
+
+#[tokio::test]
 async fn funnel_forwards_are_filtered_by_the_forwarded_client_address() {
     // Funnel terminates TLS and proxies over loopback; the allowlist must
     // apply to the X-Forwarded-For address, not to the proxy's loopback.
@@ -651,6 +742,33 @@ async fn local_webapp_tier_is_clamped_to_localhost_and_port_only() {
         .unwrap();
     assert_eq!(refused.status(), StatusCode::FORBIDDEN);
     assert!(body_text(refused).await.contains("local webapp"));
+
+    // The HTTPS/transport knobs are exposure features too: a local webapp
+    // cannot host TLS or relax/lock asset streaming.
+    let refused = router
+        .clone()
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "PUT",
+            "/api/network/config",
+            r#"{"listen":"localhost","port":9000,"auth":{"scope":"never"},"allow":{},"https_enabled":true}"#,
+        ))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(refused).await.contains("local webapp"));
+
+    let refused = router
+        .clone()
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "PUT",
+            "/api/network/config",
+            r#"{"listen":"localhost","port":9000,"auth":{"scope":"never"},"allow":{},"asset_transport":"https-http"}"#,
+        ))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
 
     // A pure port change goes through.
     let port_edit = router

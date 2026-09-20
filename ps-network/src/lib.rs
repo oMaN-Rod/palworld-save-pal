@@ -12,15 +12,16 @@
 //! The server crate wires these into axum middleware and the WS dispatcher.
 pub mod auth;
 pub mod config;
+pub mod https;
 pub mod policy;
 pub mod tailscale;
 #[cfg(feature = "upnp")]
 pub mod upnp;
 
 pub use config::{
-    validate_pin, AllowMode, AllowRules, AuthConfig, AuthScope, ConfigError, ListenMode,
-    NetworkConfig, NetworkTier, PinHash, MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS,
-    MIN_SESSION_TTL_SECS,
+    validate_pin, AllowMode, AllowRules, AssetTransport, AuthConfig, AuthScope, ConfigError,
+    ListenMode, NetworkConfig, NetworkTier, PinHash, MAX_PIN_CHARS, MAX_SESSION_TTL_SECS,
+    MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
 };
 pub use policy::{
     canonical, classify, default_audience, evaluate, evaluate_forwarded, explicitly_listed,

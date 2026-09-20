@@ -25,6 +25,10 @@ tracing = { workspace = true }
 hmac = { workspace = true }
 sha2 = { workspace = true }
 rand = { workspace = true }
+# Self-signed certificates for native HTTPS hosting (pure computation + fs;
+# keeps the crate free of axum/tokio). Same locked version the webrtc stack
+# already builds.
+rcgen = "0.14"
 igd-next = { version = "0.17", optional = true, features = ["aio_tokio"] }
 tokio = { workspace = true, optional = true }
 

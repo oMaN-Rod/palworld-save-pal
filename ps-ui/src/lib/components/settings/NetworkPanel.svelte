@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Button, Card, Input } from '$components/ui';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { getNetworkState, type AuthScope, type ListenMode } from '$states';
+	import { getNetworkState, type AssetTransport, type AuthScope, type ListenMode } from '$states';
 	import { getModalState } from '$states';
 	import { Switch } from '@skeletonlabs/skeleton-svelte';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
@@ -45,6 +45,10 @@
 	let funnelEnabled = $state(false);
 	/** True after enabling Funnel auto-raised the PIN scope (server rule). */
 	let funnelScopeForced = $state(false);
+	let httpsEnabled = $state(false);
+	let assetTransport = $state<AssetTransport>('https');
+	/** True after enabling native HTTPS auto-turned Funnel off (server rule). */
+	let httpsForcedFunnelOff = $state(false);
 	let saved = $state(false);
 	let switching = $state(false);
 	let standaloneNote = $state<string | null>(null);
@@ -64,6 +68,12 @@
 		}[listen]
 	);
 
+	const assetTransportOptions: { value: AssetTransport; label: string }[] = [
+		{ value: 'https', label: m.network_transport_https() },
+		{ value: 'https-http', label: m.network_transport_https_http() },
+		{ value: 'loopback', label: m.network_transport_loopback() }
+	];
+
 	onMount(() => {
 		network
 			.loadConfig()
@@ -78,7 +88,10 @@
 				authScope = config.auth.scope;
 				upnpEnabled = config.upnp_enabled;
 				funnelEnabled = config.funnel_enabled;
+				httpsEnabled = config.https_enabled ?? false;
+				assetTransport = config.asset_transport ?? 'https';
 				funnelScopeForced = false;
+				httpsForcedFunnelOff = false;
 				ready = true;
 			})
 			.catch((error) => {
@@ -118,6 +131,17 @@
 		}
 		if (authScope !== 'never' && !pinEffective) {
 			warnings.push(m.network_warning_pin_missing());
+		}
+		// Mirror of the server's asset-transport posture warnings, live so a
+		// pending relaxation is visible before it is saved.
+		if (listen !== 'localhost') {
+			if (assetTransport === 'https-http') {
+				warnings.push(m.network_warning_cleartext());
+			} else if (assetTransport === 'loopback') {
+				warnings.push(m.network_warning_loopback_only());
+			} else if (!httpsEnabled && !funnelEnabled) {
+				warnings.push(m.network_warning_no_https());
+			}
 		}
 		return warnings;
 	});
@@ -181,7 +205,9 @@
 			// Empty string clears the PIN server-side; undefined keeps it.
 			newPin: clearPin ? '' : newPin ? newPin : undefined,
 			upnpEnabled,
-			funnelEnabled
+			funnelEnabled,
+			httpsEnabled,
+			assetTransport
 		});
 		if (result) {
 			saved = true;
@@ -189,10 +215,13 @@
 			confirmPin = '';
 			clearPin = false;
 			funnelScopeForced = false;
+			httpsForcedFunnelOff = false;
 			// If a side effect failed (e.g. the tailscale CLI errored), the
 			// server rolled that toggle back — reflect the truth in the form.
 			funnelEnabled = result.config.funnel_enabled;
 			upnpEnabled = result.config.upnp_enabled;
+			httpsEnabled = result.config.https_enabled ?? false;
+			assetTransport = result.config.asset_transport ?? 'https';
 			authScope = result.config.auth.scope;
 			allowMode = result.config.allow?.mode ?? 'balanced';
 			// Re-read what tailscale says now that the save applied.
@@ -250,6 +279,50 @@
 		</Card>
 
 		{#if !isLocalWebapp}
+			<!-- Transport: asset streaming policy + native HTTPS -->
+			<Card class="flex flex-col gap-2 p-3">
+				<h2 class="h4 flex items-center gap-2">
+					<Icon icon="tabler:shield-lock" size={16} /> {m.network_transport()}
+				</h2>
+				<label class="flex flex-col gap-1">
+					<span class="text-sm">{m.network_transport()}</span>
+					<select
+						class="bg-surface-900 border-surface-700 rounded-sm border px-2 py-1.5 text-sm"
+						bind:value={assetTransport}
+					>
+						{#each assetTransportOptions as option (option.value)}
+							<option value={option.value}>{option.label}</option>
+						{/each}
+					</select>
+					<span class="text-xs text-surface-400">{m.network_transport_hint()}</span>
+				</label>
+				<div class="flex flex-col gap-1.5 border-t border-surface-800 pt-2">
+					<div class="flex items-center gap-2">
+						<Switch
+							name="https"
+							checked={httpsEnabled}
+							onCheckedChange={(e: CheckedChangeDetails) => {
+								httpsEnabled = e.checked;
+								// The server rejects both on: Funnel forwards to
+								// this port over plain HTTP, which a TLS
+								// listener declines. Resolve it here so the
+								// save cannot 400.
+								if (httpsEnabled && funnelEnabled) {
+									funnelEnabled = false;
+									httpsForcedFunnelOff = true;
+								}
+								if (!httpsEnabled) httpsForcedFunnelOff = false;
+							}}
+						/>
+						<span class="text-sm">{m.network_https_host()}</span>
+					</div>
+					<p class="text-xs text-surface-400">{m.network_https_host_hint()}</p>
+					{#if httpsForcedFunnelOff}
+						<p class="text-xs text-warning-500">{m.network_https_funnel_note()}</p>
+					{/if}
+				</div>
+			</Card>
+
 			<!-- PIN protection -->
 			<Card class="flex flex-col gap-2 p-3">
 				<h2 class="h4 flex items-center gap-2">
@@ -314,17 +387,21 @@
 						<Switch
 							name="funnel"
 							checked={funnelEnabled}
-							onCheckedChange={(e: CheckedChangeDetails) => {
-								funnelEnabled = e.checked;
-								// The server rejects Funnel unless the PIN
-								// covers every session; adopt that scope with
-								// the toggle so the save cannot 400.
-								if (funnelEnabled && authScope !== 'always') {
-									authScope = 'always';
-									funnelScopeForced = true;
-								}
-								if (!funnelEnabled) funnelScopeForced = false;
-							}}
+						onCheckedChange={(e: CheckedChangeDetails) => {
+							funnelEnabled = e.checked;
+							// The server rejects Funnel unless the PIN
+							// covers every session; adopt that scope with
+							// the toggle so the save cannot 400.
+							if (funnelEnabled && authScope !== 'always') {
+								authScope = 'always';
+								funnelScopeForced = true;
+							}
+							if (funnelEnabled && httpsEnabled) {
+								httpsEnabled = false;
+								httpsForcedFunnelOff = true;
+							}
+							if (!funnelEnabled) funnelScopeForced = false;
+						}}
 						/>
 						<span class="text-sm">{m.network_funnel()}</span>
 						{#if funnelLive}

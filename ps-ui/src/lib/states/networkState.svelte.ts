@@ -11,6 +11,8 @@ export type ListenMode = 'localhost' | 'lan' | 'tailscale' | 'wan';
 export type AuthScope = 'never' | 'networkonly' | 'always';
 /** What an EMPTY allowlist falls back to; listed addresses always apply. */
 export type AllowMode = 'open' | 'balanced' | 'strict';
+/** How remote peers may load the app and its assets; loopback is exempt. */
+export type AssetTransport = 'https' | 'https-http' | 'loopback';
 
 export interface NetworkConfigDto {
 	tier?: string;
@@ -21,6 +23,9 @@ export interface NetworkConfigDto {
 	auth: { scope: AuthScope; pin_set: boolean; session_ttl_secs: number };
 	upnp_enabled: boolean;
 	funnel_enabled: boolean;
+	/** Absent on older servers — normalized on load. */
+	https_enabled?: boolean;
+	asset_transport?: AssetTransport;
 }
 
 export interface FunnelStatusDto {
@@ -200,6 +205,8 @@ class NetworkState {
 		newPin?: string;
 		upnpEnabled: boolean;
 		funnelEnabled: boolean;
+		httpsEnabled: boolean;
+		assetTransport: AssetTransport;
 	}): Promise<SaveResult | null> {
 		this.saving = true;
 		this.error = null;
@@ -215,7 +222,9 @@ class NetworkState {
 				},
 				auth: { scope: update.scope, new_pin: update.newPin ?? null },
 				upnp_enabled: update.upnpEnabled,
-				funnel_enabled: update.funnelEnabled
+				funnel_enabled: update.funnelEnabled,
+				https_enabled: update.httpsEnabled,
+				asset_transport: update.assetTransport
 			};
 			const result = await fetchJson<SaveResult>(
 				'/api/network/config',

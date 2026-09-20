@@ -19,7 +19,7 @@ use axum::routing::get;
 use axum::{Json, Router};
 use ps_network::auth::{AuthRateLimiter, SessionRegistry};
 use ps_network::{
-    AllowMode, AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict,
+    AllowMode, AssetTransport, AuthScope, ListenMode, NetworkConfig, NetworkTier, PeerAcl as Verdict,
     MAX_PIN_CHARS, MAX_SESSION_TTL_SECS, MIN_PIN_CHARS, MIN_SESSION_TTL_SECS,
 };
 
@@ -394,10 +394,11 @@ impl NetworkPolicy for NetworkRuntime {
 }
 
 /// The outermost request gate: listen mode, allowlists, PIN session, the
-/// listen-mode cleartext-HTTP policy, and write permission for mutating HTTP
-/// routes. Websocket write permission is additionally stamped per-connection
-/// in `ws.rs` and enforced in the dispatcher; this layer still guards the
-/// upgrade itself.
+/// asset-transport policy (HTTPS by default; cleartext and loopback-only
+/// are explicit, warned opt-outs), and write permission for mutating HTTP
+/// routes. Websocket write permission is additionally stamped
+/// per-connection in `ws.rs` and enforced in the dispatcher; this layer
+/// still guards the upgrade itself.
 pub async fn network_gate(
     State(runtime): State<Arc<NetworkRuntime>>,
     request: Request,
@@ -435,29 +436,44 @@ pub async fn network_gate(
             "refused: your address is not allowed to connect to this PalStudio instance",
         );
     }
-    // Cleartext HTTP is a listen-mode posture, not a blanket rule: localhost
-    // and lan are plain-HTTP tiers by design, while tailscale and wan expect
-    // TLS-terminated traffic — remote peers must arrive through Tailscale
-    // Funnel/serve or an HTTPS proxy. The refusal keys on the SOCKET peer: a
-    // Funnel forward hops over plain HTTP on loopback after tailscale
-    // terminates TLS upstream, and the loopback seat is exempt everywhere.
-    // `secure_transport` only matches absolute-form https URIs (proxy-style
-    // requests); origin-form browser requests carry no scheme, so for the
-    // tls-required modes the practical path is a loopback TLS terminator.
-    let listen = runtime.effective_config().listen;
-    if matches!(listen, ListenMode::Tailscale | ListenMode::Wan)
-        && !ps_network::canonical(socket_peer).is_loopback()
-        && !secure_transport(&request)
-    {
-        tracing::warn!(%peer, %path, listen = %listen.as_str(), "refused cleartext network request");
-        return error_response(
-            StatusCode::UPGRADE_REQUIRED,
-            &format!(
-                "HTTPS is required for non-loopback connections on listen mode '{}' — use the \
-                 tailscale Funnel URL or an HTTPS proxy",
-                listen.as_str()
-            ),
-        );
+    // Asset-streaming transport is its own policy dimension (`asset_transport`),
+    // not a listen-mode side effect: the local operator seat — a DIRECT
+    // loopback connection with no proxy forwarding — is exempt from every
+    // variant, while remote peers must match the configured posture. HTTPS is
+    // the default; cleartext or loopback-only are deliberate, warned choices.
+    // "Arrived over HTTPS" covers the three real shapes: our own TLS listener
+    // (https_enabled — every decrypted request came through it), a Funnel
+    // forward (TLS terminated upstream, forwarded to loopback), and an
+    // absolute-form https URI left by a local TLS proxy.
+    let config = runtime.effective_config();
+    let local_seat =
+        ps_network::canonical(socket_peer).is_loopback() && !inbound.forwarded();
+    if !local_seat {
+        let arrived_https =
+            secure_transport(&request) || config.https_enabled || inbound.forwarded();
+        match config.asset_transport {
+            AssetTransport::Loopback => {
+                tracing::warn!(%peer, %path, "remote request refused: loopback-only streaming");
+                return error_response(
+                    StatusCode::FORBIDDEN,
+                    "refused: asset streaming on this instance is limited to this machine",
+                );
+            }
+            AssetTransport::Https if !arrived_https => {
+                tracing::warn!(
+                    %peer,
+                    %path,
+                    transport = %AssetTransport::Https.as_str(),
+                    "refused cleartext network request"
+                );
+                return error_response(
+                    StatusCode::UPGRADE_REQUIRED,
+                    "HTTPS is required for non-loopback connections — host HTTPS in network \
+                     settings, use the tailscale Funnel URL, or allow HTTP asset streaming",
+                );
+            }
+            AssetTransport::Https | AssetTransport::HttpsHttp => {}
+        }
     }
     // These routes are intentionally unauthenticated only after the peer has
     // passed listen mode and the connect allowlist. Otherwise a public client
@@ -547,12 +563,29 @@ pub(crate) fn security_warnings(config: &NetworkConfig) -> Vec<String> {
                 .into(),
         );
     }
-    if matches!(config.listen, ListenMode::Tailscale | ListenMode::Wan) && !config.funnel_enabled {
-        warnings.push(format!(
-            "listen mode '{}' requires HTTPS for remote peers — enable Tailscale Funnel (or \
-             front this port with your own HTTPS proxy) or non-loopback clients are refused",
-            config.listen.as_str()
-        ));
+    if config.listen == ListenMode::Localhost {
+        return warnings;
+    }
+    match config.asset_transport {
+        AssetTransport::HttpsHttp => warnings.push(
+            "asset streaming allows cleartext HTTP — remote traffic, including saves and the \
+             PIN, travels unencrypted on the wire"
+                .into(),
+        ),
+        AssetTransport::Loopback => warnings.push(
+            "asset streaming is limited to this machine — remote peers (including Funnel \
+             visitors) are refused regardless of transport"
+                .into(),
+        ),
+        AssetTransport::Https if !config.https_enabled && !config.funnel_enabled => {
+            warnings.push(
+                "remote peers must use HTTPS but none is hosted — enable 'Host HTTPS' or \
+                 Tailscale Funnel, or allow cleartext asset streaming, or remote clients are \
+                 refused"
+                    .into(),
+            )
+        }
+        AssetTransport::Https => {}
     }
     warnings
 }
@@ -584,6 +617,8 @@ pub struct NetworkConfigDto {
     pub auth: AuthDto,
     pub upnp_enabled: bool,
     pub funnel_enabled: bool,
+    pub https_enabled: bool,
+    pub asset_transport: AssetTransport,
 }
 
 #[derive(serde::Serialize)]
@@ -595,7 +630,7 @@ pub struct AuthDto {
 
 /// Edit payload from the Network page. Omitted pins keep the stored hash;
 /// `Some("")` clears it.
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct NetworkConfigUpdate {
     pub listen: ListenMode,
     pub port: u16,
@@ -606,9 +641,13 @@ pub struct NetworkConfigUpdate {
     pub upnp_enabled: bool,
     #[serde(default)]
     pub funnel_enabled: bool,
+    #[serde(default)]
+    pub https_enabled: bool,
+    #[serde(default)]
+    pub asset_transport: AssetTransport,
 }
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct AuthUpdate {
     pub scope: AuthScope,
     #[serde(default)]
@@ -658,6 +697,8 @@ fn redact(config: &NetworkConfig) -> NetworkConfigDto {
         },
         upnp_enabled: config.upnp_enabled,
         funnel_enabled: config.funnel_enabled,
+        https_enabled: config.https_enabled,
+        asset_transport: config.asset_transport,
     }
 }
 
@@ -699,6 +740,13 @@ fn validate(update: &NetworkConfigUpdate) -> Vec<String> {
     if update.funnel_enabled && update.auth.scope != AuthScope::Always {
         errors.push("Tailscale Funnel requires AuthScope::Always".into());
     }
+    if update.https_enabled && update.funnel_enabled {
+        errors.push(
+            "native HTTPS and Tailscale Funnel are mutually exclusive — Funnel forwards to this \
+             port over plain HTTP"
+                .into(),
+        );
+    }
     errors
 }
 
@@ -739,6 +787,8 @@ async fn put_config(
             || update.auth.new_pin.is_some_and(|pin| !pin.is_empty())
             || update.upnp_enabled
             || update.funnel_enabled
+            || update.https_enabled
+            || update.asset_transport != AssetTransport::Https
         {
             return error_response(
                 StatusCode::FORBIDDEN,
@@ -792,6 +842,8 @@ async fn put_config(
         },
         upnp_enabled: update.upnp_enabled,
         funnel_enabled: update.funnel_enabled,
+        https_enabled: update.https_enabled,
+        asset_transport: update.asset_transport,
     };
     match update.auth.new_pin.as_deref() {
         Some("") => merged.auth.pin = None,
@@ -855,14 +907,18 @@ async fn put_config(
 
     let port_changed = merged.port != old.port;
     let listen_changed = merged.listen != old.listen;
+    // Flipping native HTTPS changes the listener's shape (TLS vs plain), so
+    // it needs the same rebind as a port change.
+    let https_changed = merged.https_enabled != old.https_enabled;
     let new_port = merged.port;
     runtime.set_config(merged.clone());
 
-    if port_changed || listen_changed {
+    if port_changed || listen_changed || https_changed {
         tracing::info!(
             old = old.port,
             new = new_port,
             listen_changed,
+            https_changed,
             "network listener configuration changed; requesting rebind"
         );
         if env_mode_always() {
@@ -883,7 +939,7 @@ async fn put_config(
         StatusCode::OK,
         Json(serde_json::json!({
             "config": redact(&runtime.config()),
-            "restart_required": port_changed || listen_changed,
+            "restart_required": port_changed || listen_changed || https_changed,
             "warnings": warnings,
         })),
     )
@@ -1398,6 +1454,8 @@ mod tests {
             },
             upnp_enabled: true,
             funnel_enabled: false,
+            https_enabled: false,
+            asset_transport: AssetTransport::Https,
         };
         let errors = validate(&update);
         assert!(errors.iter().any(|e| e.contains("port")));
@@ -1419,8 +1477,17 @@ mod tests {
             },
             upnp_enabled: false,
             funnel_enabled: false,
+            https_enabled: true,
+            asset_transport: AssetTransport::HttpsHttp,
         };
         assert!(validate(&update).is_empty());
+
+        // Native HTTPS and Funnel cannot both be on: Funnel forwards to the
+        // port over plain HTTP and would break against a TLS listener.
+        let mut conflict = update.clone();
+        conflict.funnel_enabled = true;
+        let errors = validate(&conflict);
+        assert!(errors.iter().any(|e| e.contains("mutually exclusive")));
     }
 
     #[tokio::test]
@@ -1485,18 +1552,24 @@ mod tests {
         // The shipped default (localhost, no PIN) is quiet.
         assert!(security_warnings(&NetworkConfig::default()).is_empty());
 
-        // The Docker default posture: LAN exposure without a PIN.
+        // The Docker default posture: LAN exposure without a PIN, plus the
+        // HTTPS-required-but-none-hosted posture note.
         let exposed = NetworkConfig {
             listen: ListenMode::Lan,
             ..NetworkConfig::default()
         };
         let warnings = security_warnings(&exposed);
-        assert_eq!(warnings.len(), 1);
-        assert!(warnings[0].contains("without a PIN"));
+        assert_eq!(warnings.len(), 2);
+        assert!(warnings.iter().any(|w| w.contains("without a PIN")));
+        assert!(warnings.iter().any(|w| w.contains("none is hosted")));
 
-        // A PIN neutralizes the exposure warning.
-        let protected = config_with_pin(AuthScope::NetworkOnly);
+        // A PIN neutralizes the exposure warning; hosting HTTPS (or Funnel)
+        // neutralizes the transport one.
+        let mut protected = config_with_pin(AuthScope::NetworkOnly);
+        protected.https_enabled = true;
         assert!(security_warnings(&protected).is_empty());
+        let protected = config_with_pin(AuthScope::NetworkOnly);
+        assert_eq!(security_warnings(&protected).len(), 1);
 
         // Auth-on-without-PIN is called out even on localhost.
         let mut broken = NetworkConfig::default();
@@ -1504,6 +1577,22 @@ mod tests {
         let warnings = security_warnings(&broken);
         assert_eq!(warnings.len(), 1);
         assert!(warnings[0].contains("no PIN is set"));
+    }
+
+    #[test]
+    fn relaxed_asset_transport_earns_a_security_warning() {
+        let mut config = config_with_pin(AuthScope::NetworkOnly);
+        config.asset_transport = AssetTransport::HttpsHttp;
+        let warnings = security_warnings(&config);
+        assert_eq!(warnings.len(), 1);
+        assert!(warnings[0].contains("cleartext HTTP"));
+
+        // Loopback-only streaming is stricter, not riskier — the warning
+        // says remote peers stop working, not that traffic is exposed.
+        config.asset_transport = AssetTransport::Loopback;
+        let warnings = security_warnings(&config);
+        assert_eq!(warnings.len(), 1);
+        assert!(warnings[0].contains("limited to this machine"));
     }
 
     #[test]

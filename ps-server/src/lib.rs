@@ -2,6 +2,7 @@ pub mod api_convert;
 pub mod bridge;
 pub mod bridge_handlers;
 pub mod bridge_instances_handlers;
+pub mod https_listener;
 pub mod local_saves_handlers;
 pub mod lsp_service;
 pub mod network;
@@ -454,7 +455,15 @@ pub async fn start_server_with(
     let bind_ip = listener_bind_ip(&config, &network).await?;
     let listener = tokio::net::TcpListener::bind((bind_ip, effective_port)).await?;
     let addr = listener.local_addr()?;
-    tracing::info!(%addr, desktop_mode = config.desktop_mode, "ps-server listening");
+    // The policy's own TLS flag decides the listener's shape; a rebind (not
+    // a socket rebind of the same shape) is requested whenever it flips.
+    let https_enabled = network.effective_config().https_enabled;
+    tracing::info!(
+        %addr,
+        scheme = if https_enabled { "https" } else { "http" },
+        desktop_mode = config.desktop_mode,
+        "ps-server listening"
+    );
 
     // Reconcile configured router/tailnet exposure after the socket is bound,
     // but before any background service is started. The environment not
@@ -497,24 +506,39 @@ pub async fn start_server_with(
     let exit_notify = Arc::clone(&network);
     let restart_flag = network.restart_flag();
     let exit_flag = network.exit_flag_handle();
-    let serve_task = tokio::spawn(async move {
-        axum::serve(
-            listener,
-            application.into_make_service_with_connect_info::<SocketAddr>(),
-        )
-        .with_graceful_shutdown(async move {
-            tokio::select! {
-                _ = shutdown_receiver => {}
-                // A port change from the Network page: end this listener so
-                // the main loop rebinds with the new configuration.
-                () = restart_notify.restart_wait() => {}
-                // A runtime-mode switch (service_control): end the listener
-                // AND let the main loop exit rather than rebind.
-                () = exit_notify.exit_wait() => {}
-            }
+    let shutdown = async move {
+        tokio::select! {
+            _ = shutdown_receiver => {}
+            // A port change from the Network page: end this listener so
+            // the main loop rebinds with the new configuration.
+            () = restart_notify.restart_wait() => {}
+            // A runtime-mode switch (service_control): end the listener
+            // AND let the main loop exit rather than rebind.
+            () = exit_notify.exit_wait() => {}
+        }
+    };
+    // Building the TLS listener fails loudly (bad/ungeneratable certificate)
+    // BEFORE the server reports itself as up.
+    let serve_task = if https_enabled {
+        let listener = crate::https_listener::tls_listener(listener, &app_dir)?;
+        tokio::spawn(async move {
+            axum::serve(
+                listener,
+                application.into_make_service_with_connect_info::<SocketAddr>(),
+            )
+            .with_graceful_shutdown(shutdown)
+            .await
         })
-        .await
-    });
+    } else {
+        tokio::spawn(async move {
+            axum::serve(
+                listener,
+                application.into_make_service_with_connect_info::<SocketAddr>(),
+            )
+            .with_graceful_shutdown(shutdown)
+            .await
+        })
+    };
 
     Ok(ServerHandle {
         addr,

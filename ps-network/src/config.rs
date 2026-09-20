@@ -164,6 +164,46 @@ pub struct AllowRules {
     pub mode: AllowMode,
 }
 
+/// How remote (non-loopback) peers may load the app and its assets. The
+/// local operator seat — a DIRECT loopback connection — is exempt from every
+/// variant; a Funnel-forwarded loopback socket is judged as its remote
+/// client, not as the operator.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "kebab-case")]
+pub enum AssetTransport {
+    /// HTTPS only (default): cleartext requests from non-loopback peers are
+    /// refused. Serve HTTPS natively, publish via Tailscale Funnel, or front
+    /// the port with an HTTPS proxy.
+    #[default]
+    Https,
+    /// HTTPS or HTTP: cleartext is accepted for remote peers too. Saving
+    /// this answers with a security warning — saves, settings, and the PIN
+    /// travel unencrypted on the wire.
+    HttpsHttp,
+    /// Loopback only: remote peers are refused regardless of transport;
+    /// asset streaming is limited to this machine.
+    Loopback,
+}
+
+impl AssetTransport {
+    pub fn parse(s: &str) -> Option<Self> {
+        match s.trim().to_ascii_lowercase().as_str() {
+            "https" => Some(AssetTransport::Https),
+            "https-http" | "http" | "https_http" => Some(AssetTransport::HttpsHttp),
+            "loopback" => Some(AssetTransport::Loopback),
+            _ => None,
+        }
+    }
+
+    pub fn as_str(self) -> &'static str {
+        match self {
+            AssetTransport::Https => "https",
+            AssetTransport::HttpsHttp => "https-http",
+            AssetTransport::Loopback => "loopback",
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct AuthConfig {
     #[serde(default)]
@@ -213,6 +253,14 @@ pub struct NetworkConfig {
     /// when available. No-op (surfaced as unavailable) without tailscale.
     #[serde(default)]
     pub funnel_enabled: bool,
+    /// Serve the port over HTTPS with a self-signed certificate generated
+    /// (once) beside the database. Mutually exclusive with Funnel, which
+    /// forwards to this port over plain HTTP.
+    #[serde(default)]
+    pub https_enabled: bool,
+    /// How remote peers may load the app and its assets (HTTPS by default).
+    #[serde(default)]
+    pub asset_transport: AssetTransport,
 }
 
 fn default_version() -> u32 {
@@ -233,6 +281,8 @@ impl Default for NetworkConfig {
             auth: AuthConfig::default(),
             upnp_enabled: false,
             funnel_enabled: false,
+            https_enabled: false,
+            asset_transport: AssetTransport::Https,
         }
     }
 }
@@ -269,6 +319,14 @@ impl NetworkConfig {
         if self.auth.scope != AuthScope::Never && self.auth.pin.is_none() {
             self.auth.scope = AuthScope::Never;
             notes.push("authentication disabled: no PIN was configured".into());
+        }
+        if self.https_enabled && self.funnel_enabled {
+            // Fail toward less exposure: Funnel off keeps the port private
+            // while native HTTPS keeps it encrypted.
+            self.funnel_enabled = false;
+            notes.push(
+                "Tailscale Funnel disabled: native HTTPS and Funnel are mutually exclusive".into(),
+            );
         }
         notes
     }
@@ -329,6 +387,13 @@ impl NetworkConfig {
                 "Tailscale Funnel requires AuthScope::Always".into(),
             ));
         }
+        if self.https_enabled && self.funnel_enabled {
+            return Err(ConfigError::Invalid(
+                "native HTTPS and Tailscale Funnel cannot both be enabled — Funnel forwards \
+                 to this port over plain HTTP"
+                    .into(),
+            ));
+        }
         Ok(())
     }
 
@@ -355,10 +420,27 @@ impl NetworkConfig {
             } else {
                 validate_pin(&pin)?;
                 config.auth.pin = Some(PinHash::generate(&pin));
-                if config.auth.scope == AuthScope::Never && config.listen != ListenMode::Localhost {
+                if config.auth.scope == AuthScope::Never && config.listen != ListenMode::Localhost
+                {
                     config.auth.scope = AuthScope::NetworkOnly;
                 }
             }
+        }
+        if let Ok(flag) = std::env::var("PS_HTTPS") {
+            config.https_enabled = flag.trim().eq_ignore_ascii_case("1")
+                || flag.trim().eq_ignore_ascii_case("true");
+            if config.https_enabled {
+                // An operator asking for HTTPS via env cannot also keep
+                // Funnel pointed at the now-TLS port.
+                config.funnel_enabled = false;
+            }
+        }
+        if let Ok(transport) = std::env::var("PS_ASSET_TRANSPORT") {
+            config.asset_transport = AssetTransport::parse(&transport).ok_or_else(|| {
+                ConfigError::Invalid(
+                    "PS_ASSET_TRANSPORT must be https, https-http, or loopback".into(),
+                )
+            })?;
         }
         config.validate()?;
         Ok(config)
@@ -433,6 +515,8 @@ impl NetworkConfig {
             auth: AuthConfig::default(),
             upnp_enabled: false,
             funnel_enabled: false,
+            https_enabled: false,
+            asset_transport: AssetTransport::Https,
         }
     }
 }
@@ -457,6 +541,42 @@ mod tests {
         assert_eq!(config.auth.scope, AuthScope::Never);
         assert!(!config.upnp_enabled);
         assert!(!config.funnel_enabled);
+        assert!(!config.https_enabled);
+        assert_eq!(config.asset_transport, AssetTransport::Https);
+    }
+
+    #[test]
+    fn native_https_and_funnel_are_mutually_exclusive() {
+        let mut config = NetworkConfig::default();
+        config.listen = ListenMode::Lan;
+        config.auth.scope = AuthScope::Always;
+        config.auth.pin = Some(PinHash::generate("1234"));
+        config.funnel_enabled = true;
+        config.https_enabled = true;
+        assert!(config.validate().is_err());
+
+        // Normalization disables the exposure (Funnel), keeping encryption.
+        let mut notes = config.normalize_legacy();
+        assert!(!config.funnel_enabled);
+        assert!(config.https_enabled);
+        assert!(notes.pop().unwrap().contains("mutually exclusive"));
+    }
+
+    #[test]
+    fn asset_transport_round_trips_and_defaults_for_older_stored_rows() {
+        let config = NetworkConfig {
+            listen: ListenMode::Lan,
+            asset_transport: AssetTransport::HttpsHttp,
+            ..NetworkConfig::default()
+        };
+        let parsed = NetworkConfig::from_json(&config.to_json()).unwrap();
+        assert_eq!(parsed.asset_transport, AssetTransport::HttpsHttp);
+        assert_eq!(AssetTransport::parse("loopback"), Some(AssetTransport::Loopback));
+
+        // A row saved before the field existed keeps the HTTPS default.
+        let legacy = NetworkConfig::from_json(r#"{"listen":"lan","port":9000}"#).unwrap();
+        assert_eq!(legacy.asset_transport, AssetTransport::Https);
+        assert!(!legacy.https_enabled);
     }
 
     #[test]
