@@ -376,6 +376,17 @@ fn a_structure_whose_container_is_missing_is_dropped_with_a_warning() {
         "the finding should carry a count, got: {}",
         finding.message
     );
+
+    let remaining_item_targets: usize = imported
+        .blueprint
+        .structures
+        .iter()
+        .map(|s| capture::module_target_container_ids(&s.properties).0.len())
+        .sum();
+    assert_eq!(
+        remaining_item_targets, 0,
+        "no surviving structure may still reference a missing item container"
+    );
 }
 
 /// One finding per rule, not one per object: the corpus has an 8,120-object sample.

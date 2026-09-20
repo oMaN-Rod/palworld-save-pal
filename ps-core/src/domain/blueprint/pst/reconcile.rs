@@ -128,8 +128,9 @@ fn clear_slots_missing_dynamic_items(blueprint: &mut BaseBlueprint, findings: &m
 
 /// A structure's `Connector.RawData.connect.any_place` names other structures by their
 /// `Model.RawData.instance_id`; one dropped during assembly leaves a link pointing at
-/// nothing, so the link is removed rather than the owning structure. PST's own importer
-/// runs an equivalent pass (`_remap_connector_links` in `base_manager.py`).
+/// nothing, so the link is removed rather than the owning structure. The exporting tool
+/// performs an equivalent reconciliation on its own connector links, so this is expected
+/// behaviour to guard against, not a PalStudio-specific concern.
 fn remove_dangling_connector_links(blueprint: &mut BaseBlueprint, findings: &mut Vec<Finding>) {
     let surviving: HashSet<Uuid> = capture::structure_instance_ids(blueprint).into_iter().collect();
 
@@ -253,6 +254,89 @@ mod tests {
                 .iter()
                 .all(|item| props::guid_to_uuid(&item.connect_to_model_instance_id) != target_id),
             "a link to a removed structure must not survive reconciliation"
+        );
+    }
+
+    /// The subtle part of this pass: rule 1 dropping a structure must cascade into rule 3
+    /// within the *same* `reconcile()` call, because rule 3 recomputes the surviving
+    /// instance-id set from whatever rule 1 already left behind. A second structure's
+    /// connector link into the one rule 1 drops must not survive either.
+    #[test]
+    fn a_structure_dropped_by_rule_one_cascades_into_a_dangling_link_removed_by_rule_three() {
+        let mut blueprint = super::super::import(&fixture("v1_relics_base.json"), "Home")
+            .expect("imports")
+            .blueprint;
+
+        let dropped_instance_id = blueprint
+            .structures
+            .iter()
+            .find_map(|s| {
+                let (item_ids, _) = capture::module_target_container_ids(&s.properties);
+                if item_ids.is_empty() {
+                    return None;
+                }
+                model_instance_id(&s.properties)
+            })
+            .expect("fixture has a structure referencing an item container");
+
+        let linking_map_object_id = {
+            let mut found = None;
+            for s in &mut blueprint.structures {
+                let (item_ids, char_ids) = capture::module_target_container_ids(&s.properties);
+                if !item_ids.is_empty() || !char_ids.is_empty() {
+                    continue;
+                }
+                if model_instance_id(&s.properties) == Some(dropped_instance_id) {
+                    continue;
+                }
+                let Some(connector) = capture::map_object_connector_mut(&mut s.properties) else {
+                    continue;
+                };
+                let Some(item) = connector.connect.any_place.first_mut() else { continue };
+                item.connect_to_model_instance_id = props::uuid_to_guid(dropped_instance_id);
+                found = Some(s.map_object_id.clone());
+                break;
+            }
+            found.expect(
+                "fixture has a connector-bearing structure with no container reference to \
+                 repoint at the one rule 1 will drop",
+            )
+        };
+
+        // The only way `dropped_instance_id`'s owning structure is dropped: clearing every
+        // item container leaves its `target_container_id` unresolved.
+        blueprint.item_containers.clear();
+
+        let mut findings = Vec::new();
+        reconcile(&mut blueprint, &mut findings);
+
+        assert!(
+            findings.iter().any(|f| f.code == "pst.structure_dropped_missing_container"),
+            "rule 1 must report the drop"
+        );
+        assert!(
+            findings.iter().any(|f| f.code == "pst.connector_link_removed"),
+            "rule 3 must report the cascaded link removal"
+        );
+
+        assert!(
+            capture::structure_instance_ids(&blueprint).iter().all(|id| *id != dropped_instance_id),
+            "the structure referencing the missing container must be gone"
+        );
+        let linking_structure = blueprint
+            .structures
+            .iter_mut()
+            .find(|s| s.map_object_id == linking_map_object_id)
+            .expect("the linking structure itself has no container reference, so it survives");
+        let connector = capture::map_object_connector_mut(&mut linking_structure.properties)
+            .expect("it still carries a connector");
+        assert!(
+            connector
+                .connect
+                .any_place
+                .iter()
+                .all(|item| props::guid_to_uuid(&item.connect_to_model_instance_id) != dropped_instance_id),
+            "the link into the structure rule 1 dropped must not survive rule 3 in the same pass"
         );
     }
 }
