@@ -38,6 +38,7 @@ export interface BlueprintRow {
 export interface CaptureBlueprintResponse {
 	handle: string;
 	header: BlueprintHeader;
+	findings?: BlueprintFinding[];
 }
 
 export interface Vec3 {

@@ -9,7 +9,7 @@
 use serde_json::Value;
 
 use super::reconcile;
-use super::super::validate::{Finding, Severity};
+use super::super::validate::{self, Finding, Severity};
 use super::super::{
     scrub, transform, BaseBlueprint, BlueprintHeader, BlueprintStructure, CaptureOptions,
     SCHEMA_VERSION,
@@ -156,15 +156,23 @@ fn read_structures(
     let Some(map_objects) = payload.get("map_objects").and_then(Value::as_array) else {
         return (structures, 0);
     };
+    let mut dropped = Vec::new();
     for (index, value) in map_objects.iter().enumerate() {
         match read_structure(value, anchor) {
             Ok(structure) => structures.push(structure),
-            Err(e) => findings.push(Finding {
-                severity: Severity::Warning,
-                code: "pst.structure_dropped".to_string(),
-                message: format!("map_objects[{index}] did not decode and was dropped: {e}"),
-            }),
+            Err(e) => {
+                tracing::warn!("map_objects[{index}] did not decode and was dropped: {e}");
+                dropped.push(index.to_string());
+            }
         }
+    }
+    if !dropped.is_empty() {
+        findings.push(validate::aggregated(
+            "pst.structure_dropped",
+            Severity::Warning,
+            dropped.len(),
+            &dropped,
+        ));
     }
     (structures, map_objects.len())
 }
@@ -234,15 +242,18 @@ fn read_map_entries(
 ) -> Vec<MapEntry> {
     let mut entries = Vec::new();
     let Some(items) = payload.get(section).and_then(Value::as_array) else { return entries };
+    let mut dropped = Vec::new();
     for (index, item) in items.iter().enumerate() {
         match read_map_entry(item, path) {
             Ok(entry) => entries.push(entry),
-            Err(e) => findings.push(Finding {
-                severity: Severity::Warning,
-                code: code.to_string(),
-                message: format!("{section}[{index}] did not decode and was dropped: {e}"),
-            }),
+            Err(e) => {
+                tracing::warn!("{section}[{index}] did not decode and was dropped: {e}");
+                dropped.push(index.to_string());
+            }
         }
+    }
+    if !dropped.is_empty() {
+        findings.push(validate::aggregated(code, Severity::Warning, dropped.len(), &dropped));
     }
     entries
 }
@@ -263,15 +274,23 @@ fn read_map_entry(item: &Value, path: &str) -> Result<MapEntry, CoreError> {
 fn read_works(payload: &Value, findings: &mut Vec<Finding>) -> Vec<StructValue> {
     let mut works = Vec::new();
     let Some(items) = payload.get("works").and_then(Value::as_array) else { return works };
+    let mut dropped = Vec::new();
     for (index, item) in items.iter().enumerate() {
         match read_work(item) {
             Ok(value) => works.push(value),
-            Err(e) => findings.push(Finding {
-                severity: Severity::Warning,
-                code: "pst.work_dropped".to_string(),
-                message: format!("works[{index}] did not decode and was dropped: {e}"),
-            }),
+            Err(e) => {
+                tracing::warn!("works[{index}] did not decode and was dropped: {e}");
+                dropped.push(index.to_string());
+            }
         }
+    }
+    if !dropped.is_empty() {
+        findings.push(validate::aggregated(
+            "pst.work_dropped",
+            Severity::Warning,
+            dropped.len(),
+            &dropped,
+        ));
     }
     works
 }
@@ -304,15 +323,18 @@ fn read_struct_values(
 ) -> Vec<StructValue> {
     let mut values = Vec::new();
     let Some(items) = payload.get(section).and_then(Value::as_array) else { return values };
+    let mut dropped = Vec::new();
     for (index, item) in items.iter().enumerate() {
         match properties_from_json::<Palworld>(item, path) {
             Ok(properties) => values.push(StructValue::Struct(properties)),
-            Err(e) => findings.push(Finding {
-                severity: Severity::Warning,
-                code: code.to_string(),
-                message: format!("{section}[{index}] did not decode and was dropped: {e}"),
-            }),
+            Err(e) => {
+                tracing::warn!("{section}[{index}] did not decode and was dropped: {e}");
+                dropped.push(index.to_string());
+            }
         }
+    }
+    if !dropped.is_empty() {
+        findings.push(validate::aggregated(code, Severity::Warning, dropped.len(), &dropped));
     }
     values
 }
@@ -321,10 +343,15 @@ fn read_struct_values(
 /// own. This governs only how an imported blueprint re-encodes to its own `.psbp` file
 /// format; placement always writes through the *target* session's real header, so this
 /// synthesized one never reaches a save.
+///
+/// `save_game_version` must be at least 3: uesave's own `Header::read` only reads back
+/// `package_version.ue5` when `save_game_version >= 3`, so pairing `Some(ue5)` here with
+/// a lower version writes four bytes on encode that decode never consumes -- every byte
+/// after the header misreads from then on, corrupting the entire re-encoded blueprint.
 fn palworld_header() -> Header {
     Header {
         magic: u32::from_le_bytes(*b"GVAS"),
-        save_game_version: 2,
+        save_game_version: 3,
         package_version: PackageVersion { ue4: 522, ue5: Some(1008) },
         engine_version_major: 5,
         engine_version_minor: 1,

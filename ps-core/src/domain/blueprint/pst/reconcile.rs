@@ -8,25 +8,13 @@ use std::collections::HashSet;
 
 use uuid::Uuid;
 
-use super::super::{capture, validate::{Finding, Severity}, BaseBlueprint};
+use super::super::{
+    capture,
+    validate::{aggregated, Finding, Severity, MAX_EXEMPLARS},
+    BaseBlueprint,
+};
 use crate::props;
 use crate::ue::{FGuid, PalStruct, Property, PropertyKey, StructValue};
-
-/// At most this many examples are named in an aggregated finding.
-const MAX_EXEMPLARS: usize = 5;
-
-fn aggregated(code: &str, severity: Severity, count: usize, exemplars: &[String]) -> Finding {
-    let shown = exemplars.iter().take(MAX_EXEMPLARS).cloned().collect::<Vec<_>>().join(", ");
-    Finding {
-        severity,
-        code: code.to_string(),
-        message: if exemplars.len() > MAX_EXEMPLARS {
-            format!("{count} affected, including {shown}")
-        } else {
-            format!("{count} affected: {shown}")
-        },
-    }
-}
 
 /// `source_structure_count` must be the raw source's structure count -- e.g. the length
 /// of PST's `map_objects` array before any decoding -- not the post-decode count of

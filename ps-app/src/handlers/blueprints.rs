@@ -190,10 +190,20 @@ pub async fn handle_load_blueprint(
             .unwrap_or("blueprint");
 
         match sniff(&bytes) {
-            BlueprintSource::PstCompressed | BlueprintSource::PstJson => {
-                let imported = pst::import(&bytes, name)?;
-                (imported.blueprint, imported.findings)
-            }
+            BlueprintSource::PstCompressed | BlueprintSource::PstJson => match pst::import(&bytes, name) {
+                Ok(mut imported) => {
+                    imported.blueprint.header.game_data_version =
+                        ctx.app.game_data.version().to_string();
+                    (imported.blueprint, imported.findings)
+                }
+                Err(e) => {
+                    ctx.emitter.emit(
+                        MessageType::LoadBlueprint,
+                        &serde_json::json!({ "error": e.to_string() }),
+                    );
+                    return Ok(());
+                }
+            },
             BlueprintSource::NativePsbp => (gvas::from_psbp_bytes(&bytes)?, Vec::new()),
             BlueprintSource::NativeJson => {
                 let text = String::from_utf8(bytes).map_err(|e| {
@@ -202,9 +212,11 @@ pub async fn handle_load_blueprint(
                 (gvas::from_json(&text)?, Vec::new())
             }
             BlueprintSource::Unknown => {
-                return Err(HandlerError::Other(
-                    "unrecognized blueprint file format".to_string(),
-                ));
+                ctx.emitter.emit(
+                    MessageType::LoadBlueprint,
+                    &serde_json::json!({ "error": "unrecognized blueprint file format" }),
+                );
+                return Ok(());
             }
         }
     } else {
@@ -214,9 +226,14 @@ pub async fn handle_load_blueprint(
     };
 
     if validate::has_blocking(&findings) {
-        return Err(HandlerError::Other(
-            "blueprint import failed reconciliation and cannot be loaded".to_string(),
-        ));
+        ctx.emitter.emit(
+            MessageType::LoadBlueprint,
+            &serde_json::json!({
+                "error": "blueprint import failed reconciliation and cannot be loaded",
+                "findings": findings.iter().map(finding_json).collect::<Vec<_>>(),
+            }),
+        );
+        return Ok(());
     }
 
     let header = serde_json::to_value(&blueprint.header)?;

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import * as m from '$i18n/messages';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { blueprintsData, type BlueprintFormat } from '$lib/data/blueprints.svelte';
@@ -7,11 +8,17 @@
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { ExportBlueprintModal, SelectBaseModal } from '$components/modals';
 	import { Button, Card, FileDropzone } from '$components/ui';
-	import type { BlueprintRow } from '$types';
+	import type { BlueprintFinding, BlueprintRow } from '$types';
 
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+
+	const messages = m as unknown as Record<string, (() => string) | undefined>;
+
+	function findingText(finding: BlueprintFinding): string {
+		return messages[`blueprint_finding_${finding.code.replaceAll('.', '_')}`]?.() ?? finding.message;
+	}
 
 	let importFiles: FileList | undefined = $state();
 
@@ -56,10 +63,11 @@
 	async function importFile(files: FileList) {
 		const file = files?.[0];
 		if (!file) return;
+		// Just a hint for compatibility; the server sniffs the content to decide the real format.
 		const format: BlueprintFormat = file.name.toLowerCase().endsWith('.json') ? 'json' : 'psbp';
 		const content = await fileToBase64(file);
 		try {
-			const res = await blueprintsData.loadFromContent(content, format);
+			const res = await blueprintsData.loadFromContent(content, format, file.name);
 			toast.add(`Imported ${res.header.name}.`, 'Blueprint', 'success');
 			const save = await modal.showConfirmModal({
 				title: `Save "${res.header.name}" to the library?`,
@@ -130,15 +138,27 @@
 		</div>
 	</div>
 
-	<FileDropzone name="blueprint-import" accept=".psbp,.psp,.json" bind:files={importFiles}>
+	<FileDropzone
+		name="blueprint-import"
+		accept=".psbp,.psp,.json,.pstbase"
+		bind:files={importFiles}
+	>
 		{#snippet message()}
 			<h3 class="h3">Import a blueprint</h3>
-			<span>Drag and drop a .psbp or .json file here</span>
+			<span>{m.blueprint_import_dropzone_hint()}</span>
 		{/snippet}
 	</FileDropzone>
 
+	{#if blueprintsData.lastImportFindings.length > 0}
+		<div class="mt-2 space-y-1">
+			{#each blueprintsData.lastImportFindings as finding (finding.code + finding.message)}
+				<p class="text-sm opacity-80">{findingText(finding)}</p>
+			{/each}
+		</div>
+	{/if}
+
 	{#if blueprintsData.rows.length === 0}
-		<p class="opacity-70">No blueprints yet. Capture one from a base, or import a .psbp/.json file.</p>
+		<p class="opacity-70">{m.blueprint_import_empty_state()}</p>
 	{:else}
 		<div class="flex flex-col gap-2 max-h-100 2xl:max-h-164 overflow-y-auto">
 			{#each blueprintsData.rows as row (row.id)}

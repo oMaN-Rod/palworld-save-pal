@@ -4,6 +4,7 @@ import type {
 	BlueprintRow,
 	CaptureBlueprintResponse,
 	CaptureOptions,
+	BlueprintFinding,
 	BlueprintGeometry,
 	PlacementAnchor,
 	ValidatePlacementResponse,
@@ -12,9 +13,15 @@ import type {
 
 export type BlueprintFormat = 'psbp' | 'json';
 
+// A refused load_blueprint answers under its own message type with `error` (and, for a
+// failed reconciliation, `findings`) rather than the dispatcher's hard `error` frame, so
+// the request/response waiter still resolves. `handle`/`header` are then absent.
+type LoadBlueprintResponse = Partial<CaptureBlueprintResponse> & { error?: string };
+
 class Blueprints {
 	rows: BlueprintRow[] = $state([]);
 	current: CaptureBlueprintResponse | null = $state(null);
+	lastImportFindings: BlueprintFinding[] = $state([]);
 
 	async list(): Promise<BlueprintRow[]> {
 		const response = await sendAndWait<{ blueprints: BlueprintRow[] }>(MessageType.LIST_BLUEPRINTS);
@@ -43,21 +50,34 @@ class Blueprints {
 	}
 
 	async loadFromId(id: string): Promise<CaptureBlueprintResponse> {
-		const res = await sendAndWait<CaptureBlueprintResponse>(MessageType.LOAD_BLUEPRINT, { id });
-		this.current = res;
-		return res;
+		const res = await sendAndWait<LoadBlueprintResponse>(MessageType.LOAD_BLUEPRINT, { id });
+		return this.acceptLoadResponse(res);
 	}
 
 	async loadFromContent(
 		content: string,
-		format: BlueprintFormat
+		format: BlueprintFormat,
+		filename?: string
 	): Promise<CaptureBlueprintResponse> {
-		const res = await sendAndWait<CaptureBlueprintResponse>(MessageType.LOAD_BLUEPRINT, {
+		const res = await sendAndWait<LoadBlueprintResponse>(MessageType.LOAD_BLUEPRINT, {
 			content,
-			format
+			format,
+			filename
 		});
-		this.current = res;
-		return res;
+		return this.acceptLoadResponse(res);
+	}
+
+	// A refused load carries its findings before the error is thrown, so the findings
+	// panel can still explain why (e.g. a failed reconciliation), even though the caller's
+	// catch block is what puts the error itself in front of the user.
+	private acceptLoadResponse(res: LoadBlueprintResponse): CaptureBlueprintResponse {
+		this.lastImportFindings = res.findings ?? [];
+		if (res.error || !res.handle || !res.header) {
+			throw new Error(res.error ?? 'Blueprint failed to load');
+		}
+		const loaded = res as CaptureBlueprintResponse;
+		this.current = loaded;
+		return loaded;
 	}
 
 	exportFile(handle: string, format: BlueprintFormat): void {
@@ -111,6 +131,7 @@ class Blueprints {
 	reset(): void {
 		this.rows = [];
 		this.current = null;
+		this.lastImportFindings = [];
 	}
 }
 

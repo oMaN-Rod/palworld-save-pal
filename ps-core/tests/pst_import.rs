@@ -211,6 +211,23 @@ fn exporter_excludes(map_object_id: &str) -> bool {
             && !map_object_id.contains("Incubator"))
 }
 
+/// A structure's unique identity, for pairing two roads' output to the *same* structure
+/// rather than merely the same type -- `map_object_id` is a type name shared by every
+/// wall or floor of that kind, so sorting or zipping on it alone can pair up two
+/// different structures that happen to share a type and never notice.
+fn model_instance_id(properties: &ps_core::ue::Properties) -> Option<uuid::Uuid> {
+    let model = properties
+        .0
+        .get(&ps_core::ue::PropertyKey::from("Model"))
+        .and_then(ps_core::props::struct_props)?;
+    match model.0.get(&ps_core::ue::PropertyKey::from("RawData"))? {
+        ps_core::ue::Property::Struct(ps_core::ue::StructValue::Game(
+            ps_core::ue::PalStruct::MapModel(raw),
+        )) => Some(ps_core::props::guid_to_uuid(&raw.instance_id)),
+        _ => None,
+    }
+}
+
 /// The centrepiece. A PST export of a base and a native capture of that same base are
 /// two roads to the same object; where they disagree, the mapping table is wrong.
 ///
@@ -258,20 +275,46 @@ fn a_pst_import_matches_a_native_capture_of_the_same_base() {
     );
 
     // Relative transforms are computed identically by both paths, so they must agree to
-    // within float noise rather than merely being "close".
+    // within float noise rather than merely being "close". Paired by model instance id
+    // (unique per structure) rather than `map_object_id` (a type name shared by every
+    // structure of that kind), and the id itself is asserted equal inside the zip so a
+    // divergent ordering between the two roads fails as exactly that -- an ordering
+    // mismatch -- rather than a fabricated transform mismatch between two unrelated
+    // same-typed structures.
     let mut captured_by_id: Vec<_> = expected_structures
         .iter()
-        .map(|s| (s.map_object_id.clone(), s.relative_transform.clone()))
+        .filter_map(|s| {
+            model_instance_id(&s.properties)
+                .map(|id| (id, s.map_object_id.clone(), s.relative_transform.clone()))
+        })
         .collect();
-    captured_by_id.sort_by(|a, b| a.0.cmp(&b.0));
+    captured_by_id.sort_by_key(|(id, _, _)| *id);
     let mut imported_by_id: Vec<_> = imported
         .structures
         .iter()
-        .map(|s| (s.map_object_id.clone(), s.relative_transform.clone()))
+        .filter_map(|s| {
+            model_instance_id(&s.properties)
+                .map(|id| (id, s.map_object_id.clone(), s.relative_transform.clone()))
+        })
         .collect();
-    imported_by_id.sort_by(|a, b| a.0.cmp(&b.0));
+    imported_by_id.sort_by_key(|(id, _, _)| *id);
+    assert_eq!(
+        captured_by_id.len(),
+        expected_structures.len(),
+        "every expected structure must carry a model instance id"
+    );
+    assert_eq!(
+        imported_by_id.len(),
+        imported.structures.len(),
+        "every imported structure must carry a model instance id"
+    );
 
-    for ((id, want), (_, got)) in captured_by_id.iter().zip(&imported_by_id) {
+    for ((want_id, id, want), (got_id, _, got)) in captured_by_id.iter().zip(&imported_by_id) {
+        assert_eq!(
+            want_id, got_id,
+            "{id} at this position: captured instance {want_id}, imported instance {got_id} -- \
+             the two roads disagree on which structure this is, not merely its transform"
+        );
         for (axis, want, got) in [
             ("x", want.translation.x.0, got.translation.x.0),
             ("y", want.translation.y.0, got.translation.y.0),
@@ -349,6 +392,32 @@ fn both_encodings_import_to_the_same_blueprint() {
         pst::import(&fixture("v1_relics_base.pstbase"), "Home").expect("pstbase").blueprint;
     assert_eq!(from_json.structures.len(), from_pstbase.structures.len());
     assert_eq!(from_json.header.footprint_radius, from_pstbase.header.footprint_radius);
+
+    // Structure count and footprint radius alone would pass even if the two encodings
+    // normalized to different structures wearing the same totals. Compare the actual
+    // per-structure geometry, paired by model instance id rather than the shared type
+    // name `map_object_id`, so a real divergence in "all encodings normalize to one
+    // representation" cannot hide behind two equal-looking numbers.
+    let sorted_geometry = |bp: &ps_core::domain::blueprint::BaseBlueprint| -> Vec<_> {
+        let mut geometry: Vec<_> = bp
+            .structures
+            .iter()
+            .filter_map(|s| {
+                model_instance_id(&s.properties)
+                    .map(|id| (id, s.map_object_id.clone(), s.relative_transform.clone()))
+            })
+            .collect();
+        geometry.sort_by_key(|(id, _, _)| *id);
+        geometry.into_iter().map(|(_, map_object_id, transform)| (map_object_id, transform)).collect()
+    };
+    let json_geometry = sorted_geometry(&from_json);
+    let pstbase_geometry = sorted_geometry(&from_pstbase);
+    assert_eq!(json_geometry.len(), from_json.structures.len());
+    assert_eq!(pstbase_geometry.len(), from_pstbase.structures.len());
+    assert_eq!(
+        json_geometry, pstbase_geometry,
+        "both encodings must produce the same structure types at the same relative transforms"
+    );
 }
 
 /// Leniency must never cost integrity: a structure whose container was dropped is
@@ -469,9 +538,18 @@ fn a_payload_whose_structures_all_fail_to_decode_blocks_the_import() {
     let imported = pst::import(&bytes, "Home").expect("the envelope itself still decodes");
 
     assert!(imported.blueprint.structures.is_empty(), "every structure must have failed to decode");
-    let dropped =
-        imported.findings.iter().filter(|f| f.code == "pst.structure_dropped").count();
-    assert_eq!(dropped, original_count, "every corrupted map object must be reported dropped");
+    let structure_dropped: Vec<_> =
+        imported.findings.iter().filter(|f| f.code == "pst.structure_dropped").collect();
+    assert_eq!(
+        structure_dropped.len(),
+        1,
+        "one aggregated finding per rule, not one per corrupted map object"
+    );
+    assert!(
+        structure_dropped[0].message.contains(&original_count.to_string()),
+        "the aggregated finding should carry the count, got: {}",
+        structure_dropped[0].message
+    );
 
     let finding = imported
         .findings
@@ -581,6 +659,136 @@ fn a_container_slot_pointing_at_a_missing_dynamic_item_is_cleared_with_a_warning
         .map(|entry| capture::container_slot_dynamic_item_ids(entry).len())
         .sum();
     assert_eq!(referenced_after, 0, "no slot may still reference a dropped dynamic item");
+}
+
+/// Pins the schema priming for the two structs `assemble` re-types from a sibling field
+/// (see the module doc on `pst::assemble`): `PalMapConcreteModelModule::module_type` and
+/// `PalWork::work_type` both come back empty from the generic decode and are patched in
+/// afterward. If the psbp encoder does not know these variants exist, or the decoder does
+/// not prime them the same way, that patched-in type tag is exactly the kind of thing an
+/// encode/decode cycle could silently drop -- writing back a blueprint that will not parse.
+#[test]
+fn an_import_round_trips_through_gvas_encoding_unchanged() {
+    use ps_core::domain::blueprint::gvas;
+    use ps_core::ue::{PalStruct, Property, PropertyKey, StructValue};
+
+    let imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports").blueprint;
+
+    let bytes = gvas::to_psbp_bytes(&imported).expect("psbp encode");
+    let restored = gvas::from_psbp_bytes(&bytes).expect("psbp decode");
+
+    assert_eq!(restored.structures.len(), imported.structures.len());
+    assert_eq!(restored.header.name, imported.header.name);
+    assert_eq!(restored.header.footprint_radius, imported.header.footprint_radius);
+
+    fn module_types(bp: &ps_core::domain::blueprint::BaseBlueprint) -> Vec<String> {
+        let mut out = Vec::new();
+        for structure in &bp.structures {
+            let Some(concrete) = structure
+                .properties
+                .0
+                .get(&PropertyKey::from("ConcreteModel"))
+                .and_then(ps_core::props::struct_props)
+            else {
+                continue;
+            };
+            let Some(entries) = concrete
+                .0
+                .get(&PropertyKey::from("ModuleMap"))
+                .and_then(ps_core::props::map_entries)
+            else {
+                continue;
+            };
+            for entry in entries {
+                let Some(props) = ps_core::props::struct_props(&entry.value) else { continue };
+                if let Some(Property::Struct(StructValue::Game(PalStruct::MapConcreteModelModule(
+                    raw,
+                )))) = props.0.get(&PropertyKey::from("RawData"))
+                {
+                    out.push(raw.module_type.clone());
+                }
+            }
+        }
+        out
+    }
+    let imported_module_types = module_types(&imported);
+    assert!(!imported_module_types.is_empty(), "fixture must exercise typed concrete-model modules");
+    assert_eq!(
+        module_types(&restored),
+        imported_module_types,
+        "module_type must survive an encode/decode cycle"
+    );
+    assert!(
+        module_types(&restored).iter().all(|t| !t.is_empty()),
+        "module_type must not come back blanked"
+    );
+
+    fn work_types(bp: &ps_core::domain::blueprint::BaseBlueprint) -> Vec<String> {
+        bp.works
+            .iter()
+            .filter_map(|w| {
+                let StructValue::Struct(props) = w else { return None };
+                match props.0.get(&PropertyKey::from("RawData"))? {
+                    Property::Struct(StructValue::Game(PalStruct::Work(raw))) => {
+                        Some(raw.work_type.clone())
+                    }
+                    _ => None,
+                }
+            })
+            .collect()
+    }
+    let imported_work_types = work_types(&imported);
+    assert!(!imported_work_types.is_empty(), "fixture must exercise typed works");
+    assert_eq!(
+        work_types(&restored),
+        imported_work_types,
+        "work_type must survive an encode/decode cycle"
+    );
+    assert!(
+        work_types(&restored).iter().all(|t| !t.is_empty()),
+        "work_type must not come back blanked"
+    );
+}
+
+/// The headline invariant, verified through the real pipeline rather than by hand:
+/// anything `import` returns must be something `place` can safely write. A blueprint
+/// import that quietly produces something `place` refuses would otherwise only be caught
+/// by a human clicking through the UI.
+#[test]
+fn an_imported_blueprint_places_cleanly_into_a_fixture_save() {
+    use ps_core::domain::blueprint::place::{self, PlacementRequest};
+    use ps_core::domain::blueprint::validate::{Anchor, PlacementMode};
+
+    let mut session = common::load_fixture_session("v1_relics");
+    let imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports").blueprint;
+    assert!(!imported.structures.is_empty(), "the fixture base has structures");
+
+    let guild_id = common::fixture_guild_id(&session);
+    let owner = common::fixture_player_uid(&session);
+    let bases_before = common::base_count(&session);
+    let objects_before = common::map_object_count(&session);
+
+    let request = PlacementRequest {
+        anchor: Anchor { x: 400_000.0, y: 400_000.0, z: 1000.0, yaw_radians: 0.0 },
+        mode: PlacementMode::NewBase { guild_id },
+        owner_player_uid: owner,
+        override_warnings: true,
+    };
+
+    let result = place::place(&mut session, &imported, &request, &common::game_data())
+        .expect("an imported blueprint must place cleanly into a fixture save");
+
+    assert_eq!(common::base_count(&session), bases_before + 1, "placement must add one base");
+    assert_eq!(
+        result.structures_placed as usize,
+        imported.structures.len(),
+        "every imported structure must be placed"
+    );
+    assert_eq!(
+        common::map_object_count(&session),
+        objects_before + imported.structures.len(),
+        "every placed structure must reach MapObjectSaveData"
+    );
 }
 
 /// The 9 real PST exports. Env-gated because they are large and live outside the repo:

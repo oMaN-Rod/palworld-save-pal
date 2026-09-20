@@ -414,6 +414,34 @@ async fn load_of_malformed_base64_content_is_an_error_frame() {
     assert_eq!(frame["type"], "error", "undecodable content is refused, not decoded to garbage");
 }
 
+/// A refused third-party (PST) file must answer under `load_blueprint`'s own type with a
+/// soft `error` field, not the dispatcher's hard `error` frame -- otherwise `sendAndWait`'s
+/// waiter (keyed by message type) never resolves and the page's own `catch` never runs.
+/// An outdated export (missing `dynamic_items`/`base_camp_level`) exercises one of the six
+/// PST refusal paths this convention now covers.
+#[tokio::test]
+async fn load_of_an_outdated_pst_export_answers_under_load_blueprint_with_a_soft_error() {
+    use base64::Engine as _;
+
+    let (server, _scratch) = start_test_server().await;
+    let mut socket = connect(server.addr).await;
+
+    let outdated = br#"{"base_camp":{},"map_objects":[]}"#;
+    let content = base64::engine::general_purpose::STANDARD.encode(outdated);
+
+    send(&mut socket, json!({"type": "load_blueprint",
+        "data": {"content": content, "format": "json", "filename": "old_export.json"}})).await;
+    let frame = recv(&mut socket).await;
+
+    assert_eq!(
+        frame["type"], "load_blueprint",
+        "a PST refusal must answer under load_blueprint so the waiter resolves, not as an error frame"
+    );
+    let error = frame["data"]["error"].as_str().expect("a refusal carries an error string");
+    assert!(error.contains("re-export"), "the error should tell the user to re-export, got: {error}");
+    assert!(frame["data"]["handle"].is_null(), "a refused import must not produce a usable handle");
+}
+
 #[tokio::test]
 async fn geometry_returns_one_entry_per_structure_with_a_transform() {
     let (server, _scratch) = start_test_server().await;

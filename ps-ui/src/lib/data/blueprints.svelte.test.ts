@@ -66,6 +66,85 @@ describe('blueprintsData.loadFromContent', () => {
 	});
 });
 
+describe('blueprintsData.loadFromContent findings', () => {
+	it('keeps the findings returned with an imported blueprint', async () => {
+		const findings = [
+			{
+				severity: 'warning',
+				code: 'pst.base_camp_level_dropped',
+				message: 'base camp level 35 not carried'
+			}
+		];
+		sendAndWait.mockResolvedValueOnce({ handle: 'h1', header: { name: 'Home' }, findings });
+
+		await blueprintsData.loadFromContent('QkFTRQ==', 'psbp');
+
+		expect(blueprintsData.lastImportFindings).toHaveLength(1);
+		expect(blueprintsData.lastImportFindings[0].code).toBe('pst.base_camp_level_dropped');
+	});
+
+	it('sends the filename so the server can name a PST-sourced blueprint', async () => {
+		sendAndWait.mockResolvedValueOnce({ handle: 'h1', header: { name: 'Home' }, findings: [] });
+
+		await blueprintsData.loadFromContent('QkFTRQ==', 'psbp', 'MyBase.pstbase');
+
+		expect(sendAndWait).toHaveBeenCalledWith(MessageType.LOAD_BLUEPRINT, {
+			content: 'QkFTRQ==',
+			format: 'psbp',
+			filename: 'MyBase.pstbase'
+		});
+	});
+
+	it('clears stale findings when a clean blueprint is loaded', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			handle: 'h1',
+			header: { name: 'Home' },
+			findings: [{ severity: 'warning', code: 'x', message: 'y' }]
+		});
+		await blueprintsData.loadFromContent('QkFTRQ==', 'psbp');
+
+		sendAndWait.mockResolvedValueOnce({ handle: 'h2', header: { name: 'Other' }, findings: [] });
+		await blueprintsData.loadFromContent('QkFTRQ==', 'psbp');
+
+		expect(blueprintsData.lastImportFindings).toHaveLength(0);
+	});
+});
+
+describe('blueprintsData.loadFromContent refusal', () => {
+	it('throws with the server error when a PST import is refused, rather than resolving', async () => {
+		sendAndWait.mockResolvedValueOnce({
+			error: 'this base export is missing dynamic_items or base_camp_level and predates the current PST export format; re-export it from PalworldSaveTools and try again'
+		});
+
+		await expect(blueprintsData.loadFromContent('QkFTRQ==', 'psbp')).rejects.toThrow('re-export');
+		expect(blueprintsData.current).toBeNull();
+	});
+
+	it('keeps the findings that explain a failed-reconciliation refusal even though it still throws', async () => {
+		const findings = [
+			{ severity: 'blocking', code: 'pst.no_structures', message: 'no structures survived import' }
+		];
+		sendAndWait.mockResolvedValueOnce({
+			error: 'blueprint import failed reconciliation and cannot be loaded',
+			findings
+		});
+
+		await expect(blueprintsData.loadFromContent('QkFTRQ==', 'psbp')).rejects.toThrow(
+			'failed reconciliation'
+		);
+		expect(blueprintsData.lastImportFindings).toEqual(findings);
+	});
+});
+
+describe('blueprintsData.loadFromId refusal', () => {
+	it('throws with the server error rather than resolving to a handle-less response', async () => {
+		sendAndWait.mockResolvedValueOnce({ error: 'Blueprint missing-id not found' });
+
+		await expect(blueprintsData.loadFromId('missing-id')).rejects.toThrow('not found');
+		expect(blueprintsData.current).toBeNull();
+	});
+});
+
 describe('blueprintsData.exportRow', () => {
 	it('loads the stored row by id then fires an export for the returned handle', async () => {
 		sendAndWait.mockResolvedValueOnce({ handle: 'h3', header: { name: 'Home' } });

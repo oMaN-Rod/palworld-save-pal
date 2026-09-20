@@ -34,6 +34,25 @@ pub struct Finding {
     pub message: String,
 }
 
+/// At most this many examples are named in an aggregated finding.
+pub const MAX_EXEMPLARS: usize = 5;
+
+/// One finding standing in for many identical-cause drops, so a corpus of thousands
+/// of bad objects reports as a sentence instead of one wire finding (and one DOM node)
+/// per object.
+pub fn aggregated(code: &str, severity: Severity, count: usize, exemplars: &[String]) -> Finding {
+    let shown = exemplars.iter().take(MAX_EXEMPLARS).cloned().collect::<Vec<_>>().join(", ");
+    Finding {
+        severity,
+        code: code.to_string(),
+        message: if exemplars.len() > MAX_EXEMPLARS {
+            format!("{count} affected, including {shown}")
+        } else {
+            format!("{count} affected: {shown}")
+        },
+    }
+}
+
 #[derive(Debug, Clone, Copy)]
 pub enum PlacementMode {
     NewBase { guild_id: Uuid },
