@@ -28,17 +28,32 @@ fn aggregated(code: &str, severity: Severity, count: usize, exemplars: &[String]
     }
 }
 
-pub fn reconcile(blueprint: &mut BaseBlueprint, findings: &mut Vec<Finding>) {
+/// `source_structure_count` is the number of structures present just before this pass
+/// runs (the caller's own count, taken right before calling this function) -- it is what
+/// tells `pst.no_structures` apart from a base that legitimately has nothing in it.
+pub fn reconcile(blueprint: &mut BaseBlueprint, source_structure_count: usize, findings: &mut Vec<Finding>) {
     drop_structures_missing_containers(blueprint, findings);
     clear_slots_missing_dynamic_items(blueprint, findings);
     remove_dangling_connector_links(blueprint, findings);
 
     if blueprint.structures.is_empty() {
-        findings.push(Finding {
-            severity: Severity::Blocking,
-            code: "pst.no_structures".to_string(),
-            message: "no structures survived import".to_string(),
-        });
+        if source_structure_count == 0 {
+            findings.push(Finding {
+                severity: Severity::Warning,
+                code: "pst.no_structures".to_string(),
+                message: "the source base has no structures; the imported blueprint is empty \
+                          and placing it will do nothing"
+                    .to_string(),
+            });
+        } else {
+            findings.push(Finding {
+                severity: Severity::Blocking,
+                code: "pst.no_structures".to_string(),
+                message: format!(
+                    "no structures survived import out of {source_structure_count} in the source"
+                ),
+            });
+        }
     }
 }
 
@@ -232,8 +247,9 @@ mod tests {
             .expect("the linked structure exists in the fixture");
         blueprint.structures.remove(target_index);
 
+        let source_structure_count = blueprint.structures.len();
         let mut findings = Vec::new();
-        reconcile(&mut blueprint, &mut findings);
+        reconcile(&mut blueprint, source_structure_count, &mut findings);
 
         findings
             .iter()
@@ -307,8 +323,9 @@ mod tests {
         // item container leaves its `target_container_id` unresolved.
         blueprint.item_containers.clear();
 
+        let source_structure_count = blueprint.structures.len();
         let mut findings = Vec::new();
-        reconcile(&mut blueprint, &mut findings);
+        reconcile(&mut blueprint, source_structure_count, &mut findings);
 
         assert!(
             findings.iter().any(|f| f.code == "pst.structure_dropped_missing_container"),

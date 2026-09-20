@@ -361,7 +361,7 @@ fn a_structure_whose_container_is_missing_is_dropped_with_a_warning() {
     // Remove every item container, stranding whatever referenced them.
     imported.blueprint.item_containers.clear();
     let mut findings = Vec::new();
-    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, before, &mut findings);
 
     assert!(
         imported.blueprint.structures.len() < before,
@@ -393,9 +393,10 @@ fn a_structure_whose_container_is_missing_is_dropped_with_a_warning() {
 #[test]
 fn findings_are_aggregated_rather_than_one_per_object() {
     let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    let before = imported.blueprint.structures.len();
     imported.blueprint.item_containers.clear();
     let mut findings = Vec::new();
-    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, before, &mut findings);
 
     let drops = findings
         .iter()
@@ -404,18 +405,46 @@ fn findings_are_aggregated_rather_than_one_per_object() {
     assert_eq!(drops, 1, "one aggregated finding per rule");
 }
 
-/// A blueprint with nothing left in it is a failure, not a silent empty import.
+/// A base that had structures, none of which survived, is a failure -- leniency lost
+/// everything the source actually had.
 #[test]
 fn a_blueprint_reduced_to_nothing_is_blocking() {
     let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    let before = imported.blueprint.structures.len();
+    assert!(before > 0, "fixture must start with structures for this test to mean anything");
     imported.blueprint.structures.clear();
     let mut findings = Vec::new();
-    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, before, &mut findings);
 
     assert!(
         findings.iter().any(|f| f.code == "pst.no_structures"
             && matches!(f.severity, Severity::Blocking)),
-        "an empty blueprint must block"
+        "losing every structure the source had must block"
+    );
+}
+
+/// A base that had no structures to begin with is not a failure: it is a faithfully
+/// imported empty base (e.g. a genuinely empty corpus sample). It must warn, not block,
+/// so the import still succeeds.
+#[test]
+fn a_source_with_no_structures_at_all_only_warns() {
+    let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    imported.blueprint.structures.clear();
+    let mut findings = Vec::new();
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, 0, &mut findings);
+
+    let finding = findings
+        .iter()
+        .find(|f| f.code == "pst.no_structures")
+        .expect("an empty result is still reported");
+    assert!(
+        matches!(finding.severity, Severity::Warning),
+        "a source that never had structures must not block, got {:?}",
+        finding.severity
+    );
+    assert!(
+        !findings.iter().any(|f| matches!(f.severity, Severity::Blocking)),
+        "nothing about a genuinely empty source should block the import"
     );
 }
 
@@ -446,8 +475,9 @@ fn a_container_slot_pointing_at_a_missing_dynamic_item_is_cleared_with_a_warning
     assert!(referenced_before > 0, "fixture must exercise at least one occupied slot");
 
     imported.blueprint.dynamic_items.clear();
+    let source_structure_count = imported.blueprint.structures.len();
     let mut findings = Vec::new();
-    pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+    pst::reconcile::reconcile(&mut imported.blueprint, source_structure_count, &mut findings);
 
     findings
         .iter()

@@ -100,7 +100,8 @@ pub fn import(bytes: &[u8], name: &str) -> Result<PstImport, CoreError> {
         dynamic_items,
     };
 
-    reconcile::reconcile(&mut blueprint, &mut findings);
+    let source_structure_count = blueprint.structures.len();
+    reconcile::reconcile(&mut blueprint, source_structure_count, &mut findings);
     scrub::scrub_blueprint(&mut blueprint);
 
     Ok(PstImport { blueprint, findings })
