@@ -191,3 +191,162 @@ fn an_outdated_payload_is_refused() {
         "the error should tell the user to re-export, got: {err}"
     );
 }
+
+mod common;
+
+use ps_core::domain::blueprint::{capture, BlueprintStructure, CaptureOptions};
+use std::collections::BTreeSet;
+
+/// The third-party exporter drops these object types from its own payload by design; its
+/// source applies this same rule in three separate places when it builds `map_objects`:
+/// plain `PalBooth`/`ItemBooth`, and any `PalEgg*` that is neither hatching nor an
+/// incubator. No conversion could ever produce them on the imported side, so every
+/// comparison below subtracts exactly what this rule accounts for -- and nothing else --
+/// before comparing the two roads.
+fn exporter_excludes(map_object_id: &str) -> bool {
+    map_object_id == "PalBooth"
+        || map_object_id == "ItemBooth"
+        || (map_object_id.starts_with("PalEgg")
+            && !map_object_id.contains("Hatching")
+            && !map_object_id.contains("Incubator"))
+}
+
+/// The centrepiece. A PST export of a base and a native capture of that same base are
+/// two roads to the same object; where they disagree, the mapping table is wrong.
+///
+/// This is what catches a systematic fault such as palworld-save-tools and uesave
+/// disagreeing on FGuid byte order, which would otherwise surface as scrambled guids in
+/// a user's save long after the cause.
+///
+/// `capture_unscrubbed` needs `ps-core`'s `test-fixtures` feature; this workspace already
+/// enables it for every integration test via the `[dev-dependencies]` self-dependency in
+/// `ps-core/Cargo.toml`, but run with `--features test-fixtures` explicitly too:
+/// `cargo test -p ps-core --features test-fixtures --test pst_import`.
+#[test]
+fn a_pst_import_matches_a_native_capture_of_the_same_base() {
+    let session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+    let captured = capture::capture_unscrubbed(&session, base_id, CaptureOptions::full(), "Home")
+        .expect("native capture");
+    let imported = pst::import(&fixture("v1_relics_base.json"), "Home")
+        .expect("pst import")
+        .blueprint;
+
+    // Every structure the exporter's own rule would drop, set aside before comparing --
+    // not a tolerance, but matching the payload the import actually received.
+    let expected_structures: Vec<&BlueprintStructure> =
+        captured.structures.iter().filter(|s| !exporter_excludes(&s.map_object_id)).collect();
+    assert_eq!(
+        imported.structures.len(),
+        expected_structures.len(),
+        "both roads must find the same structures, once the exporter's own exclusions are set aside"
+    );
+
+    let ids = |bp: &ps_core::domain::blueprint::BaseBlueprint| -> Vec<String> {
+        let mut out: Vec<String> =
+            bp.structures.iter().map(|s| s.map_object_id.clone()).collect();
+        out.sort();
+        out
+    };
+    let mut expected_ids: Vec<String> =
+        expected_structures.iter().map(|s| s.map_object_id.clone()).collect();
+    expected_ids.sort();
+    assert_eq!(
+        ids(&imported),
+        expected_ids,
+        "the same structure types, in the same counts, once excluded types are set aside"
+    );
+
+    // Relative transforms are computed identically by both paths, so they must agree to
+    // within float noise rather than merely being "close".
+    let mut captured_by_id: Vec<_> = expected_structures
+        .iter()
+        .map(|s| (s.map_object_id.clone(), s.relative_transform.clone()))
+        .collect();
+    captured_by_id.sort_by(|a, b| a.0.cmp(&b.0));
+    let mut imported_by_id: Vec<_> = imported
+        .structures
+        .iter()
+        .map(|s| (s.map_object_id.clone(), s.relative_transform.clone()))
+        .collect();
+    imported_by_id.sort_by(|a, b| a.0.cmp(&b.0));
+
+    for ((id, want), (_, got)) in captured_by_id.iter().zip(&imported_by_id) {
+        for (axis, want, got) in [
+            ("x", want.translation.x.0, got.translation.x.0),
+            ("y", want.translation.y.0, got.translation.y.0),
+            ("z", want.translation.z.0, got.translation.z.0),
+        ] {
+            assert!(
+                (want - got).abs() < 0.01,
+                "{id} relative {axis}: captured {want}, imported {got}"
+            );
+        }
+    }
+}
+
+/// Guid-bearing collections must line up exactly. A byte-order fault shows here as two
+/// disjoint sets rather than as a near miss.
+///
+/// The exporter's exclusion rule (see `exporter_excludes`) removes item containers reachable
+/// *only* through an excluded structure; a container still reached by some other,
+/// non-excluded structure must still be present, so this does not merely filter the
+/// captured side -- it subtracts exactly the ids the exclusion accounts for.
+///
+/// Work entries get no such treatment: the exporter's exclusion rule only ever filters
+/// `map_objects`, and a booth's own `EPalWorkableType::Booth` work record still travels in
+/// the payload even though the booth's map object does not. So the two sides' work ids
+/// must match exactly, with nothing subtracted.
+#[test]
+fn a_pst_import_carries_the_same_container_and_work_ids_as_a_capture() {
+    let session = common::load_fixture_session("v1_relics");
+    let base_id = common::fixture_base_id(&session);
+    let captured = capture::capture_unscrubbed(&session, base_id, CaptureOptions::full(), "Home")
+        .expect("native capture");
+    let imported = pst::import(&fixture("v1_relics_base.json"), "Home")
+        .expect("pst import")
+        .blueprint;
+
+    let container_ids = |bp: &ps_core::domain::blueprint::BaseBlueprint| -> BTreeSet<uuid::Uuid> {
+        bp.item_containers.iter().filter_map(capture::container_entry_id).collect()
+    };
+    let excluded_container_ids: BTreeSet<uuid::Uuid> = captured
+        .structures
+        .iter()
+        .filter(|s| exporter_excludes(&s.map_object_id))
+        .flat_map(|s| capture::module_target_container_ids(&s.properties).0)
+        .collect();
+    let included_container_ids: BTreeSet<uuid::Uuid> = captured
+        .structures
+        .iter()
+        .filter(|s| !exporter_excludes(&s.map_object_id))
+        .flat_map(|s| capture::module_target_container_ids(&s.properties).0)
+        .collect();
+    let exclusively_excluded_container_ids: BTreeSet<uuid::Uuid> =
+        excluded_container_ids.difference(&included_container_ids).copied().collect();
+    let expected_container_ids: BTreeSet<uuid::Uuid> = container_ids(&captured)
+        .difference(&exclusively_excluded_container_ids)
+        .copied()
+        .collect();
+    assert_eq!(
+        container_ids(&imported),
+        expected_container_ids,
+        "item container ids must match exactly, once containers reachable only through an \
+         excluded structure are set aside"
+    );
+
+    let work_ids = |bp: &ps_core::domain::blueprint::BaseBlueprint| -> BTreeSet<uuid::Uuid> {
+        bp.works.iter().filter_map(capture::work_base_id).collect()
+    };
+    assert_eq!(work_ids(&imported), work_ids(&captured), "work ids must match exactly");
+}
+
+/// Both encodings must import identically; otherwise one of them is lossy.
+#[test]
+fn both_encodings_import_to_the_same_blueprint() {
+    let from_json = pst::import(&fixture("v1_relics_base.json"), "Home").expect("json").blueprint;
+    let from_pstbase =
+        pst::import(&fixture("v1_relics_base.pstbase"), "Home").expect("pstbase").blueprint;
+    assert_eq!(from_json.structures.len(), from_pstbase.structures.len());
+    assert_eq!(from_json.header.footprint_radius, from_pstbase.header.footprint_radius);
+}
