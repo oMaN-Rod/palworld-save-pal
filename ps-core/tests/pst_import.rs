@@ -462,3 +462,63 @@ fn a_container_slot_pointing_at_a_missing_dynamic_item_is_cleared_with_a_warning
         .sum();
     assert_eq!(referenced_after, 0, "no slot may still reference a dropped dynamic item");
 }
+
+/// The 9 real PST exports. Env-gated because they are large and live outside the repo:
+///
+///     PST_CORPUS_DIR=/o/tmp/pstbases cargo test -p ps-core --features test-fixtures \
+///         --test pst_import the_corpus -- --nocapture
+///
+/// Reports rather than failing on warnings: the point is to discover which adapter
+/// variants real blueprints exercise. Blocking findings and hard errors do fail.
+///
+/// Peak working set observed while importing the full 9-file corpus in one process,
+/// dominated by the ~92 MB `megabase.json` sample: ~526 MB (measured with
+/// `Get-Process`'s `PeakWorkingSet64` wrapping the compiled test binary).
+#[test]
+fn the_corpus_imports_without_blocking_findings() {
+    let Ok(dir) = std::env::var("PST_CORPUS_DIR") else {
+        eprintln!("PST_CORPUS_DIR unset; skipping the corpus test");
+        return;
+    };
+
+    let mut failures = Vec::new();
+    let mut warned = 0usize;
+    for entry in std::fs::read_dir(&dir).expect("read corpus dir").flatten() {
+        let path = entry.path();
+        let is_blueprint = path
+            .extension()
+            .and_then(|e| e.to_str())
+            .is_some_and(|e| e == "json" || e == "pstbase");
+        if !is_blueprint {
+            continue;
+        }
+        let name = path.file_name().unwrap_or_default().to_string_lossy().to_string();
+        let bytes = std::fs::read(&path).expect("read corpus file");
+
+        match pst::import(&bytes, &name) {
+            Err(e) => failures.push(format!("{name}: hard error: {e}")),
+            Ok(imported) => {
+                for finding in &imported.findings {
+                    match finding.severity {
+                        Severity::Blocking => {
+                            failures.push(format!("{name}: blocking {}: {}", finding.code, finding.message));
+                        }
+                        Severity::Warning => {
+                            warned += 1;
+                            eprintln!("{name}: warning {}: {}", finding.code, finding.message);
+                        }
+                    }
+                }
+                eprintln!(
+                    "{name}: {} structures, {} containers, {} works",
+                    imported.blueprint.structures.len(),
+                    imported.blueprint.item_containers.len(),
+                    imported.blueprint.works.len()
+                );
+            }
+        }
+    }
+
+    eprintln!("corpus: {warned} warning(s) across all samples");
+    assert!(failures.is_empty(), "corpus failures:\n{}", failures.join("\n"));
+}
