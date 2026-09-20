@@ -35,7 +35,7 @@
 
 	const label = $derived.by(() => {
 		const file = appState.saveFile;
-		if (!file) return 'PalStudio';
+		if (!file) return '';
 		return file.world_name ? `${file.world_name} — ${file.name}` : file.name;
 	});
 
