@@ -28,9 +28,12 @@ fn aggregated(code: &str, severity: Severity, count: usize, exemplars: &[String]
     }
 }
 
-/// `source_structure_count` is the number of structures present just before this pass
-/// runs (the caller's own count, taken right before calling this function) -- it is what
-/// tells `pst.no_structures` apart from a base that legitimately has nothing in it.
+/// `source_structure_count` must be the raw source's structure count -- e.g. the length
+/// of PST's `map_objects` array before any decoding -- not the post-decode count of
+/// structures that made it into `blueprint`. Those two collapse to the same number
+/// whenever every structure in the source fails to decode, which is exactly the
+/// catastrophic case this parameter exists to tell apart from a base that legitimately
+/// had nothing in it.
 pub fn reconcile(blueprint: &mut BaseBlueprint, source_structure_count: usize, findings: &mut Vec<Finding>) {
     drop_structures_missing_containers(blueprint, findings);
     clear_slots_missing_dynamic_items(blueprint, findings);

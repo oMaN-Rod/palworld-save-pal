@@ -448,6 +448,96 @@ fn a_source_with_no_structures_at_all_only_warns() {
     );
 }
 
+/// The regression this discriminator exists to catch: a source that genuinely held map
+/// objects, every one of which failed to decode, must not be indistinguishable from a
+/// source that never had any. This is the real corpus failure mode (a dialect gap took
+/// three full samples to zero structures) and it must still block after the fix.
+#[test]
+fn a_payload_whose_structures_all_fail_to_decode_blocks_the_import() {
+    let mut payload = pst::envelope::decode(&fixture("v1_relics_base.json")).expect("decodes");
+    let map_objects = payload
+        .get_mut("map_objects")
+        .and_then(serde_json::Value::as_array_mut)
+        .expect("fixture has a map_objects array");
+    let original_count = map_objects.len();
+    assert!(original_count > 0, "fixture must carry real map objects for this test to mean anything");
+    for entry in map_objects.iter_mut() {
+        *entry = serde_json::Value::Null;
+    }
+    let bytes = serde_json::to_vec(&payload).expect("re-serializes");
+
+    let imported = pst::import(&bytes, "Home").expect("the envelope itself still decodes");
+
+    assert!(imported.blueprint.structures.is_empty(), "every structure must have failed to decode");
+    let dropped =
+        imported.findings.iter().filter(|f| f.code == "pst.structure_dropped").count();
+    assert_eq!(dropped, original_count, "every corrupted map object must be reported dropped");
+
+    let finding = imported
+        .findings
+        .iter()
+        .find(|f| f.code == "pst.no_structures")
+        .expect("the empty result is still reported");
+    assert!(
+        matches!(finding.severity, Severity::Blocking),
+        "a source that had structures which all failed to decode must block, got {:?}",
+        finding.severity
+    );
+}
+
+/// Pins the boundary from the other side: some decode failures among survivors must not
+/// trip the empty-result rule at all.
+#[test]
+fn a_payload_whose_structures_partially_fail_to_decode_does_not_block() {
+    let mut payload = pst::envelope::decode(&fixture("v1_relics_base.json")).expect("decodes");
+    let map_objects = payload
+        .get_mut("map_objects")
+        .and_then(serde_json::Value::as_array_mut)
+        .expect("fixture has a map_objects array");
+    assert!(map_objects.len() > 1, "fixture must carry more than one map object for this test");
+    map_objects[0] = serde_json::Value::Null;
+    let bytes = serde_json::to_vec(&payload).expect("re-serializes");
+
+    let imported = pst::import(&bytes, "Home").expect("imports");
+
+    assert!(!imported.blueprint.structures.is_empty(), "the surviving structures must remain");
+    assert!(
+        imported.findings.iter().any(|f| f.code == "pst.structure_dropped"),
+        "the corrupted entry must still be reported"
+    );
+    assert!(
+        !imported.findings.iter().any(|f| f.code == "pst.no_structures"),
+        "structures survived, so the empty-result rule must not fire at all"
+    );
+}
+
+/// The other boundary: a source that never had any map objects to begin with must warn,
+/// not block, exercised through the real import path rather than `reconcile` directly.
+#[test]
+fn a_payload_with_no_map_objects_at_all_only_warns() {
+    let mut payload = pst::envelope::decode(&fixture("v1_relics_base.json")).expect("decodes");
+    payload["map_objects"] = serde_json::Value::Array(Vec::new());
+    let bytes = serde_json::to_vec(&payload).expect("re-serializes");
+
+    let imported = pst::import(&bytes, "Home").expect("imports");
+
+    assert!(imported.blueprint.structures.is_empty());
+    let finding = imported
+        .findings
+        .iter()
+        .find(|f| f.code == "pst.no_structures")
+        .expect("the empty result is still reported");
+    assert!(
+        matches!(finding.severity, Severity::Warning),
+        "a source with no map objects at all must not block, got {:?}",
+        finding.severity
+    );
+    assert!(
+        !imported.findings.iter().any(|f| matches!(f.severity, Severity::Blocking)),
+        "nothing about a genuinely empty source should block the import"
+    );
+}
+
 /// The happy path must stay clean, or the rules are too eager.
 #[test]
 fn a_healthy_import_produces_no_blocking_findings() {

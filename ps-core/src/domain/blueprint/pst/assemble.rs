@@ -36,7 +36,7 @@ pub fn import(bytes: &[u8], name: &str) -> Result<PstImport, CoreError> {
     let mut findings = Vec::new();
 
     let (base_camp_properties, anchor, footprint_radius) = read_base_camp(&payload)?;
-    let structures = read_structures(&payload, &anchor, &mut findings);
+    let (structures, source_structure_count) = read_structures(&payload, &anchor, &mut findings);
 
     let item_containers = read_map_entries(
         &payload,
@@ -100,7 +100,6 @@ pub fn import(bytes: &[u8], name: &str) -> Result<PstImport, CoreError> {
         dynamic_items,
     };
 
-    let source_structure_count = blueprint.structures.len();
     reconcile::reconcile(&mut blueprint, source_structure_count, &mut findings);
     scrub::scrub_blueprint(&mut blueprint);
 
@@ -144,14 +143,18 @@ fn read_base_camp(payload: &Value) -> Result<(Properties, PalTransform, f64), Co
     Ok((properties, anchor, footprint_radius))
 }
 
+/// Returns the decoded structures alongside the raw `map_objects` array length -- the
+/// count `reconcile` needs to tell "the source had none" apart from "the source had some
+/// and every one of them failed to decode", which looks identical once collapsed to the
+/// post-decode vector's length.
 fn read_structures(
     payload: &Value,
     anchor: &PalTransform,
     findings: &mut Vec<Finding>,
-) -> Vec<BlueprintStructure> {
+) -> (Vec<BlueprintStructure>, usize) {
     let mut structures = Vec::new();
     let Some(map_objects) = payload.get("map_objects").and_then(Value::as_array) else {
-        return structures;
+        return (structures, 0);
     };
     for (index, value) in map_objects.iter().enumerate() {
         match read_structure(value, anchor) {
@@ -163,7 +166,7 @@ fn read_structures(
             }),
         }
     }
-    structures
+    (structures, map_objects.len())
 }
 
 fn read_structure(value: &Value, anchor: &PalTransform) -> Result<BlueprintStructure, CoreError> {
