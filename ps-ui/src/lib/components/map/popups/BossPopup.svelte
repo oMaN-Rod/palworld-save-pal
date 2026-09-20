@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Boss } from '$types';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { assetLoader } from '$utils';
 	import { bossPalKey, humanizeSpawnerId } from '../geo/utils';
 	import Popup from './Popup.svelte';

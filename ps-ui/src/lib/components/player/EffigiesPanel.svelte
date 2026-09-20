@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { fade } from 'svelte/transition';
 	import { Button, Slider, Spinner, Tooltip } from '$components/ui';
-	import { relicData } from '$lib/data';
+	import { relicData } from '$lib/data/relic.svelte';
 	import { getToastState } from '$states';
 	import { assetLoader } from '$utils';
 	import {

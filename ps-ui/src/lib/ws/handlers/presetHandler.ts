@@ -1,4 +1,4 @@
-import { presetsData } from '$lib/data';
+import { presetsData } from '$lib/data/presets.svelte';
 import { getToastState } from '$states';
 import { MessageType } from '$types';
 import type { WSMessageHandler } from '../types';

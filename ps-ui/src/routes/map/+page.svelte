@@ -37,7 +37,11 @@
 	import { MAP_LAYERS, isMapLayerId, type MapLayerId } from '$components/map/layers/layerRegistry';
 	import { mapLayerMarkerCount } from '$components/map/layers/mapLayerFeatures';
 	import { mapLayers } from '$lib/data/mapLayerStore.svelte';
-	import { dungeons, fastTravelPoints, relics, relicData, bosses } from '$lib/data';
+	import { dungeons } from '$lib/data/dungeons.svelte';
+import { fastTravelPoints } from '$lib/data/fastTravelPoints.svelte';
+import { relics } from '$lib/data/relics.svelte';
+import { relicData } from '$lib/data/relic.svelte';
+import { bosses } from '$lib/data/bosses.svelte';
 	import { getLiveActors } from '$lib/data/liveActors.svelte';
 	import { partitionSpawns } from '$components/map/features/spawns';
 	import { placementState } from '$lib/data/placement.svelte';

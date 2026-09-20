@@ -8,7 +8,9 @@
 		type SelectOption,
 		type SkillType
 	} from '$types';
-	import { activeSkillsData, elementsData, passiveSkillsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';

@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Card } from '$components/ui';
-	import { itemsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
 	import type { TreeNode } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';

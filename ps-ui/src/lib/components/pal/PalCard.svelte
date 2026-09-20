@@ -6,7 +6,7 @@
 	import { getAppState, getPalEditorState } from '$states';
 	import PalInfoPopup from './PalInfoPopup.svelte';
 	import StatusBadge from './StatusBadge.svelte';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { ContextMenu } from '$components/ui';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';

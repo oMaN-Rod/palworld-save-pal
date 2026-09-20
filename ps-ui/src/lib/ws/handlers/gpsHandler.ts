@@ -1,4 +1,4 @@
-import { palsData } from '$lib/data';
+import { palsData } from '$lib/data/pals.svelte';
 import { getAppState, getNavigationState } from '$states';
 import { MessageType, type Pal } from '$types';
 import type { WSMessageHandler } from '$ws/types';

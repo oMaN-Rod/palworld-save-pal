@@ -1,4 +1,4 @@
-import { palsData } from '$lib/data';
+import { palsData } from '$lib/data/pals.svelte';
 import { getAppState, getToastState } from '$states';
 import type { Player } from '$types';
 import { MessageType } from '$types';

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { activeSkillsData, palsData, passiveSkillsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { cn } from '$theme';
 	import type { OverviewStats } from '$states';
 	import * as m from '$i18n/messages';

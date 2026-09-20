@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { elementsData, palsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { byPaldeckIndex } from '$lib/utils/wikiDescriptors';

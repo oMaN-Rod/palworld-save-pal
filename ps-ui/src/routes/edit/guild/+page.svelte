@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { buildingsData } from '$lib/data/buildings.svelte';
+import { itemsData } from '$lib/data/items.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import {

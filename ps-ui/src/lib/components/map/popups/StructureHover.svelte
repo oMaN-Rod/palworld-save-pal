@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { BaseStructure } from '$types';
-	import { baseStructuresData, buildingsData } from '$lib/data';
+	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
+import { buildingsData } from '$lib/data/buildings.svelte';
 	import { getAppState } from '$states';
 	import { structureInfo } from '../scene/structures/structureInfo';
 	import { structureColors } from '../style/mapColors.svelte';

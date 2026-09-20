@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import type { Base } from '$types';
 	import { Button } from '$components/ui';
-	import { itemsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
 	import { assetLoader } from '$utils';
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import Popup from './Popup.svelte';

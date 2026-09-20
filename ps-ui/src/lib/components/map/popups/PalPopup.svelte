@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { MapObject, Pal } from '$types';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { PalBadge } from '$components/pal';
 	import Popup from './Popup.svelte';
 	import Badge from './Badge.svelte';

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { palsData, workSuitabilityData, WORK_SUITABILITY_KEYS } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { workSuitabilityData, WORK_SUITABILITY_KEYS } from '$lib/data/workSuitability.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { suitabilityImageMap } from '$utils/pals';

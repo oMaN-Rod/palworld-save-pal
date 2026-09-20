@@ -1,4 +1,5 @@
-import { expData, palsData } from '$lib/data';
+import { expData } from '$lib/data/exp.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
 import { MAX_LEVEL } from '$lib/constants';

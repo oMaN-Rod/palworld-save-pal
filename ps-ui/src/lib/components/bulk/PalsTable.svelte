@@ -8,7 +8,8 @@
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType, type PalSummary } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { palsData, elementsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { assetLoader } from '$utils';
 	import { filterBySearch, groupPalIds, groupedPalIdCount, resolveBulkPal } from './bulk.utils';
 	import BulkSelectionBanner from './BulkSelectionBanner.svelte';

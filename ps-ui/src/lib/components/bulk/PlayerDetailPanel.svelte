@@ -9,7 +9,7 @@
 	import { staticIcons } from '$types/icons';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { PalInfoPopup } from '$components/pal';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { PlayerHealthBadge, PlayerStats } from '$components/player';
 
 	let { expanded = false, onclose }: { expanded?: boolean; onclose?: () => void } = $props();

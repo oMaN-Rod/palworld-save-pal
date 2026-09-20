@@ -1,6 +1,6 @@
 import { page } from '$app/state';
 import * as m from '$i18n/messages';
-import { baseStructuresData } from '$lib/data';
+import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 import { getActiveDirectory, takeSaveTarget, writeSaveInPlace } from '$lib/fs';
 import {
 	clearSessionPersistence,

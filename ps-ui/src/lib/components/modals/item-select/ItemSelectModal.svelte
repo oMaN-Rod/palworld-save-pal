@@ -4,7 +4,8 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData, palsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { getAppState } from '$states';
 	import { cn } from '$theme';
 	import {

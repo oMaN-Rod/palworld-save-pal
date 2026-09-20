@@ -1,4 +1,4 @@
-import { palsData } from '$lib/data';
+import { palsData } from '$lib/data/pals.svelte';
 import type { PalData } from '$types';
 
 const SPECIAL_CASES = ['PREDATOR_', 'RAID_', 'GYM_', 'SUMMON_', '_OILRIG'];

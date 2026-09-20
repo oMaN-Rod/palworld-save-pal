@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { itemsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
 	import { Rarity, type ItemContainerSlot } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';

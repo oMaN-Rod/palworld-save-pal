@@ -1,4 +1,4 @@
-import { itemsData } from '$lib/data';
+import { itemsData } from '$lib/data/items.svelte';
 import { ItemTypeA, ItemTypeB, Rarity, type Item } from '$types';
 import { normalizeKeys } from '$utils';
 

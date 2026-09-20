@@ -2,8 +2,8 @@
 	import { EntryState, type Pal } from '$types';
 	import { Button, Tooltip, Progress } from '$components/ui';
 	import { staticIcons } from '$types/icons';
-	import { palsData } from '$lib/data';
-	import { friendshipData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+	import { friendshipData } from '$lib/data/friendship.svelte';
 	import { getModalState } from '$states';
 	import TrustEditModal from './TrustEditModal.svelte';
 	import * as m from '$i18n/messages';

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { labResearchData, workSuitabilityData } from '$lib/data';
+	import { labResearchData } from '$lib/data/labResearch.svelte';
+import { workSuitabilityData } from '$lib/data/workSuitability.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';

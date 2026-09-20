@@ -1,4 +1,4 @@
-import { pluginsData } from '$lib/data';
+import { pluginsData } from '$lib/data/plugins.svelte';
 import { lspClient, type LspRequestReply } from '$lib/plugins/lspClient';
 import { MessageType, type PluginRunResult, type PluginSummary } from '$types';
 import type { WSMessageHandler } from '../types';

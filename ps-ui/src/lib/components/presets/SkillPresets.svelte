@@ -2,7 +2,10 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Combobox, TooltipButton } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData, presetsData, activeSkillsData, passiveSkillsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
+import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { getModalState, getToastState, sortPresets } from '$states';
 	import { cn } from '$theme';
 	import { type PassiveSkill, type PresetProfile, type SelectOption } from '$types';

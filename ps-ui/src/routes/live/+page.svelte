@@ -16,7 +16,9 @@
 	import LiveStatusChips from '$components/live/LiveStatusChips.svelte';
 	import { cn } from '$theme';
 	import { c } from '$lib/utils/commonTranslations';
-	import { expData, itemsData, palsData } from '$lib/data';
+	import { expData } from '$lib/data/exp.svelte';
+import { itemsData } from '$lib/data/items.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { getGameState, getModalState, getToastState, GameCommandError } from '$states';
 	import type {
 		GameHealPalsJson,

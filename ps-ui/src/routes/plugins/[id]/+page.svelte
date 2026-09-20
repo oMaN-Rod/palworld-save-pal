@@ -3,7 +3,7 @@
 	import { goto, replaceState } from '$app/navigation';
 	import { onDestroy, untrack } from 'svelte';
 	import { cn } from '$theme';
-	import { PLUGIN_WALL_CLOCK_LIMIT_SECONDS, pluginsData } from '$lib/data';
+	import { PLUGIN_WALL_CLOCK_LIMIT_SECONDS, pluginsData } from '$lib/data/plugins.svelte';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { slugify } from '$lib/plugins/pluginId';
 	import {

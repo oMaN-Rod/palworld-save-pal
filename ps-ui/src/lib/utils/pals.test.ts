@@ -1,13 +1,16 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('$lib/data', () => ({
-	expData: { getExpDataByLevel: vi.fn() },
+vi.mock('$lib/data/exp.svelte', () => ({
+	expData: { getExpDataByLevel: vi.fn() }
+}));
+vi.mock('$lib/data/pals.svelte', () => ({
 	palsData: { getByKey: vi.fn() }
 }));
 vi.mock('$lib/utils', () => ({ getStats: vi.fn() }));
 vi.mock('$states', () => ({ getAppState: vi.fn() }));
 
-import { expData, palsData } from '$lib/data';
+import { expData } from '$lib/data/exp.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 import { getStats } from '$lib/utils';
 import { getAppState } from '$states';
 import { EntryState } from '$types';

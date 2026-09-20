@@ -5,7 +5,7 @@
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { cn } from '$theme';
 	import { getAppState, getPalEditorState } from '$states';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import * as m from '$i18n/messages';

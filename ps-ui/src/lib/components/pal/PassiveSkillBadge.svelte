@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { passiveSkillsData } from '$lib/data';
+	import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import type { Pal, PassiveSkill } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { SkillSelectModal } from '$components/modals';

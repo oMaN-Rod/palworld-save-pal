@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { palsData, elementsData, activeSkillsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { activeSkillsData } from '$lib/data/activeSkills.svelte';
 	import { WikiEntity } from '$components/docs';
 	import PalModelViewer from '$components/pal/PalModelViewer.svelte';
 	import { Loading } from '$components/ui';

@@ -4,7 +4,7 @@
 	import { getModalState } from '$states';
 	import { NumberSliderModal } from '$components/modals';
 	import { CornerDotButton, Tooltip } from '$components/ui';
-	import { relicData } from '$lib/data';
+	import { relicData } from '$lib/data/relic.svelte';
 	import type { RelicRankData } from '$lib/data/relic.svelte';
 	import { assetLoader } from '$utils';
 	import * as m from '$i18n/messages';

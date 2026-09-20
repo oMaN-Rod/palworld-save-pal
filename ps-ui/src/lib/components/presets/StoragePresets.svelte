@@ -2,7 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { TextInputModal } from '$components/modals';
 	import { Button, List, TooltipButton } from '$components/ui';
-	import { itemsData, presetsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import type { ItemContainer, ItemContainerSlot, PresetProfile } from '$lib/types';
 	import { getModalState, getToastState, sortPresets } from '$states';
 	import { EntryState } from '$types';

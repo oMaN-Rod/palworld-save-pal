@@ -10,7 +10,7 @@
 		type ItemContainerSlot
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { itemsData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
 	import { assetLoader } from '$utils';
 	import { Tabs } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/tabs';

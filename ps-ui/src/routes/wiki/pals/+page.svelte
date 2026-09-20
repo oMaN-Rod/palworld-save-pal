@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo, breadcrumbSchema } from '$lib/components/seo';
-	import { palsData, elementsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { WikiGrid, WikiSearch, WikiCard, WikiViewToggle } from '$components/docs';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { assetLoader } from '$utils';
 	import * as m from '$i18n/messages';
 	import type { OverviewStats } from '$states';

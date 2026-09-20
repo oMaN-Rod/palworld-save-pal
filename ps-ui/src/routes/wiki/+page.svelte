@@ -2,16 +2,14 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
 	import { Seo, breadcrumbSchema } from '$lib/components/seo';
-	import {
-		palsData,
-		itemsData,
-		buildingsData,
-		activeSkillsData,
-		passiveSkillsData,
-		technologiesData,
-		elementsData,
-		workSuitabilityData
-	} from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { itemsData } from '$lib/data/items.svelte';
+import { buildingsData } from '$lib/data/buildings.svelte';
+import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
+import { technologiesData } from '$lib/data/technologies.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { workSuitabilityData } from '$lib/data/workSuitability.svelte';
 	import { WikiCard, WikiSearch } from '$components/docs';
 	import { searchWiki, type WikiSearchEntry } from '$lib/utils/wikiSearch';
 	import { descriptorFor } from '$lib/utils/wikiDescriptors';

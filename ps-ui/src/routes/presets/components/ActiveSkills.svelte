@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { activeSkillsData, elementsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import type { PresetProfile } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader } from '$utils';

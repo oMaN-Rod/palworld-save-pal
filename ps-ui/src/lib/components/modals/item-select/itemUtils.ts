@@ -1,5 +1,6 @@
 import { ASSET_DATA_PATH } from '$lib/constants';
-import { itemsData, palsData } from '$lib/data';
+import { itemsData } from '$lib/data/items.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 import { ItemTypeA, Rarity, type Item } from '$types';
 import { staticIcons } from '$types/icons';
 import { assetLoader } from '$utils';

@@ -43,7 +43,7 @@
 	import { CompatBanner, UnsupportedBrowser } from '$components/compat';
 	import { detectCapabilities, hardBlocked } from '$lib/utils/browserCapabilities';
 	import { send } from '$lib/utils/websocketUtils';
-	import { baseStructuresData } from '$lib/data';
+	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { MessageType } from '$types';
 
 	const { children } = $props();

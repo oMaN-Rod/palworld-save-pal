@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('$lib/data', () => ({
+vi.mock('$lib/data/pals.svelte', () => ({
 	palsData: {
 		getByKey: () => ({
 			is_pal: true,
@@ -8,7 +8,9 @@ vi.mock('$lib/data', () => ({
 			is_raid_boss: false,
 			scaling: { hp: 70, attack: 70, defense: 70 }
 		})
-	},
+	}
+}));
+vi.mock('$lib/data/passiveSkills.svelte', () => ({
 	passiveSkillsData: { getByKey: () => undefined }
 }));
 

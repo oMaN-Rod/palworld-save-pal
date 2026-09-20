@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labResearchData } from '$lib/data';
+	import { labResearchData } from '$lib/data/labResearch.svelte';
 	import { LabResearchControls, ResearchDetailPanel, ResearchNode } from '$components/guilds';
 	import { buildTree } from '$components/guilds/researchTreeBuilder';
 	import { countResearched, toResearchGuildShape } from './liveGuild.utils';

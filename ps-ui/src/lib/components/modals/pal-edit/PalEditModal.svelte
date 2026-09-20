@@ -21,7 +21,9 @@
 		TextInputModal
 	} from '$components/modals';
 	import { Button, SectionHeader, Tooltip } from '$components/ui';
-	import { expData, palsData, presetsData } from '$lib/data';
+	import { expData } from '$lib/data/exp.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import {
 		defaultPresetConfig,

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { labResearchData } from '$lib/data';
+	import { labResearchData } from '$lib/data/labResearch.svelte';
 	import { send } from '$lib/utils/websocketUtils';
 	import { getToastState } from '$states';
 	import { type Guild, type TreeNode, EntryState, MessageType } from '$types';

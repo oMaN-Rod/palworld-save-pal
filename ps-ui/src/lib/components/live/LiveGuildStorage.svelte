@@ -3,7 +3,7 @@
 	import { ItemBadge } from '$components/shared';
 	import { containerSlots } from './liveView.utils';
 	import LivePalboxPager from './LivePalboxPager.svelte';
-	import { buildingsData } from '$lib/data';
+	import { buildingsData } from '$lib/data/buildings.svelte';
 	import { assetLoader } from '$utils';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { staticIcons } from '$types/icons';

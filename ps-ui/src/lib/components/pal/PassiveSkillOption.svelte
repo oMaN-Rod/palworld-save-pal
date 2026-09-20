@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { passiveSkillsData } from '$lib/data';
+	import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { type SelectOption } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader, calculateFilters } from '$utils';

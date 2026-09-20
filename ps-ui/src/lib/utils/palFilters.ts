@@ -1,4 +1,4 @@
-import { elementsData } from '$lib/data';
+import { elementsData } from '$lib/data/elements.svelte';
 import type { ElementType, Pal, PalData } from '$types';
 
 export type PalCategory = 'normal' | 'quest' | 'boss' | 'special' | 'other';

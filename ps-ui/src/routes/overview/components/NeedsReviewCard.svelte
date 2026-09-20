@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Input } from '$components/ui';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { assetLoader } from '$utils';
 	import { cn } from '$theme';
 	import * as m from '$i18n/messages';

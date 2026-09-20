@@ -18,7 +18,8 @@
 		TextInputModal
 	} from '$components/modals';
 	import { Button, SectionHeader, Spinner, Tooltip } from '$components/ui';
-	import { palsData, presetsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import {
 		defaultPresetConfig,

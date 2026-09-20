@@ -1,4 +1,5 @@
-import { palsData, passiveSkillsData } from '$lib/data';
+import { palsData } from '$lib/data/pals.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 import type { Pal, Player } from '$types';
 import { EffectType, TargetType } from '$types';
 

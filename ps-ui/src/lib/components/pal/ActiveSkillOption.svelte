@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { activeSkillsData, elementsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { type SelectOption } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';
 	import { assetLoader } from '$utils';

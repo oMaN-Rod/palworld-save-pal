@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('$lib/data', () => ({
+vi.mock('$lib/data/elements.svelte', () => ({
 	elementsData: { elements: { Fire: { icon: 'fire' }, Water: { icon: 'water' } } }
 }));
 

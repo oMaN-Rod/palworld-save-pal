@@ -1,14 +1,11 @@
-import {
-	activeSkillsData,
-	buildingsData,
-	elementsData,
-	itemsData,
-	palsData,
-	passiveSkillsData,
-	technologiesData,
-	workSuitabilityData,
-	WORK_SUITABILITY_KEYS
-} from '$lib/data';
+import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { buildingsData } from '$lib/data/buildings.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { itemsData } from '$lib/data/items.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
+import { technologiesData } from '$lib/data/technologies.svelte';
+import { workSuitabilityData, WORK_SUITABILITY_KEYS } from '$lib/data/workSuitability.svelte';
 import { ASSET_DATA_PATH } from '$lib/constants';
 import { assetLoader } from './assetLoader';
 import { rarityGradientClass, skillFilter } from './colors';

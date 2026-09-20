@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Boss } from '$types';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { bossPalKey, humanizeSpawnerId } from '../geo/utils';
 	import Hover from './Hover.svelte';
 	import Badge from './Badge.svelte';

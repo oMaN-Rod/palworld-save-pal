@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { presetsData } from '$lib/data';
+	import { presetsData } from '$lib/data/presets.svelte';
 	import { Button, List, TooltipButton, Input, Tooltip, Select } from '$components/ui';
 	import {
 		getModalState,

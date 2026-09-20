@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PalCard } from '$components/pal';
 	import { ContextMenu, Spinner } from '$components/ui';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import type { GamePalJson } from '$states/gameState.svelte';
 	import * as m from '$i18n/messages';
 	import { deriveCharacterKey, toLivePal } from './liveView.utils';

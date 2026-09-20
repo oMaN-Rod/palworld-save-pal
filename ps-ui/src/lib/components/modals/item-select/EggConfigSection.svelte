@@ -5,7 +5,8 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { activeSkillsData, passiveSkillsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { getAppState } from '$states';
 	import { PalGender, type EggConfig, type Pal, type SelectOption } from '$types';

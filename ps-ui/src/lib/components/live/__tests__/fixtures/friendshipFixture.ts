@@ -1,4 +1,4 @@
-import { friendshipData } from '$lib/data';
+import { friendshipData } from '$lib/data/friendship.svelte';
 import type { FriendshipData } from '$lib/data/friendship.svelte';
 
 export function seedFriendship(): void {

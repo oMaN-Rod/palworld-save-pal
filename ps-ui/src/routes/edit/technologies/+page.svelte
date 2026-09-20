@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { getAppState, getModalState } from '$states';
-	import { buildingsData, itemsData, technologiesData } from '$lib/data';
+	import { buildingsData } from '$lib/data/buildings.svelte';
+import { itemsData } from '$lib/data/items.svelte';
+import { technologiesData } from '$lib/data/technologies.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { NumberInputModal } from '$components/modals';

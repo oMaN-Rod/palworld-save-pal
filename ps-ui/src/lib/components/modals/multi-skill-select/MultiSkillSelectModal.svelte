@@ -2,7 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox, List, TooltipButton } from '$components/ui';
 	import { type Pal, type SelectOption, type SkillType } from '$types';
-	import { activeSkillsData, passiveSkillsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';
 	import { ActiveSkillOption, PassiveSkillOption } from '$components/pal';
 	import * as m from '$i18n/messages';

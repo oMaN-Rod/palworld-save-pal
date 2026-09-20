@@ -104,16 +104,14 @@
 		materialTints,
 		structureColors
 	} from './style/mapColors.svelte';
-	import {
-		dungeons,
-		fastTravelPoints,
-		relics,
-		relicData,
-		bosses,
-		palsData,
-		baseStructuresData,
-		buildingsData
-	} from '$lib/data';
+	import { dungeons } from '$lib/data/dungeons.svelte';
+import { fastTravelPoints } from '$lib/data/fastTravelPoints.svelte';
+import { relics } from '$lib/data/relics.svelte';
+import { relicData } from '$lib/data/relic.svelte';
+import { bosses } from '$lib/data/bosses.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { baseStructuresData } from '$lib/data/baseStructures.svelte';
+import { buildingsData } from '$lib/data/buildings.svelte';
 	import { assetLoader } from '$utils';
 	import MapTooltip from './popups/MapTooltip.svelte';
 	import MapPopup from './popups/MapPopup.svelte';

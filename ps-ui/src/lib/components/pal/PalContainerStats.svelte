@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
-	import { elementsData, palsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { assetLoader, calculateFilters } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import type { ElementType, Pal, PalData } from '$types';

@@ -1,13 +1,27 @@
 import { describe, it, expect, vi } from 'vitest';
 
-vi.mock('$lib/data', () => ({
-	activeSkillsData: { activeSkills: {} },
-	buildingsData: { buildings: {} },
-	elementsData: { elements: {} },
-	itemsData: { items: {} },
-	palsData: { pals: {} },
-	passiveSkillsData: { passiveSkills: {} },
-	technologiesData: { technologies: {} },
+vi.mock('$lib/data/activeSkills.svelte', () => ({
+	activeSkillsData: { activeSkills: {} }
+}));
+vi.mock('$lib/data/buildings.svelte', () => ({
+	buildingsData: { buildings: {} }
+}));
+vi.mock('$lib/data/elements.svelte', () => ({
+	elementsData: { elements: {} }
+}));
+vi.mock('$lib/data/items.svelte', () => ({
+	itemsData: { items: {} }
+}));
+vi.mock('$lib/data/pals.svelte', () => ({
+	palsData: { pals: {} }
+}));
+vi.mock('$lib/data/passiveSkills.svelte', () => ({
+	passiveSkillsData: { passiveSkills: {} }
+}));
+vi.mock('$lib/data/technologies.svelte', () => ({
+	technologiesData: { technologies: {} }
+}));
+vi.mock('$lib/data/workSuitability.svelte', () => ({
 	workSuitabilityData: { workSuitability: {} },
 	WORK_SUITABILITY_KEYS: []
 }));

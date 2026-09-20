@@ -4,7 +4,7 @@ import './fixtures/animatePolyfill';
 import { render, screen, fireEvent, waitFor } from '@testing-library/svelte';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import LivePalEditModal from '../LivePalEditModal.svelte';
-import { expData } from '$lib/data';
+import { expData } from '$lib/data/exp.svelte';
 import { clearFriendship, seedFriendship } from './fixtures/friendshipFixture';
 import type { GamePalDetailJson, GamePalJson } from '$states/gameState.svelte';
 

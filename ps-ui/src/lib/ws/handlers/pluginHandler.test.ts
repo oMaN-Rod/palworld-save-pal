@@ -16,7 +16,7 @@ vi.mock('$lib/plugins/lspClient', () => ({
 	}
 }));
 
-vi.mock('$lib/data', () => ({
+vi.mock('$lib/data/plugins.svelte', () => ({
 	pluginsData: { finishRun: vi.fn(), plugins: [] }
 }));
 

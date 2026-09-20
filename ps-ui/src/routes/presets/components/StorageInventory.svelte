@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { buildingsData } from '$lib/data';
+	import { buildingsData } from '$lib/data/buildings.svelte';
 	import type { PresetProfile } from '$types';
 	import { ASSET_DATA_PATH } from '$types/icons';
 	import { assetLoader } from '$utils';

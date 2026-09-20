@@ -8,7 +8,7 @@
 	import { onDestroy, untrack } from 'svelte';
 	import { Button, Input, Monaco, Spinner } from '$components/ui';
 	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
-	import { pluginsData } from '$lib/data';
+	import { pluginsData } from '$lib/data/plugins.svelte';
 	import { MANIFEST_PATH, pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { registerLuaProviders, type ApiSnapshot } from '$lib/plugins/luaProviders';
 	import {

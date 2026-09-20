@@ -6,7 +6,7 @@
 	import LiveGuildChest from './LiveGuildChest.svelte';
 	import LiveGuildLab from './LiveGuildLab.svelte';
 	import { countResearched, partitionContainers, type LiveGuildView } from './liveGuild.utils';
-	import { labResearchData } from '$lib/data';
+	import { labResearchData } from '$lib/data/labResearch.svelte';
 	import type {
 		GameBasePalsJson,
 		GameGuildContainersJson,

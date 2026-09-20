@@ -2,7 +2,7 @@
 import { fireEvent, render, screen } from '@testing-library/svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import '../../pal/__tests__/fixtures/matchMediaPolyfill';
-import { labResearchData } from '$lib/data';
+import { labResearchData } from '$lib/data/labResearch.svelte';
 import LiveGuildLab from '../LiveGuildLab.svelte';
 
 beforeEach(() => {

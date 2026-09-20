@@ -2,7 +2,9 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, List, Tooltip } from '$components/ui';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { elementsData, palsData, presetsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import { getAppState } from '$states';
 	import { EntryState, MessageType, type Pal, type PalData, type PresetProfile } from '$types';
 	import { applyPalPreset, assetLoader, canBeAlpha, canBeLucky, formatNickname } from '$utils';

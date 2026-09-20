@@ -2,7 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, CornerDotButton, Tooltip, Combobox, Input } from '$components/ui';
 	import { PalGender, type SelectOption } from '$types';
-	import { palsData, elementsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';

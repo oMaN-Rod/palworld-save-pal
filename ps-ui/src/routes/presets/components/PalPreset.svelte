@@ -1,12 +1,10 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Tooltip } from '$components/ui';
-	import {
-		activeSkillsData,
-		elementsData,
-		passiveSkillsData,
-		workSuitabilityData
-	} from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
+import { workSuitabilityData } from '$lib/data/workSuitability.svelte';
 	import { cn } from '$theme';
 	import { PalGender, type PresetProfile, type WorkSuitability } from '$types';
 	import { ASSET_DATA_PATH, staticIcons } from '$types/icons';

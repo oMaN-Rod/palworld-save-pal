@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Button, Combobox, Tooltip, TooltipButton } from '$components/ui';
-	import { buildingsData } from '$lib/data';
+	import { buildingsData } from '$lib/data/buildings.svelte';
 	import { getAppState, getModalState } from '$states';
 	import {
 		MessageType,

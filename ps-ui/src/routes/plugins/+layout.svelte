@@ -2,7 +2,7 @@
 	import { page } from '$app/state';
 	import { beforeNavigate, goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
-	import { pluginsData } from '$lib/data';
+	import { pluginsData } from '$lib/data/plugins.svelte';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { leaveIsSafe, pluginIdFromPath } from '$lib/plugins/pluginPane';
 	import { slugify } from '$lib/plugins/pluginId';

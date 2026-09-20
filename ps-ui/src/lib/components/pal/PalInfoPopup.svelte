@@ -5,7 +5,7 @@
 	import StatusBadge from './StatusBadge.svelte';
 	import PalHeader from './PalHeader.svelte';
 	import PassiveSkillBadge from './PassiveSkillBadge.svelte';
-	import { palsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
 	import { staticIcons } from '$types/icons';
 	import { NumberSliderModal } from '$components/modals';
 	import { getAppState, getModalState } from '$states';

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { passiveSkillsData, activeSkillsData } from '$lib/data';
+	import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
+import { activeSkillsData } from '$lib/data/activeSkills.svelte';
 	import * as m from '$i18n/messages';
 	import type { OverviewStats } from '$states';
 

@@ -2,7 +2,9 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox, List } from '$components/ui';
 	import type { ActiveSkill } from '$types';
-	import { activeSkillsData, elementsData, palsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { isSkillAvailableForCharacter } from '$lib/utils/skillFilters';

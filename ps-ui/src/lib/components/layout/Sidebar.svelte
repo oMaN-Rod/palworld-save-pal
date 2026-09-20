@@ -6,7 +6,7 @@
 	import { OpenFolder, SettingsModal } from '$components/modals';
 	import { MessageType } from '$types';
 	import { send } from '$lib/utils/websocketUtils';
-	import { baseStructuresData } from '$lib/data';
+	import { baseStructuresData } from '$lib/data/baseStructures.svelte';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import * as m from '$i18n/messages';

@@ -11,7 +11,8 @@
 		type ItemContainer
 	} from '$types';
 	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
-	import { itemsData, expData } from '$lib/data';
+	import { itemsData } from '$lib/data/items.svelte';
+import { expData } from '$lib/data/exp.svelte';
 	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { PlayerStats, PlayerHealthBadge } from '$components/player';
 	import { ItemBadge } from '$components/shared';

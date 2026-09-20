@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { elementsData, palsData, presetsData } from '$lib/data';
+	import { elementsData } from '$lib/data/elements.svelte';
+import { palsData } from '$lib/data/pals.svelte';
+import { presetsData } from '$lib/data/presets.svelte';
 	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import { Button, Input, Tooltip, TooltipButton } from '$components/ui';

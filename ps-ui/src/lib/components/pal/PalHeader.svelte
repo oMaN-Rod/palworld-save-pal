@@ -2,7 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, CornerDotButton, Progress, Tooltip, Input } from '$components/ui';
 	import { EntryState, type Pal } from '$types';
-	import { palsData, expData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { expData } from '$lib/data/exp.svelte';
 	import { cn } from '$theme';
 	import { getAppState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';

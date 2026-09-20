@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { activeSkillsData, elementsData } from '$lib/data';
+	import { activeSkillsData } from '$lib/data/activeSkills.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { getModalState } from '$states';
 	import { SkillSelectModal } from '$components/modals';

@@ -2,7 +2,8 @@
 	import { EntryState, type Pal, type WorkSuitability } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { Tooltip } from '$components/ui';
-	import { palsData, workSuitabilityData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { workSuitabilityData } from '$lib/data/workSuitability.svelte';
 	import { assetLoader, suitabilityImageMap } from '$utils';
 	import { NumberSliderModal } from '$components/modals';
 	import { getModalState } from '$states';

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
-	import { missionsData } from '$lib/data';
+	import { missionsData } from '$lib/data/missions.svelte';
 	import type { Mission, MissionType } from '$types';
 	import { SectionHeader, Tooltip } from '$components/ui';
 	import * as m from '$i18n/messages';

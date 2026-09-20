@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { passiveSkillsData } from '$lib/data';
+	import { passiveSkillsData } from '$lib/data/passiveSkills.svelte';
 	import { groupPassiveFamilies, type PassiveFamily, type PassiveMember } from '$lib/utils/passiveFamilies';
 	import { isHiddenRecord } from '$lib/utils/wikiSlug';
 	import { ASSET_DATA_PATH } from '$lib/constants';

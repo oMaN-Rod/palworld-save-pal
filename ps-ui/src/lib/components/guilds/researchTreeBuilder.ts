@@ -1,4 +1,4 @@
-import { labResearchData } from '$lib/data';
+import { labResearchData } from '$lib/data/labResearch.svelte';
 import type { Guild, LabResearch, TreeNode } from '$types';
 
 export function getGuildResearchProgress(guild: Guild, researchId: string): number {

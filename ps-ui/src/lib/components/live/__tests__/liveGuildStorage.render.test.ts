@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import '../../pal/__tests__/fixtures/matchMediaPolyfill';
 import './fixtures/animatePolyfill';
-import { buildingsData } from '$lib/data';
+import { buildingsData } from '$lib/data/buildings.svelte';
 import { normalizeKeys } from '$utils';
 import type { GameGuildBaseJson, GameInventoryContainerJson } from '$states/gameState.svelte';
 import LiveGuildChest from '../LiveGuildChest.svelte';

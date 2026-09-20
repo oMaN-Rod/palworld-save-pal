@@ -3,7 +3,8 @@
 	import { CornerDotButton, Tooltip } from '$components/ui';
 	import { type ElementType, EntryState, type Pal, PalGender } from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { palsData, elementsData } from '$lib/data';
+	import { palsData } from '$lib/data/pals.svelte';
+import { elementsData } from '$lib/data/elements.svelte';
 	import { cn } from '$theme';
 	import { getAppState, getNavigationState, getToastState } from '$states';
 	import { assetLoader, editLucky, editAlpha, editAwakened, editImported } from '$utils';

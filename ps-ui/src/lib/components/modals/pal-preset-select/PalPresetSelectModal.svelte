@@ -2,7 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Card, Tooltip, Combobox } from '$components/ui';
 	import { type SelectOption } from '$types';
-	import { presetsData, palsData } from '$lib/data';
+	import { presetsData } from '$lib/data/presets.svelte';
+import { palsData } from '$lib/data/pals.svelte';
 	import { sortPresets } from '$states';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';

@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import { palsData } from '$lib/data';
+import { palsData } from '$lib/data/pals.svelte';
 import { getAppState } from '$states';
 import type { Guild, GuildSummary, Player, PlayerSummary } from '$types';
 import { MessageType } from '$types';
