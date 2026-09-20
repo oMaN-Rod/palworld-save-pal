@@ -78,15 +78,27 @@ async fn test_router_with_runtime(config: NetworkConfig) -> (axum::Router, Arc<N
     (router, runtime)
 }
 
+/// A request shaped the way a browser sends it: origin-form URI (path only,
+/// no scheme) regardless of peer. The scheme never appears on the wire for
+/// plain HTTP/1.1 traffic, so the gate must not assume one.
 fn peer_request(peer: &str, method: &str, uri: &str) -> Request<Body> {
-    let request_uri = if peer.parse::<std::net::IpAddr>().unwrap().is_loopback() {
-        uri.to_owned()
-    } else {
-        format!("https://palstudio.test{uri}")
-    };
     let mut request = Request::builder()
         .method(method)
-        .uri(request_uri)
+        .uri(uri)
+        .body(Body::empty())
+        .unwrap();
+    request.extensions_mut().insert(ConnectInfo(
+        format!("{peer}:40000").parse::<SocketAddr>().unwrap(),
+    ));
+    request
+}
+
+/// A proxied request whose URI carries the https scheme (absolute form) —
+/// the only way `secure_transport` can observe TLS upstream of us.
+fn secure_peer_request(peer: &str, method: &str, uri: &str) -> Request<Body> {
+    let mut request = Request::builder()
+        .method(method)
+        .uri(format!("https://palstudio.test{uri}"))
         .body(Body::empty())
         .unwrap();
     request.extensions_mut().insert(ConnectInfo(
@@ -153,6 +165,55 @@ async fn localhost_mode_admits_loopback_and_refuses_lan() {
         .unwrap();
     assert_eq!(refused.status(), StatusCode::FORBIDDEN);
     assert!(body_text(refused).await.contains("not allowed to connect"));
+}
+
+#[tokio::test]
+async fn cleartext_http_follows_the_listen_mode() {
+    // localhost/lan are plain-HTTP tiers: a cleartext (origin-form, no
+    // scheme) request from an admitted LAN peer serves the SPA.
+    let lan = test_router(config(ListenMode::Lan, AuthScope::Never, false)).await;
+    let served = lan
+        .oneshot(peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(served.status(), StatusCode::OK);
+
+    // tailscale/wan demand TLS for non-loopback peers: the same browser-
+    // shaped request is refused with 426 even though the policy admits the
+    // peer (a listed tailnet address under tailscale, everyone under wan).
+    let mut tailnet_policy = config(ListenMode::Tailscale, AuthScope::Never, false);
+    tailnet_policy.allow.connect = vec!["100.115.95.115".into()];
+    let tailnet = test_router(tailnet_policy).await;
+    let refused = tailnet
+        .oneshot(peer_request("100.115.95.115", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::UPGRADE_REQUIRED);
+    assert!(body_text(refused).await.contains("Funnel"));
+
+    let wan = test_router(config(ListenMode::Wan, AuthScope::Never, false)).await;
+    let refused = wan
+        .clone()
+        .oneshot(peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::UPGRADE_REQUIRED);
+
+    // Loopback stays exempt in a tls-required mode…
+    let local = wan
+        .clone()
+        .oneshot(peer_request("127.0.0.1", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(local.status(), StatusCode::OK);
+
+    // …and a proxied request that still shows its https origin passes the
+    // requirement without Funnel in the picture.
+    let proxied = wan
+        .oneshot(secure_peer_request("192.168.1.50", "GET", "/"))
+        .await
+        .unwrap();
+    assert_eq!(proxied.status(), StatusCode::OK);
 }
 
 #[tokio::test]

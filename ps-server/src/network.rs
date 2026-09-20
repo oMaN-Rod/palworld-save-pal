@@ -393,10 +393,11 @@ impl NetworkPolicy for NetworkRuntime {
     }
 }
 
-/// The outermost request gate: listen mode, allowlists, PIN session, and
-/// write permission for mutating HTTP routes. Websocket write permission is
-/// additionally stamped per-connection in `ws.rs` and enforced in the
-/// dispatcher; this layer still guards the upgrade itself.
+/// The outermost request gate: listen mode, allowlists, PIN session, the
+/// listen-mode cleartext-HTTP policy, and write permission for mutating HTTP
+/// routes. Websocket write permission is additionally stamped per-connection
+/// in `ws.rs` and enforced in the dispatcher; this layer still guards the
+/// upgrade itself.
 pub async fn network_gate(
     State(runtime): State<Arc<NetworkRuntime>>,
     request: Request,
@@ -434,13 +435,28 @@ pub async fn network_gate(
             "refused: your address is not allowed to connect to this PalStudio instance",
         );
     }
-    // The cleartext refusal keys on the SOCKET peer: a Funnel forward hops
-    // over plain HTTP on loopback after tailscale terminates TLS upstream.
-    if !ps_network::canonical(socket_peer).is_loopback() && !secure_transport(&request) {
-        tracing::warn!(%peer, %path, "refused cleartext network request");
+    // Cleartext HTTP is a listen-mode posture, not a blanket rule: localhost
+    // and lan are plain-HTTP tiers by design, while tailscale and wan expect
+    // TLS-terminated traffic — remote peers must arrive through Tailscale
+    // Funnel/serve or an HTTPS proxy. The refusal keys on the SOCKET peer: a
+    // Funnel forward hops over plain HTTP on loopback after tailscale
+    // terminates TLS upstream, and the loopback seat is exempt everywhere.
+    // `secure_transport` only matches absolute-form https URIs (proxy-style
+    // requests); origin-form browser requests carry no scheme, so for the
+    // tls-required modes the practical path is a loopback TLS terminator.
+    let listen = runtime.effective_config().listen;
+    if matches!(listen, ListenMode::Tailscale | ListenMode::Wan)
+        && !ps_network::canonical(socket_peer).is_loopback()
+        && !secure_transport(&request)
+    {
+        tracing::warn!(%peer, %path, listen = %listen.as_str(), "refused cleartext network request");
         return error_response(
             StatusCode::UPGRADE_REQUIRED,
-            "HTTPS is required for non-loopback connections",
+            &format!(
+                "HTTPS is required for non-loopback connections on listen mode '{}' — use the \
+                 tailscale Funnel URL or an HTTPS proxy",
+                listen.as_str()
+            ),
         );
     }
     // These routes are intentionally unauthenticated only after the peer has
@@ -530,6 +546,13 @@ pub(crate) fn security_warnings(config: &NetworkConfig) -> Vec<String> {
              visitors will all be refused until their addresses are listed"
                 .into(),
         );
+    }
+    if matches!(config.listen, ListenMode::Tailscale | ListenMode::Wan) && !config.funnel_enabled {
+        warnings.push(format!(
+            "listen mode '{}' requires HTTPS for remote peers — enable Tailscale Funnel (or \
+             front this port with your own HTTPS proxy) or non-loopback clients are refused",
+            config.listen.as_str()
+        ));
     }
     warnings
 }
