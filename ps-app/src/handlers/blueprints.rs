@@ -124,8 +124,44 @@ pub struct LoadBlueprintData {
     pub id: Option<String>,
     #[serde(default)]
     pub content: Option<String>,
+    /// Kept for backward compatibility. Content is sniffed, so this is a hint,
+    /// not the authority: `.json` is shared by two of the four formats.
     #[serde(default)]
     pub format: Option<String>,
+    #[serde(default)]
+    pub filename: Option<String>,
+}
+
+/// What a dropped blueprint file actually is. `.json` is ambiguous between PalStudio's
+/// own encoding and PST's, so content decides, not the extension or the client's hint.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum BlueprintSource {
+    PstCompressed,
+    PstJson,
+    NativePsbp,
+    NativeJson,
+    Unknown,
+}
+
+fn sniff(bytes: &[u8]) -> BlueprintSource {
+    use ps_core::domain::blueprint::gvas::{LEGACY_MAGIC, PSBP_MAGIC};
+
+    if ps_core::domain::blueprint::pst::envelope::is_pstbase(bytes) {
+        return BlueprintSource::PstCompressed;
+    }
+    if bytes.starts_with(PSBP_MAGIC) || bytes.starts_with(LEGACY_MAGIC) {
+        return BlueprintSource::NativePsbp;
+    }
+    let Ok(value) = serde_json::from_slice::<serde_json::Value>(bytes) else {
+        return BlueprintSource::Unknown;
+    };
+    if value.get("base_camp").is_some() && value.get("map_objects").is_some() {
+        BlueprintSource::PstJson
+    } else if value.get("header").is_some() && value.get("root").is_some() {
+        BlueprintSource::NativeJson
+    } else {
+        BlueprintSource::Unknown
+    }
 }
 
 pub async fn handle_load_blueprint(
@@ -133,30 +169,42 @@ pub async fn handle_load_blueprint(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     use base64::Engine as _;
-    use ps_core::domain::blueprint::gvas;
+    use ps_core::domain::blueprint::{gvas, pst, validate};
 
-    let blueprint = if let Some(id) = &data.id {
+    let (blueprint, findings) = if let Some(id) = &data.id {
         let stored = ps_db::blueprints::get(&*ctx.app.driver, id)
             .await?
             .ok_or_else(|| HandlerError::Other(format!("Blueprint {id} not found")))?;
-        gvas::from_psbp_bytes(&stored.payload)?
+        (gvas::from_psbp_bytes(&stored.payload)?, Vec::new())
     } else if let Some(content) = &data.content {
-        let format = data.format.as_deref().unwrap_or("psbp");
-        match format {
-            "json" => {
-                let text = String::from_utf8(
-                    base64::engine::general_purpose::STANDARD
-                        .decode(content)
-                        .map_err(|e| HandlerError::Other(format!("invalid base64: {e}")))?,
-                )
-                .map_err(|e| HandlerError::Other(format!("invalid utf-8 in json blueprint: {e}")))?;
-                gvas::from_json(&text)?
+        let bytes = base64::engine::general_purpose::STANDARD
+            .decode(content)
+            .map_err(|e| HandlerError::Other(format!("invalid base64: {e}")))?;
+
+        let name = data
+            .filename
+            .as_deref()
+            .and_then(|f| std::path::Path::new(f).file_stem())
+            .and_then(|s| s.to_str())
+            .filter(|s| !s.is_empty())
+            .unwrap_or("blueprint");
+
+        match sniff(&bytes) {
+            BlueprintSource::PstCompressed | BlueprintSource::PstJson => {
+                let imported = pst::import(&bytes, name)?;
+                (imported.blueprint, imported.findings)
             }
-            _ => {
-                let bytes = base64::engine::general_purpose::STANDARD
-                    .decode(content)
-                    .map_err(|e| HandlerError::Other(format!("invalid base64: {e}")))?;
-                gvas::from_psbp_bytes(&bytes)?
+            BlueprintSource::NativePsbp => (gvas::from_psbp_bytes(&bytes)?, Vec::new()),
+            BlueprintSource::NativeJson => {
+                let text = String::from_utf8(bytes).map_err(|e| {
+                    HandlerError::Other(format!("invalid utf-8 in json blueprint: {e}"))
+                })?;
+                (gvas::from_json(&text)?, Vec::new())
+            }
+            BlueprintSource::Unknown => {
+                return Err(HandlerError::Other(
+                    "unrecognized blueprint file format".to_string(),
+                ));
             }
         }
     } else {
@@ -165,11 +213,21 @@ pub async fn handle_load_blueprint(
         ));
     };
 
+    if validate::has_blocking(&findings) {
+        return Err(HandlerError::Other(
+            "blueprint import failed reconciliation and cannot be loaded".to_string(),
+        ));
+    }
+
     let header = serde_json::to_value(&blueprint.header)?;
     let handle = ctx.blueprints.insert(blueprint);
     ctx.emitter.emit(
         MessageType::LoadBlueprint,
-        &serde_json::json!({ "handle": handle, "header": header }),
+        &serde_json::json!({
+            "handle": handle,
+            "header": header,
+            "findings": findings.iter().map(finding_json).collect::<Vec<_>>(),
+        }),
     );
     Ok(())
 }
@@ -381,6 +439,29 @@ mod tests {
 
     fn finding(severity: Severity, code: &str) -> Finding {
         Finding { severity, code: code.to_string(), message: format!("{code} tripped") }
+    }
+
+    #[test]
+    fn sniffing_routes_each_format_by_content_not_by_extension() {
+        // .json is ambiguous between the two formats, so content is the only authority.
+        assert!(matches!(sniff(&[0x28, 0xb5, 0x2f, 0xfd, 0x00]), BlueprintSource::PstCompressed));
+        assert!(matches!(
+            sniff(br#"{"base_camp":{},"map_objects":[]}"#),
+            BlueprintSource::PstJson
+        ));
+        assert!(matches!(sniff(b"PSBP1\0\0\0\x01\0\0\0"), BlueprintSource::NativePsbp));
+        assert!(matches!(sniff(b"PSPBP1\0\0\x01\0\0\0"), BlueprintSource::NativePsbp));
+        assert!(matches!(
+            sniff(br#"{"header":{},"root":{}}"#),
+            BlueprintSource::NativeJson
+        ));
+        assert!(matches!(sniff(b"neither"), BlueprintSource::Unknown));
+    }
+
+    /// A PST json missing map_objects is not a PST blueprint; it must not be claimed.
+    #[test]
+    fn sniffing_requires_both_pst_markers() {
+        assert!(matches!(sniff(br#"{"base_camp":{}}"#), BlueprintSource::Unknown));
     }
 
     #[test]
