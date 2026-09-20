@@ -8,6 +8,7 @@
 
 use serde_json::Value;
 
+use super::reconcile;
 use super::super::validate::{Finding, Severity};
 use super::super::{
     scrub, transform, BaseBlueprint, BlueprintHeader, BlueprintStructure, CaptureOptions,
@@ -99,8 +100,7 @@ pub fn import(bytes: &[u8], name: &str) -> Result<PstImport, CoreError> {
         dynamic_items,
     };
 
-    // A later stage inserts a reconciliation pass here, once assembly can no longer
-    // drop anything else. Scrub must stay last so nothing added above escapes it.
+    reconcile::reconcile(&mut blueprint, &mut findings);
     scrub::scrub_blueprint(&mut blueprint);
 
     Ok(PstImport { blueprint, findings })

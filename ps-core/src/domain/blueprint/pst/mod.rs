@@ -5,5 +5,6 @@
 
 pub mod assemble;
 pub mod envelope;
+pub mod reconcile;
 
 pub use assemble::{import, PstImport};

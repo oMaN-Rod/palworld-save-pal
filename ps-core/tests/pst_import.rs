@@ -350,3 +350,104 @@ fn both_encodings_import_to_the_same_blueprint() {
     assert_eq!(from_json.structures.len(), from_pstbase.structures.len());
     assert_eq!(from_json.header.footprint_radius, from_pstbase.header.footprint_radius);
 }
+
+/// Leniency must never cost integrity: a structure whose container was dropped is
+/// dropped too, because at placement it would dereference something that is not there.
+#[test]
+fn a_structure_whose_container_is_missing_is_dropped_with_a_warning() {
+    let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    let before = imported.blueprint.structures.len();
+
+    // Remove every item container, stranding whatever referenced them.
+    imported.blueprint.item_containers.clear();
+    let mut findings = Vec::new();
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+
+    assert!(
+        imported.blueprint.structures.len() < before,
+        "structures referencing a missing container must be dropped"
+    );
+    let finding = findings
+        .iter()
+        .find(|f| f.code == "pst.structure_dropped_missing_container")
+        .expect("the drop is reported");
+    assert!(
+        finding.message.contains(&(before - imported.blueprint.structures.len()).to_string()),
+        "the finding should carry a count, got: {}",
+        finding.message
+    );
+}
+
+/// One finding per rule, not one per object: the corpus has an 8,120-object sample.
+#[test]
+fn findings_are_aggregated_rather_than_one_per_object() {
+    let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    imported.blueprint.item_containers.clear();
+    let mut findings = Vec::new();
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+
+    let drops = findings
+        .iter()
+        .filter(|f| f.code == "pst.structure_dropped_missing_container")
+        .count();
+    assert_eq!(drops, 1, "one aggregated finding per rule");
+}
+
+/// A blueprint with nothing left in it is a failure, not a silent empty import.
+#[test]
+fn a_blueprint_reduced_to_nothing_is_blocking() {
+    let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    imported.blueprint.structures.clear();
+    let mut findings = Vec::new();
+    ps_core::domain::blueprint::pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+
+    assert!(
+        findings.iter().any(|f| f.code == "pst.no_structures"
+            && matches!(f.severity, Severity::Blocking)),
+        "an empty blueprint must block"
+    );
+}
+
+/// The happy path must stay clean, or the rules are too eager.
+#[test]
+fn a_healthy_import_produces_no_blocking_findings() {
+    let imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    let blocking: Vec<_> = imported
+        .findings
+        .iter()
+        .filter(|f| matches!(f.severity, Severity::Blocking))
+        .collect();
+    assert!(blocking.is_empty(), "unexpected blocking findings: {blocking:?}");
+}
+
+/// A cleared slot must actually stop referencing the missing dynamic item, not merely
+/// get reported -- placement would otherwise dereference a `DynamicItemSaveData` entry
+/// that this same pass just decided did not exist.
+#[test]
+fn a_container_slot_pointing_at_a_missing_dynamic_item_is_cleared_with_a_warning() {
+    let mut imported = pst::import(&fixture("v1_relics_base.json"), "Home").expect("imports");
+    let referenced_before: usize = imported
+        .blueprint
+        .item_containers
+        .iter()
+        .map(|entry| capture::container_slot_dynamic_item_ids(entry).len())
+        .sum();
+    assert!(referenced_before > 0, "fixture must exercise at least one occupied slot");
+
+    imported.blueprint.dynamic_items.clear();
+    let mut findings = Vec::new();
+    pst::reconcile::reconcile(&mut imported.blueprint, &mut findings);
+
+    findings
+        .iter()
+        .find(|f| f.code == "pst.slot_cleared_missing_dynamic_item")
+        .expect("the clear is reported");
+
+    let referenced_after: usize = imported
+        .blueprint
+        .item_containers
+        .iter()
+        .map(|entry| capture::container_slot_dynamic_item_ids(entry).len())
+        .sum();
+    assert_eq!(referenced_after, 0, "no slot may still reference a dropped dynamic item");
+}
