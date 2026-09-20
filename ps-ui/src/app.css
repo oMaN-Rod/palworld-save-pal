@@ -1540,7 +1540,9 @@ body::after {
 	color: var(--color-surface-300);
 	white-space: nowrap;
 	flex-shrink: 0;
-	transition: background-color 120ms ease, color 120ms ease;
+	transition:
+		background-color 120ms ease,
+		color 120ms ease;
 }
 
 .public-nav-link:hover {
@@ -1571,7 +1573,9 @@ body::after {
 	border: 1px solid color-mix(in srgb, var(--color-surface-600) 55%, transparent);
 	white-space: nowrap;
 	flex-shrink: 0;
-	transition: background-color 120ms ease, color 120ms ease;
+	transition:
+		background-color 120ms ease,
+		color 120ms ease;
 }
 
 /* Responsive split: ≥640px = floating centered pill; <640px = standard
@@ -1707,7 +1711,9 @@ body::after {
 	border-radius: 0.3125rem;
 	font-size: 0.6875rem;
 	color: var(--color-surface-300);
-	transition: background-color 0.12s ease-out, color 0.12s ease-out;
+	transition:
+		background-color 0.12s ease-out,
+		color 0.12s ease-out;
 }
 .title-bar-action:hover {
 	background: color-mix(in srgb, var(--color-surface-700) 45%, transparent);
@@ -1726,6 +1732,11 @@ body::after {
 	.title-bar-action-label {
 		display: none;
 	}
+}
+.title-bar-count {
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+	line-height: 1;
 }
 .title-bar-label {
 	flex: 1 1 auto;
@@ -1749,7 +1760,9 @@ body::after {
 	width: 2.75rem;
 	align-self: stretch;
 	color: var(--color-surface-400);
-	transition: background-color 0.12s ease-out, color 0.12s ease-out;
+	transition:
+		background-color 0.12s ease-out,
+		color 0.12s ease-out;
 }
 .title-bar-control:hover {
 	background: color-mix(in srgb, var(--color-surface-700) 55%, transparent);

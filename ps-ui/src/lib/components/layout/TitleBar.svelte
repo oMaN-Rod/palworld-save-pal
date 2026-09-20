@@ -2,17 +2,17 @@
 	import { PUBLIC_DESKTOP_MODE } from '$env/static/public';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { osFamily } from '$lib/utils/platform';
+	import { openExternalLink } from '$lib/utils/externalLink';
+	import { fetchGithubStars, formatStars } from '$lib/utils/githubStars';
 	import { getAppState } from '$states';
 	import * as m from '$i18n/messages';
+	import { onMount } from 'svelte';
 	import { createNavActions } from './navActions.svelte';
-	import {
-		TITLE_BAR_ACTION_IDS,
-		navItems,
-		type NavAction,
-		type NavContext,
-		type NavItem
-	} from './navItems';
+	import { navItems, type NavAction, type NavContext, type NavItem } from './navItems';
 	import { createWindowControls } from './windowControls.svelte';
+
+	const GITHUB_URL = 'https://github.com/oMaN-Rod/palstudio';
+	const DISCORD_URL = 'https://discord.gg/YWZFPy9G8J';
 
 	const appState = getAppState();
 	const actions = createNavActions();
@@ -27,11 +27,17 @@
 	});
 
 	// The C-layout split lives here, not in navItems.ts: which side a button sits
-	// on is presentation, not nav model. Together the two groups must cover
+	// on is presentation, not nav model. Together the three groups must cover
 	// exactly TITLE_BAR_ACTION_IDS — a test enforces that, because anything this
 	// bar fails to render the sidebar has already dropped.
 	const saveActions = $derived(itemsFor(['save', 'eject']));
-	const appActions = $derived(itemsFor(['open-folder', 'settings']));
+	const fileActions = $derived(itemsFor(['open-folder']));
+	const appActions = $derived(itemsFor(['settings']));
+
+	let stars = $state<number | null>(null);
+
+	// Brand names and the star count need no translation.
+	const githubLabel = $derived(stars === null ? 'GitHub' : `GitHub (★${formatStars(stars)})`);
 
 	const label = $derived.by(() => {
 		const file = appState.saveFile;
@@ -63,7 +69,29 @@
 	}
 
 	$effect(() => controls.watch());
+
+	onMount(async () => {
+		stars = await fetchGithubStars();
+	});
 </script>
+
+{#snippet externalLink(id: string, href: string, name: string, icon: string, count: number | null)}
+	<a
+		class="title-bar-action"
+		data-testid="title-link-{id}"
+		{href}
+		target="_blank"
+		rel="noopener noreferrer"
+		title={name}
+		aria-label={name}
+		onclick={(event) => openExternalLink(event, href)}
+	>
+		<Icon {icon} class="h-4 w-4 shrink-0" />
+		{#if count !== null}
+			<span class="title-bar-count">★{formatStars(count)}</span>
+		{/if}
+	</a>
+{/snippet}
 
 {#snippet action(item: NavItem)}
 	<button
@@ -74,7 +102,6 @@
 		onclick={() => runAction(item.action!)}
 	>
 		<Icon icon={item.icon(ctx)} class="h-4 w-4 shrink-0" />
-		<span class="title-bar-action-label">{item.label?.()}</span>
 	</button>
 {/snippet}
 
@@ -95,6 +122,13 @@
 	{/each}
 
 	<span class="title-bar-label" data-testid="title-bar-label">{label}</span>
+
+	{#each fileActions as item (item.id)}
+		{@render action(item)}
+	{/each}
+
+	{@render externalLink('github', GITHUB_URL, githubLabel, 'tabler:brand-github', stars)}
+	{@render externalLink('discord', DISCORD_URL, 'Discord', 'tabler:brand-discord', null)}
 
 	{#each appActions as item (item.id)}
 		{@render action(item)}
@@ -119,10 +153,7 @@
 				aria-label={controls.maximized ? m.window_restore() : m.window_maximize()}
 				onclick={() => controls.toggleMaximize()}
 			>
-				<Icon
-					icon={controls.maximized ? 'tabler:squares' : 'tabler:square'}
-					class="h-3.5 w-3.5"
-				/>
+				<Icon icon={controls.maximized ? 'tabler:squares' : 'tabler:square'} class="h-3.5 w-3.5" />
 			</button>
 			<button
 				class="title-bar-control danger"

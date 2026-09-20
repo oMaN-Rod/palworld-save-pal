@@ -1,13 +1,14 @@
 // @vitest-environment jsdom
 import { render, screen } from '@testing-library/svelte';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-const { appState, platform, actions } = vi.hoisted(() => ({
+const { appState, platform, actions, github } = vi.hoisted(() => ({
 	appState: { saveFile: undefined as { name: string; world_name?: string } | undefined },
 	platform: { os: 'windows' as 'windows' | 'macos' | 'linux' | 'other' },
-	actions: { save: vi.fn(), eject: vi.fn(), openFolder: vi.fn(), settings: vi.fn() }
+	actions: { save: vi.fn(), eject: vi.fn(), openFolder: vi.fn(), settings: vi.fn() },
+	github: { stars: null as number | null }
 }));
 
 vi.mock('$lib/utils/platform', async (original) => ({
@@ -25,6 +26,11 @@ vi.mock('$states', () => ({
 vi.mock('$lib/signal/remoteMode.svelte', () => ({ getRemoteMode: () => ({ active: false }) }));
 vi.mock('$lib/signal/webSession', () => ({ getWebSignalSession: () => ({ connected: false }) }));
 vi.mock('../navActions.svelte', () => ({ createNavActions: () => actions }));
+// Keep the suite off the network.
+vi.mock('$lib/utils/githubStars', async (original) => ({
+	...(await original<Record<string, unknown>>()),
+	fetchGithubStars: async () => github.stars
+}));
 vi.mock('$env/static/public', () => ({ PUBLIC_DESKTOP_MODE: 'true' }));
 
 import { TITLE_BAR_ACTION_IDS } from '../navItems';
@@ -35,6 +41,7 @@ describe('TitleBar', () => {
 		vi.clearAllMocks();
 		appState.saveFile = undefined;
 		platform.os = 'windows';
+		github.stars = null;
 	});
 
 	it('marks the root as a deep drag region', () => {
@@ -97,6 +104,53 @@ describe('TitleBar', () => {
 		expect(rendered.sort()).toEqual([...TITLE_BAR_ACTION_IDS].sort());
 	});
 
+	it('links out to GitHub and Discord ahead of settings', () => {
+		const { container } = render(TitleBar);
+
+		const order = [...container.querySelectorAll('[data-testid^="title-"]')].map((el) =>
+			el.getAttribute('data-testid')
+		);
+
+		expect(order.indexOf('title-link-github')).toBeGreaterThan(
+			order.indexOf('title-action-open-folder')
+		);
+		expect(order.indexOf('title-link-discord')).toBeGreaterThan(order.indexOf('title-link-github'));
+		expect(order.indexOf('title-action-settings')).toBeGreaterThan(
+			order.indexOf('title-link-discord')
+		);
+	});
+
+	it('opens the external links in a new tab', () => {
+		render(TitleBar);
+
+		const github = screen.getByTestId('title-link-github');
+		const discord = screen.getByTestId('title-link-discord');
+
+		expect(github.getAttribute('href')).toBe('https://github.com/oMaN-Rod/palstudio');
+		expect(discord.getAttribute('href')).toBe('https://discord.gg/YWZFPy9G8J');
+		for (const link of [github, discord]) {
+			expect(link.getAttribute('target')).toBe('_blank');
+			expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+		}
+	});
+
+	it('shows the GitHub star count once it resolves', async () => {
+		github.stars = 1234;
+		render(TitleBar);
+
+		const link = await screen.findByTestId('title-link-github');
+		await vi.waitFor(() => expect(link.textContent).toContain('1.2k'));
+		expect(link.getAttribute('aria-label')).toBe('GitHub (★1.2k)');
+	});
+
+	it('falls back to the bare GitHub icon when the star count is unavailable', async () => {
+		render(TitleBar);
+
+		const link = await screen.findByTestId('title-link-github');
+		expect(link.textContent?.trim()).toBe('');
+		expect(link.getAttribute('aria-label')).toBe('GitHub');
+	});
+
 	it('renders every action as a button so the drag script excludes it', () => {
 		appState.saveFile = { name: 'Level.sav' };
 		const { container } = render(TitleBar);
@@ -106,10 +160,10 @@ describe('TitleBar', () => {
 		}
 	});
 
-	it('falls back to the product title when no save is loaded', () => {
+	it('leaves the label empty when no save is loaded', () => {
 		render(TitleBar);
 
-		expect(screen.getByTestId('title-bar-label').textContent).toContain('PalStudio');
+		expect(screen.getByTestId('title-bar-label').textContent).toBe('');
 	});
 
 	it('shows the world and file name when a save is loaded', () => {
@@ -130,7 +184,10 @@ describe('TitleBar', () => {
 // Settings and Open Folder modals this bar itself opens.
 describe('title bar stacking', () => {
 	const appCss = readFileSync(resolve(import.meta.dirname, '../../../../app.css'), 'utf8');
-	const layout = readFileSync(resolve(import.meta.dirname, '../../../../routes/+layout.svelte'), 'utf8');
+	const layout = readFileSync(
+		resolve(import.meta.dirname, '../../../../routes/+layout.svelte'),
+		'utf8'
+	);
 
 	const MODAL_OVERLAY_Z = 50000;
 	const RESIZE_WARNING_Z = 99999;
