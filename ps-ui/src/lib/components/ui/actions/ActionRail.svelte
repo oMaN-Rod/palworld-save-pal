@@ -1,17 +1,25 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, Tooltip } from '$components/ui';
+	import { cn } from '$theme';
 
 	import { availableActions, type ActionDescriptor } from './actionDescriptor';
 
-	let { actions, id }: { actions: ActionDescriptor[]; id?: string } = $props();
+	let {
+		actions,
+		id,
+		class: className
+	}: { actions: ActionDescriptor[]; id?: string; class?: string } = $props();
 
 	const rows = $derived(availableActions(actions));
 </script>
 
 <nav
 	{id}
-	class="btn-group preset-outlined-surface-200-800 flex-col items-center self-start rounded-sm"
+	class={cn(
+		'btn-group preset-outlined-surface-200-800 flex-col items-center self-start rounded-sm',
+		className
+	)}
 >
 	{#each rows as action (action.id)}
 		<Tooltip label={action.label}>

@@ -21,6 +21,8 @@
 		TextInputModal
 	} from '$components/modals';
 	import { Button, SectionHeader, Tooltip } from '$components/ui';
+	import SectionShell from '$components/ui/section/SectionShell.svelte';
+	import { presentationFor, type SectionDef } from '$components/ui/section/sectionShell';
 	import { expData, palsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getToastState } from '$states';
 	import {
@@ -32,6 +34,7 @@
 	} from '$types';
 	import { staticIcons } from '$types/icons';
 	import { assetLoader, calculateFilters, formatBossCharacterId, handleMaxOutPal } from '$utils';
+	import { layout } from '$utils/layout.svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -46,8 +49,41 @@
 	let palLevelProgressToNext: number = $state(0);
 	let palLevelProgressValue: number = $state(0);
 	let palLevelProgressMax: number = $state(1);
-	let leftAccordionValue: string[] = $state(['active_skills']);
 	let rightAccordionValue: string[] = $state(['stats']);
+
+	const sections: SectionDef[] = [
+		{
+			id: 'active_skills',
+			title: c.activeSkills,
+			header: activeSkillsHeader,
+			body: activeSkillsBody,
+			group: 'primary'
+		},
+		{
+			id: 'passive_skills',
+			title: c.passiveSkills,
+			header: passiveSkillsHeader,
+			body: passiveSkillsBody,
+			group: 'primary'
+		},
+		{
+			id: 'work_suitability',
+			title: m.work_suitability(),
+			header: workSuitabilityHeader,
+			body: workSuitabilityBody,
+			group: 'primary'
+		},
+		{
+			id: 'talents',
+			title: m.talents_ivs(),
+			header: talentsHeader,
+			body: talentsBody,
+			group: 'aside'
+		},
+		{ id: 'souls', title: m.souls(), header: soulsHeader, body: soulsBody, group: 'aside' }
+	];
+
+	let activeSection = $state('active_skills');
 
 	const max_talent = $derived(appState.settings.cheat_mode ? 255 : 100);
 	const max_souls = $derived(appState.settings.cheat_mode ? 255 : 20);
@@ -568,6 +604,59 @@
 	</SectionHeader>
 {/snippet}
 
+{#snippet workSuitabilityBody()}
+	<WorkSuitabilities bind:pal={appState.selectedPal} />
+{/snippet}
+
+{#snippet talentsBody()}
+	<Talents bind:pal={appState.selectedPal!} />
+{/snippet}
+
+{#snippet soulsBody()}
+	<Souls bind:pal={appState.selectedPal!} />
+{/snippet}
+
+{#snippet between()}
+	<div id="pal-image" class="overflow-auto p-2">
+		<div class="flex h-full flex-col items-center justify-center">
+			<div class="pal w-full">
+				<Tooltip
+					baseClass="w-full"
+					popupClass="p-4 bg-surface-800"
+					rounded="rounded-none"
+					position="top-start"
+					useArrow={false}
+				>
+					<div class="relative h-87.5 w-full 2xl:h-150">
+						<PalModelViewer
+							characterKey={appState.selectedPal!.character_key}
+							fallback={palImageFallback}
+						/>
+						{#if appState.selectedPal!.is_predator}
+							<img
+								src={staticIcons.predatorIcon}
+								alt="Predator"
+								class="absolute right-0 bottom-0 h-12 w-12"
+								style="filter: {calculateFilters('#FF0000')};"
+							/>
+						{/if}
+					</div>
+
+					{#snippet popup()}
+						{#await getPalDescription(appState.selectedPal!.character_key) then description}
+							{#if description}
+								<div class="flex max-w-96 flex-col">
+									<p class="text-center">{description}</p>
+								</div>
+							{/if}
+						{/await}
+					{/snippet}
+				</Tooltip>
+			</div>
+		</div>
+	</div>
+{/snippet}
+
 {#if appState.selectedPal}
 	<div class="flex h-full overflow-auto p-2">
 		<nav
@@ -604,93 +693,13 @@
 				<PalHeader bind:pal={appState.selectedPal} />
 			</div>
 			<div class="flex grow">
-				<div class="hidden flex-1 overflow-auto p-2 2xl:block">
-					<div class="flex flex-col space-y-2">
-						<div id="pal-active-skills">
-							{@render activeSkillsHeader()}
-							{@render activeSkillsBody()}
-						</div>
-						<div id="pal-passive-skills">
-							{@render passiveSkillsHeader()}
-							{@render passiveSkillsBody()}
-						</div>
-						<div id="pal-work-suitability">
-							{@render workSuitabilityHeader()}
-							<WorkSuitabilities bind:pal={appState.selectedPal} />
-						</div>
-					</div>
-				</div>
-				<div class="mt-4 2xl:hidden">
-					<Accordion
-						classes="min-w-96 max-w-96"
-						value={leftAccordionValue}
-						onValueChange={(e: ValueChangeDetails) => (leftAccordionValue = e.value)}
-						collapsible
-					>
-						<Accordion.Item value="active_skills" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								{@render activeSkillsHeader()}
-							{/snippet}
-							{#snippet panel()}
-								{@render activeSkillsBody()}
-							{/snippet}
-						</Accordion.Item>
-						<Accordion.Item value="passive_skills" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								{@render passiveSkillsHeader()}
-							{/snippet}
-							{#snippet panel()}
-								{@render passiveSkillsBody()}
-							{/snippet}
-						</Accordion.Item>
-						<Accordion.Item value="work_suitability" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								{@render workSuitabilityHeader()}
-							{/snippet}
-							{#snippet panel()}
-								<WorkSuitabilities bind:pal={appState.selectedPal} />
-							{/snippet}
-						</Accordion.Item>
-					</Accordion>
-				</div>
-				<div id="pal-image" class="flex-1 overflow-auto p-2">
-					<div class="flex h-full flex-col items-center justify-center">
-						<div class="pal w-full">
-							<Tooltip
-								baseClass="w-full"
-								popupClass="p-4 bg-surface-800"
-								rounded="rounded-none"
-								position="top-start"
-								useArrow={false}
-							>
-								<div class="relative h-87.5 w-full 2xl:h-150">
-									<PalModelViewer
-										characterKey={appState.selectedPal.character_key}
-										fallback={palImageFallback}
-									/>
-									{#if appState.selectedPal.is_predator}
-										<img
-											src={staticIcons.predatorIcon}
-											alt="Predator"
-											class="absolute right-0 bottom-0 h-12 w-12"
-											style="filter: {calculateFilters('#FF0000')};"
-										/>
-									{/if}
-								</div>
-
-								{#snippet popup()}
-									{#await getPalDescription(appState.selectedPal!.character_key) then description}
-										{#if description}
-											<div class="flex max-w-96 flex-col">
-												<p class="text-center">{description}</p>
-											</div>
-										{/if}
-									{/await}
-								{/snippet}
-							</Tooltip>
-						</div>
-					</div>
-				</div>
+				<SectionShell
+					{sections}
+					presentation={presentationFor(layout.deviceClass)}
+					{between}
+					bind:active={activeSection}
+					label={m.pal_sections()}
+				/>
 			</div>
 		</div>
 		<div class="w-1/3 overflow-auto p-2">
@@ -701,14 +710,6 @@
 				<div id="pal-stats">
 					<SectionHeader text={m.stats()} />
 					<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-				</div>
-				<div id="pal-talents">
-					{@render talentsHeader()}
-					<Talents bind:pal={appState.selectedPal} />
-				</div>
-				<div id="pal-souls">
-					{@render soulsHeader()}
-					<Souls bind:pal={appState.selectedPal} />
 				</div>
 			</div>
 			<div class="flex flex-col space-y-2 2xl:hidden">
@@ -725,22 +726,6 @@
 						{/snippet}
 						{#snippet panel()}
 							<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item value="talents" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							{@render talentsHeader()}
-						{/snippet}
-						{#snippet panel()}
-							<Talents bind:pal={appState.selectedPal!} />
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item value="souls" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							{@render soulsHeader()}
-						{/snippet}
-						{#snippet panel()}
-							<Souls bind:pal={appState.selectedPal!} />
 						{/snippet}
 					</Accordion.Item>
 				</Accordion>

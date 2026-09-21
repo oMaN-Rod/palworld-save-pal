@@ -10,16 +10,17 @@
 		actions,
 		title,
 		subtitle,
-		id
+		id,
+		class: className
 	}: {
 		actions: ActionDescriptor[];
 		title: string;
 		subtitle?: string;
 		id?: string;
+		class?: string;
 	} = $props();
 
-	// Sheet state lives here rather than in a child that unmounts on the device
-	// branch, so rotating a tablet across 768px does not silently close it.
+	// Owned here so crossing the breakpoint doesn't unmount it with a branch child.
 	let sheetOpen = $state(false);
 
 	$effect(() => {
@@ -46,5 +47,5 @@
 		onClose={() => (sheetOpen = false)}
 	/>
 {:else}
-	<ActionRail {actions} {id} />
+	<ActionRail {actions} {id} class={className} />
 {/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
+	import { ActionGroup } from '$components/ui/actions';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import {
 		EntryState,
@@ -23,7 +24,8 @@
 	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import type { ValueChangeDetails as AccordionValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
-	import { c, p } from '$lib/utils/commonTranslations';
+	import { c } from '$lib/utils/commonTranslations';
+	import { buildPlayerActions } from './playerActions';
 
 	const appState = getAppState();
 	const toast = getToastState();
@@ -57,9 +59,8 @@
 	let gliderGear: ItemContainerSlot = $state(defaultItemContainerSlot);
 	let sphereModule: ItemContainerSlot = $state(defaultItemContainerSlot);
 	let accessoryGear: ItemContainerSlot[] = $state([]);
-	let group = $state('inventory');
+	let group: 'inventory' | 'key_items' = $state('inventory');
 	let sideBarExpanded: string[] = $state(['stats']);
-	let sideBarWrapper: HTMLDivElement | null = $state(null);
 
 	let health = $state(500);
 
@@ -582,87 +583,44 @@
 			appState.selectedPlayer.state = EntryState.MODIFIED;
 		}
 	}
+
+	const playerActions = $derived(
+		buildPlayerActions({
+			group,
+			sortCommonContainer,
+			fillCommonContainer,
+			setCommonContainerCount,
+			clearCommonContainer,
+			setEssentialList,
+			clearEssentialContainer,
+			clearWeaponLoadOutContainer,
+			clearEquipmentArmorContainer,
+			clearFoodEquipContainer,
+			clearAll
+		})
+	);
 </script>
 
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
-			<nav
+			<ActionGroup
 				id="quick-actions"
-				class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center rounded-sm"
+				actions={playerActions}
+				title={m.quick_actions()}
+				class="mr-2"
+			/>
+			<div
+				class="@container grid w-full grid-cols-[auto_1fr] gap-4 pr-4 xl:grid-cols-[auto_1fr_24rem]"
 			>
-				{#if group === 'inventory'}
-					<Tooltip label={m.sort_inventory()}>
-						<Button variant="ghost" size="icon" onclick={sortCommonContainer}>
-							<Icon icon="ph:sort-ascending" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.fill_entity({ entity: m.inventory() })}>
-						<Button variant="ghost" size="icon" onclick={fillCommonContainer}>
-							<Icon icon="tabler:paint" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.set_inventory_count()}>
-						<Button variant="ghost" size="icon" onclick={setCommonContainerCount}>
-							<Icon icon="tabler:hash" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.clear_entity({ entity: m.inventory() })}>
-						<Button variant="ghost" size="icon" onclick={clearCommonContainer}>
-							<Icon icon="tabler:arrows-move-horizontal" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-				{/if}
-				{#if group === 'key_items'}
-					<Tooltip label={m.add_all_pal_gear(p.pal)}>
-						<Button variant="ghost" size="icon" onclick={() => setEssentialList('gear')}>
-							<Icon icon="ph:paw-print" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.add_all_implants()}>
-						<Button variant="ghost" size="icon" onclick={() => setEssentialList('implants')}>
-							<Icon icon="tabler:activity" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.add_other_key_items()}>
-						<Button variant="ghost" size="icon" onclick={() => setEssentialList('misc')}>
-							<Icon icon="tabler:key" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.clear_entity({ entity: m.key_items() })}>
-						<Button variant="ghost" size="icon" onclick={clearEssentialContainer}>
-							<Icon icon="tabler:arrows-move-horizontal" class="h-6 w-6" />
-						</Button>
-					</Tooltip>
-				{/if}
-				<Tooltip label={m.clear_entity({ entity: m.weapon({ count: 2 }) })}>
-					<Button variant="ghost" size="icon" onclick={clearWeaponLoadOutContainer}>
-						<Icon icon="tabler:swords" class="h-6 w-6" />
-					</Button>
-				</Tooltip>
-				<Tooltip label={m.clear_entity({ entity: m.armor() })}>
-					<Button variant="ghost" size="icon" onclick={clearEquipmentArmorContainer}>
-						<Icon icon="tabler:shield" class="h-6 w-6" />
-					</Button>
-				</Tooltip>
-				<Tooltip label={m.clear_entity({ entity: m.food() })}>
-					<Button variant="ghost" size="icon" onclick={clearFoodEquipContainer}>
-						<Icon icon="tabler:pizza" class="h-6 w-6" />
-					</Button>
-				</Tooltip>
-				<Tooltip label={m.clear_all()}>
-					<Button variant="ghost" size="icon" onclick={clearAll}>
-						<Icon icon="tabler:bomb" class="h-6 w-6" />
-					</Button>
-				</Tooltip>
-			</nav>
-			<div class="grid w-full grid-cols-[auto_1fr] gap-4 pr-4 lg:pr-80 xl:pr-96 2xl:pr-105">
 				<div class="flex flex-col space-y-2">
 					<Tabs
 						listBorder="preset-outlined-surface-200-800"
 						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
 						value={group}
-						onValueChange={(e: ValueChangeDetails) => (group = e.value)}
+						onValueChange={(e: ValueChangeDetails) => {
+							if (e.value === 'inventory' || e.value === 'key_items') group = e.value;
+						}}
 					>
 						{#snippet list()}
 							<Tabs.Control
@@ -841,184 +799,189 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div
-				class="fixed right-2 max-h-[calc(100vh-var(--titlebar-h))] w-72 flex-none overflow-y-auto lg:w-80 xl:w-96"
-				bind:this={sideBarWrapper}
-			>
-				<div
-					id="player-level"
-					class="border-l-surface-600 bg-surface-800 mr-2 mb-2 flex rounded-none border-l-2 p-4"
-				>
-					<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-						<div class="flex items-center">
-							<Tooltip position="bottom">
-								<Button
-									variant="ghost"
-									size="icon"
-									class="mr-4"
-									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-									onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
-								>
-									<Icon icon="tabler:minus" class="text-primary-500" size={16} />
-								</Button>
-								{#snippet popup()}
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+				<div class="max-h-[calc(100vh-var(--titlebar-h))] min-w-0 overflow-y-auto">
+					<div
+						id="player-level"
+						class="border-l-surface-600 bg-surface-800 mr-2 mb-2 flex rounded-none border-l-2 p-4"
+					>
+						<div class="mr-4 flex flex-col items-center justify-center rounded-none">
+							<div class="flex items-center">
+								<Tooltip position="bottom">
+									<Button
+										variant="ghost"
+										size="icon"
+										class="mr-4"
+										oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+										onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
+									>
+										<Icon icon="tabler:minus" class="text-primary-500" size={16} />
+									</Button>
+									{#snippet popup()}
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.leftClickIcon}
+													alt="Left Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">-5</span>
 										</div>
-										<div class="h-6 w-6">
-											<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.rightClickIcon}
+													alt="Right Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">-10</span>
 										</div>
-										<span class="text-xs font-bold">-5</span>
-									</div>
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.middleClickIcon}
+													alt="Middle Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">Level 1</span>
 										</div>
-										<div class="h-6 w-6">
-											<img
-												src={staticIcons.rightClickIcon}
-												alt="Right Click"
-												class="h-full w-full"
-											/>
-										</div>
-										<span class="text-xs font-bold">-10</span>
-									</div>
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-										</div>
-										<div class="h-6 w-6">
-											<img
-												src={staticIcons.middleClickIcon}
-												alt="Middle Click"
-												class="h-full w-full"
-											/>
-										</div>
-										<span class="text-xs font-bold">Level 1</span>
-									</div>
-								{/snippet}
-							</Tooltip>
+									{/snippet}
+								</Tooltip>
 
-							<div class="flex flex-col items-center justify-center">
-								<span class="text-surface-400 text-sm font-bold">{m.level().toUpperCase()}</span>
-								<span class="text-xl font-bold xl:text-2xl">
-									<NumberFlow value={appState.selectedPlayer.level} />
-								</span>
-							</div>
+								<div class="flex flex-col items-center justify-center">
+									<span class="text-surface-400 text-sm font-bold">{m.level().toUpperCase()}</span>
+									<span class="text-xl font-bold xl:text-2xl">
+										<NumberFlow value={appState.selectedPlayer.level} />
+									</span>
+								</div>
 
-							<Tooltip position="bottom">
-								<Button
-									variant="ghost"
-									size="icon"
-									class="ml-4"
-									oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-									onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
-								>
-									<Icon icon="tabler:plus" class="text-primary-500" size={16} />
-								</Button>
-								{#snippet popup()}
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+								<Tooltip position="bottom">
+									<Button
+										variant="ghost"
+										size="icon"
+										class="ml-4"
+										oncontextmenu={(event: MouseEvent) => event.preventDefault()}
+										onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
+									>
+										<Icon icon="tabler:plus" class="text-primary-500" size={16} />
+									</Button>
+									{#snippet popup()}
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.leftClickIcon}
+													alt="Left Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">+5</span>
 										</div>
-										<div class="h-6 w-6">
-											<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.rightClickIcon}
+													alt="Right Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">+10</span>
 										</div>
-										<span class="text-xs font-bold">+5</span>
-									</div>
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
+										<div class="flex items-center space-x-2">
+											<div class="h-6 w-6">
+												<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
+											</div>
+											<div class="h-6 w-6">
+												<img
+													src={staticIcons.middleClickIcon}
+													alt="Middle Click"
+													class="h-full w-full"
+												/>
+											</div>
+											<span class="text-xs font-bold">Level {max_level}</span>
 										</div>
-										<div class="h-6 w-6">
-											<img
-												src={staticIcons.rightClickIcon}
-												alt="Right Click"
-												class="h-full w-full"
-											/>
-										</div>
-										<span class="text-xs font-bold">+10</span>
-									</div>
-									<div class="flex items-center space-x-2">
-										<div class="h-6 w-6">
-											<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-										</div>
-										<div class="h-6 w-6">
-											<img
-												src={staticIcons.middleClickIcon}
-												alt="Middle Click"
-												class="h-full w-full"
-											/>
-										</div>
-										<span class="text-xs font-bold">Level {max_level}</span>
-									</div>
-								{/snippet}
-							</Tooltip>
-						</div>
-					</div>
-
-					<div class="grow">
-						<div class="flex flex-col">
-							<div class="flex space-x-2">
-								<button
-									id="player-nickname"
-									class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
-									onclick={handleUpdateNickname}
-								>
-									<Icon icon="tabler:edit" class="h-4 w-4" />
-								</button>
-								<Tooltip
-									label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
-								>
-									<span class="truncate">{appState.selectedPlayer.nickname}</span>
+									{/snippet}
 								</Tooltip>
 							</div>
-							<div class="flex flex-col space-y-2">
-								<div class="flex">
-									<span class="text-on-surface grow">NEXT</span>
-									<span class="text-on-surface">{levelProgressToNext}</span>
+						</div>
+
+						<div class="grow">
+							<div class="flex flex-col">
+								<div class="flex space-x-2">
+									<button
+										id="player-nickname"
+										class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
+										onclick={handleUpdateNickname}
+									>
+										<Icon icon="tabler:edit" class="h-4 w-4" />
+									</button>
+									<Tooltip
+										label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
+									>
+										<span class="truncate">{appState.selectedPlayer.nickname}</span>
+									</Tooltip>
 								</div>
-								<Progress
-									value={levelProgressValue}
-									max={levelProgressMax}
-									height="h-2"
-									width="w-full"
-									rounded="rounded-none"
-									showLabel={false}
-								/>
+								<div class="flex flex-col space-y-2">
+									<div class="flex">
+										<span class="text-on-surface grow">NEXT</span>
+										<span class="text-on-surface">{levelProgressToNext}</span>
+									</div>
+									<Progress
+										value={levelProgressValue}
+										max={levelProgressMax}
+										height="h-2"
+										width="w-full"
+										rounded="rounded-none"
+										showLabel={false}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
+					<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
+					<Accordion
+						value={sideBarExpanded}
+						onValueChange={(e: AccordionValueChangeDetails) => (sideBarExpanded = e.value)}
+						collapsible
+					>
+						<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
+							{#snippet control()}
+								{m.stats()}
+							{/snippet}
+							{#snippet panel()}
+								<PlayerStats player={appState.selectedPlayer!} />
+							{/snippet}
+						</Accordion.Item>
+						<hr class="hr" />
+						<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
+							{#snippet control()}
+								<div id="player-presets-control" class="w-full">
+									{c.preset}
+								</div>
+							{/snippet}
+							{#snippet panel()}
+								<PlayerPresets bind:player={appState.selectedPlayer} />
+							{/snippet}
+						</Accordion.Item>
+					</Accordion>
 				</div>
-				<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
-				<Accordion
-					value={sideBarExpanded}
-					onValueChange={(e: AccordionValueChangeDetails) => (sideBarExpanded = e.value)}
-					collapsible
-				>
-					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							{m.stats()}
-						{/snippet}
-						{#snippet panel()}
-							<PlayerStats player={appState.selectedPlayer!} />
-						{/snippet}
-					</Accordion.Item>
-					<hr class="hr" />
-					<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							<div id="player-presets-control" class="w-full">
-								{c.preset}
-							</div>
-						{/snippet}
-						{#snippet panel()}
-							<PlayerPresets containerRef={sideBarWrapper} bind:player={appState.selectedPlayer} />
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
 			</div>
 		</div>
 	</div>

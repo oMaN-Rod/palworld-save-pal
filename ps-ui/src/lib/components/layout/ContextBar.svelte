@@ -23,6 +23,7 @@
 >
 	{#each shown as item (item.id)}
 		<a
+			id={item.id}
 			href={item.href}
 			aria-current={item.id === activeId ? 'page' : undefined}
 			class="flex shrink-0 items-center rounded-full px-3.5 py-2 text-sm whitespace-nowrap transition-colors"

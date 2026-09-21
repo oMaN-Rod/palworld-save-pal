@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { DebugButton } from '$components/layout';
+	import { ContextBar, DebugButton } from '$components/layout';
 	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
+	import { navDrawer } from '$states/navDrawer.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
-	import { MessageType, type Player } from '$types';
-	import { KeyboardShortcut, Nuke, Tooltip } from '$components/ui';
+	import { MessageType } from '$types';
+	import { Nuke, Tooltip } from '$components/ui';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { send } from '$utils/websocketUtils';
+	import { layout } from '$utils/layout.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import { EDIT_TABS, shortcutMap, toContextItems, type EditTabContext } from './editTabs';
 
 	const { children } = $props();
 
@@ -17,27 +21,18 @@
 	const modal = getModalState();
 	const palEditor = getPalEditorState();
 
-	const keyboardShortcuts: Record<string, string> = {
-		KeyL: 'player',
-		KeyT: 'technologies',
-		KeyB: 'palbox',
-		KeyF: 'effigies',
-		KeyD: 'dps',
-		KeyG: 'guild',
-		KeyM: 'missions',
-		KeyS: 'gps'
-	};
+	const shortcuts = shortcutMap();
+	const visibleTabs = EDIT_TABS.filter((tab) => !tab.shortcutOnly);
 
-	function isTabAvailable(tab: string): boolean {
-		switch (tab) {
-			case 'dps':
-				return !!appState.selectedPlayer?.dps;
-			case 'gps':
-				return !!appState.gps;
-			default:
-				return appState.selectedPlayer !== undefined;
-		}
-	}
+	const tabContext = $derived<EditTabContext>({
+		hasSave: !!appState.saveFile,
+		hasPlayer: appState.selectedPlayer !== undefined,
+		hasDps: !!appState.selectedPlayer?.dps,
+		hasGps: appState.hasGpsAvailable
+	});
+
+	const contextItems = $derived(toContextItems(visibleTabs, tabContext));
+	const activeTabId = $derived(EDIT_TABS.find((tab) => tab.href === page.url.pathname)?.id);
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (
@@ -61,10 +56,11 @@
 			return;
 		}
 
-		const shortcutTab = keyboardShortcuts[event.code];
-		if (shortcutTab && isTabAvailable(shortcutTab)) {
+		const tabId = shortcuts[event.code];
+		const tab = tabId ? EDIT_TABS.find((t) => t.id === tabId) : undefined;
+		if (tab && tab.available(tabContext)) {
 			event.preventDefault();
-			goto(`/edit/${shortcutTab}`);
+			goto(tab.href);
 		}
 	}
 
@@ -114,30 +110,18 @@
 		{:else}
 			<div></div>
 		{/if}
-		<div id="player-tabs" class="flex gap-4">
-			{#if appState.saveFile && appState.selectedPlayer}
-				<KeyboardShortcut id="loadout-tab" text={m.loadout()} key="L" href="/edit/player" />
-				<KeyboardShortcut
-					id="technology-tab"
-					text={m.technology({ count: 2 })}
-					key="T"
-					href="/edit/technologies"
-				/>
-				<KeyboardShortcut id="palbox-tab" text={m.palbox()} key="B" href="/edit/palbox" />
-				<KeyboardShortcut
-					id="effigies-tab"
-					text={m.edit_effigies()}
-					key="F"
-					href="/edit/effigies"
-				/>
+		<div class="flex min-w-0 items-center gap-2">
+			{#if layout.phone}
+				<button
+					type="button"
+					class="btn shrink-0 p-2"
+					aria-label={m.menu()}
+					onclick={() => (navDrawer.open = true)}
+				>
+					<Icon icon="tabler:menu-2" size={20} />
+				</button>
 			{/if}
-			{#if appState.selectedPlayer?.dps}
-				<KeyboardShortcut id="dps-tab" text={m.dps()} key="D" href="/edit/dps" />
-			{/if}
-			{#if appState.selectedPlayer}
-				<KeyboardShortcut id="guild-tab" text={m.guild({ count: 1 })} key="G" href="/edit/guild" />
-				<KeyboardShortcut id="missions-tab" text={m.missions()} key="M" href="/edit/missions" />
-			{/if}
+			<ContextBar id="player-tabs" items={contextItems} activeId={activeTabId ?? ''} />
 		</div>
 		<div></div>
 	</div>

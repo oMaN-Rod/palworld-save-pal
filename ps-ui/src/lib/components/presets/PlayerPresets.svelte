@@ -10,8 +10,7 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$utils/commonTranslations';
 
-	let { containerRef, player = $bindable() } = $props<{
-		containerRef: HTMLDivElement | null;
+	let { player = $bindable() } = $props<{
 		player: Player | undefined;
 	}>();
 
@@ -24,7 +23,6 @@
 	let selectedPreset: ExtendedPresetProfile = $state({ id: '', name: '', type: 'inventory' });
 	let selectedPresets: ExtendedPresetProfile[] = $state([]);
 	let selectAll: boolean = $state(false);
-	let listWrapperStyle = $state('');
 
 	let filteredPresets: ExtendedPresetProfile[] = $derived.by(() => {
 		return sortPresets(
@@ -34,15 +32,6 @@
 			'inventory'
 		);
 	});
-
-	function calculateHeight() {
-		if (containerRef) {
-			const rect = containerRef.getBoundingClientRect();
-			const windowHeight = window.innerHeight;
-			const listHeight = windowHeight - rect.top - 320;
-			listWrapperStyle = `height: ${listHeight}px;`;
-		}
-	}
 
 	async function handleApplyPreset() {
 		if (!selectedPresets.length || !player) return;
@@ -192,17 +181,6 @@
 			toast.add(m.preset_rename_failed(), m.error(), 'error');
 		}
 	}
-
-	$effect(() => {
-		calculateHeight();
-	});
-
-	$effect(() => {
-		window.addEventListener('resize', calculateHeight);
-		return () => {
-			window.removeEventListener('resize', calculateHeight);
-		};
-	});
 </script>
 
 <div id="player-presets" class="flex max-w-96 min-w-64 flex-col space-y-2">
@@ -238,77 +216,75 @@
 			</TooltipButton>
 		{/if}
 	</div>
-	<div class="overflow-y-auto" style={listWrapperStyle}>
-		<List
-			baseClass="bg-surface-800"
-			listClass="overflow-y-auto"
-			items={filteredPresets}
-			bind:selectedItems={selectedPresets}
-			bind:selectedItem={selectedPreset}
-			bind:selectAll
-			onlyHighlightChecked
-		>
-			{#snippet listHeader()}
-				<div class="flex justify-start">
-					<span class="font-bold">{c.presets}</span>
-				</div>
-			{/snippet}
-			{#snippet listItem(preset)}
-				<span class="grow">{preset.name}</span>
-			{/snippet}
-			{#snippet listItemActions(preset)}
-				<Button variant="ghost" size="icon" onclick={() => handleEditPresetName(preset)}>
-					<Icon icon="tabler:edit" class="h-4 w-4" />
-				</Button>
-			{/snippet}
-			{#snippet listItemPopup(preset)}
-				{@const commonContainerString =
-					preset.common_container && preset.common_container.length > 0
-						? `${preset.common_container.length} ${c.items}`
-						: '—'}
-				{@const essentialContainerString =
-					preset.essential_container && preset.essential_container.length > 0
-						? `${preset.essential_container.length} ${c.items}`
-						: '—'}
-				{@const weaponLoadOutContainerString =
-					preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
-						? `${preset.weapon_load_out_container.length} ${c.items}`
-						: '—'}
-				{@const playerEquipmentArmorContainerString =
-					preset.player_equipment_armor_container &&
-					preset.player_equipment_armor_container.length > 0
-						? `${preset.player_equipment_armor_container.length} ${c.items}`
-						: '—'}
-				{@const foodEquipContainerString =
-					preset.food_equip_container && preset.food_equip_container.length > 0
-						? `${preset.food_equip_container.length} ${c.items}`
-						: '—'}
-				<div class="flex min-w-64 flex-col">
-					<span class="text-lg font-bold">{preset.name}</span>
-					<div class="flex flex-col space-y-2">
-						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.common() })}</span>
-							<span>{commonContainerString}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.essential() })}</span>
-							<span>{essentialContainerString}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.weapon({ count: 1 }) })}</span>
-							<span>{weaponLoadOutContainerString}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.armor() })}</span>
-							<span>{playerEquipmentArmorContainerString}</span>
-						</div>
-						<div class="flex justify-between">
-							<span class="mr-2">{m.container_entity({ entity: m.food() })}</span>
-							<span>{foodEquipContainerString}</span>
-						</div>
+	<List
+		baseClass="bg-surface-800"
+		listClass="overflow-y-auto"
+		items={filteredPresets}
+		bind:selectedItems={selectedPresets}
+		bind:selectedItem={selectedPreset}
+		bind:selectAll
+		onlyHighlightChecked
+	>
+		{#snippet listHeader()}
+			<div class="flex justify-start">
+				<span class="font-bold">{c.presets}</span>
+			</div>
+		{/snippet}
+		{#snippet listItem(preset)}
+			<span class="grow">{preset.name}</span>
+		{/snippet}
+		{#snippet listItemActions(preset)}
+			<Button variant="ghost" size="icon" onclick={() => handleEditPresetName(preset)}>
+				<Icon icon="tabler:edit" class="h-4 w-4" />
+			</Button>
+		{/snippet}
+		{#snippet listItemPopup(preset)}
+			{@const commonContainerString =
+				preset.common_container && preset.common_container.length > 0
+					? `${preset.common_container.length} ${c.items}`
+					: '—'}
+			{@const essentialContainerString =
+				preset.essential_container && preset.essential_container.length > 0
+					? `${preset.essential_container.length} ${c.items}`
+					: '—'}
+			{@const weaponLoadOutContainerString =
+				preset.weapon_load_out_container && preset.weapon_load_out_container.length > 0
+					? `${preset.weapon_load_out_container.length} ${c.items}`
+					: '—'}
+			{@const playerEquipmentArmorContainerString =
+				preset.player_equipment_armor_container &&
+				preset.player_equipment_armor_container.length > 0
+					? `${preset.player_equipment_armor_container.length} ${c.items}`
+					: '—'}
+			{@const foodEquipContainerString =
+				preset.food_equip_container && preset.food_equip_container.length > 0
+					? `${preset.food_equip_container.length} ${c.items}`
+					: '—'}
+			<div class="flex min-w-64 flex-col">
+				<span class="text-lg font-bold">{preset.name}</span>
+				<div class="flex flex-col space-y-2">
+					<div class="flex justify-between">
+						<span class="mr-2">{m.container_entity({ entity: m.common() })}</span>
+						<span>{commonContainerString}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="mr-2">{m.container_entity({ entity: m.essential() })}</span>
+						<span>{essentialContainerString}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="mr-2">{m.container_entity({ entity: m.weapon({ count: 1 }) })}</span>
+						<span>{weaponLoadOutContainerString}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="mr-2">{m.container_entity({ entity: m.armor() })}</span>
+						<span>{playerEquipmentArmorContainerString}</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="mr-2">{m.container_entity({ entity: m.food() })}</span>
+						<span>{foodEquipContainerString}</span>
 					</div>
 				</div>
-			{/snippet}
-		</List>
-	</div>
+			</div>
+		{/snippet}
+	</List>
 </div>
