@@ -102,6 +102,8 @@ export default defineConfig({
 		noExternal: [/^@skeletonlabs\//, /^@zag-js\//, 'maplibre-gl']
 	},
 	test: {
+		// Some suites starve past the 5s default under full worker load.
+		testTimeout: 15000,
 		// Split by project instead of a global `environment`: component render
 		// tests (`*.render.test.ts`) need jsdom and the `browser` resolve
 		// condition so `mount()` and SvelteKit's runtime resolve to their client

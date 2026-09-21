@@ -1,9 +1,17 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
+
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Button, Input, Tooltip, TooltipButton } from '$components/ui';
+	import {
+		getAppState,
+		getModalState,
+		getPalEditorState,
+		getToastState,
+		getUpsState
+	} from '$states';
+	import { Card, Input, Tooltip } from '$components/ui';
+	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		NumberInputModal,
 		PalSelectModal,
@@ -13,7 +21,6 @@
 	} from '$components/modals';
 	import { type Pal, type PalData, MessageType, type CloneToUpsModalProps } from '$types';
 	import {
-		debounce,
 		deepCopy,
 		handleMaxOutPal,
 		formatNickname,
@@ -21,25 +28,32 @@
 		palMatchesFilter
 	} from '$utils';
 	import { cn } from '$theme';
-	import { staticIcons } from '$types/icons';
-	import { Card } from '$components/ui';
-	import { PalCard, PalBadge, PalContainerStats, PalFilterButtons, PalGrid } from '$components/pal';
+	import { PalCard, PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
+	import { PalContainerView } from '$components/pal/container';
+	import type { PalContainerSelection } from '$states/palContainer.svelte';
 	import { send } from '$lib/utils/websocketUtils';
-	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
+	import { buildPalboxActions } from './palboxActions';
+
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
-	const VISIBLE_PAGE_BUBBLES = 16;
 
 	type SortBy = 'name' | 'level' | 'paldeck-index' | 'slot-index';
 	type SortOrder = 'asc' | 'desc';
+
+	type PalWithData = {
+		id: string;
+		pal: Pal;
+		palData?: PalData;
+	};
 
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
 	const upsState = getUpsState();
+	const palEditor = getPalEditorState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -47,18 +61,12 @@
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
-	let currentPage = $state(1);
-	let filteredPals: PalWithData[] = $state([]);
-	let selectedPals: string[] = $state([]);
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
-	let filterExpand = $state(['']);
 
-	type PalWithData = {
-		id: string;
-		pal: Pal;
-		palData?: PalData;
-	};
+	// SvelteSet: the view re-reads the selection on mutation, not replacement.
+	const selectedIds = new SvelteSet<string>();
+	const selectedIdList = $derived([...selectedIds]);
 
 	const otomoContainer: Record<string, Pal> = $derived.by(() => {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
@@ -82,88 +90,98 @@
 
 			return Object.fromEntries(allSlots);
 		}
+		return {};
 	});
 
-	const totalPages = $derived(
-		Math.ceil(
-			searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index'
-				? filteredPals.length
-				: TOTAL_SLOTS
-		) / PALS_PER_PAGE
-	);
-	const visiblePageStart = $derived(
-		Math.max(
-			1,
-			Math.min(
-				currentPage - Math.floor(VISIBLE_PAGE_BUBBLES / 2),
-				totalPages - VISIBLE_PAGE_BUBBLES + 1
-			)
-		)
-	);
-	const visiblePageEnd = $derived(
-		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
-	);
-	const visiblePages = $derived(
-		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
-	);
+	const boxPals = $derived.by((): PalWithData[] => {
+		const player = appState.selectedPlayer;
+		if (!player || !player.pals) return [];
+		const palBoxId = player.pal_box_id;
+		return Object.entries(player.pals as Record<string, Pal>)
+			.filter(([_, pal]) => pal.storage_id === palBoxId)
+			.map(([id, pal]) => ({ id, pal, palData: palsData.getByKey(pal.character_key) }));
+	});
 
-	const currentPageItems = $derived.by(() => {
-		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
-		const endIndex = startIndex + PALS_PER_PAGE;
+	const knownPals = $derived(boxPals.filter(({ palData }) => Boolean(palData)));
 
-		if (searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index') {
-			return filteredPals.slice(startIndex, endIndex);
+	const matchingPals = $derived.by(() => {
+		const query = searchQuery.toLowerCase();
+		return knownPals.filter(({ pal, palData }) => {
+			const matchesSearch =
+				query === '' ||
+				Boolean(pal.name?.toLowerCase().includes(query)) ||
+				Boolean(pal.nickname?.toLowerCase().includes(query)) ||
+				Boolean(pal.character_id?.toLowerCase().includes(query));
+			return matchesSearch && palMatchesFilter(pal, palData as PalData, selectedFilter);
+		});
+	});
+
+	const sortedPals = $derived.by(() => {
+		const direction = sortOrder === 'asc' ? 1 : -1;
+		const list = [...matchingPals];
+		switch (sortBy) {
+			case 'name':
+				return list.sort((a, b) => direction * (a.pal.name ?? '').localeCompare(b.pal.name ?? ''));
+			case 'level':
+				return list.sort((a, b) => direction * (a.pal.level - b.pal.level));
+			case 'paldeck-index':
+				return list.sort((a, b) => {
+					const indexA = a.palData?.pal_deck_index ?? Infinity;
+					const indexB = b.palData?.pal_deck_index ?? Infinity;
+					if (indexA === indexB) return 0;
+					return direction * (indexA - indexB);
+				});
+			default:
+				return list.sort((a, b) => direction * (a.pal.storage_slot - b.pal.storage_slot));
 		}
+	});
 
-		// Slot lookup map built once — the previous per-slot find() scanned all
-		// (up to 960) proxied pals for each of the 960 slots. First pal at a
-		// given slot wins, matching the old find()-first behavior.
+	// Once the list is narrowed or reordered, slot numbers mean nothing.
+	const showsEmptySlots = $derived(
+		searchQuery === '' && selectedFilter === 'All' && sortBy === 'slot-index'
+	);
+
+	const displayPals = $derived.by((): PalWithData[] => {
+		if (!showsEmptySlots) return sortedPals;
+
 		const bySlot = new Map<number, PalWithData>();
-		for (const pal of filteredPals) {
-			if (!bySlot.has(pal.pal.storage_slot)) {
-				bySlot.set(pal.pal.storage_slot, pal);
+		for (const entry of sortedPals) {
+			if (!bySlot.has(entry.pal.storage_slot)) {
+				bySlot.set(entry.pal.storage_slot, entry);
 			}
 		}
 
-		const paddedPals = Array(TOTAL_SLOTS)
-			.fill(undefined)
-			.map((_, index) => {
-				const pal = bySlot.get(index);
-				if (pal) {
-					return pal;
-				} else {
-					return {
-						id: `empty-${index}`,
-						pal: {
-							character_id: 'None',
-							character_key: 'None',
-							storage_slot: index,
-							instance_id: `empty-${index}`,
-							storage_id: appState.selectedPlayer?.pal_box_id
-						} as Pal
-					};
-				}
-			});
-
-		return paddedPals.slice(startIndex, endIndex);
-	});
-
-	const sortButtonClass = (currentSortBy: SortBy) =>
-		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
-
-	const pals = $derived.by(() => {
-		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		const playerPals = Object.entries(appState.selectedPlayer.pals as Record<string, Pal>);
-		const palBoxId = appState.selectedPlayer.pal_box_id;
-		return playerPals
-			.filter(([_, pal]) => pal.storage_id === palBoxId)
-			.map(([id, pal]) => {
-				const palData = palsData.getByKey(pal.character_key);
-				return { id, pal, palData } as PalWithData;
-			});
+		return Array.from({ length: TOTAL_SLOTS }, (_, index) => bySlot.get(index) ?? emptySlot(index));
 	});
 
 	const elementTypes = $derived(Object.keys(elementsData.elements));
+
+	const selection: PalContainerSelection<string> = {
+		get ids() {
+			return selectedIds;
+		},
+		onToggle: (id: string) => toggleSelected(id)
+	};
+
+	const palboxActions = $derived(
+		buildPalboxActions({
+			selectionCount: selectedIds.size,
+			addPal: () => handleAddPal('palbox'),
+			addAllPals: addAllPalsToBox,
+			selectAll,
+			healAll: handleHealAll,
+			cloneSelected: cloneSelectedPal,
+			applyPreset: handleSelectPreset,
+			cloneSelectedToUps: handleBulkCloneToUps,
+			healSelected: healSelectedPals,
+			maxSelected: maxSelectedPals,
+			deleteSelected: deleteSelectedPals,
+			clearSelection: () => selectedIds.clear()
+		})
+	);
+
+	const sortButtonClass = (currentSortBy: SortBy) =>
+		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
 
 	const LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
@@ -195,34 +213,66 @@
 		}
 	});
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.target instanceof HTMLInputElement) {
+	function emptySlot(index: number): PalWithData {
+		return {
+			id: `empty-${index}`,
+			pal: {
+				character_id: 'None',
+				character_key: 'None',
+				storage_slot: index,
+				instance_id: `empty-${index}`,
+				storage_id: appState.selectedPlayer?.pal_box_id
+			} as Pal
+		};
+	}
+
+	function nicknameOf(entry: PalWithData): string {
+		return entry.pal.nickname || entry.pal.name || entry.pal.character_id;
+	}
+
+	function isRealPal(entry: PalWithData): boolean {
+		return entry.pal.character_id !== 'None';
+	}
+
+	// An empty slot has no record, so no bulk operation could resolve its id.
+	function toggleSelected(id: string): void {
+		if (!appState.selectedPlayer?.pals?.[id]) return;
+		if (selectedIds.has(id)) {
+			selectedIds.delete(id);
+		} else {
+			selectedIds.add(id);
+		}
+	}
+
+	function handlePalSelect(pal: Pal, event: MouseEvent) {
+		if (!pal || pal.character_id === 'None') return;
+		if (event.ctrlKey || event.metaKey) {
+			toggleSelected(pal.instance_id);
+		}
+	}
+
+	function selectAll(includeParty: boolean): void {
+		const boxIds = displayPals.filter(isRealPal).map((entry) => entry.id);
+		const partyIds = includeParty
+			? Object.values(otomoContainer)
+					.filter((pal) => pal.character_id !== 'None')
+					.map((pal) => pal.instance_id)
+			: [];
+		const everything = [...boxIds, ...partyIds];
+		const wasComplete = selectedIds.size === everything.length;
+
+		selectedIds.clear();
+		if (wasComplete) return;
+		for (const id of everything) selectedIds.add(id);
+	}
+
+	function handleOpenPal(entry: PalWithData): void {
+		if (!isRealPal(entry)) {
+			handleAddPal('palbox', entry.pal.storage_slot);
 			return;
 		}
-		if (event.key === 'ArrowLeft' || event.key === 'q' || event.key === 'Q') {
-			decrementPage();
-		} else if (event.key === 'ArrowRight' || event.key === 'e' || event.key === 'E') {
-			incrementPage();
-		}
+		palEditor.open(entry.pal);
 	}
-
-	function decrementPage() {
-		if (currentPage > 1) {
-			currentPage--;
-		} else {
-			currentPage = totalPages;
-		}
-	}
-
-	function incrementPage() {
-		if (currentPage < totalPages) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-	}
-
-	const debouncedFilterPals = debounce(filterPals, 300);
 
 	function handleMoveToParty(pal: Pal) {
 		if (appState.selectedPlayer) {
@@ -244,22 +294,6 @@
 		}
 	}
 
-	async function filterPals() {
-		if (!pals) return;
-		filteredPals = pals.filter(({ pal, palData }) => {
-			if (!palData) {
-				return false;
-			}
-			const matchesSearch =
-				pal.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.character_id.toLowerCase().includes(searchQuery.toLowerCase());
-			return matchesSearch && palMatchesFilter(pal, palData, selectedFilter);
-		});
-
-		sortPals();
-	}
-
 	function toggleSort(newSortBy: SortBy) {
 		if (sortBy === newSortBy) {
 			if (sortOrder === 'desc') {
@@ -271,24 +305,6 @@
 		} else {
 			sortBy = newSortBy;
 			sortOrder = 'asc';
-		}
-		sortPals();
-	}
-
-	function sortPals() {
-		switch (sortBy) {
-			case 'name':
-				sortByName();
-				break;
-			case 'level':
-				sortByLevel();
-				break;
-			case 'paldeck-index':
-				sortByPaldeckIndex();
-				break;
-			default:
-				sortBySlotIndex();
-				break;
 		}
 	}
 
@@ -315,41 +331,6 @@
 			container_id: containerId,
 			storage_slot: index
 		});
-	}
-
-	function sortByName() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.name.localeCompare(b.pal.name)
-				: b.pal.name.localeCompare(a.pal.name)
-		);
-	}
-
-	function sortByLevel() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc' ? a.pal.level - b.pal.level : b.pal.level - a.pal.level
-		);
-	}
-
-	function sortBySlotIndex() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.storage_slot - b.pal.storage_slot
-				: b.pal.storage_slot - a.pal.storage_slot
-		);
-	}
-
-	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.getByKey(p.pal.character_key));
-		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
-
-		palsWithInfo.sort((a, b) => {
-			const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-			const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-			return sortOrder === 'asc' ? indexA - indexB : indexB - indexA;
-		});
-
-		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
 	}
 
 	async function clonePal(pal: Pal) {
@@ -383,7 +364,8 @@
 
 	async function cloneSelectedPal() {
 		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			const pal = appState.selectedPlayer.pals[selectedPals[0]];
+			const [first] = selectedIdList;
+			const pal = first ? appState.selectedPlayer.pals[first] : undefined;
 			if (!pal) return;
 			await clonePal(pal);
 		}
@@ -421,9 +403,10 @@
 	}
 
 	async function handleBulkCloneToUps() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		const palsToClone = selectedPals
+		const ids = [...selectedIds];
+		const palsToClone = ids
 			.map((id) => appState.selectedPlayer?.pals?.[id])
 			.filter(Boolean) as Pal[];
 
@@ -445,7 +428,7 @@
 
 		try {
 			await upsState.cloneToUps(
-				selectedPals,
+				ids,
 				'pal_box',
 				appState.selectedPlayer?.uid,
 				collectionId,
@@ -453,32 +436,21 @@
 				notes || undefined
 			);
 
-			selectedPals = [];
+			selectedIds.clear();
 		} catch (error) {
 			console.error('Bulk clone to UPS failed:', error);
 			toast.add(m.bulk_clone_to_ups_failed(), m.error(), 'error');
 		}
 	}
 
-	function handlePalSelect(pal: Pal, event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
-		if (event.ctrlKey || event.metaKey) {
-			if (selectedPals.includes(pal.instance_id)) {
-				selectedPals = selectedPals.filter((id) => id !== pal.instance_id);
-			} else {
-				selectedPals = [...selectedPals, pal.instance_id];
-			}
-		}
-	}
-
 	async function healSelectedPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		send(MessageType.HEAL_PALS, [...selectedPals]);
+		send(MessageType.HEAL_PALS, [...selectedIds]);
 
-		Object.values(appState.selectedPlayer.pals).forEach(async (pal) => {
-			if (selectedPals.includes(pal.instance_id)) {
+		Object.values(appState.selectedPlayer.pals).forEach((pal) => {
+			if (selectedIds.has(pal.instance_id)) {
 				pal.hp = pal.max_hp;
 				pal.sanity = 100;
 				const palData = palsData.getByKey(pal.character_key);
@@ -488,14 +460,14 @@
 			}
 		});
 
-		selectedPals = [];
+		selectedIds.clear();
 	}
 
 	async function maxSelectedPals() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		for (const palId of selectedPals) {
+		for (const palId of selectedIds) {
 			const pal = appState.selectedPlayer.pals[palId];
 			handleMaxOutPal(pal, appState.selectedPlayer);
 		}
@@ -507,13 +479,14 @@
 	}
 
 	async function deleteSelectedPals() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
+		const count = selectedIds.size;
 		const confirmed = await modal.showConfirmModal({
-			title: m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			title: m.delete_selected_entity({ entity: m.pal({ count }) }),
 			message: m.delete_count_entities_confirm({
-				count: selectedPals.length,
-				entity: m.pal({ count: selectedPals.length })
+				count,
+				entity: m.pal({ count })
 			}),
 			confirmText: m.delete(),
 			cancelText: m.cancel()
@@ -522,15 +495,15 @@
 		if (appState.selectedPlayer && appState.selectedPlayer.pals && confirmed) {
 			send(MessageType.DELETE_PALS, {
 				player_id: appState.selectedPlayer.uid,
-				pal_ids: [...selectedPals]
+				pal_ids: [...selectedIds]
 			});
 
 			appState.selectedPlayer.pals = Object.fromEntries(
-				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedPals.includes(id))
+				Object.entries(appState.selectedPlayer.pals).filter(([id]) => !selectedIds.has(id))
 			);
 		}
 
-		selectedPals = [];
+		selectedIds.clear();
 	}
 
 	async function handleDeletePal(pal: Pal) {
@@ -551,66 +524,6 @@
 		}
 	}
 
-	function handleSelectAll(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
-		if (event.ctrlKey || event.metaKey) {
-			const otomoPalIds = Object.values(otomoContainer)
-				.filter((pal) => pal.character_id !== 'None')
-				.map((pal) => pal.instance_id);
-
-			if (selectedPals.length === filteredPals.length + otomoPalIds.length) {
-				selectedPals = [];
-			} else {
-				selectedPals = [...filteredPals.map((p) => p.id), ...otomoPalIds];
-			}
-		} else {
-			if (selectedPals.length === filteredPals.length) {
-				selectedPals = [];
-			} else {
-				selectedPals = filteredPals.map((p) => p.id);
-			}
-		}
-	}
-
-	$effect(() => {
-		if (appState.selectedPlayer && appState.selectedPlayer.pals) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (searchQuery || selectedFilter) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (
-			(appState.selectedPal && appState.selectedPal.level) ||
-			(appState.selectedPal && appState.selectedPal.nickname)
-		) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		window.addEventListener('keydown', handleKeydown);
-		return () => {
-			window.removeEventListener('keydown', handleKeydown);
-		};
-	});
-
-	$effect(() => {
-		if (currentPage > totalPages) {
-			currentPage = 1;
-		}
-	});
-
-	$effect(() => {
-		if (pals) {
-			debouncedFilterPals();
-		}
-	});
-
 	function handleHealAll() {
 		if (!appState.selectedPlayer || !appState.selectedPlayer.pals) return;
 		send(MessageType.HEAL_ALL_PALS, {
@@ -628,14 +541,15 @@
 	}
 
 	async function handleSelectPreset() {
-		const selectedPalsData = selectedPals.map((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
+		const ids = [...selectedIds];
+		const selectedPalsData = ids.map((id) => {
+			const palWithData = boxPals.find((entry) => entry.id === id);
 			return {
 				character_id: palWithData?.pal.character_id,
 				character_key: palWithData?.pal.character_key
 			};
 		});
-		const otomoPalsData = selectedPals.map((id) => {
+		const otomoPalsData = ids.map((id) => {
 			const palWithData = otomoContainer[id];
 			return {
 				character_id: palWithData?.character_id,
@@ -653,8 +567,8 @@
 
 		const presetProfile = presetsData.presetProfiles[result];
 
-		selectedPals.forEach((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
+		ids.forEach((id) => {
+			const palWithData = boxPals.find((entry) => entry.id === id);
 			if (palWithData) {
 				applyPalPreset(palWithData.pal, presetProfile, appState.selectedPlayer!);
 			}
@@ -675,6 +589,47 @@
 			target: 'pal-box'
 		});
 	}
+
+	function palActions(entry: PalWithData): ActionDescriptor[] {
+		if (!isRealPal(entry)) {
+			return [
+				{
+					id: 'palbox-pal-add',
+					label: m.add_new_pal(p.pal),
+					icon: 'tabler:plus',
+					run: () => handleAddPal('palbox', entry.pal.storage_slot)
+				}
+			];
+		}
+
+		return [
+			{
+				id: 'palbox-pal-move',
+				label: m.move_to_entity({ entity: m.party() }),
+				icon: 'tabler:archive-off',
+				run: () => handleMoveToParty(entry.pal)
+			},
+			{
+				id: 'palbox-pal-clone',
+				label: m.clone_selected_pal(p.pal),
+				icon: 'tabler:copy',
+				run: () => handleClonePal(entry.pal)
+			},
+			{
+				id: 'palbox-pal-clone-to-ups',
+				label: m.clone_to_entity({ entity: m.ups() }),
+				icon: 'tabler:upload',
+				run: () => handleCloneToUps(entry.pal)
+			},
+			{
+				id: 'palbox-pal-delete',
+				label: m.delete_entity({ entity: c.pal }),
+				icon: 'tabler:trash',
+				run: () => handleDeletePal(entry.pal),
+				danger: true
+			}
+		];
+	}
 </script>
 
 {#snippet party()}
@@ -682,7 +637,7 @@
 		{#each Object.values(otomoContainer) as pal, index}
 			<PalCard
 				pal={otomoContainer[pal.instance_id]}
-				bind:selected={selectedPals}
+				selected={selectedIdList}
 				onSelect={handlePalSelect}
 				onMove={() => handleMoveToPalbox(pal)}
 				onDelete={() => handleDeletePal(pal)}
@@ -695,284 +650,152 @@
 	</div>
 {/snippet}
 
-{#if appState.selectedPlayer}
-	<div
-		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
-		{...additionalProps}
-	>
-		<div class="shrink-0 p-4">
-			<nav
-				id="palbox-toolbar"
-				class="btn-group bg-surface-900 mb-2 w-full items-center overflow-x-auto rounded-sm p-1"
-			>
-				<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: m.palbox() })}>
-					<Button
-						id="palbox-add-pal"
-						variant="ghost"
-						size="icon"
-						onclick={() => handleAddPal('palbox')}
-					>
-						<Icon icon="tabler:plus" class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-				<Tooltip
-					position="right"
-					label={m.add_all_pals_to_entity({ entity: m.palbox(), pals: c.pals })}
-				>
-					<Button id="palbox-add-all" variant="ghost" size="icon" onclick={() => addAllPalsToBox()}>
-						<Icon icon="tabler:circle-plus" class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-				<Tooltip>
-					<Button
-						id="palbox-select-all"
-						variant="ghost"
-						size="icon"
-						onclick={(event: MouseEvent) =>
-							handleSelectAll(
-								event as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
-							)}
-					>
-						<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
-					</Button>
-					{#snippet popup()}
-						<div class="flex flex-col">
-							<span>{m.select_all_in()}</span>
-							<div class="grid grid-cols-[auto_1fr] gap-1">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								<span class="text-sm">{m.palbox()}</span>
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
-									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								</div>
-								<span class="text-sm">{m.pal_box_party()}</span>
-							</div>
-						</div>
-					{/snippet}
-				</Tooltip>
-				<Tooltip label={m.heal_all_in_entity({ entity: m.palbox() })}>
-					<Button id="palbox-heal-all" variant="ghost" size="icon" onclick={handleHealAll}>
-						<Icon icon="tabler:bandage" class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-				{#if selectedPals.length === 1}
-					<Tooltip label={m.clone_selected_pal(p.pal)}>
-						<Button variant="ghost" size="icon" onclick={cloneSelectedPal}>
-							<Icon icon="tabler:copy" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-				{/if}
-				{#if selectedPals.length >= 1}
-					<Tooltip
-						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-							<Icon icon="tabler:player-play" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.clone_pals_to_entity({
-							count: selectedPals.length,
-							pals: m.pal({ count: selectedPals.length }),
-							entity: c.universalPalStorage
-						})}
-					>
-						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
-							<Icon icon="tabler:upload" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.heal_selected_pals({ pals: m.pal({ count: selectedPals.length }) })}>
-						<Button variant="ghost" size="icon" onclick={healSelectedPals}>
-							<Icon icon="tabler:ambulance" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.max_out_selected_pals({ pals: m.pal({ count: selectedPals.length }) })}>
-						<Button variant="ghost" size="icon" onclick={maxSelectedPals}>
-							<Icon icon="ph:hand-fist" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-							<Icon icon="tabler:trash" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-							<Icon icon="tabler:x" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-				{/if}
-			</nav>
-			<div id="palbox-filters">
-				<Accordion
-					value={filterExpand}
-					onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-					collapsible
-				>
-					<Accordion.Item
-						value="filter"
-						base="rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet lead()}<Icon icon="tabler:search" />{/snippet}
-						{#snippet control()}
-							<span class="font-bold">{m.filter_and_sort()}</span>
-						{/snippet}
-						{#snippet panel()}
-							<Input
-								type="text"
-								inputClass="w-full"
-								placeholder={m.search_by_name_nickname()}
-								bind:value={searchQuery}
-							/>
-							<div>
-								<legend class="font-bold">{m.sort()}</legend>
-								<hr />
-								<div class="grid grid-cols-3 sm:grid-cols-6">
-									<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
-										<button
-											type="button"
-											class={sortButtonClass('level')}
-											onclick={() => toggleSort('level')}
-										>
-											<Icon icon={LevelSortIcon} />
-										</button>
-									</Tooltip>
-									<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
-										<button
-											type="button"
-											class={sortButtonClass('name')}
-											onclick={() => toggleSort('name')}
-										>
-											<Icon icon={NameSortIcon} />
-										</button>
-									</Tooltip>
-									<Tooltip label={m.sort_by_entity({ entity: `${m.paldeck()} #` })}>
-										<button
-											type="button"
-											class={sortButtonClass('paldeck-index')}
-											onclick={() => toggleSort('paldeck-index')}
-										>
-											<Icon icon={PaldeckSortIcon} />
-										</button>
-									</Tooltip>
-								</div>
-							</div>
-							<PalFilterButtons bind:selectedFilter />
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item
-						value="stats"
-						base="block 2xl:hidden rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet lead()}<Icon icon="tabler:info-circle" />{/snippet}
-						{#snippet control()}
-							<span class="font-bold">{m.stats()}</span>
-						{/snippet}
-						{#snippet panel()}
-							{#if pals && pals.length > 0}
-								<PalContainerStats {pals} {elementTypes} />
-							{:else}
-								<div>{m.no_pals_available(p.pals)}</div>
-							{/if}
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item
-						value="party"
-						base="block 2xl:hidden rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet lead()}<Icon icon="tabler:user" />{/snippet}
-						{#snippet control()}
-							<span class="font-bold">{m.party()}</span>
-						{/snippet}
-						{#snippet panel()}
-							{@render party()}
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
-			</div>
+{#snippet stats()}
+	{#if boxPals.length > 0}
+		<PalContainerStats pals={boxPals} {elementTypes} />
+	{:else}
+		<div>{m.no_pals_available(p.pals)}</div>
+	{/if}
+{/snippet}
 
-			<div id="palbox-party">
-				<Card rounded="rounded-sm" class="mt-2 hidden 2xl:block">
-					<h4 class="h4 mb-2">{m.party()}</h4>
-					{@render party()}
-				</Card>
-			</div>
-		</div>
+<!-- The page's own search box: selecting every match needs the query. -->
+{#snippet filters()}
+	<div id="palbox-filters" class="flex flex-col gap-4">
+		<Input
+			type="text"
+			inputClass="w-full"
+			placeholder={m.search_by_name_nickname()}
+			bind:value={searchQuery}
+		/>
 
 		<div>
-			<div id="palbox-pager" class="mb-4 flex items-center justify-center space-x-4">
-				<Button  class="rounded-full font-bold p-0!" variant="ghost" size="md" onclick={decrementPage}>
-					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-				</Button>
-
-				<div class="flex space-x-2">
-					{#each visiblePages as page}
-						<TooltipButton
-							buttonClass="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500! text-white'
-								: 'bg-surface-800 hover:bg-surface-600'}"
-							onclick={() => (currentPage = page)}
-							popupLabel={`Box ${page}`}
-							variant="ghost"
-							size="md"
-						>
-							{Math.floor(page)}
-						</TooltipButton>
-					{/each}
-				</div>
-
-				<Button class="rounded-sm font-bold p-0!" variant="ghost" size="md" onclick={incrementPage}>
-					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-				</Button>
-			</div>
-
-			<div id="palbox-grid" class="overflow-hidden">
-				<PalGrid>
-					{#each currentPageItems as item (item.pal.instance_id)}
-						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
-							<PalBadge
-								pal={item.pal}
-								bind:selected={selectedPals}
-								onSelect={handlePalSelect}
-								onMove={() => handleMoveToParty(item.pal)}
-								onDelete={() => handleDeletePal(item.pal)}
-								onAdd={() => handleAddPal('palbox', item.pal.storage_slot)}
-								onClone={() => handleClonePal(item.pal)}
-								onCloneToUps={() => handleCloneToUps(item.pal)}
-							/>
-						{/if}
-					{/each}
-				</PalGrid>
+			<legend class="font-bold">{m.sort()}</legend>
+			<hr />
+			<div class="grid grid-cols-3 sm:grid-cols-6">
+				<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
+					<button
+						type="button"
+						class={sortButtonClass('level')}
+						onclick={() => toggleSort('level')}
+					>
+						<Icon icon={LevelSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
+					<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')}>
+						<Icon icon={NameSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: `${m.paldeck()} #` })}>
+					<button
+						type="button"
+						class={sortButtonClass('paldeck-index')}
+						onclick={() => toggleSort('paldeck-index')}
+					>
+						<Icon icon={PaldeckSortIcon} />
+					</button>
+				</Tooltip>
 			</div>
 		</div>
-		<div id="palbox-stats">
-			{#if pals && pals.length > 0}
-				<Card class="mr-2 hidden min-h-0 2xl:block">
-					<PalContainerStats {pals} {elementTypes} />
-				</Card>
-			{:else}
-				<Card class="mr-2 hidden min-h-0 2xl:block">
-					<div>{m.no_pals_available(p.pals)}</div>
-				</Card>
+
+		<PalFilterButtons bind:selectedFilter />
+
+		<div class="2xl:hidden">
+			<legend class="font-bold">{m.party()}</legend>
+			<hr class="mb-2" />
+			{@render party()}
+		</div>
+
+		<div class="2xl:hidden">
+			<legend class="font-bold">{m.stats()}</legend>
+			<hr class="mb-2" />
+			{@render stats()}
+		</div>
+	</div>
+{/snippet}
+
+{#snippet portrait(entry: PalWithData)}
+	<PalBadge
+		pal={entry.pal}
+		selected={selectedIdList}
+		onMove={() => handleMoveToParty(entry.pal)}
+		onDelete={() => handleDeletePal(entry.pal)}
+		onAdd={() => handleAddPal('palbox', entry.pal.storage_slot)}
+		onClone={() => handleClonePal(entry.pal)}
+		onCloneToUps={() => handleCloneToUps(entry.pal)}
+	/>
+{/snippet}
+
+{#snippet columns(entry: PalWithData)}
+	{#if isRealPal(entry)}
+		<div class="flex flex-col gap-0.5">
+			<span class="truncate text-sm font-bold">{nicknameOf(entry)}</span>
+			<span class="text-surface-400 text-xs">
+				{m.level()}
+				{entry.pal.level ?? 0}
+			</span>
+		</div>
+	{:else}
+		<span class="text-surface-500 text-sm">{m.empty()} · {entry.pal.storage_slot + 1}</span>
+	{/if}
+{/snippet}
+
+{#snippet detail(entry: PalWithData)}
+	<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+		<dt class="text-surface-400">{m.nickname()}</dt>
+		<dd>{nicknameOf(entry)}</dd>
+		<dt class="text-surface-400">{m.level()}</dt>
+		<dd>{entry.pal.level ?? 0}</dd>
+		<dt class="text-surface-400">{m.hp()}</dt>
+		<dd>{entry.pal.hp ?? 0} / {entry.pal.max_hp ?? 0}</dd>
+	</dl>
+{/snippet}
+
+{#if appState.selectedPlayer}
+	<div
+		class="grid h-full w-full grid-cols-1 gap-2 p-2 2xl:grid-cols-[1fr_20%]"
+		{...additionalProps}
+	>
+		<div class="flex min-h-0 gap-2">
+			<!-- Once something is selected the view's own toolbar carries these
+			     rows; two action surfaces at once would be two phone buttons in
+			     the same corner. -->
+			{#if selectedIds.size === 0}
+				<ActionGroup id="palbox-actions" actions={palboxActions} title={m.quick_actions()} />
 			{/if}
+
+			<div class="min-w-0 flex-1">
+				<PalContainerView
+					pals={displayPals}
+					idOf={(entry) => entry.id}
+					{nicknameOf}
+					storageKey="palbox"
+					title={m.palbox()}
+					pageSize={PALS_PER_PAGE}
+					actions={palboxActions}
+					{selection}
+					{filters}
+					{portrait}
+					{columns}
+					{detail}
+					{palActions}
+					onOpenPal={handleOpenPal}
+				/>
+			</div>
 		</div>
+
+		<aside class="hidden min-h-0 flex-col gap-2 overflow-y-auto 2xl:flex">
+			<Card rounded="rounded-sm">
+				<h4 class="h4 mb-2">{m.party()}</h4>
+				{@render party()}
+			</Card>
+			<Card class="min-h-0">
+				{@render stats()}
+			</Card>
+		</aside>
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
 		<h2 class="h2">{m.select_player_view_entity({ entity: m.palbox() })}</h2>
 	</div>
 {/if}
-
-<style>
-	.pal-element-badge {
-		width: 24px;
-		height: 24px;
-	}
-</style>

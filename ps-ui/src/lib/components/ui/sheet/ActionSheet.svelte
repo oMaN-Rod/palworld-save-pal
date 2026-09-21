@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { availableActions, type ActionDescriptor } from '$components/ui/actions/actionDescriptor';
+	import { sheetActions, type ActionDescriptor } from '$components/ui/actions/actionDescriptor';
 
 	import BottomSheet from './BottomSheet.svelte';
 
@@ -18,13 +18,7 @@
 		onClose: () => void;
 	} = $props();
 
-	// Destructive actions sort last so a mis-tap near the thumb's resting
-	// position cannot be the one that clears a slot.
-	const rows = $derived(
-		[...availableActions(actions)].sort(
-			(a, b) => Number(a.danger ?? false) - Number(b.danger ?? false)
-		)
-	);
+	const rows = $derived(sheetActions(actions));
 
 	async function activate(action: ActionDescriptor): Promise<void> {
 		try {

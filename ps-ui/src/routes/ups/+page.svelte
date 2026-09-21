@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { Button, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
+
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import { Button, Input, Nuke, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		ImportToUpsModal,
 		EditTagsModal,
@@ -10,13 +12,26 @@
 		NukeUpsConfirmModal,
 		PalSelectModal
 	} from '$components/modals';
+	import { PalContainerView } from '$components/pal/container';
+	import type {
+		PalContainerSelection,
+		PalContainerServerPaging
+	} from '$states/palContainer.svelte';
 	import { cn } from '$theme';
-	import { getUpsState, getModalState, getAppState, getToastState } from '$states';
+	import {
+		getUpsState,
+		getModalState,
+		getAppState,
+		getPalEditorState,
+		getToastState
+	} from '$states';
 	import { elementsData, palsData } from '$lib/data';
 	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { assetLoader } from '$utils';
 	import { staticIcons } from '$types/icons';
 	import {
+		type Pal,
+		type UPSPal,
 		type UPSSortBy,
 		type UPSSortOrder,
 		type ImportToUpsModalResults,
@@ -28,18 +43,16 @@
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 
-	import UPSPalGrid from './components/UPSPalGrid.svelte';
+	import UPSPalBadge from './components/UPSPalBadge.svelte';
 	import UPSCollectionsPanel from './components/UPSCollectionsPanel.svelte';
 	import UPSTagsPanel from './components/UPSTagsPanel.svelte';
 	import UPSStatsPanel from './components/UPSStatsPanel.svelte';
-	import UPSPalList from './components/UPSPalList.svelte';
-	import { Nuke } from '$components/ui';
-
-	const VISIBLE_PAGE_BUBBLES = 16;
+	import { buildUpsActions } from './upsActions';
 
 	const upsState = getUpsState();
 	const modal = getModalState();
 	const appState = getAppState();
+	const palEditor = getPalEditorState();
 	const toast = getToastState();
 
 	let searchInput = $state('');
@@ -55,24 +68,6 @@
 		}, 300);
 	}
 
-	const totalPages = $derived(upsState.pagination.totalPages);
-	const currentPage = $derived(upsState.pagination.page);
-	const visiblePageStart = $derived(
-		Math.max(
-			1,
-			Math.min(
-				currentPage - Math.floor(VISIBLE_PAGE_BUBBLES / 2),
-				totalPages - VISIBLE_PAGE_BUBBLES + 1
-			)
-		)
-	);
-	const visiblePageEnd = $derived(
-		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
-	);
-	const visiblePages = $derived(
-		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
-	);
-
 	const elementTypes = $derived(Object.keys(elementsData.elements));
 	const elementIcons = $derived.by(() => {
 		let elementIcons: Record<string, string> = {};
@@ -86,6 +81,48 @@
 		}
 		return elementIcons;
 	});
+
+	// `pageSize` must be passed: the view's default of 30 would mismatch server pages.
+	// Getters so every read reaches the current `pagination`.
+	const serverPaging: PalContainerServerPaging = {
+		get page() {
+			return upsState.pagination.page;
+		},
+		get totalCount() {
+			return upsState.pagination.totalCount;
+		},
+		get pageSize() {
+			return upsState.pagination.limit;
+		},
+		onPageChange: (page: number) => {
+			upsState.setPage(page);
+			upsState.loadPals();
+		}
+	};
+
+	// Owned by the state object: it spans pages the view has never been handed.
+	const selection: PalContainerSelection<number> = {
+		get ids() {
+			return upsState.selectedPals;
+		},
+		onToggle: (id: number) => upsState.togglePalSelection(id)
+	};
+
+	const upsActions = $derived(
+		buildUpsActions({
+			selectionCount: upsState.selectedPals.size,
+			pageCount: upsState.pals.length,
+			totalCount: upsState.pagination.totalCount,
+			filtered: hasActiveFilters(),
+			selectAllOnPage: () => upsState.selectAllPals(),
+			selectAllMatching: () => upsState.selectAllFilteredPals(),
+			editTags: handleBulkEditTags,
+			addToCollection: handleBulkAddToCollection,
+			exportSelected: handleBulkExport,
+			deleteSelected,
+			clearSelection: () => upsState.clearSelection()
+		})
+	);
 
 	function handleSort(sortBy: UPSSortBy) {
 		const newOrder: UPSSortOrder =
@@ -102,13 +139,6 @@
 		return upsState.filters.sortOrder === 'asc'
 			? 'tabler:sort-ascending-numbers'
 			: 'tabler:sort-descending-numbers';
-	}
-
-	function handlePageChange(page: number) {
-		if (page >= 1 && page <= totalPages) {
-			upsState.setPage(page);
-			upsState.loadPals();
-		}
 	}
 
 	function clearFilters() {
@@ -166,18 +196,6 @@
 		return cn('btn', upsState.filters.palTypes.includes(palType) ? 'bg-secondary-500/25' : '');
 	}
 
-	function selectAll() {
-		upsState.selectAllPals();
-	}
-
-	async function selectAllFiltered() {
-		await upsState.selectAllFilteredPals();
-	}
-
-	function clearSelection() {
-		upsState.clearSelection();
-	}
-
 	function hasActiveFilters(): boolean {
 		return (
 			!!upsState.filters.search ||
@@ -186,6 +204,29 @@
 			upsState.filters.elementTypes.length > 0 ||
 			upsState.filters.palTypes.length > 0
 		);
+	}
+
+	function nicknameOf(upsPal: UPSPal): string {
+		return upsPal.nickname || upsPal.character_id;
+	}
+
+	function formatDate(dateString: string): string {
+		return new Date(dateString).toLocaleString();
+	}
+
+	// Assigned before `open` so the `__ups_*` markers dodge excess-property checks.
+	function handleOpenPal(upsPal: UPSPal): void {
+		// Via `Partial<Pal>`: svelte-check rejects a bare `as Pal` on the spread.
+		const pal = { ...(upsPal.pal_data as Partial<Pal>), id: upsPal.id } as Pal;
+		if (!pal.character_key && upsPal.character_key) {
+			pal.character_key = upsPal.character_key;
+		}
+		const palWithMetadata = {
+			...pal,
+			__ups_source: true,
+			__ups_id: upsPal.id
+		};
+		palEditor.open(palWithMetadata);
 	}
 
 	async function deleteSelected() {
@@ -373,6 +414,85 @@
 		}
 	}
 
+	async function handleClonePal(upsPal: UPSPal) {
+		const confirmed = await modal.showConfirmModal({
+			title: m.clone_selected_pal({ pal: c.pal }),
+			message: m.clone_pal_to_entity({ pal: nicknameOf(upsPal), entity: c.universalPalStorage }),
+			confirmText: m.clone_selected_pal({ pal: '' }),
+			cancelText: m.cancel()
+		});
+
+		if (confirmed) {
+			await upsState.clonePal(upsPal.id);
+		}
+	}
+
+	async function handleExportPal(upsPal: UPSPal) {
+		// @ts-ignore
+		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
+			title: m.export_pals({ pals: c.pal, count: 1 }),
+			pals: [upsPal]
+		});
+
+		if (!result) return;
+
+		const target = result.target as 'pal_box' | 'dps' | 'gps';
+		try {
+			await upsState.exportPal(upsPal.id, target, result.playerId);
+			toast.add(
+				m.successfully_cloned_pal_to_entity({
+					pal: nicknameOf(upsPal),
+					entity: result.target.toUpperCase()
+				}),
+				m.success(),
+				'success'
+			);
+		} catch (error) {
+			console.error('Export failed:', error);
+			toast.add(m.import_failed(), m.error(), 'error');
+		}
+	}
+
+	async function handleAddPalToCollection(upsPal: UPSPal) {
+		// @ts-ignore
+		const result = await modal.showModal<AddToCollectionResult>(AddToCollectionModal, {
+			title: m.add_to_collection(),
+			pals: [upsPal]
+		});
+
+		if (!result) return;
+
+		const collectionId = result.removeFromCollection ? undefined : result.collectionId;
+		await upsState.updatePal(upsPal.id, { collection_id: collectionId });
+		await upsState.loadAll();
+	}
+
+	async function handleEditPalTags(upsPal: UPSPal) {
+		// @ts-ignore
+		const result = await modal.showModal<string[]>(EditTagsModal, {
+			title: m.edit_entity({ entity: c.tags }),
+			pals: [upsPal]
+		});
+
+		if (!result) return;
+
+		await upsState.updatePal(upsPal.id, { tags: result });
+		await upsState.loadAll();
+	}
+
+	async function handleDeletePal(upsPal: UPSPal) {
+		const confirmed = await modal.showConfirmModal({
+			title: m.delete_entity({ entity: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: nicknameOf(upsPal) }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
+		});
+
+		if (confirmed) {
+			await upsState.deletePals([upsPal.id]);
+		}
+	}
+
 	async function handleNukeUps() {
 		try {
 			// @ts-ignore
@@ -486,10 +606,350 @@
 		}
 	}
 
+	// Mirrors `UPSPalBadge`'s context menu, which touch devices cannot open.
+	function palActions(upsPal: UPSPal): ActionDescriptor[] {
+		return [
+			{
+				id: 'ups-pal-clone',
+				label: m.clone_selected_pal({ pal: c.pal }),
+				icon: 'tabler:copy',
+				run: () => handleClonePal(upsPal)
+			},
+			{
+				id: 'ups-pal-export',
+				label: m.export_pals({ pals: c.pal, count: 1 }),
+				icon: 'tabler:upload',
+				run: () => handleExportPal(upsPal)
+			},
+			{
+				id: 'ups-pal-add-to-collection',
+				label: m.add_to_collection(),
+				icon: 'tabler:folder-plus',
+				run: () => handleAddPalToCollection(upsPal)
+			},
+			{
+				id: 'ups-pal-edit-tags',
+				label: m.edit_entity({ entity: c.tags }),
+				icon: 'tabler:tag',
+				run: () => handleEditPalTags(upsPal)
+			},
+			{
+				id: 'ups-pal-delete',
+				label: m.delete_entity({ entity: c.pal }),
+				icon: 'tabler:trash',
+				run: () => handleDeletePal(upsPal),
+				danger: true
+			}
+		];
+	}
+
 	$effect(() => {
 		searchInput = upsState.filters.search;
 	});
 </script>
+
+<!-- The page's own search box: UPS searches on the server, so no `matches` predicate. -->
+{#snippet filters()}
+	<div id="ups-filters" class="flex flex-col gap-4">
+		<Input
+			bind:value={searchInput}
+			oninput={handleSearchInput}
+			placeholder={m.search_entity({ entity: c.pals })}
+		/>
+
+		<Accordion base="w-full" collapsible>
+			<Accordion.Item
+				value="filters"
+				base="rounded-sm bg-surface-900"
+				controlHover="hover:bg-secondary-500/25"
+			>
+				{#snippet control()}
+					<div class="flex items-center gap-2">
+						<Icon icon="tabler:filter" class="h-4 w-4" />
+						<span class="font-bold">{m.filter_and_sort()}</span>
+						{#if hasActiveFilters()}
+							<span class="bg-secondary-500/25 text-secondary-300 rounded-full px-2 py-0.5 text-xs"
+								>{m.active()}</span
+							>
+						{/if}
+					</div>
+				{/snippet}
+				{#snippet panel()}
+					<div class="flex flex-col gap-4">
+						<div class="space-y-4">
+							<legend class="font-bold">{m.element_and_type()}</legend>
+							<div class="space-y-3">
+								<div>
+									<div class="mb-1 flex items-center justify-between">
+										<span class="text-surface-400 text-xs font-medium">
+											{m.element_types()}
+										</span>
+										{#if upsState.filters.elementTypes.length > 0}
+											<button
+												class="text-primary-400 hover:text-primary-300 text-xs"
+												onclick={clearElementTypeFilters}
+											>
+												{m.clear()} ({upsState.filters.elementTypes.length})
+											</button>
+										{/if}
+									</div>
+									<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-5">
+										{#each elementTypes as element}
+											{@const elementData = elementsData.getByKey(element)}
+											{@const localizedName = elementData?.localized_name || element}
+											<Tooltip label={localizedName}>
+												<button
+													class={getElementButtonClass(element)}
+													onclick={() => handleElementTypeFilter(element)}
+													aria-label={localizedName}
+												>
+													<img
+														src={elementIcons[element]}
+														alt={localizedName}
+														class="pal-element-badge"
+													/>
+												</button>
+											</Tooltip>
+										{/each}
+									</div>
+								</div>
+
+								<div>
+									<div class="mb-1 flex items-center justify-between">
+										<span class="text-surface-400 text-xs font-medium">
+											{m.pal_types()}
+										</span>
+										{#if upsState.filters.palTypes.length > 0}
+											<button
+												class="text-primary-400 hover:text-primary-300 text-xs"
+												onclick={clearPalTypeFilters}
+											>
+												{m.clear()} ({upsState.filters.palTypes.length})
+											</button>
+										{/if}
+									</div>
+									<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
+										<TooltipButton
+											popupLabel={m.alpha_pal({ pals: c.pals })}
+											onclick={() => handlePalTypeFilter('alpha')}
+											buttonClass={getPalTypeButtonClass('alpha')}
+										>
+											<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.lucky_pals({ pals: c.pals })}
+											onclick={() => handlePalTypeFilter('lucky')}
+											buttonClass={getPalTypeButtonClass('lucky')}
+										>
+											<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.awakened()}
+											onclick={() => handlePalTypeFilter('awakened')}
+											buttonClass={getPalTypeButtonClass('awakened')}
+										>
+											<img
+												src={staticIcons.awakeningIcon}
+												alt="Awakened"
+												class="pal-element-badge"
+											/>
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.imported()}
+											onclick={() => handlePalTypeFilter('imported')}
+											buttonClass={getPalTypeButtonClass('imported')}
+										>
+											<img
+												src={staticIcons.importedIcon}
+												alt="Imported"
+												class="pal-element-badge"
+											/>
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.human({ count: 2 })}
+											buttonClass={getPalTypeButtonClass('human')}
+											onclick={() => handlePalTypeFilter('human')}
+										>
+											<Icon icon="tabler:user" />
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.predator_pals({ pals: c.pals })}
+											buttonClass={getPalTypeButtonClass('predator')}
+											onclick={() => handlePalTypeFilter('predator')}
+										>
+											<img
+												src={staticIcons.predatorIcon}
+												alt="Predator"
+												class="pal-element-badge"
+											/>
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.oil_rig_pals({ pals: c.pals })}
+											buttonClass={getPalTypeButtonClass('oilrig')}
+											onclick={() => handlePalTypeFilter('oilrig')}
+										>
+											<img src={staticIcons.oilrigIcon} alt="Oil Rig" class="pal-element-badge" />
+										</TooltipButton>
+										<TooltipButton
+											popupLabel={m.summoned_pals({ pals: c.pals })}
+											buttonClass={getPalTypeButtonClass('summon')}
+											onclick={() => handlePalTypeFilter('summon')}
+										>
+											<img src={staticIcons.altarIcon} alt="Summoned" class="pal-element-badge" />
+										</TooltipButton>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<legend class="mb-2 font-bold">{m.sort_by()}</legend>
+							<div class="flex flex-wrap gap-2">
+								{#each [{ key: 'created_at', label: m.created() }, { key: 'updated_at', label: m.modified() }, { key: 'character_id', label: m.character() }, { key: 'nickname', label: m.name() }, { key: 'level', label: m.level() }, { key: 'transfer_count', label: m.transfer( { count: 2 } ) }, { key: 'clone_count', label: m.clones() }] as sortOption}
+									{@const sortIcon = getSortIcon(sortOption.key as UPSSortBy)}
+									<button
+										class={cn(
+											'btn btn-sm',
+											upsState.filters.sortBy === sortOption.key ? 'bg-secondary-500/25' : ''
+										)}
+										onclick={() => handleSort(sortOption.key as UPSSortBy)}
+									>
+										{sortOption.label}
+										<Icon icon={sortIcon} class="h-3 w-3" />
+									</button>
+								{/each}
+							</div>
+						</div>
+
+						{#if hasActiveFilters()}
+							<div class="border-surface-700/60 border-t pt-2">
+								<button
+									onclick={clearFilters}
+									class="text-primary-400 hover:text-primary-300 flex items-center gap-1 text-sm"
+								>
+									<Icon icon="tabler:x" class="h-3 w-3" />
+									{m.clear_all_entity({ entity: m.filter({ count: 2 }) })}
+								</button>
+							</div>
+						{/if}
+					</div>
+				{/snippet}
+			</Accordion.Item>
+		</Accordion>
+	</div>
+{/snippet}
+
+{#snippet portrait(upsPal: UPSPal)}
+	<div class="relative">
+		<UPSPalBadge {upsPal} />
+
+		{#if upsPal.tags && upsPal.tags.length > 0}
+			<div
+				class="bg-surface-950/80 text-surface-100 pointer-events-none absolute right-0 -bottom-1 rounded px-1 py-0.5 text-[10px] leading-none backdrop-blur-sm"
+			>
+				{upsPal.tags.length}<Icon icon="tabler:tag" size={10} class="ml-0.5 inline" />
+			</div>
+		{/if}
+
+		{#if upsPal.transfer_count > 0 || upsPal.clone_count > 0}
+			<div
+				class="bg-surface-950/80 text-surface-100 pointer-events-none absolute -top-1 right-0 space-y-0.5 rounded px-1 py-0.5 text-right text-[10px] leading-none backdrop-blur-sm"
+			>
+				{#if upsPal.transfer_count > 0}
+					<div title={m.transfer({ count: 2 })}>
+						<Icon icon="tabler:upload" size={10} class="mr-0.5 inline" />{upsPal.transfer_count}
+					</div>
+				{/if}
+				{#if upsPal.clone_count > 0}
+					<div title={m.clones()}>
+						<Icon icon="tabler:refresh" size={10} class="mr-0.5 inline" />{upsPal.clone_count}
+					</div>
+				{/if}
+			</div>
+		{/if}
+	</div>
+{/snippet}
+
+{#snippet columns(upsPal: UPSPal)}
+	<div class="flex min-w-0 flex-col gap-0.5">
+		<div class="flex min-w-0 items-center gap-2">
+			<span class="truncate text-sm font-bold">{nicknameOf(upsPal)}</span>
+			{#if upsPal.nickname && upsPal.nickname !== upsPal.character_id}
+				<span class="text-surface-400 truncate text-xs">({upsPal.character_id})</span>
+			{/if}
+			<span class="text-surface-300 shrink-0 text-xs">
+				{m.level_abbr()}. {upsPal.level}
+			</span>
+		</div>
+
+		{#if upsPal.tags && upsPal.tags.length > 0}
+			<div class="flex flex-wrap gap-1">
+				{#each upsPal.tags.slice(0, 3) as tag}
+					<span
+						class="bg-secondary-500/20 text-secondary-300 inline-flex items-center rounded px-2 py-0.5 text-xs font-medium"
+					>
+						{tag}
+					</span>
+				{/each}
+				{#if upsPal.tags.length > 3}
+					<span class="text-surface-400 text-xs"
+						>{m.and_more_count({ count: upsPal.tags.length - 3 })}</span
+					>
+				{/if}
+			</div>
+		{/if}
+
+		{#if upsPal.notes}
+			<p class="text-surface-400 truncate text-xs">{upsPal.notes}</p>
+		{/if}
+
+		<span class="text-surface-500 truncate text-xs">
+			{#if upsPal.source_save_file}
+				{m.origin_label()}
+				{upsPal.source_save_file} ·
+			{/if}
+			{m.added_label()}
+			{formatDate(upsPal.created_at)}
+		</span>
+	</div>
+{/snippet}
+
+{#snippet detail(upsPal: UPSPal)}
+	<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+		<dt class="text-surface-400">{m.nickname()}</dt>
+		<dd class="truncate">{nicknameOf(upsPal)}</dd>
+		<dt class="text-surface-400">{m.character()}</dt>
+		<dd class="truncate">{upsPal.character_id}</dd>
+		<dt class="text-surface-400">{m.level()}</dt>
+		<dd>{upsPal.level}</dd>
+		<dt class="text-surface-400">{m.transfer({ count: 2 })}</dt>
+		<dd>{upsPal.transfer_count}</dd>
+		<dt class="text-surface-400">{m.clones()}</dt>
+		<dd>{upsPal.clone_count}</dd>
+		{#if upsPal.source_save_file}
+			<dt class="text-surface-400">{m.origin_label()}</dt>
+			<dd class="truncate">{upsPal.source_save_file}</dd>
+		{/if}
+		<dt class="text-surface-400">{m.added_label()}</dt>
+		<dd>{formatDate(upsPal.created_at)}</dd>
+		{#if upsPal.updated_at !== upsPal.created_at}
+			<dt class="text-surface-400">{m.modified_label()}</dt>
+			<dd>{formatDate(upsPal.updated_at)}</dd>
+		{/if}
+		{#if upsPal.last_accessed_at}
+			<dt class="text-surface-400">{m.last_accessed()}</dt>
+			<dd>{formatDate(upsPal.last_accessed_at)}</dd>
+		{/if}
+		{#if upsPal.tags && upsPal.tags.length > 0}
+			<dt class="text-surface-400">{c.tags}</dt>
+			<dd>{upsPal.tags.join(', ')}</dd>
+		{/if}
+		{#if upsPal.notes}
+			<dt class="text-surface-400">{m.note()}</dt>
+			<dd>{upsPal.notes}</dd>
+		{/if}
+	</dl>
+{/snippet}
 
 <div class="animate-fade-in flex h-full flex-col">
 	<div class="flex items-center justify-between gap-3 px-4 pt-4">
@@ -527,6 +987,18 @@
 				</TooltipButton>
 			{/if}
 
+			{#if upsState.pagination.totalCount > 0}
+				<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
+					<button
+						class="text-error-500 hover:bg-error-500/20 hover:text-error-400 h-8 w-8 rounded-md p-2 transition-colors"
+						onclick={handleNukeUps}
+						disabled={upsState.loading}
+					>
+						<Nuke size={16} />
+					</button>
+				</TooltipButton>
+			{/if}
+
 			{#if upsState.pagination.totalCount > 0 || appState.saveFile}
 				<div class="bg-surface-700 h-6 w-px"></div>
 			{/if}
@@ -556,229 +1028,12 @@
 					<Icon icon="tabler:chart-bar" class="h-4 w-4" />
 				</TooltipButton>
 			</div>
-
-			<div
-				class="bg-surface-950/50 border-surface-700/40 flex gap-1 rounded-sm border p-0.5"
-				role="group"
-				aria-label={m.grid_view()}
-			>
-				<TooltipButton
-					onclick={() => upsState.setViewMode('grid')}
-					class="rounded-sm p-2 transition-all {tabPill(upsState.viewMode === 'grid')}"
-					popupLabel={m.grid_view()}
-				>
-					<Icon icon="tabler:grid-3x3" class="h-4 w-4" />
-				</TooltipButton>
-
-				<TooltipButton
-					onclick={() => upsState.setViewMode('list')}
-					class="rounded-sm p-2 transition-all {tabPill(upsState.viewMode === 'list')}"
-					popupLabel={m.list_view()}
-				>
-					<Icon icon="tabler:list" class="h-4 w-4" />
-				</TooltipButton>
-			</div>
 		</div>
 	</div>
 
 	<div class="flex flex-1 overflow-hidden">
 		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
 			<div class="animate-slide-down flex w-full flex-col gap-2 p-4 sm:w-72 sm:flex-none md:w-80">
-				<div>
-					<Input
-						bind:value={searchInput}
-						oninput={handleSearchInput}
-						placeholder={m.search_entity({ entity: c.pals })}
-					/>
-				</div>
-				<Accordion base="w-full" collapsible>
-					<Accordion.Item
-						value="filters"
-						base="rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet control()}
-							<div class="flex items-center gap-2">
-								<Icon icon="tabler:filter" class="h-4 w-4" />
-								<span class="font-bold">{m.filter_and_sort()}</span>
-								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
-									<span
-										class="bg-secondary-500/25 text-secondary-300 rounded-full px-2 py-0.5 text-xs"
-										>{m.active()}</span
-									>
-								{/if}
-							</div>
-						{/snippet}
-						{#snippet panel()}
-							<div class="flex flex-col gap-4">
-								<div class="space-y-4">
-									<legend class="font-bold">{m.element_and_type()}</legend>
-									<div class="space-y-3">
-										<div>
-											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-400 text-xs font-medium">
-													{m.element_types()}
-												</span>
-												{#if upsState.filters.elementTypes.length > 0}
-													<button
-														class="text-primary-400 hover:text-primary-300 text-xs"
-														onclick={clearElementTypeFilters}
-													>
-														{m.clear()} ({upsState.filters.elementTypes.length})
-													</button>
-												{/if}
-											</div>
-											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-5">
-												{#each elementTypes as element}
-													{@const elementData = elementsData.getByKey(element)}
-													{@const localizedName = elementData?.localized_name || element}
-													<Tooltip label={localizedName}>
-														<button
-															class={getElementButtonClass(element)}
-															onclick={() => handleElementTypeFilter(element)}
-															aria-label={localizedName}
-														>
-															<img
-																src={elementIcons[element]}
-																alt={localizedName}
-																class="pal-element-badge"
-															/>
-														</button>
-													</Tooltip>
-												{/each}
-											</div>
-										</div>
-
-										<div>
-											<div class="mb-1 flex items-center justify-between">
-												<span class="text-surface-400 text-xs font-medium">
-													{m.pal_types()}
-												</span>
-												{#if upsState.filters.palTypes.length > 0}
-													<button
-														class="text-primary-400 hover:text-primary-300 text-xs"
-														onclick={clearPalTypeFilters}
-													>
-														{m.clear()} ({upsState.filters.palTypes.length})
-													</button>
-												{/if}
-											</div>
-											<div class="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
-												<TooltipButton
-													popupLabel={m.alpha_pal({ pals: c.pals })}
-													onclick={() => handlePalTypeFilter('alpha')}
-													buttonClass={getPalTypeButtonClass('alpha')}
-												>
-													<img src={staticIcons.alphaIcon} alt="Alpha" class="pal-element-badge" />
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.lucky_pals({ pals: c.pals })}
-													onclick={() => handlePalTypeFilter('lucky')}
-													buttonClass={getPalTypeButtonClass('lucky')}
-												>
-													<img src={staticIcons.luckyIcon} alt="Lucky" class="pal-element-badge" />
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.awakened()}
-													onclick={() => handlePalTypeFilter('awakened')}
-													buttonClass={getPalTypeButtonClass('awakened')}
-												>
-													<img
-														src={staticIcons.awakeningIcon}
-														alt="Awakened"
-														class="pal-element-badge"
-													/>
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.imported()}
-													onclick={() => handlePalTypeFilter('imported')}
-													buttonClass={getPalTypeButtonClass('imported')}
-												>
-													<img
-														src={staticIcons.importedIcon}
-														alt="Imported"
-														class="pal-element-badge"
-													/>
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.human({ count: 2 })}
-													buttonClass={getPalTypeButtonClass('human')}
-													onclick={() => handlePalTypeFilter('human')}
-												>
-													<Icon icon="tabler:user" />
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.predator_pals({ pals: c.pals })}
-													buttonClass={getPalTypeButtonClass('predator')}
-													onclick={() => handlePalTypeFilter('predator')}
-												>
-													<img
-														src={staticIcons.predatorIcon}
-														alt="Predator"
-														class="pal-element-badge"
-													/>
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.oil_rig_pals({ pals: c.pals })}
-													buttonClass={getPalTypeButtonClass('oilrig')}
-													onclick={() => handlePalTypeFilter('oilrig')}
-												>
-													<img
-														src={staticIcons.oilrigIcon}
-														alt="Oil Rig"
-														class="pal-element-badge"
-													/>
-												</TooltipButton>
-												<TooltipButton
-													popupLabel={m.summoned_pals({ pals: c.pals })}
-													buttonClass={getPalTypeButtonClass('summon')}
-													onclick={() => handlePalTypeFilter('summon')}
-												>
-													<img
-														src={staticIcons.altarIcon}
-														alt="Summoned"
-														class="pal-element-badge"
-													/>
-												</TooltipButton>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div>
-									<legend class="mb-2 font-bold">{m.sort_by()}</legend>
-									<div class="flex flex-wrap gap-2">
-										{#each [{ key: 'created_at', label: m.created() }, { key: 'updated_at', label: m.modified() }, { key: 'character_id', label: m.character() }, { key: 'nickname', label: m.name() }, { key: 'level', label: m.level() }, { key: 'transfer_count', label: m.transfer( { count: 2 } ) }, { key: 'clone_count', label: m.clones() }] as sortOption}
-											{@const sortIcon = getSortIcon(sortOption.key as UPSSortBy)}
-											<button
-												class={cn(
-													'btn btn-sm',
-													upsState.filters.sortBy === sortOption.key ? 'bg-secondary-500/25' : ''
-												)}
-												onclick={() => handleSort(sortOption.key as UPSSortBy)}
-											>
-												{sortOption.label}
-												<Icon icon={sortIcon} class="h-3 w-3" />
-											</button>
-										{/each}
-									</div>
-								</div>
-
-								{#if upsState.filters.search || upsState.filters.collectionId || upsState.filters.tags.length > 0 || upsState.filters.elementTypes.length > 0 || upsState.filters.palTypes.length > 0}
-									<div class="border-surface-700/60 border-t pt-2">
-										<button
-											onclick={clearFilters}
-											class="text-primary-400 hover:text-primary-300 flex items-center gap-1 text-sm"
-										>
-											<Icon icon="tabler:x" class="h-3 w-3" />
-											{m.clear_all_entity({ entity: m.filter({ count: 2 }) })}
-										</button>
-									</div>
-								{/if}
-							</div>
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
 				{#if upsState.showCollectionsPanel}
 					<UPSCollectionsPanel />
 				{/if}
@@ -791,223 +1046,61 @@
 			</div>
 		{/if}
 
-		<div class="flex flex-1 flex-col">
-			{#if upsState.pals.length > 0}
-				<div
-					class="bg-surface-900/60 grid h-12 grid-cols-[auto_1fr_auto] items-center px-4 text-sm"
-				>
-					<div class="flex w-full items-center gap-4">
-						<span>
-							{m.selected_of_total({
-								selected: upsState.selectedPals.size,
-								total:
-									upsState.selectedPals.size <= upsState.pals.length
-										? upsState.pals.length
-										: upsState.pagination.totalCount
-							})}
-						</span>
-						<nav class="btn-group bg-surface-950/50 items-center rounded-sm p-0.5">
-							<TooltipButton
-								variant="ghost"
-								size="icon"
-								popupLabel={m.select_all_page_pals({
-									pals: c.pals,
-									count: upsState.pals.length
-								})}
-								onclick={selectAll}
-							>
-								<Icon icon="tabler:note" class="h-4 w-4" />
-							</TooltipButton>
-							{#if hasActiveFilters()}
-								<TooltipButton
-									variant="ghost"
-									size="icon"
-									popupLabel={m.select_all_filtered_pals({
-										pals: c.pals,
-										count: upsState.pagination.totalCount
-									})}
-									onclick={selectAllFiltered}
-								>
-									<Icon icon="tabler:arrows-diff" />
-								</TooltipButton>
-							{:else}
-								<TooltipButton
-									variant="ghost"
-									size="icon"
-									popupLabel={m.select_all_ups_pals({
-										pals: c.pals,
-										count: upsState.pagination.totalCount
-									})}
-									onclick={selectAllFiltered}
-								>
-									<Icon icon="tabler:arrows-diff" />
-								</TooltipButton>
-							{/if}
-							{#if upsState.hasSelectedPals}
-								<TooltipButton
-									variant="ghost"
-									size="icon"
-									popupLabel={m.clear_selection()}
-									onclick={clearSelection}
-								>
-									<Icon icon="tabler:x" class="h-4 w-4" />
-								</TooltipButton>
-							{/if}
-						</nav>
-					</div>
-					<div class="flex items-center gap-2">
-						{#if upsState.hasSelectedPals}
-							<TooltipButton
-								onclick={handleBulkEditTags}
-								variant="ghost"
-								size="icon"
-								class="hover:bg-secondary-500/25 text-secondary-300"
-								popupLabel={m.edit_entity({ entity: c.tags })}
-							>
-								<Icon icon="tabler:tag" class="h-4 w-4" />
-							</TooltipButton>
-							<TooltipButton
-								onclick={handleBulkAddToCollection}
-								variant="ghost"
-								size="icon"
-								class="hover:bg-secondary-500/25 text-secondary-300"
-								popupLabel={m.add_to_collection()}
-							>
-								<Icon icon="tabler:folder" class="h-4 w-4" />
-							</TooltipButton>
-							<TooltipButton
-								onclick={handleBulkExport}
-								variant="ghost"
-								size="icon"
-								class="hover:bg-tertiary-500/25 text-tertiary-300"
-								popupLabel={m.export_selected()}
-							>
+		<div class="flex min-h-0 min-w-0 flex-1 flex-col p-2">
+			{#if upsState.loading}
+				<div class="flex h-full flex-col items-center justify-center gap-4">
+					<Spinner size="size-16" />
+					<p class="text-surface-400">
+						{m.loading_entity({ entity: m.universal_pal_storage({ pal: c.pal }) })}
+					</p>
+				</div>
+				<!-- A filter-emptied page keeps the container so its filter button stays reachable. -->
+			{:else if upsState.pals.length === 0 && !hasActiveFilters()}
+				<div class="flex h-64 flex-col items-center justify-center text-center">
+					<Icon icon="tabler:user" class="text-surface-500 mb-4 h-16 w-16" />
+					<h3 class="text-surface-300 mb-2 text-lg font-medium">
+						{m.no_pals_in_storage({ pals: c.pals })}
+					</h3>
+					<p class="text-surface-400 mb-4 max-w-md">
+						{m.create_pals_or_import({ pals: c.pals })}
+					</p>
+					<div class="flex gap-3">
+						<Button variant="secondary" onclick={handleAddPal}>
+							<Icon icon="tabler:plus" class="h-4 w-4" />
+							{m.add_new_pal({ pal: c.pal })}
+						</Button>
+						{#if appState.saveFile}
+							<Button variant="secondary" onclick={handleImportFromSave}>
 								<Icon icon="tabler:upload" class="h-4 w-4" />
-							</TooltipButton>
-							<TooltipButton
-								onclick={deleteSelected}
-								variant="ghost"
-								size="icon"
-								class="hover:bg-error-500/25 text-error-400"
-								popupLabel={m.delete_entity({ entity: m.selected() })}
-							>
-								<Icon icon="tabler:trash" class="h-4 w-4" />
-							</TooltipButton>
+								{m.import_from_save()}
+							</Button>
 						{/if}
-						{#if upsState.pagination.totalCount > 0}
-							<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
-								<button
-									class="text-error-500 hover:bg-error-500/20 hover:text-error-400 h-8 w-8 rounded-md p-2 transition-colors"
-									onclick={handleNukeUps}
-									disabled={upsState.loading}
-								>
-									<Nuke size={16} />
-								</button>
-							</TooltipButton>
-						{/if}
-					</div>
-					<div class="text-surface-400">
-						{m.page_of_pages({ current: currentPage, total: totalPages })}
 					</div>
 				</div>
-			{/if}
-
-			<div class="flex-1 overflow-auto">
-				{#if upsState.loading}
-					<div class="flex h-full flex-col items-center justify-center gap-4">
-						<Spinner size="size-16" />
-						<p class="text-surface-400">
-							{m.loading_entity({ entity: m.universal_pal_storage({ pal: c.pal }) })}
-						</p>
-					</div>
-				{:else if upsState.pals.length === 0}
-					<div class="flex h-64 flex-col items-center justify-center text-center">
-						<Icon icon="tabler:user" class="text-surface-500 mb-4 h-16 w-16" />
-						<h3 class="text-surface-300 mb-2 text-lg font-medium">
-							{m.no_pals_in_storage({ pals: c.pals })}
-						</h3>
-						<p class="text-surface-400 mb-4 max-w-md">
-							{m.create_pals_or_import({ pals: c.pals })}
-						</p>
-						<div class="flex gap-3">
-							<Button variant="secondary" onclick={handleAddPal}>
-								<Icon icon="tabler:plus" class="h-4 w-4" />
-								{m.add_new_pal({ pal: c.pal })}
-							</Button>
-							{#if appState.saveFile}
-								<Button variant="secondary" onclick={handleImportFromSave}>
-									<Icon icon="tabler:upload" class="h-4 w-4" />
-									{m.import_from_save()}
-								</Button>
-							{/if}
-						</div>
-					</div>
-				{:else}
-					{#if upsState.viewMode === 'grid'}
-						<UPSPalGrid />
-					{:else}
-						<UPSPalList />
+			{:else}
+				<div class="flex min-h-0 gap-2">
+					<!-- With a selection, the view's own toolbar carries these rows. -->
+					{#if upsState.selectedPals.size === 0}
+						<ActionGroup id="ups-actions" actions={upsActions} title={m.quick_actions()} />
 					{/if}
-				{/if}
-			</div>
 
-			{#if totalPages > 1}
-				<div class="border-surface-700/40 border-t p-4">
-					<div class="flex items-center justify-between">
-						<div class="text-surface-400 text-sm">
-							{m.showing_pals({
-								start: (currentPage - 1) * upsState.pagination.limit + 1,
-								end: Math.min(
-									currentPage * upsState.pagination.limit,
-									upsState.pagination.totalCount
-								),
-								total: upsState.pagination.totalCount,
-								pals: c.pals
-							})}
-						</div>
-						<div class="flex items-center gap-1">
-							<button
-								onclick={() => handlePageChange(1)}
-								disabled={currentPage === 1}
-								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								<Icon icon="tabler:sort-ascending-numbers" class="h-4 w-4 rotate-90" />
-							</button>
-							<button
-								onclick={() => handlePageChange(currentPage - 1)}
-								disabled={currentPage === 1}
-								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								<Icon icon="tabler:sort-ascending-letters" class="h-4 w-4 rotate-90" />
-							</button>
-
-							{#each visiblePages as page}
-								<button
-									onclick={() => handlePageChange(page)}
-									class="h-8 min-w-8 rounded-full px-2 text-sm transition-colors {page ===
-									currentPage
-										? 'bg-primary-500 text-white'
-										: 'text-surface-300 hover:bg-surface-800'}"
-								>
-									{page}
-								</button>
-							{/each}
-
-							<button
-								onclick={() => handlePageChange(currentPage + 1)}
-								disabled={currentPage === totalPages}
-								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								<Icon icon="tabler:sort-descending-letters" class="h-4 w-4 -rotate-90" />
-							</button>
-							<button
-								onclick={() => handlePageChange(totalPages)}
-								disabled={currentPage === totalPages}
-								class="hover:bg-surface-800 text-surface-300 rounded-full p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
-							>
-								<Icon icon="tabler:sort-descending-numbers" class="h-4 w-4 -rotate-90" />
-							</button>
-						</div>
+					<div class="min-w-0 flex-1">
+						<PalContainerView
+							pals={upsState.pals}
+							idOf={(upsPal) => upsPal.id}
+							{nicknameOf}
+							storageKey="ups"
+							title={c.pals}
+							actions={upsActions}
+							{serverPaging}
+							{selection}
+							{filters}
+							{portrait}
+							{columns}
+							{detail}
+							{palActions}
+							onOpenPal={handleOpenPal}
+						/>
 					</div>
 				</div>
 			{/if}

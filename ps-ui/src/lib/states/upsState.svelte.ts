@@ -10,6 +10,7 @@ import {
 	MessageType
 } from '$lib/types';
 import { isReady, send, sendAndWait } from '$lib/utils/websocketUtils';
+import { SvelteSet } from 'svelte/reactivity';
 
 function toCollectionId(value: unknown): number | undefined {
 	if (value === undefined || value === null || value === '') return undefined;
@@ -25,8 +26,7 @@ export interface UPSState {
 	filters: UPSFilters;
 	pagination: UPSPagination;
 	loading: boolean;
-	selectedPals: Set<number>;
-	viewMode: 'grid' | 'list';
+	selectedPals: SvelteSet<number>;
 	showCollectionsPanel: boolean;
 	showTagsPanel: boolean;
 	showStatsPanel: boolean;
@@ -58,8 +58,8 @@ class UPSStateClass {
 	filters = $state<UPSFilters>({ ...DEFAULT_FILTERS });
 	pagination = $state<UPSPagination>({ ...DEFAULT_PAGINATION });
 	loading = $state(false);
-	selectedPals = $state<Set<number>>(new Set());
-	viewMode = $state<'grid' | 'list'>('grid');
+	// Mutated in place by several callers, so the set itself must be reactive.
+	selectedPals = new SvelteSet<number>();
 	showCollectionsPanel = $state(true);
 	showTagsPanel = $state(false);
 	showStatsPanel = $state(false);
@@ -428,12 +428,10 @@ class UPSStateClass {
 		} else {
 			this.selectedPals.add(palId);
 		}
-		this.selectedPals = new Set(this.selectedPals);
 	}
 
 	selectAllPals(): void {
 		this.pals.forEach((pal) => this.selectedPals.add(pal.id));
-		this.selectedPals = new Set(this.selectedPals);
 	}
 
 	async selectAllFilteredPals(): Promise<void> {
@@ -453,7 +451,7 @@ class UPSStateClass {
 	}
 
 	clearSelection(): void {
-		this.selectedPals = new Set();
+		this.selectedPals.clear();
 	}
 
 	updateSearch(search: string): void {
@@ -536,10 +534,6 @@ class UPSStateClass {
 
 	setStats(stats: UPSStats): void {
 		this.stats = stats;
-	}
-
-	setViewMode(mode: 'grid' | 'list'): void {
-		this.viewMode = mode;
 	}
 
 	toggleCollectionsPanel(): void {

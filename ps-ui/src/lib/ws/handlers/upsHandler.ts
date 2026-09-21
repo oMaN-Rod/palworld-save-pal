@@ -18,7 +18,6 @@ export const getUpsAllFilteredIdsHandler: WSMessageHandler = {
 	async handle(data: { pal_ids: number[]; total_count: number }) {
 		const upsState = getUpsState();
 		data.pal_ids.forEach((id) => upsState.selectedPals.add(id));
-		upsState.selectedPals = new Set(upsState.selectedPals);
 	}
 };
 
@@ -171,7 +170,11 @@ export const importToUpsHandler: WSMessageHandler = {
 
 			await upsState.loadCollections();
 		} else {
-			toastState.add(m.import_to_entity_failed({ entity: c.universalPalStorage }), m.error(), 'error');
+			toastState.add(
+				m.import_to_entity_failed({ entity: c.universalPalStorage }),
+				m.error(),
+				'error'
+			);
 		}
 	}
 };

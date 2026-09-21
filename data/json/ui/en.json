@@ -330,6 +330,7 @@
   "deleted_entity_named": "Deleted {entity} \"{name}\"",
   "deleted_entity_only": "Deleted {entity}",
   "deleted_partial": "Deleted {count} of {total} {pals}",
+  "deselect": "Deselect",
   "description_optional": "Description (optional)",
   "detailed_structures": "Detailed structures",
   "dimensional_pal_storage": "Dimensional {pal} Storage",
@@ -963,6 +964,7 @@
   "palbox": "Palbox",
   "paldeck": "Paldeck",
   "pals_in_storage": "{pals} in storage",
+  "pals_selected_count": "{count} {pals} selected",
   "party": "Party",
   "passive": "Passive",
   "passive_skill": [

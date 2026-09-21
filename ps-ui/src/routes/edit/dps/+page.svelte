@@ -1,9 +1,17 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
+
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Button, Card, Input, Tooltip, TooltipButton } from '$components/ui';
+	import {
+		getAppState,
+		getModalState,
+		getPalEditorState,
+		getToastState,
+		getUpsState
+	} from '$states';
+	import { Card, Input, Tooltip } from '$components/ui';
+	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -13,7 +21,6 @@
 	} from '$components/modals';
 	import { MessageType, type Pal, type PalData, type CloneToUpsModalProps } from '$types';
 	import {
-		debounce,
 		formatNickname,
 		deepCopy,
 		applyPalPreset,
@@ -23,24 +30,34 @@
 		palMatchesFilter
 	} from '$utils';
 	import { cn } from '$theme';
-	import { staticIcons } from '$types/icons';
-	import { PalBadge, PalContainerStats, PalFilterButtons, PalGrid } from '$components/pal';
+	import { PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
+	import { PalContainerView } from '$components/pal/container';
+	import type { PalContainerSelection } from '$states/palContainer.svelte';
 	import { send } from '$lib/utils/websocketUtils';
-	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
+	import { buildDpsActions } from './dpsActions';
+
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 9600;
-	const VISIBLE_PAGE_BUBBLES = 16;
 
 	type SortBy = 'name' | 'level' | 'paldeck-index' | 'slot-index';
 	type SortOrder = 'asc' | 'desc';
+
+	type PalWithData = {
+		id: string;
+		/** The storage key of the slot, as a number: the backend rejects "3". */
+		index: number;
+		pal: Pal;
+		palData?: PalData;
+	};
 
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
 	const upsState = getUpsState();
+	const palEditor = getPalEditorState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -48,96 +65,105 @@
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
-	let currentPage = $state(1);
-	let filteredPals: PalWithData[] = $state([]);
-	let selectedPals: string[] = $state([]);
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
-	let filterExpand = $state(['']);
 
-	type PalWithData = {
-		id: string;
-		index: number;
-		pal: Pal;
-		palData?: PalData;
-	};
+	// SvelteSet: the view re-reads the selection on mutation, not replacement.
+	const selectedIds = new SvelteSet<string>();
+	const selectedIdList = $derived([...selectedIds]);
 
-	const totalPages = $derived(
-		Math.ceil(
-			searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index'
-				? filteredPals.length
-				: TOTAL_SLOTS
-		) / PALS_PER_PAGE
-	);
-	const visiblePageStart = $derived(
-		Math.max(
-			1,
-			Math.min(
-				currentPage - Math.floor(VISIBLE_PAGE_BUBBLES / 2),
-				totalPages - VISIBLE_PAGE_BUBBLES + 1
-			)
-		)
-	);
-	const visiblePageEnd = $derived(
-		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
-	);
-	const visiblePages = $derived(
-		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
-	);
-
-	// `index` is an Object.entries key, so it arrives as a string.
-	const palsBySlot = $derived.by(() => {
-		const bySlot = new Map<number, PalWithData>();
-		for (const pal of filteredPals) {
-			const slot = Number(pal.index);
-			if (!bySlot.has(slot)) bySlot.set(slot, pal);
-		}
-		return bySlot;
+	const dpsPals = $derived.by((): PalWithData[] => {
+		const storage = appState.selectedPlayer?.dps;
+		if (!storage) return [];
+		return Object.entries(storage)
+			.filter(([_, pal]) => pal && pal.character_id !== 'None')
+			.map(([index, pal]) => ({
+				id: pal.instance_id,
+				index: Number(index),
+				pal,
+				palData: palsData.getByKey(pal.character_key)
+			}));
 	});
 
-	const currentPageItems = $derived.by(() => {
-		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
-		const endIndex = startIndex + PALS_PER_PAGE;
+	const palsById = $derived(new Map(dpsPals.map((entry) => [entry.id, entry])));
 
-		if (searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index') {
-			return filteredPals.slice(startIndex, endIndex);
-		}
+	const knownPals = $derived(dpsPals.filter(({ palData }) => Boolean(palData)));
 
-		return Array.from({ length: Math.min(endIndex, TOTAL_SLOTS) - startIndex }, (_, offset) => {
-			const index = startIndex + offset;
-			return (
-				palsBySlot.get(index) ?? {
-					id: `empty-${index}`,
-					index: index,
-					pal: {
-						character_id: 'None',
-						character_key: 'None',
-						storage_slot: index,
-						instance_id: `empty-${index}`,
-						storage_id: appState.selectedPlayer?.pal_box_id
-					} as Pal
-				}
-			);
+	const matchingPals = $derived.by(() => {
+		const query = searchQuery.toLowerCase();
+		return knownPals.filter(({ pal, palData }) => {
+			const matchesSearch =
+				query === '' ||
+				Boolean(palData?.localized_name?.toLowerCase().includes(query)) ||
+				Boolean(pal.nickname?.toLowerCase().includes(query)) ||
+				Boolean(pal.character_id?.toLowerCase().includes(query));
+			return matchesSearch && palMatchesFilter(pal, palData as PalData, selectedFilter);
 		});
 	});
+
+	const sortedPals = $derived.by(() => {
+		const direction = sortOrder === 'asc' ? 1 : -1;
+		const list = [...matchingPals];
+		switch (sortBy) {
+			case 'name':
+				return list.sort((a, b) => direction * (a.pal.name ?? '').localeCompare(b.pal.name ?? ''));
+			case 'level':
+				return list.sort((a, b) => direction * (a.pal.level - b.pal.level));
+			case 'paldeck-index':
+				return list.sort((a, b) => {
+					const indexA = a.palData?.pal_deck_index ?? Infinity;
+					const indexB = b.palData?.pal_deck_index ?? Infinity;
+					if (indexA === indexB) return 0;
+					return direction * (indexA - indexB);
+				});
+			default:
+				return list.sort((a, b) => direction * (a.pal.storage_slot - b.pal.storage_slot));
+		}
+	});
+
+	// Once the list is narrowed or reordered, slot numbers mean nothing.
+	const showsEmptySlots = $derived(
+		searchQuery === '' && selectedFilter === 'All' && sortBy === 'slot-index'
+	);
+
+	const displayPals = $derived.by((): PalWithData[] => {
+		if (!showsEmptySlots) return sortedPals;
+
+		const bySlot = new Map<number, PalWithData>();
+		for (const entry of sortedPals) {
+			if (!bySlot.has(entry.index)) {
+				bySlot.set(entry.index, entry);
+			}
+		}
+
+		return Array.from({ length: TOTAL_SLOTS }, (_, index) => bySlot.get(index) ?? emptySlot(index));
+	});
+
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+
+	const selection: PalContainerSelection<string> = {
+		get ids() {
+			return selectedIds;
+		},
+		onToggle: (id: string) => toggleSelected(id)
+	};
+
+	const dpsActions = $derived(
+		buildDpsActions({
+			selectionCount: selectedIds.size,
+			addAllPals: addAllPalsDps,
+			selectAll,
+			applyPreset: handleSelectPreset,
+			cloneSelectedToUps: handleBulkCloneToUps,
+			deleteSelected: deleteSelectedPals,
+			clearSelection: () => selectedIds.clear()
+		})
+	);
 
 	const sortButtonClass = (currentSortBy: SortBy) =>
 		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
 
-	let pals = $derived.by(() => {
-		if (!appState.selectedPlayer || !appState.selectedPlayer.dps) return;
-		const playerPals = Object.entries(appState.selectedPlayer.dps).filter(
-			([_, pal]) => pal && pal.character_id !== 'None'
-		);
-		return playerPals.map(([i, pal]) => {
-			const palData = palsData.getByKey(pal.character_key);
-			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
-		});
-	});
-
-	let elementTypes = $derived(Object.keys(elementsData.elements));
-
-	let LevelSortIcon = $derived.by(() => {
+	const LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
 			return 'tabler:sort-ascending-numbers';
 		} else {
@@ -147,7 +173,7 @@
 		}
 	});
 
-	let NameSortIcon = $derived.by(() => {
+	const NameSortIcon = $derived.by(() => {
 		if (sortBy !== 'name') {
 			return 'tabler:sort-ascending-letters';
 		} else {
@@ -157,7 +183,7 @@
 		}
 	});
 
-	let PaldeckSortIcon = $derived.by(() => {
+	const PaldeckSortIcon = $derived.by(() => {
 		if (sortBy !== 'paldeck-index') {
 			return 'tabler:arrows-sort';
 		} else {
@@ -167,75 +193,52 @@
 		}
 	});
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.target instanceof HTMLInputElement) {
+	function emptySlot(index: number): PalWithData {
+		return {
+			id: `empty-${index}`,
+			index,
+			pal: {
+				character_id: 'None',
+				character_key: 'None',
+				storage_slot: index,
+				instance_id: `empty-${index}`
+			} as Pal
+		};
+	}
+
+	function nicknameOf(entry: PalWithData): string {
+		return entry.pal.nickname || entry.pal.name || entry.pal.character_id;
+	}
+
+	function isRealPal(entry: PalWithData): boolean {
+		return entry.pal.character_id !== 'None';
+	}
+
+	// An empty slot has no record, so no bulk operation could resolve its id.
+	function toggleSelected(id: string): void {
+		if (!palsById.has(id)) return;
+		if (selectedIds.has(id)) {
+			selectedIds.delete(id);
+		} else {
+			selectedIds.add(id);
+		}
+	}
+
+	function selectAll(): void {
+		const ids = sortedPals.map((entry) => entry.id);
+		const wasComplete = selectedIds.size === ids.length;
+
+		selectedIds.clear();
+		if (wasComplete) return;
+		for (const id of ids) selectedIds.add(id);
+	}
+
+	function handleOpenPal(entry: PalWithData): void {
+		if (!isRealPal(entry)) {
+			handleAddPal(entry.index);
 			return;
 		}
-		if (event.key === 'ArrowLeft' || event.key === 'q' || event.key === 'Q') {
-			decrementPage();
-		} else if (event.key === 'ArrowRight' || event.key === 'e' || event.key === 'E') {
-			incrementPage();
-		}
-	}
-
-	function decrementPage() {
-		if (currentPage > 1) {
-			currentPage--;
-		} else {
-			currentPage = totalPages;
-		}
-	}
-
-	function incrementPage() {
-		if (currentPage < totalPages) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-	}
-
-	const debouncedFilterPals = debounce(filterPals, 300);
-
-	async function filterPals() {
-		if (!pals) return;
-		filteredPals = pals.filter(({ pal, palData }) => {
-			if (!palData) {
-				return false;
-			}
-			const matchesSearch =
-				palData.localized_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.character_id.toLowerCase().includes(searchQuery.toLowerCase());
-			return matchesSearch && palMatchesFilter(pal, palData, selectedFilter);
-		});
-
-		sortPals();
-	}
-
-	async function handleSelectPreset() {
-		const selectedPalsData = selectedPals.map((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
-			return {
-				character_id: palWithData?.pal.character_id,
-				character_key: palWithData?.pal.character_key
-			};
-		});
-
-		// @ts-ignore
-		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: m.select_entity({ entity: c.preset }),
-			selectedPals: selectedPalsData
-		});
-		if (!result) return;
-
-		const presetProfile = presetsData.presetProfiles[result];
-
-		selectedPals.forEach((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
-			if (palWithData) {
-				applyPalPreset(palWithData.pal, presetProfile, appState.selectedPlayer!);
-			}
-		});
+		palEditor.open(entry.pal);
 	}
 
 	function toggleSort(newSortBy: SortBy) {
@@ -249,24 +252,6 @@
 		} else {
 			sortBy = newSortBy;
 			sortOrder = 'asc';
-		}
-		sortPals();
-	}
-
-	function sortPals() {
-		switch (sortBy) {
-			case 'name':
-				sortByName();
-				break;
-			case 'level':
-				sortByLevel();
-				break;
-			case 'paldeck-index':
-				sortByPaldeckIndex();
-				break;
-			default:
-				sortBySlotIndex();
-				break;
 		}
 	}
 
@@ -292,7 +277,7 @@
 
 	async function clonePal(pal: Pal) {
 		const maxClones = appState.selectedPlayer!.dps
-			? 9600 - Object.values(appState.selectedPlayer!.dps).length
+			? TOTAL_SLOTS - Object.values(appState.selectedPlayer!.dps).length
 			: 0;
 		if (maxClones === 0) {
 			toast.add(
@@ -367,11 +352,10 @@
 	}
 
 	async function handleBulkCloneToUps() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		const palsToClone = selectedPals
-			.map((id) => pals?.find((p) => p.id === id)?.pal)
-			.filter(Boolean) as Pal[];
+		const ids = selectedIdList;
+		const palsToClone = ids.map((id) => palsById.get(id)?.pal).filter(Boolean) as Pal[];
 
 		if (palsToClone.length === 0) return;
 
@@ -392,7 +376,7 @@
 
 		try {
 			await upsState.cloneToUps(
-				selectedPals,
+				ids,
 				'dps',
 				appState.selectedPlayer?.uid,
 				collectionId,
@@ -410,74 +394,56 @@
 				'success'
 			);
 
-			selectedPals = [];
+			selectedIds.clear();
 		} catch (error) {
 			console.error('Bulk clone to UPS failed:', error);
 			toast.add(m.bulk_clone_to_ups_failed(), m.error(), 'error');
 		}
 	}
 
-	function sortByName() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.name.localeCompare(b.pal.name)
-				: b.pal.name.localeCompare(a.pal.name)
-		);
-	}
-
-	function sortByLevel() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc' ? a.pal.level - b.pal.level : b.pal.level - a.pal.level
-		);
-	}
-
-	function sortBySlotIndex() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.storage_slot - b.pal.storage_slot
-				: b.pal.storage_slot - a.pal.storage_slot
-		);
-	}
-
-	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.getByKey(p.pal.character_key));
-		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
-
-		palsWithInfo.sort((a, b) => {
-			const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-			const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-			return sortOrder === 'asc' ? indexA - indexB : indexB - indexA;
+	async function handleSelectPreset() {
+		const ids = selectedIdList;
+		const selectedPalsData = ids.map((id) => {
+			const palWithData = palsById.get(id);
+			return {
+				character_id: palWithData?.pal.character_id,
+				character_key: palWithData?.pal.character_key
+			};
 		});
 
-		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
-	}
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: m.select_entity({ entity: c.preset }),
+			selectedPals: selectedPalsData
+		});
+		if (!result) return;
 
-	function handlePalSelect(pal: Pal, event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
-		if (event.ctrlKey || event.metaKey) {
-			if (selectedPals.includes(pal.instance_id)) {
-				selectedPals = selectedPals.filter((id) => id !== pal.instance_id);
-			} else {
-				selectedPals = [...selectedPals, pal.instance_id];
+		const presetProfile = presetsData.presetProfiles[result];
+
+		ids.forEach((id) => {
+			const palWithData = palsById.get(id);
+			if (palWithData) {
+				applyPalPreset(palWithData.pal, presetProfile, appState.selectedPlayer!);
 			}
-		}
+		});
 	}
 
 	async function deleteSelectedPals() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
+		const count = selectedIds.size;
 		const confirmed = await modal.showConfirmModal({
-			title: m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			title: m.delete_selected_entity({ entity: m.pal({ count }) }),
 			message: m.delete_count_entities_confirm({
-				count: selectedPals.length,
-				entity: m.pal({ count: selectedPals.length })
+				count,
+				entity: m.pal({ count })
 			}),
 			confirmText: m.delete(),
 			cancelText: m.cancel()
 		});
 
 		if (appState.selectedPlayer && appState.selectedPlayer.dps && confirmed) {
-			const palIndexes = selectedStorageIndexes(appState.selectedPlayer.dps, selectedPals);
+			const palIndexes = selectedStorageIndexes(appState.selectedPlayer.dps, selectedIdList);
 			send(MessageType.DELETE_DPS_PALS, {
 				player_id: appState.selectedPlayer.uid,
 				pal_indexes: palIndexes
@@ -486,7 +452,7 @@
 			appState.selectedPlayer.dps = withoutStorageIndexes(appState.selectedPlayer.dps, palIndexes);
 		}
 
-		selectedPals = [];
+		selectedIds.clear();
 	}
 
 	async function handleDeletePal(pal: Pal) {
@@ -507,54 +473,6 @@
 		}
 	}
 
-	function handleSelectAll() {
-		if (selectedPals.length === filteredPals.length) {
-			selectedPals = [];
-		} else {
-			selectedPals = filteredPals.map((p) => p.id);
-		}
-	}
-
-	$effect(() => {
-		if (appState.selectedPlayer && appState.selectedPlayer.dps) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (searchQuery || selectedFilter) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (
-			(appState.selectedPal && appState.selectedPal.level) ||
-			(appState.selectedPal && appState.selectedPal.nickname)
-		) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		window.addEventListener('keydown', handleKeydown);
-		return () => {
-			window.removeEventListener('keydown', handleKeydown);
-		};
-	});
-
-	$effect(() => {
-		if (currentPage > totalPages) {
-			currentPage = 1;
-		}
-	});
-
-	$effect(() => {
-		if (pals) {
-			debouncedFilterPals();
-		}
-	});
-
 	async function addAllPalsDps() {
 		if (!appState.selectedPlayer) return;
 		// @ts-ignore
@@ -564,233 +482,176 @@
 			target: 'dps'
 		});
 	}
+
+	function palActions(entry: PalWithData): ActionDescriptor[] {
+		if (!isRealPal(entry)) {
+			return [
+				{
+					id: 'dps-pal-add',
+					label: m.add_new_pal(p.pal),
+					icon: 'tabler:plus',
+					run: () => handleAddPal(entry.index)
+				}
+			];
+		}
+
+		return [
+			{
+				id: 'dps-pal-clone',
+				label: m.clone_selected_pal(p.pal),
+				icon: 'tabler:copy',
+				run: () => handleClonePal(entry.pal)
+			},
+			{
+				id: 'dps-pal-clone-to-ups',
+				label: m.clone_to_entity({ entity: m.ups() }),
+				icon: 'tabler:upload',
+				run: () => handleCloneToUps(entry.pal)
+			},
+			{
+				id: 'dps-pal-delete',
+				label: m.delete_entity({ entity: c.pal }),
+				icon: 'tabler:trash',
+				run: () => handleDeletePal(entry.pal),
+				danger: true
+			}
+		];
+	}
 </script>
+
+{#snippet stats()}
+	{#if dpsPals.length > 0}
+		<PalContainerStats pals={dpsPals} {elementTypes} />
+	{:else}
+		<div>{m.no_pals_available(p.pals)}</div>
+	{/if}
+{/snippet}
+
+<!-- The page's own search box: its filtering also sorts and pads, which `matches` can't express. -->
+{#snippet filters()}
+	<div id="dps-filters" class="flex flex-col gap-4">
+		<Input
+			type="text"
+			inputClass="w-full"
+			placeholder={m.search_by_name_nickname()}
+			bind:value={searchQuery}
+		/>
+
+		<div>
+			<legend class="font-bold">{m.sort()}</legend>
+			<hr />
+			<div class="grid grid-cols-3 sm:grid-cols-6">
+				<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
+					<button
+						type="button"
+						class={sortButtonClass('level')}
+						onclick={() => toggleSort('level')}
+					>
+						<Icon icon={LevelSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
+					<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')}>
+						<Icon icon={NameSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
+					<button
+						type="button"
+						class={sortButtonClass('paldeck-index')}
+						onclick={() => toggleSort('paldeck-index')}
+					>
+						<Icon icon={PaldeckSortIcon} />
+					</button>
+				</Tooltip>
+			</div>
+		</div>
+
+		<PalFilterButtons bind:selectedFilter />
+
+		<div class="2xl:hidden">
+			<legend class="font-bold">{m.stats()}</legend>
+			<hr class="mb-2" />
+			{@render stats()}
+		</div>
+	</div>
+{/snippet}
+
+{#snippet portrait(entry: PalWithData)}
+	<PalBadge
+		pal={entry.pal}
+		selected={selectedIdList}
+		onDelete={() => handleDeletePal(entry.pal)}
+		onAdd={() => handleAddPal(entry.index)}
+		onClone={() => handleClonePal(entry.pal)}
+		onCloneToUps={() => handleCloneToUps(entry.pal)}
+	/>
+{/snippet}
+
+{#snippet columns(entry: PalWithData)}
+	{#if isRealPal(entry)}
+		<div class="flex flex-col gap-0.5">
+			<span class="truncate text-sm font-bold">{nicknameOf(entry)}</span>
+			<span class="text-surface-400 text-xs">
+				{m.level()}
+				{entry.pal.level ?? 0}
+			</span>
+		</div>
+	{:else}
+		<span class="text-surface-500 text-sm">{m.empty()} · {entry.index + 1}</span>
+	{/if}
+{/snippet}
+
+{#snippet detail(entry: PalWithData)}
+	<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+		<dt class="text-surface-400">{m.nickname()}</dt>
+		<dd>{nicknameOf(entry)}</dd>
+		<dt class="text-surface-400">{m.level()}</dt>
+		<dd>{entry.pal.level ?? 0}</dd>
+		<dt class="text-surface-400">{m.hp()}</dt>
+		<dd>{entry.pal.hp ?? 0} / {entry.pal.max_hp ?? 0}</dd>
+	</dl>
+{/snippet}
 
 {#if appState.selectedPlayer}
 	<div
-		class="grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		class="grid h-full w-full grid-cols-1 gap-2 p-2 2xl:grid-cols-[1fr_20%]"
 		{...additionalProps}
 	>
-		<div class="shrink-0 p-4">
-			<div
-				id="dps-toolbar"
-				class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1"
-			>
-				<Tooltip
-					position="right"
-					label={m.add_all_pals_to_entity({ pals: c.pals, entity: m.dps() })}
-				>
-					<Button id="dps-add-all" variant="ghost" size="icon" onclick={addAllPalsDps}>
-						<Icon icon="tabler:circle-plus" class="h-4 w-4" />
-					</Button>
-				</Tooltip>
-				<Tooltip>
-					<Button id="dps-select-all" variant="ghost" size="icon" onclick={handleSelectAll}>
-						<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
-					</Button>
-					{#snippet popup()}
-						<div class="flex flex-col">
-							<span>{m.select_all_in()}</span>
-							<div class="grid grid-cols-[auto_1fr] gap-1">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								<span class="text-sm">{m.palbox()}</span>
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
-									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								</div>
-								<span class="text-sm">{m.pal_box_party()}</span>
-							</div>
-						</div>
-					{/snippet}
-				</Tooltip>
-
-				{#if selectedPals.length >= 1}
-					<Tooltip
-						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-							<Icon icon="tabler:player-play" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.clone_pals_to_entity({
-							count: selectedPals.length,
-							pals: m.pal({ count: selectedPals.length }),
-							entity: m.ups()
-						})}
-					>
-						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
-							<Icon icon="tabler:upload" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-							<Icon icon="tabler:trash" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-							<Icon icon="tabler:x" class="h-4 w-4" />
-						</Button>
-					</Tooltip>
-				{/if}
-			</div>
-			<div id="dps-filters">
-				<Accordion
-					value={filterExpand}
-					onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-					collapsible
-				>
-					<Accordion.Item
-						value="filter"
-						base="rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet lead()}<Icon icon="tabler:search" />{/snippet}
-						{#snippet control()}
-							<span class="font-bold">{m.filter_and_sort()}</span>
-						{/snippet}
-						{#snippet panel()}
-							<Input
-								type="text"
-								inputClass="w-full"
-								placeholder={m.search_by_name_nickname()}
-								bind:value={searchQuery}
-							/>
-							<div>
-								<legend class="font-bold">{m.sort()}</legend>
-								<hr />
-								<div class="grid grid-cols-3 sm:grid-cols-6">
-									<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
-										<button
-											type="button"
-											class={sortButtonClass('level')}
-											onclick={() => toggleSort('level')}
-										>
-											<Icon icon={LevelSortIcon} />
-										</button>
-									</Tooltip>
-									<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
-										<button
-											type="button"
-											class={sortButtonClass('name')}
-											onclick={() => toggleSort('name')}
-										>
-											<Icon icon={NameSortIcon} />
-										</button>
-									</Tooltip>
-									<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
-										<button
-											type="button"
-											class={sortButtonClass('paldeck-index')}
-											onclick={() => toggleSort('paldeck-index')}
-										>
-											<Icon icon={PaldeckSortIcon} />
-										</button>
-									</Tooltip>
-								</div>
-							</div>
-							<PalFilterButtons bind:selectedFilter />
-						{/snippet}
-					</Accordion.Item>
-					<Accordion.Item
-						value="stats"
-						base="block 2xl:hidden rounded-sm bg-surface-900"
-						controlHover="hover:bg-secondary-500/25"
-					>
-						{#snippet lead()}<Icon icon="tabler:info-circle" />{/snippet}
-						{#snippet control()}
-							<span class="font-bold">{m.stats()}</span>
-						{/snippet}
-						{#snippet panel()}
-							{#if pals && pals.length > 0}
-								<PalContainerStats {pals} {elementTypes} />
-							{:else}
-								<div>{m.no_pals_available(p.pals)}</div>
-							{/if}
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
-			</div>
-		</div>
-
-		<div>
-			<div id="dps-pager" class="mb-4 flex items-center justify-center space-x-4">
-				<Button
-					class="rounded-full p-0! font-bold"
-					variant="ghost"
-					size="md"
-					onclick={decrementPage}
-				>
-					<img src={staticIcons.qIcon} alt={m.previous()} class="h-10 w-10" />
-				</Button>
-
-				<div class="flex space-x-2">
-					{#each visiblePages as page}
-						<TooltipButton
-							buttonClass="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500! text-white'
-								: 'bg-surface-800 hover:bg-surface-600'}"
-							onclick={() => (currentPage = page)}
-							popupLabel={`Box ${page}`}
-							variant="ghost"
-							size="md"
-						>
-							{Math.floor(page)}
-						</TooltipButton>
-					{/each}
-				</div>
-
-				<Button class="rounded-sm p-0! font-bold" variant="ghost" size="md" onclick={incrementPage}>
-					<img src={staticIcons.eIcon} alt={m.next()} class="h-10 w-10" />
-				</Button>
-			</div>
-
-			<div id="dps-grid" class="overflow-hidden">
-				<PalGrid>
-					{#each currentPageItems as item (item.pal.instance_id)}
-						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
-							<PalBadge
-								pal={item.pal}
-								bind:selected={selectedPals}
-								onSelect={handlePalSelect}
-								onMove={() => {}}
-								onDelete={() => handleDeletePal(item.pal)}
-								onAdd={() => handleAddPal(item.index)}
-								onClone={() => handleClonePal(item.pal)}
-								onCloneToUps={() => handleCloneToUps(item.pal)}
-							/>
-						{/if}
-					{/each}
-				</PalGrid>
-			</div>
-		</div>
-
-		<div id="dps-stats">
-			{#if pals && pals.length > 0}
-				<Card class="mr-2 hidden min-h-0 2xl:block">
-					<PalContainerStats {pals} {elementTypes} />
-				</Card>
-			{:else}
-				<Card class="mr-2 hidden min-h-0 2xl:block">
-					<div>{m.no_pals_available(p.pals)}</div>
-				</Card>
+		<div class="flex min-h-0 gap-2">
+			<!-- The view's own toolbar carries these rows once something is selected. -->
+			{#if selectedIds.size === 0}
+				<ActionGroup id="dps-actions" actions={dpsActions} title={m.quick_actions()} />
 			{/if}
+
+			<div class="min-w-0 flex-1">
+				<PalContainerView
+					pals={displayPals}
+					idOf={(entry) => entry.id}
+					{nicknameOf}
+					storageKey="dps"
+					title={c.dimensionalPalStorage}
+					pageSize={PALS_PER_PAGE}
+					actions={dpsActions}
+					{selection}
+					{filters}
+					{portrait}
+					{columns}
+					{detail}
+					{palActions}
+					onOpenPal={handleOpenPal}
+				/>
+			</div>
 		</div>
+
+		<aside id="dps-stats" class="hidden min-h-0 flex-col gap-2 overflow-y-auto 2xl:flex">
+			<Card class="min-h-0">
+				{@render stats()}
+			</Card>
+		</aside>
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">
 		<h2 class="h2">{m.select_player_view_entity({ entity: c.dimensionalPalStorage })}</h2>
 	</div>
 {/if}
-
-<style>
-	.pal-element-badge {
-		width: 24px;
-		height: 24px;
-	}
-</style>

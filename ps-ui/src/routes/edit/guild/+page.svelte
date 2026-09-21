@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
+
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState } from '$states';
+	import { getAppState, getModalState, getPalEditorState, getToastState } from '$states';
 	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		type ItemContainer,
 		type Pal,
@@ -13,7 +16,8 @@
 		Rarity
 	} from '$types';
 	import { ASSET_DATA_PATH } from '$lib/constants';
-	import { PalBadge, PalGrid } from '$components/pal';
+	import { PalBadge } from '$components/pal';
+	import { PalContainerView } from '$components/pal/container';
 	import { DebugButton } from '$components/layout';
 	import { ItemBadge } from '$components/shared';
 	import LabResearch from '$components/guilds/LabResearch.svelte';
@@ -25,15 +29,18 @@
 		NumberSliderModal,
 		TextInputModal
 	} from '$components/modals';
-	import { assetLoader, debounce, deepCopy, formatBossCharacterId, formatNickname } from '$utils';
+	import { assetLoader, deepCopy, formatBossCharacterId, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
+	import type { PalContainerSelection } from '$states/palContainer.svelte';
 	import { send } from '$lib/utils/websocketUtils';
 	import { goto } from '$app/navigation';
 	import { Nuke } from '$components/ui';
 	import { LabResearchControls } from '$components/guilds';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
+
+	import { buildGuildActions } from './guildActions';
 
 	interface PalWithBaseId {
 		pal: Pal;
@@ -43,13 +50,18 @@
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
+	const palEditor = getPalEditorState();
 
 	const VISIBLE_PAGE_BUBBLES = 16;
 
-	let selectedPals: string[] = $state([]);
+	// A set, not a list: every read of the selection is a membership test, and
+	// a `SvelteSet` rather than a plain one because the view re-reads it on
+	// mutation rather than on replacement.
+	const selectedIds = new SvelteSet<string>();
+	const selectedIdList = $derived([...selectedIds]);
+
 	let palSearchQuery = $state('');
 	let currentPage = $state(1);
-	let filteredPals: PalWithBaseId[] = $state([]);
 	let activeTab: 'pals' | 'storage' | 'guildChest' | 'lab' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
@@ -202,13 +214,31 @@
 		return staticIcons.unknownIcon;
 	});
 
-	const currentPageItems = $derived.by(() => {
+	// Pre-migration the search results lived in a `$state` array refilled by a
+	// debounced `filterPals()`, so the grid showed the previous query's matches
+	// for 300ms and never noticed a pal deleted underneath it. Same predicate,
+	// same cross-base reach, derived rather than pushed.
+	const matchingPals = $derived.by((): PalWithBaseId[] => {
+		if (!guildBases || !palSearchQuery) return [];
+		const query = palSearchQuery.toLowerCase();
+		return Object.entries(guildBases).flatMap(([baseId, base]) =>
+			Object.values(base.pals)
+				.filter(
+					(pal) =>
+						pal.character_id !== 'None' &&
+						(pal.name.toLowerCase().includes(query) ||
+							pal.nickname?.toLowerCase().includes(query) ||
+							pal.character_id.toLowerCase().includes(query))
+				)
+				.map((pal) => ({ pal, baseId }))
+		);
+	});
+
+	// A search spans every base, so empty slots (which belong to one base) are dropped.
+	const displayPals = $derived.by((): PalWithBaseId[] => {
+		if (palSearchQuery) return matchingPals;
 		if (!currentBase) return [];
 		const [baseId, base] = currentBase;
-
-		if (palSearchQuery) {
-			return filteredPals;
-		}
 
 		const palsBySlot = new Map<number, (typeof base.pals)[string]>();
 		for (const pal of Object.values(base.pals)) {
@@ -238,7 +268,31 @@
 			});
 	});
 
-	const debouncedFilterPals = debounce(filterPals, 300);
+	// An empty slot has no record, so no bulk operation could resolve its id.
+	const selectablePals = $derived(
+		new Map(displayPals.filter(isRealPal).map((item) => [item.pal.instance_id, item]))
+	);
+
+	const selection: PalContainerSelection<string> = {
+		get ids() {
+			return selectedIds;
+		},
+		onToggle: (id: string) => toggleSelected(id)
+	};
+
+	const guildActions = $derived(
+		buildGuildActions({
+			selectionCount: selectedIds.size,
+			baseId: currentBase?.[0] ?? '',
+			addPal: handleAddPal,
+			selectAll: handleSelectAll,
+			healAll: handleHealAll,
+			applyPreset: handleSelectPreset,
+			healSelected: healSelectedPals,
+			deleteSelected: deleteSelectedPals,
+			clearSelection: () => selectedIds.clear()
+		})
+	);
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.target instanceof HTMLInputElement) return;
@@ -272,15 +326,59 @@
 		selectedInventoryItem = '';
 	}
 
-	function handlePalSelect(pal: Pal, event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
-		if (event.ctrlKey || event.metaKey) {
-			if (selectedPals.includes(pal.instance_id)) {
-				selectedPals = selectedPals.filter((id) => id !== pal.instance_id);
-			} else {
-				selectedPals = [...selectedPals, pal.instance_id];
-			}
+	function isRealPal(item: PalWithBaseId): boolean {
+		return item.pal.character_id !== 'None';
+	}
+
+	function nicknameOf(item: PalWithBaseId): string {
+		return item.pal.nickname || item.pal.name || item.pal.character_id;
+	}
+
+	function toggleSelected(id: string): void {
+		if (!selectablePals.has(id)) return;
+		if (selectedIds.has(id)) {
+			selectedIds.delete(id);
+		} else {
+			selectedIds.add(id);
 		}
+	}
+
+	function handleOpenPal(item: PalWithBaseId): void {
+		if (!isRealPal(item)) {
+			handleAddPal(item.baseId, item.pal.storage_slot);
+			return;
+		}
+		palEditor.open(item.pal);
+	}
+
+	// The base comes off the item: a search result may live outside `currentBase`.
+	function palActions(item: PalWithBaseId): ActionDescriptor[] {
+		if (!isRealPal(item)) {
+			return [
+				{
+					id: 'guild-pal-add',
+					label: m.add_new_pal(p.pal),
+					icon: 'tabler:plus',
+					run: () => handleAddPal(item.baseId, item.pal.storage_slot)
+				}
+			];
+		}
+
+		return [
+			{
+				id: 'guild-pal-clone',
+				label: m.clone_selected_pal(p.pal),
+				icon: 'tabler:copy',
+				run: () => handleClonePal(item)
+			},
+			{
+				id: 'guild-pal-delete',
+				label: m.delete_entity({ entity: c.pal }),
+				icon: 'tabler:trash',
+				run: () => handleDeletePal(item.baseId, item.pal),
+				danger: true
+			}
+		];
 	}
 
 	async function handleAddPal(baseId: string, index?: number) {
@@ -346,13 +444,14 @@
 	}
 
 	async function deleteSelectedPals() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
+		const count = selectedIds.size;
 		const confirmed = await modal.showConfirmModal({
-			title: m.delete_entity({ entity: m.pal({ count: selectedPals.length }) }),
+			title: m.delete_entity({ entity: m.pal({ count }) }),
 			message: m.delete_count_entities_confirm({
-				count: selectedPals.length,
-				entity: m.pal({ count: selectedPals.length })
+				count,
+				entity: m.pal({ count })
 			}),
 			confirmText: m.delete(),
 			cancelText: m.cancel()
@@ -363,15 +462,15 @@
 			send(MessageType.DELETE_PALS, {
 				guild_id: playerGuild?.id,
 				base_id: baseId,
-				pal_ids: selectedPals
+				pal_ids: selectedIdList
 			});
 
 			playerGuild!.bases[baseId].pals = Object.fromEntries(
-				Object.entries(playerGuild!.bases[baseId].pals).filter(([id]) => !selectedPals.includes(id))
+				Object.entries(playerGuild!.bases[baseId].pals).filter(([id]) => !selectedIds.has(id))
 			);
 		}
 
-		selectedPals = [];
+		selectedIds.clear();
 	}
 
 	async function handleDeletePal(baseId: string, pal: Pal) {
@@ -396,45 +495,26 @@
 		);
 	}
 
-	function filterPals() {
-		if (!guildBases || !palSearchQuery) return;
-
-		filteredPals = Object.entries(guildBases).flatMap(([baseId, base]) =>
-			Object.values(base.pals)
-				.filter((pal) => {
-					return (
-						pal.name.toLowerCase().includes(palSearchQuery.toLowerCase()) ||
-						pal.nickname?.toLowerCase().includes(palSearchQuery.toLowerCase()) ||
-						pal.character_id.toLowerCase().includes(palSearchQuery.toLowerCase())
-					);
-				})
-				.map((pal) => ({
-					pal: pal,
-					baseId: baseId
-				}))
-		);
-	}
-
 	function handleSelectAll() {
 		if (!currentBase) return;
-		const [_, base] = currentBase;
+		const [, base] = currentBase;
 
 		const basePalIds = Object.values(base.pals).map((pal) => pal.instance_id);
+		// A count comparison, not a subset test, so a second press clears.
+		const wasComplete = selectedIds.size === basePalIds.length;
 
-		if (selectedPals.length === basePalIds.length) {
-			selectedPals = [];
-		} else {
-			selectedPals = [...basePalIds];
-		}
+		selectedIds.clear();
+		if (wasComplete) return;
+		for (const id of basePalIds) selectedIds.add(id);
 	}
 
 	async function healSelectedPals() {
-		if (!guildBases || selectedPals.length === 0) return;
-		send(MessageType.HEAL_PALS, [...selectedPals]);
+		if (!guildBases || selectedIds.size === 0) return;
+		send(MessageType.HEAL_PALS, selectedIdList);
 
 		Object.values(guildBases).forEach((base) => {
 			Object.values(base.pals).forEach((pal) => {
-				if (selectedPals.includes(pal.instance_id)) {
+				if (selectedIds.has(pal.instance_id)) {
 					pal.hp = pal.max_hp;
 					pal.sanity = 100;
 					const palData = palsData.getByKey(pal.character_key);
@@ -445,7 +525,7 @@
 			});
 		});
 
-		selectedPals = [];
+		selectedIds.clear();
 	}
 
 	function handleHealAll() {
@@ -536,7 +616,7 @@
 	}
 
 	async function handleSelectPreset() {
-		const selectedPalsData = selectedPals.map((id) => {
+		const selectedPalsData = selectedIdList.map((id) => {
 			const pal = Object.values(currentBase![1].pals).find((p) => p.instance_id === id);
 			return {
 				character_id: pal?.character_id,
@@ -552,7 +632,7 @@
 
 		const presetProfile = presetsData.presetProfiles[result];
 
-		selectedPals.forEach((id) => {
+		selectedIdList.forEach((id) => {
 			const pal = Object.values(currentBase![1].pals).find((p) => p.instance_id === id);
 			if (pal) {
 				for (const [key, value] of Object.entries(presetProfile.pal_preset!)) {
@@ -660,12 +740,6 @@
 	}
 
 	$effect(() => {
-		if (palSearchQuery) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
 		window.addEventListener('keydown', handleKeydown);
 		return () => {
 			window.removeEventListener('keydown', handleKeydown);
@@ -684,6 +758,53 @@
 		}
 	});
 </script>
+
+<!-- The page's own search box: its filtering spans every base, which `matches` can't express. -->
+{#snippet filters()}
+	<div id="guild-pal-filters" class="flex flex-col gap-4">
+		<Input
+			type="text"
+			inputClass="w-full"
+			placeholder={m.search_by_name_nickname()}
+			bind:value={palSearchQuery}
+		/>
+	</div>
+{/snippet}
+
+{#snippet portrait(item: PalWithBaseId)}
+	<PalBadge
+		pal={item.pal}
+		selected={selectedIdList}
+		onDelete={() => handleDeletePal(item.baseId, item.pal)}
+		onAdd={() => handleAddPal(item.baseId, item.pal.storage_slot)}
+		onClone={() => handleClonePal(item)}
+	/>
+{/snippet}
+
+{#snippet columns(item: PalWithBaseId)}
+	{#if isRealPal(item)}
+		<div class="flex flex-col gap-0.5">
+			<span class="truncate text-sm font-bold">{nicknameOf(item)}</span>
+			<span class="text-surface-400 text-xs">
+				{m.level()}
+				{item.pal.level ?? 0}
+			</span>
+		</div>
+	{:else}
+		<span class="text-surface-500 text-sm">{m.empty()} · {item.pal.storage_slot + 1}</span>
+	{/if}
+{/snippet}
+
+{#snippet detail(item: PalWithBaseId)}
+	<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+		<dt class="text-surface-400">{m.nickname()}</dt>
+		<dd>{nicknameOf(item)}</dd>
+		<dt class="text-surface-400">{m.level()}</dt>
+		<dd>{item.pal.level ?? 0}</dd>
+		<dt class="text-surface-400">{m.hp()}</dt>
+		<dd>{item.pal.hp ?? 0} / {item.pal.max_hp ?? 0}</dd>
+	</dl>
+{/snippet}
 
 {#if appState.selectedPlayer}
 	{#if appState.loadingGuild}
@@ -820,59 +941,9 @@
 						<span>{m.lab()}</span>
 					</button>
 				</nav>
-				{#if activeTab === 'pals'}
-					<div
-						id="guild-pals-toolbar"
-						class="btn-group bg-surface-900 w-full items-center rounded-sm p-1"
-					>
-						<Tooltip position="right" label={m.add_new_pal_to_entity({ entity: c.base })}>
-							<Button
-								id="guild-pals-add"
-								variant="ghost"
-								size="icon"
-								onclick={() => currentBase && handleAddPal(currentBase[0])}
-							>
-								<Icon icon="tabler:plus" class="h-4 w-4" />
-							</Button>
-						</Tooltip>
-						<Tooltip label={m.select_all_current_base()}>
-							<Button
-								id="guild-pals-select-all"
-								variant="ghost"
-								size="icon"
-								onclick={handleSelectAll}
-							>
-								<Icon icon="tabler:arrows-diff" class="h-4 w-4" />
-							</Button>
-						</Tooltip>
-						<Tooltip label={m.heal_all_in_entity({ entity: c.base })}>
-							<Button id="guild-pals-heal-all" variant="ghost" size="icon" onclick={handleHealAll}>
-								<Icon icon="tabler:bandage" class="h-4 w-4" />
-							</Button>
-						</Tooltip>
-						{#if selectedPals.length > 0}
-							<Tooltip label={m.apply_preset_to_selected(p.pals)}>
-								<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-									<Icon icon="tabler:player-play" class="h-4 w-4" />
-								</Button>
-							</Tooltip>
-							<Tooltip label={m.heal_selected_pals(p.pals)}>
-								<Button variant="ghost" size="icon" onclick={healSelectedPals}>
-									<Icon icon="tabler:ambulance" class="h-4 w-4" />
-								</Button>
-							</Tooltip>
-							<Tooltip label={m.delete_selected_entity({ entity: c.pals })}>
-								<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-									<Icon icon="tabler:trash" class="h-4 w-4" />
-								</Button>
-							</Tooltip>
-							<Tooltip label={m.clear_entity({ entity: m.selected() })}>
-								<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-									<Icon icon="tabler:x" class="h-4 w-4" />
-								</Button>
-							</Tooltip>
-						{/if}
-					</div>
+				{#if activeTab === 'pals' && selectedIds.size === 0}
+					<!-- The view's own toolbar carries these rows once something is selected. -->
+					<ActionGroup id="guild-pals-actions" actions={guildActions} title={m.quick_actions()} />
 				{/if}
 				{#if activeTab == 'storage'}
 					<div class="flex items-center">
@@ -1018,22 +1089,27 @@
 					</div>
 				{/if}
 				{#if activeTab == 'pals'}
-					<div id="guild-pals-grid" class="overflow-hidden">
-						<PalGrid>
-							{#each currentPageItems as item (item.pal.instance_id)}
-								{#if item.pal.character_id !== 'None' || !palSearchQuery}
-									<PalBadge
-										pal={item.pal}
-										bind:selected={selectedPals}
-										onSelect={handlePalSelect}
-										onDelete={() => handleDeletePal(currentBase![0], item.pal)}
-										onAdd={() => handleAddPal(currentBase![0], item.pal.storage_slot)}
-										onClone={() => handleClonePal(item)}
-										onMove={() => {}}
-									/>
-								{/if}
-							{/each}
-						</PalGrid>
+					<!-- `pageSize={0}` is this container's documented "paging disabled":
+					     guild pages bases, not pals, and the selector above is that
+					     control. `PalContainerView`'s `pageSize` defaults to 30, so
+					     leaving it off would grow a second pager with nothing to page. -->
+					<div class="min-h-0">
+						<PalContainerView
+							pals={displayPals}
+							idOf={(item) => item.pal.instance_id}
+							{nicknameOf}
+							storageKey="guild"
+							title={c.pals}
+							pageSize={0}
+							actions={guildActions}
+							{selection}
+							{filters}
+							{portrait}
+							{columns}
+							{detail}
+							{palActions}
+							onOpenPal={handleOpenPal}
+						/>
 					</div>
 				{:else if activeTab == 'storage'}
 					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}
@@ -1089,7 +1165,9 @@
 									{/if}
 								{/snippet}
 							</List>
-							<div class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]">
+							<div
+								class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]"
+							>
 								{#if currentStorageContainer}
 									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
 									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}

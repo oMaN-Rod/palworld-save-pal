@@ -1,9 +1,17 @@
 <script lang="ts">
+	import { SvelteSet } from 'svelte/reactivity';
+
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { elementsData, palsData, presetsData } from '$lib/data';
-	import { getAppState, getModalState, getToastState, getUpsState } from '$states';
-	import { Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { Button, Card, Input, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import {
+		getAppState,
+		getModalState,
+		getPalEditorState,
+		getToastState,
+		getUpsState
+	} from '$states';
+	import { Card, Input, Spinner, Tooltip } from '$components/ui';
+	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		PalSelectModal,
 		FillPalsModal,
@@ -14,7 +22,6 @@
 	} from '$components/modals';
 	import { type Pal, type PalData, type CloneToUpsModalProps, MessageType } from '$types';
 	import {
-		debounce,
 		formatNickname,
 		deepCopy,
 		applyPalPreset,
@@ -24,24 +31,34 @@
 		palMatchesFilter
 	} from '$utils';
 	import { cn } from '$theme';
-	import { staticIcons } from '$types/icons';
-	import { PalBadge, PalContainerStats, PalFilterButtons, PalGrid } from '$components/pal';
+	import { PalBadge, PalContainerStats, PalFilterButtons } from '$components/pal';
+	import { PalContainerView } from '$components/pal/container';
+	import type { PalContainerSelection } from '$states/palContainer.svelte';
 	import { send } from '$lib/utils/websocketUtils';
-	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
+	import { buildGpsActions } from './gpsActions';
+
 	const PALS_PER_PAGE = 30;
 	const TOTAL_SLOTS = 960;
-	const VISIBLE_PAGE_BUBBLES = 16;
 
 	type SortBy = 'name' | 'level' | 'paldeck-index' | 'slot-index';
 	type SortOrder = 'asc' | 'desc';
+
+	type PalWithData = {
+		id: string;
+		/** The storage key of the slot, as a number: the backend rejects "3". */
+		index: number;
+		pal: Pal;
+		palData?: PalData;
+	};
 
 	const appState = getAppState();
 	const modal = getModalState();
 	const toast = getToastState();
 	const upsState = getUpsState();
+	const palEditor = getPalEditorState();
 
 	let { ...additionalProps } = $props<{
 		[key: string]: any;
@@ -49,92 +66,106 @@
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
-	let currentPage = $state(1);
-	let filteredPals: PalWithData[] = $state([]);
-	let selectedPals: string[] = $state([]);
 	let sortBy: SortBy = $state('slot-index');
 	let sortOrder: SortOrder = $state('asc');
-	let filterExpand = $state(['']);
 
-	type PalWithData = {
-		id: string;
-		index: number;
-		pal: Pal;
-		palData?: PalData;
-	};
+	// SvelteSet: the view re-reads the selection on mutation, not replacement.
+	const selectedIds = new SvelteSet<string>();
+	const selectedIdList = $derived([...selectedIds]);
 
-	const totalPages = $derived(
-		Math.ceil(
-			searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index'
-				? filteredPals.length
-				: TOTAL_SLOTS
-		) / PALS_PER_PAGE
-	);
-	const visiblePageStart = $derived(
-		Math.max(
-			1,
-			Math.min(
-				currentPage - Math.floor(VISIBLE_PAGE_BUBBLES / 2),
-				totalPages - VISIBLE_PAGE_BUBBLES + 1
-			)
-		)
-	);
-	const visiblePageEnd = $derived(
-		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
-	);
-	const visiblePages = $derived(
-		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
+	const gpsPals = $derived.by((): PalWithData[] => {
+		const storage = appState.gps;
+		if (!storage) return [];
+		return Object.entries(storage)
+			.filter(([_, pal]) => pal && pal.character_id !== 'None')
+			.map(([index, pal]) => ({
+				id: pal.instance_id,
+				index: Number(index),
+				pal,
+				palData: palsData.getByKey(pal.character_key)
+			}));
+	});
+
+	const palsById = $derived(new Map(gpsPals.map((entry) => [entry.id, entry])));
+
+	const knownPals = $derived(gpsPals.filter(({ palData }) => Boolean(palData)));
+
+	const matchingPals = $derived.by(() => {
+		const query = searchQuery.toLowerCase();
+		return knownPals.filter(({ pal, palData }) => {
+			const matchesSearch =
+				query === '' ||
+				Boolean(palData?.localized_name?.toLowerCase().includes(query)) ||
+				Boolean(pal.nickname?.toLowerCase().includes(query)) ||
+				Boolean(pal.character_id?.toLowerCase().includes(query));
+			return matchesSearch && palMatchesFilter(pal, palData as PalData, selectedFilter);
+		});
+	});
+
+	const sortedPals = $derived.by(() => {
+		const direction = sortOrder === 'asc' ? 1 : -1;
+		const list = [...matchingPals];
+		switch (sortBy) {
+			case 'name':
+				return list.sort((a, b) => direction * (a.pal.name ?? '').localeCompare(b.pal.name ?? ''));
+			case 'level':
+				return list.sort((a, b) => direction * (a.pal.level - b.pal.level));
+			case 'paldeck-index':
+				return list.sort((a, b) => {
+					const indexA = a.palData?.pal_deck_index ?? Infinity;
+					const indexB = b.palData?.pal_deck_index ?? Infinity;
+					if (indexA === indexB) return 0;
+					return direction * (indexA - indexB);
+				});
+			default:
+				return list.sort((a, b) => direction * (a.pal.storage_slot - b.pal.storage_slot));
+		}
+	});
+
+	// Once the list is narrowed or reordered, slot numbers mean nothing.
+	const showsEmptySlots = $derived(
+		searchQuery === '' && selectedFilter === 'All' && sortBy === 'slot-index'
 	);
 
-	const currentPageItems = $derived.by(() => {
-		const startIndex = (currentPage - 1) * PALS_PER_PAGE;
-		const endIndex = startIndex + PALS_PER_PAGE;
+	const displayPals = $derived.by((): PalWithData[] => {
+		if (!showsEmptySlots) return sortedPals;
 
-		if (searchQuery || selectedFilter !== 'All' || sortBy !== 'slot-index') {
-			return filteredPals.slice(startIndex, endIndex);
+		const bySlot = new Map<number, PalWithData>();
+		for (const entry of sortedPals) {
+			if (!bySlot.has(entry.index)) {
+				bySlot.set(entry.index, entry);
+			}
 		}
 
-		const paddedPals = Array(TOTAL_SLOTS)
-			.fill(undefined)
-			.map((_, index) => {
-				const pal = filteredPals.find((p) => p.index == index);
-				if (pal) {
-					return pal;
-				} else {
-					return {
-						id: `empty-${index}`,
-						index: index,
-						pal: {
-							character_id: 'None',
-							character_key: 'None',
-							storage_slot: index,
-							instance_id: `empty-${index}`,
-							storage_id: '00000000-0000-0000-0000-000000000000'
-						} as Pal
-					};
-				}
-			});
-
-		return paddedPals.slice(startIndex, endIndex);
+		return Array.from({ length: TOTAL_SLOTS }, (_, index) => bySlot.get(index) ?? emptySlot(index));
 	});
+
+	const elementTypes = $derived(Object.keys(elementsData.elements));
+
+	const selection: PalContainerSelection<string> = {
+		get ids() {
+			return selectedIds;
+		},
+		onToggle: (id: string) => toggleSelected(id)
+	};
+
+	const gpsActions = $derived(
+		buildGpsActions({
+			selectionCount: selectedIds.size,
+			addAllPals: addAllPalsGps,
+			selectAll,
+			applyPreset: handleSelectPreset,
+			cloneSelectedToUps: handleBulkCloneToUps,
+			cloneSelectedToPlayer: handleBulkCloneToPlayer,
+			deleteSelected: deleteSelectedPals,
+			clearSelection: () => selectedIds.clear()
+		})
+	);
 
 	const sortButtonClass = (currentSortBy: SortBy) =>
 		cn('btn', sortBy === currentSortBy ? 'bg-secondary-500/25' : '');
 
-	let pals = $derived.by(() => {
-		if (!appState.gps) return;
-		const gpsPals = Object.entries(appState.gps).filter(
-			([_, pal]) => pal && pal.character_id !== 'None'
-		);
-		return gpsPals.map(([i, pal]) => {
-			const palData = palsData.getByKey(pal.character_key);
-			return { id: pal.instance_id, index: i as unknown as number, pal, palData };
-		});
-	});
-
-	let elementTypes = $derived(Object.keys(elementsData.elements));
-
-	let LevelSortIcon = $derived.by(() => {
+	const LevelSortIcon = $derived.by(() => {
 		if (sortBy !== 'level') {
 			return 'tabler:sort-ascending-numbers';
 		} else {
@@ -144,7 +175,7 @@
 		}
 	});
 
-	let NameSortIcon = $derived.by(() => {
+	const NameSortIcon = $derived.by(() => {
 		if (sortBy !== 'name') {
 			return 'tabler:sort-ascending-letters';
 		} else {
@@ -154,7 +185,7 @@
 		}
 	});
 
-	let PaldeckSortIcon = $derived.by(() => {
+	const PaldeckSortIcon = $derived.by(() => {
 		if (sortBy !== 'paldeck-index') {
 			return 'tabler:arrows-sort';
 		} else {
@@ -164,75 +195,53 @@
 		}
 	});
 
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.target instanceof HTMLInputElement) {
+	function emptySlot(index: number): PalWithData {
+		return {
+			id: `empty-${index}`,
+			index,
+			pal: {
+				character_id: 'None',
+				character_key: 'None',
+				storage_slot: index,
+				instance_id: `empty-${index}`,
+				storage_id: '00000000-0000-0000-0000-000000000000'
+			} as Pal
+		};
+	}
+
+	function nicknameOf(entry: PalWithData): string {
+		return entry.pal.nickname || entry.pal.name || entry.pal.character_id;
+	}
+
+	function isRealPal(entry: PalWithData): boolean {
+		return entry.pal.character_id !== 'None';
+	}
+
+	// An empty slot has no record, so no bulk operation could resolve its id.
+	function toggleSelected(id: string): void {
+		if (!palsById.has(id)) return;
+		if (selectedIds.has(id)) {
+			selectedIds.delete(id);
+		} else {
+			selectedIds.add(id);
+		}
+	}
+
+	function selectAll(): void {
+		const ids = sortedPals.map((entry) => entry.id);
+		const wasComplete = selectedIds.size === ids.length;
+
+		selectedIds.clear();
+		if (wasComplete) return;
+		for (const id of ids) selectedIds.add(id);
+	}
+
+	function handleOpenPal(entry: PalWithData): void {
+		if (!isRealPal(entry)) {
+			handleAddPal(entry.index);
 			return;
 		}
-		if (event.key === 'ArrowLeft' || event.key === 'q' || event.key === 'Q') {
-			decrementPage();
-		} else if (event.key === 'ArrowRight' || event.key === 'e' || event.key === 'E') {
-			incrementPage();
-		}
-	}
-
-	function decrementPage() {
-		if (currentPage > 1) {
-			currentPage--;
-		} else {
-			currentPage = totalPages;
-		}
-	}
-
-	function incrementPage() {
-		if (currentPage < totalPages) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-	}
-
-	const debouncedFilterPals = debounce(filterPals, 300);
-
-	async function filterPals() {
-		if (!pals) return;
-		filteredPals = pals.filter(({ pal, palData }) => {
-			if (!palData) {
-				return false;
-			}
-			const matchesSearch =
-				palData.localized_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.nickname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				pal.character_id.toLowerCase().includes(searchQuery.toLowerCase());
-			return matchesSearch && palMatchesFilter(pal, palData, selectedFilter);
-		});
-
-		sortPals();
-	}
-
-	async function handleSelectPreset() {
-		const selectedPalsData = selectedPals.map((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
-			return {
-				character_id: palWithData?.pal.character_id,
-				character_key: palWithData?.pal.character_key
-			};
-		});
-
-		// @ts-ignore
-		const result = await modal.showModal<string>(PalPresetSelectModal, {
-			title: m.select_entity({ entity: m.preset({ count: 1 }) }),
-			selectedPals: selectedPalsData
-		});
-		if (!result) return;
-
-		const presetProfile = presetsData.presetProfiles[result];
-
-		selectedPals.forEach((id) => {
-			const palWithData = pals?.find((p) => p.id === id);
-			if (palWithData) {
-				applyPalPreset(palWithData.pal, presetProfile, undefined);
-			}
-		});
+		palEditor.open(entry.pal);
 	}
 
 	function toggleSort(newSortBy: SortBy) {
@@ -247,31 +256,13 @@
 			sortBy = newSortBy;
 			sortOrder = 'asc';
 		}
-		sortPals();
-	}
-
-	function sortPals() {
-		switch (sortBy) {
-			case 'name':
-				sortByName();
-				break;
-			case 'level':
-				sortByLevel();
-				break;
-			case 'paldeck-index':
-				sortByPaldeckIndex();
-				break;
-			default:
-				sortBySlotIndex();
-				break;
-		}
 	}
 
 	async function handleAddPal(index: number) {
 		if (!appState.gps) return;
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: m.add_new_pal_to_entity({ entity: m.global_pal_storage({ pal: c.pal }) })
+			title: m.add_new_pal_to_entity({ entity: c.globalPalStorage })
 		});
 		if (!result) return;
 		const [selectedPal, nickname] = result;
@@ -295,10 +286,7 @@
 		// @ts-ignore
 		const result = await modal.showModal<number>(NumberInputModal, {
 			title: m.how_many_clones(),
-			message: m.slots_available_in_entity({
-				entity: m.global_pal_storage({ pal: c.pal }),
-				count: maxClones
-			}),
+			message: m.slots_available_in_entity({ count: maxClones, entity: c.globalPalStorage }),
 			value: 1,
 			min: 0,
 			max: maxClones
@@ -320,141 +308,11 @@
 		await clonePal(pal);
 	}
 
-	function sortByName() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.name.localeCompare(b.pal.name)
-				: b.pal.name.localeCompare(a.pal.name)
-		);
-	}
-
-	function sortByLevel() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc' ? a.pal.level - b.pal.level : b.pal.level - a.pal.level
-		);
-	}
-
-	function sortBySlotIndex() {
-		filteredPals = filteredPals.sort((a, b) =>
-			sortOrder === 'asc'
-				? a.pal.storage_slot - b.pal.storage_slot
-				: b.pal.storage_slot - a.pal.storage_slot
-		);
-	}
-
-	async function sortByPaldeckIndex() {
-		const palInfos = filteredPals.map((p) => palsData.pals[p.pal.character_key]);
-		const palsWithInfo = filteredPals.map((pal, index) => [pal, palInfos[index]]);
-
-		palsWithInfo.sort((a, b) => {
-			const indexA = (a[1] as PalData)?.pal_deck_index ?? Infinity;
-			const indexB = (b[1] as PalData)?.pal_deck_index ?? Infinity;
-			return sortOrder === 'asc' ? indexA - indexB : indexB - indexA;
-		});
-
-		filteredPals = palsWithInfo.map((pair) => pair[0] as PalWithData);
-	}
-
-	function handlePalSelect(pal: Pal, event: MouseEvent) {
-		if (!pal || pal.character_id === 'None') return;
-		if (event.ctrlKey || event.metaKey) {
-			if (selectedPals.includes(pal.instance_id)) {
-				selectedPals = selectedPals.filter((id) => id !== pal.instance_id);
-			} else {
-				selectedPals = [...selectedPals, pal.instance_id];
-			}
-		}
-	}
-
-	async function deleteSelectedPals() {
-		if (selectedPals.length === 0) return;
-
-		const confirmed = await modal.showConfirmModal({
-			title: m.delete_entity({ entity: m.pal({ count: selectedPals.length }) }),
-			message: m.delete_count_entities_confirm({
-				entity: m.pal({ count: selectedPals.length }),
-				count: selectedPals.length
-			}),
-			confirmText: m.delete(),
-			cancelText: m.cancel()
-		});
-
-		if (appState.gps && confirmed) {
-			const palIndexes = selectedStorageIndexes(appState.gps, selectedPals);
-			send(MessageType.DELETE_GPS_PALS, {
-				pal_indexes: palIndexes
-			});
-
-			appState.gps = withoutStorageIndexes(appState.gps, palIndexes);
-		}
-
-		selectedPals = [];
-	}
-
-	async function handleDeletePal(pal: Pal) {
-		const confirmed = await modal.showConfirmModal({
-			title: m.delete_entity({ entity: c.pal }),
-			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
-			confirmText: m.delete(),
-			cancelText: m.cancel()
-		});
-		if (appState.gps && confirmed) {
-			const palIndex = storageIndexOf(appState.gps, pal.instance_id);
-			if (palIndex === undefined) return;
-			send(MessageType.DELETE_GPS_PALS, {
-				pal_indexes: [palIndex]
-			});
-			appState.gps = withoutStorageIndexes(appState.gps, [palIndex]);
-		}
-	}
-
-	function handleSelectAll() {
-		if (selectedPals.length === filteredPals.length) {
-			selectedPals = [];
-		} else {
-			selectedPals = filteredPals.map((p) => p.id);
-		}
-	}
-
-	$effect(() => {
-		if (appState.gps) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		if (searchQuery || selectedFilter) {
-			debouncedFilterPals();
-		}
-	});
-
-	$effect(() => {
-		window.addEventListener('keydown', handleKeydown);
-		return () => {
-			window.removeEventListener('keydown', handleKeydown);
-		};
-	});
-
-	$effect(() => {
-		if (currentPage > totalPages) {
-			currentPage = 1;
-		}
-	});
-
-	$effect(() => {
-		if (pals) {
-			debouncedFilterPals();
-		}
-	});
-
 	async function handleCloneToUps(pal: Pal) {
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: m.clone_to_entity({ entity: m.ups() }),
-			message: m.clone_pal_to_entity({
-				pal: c.pal,
-				entity: m.universal_pal_storage({ pal: c.pal })
-			}),
+			title: m.clone_to_entity({ entity: c.universalPalStorage }),
+			message: m.clone_pal_to_entity({ pal: c.pal, entity: c.universalPalStorage }),
 			pals: [pal]
 		});
 
@@ -474,9 +332,9 @@
 
 			toast.add(
 				m.successfully_cloned_pals_to_entity({
+					count: 1,
 					pals: c.pals,
-					entity: c.universalPalStorage,
-					count: 1
+					entity: c.universalPalStorage
 				}),
 				m.success(),
 				'success'
@@ -488,20 +346,19 @@
 	}
 
 	async function handleBulkCloneToUps() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		const palsToClone = selectedPals
-			.map((id) => pals?.find((p) => p.id === id)?.pal)
-			.filter(Boolean) as Pal[];
+		const ids = selectedIdList;
+		const palsToClone = ids.map((id) => palsById.get(id)?.pal).filter(Boolean) as Pal[];
 
 		if (palsToClone.length === 0) return;
 
 		// @ts-ignore
 		const result = await modal.showModal<CloneToUpsModalProps>(CloneToUpsModal, {
-			title: m.clone_to_entity({ entity: m.ups() }),
-			message: m.successfully_cloned_pals_to_entity({
+			title: m.clone_to_entity({ entity: c.universalPalStorage }),
+			message: m.clone_pals_to_entity({
 				count: palsToClone.length,
-				pals: c.pals,
+				pals: m.pal({ count: palsToClone.length }),
 				entity: c.universalPalStorage
 			}),
 			pals: palsToClone
@@ -513,7 +370,7 @@
 
 		try {
 			await upsState.cloneToUps(
-				selectedPals,
+				ids,
 				'gps',
 				undefined,
 				collectionId,
@@ -524,14 +381,14 @@
 			toast.add(
 				m.successfully_cloned_pals_to_entity({
 					count: palsToClone.length,
-					pals: c.pals,
+					pals: m.pal({ count: palsToClone.length }),
 					entity: c.universalPalStorage
 				}),
 				m.success(),
 				'success'
 			);
 
-			selectedPals = [];
+			selectedIds.clear();
 		} catch (error) {
 			console.error('Bulk clone to UPS failed:', error);
 			toast.add(m.bulk_clone_to_ups_failed(), m.error(), 'error');
@@ -541,8 +398,8 @@
 	async function handleCloneToPlayer(pal: Pal) {
 		// @ts-ignore
 		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
-			title: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
-			message: m.clone_pal_to_entity({ pal: c.pal, entity: m.player({ count: 1 }) }),
+			title: m.clone_to_entity({ entity: c.player }),
+			message: m.clone_pal_to_entity({ pal: c.pal, entity: c.player }),
 			pals: [pal],
 			hideGps: true
 		});
@@ -559,7 +416,7 @@
 			m.successfully_cloned_pals_to_entity({
 				count: 1,
 				pals: c.pals,
-				entity: m.player({ count: 1 })
+				entity: c.player
 			}),
 			m.success(),
 			'success'
@@ -567,18 +424,16 @@
 	}
 
 	async function handleBulkCloneToPlayer() {
-		if (selectedPals.length === 0) return;
+		if (selectedIds.size === 0) return;
 
-		const palsToClone = selectedPals
-			.map((id) => pals?.find((p) => p.id === id)?.pal)
-			.filter(Boolean) as Pal[];
+		const palsToClone = selectedIdList.map((id) => palsById.get(id)?.pal).filter(Boolean) as Pal[];
 
 		if (palsToClone.length === 0) return;
 
 		// @ts-ignore
 		const result = await modal.showModal<{ target: string; playerId?: string }>(ExportPalModal, {
-			title: m.clone_to_entity({ entity: m.player({ count: 1 }) }),
-			message: m.clone_pal_to_entity({ pal: c.pals, entity: m.player({ count: 1 }) }),
+			title: m.clone_to_entity({ entity: c.player }),
+			message: m.clone_pal_to_entity({ pal: c.pals, entity: c.player }),
 			pals: palsToClone,
 			hideGps: true
 		});
@@ -586,7 +441,7 @@
 		if (!result || result.target === 'gps' || !result.playerId) return;
 
 		send(MessageType.CLONE_GPS_PAL_TO_PLAYER, {
-			pal_ids: palsToClone.map((p) => p.instance_id),
+			pal_ids: palsToClone.map((entry) => entry.instance_id),
 			destination_type: result.target,
 			destination_player_uid: result.playerId
 		});
@@ -595,25 +450,231 @@
 			m.successfully_cloned_pals_to_entity({
 				count: palsToClone.length,
 				pals: c.pals,
-				entity: m.player({ count: 1 })
+				entity: c.player
 			}),
 			m.success(),
 			'success'
 		);
 
-		selectedPals = [];
+		selectedIds.clear();
+	}
+
+	async function handleSelectPreset() {
+		const ids = selectedIdList;
+		const selectedPalsData = ids.map((id) => {
+			const palWithData = palsById.get(id);
+			return {
+				character_id: palWithData?.pal.character_id,
+				character_key: palWithData?.pal.character_key
+			};
+		});
+
+		// @ts-ignore
+		const result = await modal.showModal<string>(PalPresetSelectModal, {
+			title: m.select_entity({ entity: c.preset }),
+			selectedPals: selectedPalsData
+		});
+		if (!result) return;
+
+		const presetProfile = presetsData.presetProfiles[result];
+
+		ids.forEach((id) => {
+			const palWithData = palsById.get(id);
+			if (palWithData) {
+				applyPalPreset(palWithData.pal, presetProfile, undefined);
+			}
+		});
+	}
+
+	async function deleteSelectedPals() {
+		if (selectedIds.size === 0) return;
+
+		const count = selectedIds.size;
+		const confirmed = await modal.showConfirmModal({
+			title: m.delete_selected_entity({ entity: m.pal({ count }) }),
+			message: m.delete_count_entities_confirm({
+				count,
+				entity: m.pal({ count })
+			}),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
+		});
+
+		if (appState.gps && confirmed) {
+			const palIndexes = selectedStorageIndexes(appState.gps, selectedIdList);
+			send(MessageType.DELETE_GPS_PALS, {
+				pal_indexes: palIndexes
+			});
+
+			appState.gps = withoutStorageIndexes(appState.gps, palIndexes);
+		}
+
+		selectedIds.clear();
+	}
+
+	async function handleDeletePal(pal: Pal) {
+		const confirmed = await modal.showConfirmModal({
+			title: m.delete_entity({ entity: c.pal }),
+			message: m.delete_entity_by_name_confirm({ name: pal.nickname || pal.name }),
+			confirmText: m.delete(),
+			cancelText: m.cancel()
+		});
+		if (appState.gps && confirmed) {
+			const palIndex = storageIndexOf(appState.gps, pal.instance_id);
+			if (palIndex === undefined) return;
+			send(MessageType.DELETE_GPS_PALS, {
+				pal_indexes: [palIndex]
+			});
+			appState.gps = withoutStorageIndexes(appState.gps, [palIndex]);
+		}
 	}
 
 	async function addAllPalsGps() {
 		if (!appState.gps) return;
 		// @ts-ignore
 		await modal.showModal<string>(FillPalsModal, {
-			title: m.fill_entity({ entity: m.global_pal_storage({ pal: c.pal }) }),
+			title: m.fill_entity({ entity: c.globalPalStorage }),
 			player: appState.selectedPlayer,
 			target: 'gps'
 		});
 	}
+
+	function palActions(entry: PalWithData): ActionDescriptor[] {
+		if (!isRealPal(entry)) {
+			return [
+				{
+					id: 'gps-pal-add',
+					label: m.add_new_pal(p.pal),
+					icon: 'tabler:plus',
+					run: () => handleAddPal(entry.index)
+				}
+			];
+		}
+
+		return [
+			{
+				id: 'gps-pal-clone',
+				label: m.clone_selected_pal(p.pal),
+				icon: 'tabler:copy',
+				run: () => handleClonePal(entry.pal)
+			},
+			{
+				id: 'gps-pal-clone-to-ups',
+				label: m.clone_to_entity({ entity: m.ups() }),
+				icon: 'tabler:upload',
+				run: () => handleCloneToUps(entry.pal)
+			},
+			{
+				id: 'gps-pal-clone-to-player',
+				label: m.clone_to_entity({ entity: c.player }),
+				icon: 'tabler:users',
+				run: () => handleCloneToPlayer(entry.pal)
+			},
+			{
+				id: 'gps-pal-delete',
+				label: m.delete_entity({ entity: c.pal }),
+				icon: 'tabler:trash',
+				run: () => handleDeletePal(entry.pal),
+				danger: true
+			}
+		];
+	}
 </script>
+
+{#snippet stats()}
+	{#if gpsPals.length > 0}
+		<PalContainerStats pals={gpsPals} {elementTypes} />
+	{:else}
+		<div>{m.no_pals_available(p.pals)}</div>
+	{/if}
+{/snippet}
+
+<!-- The page's own search box: its filtering also sorts and pads, which `matches` can't express. -->
+{#snippet filters()}
+	<div id="gps-filters" class="flex flex-col gap-4">
+		<Input
+			type="text"
+			inputClass="w-full"
+			placeholder={m.search_by_name_nickname()}
+			bind:value={searchQuery}
+		/>
+
+		<div>
+			<legend class="font-bold">{m.sort()}</legend>
+			<hr />
+			<div class="grid grid-cols-3 sm:grid-cols-6">
+				<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
+					<button
+						type="button"
+						class={sortButtonClass('level')}
+						onclick={() => toggleSort('level')}
+					>
+						<Icon icon={LevelSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: m.name() })}>
+					<button type="button" class={sortButtonClass('name')} onclick={() => toggleSort('name')}>
+						<Icon icon={NameSortIcon} />
+					</button>
+				</Tooltip>
+				<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
+					<button
+						type="button"
+						class={sortButtonClass('paldeck-index')}
+						onclick={() => toggleSort('paldeck-index')}
+					>
+						<Icon icon={PaldeckSortIcon} />
+					</button>
+				</Tooltip>
+			</div>
+		</div>
+
+		<PalFilterButtons bind:selectedFilter />
+
+		<div class="2xl:hidden">
+			<legend class="font-bold">{m.stats()}</legend>
+			<hr class="mb-2" />
+			{@render stats()}
+		</div>
+	</div>
+{/snippet}
+
+{#snippet portrait(entry: PalWithData)}
+	<PalBadge
+		pal={entry.pal}
+		selected={selectedIdList}
+		onDelete={() => handleDeletePal(entry.pal)}
+		onAdd={() => handleAddPal(entry.index)}
+		onClone={() => handleClonePal(entry.pal)}
+		onCloneToUps={() => handleCloneToUps(entry.pal)}
+		onCloneToPlayer={() => handleCloneToPlayer(entry.pal)}
+	/>
+{/snippet}
+
+{#snippet columns(entry: PalWithData)}
+	{#if isRealPal(entry)}
+		<div class="flex flex-col gap-0.5">
+			<span class="truncate text-sm font-bold">{nicknameOf(entry)}</span>
+			<span class="text-surface-400 text-xs">
+				{m.level()}
+				{entry.pal.level ?? 0}
+			</span>
+		</div>
+	{:else}
+		<span class="text-surface-500 text-sm">{m.empty()} · {entry.index + 1}</span>
+	{/if}
+{/snippet}
+
+{#snippet detail(entry: PalWithData)}
+	<dl class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+		<dt class="text-surface-400">{m.nickname()}</dt>
+		<dd>{nicknameOf(entry)}</dd>
+		<dt class="text-surface-400">{m.level()}</dt>
+		<dd>{entry.pal.level ?? 0}</dd>
+		<dt class="text-surface-400">{m.hp()}</dt>
+		<dd>{entry.pal.hp ?? 0} / {entry.pal.max_hp ?? 0}</dd>
+	</dl>
+{/snippet}
 
 {#if appState.loadingGps}
 	<div class="animate-fade-in flex h-full w-full items-center justify-center">
@@ -630,218 +691,39 @@
 	</div>
 {:else}
 	<div
-		class="animate-fade-in grid h-full w-full grid-cols-[25%_1fr] 2xl:grid-cols-[25%_1fr_20%]"
+		class="animate-fade-in grid h-full w-full grid-cols-1 gap-2 p-2 2xl:grid-cols-[1fr_20%]"
 		{...additionalProps}
 	>
-		<div class="shrink-0 p-4">
-			<div class="btn-group bg-surface-900 mb-2 w-full items-center rounded-sm p-1">
-				<Tooltip
-					position="right"
-					label={m.add_all_pals_to_entity({ entity: m.gps(), pals: c.pals })}
-				>
-					<Button variant="ghost" size="icon" onclick={addAllPalsGps}>
-						<Icon icon="tabler:circle-plus" />
-					</Button>
-				</Tooltip>
-				<Tooltip>
-					<Button variant="ghost" size="icon" onclick={handleSelectAll}>
-						<Icon icon="tabler:arrows-diff" />
-					</Button>
-					{#snippet popup()}
-						<div class="flex flex-col">
-							<span>{m.select_all_in()}</span>
-							<div class="grid grid-cols-[auto_1fr] gap-1">
-								<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								<span class="text-sm">{m.palbox()}</span>
-								<div class="flex">
-									<img src={staticIcons.ctrlIcon} alt="Ctrl" class="h-6 w-6" />
-									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-6 w-6" />
-								</div>
-								<span class="text-sm">{m.pal_box_party()}</span>
-							</div>
-						</div>
-					{/snippet}
-				</Tooltip>
+		<div class="flex min-h-0 gap-2">
+			<!-- The view's own toolbar carries these rows once something is selected. -->
+			{#if selectedIds.size === 0}
+				<ActionGroup id="gps-actions" actions={gpsActions} title={m.quick_actions()} />
+			{/if}
 
-				{#if selectedPals.length >= 1}
-					<Tooltip
-						label={m.apply_preset_to_selected({ pals: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={handleSelectPreset}>
-							<Icon icon="tabler:player-play" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.clone_pal_to_entity({ entity: m.ups(), pal: c.pal })}>
-						<Button variant="ghost" size="icon" onclick={handleBulkCloneToUps}>
-							<Icon icon="tabler:upload" />
-						</Button>
-					</Tooltip>
-					<Tooltip label={m.clone_to_entity({ entity: m.player({ count: 1 }) })}>
-						<Button variant="ghost" size="icon" onclick={handleBulkCloneToPlayer}>
-							<Icon icon="tabler:users" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.delete_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={deleteSelectedPals}>
-							<Icon icon="tabler:trash" />
-						</Button>
-					</Tooltip>
-					<Tooltip
-						label={m.clear_selected_entity({ entity: m.pal({ count: selectedPals.length }) })}
-					>
-						<Button variant="ghost" size="icon" onclick={() => (selectedPals = [])}>
-							<Icon icon="tabler:x" />
-						</Button>
-					</Tooltip>
-				{/if}
-			</div>
-			<Accordion
-				value={filterExpand}
-				onValueChange={(e: ValueChangeDetails) => (filterExpand = e.value)}
-				collapsible
-			>
-				<Accordion.Item
-					value="filter"
-					base="rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Icon icon="tabler:search" />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.filter_and_sort()}</span>
-					{/snippet}
-					{#snippet panel()}
-						<Input
-							type="text"
-							inputClass="w-full"
-							placeholder={m.search_by_name_nickname()}
-							bind:value={searchQuery}
-						/>
-						<div>
-							<legend class="font-bold">{m.sort()}</legend>
-							<hr />
-							<div class="grid grid-cols-3 sm:grid-cols-6">
-								<Tooltip label={m.sort_by_entity({ entity: m.level() })}>
-									<button
-										type="button"
-										class={sortButtonClass('level')}
-										onclick={() => toggleSort('level')}
-									>
-										<Icon icon={LevelSortIcon} />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_entity({ entity: m.name({ count: 1 }) })}>
-									<button
-										type="button"
-										class={sortButtonClass('name')}
-										onclick={() => toggleSort('name')}
-									>
-										<Icon icon={NameSortIcon} />
-									</button>
-								</Tooltip>
-								<Tooltip label={m.sort_by_entity({ entity: m.paldeck() })}>
-									<button
-										type="button"
-										class={sortButtonClass('paldeck-index')}
-										onclick={() => toggleSort('paldeck-index')}
-									>
-										<Icon icon={PaldeckSortIcon} />
-									</button>
-								</Tooltip>
-							</div>
-						</div>
-						<PalFilterButtons bind:selectedFilter />
-					{/snippet}
-				</Accordion.Item>
-				<Accordion.Item
-					value="stats"
-					base="block 2xl:hidden rounded-sm bg-surface-900"
-					controlHover="hover:bg-secondary-500/25"
-				>
-					{#snippet lead()}<Icon icon="tabler:info-circle" />{/snippet}
-					{#snippet control()}
-						<span class="font-bold">{m.stats()}</span>
-					{/snippet}
-					{#snippet panel()}
-						{#if pals && pals.length > 0}
-							<PalContainerStats {pals} {elementTypes} />
-						{:else}
-							<div>{m.no_pals_available(p.pals)}</div>
-						{/if}
-					{/snippet}
-				</Accordion.Item>
-			</Accordion>
-		</div>
-
-		<div>
-			<div class="mb-4 flex items-center justify-center space-x-4">
-				<Button
-					class="rounded-full p-0! font-bold"
-					variant="ghost"
-					size="md"
-					onclick={decrementPage}
-				>
-					<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-				</Button>
-
-				<div class="flex space-x-2">
-					{#each visiblePages as page}
-						<TooltipButton
-							buttonClass="h-8 w-8 rounded-full {page === currentPage
-								? 'bg-primary-500! text-white'
-								: 'bg-surface-800 hover:bg-surface-600'}"
-							onclick={() => (currentPage = page)}
-							popupLabel={`Box ${page}`}
-							variant="ghost"
-							size="md"
-						>
-							{Math.floor(page)}
-						</TooltipButton>
-					{/each}
-				</div>
-
-				<Button class="rounded-sm p-0! font-bold" variant="ghost" size="md" onclick={incrementPage}>
-					<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-				</Button>
-			</div>
-
-			<div class="overflow-hidden">
-				<PalGrid>
-					{#each currentPageItems as item (item.pal.instance_id)}
-						{#if item.pal.character_id !== 'None' || (!searchQuery && selectedFilter === 'All' && sortBy === 'slot-index')}
-							<PalBadge
-								pal={item.pal}
-								bind:selected={selectedPals}
-								onSelect={handlePalSelect}
-								onMove={() => {}}
-								onDelete={() => handleDeletePal(item.pal)}
-								onAdd={() => handleAddPal(item.index)}
-								onClone={() => handleClonePal(item.pal)}
-								onCloneToUps={() => handleCloneToUps(item.pal)}
-								onCloneToPlayer={() => handleCloneToPlayer(item.pal)}
-							/>
-						{/if}
-					{/each}
-				</PalGrid>
+			<div class="min-w-0 flex-1">
+				<PalContainerView
+					pals={displayPals}
+					idOf={(entry) => entry.id}
+					{nicknameOf}
+					storageKey="gps"
+					title={c.globalPalStorage}
+					pageSize={PALS_PER_PAGE}
+					actions={gpsActions}
+					{selection}
+					{filters}
+					{portrait}
+					{columns}
+					{detail}
+					{palActions}
+					onOpenPal={handleOpenPal}
+				/>
 			</div>
 		</div>
 
-		{#if pals && pals.length > 0}
-			<Card class="mr-2 hidden min-h-0 2xl:block">
-				<PalContainerStats {pals} {elementTypes} />
+		<aside id="gps-stats" class="hidden min-h-0 flex-col gap-2 overflow-y-auto 2xl:flex">
+			<Card class="min-h-0">
+				{@render stats()}
 			</Card>
-		{:else}
-			<Card class="mr-2 hidden min-h-0 2xl:block">
-				<div>{m.no_pals_available(p.pals)}</div>
-			</Card>
-		{/if}
+		</aside>
 	</div>
 {/if}
-
-<style>
-	.pal-element-badge {
-		width: 24px;
-		height: 24px;
-	}
-</style>

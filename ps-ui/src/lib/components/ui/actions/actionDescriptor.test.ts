@@ -1,9 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { availableActions, type ActionDescriptor } from './actionDescriptor';
+import { availableActions, sheetActions, type ActionDescriptor } from './actionDescriptor';
 
 function action(id: string, available?: () => boolean): ActionDescriptor {
 	return { id, label: id, icon: 'tabler:circle', run: vi.fn(), available };
+}
+
+function danger(id: string): ActionDescriptor {
+	return { id, label: id, icon: 'tabler:trash', run: vi.fn(), danger: true };
 }
 
 describe('availableActions', () => {
@@ -24,5 +28,23 @@ describe('availableActions', () => {
 
 	it('returns an empty list when everything is unavailable', () => {
 		expect(availableActions([action('a', () => false)])).toEqual([]);
+	});
+});
+
+describe('sheetActions', () => {
+	it('sorts destructive actions last', () => {
+		const actions = [danger('delete'), action('sort'), danger('purge'), action('fill')];
+		expect(sheetActions(actions).map((a) => a.id)).toEqual(['sort', 'fill', 'delete', 'purge']);
+	});
+
+	it('keeps declared order among everything that is not destructive', () => {
+		const actions = [action('select'), action('heal'), action('clone')];
+		expect(sheetActions(actions).map((a) => a.id)).toEqual(['select', 'heal', 'clone']);
+	});
+
+	it('drops unavailable actions before ordering, and does not mutate the input', () => {
+		const actions = [danger('delete'), action('clone', () => false), action('sort')];
+		expect(sheetActions(actions).map((a) => a.id)).toEqual(['sort', 'delete']);
+		expect(actions.map((a) => a.id)).toEqual(['delete', 'clone', 'sort']);
 	});
 });

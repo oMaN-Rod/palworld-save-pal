@@ -15,3 +15,10 @@ export type ActionDescriptor = {
 export function availableActions(actions: ActionDescriptor[]): ActionDescriptor[] {
 	return actions.filter((action) => action.available?.() ?? true);
 }
+
+/** Danger sorts last, away from the resting thumb; rails keep declared order. */
+export function sheetActions(actions: ActionDescriptor[]): ActionDescriptor[] {
+	return [...availableActions(actions)].sort(
+		(a, b) => Number(a.danger ?? false) - Number(b.danger ?? false)
+	);
+}
