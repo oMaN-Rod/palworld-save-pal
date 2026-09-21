@@ -1,28 +1,19 @@
 <script lang="ts">
-	import { page } from '$app/state';
 	import * as m from '$i18n/messages';
-	import { isWebBuild } from '$lib/utils/platform';
-	import { getAppState } from '$states';
 
 	const { children } = $props();
-	const appState = getAppState();
-	const publicShell = $derived(isWebBuild && !appState.saveFile);
 
-	const allTabs = [
+	// Tours are unlinked: their step selectors target ids the pal pages no longer have.
+	const tabs = [
 		{ label: m.docs_wiki(), href: '/wiki', id: 'wiki' },
-		{ label: m.docs_guides(), href: '/docs/guides', id: 'guides' },
-		{ label: m.docs_tours(), href: '/docs/tours', id: 'tours' },
+		{ label: m.docs_guides(), href: '/docs/guides', id: 'guides' }
 	];
-	const tabs = $derived(publicShell ? allTabs.filter((tab) => tab.id !== 'tours') : allTabs);
 
-	const activeTab = $derived.by(() => {
-		if (page.url.pathname.startsWith('/docs/tours')) return 'tours';
-		return 'guides';
-	});
+	const activeTab = 'guides';
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden">
-	<nav class="flex gap-1 border-b border-surface-700 px-4 pt-2">
+	<nav class="border-surface-700 flex gap-1 border-b px-4 pt-2">
 		{#each tabs as tab}
 			<a
 				href={tab.href}
