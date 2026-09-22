@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
-	import SectionTabs from '$components/ui/tabs/SectionTabs.svelte';
+	import SectionTabs, { panelId, tabId } from '$components/ui/tabs/SectionTabs.svelte';
 	import type { SectionDef, SectionPresentation } from './sectionShell';
 
 	let {
@@ -10,12 +10,14 @@
 		presentation,
 		active = $bindable(sections[0]?.id),
 		label,
+		idPrefix,
 		between
 	}: {
 		sections: SectionDef[];
 		presentation: SectionPresentation;
 		active?: string;
 		label: string;
+		idPrefix: string;
 		/** Rendered as its own grid column between each pair of `group` columns. Ignored outside `columns` presentation. */
 		between?: Snippet;
 	} = $props();
@@ -87,10 +89,17 @@
 		tabs={sections.map((section) => ({ id: section.id, label: section.title }))}
 		bind:active
 		{label}
+		{idPrefix}
 	/>
 	{#each sections as section (section.id)}
 		{#if section.id === active}
-			<div data-testid={section.id}>
+			<div
+				id={panelId(idPrefix, section.id)}
+				role="tabpanel"
+				aria-labelledby={tabId(idPrefix, section.id)}
+				tabindex="0"
+				data-testid={section.id}
+			>
 				{@render section.body()}
 			</div>
 		{/if}

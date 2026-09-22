@@ -10,5 +10,5 @@
 	];
 </script>
 
-<SectionTabs {tabs} bind:active label="Player sections" />
+<SectionTabs {tabs} bind:active label="Player sections" idPrefix="harness" />
 <span data-testid="active-value">{active}</span>

@@ -3,6 +3,8 @@
 	import { fade } from 'svelte/transition';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
 	import { Loading } from '$components/ui';
+	import { layout } from '$utils/layout.svelte';
+	import { cn } from '$theme';
 	import type { Component } from 'svelte';
 	import { onMount } from 'svelte';
 	import * as m from '$i18n/messages';
@@ -56,8 +58,14 @@
 		aria-modal="true"
 		tabindex="-1"
 	>
-		<div class="relative">
-			<div class="bg-surface-950 h-[90vh] w-[90vw] overflow-hidden rounded-sm">
+		<div class={layout.phone ? 'relative h-full w-full' : 'relative'}>
+			<div
+				data-testid="pal-editor-surface"
+				class={cn(
+					'bg-surface-950 overflow-hidden',
+					layout.phone ? 'h-full w-full' : 'h-[90vh] w-[90vw] rounded-sm'
+				)}
+			>
 				{#if palEditor.loading}
 					<div class="flex h-full items-center justify-center">
 						<Loading
@@ -82,7 +90,11 @@
 			</div>
 			<button
 				type="button"
-				class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+				class={cn(
+					'bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute z-20 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors',
+					layout.phone ? 'top-2 right-2' : 'top-0 left-full ml-2'
+				)}
+				style:margin-top={layout.phone ? 'env(safe-area-inset-top)' : undefined}
 				aria-label={m.close()}
 				onclick={() => palEditor.close()}
 			>

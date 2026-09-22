@@ -283,6 +283,10 @@
 		return () => clearInterval(interval);
 	});
 
+	function clearPlayer() {
+		selectedPlayerUid = null;
+	}
+
 	async function selectPlayer(player: GamePlayerJson) {
 		selectedPlayerUid = player.uid;
 		detailLoading = true;
@@ -699,6 +703,7 @@
 		{/if}
 
 		<span
+			data-testid="live-connection"
 			class={cn(
 				'ml-auto shrink-0 rounded-sm px-2 py-0.5 text-xs font-medium',
 				CHIP_COLOR[chipState]
@@ -712,6 +717,9 @@
 		<SidebarDetail
 			detailActive={selectedPlayer !== null}
 			sidebarClass={sidebarWidth}
+			detailOnPhone="sheet"
+			detailTitle={selectedPlayer?.nickname ?? ''}
+			onDetailClose={clearPlayer}
 		>
 			{#snippet sidebar()}
 				{#if selectedPlayer}

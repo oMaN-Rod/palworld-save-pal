@@ -31,6 +31,19 @@ describe('SectionShell', () => {
 		expect(screen.queryByText('talents body')).toBeNull();
 	});
 
+	it('ties each tab to the panel it opens', async () => {
+		render(SectionShellHarness, { presentation: 'tabs', active: 'active' });
+		await tick();
+
+		const tab = screen.getByRole('tab', { name: /active skills/i });
+		const panel = screen.getByRole('tabpanel');
+
+		expect(tab.getAttribute('aria-controls')).toBe(panel.id);
+		expect(panel.getAttribute('aria-labelledby')).toBe(tab.id);
+		expect(panel.id).toBe('shell-active-panel');
+		expect(tab.id).toBe('shell-active-tab');
+	});
+
 	it('defines each section body exactly once regardless of presentation', async () => {
 		render(SectionShellHarness, { presentation: 'columns' });
 		await tick();

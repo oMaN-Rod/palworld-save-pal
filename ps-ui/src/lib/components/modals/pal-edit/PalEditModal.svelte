@@ -51,7 +51,7 @@
 	let palLevelProgressMax: number = $state(1);
 	let rightAccordionValue: string[] = $state(['stats']);
 
-	const sections: SectionDef[] = [
+	const baseSections: SectionDef[] = [
 		{
 			id: 'active_skills',
 			title: c.activeSkills,
@@ -82,6 +82,15 @@
 		},
 		{ id: 'souls', title: m.souls(), header: soulsHeader, body: soulsBody, group: 'aside' }
 	];
+
+	const sections = $derived(
+		layout.phone
+			? [
+					...baseSections,
+					{ id: 'status', title: m.stats(), body: statusBody, group: 'aside' as const }
+				]
+			: baseSections
+	);
 
 	let activeSection = $state('active_skills');
 
@@ -657,79 +666,128 @@
 	</div>
 {/snippet}
 
-{#if appState.selectedPal}
-	<div class="flex h-full overflow-auto p-2">
-		<nav
-			id="pal-quick-actions"
-			class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center self-start rounded-sm"
+{#snippet quickActions()}
+	<Tooltip label={m.edit_entity({ entity: m.nickname() })}>
+		<Button variant="ghost" size="icon" onclick={handleEditNickname}>
+			<Icon icon="tabler:edit" class="h-6 w-6" />
+		</Button>
+	</Tooltip>
+	<Tooltip label={m.max_out_pal_stats(p.pal)}>
+		<Button
+			variant="ghost"
+			size="icon"
+			onclick={() => handleMaxOutPal(appState.selectedPal!, appState.selectedPlayer!)}
 		>
-			<Tooltip label={m.edit_entity({ entity: m.nickname() })}>
-				<Button variant="ghost" size="icon" onclick={handleEditNickname}>
-					<Icon icon="tabler:edit" class="h-6 w-6" />
-				</Button>
-			</Tooltip>
-			<Tooltip label={m.max_out_pal_stats(p.pal)}>
-				<Button
-					variant="ghost"
-					size="icon"
-					onclick={() => handleMaxOutPal(appState.selectedPal!, appState.selectedPlayer!)}
-				>
-					<Icon icon="ph:hand-fist" class="h-6 w-6" />
-				</Button>
-			</Tooltip>
-			<Tooltip label={m.save_as_preset()}>
-				<Button variant="ghost" size="icon" onclick={handleSavePalPreset}>
-					<Icon icon="tabler:device-floppy" class="h-6 w-6" />
-				</Button>
-			</Tooltip>
-			<Tooltip label={m.apply_preset()}>
-				<Button variant="ghost" size="icon" onclick={handleApplyPalPreset}>
-					<Icon icon="tabler:player-play" class="h-6 w-6" />
-				</Button>
-			</Tooltip>
-		</nav>
-		<div class="flex grow flex-col">
-			<div id="pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
-				<PalHeader bind:pal={appState.selectedPal} />
+			<Icon icon="ph:hand-fist" class="h-6 w-6" />
+		</Button>
+	</Tooltip>
+	<Tooltip label={m.save_as_preset()}>
+		<Button variant="ghost" size="icon" onclick={handleSavePalPreset}>
+			<Icon icon="tabler:device-floppy" class="h-6 w-6" />
+		</Button>
+	</Tooltip>
+	<Tooltip label={m.apply_preset()}>
+		<Button variant="ghost" size="icon" onclick={handleApplyPalPreset}>
+			<Icon icon="tabler:player-play" class="h-6 w-6" />
+		</Button>
+	</Tooltip>
+{/snippet}
+
+{#snippet statusBody()}
+	<div class="flex flex-col space-y-2">
+		<StatusBadge bind:pal={appState.selectedPal} />
+		<SectionHeader text={m.stats()} />
+		<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+	</div>
+{/snippet}
+
+{#if appState.selectedPal}
+	{#if layout.phone}
+		<!-- The identity strip is the one thing that must stay put: it is how the
+		     user knows which Pal the tabs below are editing. -->
+		<div class="flex h-full flex-col overflow-hidden p-2">
+			<div id="pal-identity" class="flex shrink-0 gap-2">
+				<div class="size-24 shrink-0">
+					<PalModelViewer
+						characterKey={appState.selectedPal.character_key}
+						fallback={palImageFallback}
+					/>
+				</div>
+				<div id="pal-header" class="min-w-0 grow">
+					<PalHeader bind:pal={appState.selectedPal} />
+				</div>
 			</div>
-			<div class="flex grow">
+			<nav
+				id="pal-quick-actions"
+				class="btn-group preset-outlined-surface-200-800 mt-2 flex shrink-0 justify-center rounded-sm"
+			>
+				{@render quickActions()}
+			</nav>
+			<div class="mt-2 flex min-h-0 grow flex-col overflow-hidden">
 				<SectionShell
 					{sections}
-					presentation={presentationFor(layout.deviceClass)}
-					{between}
+					presentation="tabs"
 					bind:active={activeSection}
 					label={m.pal_sections()}
+					idPrefix="pal-edit"
 				/>
 			</div>
 		</div>
-		<div class="w-1/3 overflow-auto p-2">
-			<div class="hidden flex-col space-y-2 2xl:flex">
-				<div id="pal-status">
-					<StatusBadge bind:pal={appState.selectedPal} />
+	{:else}
+		<div class="flex h-full overflow-auto p-2">
+			<nav
+				id="pal-quick-actions"
+				class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center self-start rounded-sm"
+			>
+				{@render quickActions()}
+			</nav>
+			<div class="flex grow flex-col">
+				<div id="pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
+					<PalHeader bind:pal={appState.selectedPal} />
 				</div>
-				<div id="pal-stats">
-					<SectionHeader text={m.stats()} />
-					<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+				<div class="flex grow">
+					<SectionShell
+						{sections}
+						presentation={presentationFor(layout.deviceClass)}
+						{between}
+						bind:active={activeSection}
+						label={m.pal_sections()}
+						idPrefix="pal-edit"
+					/>
 				</div>
 			</div>
-			<div class="flex flex-col space-y-2 2xl:hidden">
-				<StatusBadge bind:pal={appState.selectedPal} />
-				<Accordion
-					classes="w-full min-w-0 2xl:min-w-96"
-					value={rightAccordionValue}
-					onValueChange={(e: ValueChangeDetails) => (rightAccordionValue = e.value)}
-					collapsible
-				>
-					<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
-						{#snippet control()}
-							<SectionHeader text={m.stats()} />
-						{/snippet}
-						{#snippet panel()}
-							<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
-						{/snippet}
-					</Accordion.Item>
-				</Accordion>
+			<div class="w-1/3 overflow-auto p-2">
+				<div class="hidden flex-col space-y-2 2xl:flex">
+					<div id="pal-status">
+						<StatusBadge bind:pal={appState.selectedPal} />
+					</div>
+					<div id="pal-stats">
+						<SectionHeader text={m.stats()} />
+						<StatsBadges bind:pal={appState.selectedPal} bind:player={appState.selectedPlayer} />
+					</div>
+				</div>
+				<div class="flex flex-col space-y-2 2xl:hidden">
+					<StatusBadge bind:pal={appState.selectedPal} />
+					<Accordion
+						classes="w-full min-w-0 2xl:min-w-96"
+						value={rightAccordionValue}
+						onValueChange={(e: ValueChangeDetails) => (rightAccordionValue = e.value)}
+						collapsible
+					>
+						<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
+							{#snippet control()}
+								<SectionHeader text={m.stats()} />
+							{/snippet}
+							{#snippet panel()}
+								<StatsBadges
+									bind:pal={appState.selectedPal}
+									bind:player={appState.selectedPlayer}
+								/>
+							{/snippet}
+						</Accordion.Item>
+					</Accordion>
+				</div>
 			</div>
 		</div>
-	</div>
+	{/if}
 {/if}

@@ -7,6 +7,13 @@ describe('SHEET_SNAP_VH', () => {
 		expect(SHEET_SNAP_VH.peek).toBeLessThan(SHEET_SNAP_VH.half);
 		expect(SHEET_SNAP_VH.half).toBeLessThan(SHEET_SNAP_VH.tall);
 	});
+
+	it('leaves what is behind it visible at every stop', () => {
+		for (const height of Object.values(SHEET_SNAP_VH)) {
+			expect(height).toBeGreaterThan(0);
+			expect(height).toBeLessThan(100);
+		}
+	});
 });
 
 describe('resolveDrag', () => {
@@ -33,6 +40,11 @@ describe('resolveDrag', () => {
 
 	it('closes when dragged down from the smallest stop', () => {
 		expect(resolveDrag('peek', 80, snaps)).toBe('closed');
+	});
+
+	it('honours a custom threshold', () => {
+		expect(resolveDrag('tall', 20, snaps)).toBe('tall');
+		expect(resolveDrag('tall', 20, snaps, 10)).toBe('half');
 	});
 
 	it('honours a restricted stop list', () => {

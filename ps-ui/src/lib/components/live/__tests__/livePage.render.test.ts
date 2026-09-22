@@ -4,9 +4,7 @@ import { MessageType } from '$types';
 import { fireEvent, render, screen, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import '../../pal/__tests__/fixtures/matchMediaPolyfill';
 import './fixtures/animatePolyfill';
-import { clearFriendship, seedFriendship } from './fixtures/friendshipFixture';
 
 const capabilities: GameCapabilitiesJson = {
 	version: 1,
@@ -99,13 +97,33 @@ const mockSendAndWait = vi.fn(async (type: string, _data?: unknown) => {
 					adminUid: 'u1',
 					roleOptions: ['GuildMaster', 'SubMaster', 'Member', 'Guest'],
 					members: [
-						{ uid: 'u1', name: 'Aurora', role: 'GuildMaster', status: 'Online', lastOnlineTicks: 1 },
+						{
+							uid: 'u1',
+							name: 'Aurora',
+							role: 'GuildMaster',
+							status: 'Online',
+							lastOnlineTicks: 1
+						},
 						{ uid: 'u2', name: 'Fenrir', role: 'Member', status: 'Offline', lastOnlineTicks: 2 }
 					],
 					lab: { currentResearchId: 'Research_A', research: [] },
 					bases: [
-						{ id: 'b1', name: 'Main', level: 35, buildingNum: 259, containerId: 'c1', palSlotNum: 15 },
-						{ id: 'b2', name: 'Outpost', level: 35, buildingNum: 12, containerId: 'c2', palSlotNum: 15 }
+						{
+							id: 'b1',
+							name: 'Main',
+							level: 35,
+							buildingNum: 259,
+							containerId: 'c1',
+							palSlotNum: 15
+						},
+						{
+							id: 'b2',
+							name: 'Outpost',
+							level: 35,
+							buildingNum: 12,
+							containerId: 'c2',
+							palSlotNum: 15
+						}
 					]
 				},
 				status: 'ok'
@@ -199,8 +217,14 @@ vi.mock('$utils/websocketUtils', () => ({
 	pushProgressMessage: vi.fn()
 }));
 
-import { getGameState, getModalState } from '$states';
-import LivePage from '../../../../routes/live/+page.svelte';
+import { installViewportStub } from '$utils/__tests__/fixtures/viewportStub';
+
+// Dynamic, after the stub: `layout.svelte.ts` reads matchMedia once on first import,
+// and both `$states` and `$lib/data` reach it.
+const { setViewport } = installViewportStub();
+const { clearFriendship, seedFriendship } = await import('./fixtures/friendshipFixture');
+const { getGameState, getModalState } = await import('$states');
+const { default: LivePage } = await import('../../../../routes/live/+page.svelte');
 
 const gameState = getGameState();
 
@@ -220,6 +244,7 @@ function resetGameState() {
 }
 
 beforeEach(() => {
+	setViewport(1440);
 	mockSendAndWait.mockClear();
 	capabilities.ops['pal.heal'] = { available: true, reason: null };
 	capabilities.ops['pal.add'] = { available: false, reason: null };
@@ -640,7 +665,9 @@ describe('live page base pals', () => {
 		const pager = document.querySelector('#live-base-pager') as HTMLElement;
 		await user.click(within(pager).getByRole('button', { name: '2' }));
 
-		const calls = mockSendAndWait.mock.calls.filter(([type]) => type === MessageType.GAME_BASE_PALS);
+		const calls = mockSendAndWait.mock.calls.filter(
+			([type]) => type === MessageType.GAME_BASE_PALS
+		);
 		expect((calls.at(-1)?.[1] as { base_id: string }).base_id).toBe('b2');
 	});
 });
@@ -776,5 +803,61 @@ describe('live page pal placement', () => {
 			slot_index: null,
 			instance_id: 'bp1'
 		});
+	});
+});
+
+describe('live page on a phone', () => {
+	async function pickAurora(user: ReturnType<typeof userEvent.setup>) {
+		const row = await screen.findByRole('button', { name: /Aurora/ });
+		await user.click(row);
+		return row;
+	}
+
+	it('opens the detail pane as a sheet', async () => {
+		const user = userEvent.setup();
+		setViewport(390);
+		render(LivePage);
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+		await pickAurora(user);
+
+		const sheet = await screen.findByRole('dialog');
+		expect(within(sheet).getByRole('tab', { name: 'Palbox' })).not.toBeNull();
+	});
+
+	it('leaves the pane inline on a desktop', async () => {
+		const user = userEvent.setup();
+		setViewport(1440);
+		render(LivePage);
+
+		await pickAurora(user);
+
+		expect(await screen.findByRole('tab', { name: 'Palbox' })).not.toBeNull();
+		expect(screen.queryByRole('dialog')).toBeNull();
+	});
+
+	it('keeps the connection indicator at either width', async () => {
+		setViewport(390);
+		const phone = render(LivePage);
+		expect(await screen.findByTestId('live-connection')).not.toBeNull();
+		phone.unmount();
+
+		setViewport(1440);
+		render(LivePage);
+		expect(await screen.findByTestId('live-connection')).not.toBeNull();
+	});
+
+	it('closes the sheet and leaves the list behind', async () => {
+		const user = userEvent.setup();
+		setViewport(390);
+		render(LivePage);
+
+		await pickAurora(user);
+		await screen.findByRole('dialog');
+
+		await user.click(screen.getByTestId('sheet-backdrop'));
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+		expect(await screen.findByRole('button', { name: /Aurora/ })).not.toBeNull();
 	});
 });

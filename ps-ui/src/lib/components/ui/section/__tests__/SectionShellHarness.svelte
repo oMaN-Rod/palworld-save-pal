@@ -26,4 +26,4 @@
 	<span>talents body</span>
 {/snippet}
 
-<SectionShell {sections} {presentation} bind:active label="Sections" />
+<SectionShell {sections} {presentation} bind:active label="Sections" idPrefix="shell" />

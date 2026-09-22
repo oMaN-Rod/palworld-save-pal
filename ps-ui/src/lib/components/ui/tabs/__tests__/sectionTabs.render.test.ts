@@ -25,6 +25,24 @@ describe('SectionTabs', () => {
 		expect(screen.getByRole('tab', { name: 'Gear' }).getAttribute('aria-selected')).toBe('false');
 	});
 
+	it('names itself and the panel it opens from the prefix', async () => {
+		render(SectionTabsHarness, { active: 'stats' });
+		await tick();
+
+		const tab = screen.getByRole('tab', { name: 'Stats' });
+		expect(tab.id).toBe('harness-stats-tab');
+		expect(tab.getAttribute('aria-controls')).toBe('harness-stats-panel');
+	});
+
+	it('points an unselected tab at its panel too', async () => {
+		render(SectionTabsHarness, { active: 'stats' });
+		await tick();
+
+		expect(screen.getByRole('tab', { name: 'Gear' }).getAttribute('aria-controls')).toBe(
+			'harness-gear-panel'
+		);
+	});
+
 	it('reports the tab the user picked', async () => {
 		render(SectionTabsHarness, { active: 'stats' });
 		await tick();

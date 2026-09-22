@@ -11,8 +11,8 @@
 	import { clampMapOpacity } from '$components/map/style/mapOpacity';
 	import RelicFilterControl from '$components/map/controls/RelicFilterControl.svelte';
 	import MapOptionsPanel from '$components/map/panels/MapOptionsPanel.svelte';
-	import MapOptionsSheet from '$components/map/panels/MapOptionsSheet.svelte';
-	import type { SheetSnap } from '$components/map/state/mapSheet';
+	import { BottomSheet } from '$components/ui/sheet';
+	import type { SheetSnap } from '$components/ui/sheet/sheetSnap';
 	import PlacementPanel from '$components/map/panels/PlacementPanel.svelte';
 	import { mapOptionsState } from '$components/map/state/mapOptions.svelte';
 	import {
@@ -74,7 +74,9 @@
 	const toast = getToastState();
 
 	const saveLoaded = $derived(!!appState.saveFile);
-	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile, getRemoteMode().active));
+	const publicShell = $derived(
+		isPublicShell(isWebBuild, appState.saveFile, getRemoteMode().active)
+	);
 	// Prerender renders this route in Node, where reading `searchParams` is a
 	// build-time throw — there is no query string to read for a static file.
 	const pipMode = $derived(browser && page.url.searchParams.get('pip') === '1');
@@ -648,14 +650,18 @@
 			</aside>
 		{/if}
 
-		{#if mobile && sheetOpen}
-			<MapOptionsSheet
+		{#if mobile}
+			<!-- Not modal: the map behind it must stay pannable. -->
+			<BottomSheet
+				open={sheetOpen}
 				bind:snap={sheetSnap}
+				snaps={['peek', 'tall']}
 				title={m.map_options()}
+				modal={false}
 				onClose={() => (sheetOpen = false)}
 			>
 				{@render optionsBody()}
-			</MapOptionsSheet>
+			</BottomSheet>
 		{/if}
 
 		<div

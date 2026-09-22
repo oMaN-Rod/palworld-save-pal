@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { Button, ItemHeader, Progress, Tooltip } from '$components/ui';
 	import { ActionGroup } from '$components/ui/actions';
+	import SectionTabs, { panelId, tabId } from '$components/ui/tabs/SectionTabs.svelte';
+	import { layout } from '$utils/layout.svelte';
 	import { getAppState, getToastState, getModalState } from '$states';
 	import {
 		EntryState,
@@ -11,27 +12,21 @@
 		type ItemContainerSlot,
 		type ItemContainer
 	} from '$types';
-	import { ASSET_DATA_PATH, MAX_LEVEL } from '$lib/constants';
+	import { MAX_LEVEL } from '$lib/constants';
 	import { itemsData, expData } from '$lib/data';
-	import { Tabs, Accordion } from '@skeletonlabs/skeleton-svelte';
-	import { PlayerStats, PlayerHealthBadge } from '$components/player';
-	import { ItemBadge } from '$components/shared';
-	import { PlayerPresets } from '$components/presets';
 	import { TextInputModal, NumberInputModal, ItemSelectModal } from '$components/modals';
-	import { assetLoader } from '$utils';
-	import { staticIcons } from '$types/icons';
-	import NumberFlow from '@number-flow/svelte';
-	import type { ValueChangeDetails } from '@zag-js/tabs';
-	import type { ValueChangeDetails as AccordionValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
+	import PlayerGear from './components/PlayerGear.svelte';
+	import PlayerStatsPanel from './components/PlayerStatsPanel.svelte';
+	import PlayerInventory from './components/PlayerInventory.svelte';
 	import { buildPlayerActions } from './playerActions';
 
 	const appState = getAppState();
 	const toast = getToastState();
 	const modal = getModalState();
 
-	const max_level = $derived(appState.settings.cheat_mode ? 99 : MAX_LEVEL);
+	const maxLevel = $derived(appState.settings.cheat_mode ? 99 : MAX_LEVEL);
 
 	const defaultItem = {
 		id: '',
@@ -60,7 +55,6 @@
 	let sphereModule: ItemContainerSlot = $state(defaultItemContainerSlot);
 	let accessoryGear: ItemContainerSlot[] = $state([]);
 	let group: 'inventory' | 'key_items' = $state('inventory');
-	let sideBarExpanded: string[] = $state(['stats']);
 
 	let health = $state(500);
 
@@ -83,21 +77,6 @@
 			}
 		});
 		return Math.min(42 + extraSlots, 54);
-	});
-
-	let { levelProgressToNext, levelProgressValue, levelProgressMax } = $derived.by(() => {
-		if (appState.selectedPlayer) {
-			if (appState.selectedPlayer.level >= max_level) {
-				return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
-			}
-			const nextExp = expData.expData[appState.selectedPlayer.level + 1];
-			return {
-				levelProgressToNext: nextExp.TotalEXP - appState.selectedPlayer.exp || 0,
-				levelProgressValue: nextExp.NextEXP - (nextExp.TotalEXP - appState.selectedPlayer.exp),
-				levelProgressMax: nextExp.NextEXP
-			};
-		}
-		return { levelProgressToNext: 0, levelProgressValue: 0, levelProgressMax: 1 };
 	});
 
 	const gearToAdd = $derived.by(() => {
@@ -132,16 +111,6 @@
 			})
 			.sort((a, b) => (a.details.sort_id || Infinity) - (b.details.sort_id || Infinity));
 	});
-
-	async function getItemIcon(staticId: string) {
-		if (!staticId || staticId === 'None') return;
-		const itemData = itemsData.getByKey(staticId);
-		if (!itemData) {
-			console.error(`Item data not found for static id: ${staticId}`);
-			return;
-		}
-		return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`);
-	}
 
 	function clearContainer(container: ItemContainer) {
 		Object.values(container.slots).forEach((slot) => {
@@ -506,14 +475,14 @@
 
 		if (event.ctrlKey) {
 			if (event.button === 0) {
-				newLevel = Math.min(appState.selectedPlayer.level + 5, max_level);
+				newLevel = Math.min(appState.selectedPlayer.level + 5, maxLevel);
 			} else if (event.button === 1) {
-				newLevel = max_level;
+				newLevel = maxLevel;
 			} else if (event.button === 2) {
-				newLevel = Math.min(appState.selectedPlayer.level + 10, max_level);
+				newLevel = Math.min(appState.selectedPlayer.level + 10, maxLevel);
 			}
 		} else {
-			newLevel = Math.min(appState.selectedPlayer.level + 1, max_level);
+			newLevel = Math.min(appState.selectedPlayer.level + 1, maxLevel);
 		}
 
 		if (newLevel === appState.selectedPlayer.level) return;
@@ -584,6 +553,17 @@
 		}
 	}
 
+	const SECTION_ID_PREFIX = 'player';
+
+	// Phone reading order, not the desktop grid's.
+	const sections = $derived([
+		{ id: 'stats', label: m.stats(), body: statsSection },
+		{ id: 'inventory', label: m.inventory(), body: inventorySection },
+		{ id: 'gear', label: m.gear(), body: gearSection }
+	]);
+
+	let activeSection = $state('stats');
+
 	const playerActions = $derived(
 		buildPlayerActions({
 			group,
@@ -601,6 +581,42 @@
 	);
 </script>
 
+{#snippet inventorySection()}
+	<PlayerInventory
+		{commonContainer}
+		{essentialContainer}
+		bind:group
+		onUpdate={onItemUpdate}
+		onCopyPaste={handleCopyPaste}
+	/>
+{/snippet}
+
+{#snippet gearSection()}
+	<PlayerGear
+		{weaponLoadOutContainer}
+		{foodEquipContainer}
+		{accessoryGear}
+		{headGear}
+		{bodyGear}
+		{shieldGear}
+		{gliderGear}
+		{sphereModule}
+		onUpdate={onItemUpdate}
+		onCopyPaste={(event, slot) => handleCopyPaste(event, slot, false)}
+	/>
+{/snippet}
+
+{#snippet statsSection()}
+	<PlayerStatsPanel
+		player={appState.selectedPlayer!}
+		{maxLevel}
+		bind:health
+		onLevelIncrement={handleLevelIncrement}
+		onLevelDecrement={handleLevelDecrement}
+		onUpdateNickname={handleUpdateNickname}
+	/>
+{/snippet}
+
 {#if appState.selectedPlayer}
 	<div class="flex h-full flex-col overflow-auto">
 		<div class="ml-2 flex">
@@ -610,379 +626,47 @@
 				title={m.quick_actions()}
 				class="mr-2"
 			/>
-			<div
-				class="@container grid w-full grid-cols-[auto_1fr] gap-4 pr-4 xl:grid-cols-[auto_1fr_24rem]"
-			>
-				<div class="flex flex-col space-y-2">
-					<Tabs
-						listBorder="preset-outlined-surface-200-800"
-						listClasses="btn-group preset-outlined-surface-200-800 w-full flex-col md:flex-row rounded-sm"
-						value={group}
-						onValueChange={(e: ValueChangeDetails) => {
-							if (e.value === 'inventory' || e.value === 'key_items') group = e.value;
-						}}
-					>
-						{#snippet list()}
-							<Tabs.Control
-								value="inventory"
-								classes="w-full"
-								base="border-none hover:bg-secondary-500/50 rounded-sm"
-								labelBase="btn"
-								stateActive="bg-secondary-800 text-white"
-								padding="p-0"
+			{#if layout.phone}
+				<div class="flex w-full min-w-0 flex-col">
+					<SectionTabs
+						tabs={sections.map(({ id, label }) => ({ id, label }))}
+						bind:active={activeSection}
+						label={m.player_sections()}
+						idPrefix={SECTION_ID_PREFIX}
+					/>
+					{#each sections as section (section.id)}
+						{#if section.id === activeSection}
+							<div
+								id={panelId(SECTION_ID_PREFIX, section.id)}
+								role="tabpanel"
+								aria-labelledby={tabId(SECTION_ID_PREFIX, section.id)}
+								tabindex="0"
+								data-testid="player-{section.id}"
+								class="min-w-0 flex-1 overflow-y-auto p-2"
 							>
-								{m.inventory()}
-							</Tabs.Control>
-							<Tabs.Control
-								value="key_items"
-								classes="w-full"
-								base="border-none hover:bg-secondary-500/50 rounded-sm"
-								labelBase="btn"
-								stateActive="bg-secondary-800 text-white"
-								padding="p-0"
-							>
-								<div id="key-items-tab" class="w-full">
-									{m.key_items()}
-								</div>
-							</Tabs.Control>
-						{/snippet}
-						{#snippet content()}
-							<Tabs.Panel value="inventory">
-								<div id="inventory-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
-										{#each Object.values(commonContainer.slots) as _, index}
-											<ItemBadge
-												bind:slot={commonContainer.slots[index]}
-												itemGroup="Common"
-												onCopyPaste={(event) =>
-													handleCopyPaste(event, commonContainer.slots[index])}
-												onUpdate={onItemUpdate}
-											/>
-										{/each}
-									</div>
-								</div>
-							</Tabs.Panel>
-							<Tabs.Panel value="key_items">
-								<div id="key-items-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-									<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
-										{#each Object.values(essentialContainer.slots) as _, index}
-											<ItemBadge
-												bind:slot={essentialContainer.slots[index]}
-												itemGroup="KeyItem"
-												onUpdate={onItemUpdate}
-												onCopyPaste={(event) =>
-													handleCopyPaste(event, essentialContainer.slots[index], false)}
-											/>
-										{/each}
-									</div>
-								</div>
-							</Tabs.Panel>
-						{/snippet}
-					</Tabs>
-				</div>
-				<div class="flex min-h-0 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]">
-					<div class="flex flex-col space-y-2">
-						<div id="weapon-equip" class="flex flex-col space-y-2">
-							<ItemHeader text={m.weapon({ count: 1 })} />
-							<div class="flex space-x-2 2xl:flex-col 2xl:space-y-2">
-								{#each Object.values(weaponLoadOutContainer.slots) as _, index}
-									<ItemBadge
-										bind:slot={weaponLoadOutContainer.slots[index]}
-										itemGroup="Weapon"
-										onCopyPaste={(event) =>
-											handleCopyPaste(event, weaponLoadOutContainer.slots[index], false)}
-										onUpdate={onItemUpdate}
-									/>
-								{/each}
+								{@render section.body()}
 							</div>
-						</div>
-						<div id="accessory-equip" class="flex flex-col space-y-2">
-							<ItemHeader text={m.accessory()} />
-							<div class="2xl:ml-2">
-								<div class="flex max-h-36 max-w-36 gap-2 2xl:grid 2xl:grid-cols-2">
-									{#each accessoryGear as _, index}
-										<ItemBadge
-											bind:slot={accessoryGear[index]}
-											itemGroup="Accessory"
-											onCopyPaste={(event) => handleCopyPaste(event, accessoryGear[index], false)}
-											onUpdate={onItemUpdate}
-										/>
-									{/each}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="hidden flex-col items-center justify-center 2xl:flex">
-						<span class="flex h-1/3 items-end">
-							{#await getItemIcon(headGear.static_id) then icon}
-								{#if icon}
-									<img
-										src={icon}
-										alt={headGear.static_id}
-										class="hidden 2xl:block 2xl:h-16 2xl:w-16"
-									/>
-								{/if}
-							{/await}
-						</span>
-						<span class="h-2/3">
-							{#await getItemIcon(bodyGear.static_id) then icon}
-								{#if icon}
-									<img
-										src={icon}
-										alt={bodyGear.static_id}
-										class="hidden 2xl:block 2xl:h-64 2xl:w-64"
-									/>
-								{/if}
-							{/await}
-						</span>
-					</div>
-					<div id="gear-equip" class="mt-2 flex space-y-2 space-x-2 2xl:flex-col">
-						<div class="flex flex-col space-y-2">
-							<ItemHeader text={m.head()} />
-							<ItemBadge
-								bind:slot={headGear}
-								itemGroup="Head"
-								onCopyPaste={(event) => handleCopyPaste(event, headGear, false)}
-								onUpdate={onItemUpdate}
-							/>
-						</div>
-						<div class="flex flex-col space-y-2">
-							<ItemHeader text={m.body()} />
-							<ItemBadge
-								bind:slot={bodyGear}
-								itemGroup="Body"
-								onCopyPaste={(event) => handleCopyPaste(event, bodyGear, false)}
-								onUpdate={onItemUpdate}
-							/>
-						</div>
-						<div class="flex flex-col space-y-2">
-							<ItemHeader text={m.shield()} />
-							<ItemBadge
-								bind:slot={shieldGear}
-								itemGroup="Shield"
-								onCopyPaste={(event) => handleCopyPaste(event, shieldGear, false)}
-								onUpdate={onItemUpdate}
-							/>
-						</div>
-						<div class="flex flex-col space-y-2">
-							<ItemHeader text={m.glider()} />
-							<ItemBadge
-								bind:slot={gliderGear}
-								itemGroup="Glider"
-								onCopyPaste={(event) => handleCopyPaste(event, gliderGear, false)}
-								onUpdate={onItemUpdate}
-							/>
-						</div>
-						<div class="flex flex-col space-y-2">
-							<ItemHeader text={m.sphere_module()} baseClass="hidden 2xl:block" />
-							<ItemHeader text={m.module()} baseClass="block 2xl:hidden" />
-							<ItemBadge
-								bind:slot={sphereModule}
-								itemGroup="SphereModule"
-								onCopyPaste={(event) => handleCopyPaste(event, sphereModule, false)}
-								onUpdate={onItemUpdate}
-							/>
-						</div>
-					</div>
-					<div id="food-equip" class="col-span-3 space-y-2 2xl:mt-2 2xl:ml-12">
-						<ItemHeader text={m.food()} />
-						<div class="flex flex-row space-x-2">
-							{#each Object.values(foodEquipContainer.slots) as _, index}
-								<ItemBadge
-									bind:slot={foodEquipContainer.slots[index]}
-									itemGroup="Food"
-									onCopyPaste={(event) =>
-										handleCopyPaste(event, foodEquipContainer.slots[index], false)}
-									onUpdate={onItemUpdate}
-								/>
-							{/each}
-						</div>
-					</div>
+						{/if}
+					{/each}
 				</div>
-
-				<div class="max-h-[calc(100vh-var(--titlebar-h))] min-w-0 overflow-y-auto">
+			{:else}
+				<div
+					class="@container grid w-full grid-cols-[auto_1fr] gap-4 pr-4 xl:grid-cols-[auto_1fr_24rem]"
+				>
+					<div data-testid="player-inventory" class="flex flex-col space-y-2">
+						{@render inventorySection()}
+					</div>
 					<div
-						id="player-level"
-						class="border-l-surface-600 bg-surface-800 mr-2 mb-2 flex rounded-none border-l-2 p-4"
+						data-testid="player-gear"
+						class="flex min-h-0 flex-col 2xl:grid 2xl:grid-cols-[auto_1fr_auto]"
 					>
-						<div class="mr-4 flex flex-col items-center justify-center rounded-none">
-							<div class="flex items-center">
-								<Tooltip position="bottom">
-									<Button
-										variant="ghost"
-										size="icon"
-										class="mr-4"
-										oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-										onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
-									>
-										<Icon icon="tabler:minus" class="text-primary-500" size={16} />
-									</Button>
-									{#snippet popup()}
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.leftClickIcon}
-													alt="Left Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">-5</span>
-										</div>
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.rightClickIcon}
-													alt="Right Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">-10</span>
-										</div>
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.middleClickIcon}
-													alt="Middle Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">Level 1</span>
-										</div>
-									{/snippet}
-								</Tooltip>
-
-								<div class="flex flex-col items-center justify-center">
-									<span class="text-surface-400 text-sm font-bold">{m.level().toUpperCase()}</span>
-									<span class="text-xl font-bold xl:text-2xl">
-										<NumberFlow value={appState.selectedPlayer.level} />
-									</span>
-								</div>
-
-								<Tooltip position="bottom">
-									<Button
-										variant="ghost"
-										size="icon"
-										class="ml-4"
-										oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-										onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
-									>
-										<Icon icon="tabler:plus" class="text-primary-500" size={16} />
-									</Button>
-									{#snippet popup()}
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.leftClickIcon}
-													alt="Left Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">+5</span>
-										</div>
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.rightClickIcon}
-													alt="Right Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">+10</span>
-										</div>
-										<div class="flex items-center space-x-2">
-											<div class="h-6 w-6">
-												<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
-											</div>
-											<div class="h-6 w-6">
-												<img
-													src={staticIcons.middleClickIcon}
-													alt="Middle Click"
-													class="h-full w-full"
-												/>
-											</div>
-											<span class="text-xs font-bold">Level {max_level}</span>
-										</div>
-									{/snippet}
-								</Tooltip>
-							</div>
-						</div>
-
-						<div class="grow">
-							<div class="flex flex-col">
-								<div class="flex space-x-2">
-									<button
-										id="player-nickname"
-										class="hover:bg-secondary-500/50 hover:ring-offset-surface-900 text-start font-bold hover:ring hover:ring-offset-4"
-										onclick={handleUpdateNickname}
-									>
-										<Icon icon="tabler:edit" class="h-4 w-4" />
-									</button>
-									<Tooltip
-										label={new Date(appState.selectedPlayer.last_online_time).toLocaleString()}
-									>
-										<span class="truncate">{appState.selectedPlayer.nickname}</span>
-									</Tooltip>
-								</div>
-								<div class="flex flex-col space-y-2">
-									<div class="flex">
-										<span class="text-on-surface grow">NEXT</span>
-										<span class="text-on-surface">{levelProgressToNext}</span>
-									</div>
-									<Progress
-										value={levelProgressValue}
-										max={levelProgressMax}
-										height="h-2"
-										width="w-full"
-										rounded="rounded-none"
-										showLabel={false}
-									/>
-								</div>
-							</div>
-						</div>
+						{@render gearSection()}
 					</div>
-					<PlayerHealthBadge bind:player={appState.selectedPlayer} bind:maxHp={health} />
-					<Accordion
-						value={sideBarExpanded}
-						onValueChange={(e: AccordionValueChangeDetails) => (sideBarExpanded = e.value)}
-						collapsible
-					>
-						<Accordion.Item value="stats" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								{m.stats()}
-							{/snippet}
-							{#snippet panel()}
-								<PlayerStats player={appState.selectedPlayer!} />
-							{/snippet}
-						</Accordion.Item>
-						<hr class="hr" />
-						<Accordion.Item value="presets" controlHover="hover:bg-secondary-500/25">
-							{#snippet control()}
-								<div id="player-presets-control" class="w-full">
-									{c.preset}
-								</div>
-							{/snippet}
-							{#snippet panel()}
-								<PlayerPresets bind:player={appState.selectedPlayer} />
-							{/snippet}
-						</Accordion.Item>
-					</Accordion>
+					<div data-testid="player-stats">
+						{@render statsSection()}
+					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
 	</div>
 {:else}
@@ -993,32 +677,3 @@
 		</h2>
 	</div>
 {/if}
-
-<style lang="postcss">
-	img {
-		opacity: 0;
-		animation: fadeIn 0.3s ease-in forwards;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-		}
-	}
-
-	img:not([src]) {
-		animation: fadeOut 0.3s ease-out forwards;
-	}
-
-	@keyframes fadeOut {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
-	}
-</style>

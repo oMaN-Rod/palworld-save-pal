@@ -2,13 +2,38 @@
 import { EntryState, PalGender, type Pal, type WorkSuitability } from '$types';
 import '$utils/__tests__/fixtures/animatePolyfill';
 import { installViewportStub } from '$utils/__tests__/fixtures/viewportStub';
-import { render, screen } from '@testing-library/svelte';
+import { render, screen, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { tick } from 'svelte';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('$components/pal/PalModelViewer.svelte', async () => ({
-	default: (await import('./fixtures/PalModelViewerStub.svelte')).default
+const { renderers } = vi.hoisted(() => ({ renderers: [] as { disposed: number }[] }));
+
+// Only the GL context is faked; whether one gets built is under test.
+vi.mock('three', async (importOriginal) => {
+	const actual = await importOriginal<Record<string, unknown>>();
+	class FakeRenderer {
+		record = { disposed: 0 };
+		constructor() {
+			renderers.push(this.record);
+		}
+		dispose() {
+			this.record.disposed += 1;
+		}
+		forceContextLoss() {}
+		setClearAlpha() {}
+		setPixelRatio() {}
+		setSize() {}
+		render() {}
+	}
+	return { ...actual, WebGLRenderer: FakeRenderer };
+});
+
+vi.mock('$components/map/scene/pal/palMeshLibrary', () => ({
+	palModelUrl: (key: string) => `/models/pals/${key}.glb`,
+	requestPalMesh: () => null,
+	palMeshFailed: () => false,
+	onPalMeshLoaded: () => () => {}
 }));
 
 const { appState } = vi.hoisted(() => ({
@@ -30,6 +55,7 @@ const { expData, friendshipData } = await import('$lib/data');
 
 const DESKTOP_WIDTH = 1920;
 const TABLET_WIDTH = 820;
+const PHONE_WIDTH = 390;
 
 const ACTIVE_SKILL_MARKER = 'ZzActiveSkillMarkerZz';
 const PASSIVE_SKILL_MARKER = 'ZzPassiveSkillMarkerZz';
@@ -145,6 +171,14 @@ describe('PalEditModal sections', () => {
 		friendshipData.friendshipData = { '1': { rank: 1, required_point: 0 } };
 		appState.selectedPal = makePal();
 		appState.selectedPlayer = undefined;
+		renderers.length = 0;
+		vi.stubGlobal(
+			'ResizeObserver',
+			class {
+				observe() {}
+				disconnect() {}
+			}
+		);
 	});
 
 	it('renders all five sections with content present at desktop width', async () => {
@@ -199,6 +233,50 @@ describe('PalEditModal sections', () => {
 		const asideColumn = screen.getByTestId('talents').parentElement;
 		expect(screen.getByTestId('souls').parentElement).toBe(asideColumn);
 		expect(asideColumn).not.toBe(primaryColumn);
+	});
+
+	it('keeps the identity strip and a tablist on a phone', async () => {
+		setViewport(PHONE_WIDTH);
+		render(PalEditModal);
+		await tick();
+
+		expect(document.getElementById('pal-identity')).not.toBeNull();
+		expect(document.getElementById('pal-header')).not.toBeNull();
+		expect(screen.getByRole('tablist', { name: 'Pal sections' })).not.toBeNull();
+	});
+
+	it('gives status and stats a tab of their own on a phone', async () => {
+		setViewport(PHONE_WIDTH);
+		render(PalEditModal);
+		await tick();
+
+		const list = screen.getByRole('tablist', { name: 'Pal sections' });
+		const labels = within(list)
+			.getAllByRole('tab')
+			.map((tab) => tab.textContent?.trim());
+		expect(labels).toContain('Stats');
+	});
+
+	it('offers the 3D model rather than building a GL context for it', async () => {
+		setViewport(PHONE_WIDTH);
+		render(PalEditModal);
+		await tick();
+
+		expect(screen.getByRole('button', { name: 'Load 3D model' })).not.toBeNull();
+		expect(document.querySelector('canvas')).toBeNull();
+		expect(renderers).toHaveLength(0);
+	});
+
+	it('builds the model only once the user asks for it', async () => {
+		setViewport(PHONE_WIDTH);
+		render(PalEditModal);
+		await tick();
+
+		await userEvent.click(screen.getByRole('button', { name: 'Load 3D model' }));
+		await tick();
+
+		expect(document.querySelector('canvas')).not.toBeNull();
+		expect(renderers).toHaveLength(1);
 	});
 
 	it('places the pal portrait between the primary and aside desktop columns', async () => {

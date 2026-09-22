@@ -455,6 +455,7 @@
   "for": "for",
   "friendship_rank": "Friendship Rank",
   "gamepass": "GamePass",
+  "gear": "Gear",
   "gender": "Gender",
   "general": "General",
   "glider": "Glider",
@@ -748,6 +749,7 @@
   "live_title": "Live Game",
   "live_write_in_flight": "Another change is still running.",
   "live_world_not_loaded": "World not loaded yet.",
+  "load_3d_model": "Load 3D model",
   "load_guild_bases": "Load Guild/Bases",
   "load_player": "Load Player",
   "loaded_entity": "Loaded {entity}",
@@ -958,6 +960,7 @@
   "pal_cannot_be_trait": "{type} Pal cannot be {trait}",
   "pal_count": "Pal Count",
   "pal_height": "Pal height",
+  "pal_portrait": "Portrait",
   "pal_sections": "Pal sections",
   "pal_size": "Pal size",
   "pal_types": "Pal Types",
@@ -1000,6 +1003,7 @@
       ]
     }
   ],
+  "player_sections": "Player sections",
   "poi": "Points of Interest",
   "predator": "Predator",
   "predator_pals": "Predator {pals}",

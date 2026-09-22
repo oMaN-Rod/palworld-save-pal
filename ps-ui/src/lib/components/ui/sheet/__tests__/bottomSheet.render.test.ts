@@ -172,3 +172,43 @@ describe('BottomSheet', () => {
 		});
 	});
 });
+
+describe('BottomSheet as a non-modal sheet', () => {
+	it('drops the backdrop and the modal flag', async () => {
+		render(BottomSheetHarness, { props: { open: true, modal: false, onClose: vi.fn() } });
+		await tick();
+
+		expect(screen.queryByTestId('sheet-backdrop')).toBeNull();
+		expect(getDialog().getAttribute('aria-modal')).toBeNull();
+	});
+
+	it('carries its own close button instead', async () => {
+		const onClose = vi.fn();
+		render(BottomSheetHarness, { props: { open: true, modal: false, onClose } });
+		await tick();
+
+		await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+		expect(onClose).toHaveBeenCalledTimes(1);
+	});
+
+	it('leaves the close button to the backdrop when it is modal', async () => {
+		render(BottomSheetHarness, { props: { open: true, onClose: vi.fn() } });
+		await tick();
+
+		expect(screen.getByTestId('sheet-backdrop')).toBeTruthy();
+		expect(screen.queryByRole('button', { name: 'Close' })).toBeNull();
+	});
+
+	it('still resizes from the handle', async () => {
+		render(BottomSheetHarness, { props: { open: true, modal: false, onClose: vi.fn() } });
+		await tick();
+
+		const handle = getHandle();
+		handle.dispatchEvent(pointerEvent('pointerdown', 400));
+		handle.dispatchEvent(pointerEvent('pointerup', 300));
+		await tick();
+
+		expect(getDialog().style.height).toBe(`${SHEET_SNAP_VH.tall}vh`);
+	});
+});

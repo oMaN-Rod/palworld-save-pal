@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { fly, fade } from 'svelte/transition';
+	import Icon from '$lib/components/ui/icons/Icon.svelte';
+	import { cn } from '$theme';
 	import { cubicOut } from 'svelte/easing';
 	import type { Snippet } from 'svelte';
 	import * as m from '$i18n/messages';
@@ -19,6 +21,7 @@
 		snaps = DEFAULT_SNAPS,
 		title,
 		onClose,
+		modal = true,
 		children
 	}: {
 		open?: boolean;
@@ -26,6 +29,8 @@
 		snaps?: SheetSnap[];
 		title: string;
 		onClose: () => void;
+		/** Non-modal: no backdrop, the page behind stays usable, and the sheet has its own close button. */
+		modal?: boolean;
 		children: Snippet;
 	} = $props();
 
@@ -73,7 +78,8 @@
 	$effect(() => {
 		if (!open || !dialogEl) return;
 		document.addEventListener('keydown', handleKeydown);
-		const releaseFocus = trapFocus(dialogEl);
+		// A non-modal sheet leaves the page usable, so trapping focus would lock the user out of it.
+		const releaseFocus = modal ? trapFocus(dialogEl) : () => {};
 		return () => {
 			document.removeEventListener('keydown', handleKeydown);
 			releaseFocus();
@@ -82,21 +88,26 @@
 </script>
 
 {#if open}
-	<div
-		class="fixed inset-0 z-[50000] bg-black/55"
-		data-testid="sheet-backdrop"
-		onclick={onClose}
-		role="presentation"
-		transition:fade={{ duration: 150 }}
-	></div>
+	{#if modal}
+		<div
+			class="fixed inset-0 z-[50000] bg-black/55"
+			data-testid="sheet-backdrop"
+			onclick={onClose}
+			role="presentation"
+			transition:fade={{ duration: 150 }}
+		></div>
+	{/if}
 
 	<div
 		bind:this={dialogEl}
-		class="bg-surface-800 border-surface-600 fixed inset-x-0 bottom-0 z-[50001] flex flex-col rounded-t-2xl border-t shadow-2xl"
+		class={cn(
+			'bg-surface-800 border-surface-600 inset-x-0 bottom-0 flex flex-col rounded-t-2xl border-t shadow-2xl',
+			modal ? 'fixed z-[50001]' : 'absolute z-10'
+		)}
 		style:height="{SHEET_SNAP_VH[snap]}vh"
 		style:padding-bottom="env(safe-area-inset-bottom)"
 		role="dialog"
-		aria-modal="true"
+		aria-modal={modal ? 'true' : undefined}
 		aria-labelledby={titleId}
 		transition:fly={{ y: 400, duration: 220, easing: cubicOut }}
 	>
@@ -111,7 +122,19 @@
 			<span class="bg-surface-500 block h-1 w-10 rounded-full"></span>
 		</button>
 
-		<h2 id={titleId} class="heading-gradient px-4 pb-2 text-sm font-bold">{title}</h2>
+		<div class="flex items-center justify-between gap-2 px-4 pb-2">
+			<h2 id={titleId} class="heading-gradient text-sm font-bold">{title}</h2>
+			{#if !modal}
+				<button
+					type="button"
+					class="hover:bg-surface-700 flex size-11 shrink-0 items-center justify-center rounded-lg"
+					aria-label={m.close()}
+					onclick={onClose}
+				>
+					<Icon icon="tabler:x" class="size-5" />
+				</button>
+			{/if}
+		</div>
 
 		<div class="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
 			{@render children()}

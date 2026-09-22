@@ -1,27 +1,20 @@
 <script lang="ts">
 	import { SvelteSet } from 'svelte/reactivity';
 
-	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { palsData, buildingsData, itemsData, presetsData } from '$lib/data';
+	import { palsData, itemsData, presetsData } from '$lib/data';
 	import { getAppState, getModalState, getPalEditorState, getToastState } from '$states';
-	import { Button, Input, List, Spinner, Tooltip, TooltipButton } from '$components/ui';
+	import { Input, Spinner } from '$components/ui';
 	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		type ItemContainer,
 		type Pal,
 		type ItemContainerSlot,
 		MessageType,
-		EntryState,
-		BuildingTypeA,
-		Rarity
+		EntryState
 	} from '$types';
-	import { ASSET_DATA_PATH } from '$lib/constants';
 	import { PalBadge } from '$components/pal';
 	import { PalContainerView } from '$components/pal/container';
-	import { DebugButton } from '$components/layout';
-	import { ItemBadge } from '$components/shared';
 	import LabResearch from '$components/guilds/LabResearch.svelte';
-	import { StoragePresets } from '$components/presets';
 	import {
 		PalSelectModal,
 		NumberInputModal,
@@ -29,17 +22,22 @@
 		NumberSliderModal,
 		TextInputModal
 	} from '$components/modals';
-	import { assetLoader, deepCopy, formatBossCharacterId, formatNickname } from '$utils';
+	import { deepCopy, formatBossCharacterId, formatNickname } from '$utils';
 	import { cn } from '$theme';
 	import { staticIcons } from '$types/icons';
 	import type { PalContainerSelection } from '$states/palContainer.svelte';
 	import { send } from '$lib/utils/websocketUtils';
 	import { goto } from '$app/navigation';
-	import { Nuke } from '$components/ui';
 	import { LabResearchControls } from '$components/guilds';
 	import * as m from '$i18n/messages';
 	import { c, p } from '$lib/utils/commonTranslations';
 
+	import GuildBasePager from './components/GuildBasePager.svelte';
+	import GuildHeader from './components/GuildHeader.svelte';
+	import GuildInventoryPanel from './components/GuildInventoryPanel.svelte';
+	import GuildChest from './components/GuildChest.svelte';
+	import GuildStorage from './components/GuildStorage.svelte';
+	import { IGNORED_CONTAINER_KEYS, type GuildInventoryItem } from './guildStorage';
 	import { buildGuildActions } from './guildActions';
 
 	interface PalWithBaseId {
@@ -52,16 +50,12 @@
 	const toast = getToastState();
 	const palEditor = getPalEditorState();
 
-	const VISIBLE_PAGE_BUBBLES = 16;
-
-	// A set, not a list: every read of the selection is a membership test, and
-	// a `SvelteSet` rather than a plain one because the view re-reads it on
-	// mutation rather than on replacement.
+	// SvelteSet: the view re-reads the selection on mutation, not replacement.
 	const selectedIds = new SvelteSet<string>();
 	const selectedIdList = $derived([...selectedIds]);
 
 	let palSearchQuery = $state('');
-	let currentPage = $state(1);
+	let baseNumber = $state(1);
 	let activeTab: 'pals' | 'storage' | 'guildChest' | 'lab' = $state('pals');
 	let currentStorageContainer: (ItemContainer & { slots: ItemContainerSlot[] }) | undefined =
 		$state(undefined);
@@ -76,48 +70,19 @@
 		}
 	});
 
-	const guildChestIcon = $derived.by(() => {
-		if (!playerGuild?.guild_chest) return null;
-		const building = buildingsData.getByKey('GuildChest');
-		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
-		}
-		return staticIcons.unknownIcon;
-	});
-
 	const guildBases = $derived.by(() => {
 		if (playerGuild) {
 			return playerGuild.bases;
 		}
 	});
 
-	const totalPages = $derived(Object.keys(guildBases || {}).length);
-
-	const visiblePageStart = $derived(
-		Math.max(
-			1,
-			Math.min(
-				currentPage - Math.floor(VISIBLE_PAGE_BUBBLES / 2),
-				totalPages - VISIBLE_PAGE_BUBBLES + 1
-			)
-		)
-	);
-
-	const visiblePageEnd = $derived(
-		Math.min(visiblePageStart + VISIBLE_PAGE_BUBBLES - 1, totalPages)
-	);
-
-	const visiblePages = $derived(
-		Array.from({ length: visiblePageEnd - visiblePageStart + 1 }, (_, i) => visiblePageStart + i)
-	);
+	const baseCount = $derived(Object.keys(guildBases || {}).length);
 
 	const currentBase = $derived.by(() => {
 		if (!guildBases) return null;
 		const baseEntries = Object.entries(guildBases);
-		return baseEntries[currentPage - 1] || null;
+		return baseEntries[baseNumber - 1] || null;
 	});
-
-	const ignoreKeys = ['None', 'Empty', 'TreasureBox', 'PalEgg', 'CommonDropItem'];
 
 	const currentBaseStorageContainers = $derived.by(() => {
 		if (!currentBase) return null;
@@ -125,7 +90,8 @@
 		return Object.values(base.storage_containers)
 			.filter(
 				(container) =>
-					container.slot_num !== 0 && !ignoreKeys.some((key) => container.key.includes(key))
+					container.slot_num !== 0 &&
+					!IGNORED_CONTAINER_KEYS.some((key) => container.key.includes(key))
 			)
 			.filter(
 				(container) =>
@@ -154,15 +120,10 @@
 			.sort((a, b) => a.key.localeCompare(b.key));
 	});
 
-	type InventoryInfo = {
-		containers: Record<string, number>;
-		total_count: number;
-	};
-
 	const currentBaseInventory = $derived.by(() => {
 		if (!currentBase) return { current: [] };
 		const [_, base] = currentBase;
-		let inventoryItems: Record<string, InventoryInfo> = {};
+		let inventoryItems: Record<string, Omit<GuildInventoryItem, 'static_id'>> = {};
 		for (const container of Object.values(currentBaseStorageContainers || {})) {
 			for (const slot of container.slots) {
 				if (slot.static_id !== 'None') {
@@ -205,19 +166,6 @@
 		};
 	});
 
-	const currentStorageContainerIcon = $derived.by(() => {
-		if (!currentStorageContainer) return null;
-		const building = buildingsData.getByKey(currentStorageContainer.key);
-		if (building) {
-			return assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${building.icon}.webp`);
-		}
-		return staticIcons.unknownIcon;
-	});
-
-	// Pre-migration the search results lived in a `$state` array refilled by a
-	// debounced `filterPals()`, so the grid showed the previous query's matches
-	// for 300ms and never noticed a pal deleted underneath it. Same predicate,
-	// same cross-base reach, derived rather than pushed.
 	const matchingPals = $derived.by((): PalWithBaseId[] => {
 		if (!guildBases || !palSearchQuery) return [];
 		const query = palSearchQuery.toLowerCase();
@@ -298,32 +246,30 @@
 		if (event.target instanceof HTMLInputElement) return;
 
 		if (event.key === 'ArrowLeft' || event.key === 'q' || event.key === 'Q') {
-			decrementPage();
+			previousBase();
 		} else if (event.key === 'ArrowRight' || event.key === 'e' || event.key === 'E') {
-			incrementPage();
+			nextBase();
 		}
 	}
 
-	function decrementPage() {
-		if (currentPage > 1) {
-			currentPage--;
-		} else {
-			currentPage = totalPages;
-		}
+	function selectBase(base: number) {
+		baseNumber = base;
+	}
+
+	function clearBaseStorageView() {
 		currentStorageContainer = undefined;
 		inventorySearchQuery = '';
 		selectedInventoryItem = '';
 	}
 
-	function incrementPage() {
-		if (currentPage < totalPages) {
-			currentPage++;
-		} else {
-			currentPage = 1;
-		}
-		currentStorageContainer = undefined;
-		inventorySearchQuery = '';
-		selectedInventoryItem = '';
+	function previousBase() {
+		selectBase(baseNumber > 1 ? baseNumber - 1 : baseCount);
+		clearBaseStorageView();
+	}
+
+	function nextBase() {
+		selectBase(baseNumber < baseCount ? baseNumber + 1 : 1);
+		clearBaseStorageView();
 	}
 
 	function isRealPal(item: PalWithBaseId): boolean {
@@ -388,7 +334,7 @@
 
 		// @ts-ignore
 		const result = await modal.showModal<[string, string] | undefined>(PalSelectModal, {
-			title: m.add_pal_to_base({ pal: c.pal, base: currentPage })
+			title: m.add_pal_to_base({ pal: c.pal, base: baseNumber })
 		});
 		if (!result) return;
 
@@ -671,21 +617,6 @@
 		activeTab = 'guildChest';
 	}
 
-	function getItemBackground(rarity: Rarity): string {
-		switch (rarity) {
-			case Rarity.Uncommon:
-				return 'bg-linear-to-tl from-green-500/50';
-			case Rarity.Rare:
-				return 'bg-linear-to-tl from-blue-500/50';
-			case Rarity.Epic:
-				return 'bg-linear-to-tl from-purple-500/50';
-			case Rarity.Legendary:
-				return 'bg-linear-to-tl from-yellow-500/50';
-			default:
-				return '';
-		}
-	}
-
 	async function handleEditBaseName() {
 		if (!currentBase) return;
 		// @ts-ignore
@@ -747,8 +678,8 @@
 	});
 
 	$effect(() => {
-		if (currentPage > totalPages && totalPages > 0) {
-			currentPage = totalPages;
+		if (baseNumber > baseCount && baseCount > 0) {
+			baseNumber = baseCount;
 		}
 	});
 
@@ -826,59 +757,16 @@
 	{:else}
 		<div class="grid h-full w-full grid-cols-[minmax(200px,25%)_1fr] xl:grid-cols-[25%_1fr]">
 			<div class="shrink-0 space-y-2 p-4">
-				<div class="flex">
-					<div class="flex items-center">
-						<Button
-							id="guild-name"
-							variant="ghost"
-							class="min-w-0 px-0 text-start"
-							onclick={handleEditGuildName}
-						>
-							<h4 class="h4 hover:text-secondary-500 truncate">{playerGuild!.name}</h4>
-						</Button>
-						<Tooltip label={m.basecamp_level()}>
-							<button
-								id="guild-level"
-								class="outline-surface-700 hover:outline-secondary-500 ml-2 flex gap-2 rounded p-1 align-bottom outline"
-								onclick={handleEditBasecampLevel}
-							>
-								<span class="text-surface-700">{m.level_abbr()}</span>
-								{playerGuild.base_camp_level}
-							</button>
-						</Tooltip>
-					</div>
-					{#if playerGuild && appState.settings.debug_mode}
-						<DebugButton href={`/debug?guildId=${playerGuild.id}`} />
-					{/if}
-					<Tooltip label={m.delete_entire_guild()}>
-						<button
-							id="guild-delete"
-							class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50"
-							onclick={handleDeleteGuild}
-						>
-							<Nuke size={24} />
-						</button>
-					</Tooltip>
-				</div>
-
-				<div class="flex flex-col">
-					<div class="flex">
-						<h5 class="h5 font-light">{c.base} {currentPage}</h5>
-						{#if playerGuild && currentBase && appState.settings.debug_mode}
-							<DebugButton
-								iconClass="h-4 w-4"
-								href={`/debug?guildId=${playerGuild.id}&baseId=${currentBase[1].id}`}
-							/>
-						{/if}
-					</div>
-					<div class="flex">
-						<Button id="guild-base-name" variant="ghost" class="px-0" onclick={handleEditBaseName}>
-							<h5 class="h5 hover:text-secondary-500 font-light">
-								{currentBase?.[1]?.name || ''}
-							</h5>
-						</Button>
-					</div>
-				</div>
+				<GuildHeader
+					guild={playerGuild}
+					base={currentBase?.[1] ?? null}
+					{baseNumber}
+					debugMode={appState.settings.debug_mode}
+					onEditGuildName={handleEditGuildName}
+					onEditBasecampLevel={handleEditBasecampLevel}
+					onDeleteGuild={handleDeleteGuild}
+					onEditBaseName={handleEditBaseName}
+				/>
 
 				<nav
 					id="guild-tabs"
@@ -946,100 +834,18 @@
 					<ActionGroup id="guild-pals-actions" actions={guildActions} title={m.quick_actions()} />
 				{/if}
 				{#if activeTab == 'storage'}
-					<div class="flex items-center">
-						<Input
-							bind:value={inventorySearchQuery}
-							placeholder={m.search_entity({ entity: m.inventory() })}
-						/>
-						<Button
-							variant="ghost"
-							onclick={() => {
-								inventorySearchQuery = '';
-								selectedInventoryItem = '';
-							}}
-						>
-							<Icon icon="tabler:rotate" class="h-6 w-6" />
-						</Button>
-					</div>
-					<List
-						bind:items={currentBaseInventory.current}
-						baseClass="w-full"
-						listClass="h-[calc(100vh-var(--titlebar-h)-350px)]"
-						canSelect={false}
-						idKey="static_id"
-						headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
-						onselect={(item) => {
-							selectedInventoryItem = item.static_id;
+					<GuildInventoryPanel
+						items={currentBaseInventory.current}
+						bind:searchQuery={inventorySearchQuery}
+						onSelect={(staticId) => {
+							selectedInventoryItem = staticId;
 							inventorySearchQuery = '';
 						}}
-						multiple={false}
-					>
-						{#snippet listHeader()}
-							<div class="h-8 w-8"></div>
-							<span class="font-bold">{m.inventory()}</span>
-							<span class="font-bold">{m.total()}</span>
-						{/snippet}
-						{#snippet listItem(item)}
-							{@const itemData = itemsData.getByKey(item.static_id)}
-							{#if itemData}
-								{@const itemIcon = assetLoader.loadImage(
-									`${ASSET_DATA_PATH}/img/${itemData.details.icon}.webp`
-								)}
-								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
-									<div class={getItemBackground(itemData.details.rarity)}>
-										<img
-											src={itemIcon || staticIcons.unknownIcon}
-											alt={itemData.info.localized_name}
-											class="h-8 w-8"
-										/>
-									</div>
-									<span class="truncate">{itemData.info.localized_name}</span>
-									<span>{item.total_count.toLocaleString()}</span>
-								</div>
-							{:else}
-								<div class="grid w-full grid-cols-[auto_1fr_auto] gap-2">
-									<img src={staticIcons.unknownIcon} alt={item.static_id} class="h-8 w-8" />
-									<span class="truncate">{item.static_id}</span>
-									<span>{item.total_count.toLocaleString()}</span>
-								</div>
-							{/if}
-						{/snippet}
-						{#snippet listItemPopup(item)}
-							{@const itemData = itemsData.getByKey(item.static_id)}
-							{#if itemData}
-								<div class="flex flex-col">
-									<span class="font-bold">{itemData.info.localized_name}</span>
-									<span class="text-sm">{itemData.info.description}</span>
-									<hr class="border-surface-500 my-2" />
-									<span class="font-bold">{m.total_count({ count: item.total_count })}</span>
-									{#each Object.entries(item.containers) as [containerId, count]}
-										{@const building = buildingsData.getByKey(containerId)}
-										{#if building}
-											{@const buildingIcon = assetLoader.loadImage(
-												`${ASSET_DATA_PATH}/img/${building.icon}.webp`
-											)}
-											<div class="grid w-full min-w-0 grid-cols-[auto_1fr_auto] gap-2">
-												<img
-													src={buildingIcon || staticIcons.unknownIcon}
-													alt={building.localized_name}
-													class="h-8 w-8 shrink-0"
-												/>
-												<span class="truncate">{building.localized_name}</span>
-												<span>{count.toLocaleString()}</span>
-											</div>
-										{:else if !ignoreKeys.some((key) => containerId.includes(key))}
-											<div class="grid w-full grid-cols-2 gap-2">
-												<span class="font-bold"> {containerId}: </span>
-												<span>{count.toLocaleString()}</span>
-											</div>
-										{/if}
-									{/each}
-								</div>
-							{:else}
-								{item.static_id}
-							{/if}
-						{/snippet}
-					</List>
+						onReset={() => {
+							inventorySearchQuery = '';
+							selectedInventoryItem = '';
+						}}
+					/>
 				{/if}
 				{#if activeTab === 'lab'}
 					<LabResearchControls
@@ -1052,47 +858,16 @@
 
 			<div>
 				{#if activeTab !== 'lab'}
-					<div id="guild-pager" class="mb-4 flex items-center justify-center space-x-4">
-						<Button
-							class="rounded-full p-0! font-bold"
-							variant="ghost"
-							size="md"
-							onclick={decrementPage}
-						>
-							<img src={staticIcons.qIcon} alt="Previous" class="h-10 w-10" />
-						</Button>
-
-						<div class="flex space-x-2">
-							{#each visiblePages as page}
-								<TooltipButton
-									buttonClass="h-8 w-8 rounded-full {page === currentPage
-										? 'bg-primary-500! text-white'
-										: 'bg-surface-800 hover:bg-surface-600'}"
-									onclick={() => (currentPage = page)}
-									popupLabel={`Box ${page}`}
-									variant="ghost"
-									size="md"
-								>
-									{Math.floor(page)}
-								</TooltipButton>
-							{/each}
-						</div>
-
-						<Button
-							class="rounded-sm p-0! font-bold"
-							variant="ghost"
-							size="md"
-							onclick={incrementPage}
-						>
-							<img src={staticIcons.eIcon} alt="Next" class="h-10 w-10" />
-						</Button>
-					</div>
+					<GuildBasePager
+						total={baseCount}
+						current={baseNumber}
+						onSelect={selectBase}
+						onPrevious={previousBase}
+						onNext={nextBase}
+					/>
 				{/if}
 				{#if activeTab == 'pals'}
-					<!-- `pageSize={0}` is this container's documented "paging disabled":
-					     guild pages bases, not pals, and the selector above is that
-					     control. `PalContainerView`'s `pageSize` defaults to 30, so
-					     leaving it off would grow a second pager with nothing to page. -->
+					<!-- `pageSize={0}` disables paging: guild pages bases, not pals. -->
 					<div class="min-h-0">
 						<PalContainerView
 							pals={displayPals}
@@ -1112,149 +887,29 @@
 						/>
 					</div>
 				{:else if activeTab == 'storage'}
-					{#if currentBaseStorageContainers && currentBaseStorageContainers.length > 0}
-						<div id="guild-storage-content" class="flex space-x-4">
-							<List
-								items={currentBaseStorageContainers}
-								baseClass="w-1/4"
-								listClass="h-[calc(100vh-var(--titlebar-h)-175px)]"
-								canSelect={false}
-								idKey="id"
-								onselect={(itemContainer) => handleSelectStorageContainer(itemContainer)}
-								multiple={false}
-							>
-								{#snippet listItem(item)}
-									{@const building = buildingsData.getByKey(item.key)}
-									{#if building}
-										{@const buildingIcon = assetLoader.loadImage(
-											`${ASSET_DATA_PATH}/img/${building.icon}.webp`
-										)}
-										<div class="grid min-w-0 grid-cols-[auto_1fr] gap-2">
-											<img
-												src={buildingIcon || staticIcons.unknownIcon}
-												alt={building.localized_name}
-												class="h-8 w-8 shrink-0"
-											/>
-											<span class="truncate">{building.localized_name}</span>
-										</div>
-									{:else}
-										<div class="grid min-w-0 grid-cols-[auto_1fr] gap-2">
-											<img src={staticIcons.unknownIcon} alt={item.key} class="h-8 w-8 shrink-0" />
-											<span class="truncate">{item.key}</span>
-										</div>
-									{/if}
-								{/snippet}
-								{#snippet listItemPopup(item)}
-									{@const building = buildingsData.getByKey(item.key)}
-									{#if building}
-										<div class="flex flex-col">
-											<h4 class="h4">{building.localized_name}</h4>
-											<div class="grid w-full grid-cols-2 gap-2">
-												<span class="font-bold">{m.available_slots()}</span>
-												<span>{item.slot_num}</span>
-											</div>
-											<div class="grid w-full grid-cols-2 gap-2">
-												<span class="font-bold">{m.used_slots()}</span>
-												<span>
-													{item?.slots?.filter((slot) => slot.static_id !== 'None').length}
-												</span>
-											</div>
-										</div>
-									{:else}
-										{item.key}
-									{/if}
-								{/snippet}
-							</List>
-							<div
-								class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]"
-							>
-								{#if currentStorageContainer}
-									{@const building = buildingsData.getByKey(currentStorageContainer.key)}
-									{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-									<div class="flex items-start space-x-4">
-										<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
-											{#each Object.values(currentStorageContainer.slots) as _, index}
-												<ItemBadge
-													bind:slot={currentStorageContainer.slots[index]}
-													{itemGroup}
-													onUpdate={() => {
-														currentStorageContainer!.state = EntryState.MODIFIED;
-													}}
-													onCopyPaste={(event) => {
-														handleCopyPaste(event, currentStorageContainer!.slots[index], true);
-														currentStorageContainer!.state = EntryState.MODIFIED;
-													}}
-												/>
-											{/each}
-										</div>
-										{#if currentStorageContainerIcon}
-											<div class="ml-2 flex flex-col">
-												<img
-													src={currentStorageContainerIcon}
-													alt="Storage Container Icon"
-													class="max-h-48 w-full max-w-48 object-contain 2xl:max-h-64 2xl:max-w-64"
-												/>
-												<StoragePresets
-													container={currentStorageContainer}
-													onUpdate={() => {
-														currentStorageContainer!.state = EntryState.MODIFIED;
-													}}
-												/>
-											</div>
-										{/if}
-									</div>
-								{:else}
-									<div class="flex w-full items-center justify-center">
-										<h2 class="h2">{m.select_entity({ entity: m.storage_container() })}</h2>
-									</div>
-								{/if}
-							</div>
-						</div>
-					{:else}
-						<div class="flex w-full items-center justify-center">
-							<h2 class="h2">{m.no_storage_containers()}</h2>
-						</div>
-					{/if}
+					<GuildStorage
+						containers={currentBaseStorageContainers ?? []}
+						selected={currentStorageContainer}
+						onSelect={handleSelectStorageContainer}
+						onUpdate={() => {
+							currentStorageContainer!.state = EntryState.MODIFIED;
+						}}
+						onCopyPaste={(event, slot) => {
+							handleCopyPaste(event, slot, true);
+							currentStorageContainer!.state = EntryState.MODIFIED;
+						}}
+					/>
 				{:else if activeTab == 'guildChest' && playerGuild?.guild_chest}
-					{@const building = buildingsData.getByKey('GuildChest')}
-					{@const itemGroup = building?.type_a == BuildingTypeA.Food ? 'Food' : 'Common'}
-					<div
-						id="guild-chest-content"
-						class="max-h-[calc(100vh-var(--titlebar-h)-450px)] overflow-y-auto 2xl:max-h-[calc(100vh-var(--titlebar-h)-200px)]"
-					>
-						<div class="flex items-start space-x-4">
-							<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
-								{#each Object.values(playerGuild.guild_chest.slots) as _, index}
-									<ItemBadge
-										bind:slot={playerGuild.guild_chest.slots[index]}
-										{itemGroup}
-										onUpdate={() => {
-											playerGuild.guild_chest!.state = EntryState.MODIFIED;
-										}}
-										onCopyPaste={(event) => {
-											handleCopyPaste(event, playerGuild.guild_chest!.slots[index], true);
-											playerGuild.guild_chest!.state = EntryState.MODIFIED;
-										}}
-									/>
-								{/each}
-							</div>
-							{#if guildChestIcon}
-								<div class="ml-4 flex flex-col">
-									<img
-										src={guildChestIcon}
-										alt="Storage Container Icon"
-										class="ml-8 max-h-48 max-w-48 2xl:max-h-64 2xl:max-w-64"
-									/>
-									<StoragePresets
-										container={playerGuild.guild_chest}
-										onUpdate={() => {
-											playerGuild.guild_chest!.state = EntryState.MODIFIED;
-										}}
-									/>
-								</div>
-							{/if}
-						</div>
-					</div>
+					<GuildChest
+						chest={playerGuild.guild_chest as ItemContainer & { slots: ItemContainerSlot[] }}
+						onUpdate={() => {
+							playerGuild.guild_chest!.state = EntryState.MODIFIED;
+						}}
+						onCopyPaste={(event, slot) => {
+							handleCopyPaste(event, slot, true);
+							playerGuild.guild_chest!.state = EntryState.MODIFIED;
+						}}
+					/>
 				{:else if activeTab == 'lab'}
 					<div id="guild-lab-content" class="h-full w-full">
 						<LabResearch
