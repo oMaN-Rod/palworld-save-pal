@@ -23,7 +23,7 @@ param(
     [switch]$SkipUe4ss, [switch]$RemoveWin64Ue4ss,
     [string]$HostAddr, [int]$VitePort, [int]$ServerPort,
     [int]$BrokerPort, [int]$WebPort, [switch]$LocalOnly,
-    [switch]$NoServer, [switch]$SkipCheck, [switch]$NoInstall, [switch]$NoMux,
+    [switch]$Lan, [switch]$NoServer, [switch]$SkipCheck, [switch]$NoInstall, [switch]$NoMux,
     [switch]$RebuildWasm, [string]$ForceCheckMode, [switch]$LiveTurn, [switch]$Help
 )
 
@@ -852,7 +852,10 @@ function Run-InstallWasm() {
 }
 
 function Run-Web {
-    $h = if ($HostAddr) { $HostAddr } else { "127.0.0.1" }
+    # Bind every interface but advertise a routable LAN IP, never 0.0.0.0.
+    $h = if ($HostAddr) { $HostAddr } elseif ($Lan) { Detect-LanIp } else { "127.0.0.1" }
+    if ($Lan -and -not $h) { Die "-Lan found no LAN IP on this machine. Pass -HostAddr <ip>." }
+    $bind = if ($Lan) { "0.0.0.0" } else { $h }
     $vitePort = if ($VitePort) { $VitePort } else { $VitePortDefault }
     $serverPort = if ($ServerPort) { $ServerPort } else { $ServerPortDefault }
     $wsUrl = "${h}:$serverPort/ws"
@@ -866,11 +869,11 @@ function Run-Web {
     Banner "Dev: web  (${h}:$vitePort  +  ps-server :$serverPort)"
 
     $components = @(@{ Tag="vite"; Cwd=$UiDir; Env=$null
-        Cmd=@($bun, "run", "dev:vite", "--", "--host", $h, "--port", "$vitePort") })
+        Cmd=@($bun, "run", "dev:vite", "--", "--host", $bind, "--port", "$vitePort") })
     if (-not $NoServer) {
         $components += @{ Tag="ps-server"; Cwd=$RepoRoot; Env=$null
             Cmd=@($cargo, "run", "-p", "ps-server", "--",
-                "--host", $h, "--port", "$serverPort",
+                "--host", $bind, "--port", "$serverPort",
                 "--ui-dir", $UiDir, "--data-dir", (Join-Path $RepoRoot "data"),
                 "--db", (Join-Path $RepoRoot "ps-rs.db"), "--dev") }
     }
@@ -1227,6 +1230,9 @@ options:
   -InstallWasm      Install the WASM toolchain (wasm32 target + wasm-pack).
   -HostAddr <ip>    Host/IP bind or WS_URL host (-Web/-Serve/-Docker);
                     LAN IP to advertise (-Signal, auto-detected by default).
+  -Lan              (-Web) listen on every interface and advertise this
+                    machine's LAN IP, so a phone on the same Wi-Fi can open
+                    the dev server. Combine with -HostAddr to pick the IP.
   -VitePort <p>     Vite port (default 5173).
   -ServerPort <p>   ps-server port (default 5174).
   -BrokerPort <p>   (-Signal) wrangler dev port (default 8787).

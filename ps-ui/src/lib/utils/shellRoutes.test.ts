@@ -5,7 +5,8 @@ import {
 	isPipWindow,
 	isPublicShell,
 	isSaveRequiredRoute,
-	landingRedirect
+	landingRedirect,
+	shellNav
 } from './shellRoutes';
 
 describe('isSaveRequiredRoute', () => {
@@ -151,5 +152,20 @@ describe('landingRedirect', () => {
 
 	it('ignores an empty path parameter', () => {
 		expect(landingRedirect({ ...base, url: at('?path=') })).toBe('/upload');
+	});
+});
+
+describe('shellNav', () => {
+	it('gives the public shell the public nav at any width', () => {
+		expect(shellNav(true, true)).toBe('public');
+		expect(shellNav(true, false)).toBe('public');
+	});
+
+	it('gives a phone the drawer once the shell is not public', () => {
+		expect(shellNav(false, true)).toBe('drawer');
+	});
+
+	it('gives anything wider the sidebar', () => {
+		expect(shellNav(false, false)).toBe('sidebar');
 	});
 });

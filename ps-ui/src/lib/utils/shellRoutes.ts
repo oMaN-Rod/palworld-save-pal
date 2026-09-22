@@ -25,11 +25,7 @@ export function isFullBleedRoute(pathname: string): boolean {
 	);
 }
 
-export function isPublicShell(
-	webBuild: boolean,
-	saveFile: unknown,
-	remoteActive = false
-): boolean {
+export function isPublicShell(webBuild: boolean, saveFile: unknown, remoteActive = false): boolean {
 	return webBuild && !saveFile && !remoteActive;
 }
 
@@ -62,4 +58,12 @@ export function landingRedirect(options: {
 	if (options.desktop) return options.hasSave ? null : '/overview';
 	if (options.hasSave) return '/edit';
 	return options.webBuild ? null : '/upload';
+}
+
+export type ShellNav = 'public' | 'drawer' | 'sidebar';
+
+/** Order matters: the public shell wins over the phone drawer at every width. */
+export function shellNav(publicShell: boolean, phone: boolean): ShellNav {
+	if (publicShell) return 'public';
+	return phone ? 'drawer' : 'sidebar';
 }

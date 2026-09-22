@@ -97,7 +97,7 @@
 
 		<button
 			onclick={() => selectCollection(null)}
-			class="hover:bg-secondary-500/25 flex w-full items-center gap-2 rounded-sm p-2 text-left transition-colors {upsState
+			class="hover:bg-secondary-500/25 flex min-h-11 w-full items-center gap-2 rounded-sm p-2 text-left transition-colors {upsState
 				.filters.collectionId === undefined
 				? 'bg-secondary-500/25'
 				: ''}"
@@ -262,7 +262,7 @@
 				{#if !showArchived}
 					<button
 						onclick={createCollection}
-						class="text-primary-400 hover:text-primary-300 mt-2 text-sm"
+						class="text-primary-400 hover:text-primary-300 mt-2 min-h-11 px-3 text-sm"
 					>
 						{m.create_first_entity({ entity: c.collection })}
 					</button>

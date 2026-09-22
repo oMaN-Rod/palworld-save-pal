@@ -597,7 +597,17 @@ run_install_wasm() {
 
 run_web() {
     # env already snapshotted by main; write web env for this run.
-    local host="${ARG_HOST:-127.0.0.1}"
+    # Bind every interface but advertise a routable LAN IP, never 0.0.0.0.
+    local host bind
+    if [[ -n "${ARG_HOST:-}" ]]; then
+        host="$ARG_HOST"
+    elif [[ "${ARG_LAN:-0}" == "1" ]]; then
+        host="$(detect_lan_ip)"
+        [[ -n "$host" ]] || die "--lan found no LAN IP on this machine. Pass --host <ip>."
+    else
+        host="127.0.0.1"
+    fi
+    if [[ "${ARG_LAN:-0}" == "1" ]]; then bind="0.0.0.0"; else bind="$host"; fi
     local vite_port="${ARG_VITE_PORT:-$VITE_PORT_DEFAULT}"
     local server_port="${ARG_SERVER_PORT:-$SERVER_PORT_DEFAULT}"
     local ws_url="${host}:${server_port}/ws"
@@ -610,11 +620,11 @@ run_web() {
     banner "Dev: web  (${host}:${vite_port}  +  ps-server :${server_port})"
 
     local vite_pid server_pid
-    SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$host" --port "$vite_port"
+    SPAWN_CWD="$UI_DIR" spawn_bg_tagged vite "$bun" run dev:vite -- --host "$bind" --port "$vite_port"
     vite_pid="$LAST_BG_PID"
     if [[ "${ARG_NO_SERVER:-0}" != "1" ]]; then
         SPAWN_CWD="$REPO_ROOT" spawn_bg_tagged ps-server "$cargo" run -p ps-server -- \
-            --host "$host" --port "$server_port" \
+            --host "$bind" --port "$server_port" \
             --ui-dir "$UI_DIR" --data-dir "$REPO_ROOT/data" \
             --db "$REPO_ROOT/ps-rs.db" --dev
         server_pid="$LAST_BG_PID"
@@ -825,6 +835,9 @@ options:
                      The one opt-in installer; everything else stays
                      fail-with-instructions. Skips anything already present.
   --host <ip>        Host/IP bind or WS_URL host (--web/--serve/--docker).
+  --lan              (--web) listen on every interface and advertise this
+                     machine's LAN IP, so a phone on the same Wi-Fi can open
+                     the dev server. Combine with --host to pick the IP.
   --vite-port <p>    Vite port (default 5173).
   --server-port <p>  ps-server port (default 5174).
   --no-server        (--web) skip ps-server (Vite only).
@@ -859,6 +872,7 @@ parse_args() {
             --check|--doctor) ARG_CHECK=1; shift ;;
             --install-wasm) ARG_INSTALL_WASM=1; shift ;;
             --host) ARG_HOST="$2"; shift 2 ;;
+            --lan) ARG_LAN=1; shift ;;
             --vite-port) ARG_VITE_PORT="$2"; shift 2 ;;
             --server-port) ARG_SERVER_PORT="$2"; shift 2 ;;
             --no-server) ARG_NO_SERVER=1; shift ;;

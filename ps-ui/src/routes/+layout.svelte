@@ -26,6 +26,7 @@
 		isFullBleedRoute,
 		isPipWindow,
 		isPublicShell,
+		shellNav,
 		isCompatExemptRoute
 	} from '$lib/utils/shellRoutes';
 	import { localizedPath, siteLocales } from '$lib/i18n/routingConfig.js';
@@ -63,6 +64,7 @@
 	// global — detecting there would bake the block screen into shipped HTML.
 	const blocked = browser && isWebBuild && hardBlocked(detectCapabilities());
 	const publicShell = $derived(isPublicShell(isWebBuild, appState.saveFile, remoteMode.active));
+	const nav = $derived(shellNav(publicShell, layout.phone));
 	const pipWindow = $derived(browser && isPipWindow(page.url));
 	const showTitleBar = $derived(browser && desktopChrome() && !pipWindow);
 
@@ -214,9 +216,9 @@
 				{/if}
 				<div class="relative z-[1] flex min-h-0 w-full flex-1 overflow-hidden">
 					{#if !pipWindow}
-						{#if publicShell}
+						{#if nav === 'public'}
 							<PublicNav />
-						{:else if layout.phone}
+						{:else if nav === 'drawer'}
 							<NavDrawer bind:open={navDrawer.open} onClose={() => (navDrawer.open = false)} />
 						{:else}
 							<Sidebar />

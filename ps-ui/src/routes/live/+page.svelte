@@ -656,7 +656,7 @@
 				type="button"
 				id="live-instance-switcher-trigger"
 				aria-label={m.live_instance_switch()}
-				class="bg-surface-800 hover:bg-surface-700 flex shrink-0 items-center gap-2 rounded-sm px-2 py-1 text-xs"
+				class="bg-surface-800 hover:bg-surface-700 flex min-h-11 shrink-0 items-center gap-2 rounded-sm px-2 py-1 text-xs"
 			>
 				<Icon icon="tabler:server-2" size={16} />
 				<span class="max-w-32 truncate">{activeInstance?.name ?? m.live_instance_switch()}</span>

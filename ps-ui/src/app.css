@@ -941,20 +941,21 @@ body::after {
 	padding: 0.5rem;
 }
 
-/*
- * Touch needs a 44px target; the mouse does not. Widening by pointer type
- * rather than viewport width keeps a touchscreen laptop correct and leaves a
- * narrow mouse-driven window alone.
- */
+/* By pointer type, not width, so a touchscreen laptop still gets 44px targets. */
 @media (pointer: coarse) {
+	.btn,
+	.btn-sm,
+	.nav-link {
+		min-height: 2.75rem;
+	}
 	.btn-icon {
 		min-width: 2.75rem;
 		min-height: 2.75rem;
 	}
-	.btn-sm {
-		min-height: 2.75rem;
-	}
-	.nav-link {
+	/* MapLibre ships 29px controls and our own map controls match them so the
+	   group reads as one strip; on touch the whole strip grows together. */
+	.maplibregl-ctrl button {
+		min-width: 2.75rem;
 		min-height: 2.75rem;
 	}
 }

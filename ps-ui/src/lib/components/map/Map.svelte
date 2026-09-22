@@ -1794,12 +1794,7 @@
 							['image', ['get', 'icon']],
 							[
 								'image',
-								[
-									'case',
-									['==', ['get', 'featureType'], 'live_player'],
-									ICON_PLAYER,
-									ICON_LIVE_PAL
-								]
+								['case', ['==', ['get', 'featureType'], 'live_player'], ICON_PLAYER, ICON_LIVE_PAL]
 							]
 						],
 						'icon-allow-overlap': true,
@@ -2120,7 +2115,11 @@
 	{/if}
 
 	{#if liveActors.followedId && !followSuppressed}
-		<div class="follow-chip" class:follow-chip-waiting={followVerdictKind === 'waiting'} role="status">
+		<div
+			class="follow-chip"
+			class:follow-chip-waiting={followVerdictKind === 'waiting'}
+			role="status"
+		>
 			<span class="follow-chip-text">
 				{followVerdictKind === 'waiting'
 					? m.live_following_waiting({ name: followedActorName })
@@ -2388,14 +2387,17 @@
 			transform: translateX(-50%);
 		}
 
-		.map-area-btn {
-			min-height: 44px;
-		}
-
 		/* Bottom-right is where the options sheet lives, and this outranks it on
 		   z-index. It also only ever updated from a mouse. */
 		.coordinate-display {
 			display: none;
+		}
+	}
+
+	/* By pointer, not width: a tablet in two hands is thumbed like a phone. */
+	@media (pointer: coarse) {
+		.map-area-btn {
+			min-height: 44px;
 		}
 	}
 
