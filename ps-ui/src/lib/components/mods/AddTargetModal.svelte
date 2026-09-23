@@ -79,7 +79,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="flex max-w-[640px] min-w-[520px] flex-col gap-4">
+	<Card class="modal-panel flex max-w-[640px] min-w-[520px] flex-col gap-4">
 		<h3 class="h3">{m.mods_add_target_title()}</h3>
 
 		<section class="flex flex-col gap-2">

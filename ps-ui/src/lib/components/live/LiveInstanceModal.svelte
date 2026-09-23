@@ -59,11 +59,17 @@
 	}
 </script>
 
-<div class="flex flex-col gap-3 bg-surface-900 p-8 rounded-md">
+<div class="modal-panel bg-surface-900 flex flex-col gap-3 rounded-md p-4 md:p-8">
 	<Input bind:value={name} label={m.live_instance_name()} />
 	<Input bind:value={host} label={m.live_instance_host()} />
 	<Input bind:value={port} label={m.live_instance_port()} type="number" min={1} max={65535} />
-	<Input bind:value={token} label={m.live_instance_token()} type="password" {editing} hint={editing ? m.live_instance_token_hint() : undefined} />
+	<Input
+		bind:value={token}
+		label={m.live_instance_token()}
+		type="password"
+		{editing}
+		hint={editing ? m.live_instance_token_hint() : undefined}
+	/>
 
 	{#if isRemote}
 		<p class="text-xs text-yellow-400">{m.live_instance_remote_warning()}</p>
@@ -76,7 +82,9 @@
 	{/if}
 
 	<div class="flex justify-end gap-2">
-		<Button variant="ghost" disabled={!valid || testing} onclick={test}>{m.live_instance_test()}</Button>
+		<Button variant="ghost" disabled={!valid || testing} onclick={test}
+			>{m.live_instance_test()}</Button
+		>
 		<Button variant="ghost" onclick={oncancel}>{m.cancel()}</Button>
 		<Button variant="primary" disabled={!valid || saving} onclick={save}>{c.save}</Button>
 	</div>

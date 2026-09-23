@@ -30,7 +30,11 @@
 	} from '$types';
 	import { staticIcons } from '$types/icons';
 	import { applyPalPreset, assetLoader, calculateFilters, handleMaxOutPal } from '$utils';
-	import type { GamePalDetailJson, GamePalEditRequest, GamePalJson } from '$states/gameState.svelte';
+	import type {
+		GamePalDetailJson,
+		GamePalEditRequest,
+		GamePalJson
+	} from '$states/gameState.svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import * as m from '$i18n/messages';
@@ -312,7 +316,6 @@
 
 		return edited;
 	}
-
 </script>
 
 {#snippet activeSkillsHeader()}
@@ -497,16 +500,16 @@
 	<img src={palImage} alt={`${appState.selectedPal?.name} icon`} class="size-full object-contain" />
 {/snippet}
 
-<div class="bg-surface-950 h-[90vh] w-[90vw] overflow-hidden rounded-sm">
+<div class="bg-surface-950 h-full w-full overflow-hidden md:h-[90vh] md:w-[90vw] md:rounded-sm">
 	{#if loading || !draft}
 		<div class="flex h-full items-center justify-center">
 			<Spinner size="size-16" />
 		</div>
 	{:else}
-		<div id="live-pal-edit" class="flex h-full overflow-auto p-2">
+		<div id="live-pal-edit" class="flex h-full flex-col overflow-auto p-2 md:flex-row">
 			<nav
 				id="live-pal-quick-actions"
-				class="btn-group preset-outlined-surface-200-800 mr-2 flex-col items-center self-start rounded-sm"
+				class="btn-group preset-outlined-surface-200-800 mb-2 flex justify-center rounded-sm md:mr-2 md:mb-0 md:flex-col md:items-center md:self-start"
 				aria-label={m.live_edit_pal({ name: original.name })}
 			>
 				<Tooltip label={m.edit_entity({ entity: m.nickname() })}>
@@ -548,10 +551,10 @@
 			</nav>
 
 			<div class="flex grow flex-col">
-				<div id="live-pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
+				<div id="live-pal-header" class="w-full shrink-0 md:w-3/4 2xl:w-2/3">
 					<PalHeader bind:pal={draft} showSpeciesActions={false} {levelCap} />
 				</div>
-				<div class="flex grow">
+				<div class="flex grow flex-col md:flex-row">
 					<div class="hidden flex-1 overflow-auto p-2 2xl:block">
 						<div class="flex flex-col space-y-2">
 							<div id="live-pal-active-skills">
@@ -570,7 +573,7 @@
 					</div>
 					<div class="mt-4 2xl:hidden">
 						<Accordion
-							classes="min-w-96 max-w-96"
+							classes="w-full md:min-w-96 md:max-w-96"
 							value={leftAccordionValue}
 							onValueChange={(e: ValueChangeDetails) => (leftAccordionValue = e.value)}
 							collapsible
@@ -610,11 +613,8 @@
 								position="top-start"
 								useArrow={false}
 							>
-								<div class="relative h-87.5 w-full 2xl:h-150">
-									<PalModelViewer
-										characterKey={draft.character_key}
-										fallback={palImageFallback}
-									/>
+								<div class="relative h-48 w-full md:h-87.5 2xl:h-150">
+									<PalModelViewer characterKey={draft.character_key} fallback={palImageFallback} />
 									{#if draft.is_predator}
 										<img
 											src={staticIcons.predatorIcon}
@@ -637,7 +637,7 @@
 				</div>
 			</div>
 
-			<div class="w-1/3 overflow-auto p-2">
+			<div class="w-full overflow-auto p-2 md:w-1/3">
 				<div class="hidden flex-col space-y-2 2xl:flex">
 					<div id="live-pal-status">
 						<StatusBadge bind:pal={draft} />

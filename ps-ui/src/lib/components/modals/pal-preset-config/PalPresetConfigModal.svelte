@@ -47,7 +47,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[calc(100vw/3)]">
+	<Card class="modal-panel min-w-[calc(100vw/3)]">
 		<h3 class="h3">Preset Config</h3>
 
 		<div class="mt-2 flex flex-col space-y-4">

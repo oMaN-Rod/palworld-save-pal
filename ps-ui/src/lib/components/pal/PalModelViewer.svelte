@@ -26,12 +26,6 @@
 
 	const spin = new PalSpin();
 
-	// A GL context per Pal is the single most expensive thing this editor can
-	// do, and most edits never look at the model — so it is offered, not taken.
-	// Keyed by pal: answering for one Pal does not answer for the next.
-	let loadedKey = $state<string | null>(null);
-	const activated = $derived(loadedKey === characterKey);
-
 	let status = $state<'loading' | 'ready' | 'unavailable'>('loading');
 	// $state.raw: three.js objects are deeply structured, and $state's proxying breaks three's own identity checks.
 	let stage = $state.raw<THREE.Group | null>(null);
@@ -112,18 +106,16 @@
 			status = 'unavailable';
 			return;
 		}
-		if (!activated) return;
-		const key = characterKey;
 		status = 'loading';
 
 		const attempt = () => {
-			const loaded = requestPalMesh(key);
+			const loaded = requestPalMesh(characterKey);
 			if (loaded) {
 				source = loaded;
 				status = 'ready';
 				return true;
 			}
-			if (palMeshFailed(key)) {
+			if (palMeshFailed(characterKey)) {
 				status = 'unavailable';
 				return true;
 			}
@@ -159,15 +151,6 @@
 
 {#if status === 'unavailable'}
 	{@render fallback?.()}
-{:else if !activated}
-	<button
-		type="button"
-		class="border-surface-700 text-surface-300 hover:border-primary-500 hover:text-primary-300 flex size-full min-h-32 flex-col items-center justify-center gap-2 rounded-sm border-2 border-dashed transition-colors"
-		onclick={() => (loadedKey = characterKey)}
-	>
-		<Icon icon="tabler:cube-3d-sphere" class="size-8" />
-		<span class="text-sm">{m.load_3d_model()}</span>
-	</button>
 {:else}
 	<div class="relative size-full">
 		<canvas

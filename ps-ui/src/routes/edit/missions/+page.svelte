@@ -3,9 +3,9 @@
 	import { MissionDetails, MissionList } from '$components/missions';
 	import { ConfirmModal } from '$components/modals';
 	import { TooltipButton } from '$components/ui';
+	import SectionTabs, { panelId, tabId } from '$components/ui/tabs/SectionTabs.svelte';
+	import { SidebarDetail } from '$components/layout';
 	import { getAppState, getModalState, getToastState } from '$states';
-	import { Tabs } from '@skeletonlabs/skeleton-svelte';
-	import type { ValueChangeDetails } from '@zag-js/tabs';
 	import { EntryState, type Mission, type MissionType } from '$types';
 	import * as m from '$i18n/messages';
 
@@ -13,13 +13,22 @@
 	const modal = getModalState();
 	const toast = getToastState();
 
-	let activeTab: MissionType = $state('Main');
+	const SECTION_ID_PREFIX = 'missions';
+
+	let activeTabId: string = $state('Main');
 	let selectedMission: Mission | undefined = $state(undefined);
 
-	function handleTabChange(e: ValueChangeDetails) {
-		activeTab = e.value as MissionType;
+	const activeTab = $derived(activeTabId as MissionType);
+	const missionTabs = $derived([
+		{ id: 'Main', label: m.main_missions() },
+		{ id: 'Sub', label: m.sub_missions() }
+	]);
+
+	// Clear the selection on tab change, or a phone sheet stays open over the wrong list.
+	$effect(() => {
+		void activeTabId;
 		selectedMission = undefined;
-	}
+	});
 
 	function getMissionPrefix(type: MissionType): string {
 		return type === 'Main' ? 'Main_' : 'Sub_';
@@ -144,102 +153,81 @@
 
 {#if appState.selectedPlayer}
 	<div class="relative flex h-full flex-col p-4">
-		<div id="missions-tabs">
-				<Tabs
-					listBorder="border-none"
-					listClasses="btn-group preset-outlined-surface-200-800 w-auto flex-col md:flex-row rounded-sm"
-					value={activeTab}
-					onValueChange={handleTabChange}
-				>
-					{#snippet list()}
-						<Tabs.Control
-							value="Main"
-							classes="px-6"
-							base="border-none hover:bg-secondary-500/50 rounded-sm"
-							labelBase="btn"
-							stateActive="bg-secondary-800 text-white"
-							padding="p-0"
-						>
-							{m.main_missions()}
-						</Tabs.Control>
-						<Tabs.Control
-							value="Sub"
-							classes="px-6"
-							base="border-none hover:bg-secondary-500/50 rounded-sm"
-							labelBase="btn"
-							stateActive="bg-secondary-800 text-white"
-							padding="p-0"
-						>
-							{m.sub_missions()}
-						</Tabs.Control>
-					{/snippet}
-					{#snippet content()}
-						<Tabs.Panel value="Main">
-							<div class="mt-4 grid h-[calc(100vh-var(--titlebar-h)-200px)] grid-cols-[25%_1fr] gap-4">
-								<div id="missions-list" class="overflow-y-auto">
-									<MissionList
-										currentMissions={appState.selectedPlayer?.current_missions ?? []}
-										completedMissions={appState.selectedPlayer?.completed_missions ?? []}
-										bind:selectedMission
-										missionType="Main"
-										onClearMission={handleClearMission}
-										onMarkComplete={handleMarkComplete}
-									/>
-								</div>
-								<div id="missions-details" class="overflow-y-auto">
-									<MissionDetails mission={selectedMission} />
-								</div>
-							</div>
-						</Tabs.Panel>
-						<Tabs.Panel value="Sub">
-							<div class="mt-4 grid h-[calc(100vh-var(--titlebar-h)-200px)] grid-cols-[25%_1fr] gap-4">
-								<div class="overflow-y-auto">
-									<MissionList
-										currentMissions={appState.selectedPlayer?.current_missions ?? []}
-										completedMissions={appState.selectedPlayer?.completed_missions ?? []}
-										bind:selectedMission
-										missionType="Sub"
-										onClearMission={handleClearMission}
-										onMarkComplete={handleMarkComplete}
-									/>
-								</div>
-								<div class="overflow-y-auto">
-									<MissionDetails mission={selectedMission} />
-								</div>
-							</div>
-						</Tabs.Panel>
-					{/snippet}
-				</Tabs>
-			</div>
-			<div id="missions-actions" class="absolute top-4 right-4 flex items-center gap-2">
-				<TooltipButton
-					id="missions-mark-current-complete"
-					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel={m.mark_all_current_complete()}
-					position="bottom"
-					onclick={markAllCurrentAsComplete}
-				>
-					<Icon icon="tabler:checks" class="h-5 w-5" />
-				</TooltipButton>
-				<TooltipButton
-					id="missions-clear-current"
-					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel={m.clear_all_entity({ entity: m.current_missions() })}
-					position="bottom"
-					onclick={clearAllCurrentMissions}
-				>
-					<Icon icon="tabler:playlist-x" class="h-5 w-5" />
-				</TooltipButton>
-				<TooltipButton
-					id="missions-clear-completed"
-					buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
-					popupLabel={m.clear_all_entity({ entity: m.completed_missions() })}
-					position="bottom"
-					onclick={clearAllCompletedMissions}
-				>
-					<Icon icon="tabler:trash-x" class="h-5 w-5" />
-				</TooltipButton>
-			</div>
+		<div
+			id="missions-actions"
+			class="mb-2 flex items-center gap-2 md:absolute md:top-4 md:right-4 md:z-10 md:mb-0"
+		>
+			<TooltipButton
+				id="missions-mark-current-complete"
+				buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
+				popupLabel={m.mark_all_current_complete()}
+				position="bottom"
+				onclick={markAllCurrentAsComplete}
+			>
+				<Icon icon="tabler:checks" class="h-5 w-5" />
+			</TooltipButton>
+			<TooltipButton
+				id="missions-clear-current"
+				buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
+				popupLabel={m.clear_all_entity({ entity: m.current_missions() })}
+				position="bottom"
+				onclick={clearAllCurrentMissions}
+			>
+				<Icon icon="tabler:playlist-x" class="h-5 w-5" />
+			</TooltipButton>
+			<TooltipButton
+				id="missions-clear-completed"
+				buttonClass="preset-outlined-surface-200-800 rounded-sm p-2 hover:bg-secondary-500/50"
+				popupLabel={m.clear_all_entity({ entity: m.completed_missions() })}
+				position="bottom"
+				onclick={clearAllCompletedMissions}
+			>
+				<Icon icon="tabler:trash-x" class="h-5 w-5" />
+			</TooltipButton>
+		</div>
+
+		<!-- One panel, not one per tab, so there is never a second detail sheet in the DOM. -->
+		<div id="missions-tabs" class="shrink-0">
+			<SectionTabs
+				tabs={missionTabs}
+				bind:active={activeTabId}
+				label={m.missions()}
+				idPrefix={SECTION_ID_PREFIX}
+			/>
+		</div>
+
+		<div
+			id={panelId(SECTION_ID_PREFIX, activeTabId)}
+			role="tabpanel"
+			aria-labelledby={tabId(SECTION_ID_PREFIX, activeTabId)}
+			tabindex="0"
+			class="min-h-0 flex-1"
+		>
+			<SidebarDetail
+				detailActive={!!selectedMission}
+				detailOnPhone="sheet"
+				detailTitle={selectedMission?.localized_name ?? ''}
+				onDetailClose={() => (selectedMission = undefined)}
+			>
+				{#snippet sidebar()}
+					<div id="missions-list" class="h-full">
+						<MissionList
+							currentMissions={appState.selectedPlayer?.current_missions ?? []}
+							completedMissions={appState.selectedPlayer?.completed_missions ?? []}
+							bind:selectedMission
+							missionType={activeTab}
+							onClearMission={handleClearMission}
+							onMarkComplete={handleMarkComplete}
+						/>
+					</div>
+				{/snippet}
+				{#snippet detail()}
+					<div id="missions-details" class="h-full">
+						<MissionDetails mission={selectedMission} />
+					</div>
+				{/snippet}
+			</SidebarDetail>
+		</div>
 	</div>
 {:else}
 	<div class="flex h-full w-full items-center justify-center">

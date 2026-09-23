@@ -58,7 +58,7 @@
 	{#snippet content()}
 		<Tabs.Panel value="inventory">
 			<div id="inventory-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-				<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+				<div class="m-1 grid grid-cols-4 gap-2 md:grid-cols-6">
 					{#each commonContainer.slots as slot}
 						<ItemBadge
 							{slot}
@@ -72,7 +72,7 @@
 		</Tabs.Panel>
 		<Tabs.Panel value="key_items">
 			<div id="key-items-panel" class="max-h-[500px] overflow-y-auto 2xl:max-h-[800px]">
-				<div class="m-1 grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+				<div class="m-1 grid grid-cols-4 gap-2 md:grid-cols-6">
 					{#each essentialContainer.slots as slot}
 						<ItemBadge
 							{slot}

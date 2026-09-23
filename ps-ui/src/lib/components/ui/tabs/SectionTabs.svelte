@@ -52,11 +52,9 @@
 	}
 </script>
 
-<!-- `flex-1` with `min-w-fit`: a few tabs share the width evenly as before, and
-     a strip too long for the screen scrolls rather than squeezing its labels
-     into unreadable columns. -->
+<!-- Wrap rather than overflow: a tab off the edge looks like it does not exist. -->
 <div
-	class="border-surface-700/40 bg-surface-900/40 flex shrink-0 overflow-x-auto border-b"
+	class="border-surface-700/40 bg-surface-900/40 flex shrink-0 flex-wrap border-b mb-2"
 	role="tablist"
 	aria-label={label}
 >

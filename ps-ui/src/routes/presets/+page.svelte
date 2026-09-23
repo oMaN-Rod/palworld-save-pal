@@ -2,6 +2,8 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { presetsData } from '$lib/data';
 	import { Button, List, TooltipButton, Input, Tooltip, Select } from '$components/ui';
+	import { SidebarDetail } from '$components/layout';
+	import { layout } from '$utils/layout.svelte';
 	import {
 		getModalState,
 		getToastState,
@@ -46,6 +48,14 @@
 	};
 	const activeTypeKey = $derived(TAB_TYPE[activeTab]);
 	const activeConfig = $derived(getConfig(activeTypeKey));
+
+	// On desktop the detail column also holds the empty state.
+	const detailOpen = $derived(layout.phone ? selectedPresets.length > 0 : true);
+	const detailTitle = $derived(
+		selectedPresets.length === 1
+			? selectedPresets[0].name
+			: m.preset({ count: selectedPresets.length })
+	);
 
 	const sortOptions = $derived([
 		{ value: 'name', label: m.name() },
@@ -264,145 +274,154 @@
 		</nav>
 	</div>
 
-	<div
-		class="grid h-full w-full grid-cols-[minmax(200px,320px)_1fr] lg:grid-cols-[280px_1fr] xl:grid-cols-[320px_1fr]"
+	<SidebarDetail
+		class="min-h-0 flex-1"
+		detailActive={detailOpen}
+		detailOnPhone="sheet"
+		{detailTitle}
+		onDetailClose={() => (selectedPresets = [])}
+		sidebarClass="sm:w-72 lg:w-80"
 	>
-		<div class="shrink-0 space-y-2 overflow-y-auto p-4" onkeydown={handlePanelKeydown} role="none">
-			<div class="flex items-center space-x-2">
-				<div class="grow">
-					<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
-				</div>
-
-				<TooltipButton
-					popupLabel={m.clear_entity({ entity: m.search() })}
-					onclick={() => {
-						searchQuery = '';
-					}}
-				>
-					<Icon icon="tabler:rotate" class="h-6 w-6" />
-				</TooltipButton>
-			</div>
-
-			<div class="flex items-center space-x-2">
-				<div class="grow">
-					{#key activeTypeKey}
-						<Select
-							options={sortOptions}
-							value={activeConfig.mode}
-							onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
-							label={m.sort_by()}
-						/>
-					{/key}
-				</div>
-
-				{#if activeConfig.mode === 'name'}
-					<TooltipButton
-						popupLabel={activeConfig.direction === 'asc' ? m.sort_descending() : m.sort_ascending()}
-						onclick={() =>
-							setDirection(activeTypeKey, activeConfig.direction === 'asc' ? 'desc' : 'asc')}
-					>
-						{#if activeConfig.direction === 'asc'}
-							<Icon icon="ph:sort-descending" class="h-6 w-6" />
-						{:else}
-							<Icon icon="ph:sort-ascending" class="h-6 w-6" />
-						{/if}
-					</TooltipButton>
-				{/if}
-			</div>
-
-			<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
-				<TooltipButton
-					popupLabel={m.import_preset()}
-					onclick={handleImportPreset}
-					buttonClass="hover:bg-secondary-500/50"
-				>
-					<Icon icon="tabler:upload" size={20} />
-				</TooltipButton>
-
-				<TooltipButton
-					popupLabel={m.export_selected()}
-					onclick={handleExportSelected}
-					buttonClass="hover:bg-primary-500/50"
-					disabled={selectedPresets.length === 0}
-				>
-					<Icon icon="tabler:download" size={20} />
-				</TooltipButton>
-
-				<TooltipButton
-					popupLabel={m.delete_selected_entity({
-						entity: m.preset({ count: selectedPresets.length })
-					})}
-					onclick={handleDeletePresets}
-					buttonClass="hover:bg-error-500/50"
-					disabled={selectedPresets.length === 0}
-				>
-					<Icon icon="tabler:trash" size={20} />
-				</TooltipButton>
-
-				<div class="bg-surface-700/50 mx-1 w-px self-stretch"></div>
-
-				<TooltipButton
-					popupLabel={m.move_up()}
-					onclick={() => moveSelected('up')}
-					buttonClass="hover:bg-secondary-500/50"
-					disabled={selectedPresets.length === 0 || !!searchQuery}
-				>
-					<Icon icon="tabler:chevron-up" size={20} />
-				</TooltipButton>
-
-				<TooltipButton
-					popupLabel={m.move_down()}
-					onclick={() => moveSelected('down')}
-					buttonClass="hover:bg-secondary-500/50"
-					disabled={selectedPresets.length === 0 || !!searchQuery}
-				>
-					<Icon icon="tabler:chevron-down" size={20} />
-				</TooltipButton>
-			</div>
-
-			<List
-				items={filteredPresets}
-				listClass="h-[calc(100vh-var(--titlebar-h)-300px)] overflow-y-auto"
-				bind:selectedItems={selectedPresets}
-				multiple={true}
-				headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
-				reorderable={activeConfig.mode === 'custom' && !searchQuery}
-				onReorder={(ids) => setCustomOrder(activeTypeKey, ids as string[])}
-			>
-				{#snippet listHeader()}
-					<span class="font-bold">{m.name()}</span>
-					<span class="font-bold">{m.actions()}</span>
-				{/snippet}
-				{#snippet listItem(preset)}
-					<span class="grow truncate">{preset.name}</span>
-				{/snippet}
-				{#snippet listItemActions(preset)}
-					<TooltipButton
-						popupLabel={m.export_preset()}
-						onclick={() => handleExportPreset(preset)}
-						buttonClass="hover:bg-primary-500/25 p-2"
-					>
-						<Icon icon="tabler:download" size={16} />
-					</TooltipButton>
-					<Button
-						variant="ghost"
-						class="hover:bg-error-500/25 p-2"
-						onclick={() => handleDeletePreset(preset)}
-					>
-						<Icon icon="tabler:trash" size={16} />
-					</Button>
-				{/snippet}
-				{#snippet listItemPopup(preset)}
-					<div class="flex flex-col">
-						<span class="text-lg font-bold">{preset.name}</span>
-						<span class="text-surface-400 text-sm">{m.type_label({ type: preset.type })}</span>
+		{#snippet sidebar()}
+			<div class="space-y-2" onkeydown={handlePanelKeydown} role="none">
+				<div class="flex items-center space-x-2">
+					<div class="grow">
+						<Input bind:value={searchQuery} placeholder={m.search_presets()} inputClass="w-full" />
 					</div>
-				{/snippet}
-			</List>
-		</div>
 
-		<div class="overflow-y-auto p-4">
-			<div class="h-[calc(100vh-var(--titlebar-h)-32px)] overflow-auto">
+					<TooltipButton
+						popupLabel={m.clear_entity({ entity: m.search() })}
+						onclick={() => {
+							searchQuery = '';
+						}}
+					>
+						<Icon icon="tabler:rotate" class="h-6 w-6" />
+					</TooltipButton>
+				</div>
+
+				<div class="flex items-center space-x-2">
+					<div class="grow">
+						{#key activeTypeKey}
+							<Select
+								options={sortOptions}
+								value={activeConfig.mode}
+								onChange={(v) => setMode(activeTypeKey, v as PresetSortMode)}
+								label={m.sort_by()}
+							/>
+						{/key}
+					</div>
+
+					{#if activeConfig.mode === 'name'}
+						<TooltipButton
+							popupLabel={activeConfig.direction === 'asc'
+								? m.sort_descending()
+								: m.sort_ascending()}
+							onclick={() =>
+								setDirection(activeTypeKey, activeConfig.direction === 'asc' ? 'desc' : 'asc')}
+						>
+							{#if activeConfig.direction === 'asc'}
+								<Icon icon="ph:sort-descending" class="h-6 w-6" />
+							{:else}
+								<Icon icon="ph:sort-ascending" class="h-6 w-6" />
+							{/if}
+						</TooltipButton>
+					{/if}
+				</div>
+
+				<div class="border-surface-700/50 bg-surface-900 flex gap-1 rounded-sm border p-1">
+					<TooltipButton
+						popupLabel={m.import_preset()}
+						onclick={handleImportPreset}
+						buttonClass="hover:bg-secondary-500/50"
+					>
+						<Icon icon="tabler:upload" size={20} />
+					</TooltipButton>
+
+					<TooltipButton
+						popupLabel={m.export_selected()}
+						onclick={handleExportSelected}
+						buttonClass="hover:bg-primary-500/50"
+						disabled={selectedPresets.length === 0}
+					>
+						<Icon icon="tabler:download" size={20} />
+					</TooltipButton>
+
+					<TooltipButton
+						popupLabel={m.delete_selected_entity({
+							entity: m.preset({ count: selectedPresets.length })
+						})}
+						onclick={handleDeletePresets}
+						buttonClass="hover:bg-error-500/50"
+						disabled={selectedPresets.length === 0}
+					>
+						<Icon icon="tabler:trash" size={20} />
+					</TooltipButton>
+
+					<div class="bg-surface-700/50 mx-1 w-px self-stretch"></div>
+
+					<TooltipButton
+						popupLabel={m.move_up()}
+						onclick={() => moveSelected('up')}
+						buttonClass="hover:bg-secondary-500/50"
+						disabled={selectedPresets.length === 0 || !!searchQuery}
+					>
+						<Icon icon="tabler:chevron-up" size={20} />
+					</TooltipButton>
+
+					<TooltipButton
+						popupLabel={m.move_down()}
+						onclick={() => moveSelected('down')}
+						buttonClass="hover:bg-secondary-500/50"
+						disabled={selectedPresets.length === 0 || !!searchQuery}
+					>
+						<Icon icon="tabler:chevron-down" size={20} />
+					</TooltipButton>
+				</div>
+
+				<List
+					items={filteredPresets}
+					listClass="h-[calc(100vh-var(--titlebar-h)-300px)] overflow-y-auto"
+					bind:selectedItems={selectedPresets}
+					multiple={true}
+					headerClass="grid w-full grid-cols-[auto_1fr_auto] gap-2 rounded-sm"
+					reorderable={activeConfig.mode === 'custom' && !searchQuery}
+					onReorder={(ids) => setCustomOrder(activeTypeKey, ids as string[])}
+				>
+					{#snippet listHeader()}
+						<span class="font-bold">{m.name()}</span>
+						<span class="font-bold">{m.actions()}</span>
+					{/snippet}
+					{#snippet listItem(preset)}
+						<span class="grow truncate">{preset.name}</span>
+					{/snippet}
+					{#snippet listItemActions(preset)}
+						<TooltipButton
+							popupLabel={m.export_preset()}
+							onclick={() => handleExportPreset(preset)}
+							buttonClass="hover:bg-primary-500/25 p-2"
+						>
+							<Icon icon="tabler:download" size={16} />
+						</TooltipButton>
+						<Button
+							variant="ghost"
+							class="hover:bg-error-500/25 p-2"
+							onclick={() => handleDeletePreset(preset)}
+						>
+							<Icon icon="tabler:trash" size={16} />
+						</Button>
+					{/snippet}
+					{#snippet listItemPopup(preset)}
+						<div class="flex flex-col">
+							<span class="text-lg font-bold">{preset.name}</span>
+							<span class="text-surface-400 text-sm">{m.type_label({ type: preset.type })}</span>
+						</div>
+					{/snippet}
+				</List>
+			</div>
+		{/snippet}
+
+		{#snippet detail()}
+			<div id="presets-detail" data-testid="presets-detail" class="h-full overflow-auto">
 				{#if selectedPresets.length === 1}
 					{@render presetContent(0)}
 				{:else if selectedPresets.length > 1}
@@ -432,8 +451,8 @@
 					</div>
 				{/if}
 			</div>
-		</div>
-	</div>
+		{/snippet}
+	</SidebarDetail>
 </div>
 
 <style lang="postcss">

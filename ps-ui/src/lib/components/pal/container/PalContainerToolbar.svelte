@@ -12,6 +12,8 @@
 		selectionCount,
 		actions,
 		filterable = true,
+		filterOpen = false,
+		filterPanelId,
 		onOpenFilter,
 		title
 	}: {
@@ -20,6 +22,8 @@
 		actions: ActionDescriptor[];
 		/** False when the panel behind the button would have nothing in it. */
 		filterable?: boolean;
+		filterOpen?: boolean;
+		filterPanelId?: string;
 		onOpenFilter: () => void;
 		title: string;
 	} = $props();
@@ -42,6 +46,8 @@
 					type="button"
 					class="btn preset-outlined-surface-200-800 flex items-center gap-1.5"
 					aria-label={filterLabel}
+					aria-expanded={filterOpen}
+					aria-controls={filterOpen ? filterPanelId : undefined}
 					onclick={onOpenFilter}
 				>
 					<Icon icon="tabler:filter" class="size-5" />
@@ -69,13 +75,4 @@
 			</div>
 		</div>
 	</div>
-
-	{#if selectionCount > 0}
-		<div class="bg-surface-800 flex items-center justify-between gap-2 rounded-sm px-3 py-2">
-			<span class="text-sm font-bold">
-				{m.pals_selected_count({ count: selectionCount, pals: m.pal({ count: selectionCount }) })}
-			</span>
-			<ActionGroup {actions} title={m.bulk_actions()} id="pal-container-actions" class="flex-row" />
-		</div>
-	{/if}
 </div>

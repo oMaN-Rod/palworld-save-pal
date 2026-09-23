@@ -47,7 +47,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-md min-w-[calc(100vw/2.5)]">
+	<Card class="modal-panel max-w-md min-w-[calc(100vw/2.5)]">
 		<div class="mb-6 flex items-center gap-3">
 			<div class="bg-error-500/20 rounded-full p-2">
 				<Icon icon="tabler:alert-triangle" class="text-error-500 h-6 w-6" />

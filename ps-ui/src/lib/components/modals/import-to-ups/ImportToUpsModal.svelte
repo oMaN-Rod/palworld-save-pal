@@ -214,7 +214,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-2xl min-w-[calc(100vw/2)]">
+	<Card class="modal-panel max-w-2xl min-w-[calc(100vw/2)]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Icon icon="tabler:file-text" class="h-5 w-5" />
@@ -308,12 +308,7 @@
 								inputClass="w-full"
 							/>
 							<div class="flex gap-2">
-								<Button
-									type="button"
-									variant="primary"
-									size="sm"
-									onclick={createCollection}
-								>
+								<Button type="button" variant="primary" size="sm" onclick={createCollection}>
 									{m.create()}
 								</Button>
 								<Button
@@ -454,20 +449,11 @@
 		</div>
 
 		<div class="mt-6 flex justify-end gap-2">
-			<Button
-				type="button"
-				variant="neutral"
-				onclick={() => handleClose(false)}
-			>
+			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
 				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>
-			<Button
-				type="button"
-				variant="primary"
-				onclick={() => handleClose(true)}
-				data-modal-primary
-			>
+			<Button type="button" variant="primary" onclick={() => handleClose(true)} data-modal-primary>
 				<Icon icon="tabler:device-floppy" class="h-4 w-4" />
 				{m.import()}
 			</Button>

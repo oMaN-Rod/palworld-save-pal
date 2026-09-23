@@ -13,6 +13,7 @@ const { VIEW_MODE_STORAGE_PREFIX } = await import('$states/palContainer.svelte')
 const { default: PalContainerViewHarness } = await import('./PalContainerViewHarness.svelte');
 
 const DESKTOP_WIDTH = 1440;
+const TABLET_WIDTH = 1024;
 const PHONE_WIDTH = 390;
 const PAGE_SIZE = 4;
 
@@ -72,6 +73,10 @@ function pagerLabel(): string {
 
 function grid(): HTMLElement | null {
 	return screen.queryByTestId('pal-container-grid');
+}
+
+function filterPanel(): HTMLElement | null {
+	return screen.queryByTestId('pal-container-filter-panel');
 }
 
 function listRows(): HTMLElement[] {
@@ -246,6 +251,62 @@ describe('filter controls', () => {
 
 		const sheet = screen.getByRole('dialog', { name: /filters/i });
 		expect(sheet.contains(screen.getByTestId('pal-container-filters'))).toBe(true);
+	});
+
+	// The pager sits outside the panel row so opening the panel does not move it.
+	it('opens beside the grid, leaving the pager full width', async () => {
+		renderView({ storageKey: 'beside-grid' });
+
+		await openFilters();
+
+		const panel = filterPanel();
+		const row = panel?.parentElement;
+		expect(row?.className).toContain('flex-row');
+		expect((panel?.previousElementSibling as HTMLElement | null)?.contains(grid()!)).toBe(true);
+		expect(row?.contains(screen.getByRole('navigation'))).toBe(false);
+	});
+
+	it('closes again on a second press of the same button', async () => {
+		renderView({ storageKey: 'toggle-filters' });
+
+		await openFilters();
+		expect(filterPanel()).not.toBeNull();
+
+		await openFilters();
+
+		expect(filterPanel()).toBeNull();
+	});
+
+	it('closes from the panel’s own button, for a toolbar scrolled out of reach', async () => {
+		renderView({ storageKey: 'panel-close' });
+		await openFilters();
+
+		await fireEvent.click(within(filterPanel()!).getByRole('button', { name: /close/i }));
+		await tick();
+
+		expect(filterPanel()).toBeNull();
+	});
+
+	// Tablets get the panel, not the sheet: only `layout.phone` decides.
+	it('renders the panel on a tablet rather than the sheet', async () => {
+		setViewport(TABLET_WIDTH);
+		renderView({ storageKey: 'tablet-filters' });
+
+		await openFilters();
+
+		expect(filterPanel()).not.toBeNull();
+		expect(screen.queryByRole('dialog')).toBeNull();
+	});
+
+	it('reports the panel state on the button that controls it', async () => {
+		renderView({ storageKey: 'filter-expanded' });
+		const button = screen.getByRole('button', { name: /^filter/i });
+		expect(button.getAttribute('aria-expanded')).toBe('false');
+
+		await openFilters();
+
+		expect(button.getAttribute('aria-expanded')).toBe('true');
+		expect(document.getElementById(button.getAttribute('aria-controls') ?? '')).toBe(filterPanel());
 	});
 });
 

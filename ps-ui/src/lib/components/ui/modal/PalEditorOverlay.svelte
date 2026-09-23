@@ -58,12 +58,25 @@
 		aria-modal="true"
 		tabindex="-1"
 	>
-		<div class={layout.phone ? 'relative h-full w-full' : 'relative'}>
+		<div class={layout.phone ? 'relative flex h-full w-full flex-col' : 'relative'}>
+			<!-- On the sheet's own corner the close button would cover the Pal. -->
+			{#if layout.phone}
+				<div class="flex shrink-0 justify-end p-1" style:padding-top="env(safe-area-inset-top)">
+					<button
+						type="button"
+						class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+						aria-label={m.close()}
+						onclick={() => palEditor.close()}
+					>
+						<Icon icon="tabler:x" size={24} />
+					</button>
+				</div>
+			{/if}
 			<div
 				data-testid="pal-editor-surface"
 				class={cn(
 					'bg-surface-950 overflow-hidden',
-					layout.phone ? 'h-full w-full' : 'h-[90vh] w-[90vw] rounded-sm'
+					layout.phone ? 'min-h-0 w-full grow' : 'h-[90vh] w-[90vw] rounded-sm'
 				)}
 			>
 				{#if palEditor.loading}
@@ -88,18 +101,16 @@
 					{/if}
 				{/if}
 			</div>
-			<button
-				type="button"
-				class={cn(
-					'bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute z-20 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors',
-					layout.phone ? 'top-2 right-2' : 'top-0 left-full ml-2'
-				)}
-				style:margin-top={layout.phone ? 'env(safe-area-inset-top)' : undefined}
-				aria-label={m.close()}
-				onclick={() => palEditor.close()}
-			>
-				<Icon icon="tabler:x" size={24} />
-			</button>
+			{#if !layout.phone}
+				<button
+					type="button"
+					class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+					aria-label={m.close()}
+					onclick={() => palEditor.close()}
+				>
+					<Icon icon="tabler:x" size={24} />
+				</button>
+			{/if}
 		</div>
 	</div>
 {/if}

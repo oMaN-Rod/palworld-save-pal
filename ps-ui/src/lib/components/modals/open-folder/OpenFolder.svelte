@@ -45,7 +45,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-auto">
+	<Card class="modal-panel min-w-auto">
 		<h3 class="h3">{title}</h3>
 
 		<div class="mt-2 flex gap-2">

@@ -1,3 +1,4 @@
+import AppBar from './AppBar.svelte';
 import ContextBar from './ContextBar.svelte';
 import DebugButton from './DebugButton.svelte';
 import Drawer from './Drawer.svelte';
@@ -11,6 +12,7 @@ import TitleBar from './TitleBar.svelte';
 
 export type { ContextBarItem } from './ContextBar.svelte';
 export {
+	AppBar,
 	ContextBar,
 	DebugButton,
 	Drawer,

@@ -92,6 +92,11 @@
 			: baseSections
 	);
 
+	const asideSections = baseSections.filter((section) => section.group === 'aside');
+	const shellSections = $derived(
+		layout.desktop ? baseSections.filter((section) => section.group === 'primary') : sections
+	);
+
 	let activeSection = $state('active_skills');
 
 	const max_talent = $derived(appState.settings.cheat_mode ? 255 : 100);
@@ -703,17 +708,9 @@
 
 {#if appState.selectedPal}
 	{#if layout.phone}
-		<!-- The identity strip is the one thing that must stay put: it is how the
-		     user knows which Pal the tabs below are editing. -->
 		<div class="flex h-full flex-col overflow-hidden p-2">
-			<div id="pal-identity" class="flex shrink-0 gap-2">
-				<div class="size-24 shrink-0">
-					<PalModelViewer
-						characterKey={appState.selectedPal.character_key}
-						fallback={palImageFallback}
-					/>
-				</div>
-				<div id="pal-header" class="min-w-0 grow">
+			<div id="pal-identity" class="flex shrink-0 flex-col gap-2">
+				<div id="pal-header">
 					<PalHeader bind:pal={appState.selectedPal} />
 				</div>
 			</div>
@@ -745,18 +742,24 @@
 				<div id="pal-header" class="w-3/4 shrink-0 2xl:w-2/3">
 					<PalHeader bind:pal={appState.selectedPal} />
 				</div>
-				<div class="flex grow">
-					<SectionShell
-						{sections}
-						presentation={presentationFor(layout.deviceClass)}
-						{between}
-						bind:active={activeSection}
-						label={m.pal_sections()}
-						idPrefix="pal-edit"
-					/>
+				<div class="flex grow gap-2">
+					<div class="min-w-0 grow">
+						<SectionShell
+							sections={shellSections}
+							presentation={presentationFor(layout.deviceClass)}
+							bind:active={activeSection}
+							label={m.pal_sections()}
+							idPrefix="pal-edit"
+						/>
+					</div>
+					{#if layout.desktop}
+						<div class="min-w-0 grow">
+							{@render between()}
+						</div>
+					{/if}
 				</div>
 			</div>
-			<div class="w-1/3 overflow-auto p-2">
+			<div id="pal-side" class="w-1/3 overflow-auto p-2">
 				<div class="hidden flex-col space-y-2 2xl:flex">
 					<div id="pal-status">
 						<StatusBadge bind:pal={appState.selectedPal} />
@@ -787,6 +790,16 @@
 						</Accordion.Item>
 					</Accordion>
 				</div>
+				{#if layout.desktop}
+					<div class="mt-2 flex flex-col space-y-2">
+						{#each asideSections as section (section.id)}
+							<div data-testid={section.id}>
+								{@render section.header?.()}
+								{@render section.body()}
+							</div>
+						{/each}
+					</div>
+				{/if}
 			</div>
 		</div>
 	{/if}

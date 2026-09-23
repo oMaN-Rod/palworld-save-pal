@@ -4,6 +4,7 @@
 	import { EntryState, type Pal } from '$types';
 	import { palsData, expData } from '$lib/data';
 	import { cn } from '$theme';
+	import { layout } from '$utils/layout.svelte';
 	import { getAppState } from '$states';
 	import { Rating } from '@skeletonlabs/skeleton-svelte';
 	import { staticIcons } from '$types/icons';
@@ -152,9 +153,19 @@
 
 {#if pal}
 	<div
-		class="border-l-surface-600 bg-surface-800 flex flex-row rounded-none border-l-2 p-4"
+		class={cn(
+			'border-l-surface-600 bg-surface-800 flex rounded-none border-l-2',
+			layout.phone ? 'flex-col gap-3 p-3' : 'flex-row p-4'
+		)}
 	>
-		<div class="mr-4 flex flex-col items-center justify-center rounded-none">
+		<div
+			class={cn(
+				'flex rounded-none',
+				layout.phone
+					? 'w-full flex-row items-center justify-between gap-2'
+					: 'mr-4 flex-col items-center justify-center'
+			)}
+		>
 			{#if appState.settings.cheat_mode}
 				<Input
 					value={palRank}
@@ -176,14 +187,14 @@
 					}}
 				/>
 			{/if}
-			<div class="flex flex-row px-2">
+			<div class={cn('flex flex-row', layout.phone ? '' : 'px-2')}>
 				{#if showActions}
 					<Tooltip position="bottom">
 						<Button
 							variant="ghost"
 							size="icon"
 							oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-							class="mr-4"
+							class={layout.phone ? 'mr-1' : 'mr-4'}
 							onmousedown={(event: MouseEvent) => handleLevelDecrement(event)}
 						>
 							<Icon icon="tabler:minus" class="text-primary-500" />
@@ -198,11 +209,7 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.leftClickIcon}
-										alt="Left Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">-5</span>
 							</div>
@@ -211,28 +218,16 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.rightClickIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">-10</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.ctrlIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.middleClickIcon}
-										alt="Middle Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">Level 1</span>
 							</div>
@@ -243,7 +238,7 @@
 				<Tooltip>
 					<div class="flex flex-col items-center justify-center">
 						<span class={cn('text-surface-400 font-bold', palLevelClass)}>LEVEL</span>
-						<span class={cn('text-4xl font-bold', palLevelClass)}>
+						<span class={cn('font-bold', layout.phone ? 'text-3xl' : 'text-4xl', palLevelClass)}>
 							<NumberFlow value={palLevel} />
 						</span>
 					</div>
@@ -258,7 +253,7 @@
 							variant="ghost"
 							size="icon"
 							oncontextmenu={(event: MouseEvent) => event.preventDefault()}
-							class="ml-4"
+							class={layout.phone ? 'ml-1' : 'ml-4'}
 							onmousedown={(event: MouseEvent) => handleLevelIncrement(event)}
 						>
 							<Icon icon="tabler:plus" class="text-primary-500" />
@@ -273,11 +268,7 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.leftClickIcon}
-										alt="Left Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.leftClickIcon} alt="Left Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">+5</span>
 							</div>
@@ -286,28 +277,16 @@
 									<img src={staticIcons.ctrlIcon} alt="Control" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.rightClickIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.rightClickIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">+10</span>
 							</div>
 							<div class="flex items-center space-x-2">
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.ctrlIcon}
-										alt="Right Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.ctrlIcon} alt="Right Click" class="h-full w-full" />
 								</div>
 								<div class="h-6 w-6">
-									<img
-										src={staticIcons.middleClickIcon}
-										alt="Middle Click"
-										class="h-full w-full"
-									/>
+									<img src={staticIcons.middleClickIcon} alt="Middle Click" class="h-full w-full" />
 								</div>
 								<span class="text-xs font-bold">{m.level({ level: max_level })}</span>
 							</div>

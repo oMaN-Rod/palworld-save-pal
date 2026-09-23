@@ -1,25 +1,28 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import * as m from '$i18n/messages';
+	import { layout } from '$utils/layout.svelte';
 	import { cn } from '$theme';
 
 	let {
 		page = $bindable(1),
 		pageCount,
 		label,
-		windowSize = 16
+		windowSize
 	}: {
 		page: number;
-		/** Integer page total, supplied by the caller; never recomputed here. */
 		pageCount: number;
 		label: string;
 		windowSize?: number;
 	} = $props();
 
+	// Sixteen bubbles wrap into six rows on a phone, burying the grid they page.
+	const visibleCount = $derived(windowSize ?? (layout.phone ? 3 : 16));
+
 	const windowStart = $derived(
-		Math.max(1, Math.min(page - Math.floor(windowSize / 2), pageCount - windowSize + 1))
+		Math.max(1, Math.min(page - Math.floor(visibleCount / 2), pageCount - visibleCount + 1))
 	);
-	const windowEnd = $derived(Math.min(windowStart + windowSize - 1, pageCount));
+	const windowEnd = $derived(Math.min(windowStart + visibleCount - 1, pageCount));
 	const pages = $derived(
 		Array.from({ length: windowEnd - windowStart + 1 }, (_, i) => windowStart + i)
 	);

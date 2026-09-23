@@ -6,13 +6,14 @@ export type PublicNavItem = {
 	/** Iconify icon name, e.g. `tabler:map`. */
 	icon: string;
 	label: () => string;
+	hideOnMobile?: boolean;
 };
 
 export const publicNavItems: PublicNavItem[] = [
 	{ id: 'map', href: '/map', icon: 'tabler:map', label: () => m.map() },
 	{ id: 'wiki', href: '/wiki', icon: 'tabler:book', label: () => m.docs_wiki() },
 	{ id: 'breeding', href: '/breeding', icon: 'tabler:flask', label: () => m.breeding() },
-	{ id: 'editor', href: '/editor', icon: 'tabler:notebook', label: () => m.editor() },
+	{ id: 'editor', href: '/editor', icon: 'tabler:notebook', label: () => m.editor(), hideOnMobile: true },
 	{ id: 'signal', href: '/signal', icon: 'local:rwby-rose', label: () => m.signal() }
 ];
 

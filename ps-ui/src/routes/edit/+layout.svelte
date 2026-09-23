@@ -2,15 +2,12 @@
 	import { ContextBar, DebugButton } from '$components/layout';
 	import { PlayerList } from '$components/player';
 	import { getAppState, getModalState, getPalEditorState } from '$states';
-	import { navDrawer } from '$states/navDrawer.svelte';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { fade } from 'svelte/transition';
 	import { MessageType } from '$types';
 	import { Nuke, Tooltip } from '$components/ui';
-	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { send } from '$utils/websocketUtils';
-	import { layout } from '$utils/layout.svelte';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
 	import { EDIT_TABS, shortcutMap, toContextItems, type EditTabContext } from './editTabs';
@@ -90,10 +87,13 @@
 </script>
 
 <div class="flex h-full w-full flex-col overflow-hidden">
-	<div class="mx-2 flex min-w-72 items-center justify-between">
+	<!-- Tabs get their own row: sharing one with the player select pushed them off a phone. -->
+	<div class="border-surface-700/40 bg-surface-900/60 flex shrink-0 flex-col md:flex-row border-b md:items-center mb-2">
 		{#if appState.saveFile}
-			<div class="flex items-center">
-				<PlayerList selected={appState.selectedPlayer?.uid || undefined} />
+			<div class="flex min-w-0 items-center gap-2 px-2 py-1.5">
+				<div class="min-w-0 flex-1">
+					<PlayerList selected={appState.selectedPlayer?.uid || undefined} />
+				</div>
 				{#if appState.selectedPlayer && appState.settings.debug_mode}
 					<DebugButton
 						href={`/debug?guildId=${appState.selectedPlayer?.guild_id}&playerId=${appState.selectedPlayer!.uid}`}
@@ -101,29 +101,17 @@
 				{/if}
 				{#if appState.selectedPlayer}
 					<Tooltip label={m.delete_entity({ entity: c.player })}>
-						<button class="btn ml-4 h-8 w-8 p-2 hover:bg-red-500/50" onclick={handleDeletePlayer}>
+						<button
+							class="btn btn-icon hover:bg-error-500/50 shrink-0"
+							onclick={handleDeletePlayer}
+						>
 							<Nuke size={24} />
 						</button>
 					</Tooltip>
 				{/if}
 			</div>
-		{:else}
-			<div></div>
 		{/if}
-		<div class="flex min-w-0 items-center gap-2">
-			{#if layout.phone}
-				<button
-					type="button"
-					class="btn shrink-0 p-2"
-					aria-label={m.menu()}
-					onclick={() => (navDrawer.open = true)}
-				>
-					<Icon icon="tabler:menu-2" size={20} />
-				</button>
-			{/if}
-			<ContextBar id="player-tabs" items={contextItems} activeId={activeTabId ?? ''} />
-		</div>
-		<div></div>
+		<ContextBar id="player-tabs" items={contextItems} activeId={activeTabId ?? ''} />
 	</div>
 	<div class="relative flex-1 overflow-hidden">
 		{#key page.url.pathname}

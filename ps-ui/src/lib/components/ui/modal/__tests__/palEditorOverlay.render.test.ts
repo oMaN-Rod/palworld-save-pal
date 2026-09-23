@@ -45,7 +45,7 @@ describe('PalEditorOverlay', () => {
 		const className = surface().className;
 		expect(className).not.toContain('90vw');
 		expect(className).not.toContain('90vh');
-		expect(className).toContain('h-full');
+		expect(className).toContain('grow');
 		expect(className).toContain('w-full');
 	});
 

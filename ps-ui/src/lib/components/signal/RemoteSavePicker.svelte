@@ -194,7 +194,7 @@
 				{@const modified = formatModified(save.modified_ms)}
 				<button
 					type="button"
-					class="bg-surface-800 hover:bg-surface-700 flex w-full items-center justify-between gap-3 rounded-sm p-3 text-left"
+					class="bg-surface-900 hover:bg-surface-700 flex w-full items-center justify-between gap-3 rounded-sm p-3 text-left"
 					onclick={() => loadSteamSave(save.path)}
 				>
 					<div class="min-w-0">

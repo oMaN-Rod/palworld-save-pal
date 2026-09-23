@@ -6,7 +6,7 @@
 	import * as m from '$i18n/messages';
 	import { Seo } from '$lib/components/seo';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
-	import { Button, Card, Input } from '$components/ui';
+	import { Button, Card, Input, Tooltip } from '$components/ui';
 	import { SidebarDetail } from '$components/layout';
 	import { localizedPath } from '$lib/i18n/routingConfig.js';
 	import { isWebBuild } from '$lib/utils/platform';
@@ -117,8 +117,7 @@
 		}
 		try {
 			remoteMode.enter();
-		} catch {
-		}
+		} catch {}
 	}
 
 	const pickerSections: { id: PickerSection; icon: string; label: () => string }[] = [
@@ -164,44 +163,64 @@
 {:else if session.state === 'connected'}
 	<SidebarDetail class="animate-fade-in" detailActive={remoteMode.active}>
 		{#snippet sidebar()}
-			<Card>
-				<div class="flex flex-col gap-5">
-					<div class="flex flex-col items-center gap-1 text-center">
-						<Icon icon="tabler:circle-check" size={32} class="text-success-400" />
-						<h2 class="h4 font-semibold">{m.signal_connected_heading()}</h2>
-						<p class="text-surface-200 flex items-center gap-1.5 text-sm font-medium">
-							<Icon icon="tabler:device-desktop" size={16} class="text-surface-400" />
-							{connectedDesktopName ?? m.signal_desktop_fallback_name()}
-						</p>
-						{#if sourceStatus}
-							<p class="text-surface-300 text-sm">
-								{m.signal_source_health({ health: healthLabel(sourceStatus.health) })}
+			<Card padding="p-3">
+				<div class="flex flex-col gap-3">
+					<div class="flex items-center gap-2">
+						<Icon icon="tabler:circle-check" size={20} class="text-success-400 shrink-0" />
+						<div class="min-w-0 flex-1">
+							<p class="truncate text-sm font-semibold">{m.signal_connected_heading()}</p>
+							<p class="text-surface-300 flex items-center gap-1 text-xs">
+								<Icon icon="tabler:device-desktop" size={12} class="text-surface-400 shrink-0" />
+								<span class="truncate">
+									{connectedDesktopName ?? m.signal_desktop_fallback_name()}
+								</span>
 							</p>
-							<p class="text-surface-300 text-sm">
-								{m.signal_source_actors({ count: sourceStatus.actorCount ?? 0 })}
-							</p>
-						{:else if statusFailed}
-							<p class="text-surface-400 text-xs">{m.signal_status_unavailable()}</p>
-						{/if}
-						{#if session.viaRelay}
-							<p class="text-surface-400 text-xs">{m.signal_via_relay()}</p>
-						{/if}
+						</div>
 					</div>
 
-					<div class="flex flex-col gap-2">
-						<Button variant="primary" onclick={openLiveMap}>{m.signal_open_live_map()}</Button>
+					{#if sourceStatus || statusFailed || session.viaRelay}
+						<div class="text-surface-300 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+							{#if sourceStatus}
+								<span>{m.signal_source_health({ health: healthLabel(sourceStatus.health) })}</span>
+								<span>{m.signal_source_actors({ count: sourceStatus.actorCount ?? 0 })}</span>
+							{:else if statusFailed}
+								<span class="text-surface-400">{m.signal_status_unavailable()}</span>
+							{/if}
+							{#if session.viaRelay}
+								<span class="text-surface-400">{m.signal_via_relay()}</span>
+							{/if}
+						</div>
+					{/if}
+
+					<div class="flex flex-wrap gap-2">
+						<Tooltip label={m.signal_open_live_map()}>
+							<Button variant="primary" onclick={openLiveMap}>
+								<Icon icon="tabler:map" size={16} class="shrink-0" />
+							</Button>
+						</Tooltip>
+
 						{#if remoteMode.active}
-							<Button variant="primary" onclick={() => goto('/servers')}>Servers</Button>
+							<Tooltip label="Servers">
+								<Button variant="primary" onclick={() => goto('/servers')}>
+									<Icon icon="tabler:server" size={16} class="shrink-0" />
+								</Button>
+							</Tooltip>
 						{/if}
-						<Button
-							variant="neutral"
-							onclick={toggleRemoteMode}
-							disabled={exitBlocked}
-							title={exitBlocked ? m.signal_remote_mode_exit_blocked_hint() : undefined}
-						>
-							{remoteMode.active ? m.signal_remote_mode_exit() : m.signal_remote_mode_enter()}
-						</Button>
-						<Button variant="ghost" onclick={handleDisconnect}>{m.signal_disconnect()}</Button>
+						<Tooltip label={remoteMode.active ? m.signal_remote_mode_exit() : m.signal_remote_mode_enter()}>
+							<Button
+								variant="neutral"
+								onclick={toggleRemoteMode}
+								disabled={exitBlocked}
+								title={exitBlocked ? m.signal_remote_mode_exit_blocked_hint() : undefined}
+							>
+								<Icon icon="tabler:remote-control" size={16} class="shrink-0" />
+							</Button>
+						</Tooltip>
+						<Tooltip label={m.signal_disconnect()}>
+							<Button variant="danger" onclick={handleDisconnect}>
+								<Icon icon="tabler:plug-off" size={16} class="shrink-0" />
+							</Button>
+						</Tooltip>
 					</div>
 
 					{#if remoteMode.active}
@@ -209,19 +228,21 @@
 							<p class="text-surface-400 px-1 text-xs font-semibold tracking-wide uppercase">
 								{m.remote_saves_title()}
 							</p>
-							{#each pickerSections as sectionOption (sectionOption.id)}
-								<button
-									type="button"
-									class="flex w-full items-center gap-2 rounded-sm p-2 text-left text-sm transition-colors {activeSection ===
-									sectionOption.id
-										? 'bg-secondary-500/25 text-surface-50'
-										: 'text-surface-300 hover:bg-surface-800'}"
-									onclick={() => (activeSection = sectionOption.id)}
-								>
-									<Icon icon={sectionOption.icon} size={16} class="shrink-0" />
-									<span>{sectionOption.label()}</span>
-								</button>
-							{/each}
+							<div class="flex gap-1 overflow-x-auto md:flex-col">
+								{#each pickerSections as sectionOption (sectionOption.id)}
+									<button
+										type="button"
+										class="flex shrink-0 items-center gap-2 rounded-sm p-2 text-left text-sm whitespace-nowrap transition-colors md:w-full {activeSection ===
+										sectionOption.id
+											? 'bg-secondary-500/25 text-surface-50'
+											: 'text-surface-300 hover:bg-surface-800'}"
+										onclick={() => (activeSection = sectionOption.id)}
+									>
+										<Icon icon={sectionOption.icon} size={16} class="shrink-0" />
+										<span>{sectionOption.label()}</span>
+									</button>
+								{/each}
+							</div>
 						</div>
 					{/if}
 				</div>

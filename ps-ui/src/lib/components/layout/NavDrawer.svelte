@@ -124,7 +124,7 @@
 		transition:fly={{ x: -300, duration: 220 }}
 	>
 		<div class="flex items-center gap-2 p-3">
-			<span class="flex-1 text-base font-extrabold">PalStudio</span>
+			<span class="heading-gradient flex-1 text-base font-extrabold">PalStudio</span>
 			<button
 				type="button"
 				class="flex size-11 items-center justify-center rounded-lg"

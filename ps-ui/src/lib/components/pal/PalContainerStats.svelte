@@ -121,7 +121,7 @@
 	let totalPals = $derived(pals.length);
 </script>
 
-<div class="flex flex-col space-y-3">
+<div class="flex flex-col space-y-3 min-w-84">
 	<div class="flex space-x-2">
 		<span class="grow font-bold">{m.total_pals(p.pals)}</span>
 		<span>{totalPals}</span>

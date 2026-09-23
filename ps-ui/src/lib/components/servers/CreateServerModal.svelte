@@ -156,7 +156,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-[750px] min-w-[650px]">
+	<Card class="modal-panel max-w-[750px] min-w-[650px]">
 		<div class="mb-4 flex items-center gap-3">
 			<h3 class="h3">{title}</h3>
 			<a

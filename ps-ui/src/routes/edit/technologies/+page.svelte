@@ -204,18 +204,21 @@
 {/snippet}
 
 {#if appState.selectedPlayer}
-	<main class="h-full min-h-[calc(100vh-var(--titlebar-h))] p-8">
+	<main class="h-full min-h-[calc(100vh-var(--titlebar-h))] p-4 md:p-8">
 		<div class="mx-auto max-w-7xl">
-			<div class="mb-8 flex items-center justify-between">
-				<div class="flex gap-8">
+			<div
+				id="tech-summary"
+				class="bg-surface-950/95 sticky top-0 z-10 mb-6 flex flex-col gap-3 py-2 backdrop-blur md:static md:mb-8 md:flex-row md:items-center md:justify-between md:gap-0 md:bg-transparent md:py-0 md:backdrop-blur-none"
+			>
+				<div class="flex gap-3 md:gap-8">
 					<button
 						id="tech-points"
 						onclick={() => handleEditTechPoints('tech')}
-						class="border-surface-400 hover:ring-tech-500 cursor-pointer rounded-lg border hover:ring-2"
+						class="border-surface-400 hover:ring-tech-500 flex-1 cursor-pointer rounded-lg border hover:ring-2 md:flex-none"
 					>
-						<div class="px-6 py-3">
+						<div class="px-4 py-2 md:px-6 md:py-3">
 							<div class="text-surface-400 text-xs">{m.technology_points()}</div>
-							<div class="text-tech-500 text-2xl font-bold">
+							<div class="text-tech-500 text-xl font-bold md:text-2xl">
 								{appState.selectedPlayer.technology_points}
 							</div>
 						</div>
@@ -223,22 +226,22 @@
 					<button
 						id="ancient-tech-points"
 						onclick={() => handleEditTechPoints('ancient')}
-						class="border-surface-400 hover:ring-ancient-tech-500 cursor-pointer rounded-lg border hover:ring-2"
+						class="border-surface-400 hover:ring-ancient-tech-500 flex-1 cursor-pointer rounded-lg border hover:ring-2 md:flex-none"
 					>
-						<div class="px-6 py-3">
+						<div class="px-4 py-2 md:px-6 md:py-3">
 							<div class="text-surface-400 text-xs">{m.ancient_technology_points()}</div>
-							<div class="text-ancient-tech-500 text-2xl font-bold">
+							<div class="text-ancient-tech-500 text-xl font-bold md:text-2xl">
 								{appState.selectedPlayer.boss_technology_points}
 							</div>
 						</div>
 					</button>
 				</div>
-				<div id="tech-bulk-actions" class="flex gap-4">
+				<div id="tech-bulk-actions" class="flex gap-2 md:gap-4">
 					<Button
 						id="tech-lock-all"
 						variant="primary"
 						size="lg"
-						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
+						class="hover:ring-secondary-500 flex-1 rounded-lg font-medium hover:ring-2 md:flex-none"
 						onclick={resetAll}
 					>
 						<Icon icon="tabler:lock" class="inline h-4 w-4" />
@@ -248,7 +251,7 @@
 						id="tech-unlock-all"
 						variant="primary"
 						size="lg"
-						class="hover:ring-secondary-500 rounded-lg font-medium hover:ring-2"
+						class="hover:ring-secondary-500 flex-1 rounded-lg font-medium hover:ring-2 md:flex-none"
 						onclick={unlockAll}
 					>
 						<Icon icon="tabler:lock-open" class="inline h-4 w-4" />
@@ -262,18 +265,19 @@
 					{@const techIDs = levelData.regular}
 					{@const emptySlots = 8 - techIDs.length}
 					{@const ancientTechID = levelData.ancient}
-					<div class="mb-12 grid grid-cols-[auto_1fr] gap-4">
-						<div class="mb-4 flex items-center px-10">
+					<!-- A full tier is ~900px wide, so it wraps below the breakpoint. -->
+					<div class="mb-8 flex flex-col gap-2 md:mb-12 md:grid md:grid-cols-[auto_1fr] md:gap-4">
+						<div class="flex items-center md:mb-4 md:px-10">
 							<div
-								class="border-surface-500 flex h-12 w-12 items-center justify-center rounded border-2 text-xl font-bold"
+								class="border-surface-500 flex h-10 w-10 items-center justify-center rounded border-2 text-lg font-bold md:h-12 md:w-12 md:text-xl"
 							>
 								{levelCap}
 							</div>
 							<div class="ml-4 h-0.5 flex-1"></div>
 						</div>
 
-						<div class="flex gap-4">
-							<div class="flex gap-4">
+						<div class="flex flex-wrap gap-2 md:flex-nowrap md:gap-4">
+							<div class="flex flex-wrap gap-2 md:flex-nowrap md:gap-4">
 								{#each techIDs as techID}
 									{@const technologyItem = technologiesData.getByKey(techID)}
 									{@const isSelected =
@@ -287,18 +291,18 @@
 									{/if}
 								{/each}
 								{#each Array(emptySlots) as _}
-									<div class="w-24 2xl:w-32"></div>
+									<div class="hidden w-24 md:block 2xl:w-32"></div>
 								{/each}
 							</div>
 
-							<div class="bg-ancient-tech-500 w-px"></div>
+							<div class="bg-ancient-tech-500 h-px w-full md:h-auto md:w-px"></div>
 
 							{#if ancientTechID}
 								{@const ancientTechItem = technologiesData.getByKey(ancientTechID) as Technology}
 								{@const isSelected = appState.selectedPlayer.technologies.includes(ancientTechID)}
 								{@render technologyButton(ancientTechID, isSelected, ancientTechItem, 'ancient')}
 							{:else}
-								<div class="bg-tertiary-950 w-24 2xl:w-32"></div>
+								<div class="bg-tertiary-950 hidden w-24 md:block 2xl:w-32"></div>
 							{/if}
 						</div>
 					</div>

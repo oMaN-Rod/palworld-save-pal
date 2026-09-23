@@ -32,7 +32,7 @@
 <div>
 	<legend class="font-bold">{m.element_and_type()}</legend>
 	<hr />
-	<div class="mt-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 2xl:grid-cols-6">
+	<div class="mt-2 grid grid-cols-4">
 		<Tooltip>
 			<button class={filterClass('All')} onclick={() => (selectedFilter = 'All')}>
 				<Icon icon="tabler:layout-list" />

@@ -221,7 +221,7 @@ describe('PalEditModal sections', () => {
 		}
 	});
 
-	it('keeps talents and souls in a separate desktop column from the other three', async () => {
+	it('keeps the other three sections in one desktop column', async () => {
 		setViewport(DESKTOP_WIDTH);
 		render(PalEditModal);
 		await tick();
@@ -229,10 +229,25 @@ describe('PalEditModal sections', () => {
 		const primaryColumn = screen.getByTestId('active_skills').parentElement;
 		expect(screen.getByTestId('passive_skills').parentElement).toBe(primaryColumn);
 		expect(screen.getByTestId('work_suitability').parentElement).toBe(primaryColumn);
+		expect(primaryColumn!.contains(screen.getByTestId('talents'))).toBe(false);
+	});
 
-		const asideColumn = screen.getByTestId('talents').parentElement;
-		expect(screen.getByTestId('souls').parentElement).toBe(asideColumn);
-		expect(asideColumn).not.toBe(primaryColumn);
+	it('stacks talents and souls under the stats on a desktop', async () => {
+		setViewport(DESKTOP_WIDTH);
+		render(PalEditModal);
+		await tick();
+
+		const side = document.getElementById('pal-side');
+		const stats = document.getElementById('pal-stats');
+		const talents = screen.getByTestId('talents');
+
+		expect(side).not.toBeNull();
+		expect(stats).not.toBeNull();
+		expect(side!.contains(stats!)).toBe(true);
+		expect(side!.contains(talents)).toBe(true);
+		expect(side!.contains(screen.getByTestId('souls'))).toBe(true);
+		expect(side!.contains(screen.getByTestId('active_skills'))).toBe(false);
+		expect(stats!.compareDocumentPosition(talents) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 	});
 
 	it('keeps the identity strip and a tablist on a phone', async () => {
@@ -279,21 +294,21 @@ describe('PalEditModal sections', () => {
 		expect(renderers).toHaveLength(1);
 	});
 
-	it('places the pal portrait between the primary and aside desktop columns', async () => {
+	it('places the pal portrait between the primary sections and the side column', async () => {
 		setViewport(DESKTOP_WIDTH);
 		render(PalEditModal);
 		await tick();
 
 		const primary = screen.getByTestId('active_skills');
 		const portrait = document.getElementById('pal-image');
-		const aside = screen.getByTestId('talents');
+		const side = document.getElementById('pal-side');
 
 		expect(portrait).not.toBeNull();
 		expect(
 			primary.compareDocumentPosition(portrait!) & Node.DOCUMENT_POSITION_FOLLOWING
 		).toBeTruthy();
 		expect(
-			portrait!.compareDocumentPosition(aside) & Node.DOCUMENT_POSITION_FOLLOWING
+			portrait!.compareDocumentPosition(side!) & Node.DOCUMENT_POSITION_FOLLOWING
 		).toBeTruthy();
 	});
 });

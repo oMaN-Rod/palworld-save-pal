@@ -148,9 +148,9 @@
 	});
 
 	const cardClass = $derived(
-		isEgg ? 'w-full max-w-[1200px] min-w-[600px]' : 'w-full w-[600px]'
+		isEgg ? 'modal-panel w-full max-w-[1200px] min-w-[600px]' : 'modal-panel w-full md:w-[600px]'
 	);
-	const controlsClass = $derived(isEgg ? 'grid grid-cols-[570px_1fr] gap-2' : 'flex w-full');
+	const controlsClass = $derived(isEgg ? 'grid gap-2 md:grid-cols-[570px_1fr]' : 'flex w-full');
 
 	function handleClose(confirmed: boolean) {
 		closeModal(confirmed ? [itemId, count, eggConfig] : undefined);
@@ -227,9 +227,11 @@
 									<div class="flex flex-col">
 										<span class="font-bold">{option.label}</span>
 
-										<span class="text-xs text-muted">{item?.info.description}</span>
+										<span class="text-muted text-xs">{item?.info.description}</span>
 									</div>
-									<span class="text-xs self-start">{getItemTier(option.value as string, items)}</span>
+									<span class="self-start text-xs"
+										>{getItemTier(option.value as string, items)}</span
+									>
 								</div>
 							{:catch}
 								<div class="grid grid-cols-[auto_1fr_auto]">
@@ -286,9 +288,7 @@
 										)}
 									>
 										<img
-											src={assetLoader.loadImage(
-												`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`
-											)}
+											src={assetLoader.loadImage(`${ASSET_DATA_PATH}/img/${eggConfig.gender}.webp`)}
 											alt={eggConfig.gender}
 										/>
 									</div>

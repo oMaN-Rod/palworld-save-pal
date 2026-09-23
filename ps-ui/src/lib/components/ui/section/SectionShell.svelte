@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 	import type { ValueChangeDetails } from '@zag-js/accordion';
 	import SectionTabs, { panelId, tabId } from '$components/ui/tabs/SectionTabs.svelte';
@@ -10,16 +9,13 @@
 		presentation,
 		active = $bindable(sections[0]?.id),
 		label,
-		idPrefix,
-		between
+		idPrefix
 	}: {
 		sections: SectionDef[];
 		presentation: SectionPresentation;
 		active?: string;
 		label: string;
 		idPrefix: string;
-		/** Rendered as its own grid column between each pair of `group` columns. Ignored outside `columns` presentation. */
-		between?: Snippet;
 	} = $props();
 
 	let accordionValue: string[] = $state([]);
@@ -36,19 +32,14 @@
 		}
 		return [...groups.values()];
 	});
-
-	// One track per column group, plus one for `between` in each gap between them.
-	const trackCount = $derived(
-		columnGroups.length + (between ? Math.max(columnGroups.length - 1, 0) : 0)
-	);
 </script>
 
 {#if presentation === 'columns'}
-	<div class="grid gap-2" style="grid-template-columns: repeat({trackCount}, minmax(0, 1fr));">
+	<div
+		class="grid gap-2"
+		style="grid-template-columns: repeat({columnGroups.length}, minmax(0, 1fr));"
+	>
 		{#each columnGroups as group, index (index)}
-			{#if index > 0 && between}
-				<div>{@render between()}</div>
-			{/if}
 			<div class="flex flex-col gap-2">
 				{#each group as section (section.id)}
 					<div data-testid={section.id}>

@@ -81,8 +81,24 @@ describe('GuildStorage', () => {
 		expect(screen.getByAltText('Storage Container Icon')).toBeTruthy();
 	});
 
-	// A base whose containers are all filtered out is not a broken base, so it
-	// says so rather than rendering an empty two-column shell.
+	it('stacks the container list over the grid below the breakpoint', () => {
+		renderStorage();
+
+		const content = document.querySelector('#guild-storage-content');
+		expect(content).not.toBeNull();
+		expect(content?.className).toContain('flex-col');
+		expect(content?.className).toContain('md:flex-row');
+	});
+
+	it('gives the container list the full width it is stacked in', () => {
+		renderStorage();
+
+		const list = document.querySelector('#guild-storage-containers');
+		expect(list).not.toBeNull();
+		const unprefixed = (list?.className ?? '').split(/  */).filter((token) => !token.includes(':'));
+		expect(unprefixed).not.toContain('w-1/4');
+	});
+
 	it('says so when the base has no containers to show', () => {
 		renderStorage({ containers: [] });
 		expect(screen.getByText('No Storage Containers')).toBeTruthy();

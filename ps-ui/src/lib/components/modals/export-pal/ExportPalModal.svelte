@@ -100,7 +100,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-lg min-w-[400px]">
+	<Card class="modal-panel max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				{#if exportTarget}
@@ -196,8 +196,8 @@
 				{/if}
 			</div>
 
-			<div class="rounded bg-surface-100 dark:bg-surface-800 p-3 text-sm ">
-				<p class="mb-1 font-medium ">{m.note()}:</p>
+			<div class="bg-surface-100 dark:bg-surface-800 rounded p-3 text-sm">
+				<p class="mb-1 font-medium">{m.note()}:</p>
 				<p class="text-yellow-700 dark:text-yellow-300">
 					{m.export_note_message()}
 				</p>
@@ -205,11 +205,7 @@
 		</div>
 
 		<div class="mt-6 flex justify-end gap-2">
-			<Button
-				type="button"
-				variant="neutral"
-				onclick={() => handleClose(false)}
-			>
+			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
 				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>

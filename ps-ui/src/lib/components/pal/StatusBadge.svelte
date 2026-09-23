@@ -126,8 +126,9 @@
 						type="button"
 						onclick={showTrustEditModal}
 						aria-label="Edit Trust"
+						class="h-6 w-6"
 					>
-						<img src={staticIcons.trustIcon} alt="Trust" />
+						<img src={staticIcons.trustIcon} alt="Trust" class="h-6 w-6"/>
 					</Button>
 				</Tooltip>
 			{/if}
@@ -160,8 +161,8 @@
 		<div class={iconSlotClass}>
 			{#if showActions}
 				<Tooltip>
-					<Button variant="ghost" size="icon" onclick={handleHeal} aria-label="Health">
-						<img src={staticIcons.hpIcon} alt="Health" />
+					<Button variant="ghost" size="icon" onclick={handleHeal} aria-label="Health" class="h-6 w-6">
+						<img src={staticIcons.hpIcon} alt="Health" class="h-6 w-6"/>
 					</Button>
 					{#snippet popup()}
 						<span>HP</span>
@@ -184,8 +185,8 @@
 		<div class={iconSlotClass}>
 			{#if showActions}
 				<Tooltip>
-					<Button variant="ghost" size="icon" onclick={handleEat} aria-label="Food">
-						<img src={staticIcons.foodIcon} alt="Food" />
+					<Button variant="ghost" size="icon" onclick={handleEat} aria-label="Food" class="h-6 w-6">
+						<img src={staticIcons.foodIcon} alt="Food" class="h-6 w-6"/>
 					</Button>
 					{#snippet popup()}
 						<span>{m.feed()}</span>

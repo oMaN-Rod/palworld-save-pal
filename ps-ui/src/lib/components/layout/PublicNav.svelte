@@ -4,8 +4,17 @@
 	import LocaleChip from './LocaleChip.svelte';
 	import ThemeChip from './ThemeChip.svelte';
 	import { publicNavItems, activePublicNavId } from './publicNavItems';
+	import { browser } from '$app/environment';
+	import { detectBrowser } from '$lib/utils/browserIdentity';
 
 	const activeId = $derived(activePublicNavId(page.url.pathname));
+
+	const agent = browser
+		? detectBrowser()
+		: { family: 'unknown' as const, name: 'this browser', mobile: false };
+	const isMobile = agent.mobile;
+
+	const navItems = $derived(publicNavItems.filter(item => !(isMobile && item.hideOnMobile)));
 </script>
 
 <nav class="public-nav">
@@ -17,7 +26,7 @@
 	</a>
 
 	<div class="public-nav-links">
-		{#each publicNavItems as item (item.id)}
+		{#each navItems as item (item.id)}
 			<a
 				href={item.href}
 				class="public-nav-link"

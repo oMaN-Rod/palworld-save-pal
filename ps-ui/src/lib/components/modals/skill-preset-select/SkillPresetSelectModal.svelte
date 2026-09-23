@@ -103,7 +103,7 @@
 	}
 </script>
 
-<Card class="min-w-[calc(100vw/3)]">
+<Card class="modal-panel min-w-[calc(100vw/3)]">
 	<h3 class="h3">{title}</h3>
 	<Combobox options={selectOptions} bind:value={selectedPreset}>
 		{#snippet selectOption(option)}

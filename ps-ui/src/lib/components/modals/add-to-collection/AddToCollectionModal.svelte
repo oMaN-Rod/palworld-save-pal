@@ -97,7 +97,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-lg min-w-[400px]">
+	<Card class="modal-panel max-w-lg min-w-[400px]">
 		<div class="mb-4 flex items-center justify-between">
 			<h3 class="h3 flex items-center gap-2">
 				<Icon icon="tabler:folder" class="h-5 w-5" />
@@ -185,12 +185,7 @@
 							>
 								{m.create()}
 							</Button>
-							<Button
-								type="button"
-								variant="neutral"
-								size="sm"
-								onclick={cancelCreateCollection}
-							>
+							<Button type="button" variant="neutral" size="sm" onclick={cancelCreateCollection}>
 								{m.cancel()}
 							</Button>
 						</div>
@@ -221,11 +216,7 @@
 		</div>
 
 		<div class="mt-6 flex justify-end gap-2">
-			<Button
-				type="button"
-				variant="neutral"
-				onclick={() => handleClose(false)}
-			>
+			<Button type="button" variant="neutral" onclick={() => handleClose(false)}>
 				<Icon icon="tabler:x" class="h-4 w-4" />
 				{m.cancel()}
 			</Button>

@@ -40,7 +40,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-[600px] min-w-[520px]">
+	<Card class="modal-panel max-w-[600px] min-w-[520px]">
 		<h3 class="h3 mb-4">{title}</h3>
 
 		<div class="flex flex-col gap-3">

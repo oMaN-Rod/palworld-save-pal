@@ -66,8 +66,7 @@
 	}
 
 	function handleLearnAll() {
-		const allSkillIds = selectOptions
-			.map((option) => option.value);
+		const allSkillIds = selectOptions.map((option) => option.value);
 		learnedSkills = allSkillIds.map((skillId) => ({ id: skillId }));
 	}
 
@@ -88,7 +87,7 @@
 	});
 </script>
 
-<Card class="min-w-[calc(100vw/3)]">
+<Card class="modal-panel min-w-[calc(100vw/3)]">
 	<h3 class="h3">{m.edit_entity({ entity: m.learned_skills() })}</h3>
 	<div class="mt-4 flex items-center space-x-2">
 		<Combobox options={unlearnedSkills} bind:value={selectedSkill}>

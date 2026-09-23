@@ -57,7 +57,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-lg min-w-[400px]">
+	<Card class="modal-panel max-w-lg min-w-[400px]">
 		<h3 class="h3">Export blueprint</h3>
 
 		<div class="mt-2 flex flex-col gap-2">
@@ -113,9 +113,7 @@
 
 		<div class="mt-4 flex justify-end gap-2">
 			<Button variant="neutral" onclick={() => closeModal(null)}>Cancel</Button>
-			<Button variant="primary" disabled={busy} onclick={confirm} data-modal-primary>
-				Export
-			</Button>
+			<Button variant="primary" disabled={busy} onclick={confirm} data-modal-primary>Export</Button>
 		</div>
 	</Card>
 </div>

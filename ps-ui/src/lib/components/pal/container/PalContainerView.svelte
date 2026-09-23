@@ -16,6 +16,7 @@
 
 	import PalContainerToolbar from './PalContainerToolbar.svelte';
 	import PalDetailSheet from './PalDetailSheet.svelte';
+	import PalFilterPanel from './PalFilterPanel.svelte';
 	import PalFilterSheet from './PalFilterSheet.svelte';
 	import PalList from './PalList.svelte';
 	import PalPager from './PalPager.svelte';
@@ -66,6 +67,8 @@
 		/** Where a tap goes when there is room for a real editor. */
 		onOpenPal?: (pal: TPal) => void;
 	} = $props();
+
+	const filterPanelId = $props.id();
 
 	let searchQuery = $state('');
 	let selectedFilter = $state('All');
@@ -226,40 +229,46 @@
 		selectionCount={selected.count}
 		{actions}
 		{filterable}
+		{filterOpen}
+		filterPanelId={layout.phone ? undefined : filterPanelId}
 		onOpenFilter={() => (filterOpen = !filterOpen)}
 		{title}
 	/>
 
-	{#if filterOpen && !layout.phone}
-		{@render filterPanel()}
-	{/if}
+	<div class="flex min-h-0 flex-1 flex-row gap-2">
+		<div class="min-h-0 min-w-0 flex-1 overflow-y-auto">
+			{#if container.viewMode === 'list'}
+				<PalList
+					pals={pagePals}
+					{idOf}
+					{nicknameOf}
+					selectedIds={selected.ids}
+					onSelect={handleSelect}
+					onLongPress={handleLongPress}
+					{portrait}
+					{columns}
+				/>
+			{:else}
+				<PalGrid data-testid="pal-container-grid">
+					{#each pagePals as pal (idOf(pal))}
+						<div
+							role="presentation"
+							data-testid="pal-container-badge"
+							oncontextmenucapture={handleContextMenu}
+							onclickcapture={(event) => handleGridActivate(event, pal)}
+							use:longPress={{ onLongPress: () => handleLongPress(pal) }}
+						>
+							{@render portrait(pal)}
+						</div>
+					{/each}
+				</PalGrid>
+			{/if}
+		</div>
 
-	<div class="min-h-0 flex-1 overflow-y-auto">
-		{#if container.viewMode === 'list'}
-			<PalList
-				pals={pagePals}
-				{idOf}
-				{nicknameOf}
-				selectedIds={selected.ids}
-				onSelect={handleSelect}
-				onLongPress={handleLongPress}
-				{portrait}
-				{columns}
-			/>
-		{:else}
-			<PalGrid data-testid="pal-container-grid">
-				{#each pagePals as pal (idOf(pal))}
-					<div
-						role="presentation"
-						data-testid="pal-container-badge"
-						oncontextmenucapture={handleContextMenu}
-						onclickcapture={(event) => handleGridActivate(event, pal)}
-						use:longPress={{ onLongPress: () => handleLongPress(pal) }}
-					>
-						{@render portrait(pal)}
-					</div>
-				{/each}
-			</PalGrid>
+		{#if filterOpen && !layout.phone}
+			<PalFilterPanel id={filterPanelId} onClose={() => (filterOpen = false)}>
+				{@render filterPanel()}
+			</PalFilterPanel>
 		{/if}
 	</div>
 

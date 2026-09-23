@@ -16,7 +16,7 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="max-w-lg min-w-[400px]">
+	<Card class="modal-panel max-w-lg min-w-[400px]">
 		<h3 class="h3">Choose a base to capture</h3>
 
 		{#if bases.length === 0}

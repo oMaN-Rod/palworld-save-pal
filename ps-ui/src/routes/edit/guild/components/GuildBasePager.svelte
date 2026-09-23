@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button, TooltipButton } from '$components/ui';
 	import { staticIcons } from '$types/icons';
+	import { layout } from '$utils/layout.svelte';
 
 	interface Props {
 		total: number;
@@ -11,13 +12,16 @@
 		onNext: () => void;
 	}
 
-	let { total, current, visibleCount = 16, onSelect, onPrevious, onNext }: Props = $props();
+	let { total, current, visibleCount, onSelect, onPrevious, onNext }: Props = $props();
+
+	// Sixteen bubbles wrap into six rows on a phone, burying the base below them.
+	const shown = $derived(visibleCount ?? (layout.phone ? 3 : 16));
 
 	const windowStart = $derived(
-		Math.max(1, Math.min(current - Math.floor(visibleCount / 2), total - visibleCount + 1))
+		Math.max(1, Math.min(current - Math.floor(shown / 2), total - shown + 1))
 	);
 
-	const windowEnd = $derived(Math.min(windowStart + visibleCount - 1, total));
+	const windowEnd = $derived(Math.min(windowStart + shown - 1, total));
 
 	const visibleBases = $derived(
 		Array.from({ length: windowEnd - windowStart + 1 }, (_, i) => windowStart + i)

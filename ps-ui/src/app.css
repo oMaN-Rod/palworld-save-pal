@@ -774,13 +774,6 @@ body::after {
 	outline-offset: -2px;
 }
 
-.context-bar-active {
-	background: color-mix(in srgb, var(--color-primary-500) 16%, transparent);
-	color: var(--color-primary-300);
-	border: 1px solid color-mix(in srgb, var(--color-primary-500) 42%, transparent);
-	font-weight: 700;
-}
-
 /* Collapsed-mode: center icons, hide labels + group headers */
 .sidebar.collapsed .nav-link {
 	justify-content: center;
@@ -957,6 +950,21 @@ body::after {
 	.maplibregl-ctrl button {
 		min-width: 2.75rem;
 		min-height: 2.75rem;
+	}
+}
+
+/*
+ * Modal panels size themselves for a desktop viewport -- `min-w-[400px]`,
+ * `min-w-[calc(100vw/3)]`, `w-[650px]` -- which on a phone asks for more width
+ * than the screen has. Below the tablet breakpoint the panel is the screen
+ * minus a gutter and nothing else, whatever width utilities it carries; above
+ * it, those utilities are left alone.
+ */
+@media (max-width: 767px) {
+	.modal-panel {
+		width: calc(100vw - 2rem);
+		min-width: 0;
+		max-width: 100%;
 	}
 }
 

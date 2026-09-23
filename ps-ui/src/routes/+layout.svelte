@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { Sidebar, PublicNav, TitleBar, NavDrawer } from '$components/layout';
+	import { AppBar, Sidebar, PublicNav, TitleBar, NavDrawer } from '$components/layout';
 	import { Toast, Modal, Spinner, PalEditorOverlay } from '$components/ui';
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { bootstrap } from '$lib/data/bootstrap';
@@ -225,6 +225,9 @@
 						{/if}
 					{/if}
 					<div class="relative flex flex-1 flex-col overflow-hidden">
+						{#if nav === 'drawer' && !pipWindow}
+							<AppBar />
+						{/if}
 						{#if appState.autoSave}
 							<div class="auto-save-indicator" transition:fade>
 								<span class="text-primary-400 text-sm font-bold">{m.syncing()}</span>

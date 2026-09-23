@@ -102,20 +102,20 @@
 </script>
 
 <div bind:this={modalContainer}>
-	<Card class="min-w-[calc(100vw/3)]">
+	<Card class="modal-panel min-w-[calc(100vw/3)]">
 		<h3 class="h3">{title}</h3>
 		<Combobox options={selectOptions} bind:value={selectedPal}>
 			{#snippet selectOption(option)}
 				{@const palData = palsData.getByKey(option.value as string)}
 				<div class="flex items-center space-x-2">
 					{#if (palData?.pal_deck_index ?? 0) > 0}
-							<span class="text-xs">#{palData?.pal_deck_index}</span>
+						<span class="text-xs">#{palData?.pal_deck_index}</span>
 					{:else}
 						<span class="text-xs">----</span>
 					{/if}
 					<img src={getIconPath(option)} alt={option.label} class="h-8 w-8" />
-					
-					<div class="flex flex-col grow">
+
+					<div class="flex grow flex-col">
 						<span>{option.label}</span>
 						<span class="text-xs">{option.value}</span>
 					</div>

@@ -755,8 +755,11 @@
 			<img src={staticIcons.sadIcon} alt="Sad" class="h-18 w-18" />
 		</div>
 	{:else}
-		<div class="grid h-full w-full grid-cols-[minmax(200px,25%)_1fr] xl:grid-cols-[25%_1fr]">
-			<div class="shrink-0 space-y-2 p-4">
+		<div
+			id="guild-shell"
+			class="flex h-full w-full flex-col md:grid md:grid-cols-[minmax(200px,25%)_1fr] xl:grid-cols-[25%_1fr]"
+		>
+			<div class="shrink-0 space-y-2 p-2 md:p-4">
 				<GuildHeader
 					guild={playerGuild}
 					base={currentBase?.[1] ?? null}
@@ -770,12 +773,12 @@
 
 				<nav
 					id="guild-tabs"
-					class="btn-group preset-outlined-surface-200-800 w-full flex-col rounded-sm p-2 md:flex-row"
+					class="btn-group preset-outlined-surface-200-800 flex w-full flex-row overflow-x-auto rounded-sm p-2"
 				>
 					<button
 						id="guild-tab-pals"
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
+							'btn hover:bg-secondary-500/50 min-h-11 min-w-fit flex-1 rounded-sm whitespace-nowrap',
 							activeTab == 'pals' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
@@ -789,7 +792,7 @@
 					<button
 						id="guild-tab-storage"
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
+							'btn hover:bg-secondary-500/50 min-h-11 min-w-fit flex-1 rounded-sm whitespace-nowrap',
 							activeTab == 'storage' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
@@ -803,7 +806,7 @@
 					<button
 						id="guild-tab-chest"
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
+							'btn hover:bg-secondary-500/50 min-h-11 min-w-fit flex-1 rounded-sm whitespace-nowrap',
 							activeTab == 'guildChest' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {
@@ -817,7 +820,7 @@
 					<button
 						id="guild-tab-lab"
 						class={cn(
-							'btn hover:bg-secondary-500/50 w-1/4 rounded-sm',
+							'btn hover:bg-secondary-500/50 min-h-11 min-w-fit flex-1 rounded-sm whitespace-nowrap',
 							activeTab == 'lab' ? 'bg-secondary-800 text-white' : ''
 						)}
 						onclick={() => {

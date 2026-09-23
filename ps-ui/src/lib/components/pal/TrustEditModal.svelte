@@ -52,7 +52,7 @@
 	initializeTrust();
 </script>
 
-<Card class="text-surface-50 min-w-[min(100vw,24rem)] rounded-xl p-6 shadow-lg">
+<Card class="modal-panel text-surface-50 min-w-[min(100vw,24rem)] rounded-xl p-6 shadow-lg">
 	<h3 class="mb-6 text-lg font-semibold">{m.edit_entity({ entity: m.trust() })}</h3>
 
 	<div class="space-y-6">

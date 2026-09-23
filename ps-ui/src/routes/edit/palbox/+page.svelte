@@ -10,7 +10,7 @@
 		getToastState,
 		getUpsState
 	} from '$states';
-	import { Card, Input, Tooltip } from '$components/ui';
+	import { Card, Input, Popover, Tooltip } from '$components/ui';
 	import { ActionGroup, type ActionDescriptor } from '$components/ui/actions';
 	import {
 		NumberInputModal,
@@ -699,18 +699,6 @@
 		</div>
 
 		<PalFilterButtons bind:selectedFilter />
-
-		<div class="2xl:hidden">
-			<legend class="font-bold">{m.party()}</legend>
-			<hr class="mb-2" />
-			{@render party()}
-		</div>
-
-		<div class="2xl:hidden">
-			<legend class="font-bold">{m.stats()}</legend>
-			<hr class="mb-2" />
-			{@render stats()}
-		</div>
 	</div>
 {/snippet}
 
@@ -752,17 +740,27 @@
 {/snippet}
 
 {#if appState.selectedPlayer}
-	<div
-		class="grid h-full w-full grid-cols-1 gap-2 p-2 2xl:grid-cols-[1fr_20%]"
-		{...additionalProps}
-	>
-		<div class="flex min-h-0 gap-2">
-			<!-- Once something is selected the view's own toolbar carries these
-			     rows; two action surfaces at once would be two phone buttons in
-			     the same corner. -->
-			{#if selectedIds.size === 0}
-				<ActionGroup id="palbox-actions" actions={palboxActions} title={m.quick_actions()} />
-			{/if}
+	<details class="2xl:hidden p-2 border border-surface-600 mx-1 rounded">
+		<summary class="font-bold">{m.party()}</summary>
+		<hr class="mb-2" />
+		{@render party()}
+	</details>
+	<div class="flex h-full w-full gap-2 p-2" {...additionalProps}>
+		<div class="flex min-h-0 w-full gap-2">
+			<ActionGroup id="palbox-actions" actions={palboxActions} title={m.quick_actions()} />
+			<aside class="hidden min-h-0 min-w-100 flex-col gap-2 overflow-y-auto 2xl:flex">
+				<Card rounded="rounded-sm">
+					<h4 class="h4 mb-2">{m.party()}</h4>
+					{@render party()}
+				</Card>
+			</aside>
+
+			<Popover position="right-start" class="mt-3">
+				<Icon icon="tabler:info-circle" class="size-5" title="Info" />
+				{#snippet content()}
+					{@render stats()}
+				{/snippet}
+			</Popover>
 
 			<div class="min-w-0 flex-1">
 				<PalContainerView
@@ -783,16 +781,6 @@
 				/>
 			</div>
 		</div>
-
-		<aside class="hidden min-h-0 flex-col gap-2 overflow-y-auto 2xl:flex">
-			<Card rounded="rounded-sm">
-				<h4 class="h4 mb-2">{m.party()}</h4>
-				{@render party()}
-			</Card>
-			<Card class="min-h-0">
-				{@render stats()}
-			</Card>
-		</aside>
 	</div>
 {:else}
 	<div class="flex w-full items-center justify-center">

@@ -2,6 +2,7 @@
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { fade } from 'svelte/transition';
 	import { getModalState } from '$states';
+	import { layout } from '$utils/layout.svelte';
 	import { cn } from '$theme';
 	import { onMount } from 'svelte';
 	import Button from '../button/Button.svelte';
@@ -67,7 +68,7 @@
 	{@const isTop = depth === modal.stack.length - 1}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<div
-		class={cn('fixed inset-0 flex items-center justify-center', overlayClass)}
+		class={cn('fixed inset-0 flex items-center justify-center p-4', overlayClass)}
 		style="z-index: {50000 + depth * 10}"
 		transition:fade={{ duration: 200 }}
 		onclick={isTop ? handleOutsideClick : undefined}
@@ -78,16 +79,41 @@
 		inert={!isTop}
 		tabindex="-1"
 	>
-		<div class={cn('relative', contentClass, rounded)}>
+		{#snippet closeButton(position: string)}
 			<button
 				type="button"
-				class="bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 absolute top-0 left-full z-20 ml-2 flex size-11 items-center justify-center rounded-full border-2 shadow-lg transition-colors"
+				class={cn(
+					'bg-surface-950 text-surface-200 border-surface-700 hover:bg-surface-800 hover:text-surface-50 z-20 flex size-11 shrink-0 items-center justify-center rounded-full border-2 shadow-lg transition-colors',
+					position
+				)}
 				aria-label={m.close()}
 				onclick={() => modal.closeEntry(entry.id)}
 			>
 				<Icon icon="tabler:x" size={24} />
 			</button>
-			<entry.component {...entry.props} closeModal={(value: any) => modal.closeEntry(entry.id, value)} />
+		{/snippet}
+		<div
+			class={cn(
+				'relative',
+				layout.phone && 'flex max-h-full w-full flex-col',
+				contentClass,
+				rounded
+			)}
+		>
+			<!-- No room beside the panel on a phone; over its corner it would cover content. -->
+			{#if layout.phone}
+				<div class="flex justify-end pb-2">
+					{@render closeButton('')}
+				</div>
+			{:else}
+				{@render closeButton('absolute top-0 left-full ml-2')}
+			{/if}
+			<div class={layout.phone ? 'min-h-0 overflow-y-auto' : 'contents'}>
+				<entry.component
+					{...entry.props}
+					closeModal={(value: any) => modal.closeEntry(entry.id, value)}
+				/>
+			</div>
 		</div>
 	</div>
 {/each}
