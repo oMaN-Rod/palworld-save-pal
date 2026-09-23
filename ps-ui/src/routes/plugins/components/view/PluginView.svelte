@@ -43,14 +43,16 @@
 {/snippet}
 
 {#if groups.length > 1}
-	<div class="grid grid-cols-[25%_1fr] gap-2">
-		<div class="flex max-h-160 flex-col gap-2 overflow-y-auto 2xl:max-h-220">
+	<div class="flex flex-col gap-2 md:grid md:grid-cols-[25%_1fr]">
+		<div
+			class="flex gap-2 overflow-x-auto max-md:shrink-0 md:max-h-160 md:flex-col md:overflow-x-visible md:overflow-y-auto 2xl:max-h-220"
+		>
 			{#each groups as group (group.title)}
 				<button
 					type="button"
 					aria-pressed={group === selected}
 					class={cn(
-						'rounded-sm border p-2 text-left font-medium transition-colors',
+						'min-h-11 shrink-0 rounded-sm border p-2 text-left font-medium whitespace-nowrap transition-colors',
 						group === selected
 							? 'border-primary-500 bg-surface-800'
 							: 'border-surface-700 hover:bg-secondary-500/25'

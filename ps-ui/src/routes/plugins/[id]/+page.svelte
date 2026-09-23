@@ -253,7 +253,7 @@
 	<p class="opacity-70">No such plugin.</p>
 {:else}
 	<div class="flex h-full flex-col gap-3">
-		<div class="flex items-start justify-between gap-4">
+		<div class="flex flex-wrap items-start justify-between gap-4">
 			<div class="min-w-0">
 				<div class="flex items-center gap-2">
 					<h2 class="truncate text-lg font-semibold">{plugin.name}</h2>
@@ -286,14 +286,18 @@
 			</div>
 		</div>
 
-		<div class="border-surface-700 flex gap-1 border-b" role="tablist" aria-label="Plugin pane">
+		<div
+			class="border-surface-700 flex shrink-0 gap-1 overflow-x-auto border-b"
+			role="tablist"
+			aria-label="Plugin pane"
+		>
 			{#each availableModes(plugin) as paneMode (paneMode)}
 				<button
 					type="button"
 					role="tab"
 					aria-selected={mode === paneMode}
 					class={cn(
-						'-mb-px border-b-2 px-3 py-1.5 text-sm',
+						'-mb-px min-h-11 border-b-2 px-3 py-1.5 text-sm whitespace-nowrap',
 						mode === paneMode
 							? 'border-primary-500 text-surface-50 font-medium'
 							: 'text-surface-400 hover:text-surface-200 border-transparent'
@@ -343,7 +347,7 @@
 					{/if}
 				</PluginView>
 			{:else}
-				<div class="grid grid-cols-[25%_1fr] gap-2">
+				<div class="flex flex-col gap-2 md:grid md:grid-cols-[25%_1fr]">
 					<RunPane {plugin} disabled={pluginsData.running !== null} onRun={runCommand} />
 					{#if showResult && pluginsData.lastResult}
 						<RunResult

@@ -9,7 +9,7 @@
 		<a
 			href={categoryHref(category.id)}
 			aria-current={active === category.id ? 'page' : undefined}
-			class="shrink-0 rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors {active ===
+			class="tap-target shrink-0 rounded-md px-3 py-1.5 text-sm whitespace-nowrap transition-colors {active ===
 			category.id
 				? 'bg-surface-700 text-surface-50 font-medium'
 				: 'text-surface-400 hover:bg-surface-800 hover:text-surface-200'}"

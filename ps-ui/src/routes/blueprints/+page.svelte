@@ -17,7 +17,9 @@
 	const messages = m as unknown as Record<string, (() => string) | undefined>;
 
 	function findingText(finding: BlueprintFinding): string {
-		return messages[`blueprint_finding_${finding.code.replaceAll('.', '_')}`]?.() ?? finding.message;
+		return (
+			messages[`blueprint_finding_${finding.code.replaceAll('.', '_')}`]?.() ?? finding.message
+		);
 	}
 
 	let importFiles: FileList | undefined = $state();
@@ -131,18 +133,14 @@
 </script>
 
 <div class="flex flex-col gap-4 p-4">
-	<div class="flex items-center justify-between">
+	<div id="blueprints-header" class="flex flex-wrap items-center justify-between gap-2">
 		<h1 class="text-xl font-semibold">Blueprints</h1>
 		<div class="flex gap-2">
 			<Button onclick={captureNew}>Capture new blueprint</Button>
 		</div>
 	</div>
 
-	<FileDropzone
-		name="blueprint-import"
-		accept=".psbp,.psp,.json,.pstbase"
-		bind:files={importFiles}
-	>
+	<FileDropzone name="blueprint-import" accept=".psbp,.psp,.json,.pstbase" bind:files={importFiles}>
 		{#snippet message()}
 			<h3 class="h3">Import a blueprint</h3>
 			<span>{m.blueprint_import_dropzone_hint()}</span>
@@ -160,34 +158,37 @@
 	{#if blueprintsData.rows.length === 0}
 		<p class="opacity-70">{m.blueprint_import_empty_state()}</p>
 	{:else}
-		<div class="flex flex-col gap-2 max-h-100 2xl:max-h-164 overflow-y-auto">
+		<div class="flex max-h-100 flex-col gap-2 overflow-y-auto 2xl:max-h-164">
 			{#each blueprintsData.rows as row (row.id)}
-				<Card class="flex items-center justify-between gap-4">
-					<div class="min-w-0">
-						<div class="truncate font-medium">{row.name}</div>
-						<div class="truncate text-sm opacity-70">
-							{row.source_world || 'unknown world'} · {row.structure_count} structures · {fmtDate(
-								row.created_at
-							)}
+				<Card>
+					<div
+						id="blueprint-{row.id}"
+						class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+					>
+						<div class="min-w-0">
+							<div class="truncate font-medium">{row.name}</div>
+							<div class="truncate text-sm opacity-70">
+								{row.source_world || 'unknown world'} · {row.structure_count} structures · {fmtDate(
+									row.created_at
+								)}
+							</div>
 						</div>
-					</div>
-					<div class="flex shrink-0 gap-2">
-						<Button
-							onclick={() => placeRow(row)}
-							disabled={!appState.saveFile}
-							title={appState.saveFile ? undefined : 'Load a save first'}
-						>
-							Place
-						</Button>
-						<Button variant="secondary" onclick={() => exportRow(row, 'psbp')}
-							>Export .psbp</Button
-						>
-						<Button variant="ghost" onclick={() => exportRow(row, 'json')}
-							>.json</Button
-						>
-						<Button variant="ghost" title="Delete" onclick={() => deleteRow(row)}>
-							<Icon icon="tabler:trash-x" size={16} />
-						</Button>
+						<div id="blueprint-actions-{row.id}" class="flex flex-wrap gap-2 sm:shrink-0">
+							<Button
+								onclick={() => placeRow(row)}
+								disabled={!appState.saveFile}
+								title={appState.saveFile ? undefined : 'Load a save first'}
+							>
+								Place
+							</Button>
+							<Button variant="secondary" onclick={() => exportRow(row, 'psbp')}
+								>Export .psbp</Button
+							>
+							<Button variant="ghost" onclick={() => exportRow(row, 'json')}>.json</Button>
+							<Button variant="ghost" title="Delete" onclick={() => deleteRow(row)}>
+								<Icon icon="tabler:trash-x" size={16} />
+							</Button>
+						</div>
 					</div>
 				</Card>
 			{/each}

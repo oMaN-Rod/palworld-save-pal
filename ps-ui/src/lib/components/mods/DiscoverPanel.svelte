@@ -9,6 +9,7 @@
 	import NexusAccountCard from './NexusAccountCard.svelte';
 	import NexusDecisionsModal from './NexusDecisionsModal.svelte';
 	import NexusDetailDrawer from './NexusDetailDrawer.svelte';
+	import DetailPresentation from '$components/layout/DetailPresentation.svelte';
 	import NexusModCard from './NexusModCard.svelte';
 	import { nexusErrorText } from './nexusText';
 
@@ -19,6 +20,9 @@
 	const modal = getModalState();
 
 	let selectedId = $state<number | null>(null);
+	const selectedName = $derived(
+		nexusState.results.find((entry) => entry.mod_id === selectedId)?.name ?? ''
+	);
 	let queryText = $state(nexusState.query);
 
 	const refusal = $derived(modsState.lastErrorFor(MessageType.NEXUS_SEARCH));
@@ -189,9 +193,13 @@
 			{/if}
 		</div>
 		{#if selectedId !== null}
-			<div class="order-first lg:order-none">
+			<DetailPresentation
+				class="order-first lg:order-none"
+				title={selectedName}
+				onClose={() => (selectedId = null)}
+			>
 				<NexusDetailDrawer {targetId} modId={selectedId} onClose={() => (selectedId = null)} />
-			</div>
+			</DetailPresentation>
 		{/if}
 	</div>
 </div>

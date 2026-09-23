@@ -8,6 +8,8 @@
 	import { slugify } from '$lib/plugins/pluginId';
 	import { getModalState, getToastState } from '$states';
 	import { Button, FileDropzone } from '$components/ui';
+	import Icon from '$components/ui/icons/Icon.svelte';
+	import { cn } from '$theme';
 	import { TextInputModal } from '$components';
 	import PluginList from './components/PluginList.svelte';
 	import { onMount } from 'svelte';
@@ -111,7 +113,13 @@
 
 <div class="flex h-full w-full flex-col overflow-hidden">
 	<div class="flex flex-1 overflow-hidden">
-		<aside class="border-surface-700 w-72 shrink-0 overflow-y-auto border-r p-3">
+		<aside
+			id="plugins-list"
+			class={cn(
+				'border-surface-700 w-full shrink-0 overflow-y-auto border-r p-3 md:w-72',
+				selectedId && 'max-md:hidden'
+			)}
+		>
 			<Button size="sm" onclick={newPlugin} class="mb-2">New plugin</Button>
 			<FileDropzone
 				name="plugin-install"
@@ -135,13 +143,27 @@
 				<PluginList plugins={pluginsData.plugins} {selectedId} onToggleEnabled={toggleEnabled} />
 			{/if}
 		</aside>
-		<div class="relative flex-1 overflow-hidden">
+		<div
+			id="plugins-detail"
+			class={cn('relative flex-1 overflow-hidden', !selectedId && 'max-md:hidden')}
+		>
 			{#key page.url.pathname}
 				<div
 					class="absolute inset-0 overflow-y-auto p-4"
 					transition:fade={{ duration: 150 }}
 					onoutrostart={(event) => event.currentTarget.classList.add('pointer-events-none')}
 				>
+					{#if selectedId}
+						<button
+							type="button"
+							data-testid="plugins-back"
+							class="text-surface-300 hover:text-surface-50 mb-2 flex min-h-11 items-center gap-1 text-sm md:hidden"
+							onclick={() => goto('/plugins')}
+						>
+							<Icon icon="tabler:chevron-left" class="h-4 w-4" />
+							Plugins
+						</button>
+					{/if}
 					{@render children()}
 				</div>
 			{/key}

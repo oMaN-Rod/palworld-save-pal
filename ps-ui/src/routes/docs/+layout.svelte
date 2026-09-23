@@ -17,7 +17,7 @@
 		{#each tabs as tab}
 			<a
 				href={tab.href}
-				class="rounded-t-md px-4 py-2 text-sm font-medium transition-colors {activeTab === tab.id
+				class="tap-target rounded-t-md px-4 py-2 text-sm font-medium transition-colors {activeTab === tab.id
 					? 'bg-surface-700 text-surface-50'
 					: 'text-surface-400 hover:bg-surface-800 hover:text-surface-200'}"
 			>

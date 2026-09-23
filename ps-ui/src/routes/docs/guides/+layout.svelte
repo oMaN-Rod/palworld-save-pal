@@ -36,7 +36,7 @@
 		{#each guides as guide}
 			<a
 				href={guide.href}
-				class="rounded-md px-3 py-1.5 text-sm transition-colors {activeGuide === guide.slug
+				class="tap-target rounded-md px-3 py-1.5 text-sm transition-colors {activeGuide === guide.slug
 					? 'bg-surface-700 text-surface-50 font-medium'
 					: 'text-surface-400 hover:bg-surface-800 hover:text-surface-200'}"
 			>

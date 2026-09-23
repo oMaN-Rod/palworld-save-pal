@@ -51,7 +51,7 @@
 <span class="inline-flex shrink-0 items-center gap-1.5">
 	<button
 		type="button"
-		class="group shrink-0 cursor-help rounded-full transition-transform duration-200 hover:scale-125 hover:rotate-12"
+		class="tap-target group shrink-0 cursor-help rounded-full transition-transform duration-200 hover:scale-125 hover:rotate-12"
 		title={m.signal_rwby_rose_title()}
 		aria-label={m.signal_rwby_rose_aria()}
 		onclick={() => (loreOpen = true)}

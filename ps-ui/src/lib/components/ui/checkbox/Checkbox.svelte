@@ -19,7 +19,7 @@
 
 <label
 	class={cn(
-		'flex items-center space-x-2',
+		'tap-target flex items-center space-x-2',
 		disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
 		className
 	)}

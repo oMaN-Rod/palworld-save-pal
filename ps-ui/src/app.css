@@ -945,21 +945,36 @@ body::after {
 		min-width: 2.75rem;
 		min-height: 2.75rem;
 	}
-	/* MapLibre ships 29px controls and our own map controls match them so the
-	   group reads as one strip; on touch the whole strip grows together. */
+	.input {
+		min-height: 2.75rem;
+	}
+	[data-scope='switch'][data-part='root'] {
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+	}
+	/* A native checkbox is tapped through its label. */
+	label:has(> input[type='checkbox']),
+	label:has(> input[type='radio']) {
+		min-height: 2.75rem;
+	}
+	.tap-target {
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+	}
+	a.tap-target,
+	button.tap-target {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	/* Grow MapLibre's 29px controls and ours together as one strip. */
 	.maplibregl-ctrl button {
 		min-width: 2.75rem;
 		min-height: 2.75rem;
 	}
 }
 
-/*
- * Modal panels size themselves for a desktop viewport -- `min-w-[400px]`,
- * `min-w-[calc(100vw/3)]`, `w-[650px]` -- which on a phone asks for more width
- * than the screen has. Below the tablet breakpoint the panel is the screen
- * minus a gutter and nothing else, whatever width utilities it carries; above
- * it, those utilities are left alone.
- */
+/* Desktop width utilities on modal panels would overflow a phone. */
 @media (max-width: 767px) {
 	.modal-panel {
 		width: calc(100vw - 2rem);

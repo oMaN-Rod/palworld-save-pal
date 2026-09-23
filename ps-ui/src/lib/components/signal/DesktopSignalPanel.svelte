@@ -120,7 +120,7 @@
 		{/if}
 
 		<div class="ml-auto flex items-center gap-3">
-			<a class="text-primary-400 hover:text-primary-300 text-sm" href="/docs/guides/remote-access">
+			<a class="tap-target text-primary-400 hover:text-primary-300 text-sm" href="/docs/guides/remote-access">
 				{m.signal_how_it_works_link()}
 			</a>
 			<SignalSourcePopover />

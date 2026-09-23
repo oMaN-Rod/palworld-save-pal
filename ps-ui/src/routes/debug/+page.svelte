@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Button, Combobox, Tooltip, TooltipButton } from '$components/ui';
+	import SectionTabs, { panelId, tabId } from '$components/ui/tabs/SectionTabs.svelte';
 	import { buildingsData } from '$lib/data';
 	import { getAppState, getModalState } from '$states';
 	import {
@@ -14,8 +15,8 @@
 		type Pal,
 		type Player
 	} from '$types';
-	import { Switch, Tabs } from '@skeletonlabs/skeleton-svelte';
-	import { onMount } from 'svelte';
+	import { Switch } from '@skeletonlabs/skeleton-svelte';
+	import { onMount, untrack } from 'svelte';
 	import { JSONEditor, type ContextMenuItem } from 'svelte-jsoneditor';
 	import { send, sendAndWait } from '$lib/utils/websocketUtils';
 	import type { CheckedChangeDetails } from '@zag-js/switch';
@@ -57,7 +58,11 @@
 		character_container: { content: { text: '' } },
 		level: { content: { text: '' } }
 	});
+	const SECTION_ID_PREFIX = 'debug';
 	let activePage: RawDataType = $state('guild');
+	const tabs = $derived(
+		(Object.keys(jsons) as RawDataType[]).map((key) => ({ id: key, label: tabTitles[key] }))
+	);
 
 	let guild: Guild | undefined = $state(undefined);
 	let selectedGuildId: string = $state('');
@@ -469,15 +474,16 @@
 		}
 	}
 
-	function handleSwitchTab(e: { value: string }): void {
-		activePage = e.value as RawDataType;
-		if (activePage === 'level') {
-			handleGetRawData(activePage);
-		}
-	}
+	$effect(() => {
+		if (activePage !== 'level') return;
+		untrack(() => handleGetRawData('level'));
+	});
 </script>
 
-<div class="animate-fade-in grid h-full grid-cols-[25%_1fr] gap-2 p-2">
+<div
+	id="debug-shell"
+	class="animate-fade-in flex h-full flex-col gap-2 p-2 md:grid md:grid-cols-[25%_1fr]"
+>
 	<div class="flex flex-col">
 		<Button variant="primary" class="mb-2 flex w-full" onclick={handleReset}>
 			<span class="font-medium">{m.reset()}</span>
@@ -680,31 +686,30 @@
 		{/if}
 	</div>
 
-	<Tabs value={activePage} onValueChange={handleSwitchTab}>
-		{#snippet list()}
-			{#each Object.keys(jsons) as key}
-				<Tabs.Control
-					value={key}
-					stateActive="border-b-secondary-500 opacity-100 text-secondary-500"
-				>
-					{tabTitles[key as RawDataType]}
-				</Tabs.Control>
-			{/each}
-			<Tooltip baseClass="text-end m-auto flex items-center">
-				<span class=" text-red-500">{m.read_only()}</span>
+	<div class="flex min-w-0 flex-col">
+		<div class="flex items-center gap-2">
+			<div class="min-w-0 flex-1">
+				<SectionTabs {tabs} bind:active={activePage} label={m.raw()} idPrefix={SECTION_ID_PREFIX} />
+			</div>
+			<Tooltip baseClass="flex items-center">
+				<span class="text-red-500">{m.read_only()}</span>
 				{#snippet popup()}
 					{m.read_only()}
 				{/snippet}
 			</Tooltip>
-		{/snippet}
-		{#snippet content()}
-			{#each Object.keys(jsons) as key}
-				<Tabs.Panel value={key}>
-					<div class="editor-wrapper">
-						<JSONEditor bind:content={jsons[key as RawDataType].content} {onRenderContextMenu} />
-					</div>
-				</Tabs.Panel>
-			{/each}
-		{/snippet}
-	</Tabs>
+		</div>
+
+		<!-- One editor, not one per tab: each mounts its own parser over the same save. -->
+		<div
+			id={panelId(SECTION_ID_PREFIX, activePage)}
+			role="tabpanel"
+			aria-labelledby={tabId(SECTION_ID_PREFIX, activePage)}
+			tabindex="0"
+			class="min-h-0 flex-1"
+		>
+			<div class="editor-wrapper">
+				<JSONEditor bind:content={jsons[activePage].content} {onRenderContextMenu} />
+			</div>
+		</div>
+	</div>
 </div>

@@ -307,6 +307,21 @@ describe('/mods', () => {
 		expect(nexus.reset).not.toHaveBeenCalled();
 	});
 
+	it('stacks the target list over the panel below the breakpoint', () => {
+		render(ModsPage);
+
+		const shell = document.querySelector('#mods-shell');
+		expect(shell).not.toBeNull();
+		expect(shell?.className).toContain('flex-col');
+		expect(shell?.className).toContain('md:flex-row');
+
+		const list = document.querySelector('#mods-target-list');
+		expect(list?.className).toContain('w-full');
+		expect(list?.className).toContain('md:w-80');
+		const unprefixed = (list?.className ?? '').split(/  */).filter((token) => !token.includes(':'));
+		expect(unprefixed).not.toContain('w-80');
+	});
+
 	it('does not clear an in-flight download just from mounting, only on an actual resets bump', () => {
 		render(ModsPage);
 

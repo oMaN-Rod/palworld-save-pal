@@ -9,12 +9,13 @@
 	import InactiveProfileNotice from './InactiveProfileNotice.svelte';
 	import ModCard from './ModCard.svelte';
 	import ModDetailDrawer from './ModDetailDrawer.svelte';
+	import DetailPresentation from '$components/layout/DetailPresentation.svelte';
 	import { modsViewMode, type ModsView } from './modsView.svelte';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
 	import { nexusErrorText } from './nexusText';
 	import { modTypeLabel as typeLabel } from './modLabels';
-	import { filterMods, inUseProfileIds, sortMods, type ModSort } from './modList';
+	import { displayName, filterMods, inUseProfileIds, sortMods, type ModSort } from './modList';
 
 	let { targetId }: { targetId: string } = $props();
 
@@ -260,9 +261,13 @@
 				{/each}
 			</div>
 			{#if selected}
-				<div class="order-first lg:order-none">
+				<DetailPresentation
+					class="order-first lg:order-none"
+					title={displayName(selected)}
+					onClose={() => (selectedId = null)}
+				>
 					<ModDetailDrawer mod={selected} {targetId} onClose={() => (selectedId = null)} />
-				</div>
+				</DetailPresentation>
 			{/if}
 		</div>
 	{/if}

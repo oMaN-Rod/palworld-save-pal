@@ -62,7 +62,7 @@
 	<button
 		type="button"
 		id="signal-source-button"
-		class="bg-surface-800 hover:bg-surface-700 flex items-center gap-1.5 rounded-sm px-3 py-1.5 text-sm font-medium"
+		class="tap-target bg-surface-800 hover:bg-surface-700 flex items-center gap-1.5 rounded-sm px-3 py-1.5 text-sm font-medium"
 	>
 		<Icon icon="tabler:plug" size={16} class="text-surface-400" />
 		{m.signal_source_settings()}

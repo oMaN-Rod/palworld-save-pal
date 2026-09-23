@@ -3,6 +3,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { getServerState, getModalState } from '$states';
 	import { Button, Card } from '$components/ui';
+	import DetailPresentation from '$components/layout/DetailPresentation.svelte';
 	import {
 		ServerCard,
 		ServerDetailPanel,
@@ -89,8 +90,11 @@
 	}
 </script>
 
-<div class="flex h-full min-h-[calc(100vh-var(--titlebar-h))] w-full gap-4 p-4">
-	<div class="flex w-80 shrink-0 flex-col gap-4">
+<div
+	id="servers-shell"
+	class="flex h-full min-h-[calc(100vh-var(--titlebar-h))] w-full flex-col gap-4 p-4 md:flex-row"
+>
+	<div id="servers-list" class="flex w-full shrink-0 flex-col gap-4 md:w-80">
 		<div class="flex items-center justify-between">
 			<h2 class="heading-gradient text-xl font-bold">Servers</h2>
 			<div class="flex items-center gap-2">
@@ -140,7 +144,12 @@
 		</div>
 	</div>
 
-	<div class="min-w-0 flex-1">
+	<DetailPresentation
+		class="min-w-0 flex-1"
+		active={!!selectedServer}
+		title={selectedServer?.name ?? ''}
+		onClose={() => (serverState.selectedServer = null)}
+	>
 		{#if selectedServer}
 			<ServerDetailPanel server={selectedServer} />
 		{:else}
@@ -151,5 +160,5 @@
 				</div>
 			</div>
 		{/if}
-	</div>
+	</DetailPresentation>
 </div>

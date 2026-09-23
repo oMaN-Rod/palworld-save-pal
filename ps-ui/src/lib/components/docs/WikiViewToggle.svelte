@@ -15,7 +15,7 @@
 		<button
 			type="button"
 			class={cn(
-				'btn btn-sm',
+				'btn btn-sm tap-target',
 				active ? 'bg-secondary-500/25 text-surface-50' : 'text-surface-400'
 			)}
 			onclick={() => (wikiPrefs.viewMode = mode.id)}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { List, Loading, Tooltip } from '$components/ui';
+	import BulkDetailShell from './BulkDetailShell.svelte';
 	import { getAppState, getNavigationState } from '$states';
 	import * as m from '$i18n/messages';
 	import { c } from '$lib/utils/commonTranslations';
@@ -43,88 +44,73 @@
 	}
 </script>
 
-<div
-	class="bg-surface-800/80 text-on-surface h-[calc(100vh-var(--titlebar-h)-84px)] shrink-0 overflow-hidden shadow-lg backdrop-blur-md transition-all duration-300 ease-in-out"
-	style:width={expanded ? '420px' : '0px'}
->
-	<div class="flex h-full w-105 flex-col overflow-y-auto p-4">
-		<div class="mb-3 flex items-center justify-between">
-			<span class="font-semibold">{c.guild}</span>
-			<button
-				class="hover:text-primary-500 rounded p-1"
-				onclick={() => onclose?.()}
-				aria-label={m.close_drawer()}
-			>
-				<Icon icon="tabler:x" class="h-4 w-4" />
-			</button>
+<BulkDetailShell title={c.guild} {expanded} {onclose}>
+	{#if appState.loadingGuild}
+		<div class="flex flex-1 items-center justify-center">
+			<Loading
+				label={m.loading_entity({ entity: c.guild })}
+				loadingComplete={!appState.loadingGuild}
+				icon="tabler:users"
+			/>
 		</div>
-		{#if appState.loadingGuild}
-			<div class="flex flex-1 items-center justify-center">
-				<Loading
-					label={m.loading_entity({ entity: c.guild })}
-					loadingComplete={!appState.loadingGuild}
-					icon="tabler:users"
-				/>
-			</div>
-		{:else if guild}
-			<div class="flex flex-col gap-3">
-				<h3 class="h4">{guild.name}</h3>
-				<dl class="grid grid-cols-2 gap-1 text-sm">
-					<dt>{m.level()}</dt>
-					<dd>{guild.base_camp_level ?? '—'}</dd>
-					<dt>{c.players}</dt>
-					<dd>{guild.players?.length ?? 0}</dd>
-					<dt>{c.bases}</dt>
-					<dd>{guild.bases ? Object.keys(guild.bases).length : 0}</dd>
-				</dl>
-				<div class="flex flex-col gap-1">
-					<h4 class="text-sm font-semibold">{c.players}</h4>
-					<List
-						items={filteredPlayers}
-						idKey="uid"
-						canSelect={false}
-						class="flex flex-col gap-1"
-						headerClass="flex p-0"
-					>
-						{#snippet listHeader()}
-							{#if filteredPlayers.length > 5}
-								<Input
-									bind:value={query}
-									inputClass="my-0"
-									placeholder={m.search_entity({ entity: c.players })}
-								/>
-							{:else}
-								<div></div>
+	{:else if guild}
+		<div class="flex flex-col gap-3">
+			<h3 class="h4">{guild.name}</h3>
+			<dl class="grid grid-cols-2 gap-1 text-sm">
+				<dt>{m.level()}</dt>
+				<dd>{guild.base_camp_level ?? '—'}</dd>
+				<dt>{c.players}</dt>
+				<dd>{guild.players?.length ?? 0}</dd>
+				<dt>{c.bases}</dt>
+				<dd>{guild.bases ? Object.keys(guild.bases).length : 0}</dd>
+			</dl>
+			<div class="flex flex-col gap-1">
+				<h4 class="text-sm font-semibold">{c.players}</h4>
+				<List
+					items={filteredPlayers}
+					idKey="uid"
+					canSelect={false}
+					class="flex flex-col gap-1"
+					headerClass="flex p-0"
+				>
+					{#snippet listHeader()}
+						{#if filteredPlayers.length > 5}
+							<Input
+								bind:value={query}
+								inputClass="my-0"
+								placeholder={m.search_entity({ entity: c.players })}
+							/>
+						{:else}
+							<div></div>
+						{/if}
+					{/snippet}
+					{#snippet listItem(member)}
+						<div class="flex items-center gap-2">
+							<span class="font-bold">Lvl {member?.level ?? '—'}</span>
+							<span class="truncate">{member?.name}</span>
+							{#if guild?.admin_player_uid && guild.admin_player_uid === member.uid}
+								<Tooltip label={m.guild_leader()}>
+									<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
+								</Tooltip>
 							{/if}
-						{/snippet}
-						{#snippet listItem(member)}
-							<div class="flex items-center gap-2">
-								<span class="font-bold">Lvl {member?.level ?? '—'}</span>
-								<span class="truncate">{member?.name}</span>
-								{#if guild?.admin_player_uid && guild.admin_player_uid === member.uid}
-									<Tooltip label={m.guild_leader()}>
-										<Icon icon="tabler:crown" class="text-warning-500 h-3.5 w-3.5 shrink-0" />
-									</Tooltip>
-								{/if}
-							</div>
-						{/snippet}
-						{#snippet listItemActions(member)}
-							<button
-								class="ml-2 text-left text-sm hover:underline"
-								onclick={() => editPlayer(member.uid)}
-							>
-								<Icon icon="tabler:pencil" class="h-4 w-4" />
-							</button>
-						{/snippet}
-					</List>
-				</div>
+						</div>
+					{/snippet}
+					{#snippet listItemActions(member)}
+						<button
+							class="ml-2 text-left text-sm hover:underline"
+							onclick={() => editPlayer(member.uid)}
+						>
+							<Icon icon="tabler:pencil" class="h-4 w-4" />
+						</button>
+					{/snippet}
+				</List>
 			</div>
-		{:else}
-			<div class="flex flex-1 items-center justify-center">
-				<p class="text-surface-400 text-sm">
-					{m.failed_load_entity({ entity: c.guild })}
-				</p>
-			</div>
-		{/if}
-	</div>
-</div>
+		</div>
+	{:else}
+		<div class="flex flex-1 items-center justify-center">
+			<p class="text-surface-400 text-sm">
+				{m.failed_load_entity({ entity: c.guild })}
+			</p>
+		</div>
+	{/if}
+</BulkDetailShell>

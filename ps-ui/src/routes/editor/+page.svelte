@@ -7,6 +7,7 @@
 	import * as m from '$i18n/messages';
 	import { buildEditorTheme, EDITOR_THEME_NAME } from '$components/ui/monaco/paletteTheme';
 	import { getToastState, theme, type ThemeName } from '$states';
+	import { layout } from '$utils/layout.svelte';
 	import { jsonToSav, savToJson } from '$lib/data/convertSav';
 	import { sendAndWait } from '$lib/utils/websocketUtils';
 	import { MessageType } from '$types';
@@ -34,6 +35,12 @@
 	});
 
 	const LARGE_FILE_THRESHOLD = 50 * 1024 * 1024;
+
+	// On a phone the minimap eats a fifth of the width.
+	const editorOptions = $derived({
+		automaticLayout: true,
+		minimap: { enabled: !layout.phone }
+	});
 
 	let isLoading = $state(false);
 	let content: { text: string } | undefined = $state(undefined);
@@ -176,7 +183,7 @@
 
 {#if content}
 	<div class="editor-wrapper">
-		<div class="bg-surface-800 flex gap-2">
+		<div id="editor-toolbar" class="bg-surface-800 flex flex-wrap gap-2 p-1">
 			<button class="toolbar-btn" title="Save SAV file" onclick={handleSave}>
 				<Icon icon="tabler:device-floppy" size={18} />
 				<span>Save</span>
@@ -201,6 +208,7 @@
 				bind:value={content.text}
 				theme={EDITOR_THEME_NAME}
 				themeData={editorThemeData}
+				options={editorOptions}
 				{largeFile}
 			/>
 		</div>
@@ -211,12 +219,14 @@
 			<Spinner />
 			<Stopwatch bind:seconds={elapsed} />
 		{:else}
-			<FileDropzone baseClass="w-1/2 hover:bg-surface-800" name="file" accept=".sav" bind:files>
-				{#snippet message()}
-					<h1 class="h3">Palworld JSON Save Editor</h1>
-					<span>Drag and drop a *.sav file here</span>
-				{/snippet}
-			</FileDropzone>
+			<div id="editor-dropzone" class="w-full max-w-md px-4 sm:w-1/2 sm:max-w-none sm:px-0">
+				<FileDropzone baseClass="w-full hover:bg-surface-800" name="file" accept=".sav" bind:files>
+					{#snippet message()}
+						<h1 class="h3">Palworld JSON Save Editor</h1>
+						<span>Drag and drop a *.sav file here</span>
+					{/snippet}
+				</FileDropzone>
+			</div>
 		{/if}
 	</div>
 {/if}
@@ -250,6 +260,12 @@
 		background-color: rgb(var(--color-surface-700));
 		cursor: pointer;
 		transition: background-color 0.15s;
+	}
+
+	@media (pointer: coarse) {
+		.toolbar-btn {
+			min-height: 2.75rem;
+		}
 	}
 
 	.toolbar-btn:hover {

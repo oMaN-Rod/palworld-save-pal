@@ -51,9 +51,7 @@
 	});
 	const PaldeckSortIcon = $derived.by(() => {
 		if (sortBy !== 'paldeck-index') return 'tabler:arrows-sort';
-		return sortOrder === 'asc'
-			? 'tabler:sort-ascending-numbers'
-			: 'tabler:sort-descending-numbers';
+		return sortOrder === 'asc' ? 'tabler:sort-ascending-numbers' : 'tabler:sort-descending-numbers';
 	});
 
 	function toggleSort(newSortBy: SortBy) {
@@ -86,14 +84,11 @@
 
 	const categoryChipClass = (id: PalCategory) =>
 		cn(
-			'btn btn-sm gap-1',
+			'btn btn-sm tap-target gap-1',
 			selectedCategories.has(id) ? 'bg-secondary-500/25 text-surface-50' : 'text-surface-400'
 		);
 	const elementChipClass = (element: string) =>
-		cn(
-			'btn btn-sm',
-			selectedElement === element ? 'bg-secondary-500/25' : ''
-		);
+		cn('btn btn-sm tap-target', selectedElement === element ? 'bg-secondary-500/25' : '');
 
 	function getElementIcon(element: string): string {
 		const el = elementsData.elements[element];
@@ -178,11 +173,7 @@
 
 				<div class="flex flex-wrap items-center gap-1">
 					{#each CATEGORIES as { id, label } (id)}
-						<button
-							type="button"
-							class={categoryChipClass(id)}
-							onclick={() => toggleCategory(id)}
-						>
+						<button type="button" class={categoryChipClass(id)} onclick={() => toggleCategory(id)}>
 							{#if selectedCategories.has(id)}
 								<Icon icon="tabler:check" class="h-3.5 w-3.5" />
 							{/if}
@@ -194,7 +185,10 @@
 				<div class="flex flex-wrap items-center gap-1">
 					<button
 						type="button"
-						class={cn('btn btn-sm', selectedElement === null ? 'bg-secondary-500/25' : '')}
+						class={cn(
+							'btn btn-sm tap-target',
+							selectedElement === null ? 'bg-secondary-500/25' : ''
+						)}
 						onclick={() => (selectedElement = null)}
 						title="All elements"
 					>

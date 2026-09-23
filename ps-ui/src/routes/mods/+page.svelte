@@ -83,8 +83,11 @@
 </script>
 
 {#if available}
-	<div class="flex h-full min-h-[calc(100vh-var(--titlebar-h))] w-full gap-4 p-4">
-		<div class="flex w-80 shrink-0 flex-col gap-4">
+	<div
+		id="mods-shell"
+		class="flex h-full min-h-[calc(100vh-var(--titlebar-h))] w-full flex-col gap-4 p-4 md:flex-row"
+	>
+		<div id="mods-target-list" class="flex w-full shrink-0 flex-col gap-4 md:w-80">
 			<TargetList selectedId={selected?.id} onselect={select} />
 		</div>
 

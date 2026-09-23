@@ -11,7 +11,7 @@
 		type="text"
 		bind:value
 		{placeholder}
-		class="w-full rounded-md border border-surface-700 bg-surface-800 py-2 pl-10 pr-10 text-sm text-surface-50 placeholder:text-surface-500 focus:border-primary-500 focus:outline-none"
+		class="tap-target w-full rounded-md border border-surface-700 bg-surface-800 py-2 pl-10 pr-10 text-sm text-surface-50 placeholder:text-surface-500 focus:border-primary-500 focus:outline-none"
 	/>
 	{#if value}
 		<button
