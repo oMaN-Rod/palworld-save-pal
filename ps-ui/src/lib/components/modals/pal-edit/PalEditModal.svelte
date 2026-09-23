@@ -713,6 +713,12 @@
 				<div id="pal-header">
 					<PalHeader bind:pal={appState.selectedPal} />
 				</div>
+				<div class="h-40 w-full">
+					<PalModelViewer
+						characterKey={appState.selectedPal.character_key}
+						fallback={palImageFallback}
+					/>
+				</div>
 			</div>
 			<nav
 				id="pal-quick-actions"

@@ -75,4 +75,14 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Pages hide their own quick actions once something is selected, so this is the only way to reach them. -->
+	{#if selectionCount > 0}
+		<div class="bg-surface-800 flex items-center justify-between gap-2 rounded-sm px-3 py-2">
+			<span class="text-sm font-bold">
+				{m.pals_selected_count({ count: selectionCount, pals: m.pal({ count: selectionCount }) })}
+			</span>
+			<ActionGroup {actions} title={m.bulk_actions()} id="pal-container-actions" class="flex-row" />
+		</div>
+	{/if}
 </div>

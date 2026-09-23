@@ -740,14 +740,17 @@
 {/snippet}
 
 {#if appState.selectedPlayer}
-	<details class="2xl:hidden p-2 border border-surface-600 mx-1 rounded">
+	<details class="border-surface-600 mx-1 rounded border p-2 2xl:hidden">
 		<summary class="font-bold">{m.party()}</summary>
 		<hr class="mb-2" />
 		{@render party()}
 	</details>
 	<div class="flex h-full w-full gap-2 p-2" {...additionalProps}>
 		<div class="flex min-h-0 w-full gap-2">
-			<ActionGroup id="palbox-actions" actions={palboxActions} title={m.quick_actions()} />
+			<!-- The view's own toolbar carries these rows once something is selected. -->
+			{#if selectedIds.size === 0}
+				<ActionGroup id="palbox-actions" actions={palboxActions} title={m.quick_actions()} />
+			{/if}
 			<aside class="hidden min-h-0 min-w-100 flex-col gap-2 overflow-y-auto 2xl:flex">
 				<Card rounded="rounded-sm">
 					<h4 class="h4 mb-2">{m.party()}</h4>
