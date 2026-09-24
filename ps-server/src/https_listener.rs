@@ -3,7 +3,7 @@
 //! owns (see `ps_network::https`). Swapped in wherever the policy sets
 //! `https_enabled`; plain HTTP keeps the tokio TcpListener everywhere else.
 use std::io;
-use std::net::SocketAddr;
+use std::net::{IpAddr, SocketAddr};
 use std::path::Path;
 use std::sync::Arc;
 use std::time::Duration;
@@ -57,7 +57,9 @@ impl Listener for TlsListener {
 
 /// Builds the TLS listener over an already-bound TCP listener, loading (or
 /// generating) the self-signed certificate pair from `cert_dir` — the
-/// deployment's app directory, the one place guaranteed writable.
+/// deployment's app directory, the one place guaranteed writable. `extra_ips`
+/// (this host's tailscale addresses) are baked into a NEWLY generated
+/// certificate's SANs; an already-stored pair is reused unchanged.
 ///
 /// The `.tap_io` wrap is load-bearing: axum ships its `Connected`
 /// (ConnectInfo) implementation for TapIo-wrapped listeners keyed on the
@@ -66,8 +68,9 @@ impl Listener for TlsListener {
 pub fn tls_listener(
     tcp: TcpListener,
     cert_dir: &Path,
+    extra_ips: &[IpAddr],
 ) -> anyhow::Result<TapIo<TlsListener, TlsTap>> {
-    let certificate = ps_network::https::ensure_certificate(cert_dir, &[])?;
+    let certificate = ps_network::https::ensure_certificate(cert_dir, extra_ips)?;
     let certs: Vec<CertificateDer<'static>> =
         CertificateDer::pem_slice_iter(certificate.cert_pem.as_bytes())
             .collect::<Result<_, _>>()

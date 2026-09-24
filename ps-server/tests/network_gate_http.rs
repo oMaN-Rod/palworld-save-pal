@@ -563,6 +563,51 @@ async fn removing_an_address_takes_effect_without_a_restart() {
 }
 
 #[tokio::test]
+async fn native_https_marks_the_session_cookie_secure_even_on_loopback() {
+    // The operator unlocking over their own TLS listener (https://localhost)
+    // must not receive a cookie the browser would happily resend over
+    // cleartext after a later config flip.
+    let mut policy = config(ListenMode::Lan, AuthScope::NetworkOnly, true);
+    policy.https_enabled = true;
+    let router = test_router(policy).await;
+    let unlock = router
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "POST",
+            "/api/network/session",
+            r#"{"pin":"4321"}"#,
+        ))
+        .await
+        .unwrap();
+    assert_eq!(unlock.status(), StatusCode::OK);
+    let cookie = unlock
+        .headers()
+        .get("set-cookie")
+        .and_then(|v| v.to_str().ok())
+        .expect("session cookie");
+    assert!(cookie.contains("Secure"), "cookie was {cookie}");
+
+    // Without native HTTPS (and no funnel/forwarding), loopback stays on the
+    // plain-HTTP dev path: no Secure attribute, or curl-on-http drops it.
+    let plain = test_router(config(ListenMode::Lan, AuthScope::NetworkOnly, true)).await;
+    let unlock = plain
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "POST",
+            "/api/network/session",
+            r#"{"pin":"4321"}"#,
+        ))
+        .await
+        .unwrap();
+    let cookie = unlock
+        .headers()
+        .get("set-cookie")
+        .and_then(|v| v.to_str().ok())
+        .expect("session cookie");
+    assert!(!cookie.contains("Secure"), "cookie was {cookie}");
+}
+
+#[tokio::test]
 async fn native_https_and_funnel_cannot_be_saved_together() {
     // Both on would strand Funnel: it forwards to this port over plain
     // HTTP and a TLS listener declines the handshake. The save is refused

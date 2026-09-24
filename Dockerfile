@@ -87,8 +87,13 @@ EXPOSE 5174
 
 # The SPA middleware serves ui/index.html at "/" (200) once the server is up,
 # which makes it a suitable liveness probe without a dedicated health route.
+# The scheme probe tries plain HTTP first and falls back to HTTPS with the
+# self-signed certificate: https_enabled persists in the database volume, so
+# the probe must follow the listener's shape or a healthy container reports
+# itself unhealthy forever.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -fsS -o /dev/null http://127.0.0.1:5174/ || exit 1
+    CMD curl -fsS -o /dev/null http://127.0.0.1:5174/ || \
+        curl -kfsS -o /dev/null https://127.0.0.1:5174/ || exit 1
 
 # The container listener uses all container interfaces so Docker can publish
 # it; the compose file binds the host side to loopback by default, while the

@@ -1161,7 +1161,11 @@ async fn create_session(
     }
     runtime.record_auth_success(client);
     let token = runtime.sessions.issue(ttl);
-    let secure = config.funnel_enabled
+    // Secure whenever the response itself traveled TLS (native HTTPS) or
+    // will travel TLS after an upstream terminator (Funnel/proxy): a cookie
+    // that ever rides a decrypted hop must not be re-sent over cleartext.
+    let secure = config.https_enabled
+        || config.funnel_enabled
         || inbound.forwarded()
         || !ps_network::canonical(peer.ip()).is_loopback()
         || secure_transport_from_headers(&headers);
@@ -1192,7 +1196,8 @@ async fn delete_session(
         runtime.sessions.revoke(&token);
     }
     // Clear the cookie regardless so the browser drops it.
-    let secure = runtime.effective_config().funnel_enabled
+    let secure = runtime.effective_config().https_enabled
+        || runtime.effective_config().funnel_enabled
         || !ps_network::canonical(peer.ip()).is_loopback()
         || secure_transport_from_headers(&headers);
     let suffix = if secure { "; Secure" } else { "" };

@@ -518,9 +518,15 @@ pub async fn start_server_with(
         }
     };
     // Building the TLS listener fails loudly (bad/ungeneratable certificate)
-    // BEFORE the server reports itself as up.
+    // BEFORE the server reports itself as up. A first-generation certificate
+    // bakes in this host's tailscale addresses as SANs; the stored pair wins
+    // afterwards, so this probe only runs while HTTPS is hosted.
     let serve_task = if https_enabled {
-        let listener = crate::https_listener::tls_listener(listener, &app_dir)?;
+        let extra_ips = match tokio::task::spawn_blocking(ps_network::tailscale::detect).await {
+            Ok(status) if status.available => status.ipv4,
+            _ => Vec::new(),
+        };
+        let listener = crate::https_listener::tls_listener(listener, &app_dir, &extra_ips)?;
         tokio::spawn(async move {
             axum::serve(
                 listener,
