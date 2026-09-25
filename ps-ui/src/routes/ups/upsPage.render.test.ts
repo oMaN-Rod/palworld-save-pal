@@ -57,12 +57,10 @@ vi.mock('$components/modals', () => ({
 	PalSelectModal: {}
 }));
 
-// Stubbed rather than rendered: each belongs to a side panel this suite keeps
-// closed, and each pulls in collection/tag/stat fixtures that say nothing
-// about the container.
-vi.mock('./components/UPSCollectionsPanel.svelte', () => ({ default: {} }));
-vi.mock('./components/UPSTagsPanel.svelte', () => ({ default: {} }));
-vi.mock('./components/UPSStatsPanel.svelte', () => ({ default: {} }));
+// Callable no-ops: the phone cases open one.
+vi.mock('./components/UPSCollectionsPanel.svelte', () => ({ default: () => {} }));
+vi.mock('./components/UPSTagsPanel.svelte', () => ({ default: () => {} }));
+vi.mock('./components/UPSStatsPanel.svelte', () => ({ default: () => {} }));
 
 vi.mock('$lib/data', () => ({
 	palsData: {
@@ -469,5 +467,63 @@ describe('ups page', () => {
 		await user.click(screen.getByLabelText('List View'));
 
 		expect(localStorage.getItem('ps-pal-view-ups')).toBe('list');
+	});
+});
+
+describe('ups page on a phone', () => {
+	it('keeps the panel beside the grid on a desktop', async () => {
+		loadPage(3, 3);
+		upsState.showCollectionsPanel = true;
+		renderPage();
+		await tick();
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+		expect(document.querySelector('#ups-panels')).not.toBeNull();
+	});
+
+	it('lifts the open panel into a sheet', async () => {
+		setViewport(390);
+		loadPage(3, 3);
+		renderPage();
+		await tick();
+		upsState.showTagsPanel = true;
+		await tick();
+
+		expect(screen.getByRole('dialog')).not.toBeNull();
+	});
+
+	it('opens on the grid rather than on a panel', async () => {
+		setViewport(390);
+		upsState.showCollectionsPanel = true;
+		loadPage(3, 3);
+		renderPage();
+		await tick();
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+		expect(upsState.showCollectionsPanel).toBe(false);
+	});
+
+	it('closes the panel when the sheet is dismissed', async () => {
+		setViewport(390);
+		loadPage(3, 3);
+		renderPage();
+		await tick();
+		upsState.showStatsPanel = true;
+		await tick();
+
+		await fireEvent.click(screen.getByTestId('sheet-backdrop'));
+
+		expect(upsState.showStatsPanel).toBe(false);
+	});
+
+	it('wraps the header rather than squeezing the title', async () => {
+		setViewport(390);
+		loadPage(3, 3);
+		renderPage();
+		await tick();
+
+		const header = document.querySelector('#ups-header');
+		expect(header).not.toBeNull();
+		expect(header?.className).toContain('flex-wrap');
 	});
 });

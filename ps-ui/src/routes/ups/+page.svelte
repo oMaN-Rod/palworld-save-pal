@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { Accordion } from '@skeletonlabs/skeleton-svelte';
 
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
@@ -13,6 +14,8 @@
 		PalSelectModal
 	} from '$components/modals';
 	import { PalContainerView } from '$components/pal/container';
+	import DetailPresentation from '$components/layout/DetailPresentation.svelte';
+	import { layout } from '$utils/layout.svelte';
 	import type {
 		PalContainerSelection,
 		PalContainerServerPaging
@@ -54,6 +57,22 @@
 	const appState = getAppState();
 	const palEditor = getPalEditorState();
 	const toast = getToastState();
+
+	const openPanel = $derived(
+		upsState.showCollectionsPanel
+			? { title: m.collection({ count: 2 }) }
+			: upsState.showTagsPanel
+				? { title: c.tags }
+				: upsState.showStatsPanel
+					? { title: m.statistics() }
+					: null
+	);
+
+	// The collections panel opens by default, which on a phone covers the grid.
+	$effect(() => {
+		if (!layout.phone) return;
+		untrack(() => upsState.closePanels());
+	});
 
 	let searchInput = $state('');
 	let searchTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
@@ -952,10 +971,10 @@
 {/snippet}
 
 <div class="animate-fade-in flex h-full flex-col">
-	<div class="flex items-center justify-between gap-3 px-4 pt-4">
-		<div class="flex items-center gap-2">
+	<div id="ups-header" class="flex flex-wrap items-center justify-between gap-3 px-4 pt-4">
+		<div class="flex min-w-0 items-center gap-2">
 			<Icon icon="tabler:database" size={20} class="text-primary-400" />
-			<div>
+			<div class="min-w-0">
 				<h1 class="heading-gradient text-xl font-bold">
 					{m.universal_pal_storage({ pal: c.pal })}
 				</h1>
@@ -966,7 +985,7 @@
 			</div>
 		</div>
 
-		<div class="flex items-center gap-2">
+		<div class="flex flex-wrap items-center gap-2">
 			<TooltipButton
 				onclick={handleAddPal}
 				variant="secondary"
@@ -990,7 +1009,7 @@
 			{#if upsState.pagination.totalCount > 0}
 				<TooltipButton popupLabel={m.nuke_ups({ pals: c.pals })}>
 					<button
-						class="text-error-500 hover:bg-error-500/20 hover:text-error-400 h-8 w-8 rounded-md p-2 transition-colors"
+						class="tap-target text-error-500 hover:bg-error-500/20 hover:text-error-400 h-8 w-8 rounded-md p-2 transition-colors"
 						onclick={handleNukeUps}
 						disabled={upsState.loading}
 					>
@@ -1032,18 +1051,24 @@
 	</div>
 
 	<div class="flex flex-1 overflow-hidden">
-		{#if upsState.showCollectionsPanel || upsState.showTagsPanel || upsState.showStatsPanel}
-			<div class="animate-slide-down flex w-full flex-col gap-2 p-4 sm:w-72 sm:flex-none md:w-80">
-				{#if upsState.showCollectionsPanel}
-					<UPSCollectionsPanel />
-				{/if}
-				{#if upsState.showTagsPanel}
-					<UPSTagsPanel />
-				{/if}
-				{#if upsState.showStatsPanel}
-					<UPSStatsPanel />
-				{/if}
-			</div>
+		{#if openPanel}
+			<DetailPresentation
+				class="animate-slide-down flex w-full flex-col gap-2 p-4 sm:w-72 sm:flex-none md:w-80"
+				title={openPanel.title}
+				onClose={() => upsState.closePanels()}
+			>
+				<div id="ups-panels" class="flex flex-col gap-2">
+					{#if upsState.showCollectionsPanel}
+						<UPSCollectionsPanel />
+					{/if}
+					{#if upsState.showTagsPanel}
+						<UPSTagsPanel />
+					{/if}
+					{#if upsState.showStatsPanel}
+						<UPSStatsPanel />
+					{/if}
+				</div>
+			</DetailPresentation>
 		{/if}
 
 		<div class="flex min-h-0 min-w-0 flex-1 flex-col p-2">
@@ -1064,7 +1089,7 @@
 					<p class="text-surface-400 mb-4 max-w-md">
 						{m.create_pals_or_import({ pals: c.pals })}
 					</p>
-					<div class="flex gap-3">
+					<div class="flex flex-wrap justify-center gap-3">
 						<Button variant="secondary" onclick={handleAddPal}>
 							<Icon icon="tabler:plus" class="h-4 w-4" />
 							{m.add_new_pal({ pal: c.pal })}

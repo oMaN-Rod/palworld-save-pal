@@ -10,6 +10,7 @@
 	import { Button, FileDropzone } from '$components/ui';
 	import Icon from '$components/ui/icons/Icon.svelte';
 	import { cn } from '$theme';
+	import { layout } from '$utils/layout.svelte';
 	import { TextInputModal } from '$components';
 	import PluginList from './components/PluginList.svelte';
 	import { onMount } from 'svelte';
@@ -120,7 +121,9 @@
 				selectedId && 'max-md:hidden'
 			)}
 		>
-			<Button size="sm" onclick={newPlugin} class="mb-2">New plugin</Button>
+			{#if !layout.phone}
+				<Button size="sm" onclick={newPlugin} class="mb-2">New plugin</Button>
+			{/if}
 			<FileDropzone
 				name="plugin-install"
 				accept=".lua,.zip"

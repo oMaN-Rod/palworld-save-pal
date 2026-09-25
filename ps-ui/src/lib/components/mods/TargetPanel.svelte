@@ -311,7 +311,10 @@
 			</p>
 		{/if}
 
-		<div class="border-surface-700 flex gap-1 border-b" role="tablist">
+		<div
+			class="border-surface-700 flex shrink-0 gap-1 overflow-x-auto overscroll-x-contain border-b"
+			role="tablist"
+		>
 			{#each tabs as entry (entry.id)}
 				<button
 					id={`${tabsId}-${entry.id}`}
@@ -320,7 +323,7 @@
 					aria-controls={`${tabsId}-panel`}
 					tabindex={tab === entry.id ? 0 : -1}
 					class={cn(
-						'flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors',
+						'flex shrink-0 items-center gap-2 px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors',
 						tab === entry.id
 							? 'border-b-2'
 							: 'text-surface-400 hover:text-surface-200 border-b-2 border-transparent'

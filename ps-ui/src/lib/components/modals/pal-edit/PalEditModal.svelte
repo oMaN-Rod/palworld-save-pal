@@ -749,7 +749,7 @@
 					<PalHeader bind:pal={appState.selectedPal} />
 				</div>
 				<div class="flex grow gap-2">
-					<div class="min-w-0 grow">
+					<div class={layout.desktop ? 'w-96 shrink-0 2xl:w-md' : 'min-w-0 grow'}>
 						<SectionShell
 							sections={shellSections}
 							presentation={presentationFor(layout.deviceClass)}

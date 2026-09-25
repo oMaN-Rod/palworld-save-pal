@@ -554,6 +554,12 @@ class UPSStateClass {
 		this.showTagsPanel = false;
 	}
 
+	closePanels(): void {
+		this.showCollectionsPanel = false;
+		this.showTagsPanel = false;
+		this.showStatsPanel = false;
+	}
+
 	reset(): void {
 		this.pals = [];
 		this.collections = [];

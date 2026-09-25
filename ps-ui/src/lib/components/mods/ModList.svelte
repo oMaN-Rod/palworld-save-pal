@@ -247,7 +247,7 @@
 			<div
 				data-view={modsViewMode.current}
 				class={modsViewMode.current === 'grid'
-					? 'grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-3'
+					? 'grid grid-cols-2 gap-2 md:grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] md:gap-3'
 					: 'flex flex-col gap-2'}
 			>
 				{#each visible as mod (mod.id)}

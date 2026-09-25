@@ -5,6 +5,7 @@
 	import { cn } from '$theme';
 	import type { Snippet } from 'svelte';
 	import * as m from '$i18n/messages';
+	import { anchoredPopup, portal } from '$utils';
 
 	let {
 		options = [],
@@ -39,6 +40,8 @@
 	let selected = $state(typeof _value === 'string' ? _value : _value.toString());
 	let isOpen = $state(false);
 	let containerRef: HTMLDivElement;
+	let triggerRef = $state<HTMLDivElement>();
+	let popupRef = $state<HTMLDivElement>();
 	let listboxId = nanoid();
 
 	$effect(() => {
@@ -67,6 +70,7 @@
 	function handleOptionClick(option: SelectOption) {
 		if (!disabled) {
 			selected = option.value.toString();
+			isOpen = false;
 		}
 	}
 
@@ -120,7 +124,8 @@
 
 	$effect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (containerRef && !containerRef.contains(event.target as Node)) {
+			const target = event.target as Node;
+			if (containerRef && !containerRef.contains(target) && !popupRef?.contains(target)) {
 				isOpen = false;
 			}
 		};
@@ -140,6 +145,7 @@
 		</span>
 	{/if}
 	<div
+		bind:this={triggerRef}
 		class={selectClass}
 		tabindex={disabled ? -1 : 0}
 		onkeydown={handleKeyDown}
@@ -160,8 +166,11 @@
 		</div>
 		{#if isOpen}
 			<div
+				bind:this={popupRef}
+				{@attach portal()}
+				{@attach anchoredPopup(triggerRef, 600)}
 				id={listboxId}
-				class="bg-surface-800 border-surface-600 absolute right-0 left-0 z-50 mt-1 max-h-[600px] overflow-y-scroll rounded-xs border shadow-lg"
+				class="bg-surface-800 border-surface-600 z-[99999] overflow-y-auto rounded-xs border shadow-lg"
 				role="listbox"
 			>
 				{#each options as option}

@@ -1,7 +1,10 @@
 <script lang="ts">
 	import Icon from '$lib/components/ui/icons/Icon.svelte';
 	import { Seo } from '$lib/components/seo';
-	import { onMount } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
+	import { BottomSheet } from '$components/ui/sheet';
+	import type { SheetSnap } from '$components/ui/sheet/sheetSnap';
+	import { layout } from '$utils/layout.svelte';
 	import * as m from '$i18n/messages';
 	import { getAppState } from '$states/appState.svelte';
 	import { isWebBuild } from '$lib/utils/platform';
@@ -125,6 +128,8 @@
 	let graphLayout = $state<GraphLayout>('all-in-one');
 	let currentGen = $state(1);
 	let sidePanelCollapsed = $state(false);
+	let controlsOpen = $state(false);
+	let controlsSnap = $state<SheetSnap>('half');
 	let graphViewMode = $state<LayoutMode>('dendrogram');
 
 	const chainTrees = $derived<TreeNode[]>(
@@ -570,9 +575,49 @@
 					<Icon icon="tabler:alert-triangle" size={13} class="shrink-0" /><span>{error}</span>
 				</div>
 			{/if}
+			{#snippet directPanel(inSheet: boolean)}
+				<BreedingSidePanel
+					mode="direct"
+					chains={[]}
+					{pals}
+					activeChainIndex={0}
+					{directSub}
+					ondirectSubChange={(s) => (directSub = s as DirectSub)}
+					{parentA}
+					onparentAChange={(t) => (parentA = t)}
+					{parentB}
+					onparentBChange={(t) => (parentB = t)}
+					{directTarget}
+					ondirectTargetChange={(t) => (directTarget = t)}
+					{canRunDirect}
+					{directLoading}
+					oncomputeDirect={() => {
+						controlsOpen = false;
+						runDirect();
+					}}
+					chainTarget={null}
+					chainGender={null}
+					{chainGens}
+					{chainMaxResults}
+					selectedPool={[]}
+					players={[]}
+					ownerUid={null}
+					includeWild={false}
+					saveLoaded={false}
+					computing={false}
+					canRunChain={false}
+					{error}
+					{palMap}
+					{passiveName}
+					selectedNode={selectedNodeDetail}
+					showHeader={!inSheet}
+					collapsed={!inSheet && sidePanelCollapsed}
+					oncollapsedChange={(v) => (sidePanelCollapsed = v)}
+				/>
+			{/snippet}
 			<div class="flex min-h-0 flex-1 gap-4">
 				<div
-					class="border-surface-700/30 bg-surface-950/20 min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border"
+					class="border-surface-700/30 bg-surface-950/20 relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border"
 				>
 					{#if directTrees.length}
 						<GraphView
@@ -593,48 +638,25 @@
 							{m.breeding_select_parents_hint()}
 						</div>
 					{/if}
+					{#if layout.phone}
+						{@render controlsButton()}
+					{/if}
 				</div>
-				<div class="{sidePanelCollapsed ? 'w-10' : 'w-64'} shrink-0 transition-all duration-200">
-					<div
-						class="border-surface-700/20 bg-surface-900/90 h-full overflow-hidden rounded-md border shadow-xl backdrop-blur-sm"
-					>
-						<BreedingSidePanel
-							mode="direct"
-							chains={[]}
-							{pals}
-							activeChainIndex={0}
-							{directSub}
-							ondirectSubChange={(s) => (directSub = s as DirectSub)}
-							{parentA}
-							onparentAChange={(t) => (parentA = t)}
-							{parentB}
-							onparentBChange={(t) => (parentB = t)}
-							{directTarget}
-							ondirectTargetChange={(t) => (directTarget = t)}
-							{canRunDirect}
-							{directLoading}
-							oncomputeDirect={runDirect}
-							chainTarget={null}
-							chainGender={null}
-							{chainGens}
-							{chainMaxResults}
-							selectedPool={[]}
-							players={[]}
-							ownerUid={null}
-							includeWild={false}
-							saveLoaded={false}
-							computing={false}
-							canRunChain={false}
-							{error}
-							{palMap}
-							{passiveName}
-							selectedNode={selectedNodeDetail}
-							collapsed={sidePanelCollapsed}
-							oncollapsedChange={(v) => (sidePanelCollapsed = v)}
-						/>
-					</div>
-				</div>
+				{#if !layout.phone}
+					{@render sidePanelColumn(directPanel, 'w-64')}
+				{/if}
 			</div>
+			{#if layout.phone}
+				<BottomSheet
+					open={controlsOpen}
+					bind:snap={controlsSnap}
+					snaps={['half', 'tall']}
+					title={m.breeding_controls()}
+					onClose={() => (controlsOpen = false)}
+				>
+					{@render directPanel(true)}
+				</BottomSheet>
+			{/if}
 		{:else if chainViewMode === 'list'}
 			<div class="space-y-4">
 				{#if mode === 'save' && !appState.saveFile}
@@ -830,9 +852,52 @@
 				</p>
 			{/each}
 
+			{#snippet chainPanel(inSheet: boolean)}
+				<BreedingSidePanel
+					mode={mode === 'save' ? 'save' : 'selection'}
+					{pals}
+					showHeader={!inSheet}
+					collapsed={!inSheet && sidePanelCollapsed}
+					oncollapsedChange={(v) => (sidePanelCollapsed = v)}
+					{chains}
+					{activeChainIndex}
+					onactiveChainIndexChange={(idx) => (activeChainIndex = idx)}
+					{chainTarget}
+					onchainTargetChange={(t) => (chainTarget = t)}
+					{chainGender}
+					onchainGenderChange={(g) => (chainGender = g)}
+					{chainGens}
+					onchainGensChange={(n) => (chainGens = n)}
+					{chainMaxResults}
+					onchainMaxResultsChange={(n) => (chainMaxResults = n)}
+					{selectedPool}
+					onaddToPool={(t) => addToPool(t)}
+					onremoveFromPool={(t) => removeFromPool(t)}
+					onsetPoolGender={(t, g) => setPoolGender(t, g)}
+					{players}
+					{ownerUid}
+					onownerUidChange={(uid) => {
+						ownerUid = uid;
+						clearSaveResults();
+					}}
+					{includeWild}
+					onincludeWildChange={(val) => (includeWild = val)}
+					saveLoaded={!!appState.saveFile}
+					{computing}
+					{canRunChain}
+					oncompute={() => {
+						controlsOpen = false;
+						runChain();
+					}}
+					{error}
+					{palMap}
+					{passiveName}
+					selectedNode={selectedNodeDetail}
+				/>
+			{/snippet}
 			<div class="flex min-h-0 flex-1 gap-4">
 				<div
-					class="border-surface-700/30 bg-surface-950/20 min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border"
+					class="border-surface-700/30 bg-surface-950/20 relative min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border"
 				>
 					<GraphView
 						trees={chainTrees}
@@ -849,51 +914,46 @@
 						{maxDepth}
 						onselect={(node) => (selectedTreeNode = node)}
 					/>
+					{#if layout.phone}
+						{@render controlsButton()}
+					{/if}
 				</div>
-				<div class="{sidePanelCollapsed ? 'w-10' : 'w-80'} shrink-0 transition-all duration-200">
-					<div
-						class="border-surface-700/20 bg-surface-900/90 h-full overflow-hidden rounded-md border shadow-xl backdrop-blur-sm"
-					>
-						<BreedingSidePanel
-							mode={mode === 'save' ? 'save' : 'selection'}
-							{pals}
-							collapsed={sidePanelCollapsed}
-							oncollapsedChange={(v) => (sidePanelCollapsed = v)}
-							{chains}
-							{activeChainIndex}
-							onactiveChainIndexChange={(idx) => (activeChainIndex = idx)}
-							{chainTarget}
-							onchainTargetChange={(t) => (chainTarget = t)}
-							{chainGender}
-							onchainGenderChange={(g) => (chainGender = g)}
-							{chainGens}
-							onchainGensChange={(n) => (chainGens = n)}
-							{chainMaxResults}
-							onchainMaxResultsChange={(n) => (chainMaxResults = n)}
-							{selectedPool}
-							onaddToPool={(t) => addToPool(t)}
-							onremoveFromPool={(t) => removeFromPool(t)}
-							onsetPoolGender={(t, g) => setPoolGender(t, g)}
-							{players}
-							{ownerUid}
-							onownerUidChange={(uid) => {
-								ownerUid = uid;
-								clearSaveResults();
-							}}
-							{includeWild}
-							onincludeWildChange={(val) => (includeWild = val)}
-							saveLoaded={!!appState.saveFile}
-							{computing}
-							{canRunChain}
-							oncompute={runChain}
-							{error}
-							{palMap}
-							{passiveName}
-							selectedNode={selectedNodeDetail}
-						/>
-					</div>
-				</div>
+				{#if !layout.phone}
+					{@render sidePanelColumn(chainPanel, 'w-80')}
+				{/if}
 			</div>
+			{#if layout.phone}
+				<BottomSheet
+					open={controlsOpen}
+					bind:snap={controlsSnap}
+					snaps={['half', 'tall']}
+					title={m.breeding_controls()}
+					onClose={() => (controlsOpen = false)}
+				>
+					{@render chainPanel(true)}
+				</BottomSheet>
+			{/if}
 		{/if}
 	</div>
 </div>
+
+{#snippet sidePanelColumn(panel: Snippet<[boolean]>, width: string)}
+	<div class="{sidePanelCollapsed ? 'w-10' : width} shrink-0 transition-all duration-200">
+		<div
+			class="border-surface-700/20 bg-surface-900/90 h-full overflow-hidden rounded-md border shadow-xl backdrop-blur-sm"
+		>
+			{@render panel(false)}
+		</div>
+	</div>
+{/snippet}
+
+{#snippet controlsButton()}
+	<button
+		type="button"
+		class="bg-primary-500 text-surface-950 absolute right-3 bottom-3 flex size-12 items-center justify-center rounded-full shadow-lg"
+		aria-label={m.breeding_controls()}
+		onclick={() => (controlsOpen = true)}
+	>
+		<Icon icon="tabler:adjustments" size={22} />
+	</button>
+{/snippet}

@@ -132,7 +132,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4 p-4">
+<div class="flex h-full flex-col gap-4 p-4">
 	<div id="blueprints-header" class="flex flex-wrap items-center justify-between gap-2">
 		<h1 class="text-xl font-semibold">Blueprints</h1>
 		<div class="flex gap-2">
@@ -158,7 +158,7 @@
 	{#if blueprintsData.rows.length === 0}
 		<p class="opacity-70">{m.blueprint_import_empty_state()}</p>
 	{:else}
-		<div class="flex max-h-100 flex-col gap-2 overflow-y-auto 2xl:max-h-164">
+		<div class="flex min-h-64 flex-1 flex-col gap-2 overflow-y-auto">
 			{#each blueprintsData.rows as row (row.id)}
 				<Card>
 					<div

@@ -87,6 +87,7 @@
 	});
 </script>
 
+<!-- `|global`: call sites gate this sheet in a parent block, so a local transition would never play. -->
 {#if open}
 	{#if modal}
 		<div
@@ -94,14 +95,14 @@
 			data-testid="sheet-backdrop"
 			onclick={onClose}
 			role="presentation"
-			transition:fade={{ duration: 150 }}
+			transition:fade|global={{ duration: 150 }}
 		></div>
 	{/if}
 
 	<div
 		bind:this={dialogEl}
 		class={cn(
-			'bg-surface-800 border-surface-600 inset-x-0 bottom-0 flex flex-col rounded-t-2xl border-t shadow-2xl',
+			'bg-surface-800 border-surface-600 inset-x-0 bottom-0 flex flex-col rounded-t-2xl border-t shadow-2xl transition-[height] duration-200 ease-out',
 			modal ? 'fixed z-[50001]' : 'absolute z-10'
 		)}
 		style:height="{SHEET_SNAP_VH[snap]}vh"
@@ -109,7 +110,7 @@
 		role="dialog"
 		aria-modal={modal ? 'true' : undefined}
 		aria-labelledby={titleId}
-		transition:fly={{ y: 400, duration: 220, easing: cubicOut }}
+		transition:fly|global={{ y: '100%', duration: 260, opacity: 1, easing: cubicOut }}
 	>
 		<button
 			type="button"

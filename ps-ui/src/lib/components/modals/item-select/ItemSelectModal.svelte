@@ -200,7 +200,7 @@
 		<div class={controlsClass}>
 			<div class="w-full">
 				<div class="flex flex-row items-center">
-					<Combobox options={selectOptions} bind:value={itemId} viewportClass="h-50 2xl:h-100">
+					<Combobox options={selectOptions} bind:value={itemId}>
 						{#snippet selectOption(option)}
 							{@const item = itemsData.getByKey(option.value as string)}
 							{#await getItemIcon(option.value as string) then icon}

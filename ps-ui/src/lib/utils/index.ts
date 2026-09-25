@@ -1,3 +1,4 @@
+export * from './anchoredPopup';
 export * from './assetLoader';
 export * from './colors';
 export * from './debounce';

@@ -6,15 +6,16 @@
 	import { publicNavItems, activePublicNavId } from './publicNavItems';
 	import { browser } from '$app/environment';
 	import { detectBrowser } from '$lib/utils/browserIdentity';
+	import { layout } from '$lib/utils/layout.svelte';
 
 	const activeId = $derived(activePublicNavId(page.url.pathname));
 
 	const agent = browser
 		? detectBrowser()
 		: { family: 'unknown' as const, name: 'this browser', mobile: false };
-	const isMobile = agent.mobile;
+	const isMobile = $derived(agent.mobile || layout.phone);
 
-	const navItems = $derived(publicNavItems.filter(item => !(isMobile && item.hideOnMobile)));
+	const navItems = $derived(publicNavItems.filter((item) => !(isMobile && item.hideOnMobile)));
 </script>
 
 <nav class="public-nav">

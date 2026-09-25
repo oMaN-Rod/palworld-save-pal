@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import '$utils/__tests__/fixtures/animatePolyfill';
 import { render, screen, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { tick } from 'svelte';

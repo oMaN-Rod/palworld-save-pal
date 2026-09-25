@@ -6,6 +6,7 @@
 	import { onMount, type Snippet } from 'svelte';
 	import SvelteVirtualList from '@humanspeak/svelte-virtual-list';
 	import * as m from '$i18n/messages';
+	import { anchoredPopup, portal } from '$utils';
 
 	let {
 		options = [],
@@ -40,6 +41,8 @@
 
 	let isOpen = $state(false);
 	let containerRef: HTMLDivElement;
+	let triggerRef = $state<HTMLDivElement>();
+	let popupRef = $state<HTMLDivElement>();
 	let listboxId = nanoid();
 	let searchTerm = $state('');
 	let isUserSearching = $state(false);
@@ -150,7 +153,8 @@
 
 	onMount(() => {
 		const handleClickOutside = (event: MouseEvent) => {
-			if (containerRef && !containerRef.contains(event.target as Node)) {
+			const target = event.target as Node;
+			if (containerRef && !containerRef.contains(target) && !popupRef?.contains(target)) {
 				isOpen = false;
 			}
 		};
@@ -174,6 +178,7 @@
 		</span>
 	{/if}
 	<div
+		bind:this={triggerRef}
 		class={selectClass}
 		tabindex={disabled ? -1 : 0}
 		onkeydown={handleKeyDown}
@@ -206,9 +211,12 @@
 		</div>
 		{#if isOpen}
 			<div
+				bind:this={popupRef}
+				{@attach portal()}
+				{@attach anchoredPopup(triggerRef)}
 				id={listboxId}
 				class={cn(
-					'bg-surface-900 border-surface-600 select-popup absolute right-0 left-0 z-50 mt-3 h-50 rounded-xs border shadow-lg',
+					'bg-surface-900 border-surface-600 select-popup h-72 rounded-xs border shadow-lg',
 					_viewportClass
 				)}
 				role="listbox"

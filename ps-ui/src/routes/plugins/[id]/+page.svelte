@@ -3,6 +3,7 @@
 	import { goto, replaceState } from '$app/navigation';
 	import { onDestroy, untrack } from 'svelte';
 	import { cn } from '$theme';
+	import { layout } from '$utils/layout.svelte';
 	import { PLUGIN_WALL_CLOCK_LIMIT_SECONDS, pluginsData } from '$lib/data';
 	import { pluginEditor } from '$lib/plugins/pluginEditor.svelte';
 	import { slugify } from '$lib/plugins/pluginId';
@@ -37,7 +38,9 @@
 		page.url.href;
 		modeOverride = null;
 	});
-	const mode = $derived(modeOverride ?? resolveMode(page.url.searchParams.get('mode'), plugin));
+	const mode: PaneMode = $derived(
+		layout.phone ? 'run' : (modeOverride ?? resolveMode(page.url.searchParams.get('mode'), plugin))
+	);
 
 	let pendingApply: { commandId: string; args: Record<string, unknown> } | null = $state(null);
 	let resultPluginId: string | null = $state(null);
@@ -279,35 +282,40 @@
 
 			<div class="flex items-center gap-2">
 				<Button variant="ghost" size="sm" onclick={exportPlugin}>Export</Button>
-				<Button variant="ghost" size="sm" onclick={clonePlugin}>Clone</Button>
+				{#if !layout.phone}
+					<Button variant="ghost" size="sm" onclick={clonePlugin}>Clone</Button>
+				{/if}
 				{#if !plugin.bundled}
 					<Button variant="ghost" size="sm" onclick={uninstall}>Uninstall</Button>
 				{/if}
 			</div>
 		</div>
 
-		<div
-			class="border-surface-700 flex shrink-0 gap-1 overflow-x-auto border-b"
-			role="tablist"
-			aria-label="Plugin pane"
-		>
-			{#each availableModes(plugin) as paneMode (paneMode)}
-				<button
-					type="button"
-					role="tab"
-					aria-selected={mode === paneMode}
-					class={cn(
-						'-mb-px min-h-11 border-b-2 px-3 py-1.5 text-sm whitespace-nowrap',
-						mode === paneMode
-							? 'border-primary-500 text-surface-50 font-medium'
-							: 'text-surface-400 hover:text-surface-200 border-transparent'
-					)}
-					onclick={() => selectMode(paneMode)}
-				>
-					{MODE_LABELS[paneMode]}
-				</button>
-			{/each}
-		</div>
+		<!-- A phone gets no code editor, so Run is the only pane and needs no tab. -->
+		{#if !layout.phone}
+			<div
+				class="border-surface-700 flex shrink-0 gap-1 overflow-x-auto border-b"
+				role="tablist"
+				aria-label="Plugin pane"
+			>
+				{#each availableModes(plugin) as paneMode (paneMode)}
+					<button
+						type="button"
+						role="tab"
+						aria-selected={mode === paneMode}
+						class={cn(
+							'-mb-px min-h-11 border-b-2 px-3 py-1.5 text-sm whitespace-nowrap',
+							mode === paneMode
+								? 'border-primary-500 text-surface-50 font-medium'
+								: 'text-surface-400 hover:text-surface-200 border-transparent'
+						)}
+						onclick={() => selectMode(paneMode)}
+					>
+						{MODE_LABELS[paneMode]}
+					</button>
+				{/each}
+			</div>
+		{/if}
 		<div class="flex flex-col gap-3">
 			{#if pluginsData.running}
 				<div class="border-surface-700 flex items-center justify-between rounded-sm border p-2">

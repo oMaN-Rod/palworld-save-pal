@@ -1,9 +1,10 @@
-import * as m from '$i18n/messages';
 import { browser } from '$app/environment';
-import { c } from '$lib/utils/commonTranslations';
-import { isWebBuild } from '$lib/utils/platform';
+import * as m from '$i18n/messages';
 import { getRemoteMode } from '$lib/signal/remoteMode.svelte';
 import { getWebSignalSession } from '$lib/signal/webSession';
+import { c } from '$lib/utils/commonTranslations';
+import { layout } from '$lib/utils/layout.svelte';
+import { isWebBuild } from '$lib/utils/platform';
 import { getSignalState, type AppState } from '$states';
 
 export type NavSection = 'header' | 'tiles' | 'footer';
@@ -58,7 +59,8 @@ export const navItems: NavItem[] = [
 		icon: () => 'tabler:device-floppy',
 		label: () => c.save,
 		action: 'save',
-		visible: (ctx) => Boolean(ctx.appState.saveFile) && ctx.desktop
+		// A remote session's save lives on the desktop host, so it saves the same way.
+		visible: (ctx) => Boolean(ctx.appState.saveFile) && (ctx.desktop || getRemoteMode().active)
 	},
 	{
 		id: 'eject',
@@ -183,7 +185,8 @@ export const navItems: NavItem[] = [
 		group: 'tools',
 		icon: () => 'tabler:notebook',
 		label: () => m.editor(),
-		href: '/editor'
+		href: '/editor',
+		visible: () => !layout.phone
 	},
 	{
 		id: 'plugins',
@@ -216,7 +219,8 @@ export const navItems: NavItem[] = [
 		group: 'tools',
 		icon: () => 'tabler:transform-filled',
 		label: () => m.save_migration(),
-		href: '/tools'
+		href: '/tools',
+		visible: () => !layout.phone
 	},
 	{
 		id: 'docs',
