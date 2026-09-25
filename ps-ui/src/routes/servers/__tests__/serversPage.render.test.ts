@@ -6,7 +6,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { installViewportStub } from '$utils/__tests__/fixtures/viewportStub';
 
-const { serverState } = vi.hoisted(() => ({
+const { serverState, showModal } = vi.hoisted(() => ({
+	showModal: vi.fn(),
 	serverState: {
 		servers: [] as unknown[],
 		selectedServer: null as unknown,
@@ -23,7 +24,7 @@ const { serverState } = vi.hoisted(() => ({
 
 vi.mock('$states', () => ({
 	getServerState: () => serverState,
-	getModalState: () => ({ showModal: vi.fn() })
+	getModalState: () => ({ showModal })
 }));
 
 vi.mock('$components/servers', async () => ({
@@ -99,5 +100,24 @@ describe('servers page', () => {
 		await fireEvent.click(screen.getByTestId('sheet-backdrop'));
 
 		expect(serverState.selectedServer).toBeNull();
+	});
+});
+
+describe('servers page empty state', () => {
+	it('offers a hosted server when there are none', async () => {
+		serverState.servers = [];
+		render(ServersPage);
+		await tick();
+
+		await fireEvent.click(screen.getByRole('button', { name: /rent a hosted server/i }));
+
+		expect(showModal).toHaveBeenCalledWith({}, expect.objectContaining({ initialType: 'hosted' }));
+	});
+
+	it('hides the offer once a server exists', async () => {
+		render(ServersPage);
+		await tick();
+
+		expect(screen.queryByRole('button', { name: /rent a hosted server/i })).toBeNull();
 	});
 });

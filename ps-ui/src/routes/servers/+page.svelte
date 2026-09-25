@@ -41,7 +41,7 @@
 		serverState.stopServer(server.id);
 	}
 
-	async function handleCreate() {
+	async function handleCreate(initialType: ServerType['server_type'] | 'hosted' = 'docker') {
 		const allocatedPorts = new Set<number>();
 		for (const s of servers) {
 			allocatedPorts.add(s.game_port);
@@ -71,7 +71,8 @@
 		// @ts-ignore
 		const result = await modal.showModal<CreateServerData | null>(CreateServerModal, {
 			title: 'Create Server',
-			suggestedPorts
+			suggestedPorts,
+			initialType
 		});
 
 		if (result) {
@@ -107,7 +108,12 @@
 					<Icon icon="tabler:download" size={14} />
 					Import
 				</Button>
-				<Button variant="primary" size="sm" class="flex items-center gap-2" onclick={handleCreate}>
+				<Button
+					variant="primary"
+					size="sm"
+					class="flex items-center gap-2"
+					onclick={() => handleCreate()}
+				>
 					<Icon icon="tabler:plus" size={14} />
 					New
 				</Button>
@@ -130,6 +136,16 @@
 					<p>No servers configured</p>
 					<p class="mt-1 text-sm">Create one to get started</p>
 				</Card>
+				<p class="text-surface-400 text-xs">
+					No spare PC?
+					<button
+						type="button"
+						class="text-primary-400 hover:text-primary-300 underline-offset-2 hover:underline"
+						onclick={() => handleCreate('hosted')}
+					>
+						Rent a hosted server
+					</button>
+				</p>
 			{:else}
 				{#each servers as server (server.id)}
 					<ServerCard
