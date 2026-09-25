@@ -3,6 +3,10 @@ title: Server Setup
 description: Configure and manage Palworld dedicated servers
 ---
 
+<script>
+	import { CentrixCallout } from '$components/partners';
+</script>
+
 # Server Setup
 
 PalStudio includes a built-in server manager for creating, configuring, and running dedicated Palworld servers directly from the app. Both **Docker** and **Native (Windows)** deployments are supported.
@@ -23,6 +27,12 @@ Running a Palworld dedicated server requires the following hardware ([source](ht
 | **OS**      | Windows or Linux 64-bit| Windows or Linux 64-bit  |
 
 > 8 GB of RAM is bootable but increases the possibility of server crashes due to out-of-memory errors. SSD storage is strongly recommended — low-performance storage may corrupt saved data.
+
+### Hosting Options {.toc}
+
+You don't need your own hardware to run a server. If you'd rather not leave a PC running all day, or your ISP blocks port forwarding, you can rent a hosted server instead. PalStudio can still edit its saves.
+
+<CentrixCallout />
 
 ### Installing Docker (Docker Deployment Only) {.toc}
 
@@ -90,7 +100,7 @@ For players outside your local network to connect, you must forward the server p
 5. **Save and apply** the changes.
 6. **Verify** the ports are open using an online port checker (search "open port check tool") or have a friend try connecting to your external IP.
 
-> If you are behind a CGNAT (common with some ISPs), port forwarding at the router level will not work. Contact your ISP to request a public IP or consider using a VPN/tunneling service.
+> If you are behind a CGNAT (common with some ISPs), port forwarding at the router level will not work. Contact your ISP to request a public IP, use a VPN/tunneling service, or run the server on a [hosted machine](#hosting-options) instead.
 
 ---
 
