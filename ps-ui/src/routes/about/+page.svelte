@@ -3,6 +3,7 @@
 	import { Seo } from '$lib/components/seo';
 	import { getAppState } from '$states';
 	import { Card, Tooltip } from '$components/ui';
+	import { PartnerCard } from '$components/partners';
 	import Saitama from '$lib/assets/img/app/saitama.webp';
 	import githubIcon from '$lib/assets/img/app/github.svg';
 	import discordIcon from '$lib/assets/img/app/discord.svg';
@@ -199,6 +200,11 @@
 						<span class="align-bottom text-xs">{m.about_link_support()}</span>
 					</a>
 				</div>
+			</Card>
+		</div>
+		<div use:tilt class="card-tilt">
+			<Card>
+				<PartnerCard />
 			</Card>
 		</div>
 		<div use:tilt class="card-tilt">
