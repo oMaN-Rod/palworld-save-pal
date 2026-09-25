@@ -33,6 +33,8 @@ async fn start_test_server() -> (ps_server::ServerHandle, tempfile::TempDir) {
         db_path: scratch.path().join("phase2-ws-test.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
     let handle = ps_server::start_server(config).await.unwrap();
     (handle, scratch)

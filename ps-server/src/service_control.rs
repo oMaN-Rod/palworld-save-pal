@@ -745,6 +745,16 @@ async fn set_runtime(
             "the desktop app is standalone by design; run the install script to set up a service",
         );
     }
+    // Runtime mode is a network setting: a locked public websuite run
+    // cannot (un)register services any more than it can rebind the policy.
+    if runtime.edits_locked() {
+        return error_response(
+            StatusCode::FORBIDDEN,
+            "network settings are locked: this instance is hosted publicly without \
+             --allow-network — restart `palstudio websuite` with --allow-network to switch \
+             the runtime mode",
+        );
+    }
     let Some(manager) = ServiceManager::detect() else {
         return error_response(
             StatusCode::CONFLICT,

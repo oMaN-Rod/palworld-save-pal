@@ -177,6 +177,7 @@ How much of the Network page you get depends on how the instance runs:
 | Desktop app (Tauri) | none — localhost by construction |
 | `palstudio webapp` (hand-launched, incl. the AppImage webapp) | **port only**, localhost-enforced |
 | `palstudio serve` / `palstudio host` | full |
+| `palstudio websuite` | **read-only** unless started with `--allow-network` |
 | Background service (systemd / launchd / Task Scheduler) | full |
 | Docker | full (`--hosted` in the image CMD) |
 
@@ -185,6 +186,18 @@ mode is clamped to localhost, the PIN/allowlists/UPnP/funnel are off, and
 PUTs that try to change anything but the port are refused with a pointer to
 `palstudio host` or the service. The stored policy is left untouched, so
 graduating to a hosted context restores whatever was configured before.
+
+`palstudio websuite` is the public-hosting tier — the counterpart at the
+other end of the spectrum. It publishes the instance to everyone: the listen
+mode is clamped to `wan` for the run, and the network settings are FROZEN —
+the Network page renders read-only and every config save or runtime-mode
+switch is refused — unless the process was started with `--allow-network`.
+This keeps a public deployment from having its network policy edited through
+the web UI it serves. The stored policy's other knobs (port, allowlists, PIN,
+transport posture) still protect the public audience, and as with the webapp
+tier the stored config is never mutated: `--allow-network` (or plain
+`serve`) sees the original policy again. The `ps-server` binary accepts
+`--websuite [--allow-network]` for containers.
 
 ### Allowlists and what "empty" means
 

@@ -26,6 +26,8 @@ export interface NetworkConfigDto {
 	/** Absent on older servers — normalized on load. */
 	https_enabled?: boolean;
 	asset_transport?: AssetTransport;
+	/** True on a public websuite run without --allow-network: the policy is frozen. */
+	edits_locked?: boolean;
 }
 
 export interface FunnelStatusDto {

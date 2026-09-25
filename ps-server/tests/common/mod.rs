@@ -61,6 +61,8 @@ pub async fn start_test_server() -> TestServer {
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
     let handle = ps_server::start_server(config).await.unwrap();
     TestServer {
@@ -87,6 +89,8 @@ pub async fn start_desktop_test_server(
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: true,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
     let handle = ps_server::start_server_with(config, dialogs).await.unwrap();
     TestServer {

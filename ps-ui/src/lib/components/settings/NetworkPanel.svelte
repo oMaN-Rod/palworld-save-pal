@@ -118,6 +118,9 @@
 	const isLocalWebapp = $derived(
 		network.config?.tier === 'localwebapp' || network.runtime?.tier === 'localwebapp'
 	);
+	// A public websuite run without --allow-network freezes the whole policy:
+	// the server refuses every save, so the page renders read-only instead.
+	const editsLocked = $derived(network.config?.edits_locked === true);
 
 	// Mirrors the server's security_warnings, computed live so the banner
 	// reacts to edits before they are saved.
@@ -250,6 +253,17 @@
 			</Card>
 		{/if}
 
+		{#if editsLocked}
+			<!-- Public websuite run: the policy is frozen server-side, so every
+			     editing affordance is replaced by the lock notice. -->
+			<Card class="border-warning-500/50 flex flex-col gap-2 p-3">
+				<h2 class="h4 flex items-center gap-2">
+					<Icon icon="tabler:lock" size={16} /> {m.network_locked_title()}
+				</h2>
+				<p class="text-sm text-surface-300">{m.network_locked_body()}</p>
+				<p class="text-xs text-surface-400">{m.network_locked_hint()}</p>
+			</Card>
+		{:else}
 		<!-- Exposure: listen mode + port -->
 		<Card class="flex flex-col gap-2 p-3">
 			<h2 class="h4 flex items-center gap-2">
@@ -556,5 +570,6 @@
 		{#each network.warnings as warning (warning)}
 			<p class="text-sm text-warning-500">⚠ {warning}</p>
 		{/each}
+		{/if}
 	{/if}
 </div>

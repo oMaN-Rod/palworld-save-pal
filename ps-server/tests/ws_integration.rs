@@ -17,6 +17,8 @@ async fn start_test_server(temp_dir: &tempfile::TempDir) -> ServerHandle {
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap()

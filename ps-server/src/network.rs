@@ -42,6 +42,10 @@ const FAILED_PIN_DELAY: Duration = Duration::from_millis(400);
 pub struct NetworkRuntime {
     config: RwLock<NetworkConfig>,
     tier: NetworkTier,
+    /// `false` only for a websuite run without `--allow-network`: the public
+    /// deployment exposes the SPA but the network policy is frozen — saves
+    /// and runtime-mode switches are refused while the process runs.
+    allow_network_edits: bool,
     pub sessions: SessionRegistry,
     restart: tokio::sync::Notify,
     restart_flag: Arc<AtomicBool>,
@@ -61,9 +65,14 @@ impl NetworkRuntime {
     }
 
     pub fn with_tier(config: NetworkConfig, tier: NetworkTier) -> Self {
+        NetworkRuntime::with_tier_and_edits(config, tier, true)
+    }
+
+    pub fn with_tier_and_edits(config: NetworkConfig, tier: NetworkTier, allow_edits: bool) -> Self {
         NetworkRuntime {
             config: RwLock::new(config),
             tier,
+            allow_network_edits: allow_edits,
             sessions: SessionRegistry::default(),
             restart: tokio::sync::Notify::new(),
             restart_flag: Arc::new(AtomicBool::new(false)),
@@ -86,15 +95,33 @@ impl NetworkRuntime {
         NetworkRuntime { tier, ..self }
     }
 
+    /// Boot-time wiring for the websuite `--allow-network` choice. Every
+    /// other context allows edits, so the default constructor is `true`.
+    pub fn into_allow_network_edits(self, allowed: bool) -> Self {
+        NetworkRuntime {
+            allow_network_edits: allowed,
+            ..self
+        }
+    }
+
+    /// True when the network policy is frozen for this run: a public
+    /// websuite deployment started without `--allow-network`.
+    pub fn edits_locked(&self) -> bool {
+        self.tier == NetworkTier::WebSuite && !self.allow_network_edits
+    }
+
     /// The policy as enforced: a hand-launched local webapp sees the stored
     /// config clamped to localhost-only (the stored one is preserved for a
-    /// later hosted run).
+    /// later hosted run); a locked websuite run is clamped to a public
+    /// audience. Both clamps read-only reshape the STORED config, which
+    /// stays intact for the next run.
     pub fn effective_config(&self) -> NetworkConfig {
         match self.tier {
             NetworkTier::Desktop | NetworkTier::LocalWebapp => {
                 self.config().clamped_for_local_webapp()
             }
-            NetworkTier::Hosted => self.config(),
+            NetworkTier::WebSuite if self.edits_locked() => self.config().clamped_for_websuite(),
+            NetworkTier::Hosted | NetworkTier::WebSuite => self.config(),
         }
     }
 
@@ -619,6 +646,9 @@ pub struct NetworkConfigDto {
     pub funnel_enabled: bool,
     pub https_enabled: bool,
     pub asset_transport: AssetTransport,
+    /// True when this run refuses network-policy edits (a public websuite
+    /// deployment without `--allow-network`).
+    pub edits_locked: bool,
 }
 
 #[derive(serde::Serialize)]
@@ -674,7 +704,7 @@ async fn get_config(axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime
     (
         StatusCode::OK,
         Json(
-            serde_json::to_value(&redact(&runtime.effective_config()))
+            serde_json::to_value(redact(&runtime.effective_config(), runtime.edits_locked()))
                 .map(|mut value| {
                     value["tier"] = serde_json::json!(runtime.tier().as_str());
                     value
@@ -685,7 +715,7 @@ async fn get_config(axum::Extension(runtime): axum::Extension<Arc<NetworkRuntime
         .into_response()
 }
 
-fn redact(config: &NetworkConfig) -> NetworkConfigDto {
+fn redact(config: &NetworkConfig, edits_locked: bool) -> NetworkConfigDto {
     NetworkConfigDto {
         listen: config.listen,
         port: config.port,
@@ -699,6 +729,7 @@ fn redact(config: &NetworkConfig) -> NetworkConfigDto {
         funnel_enabled: config.funnel_enabled,
         https_enabled: config.https_enabled,
         asset_transport: config.asset_transport,
+        edits_locked,
     }
 }
 
@@ -762,6 +793,17 @@ async fn put_config(
         );
     }
 
+    // A public websuite run without --allow-network is a frozen deployment:
+    // no listen mode, port, allowlist, PIN, transport, or exposure change
+    // through the web UI. Restart with the flag to edit.
+    if runtime.edits_locked() {
+        return error_response(
+            StatusCode::FORBIDDEN,
+            "network settings are locked: this instance is hosted publicly without \
+             --allow-network — restart `palstudio websuite` with --allow-network to edit them",
+        );
+    }
+
     let errors = validate(&update);
     if !errors.is_empty() {
         return (
@@ -816,7 +858,7 @@ async fn put_config(
             );
             runtime.request_restart();
         }
-        let mut dto = serde_json::to_value(&redact(&runtime.effective_config()))
+        let mut dto = serde_json::to_value(redact(&runtime.effective_config(), false))
             .unwrap_or_else(|_| serde_json::json!({}));
         dto["tier"] = serde_json::json!(runtime.tier().as_str());
         return (
@@ -938,7 +980,8 @@ async fn put_config(
     (
         StatusCode::OK,
         Json(serde_json::json!({
-            "config": redact(&runtime.config()),
+            "config": serde_json::to_value(redact(&runtime.config(), runtime.edits_locked()))
+                .unwrap_or_else(|_| serde_json::json!({})),
             "restart_required": port_changed || listen_changed || https_changed,
             "warnings": warnings,
         })),
@@ -1429,8 +1472,8 @@ mod tests {
     #[test]
     fn redacted_config_never_contains_the_pin_hash() {
         let raw = config_with_pin(AuthScope::NetworkOnly).to_json();
-        let redacted =
-            serde_json::to_string(&redact(&config_with_pin(AuthScope::NetworkOnly))).unwrap();
+        let redacted = serde_json::to_string(&redact(&config_with_pin(AuthScope::NetworkOnly), false))
+            .unwrap();
         let hash = raw
             .split("\"hash\":\"")
             .nth(1)
@@ -1550,6 +1593,48 @@ mod tests {
         assert!(!flag.load(Ordering::SeqCst));
         runtime.request_restart();
         assert!(flag.load(Ordering::SeqCst));
+    }
+
+    #[test]
+    fn edits_lock_applies_only_to_locked_websuite_runs() {
+        // Hosted and webapp tiers never lock, whatever the edit flag says.
+        let hosted = NetworkRuntime::with_tier_and_edits(
+            NetworkConfig::default(),
+            NetworkTier::Hosted,
+            false,
+        );
+        assert!(!hosted.edits_locked());
+        // Websuite: locked without the flag, open with it.
+        let locked = NetworkRuntime::with_tier_and_edits(
+            NetworkConfig {
+                listen: ListenMode::Localhost,
+                ..NetworkConfig::default()
+            },
+            NetworkTier::WebSuite,
+            false,
+        );
+        assert!(locked.edits_locked());
+        assert_eq!(
+            locked.effective_config().listen,
+            ListenMode::Wan,
+            "a locked websuite run is public regardless of the stored mode"
+        );
+        let open = NetworkRuntime::with_tier_and_edits(
+            NetworkConfig {
+                listen: ListenMode::Localhost,
+                ..NetworkConfig::default()
+            },
+            NetworkTier::WebSuite,
+            true,
+        );
+        assert!(!open.edits_locked());
+        assert_eq!(
+            open.effective_config().listen,
+            ListenMode::Localhost,
+            "--allow-network applies the stored policy untouched"
+        );
+        // The stored config is never mutated by the clamp.
+        assert_eq!(locked.config().listen, ListenMode::Localhost);
     }
 
     #[test]

@@ -465,13 +465,17 @@ pub fn validate_pin(pin: &str) -> Result<(), ConfigError> {
 /// Which runtime context the server is running in — decides how much of the
 /// network policy is surfaced and enforced:
 ///
-/// - `Desktop`      — the Tauri app: localhost by construction, no network
-///                    settings at all.
-/// - `LocalWebapp`  — a hand-launched `palstudio webapp` (AppImage, bundle,
-///                    interactive picker): a local tool. Hard-clamped to
-///                    localhost; only the port is editable.
-/// - `Hosted`       — `palstudio serve`/`host`, background services, and
-///                    containers: the full policy surface.
+/// - `Desktop` — the Tauri app: localhost by construction, no network
+///   settings at all.
+/// - `LocalWebapp` — a hand-launched `palstudio webapp` (AppImage, bundle,
+///   interactive picker): a local tool. Hard-clamped to localhost; only the
+///   port is editable.
+/// - `Hosted` — `palstudio serve`/`host`, background services, and
+///   containers: the full policy surface.
+/// - `WebSuite` — `palstudio websuite`: the instance is published for the
+///   general public. The policy is clamped to a public audience and network
+///   settings are locked unless the operator started it with
+///   `--allow-network`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum NetworkTier {
@@ -480,6 +484,7 @@ pub enum NetworkTier {
     #[serde(alias = "desktop")]
     Desktop,
     LocalWebapp,
+    WebSuite,
 }
 
 impl NetworkTier {
@@ -488,6 +493,7 @@ impl NetworkTier {
             "hosted" | "host" | "serve" => Some(NetworkTier::Hosted),
             "desktop" => Some(NetworkTier::Desktop),
             "local" | "webapp" | "localwebapp" | "local_webapp" => Some(NetworkTier::LocalWebapp),
+            "websuite" | "web-suite" | "web_suite" | "public" => Some(NetworkTier::WebSuite),
             _ => None,
         }
     }
@@ -497,6 +503,7 @@ impl NetworkTier {
             NetworkTier::Hosted => "hosted",
             NetworkTier::Desktop => "desktop",
             NetworkTier::LocalWebapp => "localwebapp",
+            NetworkTier::WebSuite => "websuite",
         }
     }
 }
@@ -517,6 +524,19 @@ impl NetworkConfig {
             funnel_enabled: false,
             https_enabled: false,
             asset_transport: AssetTransport::Https,
+        }
+    }
+
+    /// The effective policy for a public websuite run: the audience widens
+    /// to Wan (this is, by construction, a server for everyone) while every
+    /// other knob — port, allowlists, PIN, transport posture — stays as the
+    /// operator stored it, so allowlists and the PIN keep protecting a
+    /// public deployment. Only meaningful while network edits are locked;
+    /// with `--allow-network` the stored policy applies untouched.
+    pub fn clamped_for_websuite(&self) -> NetworkConfig {
+        NetworkConfig {
+            listen: ListenMode::Wan,
+            ..self.clone()
         }
     }
 }
@@ -676,8 +696,38 @@ mod tests {
         assert_eq!(NetworkTier::parse("webapp"), Some(NetworkTier::LocalWebapp));
         assert_eq!(NetworkTier::parse("HOSTED"), Some(NetworkTier::Hosted));
         assert_eq!(NetworkTier::parse("desktop"), Some(NetworkTier::Desktop));
+        assert_eq!(NetworkTier::parse("websuite"), Some(NetworkTier::WebSuite));
+        assert_eq!(NetworkTier::parse("web-suite"), Some(NetworkTier::WebSuite));
         assert_eq!(NetworkTier::parse("other"), None);
         assert_eq!(NetworkTier::default(), NetworkTier::Hosted);
+    }
+
+    #[test]
+    fn websuite_clamp_widens_the_audience_and_keeps_every_other_knob() {
+        let stored = NetworkConfig {
+            listen: ListenMode::Localhost,
+            port: 9000,
+            allow: AllowRules {
+                connect: vec!["203.0.113.9".into()],
+                write: vec!["203.0.113.10".into()],
+                mode: AllowMode::Balanced,
+            },
+            auth: AuthConfig {
+                scope: AuthScope::NetworkOnly,
+                pin: Some(PinHash::generate("1234")),
+                session_ttl_secs: 60,
+            },
+            https_enabled: true,
+            ..NetworkConfig::default()
+        };
+        let clamped = stored.clamped_for_websuite();
+        assert_eq!(clamped.listen, ListenMode::Wan, "a websuite run is public");
+        assert_eq!(clamped.port, stored.port);
+        assert_eq!(clamped.allow, stored.allow);
+        assert_eq!(clamped.auth, stored.auth);
+        assert!(clamped.https_enabled);
+        // The stored policy is untouched for a later --allow-network run.
+        assert_eq!(stored.listen, ListenMode::Localhost);
     }
 
     #[test]

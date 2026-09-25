@@ -23,6 +23,8 @@ async fn startup_imports_legacy_db_next_to_new_db() {
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
     let handle = ps_server::start_server(config).await.unwrap();
 

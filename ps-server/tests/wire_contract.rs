@@ -571,6 +571,8 @@ async fn replay_all_fixtures(fixtures_root: &std::path::Path) -> usize {
         db_path: temp_dir.path().join("contract.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();
@@ -1866,6 +1868,8 @@ async fn list_local_saves_is_refused_without_desktop_mode() {
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();
@@ -1898,6 +1902,8 @@ async fn list_local_saves_response_shape_is_pinned() {
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();
@@ -1941,6 +1947,8 @@ async fn browse_directory_is_refused_without_desktop_mode() {
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();
@@ -1981,6 +1989,8 @@ async fn browse_directory_response_shape_is_pinned() {
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();
@@ -2036,6 +2046,8 @@ async fn browse_directory_of_a_missing_path_replies_with_an_inline_error() {
         db_path: temp_dir.path().join("wire.db"),
         desktop_mode: true,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();

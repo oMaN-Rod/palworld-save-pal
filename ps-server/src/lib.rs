@@ -82,6 +82,13 @@ pub struct ServerConfig {
     /// full network policy. `false` marks a hand-launched local webapp,
     /// which is hard-clamped to localhost with only the port editable.
     pub hosted: bool,
+    /// A public websuite run (`websuite` verb): hosted by construction, but
+    /// with the network policy frozen unless `allow_network_edits` is set.
+    pub websuite: bool,
+    /// The websuite `--allow-network` choice. Ignored outside the websuite
+    /// tier (serve/host/webapp always allow edits); `false` locks the
+    /// network policy for the life of the process.
+    pub allow_network_edits: bool,
 }
 
 pub struct ServerHandle {
@@ -393,6 +400,8 @@ pub async fn start_server_with(
     // enforced per-request, so only a port edit needs a rebind.
     let tier = if config.desktop_mode {
         ps_network::NetworkTier::Desktop
+    } else if config.websuite {
+        ps_network::NetworkTier::WebSuite
     } else if config.hosted {
         ps_network::NetworkTier::Hosted
     } else {
@@ -402,7 +411,8 @@ pub async fn start_server_with(
         crate::network::NetworkRuntime::load(&*driver)
             .await
             .map_err(|error| anyhow::anyhow!("could not load network config: {error}"))?
-            .into_tier(tier),
+            .into_tier(tier)
+            .into_allow_network_edits(config.allow_network_edits || !config.websuite),
     );
     if network.effective_config().listen == ps_network::ListenMode::Tailscale {
         network.refresh_tailnet_peers().await?;
@@ -470,7 +480,10 @@ pub async fn start_server_with(
     // matching the policy (no Tailscale CLI, no UPnP gateway) degrades the
     // deployment loudly rather than stopping the server from serving; the
     // listen policy itself still gates every peer.
-    if network.tier() == ps_network::NetworkTier::Hosted {
+    if matches!(
+        network.tier(),
+        ps_network::NetworkTier::Hosted | ps_network::NetworkTier::WebSuite
+    ) {
         for failure in
             crate::network::reconcile_current_resources(&network.effective_config()).await
         {

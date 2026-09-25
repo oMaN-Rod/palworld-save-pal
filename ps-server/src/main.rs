@@ -34,6 +34,13 @@ struct Cli {
     /// network policy; the Docker image passes it in its CMD.
     #[arg(long)]
     hosted: bool,
+    /// Mark this as a public websuite run: hosted, with the network policy
+    /// frozen unless --allow-network is also given.
+    #[arg(long)]
+    websuite: bool,
+    /// Only meaningful with --websuite: keep network settings editable.
+    #[arg(long)]
+    allow_network: bool,
 }
 
 #[tokio::main]
@@ -59,7 +66,9 @@ async fn main() -> anyhow::Result<()> {
         data_dir: cli.data_dir,
         db_path: cli.db,
         desktop_mode: false,
-        hosted: cli.hosted,
+        hosted: cli.hosted || cli.websuite,
+        websuite: cli.websuite,
+        allow_network_edits: cli.allow_network,
     };
     loop {
         let handle = start_server(config.clone()).await?;

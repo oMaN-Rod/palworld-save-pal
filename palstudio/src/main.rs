@@ -24,6 +24,11 @@ enum Mode {
     Serve(ServerArgs),
     /// Alias of serve for humans: "host this instance for others".
     Host(ServerArgs),
+    /// Publish the web suite for everyone: a public server whose network
+    /// settings are LOCKED unless --allow-network is passed. The stored
+    /// policy's other knobs (port, allowlists, PIN, transport) still apply.
+    #[command(name = "websuite", alias = "web-suite")]
+    WebSuite(WebSuiteArgs),
     /// Run a LOCAL webapp (localhost-only; the Network page offers just the
     /// port) and open it in your browser.
     Webapp(ServerArgs),
@@ -60,6 +65,19 @@ struct ServerArgs {
     /// Development mode (debug logging).
     #[arg(long)]
     dev: bool,
+}
+
+/// `websuite` args: the server args plus the public-hosting toggle.
+#[derive(clap::Args, Debug, Clone)]
+struct WebSuiteArgs {
+    #[command(flatten)]
+    server: ServerArgs,
+    /// Keep the network settings editable while hosting publicly. Without
+    /// this flag the Network page is read-only for the life of the process:
+    /// no listen mode, port, allowlist, PIN, transport, exposure, or
+    /// runtime-mode changes through the web UI.
+    #[arg(long)]
+    allow_network: bool,
 }
 
 impl Default for ServerArgs {
@@ -247,6 +265,7 @@ async fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
     let dev = cli.command.as_ref().is_some_and(|mode| match mode {
         Mode::Serve(args) | Mode::Host(args) | Mode::Webapp(args) => args.dev,
+        Mode::WebSuite(args) => args.server.dev,
         Mode::Desktop => false,
     });
     tracing_subscriber::fmt()
@@ -260,14 +279,32 @@ async fn main() -> anyhow::Result<()> {
     match cli.command {
         // Serve/host and services are network-facing contexts: the full
         // network policy applies. The webapp is a hand-launched local tool.
+        // The websuite is a public run: hosted, with network settings
+        // editable only when --allow-network was given.
         Some(Mode::Serve(args)) | Some(Mode::Host(args)) => {
             let data_home = args.data_home.clone().map_or_else(default_data_home, Ok)?;
-            run_server(&args, &data_home, false, true).await
+            run_server(&args, &data_home, false, true, false, true).await
+        }
+        Some(Mode::WebSuite(args)) => {
+            let data_home = args
+                .server
+                .data_home
+                .clone()
+                .map_or_else(default_data_home, Ok)?;
+            run_server(
+                &args.server,
+                &data_home,
+                false,
+                true,
+                true,
+                args.allow_network,
+            )
+            .await
         }
         Some(Mode::Webapp(args)) => {
             let data_home = args.data_home.clone().map_or_else(default_data_home, Ok)?;
             write_preferred_mode(&data_home, "webapp");
-            run_server(&args, &data_home, true, false).await
+            run_server(&args, &data_home, true, false, false, true).await
         }
         Some(Mode::Desktop) => launch_desktop(),
         None => {
@@ -276,7 +313,7 @@ async fn main() -> anyhow::Result<()> {
                 LaunchChoice::Desktop => launch_desktop(),
                 LaunchChoice::Webapp => {
                     write_preferred_mode(&data_home, "webapp");
-                    run_server(&ServerArgs::default(), &data_home, true, false).await
+                    run_server(&ServerArgs::default(), &data_home, true, false, false, true).await
                 }
             }
         }
@@ -289,6 +326,8 @@ async fn run_server(
     data_home: &std::path::Path,
     mut open_browser: bool,
     hosted: bool,
+    websuite: bool,
+    allow_network: bool,
 ) -> anyhow::Result<()> {
     let (assets, bundled_db) = match (args.ui_dir.clone(), args.data_dir.clone()) {
         // Explicit dirs mean the operator owns the layout; do not touch them.
@@ -321,6 +360,8 @@ async fn run_server(
         db_path: db_path.clone(),
         desktop_mode: false,
         hosted,
+        websuite,
+        allow_network_edits: allow_network,
     };
     loop {
         let handle = ps_server::start_server(config.clone()).await?;

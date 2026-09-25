@@ -20,6 +20,8 @@ async fn start_server_binds_the_port_before_returning() {
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
 
     let handle = start_server(config).await.unwrap();
@@ -56,6 +58,8 @@ async fn shutdown_completes_and_frees_the_port() {
         db_path: temp_dir.path().join("test.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
 
     let handle = start_server(config).await.unwrap();

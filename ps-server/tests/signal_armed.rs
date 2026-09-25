@@ -1017,6 +1017,8 @@ async fn a_desktop_left_armed_arms_itself_at_startup() {
         db_path,
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     })
     .await
     .unwrap();

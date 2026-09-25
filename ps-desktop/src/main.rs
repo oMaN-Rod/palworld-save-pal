@@ -209,6 +209,8 @@ fn main() {
                 db_path: asset_dirs.db_path,
                 desktop_mode: true,
                 hosted: false,
+                websuite: false,
+                allow_network_edits: true,
             };
 
             // start_server binds the listener before returning, so once this

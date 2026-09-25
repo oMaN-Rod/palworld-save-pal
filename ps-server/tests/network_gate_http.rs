@@ -840,6 +840,10 @@ async fn local_webapp_tier_is_clamped_to_localhost_and_port_only() {
 }
 
 async fn build_router_local_webapp(runtime: NetworkRuntime) -> axum::Router {
+    build_router_for(runtime).await
+}
+
+async fn build_router_for(runtime: NetworkRuntime) -> axum::Router {
     let temp_dir = tempfile::tempdir().unwrap();
     let ui_dir = temp_dir.path().join("ui");
     std::fs::create_dir_all(&ui_dir).unwrap();
@@ -876,4 +880,124 @@ async fn build_router_local_webapp(runtime: NetworkRuntime) -> axum::Router {
         &ui_dir,
         Arc::new(runtime),
     )
+}
+
+/// A public websuite run without --allow-network is a read-only deployment:
+/// the effective policy is clamped to a public audience, the DTO says
+/// `edits_locked`, and every network-settings mutation — config saves and
+/// runtime-mode switches alike — is refused even for the loopback operator.
+#[tokio::test]
+async fn websuite_locked_run_is_public_and_refuses_all_network_edits() {
+    // Stored policy says localhost; the websuite clamp widens it to Wan for
+    // the run, without mutating what a later hosted run would load.
+    let stored = config(ListenMode::Localhost, AuthScope::Never, false);
+    let runtime = NetworkRuntime::with_tier_and_edits(
+        stored,
+        ps_network::NetworkTier::WebSuite,
+        false,
+    );
+    // Minted before the runtime moves into the router: the loopback operator
+    // seat that the runtime-switch test needs.
+    let session_token = runtime.sessions.issue(std::time::Duration::from_secs(60));
+    let router = build_router_for(runtime).await;
+
+    let view = router
+        .clone()
+        .oneshot(peer_request("127.0.0.1", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(view.status(), StatusCode::OK);
+    let text = body_text(view).await;
+    assert!(text.contains("\"tier\":\"websuite\""));
+    assert!(text.contains("\"listen\":\"wan\""), "public clamp: {text}");
+    assert!(text.contains("\"edits_locked\":true"));
+
+    // A remote visitor is admitted (this is, by construction, a public
+    // server) and sees the same locked posture.
+    let remote = router
+        .clone()
+        .oneshot(peer_request("203.0.113.9", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(remote.status(), StatusCode::OK);
+    assert!(body_text(remote).await.contains("\"edits_locked\":true"));
+
+    // The loopback operator cannot edit the frozen policy either — not the
+    // stored values, and not a relaxation.
+    for payload in [
+        // Identity save: still an edit.
+        r#"{"listen":"wan","port":5174,"auth":{"scope":"never"},"allow":{}}"#,
+        // Port change.
+        r#"{"listen":"wan","port":9000,"auth":{"scope":"never"},"allow":{}}"#,
+        // Listen-mode drop back to localhost (locking yourself out is
+        // still an edit on a locked run).
+        r#"{"listen":"localhost","port":5174,"auth":{"scope":"never"},"allow":{}}"#,
+    ] {
+        let refused = router
+            .clone()
+            .oneshot(peer_json_request("127.0.0.1", "PUT", "/api/network/config", payload))
+            .await
+            .unwrap();
+        assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+        let message = body_text(refused).await;
+        assert!(message.contains("locked"), "got: {message}");
+        assert!(message.contains("--allow-network"), "got: {message}");
+    }
+
+    // Runtime mode is a network setting: switching is refused too. The
+    // service-control plane demands its local session first — the same lock
+    // then stops the switch even for an authenticated local operator.
+    let refused = router
+        .oneshot(with_cookie(
+            peer_json_request(
+                "127.0.0.1",
+                "POST",
+                "/api/network/runtime",
+                r#"{"mode":"standalone"}"#,
+            ),
+            &format!("{}={}", ps_server::network::SESSION_COOKIE, session_token),
+        ))
+        .await
+        .unwrap();
+    assert_eq!(refused.status(), StatusCode::FORBIDDEN);
+    assert!(body_text(refused).await.contains("locked"));
+}
+
+/// With --allow-network, the websuite tier keeps the full hosted surface:
+/// the stored policy applies unclamped and edits work normally.
+#[tokio::test]
+async fn websuite_with_allow_network_stays_fully_editable() {
+    let stored = config(ListenMode::Lan, AuthScope::Never, false);
+    let runtime = NetworkRuntime::with_tier_and_edits(
+        stored,
+        ps_network::NetworkTier::WebSuite,
+        true,
+    );
+    let router = build_router_for(runtime).await;
+
+    let view = router
+        .clone()
+        .oneshot(peer_request("127.0.0.1", "GET", "/api/network/config"))
+        .await
+        .unwrap();
+    assert_eq!(view.status(), StatusCode::OK);
+    let text = body_text(view).await;
+    assert!(text.contains("\"tier\":\"websuite\""));
+    assert!(text.contains("\"listen\":\"lan\""), "stored policy: {text}");
+    assert!(text.contains("\"edits_locked\":false"));
+
+    // A listen-mode + port change goes through exactly like on `serve`.
+    let edit = router
+        .oneshot(peer_json_request(
+            "127.0.0.1",
+            "PUT",
+            "/api/network/config",
+            r#"{"listen":"tailscale","port":9100,"auth":{"scope":"never"},"allow":{}}"#,
+        ))
+        .await
+        .unwrap();
+    assert_eq!(edit.status(), StatusCode::OK);
+    let text = body_text(edit).await;
+    assert!(text.contains("\"listen\":\"tailscale\""));
+    assert!(text.contains("\"restart_required\":true"));
 }

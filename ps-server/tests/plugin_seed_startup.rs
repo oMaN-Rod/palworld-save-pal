@@ -21,6 +21,8 @@ async fn startup_seeds_the_bundled_plugin_set_without_an_explicit_call() {
         db_path: temp_dir.path().join("ps-rs.db"),
         desktop_mode: false,
         hosted: false,
+        websuite: false,
+        allow_network_edits: true,
     };
     let handle = ps_server::start_server(config).await.unwrap();
 
