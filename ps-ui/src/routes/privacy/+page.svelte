@@ -99,7 +99,7 @@
 		<p>Besides loading the site itself, PalStudio may contact:</p>
 		<ul class="list-disc space-y-1 pl-6">
 			<li>GitHub, to check whether a newer release exists and to download mod frameworks.</li>
-			<li>Nexus Mods, if you use the built-in mod browser, using the API key you supply.</li>
+			<li>Nexus Mods, if you use the built-in mod browser, using the access you grant PalStudio when you sign in.</li>
 			<li>
 				Our pairing broker and TURN relay, only while a remote session is being set up or running.
 			</li>

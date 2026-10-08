@@ -44,10 +44,9 @@ import {
 	nexusAccountGetHandler,
 	nexusHandlerRegisterHandler,
 	nexusHandlerStatusHandler,
-	nexusKeySetHandler
+	nexusSignInHandler
 } from '$lib/ws/handlers/nexusHandler';
 import NexusAccountCard from '../NexusAccountCard.svelte';
-import NexusKeyModal from '../NexusKeyModal.svelte';
 
 const context = {} as never;
 const modsState = () => holder.mods as ModsState;
@@ -67,24 +66,21 @@ beforeEach(() => {
 });
 
 describe('NexusAccountCard', () => {
-	it('shows the anonymous sentence and an Add API key button with no key stored', () => {
+	it('shows the anonymous sentence and a sign-in button while signed out', () => {
 		render(NexusAccountCard);
 
 		expect(
-			screen.getByText(
-				'Browsing anonymously. Add your API key to download files and see your account.'
-			)
+			screen.getByText('Browsing anonymously. Sign in to download files and see your account.')
 		).toBeTruthy();
-		expect(screen.getByRole('button', { name: 'Add API key' })).toBeTruthy();
-		expect(screen.queryByRole('button', { name: 'Replace API key' })).toBeNull();
-		expect(screen.queryByRole('button', { name: 'Remove API key' })).toBeNull();
+		expect(screen.getByRole('button', { name: 'Sign in with Nexus Mods' })).toBeTruthy();
+		expect(screen.queryByRole('button', { name: 'Sign out' })).toBeNull();
 	});
 
 	it('shows the account name, the Premium badge and a profile link for a premium account', async () => {
 		render(NexusAccountCard);
 		await nexusAccountGetHandler.handle(
 			{
-				has_key: true,
+				signed_in: true,
 				account: {
 					user_id: 7,
 					name: 'Tester',
@@ -108,7 +104,7 @@ describe('NexusAccountCard', () => {
 		render(NexusAccountCard);
 		await nexusAccountGetHandler.handle(
 			{
-				has_key: true,
+				signed_in: true,
 				account: {
 					user_id: 7,
 					name: 'Tester',
@@ -181,11 +177,11 @@ describe('NexusAccountCard', () => {
 		expect(screen.getByRole('alert').textContent).toContain('Registering the link handler failed.');
 	});
 
-	it('confirms before clearing the stored key, and only sends nexus_key_clear once confirmed', async () => {
+	it('confirms before signing out, and only sends nexus_sign_out once confirmed', async () => {
 		render(NexusAccountCard);
 		await nexusAccountGetHandler.handle(
 			{
-				has_key: true,
+				signed_in: true,
 				account: {
 					user_id: 7,
 					name: 'Tester',
@@ -200,78 +196,50 @@ describe('NexusAccountCard', () => {
 		await tick();
 
 		modal.showConfirmModal.mockResolvedValue(false);
-		await fireEvent.click(screen.getByRole('button', { name: 'Remove API key' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
 		await vi.waitFor(() => expect(modal.showConfirmModal).toHaveBeenCalledTimes(1));
-		expect(sent(MessageType.NEXUS_KEY_CLEAR)).toHaveLength(0);
+		expect(sent(MessageType.NEXUS_SIGN_OUT)).toHaveLength(0);
 
 		modal.showConfirmModal.mockResolvedValue(true);
-		await fireEvent.click(screen.getByRole('button', { name: 'Remove API key' }));
-		await vi.waitFor(() => expect(sent(MessageType.NEXUS_KEY_CLEAR)).toHaveLength(1));
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign out' }));
+		await vi.waitFor(() => expect(sent(MessageType.NEXUS_SIGN_OUT)).toHaveLength(1));
 	});
 });
 
-describe('NexusKeyModal', () => {
-	it('sends nexus_key_set with the typed key and clears the field afterwards', async () => {
-		render(NexusKeyModal, { closeModal: vi.fn() });
+describe('NexusAccountCard sign-in', () => {
+	it('sends nexus_sign_in and waits with a cancel button until Nexus Mods answers', async () => {
+		render(NexusAccountCard);
 
-		const input = screen.getByLabelText('API key') as HTMLInputElement;
-		await fireEvent.input(input, { target: { value: 'my-secret-token' } });
-		await fireEvent.click(screen.getByRole('button', { name: 'Save key' }));
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
 
-		expect(sent(MessageType.NEXUS_KEY_SET)).toHaveLength(1);
-		expect(sent(MessageType.NEXUS_KEY_SET)[0][1]).toEqual({ key: 'my-secret-token' });
-		expect(input.value).toBe('');
-	});
+		expect(sent(MessageType.NEXUS_SIGN_IN)).toHaveLength(1);
+		expect(screen.getByRole('status').textContent).toContain('Approve PalStudio');
+		expect(screen.queryByRole('button', { name: 'Sign in with Nexus Mods' })).toBeNull();
 
-	it('marks the field as password, non-autocompleting and unspellchecked', () => {
-		render(NexusKeyModal, { closeModal: vi.fn() });
+		await fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+		expect(sent(MessageType.NEXUS_SIGN_IN_CANCEL)).toHaveLength(1);
 
-		const input = screen.getByLabelText('API key') as HTMLInputElement;
-		expect(input.type).toBe('password');
-		expect(input.getAttribute('autocomplete')).toBe('off');
-		expect(input.getAttribute('spellcheck')).toBe('false');
-	});
-
-	it('renders an invalid_key refusal without repopulating the field', async () => {
-		render(NexusKeyModal, { closeModal: vi.fn() });
-
-		const input = screen.getByLabelText('API key') as HTMLInputElement;
-		await fireEvent.input(input, { target: { value: 'not-a-real-key' } });
-		await fireEvent.click(screen.getByRole('button', { name: 'Save key' }));
-
-		await nexusKeySetHandler.handle(
-			{ error: { code: 'invalid_key', message: 'that is not a Nexus Mods API key' } },
+		await nexusSignInHandler.handle(
+			{ error: { code: 'sign_in_cancelled', message: 'cancelled' } },
 			context
 		);
 		await tick();
 
-		expect(screen.getByRole('alert').textContent).toContain('did not accept');
-		expect(input.value).toBe('');
+		expect(screen.getByRole('button', { name: 'Sign in with Nexus Mods' })).toBeTruthy();
+		expect(screen.queryByRole('alert')).toBeNull();
 	});
 
-	it('moves focus into the field on open', async () => {
-		render(NexusKeyModal, { closeModal: vi.fn() });
-		await new Promise((resolve) => setTimeout(resolve, 0));
+	it('shows the account once the sign-in finishes', async () => {
+		render(NexusAccountCard);
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
 
-		expect(document.activeElement).toBe(screen.getByLabelText('API key'));
-	});
-
-	it('closes on a successful key set, not just on Cancel', async () => {
-		const closeModal = vi.fn();
-		render(NexusKeyModal, { closeModal });
-
-		const input = screen.getByLabelText('API key') as HTMLInputElement;
-		await fireEvent.input(input, { target: { value: 'my-secret-token' } });
-		await fireEvent.click(screen.getByRole('button', { name: 'Save key' }));
-		expect(closeModal).not.toHaveBeenCalled();
-
-		await nexusKeySetHandler.handle(
+		await nexusSignInHandler.handle(
 			{
-				has_key: true,
+				signed_in: true,
 				account: {
 					user_id: 7,
 					name: 'Tester',
-					is_premium: true,
+					is_premium: false,
 					is_supporter: false,
 					profile_url: null
 				},
@@ -281,6 +249,91 @@ describe('NexusKeyModal', () => {
 		);
 		await tick();
 
-		expect(closeModal).toHaveBeenCalledTimes(1);
+		expect(screen.getByText('Tester')).toBeTruthy();
+		expect(screen.getByText('Free account')).toBeTruthy();
+		expect(screen.queryByRole('status')).toBeNull();
+	});
+
+	it('drops the expiry warning once the user has signed in again', async () => {
+		render(NexusAccountCard);
+		await nexusAccountGetHandler.handle(
+			{ signed_in: false, error: { code: 'sign_in_expired', message: 'expired' } },
+			context
+		);
+		await tick();
+		expect(screen.getByRole('alert').textContent).toContain('has expired');
+
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
+		await nexusSignInHandler.handle(
+			{
+				signed_in: true,
+				account: {
+					user_id: 7,
+					name: 'Tester',
+					is_premium: false,
+					is_supporter: false,
+					profile_url: null
+				},
+				rate_limit: null
+			},
+			context
+		);
+		await tick();
+
+		expect(screen.getByText('Tester')).toBeTruthy();
+		expect(screen.queryByRole('alert')).toBeNull();
+	});
+
+	it('offers a retry, not another sign-in, when the account could not be read', async () => {
+		render(NexusAccountCard);
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
+		await nexusSignInHandler.handle(
+			{ signed_in: true, error: { code: 'network', message: 'no route' } },
+			context
+		);
+		await tick();
+
+		expect(screen.getByRole('alert').textContent).toContain('could not be reached');
+		expect(screen.queryByRole('button', { name: 'Sign in with Nexus Mods' })).toBeNull();
+		expect(screen.getByRole('button', { name: 'Sign out' })).toBeTruthy();
+
+		const before = sent(MessageType.NEXUS_ACCOUNT_GET).length;
+		await fireEvent.click(screen.getByRole('button', { name: 'Try again' }));
+		expect(sent(MessageType.NEXUS_ACCOUNT_GET)).toHaveLength(before + 1);
+
+		await nexusAccountGetHandler.handle(
+			{
+				signed_in: true,
+				account: {
+					user_id: 7,
+					name: 'Tester',
+					is_premium: false,
+					is_supporter: false,
+					profile_url: null
+				},
+				rate_limit: null
+			},
+			context
+		);
+		await tick();
+
+		expect(screen.getByText('Tester')).toBeTruthy();
+		expect(screen.queryByRole('alert')).toBeNull();
+	});
+
+	it('renders a failed sign-in under the button and clears it on the next try', async () => {
+		render(NexusAccountCard);
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
+		await nexusSignInHandler.handle(
+			{ error: { code: 'sign_in_timed_out', message: 'too slow' } },
+			context
+		);
+		await tick();
+
+		expect(screen.getByRole('alert').textContent).toContain('took too long');
+
+		await fireEvent.click(screen.getByRole('button', { name: 'Sign in with Nexus Mods' }));
+		expect(screen.queryByRole('alert')).toBeNull();
+		expect(sent(MessageType.NEXUS_SIGN_IN)).toHaveLength(2);
 	});
 });

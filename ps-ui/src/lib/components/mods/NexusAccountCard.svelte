@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { untrack, type Component } from 'svelte';
+	import { untrack } from 'svelte';
 	import { Button, Card } from '$components/ui';
 	import { getModalState, getModsState, getNexusState } from '$states';
 	import { openExternalLink } from '$lib/utils/externalLink';
 	import { MessageType } from '$types';
 	import * as m from '$i18n/messages';
-	import NexusKeyModal from './NexusKeyModal.svelte';
 	import { nexusErrorText } from './nexusText';
 	import { safeHttpUrl } from './nexusSafety';
 
@@ -17,7 +16,11 @@
 	const rateLimit = $derived(nexusState.rateLimit);
 	const handler = $derived(nexusState.handler);
 
-	const accountRefusal = $derived(modsState.lastErrorFor(MessageType.NEXUS_ACCOUNT_GET));
+	const signingIn = $derived(nexusState.isBusy('signIn'));
+	const accountRefusal = $derived(
+		modsState.lastErrorFor(MessageType.NEXUS_SIGN_IN) ??
+			modsState.lastErrorFor(MessageType.NEXUS_ACCOUNT_GET)
+	);
 
 	const profileUrl = $derived(safeHttpUrl(account?.profile_url ?? null));
 
@@ -56,10 +59,6 @@
 		});
 	});
 
-	function openKeyModal(): void {
-		modal.showModal(NexusKeyModal as unknown as Component, {});
-	}
-
 	async function replaceHandler(): Promise<void> {
 		const current = foreignCurrent ?? '';
 		const confirmed = await modal.showConfirmModal({
@@ -72,15 +71,20 @@
 		nexusState.registerHandler(true);
 	}
 
-	async function confirmClearKey(): Promise<void> {
+	function signIn(): void {
+		modsState.clearLastError(MessageType.NEXUS_SIGN_IN);
+		nexusState.signIn();
+	}
+
+	async function confirmSignOut(): Promise<void> {
 		const confirmed = await modal.showConfirmModal({
-			title: m.mods_nexus_account_clear_confirm_title(),
-			message: m.mods_nexus_account_clear_confirm_message(),
-			confirmText: m.mods_nexus_account_clear_key(),
+			title: m.mods_nexus_account_sign_out_confirm_title(),
+			message: m.mods_nexus_account_sign_out_confirm_message(),
+			confirmText: m.mods_nexus_account_sign_out(),
 			cancelText: m.mods_panel_cancel()
 		});
 		if (!confirmed) return;
-		nexusState.clearKey();
+		nexusState.signOut();
 	}
 </script>
 
@@ -89,10 +93,22 @@
 		<h3 class="text-surface-400 text-xs font-medium tracking-wide uppercase">
 			{m.mods_nexus_account_title()}
 		</h3>
-		{#if !nexusState.hasKey}
+		{#if signingIn}
+			<p class="text-surface-300 text-sm" role="status">
+				{m.mods_nexus_account_sign_in_waiting()}
+			</p>
+			<Button
+				variant="ghost"
+				size="sm"
+				class="self-start"
+				onclick={() => nexusState.cancelSignIn()}
+			>
+				{m.mods_nexus_account_sign_in_cancel()}
+			</Button>
+		{:else if !nexusState.signedIn}
 			<p class="text-surface-300 text-sm">{m.mods_nexus_account_anonymous()}</p>
-			<Button variant="secondary" size="sm" class="self-start" onclick={openKeyModal}>
-				{m.mods_nexus_account_add_key()}
+			<Button variant="secondary" size="sm" class="self-start" onclick={signIn}>
+				{m.mods_nexus_account_sign_in()}
 			</Button>
 		{:else if account}
 			<div class="flex flex-wrap items-center gap-2 text-sm">
@@ -115,12 +131,16 @@
 					</a>
 				{/if}
 			</div>
+			<Button variant="ghost" size="sm" class="self-start" onclick={confirmSignOut}>
+				{m.mods_nexus_account_sign_out()}
+			</Button>
+		{:else}
 			<div class="flex gap-2">
-				<Button variant="secondary" size="sm" onclick={openKeyModal}>
-					{m.mods_nexus_account_replace_key()}
+				<Button variant="secondary" size="sm" onclick={() => nexusState.loadAccount()}>
+					{m.mods_nexus_account_retry()}
 				</Button>
-				<Button variant="ghost" size="sm" onclick={confirmClearKey}>
-					{m.mods_nexus_account_clear_key()}
+				<Button variant="ghost" size="sm" onclick={confirmSignOut}>
+					{m.mods_nexus_account_sign_out()}
 				</Button>
 			</div>
 		{/if}

@@ -60,7 +60,8 @@ const inlineRefusals = new Set<string>([
 	MessageType.NEXUS_SEARCH,
 	MessageType.NEXUS_MOD_FILES,
 	MessageType.NEXUS_ACCOUNT_GET,
-	MessageType.NEXUS_KEY_SET
+	MessageType.NEXUS_SIGN_IN,
+	MessageType.NEXUS_SIGN_IN_CANCEL
 ]);
 
 /** Refusals a target's panel or the install modal renders; one without a target has nowhere to show. */
@@ -88,7 +89,7 @@ const panelRefusals = new Set<string>([
 	MessageType.MOD_CONFLICTS,
 	MessageType.MOD_VERIFICATION_GET,
 	MessageType.NEXUS_CATEGORIES,
-	MessageType.NEXUS_KEY_CLEAR,
+	MessageType.NEXUS_SIGN_OUT,
 	MessageType.NEXUS_HANDLER_STATUS,
 	MessageType.MOD_UPDATE_CHECK
 ]);

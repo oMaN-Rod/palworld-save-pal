@@ -194,7 +194,7 @@ describe('NexusState', () => {
 	});
 
 	it('clears in-flight work on a drop but keeps what the server told it', () => {
-		state.applyAccount({ has_key: true, account: null, rate_limit: null });
+		state.applyAccount({ signed_in: true, account: null, rate_limit: null });
 		state.search();
 		state.startDownload({ target_id: 't1', mod_id: 1, file_id: 2 });
 		state.checkUpdates('t1');
@@ -203,10 +203,10 @@ describe('NexusState', () => {
 		expect(state.isBusy('searching')).toBe(false);
 		expect(state.downloadingFile(1, 2)).toBe(false);
 		expect(state.checkedUpdates('t1')).toBe(false);
-		expect(state.hasKey).toBe(true);
+		expect(state.signedIn).toBe(true);
 
 		state.reset();
-		expect(state.hasKey).toBe(false);
+		expect(state.signedIn).toBe(false);
 		expect(state.results).toEqual([]);
 	});
 

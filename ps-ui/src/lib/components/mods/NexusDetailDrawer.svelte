@@ -40,8 +40,8 @@
 			.sort((a, b) => categoryRank(a.category) - categoryRank(b.category))
 	);
 
-	/** No key sits with a free account: both take the browser path with the same premium note. */
-	const isPremium = $derived(nexusState.hasKey && nexusState.account?.is_premium !== false);
+	/** Signed out, a free account and an account that has not loaded all take the browser path. */
+	const isPremium = $derived(nexusState.signedIn && nexusState.account?.is_premium === true);
 	const progress = $derived(modsState.progressFor(targetId));
 	const downloadError = $derived(modsState.lastErrorFor(MessageType.NEXUS_DOWNLOAD, targetId));
 	/** Serializes downloads per the drawer's own mod: the server keeps no per-file lock, and

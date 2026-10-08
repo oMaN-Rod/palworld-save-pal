@@ -3,8 +3,12 @@ import { nexusDateText, nexusErrorText } from './nexusText';
 
 describe('nexusErrorText', () => {
 	it('has its own sentence for the codes a user can act on', () => {
-		expect(nexusErrorText({ code: 'key_required', message: 'add a key' })).toContain('API key');
-		expect(nexusErrorText({ code: 'invalid_key', message: 'nope' })).toContain('did not accept');
+		expect(nexusErrorText({ code: 'sign_in_required', message: 'sign in' })).toContain('Sign in');
+		expect(nexusErrorText({ code: 'sign_in_expired', message: 'nope' })).toContain('has expired');
+		expect(nexusErrorText({ code: 'sign_in_timed_out', message: 'slow' })).toContain('took too long');
+		expect(nexusErrorText({ code: 'sign_in_refused', message: 'no' })).toContain('refused');
+		expect(nexusErrorText({ code: 'browser_failed', message: 'no' })).toContain('browser');
+		expect(nexusErrorText({ code: 'callback_unavailable', message: 'no' })).toContain('could not listen');
 		expect(nexusErrorText({ code: 'keyring_unavailable', message: 'boom' })).toContain('keyring');
 		expect(nexusErrorText({ code: 'desktop_only', message: 'no' })).toContain('desktop app');
 		expect(nexusErrorText({ code: 'network', message: 'no route' })).toContain('could not be reached');

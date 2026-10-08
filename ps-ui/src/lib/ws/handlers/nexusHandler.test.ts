@@ -57,26 +57,128 @@ describe('nexus handlers', () => {
 		holder.nexus.loadAccount();
 		await handlerFor(MessageType.NEXUS_ACCOUNT_GET).handle(
 			{
-				has_key: true,
+				signed_in: true,
 				account: { user_id: 7, name: 'Tester', is_premium: true, is_supporter: false, profile_url: null },
 				rate_limit: null
 			},
 			context
 		);
 		expect(holder.nexus.account?.name).toBe('Tester');
-		expect(holder.nexus.hasKey).toBe(true);
+		expect(holder.nexus.signedIn).toBe(true);
 		expect(holder.nexus.isBusy('account')).toBe(false);
 	});
 
-	it('records a refused key and leaves the account alone', async () => {
-		holder.nexus.setKey('not-a-key');
-		await handlerFor(MessageType.NEXUS_KEY_SET).handle(
-			{ error: { code: 'invalid_key', message: 'that is not a Nexus Mods API key' } },
+	it('records a refused sign-in and leaves the account alone', async () => {
+		holder.nexus.signIn();
+		expect(holder.nexus.isBusy('signIn')).toBe(true);
+		await handlerFor(MessageType.NEXUS_SIGN_IN).handle(
+			{ error: { code: 'sign_in_refused', message: 'Nexus Mods refused the sign-in' } },
 			context
 		);
-		expect(holder.nexus.hasKey).toBe(false);
-		expect(holder.mods.lastErrorFor(MessageType.NEXUS_KEY_SET)?.code).toBe('invalid_key');
-		expect(holder.nexus.isBusy('account')).toBe(false);
+		expect(holder.nexus.signedIn).toBe(false);
+		expect(holder.mods.lastErrorFor(MessageType.NEXUS_SIGN_IN)?.code).toBe('sign_in_refused');
+		expect(holder.nexus.isBusy('signIn')).toBe(false);
+		expect(toast.add).not.toHaveBeenCalled();
+	});
+
+	it('signs the account out when Nexus Mods reports the sign-in expired', async () => {
+		holder.nexus.applyAccount({
+			signed_in: true,
+			account: { user_id: 7, name: 'Tester', is_premium: true, is_supporter: false, profile_url: null },
+			rate_limit: null
+		});
+		holder.nexus.loadAccount();
+		await handlerFor(MessageType.NEXUS_ACCOUNT_GET).handle(
+			{ error: { code: 'sign_in_expired', message: 'expired' } },
+			context
+		);
+		expect(holder.nexus.signedIn).toBe(false);
+		expect(holder.nexus.account).toBeNull();
+		expect(holder.mods.lastErrorFor(MessageType.NEXUS_ACCOUNT_GET)?.code).toBe('sign_in_expired');
+	});
+
+	it('signs the account out when any authenticated reply reports the sign-in gone', async () => {
+		const signedIn = {
+			signed_in: true,
+			account: { user_id: 7, name: 'Tester', is_premium: true, is_supporter: false, profile_url: null },
+			rate_limit: null
+		};
+		holder.nexus.applyAccount(signedIn);
+		holder.nexus.loadCategories();
+		await handlerFor(MessageType.NEXUS_CATEGORIES).handle(
+			{ error: { code: 'sign_in_expired', message: 'expired' } },
+			context
+		);
+		expect(holder.nexus.signedIn).toBe(false);
+
+		holder.nexus.applyAccount(signedIn);
+		holder.nexus.startDownload({ target_id: 't1', mod_id: 4821, file_id: 99001 });
+		await handlerFor(MessageType.NEXUS_DOWNLOAD).handle(
+			{
+				target_id: 't1',
+				nexus_mod_id: 4821,
+				file_id: 99001,
+				error: { code: 'sign_in_required', message: 'sign in first' }
+			},
+			context
+		);
+		expect(holder.nexus.signedIn).toBe(false);
+		expect(holder.nexus.account).toBeNull();
+
+		holder.nexus.applyAccount(signedIn);
+		holder.nexus.loadCategories();
+		await handlerFor(MessageType.NEXUS_CATEGORIES).handle(
+			{ error: { code: 'network', message: 'no route' } },
+			context
+		);
+		expect(holder.nexus.signedIn).toBe(true);
+	});
+
+	it('stays signed in when the sign-in went through but the account could not be read', async () => {
+		holder.nexus.signIn();
+		await handlerFor(MessageType.NEXUS_SIGN_IN).handle(
+			{ signed_in: true, error: { code: 'network', message: 'no route' } },
+			context
+		);
+		expect(holder.nexus.signedIn).toBe(true);
+		expect(holder.nexus.account).toBeNull();
+		expect(holder.mods.lastErrorFor(MessageType.NEXUS_SIGN_IN)?.code).toBe('network');
+
+		holder.nexus.loadAccount();
+		await handlerFor(MessageType.NEXUS_ACCOUNT_GET).handle(
+			{
+				signed_in: true,
+				account: { user_id: 7, name: 'Tester', is_premium: false, is_supporter: false, profile_url: null },
+				rate_limit: null
+			},
+			context
+		);
+		expect(holder.nexus.account?.name).toBe('Tester');
+		expect(holder.mods.lastErrorFor(MessageType.NEXUS_SIGN_IN)).toBeUndefined();
+	});
+
+	it('treats a cancelled sign-in as no error at all', async () => {
+		holder.nexus.signIn();
+		await handlerFor(MessageType.NEXUS_SIGN_IN).handle(
+			{ error: { code: 'sign_in_cancelled', message: 'cancelled' } },
+			context
+		);
+		expect(holder.mods.lastErrorFor(MessageType.NEXUS_SIGN_IN)).toBeUndefined();
+		expect(holder.nexus.isBusy('signIn')).toBe(false);
+	});
+
+	it('stores the account a finished sign-in returns', async () => {
+		holder.nexus.signIn();
+		await handlerFor(MessageType.NEXUS_SIGN_IN).handle(
+			{
+				signed_in: true,
+				account: { user_id: 7, name: 'Tester', is_premium: false, is_supporter: false, profile_url: null },
+				rate_limit: null
+			},
+			context
+		);
+		expect(holder.nexus.account?.name).toBe('Tester');
+		expect(holder.nexus.isBusy('signIn')).toBe(false);
 	});
 
 	it('stores a search page', async () => {

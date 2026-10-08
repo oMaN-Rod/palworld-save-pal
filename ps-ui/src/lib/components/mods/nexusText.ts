@@ -4,10 +4,18 @@ import type { ModError } from '$types';
 /** The server's own message is the fallback; it may be Nexus's text, so never render it as HTML. */
 export function nexusErrorText(error: ModError): string {
 	switch (error.code) {
-		case 'key_required':
-			return m.mods_nexus_error_key_required();
-		case 'invalid_key':
-			return m.mods_nexus_error_invalid_key();
+		case 'sign_in_required':
+			return m.mods_nexus_error_sign_in_required();
+		case 'sign_in_expired':
+			return m.mods_nexus_error_sign_in_expired();
+		case 'sign_in_timed_out':
+			return m.mods_nexus_error_sign_in_timed_out();
+		case 'sign_in_refused':
+			return m.mods_nexus_error_sign_in_refused();
+		case 'browser_failed':
+			return m.mods_nexus_error_browser_failed();
+		case 'callback_unavailable':
+			return m.mods_nexus_error_callback_unavailable();
 		case 'keyring_unavailable':
 			return m.mods_nexus_error_keyring();
 		case 'desktop_only':

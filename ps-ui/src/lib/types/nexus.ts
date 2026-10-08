@@ -18,7 +18,7 @@ export interface NexusRateLimit {
 }
 
 export interface NexusAccountReply {
-	has_key: boolean;
+	signed_in: boolean;
 	account: NexusAccount | null;
 	rate_limit: NexusRateLimit | null;
 	error?: ModError;

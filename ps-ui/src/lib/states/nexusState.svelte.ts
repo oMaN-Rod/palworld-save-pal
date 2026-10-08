@@ -22,6 +22,7 @@ import { MessageType } from '$types';
 
 export type NexusBusyKind =
 	| 'account'
+	| 'signIn'
 	| 'categories'
 	| 'searching'
 	| 'files'
@@ -42,7 +43,7 @@ function without<T>(record: Record<string, T>, key: string): Record<string, T> {
 }
 
 export class NexusState {
-	hasKey = $state(false);
+	signedIn = $state(false);
 	account = $state<NexusAccount | null>(null);
 	rateLimit = $state<NexusRateLimit | null>(null);
 	categories = $state<NexusCategory[]>([]);
@@ -117,15 +118,19 @@ export class NexusState {
 		send(MessageType.NEXUS_ACCOUNT_GET, {});
 	}
 
-	/** The key is passed straight through and never stored here. */
-	setKey(key: string): void {
-		this.#startBusy('account');
-		send(MessageType.NEXUS_KEY_SET, { key });
+	/** The reply only arrives once the user has approved PalStudio on the Nexus Mods site. */
+	signIn(): void {
+		this.#startBusy('signIn');
+		send(MessageType.NEXUS_SIGN_IN, {});
 	}
 
-	clearKey(): void {
+	cancelSignIn(): void {
+		send(MessageType.NEXUS_SIGN_IN_CANCEL, {});
+	}
+
+	signOut(): void {
 		this.#startBusy('account');
-		send(MessageType.NEXUS_KEY_CLEAR, {});
+		send(MessageType.NEXUS_SIGN_OUT, {});
 	}
 
 	loadCategories(): void {
@@ -206,9 +211,15 @@ export class NexusState {
 	}
 
 	applyAccount(reply: NexusAccountReply): void {
-		this.hasKey = reply.has_key;
+		this.signedIn = reply.signed_in;
 		this.account = reply.account;
 		this.rateLimit = reply.rate_limit;
+	}
+
+	/** Nexus Mods dropped the sign-in on its side; the rate limit it last reported still holds. */
+	signedOut(): void {
+		this.signedIn = false;
+		this.account = null;
 	}
 
 	applyCategories(reply: NexusCategoriesReply): void {
@@ -320,7 +331,7 @@ export class NexusState {
 
 	reset(): void {
 		this.forgetInFlight();
-		this.hasKey = false;
+		this.signedIn = false;
 		this.account = null;
 		this.rateLimit = null;
 		this.categories = [];

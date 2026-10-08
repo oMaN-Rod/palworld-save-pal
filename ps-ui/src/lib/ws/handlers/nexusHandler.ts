@@ -4,32 +4,54 @@ import type { NexusDownloadReply, NexusLinkPush } from '$types';
 import { getModsState, getNexusState } from '$states';
 import { settled } from './modsHandler';
 
+/** Any reply made on the account's behalf can report the sign-in gone, or still held despite a failure. */
+function noteSession(data: { signed_in?: boolean; error?: { code?: string } } | undefined): void {
+	const code = data?.error?.code;
+	if (code === undefined) return;
+	const state = getNexusState();
+	if (code === 'sign_in_expired' || code === 'sign_in_required') state.signedOut();
+	else if (data?.signed_in === true) state.signedIn = true;
+}
+
 export const nexusAccountGetHandler: WSMessageHandler = {
 	type: MessageType.NEXUS_ACCOUNT_GET,
 	async handle(data) {
 		const state = getNexusState();
 		state.finishBusy('account');
+		noteSession(data);
 		if (settled(MessageType.NEXUS_ACCOUNT_GET, data)) return;
+		getModsState().clearLastError(MessageType.NEXUS_SIGN_IN);
 		state.applyAccount(data);
 	}
 };
 
-export const nexusKeySetHandler: WSMessageHandler = {
-	type: MessageType.NEXUS_KEY_SET,
+export const nexusSignInHandler: WSMessageHandler = {
+	type: MessageType.NEXUS_SIGN_IN,
 	async handle(data) {
 		const state = getNexusState();
-		state.finishBusy('account');
-		if (settled(MessageType.NEXUS_KEY_SET, data)) return;
+		state.finishBusy('signIn');
+		if (data?.error?.code === 'sign_in_cancelled') return;
+		noteSession(data);
+		if (settled(MessageType.NEXUS_SIGN_IN, data)) return;
+		getModsState().clearLastError(MessageType.NEXUS_ACCOUNT_GET);
 		state.applyAccount(data);
 	}
 };
 
-export const nexusKeyClearHandler: WSMessageHandler = {
-	type: MessageType.NEXUS_KEY_CLEAR,
+/** The cancelled sign-in answers for itself under `nexus_sign_in`. */
+export const nexusSignInCancelHandler: WSMessageHandler = {
+	type: MessageType.NEXUS_SIGN_IN_CANCEL,
+	async handle(data) {
+		settled(MessageType.NEXUS_SIGN_IN_CANCEL, data);
+	}
+};
+
+export const nexusSignOutHandler: WSMessageHandler = {
+	type: MessageType.NEXUS_SIGN_OUT,
 	async handle(data) {
 		const state = getNexusState();
 		state.finishBusy('account');
-		if (settled(MessageType.NEXUS_KEY_CLEAR, data)) return;
+		if (settled(MessageType.NEXUS_SIGN_OUT, data)) return;
 		state.applyAccount(data);
 	}
 };
@@ -39,6 +61,7 @@ export const nexusCategoriesHandler: WSMessageHandler = {
 	async handle(data) {
 		const state = getNexusState();
 		state.finishBusy('categories');
+		noteSession(data);
 		if (settled(MessageType.NEXUS_CATEGORIES, data)) return;
 		state.applyCategories(data);
 	}
@@ -69,6 +92,7 @@ export const nexusDownloadHandler: WSMessageHandler = {
 	async handle(data: NexusDownloadReply) {
 		const state = getNexusState();
 		state.finishDownload(data.nexus_mod_id, data.file_id);
+		noteSession(data);
 		if (settled(MessageType.NEXUS_DOWNLOAD, data, data.target_id)) return;
 		if (data.needs_decisions) {
 			state.holdDecisions(data);
@@ -139,8 +163,9 @@ export const modUpdateIgnoreHandler: WSMessageHandler = {
 
 export const nexusHandlers: WSMessageHandler[] = [
 	nexusAccountGetHandler,
-	nexusKeySetHandler,
-	nexusKeyClearHandler,
+	nexusSignInHandler,
+	nexusSignInCancelHandler,
+	nexusSignOutHandler,
 	nexusCategoriesHandler,
 	nexusSearchHandler,
 	nexusModFilesHandler,

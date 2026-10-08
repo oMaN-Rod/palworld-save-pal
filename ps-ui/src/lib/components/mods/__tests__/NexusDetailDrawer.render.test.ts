@@ -69,7 +69,7 @@ function sent(type: MessageType) {
 }
 
 function setPremiumAccount(): void {
-	nexusState().hasKey = true;
+	nexusState().signedIn = true;
 	nexusState().account = {
 		user_id: 1,
 		name: 'Tester',
@@ -135,7 +135,7 @@ describe('NexusDetailDrawer', () => {
 		});
 	});
 
-	it('shows the browser sentence and sends no nexus_download with no key stored at all', async () => {
+	it('shows the browser sentence and sends no nexus_download while signed out', async () => {
 		render(NexusDetailDrawer, { targetId: TARGET_ID, modId: MOD_ID, onClose: vi.fn() });
 		await applyFiles([file({ file_id: 99001, name: 'Cool Mod', version: '1.2.0' })]);
 
@@ -144,6 +144,19 @@ describe('NexusDetailDrawer', () => {
 			screen.getByRole('button', { name: 'Download Cool Mod 1.2.0 in your browser' })
 		).toBeTruthy();
 		expect(sent(MessageType.NEXUS_DOWNLOAD)).toHaveLength(0);
+	});
+
+	it('keeps the browser option while signed in with an account that has not loaded', async () => {
+		nexusState().signedIn = true;
+		nexusState().account = null;
+		render(NexusDetailDrawer, { targetId: TARGET_ID, modId: MOD_ID, onClose: vi.fn() });
+		await applyFiles([file({ file_id: 99001, name: 'Cool Mod', version: '1.2.0' })]);
+
+		expect(screen.getAllByText(/Nexus Mods Premium/).length).toBeGreaterThan(0);
+		expect(
+			screen.getByRole('button', { name: 'Download Cool Mod 1.2.0 in your browser' })
+		).toBeTruthy();
+		expect(screen.queryByRole('button', { name: 'Download Cool Mod 1.2.0' })).toBeNull();
 	});
 
 	it('shows the browser sentence and sends no nexus_download for a non-premium account', async () => {
