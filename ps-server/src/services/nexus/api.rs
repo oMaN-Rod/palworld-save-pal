@@ -4,7 +4,7 @@ use std::sync::{Mutex, PoisonError};
 use std::time::Duration;
 
 use async_trait::async_trait;
-use reqwest::header::{HeaderMap, HeaderName, HeaderValue, USER_AGENT};
+use reqwest::header::{HeaderMap, HeaderName, HeaderValue, AUTHORIZATION, USER_AGENT};
 use reqwest::StatusCode;
 use serde_json::{json, Value};
 
@@ -13,7 +13,7 @@ use ps_core::nexus::{
     SearchData, SearchParams,
 };
 
-use super::keystore::ApiKey;
+use super::oauth::AccessToken;
 use crate::services::mods::frameworks::source::Progress;
 
 pub const API_BASE: &str = "https://api.nexusmods.com";
@@ -40,8 +40,8 @@ impl std::fmt::Debug for NxmAuth {
 
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 pub enum NexusError {
-    #[error("Nexus Mods did not accept the API key")]
-    InvalidKey,
+    #[error("Nexus Mods no longer accepts this sign-in")]
+    Unauthorized,
     #[error("downloading directly needs a Nexus Mods Premium account")]
     PremiumRequired,
     #[error("the download link does not match this file")]
@@ -65,7 +65,7 @@ pub enum NexusError {
 impl NexusError {
     pub fn code(&self) -> &'static str {
         match self {
-            NexusError::InvalidKey => "invalid_key",
+            NexusError::Unauthorized => "sign_in_expired",
             NexusError::PremiumRequired => "premium_required",
             NexusError::InvalidLink => "invalid_link",
             NexusError::LinkExpired => "link_expired",
@@ -89,13 +89,13 @@ impl NexusError {
 
 #[async_trait]
 pub trait NexusApi: Send + Sync {
-    async fn validate(&self, key: &ApiKey) -> Result<Account, NexusError>;
-    async fn categories(&self, key: &ApiKey) -> Result<Vec<Category>, NexusError>;
+    async fn validate(&self, token: &AccessToken) -> Result<Account, NexusError>;
+    async fn categories(&self, token: &AccessToken) -> Result<Vec<Category>, NexusError>;
     async fn search(&self, params: &SearchParams) -> Result<ModsPage, NexusError>;
     async fn mod_files(&self, mod_ids: &[u32]) -> Result<BTreeMap<u32, Vec<ModFile>>, NexusError>;
     async fn download_link(
         &self,
-        key: &ApiKey,
+        token: &AccessToken,
         mod_id: u32,
         file_id: u32,
         nxm: Option<&NxmAuth>,
@@ -147,9 +147,9 @@ impl HttpNexusApi {
         let api = reqwest::Client::builder()
             .default_headers(app_headers())
             .timeout(API_TIMEOUT)
-            // A cross-host redirect keeps the `apikey` header, so following one
-            // would hand the user's key to another host. Treat any 3xx as an
-            // ordinary unexpected status instead.
+            // Following a redirect could hand the user's access token to
+            // another host. Treat any 3xx as an ordinary unexpected status
+            // instead.
             .redirect(reqwest::redirect::Policy::none())
             .build()
             .expect("nexus api client");
@@ -187,17 +187,18 @@ impl HttpNexusApi {
 
     async fn v1_get(
         &self,
-        key: &ApiKey,
+        token: &AccessToken,
         path: &str,
         query: &[(&str, String)],
         premium_route: bool,
     ) -> Result<Value, NexusError> {
-        let mut apikey = HeaderValue::from_str(key.expose()).map_err(|_| NexusError::InvalidKey)?;
-        apikey.set_sensitive(true);
+        let mut bearer = HeaderValue::from_str(&format!("Bearer {}", token.expose()))
+            .map_err(|_| NexusError::Unauthorized)?;
+        bearer.set_sensitive(true);
         let response = self
             .api
             .get(format!("{}{path}", self.v1_base))
-            .header("apikey", apikey)
+            .header(AUTHORIZATION, bearer)
             .query(query)
             .send()
             .await
@@ -299,14 +300,16 @@ impl HttpNexusApi {
 
 #[async_trait]
 impl NexusApi for HttpNexusApi {
-    async fn validate(&self, key: &ApiKey) -> Result<Account, NexusError> {
-        let value = self.v1_get(key, "/users/validate.json", &[], false).await?;
+    async fn validate(&self, token: &AccessToken) -> Result<Account, NexusError> {
+        let value = self
+            .v1_get(token, "/users/validate.json", &[], false)
+            .await?;
         nexus::parse_account(value).map_err(|error| unexpected(StatusCode::OK, error))
     }
 
-    async fn categories(&self, key: &ApiKey) -> Result<Vec<Category>, NexusError> {
+    async fn categories(&self, token: &AccessToken) -> Result<Vec<Category>, NexusError> {
         let path = format!("/games/{}.json", nexus::GAME_DOMAIN);
-        let value = self.v1_get(key, &path, &[], false).await?;
+        let value = self.v1_get(token, &path, &[], false).await?;
         nexus::categories_from_game(value).map_err(|error| unexpected(StatusCode::OK, error))
     }
 
@@ -333,7 +336,7 @@ impl NexusApi for HttpNexusApi {
 
     async fn download_link(
         &self,
-        key: &ApiKey,
+        token: &AccessToken,
         mod_id: u32,
         file_id: u32,
         nxm: Option<&NxmAuth>,
@@ -347,7 +350,7 @@ impl NexusApi for HttpNexusApi {
             "/games/{}/mods/{mod_id}/files/{file_id}/download_link.json",
             nexus::GAME_DOMAIN
         );
-        let value = self.v1_get(key, &path, &query, true).await?;
+        let value = self.v1_get(token, &path, &query, true).await?;
         let links: Vec<DownloadLink> =
             serde_json::from_value(value).map_err(|error| unexpected(StatusCode::OK, error))?;
         links
@@ -431,7 +434,7 @@ fn v1_error(
     premium_route: bool,
 ) -> NexusError {
     match status {
-        StatusCode::UNAUTHORIZED => NexusError::InvalidKey,
+        StatusCode::UNAUTHORIZED => NexusError::Unauthorized,
         StatusCode::FORBIDDEN if premium_route => NexusError::PremiumRequired,
         StatusCode::BAD_REQUEST => NexusError::InvalidLink,
         StatusCode::GONE => NexusError::LinkExpired,
@@ -482,8 +485,8 @@ mod tests {
         format!("http://{addr}")
     }
 
-    fn key(text: &str) -> ApiKey {
-        ApiKey::parse(text).unwrap()
+    fn token(text: &str) -> AccessToken {
+        AccessToken::new(text)
     }
 
     type Seen = Arc<std::sync::Mutex<Vec<AxumHeaders>>>;
@@ -498,7 +501,7 @@ mod tests {
     ];
 
     #[tokio::test]
-    async fn validate_sends_the_key_and_app_headers_and_records_the_rate_limit() {
+    async fn validate_sends_the_bearer_token_and_app_headers_and_records_the_rate_limit() {
         let seen: Seen = Default::default();
         let router = axum::Router::new()
             .route(
@@ -518,13 +521,14 @@ mod tests {
             .with_state(seen.clone());
         let api = HttpNexusApi::new(&spawn(router).await);
 
-        let account = api.validate(&key("k-123")).await.unwrap();
+        let account = api.validate(&token("k-123")).await.unwrap();
         assert_eq!(
             (account.user_id, account.name.as_str(), account.is_premium),
             (7, "Tester", true)
         );
         let headers = seen.lock().unwrap()[0].clone();
-        assert_eq!(headers["apikey"], "k-123");
+        assert_eq!(headers["authorization"], "Bearer k-123");
+        assert!(headers.get("apikey").is_none());
         assert_eq!(headers["application-name"], "PalStudio");
         assert_eq!(headers["application-version"], env!("CARGO_PKG_VERSION"));
         assert_eq!(
@@ -535,20 +539,20 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn a_rejected_key_is_invalid_key() {
+    async fn a_rejected_token_is_unauthorized() {
         let router = axum::Router::new().route(
             "/v1/users/validate.json",
             get(|| async {
                 (
                     AxumStatus::UNAUTHORIZED,
-                    Json(serde_json::json!({ "message": "Please provide a valid API Key" })),
+                    Json(serde_json::json!({ "message": "Unauthorized" })),
                 )
             }),
         );
         let api = HttpNexusApi::new(&spawn(router).await);
         assert_eq!(
-            api.validate(&key("nope")).await.unwrap_err(),
-            NexusError::InvalidKey
+            api.validate(&token("nope")).await.unwrap_err(),
+            NexusError::Unauthorized
         );
     }
 
@@ -564,7 +568,7 @@ mod tests {
             }),
         );
         let api = HttpNexusApi::new(&spawn(router).await);
-        let error = api.validate(&key("k")).await.unwrap_err();
+        let error = api.validate(&token("k")).await.unwrap_err();
         assert_eq!(error.code(), "nexus_error", "{error}");
     }
 
@@ -580,13 +584,13 @@ mod tests {
             }),
         );
         let api = HttpNexusApi::new(&spawn(router).await);
-        let categories = api.categories(&key("k")).await.unwrap();
+        let categories = api.categories(&token("k")).await.unwrap();
         assert_eq!(categories.len(), 2);
         assert_eq!(categories[1].parent_category, Some(1));
     }
 
     #[tokio::test]
-    async fn graphql_calls_never_carry_the_key_and_batch_mod_files() {
+    async fn graphql_calls_never_carry_the_token_and_batch_mod_files() {
         type SeenGraphql = Arc<std::sync::Mutex<Vec<(AxumHeaders, serde_json::Value)>>>;
         let seen: SeenGraphql = Default::default();
         let router = axum::Router::new()
@@ -634,7 +638,7 @@ mod tests {
         let seen = seen.lock().unwrap();
         assert_eq!(seen.len(), 2, "an empty id list makes no request");
         for (headers, _) in seen.iter() {
-            assert!(headers.get("apikey").is_none());
+            assert!(headers.get("authorization").is_none());
             assert_eq!(headers["application-name"], "PalStudio");
         }
         assert_eq!(
@@ -692,7 +696,7 @@ mod tests {
         };
 
         assert_eq!(
-            api.download_link(&key("k"), 1, 55, Some(&nxm))
+            api.download_link(&token("k"), 1, 55, Some(&nxm))
                 .await
                 .unwrap(),
             "https://cdn.example.invalid/55.zip"
@@ -700,11 +704,11 @@ mod tests {
         let first = queries.lock().unwrap()[0].clone();
         assert_eq!(first.get("key").map(String::as_str), Some("nxm-key"));
         assert_eq!(first.get("expires").map(String::as_str), Some("4102444800"));
-        api.download_link(&key("k"), 1, 55, None).await.unwrap();
+        api.download_link(&token("k"), 1, 55, None).await.unwrap();
         assert!(queries.lock().unwrap()[1].is_empty());
 
         for (mod_id, code) in [
-            (401, "invalid_key"),
+            (401, "sign_in_expired"),
             (403, "premium_required"),
             (400, "invalid_link"),
             (410, "link_expired"),
@@ -712,13 +716,13 @@ mod tests {
             (502, "nexus_error"),
         ] {
             let error = api
-                .download_link(&key("k"), mod_id, 1, None)
+                .download_link(&token("k"), mod_id, 1, None)
                 .await
                 .unwrap_err();
             assert_eq!(error.code(), code, "{mod_id}");
         }
         let limited = api
-            .download_link(&key("k"), 429, 1, None)
+            .download_link(&token("k"), 429, 1, None)
             .await
             .unwrap_err();
         assert_eq!(
@@ -784,7 +788,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn a_redirect_never_leaks_the_key_to_another_host() {
+    async fn a_redirect_never_leaks_the_token_to_another_host() {
         let leaked: Seen = Default::default();
         let decoy = axum::Router::new()
             .route(
@@ -809,7 +813,7 @@ mod tests {
         );
         let api = HttpNexusApi::new(&spawn(router).await);
 
-        let error = api.validate(&key("k-123")).await.unwrap_err();
+        let error = api.validate(&token("k-123")).await.unwrap_err();
         assert_eq!(error.code(), "nexus_error");
         assert!(
             leaked.lock().unwrap().is_empty(),

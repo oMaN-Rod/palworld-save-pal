@@ -1,7 +1,10 @@
-//! Wire handlers for Nexus Mods: the stored API key and account, browsing,
+//! Wire handlers for Nexus Mods: OAuth sign-in and the account, browsing,
 //! downloads, nxm:// link delivery, link handler registration and update
 //! checks. Every one runs only for the desktop app's own loopback connection.
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
+
+use tokio_util::sync::CancellationToken;
 
 use serde_json::{json, Value};
 
@@ -16,10 +19,11 @@ use crate::mods_handlers::{
 };
 use crate::services::mods::uploads::UploadStore;
 use crate::services::mods::{deploy, install, layout, library, LibraryPaths};
-use crate::services::nexus::api::{NexusError, NxmAuth, MAX_DOWNLOAD};
-use crate::services::nexus::keystore::{self, ApiKey, KeyStoreError};
+use crate::services::nexus::api::{NexusApi, NexusError, NxmAuth, MAX_DOWNLOAD};
 use crate::services::nexus::now_secs;
+use crate::services::nexus::oauth::{OAuthError, Tokens};
 use crate::services::nexus::protocol::{HandlerStatus, RegistryError};
+use crate::services::nexus::session::{CallError, NexusSession, SessionError};
 use crate::services::ServerServices;
 
 pub(crate) fn nexus_allowed(
@@ -57,11 +61,11 @@ pub(crate) fn refuse_nexus(
     );
 }
 
-pub(crate) fn refuse_key_store(
+pub(crate) fn refuse_session(
     ctx: &mut HandlerCtx<'_>,
     message_type: MessageType,
     context: Value,
-    error: &KeyStoreError,
+    error: &SessionError,
 ) {
     emit_refusal(
         ctx,
@@ -73,48 +77,43 @@ pub(crate) fn refuse_key_store(
     );
 }
 
-async fn stored_key(
-    services: &ServerServices,
+pub(crate) fn refuse_call(
     ctx: &mut HandlerCtx<'_>,
     message_type: MessageType,
-    context: &Value,
-) -> Option<Option<ApiKey>> {
-    match keystore::read_key(&services.nexus_keys).await {
-        Ok(key) => Some(key),
-        Err(error) => {
-            refuse_key_store(ctx, message_type, context.clone(), &error);
-            None
-        }
+    context: Value,
+    error: &CallError,
+) {
+    match error {
+        CallError::Session(error) => refuse_session(ctx, message_type, context, error),
+        CallError::Nexus(error) => refuse_nexus(ctx, message_type, context, error),
     }
 }
 
-pub(crate) async fn required_key(
-    services: &ServerServices,
-    ctx: &mut HandlerCtx<'_>,
-    message_type: MessageType,
-    context: &Value,
-) -> Option<ApiKey> {
-    match stored_key(services, ctx, message_type, context).await? {
-        Some(key) => Some(key),
-        None => {
-            emit_refusal(
-                ctx,
-                message_type,
-                context.clone(),
-                "key_required",
-                "add a Nexus Mods API key first".to_string(),
-                json!({}),
-            );
-            None
-        }
-    }
+fn refuse_signed_out(ctx: &mut HandlerCtx<'_>, message_type: MessageType, context: Value) {
+    emit_refusal(
+        ctx,
+        message_type,
+        context,
+        "sign_in_required",
+        "sign in to Nexus Mods first".to_string(),
+        json!({}),
+    );
 }
 
-fn account_reply(services: &ServerServices, account: Option<&Account>) -> Value {
+/// `sign_in_expired` is only ever reported once the grant has been dropped.
+fn still_signed_in(error: &CallError) -> bool {
+    !matches!(
+        error,
+        CallError::Session(SessionError::OAuth(OAuthError::Expired))
+            | CallError::Nexus(NexusError::Unauthorized)
+    )
+}
+
+fn account_reply(nexus: &dyn NexusApi, account: Option<&Account>) -> Value {
     json!({
-        "has_key": account.is_some(),
+        "signed_in": account.is_some(),
         "account": account,
-        "rate_limit": services.nexus.rate_limit(),
+        "rate_limit": nexus.rate_limit(),
     })
 }
 
@@ -124,83 +123,158 @@ pub async fn handle_nexus_account_get(
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
     let message_type = MessageType::NexusAccountGet;
-    let context = json!({});
-    if !nexus_allowed(ctx, message_type, &context) {
+    if !nexus_allowed(ctx, message_type, &json!({})) {
         return Ok(());
     }
-    let Some(key) = stored_key(services, ctx, message_type, &context).await else {
-        return Ok(());
-    };
-    let Some(key) = key else {
-        ctx.emitter
-            .emit(message_type, &account_reply(services, None));
-        return Ok(());
-    };
-    match services.nexus.validate(&key).await {
+    let nexus = &services.nexus;
+    let validated = services
+        .nexus_session
+        .authorized(|token| async move { nexus.validate(&token).await })
+        .await;
+    match validated {
         Ok(account) => ctx
             .emitter
-            .emit(message_type, &account_reply(services, Some(&account))),
-        Err(error) => refuse_nexus(ctx, message_type, json!({ "has_key": true }), &error),
-    }
-    Ok(())
-}
-
-pub async fn handle_nexus_key_set(
-    services: &ServerServices,
-    data: Value,
-    ctx: &mut HandlerCtx<'_>,
-) -> Result<(), HandlerError> {
-    let message_type = MessageType::NexusKeySet;
-    let context = json!({});
-    if !nexus_allowed(ctx, message_type, &context) {
-        return Ok(());
-    }
-    let Some(key) = data
-        .get("key")
-        .and_then(Value::as_str)
-        .and_then(ApiKey::parse)
-    else {
-        emit_refusal(
-            ctx,
-            message_type,
-            context,
-            "invalid_key",
-            "that is not a Nexus Mods API key".to_string(),
-            json!({}),
-        );
-        return Ok(());
-    };
-    let account = match services.nexus.validate(&key).await {
-        Ok(account) => account,
+            .emit(message_type, &account_reply(&**nexus, account.as_ref())),
         Err(error) => {
-            refuse_nexus(ctx, message_type, context, &error);
-            return Ok(());
+            let context = json!({ "signed_in": still_signed_in(&error) });
+            refuse_call(ctx, message_type, context, &error);
         }
-    };
-    if let Err(error) = keystore::write_key(&services.nexus_keys, key).await {
-        refuse_key_store(ctx, message_type, context, &error);
-        return Ok(());
     }
-    ctx.emitter
-        .emit(message_type, &account_reply(services, Some(&account)));
     Ok(())
 }
 
-pub async fn handle_nexus_key_clear(
+/// A sign-in that came back from the browser: its tokens, not yet kept, and
+/// what reading the account with them gave.
+struct Granted {
+    tokens: Tokens,
+    account: Result<Account, NexusError>,
+}
+
+enum SignInFailure {
+    Session(SessionError),
+    /// Nexus Mods would not let the new tokens read the account.
+    Rejected(NexusError),
+}
+
+impl From<SessionError> for SignInFailure {
+    fn from(error: SessionError) -> Self {
+        SignInFailure::Session(error)
+    }
+}
+
+/// Keeps nothing: whoever closes the cancel window decides whether the
+/// tokens are adopted.
+async fn sign_in(
+    session: &NexusSession,
+    nexus: &dyn NexusApi,
+    cancel: &CancellationToken,
+) -> Result<Granted, SignInFailure> {
+    let tokens = session.authorize(cancel).await?;
+    let account = tokio::select! {
+        _ = cancel.cancelled() => {
+            return Err(SignInFailure::Session(OAuthError::Cancelled.into()));
+        }
+        account = nexus.validate(&tokens.access) => account,
+    };
+    match account {
+        Err(error @ NexusError::Unauthorized) => Err(SignInFailure::Rejected(error)),
+        // An outage or a rate limit says nothing against the grant itself.
+        account => Ok(Granted { tokens, account }),
+    }
+}
+
+fn nexus_refusal(error: &NexusError) -> Value {
+    let mut refusal = json!({ "code": error.code(), "message": error.to_string() });
+    if let (Some(refusal), Value::Object(detail)) = (refusal.as_object_mut(), error.detail()) {
+        refusal.extend(detail);
+    }
+    refusal
+}
+
+fn session_refusal(error: &SessionError) -> Value {
+    json!({ "error": { "code": error.code(), "message": error.to_string() } })
+}
+
+pub async fn handle_nexus_sign_in(
     services: &ServerServices,
     _data: Value,
     ctx: &mut HandlerCtx<'_>,
 ) -> Result<(), HandlerError> {
-    let message_type = MessageType::NexusKeyClear;
+    let message_type = MessageType::NexusSignIn;
+    if !nexus_allowed(ctx, message_type, &json!({})) {
+        return Ok(());
+    }
+    let cancel = services.nexus_sign_in.begin();
+    let session = Arc::clone(&services.nexus_session);
+    let slot = Arc::clone(&services.nexus_sign_in);
+    let nexus = Arc::clone(&services.nexus);
+    let emitter = ctx.emitter.clone();
+    // The user finishes in their browser, which can take minutes; waiting here
+    // would hold up every other message on this connection.
+    tokio::spawn(async move {
+        let outcome = tokio::select! {
+            _ = emitter.closed() => {
+                cancel.cancel();
+                return;
+            }
+            outcome = sign_in(&session, &*nexus, &cancel) => outcome,
+        };
+        // Nothing has been kept yet, so a cancel that got in first costs
+        // nothing, and one that comes later is told it was too late.
+        let reply = if !slot.finish(&cancel) {
+            session_refusal(&OAuthError::Cancelled.into())
+        } else {
+            match outcome {
+                Err(SignInFailure::Session(error)) => session_refusal(&error),
+                Err(SignInFailure::Rejected(error)) => {
+                    json!({ "signed_in": false, "error": nexus_refusal(&error) })
+                }
+                Ok(granted) => match session.adopt(granted.tokens).await {
+                    Err(error) => session_refusal(&error),
+                    Ok(_) => match granted.account {
+                        Ok(account) => account_reply(&*nexus, Some(&account)),
+                        Err(error) => {
+                            json!({ "signed_in": true, "error": nexus_refusal(&error) })
+                        }
+                    },
+                },
+            }
+        };
+        emitter.emit(message_type, &reply);
+    });
+    Ok(())
+}
+
+pub async fn handle_nexus_sign_in_cancel(
+    services: &ServerServices,
+    _data: Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let message_type = MessageType::NexusSignInCancel;
+    if !nexus_allowed(ctx, message_type, &json!({})) {
+        return Ok(());
+    }
+    let cancelled = services.nexus_sign_in.cancel();
+    ctx.emitter
+        .emit(message_type, &json!({ "cancelled": cancelled }));
+    Ok(())
+}
+
+pub async fn handle_nexus_sign_out(
+    services: &ServerServices,
+    _data: Value,
+    ctx: &mut HandlerCtx<'_>,
+) -> Result<(), HandlerError> {
+    let message_type = MessageType::NexusSignOut;
     let context = json!({});
     if !nexus_allowed(ctx, message_type, &context) {
         return Ok(());
     }
-    match keystore::clear_key(&services.nexus_keys).await {
+    match services.nexus_session.sign_out().await {
         Ok(()) => ctx
             .emitter
-            .emit(message_type, &account_reply(services, None)),
-        Err(error) => refuse_key_store(ctx, message_type, context, &error),
+            .emit(message_type, &account_reply(&*services.nexus, None)),
+        Err(error) => refuse_session(ctx, message_type, context, &error.into()),
     }
     Ok(())
 }
@@ -215,14 +289,17 @@ pub async fn handle_nexus_categories(
     if !nexus_allowed(ctx, message_type, &context) {
         return Ok(());
     }
-    let Some(key) = required_key(services, ctx, message_type, &context).await else {
-        return Ok(());
-    };
-    match services.nexus.categories(&key).await {
-        Ok(categories) => ctx
+    let nexus = &services.nexus;
+    let listed = services
+        .nexus_session
+        .authorized(|token| async move { nexus.categories(&token).await })
+        .await;
+    match listed {
+        Ok(Some(categories)) => ctx
             .emitter
             .emit(message_type, &json!({ "categories": categories })),
-        Err(error) => refuse_nexus(ctx, message_type, context, &error),
+        Ok(None) => refuse_signed_out(ctx, message_type, context),
+        Err(error) => refuse_call(ctx, message_type, context, &error),
     }
     Ok(())
 }
@@ -450,17 +527,22 @@ pub async fn handle_nexus_download(
     });
 
     if !cached {
-        let Some(key) = required_key(services, ctx, message_type, &context).await else {
-            return Ok(());
-        };
-        let url = match services
-            .nexus
-            .download_link(&key, data.mod_id, data.file_id, nxm.as_ref())
-            .await
-        {
-            Ok(url) => url,
+        let nexus = &services.nexus;
+        let (mod_id, file_id, nxm) = (data.mod_id, data.file_id, nxm.as_ref());
+        let linked = services
+            .nexus_session
+            .authorized(
+                |token| async move { nexus.download_link(&token, mod_id, file_id, nxm).await },
+            )
+            .await;
+        let url = match linked {
+            Ok(Some(url)) => url,
+            Ok(None) => {
+                refuse_signed_out(ctx, message_type, context);
+                return Ok(());
+            }
             Err(error) => {
-                refuse_nexus(ctx, message_type, context, &error);
+                refuse_call(ctx, message_type, context, &error);
                 return Ok(());
             }
         };

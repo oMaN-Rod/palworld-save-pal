@@ -6,7 +6,7 @@ license.workspace = true
 
 [features]
 # Desktop-only native file dialogs (rfd) and the OS keyring that holds the
-# Nexus Mods API key. Off by default so the server/Docker build stays headless
+# Nexus Mods refresh token. Off by default so the server/Docker build stays headless
 # and never carries keyring code. ps-desktop enables it.
 desktop = ["dep:rfd", "dep:keyring"]
 

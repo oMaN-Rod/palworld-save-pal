@@ -6,16 +6,22 @@ use std::sync::Arc;
 
 use serde_json::{json, Value};
 
-use common::nexus_stub::{self, NexusStub, FILE_ID, FREE_KEY, MOD_ID, PREMIUM_KEY};
+use common::nexus_stub::{self, NexusStub, FILE_ID, FREE_TOKEN, MOD_ID, PREMIUM_TOKEN};
 use ps_server::desktop_dialogs::NullDialogProvider;
 use ps_server::services::docker::mock::MockDocker;
 use ps_server::services::nexus::api::HttpNexusApi;
-use ps_server::services::nexus::keystore::{MemoryKeyStore, NexusKeyStore};
+use ps_server::services::nexus::oauth::{AccessToken, NexusOAuth, OAuthError, Tokens};
 use ps_server::services::nexus::protocol::{HandlerStatus, ProtocolRegistry, RegistryError};
+use ps_server::services::nexus::session::NexusSession;
+use ps_server::services::nexus::token_store::{
+    MemoryTokenStore, NexusTokenStore, RefreshToken, TokenStoreError,
+};
 use ps_server::services::ServerServices;
 
 const OURS: &str = r#""C:\PalStudio\palstudio.exe" "%1""#;
 const VORTEX: &str = r#""C:\Vortex\Vortex.exe" -d "%1""#;
+const STORED_REFRESH: &str = "stored-refresh";
+const GRANTED_REFRESH: &str = "granted-refresh";
 
 #[derive(Default)]
 struct FakeRegistry {
@@ -43,16 +49,107 @@ impl ProtocolRegistry for FakeRegistry {
     }
 }
 
+/// Signs in with `outcome`, or waits to be cancelled when there is none, and
+/// renews a stored grant into each of `renewed` in turn, repeating the last.
+#[derive(Default)]
+struct FakeOAuth {
+    outcome: std::sync::Mutex<Option<Result<String, OAuthError>>>,
+    renewed: std::sync::Mutex<std::collections::VecDeque<String>>,
+}
+
+fn tokens(access: String) -> Tokens {
+    Tokens {
+        access: AccessToken::new(access),
+        refresh: RefreshToken::parse(GRANTED_REFRESH),
+        expires_in: 3600,
+    }
+}
+
+impl FakeOAuth {
+    fn answer(&self, outcome: Result<&str, OAuthError>) {
+        *self.outcome.lock().unwrap() = Some(outcome.map(str::to_string));
+    }
+}
+
+#[async_trait::async_trait]
+impl NexusOAuth for FakeOAuth {
+    async fn sign_in(
+        &self,
+        cancel: &tokio_util::sync::CancellationToken,
+    ) -> Result<Tokens, OAuthError> {
+        let outcome = self.outcome.lock().unwrap().take();
+        match outcome {
+            Some(outcome) => outcome.map(tokens),
+            None => {
+                cancel.cancelled().await;
+                Err(OAuthError::Cancelled)
+            }
+        }
+    }
+
+    async fn refresh(&self, _token: &RefreshToken) -> Result<Tokens, OAuthError> {
+        let mut renewed = self.renewed.lock().unwrap();
+        let next = if renewed.len() > 1 {
+            renewed.pop_front()
+        } else {
+            renewed.front().cloned()
+        };
+        next.map(tokens).ok_or(OAuthError::Expired)
+    }
+}
+
 struct NexusServer {
     server: common::TestServer,
     stub: NexusStub,
-    keys: Arc<MemoryKeyStore>,
+    tokens: Arc<MemoryTokenStore>,
+    oauth: Arc<FakeOAuth>,
     registry: Arc<FakeRegistry>,
 }
 
-async fn start_nexus_server(key: Option<&str>) -> NexusServer {
+/// `access` is the token a stored grant renews into; without one the server
+/// starts signed out.
+async fn start_nexus_server(access: Option<&str>) -> NexusServer {
+    let stored = access.map(|_| MemoryTokenStore::with_token(STORED_REFRESH));
+    start_nexus_server_with(stored.unwrap_or_default(), access.as_slice()).await
+}
+
+async fn start_nexus_server_with(tokens: MemoryTokenStore, renewed: &[&str]) -> NexusServer {
+    let tokens = Arc::new(tokens);
+    start_nexus_server_on(tokens.clone(), tokens, renewed).await
+}
+
+/// A store whose `set` reports that it was entered, then waits to be let go.
+struct SlowSetStore {
+    inner: Arc<MemoryTokenStore>,
+    entered: std::sync::Mutex<std::sync::mpsc::Sender<()>>,
+    release: std::sync::Mutex<std::sync::mpsc::Receiver<()>>,
+}
+
+impl NexusTokenStore for SlowSetStore {
+    fn get(&self) -> Result<Option<RefreshToken>, TokenStoreError> {
+        self.inner.get()
+    }
+
+    fn set(&self, token: &RefreshToken) -> Result<(), TokenStoreError> {
+        self.entered.lock().unwrap().send(()).unwrap();
+        self.release.lock().unwrap().recv().unwrap();
+        self.inner.set(token)
+    }
+
+    fn clear(&self) -> Result<(), TokenStoreError> {
+        self.inner.clear()
+    }
+}
+
+/// `store` is what the session writes through; `tokens` is where it lands.
+async fn start_nexus_server_on(
+    store: Arc<dyn NexusTokenStore>,
+    tokens: Arc<MemoryTokenStore>,
+    renewed: &[&str],
+) -> NexusServer {
     let stub = nexus_stub::spawn_nexus_stub().await;
-    let keys = Arc::new(key.map(MemoryKeyStore::with_key).unwrap_or_default());
+    let oauth = Arc::new(FakeOAuth::default());
+    *oauth.renewed.lock().unwrap() = renewed.iter().map(|token| token.to_string()).collect();
     let registry = Arc::new(FakeRegistry::default());
     let docker = Arc::new(MockDocker::default());
     let mut services = ServerServices::with_docker(
@@ -60,12 +157,12 @@ async fn start_nexus_server(key: Option<&str>) -> NexusServer {
         std::env::temp_dir().join("ps-nexus-ws-test-unused-app-root"),
     );
     services.nexus = Arc::new(HttpNexusApi::new(&stub.base));
-    services.nexus_keys = keys.clone();
+    services.nexus_session = Arc::new(NexusSession::new(store, oauth.clone()));
     services.protocol_registry = registry.clone();
     let dialogs: Arc<dyn ps_server::desktop_dialogs::FileDialogProvider> =
         Arc::new(NullDialogProvider);
     let server = common::start_desktop_test_server_with_services(dialogs, services).await;
-    NexusServer { server, stub, keys, registry }
+    NexusServer { server, stub, tokens, oauth, registry }
 }
 
 async fn request(ws: &mut common::WsClient, message_type: &str, data: Value) -> Value {
@@ -73,8 +170,8 @@ async fn request(ws: &mut common::WsClient, message_type: &str, data: Value) -> 
     common::mods_ws::next_of_type(ws, message_type).await.0
 }
 
-fn stored_key(keys: &MemoryKeyStore) -> Option<String> {
-    keys.get().unwrap().map(|key| key.expose().to_string())
+fn stored_token(tokens: &MemoryTokenStore) -> Option<String> {
+    tokens.get().unwrap().map(|token| token.expose().to_string())
 }
 
 #[tokio::test]
@@ -83,8 +180,9 @@ async fn nexus_messages_refuse_outside_the_desktop_app() {
     let mut ws = common::connect(&server).await;
     for (message_type, data) in [
         ("nexus_account_get", Value::Null),
-        ("nexus_key_set", json!({ "key": "abc" })),
-        ("nexus_key_clear", Value::Null),
+        ("nexus_sign_in", Value::Null),
+        ("nexus_sign_in_cancel", Value::Null),
+        ("nexus_sign_out", Value::Null),
         ("nexus_categories", Value::Null),
         ("nexus_search", json!({})),
         ("nexus_mod_files", json!({ "mod_id": 1 })),
@@ -135,62 +233,214 @@ async fn links_wait_for_a_subscriber_and_then_arrive_live() {
 }
 
 #[tokio::test]
-async fn without_a_key_the_account_is_empty() {
+async fn signed_out_the_account_is_empty() {
     let nexus = start_nexus_server(None).await;
     let mut ws = common::connect(&nexus.server).await;
     let reply = request(&mut ws, "nexus_account_get", Value::Null).await;
-    assert_eq!(reply["data"]["has_key"], false, "{reply}");
+    assert_eq!(reply["data"]["signed_in"], false, "{reply}");
     assert!(reply["data"]["account"].is_null());
     nexus.server.handle.shutdown().await;
 }
 
 #[tokio::test]
-async fn a_rejected_key_is_not_stored_or_echoed() {
+async fn a_refused_or_unusable_sign_in_stores_nothing() {
     let nexus = start_nexus_server(None).await;
     let mut ws = common::connect(&nexus.server).await;
-    let reply = request(&mut ws, "nexus_key_set", json!({ "key": "not-a-real-key" })).await;
-    assert_eq!(reply["data"]["error"]["code"], "invalid_key", "{reply}");
-    assert!(!reply.to_string().contains("not-a-real-key"));
-    assert_eq!(stored_key(&nexus.keys), None);
-    for data in [json!({ "key": "   " }), json!({}), Value::Null] {
-        let blank = request(&mut ws, "nexus_key_set", data).await;
-        assert_eq!(blank["data"]["error"]["code"], "invalid_key", "{blank}");
-    }
+
+    nexus.oauth.answer(Err(OAuthError::Refused("access_denied".to_string())));
+    let refused = request(&mut ws, "nexus_sign_in", Value::Null).await;
+    assert_eq!(refused["data"]["error"]["code"], "sign_in_refused", "{refused}");
+
+    nexus.oauth.answer(Ok("not-a-real-token"));
+    let rejected = request(&mut ws, "nexus_sign_in", Value::Null).await;
+    assert_eq!(rejected["data"]["error"]["code"], "sign_in_expired", "{rejected}");
+    assert_eq!(rejected["data"]["signed_in"], false);
+    assert!(!rejected.to_string().contains("not-a-real-token"));
+    assert_eq!(stored_token(&nexus.tokens), None);
     nexus.server.handle.shutdown().await;
 }
 
 #[tokio::test]
-async fn a_valid_key_is_stored_and_the_account_comes_back_without_it() {
+async fn signing_in_keeps_only_the_refresh_token_and_never_echoes_a_token() {
     let nexus = start_nexus_server(None).await;
     let mut ws = common::connect(&nexus.server).await;
 
-    let set =
-        request(&mut ws, "nexus_key_set", json!({ "key": format!("  {PREMIUM_KEY} ") })).await;
-    assert_eq!(set["data"]["has_key"], true, "{set}");
-    assert_eq!(set["data"]["account"]["name"], "Tester");
-    assert_eq!(set["data"]["account"]["is_premium"], true);
-    assert!(!set.to_string().contains(PREMIUM_KEY));
-    assert_eq!(stored_key(&nexus.keys).as_deref(), Some(PREMIUM_KEY));
+    nexus.oauth.answer(Ok(PREMIUM_TOKEN));
+    let signed_in = request(&mut ws, "nexus_sign_in", Value::Null).await;
+    assert_eq!(signed_in["data"]["signed_in"], true, "{signed_in}");
+    assert_eq!(signed_in["data"]["account"]["name"], "Tester");
+    assert_eq!(signed_in["data"]["account"]["is_premium"], true);
+    assert!(!signed_in.to_string().contains(PREMIUM_TOKEN));
+    assert!(!signed_in.to_string().contains(GRANTED_REFRESH));
+    assert_eq!(stored_token(&nexus.tokens).as_deref(), Some(GRANTED_REFRESH));
 
     let account = request(&mut ws, "nexus_account_get", Value::Null).await;
     assert_eq!(account["data"]["account"]["user_id"], 7, "{account}");
-    assert!(!account.to_string().contains(PREMIUM_KEY));
+    assert!(!account.to_string().contains(PREMIUM_TOKEN));
 
-    let cleared = request(&mut ws, "nexus_key_clear", Value::Null).await;
-    assert_eq!(cleared["data"]["has_key"], false, "{cleared}");
-    assert_eq!(stored_key(&nexus.keys), None);
+    let cleared = request(&mut ws, "nexus_sign_out", Value::Null).await;
+    assert_eq!(cleared["data"]["signed_in"], false, "{cleared}");
+    assert_eq!(stored_token(&nexus.tokens), None);
     nexus.server.handle.shutdown().await;
 }
 
 #[tokio::test]
-async fn categories_need_a_key() {
+async fn a_waiting_sign_in_leaves_the_connection_free_and_can_be_cancelled() {
+    let nexus = start_nexus_server(None).await;
+    let mut ws = common::connect(&nexus.server).await;
+
+    common::send_json(&mut ws, json!({ "type": "nexus_sign_in", "data": null })).await;
+    let account = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(account["data"]["signed_in"], false, "{account}");
+
+    common::send_json(&mut ws, json!({ "type": "nexus_sign_in_cancel", "data": null })).await;
+    let mut cancelled = None;
+    let mut refusal = None;
+    while cancelled.is_none() || refusal.is_none() {
+        let frame = common::next_json(&mut ws).await;
+        match frame["type"].as_str() {
+            Some("nexus_sign_in_cancel") => cancelled = Some(frame),
+            Some("nexus_sign_in") => refusal = Some(frame),
+            _ => panic!("unexpected frame: {frame}"),
+        }
+    }
+    assert_eq!(cancelled.unwrap()["data"]["cancelled"], true);
+    assert_eq!(refusal.unwrap()["data"]["error"]["code"], "sign_in_cancelled");
+
+    let idle = request(&mut ws, "nexus_sign_in_cancel", Value::Null).await;
+    assert_eq!(idle["data"]["cancelled"], false, "{idle}");
+    assert_eq!(stored_token(&nexus.tokens), None);
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn a_grant_nexus_no_longer_honours_signs_the_user_out() {
+    let nexus = start_nexus_server_with(MemoryTokenStore::with_token(STORED_REFRESH), &[]).await;
+    let mut ws = common::connect(&nexus.server).await;
+
+    let expired = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(expired["data"]["error"]["code"], "sign_in_expired", "{expired}");
+    assert_eq!(stored_token(&nexus.tokens), None);
+
+    let signed_out = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(signed_out["data"]["signed_in"], false, "{signed_out}");
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn a_refused_access_token_is_renewed_before_anyone_is_signed_out() {
+    let stale_then_good = ["stale-token", PREMIUM_TOKEN];
+    let nexus =
+        start_nexus_server_with(MemoryTokenStore::with_token(STORED_REFRESH), &stale_then_good)
+            .await;
+    let mut ws = common::connect(&nexus.server).await;
+    let account = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(account["data"]["signed_in"], true, "{account}");
+    assert_eq!(account["data"]["account"]["name"], "Tester");
+    nexus.server.handle.shutdown().await;
+
+    let nexus =
+        start_nexus_server_with(MemoryTokenStore::with_token(STORED_REFRESH), &["stale-token"])
+            .await;
+    let mut ws = common::connect(&nexus.server).await;
+    let refused = request(&mut ws, "nexus_categories", Value::Null).await;
+    assert_eq!(refused["data"]["error"]["code"], "sign_in_expired", "{refused}");
+    assert_eq!(stored_token(&nexus.tokens), None, "the grant itself was refused twice");
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn an_outage_while_reading_the_account_keeps_the_new_grant() {
+    let nexus = start_nexus_server(None).await;
+    nexus.stub.state.rate_limited.store(true, Ordering::SeqCst);
+    let mut ws = common::connect(&nexus.server).await;
+
+    nexus.oauth.answer(Ok(PREMIUM_TOKEN));
+    let reply = request(&mut ws, "nexus_sign_in", Value::Null).await;
+    assert_eq!(reply["data"]["error"]["code"], "rate_limited", "{reply}");
+    assert_eq!(reply["data"]["signed_in"], true);
+    assert_eq!(stored_token(&nexus.tokens).as_deref(), Some(GRANTED_REFRESH));
+
+    let again = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(again["data"]["error"]["code"], "rate_limited", "{again}");
+    assert_eq!(again["data"]["signed_in"], true);
+
+    nexus.stub.state.rate_limited.store(false, Ordering::SeqCst);
+    let account = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(account["data"]["account"]["name"], "Tester", "{account}");
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn cancelling_while_the_account_is_being_read_keeps_nothing() {
+    let nexus = start_nexus_server(None).await;
+    nexus.stub.state.slow_validate.store(true, Ordering::SeqCst);
+    let mut ws = common::connect(&nexus.server).await;
+
+    nexus.oauth.answer(Ok(PREMIUM_TOKEN));
+    common::send_json(&mut ws, json!({ "type": "nexus_sign_in", "data": null })).await;
+    while nexus.stub.state.validate_hits.load(Ordering::SeqCst) == 0 {
+        tokio::time::sleep(std::time::Duration::from_millis(5)).await;
+    }
+
+    common::send_json(&mut ws, json!({ "type": "nexus_sign_in_cancel", "data": null })).await;
+    let mut cancelled = None;
+    let mut refusal = None;
+    while cancelled.is_none() || refusal.is_none() {
+        let frame = common::next_json(&mut ws).await;
+        match frame["type"].as_str() {
+            Some("nexus_sign_in_cancel") => cancelled = Some(frame),
+            Some("nexus_sign_in") => refusal = Some(frame),
+            _ => panic!("unexpected frame: {frame}"),
+        }
+    }
+    assert_eq!(cancelled.unwrap()["data"]["cancelled"], true);
+    assert_eq!(refusal.unwrap()["data"]["error"]["code"], "sign_in_cancelled");
+    assert_eq!(stored_token(&nexus.tokens), None);
+
+    nexus.stub.state.slow_validate.store(false, Ordering::SeqCst);
+    let account = request(&mut ws, "nexus_account_get", Value::Null).await;
+    assert_eq!(account["data"]["signed_in"], false, "{account}");
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn a_cancel_that_arrives_while_the_sign_in_is_being_kept_is_told_it_was_too_late() {
+    let (entered_tx, entered_rx) = std::sync::mpsc::channel();
+    let (release_tx, release_rx) = std::sync::mpsc::channel();
+    let tokens = Arc::new(MemoryTokenStore::default());
+    let store = Arc::new(SlowSetStore {
+        inner: tokens.clone(),
+        entered: std::sync::Mutex::new(entered_tx),
+        release: std::sync::Mutex::new(release_rx),
+    });
+    let nexus = start_nexus_server_on(store, tokens, &[]).await;
+    let mut ws = common::connect(&nexus.server).await;
+
+    nexus.oauth.answer(Ok(PREMIUM_TOKEN));
+    common::send_json(&mut ws, json!({ "type": "nexus_sign_in", "data": null })).await;
+    tokio::task::spawn_blocking(move || entered_rx.recv().unwrap()).await.unwrap();
+
+    let late = request(&mut ws, "nexus_sign_in_cancel", Value::Null).await;
+    assert_eq!(late["data"]["cancelled"], false, "{late}");
+    release_tx.send(()).unwrap();
+
+    let signed_in = common::mods_ws::next_of_type(&mut ws, "nexus_sign_in").await.0;
+    assert_eq!(signed_in["data"]["signed_in"], true, "{signed_in}");
+    assert_eq!(signed_in["data"]["account"]["name"], "Tester");
+    assert_eq!(stored_token(&nexus.tokens).as_deref(), Some(GRANTED_REFRESH));
+    nexus.server.handle.shutdown().await;
+}
+
+#[tokio::test]
+async fn categories_need_a_sign_in() {
     let without = start_nexus_server(None).await;
     let mut ws = common::connect(&without.server).await;
     let refused = request(&mut ws, "nexus_categories", Value::Null).await;
-    assert_eq!(refused["data"]["error"]["code"], "key_required", "{refused}");
+    assert_eq!(refused["data"]["error"]["code"], "sign_in_required", "{refused}");
     without.server.handle.shutdown().await;
 
-    let with = start_nexus_server(Some(FREE_KEY)).await;
+    let with = start_nexus_server(Some(FREE_TOKEN)).await;
     let mut ws = common::connect(&with.server).await;
     let reply = request(&mut ws, "nexus_categories", Value::Null).await;
     let categories = reply["data"]["categories"].as_array().unwrap();
@@ -201,8 +451,8 @@ async fn categories_need_a_key() {
 }
 
 #[tokio::test]
-async fn search_and_file_lists_are_anonymous_even_with_a_key() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+async fn search_and_file_lists_are_anonymous_even_when_signed_in() {
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
 
     let search =
@@ -218,20 +468,20 @@ async fn search_and_file_lists_are_anonymous_even_with_a_key() {
     assert_eq!(files["data"]["latest_file_id"], nexus_stub::FILE_ID);
     assert!(files["data"]["files"][1]["size_in_bytes"].is_u64());
 
-    let keys = nexus.stub.state.graphql_apikeys.lock().unwrap().clone();
-    assert_eq!(keys, vec![None, None]);
+    let sent = nexus.stub.state.graphql_tokens.lock().unwrap().clone();
+    assert_eq!(sent, vec![None, None]);
     nexus.server.handle.shutdown().await;
 }
 
 #[tokio::test]
 async fn an_exhausted_rate_limit_refuses_with_its_reset() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     nexus.stub.state.rate_limited.store(true, std::sync::atomic::Ordering::SeqCst);
     let mut ws = common::connect(&nexus.server).await;
     let reply = request(&mut ws, "nexus_account_get", Value::Null).await;
     assert_eq!(reply["data"]["error"]["code"], "rate_limited", "{reply}");
     assert_eq!(reply["data"]["error"]["reset"], "2026-09-17T00:00:00+00:00");
-    assert_eq!(reply["data"]["has_key"], true);
+    assert_eq!(reply["data"]["signed_in"], true);
     nexus.server.handle.shutdown().await;
 }
 
@@ -274,7 +524,7 @@ async fn library_mod(ws: &mut common::WsClient, id: &str) -> Option<Value> {
 
 #[tokio::test]
 async fn a_premium_account_downloads_and_installs_a_nexus_file() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
     let install = common::mods_ws::fake_windows_install();
     let target_id = add_target(&mut ws, install.path()).await;
@@ -318,7 +568,7 @@ async fn a_premium_account_downloads_and_installs_a_nexus_file() {
 
 #[tokio::test]
 async fn a_free_account_needs_an_nxm_link() {
-    let nexus = start_nexus_server(Some(FREE_KEY)).await;
+    let nexus = start_nexus_server(Some(FREE_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
     let install = common::mods_ws::fake_windows_install();
     let target_id = add_target(&mut ws, install.path()).await;
@@ -367,7 +617,7 @@ async fn link_and_key_problems_refuse_before_downloading() {
 
     let (no_key, _) =
         download(&mut ws, json!({ "target_id": target_id, "mod_id": MOD_ID, "file_id": FILE_ID })).await;
-    assert_eq!(no_key["data"]["error"]["code"], "key_required", "{no_key}");
+    assert_eq!(no_key["data"]["error"]["code"], "sign_in_required", "{no_key}");
 
     let (unknown, _) =
         download(&mut ws, json!({ "target_id": target_id, "mod_id": MOD_ID, "file_id": 5 })).await;
@@ -403,7 +653,7 @@ async fn an_archive_already_downloaded_is_installed_without_a_key() {
 
 #[tokio::test]
 async fn an_already_installed_mod_refuses_without_a_download_link_query() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
     let install = common::mods_ws::fake_windows_install();
     let target_id = add_target(&mut ws, install.path()).await;
@@ -429,7 +679,7 @@ async fn an_already_installed_mod_refuses_without_a_download_link_query() {
 
 #[tokio::test]
 async fn a_blank_version_skips_the_pre_check_and_a_refusal_keeps_the_archive() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
     let install = common::mods_ws::fake_windows_install();
     let target_id = add_target(&mut ws, install.path()).await;
@@ -499,7 +749,7 @@ async fn registering_with_no_handler_needs_no_force() {
 
 #[tokio::test]
 async fn update_checks_find_newer_main_files_and_honour_ignores() {
-    let nexus = start_nexus_server(Some(PREMIUM_KEY)).await;
+    let nexus = start_nexus_server(Some(PREMIUM_TOKEN)).await;
     let mut ws = common::connect(&nexus.server).await;
     let install = common::mods_ws::fake_windows_install();
     let target_id = add_target(&mut ws, install.path()).await;
@@ -517,7 +767,7 @@ async fn update_checks_find_newer_main_files_and_honour_ignores() {
             ]),
         );
     }
-    let graphql_before = nexus.stub.state.graphql_apikeys.lock().unwrap().len();
+    let graphql_before = nexus.stub.state.graphql_tokens.lock().unwrap().len();
 
     let checked = request(&mut ws, "mod_update_check", json!({})).await;
     let updates = checked["data"]["updates"].as_array().unwrap().clone();
@@ -557,7 +807,7 @@ async fn update_checks_find_newer_main_files_and_honour_ignores() {
     let no_target = request(&mut ws, "mod_update_check", json!({ "target_id": "client-nope" })).await;
     assert_eq!(no_target["data"]["error"]["code"], "target_not_found", "{no_target}");
 
-    let keys = nexus.stub.state.graphql_apikeys.lock().unwrap().clone();
+    let keys = nexus.stub.state.graphql_tokens.lock().unwrap().clone();
     assert!(keys[graphql_before..].iter().all(Option::is_none));
     nexus.server.handle.shutdown().await;
 }

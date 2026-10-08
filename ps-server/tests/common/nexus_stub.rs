@@ -11,8 +11,8 @@ use axum::routing::{get, post};
 use axum::Json;
 use serde_json::{json, Value};
 
-pub const PREMIUM_KEY: &str = "stub-premium-key";
-pub const FREE_KEY: &str = "stub-free-key";
+pub const PREMIUM_TOKEN: &str = "stub-premium-token";
+pub const FREE_TOKEN: &str = "stub-free-token";
 pub const MOD_ID: u32 = 4821;
 pub const FILE_ID: u32 = 99001;
 pub const OLD_FILE_ID: u32 = 99000;
@@ -21,7 +21,9 @@ pub struct StubState {
     pub base: String,
     pub archive: Vec<u8>,
     pub rate_limited: AtomicBool,
-    pub graphql_apikeys: Mutex<Vec<Option<String>>>,
+    pub slow_validate: AtomicBool,
+    pub validate_hits: AtomicUsize,
+    pub graphql_tokens: Mutex<Vec<Option<String>>>,
     pub graphql_queries: Mutex<Vec<String>>,
     pub download_link_queries: Mutex<Vec<HashMap<String, String>>>,
     pub cdn_hits: AtomicUsize,
@@ -74,7 +76,9 @@ pub async fn spawn_nexus_stub() -> NexusStub {
         base: base.clone(),
         archive,
         rate_limited: AtomicBool::new(false),
-        graphql_apikeys: Mutex::new(Vec::new()),
+        slow_validate: AtomicBool::new(false),
+        validate_hits: AtomicUsize::new(0),
+        graphql_tokens: Mutex::new(Vec::new()),
         graphql_queries: Mutex::new(Vec::new()),
         download_link_queries: Mutex::new(Vec::new()),
         cdn_hits: AtomicUsize::new(0),
@@ -94,21 +98,22 @@ pub async fn spawn_nexus_stub() -> NexusStub {
     NexusStub { base, state }
 }
 
-fn apikey(headers: &HeaderMap) -> Option<String> {
+fn bearer(headers: &HeaderMap) -> Option<String> {
     headers
-        .get("apikey")
+        .get("authorization")
         .and_then(|value| value.to_str().ok())
+        .and_then(|value| value.strip_prefix("Bearer "))
         .map(str::to_string)
 }
 
-fn known_key(headers: &HeaderMap) -> bool {
-    matches!(apikey(headers).as_deref(), Some(PREMIUM_KEY | FREE_KEY))
+fn known_token(headers: &HeaderMap) -> bool {
+    matches!(bearer(headers).as_deref(), Some(PREMIUM_TOKEN | FREE_TOKEN))
 }
 
 fn unauthorized() -> Response {
     (
         StatusCode::UNAUTHORIZED,
-        Json(json!({ "message": "Please provide a valid API Key" })),
+        Json(json!({ "message": "Unauthorized" })),
     )
         .into_response()
 }
@@ -130,16 +135,20 @@ fn rate_limited() -> Response {
 }
 
 async fn validate(State(state): State<Arc<StubState>>, headers: HeaderMap) -> Response {
+    state.validate_hits.fetch_add(1, Ordering::SeqCst);
+    if state.slow_validate.load(Ordering::SeqCst) {
+        tokio::time::sleep(std::time::Duration::from_secs(10)).await;
+    }
     if state.rate_limited.load(Ordering::SeqCst) {
         return rate_limited();
     }
-    let premium = match apikey(&headers).as_deref() {
-        Some(PREMIUM_KEY) => true,
-        Some(FREE_KEY) => false,
+    let premium = match bearer(&headers).as_deref() {
+        Some(PREMIUM_TOKEN) => true,
+        Some(FREE_TOKEN) => false,
         _ => return unauthorized(),
     };
     Json(json!({
-        "user_id": 7, "key": apikey(&headers), "name": "Tester",
+        "user_id": 7, "name": "Tester",
         "is_premium?": premium, "is_premium": premium, "is_supporter": premium,
         "email": "tester@example.invalid", "profile_url": "https://example.invalid/users/7"
     }))
@@ -147,7 +156,7 @@ async fn validate(State(state): State<Arc<StubState>>, headers: HeaderMap) -> Re
 }
 
 async fn game(headers: HeaderMap) -> Response {
-    if !known_key(&headers) {
+    if !known_token(&headers) {
         return unauthorized();
     }
     Json(
@@ -170,7 +179,7 @@ async fn download_link(
         .lock()
         .unwrap()
         .push(query.clone());
-    if !known_key(&headers) {
+    if !known_token(&headers) {
         return unauthorized();
     }
     match (query.get("key"), query.get("expires")) {
@@ -184,7 +193,7 @@ async fn download_link(
             )
                 .into_response()
         }
-        (None, None) if apikey(&headers).as_deref() == Some(FREE_KEY) => {
+        (None, None) if bearer(&headers).as_deref() == Some(FREE_TOKEN) => {
             return (
                 StatusCode::FORBIDDEN,
                 Json(json!({ "message": "premium only" })),
@@ -203,7 +212,7 @@ async fn graphql(
     headers: HeaderMap,
     Json(body): Json<Value>,
 ) -> Response {
-    state.graphql_apikeys.lock().unwrap().push(apikey(&headers));
+    state.graphql_tokens.lock().unwrap().push(bearer(&headers));
     let query = body["query"].as_str().unwrap_or_default().to_string();
     state.graphql_queries.lock().unwrap().push(query.clone());
     if query.contains("mods(") {

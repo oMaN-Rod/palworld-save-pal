@@ -966,19 +966,18 @@ fn the_denylist_matches_the_vocabulary() {
 }
 
 #[tokio::test]
-async fn nexus_key_set_is_refused_over_the_bridge_without_echoing_the_key() {
+async fn nexus_sign_in_is_refused_over_the_bridge() {
     let server = common::start_test_server().await;
     let (ctl_in_tx, mut ctl_out_rx, cancel) = spawn_bridge(server.handle.app.clone());
 
     ctl_in_tx
-        .send(json!({ "type": "nexus_key_set", "data": { "key": "secret-remote-key" } }))
+        .send(json!({ "type": "nexus_sign_in", "data": null }))
         .await
         .unwrap();
 
     let frame = next_frame(&mut ctl_out_rx).await;
-    assert_eq!(frame["type"], "nexus_key_set");
+    assert_eq!(frame["type"], "nexus_sign_in");
     assert_remote_denied(&frame);
-    assert!(!frame.to_string().contains("secret-remote-key"), "{frame}");
 
     cancel.cancel();
     server.handle.shutdown().await;
@@ -1022,7 +1021,7 @@ fn every_nexus_and_update_message_is_denylisted() {
             wire.starts_with("nexus_") || wire.starts_with("mod_update_")
         })
         .collect();
-    assert_eq!(names.len(), 13, "{names:?}");
+    assert_eq!(names.len(), 14, "{names:?}");
     for message_type in names {
         assert!(
             remote_ctl::REMOTE_DENYLIST.contains(&message_type),

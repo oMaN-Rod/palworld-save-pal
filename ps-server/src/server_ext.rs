@@ -512,11 +512,14 @@ impl ExtRouter for ServerExtRouter {
             MessageType::NexusAccountGet => {
                 nexus_handlers::handle_nexus_account_get(services, data, ctx).await
             }
-            MessageType::NexusKeySet => {
-                nexus_handlers::handle_nexus_key_set(services, data, ctx).await
+            MessageType::NexusSignIn => {
+                nexus_handlers::handle_nexus_sign_in(services, data, ctx).await
             }
-            MessageType::NexusKeyClear => {
-                nexus_handlers::handle_nexus_key_clear(services, data, ctx).await
+            MessageType::NexusSignInCancel => {
+                nexus_handlers::handle_nexus_sign_in_cancel(services, data, ctx).await
+            }
+            MessageType::NexusSignOut => {
+                nexus_handlers::handle_nexus_sign_out(services, data, ctx).await
             }
             MessageType::NexusCategories => {
                 nexus_handlers::handle_nexus_categories(services, data, ctx).await
@@ -689,8 +692,9 @@ mod tests {
         "profile_remove_mod",
         "mod_release_profiles",
         "nexus_account_get",
-        "nexus_key_set",
-        "nexus_key_clear",
+        "nexus_sign_in",
+        "nexus_sign_in_cancel",
+        "nexus_sign_out",
         "nexus_categories",
         "nexus_search",
         "nexus_mod_files",
